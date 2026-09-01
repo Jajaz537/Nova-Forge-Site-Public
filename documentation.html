@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171715">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <meta name="application-name" content="Nova Forge">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="description" content="Documentation publique Nova Forge : vérification, statut public, vie privée navigateur et limites de la surface officielle.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Nova Forge">
+  <meta property="og:title" content="Documentation publique — Nova Forge">
+  <meta property="og:description" content="Règles publiques Nova Forge de vérification, statut machine-readable, vie privée navigateur et publication fail-closed.">
+  <title>Documentation publique — Nova Forge</title>
+  <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="alternate" type="application/json" href="./public-status.json" title="Nova Forge — statut public">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/official.css">
+  <script src="./assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Nova Forge, retour au site officiel">
+      <img class="brand-logo" src="./assets/nova-mark.svg" alt="" width="32" height="32">
+      <span>Nova Forge</span>
+    </a>
+    <nav aria-label="Documentation publique">
+      <a href="#verification">Vérification</a>
+      <a href="#status">Statut</a>
+      <a href="#privacy">Vie privée</a>
+      <a href="#limits">Limites</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="docs-hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Nova Forge · documentation publique</p>
+        <h1 id="docs-hero-title">Comprendre ce que le site affirme — et ce qu’il n’affirme pas.</h1>
+        <p class="lede">Cette documentation couvre uniquement la surface publique du site officiel. Elle décrit les règles visibles de vérification, de confidentialité et de publication sans documenter les composants privés ou internes de Nova Forge OS.</p>
+        <div class="actions"><a class="button primary" href="./security.html">Sécurité & provenance</a><a class="button" href="./verify.html">Vérifier un SHA-256</a><a class="button" href="./public-status.json">Statut public JSON</a><a class="button" href="./">Retour au site officiel</a></div>
+      </div>
+      <aside class="hero-panel" aria-label="Portée de cette documentation">
+        <p class="eyebrow">Portée</p>
+        <ul class="feature-list">
+          <li><span>01</span><div><strong>Public uniquement</strong><small>Aucun secret, mécanisme réservé ou contenu privé/interne.</small></div></li>
+          <li><span>02</span><div><strong>Fail closed</strong><small>Une preuve absente reste absente.</small></div></li>
+          <li><span>03</span><div><strong>Build servi</strong><small>Le statut et la provenance publique décrivent uniquement la surface livrée.</small></div></li>
+          <li><span>04</span><div><strong>Pas de promesse implicite</strong><small>Une fonction non connectée n’est pas présentée comme disponible.</small></div></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section" id="verification" aria-labelledby="verification-title">
+      <p class="eyebrow">Vérification publique</p>
+      <h2 id="verification-title">Quatre éléments avant toute distribution.</h2>
+      <p class="section-intro">Le site ne doit présenter un artefact comme distribuable que lorsque les informations nécessaires à sa vérification sont réellement publiées. Ces informations ne remplacent pas les contrôles internes ; elles constituent la partie que le public peut vérifier.</p>
+      <div class="requirements" role="list" aria-label="Éléments de vérification publique">
+        <div role="listitem"><strong>Identité</strong><span>Le nom et la version attendus doivent permettre de savoir précisément quel artefact est concerné.</span></div>
+        <div role="listitem"><strong>Intégrité</strong><span>Un hash publié permet de détecter qu’un fichier reçu ne correspond pas à l’artefact annoncé.</span></div>
+        <div role="listitem"><strong>Provenance</strong><span>La source et la chaîne de livraison déclarées doivent être qualifiées avant d’accorder de la confiance à un fichier.</span></div>
+        <div role="listitem"><strong>Signature</strong><span>Lorsqu’une signature est requise, elle doit être présente et vérifiable ; son absence ne doit jamais être masquée par un badge visuel.</span></div>
+      </div>
+      <div class="security-note"><strong>Outils publics :</strong> le <a href="./verify.html">vérificateur SHA-256</a> calcule l’empreinte d’un fichier dans le navigateur sans l’exécuter ni l’envoyer. Une correspondance de hash prouve l’intégrité par rapport à la valeur fournie ; elle ne prouve pas à elle seule l’identité, l’auteur ou la provenance. Le <a href="./security.html">contrat Sécurité & provenance</a> détaille la séparation de ces preuves et leurs états fail-closed.</div>
+    </section>
+
+    <section class="section" id="status" aria-labelledby="status-title">
+      <div class="section-heading"><div><p class="eyebrow">Statut & provenance du shell</p><h2 id="status-title">Un état public livré avec le build.</h2></div><span class="badge">Public-only</span></div>
+      <p class="section-intro">Le fichier <code>public-status.json</code> décrit les propriétés publiques de la surface servie. Lors d’un empaquetage ou d’un déploiement autorisé, la chaîne de livraison génère également <code>SHA256SUMS.txt</code> et <code>public-build.json</code> pour identifier précisément les fichiers publics sans divulguer la révision du dépôt privé.</p>
+      <div class="cards three">
+        <article class="card"><h3>Statut déclaratif</h3><p><code>public-status.json</code> décrit la phase, les principes actifs, la disponibilité des téléchargements et l’état des intégrations. Il n’est pas une signature cryptographique.</p></article>
+        <article class="card"><h3>Empreinte du build</h3><p><code>SHA256SUMS.txt</code> contient les SHA-256 de la surface publique empaquetée. <code>public-build.json</code> publie l’empreinte agrégée de cette liste avec un schéma versionné.</p></article>
+        <article class="card"><h3>Source privée masquée</h3><p>Le manifeste de build public utilise <code>withheld-private-source</code> au lieu d’exposer l’identifiant de révision du dépôt privé. La preuve porte sur la surface publiée, pas sur le cœur interne.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="privacy" aria-labelledby="privacy-doc-title">
+      <p class="eyebrow">Vie privée navigateur</p>
+      <h2 id="privacy-doc-title">Ce que fait la surface actuelle.</h2>
+      <div class="cards three">
+        <article class="card"><h3>Consultation sans compte</h3><p>Le contenu public est conçu pour être consultable sans compte Nova Forge et sans profil distant requis par le noyau actuel.</p></article>
+        <article class="card"><h3>Smart Profile</h3><p>Lorsque l’utilisateur déclenche l’analyse, le résultat est calculé dans le navigateur à partir des informations exposées par celui-ci. Le noyau actuel ne transmet pas ce résultat à un service distant.</p></article>
+        <article class="card"><h3>Vérificateur local</h3><p>Le fichier choisi pour un calcul SHA-256 est lu par le navigateur et transmis uniquement à l’API Web Crypto locale. Le site ne l’exécute pas et ne l’envoie pas à un backend.</p></article>
+      </div>
+      <div class="security-note"><strong>Réseau :</strong> les ressources du noyau actuel sont servies depuis la même origine et peuvent être mises en cache par le service worker pour la consultation hors ligne. Aucun domaine tiers n’est requis par cette surface.</div>
+    </section>
+
+    <section class="section" id="limits" aria-labelledby="limits-title">
+      <p class="eyebrow">Limites actuelles</p>
+      <h2 id="limits-title">Ce qui n’est pas encore disponible.</h2>
+      <div class="cards">
+        <article class="card"><h3>Installation Nova Forge OS</h3><p>Aucune procédure d’installation publique n’est publiée tant qu’un build autorisé et sa chaîne de confiance ne sont pas disponibles.</p><span class="badge neutral">Verrouillé</span></article>
+        <article class="card"><h3>Services réseau</h3><p>Les fonctions qui nécessitent un backend réel restent explicitement non connectées. Elles ne sont pas simulées pour donner l’impression d’une disponibilité.</p><span class="badge neutral">Non connecté</span></article>
+        <article class="card"><h3>Communauté</h3><p>La modération, les appels et les décisions sont décrits comme des contrats futurs, mais aucun backend communautaire n’est présenté comme actif.</p><span class="badge neutral">Non connecté</span></article>
+        <article class="card"><h3>Signature cryptographique du site</h3><p>Le shell empaqueté dispose d’empreintes SHA-256 publiques, mais aucune signature cryptographique du site n’est annoncée tant qu’une clé et une procédure publiques réellement vérifiables ne sont pas publiées.</p><span class="badge neutral">Non annoncée</span></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>Nova Forge</strong><p>Documentation publique · surface pré-VF.</p></div>
+    <div class="footer-meta"><p>Cette page documente uniquement les comportements publics visibles.</p><p><a href="./">Site officiel</a> · <a href="./security.html">Sécurité & provenance</a> · <a href="./verify.html">Vérificateur SHA-256</a> · <a href="./public-status.json">Statut public JSON</a></p></div>
+  </footer>
+</body>
+</html>

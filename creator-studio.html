@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171715">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="description" content="Creator Studio Nova Forge : éditer localement un Universal Mod Manifest sans publication implicite ni backend obligatoire.">
+  <title>Creator Studio — Nova Forge</title>
+  <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/official.css">
+  <link rel="stylesheet" href="./assets/creator-studio.css">
+  <script src="./assets/json-schema-lite.js" defer></script>
+  <script src="./assets/creator-studio.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <header class="topbar">
+    <a class="brand" href="./index.html" aria-label="Nova Forge, accueil"><img class="brand-logo" src="./assets/nova-mark.svg" alt="" width="32" height="32"><span>Nova Forge</span></a>
+    <nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html" aria-current="page">Creator Studio</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a></nav>
+  </header>
+
+  <main id="main" class="studio-page">
+    <section class="studio-hero" aria-labelledby="studio-title">
+      <p class="eyebrow">Creator Studio V2 · brouillon local</p>
+      <h1 id="studio-title">Éditer le manifest complet sans publier.</h1>
+      <p class="lede">Le Studio édite localement le Universal Mod Manifest public, valide le brouillon contre son schéma et produit un export déterministe. Aucun compte, upload, signature, publication ou exécution n’est déclenché automatiquement.</p>
+      <div class="release-status"><span class="status-dot" aria-hidden="true"></span><span><strong>NON PUBLIÉ.</strong> Les brouillons restent dans ce navigateur uniquement après action explicite. Un état déclaré n’est jamais présenté comme une preuve vérifiée par le Studio.</span></div>
+    </section>
+
+    <section class="studio-layout" aria-label="Éditeur de manifeste">
+      <form id="creator-form" class="studio-form" novalidate>
+        <div><p class="eyebrow">Import</p><h2>Reprendre un brouillon JSON</h2></div>
+        <fieldset>
+          <label class="wide" for="import-draft-file"><span>Fichier JSON local</span><input id="import-draft-file" name="importDraft" type="file" accept="application/json,.json"></label>
+          <div class="wide studio-inline-actions"><button class="button" id="import-draft" type="button">Importer le brouillon</button><span>Seuls les manifests verrouillés et non publiés sont acceptés.</span></div>
+        </fieldset>
+
+        <div><p class="eyebrow">Identité</p><h2>Décrire le contenu</h2></div>
+        <fieldset>
+          <label for="content-id"><span>Identifiant public</span><input id="content-id" name="contentId" required pattern="[a-z0-9][a-z0-9._-]{1,127}" autocomplete="off" placeholder="mon-projet"></label>
+          <label for="content-version"><span>Version</span><input id="content-version" name="version" required autocomplete="off" placeholder="1.0.0"></label>
+          <label class="wide" for="content-name"><span>Nom</span><input id="content-name" name="name" required autocomplete="off" placeholder="Nom de la création"></label>
+          <label for="content-kind"><span>Type</span><select id="content-kind" name="kind"><option value="mod">Mod</option><option value="pack">Pack</option><option value="experience">Expérience</option><option value="tool">Outil</option><option value="resource">Ressource</option></select></label>
+          <label class="wide" for="content-summary"><span>Résumé</span><textarea id="content-summary" name="summary" maxlength="1200" placeholder="Décrivez le contenu sans promesse non prouvée."></textarea></label>
+        </fieldset>
+
+        <div><p class="eyebrow">Jeu cible</p><h2>Jeu, versions et loaders</h2></div>
+        <fieldset>
+          <label for="game-id"><span>Identifiant du jeu</span><input id="game-id" name="gameId" required autocomplete="off" placeholder="minecraft"></label>
+          <label for="game-name"><span>Nom du jeu</span><input id="game-name" name="gameName" required autocomplete="off" placeholder="Minecraft"></label>
+          <label class="wide" for="game-versions"><span>Versions cibles</span><input id="game-versions" name="gameVersions" autocomplete="off" placeholder="1.21.1, 1.21.2"></label>
+          <label class="wide" for="game-loaders"><span>Loaders</span><input id="game-loaders" name="gameLoaders" autocomplete="off" placeholder="fabric, neoforge"></label>
+        </fieldset>
+
+        <div><p class="eyebrow">Compatibilité</p><h2>Preuve, dépendances et conflits</h2></div>
+        <fieldset>
+          <label for="compatibility-evidence"><span>Niveau de preuve déclaré</span><select id="compatibility-evidence" name="evidence"><option value="unknown">Inconnu</option><option value="estimated">Estimé</option><option value="measured">Mesuré</option></select></label>
+          <label for="evidence-receipt"><span>Receipt de mesure</span><input id="evidence-receipt" name="evidenceReceipt" autocomplete="off" placeholder="receipt:compat.example"></label>
+          <label class="wide" for="compatibility-notes"><span>Notes de compatibilité</span><textarea id="compatibility-notes" name="compatibilityNotes" maxlength="2000" placeholder="Limites et informations encore inconnues."></textarea></label>
+          <label class="wide" for="dependencies"><span>Dépendances — une par ligne</span><textarea id="dependencies" name="dependencies" placeholder="core-lib | >=1.2 <2 | false"></textarea><small>Format : <code>id | versionRange | optional</code>.</small></label>
+          <label class="wide" for="conflicts"><span>Conflits — un par ligne</span><textarea id="conflicts" name="conflicts" placeholder="other-mod | >=2 | false"></textarea><small>Format : <code>id | versionRange | optional</code>.</small></label>
+        </fieldset>
+
+        <div><p class="eyebrow">Créateur & droits</p><h2>Attribution et redistribution</h2></div>
+        <fieldset>
+          <label for="creator-id"><span>Identifiant créateur</span><input id="creator-id" name="creatorId" required autocomplete="off" placeholder="creator-id"></label>
+          <label for="creator-name"><span>Nom affiché</span><input id="creator-name" name="creatorName" required autocomplete="off" placeholder="Nom du créateur"></label>
+          <label for="license"><span>Licence / droits</span><input id="license" name="license" required autocomplete="off" placeholder="All Rights Reserved, MIT, CC-BY…"></label>
+          <label for="redistribution"><span>Redistribution</span><select id="redistribution" name="redistribution"><option value="unknown">Inconnue</option><option value="allowed">Autorisée</option><option value="restricted">Restreinte</option><option value="not-authorized">Non autorisée</option></select></label>
+          <label class="wide" for="rights-notice"><span>Notice de droits</span><textarea id="rights-notice" name="rightsNotice" maxlength="3000" placeholder="Précisions de licence ou de redistribution."></textarea></label>
+        </fieldset>
+
+        <div><p class="eyebrow">Provenance déclarée</p><h2>Ne pas confondre déclaration et attestation</h2></div>
+        <fieldset>
+          <label for="provenance-state"><span>État déclaré</span><select id="provenance-state" name="provenanceState"><option value="unknown">Inconnu</option><option value="declared-unattested">Déclaré, non attesté</option><option value="verified">Vérifié — receipt requis</option></select></label>
+          <label for="provenance-receipt"><span>Receipt de provenance</span><input id="provenance-receipt" name="provenanceReceipt" autocomplete="off" placeholder="receipt:provenance.example"></label>
+          <label class="wide" for="source-uri"><span>URI source déclarée</span><input id="source-uri" name="sourceUri" type="url" autocomplete="off" placeholder="https://example.invalid/source"></label>
+          <label class="wide" for="provenance-notes"><span>Notes de provenance</span><textarea id="provenance-notes" name="provenanceNotes" maxlength="2000" placeholder="Le Studio n’atteste aucune provenance automatiquement."></textarea></label>
+        </fieldset>
+
+        <div><p class="eyebrow">Fichiers</p><h2>Chemins, tailles et SHA-256</h2></div>
+        <fieldset>
+          <label class="wide" for="files"><span>Fichiers — un par ligne</span><textarea id="files" name="files" placeholder="textures/main.dds | 1024 | 0123…64 hex… | image/vnd-ms.dds | false"></textarea><small>Format : <code>path | size | sha256 | mediaType | executable</code>. Aucun fichier n’est lu ni exécuté par le Studio.</small></label>
+        </fieldset>
+
+        <div class="studio-note"><strong>Distribution verrouillée.</strong> Tout brouillon généré ou importé est forcé à <code>state: locked</code>, <code>downloadable: false</code> et <code>releaseReceipt: null</code>. Le SHA-256 décrit l’intégrité attendue des octets ; il ne prouve ni auteur, ni licence, ni provenance.</div>
+        <div class="studio-actions">
+          <button class="button primary" type="submit">Valider l’aperçu</button>
+          <button class="button" id="save-draft" type="button">Sauvegarder localement</button>
+          <button class="button" id="download-draft" type="button">Exporter JSON déterministe</button>
+          <button class="button" id="clear-draft" type="button">Effacer le brouillon local</button>
+        </div>
+        <p id="schema-status" class="studio-status" role="status" aria-live="polite">Schéma public non chargé.</p>
+        <p id="studio-status" class="studio-status" role="status" aria-live="polite">Aucun brouillon sauvegardé dans cette session.</p>
+      </form>
+
+      <aside class="studio-preview" aria-labelledby="preview-title">
+        <p class="eyebrow">Universal Mod Manifest v1</p>
+        <h2 id="preview-title">Aperçu canonique du brouillon</h2>
+        <p>Le JSON ci-dessous est calculé localement et trié de façon déterministe. Il ne constitue ni une publication, ni une signature, ni une attestation de provenance ou de mesure.</p>
+        <pre id="manifest-preview" tabindex="0" aria-label="Aperçu JSON du manifeste">{}</pre>
+        <div class="actions"><a class="button" href="./schemas/universal-mod-manifest.schema.json">Ouvrir le schéma public</a><a class="button" href="./security.html">Contrat de confiance</a></div>
+      </aside>
+    </section>
+  </main>
+
+  <footer><div><strong>Nova Forge Creator Studio</strong><p>Brouillons locaux · NON PUBLIÉS · validation locale · fail-closed.</p></div><p>Pré-VF · aucun backend requis</p></footer>
+</body>
+</html>

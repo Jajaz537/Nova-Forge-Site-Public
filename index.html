@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171715">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <meta name="application-name" content="Nova Forge">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="description" content="Nova Forge — site officiel public : OS, modules, catalogue local, sécurité, provenance et documentation publique.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Nova Forge">
+  <meta property="og:title" content="Nova Forge — Site officiel Premium HD">
+  <meta property="og:description" content="Découvrez la surface publique de Nova Forge : OS, catalogue, sécurité, provenance et documentation, sans exposition du cœur privé.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Nova Forge — Site officiel Premium HD">
+  <meta name="twitter:description" content="Surface officielle publique Nova Forge, conçue autour du local-first, du fail-closed et de la provenance vérifiable.">
+  <title>Nova Forge — Site officiel Premium HD</title>
+  <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="alternate" type="application/json" href="./public-status.json" title="Nova Forge — statut public">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/official.css">
+  <script src="./assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <noscript><div class="noscript-note">JavaScript est désactivé. Le contenu officiel reste accessible ; seules les démonstrations interactives locales et l’affichage enrichi du statut public sont indisponibles.</div></noscript>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Nova Forge, accueil">
+      <img class="brand-logo" src="./assets/nova-mark.svg" alt="" width="32" height="32">
+      <span>Nova Forge</span>
+    </a>
+    <nav aria-label="Navigation principale">
+      <a href="#os">OS</a>
+      <a href="./ecosystem.html">Écosystème</a>
+      <a href="#catalogue">Catalogue</a>
+      <a href="#downloads">Téléchargements</a>
+      <a href="./security.html">Sécurité</a>
+      <a href="#privacy">Vie privée</a>
+      <a href="#docs">Documentation</a>
+      <a href="#community">Communauté</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Nova Forge · Premium HD · public-first</p>
+        <h1 id="hero-title">Un hub multigaming conçu autour de la confiance vérifiable.</h1>
+        <p class="lede">Le site public de Nova Forge présente l’écosystème sans exposer les composants privés. Les fonctions disponibles, simulées ou encore non connectées sont distinguées explicitement.</p>
+        <div class="actions">
+          <a class="button primary" href="#os">Découvrir Nova Forge OS</a>
+          <a class="button" href="./ecosystem.html">Explorer l’écosystème</a>
+          <a class="button" href="./security.html">Voir les garanties publiques</a>
+        </div>
+        <div class="release-status" aria-label="État public du site">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span><strong>Pré-VF publique.</strong> Aucun téléchargement système n’est publié tant que sa provenance et sa signature ne sont pas vérifiables.</span>
+        </div>
+      </div>
+      <aside class="hero-panel" aria-label="Principes Nova Forge">
+        <p class="eyebrow">Principes actifs</p>
+        <ul class="feature-list">
+          <li><span>01</span><div><strong>Static-first</strong><small>Le contenu public essentiel reste lisible sans backend.</small></div></li>
+          <li><span>02</span><div><strong>Local-first</strong><small>Le navigateur ne simule pas des capacités système absentes.</small></div></li>
+          <li><span>03</span><div><strong>Fail closed</strong><small>Une preuve manquante n’est jamais remplacée par une confiance implicite.</small></div></li>
+          <li><span>04</span><div><strong>Anti-fuite</strong><small>Les surfaces privées et internes ne sont pas publiées.</small></div></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="trust-strip" aria-label="Garanties de ce noyau">
+      <span>Navigation publique sans compte</span>
+      <span>Aucune télémétrie distante requise</span>
+      <span>Aucun exécutable lancé par le site</span>
+      <span>Données Smart Profile locales</span>
+    </section>
+
+    <section class="status-band" aria-labelledby="public-status-title">
+      <div>
+        <p class="eyebrow">État vérifiable du build</p>
+        <h2 id="public-status-title">Surface publique pré-VF</h2>
+        <p class="section-intro" data-public-status-message>Le statut livré avec ce site déclare une surface public-only, static-first, local-first et fail-closed. Aucun téléchargement public n’est déclaré disponible.</p>
+      </div>
+      <div class="status-summary" data-public-status-facts aria-live="polite">
+        <span><strong>Distribution</strong><small>verrouillée</small></span>
+        <span><strong>Bridge OS</strong><small>non connecté</small></span>
+        <span><strong>Smart Profile</strong><small>navigateur local</small></span>
+        <span data-public-build-fact><strong>Empreinte</strong><small>source non empaquetée</small></span>
+      </div>
+      <a class="button" href="./public-status.json">Consulter le JSON public</a>
+    </section>
+
+    <section class="section" id="os" aria-labelledby="os-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Nova Forge OS</p><h2 id="os-title">Le centre de contrôle de l’écosystème.</h2></div>
+        <span class="badge">Surface publique</span>
+      </div>
+      <p class="section-intro">Le site ne réplique pas les fonctions internes de l’OS. Il expose uniquement les informations prévues pour le public : rôle des modules, compatibilité, provenance, documentation autorisée et disponibilité.</p>
+      <div class="cards three">
+        <article class="card"><p class="card-kicker">Système</p><h3>Gestion multigaming</h3><p>Une couche d’orchestration destinée à centraliser les fonctions publiques de découverte, compatibilité et gestion de contenus.</p><a class="text-link" href="./ecosystem.html">Voir l’écosystème public</a></article>
+        <article class="card"><p class="card-kicker">Compatibilité</p><h3>Smart Profile</h3><p>Les recommandations distinguent ce qui est mesuré, estimé ou inconnu. Aucun FPS ni niveau de stabilité n’est promis sans preuve.</p><button class="text-button" type="button" data-smart-profile>Analyser ce navigateur</button></article>
+        <article class="card"><p class="card-kicker">Intégration</p><h3>Bridge OS optionnel</h3><p>Le site public reste autonome. Une intégration locale future ne pourra être déclenchée que par une action explicite de l’utilisateur.</p><button class="text-button" type="button" data-os-bridge>Afficher l’état</button></article>
+      </div>
+      <div class="panel profile-panel" data-profile-result role="status" aria-live="polite"><p class="muted" data-os-status>Aucune analyse locale exécutée.</p></div>
+    </section>
+
+    <section class="section" id="catalogue" aria-labelledby="catalogue-title">
+      <div class="section-heading"><div><p class="eyebrow">Catalogue public</p><h2 id="catalogue-title">Découvrir sans dépendance serveur.</h2></div><span class="badge">Démonstration locale</span></div>
+      <p class="section-intro">Ce catalogue sert de démonstration de l’interface publique. Une entrée ne devient distribuable que lorsque ses métadonnées, sa source et ses preuves de provenance sont réellement disponibles.</p>
+      <label class="field" for="mod-search"><span>Rechercher dans la démonstration</span><input id="mod-search" type="search" autocomplete="off" placeholder="Nom, jeu, catégorie…"></label>
+      <div class="cards" data-mod-catalog aria-live="polite"></div>
+    </section>
+
+    <section class="section" id="downloads" aria-labelledby="downloads-title">
+      <div class="section-heading"><div><p class="eyebrow">Téléchargements publics</p><h2 id="downloads-title">Rien n’est distribué sans chaîne de confiance.</h2></div><span class="badge neutral">Publication verrouillée</span></div>
+      <div class="split download-grid">
+        <div>
+          <p class="section-intro">Les builds, modules ou paquets publics apparaîtront ici uniquement lorsqu’un artefact autorisé disposera des informations minimales nécessaires à une vérification indépendante.</p>
+          <div class="requirements" role="list" aria-label="Exigences de publication">
+            <div role="listitem"><strong>Identité</strong><span>nom et version attendus</span></div>
+            <div role="listitem"><strong>Intégrité</strong><span>hash publié</span></div>
+            <div role="listitem"><strong>Provenance</strong><span>source et chaîne de livraison qualifiées</span></div>
+            <div role="listitem"><strong>Signature</strong><span>preuve vérifiable lorsqu’elle est requise</span></div>
+          </div>
+        </div>
+        <div class="panel locked-panel">
+          <span class="lock-icon" aria-hidden="true">◇</span>
+          <h3>Aucun téléchargement public validé</h3>
+          <p>Cette absence est volontaire : le site ne crée pas de faux bouton de téléchargement et ne publie pas un artefact non vérifié.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="security" aria-labelledby="security-title">
+      <p class="eyebrow">Sécurité & provenance</p><h2 id="security-title">La confiance ne dépend pas de l’apparence du site.</h2>
+      <div class="cards three">
+        <article class="card"><h3>Universal Mod Manifest</h3><p>Le contrat public doit décrire ce qui peut être affirmé sur une ressource. Une provenance ou une licence n’est affichée que si la preuve correspondante existe.</p><span class="badge neutral">Backend non connecté</span></article>
+        <article class="card"><h3>Storage Broker / Resolver</h3><p>La résolution d’origine, miroir ou cache doit vérifier l’identité attendue avant d’accorder la confiance à un contenu.</p><span class="badge neutral">Backend non connecté</span></article>
+        <article class="card"><h3>Repair Network</h3><p>Aucune substitution silencieuse : si aucune copie vérifiée ne correspond à l’identité attendue, la réparation doit échouer fermée.</p><span class="badge neutral">Backend non connecté</span></article>
+      </div>
+      <div class="security-note"><strong>Règle publique :</strong> une information absente reste absente. Le site ne transforme jamais « inconnu » en « vérifié » pour améliorer sa présentation. <a href="./security.html">Ouvrir le contrat Sécurité & provenance.</a> <a href="./verify.html">Vérifier un fichier localement.</a> <a href="./public-status.json">Consulter le statut public JSON.</a></div>
+    </section>
+
+    <section class="section" id="privacy" aria-labelledby="privacy-title">
+      <div class="section-heading"><div><p class="eyebrow">Vie privée</p><h2 id="privacy-title">Le noyau public fonctionne sans profil distant.</h2></div><span class="badge">Local-first</span></div>
+      <p class="section-intro">Dans cette version du site, les fonctions interactives disponibles sont exécutées dans le navigateur. Aucun compte ni backend distant n’est nécessaire pour consulter le contenu public ou utiliser la démonstration locale.</p>
+      <div class="cards three">
+        <article class="card"><h3>Smart Profile local</h3><p>L’analyse utilise uniquement les informations que le navigateur expose à la page, puis affiche le résultat localement. Elle n’envoie pas ce résultat à un service Nova Forge distant.</p><span class="badge neutral">Traitement navigateur</span></article>
+        <article class="card"><h3>Préférences locales</h3><p>Le noyau peut mémoriser localement une préférence liée à la réduction des animations. Cette donnée reste dans le stockage du navigateur et n’est pas requise pour consulter le site.</p><span class="badge neutral">Stockage facultatif</span></article>
+        <article class="card"><h3>Réseau minimal</h3><p>Le service worker met en cache les ressources statiques du même site pour améliorer la disponibilité hors ligne. Aucun domaine tiers n’est requis par ce noyau.</p><span class="badge neutral">Même origine</span></article>
+      </div>
+    </section>
+
+    <section class="section" id="docs" aria-labelledby="docs-title">
+      <div class="section-heading"><div><p class="eyebrow">Documentation</p><h2 id="docs-title">Une documentation publique, séparée du cœur interne.</h2></div><span class="badge">Anti-fuite</span></div>
+      <div class="cards three">
+        <article class="card"><h3>Éditions & modules</h3><p>La page Écosystème présente uniquement les modules déjà publics et réserve les éditions sans inventer de nomenclature.</p><a class="text-link" href="./ecosystem.html">Ouvrir l’écosystème public</a></article>
+        <article class="card"><h3>Vérification publique</h3><p>Le guide public décrit comment interpréter identité, hash, provenance, signature et état fail-closed sans révéler le fonctionnement interne.</p><a class="text-link" href="./documentation.html#verification">Lire le guide de vérification</a></article>
+        <article class="card"><h3>Contrat du site</h3><p>Vie privée navigateur, statut machine-readable, accessibilité et limites actuelles sont documentés dans une surface publique dédiée.</p><a class="text-link" href="./documentation.html">Ouvrir la documentation publique</a></article>
+      </div>
+    </section>
+
+    <section class="section split" id="community" aria-labelledby="community-title">
+      <div><p class="eyebrow">Communauté</p><h2 id="community-title">Modération transparente par conception.</h2><p>Reports, appels, raisons et décisions restent des contrats explicites. Ce noyau ne simule pas un backend de modération qui n’existe pas encore.</p></div>
+      <div class="panel"><dl><div><dt>Signal automatique</dt><dd>séparé d’une décision</dd></div><div><dt>Décision modérateur</dt><dd>raison explicite requise</dd></div><div><dt>Action légale</dt><dd>surface distincte et auditable</dd></div></dl></div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>Nova Forge</strong><p>Site officiel public · noyau pré-VF Premium HD.</p></div>
+    <div class="footer-meta"><p>Ce site n’expose aucun contenu privé ou interne et n’établit aucune confiance sans preuve correspondante.</p><p><a href="./ecosystem.html">Écosystème</a> · <a href="./security.html">Sécurité & provenance</a> · <a href="./verify.html">Vérificateur SHA-256</a> · <a href="./documentation.html">Documentation publique</a> · <a href="./public-status.json">Statut JSON</a></p></div>
+  </footer>
+</body>
+</html>

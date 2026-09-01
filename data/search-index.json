@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "indexMode": "preindexed-local",
+  "externalAdapterRequired": false,
+  "entries": [
+    {"id":"page:catalog","kind":"page","title":"Catalogue multigaming","summary":"Découvrir les contenus publics avec preuve explicite et distribution fail-closed.","href":"./catalog.html","terms":["catalogue","mods","packs","experiences","multigaming"]},
+    {"id":"page:creator-studio","kind":"page","title":"Creator Studio","summary":"Éditer et valider localement un Universal Mod Manifest sans publication implicite.","href":"./creator-studio.html","terms":["creator","studio","manifest","umm","draft"]},
+    {"id":"page:profiles","kind":"page","title":"Profiles & Passkeys","summary":"Frontière publique entre identité, WebAuthn, récupération, sessions et actions privilégiées.","href":"./profiles.html","terms":["profiles","passkeys","webauthn","sessions","identite"]},
+    {"id":"page:community","kind":"page","title":"Communauté","summary":"Contrats Abuse Shield, modération, discussions, reviews et commentaires sans faux backend.","href":"./community.html","terms":["communaute","moderation","reviews","commentaires","abuse shield"]},
+    {"id":"page:security","kind":"page","title":"Sécurité & provenance","summary":"Contrat public de confiance, provenance, intégrité et états fail-closed.","href":"./security.html","terms":["securite","provenance","signature","integrite","sha256"]},
+    {"id":"page:downloads","kind":"page","title":"Téléchargements publics","summary":"Distribution verrouillée jusqu’à présence des preuves requises.","href":"./downloads.html","terms":["downloads","telechargements","artifacts","signature","provenance"]},
+    {"id":"content:ember-textures","kind":"content","title":"Ember Textures — Preview","summary":"Aperçu de démonstration Skyrim Special Edition, sans artefact distribué.","href":"./project-ember-textures.html","terms":["skyrim","textures","mod","preview"]},
+    {"id":"content:balanced-latency-pack","kind":"content","title":"Balanced Latency Pack — Preview","summary":"Pack de démonstration Cyberpunk 2077, estimation sans garantie de FPS.","href":"./project-balanced-latency-pack.html","terms":["cyberpunk","latency","performance","pack","preview"]},
+    {"id":"content:forge-night-experience","kind":"content","title":"Forge Night Experience — Preview","summary":"Expérience de démonstration Minecraft, compatibilité inconnue sans receipt mesuré.","href":"./project-forge-night-experience.html","terms":["minecraft","experience","modpack","preview"]}
+  ]
+}

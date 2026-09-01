@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171715">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="description" content="Catalogue public Nova Forge : jeux, mods, packs et expériences avec provenance et compatibilité explicites.">
+  <title>Catalogue — Nova Forge</title>
+  <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/official.css">
+  <link rel="stylesheet" href="./assets/catalog.css">
+  <script src="./assets/catalog.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <header class="topbar">
+    <a class="brand" href="./index.html" aria-label="Nova Forge, accueil"><img class="brand-logo" src="./assets/nova-mark.svg" alt="" width="32" height="32"><span>Nova Forge</span></a>
+    <nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./catalog.html" aria-current="page">Catalogue</a><a href="./creator-studio.html">Creator Studio</a><a href="./ecosystem.html">Écosystème</a><a href="./downloads.html">Téléchargements</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a></nav>
+  </header>
+  <main id="main" class="catalog-page">
+    <section class="catalog-hero" aria-labelledby="catalog-title">
+      <div><p class="eyebrow">Catalogue multigaming · static-first</p><h1 id="catalog-title">Découvrir par preuve, pas par promesse.</h1><p class="lede">Jeux, mods, packs et expériences sont filtrables localement. Les états <strong>Mesuré</strong>, <strong>Estimé</strong> et <strong>Inconnu</strong> restent distincts ; aucune entrée de démonstration n’implique un téléchargement disponible.</p></div>
+      <aside class="panel catalog-contract" aria-label="Contrat du catalogue"><strong>Public-only</strong><span>Aucune donnée interne ou non publique.</span><strong>Provider-neutral</strong><span>L’identité ne dépend pas d’un hébergeur.</span><strong>Fail-closed</strong><span>Une preuve absente reste inconnue.</span></aside>
+    </section>
+    <section class="catalog-controls" aria-labelledby="filters-title">
+      <div class="section-heading"><div><p class="eyebrow">Recherche locale</p><h2 id="filters-title">Filtrer le catalogue</h2></div><span class="badge" id="catalog-count" aria-live="polite">3 entrées</span></div>
+      <form id="catalog-filter-form" class="filter-grid">
+        <label><span>Recherche</span><input id="catalog-query" name="q" type="search" autocomplete="off" placeholder="Nom, jeu, créateur, tag…"></label>
+        <label><span>Type</span><select id="catalog-kind" name="kind"><option value="">Tous</option><option value="mod">Mod</option><option value="pack">Pack</option><option value="experience">Expérience</option></select></label>
+        <label><span>Jeu</span><select id="catalog-game" name="game"><option value="">Tous</option></select></label>
+        <label><span>Compatibilité</span><select id="catalog-evidence" name="evidence"><option value="">Toutes</option><option value="measured">Mesurée</option><option value="estimated">Estimée</option><option value="unknown">Inconnue</option></select></label>
+        <label><span>Tri</span><select id="catalog-sort" name="sort"><option value="featured">Sélection</option><option value="name">Nom</option><option value="updated">Mise à jour</option></select></label>
+        <label class="check-control"><input id="catalog-favorites-only" type="checkbox"><span>Favoris uniquement</span></label>
+      </form>
+      <p id="catalog-state" class="catalog-state" role="status" aria-live="polite">Le contenu HTML initial est disponible. Les filtres locaux s’activent si JavaScript est disponible.</p>
+    </section>
+    <section class="catalog-results" aria-labelledby="results-title">
+      <div class="section-heading"><div><p class="eyebrow">Résultats</p><h2 id="results-title">Sélection publique</h2></div><button class="button" type="button" id="catalog-reset">Réinitialiser</button></div>
+      <div id="catalog-grid" class="catalog-grid">
+        <article class="catalog-card" data-catalog-id="ember-textures" data-kind="mod" data-game="Skyrim Special Edition" data-evidence="unknown"><div class="catalog-card-top"><span class="badge">Mod</span><span class="evidence-chip unknown">Inconnue</span></div><h3>Ember Textures — Preview</h3><p>Entrée de démonstration pour le pipeline de métadonnées, sans binaire ni lien de téléchargement.</p><dl><div><dt>Jeu</dt><dd>Skyrim Special Edition</dd></div><div><dt>Version</dt><dd>0.1.0-preview</dd></div><div><dt>Provenance</dt><dd>Déclarée, non attestée</dd></div></dl><div class="catalog-card-actions"><button class="text-button" type="button" data-favorite-id="ember-textures" aria-pressed="false">☆ Favori</button><a class="text-link" href="./project-ember-textures.html">Voir le mini-hub</a></div></article>
+        <article class="catalog-card" data-catalog-id="balanced-latency-pack" data-kind="pack" data-game="Cyberpunk 2077" data-evidence="estimated"><div class="catalog-card-top"><span class="badge">Pack</span><span class="evidence-chip estimated">Estimée</span></div><h3>Balanced Latency Pack — Preview</h3><p>Exemple de pack local-first : recommandations non garanties, aucune promesse de FPS.</p><dl><div><dt>Jeu</dt><dd>Cyberpunk 2077</dd></div><div><dt>Version</dt><dd>0.2.0-preview</dd></div><div><dt>Distribution</dt><dd>Verrouillée</dd></div></dl><div class="catalog-card-actions"><button class="text-button" type="button" data-favorite-id="balanced-latency-pack" aria-pressed="false">☆ Favori</button><a class="text-link" href="./project-balanced-latency-pack.html">Voir le mini-hub</a></div></article>
+        <article class="catalog-card" data-catalog-id="forge-night-experience" data-kind="experience" data-game="Minecraft" data-evidence="unknown"><div class="catalog-card-top"><span class="badge">Expérience</span><span class="evidence-chip unknown">Inconnue</span></div><h3>Forge Night Experience — Preview</h3><p>Exemple d’expérience complète sans artefact publié ; aucune mesure attestée n’est revendiquée.</p><dl><div><dt>Jeu</dt><dd>Minecraft</dd></div><div><dt>Version</dt><dd>0.1.0-preview</dd></div><div><dt>Fichiers</dt><dd>Aucun artefact publié</dd></div></dl><div class="catalog-card-actions"><button class="text-button" type="button" data-favorite-id="forge-night-experience" aria-pressed="false">☆ Favori</button><a class="text-link" href="./project-forge-night-experience.html">Voir le mini-hub</a></div></article>
+      </div>
+      <div id="catalog-empty" class="panel catalog-empty" hidden><h3>Aucun résultat</h3><p>Modifiez les filtres ou réinitialisez la recherche. Aucun résultat caché n’est chargé depuis un service distant.</p></div>
+    </section>
+    <section class="section catalog-trust" aria-labelledby="trust-title"><p class="eyebrow">Universal Mod Manifest</p><h2 id="trust-title">Une identité portable avant le stockage.</h2><p class="section-intro">Le schéma public décrit identité, cible, compatibilité, dépendances, conflits, droits, provenance, fichiers et état de distribution sans dépendre d’un fournisseur. Les entrées de prévisualisation restent volontairement non distribuables.</p><div class="actions"><a class="button" href="./schemas/universal-mod-manifest.schema.json">Voir le schéma JSON</a><a class="button" href="./data/catalog.json">Voir les données du catalogue</a><a class="button" href="./security.html">Relire le contrat de confiance</a></div></section>
+  </main>
+  <footer><div><strong>Nova Forge</strong><p>Catalogue public indépendant de Nova Forge OS.</p></div><p>Pré-VF · static-first · local-first · fail-closed</p></footer>
+</body>
+</html>

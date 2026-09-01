@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nova-forge:schemas:community-write:v1",
+  "title": "Nova Forge Community Write Intent",
+  "description": "Provider-neutral write-intent contract. A write surface must pass Abuse Shield and moderation routing before acceptance. This schema does not imply that a backend is active.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "intentId", "actorProfileRef", "kind", "target", "payload", "abuseShield", "moderation", "createdAt"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "intentId": {"type": "string", "pattern": "^community-intent:[a-z0-9][a-z0-9._:-]{7,191}$"},
+    "actorProfileRef": {"type": "string", "pattern": "^profile:[a-z0-9][a-z0-9._:-]{2,127}$"},
+    "kind": {"enum": ["collection-update", "discussion", "review", "comment"]},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contentId", "contentVersion"],
+      "properties": {
+        "contentId": {"type": "string", "minLength": 3, "maxLength": 200},
+        "contentVersion": {"type": "string", "minLength": 1, "maxLength": 120},
+        "parentId": {"type": ["string", "null"], "maxLength": 200}
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {"type": "string", "maxLength": 200},
+        "body": {"type": "string", "maxLength": 12000},
+        "rating": {"type": ["integer", "null"], "minimum": 1, "maximum": 5},
+        "collectionItems": {
+          "type": "array",
+          "maxItems": 500,
+          "uniqueItems": true,
+          "items": {"type": "string", "maxLength": 200}
+        }
+      }
+    },
+    "abuseShield": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "state"],
+      "properties": {
+        "required": {"const": true},
+        "state": {"enum": ["pending", "passed", "blocked"]},
+        "signalsReceiptId": {"type": ["string", "null"], "maxLength": 200}
+      }
+    },
+    "moderation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policyVersion", "routingState"],
+      "properties": {
+        "policyVersion": {"type": "string", "minLength": 1, "maxLength": 80},
+        "routingState": {"enum": ["pending", "accepted", "rejected", "held-for-review"]},
+        "moderationReceiptId": {"type": ["string", "null"], "pattern": "^moderation:[a-z0-9][a-z0-9._:-]{7,191}$"}
+      }
+    },
+    "createdAt": {"type": "string", "format": "date-time"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"abuseShield": {"properties": {"state": {"const": "blocked"}}}}},
+      "then": {"properties": {"moderation": {"properties": {"routingState": {"enum": ["rejected", "held-for-review"]}}}}}
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "schema": "nova-forge-public-site-status/v1",
+  "surface": "official-site",
+  "stage": "pre-vf",
+  "principles": {
+    "static_first": true,
+    "local_first": true,
+    "fail_closed": true,
+    "public_only": true
+  },
+  "runtime": {
+    "account_required": false,
+    "remote_telemetry_required": false,
+    "third_party_runtime_dependency_required": false,
+    "browser_local_storage_optional": true,
+    "local_preference_persisted_only_after_explicit_user_action": true,
+    "default_preference_state_persisted": false,
+    "same_origin_service_worker": true,
+    "service_worker_cache_policy": "public-allowlist-only",
+    "arbitrary_same_origin_get_cached": false
+  },
+  "hosting": {
+    "mandatory_monthly_budget_eur": 0,
+    "paid_plan_allowed": false,
+    "private_source_repository_must_remain_private": true,
+    "public_artifact_only_mirror_required_when_private_hosting_costs_money": true,
+    "public_url_verified": false
+  },
+  "distribution": {
+    "public_download_available": false,
+    "manifest": "downloads.json",
+    "public_page": "./downloads.html",
+    "policy": "verified-artifacts-only",
+    "required_evidence": [
+      "identity",
+      "integrity-hash",
+      "provenance",
+      "signature-when-required"
+    ]
+  },
+  "verification": {
+    "local_sha256_tool": true,
+    "local_sha256_tool_path": "./verify.html",
+    "file_upload_required": false,
+    "file_execution_required": false,
+    "hash_match_proves_provenance": false
+  },
+  "public_build_provenance": {
+    "generated_at_delivery": true,
+    "manifest": "public-build.json",
+    "checksums": "SHA256SUMS.txt",
+    "hash_algorithm": "sha256",
+    "private_source_revision_exposed": false
+  },
+  "integrations": {
+    "nova_forge_os_bridge": "not_connected",
+    "storage_broker_resolver": "not_connected",
+    "repair_network": "not_connected",
+    "community_backend": "not_connected",
+    "external_search_adapter": "not_required"
+  },
+  "community": {
+    "execution": "browser-local-drafts",
+    "collection_schema_contract": "./schemas/collection.schema.json",
+    "submission_schema_contract": "./schemas/community-submission.schema.json",
+    "draft_types": ["discussion", "review", "comment"],
+    "sync_state": "local-only",
+    "draft_state": "local-draft",
+    "publication_state": "not-submitted",
+    "remote_write_available": false,
+    "remote_identity_claimed": false,
+    "service_worker_caches_drafts": false
+  },
+  "smart_profile": {
+    "execution": "browser-local",
+    "schema_contract": "./schemas/smart-profile.schema.json",
+    "evidence_labels": ["Measured", "Estimated", "Unknown"],
+    "evidence_sources": ["browser-api", "browser-approximation", "unavailable"],
+    "remote_profile_upload_required": false,
+    "fps_guarantee": false,
+    "stability_guarantee": false
+  }
+}

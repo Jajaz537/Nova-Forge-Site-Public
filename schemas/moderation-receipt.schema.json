@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nova-forge:schemas:moderation-receipt:v1",
+  "title": "Nova Forge Moderation Receipt",
+  "description": "DSA-ready architecture contract for immutable moderation notices, decisions, statements of reasons and appeals. This is not a claim of legal compliance.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "receiptId", "receiptType", "content", "category", "createdAt", "provenance"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "receiptId": {"type": "string", "pattern": "^moderation:[a-z0-9][a-z0-9._:-]{7,191}$"},
+    "receiptType": {"enum": ["notice", "decision", "appeal", "appeal-outcome"]},
+    "content": {"$ref": "#/$defs/contentRef"},
+    "category": {"enum": ["illegal-content", "policy-violation", "spam-abuse", "intellectual-property"]},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "notice": {"$ref": "#/$defs/notice"},
+    "decision": {"$ref": "#/$defs/decision"},
+    "appeal": {"$ref": "#/$defs/appeal"},
+    "outcome": {"$ref": "#/$defs/outcome"},
+    "provenance": {"$ref": "#/$defs/provenance"}
+  },
+  "allOf": [
+    {"if": {"properties": {"receiptType": {"const": "notice"}}}, "then": {"required": ["notice"]}},
+    {"if": {"properties": {"receiptType": {"const": "decision"}}}, "then": {"required": ["decision"]}},
+    {"if": {"properties": {"receiptType": {"const": "appeal"}}}, "then": {"required": ["appeal"]}},
+    {"if": {"properties": {"receiptType": {"const": "appeal-outcome"}}}, "then": {"required": ["outcome"]}}
+  ],
+  "$defs": {
+    "contentRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contentId", "contentVersion"],
+      "properties": {
+        "contentId": {"type": "string", "minLength": 3, "maxLength": 200},
+        "contentVersion": {"type": "string", "minLength": 1, "maxLength": 120},
+        "contentDigest": {"type": ["string", "null"], "pattern": "^sha256:[a-f0-9]{64}$"}
+      }
+    },
+    "notice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason", "ruleOrLegalBasis", "submittedAt", "immutable"],
+      "properties": {
+        "reason": {"type": "string", "minLength": 1, "maxLength": 4000},
+        "ruleOrLegalBasis": {"type": "string", "minLength": 1, "maxLength": 1000},
+        "submittedAt": {"type": "string", "format": "date-time"},
+        "evidenceRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "maxLength": 500}},
+        "immutable": {"const": true}
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "scope", "duration", "statementOfReasons", "decidedAt"],
+      "properties": {
+        "action": {"enum": ["no-action", "label", "visibility-limit", "remove", "disable-distribution", "suspend-account"]},
+        "scope": {"enum": ["content-version", "release", "thread", "comment", "account"]},
+        "duration": {"enum": ["none", "temporary", "indefinite"]},
+        "expiresAt": {"type": ["string", "null"], "format": "date-time"},
+        "statementOfReasons": {"type": "string", "minLength": 1, "maxLength": 8000},
+        "ruleOrLegalBasis": {"type": "string", "maxLength": 1000},
+        "decidedAt": {"type": "string", "format": "date-time"},
+        "automatedSignalUsed": {"type": "boolean"},
+        "humanDecision": {"type": "boolean"}
+      }
+    },
+    "appeal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decisionReceiptId", "grounds", "submittedAt", "state"],
+      "properties": {
+        "decisionReceiptId": {"type": "string", "pattern": "^moderation:[a-z0-9][a-z0-9._:-]{7,191}$"},
+        "grounds": {"type": "string", "minLength": 1, "maxLength": 8000},
+        "submittedAt": {"type": "string", "format": "date-time"},
+        "state": {"enum": ["submitted", "under-review", "closed"]}
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["appealReceiptId", "result", "reason", "decidedAt"],
+      "properties": {
+        "appealReceiptId": {"type": "string", "pattern": "^moderation:[a-z0-9][a-z0-9._:-]{7,191}$"},
+        "result": {"enum": ["upheld", "modified", "reversed"]},
+        "reason": {"type": "string", "minLength": 1, "maxLength": 8000},
+        "decidedAt": {"type": "string", "format": "date-time"}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recordedBy", "recordedAt", "previousReceiptId"],
+      "properties": {
+        "recordedBy": {"enum": ["system", "moderator", "appeals-reviewer"]},
+        "recordedAt": {"type": "string", "format": "date-time"},
+        "previousReceiptId": {"type": ["string", "null"], "pattern": "^moderation:[a-z0-9][a-z0-9._:-]{7,191}$"}
+      }
+    }
+  }
+}

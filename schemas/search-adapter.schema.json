@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nova-forge:schemas:search-adapter:v1",
+  "title": "Nova Forge Optional External Search Adapter",
+  "description": "Optional adapter contract. The zero-cost preindexed local search remains authoritative for core availability; an external index may enrich discovery but cannot replace content identity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "adapterId", "requiredForCore", "identityPolicy", "costPolicy", "state"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "adapterId": {"type": "string", "minLength": 3, "maxLength": 120},
+    "requiredForCore": {"const": false},
+    "identityPolicy": {"const": "preserve-local-content-id"},
+    "costPolicy": {"enum": ["disabled", "explicit-budget-only", "free-tier-with-hard-ceiling"]},
+    "state": {"enum": ["disabled", "configured", "degraded"]},
+    "endpoint": {"type": ["string", "null"], "format": "uri", "maxLength": 2048},
+    "hardMonthlyBudgetEur": {"type": "number", "minimum": 0},
+    "surgeMode": {"enum": ["disable-external-first", "local-only"]}
+  },
+  "allOf": [
+    {"if": {"properties": {"state": {"const": "disabled"}}}, "then": {"properties": {"endpoint": {"type": "null"}}}}
+  ]
+}

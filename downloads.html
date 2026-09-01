@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171715">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <meta name="application-name" content="Nova Forge">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="description" content="Téléchargements publics Nova Forge : seuls les artefacts autorisés, identifiés et vérifiables peuvent apparaître sur cette surface.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Nova Forge">
+  <meta property="og:title" content="Téléchargements publics — Nova Forge">
+  <meta property="og:description" content="Surface fail-closed de distribution Nova Forge : aucun artefact n’est publié sans identité, SHA-256, provenance et statut de signature.">
+  <title>Téléchargements publics — Nova Forge</title>
+  <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="alternate" type="application/json" href="./downloads.json" title="Nova Forge — téléchargements publics">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/official.css">
+  <script src="./assets/app.js" defer></script>
+  <script src="./assets/downloads.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Nova Forge, retour au site officiel"><img class="brand-logo" src="./assets/nova-mark.svg" alt="" width="32" height="32"><span>Nova Forge</span></a>
+    <nav aria-label="Téléchargements publics"><a href="#availability">Disponibilité</a><a href="#contract">Contrat</a><a href="#verify">Vérifier</a></nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="downloads-page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Distribution publique · fail-closed</p>
+        <h1 id="downloads-page-title">Aucun fichier sans chaîne de confiance.</h1>
+        <p class="lede">Cette page est la surface officielle prévue pour les artefacts publics Nova Forge. Elle reste volontairement vide tant qu’aucun fichier autorisé ne possède les preuves minimales nécessaires à une vérification indépendante.</p>
+        <div class="actions"><a class="button primary" href="#contract">Voir le contrat de publication</a><a class="button" href="./downloads.json">Manifeste JSON</a></div>
+      </div>
+      <aside class="hero-panel" aria-label="État actuel des téléchargements">
+        <p class="eyebrow">État actuel</p>
+        <ul class="feature-list">
+          <li><span>01</span><div><strong>Disponibilité</strong><small>Aucun artefact public déclaré disponible.</small></div></li>
+          <li><span>02</span><div><strong>Liens</strong><small>Aucun faux bouton ni URL de téléchargement de démonstration.</small></div></li>
+          <li><span>03</span><div><strong>Preuves</strong><small>Identité, SHA-256, provenance et statut de signature sont requis avant publication.</small></div></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section" id="availability" aria-labelledby="availability-title">
+      <div class="section-heading"><div><p class="eyebrow">Disponibilité</p><h2 id="availability-title">Distribution verrouillée.</h2></div><span class="badge neutral" data-download-state data-state="locked">0 artefact</span></div>
+      <div class="panel locked-panel">
+        <span class="lock-icon" aria-hidden="true">◇</span>
+        <h3>Aucun téléchargement public validé</h3>
+        <p>Le manifeste <code>downloads.json</code> déclare actuellement <code>available=false</code> et une liste <code>artifacts=[]</code>. Cette page ne déduit jamais une disponibilité à partir d’un fichier présent ailleurs.</p>
+      </div>
+      <div class="cards" data-download-artifacts aria-live="polite"></div>
+    </section>
+
+    <section class="section" id="contract" aria-labelledby="contract-title">
+      <p class="eyebrow">Contrat de publication</p>
+      <h2 id="contract-title">Ce qu’un futur artefact devra publier.</h2>
+      <div class="requirements" role="list" aria-label="Contrat d’un artefact public">
+        <div role="listitem"><strong>Identité</strong><span>identifiant public, nom, version et nom exact du fichier</span></div>
+        <div role="listitem"><strong>Taille</strong><span>taille publique en octets afin de détecter les incohérences évidentes</span></div>
+        <div role="listitem"><strong>SHA-256</strong><span>64 caractères hexadécimaux minuscules correspondant au fichier distribué</span></div>
+        <div role="listitem"><strong>Provenance</strong><span>information publique qualifiée sur la chaîne de livraison autorisée</span></div>
+        <div role="listitem"><strong>Signature</strong><span>statut explicite, avec preuve vérifiable lorsqu’une signature est requise</span></div>
+        <div role="listitem"><strong>Chemin</strong><span>URL relative same-origin limitée à la surface publique autorisée</span></div>
+      </div>
+      <div class="security-note"><strong>Règle :</strong> la présence d’un fichier dans un dépôt, une release ou un stockage ne suffit jamais à le rendre téléchargeable depuis le site. L’entrée du manifeste public doit être autorisée et complète.</div>
+    </section>
+
+    <section class="section" id="verify" aria-labelledby="verify-download-title">
+      <p class="eyebrow">Vérification locale</p>
+      <h2 id="verify-download-title">Comparer un fichier reçu à son empreinte.</h2>
+      <p class="section-intro">Lorsqu’un artefact public existera, son SHA-256 pourra être vérifié localement dans le navigateur. Une correspondance confirme l’intégrité par rapport à l’empreinte publiée ; elle ne remplace pas la provenance ou une signature requise.</p>
+      <div class="actions"><a class="button primary" href="./verify.html">Ouvrir le vérificateur SHA-256</a><a class="button" href="./documentation.html#verification">Lire le guide public</a><a class="button" href="./">Retour au site officiel</a></div>
+    </section>
+  </main>
+
+  <footer><div><strong>Nova Forge</strong><p>Téléchargements publics · surface pré-VF.</p></div><div class="footer-meta"><p>Aucun artefact public n’est déclaré disponible.</p><p><a href="./downloads.json">Manifeste JSON</a> · <a href="./public-status.json">Statut public</a></p></div></footer>
+</body>
+</html>

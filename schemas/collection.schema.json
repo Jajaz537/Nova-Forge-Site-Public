@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nova-forge:schemas:collection:v1",
+  "title": "Nova Forge Collection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "name", "itemIds", "syncState"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,127}$"},
+    "name": {"type": "string", "minLength": 1, "maxLength": 160},
+    "description": {"type": "string", "maxLength": 1200},
+    "ownerProfileId": {"type": ["string", "null"], "maxLength": 160},
+    "itemIds": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,127}$"},
+      "uniqueItems": true
+    },
+    "visibility": {"enum": ["private-local", "unlisted", "public"], "default": "private-local"},
+    "syncState": {"enum": ["local-only", "sync-pending", "synced"]}
+  }
+}

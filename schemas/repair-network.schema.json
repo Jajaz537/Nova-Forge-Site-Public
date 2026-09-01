@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nova-forge:schemas:repair-network:v1",
+  "title": "Nova Forge Repair Network V1",
+  "description": "Fail-closed repair contract layered over provider-neutral resolution. Repair may only restore the already-declared logical identity; it never substitutes a different artifact because it is merely available.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "logicalIdentity", "releaseState", "repairPolicy", "candidateOrigins", "result"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "logicalIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manifestSha256", "artifactSha256"],
+      "properties": {
+        "manifestSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "artifactSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "releaseState": {"enum": ["active", "withdrawn", "revoked"]},
+    "repairPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resolverVerificationRequired", "digestMatchRequired", "manifestBindingRequired", "silentSubstitutionForbidden", "revokedDistributionForbidden", "mutableAliasTrustForbidden"],
+      "properties": {
+        "resolverVerificationRequired": {"const": true},
+        "digestMatchRequired": {"const": true},
+        "manifestBindingRequired": {"const": true},
+        "silentSubstitutionForbidden": {"const": true},
+        "revokedDistributionForbidden": {"const": true},
+        "mutableAliasTrustForbidden": {"const": true}
+      }
+    },
+    "candidateOrigins": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["originId", "resolutionState"],
+        "properties": {
+          "originId": {"type": "string", "minLength": 3, "maxLength": 160},
+          "resolutionState": {"enum": ["unresolved", "verified", "failed"]},
+          "verifiedArtifactSha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+          "failureReason": {"type": ["string", "null"], "maxLength": 1000}
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "distributable"],
+      "properties": {
+        "state": {"enum": ["not-attempted", "repaired", "no-verified-copy", "digest-mismatch", "release-withdrawn", "release-revoked"]},
+        "distributable": {"type": "boolean"},
+        "selectedOriginId": {"type": ["string", "null"], "maxLength": 160},
+        "verifiedArtifactSha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "reason": {"type": ["string", "null"], "maxLength": 1000}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"releaseState": {"enum": ["withdrawn", "revoked"]}}},
+      "then": {"properties": {"result": {"properties": {"distributable": {"const": false}}}}}
+    },
+    {
+      "if": {"properties": {"result": {"properties": {"state": {"const": "repaired"}}}}},
+      "then": {
+        "properties": {
+          "releaseState": {"const": "active"},
+          "result": {
+            "required": ["selectedOriginId", "verifiedArtifactSha256"],
+            "properties": {"distributable": {"const": true}}
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"result": {"properties": {"state": {"enum": ["no-verified-copy", "digest-mismatch", "release-withdrawn", "release-revoked"]}}}}},
+      "then": {"properties": {"result": {"properties": {"distributable": {"const": false}}, "required": ["reason"]}}}
+    }
+  ]
+}

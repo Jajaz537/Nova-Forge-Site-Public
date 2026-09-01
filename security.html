@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171715">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <meta name="application-name" content="Nova Forge">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="description" content="Sécurité et provenance Nova Forge : identité, intégrité SHA-256, provenance, signature et publication fail-closed de la surface officielle.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Nova Forge">
+  <meta property="og:title" content="Sécurité & provenance — Nova Forge">
+  <meta property="og:description" content="Contrat public Nova Forge de vérification et de publication fail-closed, sans exposition du cœur privé.">
+  <title>Sécurité & provenance — Nova Forge</title>
+  <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="alternate" type="application/json" href="./public-status.json" title="Nova Forge — statut public">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/official.css">
+  <script src="./assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Nova Forge, retour au site officiel"><img class="brand-logo" src="./assets/nova-mark.svg" alt="" width="32" height="32"><span>Nova Forge</span></a>
+    <nav aria-label="Sécurité et provenance"><a href="#chain">Chaîne de confiance</a><a href="#states">États</a><a href="#proofs">Preuves publiques</a><a href="#limits">Limites</a></nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="security-hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Nova Forge · sécurité publique</p>
+        <h1 id="security-hero-title">La confiance doit rester vérifiable, séparée et révocable.</h1>
+        <p class="lede">Cette page décrit uniquement le contrat de sécurité visible de la surface publique Nova Forge. Elle ne révèle aucun mécanisme privé et ne transforme jamais l’absence de preuve en validation.</p>
+        <div class="actions"><a class="button primary" href="./verify.html">Vérifier un SHA-256</a><a class="button" href="./downloads.html">Voir les téléchargements</a><a class="button" href="./documentation.html#verification">Lire la procédure</a></div>
+      </div>
+      <aside class="hero-panel" aria-label="Principes de sécurité publics">
+        <p class="eyebrow">Principes actifs</p>
+        <ul class="feature-list">
+          <li><span>01</span><div><strong>Preuves distinctes</strong><small>Identité, intégrité, provenance et signature ne se remplacent pas.</small></div></li>
+          <li><span>02</span><div><strong>Fail closed</strong><small>Une preuve absente ou invalide maintient l’état non vérifié.</small></div></li>
+          <li><span>03</span><div><strong>Public-only</strong><small>La preuve publique porte sur la surface distribuée, pas sur le cœur privé.</small></div></li>
+          <li><span>04</span><div><strong>Pas de confiance visuelle</strong><small>Un badge ou une apparence ne remplace jamais une preuve correspondante.</small></div></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section" id="chain" aria-labelledby="chain-title">
+      <p class="eyebrow">Chaîne de confiance</p>
+      <h2 id="chain-title">Quatre preuves, quatre rôles.</h2>
+      <p class="section-intro">Un artefact ne devient distribuable publiquement que lorsque son identité et les preuves requises peuvent être qualifiées. Chaque élément répond à une question différente.</p>
+      <div class="requirements" role="list" aria-label="Chaîne de confiance publique">
+        <div role="listitem"><strong>Identité</strong><span>Quel artefact précis est attendu : nom, version et fichier annoncé.</span></div>
+        <div role="listitem"><strong>Intégrité</strong><span>Le SHA-256 reçu correspond-il exactement à l’empreinte publiée pour cet artefact ?</span></div>
+        <div role="listitem"><strong>Provenance</strong><span>La source et la chaîne de livraison déclarées sont-elles celles qui ont été qualifiées ?</span></div>
+        <div role="listitem"><strong>Signature</strong><span>Lorsqu’elle est requise, la signature annoncée est-elle présente et vérifiable ?</span></div>
+      </div>
+      <div class="security-note"><strong>Important :</strong> une correspondance SHA-256 établit uniquement l’intégrité par rapport à l’empreinte fournie. Elle ne prouve pas à elle seule l’auteur, la licence, la provenance ou l’autorisation de distribution.</div>
+    </section>
+
+    <section class="section" id="states" aria-labelledby="states-title">
+      <div class="section-heading"><div><p class="eyebrow">États publics</p><h2 id="states-title">« Inconnu » reste différent de « vérifié ».</h2></div><span class="badge">Fail closed</span></div>
+      <div class="cards three">
+        <article class="card"><h3>Vérifié</h3><p>L’état ne peut être présenté comme vérifié que lorsque la preuve correspondante est réellement disponible et qualifiée pour l’objet concerné.</p></article>
+        <article class="card"><h3>Non vérifié</h3><p>Une preuve manquante, invalide ou non qualifiée ne doit pas être compensée par une hypothèse, une estimation ou un élément d’interface rassurant.</p></article>
+        <article class="card"><h3>Non applicable</h3><p>Lorsqu’une preuve n’est pas requise par le contrat de l’artefact, cet état doit être déclaré explicitement plutôt que confondu avec une réussite de vérification.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="proofs" aria-labelledby="proofs-title">
+      <p class="eyebrow">Preuves publiques disponibles</p>
+      <h2 id="proofs-title">Ce que la surface actuelle permet de contrôler.</h2>
+      <div class="cards three">
+        <article class="card"><h3>Statut machine-readable</h3><p><code>public-status.json</code> déclare la phase publique, les principes actifs et la disponibilité de la distribution. Il reste déclaratif et n’est pas une signature cryptographique.</p><a class="text-link" href="./public-status.json">Consulter le statut JSON</a></article>
+        <article class="card"><h3>Manifeste de téléchargements</h3><p><code>downloads.json</code> reste verrouillé tant qu’aucun artefact public autorisé ne satisfait le contrat de preuves requis.</p><a class="text-link" href="./downloads.json">Consulter le manifeste</a></article>
+        <article class="card"><h3>Vérification locale</h3><p>Le vérificateur lit un fichier dans le navigateur et calcule son SHA-256 sans l’exécuter ni l’envoyer à un service Nova Forge distant.</p><a class="text-link" href="./verify.html">Ouvrir le vérificateur</a></article>
+      </div>
+      <div class="security-note"><strong>Build public :</strong> lors d’un empaquetage ou d’un déploiement autorisé, la chaîne de livraison génère les empreintes de la surface publique et un manifeste de build sans exposer la révision du dépôt privé.</div>
+    </section>
+
+    <section class="section" id="limits" aria-labelledby="security-limits-title">
+      <p class="eyebrow">Limites actuelles</p>
+      <h2 id="security-limits-title">Cette page n’est pas une preuve par elle-même.</h2>
+      <div class="cards">
+        <article class="card"><h3>Aucun téléchargement public validé</h3><p>Le manifeste reste en état indisponible. Aucun bouton de téléchargement système ne doit apparaître avant publication d’un artefact autorisé et vérifiable.</p><span class="badge neutral">Distribution verrouillée</span></article>
+        <article class="card"><h3>Aucune signature du site annoncée</h3><p>La surface empaquetée dispose d’empreintes SHA-256, mais aucune signature cryptographique du site n’est revendiquée tant qu’une procédure publique réellement vérifiable n’existe pas.</p><span class="badge neutral">Non annoncée</span></article>
+        <article class="card"><h3>Backends non connectés</h3><p>Les fonctions qui nécessitent des services réseau ou système réels restent explicitement non connectées et ne sont pas simulées comme des capacités actives.</p><span class="badge neutral">Non connecté</span></article>
+      </div>
+      <div class="actions"><a class="button" href="./documentation.html#verification">Documentation de vérification</a><a class="button" href="./downloads.html">État des téléchargements</a><a class="button" href="./">Retour au site officiel</a></div>
+    </section>
+  </main>
+
+  <footer><div><strong>Nova Forge</strong><p>Sécurité & provenance · contrat public pré-VF.</p></div><div class="footer-meta"><p>Une information absente reste absente.</p><p><a href="./documentation.html">Documentation publique</a> · <a href="./verify.html">Vérificateur SHA-256</a> · <a href="./public-status.json">Statut public JSON</a></p></div></footer>
+</body>
+</html>

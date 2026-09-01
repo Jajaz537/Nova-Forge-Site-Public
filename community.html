@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171715">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="description" content="Communauté Nova Forge local-first : collections et contributions locales exportables, profils créateurs et contrats de modération fail-closed.">
+  <title>Communauté — Nova Forge</title>
+  <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/official.css">
+  <script src="./assets/community.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <header class="topbar">
+    <a class="brand" href="./index.html" aria-label="Nova Forge, accueil"><img class="brand-logo" src="./assets/nova-mark.svg" alt="" width="32" height="32"><span>Nova Forge</span></a>
+    <nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./catalog.html">Catalogue</a><a href="./profiles.html">Profiles</a><a href="./community.html" aria-current="page">Communauté</a><a href="./security.html">Sécurité</a></nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="community-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Communauté · local-first</p>
+        <h1 id="community-title">Créer localement sans simuler un backend.</h1>
+        <p class="lede">Collections, discussions, reviews et commentaires peuvent être préparés et exportés localement. La publication réseau reste verrouillée tant que les vrais contrôles d’identité, Abuse Shield et modération ne sont pas connectés.</p>
+        <div class="release-status"><span class="status-dot" aria-hidden="true"></span><span><strong>Écriture réseau non connectée.</strong> Les fonctions V1 ci-dessous restent locales au navigateur ; aucune synchronisation, publication ou identité de compte n’est revendiquée.</span></div>
+      </div>
+      <aside class="hero-panel" aria-label="Règles de la communauté"><p class="eyebrow">Règles actives</p><ul class="feature-list"><li><span>01</span><div><strong>Identité séparée</strong><small>Le profil public n’expose pas les credentials.</small></div></li><li><span>02</span><div><strong>Abuse Shield requis</strong><small>Toute future écriture distante a un état de contrôle explicite.</small></div></li><li><span>03</span><div><strong>Modération traçable</strong><small>Signal, décision humaine et appel restent des receipts distincts et chaînés.</small></div></li><li><span>04</span><div><strong>Pas de fiction</strong><small>Les services non disponibles ne sont pas simulés.</small></div></li></ul></aside>
+    </section>
+
+    <section class="section" aria-labelledby="community-surfaces-title">
+      <p class="eyebrow">Surfaces</p><h2 id="community-surfaces-title">Une identité commune pour les expériences sociales.</h2>
+      <div class="cards three">
+        <article class="card"><h3>Collections & favoris</h3><p>Collections V1 locales, import/export déterministe et reprise des favoris du catalogue. Un futur sync réutilisera le même format.</p><span class="badge">Local V1</span></article>
+        <article class="card"><h3>Profils créateurs</h3><p>Le profil public réutilise le schéma partagé et reste séparé des sessions, passkeys et mécanismes de récupération.</p><a class="text-link" href="./profiles.html">Voir Profiles & Passkeys</a></article>
+        <article class="card"><h3>Galeries & changelogs</h3><p>Les mini-hubs exposent déjà des sections statiques galerie/changelog. Les données enrichies futures devront conserver la même identité de release.</p><a class="text-link" href="./project.html">Voir les mini-hubs</a></article>
+        <article class="card"><h3>Discussions</h3><p>Un brouillon local portable peut être préparé et exporté. Aucune discussion distante n’est publiée automatiquement.</p><span class="badge">Brouillon local V1</span></article>
+        <article class="card"><h3>Reviews</h3><p>Une review locale peut inclure une note explicite sans être présentée comme publiée ou modérée.</p><span class="badge">Brouillon local V1</span></article>
+        <article class="card"><h3>Commentaires</h3><p>Un commentaire local exige un parent explicite ; la publication distante reste séparée et fail-closed.</p><span class="badge">Brouillon local V1</span></article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="collections-title">
+      <p class="eyebrow">Collections locales V1</p><h2 id="collections-title">Portable, déterministe, non synchronisé.</h2>
+      <p class="section-intro">Cette island facultative stocke une seule collection dans ce navigateur après action explicite. L’import reste en mémoire jusqu’à sauvegarde. Les IDs absents du catalogue public sont refusés.</p>
+      <form id="collection-form" class="panel" novalidate>
+        <label class="field" for="collection-id"><span>Identifiant local stable</span><input id="collection-id" name="collection-id" value="ma-collection" required pattern="[a-z0-9][a-z0-9._-]{1,127}" maxlength="128" autocomplete="off"></label>
+        <label class="field" for="collection-name"><span>Nom</span><input id="collection-name" name="collection-name" value="Ma collection Nova" required maxlength="160" autocomplete="off"></label>
+        <label class="field" for="collection-description"><span>Description facultative</span><textarea id="collection-description" name="collection-description" maxlength="1200" rows="3"></textarea></label>
+        <fieldset id="collection-items"><legend>Contenus du catalogue</legend><p class="muted">Chargement local du catalogue public…</p></fieldset>
+        <div class="actions"><button class="button primary" type="button" id="collection-save">Sauvegarder localement</button><button class="button" type="button" id="collection-from-favorites">Copier mes favoris locaux</button><button class="button" type="button" id="collection-export">Exporter JSON</button></div>
+        <label class="field" for="collection-import-file"><span>Importer une collection JSON locale</span><input id="collection-import-file" type="file" accept="application/json,.json"></label>
+        <div class="actions"><button class="button" type="button" id="collection-import">Importer en mémoire</button><button class="button" type="button" id="collection-clear">Supprimer la copie locale</button></div>
+        <p id="collection-status" role="status" aria-live="polite">Aucune synchronisation réseau n’est active.</p>
+      </form>
+      <div class="panel"><h3>Aperçu canonique</h3><pre id="collection-preview" tabindex="0">Brouillon local incomplet.</pre></div>
+      <div class="security-note"><strong>NON SYNCHRONISÉ.</strong> `local-only` signifie uniquement ce navigateur. Exporter un JSON ne constitue ni une publication, ni une preuve de propriété, ni une provenance vérifiée.</div>
+    </section>
+
+    <section class="section" aria-labelledby="submission-title">
+      <p class="eyebrow">Contribution locale V1</p><h2 id="submission-title">Préparer une discussion, review ou réponse sans la publier.</h2>
+      <p class="section-intro">Le brouillon est lié à un ID du catalogue public et peut être sauvegardé ou exporté localement. Aucun auteur distant, état de modération ou publication n’est inventé.</p>
+      <form id="submission-form" class="panel" novalidate>
+        <label class="field" for="submission-id"><span>Identifiant local stable</span><input id="submission-id" value="ma-contribution" required pattern="[a-z0-9][a-z0-9._-]{1,127}" maxlength="128" autocomplete="off"></label>
+        <label class="field" for="submission-kind"><span>Type</span><select id="submission-kind"><option value="discussion">Discussion</option><option value="review">Review</option><option value="comment">Commentaire</option></select></label>
+        <label class="field" for="submission-target"><span>Contenu ciblé</span><select id="submission-target" required><option value="">Chargement du catalogue…</option></select></label>
+        <label class="field" id="submission-title-field" for="submission-heading"><span>Titre</span><input id="submission-heading" maxlength="180" autocomplete="off"></label>
+        <label class="field" id="submission-rating-field" for="submission-rating" hidden><span>Note de la review (1–5)</span><input id="submission-rating" type="number" min="1" max="5" step="1" inputmode="numeric"></label>
+        <label class="field" id="submission-parent-field" for="submission-parent" hidden><span>ID de la contribution parente</span><input id="submission-parent" pattern="[a-z0-9][a-z0-9._-]{1,127}" maxlength="128" autocomplete="off"></label>
+        <label class="field" for="submission-body"><span>Contenu</span><textarea id="submission-body" required maxlength="8000" rows="7"></textarea></label>
+        <div class="actions"><button class="button primary" type="button" id="submission-validate">Valider le brouillon</button><button class="button" type="button" id="submission-save">Sauvegarder localement</button><button class="button" type="button" id="submission-export">Exporter JSON</button></div>
+        <label class="field" for="submission-import-file"><span>Importer un brouillon JSON local</span><input id="submission-import-file" type="file" accept="application/json,.json"></label>
+        <div class="actions"><button class="button" type="button" id="submission-import">Importer en mémoire</button><button class="button" type="button" id="submission-clear">Supprimer la copie locale</button></div>
+        <p id="submission-status" role="status" aria-live="polite">Brouillon NON PUBLIÉ · aucune écriture réseau.</p>
+      </form>
+      <div class="panel"><h3>Aperçu canonique de la contribution</h3><pre id="submission-preview" tabindex="0">Brouillon local incomplet.</pre></div>
+      <div class="security-note"><strong>NON PUBLIÉ.</strong> L’export conserve `authorProfileId: null`, `syncState: local-only`, `publicationState: local-draft` et `moderationState: not-submitted`. Une future publication devra passer l’identité, Abuse Shield et les contrats de modération réels.</div>
+    </section>
+
+    <section class="section" aria-labelledby="community-contracts-title">
+      <p class="eyebrow">Contrats publics</p><h2 id="community-contracts-title">Inspectables avant le backend.</h2>
+      <div class="actions"><a class="button" href="./schemas/collection.schema.json">Collection V1</a><a class="button" href="./schemas/community-submission.schema.json">Contribution locale V1</a><a class="button" href="./schemas/community-write.schema.json">Écriture + Abuse Shield</a><a class="button" href="./schemas/moderation-receipt.schema.json">Receipts de modération</a><a class="button" href="./schemas/moderation-export.schema.json">Export modération</a><a class="button" href="./schemas/public-profile.schema.json">Profil public</a></div>
+      <div class="security-note"><strong>DSA-ready ≠ conformité prouvée.</strong> Les contrats séparent signal automatisé, décision humaine, appel et provenance, avec export provider-neutral et rétention explicite. La conformité juridique dépendra aussi du service réel, de ses procédures, de sa juridiction et de validations dédiées.</div>
+    </section>
+  </main>
+
+  <footer><div><strong>Nova Forge Community</strong><p>Collections et contributions locales réelles · aucune écriture distante simulée.</p></div><p>Local-first · Abuse Shield avant écriture réseau</p></footer>
+</body>
+</html>

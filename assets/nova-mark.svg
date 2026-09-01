@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Nova Forge">
+  <rect width="512" height="512" rx="112" fill="#171715"/>
+  <path d="M126 380V132h54l152 151V132h54v248h-50L180 225v155z" fill="#d8ad58"/>
+  <path d="M352 100h36v92h-36z" fill="#cf7046" opacity=".9"/>
+</svg>

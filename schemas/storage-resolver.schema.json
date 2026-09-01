@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nova-forge:schemas:storage-resolver:v1",
+  "title": "Nova Forge Provider-Neutral Storage Resolver",
+  "description": "Provider-neutral resolution contract. Logical identity is digest/manifest based and never changes when storage provider or mirror changes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "logicalIdentity", "storageClass", "origins", "verificationPolicy", "resolutionState"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "logicalIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manifestSha256", "artifactSha256"],
+      "properties": {
+        "manifestSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "artifactSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "storageClass": {"enum": ["hot", "cold"]},
+    "origins": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["originId", "kind", "locator", "state"],
+        "properties": {
+          "originId": {"type": "string", "minLength": 3, "maxLength": 160},
+          "kind": {"enum": ["https", "object-storage", "mirror", "p2p", "ipfs"]},
+          "locator": {"type": "string", "minLength": 1, "maxLength": 4096},
+          "state": {"enum": ["active", "degraded", "disabled"]},
+          "mutableAlias": {"type": "boolean", "default": false},
+          "providerLabel": {"type": ["string", "null"], "maxLength": 120}
+        }
+      }
+    },
+    "verificationPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["digestVerificationRequired", "manifestBindingRequired", "rejectDigestMismatch", "rejectUntrustedMutableAlias"],
+      "properties": {
+        "digestVerificationRequired": {"const": true},
+        "manifestBindingRequired": {"const": true},
+        "rejectDigestMismatch": {"const": true},
+        "rejectUntrustedMutableAlias": {"const": true}
+      }
+    },
+    "resolutionState": {"enum": ["unresolved", "verified", "failed"]},
+    "resolvedOriginId": {"type": ["string", "null"], "maxLength": 160},
+    "verifiedArtifactSha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+    "failureReason": {"type": ["string", "null"], "maxLength": 1000}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"resolutionState": {"const": "verified"}}},
+      "then": {"required": ["resolvedOriginId", "verifiedArtifactSha256"]}
+    },
+    {
+      "if": {"properties": {"resolutionState": {"const": "failed"}}},
+      "then": {"required": ["failureReason"]}
+    }
+  ]
+}

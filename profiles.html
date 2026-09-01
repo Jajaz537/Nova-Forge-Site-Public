@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171715">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="description" content="Contrats publics Nova Forge pour profils, passkeys WebAuthn, récupération, sessions et actions privilégiées.">
+  <title>Profiles & Passkeys — Nova Forge</title>
+  <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/official.css">
+  <link rel="stylesheet" href="./assets/profiles.css">
+  <script src="./assets/profiles.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <header class="topbar">
+    <a class="brand" href="./index.html" aria-label="Nova Forge, accueil"><img class="brand-logo" src="./assets/nova-mark.svg" alt="" width="32" height="32"><span>Nova Forge</span></a>
+    <nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Creator Studio</a><a href="./profiles.html" aria-current="page">Profiles</a><a href="./security.html">Sécurité</a></nav>
+  </header>
+
+  <main id="main" class="profiles-page">
+    <section class="profiles-hero" aria-labelledby="profiles-title">
+      <div>
+        <p class="eyebrow">Identité publique · WebAuthn · provider-neutral</p>
+        <h1 id="profiles-title">Séparer ce qui est public de ce qui authentifie.</h1>
+        <p class="lede">Un profil public ne contient ni credential, ni session, ni mécanisme de récupération. Les passkeys restent des credentials WebAuthn ; Nova Forge n’a jamais besoin de stocker leur clé privée.</p>
+      </div>
+      <aside class="panel" aria-label="État de la surface"><strong>Contrat uniquement.</strong><p>Aucun compte n’est créé depuis cette page. Aucun credential n’est enregistré et aucun challenge d’authentification n’est simulé.</p></aside>
+    </section>
+
+    <section class="profiles-grid" aria-labelledby="boundaries-title">
+      <div class="section-heading"><div><p class="eyebrow">Frontières</p><h2 id="boundaries-title">Cinq domaines séparés</h2></div></div>
+      <article class="profile-card"><h3>Identité publique</h3><p>Handle, nom affiché, bio, visibilité, rôle créateur et collections. Contrat : <code>public-profile.schema.json</code>.</p></article>
+      <article class="profile-card"><h3>Credentials</h3><p>Passkeys WebAuthn actives ou révoquées, algorithme public, transports et politique de vérification utilisateur. Aucune clé privée dans Nova Forge.</p></article>
+      <article class="profile-card"><h3>Récupération</h3><p>État distinct du credential principal. Aucun mécanisme n’est présenté comme configuré sans preuve réelle.</p></article>
+      <article class="profile-card"><h3>Sessions & appareils</h3><p>Journal utilisateur des sessions actives, révoquées ou expirées, séparé du profil public.</p></article>
+      <article class="profile-card"><h3>Actions privilégiées</h3><p>Publication, modération et changements de sécurité exigent une ré-authentification récente.</p></article>
+    </section>
+
+    <section class="profiles-grid" aria-labelledby="webauthn-title">
+      <div class="section-heading"><div><p class="eyebrow">Détection locale</p><h2 id="webauthn-title">Capacités WebAuthn de ce navigateur</h2></div><span class="badge" id="passkey-status" role="status" aria-live="polite">Non vérifié</span></div>
+      <article class="profile-card"><h3>WebAuthn API</h3><p id="webauthn-api">État non vérifié.</p></article>
+      <article class="profile-card"><h3>Authentificateur de plateforme</h3><p id="platform-authenticator">État non vérifié.</p></article>
+      <article class="profile-card"><h3>Conditional mediation</h3><p id="conditional-mediation">État non vérifié.</p></article>
+      <p class="profiles-note">Ces contrôles mesurent uniquement la disponibilité d’API dans le navigateur. Ils ne prouvent pas qu’un compte existe, qu’une passkey est enregistrée, ni qu’une authentification a réussi.</p>
+    </section>
+
+    <section class="section" aria-labelledby="contracts-title">
+      <p class="eyebrow">Contrats publics</p><h2 id="contracts-title">Lisibles sans compte</h2>
+      <div class="actions"><a class="button" href="./schemas/public-profile.schema.json">Profil public</a><a class="button" href="./schemas/account-security.schema.json">Sécurité du compte</a><a class="button" href="./security.html">Sécurité & provenance</a></div>
+    </section>
+  </main>
+
+  <footer><div><strong>Nova Forge Profiles</strong><p>Identité publique séparée des credentials et des sessions.</p></div><p>Pré-VF · aucune authentification simulée</p></footer>
+</body>
+</html>

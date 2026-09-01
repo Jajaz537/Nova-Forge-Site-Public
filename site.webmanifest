@@ -1,0 +1,32 @@
+{
+  "id": "./",
+  "name": "Nova Forge — Site officiel",
+  "short_name": "Nova Forge",
+  "description": "Site officiel public Nova Forge : OS, catalogue, recherche, création, communauté, sécurité, provenance et documentation publique.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#0d0e0e",
+  "theme_color": "#171715",
+  "categories": ["utilities", "productivity", "games"],
+  "prefer_related_applications": false,
+  "icons": [
+    {"src": "./assets/nova-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}
+  ],
+  "shortcuts": [
+    {"name": "Catalogue multigaming", "short_name": "Catalogue", "url": "./catalog.html", "icons": [{"src": "./assets/nova-mark.svg", "sizes": "any", "type": "image/svg+xml"}]},
+    {"name": "Recherche locale", "short_name": "Recherche", "url": "./search.html", "icons": [{"src": "./assets/nova-mark.svg", "sizes": "any", "type": "image/svg+xml"}]},
+    {"name": "Creator Studio", "short_name": "Studio", "url": "./creator-studio.html", "icons": [{"src": "./assets/nova-mark.svg", "sizes": "any", "type": "image/svg+xml"}]},
+    {"name": "Profiles & Passkeys", "short_name": "Profiles", "url": "./profiles.html", "icons": [{"src": "./assets/nova-mark.svg", "sizes": "any", "type": "image/svg+xml"}]},
+    {"name": "Communauté", "short_name": "Communauté", "url": "./community.html", "icons": [{"src": "./assets/nova-mark.svg", "sizes": "any", "type": "image/svg+xml"}]},
+    {"name": "Écosystème Nova Forge", "short_name": "Écosystème", "url": "./ecosystem.html", "icons": [{"src": "./assets/nova-mark.svg", "sizes": "any", "type": "image/svg+xml"}]},
+    {"name": "Téléchargements publics", "short_name": "Téléchargements", "url": "./downloads.html", "icons": [{"src": "./assets/nova-mark.svg", "sizes": "any", "type": "image/svg+xml"}]},
+    {"name": "Sécurité & provenance", "short_name": "Sécurité", "url": "./security.html", "icons": [{"src": "./assets/nova-mark.svg", "sizes": "any", "type": "image/svg+xml"}]},
+    {"name": "Vérificateur SHA-256", "short_name": "Vérifier", "url": "./verify.html", "icons": [{"src": "./assets/nova-mark.svg", "sizes": "any", "type": "image/svg+xml"}]},
+    {"name": "Documentation publique", "short_name": "Docs", "url": "./documentation.html", "icons": [{"src": "./assets/nova-mark.svg", "sizes": "any", "type": "image/svg+xml"}]}
+  ]
+}

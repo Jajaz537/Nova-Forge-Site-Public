@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nova-forge:schemas:compatibility-graph:v1",
+  "title": "Nova Forge Compatibility Graph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "dataClass", "nodes", "edges"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "dataClass": {"enum": ["demonstration", "published"]},
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type", "label"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{1,159}$"},
+          "type": {"enum": ["game", "game-version", "content", "loader", "environment"]},
+          "label": {"type": "string", "minLength": 1, "maxLength": 200},
+          "version": {"type": "string", "maxLength": 100},
+          "contentId": {"type": "string", "maxLength": 160}
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["from", "to", "relation", "evidence"],
+        "properties": {
+          "from": {"type": "string", "minLength": 1, "maxLength": 160},
+          "to": {"type": "string", "minLength": 1, "maxLength": 160},
+          "relation": {"enum": ["targets", "supports", "requires", "optional", "conflicts-with", "tested-on"]},
+          "evidence": {"enum": ["measured", "estimated", "unknown"]},
+          "evidenceReceipt": {"type": "string", "pattern": "^receipt:[a-z0-9][a-z0-9._:-]{1,191}$"},
+          "notes": {"type": "string", "maxLength": 2000}
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"evidence": {"const": "measured"}}, "required": ["evidence"]},
+            "then": {"required": ["evidenceReceipt"]}
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "nova-forge-public-site-build/v1",
+  "surface": "official-site",
+  "stage": "pre-vf",
+  "source_revision": "withheld-private-source",
+  "hash_algorithm": "sha256",
+  "surface_digest_sha256": "be1f1b0e38adc754dfc6405db9c4957f7ea44cae60ef42c70dd1ce7e6004151e",
+  "checksums": "SHA256SUMS.txt"
+}

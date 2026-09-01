@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nova-forge:schemas:web-smart-profile:v1",
+  "title": "Nova Forge Web Smart Profile",
+  "description": "Browser-local observation contract. Evidence labels describe only what the browser exposed or what Nova Forge estimated from it; they never guarantee FPS or stability.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "execution", "observations", "recommendation", "guarantees"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "execution": {"const": "browser-local"},
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "evidence", "source", "value"],
+        "properties": {
+          "key": {"enum": ["hardware-concurrency", "device-memory", "screen-width", "device-pixel-ratio"]},
+          "evidence": {"enum": ["measured", "estimated", "unknown"]},
+          "source": {"enum": ["browser-api", "browser-approximation", "unavailable"]},
+          "value": {"type": ["number", "null"]},
+          "unit": {"type": ["string", "null"], "maxLength": 32}
+        },
+        "allOf": [
+          {"if": {"properties": {"evidence": {"const": "measured"}}}, "then": {"properties": {"source": {"const": "browser-api"}, "value": {"type": "number"}}}},
+          {"if": {"properties": {"evidence": {"const": "estimated"}}}, "then": {"properties": {"source": {"enum": ["browser-approximation", "browser-api"]}, "value": {"type": "number"}}}},
+          {"if": {"properties": {"evidence": {"const": "unknown"}}}, "then": {"properties": {"source": {"const": "unavailable"}, "value": {"type": "null"}}}}
+        ]
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile", "evidence", "basis"],
+      "properties": {
+        "profile": {"enum": ["low-prudent", "medium", "high"]},
+        "evidence": {"const": "estimated"},
+        "basis": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "maxLength": 80}}
+      }
+    },
+    "guarantees": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fps", "stability"],
+      "properties": {
+        "fps": {"const": false},
+        "stability": {"const": false}
+      }
+    }
+  }
+}

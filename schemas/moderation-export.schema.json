@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nova-forge:schemas:moderation-export:v1",
+  "title": "Nova Forge Moderation Export Envelope",
+  "description": "Provider-neutral export envelope for immutable moderation receipts. Retention is explicit and bounded unless a legal hold is declared. This is an architecture contract, not a claim of legal compliance.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "exportId", "generatedAt", "providerNeutral", "retention", "receipts"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "exportId": {"type": "string", "pattern": "^moderation-export:[a-z0-9][a-z0-9._:-]{7,191}$"},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "providerNeutral": {"const": true},
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy", "expiresAt", "legalHold"],
+      "properties": {
+        "policy": {"enum": ["standard", "appeal-active", "legal-hold"]},
+        "expiresAt": {"type": ["string", "null"], "format": "date-time"},
+        "legalHold": {"type": "boolean"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"legalHold": {"const": false}}, "required": ["legalHold"]},
+          "then": {"properties": {"expiresAt": {"type": "string", "format": "date-time"}}}
+        },
+        {
+          "if": {"properties": {"policy": {"const": "legal-hold"}}, "required": ["policy"]},
+          "then": {"properties": {"legalHold": {"const": true}}}
+        }
+      ]
+    },
+    "receipts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "object"}
+    }
+  }
+}

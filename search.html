@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171715">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="description" content="Recherche locale Nova Forge : index public pré-calculé, sans service distant obligatoire.">
+  <title>Recherche — Nova Forge</title>
+  <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/official.css">
+  <link rel="stylesheet" href="./assets/search.css">
+  <script src="./assets/search.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <header class="topbar">
+    <a class="brand" href="./index.html" aria-label="Nova Forge, accueil"><img class="brand-logo" src="./assets/nova-mark.svg" alt="" width="32" height="32"><span>Nova Forge</span></a>
+    <nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./catalog.html">Catalogue</a><a href="./search.html" aria-current="page">Recherche</a><a href="./community.html">Communauté</a><a href="./security.html">Sécurité</a></nav>
+  </header>
+  <main id="main" class="search-page">
+    <section class="search-hero" aria-labelledby="search-title">
+      <div><p class="eyebrow">Recherche · zero-cost · local-first</p><h1 id="search-title">Chercher sans service distant obligatoire.</h1><p class="lede">L’index V1 est un fichier public pré-calculé. La recherche s’exécute dans ce navigateur et reste utilisable hors ligne une fois la surface mise en cache.</p></div>
+      <aside class="panel"><strong>Adapter externe : optionnel.</strong><p>Un futur moteur externe pourra compléter l’index local, mais ne remplacera jamais l’identité des résultats et ne sera pas requis pour le cœur.</p></aside>
+    </section>
+    <section class="section" aria-labelledby="query-title">
+      <div class="section-heading"><div><p class="eyebrow">Index public</p><h2 id="query-title">Recherche locale</h2></div><span class="badge" id="search-count" aria-live="polite">9 entrées statiques</span></div>
+      <label class="field" for="site-search"><span>Rechercher</span><input id="site-search" type="search" autocomplete="off" placeholder="Catalogue, passkeys, Skyrim, provenance…"></label>
+      <p id="search-state" role="status" aria-live="polite">Le répertoire statique reste disponible. Le filtre local s’active si JavaScript est disponible.</p>
+      <div id="search-results" class="search-results">
+        <a class="search-result" href="./catalog.html"><strong>Catalogue multigaming</strong><span>Mods, packs et expériences publics.</span></a>
+        <a class="search-result" href="./creator-studio.html"><strong>Creator Studio</strong><span>Manifestes locaux et export déterministe.</span></a>
+        <a class="search-result" href="./profiles.html"><strong>Profiles & Passkeys</strong><span>Identité publique et frontière WebAuthn.</span></a>
+        <a class="search-result" href="./community.html"><strong>Communauté</strong><span>Abuse Shield et modération avant écriture.</span></a>
+        <a class="search-result" href="./security.html"><strong>Sécurité & provenance</strong><span>Confiance fail-closed et vérification.</span></a>
+      </div>
+      <div id="search-empty" class="panel" hidden><h3>Aucun résultat local</h3><p>Aucun résultat distant n’est substitué silencieusement.</p></div>
+    </section>
+  </main>
+  <footer><div><strong>Nova Forge Search</strong><p>Index local pré-calculé · adapter externe optionnel.</p></div><p>Pré-VF · zéro service payant obligatoire</p></footer>
+</body>
+</html>

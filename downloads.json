@@ -1,0 +1,29 @@
+{
+  "schema": "nova-forge-public-downloads/v1",
+  "surface": "official-site",
+  "stage": "pre-vf",
+  "available": false,
+  "policy": "verified-artifacts-only",
+  "required_evidence": [
+    "identity",
+    "integrity-sha256",
+    "provenance",
+    "signature-when-required"
+  ],
+  "artifact_contract": {
+    "required_fields_when_published": [
+      "id",
+      "name",
+      "version",
+      "filename",
+      "size_bytes",
+      "sha256",
+      "provenance",
+      "download_path"
+    ],
+    "download_path_policy": "same-origin-public-surface-only",
+    "sha256_format": "64-lowercase-hex",
+    "signature_status_required": true
+  },
+  "artifacts": []
+}

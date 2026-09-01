@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nova-forge:schemas:account-security:v1",
+  "title": "Nova Forge Account Security Boundary",
+  "description": "Public contract separating identity, WebAuthn credential records, recovery, sessions/devices and privileged-action re-authentication. This schema describes records only; it never contains or requests a private key.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "profileRef", "credentials", "recovery", "sessions", "privilegedActions"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "profileRef": {"type": "string", "pattern": "^profile:[a-z0-9][a-z0-9._:-]{2,127}$"},
+    "credentials": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/credential"}
+    },
+    "recovery": {"$ref": "#/$defs/recovery"},
+    "sessions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/session"}
+    },
+    "privilegedActions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/privilegedAction"}
+    }
+  },
+  "$defs": {
+    "credential": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["credentialId", "kind", "publicKeyAlgorithm", "userVerification", "state", "createdAt"],
+      "properties": {
+        "credentialId": {"type": "string", "minLength": 16, "maxLength": 2048},
+        "kind": {"const": "passkey"},
+        "publicKeyAlgorithm": {"type": "integer"},
+        "userVerification": {"enum": ["required", "preferred", "discouraged"]},
+        "transports": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["internal", "usb", "nfc", "ble", "hybrid"]}
+        },
+        "discoverable": {"type": "boolean"},
+        "state": {"enum": ["active", "revoked"]},
+        "createdAt": {"type": "string", "format": "date-time"},
+        "lastUsedAt": {"type": ["string", "null"], "format": "date-time"},
+        "label": {"type": "string", "maxLength": 80}
+      }
+    },
+    "recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "state"],
+      "properties": {
+        "mode": {"enum": ["none", "recovery-codes", "verified-contact", "support-assisted"]},
+        "state": {"enum": ["not-configured", "configured", "suspended"]},
+        "lastChangedAt": {"type": ["string", "null"], "format": "date-time"}
+      }
+    },
+    "session": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sessionId", "createdAt", "lastSeenAt", "state", "deviceLabel"],
+      "properties": {
+        "sessionId": {"type": "string", "minLength": 12, "maxLength": 200},
+        "createdAt": {"type": "string", "format": "date-time"},
+        "lastSeenAt": {"type": "string", "format": "date-time"},
+        "state": {"enum": ["active", "revoked", "expired"]},
+        "deviceLabel": {"type": "string", "minLength": 1, "maxLength": 120},
+        "approximateRegion": {"type": ["string", "null"], "maxLength": 120}
+      }
+    },
+    "privilegedAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "reauthenticationRequired"],
+      "properties": {
+        "action": {"enum": ["publish", "moderate", "change-credentials", "change-recovery", "revoke-session"]},
+        "reauthenticationRequired": {"const": true},
+        "maximumAuthenticationAgeSeconds": {"type": "integer", "minimum": 0, "maximum": 3600}
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171715">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <meta name="application-name" content="Nova Forge">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="description" content="Écosystème public Nova Forge : modules annoncés publiquement, états de connexion et cadre des futures éditions Nova Forge OS.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Nova Forge">
+  <meta property="og:title" content="Écosystème public — Nova Forge">
+  <meta property="og:description" content="Modules publics Nova Forge et cadre des éditions, sans exposition des composants privés ou internes.">
+  <title>Écosystème public — Nova Forge</title>
+  <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/official.css">
+  <script src="./assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Nova Forge, retour au site officiel"><img class="brand-logo" src="./assets/nova-mark.svg" alt="" width="32" height="32"><span>Nova Forge</span></a>
+    <nav aria-label="Écosystème public"><a href="#editions">Éditions</a><a href="#modules">Modules</a><a href="#availability">Disponibilité</a></nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="ecosystem-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Nova Forge OS · écosystème public</p>
+        <h1 id="ecosystem-title">Présenter l’écosystème sans dévoiler le cœur interne.</h1>
+        <p class="lede">Cette surface rassemble uniquement les noms et rôles déjà annoncés publiquement. Les éditions commerciales ou techniques ne reçoivent aucun nom, prix ou contenu supposé tant qu’une nomenclature publique autorisée n’existe pas.</p>
+        <div class="actions"><a class="button primary" href="#modules">Voir les modules publics</a><a class="button" href="./documentation.html">Documentation publique</a></div>
+      </div>
+      <aside class="hero-panel" aria-label="Règles de publication de l’écosystème">
+        <p class="eyebrow">Règles actives</p>
+        <ul class="feature-list">
+          <li><span>01</span><div><strong>Noms publics seulement</strong><small>Aucun nom interne ou réservé n’est dérivé du dépôt privé.</small></div></li>
+          <li><span>02</span><div><strong>État explicite</strong><small>Une intégration non connectée reste affichée comme non connectée.</small></div></li>
+          <li><span>03</span><div><strong>Éditions non inventées</strong><small>La matrice restera verrouillée jusqu’à publication d’une nomenclature autorisée.</small></div></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section" id="editions" aria-labelledby="editions-title">
+      <div class="section-heading"><div><p class="eyebrow">Éditions Nova Forge OS</p><h2 id="editions-title">Nomenclature officielle non publiée.</h2></div><span class="badge neutral">Verrouillé</span></div>
+      <p class="section-intro">Le site réserve la surface nécessaire aux éditions, mais ne crée aucun niveau artificiel. Lorsqu’une nomenclature publique sera autorisée, chaque édition devra pouvoir être décrite sans ambiguïté par des informations vérifiables.</p>
+      <div class="requirements" role="list" aria-label="Contrat futur des éditions publiques">
+        <div role="listitem"><strong>Identité</strong><span>nom officiel et version ou cycle de l’édition</span></div>
+        <div role="listitem"><strong>Périmètre</strong><span>modules et fonctions publiquement inclus</span></div>
+        <div role="listitem"><strong>Cycle</strong><span>politique publique de support et de mises à jour</span></div>
+        <div role="listitem"><strong>Distribution</strong><span>canal autorisé, provenance, hash et signature lorsque requise</span></div>
+      </div>
+      <div class="security-note"><strong>Anti-fuite :</strong> l’absence actuelle de noms d’éditions est volontaire. Aucun nom privé ou interne ne sera transformé en offre publique par déduction.</div>
+    </section>
+
+    <section class="section" id="modules" aria-labelledby="modules-title">
+      <div class="section-heading"><div><p class="eyebrow">Modules annoncés publiquement</p><h2 id="modules-title">Des rôles visibles, des états qualifiés.</h2></div><span class="badge">Public-only</span></div>
+      <div class="cards three">
+        <article class="card"><p class="card-kicker">Compatibilité</p><h3>Smart Profile</h3><p>Analyse indicative exécutée dans le navigateur. Les résultats distinguent ce qui est mesuré, estimé ou inconnu et n’établissent aucune garantie de FPS ou de stabilité.</p><span class="badge">Démo navigateur</span></article>
+        <article class="card"><p class="card-kicker">Contrat de ressource</p><h3>Universal Mod Manifest</h3><p>Surface destinée à décrire les informations qu’une ressource peut publier : identité, provenance, licence et autres preuves lorsqu’elles existent réellement.</p><span class="badge neutral">Backend non connecté</span></article>
+        <article class="card"><p class="card-kicker">Résolution</p><h3>Storage Broker / Resolver</h3><p>Rôle public annoncé pour qualifier l’origine, les miroirs ou les caches avant qu’un contenu puisse être considéré comme correspondant à l’identité attendue.</p><span class="badge neutral">Backend non connecté</span></article>
+        <article class="card"><p class="card-kicker">Réparation</p><h3>Repair Network</h3><p>Principe public de réparation fail-closed : aucune substitution silencieuse lorsqu’aucune copie vérifiée ne correspond à l’identité attendue.</p><span class="badge neutral">Backend non connecté</span></article>
+        <article class="card"><p class="card-kicker">Intégration locale</p><h3>Bridge Nova Forge OS</h3><p>Le site reste autonome. Toute future intégration locale devra être optionnelle, qualifiée et déclenchée par une action utilisateur explicite.</p><span class="badge neutral">Non connecté</span></article>
+        <article class="card"><p class="card-kicker">Communauté</p><h3>Contrats de modération</h3><p>Signal, décision, raison et appel sont présentés comme des responsabilités distinctes. Aucun backend communautaire actif n’est simulé par la surface actuelle.</p><span class="badge neutral">Backend non connecté</span></article>
+      </div>
+    </section>
+
+    <section class="section" id="availability" aria-labelledby="availability-title">
+      <p class="eyebrow">Disponibilité publique</p>
+      <h2 id="availability-title">Présentation ne signifie pas distribution.</h2>
+      <p class="section-intro">La présence d’un module sur cette page signifie uniquement que son rôle peut être présenté publiquement. Elle ne signifie pas qu’un binaire, service, API ou téléchargement correspondant est disponible.</p>
+      <div class="actions"><a class="button" href="./public-status.json">Lire le statut JSON</a><a class="button" href="./verify.html">Vérificateur SHA-256</a><a class="button" href="./">Retour au site officiel</a></div>
+    </section>
+  </main>
+
+  <footer><div><strong>Nova Forge</strong><p>Écosystème public · surface pré-VF.</p></div><div class="footer-meta"><p>Aucun nom d’édition privé ou interne n’est exposé.</p><p><a href="./documentation.html">Documentation</a> · <a href="./public-status.json">Statut public</a></p></div></footer>
+</body>
+</html>

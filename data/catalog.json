@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "generatedFor": "nova-forge-site-pre-vf",
+  "dataClass": "demonstration",
+  "distributionPolicy": "metadata-preview-only",
+  "items": [
+    {
+      "id": "ember-textures",
+      "public": true,
+      "kind": "mod",
+      "name": "Ember Textures — Preview",
+      "version": "0.1.0-preview",
+      "updatedAt": "2026-09-01T00:00:00Z",
+      "featuredRank": 1,
+      "summary": "Entrée de démonstration pour le pipeline de métadonnées, sans binaire ni lien de téléchargement.",
+      "game": {"id": "skyrim-se", "name": "Skyrim Special Edition", "versions": ["1.6.x"]},
+      "creator": {"id": "nova-demo", "displayName": "Nova Forge Demo"},
+      "tags": ["textures", "visual", "preview"],
+      "compatibility": {"evidence": "unknown", "notes": "Aucune mesure de compatibilité réelle publiée."},
+      "provenance": {"state": "declared-unattested", "label": "Déclarée, non attestée"},
+      "rights": {"license": "UNSPECIFIED-PREVIEW", "redistribution": "not-authorized"},
+      "distribution": {"state": "locked", "label": "Verrouillée", "downloadable": false},
+      "manifest": null
+    },
+    {
+      "id": "balanced-latency-pack",
+      "public": true,
+      "kind": "pack",
+      "name": "Balanced Latency Pack — Preview",
+      "version": "0.2.0-preview",
+      "updatedAt": "2026-09-01T00:00:00Z",
+      "featuredRank": 2,
+      "summary": "Exemple de pack local-first : recommandations non garanties, aucune promesse de FPS.",
+      "game": {"id": "cyberpunk-2077", "name": "Cyberpunk 2077", "versions": ["2.x"]},
+      "creator": {"id": "nova-demo", "displayName": "Nova Forge Demo"},
+      "tags": ["latency", "performance", "preview"],
+      "compatibility": {"evidence": "estimated", "notes": "Estimation de démonstration uniquement ; aucune mesure attestée."},
+      "provenance": {"state": "declared-unattested", "label": "Déclarée, non attestée"},
+      "rights": {"license": "UNSPECIFIED-PREVIEW", "redistribution": "not-authorized"},
+      "distribution": {"state": "locked", "label": "Verrouillée", "downloadable": false},
+      "manifest": null
+    },
+    {
+      "id": "forge-night-experience",
+      "public": true,
+      "kind": "experience",
+      "name": "Forge Night Experience — Preview",
+      "version": "0.1.0-preview",
+      "updatedAt": "2026-09-01T00:00:00Z",
+      "featuredRank": 3,
+      "summary": "Exemple d’expérience complète sans artefact publié ; aucune mesure attestée n’est revendiquée.",
+      "game": {"id": "minecraft", "name": "Minecraft", "versions": ["1.21.x"]},
+      "creator": {"id": "nova-demo", "displayName": "Nova Forge Demo"},
+      "tags": ["experience", "modpack", "preview"],
+      "compatibility": {"evidence": "unknown", "notes": "Donnée de démonstration ; aucun receipt de mesure n’est publié."},
+      "provenance": {"state": "declared-unattested", "label": "Déclarée, non attestée"},
+      "rights": {"license": "UNSPECIFIED-PREVIEW", "redistribution": "not-authorized"},
+      "distribution": {"state": "locked", "label": "Verrouillée", "downloadable": false},
+      "manifest": null
+    }
+  ]
+}

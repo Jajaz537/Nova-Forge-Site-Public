@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nova-forge:schemas:public-profile:v1",
+  "title": "Nova Forge Public Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "profileId", "handle", "displayName", "visibility", "creator"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "profileId": {"type": "string", "pattern": "^profile:[a-z0-9][a-z0-9._:-]{2,127}$"},
+    "handle": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,31}$"},
+    "displayName": {"type": "string", "minLength": 1, "maxLength": 80},
+    "bio": {"type": "string", "maxLength": 500},
+    "visibility": {"enum": ["public", "unlisted", "private"]},
+    "creator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["isCreator"],
+      "properties": {
+        "isCreator": {"type": "boolean"},
+        "displayLabel": {"type": "string", "maxLength": 80}
+      }
+    },
+    "links": {
+      "type": "array",
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "url"],
+        "properties": {
+          "label": {"type": "string", "minLength": 1, "maxLength": 40},
+          "url": {"type": "string", "format": "uri", "maxLength": 2048}
+        }
+      }
+    },
+    "collections": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^collection:[a-z0-9][a-z0-9._:-]{2,159}$"}
+    },
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": "string", "format": "date-time"}
+  }
+}

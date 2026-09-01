@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "dataClass": "demonstration",
+  "nodes": [
+    {"id": "game:skyrim-se", "type": "game", "label": "Skyrim Special Edition"},
+    {"id": "game-version:skyrim-se:1.6.x", "type": "game-version", "label": "Skyrim SE 1.6.x", "version": "1.6.x"},
+    {"id": "game:cyberpunk-2077", "type": "game", "label": "Cyberpunk 2077"},
+    {"id": "game-version:cyberpunk-2077:2.x", "type": "game-version", "label": "Cyberpunk 2077 2.x", "version": "2.x"},
+    {"id": "game:minecraft", "type": "game", "label": "Minecraft"},
+    {"id": "game-version:minecraft:1.21.x", "type": "game-version", "label": "Minecraft 1.21.x", "version": "1.21.x"},
+    {"id": "content:ember-textures", "type": "content", "label": "Ember Textures — Preview", "contentId": "ember-textures"},
+    {"id": "content:balanced-latency-pack", "type": "content", "label": "Balanced Latency Pack — Preview", "contentId": "balanced-latency-pack"},
+    {"id": "content:forge-night-experience", "type": "content", "label": "Forge Night Experience — Preview", "contentId": "forge-night-experience"},
+    {"id": "environment:windows", "type": "environment", "label": "Windows"}
+  ],
+  "edges": [
+    {"from": "content:ember-textures", "to": "game:skyrim-se", "relation": "targets", "evidence": "unknown", "notes": "Cible déclarée dans la donnée de démonstration ; compatibilité non attestée."},
+    {"from": "content:ember-textures", "to": "game-version:skyrim-se:1.6.x", "relation": "supports", "evidence": "unknown", "notes": "Version déclarée dans le catalogue de démonstration."},
+    {"from": "game-version:skyrim-se:1.6.x", "to": "game:skyrim-se", "relation": "requires", "evidence": "unknown", "notes": "Relation structurelle de version ; ce n’est pas une mesure."},
+    {"from": "content:balanced-latency-pack", "to": "game:cyberpunk-2077", "relation": "targets", "evidence": "unknown", "notes": "Cible déclarée dans la donnée de démonstration."},
+    {"from": "content:balanced-latency-pack", "to": "game-version:cyberpunk-2077:2.x", "relation": "supports", "evidence": "unknown", "notes": "Plage de version déclarée dans la donnée de démonstration."},
+    {"from": "game-version:cyberpunk-2077:2.x", "to": "game:cyberpunk-2077", "relation": "requires", "evidence": "unknown", "notes": "Relation structurelle de version ; ce n’est pas une mesure."},
+    {"from": "content:balanced-latency-pack", "to": "environment:windows", "relation": "tested-on", "evidence": "estimated", "notes": "Estimation de démonstration uniquement ; aucune mesure attestée ni garantie de FPS/stabilité."},
+    {"from": "content:forge-night-experience", "to": "game:minecraft", "relation": "targets", "evidence": "unknown", "notes": "Cible déclarée dans la donnée de démonstration."},
+    {"from": "content:forge-night-experience", "to": "game-version:minecraft:1.21.x", "relation": "supports", "evidence": "unknown", "notes": "Version déclarée dans la donnée de démonstration."},
+    {"from": "game-version:minecraft:1.21.x", "to": "game:minecraft", "relation": "requires", "evidence": "unknown", "notes": "Relation structurelle de version ; ce n’est pas une mesure."},
+    {"from": "content:forge-night-experience", "to": "environment:windows", "relation": "tested-on", "evidence": "unknown", "notes": "Aucun receipt de mesure publié ; état volontairement Unknown."}
+  ]
+}

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171715">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="description" content="Vérificateur SHA-256 local Nova Forge : calculez une empreinte dans votre navigateur sans envoyer ni exécuter le fichier.">
+  <title>Vérificateur SHA-256 — Nova Forge</title>
+  <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/official.css">
+  <script src="./assets/app.js" defer></script>
+  <script src="./assets/verify.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Nova Forge, accueil"><img class="brand-logo" src="./assets/nova-mark.svg" alt="" width="32" height="32"><span>Nova Forge</span></a>
+    <nav aria-label="Navigation de vérification"><a href="./">Site officiel</a><a href="./security.html">Sécurité & provenance</a><a href="./documentation.html#verification">Guide public</a></nav>
+  </header>
+
+  <main id="main">
+    <section class="hero verify-hero" aria-labelledby="verify-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Intégrité locale · SHA-256</p>
+        <h1 id="verify-title">Vérifier un fichier sans l’envoyer.</h1>
+        <p class="lede">Le navigateur lit le fichier sélectionné, calcule son SHA-256 localement et peut le comparer à une empreinte attendue. Le fichier n’est ni exécuté ni transmis par cet outil.</p>
+      </div>
+      <aside class="hero-panel" aria-label="Limites du vérificateur">
+        <p class="eyebrow">Ce que cette preuve signifie</p>
+        <ul class="feature-list">
+          <li><span>01</span><div><strong>Intégrité</strong><small>Une correspondance prouve seulement l’égalité de l’empreinte SHA-256 fournie et calculée.</small></div></li>
+          <li><span>02</span><div><strong>Pas d’identité implicite</strong><small>Une empreinte correcte ne prouve pas à elle seule l’auteur, la licence ou la provenance.</small></div></li>
+          <li><span>03</span><div><strong>Fail closed</strong><small>Une valeur attendue absente ou invalide n’est jamais transformée en validation.</small></div></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section verify-shell" aria-labelledby="tool-title">
+      <div class="section-heading"><div><p class="eyebrow">Outil navigateur</p><h2 id="tool-title">Calculer et comparer</h2></div><span class="badge">Traitement local</span></div>
+      <div class="verify-grid">
+        <div class="panel verify-form">
+          <label class="field" for="verify-file"><span>Fichier local</span><input id="verify-file" type="file"></label>
+          <label class="field" for="expected-sha256"><span>SHA-256 attendu <small>(facultatif)</small></span><input id="expected-sha256" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="71" placeholder="64 caractères hexadécimaux"></label>
+          <button class="button primary" type="button" data-verify-file>Calculer le SHA-256</button>
+          <p class="muted verify-note">Pour de très gros fichiers, le navigateur peut utiliser une quantité importante de mémoire pendant le calcul.</p>
+        </div>
+        <div class="panel verify-result" data-verify-result data-state="neutral" role="status" aria-live="polite">
+          <strong>Aucun calcul lancé</strong>
+          <p class="muted">Sélectionnez un fichier. Une empreinte attendue est nécessaire uniquement si vous voulez vérifier une correspondance exacte.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="verify-contract-title">
+      <p class="eyebrow">Contrat public</p>
+      <h2 id="verify-contract-title">Une empreinte n’est qu’une partie de la confiance.</h2>
+      <p class="section-intro">Pour un artefact Nova Forge distribuable, l’identité attendue, l’intégrité, la provenance et la signature lorsqu’elle est requise restent des preuves distinctes. Cet outil ne remplace aucune de ces preuves.</p>
+      <div class="actions"><a class="button primary" href="./security.html">Voir le contrat Sécurité & provenance</a><a class="button" href="./documentation.html#verification">Lire la procédure publique</a><a class="button" href="./public-status.json">Voir le statut du site</a></div>
+    </section>
+  </main>
+
+  <footer><div><strong>Nova Forge</strong><p>Vérificateur public local · aucune exécution du fichier.</p></div><div class="footer-meta"><p>Le calcul reste dans le navigateur.</p><p><a href="./security.html">Sécurité & provenance</a> · <a href="./">Retour au site officiel</a></p></div></footer>
+</body>
+</html>
