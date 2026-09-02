@@ -1,0 +1,2 @@
+# Cloudflare Pages path redirects only.
+# Domain-level www -> apex redirect must be configured as a Cloudflare Redirect Rule after DNS activation.

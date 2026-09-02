@@ -2,3 +2,54 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: upgrade-insecure-requests
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+/
+  Link: <https://getnovaforge.com/>; rel="canonical"
+
+/catalog
+  Link: <https://getnovaforge.com/catalog>; rel="canonical"
+
+/community
+  Link: <https://getnovaforge.com/community>; rel="canonical"
+
+/creator-studio
+  Link: <https://getnovaforge.com/creator-studio>; rel="canonical"
+
+/documentation
+  Link: <https://getnovaforge.com/documentation>; rel="canonical"
+
+/downloads
+  Link: <https://getnovaforge.com/downloads>; rel="canonical"
+
+/ecosystem
+  Link: <https://getnovaforge.com/ecosystem>; rel="canonical"
+
+/profiles
+  Link: <https://getnovaforge.com/profiles>; rel="canonical"
+
+/project
+  Link: <https://getnovaforge.com/project>; rel="canonical"
+
+/project-balanced-latency-pack
+  Link: <https://getnovaforge.com/project-balanced-latency-pack>; rel="canonical"
+
+/project-ember-textures
+  Link: <https://getnovaforge.com/project-ember-textures>; rel="canonical"
+
+/project-forge-night-experience
+  Link: <https://getnovaforge.com/project-forge-night-experience>; rel="canonical"
+
+/search
+  Link: <https://getnovaforge.com/search>; rel="canonical"
+
+/security
+  Link: <https://getnovaforge.com/security>; rel="canonical"
+
+/verify
+  Link: <https://getnovaforge.com/verify>; rel="canonical"
