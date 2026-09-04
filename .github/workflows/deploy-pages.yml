@@ -1,0 +1,139 @@
+name: Deploy verified Nova Forge public artifact
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/deploy-pages.yml'
+      - 'SHA256SUMS.txt'
+      - 'public-build.json'
+      - 'public-status.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: nova-forge-public-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout public mirror
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Verify and stage exact public release
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json, re, shutil
+
+          root = Path('.').resolve()
+          stage = root / '_site'
+          sums_path = root / 'SHA256SUMS.txt'
+          build_path = root / 'public-build.json'
+          status_path = root / 'public-status.json'
+          generated = {'SHA256SUMS.txt', 'public-build.json'}
+          forbidden = (
+              'Nova-Forge-OS-Private', 'NovaForgeOS.Founder', 'FOUNDER_PRIVATE',
+              'FounderSecret', 'founder-only', 'Fondateur', 'NovaForgeOS.Site/tools', '.github/'
+          )
+          sum_re = re.compile(r'^([0-9a-f]{64})  \./(.+)$')
+
+          if stage.exists():
+              shutil.rmtree(stage)
+          stage.mkdir()
+          for required in (sums_path, build_path, status_path):
+              if not required.is_file():
+                  raise SystemExit(f'missing required release file: {required.name}')
+
+          raw_sums = sums_path.read_bytes()
+          build = json.loads(build_path.read_text(encoding='utf-8'))
+          status = json.loads(status_path.read_text(encoding='utf-8'))
+          if build.get('schema') != 'nova-forge-public-site-build/v1':
+              raise SystemExit('public-build schema mismatch')
+          if build.get('surface') != 'official-site':
+              raise SystemExit('public-build surface mismatch')
+          if build.get('source_revision') != 'withheld-private-source':
+              raise SystemExit('private source revision must stay withheld')
+          if build.get('hash_algorithm') != 'sha256' or build.get('checksums') != 'SHA256SUMS.txt':
+              raise SystemExit('public-build checksum contract mismatch')
+          if build.get('surface_digest_sha256') != hashlib.sha256(raw_sums).hexdigest():
+              raise SystemExit('surface digest mismatch')
+
+          hosting = status.get('hosting', {})
+          if hosting.get('mandatory_monthly_budget_eur') != 0 or hosting.get('paid_plan_allowed') is not False:
+              raise SystemExit('EUR0 hosting contract mismatch')
+          if hosting.get('private_source_repository_must_remain_private') is not True:
+              raise SystemExit('private source repository contract missing')
+
+          expected = {}
+          for line in raw_sums.decode('utf-8').splitlines():
+              match = sum_re.fullmatch(line)
+              if not match:
+                  raise SystemExit(f'malformed checksum line: {line!r}')
+              digest, rel = match.groups()
+              if rel.startswith('/') or '..' in Path(rel).parts or rel in expected:
+                  raise SystemExit(f'unsafe/duplicate checksum path: {rel}')
+              expected[rel] = digest
+
+          for rel, digest in sorted(expected.items()):
+              src = root / rel
+              if not src.is_file() or src.is_symlink():
+                  raise SystemExit(f'missing or unsafe public file: {rel}')
+              actual = hashlib.sha256(src.read_bytes()).hexdigest()
+              if actual != digest:
+                  raise SystemExit(f'checksum mismatch: {rel}')
+              dst = stage / rel
+              dst.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copy2(src, dst)
+
+          shutil.copy2(sums_path, stage / 'SHA256SUMS.txt')
+          shutil.copy2(build_path, stage / 'public-build.json')
+
+          actual_stage = sorted(p.relative_to(stage).as_posix() for p in stage.rglob('*') if p.is_file())
+          expected_stage = sorted([*expected.keys(), *generated])
+          if actual_stage != expected_stage:
+              raise SystemExit('staged release tree mismatch')
+
+          readable = {'.html', '.js', '.css', '.json', '.txt', '.svg', '.webmanifest'}
+          for path in stage.rglob('*'):
+              if not path.is_file():
+                  continue
+              if path.suffix.lower() not in readable and path.name != 'site.webmanifest':
+                  continue
+              text = path.read_text(encoding='utf-8', errors='strict').lower()
+              for marker in forbidden:
+                  if marker.lower() in text:
+                      raise SystemExit(f'private/internal marker in public release: {path.relative_to(stage)}')
+
+          print(
+              f"PASS_LIVE_PAGES_STAGE: files={len(actual_stage)} exact_tree=yes sha256=yes "
+              f"surface_digest={build['surface_digest_sha256']} eur0=yes private_markers=none"
+          )
+          PY
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload exact Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
