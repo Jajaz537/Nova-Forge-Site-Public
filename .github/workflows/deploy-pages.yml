@@ -3,11 +3,6 @@ name: Deploy verified Nova Forge public artifact
 on:
   push:
     branches: [main]
-    paths:
-      - '.github/workflows/deploy-pages.yml'
-      - 'SHA256SUMS.txt'
-      - 'public-build.json'
-      - 'public-status.json'
   workflow_dispatch:
 
 permissions:
