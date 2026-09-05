@@ -8,6 +8,7 @@ db09c5a11d225a89c50c9f4c9e2985d53d862076c5ea0a9a65c83ce1d83bf350  ./assets/creat
 b9f14aadd66ae996f90d1d8234fb91038975fe7467db820e40c1283c249f0bab  ./assets/creator-studio.js
 e577af06da110258a74b32f7f5503ba4eb222ade98fdd24a3332dd7c50cd19aa  ./assets/downloads.js
 bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-schema-lite.js
+5c51297743c9f10762584b41f3cb3d0f403e67d49cde5f9a01f228d651c526a5  ./assets/nova-forge-core-concept.webp
 884fc8a9fa04105a294f8bea4e6c61c7ff0f3de94e227b9412d2f757c5a3c4f4  ./assets/nova-mark-192.png
 a9d20d30f4ad4afbdf615f4d235d9ab95446bfc388b3d85f005f4861a4c90632  ./assets/nova-mark-512.png
 e8afe9ea440ac2bd423e1baaac751efae9791c1870e793d734168d5ddc97a0a0  ./assets/nova-mark.svg
@@ -18,7 +19,7 @@ eeab87956f214354e6dbb15ec04c340a940e457f4b44b4cd6992b9f1033d62e2  ./assets/offic
 e23d66c77a31a7ce97d1a7e32085c0f5cb935892a9f94169b8443b6bfbbfed9b  ./assets/project-hub.js
 616ee68d070d70aac23106eebf4814d60f4c6ab62e16b0606f912e2d07db3eeb  ./assets/search.css
 a129f5d7845cd6cbf6da6b4e474f7c540cadaeadef4694614bcf09d30ef7ef04  ./assets/search.js
-6f00bc9139a394bfa18c0d967ac294070181a59db6cbb0f60f1efce2ccf460a5  ./assets/site.css
+119ced12d9a210cf7490542378e54483cb8837aacde29d6f7d5aba61280b65a8  ./assets/site.css
 8785fec8bc7acfb8f8aa1cb9ec15b680386e1c083494fc8c7a52efb7cb3b56a9  ./assets/verify.js
 7e17082a9c609bc2cdba59297824aacd50b4ad4e22c5e88ba34f0c46bee517ae  ./catalog.html
 85e203da2b6ff4e56f338d2e0f49a39055c703b8ff97c1985a1837340b787fe7  ./community.html
@@ -30,7 +31,7 @@ a129f5d7845cd6cbf6da6b4e474f7c540cadaeadef4694614bcf09d30ef7ef04  ./assets/searc
 37ae5aa7dce70c2551d97ba031465e7cfb71e688a43156341a2ae41de80b4cbd  ./downloads.html
 d60000a6ce45fe5caef1906d8d0d15d26ecab82402aecff396c1b23f32fc8ec0  ./downloads.json
 c031dd5a52f65816689c246411536096e82f29c88bc1b8527225a225b1981693  ./ecosystem.html
-81cabb8cb523e9e74b57bc41c4d018022d9a05fa20bc5e691581c2e805792d5f  ./index.html
+c6dc83b7caba9d5fb254b7f2e4d060f38508dce907ad277b5f51da3b1366c361  ./index.html
 df9fa535271bb021695183f22491cf1403fb3b1498a5e32e41dcc877be899949  ./profiles.html
 929bac8c1dee26e818c254258439011069e76bc8df171df36abb27dd3102939d  ./project-balanced-latency-pack.html
 d0fc1ffdd1ca041f36035f7b5f677cc94a2654096c4829dc29b4348e7a75a621  ./project-ember-textures.html
@@ -55,5 +56,5 @@ c2a65511fef5fe723f6e10e3af17bad0ff912918b3f00e391ac34cf12c3b9b84  ./schemas/univ
 2f1bc90bfabd272c41e413a1fc4aae746e890e1e57bfe8545e8ed81cda51e588  ./search.html
 31f513e669d1dcabd243ad47c4779854e2910f0aaa314317f526985deef8edbe  ./security.html
 96fae67e1552541c90f88250312a804d74e4b1b40f16a1a7c5102265853d4e4e  ./site.webmanifest
-6908597d29a47fdcf727b615ceea211c9551d152c6f87c1cd8536b1fea71bcd1  ./sw.js
+2574dc7dcda71de46868f5d3cefc41fbc1cce69318abafd284dfc060873fe7dc  ./sw.js
 4c778808d6ed34bf474696cce76b24e400aaa7506f6c594d1c6a69ba5d48f1ff  ./verify.html
