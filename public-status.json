@@ -24,7 +24,7 @@
     "paid_plan_allowed": false,
     "private_source_repository_must_remain_private": true,
     "public_artifact_only_mirror_required_when_private_hosting_costs_money": true,
-    "public_url_verified": false
+    "public_url_verified": true
   },
   "distribution": {
     "public_download_available": false,
@@ -63,7 +63,11 @@
     "execution": "browser-local-drafts",
     "collection_schema_contract": "./schemas/collection.schema.json",
     "submission_schema_contract": "./schemas/community-submission.schema.json",
-    "draft_types": ["discussion", "review", "comment"],
+    "draft_types": [
+      "discussion",
+      "review",
+      "comment"
+    ],
     "sync_state": "local-only",
     "draft_state": "local-draft",
     "publication_state": "not-submitted",
@@ -74,8 +78,16 @@
   "smart_profile": {
     "execution": "browser-local",
     "schema_contract": "./schemas/smart-profile.schema.json",
-    "evidence_labels": ["Measured", "Estimated", "Unknown"],
-    "evidence_sources": ["browser-api", "browser-approximation", "unavailable"],
+    "evidence_labels": [
+      "Measured",
+      "Estimated",
+      "Unknown"
+    ],
+    "evidence_sources": [
+      "browser-api",
+      "browser-approximation",
+      "unavailable"
+    ],
     "remote_profile_upload_required": false,
     "fps_guarantee": false,
     "stability_guarantee": false

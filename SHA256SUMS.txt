@@ -36,7 +36,7 @@ df9fa535271bb021695183f22491cf1403fb3b1498a5e32e41dcc877be899949  ./profiles.htm
 d0fc1ffdd1ca041f36035f7b5f677cc94a2654096c4829dc29b4348e7a75a621  ./project-ember-textures.html
 dc41db46d78244a77d4ef91aa1f5f3e49304a0235826eec321c327476081fd6c  ./project-forge-night-experience.html
 330979062abe0e7fa1b20ef39b4b850c25176d862b1f8702254a045e0a237a30  ./project.html
-320643593756d0328d14b24a4506cdc93dba168d747ecf4f9dc2c3496a01c7b9  ./public-status.json
+43d2dfa4afa6d13dbeae2feb44286098af575c31b39fcfacdc57710b73e56594  ./public-status.json
 16ceb5ee3e0dc13aa9adf31a3ebbe45a1d965b8c2b9f72eaf84e5911e140ed95  ./robots.txt
 f401f1d86cde1d83dea4e8261e0dad4b4f82999350c496910c869ad24e0ed504  ./schemas/account-security.schema.json
 b187d245d37bf96f45792aed87372e2882d24cbb9d5bc96436bd378c98713436  ./schemas/collection.schema.json
