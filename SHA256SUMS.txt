@@ -18,7 +18,7 @@ eeab87956f214354e6dbb15ec04c340a940e457f4b44b4cd6992b9f1033d62e2  ./assets/offic
 e23d66c77a31a7ce97d1a7e32085c0f5cb935892a9f94169b8443b6bfbbfed9b  ./assets/project-hub.js
 616ee68d070d70aac23106eebf4814d60f4c6ab62e16b0606f912e2d07db3eeb  ./assets/search.css
 a129f5d7845cd6cbf6da6b4e474f7c540cadaeadef4694614bcf09d30ef7ef04  ./assets/search.js
-175870b2281ec6d60ff34abfc0698fc758856a92fe8dfa19c7f42436cf43b2de  ./assets/site.css
+6f00bc9139a394bfa18c0d967ac294070181a59db6cbb0f60f1efce2ccf460a5  ./assets/site.css
 8785fec8bc7acfb8f8aa1cb9ec15b680386e1c083494fc8c7a52efb7cb3b56a9  ./assets/verify.js
 7e17082a9c609bc2cdba59297824aacd50b4ad4e22c5e88ba34f0c46bee517ae  ./catalog.html
 85e203da2b6ff4e56f338d2e0f49a39055c703b8ff97c1985a1837340b787fe7  ./community.html
