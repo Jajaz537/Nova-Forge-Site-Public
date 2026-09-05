@@ -8,6 +8,8 @@ db09c5a11d225a89c50c9f4c9e2985d53d862076c5ea0a9a65c83ce1d83bf350  ./assets/creat
 b9f14aadd66ae996f90d1d8234fb91038975fe7467db820e40c1283c249f0bab  ./assets/creator-studio.js
 e577af06da110258a74b32f7f5503ba4eb222ade98fdd24a3332dd7c50cd19aa  ./assets/downloads.js
 bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-schema-lite.js
+884fc8a9fa04105a294f8bea4e6c61c7ff0f3de94e227b9412d2f757c5a3c4f4  ./assets/nova-mark-192.png
+a9d20d30f4ad4afbdf615f4d235d9ab95446bfc388b3d85f005f4861a4c90632  ./assets/nova-mark-512.png
 e8afe9ea440ac2bd423e1baaac751efae9791c1870e793d734168d5ddc97a0a0  ./assets/nova-mark.svg
 eeab87956f214354e6dbb15ec04c340a940e457f4b44b4cd6992b9f1033d62e2  ./assets/official.css
 60cb04fe638d9f17f6edebc46b281bbbab3eb41bd7618298d48055a37c17f687  ./assets/profiles.css
@@ -52,6 +54,6 @@ b87844bf2b8b09ce5a39f94e1fd92719c3abd88f64092b7ba90d905ca695440f  ./schemas/stor
 c2a65511fef5fe723f6e10e3af17bad0ff912918b3f00e391ac34cf12c3b9b84  ./schemas/universal-mod-manifest.schema.json
 2f1bc90bfabd272c41e413a1fc4aae746e890e1e57bfe8545e8ed81cda51e588  ./search.html
 31f513e669d1dcabd243ad47c4779854e2910f0aaa314317f526985deef8edbe  ./security.html
-3c3b3f6b0f11304a0ea6da61ad97f33dbfe0665a6138eaab8c7b3ed182053514  ./site.webmanifest
-20d5833f656bdf74ee6e0a70df3cdb11813f298eeb9d0da0eef42bd1ac8e7954  ./sw.js
+96fae67e1552541c90f88250312a804d74e4b1b40f16a1a7c5102265853d4e4e  ./site.webmanifest
+6908597d29a47fdcf727b615ceea211c9551d152c6f87c1cd8536b1fea71bcd1  ./sw.js
 4c778808d6ed34bf474696cce76b24e400aaa7506f6c594d1c6a69ba5d48f1ff  ./verify.html

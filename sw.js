@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nova-site-shell-v32';
+const CACHE_NAME = 'nova-site-shell-v33';
 const BASE_URL = new URL('./', self.location.href);
 const PUBLIC_PAGE_PATHS = [
   './',
@@ -59,6 +59,8 @@ const SHELL_PATHS = [
   './assets/community.js',
   './assets/downloads.js',
   './assets/verify.js',
+  './assets/nova-mark-192.png',
+  './assets/nova-mark-512.png',
   './assets/nova-mark.svg'
 ];
 const RUNTIME_PUBLIC_PATHS = [
