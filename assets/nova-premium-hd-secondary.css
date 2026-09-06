@@ -1,0 +1,13 @@
+/* Compatibility bridge: maps the existing secondary-page shell to the canonical Premium HD system. */
+.topbar{position:sticky;top:0;z-index:60;min-height:76px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:28px;padding:0 clamp(18px,4vw,64px);background:rgba(9,11,14,.82);border-bottom:1px solid rgba(80,91,104,.28);backdrop-filter:blur(18px) saturate(120%)}
+.topbar .brand{white-space:nowrap}.topbar .brand-logo{width:34px;height:34px;border-radius:10px}.topbar nav{justify-self:center;display:flex;align-items:center;gap:4px}.topbar nav a{min-height:42px;display:flex;align-items:center;padding:0 12px;border-radius:9px;color:var(--nova-text-secondary);font-size:.9rem;font-weight:650;transition:background var(--nova-motion-standard),color var(--nova-motion-standard)}.topbar nav a:hover,.topbar nav a[aria-current="page"]{color:var(--nova-text);background:rgba(255,255,255,.035)}
+
+.hero{min-height:0;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr);gap:clamp(2rem,6vw,5.5rem);align-items:center;padding:clamp(4.8rem,10vw,8.5rem) 0 clamp(3.8rem,7vw,6rem);border-bottom:0}
+.hero::before,.hero::after{content:none}
+.hero-panel{min-width:0}
+.feature-list li{min-width:0}.feature-list li>div{min-width:0}
+body>footer{border-top:1px solid rgba(80,91,104,.24);background:#080a0c;padding:42px clamp(18px,4vw,64px)}
+input,select,textarea{min-height:48px;border-color:var(--nova-border-standard)!important;border-radius:10px!important;background:#0b0f13!important;color:var(--nova-text)!important}input:focus,select:focus,textarea:focus{border-color:var(--nova-guide)!important;box-shadow:0 0 0 3px rgba(112,164,219,.09)!important}
+.card,.panel{border-color:rgba(80,91,104,.3);border-radius:12px;background:var(--nova-panel)}
+@media(max-width:1180px){.hero{grid-template-columns:1fr}.hero-panel{max-width:720px}.topbar{grid-template-columns:1fr auto;min-height:68px}.topbar nav{grid-column:1/-1;justify-self:stretch}.topbar nav[data-open="false"]{display:none}.topbar nav[data-open="true"]{display:grid;position:absolute;left:18px;right:18px;top:68px;padding:10px;border:1px solid var(--nova-border-subtle);border-radius:12px;background:#0d1115;box-shadow:var(--nova-elevation-floating)}.topbar nav a{min-height:46px}}
+@media(max-width:480px){.topbar{padding-inline:14px;gap:10px}.topbar .brand span{font-size:.95rem}}
