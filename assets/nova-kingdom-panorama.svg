@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 560" role="img" aria-labelledby="title desc">
+<title id="title">Royaume de Braise, horizon Nova Forge</title>
+<desc id="desc">Panorama vectoriel sombre d'une cité technologique organisée autour d'une forge centrale.</desc>
+<defs>
+ <linearGradient id="sky" x2="1"><stop stop-color="#090b0e"/><stop offset=".62" stop-color="#11161b"/><stop offset="1" stop-color="#24170f"/></linearGradient>
+ <linearGradient id="ground" y2="1"><stop stop-color="#161c22"/><stop offset="1" stop-color="#090b0e"/></linearGradient>
+ <linearGradient id="ember"><stop stop-color="#e5cd91"/><stop offset=".55" stop-color="#c6a45a"/><stop offset="1" stop-color="#d0693b"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#d0693b" stop-opacity=".32"/><stop offset="1" stop-color="#d0693b" stop-opacity="0"/></radialGradient>
+ <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse"><path d="M64 0H0V64" fill="none" stroke="#505b68" stroke-opacity=".12"/></pattern>
+</defs>
+<rect width="1600" height="560" fill="url(#sky)"/><rect width="1600" height="560" fill="url(#grid)"/>
+<circle cx="1230" cy="205" r="210" fill="url(#glow)"/>
+<path d="M0 350L170 220l170 112 190-178 180 176 170-122 180 132 205-190 335 205v205H0z" fill="#0d1014"/>
+<path d="M0 410l260-88 205 64 245-104 238 100 240-120 412 148v150H0z" fill="url(#ground)"/>
+<g transform="translate(1040 105)">
+ <path d="M180 20l72 78v220H108V98z" fill="#161c22" stroke="#505b68"/>
+ <path d="M180 20v298M108 98h144" stroke="#c6a45a" stroke-width="3"/>
+ <path d="M72 152h72v166H72zm216 0h72v166h-72z" fill="#11161b" stroke="#242e38"/>
+ <path d="M54 152l54-55 54 55m108 0l54-55 54 55" fill="#161c22" stroke="#505b68"/>
+ <path d="M144 194h72v124h-72z" fill="#090b0e" stroke="#c6a45a"/>
+ <path d="M180 210l18 35-18 35-18-35z" fill="#d0693b"/>
+</g>
+<g fill="#11161b" stroke="#242e38">
+ <path d="M80 430h105v80H80zM210 395h130v115H210zM370 425h92v85h-92zM500 380h150v130H500zM690 420h105v90H690zM825 390h155v120H825z"/>
+</g>
+<g fill="#c6a45a">
+ <path d="M105 455h8v12h-8zm45 0h8v12h-8zm91-25h9v14h-9zm55 0h9v14h-9zm102 20h8v12h-8zm142-30h10v16h-10zm58 0h10v16h-10zm122 25h8v12h-8zm142-20h10v15h-10zm60 0h10v15h-10z"/>
+</g>
+<path d="M0 510h1600" stroke="#c6a45a" stroke-opacity=".55"/><path d="M120 536h490l84-26h310" fill="none" stroke="url(#ember)" stroke-width="3"/>
+</svg>

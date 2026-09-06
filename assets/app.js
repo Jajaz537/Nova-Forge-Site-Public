@@ -256,50 +256,9 @@
     entries.forEach(({ target }) => observer.observe(target));
   }
 
-  function setupMotionPreference() {
-    const topbar = bySelector('.topbar');
-    if (!topbar) return;
-    const key = 'nova_site_shell_preferences_v1';
-    let mode = 'system';
-
-    try {
-      const stored = JSON.parse(localStorage.getItem(key) || '{}');
-      if (stored.motion === 'reduced') mode = 'reduced';
-      else if (stored.reducedMotion === true) mode = 'reduced';
-    } catch {
-      mode = 'system';
-    }
-
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'motion-toggle';
-
-    const apply = () => {
-      if (mode === 'reduced') document.documentElement.dataset.motion = 'reduced';
-      else delete document.documentElement.dataset.motion;
-      button.setAttribute('aria-pressed', mode === 'reduced' ? 'true' : 'false');
-      button.textContent = mode === 'reduced' ? 'Animations réduites' : 'Animations système';
-    };
-
-    button.addEventListener('click', () => {
-      mode = mode === 'reduced' ? 'system' : 'reduced';
-      apply();
-      try {
-        if (mode === 'reduced') localStorage.setItem(key, JSON.stringify({ motion: 'reduced' }));
-        else localStorage.removeItem(key);
-      } catch {
-        /* La préférence reste fonctionnelle pour la session même sans stockage. */
-      }
-    });
-
-    apply();
-    topbar.append(button);
-  }
-
   renderCatalogue();
   Promise.allSettled([loadCatalogue(), loadPublicStatus(), loadPublicBuild()]);
   enableActiveNavigation();
-  setupMotionPreference();
   search?.addEventListener('input', (event) => renderCatalogue(event.currentTarget.value));
   bySelector('[data-smart-profile]')?.addEventListener('click', renderProfile);
   bySelector('[data-os-bridge]')?.addEventListener('click', renderBridgeState);

@@ -22,8 +22,10 @@
   <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
   <link rel="alternate" type="application/json" href="./public-status.json" title="Nova Forge — statut public">
+  <link rel="stylesheet" href="./assets/tokens.css">
   <link rel="stylesheet" href="./assets/site.css">
   <link rel="stylesheet" href="./assets/official.css">
+  <script src="./assets/shell.js" defer></script>
   <script src="./assets/app.js" defer></script>
 </head>
 <body>
@@ -47,24 +49,44 @@
   </header>
 
   <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">Nova Forge · Écosystème gaming nouvelle génération</p>
-        <h1 id="hero-title">Le gaming, forgé autour de vous.</h1>
-        <p class="lede">Nova Forge réunit jeux, créations et outils dans une expérience cohérente, rapide et maîtrisée — avec des preuves claires lorsque la confiance compte.</p>
-        <div class="actions">
-          <a class="button primary" href="./ecosystem.html">Explorer Nova Forge</a>
-          <a class="button" href="./catalog.html">Découvrir le catalogue</a>
-        </div>
-        <div class="release-status" aria-label="État public du site">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span><strong>Surface publique en préparation.</strong> Les téléchargements resteront verrouillés jusqu’à leur validation complète.</span>
+    <section class="command-hero" id="top" aria-labelledby="hero-title">
+      <div class="kingdom-panorama">
+        <img src="./assets/nova-kingdom-panorama.svg" width="1600" height="560" alt="">
+        <div class="command-identity">
+          <p class="eyebrow">Nova Forge OS · Avalon</p>
+          <h1 id="hero-title">Le gaming, forgé autour de vous.</h1>
+          <p class="lede">Un écosystème souverain pour organiser vos jeux, vos créations et vos outils avec une confiance lisible à chaque étape.</p>
+          <div class="actions"><a class="button primary" href="./ecosystem.html">Explorer Nova Forge</a><a class="button" href="./catalog.html">Ouvrir le catalogue</a></div>
         </div>
       </div>
-      <figure class="hero-visual">
-        <img src="./assets/nova-forge-core-concept.webp" width="1600" height="1000" alt="Composition conceptuelle du cœur Nova Forge, faite d’anneaux métalliques illuminés" fetchpriority="high">
-        <figcaption><span>Concept visuel</span><strong>Cœur Nova Forge</strong><small>Une vision de l’écosystème, pas une capture de l’OS.</small></figcaption>
-      </figure>
+      <div class="command-dashboard" aria-label="État du centre Nova Forge">
+        <div class="command-main">
+          <div class="command-row">
+            <article class="command-panel">
+              <p class="eyebrow">Disponibilité</p>
+              <div class="readiness-value"><strong>Pré-VF</strong><span class="status-chip">Site stable</span></div>
+              <p class="muted">La surface publique est active. Les distributions OS restent verrouillées jusqu’à validation.</p>
+            </article>
+            <article class="command-panel">
+              <p class="eyebrow">Progression publique</p>
+              <div class="progress-list">
+                <div class="progress-item progress-ready"><span>Fondations</span><div class="progress-track"><span></span></div><strong>Prêtes</strong></div>
+                <div class="progress-item progress-current"><span>Expérience</span><div class="progress-track"><span></span></div><strong>En cours</strong></div>
+                <div class="progress-item progress-locked"><span>Distribution</span><div class="progress-track"><span></span></div><strong>Verrouillée</strong></div>
+              </div>
+            </article>
+          </div>
+          <article class="command-panel">
+            <p class="eyebrow">Activité récente</p>
+            <ul class="activity-list"><li><time>Maintenant</time><span>Site officiel disponible sur le domaine public</span><em>actif</em></li><li><time>Local</time><span>Catalogue et outils fonctionnent sans compte distant</span><em>prêt</em></li><li><time>À venir</time><span>Distribution après validation d’intégrité et de provenance</span><em>verrouillé</em></li></ul>
+          </article>
+          <div class="command-actions">
+            <a class="command-action" href="./catalog.html"><span class="eyebrow">Action principale</span><strong>Découvrir le catalogue</strong><small>Parcourir les expériences publiques et leurs preuves.</small></a>
+            <a class="command-action" href="./creator-studio.html"><span class="eyebrow">Espace créateur</span><strong>Ouvrir Creator Studio</strong><small>Préparer un manifeste local sans publication implicite.</small></a>
+          </div>
+        </div>
+        <aside class="command-panel guide-panel" aria-labelledby="guide-title"><span class="guide-mark" aria-hidden="true">N</span><p class="eyebrow">Nova Guide</p><h2 id="guide-title">Votre prochain pas</h2><p>Commencez par l’écosystème pour comprendre les surfaces disponibles, puis explorez les outils locaux à votre rythme.</p><a class="button" href="./ecosystem.html">Voir l’écosystème</a></aside>
+      </div>
     </section>
 
     <section class="trust-strip" aria-label="Garanties de ce noyau">
