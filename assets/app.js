@@ -142,7 +142,76 @@
     const disclaimer = document.createElement('p');
     disclaimer.className = 'muted';
     disclaimer.textContent = 'Analyse browser-local indicative uniquement. « Measured » signifie observé via une API du navigateur pour cette session ; cela ne certifie pas le matériel physique sous-jacent. Aucun FPS ni niveau de stabilité n’est garanti.';
-    profilePanel.replaceChildren(grid, disclaimer);
+
+    const tryButton = document.createElement('button');
+    tryButton.className = 'button';
+    tryButton.type = 'button';
+    tryButton.textContent = 'Préparer un essai borné';
+    tryButton.addEventListener('click', () => {
+      const existing = profilePanel.querySelector('[data-try-anyway-flow]');
+      if (existing) {
+        existing.remove();
+        tryButton.textContent = 'Préparer un essai borné';
+        return;
+      }
+      profilePanel.append(buildTryAnywayFlow());
+      tryButton.textContent = 'Fermer le protocole d’essai';
+    });
+
+    profilePanel.replaceChildren(grid, disclaimer, tryButton);
+  }
+
+  function buildTryAnywayFlow() {
+    const panel = document.createElement('div');
+    panel.className = 'panel';
+    panel.setAttribute('data-try-anyway-flow', '');
+    panel.style.marginTop = '1rem';
+
+    const title = document.createElement('strong');
+    title.textContent = 'Essai borné — aucune modification automatique';
+    const intro = document.createElement('p');
+    intro.className = 'muted';
+    intro.textContent = 'Ce protocole ne mesure pas vos FPS et ne change aucun réglage. Il vous aide à tester manuellement une option plus ambitieuse sans transformer une estimation en garantie.';
+
+    const steps = document.createElement('ol');
+    [
+      'Risque : la recommandation reste Estimated/Unknown tant qu’aucune mesure réelle du jeu n’est fournie.',
+      'Snapshot / backup : notez vos réglages actuels et utilisez, si le jeu le permet, une sauvegarde ou un profil de configuration réversible.',
+      'Test borné : limitez l’essai à une courte session reproductible (par exemple 10 minutes, même zone/scène, mêmes réglages hors variable testée).',
+      'Mesure / comparaison : comparez fluidité, latence ressentie, stabilité et erreurs avec votre état de référence.',
+      'Décision : conservez seulement si le résultat est acceptable ; sinon revenez au snapshot ou baissez un seul réglage ciblé.'
+    ].forEach((text) => {
+      const item = document.createElement('li');
+      item.textContent = text;
+      steps.append(item);
+    });
+
+    const resultLabel = document.createElement('p');
+    resultLabel.className = 'muted';
+    resultLabel.textContent = 'Après votre test manuel, indiquez uniquement le résultat local :';
+
+    const actions = document.createElement('div');
+    actions.className = 'actions';
+    const outcome = document.createElement('p');
+    outcome.className = 'muted';
+    outcome.setAttribute('role', 'status');
+    outcome.setAttribute('aria-live', 'polite');
+
+    [
+      ['Acceptable / stable', 'Résultat local noté : acceptable. Conservez le changement uniquement pour ce scénario testé ; cela ne devient pas une garantie générale.'],
+      ['Dégradé / instable', 'Résultat local noté : dégradé. Recommandation : rollback vers le snapshot, puis baisse ciblée d’un seul réglage avant un nouveau test borné.'],
+      ['Inconnu / non concluant', 'Résultat local noté : non concluant. Recommandation : ne promouvez pas le profil ; revenez au réglage prudent ou refaites un test plus reproductible.']
+    ].forEach(([label, message]) => {
+      const button = document.createElement('button');
+      button.className = 'button small';
+      button.type = 'button';
+      button.textContent = label;
+      button.addEventListener('click', () => { outcome.textContent = message; });
+      actions.append(button);
+    });
+
+    panel.append(title, intro, steps, resultLabel, actions, outcome);
+    return panel;
   }
 
   function renderBridgeState() {
