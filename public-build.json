@@ -4,6 +4,6 @@
   "stage": "pre-vf",
   "source_revision": "withheld-private-source",
   "hash_algorithm": "sha256",
-  "surface_digest_sha256": "e1de9f52994559d1a568a5bc05b666420575a6f6b1e34c4ed778814e73b70fbd",
+  "surface_digest_sha256": "dd866c04330d3dc586d8256caf83e201db7e3a1617d17a481939b724365405a0",
   "checksums": "SHA256SUMS.txt"
 }
