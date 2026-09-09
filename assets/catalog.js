@@ -2,6 +2,7 @@
   "use strict";
   const DATA_URL = "./data/catalog.json";
   const FAVORITES_KEY = "nova-forge:catalog:favorites:v1";
+  const SAVED_VIEWS_KEY = "nova-forge:catalog:saved-views:v1";
   const grid = document.querySelector("#catalog-grid");
   const form = document.querySelector("#catalog-filter-form");
   if (!grid || !form) return;
@@ -16,9 +17,16 @@
   const countNode = document.querySelector("#catalog-count");
   const stateNode = document.querySelector("#catalog-state");
   const emptyNode = document.querySelector("#catalog-empty");
+  const viewNameInput = document.querySelector("#catalog-view-name");
+  const viewSelect = document.querySelector("#catalog-saved-view");
+  const saveViewButton = document.querySelector("#catalog-save-view");
+  const applyViewButton = document.querySelector("#catalog-apply-view");
+  const deleteViewButton = document.querySelector("#catalog-delete-view");
+  const viewsStateNode = document.querySelector("#catalog-views-state");
 
   let items = [];
   let favorites = loadFavorites();
+  let savedViews = loadSavedViews();
 
   function loadFavorites() {
     try {
@@ -30,6 +38,90 @@
 
   function saveFavorites() {
     try { localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites].sort())); } catch {}
+  }
+
+  function loadSavedViews() {
+    try {
+      const raw = localStorage.getItem(SAVED_VIEWS_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      if (!Array.isArray(parsed)) return [];
+      return parsed.filter((view) => view && typeof view.id === "string" && typeof view.name === "string" && view.filters && typeof view.filters === "object").slice(0, 12);
+    } catch { return []; }
+  }
+
+  function persistSavedViews() {
+    try {
+      localStorage.setItem(SAVED_VIEWS_KEY, JSON.stringify(savedViews.slice(0, 12)));
+      return true;
+    } catch { return false; }
+  }
+
+  function currentFilters() {
+    return {
+      q: queryInput.value.trim(),
+      kind: kindSelect.value,
+      game: gameSelect.value,
+      evidence: evidenceSelect.value,
+      sort: sortSelect.value,
+      favoritesOnly: favoritesOnly.checked
+    };
+  }
+
+  function refreshSavedViews() {
+    if (!viewSelect) return;
+    const selected = viewSelect.value;
+    viewSelect.replaceChildren(new Option("Choisir une vue…", ""));
+    savedViews.forEach((view) => viewSelect.add(new Option(view.name, view.id)));
+    if (savedViews.some((view) => view.id === selected)) viewSelect.value = selected;
+    const hasSelection = Boolean(viewSelect.value);
+    if (applyViewButton) applyViewButton.disabled = !hasSelection;
+    if (deleteViewButton) deleteViewButton.disabled = !hasSelection;
+  }
+
+  function applySavedView(view) {
+    if (!view?.filters) return;
+    const filters = view.filters;
+    queryInput.value = typeof filters.q === "string" ? filters.q : "";
+    kindSelect.value = typeof filters.kind === "string" ? filters.kind : "";
+    if (typeof filters.game === "string" && [...gameSelect.options].some((option) => option.value === filters.game)) gameSelect.value = filters.game;
+    else gameSelect.value = "";
+    evidenceSelect.value = typeof filters.evidence === "string" ? filters.evidence : "";
+    sortSelect.value = typeof filters.sort === "string" ? filters.sort : "featured";
+    favoritesOnly.checked = filters.favoritesOnly === true;
+    if (items.length) render();
+    if (viewsStateNode) viewsStateNode.textContent = `Vue « ${view.name} » appliquée localement.`;
+  }
+
+  function saveCurrentView() {
+    if (!viewNameInput || !viewSelect) return;
+    const name = viewNameInput.value.trim().replace(/\s+/g, " ").slice(0, 48);
+    if (!name) {
+      if (viewsStateNode) viewsStateNode.textContent = "Donnez un nom à la vue avant de l’enregistrer.";
+      viewNameInput.focus();
+      return;
+    }
+    const now = Date.now();
+    const id = `view-${now.toString(36)}`;
+    savedViews = [{id, name, filters: currentFilters()}, ...savedViews.filter((view) => view.name.toLocaleLowerCase("fr") !== name.toLocaleLowerCase("fr"))].slice(0, 12);
+    if (!persistSavedViews()) {
+      if (viewsStateNode) viewsStateNode.textContent = "Le navigateur a refusé l’enregistrement local de cette vue.";
+      return;
+    }
+    refreshSavedViews();
+    viewSelect.value = id;
+    viewNameInput.value = "";
+    if (applyViewButton) applyViewButton.disabled = false;
+    if (deleteViewButton) deleteViewButton.disabled = false;
+    if (viewsStateNode) viewsStateNode.textContent = `Vue « ${name} » enregistrée uniquement dans ce navigateur.`;
+  }
+
+  function deleteSelectedView() {
+    if (!viewSelect?.value) return;
+    const target = savedViews.find((view) => view.id === viewSelect.value);
+    savedViews = savedViews.filter((view) => view.id !== viewSelect.value);
+    persistSavedViews();
+    refreshSavedViews();
+    if (viewsStateNode) viewsStateNode.textContent = target ? `Vue « ${target.name} » supprimée de ce navigateur.` : "Vue locale supprimée.";
   }
 
   const normalize = (value) => String(value ?? "").trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -120,6 +212,7 @@
       if (!payload || payload.schemaVersion !== 1 || !Array.isArray(payload.items)) throw new Error("catalog-contract-invalid");
       items = payload.items.filter((item) => item && item.public === true && typeof item.id === "string");
       refreshGames();
+      refreshSavedViews();
       render();
     } catch {
       stateNode.textContent = navigator.onLine ? "Le catalogue enrichi n’a pas pu être chargé. Le contenu HTML statique initial reste disponible." : "Hors ligne : le contenu HTML statique initial reste disponible ; les données enrichies ne sont pas dans le cache courant.";
@@ -155,7 +248,20 @@
   form.addEventListener("change", () => { if (items.length) render(); });
   form.addEventListener("submit", (event) => event.preventDefault());
   resetButton?.addEventListener("click", () => { form.reset(); if (items.length) render(); queryInput.focus(); });
+  saveViewButton?.addEventListener("click", saveCurrentView);
+  applyViewButton?.addEventListener("click", () => {
+    const view = savedViews.find((item) => item.id === viewSelect?.value);
+    if (view) applySavedView(view);
+  });
+  deleteViewButton?.addEventListener("click", deleteSelectedView);
+  viewSelect?.addEventListener("change", () => {
+    const hasSelection = Boolean(viewSelect.value);
+    if (applyViewButton) applyViewButton.disabled = !hasSelection;
+    if (deleteViewButton) deleteViewButton.disabled = !hasSelection;
+    if (viewsStateNode) viewsStateNode.textContent = hasSelection ? "Vue locale prête à être appliquée." : "Les vues enregistrées restent uniquement dans ce navigateur.";
+  });
 
+  refreshSavedViews();
   bindStaticFavorites();
   hydrate();
 })();
