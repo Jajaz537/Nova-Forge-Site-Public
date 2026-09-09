@@ -41,6 +41,17 @@
         <label><span>Tri</span><select id="catalog-sort" name="sort"><option value="featured">Sélection</option><option value="name">Nom</option><option value="updated">Mise à jour</option></select></label>
         <label class="check-control"><input id="catalog-favorites-only" type="checkbox"><span>Favoris uniquement</span></label>
       </form>
+      <div class="saved-view-panel panel" aria-labelledby="saved-views-title">
+        <div><p class="eyebrow">Vues enregistrées</p><h3 id="saved-views-title">Retrouver un filtre sans compte.</h3><p>Enregistrez jusqu’à 12 vues de catalogue dans ce navigateur. Elles ne sont ni synchronisées ni envoyées à Nova Forge.</p></div>
+        <div class="saved-view-controls">
+          <label><span>Nom de la vue</span><input id="catalog-view-name" type="text" maxlength="48" autocomplete="off" placeholder="Ex. Mes packs mesurés"></label>
+          <button class="button small" type="button" id="catalog-save-view">Enregistrer la vue</button>
+          <label><span>Vues locales</span><select id="catalog-saved-view"><option value="">Choisir une vue…</option></select></label>
+          <button class="button small" type="button" id="catalog-apply-view" disabled>Appliquer</button>
+          <button class="button small" type="button" id="catalog-delete-view" disabled>Supprimer</button>
+        </div>
+        <p id="catalog-views-state" class="catalog-state" role="status" aria-live="polite">Les vues enregistrées restent uniquement dans ce navigateur.</p>
+      </div>
       <p id="catalog-state" class="catalog-state" role="status" aria-live="polite">Le contenu HTML initial est disponible. Les filtres locaux s’activent si JavaScript est disponible.</p>
     </section>
     <section class="catalog-results" aria-labelledby="results-title">
