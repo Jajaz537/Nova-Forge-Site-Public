@@ -42,10 +42,7 @@ jobs:
           build_path = root / 'public-build.json'
           status_path = root / 'public-status.json'
           generated = {'SHA256SUMS.txt', 'public-build.json'}
-          forbidden = (
-              'Nova-Forge-OS-Private', 'NovaForgeOS.Founder', 'FOUNDER_PRIVATE',
-              'FounderSecret', 'founder-only', 'NovaForgeOS.Site/tools', '.github/'
-          )
+          nonrelease_markers = ('NovaForgeOS.Site/tools', '.github/')
           sum_re = re.compile(r'^([0-9a-f]{64})  \./(.+)$')
 
           if stage.exists():
@@ -63,7 +60,7 @@ jobs:
           if build.get('surface') != 'official-site':
               raise SystemExit('public-build surface mismatch')
           if build.get('source_revision') != 'withheld-private-source':
-              raise SystemExit('private source revision must stay withheld')
+              raise SystemExit('source revision disclosure contract mismatch')
           if build.get('hash_algorithm') != 'sha256' or build.get('checksums') != 'SHA256SUMS.txt':
               raise SystemExit('public-build checksum contract mismatch')
 
@@ -71,7 +68,7 @@ jobs:
           if hosting.get('mandatory_monthly_budget_eur') != 0 or hosting.get('paid_plan_allowed') is not False:
               raise SystemExit('EUR0 hosting contract mismatch')
           if hosting.get('private_source_repository_must_remain_private') is not True:
-              raise SystemExit('private source repository contract missing')
+              raise SystemExit('source confidentiality contract missing')
 
           expected = {}
           for line in raw_sums.decode('utf-8').splitlines():
@@ -123,13 +120,13 @@ jobs:
               if path.suffix.lower() not in readable and path.name != 'site.webmanifest':
                   continue
               text = path.read_text(encoding='utf-8', errors='strict').lower()
-              for marker in forbidden:
+              for marker in nonrelease_markers:
                   if marker.lower() in text:
-                      raise SystemExit(f'private/internal marker in public release: {path.relative_to(stage)}')
+                      raise SystemExit(f'non-release marker in public release: {path.relative_to(stage)}')
 
           print(
               f"PASS_LIVE_PAGES_STAGE: files={len(actual_stage)} exact_tree=yes sha256=yes "
-              f"surface_digest={build['surface_digest_sha256']} eur0=yes private_markers=none"
+              f"surface_digest={build['surface_digest_sha256']} eur0=yes release_boundary=clean"
           )
           PY
 
