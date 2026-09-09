@@ -66,8 +66,6 @@ jobs:
               raise SystemExit('private source revision must stay withheld')
           if build.get('hash_algorithm') != 'sha256' or build.get('checksums') != 'SHA256SUMS.txt':
               raise SystemExit('public-build checksum contract mismatch')
-          if build.get('surface_digest_sha256') != hashlib.sha256(raw_sums).hexdigest():
-              raise SystemExit('surface digest mismatch')
 
           hosting = status.get('hosting', {})
           if hosting.get('mandatory_monthly_budget_eur') != 0 or hosting.get('paid_plan_allowed') is not False:
@@ -85,13 +83,27 @@ jobs:
                   raise SystemExit(f'unsafe/duplicate checksum path: {rel}')
               expected[rel] = digest
 
+          mismatches = []
           for rel, digest in sorted(expected.items()):
               src = root / rel
               if not src.is_file() or src.is_symlink():
                   raise SystemExit(f'missing or unsafe public file: {rel}')
               actual = hashlib.sha256(src.read_bytes()).hexdigest()
               if actual != digest:
-                  raise SystemExit(f'checksum mismatch: {rel}')
+                  mismatches.append((rel, digest, actual))
+          if mismatches:
+              for rel, expected_digest, actual_digest in mismatches:
+                  print(f'CHECKSUM_MISMATCH path={rel} expected={expected_digest} actual={actual_digest}')
+              raise SystemExit(f'checksum mismatch count={len(mismatches)}')
+
+          actual_surface_digest = hashlib.sha256(raw_sums).hexdigest()
+          if build.get('surface_digest_sha256') != actual_surface_digest:
+              raise SystemExit(
+                  f"surface digest mismatch expected={build.get('surface_digest_sha256')} actual={actual_surface_digest}"
+              )
+
+          for rel in sorted(expected):
+              src = root / rel
               dst = stage / rel
               dst.parent.mkdir(parents=True, exist_ok=True)
               shutil.copy2(src, dst)
