@@ -1,4 +1,4 @@
 {
-  "mode": "status",
-  "reason": "Targeted read-only micro-proof after Pages custom-domain creation remained pending for 10 minutes"
+  "mode": "repair-apex-pages",
+  "reason": "Targeted fix: replace only the conflicting imported IONOS apex A/AAAA web records with the verified Cloudflare Pages CNAME; preserve mail records; keep DNSSEC and old domain untouched"
 }
