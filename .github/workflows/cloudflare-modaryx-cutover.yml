@@ -11,7 +11,6 @@ on:
         options:
           - status
           - attach-pages
-          - deploy
           - enable-dnssec
 
 permissions:
@@ -22,7 +21,6 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  CLOUDFLARE_ACCOUNT_ID: 94d03dcfde9f4ed9981b1952ca9fb113
   CLOUDFLARE_ZONE_NAME: modaryxmods.com
   CLOUDFLARE_PROJECT_NAME: nova-forge-site-public
   EXPECTED_NS_1: dawn.ns.cloudflare.com
@@ -35,13 +33,7 @@ jobs:
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
-      - name: Checkout public repository
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-          fetch-depth: 1
-
-      - name: Require the scoped Cloudflare token
+      - name: Require scoped Cloudflare token
         shell: bash
         run: |
           set -euo pipefail
@@ -50,7 +42,7 @@ jobs:
             exit 1
           fi
 
-      - name: Verify Cloudflare zone and Pages project
+      - name: Verify MODARYX zone and existing Pages project
         id: preflight
         shell: bash
         run: |
@@ -58,53 +50,54 @@ jobs:
           api="https://api.cloudflare.com/client/v4"
           auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
 
-          zones_json="$(curl -fsS "${auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}&account.id=${CLOUDFLARE_ACCOUNT_ID}")"
+          verify_json="$(curl -fsS "${auth[@]}" "${api}/user/tokens/verify")"
+          test "$(jq -r '.success' <<<"$verify_json")" = "true"
+          test "$(jq -r '.result.status' <<<"$verify_json")" = "active"
+
+          zones_json="$(curl -fsS "${auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}")"
           test "$(jq -r '.success' <<<"$zones_json")" = "true"
-          zone_count="$(jq '.result | length' <<<"$zones_json")"
-          if [ "$zone_count" -ne 1 ]; then
-            echo "Expected exactly one zone named ${CLOUDFLARE_ZONE_NAME}; found ${zone_count}"
-            exit 1
-          fi
+          test "$(jq '.result | length' <<<"$zones_json")" -eq 1
 
           zone_id="$(jq -r '.result[0].id' <<<"$zones_json")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones_json")"
           zone_status="$(jq -r '.result[0].status' <<<"$zones_json")"
           plan_name="$(jq -r '.result[0].plan.name // "unknown"' <<<"$zones_json")"
           ns_json="$(jq -c '.result[0].name_servers // []' <<<"$zones_json")"
 
-          if [ "$zone_status" != "active" ]; then
-            echo "Cloudflare zone is not active: ${zone_status}"
-            exit 1
-          fi
+          test "$zone_status" = "active"
           jq -e --arg ns "$EXPECTED_NS_1" 'index($ns) != null' <<<"$ns_json" >/dev/null
           jq -e --arg ns "$EXPECTED_NS_2" 'index($ns) != null' <<<"$ns_json" >/dev/null
 
-          project_json="$(curl -fsS "${auth[@]}" "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}")"
+          project_json="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${CLOUDFLARE_PROJECT_NAME}")"
           test "$(jq -r '.success' <<<"$project_json")" = "true"
-          project_name="$(jq -r '.result.name' <<<"$project_json")"
-          if [ "$project_name" != "$CLOUDFLARE_PROJECT_NAME" ]; then
-            echo "Unexpected Pages project: ${project_name}"
-            exit 1
-          fi
+          test "$(jq -r '.result.name' <<<"$project_json")" = "$CLOUDFLARE_PROJECT_NAME"
+
+          source_type="$(jq -r '.result.source.type // "direct-upload-or-unreported"' <<<"$project_json")"
+          production_branch="$(jq -r '.result.source.config.production_branch // .result.production_branch // "unknown"' <<<"$project_json")"
 
           echo "zone_id=${zone_id}" >> "$GITHUB_OUTPUT"
+          echo "account_id=${account_id}" >> "$GITHUB_OUTPUT"
+          echo "TOKEN=active"
           echo "ZONE_ACTIVE=yes"
-          echo "ZONE_NAME=${CLOUDFLARE_ZONE_NAME}"
           echo "EXPECTED_NAMESERVERS=yes"
           echo "PLAN=${plan_name}"
-          echo "PAGES_PROJECT=${project_name}"
+          echo "PAGES_PROJECT=${CLOUDFLARE_PROJECT_NAME}"
+          echo "PAGES_SOURCE_TYPE=${source_type}"
+          echo "PAGES_PRODUCTION_BRANCH=${production_branch}"
           echo "OLD_DOMAIN_UNTOUCHED=getnovaforge.com"
 
       - name: Read current MODARYX status
         if: ${{ inputs.mode == 'status' }}
         shell: bash
         env:
+          ACCOUNT_ID: ${{ steps.preflight.outputs.account_id }}
           ZONE_ID: ${{ steps.preflight.outputs.zone_id }}
         run: |
           set -euo pipefail
           api="https://api.cloudflare.com/client/v4"
           auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
 
-          domains_json="$(curl -fsS "${auth[@]}" "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/domains")"
+          domains_json="$(curl -fsS "${auth[@]}" "${api}/accounts/${ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/domains")"
           test "$(jq -r '.success' <<<"$domains_json")" = "true"
           apex_status="$(jq -r --arg d "$CLOUDFLARE_ZONE_NAME" '.result[]? | select(.name == $d) | .status' <<<"$domains_json" | head -n1)"
           [ -n "$apex_status" ] || apex_status="not-attached"
@@ -125,11 +118,13 @@ jobs:
       - name: Attach modaryxmods.com to the existing Pages project
         if: ${{ inputs.mode == 'attach-pages' }}
         shell: bash
+        env:
+          ACCOUNT_ID: ${{ steps.preflight.outputs.account_id }}
         run: |
           set -euo pipefail
           api="https://api.cloudflare.com/client/v4"
           auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
-          domain_api="${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/domains"
+          domain_api="${api}/accounts/${ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/domains"
 
           domains_json="$(curl -fsS "${auth[@]}" "$domain_api")"
           test "$(jq -r '.success' <<<"$domains_json")" = "true"
@@ -171,128 +166,17 @@ jobs:
           echo "DNSSEC_NOT_CHANGED=yes"
           echo "OLD_DOMAIN_UNTOUCHED=getnovaforge.com"
 
-      - name: Verify and stage exact MODARYX public release
-        if: ${{ inputs.mode == 'deploy' }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-          import hashlib, json, re, shutil
-
-          root = Path('.').resolve()
-          stage = root / '_site'
-          sums_path = root / 'SHA256SUMS.txt'
-          build_path = root / 'public-build.json'
-          status_path = root / 'public-status.json'
-          generated = {'SHA256SUMS.txt', 'public-build.json'}
-          sum_re = re.compile(r'^([0-9a-f]{64})  \./(.+)$')
-
-          if 'MODARYX MODS' not in (root / 'index.html').read_text(encoding='utf-8'):
-              raise SystemExit('brand gate failed: index.html is not the prepared MODARYX MODS release')
-          if 'https://modaryxmods.com' not in (root / 'index.html').read_text(encoding='utf-8'):
-              raise SystemExit('canonical gate failed: modaryxmods.com is missing from index.html')
-
-          if stage.exists():
-              shutil.rmtree(stage)
-          stage.mkdir()
-          for required in (sums_path, build_path, status_path):
-              if not required.is_file():
-                  raise SystemExit(f'missing required release file: {required.name}')
-
-          raw_sums = sums_path.read_bytes()
-          build = json.loads(build_path.read_text(encoding='utf-8'))
-          status = json.loads(status_path.read_text(encoding='utf-8'))
-          if build.get('surface') != 'official-site':
-              raise SystemExit('public-build surface mismatch')
-          if build.get('source_revision') != 'withheld-private-source':
-              raise SystemExit('source revision disclosure contract mismatch')
-          if build.get('hash_algorithm') != 'sha256' or build.get('checksums') != 'SHA256SUMS.txt':
-              raise SystemExit('public-build checksum contract mismatch')
-          hosting = status.get('hosting', {})
-          if hosting.get('mandatory_monthly_budget_eur') != 0 or hosting.get('paid_plan_allowed') is not False:
-              raise SystemExit('EUR0 hosting contract mismatch')
-          if hosting.get('private_source_repository_must_remain_private') is not True:
-              raise SystemExit('source confidentiality contract missing')
-
-          expected = {}
-          for line in raw_sums.decode('utf-8').splitlines():
-              match = sum_re.fullmatch(line)
-              if not match:
-                  raise SystemExit(f'malformed checksum line: {line!r}')
-              digest, rel = match.groups()
-              if rel.startswith('/') or '..' in Path(rel).parts or rel in expected:
-                  raise SystemExit(f'unsafe/duplicate checksum path: {rel}')
-              expected[rel] = digest
-
-          for rel, digest in sorted(expected.items()):
-              src = root / rel
-              if not src.is_file() or src.is_symlink():
-                  raise SystemExit(f'missing or unsafe public file: {rel}')
-              actual = hashlib.sha256(src.read_bytes()).hexdigest()
-              if actual != digest:
-                  raise SystemExit(f'CHECKSUM_MISMATCH path={rel} expected={digest} actual={actual}')
-              dst = stage / rel
-              dst.parent.mkdir(parents=True, exist_ok=True)
-              shutil.copy2(src, dst)
-
-          actual_surface_digest = hashlib.sha256(raw_sums).hexdigest()
-          if build.get('surface_digest_sha256') != actual_surface_digest:
-              raise SystemExit('surface digest mismatch')
-
-          shutil.copy2(sums_path, stage / 'SHA256SUMS.txt')
-          shutil.copy2(build_path, stage / 'public-build.json')
-          actual_stage = sorted(p.relative_to(stage).as_posix() for p in stage.rglob('*') if p.is_file())
-          expected_stage = sorted([*expected.keys(), *generated])
-          if actual_stage != expected_stage:
-              raise SystemExit('staged release tree mismatch')
-          print(f'PASS_MODARYX_STAGE files={len(actual_stage)} exact_tree=yes sha256=yes eur0=yes')
-          PY
-
-      - name: Require active Pages custom domain before deployment
-        if: ${{ inputs.mode == 'deploy' }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          api="https://api.cloudflare.com/client/v4"
-          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
-          one_json="$(curl -fsS "${auth[@]}" "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/domains/${CLOUDFLARE_ZONE_NAME}")"
-          test "$(jq -r '.success' <<<"$one_json")" = "true"
-          test "$(jq -r '.result.status' <<<"$one_json")" = "active"
-          echo "PAGES_DOMAIN_GATE=active"
-
-      - name: Deploy verified MODARYX artifact to Cloudflare Pages
-        if: ${{ inputs.mode == 'deploy' }}
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy _site --project-name=${{ env.CLOUDFLARE_PROJECT_NAME }} --branch=main
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Verify production HTTPS after deployment
-        if: ${{ inputs.mode == 'deploy' }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          curl -fsSL --max-time 30 "https://${CLOUDFLARE_ZONE_NAME}/" -o /tmp/modaryx-index.html
-          grep -Fq 'MODARYX MODS' /tmp/modaryx-index.html
-          curl -fsSIL --max-time 30 "https://${CLOUDFLARE_ZONE_NAME}/site.webmanifest" >/dev/null
-          echo "CLOUDFLARE_PAGES_DEPLOY=verified"
-          echo "HTTPS_ROOT=verified"
-          echo "MANIFEST=reachable"
-          echo "OLD_DOMAIN_UNTOUCHED=getnovaforge.com"
-
       - name: Enable Cloudflare DNSSEC only after Pages and HTTPS are green
         if: ${{ inputs.mode == 'enable-dnssec' }}
         shell: bash
         env:
+          ACCOUNT_ID: ${{ steps.preflight.outputs.account_id }}
           ZONE_ID: ${{ steps.preflight.outputs.zone_id }}
         run: |
           set -euo pipefail
           api="https://api.cloudflare.com/client/v4"
           auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
-          domain_api="${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/domains/${CLOUDFLARE_ZONE_NAME}"
+          domain_api="${api}/accounts/${ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/domains/${CLOUDFLARE_ZONE_NAME}"
 
           one_json="$(curl -fsS "${auth[@]}" "$domain_api")"
           test "$(jq -r '.success' <<<"$one_json")" = "true"
