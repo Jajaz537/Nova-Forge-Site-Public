@@ -1,0 +1,62 @@
+name: Cloudflare MODARYX diagnostic probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/cloudflare-probe.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-cloudflare-probe
+  cancel-in-progress: true
+
+env:
+  CLOUDFLARE_ZONE_NAME: modaryxmods.com
+  CLOUDFLARE_PROJECT_NAME: nova-forge-site-public
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Probe Pages validation and apex DNS
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}")"
+          test "$(jq -r '.success' <<<"$zones")" = "true"
+          zone_id="$(jq -r '.result[0].id' <<<"$zones")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+
+          domain="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/domains/${CLOUDFLARE_ZONE_NAME}")"
+          test "$(jq -r '.success' <<<"$domain")" = "true"
+          echo "PAGES_DOMAIN_DETAIL"
+          jq '.result | {name,status,certificate_authority,validation_data,verification_data}' <<<"$domain"
+
+          records="$(curl -fsS "${auth[@]}" "${api}/zones/${zone_id}/dns_records?name=${CLOUDFLARE_ZONE_NAME}&per_page=100")"
+          test "$(jq -r '.success' <<<"$records")" = "true"
+          echo "APEX_DNS_RECORDS"
+          jq '[.result[] | {id,type,name,content,proxied,ttl}]' <<<"$records"
+
+          caa="$(curl -fsS "${auth[@]}" "${api}/zones/${zone_id}/dns_records?type=CAA&per_page=100")"
+          test "$(jq -r '.success' <<<"$caa")" = "true"
+          echo "CAA_RECORDS"
+          jq '[.result[] | {id,type,name,content,proxied,ttl,data}]' <<<"$caa"
+
+          echo "PUBLIC_RESOLUTION"
+          getent ahostsv4 "${CLOUDFLARE_ZONE_NAME}" || true
+          getent ahostsv6 "${CLOUDFLARE_ZONE_NAME}" || true
+
+          echo "HTTPS_HEAD"
+          curl -sSIL --max-time 20 "https://${CLOUDFLARE_ZONE_NAME}/" | sed -n '1,20p' || true
+
+          echo "DNSSEC_NOT_CHANGED=yes"
+          echo "OLD_DOMAIN_UNTOUCHED=getnovaforge.com"
