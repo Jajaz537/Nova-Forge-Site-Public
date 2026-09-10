@@ -1,4 +1,4 @@
 {
-  "mode": "status",
-  "reason": "Initial scoped-token preflight for MODARYX cutover"
+  "mode": "attach-pages",
+  "reason": "Attach modaryxmods.com to the verified existing Cloudflare Pages project after successful read-only preflight"
 }
