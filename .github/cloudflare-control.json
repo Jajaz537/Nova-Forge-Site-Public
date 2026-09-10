@@ -1,4 +1,4 @@
 {
-  "mode": "repair-apex-pages",
-  "reason": "Targeted fix: replace only the conflicting imported IONOS apex A/AAAA web records with the verified Cloudflare Pages CNAME; preserve mail records; keep DNSSEC and old domain untouched"
+  "mode": "enable-dnssec",
+  "reason": "Enable Cloudflare DNSSEC only after fresh proof that the Pages custom domain is active and HTTPS root is reachable"
 }
