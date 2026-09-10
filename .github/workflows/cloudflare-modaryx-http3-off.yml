@@ -1,0 +1,54 @@
+name: Cloudflare MODARYX disable HTTP3
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/cloudflare-http3-off.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-cloudflare-http3-off
+  cancel-in-progress: true
+
+env:
+  CLOUDFLARE_ZONE_NAME: modaryxmods.com
+
+jobs:
+  disable-http3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Disable HTTP3 only for MODARYX
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -sS "${auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}")"
+          test "$(jq -r '.success' <<<"$zones")" = "true"
+          zone_id="$(jq -r '.result[0].id' <<<"$zones")"
+          test -n "$zone_id"
+          test "$zone_id" != "null"
+
+          response="$(curl -sS -X PATCH "${auth[@]}" \
+            --data '{"value":"off"}' \
+            "${api}/zones/${zone_id}/settings/http3")"
+
+          echo "HTTP3_PATCH_RESULT"
+          jq '{success,errors,result:{id:.result.id,value:.result.value,editable:.result.editable}}' <<<"$response"
+          test "$(jq -r '.success' <<<"$response")" = "true"
+          test "$(jq -r '.result.id' <<<"$response")" = "http3"
+          test "$(jq -r '.result.value' <<<"$response")" = "off"
+
+          echo "HTTPS_AFTER_CHANGE"
+          curl -sSIL --max-time 20 "https://${CLOUDFLARE_ZONE_NAME}/" | sed -n '1,12p'
+
+          echo "HTTP3_DISABLED=yes"
+          echo "DNSSEC_NOT_CHANGED=yes"
+          echo "OLD_DOMAIN_UNTOUCHED=getnovaforge.com"
