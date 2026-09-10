@@ -11,6 +11,7 @@ on:
         options:
           - status
           - attach-pages
+          - repair-apex-pages
           - enable-dnssec
   push:
     branches: [main]
@@ -27,6 +28,7 @@ concurrency:
 env:
   CLOUDFLARE_ZONE_NAME: modaryxmods.com
   CLOUDFLARE_PROJECT_NAME: nova-forge-site-public
+  CLOUDFLARE_PAGES_HOST: nova-forge-site-public.pages.dev
   EXPECTED_NS_1: dawn.ns.cloudflare.com
   EXPECTED_NS_2: sage.ns.cloudflare.com
 
@@ -54,7 +56,7 @@ jobs:
             mode="$(jq -r '.mode' .github/cloudflare-control.json)"
           fi
           case "$mode" in
-            status|attach-pages|enable-dnssec) ;;
+            status|attach-pages|repair-apex-pages|enable-dnssec) ;;
             *) echo "Unsupported mode: $mode"; exit 1 ;;
           esac
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
@@ -184,6 +186,92 @@ jobs:
 
           if [ "$status" != "active" ]; then
             echo "Pages custom domain did not become active within the guarded wait window. No destructive action taken."
+            exit 1
+          fi
+
+          curl -fsSIL --max-time 30 "https://${CLOUDFLARE_ZONE_NAME}/" >/dev/null
+          echo "PAGES_DOMAIN_ACTIVE=yes"
+          echo "HTTPS_ROOT=reachable"
+          echo "DNSSEC_NOT_CHANGED=yes"
+          echo "OLD_DOMAIN_UNTOUCHED=getnovaforge.com"
+
+      - name: Replace conflicting IONOS apex web records with Pages CNAME
+        if: ${{ steps.request.outputs.mode == 'repair-apex-pages' }}
+        shell: bash
+        env:
+          ACCOUNT_ID: ${{ steps.preflight.outputs.account_id }}
+          ZONE_ID: ${{ steps.preflight.outputs.zone_id }}
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+          domain_api="${api}/accounts/${ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/domains/${CLOUDFLARE_ZONE_NAME}"
+          records_api="${api}/zones/${ZONE_ID}/dns_records"
+
+          curl -fsSIL --max-time 30 "https://${CLOUDFLARE_PAGES_HOST}/" >/dev/null
+          echo "PAGES_HOST_REACHABLE=yes"
+
+          domain_json="$(curl -fsS "${auth[@]}" "$domain_api")"
+          test "$(jq -r '.success' <<<"$domain_json")" = "true"
+          domain_status="$(jq -r '.result.status' <<<"$domain_json")"
+          verify_error="$(jq -r '.result.verification_data.error_message // ""' <<<"$domain_json")"
+          if [ "$domain_status" = "active" ]; then
+            echo "PAGES_DOMAIN_ALREADY_ACTIVE=yes"
+            exit 0
+          fi
+          test "$domain_status" = "pending" -o "$domain_status" = "initializing"
+          if [ -n "$verify_error" ] && [ "$verify_error" != "CNAME record not set" ]; then
+            echo "Unexpected Pages verification error: $verify_error"
+            exit 1
+          fi
+
+          records_json="$(curl -fsS "${auth[@]}" "${records_api}?name=${CLOUDFLARE_ZONE_NAME}&per_page=100")"
+          test "$(jq -r '.success' <<<"$records_json")" = "true"
+
+          cname_count="$(jq '[.result[] | select(.type == "CNAME")] | length' <<<"$records_json")"
+          a_count="$(jq '[.result[] | select(.type == "A")] | length' <<<"$records_json")"
+          aaaa_count="$(jq '[.result[] | select(.type == "AAAA")] | length' <<<"$records_json")"
+          test "$cname_count" -eq 0
+          test "$a_count" -eq 1
+          test "$aaaa_count" -eq 1
+          test "$(jq -r '.result[] | select(.type == "A") | .content' <<<"$records_json")" = "217.160.0.52"
+          test "$(jq -r '.result[] | select(.type == "AAAA") | .content' <<<"$records_json")" = "2001:8d8:100f:f000::200"
+
+          a_id="$(jq -r '.result[] | select(.type == "A") | .id' <<<"$records_json")"
+          aaaa_id="$(jq -r '.result[] | select(.type == "AAAA") | .id' <<<"$records_json")"
+
+          delete_a="$(curl -fsS -X DELETE "${auth[@]}" "${records_api}/${a_id}")"
+          test "$(jq -r '.success' <<<"$delete_a")" = "true"
+          delete_aaaa="$(curl -fsS -X DELETE "${auth[@]}" "${records_api}/${aaaa_id}")"
+          test "$(jq -r '.success' <<<"$delete_aaaa")" = "true"
+
+          cname_json="$(curl -fsS -X POST "${auth[@]}" "$records_api" --data "{\"type\":\"CNAME\",\"name\":\"${CLOUDFLARE_ZONE_NAME}\",\"content\":\"${CLOUDFLARE_PAGES_HOST}\",\"proxied\":true,\"ttl\":1}")"
+          test "$(jq -r '.success' <<<"$cname_json")" = "true"
+          test "$(jq -r '.result.type' <<<"$cname_json")" = "CNAME"
+          test "$(jq -r '.result.content' <<<"$cname_json")" = "$CLOUDFLARE_PAGES_HOST"
+          echo "APEX_PAGES_CNAME_CREATED=yes"
+          echo "MAIL_MX_TXT_UNTOUCHED=yes"
+
+          status=""
+          for attempt in $(seq 1 30); do
+            one_json="$(curl -fsS "${auth[@]}" "$domain_api")"
+            test "$(jq -r '.success' <<<"$one_json")" = "true"
+            status="$(jq -r '.result.status // "unknown"' <<<"$one_json")"
+            validation="$(jq -r '.result.validation_data.status // "unknown"' <<<"$one_json")"
+            verification="$(jq -r '.result.verification_data.status // "unknown"' <<<"$one_json")"
+            echo "attempt=${attempt} domain_status=${status} validation=${validation} verification=${verification}"
+            if [ "$status" = "active" ]; then
+              break
+            fi
+            if [ "$status" = "error" ] || [ "$status" = "blocked" ]; then
+              jq '.result | {name,status,validation_data,verification_data}' <<<"$one_json"
+              exit 1
+            fi
+            sleep 20
+          done
+
+          if [ "$status" != "active" ]; then
+            echo "Pages custom domain still pending after targeted DNS repair. DNSSEC remains untouched."
             exit 1
           fi
 
