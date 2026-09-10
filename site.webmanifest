@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "Nova Forge — Site officiel",
-  "short_name": "Nova Forge",
-  "description": "Site officiel public Nova Forge : OS, catalogue, recherche, création, communauté, sécurité, provenance et documentation publique.",
+  "name": "MODARYX MODS — Gaming, Mods & Modding Tools",
+  "short_name": "MODARYX MODS",
+  "description": "Plateforme publique MODARYX MODS : mods multigaming, catalogue, recherche, outils de modding, communauté, sécurité, provenance et Modaryx OS.",
   "lang": "fr",
   "dir": "ltr",
   "start_url": "./",
@@ -17,9 +17,9 @@
   "background_color": "#090b0e",
   "theme_color": "#0d1014",
   "categories": [
+    "games",
     "utilities",
-    "productivity",
-    "games"
+    "productivity"
   ],
   "prefer_related_applications": false,
   "icons": [
@@ -44,8 +44,8 @@
   ],
   "shortcuts": [
     {
-      "name": "Catalogue multigaming",
-      "short_name": "Catalogue",
+      "name": "Catalogue de mods multigaming",
+      "short_name": "Mods",
       "url": "./catalog.html",
       "icons": [
         {
@@ -56,7 +56,7 @@
       ]
     },
     {
-      "name": "Recherche locale",
+      "name": "Recherche de mods",
       "short_name": "Recherche",
       "url": "./search.html",
       "icons": [
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "name": "Creator Studio",
+      "name": "Modding Creator Studio",
       "short_name": "Studio",
       "url": "./creator-studio.html",
       "icons": [
@@ -80,8 +80,8 @@
       ]
     },
     {
-      "name": "Profiles & Passkeys",
-      "short_name": "Profiles",
+      "name": "Profils & Passkeys",
+      "short_name": "Profils",
       "url": "./profiles.html",
       "icons": [
         {
@@ -92,7 +92,7 @@
       ]
     },
     {
-      "name": "Communauté",
+      "name": "Communauté MODARYX MODS",
       "short_name": "Communauté",
       "url": "./community.html",
       "icons": [
@@ -104,7 +104,7 @@
       ]
     },
     {
-      "name": "Écosystème Nova Forge",
+      "name": "Écosystème MODARYX MODS",
       "short_name": "Écosystème",
       "url": "./ecosystem.html",
       "icons": [
