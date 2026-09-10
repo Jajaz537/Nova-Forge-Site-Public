@@ -1,0 +1,3 @@
+{
+  "reason": "Disable HTTP/3 temporarily to diagnose ERR_QUIC_PROTOCOL_ERROR on modaryxmods.com"
+}
