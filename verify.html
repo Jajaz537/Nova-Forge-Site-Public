@@ -9,6 +9,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
   <meta name="description" content="Vérificateur SHA-256 local MODARYX MODS : calculez une empreinte dans votre navigateur sans envoyer ni exécuter le fichier.">
   <title>Vérificateur SHA-256 — MODARYX MODS</title>
+  <link rel="canonical" href="https://modaryxmods.com/verify">
   <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
   <link rel="stylesheet" href="./assets/tokens.css">
@@ -19,19 +20,21 @@
   <script src="./assets/verify.js" defer></script>
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
   <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">
+  <link rel="stylesheet" href="./assets/modaryx-secondary-premium.css?v=20260911-1">
+  <link rel="stylesheet" href="./assets/modaryx-release-projects-premium.css?v=20260911-1">
 </head>
 <body>
   <a class="skip-link" href="#main">Aller au contenu</a>
   <header class="topbar">
     <a class="brand" href="./" aria-label="MODARYX MODS, accueil"><img class="brand-logo" src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="32" height="32"><span>MODARYX MODS</span></a>
-    <nav aria-label="Navigation de vérification"><a href="./">Site officiel</a><a href="./security.html">Sécurité & provenance</a><a href="./documentation.html#verification">Guide public</a></nav>
+    <nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./games.html">Jeux</a><a href="./catalog.html">Mods</a><a href="./creator-studio.html">Créer</a><a href="./ecosystem.html">Écosystème</a><a href="./community.html">Communauté</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a></nav>
   </header>
 
   <main id="main">
     <section class="hero verify-hero" aria-labelledby="verify-title">
       <div class="hero-copy">
-        <p class="eyebrow">Intégrité locale · SHA-256</p>
-        <h1 id="verify-title">Vérifier un fichier sans l’envoyer.</h1>
+        <p class="eyebrow">MODARYX MODS · intégrité locale</p>
+        <h1 id="verify-title">Une empreinte.<br>Une vérification locale.</h1>
         <p class="lede">Le navigateur lit le fichier sélectionné, calcule son SHA-256 localement et peut le comparer à une empreinte attendue. Le fichier n’est ni exécuté ni transmis par cet outil.</p>
       </div>
       <aside class="hero-panel" aria-label="Limites du vérificateur">
