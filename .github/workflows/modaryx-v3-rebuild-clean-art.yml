@@ -1,4 +1,4 @@
-name: MODARYX v3 diagnose clean reference art
+name: MODARYX v3 rebuild exact homepage scene
 
 on:
   push:
@@ -7,12 +7,13 @@ on:
     paths:
       - '.github/workflows/modaryx-v3-rebuild-clean-art.yml'
       - '.github/modaryx-v3-clean-art-trigger.json'
+      - '.github/v3-home-scene/**'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  diagnose-clean-art:
+  rebuild-home-scene:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -20,37 +21,41 @@ jobs:
         with:
           ref: site/modaryx-vf-premium-hd-v3
           fetch-depth: 0
-      - name: Diagnose staged clean RAR chunks
+      - name: Rebuild exact scene from reference board 02
         shell: bash
         run: |
           set -euo pipefail
+          cat \
+            .github/v3-home-scene/part-00.b64 \
+            .github/v3-home-scene/part-gap.b64 \
+            .github/v3-home-scene/part-01.b64 \
+            .github/v3-home-scene/part-02.b64 \
+            | tr -d '\n\r ' | base64 -d > assets/modaryx-reference-home-v3.webp
           python3 - <<'PY'
           from pathlib import Path
-          import base64, re, hashlib
-
-          paths=[Path(f'.github/rar-art-clean/part-{i:02d}.b64') for i in range(4)]
-          chunks=[]
-          for p in paths:
-              raw=p.read_text(encoding='utf-8')
-              clean=''.join(raw.split())
-              bad=sorted(set(re.sub(r'[A-Za-z0-9+/=]','',clean)))
-              print(f'{p.name}: raw={len(raw)} clean={len(clean)} mod4={len(clean)%4} bad={bad!r}')
-              print(f'  head={clean[:48]!r}')
-              print(f'  tail={clean[-48:]!r}')
-              chunks.append(clean)
-
-          joined=''.join(chunks)
-          print(f'JOINED_LEN={len(joined)} MOD4={len(joined)%4}')
-          print(f'JOINED_BAD={sorted(set(re.sub(r"[A-Za-z0-9+/=]","",joined)))!r}')
-          padded=joined + '='*((-len(joined))%4)
-          try:
-              data=base64.b64decode(padded, validate=False)
-              print(f'DECODED_BYTES={len(data)}')
-              print(f'DECODED_HEAD={data[:16]!r}')
-              print(f'DECODED_SHA256={hashlib.sha256(data).hexdigest()}')
-              if len(data)>=12:
-                  print(f'RIFF={data[:4]==b"RIFF"} WEBP={data[8:12]==b"WEBP"}')
-          except Exception as exc:
-              print(f'DECODE_ERROR={type(exc).__name__}: {exc}')
-              raise
+          import hashlib
+          p=Path('assets/modaryx-reference-home-v3.webp')
+          data=p.read_bytes()
+          sha=hashlib.sha256(data).hexdigest()
+          print(f'BYTES={len(data)}')
+          print(f'SHA256={sha}')
+          print(f'HEAD={data[:12]!r}')
+          assert len(data) == 40840, f'unexpected size {len(data)}'
+          assert data[:4] == b'RIFF' and data[8:12] == b'WEBP', 'not a WebP RIFF container'
+          assert int.from_bytes(data[4:8], 'little') + 8 == len(data), 'RIFF size mismatch'
+          assert sha == '0e13399167bf0e50ba21aba143a1379b39501265f4254654b7f7d5e1078e5101', 'reference asset hash mismatch'
+          print('V3_REFERENCE_HOME_ASSET=PASS')
           PY
+      - name: Commit exact reference scene
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/modaryx-reference-home-v3.webp
+          if git diff --cached --quiet; then
+            echo 'No asset change.'
+            exit 0
+          fi
+          git commit -m "feat(site): add exact v3 homepage reference scene"
+          git push origin HEAD:site/modaryx-vf-premium-hd-v3
