@@ -3,7 +3,7 @@ name: MODARYX VF performance QA
 on:
   push:
     branches:
-      - site/modaryx-vf-premium-hd-v2
+      - site/modaryx-vf-premium-hd-v3
     paths:
       - '.github/modaryx-vf-performance-qa-trigger.json'
 
@@ -17,11 +17,11 @@ jobs:
     env:
       ZONE_NAME: modaryxmods.com
       PROJECT_NAME: nova-forge-site-public
-      TARGET_BRANCH: site/modaryx-vf-premium-hd-v2
+      TARGET_BRANCH: site/modaryx-vf-premium-hd-v3
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: site/modaryx-vf-premium-hd-v2
+          ref: site/modaryx-vf-premium-hd-v3
           fetch-depth: 1
 
       - name: Verify critical local byte budgets
