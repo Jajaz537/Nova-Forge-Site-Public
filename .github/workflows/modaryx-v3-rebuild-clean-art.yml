@@ -22,8 +22,44 @@ jobs:
           ref: site/modaryx-vf-premium-hd-v3
           fetch-depth: 0
 
+      - name: Recover exact scene from Git history
+        id: recover
+        shell: bash
+        run: |
+          set -euo pipefail
+          target_sha='0e13399167bf0e50ba21aba143a1379b39501265f4254654b7f7d5e1078e5101'
+          candidate="$(mktemp)"
+          found='false'
+          found_object=''
+          found_path=''
+
+          while read -r oid path; do
+            [[ -n "$oid" ]] || continue
+            [[ "$(git cat-file -t "$oid" 2>/dev/null || true)" == 'blob' ]] || continue
+            [[ "$(git cat-file -s "$oid")" == '40840' ]] || continue
+            git cat-file blob "$oid" > "$candidate"
+            sha="$(sha256sum "$candidate" | awk '{print $1}')"
+            if [[ "$sha" == "$target_sha" ]]; then
+              cp "$candidate" assets/modaryx-reference-home-v3.webp
+              found='true'
+              found_object="$oid"
+              found_path="$path"
+              break
+            fi
+          done < <(git rev-list --objects --all)
+
+          echo "HISTORY_REFERENCE_FOUND=$found"
+          if [[ "$found" == 'true' ]]; then
+            echo "HISTORY_REFERENCE_OBJECT=$found_object"
+            echo "HISTORY_REFERENCE_PATH=$found_path"
+            echo 'complete=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'complete=false' >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Rebuild exact scene from reference board 02
         id: rebuild
+        if: steps.recover.outputs.complete != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -66,7 +102,7 @@ jobs:
           echo 'complete=true' >> "$GITHUB_OUTPUT"
 
       - name: Commit exact reference scene
-        if: steps.rebuild.outputs.complete == 'true'
+        if: steps.recover.outputs.complete == 'true' || steps.rebuild.outputs.complete == 'true'
         shell: bash
         run: |
           set -euo pipefail
