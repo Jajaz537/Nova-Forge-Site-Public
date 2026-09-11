@@ -69,7 +69,7 @@ body::before{
 .mx-home{overflow:hidden}
 .mx-hero{
   position:relative;
-  min-height:560px;
+  min-height:500px;
   display:grid;
   grid-template-columns:minmax(360px,31%) minmax(560px,51%) minmax(180px,18%);
   align-items:stretch;
@@ -84,9 +84,9 @@ body::before{
 .mx-hero::before{background:linear-gradient(180deg,rgba(5,7,10,.2),transparent 30%,rgba(5,7,10,.35));z-index:0}
 .mx-hero::after{inset:auto 0 0;height:1px;background:linear-gradient(90deg,transparent,#cfa95f 28%,#efd699 50%,#cfa95f 72%,transparent)}
 .mx-hero-copy,.mx-hero-scene,.mx-hero-manifesto{position:relative;z-index:1}
-.mx-hero-copy{display:flex;flex-direction:column;justify-content:center;padding:56px 24px 42px clamp(34px,5.4vw,92px)}
+.mx-hero-copy{display:flex;flex-direction:column;justify-content:center;padding:42px 24px 30px clamp(34px,5.4vw,92px)}
 .mx-kicker{margin:0 0 14px;color:#d0ad62;font-size:.64rem;letter-spacing:.27em;text-transform:uppercase}
-.mx-hero h1{margin:0;max-width:650px;font-family:Georgia,'Times New Roman',serif;font-weight:500;font-size:clamp(3.15rem,4.9vw,5.65rem);line-height:.88;letter-spacing:-.045em;color:#f1d99f;text-shadow:0 2px 22px rgba(0,0,0,.55)}
+.mx-hero h1{margin:0;max-width:650px;font-family:Georgia,'Times New Roman',serif;font-weight:500;font-size:clamp(3.05rem,4.55vw,5.1rem);line-height:.88;letter-spacing:-.045em;color:#f1d99f;text-shadow:0 2px 22px rgba(0,0,0,.55)}
 .mx-hero-subtitle{margin:17px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.2rem,1.6vw,1.7rem);color:#eadfc8}
 .mx-hero-lede{max-width:610px;margin:14px 0 0;color:#bcc0c4;font-size:.96rem;line-height:1.54}
 .mx-hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
@@ -95,11 +95,11 @@ body::before{
 .mx-button.secondary{border:1px solid rgba(225,199,132,.46);color:#e9dfc8;background:rgba(6,9,12,.60)}
 .mx-button.secondary small{display:block;margin-top:1px;color:#818a94;font-size:.59rem;letter-spacing:.04em}
 .mx-play{display:grid;place-items:center;width:30px;height:30px;border:1px solid rgba(238,211,145,.65);border-radius:50%;font-size:.62rem;color:#e9cb80}
-.mx-hero-values{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:28px;padding-top:15px;border-top:1px solid rgba(233,206,139,.17)}
+.mx-hero-values{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px;padding-top:12px;border-top:1px solid rgba(233,206,139,.17)}
 .mx-hero-values span{display:flex;align-items:center;gap:8px;color:#d7b66c;font-size:.7rem}
 .mx-hero-values b{color:#aeb4bb;font-size:.56rem;line-height:1.25;text-transform:uppercase;letter-spacing:.12em;font-weight:600}
 
-.mx-hero-scene{min-height:560px;isolation:isolate;background:linear-gradient(90deg,rgba(5,7,10,.28),transparent 11%,transparent 89%,rgba(5,7,10,.32)),url('./modaryx-home-babies.webp') 50% 50%/cover no-repeat}
+.mx-hero-scene{min-height:500px;isolation:isolate;background:linear-gradient(90deg,rgba(5,7,10,.28),transparent 11%,transparent 89%,rgba(5,7,10,.32)),url('./modaryx-home-babies.webp') 50% 50%/cover no-repeat}
 .mx-scene-frame{position:absolute;inset:0;background:radial-gradient(circle at 61% 40%,rgba(242,196,96,.15),transparent 30%),linear-gradient(90deg,rgba(5,8,11,.48),transparent 12%,transparent 84%,rgba(5,8,11,.26));border-inline:1px solid rgba(237,208,137,.04)}
 .mx-guardian-focus{display:none}
 .mx-guardian-focus::before,.mx-guardian-focus::after{content:"";position:absolute;bottom:4%;border:1px solid rgba(238,202,117,.27);background:radial-gradient(circle at 50% 30%,rgba(237,206,132,.14),rgba(7,10,14,.9) 66%);box-shadow:inset 0 0 45px rgba(205,168,91,.06),0 18px 40px rgba(0,0,0,.38)}
@@ -185,9 +185,9 @@ body::before{
   .mx-nav a{min-height:42px}
   .mx-header-actions .menu-button{display:inline-grid}
   .mx-search-link{display:none}
-  .mx-hero{grid-template-columns:46% 54%;min-height:600px}
+  .mx-hero{grid-template-columns:46% 54%;min-height:520px}
   .mx-hero-copy{padding-left:34px}
-  .mx-hero-scene{min-height:600px}
+  .mx-hero-scene{min-height:520px}
   .mx-hero-manifesto{grid-column:1/-1;display:grid;grid-template-columns:1fr auto auto;gap:24px;align-items:center;padding:18px 34px;border-top:1px solid rgba(205,168,91,.18)}
   .mx-hero-manifesto>p{margin:0;font-size:1.2rem;transform:none}.mx-hero-verbs{display:flex;gap:10px}.mx-hero-signet{margin:0;padding:0;border:0}
   .mx-growth{grid-template-columns:1fr}.mx-vision-card{max-width:none}
@@ -197,10 +197,10 @@ body::before{
   .mx-topbar{padding:0 14px}.mx-brand strong{font-size:.94rem}.mx-brand small{display:none}.mx-join{display:none}
   .mx-nav[data-open="true"]{grid-template-columns:1fr 1fr}
   .mx-hero{grid-template-columns:1fr;min-height:auto;background-position:62% center}
-  .mx-hero-copy{padding:58px 20px 30px;background:linear-gradient(180deg,rgba(6,8,11,.76),rgba(6,8,11,.94))}
-  .mx-hero h1{font-size:clamp(3rem,14vw,4.75rem)}
+  .mx-hero-copy{padding:40px 20px 24px;background:linear-gradient(180deg,rgba(6,8,11,.76),rgba(6,8,11,.94))}
+  .mx-hero h1{font-size:clamp(2.85rem,13vw,4.15rem)}
   .mx-hero-values{grid-template-columns:1fr 1fr}
-  .mx-hero-scene{min-height:360px;background:linear-gradient(180deg,rgba(6,8,11,.06),rgba(6,8,11,.42)),url('./modaryx-home-babies.webp') 50% 50%/cover no-repeat}
+  .mx-hero-scene{min-height:320px;background:linear-gradient(180deg,rgba(6,8,11,.06),rgba(6,8,11,.42)),url('./modaryx-home-babies.webp') 50% 50%/cover no-repeat}
   .mx-guardian-focus{left:4%;right:4%;bottom:4%;height:78%}
   .mx-hero-manifesto{grid-template-columns:1fr;padding:22px 20px}.mx-hero-verbs{flex-wrap:wrap}.mx-hero-signet{display:none}
   .mx-ecosystem{padding-inline:14px}.mx-section-rule{gap:9px}.mx-section-rule h2{font-size:.57rem;letter-spacing:.2em}
