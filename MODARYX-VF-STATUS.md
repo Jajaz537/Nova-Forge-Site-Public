@@ -46,20 +46,22 @@
 - Fresh artifact `modaryx-vf-browser-qa-v3`, id `10270366550`, digest `sha256:b0ff66f24e5ff88a741337f0bdfd4246092c9a2dc60a8ee412b0f997aa857551`, contains the responsive proof set.
 - **This is not yet a visual PASS.** Board 03 still requires fresh human comparison against the authoritative source board; the central baby pair currently reuses the exact Stage-I board-02 baby scene and therefore must not be claimed as exact board-03 artwork.
 
-## Board 01 — companions implementation / exact-art gate
+## Board 01 — companions implementation / exact-art proof
 
-- `companions.html` now provides a dedicated Board-01-derived premium surface with the four locked stages **Bébés / Jeunes / Forgés / Royaux**, the shared-bond sequence and explicit continuity wording.
+- `companions.html` provides a dedicated Board-01-derived premium surface with the four locked stages **Bébés / Jeunes / Forgés / Royaux**, the shared-bond sequence and explicit continuity wording.
 - `assets/companions-v3.css` provides the responsive dark-fantasy / forged-gold composition for desktop, tablet and mobile.
-- Exact Board-01 stage crops are intentionally referenced as `assets/companions-stage-1.webp` through `assets/companions-stage-4.webp`; they are **not** to be replaced by generated or guessed artwork.
-- Source staging lives only under `.github/v3-companions-stage-art/`.
-- A fail-closed workflow, `.github/workflows/modaryx-v3-companions-stage-art.yml`, now refuses to decode/commit until all four stages each have exactly three ordered Base64 chunks and the exact expected Base64 length.
-- Locked exact stage contracts:
-  - Stage I: **36,268 Base64 chars / 32,084 bytes / SHA-256 `af8e9596cfe07640f63c49e38784a33a28d4f6633220d256bb07157ee2fe34ae`**.
-  - Stage II: **35,224 Base64 chars / 33,970 bytes / SHA-256 `1f942dbadd93ca9e0518a12cfbad45bdcae2bee4bd6c358d17dc692428b2c71e`**.
-  - Stage III: **40,084 Base64 chars / 36,950 bytes / SHA-256 `7e7785f2b4e2806b93055652ae002325810e027ccfc7987bac6957846c0797f7`**.
-  - Stage IV: **42,620 Base64 chars / 39,364 bytes / SHA-256 `84ee3bc895726dba85f489a42399151b585124d2d58c192a013b3effb3af6b3d`**.
-- Only Stage-I source chunk `stage1-part-00.b64` is currently staged in Git, so the workflow must report the source incomplete and skip asset publication until the remaining exact chunks are present.
-- **Board 01 has no visual PASS yet.** Exact asset reconstruction plus fresh responsive screenshots and human comparison are still required.
+- Exact Board-01 stage crops are published only as `assets/companions-stage-1.webp` through `assets/companions-stage-4.webp`; generated or guessed replacements remain forbidden.
+- Source staging lives only under `.github/v3-companions-stage-art/` and is validated fail-closed before any asset commit.
+- Locked **HD 520 px / Q75** contracts now proven natively by workflow:
+  - Stage I: **36,268 Base64 chars / 27,200 bytes / SHA-256 `e33e75f1d84f8fce1c712d44ec9867d658aca340df75b8e5576089dd50ef4b74`**.
+  - Stage II: **35,224 Base64 chars / 26,418 bytes / SHA-256 `23e74b894c589ac33efa3b084db194d8cd746e1c36d36019612376094c0debfe`**.
+  - Stage III: **40,084 Base64 chars / 30,062 bytes / SHA-256 `12f750fe36354ac8c9ff2239f085c34cc68fe2e190111e596fdf97c8cc8ad03a`**.
+  - Stage IV: **42,620 Base64 chars / 31,964 bytes / SHA-256 `1b7564a565b2a5ee3a772c8bb5a1e345aa8d087fccbc18900cc7171d3ca2994c`**.
+- Stages I–III use three ordered source chunks. Stage IV uses four ordered chunks because the middle 15,000-character source block is intentionally split into two 7,500-character pieces to avoid connector truncation; concatenation still yields exactly 42,620 Base64 characters.
+- Targeted exact-art run `34624861467` completed **successfully** and emitted `MODARYX_BOARD01_STAGE_1=PASS` through `MODARYX_BOARD01_STAGE_4=PASS`, plus `MODARYX_BOARD01_ALL_STAGES=PASS`.
+- The validated assets were committed by the workflow to the preview branch at commit `4bb1247` (`assets(site): rebuild exact board-01 companion stages`).
+- Browser QA has been extended to capture `companions.html` at **1440×900**, **1024×768** and **390×844**, with dedicated DOM markers for all four stages. A technical browser PASS does not constitute human visual approval.
+- **Board 01 has no human visual PASS yet.** Fresh responsive screenshots must still be inspected against the authoritative board 01.
 
 ## OS Public / Founder isolation rule
 
