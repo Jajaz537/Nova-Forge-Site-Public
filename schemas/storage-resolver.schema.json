@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:nova-forge:schemas:storage-resolver:v1",
-  "title": "MODARYX MODS Provider-Neutral Storage Resolver",
+  "title": "Nova Forge Provider-Neutral Storage Resolver",
   "description": "Provider-neutral resolution contract. Logical identity is digest/manifest based and never changes when storage provider or mirror changes.",
   "type": "object",
   "additionalProperties": false,

@@ -23,7 +23,6 @@
   <link rel="alternate" type="application/json" href="./public-status.json" title="MODARYX MODS — statut public">
   <link rel="stylesheet" href="./assets/tokens.css">
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
-  <link rel="stylesheet" href="./assets/modaryx-vf.css?v=20260911-2">
   <script src="./assets/shell.js" defer></script>
   <script src="./assets/app.js" defer></script>
   <script src="./assets/nova-premium-hd.js" defer></script>
@@ -32,84 +31,120 @@
   <a class="skip-link" href="#main">Aller au contenu</a>
   <noscript><p class="noscript-note">JavaScript est désactivé. Le contenu officiel reste accessible ; les démonstrations locales enrichies sont simplement indisponibles.</p></noscript>
 
-  <header class="mx-topbar">
-    <a class="mx-brand" href="#top" aria-label="MODARYX MODS, accueil">
-      <img src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="42" height="42">
-      <span><strong>MODARYX MODS</strong><small>Gaming • Mods • Modding Tools</small></span>
+  <header class="nova-topbar">
+    <a class="brand" href="#top" aria-label="MODARYX MODS, accueil">
+      <img src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="34" height="34">
+      <span class="brand-word">MODARYX MODS<small>Gaming · Mods · Modding Tools</small></span>
     </a>
-    <nav class="mx-nav" data-primary-nav data-open="false" aria-label="Navigation principale">
-      <a class="active" href="#top">Accueil</a>
-      <a href="./games.html">Jeux</a>
-      <a href="./catalog.html">Mods</a>
+    <nav class="nova-nav" data-primary-nav data-open="false" aria-label="Navigation principale">
+      <a href="#catalogue">Mods</a>
       <a href="./creator-studio.html">Créer</a>
       <a href="./ecosystem.html">Écosystème</a>
       <a href="./security.html">Sécurité</a>
       <a href="./documentation.html">Documentation</a>
     </nav>
-    <div class="mx-header-actions">
-      <a class="mx-search-link" href="./search.html" aria-label="Rechercher sur MODARYX MODS">⌕ <span>Rechercher…</span></a>
-      <a class="mx-account-link" href="./profiles.html">Se connecter</a>
-      <a class="mx-join" href="./community.html">Rejoindre Modaryx <span>→</span></a>
+    <div class="header-actions">
+      <a class="button small header-download" href="#downloads">Téléchargements</a>
       <button class="menu-button" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-menu-button><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <main id="main" class="site-main mx-home">
-    <section class="mx-hero" id="top" aria-labelledby="hero-title">
-      <div class="mx-hero-copy">
-        <p class="mx-kicker">Jeux • Mods • Création • Communauté</p>
-        <h1 id="hero-title">Forge ton<br>royaume numérique.</h1>
-        <p class="mx-hero-subtitle">Deux compagnons. Une même ascension.</p>
-        <p class="mx-hero-lede">Un écosystème gaming, mods et outils de modding construit pour les joueurs, créateurs et communautés qui veulent bâtir des mondes plus grands.</p>
-        <div class="mx-hero-actions">
-          <a class="mx-button primary" href="./community.html">Rejoindre Modaryx <span>→</span></a>
-          <a class="mx-button secondary" href="./ecosystem.html"><span class="mx-play">▶</span><span>Voir notre univers<small>Découvrir l’écosystème</small></span></a>
+  <main id="main" class="site-main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">MODARYX MODS · Gaming • Mods • Modding Tools</p>
+          <h1 class="display" id="hero-title">Vos jeux.<br><span class="accent">Vos mods. Votre univers.</span></h1>
+          <p class="lede">MODARYX MODS réunit mods, créations, outils de modding et confiance vérifiable dans une plateforme multigaming pensée pour évoluer avec de nouveaux jeux. Le site public reste cohérent avec Modaryx OS et ses garanties locales.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="./catalog.html">Explorer les mods</a>
+            <a class="button ghost" href="./creator-studio.html">Créer un projet</a>
+          </div>
+          <div class="hero-proof" aria-label="Principes publics">
+            <span><i></i>Multigaming</span><span><i></i>Fail-closed</span><span><i></i>Provenance vérifiable</span><span><i></i>Outils de modding</span>
+          </div>
         </div>
-        <div class="mx-hero-values" aria-label="Valeurs MODARYX MODS">
-          <span>◈ <b>Des mondes<br>plus grands</b></span>
-          <span>✦ <b>Plus créatif</b></span>
-          <span>◇ <b>Plus sûr</b></span>
-          <span>✧ <b>Ensemble</b></span>
+
+        <div class="os-stage" aria-label="Aperçu conceptuel de Modaryx OS">
+          <div class="os-window">
+            <div class="os-chrome"><span></span><span></span><span></span><strong>Modaryx OS · Public</strong></div>
+            <div class="os-layout">
+              <nav class="os-nav" aria-label="Aperçu de navigation OS">
+                <div class="os-nav-title"><img src="./favicon.svg?v=modaryx-visible-m-3" alt=""><span>Modaryx</span></div>
+                <a class="active" href="#os"><span>Accueil</span></a>
+                <a href="#catalogue"><span>Mods</span></a>
+                <a href="./ecosystem.html"><span>Modules</span></a>
+                <a href="./security.html"><span>Confiance</span></a>
+                <a class="guide-link" href="./documentation.html"><span>Guide</span></a>
+              </nav>
+              <div class="os-workspace">
+                <div class="workspace-bar"><div><small>Workspace</small><strong>Centre Modaryx</strong></div><span class="os-state">Local · prêt</span></div>
+                <div class="workspace-feature">
+                  <span class="mini-kicker">Avalon</span>
+                  <h3>Tout ce qui compte,<br>dans une seule surface.</h3>
+                  <p>Des états lisibles, des actions explicites et une navigation cohérente entre découverte, création et confiance.</p>
+                  <div class="metric-row">
+                    <div class="metric"><small>Identité</small><strong>Public</strong></div>
+                    <div class="metric"><small>Confiance</small><strong>Fail-closed</strong></div>
+                    <div class="metric"><small>Guide</small><strong>Contextuel</strong></div>
+                  </div>
+                </div>
+                <div class="workspace-list">
+                  <div><i></i><span>Catalogue multigaming</span><em>disponible</em></div>
+                  <div><i></i><span>Provenance & signatures</span><em>vérifiables</em></div>
+                  <div><i></i><span>Smart Profile</span><em>local</em></div>
+                </div>
+              </div>
+              <aside class="os-guide">
+                <div class="guide-orb">M</div><small>Modaryx Guide</small><h4>Votre prochain pas</h4>
+                <p>Explorez d’abord l’écosystème. Modaryx Guide explique ensuite les capacités, les limites et les preuves disponibles.</p>
+                <a class="guide-action" href="./ecosystem.html">Voir l’écosystème →</a>
+              </aside>
+            </div>
+          </div>
+          <div class="stage-glow"></div>
         </div>
       </div>
-
-      <div class="mx-hero-scene" role="img" aria-label="Loup et Dragon devant le royaume MODARYX, illustration issue de la maquette de référence">
-        <div class="mx-scene-frame"></div>
-        <div class="mx-guardian-focus" aria-hidden="true"><span class="wolf-orbit"></span><span class="dragon-orbit"></span><i></i></div>
-      </div>
-
-      <aside class="mx-hero-manifesto" aria-label="Manifeste MODARYX MODS">
-        <p>Plus qu’un jeu.<br>Des mondes<br>plus grands.<br><em>Ensemble.</em></p>
-        <div class="mx-hero-verbs"><span>JOUER</span><span>CRÉER</span><span>MODDER</span><span>PARTAGER</span><span>GRANDIR</span></div>
-        <div class="mx-hero-signet"><b>M</b><small>MODARYX MODS</small></div>
-      </aside>
     </section>
 
-    <section class="mx-ecosystem" aria-labelledby="mx-ecosystem-title">
-      <div class="mx-section-rule"><span></span><h2 id="mx-ecosystem-title">UN ÉCOSYSTÈME POUR TOUS LES MONDES</h2><span></span></div>
-      <div class="mx-portal-grid">
-        <a class="mx-portal-card mods" href="./catalog.html"><div class="mx-card-art"></div><div class="mx-card-copy"><span class="mx-card-icon">⌁</span><h3>Mods</h3><small>JOUE ET PERSONNALISE</small><p>Découvre, installe et personnalise tes jeux avec des créations uniques.</p><b>→</b></div></a>
-        <a class="mx-portal-card create" href="./creator-studio.html"><div class="mx-card-art"></div><div class="mx-card-copy"><span class="mx-card-icon">✦</span><h3>Créer</h3><small>CRÉE SANS LIMITES</small><p>Des outils puissants et lisibles pour donner vie à tes idées.</p><b>→</b></div></a>
-        <a class="mx-portal-card ecosystem" href="./ecosystem.html"><div class="mx-card-art"></div><div class="mx-card-copy"><span class="mx-card-icon">≋</span><h3>Écosystème</h3><small>LES OUTILS QUI RELIENT</small><p>Explore les surfaces qui relient joueurs, créateurs et projets.</p><b>→</b></div></a>
-        <a class="mx-portal-card security" href="./security.html"><div class="mx-card-art"></div><div class="mx-card-copy"><span class="mx-card-icon">◇</span><h3>Sécurité</h3><small>LA CONFIANCE D’ABORD</small><p>Provenance, états explicites et sécurité sans faux badge.</p><b>→</b></div></a>
-        <a class="mx-portal-card docs" href="./documentation.html"><div class="mx-card-art"></div><div class="mx-card-copy"><span class="mx-card-icon">▤</span><h3>Documentation</h3><small>GUIDES ET RESSOURCES</small><p>Guides, tutoriels et ressources pour comprendre et progresser.</p><b>→</b></div></a>
-      </div>
-    </section>
+    <div class="trust-rail" aria-label="Garanties publiques">
+      <div class="shell"><span><b></b>Navigation publique sans compte</span><span><b></b>Aucune télémétrie distante requise</span><span><b></b>Smart Profile local</span><span><b></b>Aucun exécutable lancé par le site</span></div>
+    </div>
 
-    <section class="mx-growth" aria-labelledby="mx-growth-title">
-      <div class="mx-growth-main">
-        <div class="mx-section-rule compact"><span></span><div><h2 id="mx-growth-title">ILS GRANDISSENT AVEC TOI</h2><p>De petits compagnons, pour un destin plus grand.</p></div><span></span></div>
-        <div class="mx-growth-track">
-          <article><div class="mx-growth-art stage-one"></div><div><span>I</span><h3>Bébés</h3><p>La naissance du lien</p></div></article>
-          <article><div class="mx-growth-art stage-two"></div><div><span>II</span><h3>Jeunes</h3><p>L’apprentissage du monde</p></div></article>
-          <article><div class="mx-growth-art stage-three"></div><div><span>III</span><h3>Forgés</h3><p>L’épreuve fait la force</p></div></article>
-          <article><div class="mx-growth-art stage-four"></div><div><span>IV</span><h3>Royaux</h3><p>Un royaume à bâtir ensemble</p></div></article>
+    <section class="editions" id="os" aria-labelledby="editions-title">
+      <div class="shell">
+        <div class="section-head"><div><p class="eyebrow">Modaryx OS Public</p><h2 class="section-title" id="editions-title">Une expérience claire.<br>Un univers cohérent.</h2></div><p class="section-copy">Le site présente l’expérience publique MODARYX MODS et les capacités destinées aux joueurs et créateurs, dans la continuité directe de Modaryx OS.</p></div>
+        <div class="edition-duo">
+          <article class="edition-panel public">
+            <span class="edition-tag">Public</span><h3>Calme.<br>Lisible.<br>Souverain.</h3><p>L’expérience publique privilégie la découverte, la compatibilité, la sécurité, la provenance et les outils locaux sans dépendance distante obligatoire.</p>
+            <div class="edition-bottom"><strong>Modaryx OS Public</strong><span>Surface officielle</span></div>
+          </article>
+          <article class="edition-panel universe">
+            <span class="edition-tag">Univers</span><h3>Explorer.<br>Créer.<br>Protéger.</h3><p>Mods, outils, catalogue, provenance et Modaryx Guide partagent la même identité afin que chaque parcours reste fluide, compréhensible et cohérent.</p>
+            <div class="edition-bottom"><strong>Écosystème MODARYX MODS</strong><span>Expérience unifiée</span></div>
+          </article>
         </div>
       </div>
-      <aside class="mx-vision-card"><div class="mx-vision-mark">M</div><div><small>MÊME PASSION.<br>PLUS DE POSSIBILITÉS.</small><p>MODARYX MODS est un écosystème pour les joueurs, les créateurs et les communautés qui rêvent plus grand.</p><a href="./ecosystem.html">Découvrir notre vision <span>→</span></a></div></aside>
     </section>
 
-    <div class="mx-bottom-band" aria-label="Univers MODARYX MODS"><strong>MODARYX MODS</strong><span>GAMING</span><span>MODS</span><span>OUTILS</span><span>CRÉATION</span><span>COMMUNAUTÉ</span><span>SÉCURITÉ</span></div>
+    <section class="chapters" aria-label="Principes MODARYX MODS">
+      <div class="shell">
+        <article class="chapter">
+          <div class="chapter-copy"><p class="eyebrow">01 · Local-first</p><h2 class="section-title">Le site complète l’OS.<br>Il ne le remplace pas.</h2><p>Catalogue local, profils, historique et outils restent utiles même si le site est indisponible. La surface web reste indépendante et ne devient jamais une dépendance critique du système.</p><div class="chapter-points"><div><span>01</span><div><strong>Autonomie</strong><small>Le cœur utilisateur continue de fonctionner localement.</small></div></div><div><span>02</span><div><strong>Actions explicites</strong><small>Aucune mutation sensible déclenchée en silence.</small></div></div></div></div>
+          <div class="chapter-visual"><div class="local-map"><div class="local-node"><small>Modaryx OS</small><strong>Bibliothèque locale</strong><em>Autonome</em></div><div class="link-line"></div><div class="local-node"><small>MODARYX MODS</small><strong>Découverte & preuves</strong><em>Complémentaire</em></div></div></div>
+        </article>
+
+        <article class="chapter">
+          <div class="chapter-copy"><p class="eyebrow">02 · Trust fabric</p><h2 class="section-title">La confiance est une chaîne,<br>pas un badge décoratif.</h2><p>Source, créateur, artefact, signature, provenance et sécurité restent des relations vérifiables. Une information inconnue reste inconnue plutôt que d’être embellie.</p><div class="chapter-points"><div><span>01</span><div><strong>Provenance explicite</strong><small>Identité et lignée restent liées au contenu.</small></div></div><div><span>02</span><div><strong>Fail-closed</strong><small>Une preuve manquante ne devient jamais une validation implicite.</small></div></div></div></div>
+          <div class="chapter-visual"><div class="trust-graph"><div class="trust-lines"></div><div class="trust-node creator"><strong>Créateur</strong><small>identité</small></div><div class="trust-node artifact"><strong>Artefact</strong><small>hash attendu</small></div><div class="trust-node signature"><strong>Signature</strong><small>preuve</small></div><div class="trust-node provenance"><strong>Provenance</strong><small>lignée</small></div><div class="trust-node security"><strong>Sécurité</strong><small>inspection</small></div></div></div>
+        </article>
+
+        <article class="chapter">
+          <div class="chapter-copy"><p class="eyebrow guide">03 · Modaryx Guide</p><h2 class="section-title">Une aide qui explique<br>avant d’agir.</h2><p>Modaryx Guide reste contextuel : il distingue le sûr, le risqué et l’inconnu, explique pourquoi et laisse les décisions importantes sous le contrôle de l’utilisateur.</p><div class="chapter-points"><div><span>01</span><div><strong>Compréhensible</strong><small>Cause, action et conséquence sont séparées.</small></div></div><div><span>02</span><div><strong>Borné</strong><small>Le Guide ne remplace pas les frontières de sécurité.</small></div></div></div></div>
+          <div class="chapter-visual"><div class="guide-surface"><div class="guide-rail"><b>M</b><b>?</b><b>✓</b></div><div class="guide-chat"><div class="bubble">Cette ressource est-elle sûre à utiliser ?</div><div class="bubble nova">Je peux confirmer l’identité et la provenance disponibles. La compatibilité reste estimée : aucune stabilité n’est promise sans preuve.</div><span class="guide-chip">Explication · sans action automatique</span></div></div></div>
+        </article>
+      </div>
+    </section>
 
     <section class="catalogue-zone" id="catalogue" aria-labelledby="catalogue-title">
       <div class="shell catalogue-shell">

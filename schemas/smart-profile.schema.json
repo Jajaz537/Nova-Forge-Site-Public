@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:nova-forge:schemas:web-smart-profile:v1",
-  "title": "MODARYX MODS Web Smart Profile",
-  "description": "Browser-local observation contract. Evidence labels describe only what the browser exposed or what MODARYX MODS estimated from it; they never guarantee FPS or stability.",
+  "title": "Nova Forge Web Smart Profile",
+  "description": "Browser-local observation contract. Evidence labels describe only what the browser exposed or what Nova Forge estimated from it; they never guarantee FPS or stability.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schemaVersion", "execution", "observations", "recommendation", "guarantees"],

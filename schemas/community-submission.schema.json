@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://nova-forge.invalid/schemas/community-submission.schema.json",
-  "title": "MODARYX MODS Local Community Submission V1",
+  "title": "Nova Forge Local Community Submission V1",
   "description": "Portable local-only draft for a future community submission. It is not a publication, moderation receipt, account assertion or network write.",
   "type": "object",
   "additionalProperties": false,

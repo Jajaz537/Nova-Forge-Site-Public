@@ -3,19 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#07090c">
+  <meta name="theme-color" content="#171715">
   <meta name="color-scheme" content="dark">
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
-  <meta name="description" content="Recherche locale MODARYX MODS : jeux, GTA 6, RDR2, mods, outils et documentation dans un index public pré-calculé, sans service distant obligatoire.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="fr_FR">
-  <meta property="og:site_name" content="MODARYX MODS">
-  <meta property="og:title" content="Recherche — MODARYX MODS">
-  <meta property="og:description" content="Rechercher localement dans les hubs de jeux, le catalogue, Creator Studio, la sécurité et la documentation MODARYX MODS.">
-  <meta property="og:url" content="https://modaryxmods.com/search">
+  <meta name="description" content="Recherche locale MODARYX MODS : index public pré-calculé, sans service distant obligatoire.">
   <title>Recherche — MODARYX MODS</title>
-  <link rel="canonical" href="https://modaryxmods.com/search">
   <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
   <link rel="stylesheet" href="./assets/tokens.css">
@@ -26,43 +19,32 @@
   <script src="./assets/search.js" defer></script>
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
   <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">
-  <link rel="stylesheet" href="./assets/modaryx-secondary-premium.css?v=20260911-1">
-  <link rel="stylesheet" href="./assets/modaryx-trust-community-premium.css?v=20260911-1">
 </head>
 <body>
   <a class="skip-link" href="#main">Aller au contenu</a>
   <header class="topbar">
     <a class="brand" href="./index.html" aria-label="MODARYX MODS, accueil"><img class="brand-logo" src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="32" height="32"><span>MODARYX MODS</span></a>
-    <nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./games.html">Jeux</a><a href="./catalog.html">Mods</a><a href="./creator-studio.html">Créer</a><a href="./ecosystem.html">Écosystème</a><a href="./community.html">Communauté</a><a href="./search.html" aria-current="page">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a></nav>
+    <nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./catalog.html">Catalogue</a><a href="./search.html" aria-current="page">Recherche</a><a href="./community.html">Communauté</a><a href="./security.html">Sécurité</a></nav>
   </header>
   <main id="main" class="search-page">
     <section class="search-hero" aria-labelledby="search-title">
-      <div><p class="eyebrow">MODARYX MODS · recherche locale</p><h1 id="search-title">Trouver un monde,<br>sans perdre le contrôle.</h1><p class="lede">L’index public V1 est pré-calculé et la recherche s’exécute dans ce navigateur. Jeux, GTA 6, Red Dead Redemption 2, catalogue, outils, profils, sécurité et documentation restent accessibles sans moteur distant obligatoire.</p></div>
+      <div><p class="eyebrow">Recherche · zero-cost · local-first</p><h1 id="search-title">Chercher sans service distant obligatoire.</h1><p class="lede">L’index V1 est un fichier public pré-calculé. La recherche s’exécute dans ce navigateur et reste utilisable hors ligne une fois la surface mise en cache.</p></div>
       <aside class="panel"><strong>Adapter externe : optionnel.</strong><p>Un futur moteur externe pourra compléter l’index local, mais ne remplacera jamais l’identité des résultats et ne sera pas requis pour le cœur.</p></aside>
     </section>
-    <div class="trust-portal-row" aria-label="Entrées rapides MODARYX">
-      <a href="./games.html"><small>Jeux</small><strong>Explorer les hubs</strong><span>GTA 6, RDR2 et les futurs univers multigaming.</span><b>Voir les jeux →</b></a>
-      <a href="./gta-6/mods/"><small>Jeu prioritaire</small><strong>GTA 6 Mods</strong><span>Catégories, guides, outils et futurs contenus publiés.</span><b>Entrer dans le hub →</b></a>
-      <a href="./red-dead-redemption-2/mods/"><small>Monde vivant</small><strong>RDR2 Mods</strong><span>Immersion, visuels, gameplay et outils avec états explicites.</span><b>Entrer dans le hub →</b></a>
-    </div>
     <section class="section" aria-labelledby="query-title">
-      <div class="section-heading"><div><p class="eyebrow">Index public</p><h2 id="query-title">Recherche locale</h2></div><span class="badge" id="search-count" aria-live="polite">13 entrées statiques</span></div>
-      <label class="field" for="site-search"><span>Rechercher</span><input id="site-search" type="search" autocomplete="off" placeholder="GTA 6, RDR2, catalogue, passkeys, provenance…"></label>
+      <div class="section-heading"><div><p class="eyebrow">Index public</p><h2 id="query-title">Recherche locale</h2></div><span class="badge" id="search-count" aria-live="polite">9 entrées statiques</span></div>
+      <label class="field" for="site-search"><span>Rechercher</span><input id="site-search" type="search" autocomplete="off" placeholder="Catalogue, passkeys, Skyrim, provenance…"></label>
       <p id="search-state" role="status" aria-live="polite">Le répertoire statique reste disponible. Le filtre local s’active si JavaScript est disponible.</p>
       <div id="search-results" class="search-results">
-        <a class="search-result" href="./games.html"><strong>Jeux & Mods</strong><span>Hubs multigaming MODARYX MODS.</span></a>
-        <a class="search-result" href="./gta-6/mods/"><strong>GTA 6 Mods</strong><span>Hub éditorial et structurel dédié à GTA 6.</span></a>
-        <a class="search-result" href="./red-dead-redemption-2/mods/"><strong>Red Dead Redemption 2 Mods</strong><span>Hub RDR2 pour immersion, gameplay et outils.</span></a>
         <a class="search-result" href="./catalog.html"><strong>Catalogue multigaming</strong><span>Mods, packs et expériences publics.</span></a>
         <a class="search-result" href="./creator-studio.html"><strong>Creator Studio</strong><span>Manifestes locaux et export déterministe.</span></a>
-        <a class="search-result" href="./profiles.html"><strong>Profils & Passkeys</strong><span>Identité publique et frontière WebAuthn.</span></a>
+        <a class="search-result" href="./profiles.html"><strong>Profiles & Passkeys</strong><span>Identité publique et frontière WebAuthn.</span></a>
         <a class="search-result" href="./community.html"><strong>Communauté</strong><span>Abuse Shield et modération avant écriture.</span></a>
         <a class="search-result" href="./security.html"><strong>Sécurité & provenance</strong><span>Confiance fail-closed et vérification.</span></a>
-        <a class="search-result" href="./documentation.html"><strong>Documentation & Modaryx Guide</strong><span>Comprendre les preuves et limites avant d’agir.</span></a>
       </div>
       <div id="search-empty" class="panel" hidden><h3>Aucun résultat local</h3><p>Aucun résultat distant n’est substitué silencieusement.</p></div>
     </section>
   </main>
-  <footer><div><strong>MODARYX MODS Search</strong><p>Index local pré-calculé · adapter externe optionnel.</p></div><p>Gaming • Mods • Modding Tools</p></footer>
+  <footer><div><strong>MODARYX MODS Search</strong><p>Index local pré-calculé · adapter externe optionnel.</p></div><p>Pré-VF · zéro service payant obligatoire</p></footer>
 </body>
 </html>

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:nova-forge:schemas:collection:v1",
-  "title": "MODARYX MODS Collection",
+  "title": "Nova Forge Collection",
   "type": "object",
   "additionalProperties": false,
   "required": ["schemaVersion", "id", "name", "itemIds", "syncState"],

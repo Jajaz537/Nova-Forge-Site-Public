@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:nova-forge:schemas:publication-receipt:v1",
-  "title": "MODARYX MODS Immutable Publication Receipt",
+  "title": "Nova Forge Immutable Publication Receipt",
   "description": "Immutable release identity binding creator, manifest digest, artifact digests, provenance/rights state, moderation state, version and timestamp. Presentation changes must not rewrite release identity.",
   "type": "object",
   "additionalProperties": false,
