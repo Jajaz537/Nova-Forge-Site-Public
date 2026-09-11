@@ -6,6 +6,27 @@ Status: locked visual direction recovered from the five Wolf + Dragon concept bo
 
 All visual language from the recovered Nova Forge concept boards is retained as art direction, but the public identity becomes MODARYX MODS and the OS identity becomes Modaryx OS. The old Nova Forge wordmark is not part of the final public design.
 
+## Naming lock — mandatory
+
+The final product naming is fixed and must be used consistently in every visible surface, metadata field, SEO title, navigation label, social preview, manifest and public copy:
+
+- Public website / platform brand: **MODARYX MODS**.
+- Root ecosystem name when a shorter form is required: **Modaryx**.
+- Operating system family: **Modaryx OS**.
+- Public edition: **Modaryx OS Public**.
+- Founder edition in French UI: **Modaryx OS Fondateur**.
+- Assistant / guidance surface: **Modaryx Guide**.
+- Production domain: **modaryxmods.com**.
+- Descriptor: **Gaming • Mods • Modding Tools**.
+
+Rules:
+
+- Do not show **Nova Forge**, **Nova Forge OS**, **getnovaforge.com**, or an old Nova wordmark anywhere in the final user-visible website, metadata or SEO surface.
+- Do not casually shorten the public platform name to “Nova”, “Nova Mods”, “Modaryx Mods OS” or any other variant.
+- “Founder” may be used only in a future English localization; the French product/UI name remains **Fondateur**.
+- Legacy internal identifiers such as historical class names, filenames, workflow names or proof references may remain temporarily only when changing them would create technical risk and only if they are not exposed as the public brand.
+- Any new page or component must inherit this naming lock before visual polish is considered complete.
+
 ## Global visual language
 
 - Cinematic fantasy-tech atmosphere: deep graphite / near-black base, forged gold / amber highlights, controlled electric blue accents, warm firelight, monumental depth.
@@ -74,18 +95,18 @@ Preserve the recovered placement logic:
 
 Public edition must remain calm, readable and fail-closed. Decorative richness must never obscure state, security or provenance.
 
-## Modaryx OS Founder — board 05
+## Modaryx OS Fondateur — board 05
 
-Preserve the same family resemblance but make Founder visibly more ceremonial/premium:
+Preserve the same family resemblance but make Fondateur visibly more ceremonial/premium:
 
 - Left vertical rail remains the main navigation anchor.
-- Founder identity appears in the top frame, never as a random badge.
+- Fondateur identity appears in the top frame, never as a random badge.
 - Hero places wolf + dragon and the kingdom as the central prestige image.
 - Four major action cards remain aligned beneath the hero.
-- Founder-only surfaces such as Legacy / Library / Vault may appear in the left rail only when the feature exists.
-- Founder visual treatment may use richer gold, heraldic frames and legacy motifs, but must not imply unavailable privileges/features.
+- Fondateur-only surfaces such as Legacy / Library / Vault may appear in the left rail only when the feature exists.
+- Fondateur visual treatment may use richer gold, heraldic frames and legacy motifs, but must not imply unavailable privileges/features.
 
-Public green is never assumed from Founder green, and Founder green is never assumed from Public green.
+Public green is never assumed from Fondateur green, and Fondateur green is never assumed from Public green.
 
 ## Website information architecture to integrate before VF
 
