@@ -1,4 +1,4 @@
-name: MODARYX v3 rebuild clean reference art
+name: MODARYX v3 diagnose clean reference art
 
 on:
   push:
@@ -9,10 +9,10 @@ on:
       - '.github/modaryx-v3-clean-art-trigger.json'
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  rebuild-clean-art:
+  diagnose-clean-art:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -20,39 +20,37 @@ jobs:
         with:
           ref: site/modaryx-vf-premium-hd-v3
           fetch-depth: 0
-      - name: Rebuild clean recovered RAR art
+      - name: Diagnose staged clean RAR chunks
         shell: bash
         run: |
           set -euo pipefail
-          : > assets/modaryx-rar-hero-v3.webp
-          for part in .github/rar-art-clean/part-00.b64 .github/rar-art-clean/part-01.b64 .github/rar-art-clean/part-02.b64 .github/rar-art-clean/part-03.b64; do
-            tr -d '\n\r ' < "$part" | base64 -d >> assets/modaryx-rar-hero-v3.webp
-          done
           python3 - <<'PY'
           from pathlib import Path
-          import hashlib
-          p = Path('assets/modaryx-rar-hero-v3.webp')
-          data = p.read_bytes()
-          print(f'BYTES={len(data)}')
-          print(f'SHA256={hashlib.sha256(data).hexdigest()}')
-          print(f'HEAD={data[:12]!r}')
-          if data[:4] != b'RIFF' or data[8:12] != b'WEBP':
-              raise SystemExit('clean recovered art is not WEBP')
-          riff = int.from_bytes(data[4:8], 'little') + 8
-          if riff != len(data):
-              raise SystemExit(f'RIFF mismatch: {riff} != {len(data)}')
-          print('CLEAN_RAR_ART_CONTAINER=PASS')
+          import base64, re, hashlib
+
+          paths=[Path(f'.github/rar-art-clean/part-{i:02d}.b64') for i in range(4)]
+          chunks=[]
+          for p in paths:
+              raw=p.read_text(encoding='utf-8')
+              clean=''.join(raw.split())
+              bad=sorted(set(re.sub(r'[A-Za-z0-9+/=]','',clean)))
+              print(f'{p.name}: raw={len(raw)} clean={len(clean)} mod4={len(clean)%4} bad={bad!r}')
+              print(f'  head={clean[:48]!r}')
+              print(f'  tail={clean[-48:]!r}')
+              chunks.append(clean)
+
+          joined=''.join(chunks)
+          print(f'JOINED_LEN={len(joined)} MOD4={len(joined)%4}')
+          print(f'JOINED_BAD={sorted(set(re.sub(r"[A-Za-z0-9+/=]","",joined)))!r}')
+          padded=joined + '='*((-len(joined))%4)
+          try:
+              data=base64.b64decode(padded, validate=False)
+              print(f'DECODED_BYTES={len(data)}')
+              print(f'DECODED_HEAD={data[:16]!r}')
+              print(f'DECODED_SHA256={hashlib.sha256(data).hexdigest()}')
+              if len(data)>=12:
+                  print(f'RIFF={data[:4]==b"RIFF"} WEBP={data[8:12]==b"WEBP"}')
+          except Exception as exc:
+              print(f'DECODE_ERROR={type(exc).__name__}: {exc}')
+              raise
           PY
-      - name: Commit clean recovered art
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/modaryx-rar-hero-v3.webp
-          if git diff --cached --quiet; then
-            echo 'No asset change.'
-            exit 0
-          fi
-          git commit -m "feat(site): reconstruct clean RAR reference art for MODARYX v3"
-          git push origin HEAD:site/modaryx-vf-premium-hd-v3
