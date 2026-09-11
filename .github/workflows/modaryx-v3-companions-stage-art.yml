@@ -27,6 +27,7 @@ jobs:
         run: |
           set -euo pipefail
           expected_chars=(0 36268 35224 40084 42620)
+          expected_parts=(0 3 3 3 4)
           complete=true
           for stage in 1 2 3 4; do
             mapfile -t parts < <(find .github/v3-companions-stage-art -maxdepth 1 -type f -name "stage${stage}-part-*.b64" | sort)
@@ -36,7 +37,7 @@ jobs:
             fi
             echo "COMPANIONS_STAGE_${stage}_PARTS=${#parts[@]}"
             echo "COMPANIONS_STAGE_${stage}_BASE64_CHARS=$chars"
-            if [ "${#parts[@]}" -ne 3 ] || [ "$chars" -ne "${expected_chars[$stage]}" ]; then
+            if [ "${#parts[@]}" -ne "${expected_parts[$stage]}" ] || [ "$chars" -ne "${expected_chars[$stage]}" ]; then
               complete=false
             fi
           done
