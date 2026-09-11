@@ -1,0 +1,3 @@
+{
+  "reason": "Audit and clean all public-facing legacy Nova Forge references while preserving internal/historical compatibility identifiers"
+}
