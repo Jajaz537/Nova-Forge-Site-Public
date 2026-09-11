@@ -1,0 +1,80 @@
+name: MODARYX VF catalog premium
+
+on:
+  push:
+    branches:
+      - site/modaryx-vf-premium-hd-v2
+    paths:
+      - '.github/modaryx-vf-catalog-premium-trigger.json'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: site/modaryx-vf-premium-hd-v2
+          fetch-depth: 0
+      - name: Premiumize catalogue without changing local filter behavior
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('catalog.html')
+          text = p.read_text(encoding='utf-8')
+
+          old = '  <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">\n'
+          new = old + '  <link rel="stylesheet" href="./assets/modaryx-secondary-premium.css?v=20260911-1">\n  <link rel="stylesheet" href="./assets/modaryx-trust-community-premium.css?v=20260911-1">\n'
+          if 'modaryx-secondary-premium.css' not in text:
+              if text.count(old) != 1:
+                  raise SystemExit(f'catalog stylesheet target count={text.count(old)}')
+              text = text.replace(old, new, 1)
+
+          old_nav = '<nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./games.html">Jeux</a><a href="./catalog.html" aria-current="page">Catalogue</a><a href="./creator-studio.html">Creator Studio</a><a href="./ecosystem.html">Écosystème</a><a href="./downloads.html">Téléchargements</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a></nav>'
+          new_nav = '<nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./games.html">Jeux</a><a href="./catalog.html" aria-current="page">Mods</a><a href="./creator-studio.html">Créer</a><a href="./ecosystem.html">Écosystème</a><a href="./community.html">Communauté</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a></nav>'
+          if old_nav in text:
+              text = text.replace(old_nav, new_nav, 1)
+          elif new_nav not in text:
+              raise SystemExit('catalog nav target not found')
+
+          old_hero = '<div><p class="eyebrow">Catalogue multigaming · static-first</p><h1 id="catalog-title">Découvrir par preuve, pas par promesse.</h1><p class="lede">Jeux, mods, packs et expériences sont filtrables localement. Les états <strong>Mesuré</strong>, <strong>Estimé</strong> et <strong>Inconnu</strong> restent distincts ; aucune entrée de démonstration n’implique un téléchargement disponible.</p></div>'
+          new_hero = '<div><p class="eyebrow">MODARYX MODS · catalogue multigaming</p><h1 id="catalog-title">Des mondes. Des mods.<br>Des preuves lisibles.</h1><p class="lede">Jeux, mods, packs et expériences sont filtrables localement. Les états <strong>Mesuré</strong>, <strong>Estimé</strong> et <strong>Inconnu</strong> restent distincts ; aucune entrée de démonstration n’implique un téléchargement disponible.</p></div>'
+          if old_hero in text:
+              text = text.replace(old_hero, new_hero, 1)
+          elif new_hero not in text:
+              raise SystemExit('catalog hero target not found')
+
+          marker = '    <section class="catalog-controls" aria-labelledby="filters-title">'
+          portals = '''    <div class="trust-portal-row" aria-label="Hubs jeux MODARYX">\n      <a href="./games.html"><small>Jeux</small><strong>Hubs multigaming</strong><span>Explorer les univers par jeu, catégorie et parcours.</span><b>Voir les jeux →</b></a>\n      <a href="./gta-6/mods/"><small>Prioritaire</small><strong>GTA 6 Mods</strong><span>Hub éditorial prêt pour les futurs contenus réellement publiés.</span><b>Entrer dans le hub →</b></a>\n      <a href="./red-dead-redemption-2/mods/"><small>Monde vivant</small><strong>RDR2 Mods</strong><span>Visuels, immersion, gameplay et outils avec états explicites.</span><b>Entrer dans le hub →</b></a>\n    </div>\n'''
+          if 'aria-label="Hubs jeux MODARYX"' not in text:
+              if text.count(marker) != 1:
+                  raise SystemExit(f'catalog controls marker count={text.count(marker)}')
+              text = text.replace(marker, portals + marker, 1)
+
+          p.write_text(text, encoding='utf-8', newline='\n')
+          proof = p.read_text(encoding='utf-8')
+          for needle in ('id="catalog-filter-form"','id="catalog-query"','id="catalog-grid"','assets/catalog.js','aria-label="Hubs jeux MODARYX"','modaryx-secondary-premium.css'):
+              if needle not in proof:
+                  raise SystemExit(f'catalog missing {needle}')
+          for forbidden in ('Nova Forge','NOVA FORGE','getnovaforge.com'):
+              if forbidden in proof:
+                  raise SystemExit(f'catalog stale brand {forbidden}')
+          print('MODARYX_CATALOG_PREMIUM_PROOF=PASS')
+          print('CATALOG_FUNCTIONAL_MARKERS=PRESERVED')
+          print('GAME_HUB_ENTRYPOINTS=games+gta6+rdr2')
+          PY
+      - name: Commit targeted catalogue polish
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog.html
+          git commit -m "feat(site): premiumize MODARYX catalogue"
+          git push origin HEAD:site/modaryx-vf-premium-hd-v2
