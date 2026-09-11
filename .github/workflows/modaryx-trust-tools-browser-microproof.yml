@@ -91,7 +91,7 @@ jobs:
           "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --window-size=1440,900 --dump-dom "$PREVIEW_URL/downloads.html" > trust-tools-proof/downloads-dom.html 2>/tmp/downloads-dom.log
           grep -Fq 'Publier moins vite.' trust-tools-proof/downloads-dom.html
           grep -Fq 'Distribution verrouillée.' trust-tools-proof/downloads-dom.html
-          grep -Fq '0 artefact' trust-tools-proof/downloads-dom.html
+          grep -Fq 'Aucun téléchargement public validé' trust-tools-proof/downloads-dom.html
 
           python3 - <<'PY'
           from pathlib import Path
