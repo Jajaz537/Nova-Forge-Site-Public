@@ -1,11 +1,12 @@
 # MODARYX MODS — next VF batch
 
-The next targeted batch is **community/profiles + security/provenance + Modaryx Guide/documentation**.
+The next targeted batch is **remaining secondary pages + final RAR homepage treatment + QA**.
 
 Goals:
-- keep the same Wolf + Dragon / kingdom visual family and approved placement discipline;
-- harmonize community and profile surfaces without pretending a backend or account service is active;
-- make security, provenance and verification states visually premium while keeping fail-closed semantics untouched;
-- give Modaryx Guide and documentation a recognizable premium portal treatment;
-- preserve local-first, static-first and explicit-action behavior;
-- do not merge PR #11 until the full VF is coherent and final QA passes.
+- keep the uploaded Wolf + Dragon RAR as the visual/composition source of truth; do not substitute generated artwork;
+- harmonize downloads, verification and project mini-hubs with the same MODARYX premium family;
+- preserve the homepage’s exact approved placement while strengthening the real art treatment from the recovered source material;
+- finish internal links and SEO relationships between Games, GTA 6, RDR2, Catalogue, Creator Studio, Community, Security and Documentation;
+- run targeted canonical, sitemap, visible-name, static-first, accessibility and responsive checks;
+- keep all unavailable distributions and unproven states fail-closed;
+- keep PR #11 draft until the complete VF is coherent and final QA passes.
