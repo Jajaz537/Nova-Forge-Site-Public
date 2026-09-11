@@ -9,4 +9,5 @@ Goals:
 - finish internal links and SEO relationships between Games, GTA 6, RDR2, Catalogue, Creator Studio, Community, Security and Documentation;
 - run targeted canonical, sitemap, visible-name, static-first, accessibility and responsive checks;
 - keep all unavailable distributions and unproven states fail-closed;
+- final QA order: remaining surfaces → links/canonicals → accessibility/responsive → performance → visible-name audit;
 - keep PR #11 draft until the complete VF is coherent and final QA passes.
