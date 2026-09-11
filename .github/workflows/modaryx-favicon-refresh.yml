@@ -1,0 +1,60 @@
+name: MODARYX favicon refresh
+
+on:
+  push:
+    branches:
+      - modaryxmods-favicon-refresh
+    paths:
+      - '.github/modaryx-favicon-refresh-trigger.json'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: modaryxmods-favicon-refresh
+          fetch-depth: 0
+      - name: Force a new favicon URL on all public HTML pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          changed=[]
+          for p in Path('.').glob('*.html'):
+              text=p.read_text(encoding='utf-8')
+              new=re.sub(r'<link rel="icon" href="\./assets/modaryx-mark\.svg" type="image/svg\+xml">', '<link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">', text)
+              new=re.sub(r'<link rel="icon" href="\./assets/nova-mark\.svg" type="image/svg\+xml">', '<link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">', new)
+              if new != text:
+                  p.write_text(new, encoding='utf-8', newline='\n')
+                  changed.append(str(p))
+          failures=[]
+          for p in Path('.').glob('*.html'):
+              text=p.read_text(encoding='utf-8')
+              if 'rel="icon"' in text and 'favicon.svg?v=modaryx-20260911-2' not in text:
+                  failures.append(str(p))
+          if failures:
+              print('FAVICON_REFRESH_FAILURES', *failures, sep='\n')
+              raise SystemExit(1)
+          print('FAVICON_REFRESH_PROOF=PASS')
+          print('\n'.join(changed))
+          PY
+      - name: Commit refresh
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo "NO_CHANGES=yes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html'
+          git commit -m "fix(site): force fresh MODARYX favicon URL"
+          git push origin HEAD:modaryxmods-favicon-refresh
