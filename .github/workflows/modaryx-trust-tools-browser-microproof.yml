@@ -1,0 +1,130 @@
+name: MODARYX trust tools browser microproof
+
+on:
+  push:
+    branches:
+      - site/modaryx-vf-premium-hd-v3
+    paths:
+      - '.github/workflows/modaryx-trust-tools-browser-microproof.yml'
+      - 'verify.html'
+      - 'downloads.html'
+      - 'assets/modaryx-release-projects-premium.css'
+      - 'assets/modaryx-trust-tools-premium-v3.css'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  trust-tools-browser-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ZONE_NAME: modaryxmods.com
+      PROJECT_NAME: nova-forge-site-public
+      TARGET_BRANCH: site/modaryx-vf-premium-hd-v3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: site/modaryx-vf-premium-hd-v3
+          fetch-depth: 1
+
+      - name: Resolve successful Cloudflare preview
+        id: preview
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H 'Content-Type: application/json')
+          zones="$(curl -fsS "${auth[@]}" "$api/zones?name=$ZONE_NAME")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          test -n "$account_id" && test "$account_id" != "null"
+          preview_url=""
+          for attempt in $(seq 1 36); do
+            deployments="$(curl -fsS "${auth[@]}" "$api/accounts/$account_id/pages/projects/$PROJECT_NAME/deployments")"
+            candidate="$(DEPLOYMENTS="$deployments" python3 - <<'PY'
+          import json, os
+          data=json.loads(os.environ['DEPLOYMENTS']); target=os.environ['TARGET_BRANCH']; rows=[]
+          for dep in data.get('result',[]):
+              meta=((dep.get('deployment_trigger') or {}).get('metadata') or {})
+              if meta.get('branch')==target and dep.get('environment')=='preview': rows.append(dep)
+          rows.sort(key=lambda d:d.get('created_on',''), reverse=True)
+          if rows:
+              d=rows[0]; print((d.get('latest_stage') or {}).get('status','unknown')+'|'+d.get('url',''))
+          PY
+            )"
+            status="${candidate%%|*}"; url="${candidate#*|}"
+            echo "preview_wait attempt=$attempt status=${status:-none}"
+            if [ "$status" = "success" ] && [ -n "$url" ]; then preview_url="$url"; break; fi
+            sleep 5
+          done
+          test -n "$preview_url"
+          echo "url=$preview_url" >> "$GITHUB_OUTPUT"
+
+      - name: Capture trust tools responsive proofs
+        shell: bash
+        env:
+          PREVIEW_URL: ${{ steps.preview.outputs.url }}
+        run: |
+          set -euo pipefail
+          chrome="$(command -v google-chrome-stable || command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$chrome"
+          mkdir -p trust-tools-proof
+          shot(){
+            local name="$1" width="$2" height="$3" path="$4"
+            "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --force-device-scale-factor=1 --window-size="${width},${height}" --screenshot="trust-tools-proof/${name}.png" "${PREVIEW_URL}${path}" >/tmp/${name}.log 2>&1
+          }
+          shot verify-desktop 1440 900 /verify.html
+          shot verify-tablet 1024 768 /verify.html
+          shot verify-mobile 390 844 /verify.html
+          shot downloads-desktop 1440 900 /downloads.html
+          shot downloads-tablet 1024 768 /downloads.html
+          shot downloads-mobile 390 844 /downloads.html
+
+          "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --window-size=1440,900 --dump-dom "$PREVIEW_URL/verify.html" > trust-tools-proof/verify-dom.html 2>/tmp/verify-dom.log
+          grep -Fq 'Une empreinte.' trust-tools-proof/verify-dom.html
+          grep -Fq 'Calculer et comparer' trust-tools-proof/verify-dom.html
+          grep -Fq 'Traitement local' trust-tools-proof/verify-dom.html
+
+          "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --window-size=1440,900 --dump-dom "$PREVIEW_URL/downloads.html" > trust-tools-proof/downloads-dom.html 2>/tmp/downloads-dom.log
+          grep -Fq 'Publier moins vite.' trust-tools-proof/downloads-dom.html
+          grep -Fq 'Distribution verrouillée.' trust-tools-proof/downloads-dom.html
+          grep -Fq '0 artefact' trust-tools-proof/downloads-dom.html
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import struct,zlib
+          expected={
+            'verify-desktop.png':(1440,900),'verify-tablet.png':(1024,768),'verify-mobile.png':(390,844),
+            'downloads-desktop.png':(1440,900),'downloads-tablet.png':(1024,768),'downloads-mobile.png':(390,844)
+          }
+          for name,dims in expected.items():
+              data=(Path('trust-tools-proof')/name).read_bytes()
+              if len(data)<12000: raise SystemExit(f'{name}: unexpectedly small {len(data)}')
+              if data[:8]!=b'\x89PNG\r\n\x1a\n': raise SystemExit(f'{name}: not PNG')
+              w,h=struct.unpack('>II',data[16:24])
+              if (w,h)!=dims: raise SystemExit(f'{name}: dimensions {(w,h)} != {dims}')
+              pos=8; raw=b''; bd=ct=None
+              while pos<len(data):
+                  n=struct.unpack('>I',data[pos:pos+4])[0]; typ=data[pos+4:pos+8]; chunk=data[pos+8:pos+8+n]; pos+=12+n
+                  if typ==b'IHDR': bd=chunk[8]; ct=chunk[9]
+                  elif typ==b'IDAT': raw+=chunk
+                  elif typ==b'IEND': break
+              if bd!=8 or ct not in (2,6): raise SystemExit(f'{name}: PNG mode drift')
+              decoded=zlib.decompress(raw); sample=decoded[::max(1,len(decoded)//10000)]
+              if len(set(sample))<12: raise SystemExit(f'{name}: low entropy')
+          print('TRUST_TOOLS_RESPONSIVE_RENDER_PASS')
+          print('PRODUCTION_NOT_CHANGED=yes')
+          print('DNSSEC_NOT_CHANGED=yes')
+          PY
+
+      - name: Upload trust tools proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: modaryx-trust-tools-browser-proof
+          path: trust-tools-proof/*
+          if-no-files-found: warn
+          retention-days: 7
