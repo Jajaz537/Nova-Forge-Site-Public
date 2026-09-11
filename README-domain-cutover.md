@@ -29,4 +29,6 @@ IONOS support has been asked to install that DS without changing nameservers. Do
 `getnovaforge.com` has automatic renewal disabled. Its Cloudflare zone remains intentionally untouched until the new domain has full DNSSEC parent-chain proof and the MODARYX production site is stable.
 
 ## Safety rule
-Do **not** remove the old Cloudflare zone, change authoritative nameservers, or declare DNSSEC fully green until registrar DS installation and parent-chain verification are proven. Content/design work on the MODARYX VF branch may continue independently while this registrar step is pending.
+Do **not** remove the old Cloudflare zone, change authoritative nameservers, or declare DNSSEC fully green until registrar DS installation and parent-chain verification are proven.
+
+The MODARYX VF design/content branch may continue independently while this registrar step is pending. DNSSEC is not a blocker for building and validating the new site surface.
