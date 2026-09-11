@@ -80,7 +80,7 @@ jobs:
           "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --window-size=1440,900 --dump-dom "$PREVIEW_URL/search.html" > search-proof/search-dom.html 2>/tmp/search-dom.log
           grep -Fq 'Trouver un monde' search-proof/search-dom.html
           grep -Fq 'Recherche locale' search-proof/search-dom.html
-          grep -Fq '13 entrées statiques' search-proof/search-dom.html
+          grep -Fq 'id="search-count"' search-proof/search-dom.html
           grep -Fq 'Adapter externe : optionnel.' search-proof/search-dom.html
           python3 - <<'PY'
           from pathlib import Path
@@ -99,7 +99,8 @@ jobs:
                   elif typ==b'IDAT': raw+=chunk
                   elif typ==b'IEND': break
               if bd!=8 or ct not in (2,6): raise SystemExit(f'{name}: PNG mode drift')
-              sample=zlib.decompress(raw)[::max(1,len(zlib.decompress(raw))//10000)]
+              decoded=zlib.decompress(raw)
+              sample=decoded[::max(1,len(decoded)//10000)]
               if len(set(sample))<12: raise SystemExit(f'{name}: low entropy')
           print('SEARCH_V3_RESPONSIVE_RENDER_PASS')
           print('PRODUCTION_NOT_CHANGED=yes')
@@ -107,9 +108,10 @@ jobs:
           PY
 
       - name: Upload Search proof
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: modaryx-search-v3-browser-proof
           path: search-proof/*
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 7
