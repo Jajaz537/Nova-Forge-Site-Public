@@ -3,90 +3,124 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#171715">
+  <meta name="theme-color" content="#05070a">
   <meta name="color-scheme" content="dark">
   <meta name="referrer" content="no-referrer">
   <meta name="application-name" content="MODARYX MODS">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
-  <meta name="description" content="Écosystème public MODARYX MODS : modules annoncés publiquement, états de connexion et cadre des futures éditions Modaryx OS.">
+  <meta name="description" content="Explore les univers MODARYX MODS : jeux, mods, création, outils, communauté et sécurité dans une expérience premium reliée à Modaryx OS.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="MODARYX MODS">
-  <meta property="og:title" content="Écosystème public — MODARYX MODS">
-  <meta property="og:description" content="Modules publics MODARYX MODS et cadre des éditions, sans exposition des composants privés ou internes.">
-  <title>Écosystème public — MODARYX MODS</title>
+  <meta property="og:title" content="Explorer les univers — MODARYX MODS">
+  <meta property="og:description" content="Les portails de l’écosystème MODARYX MODS : jouer, modder, créer, s’équiper, partager et progresser en confiance.">
+  <title>Explorer les univers — MODARYX MODS</title>
   <link rel="canonical" href="https://modaryxmods.com/ecosystem">
   <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
   <link rel="stylesheet" href="./assets/tokens.css">
   <link rel="stylesheet" href="./assets/site.css">
   <link rel="stylesheet" href="./assets/official.css">
-  <script src="./assets/shell.js" defer></script>
-  <script src="./assets/app.js" defer></script>
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
   <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">
   <link rel="stylesheet" href="./assets/modaryx-secondary-premium.css?v=20260911-1">
+  <link rel="stylesheet" href="./assets/modaryx-portals-v3.css?v=20260911-1">
+  <script src="./assets/shell.js" defer></script>
+  <script src="./assets/app.js" defer></script>
 </head>
-<body>
+<body class="mxp-page">
   <a class="skip-link" href="#main">Aller au contenu</a>
-  <header class="topbar">
-    <a class="brand" href="./" aria-label="MODARYX MODS, retour au site officiel"><img class="brand-logo" src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="32" height="32"><span>MODARYX MODS</span></a>
-    <nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./games.html">Jeux</a><a href="./catalog.html">Mods</a><a href="./creator-studio.html">Créer</a><a href="./ecosystem.html" aria-current="page">Écosystème</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a></nav>
+
+  <header class="mxp-topbar">
+    <a class="mxp-brand" href="./" aria-label="MODARYX MODS, retour à l’accueil">
+      <img src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="40" height="40">
+      <span><strong>MODARYX MODS</strong><small>Gaming • Mods • Modding Tools</small></span>
+    </a>
+    <nav class="mxp-nav" aria-label="Navigation principale">
+      <a href="./index.html">Accueil</a>
+      <a href="./games.html">Jeux</a>
+      <a href="./catalog.html">Mods</a>
+      <a href="./creator-studio.html">Créer</a>
+      <a href="./ecosystem.html" aria-current="page">Écosystème</a>
+      <a href="./security.html">Sécurité</a>
+      <a href="./documentation.html">Documentation</a>
+    </nav>
+    <div class="mxp-head-actions">
+      <a class="mxp-search" href="./search.html" aria-label="Rechercher sur MODARYX MODS">⌕ <span>Rechercher…</span></a>
+      <a class="mxp-login" href="./profiles.html">Se connecter</a>
+      <a class="mxp-create" href="./community.html">Créer un compte</a>
+    </div>
   </header>
 
-  <main id="main">
-    <section class="hero" aria-labelledby="ecosystem-title">
-      <div class="hero-copy">
-        <p class="eyebrow">MODARYX MODS · Écosystème public</p>
-        <h1 id="ecosystem-title">Un royaume. Des portails spécialisés.</h1>
-        <p class="lede">Jeux, mods, création, confiance et Modaryx OS partagent une même architecture publique. Modaryx OS Public et Modaryx OS Fondateur gardent des identités distinctes ; le site n’invente ni disponibilité, ni prix, ni validation lorsqu’une preuve publique manque.</p>
-        <div class="actions"><a class="button primary" href="#modules">Voir les modules publics</a><a class="button" href="./documentation.html">Documentation publique</a></div>
+  <main id="main" class="mxp-main">
+    <section class="mxp-portal-hero" aria-labelledby="ecosystem-title">
+      <div class="mxp-hero-copy">
+        <p class="mxp-eyebrow">MODARYX MODS · Portails / Univers</p>
+        <h1 id="ecosystem-title">Explorer<br>les univers</h1>
+        <p>Six portes vers un même écosystème. Joue, transforme tes mondes, crée tes propres expériences, découvre les outils MODARYX et avance avec une communauté pensée pour durer.</p>
+        <div class="mxp-copy-rule">Choisis ton portail</div>
       </div>
-      <aside class="hero-panel" aria-label="Règles de publication de l’écosystème">
-        <p class="eyebrow">Règles actives</p>
-        <ul class="feature-list">
-          <li><span>01</span><div><strong>Noms publics seulement</strong><small>Aucun nom interne ou réservé n’est dérivé du dépôt privé.</small></div></li>
-          <li><span>02</span><div><strong>État explicite</strong><small>Une intégration non connectée reste affichée comme non connectée.</small></div></li>
-          <li><span>03</span><div><strong>Éditions non inventées</strong><small>La matrice restera verrouillée jusqu’à publication d’une nomenclature autorisée.</small></div></li>
-        </ul>
-      </aside>
-    </section>
 
-    <section class="section" id="editions" aria-labelledby="editions-title">
-      <div class="section-heading"><div><p class="eyebrow">Éditions Modaryx OS</p><h2 id="editions-title">Deux identités. Deux niveaux de preuve.</h2></div><span class="badge neutral">Publication contrôlée</span></div>
-      <p class="section-intro">Les noms publics sont désormais fixés : <strong>Modaryx OS Public</strong> et <strong>Modaryx OS Fondateur</strong>. Leur présence sur le site ne transforme pas un build en distribution disponible : chaque édition conserve son propre état de validation et ses propres preuves.</p>
-      <div class="requirements" role="list" aria-label="Éditions publiques Modaryx OS">
-        <div role="listitem"><strong>Modaryx OS Public</strong><span>Expérience destinée à la surface publique ; disponibilité et distribution restent soumises aux preuves publiées.</span></div>
-        <div role="listitem"><strong>Modaryx OS Fondateur</strong><span>Identité distincte de l’édition Public ; aucun état vert n’est déduit d’une validation de l’autre édition.</span></div>
-        <div role="listitem"><strong>Modaryx Guide</strong><span>Aide contextuelle qui explique capacités, limites et preuves avant toute action sensible.</span></div>
-        <div role="listitem"><strong>Distribution</strong><span>Canal, provenance, hash et signature doivent être qualifiés avant tout téléchargement présenté comme officiel.</span></div>
-      </div>
-      <div class="security-note"><strong>Règle de confiance :</strong> Public vert ≠ Fondateur vert. Une preuve manquante reste manquante ; le design ne transforme jamais un état inconnu en validation.</div>
-      <div class="portal-intro" aria-label="Portails MODARYX">
-        <a href="./games.html"><small>Portail Jeux</small><strong>Des mondes à explorer.</strong><span>GTA 6, Red Dead Redemption 2 et les futurs hubs multigaming partagent une architecture commune.</span><b>Explorer les jeux →</b></a>
-        <a href="./creator-studio.html"><small>Portail Création</small><strong>Des outils pour bâtir.</strong><span>Creator Studio prépare manifests, provenance et exports localement sans publication implicite.</span><b>Ouvrir Creator Studio →</b></a>
-      </div>
-    </section>
-    <section class="section" id="modules" aria-labelledby="modules-title">
-      <div class="section-heading"><div><p class="eyebrow">Modules annoncés publiquement</p><h2 id="modules-title">Des rôles visibles, des états qualifiés.</h2></div><span class="badge">Public-only</span></div>
-      <div class="cards three">
-        <article class="card"><p class="card-kicker">Compatibilité</p><h3>Smart Profile</h3><p>Analyse indicative exécutée dans le navigateur. Les résultats distinguent ce qui est mesuré, estimé ou inconnu et n’établissent aucune garantie de FPS ou de stabilité.</p><span class="badge">Démo navigateur</span></article>
-        <article class="card"><p class="card-kicker">Contrat de ressource</p><h3>Universal Mod Manifest</h3><p>Surface destinée à décrire les informations qu’une ressource peut publier : identité, provenance, licence et autres preuves lorsqu’elles existent réellement.</p><span class="badge neutral">Backend non connecté</span></article>
-        <article class="card"><p class="card-kicker">Résolution</p><h3>Storage Broker / Resolver</h3><p>Rôle public annoncé pour qualifier l’origine, les miroirs ou les caches avant qu’un contenu puisse être considéré comme correspondant à l’identité attendue.</p><span class="badge neutral">Backend non connecté</span></article>
-        <article class="card"><p class="card-kicker">Réparation</p><h3>Repair Network</h3><p>Principe public de réparation fail-closed : aucune substitution silencieuse lorsqu’aucune copie vérifiée ne correspond à l’identité attendue.</p><span class="badge neutral">Backend non connecté</span></article>
-        <article class="card"><p class="card-kicker">Intégration locale</p><h3>Bridge Modaryx OS</h3><p>Le site reste autonome. Toute future intégration locale devra être optionnelle, qualifiée et déclenchée par une action utilisateur explicite.</p><span class="badge neutral">Non connecté</span></article>
-        <article class="card"><p class="card-kicker">Communauté</p><h3>Contrats de modération</h3><p>Signal, décision, raison et appel sont présentés comme des responsabilités distinctes. Aucun backend communautaire actif n’est simulé par la surface actuelle.</p><span class="badge neutral">Backend non connecté</span></article>
+      <div class="mxp-portal-stage" aria-label="Portails des univers MODARYX MODS">
+        <a class="mxp-portal studio" href="./creator-studio.html"><span class="mxp-portal-label"><strong>Studio</strong><small>Créer</small></span></a>
+        <a class="mxp-portal games" href="./games.html"><span class="mxp-portal-label"><strong>Jeux</strong><small>Explorer</small></span></a>
+        <a class="mxp-portal mods" href="./catalog.html"><span class="mxp-portal-label"><strong>Mods</strong><small>Transformer</small></span></a>
+        <a class="mxp-portal tools" href="./documentation.html"><span class="mxp-portal-label"><strong>Outils</strong><small>Construire</small></span></a>
+        <a class="mxp-portal community" href="./community.html"><span class="mxp-portal-label"><strong>Communauté</strong><small>Partager</small></span></a>
+        <a class="mxp-portal security" href="./security.html"><span class="mxp-portal-label"><strong>Sécurité</strong><small>Protéger</small></span></a>
+        <div class="mxp-baby-scene" role="img" aria-label="Bébé Loup et Bébé Dragon, compagnons Stage I MODARYX"></div>
+        <div class="mxp-horizon" aria-hidden="true"></div>
       </div>
     </section>
 
-    <section class="section" id="availability" aria-labelledby="availability-title">
-      <p class="eyebrow">Disponibilité publique</p>
-      <h2 id="availability-title">Présentation ne signifie pas distribution.</h2>
-      <p class="section-intro">La présence d’un module sur cette page signifie uniquement que son rôle peut être présenté publiquement. Elle ne signifie pas qu’un binaire, service, API ou téléchargement correspondant est disponible.</p>
-      <div class="actions"><a class="button" href="./public-status.json">Lire le statut JSON</a><a class="button" href="./verify.html">Vérificateur SHA-256</a><a class="button" href="./">Retour au site officiel</a></div>
+    <section class="mxp-worlds" id="worlds" aria-labelledby="worlds-title">
+      <h2 class="mxp-worlds-title" id="worlds-title"><span>Un écosystème. Six portes.</span></h2>
+      <div class="mxp-world-grid">
+        <a class="mxp-world-card" href="./creator-studio.html"><small>Studio</small><strong>Donne forme à tes idées.</strong><span>Prépare, structure et affine tes créations avec des outils conçus pour le modding.</span><b>Entrer dans Studio →</b></a>
+        <a class="mxp-world-card" href="./games.html"><small>Jeux</small><strong>Des mondes à explorer.</strong><span>Retrouve les hubs multigaming et leurs expériences MODARYX dédiées.</span><b>Voir les jeux →</b></a>
+        <a class="mxp-world-card" href="./catalog.html"><small>Mods</small><strong>Transforme ton expérience.</strong><span>Découvre des créations organisées par jeu, catégorie et compatibilité.</span><b>Explorer les mods →</b></a>
+        <a class="mxp-world-card" href="./documentation.html"><small>Outils</small><strong>Construis avec méthode.</strong><span>Guides, ressources et surfaces techniques pour comprendre avant d’agir.</span><b>Ouvrir les outils →</b></a>
+        <a class="mxp-world-card" href="./community.html"><small>Communauté</small><strong>Grandis avec les autres.</strong><span>Partage, découvre et participe à l’écosystème MODARYX MODS.</span><b>Rejoindre la communauté →</b></a>
+        <a class="mxp-world-card" href="./security.html"><small>Sécurité</small><strong>La confiance avant la promesse.</strong><span>Provenance, vérification et états explicites gardent chaque décision lisible.</span><b>Voir la sécurité →</b></a>
+      </div>
     </section>
+
+    <div class="mxp-bottom-band" aria-label="Univers MODARYX MODS"><strong>MODARYX MODS</strong><span>JEUX</span><span>MODS</span><span>STUDIO</span><span>OUTILS</span><span>COMMUNAUTÉ</span><span>SÉCURITÉ</span></div>
+
+    <div class="mxp-info-wrap">
+      <section class="section" id="editions" aria-labelledby="editions-title">
+        <div class="section-heading"><div><p class="eyebrow">Éditions Modaryx OS</p><h2 id="editions-title">Deux identités. Deux niveaux de preuve.</h2></div><span class="badge neutral">Publication contrôlée</span></div>
+        <p class="section-intro">Les noms publics sont désormais fixés : <strong>Modaryx OS Public</strong> et <strong>Modaryx OS Fondateur</strong>. Leur présence sur le site ne transforme pas un build en distribution disponible : chaque édition conserve son propre état de validation et ses propres preuves.</p>
+        <div class="requirements" role="list" aria-label="Éditions publiques Modaryx OS">
+          <div role="listitem"><strong>Modaryx OS Public</strong><span>Expérience destinée à la surface publique ; disponibilité et distribution restent soumises aux preuves publiées.</span></div>
+          <div role="listitem"><strong>Modaryx OS Fondateur</strong><span>Identité distincte de l’édition Public ; aucun état vert n’est déduit d’une validation de l’autre édition.</span></div>
+          <div role="listitem"><strong>Modaryx Guide</strong><span>Aide contextuelle qui explique capacités, limites et preuves avant toute action sensible.</span></div>
+          <div role="listitem"><strong>Distribution</strong><span>Canal, provenance, hash et signature doivent être qualifiés avant tout téléchargement présenté comme officiel.</span></div>
+        </div>
+        <div class="security-note"><strong>Règle de confiance :</strong> Public vert ≠ Fondateur vert. Une preuve manquante reste manquante ; le design ne transforme jamais un état inconnu en validation.</div>
+      </section>
+
+      <section class="section" id="modules" aria-labelledby="modules-title">
+        <div class="section-heading"><div><p class="eyebrow">Modules annoncés publiquement</p><h2 id="modules-title">Des rôles visibles, des états qualifiés.</h2></div><span class="badge">Public-only</span></div>
+        <div class="cards three">
+          <article class="card"><p class="card-kicker">Compatibilité</p><h3>Smart Profile</h3><p>Analyse indicative exécutée dans le navigateur. Les résultats distinguent ce qui est mesuré, estimé ou inconnu et n’établissent aucune garantie de FPS ou de stabilité.</p><span class="badge">Démo navigateur</span></article>
+          <article class="card"><p class="card-kicker">Contrat de ressource</p><h3>Universal Mod Manifest</h3><p>Surface destinée à décrire les informations qu’une ressource peut publier : identité, provenance, licence et autres preuves lorsqu’elles existent réellement.</p><span class="badge neutral">Backend non connecté</span></article>
+          <article class="card"><p class="card-kicker">Résolution</p><h3>Storage Broker / Resolver</h3><p>Rôle public annoncé pour qualifier l’origine, les miroirs ou les caches avant qu’un contenu puisse être considéré comme correspondant à l’identité attendue.</p><span class="badge neutral">Backend non connecté</span></article>
+          <article class="card"><p class="card-kicker">Réparation</p><h3>Repair Network</h3><p>Principe public de réparation fail-closed : aucune substitution silencieuse lorsqu’aucune copie vérifiée ne correspond à l’identité attendue.</p><span class="badge neutral">Backend non connecté</span></article>
+          <article class="card"><p class="card-kicker">Intégration locale</p><h3>Bridge Modaryx OS</h3><p>Le site reste autonome. Toute future intégration locale devra être optionnelle, qualifiée et déclenchée par une action utilisateur explicite.</p><span class="badge neutral">Non connecté</span></article>
+          <article class="card"><p class="card-kicker">Communauté</p><h3>Contrats de modération</h3><p>Signal, décision, raison et appel sont présentés comme des responsabilités distinctes. Aucun backend communautaire actif n’est simulé par la surface actuelle.</p><span class="badge neutral">Backend non connecté</span></article>
+        </div>
+      </section>
+
+      <section class="section" id="availability" aria-labelledby="availability-title">
+        <p class="eyebrow">Disponibilité publique</p>
+        <h2 id="availability-title">Présentation ne signifie pas distribution.</h2>
+        <p class="section-intro">La présence d’un module sur cette page signifie uniquement que son rôle peut être présenté publiquement. Elle ne signifie pas qu’un binaire, service, API ou téléchargement correspondant est disponible.</p>
+        <div class="actions"><a class="button" href="./public-status.json">Lire le statut JSON</a><a class="button" href="./verify.html">Vérificateur SHA-256</a><a class="button" href="./">Retour au site officiel</a></div>
+      </section>
+
+      <footer><div><strong>MODARYX MODS</strong><p>Écosystème public · preview V3.</p></div><div class="footer-meta"><p>Gaming • Mods • Modding Tools</p><p><a href="./documentation.html">Documentation</a> · <a href="./public-status.json">Statut public</a></p></div></footer>
+    </div>
   </main>
-
-  <footer><div><strong>MODARYX MODS</strong><p>Écosystème public · surface pré-VF.</p></div><div class="footer-meta"><p>Aucun nom d’édition privé ou interne n’est exposé.</p><p><a href="./documentation.html">Documentation</a> · <a href="./public-status.json">Statut public</a></p></div></footer>
 </body>
 </html>
