@@ -43,9 +43,18 @@ The five Wolf + Dragon boards recovered from the user-provided RAR remain the co
 - Static VF audit repaired two isolated QA findings without broad replay: `robots.txt` now declares the MODARYX sitemap, and the remote-dependency detector distinguishes executable remote loads from schema identifiers/example URLs.
 - Targeted static VF audit: PASS on 18 core pages (`MODARYX_STATIC_VF_AUDIT=PASS`, `CANONICAL_SITEMAP_ROBOTS=PASS`, `LOCAL_LINK_AND_ASSET_REFERENCES=PASS`, `STATIC_ACCESSIBILITY_MARKERS=PASS`, `FUNCTIONAL_MARKERS=PRESERVED`).
 - Static CSS/JS footprint measured by the audit: **196,889 bytes** total; largest scanned asset `assets/nova-premium-hd.css` at **26,304 bytes**; executable remote asset dependencies: none.
+- Responsive Chrome visual QA on desktop, tablet and mobile: **PASS**; responsive captures completed with the RAR-wired homepage.
+- Cloudflare Pages preview verification: **PASS** with HTTP/2 200 and the recovered RAR WEBP served correctly.
+- Targeted browser-level performance QA: **PASS** on GitHub Actions run `34589397654` at commit `60d51084ff9110c685414c34528b87a8969b996d`.
+- Critical first-party homepage byte set: **142,527 bytes**; recovered RAR hero transfer: **65,204 bytes**.
+- Cloudflare preview homepage transport: **HTTP/2**, TTFB **0.179 s**, curl total **0.180 s**.
+- Cold Chrome render sanity samples: **10,570 ms / 972 ms / 1,044 ms**, median **1,044 ms**, max **10,570 ms**; DOM identity, RAR-hero accessibility marker and ecosystem marker all PASS (`COLD_CHROME_RENDER_SANITY=PASS`, `RAR_HERO_RENDER_MARKERS=PASS`).
 
-## Still required before merge
-- Run responsive desktop/tablet/mobile visual checks on the RAR-wired homepage and the principal secondary surfaces.
-- Run a browser-level performance sanity pass on the preview deployment.
-- Verify the Cloudflare Pages preview deployment before promoting PR #11.
-- Keep PR #11 draft until those final visual/runtime checks are coherent and proven.
+## Final pre-merge state
+- Final visual verification: **PASS**.
+- Final preview/runtime verification: **PASS**.
+- Final targeted performance sanity verification: **PASS**.
+- No visual/performance blocker remains from the VF checklist.
+- PR #11 remains **draft and unmerged** pending an explicit merge/cutover decision.
+- Production `modaryxmods.com` is **untouched** by this VF verification pass.
+- DNSSEC is **untouched** and remains pending the IONOS confirmation.
