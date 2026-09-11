@@ -1,0 +1,9 @@
+/* MODARYX MODS — targeted mobile Portails polish.
+   Preview branch only: tighten the Board 03 hero composition below 440 px
+   without altering tablet or desktop geometry. */
+
+@media (max-width: 440px) {
+  .mxp-portal-hero {
+    min-height: 720px;
+  }
+}
