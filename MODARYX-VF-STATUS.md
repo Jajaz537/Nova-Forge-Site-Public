@@ -8,11 +8,14 @@
 - Domain: **modaryxmods.com**
 
 ## Locked visual source
-The five Wolf + Dragon boards recovered from the user-provided RAR remain the composition source of truth. Homepage placement must preserve the approved rhythm: header/navigation, editorial copy on the left, kingdom + companion focus in the center, manifesto rail on the right, portal row below, companion progression strip, then the lower ecosystem band. No generated replacement artwork is part of the implementation pass.
+The five Wolf + Dragon boards recovered from the user-provided RAR remain the composition source of truth. Homepage placement preserves the approved rhythm: header/navigation, editorial copy on the left, kingdom + companion focus in the center, manifesto rail on the right, portal row below, companion progression strip, then the lower ecosystem band. No generated replacement artwork is part of the implementation pass.
 
 ## Completed VF milestones
 - Premium homepage top rebuilt around the recovered RAR placement.
-- MODARYX visible-name audit: PASS after targeted repair.
+- The exact recovered RAR hero asset is now reconstructed as `assets/modaryx-rar-hero.webp` and wired into the central homepage scene.
+- RAR reconstruction proof: **65,204 bytes**, valid RIFF/WEBP container, SHA-256 `86cf92a822a185b1deaee23d1b2601297f1390a66d1e3aa77cef72a890ad1777`.
+- Placeholder guardian silhouettes were removed so the real recovered Wolf + Dragon artwork is the visual source.
+- MODARYX visible-name audit: PASS after the final RAR homepage wiring.
 - Premium multigaming hub added at `games.html`.
 - Dedicated SEO/content hubs added at `/gta-6/mods/` and `/red-dead-redemption-2/mods/`.
 - Game hubs use the same graphite / forged-gold / kingdom language.
@@ -42,7 +45,7 @@ The five Wolf + Dragon boards recovered from the user-provided RAR remain the co
 - Static CSS/JS footprint measured by the audit: **196,889 bytes** total; largest scanned asset `assets/nova-premium-hd.css` at **26,304 bytes**; executable remote asset dependencies: none.
 
 ## Still required before merge
-- Finish the homepage art treatment using the recovered RAR as the source, not generated replacement imagery.
-- Run responsive desktop/tablet/mobile visual checks and browser-level performance pass.
-- Re-run the final visible naming audit after the RAR homepage treatment.
-- Do not merge PR #11 until the complete VF is coherent and proven.
+- Run responsive desktop/tablet/mobile visual checks on the RAR-wired homepage and the principal secondary surfaces.
+- Run a browser-level performance sanity pass on the preview deployment.
+- Verify the Cloudflare Pages preview deployment before promoting PR #11.
+- Keep PR #11 draft until those final visual/runtime checks are coherent and proven.
