@@ -1,0 +1,11 @@
+/* Targeted V3 mobile companions navigation correction.
+   Keeps the full primary navigation visible at 390px without horizontal clipping. */
+@media (max-width:720px){
+  .cp-topbar nav{gap:12px;padding-left:14px;padding-right:14px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}
+  .cp-topbar nav::-webkit-scrollbar{display:none}
+  .cp-topbar nav a{flex:0 0 auto;font-size:.72rem;white-space:nowrap}
+}
+@media (max-width:410px){
+  .cp-topbar nav{gap:10px}
+  .cp-topbar nav a{font-size:.69rem}
+}
