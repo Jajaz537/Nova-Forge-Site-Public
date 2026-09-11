@@ -1,0 +1,105 @@
+name: MODARYX v3 exact companions stage art
+
+on:
+  push:
+    branches:
+      - site/modaryx-vf-premium-hd-v3
+    paths:
+      - '.github/workflows/modaryx-v3-companions-stage-art.yml'
+      - '.github/v3-companions-stage-art/**'
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild-companions-stage-art:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: site/modaryx-vf-premium-hd-v3
+          fetch-depth: 1
+
+      - name: Verify source completeness before decode
+        id: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected_chars=(0 36268 35224 40084 42620)
+          complete=true
+          for stage in 1 2 3 4; do
+            mapfile -t parts < <(find .github/v3-companions-stage-art -maxdepth 1 -type f -name "stage${stage}-part-*.b64" | sort)
+            chars=0
+            if [ "${#parts[@]}" -gt 0 ]; then
+              chars="$(cat "${parts[@]}" | tr -d '\n\r ' | wc -c | tr -d ' ')"
+            fi
+            echo "COMPANIONS_STAGE_${stage}_PARTS=${#parts[@]}"
+            echo "COMPANIONS_STAGE_${stage}_BASE64_CHARS=$chars"
+            if [ "${#parts[@]}" -ne 3 ] || [ "$chars" -ne "${expected_chars[$stage]}" ]; then
+              complete=false
+            fi
+          done
+          echo "complete=$complete" >> "$GITHUB_OUTPUT"
+          if [ "$complete" != true ]; then
+            echo 'V3_COMPANIONS_SOURCE=INCOMPLETE'
+            echo 'Decode and asset commit intentionally skipped.'
+          else
+            echo 'V3_COMPANIONS_SOURCE=COMPLETE'
+          fi
+
+      - name: Rebuild and validate exact board-01 stage crops
+        if: steps.source.outputs.complete == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected_bytes=(0 32084 33970 36950 39364)
+          expected_sha=(
+            unused
+            af8e9596cfe07640f63c49e38784a33a28d4f6633220d256bb07157ee2fe34ae
+            1f942dbadd93ca9e0518a12cfbad45bdcae2bee4bd6c358d17dc692428b2c71e
+            7e7785f2b4e2806b93055652ae002325810e027ccfc7987bac6957846c0797f7
+            84ee3bc895726dba85f489a42399151b585124d2d58c192a013b3effb3af6b3d
+          )
+
+          for stage in 1 2 3 4; do
+            joined="$(mktemp)"
+            mapfile -t parts < <(find .github/v3-companions-stage-art -maxdepth 1 -type f -name "stage${stage}-part-*.b64" | sort)
+            cat "${parts[@]}" | tr -d '\n\r ' > "$joined"
+            out="assets/companions-stage-${stage}.webp"
+            base64 -d "$joined" > "$out"
+            python3 - "$out" "${expected_bytes[$stage]}" "${expected_sha[$stage]}" "$stage" <<'PY'
+          from pathlib import Path
+          import hashlib, sys
+
+          path = Path(sys.argv[1])
+          expected_size = int(sys.argv[2])
+          expected_sha = sys.argv[3]
+          stage = sys.argv[4]
+          data = path.read_bytes()
+          sha = hashlib.sha256(data).hexdigest()
+          print(f'COMPANIONS_STAGE_{stage}_BYTES={len(data)}')
+          print(f'COMPANIONS_STAGE_{stage}_SHA256={sha}')
+          assert len(data) == expected_size, f'stage {stage}: unexpected size {len(data)}'
+          assert data[:4] == b'RIFF' and data[8:12] == b'WEBP', f'stage {stage}: not a WebP RIFF container'
+          assert int.from_bytes(data[4:8], 'little') + 8 == len(data), f'stage {stage}: RIFF size mismatch'
+          assert sha == expected_sha, f'stage {stage}: board-01 crop hash mismatch'
+          print(f'MODARYX_BOARD01_STAGE_{stage}=PASS')
+          PY
+          done
+          echo 'MODARYX_BOARD01_ALL_STAGES=PASS'
+
+      - name: Commit exact stage crops to preview branch only
+        if: steps.source.outputs.complete == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/companions-stage-1.webp assets/companions-stage-2.webp assets/companions-stage-3.webp assets/companions-stage-4.webp
+          if git diff --cached --quiet; then
+            echo 'No companions asset change.'
+            exit 0
+          fi
+          git commit -m "assets(site): rebuild exact board-01 companion stages"
+          git push origin HEAD:site/modaryx-vf-premium-hd-v3
