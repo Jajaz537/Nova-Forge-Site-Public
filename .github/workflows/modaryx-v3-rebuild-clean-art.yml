@@ -1,0 +1,55 @@
+name: MODARYX v3 rebuild clean reference art
+
+on:
+  push:
+    branches:
+      - site/modaryx-vf-premium-hd-v3
+    paths:
+      - '.github/workflows/modaryx-v3-rebuild-clean-art.yml'
+      - '.github/modaryx-v3-clean-art-trigger.json'
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild-clean-art:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: site/modaryx-vf-premium-hd-v3
+          fetch-depth: 0
+      - name: Rebuild clean recovered RAR art
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .github/rar-art-clean/part-00.b64 .github/rar-art-clean/part-01.b64 .github/rar-art-clean/part-02.b64 .github/rar-art-clean/part-03.b64 | tr -d '\n\r ' | base64 -d > assets/modaryx-rar-hero-v3.webp
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          p = Path('assets/modaryx-rar-hero-v3.webp')
+          data = p.read_bytes()
+          print(f'BYTES={len(data)}')
+          print(f'SHA256={hashlib.sha256(data).hexdigest()}')
+          print(f'HEAD={data[:12]!r}')
+          if data[:4] != b'RIFF' or data[8:12] != b'WEBP':
+              raise SystemExit('clean recovered art is not WEBP')
+          riff = int.from_bytes(data[4:8], 'little') + 8
+          if riff != len(data):
+              raise SystemExit(f'RIFF mismatch: {riff} != {len(data)}')
+          print('CLEAN_RAR_ART_CONTAINER=PASS')
+          PY
+      - name: Commit clean recovered art
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/modaryx-rar-hero-v3.webp
+          if git diff --cached --quiet; then
+            echo 'No asset change.'
+            exit 0
+          fi
+          git commit -m "feat(site): reconstruct clean RAR reference art for MODARYX v3"
+          git push origin HEAD:site/modaryx-vf-premium-hd-v3
