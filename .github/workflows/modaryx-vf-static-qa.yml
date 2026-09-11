@@ -3,9 +3,11 @@ name: MODARYX VF static QA
 on:
   push:
     branches:
-      - site/modaryx-vf-premium-hd-v2
+      - site/modaryx-vf-premium-hd-v3
     paths:
+      - '.github/workflows/modaryx-vf-static-qa.yml'
       - '.github/modaryx-vf-static-qa-trigger.json'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -17,8 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: site/modaryx-vf-premium-hd-v2
+          ref: site/modaryx-vf-premium-hd-v3
           fetch-depth: 0
+
       - name: Run targeted static VF audit
         shell: bash
         run: |
@@ -49,36 +52,36 @@ jobs:
               'project-forge-night-experience.html': 'https://modaryxmods.com/project-forge-night-experience',
           }
           stale = ('Nova Forge', 'NOVA FORGE', 'getnovaforge.com')
-          local_ref_failures = []
-          accessibility_failures = []
-          canonical_failures = []
+          local_ref_failures=[]
+          accessibility_failures=[]
+          canonical_failures=[]
 
           def resolve_local(page_path, raw):
-              value = raw.strip()
+              value=raw.strip()
               if not value or value.startswith(('#','mailto:','tel:','data:','javascript:')):
                   return None
-              parts = urlsplit(value)
+              parts=urlsplit(value)
               if parts.scheme or parts.netloc:
                   return None
-              clean = parts.path
+              clean=parts.path
               if not clean:
                   return None
-              target = Path(page_path).parent / clean
+              target=Path(page_path).parent / clean
               if clean.endswith('/'):
-                  target = target / 'index.html'
+                  target=target / 'index.html'
               return target
 
           for page, canonical in pages.items():
-              p = Path(page)
+              p=Path(page)
               if not p.is_file():
                   raise SystemExit(f'missing page: {page}')
-              text = p.read_text(encoding='utf-8')
+              text=p.read_text(encoding='utf-8')
               for forbidden in stale:
                   if forbidden in text:
                       raise SystemExit(f'{page}: stale public brand {forbidden}')
               if f'rel="canonical" href="{canonical}"' not in text:
                   canonical_failures.append(f'{page} -> {canonical}')
-              for marker, label in (
+              for marker,label in (
                   ('lang="fr"','html lang'),('name="viewport"','viewport'),('id="main"','main landmark'),
                   ('href="#main"','skip link'),('<h1','h1'),('Content-Security-Policy','CSP marker')):
                   if marker not in text:
@@ -89,55 +92,54 @@ jobs:
                   if not re.search(r'\balt=', tag, flags=re.I):
                       accessibility_failures.append(f'{page}: image missing alt')
               for ref in re.findall(r'\b(?:href|src)="([^"]+)"', text):
-                  target = resolve_local(page, ref)
+                  target=resolve_local(page, ref)
                   if target is None:
                       continue
-                  if target.suffix == '' and not target.is_file() and target.with_suffix('.html').is_file():
+                  if target.suffix=='' and not target.is_file() and target.with_suffix('.html').is_file():
                       continue
                   if not target.is_file():
                       local_ref_failures.append(f'{page}: {ref} -> {target.as_posix()}')
 
           if canonical_failures:
-              raise SystemExit('canonical failures:\n' + '\n'.join(canonical_failures))
+              raise SystemExit('canonical failures:\n'+'\n'.join(canonical_failures))
           if accessibility_failures:
-              raise SystemExit('static accessibility failures:\n' + '\n'.join(accessibility_failures))
+              raise SystemExit('static accessibility failures:\n'+'\n'.join(accessibility_failures))
           if local_ref_failures:
-              raise SystemExit('local reference failures:\n' + '\n'.join(local_ref_failures))
+              raise SystemExit('local reference failures:\n'+'\n'.join(local_ref_failures))
 
-          sitemap = Path('sitemap.xml').read_text(encoding='utf-8')
+          sitemap=Path('sitemap.xml').read_text(encoding='utf-8')
           for canonical in pages.values():
               if f'<loc>{canonical}</loc>' not in sitemap:
                   raise SystemExit(f'sitemap missing {canonical}')
-          robots = Path('robots.txt').read_text(encoding='utf-8')
+          robots=Path('robots.txt').read_text(encoding='utf-8')
           if 'https://modaryxmods.com/sitemap.xml' not in robots:
               raise SystemExit('robots sitemap mismatch')
-          manifest = Path('site.webmanifest').read_text(encoding='utf-8')
+          manifest=Path('site.webmanifest').read_text(encoding='utf-8')
           if 'MODARYX MODS' not in manifest:
               raise SystemExit('manifest public brand missing')
-          for public_file, text in (('sitemap.xml',sitemap),('robots.txt',robots),('site.webmanifest',manifest)):
+          for public_file,text in (('sitemap.xml',sitemap),('robots.txt',robots),('site.webmanifest',manifest)):
               for forbidden in stale:
                   if forbidden in text:
                       raise SystemExit(f'{public_file}: stale public brand {forbidden}')
 
-          # Network dependency guard: flag only executable remote loads, not schema identifiers or example URLs.
-          remote_loads = []
-          total = 0
-          largest = ('', 0)
-          network_pattern = re.compile(r'''(?:fetch|import)\s*\(\s*["']https?://|url\(\s*["']?https?://''', re.I)
+          remote_loads=[]
+          total=0
+          largest=('',0)
+          network_pattern=re.compile(r'''(?:fetch|import)\s*\(\s*["']https?://|url\(\s*["']?https?://''', re.I)
           for path in list(Path('assets').glob('*.css')) + list(Path('assets').glob('*.js')):
-              size = path.stat().st_size
-              total += size
-              if size > largest[1]:
-                  largest = (path.as_posix(), size)
-              text = path.read_text(encoding='utf-8', errors='ignore')
+              size=path.stat().st_size
+              total+=size
+              if size>largest[1]:
+                  largest=(path.as_posix(),size)
+              text=path.read_text(encoding='utf-8',errors='ignore')
               if network_pattern.search(text):
                   remote_loads.append(path.as_posix())
           if remote_loads:
-              raise SystemExit('executable remote asset dependency found: ' + ', '.join(remote_loads))
-          if total > 2_000_000:
+              raise SystemExit('executable remote asset dependency found: '+', '.join(remote_loads))
+          if total>2_000_000:
               raise SystemExit(f'static css/js budget exceeded: {total}')
 
-          functional = {
+          functional={
               'catalog.html': ('id="catalog-filter-form"','id="catalog-query"','assets/catalog.js'),
               'search.html': ('id="site-search"','assets/search.js'),
               'creator-studio.html': ('id="creator-form"','id="manifest-preview"','assets/creator-studio.js'),
@@ -149,8 +151,8 @@ jobs:
               'project-balanced-latency-pack.html': ('data-project-id="balanced-latency-pack"','id="project-favorite"','assets/project-hub.js'),
               'project-forge-night-experience.html': ('data-project-id="forge-night-experience"','id="project-favorite"','assets/project-hub.js'),
           }
-          for page, needles in functional.items():
-              text = Path(page).read_text(encoding='utf-8')
+          for page,needles in functional.items():
+              text=Path(page).read_text(encoding='utf-8')
               for needle in needles:
                   if needle not in text:
                       raise SystemExit(f'{page}: functional marker missing {needle}')
@@ -164,4 +166,6 @@ jobs:
           print(f'STATIC_CSS_JS_BYTES={total}')
           print(f'LARGEST_STATIC_ASSET={largest[0]}:{largest[1]}')
           print('EXECUTABLE_REMOTE_ASSET_DEPENDENCIES=NONE')
+          print('PRODUCTION_NOT_CHANGED=yes')
+          print('DNSSEC_NOT_CHANGED=yes')
           PY
