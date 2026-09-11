@@ -99,7 +99,7 @@ body::before{
 .mx-hero-values span{display:flex;align-items:center;gap:8px;color:#d7b66c;font-size:.7rem}
 .mx-hero-values b{color:#aeb4bb;font-size:.56rem;line-height:1.25;text-transform:uppercase;letter-spacing:.12em;font-weight:600}
 
-.mx-hero-scene{min-height:560px;isolation:isolate;background:linear-gradient(90deg,rgba(5,7,10,.38),transparent 13%,transparent 87%,rgba(5,7,10,.4)),url('./modaryx-rar-hero.webp') 52% 50%/cover no-repeat}
+.mx-hero-scene{min-height:560px;isolation:isolate;background:linear-gradient(90deg,rgba(5,7,10,.28),transparent 11%,transparent 89%,rgba(5,7,10,.32)),url('./modaryx-home-babies.webp') 50% 50%/cover no-repeat}
 .mx-scene-frame{position:absolute;inset:0;background:radial-gradient(circle at 61% 40%,rgba(242,196,96,.15),transparent 30%),linear-gradient(90deg,rgba(5,8,11,.48),transparent 12%,transparent 84%,rgba(5,8,11,.26));border-inline:1px solid rgba(237,208,137,.04)}
 .mx-guardian-focus{display:none}
 .mx-guardian-focus::before,.mx-guardian-focus::after{content:"";position:absolute;bottom:4%;border:1px solid rgba(238,202,117,.27);background:radial-gradient(circle at 50% 30%,rgba(237,206,132,.14),rgba(7,10,14,.9) 66%);box-shadow:inset 0 0 45px rgba(205,168,91,.06),0 18px 40px rgba(0,0,0,.38)}
@@ -200,7 +200,7 @@ body::before{
   .mx-hero-copy{padding:58px 20px 30px;background:linear-gradient(180deg,rgba(6,8,11,.76),rgba(6,8,11,.94))}
   .mx-hero h1{font-size:clamp(3rem,14vw,4.75rem)}
   .mx-hero-values{grid-template-columns:1fr 1fr}
-  .mx-hero-scene{min-height:360px;background:linear-gradient(180deg,rgba(6,8,11,.1),rgba(6,8,11,.6))}
+  .mx-hero-scene{min-height:360px;background:linear-gradient(180deg,rgba(6,8,11,.06),rgba(6,8,11,.42)),url('./modaryx-home-babies.webp') 50% 50%/cover no-repeat}
   .mx-guardian-focus{left:4%;right:4%;bottom:4%;height:78%}
   .mx-hero-manifesto{grid-template-columns:1fr;padding:22px 20px}.mx-hero-verbs{flex-wrap:wrap}.mx-hero-signet{display:none}
   .mx-ecosystem{padding-inline:14px}.mx-section-rule{gap:9px}.mx-section-rule h2{font-size:.57rem;letter-spacing:.2em}
