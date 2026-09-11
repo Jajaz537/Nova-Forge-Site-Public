@@ -102,7 +102,9 @@ jobs:
           shot games 1440 900 /games.html
           shot gta6 1440 900 /gta-6/mods/
           shot rdr2 1440 900 /red-dead-redemption-2/mods/
-          shot catalog 1440 900 /catalog.html
+          shot catalog-desktop 1440 900 /catalog.html
+          shot catalog-tablet 1024 768 /catalog.html
+          shot catalog-mobile 390 844 /catalog.html
           shot creator 1440 900 /creator-studio.html
           shot community 1440 900 /community.html
           shot security 1440 900 /security.html
@@ -129,6 +131,13 @@ jobs:
           grep -Fq 'Royaux' qa-dom/companions-desktop.html
           grep -Fq 'Bébés aujourd’hui. Royaux demain.' qa-dom/companions-desktop.html
 
+          "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --window-size=1440,900 --dump-dom "$PREVIEW_URL/catalog.html" > qa-dom/catalog-desktop.html 2>/tmp/chrome-dom-catalog.log
+          grep -Fq 'Des mondes. Des mods.' qa-dom/catalog-desktop.html
+          grep -Fq 'Des preuves lisibles.' qa-dom/catalog-desktop.html
+          grep -Fq 'modaryx-catalog-premium-v3.css' qa-dom/catalog-desktop.html
+          grep -Fq 'Filtrer le catalogue' qa-dom/catalog-desktop.html
+          grep -Fq 'Sélection publique' qa-dom/catalog-desktop.html
+
           python3 - <<'PY'
           from pathlib import Path
           import struct, zlib
@@ -136,7 +145,8 @@ jobs:
             'home-desktop.png':(1440,900),'home-tablet.png':(1024,768),'home-mobile.png':(390,844),
             'ecosystem-desktop.png':(1440,900),'ecosystem-tablet.png':(1024,768),'ecosystem-mobile.png':(390,844),
             'companions-desktop.png':(1440,900),'companions-tablet.png':(1024,768),'companions-mobile.png':(390,844),
-            'games.png':(1440,900),'gta6.png':(1440,900),'rdr2.png':(1440,900),'catalog.png':(1440,900),
+            'games.png':(1440,900),'gta6.png':(1440,900),'rdr2.png':(1440,900),
+            'catalog-desktop.png':(1440,900),'catalog-tablet.png':(1024,768),'catalog-mobile.png':(390,844),
             'creator.png':(1440,900),'community.png':(1440,900),'security.png':(1440,900),'docs.png':(1440,900)
           }
           for name, dims in expected.items():
@@ -168,6 +178,7 @@ jobs:
           print('BOARD02_HOMEPAGE_DOM_MARKERS=PASS')
           print('BOARD03_PORTALS_DOM_MARKERS=PASS')
           print('BOARD01_COMPANIONS_DOM_MARKERS=PASS')
+          print('CATALOG_PREMIUM_V3_DOM_MARKERS=PASS')
           PY
 
           echo 'BROWSER_QA_CAPTURE=PASS'
@@ -183,5 +194,6 @@ jobs:
             qa-dom/home-desktop.html
             qa-dom/ecosystem-desktop.html
             qa-dom/companions-desktop.html
+            qa-dom/catalog-desktop.html
           if-no-files-found: error
           retention-days: 7
