@@ -28,86 +28,84 @@ jobs:
           import re
 
           def replace_once(text, old, new, label):
-              count=text.count(old)
+              count = text.count(old)
               if count != 1:
                   raise SystemExit(f'{label}: expected one target, got {count}')
-              return text.replace(old,new,1)
+              return text.replace(old, new, 1)
 
-          # Creator Studio: preserve all functional form IDs and scripts; only navigation/meta/style.
-          p=Path('creator-studio.html')
-          text=p.read_text(encoding='utf-8')
-          text=replace_once(text,
+          p = Path('creator-studio.html')
+          text = p.read_text(encoding='utf-8')
+          text = replace_once(text,
               '  <title>Creator Studio — MODARYX MODS</title>\n',
               '  <title>Creator Studio — MODARYX MODS</title>\n  <link rel="canonical" href="https://modaryxmods.com/creator-studio">\n',
               'creator canonical')
-          text=replace_once(text,
+          text = replace_once(text,
               '  <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">\n',
               '  <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">\n  <link rel="stylesheet" href="./assets/modaryx-secondary-premium.css?v=20260911-1">\n',
               'creator stylesheet')
-          text=replace_once(text,
+          text = replace_once(text,
               '<nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html" aria-current="page">Creator Studio</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a></nav>',
               '<nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./games.html">Jeux</a><a href="./catalog.html">Mods</a><a href="./creator-studio.html" aria-current="page">Créer</a><a href="./ecosystem.html">Écosystème</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a></nav>',
               'creator nav')
-          text=replace_once(text,
+          text = replace_once(text,
               '<p class="eyebrow">Creator Studio V2 · brouillon local</p>\n      <h1 id="studio-title">Éditer le manifest complet sans publier.</h1>',
               '<p class="eyebrow">MODARYX MODS · Creator Studio</p>\n      <h1 id="studio-title">Créer sans perdre le contrôle.</h1>',
               'creator hero')
-          p.write_text(text,encoding='utf-8',newline='\n')
+          p.write_text(text, encoding='utf-8', newline='\n')
 
-          # Ecosystem: align navigation, public edition names and portal language.
-          p=Path('ecosystem.html')
-          text=p.read_text(encoding='utf-8')
-          text=replace_once(text,
+          p = Path('ecosystem.html')
+          text = p.read_text(encoding='utf-8')
+          text = replace_once(text,
               '  <title>Écosystème public — MODARYX MODS</title>\n',
               '  <title>Écosystème public — MODARYX MODS</title>\n  <link rel="canonical" href="https://modaryxmods.com/ecosystem">\n',
               'ecosystem canonical')
-          text=replace_once(text,
+          text = replace_once(text,
               '  <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">\n',
               '  <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">\n  <link rel="stylesheet" href="./assets/modaryx-secondary-premium.css?v=20260911-1">\n',
               'ecosystem stylesheet')
-          text=replace_once(text,
+          text = replace_once(text,
               '<nav aria-label="Écosystème public"><a href="#editions">Éditions</a><a href="#modules">Modules</a><a href="#availability">Disponibilité</a></nav>',
               '<nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./games.html">Jeux</a><a href="./catalog.html">Mods</a><a href="./creator-studio.html">Créer</a><a href="./ecosystem.html" aria-current="page">Écosystème</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a></nav>',
               'ecosystem nav')
-          text=replace_once(text,
+          text = replace_once(text,
               '<p class="eyebrow">Modaryx OS · écosystème public</p>\n        <h1 id="ecosystem-title">Présenter l’écosystème sans dévoiler le cœur interne.</h1>\n        <p class="lede">Cette surface rassemble uniquement les noms et rôles déjà annoncés publiquement. Les éditions commerciales ou techniques ne reçoivent aucun nom, prix ou contenu supposé tant qu’une nomenclature publique autorisée n’existe pas.</p>',
               '<p class="eyebrow">MODARYX MODS · Écosystème public</p>\n        <h1 id="ecosystem-title">Un royaume. Des portails spécialisés.</h1>\n        <p class="lede">Jeux, mods, création, confiance et Modaryx OS partagent une même architecture publique. Modaryx OS Public et Modaryx OS Fondateur gardent des identités distinctes ; le site n’invente ni disponibilité, ni prix, ni validation lorsqu’une preuve publique manque.</p>',
               'ecosystem hero')
 
-          editions=r'''    <section class="section" id="editions" aria-labelledby="editions-title">
-      <div class="section-heading"><div><p class="eyebrow">Éditions Modaryx OS</p><h2 id="editions-title">Deux identités. Deux niveaux de preuve.</h2></div><span class="badge neutral">Publication contrôlée</span></div>
-      <p class="section-intro">Les noms publics sont désormais fixés : <strong>Modaryx OS Public</strong> et <strong>Modaryx OS Fondateur</strong>. Leur présence sur le site ne transforme pas un build en distribution disponible : chaque édition conserve son propre état de validation et ses propres preuves.</p>
-      <div class="requirements" role="list" aria-label="Éditions publiques Modaryx OS">
-        <div role="listitem"><strong>Modaryx OS Public</strong><span>Expérience destinée à la surface publique ; disponibilité et distribution restent soumises aux preuves publiées.</span></div>
-        <div role="listitem"><strong>Modaryx OS Fondateur</strong><span>Identité distincte de l’édition Public ; aucun état vert n’est déduit d’une validation de l’autre édition.</span></div>
-        <div role="listitem"><strong>Modaryx Guide</strong><span>Aide contextuelle qui explique capacités, limites et preuves avant toute action sensible.</span></div>
-        <div role="listitem"><strong>Distribution</strong><span>Canal, provenance, hash et signature doivent être qualifiés avant tout téléchargement présenté comme officiel.</span></div>
-      </div>
-      <div class="security-note"><strong>Règle de confiance :</strong> Public vert ≠ Fondateur vert. Une preuve manquante reste manquante ; le design ne transforme jamais un état inconnu en validation.</div>
-      <div class="portal-intro" aria-label="Portails MODARYX">
-        <a href="./games.html"><small>Portail Jeux</small><strong>Des mondes à explorer.</strong><span>GTA 6, Red Dead Redemption 2 et les futurs hubs multigaming partagent une architecture commune.</span><b>Explorer les jeux →</b></a>
-        <a href="./creator-studio.html"><small>Portail Création</small><strong>Des outils pour bâtir.</strong><span>Creator Studio prépare manifests, provenance et exports localement sans publication implicite.</span><b>Ouvrir Creator Studio →</b></a>
-      </div>
-    </section>
-
-'''
-          pattern=r'    <section class="section" id="editions".*?(?=    <section class="section" id="modules")'
-          text,count=re.subn(pattern,editions,text,count=1,flags=re.S)
+          editions = '\n'.join([
+              '    <section class="section" id="editions" aria-labelledby="editions-title">',
+              '      <div class="section-heading"><div><p class="eyebrow">Éditions Modaryx OS</p><h2 id="editions-title">Deux identités. Deux niveaux de preuve.</h2></div><span class="badge neutral">Publication contrôlée</span></div>',
+              '      <p class="section-intro">Les noms publics sont désormais fixés : <strong>Modaryx OS Public</strong> et <strong>Modaryx OS Fondateur</strong>. Leur présence sur le site ne transforme pas un build en distribution disponible : chaque édition conserve son propre état de validation et ses propres preuves.</p>',
+              '      <div class="requirements" role="list" aria-label="Éditions publiques Modaryx OS">',
+              '        <div role="listitem"><strong>Modaryx OS Public</strong><span>Expérience destinée à la surface publique ; disponibilité et distribution restent soumises aux preuves publiées.</span></div>',
+              '        <div role="listitem"><strong>Modaryx OS Fondateur</strong><span>Identité distincte de l’édition Public ; aucun état vert n’est déduit d’une validation de l’autre édition.</span></div>',
+              '        <div role="listitem"><strong>Modaryx Guide</strong><span>Aide contextuelle qui explique capacités, limites et preuves avant toute action sensible.</span></div>',
+              '        <div role="listitem"><strong>Distribution</strong><span>Canal, provenance, hash et signature doivent être qualifiés avant tout téléchargement présenté comme officiel.</span></div>',
+              '      </div>',
+              '      <div class="security-note"><strong>Règle de confiance :</strong> Public vert ≠ Fondateur vert. Une preuve manquante reste manquante ; le design ne transforme jamais un état inconnu en validation.</div>',
+              '      <div class="portal-intro" aria-label="Portails MODARYX">',
+              '        <a href="./games.html"><small>Portail Jeux</small><strong>Des mondes à explorer.</strong><span>GTA 6, Red Dead Redemption 2 et les futurs hubs multigaming partagent une architecture commune.</span><b>Explorer les jeux →</b></a>',
+              '        <a href="./creator-studio.html"><small>Portail Création</small><strong>Des outils pour bâtir.</strong><span>Creator Studio prépare manifests, provenance et exports localement sans publication implicite.</span><b>Ouvrir Creator Studio →</b></a>',
+              '      </div>',
+              '    </section>',
+              ''
+          ])
+          pattern = r'    <section class="section" id="editions".*?(?=    <section class="section" id="modules")'
+          text, count = re.subn(pattern, editions, text, count=1, flags=re.S)
           if count != 1:
               raise SystemExit(f'ecosystem editions: replaced={count}')
-          p.write_text(text,encoding='utf-8',newline='\n')
+          p.write_text(text, encoding='utf-8', newline='\n')
 
-          # Targeted proof: preserve functional Creator Studio IDs and verify new public naming.
-          creator=Path('creator-studio.html').read_text(encoding='utf-8')
+          creator = Path('creator-studio.html').read_text(encoding='utf-8')
           for needle in ('id="creator-form"','id="manifest-preview"','id="save-draft"','assets/creator-studio.js','modaryx-secondary-premium.css','https://modaryxmods.com/creator-studio'):
               if needle not in creator:
                   raise SystemExit(f'creator missing {needle}')
-          eco=Path('ecosystem.html').read_text(encoding='utf-8')
+          eco = Path('ecosystem.html').read_text(encoding='utf-8')
           for needle in ('Modaryx OS Public','Modaryx OS Fondateur','Modaryx Guide','class="portal-intro"','https://modaryxmods.com/ecosystem'):
               if needle not in eco:
                   raise SystemExit(f'ecosystem missing {needle}')
           for path in ('creator-studio.html','ecosystem.html'):
-              content=Path(path).read_text(encoding='utf-8')
+              content = Path(path).read_text(encoding='utf-8')
               for forbidden in ('Nova Forge','NOVA FORGE','getnovaforge.com'):
                   if forbidden in content:
                       raise SystemExit(f'{path}: stale public brand {forbidden}')
