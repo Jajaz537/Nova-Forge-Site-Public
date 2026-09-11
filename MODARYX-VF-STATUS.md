@@ -1,46 +1,47 @@
 # MODARYX MODS — VF Premium HD V3 status
 
-## Active recovery state — 2026-09-11
+## Active preview state — 2026-09-11
 
-- **Production is the stable rollback and must not be changed without explicit human visual approval.**
+- **Production remains the stable rollback and must not be changed without explicit human visual approval.**
 - Work is restricted to preview branch `site/modaryx-vf-premium-hd-v3`.
 - No merge, cutover or production deployment is authorized.
-- The previous homepage visual PASS is **revoked**: the old VF hero was reported visually corrupted in production.
-- The RAR `Nova_Forge_5_Nouveaux_Concepts_Loup_Dragon.rar` is the visual source of truth.
+- The five Wolf + Dragon boards from `Nova_Forge_5_Nouveaux_Concepts_Loup_Dragon.rar` remain the visual source of truth.
 - Source boards, in order: Compagnons officiels Loup + Dragon; Site Accueil Loup + Dragon; Portails / Univers Loup + Dragon; OS Public Loup + Dragon; OS Fondateur Loup + Dragon.
-- Current priority order: homepage board 02; portals/universe board 03; companions; OS Public; OS Fondateur; remove public-visible internal/debug copy; desktop/tablet/mobile visual validation; only then consider production.
-- DNSSEC is frozen pending the IONOS response. Do not modify DS/DNSKEY settings in this site pass.
+- Priority order remains: homepage board 02; portals/universe board 03; companions; OS Public; OS Fondateur; remove public-visible internal/debug copy; desktop/tablet/mobile visual validation; only then consider production.
+- DNSSEC remains frozen pending the IONOS response. Do not modify DS/DNSKEY settings in this site pass.
 
-## Homepage board 02 — current blocker and proof
+## Locked companion-age rule
 
-- `index.html` still renders its central scene through the CSS class `.mx-hero-scene`.
-- `assets/modaryx-vf.css` still points desktop/tablet at `assets/modaryx-rar-hero.webp`; this old hero is **not visually approved**.
-- The mobile rule at `max-width:720px` currently replaces the scene background with a gradient and drops the Wolf + Dragon image URL entirely. This is a confirmed responsive defect to repair when the exact board-02 asset is wired.
-- Do **not** use `.github/rar-art-clean/part-00..03.b64` as a source; that legacy reconstruction is invalid.
-- Do **not** use `.github/v3-home-scene/` as a source; that intermediate set is truncated.
-- Clean source staging is `.github/v3-home-scene-exact/`.
-- Current clean staging proof: **6 parts / 36,000 Base64 characters**.
-- Expected exact Base64 length for the target 40,840-byte WEBP: **54,456 characters**.
-- Expected target SHA-256: `0e13399167bf0e50ba21aba143a1379b39501265f4254654b7f7d5e1078e5101`.
-- Rebuild workflow is fail-closed: it will not decode or commit an asset until the clean source reaches exactly 54,456 Base64 characters, then it additionally verifies 40,840 bytes, RIFF/WEBP integrity, RIFF length and the exact SHA-256.
-- Targeted guard proof: GitHub Actions run `34598889195` completed successfully with `EXACT_SOURCE_PARTS=6`, `EXACT_SOURCE_BASE64_CHARS=36000`, `V3_REFERENCE_HOME_SOURCE=INCOMPLETE`; the asset commit step was skipped.
-- Repository-history probe run `34598968907`: `HISTORY_REFERENCE_FOUND=false`; the exact 40,840-byte/hash asset does not exist in reachable Git history under another path.
-- **Source recovery conclusion:** the exact board-02 source cannot be completed from the repository alone. Re-upload the visual-source RAR before further homepage artwork/crop changes.
+- Main site appearances of the Wolf + Dragon must be **Stage I — babies**.
+- This applies to the homepage hero, portals/universe foreground pair, companion cards and the principal OS visuals implemented on the public site.
+- Stages II–IV may appear only where the interface explicitly demonstrates growth/progression, for example the `ILS GRANDISSENT AVEC TOI` progression strip.
+- Any older/young/adult/royal pair used as the main site pair is not acceptable for visual approval.
 
-## Fresh V3 browser evidence — not a visual PASS
+## Homepage board 02 — recovered baby scene and current proof
 
-- Browser QA was corrected from V2 to the actual V3 branch and preview target.
-- Fresh V3 run: `34599130791` at commit `2062555a26cc1fa553aeff21b4efe316eb792d0b`.
-- Cloudflare preview used by that run: `https://43a91bc4.nova-forge-site-public.pages.dev`.
-- Captures produced successfully: homepage desktop **1440×900**, tablet **1024×768**, mobile **390×844**, plus Games, GTA 6, RDR2, Catalogue, Creator Studio, Community, Security and Documentation.
-- Render guards passed only for dimensions/non-blank output/DOM markers. They are technical capture guards, **not visual approval**.
-- Fresh human inspection of the V3 screenshots confirms: desktop and tablet hero artwork is visibly corrupted into large block/glitch artifacts; mobile omits the Wolf + Dragon scene completely and leaves an empty dark hero area.
-- Therefore homepage board 02 remains **BLOCKED / NOT APPROVED** until the authentic RAR board is re-ingested and the preview is compared again.
-- Browser QA reported `PRODUCTION_NOT_CHANGED=yes` and `DNSSEC_NOT_CHANGED=yes`.
+- The previous corrupted legacy hero remains revoked and must not be reintroduced.
+- An exact Stage-I baby scene derived from the board-02 source has now been rebuilt on the preview branch as `assets/modaryx-home-babies.webp`.
+- Rebuild contract: **8 staged Base64 parts / 93,280 characters / 69,960 decoded bytes / valid RIFF-WEBP**.
+- Locked asset SHA-256: `2e1aa635fae4f6ea882e153db2ee096fb345d8560f5ba67e033580e5384a9f1e`.
+- The rebuild workflow validates byte length, RIFF/WEBP integrity, RIFF container length and the exact SHA before committing the asset.
+- `assets/modaryx-vf.css` now uses `modaryx-home-babies.webp` for desktop, tablet and mobile hero scenes; the former mobile rule that dropped the animals has been removed.
+- The hero was subsequently tightened toward board 02: reduced hero height, reduced oversized heading scale and reduced excess vertical spacing while preserving the exact baby artwork.
+- The latest preview branch head used for responsive browser QA is `85cb6c24704525d00d39ade0182d399de34dff7b`.
+- Fresh browser QA run `34612814238` completed successfully for homepage desktop **1440×900**, tablet **1024×768**, mobile **390×844**, plus the existing secondary-page capture set.
+- The run passed screenshot dimension, non-blank render and required homepage DOM-marker guards.
+- Artifact `modaryx-vf-browser-qa-v3`, id `10268374949`, digest `sha256:714620784f4f9406fdc46976be63d0945e72190bdf235d13ef93fafca3c9360e`, contains the fresh captures.
+- **This is still not a visual PASS.** The homepage requires fresh human inspection against board 02 before it can be marked approved.
+
+## Board 03 — next active implementation target
+
+- `ecosystem.html` is still a prototype-style public ecosystem page and is not yet faithful to the Portails / Univers board.
+- The target composition is the board-03 cinematic portals scene: large `Explorer les univers` hierarchy, multiple glowing portal arches, central Stage-I baby Wolf + Dragon pair, six large universe cards and the premium dark fantasy/gold visual language.
+- The current public/debug-oriented ecosystem copy may be preserved below the premium composition until the later dedicated cleanup pass; do not destroy functional status surfaces broadly while the visual rebuild is in progress.
+- Board-03 work must remain on the V3 preview branch and must not be treated as visually approved without fresh responsive captures and human comparison to the source board.
 
 ## Public-visible prototype/debug copy already identified
 
-The current homepage still exposes implementation-oriented wording below the premium composition, including browser analysis, Bridge OS status, fail-closed labels, local-profile state and source/build status language. These are recorded for the later public-copy cleanup pass. Do not perform a broad deletion while board-02 structure is blocked; preserve functional IDs/data attributes until their surfaces are deliberately redesigned.
+The current homepage and ecosystem surfaces still expose implementation-oriented wording such as browser analysis, Bridge OS status, fail-closed labels, local-profile state, backend connection state and source/build status language. These remain queued for the dedicated public-copy cleanup pass after the five main visual surfaces are rebuilt. Preserve functional IDs/data attributes until each surface is deliberately redesigned.
 
 ## Locked identity
 
@@ -52,11 +53,11 @@ The current homepage still exposes implementation-oriented wording below the pre
 
 ## Locked visual contract
 
-The five Wolf + Dragon boards from the RAR are authoritative. No generated replacement artwork, approximate silhouette, guessed crop or legacy hero may be treated as a visual PASS. A technical/static PASS never substitutes for fresh human visual validation of desktop, tablet and mobile preview captures.
+The five Wolf + Dragon boards are authoritative. No generated replacement artwork, approximate silhouette, guessed crop or legacy hero may be treated as a visual PASS. A technical/static PASS never substitutes for fresh human visual validation of desktop, tablet and mobile preview captures.
 
 ## Historical technical work — not a current visual PASS
 
-The branch contains prior premium styling, game hubs, Creator Studio, ecosystem, trust/content, catalogue, search, download/verifier and project-hub work with targeted static/functional checks. Those checks may still be useful as regression guards, but all previous claims of final visual approval, responsive visual PASS or production readiness are superseded by the V3 recovery state above.
+The branch contains prior premium styling, game hubs, Creator Studio, ecosystem, trust/content, catalogue, search, download/verifier and project-hub work with targeted static/functional checks. Those checks may still be useful as regression guards, but all previous claims of final visual approval, responsive visual PASS or production readiness remain superseded by the V3 recovery/rebuild state above.
 
 ## Release gate
 
