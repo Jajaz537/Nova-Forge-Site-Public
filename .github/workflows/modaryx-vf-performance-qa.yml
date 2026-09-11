@@ -182,7 +182,7 @@ jobs:
             elapsed=$((end_ms-start_ms))
             echo "$elapsed" | tee -a perf-proof/chrome-render-ms.txt
             grep -Fq 'MODARYX MODS' "perf-proof/chrome/home-${sample}.html"
-            grep -Fq 'Loup et Dragon devant le royaume MODARYX' "perf-proof/chrome/home-${sample}.html"
+            grep -Fq 'Bébé Loup et Bébé Dragon devant le royaume MODARYX' "perf-proof/chrome/home-${sample}.html"
             grep -Fq 'UN ÉCOSYSTÈME POUR TOUS LES MONDES' "perf-proof/chrome/home-${sample}.html"
             rm -rf "$profile"
           done
