@@ -93,6 +93,9 @@ jobs:
           shot home-desktop 1440 900 /
           shot home-tablet 1024 768 /
           shot home-mobile 390 844 /
+          shot ecosystem-desktop 1440 900 /ecosystem.html
+          shot ecosystem-tablet 1024 768 /ecosystem.html
+          shot ecosystem-mobile 390 844 /ecosystem.html
           shot games 1440 900 /games.html
           shot gta6 1440 900 /gta-6/mods/
           shot rdr2 1440 900 /red-dead-redemption-2/mods/
@@ -102,17 +105,24 @@ jobs:
           shot security 1440 900 /security.html
           shot docs 1440 900 /documentation.html
 
-          "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --window-size=1440,900 --dump-dom "$PREVIEW_URL/" > qa-dom/home-desktop.html 2>/tmp/chrome-dom.log
+          "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --window-size=1440,900 --dump-dom "$PREVIEW_URL/" > qa-dom/home-desktop.html 2>/tmp/chrome-dom-home.log
           grep -Fq 'MODARYX MODS' qa-dom/home-desktop.html
           grep -Fq 'Bébé Loup et Bébé Dragon devant le royaume MODARYX' qa-dom/home-desktop.html
           grep -Fq 'UN ÉCOSYSTÈME POUR TOUS LES MONDES' qa-dom/home-desktop.html
           grep -Fq 'ILS GRANDISSENT AVEC TOI' qa-dom/home-desktop.html
+
+          "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --window-size=1440,900 --dump-dom "$PREVIEW_URL/ecosystem.html" > qa-dom/ecosystem-desktop.html 2>/tmp/chrome-dom-ecosystem.log
+          grep -Fq 'Explorer' qa-dom/ecosystem-desktop.html
+          grep -Fq 'les univers' qa-dom/ecosystem-desktop.html
+          grep -Fq 'Bébé Loup et Bébé Dragon, compagnons Stage I MODARYX' qa-dom/ecosystem-desktop.html
+          grep -Fq 'Un écosystème. Six portes.' qa-dom/ecosystem-desktop.html
 
           python3 - <<'PY'
           from pathlib import Path
           import struct, zlib
           expected={
             'home-desktop.png':(1440,900),'home-tablet.png':(1024,768),'home-mobile.png':(390,844),
+            'ecosystem-desktop.png':(1440,900),'ecosystem-tablet.png':(1024,768),'ecosystem-mobile.png':(390,844),
             'games.png':(1440,900),'gta6.png':(1440,900),'rdr2.png':(1440,900),'catalog.png':(1440,900),
             'creator.png':(1440,900),'community.png':(1440,900),'security.png':(1440,900),'docs.png':(1440,900)
           }
@@ -142,7 +152,8 @@ jobs:
               print(f'{name}: {w}x{h} bytes={len(data)} entropy_values={len(set(sample))}')
           print('RESPONSIVE_SCREENSHOT_DIMENSIONS=PASS')
           print('NON_BLANK_RENDER_GUARD=PASS')
-          print('RAR_HOMEPAGE_DOM_MARKERS=PASS')
+          print('BOARD02_HOMEPAGE_DOM_MARKERS=PASS')
+          print('BOARD03_PORTALS_DOM_MARKERS=PASS')
           PY
 
           echo 'BROWSER_QA_CAPTURE=PASS'
@@ -156,5 +167,6 @@ jobs:
           path: |
             qa-shots/*.png
             qa-dom/home-desktop.html
+            qa-dom/ecosystem-desktop.html
           if-no-files-found: error
           retention-days: 7
