@@ -179,7 +179,7 @@
   .trust-portal-row>a::before{opacity:.42}
 }
 @media(max-width:760px){
-  .catalog-hero{min-height:auto;gap:24px!important;padding-bottom:38px!important}
+  .catalog-hero{min-height:auto;grid-template-columns:1fr!important;gap:24px!important;padding-bottom:38px!important}
   .catalog-hero::before{top:auto;right:-56px;bottom:8px;width:250px;height:190px;opacity:.16}
   .catalog-contract{padding:17px 18px!important}
   .trust-portal-row{grid-template-columns:1fr!important;padding-top:12px}
