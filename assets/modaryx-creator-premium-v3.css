@@ -1,0 +1,88 @@
+/* MODARYX MODS — Creator Studio Premium HD V3
+   Isolated visual polish for the local-first creator surface.
+   Reuses validated MODARYX kingdom + Stage I companion assets only. */
+
+.studio-hero{
+  position:relative;
+  isolation:isolate;
+  min-height:470px;
+  overflow:hidden;
+  padding-right:min(34vw,470px)!important;
+}
+.studio-hero>*{position:relative;z-index:3}
+.studio-hero h1{max-width:10.5ch!important;text-wrap:balance;text-shadow:0 4px 34px rgba(0,0,0,.58)}
+.studio-hero .lede{max-width:760px!important}
+.studio-hero .release-status{max-width:860px;margin-top:26px!important}
+
+.studio-hero::before{
+  content:"";
+  position:absolute;
+  z-index:1;
+  right:3.5%;
+  top:72px;
+  width:min(420px,31vw);
+  height:330px;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(6,9,12,.02),rgba(6,9,12,.34)),
+    url('./modaryx-home-babies.webp') 50% 49%/cover no-repeat;
+  opacity:.36;
+  filter:saturate(.86) contrast(1.06) brightness(.78);
+  border-radius:46% 46% 18% 18% / 40% 40% 15% 15%;
+  mask-image:radial-gradient(ellipse 75% 72% at 50% 51%,#000 46%,rgba(0,0,0,.76) 68%,transparent 100%);
+}
+.studio-hero::after{
+  right:-5%!important;
+  top:2%!important;
+  width:min(760px,55vw)!important;
+  height:96%!important;
+  opacity:.43!important;
+  background:
+    linear-gradient(90deg,rgba(7,9,12,.98),rgba(7,9,12,.34) 36%,rgba(7,9,12,.08)),
+    url('./modaryx-kingdom-panorama.svg') 58% 52%/cover no-repeat!important;
+  mask-image:linear-gradient(90deg,transparent 0,#000 25%,#000 82%,transparent 100%)!important;
+}
+
+.studio-layout{position:relative}
+.studio-layout::before{
+  content:"CRÉER · VALIDER · EXPORTER";
+  position:absolute;
+  top:15px;
+  left:2px;
+  color:rgba(222,194,127,.42);
+  font-size:.62rem;
+  font-weight:800;
+  letter-spacing:.22em;
+  pointer-events:none;
+}
+.studio-form,.studio-preview{position:relative;overflow:hidden}
+.studio-form::before,.studio-preview::before{
+  content:"";
+  position:absolute;
+  left:22px;right:22px;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(239,216,155,.42),transparent);
+  pointer-events:none;
+}
+.studio-preview::after{
+  content:"M";
+  position:absolute;
+  right:22px;bottom:8px;
+  font:500 6rem/1 Georgia,'Times New Roman',serif;
+  color:rgba(210,173,100,.028);
+  pointer-events:none;
+}
+
+@media(max-width:1040px){
+  .studio-hero{padding-right:min(28vw,260px)!important}
+  .studio-hero::before{right:-1%;width:min(330px,34vw);opacity:.26}
+  .studio-hero::after{opacity:.32!important}
+}
+@media(max-width:760px){
+  .studio-hero{min-height:auto;padding-right:0!important;padding-bottom:42px!important}
+  .studio-hero h1{max-width:12ch!important}
+  .studio-hero::before{right:-74px;top:auto;bottom:18px;width:235px;height:178px;opacity:.13}
+  .studio-hero::after{right:-35%!important;width:110%!important;opacity:.18!important}
+  .studio-hero .release-status{margin-top:20px!important}
+  .studio-layout::before{top:13px;left:0;font-size:.56rem;letter-spacing:.16em}
+}
+@media(prefers-reduced-motion:reduce){.studio-form,.studio-preview{scroll-behavior:auto}}
