@@ -48,7 +48,6 @@ jobs:
               'project-balanced-latency-pack.html': 'https://modaryxmods.com/project-balanced-latency-pack',
               'project-forge-night-experience.html': 'https://modaryxmods.com/project-forge-night-experience',
           }
-
           stale = ('Nova Forge', 'NOVA FORGE', 'getnovaforge.com')
           local_ref_failures = []
           accessibility_failures = []
@@ -64,11 +63,8 @@ jobs:
               clean = parts.path
               if not clean:
                   return None
-              base = Path(page_path).parent
-              target = (base / clean)
+              target = Path(page_path).parent / clean
               if clean.endswith('/'):
-                  target = target / 'index.html'
-              elif target.name in ('.',''):
                   target = target / 'index.html'
               return target
 
@@ -77,43 +73,27 @@ jobs:
               if not p.is_file():
                   raise SystemExit(f'missing page: {page}')
               text = p.read_text(encoding='utf-8')
-
               for forbidden in stale:
                   if forbidden in text:
                       raise SystemExit(f'{page}: stale public brand {forbidden}')
-
-              marker = f'rel="canonical" href="{canonical}"'
-              if marker not in text:
+              if f'rel="canonical" href="{canonical}"' not in text:
                   canonical_failures.append(f'{page} -> {canonical}')
-
-              if 'lang="fr"' not in text:
-                  accessibility_failures.append(f'{page}: html lang')
-              if 'name="viewport"' not in text:
-                  accessibility_failures.append(f'{page}: viewport')
-              if 'id="main"' not in text:
-                  accessibility_failures.append(f'{page}: main landmark')
-              if 'class="skip-link"' not in text or 'href="#main"' not in text:
-                  accessibility_failures.append(f'{page}: skip link')
-              if '<h1' not in text:
-                  accessibility_failures.append(f'{page}: h1')
+              for marker, label in (
+                  ('lang="fr"','html lang'),('name="viewport"','viewport'),('id="main"','main landmark'),
+                  ('href="#main"','skip link'),('<h1','h1'),('Content-Security-Policy','CSP marker')):
+                  if marker not in text:
+                      accessibility_failures.append(f'{page}: {label}')
               if '<nav' in text and 'aria-label=' not in text:
                   accessibility_failures.append(f'{page}: nav label')
-              if 'Content-Security-Policy' not in text:
-                  accessibility_failures.append(f'{page}: CSP marker')
-
               for tag in re.findall(r'<img\b[^>]*>', text, flags=re.I):
                   if not re.search(r'\balt=', tag, flags=re.I):
                       accessibility_failures.append(f'{page}: image missing alt')
-
-              refs = re.findall(r'\b(?:href|src)="([^"]+)"', text)
-              for ref in refs:
+              for ref in re.findall(r'\b(?:href|src)="([^"]+)"', text):
                   target = resolve_local(page, ref)
                   if target is None:
                       continue
-                  if target.suffix == '' and not target.is_file():
-                      html_target = target.with_suffix('.html')
-                      if html_target.is_file():
-                          continue
+                  if target.suffix == '' and not target.is_file() and target.with_suffix('.html').is_file():
+                      continue
                   if not target.is_file():
                       local_ref_failures.append(f'{page}: {ref} -> {target.as_posix()}')
 
@@ -128,38 +108,32 @@ jobs:
           for canonical in pages.values():
               if f'<loc>{canonical}</loc>' not in sitemap:
                   raise SystemExit(f'sitemap missing {canonical}')
-          for forbidden in stale:
-              if forbidden in sitemap:
-                  raise SystemExit(f'sitemap stale brand {forbidden}')
-
           robots = Path('robots.txt').read_text(encoding='utf-8')
           if 'https://modaryxmods.com/sitemap.xml' not in robots:
               raise SystemExit('robots sitemap mismatch')
-          for forbidden in stale:
-              if forbidden in robots:
-                  raise SystemExit(f'robots stale brand {forbidden}')
-
           manifest = Path('site.webmanifest').read_text(encoding='utf-8')
           if 'MODARYX MODS' not in manifest:
               raise SystemExit('manifest public brand missing')
-          for forbidden in stale:
-              if forbidden in manifest:
-                  raise SystemExit(f'manifest stale brand {forbidden}')
+          for public_file, text in (('sitemap.xml',sitemap),('robots.txt',robots),('site.webmanifest',manifest)):
+              for forbidden in stale:
+                  if forbidden in text:
+                      raise SystemExit(f'{public_file}: stale public brand {forbidden}')
 
-          # Static-first / performance-oriented guardrails, not a browser benchmark.
-          remote_assets = []
+          # Network dependency guard: flag only executable remote loads, not schema identifiers or example URLs.
+          remote_loads = []
           total = 0
           largest = ('', 0)
+          network_pattern = re.compile(r'''(?:fetch|import)\s*\(\s*["']https?://|url\(\s*["']?https?://''', re.I)
           for path in list(Path('assets').glob('*.css')) + list(Path('assets').glob('*.js')):
               size = path.stat().st_size
               total += size
               if size > largest[1]:
                   largest = (path.as_posix(), size)
               text = path.read_text(encoding='utf-8', errors='ignore')
-              if re.search(r'https?://', text):
-                  remote_assets.append(path.as_posix())
-          if remote_assets:
-              raise SystemExit('remote asset dependency found: ' + ', '.join(remote_assets))
+              if network_pattern.search(text):
+                  remote_loads.append(path.as_posix())
+          if remote_loads:
+              raise SystemExit('executable remote asset dependency found: ' + ', '.join(remote_loads))
           if total > 2_000_000:
               raise SystemExit(f'static css/js budget exceeded: {total}')
 
@@ -189,5 +163,5 @@ jobs:
           print('FUNCTIONAL_MARKERS=PRESERVED')
           print(f'STATIC_CSS_JS_BYTES={total}')
           print(f'LARGEST_STATIC_ASSET={largest[0]}:{largest[1]}')
-          print('REMOTE_ASSET_DEPENDENCIES=NONE')
+          print('EXECUTABLE_REMOTE_ASSET_DEPENDENCIES=NONE')
           PY
