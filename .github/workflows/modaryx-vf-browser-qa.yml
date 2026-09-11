@@ -96,6 +96,9 @@ jobs:
           shot ecosystem-desktop 1440 900 /ecosystem.html
           shot ecosystem-tablet 1024 768 /ecosystem.html
           shot ecosystem-mobile 390 844 /ecosystem.html
+          shot companions-desktop 1440 900 /companions.html
+          shot companions-tablet 1024 768 /companions.html
+          shot companions-mobile 390 844 /companions.html
           shot games 1440 900 /games.html
           shot gta6 1440 900 /gta-6/mods/
           shot rdr2 1440 900 /red-dead-redemption-2/mods/
@@ -117,12 +120,22 @@ jobs:
           grep -Fq 'Bébé Loup et Bébé Dragon, compagnons Stage I MODARYX' qa-dom/ecosystem-desktop.html
           grep -Fq 'Un écosystème. Six portes.' qa-dom/ecosystem-desktop.html
 
+          "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --window-size=1440,900 --dump-dom "$PREVIEW_URL/companions.html" > qa-dom/companions-desktop.html 2>/tmp/chrome-dom-companions.log
+          grep -Fq 'Ils grandissent' qa-dom/companions-desktop.html
+          grep -Fq 'Quatre étapes. Une seule histoire.' qa-dom/companions-desktop.html
+          grep -Fq 'Bébés' qa-dom/companions-desktop.html
+          grep -Fq 'Jeunes' qa-dom/companions-desktop.html
+          grep -Fq 'Forgés' qa-dom/companions-desktop.html
+          grep -Fq 'Royaux' qa-dom/companions-desktop.html
+          grep -Fq 'Bébés aujourd’hui. Royaux demain.' qa-dom/companions-desktop.html
+
           python3 - <<'PY'
           from pathlib import Path
           import struct, zlib
           expected={
             'home-desktop.png':(1440,900),'home-tablet.png':(1024,768),'home-mobile.png':(390,844),
             'ecosystem-desktop.png':(1440,900),'ecosystem-tablet.png':(1024,768),'ecosystem-mobile.png':(390,844),
+            'companions-desktop.png':(1440,900),'companions-tablet.png':(1024,768),'companions-mobile.png':(390,844),
             'games.png':(1440,900),'gta6.png':(1440,900),'rdr2.png':(1440,900),'catalog.png':(1440,900),
             'creator.png':(1440,900),'community.png':(1440,900),'security.png':(1440,900),'docs.png':(1440,900)
           }
@@ -154,6 +167,7 @@ jobs:
           print('NON_BLANK_RENDER_GUARD=PASS')
           print('BOARD02_HOMEPAGE_DOM_MARKERS=PASS')
           print('BOARD03_PORTALS_DOM_MARKERS=PASS')
+          print('BOARD01_COMPANIONS_DOM_MARKERS=PASS')
           PY
 
           echo 'BROWSER_QA_CAPTURE=PASS'
@@ -168,5 +182,6 @@ jobs:
             qa-shots/*.png
             qa-dom/home-desktop.html
             qa-dom/ecosystem-desktop.html
+            qa-dom/companions-desktop.html
           if-no-files-found: error
           retention-days: 7
