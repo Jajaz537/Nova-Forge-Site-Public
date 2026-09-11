@@ -1,13 +1,13 @@
 # MODARYX MODS — next VF batch
 
-The next targeted batch is **final RAR homepage treatment + QA**.
+The next targeted batch is **preview runtime QA + responsive visual verification**.
 
 Goals:
-- keep the uploaded Wolf + Dragon RAR as the visual/composition source of truth; do not substitute generated artwork;
-- preserve the homepage’s exact approved placement while strengthening the real art treatment from the recovered source material;
-- verify internal links and SEO relationships between Games, GTA 6, RDR2, Catalogue, Creator Studio, Community, Security, Downloads, Projects and Documentation;
-- run targeted canonical, sitemap, visible-name, static-first and accessibility checks;
-- run responsive desktop/tablet/mobile checks and a performance-oriented static asset pass;
-- keep all unavailable distributions and unproven states fail-closed;
-- final QA order: homepage RAR treatment → links/canonicals → accessibility/responsive → performance → visible-name audit;
-- keep PR #11 draft until the complete VF is coherent and final QA passes.
+- keep the recovered Wolf + Dragon RAR artwork and approved composition exactly as the homepage source of truth;
+- verify the Cloudflare Pages preview generated from `site/modaryx-vf-premium-hd-v2` before any production merge;
+- check desktop, tablet and mobile behavior on the homepage, Games, GTA 6, RDR2, Catalogue, Creator Studio, Community, Security, Downloads and Documentation;
+- run a browser-level performance sanity pass on the preview without weakening CSP, fail-closed distribution states or local-only verification behavior;
+- confirm the final visible naming audit remains green after all runtime adjustments;
+- repair only exact findings, with targeted micro-proofs after each repair;
+- keep PR #11 draft until preview, responsive and runtime checks are green;
+- only then prepare PR #11 for final promotion to `main`.
