@@ -1,0 +1,109 @@
+name: MODARYX VF trust content
+
+on:
+  push:
+    branches:
+      - site/modaryx-vf-premium-hd-v2
+    paths:
+      - '.github/modaryx-vf-trust-content-trigger.json'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: site/modaryx-vf-premium-hd-v2
+          fetch-depth: 0
+      - name: Harmonize navigation and Guide callouts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def once(text, old, new, label):
+              n = text.count(old)
+              if n != 1:
+                  raise SystemExit(f'{label}: expected 1 target, got {n}')
+              return text.replace(old, new, 1)
+
+          nav = '<nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./games.html">Jeux</a><a href="./catalog.html">Mods</a><a href="./creator-studio.html">Créer</a><a href="./ecosystem.html">Écosystème</a><a href="./community.html">Communauté</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a></nav>'
+
+          # Community
+          p = Path('community.html')
+          text = p.read_text(encoding='utf-8')
+          old = '<nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./catalog.html">Catalogue</a><a href="./profiles.html">Profiles</a><a href="./community.html" aria-current="page">Communauté</a><a href="./security.html">Sécurité</a></nav>'
+          community_nav = nav.replace('<a href="./community.html">Communauté</a>', '<a href="./community.html" aria-current="page">Communauté</a>')
+          text = once(text, old, community_nav, 'community nav')
+          hero_end = '    </section>\n\n    <section class="section" aria-labelledby="community-surfaces-title">'
+          portals = '''    </section>\n\n    <div class="trust-portal-row" aria-label="Portails communauté MODARYX">\n      <a href="./profiles.html"><small>Identité</small><strong>Profils & Passkeys</strong><span>Séparer l’identité publique des credentials et des sessions.</span><b>Voir les profils →</b></a>\n      <a href="./creator-studio.html"><small>Création</small><strong>Creator Studio</strong><span>Préparer localement les contenus avant toute publication réelle.</span><b>Créer un projet →</b></a>\n      <a href="./security.html"><small>Confiance</small><strong>Sécurité & provenance</strong><span>Comprendre les preuves qui restent distinctes avant publication.</span><b>Voir la sécurité →</b></a>\n    </div>\n\n    <section class="section" aria-labelledby="community-surfaces-title">'''
+          text = once(text, hero_end, portals, 'community portals')
+          p.write_text(text, encoding='utf-8', newline='\n')
+
+          # Profiles
+          p = Path('profiles.html')
+          text = p.read_text(encoding='utf-8')
+          old = '<nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Creator Studio</a><a href="./profiles.html" aria-current="page">Profiles</a><a href="./security.html">Sécurité</a></nav>'
+          profile_nav = nav.replace('<a href="./community.html">Communauté</a>', '<a href="./profiles.html" aria-current="page">Profils</a><a href="./community.html">Communauté</a>')
+          text = once(text, old, profile_nav, 'profiles nav')
+          hero_end = '    </section>\n\n    <section class="profiles-grid" aria-labelledby="boundaries-title">'
+          portals = '''    </section>\n\n    <div class="trust-portal-row" aria-label="Portails identité MODARYX">\n      <a href="./community.html"><small>Communauté</small><strong>Identité publique</strong><span>Collections et contributions restent séparées de l’authentification.</span><b>Voir la communauté →</b></a>\n      <a href="./security.html"><small>Confiance</small><strong>Frontières de sécurité</strong><span>Credentials, sessions et preuves gardent des responsabilités distinctes.</span><b>Voir la sécurité →</b></a>\n      <a href="./documentation.html"><small>Guide</small><strong>Comprendre avant d’agir</strong><span>La documentation explique les limites sans simuler de compte actif.</span><b>Lire la documentation →</b></a>\n    </div>\n\n    <section class="profiles-grid" aria-labelledby="boundaries-title">'''
+          text = once(text, hero_end, portals, 'profiles portals')
+          p.write_text(text, encoding='utf-8', newline='\n')
+
+          # Security
+          p = Path('security.html')
+          text = p.read_text(encoding='utf-8')
+          old = '<nav aria-label="Sécurité et provenance"><a href="#chain">Chaîne de confiance</a><a href="#states">États</a><a href="#proofs">Preuves publiques</a><a href="#limits">Limites</a></nav>'
+          security_nav = nav.replace('<a href="./security.html">Sécurité</a>', '<a href="./security.html" aria-current="page">Sécurité</a>')
+          text = once(text, old, security_nav, 'security nav')
+          hero_end = '    </section>\n\n    <section class="section" id="chain" aria-labelledby="chain-title">'
+          guide = '''    </section>\n\n    <div class="guide-callout" aria-label="Modaryx Guide — sécurité">\n      <div class="guide-mark">M</div>\n      <div><small>Modaryx Guide</small><strong>La preuve avant la promesse.</strong><p>Le Guide peut expliquer la différence entre identité, hash, provenance, signature et compatibilité. Il ne transforme jamais un état inconnu en état sûr et ne remplace aucune vérification.</p></div>\n    </div>\n\n    <section class="section" id="chain" aria-labelledby="chain-title">'''
+          text = once(text, hero_end, guide, 'security Guide')
+          p.write_text(text, encoding='utf-8', newline='\n')
+
+          # Documentation
+          p = Path('documentation.html')
+          text = p.read_text(encoding='utf-8')
+          old = '''    <nav aria-label="Documentation publique">\n      <a href="#verification">Vérification</a>\n      <a href="#status">Statut</a>\n      <a href="#privacy">Vie privée</a>\n      <a href="#limits">Limites</a>\n    </nav>'''
+          docs_nav = nav.replace('<a href="./documentation.html">Documentation</a>', '<a href="./documentation.html" aria-current="page">Documentation</a>')
+          text = once(text, old, '    ' + docs_nav, 'docs nav')
+          hero_end = '    </section>\n\n    <section class="section" id="verification" aria-labelledby="verification-title">'
+          guide = '''    </section>\n\n    <div class="guide-callout" aria-label="Modaryx Guide — documentation">\n      <div class="guide-mark">M</div>\n      <div><small>Modaryx Guide</small><strong>Comprendre avant d’agir.</strong><p>Modaryx Guide sert de couche d’explication contextuelle : il indique ce qui est connu, estimé ou inconnu, rappelle les limites et laisse les décisions importantes sous le contrôle de l’utilisateur.</p></div>\n    </div>\n\n    <section class="section" id="verification" aria-labelledby="verification-title">'''
+          text = once(text, hero_end, guide, 'docs Guide')
+          p.write_text(text, encoding='utf-8', newline='\n')
+
+          checks = {
+              'community.html': ('id="collection-form"','id="submission-form"','Profils & Passkeys'),
+              'profiles.html': ('assets/profiles.js','aria-current="page">Profils</a>'),
+              'security.html': ('id="chain"','id="states"','id="proofs"','Modaryx Guide'),
+              'documentation.html': ('id="verification"','id="status"','id="privacy"','id="limits"','Modaryx Guide'),
+          }
+          for path, needles in checks.items():
+              content = Path(path).read_text(encoding='utf-8')
+              for needle in needles:
+                  if needle not in content:
+                      raise SystemExit(f'{path}: missing {needle}')
+              for forbidden in ('Nova Forge','NOVA FORGE','getnovaforge.com'):
+                  if forbidden in content:
+                      raise SystemExit(f'{path}: stale brand {forbidden}')
+
+          print('MODARYX_TRUST_CONTENT_PROOF=PASS')
+          print('GUIDE_CALLOUTS=security+documentation')
+          print('COMMUNITY_PROFILE_FUNCTIONS=PRESERVED')
+          print('PUBLIC_BRAND=MODARYX MODS')
+          PY
+      - name: Commit targeted content harmonization
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add community.html profiles.html security.html documentation.html
+          git commit -m "feat(site): harmonize trust community and Guide surfaces"
+          git push origin HEAD:site/modaryx-vf-premium-hd-v2
