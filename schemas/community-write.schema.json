@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:nova-forge:schemas:community-write:v1",
-  "title": "Nova Forge Community Write Intent",
+  "title": "MODARYX MODS Community Write Intent",
   "description": "Provider-neutral write-intent contract. A write surface must pass Abuse Shield and moderation routing before acceptance. This schema does not imply that a backend is active.",
   "type": "object",
   "additionalProperties": false,

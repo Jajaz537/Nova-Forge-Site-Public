@@ -1,18 +1,17 @@
 {
-  "schemaVersion": 1,
-  "canonicalOrigin": "https://getnovaforge.com",
-  "aliases": ["https://www.getnovaforge.com"],
+  "schemaVersion": 2,
+  "canonicalOrigin": "https://modaryxmods.com",
+  "aliases": [],
   "hostingTarget": "Cloudflare Pages",
+  "pagesProject": "nova-forge-site-public",
   "httpsRequired": true,
-  "hstsPrepared": true,
-  "sitemap": "https://getnovaforge.com/sitemap.xml",
-  "status": "PREPARED_NOT_ACTIVATED",
-  "activationRequirements": [
-    "Domain getnovaforge.com is registered to the project owner",
-    "Cloudflare zone is active and authoritative nameservers are configured",
-    "Cloudflare Pages project is connected to Jajaz537/Nova-Forge-Site-Public",
-    "getnovaforge.com is attached as the production custom domain",
-    "www.getnovaforge.com redirects to https://getnovaforge.com",
-    "HTTPS certificate is active before cutover merge"
+  "httpsStatus": "ACTIVE",
+  "dnssecStatus": "PENDING_REGISTRAR_DS",
+  "status": "ACTIVE_HTTPS_DNSSEC_PENDING_REGISTRAR_DS",
+  "sitemap": "https://modaryxmods.com/sitemap.xml",
+  "notes": [
+    "Public brand is MODARYX MODS.",
+    "Production domain is modaryxmods.com.",
+    "Do not mark DNSSEC green until registrar DS installation and parent-chain verification are proven."
   ]
 }

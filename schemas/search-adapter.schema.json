@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:nova-forge:schemas:search-adapter:v1",
-  "title": "Nova Forge Optional External Search Adapter",
+  "title": "MODARYX MODS Optional External Search Adapter",
   "description": "Optional adapter contract. The zero-cost preindexed local search remains authoritative for core availability; an external index may enrich discovery but cannot replace content identity.",
   "type": "object",
   "additionalProperties": false,

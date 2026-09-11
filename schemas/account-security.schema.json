@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:nova-forge:schemas:account-security:v1",
-  "title": "Nova Forge Account Security Boundary",
+  "title": "MODARYX MODS Account Security Boundary",
   "description": "Public contract separating identity, WebAuthn credential records, recovery, sessions/devices and privileged-action re-authentication. This schema describes records only; it never contains or requests a private key.",
   "type": "object",
   "additionalProperties": false,

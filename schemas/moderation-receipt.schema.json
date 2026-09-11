@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:nova-forge:schemas:moderation-receipt:v1",
-  "title": "Nova Forge Moderation Receipt",
+  "title": "MODARYX MODS Moderation Receipt",
   "description": "DSA-ready architecture contract for immutable moderation notices, decisions, statements of reasons and appeals. This is not a claim of legal compliance.",
   "type": "object",
   "additionalProperties": false,
