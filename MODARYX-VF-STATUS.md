@@ -33,10 +33,11 @@ The five Wolf + Dragon boards recovered from the user-provided RAR remain the co
 - Targeted catalogue proof: PASS (`MODARYX_CATALOG_PREMIUM_PROOF=PASS`, `CATALOG_FUNCTIONAL_MARKERS=PRESERVED`).
 - Search now uses the premium family, a canonical URL, harmonized navigation, and direct entries for Games/GTA 6/RDR2.
 - Local search index expanded from 9 to 13 entries, including Games, GTA 6 Mods, RDR2 Mods and Documentation/Modaryx Guide; external adapter remains optional.
+- Domain/cutover documentation was refreshed to MODARYX and still keeps DNSSEC pending until registrar/parent proof.
 
 ## Still required before merge
 - Finish the homepage art treatment using the recovered RAR as the source, not generated replacement imagery.
-- Harmonize remaining secondary pages and mini-hubs that are still on older visual surfaces.
+- Harmonize downloads, verification and project mini-hubs still on older visual surfaces.
 - Run targeted accessibility, internal-link, canonical/sitemap and static-first audits.
 - Run responsive desktop/tablet/mobile checks and performance pass.
 - Re-run the final visible naming audit after all content changes.
