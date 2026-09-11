@@ -34,12 +34,12 @@ jobs:
           files = {
               'index.html': 30_000,
               'assets/modaryx-rar-hero.webp': 100_000,
-              'assets/css/tokens.css': 10_000,
-              'assets/nova-premium.css': 40_000,
-              'assets/modaryx-vf.css': 70_000,
-              'assets/modaryx-vf-shell.js': 15_000,
-              'assets/app.js': 15_000,
-              'assets/nova-premium.js': 15_000,
+              'assets/tokens.css': 10_000,
+              'assets/nova-premium-hd.css': 40_000,
+              'assets/modaryx-vf.css': 40_000,
+              'assets/shell.js': 10_000,
+              'assets/app.js': 25_000,
+              'assets/nova-premium-hd.js': 10_000,
           }
           total = 0
           for raw, limit in files.items():
@@ -51,8 +51,8 @@ jobs:
               print(f'BUDGET {raw} bytes={size} limit={limit}')
               if size > limit:
                   raise SystemExit(f'critical byte budget exceeded: {raw} {size}>{limit}')
-          if total > 300_000:
-              raise SystemExit(f'critical first-party byte budget exceeded: {total}>300000')
+          if total > 220_000:
+              raise SystemExit(f'critical first-party byte budget exceeded: {total}>220000')
           print(f'CRITICAL_FIRST_PARTY_BYTES={total}')
           print('CRITICAL_LOCAL_BYTE_BUDGETS=PASS')
           PY
@@ -111,12 +111,12 @@ jobs:
           paths=(
             '/'
             '/assets/modaryx-rar-hero.webp'
-            '/assets/css/tokens.css'
-            '/assets/nova-premium.css'
-            '/assets/modaryx-vf.css'
-            '/assets/modaryx-vf-shell.js'
+            '/assets/tokens.css'
+            '/assets/nova-premium-hd.css'
+            '/assets/modaryx-vf.css?v=20260911-2'
+            '/assets/shell.js'
             '/assets/app.js'
-            '/assets/nova-premium.js'
+            '/assets/nova-premium-hd.js'
           )
           : > perf-proof/curl-metrics.tsv
           for path in "${paths[@]}"; do
