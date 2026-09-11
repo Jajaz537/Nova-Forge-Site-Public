@@ -1,0 +1,71 @@
+name: MODARYX v3 tighten homepage hero
+
+on:
+  push:
+    branches:
+      - site/modaryx-vf-premium-hd-v3
+    paths:
+      - '.github/workflows/modaryx-v3-tighten-home-hero.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  tighten-home-hero:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: site/modaryx-vf-premium-hd-v3
+          fetch-depth: 1
+
+      - name: Apply targeted board-02 vertical tightening
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('assets/modaryx-vf.css')
+          css = path.read_text()
+          replacements = {
+              '  min-height:560px;\n  display:grid;': '  min-height:500px;\n  display:grid;',
+              '.mx-hero-copy{display:flex;flex-direction:column;justify-content:center;padding:56px 24px 42px clamp(34px,5.4vw,92px)}': '.mx-hero-copy{display:flex;flex-direction:column;justify-content:center;padding:42px 24px 30px clamp(34px,5.4vw,92px)}',
+              "font-size:clamp(3.15rem,4.9vw,5.65rem)": "font-size:clamp(3.05rem,4.55vw,5.1rem)",
+              '.mx-hero-values{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:28px;padding-top:15px;': '.mx-hero-values{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px;padding-top:12px;',
+              '.mx-hero-scene{min-height:560px;isolation:isolate;': '.mx-hero-scene{min-height:500px;isolation:isolate;',
+              '.mx-hero{grid-template-columns:46% 54%;min-height:600px}': '.mx-hero{grid-template-columns:46% 54%;min-height:520px}',
+              '.mx-hero-scene{min-height:600px}': '.mx-hero-scene{min-height:520px}',
+              '.mx-hero-copy{padding:58px 20px 30px;': '.mx-hero-copy{padding:40px 20px 24px;',
+              '.mx-hero h1{font-size:clamp(3rem,14vw,4.75rem)}': '.mx-hero h1{font-size:clamp(2.85rem,13vw,4.15rem)}',
+              '.mx-hero-scene{min-height:360px;background:': '.mx-hero-scene{min-height:320px;background:'
+          }
+          for old, new in replacements.items():
+              count = css.count(old)
+              if count != 1:
+                  raise SystemExit(f'Expected exactly one marker for {old!r}, found {count}')
+              css = css.replace(old, new)
+
+          assert "url('./modaryx-home-babies.webp')" in css
+          assert "modaryx-rar-hero.webp" not in css
+          path.write_text(css)
+          print('BOARD02_BABIES_PRESERVED=PASS')
+          print('HOME_HERO_DESKTOP_TIGHTENED=PASS')
+          print('HOME_HERO_TABLET_TIGHTENED=PASS')
+          print('HOME_HERO_MOBILE_TIGHTENED=PASS')
+          PY
+          git diff --check
+
+      - name: Commit targeted preview-only change
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/modaryx-vf.css
+          if git diff --cached --quiet; then
+            echo 'No targeted hero change.'
+            exit 0
+          fi
+          git commit -m "fix(site): tighten baby homepage hero toward board 02"
+          git push origin HEAD:site/modaryx-vf-premium-hd-v3
