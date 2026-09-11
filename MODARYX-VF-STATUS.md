@@ -27,17 +27,19 @@ The five Wolf + Dragon boards recovered from the user-provided RAR remain the co
 - Community, profiles, security and documentation now share the premium graphite / forged-gold / kingdom family and explicit canonicals.
 - Their behavioral markers were preserved: `MODARYX_TRUST_COMMUNITY_STYLE_PROOF=PASS`, `BEHAVIORAL_MARKERS=PRESERVED`.
 - Community/profile navigation and cross-portal paths are harmonized; forms and scripts remain intact.
-- Security and documentation now contain explicit **Modaryx Guide** explanation callouts without granting the Guide any automatic authority.
+- Security and documentation contain explicit **Modaryx Guide** explanation callouts without granting the Guide any automatic authority.
 - Targeted trust/content proof: PASS (`MODARYX_TRUST_CONTENT_PROOF=PASS`, `COMMUNITY_PROFILE_FUNCTIONS=PRESERVED`).
 - Catalogue now uses the premium family, links Games/GTA 6/RDR2, and keeps all local filter IDs and `catalog.js` behavior intact.
 - Targeted catalogue proof: PASS (`MODARYX_CATALOG_PREMIUM_PROOF=PASS`, `CATALOG_FUNCTIONAL_MARKERS=PRESERVED`).
-- Search now uses the premium family, a canonical URL, harmonized navigation, and direct entries for Games/GTA 6/RDR2.
+- Search uses the premium family, a canonical URL, harmonized navigation, and direct entries for Games/GTA 6/RDR2.
 - Local search index expanded from 9 to 13 entries, including Games, GTA 6 Mods, RDR2 Mods and Documentation/Modaryx Guide; external adapter remains optional.
 - Domain/cutover documentation was refreshed to MODARYX and still keeps DNSSEC pending until registrar/parent proof.
+- Downloads, local SHA-256 verification, project directory and all three public mini-hubs now use the premium MODARYX family with explicit canonical URLs and harmonized navigation.
+- Distribution remains fail-closed (`available=false`, `artifacts=[]`), the verifier remains browser-local, and project identities/favorite controls remain intact.
+- Targeted release/project proof: PASS (`MODARYX_RELEASE_PROJECTS_PREMIUM_PROOF=PASS`, `DOWNLOAD_FAIL_CLOSED_MARKERS=PRESERVED`, `VERIFY_LOCAL_SHA256_MARKERS=PRESERVED`, `PROJECT_HUB_IDENTITIES=PRESERVED`).
 
 ## Still required before merge
 - Finish the homepage art treatment using the recovered RAR as the source, not generated replacement imagery.
-- Harmonize downloads, verification and project mini-hubs still on older visual surfaces.
 - Run targeted accessibility, internal-link, canonical/sitemap and static-first audits.
 - Run responsive desktop/tablet/mobile checks and performance pass.
 - Re-run the final visible naming audit after all content changes.
