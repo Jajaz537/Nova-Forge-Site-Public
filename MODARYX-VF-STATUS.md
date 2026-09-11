@@ -26,18 +26,22 @@
 - The rebuild workflow validates byte length, RIFF/WEBP integrity, RIFF container length and the exact SHA before committing the asset.
 - `assets/modaryx-vf.css` now uses `modaryx-home-babies.webp` for desktop, tablet and mobile hero scenes; the former mobile rule that dropped the animals has been removed.
 - The hero was subsequently tightened toward board 02: reduced hero height, reduced oversized heading scale and reduced excess vertical spacing while preserving the exact baby artwork.
-- The latest preview branch head used for responsive browser QA is `85cb6c24704525d00d39ade0182d399de34dff7b`.
 - Fresh browser QA run `34612814238` completed successfully for homepage desktop **1440×900**, tablet **1024×768**, mobile **390×844**, plus the existing secondary-page capture set.
 - The run passed screenshot dimension, non-blank render and required homepage DOM-marker guards.
 - Artifact `modaryx-vf-browser-qa-v3`, id `10268374949`, digest `sha256:714620784f4f9406fdc46976be63d0945e72190bdf235d13ef93fafca3c9360e`, contains the fresh captures.
 - **This is still not a visual PASS.** The homepage requires fresh human inspection against board 02 before it can be marked approved.
 
-## Board 03 — next active implementation target
+## Board 03 — portals/universe implementation and current proof
 
-- `ecosystem.html` is still a prototype-style public ecosystem page and is not yet faithful to the Portails / Univers board.
-- The target composition is the board-03 cinematic portals scene: large `Explorer les univers` hierarchy, multiple glowing portal arches, central Stage-I baby Wolf + Dragon pair, six large universe cards and the premium dark fantasy/gold visual language.
-- The current public/debug-oriented ecosystem copy may be preserved below the premium composition until the later dedicated cleanup pass; do not destroy functional status surfaces broadly while the visual rebuild is in progress.
-- Board-03 work must remain on the V3 preview branch and must not be treated as visually approved without fresh responsive captures and human comparison to the source board.
+- `ecosystem.html` has now been rebuilt at the top of the page toward the Portails / Univers board rather than the former prototype hero.
+- A dedicated preview-only visual layer, `assets/modaryx-portals-v3.css`, implements the board-03 composition family: large `Explorer les univers` hierarchy, six glowing portal arches, premium dark fantasy/gold treatment, a central Stage-I baby Wolf + Dragon scene, six large universe cards and the narrow brand/world band.
+- The portal labels are adapted to the current MODARYX public information architecture: Studio, Jeux, Mods, Outils, Communauté and Sécurité.
+- The older public/status-oriented ecosystem content is retained below the premium composition for now so functional trust/distribution information is not destroyed before the dedicated public-copy cleanup pass.
+- Browser QA was extended with fresh board-03 captures at **1440×900**, **1024×768** and **390×844**, plus dedicated DOM markers for the portal headline, Stage-I companions and six-world section.
+- Targeted responsive QA run `34616445291` completed **successfully** at preview head `308aac2ba33214bddcd9095140d11a276ce91750`.
+- The run passed Cloudflare preview resolution, responsive screenshot dimensions, non-blank render guards, homepage markers and the new board-03 portal markers.
+- Fresh artifact `modaryx-vf-browser-qa-v3`, id `10270366550`, digest `sha256:b0ff66f24e5ff88a741337f0bdfd4246092c9a2dc60a8ee412b0f997aa857551`, contains the responsive proof set.
+- **This is not yet a visual PASS.** Board 03 still requires fresh human comparison against the authoritative source board; the central baby pair currently reuses the exact Stage-I board-02 baby scene and therefore must not be claimed as exact board-03 artwork.
 
 ## Public-visible prototype/debug copy already identified
 
