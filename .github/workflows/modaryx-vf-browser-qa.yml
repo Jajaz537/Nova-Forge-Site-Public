@@ -3,8 +3,9 @@ name: MODARYX VF browser QA
 on:
   push:
     branches:
-      - site/modaryx-vf-premium-hd-v2
+      - site/modaryx-vf-premium-hd-v3
     paths:
+      - '.github/workflows/modaryx-vf-browser-qa.yml'
       - '.github/modaryx-vf-browser-qa-trigger.json'
 
 permissions:
@@ -17,11 +18,11 @@ jobs:
     env:
       ZONE_NAME: modaryxmods.com
       PROJECT_NAME: nova-forge-site-public
-      TARGET_BRANCH: site/modaryx-vf-premium-hd-v2
+      TARGET_BRANCH: site/modaryx-vf-premium-hd-v3
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: site/modaryx-vf-premium-hd-v2
+          ref: site/modaryx-vf-premium-hd-v3
           fetch-depth: 1
 
       - name: Resolve successful Cloudflare preview
@@ -89,12 +90,9 @@ jobs:
             "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --force-device-scale-factor=1 --window-size="${width},${height}" --screenshot="qa-shots/${name}.png" "${PREVIEW_URL}${path}" >/tmp/chrome-${name}.log 2>&1
           }
 
-          # Homepage: exact composition proof at the three target families.
           shot home-desktop 1440 900 /
           shot home-tablet 1024 768 /
           shot home-mobile 390 844 /
-
-          # Principal VF surfaces at desktop width.
           shot games 1440 900 /games.html
           shot gta6 1440 900 /gta-6/mods/
           shot rdr2 1440 900 /red-dead-redemption-2/mods/
@@ -128,7 +126,6 @@ jobs:
               w,h=struct.unpack('>II',data[16:24])
               if (w,h) != dims:
                   raise SystemExit(f'{name}: dimensions {(w,h)} != {dims}')
-              # Blank-page guard: inspect decompressed scanline bytes for a useful value spread.
               pos=8; raw=b''; ctype=bitdepth=None
               while pos < len(data):
                   n=struct.unpack('>I',data[pos:pos+4])[0]; typ=data[pos+4:pos+8]; chunk=data[pos+8:pos+8+n]; pos += 12+n
@@ -155,7 +152,7 @@ jobs:
       - name: Upload responsive proof screenshots
         uses: actions/upload-artifact@v4
         with:
-          name: modaryx-vf-browser-qa
+          name: modaryx-vf-browser-qa-v3
           path: |
             qa-shots/*.png
             qa-dom/home-desktop.html
