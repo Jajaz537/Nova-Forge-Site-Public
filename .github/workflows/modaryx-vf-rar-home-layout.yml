@@ -27,109 +27,31 @@ jobs:
           from pathlib import Path
           import re
 
-          p=Path('index.html')
-          text=p.read_text(encoding='utf-8')
+          page = Path('index.html')
+          fragment = Path('.github/modaryx-rar-home-fragment.html')
+          text = page.read_text(encoding='utf-8')
+          block = fragment.read_text(encoding='utf-8')
 
-          block=r'''  <header class="mx-topbar">
-    <a class="mx-brand" href="#top" aria-label="MODARYX MODS, accueil">
-      <img src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="42" height="42">
-      <span><strong>MODARYX MODS</strong><small>Gaming • Mods • Modding Tools</small></span>
-    </a>
-    <nav class="mx-nav" data-primary-nav data-open="false" aria-label="Navigation principale">
-      <a class="active" href="#top">Accueil</a>
-      <a href="./catalog.html">Mods</a>
-      <a href="./creator-studio.html">Créer</a>
-      <a href="./ecosystem.html">Écosystème</a>
-      <a href="./security.html">Sécurité</a>
-      <a href="./documentation.html">Documentation</a>
-    </nav>
-    <div class="mx-header-actions">
-      <a class="mx-search-link" href="./search.html" aria-label="Rechercher sur MODARYX MODS">⌕ <span>Rechercher…</span></a>
-      <a class="mx-account-link" href="./profiles.html">Se connecter</a>
-      <a class="mx-join" href="./community.html">Rejoindre Modaryx <span>→</span></a>
-      <button class="menu-button" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-menu-button><span></span><span></span><span></span></button>
-    </div>
-  </header>
-
-  <main id="main" class="site-main mx-home">
-    <section class="mx-hero" id="top" aria-labelledby="hero-title">
-      <div class="mx-hero-copy">
-        <p class="mx-kicker">Jeux • Mods • Création • Communauté</p>
-        <h1 id="hero-title">Forge ton<br>royaume numérique.</h1>
-        <p class="mx-hero-subtitle">Deux compagnons. Une même ascension.</p>
-        <p class="mx-hero-lede">Un écosystème gaming, mods et outils de modding construit pour les joueurs, créateurs et communautés qui veulent bâtir des mondes plus grands.</p>
-        <div class="mx-hero-actions">
-          <a class="mx-button primary" href="./community.html">Rejoindre Modaryx <span>→</span></a>
-          <a class="mx-button secondary" href="./ecosystem.html"><span class="mx-play">▶</span><span>Voir notre univers<small>Découvrir l’écosystème</small></span></a>
-        </div>
-        <div class="mx-hero-values" aria-label="Valeurs MODARYX MODS">
-          <span>◈ <b>Des mondes<br>plus grands</b></span>
-          <span>✦ <b>Plus créatif</b></span>
-          <span>◇ <b>Plus sûr</b></span>
-          <span>✧ <b>Ensemble</b></span>
-        </div>
-      </div>
-
-      <div class="mx-hero-scene" role="img" aria-label="Royaume MODARYX, scène centrale réservée au duo Loup et Dragon">
-        <div class="mx-scene-frame"></div>
-        <div class="mx-guardian-focus" aria-hidden="true"><span class="wolf-orbit"></span><span class="dragon-orbit"></span><i></i></div>
-      </div>
-
-      <aside class="mx-hero-manifesto" aria-label="Manifeste MODARYX MODS">
-        <p>Plus qu’un jeu.<br>Des mondes<br>plus grands.<br><em>Ensemble.</em></p>
-        <div class="mx-hero-verbs"><span>JOUER</span><span>CRÉER</span><span>MODDER</span><span>PARTAGER</span><span>GRANDIR</span></div>
-        <div class="mx-hero-signet"><b>M</b><small>MODARYX MODS</small></div>
-      </aside>
-    </section>
-
-    <section class="mx-ecosystem" aria-labelledby="mx-ecosystem-title">
-      <div class="mx-section-rule"><span></span><h2 id="mx-ecosystem-title">UN ÉCOSYSTÈME POUR TOUS LES MONDES</h2><span></span></div>
-      <div class="mx-portal-grid">
-        <a class="mx-portal-card mods" href="./catalog.html"><div class="mx-card-art"></div><div class="mx-card-copy"><span class="mx-card-icon">⌁</span><h3>Mods</h3><small>JOUE ET PERSONNALISE</small><p>Découvre, installe et personnalise tes jeux avec des créations uniques.</p><b>→</b></div></a>
-        <a class="mx-portal-card create" href="./creator-studio.html"><div class="mx-card-art"></div><div class="mx-card-copy"><span class="mx-card-icon">✦</span><h3>Créer</h3><small>CRÉE SANS LIMITES</small><p>Des outils puissants et lisibles pour donner vie à tes idées.</p><b>→</b></div></a>
-        <a class="mx-portal-card ecosystem" href="./ecosystem.html"><div class="mx-card-art"></div><div class="mx-card-copy"><span class="mx-card-icon">≋</span><h3>Écosystème</h3><small>LES OUTILS QUI RELIENT</small><p>Explore les surfaces qui relient joueurs, créateurs et projets.</p><b>→</b></div></a>
-        <a class="mx-portal-card security" href="./security.html"><div class="mx-card-art"></div><div class="mx-card-copy"><span class="mx-card-icon">◇</span><h3>Sécurité</h3><small>LA CONFIANCE D’ABORD</small><p>Provenance, états explicites et sécurité sans faux badge.</p><b>→</b></div></a>
-        <a class="mx-portal-card docs" href="./documentation.html"><div class="mx-card-art"></div><div class="mx-card-copy"><span class="mx-card-icon">▤</span><h3>Documentation</h3><small>GUIDES ET RESSOURCES</small><p>Guides, tutoriels et ressources pour comprendre et progresser.</p><b>→</b></div></a>
-      </div>
-    </section>
-
-    <section class="mx-growth" aria-labelledby="mx-growth-title">
-      <div class="mx-growth-main">
-        <div class="mx-section-rule compact"><span></span><div><h2 id="mx-growth-title">ILS GRANDISSENT AVEC TOI</h2><p>De petits compagnons, pour un destin plus grand.</p></div><span></span></div>
-        <div class="mx-growth-track">
-          <article><div class="mx-growth-art stage-one"></div><div><span>I</span><h3>Bébés</h3><p>La naissance du lien</p></div></article>
-          <article><div class="mx-growth-art stage-two"></div><div><span>II</span><h3>Jeunes</h3><p>L’apprentissage du monde</p></div></article>
-          <article><div class="mx-growth-art stage-three"></div><div><span>III</span><h3>Forgés</h3><p>L’épreuve fait la force</p></div></article>
-          <article><div class="mx-growth-art stage-four"></div><div><span>IV</span><h3>Royaux</h3><p>Un royaume à bâtir ensemble</p></div></article>
-        </div>
-      </div>
-      <aside class="mx-vision-card"><div class="mx-vision-mark">M</div><div><small>MÊME PASSION.<br>PLUS DE POSSIBILITÉS.</small><p>MODARYX MODS est un écosystème pour les joueurs, les créateurs et les communautés qui rêvent plus grand.</p><a href="./ecosystem.html">Découvrir notre vision <span>→</span></a></div></aside>
-    </section>
-
-    <div class="mx-bottom-band" aria-label="Univers MODARYX MODS"><strong>MODARYX MODS</strong><span>GAMING</span><span>MODS</span><span>OUTILS</span><span>CRÉATION</span><span>COMMUNAUTÉ</span><span>SÉCURITÉ</span></div>
-
-'''
-
-          pattern=r'  <header class="nova-topbar">.*?(?=    <section class="catalogue-zone")'
+          pattern = r'  <header class="nova-topbar">.*?(?=    <section class="catalogue-zone")'
           new, count = re.subn(pattern, block, text, count=1, flags=re.S)
           if count != 1:
               raise SystemExit(f'Expected exactly one homepage-top block, replaced={count}')
-          p.write_text(new,encoding='utf-8',newline='\n')
 
-          proof=p.read_text(encoding='utf-8')
-          required=[
-            'class="mx-topbar"',
-            'class="mx-hero"',
-            'UN ÉCOSYSTÈME POUR TOUS LES MONDES',
-            '>Bébés<', '>Jeunes<', '>Forgés<', '>Royaux<',
-            'MODARYX MODS', 'Modaryx'
-          ]
-          missing=[x for x in required if x not in proof]
-          forbidden=['Forge ton royaume numérique.</h1>\n        <p class="mx-hero-subtitle">Deux compagnons. Une même ascension.</p>\n        <p class="mx-hero-lede">Un écosystème gaming, création, musique et hardware']
-          if missing:
-              raise SystemExit('Missing required layout markers: '+repr(missing))
           if 'Nova Forge' in block or 'getnovaforge.com' in block:
-              raise SystemExit('Old public brand leaked into new block')
+              raise SystemExit('Old public brand leaked into new fragment')
+
+          required = [
+              'class="mx-topbar"',
+              'class="mx-hero"',
+              'UN ÉCOSYSTÈME POUR TOUS LES MONDES',
+              '>Bébés<', '>Jeunes<', '>Forgés<', '>Royaux<',
+              'MODARYX MODS'
+          ]
+          missing = [item for item in required if item not in new]
+          if missing:
+              raise SystemExit('Missing required layout markers: ' + repr(missing))
+
+          page.write_text(new, encoding='utf-8', newline='\n')
           print('RAR_PLACEMENT_HOME_PROOF=PASS')
           print('PUBLIC_BRAND=MODARYX MODS')
           print('LAYOUT=header+hero-left+central-scene+right-manifesto+5-portals+4-growth+vision')
