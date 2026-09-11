@@ -1,0 +1,67 @@
+name: MODARYX v3 exact baby homepage scene
+
+on:
+  push:
+    branches:
+      - site/modaryx-vf-premium-hd-v3
+    paths:
+      - '.github/workflows/modaryx-v3-home-babies.yml'
+      - '.github/v3-home-baby-scene/**'
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild-baby-home-scene:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: site/modaryx-vf-premium-hd-v3
+          fetch-depth: 1
+
+      - name: Rebuild exact board-02 baby scene
+        shell: bash
+        run: |
+          set -euo pipefail
+          joined="$(mktemp)"
+          mapfile -t parts < <(find .github/v3-home-baby-scene -maxdepth 1 -type f -name 'part-*.b64' | sort)
+          test "${#parts[@]}" -eq 8
+          cat "${parts[@]}" | tr -d '\n\r ' > "$joined"
+          chars="$(wc -c < "$joined" | tr -d ' ')"
+          echo "BABY_HOME_PARTS=${#parts[@]}"
+          echo "BABY_HOME_BASE64_CHARS=$chars"
+          test "$chars" -eq 93280
+          base64 -d "$joined" > assets/modaryx-home-babies.webp
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+
+          p = Path('assets/modaryx-home-babies.webp')
+          data = p.read_bytes()
+          sha = hashlib.sha256(data).hexdigest()
+          print(f'BABY_HOME_BYTES={len(data)}')
+          print(f'BABY_HOME_SHA256={sha}')
+          print(f'BABY_HOME_HEAD={data[:12]!r}')
+          assert len(data) == 69960, f'unexpected size {len(data)}'
+          assert data[:4] == b'RIFF' and data[8:12] == b'WEBP', 'not a WebP RIFF container'
+          assert int.from_bytes(data[4:8], 'little') + 8 == len(data), 'RIFF size mismatch'
+          assert sha == '2e1aa635fae4f6ea882e153db2ee096fb345d8560f5ba67e033580e5384a9f1e', 'board-02 baby crop hash mismatch'
+          print('MODARYX_BOARD02_BABY_ASSET=PASS')
+          PY
+
+      - name: Commit exact baby scene to preview branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/modaryx-home-babies.webp
+          if git diff --cached --quiet; then
+            echo 'No baby asset change.'
+            exit 0
+          fi
+          git commit -m "assets(site): add exact board-02 baby homepage scene"
+          git push origin HEAD:site/modaryx-vf-premium-hd-v3
