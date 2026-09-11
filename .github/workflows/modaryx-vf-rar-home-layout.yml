@@ -1,4 +1,4 @@
-name: MODARYX VF RAR homepage layout
+name: MODARYX VF RAR homepage finalize
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  apply:
+  finalize:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -19,49 +19,38 @@ jobs:
         with:
           ref: site/modaryx-vf-premium-hd-v2
           fetch-depth: 0
-      - name: Apply recovered RAR placement to homepage top
+      - name: Finalize recovered homepage placement
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
-          import re
-
-          page = Path('index.html')
-          fragment = Path('.github/modaryx-rar-home-fragment.html')
-          text = page.read_text(encoding='utf-8')
-          block = fragment.read_text(encoding='utf-8')
-
-          pattern = r'  <header class="nova-topbar">.*?(?=    <section class="catalogue-zone")'
-          new, count = re.subn(pattern, block, text, count=1, flags=re.S)
-          if count != 1:
-              raise SystemExit(f'Expected exactly one homepage-top block, replaced={count}')
-
-          if 'Nova Forge' in block or 'getnovaforge.com' in block:
-              raise SystemExit('Old public brand leaked into new fragment')
-
-          required = [
-              'class="mx-topbar"',
-              'class="mx-hero"',
-              'UN ÉCOSYSTÈME POUR TOUS LES MONDES',
-              '>Bébés<', '>Jeunes<', '>Forgés<', '>Royaux<',
-              'MODARYX MODS'
+          p=Path('index.html')
+          text=p.read_text(encoding='utf-8')
+          text=text.replace('./assets/modaryx-vf.css?v=20260911-1','./assets/modaryx-vf.css?v=20260911-2',1)
+          required=[
+            'class="mx-topbar"',
+            'class="mx-hero"',
+            'UN ÉCOSYSTÈME POUR TOUS LES MONDES',
+            '>Bébés<', '>Jeunes<', '>Forgés<', '>Royaux<',
+            './assets/modaryx-vf.css?v=20260911-2'
           ]
-          missing = [item for item in required if item not in new]
+          missing=[x for x in required if x not in text]
           if missing:
-              raise SystemExit('Missing required layout markers: ' + repr(missing))
-
-          page.write_text(new, encoding='utf-8', newline='\n')
-          print('RAR_PLACEMENT_HOME_PROOF=PASS')
+              raise SystemExit('RAR finalization markers missing: '+repr(missing))
+          p.write_text(text,encoding='utf-8',newline='\n')
+          print('RAR_HOME_FINALIZE_PROOF=PASS')
           print('PUBLIC_BRAND=MODARYX MODS')
-          print('LAYOUT=header+hero-left+central-scene+right-manifesto+5-portals+4-growth+vision')
           PY
-      - name: Commit recovered placement
+      - name: Remove temporary RAR applicator files and commit
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/modaryx-rar-home-fragment.html
+          git rm .github/modaryx-vf-rar-home-layout-trigger.json
+          git rm .github/workflows/modaryx-vf-rar-home-layout.yml
           git add index.html
-          git commit -m "feat(site): match recovered RAR homepage placement"
+          git commit -m "chore(site): finalize recovered MODARYX homepage layout"
           git push origin HEAD:site/modaryx-vf-premium-hd-v2
