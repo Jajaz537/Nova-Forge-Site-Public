@@ -6,18 +6,18 @@
   <meta name="theme-color" content="#171715">
   <meta name="color-scheme" content="dark">
   <meta name="referrer" content="no-referrer">
-  <meta name="application-name" content="Nova Forge">
+  <meta name="application-name" content="MODARYX MODS">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
-  <meta name="description" content="Documentation publique Nova Forge : vérification, statut public, vie privée navigateur et limites de la surface officielle.">
+  <meta name="description" content="Documentation publique MODARYX MODS : vérification, statut public, vie privée navigateur et limites de la surface officielle.">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:site_name" content="Nova Forge">
-  <meta property="og:title" content="Documentation publique — Nova Forge">
-  <meta property="og:description" content="Règles publiques Nova Forge de vérification, statut machine-readable, vie privée navigateur et publication fail-closed.">
-  <title>Documentation publique — Nova Forge</title>
-  <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
+  <meta property="og:site_name" content="MODARYX MODS">
+  <meta property="og:title" content="Documentation publique — MODARYX MODS">
+  <meta property="og:description" content="Règles publiques MODARYX MODS de vérification, statut machine-readable, vie privée navigateur et publication fail-closed.">
+  <title>Documentation publique — MODARYX MODS</title>
+  <link rel="icon" href="./assets/modaryx-mark.svg" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
-  <link rel="alternate" type="application/json" href="./public-status.json" title="Nova Forge — statut public">
+  <link rel="alternate" type="application/json" href="./public-status.json" title="MODARYX MODS — statut public">
   <link rel="stylesheet" href="./assets/tokens.css">
   <link rel="stylesheet" href="./assets/site.css">
   <link rel="stylesheet" href="./assets/official.css">
@@ -29,9 +29,9 @@
 <body>
   <a class="skip-link" href="#main">Aller au contenu</a>
   <header class="topbar">
-    <a class="brand" href="./" aria-label="Nova Forge, retour au site officiel">
-      <img class="brand-logo" src="./assets/nova-mark.svg" alt="" width="32" height="32">
-      <span>Nova Forge</span>
+    <a class="brand" href="./" aria-label="MODARYX MODS, retour au site officiel">
+      <img class="brand-logo" src="./assets/modaryx-mark.svg" alt="" width="32" height="32">
+      <span>MODARYX MODS</span>
     </a>
     <nav aria-label="Documentation publique">
       <a href="#verification">Vérification</a>
@@ -44,9 +44,9 @@
   <main id="main">
     <section class="hero" aria-labelledby="docs-hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">Nova Forge · documentation publique</p>
+        <p class="eyebrow">MODARYX MODS · documentation publique</p>
         <h1 id="docs-hero-title">Comprendre ce que le site affirme — et ce qu’il n’affirme pas.</h1>
-        <p class="lede">Cette documentation couvre uniquement la surface publique du site officiel. Elle décrit les règles visibles de vérification, de confidentialité et de publication sans documenter les composants privés ou internes de Nova Forge OS.</p>
+        <p class="lede">Cette documentation couvre uniquement la surface publique du site officiel. Elle décrit les règles visibles de vérification, de confidentialité et de publication sans documenter les composants privés ou internes de Modaryx OS.</p>
         <div class="actions"><a class="button primary" href="./security.html">Sécurité & provenance</a><a class="button" href="./verify.html">Vérifier un SHA-256</a><a class="button" href="./public-status.json">Statut public JSON</a><a class="button" href="./">Retour au site officiel</a></div>
       </div>
       <aside class="hero-panel" aria-label="Portée de cette documentation">
@@ -87,7 +87,7 @@
       <p class="eyebrow">Vie privée navigateur</p>
       <h2 id="privacy-doc-title">Ce que fait la surface actuelle.</h2>
       <div class="cards three">
-        <article class="card"><h3>Consultation sans compte</h3><p>Le contenu public est conçu pour être consultable sans compte Nova Forge et sans profil distant requis par le noyau actuel.</p></article>
+        <article class="card"><h3>Consultation sans compte</h3><p>Le contenu public est conçu pour être consultable sans compte MODARYX MODS et sans profil distant requis par le noyau actuel.</p></article>
         <article class="card"><h3>Smart Profile</h3><p>Lorsque l’utilisateur déclenche l’analyse, le résultat est calculé dans le navigateur à partir des informations exposées par celui-ci. Le noyau actuel ne transmet pas ce résultat à un service distant.</p></article>
         <article class="card"><h3>Vérificateur local</h3><p>Le fichier choisi pour un calcul SHA-256 est lu par le navigateur et transmis uniquement à l’API Web Crypto locale. Le site ne l’exécute pas et ne l’envoie pas à un backend.</p></article>
       </div>
@@ -98,7 +98,7 @@
       <p class="eyebrow">Limites actuelles</p>
       <h2 id="limits-title">Ce qui n’est pas encore disponible.</h2>
       <div class="cards">
-        <article class="card"><h3>Installation Nova Forge OS</h3><p>Aucune procédure d’installation publique n’est publiée tant qu’un build autorisé et sa chaîne de confiance ne sont pas disponibles.</p><span class="badge neutral">Verrouillé</span></article>
+        <article class="card"><h3>Installation Modaryx OS</h3><p>Aucune procédure d’installation publique n’est publiée tant qu’un build autorisé et sa chaîne de confiance ne sont pas disponibles.</p><span class="badge neutral">Verrouillé</span></article>
         <article class="card"><h3>Services réseau</h3><p>Les fonctions qui nécessitent un backend réel restent explicitement non connectées. Elles ne sont pas simulées pour donner l’impression d’une disponibilité.</p><span class="badge neutral">Non connecté</span></article>
         <article class="card"><h3>Communauté</h3><p>La modération, les appels et les décisions sont décrits comme des contrats futurs, mais aucun backend communautaire n’est présenté comme actif.</p><span class="badge neutral">Non connecté</span></article>
         <article class="card"><h3>Signature cryptographique du site</h3><p>Le shell empaqueté dispose d’empreintes SHA-256 publiques, mais aucune signature cryptographique du site n’est annoncée tant qu’une clé et une procédure publiques réellement vérifiables ne sont pas publiées.</p><span class="badge neutral">Non annoncée</span></article>
@@ -107,7 +107,7 @@
   </main>
 
   <footer>
-    <div><strong>Nova Forge</strong><p>Documentation publique · surface pré-VF.</p></div>
+    <div><strong>MODARYX MODS</strong><p>Documentation publique · surface pré-VF.</p></div>
     <div class="footer-meta"><p>Cette page documente uniquement les comportements publics visibles.</p><p><a href="./">Site officiel</a> · <a href="./security.html">Sécurité & provenance</a> · <a href="./verify.html">Vérificateur SHA-256</a> · <a href="./public-status.json">Statut public JSON</a></p></div>
   </footer>
 </body>

@@ -220,7 +220,7 @@
     title.textContent = 'Bridge OS inactif';
     const copy = document.createElement('p');
     copy.className = 'muted';
-    copy.textContent = 'Aucun protocole local, exécutable ou service Nova Forge OS n’a été lancé. L’intégration reste optionnelle et devra nécessiter une action utilisateur explicite.';
+    copy.textContent = 'Aucun protocole local, exécutable ou service Modaryx OS n’a été lancé. L’intégration reste optionnelle et devra nécessiter une action utilisateur explicite.';
     profilePanel.replaceChildren(title, copy);
   }
 
