@@ -24,7 +24,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cat .github/rar-art-clean/part-00.b64 .github/rar-art-clean/part-01.b64 .github/rar-art-clean/part-02.b64 .github/rar-art-clean/part-03.b64 | tr -d '\n\r ' | base64 -d > assets/modaryx-rar-hero-v3.webp
+          : > assets/modaryx-rar-hero-v3.webp
+          for part in .github/rar-art-clean/part-00.b64 .github/rar-art-clean/part-01.b64 .github/rar-art-clean/part-02.b64 .github/rar-art-clean/part-03.b64; do
+            tr -d '\n\r ' < "$part" | base64 -d >> assets/modaryx-rar-hero-v3.webp
+          done
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
