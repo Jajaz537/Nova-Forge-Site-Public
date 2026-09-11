@@ -3,9 +3,11 @@ name: MODARYX VF preview probe
 on:
   push:
     branches:
-      - site/modaryx-vf-premium-hd-v2
+      - site/modaryx-vf-premium-hd-v3
     paths:
+      - '.github/workflows/modaryx-vf-preview-probe.yml'
       - '.github/modaryx-vf-preview-probe-trigger.json'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -17,11 +19,12 @@ jobs:
     env:
       ZONE_NAME: modaryxmods.com
       PROJECT_NAME: nova-forge-site-public
-      TARGET_BRANCH: site/modaryx-vf-premium-hd-v2
+      TARGET_BRANCH: site/modaryx-vf-premium-hd-v3
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: site/modaryx-vf-premium-hd-v2
+          ref: site/modaryx-vf-premium-hd-v3
+
       - name: Discover and probe Cloudflare Pages preview
         shell: bash
         env:
@@ -62,26 +65,20 @@ jobs:
           if not data.get('success'):
               raise SystemExit('Pages deployment lookup failed')
           target=os.environ['TARGET_BRANCH']
-          rows=data.get('result',[])
-          branches=[]
-          matches=[]
-          for dep in rows:
+          matches=[]; branches=[]
+          for dep in data.get('result',[]):
               meta=((dep.get('deployment_trigger') or {}).get('metadata') or {})
               branch=meta.get('branch')
-              if branch:
-                  branches.append(branch)
-              if branch == target and dep.get('environment') == 'preview':
-                  matches.append(dep)
+              if branch: branches.append(branch)
+              if branch==target and dep.get('environment')=='preview': matches.append(dep)
           if not matches:
               uniq=[]
               for b in branches:
-                  if b not in uniq:
-                      uniq.append(b)
-              raise SystemExit('no successful candidate preview deployment found for target branch; observed branches=' + ','.join(uniq[:12]))
-          matches.sort(key=lambda d: d.get('created_on',''), reverse=True)
-          dep=matches[0]
-          stage=dep.get('latest_stage') or {}
-          if stage.get('status') != 'success':
+                  if b not in uniq: uniq.append(b)
+              raise SystemExit('no preview for target branch; observed='+','.join(uniq[:12]))
+          matches.sort(key=lambda d:d.get('created_on',''), reverse=True)
+          dep=matches[0]; stage=dep.get('latest_stage') or {}
+          if stage.get('status')!='success':
               raise SystemExit(f"latest target preview is not successful: {stage.get('status')}")
           print(dep['url'])
           print(f"PREVIEW_DEPLOYMENT_ID={dep.get('id')}", file=os.sys.stderr)
@@ -97,7 +94,7 @@ jobs:
           html="$(curl --http2 -fsS "$preview_url/")"
           printf '%s' "$html" | grep -Fq 'MODARYX MODS'
           printf '%s' "$html" | grep -Fq 'modaryx-vf.css'
-          printf '%s' "$html" | grep -Fq 'Loup et Dragon devant le royaume MODARYX'
+          printf '%s' "$html" | grep -Fq 'Bébé Loup et Bébé Dragon devant le royaume MODARYX'
 
           art_headers="$(curl --http2 -fsSI "$preview_url/assets/modaryx-rar-hero.webp")"
           printf '%s\n' "$art_headers" | grep -Eq '^HTTP/[0-9.]+ 200'
