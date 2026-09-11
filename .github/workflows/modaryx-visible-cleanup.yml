@@ -1,0 +1,167 @@
+name: MODARYX visible-brand cleanup
+
+on:
+  push:
+    branches:
+      - modaryxmods-visible-cleanup
+    paths:
+      - '.github/modaryx-visible-cleanup-trigger.json'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: modaryxmods-visible-cleanup
+          fetch-depth: 0
+
+      - name: Replace public-facing Nova Forge references
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, struct, zlib
+
+          root = Path('.')
+          public_files = list(root.glob('*.html'))
+          public_files += [
+              root/'site.webmanifest', root/'robots.txt', root/'sitemap.xml',
+              root/'_headers', root/'_redirects', root/'public-status.json',
+              root/'public-build.json', root/'downloads.json', root/'sw.js'
+          ]
+          public_files += list((root/'data').glob('*.json'))
+          public_files += list((root/'assets').glob('*.js'))
+          public_files = [p for p in public_files if p.exists() and p.is_file()]
+
+          replacements = [
+              ('Nova Forge OS', 'Modaryx OS'),
+              ('NOVA FORGE OS', 'MODARYX OS'),
+              ('Nova Forge', 'MODARYX MODS'),
+              ('NOVA FORGE', 'MODARYX MODS'),
+              ('nova forge', 'MODARYX MODS'),
+              ('getnovaforge.com', 'modaryxmods.com'),
+              ('Ma collection Nova', 'Ma collection MODARYX'),
+              ('nova-mark-192.png', 'modaryx-mark-192.png'),
+              ('nova-mark-512.png', 'modaryx-mark-512.png'),
+              ('nova-mark.svg', 'modaryx-mark.svg'),
+          ]
+
+          changed = []
+          for path in public_files:
+              try:
+                  text = path.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              new = text
+              for old, replacement in replacements:
+                  new = new.replace(old, replacement)
+              if new != text:
+                  path.write_text(new, encoding='utf-8', newline='\n')
+                  changed.append(str(path))
+
+          svg = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="MODARYX MODS">
+            <rect width="512" height="512" rx="112" fill="#171715"/>
+            <path d="M112 380V132h58l86 110 86-110h58v248h-58V223l-86 108-86-108v157z" fill="#d8ad58"/>
+            <path d="M352 100h36v92h-36z" fill="#cf7046" opacity=".9"/>
+          </svg>
+          '''
+          svg_path = root/'assets'/'modaryx-mark.svg'
+          if not svg_path.exists() or svg_path.read_text(encoding='utf-8') != svg:
+              svg_path.write_text(svg, encoding='utf-8', newline='\n')
+              changed.append(str(svg_path))
+
+          def seg_dist(px, py, ax, ay, bx, by):
+              vx, vy = bx-ax, by-ay
+              wx, wy = px-ax, py-ay
+              c1 = vx*wx + vy*wy
+              if c1 <= 0:
+                  return ((px-ax)**2 + (py-ay)**2) ** 0.5
+              c2 = vx*vx + vy*vy
+              if c1 >= c2:
+                  return ((px-bx)**2 + (py-by)**2) ** 0.5
+              t = c1/c2
+              qx, qy = ax+t*vx, ay+t*vy
+              return ((px-qx)**2 + (py-qy)**2) ** 0.5
+
+          def make_png(size, path):
+              bg=(23,23,21,255); gold=(216,173,88,255); orange=(207,112,70,255); transparent=(0,0,0,0)
+              r=int(size*0.22); thick=size*0.105
+              segments=[
+                  (size*.25,size*.74,size*.25,size*.27),
+                  (size*.25,size*.27,size*.50,size*.56),
+                  (size*.50,size*.56,size*.75,size*.27),
+                  (size*.75,size*.27,size*.75,size*.74),
+              ]
+              rows=[]
+              for y in range(size):
+                  row=bytearray()
+                  for x in range(size):
+                      # Rounded-square background.
+                      inside = True
+                      if x < r and y < r: inside = (x-r)**2+(y-r)**2 <= r*r
+                      elif x >= size-r and y < r: inside = (x-(size-r-1))**2+(y-r)**2 <= r*r
+                      elif x < r and y >= size-r: inside = (x-r)**2+(y-(size-r-1))**2 <= r*r
+                      elif x >= size-r and y >= size-r: inside = (x-(size-r-1))**2+(y-(size-r-1))**2 <= r*r
+                      color = bg if inside else transparent
+                      if inside and any(seg_dist(x,y,*s) <= thick/2 for s in segments): color=gold
+                      if inside and size*.69 <= x <= size*.76 and size*.18 <= y <= size*.38: color=orange
+                      row.extend(color)
+                  rows.append(b'\x00'+bytes(row))
+              raw=b''.join(rows)
+              def chunk(tag,data):
+                  return struct.pack('>I',len(data))+tag+data+struct.pack('>I',zlib.crc32(tag+data)&0xffffffff)
+              png=b'\x89PNG\r\n\x1a\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',size,size,8,6,0,0,0))+chunk(b'IDAT',zlib.compress(raw,9))+chunk(b'IEND',b'')
+              path.write_bytes(png)
+
+          for size in (192,512):
+              p=root/'assets'/f'modaryx-mark-{size}.png'
+              make_png(size,p)
+              changed.append(str(p))
+
+          print('CHANGED_FILES')
+          for p in sorted(set(changed)):
+              print(p)
+
+          # Public-surface proof: no old brand/domain or old mark reference remains in the selected surface.
+          forbidden = [
+              re.compile(r'Nova Forge', re.I),
+              re.compile(r'getnovaforge\.com', re.I),
+              re.compile(r'nova-mark(?:-192|-512)?\.(?:svg|png)', re.I),
+          ]
+          failures=[]
+          for path in public_files:
+              try: text=path.read_text(encoding='utf-8')
+              except UnicodeDecodeError: continue
+              for rx in forbidden:
+                  if rx.search(text): failures.append((str(path),rx.pattern))
+          for path in root.glob('*.html'):
+              text=path.read_text(encoding='utf-8')
+              if re.search(r'\bNova\b', text):
+                  failures.append((str(path),'standalone Nova'))
+          if failures:
+              print('PUBLIC_REBRAND_FAILURES')
+              for item in failures: print(*item)
+              raise SystemExit(1)
+          print('PUBLIC_REBRAND_PROOF=PASS')
+          PY
+
+      - name: Commit cleanup to preparation branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git status --short
+          if git diff --quiet && git diff --cached --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
+            echo "NO_CHANGES=yes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html' site.webmanifest robots.txt sitemap.xml _headers _redirects public-status.json public-build.json downloads.json sw.js data assets/*.js assets/modaryx-mark.svg assets/modaryx-mark-192.png assets/modaryx-mark-512.png
+          git commit -m "feat(site): complete visible MODARYX brand cleanup"
+          git push origin HEAD:modaryxmods-visible-cleanup
