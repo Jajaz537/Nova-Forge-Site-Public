@@ -1,0 +1,124 @@
+name: MODARYX VF release projects premium
+
+on:
+  push:
+    branches:
+      - site/modaryx-vf-premium-hd-v2
+    paths:
+      - '.github/modaryx-vf-release-projects-premium-trigger.json'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: site/modaryx-vf-premium-hd-v2
+          fetch-depth: 0
+      - name: Premiumize release verification and project hubs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          pages = {
+              'downloads.html': ('Téléchargements publics — MODARYX MODS', 'https://modaryxmods.com/downloads'),
+              'verify.html': ('Vérificateur SHA-256 — MODARYX MODS', 'https://modaryxmods.com/verify'),
+              'project.html': ('Projets — MODARYX MODS', 'https://modaryxmods.com/project'),
+              'project-ember-textures.html': ('Ember Textures — MODARYX MODS', 'https://modaryxmods.com/project-ember-textures'),
+              'project-balanced-latency-pack.html': ('Balanced Latency Pack — MODARYX MODS', 'https://modaryxmods.com/project-balanced-latency-pack'),
+              'project-forge-night-experience.html': ('Forge Night Experience — MODARYX MODS', 'https://modaryxmods.com/project-forge-night-experience'),
+          }
+
+          nav = '<nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./games.html">Jeux</a><a href="./catalog.html">Mods</a><a href="./creator-studio.html">Créer</a><a href="./ecosystem.html">Écosystème</a><a href="./community.html">Communauté</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a></nav>'
+          style_anchor = '  <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">\n'
+          style_extra = '  <link rel="stylesheet" href="./assets/modaryx-secondary-premium.css?v=20260911-1">\n  <link rel="stylesheet" href="./assets/modaryx-release-projects-premium.css?v=20260911-1">\n'
+
+          for name, (title, canonical) in pages.items():
+              p = Path(name)
+              text = p.read_text(encoding='utf-8')
+              title_line = f'  <title>{title}</title>\n'
+              if f'rel="canonical" href="{canonical}"' not in text:
+                  if text.count(title_line) != 1:
+                      raise SystemExit(f'{name}: title target mismatch')
+                  text = text.replace(title_line, title_line + f'  <link rel="canonical" href="{canonical}">\n', 1)
+              if 'modaryx-release-projects-premium.css' not in text:
+                  if text.count(style_anchor) != 1:
+                      raise SystemExit(f'{name}: style anchor mismatch')
+                  text = text.replace(style_anchor, style_anchor + style_extra, 1)
+              text, count = re.subn(r'<nav\b[^>]*>.*?</nav>', nav, text, count=1, flags=re.S)
+              if count != 1:
+                  raise SystemExit(f'{name}: navigation replacement failed')
+              p.write_text(text, encoding='utf-8', newline='\n')
+
+          # Targeted copy polish, without changing release or verification behavior.
+          p = Path('downloads.html')
+          text = p.read_text(encoding='utf-8')
+          text = text.replace('<p class="eyebrow">Distribution publique · fail-closed</p>\n        <h1 id="downloads-page-title">Aucun fichier sans chaîne de confiance.</h1>', '<p class="eyebrow">MODARYX MODS · distribution publique</p>\n        <h1 id="downloads-page-title">Publier moins vite.<br>Vérifier mieux.</h1>', 1)
+          p.write_text(text, encoding='utf-8', newline='\n')
+
+          p = Path('verify.html')
+          text = p.read_text(encoding='utf-8')
+          text = text.replace('<p class="eyebrow">Intégrité locale · SHA-256</p>\n        <h1 id="verify-title">Vérifier un fichier sans l’envoyer.</h1>', '<p class="eyebrow">MODARYX MODS · intégrité locale</p>\n        <h1 id="verify-title">Une empreinte.<br>Une vérification locale.</h1>', 1)
+          p.write_text(text, encoding='utf-8', newline='\n')
+
+          p = Path('project.html')
+          text = p.read_text(encoding='utf-8')
+          text = text.replace('<section class="section" aria-labelledby="project-directory-title"><p class="eyebrow">Mini-hubs publics</p><h1 id="project-directory-title">Une URL stable par entrée.</h1><p class="section-intro">', '<section class="project-hero project-directory-hero" aria-labelledby="project-directory-title"><div><p class="eyebrow">MODARYX MODS · mini-hubs publics</p><h1 id="project-directory-title">Chaque création garde son identité.</h1><p class="lede">', 1)
+          text = text.replace('une autre entrée.</p></section>\n    <section class="project-grid"', 'une autre entrée.</p></div><aside class="project-section"><p class="eyebrow">Contrat public</p><h2>Static-first. Provider-neutral.</h2><p>Compatibilité, provenance, droits et distribution restent qualifiés séparément ; aucune preuve absente n’est remplacée par une promesse visuelle.</p></aside></section>\n    <section class="project-grid"', 1)
+          p.write_text(text, encoding='utf-8', newline='\n')
+
+          css = '''/* MODARYX MODS — release, verification and project premium layer */
+.project-page{width:min(1420px,calc(100% - 40px))!important;margin-inline:auto!important}
+.project-hero{position:relative;display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(300px,.72fr)!important;gap:clamp(28px,5vw,72px)!important;padding:clamp(72px,8vw,118px) 0 48px!important;border-bottom:1px solid rgba(235,209,145,.13)!important;overflow:hidden}
+.project-hero::after{content:"";position:absolute;right:-7%;top:5%;width:min(720px,53vw);height:90%;z-index:-1;background:linear-gradient(90deg,rgba(7,9,12,.97),rgba(7,9,12,.26)),url('./modaryx-kingdom-panorama.svg') center/cover no-repeat;opacity:.46;mask-image:linear-gradient(90deg,transparent,#000 28%,#000 82%,transparent)}
+.project-hero h1{margin:.2rem 0 1rem;font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(3rem,5.2vw,6.2rem);line-height:.95;letter-spacing:-.045em;color:#f5ead0}.project-hero .lede{max-width:760px;color:#aab5bf;line-height:1.7}.project-hero .eyebrow{color:#d7b86e;letter-spacing:.18em;text-transform:uppercase;font-size:.68rem}
+.project-grid{gap:16px!important;padding:38px 0 72px!important}.project-section{border-color:rgba(255,255,255,.08)!important;border-radius:14px!important;background:linear-gradient(155deg,rgba(17,23,29,.95),rgba(8,11,14,.98))!important;box-shadow:0 24px 66px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.018)!important;padding:24px!important}.project-section h2{font-family:Georgia,"Times New Roman",serif;font-weight:500;color:#e8d7aa!important}.project-meta div{border-color:rgba(255,255,255,.07)!important}.project-meta strong{color:#d9c58c!important}.project-meta span,.project-state,.relation-card p,.trust-summary span{color:#95a0aa!important}.relation-card{border-color:rgba(255,255,255,.075)!important;background:rgba(255,255,255,.018)!important}.relation-type{color:#d0ae5f!important}.trust-summary div{border-left-color:#cba85d!important;background:rgba(203,168,93,.04)!important}
+.verify-shell,.locked-panel{border-radius:14px}.verify-grid{gap:18px!important}.verify-form,.locked-panel{border-color:rgba(203,168,93,.14)!important;background:linear-gradient(155deg,rgba(17,23,29,.95),rgba(8,11,14,.98))!important;box-shadow:0 24px 66px rgba(0,0,0,.2)!important}.verify-form input{background:#090e13!important;border-color:rgba(255,255,255,.09)!important;color:#f1ead9!important}.verify-note{color:#8f9aa4!important}
+.project-directory-hero{margin-bottom:0}.project-directory-hero .project-section{align-self:end}.project-page>.section:last-of-type{padding-bottom:76px!important}
+@media(max-width:900px){.project-page{width:min(100% - 28px,1420px)!important}.project-hero{grid-template-columns:1fr!important}.project-hero::after{width:100%;right:-30%;opacity:.28}.project-grid{grid-template-columns:1fr!important}}
+@media(max-width:720px){.project-hero{padding-top:62px!important}.project-hero h1{font-size:clamp(2.7rem,13vw,4.7rem)!important}.project-section{padding:18px!important}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;animation-iteration-count:1!important}}
+'''
+          Path('assets/modaryx-release-projects-premium.css').write_text(css, encoding='utf-8', newline='\n')
+
+          checks = {
+              'downloads.html': ('assets/downloads.js','data-download-state','available=false','artifacts=[]','https://modaryxmods.com/downloads'),
+              'verify.html': ('assets/verify.js','id="verify-file"','data-verify-file','id="expected-sha256"','https://modaryxmods.com/verify'),
+              'project.html': ('project-ember-textures.html','project-balanced-latency-pack.html','project-forge-night-experience.html','https://modaryxmods.com/project'),
+              'project-ember-textures.html': ('data-project-id="ember-textures"','assets/project-hub.js','id="project-favorite"','https://modaryxmods.com/project-ember-textures'),
+              'project-balanced-latency-pack.html': ('data-project-id="balanced-latency-pack"','assets/project-hub.js','id="project-favorite"','https://modaryxmods.com/project-balanced-latency-pack'),
+              'project-forge-night-experience.html': ('data-project-id="forge-night-experience"','assets/project-hub.js','id="project-favorite"','https://modaryxmods.com/project-forge-night-experience'),
+          }
+          for name, needles in checks.items():
+              content = Path(name).read_text(encoding='utf-8')
+              for needle in needles:
+                  if needle not in content:
+                      raise SystemExit(f'{name}: missing {needle}')
+              if 'modaryx-release-projects-premium.css' not in content:
+                  raise SystemExit(f'{name}: premium stylesheet missing')
+              for forbidden in ('Nova Forge','NOVA FORGE','getnovaforge.com'):
+                  if forbidden in content:
+                      raise SystemExit(f'{name}: stale public brand {forbidden}')
+
+          print('MODARYX_RELEASE_PROJECTS_PREMIUM_PROOF=PASS')
+          print('DOWNLOAD_FAIL_CLOSED_MARKERS=PRESERVED')
+          print('VERIFY_LOCAL_SHA256_MARKERS=PRESERVED')
+          print('PROJECT_HUB_IDENTITIES=PRESERVED')
+          print('PUBLIC_BRAND=MODARYX MODS')
+          PY
+      - name: Commit targeted release and project polish
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add downloads.html verify.html project.html project-ember-textures.html project-balanced-latency-pack.html project-forge-night-experience.html assets/modaryx-release-projects-premium.css
+          git commit -m "feat(site): premiumize release and project surfaces"
+          git push origin HEAD:site/modaryx-vf-premium-hd-v2
