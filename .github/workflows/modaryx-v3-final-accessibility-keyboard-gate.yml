@@ -1,0 +1,222 @@
+name: MODARYX V3 final accessibility keyboard gate
+
+on:
+  push:
+    branches:
+      - site/modaryx-vf-premium-hd-v3
+    paths:
+      - '.github/workflows/modaryx-v3-final-accessibility-keyboard-gate.yml'
+      - '.github/modaryx-v3-final-accessibility-keyboard-trigger.json'
+
+permissions:
+  contents: read
+
+jobs:
+  accessibility-keyboard-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ZONE_NAME: modaryxmods.com
+      PROJECT_NAME: nova-forge-site-public
+      TARGET_BRANCH: site/modaryx-vf-premium-hd-v3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: site/modaryx-vf-premium-hd-v3
+          fetch-depth: 1
+
+      - name: Resolve successful Cloudflare preview
+        id: preview
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H 'Content-Type: application/json')
+          zones="$(curl -fsS "${auth[@]}" "$api/zones?name=$ZONE_NAME")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          test -n "$account_id" && test "$account_id" != "null"
+          preview_url=""
+          for attempt in $(seq 1 36); do
+            deployments="$(curl -fsS "${auth[@]}" "$api/accounts/$account_id/pages/projects/$PROJECT_NAME/deployments")"
+            candidate="$(DEPLOYMENTS="$deployments" python3 - <<'PY'
+          import json, os
+          data=json.loads(os.environ['DEPLOYMENTS']); target=os.environ['TARGET_BRANCH']; rows=[]
+          for dep in data.get('result',[]):
+              meta=((dep.get('deployment_trigger') or {}).get('metadata') or {})
+              if meta.get('branch')==target and dep.get('environment')=='preview': rows.append(dep)
+          rows.sort(key=lambda d:d.get('created_on',''), reverse=True)
+          if rows:
+              d=rows[0]; print((d.get('latest_stage') or {}).get('status','unknown')+'|'+d.get('url',''))
+          PY
+            )"
+            status="${candidate%%|*}"; url="${candidate#*|}"
+            echo "preview_wait attempt=$attempt status=${status:-none}"
+            if [ "$status" = "success" ] && [ -n "$url" ]; then preview_url="$url"; break; fi
+            sleep 5
+          done
+          test -n "$preview_url"
+          echo "url=$preview_url" >> "$GITHUB_OUTPUT"
+          echo "PREVIEW_URL=$preview_url"
+
+      - name: Run consolidated accessibility and keyboard gate
+        shell: bash
+        env:
+          PREVIEW_URL: ${{ steps.preview.outputs.url }}
+        run: |
+          set -euo pipefail
+          chrome="$(command -v google-chrome-stable || command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$chrome"
+          echo "CHROME_BIN=$chrome"
+          "$chrome" --version
+          "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --remote-allow-origins='*' --remote-debugging-port=9222 --user-data-dir=/tmp/modaryx-a11y-chrome about:blank >/tmp/modaryx-a11y-chrome.log 2>&1 &
+          chrome_pid=$!
+          trap 'kill "$chrome_pid" >/dev/null 2>&1 || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:9222/json/version >/tmp/cdp-version.json 2>/dev/null; then break; fi
+            sleep 1
+          done
+          test -s /tmp/cdp-version.json
+          export CDP_WS="$(jq -r '.webSocketDebuggerUrl' /tmp/cdp-version.json)"
+          test -n "$CDP_WS" && test "$CDP_WS" != "null"
+
+          cat > /tmp/modaryx-a11y-gate.mjs <<'JS'
+          const base = process.env.PREVIEW_URL;
+          const ws = new WebSocket(process.env.CDP_WS);
+          let nextId = 1;
+          const pending = new Map();
+          const events = [];
+          ws.addEventListener('message', e => {
+            const m = JSON.parse(e.data);
+            if (m.id && pending.has(m.id)) {
+              const {resolve,reject} = pending.get(m.id); pending.delete(m.id);
+              if (m.error) reject(new Error(JSON.stringify(m.error))); else resolve(m.result || {});
+            } else if (m.method) events.push(m);
+          });
+          await new Promise((resolve,reject)=>{ws.addEventListener('open',resolve,{once:true}); ws.addEventListener('error',reject,{once:true});});
+          const cdp = (method, params={}) => new Promise((resolve,reject)=>{
+            const id=nextId++; pending.set(id,{resolve,reject}); ws.send(JSON.stringify({id,method,params}));
+          });
+          const delay = ms => new Promise(r=>setTimeout(r,ms));
+          await cdp('Page.enable');
+          await cdp('Runtime.enable');
+          await cdp('Accessibility.enable');
+          await cdp('DOM.enable');
+          const evalJS = async expression => {
+            const r=await cdp('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});
+            if (r.exceptionDetails) throw new Error('Runtime exception: '+JSON.stringify(r.exceptionDetails));
+            return r.result?.value;
+          };
+          const navigate = async path => {
+            events.length=0;
+            await cdp('Page.navigate',{url:base+path});
+            for (let i=0;i<60;i++) {
+              if (events.some(e=>e.method==='Page.loadEventFired')) break;
+              await delay(100);
+            }
+            await delay(300);
+          };
+          const key = async (key, code, keyCode) => {
+            await cdp('Input.dispatchKeyEvent',{type:'keyDown',key,code,windowsVirtualKeyCode:keyCode,nativeVirtualKeyCode:keyCode});
+            await cdp('Input.dispatchKeyEvent',{type:'keyUp',key,code,windowsVirtualKeyCode:keyCode,nativeVirtualKeyCode:keyCode});
+            await delay(80);
+          };
+          const assert = (ok,msg) => { if(!ok) throw new Error(msg); };
+
+          const pages = [
+            ['home','/'],['ecosystem','/ecosystem.html'],['companions','/companions.html'],['games','/games.html'],
+            ['catalog','/catalog.html'],['creator','/creator-studio.html'],['community','/community.html'],['search','/search.html'],
+            ['profiles','/profiles.html'],['security','/security.html'],['docs','/documentation.html'],['verify','/verify.html'],
+            ['downloads','/downloads.html'],['project','/project.html'],['404','/404.html']
+          ];
+
+          for (const [name,path] of pages) {
+            await cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:900,deviceScaleFactor:1,mobile:false});
+            await navigate(path);
+            const s = await evalJS(`(()=>{
+              const ids=[...document.querySelectorAll('[id]')].map(x=>x.id).filter(Boolean);
+              const dup=[...new Set(ids.filter((x,i)=>ids.indexOf(x)!==i))];
+              const unlabeled=[...document.querySelectorAll('input,select,textarea')].filter(el=>{
+                const id=el.id; return !(el.getAttribute('aria-label')||el.getAttribute('aria-labelledby')||(id&&document.querySelector('label[for="'+CSS.escape(id)+'"]')||el.closest('label')));
+              }).map(el=>el.outerHTML.slice(0,160));
+              const emptyButtons=[...document.querySelectorAll('button')].filter(b=>!(b.getAttribute('aria-label')||b.getAttribute('aria-labelledby')||b.textContent.trim())).length;
+              const badAnchors=[...document.querySelectorAll('a')].filter(a=>!a.getAttribute('href')||!(a.getAttribute('aria-label')||a.textContent.trim()||a.querySelector('img[alt]:not([alt=""])'))).length;
+              const posTab=[...document.querySelectorAll('[tabindex]')].filter(el=>Number(el.getAttribute('tabindex'))>0).length;
+              return {lang:document.documentElement.lang,main:!!document.querySelector('main#main'),h1:document.querySelectorAll('h1').length,skip:!!document.querySelector('a.skip-link[href="#main"]'),dup,unlabeled,emptyButtons,badAnchors,posTab,title:document.title};
+            })()`);
+            assert(s.lang==='fr', `${name}: lang=${s.lang}`);
+            assert(s.main, `${name}: main#main missing`);
+            assert(s.h1===1, `${name}: expected exactly one h1, got ${s.h1}`);
+            assert(s.skip, `${name}: skip-link missing`);
+            assert(s.dup.length===0, `${name}: duplicate IDs ${s.dup.join(',')}`);
+            assert(s.unlabeled.length===0, `${name}: unlabeled controls ${s.unlabeled.join(' | ')}`);
+            assert(s.emptyButtons===0, `${name}: empty accessible button text`);
+            assert(s.badAnchors===0, `${name}: bad/unnamed anchor count=${s.badAnchors}`);
+            assert(s.posTab===0, `${name}: positive tabindex count=${s.posTab}`);
+
+            const ax = await cdp('Accessibility.getFullAXTree');
+            const interactiveRoles = new Set(['button','link','textbox','searchbox','combobox','checkbox','radio','switch','slider','spinbutton','tab']);
+            const unnamed = (ax.nodes||[]).filter(n=>interactiveRoles.has(n.role?.value) && !String(n.name?.value||'').trim() && !n.ignored);
+            assert(unnamed.length===0, `${name}: unnamed AX controls=${unnamed.map(n=>n.role?.value).join(',')}`);
+
+            await evalJS(`document.activeElement && document.activeElement.blur && document.activeElement.blur()`);
+            await key('Tab','Tab',9);
+            const first = await evalJS(`({tag:document.activeElement?.tagName,cls:document.activeElement?.className||'',text:(document.activeElement?.textContent||'').trim().slice(0,80)})`);
+            assert(String(first.cls).split(/\s+/).includes('skip-link'), `${name}: first Tab did not focus skip-link: ${JSON.stringify(first)}`);
+            await key('Enter','Enter',13);
+            const hash = await evalJS(`location.hash`);
+            assert(hash==='#main', `${name}: skip-link Enter did not target #main (${hash})`);
+
+            const seq=[];
+            for(let i=0;i<7;i++) { await key('Tab','Tab',9); seq.push(await evalJS(`document.activeElement ? (document.activeElement.tagName+'|'+(document.activeElement.getAttribute('aria-label')||document.activeElement.textContent||'').trim().slice(0,60)) : ''`)); }
+            assert(new Set(seq.filter(Boolean)).size>=3, `${name}: keyboard focus did not advance enough: ${JSON.stringify(seq)}`);
+            console.log(`PAGE_A11Y_KEYBOARD_PASS name=${name} title=${JSON.stringify(s.title)} focus_unique=${new Set(seq).size}`);
+          }
+
+          // Mobile shell: ensure the injected menu control is keyboard operable and exposes state.
+          await cdp('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true,screenWidth:390,screenHeight:844});
+          await navigate('/catalog.html');
+          const menu = await evalJS(`(()=>{const b=[...document.querySelectorAll('button')].find(x=>/menu/i.test((x.getAttribute('aria-label')||x.textContent||''))); return b?{text:(b.getAttribute('aria-label')||b.textContent).trim(),expanded:b.getAttribute('aria-expanded'),html:b.outerHTML.slice(0,240)}:null})()`);
+          assert(menu, 'mobile: Menu button not found');
+          // Reach menu by keyboard without assuming exact tab count.
+          let reached=false;
+          for(let i=0;i<12;i++) {
+            await key('Tab','Tab',9);
+            const isMenu=await evalJS(`(()=>{const e=document.activeElement; return !!(e&&e.tagName==='BUTTON'&&/menu/i.test((e.getAttribute('aria-label')||e.textContent||'')))})()`);
+            if(isMenu){reached=true;break;}
+          }
+          assert(reached,'mobile: menu not keyboard reachable within 12 Tabs');
+          const before=await evalJS(`document.activeElement.getAttribute('aria-expanded')`);
+          await key('Enter','Enter',13);
+          const after=await evalJS(`document.activeElement.getAttribute('aria-expanded')`);
+          assert(before!==after || after==='true', `mobile: menu Enter did not change expanded state (${before} -> ${after})`);
+          console.log(`MOBILE_MENU_KEYBOARD_PASS expanded=${before}->${after}`);
+          console.log('ACCESSIBILITY_AX_TREE=PASS');
+          console.log('KEYBOARD_TAB_SEQUENCE=PASS');
+          console.log('SKIP_LINK_ACTIVATION=PASS');
+          console.log('DUPLICATE_ID_GUARD=PASS');
+          console.log('FORM_LABEL_GUARD=PASS');
+          console.log('MOBILE_MENU_KEYBOARD=PASS');
+          ws.close();
+          JS
+
+          node /tmp/modaryx-a11y-gate.mjs | tee /tmp/modaryx-a11y-gate.log
+          grep -Fq 'ACCESSIBILITY_AX_TREE=PASS' /tmp/modaryx-a11y-gate.log
+          grep -Fq 'KEYBOARD_TAB_SEQUENCE=PASS' /tmp/modaryx-a11y-gate.log
+          grep -Fq 'SKIP_LINK_ACTIVATION=PASS' /tmp/modaryx-a11y-gate.log
+          grep -Fq 'MOBILE_MENU_KEYBOARD=PASS' /tmp/modaryx-a11y-gate.log
+          echo 'FINAL_ACCESSIBILITY_KEYBOARD_GATE=PASS'
+          echo 'PRODUCTION_NOT_CHANGED=yes'
+          echo 'DNSSEC_NOT_CHANGED=yes'
+
+      - name: Upload accessibility gate log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: modaryx-v3-final-accessibility-keyboard-gate
+          path: |
+            /tmp/modaryx-a11y-gate.log
+            /tmp/modaryx-a11y-chrome.log
+          if-no-files-found: warn
+          retention-days: 7
