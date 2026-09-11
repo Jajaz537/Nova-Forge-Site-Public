@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:nova-forge:schemas:compatibility-graph:v1",
-  "title": "Nova Forge Compatibility Graph",
+  "title": "MODARYX MODS Compatibility Graph",
   "type": "object",
   "additionalProperties": false,
   "required": ["schemaVersion", "dataClass", "nodes", "edges"],

@@ -1,0 +1,167 @@
+name: MODARYX VF static QA
+
+on:
+  push:
+    branches:
+      - site/modaryx-vf-premium-hd-v2
+    paths:
+      - '.github/modaryx-vf-static-qa-trigger.json'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: site/modaryx-vf-premium-hd-v2
+          fetch-depth: 0
+      - name: Run targeted static VF audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          import re
+
+          pages = {
+              'index.html': 'https://modaryxmods.com/',
+              'games.html': 'https://modaryxmods.com/games',
+              'gta-6/mods/index.html': 'https://modaryxmods.com/gta-6/mods/',
+              'red-dead-redemption-2/mods/index.html': 'https://modaryxmods.com/red-dead-redemption-2/mods/',
+              'catalog.html': 'https://modaryxmods.com/catalog',
+              'search.html': 'https://modaryxmods.com/search',
+              'creator-studio.html': 'https://modaryxmods.com/creator-studio',
+              'ecosystem.html': 'https://modaryxmods.com/ecosystem',
+              'community.html': 'https://modaryxmods.com/community',
+              'profiles.html': 'https://modaryxmods.com/profiles',
+              'security.html': 'https://modaryxmods.com/security',
+              'documentation.html': 'https://modaryxmods.com/documentation',
+              'downloads.html': 'https://modaryxmods.com/downloads',
+              'verify.html': 'https://modaryxmods.com/verify',
+              'project.html': 'https://modaryxmods.com/project',
+              'project-ember-textures.html': 'https://modaryxmods.com/project-ember-textures',
+              'project-balanced-latency-pack.html': 'https://modaryxmods.com/project-balanced-latency-pack',
+              'project-forge-night-experience.html': 'https://modaryxmods.com/project-forge-night-experience',
+          }
+          stale = ('Nova Forge', 'NOVA FORGE', 'getnovaforge.com')
+          local_ref_failures = []
+          accessibility_failures = []
+          canonical_failures = []
+
+          def resolve_local(page_path, raw):
+              value = raw.strip()
+              if not value or value.startswith(('#','mailto:','tel:','data:','javascript:')):
+                  return None
+              parts = urlsplit(value)
+              if parts.scheme or parts.netloc:
+                  return None
+              clean = parts.path
+              if not clean:
+                  return None
+              target = Path(page_path).parent / clean
+              if clean.endswith('/'):
+                  target = target / 'index.html'
+              return target
+
+          for page, canonical in pages.items():
+              p = Path(page)
+              if not p.is_file():
+                  raise SystemExit(f'missing page: {page}')
+              text = p.read_text(encoding='utf-8')
+              for forbidden in stale:
+                  if forbidden in text:
+                      raise SystemExit(f'{page}: stale public brand {forbidden}')
+              if f'rel="canonical" href="{canonical}"' not in text:
+                  canonical_failures.append(f'{page} -> {canonical}')
+              for marker, label in (
+                  ('lang="fr"','html lang'),('name="viewport"','viewport'),('id="main"','main landmark'),
+                  ('href="#main"','skip link'),('<h1','h1'),('Content-Security-Policy','CSP marker')):
+                  if marker not in text:
+                      accessibility_failures.append(f'{page}: {label}')
+              if '<nav' in text and 'aria-label=' not in text:
+                  accessibility_failures.append(f'{page}: nav label')
+              for tag in re.findall(r'<img\b[^>]*>', text, flags=re.I):
+                  if not re.search(r'\balt=', tag, flags=re.I):
+                      accessibility_failures.append(f'{page}: image missing alt')
+              for ref in re.findall(r'\b(?:href|src)="([^"]+)"', text):
+                  target = resolve_local(page, ref)
+                  if target is None:
+                      continue
+                  if target.suffix == '' and not target.is_file() and target.with_suffix('.html').is_file():
+                      continue
+                  if not target.is_file():
+                      local_ref_failures.append(f'{page}: {ref} -> {target.as_posix()}')
+
+          if canonical_failures:
+              raise SystemExit('canonical failures:\n' + '\n'.join(canonical_failures))
+          if accessibility_failures:
+              raise SystemExit('static accessibility failures:\n' + '\n'.join(accessibility_failures))
+          if local_ref_failures:
+              raise SystemExit('local reference failures:\n' + '\n'.join(local_ref_failures))
+
+          sitemap = Path('sitemap.xml').read_text(encoding='utf-8')
+          for canonical in pages.values():
+              if f'<loc>{canonical}</loc>' not in sitemap:
+                  raise SystemExit(f'sitemap missing {canonical}')
+          robots = Path('robots.txt').read_text(encoding='utf-8')
+          if 'https://modaryxmods.com/sitemap.xml' not in robots:
+              raise SystemExit('robots sitemap mismatch')
+          manifest = Path('site.webmanifest').read_text(encoding='utf-8')
+          if 'MODARYX MODS' not in manifest:
+              raise SystemExit('manifest public brand missing')
+          for public_file, text in (('sitemap.xml',sitemap),('robots.txt',robots),('site.webmanifest',manifest)):
+              for forbidden in stale:
+                  if forbidden in text:
+                      raise SystemExit(f'{public_file}: stale public brand {forbidden}')
+
+          # Network dependency guard: flag only executable remote loads, not schema identifiers or example URLs.
+          remote_loads = []
+          total = 0
+          largest = ('', 0)
+          network_pattern = re.compile(r'''(?:fetch|import)\s*\(\s*["']https?://|url\(\s*["']?https?://''', re.I)
+          for path in list(Path('assets').glob('*.css')) + list(Path('assets').glob('*.js')):
+              size = path.stat().st_size
+              total += size
+              if size > largest[1]:
+                  largest = (path.as_posix(), size)
+              text = path.read_text(encoding='utf-8', errors='ignore')
+              if network_pattern.search(text):
+                  remote_loads.append(path.as_posix())
+          if remote_loads:
+              raise SystemExit('executable remote asset dependency found: ' + ', '.join(remote_loads))
+          if total > 2_000_000:
+              raise SystemExit(f'static css/js budget exceeded: {total}')
+
+          functional = {
+              'catalog.html': ('id="catalog-filter-form"','id="catalog-query"','assets/catalog.js'),
+              'search.html': ('id="site-search"','assets/search.js'),
+              'creator-studio.html': ('id="creator-form"','id="manifest-preview"','assets/creator-studio.js'),
+              'community.html': ('id="collection-form"','id="submission-form"','assets/community.js'),
+              'profiles.html': ('assets/profiles.js',),
+              'downloads.html': ('assets/downloads.js','data-download-state','available=false','artifacts=[]'),
+              'verify.html': ('assets/verify.js','id="verify-file"','data-verify-file'),
+              'project-ember-textures.html': ('data-project-id="ember-textures"','id="project-favorite"','assets/project-hub.js'),
+              'project-balanced-latency-pack.html': ('data-project-id="balanced-latency-pack"','id="project-favorite"','assets/project-hub.js'),
+              'project-forge-night-experience.html': ('data-project-id="forge-night-experience"','id="project-favorite"','assets/project-hub.js'),
+          }
+          for page, needles in functional.items():
+              text = Path(page).read_text(encoding='utf-8')
+              for needle in needles:
+                  if needle not in text:
+                      raise SystemExit(f'{page}: functional marker missing {needle}')
+
+          print('MODARYX_STATIC_VF_AUDIT=PASS')
+          print(f'PAGES_AUDITED={len(pages)}')
+          print('CANONICAL_SITEMAP_ROBOTS=PASS')
+          print('LOCAL_LINK_AND_ASSET_REFERENCES=PASS')
+          print('STATIC_ACCESSIBILITY_MARKERS=PASS')
+          print('FUNCTIONAL_MARKERS=PRESERVED')
+          print(f'STATIC_CSS_JS_BYTES={total}')
+          print(f'LARGEST_STATIC_ASSET={largest[0]}:{largest[1]}')
+          print('EXECUTABLE_REMOTE_ASSET_DEPENDENCIES=NONE')
+          PY

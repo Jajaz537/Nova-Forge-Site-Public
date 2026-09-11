@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:nova-forge:schemas:repair-network:v1",
-  "title": "Nova Forge Repair Network V1",
+  "title": "MODARYX MODS Repair Network V1",
   "description": "Fail-closed repair contract layered over provider-neutral resolution. Repair may only restore the already-declared logical identity; it never substitutes a different artifact because it is merely available.",
   "type": "object",
   "additionalProperties": false,

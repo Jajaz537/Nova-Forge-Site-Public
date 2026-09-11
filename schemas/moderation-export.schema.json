@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:nova-forge:schemas:moderation-export:v1",
-  "title": "Nova Forge Moderation Export Envelope",
+  "title": "MODARYX MODS Moderation Export Envelope",
   "description": "Provider-neutral export envelope for immutable moderation receipts. Retention is explicit and bounded unless a legal hold is declared. This is an architecture contract, not a claim of legal compliance.",
   "type": "object",
   "additionalProperties": false,
