@@ -98,7 +98,7 @@
     relationsEmpty.hidden = edges.length !== 0;
     renderFavorite(item.id);
     state.textContent = "Mini-hub hydraté depuis le catalogue et le Compatibility Graph publics du même site.";
-    document.title = `${item.name} — Nova Forge`;
+    document.title = `${item.name} — MODARYX MODS`;
   }
 
   async function hydrate() {

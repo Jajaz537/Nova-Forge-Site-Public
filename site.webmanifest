@@ -24,19 +24,19 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "./assets/nova-mark-192.png",
+      "src": "./assets/modaryx-mark-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "./assets/nova-mark-512.png",
+      "src": "./assets/modaryx-mark-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "./assets/nova-mark.svg",
+      "src": "./assets/modaryx-mark.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
@@ -49,7 +49,7 @@
       "url": "./catalog.html",
       "icons": [
         {
-          "src": "./assets/nova-mark.svg",
+          "src": "./assets/modaryx-mark.svg",
           "sizes": "any",
           "type": "image/svg+xml"
         }
@@ -61,7 +61,7 @@
       "url": "./search.html",
       "icons": [
         {
-          "src": "./assets/nova-mark.svg",
+          "src": "./assets/modaryx-mark.svg",
           "sizes": "any",
           "type": "image/svg+xml"
         }
@@ -73,7 +73,7 @@
       "url": "./creator-studio.html",
       "icons": [
         {
-          "src": "./assets/nova-mark.svg",
+          "src": "./assets/modaryx-mark.svg",
           "sizes": "any",
           "type": "image/svg+xml"
         }
@@ -85,7 +85,7 @@
       "url": "./profiles.html",
       "icons": [
         {
-          "src": "./assets/nova-mark.svg",
+          "src": "./assets/modaryx-mark.svg",
           "sizes": "any",
           "type": "image/svg+xml"
         }
@@ -97,7 +97,7 @@
       "url": "./community.html",
       "icons": [
         {
-          "src": "./assets/nova-mark.svg",
+          "src": "./assets/modaryx-mark.svg",
           "sizes": "any",
           "type": "image/svg+xml"
         }
@@ -109,7 +109,7 @@
       "url": "./ecosystem.html",
       "icons": [
         {
-          "src": "./assets/nova-mark.svg",
+          "src": "./assets/modaryx-mark.svg",
           "sizes": "any",
           "type": "image/svg+xml"
         }
@@ -121,7 +121,7 @@
       "url": "./downloads.html",
       "icons": [
         {
-          "src": "./assets/nova-mark.svg",
+          "src": "./assets/modaryx-mark.svg",
           "sizes": "any",
           "type": "image/svg+xml"
         }
@@ -133,7 +133,7 @@
       "url": "./security.html",
       "icons": [
         {
-          "src": "./assets/nova-mark.svg",
+          "src": "./assets/modaryx-mark.svg",
           "sizes": "any",
           "type": "image/svg+xml"
         }
@@ -145,7 +145,7 @@
       "url": "./verify.html",
       "icons": [
         {
-          "src": "./assets/nova-mark.svg",
+          "src": "./assets/modaryx-mark.svg",
           "sizes": "any",
           "type": "image/svg+xml"
         }
@@ -157,7 +157,7 @@
       "url": "./documentation.html",
       "icons": [
         {
-          "src": "./assets/nova-mark.svg",
+          "src": "./assets/modaryx-mark.svg",
           "sizes": "any",
           "type": "image/svg+xml"
         }

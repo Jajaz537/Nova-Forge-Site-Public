@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="MODARYX MODS">
+  <rect width="512" height="512" rx="112" fill="#171715"/>
+  <path d="M112 380V132h58l86 110 86-110h58v248h-58V223l-86 108-86-108v157z" fill="#d8ad58"/>
+  <path d="M352 100h36v92h-36z" fill="#cf7046" opacity=".9"/>
+</svg>

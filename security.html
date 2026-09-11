@@ -6,18 +6,18 @@
   <meta name="theme-color" content="#171715">
   <meta name="color-scheme" content="dark">
   <meta name="referrer" content="no-referrer">
-  <meta name="application-name" content="Nova Forge">
+  <meta name="application-name" content="MODARYX MODS">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
-  <meta name="description" content="Sécurité et provenance Nova Forge : identité, intégrité SHA-256, provenance, signature et publication fail-closed de la surface officielle.">
+  <meta name="description" content="Sécurité et provenance MODARYX MODS : identité, intégrité SHA-256, provenance, signature et publication fail-closed de la surface officielle.">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:site_name" content="Nova Forge">
-  <meta property="og:title" content="Sécurité & provenance — Nova Forge">
-  <meta property="og:description" content="Contrat public Nova Forge de vérification et de publication fail-closed, sans exposition du cœur privé.">
-  <title>Sécurité & provenance — Nova Forge</title>
-  <link rel="icon" href="./assets/nova-mark.svg" type="image/svg+xml">
+  <meta property="og:site_name" content="MODARYX MODS">
+  <meta property="og:title" content="Sécurité & provenance — MODARYX MODS">
+  <meta property="og:description" content="Contrat public MODARYX MODS de vérification et de publication fail-closed, sans exposition du cœur privé.">
+  <title>Sécurité & provenance — MODARYX MODS</title>
+  <link rel="icon" href="./assets/modaryx-mark.svg" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
-  <link rel="alternate" type="application/json" href="./public-status.json" title="Nova Forge — statut public">
+  <link rel="alternate" type="application/json" href="./public-status.json" title="MODARYX MODS — statut public">
   <link rel="stylesheet" href="./assets/tokens.css">
   <link rel="stylesheet" href="./assets/site.css">
   <link rel="stylesheet" href="./assets/official.css">
@@ -29,16 +29,16 @@
 <body>
   <a class="skip-link" href="#main">Aller au contenu</a>
   <header class="topbar">
-    <a class="brand" href="./" aria-label="Nova Forge, retour au site officiel"><img class="brand-logo" src="./assets/nova-mark.svg" alt="" width="32" height="32"><span>Nova Forge</span></a>
+    <a class="brand" href="./" aria-label="MODARYX MODS, retour au site officiel"><img class="brand-logo" src="./assets/modaryx-mark.svg" alt="" width="32" height="32"><span>MODARYX MODS</span></a>
     <nav aria-label="Sécurité et provenance"><a href="#chain">Chaîne de confiance</a><a href="#states">États</a><a href="#proofs">Preuves publiques</a><a href="#limits">Limites</a></nav>
   </header>
 
   <main id="main">
     <section class="hero" aria-labelledby="security-hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">Nova Forge · sécurité publique</p>
+        <p class="eyebrow">MODARYX MODS · sécurité publique</p>
         <h1 id="security-hero-title">La confiance doit rester vérifiable, séparée et révocable.</h1>
-        <p class="lede">Cette page décrit uniquement le contrat de sécurité visible de la surface publique Nova Forge. Elle ne révèle aucun mécanisme privé et ne transforme jamais l’absence de preuve en validation.</p>
+        <p class="lede">Cette page décrit uniquement le contrat de sécurité visible de la surface publique MODARYX MODS. Elle ne révèle aucun mécanisme privé et ne transforme jamais l’absence de preuve en validation.</p>
         <div class="actions"><a class="button primary" href="./verify.html">Vérifier un SHA-256</a><a class="button" href="./downloads.html">Voir les téléchargements</a><a class="button" href="./documentation.html#verification">Lire la procédure</a></div>
       </div>
       <aside class="hero-panel" aria-label="Principes de sécurité publics">
@@ -80,7 +80,7 @@
       <div class="cards three">
         <article class="card"><h3>Statut machine-readable</h3><p><code>public-status.json</code> déclare la phase publique, les principes actifs et la disponibilité de la distribution. Il reste déclaratif et n’est pas une signature cryptographique.</p><a class="text-link" href="./public-status.json">Consulter le statut JSON</a></article>
         <article class="card"><h3>Manifeste de téléchargements</h3><p><code>downloads.json</code> reste verrouillé tant qu’aucun artefact public autorisé ne satisfait le contrat de preuves requis.</p><a class="text-link" href="./downloads.json">Consulter le manifeste</a></article>
-        <article class="card"><h3>Vérification locale</h3><p>Le vérificateur lit un fichier dans le navigateur et calcule son SHA-256 sans l’exécuter ni l’envoyer à un service Nova Forge distant.</p><a class="text-link" href="./verify.html">Ouvrir le vérificateur</a></article>
+        <article class="card"><h3>Vérification locale</h3><p>Le vérificateur lit un fichier dans le navigateur et calcule son SHA-256 sans l’exécuter ni l’envoyer à un service MODARYX MODS distant.</p><a class="text-link" href="./verify.html">Ouvrir le vérificateur</a></article>
       </div>
       <div class="security-note"><strong>Build public :</strong> lors d’un empaquetage ou d’un déploiement autorisé, la chaîne de livraison génère les empreintes de la surface publique et un manifeste de build sans exposer la révision du dépôt privé.</div>
     </section>
@@ -97,6 +97,6 @@
     </section>
   </main>
 
-  <footer><div><strong>Nova Forge</strong><p>Sécurité & provenance · contrat public pré-VF.</p></div><div class="footer-meta"><p>Une information absente reste absente.</p><p><a href="./documentation.html">Documentation publique</a> · <a href="./verify.html">Vérificateur SHA-256</a> · <a href="./public-status.json">Statut public JSON</a></p></div></footer>
+  <footer><div><strong>MODARYX MODS</strong><p>Sécurité & provenance · contrat public pré-VF.</p></div><div class="footer-meta"><p>Une information absente reste absente.</p><p><a href="./documentation.html">Documentation publique</a> · <a href="./verify.html">Vérificateur SHA-256</a> · <a href="./public-status.json">Statut public JSON</a></p></div></footer>
 </body>
 </html>
