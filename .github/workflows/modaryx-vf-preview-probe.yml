@@ -58,33 +58,42 @@ jobs:
           print('PAGES_PRODUCTION_BRANCH=' + str(((r.get('source') or {}).get('config') or {}).get('production_branch')))
           PY
 
-          deployments="$(curl -fsS "${auth[@]}" "$api/accounts/$account_id/pages/projects/$PROJECT_NAME/deployments")"
-          preview_url="$(DEPLOYMENTS="$deployments" python3 - <<'PY'
+          preview_url=""
+          for attempt in $(seq 1 36); do
+            deployments="$(curl -fsS "${auth[@]}" "$api/accounts/$account_id/pages/projects/$PROJECT_NAME/deployments")"
+            candidate="$(DEPLOYMENTS="$deployments" python3 - <<'PY'
           import json, os
           data=json.loads(os.environ['DEPLOYMENTS'])
           if not data.get('success'):
               raise SystemExit('Pages deployment lookup failed')
           target=os.environ['TARGET_BRANCH']
-          matches=[]; branches=[]
+          matches=[]
           for dep in data.get('result',[]):
               meta=((dep.get('deployment_trigger') or {}).get('metadata') or {})
-              branch=meta.get('branch')
-              if branch: branches.append(branch)
-              if branch==target and dep.get('environment')=='preview': matches.append(dep)
-          if not matches:
-              uniq=[]
-              for b in branches:
-                  if b not in uniq: uniq.append(b)
-              raise SystemExit('no preview for target branch; observed='+','.join(uniq[:12]))
+              if meta.get('branch')==target and dep.get('environment')=='preview':
+                  matches.append(dep)
           matches.sort(key=lambda d:d.get('created_on',''), reverse=True)
-          dep=matches[0]; stage=dep.get('latest_stage') or {}
-          if stage.get('status')!='success':
-              raise SystemExit(f"latest target preview is not successful: {stage.get('status')}")
-          print(dep['url'])
-          print(f"PREVIEW_DEPLOYMENT_ID={dep.get('id')}", file=os.sys.stderr)
-          print(f"PREVIEW_CREATED_ON={dep.get('created_on')}", file=os.sys.stderr)
+          if matches:
+              dep=matches[0]
+              print((dep.get('latest_stage') or {}).get('status','unknown')+'|'+dep.get('url','')+'|'+str(dep.get('id',''))+'|'+str(dep.get('created_on','')))
           PY
-          )"
+            )"
+            status="${candidate%%|*}"
+            rest="${candidate#*|}"
+            url="${rest%%|*}"
+            rest2="${rest#*|}"
+            dep_id="${rest2%%|*}"
+            created="${rest2#*|}"
+            echo "preview_wait attempt=$attempt status=${status:-none} deployment=${dep_id:-none}"
+            if [ "$status" = "success" ] && [ -n "$url" ]; then
+              preview_url="$url"
+              echo "PREVIEW_DEPLOYMENT_ID=$dep_id"
+              echo "PREVIEW_CREATED_ON=$created"
+              break
+            fi
+            sleep 5
+          done
+          test -n "$preview_url"
 
           echo "PREVIEW_URL=$preview_url"
           headers="$(curl --http2 -fsSI "$preview_url/")"
