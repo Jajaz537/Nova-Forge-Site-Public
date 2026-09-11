@@ -37,10 +37,12 @@ The five Wolf + Dragon boards recovered from the user-provided RAR remain the co
 - Downloads, local SHA-256 verification, project directory and all three public mini-hubs now use the premium MODARYX family with explicit canonical URLs and harmonized navigation.
 - Distribution remains fail-closed (`available=false`, `artifacts=[]`), the verifier remains browser-local, and project identities/favorite controls remain intact.
 - Targeted release/project proof: PASS (`MODARYX_RELEASE_PROJECTS_PREMIUM_PROOF=PASS`, `DOWNLOAD_FAIL_CLOSED_MARKERS=PRESERVED`, `VERIFY_LOCAL_SHA256_MARKERS=PRESERVED`, `PROJECT_HUB_IDENTITIES=PRESERVED`).
+- Static VF audit repaired two isolated QA findings without broad replay: `robots.txt` now declares the MODARYX sitemap, and the remote-dependency detector distinguishes executable remote loads from schema identifiers/example URLs.
+- Targeted static VF audit: PASS on 18 core pages (`MODARYX_STATIC_VF_AUDIT=PASS`, `CANONICAL_SITEMAP_ROBOTS=PASS`, `LOCAL_LINK_AND_ASSET_REFERENCES=PASS`, `STATIC_ACCESSIBILITY_MARKERS=PASS`, `FUNCTIONAL_MARKERS=PRESERVED`).
+- Static CSS/JS footprint measured by the audit: **196,889 bytes** total; largest scanned asset `assets/nova-premium-hd.css` at **26,304 bytes**; executable remote asset dependencies: none.
 
 ## Still required before merge
 - Finish the homepage art treatment using the recovered RAR as the source, not generated replacement imagery.
-- Run targeted accessibility, internal-link, canonical/sitemap and static-first audits.
-- Run responsive desktop/tablet/mobile checks and performance pass.
-- Re-run the final visible naming audit after all content changes.
+- Run responsive desktop/tablet/mobile visual checks and browser-level performance pass.
+- Re-run the final visible naming audit after the RAR homepage treatment.
 - Do not merge PR #11 until the complete VF is coherent and proven.
