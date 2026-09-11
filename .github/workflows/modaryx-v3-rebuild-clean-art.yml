@@ -7,7 +7,7 @@ on:
     paths:
       - '.github/workflows/modaryx-v3-rebuild-clean-art.yml'
       - '.github/modaryx-v3-clean-art-trigger.json'
-      - '.github/v3-home-scene/**'
+      - '.github/v3-home-scene-exact/**'
 
 permissions:
   contents: write
@@ -21,22 +21,39 @@ jobs:
         with:
           ref: site/modaryx-vf-premium-hd-v3
           fetch-depth: 0
+
       - name: Rebuild exact scene from reference board 02
+        id: rebuild
         shell: bash
         run: |
           set -euo pipefail
-          cat \
-            .github/v3-home-scene/part-00.b64 \
-            .github/v3-home-scene/part-gap.b64 \
-            .github/v3-home-scene/part-01.b64 \
-            .github/v3-home-scene/part-02.b64 \
-            | tr -d '\n\r ' | base64 -d > assets/modaryx-reference-home-v3.webp
+          mapfile -t parts < <(find .github/v3-home-scene-exact -maxdepth 1 -type f -name 'part-*.b64' | sort)
+          if [[ ${#parts[@]} -eq 0 ]]; then
+            echo 'No exact source chunks found.'
+            echo 'complete=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          joined="$(mktemp)"
+          cat "${parts[@]}" | tr -d '\n\r ' > "$joined"
+          chars="$(wc -c < "$joined" | tr -d ' ')"
+          echo "EXACT_SOURCE_PARTS=${#parts[@]}"
+          echo "EXACT_SOURCE_BASE64_CHARS=$chars"
+
+          if [[ "$chars" -ne 54456 ]]; then
+            echo 'V3_REFERENCE_HOME_SOURCE=INCOMPLETE'
+            echo 'complete=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          base64 -d "$joined" > assets/modaryx-reference-home-v3.webp
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
-          p=Path('assets/modaryx-reference-home-v3.webp')
-          data=p.read_bytes()
-          sha=hashlib.sha256(data).hexdigest()
+
+          p = Path('assets/modaryx-reference-home-v3.webp')
+          data = p.read_bytes()
+          sha = hashlib.sha256(data).hexdigest()
           print(f'BYTES={len(data)}')
           print(f'SHA256={sha}')
           print(f'HEAD={data[:12]!r}')
@@ -46,7 +63,10 @@ jobs:
           assert sha == '0e13399167bf0e50ba21aba143a1379b39501265f4254654b7f7d5e1078e5101', 'reference asset hash mismatch'
           print('V3_REFERENCE_HOME_ASSET=PASS')
           PY
+          echo 'complete=true' >> "$GITHUB_OUTPUT"
+
       - name: Commit exact reference scene
+        if: steps.rebuild.outputs.complete == 'true'
         shell: bash
         run: |
           set -euo pipefail
