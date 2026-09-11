@@ -53,13 +53,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          expected_bytes=(0 32084 33970 36950 39364)
+          expected_bytes=(0 27200 26418 30062 31964)
           expected_sha=(
             unused
-            af8e9596cfe07640f63c49e38784a33a28d4f6633220d256bb07157ee2fe34ae
-            1f942dbadd93ca9e0518a12cfbad45bdcae2bee4bd6c358d17dc692428b2c71e
-            7e7785f2b4e2806b93055652ae002325810e027ccfc7987bac6957846c0797f7
-            84ee3bc895726dba85f489a42399151b585124d2d58c192a013b3effb3af6b3d
+            e33e75f1d84f8fce1c712d44ec9867d658aca340df75b8e5576089dd50ef4b74
+            23e74b894c589ac33efa3b084db194d8cd746e1c36d36019612376094c0debfe
+            12f750fe36354ac8c9ff2239f085c34cc68fe2e190111e596fdf97c8cc8ad03a
+            1b7564a565b2a5ee3a772c8bb5a1e345aa8d087fccbc18900cc7171d3ca2994c
           )
 
           for stage in 1 2 3 4; do
