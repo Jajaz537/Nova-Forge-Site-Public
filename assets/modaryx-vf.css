@@ -1,0 +1,170 @@
+/* MODARYX MODS — VF Premium HD polish layer
+   Preserves the approved layout and strengthens finish, hierarchy and depth. */
+
+:root{
+  --nova-canvas:#07090c;
+  --nova-navigation:#0a0d11;
+  --nova-panel:#0f1419;
+  --nova-card:#141a20;
+  --nova-overlay:#1a222a;
+  --nova-text:#f7f3e8;
+  --nova-text-secondary:#a8b0ba;
+  --nova-gold:#cba85d;
+  --nova-gold-light:#edd59a;
+  --nova-ember:#d87343;
+  --nova-guide:#78aee3;
+  --nova-border-subtle:#222b34;
+  --nova-border-standard:#465361;
+  --modaryx-line:rgba(232,210,151,.16);
+  --modaryx-glow:rgba(203,168,93,.16);
+  --modaryx-blue-glow:rgba(120,174,227,.12);
+}
+
+html{background:#07090c}
+body{
+  background:
+    radial-gradient(1100px 620px at 82% -8%,rgba(203,168,93,.075),transparent 62%),
+    radial-gradient(900px 600px at 102% 28%,rgba(120,174,227,.055),transparent 66%),
+    linear-gradient(180deg,#07090c 0%,#090c10 46%,#07090c 100%);
+}
+body::before{
+  background:
+    linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.62),transparent 70%);
+  opacity:.6;
+}
+
+/* Header — same placement, more premium */
+.nova-topbar{
+  height:80px;
+  padding-inline:clamp(18px,4.2vw,72px);
+  border-bottom:1px solid rgba(231,211,159,.10);
+  background:linear-gradient(180deg,rgba(8,10,13,.94),rgba(8,10,13,.78));
+  backdrop-filter:blur(24px) saturate(135%);
+  box-shadow:0 14px 50px rgba(0,0,0,.18);
+}
+.brand{gap:13px}
+.brand img{
+  width:36px;height:36px;border-radius:11px;
+  box-shadow:0 0 0 1px rgba(237,213,154,.22),0 10px 30px rgba(0,0,0,.38),0 0 26px rgba(203,168,93,.08);
+}
+.brand-word{font-size:1.01rem;font-weight:810;letter-spacing:-.025em}
+.brand-word small{margin-top:-2px;font-size:.59rem;letter-spacing:.145em;color:#858f9a}
+.nova-nav{gap:2px;padding:4px;border:1px solid rgba(255,255,255,.035);border-radius:12px;background:rgba(255,255,255,.018)}
+.nova-nav a{min-height:38px;padding-inline:13px;border-radius:8px;color:#9ca5af;font-size:.86rem}
+.nova-nav a:hover,.nova-nav a[aria-current="page"]{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));color:#f5f1e7}
+
+/* Hero — approved left copy/right OS composition retained */
+.hero{
+  min-height:calc(100svh - 80px);
+  padding:clamp(72px,8vw,128px) 0 92px;
+  border-bottom:1px solid rgba(232,210,151,.09);
+}
+.hero::before{opacity:.62;filter:saturate(.82) contrast(1.05)}
+.hero::after{
+  right:5vw;top:11%;width:520px;height:520px;
+  background:radial-gradient(circle,rgba(203,168,93,.12),rgba(216,115,67,.026) 40%,transparent 68%);
+  filter:blur(22px);
+}
+.hero-grid{grid-template-columns:minmax(0,.83fr) minmax(610px,1.17fr);gap:clamp(48px,6.2vw,112px)}
+.hero-copy{position:relative;padding-top:10px}
+.hero-copy::before{content:"";position:absolute;left:-22px;top:2px;width:1px;height:126px;background:linear-gradient(var(--nova-gold),transparent);opacity:.55}
+.eyebrow{margin-bottom:18px;font-size:.72rem;letter-spacing:.16em;color:#e7cb89}
+.display{
+  max-width:820px;
+  font-size:clamp(3.9rem,7vw,7.35rem);
+  line-height:.865;
+  letter-spacing:-.067em;
+  font-weight:750;
+  text-shadow:0 1px 0 rgba(255,255,255,.025);
+}
+.display .accent{background:linear-gradient(105deg,#f0dda7 0%,#cba85d 48%,#df8650 110%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{max-width:670px;margin-top:28px;color:#b9c0c8;font-size:clamp(1.04rem,1.45vw,1.25rem);line-height:1.62}
+.hero-actions{margin-top:38px;gap:11px}
+.button{border-radius:11px;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.button.primary{
+  border-color:rgba(243,221,164,.58);
+  background:linear-gradient(180deg,#e0c47d 0%,#bc9448 100%);
+  box-shadow:0 12px 36px rgba(203,168,93,.17),inset 0 1px rgba(255,255,255,.34);
+}
+.button.primary:hover{box-shadow:0 18px 46px rgba(203,168,93,.24),inset 0 1px rgba(255,255,255,.38)}
+.button.ghost{background:rgba(13,18,24,.66);border-color:rgba(120,174,227,.25);box-shadow:inset 0 1px rgba(255,255,255,.025)}
+.hero-proof{margin-top:42px;gap:22px;font-size:.8rem;color:#8f99a4}
+.hero-proof i{box-shadow:0 0 0 4px rgba(98,181,138,.07),0 0 20px rgba(98,181,138,.15)}
+
+/* Modaryx OS stage */
+.os-stage{filter:drop-shadow(0 28px 46px rgba(0,0,0,.25))}
+.os-window{
+  min-height:610px;
+  border-color:rgba(160,171,183,.28);
+  border-radius:19px;
+  background:linear-gradient(145deg,rgba(17,22,27,.985),rgba(7,10,13,.995));
+  box-shadow:0 46px 120px rgba(0,0,0,.54),0 0 0 1px rgba(255,255,255,.022) inset,0 0 72px rgba(203,168,93,.035);
+  transform:rotateY(-1.25deg) rotateX(.25deg);
+}
+.os-window::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(237,213,154,.28),transparent);z-index:5}
+.os-chrome{height:48px;background:linear-gradient(180deg,#0f1318,#0c1014);border-bottom-color:rgba(255,255,255,.055)}
+.os-layout{min-height:562px;grid-template-columns:142px 1fr 210px}
+.os-nav{background:linear-gradient(180deg,#0b0f13,#0a0d11);border-right-color:rgba(255,255,255,.055)}
+.os-nav a.active{background:linear-gradient(90deg,rgba(203,168,93,.13),rgba(255,255,255,.025));box-shadow:inset 2px 0 #d3af63}
+.os-workspace{background:radial-gradient(600px 300px at 72% 4%,rgba(203,168,93,.07),transparent 68%)}
+.workspace-feature{border-color:rgba(203,168,93,.22);background:linear-gradient(145deg,rgba(21,27,33,.97),rgba(11,15,19,.98));box-shadow:0 24px 58px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.022)}
+.os-guide{background:linear-gradient(180deg,#101a23,#0a1117);border-left-color:rgba(120,174,227,.11)}
+.guide-orb{box-shadow:0 0 0 1px rgba(120,174,227,.06),0 0 42px rgba(120,174,227,.12)}
+.stage-glow{right:8%;bottom:-10%;width:70%;height:24%;background:radial-gradient(ellipse,rgba(203,168,93,.17),transparent 70%);filter:blur(34px)}
+
+/* Rails and major surfaces */
+.trust-rail{background:rgba(8,11,14,.84);border-bottom-color:rgba(255,255,255,.05)}
+.trust-rail .shell{min-height:70px}
+.trust-rail span{color:#929ba5;border-right-color:rgba(255,255,255,.055)}
+.editions{background:radial-gradient(900px 500px at 50% 30%,rgba(120,174,227,.025),transparent 70%),linear-gradient(180deg,#080b0e,#0a0d11 50%,#080a0d)}
+.section-title{letter-spacing:-.052em;font-weight:735}
+.section-copy{color:#9da6b0;line-height:1.65}
+.edition-duo{gap:18px}
+.edition-panel{
+  border-color:rgba(255,255,255,.085);
+  border-radius:19px;
+  background:linear-gradient(145deg,rgba(18,24,30,.96),rgba(11,15,19,.98));
+  box-shadow:0 24px 70px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.025);
+}
+.edition-panel:hover{border-color:rgba(237,213,154,.19)}
+
+/* Global card finesse without changing layout */
+.card,.panel{
+  border-color:rgba(255,255,255,.085)!important;
+  box-shadow:0 18px 54px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.018);
+}
+.card:hover{border-color:rgba(237,213,154,.18)!important}
+
+/* Footer polish */
+.site-footer{border-top-color:rgba(232,210,151,.09)!important;background:linear-gradient(180deg,#080a0d,#06080a)!important}
+
+@media (max-width:1180px){
+  .hero-grid{grid-template-columns:1fr;gap:64px}
+  .hero-copy{max-width:900px}
+  .os-stage{max-width:940px;width:100%;margin-inline:auto}
+}
+
+@media (max-width:760px){
+  .nova-topbar{height:72px;padding-inline:16px}
+  .brand-word small{display:none}
+  .hero{min-height:auto;padding:76px 0 70px}
+  .hero-copy::before{display:none}
+  .display{font-size:clamp(3rem,14vw,4.8rem);letter-spacing:-.06em}
+  .lede{font-size:1rem}
+  .hero-proof{gap:12px 18px}
+  .os-window{transform:none;border-radius:15px;min-height:0}
+  .os-layout{grid-template-columns:1fr}
+  .os-nav,.os-guide{display:none}
+  .os-workspace{padding:18px}
+  .trust-rail .shell{grid-template-columns:1fr 1fr;padding-block:8px}
+  .trust-rail span{border-right:0;justify-content:flex-start;padding-inline:8px;text-align:left}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+  .os-window{transform:none}
+}
