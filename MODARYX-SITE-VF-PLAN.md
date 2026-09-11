@@ -44,6 +44,7 @@ Status: **premium milestone complete**
 - Catalogue now belongs to the MODARYX premium family and exposes Games/GTA 6/RDR2 entry points.
 - Search is still preindexed-local with `externalAdapterRequired=false`.
 - Search index expanded to 13 entries including Games, GTA 6, RDR2 and Documentation/Modaryx Guide.
+- Search surface is canonicalized and visually harmonized.
 - Targeted catalogue functional-marker proof: PASS.
 
 ### 4 — Creator Studio
@@ -74,7 +75,12 @@ Status: **next**
 - Harmonize downloads, verification and project mini-hubs still using older secondary presentation.
 - Preserve all locked/publication states and preview disclaimers.
 
-### 8 — Final QA before merge
+### 8 — Final RAR art pass
+Status: **pending**
+- Strengthen the homepage’s central kingdom/companion treatment from the recovered source material without changing the approved geometry.
+- Do not use generated substitute artwork.
+
+### 9 — Final QA before merge
 Status: **pending**
 - responsive desktop/tablet/mobile;
 - keyboard and accessibility pass;
