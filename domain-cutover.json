@@ -1,18 +1,19 @@
 {
   "schemaVersion": 1,
-  "canonicalOrigin": "https://getnovaforge.com",
-  "aliases": ["https://www.getnovaforge.com"],
+  "canonicalOrigin": "https://modaryxmods.com",
+  "aliases": ["https://www.modaryxmods.com"],
   "hostingTarget": "Cloudflare Pages",
   "httpsRequired": true,
   "hstsPrepared": true,
-  "sitemap": "https://getnovaforge.com/sitemap.xml",
-  "status": "PREPARED_NOT_ACTIVATED",
+  "sitemap": "https://modaryxmods.com/sitemap.xml",
+  "status": "CLOUDFLARE_ACTIVE_PAGES_PENDING",
   "activationRequirements": [
-    "Domain getnovaforge.com is registered to the project owner",
+    "Domain modaryxmods.com is registered to the project owner",
     "Cloudflare zone is active and authoritative nameservers are configured",
     "Cloudflare Pages project is connected to Jajaz537/Nova-Forge-Site-Public",
-    "getnovaforge.com is attached as the production custom domain",
-    "www.getnovaforge.com redirects to https://getnovaforge.com",
-    "HTTPS certificate is active before cutover merge"
+    "modaryxmods.com is attached as the production custom domain",
+    "www.modaryxmods.com redirects to https://modaryxmods.com",
+    "HTTPS certificate is active before cutover merge",
+    "DNSSEC is enabled and validated before removing the legacy getnovaforge.com Cloudflare configuration"
   ]
 }
