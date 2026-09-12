@@ -10,7 +10,12 @@
   toggle.className = 'nav-toggle';
   toggle.setAttribute('aria-controls', nav.id);
   toggle.setAttribute('aria-expanded', 'false');
-  toggle.innerHTML = '<span aria-hidden="true"></span><span class="nav-toggle-label">Menu</span>';
+  const toggleIcon = document.createElement('span');
+  toggleIcon.setAttribute('aria-hidden', 'true');
+  const toggleLabel = document.createElement('span');
+  toggleLabel.className = 'nav-toggle-label';
+  toggleLabel.textContent = 'Menu';
+  toggle.append(toggleIcon, toggleLabel);
 
   const close = () => {
     header.removeAttribute('data-nav-open');
@@ -57,4 +62,49 @@
   });
   applyMotion();
   header.append(motion);
+
+  // Retained idea SITE-R07: bounded, same-origin intent prefetch only.
+  // It never prefetches when Save-Data is enabled or on 2G-class links.
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const effectiveType = String(connection?.effectiveType || '').toLowerCase();
+  const constrainedNetwork = connection?.saveData === true || effectiveType === 'slow-2g' || effectiveType === '2g';
+  const maxPrefetches = effectiveType === '3g' ? 1 : 4;
+  const prefetched = new Set();
+
+  const prefetchCandidate = (target) => {
+    if (constrainedNetwork || prefetched.size >= maxPrefetches || document.visibilityState === 'hidden') return;
+    const link = target?.closest?.('a[href]');
+    if (!link || link.hasAttribute('download')) return;
+    if (link.target && link.target !== '_self') return;
+    const rel = new Set(String(link.rel || '').toLowerCase().split(/\s+/).filter(Boolean));
+    if (rel.has('external') || rel.has('nofollow')) return;
+
+    let url;
+    try { url = new URL(link.href, location.href); } catch { return; }
+    if (!/^https?:$/.test(url.protocol) || url.origin !== location.origin) return;
+    if (url.hash && `${url.origin}${url.pathname}${url.search}` === `${location.origin}${location.pathname}${location.search}`) return;
+    url.hash = '';
+    if (url.href === `${location.origin}${location.pathname}${location.search}` || prefetched.has(url.href)) return;
+
+    const path = url.pathname;
+    const last = path.split('/').pop() || '';
+    if (last.includes('.') && !last.endsWith('.html')) return;
+
+    const hint = document.createElement('link');
+    hint.rel = 'prefetch';
+    hint.href = url.href;
+    hint.setAttribute('data-modaryx-intent-prefetch', 'true');
+    document.head.append(hint);
+    prefetched.add(url.href);
+  };
+
+  let hoverTimer = 0;
+  document.addEventListener('mouseover', (event) => {
+    const link = event.target?.closest?.('a[href]');
+    if (!link) return;
+    window.clearTimeout(hoverTimer);
+    hoverTimer = window.setTimeout(() => prefetchCandidate(link), 120);
+  }, {passive: true});
+  document.addEventListener('mouseout', () => window.clearTimeout(hoverTimer), {passive: true});
+  document.addEventListener('focusin', (event) => prefetchCandidate(event.target));
 })();
