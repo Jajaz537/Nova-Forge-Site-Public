@@ -4,6 +4,11 @@
   "externalAdapterRequired": false,
   "entries": [
     {"id":"page:catalog","kind":"page","title":"Catalogue multigaming","summary":"Découvrir les contenus publics avec preuve explicite et distribution fail-closed.","href":"./catalog.html","terms":["catalogue","mods","packs","experiences","multigaming"]},
+    {"id":"page:games","kind":"page","title":"Jeux","summary":"Hubs multigaming Nova Forge avec support technique, compatibilité et distribution explicitement séparés.","href":"/games/","terms":["jeux","games","hubs","multigaming"]},
+    {"id":"page:gta-6","kind":"page","title":"GTA 6","summary":"Hub éditorial GTA 6 sans adapter ou artefact Nova Forge revendiqué comme validé.","href":"/gta-6/","terms":["gta 6","grand theft auto vi","jeu","hub"]},
+    {"id":"page:gta-6-mods","kind":"page","title":"Mods GTA 6","summary":"Architecture de catégories GTA 6 avec zéro faux mod et distribution verrouillée sans preuve.","href":"/gta-6/mods/","terms":["gta 6","mods","categories","compatibilite"]},
+    {"id":"page:red-dead-redemption-2","kind":"page","title":"Red Dead Redemption 2","summary":"Hub de référence RDR2 sans release publique Nova Forge inventée.","href":"/red-dead-redemption-2/","terms":["red dead redemption 2","rdr2","jeu","hub"]},
+    {"id":"page:red-dead-redemption-2-mods","kind":"page","title":"Mods Red Dead Redemption 2","summary":"Architecture Mods RDR2 sans faux artefact, faux miroir ou page SEO vide.","href":"/red-dead-redemption-2/mods/","terms":["red dead redemption 2","rdr2","mods","categories"]},
     {"id":"page:creator-studio","kind":"page","title":"Creator Studio","summary":"Éditer et valider localement un Universal Mod Manifest sans publication implicite.","href":"./creator-studio.html","terms":["creator","studio","manifest","umm","draft"]},
     {"id":"page:profiles","kind":"page","title":"Profiles & Passkeys","summary":"Frontière publique entre identité, WebAuthn, récupération, sessions et actions privilégiées.","href":"./profiles.html","terms":["profiles","passkeys","webauthn","sessions","identite"]},
     {"id":"page:community","kind":"page","title":"Communauté","summary":"Contrats Abuse Shield, modération, discussions, reviews et commentaires sans faux backend.","href":"./community.html","terms":["communaute","moderation","reviews","commentaires","abuse shield"]},

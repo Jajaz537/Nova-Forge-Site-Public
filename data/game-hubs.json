@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "stage": "pre-vf",
+  "policy": {
+    "noFakeCatalogVolume": true,
+    "unknownCompatibilityStaysUnknown": true,
+    "emptySeoCategoryPagesForbidden": true,
+    "verifiedArtifactRequiredForDownload": true
+  },
+  "games": [
+    {
+      "id": "gta-6",
+      "name": "Grand Theft Auto VI",
+      "hub": "/gta-6/",
+      "modsHub": "/gta-6/mods/",
+      "supportState": "adapter-not-validated",
+      "compatibilityEvidence": "unknown",
+      "publicModsPublished": 0,
+      "distributionAvailable": false,
+      "note": "Nova Forge ne revendique aucun adapter, loader, format d’installation ou mod public vérifié pour ce jeu tant qu’une preuve technique réelle n’existe pas."
+    },
+    {
+      "id": "red-dead-redemption-2",
+      "name": "Red Dead Redemption 2",
+      "hub": "/red-dead-redemption-2/",
+      "modsHub": "/red-dead-redemption-2/mods/",
+      "supportState": "hub-ready-no-verified-public-release",
+      "compatibilityEvidence": "unknown",
+      "publicModsPublished": 0,
+      "distributionAvailable": false,
+      "note": "Le hub éditorial est prêt, mais aucun artefact Nova Forge vérifié n’est publié ou distribué depuis cette surface."
+    },
+    {
+      "id": "skyrim-se",
+      "name": "Skyrim Special Edition",
+      "hub": null,
+      "modsHub": null,
+      "supportState": "metadata-preview-only",
+      "compatibilityEvidence": "unknown",
+      "publicModsPublished": 0,
+      "distributionAvailable": false,
+      "note": "Une entrée de démonstration de métadonnées existe dans le catalogue ; aucun artefact n’est distribué."
+    },
+    {
+      "id": "cyberpunk-2077",
+      "name": "Cyberpunk 2077",
+      "hub": null,
+      "modsHub": null,
+      "supportState": "metadata-preview-only",
+      "compatibilityEvidence": "estimated",
+      "publicModsPublished": 0,
+      "distributionAvailable": false,
+      "note": "Une entrée de démonstration de métadonnées existe ; l’estimation affichée ne constitue pas une garantie de compatibilité ou de performance."
+    },
+    {
+      "id": "minecraft",
+      "name": "Minecraft",
+      "hub": null,
+      "modsHub": null,
+      "supportState": "metadata-preview-only",
+      "compatibilityEvidence": "unknown",
+      "publicModsPublished": 0,
+      "distributionAvailable": false,
+      "note": "Une entrée de démonstration de métadonnées existe ; aucune release publique vérifiée n’est distribuée."
+    }
+  ]
+}

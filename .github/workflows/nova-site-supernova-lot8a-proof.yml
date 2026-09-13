@@ -1,0 +1,39 @@
+name: Nova Site Super Nova Lot 8A Game Hubs Proof
+
+on:
+  push:
+    branches:
+      - supernova/accelerated-all-ideas-20260913
+    paths:
+      - 'games/**'
+      - 'gta-6/**'
+      - 'red-dead-redemption-2/**'
+      - 'assets/game-hub.css'
+      - 'data/game-hubs.json'
+      - 'schemas/game-hubs.schema.json'
+      - 'data/search-index.json'
+      - 'sitemap.xml'
+      - 'eng/site/Test-NovaSiteSuperNovaLot8A.ps1'
+      - 'eng/site/Test-NovaPublicBrand.ps1'
+      - '.github/workflows/nova-site-supernova-lot8a-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  targeted-lot8a:
+    name: Targeted Site Lot 8A Windows proof
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Prove truthful game hubs and SEO architecture
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Write-Host "SOURCE_COMMIT=$env:GITHUB_SHA"
+          pwsh -NoProfile -ExecutionPolicy Bypass -File ./eng/site/Test-NovaSiteSuperNovaLot8A.ps1
