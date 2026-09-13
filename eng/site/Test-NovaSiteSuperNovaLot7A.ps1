@@ -31,7 +31,7 @@ $manifest = (Read-RepoText 'site.webmanifest' | ConvertFrom-Json)
 Assert-True ($manifest.name -like 'Nova Forge*') 'pwa-nova-forge-name'
 Assert-True ($manifest.short_name -eq 'Nova Forge') 'pwa-nova-forge-short-name'
 $iconSources = @($manifest.icons | ForEach-Object { [string]$_.src })
-Assert-True (($iconSources | Where-Object { $_ -notmatch 'nova-mark' }).Count -eq 0) 'pwa-nova-icons-only'
+Assert-True (@($iconSources | Where-Object { $_ -notmatch 'nova-mark' }).Count -eq 0) 'pwa-nova-icons-only'
 
 $sitemap = Read-RepoText 'sitemap.xml'
 Assert-True ($sitemap.Contains('https://getnovaforge.com/')) 'sitemap-getnovaforge'

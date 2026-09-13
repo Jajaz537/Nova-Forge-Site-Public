@@ -24,6 +24,7 @@ jobs:
         with:
           fetch-depth: 1
 
+      # This proof intentionally validates the committed HTML state, not a generated worktree.
       - name: Prove no legacy public identity remains in HTML
         shell: pwsh
         run: |
