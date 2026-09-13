@@ -1,0 +1,42 @@
+{
+  "schema": "nova-forge-supernova-site-lot7e/v1",
+  "stage": "pre-vf",
+  "purpose": "Replace historical architecture-only Site ideas with executable/provider-neutral evidence or an explicit final blocker.",
+  "architectureOnlyRemaining": 0,
+  "engine": "./assets/site-fabric.mjs",
+  "policy": {
+    "providerNeutral": true,
+    "noSilentOverage": true,
+    "failClosed": true,
+    "noFakeBackend": true,
+    "mainBranchUntouched": true
+  },
+  "ideas": [
+    {"id":"site.independent","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["public-status.json","index.html"]},
+    {"id":"site.mod-mini-hubs","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["project-ember-textures.html","project-balanced-latency-pack.html","project-forge-night-experience.html","assets/project-hub.js"]},
+    {"id":"site.creator-studio","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"PROVIDER_NOT_CONNECTED_BY_DESIGN","evidence":["creator-studio.html","assets/creator-studio.js","assets/creator-workbench.mjs","schemas/publication-receipt.schema.json","assets/site-fabric.mjs#evaluatePublicationEligibility"]},
+    {"id":"site.universal-mod-manifest","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["schemas/universal-mod-manifest.schema.json","assets/creator-studio.js"]},
+    {"id":"site.compatibility-graph","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["schemas/compatibility-graph.schema.json","data/compatibility-graph.json","assets/project-hub.js"]},
+    {"id":"site.nova-experiences","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["ecosystem.html","project-forge-night-experience.html"]},
+    {"id":"site.web-smart-profile","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["schemas/smart-profile.schema.json","profiles.html","assets/site-fabric.mjs#buildSmartProfile"]},
+    {"id":"site.zero-euro","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["public-status.json","assets/site-fabric.mjs#surgeDecision"]},
+    {"id":"site.static-first","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["public-status.json","site.webmanifest","sw.js"]},
+    {"id":"site.storage-broker","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"PROVIDER_NOT_CONNECTED_BY_DESIGN","evidence":["schemas/storage-resolver.schema.json","assets/site-fabric.mjs#resolveStorage"]},
+    {"id":"site.hyperscale-storage","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"PROVIDER_NOT_CONNECTED_BY_DESIGN","evidence":["schemas/storage-resolver.schema.json","assets/site-fabric.mjs#resolveStorage"]},
+    {"id":"site.federation","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"PROVIDER_NOT_CONNECTED_BY_DESIGN","evidence":["schemas/storage-resolver.schema.json","assets/site-fabric.mjs#resolveStorage"]},
+    {"id":"site.offline-pwa","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["site.webmanifest","sw.js","public-status.json"]},
+    {"id":"site.surge-mode","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["assets/site-fabric.mjs#surgeDecision"]},
+    {"id":"site.abuse-shield","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"SERVER_ENFORCEMENT_OPTIONAL_UNTIL_REMOTE_WRITES","evidence":["assets/site-fabric.mjs#abuseDecision","public-status.json"]},
+    {"id":"site.moderation","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["assets/moderation-contract.mjs","schemas/moderation-receipt.schema.json","schemas/moderation-export.schema.json"]},
+    {"id":"site.dsa","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"BLOCKED_EXTERNAL_HUMAN_ENDPOINT","evidence":["assets/moderation-contract.mjs","schemas/moderation-receipt.schema.json","schemas/moderation-export.schema.json","security/human-complaint-path.json"]},
+    {"id":"site.trust-vocabulary","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["public-status.json","schemas/c2pa-evidence.schema.json","schemas/update-trust.schema.json"]},
+    {"id":"site.search","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["search.html","assets/search.js","data/search-index.json","schemas/search-adapter.schema.json"]},
+    {"id":"site.media","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"READY_PRE_VF","evidence":["assets/site-fabric.mjs#mediaDerivativePlan"]},
+    {"id":"site.hot-cold-community","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"REMOTE_BACKEND_NOT_CONNECTED_BY_DESIGN","evidence":["community.html","assets/community.js","assets/site-fabric.mjs#routeCommunityItem"]},
+    {"id":"site.repair-network","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"PROVIDER_NOT_CONNECTED_BY_DESIGN","evidence":["schemas/repair-network.schema.json","assets/site-fabric.mjs#repairArtifact"]},
+    {"id":"site.passkeys","implementationState":"IMPLEMENTED_TECHNICAL_PRE_VF","finalState":"AUTH_PROVIDER_NOT_CONNECTED_BY_DESIGN","evidence":["profiles.html","assets/profiles.js","schemas/account-security.schema.json","schemas/passkey-recovery.schema.json","assets/site-fabric.mjs#evaluatePasskeyReadiness"]}
+  ],
+  "finalBlockers": [
+    {"id":"site.dsa.human-complaint-endpoint","state":"BLOCKED_REAL_HUMAN_ENDPOINT_REQUIRED","evidence":"security/human-complaint-path.json"}
+  ]
+}
