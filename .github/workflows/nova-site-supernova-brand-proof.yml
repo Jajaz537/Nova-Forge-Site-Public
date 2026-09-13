@@ -16,7 +16,7 @@ permissions:
 jobs:
   public-brand-proof:
     name: Targeted public brand Windows proof
-    runs-on: [self-hosted, Windows, X64]
+    runs-on: windows-latest
     timeout-minutes: 10
     steps:
       - name: Checkout exact committed state

@@ -16,7 +16,7 @@ permissions:
 jobs:
   rebrand-public-html:
     name: Rebrand public HTML in one bounded batch
-    runs-on: [self-hosted, Windows, X64]
+    runs-on: windows-latest
     timeout-minutes: 10
     steps:
       - name: Checkout exact Super Nova branch
