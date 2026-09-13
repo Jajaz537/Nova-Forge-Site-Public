@@ -1,0 +1,9 @@
+{
+  "schema": "nova-forge-core-web-vitals-budget/v1",
+  "targetBasis": "75th-percentile-objective",
+  "fieldP75MeasurementState": "not-collected-pre-vf",
+  "fieldTargets": {"lcpMs":2500,"inpMs":200,"cls":0.1},
+  "localSessionDiagnostics": {"enabled":true,"remoteTelemetry":false,"storage":"sessionStorage","notEquivalentToFieldP75":true},
+  "staticBudgets": {"maxFirstPartyJsBytes":220000,"maxFirstPartyCssBytes":140000,"maxHtmlBytesPerPage":110000,"thirdPartyRuntimeResources":0},
+  "promotionRule": "Do not describe local/lab measurements as field p75. Preserve the p75 targets for later privacy-preserving field evidence."
+}

@@ -1,0 +1,27 @@
+name: Nova Site Super Nova Lot 7D Technical Proof
+
+on:
+  push:
+    branches:
+      - supernova/accelerated-all-ideas-20260913
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  targeted-lot7d:
+    name: Targeted Site Lot 7D technical Windows proof
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Prove performance budgets, DSA receipts and accessibility technical evidence
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Write-Host "SOURCE_COMMIT=$env:GITHUB_SHA"
+          pwsh -NoProfile -ExecutionPolicy Bypass -File ./eng/site/Test-NovaSiteSuperNovaLot7D.ps1

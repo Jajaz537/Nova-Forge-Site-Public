@@ -1,0 +1,11 @@
+{
+  "schema":"nova-forge-human-complaint-path/v1",
+  "state":"BLOCKED_REAL_HUMAN_ENDPOINT_REQUIRED",
+  "humanReviewRequired":true,
+  "automatedOnlyResolutionAllowed":false,
+  "publicHumanEndpoint":null,
+  "appealReceiptSchema":"./schemas/moderation-receipt.schema.json",
+  "localPortableAppealAvailable":true,
+  "blockingBeforeFinal":true,
+  "reason":"No verified private human complaint endpoint is present in the repository. Nova Forge must not invent an email address or claim an automated system is a human escalation path."
+}
