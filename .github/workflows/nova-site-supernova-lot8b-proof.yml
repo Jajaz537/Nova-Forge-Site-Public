@@ -1,0 +1,29 @@
+name: Nova Site Super Nova Lot 8B Discovery Proof
+
+on:
+  push:
+    branches:
+      - supernova/accelerated-all-ideas-20260913
+    paths:
+      - '*.html'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  targeted-lot8b:
+    name: Targeted Site Lot 8B Windows proof
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Prove game discovery placement and navigation
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Write-Host "SOURCE_COMMIT=$env:GITHUB_SHA"
+          pwsh -NoProfile -ExecutionPolicy Bypass -File ./eng/site/Test-NovaSiteSuperNovaLot8B.ps1

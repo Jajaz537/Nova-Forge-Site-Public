@@ -1,0 +1,46 @@
+name: Nova Site Super Nova Lot 8B Game Discovery Batch
+
+on:
+  push:
+    branches:
+      - supernova/accelerated-all-ideas-20260913
+    paths:
+      - 'eng/site/Invoke-NovaGameDiscoveryBatch.ps1'
+      - '.github/workflows/nova-site-supernova-lot8b-batch.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  game-discovery-batch:
+    name: Add Games discovery to bounded root public surfaces
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact Super Nova branch
+        uses: actions/checkout@v4
+        with:
+          ref: supernova/accelerated-all-ideas-20260913
+          fetch-depth: 1
+      - name: Apply bounded game discovery batch
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Write-Host "SOURCE_COMMIT=$env:GITHUB_SHA"
+          pwsh -NoProfile -ExecutionPolicy Bypass -File ./eng/site/Invoke-NovaGameDiscoveryBatch.ps1
+      - name: Commit generated discovery surfaces
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git add -- '*.html'
+          $pending = git status --porcelain -- '*.html'
+          if (-not $pending) {
+            Write-Host 'PASS_SUPERNOVA_GAME_DISCOVERY_BATCH_NO_COMMIT_NEEDED'
+            exit 0
+          }
+          git config user.name 'Nova Forge Super Nova'
+          git config user.email 'actions@users.noreply.github.com'
+          git commit -m 'site: surface game hubs in public navigation'
+          git push origin HEAD:supernova/accelerated-all-ideas-20260913
+          Write-Host 'PASS_SUPERNOVA_GAME_DISCOVERY_BATCH_COMMITTED'
