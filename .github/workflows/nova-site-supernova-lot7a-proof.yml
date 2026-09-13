@@ -1,0 +1,41 @@
+name: Nova Site Super Nova Lot 7A Targeted Proof
+
+on:
+  push:
+    branches:
+      - supernova/accelerated-all-ideas-20260913
+    paths:
+      - '_headers'
+      - 'site.webmanifest'
+      - 'sitemap.xml'
+      - 'robots.txt'
+      - 'favicon.svg'
+      - 'assets/shell.js'
+      - 'assets/tokens.css'
+      - 'domain-cutover.json'
+      - 'public-status.json'
+      - 'governance/SUPER-NOVA-SITE-LOT7A.json'
+      - 'eng/site/Test-NovaSiteSuperNovaLot7A.ps1'
+      - '.github/workflows/nova-site-supernova-lot7a-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  targeted-site-lot7a:
+    name: Targeted Site Lot 7A Windows proof
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Prove canonical identity, security and progressive shell
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Write-Host "SOURCE_COMMIT=$env:GITHUB_SHA"
+          pwsh -NoProfile -ExecutionPolicy Bypass -File ./eng/site/Test-NovaSiteSuperNovaLot7A.ps1
