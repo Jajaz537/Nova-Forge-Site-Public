@@ -100,6 +100,35 @@
   document.addEventListener('pointerout', cancelPrefetch, { passive: true });
   document.addEventListener('focusin', schedulePrefetch);
 
+  const classifyBlockedResource = (value) => {
+    if (!value) return 'none';
+    if (value === 'inline' || value === 'eval') return value;
+    if (value.startsWith('data:')) return 'data';
+    try {
+      const url = new URL(value, document.baseURI);
+      return url.origin === location.origin ? 'same-origin' : 'cross-origin';
+    } catch {
+      return 'opaque';
+    }
+  };
+
+  document.addEventListener('securitypolicyviolation', (event) => {
+    try {
+      const key = 'nova-forge:csp-violations:v1';
+      const previous = JSON.parse(sessionStorage.getItem(key) || '[]');
+      const records = Array.isArray(previous) ? previous.slice(-19) : [];
+      records.push({
+        effectiveDirective: String(event.effectiveDirective || event.violatedDirective || 'unknown').slice(0, 80),
+        disposition: String(event.disposition || 'enforce').slice(0, 16),
+        blockedClass: classifyBlockedResource(String(event.blockedURI || '')),
+        statusCode: Number.isFinite(event.statusCode) ? event.statusCode : 0
+      });
+      sessionStorage.setItem(key, JSON.stringify(records));
+    } catch {
+      // Privacy-safe local evidence is best-effort and never sent remotely.
+    }
+  });
+
   const page = location.pathname.split('/').pop() || 'index.html';
   if (page === 'creator-studio.html') import('./creator-workbench.mjs').catch(() => {});
   if (page === 'profiles.html') import('./local-data-control.mjs').catch(() => {});

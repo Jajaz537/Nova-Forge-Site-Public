@@ -24,6 +24,7 @@
   <script src="./assets/shell.js" defer></script>
   <script src="./assets/app.js" defer></script>
   <script src="./assets/downloads.js" defer></script>
+  <script type="module" src="./assets/range-verified-download.mjs"></script>
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
   <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">
 </head>
@@ -69,17 +70,19 @@
         <div role="listitem"><strong>Identité</strong><span>identifiant public, nom, version et nom exact du fichier</span></div>
         <div role="listitem"><strong>Taille</strong><span>taille publique en octets afin de détecter les incohérences évidentes</span></div>
         <div role="listitem"><strong>SHA-256</strong><span>64 caractères hexadécimaux minuscules correspondant au fichier distribué</span></div>
+        <div role="listitem"><strong>Identité immuable</strong><span><code>sha256:&lt;empreinte&gt;</code> et version exacte doivent rester identiques sur chaque réponse partielle</span></div>
         <div role="listitem"><strong>Provenance</strong><span>information publique qualifiée sur la chaîne de livraison autorisée</span></div>
         <div role="listitem"><strong>Signature</strong><span>statut explicite, avec preuve vérifiable lorsqu’une signature est requise</span></div>
+        <div role="listitem"><strong>Range vérifié</strong><span>réponses 206 contiguës, offset/total serveur exacts et SHA-256 de l’objet complet avant sauvegarde</span></div>
         <div role="listitem"><strong>Chemin</strong><span>URL relative same-origin limitée à la surface publique autorisée</span></div>
       </div>
-      <div class="security-note"><strong>Règle :</strong> la présence d’un fichier dans un dépôt, une release ou un stockage ne suffit jamais à le rendre téléchargeable depuis le site. L’entrée du manifeste public doit être autorisée et complète.</div>
+      <div class="security-note"><strong>Règle :</strong> aucun octet provenant d’une autre version ou d’une identité mutable ne peut être assemblé silencieusement. Sans en-têtes d’identité/version et vérification finale de l’objet complet, le téléchargement reste bloqué.</div>
     </section>
 
     <section class="section" id="verify" aria-labelledby="verify-download-title">
       <p class="eyebrow">Vérification locale</p>
       <h2 id="verify-download-title">Comparer un fichier reçu à son empreinte.</h2>
-      <p class="section-intro">Lorsqu’un artefact public existera, son SHA-256 pourra être vérifié localement dans le navigateur. Une correspondance confirme l’intégrité par rapport à l’empreinte publiée ; elle ne remplace pas la provenance ou une signature requise.</p>
+      <p class="section-intro">Lorsqu’un artefact public existera, son téléchargement navigateur utilisera des plages HTTP bornées et ne sera sauvegardé qu’après vérification SHA-256 de l’objet complet. Le vérificateur manuel reste disponible en contrôle indépendant.</p>
       <div class="actions"><a class="button primary" href="./verify.html">Ouvrir le vérificateur SHA-256</a><a class="button" href="./documentation.html#verification">Lire le guide public</a><a class="button" href="./">Retour au site officiel</a></div>
     </section>
   </main>

@@ -8,7 +8,9 @@
     "identity",
     "integrity-sha256",
     "provenance",
-    "signature-when-required"
+    "signature-when-required",
+    "immutable-version",
+    "verified-range-transfer"
   ],
   "artifact_contract": {
     "required_fields_when_published": [
@@ -18,12 +20,28 @@
       "filename",
       "size_bytes",
       "sha256",
+      "content_identity",
+      "immutable_version",
       "provenance",
-      "download_path"
+      "download_path",
+      "range_verification"
     ],
     "download_path_policy": "same-origin-public-surface-only",
     "sha256_format": "64-lowercase-hex",
-    "signature_status_required": true
+    "content_identity_format": "sha256:<artifact-sha256>",
+    "signature_status_required": true,
+    "immutable_version_required": true
+  },
+  "range_verification_contract": {
+    "required": true,
+    "transport": "HTTP Range 206",
+    "server_known_offset_required": true,
+    "server_content_identity_header": "X-Nova-Content-Identity",
+    "server_version_header": "X-Nova-Artifact-Version",
+    "contiguous_ranges_only": true,
+    "cross_release_splicing": "forbidden",
+    "whole_object_sha256_before_save": "required",
+    "max_browser_verified_bytes": 536870912
   },
   "artifacts": []
 }

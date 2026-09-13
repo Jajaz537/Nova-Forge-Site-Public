@@ -1,0 +1,79 @@
+{
+  "schema": "nova-forge-site-asvs-baseline/v1",
+  "version": "5.0-aligned-pre-vf",
+  "claim": "executable-baseline-not-certification",
+  "failClosed": true,
+  "surfaces": [
+    "authentication",
+    "creator-upload",
+    "moderation",
+    "release",
+    "storage",
+    "recovery"
+  ],
+  "controls": [
+    {
+      "id": "V1-TRUST-BOUNDARIES",
+      "surfaces": ["authentication","creator-upload","moderation","release","storage","recovery"],
+      "requirement": "Explicit public/private and provider boundaries",
+      "evidence": ["public-status.json","schemas/account-security.schema.json"],
+      "failClosed": true
+    },
+    {
+      "id": "V2-AUTH-PASSKEY",
+      "surfaces": ["authentication","recovery"],
+      "requirement": "Passkey-first provider-neutral identity with no private-key storage",
+      "evidence": ["schemas/passkey-recovery.schema.json","profiles.html"],
+      "failClosed": true
+    },
+    {
+      "id": "V3-SESSION-ABSENCE",
+      "surfaces": ["authentication"],
+      "requirement": "No simulated remote session or account state without backend proof",
+      "evidence": ["profiles.html","public-status.json"],
+      "failClosed": true
+    },
+    {
+      "id": "V5-INPUT-OUTPUT",
+      "surfaces": ["creator-upload","moderation"],
+      "requirement": "Schema validation and DOM text sinks; no unrestricted HTML injection",
+      "evidence": ["assets/json-schema-lite.js","assets/shell.js","_headers"],
+      "failClosed": true
+    },
+    {
+      "id": "V8-DATA-MINIMIZATION",
+      "surfaces": ["storage","recovery"],
+      "requirement": "Local-first storage plus bounded application-owned purge controls",
+      "evidence": ["assets/local-data-control.mjs"],
+      "failClosed": true
+    },
+    {
+      "id": "V10-MALICIOUS-CONTENT",
+      "surfaces": ["creator-upload","release"],
+      "requirement": "Quarantine and no promotion before security/provenance verification",
+      "evidence": ["assets/creator-workbench.mjs","assets/resumable-upload.mjs"],
+      "failClosed": true
+    },
+    {
+      "id": "V12-FILE-BOUNDARIES",
+      "surfaces": ["creator-upload","storage"],
+      "requirement": "Bounded file size/type/archive handling and non-executable staging",
+      "evidence": ["assets/creator-workbench.mjs"],
+      "failClosed": true
+    },
+    {
+      "id": "V13-REMOTE-API-ABSENCE",
+      "surfaces": ["moderation","release"],
+      "requirement": "Network-dependent operations remain disconnected until a real authorized endpoint exists",
+      "evidence": ["public-status.json"],
+      "failClosed": true
+    },
+    {
+      "id": "V14-CONFIG-CSP",
+      "surfaces": ["authentication","creator-upload","moderation","release","storage","recovery"],
+      "requirement": "Strict CSP, Trusted Types enforcement where supported and first-party critical resources",
+      "evidence": ["_headers","security/third-party-resource-policy.json"],
+      "failClosed": true
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+name: Nova Site Super Nova Lot 7C Targeted Proof
+
+on:
+  push:
+    branches:
+      - supernova/accelerated-all-ideas-20260913
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  targeted-lot7c:
+    name: Targeted Site Lot 7C Windows proof
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Prove ASVS, injection hardening, provenance, update trust and verified Range downloads
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Write-Host "SOURCE_COMMIT=$env:GITHUB_SHA"
+          pwsh -NoProfile -ExecutionPolicy Bypass -File ./eng/site/Test-NovaSiteSuperNovaLot7C.ps1

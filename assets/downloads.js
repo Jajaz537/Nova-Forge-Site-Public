@@ -7,6 +7,7 @@
 
   const SHA256_RE = /^[0-9a-f]{64}$/;
   const SAFE_ID_RE = /^[a-z0-9][a-z0-9._-]{0,95}$/;
+  const MAX_BROWSER_VERIFIED_BYTES = 512 * 1024 * 1024;
 
   function failClosed(message = 'Aucun téléchargement public validé') {
     root.replaceChildren();
@@ -31,11 +32,15 @@
     if (typeof item.name !== 'string' || !item.name.trim()) return false;
     if (typeof item.version !== 'string' || !item.version.trim()) return false;
     if (typeof item.filename !== 'string' || !item.filename.trim()) return false;
-    if (!Number.isSafeInteger(item.size_bytes) || item.size_bytes <= 0) return false;
+    if (!Number.isSafeInteger(item.size_bytes) || item.size_bytes <= 0 || item.size_bytes > MAX_BROWSER_VERIFIED_BYTES) return false;
     if (!SHA256_RE.test(item.sha256 || '')) return false;
+    if (item.content_identity !== `sha256:${item.sha256}`) return false;
+    if (item.immutable_version !== true) return false;
     if (typeof item.provenance !== 'string' || !item.provenance.trim()) return false;
     if (!validRelativeDownloadPath(item.download_path)) return false;
     if (!['verified', 'not-required'].includes(item.signature_status)) return false;
+    if (item.range_verification?.required !== true) return false;
+    if (!Number.isSafeInteger(item.range_verification?.max_browser_bytes) || item.range_verification.max_browser_bytes <= 0 || item.range_verification.max_browser_bytes > MAX_BROWSER_VERIFIED_BYTES) return false;
     return true;
   }
 
@@ -75,19 +80,27 @@
     const actions = document.createElement('div');
     actions.className = 'actions';
 
-    const download = document.createElement('a');
+    const download = document.createElement('button');
     download.className = 'button primary';
-    download.href = item.download_path;
-    download.download = item.filename;
-    download.textContent = 'Télécharger';
+    download.type = 'button';
+    download.dataset.novaVerifiedDownload = '';
+    download.dataset.downloadId = item.id;
+    download.textContent = 'Télécharger + vérifier';
 
     const verify = document.createElement('a');
     verify.className = 'button';
     verify.href = `./verify.html#sha256=${item.sha256}`;
     verify.textContent = 'Vérifier le SHA-256';
 
+    const transferStatus = document.createElement('p');
+    transferStatus.className = 'muted';
+    transferStatus.dataset.verifiedDownloadStatus = '';
+    transferStatus.setAttribute('role', 'status');
+    transferStatus.setAttribute('aria-live', 'polite');
+    transferStatus.textContent = 'Le fichier ne sera sauvegardé qu’après vérification Range + SHA-256 complète.';
+
     actions.append(download, verify);
-    article.append(kicker, title, meta, provenance, hash, actions);
+    article.append(kicker, title, meta, provenance, hash, actions, transferStatus);
     return article;
   }
 
@@ -103,6 +116,7 @@
       if (manifest?.schema !== 'nova-forge-public-downloads/v1') return;
       if (manifest?.policy !== 'verified-artifacts-only') return;
       if (manifest?.available !== true) return;
+      if (manifest?.range_verification_contract?.required !== true) return;
       if (!Array.isArray(manifest?.artifacts) || !manifest.artifacts.length) return;
       if (!manifest.artifacts.every(validateArtifact)) return;
 

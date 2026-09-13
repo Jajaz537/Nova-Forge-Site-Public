@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nova-forge:schemas:c2pa-evidence:v1",
+  "title": "Nova Forge validated C2PA evidence receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema","standard","validationState","validatorProvider","validationReceiptSha256","manifestClaimDigestSha256","assetSha256","lineageState","rightsOwnershipInferred"],
+  "properties": {
+    "schema": {"const": "nova-forge-c2pa-evidence/v1"},
+    "standard": {"const": "c2pa"},
+    "validationState": {"enum": ["valid","invalid","unknown"]},
+    "validatorProvider": {"type": "string","pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{1,127}$"},
+    "validationReceiptSha256": {"type": "string","pattern": "^[0-9a-f]{64}$"},
+    "manifestClaimDigestSha256": {"type": "string","pattern": "^[0-9a-f]{64}$"},
+    "assetSha256": {"type": "string","pattern": "^[0-9a-f]{64}$"},
+    "lineageState": {"enum": ["original","derived","unknown"]},
+    "rightsOwnershipInferred": {"const": false}
+  }
+}

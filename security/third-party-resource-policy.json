@@ -1,0 +1,11 @@
+{
+  "schema": "nova-forge-third-party-resource-policy/v1",
+  "mode": "first-party-critical-resources-only",
+  "criticalResourceOrigins": ["self"],
+  "thirdPartyDependencies": [],
+  "allowlistRequiredBeforeThirdPartyUse": true,
+  "subresourceIntegrityRequiredWhereCompatible": true,
+  "immutableVersionPinRequired": true,
+  "fallback": "fail-closed",
+  "note": "Current public shell intentionally uses no third-party executable, stylesheet, font or image runtime dependency."
+}
