@@ -99,4 +99,8 @@
   document.addEventListener('pointerover', schedulePrefetch, { passive: true });
   document.addEventListener('pointerout', cancelPrefetch, { passive: true });
   document.addEventListener('focusin', schedulePrefetch);
+
+  const page = location.pathname.split('/').pop() || 'index.html';
+  if (page === 'creator-studio.html') import('./creator-workbench.mjs').catch(() => {});
+  if (page === 'profiles.html') import('./local-data-control.mjs').catch(() => {});
 })();

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nova-site-shell-v36';
+const CACHE_NAME = 'nova-site-shell-v37';
 const BASE_URL = new URL('./', self.location.href);
 const PUBLIC_PAGE_PATHS = [
   './',
@@ -31,6 +31,7 @@ const SHELL_PATHS = [
   './schemas/compatibility-graph.schema.json',
   './schemas/public-profile.schema.json',
   './schemas/account-security.schema.json',
+  './schemas/passkey-recovery.schema.json',
   './schemas/collection.schema.json',
   './schemas/community-submission.schema.json',
   './schemas/community-write.schema.json',
@@ -54,14 +55,17 @@ const SHELL_PATHS = [
   './assets/search.js',
   './assets/json-schema-lite.js',
   './assets/creator-studio.js',
+  './assets/creator-workbench.mjs',
+  './assets/resumable-upload.mjs',
+  './assets/local-data-control.mjs',
   './assets/project-hub.js',
   './assets/profiles.js',
   './assets/community.js',
   './assets/downloads.js',
   './assets/verify.js',
-  './assets/modaryx-mark-192.png',
-  './assets/modaryx-mark-512.png',
-  './assets/modaryx-mark.svg',
+  './assets/nova-mark-192.png',
+  './assets/nova-mark-512.png',
+  './assets/nova-mark.svg',
   './assets/nova-kingdom-panorama.svg',
   './assets/tokens.css',
   './assets/nova-premium-hd.css',

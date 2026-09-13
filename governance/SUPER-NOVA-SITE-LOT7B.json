@@ -1,0 +1,28 @@
+{
+  "schema": "nova-forge-supernova-site-lot/v1",
+  "lot": "7B",
+  "status": "IMPLEMENTED_PENDING_TARGETED_PROOF",
+  "scope": "official-site",
+  "layoutPolicy": "NO_LAYOUT_RESTRUCTURE_DYNAMIC_CONTROLS_ONLY",
+  "researchMappings": [
+    "site.privacy-data-minimization",
+    "site.passkey-portable-recovery",
+    "site.opfs-creator-workbench",
+    "site.resumable-verified-uploads",
+    "SITE-R20-hostile-creator-upload-boundary",
+    "SITE-R21-bounded-browser-local-data-purge"
+  ],
+  "contracts": {
+    "localData": "assets/local-data-control.mjs",
+    "creatorWorkbench": "assets/creator-workbench.mjs",
+    "resumableUpload": "assets/resumable-upload.mjs",
+    "passkeyRecovery": "schemas/passkey-recovery.schema.json"
+  },
+  "activation": {
+    "remoteUploadProviderConfigured": false,
+    "remoteUploadBehavior": "FAIL_CLOSED_UNTIL_REAL_SAME_ORIGIN_PROVIDER_EXISTS",
+    "passkeyAccountBackendConfigured": false,
+    "passkeyBehavior": "CONTRACT_AND_BROWSER_CAPABILITY_ONLY_NO_SIMULATED_CREDENTIALS"
+  },
+  "closurePolicy": "No canonical research item is closed until targeted Windows evidence passes."
+}

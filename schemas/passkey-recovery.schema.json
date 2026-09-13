@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nova-forge:schemas:passkey-recovery:v1",
+  "title": "Nova Forge Passkey Recovery Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "profileId", "credentialPolicy", "credentials", "recoveryMethods", "auditReceipts", "privateKeyMaterialStoredByNova"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "profileId": {"type": "string", "minLength": 2, "maxLength": 128, "pattern": "^[a-z0-9][a-z0-9._-]+$"},
+    "credentialPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["passkeyFirst", "multipleCredentialsSupported", "providerLockInAllowed"],
+      "properties": {
+        "passkeyFirst": {"const": true},
+        "multipleCredentialsSupported": {"const": true},
+        "providerLockInAllowed": {"const": false}
+      }
+    },
+    "credentials": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["credentialId", "state", "providerNeutral", "privateKeyExportedToNova"],
+        "properties": {
+          "credentialId": {"type": "string", "minLength": 8, "maxLength": 512},
+          "state": {"enum": ["active", "revoked", "lost", "unknown"]},
+          "providerNeutral": {"type": "boolean"},
+          "privateKeyExportedToNova": {"const": false}
+        }
+      }
+    },
+    "recoveryMethods": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "configured", "providerNeutral", "proofReceiptId"],
+        "properties": {
+          "id": {"type": "string", "minLength": 2, "maxLength": 128},
+          "kind": {"enum": ["secondary-passkey", "recovery-code", "verified-contact", "human-assisted"]},
+          "configured": {"type": "boolean"},
+          "providerNeutral": {"const": true},
+          "proofReceiptId": {"type": ["string", "null"], "maxLength": 256}
+        },
+        "allOf": [
+          {"if": {"properties": {"configured": {"const": true}}, "required": ["configured"]}, "then": {"properties": {"proofReceiptId": {"type": "string", "minLength": 8}}}}
+        ]
+      }
+    },
+    "auditReceipts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["receiptId", "action", "occurredAt", "humanReviewAvailable"],
+        "properties": {
+          "receiptId": {"type": "string", "minLength": 8, "maxLength": 256},
+          "action": {"enum": ["credential-added", "credential-revoked", "recovery-started", "recovery-completed", "recovery-denied"]},
+          "occurredAt": {"type": "string", "format": "date-time"},
+          "humanReviewAvailable": {"type": "boolean"}
+        }
+      }
+    },
+    "privateKeyMaterialStoredByNova": {"const": false}
+  }
+}
