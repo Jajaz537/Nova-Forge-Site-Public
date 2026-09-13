@@ -6,6 +6,8 @@ on:
       - supernova/accelerated-all-ideas-20260913
     paths:
       - '*.html'
+      - 'eng/site/Test-NovaSiteSuperNovaLot8B.ps1'
+      - '.github/workflows/nova-site-supernova-lot8b-proof.yml'
   workflow_dispatch:
 
 permissions:
