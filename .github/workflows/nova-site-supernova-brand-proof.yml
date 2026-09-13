@@ -1,0 +1,33 @@
+name: Nova Site Super Nova Public Brand Targeted Proof
+
+on:
+  push:
+    branches:
+      - supernova/accelerated-all-ideas-20260913
+    paths:
+      - '*.html'
+      - 'eng/site/Test-NovaPublicBrand.ps1'
+      - '.github/workflows/nova-site-supernova-brand-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-brand-proof:
+    name: Targeted public brand Windows proof
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact committed state
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Prove no legacy public identity remains in HTML
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Write-Host "SOURCE_COMMIT=$env:GITHUB_SHA"
+          pwsh -NoProfile -ExecutionPolicy Bypass -File ./eng/site/Test-NovaPublicBrand.ps1
+          Write-Host 'PASS_TARGETED_NOVA_PUBLIC_BRAND_WINDOWS_PROOF'

@@ -1,0 +1,48 @@
+name: Nova Site Super Nova Rebrand Batch
+
+on:
+  push:
+    branches:
+      - supernova/accelerated-all-ideas-20260913
+    paths:
+      - 'eng/site/Invoke-NovaPublicRebrand.ps1'
+      - 'eng/site/Test-NovaPublicBrand.ps1'
+      - '.github/workflows/nova-site-supernova-rebrand-batch.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebrand-public-html:
+    name: Rebrand public HTML in one bounded batch
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact Super Nova branch
+        uses: actions/checkout@v4
+        with:
+          ref: supernova/accelerated-all-ideas-20260913
+          fetch-depth: 1
+
+      - name: Apply bounded public rebrand
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -ExecutionPolicy Bypass -File ./eng/site/Invoke-NovaPublicRebrand.ps1
+          pwsh -NoProfile -ExecutionPolicy Bypass -File ./eng/site/Test-NovaPublicBrand.ps1
+
+      - name: Commit generated public identity batch
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git add -- '*.html'
+          $pending = git status --porcelain
+          if (-not $pending) {
+            Write-Host 'PASS_SUPERNOVA_REBRAND_NO_CHANGES_NEEDED'
+            exit 0
+          }
+          git config user.name 'Nova Forge Super Nova'
+          git config user.email 'actions@users.noreply.github.com'
+          git commit -m 'site: apply Nova Forge public identity batch'
+          git push origin HEAD:supernova/accelerated-all-ideas-20260913
+          Write-Host 'PASS_SUPERNOVA_REBRAND_BATCH_COMMITTED'
