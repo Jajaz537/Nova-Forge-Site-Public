@@ -18,7 +18,8 @@ foreach($surface in $surfaces){
   Assert-True (Test-Path $path) ('seo-file-'+(($surface.path -replace '[^a-zA-Z0-9]+','-').Trim('-')))
   $text=[IO.File]::ReadAllText($path)
   $canonical=[regex]::Escape([string]$surface.canonical)
-  Assert-True ([regex]::Matches($text,"<link\s+rel=\"canonical\"\s+href=\"$canonical\">").Count -eq 1) ('canonical-'+(($surface.path -replace '[^a-zA-Z0-9]+','-').Trim('-')))
+  $canonicalPattern='<link\s+rel="canonical"\s+href="'+$canonical+'">'
+  Assert-True ([regex]::Matches($text,$canonicalPattern,[Text.RegularExpressions.RegexOptions]::IgnoreCase).Count -eq 1) ('canonical-'+(($surface.path -replace '[^a-zA-Z0-9]+','-').Trim('-')))
   Assert-True ($text.Contains(('property="og:url" content="{0}"' -f $surface.canonical))) ('og-url-'+(($surface.path -replace '[^a-zA-Z0-9]+','-').Trim('-')))
   $expectedRobots=if($surface.indexable -eq $true){'index,follow,max-image-preview:large'}else{'noindex,follow'}
   Assert-True ($text.Contains(('name="robots" content="{0}"' -f $expectedRobots))) ('robots-'+(($surface.path -replace '[^a-zA-Z0-9]+','-').Trim('-')))
