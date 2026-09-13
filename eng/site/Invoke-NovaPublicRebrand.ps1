@@ -4,8 +4,10 @@ param()
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
-$files = @(Get-ChildItem -Path $root -Filter '*.html' -File | Sort-Object Name)
-if ($files.Count -eq 0) { throw 'No public HTML files found.' }
+$htmlFiles = @(Get-ChildItem -Path $root -Filter '*.html' -File | Sort-Object FullName)
+$runtimeFiles = @(Get-ChildItem -Path (Join-Path $root 'assets') -File | Where-Object { $_.Extension -in @('.js','.mjs') } | Sort-Object FullName)
+$files = @($htmlFiles + $runtimeFiles)
+if ($htmlFiles.Count -eq 0 -or $runtimeFiles.Count -eq 0) { throw 'Public HTML/runtime surface not found.' }
 
 $changed = 0
 foreach ($file in $files) {
@@ -25,7 +27,8 @@ foreach ($file in $files) {
     if ($next -ne $text) {
         [IO.File]::WriteAllText($file.FullName, $next, [Text.UTF8Encoding]::new($false))
         $changed++
-        Write-Host "UPDATED $($file.Name)"
+        $relative = [IO.Path]::GetRelativePath($root, $file.FullName)
+        Write-Host "UPDATED $relative"
     }
 }
-Write-Host "NOVA_REBRAND_CHANGED_FILES=$changed"
+Write-Host "NOVA_REBRAND_CHANGED_FILES=$changed html=$($htmlFiles.Count) runtime=$($runtimeFiles.Count)"
