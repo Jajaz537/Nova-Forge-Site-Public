@@ -23,6 +23,7 @@
   <link rel="alternate" type="application/json" href="./public-status.json" title="Nova Forge — statut public">
   <link rel="stylesheet" href="./assets/tokens.css">
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
+  <link rel="stylesheet" href="./assets/game-hub.css">
   <script src="./assets/shell.js" defer></script>
   <script src="./assets/app.js" defer></script>
   <script src="./assets/nova-premium-hd.js" defer></script>
@@ -38,6 +39,7 @@
     </a>
     <nav class="nova-nav" data-primary-nav data-open="false" aria-label="Navigation principale">
       <a href="#catalogue">Mods</a>
+      <a href="./games/">Jeux</a>
       <a href="./creator-studio.html">Créer</a>
       <a href="./ecosystem.html">Écosystème</a>
       <a href="./security.html">Sécurité</a>
@@ -111,6 +113,20 @@
       <div class="shell"><span><b></b>Navigation publique sans compte</span><span><b></b>Aucune télémétrie distante requise</span><span><b></b>Smart Profile local</span><span><b></b>Aucun exécutable lancé par le site</span></div>
     </div>
 
+    <section class="game-section home-games-stage" id="games" aria-labelledby="home-games-title">
+      <div class="shell game-shell">
+        <div class="game-section-head">
+          <div><p class="eyebrow">Jeux en vedette</p><h2 class="section-title" id="home-games-title">Deux hubs dédiés.<br>Zéro faux catalogue.</h2></div>
+          <p>GTA 6 et Red Dead Redemption 2 disposent maintenant de hubs éditoriaux dédiés. Le support technique, la compatibilité et la distribution restent séparés : aucun mod public vérifié n’est inventé pour remplir les pages.</p>
+        </div>
+        <div class="game-grid">
+          <article class="game-card"><p class="game-kicker">Hub dédié</p><h3>GTA 6</h3><p>Architecture de découverte prête, adapter Nova Forge non validé et compatibilité explicitement inconnue.</p><div class="game-actions"><a href="./gta-6/">Explorer GTA 6</a></div></article>
+          <article class="game-card"><p class="game-kicker">Hub dédié</p><h3>Red Dead Redemption 2</h3><p>Surface éditoriale multigaming prête, sans release publique Nova Forge ou compatibilité technique inventée.</p><div class="game-actions"><a href="./red-dead-redemption-2/">Explorer RDR2</a></div></article>
+          <article class="game-card"><p class="game-kicker">Tous les jeux</p><h3>Architecture extensible</h3><p>Les autres jeux restent dans le catalogue tant qu’un hub substantiel n’est pas justifié. Aucune page SEO vide n’est générée.</p><div class="game-actions"><a href="./games/">Voir tous les jeux</a></div></article>
+        </div>
+        <p class="game-note">État pré-VF : 0 mod public vérifié sur les deux hubs dédiés. Aucun téléchargement n’est exposé sans identité, intégrité, droits, provenance et preuve de distribution suffisants.</p>
+      </div>
+    </section>
     <section class="editions" id="os" aria-labelledby="editions-title">
       <div class="shell">
         <div class="section-head"><div><p class="eyebrow">Nova Forge OS Public</p><h2 class="section-title" id="editions-title">Une expérience claire.<br>Un univers cohérent.</h2></div><p class="section-copy">Le site présente l’expérience publique Nova Forge et les capacités destinées aux joueurs et créateurs, dans la continuité directe de Nova Forge OS.</p></div>
