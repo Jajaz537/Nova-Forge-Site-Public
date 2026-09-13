@@ -1,0 +1,28 @@
+name: Nova Site Super Nova Lot 8C SEO Proof
+on:
+  push:
+    branches: [supernova/accelerated-all-ideas-20260913]
+    paths:
+      - 'eng/site/Test-NovaSiteSuperNovaLot8C.ps1'
+      - '.github/workflows/nova-site-supernova-lot8c-proof.yml'
+      - '*.html'
+      - 'games/**'
+      - 'gta-6/**'
+      - 'red-dead-redemption-2/**'
+      - 'sitemap.xml'
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  targeted-lot8c:
+    name: Targeted Site Lot 8C Windows proof
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 1}
+      - name: Prove canonical indexing and CSP-safe structured data
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          Write-Host "SOURCE_COMMIT=$env:GITHUB_SHA"
+          pwsh -NoProfile -ExecutionPolicy Bypass -File ./eng/site/Test-NovaSiteSuperNovaLot8C.ps1

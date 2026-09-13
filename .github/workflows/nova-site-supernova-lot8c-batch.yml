@@ -1,0 +1,39 @@
+name: Nova Site Super Nova Lot 8C SEO Surface Batch
+on:
+  push:
+    branches: [supernova/accelerated-all-ideas-20260913]
+    paths:
+      - 'data/seo-surfaces.json'
+      - 'schemas/seo-surfaces.schema.json'
+      - 'eng/site/Invoke-NovaSeoSurfaceBatch.ps1'
+      - '.github/workflows/nova-site-supernova-lot8c-batch.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  seo-surface-batch:
+    name: Apply bounded SEO and microdata surface batch
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact branch
+        uses: actions/checkout@v4
+        with: {ref: supernova/accelerated-all-ideas-20260913, fetch-depth: 1}
+      - name: Apply bounded SEO surface transform
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          Write-Host "SOURCE_COMMIT=$env:GITHUB_SHA"
+          pwsh -NoProfile -ExecutionPolicy Bypass -File ./eng/site/Invoke-NovaSeoSurfaceBatch.ps1
+      - name: Commit generated SEO surfaces
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          git add -- '*.html' 'games/*.html' 'gta-6/*.html' 'gta-6/mods/*.html' 'red-dead-redemption-2/*.html' 'red-dead-redemption-2/mods/*.html' sitemap.xml
+          $pending=git status --porcelain
+          if(-not $pending){Write-Host 'PASS_SUPERNOVA_SEO_SURFACE_BATCH_NO_COMMIT_NEEDED';exit 0}
+          git config user.name 'Nova Forge Super Nova'
+          git config user.email 'actions@users.noreply.github.com'
+          git commit -m 'site: apply CSP-safe SEO surface metadata'
+          git push origin HEAD:supernova/accelerated-all-ideas-20260913
+          Write-Host 'PASS_SUPERNOVA_SEO_SURFACE_BATCH_COMMITTED'

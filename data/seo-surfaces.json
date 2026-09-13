@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "stage": "pre-vf",
+  "structuredDataMode": "html-microdata-csp-safe",
+  "emptyCategoryPagesAllowed": false,
+  "demoPreviewIndexing": "noindex-follow",
+  "surfaces": [
+    {"path":"games/index.html","canonical":"https://getnovaforge.com/games/","type":"CollectionPage","indexable":true},
+    {"path":"gta-6/index.html","canonical":"https://getnovaforge.com/gta-6/","type":"CollectionPage","indexable":true},
+    {"path":"gta-6/mods/index.html","canonical":"https://getnovaforge.com/gta-6/mods/","type":"CollectionPage","indexable":true},
+    {"path":"red-dead-redemption-2/index.html","canonical":"https://getnovaforge.com/red-dead-redemption-2/","type":"CollectionPage","indexable":true},
+    {"path":"red-dead-redemption-2/mods/index.html","canonical":"https://getnovaforge.com/red-dead-redemption-2/mods/","type":"CollectionPage","indexable":true},
+    {"path":"project.html","canonical":"https://getnovaforge.com/project","type":"CollectionPage","indexable":true},
+    {"path":"project-ember-textures.html","canonical":"https://getnovaforge.com/project-ember-textures","type":"CreativeWork","indexable":false},
+    {"path":"project-balanced-latency-pack.html","canonical":"https://getnovaforge.com/project-balanced-latency-pack","type":"CreativeWork","indexable":false},
+    {"path":"project-forge-night-experience.html","canonical":"https://getnovaforge.com/project-forge-night-experience","type":"CreativeWork","indexable":false}
+  ]
+}

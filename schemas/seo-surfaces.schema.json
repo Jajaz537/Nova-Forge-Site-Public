@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:nova-forge:schemas:seo-surfaces:v1",
+  "title":"Nova Forge SEO Surfaces Registry",
+  "type":"object","additionalProperties":false,
+  "required":["schemaVersion","stage","structuredDataMode","emptyCategoryPagesAllowed","demoPreviewIndexing","surfaces"],
+  "properties":{
+    "schemaVersion":{"const":1},"stage":{"const":"pre-vf"},
+    "structuredDataMode":{"const":"html-microdata-csp-safe"},
+    "emptyCategoryPagesAllowed":{"const":false},
+    "demoPreviewIndexing":{"const":"noindex-follow"},
+    "surfaces":{"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["path","canonical","type","indexable"],"properties":{"path":{"type":"string","minLength":3},"canonical":{"type":"string","pattern":"^https://getnovaforge\\.com/"},"type":{"enum":["CollectionPage","CreativeWork"]},"indexable":{"type":"boolean"}}}}
+  }
+}
