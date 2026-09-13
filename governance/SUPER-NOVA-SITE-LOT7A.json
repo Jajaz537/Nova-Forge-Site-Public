@@ -1,0 +1,27 @@
+{
+  "schema": "nova-forge-supernova-site-lot/v1",
+  "lot": "7A",
+  "status": "IMPLEMENTED_PENDING_TARGETED_PROOF",
+  "scope": "official-site",
+  "branch": "supernova/accelerated-all-ideas-20260913",
+  "layoutPolicy": "NO_LAYOUT_RESTRUCTURE",
+  "canonicalOrigin": "https://getnovaforge.com",
+  "changes": [
+    "canonical HTTP Link headers migrated to getnovaforge.com",
+    "site-wide security response headers hardened without Trusted Types enforcement",
+    "PWA identity and icons migrated to Nova Forge assets",
+    "sitemap and robots canonical origin migrated to getnovaforge.com",
+    "favicon migrated to Nova Forge mark",
+    "dynamic shell no longer uses innerHTML",
+    "same-origin intent-aware prefetch is bounded and disabled for Save-Data/2g",
+    "cross-document View Transitions enabled progressively with reduced-motion fallback"
+  ],
+  "researchMappings": [
+    "site.browser-injection-hardening",
+    "site.third-party-resource-integrity",
+    "site.intent-aware-prefetch",
+    "site.progressive-navigation-transitions",
+    "site.accessibility-executable-evidence"
+  ],
+  "closurePolicy": "No research item is closed until targeted executable evidence passes."
+}

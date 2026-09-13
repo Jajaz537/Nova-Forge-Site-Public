@@ -38,3 +38,15 @@
   --nova-motion-deliberate: 240ms;
   --nova-font: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
 }
+
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+}
