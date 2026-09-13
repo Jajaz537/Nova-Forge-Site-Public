@@ -5,6 +5,10 @@ $ErrorActionPreference='Stop'
 $root=(Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $registry=(Get-Content -Raw (Join-Path $root 'data\seo-surfaces.json')|ConvertFrom-Json)
 $changed=0
+function Replace-FirstIgnoreCase([string]$InputText,[string]$Pattern,[string]$Replacement){
+  $rx=[regex]::new($Pattern,[Text.RegularExpressions.RegexOptions]::IgnoreCase)
+  return $rx.Replace($InputText,$Replacement,1)
+}
 foreach($surface in @($registry.surfaces)){
   $path=Join-Path $root ([string]$surface.path)
   if(-not(Test-Path $path)){throw "SEO surface missing: $($surface.path)"}
@@ -37,18 +41,18 @@ foreach($surface in @($registry.surfaces)){
   }
   if($next -notmatch '<main\b[^>]*\sitemscope(?:\s|>)'){
     $schema='https://schema.org/'+[string]$surface.type
-    $next=[regex]::Replace($next,'<main\b([^>]*)>','<main$1 itemscope itemtype="'+$schema+'">',1,[Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    $next=Replace-FirstIgnoreCase $next '<main\b([^>]*)>' ('<main$1 itemscope itemtype="'+$schema+'">')
   }
   if($next -notmatch '<h1\b[^>]*\sitemprop="name"'){
-    $next=[regex]::Replace($next,'<h1\b([^>]*)>','<h1$1 itemprop="name">',1,[Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    $next=Replace-FirstIgnoreCase $next '<h1\b([^>]*)>' '<h1$1 itemprop="name">'
   }
   if($next -notmatch '\sitemprop="description"'){
     if($next -match '<p\b[^>]*class="[^"]*game-lede[^"]*"[^>]*>'){
-      $next=[regex]::Replace($next,'<p\b([^>]*class="[^"]*game-lede[^"]*"[^>]*)>','<p$1 itemprop="description">',1,[Text.RegularExpressions.RegexOptions]::IgnoreCase)
+      $next=Replace-FirstIgnoreCase $next '<p\b([^>]*class="[^"]*game-lede[^"]*"[^>]*)>' '<p$1 itemprop="description">'
     } elseif($next -match '<p\b[^>]*id="project-summary"[^>]*>'){
-      $next=[regex]::Replace($next,'<p\b([^>]*id="project-summary"[^>]*)>','<p$1 itemprop="description">',1,[Text.RegularExpressions.RegexOptions]::IgnoreCase)
+      $next=Replace-FirstIgnoreCase $next '<p\b([^>]*id="project-summary"[^>]*)>' '<p$1 itemprop="description">'
     } elseif($next -match '<p\b[^>]*class="section-intro"[^>]*>'){
-      $next=[regex]::Replace($next,'<p\b([^>]*class="section-intro"[^>]*)>','<p$1 itemprop="description">',1,[Text.RegularExpressions.RegexOptions]::IgnoreCase)
+      $next=Replace-FirstIgnoreCase $next '<p\b([^>]*class="section-intro"[^>]*)>' '<p$1 itemprop="description">'
     } else {throw "No safe structured description target: $($surface.path)"}
   }
   if($next -ne $text){[IO.File]::WriteAllText($path,$next,[Text.UTF8Encoding]::new($false));$changed++;Write-Host "UPDATED $($surface.path)"}
