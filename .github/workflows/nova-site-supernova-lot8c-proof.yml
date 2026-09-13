@@ -1,4 +1,5 @@
 name: Nova Site Super Nova Lot 8C SEO Proof
+# Exact-content proof trigger after generated SEO surface commit.
 on:
   push:
     branches: [supernova/accelerated-all-ideas-20260913]
