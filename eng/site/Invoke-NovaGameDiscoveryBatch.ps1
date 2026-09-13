@@ -17,11 +17,13 @@ foreach ($file in $files) {
         $nav = $navMatch.Value
         if ($nav -notmatch '(?i)href="(?:\./|/)games/"') {
             $updatedNav = $nav
-            if ($updatedNav -match '<a\b[^>]*href="#catalogue"[^>]*>[\s\S]*?</a>') {
-                $updatedNav = [regex]::Replace($updatedNav, '(<a\b[^>]*href="#catalogue"[^>]*>[\s\S]*?</a>)', '$1' + "`n      <a href=\"./games/\">Jeux</a>", 1, [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+            $indexPattern = [regex]::new('<a\b[^>]*href="#catalogue"[^>]*>[\s\S]*?</a>', [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+            $catalogPattern = [regex]::new('<a\b[^>]*href="\./catalog\.html"[^>]*>[\s\S]*?</a>', [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+            if ($indexPattern.IsMatch($updatedNav)) {
+                $updatedNav = $indexPattern.Replace($updatedNav, { param($m) $m.Value + "`n      " + '<a href="./games/">Jeux</a>' }, 1)
             }
-            elseif ($updatedNav -match '<a\b[^>]*href="\./catalog\.html"[^>]*>[\s\S]*?</a>') {
-                $updatedNav = [regex]::Replace($updatedNav, '(<a\b[^>]*href="\./catalog\.html"[^>]*>[\s\S]*?</a>)', '$1<a href="./games/">Jeux</a>', 1, [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+            elseif ($catalogPattern.IsMatch($updatedNav)) {
+                $updatedNav = $catalogPattern.Replace($updatedNav, { param($m) $m.Value + '<a href="./games/">Jeux</a>' }, 1)
             }
             else {
                 throw "Primary navigation has no safe Games insertion point: $($file.Name)"
@@ -35,7 +37,7 @@ foreach ($file in $files) {
         if ($next -notmatch '(?i)href="\./assets/game-hub\.css"') {
             $needle = '<link rel="stylesheet" href="./assets/nova-premium-hd.css">'
             if (-not $next.Contains($needle)) { throw 'index.html missing Premium HD stylesheet anchor.' }
-            $next = $next.Replace($needle, $needle + "`n  <link rel=\"stylesheet\" href=\"./assets/game-hub.css\">")
+            $next = $next.Replace($needle, $needle + "`n  " + '<link rel="stylesheet" href="./assets/game-hub.css">')
         }
 
         if ($next -notmatch 'id="games"') {
