@@ -340,7 +340,7 @@
   clearButton.addEventListener("click", () => {
     localStorage.removeItem(COLLECTION_KEY);
     fields.id.value = "ma-collection";
-    fields.name.value = "Ma collection MODARYX";
+    fields.name.value = "Ma collection NOVA FORGE";
     fields.description.value = "";
     selectedIds = new Set();
     renderItems();
