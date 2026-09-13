@@ -29,15 +29,18 @@ foreach($surface in @($registry.surfaces)){
     $titleTag=$titleMatch.Value
     $next=$next.Replace($titleTag,$titleTag+"`n  "+('<link rel="canonical" href="{0}">' -f $surface.canonical))
   }
-  if($next -notmatch '<meta\s+property="og:title"'){
-    $canonicalTag='<link rel="canonical" href="{0}">' -f $surface.canonical
-    $og=@(
-      '<meta property="og:title" content="{0}">' -f $title,
-      '<meta property="og:description" content="{0}">' -f $desc,
-      '<meta property="og:url" content="{0}">' -f $surface.canonical,
-      '<meta property="og:type" content="website">'
-    ) -join "`n  "
-    $next=$next.Replace($canonicalTag,$canonicalTag+"`n  "+$og)
+  $canonicalTag='<link rel="canonical" href="{0}">' -f $surface.canonical
+  $ogTags=@(
+    @{pattern='<meta\s+property="og:title"';tag=('<meta property="og:title" content="{0}">' -f $title)},
+    @{pattern='<meta\s+property="og:description"';tag=('<meta property="og:description" content="{0}">' -f $desc)},
+    @{pattern='<meta\s+property="og:url"';tag=('<meta property="og:url" content="{0}">' -f $surface.canonical)},
+    @{pattern='<meta\s+property="og:type"';tag='<meta property="og:type" content="website">'}
+  )
+  foreach($og in $ogTags){
+    if($next -notmatch [string]$og.pattern){
+      if(-not $next.Contains($canonicalTag)){throw "Canonical anchor missing while adding Open Graph metadata: $($surface.path)"}
+      $next=$next.Replace($canonicalTag,$canonicalTag+"`n  "+[string]$og.tag)
+    }
   }
   if($next -notmatch '<main\b[^>]*\sitemscope(?:\s|>)'){
     $schema='https://schema.org/'+[string]$surface.type
