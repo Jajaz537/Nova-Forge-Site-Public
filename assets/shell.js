@@ -24,7 +24,7 @@
     if (event.target.closest('a')) close();
   });
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
+    if (event.key === 'Escape' && header.hasAttribute('data-nav-open')) {
       close();
       toggle.focus();
     }

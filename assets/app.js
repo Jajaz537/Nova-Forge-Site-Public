@@ -291,7 +291,8 @@
         small.textContent = `SHA-256 ${digest.slice(0, 12)}…`;
         small.title = digest;
       }
-      buildFact.dataset.verified = 'true';
+      // Reading a claimed digest does not verify the served bytes.
+      buildFact.dataset.reported = 'true';
     } catch {
       /* L’absence du manifeste de build conserve l’état fail-closed. */
     }
