@@ -9,6 +9,7 @@
   if (!input || !results || !count || !state || !empty) return;
 
   let entries = [];
+  let hydrated = false;
   const normalize = (value) => String(value ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
   const makeResult = (entry) => {
     const link = document.createElement("a");
@@ -41,12 +42,13 @@
       const payload = await response.json();
       if (payload?.schemaVersion !== 1 || payload?.indexMode !== "preindexed-local" || payload?.externalAdapterRequired !== false || !Array.isArray(payload.entries)) throw new Error("search-index-invalid");
       entries = payload.entries.filter((entry) => entry && typeof entry.id === "string" && typeof entry.href === "string" && entry.href.startsWith("./") && !entry.href.includes(".."));
+      hydrated = true;
       render();
     } catch {
       state.textContent = "Index enrichi indisponible ; le répertoire statique reste affiché sans substitution distante.";
     }
   }
 
-  input.addEventListener("input", () => { if (entries.length) render(); });
+  input.addEventListener("input", () => { if (hydrated) render(); });
   hydrate();
 })();

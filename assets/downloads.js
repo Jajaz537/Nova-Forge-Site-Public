@@ -8,7 +8,7 @@
   const SHA256_RE = /^[0-9a-f]{64}$/;
   const SAFE_ID_RE = /^[a-z0-9][a-z0-9._-]{0,95}$/;
 
-  function failClosed(message = 'Aucun téléchargement public validé') {
+  function failClosed(message = 'Aucun téléchargement public déclaré disponible') {
     root.replaceChildren();
     state.textContent = message;
     state.dataset.state = 'locked';
@@ -98,6 +98,11 @@
         cache: 'no-cache',
         credentials: 'same-origin'
       });
+      if (response.headers?.get('X-Modaryx-Cache') === 'offline-stale') {
+        failClosed('Téléchargements verrouillés : le manifeste est une copie hors ligne non actualisée. Reconnectez-vous pour vérifier la disponibilité actuelle.');
+        state.dataset.freshness = 'offline-stale';
+        return;
+      }
       if (!response.ok) return;
       const manifest = await response.json();
       if (manifest?.schema !== 'nova-forge-public-downloads/v1') return;
@@ -110,8 +115,9 @@
       if (ids.size !== manifest.artifacts.length) return;
 
       root.replaceChildren(...manifest.artifacts.map(renderArtifact));
-      state.textContent = `${manifest.artifacts.length} artefact${manifest.artifacts.length > 1 ? 's' : ''} public${manifest.artifacts.length > 1 ? 's' : ''} vérifié${manifest.artifacts.length > 1 ? 's' : ''}`;
+      state.textContent = `${manifest.artifacts.length} artefact${manifest.artifacts.length > 1 ? 's' : ''} public${manifest.artifacts.length > 1 ? 's' : ''} déclaré${manifest.artifacts.length > 1 ? 's' : ''} disponible${manifest.artifacts.length > 1 ? 's' : ''} dans le manifeste de publication. Ce navigateur n’a vérifié ni les fichiers ni leur signature.`;
       state.dataset.state = 'available';
+      state.dataset.freshness = 'network';
     } catch {
       failClosed();
     }

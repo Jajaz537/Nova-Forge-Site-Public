@@ -6,6 +6,14 @@
   const button = document.querySelector('[data-verify-file]');
   const result = document.querySelector('[data-verify-result]');
 
+  let inputRevision = 0;
+  let running = false;
+
+  function invalidateResult() {
+    inputRevision += 1;
+    renderState("Vérification à relancer", "Le fichier ou l’empreinte attendue a changé. Relancez le calcul pour vérifier cette sélection.");
+  }
+
   const normalizeHash = (value) => value.trim().toLowerCase().replace(/^sha256:/, '').trim();
   const isSha256 = (value) => /^[0-9a-f]{64}$/.test(value);
   const toHex = (buffer) => [...new Uint8Array(buffer)].map((byte) => byte.toString(16).padStart(2, '0')).join('');
@@ -32,10 +40,12 @@
     const candidate = normalizeHash(decoded);
     if (!isSha256(candidate)) return;
     expectedInput.value = candidate;
+    inputRevision += 1;
     renderState('Empreinte attendue préremplie', 'Choisissez maintenant le fichier local à comparer. Le fragment d’URL n’est pas envoyé au serveur.', 'neutral');
   }
 
   async function verifySelectedFile() {
+    if (running) return;
     const file = fileInput?.files?.[0];
     if (!file || !button) {
       renderState('Aucun fichier sélectionné', 'Choisissez un fichier local avant de lancer le calcul.', 'warning');
@@ -47,6 +57,9 @@
       return;
     }
 
+    const revision = inputRevision;
+    const expected = normalizeHash(expectedInput?.value ?? "");
+    running = true;
     button.disabled = true;
     button.setAttribute('aria-busy', 'true');
     renderState('Calcul en cours', `Lecture locale de ${file.name}. Le fichier n’est ni exécuté ni envoyé par cet outil.`);
@@ -54,7 +67,7 @@
     try {
       const data = await file.arrayBuffer();
       const digest = toHex(await crypto.subtle.digest('SHA-256', data));
-      const expected = normalizeHash(expectedInput?.value ?? '');
+      if (revision !== inputRevision) return;
 
       if (!expected) {
         renderState('Empreinte calculée', `SHA-256 : ${digest}. Aucune empreinte attendue n’a été fournie, donc aucune correspondance n’est affirmée.`, 'neutral');
@@ -72,13 +85,17 @@
         renderState('Empreinte différente', `Calculé : ${digest}. La valeur ne correspond pas à l’empreinte attendue. Le fichier ne doit pas être considéré comme identique sur cette seule vérification.`, 'mismatch');
       }
     } catch {
+      if (revision !== inputRevision) return;
       renderState('Calcul impossible', 'Le navigateur n’a pas pu lire ou hacher ce fichier. Aucun résultat de confiance n’est produit.', 'warning');
     } finally {
+      running = false;
       button.disabled = false;
       button.removeAttribute('aria-busy');
     }
   }
 
+  fileInput?.addEventListener("change", invalidateResult);
+  expectedInput?.addEventListener("input", invalidateResult);
   prefillExpectedFromFragment();
   window.addEventListener('hashchange', prefillExpectedFromFragment);
   button?.addEventListener('click', verifySelectedFile);

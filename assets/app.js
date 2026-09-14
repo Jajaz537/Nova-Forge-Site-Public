@@ -217,29 +217,32 @@
   function renderBridgeState() {
     if (!profilePanel) return;
     const title = document.createElement('strong');
-    title.textContent = 'Bridge OS inactif';
+    title.textContent = 'Pont local optionnel inactif';
     const copy = document.createElement('p');
     copy.className = 'muted';
-    copy.textContent = 'Aucun protocole local, exécutable ou service Modaryx OS n’a été lancé. L’intégration reste optionnelle et devra nécessiter une action utilisateur explicite.';
+    copy.textContent = 'Aucun protocole local, exécutable ou service n’a été lancé. Le pont local reste optionnel et nécessitera une action utilisateur explicite.';
     profilePanel.replaceChildren(title, copy);
   }
 
-  function renderPublicStatus(status) {
+  function renderPublicStatus(status, stale = false) {
     if (!publicStatusMessage || !publicStatusFacts) return;
     const stage = status?.stage === 'pre-vf' ? 'pré-VF' : 'état non qualifié';
     const publicOnly = status?.principles?.public_only === true;
-    const downloadAvailable = status?.distribution?.public_download_available === true;
+    const downloadAvailable = !stale && status?.distribution?.public_download_available === true;
     const bridge = status?.integrations?.nova_forge_os_bridge === 'not_connected' ? 'non connecté' : 'état non qualifié';
     const profile = status?.smart_profile?.execution === 'browser-local' ? 'navigateur local' : 'état non qualifié';
     const currentBuildNode = getPublicBuildFact();
     const buildNode = currentBuildNode?.cloneNode(true) ?? null;
 
-    publicStatusMessage.textContent = publicOnly
+    publicStatusMessage.dataset.freshness = stale ? 'offline-stale' : 'network';
+    publicStatusMessage.textContent = stale
+      ? 'Statut non actualisé : seule une copie hors ligne est disponible. La disponibilité actuelle des téléchargements ne peut pas être confirmée.'
+      : publicOnly
       ? `Le manifeste livré avec ce build déclare une surface ${stage}, public-only et fail-closed. ${downloadAvailable ? 'Un téléchargement public est déclaré disponible.' : 'Aucun téléchargement public n’est déclaré disponible.'}`
       : 'Le manifeste de statut ne permet pas de qualifier cette surface comme public-only.';
 
     const facts = [
-      ['Distribution', downloadAvailable ? 'déclarée disponible' : 'verrouillée'],
+      ['Distribution', stale ? 'non confirmée hors ligne' : downloadAvailable ? 'déclarée disponible' : 'verrouillée'],
       ['Bridge OS', bridge],
       ['Smart Profile', profile]
     ];
@@ -264,12 +267,29 @@
         cache: 'no-cache',
         credentials: 'same-origin'
       });
-      if (!response.ok) return;
+      if (response.headers?.get('X-Modaryx-Cache') === 'offline-stale') {
+        renderPublicStatus(null, true);
+        return;
+      }
+      if (!response.ok) throw new Error('status-unavailable');
       const status = await response.json();
-      if (status?.schema !== 'nova-forge-public-site-status/v1') return;
+      if (status?.schema !== 'nova-forge-public-site-status/v1') throw new Error('status-invalid');
       renderPublicStatus(status);
     } catch {
-      /* Le contenu statique de repli reste la source affichée. */
+      publicStatusMessage.textContent = 'Statut non actualisé : le manifeste public est indisponible. Aucune disponibilité actuelle n’est confirmée.';
+      publicStatusMessage.dataset.freshness = 'unavailable';
+    }
+  }
+
+  function markBuildUnavailable(stale = false) {
+    const buildFact = getPublicBuildFact();
+    if (!buildFact) return;
+    buildFact.dataset.freshness = stale ? 'offline-stale' : 'unavailable';
+    delete buildFact.dataset.reported;
+    const small = buildFact.querySelector('small');
+    if (small) {
+      small.textContent = stale ? 'Build non actualisé · copie hors ligne' : 'Empreinte de build non disponible';
+      small.removeAttribute('title');
     }
   }
 
@@ -280,21 +300,26 @@
         cache: 'no-cache',
         credentials: 'same-origin'
       });
-      if (!response.ok) return;
+      if (response.headers?.get('X-Modaryx-Cache') === 'offline-stale') {
+        markBuildUnavailable(true);
+        return;
+      }
+      if (!response.ok) throw new Error('build-unavailable');
       const build = await response.json();
       const digest = typeof build?.surface_digest_sha256 === 'string' ? build.surface_digest_sha256 : '';
-      if (build?.schema !== 'nova-forge-public-site-build/v1' || build?.source_revision !== 'withheld-private-source' || !/^[0-9a-f]{64}$/.test(digest)) return;
+      if (build?.schema !== 'nova-forge-public-site-build/v1' || build?.source_revision !== 'withheld-private-source' || !/^[0-9a-f]{64}$/.test(digest)) throw new Error('build-digest-unavailable');
       const buildFact = getPublicBuildFact();
       if (!buildFact) return;
       const small = buildFact.querySelector('small');
       if (small) {
-        small.textContent = `SHA-256 ${digest.slice(0, 12)}…`;
+        small.textContent = `SHA-256 déclaré ${digest.slice(0, 12)}…`;
         small.title = digest;
       }
       // Reading a claimed digest does not verify the served bytes.
       buildFact.dataset.reported = 'true';
+      buildFact.dataset.freshness = 'network';
     } catch {
-      /* L’absence du manifeste de build conserve l’état fail-closed. */
+      markBuildUnavailable();
     }
   }
 

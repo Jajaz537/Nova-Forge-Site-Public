@@ -30,6 +30,7 @@
 
   let schema = null;
   let lastManifest = null;
+  let draftEdited = false;
 
   const read = (key) => String(fields[key]?.value ?? "").trim();
   const uniqueSorted = (value) => [...new Set(String(value).split(",").map((part) => part.trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, "en"));
@@ -146,6 +147,8 @@
       schemaStatus.textContent = errors.length ? `Validation locale : ${errors.length} erreur(s). ${errors.slice(0, 3).join(" · ")}` : "Validation locale : brouillon conforme au schéma UMM chargé. Cela ne constitue pas une preuve de provenance, signature ou mesure.";
       return {manifest, errors};
     } catch (error) {
+      lastManifest = null;
+      preview.textContent = "Brouillon incomplet : corrigez les champs signalés pour actualiser l’aperçu.";
       schemaStatus.textContent = `Brouillon non valide : ${error.message}`;
       return {manifest: null, errors: [error.message]};
     }
@@ -172,6 +175,8 @@
     if (!manifest || manifest.schemaVersion !== 1 || manifest.distribution?.state !== "locked" || manifest.distribution?.downloadable !== false || manifest.releaseReceipt !== null) {
       throw new Error("Seuls les brouillons UMM v1 verrouillés, non téléchargeables et sans releaseReceipt peuvent être importés.");
     }
+    const importErrors = schemaErrors(manifest);
+    if (importErrors.length) throw new Error(`Brouillon non conforme : ${importErrors.slice(0, 3).join(" · ")}`);
     const mapping = {
       contentId: manifest.content?.id, version: manifest.content?.version, name: manifest.content?.name, kind: manifest.content?.kind, summary: manifest.content?.summary,
       gameId: manifest.target?.gameId, gameName: manifest.target?.gameName, gameVersions: (manifest.target?.versions || []).join(", "), gameLoaders: (manifest.target?.loaders || []).join(", "),
@@ -181,9 +186,14 @@
       provenanceState: manifest.provenance?.state, provenanceReceipt: manifest.provenance?.receiptId, sourceUri: manifest.provenance?.sourceUri, provenanceNotes: manifest.provenance?.notes,
       files: fileLines(manifest.files)
     };
+    const previous = Object.fromEntries(Object.entries(fields).map(([key, node]) => [key, node?.value]));
     for (const [key, node] of Object.entries(fields)) if (node) node.value = mapping[key] ?? "";
     const result = render();
-    if (result.errors.length) throw new Error(`Brouillon importé mais non conforme : ${result.errors.slice(0, 3).join(" · ")}`);
+    if (result.errors.length) {
+      for (const [key, node] of Object.entries(fields)) if (node) node.value = previous[key];
+      render();
+      throw new Error(`Import refusé, brouillon précédent conservé : ${result.errors.slice(0, 3).join(" · ")}`);
+    }
   }
 
   async function loadSchema() {
@@ -252,6 +262,7 @@
       return;
     }
     try {
+      await schemaReady;
       const imported = JSON.parse(await file.text());
       applyManifest(imported);
       status.textContent = "Brouillon importé localement et validé. Il n’est ni sauvegardé ni publié tant que vous ne le demandez pas explicitement.";
@@ -261,7 +272,14 @@
   });
 
   clearButton.addEventListener("click", () => {
-    try { localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(LEGACY_STORAGE_KEY); } catch {}
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(LEGACY_STORAGE_KEY);
+    } catch {
+      status.textContent = "Suppression locale impossible ou incomplète. Le brouillon affiché est conservé ; les données stockées ne sont pas déclarées effacées.";
+      return;
+    }
+    draftEdited = true;
     form.reset();
     importFile.value = "";
     lastManifest = null;
@@ -288,10 +306,12 @@
     status.textContent = "Export JSON déterministe généré localement. Le manifest reste NON PUBLIÉ et distribution=locked.";
   });
 
-  form.addEventListener("input", () => render());
-  form.addEventListener("change", () => render());
+  form.addEventListener("input", () => { draftEdited = true; render(); });
+  form.addEventListener("change", () => { draftEdited = true; render(); });
 
   render();
-  loadSavedDraft();
-  loadSchema();
+  const schemaReady = loadSchema();
+  schemaReady.then(() => {
+    if (!draftEdited && schema) loadSavedDraft();
+  });
 })();

@@ -50,6 +50,7 @@
   };
 
   let catalogItems = [];
+  let catalogReady = false;
   let selectedIds = new Set();
 
   const canonicalize = (value) => {
@@ -70,6 +71,7 @@
   }
 
   function buildCollection() {
+    if (!catalogReady) throw new Error("Catalogue indisponible ou en cours de chargement. Réessayez après son chargement.");
     const id = String(fields.id?.value || "").trim().toLowerCase();
     const name = String(fields.name?.value || "").trim();
     const description = String(fields.description?.value || "").trim();
@@ -95,7 +97,9 @@
   }
 
   function renderItems() {
-    itemList.replaceChildren();
+    const legend = document.createElement("legend");
+    legend.textContent = "Contenus du catalogue";
+    itemList.replaceChildren(legend);
     for (const item of catalogItems) {
       const label = document.createElement("label");
       label.className = "collection-choice";
@@ -115,7 +119,9 @@
   }
 
   function applyCollection(value) {
+    if (!catalogReady) throw new Error("Catalogue indisponible ou en cours de chargement.");
     if (!value || value.schemaVersion !== 1 || !ID_RE.test(String(value.id || "")) || typeof value.name !== "string") throw new Error("Collection V1 invalide.");
+    if (!value.name.trim() || value.name.length > 160 || (value.description !== undefined && (typeof value.description !== "string" || value.description.length > 1200))) throw new Error("Nom ou description de collection invalide ; brouillon précédent conservé.");
     if (value.syncState !== "local-only") throw new Error("Seules les collections local-only peuvent être importées sans service de synchronisation.");
     if (value.visibility !== "private-local") throw new Error("La visibilité distante n’est pas disponible sans service réel.");
     if (value.ownerProfileId !== null) throw new Error("Une identité de compte ne peut pas être affirmée dans ce mode local.");
@@ -270,6 +276,7 @@
       const data = await response.json();
       if (data?.schemaVersion !== 1 || data?.dataClass !== "demonstration" || !Array.isArray(data.items)) throw new Error("catalog-contract-invalid");
       catalogItems = data.items.filter((item) => item?.public === true && ID_RE.test(String(item.id || "")));
+      catalogReady = true;
       renderItems();
       renderSubmissionTargets();
       loadSavedCollection();
@@ -277,6 +284,7 @@
       renderPreview();
       renderSubmissionPreview();
     } catch {
+      catalogReady = false;
       catalogItems = [];
       renderItems();
       renderSubmissionTargets();
@@ -338,7 +346,10 @@
   });
 
   clearButton.addEventListener("click", () => {
-    localStorage.removeItem(COLLECTION_KEY);
+    try { localStorage.removeItem(COLLECTION_KEY); } catch {
+      status.textContent = "Suppression locale impossible. La collection affichée est conservée et n’est pas déclarée effacée.";
+      return;
+    }
     fields.id.value = "ma-collection";
     fields.name.value = "Ma collection MODARYX";
     fields.description.value = "";
@@ -397,7 +408,10 @@
   });
 
   submissionClear.addEventListener("click", () => {
-    localStorage.removeItem(SUBMISSION_KEY);
+    try { localStorage.removeItem(SUBMISSION_KEY); } catch {
+      submissionStatus.textContent = "Suppression locale impossible. Le brouillon affiché est conservé et n’est pas déclaré effacé.";
+      return;
+    }
     submissionFields.id.value = "ma-contribution";
     submissionFields.kind.value = "discussion";
     submissionFields.target.value = "";
