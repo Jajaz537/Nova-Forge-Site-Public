@@ -1,0 +1,569 @@
+{
+  "measuredAt": "2026-09-14T23:00:06.604Z",
+  "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
+  "assertions": [
+    {
+      "name": "Only old site cache deleted",
+      "passed": true
+    },
+    {
+      "name": "Public alias /catalog.html",
+      "passed": true
+    },
+    {
+      "name": "Public alias /catalog.html?game=demo",
+      "passed": true
+    },
+    {
+      "name": "Public alias /catalog",
+      "passed": true
+    },
+    {
+      "name": "Public alias /catalog?game=demo",
+      "passed": true
+    },
+    {
+      "name": "Aliases write canonical key",
+      "passed": true
+    },
+    {
+      "name": "Excluded GET /private.html",
+      "passed": true
+    },
+    {
+      "name": "Excluded POST /catalog.html",
+      "passed": true
+    },
+    {
+      "name": "Excluded GET https://other.test/catalog.html",
+      "passed": true
+    },
+    {
+      "name": "Excluded GET /downloads.json?private=1",
+      "passed": true
+    },
+    {
+      "name": "Excluded GET /catalogue",
+      "passed": true
+    },
+    {
+      "name": "Metadata network first /public-build.json",
+      "passed": true
+    },
+    {
+      "name": "Metadata network first /downloads.json",
+      "passed": true
+    },
+    {
+      "name": "Metadata network first /public-status.json",
+      "passed": true
+    },
+    {
+      "name": "Metadata network first /SHA256SUMS.txt",
+      "passed": true
+    },
+    {
+      "name": "Metadata network first /data/catalog.json",
+      "passed": true
+    },
+    {
+      "name": "Offline explicit stale /catalog?game=demo",
+      "passed": true
+    },
+    {
+      "name": "Offline explicit stale /downloads.json",
+      "passed": true
+    },
+    {
+      "name": "No cached metadata is network error",
+      "passed": true
+    },
+    {
+      "name": "HTTP 404 retained",
+      "passed": true
+    },
+    {
+      "name": "Quota failure preserves network response",
+      "passed": true
+    }
+  ],
+  "serviceWorkerSha256": "51bac9861ff27876ec906c343c23e638ed01bb026b156fd16f1b1997035008a5",
+  "probes": [
+    {
+      "url": "/catalog.html",
+      "mode": "navigate",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/catalog.html?game=demo",
+      "mode": "navigate",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/catalog",
+      "mode": "navigate",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/catalog?game=demo",
+      "mode": "navigate",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/private.html",
+      "mode": "navigate",
+      "method": "GET",
+      "intercepted": false,
+      "networkCalls": 0,
+      "waitUntilCalls": 0,
+      "stale": null
+    },
+    {
+      "url": "/catalog.html",
+      "mode": "navigate",
+      "method": "POST",
+      "intercepted": false,
+      "networkCalls": 0,
+      "waitUntilCalls": 0,
+      "stale": null
+    },
+    {
+      "url": "https://other.test/catalog.html",
+      "mode": "navigate",
+      "method": "GET",
+      "intercepted": false,
+      "networkCalls": 0,
+      "waitUntilCalls": 0,
+      "stale": null
+    },
+    {
+      "url": "/downloads.json?private=1",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": false,
+      "networkCalls": 0,
+      "waitUntilCalls": 0,
+      "stale": null
+    },
+    {
+      "url": "/catalogue",
+      "mode": "navigate",
+      "method": "GET",
+      "intercepted": false,
+      "networkCalls": 0,
+      "waitUntilCalls": 0,
+      "stale": null
+    },
+    {
+      "url": "/public-build.json",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/downloads.json",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/public-status.json",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/SHA256SUMS.txt",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/data/catalog.json",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/catalog?game=demo",
+      "mode": "navigate",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": "offline-stale"
+    },
+    {
+      "url": "/downloads.json",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": "offline-stale"
+    },
+    {
+      "url": "/public-build.json",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 0,
+      "stale": null
+    },
+    {
+      "url": "/downloads.json",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 404,
+      "stale": null
+    },
+    {
+      "url": "/downloads.json",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    }
+  ],
+  "activationDeletedCaches": [
+    "nova-site-shell-old"
+  ],
+  "precache": {
+    "requests": 69,
+    "uniqueLocalFiles": 68,
+    "missing": [],
+    "files": 68,
+    "rawBytes": 385814,
+    "gzipEstimateBytes": 121183
+  },
+  "pages": [
+    {
+      "page": "404.html",
+      "htmlBytes": 4143,
+      "css": {
+        "files": 7,
+        "rawBytes": 62481,
+        "gzipEstimateBytes": 17890
+      },
+      "js": {
+        "files": 2,
+        "rawBytes": 19457,
+        "gzipEstimateBytes": 6077
+      }
+    },
+    {
+      "page": "catalog.html",
+      "htmlBytes": 10559,
+      "css": {
+        "files": 8,
+        "rawBytes": 66529,
+        "gzipEstimateBytes": 19151
+      },
+      "js": {
+        "files": 2,
+        "rawBytes": 15558,
+        "gzipEstimateBytes": 4509
+      }
+    },
+    {
+      "page": "community.html",
+      "htmlBytes": 13362,
+      "css": {
+        "files": 7,
+        "rawBytes": 62481,
+        "gzipEstimateBytes": 17890
+      },
+      "js": {
+        "files": 2,
+        "rawBytes": 22096,
+        "gzipEstimateBytes": 5396
+      }
+    },
+    {
+      "page": "creator-studio.html",
+      "htmlBytes": 13119,
+      "css": {
+        "files": 8,
+        "rawBytes": 64207,
+        "gzipEstimateBytes": 18623
+      },
+      "js": {
+        "files": 3,
+        "rawBytes": 23573,
+        "gzipEstimateBytes": 7226
+      }
+    },
+    {
+      "page": "documentation.html",
+      "htmlBytes": 12705,
+      "css": {
+        "files": 7,
+        "rawBytes": 62481,
+        "gzipEstimateBytes": 17890
+      },
+      "js": {
+        "files": 2,
+        "rawBytes": 19457,
+        "gzipEstimateBytes": 6077
+      }
+    },
+    {
+      "page": "downloads.html",
+      "htmlBytes": 8259,
+      "css": {
+        "files": 7,
+        "rawBytes": 62481,
+        "gzipEstimateBytes": 17890
+      },
+      "js": {
+        "files": 3,
+        "rawBytes": 24445,
+        "gzipEstimateBytes": 7786
+      }
+    },
+    {
+      "page": "ecosystem.html",
+      "htmlBytes": 9050,
+      "css": {
+        "files": 7,
+        "rawBytes": 62481,
+        "gzipEstimateBytes": 17890
+      },
+      "js": {
+        "files": 2,
+        "rawBytes": 19457,
+        "gzipEstimateBytes": 6077
+      }
+    },
+    {
+      "page": "index.html",
+      "htmlBytes": 19320,
+      "css": {
+        "files": 4,
+        "rawBytes": 40546,
+        "gzipEstimateBytes": 11313
+      },
+      "js": {
+        "files": 3,
+        "rawBytes": 20497,
+        "gzipEstimateBytes": 6522
+      }
+    },
+    {
+      "page": "profiles.html",
+      "htmlBytes": 6440,
+      "css": {
+        "files": 8,
+        "rawBytes": 63442,
+        "gzipEstimateBytes": 18352
+      },
+      "js": {
+        "files": 2,
+        "rawBytes": 3903,
+        "gzipEstimateBytes": 1437
+      }
+    },
+    {
+      "page": "project-balanced-latency-pack.html",
+      "htmlBytes": 7047,
+      "css": {
+        "files": 8,
+        "rawBytes": 64663,
+        "gzipEstimateBytes": 18722
+      },
+      "js": {
+        "files": 2,
+        "rawBytes": 8111,
+        "gzipEstimateBytes": 2876
+      }
+    },
+    {
+      "page": "project-ember-textures.html",
+      "htmlBytes": 6836,
+      "css": {
+        "files": 8,
+        "rawBytes": 64663,
+        "gzipEstimateBytes": 18722
+      },
+      "js": {
+        "files": 2,
+        "rawBytes": 8111,
+        "gzipEstimateBytes": 2876
+      }
+    },
+    {
+      "page": "project-forge-night-experience.html",
+      "htmlBytes": 7033,
+      "css": {
+        "files": 8,
+        "rawBytes": 64663,
+        "gzipEstimateBytes": 18722
+      },
+      "js": {
+        "files": 2,
+        "rawBytes": 8111,
+        "gzipEstimateBytes": 2876
+      }
+    },
+    {
+      "page": "project.html",
+      "htmlBytes": 4601,
+      "css": {
+        "files": 8,
+        "rawBytes": 64663,
+        "gzipEstimateBytes": 18722
+      },
+      "js": {
+        "files": 1,
+        "rawBytes": 2169,
+        "gzipEstimateBytes": 805
+      }
+    },
+    {
+      "page": "search.html",
+      "htmlBytes": 5427,
+      "css": {
+        "files": 8,
+        "rawBytes": 63228,
+        "gzipEstimateBytes": 18290
+      },
+      "js": {
+        "files": 2,
+        "rawBytes": 4659,
+        "gzipEstimateBytes": 1883
+      }
+    },
+    {
+      "page": "security.html",
+      "htmlBytes": 10843,
+      "css": {
+        "files": 7,
+        "rawBytes": 62481,
+        "gzipEstimateBytes": 17890
+      },
+      "js": {
+        "files": 2,
+        "rawBytes": 19457,
+        "gzipEstimateBytes": 6077
+      }
+    },
+    {
+      "page": "verify.html",
+      "htmlBytes": 6393,
+      "css": {
+        "files": 7,
+        "rawBytes": 62481,
+        "gzipEstimateBytes": 17890
+      },
+      "js": {
+        "files": 3,
+        "rawBytes": 23677,
+        "gzipEstimateBytes": 7691
+      }
+    }
+  ],
+  "protectedFiles": [
+    {
+      "file": "_headers",
+      "unchanged": true
+    },
+    {
+      "file": "_redirects",
+      "unchanged": true
+    },
+    {
+      "file": "domain-cutover.json",
+      "unchanged": true
+    },
+    {
+      "file": "robots.txt",
+      "unchanged": true
+    },
+    {
+      "file": "sitemap.xml",
+      "unchanged": true
+    },
+    {
+      "file": "site.webmanifest",
+      "unchanged": true
+    },
+    {
+      "file": ".github/cloudflare-control.json",
+      "unchanged": true
+    },
+    {
+      "file": ".github/cloudflare-http3-off.json",
+      "unchanged": true
+    },
+    {
+      "file": ".github/cloudflare-probe.json",
+      "unchanged": true
+    },
+    {
+      "file": ".github/site-vf-session.json",
+      "unchanged": true
+    },
+    {
+      "file": ".github/workflows/cloudflare-modaryx-cutover.yml",
+      "unchanged": true
+    },
+    {
+      "file": ".github/workflows/cloudflare-modaryx-http3-off.yml",
+      "unchanged": true
+    },
+    {
+      "file": ".github/workflows/cloudflare-modaryx-probe.yml",
+      "unchanged": true
+    }
+  ]
+}

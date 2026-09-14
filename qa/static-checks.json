@@ -1,0 +1,140 @@
+{
+  "scope": "Static structure, JS syntax and declared file digests only",
+  "pages": [
+    {
+      "page": "404.html",
+      "errors": []
+    },
+    {
+      "page": "catalog.html",
+      "errors": []
+    },
+    {
+      "page": "community.html",
+      "errors": []
+    },
+    {
+      "page": "creator-studio.html",
+      "errors": []
+    },
+    {
+      "page": "documentation.html",
+      "errors": []
+    },
+    {
+      "page": "downloads.html",
+      "errors": []
+    },
+    {
+      "page": "ecosystem.html",
+      "errors": []
+    },
+    {
+      "page": "index.html",
+      "errors": []
+    },
+    {
+      "page": "profiles.html",
+      "errors": []
+    },
+    {
+      "page": "project-balanced-latency-pack.html",
+      "errors": []
+    },
+    {
+      "page": "project-ember-textures.html",
+      "errors": []
+    },
+    {
+      "page": "project-forge-night-experience.html",
+      "errors": []
+    },
+    {
+      "page": "project.html",
+      "errors": []
+    },
+    {
+      "page": "search.html",
+      "errors": []
+    },
+    {
+      "page": "security.html",
+      "errors": []
+    },
+    {
+      "page": "verify.html",
+      "errors": []
+    }
+  ],
+  "scripts": [
+    {
+      "file": "assets/app.js",
+      "valid": true,
+      "error": ""
+    },
+    {
+      "file": "assets/catalog.js",
+      "valid": true,
+      "error": ""
+    },
+    {
+      "file": "assets/community.js",
+      "valid": true,
+      "error": ""
+    },
+    {
+      "file": "assets/creator-studio.js",
+      "valid": true,
+      "error": ""
+    },
+    {
+      "file": "assets/downloads.js",
+      "valid": true,
+      "error": ""
+    },
+    {
+      "file": "assets/json-schema-lite.js",
+      "valid": true,
+      "error": ""
+    },
+    {
+      "file": "assets/nova-premium-hd.js",
+      "valid": true,
+      "error": ""
+    },
+    {
+      "file": "assets/profiles.js",
+      "valid": true,
+      "error": ""
+    },
+    {
+      "file": "assets/project-hub.js",
+      "valid": true,
+      "error": ""
+    },
+    {
+      "file": "assets/search.js",
+      "valid": true,
+      "error": ""
+    },
+    {
+      "file": "assets/shell.js",
+      "valid": true,
+      "error": ""
+    },
+    {
+      "file": "assets/verify.js",
+      "valid": true,
+      "error": ""
+    },
+    {
+      "file": "sw.js",
+      "valid": true,
+      "error": ""
+    }
+  ],
+  "hashes": {
+    "count": 74,
+    "errors": []
+  }
+}
