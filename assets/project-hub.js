@@ -97,7 +97,7 @@
     });
     relationsEmpty.hidden = edges.length !== 0;
     renderFavorite(item.id);
-    state.textContent = "Mini-hub hydraté depuis le catalogue et le Compatibility Graph publics du même site.";
+    state.textContent = "Informations du catalogue chargées. Cette fiche reste une démonstration sans téléchargement.";
     document.title = `${item.name} — MODARYX MODS`;
   }
 

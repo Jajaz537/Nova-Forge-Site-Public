@@ -20,20 +20,23 @@
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
   <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">
   <link rel="stylesheet" href="./assets/modaryx-platform-refinement.css">
+  <link rel="stylesheet" href="./assets/modaryx-foundations.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Aller au contenu</a>
   <header class="topbar">
     <a class="brand" href="./index.html" aria-label="MODARYX MODS, accueil"><img class="brand-logo" src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="32" height="32"><span>MODARYX MODS</span></a>
-    <nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./catalog.html">Catalogue</a><a href="./search.html" aria-current="page">Recherche</a><a href="./community.html">Communauté</a><a href="./security.html">Sécurité</a></nav>
+    <nav aria-label="Navigation principale"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html" aria-current="page">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Aide</a></nav>
   </header>
   <main id="main" class="search-page">
+    <nav class="page-trail" aria-label="Fil d’Ariane"><a href="./index.html">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Recherche</span></nav>
+    
     <section class="search-hero" aria-labelledby="search-title">
-      <div><p class="eyebrow">Recherche · zero-cost · local-first</p><h1 id="search-title">Chercher sans service distant obligatoire.</h1><p class="lede">L’index V1 est un fichier public pré-calculé. La recherche s’exécute dans ce navigateur et reste utilisable hors ligne une fois la surface mise en cache.</p></div>
-      <aside class="panel"><strong>Adapter externe : optionnel.</strong><p>Un futur moteur externe pourra compléter l’index local, mais ne remplacera jamais l’identité des résultats et ne sera pas requis pour le cœur.</p></aside>
+      <div><p class="eyebrow">Recherche · index du site</p><h1 id="search-title">Retrouvez un projet ou un outil.</h1><p class="lede">Recherchez un jeu, un projet ou une fonction dans les pages référencées par MODARYX. Votre saisie est filtrée dans ce navigateur ; elle n’est pas envoyée à un moteur de recherche distant.</p></div>
+      <aside class="panel"><strong>Le périmètre de la recherche.</strong><p>Les résultats proviennent de l’index public du site. Les projets présentés sont des démonstrations ; leur présence ne signifie pas qu’un fichier est téléchargeable.</p></aside>
     </section>
     <section class="section" aria-labelledby="query-title">
-      <div class="section-heading"><div><p class="eyebrow">Index public</p><h2 id="query-title">Recherche locale</h2></div><span class="badge" id="search-count" aria-live="polite">9 entrées statiques</span></div>
+      <div class="section-heading"><div><p class="eyebrow">Index public</p><h2 id="query-title">Recherche locale</h2></div><span class="badge" id="search-count" aria-live="polite">Répertoire du site</span></div>
       <label class="field" for="site-search"><span>Rechercher</span><input id="site-search" type="search" autocomplete="off" placeholder="Catalogue, passkeys, Skyrim, provenance…"></label>
       <p id="search-state" role="status" aria-live="polite">Le répertoire statique reste disponible. Le filtre local s’active si JavaScript est disponible.</p>
       <div id="search-results" class="search-results">
@@ -43,9 +46,9 @@
         <a class="search-result" href="./community.html"><strong>Communauté</strong><span>Abuse Shield et modération avant écriture.</span></a>
         <a class="search-result" href="./security.html"><strong>Sécurité & provenance</strong><span>Confiance fail-closed et vérification.</span></a>
       </div>
-      <div id="search-empty" class="panel" hidden><h3>Aucun résultat local</h3><p>Aucun résultat distant n’est substitué silencieusement.</p></div>
+      <div id="search-empty" class="panel" hidden><h3>Aucun résultat local</h3><p>Essayez un terme plus court, le nom du jeu ou une fonction comme « collection ». Vous pouvez aussi <a href="./catalog.html">ouvrir le catalogue</a>.</p></div>
     </section>
   </main>
-  <footer><div><strong>MODARYX MODS Search</strong><p>Index local pré-calculé · adapter externe optionnel.</p></div><p>Pré-VF · zéro service payant obligatoire</p></footer>
+  <footer class="site-footer"><div><strong>MODARYX MODS</strong><p>Explorez des créations et préparez vos projets avec des outils locaux.</p></div><nav aria-label="Navigation de pied de page"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./profiles.html">Profils</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a><a href="./downloads.html">Téléchargements</a><a href="./documentation.html#privacy">Données locales</a><a href="./public-status.json">Statut public</a></nav></footer>
 </body>
 </html>

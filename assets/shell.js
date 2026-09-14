@@ -30,6 +30,7 @@
     }
   });
   header.insertBefore(toggle, nav);
+  header.setAttribute('data-nav-ready', 'true');
 
   const key = 'nova_site_shell_preferences_v1';
   let reduced = false;
