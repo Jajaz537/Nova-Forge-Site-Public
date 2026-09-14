@@ -65,3 +65,7 @@ Fichiers modifiés dans ce lot : `sw.js` et les trois fichiers `qa/` autorisés.
 ## Révision artistique Loup/Dragon
 
 Les poids initiaux ci-dessus précèdent les illustrations autorisées. Le JSON `cache-checks.json` donne les poids actualisés. Le budget proposé de précache passe à 800 000 octets bruts pour ces deux WebP ; cette augmentation explicite finance la direction demandée, sans mesure CWV revendiquée. Le panorama portails est chargé paresseusement dans le document ; le précache engage néanmoins son téléchargement lors de l’installation du service worker.
+
+## Correction de première visite — v43
+
+L’observation historique « les pages sans app.js n’installent pas le service worker » est corrigée dans le source : l’initialisation est maintenant dans shell.js sur les seize pages. Neuf tests ciblés passent ; la preuve native de première installation HTTPS reste ouverte. `updateViaCache: none` évite le cache HTTP pour la récupération du script worker, sans modifier la stratégie de cache des contenus. Voir https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register.

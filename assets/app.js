@@ -358,10 +358,5 @@
   bySelector('[data-smart-profile]')?.addEventListener('click', renderProfile);
   bySelector('[data-os-bridge]')?.addEventListener('click', renderBridgeState);
 
-  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-    const serviceWorkerUrl = new URL('./sw.js', document.baseURI);
-    navigator.serviceWorker.register(serviceWorkerUrl, { scope: './' }).catch(() => {
-      /* L’amélioration hors-ligne est optionnelle ; le contenu reste static-first. */
-    });
-  }
+
 })();

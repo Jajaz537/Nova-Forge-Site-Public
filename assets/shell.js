@@ -1,3 +1,22 @@
+// Shared entry point: every public page can initiate offline preparation.
+(async () => {
+  'use strict';
+  if (!window.isSecureContext || !('serviceWorker' in navigator)) return;
+  const scriptSource = document.currentScript?.src;
+  if (!scriptSource) return;
+  try {
+    const workerUrl = new URL('../sw.js', scriptSource);
+    if (workerUrl.origin !== location.origin) return;
+    await navigator.serviceWorker.register(workerUrl, {
+      scope: new URL('./', workerUrl).href,
+      updateViaCache: 'none'
+    });
+  } catch {
+    // Optional enhancement: failure must not block navigation or local tools.
+    // Registration alone is not a claim that offline installation completed.
+  }
+})();
+
 (() => {
   'use strict';
   const header = document.querySelector('.topbar');

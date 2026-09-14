@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-14T23:41:46.571Z",
+  "measuredAt": "2026-09-14T23:50:47.014Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -87,7 +87,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "c8a0d7f0df912ff63f6bb6c3aaffb04f7aea93fb3ec249308b98e237fd3bb859",
+  "serviceWorkerSha256": "36408c782417888c3e189adf318cd79033fc1c6eea2923884166027550e92caa",
   "probes": [
     {
       "url": "/catalog.html",
@@ -283,8 +283,8 @@
     "uniqueLocalFiles": 70,
     "missing": [],
     "files": 70,
-    "rawBytes": 782149,
-    "gzipEstimateBytes": 515063
+    "rawBytes": 782481,
+    "gzipEstimateBytes": 515231
   },
   "pages": [
     {
@@ -297,8 +297,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 19457,
-        "gzipEstimateBytes": 6077
+        "rawBytes": 19789,
+        "gzipEstimateBytes": 6245
       }
     },
     {
@@ -311,8 +311,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 15558,
-        "gzipEstimateBytes": 4509
+        "rawBytes": 16255,
+        "gzipEstimateBytes": 4824
       }
     },
     {
@@ -325,8 +325,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 22325,
-        "gzipEstimateBytes": 5479
+        "rawBytes": 23022,
+        "gzipEstimateBytes": 5794
       }
     },
     {
@@ -339,8 +339,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 24911,
-        "gzipEstimateBytes": 7648
+        "rawBytes": 25608,
+        "gzipEstimateBytes": 7963
       }
     },
     {
@@ -353,8 +353,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 19457,
-        "gzipEstimateBytes": 6077
+        "rawBytes": 19789,
+        "gzipEstimateBytes": 6245
       }
     },
     {
@@ -367,8 +367,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 24445,
-        "gzipEstimateBytes": 7786
+        "rawBytes": 24777,
+        "gzipEstimateBytes": 7954
       }
     },
     {
@@ -381,8 +381,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 19457,
-        "gzipEstimateBytes": 6077
+        "rawBytes": 19789,
+        "gzipEstimateBytes": 6245
       }
     },
     {
@@ -395,8 +395,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 20497,
-        "gzipEstimateBytes": 6522
+        "rawBytes": 20829,
+        "gzipEstimateBytes": 6690
       }
     },
     {
@@ -409,8 +409,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 3903,
-        "gzipEstimateBytes": 1437
+        "rawBytes": 4600,
+        "gzipEstimateBytes": 1752
       }
     },
     {
@@ -423,8 +423,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 8111,
-        "gzipEstimateBytes": 2876
+        "rawBytes": 8808,
+        "gzipEstimateBytes": 3191
       }
     },
     {
@@ -437,8 +437,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 8111,
-        "gzipEstimateBytes": 2876
+        "rawBytes": 8808,
+        "gzipEstimateBytes": 3191
       }
     },
     {
@@ -451,8 +451,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 8111,
-        "gzipEstimateBytes": 2876
+        "rawBytes": 8808,
+        "gzipEstimateBytes": 3191
       }
     },
     {
@@ -465,8 +465,8 @@
       },
       "js": {
         "files": 1,
-        "rawBytes": 2169,
-        "gzipEstimateBytes": 805
+        "rawBytes": 2866,
+        "gzipEstimateBytes": 1120
       }
     },
     {
@@ -479,8 +479,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 4659,
-        "gzipEstimateBytes": 1883
+        "rawBytes": 5356,
+        "gzipEstimateBytes": 2198
       }
     },
     {
@@ -493,8 +493,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 19457,
-        "gzipEstimateBytes": 6077
+        "rawBytes": 19789,
+        "gzipEstimateBytes": 6245
       }
     },
     {
@@ -507,8 +507,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 23677,
-        "gzipEstimateBytes": 7691
+        "rawBytes": 24009,
+        "gzipEstimateBytes": 7859
       }
     }
   ],

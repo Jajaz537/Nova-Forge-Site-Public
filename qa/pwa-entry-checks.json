@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "scope": "Nine structural and Node VM checks; not native PWA installation/offline proof",
+  "checks": [
+    "All 16 public pages load the shared entry exactly once; no duplicate registration in app.js",
+    "HTTPS page without a navigation element still registers",
+    "Subdirectory deployment uses shell location, not document URL",
+    "Insecure context skipped",
+    "Unsupported browser skipped",
+    "Missing script URL skipped",
+    "Foreign script origin skipped",
+    "Registration promise rejection contained",
+    "Synchronous registration failure contained"
+  ]
+}
