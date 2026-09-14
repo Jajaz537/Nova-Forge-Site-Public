@@ -5,7 +5,7 @@
 c515e535e9fae58f857edd7a37d270b37f578061880d05a4a00ed5ab5bb95a66  ./assets/catalog.js
 589c29f63abc52077a8ff4d62e1748b778107e997e298417071905faffc65626  ./assets/community.js
 db09c5a11d225a89c50c9f4c9e2985d53d862076c5ea0a9a65c83ce1d83bf350  ./assets/creator-studio.css
-39c9e33a144c6b5ae437b019e3cbdb1d4c6ac9f3c63d1bce967ec5320f3f24c4  ./assets/creator-studio.js
+ac3a2e71a88f9cd3ff839c1546eda1dbc6e4fc5b17ab02aa0e746697226801a6  ./assets/creator-studio.js
 74deefbbeca6a11fd5a475a70c1f822789993d7c844cd1f172cefadc89dcd1b1  ./assets/downloads.js
 33a0530ceb4cafa33a6e0f05cc04994d086b8d11308d5f5f2a9fac20861efe81  ./assets/forge-field.svg
 bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-schema-lite.js
@@ -69,6 +69,6 @@ c2a65511fef5fe723f6e10e3af17bad0ff912918b3f00e391ac34cf12c3b9b84  ./schemas/univ
 f1ffbeb87db7b56ea483d7ab6b18db1ee378930d33bc91cde4032e9cb9bc6e8e  ./search.html
 948ff533daee117a773975ae944ccb3ff8a045d5daa44497fba411f2e4d3e639  ./security.html
 95381433ad3296afcf2befa6bac332088f72180439f276575b22515f661e0912  ./site.webmanifest
-51bac9861ff27876ec906c343c23e638ed01bb026b156fd16f1b1997035008a5  ./sw.js
+25ea84b20183edb802c1f54dd0d6a3bf978e93385a62146bb08f65a70baee61d  ./sw.js
 cbffe9845399e9ed0d82ee13fa3477f0461c1c7dc649a6624da720179f73292a  ./verify.html
 65a536d9eb31483516ac9e12548cde8fb037a87c5cff5e7b012db6a9f257b688  assets/modaryx-foundations.css

@@ -31,6 +31,7 @@
   let schema = null;
   let lastManifest = null;
   let draftEdited = false;
+  let validationRequested = false;
 
   const read = (key) => String(fields[key]?.value ?? "").trim();
   const uniqueSorted = (value) => [...new Set(String(value).split(",").map((part) => part.trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, "en"));
@@ -138,13 +139,25 @@
     return errors;
   }
 
+  const friendlyError = (message) => {
+    const names = {"$.content.id": "Identifiant du projet", "$.content.name": "Nom du projet", "$.content.version": "Version", "$.target.gameId": "Identifiant du jeu", "$.target.gameName": "Nom du jeu", "$.creator.id": "Identifiant créateur", "$.creator.displayName": "Nom du créateur", "$.rights.license": "Licence", "$.compatibility.evidenceReceipt": "Justificatif de mesure", "$.provenance.receiptId": "Justificatif de provenance"};
+    for (const [path, label] of Object.entries(names)) message = message.replace(path + ":", label + ":");
+    return message.replace("longueur minimale 1", "champ à renseigner");
+  };
+
   function render() {
     try {
       const manifest = buildManifest();
       lastManifest = manifest;
       preview.textContent = canonicalText(manifest);
       const errors = schemaErrors(manifest);
-      schemaStatus.textContent = errors.length ? `Validation locale : ${errors.length} erreur(s). ${errors.slice(0, 3).join(" · ")}` : "Validation locale : brouillon conforme au schéma UMM chargé. Cela ne constitue pas une preuve de provenance, signature ou mesure.";
+      schemaStatus.textContent = !schema
+        ? "Chargement du format de validation. L’export reste indisponible pour le moment."
+        : errors.length
+          ? validationRequested
+            ? `À corriger : ${errors.length} point(s). ${errors.slice(0, 3).map(friendlyError).join(" · ")}`
+            : "Votre brouillon est en cours. Renseignez les champs obligatoires, puis choisissez Valider l’aperçu."
+          : "Format du brouillon conforme. Cela ne vérifie ni la provenance, ni la signature, ni la compatibilité réelle.";
       return {manifest, errors};
     } catch (error) {
       lastManifest = null;
@@ -155,6 +168,8 @@
   }
 
   function requireValidDraft() {
+    validationRequested = true;
+    render();
     if (!form.checkValidity()) {
       form.reportValidity();
       status.textContent = "Complétez les champs requis avant sauvegarde ou export.";
@@ -281,6 +296,7 @@
     }
     draftEdited = true;
     form.reset();
+    validationRequested = false;
     importFile.value = "";
     lastManifest = null;
     preview.textContent = "{}";
