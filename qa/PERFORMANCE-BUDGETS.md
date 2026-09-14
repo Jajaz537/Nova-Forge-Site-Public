@@ -61,3 +61,7 @@ Les métadonnées publiques et catalogues utilisent le réseau avec `cache: no-s
 `node qa/check-cache.mjs` a exécuté 21 assertions : périmètre de purge, alias publics, clé canonique, exclusions, recours réseau des métadonnées, réponses hors ligne marquées, absence de copie, HTTP 404 et erreur de quota. `node --check sw.js` a également réussi. Aucun de ces contrôles n'est une validation native du navigateur. Le rapport JSON contient le hash exact de la source examinée.
 
 Fichiers modifiés dans ce lot : `sw.js` et les trois fichiers `qa/` autorisés. L'installation depuis les pages sans `app.js` reste un point de parcours à vérifier ; aucun HTML ni autre JavaScript n'a été changé par cette tâche.
+
+## Révision artistique Loup/Dragon
+
+Les poids initiaux ci-dessus précèdent les illustrations autorisées. Le JSON `cache-checks.json` donne les poids actualisés. Le budget proposé de précache passe à 800 000 octets bruts pour ces deux WebP ; cette augmentation explicite finance la direction demandée, sans mesure CWV revendiquée. Le panorama portails est chargé paresseusement dans le document ; le précache engage néanmoins son téléchargement lors de l’installation du service worker.

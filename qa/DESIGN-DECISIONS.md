@@ -29,3 +29,19 @@ Ces sources ne donnent aucune permission de copier leur marque, leurs assets ou 
 ## Limites de la direction
 
 Les démonstrations ne deviennent pas des produits distribués. Les galeries de mods restent sans médias autorisés, les hubs GTA6/RDR2 ne sont pas réalisés, et le Guide n'est pas connecté. Ces écarts restent visibles dans le registre anti-oubli. L'objectif « ultra haut de gamme » reste une exigence de recette, pas une mesure obtenue par un simple contrôle de largeur.
+
+## Référence prioritaire Loup/Dragon — correction utilisateur
+
+Source fournie : `Nova_Forge_5_Nouveaux_Concepts_Loup_Dragon(1).rar`. Le second envoi est identique, SHA-256 `c7592976adc53de0d5fb6f98bc1454c73d741bd0215fcd1398e047ececfb6532`. Les cinq PNG ont été extraits ; 02 (accueil), 03 (portails) et 01 (compagnons) inspectés visuellement. Les concepts OS 04/05 ne sont pas transposés en fonctionnalités web.
+
+Cette direction remplace l'exploration intermédiaire de sculpture métallique, conservée hors du candidat. Priorité : complicité loup/dragon, citadelle et cascades, portails de pierre, anthracite, or et braise, bleu secondaire. Linear/Raycast/Vercel et les autres références restent des sources de finition uniquement. Le branding public demeure MODARYX MODS ; aucun remplacement global de contrats historiques.
+
+Deux illustrations ont été produites avec ImageGen intégré à partir des références fournies, puis converties en WebP avec ImageMagick. Le texte et la navigation sont du HTML, séparés des images décoratives, sans animation permanente. Les visuels ne prouvent pas une fonctionnalité, une intégration jeu ou une distribution disponible. Figma et Adobe ne sont pas revendiqués.
+
+Prompts de production : (1) panorama fidèle aux compagnons jeunes loup argenté et dragon noir/or aux yeux bleus, ensemble à droite sur une roche sombre, citadelle, cascades et montagnes au couchant, gauche calme pour texte HTML, aucun texte/logo/UI ; (2) trois portails de pierre, atelier ambre à gauche, citadelle centrale, forêt bleue à droite, monde et lumière de la référence 03, sans texte/UI/personnage additionnel.
+
+Accueil : illustration immersive et titre éditorial serif. Écosystème : panorama des portails et trois vrais parcours Créer/Explorer/Rassembler. Les formulaires, états et contrats existants sont conservés. Les titres des seize pages partagent la famille typographique ; pas de décor lourd dans les champs ou tableaux.
+
+- `assets/modaryx-wolf-dragon-hero.webp` : 212218 octets.
+
+- `assets/modaryx-world-portals.webp` : 180174 octets.

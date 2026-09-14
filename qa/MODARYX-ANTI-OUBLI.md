@@ -53,3 +53,7 @@ La matrice de recette du lot doit associer chaque page aux captures et aux contr
 ## Décision de sortie
 
 **EN COURS — VF non déclarée.** Le lot peut améliorer et vérifier la finition des pages existantes, tout en conservant explicitement les hubs et services absents. Une fusion, un build réussi ou l'existence d'un schéma ne clôture pas ces écarts. Aucune idée retenue n'est implicitement abandonnée ou considérée réalisée par ce document.
+
+## Correction visuelle prioritaire
+
+Pack Loup/Dragon récupéré et trois références web inspectées : intégration accueil et portails EN COURS de recette. Identité MODARYX préservée. Le cycle de croissance des compagnons du concept 01 est un langage visuel complémentaire ; aucune progression interactive n’est déclarée disponible.
