@@ -63,11 +63,18 @@
   function downloadJson(value, filename) {
     const blob = new Blob([canonicalText(value)], {type: "application/json"});
     const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = filename;
-    anchor.click();
-    URL.revokeObjectURL(url);
+    let anchor;
+    try {
+      anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = filename;
+      anchor.rel = "noopener";
+      document.body.append(anchor);
+      anchor.click();
+    } finally {
+      anchor?.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
   }
 
   function buildCollection() {
@@ -323,7 +330,7 @@
     try {
       const collection = buildCollection();
       downloadJson(collection, `${collection.id}.nova-collection.json`);
-      status.textContent = "Export déterministe créé localement. Aucun contenu n’a été envoyé.";
+      status.textContent = "Export préparé. Vérifiez les téléchargements de votre navigateur. Aucun contenu n’a été envoyé.";
     } catch (error) {
       status.textContent = `Export bloqué : ${error.message}`;
     }
@@ -385,7 +392,7 @@
     try {
       const submission = buildSubmission();
       downloadJson(submission, `${submission.id}.nova-community-draft.json`);
-      submissionStatus.textContent = "Export déterministe créé localement · NON PUBLIÉ · aucun contenu envoyé.";
+      submissionStatus.textContent = "Export préparé. Vérifiez les téléchargements de votre navigateur · NON PUBLIÉ · aucun contenu envoyé.";
     } catch (error) {
       submissionStatus.textContent = `Export bloqué : ${error.message}`;
     }

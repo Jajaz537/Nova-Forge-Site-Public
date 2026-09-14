@@ -308,18 +308,25 @@
   downloadButton.addEventListener("click", () => {
     const manifest = requireValidDraft();
     if (!manifest) return;
-    const blob = new Blob([canonicalText(manifest)], {type: "application/json"});
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    const safeId = read("contentId").replace(/[^a-z0-9._-]/gi, "-").toLowerCase() || "nova-forge-draft";
-    anchor.href = url;
-    anchor.download = `${safeId}.nova-manifest.json`;
-    anchor.rel = "noopener";
-    document.body.append(anchor);
-    anchor.click();
-    anchor.remove();
-    URL.revokeObjectURL(url);
-    status.textContent = "Export JSON déterministe généré localement. Le manifest reste NON PUBLIÉ et distribution=locked.";
+    let url;
+    let anchor;
+    try {
+      const blob = new Blob([canonicalText(manifest)], {type: "application/json"});
+      url = URL.createObjectURL(blob);
+      anchor = document.createElement("a");
+      const safeId = read("contentId").replace(/[^a-z0-9._-]/gi, "-").toLowerCase() || "nova-forge-draft";
+      anchor.href = url;
+      anchor.download = `${safeId}.nova-manifest.json`;
+      anchor.rel = "noopener";
+      document.body.append(anchor);
+      anchor.click();
+      status.textContent = "Export JSON préparé. Vérifiez les téléchargements de votre navigateur. Le brouillon reste NON PUBLIÉ.";
+    } catch {
+      status.textContent = "Export impossible dans ce navigateur. Votre brouillon est conservé ; vous pouvez réessayer ou enregistrer une copie locale.";
+    } finally {
+      anchor?.remove();
+      if (url) setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
   });
 
   form.addEventListener("input", () => { draftEdited = true; render(); });
