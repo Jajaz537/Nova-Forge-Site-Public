@@ -45,7 +45,10 @@
     const id = root.dataset.projectId;
     const favorites = loadFavorites();
     if (favorites.has(id)) favorites.delete(id); else favorites.add(id);
-    try { localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites].sort())); } catch {}
+    try { localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites].sort())); } catch {
+      state.textContent = "Favori non modifié : le navigateur a refusé l’enregistrement local.";
+      return;
+    }
     renderFavorite(id);
     state.textContent = favorites.has(id) ? "Ajouté aux favoris de ce navigateur uniquement." : "Retiré des favoris de ce navigateur uniquement.";
   }

@@ -37,7 +37,7 @@
   }
 
   function saveFavorites() {
-    try { localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites].sort())); } catch {}
+    try { localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites].sort())); return true; } catch { return false; }
   }
 
   function loadSavedViews() {
@@ -100,10 +100,12 @@
       viewNameInput.focus();
       return;
     }
+    const previousViews = savedViews;
     const now = Date.now();
     const id = `view-${now.toString(36)}`;
     savedViews = [{id, name, filters: currentFilters()}, ...savedViews.filter((view) => view.name.toLocaleLowerCase("fr") !== name.toLocaleLowerCase("fr"))].slice(0, 12);
     if (!persistSavedViews()) {
+      savedViews = previousViews;
       if (viewsStateNode) viewsStateNode.textContent = "Le navigateur a refusé l’enregistrement local de cette vue.";
       return;
     }
@@ -118,8 +120,13 @@
   function deleteSelectedView() {
     if (!viewSelect?.value) return;
     const target = savedViews.find((view) => view.id === viewSelect.value);
+    const previousViews = savedViews;
     savedViews = savedViews.filter((view) => view.id !== viewSelect.value);
-    persistSavedViews();
+    if (!persistSavedViews()) {
+      savedViews = previousViews;
+      if (viewsStateNode) viewsStateNode.textContent = "Suppression impossible : le navigateur a refusé la modification locale.";
+      return;
+    }
     refreshSavedViews();
     if (viewsStateNode) viewsStateNode.textContent = target ? `Vue « ${target.name} » supprimée de ce navigateur.` : "Vue locale supprimée.";
   }
@@ -201,7 +208,7 @@
     grid.replaceChildren(...filtered.map(buildCard));
     countNode.textContent = `${filtered.length} ${filtered.length === 1 ? "entrée" : "entrées"}`;
     emptyNode.hidden = filtered.length !== 0;
-    stateNode.textContent = onlyFavorites ? "Filtrage local des favoris activé. Aucune synchronisation distante." : "Catalogue hydraté depuis les données publiques du même site. Recherche et tri exécutés localement.";
+    stateNode.textContent = onlyFavorites ? "Filtrage local des favoris activé. Aucune synchronisation distante." : "Catalogue chargé. Recherche et tri effectués dans votre navigateur.";
   }
 
   async function hydrate() {
@@ -223,7 +230,11 @@
 
   function toggleFavorite(id, button) {
     if (favorites.has(id)) favorites.delete(id); else favorites.add(id);
-    saveFavorites();
+    if (!saveFavorites()) {
+      if (favorites.has(id)) favorites.delete(id); else favorites.add(id);
+      stateNode.textContent = "Favori non modifié : le navigateur a refusé l’enregistrement local.";
+      return;
+    }
     const active = favorites.has(id);
     button.setAttribute("aria-pressed", active ? "true" : "false");
     button.textContent = active ? "★ Favori" : "☆ Favori";

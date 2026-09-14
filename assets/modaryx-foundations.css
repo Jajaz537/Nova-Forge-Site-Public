@@ -41,3 +41,23 @@ input::file-selector-button { padding: 8px 12px; margin-right: 12px; border: 1px
 .studio-step-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--nova-gold-light); }
 @media(max-width:760px) { .site-footer { grid-template-columns: 1fr; } .site-footer nav { justify-content: flex-start; } }
 @media(prefers-reduced-motion:reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+
+/* Finish pass: restrained materials, readable rhythm and native disclosure. */
+:root { --modaryx-motion-fast: 120ms; --modaryx-motion-standard: 180ms; }
+h1, h2, h3 { text-wrap: balance; }
+main p { text-wrap: pretty; }
+.modaryx-disclosure { margin-block: 16px; border: 1px solid var(--nova-border-standard); border-radius: var(--nova-radius-md); background: var(--nova-panel); }
+.modaryx-disclosure summary { padding: 18px 22px; min-height: 56px; cursor: pointer; font-weight: 650; color: var(--nova-gold-light); }
+.modaryx-disclosure pre { padding: 0 22px 22px; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 30rem; overflow: auto; }
+.modaryx-disclosure[open] summary { border-bottom: 1px solid var(--nova-border-subtle); margin-bottom: 18px; }
+@media (hover:hover) {
+  .site-footer a:hover, .page-trail a:hover, .section-nav a:hover, .studio-step-links a:hover { text-decoration: underline; }
+  .modaryx-disclosure summary:hover { background: var(--nova-card); }
+}
+@media (min-width:1181px) and (max-width:1320px) {
+  .topbar { grid-template-columns: auto minmax(0,1fr) auto; gap: 12px; }
+  .topbar .nav-toggle { display: none; }
+  .topbar nav, .topbar[data-nav-open] nav { display: flex; grid-column: 2; grid-row: 1; justify-self: center; padding: 0; gap: 0; }
+  .topbar nav a { padding-inline: 7px; font-size: .82rem; background: transparent; border: 0; }
+  .topbar .motion-toggle { grid-column: 3; }
+}
