@@ -308,3 +308,11 @@ Commit produit `a0c8a39b4ded8a89262b746d602f14be695ac8f4` : quatre résumés ren
 `qa/search-browser-20260915.json` : Chrome HTTPS, mêmes deux résultats pour CRÉER/creer, état vide sans perte de focus, retour aux quatorze résultats par effacement clavier, navigation Entrée vers le Studio. Après modification : nouveaux textes observés, ancien terme fail-closed sans résultat ; deux mesures à 320/768 et état vide à 320 sans débordement. L’appel d’effacement initial resté sans effet est exclu ; aucune panne du site déduite de cet appel pilote.
 
 Six groupes de scénarios source recherche, cinq contrôles secours HTML, vingt-cinq assertions cache ; structure/syntaxe et 76 empreintes sans erreur. Cache v73 : 799420 octets précachés, marge 580 sous le budget proposé. Pas de nouvelle preuve de panne réseau réelle, lecteur d’écran, cycle hors ligne ou VF.
+
+## Catalogue — persistance et focus natifs
+
+Recette Chrome HTTPS sur `06f8bf8643e743940358ca13f8bb29eee91135ab`, sans modification produit : favori témoin conservé après rechargement ; retrait du dernier favori sous filtre donne zéro entrée et focus recherche ; vue nommée avec filtre Skyrim conservée après rechargement puis appliquée avec une entrée ; suppression clavier remet le focus au sélecteur des vues.
+
+État initial vide vérifié avant toute écriture locale : trois favoris faux, aucune vue. Seules les données créées pour la recette sont supprimées. Dernier rechargement : trois entrées, favoris faux, aucune vue, état visible initial retrouvé. Preuves détaillées : `qa/catalog-persistence-browser-20260915.json`.
+
+Ce lot ferme ces cinq parcours natifs ciblés. Il ne prouve ni redémarrage complet du navigateur, ni stockage saturé/refusé dans Chrome, ni synchronisation multi-onglets, lecteur d’écran, appareil physique ou cycle hors ligne. Les refus de stockage restent couverts par les preuves source précédentes. Aucun changement de cache, d’asset, de marque, d’OS ou d’infrastructure ; VF non validée.
