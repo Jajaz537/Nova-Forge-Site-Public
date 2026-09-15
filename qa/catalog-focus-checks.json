@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "scope": "Six source transaction scenarios in Node VM; not browser or screen reader",
+  "checks": [
+    "Removing focused middle favorite moves focus to the following card",
+    "Removing focused last card moves focus to previous remaining card",
+    "Removing only favorite returns focus to search",
+    "Action without focus on favorite does not steal focus",
+    "Storage failure retains favorite and card without moving focus",
+    "Unfiltered toggle retains its original button without rerender"
+  ]
+}

@@ -176,6 +176,7 @@
     const favoriteButton = make("button", `text-button${favorite ? " favorite-active" : ""}`, favorite ? "★ Favori" : "☆ Favori");
     favoriteButton.type = "button";
     favoriteButton.dataset.favoriteId = item.id;
+    favoriteButton.setAttribute("aria-label", `Favori : ${item.name}`);
     favoriteButton.setAttribute("aria-pressed", favorite ? "true" : "false");
     const projectLink = make("a", "text-link", "Voir le mini-hub");
     projectLink.href = projectHref(item.id);
@@ -239,11 +240,23 @@
     button.setAttribute("aria-pressed", active ? "true" : "false");
     button.textContent = active ? "★ Favori" : "☆ Favori";
     button.classList.toggle("favorite-active", active);
-    if (items.length && favoritesOnly.checked) render();
+    if (items.length && favoritesOnly.checked) {
+      const buttons = [...grid.querySelectorAll("[data-favorite-id]")];
+      const position = buttons.indexOf(button);
+      const restoreFocus = document.activeElement === button;
+      render();
+      if (restoreFocus) {
+        const remaining = [...grid.querySelectorAll("[data-favorite-id]")];
+        const target = remaining[Math.min(Math.max(position, 0), remaining.length - 1)];
+        (target || queryInput).focus();
+      }
+    }
   }
 
   function bindStaticFavorites() {
     grid.querySelectorAll("[data-favorite-id]").forEach((button) => {
+      const title = button.closest(".catalog-card")?.querySelector("h3")?.textContent;
+      if (title) button.setAttribute("aria-label", `Favori : ${title}`);
       const active = favorites.has(button.dataset.favoriteId);
       button.setAttribute("aria-pressed", active ? "true" : "false");
       button.textContent = active ? "★ Favori" : "☆ Favori";

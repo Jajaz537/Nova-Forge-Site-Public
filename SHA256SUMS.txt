@@ -2,7 +2,7 @@
 398972cfd308d4315127837ddbef16e2c44c9594052784f691d45ab5abde32d7  ./404.html
 3e2b22f3f8ea1fe2066510891149f8bb3975f79d43ae46ead8c25803341b76e7  ./assets/app.js
 315aded9aec412b378cb4c257d493b0f541c68fb5bcd10bdccb497bbbe51e52e  ./assets/catalog.css
-c515e535e9fae58f857edd7a37d270b37f578061880d05a4a00ed5ab5bb95a66  ./assets/catalog.js
+104edc6cab2f6f9e7ec5822d4c74e2606f11b5b366b0486e3ad915245c45aaee  ./assets/catalog.js
 d208e5e35e791c8e17d74b28da101d85486caa0af572b979cae11b3c405a46d9  ./assets/community.js
 db09c5a11d225a89c50c9f4c9e2985d53d862076c5ea0a9a65c83ce1d83bf350  ./assets/creator-studio.css
 3dc1e6ea918337da2ffd4fa876448cb9c4faa2b72efbef4e45c553db319a61b7  ./assets/creator-studio.js
@@ -69,7 +69,7 @@ c2a65511fef5fe723f6e10e3af17bad0ff912918b3f00e391ac34cf12c3b9b84  ./schemas/univ
 2fdd57aa51150af5c2470518eb6c1a07d11bbe95b8cf457b024badb2de4561ba  ./search.html
 948ff533daee117a773975ae944ccb3ff8a045d5daa44497fba411f2e4d3e639  ./security.html
 95381433ad3296afcf2befa6bac332088f72180439f276575b22515f661e0912  ./site.webmanifest
-a8f9700949bff0b5095e92571dedb9ab639307a35c9b552fbcfd2fb4d1dcf989  ./sw.js
+6adaf9e193fb70a687f150c3b40da2c57f23117a2a837f94e81e1fe059c3f6ab  ./sw.js
 cbffe9845399e9ed0d82ee13fa3477f0461c1c7dc649a6624da720179f73292a  ./verify.html
 75f187f2d5404edc13193ac0d31bcade97653d0dadd264e8052f9e2fa6ae0be7  assets/modaryx-foundations.css
 25244395f7714ce0da8247cb3ed7b58312cc7cf0a893ec32fc575cb6c359f5f8  assets/modaryx-wolf-dragon-hero.webp

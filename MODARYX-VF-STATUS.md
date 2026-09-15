@@ -106,8 +106,16 @@ Ces mesures ne prouvent ni tous les chevauchements, ni tous les états, ni la co
 
 ## Suite ciblée — prévalidation du vérificateur (15 septembre 2026)
 
+Lot conservé ; la suite catalogue ci-dessous actualise le cache et la couverture.
+
 Une empreinte attendue mal formée est désormais refusée avant lecture du fichier et calcul SHA-256. Le champ reçoit le focus et aria-invalid ; une édition ou un préremplissage valide efface cet état. Sans fichier, le focus revient au sélecteur. L’empreinte reste facultative : une valeur vide permet le calcul seul, sans prétendre à une correspondance. Aucun contrat historique renommé, aucune modification d’infrastructure.
 
 Sept scénarios dédiés réussis dans `qa/verify-checks.json`, avec digest Web Crypto Node réel et DOM simulé : absence de fichier, refus sans lecture, correction/empreinte facultative, correspondance et différence, concurrence/résultat périmé, erreur de lecture, Web Crypto absent. Chrome local : activation sans fichier confirme le sélecteur actif et l’avertissement visible. Le focus sur empreinte invalide et les calculs avec fichier ont été testés ici en Node seulement. Ce lot ne prouve pas lecteur d’écran ni fichiers physiques en navigateur.
 
 Sept scénarios d’état existants et 21 assertions cache réexécutés, structure 16 pages/13 scripts et 76 empreintes sans erreur. Couverture ciblée cumulée : 76 scénarios/contrôles (dont les sept nouveaux), hors mesures de largeur. Cache v48 ; précache 788697 octets bruts, 516918 estimation gzip, pas une mesure de performance terrain. Statut EN COURS, aucune VF ; preuves externes précédemment listées toujours manquantes.
+
+## Suite ciblée — focus des favoris (15 septembre 2026)
+
+En vue Favoris uniquement, retirer la carte active transfère maintenant le focus au favori suivant, au précédent si elle était dernière, ou au champ Recherche si la liste devient vide. Un déclenchement sans focus sur ce bouton ne vole pas le focus. Les boutons Favori portent le nom du projet dans leur libellé accessible, sur cartes enrichies et secours HTML après initialisation JavaScript.
+
+Chrome local : ajout de deux favoris de test, filtrage puis Entrée sur Ember → focus Balanced ; Entrée sur Balanced → focus catalog-query. Favoris de test retirés et filtre décoché à la fin. Aucun lecteur d’écran réel revendiqué. Six scénarios source Node réussis dans qa/catalog-focus-checks.json ; trois tests de refus du stockage et 21 assertions cache réexécutés. Structure 16 pages, 13 scripts et 76 empreintes sans erreur. Couverture ciblée cumulée 82 scénarios/contrôles, hors mesures de largeur ; cache v49, précache 789364 octets bruts (517084 estimation gzip). EN COURS, aucune VF ; les preuves externes restent ouvertes.
