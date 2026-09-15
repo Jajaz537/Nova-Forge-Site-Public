@@ -212,17 +212,32 @@
     stateNode.textContent = onlyFavorites ? "Filtrage local des favoris activé. Aucune synchronisation distante." : "Catalogue chargé. Recherche et tri effectués dans votre navigateur.";
   }
 
+  function readPublicItems(payload) {
+    if (!payload || payload.schemaVersion !== 1 || !Array.isArray(payload.items)) throw new Error("catalog-contract-invalid");
+    const visible = payload.items.filter((item) => item?.public === true);
+    const text = (value) => typeof value === "string" && value.trim().length > 0;
+    const valid = (item) => text(item.id) && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.id) &&
+      ["mod", "pack", "experience"].includes(item.kind) && text(item.name) && text(item.version) &&
+      typeof item.summary === "string" && text(item.game?.name) && text(item.creator?.displayName) &&
+      ["unknown", "estimated", "measured"].includes(item.compatibility?.evidence) &&
+      text(item.provenance?.label) && text(item.distribution?.label) &&
+      (item.tags === undefined || (Array.isArray(item.tags) && item.tags.every((tag) => typeof tag === "string"))) &&
+      (item.featuredRank === undefined || (typeof item.featuredRank === "number" && Number.isFinite(item.featuredRank)));
+    if (!visible.every(valid) || new Set(visible.map((item) => item.id)).size !== visible.length) throw new Error("catalog-entry-invalid");
+    return visible;
+  }
+
   async function hydrate() {
     try {
       const response = await fetch(DATA_URL, {headers: {Accept: "application/json"}});
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const payload = await response.json();
-      if (!payload || payload.schemaVersion !== 1 || !Array.isArray(payload.items)) throw new Error("catalog-contract-invalid");
-      items = payload.items.filter((item) => item && item.public === true && typeof item.id === "string");
+      items = readPublicItems(payload);
       refreshGames();
       refreshSavedViews();
       render();
     } catch {
+      items = [];
       stateNode.textContent = navigator.onLine ? "Le catalogue enrichi n’a pas pu être chargé. Le contenu HTML statique initial reste disponible." : "Hors ligne : le contenu HTML statique initial reste disponible ; les données enrichies ne sont pas dans le cache courant.";
       countNode.textContent = `${grid.querySelectorAll(".catalog-card").length} entrées statiques`;
       bindStaticFavorites();

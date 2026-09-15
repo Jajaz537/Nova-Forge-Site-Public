@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "scope": "Six grouped Node VM source scenarios, including ten malformed variants; not native browser proof",
+  "checks": [
+    "Current three public records load before rendering",
+    "Ten malformed public record variants retain static cards without invoking enriched rendering",
+    "Duplicate public identifiers reject enriched catalogue",
+    "Non-public and null entries are excluded from public rendering",
+    "Empty valid catalogue reaches empty rendering rather than failure",
+    "Unsupported contract preserves static fallback"
+  ]
+}
