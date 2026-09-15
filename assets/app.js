@@ -278,12 +278,12 @@
     publicStatusMessage.textContent = stale
       ? 'Statut non actualisé : seule une copie hors ligne est disponible. La disponibilité actuelle des téléchargements ne peut pas être confirmée.'
       : publicOnly
-      ? `Le manifeste livré avec ce build déclare une surface ${stage}, public-only et fail-closed. ${downloadAvailable ? 'Un téléchargement public est déclaré disponible.' : 'Aucun téléchargement public n’est déclaré disponible.'}`
-      : 'Le manifeste de statut ne permet pas de qualifier cette surface comme public-only.';
+      ? `MODARYX est en ${stage}. Les téléchargements restent verrouillés tant que les preuves de publication requises ne sont pas réunies. ${downloadAvailable ? 'Un téléchargement public est déclaré disponible.' : 'Aucun téléchargement public n’est déclaré disponible.'}`
+      : 'Le statut public ne peut pas être confirmé pour cette version.';
 
     const facts = [
       ['Distribution', stale ? 'non confirmée hors ligne' : downloadAvailable ? 'déclarée disponible' : 'verrouillée'],
-      ['Bridge OS', bridge],
+      ['Pont vers Nova Forge OS', bridge],
       ['Smart Profile', profile]
     ];
 
