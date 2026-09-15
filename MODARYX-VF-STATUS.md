@@ -358,3 +358,9 @@ Quatre groupes renderer et trois scénarios cache-label réussis, vingt-cinq cac
 Présentation des observations et protocole d’essai clarifiés : Observé/Estimé/Inconnu, sauvegarde et restauration des réglages. Les codes internes Measured/Estimated/Unknown sont conservés ; aucune mesure de jeu, modification système ou persistance de résultat ajoutée. Source : `assets/app.js`.
 
 Syntaxe, structure des 16 pages, 76 empreintes et 25 assertions cache vérifiées ; précache v77 : 799626 octets bruts, sous le budget 800000. Le résultat natif après publication reste à consigner. **EN COURS, VF non validée.**
+
+### Preuve native du profil et consolidation
+
+`qa/profile-browser-20260915.json` : observation du nouveau texte français dans Chrome HTTPS après propagation, trois réponses du protocole activées au clavier, fermeture, deux mesures de reflow du protocole ouvert (320/768) sans débordement. Ce sont des tests d’interface, aucun essai de jeu réel. Les branches matérielles inconnues ne sont pas certifiées.
+
+`qa/PROOF-MATRIX-CURRENT.md` regroupe les preuves existantes et leurs limites ; `MODARYX-NEXT-BATCH.md` actualisé. Les services/corpus manquants restent explicitement ouverts et ne sont pas réduits à des preuves externes. **VF NON VALIDÉE.**

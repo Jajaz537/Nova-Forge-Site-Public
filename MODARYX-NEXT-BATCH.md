@@ -1,11 +1,12 @@
 # MODARYX — prochain bloc et conditions de clôture
 
-Actualisé le 15 septembre 2026 après `565e821a6257af23efc5c980c4a2a992162b99e6`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
+Actualisé le 15 septembre 2026 après `4e8e87ce94be43f8bbf45ceb78d0bd2ec07c9d36`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
 
 ## Acquis à conserver
 
 - TERMINÉ pour le périmètre documenté : revue desktop des seize pages, corrections de composition, reflow initial 320/390/768/960 ; preuves et limites dans `qa/finish-line/README.md`. Cela ne certifie pas tous les états de toutes les pages.
 - TERMINÉ pour les parcours ciblés : erreurs du Studio complètes, marqueurs de champs, correction progressive et accès clavier depuis les erreurs. Preuves `qa/studio-errors-browser-20260915.json` et `qa/studio-error-navigation-20260915.json`.
+- TERMINÉ pour les parcours consignés : sauvegarde/rechargement des brouillons, favoris et vues Catalogue, recherche, favoris des trois fiches et mouvement réduit partagé. Références regroupées dans `qa/PROOF-MATRIX-CURRENT.md` ; aucune généralisation aux appareils ou états non testés.
 - Budgets statiques contrôlés ; ils ne constituent pas un profiling utilisateur. Ne pas relancer les suites inchangées sans risque concret.
 
 ## Prochains blocs réellement ouverts
