@@ -344,3 +344,11 @@ Sur `51241fc`, Chrome HTTPS à 320 px : les deux menus passent aria-expanded fal
 Correction éditoriale `dc0f8bf2f8be665786209ffcd932fca5ea28db5d` : bouton historique « État du Bridge OS » devient « Lien avec Nova Forge OS », libellé de secours « Bridge OS » devient « Pont vers Nova Forge OS ». Deux occurrences classées surface utilisateur actuelle ; clés, contrats et état non connecté inchangés. Activation Entrée observée : message de pont optionnel inactif, aucune connexion revendiquée. Accueil sans débordement à 320/768. Preuves dans `qa/mobile-menu-browser-20260915.json`.
 
 Six contrôles métadonnées, cinq secours HTML, vingt-cinq cache ; structure/syntaxe/76 empreintes vérifiées. Cache v75, précache 799608 octets. Les tests sans rapport n’ont pas été relancés. VF non validée ; limites de recette et capacités absentes inchangées.
+
+## Fiches — favoris partagés et droits lisibles
+
+Chrome HTTPS sur `e8bc038` : chacune des trois fiches ajoute son favori, le catalogue le retrouve activé, puis le retrait depuis le catalogue est retrouvé sur la fiche. Seuls les trois favoris témoins initialement désactivés ont été manipulés ; tous sont revenus à false. Retour clavier au catalogue observé depuis Forge Night. États de démonstration sans téléchargement conservés.
+
+Correction `1aeb909e02e42d2d38ea31d2aa45bdca4b65b187` : sentinel technique UNSPECIFIED-PREVIEW rendu « Non précisée — aperçu » dans les trois secours HTML et le renderer. Donnée contractuelle inchangée ; les autres licences conservent leur libellé. Les trois pages affichent le nouveau texte après publication et maintiennent « Non autorisée » pour la redistribution. Six mesures à 320/768 sans débordement. Preuves : `qa/project-browser-20260915.json`.
+
+Quatre groupes renderer et trois scénarios cache-label réussis, vingt-cinq cache, structure/syntaxe et 76 empreintes sans erreur. Diff Git limité aux trois HTML, renderer, worker, empreintes et rapport cache ; aucune donnée contractuelle modifiée. Cache v76 : 799709 octets. Aucune preuve de synchronisation multi-onglets, de distribution, lecteur d’écran ou appareils physiques ajoutée. VF non validée.
