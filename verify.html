@@ -52,12 +52,12 @@
       <div class="section-heading"><div><p class="eyebrow">Outil navigateur</p><h2 id="tool-title">Calculer et comparer</h2></div><span class="badge">Traitement local</span></div>
       <div class="verify-grid">
         <div class="panel verify-form">
-          <label class="field" for="verify-file"><span>Fichier local</span><input id="verify-file" type="file"></label>
-          <label class="field" for="expected-sha256"><span>SHA-256 attendu <small>(facultatif)</small></span><input id="expected-sha256" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="71" placeholder="64 caractères hexadécimaux"></label>
+          <label class="field" for="verify-file"><span>Fichier local</span><input id="verify-file" type="file" aria-describedby="verify-result"></label>
+          <label class="field" for="expected-sha256"><span>SHA-256 attendu <small>(facultatif)</small></span><input id="expected-sha256" type="text" aria-describedby="verify-result" inputmode="text" autocomplete="off" spellcheck="false" maxlength="71" placeholder="64 caractères hexadécimaux"></label>
           <button class="button primary" type="button" data-verify-file>Calculer le SHA-256</button>
           <p class="muted verify-note">Pour de très gros fichiers, le navigateur peut utiliser une quantité importante de mémoire pendant le calcul.</p>
         </div>
-        <div class="panel verify-result" data-verify-result data-state="neutral" role="status" aria-live="polite">
+        <div id="verify-result" class="panel verify-result" data-verify-result data-state="neutral" role="status" aria-live="polite">
           <strong>Aucun calcul lancé</strong>
           <p class="muted">Sélectionnez un fichier. Une empreinte attendue est nécessaire uniquement si vous voulez vérifier une correspondance exacte.</p>
         </div>

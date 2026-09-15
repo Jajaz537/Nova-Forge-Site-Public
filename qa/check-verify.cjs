@@ -25,11 +25,16 @@ const checks = [];
   let e = setup();
   await e.button.fire('click');
   assert.equal(e.file.focused, true);
+  assert.equal(e.file.attrs['aria-invalid'], 'true');
   assert.equal(e.result.dataset.state, 'warning');
+  await e.expected.fire('input');
+  assert.equal(e.file.attrs['aria-invalid'], 'true');
   checks.push('Missing file focuses the local file picker and reports a warning');
 
   let reads = 0;
   e.file.files = [{ name: 'test', arrayBuffer: async () => { reads++; return new ArrayBuffer(0); } }];
+  await e.file.fire('change');
+  assert.equal(e.file.attrs['aria-invalid'], undefined);
   e.expected.value = 'not-a-hash';
   await e.button.fire('click');
   assert.equal(reads, 0);

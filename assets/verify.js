@@ -11,6 +11,7 @@
 
   function invalidateResult() {
     inputRevision += 1;
+    if (fileInput?.files?.[0]) fileInput.removeAttribute('aria-invalid');
     expectedInput?.removeAttribute('aria-invalid');
     renderState("Vérification à relancer", "Le fichier ou l’empreinte attendue a changé. Relancez le calcul pour vérifier cette sélection.");
   }
@@ -50,11 +51,13 @@
     if (running) return;
     const file = fileInput?.files?.[0];
     if (!file || !button) {
+      fileInput?.setAttribute('aria-invalid', 'true');
       renderState('Aucun fichier sélectionné', 'Choisissez un fichier local avant de lancer le calcul.', 'warning');
       fileInput?.focus();
       return;
     }
 
+    fileInput?.removeAttribute('aria-invalid');
     const expected = normalizeHash(expectedInput?.value ?? "");
     if (expected && !isSha256(expected)) {
       expectedInput?.setAttribute('aria-invalid', 'true');
