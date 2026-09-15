@@ -424,3 +424,9 @@ Source de départ `d3e8a95fd500af96ee633f54a4406f16f4526bcf`. Les lectures async
 Départ `99d4e302b1a067d259615b7db8e2976096999adb`. Révision du brouillon suivie avant/après attente du schéma et lecture du fichier : un import périmé ne remplace plus les champs ou le message après saisie, changement de fichier, effacement ou nouvel import. L’intention d’import empêche également la restauration automatique tardive du brouillon sauvegardé.
 
 `qa/studio-import-state-checks.json` : douze scénarios Node réussis, dont cinq nouveaux liés aux imports retardés. Le nouvel import concurrent est effectivement appliqué avant vérification de l’abandon de l’ancien. Simulation uniquement ; course temporelle via sélection native non prouvée. 25 assertions cache, 16 pages/13 scripts/76 empreintes vérifiés. Cache v82 : 798636 octets. VF NON VALIDÉE.
+
+## Import natif — autorisation refusée
+
+Tentative depuis le candidat `6cf86a2a7722237120cdf91c532252d962979391` : le sélecteur de fichiers documenté a été ouvert sur Communauté avec un fichier JSON synthétique, sans données personnelles et sans sauvegarde prévue. L’action setFiles a été rejetée par le contrôle d’autorisation du navigateur, motif retourné : permission utilisateur déclinée. Aucun contournement tenté, aucun bouton Importer ensuite activé, aucune preuve de sélection/import ajoutée.
+
+**PREUVE MANQUANTE** : imports natifs et courses temporelles en navigateur. Les résultats Node précédents gardent leur portée simulée. Cette limite d’autorisation remplace l’hypothèse d’absence technique du sélecteur : l’API existe, son usage a été refusé pour cette destination. La reprise de ce parcours exige une autorisation navigateur effectivement accordée ; ne pas redemander ou réessayer automatiquement. Aucune modification produit/infrastructure. VF NON VALIDÉE.
