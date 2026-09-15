@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-15T00:12:23.118Z",
+  "measuredAt": "2026-09-15T00:21:31.977Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -87,7 +87,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "d411c6606113c9a401f55fde36f8403e90a8c0cb123075eeacc622a1a18da074",
+  "serviceWorkerSha256": "7faa6664ca30f0cba490a2ca8d3abdab61b498f7f766f75fc62ae5755ba9c266",
   "probes": [
     {
       "url": "/catalog.html",
@@ -283,8 +283,8 @@
     "uniqueLocalFiles": 70,
     "missing": [],
     "files": 70,
-    "rawBytes": 785634,
-    "gzipEstimateBytes": 516137
+    "rawBytes": 786905,
+    "gzipEstimateBytes": 516410
   },
   "pages": [
     {
@@ -297,8 +297,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 19789,
-        "gzipEstimateBytes": 6245
+        "rawBytes": 21051,
+        "gzipEstimateBytes": 6511
       }
     },
     {
@@ -353,8 +353,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 19789,
-        "gzipEstimateBytes": 6245
+        "rawBytes": 21051,
+        "gzipEstimateBytes": 6511
       }
     },
     {
@@ -367,8 +367,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 24777,
-        "gzipEstimateBytes": 7954
+        "rawBytes": 26039,
+        "gzipEstimateBytes": 8220
       }
     },
     {
@@ -381,13 +381,13 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 19789,
-        "gzipEstimateBytes": 6245
+        "rawBytes": 21051,
+        "gzipEstimateBytes": 6511
       }
     },
     {
       "page": "index.html",
-      "htmlBytes": 18099,
+      "htmlBytes": 18108,
       "css": {
         "files": 4,
         "rawBytes": 43953,
@@ -395,8 +395,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 20829,
-        "gzipEstimateBytes": 6690
+        "rawBytes": 22091,
+        "gzipEstimateBytes": 6956
       }
     },
     {
@@ -493,8 +493,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 19789,
-        "gzipEstimateBytes": 6245
+        "rawBytes": 21051,
+        "gzipEstimateBytes": 6511
       }
     },
     {
@@ -507,8 +507,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 24009,
-        "gzipEstimateBytes": 7859
+        "rawBytes": 25271,
+        "gzipEstimateBytes": 8125
       }
     }
   ],

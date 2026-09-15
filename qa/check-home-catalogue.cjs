@@ -1,0 +1,20 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..');
+const source=fs.readFileSync(path.join(root,'assets/app.js'),'utf8');
+const code=source.slice(0,source.indexOf('  function observation'))+'globalThis.catalogueTest={renderCatalogue,loadCatalogue};})();';
+class Element {
+ constructor(tag='div'){this.tag=tag;this.children=[];this.attrs={};this.listeners={};this.textContent='';this.value='';this.focused=false;}
+ append(...x){this.children.push(...x)} replaceChildren(...x){this.children=x} setAttribute(k,v){this.attrs[k]=v} addEventListener(k,f){this.listeners[k]=f} querySelector(tag){return this.children.find(x=>x.tag===tag)} focus(){this.focused=true}
+}
+function fixture(fetch){const catalog=new Element(),search=new Element('input');const c={URL,fetch,document:{baseURI:'https://example.test/',querySelector:s=>s==='[data-mod-catalog]'?catalog:s==='#mod-search'?search:null,createElement:t=>new Element(t)}};vm.createContext(c);vm.runInContext(code,c);return {catalog,search,...c.catalogueTest};}
+const response=items=>({ok:true,json:async()=>({schemaVersion:1,dataClass:'demonstration',items})});const demo=JSON.parse(fs.readFileSync(path.join(root,'data/catalog.json'),'utf8')).items;
+const text=e=>[e.textContent,...e.children.map(text)].join(' ');const checks=[];
+(async()=>{
+ let resolve;const pending=fixture(()=>new Promise(r=>resolve=r));const first=pending.loadCatalogue();assert.match(text(pending.catalog),/Chargement/);assert.doesNotMatch(text(pending.catalog),/indisponible|ne peut pas/);assert.equal(pending.catalog.attrs['aria-busy'],'true');assert.equal(pending.search.disabled,true);resolve(response(demo));await first;assert.equal(pending.catalog.attrs['aria-busy'],'false');assert.equal(pending.search.disabled,false);assert.equal(pending.catalog.children.length,3);checks.push('Pending load is busy/loading, then renders three cards and enables search');
+ const empty=fixture(async()=>response([]));await empty.loadCatalogue();assert.match(text(empty.catalog),/Aucune création/);assert.equal(empty.catalog.querySelector('button'),undefined);checks.push('Valid empty catalogue is not reported as an error');
+ const bad=fixture(async()=>({ok:true,json:async()=>({schemaVersion:9,items:demo})}));await bad.loadCatalogue();assert.match(text(bad.catalog),/ne peut pas/);assert.equal(bad.search.disabled,true);assert.equal(bad.catalog.querySelector('button').textContent,'Réessayer');checks.push('Invalid contract fails closed with explicit retry');
+ let calls=0,retryResolve;const retry=fixture(()=>{calls++;if(calls===1)return Promise.reject(Error('offline'));return new Promise(r=>retryResolve=r)});await retry.loadCatalogue();const action=retry.catalog.querySelector('button').listeners.click;const a=action(),b=action();assert.equal(calls,2);retryResolve(response(demo));await Promise.all([a,b]);assert.equal(retry.search.focused,true);assert.equal(retry.catalog.children.length,3);checks.push('Network failure retries once during concurrent activation and restores search focus');
+ pending.renderCatalogue('zzzz-unmatched');assert.match(text(pending.catalog),/ne correspond/);assert.equal(pending.catalog.querySelector('button'),undefined);checks.push('Unmatched filter has a distinct empty-results state');
+ const failedAgain=fixture(async()=>{throw Error('offline')});await failedAgain.loadCatalogue();await failedAgain.catalog.querySelector('button').listeners.click();assert.equal(failedAgain.catalog.querySelector('button').focused,true);checks.push('Repeated failure restores focus to the replacement retry button');
+ const report={status:'PASS',scope:'Six actual-source Node scenarios, not network throttling or screen-reader certification',checks};fs.writeFileSync(path.join(__dirname,'home-catalogue-checks.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
+})().catch(e=>{console.error(e);process.exitCode=1});

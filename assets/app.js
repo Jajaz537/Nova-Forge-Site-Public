@@ -10,6 +10,8 @@
   const publicStatusFacts = bySelector('[data-public-status-facts]');
   const getPublicBuildFact = () => bySelector('[data-public-build-fact]');
   let catalogueItems = [];
+  let catalogueState = 'loading';
+  let catalogueRequestPending = false;
 
   function makeBadge(text, neutral = true) {
     const badge = document.createElement('span');
@@ -22,6 +24,15 @@
 
   function renderCatalogue(query = '') {
     if (!catalogRoot) return;
+    catalogRoot.setAttribute('aria-busy', String(catalogueState === 'loading'));
+    if (search) search.disabled = catalogueState !== 'ready';
+    if (catalogueState === 'loading') {
+      const loading = document.createElement('p');
+      loading.className = 'muted';
+      loading.textContent = 'Chargement du catalogue…';
+      catalogRoot.replaceChildren(loading);
+      return;
+    }
     const term = query.trim().toLocaleLowerCase('fr');
     const rows = catalogueItems.filter((item) => {
       const searchable = [item.name, item.game?.name, item.kind, item.summary, ...(item.tags || [])].join(' ').toLocaleLowerCase('fr');
@@ -52,32 +63,53 @@
     if (!rows.length) {
       const empty = document.createElement('p');
       empty.className = 'muted';
-      empty.textContent = catalogueItems.length
-        ? 'Aucune entrée publique ne correspond à cette recherche locale.'
-        : 'Les données du Catalogue V1 sont indisponibles. Aucun contenu alternatif n’est substitué.';
+      empty.textContent = catalogueState === 'error'
+        ? 'Le catalogue ne peut pas être chargé pour le moment.'
+        : catalogueItems.length
+          ? 'Aucune entrée publique ne correspond à cette recherche locale.'
+          : 'Aucune création publique n’est référencée pour le moment.';
       catalogRoot.append(empty);
+      if (catalogueState === 'error') {
+        const retry = document.createElement('button');
+        retry.type = 'button';
+        retry.className = 'button';
+        retry.textContent = 'Réessayer';
+        retry.addEventListener('click', () => loadCatalogue(true));
+        catalogRoot.append(retry);
+      }
       if (!catalogueItems.length) {
         const link = document.createElement('a');
         link.className = 'text-link';
         link.href = './catalog.html';
-        link.textContent = 'Ouvrir le Catalogue V1';
+        link.textContent = 'Ouvrir le catalogue';
         catalogRoot.append(link);
       }
     }
   }
 
-  async function loadCatalogue() {
-    if (!catalogRoot) return;
+  async function loadCatalogue(restoreFocus = false) {
+    if (!catalogRoot || catalogueRequestPending) return;
+    catalogueRequestPending = true;
+    catalogueState = 'loading';
+    renderCatalogue();
     try {
       const response = await fetch(new URL(CATALOGUE_URL, document.baseURI), { credentials: 'same-origin' });
       if (!response.ok) throw new Error('catalogue-unavailable');
       const payload = await response.json();
       if (payload?.schemaVersion !== 1 || payload?.dataClass !== 'demonstration' || !Array.isArray(payload.items)) throw new Error('catalogue-contract-invalid');
+      catalogueState = 'ready';
       catalogueItems = payload.items.filter((item) => item?.public === true && typeof item.id === 'string');
       renderCatalogue(search?.value || '');
     } catch {
+      catalogueState = 'error';
       catalogueItems = [];
       renderCatalogue();
+    } finally {
+      catalogueRequestPending = false;
+      if (restoreFocus) {
+        if (catalogueState === 'ready') search?.focus();
+        else catalogRoot.querySelector('button')?.focus();
+      }
     }
   }
 
