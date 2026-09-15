@@ -8,6 +8,8 @@
     "Real Node Web Crypto digest accepts normalized hash and distinguishes mismatch",
     "Concurrent activation is ignored and changed inputs suppress stale digest output",
     "Read failure restores button availability without a trust result",
-    "Missing Web Crypto does not read or claim verification"
+    "Missing Web Crypto does not read or claim verification",
+    "Malformed, empty and undecodable hash links show an error and prevent file reads",
+    "Invalid fragment interrupts stale digest output; a subsequent valid link restores neutral prefill"
   ]
 }

@@ -37,10 +37,16 @@
     try {
       decoded = decodeURIComponent(location.hash.slice('#sha256='.length));
     } catch {
-      return;
+      decoded = location.hash.slice('#sha256='.length);
     }
     const candidate = normalizeHash(decoded);
-    if (!isSha256(candidate)) return;
+    if (!isSha256(candidate)) {
+      invalidateResult();
+      expectedInput.value = candidate || '?';
+      expectedInput.setAttribute('aria-invalid', 'true');
+      renderState('Lien de vérification invalide', 'Corrigez ou effacez l’empreinte attendue avant le calcul.', 'warning');
+      return;
+    }
     expectedInput.value = candidate;
     expectedInput.removeAttribute('aria-invalid');
     inputRevision += 1;

@@ -13,12 +13,12 @@ class Element {
   replaceChildren(...children) { this.children = children; }
   focus() { this.focused = true; }
 }
-function setup(crypto = webcrypto) {
+function setup(crypto = webcrypto, hash = '') {
   const nodes = new Map();
   const get = key => { if (!nodes.has(key)) nodes.set(key, new Element()); return nodes.get(key); };
-  const context = { Uint8Array, crypto, location: { hash: '' }, document: { querySelector: get, createElement: () => new Element() }, window: { addEventListener() {} } };
+  const context = { Uint8Array, crypto, location: { hash }, document: { querySelector: get, createElement: () => new Element() }, window: { addEventListener(name, fn) { this[name] = fn; } } };
   vm.runInNewContext(fs.readFileSync(path.join(root, 'assets/verify.js'), 'utf8'), context);
-  return { file: get('#verify-file'), expected: get('#expected-sha256'), button: get('[data-verify-file]'), result: get('[data-verify-result]') };
+  return { context, file: get('#verify-file'), expected: get('#expected-sha256'), button: get('[data-verify-file]'), result: get('[data-verify-result]') };
 }
 const checks = [];
 (async () => {
@@ -90,6 +90,34 @@ const checks = [];
   await e.button.fire('click');
   assert.equal(e.result.children[0].textContent, 'SHA-256 indisponible');
   checks.push('Missing Web Crypto does not read or claim verification');
+  for (const fragment of ['incorrect', '', '%E0%A4%A']) {
+    e = setup(webcrypto, '#sha256=' + fragment);
+    assert.equal(e.result.dataset.state, 'warning');
+    assert.equal(e.expected.attrs['aria-invalid'], 'true');
+    let fragmentReads = 0;
+    e.file.files = [{ name: 'blocked', arrayBuffer: async () => { fragmentReads++; return new ArrayBuffer(0); } }];
+    await e.button.fire('click');
+    assert.equal(fragmentReads, 0);
+    assert.equal(e.result.children[0].textContent, 'Empreinte attendue invalide');
+  }
+  checks.push('Malformed, empty and undecodable hash links show an error and prevent file reads');
+  e = setup();
+  let finish;
+  e.expected.value = 'a'.repeat(64);
+  e.file.files = [{ name: 'pending', arrayBuffer: () => new Promise(r => { finish = r; }) }];
+  const oldRun = e.button.fire('click');
+  e.context.location.hash = '#sha256=invalid';
+  e.context.window.hashchange();
+  finish(new ArrayBuffer(0));
+  await oldRun;
+  assert.equal(e.result.children[0].textContent, 'Lien de vérification invalide');
+  assert.equal(e.button.disabled, false);
+  e.context.location.hash = '#sha256=' + 'b'.repeat(64);
+  e.context.window.hashchange();
+  assert.equal(e.expected.value, 'b'.repeat(64));
+  assert.equal(e.expected.attrs['aria-invalid'], undefined);
+  assert.equal(e.result.dataset.state, 'neutral');
+  checks.push('Invalid fragment interrupts stale digest output; a subsequent valid link restores neutral prefill');
   const report = { result: 'PASS', kind: 'Node VM with real Web Crypto digest; not native browser or screen-reader proof', checks };
   fs.writeFileSync(path.join(__dirname, 'verify-checks.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report, null, 2));
