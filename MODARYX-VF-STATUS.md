@@ -410,3 +410,11 @@ Sur `01f2a9e5a70a1740138b3a33df72134ae4d0921e`, le statut final disait « Capaci
 `qa/profile-capabilities-browser-20260915.json` : l’environnement Chrome HTTPS ne fournit pas WebAuthn ; statut « WebAuthn indisponible » et deux capacités non testables observés. Deux mesures à 320/768 sans débordement. Les branches nouvelles détection partielle/terminée restent testées en Node uniquement : aucune fausse preuve native ajoutée. Aucun compte ni clé créé.
 
 Matrice et prochain bloc actualisés après `5d0f3de054d17b03b4795a1cd9168bf3d92c55f0`. Ne pas tourner en boucle sur les parcours déjà couverts ou les API indisponibles. Les capacités produit absentes et les preuves externes restent ouvertes. VF NON VALIDÉE.
+
+## Imports Communauté — préserver les modifications récentes
+
+Source de départ `d3e8a95fd500af96ee633f54a4406f16f4526bcf`. Les lectures asynchrones de collection/contribution pouvaient remplacer un formulaire modifié pendant la lecture. Révision indépendante par formulaire : saisie, changement de fichier, suppression et import plus récent rendent l’ancien résultat inapplicable. Les erreurs d’une lecture périmée ne remplacent pas non plus le retour utilisateur récent ; copier les favoris invalide aussi un import de collection en attente.
+
+`qa/check-import-races.cjs` : dix scénarios source avec lectures différées, dont saisie récente, nouveau fichier, suppression, import concurrent et JSON invalide. Nouvel import valide effectivement appliqué avant de vérifier que le plus ancien est ignoré. Aucun parcours natif de fichier revendiqué.
+
+`qa/check-states.cjs` a d’abord échoué car son faux événement omettait target ; correction limitée au mock puis sept scénarios réussis. Trois contrôles stockage et 25 assertions cache réussis ; structure 16 pages/13 scripts/76 empreintes vérifiée. Cache v81 : 798369 octets bruts. Aucun changement d’infrastructure. VF NON VALIDÉE.

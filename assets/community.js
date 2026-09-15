@@ -52,6 +52,8 @@
   let catalogItems = [];
   let catalogReady = false;
   let selectedIds = new Set();
+  const revisions = new WeakMap();
+  const revise = target => { const n = (revisions.get(target) || 0) + 1; revisions.set(target, n); return n; };
 
   const canonicalize = (value) => {
     if (Array.isArray(value)) return value.map(canonicalize);
@@ -346,6 +348,7 @@
   }
 
   function markEdited(target) {
+    revise(target);
     const message = target === status ? "Modifications non sauvegardées · sauvegardez pour les conserver · NON SYNCHRONISÉ." : "Modifications non sauvegardées · validez ou sauvegardez à nouveau · NON PUBLIÉ.";
     if (target.textContent !== message) target.textContent = message;
   }
@@ -371,6 +374,7 @@
     try {
       const parsed = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
       const known = new Set(catalogItems.map((item) => item.id));
+      revise(status);
       selectedIds = new Set(Array.isArray(parsed) ? parsed.filter((id) => known.has(id)) : []);
       renderItems();
       renderPreview();
@@ -390,6 +394,7 @@
     }
   });
 
+  importFile.addEventListener("change", () => revise(status));
   importButton.addEventListener("click", async () => {
     const file = importFile.files?.[0];
     if (!file) {
@@ -397,11 +402,14 @@
       importFile.focus();
       return;
     }
+    const revision = revise(status);
     try {
       const value = JSON.parse(await file.text());
+      if (revision !== revisions.get(status)) return;
       applyCollection(value);
       status.textContent = "Collection importée en mémoire seulement. Utilisez Sauvegarder pour la conserver localement.";
     } catch (error) {
+      if (revision !== revisions.get(status)) return;
       status.textContent = `Import bloqué : ${error.message}`;
     }
   });
@@ -411,6 +419,7 @@
       status.textContent = "Suppression locale impossible. La collection affichée est conservée et n’est pas déclarée effacée.";
       return;
     }
+    revise(status);
     fields.id.value = "ma-collection";
     fields.name.value = "Ma collection MODARYX";
     fields.description.value = "";
@@ -458,6 +467,7 @@
     }
   });
 
+  submissionImportFile.addEventListener("change", () => revise(submissionStatus));
   submissionImport.addEventListener("click", async () => {
     const file = submissionImportFile.files?.[0];
     if (!file) {
@@ -465,11 +475,14 @@
       submissionImportFile.focus();
       return;
     }
+    const revision = revise(submissionStatus);
     try {
       const value = JSON.parse(await file.text());
+      if (revision !== revisions.get(submissionStatus)) return;
       applySubmission(value);
       submissionStatus.textContent = "Brouillon importé en mémoire seulement · NON PUBLIÉ.";
     } catch (error) {
+      if (revision !== revisions.get(submissionStatus)) return;
       submissionStatus.textContent = `Import bloqué : ${error.message}`;
     }
   });
@@ -479,6 +492,7 @@
       submissionStatus.textContent = "Suppression locale impossible. Le brouillon affiché est conservé et n’est pas déclaré effacé.";
       return;
     }
+    revise(submissionStatus);
     submissionFields.id.value = "ma-contribution";
     submissionFields.kind.value = "discussion";
     submissionFields.target.value = "";

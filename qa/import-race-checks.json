@@ -1,0 +1,15 @@
+{
+  "scope": "Node VM with deferred file reads; no native file-picker or screen-reader proof",
+  "checks": [
+    "collection: edit preserves correct draft",
+    "collection: file-change preserves correct draft",
+    "collection: clear preserves correct draft",
+    "collection: newer-import preserves correct draft",
+    "collection: invalid-json preserves correct draft",
+    "submission: edit preserves correct draft",
+    "submission: file-change preserves correct draft",
+    "submission: clear preserves correct draft",
+    "submission: newer-import preserves correct draft",
+    "submission: invalid-json preserves correct draft"
+  ]
+}
