@@ -282,7 +282,17 @@
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       if (data?.schemaVersion !== 1 || data?.dataClass !== "demonstration" || !Array.isArray(data.items)) throw new Error("catalog-contract-invalid");
-      catalogItems = data.items.filter((item) => item?.public === true && ID_RE.test(String(item.id || "")));
+      const publicItems = data.items.filter((item) => item?.public === true);
+      const ids = new Set();
+      for (const item of publicItems) {
+        if (typeof item.id !== "string" || !ID_RE.test(item.id) || ids.has(item.id) ||
+            typeof item.name !== "string" || !item.name.trim() ||
+            typeof item.game?.name !== "string" || !item.game.name.trim()) {
+          throw new Error("catalog-item-invalid");
+        }
+        ids.add(item.id);
+      }
+      catalogItems = publicItems;
       catalogReady = true;
       renderItems();
       renderSubmissionTargets();

@@ -197,3 +197,11 @@ Chrome local, fiche Balanced : libellés français observés avec les états Inc
 Seize menus ouverts avec Entrée, premier lien atteint par Tab, fermeture par Échap et focus rendu au bouton ; aria-expanded passe de true à false. Observations Chrome local dans qa/mobile-menu-keyboard-checks.json, source 4f9a3da4f95151f33de32edd15d6e6391efba446. Iframe demandée à 390 px ; largeur utile 375 px mesurée sur la dernière page.
 
 L’activation cible le bouton via locator.press : ce lot ne prouve pas sa découverte initiale au clavier. Tab et Échap passent ensuite par le clavier natif. Pas de preuve téléphone physique, lecteur d’écran, ordre complet de tabulation ou zoom ajoutée. Seize parcours séparés des 108 scénarios source. Aucun runtime modifié, cache v59 inchangé. EN COURS, aucune VF.
+
+## Communauté — intégrité du catalogue local (15 septembre 2026)
+
+Les collections et contributions contrôlent maintenant les identifiants publics (type, format, unicité), les noms des créations et ceux des jeux avant affichage ou restauration des brouillons. Un catalogue mal formé bloque la validation ; aucune collection partielle n’est proposée. Les entrées non publiques restent exclues. Aucun contrat distant ou branding historique n’est migré.
+
+Cinq scénarios Node VM dans qa/community-contract-checks.json, dont six variantes mal formées et conservation des champs/sélections simulés ; ce n’est pas une preuve de restauration réelle du stockage. Chrome local : les trois créations réelles du catalogue démonstratif apparaissent dans les cases de collection et les options de contribution. Aucun brouillon enregistré ou effacé pendant cette inspection.
+
+21 assertions cache et trois refus de stockage réexécutés sans erreur. Cumul source 113 scénarios/contrôles ; cache v60. Les 70 fichiers préchargés représentent 795050 octets bruts, 518875 octets gzip estimés, sans mesure de performance réelle. EN COURS, aucune VF ; limites externes inchangées.
