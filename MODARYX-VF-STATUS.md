@@ -336,3 +336,11 @@ Correction `fa54d0be9eabe1606e1d098ad3abcf84d74d92d1` : initialisation séparée
 Chrome HTTPS : préférence réduite, aria-pressed=true et scroll auto observés sur les seize pages. Durées calculées et hauteurs consignées dans `qa/motion-browser-20260915.json`. Accueil sans débordement à 320/768/1280 ; contrôle mobile inspecté visuellement, activé par Entrée, retour au mode système conservé après navigation. État initial de préférence restauré.
 
 Source : neuf contrôles entrée PWA, vingt-cinq cache, seize pages, treize scripts et 76 empreintes ; feuille commune présente sur toutes les pages. Précache 799589 octets, CSS max 69802 : budgets respectés sans mesure CWV revendiquée. Ce lot prouve le choix explicite du site ; bascule réelle de préférence OS, inventaire exhaustif des animations, appareils physiques et lecteur d’écran restent non certifiés. VF non validée.
+
+## Menus mobiles et séparation des produits
+
+Sur `51241fc`, Chrome HTTPS à 320 px : les deux menus passent aria-expanded false → true avec Entrée puis false avec Échap. Le lien ancré Mods ferme le menu d’accueil ; le lien Créer du menu secondaire mène au Studio. Catalogue avec menu ouvert : aucun débordement. Aucun nouveau PASS de focus après Échap n’est déduit de ces seuls états ARIA.
+
+Correction éditoriale `dc0f8bf2f8be665786209ffcd932fca5ea28db5d` : bouton historique « État du Bridge OS » devient « Lien avec Nova Forge OS », libellé de secours « Bridge OS » devient « Pont vers Nova Forge OS ». Deux occurrences classées surface utilisateur actuelle ; clés, contrats et état non connecté inchangés. Activation Entrée observée : message de pont optionnel inactif, aucune connexion revendiquée. Accueil sans débordement à 320/768. Preuves dans `qa/mobile-menu-browser-20260915.json`.
+
+Six contrôles métadonnées, cinq secours HTML, vingt-cinq cache ; structure/syntaxe/76 empreintes vérifiées. Cache v75, précache 799608 octets. Les tests sans rapport n’ont pas été relancés. VF non validée ; limites de recette et capacités absentes inchangées.
