@@ -10,6 +10,12 @@
 
   let entries = [];
   let hydrated = false;
+  const validEntry = (entry) => entry &&
+    typeof entry.id === "string" && entry.id.trim().length > 0 &&
+    typeof entry.title === "string" && entry.title.trim().length > 0 &&
+    typeof entry.summary === "string" &&
+    typeof entry.href === "string" && entry.href.startsWith("./") && !entry.href.includes("..") &&
+    (entry.terms === undefined || (Array.isArray(entry.terms) && entry.terms.every((term) => typeof term === "string")));
   const normalize = (value) => String(value ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
   const makeResult = (entry) => {
     const link = document.createElement("a");
@@ -41,11 +47,14 @@
       if (!response.ok) throw new Error("search-index-unavailable");
       const payload = await response.json();
       if (payload?.schemaVersion !== 1 || payload?.indexMode !== "preindexed-local" || payload?.externalAdapterRequired !== false || !Array.isArray(payload.entries)) throw new Error("search-index-invalid");
-      entries = payload.entries.filter((entry) => entry && typeof entry.id === "string" && typeof entry.href === "string" && entry.href.startsWith("./") && !entry.href.includes(".."));
+      if (!payload.entries.every(validEntry) || new Set(payload.entries.map((entry) => entry.id)).size !== payload.entries.length) throw new Error("search-entry-invalid");
+      entries = payload.entries;
+      render();
       hydrated = true;
       input.disabled = false;
-      render();
     } catch {
+      hydrated = false;
+      input.disabled = true;
       state.textContent = "Index enrichi indisponible ; le répertoire statique reste affiché sans substitution distante.";
     }
   }
