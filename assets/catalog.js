@@ -25,6 +25,7 @@
   const viewsStateNode = document.querySelector("#catalog-views-state");
 
   let items = [];
+  let staleCatalog = false;
   let favorites = loadFavorites();
   let savedViews = loadSavedViews();
 
@@ -219,6 +220,7 @@
     countNode.textContent = `${filtered.length} ${filtered.length === 1 ? "entrée" : "entrées"}`;
     emptyNode.hidden = filtered.length !== 0;
     stateNode.textContent = onlyFavorites ? "Filtrage local des favoris activé. Aucune synchronisation distante." : "Catalogue chargé. Recherche et tri effectués dans votre navigateur.";
+    if (staleCatalog) stateNode.textContent += " Copie en cache : les informations peuvent avoir changé depuis leur enregistrement.";
   }
 
   function readPublicItems(payload) {
@@ -240,6 +242,7 @@
     try {
       const response = await fetch(DATA_URL, {headers: {Accept: "application/json"}});
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      staleCatalog = response.headers?.get('X-Modaryx-Cache') === 'offline-stale';
       const payload = await response.json();
       items = readPublicItems(payload);
       refreshGames();

@@ -8,12 +8,12 @@ class Element {
   append(...children) { this.children.push(...children); }
   replaceChildren(...children) { this.children = children; }
 }
-async function setup(payload, offline = false) {
+async function setup(payload, offline = false, stale = false) {
   const nodes = new Map();
   const get = key => { if (!nodes.has(key)) nodes.set(key, new Element()); return nodes.get(key); };
   const context = { document: { querySelector: get, createElement: () => new Element() }, fetch: async () => {
     if (offline) throw Error('offline');
-    return { ok: true, json: async () => payload };
+    return { ok: true, headers: { get: () => stale ? 'offline-stale' : null }, json: async () => payload };
   } };
   vm.runInNewContext(source, context);
   await new Promise(resolve => setImmediate(resolve));
@@ -56,7 +56,13 @@ async function setup(payload, offline = false) {
   assert.deepEqual(offline('#search-results').children, ['static directory']);
   assert.equal(offline('#site-search').disabled, true);
   checks.push('Network failure preserves static navigation');
-  const report = { result: 'PASS', scope: 'Five grouped Node VM scenarios, including four malformed entry variants; not browser proof', checks };
+  const cached = await setup(actual, false, true);
+  assert.match(cached('#search-state').textContent, /Copie en cache/);
+  cached('#site-search').value = 'dragon'; cached('#site-search').events.input();
+  assert.match(cached('#search-state').textContent, /Copie en cache/);
+  assert.doesNotMatch(get('#search-state').textContent, /Copie en cache/);
+  checks.push('Cache age warning survives local filtering and is absent from network index');
+  const report = { result: 'PASS', scope: 'Six grouped Node VM scenarios, including four malformed entry variants; not browser proof', checks };
   fs.writeFileSync(path.join(__dirname, 'search-contract-checks.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report, null, 2));
 })().catch(error => { console.error(error); process.exitCode = 1; });

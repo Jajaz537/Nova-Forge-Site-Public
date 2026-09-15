@@ -155,3 +155,9 @@ Parcours réel rejoué : créer « Recette temporaire MODARYX » avec filtre Emb
 L’application d’une vue vérifie désormais chaque option Type/Jeu/Compatibilité/Tri contre les options réellement présentes. Un choix disparu ou mal formé revient à Tous/Toutes ou Sélection ; un message explicite signale l’ajustement. La vue stockée n’est pas réécrite. Les champs absents utilisent les valeurs par défaut sans faux avertissement.
 
 Quatre scénarios source Node réussis dans qa/saved-view-options-checks.json : choix valides, choix disparus, valeurs mal formées, champs omis ; immutabilité de la vue vérifiée dans chaque cas. Trois tests de refus stockage, 21 assertions cache, structure 16 pages/13 scripts et 76 empreintes réussis. Cumul ciblé 97 scénarios/contrôles hors largeurs. Cache v55. Aucun nouveau test natif navigateur ou lecteur d’écran revendiqué. EN COURS, aucune VF.
+
+## Suite ciblée — ancienneté des données en cache (15 septembre 2026)
+
+Catalogue et recherche lisent désormais le marqueur offline-stale déjà fourni par le service worker. Une réponse ainsi marquée affiche « Copie en cache » avec explication de l’ancienneté possible ; le message survit aux filtrages locaux. Une réponse réseau normale n’est pas qualifiée d’ancienne. Aucun changement de politique réseau ou de droits de téléchargement.
+
+Un scénario ajouté à qa/search-contract-checks.json et deux scénarios source dans qa/catalog-cache-label-checks.json : transmission du marqueur, maintien après rendu favoris/recherche et absence sur réponse réseau. Simulation Node uniquement, aucune coupure réseau native exécutée. Six scénarios contrat catalogue, sept états et 21 assertions cache réexécutés ; structure 16 pages/13 scripts et 76 empreintes sans erreur. Cumul ciblé 100 scénarios/contrôles hors largeurs, cache v56. Le hors ligne HTTPS réel reste PREUVE MANQUANTE. EN COURS, aucune VF.

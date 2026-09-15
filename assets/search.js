@@ -10,6 +10,7 @@
 
   let entries = [];
   let hydrated = false;
+  let staleIndex = false;
   const validEntry = (entry) => entry &&
     typeof entry.id === "string" && entry.id.trim().length > 0 &&
     typeof entry.title === "string" && entry.title.trim().length > 0 &&
@@ -39,12 +40,14 @@
     count.textContent = `${filtered.length} ${filtered.length === 1 ? "résultat" : "résultats"}`;
     empty.hidden = filtered.length !== 0;
     state.textContent = "Recherche exécutée localement dans l’index public pré-calculé. Aucun service distant interrogé.";
+    if (staleIndex) state.textContent += " Copie en cache : les pages et descriptions peuvent avoir changé depuis son enregistrement.";
   }
 
   async function hydrate() {
     try {
       const response = await fetch(INDEX_URL, {headers: {Accept: "application/json"}});
       if (!response.ok) throw new Error("search-index-unavailable");
+      staleIndex = response.headers?.get('X-Modaryx-Cache') === 'offline-stale';
       const payload = await response.json();
       if (payload?.schemaVersion !== 1 || payload?.indexMode !== "preindexed-local" || payload?.externalAdapterRequired !== false || !Array.isArray(payload.entries)) throw new Error("search-index-invalid");
       if (!payload.entries.every(validEntry) || new Set(payload.entries.map((entry) => entry.id)).size !== payload.entries.length) throw new Error("search-entry-invalid");
