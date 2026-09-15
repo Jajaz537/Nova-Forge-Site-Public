@@ -1,7 +1,7 @@
 # MODARYX — matrice de preuves et limites
 
 15 septembre 2026. PR brouillon #12, branche `design/modaryx-premium-hd-20260914-work`.
-Source de reprise : checkpoint canonique utilisateur, complété par les preuves Git. Dernier correctif source à cette consolidation : `c518b4c4bb4cec286bf258bd00a05330b712a4ad` (liens du vérificateur, cache v78). Revérifier le HEAD avant toute écriture.
+Source de reprise : checkpoint canonique utilisateur, complété par les preuves Git. Dernier correctif source à cette consolidation : `5d0f3de054d17b03b4795a1cd9168bf3d92c55f0` (statut de détection Profils, cache v80). Revérifier le HEAD avant toute écriture.
 
 Cette matrice remplace les anciens « prochains blocs » devenus partiellement acquis ; elle ne remplace pas les résultats bruts et ne réattribue pas leurs mesures au dernier commit. Les dates des preuves ne constituent pas un nouveau passage global.
 
@@ -17,6 +17,7 @@ Cette matrice remplace les anciens « prochains blocs » devenus partiellement a
 | Profil local et essai manuel | `profile-browser-20260915.json` | Libellés français, trois réponses UI, fermeture et reflow ouvert 320/768. Aucun benchmark de jeu effectué. |
 | Variantes de contribution | `submission-variants-browser-20260915.json` | Avis : notes 0/6/2,5 refusées, 5 acceptée ; commentaire : parent obligatoire ; retour Discussion sans note/parent dans le JSON. |
 | Aperçus longs Communauté | `long-preview-browser-20260915.json` | Saisie 1200/8000 caractères, texte multilingue et balises littérales ; défilement clavier jusqu’en bas, reflow 320/768. Aucun import/export testé ici. |
+| Détection Profils | `profile-detection-checks.json`, `profile-capabilities-browser-20260915.json` | Sept cas source ; navigateur : WebAuthn indisponible seulement, reflow 320/768. Détection partielle/complète non exercée nativement. |
 | FAQ et aperçus JSON | `disclosure-browser-20260915.json` | Six panneaux : Entrée ouvre, Espace ferme ; Tab accède aux deux aperçus JSON. Quatre mesures ouvertes à 320/768 sans débordement. |
 | Menus et séparation OS/web | `mobile-menu-browser-20260915.json` | Ouverture/fermeture et parcours ciblés ; lien OS optionnel inactif. |
 | Mouvement réduit | `motion-browser-20260915.json` | Préférence explicite propagée aux 16 pages, CSS calculé observé ; préférence système physique non basculée. |

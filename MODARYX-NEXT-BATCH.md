@@ -1,6 +1,6 @@
 # MODARYX — prochain bloc et conditions de clôture
 
-Actualisé le 15 septembre 2026 après `c518b4c4bb4cec286bf258bd00a05330b712a4ad`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
+Actualisé le 15 septembre 2026 après `5d0f3de054d17b03b4795a1cd9168bf3d92c55f0`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
 
 ## Acquis à conserver
 
@@ -10,6 +10,8 @@ Actualisé le 15 septembre 2026 après `c518b4c4bb4cec286bf258bd00a05330b712a4ad
 - Budgets statiques contrôlés ; ils ne constituent pas un profiling utilisateur. Ne pas relancer les suites inchangées sans risque concret.
 
 ## Prochains blocs réellement ouverts
+
+Les parcours FAQ/JSON, contenus longs, variantes Avis/Commentaire et liens du vérificateur ont maintenant des preuves ciblées dans la matrice. Ne pas les rejouer sans modification pertinente. Pour Profils, les branches WebAuthn disponibles/partielles nécessitent un navigateur offrant réellement ces API ; ne pas simuler leur disponibilité pour revendiquer une preuve native.
 
 1. EN COURS — compléter la matrice des états/parcours uniquement là où les preuves existantes ne couvrent pas le comportement ; isoler tout défaut avant correction.
 2. PREUVE MANQUANTE — lecteur d’écran natif, zoom observé 200/400 %, appareils physiques et autres moteurs navigateur. L’environnement présent ne permet pas de les certifier.

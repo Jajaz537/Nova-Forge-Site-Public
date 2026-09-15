@@ -404,3 +404,9 @@ Cache v79 : 69 fichiers uniques, 797554 octets bruts contre 799939 ; économie s
 Sur `01f2a9e5a70a1740138b3a33df72134ae4d0921e`, le statut final disait « Capacités locales vérifiées » même lorsqu’une API manquait ou rejetait la requête. Le résumé distingue maintenant « Détection partielle — résultat inconnu » de « Détection locale terminée ». Les résultats individuels restent inchangés ; aucune passkey ni authentification réelle n’est certifiée.
 
 `qa/check-profile-detection.cjs` : sept scénarios simulés réussis (absence WebAuthn, réponses true/false, absence/rejet de chaque méthode). 25 assertions cache, structure des 16 pages, 13 scripts et 76 empreintes vérifiés. Précache v80 : 797664 octets. Ces preuves sont source/Node, pas une recette matérielle de connexion. VF NON VALIDÉE.
+
+## Profils — limite native et rendu, 15 septembre 2026
+
+`qa/profile-capabilities-browser-20260915.json` : l’environnement Chrome HTTPS ne fournit pas WebAuthn ; statut « WebAuthn indisponible » et deux capacités non testables observés. Deux mesures à 320/768 sans débordement. Les branches nouvelles détection partielle/terminée restent testées en Node uniquement : aucune fausse preuve native ajoutée. Aucun compte ni clé créé.
+
+Matrice et prochain bloc actualisés après `5d0f3de054d17b03b4795a1cd9168bf3d92c55f0`. Ne pas tourner en boucle sur les parcours déjà couverts ou les API indisponibles. Les capacités produit absentes et les preuves externes restent ouvertes. VF NON VALIDÉE.
