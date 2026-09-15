@@ -81,15 +81,22 @@
   function applySavedView(view) {
     if (!view?.filters) return;
     const filters = view.filters;
+    let adjusted = false;
+    const restoreOption = (select, value, fallback) => {
+      const available = typeof value === "string" && [...select.options].some((option) => option.value === value);
+      select.value = available ? value : fallback;
+      if (!available && value !== undefined && value !== fallback) adjusted = true;
+    };
     queryInput.value = typeof filters.q === "string" ? filters.q : "";
-    kindSelect.value = typeof filters.kind === "string" ? filters.kind : "";
-    if (typeof filters.game === "string" && [...gameSelect.options].some((option) => option.value === filters.game)) gameSelect.value = filters.game;
-    else gameSelect.value = "";
-    evidenceSelect.value = typeof filters.evidence === "string" ? filters.evidence : "";
-    sortSelect.value = typeof filters.sort === "string" ? filters.sort : "featured";
+    restoreOption(kindSelect, filters.kind, "");
+    restoreOption(gameSelect, filters.game, "");
+    restoreOption(evidenceSelect, filters.evidence, "");
+    restoreOption(sortSelect, filters.sort, "featured");
     favoritesOnly.checked = filters.favoritesOnly === true;
     if (items.length) render();
-    if (viewsStateNode) viewsStateNode.textContent = `Vue « ${view.name} » appliquée localement.`;
+    if (viewsStateNode) viewsStateNode.textContent = adjusted
+      ? `Vue « ${view.name} » appliquée avec les filtres disponibles. Les choix devenus indisponibles ont été réinitialisés ; la vue enregistrée reste inchangée.`
+      : `Vue « ${view.name} » appliquée localement.`;
   }
 
   function saveCurrentView() {

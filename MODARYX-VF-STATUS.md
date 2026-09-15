@@ -149,3 +149,9 @@ Neuf contrôles d’entrée PWA et 21 assertions cache réexécutés, structure 
 Chrome local avant correction : supprimer la vue sélectionnée avec Entrée désactive le bouton et laisse BODY actif. Après correction, suppression réussie depuis le bouton actif → focus transféré au sélecteur des vues. Le transfert intervient seulement après réussite du stockage, sans voler le focus lors d’un autre mode de déclenchement.
 
 Parcours réel rejoué : créer « Recette temporaire MODARYX » avec filtre Ember, réinitialiser, sélectionner puis appliquer la vue → recherche Ember / 1 entrée ; supprimer avec Entrée → catalog-saved-view actif. Vue de recette supprimée, sélecteur revenu à Choisir une vue…, filtres réinitialisés. Aucune vue préexistante présente ni supprimée. Trois tests source de refus du stockage, 21 assertions cache, structure 16 pages/13 scripts et 76 empreintes réussis. Cumul de scénarios automatisés inchangé (93), cache v54. Cette preuve clavier Chrome ne vaut pas test de lecteur d’écran. EN COURS, aucune VF.
+
+## Suite ciblée — options anciennes des vues (15 septembre 2026)
+
+L’application d’une vue vérifie désormais chaque option Type/Jeu/Compatibilité/Tri contre les options réellement présentes. Un choix disparu ou mal formé revient à Tous/Toutes ou Sélection ; un message explicite signale l’ajustement. La vue stockée n’est pas réécrite. Les champs absents utilisent les valeurs par défaut sans faux avertissement.
+
+Quatre scénarios source Node réussis dans qa/saved-view-options-checks.json : choix valides, choix disparus, valeurs mal formées, champs omis ; immutabilité de la vue vérifiée dans chaque cas. Trois tests de refus stockage, 21 assertions cache, structure 16 pages/13 scripts et 76 empreintes réussis. Cumul ciblé 97 scénarios/contrôles hors largeurs. Cache v55. Aucun nouveau test natif navigateur ou lecteur d’écran revendiqué. EN COURS, aucune VF.
