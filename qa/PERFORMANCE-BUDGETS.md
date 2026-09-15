@@ -83,3 +83,9 @@ Le navigateur de recette permet d’inspecter le rendu et le DOM ; il n’expose
 949 octets de commentaires internes déplacés depuis les deux feuilles communes vers `CSS-SOURCE-NOTES.md`. Comparaison contre 93527f4 : les deux fichiers sont exactement identiques une fois ces seuls commentaires retirés. Aucune règle, valeur ou ordre de cascade modifié. Catalogue : 69776 octets CSS ; les seize pages respectent désormais la cible de 70000. Précache : 796723 octets bruts, 518825 gzip estimés. 25 assertions cache et 76 empreintes vérifiées. Ceci ferme l’écart de taille statique, sans prouver un gain de vitesse utilisateur.
 
 `responsive-review.html` est un outil QA séparé, sans lien dans la navigation publique, sans référencement demandé et sans ajout au précache. Il ouvre les seize pages autorisées dans un cadre de largeur réglable pour poursuivre la recette sur l’aperçu HTTPS lorsque le serveur local est inaccessible. Sa présence seule n’est pas une preuve responsive.
+
+## Première mesure navigateur HTTPS — 15 septembre 2026
+
+Seize navigations réelles dans Chrome, après a1437aa, enregistrées dans `https-browser-diagnostics-20260915.json`. Un contrôleur service worker activé est observé pour chaque page. La mesure Navigation Timing de load est comprise entre 255,5 et 621,6 ms dans cette session séquentielle, sans cache froid ni limitation réseau contrôlés. Ce n'est pas une mesure de complétude visuelle, de chargement des éléments lazy, de données asynchrones, ni une preuve LCP/CLS/INP. Aucune conclusion de performance finale.
+
+Ce lot ferme la vérification du fonctionnement des diagnostics et de la présence d'un contrôleur actif sur l'aperçu HTTPS. Première installation, changement de version, navigation réellement hors ligne et reprise restent PREUVE MANQUANTE.

@@ -245,3 +245,14 @@ Suivi du même lot : textes et grille desktop observés sur l’aperçu HTTPS, d
 EN COURS. Les tailles statiques restent sous 800000 octets précachés, mais le Catalogue dépasse la cible CSS de 725 octets. La consultation rapide des quinze routes secondaires confirme leurs titres et repères DOM ; une propriété de feuille de style non exploitable dans l’outil a été écartée comme preuve de chargement. Elle ne remplace ni une comparaison visuelle exhaustive ni la recette responsive.
 
 PREUVE MANQUANTE : responsive des derniers textes/grille, états visuels exhaustifs, lecteur d’écran, zoom natif, appareils physiques, multi-navigateurs, performance réelle et cycle PWA HTTPS hors ligne/mise à jour. Hubs, corpus et services absents restent consignés dans le registre anti-oubli. Aucune validation globale finale ni VF déclarée.
+
+## Reprise HTTPS après a1437aa — 15 septembre 2026
+
+État actuel : **EN COURS, aucune VF**. Les paragraphes antérieurs restent des observations datées ; les nouvelles preuves ci-dessous ne valident pas rétroactivement tous les états.
+
+- Budget CSS Catalogue fermé au commit 0747005 : 69776 octets, précache 796723 octets. Aucun changement de règle CSS.
+- 36 mesures responsive ajoutées au commit a1437aa pour Communauté, Profils, Sécurité et Téléchargements, neuf largeurs par page : `qa/responsive-changed-pages-20260915.json`.
+- `qa/https-browser-diagnostics-20260915.json` : seize navigations Chrome sur l'aperçu HTTPS, données Navigation Timing réelles et contrôle par un service worker activé sur les seize pages. Événement load observé entre 255,5 et 621,6 ms, un échantillon par page dans cette session. Cache non contrôlé ; aucun gain de performance, CWV, LCP/CLS/INP ou résultat appareil physique déduit. Aucune preuve de cycle hors ligne/mise à jour ajoutée.
+- `qa/verify-browser-20260915.json` : fichier témoin abc effectivement sélectionné et haché dans Chrome. Correspondance, divergence, invalidation après saisie, hash mal formé avec focus/aria-invalid et calcul seul observés. Absence de fichier également vérifiée. L'effacement par le pilote n'avait pas changé la valeur ; essai écarté puis effacement clavier réellement observé. Aucune preuve de lecteur d'écran ou de gros fichiers ajoutée.
+
+La recette HTTPS est donc accessible ; l'ancien blocage du serveur local ne bloque plus ces contrôles. Restent notamment : lecteur d'écran, zoom natif, appareils physiques/multi-navigateurs, états visuels exhaustifs, réseau/cache froid, cycle PWA hors ligne et mise à jour. Hubs et services non livrés demeurent explicitement ouverts dans l'anti-oubli. Aucun code produit ni infrastructure modifié par cette reprise de preuves.
