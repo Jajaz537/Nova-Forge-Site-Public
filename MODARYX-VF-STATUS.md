@@ -221,3 +221,9 @@ Sauvegarde et export de collection dirigent maintenant le focus vers l’identif
 Cinq scénarios Node VM dans qa/collection-focus-checks.json. Chrome local : nom remplacé temporairement par des espaces, tentative de sauvegarde bloquée, focus sur Nom et aria-invalid=true observés ; valeur initiale remise et marqueur retiré à la saisie. Aucune sauvegarde réussie ni suppression pendant cet essai. Contrat Communauté (5), exports (6), cache (21), structure 16 pages/13 scripts et 76 empreintes vérifiés sans erreur.
 
 Cumul source 123 scénarios/contrôles ; cache v62. EN COURS, aucune VF ; lecteur d’écran, appareils physiques, zoom natif, performances réelles et hors ligne HTTPS restent sans preuve nouvelle.
+
+## Communauté — états vide et indisponible (15 septembre 2026)
+
+Un catalogue vide explique désormais la possibilité de préparer une collection vide. Le sélecteur des contributions distingue absence de contenu, indisponibilité et choix disponibles. Une erreur de chargement explique la reprise et la conservation de la copie locale ; le terme technique fail-closed disparaît de ces messages publics. Aucun droit de publication ou téléchargement modifié.
+
+Trois scénarios de rendu Node VM dans qa/community-empty-checks.json : vide valide, chargement échoué et retour des choix. Contrat Communauté (5), cache (21), structure 16 pages/13 scripts et 76 empreintes vérifiés. Aucune panne réseau réelle ni nouvelle preuve navigateur revendiquée. Cumul source 126, cache v63. EN COURS, aucune VF ; les preuves externes restent ouvertes.

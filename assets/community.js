@@ -116,6 +116,14 @@
     const legend = document.createElement("legend");
     legend.textContent = "Contenus du catalogue";
     itemList.replaceChildren(legend);
+    if (!catalogItems.length) {
+      const message = document.createElement("p");
+      message.className = "muted";
+      message.textContent = catalogReady
+        ? "Aucun contenu disponible dans le catalogue. Vous pouvez préparer une collection vide."
+        : "Le catalogue n’est pas disponible. Rechargez la page pour réessayer ; votre copie locale est conservée.";
+      itemList.append(message);
+    }
     for (const item of catalogItems) {
       const label = document.createElement("label");
       label.className = "collection-choice";
@@ -185,7 +193,7 @@
     submissionFields.target.replaceChildren();
     const empty = document.createElement("option");
     empty.value = "";
-    empty.textContent = "Choisir un contenu";
+    empty.textContent = !catalogReady ? "Catalogue indisponible" : catalogItems.length ? "Choisir un contenu" : "Aucun contenu disponible";
     submissionFields.target.append(empty);
     for (const item of catalogItems) {
       const option = document.createElement("option");
@@ -331,8 +339,8 @@
       catalogItems = [];
       renderItems();
       renderSubmissionTargets();
-      status.textContent = "Catalogue public indisponible : collection locale bloquée en mode fail-closed.";
-      submissionStatus.textContent = "Catalogue public indisponible : contribution locale bloquée en mode fail-closed.";
+      status.textContent = "Catalogue indisponible. Rechargez la page pour réessayer. La copie locale de votre collection est conservée.";
+      submissionStatus.textContent = "Catalogue indisponible : choisissez un contenu après son chargement pour valider une contribution. Votre copie locale est conservée.";
     }
   }
 
