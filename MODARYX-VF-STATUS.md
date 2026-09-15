@@ -191,3 +191,9 @@ Ce contrôle clôt uniquement la recette Chrome desktop de ce parcours d’évit
 Fiches projet : les codes techniques targets/supports/tested-on sont présentés comme Cible déclarée/Compatibilité déclarée/Environnement d’évaluation déclaré. Les six types du schéma ont un libellé français ; les types de contenu affichent Mod/Pack/Expérience/Outil/Ressource. Les trois cartes HTML de secours et l’affichage enrichi concordent. Les valeurs JSON, schémas et niveaux de preuve ne changent pas ; aucun test réel n’est déduit du seul type tested-on.
 
 Chrome local, fiche Balanced : libellés français observés avec les états Inconnue/Estimée et leurs limites. Quatre scénarios de rendu, 21 assertions cache, structure 16 pages/13 scripts et 76 empreintes réussis. Cumul source inchangé (108), cache v59. Pas de validation exhaustive de localisation/lecteur d’écran ajoutée. EN COURS, aucune VF.
+
+## Consolidation — menus étroits au clavier (15 septembre 2026)
+
+Seize menus ouverts avec Entrée, premier lien atteint par Tab, fermeture par Échap et focus rendu au bouton ; aria-expanded passe de true à false. Observations Chrome local dans qa/mobile-menu-keyboard-checks.json, source 4f9a3da4f95151f33de32edd15d6e6391efba446. Iframe demandée à 390 px ; largeur utile 375 px mesurée sur la dernière page.
+
+L’activation cible le bouton via locator.press : ce lot ne prouve pas sa découverte initiale au clavier. Tab et Échap passent ensuite par le clavier natif. Pas de preuve téléphone physique, lecteur d’écran, ordre complet de tabulation ou zoom ajoutée. Seize parcours séparés des 108 scénarios source. Aucun runtime modifié, cache v59 inchangé. EN COURS, aucune VF.
