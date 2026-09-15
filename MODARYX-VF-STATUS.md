@@ -386,3 +386,9 @@ Preuve : `qa/disclosure-browser-20260915.json`. Aucun code produit, cache ou inf
 `qa/long-preview-browser-20260915.json`, source `8daaf440c7da1d1e8b8aa382242e7c31791390d2` : description saisie de 1200 caractères sans espaces et contribution de 8000 caractères multilingues avec balises littérales. Les aperçus ne créent aucun élément enfant ; le JSON reste du texte. Ctrl+Fin atteint le bas du panneau de contribution après stabilisation (1113/1113 px). Deux mesures avec panneaux ouverts à 320/768 sans débordement horizontal.
 
 Aucune sauvegarde effectuée ; rechargement final confirme description, titre et corps vides comme à l’entrée. Aucun code produit modifié, aucune nouvelle recette d’import/export, RTL complet ou lecteur d’écran revendiquée. **VF NON VALIDÉE.**
+
+## Contributions — variantes natives, 15 septembre 2026
+
+Source `653bec05706d26cc975142f1ff3de12b1b684d8b`, Chrome HTTPS : notes 0, 6 et 2,5 refusées avec focus/aria-invalid sur la note ; 5 acceptée. Parent vide du commentaire refusé avec focus ; parent au format valide accepté. Le JSON commentaire exclut titre/note ; le retour Discussion exclut note/parent. L’existence réelle d’une contribution parente n’est pas vérifiée par ce formulaire local.
+
+Sept observations dans `qa/submission-variants-browser-20260915.json`. Aucun brouillon sauvegardé ni publié, rechargement final revenu à Discussion avec champs vides. Aucun code produit modifié. **VF NON VALIDÉE**, limites externes et capacités absentes maintenues.
