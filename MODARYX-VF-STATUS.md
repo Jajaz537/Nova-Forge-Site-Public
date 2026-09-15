@@ -272,3 +272,13 @@ Corrections `05d8e79` puis `c7d91ee` : champs Studio alignés, catalogue tablett
 Revue desktop des seize pages et preuves : `qa/finish-line/README.md`. 22 scripts source réussis ; 32 contrôles finaux à 320/960 sans débordement et 15 contrôles ciblés des trois compositions corrigées. Budgets statiques respectés : CSS max 69776, JS max 26968, précache 797096 octets. 19 captures archivées hors précache.
 
 Cycle PWA réellement déconnecté, lecteur d’écran, zoom natif, appareils physiques et CWV restent PREUVE MANQUANTE. Les fonctions absentes du registre anti-oubli restent également ouvertes : ce ne sont pas uniquement des preuves externes. **VF NON VALIDÉE ; PR brouillon.**
+
+## Studio — erreurs complètes et correction progressive, 15 septembre 2026
+
+Correction c2b251b54ef306c4ea1ed90c8f9a229cd78a7af2 : une soumission vide annonçait huit erreurs mais ne présentait que les trois premières. Liste complète construite avec textContent, conteneur sémantiquement compatible, champs nativement invalides marqués aria-invalid après demande de validation et marqueurs retirés après correction. Règles métier et sauvegardes inchangées ; cache v70.
+
+Chrome HTTPS : validation par Entrée, focus au premier champ invalide, huit erreurs/huit marqueurs, puis sept après correction d’un champ, puis message de conformité du format et zéro marqueur après complétion. Aucun brouillon enregistré ni publié. Trois mesures du même état d’erreur à 320/390/768 : aucun débordement horizontal. Liste complète inspectée visuellement à 768. Preuves : qa/studio-errors-browser-20260915.json.
+
+Micro-preuves source : nouveau test du rendu 5 assertions, reçus 6, exports 6, cache 25 ; structure 16 pages, syntaxe 13 scripts et 76 empreintes sans erreur. Précache 797776 octets. Ces résultats ne valent pas certification par lecteur d’écran ni preuve de zoom natif.
+
+EN COURS : VF non validée. Les preuves externes et fonctions non livrées du registre anti-oubli restent ouvertes. Aucun changement de direction Loup/Dragon, d’OS ou d’infrastructure.
