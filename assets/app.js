@@ -12,6 +12,7 @@
   let catalogueItems = [];
   let catalogueState = 'loading';
   let catalogueRequestPending = false;
+  let catalogueStale = false;
 
   function makeBadge(text, neutral = true) {
     const badge = document.createElement('span');
@@ -60,6 +61,12 @@
       return article;
     }));
 
+    if (catalogueState === 'ready' && catalogueStale) {
+      const notice = document.createElement('p');
+      notice.className = 'muted';
+      notice.textContent = 'Copie en cache : les informations du catalogue peuvent avoir changé depuis leur enregistrement.';
+      catalogRoot.append(notice);
+    }
     if (!rows.length) {
       const empty = document.createElement('p');
       empty.className = 'muted';
@@ -95,6 +102,7 @@
     try {
       const response = await fetch(new URL(CATALOGUE_URL, document.baseURI), { credentials: 'same-origin' });
       if (!response.ok) throw new Error('catalogue-unavailable');
+      catalogueStale = response.headers?.get('X-Modaryx-Cache') === 'offline-stale';
       const payload = await response.json();
       if (payload?.schemaVersion !== 1 || payload?.dataClass !== 'demonstration' || !Array.isArray(payload.items)) throw new Error('catalogue-contract-invalid');
       catalogueState = 'ready';

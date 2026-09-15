@@ -1,12 +1,13 @@
 {
   "status": "PASS",
-  "scope": "Six actual-source Node scenarios, not network throttling or screen-reader certification",
+  "scope": "Seven actual-source Node scenarios, not network throttling or screen-reader certification",
   "checks": [
     "Pending load is busy/loading, then renders three cards and enables search",
     "Valid empty catalogue is not reported as an error",
     "Invalid contract fails closed with explicit retry",
     "Network failure retries once during concurrent activation and restores search focus",
     "Unmatched filter has a distinct empty-results state",
-    "Repeated failure restores focus to the replacement retry button"
+    "Repeated failure restores focus to the replacement retry button",
+    "Cache notice survives filtering including empty results"
   ]
 }

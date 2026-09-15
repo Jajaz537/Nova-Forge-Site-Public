@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-15T02:12:23.092Z",
+  "measuredAt": "2026-09-15T02:22:18.442Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -87,7 +87,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "76453dd78fbc4cd0e442d4dd0e04abf8547b617de2de37a3a19fc3bc2279ae0c",
+  "serviceWorkerSha256": "93c75336bac4dfabba531830ab891f95733bff2342a13c028b4bdb0aad587867",
   "probes": [
     {
       "url": "/catalog.html",
@@ -283,8 +283,8 @@
     "uniqueLocalFiles": 70,
     "missing": [],
     "files": 70,
-    "rawBytes": 792713,
-    "gzipEstimateBytes": 518196
+    "rawBytes": 793561,
+    "gzipEstimateBytes": 518454
   },
   "pages": [
     {
@@ -297,8 +297,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 21520,
-        "gzipEstimateBytes": 6704
+        "rawBytes": 21942,
+        "gzipEstimateBytes": 6809
       }
     },
     {
@@ -353,8 +353,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 21520,
-        "gzipEstimateBytes": 6704
+        "rawBytes": 21942,
+        "gzipEstimateBytes": 6809
       }
     },
     {
@@ -367,8 +367,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 26508,
-        "gzipEstimateBytes": 8413
+        "rawBytes": 26930,
+        "gzipEstimateBytes": 8518
       }
     },
     {
@@ -381,8 +381,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 21520,
-        "gzipEstimateBytes": 6704
+        "rawBytes": 21942,
+        "gzipEstimateBytes": 6809
       }
     },
     {
@@ -395,8 +395,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 22560,
-        "gzipEstimateBytes": 7149
+        "rawBytes": 22982,
+        "gzipEstimateBytes": 7254
       }
     },
     {
@@ -423,8 +423,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 9277,
-        "gzipEstimateBytes": 3384
+        "rawBytes": 9703,
+        "gzipEstimateBytes": 3537
       }
     },
     {
@@ -437,8 +437,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 9277,
-        "gzipEstimateBytes": 3384
+        "rawBytes": 9703,
+        "gzipEstimateBytes": 3537
       }
     },
     {
@@ -451,8 +451,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 9277,
-        "gzipEstimateBytes": 3384
+        "rawBytes": 9703,
+        "gzipEstimateBytes": 3537
       }
     },
     {
@@ -493,8 +493,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 21520,
-        "gzipEstimateBytes": 6704
+        "rawBytes": 21942,
+        "gzipEstimateBytes": 6809
       }
     },
     {
@@ -507,8 +507,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 26092,
-        "gzipEstimateBytes": 8409
+        "rawBytes": 26514,
+        "gzipEstimateBytes": 8514
       }
     }
   ],

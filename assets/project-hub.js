@@ -121,6 +121,12 @@
         return;
       }
       renderProject(item, graph);
+      if ([catalogResponse, graphResponse].some((response) => response.headers?.get('X-Modaryx-Cache') === 'offline-stale')) {
+        const notice = document.createElement('p');
+        notice.className = 'muted';
+        notice.textContent = 'Copie en cache : les informations du projet ou de ses relations peuvent avoir changé depuis leur enregistrement.';
+        state.insertAdjacentElement('afterend', notice);
+      }
     } catch {
       state.textContent = navigator.onLine ? "Données enrichies indisponibles ; le fallback statique reste affiché." : "Hors ligne : le fallback statique et les données déjà mises en cache restent prioritaires.";
       renderFavorite(root.dataset.projectId);

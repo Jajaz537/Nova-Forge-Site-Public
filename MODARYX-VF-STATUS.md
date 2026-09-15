@@ -161,3 +161,9 @@ Quatre scénarios source Node réussis dans qa/saved-view-options-checks.json : 
 Catalogue et recherche lisent désormais le marqueur offline-stale déjà fourni par le service worker. Une réponse ainsi marquée affiche « Copie en cache » avec explication de l’ancienneté possible ; le message survit aux filtrages locaux. Une réponse réseau normale n’est pas qualifiée d’ancienne. Aucun changement de politique réseau ou de droits de téléchargement.
 
 Un scénario ajouté à qa/search-contract-checks.json et deux scénarios source dans qa/catalog-cache-label-checks.json : transmission du marqueur, maintien après rendu favoris/recherche et absence sur réponse réseau. Simulation Node uniquement, aucune coupure réseau native exécutée. Six scénarios contrat catalogue, sept états et 21 assertions cache réexécutés ; structure 16 pages/13 scripts et 76 empreintes sans erreur. Cumul ciblé 100 scénarios/contrôles hors largeurs, cache v56. Le hors ligne HTTPS réel reste PREUVE MANQUANTE. EN COURS, aucune VF.
+
+## Suite ciblée — cache sur accueil et fiches (15 septembre 2026)
+
+L’accueil conserve un avertissement de copie en cache après filtrage, y compris sans résultat. Les fiches projet affichent une note séparée si catalogue ou graphe de relations provient du cache ancien ; une action Favori ne peut plus effacer cette qualification. Réponse réseau seule : aucune qualification d’ancienneté inventée.
+
+Un scénario supplémentaire dans qa/home-catalogue-checks.json et trois dans qa/project-cache-label-checks.json ; tests source Node uniquement. Trois refus stockage, six métadonnées publiques et 21 assertions cache réexécutés ; structure 16 pages/13 scripts et 76 empreintes sans erreur. Cumul ciblé 104 scénarios/contrôles hors largeurs, cache v57. Hors ligne HTTPS réel toujours PREUVE MANQUANTE. EN COURS, aucune VF.
