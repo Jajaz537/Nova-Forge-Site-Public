@@ -10,6 +10,7 @@ Cette matrice remplace les anciens « prochains blocs » devenus partiellement a
 | 16 pages, composition Loup/Dragon | `finish-line/README.md`, 19 captures | Revue desktop documentée, défauts Studio/Catalogue/Projets corrigés. Tous les états visuels ne sont pas certifiés. |
 | Reflow initial des 16 pages | `finish-line/final-reflow.json` | 32 mesures à 320/960 ; contrôles ciblés postérieurs dans les dossiers ci-dessous. Ni zoom natif ni téléphone physique. |
 | Studio, erreurs et accès correctif | `studio-errors-browser-20260915.json`, `studio-error-navigation-20260915.json` | Liste complète, correction progressive et accès clavier aux champs observés. |
+| Imports différés | `import-race-checks.json`, `studio-import-state-checks.json` | Révisions de brouillon : protection contre les lectures périmées en simulation Node. Course temporelle native non prouvée. |
 | Brouillons Studio/Communauté | `draft-edit-state-20260915.json`, `draft-persistence-browser-20260915.json` | Édition non sauvegardée signalée ; validation, sauvegarde et rechargement ciblés. Pas de serveur de publication. |
 | Catalogue, favoris/vues | `catalog-persistence-browser-20260915.json` | Persistance et actions ciblées, focus de retrait/suppression ; données de test retirées. |
 | Fiches, droits et favoris | `project-browser-20260915.json` | Trois allers-retours favoris, droits non inventés, six mesures de reflow. Aucun artefact distribué. |

@@ -31,6 +31,7 @@
   let schema = null;
   let lastManifest = null;
   let draftEdited = false;
+  let draftRevision = 0;
   let validationRequested = false;
 
   const read = (key) => String(fields[key]?.value ?? "").trim();
@@ -320,12 +321,17 @@
       importFile.focus();
       return;
     }
+    draftEdited = true;
+    const revision = ++draftRevision;
     try {
       await schemaReady;
+      if (revision !== draftRevision) return;
       const imported = JSON.parse(await file.text());
+      if (revision !== draftRevision) return;
       applyManifest(imported);
       status.textContent = "Brouillon importé localement et validé. Il n’est ni sauvegardé ni publié tant que vous ne le demandez pas explicitement.";
     } catch (error) {
+      if (revision !== draftRevision) return;
       status.textContent = `Import refusé : ${error.message}`;
     }
   });
@@ -339,6 +345,7 @@
       return;
     }
     draftEdited = true;
+    draftRevision++;
     form.reset();
     validationRequested = false;
     importFile.value = "";
@@ -375,6 +382,7 @@
 
   function markDraftEdited(event) {
     draftEdited = true;
+    draftRevision++;
     render();
     if (event.target.type === "file") return;
     const message = "Modifications non sauvegardées · validez ou sauvegardez à nouveau · NON PUBLIÉ.";
