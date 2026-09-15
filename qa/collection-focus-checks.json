@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "scope": "Five grouped Node VM source scenarios, not assistive technology proof",
+  "checks": [
+    "Whitespace name stays passive in preview and receives focus only after explicit validation",
+    "Identifier and oversized description errors target their fields and clear prior markers",
+    "Valid collection preserves selected content without focus movement",
+    "Successful import clears stale invalid markers",
+    "Unavailable catalogue is a system error and does not mislabel a user field"
+  ]
+}

@@ -213,3 +213,11 @@ Une validation, sauvegarde ou tentative d’export invalide dirige maintenant le
 Cinq scénarios source Node VM dans qa/submission-focus-checks.json : aperçu passif, cible manquante, contenu blanc, note/parent conditionnels et retour à un brouillon valide. Chrome local : validation avec cible absente, focus sur Contenu ciblé, aria-invalid=true et message « Choisissez un contenu du catalogue public » observés. Aucun enregistrement local effectué. Lecture par synthèse vocale non exécutée.
 
 Contrat Communauté (5), exports (6), cache (21), structure 16 pages/13 scripts et 76 empreintes vérifiés. Cumul source 118 scénarios/contrôles ; cache v61. EN COURS, aucune VF. Les essais externes et la revue exhaustive restent ouverts.
+
+## Collections — focus des erreurs (15 septembre 2026)
+
+Sauvegarde et export de collection dirigent maintenant le focus vers l’identifiant, le nom ou la description invalide et activent aria-invalid. L’aperçu reste passif. La saisie, un import valide ou une suppression locale réussie retirent les anciens marqueurs. Une indisponibilité du catalogue reste une erreur système, sans désigner un champ utilisateur comme fautif.
+
+Cinq scénarios Node VM dans qa/collection-focus-checks.json. Chrome local : nom remplacé temporairement par des espaces, tentative de sauvegarde bloquée, focus sur Nom et aria-invalid=true observés ; valeur initiale remise et marqueur retiré à la saisie. Aucune sauvegarde réussie ni suppression pendant cet essai. Contrat Communauté (5), exports (6), cache (21), structure 16 pages/13 scripts et 76 empreintes vérifiés sans erreur.
+
+Cumul source 123 scénarios/contrôles ; cache v62. EN COURS, aucune VF ; lecteur d’écran, appareils physiques, zoom natif, performances réelles et hors ligne HTTPS restent sans preuve nouvelle.

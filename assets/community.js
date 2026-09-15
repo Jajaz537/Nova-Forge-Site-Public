@@ -77,14 +77,23 @@
     }
   }
 
-  function buildCollection() {
+  function buildCollection(focusInvalid = false) {
+    if (focusInvalid) Object.values(fields).forEach(field => field.removeAttribute("aria-invalid"));
     if (!catalogReady) throw new Error("Catalogue indisponible ou en cours de chargement. Réessayez après son chargement.");
+    const check = (valid, key, message) => {
+      if (valid) return;
+      if (focusInvalid) {
+        fields[key].setAttribute("aria-invalid", "true");
+        fields[key].focus();
+      }
+      throw new Error(message);
+    };
     const id = String(fields.id?.value || "").trim().toLowerCase();
     const name = String(fields.name?.value || "").trim();
     const description = String(fields.description?.value || "").trim();
-    if (!ID_RE.test(id)) throw new Error("Identifiant : 2 à 128 caractères minuscules, chiffres, point, tiret ou underscore.");
-    if (!name || name.length > 160) throw new Error("Nom requis, 160 caractères maximum.");
-    if (description.length > 1200) throw new Error("Description : 1200 caractères maximum.");
+    check(ID_RE.test(id), "id", "Identifiant : 2 à 128 caractères minuscules, chiffres, point, tiret ou underscore.");
+    check(name && name.length <= 160, "name", "Nom requis, 160 caractères maximum.");
+    check(description.length <= 1200, "description", "Description : 1200 caractères maximum.");
     const known = new Set(catalogItems.map((item) => item.id));
     const itemIds = [...selectedIds].filter((idValue) => known.has(idValue)).sort();
     const collection = {schemaVersion: 1, id, name, itemIds, syncState: "local-only", visibility: "private-local", ownerProfileId: null};
@@ -139,6 +148,7 @@
     fields.id.value = value.id;
     fields.name.value = value.name;
     fields.description.value = value.description || "";
+    Object.values(fields).forEach(field => field.removeAttribute("aria-invalid"));
     selectedIds = new Set(value.itemIds);
     renderItems();
     renderPreview();
@@ -326,11 +336,14 @@
     }
   }
 
-  form.addEventListener("input", renderPreview);
+  form.addEventListener("input", (event) => {
+    event.target.removeAttribute("aria-invalid");
+    renderPreview();
+  });
 
   saveButton.addEventListener("click", () => {
     try {
-      const collection = buildCollection();
+      const collection = buildCollection(true);
       localStorage.setItem(COLLECTION_KEY, canonicalText(collection));
       status.textContent = "Collection sauvegardée uniquement dans ce navigateur · NON SYNCHRONISÉE.";
       preview.textContent = canonicalText(collection);
@@ -354,7 +367,7 @@
 
   exportButton.addEventListener("click", () => {
     try {
-      const collection = buildCollection();
+      const collection = buildCollection(true);
       downloadJson(collection, `${collection.id}.nova-collection.json`);
       status.textContent = "Export préparé. Vérifiez les téléchargements de votre navigateur. Aucun contenu n’a été envoyé.";
     } catch (error) {
@@ -386,6 +399,7 @@
     fields.id.value = "ma-collection";
     fields.name.value = "Ma collection MODARYX";
     fields.description.value = "";
+    Object.values(fields).forEach(field => field.removeAttribute("aria-invalid"));
     selectedIds = new Set();
     renderItems();
     renderPreview();
