@@ -316,3 +316,13 @@ Recette Chrome HTTPS sur `06f8bf8643e743940358ca13f8bb29eee91135ab`, sans modifi
 État initial vide vérifié avant toute écriture locale : trois favoris faux, aucune vue. Seules les données créées pour la recette sont supprimées. Dernier rechargement : trois entrées, favoris faux, aucune vue, état visible initial retrouvé. Preuves détaillées : `qa/catalog-persistence-browser-20260915.json`.
 
 Ce lot ferme ces cinq parcours natifs ciblés. Il ne prouve ni redémarrage complet du navigateur, ni stockage saturé/refusé dans Chrome, ni synchronisation multi-onglets, lecteur d’écran, appareil physique ou cycle hors ligne. Les refus de stockage restent couverts par les preuves source précédentes. Aucun changement de cache, d’asset, de marque, d’OS ou d’infrastructure ; VF non validée.
+
+## Persistance native des trois brouillons locaux
+
+Recette Chrome HTTPS sur `4fed30d2162e6e97e8c7b385951ad798833ca0f4`, aucune modification produit. `qa/draft-persistence-browser-20260915.json` contient sept observations Studio et quatre observations groupées Communauté, ainsi que les états initiaux et finaux.
+
+Studio : sauvegarde valide, modification non enregistrée puis restauration de la version sauvegardée ; sauvegarde invalide bloquée sans écrasement ; sauvegarde explicite d’une révision retrouvée après rechargement ; effacement avec focus identifiant puis absence de brouillon après rechargement. Collections et contributions : sauvegardes restaurées avec leurs contenus/sélections, modifications non enregistrées écartées, tentatives invalides bloquées et anciennes copies préservées.
+
+L’absence de données existantes a été vérifiée dans les champs et messages de restauration avant création. Seuls les témoins de recette ont été enregistrés puis supprimés ; état initial visible retrouvé pour les trois formulaires. Aucun envoi distant. La limite « sauvegarde/édition/rechargement non rejouée » du lot précédent est levée pour ces seuls parcours.
+
+Cela ne certifie pas redémarrage complet du navigateur, appareil physique, lecteur d’écran, quota refusé natif ni cycle PWA hors ligne. Les sources et budgets restent inchangés. VF non validée ; capacités absentes du registre toujours ouvertes.
