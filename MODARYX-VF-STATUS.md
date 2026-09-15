@@ -235,3 +235,13 @@ Deux captures actuelles de l’aperçu HTTPS et notes dans qa/visual-community-2
 Structure, scripts, empreintes, index/secours et cache prévalidés. Cumul source 126 inchangé ; cache v64. Le rendu après correction et la nouvelle grille responsive restent PREUVE MANQUANTE tant que l’aperçu accessible n’expose pas cette révision. EN COURS, aucune VF. Direction Loup/Dragon de l’accueil et des portails non modifiée.
 
 Suivi du même lot : textes et grille desktop observés sur l’aperçu HTTPS, deux captures après correction ajoutées. Après actualisation, champs identifiant/nom alignés et actions visibles dans la fenêtre. Première visite : ancien style encore visible ; cause exacte non isolée. Responsive étroit de cette grille et cohérence pendant mise à jour restent PREUVE MANQUANTE. Aucun PASS hors ligne ou VF ajouté.
+
+## Consolidation contenu et cache — 15 septembre 2026
+
+`4e278ebce718c2892f138e611ed358aba3cc611b` : Profils, Sécurité et Téléchargements clarifiés. Trois captures pleine page de l’aperçu HTTPS inspectées après publication ; hiérarchie desktop et états indisponibles conservés. CTA vers les conditions de publication activé, titre non masqué par le header. Voir `qa/secondary-content-20260915.md`. Accueil Loup/Dragon également observé après chargement de ses images ; aucune identité fusionnée.
+
+`6bd5f1821c3c9cd756a01cd7e65d806baa9576ee` : anciens CSS/JS servis depuis le cache malgré une ressource réseau plus récente, mécanisme reproduit en simulation. Révalidation des ressources UI non versionnées, avec repli local après échec réseau. Quatre assertions d’abord en échec puis réussies ; harnais cache 25, cumul source 130. Entrée PWA (9), métadonnées (6), structure et 76 empreintes revérifiées. Voir `qa/ui-cache-revalidation-20260915.md`.
+
+EN COURS. Les tailles statiques restent sous 800000 octets précachés, mais le Catalogue dépasse la cible CSS de 725 octets. La consultation rapide des quinze routes secondaires confirme leurs titres et repères DOM ; une propriété de feuille de style non exploitable dans l’outil a été écartée comme preuve de chargement. Elle ne remplace ni une comparaison visuelle exhaustive ni la recette responsive.
+
+PREUVE MANQUANTE : responsive des derniers textes/grille, états visuels exhaustifs, lecteur d’écran, zoom natif, appareils physiques, multi-navigateurs, performance réelle et cycle PWA HTTPS hors ligne/mise à jour. Hubs, corpus et services absents restent consignés dans le registre anti-oubli. Aucune validation globale finale ni VF déclarée.

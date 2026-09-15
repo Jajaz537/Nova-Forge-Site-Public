@@ -69,3 +69,11 @@ Les poids initiaux ci-dessus précèdent les illustrations autorisées. Le JSON 
 ## Correction de première visite — v43
 
 L’observation historique « les pages sans app.js n’installent pas le service worker » est corrigée dans le source : l’initialisation est maintenant dans shell.js sur les seize pages. Neuf tests ciblés passent ; la preuve native de première installation HTTPS reste ouverte. `updateViaCache: none` évite le cache HTTP pour la récupération du script worker, sans modifier la stratégie de cache des contenus. Voir https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register.
+
+## Révision v66 — écarts actuels
+
+La stratégie CSS/JS non versionnés est désormais révalidée au réseau ; détails et limites dans `ui-cache-revalidation-20260915.md`. Le total du harnais cache est de 25 assertions simulées.
+
+Mesures actuelles : 797672 octets de précache, sous la cible proposée de 800000. Le Catalogue charge 70725 octets de CSS : **écart ouvert de 725 octets** par rapport à la cible de 70000. Les autres pages sont sous cette cible. Aucun style n’a été supprimé arbitrairement pour atteindre un chiffre. Une consolidation des feuilles doit préserver la cascade et être comparée visuellement avant adoption.
+
+Le navigateur de recette permet d’inspecter le rendu et le DOM ; il n’expose pas ici un profiler réseau/CPU ou une commande de mise hors ligne. Les mesures ci-dessus restent des tailles de fichiers, pas des CWV ni des temps de démarrage. Les captures d’accueil montrent l’art Loup/Dragon après chargement, sans mesure fiable de sa durée.
