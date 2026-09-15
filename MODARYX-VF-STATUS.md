@@ -227,3 +227,9 @@ Cumul source 123 scénarios/contrôles ; cache v62. EN COURS, aucune VF ; lecteu
 Un catalogue vide explique désormais la possibilité de préparer une collection vide. Le sélecteur des contributions distingue absence de contenu, indisponibilité et choix disponibles. Une erreur de chargement explique la reprise et la conservation de la copie locale ; le terme technique fail-closed disparaît de ces messages publics. Aucun droit de publication ou téléchargement modifié.
 
 Trois scénarios de rendu Node VM dans qa/community-empty-checks.json : vide valide, chargement échoué et retour des choix. Contrat Communauté (5), cache (21), structure 16 pages/13 scripts et 76 empreintes vérifiés. Aucune panne réseau réelle ni nouvelle preuve navigateur revendiquée. Cumul source 126, cache v63. EN COURS, aucune VF ; les preuves externes restent ouvertes.
+
+## Revue visuelle Communauté — 15 septembre 2026
+
+Deux captures actuelles de l’aperçu HTTPS et notes dans qa/visual-community-20260915/REVIEW.md. Panneau « Règles actives » ambigu pour des services futurs : remplacé par les actions locales disponibles, publication future explicitée. Cartes et métadonnée clarifiées, marque MODARYX conservée. Grille desktop des deux champs courts de collection préparée à partir de 900 px ; une colonne sous ce seuil.
+
+Structure, scripts, empreintes, index/secours et cache prévalidés. Cumul source 126 inchangé ; cache v64. Le rendu après correction et la nouvelle grille responsive restent PREUVE MANQUANTE tant que l’aperçu accessible n’expose pas cette révision. EN COURS, aucune VF. Direction Loup/Dragon de l’accueil et des portails non modifiée.

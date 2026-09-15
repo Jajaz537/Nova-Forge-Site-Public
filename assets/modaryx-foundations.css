@@ -90,6 +90,14 @@ h1, .section-title { font-family:var(--modaryx-display-font); font-weight:500; l
 @media(max-width:1100px) { .modaryx-realm-hero { min-height:0; padding-top:clamp(260px,44vw,440px); padding-bottom:40px; } .modaryx-realm-art { height:clamp(320px,55vw,570px); object-position:70% center; } .modaryx-realm-hero::after { background:linear-gradient(0deg,#090e14 0%,#090e14 48%,transparent 84%); } .modaryx-realm-hero .hero-copy { max-width:720px; background:#090e14; padding:24px; border:1px solid #493f2d; border-radius:12px; } }
 @media(max-width:600px) { .modaryx-realm-hero .hero-copy { padding:24px 18px; } .modaryx-realm-hero .display { font-size:clamp(2.1rem,8vw,3rem); } .modaryx-portal-links { grid-template-columns:1fr; } .modaryx-portal-links a+a { border-left:0; } .modaryx-portals img { min-height:240px; object-fit:cover; } }
 
+/* Short collection fields share a row only when each remains comfortably wide. */
+@media(min-width:900px) {
+  #collection-form { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:24px; }
+  #collection-form > * { grid-column:1 / -1; min-width:0; }
+  #collection-form > label[for="collection-id"],
+  #collection-form > label[for="collection-name"] { grid-column:auto; }
+}
+
 /* The mobile disclosure button precedes its navigation in DOM/tab order. */
 @media(max-width:1180px) {
   .nova-topbar > .menu-button { grid-column:2; grid-row:1; justify-self:end; }

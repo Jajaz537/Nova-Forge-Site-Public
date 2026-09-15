@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-15T04:02:48.595Z",
+  "measuredAt": "2026-09-15T08:53:55.304Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -87,7 +87,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "c0a199a032f95c3b80568759fc06691537a1fd49b7e385cf73e03f4a311b1175",
+  "serviceWorkerSha256": "f80131300e7defe0a00b41c7cef637cff468418297981ba892c7c43091a4ae6c",
   "probes": [
     {
       "url": "/catalog.html",
@@ -283,8 +283,8 @@
     "uniqueLocalFiles": 70,
     "missing": [],
     "files": 70,
-    "rawBytes": 797032,
-    "gzipEstimateBytes": 519301
+    "rawBytes": 797485,
+    "gzipEstimateBytes": 519349
   },
   "pages": [
     {
@@ -292,8 +292,8 @@
       "htmlBytes": 4143,
       "css": {
         "files": 7,
-        "rawBytes": 66283,
-        "gzipEstimateBytes": 18976
+        "rawBytes": 66677,
+        "gzipEstimateBytes": 19095
       },
       "js": {
         "files": 2,
@@ -306,8 +306,8 @@
       "htmlBytes": 10592,
       "css": {
         "files": 8,
-        "rawBytes": 70331,
-        "gzipEstimateBytes": 20237
+        "rawBytes": 70725,
+        "gzipEstimateBytes": 20356
       },
       "js": {
         "files": 2,
@@ -317,11 +317,11 @@
     },
     {
       "page": "community.html",
-      "htmlBytes": 13361,
+      "htmlBytes": 13420,
       "css": {
         "files": 7,
-        "rawBytes": 66283,
-        "gzipEstimateBytes": 18976
+        "rawBytes": 66677,
+        "gzipEstimateBytes": 19095
       },
       "js": {
         "files": 2,
@@ -334,8 +334,8 @@
       "htmlBytes": 13733,
       "css": {
         "files": 8,
-        "rawBytes": 68009,
-        "gzipEstimateBytes": 19709
+        "rawBytes": 68403,
+        "gzipEstimateBytes": 19828
       },
       "js": {
         "files": 3,
@@ -348,8 +348,8 @@
       "htmlBytes": 12705,
       "css": {
         "files": 7,
-        "rawBytes": 66283,
-        "gzipEstimateBytes": 18976
+        "rawBytes": 66677,
+        "gzipEstimateBytes": 19095
       },
       "js": {
         "files": 2,
@@ -362,8 +362,8 @@
       "htmlBytes": 8259,
       "css": {
         "files": 7,
-        "rawBytes": 66283,
-        "gzipEstimateBytes": 18976
+        "rawBytes": 66677,
+        "gzipEstimateBytes": 19095
       },
       "js": {
         "files": 3,
@@ -376,8 +376,8 @@
       "htmlBytes": 9818,
       "css": {
         "files": 7,
-        "rawBytes": 66283,
-        "gzipEstimateBytes": 18976
+        "rawBytes": 66677,
+        "gzipEstimateBytes": 19095
       },
       "js": {
         "files": 2,
@@ -390,8 +390,8 @@
       "htmlBytes": 18108,
       "css": {
         "files": 4,
-        "rawBytes": 44043,
-        "gzipEstimateBytes": 12337
+        "rawBytes": 44437,
+        "gzipEstimateBytes": 12456
       },
       "js": {
         "files": 3,
@@ -404,8 +404,8 @@
       "htmlBytes": 6438,
       "css": {
         "files": 8,
-        "rawBytes": 67244,
-        "gzipEstimateBytes": 19438
+        "rawBytes": 67638,
+        "gzipEstimateBytes": 19557
       },
       "js": {
         "files": 2,
@@ -418,8 +418,8 @@
       "htmlBytes": 7114,
       "css": {
         "files": 8,
-        "rawBytes": 68465,
-        "gzipEstimateBytes": 19808
+        "rawBytes": 68859,
+        "gzipEstimateBytes": 19927
       },
       "js": {
         "files": 2,
@@ -432,8 +432,8 @@
       "htmlBytes": 6873,
       "css": {
         "files": 8,
-        "rawBytes": 68465,
-        "gzipEstimateBytes": 19808
+        "rawBytes": 68859,
+        "gzipEstimateBytes": 19927
       },
       "js": {
         "files": 2,
@@ -446,8 +446,8 @@
       "htmlBytes": 7100,
       "css": {
         "files": 8,
-        "rawBytes": 68465,
-        "gzipEstimateBytes": 19808
+        "rawBytes": 68859,
+        "gzipEstimateBytes": 19927
       },
       "js": {
         "files": 2,
@@ -460,8 +460,8 @@
       "htmlBytes": 4601,
       "css": {
         "files": 8,
-        "rawBytes": 68465,
-        "gzipEstimateBytes": 19808
+        "rawBytes": 68859,
+        "gzipEstimateBytes": 19927
       },
       "js": {
         "files": 1,
@@ -474,8 +474,8 @@
       "htmlBytes": 7493,
       "css": {
         "files": 8,
-        "rawBytes": 67030,
-        "gzipEstimateBytes": 19376
+        "rawBytes": 67424,
+        "gzipEstimateBytes": 19495
       },
       "js": {
         "files": 2,
@@ -488,8 +488,8 @@
       "htmlBytes": 10843,
       "css": {
         "files": 7,
-        "rawBytes": 66283,
-        "gzipEstimateBytes": 18976
+        "rawBytes": 66677,
+        "gzipEstimateBytes": 19095
       },
       "js": {
         "files": 2,
@@ -502,8 +502,8 @@
       "htmlBytes": 6393,
       "css": {
         "files": 7,
-        "rawBytes": 66283,
-        "gzipEstimateBytes": 18976
+        "rawBytes": 66677,
+        "gzipEstimateBytes": 19095
       },
       "js": {
         "files": 3,
