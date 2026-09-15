@@ -1,12 +1,23 @@
-# MODARYX — Prochain lot consolidé
+# MODARYX — prochain bloc et conditions de clôture
 
-Actualisé le 15 septembre 2026. Travail isolé sur la PR brouillon #12 ; revérifier son HEAD avant écriture Git. Les OS Nova Forge restent dans la session distincte.
+Actualisé le 15 septembre 2026 après `565e821a6257af23efc5c980c4a2a992162b99e6`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
 
-1. **EN COURS — Fondations et shell** : couleurs, contrastes, focus, contrôles, densité, navigation/footer et responsive cohérents.
-2. **EN COURS — Seize pages existantes** : contenu précis, identité MODARYX, états locaux compréhensibles, démonstrations explicites ; captures et parcours ciblés par page.
-3. **EN COURS — Consolidation QA** : relier la matrice des pages aux preuves réelles ; corriger les écarts exacts, sans multiplier les replays inutiles.
-4. **PREUVE MANQUANTE — Hubs éditoriaux GTA 6/RDR2** : routes absentes, idées retenues conservées. Préparer sources, droits, structure et contenu original avant intégration ; aucune page vide ni support de mods inventé.
-5. **PREUVE MANQUANTE — Capacités futures** : Guide connecté, comptes, publication distante, pont OS et services externes ne sont pas réalisés par leurs seuls schémas. Voir `qa/MODARYX-ANTI-OUBLI.md`.
-6. **BLOQUÉ — Distribution réelle** : aucun artefact public dans `downloads.json`. Ne pas ouvrir le téléchargement pour améliorer l'apparence.
+## Acquis à conserver
 
-Le prochain jalon est un candidat documenté avec preuves et limites, pas une VF présumée. La migration de l'ancien getnova est retirée du plan actif. Aucun changement d'infrastructure ou de `main` dans ce lot.
+- TERMINÉ pour le périmètre documenté : revue desktop des seize pages, corrections de composition, reflow initial 320/390/768/960 ; preuves et limites dans `qa/finish-line/README.md`. Cela ne certifie pas tous les états de toutes les pages.
+- TERMINÉ pour les parcours ciblés : erreurs du Studio complètes, marqueurs de champs, correction progressive et accès clavier depuis les erreurs. Preuves `qa/studio-errors-browser-20260915.json` et `qa/studio-error-navigation-20260915.json`.
+- Budgets statiques contrôlés ; ils ne constituent pas un profiling utilisateur. Ne pas relancer les suites inchangées sans risque concret.
+
+## Prochains blocs réellement ouverts
+
+1. EN COURS — compléter la matrice des états/parcours uniquement là où les preuves existantes ne couvrent pas le comportement ; isoler tout défaut avant correction.
+2. PREUVE MANQUANTE — lecteur d’écran natif, zoom observé 200/400 %, appareils physiques et autres moteurs navigateur. L’environnement présent ne permet pas de les certifier.
+3. PREUVE MANQUANTE — cycle réel PWA déconnecté/mise à jour/reprise, cache froid, réseau contrôlé, LCP/CLS/INP. Le worker actif et les simulations source ne ferment pas ces preuves.
+4. EN COURS — hubs GTA 6/RDR2, index jeux/catégories, corpus réel : préparer sources, droits et contenu substantiel avant intégration ; aucun support de mods présumé, aucune page vide.
+5. EN COURS — capacités absentes : comptes, profils éditables, publication/modération distante, Guide connecté, Storage Resolver/Repair Network et pont OS. Les contrats existants ne sont pas des services livrés.
+6. BLOQUÉ — distribution réelle : aucun artefact public, empreinte et signature de publication disponible. Conserver l’état indisponible.
+7. NON RÉCUPÉRÉ — intégralité de la Master NDI et des décisions historiques ; ne pas affirmer l’anti-oubli exhaustif.
+
+Le registre `qa/MODARYX-ANTI-OUBLI.md` conserve les capacités retenues. Les manques fonctionnels ne doivent pas être reclassés comme de simples tests externes. Aucune idée n’est annulée implicitement.
+
+**VF NON VALIDÉE.** MODARYX reste le web ; les OS Nova Forge et toute infrastructure restent hors périmètre. Aucune fusion main ni promotion officielle déduite d’un commit ou d’un build.

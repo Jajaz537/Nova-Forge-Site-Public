@@ -282,3 +282,11 @@ Chrome HTTPS : validation par Entrée, focus au premier champ invalide, huit err
 Micro-preuves source : nouveau test du rendu 5 assertions, reçus 6, exports 6, cache 25 ; structure 16 pages, syntaxe 13 scripts et 76 empreintes sans erreur. Précache 797776 octets. Ces résultats ne valent pas certification par lecteur d’écran ni preuve de zoom natif.
 
 EN COURS : VF non validée. Les preuves externes et fonctions non livrées du registre anti-oubli restent ouvertes. Aucun changement de direction Loup/Dragon, d’OS ou d’infrastructure.
+
+## Studio — accès direct aux champs en erreur
+
+Correction `565e821a6257af23efc5c980c4a2a992162b99e6` : liens nommés dans le résumé pour les dix chemins de validation explicitement associés aux champs ; messages non associés conservés en texte. Aucun mapping déduit pour un chemin inconnu. Soulignement, hauteur minimale 24 px et espacement des erreurs. Cache v71, précache 798622 octets.
+
+Huit liens de formulaire vide activés avec Entrée dans Chrome HTTPS : focus sur les huit champs correspondants et contour solid observé. Les coordonnées lues immédiatement pendant le défilement ne constituent pas une preuve de visibilité ; seul le dernier champ a été réinspecté après stabilisation et dans la fenêtre. Trois contrôles responsive 320/390/768 sans débordement. Source : neuf assertions du renderer, six reçus, six exports, vingt-cinq cache ; structure/syntaxe/empreintes sans erreur. Voir `qa/studio-error-navigation-20260915.json`. Lecteur d’écran et ordre exhaustif de tabulation non certifiés par ces tests.
+
+La revue desktop des seize pages reste documentée dans `qa/finish-line/README.md`. Ce lot améliore le parcours de correction ; il ne ferme ni les fonctions absentes, ni les validations externes, ni la VF.
