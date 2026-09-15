@@ -78,6 +78,18 @@
       state.textContent = "Identité enrichie incohérente ; le fallback statique est conservé.";
       return;
     }
+    // Prepare relations before replacing any visible project information.
+    if (typeof item.name !== 'string' || !item.name.trim() || typeof item.summary !== 'string' ||
+        !Array.isArray(graph.nodes) || !Array.isArray(graph.edges)) throw new Error('project-data-invalid');
+    if (!graph.nodes.every((entry) => entry && typeof entry.id === 'string') ||
+        !graph.edges.every((edge) => edge && typeof edge.from === 'string' && typeof edge.to === 'string' && typeof edge.relation === 'string')) throw new Error('project-graph-invalid');
+    const graphNodeId = `content:${item.id}`;
+    const nodeMap = new Map(graph.nodes.map((entry) => [entry.id, entry]));
+    const edges = graph.edges.filter((edge) => edge.from === graphNodeId || edge.to === graphNodeId);
+    const cards = edges.map((edge) => {
+      const peerId = edge.from === graphNodeId ? edge.to : edge.from;
+      return relationCard(edge, nodeMap.get(peerId));
+    });
     node("project-kind").textContent = `${item.kind} · aperçu public`;
     node("project-title").textContent = item.name;
     node("project-summary").textContent = item.summary;
@@ -90,14 +102,7 @@
     node("project-license").textContent = item.rights?.license || "Inconnue";
     node("project-redistribution").textContent = labels[item.rights?.redistribution] || "Inconnue";
 
-    const graphNodeId = `content:${item.id}`;
-    const nodeMap = new Map((graph.nodes || []).map((entry) => [entry.id, entry]));
-    const edges = (graph.edges || []).filter((edge) => edge.from === graphNodeId || edge.to === graphNodeId);
-    relationsRoot.replaceChildren();
-    edges.forEach((edge) => {
-      const peerId = edge.from === graphNodeId ? edge.to : edge.from;
-      relationsRoot.append(relationCard(edge, nodeMap.get(peerId)));
-    });
+    relationsRoot.replaceChildren(...cards);
     relationsEmpty.hidden = edges.length !== 0;
     renderFavorite(item.id);
     state.textContent = "Informations du catalogue chargées. Cette fiche reste une démonstration sans téléchargement.";

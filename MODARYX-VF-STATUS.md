@@ -167,3 +167,9 @@ Un scénario ajouté à qa/search-contract-checks.json et deux scénarios source
 L’accueil conserve un avertissement de copie en cache après filtrage, y compris sans résultat. Les fiches projet affichent une note séparée si catalogue ou graphe de relations provient du cache ancien ; une action Favori ne peut plus effacer cette qualification. Réponse réseau seule : aucune qualification d’ancienneté inventée.
 
 Un scénario supplémentaire dans qa/home-catalogue-checks.json et trois dans qa/project-cache-label-checks.json ; tests source Node uniquement. Trois refus stockage, six métadonnées publiques et 21 assertions cache réexécutés ; structure 16 pages/13 scripts et 76 empreintes sans erreur. Cumul ciblé 104 scénarios/contrôles hors largeurs, cache v57. Hors ligne HTTPS réel toujours PREUVE MANQUANTE. EN COURS, aucune VF.
+
+## Suite ciblée — préparation des relations avant affichage (15 septembre 2026)
+
+Avant correction, un graphe mal formé pouvait lever une exception après remplacement du titre et d’autres champs, tout en annonçant un secours statique conservé. Les collections du graphe et les champs nécessaires sont maintenant contrôlés et les cartes relationnelles préparées avant mutation visible. Un échec de préparation conserve titre, champs et relations existants. Les valeurs optionnelles inconnues gardent leurs libellés explicites.
+
+Quatre scénarios source regroupés dans qa/project-render-checks.json : quatre graphes invalides, échec de préparation de carte, données réelles et titre absent. Tests cache des fiches et refus stockage réexécutés, 21 assertions cache, structure 16 pages/13 scripts et 76 empreintes réussis. Cumul ciblé 108 scénarios/contrôles hors largeurs ; cache v58. Aucune nouvelle preuve navigateur native revendiquée. EN COURS, aucune VF.
