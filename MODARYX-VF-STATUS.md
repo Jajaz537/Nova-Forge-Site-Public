@@ -205,3 +205,11 @@ Les collections et contributions contrôlent maintenant les identifiants publics
 Cinq scénarios Node VM dans qa/community-contract-checks.json, dont six variantes mal formées et conservation des champs/sélections simulés ; ce n’est pas une preuve de restauration réelle du stockage. Chrome local : les trois créations réelles du catalogue démonstratif apparaissent dans les cases de collection et les options de contribution. Aucun brouillon enregistré ou effacé pendant cette inspection.
 
 21 assertions cache et trois refus de stockage réexécutés sans erreur. Cumul source 113 scénarios/contrôles ; cache v60. Les 70 fichiers préchargés représentent 795050 octets bruts, 518875 octets gzip estimés, sans mesure de performance réelle. EN COURS, aucune VF ; limites externes inchangées.
+
+## Contributions — focus des erreurs (15 septembre 2026)
+
+Une validation, sauvegarde ou tentative d’export invalide dirige maintenant le focus vers le champ concerné et lui donne aria-invalid. L’aperçu pendant la saisie ne déplace pas le focus. Une saisie, un changement de type, un import valide ou une remise à zéro retire les anciens marqueurs avant nouvelle validation. Les contraintes locales restent identiques ; « Note de la review » devient « Note de l’avis » sans modifier le contrat review.
+
+Cinq scénarios source Node VM dans qa/submission-focus-checks.json : aperçu passif, cible manquante, contenu blanc, note/parent conditionnels et retour à un brouillon valide. Chrome local : validation avec cible absente, focus sur Contenu ciblé, aria-invalid=true et message « Choisissez un contenu du catalogue public » observés. Aucun enregistrement local effectué. Lecture par synthèse vocale non exécutée.
+
+Contrat Communauté (5), exports (6), cache (21), structure 16 pages/13 scripts et 76 empreintes vérifiés. Cumul source 118 scénarios/contrôles ; cache v61. EN COURS, aucune VF. Les essais externes et la revue exhaustive restent ouverts.

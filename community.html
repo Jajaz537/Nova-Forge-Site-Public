@@ -79,7 +79,7 @@
         <label class="field" for="submission-kind"><span>Type</span><select id="submission-kind"><option value="discussion">Discussion</option><option value="review">Avis</option><option value="comment">Commentaire</option></select></label>
         <label class="field" for="submission-target"><span>Contenu ciblé</span><select id="submission-target" required><option value="">Chargement du catalogue…</option></select></label>
         <label class="field" id="submission-title-field" for="submission-heading"><span>Titre</span><input id="submission-heading" maxlength="180" autocomplete="off"></label>
-        <label class="field" id="submission-rating-field" for="submission-rating" hidden><span>Note de la review (1–5)</span><input id="submission-rating" type="number" min="1" max="5" step="1" inputmode="numeric"></label>
+        <label class="field" id="submission-rating-field" for="submission-rating" hidden><span>Note de l’avis (1–5)</span><input id="submission-rating" type="number" min="1" max="5" step="1" inputmode="numeric"></label>
         <label class="field" id="submission-parent-field" for="submission-parent" hidden><span>ID de la contribution parente</span><input id="submission-parent" pattern="[a-z0-9][a-z0-9._-]{1,127}" maxlength="128" autocomplete="off"></label>
         <label class="field" for="submission-body"><span>Contenu</span><textarea id="submission-body" required maxlength="8000" rows="7"></textarea></label>
         <div class="actions"><button class="button primary" type="button" id="submission-validate">Valider le brouillon</button><button class="button" type="button" id="submission-save">Sauvegarder localement</button><button class="button" type="button" id="submission-export">Exporter JSON</button></div>

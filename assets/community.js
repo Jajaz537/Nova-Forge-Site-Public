@@ -165,6 +165,9 @@
     submissionFields.heading.required = !isComment;
     submissionFields.rating.required = isReview;
     submissionFields.parent.required = isComment;
+    for (const key of ["id", "kind", "target", "heading", "body", "rating", "parent"]) {
+      submissionFields[key].removeAttribute("aria-invalid");
+    }
   }
 
   function renderSubmissionTargets() {
@@ -183,7 +186,20 @@
     if (catalogItems.some((item) => item.id === previous)) submissionFields.target.value = previous;
   }
 
-  function buildSubmission() {
+  function buildSubmission(focusInvalid = false) {
+    const check = (valid, key, message) => {
+      if (valid) return;
+      if (focusInvalid) {
+        submissionFields[key].setAttribute("aria-invalid", "true");
+        submissionFields[key].focus();
+      }
+      throw new Error(message);
+    };
+    if (focusInvalid) {
+      for (const key of ["id", "kind", "target", "heading", "body", "rating", "parent"]) {
+        submissionFields[key].removeAttribute("aria-invalid");
+      }
+    }
     const id = String(submissionFields.id?.value || "").trim().toLowerCase();
     const kind = String(submissionFields.kind?.value || "");
     const targetId = String(submissionFields.target?.value || "");
@@ -193,10 +209,10 @@
     const ratingRaw = String(submissionFields.rating?.value || "").trim();
     const known = new Set(catalogItems.map((item) => item.id));
 
-    if (!ID_RE.test(id)) throw new Error("Identifiant de contribution invalide.");
-    if (!new Set(["discussion", "review", "comment"]).has(kind)) throw new Error("Type de contribution invalide.");
-    if (!known.has(targetId)) throw new Error("La contribution doit cibler un ID du catalogue public.");
-    if (!body || body.length > 8000) throw new Error("Contenu requis, 8000 caractères maximum.");
+    check(ID_RE.test(id), "id", "Identifiant : 2 à 128 caractères, lettres minuscules, chiffres, point, tiret ou underscore.");
+    check(new Set(["discussion", "review", "comment"]).has(kind), "kind", "Choisissez un type de contribution disponible.");
+    check(known.has(targetId), "target", "Choisissez un contenu du catalogue public.");
+    check(body && body.length <= 8000, "body", "Contenu requis, 8000 caractères maximum.");
 
     const submission = {
       schemaVersion: 1,
@@ -211,16 +227,16 @@
     };
 
     if (kind === "discussion" || kind === "review") {
-      if (!heading || heading.length > 180) throw new Error("Titre requis, 180 caractères maximum.");
+      check(heading && heading.length <= 180, "heading", "Titre requis, 180 caractères maximum.");
       submission.title = heading;
     }
     if (kind === "review") {
       const rating = Number(ratingRaw);
-      if (!Number.isInteger(rating) || rating < 1 || rating > 5) throw new Error("La note doit être un entier de 1 à 5.");
+      check(Number.isInteger(rating) && rating >= 1 && rating <= 5, "rating", "La note doit être un entier de 1 à 5.");
       submission.rating = rating;
     }
     if (kind === "comment") {
-      if (!ID_RE.test(parent)) throw new Error("Un commentaire exige un ID parent valide.");
+      check(ID_RE.test(parent), "parent", "Identifiant de la contribution parente : 2 à 128 caractères, lettres minuscules, chiffres, point, tiret ou underscore.");
       submission.parentSubmissionId = parent;
     }
     return submission;
@@ -228,7 +244,7 @@
 
   function renderSubmissionPreview(showError = false) {
     try {
-      const submission = buildSubmission();
+      const submission = buildSubmission(showError);
       submissionPreview.textContent = canonicalText(submission);
       return submission;
     } catch (error) {
@@ -380,7 +396,10 @@
     updateSubmissionFields();
     renderSubmissionPreview();
   });
-  submissionForm.addEventListener("input", () => renderSubmissionPreview());
+  submissionForm.addEventListener("input", (event) => {
+    event.target.removeAttribute("aria-invalid");
+    renderSubmissionPreview();
+  });
 
   submissionValidate.addEventListener("click", () => {
     const submission = renderSubmissionPreview(true);
@@ -389,7 +408,7 @@
 
   submissionSave.addEventListener("click", () => {
     try {
-      const submission = buildSubmission();
+      const submission = buildSubmission(true);
       localStorage.setItem(SUBMISSION_KEY, canonicalText(submission));
       submissionPreview.textContent = canonicalText(submission);
       submissionStatus.textContent = "Brouillon sauvegardé uniquement dans ce navigateur · NON PUBLIÉ.";
@@ -400,7 +419,7 @@
 
   submissionExport.addEventListener("click", () => {
     try {
-      const submission = buildSubmission();
+      const submission = buildSubmission(true);
       downloadJson(submission, `${submission.id}.nova-community-draft.json`);
       submissionStatus.textContent = "Export préparé. Vérifiez les téléchargements de votre navigateur · NON PUBLIÉ · aucun contenu envoyé.";
     } catch (error) {
