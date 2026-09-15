@@ -290,3 +290,13 @@ Correction `565e821a6257af23efc5c980c4a2a992162b99e6` : liens nommés dans le r�
 Huit liens de formulaire vide activés avec Entrée dans Chrome HTTPS : focus sur les huit champs correspondants et contour solid observé. Les coordonnées lues immédiatement pendant le défilement ne constituent pas une preuve de visibilité ; seul le dernier champ a été réinspecté après stabilisation et dans la fenêtre. Trois contrôles responsive 320/390/768 sans débordement. Source : neuf assertions du renderer, six reçus, six exports, vingt-cinq cache ; structure/syntaxe/empreintes sans erreur. Voir `qa/studio-error-navigation-20260915.json`. Lecteur d’écran et ordre exhaustif de tabulation non certifiés par ces tests.
 
 La revue desktop des seize pages reste documentée dans `qa/finish-line/README.md`. Ce lot améliore le parcours de correction ; il ne ferme ni les fonctions absentes, ni les validations externes, ni la VF.
+
+## Brouillons — messages de validation et sauvegarde périmés
+
+Correction `e2a43e37f626b218d526f2cb9240e97b95333ecf` : défaut reproduit dans Chrome, une contribution validée puis vidée conservait « Brouillon local valide » alors que son aperçu indiquait « incomplet ». Les modifications de contribution, type, collection et Studio affichent désormais un état non sauvegardé. Les sélections de fichiers d’import ne déclarent pas à elles seules une modification du contenu. Même message non réassigné à chaque frappe pour éviter les mutations inutiles de la région de statut.
+
+Sept observations Chrome HTTPS documentées dans `qa/draft-edit-state-20260915.json` : retrait du succès périmé, revalidation bloquante avec focus, changement de type, édition de collection et sélection, Studio après erreur et après succès. Aucun brouillon enregistré, exporté ou publié pendant ce contrôle. Quatre mesures responsive, deux pages à 320/768, aucun débordement. Une première lecture de l’ancienne révision pendant publication a été écartée.
+
+Régressions source exécutées : focus contributions 5 groupes, focus collections 5 groupes, stockage 3, exports 6, résumé Studio 9 assertions, cache 25 ; structure 16 pages, syntaxe 13 scripts et 76 empreintes sans erreur. Cache v72 ; précache 799390 octets, marge 610 sous le budget 800000. CSS maximal 69776 octets, JS déclaré maximal 28592 octets : mesures statiques, pas CWV.
+
+EN COURS — VF non validée. Persistance réelle sauvegarde/édition/rechargement non rejouée par ce lot ; preuves externes et capacités absentes inchangées.

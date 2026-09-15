@@ -1,0 +1,159 @@
+{
+  "before": "Brouillon local valide · NON PUBLIÉ · aucune écriture réseau.",
+  "checks": [
+    {
+      "case": "edit validated contribution",
+      "preview": "Brouillon local incomplet.",
+      "status": "Modifications non sauvegardées · validez ou sauvegardez à nouveau · NON PUBLIÉ."
+    },
+    {
+      "case": "explicit revalidation blocks",
+      "focus": "submission-body",
+      "status": "Validation bloquée : Contenu requis, 8000 caractères maximum."
+    },
+    {
+      "case": "kind change clears stale error",
+      "status": "Modifications non sauvegardées · validez ou sauvegardez à nouveau · NON PUBLIÉ."
+    },
+    {
+      "case": "collection text edited",
+      "status": "Modifications non sauvegardées · sauvegardez pour les conserver · NON SYNCHRONISÉ."
+    },
+    {
+      "case": "collection selection edited",
+      "status": "Modifications non sauvegardées · sauvegardez pour les conserver · NON SYNCHRONISÉ."
+    },
+    {
+      "case": "studio edit after invalid validation",
+      "focus": "content-id",
+      "statuses": [
+        "À corriger : 7 point(s).Nom du projet: champ à renseignerVersion: champ à renseignerIdentifiant du jeu: champ à renseignerNom du jeu: champ à renseignerIdentifiant créateur: champ à renseignerNom du créateur: champ à renseignerLicence: champ à renseigner",
+        "Modifications non sauvegardées · validez ou sauvegardez à nouveau · NON PUBLIÉ."
+      ]
+    },
+    {
+      "case": "studio edit after successful validation",
+      "statuses": [
+        "Format du brouillon conforme. Cela ne vérifie ni la provenance, ni la signature, ni la compatibilité réelle.",
+        "Modifications non sauvegardées · validez ou sauvegardez à nouveau · NON PUBLIÉ."
+      ]
+    }
+  ],
+  "date": "2026-09-15T21:00:09.043Z",
+  "responsive": [
+    {
+      "contentHeight": 8273,
+      "h1": "Vos collections. Vos idées. À votre rythme.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 368.6,
+        "loadEndMs": 375,
+        "responseEndMs": 115.1,
+        "type": "navigate"
+      },
+      "page": "community.html",
+      "positiveTabindex": 0,
+      "requested": 320,
+      "scroll": 305,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/community",
+      "width": 305
+    },
+    {
+      "contentHeight": 5527,
+      "h1": "Vos collections. Vos idées. À votre rythme.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 368.6,
+        "loadEndMs": 375,
+        "responseEndMs": 115.1,
+        "type": "navigate"
+      },
+      "page": "community.html",
+      "positiveTabindex": 0,
+      "requested": 768,
+      "scroll": 753,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/community",
+      "width": 753
+    },
+    {
+      "contentHeight": 7556,
+      "h1": "Préparez la fiche de votre création.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 343.2,
+        "loadEndMs": 352.9,
+        "responseEndMs": 75.6,
+        "type": "navigate"
+      },
+      "page": "creator-studio.html",
+      "positiveTabindex": 0,
+      "requested": 320,
+      "scroll": 305,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/creator-studio",
+      "width": 305
+    },
+    {
+      "contentHeight": 6066,
+      "h1": "Préparez la fiche de votre création.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 343.2,
+        "loadEndMs": 352.9,
+        "responseEndMs": 75.6,
+        "type": "navigate"
+      },
+      "page": "creator-studio.html",
+      "positiveTabindex": 0,
+      "requested": 768,
+      "scroll": 753,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/creator-studio",
+      "width": 753
+    }
+  ],
+  "studioValid": [
+    "Format du brouillon conforme. Cela ne vérifie ni la provenance, ni la signature, ni la compatibilité réelle.",
+    "Brouillon validé localement. Rien n’a été sauvegardé ni publié automatiquement."
+  ],
+  "sourceCommit": "e2a43e37f626b218d526f2cb9240e97b95333ecf",
+  "scope": "Chrome HTTPS; local form edits only, no save, export or publication performed. Early retry serving old revision excluded.",
+  "limits": [
+    "No native screen reader, physical device, offline lifecycle or CWV proof.",
+    "Source storage/exports regressions checked; actual save-edit-reload persistence not replayed here."
+  ]
+}
