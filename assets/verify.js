@@ -11,6 +11,7 @@
 
   function invalidateResult() {
     inputRevision += 1;
+    expectedInput?.removeAttribute('aria-invalid');
     renderState("Vérification à relancer", "Le fichier ou l’empreinte attendue a changé. Relancez le calcul pour vérifier cette sélection.");
   }
 
@@ -40,6 +41,7 @@
     const candidate = normalizeHash(decoded);
     if (!isSha256(candidate)) return;
     expectedInput.value = candidate;
+    expectedInput.removeAttribute('aria-invalid');
     inputRevision += 1;
     renderState('Empreinte attendue préremplie', 'Choisissez maintenant le fichier local à comparer. Le fragment d’URL n’est pas envoyé au serveur.', 'neutral');
   }
@@ -49,8 +51,18 @@
     const file = fileInput?.files?.[0];
     if (!file || !button) {
       renderState('Aucun fichier sélectionné', 'Choisissez un fichier local avant de lancer le calcul.', 'warning');
+      fileInput?.focus();
       return;
     }
+
+    const expected = normalizeHash(expectedInput?.value ?? "");
+    if (expected && !isSha256(expected)) {
+      expectedInput?.setAttribute('aria-invalid', 'true');
+      renderState('Empreinte attendue invalide', 'La valeur attendue doit contenir exactement 64 caractères hexadécimaux. Corrigez-la, ou effacez-la pour calculer uniquement l’empreinte du fichier. Aucun fichier n’a été lu.', 'warning');
+      expectedInput?.focus();
+      return;
+    }
+    expectedInput?.removeAttribute('aria-invalid');
 
     if (!globalThis.crypto?.subtle) {
       renderState('SHA-256 indisponible', 'Ce navigateur ne fournit pas l’API Web Crypto requise. Aucun résultat n’est supposé.', 'warning');
@@ -58,7 +70,6 @@
     }
 
     const revision = inputRevision;
-    const expected = normalizeHash(expectedInput?.value ?? "");
     running = true;
     button.disabled = true;
     button.setAttribute('aria-busy', 'true');
@@ -71,11 +82,6 @@
 
       if (!expected) {
         renderState('Empreinte calculée', `SHA-256 : ${digest}. Aucune empreinte attendue n’a été fournie, donc aucune correspondance n’est affirmée.`, 'neutral');
-        return;
-      }
-
-      if (!isSha256(expected)) {
-        renderState('Empreinte attendue invalide', `SHA-256 calculé : ${digest}. La valeur attendue doit contenir exactement 64 caractères hexadécimaux.`, 'warning');
         return;
       }
 
