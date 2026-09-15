@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-15T00:02:28.337Z",
+  "measuredAt": "2026-09-15T00:12:23.118Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -87,7 +87,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "99802e923bf2de1f2ee00b3583e0434a5ad9455124a019242d2bc5b2d9ad89b8",
+  "serviceWorkerSha256": "d411c6606113c9a401f55fde36f8403e90a8c0cb123075eeacc622a1a18da074",
   "probes": [
     {
       "url": "/catalog.html",
@@ -283,8 +283,8 @@
     "uniqueLocalFiles": 70,
     "missing": [],
     "files": 70,
-    "rawBytes": 782901,
-    "gzipEstimateBytes": 515362
+    "rawBytes": 785634,
+    "gzipEstimateBytes": 516137
   },
   "pages": [
     {
@@ -303,7 +303,7 @@
     },
     {
       "page": "catalog.html",
-      "htmlBytes": 10559,
+      "htmlBytes": 10592,
       "css": {
         "files": 8,
         "rawBytes": 69935,
@@ -387,7 +387,7 @@
     },
     {
       "page": "index.html",
-      "htmlBytes": 17487,
+      "htmlBytes": 18099,
       "css": {
         "files": 4,
         "rawBytes": 43953,
@@ -401,7 +401,7 @@
     },
     {
       "page": "profiles.html",
-      "htmlBytes": 6440,
+      "htmlBytes": 6438,
       "css": {
         "files": 8,
         "rawBytes": 66848,
@@ -471,7 +471,7 @@
     },
     {
       "page": "search.html",
-      "htmlBytes": 5427,
+      "htmlBytes": 7493,
       "css": {
         "files": 8,
         "rawBytes": 66634,
@@ -479,8 +479,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 5356,
-        "gzipEstimateBytes": 2198
+        "rawBytes": 5386,
+        "gzipEstimateBytes": 2208
       }
     },
     {

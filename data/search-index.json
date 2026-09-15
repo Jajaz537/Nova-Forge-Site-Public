@@ -36,8 +36,8 @@
     {
       "id": "page:profiles",
       "kind": "page",
-      "title": "Profiles & Passkeys",
-      "summary": "Frontière publique entre identité, WebAuthn, récupération, sessions et actions privilégiées.",
+      "title": "Profils et accès",
+      "summary": "Comprendre les profils et les méthodes de connexion prévues. Aucun compte distant connecté.",
       "href": "./profiles.html",
       "terms": [
         "profiles",

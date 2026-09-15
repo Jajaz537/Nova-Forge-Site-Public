@@ -43,6 +43,7 @@
       if (payload?.schemaVersion !== 1 || payload?.indexMode !== "preindexed-local" || payload?.externalAdapterRequired !== false || !Array.isArray(payload.entries)) throw new Error("search-index-invalid");
       entries = payload.entries.filter((entry) => entry && typeof entry.id === "string" && typeof entry.href === "string" && entry.href.startsWith("./") && !entry.href.includes(".."));
       hydrated = true;
+      input.disabled = false;
       render();
     } catch {
       state.textContent = "Index enrichi indisponible ; le répertoire statique reste affiché sans substitution distante.";
