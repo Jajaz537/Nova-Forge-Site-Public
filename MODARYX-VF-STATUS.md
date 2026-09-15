@@ -185,3 +185,9 @@ Cette recette est une preuve de chargement/navigation DOM desktop, pas une revue
 Seize parcours Chrome desktop réalisés depuis une navigation directe : premier Tab → Aller au contenu ; Entrée puis Tab → élément appartenant à main. Sur l’accueil : Explorer les mods ; sur les quinze autres pages : Accueil du fil d’Ariane. Séquence finale effectuée avec touches réelles, sans focus programmatique ; détails dans qa/keyboard-skip-checks.json au SHA source 7f391007afce45166827e1562b6fe7eb9b897173.
 
 Ce contrôle clôt uniquement la recette Chrome desktop de ce parcours d’évitement. Il ne prouve ni l’ordre complet de tabulation, ni les lecteurs d’écran, ni le mobile ou les autres navigateurs. Aucun runtime changé, cache v58 et cumul source 108 inchangés ; ces seize parcours natifs sont comptés séparément. EN COURS, aucune VF.
+
+## Finition contenu — libellés des relations (15 septembre 2026)
+
+Fiches projet : les codes techniques targets/supports/tested-on sont présentés comme Cible déclarée/Compatibilité déclarée/Environnement d’évaluation déclaré. Les six types du schéma ont un libellé français ; les types de contenu affichent Mod/Pack/Expérience/Outil/Ressource. Les trois cartes HTML de secours et l’affichage enrichi concordent. Les valeurs JSON, schémas et niveaux de preuve ne changent pas ; aucun test réel n’est déduit du seul type tested-on.
+
+Chrome local, fiche Balanced : libellés français observés avec les états Inconnue/Estimée et leurs limites. Quatre scénarios de rendu, 21 assertions cache, structure 16 pages/13 scripts et 76 empreintes réussis. Cumul source inchangé (108), cache v59. Pas de validation exhaustive de localisation/lecteur d’écran ajoutée. EN COURS, aucune VF.

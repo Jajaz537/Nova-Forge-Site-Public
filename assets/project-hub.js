@@ -14,6 +14,9 @@
   const favoriteButton = node("project-favorite");
 
   const labels = {
+    mod: "Mod", pack: "Pack", experience: "Expérience", tool: "Outil", resource: "Ressource",
+    targets: "Cible déclarée", supports: "Compatibilité déclarée", requires: "Dépendance",
+    optional: "Dépendance facultative", "conflicts-with": "Conflit déclaré", "tested-on": "Environnement d’évaluation déclaré",
     measured: "Mesurée",
     estimated: "Estimée",
     unknown: "Inconnue",
@@ -66,7 +69,7 @@
     head.append(title, evidence);
     const type = document.createElement("span");
     type.className = "relation-type";
-    type.textContent = edge.relation;
+    type.textContent = labels[edge.relation] || "Relation non qualifiée";
     const notes = document.createElement("p");
     notes.textContent = edge.notes || "Aucune note publique.";
     card.append(head, type, notes);
@@ -90,7 +93,7 @@
       const peerId = edge.from === graphNodeId ? edge.to : edge.from;
       return relationCard(edge, nodeMap.get(peerId));
     });
-    node("project-kind").textContent = `${item.kind} · aperçu public`;
+    node("project-kind").textContent = `${labels[item.kind] || 'Contenu'} · aperçu public`;
     node("project-title").textContent = item.name;
     node("project-summary").textContent = item.summary;
     node("project-game").textContent = item.game?.name || "Inconnu";
