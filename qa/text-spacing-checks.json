@@ -1,0 +1,274 @@
+{
+  "date": "2026-09-15",
+  "sourceCommit": "69c8d582e949687bc6a8fc50e6304c46dbc81bc6",
+  "reference": "https://www.w3.org/WAI/WCAG22/Understanding/text-spacing",
+  "method": "Chrome rendu réel en iframe de recette, feuille qa/text-spacing.css injectée uniquement par le harnais local après chargement. Hauteur 16000 px pour isoler la largeur sans scrollbar. Mesure après deux frames suivant le chargement CSS.",
+  "checks": [
+    {
+      "page": "404.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Cette page est introuvable.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "catalog.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Explorez les projets, jeu par jeu.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "community.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Vos collections. Vos idées. À votre rythme.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "creator-studio.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Préparez la fiche de votre création.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "documentation.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Trouvez le bon outil. Comprenez ses limites.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "downloads.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Les téléchargements ne sont pas encore ouverts.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "ecosystem.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Un atelier web pour chaque étape.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "index.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "profiles.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Votre profil, vos moyens de connexion.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "project-balanced-latency-pack.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Balanced Latency Pack — Preview",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "project-ember-textures.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Ember Textures — Preview",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "project-forge-night-experience.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Forge Night Experience — Preview",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "project.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Les projets à explorer.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "search.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Retrouvez un projet ou un outil.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "security.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Sachez ce que les preuves établissent.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "verify.html",
+      "requested": 320,
+      "width": 320,
+      "scroll": 320,
+      "h1": "Vérifier un fichier sans l’envoyer.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "404.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Cette page est introuvable.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "catalog.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Explorez les projets, jeu par jeu.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "community.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Vos collections. Vos idées. À votre rythme.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "creator-studio.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Préparez la fiche de votre création.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "documentation.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Trouvez le bon outil. Comprenez ses limites.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "downloads.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Les téléchargements ne sont pas encore ouverts.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "ecosystem.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Un atelier web pour chaque étape.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "index.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "profiles.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Votre profil, vos moyens de connexion.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "project-balanced-latency-pack.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Balanced Latency Pack — Preview",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "project-ember-textures.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Ember Textures — Preview",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "project-forge-night-experience.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Forge Night Experience — Preview",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "project.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Les projets à explorer.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "search.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Retrouvez un projet ou un outil.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "security.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Sachez ce que les preuves établissent.",
+      "positiveTabindex": 0
+    },
+    {
+      "page": "verify.html",
+      "requested": 1280,
+      "width": 1280,
+      "scroll": 1280,
+      "h1": "Vérifier un fichier sans l’envoyer.",
+      "positiveTabindex": 0
+    }
+  ],
+  "summary": {
+    "measured": 32,
+    "horizontalOverflow": 0
+  },
+  "limits": [
+    "Mesures géométriques, pas validation complète WCAG 1.4.12 : tous les chevauchements et états interactifs non inspectés.",
+    "Menu accueil ouvert inspecté séparément à 305 px utiles dans iframe 320 px avec scrollbar : cinq liens lisibles, aria-expanded=true.",
+    "Zoom natif Control+plus sans variation mesurable : 200 % et 400 % PREUVE MANQUANTE.",
+    "Lecteur d’écran, appareils physiques et recette HTTPS hors ligne toujours PREUVE MANQUANTE."
+  ]
+}
