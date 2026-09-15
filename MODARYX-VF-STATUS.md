@@ -300,3 +300,11 @@ Sept observations Chrome HTTPS documentées dans `qa/draft-edit-state-20260915.j
 Régressions source exécutées : focus contributions 5 groupes, focus collections 5 groupes, stockage 3, exports 6, résumé Studio 9 assertions, cache 25 ; structure 16 pages, syntaxe 13 scripts et 76 empreintes sans erreur. Cache v72 ; précache 799390 octets, marge 610 sous le budget 800000. CSS maximal 69776 octets, JS déclaré maximal 28592 octets : mesures statiques, pas CWV.
 
 EN COURS — VF non validée. Persistance réelle sauvegarde/édition/rechargement non rejouée par ce lot ; preuves externes et capacités absentes inchangées.
+
+## Recherche — parcours et descriptions publiques
+
+Commit produit `a0c8a39b4ded8a89262b746d602f14be695ac8f4` : quatre résumés rendus accessibles sans jargon fail-closed/receipt/artefact ; index JSON et secours HTML synchronisés, clés et contrats inchangés. Les démonstrations restent explicitement non téléchargeables et non attestées.
+
+`qa/search-browser-20260915.json` : Chrome HTTPS, mêmes deux résultats pour CRÉER/creer, état vide sans perte de focus, retour aux quatorze résultats par effacement clavier, navigation Entrée vers le Studio. Après modification : nouveaux textes observés, ancien terme fail-closed sans résultat ; deux mesures à 320/768 et état vide à 320 sans débordement. L’appel d’effacement initial resté sans effet est exclu ; aucune panne du site déduite de cet appel pilote.
+
+Six groupes de scénarios source recherche, cinq contrôles secours HTML, vingt-cinq assertions cache ; structure/syntaxe et 76 empreintes sans erreur. Cache v73 : 799420 octets précachés, marge 580 sous le budget proposé. Pas de nouvelle preuve de panne réseau réelle, lecteur d’écran, cycle hors ligne ou VF.
