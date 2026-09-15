@@ -8,6 +8,7 @@
   --modaryx-label: .875rem;
 }
 [hidden] { display: none !important; }
+html { scroll-padding-top: max(100px, calc(var(--modaryx-header-height, 76px) + 20px)); }
 main, section, article, aside, form, fieldset, nav { min-width: 0; }
 main :is(p, li, strong, small, span, code, h1, h2, h3) { overflow-wrap: anywhere; }
 :is(button, input, select, textarea) { font: inherit; }

@@ -77,4 +77,14 @@
   });
   applyMotion();
   header.append(motion);
+  // Anchor destinations must clear the actual sticky header, including wrapped controls.
+  const updateAnchorOffset = () => {
+    document.documentElement.style.setProperty('--modaryx-header-height', `${Math.ceil(header.getBoundingClientRect().height)}px`);
+  };
+  updateAnchorOffset();
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(updateAnchorOffset).observe(header);
+  } else {
+    window.addEventListener('resize', updateAnchorOffset);
+  }
 })();
