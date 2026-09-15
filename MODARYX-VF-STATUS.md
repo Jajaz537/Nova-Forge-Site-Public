@@ -370,3 +370,7 @@ Syntaxe, structure des 16 pages, 76 empreintes et 25 assertions cache vérifiée
 Défaut reproduit dans Chrome : arrivée avec `#sha256=incorrect` sans avertissement. Correction : le lien SHA-256 vide, mal formé ou indécodable affiche une erreur explicite, invalide le résultat antérieur et exige correction/effacement. Un calcul en attente ne peut publier son ancien résultat après ce changement. Aucune valeur du lien n’est injectée comme HTML.
 
 `qa/check-verify.cjs` : neuf groupes réussis dont refus avant lecture et interruption de résultat périmé ; 25 assertions cache, structure 16 pages/13 scripts/76 empreintes réussies. Cache v78, 799939 octets bruts. Preuve native après publication à compléter ; VF NON VALIDÉE.
+
+### Liens du vérificateur — observation native
+
+`qa/verify-fragment-browser-20260915.json` : Chrome HTTPS confirme trois liens invalides (texte incorrect, vide, encodage invalide) en état warning avec aria-invalid ; une empreinte valide préremplit ensuite le champ en état neutre. L’annulation d’un calcul en attente reste une preuve Node ciblée, pas un scénario natif exécuté ici. Aucune preuve lecteur d’écran ajoutée. VF NON VALIDÉE.

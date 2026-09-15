@@ -1,7 +1,7 @@
 # MODARYX — matrice de preuves et limites
 
 15 septembre 2026. PR brouillon #12, branche `design/modaryx-premium-hd-20260914-work`.
-Source de reprise : checkpoint canonique utilisateur, complété par les preuves Git. Dernier correctif source à cette consolidation : `4e8e87ce94be43f8bbf45ceb78d0bd2ec07c9d36` (profil local français, cache v77). Revérifier le HEAD avant toute écriture.
+Source de reprise : checkpoint canonique utilisateur, complété par les preuves Git. Dernier correctif source à cette consolidation : `c518b4c4bb4cec286bf258bd00a05330b712a4ad` (liens du vérificateur, cache v78). Revérifier le HEAD avant toute écriture.
 
 Cette matrice remplace les anciens « prochains blocs » devenus partiellement acquis ; elle ne remplace pas les résultats bruts et ne réattribue pas leurs mesures au dernier commit. Les dates des preuves ne constituent pas un nouveau passage global.
 
@@ -17,7 +17,7 @@ Cette matrice remplace les anciens « prochains blocs » devenus partiellement a
 | Profil local et essai manuel | `profile-browser-20260915.json` | Libellés français, trois réponses UI, fermeture et reflow ouvert 320/768. Aucun benchmark de jeu effectué. |
 | Menus et séparation OS/web | `mobile-menu-browser-20260915.json` | Ouverture/fermeture et parcours ciblés ; lien OS optionnel inactif. |
 | Mouvement réduit | `motion-browser-20260915.json` | Préférence explicite propagée aux 16 pages, CSS calculé observé ; préférence système physique non basculée. |
-| Vérificateur | `verify-browser-20260915.json` | Parcours ciblé SHA-256 ; concordance ne prouve ni origine ni innocuité. |
+| Vérificateur | `verify-browser-20260915.json`, `verify-fragment-browser-20260915.json` | Parcours ciblé SHA-256 ; concordance ne prouve ni origine ni innocuité. |
 | Performance | `https-browser-diagnostics-20260915.json`, `cache-checks.json` | Navigation Timing borné et budgets statiques ; pas de CWV ni de profiling représentatif. |
 | PWA | `cache-checks.json`, contrôles source d’entrée PWA | Cache simulé et worker observé actif ; déconnexion réelle, mise à jour/recovery toujours non prouvées. |
 

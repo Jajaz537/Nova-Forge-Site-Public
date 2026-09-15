@@ -1,6 +1,6 @@
 # MODARYX — prochain bloc et conditions de clôture
 
-Actualisé le 15 septembre 2026 après `4e8e87ce94be43f8bbf45ceb78d0bd2ec07c9d36`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
+Actualisé le 15 septembre 2026 après `c518b4c4bb4cec286bf258bd00a05330b712a4ad`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
 
 ## Acquis à conserver
 
