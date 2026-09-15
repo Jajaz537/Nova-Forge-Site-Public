@@ -19,6 +19,38 @@
 
 (() => {
   'use strict';
+  const header = document.querySelector('.topbar') || document.querySelector('footer');
+  if (!header) return;
+  const key = 'nova_site_shell_preferences_v1';
+  let reduced = false;
+  try {
+    const stored = JSON.parse(localStorage.getItem(key) || '{}');
+    reduced = stored.motion === 'reduced' || stored.reducedMotion === true;
+  } catch {}
+  const motion = document.createElement('button');
+  motion.type = 'button';
+  motion.className = 'motion-toggle';
+  const applyMotion = () => {
+    document.documentElement.toggleAttribute('data-motion-reduced', reduced);
+    if (reduced) document.documentElement.dataset.motion = 'reduced';
+    else delete document.documentElement.dataset.motion;
+    motion.setAttribute('aria-pressed', String(reduced));
+    motion.textContent = reduced ? 'Mouvement réduit' : 'Mouvement système';
+  };
+  motion.addEventListener('click', () => {
+    reduced = !reduced;
+    applyMotion();
+    try {
+      if (reduced) localStorage.setItem(key, JSON.stringify({ motion: 'reduced' }));
+      else localStorage.removeItem(key);
+    } catch {}
+  });
+  applyMotion();
+  header.append(motion);
+})();
+
+(() => {
+  'use strict';
   const header = document.querySelector('.topbar');
   const nav = header?.querySelector('nav');
   if (!header || !nav) return;
@@ -51,32 +83,6 @@
   header.insertBefore(toggle, nav);
   header.setAttribute('data-nav-ready', 'true');
 
-  const key = 'nova_site_shell_preferences_v1';
-  let reduced = false;
-  try {
-    const stored = JSON.parse(localStorage.getItem(key) || '{}');
-    reduced = stored.motion === 'reduced' || stored.reducedMotion === true;
-  } catch {}
-  const motion = document.createElement('button');
-  motion.type = 'button';
-  motion.className = 'motion-toggle';
-  const applyMotion = () => {
-    document.documentElement.toggleAttribute('data-motion-reduced', reduced);
-    if (reduced) document.documentElement.dataset.motion = 'reduced';
-    else delete document.documentElement.dataset.motion;
-    motion.setAttribute('aria-pressed', String(reduced));
-    motion.textContent = reduced ? 'Mouvement réduit' : 'Mouvement système';
-  };
-  motion.addEventListener('click', () => {
-    reduced = !reduced;
-    applyMotion();
-    try {
-      if (reduced) localStorage.setItem(key, JSON.stringify({ motion: 'reduced' }));
-      else localStorage.removeItem(key);
-    } catch {}
-  });
-  applyMotion();
-  header.append(motion);
   // Anchor destinations must clear the actual sticky header, including wrapped controls.
   const updateAnchorOffset = () => {
     document.documentElement.style.setProperty('--modaryx-header-height', `${Math.ceil(header.getBoundingClientRect().height)}px`);

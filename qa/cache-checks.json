@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-15T21:07:48.792Z",
+  "measuredAt": "2026-09-15T21:38:48.969Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -103,7 +103,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "0890d4c44d59ce059d730d5c3907dbaee95b6d9bf3cef4f7179a4919db345fa3",
+  "serviceWorkerSha256": "9b4411933c9d21405e0081125f2792f04e92f339c0ceac92c5194abe5e3431e0",
   "probes": [
     {
       "url": "/catalog.html",
@@ -339,8 +339,8 @@
     "uniqueLocalFiles": 70,
     "missing": [],
     "files": 70,
-    "rawBytes": 799420,
-    "gzipEstimateBytes": 519428
+    "rawBytes": 799589,
+    "gzipEstimateBytes": 519458
   },
   "pages": [
     {
@@ -348,13 +348,13 @@
       "htmlBytes": 4143,
       "css": {
         "files": 7,
-        "rawBytes": 65728,
-        "gzipEstimateBytes": 18526
+        "rawBytes": 65754,
+        "gzipEstimateBytes": 18539
       },
       "js": {
         "files": 2,
-        "rawBytes": 21980,
-        "gzipEstimateBytes": 6827
+        "rawBytes": 22123,
+        "gzipEstimateBytes": 6844
       }
     },
     {
@@ -362,13 +362,13 @@
       "htmlBytes": 10592,
       "css": {
         "files": 8,
-        "rawBytes": 69776,
-        "gzipEstimateBytes": 19787
+        "rawBytes": 69802,
+        "gzipEstimateBytes": 19800
       },
       "js": {
         "files": 2,
-        "rawBytes": 19056,
-        "gzipEstimateBytes": 5733
+        "rawBytes": 19199,
+        "gzipEstimateBytes": 5750
       }
     },
     {
@@ -376,13 +376,13 @@
       "htmlBytes": 13420,
       "css": {
         "files": 7,
-        "rawBytes": 65728,
-        "gzipEstimateBytes": 18526
+        "rawBytes": 65754,
+        "gzipEstimateBytes": 18539
       },
       "js": {
         "files": 2,
-        "rawBytes": 26384,
-        "gzipEstimateBytes": 6619
+        "rawBytes": 26527,
+        "gzipEstimateBytes": 6636
       }
     },
     {
@@ -390,13 +390,13 @@
       "htmlBytes": 13737,
       "css": {
         "files": 8,
-        "rawBytes": 67622,
-        "gzipEstimateBytes": 19339
+        "rawBytes": 67648,
+        "gzipEstimateBytes": 19352
       },
       "js": {
         "files": 3,
-        "rawBytes": 28592,
-        "gzipEstimateBytes": 8827
+        "rawBytes": 28735,
+        "gzipEstimateBytes": 8844
       }
     },
     {
@@ -404,13 +404,13 @@
       "htmlBytes": 12705,
       "css": {
         "files": 7,
-        "rawBytes": 65728,
-        "gzipEstimateBytes": 18526
+        "rawBytes": 65754,
+        "gzipEstimateBytes": 18539
       },
       "js": {
         "files": 2,
-        "rawBytes": 21980,
-        "gzipEstimateBytes": 6827
+        "rawBytes": 22123,
+        "gzipEstimateBytes": 6844
       }
     },
     {
@@ -418,13 +418,13 @@
       "htmlBytes": 8211,
       "css": {
         "files": 7,
-        "rawBytes": 65728,
-        "gzipEstimateBytes": 18526
+        "rawBytes": 65754,
+        "gzipEstimateBytes": 18539
       },
       "js": {
         "files": 3,
-        "rawBytes": 26968,
-        "gzipEstimateBytes": 8536
+        "rawBytes": 27111,
+        "gzipEstimateBytes": 8553
       }
     },
     {
@@ -432,13 +432,13 @@
       "htmlBytes": 9818,
       "css": {
         "files": 7,
-        "rawBytes": 65728,
-        "gzipEstimateBytes": 18526
+        "rawBytes": 65754,
+        "gzipEstimateBytes": 18539
       },
       "js": {
         "files": 2,
-        "rawBytes": 21980,
-        "gzipEstimateBytes": 6827
+        "rawBytes": 22123,
+        "gzipEstimateBytes": 6844
       }
     },
     {
@@ -446,13 +446,13 @@
       "htmlBytes": 18108,
       "css": {
         "files": 4,
-        "rawBytes": 43488,
-        "gzipEstimateBytes": 11889
+        "rawBytes": 44203,
+        "gzipEstimateBytes": 12096
       },
       "js": {
         "files": 3,
-        "rawBytes": 23020,
-        "gzipEstimateBytes": 7272
+        "rawBytes": 23163,
+        "gzipEstimateBytes": 7289
       }
     },
     {
@@ -460,13 +460,13 @@
       "htmlBytes": 6563,
       "css": {
         "files": 8,
-        "rawBytes": 66689,
-        "gzipEstimateBytes": 18988
+        "rawBytes": 66715,
+        "gzipEstimateBytes": 19001
       },
       "js": {
         "files": 2,
-        "rawBytes": 5069,
-        "gzipEstimateBytes": 1945
+        "rawBytes": 5212,
+        "gzipEstimateBytes": 1962
       }
     },
     {
@@ -474,13 +474,13 @@
       "htmlBytes": 7114,
       "css": {
         "files": 8,
-        "rawBytes": 68002,
-        "gzipEstimateBytes": 19389
+        "rawBytes": 68028,
+        "gzipEstimateBytes": 19402
       },
       "js": {
         "files": 2,
-        "rawBytes": 10625,
-        "gzipEstimateBytes": 3853
+        "rawBytes": 10768,
+        "gzipEstimateBytes": 3870
       }
     },
     {
@@ -488,13 +488,13 @@
       "htmlBytes": 6873,
       "css": {
         "files": 8,
-        "rawBytes": 68002,
-        "gzipEstimateBytes": 19389
+        "rawBytes": 68028,
+        "gzipEstimateBytes": 19402
       },
       "js": {
         "files": 2,
-        "rawBytes": 10625,
-        "gzipEstimateBytes": 3853
+        "rawBytes": 10768,
+        "gzipEstimateBytes": 3870
       }
     },
     {
@@ -502,13 +502,13 @@
       "htmlBytes": 7100,
       "css": {
         "files": 8,
-        "rawBytes": 68002,
-        "gzipEstimateBytes": 19389
+        "rawBytes": 68028,
+        "gzipEstimateBytes": 19402
       },
       "js": {
         "files": 2,
-        "rawBytes": 10625,
-        "gzipEstimateBytes": 3853
+        "rawBytes": 10768,
+        "gzipEstimateBytes": 3870
       }
     },
     {
@@ -516,13 +516,13 @@
       "htmlBytes": 4619,
       "css": {
         "files": 8,
-        "rawBytes": 68002,
-        "gzipEstimateBytes": 19389
+        "rawBytes": 68028,
+        "gzipEstimateBytes": 19402
       },
       "js": {
         "files": 1,
-        "rawBytes": 3335,
-        "gzipEstimateBytes": 1313
+        "rawBytes": 3478,
+        "gzipEstimateBytes": 1330
       }
     },
     {
@@ -530,13 +530,13 @@
       "htmlBytes": 7508,
       "css": {
         "files": 8,
-        "rawBytes": 66475,
-        "gzipEstimateBytes": 18926
+        "rawBytes": 66501,
+        "gzipEstimateBytes": 18939
       },
       "js": {
         "files": 2,
-        "rawBytes": 6613,
-        "gzipEstimateBytes": 2648
+        "rawBytes": 6756,
+        "gzipEstimateBytes": 2665
       }
     },
     {
@@ -544,13 +544,13 @@
       "htmlBytes": 10896,
       "css": {
         "files": 7,
-        "rawBytes": 65728,
-        "gzipEstimateBytes": 18526
+        "rawBytes": 65754,
+        "gzipEstimateBytes": 18539
       },
       "js": {
         "files": 2,
-        "rawBytes": 21980,
-        "gzipEstimateBytes": 6827
+        "rawBytes": 22123,
+        "gzipEstimateBytes": 6844
       }
     },
     {
@@ -558,13 +558,13 @@
       "htmlBytes": 6478,
       "css": {
         "files": 7,
-        "rawBytes": 65728,
-        "gzipEstimateBytes": 18526
+        "rawBytes": 65754,
+        "gzipEstimateBytes": 18539
       },
       "js": {
         "files": 3,
-        "rawBytes": 26729,
-        "gzipEstimateBytes": 8558
+        "rawBytes": 26872,
+        "gzipEstimateBytes": 8575
       }
     }
   ],

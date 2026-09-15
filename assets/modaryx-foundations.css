@@ -99,3 +99,5 @@ h1, .section-title { font-family:var(--modaryx-display-font); font-weight:500; l
   .nova-topbar { grid-template-columns:minmax(0,1fr) auto; }
   .nova-topbar .nova-nav { justify-self:stretch; width:auto; top:100%; max-height:calc(100dvh - 90px); overflow-y:auto; }
 }
+
+.motion-toggle{min-height:var(--nova-control-min,44px);flex:0 0 auto;border:1px solid var(--line);border-radius:999px;padding:.45rem .7rem;background:rgba(255,255,255,.025);color:var(--muted);font:inherit;font-size:.76rem;font-weight:750;cursor:pointer}.motion-toggle:hover,.motion-toggle[aria-pressed="true"]{border-color:rgba(216,173,88,.4);color:var(--text);background:rgba(216,173,88,.06)}html[data-motion="reduced"]{scroll-behavior:auto}html[data-motion="reduced"] *,html[data-motion="reduced"] *::before,html[data-motion="reduced"] *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html[data-motion="reduced"] .button:hover{transform:none}
