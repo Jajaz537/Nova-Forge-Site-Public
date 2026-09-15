@@ -173,3 +173,9 @@ Un scénario supplémentaire dans qa/home-catalogue-checks.json et trois dans qa
 Avant correction, un graphe mal formé pouvait lever une exception après remplacement du titre et d’autres champs, tout en annonçant un secours statique conservé. Les collections du graphe et les champs nécessaires sont maintenant contrôlés et les cartes relationnelles préparées avant mutation visible. Un échec de préparation conserve titre, champs et relations existants. Les valeurs optionnelles inconnues gardent leurs libellés explicites.
 
 Quatre scénarios source regroupés dans qa/project-render-checks.json : quatre graphes invalides, échec de préparation de carte, données réelles et titre absent. Tests cache des fiches et refus stockage réexécutés, 21 assertions cache, structure 16 pages/13 scripts et 76 empreintes réussis. Cumul ciblé 108 scénarios/contrôles hors largeurs ; cache v58. Aucune nouvelle preuve navigateur native revendiquée. EN COURS, aucune VF.
+
+## Consolidation — seize routes dans Chrome (15 septembre 2026)
+
+Source 20556b8dd00a1064745c1268a8e430e4b81ec373, rapport qa/browser-routes-checks.json : les seize fichiers HTML ont été ouverts directement dans Chrome local. Chacun expose un document.title non vide, un h1 et un main uniques ; aucun dépassement scrollWidth/clientWidth aux largeurs utiles observées (1348 px, 1363 px pour 404 sans scrollbar). Liens et repères aria-current de l’en-tête recensés.
+
+Cette recette est une preuve de chargement/navigation DOM desktop, pas une revue exhaustive de rendu ou d’interaction. Images différées non toutes attendues, vrai statut HTTP d’une URL inexistante non testé, pas de zoom natif ni de nouvelle preuve lecteur d’écran/appareil physique/HTTPS hors ligne. Les 16 observations sont distinctes des 108 scénarios source et des mesures responsive antérieures. Aucun runtime modifié, cache v58 inchangé. EN COURS, aucune VF.
