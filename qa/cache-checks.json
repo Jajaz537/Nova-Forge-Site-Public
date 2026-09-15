@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-15T09:07:49.866Z",
+  "measuredAt": "2026-09-15T09:18:21.066Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -339,8 +339,8 @@
     "uniqueLocalFiles": 70,
     "missing": [],
     "files": 70,
-    "rawBytes": 797672,
-    "gzipEstimateBytes": 519392
+    "rawBytes": 796723,
+    "gzipEstimateBytes": 518825
   },
   "pages": [
     {
@@ -348,8 +348,8 @@
       "htmlBytes": 4143,
       "css": {
         "files": 7,
-        "rawBytes": 66677,
-        "gzipEstimateBytes": 19095
+        "rawBytes": 65728,
+        "gzipEstimateBytes": 18528
       },
       "js": {
         "files": 2,
@@ -362,8 +362,8 @@
       "htmlBytes": 10592,
       "css": {
         "files": 8,
-        "rawBytes": 70725,
-        "gzipEstimateBytes": 20356
+        "rawBytes": 69776,
+        "gzipEstimateBytes": 19789
       },
       "js": {
         "files": 2,
@@ -376,8 +376,8 @@
       "htmlBytes": 13420,
       "css": {
         "files": 7,
-        "rawBytes": 66677,
-        "gzipEstimateBytes": 19095
+        "rawBytes": 65728,
+        "gzipEstimateBytes": 18528
       },
       "js": {
         "files": 2,
@@ -390,8 +390,8 @@
       "htmlBytes": 13733,
       "css": {
         "files": 8,
-        "rawBytes": 68403,
-        "gzipEstimateBytes": 19828
+        "rawBytes": 67454,
+        "gzipEstimateBytes": 19261
       },
       "js": {
         "files": 3,
@@ -404,8 +404,8 @@
       "htmlBytes": 12705,
       "css": {
         "files": 7,
-        "rawBytes": 66677,
-        "gzipEstimateBytes": 19095
+        "rawBytes": 65728,
+        "gzipEstimateBytes": 18528
       },
       "js": {
         "files": 2,
@@ -418,8 +418,8 @@
       "htmlBytes": 8268,
       "css": {
         "files": 7,
-        "rawBytes": 66677,
-        "gzipEstimateBytes": 19095
+        "rawBytes": 65728,
+        "gzipEstimateBytes": 18528
       },
       "js": {
         "files": 3,
@@ -432,8 +432,8 @@
       "htmlBytes": 9818,
       "css": {
         "files": 7,
-        "rawBytes": 66677,
-        "gzipEstimateBytes": 19095
+        "rawBytes": 65728,
+        "gzipEstimateBytes": 18528
       },
       "js": {
         "files": 2,
@@ -446,8 +446,8 @@
       "htmlBytes": 18108,
       "css": {
         "files": 4,
-        "rawBytes": 44437,
-        "gzipEstimateBytes": 12456
+        "rawBytes": 43488,
+        "gzipEstimateBytes": 11889
       },
       "js": {
         "files": 3,
@@ -460,8 +460,8 @@
       "htmlBytes": 6563,
       "css": {
         "files": 8,
-        "rawBytes": 67638,
-        "gzipEstimateBytes": 19557
+        "rawBytes": 66689,
+        "gzipEstimateBytes": 18990
       },
       "js": {
         "files": 2,
@@ -474,8 +474,8 @@
       "htmlBytes": 7114,
       "css": {
         "files": 8,
-        "rawBytes": 68859,
-        "gzipEstimateBytes": 19927
+        "rawBytes": 67910,
+        "gzipEstimateBytes": 19360
       },
       "js": {
         "files": 2,
@@ -488,8 +488,8 @@
       "htmlBytes": 6873,
       "css": {
         "files": 8,
-        "rawBytes": 68859,
-        "gzipEstimateBytes": 19927
+        "rawBytes": 67910,
+        "gzipEstimateBytes": 19360
       },
       "js": {
         "files": 2,
@@ -502,8 +502,8 @@
       "htmlBytes": 7100,
       "css": {
         "files": 8,
-        "rawBytes": 68859,
-        "gzipEstimateBytes": 19927
+        "rawBytes": 67910,
+        "gzipEstimateBytes": 19360
       },
       "js": {
         "files": 2,
@@ -516,8 +516,8 @@
       "htmlBytes": 4601,
       "css": {
         "files": 8,
-        "rawBytes": 68859,
-        "gzipEstimateBytes": 19927
+        "rawBytes": 67910,
+        "gzipEstimateBytes": 19360
       },
       "js": {
         "files": 1,
@@ -530,8 +530,8 @@
       "htmlBytes": 7493,
       "css": {
         "files": 8,
-        "rawBytes": 67424,
-        "gzipEstimateBytes": 19495
+        "rawBytes": 66475,
+        "gzipEstimateBytes": 18928
       },
       "js": {
         "files": 2,
@@ -544,8 +544,8 @@
       "htmlBytes": 10896,
       "css": {
         "files": 7,
-        "rawBytes": 66677,
-        "gzipEstimateBytes": 19095
+        "rawBytes": 65728,
+        "gzipEstimateBytes": 18528
       },
       "js": {
         "files": 2,
@@ -558,8 +558,8 @@
       "htmlBytes": 6393,
       "css": {
         "files": 7,
-        "rawBytes": 66677,
-        "gzipEstimateBytes": 19095
+        "rawBytes": 65728,
+        "gzipEstimateBytes": 18528
       },
       "js": {
         "files": 3,

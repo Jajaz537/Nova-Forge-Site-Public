@@ -1,4 +1,3 @@
-/* Shared MODARYX presentation. Historical nova-* contracts remain compatible. */
 :root {
   --modaryx-content: 1400px;
   --modaryx-reading: 68ch;
@@ -35,7 +34,6 @@ input::file-selector-button { padding: 8px 12px; margin-right: 12px; border: 1px
 .page-trail span[aria-hidden] { color: var(--nova-border-strong); }
 .section-nav { display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 12px 0; border-block: 1px solid var(--nova-border-subtle); }
 .topbar nav a[aria-current] { color: var(--nova-gold-light); background: var(--nova-panel); box-shadow: inset 0 -2px var(--nova-gold); }
-/* Without enhancement, keep every destination accessible. */
 .topbar:not([data-nav-ready]) nav, .nova-topbar:not([data-nav-ready]) .nova-nav { display: flex; flex-wrap: wrap; position: static; grid-column: 1/-1; }
 .topbar:not([data-nav-ready]) .nav-toggle, .nova-topbar:not([data-nav-ready]) .menu-button { display: none; }
 .studio-step-links { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-block: 12px; }
@@ -43,7 +41,6 @@ input::file-selector-button { padding: 8px 12px; margin-right: 12px; border: 1px
 @media(max-width:760px) { .site-footer { grid-template-columns: 1fr; } .site-footer nav { justify-content: flex-start; } }
 @media(prefers-reduced-motion:reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 
-/* Finish pass: restrained materials, readable rhythm and native disclosure. */
 :root { --modaryx-motion-fast: 120ms; --modaryx-motion-standard: 180ms; }
 h1, h2, h3 { text-wrap: balance; }
 main p { text-wrap: pretty; }
@@ -63,7 +60,6 @@ main p { text-wrap: pretty; }
   .topbar .motion-toggle { grid-column: 3; }
 }
 
-/* Loup/Dragon: approved historical concepts, adapted to MODARYX web. */
 :root { --modaryx-display-font: Georgia, "Times New Roman", serif; }
 h1, .section-title { font-family:var(--modaryx-display-font); font-weight:500; letter-spacing:-.035em; }
 .modaryx-realm-hero { position:relative; isolation:isolate; overflow:hidden; min-height:660px; padding:80px 0; background:#090e14; }
@@ -90,7 +86,6 @@ h1, .section-title { font-family:var(--modaryx-display-font); font-weight:500; l
 @media(max-width:1100px) { .modaryx-realm-hero { min-height:0; padding-top:clamp(260px,44vw,440px); padding-bottom:40px; } .modaryx-realm-art { height:clamp(320px,55vw,570px); object-position:70% center; } .modaryx-realm-hero::after { background:linear-gradient(0deg,#090e14 0%,#090e14 48%,transparent 84%); } .modaryx-realm-hero .hero-copy { max-width:720px; background:#090e14; padding:24px; border:1px solid #493f2d; border-radius:12px; } }
 @media(max-width:600px) { .modaryx-realm-hero .hero-copy { padding:24px 18px; } .modaryx-realm-hero .display { font-size:clamp(2.1rem,8vw,3rem); } .modaryx-portal-links { grid-template-columns:1fr; } .modaryx-portal-links a+a { border-left:0; } .modaryx-portals img { min-height:240px; object-fit:cover; } }
 
-/* Short collection fields share a row only when each remains comfortably wide. */
 @media(min-width:900px) {
   #collection-form { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:24px; }
   #collection-form > * { grid-column:1 / -1; min-width:0; }
@@ -98,7 +93,6 @@ h1, .section-title { font-family:var(--modaryx-display-font); font-weight:500; l
   #collection-form > label[for="collection-name"] { grid-column:auto; }
 }
 
-/* The mobile disclosure button precedes its navigation in DOM/tab order. */
 @media(max-width:1180px) {
   .nova-topbar > .menu-button { grid-column:2; grid-row:1; justify-self:end; }
   .nova-topbar > .header-actions { display:none; }

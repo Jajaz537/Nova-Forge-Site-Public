@@ -19,7 +19,7 @@ e5877b6cb453f72f7ac8d0190a6235340f3389a8615b1929526f3750e5b8922e  ./assets/modar
 a9d20d30f4ad4afbdf615f4d235d9ab95446bfc388b3d85f005f4861a4c90632  ./assets/nova-mark-512.png
 e8afe9ea440ac2bd423e1baaac751efae9791c1870e793d734168d5ddc97a0a0  ./assets/nova-mark.svg
 ea3ceb226c6cd2903c513bb3cede5863802e345ee29cd1d33354f581c27b334b  ./assets/nova-premium-hd-secondary.css
-b22de7226a399f7b382ad874a7561029da3752286100d0c6b98adfa926685034  ./assets/nova-premium-hd.css
+5bf74ab97ac77cee1a411bc585422b8411d5dfc8f8da2a8ab16e6f59fc34f5fe  ./assets/nova-premium-hd.css
 947867b01e8b12ee6e9a9853c175590fd154233d5a2e8596592ed37420e0ef6b  ./assets/nova-premium-hd.js
 eeab87956f214354e6dbb15ec04c340a940e457f4b44b4cd6992b9f1033d62e2  ./assets/official.css
 60cb04fe638d9f17f6edebc46b281bbbab3eb41bd7618298d48055a37c17f687  ./assets/profiles.css
@@ -71,6 +71,6 @@ c2a65511fef5fe723f6e10e3af17bad0ff912918b3f00e391ac34cf12c3b9b84  ./schemas/univ
 95381433ad3296afcf2befa6bac332088f72180439f276575b22515f661e0912  ./site.webmanifest
 37d1d081e2f31c4c9f313a8e239efc2ca727892c929ca4a8fcc33515ac80450b  ./sw.js
 cbffe9845399e9ed0d82ee13fa3477f0461c1c7dc649a6624da720179f73292a  ./verify.html
-fedc06147256ef45992c196c161fbf65bd4528a85a58fe9602b9452c46390214  assets/modaryx-foundations.css
+d18ed4c250023046ab9beeb85c871e321ba2cb2ddec55d11730fd8683df26d5e  assets/modaryx-foundations.css
 25244395f7714ce0da8247cb3ed7b58312cc7cf0a893ec32fc575cb6c359f5f8  assets/modaryx-wolf-dragon-hero.webp
 200fe4edc6633c8d9912bbc51b3344568083d0b76339c1ddd9b39901d94ff832  assets/modaryx-world-portals.webp

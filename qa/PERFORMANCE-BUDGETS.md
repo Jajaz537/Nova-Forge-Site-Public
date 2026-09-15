@@ -77,3 +77,9 @@ La stratégie CSS/JS non versionnés est désormais révalidée au réseau ; dé
 Mesures actuelles : 797672 octets de précache, sous la cible proposée de 800000. Le Catalogue charge 70725 octets de CSS : **écart ouvert de 725 octets** par rapport à la cible de 70000. Les autres pages sont sous cette cible. Aucun style n’a été supprimé arbitrairement pour atteindre un chiffre. Une consolidation des feuilles doit préserver la cascade et être comparée visuellement avant adoption.
 
 Le navigateur de recette permet d’inspecter le rendu et le DOM ; il n’expose pas ici un profiler réseau/CPU ou une commande de mise hors ligne. Les mesures ci-dessus restent des tailles de fichiers, pas des CWV ni des temps de démarrage. Les captures d’accueil montrent l’art Loup/Dragon après chargement, sans mesure fiable de sa durée.
+
+## Budget CSS rétabli — 15 septembre 2026
+
+949 octets de commentaires internes déplacés depuis les deux feuilles communes vers `CSS-SOURCE-NOTES.md`. Comparaison contre 93527f4 : les deux fichiers sont exactement identiques une fois ces seuls commentaires retirés. Aucune règle, valeur ou ordre de cascade modifié. Catalogue : 69776 octets CSS ; les seize pages respectent désormais la cible de 70000. Précache : 796723 octets bruts, 518825 gzip estimés. 25 assertions cache et 76 empreintes vérifiées. Ceci ferme l’écart de taille statique, sans prouver un gain de vitesse utilisateur.
+
+`responsive-review.html` est un outil QA séparé, sans lien dans la navigation publique, sans référencement demandé et sans ajout au précache. Il ouvre les seize pages autorisées dans un cadre de largeur réglable pour poursuivre la recette sur l’aperçu HTTPS lorsque le serveur local est inaccessible. Sa présence seule n’est pas une preuve responsive.
