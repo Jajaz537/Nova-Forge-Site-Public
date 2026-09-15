@@ -380,3 +380,9 @@ Défaut reproduit dans Chrome : arrivée avec `#sha256=incorrect` sans avertisse
 Recette Chrome HTTPS sur `a4911e16e02e403a3cf97b8d952a9ae9c65066e8` : quatre FAQ et deux panneaux JSON ouverts avec Entrée puis fermés avec Espace. Tab depuis les deux résumés ouverts atteint respectivement collection-preview et submission-preview. Quatre mesures des panneaux ouverts à 320/768 sans débordement horizontal. La première tentative de mesure pendant Chargement est écartée ; résultats conservés après stabilisation.
 
 Preuve : `qa/disclosure-browser-20260915.json`. Aucun code produit, cache ou infrastructure modifié. JSON de brouillons initiaux seulement ; longs imports arbitraires et lecteur d’écran non certifiés. **VF NON VALIDÉE**, manques fonctionnels et externes inchangés.
+
+## Communauté — aperçus longs, 15 septembre 2026
+
+`qa/long-preview-browser-20260915.json`, source `8daaf440c7da1d1e8b8aa382242e7c31791390d2` : description saisie de 1200 caractères sans espaces et contribution de 8000 caractères multilingues avec balises littérales. Les aperçus ne créent aucun élément enfant ; le JSON reste du texte. Ctrl+Fin atteint le bas du panneau de contribution après stabilisation (1113/1113 px). Deux mesures avec panneaux ouverts à 320/768 sans débordement horizontal.
+
+Aucune sauvegarde effectuée ; rechargement final confirme description, titre et corps vides comme à l’entrée. Aucun code produit modifié, aucune nouvelle recette d’import/export, RTL complet ou lecteur d’écran revendiquée. **VF NON VALIDÉE.**

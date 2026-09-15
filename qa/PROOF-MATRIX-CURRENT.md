@@ -15,6 +15,7 @@ Cette matrice remplace les anciens « prochains blocs » devenus partiellement a
 | Fiches, droits et favoris | `project-browser-20260915.json` | Trois allers-retours favoris, droits non inventés, six mesures de reflow. Aucun artefact distribué. |
 | Recherche | `search-browser-20260915.json` | Accents, résultat vide, effacement, navigation clavier et contenu observés ; 14 entrées locales. |
 | Profil local et essai manuel | `profile-browser-20260915.json` | Libellés français, trois réponses UI, fermeture et reflow ouvert 320/768. Aucun benchmark de jeu effectué. |
+| Aperçus longs Communauté | `long-preview-browser-20260915.json` | Saisie 1200/8000 caractères, texte multilingue et balises littérales ; défilement clavier jusqu’en bas, reflow 320/768. Aucun import/export testé ici. |
 | FAQ et aperçus JSON | `disclosure-browser-20260915.json` | Six panneaux : Entrée ouvre, Espace ferme ; Tab accède aux deux aperçus JSON. Quatre mesures ouvertes à 320/768 sans débordement. |
 | Menus et séparation OS/web | `mobile-menu-browser-20260915.json` | Ouverture/fermeture et parcours ciblés ; lien OS optionnel inactif. |
 | Mouvement réduit | `motion-browser-20260915.json` | Préférence explicite propagée aux 16 pages, CSS calculé observé ; préférence système physique non basculée. |
