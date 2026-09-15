@@ -38,23 +38,23 @@
         <h1 id="profiles-title">Votre profil, vos moyens de connexion.</h1>
         <p class="lede">Cette page présente le modèle prévu pour les profils : les informations visibles par la communauté restent séparées des moyens de connexion et de récupération. La création de compte n’est pas encore disponible.</p>
       </div>
-      <aside class="panel" aria-label="État de la surface"><strong>Présentation du modèle.</strong><p>Vous pouvez consulter les formats publics et la disponibilité des API de ce navigateur. Aucune connexion ni création de clé n’est lancée.</p></aside>
+      <aside class="panel" aria-label="Disponibilité des profils"><strong>Comptes à venir.</strong><p>Découvrez les principes prévus pour votre profil et les capacités de ce navigateur. Vous ne pouvez pas encore créer de compte ou vous connecter.</p></aside>
     </section>
 
     <section class="profiles-grid" aria-labelledby="boundaries-title">
-      <div class="section-heading"><div><p class="eyebrow">Frontières</p><h2 id="boundaries-title">Cinq domaines séparés</h2></div></div>
-      <article class="profile-card"><h3>Identité publique</h3><p>Handle, nom affiché, bio, visibilité, rôle créateur et collections. Contrat : <code>public-profile.schema.json</code>.</p></article>
-      <article class="profile-card"><h3>Moyens de connexion</h3><p>Passkeys WebAuthn actives ou révoquées, algorithme public, transports et politique de vérification utilisateur. Aucune clé privée dans MODARYX MODS.</p></article>
-      <article class="profile-card"><h3>Récupération</h3><p>État distinct du credential principal. Aucun mécanisme n’est présenté comme configuré sans preuve réelle.</p></article>
-      <article class="profile-card"><h3>Sessions & appareils</h3><p>Journal utilisateur des sessions actives, révoquées ou expirées, séparé du profil public.</p></article>
-      <article class="profile-card"><h3>Actions privilégiées</h3><p>Publication, modération et changements de sécurité exigent une ré-authentification récente.</p></article>
+      <div class="section-heading"><div><p class="eyebrow">Fonctionnement prévu</p><h2 id="boundaries-title">Cinq domaines séparés</h2></div></div>
+      <article class="profile-card"><h3>Identité publique</h3><p>Pseudonyme, nom affiché, biographie et collections formeront votre présentation publique, distincte des informations de connexion.</p></article>
+      <article class="profile-card"><h3>Moyens de connexion</h3><p>Les clés d’accès prévues pour la connexion seront séparées du profil public. Leur enregistrement n’est pas encore disponible.</p></article>
+      <article class="profile-card"><h3>Récupération</h3><p>Les moyens de retrouver l’accès à un compte devront être configurés et vérifiés séparément. Aucun n’est actuellement activé sur ce site.</p></article>
+      <article class="profile-card"><h3>Sessions & appareils</h3><p>Un espace distinct est prévu pour consulter les connexions et leurs appareils. Aucun historique de compte n’est disponible actuellement.</p></article>
+      <article class="profile-card"><h3>Actions sensibles</h3><p>La publication, la modération et les changements de sécurité devront demander une confirmation récente de votre identité.</p></article>
     </section>
 
     <section class="profiles-grid" aria-labelledby="webauthn-title">
       <div class="section-heading"><div><p class="eyebrow">Détection locale</p><h2 id="webauthn-title">Capacités WebAuthn de ce navigateur</h2></div><span class="badge" id="passkey-status" role="status" aria-live="polite">Non vérifié</span></div>
       <article class="profile-card"><h3>WebAuthn API</h3><p id="webauthn-api">État non vérifié.</p></article>
       <article class="profile-card"><h3>Authentificateur de plateforme</h3><p id="platform-authenticator">État non vérifié.</p></article>
-      <article class="profile-card"><h3>Conditional mediation</h3><p id="conditional-mediation">État non vérifié.</p></article>
+      <article class="profile-card"><h3>Suggestion de clés à la connexion</h3><p id="conditional-mediation">État non vérifié.</p></article>
       <p class="profiles-note">Ces contrôles mesurent uniquement la disponibilité d’API dans le navigateur. Ils ne prouvent pas qu’un compte existe, qu’une passkey est enregistrée, ni qu’une authentification a réussi.</p>
     </section>
 
