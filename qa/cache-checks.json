@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-15T22:18:34.022Z",
+  "measuredAt": "2026-09-15T22:58:26.348Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -103,7 +103,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "4d08997574870d8f6d8ed7aeeca97a93e6aead1ae46bc529817e0b9d02880abd",
+  "serviceWorkerSha256": "6cd3574b5bd0c15d9cec24500d7b06b182c50e48d4e4d14db81e317e2f326153",
   "probes": [
     {
       "url": "/catalog.html",
@@ -335,12 +335,12 @@
     "nova-site-shell-old"
   ],
   "precache": {
-    "requests": 71,
-    "uniqueLocalFiles": 70,
+    "requests": 70,
+    "uniqueLocalFiles": 69,
     "missing": [],
-    "files": 70,
-    "rawBytes": 799939,
-    "gzipEstimateBytes": 519484
+    "files": 69,
+    "rawBytes": 797554,
+    "gzipEstimateBytes": 518464
   },
   "pages": [
     {

@@ -392,3 +392,9 @@ Aucune sauvegarde effectuée ; rechargement final confirme description, titre et
 Source `653bec05706d26cc975142f1ff3de12b1b684d8b`, Chrome HTTPS : notes 0, 6 et 2,5 refusées avec focus/aria-invalid sur la note ; 5 acceptée. Parent vide du commentaire refusé avec focus ; parent au format valide accepté. Le JSON commentaire exclut titre/note ; le retour Discussion exclut note/parent. L’existence réelle d’une contribution parente n’est pas vérifiée par ce formulaire local.
 
 Sept observations dans `qa/submission-variants-browser-20260915.json`. Aucun brouillon sauvegardé ni publié, rechargement final revenu à Discussion avec champs vides. Aucun code produit modifié. **VF NON VALIDÉE**, limites externes et capacités absentes maintenues.
+
+## Précache — ressource historique sans consommateur
+
+Revue sur `d16fbd4eafbd7ee881d992aa16d23b2bf775b1a9` : `assets/nova-kingdom-panorama.svg` n’apparaît que dans la liste de précache (hors empreinte), pas dans les pages, styles, scripts ou manifestes actuels. Retrait de cette seule entrée du service worker ; asset et empreinte conservés, aucune substitution de marque. Art Loup/Dragon inchangé.
+
+Cache v79 : 69 fichiers uniques, 797554 octets bruts contre 799939 ; économie statique de 2385 octets et une requête d’installation. Estimation gzip 518464 octets. Ce gain ne constitue pas une amélioration CWV mesurée. 25 assertions cache réussies ; 16 pages/13 scripts/76 empreintes vérifiés, aucune configuration protégée modifiée. Cycle natif hors ligne/mise à jour toujours PREUVE MANQUANTE. VF NON VALIDÉE.
