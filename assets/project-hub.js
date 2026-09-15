@@ -102,7 +102,7 @@
     node("project-evidence").textContent = labels[item.compatibility?.evidence] || "Inconnue";
     node("project-distribution").textContent = item.distribution?.label || "Verrouillée";
     node("project-provenance").textContent = item.provenance?.label || "Inconnue";
-    node("project-license").textContent = item.rights?.license || "Inconnue";
+    node("project-license").textContent = item.rights?.license === "UNSPECIFIED-PREVIEW" ? "Non précisée — aperçu" : item.rights?.license || "Inconnue";
     node("project-redistribution").textContent = labels[item.rights?.redistribution] || "Inconnue";
 
     relationsRoot.replaceChildren(...cards);

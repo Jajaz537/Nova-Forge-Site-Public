@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-15T21:48:27.201Z",
+  "measuredAt": "2026-09-15T21:58:43.628Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -103,7 +103,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "55b569c5c4e0d100a1a09d23197f2940630f434dee20e6dae5e3eb2f1c0a9ea9",
+  "serviceWorkerSha256": "5c2b88a210a2924712ef5514863be61bcbdeb80229e002ffd874b487c651c39b",
   "probes": [
     {
       "url": "/catalog.html",
@@ -339,8 +339,8 @@
     "uniqueLocalFiles": 70,
     "missing": [],
     "files": 70,
-    "rawBytes": 799608,
-    "gzipEstimateBytes": 519465
+    "rawBytes": 799709,
+    "gzipEstimateBytes": 519479
   },
   "pages": [
     {
@@ -471,7 +471,7 @@
     },
     {
       "page": "project-balanced-latency-pack.html",
-      "htmlBytes": 7114,
+      "htmlBytes": 7121,
       "css": {
         "files": 8,
         "rawBytes": 68028,
@@ -479,13 +479,13 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 10768,
-        "gzipEstimateBytes": 3870
+        "rawBytes": 10848,
+        "gzipEstimateBytes": 3914
       }
     },
     {
       "page": "project-ember-textures.html",
-      "htmlBytes": 6873,
+      "htmlBytes": 6880,
       "css": {
         "files": 8,
         "rawBytes": 68028,
@@ -493,13 +493,13 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 10768,
-        "gzipEstimateBytes": 3870
+        "rawBytes": 10848,
+        "gzipEstimateBytes": 3914
       }
     },
     {
       "page": "project-forge-night-experience.html",
-      "htmlBytes": 7100,
+      "htmlBytes": 7107,
       "css": {
         "files": 8,
         "rawBytes": 68028,
@@ -507,8 +507,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 10768,
-        "gzipEstimateBytes": 3870
+        "rawBytes": 10848,
+        "gzipEstimateBytes": 3914
       }
     },
     {
