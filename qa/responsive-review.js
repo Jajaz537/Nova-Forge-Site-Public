@@ -4,7 +4,13 @@ function measure(){
   try{
     const d=frame.contentDocument,e=d?.documentElement;
     if(!d?.body){output.textContent='Document indisponible';return;}
-    const w=frame.contentWindow,nav=w.performance.getEntriesByType('navigation')[0];
+    const w=frame.contentWindow;
+    const canonical=path=>path.replace(/index\.html$/, '').replace(/\.html$/, '').replace(/\/$/, '');
+    const expected=new URL('../'+page.value,location.href).pathname;
+    if(canonical(w.location.pathname)!==canonical(expected)||d.readyState!=='complete'){
+      output.textContent='Chargement : mesure différée jusqu’au document demandé';return;
+    }
+    const nav=w.performance.getEntriesByType('navigation')[0];
     const ms=value=>Number.isFinite(value)&&value>0?Math.round(value*100)/100:null;
     const worker=w.navigator.serviceWorker?.controller;
     output.textContent=JSON.stringify({page:page.value,url:w.location.href,requested:Number(width.value),width:e.clientWidth,scroll:e.scrollWidth,height:e.clientHeight,contentHeight:e.scrollHeight,h1:d.querySelector('h1')?.textContent.trim(),positiveTabindex:[...d.querySelectorAll('[tabindex]')].filter(el=>Number(el.getAttribute('tabindex'))>0).length,navigation:nav?{type:nav.type,domContentLoadedEndMs:ms(nav.domContentLoadedEventEnd),loadEndMs:ms(nav.loadEventEnd),responseEndMs:ms(nav.responseEnd)}:null,serviceWorker:{supported:'serviceWorker' in w.navigator,secure:w.isSecureContext,controller:worker?{script:worker.scriptURL,state:worker.state}:null},timingScope:'Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof'});

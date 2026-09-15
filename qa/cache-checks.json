@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-15T20:18:55.938Z",
+  "measuredAt": "2026-09-15T20:24:23.524Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -103,7 +103,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "02613a8e2359687940b10161fce7490b0fa4a333047b4992d0a0a8a13e7fb2d7",
+  "serviceWorkerSha256": "f893b55625e4b69ecd943030037d46cfa4e3a68c78a6c63b22277f049848ee49",
   "probes": [
     {
       "url": "/catalog.html",
@@ -339,8 +339,8 @@
     "uniqueLocalFiles": 70,
     "missing": [],
     "files": 70,
-    "rawBytes": 796986,
-    "gzipEstimateBytes": 518865
+    "rawBytes": 797096,
+    "gzipEstimateBytes": 518897
   },
   "pages": [
     {
@@ -349,7 +349,7 @@
       "css": {
         "files": 7,
         "rawBytes": 65728,
-        "gzipEstimateBytes": 18528
+        "gzipEstimateBytes": 18526
       },
       "js": {
         "files": 2,
@@ -363,7 +363,7 @@
       "css": {
         "files": 8,
         "rawBytes": 69776,
-        "gzipEstimateBytes": 19789
+        "gzipEstimateBytes": 19787
       },
       "js": {
         "files": 2,
@@ -377,7 +377,7 @@
       "css": {
         "files": 7,
         "rawBytes": 65728,
-        "gzipEstimateBytes": 18528
+        "gzipEstimateBytes": 18526
       },
       "js": {
         "files": 2,
@@ -391,7 +391,7 @@
       "css": {
         "files": 8,
         "rawBytes": 67474,
-        "gzipEstimateBytes": 19275
+        "gzipEstimateBytes": 19273
       },
       "js": {
         "files": 3,
@@ -405,7 +405,7 @@
       "css": {
         "files": 7,
         "rawBytes": 65728,
-        "gzipEstimateBytes": 18528
+        "gzipEstimateBytes": 18526
       },
       "js": {
         "files": 2,
@@ -419,7 +419,7 @@
       "css": {
         "files": 7,
         "rawBytes": 65728,
-        "gzipEstimateBytes": 18528
+        "gzipEstimateBytes": 18526
       },
       "js": {
         "files": 3,
@@ -433,7 +433,7 @@
       "css": {
         "files": 7,
         "rawBytes": 65728,
-        "gzipEstimateBytes": 18528
+        "gzipEstimateBytes": 18526
       },
       "js": {
         "files": 2,
@@ -461,7 +461,7 @@
       "css": {
         "files": 8,
         "rawBytes": 66689,
-        "gzipEstimateBytes": 18990
+        "gzipEstimateBytes": 18988
       },
       "js": {
         "files": 2,
@@ -474,8 +474,8 @@
       "htmlBytes": 7114,
       "css": {
         "files": 8,
-        "rawBytes": 67910,
-        "gzipEstimateBytes": 19360
+        "rawBytes": 68002,
+        "gzipEstimateBytes": 19389
       },
       "js": {
         "files": 2,
@@ -488,8 +488,8 @@
       "htmlBytes": 6873,
       "css": {
         "files": 8,
-        "rawBytes": 67910,
-        "gzipEstimateBytes": 19360
+        "rawBytes": 68002,
+        "gzipEstimateBytes": 19389
       },
       "js": {
         "files": 2,
@@ -502,8 +502,8 @@
       "htmlBytes": 7100,
       "css": {
         "files": 8,
-        "rawBytes": 67910,
-        "gzipEstimateBytes": 19360
+        "rawBytes": 68002,
+        "gzipEstimateBytes": 19389
       },
       "js": {
         "files": 2,
@@ -513,11 +513,11 @@
     },
     {
       "page": "project.html",
-      "htmlBytes": 4601,
+      "htmlBytes": 4619,
       "css": {
         "files": 8,
-        "rawBytes": 67910,
-        "gzipEstimateBytes": 19360
+        "rawBytes": 68002,
+        "gzipEstimateBytes": 19389
       },
       "js": {
         "files": 1,
@@ -531,7 +531,7 @@
       "css": {
         "files": 8,
         "rawBytes": 66475,
-        "gzipEstimateBytes": 18928
+        "gzipEstimateBytes": 18926
       },
       "js": {
         "files": 2,
@@ -545,7 +545,7 @@
       "css": {
         "files": 7,
         "rawBytes": 65728,
-        "gzipEstimateBytes": 18528
+        "gzipEstimateBytes": 18526
       },
       "js": {
         "files": 2,
@@ -559,7 +559,7 @@
       "css": {
         "files": 7,
         "rawBytes": 65728,
-        "gzipEstimateBytes": 18528
+        "gzipEstimateBytes": 18526
       },
       "js": {
         "files": 3,

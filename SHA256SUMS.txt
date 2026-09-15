@@ -12,7 +12,7 @@ bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-
 06b1dae65f9c0706fabc9b85a46cd3c50d7a5a5d2e6015b2be064b751d7b8189  ./assets/modaryx-mark-192.png
 38eb20983b8118843446d8a64dd5afa4991f43d927b41703b21b34fc30a1aa40  ./assets/modaryx-mark-512.png
 641c132867064876f6d9906ab2dabe64a9a2aeec6fdd97d7bba34a3bdcd2479c  ./assets/modaryx-mark.svg
-e5877b6cb453f72f7ac8d0190a6235340f3389a8615b1929526f3750e5b8922e  ./assets/modaryx-platform-refinement.css
+01ba1df1af85763410964f9030d52672b021d4712750f165a36d1ff97197c370  ./assets/modaryx-platform-refinement.css
 75443e41aa6c49a9ae0d09adedeb01fe4470c3ab62cbdbcc42a67b43998c8cf9  ./assets/modaryx-premium-refinement.css
 56ef2de2c164aec0e4dcb4c8582e3d25a7e123576d34b78639fea9fff9942334  ./assets/nova-kingdom-panorama.svg
 884fc8a9fa04105a294f8bea4e6c61c7ff0f3de94e227b9412d2f757c5a3c4f4  ./assets/nova-mark-192.png
@@ -24,7 +24,7 @@ ea3ceb226c6cd2903c513bb3cede5863802e345ee29cd1d33354f581c27b334b  ./assets/nova-
 eeab87956f214354e6dbb15ec04c340a940e457f4b44b4cd6992b9f1033d62e2  ./assets/official.css
 60cb04fe638d9f17f6edebc46b281bbbab3eb41bd7618298d48055a37c17f687  ./assets/profiles.css
 087a47dbb9c88c0e24bd13df4ee1c67ad9a3fb87768739d0f6197c5d33608bd7  ./assets/profiles.js
-1dc06a8f866bf8a6251f2bdbcb195360918ab337037f38c7c8b0a2f2dfc287eb  ./assets/project-hub.css
+4a12f55c53d63ed3a7ecb4f021f1b8a859953298781b3c3b0269b6fb09add5c5  ./assets/project-hub.css
 e48620d9b72a470a5105ca3b724e20b6ad1b58c8699d263738620e16f8aa66fb  ./assets/project-hub.js
 616ee68d070d70aac23106eebf4814d60f4c6ab62e16b0606f912e2d07db3eeb  ./assets/search.css
 16c8fc6bf665dda06d7bf36794d15d8be29284069b3482bfab19d52b011d0812  ./assets/search.js
@@ -48,7 +48,7 @@ bfcf8996fea9a016d490c976a35e539b9e80efed4ba89a710a61ab44778f54e2  ./index.html
 e73bd2245ddd1e55ea068836907ae32b07a075e604b5eb934898f8989de3dfd8  ./project-balanced-latency-pack.html
 2506dfc1455e9641cae9d17238085a4ea4811b16619ae1281bef0587991b645d  ./project-ember-textures.html
 321cbfefb530ea0923c0bae61b7d9358e500a76ae3b5f7bca809191407cfbcc5  ./project-forge-night-experience.html
-72ababc8ba90537d8493b723b78821350e3936a8e819e02cce2d4966bba2327b  ./project.html
+9c07b3ce2b0880601cee283a1e18119a36b78acbae4f78669c512ce5c11f5f82  ./project.html
 80163080d252e14292028eb077c6d8bd7c493b07e17ceda329ccedbe8c9189ac  ./public-build.json
 43d2dfa4afa6d13dbeae2feb44286098af575c31b39fcfacdc57710b73e56594  ./public-status.json
 16ceb5ee3e0dc13aa9adf31a3ebbe45a1d965b8c2b9f72eaf84e5911e140ed95  ./robots.txt
@@ -69,7 +69,7 @@ c2a65511fef5fe723f6e10e3af17bad0ff912918b3f00e391ac34cf12c3b9b84  ./schemas/univ
 2fdd57aa51150af5c2470518eb6c1a07d11bbe95b8cf457b024badb2de4561ba  ./search.html
 8a6ef970e78719594be1dc45423bdc8bcc61a1d314441d1b96a9fa4b9e6a8435  ./security.html
 95381433ad3296afcf2befa6bac332088f72180439f276575b22515f661e0912  ./site.webmanifest
-02613a8e2359687940b10161fce7490b0fa4a333047b4992d0a0a8a13e7fb2d7  ./sw.js
+f893b55625e4b69ecd943030037d46cfa4e3a68c78a6c63b22277f049848ee49  ./sw.js
 99a8da839b1e4e8e915f442e4dda0ffcf619859513a325a28ea571f5621ef503  ./verify.html
 d18ed4c250023046ab9beeb85c871e321ba2cb2ddec55d11730fd8683df26d5e  assets/modaryx-foundations.css
 25244395f7714ce0da8247cb3ed7b58312cc7cf0a893ec32fc575cb6c359f5f8  assets/modaryx-wolf-dragon-hero.webp
