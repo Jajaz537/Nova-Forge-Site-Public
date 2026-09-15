@@ -164,12 +164,20 @@
   };
 
   function renderErrorList(errors) {
+    const targets = {"$.content.id":"contentId","$.content.name":"name","$.content.version":"version","$.target.gameId":"gameId","$.target.gameName":"gameName","$.creator.id":"creatorId","$.creator.displayName":"creatorName","$.rights.license":"license","$.compatibility.evidenceReceipt":"evidenceReceipt","$.provenance.receiptId":"provenanceReceipt"};
     const heading = document.createElement("p");
     heading.textContent = `À corriger : ${errors.length} point(s).`;
     const list = document.createElement("ul");
     for (const message of errors) {
       const item = document.createElement("li");
-      item.textContent = friendlyError(message);
+      const field = fields[targets[message.split(":")[0]]];
+      if (field) {
+        const link = document.createElement("a");
+        link.href = `#${field.id}`;
+        link.textContent = friendlyError(message);
+        link.addEventListener("click", (event) => { event.preventDefault(); field.focus(); });
+        item.append(link);
+      } else item.textContent = friendlyError(message);
       list.append(item);
     }
     schemaStatus.replaceChildren(heading, list);

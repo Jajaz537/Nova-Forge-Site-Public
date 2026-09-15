@@ -4,8 +4,8 @@ ea72910ca5731d3faceca8d4adb9fd9df5f6201e0e5dd9110bbf3c59cac824af  ./assets/app.j
 315aded9aec412b378cb4c257d493b0f541c68fb5bcd10bdccb497bbbe51e52e  ./assets/catalog.css
 34f0f39f7ef3f4a3b5a5475e4865b3346481d3a5ac4722bf703daa50fcd811b5  ./assets/catalog.js
 187fa00a39974374e5785924e162a104b00bc6ebde477f2e4f7ba7421ba88c04  ./assets/community.js
-4607dafad93ce6d7054b2f6314fb3a6b8f0ba111ec4622d570cf62adc849019f  ./assets/creator-studio.css
-1351bacad1f134b4178b4aed63ccc00c11d4407dc145cd950e46143fb681ea40  ./assets/creator-studio.js
+1b99d934bf95142d21bb4d7aab2c0f6a56b301b70f61011af341978d7706f9c4  ./assets/creator-studio.css
+57fbf8f092f0b1f966d1465be6c9c954250d6cdc16ab1c95ce51bbb46322ab29  ./assets/creator-studio.js
 74deefbbeca6a11fd5a475a70c1f822789993d7c844cd1f172cefadc89dcd1b1  ./assets/downloads.js
 33a0530ceb4cafa33a6e0f05cc04994d086b8d11308d5f5f2a9fac20861efe81  ./assets/forge-field.svg
 bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-schema-lite.js
@@ -69,7 +69,7 @@ c2a65511fef5fe723f6e10e3af17bad0ff912918b3f00e391ac34cf12c3b9b84  ./schemas/univ
 2fdd57aa51150af5c2470518eb6c1a07d11bbe95b8cf457b024badb2de4561ba  ./search.html
 8a6ef970e78719594be1dc45423bdc8bcc61a1d314441d1b96a9fa4b9e6a8435  ./security.html
 95381433ad3296afcf2befa6bac332088f72180439f276575b22515f661e0912  ./site.webmanifest
-c133e194a8b459f24eabf1a1e28792addb04454e8092f72f7e740c6f076d322f  ./sw.js
+0e4b8e86b29518f06fd38dd35abd3b05034d3170e49baeb1786e1ad71ef702cf  ./sw.js
 99a8da839b1e4e8e915f442e4dda0ffcf619859513a325a28ea571f5621ef503  ./verify.html
 d18ed4c250023046ab9beeb85c871e321ba2cb2ddec55d11730fd8683df26d5e  assets/modaryx-foundations.css
 25244395f7714ce0da8247cb3ed7b58312cc7cf0a893ec32fc575cb6c359f5f8  assets/modaryx-wolf-dragon-hero.webp
