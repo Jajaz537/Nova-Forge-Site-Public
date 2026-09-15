@@ -7,7 +7,7 @@
       "id": "page:catalog",
       "kind": "page",
       "title": "Catalogue multigaming",
-      "summary": "Découvrir les contenus publics avec preuve explicite et distribution fail-closed.",
+      "summary": "Explorer les contenus de démonstration et leurs informations. Aucun téléchargement disponible.",
       "href": "./catalog.html",
       "terms": [
         "catalogue",
@@ -68,7 +68,7 @@
       "id": "page:security",
       "kind": "page",
       "title": "Sécurité & provenance",
-      "summary": "Contrat public de confiance, provenance, intégrité et états fail-closed.",
+      "summary": "Comprendre la provenance, les signatures, les empreintes et les limites des preuves.",
       "href": "./security.html",
       "terms": [
         "securite",
@@ -96,7 +96,7 @@
       "id": "content:ember-textures",
       "kind": "content",
       "title": "Ember Textures — Preview",
-      "summary": "Aperçu de démonstration Skyrim Special Edition, sans artefact distribué.",
+      "summary": "Aperçu de démonstration Skyrim Special Edition, sans fichier téléchargeable.",
       "href": "./project-ember-textures.html",
       "terms": [
         "skyrim",
@@ -123,7 +123,7 @@
       "id": "content:forge-night-experience",
       "kind": "content",
       "title": "Forge Night Experience — Preview",
-      "summary": "Expérience de démonstration Minecraft, compatibilité inconnue sans receipt mesuré.",
+      "summary": "Expérience de démonstration Minecraft ; compatibilité non vérifiée.",
       "href": "./project-forge-night-experience.html",
       "terms": [
         "minecraft",
