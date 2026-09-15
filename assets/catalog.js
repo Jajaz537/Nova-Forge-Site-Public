@@ -127,7 +127,9 @@
       if (viewsStateNode) viewsStateNode.textContent = "Suppression impossible : le navigateur a refusé la modification locale.";
       return;
     }
+    const restoreFocus = document.activeElement === deleteViewButton;
     refreshSavedViews();
+    if (restoreFocus) viewSelect.focus();
     if (viewsStateNode) viewsStateNode.textContent = target ? `Vue « ${target.name} » supprimée de ce navigateur.` : "Vue locale supprimée.";
   }
 
