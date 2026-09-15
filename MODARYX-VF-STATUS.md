@@ -352,3 +352,9 @@ Chrome HTTPS sur `e8bc038` : chacune des trois fiches ajoute son favori, le cata
 Correction `1aeb909e02e42d2d38ea31d2aa45bdca4b65b187` : sentinel technique UNSPECIFIED-PREVIEW rendu « Non précisée — aperçu » dans les trois secours HTML et le renderer. Donnée contractuelle inchangée ; les autres licences conservent leur libellé. Les trois pages affichent le nouveau texte après publication et maintiennent « Non autorisée » pour la redistribution. Six mesures à 320/768 sans débordement. Preuves : `qa/project-browser-20260915.json`.
 
 Quatre groupes renderer et trois scénarios cache-label réussis, vingt-cinq cache, structure/syntaxe et 76 empreintes sans erreur. Diff Git limité aux trois HTML, renderer, worker, empreintes et rapport cache ; aucune donnée contractuelle modifiée. Cache v76 : 799709 octets. Aucune preuve de synchronisation multi-onglets, de distribution, lecteur d’écran ou appareils physiques ajoutée. VF non validée.
+
+## Profil local — contenu français, 15 septembre 2026
+
+Présentation des observations et protocole d’essai clarifiés : Observé/Estimé/Inconnu, sauvegarde et restauration des réglages. Les codes internes Measured/Estimated/Unknown sont conservés ; aucune mesure de jeu, modification système ou persistance de résultat ajoutée. Source : `assets/app.js`.
+
+Syntaxe, structure des 16 pages, 76 empreintes et 25 assertions cache vérifiées ; précache v77 : 799626 octets bruts, sous le budget 800000. Le résultat natif après publication reste à consigner. **EN COURS, VF non validée.**

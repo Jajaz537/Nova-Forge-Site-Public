@@ -143,8 +143,8 @@
         ? observation('Largeur écran exposée', null, 'Unknown', 'unavailable', 'Non disponible')
         : observation('Largeur écran exposée', width, 'Measured', 'browser-api', `${width} px`),
       dpr === null
-        ? observation('Device Pixel Ratio', null, 'Unknown', 'unavailable', 'Non disponible')
-        : observation('Device Pixel Ratio', dpr, 'Measured', 'browser-api', String(dpr))
+        ? observation('Rapport de pixels', null, 'Unknown', 'unavailable', 'Non disponible')
+        : observation('Rapport de pixels', dpr, 'Measured', 'browser-api', String(dpr))
     ];
 
     const recommendation = cores && cores >= 8 && (!memory || memory >= 8)
@@ -163,7 +163,7 @@
       left.title = `Source : ${item.source}`;
       const right = document.createElement('span');
       right.className = 'evidence';
-      right.textContent = item.evidence;
+      right.textContent = {Measured:'Observé', Estimated:'Estimé', Unknown:'Inconnu'}[item.evidence];
       row.append(left, right);
       grid.append(row);
     });
@@ -175,13 +175,13 @@
     recommendationText.title = 'Estimation locale dérivée des observations disponibles.';
     const recommendationEvidence = document.createElement('span');
     recommendationEvidence.className = 'evidence';
-    recommendationEvidence.textContent = 'Estimated';
+    recommendationEvidence.textContent = 'Estimé';
     recommendationRow.append(recommendationText, recommendationEvidence);
     grid.append(recommendationRow);
 
     const disclaimer = document.createElement('p');
     disclaimer.className = 'muted';
-    disclaimer.textContent = 'Analyse browser-local indicative uniquement. « Measured » signifie observé via une API du navigateur pour cette session ; cela ne certifie pas le matériel physique sous-jacent. Aucun FPS ni niveau de stabilité n’est garanti.';
+    disclaimer.textContent = 'Analyse locale indicative : « Observé » décrit une valeur exposée par ce navigateur, sans certifier le matériel physique. Aucun FPS ni niveau de stabilité n’est garanti.';
 
     const tryButton = document.createElement('button');
     tryButton.className = 'button';
@@ -215,11 +215,11 @@
 
     const steps = document.createElement('ol');
     [
-      'Risque : la recommandation reste Estimated/Unknown tant qu’aucune mesure réelle du jeu n’est fournie.',
-      'Snapshot / backup : notez vos réglages actuels et utilisez, si le jeu le permet, une sauvegarde ou un profil de configuration réversible.',
+      'Risque : la recommandation reste une estimation tant qu’aucune mesure réelle du jeu n’est fournie.',
+      'Sauvegarde : notez vos réglages actuels et utilisez, si le jeu le permet, une sauvegarde ou un profil de configuration réversible.',
       'Test borné : limitez l’essai à une courte session reproductible (par exemple 10 minutes, même zone/scène, mêmes réglages hors variable testée).',
       'Mesure / comparaison : comparez fluidité, latence ressentie, stabilité et erreurs avec votre état de référence.',
-      'Décision : conservez seulement si le résultat est acceptable ; sinon revenez au snapshot ou baissez un seul réglage ciblé.'
+      'Décision : conservez seulement si le résultat est acceptable ; sinon restaurez vos réglages ou baissez un seul réglage ciblé.'
     ].forEach((text) => {
       const item = document.createElement('li');
       item.textContent = text;
@@ -239,8 +239,8 @@
 
     [
       ['Acceptable / stable', 'Résultat local noté : acceptable. Conservez le changement uniquement pour ce scénario testé ; cela ne devient pas une garantie générale.'],
-      ['Dégradé / instable', 'Résultat local noté : dégradé. Recommandation : rollback vers le snapshot, puis baisse ciblée d’un seul réglage avant un nouveau test borné.'],
-      ['Inconnu / non concluant', 'Résultat local noté : non concluant. Recommandation : ne promouvez pas le profil ; revenez au réglage prudent ou refaites un test plus reproductible.']
+      ['Dégradé / instable', 'Résultat local noté : dégradé. Restaurez vos réglages, puis baissez un seul réglage avant un nouvel essai.'],
+      ['Inconnu / non concluant', 'Résultat local noté : non concluant. Gardez le réglage prudent ou refaites un essai plus reproductible.']
     ].forEach(([label, message]) => {
       const button = document.createElement('button');
       button.className = 'button small';
