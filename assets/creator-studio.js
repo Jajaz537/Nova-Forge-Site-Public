@@ -373,8 +373,15 @@
     }
   });
 
-  form.addEventListener("input", () => { draftEdited = true; render(); });
-  form.addEventListener("change", () => { draftEdited = true; render(); });
+  function markDraftEdited(event) {
+    draftEdited = true;
+    render();
+    if (event.target.type === "file") return;
+    const message = "Modifications non sauvegardées · validez ou sauvegardez à nouveau · NON PUBLIÉ.";
+    if (status.textContent !== message) status.textContent = message;
+  }
+  form.addEventListener("input", markDraftEdited);
+  form.addEventListener("change", markDraftEdited);
 
   render();
   const schemaReady = loadSchema();

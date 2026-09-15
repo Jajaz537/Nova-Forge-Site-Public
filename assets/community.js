@@ -133,6 +133,7 @@
       input.checked = selectedIds.has(item.id);
       input.addEventListener("change", () => {
         if (input.checked) selectedIds.add(item.id); else selectedIds.delete(item.id);
+        markEdited(status);
         renderPreview();
       });
       const text = document.createElement("span");
@@ -344,7 +345,13 @@
     }
   }
 
+  function markEdited(target) {
+    const message = target === status ? "Modifications non sauvegardées · sauvegardez pour les conserver · NON SYNCHRONISÉ." : "Modifications non sauvegardées · validez ou sauvegardez à nouveau · NON PUBLIÉ.";
+    if (target.textContent !== message) target.textContent = message;
+  }
+
   form.addEventListener("input", (event) => {
+    if (event.target.type !== "file") markEdited(status);
     event.target.removeAttribute("aria-invalid");
     renderPreview();
   });
@@ -415,10 +422,12 @@
   });
 
   submissionFields.kind.addEventListener("change", () => {
+    markEdited(submissionStatus);
     updateSubmissionFields();
     renderSubmissionPreview();
   });
   submissionForm.addEventListener("input", (event) => {
+    if (event.target.type !== "file") markEdited(submissionStatus);
     event.target.removeAttribute("aria-invalid");
     renderSubmissionPreview();
   });
