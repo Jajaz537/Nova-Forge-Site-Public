@@ -326,3 +326,13 @@ Studio : sauvegarde valide, modification non enregistrée puis restauration de l
 L’absence de données existantes a été vérifiée dans les champs et messages de restauration avant création. Seuls les témoins de recette ont été enregistrés puis supprimés ; état initial visible retrouvé pour les trois formulaires. Aucun envoi distant. La limite « sauvegarde/édition/rechargement non rejouée » du lot précédent est levée pour ces seuls parcours.
 
 Cela ne certifie pas redémarrage complet du navigateur, appareil physique, lecteur d’écran, quota refusé natif ni cycle PWA hors ligne. Les sources et budgets restent inchangés. VF non validée ; capacités absentes du registre toujours ouvertes.
+
+## Mouvement réduit — continuité accueil et pages secondaires
+
+Défaut reproduit : mode réduit activé sur Catalogue (transition 0,00001 s, scroll auto), puis accueil ignorant la préférence (transition 0,16 s, scroll smooth). Cause : initialisation du réglage dépendante de .topbar, absent de l’accueil ; règles CSS explicites absentes de sa feuille chargée.
+
+Correction `fa54d0be9eabe1606e1d098ad3abcf84d74d92d1` : initialisation séparée de la navigation, contrôle conservé dans le header secondaire et ajouté au footer de l’accueil ; styles existants déplacés vers la feuille commune, hauteur minimale conservée à 44 px. Pas de copie du contrôle de menu ni de changement artistique.
+
+Chrome HTTPS : préférence réduite, aria-pressed=true et scroll auto observés sur les seize pages. Durées calculées et hauteurs consignées dans `qa/motion-browser-20260915.json`. Accueil sans débordement à 320/768/1280 ; contrôle mobile inspecté visuellement, activé par Entrée, retour au mode système conservé après navigation. État initial de préférence restauré.
+
+Source : neuf contrôles entrée PWA, vingt-cinq cache, seize pages, treize scripts et 76 empreintes ; feuille commune présente sur toutes les pages. Précache 799589 octets, CSS max 69802 : budgets respectés sans mesure CWV revendiquée. Ce lot prouve le choix explicite du site ; bascule réelle de préférence OS, inventaire exhaustif des animations, appareils physiques et lecteur d’écran restent non certifiés. VF non validée.
