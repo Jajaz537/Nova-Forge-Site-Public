@@ -39,7 +39,15 @@ for(const url of ['/public-build.json','/downloads.json','/public-status.json','
   entries.set('https://example.test'+url,response('cached'));
   const {record}=await probe(url,'cors');check('Metadata network first '+url,record.intercepted&&record.networkCalls===1&&record.waitUntilCalls===1&&lastFetchOptions?.cache==='no-store');
 }
+for(const url of ['/assets/modaryx-foundations.css','/assets/shell.js']){
+  const {record,result}=await probe(url,'cors');
+  check('Mutable UI resource revalidated '+url,record.networkCalls===1&&lastFetchOptions?.cache==='no-cache'&&result.body==='fresh');
+}
 networkOffline=true;
+for(const url of ['/assets/modaryx-foundations.css','/assets/shell.js']){
+  const {record,result}=await probe(url,'cors');
+  check('Mutable UI offline fallback '+url,record.networkCalls===1&&record.stale==='offline-stale'&&await result.text()==='fresh');
+}
 for(const [url,mode] of [['/catalog?game=demo','navigate'],['/downloads.json','cors']]){
   const {record,result}=await probe(url,mode);check('Offline explicit stale '+url,record.status===200&&record.stale==='offline-stale'&&await result.text()==='fresh');
 }

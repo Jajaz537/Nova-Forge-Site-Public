@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-15T09:02:53.647Z",
+  "measuredAt": "2026-09-15T09:07:49.866Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -67,6 +67,22 @@
       "passed": true
     },
     {
+      "name": "Mutable UI resource revalidated /assets/modaryx-foundations.css",
+      "passed": true
+    },
+    {
+      "name": "Mutable UI resource revalidated /assets/shell.js",
+      "passed": true
+    },
+    {
+      "name": "Mutable UI offline fallback /assets/modaryx-foundations.css",
+      "passed": true
+    },
+    {
+      "name": "Mutable UI offline fallback /assets/shell.js",
+      "passed": true
+    },
+    {
       "name": "Offline explicit stale /catalog?game=demo",
       "passed": true
     },
@@ -87,7 +103,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "3b108f957b10d23a02072ad0e98215c43d3d172083800698fc71f5d02a9fb37e",
+  "serviceWorkerSha256": "37d1d081e2f31c4c9f313a8e239efc2ca727892c929ca4a8fcc33515ac80450b",
   "probes": [
     {
       "url": "/catalog.html",
@@ -223,6 +239,46 @@
       "waitUntilCalls": 1,
       "status": 200,
       "stale": null
+    },
+    {
+      "url": "/assets/modaryx-foundations.css",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/assets/shell.js",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/assets/modaryx-foundations.css",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": "offline-stale"
+    },
+    {
+      "url": "/assets/shell.js",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": "offline-stale"
     },
     {
       "url": "/catalog?game=demo",

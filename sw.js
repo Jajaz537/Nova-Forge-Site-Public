@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nova-site-shell-v65-modaryx-premium';
+const CACHE_NAME = 'nova-site-shell-v66-modaryx-premium';
 const BASE_URL = new URL('./', self.location.href);
 const PUBLIC_PAGE_PATHS = [
   './',
@@ -108,9 +108,9 @@ const staleResponse = (cached) => {
   headers.set('X-Modaryx-Cache', 'offline-stale');
   return new Response(cached.body, {status: cached.status, statusText: cached.statusText, headers});
 };
-const networkFirst = async (request, key, metadata = false) => {
+const networkFirst = async (request, key, metadata = false, revalidate = false) => {
   try {
-    const response = await fetch(request, metadata ? {cache: 'no-store'} : undefined);
+    const response = await fetch(request, metadata ? {cache: 'no-store'} : revalidate ? {cache: 'no-cache'} : undefined);
     await storeResponse(key, response);
     return response; // Preserve real HTTP errors; do not hide a server 404/500 with old data.
   } catch {
@@ -149,6 +149,10 @@ self.addEventListener('fetch', (event) => {
     if (!CACHEABLE_PUBLIC.has(url.href)) return;
     operation = FRESH_PUBLIC.has(url.href)
       ? networkFirst(event.request, url.href, true)
+      // CSS/JS URLs have no content hash. Revalidate them with the network so a
+      // freshly fetched page does not indefinitely reuse an older UI resource.
+      : /\.(?:css|js)$/.test(url.pathname)
+      ? networkFirst(event.request, url.href, false, true)
       : readCache(url.href).then(async (cached) => {
         if (cached) return cached;
         const response = await fetch(event.request);
