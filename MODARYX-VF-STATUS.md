@@ -398,3 +398,9 @@ Sept observations dans `qa/submission-variants-browser-20260915.json`. Aucun bro
 Revue sur `d16fbd4eafbd7ee881d992aa16d23b2bf775b1a9` : `assets/nova-kingdom-panorama.svg` n’apparaît que dans la liste de précache (hors empreinte), pas dans les pages, styles, scripts ou manifestes actuels. Retrait de cette seule entrée du service worker ; asset et empreinte conservés, aucune substitution de marque. Art Loup/Dragon inchangé.
 
 Cache v79 : 69 fichiers uniques, 797554 octets bruts contre 799939 ; économie statique de 2385 octets et une requête d’installation. Estimation gzip 518464 octets. Ce gain ne constitue pas une amélioration CWV mesurée. 25 assertions cache réussies ; 16 pages/13 scripts/76 empreintes vérifiés, aucune configuration protégée modifiée. Cycle natif hors ligne/mise à jour toujours PREUVE MANQUANTE. VF NON VALIDÉE.
+
+## Profils — détection partielle correctement signalée
+
+Sur `01f2a9e5a70a1740138b3a33df72134ae4d0921e`, le statut final disait « Capacités locales vérifiées » même lorsqu’une API manquait ou rejetait la requête. Le résumé distingue maintenant « Détection partielle — résultat inconnu » de « Détection locale terminée ». Les résultats individuels restent inchangés ; aucune passkey ni authentification réelle n’est certifiée.
+
+`qa/check-profile-detection.cjs` : sept scénarios simulés réussis (absence WebAuthn, réponses true/false, absence/rejet de chaque méthode). 25 assertions cache, structure des 16 pages, 13 scripts et 76 empreintes vérifiés. Précache v80 : 797664 octets. Ces preuves sont source/Node, pas une recette matérielle de connexion. VF NON VALIDÉE.

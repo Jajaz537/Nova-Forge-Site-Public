@@ -38,7 +38,9 @@
       conditional = "Inconnu";
     }
     set(conditionalNode, `${conditional}. Aucun flux de connexion n’est lancé.`);
-    status.textContent = "Capacités locales vérifiées";
+    status.textContent = platform === "Inconnu" || conditional === "Inconnu"
+      ? "Détection partielle — résultat inconnu"
+      : "Détection locale terminée";
   }
 
   detect();
