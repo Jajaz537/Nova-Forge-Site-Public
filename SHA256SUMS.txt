@@ -12,7 +12,7 @@ bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-
 06b1dae65f9c0706fabc9b85a46cd3c50d7a5a5d2e6015b2be064b751d7b8189  ./assets/modaryx-mark-192.png
 38eb20983b8118843446d8a64dd5afa4991f43d927b41703b21b34fc30a1aa40  ./assets/modaryx-mark-512.png
 641c132867064876f6d9906ab2dabe64a9a2aeec6fdd97d7bba34a3bdcd2479c  ./assets/modaryx-mark.svg
-72408aeb7faaf4a497e3eeb2d03767d8f86f2e86c1efaed0ffbf20d415b51f80  ./assets/modaryx-platform-refinement.css
+e5877b6cb453f72f7ac8d0190a6235340f3389a8615b1929526f3750e5b8922e  ./assets/modaryx-platform-refinement.css
 75443e41aa6c49a9ae0d09adedeb01fe4470c3ab62cbdbcc42a67b43998c8cf9  ./assets/modaryx-premium-refinement.css
 56ef2de2c164aec0e4dcb4c8582e3d25a7e123576d34b78639fea9fff9942334  ./assets/nova-kingdom-panorama.svg
 884fc8a9fa04105a294f8bea4e6c61c7ff0f3de94e227b9412d2f757c5a3c4f4  ./assets/nova-mark-192.png
@@ -34,7 +34,7 @@ f90348520048d546761e0e1b794ab6d22aa02f06d06f95f54e9855bf89b345dc  ./assets/token
 6661efad9d2ac4f1baadef8649b4c26ea157e379d7575e507775ac3cf646154c  ./assets/verify.js
 6e2d0c5d17a321c3e795dd0daf3b24245b5ca1e77d543b336d5005cf2f6a82c8  ./catalog.html
 700357e258390295dc48844706c68bee286ea491a36c003ca4ad5985e256f353  ./community.html
-6777eeebffabcb9e17b02980aae7b615aa9ac1d4ed25d280facbb34b32c32934  ./creator-studio.html
+0794e2f50a0d3cbe31292921c97585983d6fb359c522b62b14361909477235fd  ./creator-studio.html
 c1f4f33d00cde1352dbf130dc1a7fe08e6afe6a011432852124871483c7596ea  ./data/catalog.json
 08f9810bea5a8afc20acbf7a6f5b23c5cb4647621f6a1787d42a3fa212981283  ./data/compatibility-graph.json
 d73dfcd98b56cee519ee1772c855298ebbd550dd94be4667b2a1f273e631040a  ./data/search-index.json
@@ -69,7 +69,7 @@ c2a65511fef5fe723f6e10e3af17bad0ff912918b3f00e391ac34cf12c3b9b84  ./schemas/univ
 2fdd57aa51150af5c2470518eb6c1a07d11bbe95b8cf457b024badb2de4561ba  ./search.html
 948ff533daee117a773975ae944ccb3ff8a045d5daa44497fba411f2e4d3e639  ./security.html
 95381433ad3296afcf2befa6bac332088f72180439f276575b22515f661e0912  ./site.webmanifest
-268b50a93f83f855d91e50a37b752d7d0fcd71fe9f41e4077bebefc3f2996130  ./sw.js
+4e74503eefb5452f46f1d9c6babdec461be93558191eebc82174843ca18d70d7  ./sw.js
 cbffe9845399e9ed0d82ee13fa3477f0461c1c7dc649a6624da720179f73292a  ./verify.html
 75f187f2d5404edc13193ac0d31bcade97653d0dadd264e8052f9e2fa6ae0be7  assets/modaryx-foundations.css
 25244395f7714ce0da8247cb3ed7b58312cc7cf0a893ec32fc575cb6c359f5f8  assets/modaryx-wolf-dragon-hero.webp
