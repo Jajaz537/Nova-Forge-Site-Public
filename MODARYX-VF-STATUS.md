@@ -264,3 +264,11 @@ Correction produit `2f1820d544f74fd6a1577122d5b0eef1140a8b56` : les deux champs 
 Chrome HTTPS après publication : aria-describedby=verify-result observé sur les champs ; clic sans fichier affiche le message et place le focus sur le sélecteur ; aria-invalid=true reste présent après saisie de l'empreinte. Un délai de lecture groupée a nécessité une nouvelle inspection DOM ; seules les observations effectivement obtenues sont retenues. Effacement du marqueur après sélection : vérifié par Node, pas rejoué dans Chrome sur ce commit. Lecteur d'écran toujours PREUVE MANQUANTE.
 
 Essai de zoom via raccourci navigateur : largeur observée 1348 px avant/après, aucun changement démontré ; ce test est exclu des preuves de zoom 200/400 %. Aucun statut VF ajouté.
+
+## Finish line — revue consolidée du 15 septembre 2026
+
+Corrections `05d8e79` puis `c7d91ee` : champs Studio alignés, catalogue tablette recomposé, index projets équilibré, disponibilité publique clarifiée, harnais responsive protégé contre l’attribution au mauvais document.
+
+Revue desktop des seize pages et preuves : `qa/finish-line/README.md`. 22 scripts source réussis ; 32 contrôles finaux à 320/960 sans débordement et 15 contrôles ciblés des trois compositions corrigées. Budgets statiques respectés : CSS max 69776, JS max 26968, précache 797096 octets. 19 captures archivées hors précache.
+
+Cycle PWA réellement déconnecté, lecteur d’écran, zoom natif, appareils physiques et CWV restent PREUVE MANQUANTE. Les fonctions absentes du registre anti-oubli restent également ouvertes : ce ne sont pas uniquement des preuves externes. **VF NON VALIDÉE ; PR brouillon.**

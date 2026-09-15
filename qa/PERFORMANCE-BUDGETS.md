@@ -89,3 +89,7 @@ Le navigateur de recette permet d’inspecter le rendu et le DOM ; il n’expose
 Seize navigations réelles dans Chrome, après a1437aa, enregistrées dans `https-browser-diagnostics-20260915.json`. Un contrôleur service worker activé est observé pour chaque page. La mesure Navigation Timing de load est comprise entre 255,5 et 621,6 ms dans cette session séquentielle, sans cache froid ni limitation réseau contrôlés. Ce n'est pas une mesure de complétude visuelle, de chargement des éléments lazy, de données asynchrones, ni une preuve LCP/CLS/INP. Aucune conclusion de performance finale.
 
 Ce lot ferme la vérification du fonctionnement des diagnostics et de la présence d'un contrôleur actif sur l'aperçu HTTPS. Première installation, changement de version, navigation réellement hors ligne et reprise restent PREUVE MANQUANTE.
+
+## Mesures du lot visuel c7d91ee
+
+`cache-checks.json` et `finish-line/source-validation.json` : CSS max 69776 octets/page, JS directement déclaré max 26968, précache 797096 octets bruts / 518897 gzip estimés ; 70 fichiers / 71 requêtes, aucune ressource manquante, 25 assertions source réussies, aucun changement des fichiers protégés. Budgets proposés actuels 70000 / 30000 / 800000 respectés. Les captures QA ne sont pas référencées par le site ni préchargées. Ce contrôle ne ferme pas les mesures CWV, peinture, CPU/GPU, mémoire, réseau réel ou cache froid.

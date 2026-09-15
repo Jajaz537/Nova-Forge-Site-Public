@@ -57,3 +57,7 @@ La matrice de recette du lot doit associer chaque page aux captures et aux contr
 ## Correction visuelle prioritaire
 
 Pack Loup/Dragon récupéré et trois références web inspectées : intégration accueil et portails EN COURS de recette. Identité MODARYX préservée. Le cycle de croissance des compagnons du concept 01 est un langage visuel complémentaire ; aucune progression interactive n’est déclarée disponible.
+
+## Relecture après c7d91ee
+
+La revue des pages existantes est documentée dans `finish-line/README.md`. Aucun « Modaryx OS » visible trouvé dans les HTML/JS/JSON examinés. Les références getnovaforge.com dans `domain-cutover.json` restent historiques/liées au déploiement, À VÉRIFIER et non modifiées. Aucun hub, compte, backend, artefact ou signature absent ci-dessus n’est clôturé par les résultats visuels. Le corpus NDI complet reste NON RÉCUPÉRÉ.

@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-15T20:24:23.524Z",
+  "measuredAt": "2026-09-15T20:26:02.863Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
