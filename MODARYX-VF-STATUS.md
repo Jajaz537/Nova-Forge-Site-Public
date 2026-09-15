@@ -256,3 +256,11 @@ PREUVE MANQUANTE : responsive des derniers textes/grille, états visuels exhaust
 - `qa/verify-browser-20260915.json` : fichier témoin abc effectivement sélectionné et haché dans Chrome. Correspondance, divergence, invalidation après saisie, hash mal formé avec focus/aria-invalid et calcul seul observés. Absence de fichier également vérifiée. L'effacement par le pilote n'avait pas changé la valeur ; essai écarté puis effacement clavier réellement observé. Aucune preuve de lecteur d'écran ou de gros fichiers ajoutée.
 
 La recette HTTPS est donc accessible ; l'ancien blocage du serveur local ne bloque plus ces contrôles. Restent notamment : lecteur d'écran, zoom natif, appareils physiques/multi-navigateurs, états visuels exhaustifs, réseau/cache froid, cycle PWA hors ligne et mise à jour. Hubs et services non livrés demeurent explicitement ouverts dans l'anti-oubli. Aucun code produit ni infrastructure modifié par cette reprise de preuves.
+
+## Vérificateur — association des erreurs, 15 septembre 2026
+
+Correction produit `2f1820d544f74fd6a1577122d5b0eef1140a8b56` : les deux champs sont reliés au résultat par aria-describedby ; fichier absent marqué aria-invalid ; modification de l'empreinte seule ne retire pas l'erreur du fichier ; sélection d'un fichier retire ce marqueur. Sept scénarios Node renforcés et 25 assertions cache réussis. Les empreintes des trois sources modifiées sont actualisées (76 contrôlées), cache v67, précache 796985 octets. Structure et syntaxe sans erreur.
+
+Chrome HTTPS après publication : aria-describedby=verify-result observé sur les champs ; clic sans fichier affiche le message et place le focus sur le sélecteur ; aria-invalid=true reste présent après saisie de l'empreinte. Un délai de lecture groupée a nécessité une nouvelle inspection DOM ; seules les observations effectivement obtenues sont retenues. Effacement du marqueur après sélection : vérifié par Node, pas rejoué dans Chrome sur ce commit. Lecteur d'écran toujours PREUVE MANQUANTE.
+
+Essai de zoom via raccourci navigateur : largeur observée 1348 px avant/après, aucun changement démontré ; ce test est exclu des preuves de zoom 200/400 %. Aucun statut VF ajouté.
