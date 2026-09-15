@@ -179,3 +179,9 @@ Quatre scénarios source regroupés dans qa/project-render-checks.json : quatre 
 Source 20556b8dd00a1064745c1268a8e430e4b81ec373, rapport qa/browser-routes-checks.json : les seize fichiers HTML ont été ouverts directement dans Chrome local. Chacun expose un document.title non vide, un h1 et un main uniques ; aucun dépassement scrollWidth/clientWidth aux largeurs utiles observées (1348 px, 1363 px pour 404 sans scrollbar). Liens et repères aria-current de l’en-tête recensés.
 
 Cette recette est une preuve de chargement/navigation DOM desktop, pas une revue exhaustive de rendu ou d’interaction. Images différées non toutes attendues, vrai statut HTTP d’une URL inexistante non testé, pas de zoom natif ni de nouvelle preuve lecteur d’écran/appareil physique/HTTPS hors ligne. Les 16 observations sont distinctes des 108 scénarios source et des mesures responsive antérieures. Aucun runtime modifié, cache v58 inchangé. EN COURS, aucune VF.
+
+## Consolidation — évitement de navigation au clavier (15 septembre 2026)
+
+Seize parcours Chrome desktop réalisés depuis une navigation directe : premier Tab → Aller au contenu ; Entrée puis Tab → élément appartenant à main. Sur l’accueil : Explorer les mods ; sur les quinze autres pages : Accueil du fil d’Ariane. Séquence finale effectuée avec touches réelles, sans focus programmatique ; détails dans qa/keyboard-skip-checks.json au SHA source 7f391007afce45166827e1562b6fe7eb9b897173.
+
+Ce contrôle clôt uniquement la recette Chrome desktop de ce parcours d’évitement. Il ne prouve ni l’ordre complet de tabulation, ni les lecteurs d’écran, ni le mobile ou les autres navigateurs. Aucun runtime changé, cache v58 et cumul source 108 inchangés ; ces seize parcours natifs sont comptés séparément. EN COURS, aucune VF.
