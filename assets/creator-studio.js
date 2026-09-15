@@ -163,8 +163,24 @@
     return message.replace("longueur minimale 1", "champ à renseigner");
   };
 
+  function renderErrorList(errors) {
+    const heading = document.createElement("p");
+    heading.textContent = `À corriger : ${errors.length} point(s).`;
+    const list = document.createElement("ul");
+    for (const message of errors) {
+      const item = document.createElement("li");
+      item.textContent = friendlyError(message);
+      list.append(item);
+    }
+    schemaStatus.replaceChildren(heading, list);
+  }
+
   function render() {
     updateReceiptFields();
+    for (const field of Object.values(fields)) {
+      if (validationRequested && field?.validity && !field.validity.valid) field.setAttribute("aria-invalid", "true");
+      else field?.removeAttribute("aria-invalid");
+    }
     try {
       const manifest = buildManifest();
       lastManifest = manifest;
@@ -174,9 +190,10 @@
         ? "Chargement du format de validation. L’export reste indisponible pour le moment."
         : errors.length
           ? validationRequested
-            ? `À corriger : ${errors.length} point(s). ${errors.slice(0, 3).map(friendlyError).join(" · ")}`
+            ? `À corriger : ${errors.length} point(s).`
             : "Votre brouillon est en cours. Renseignez les champs obligatoires, puis choisissez Valider l’aperçu."
           : "Format du brouillon conforme. Cela ne vérifie ni la provenance, ni la signature, ni la compatibilité réelle.";
+      if (schema && validationRequested && errors.length) renderErrorList(errors);
       return {manifest, errors};
     } catch (error) {
       lastManifest = null;
