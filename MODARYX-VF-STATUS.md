@@ -374,3 +374,9 @@ Défaut reproduit dans Chrome : arrivée avec `#sha256=incorrect` sans avertisse
 ### Liens du vérificateur — observation native
 
 `qa/verify-fragment-browser-20260915.json` : Chrome HTTPS confirme trois liens invalides (texte incorrect, vide, encodage invalide) en état warning avec aria-invalid ; une empreinte valide préremplit ensuite le champ en état neutre. L’annulation d’un calcul en attente reste une preuve Node ciblée, pas un scénario natif exécuté ici. Aucune preuve lecteur d’écran ajoutée. VF NON VALIDÉE.
+
+## FAQ et aperçus JSON — états ouverts, 15 septembre 2026
+
+Recette Chrome HTTPS sur `a4911e16e02e403a3cf97b8d952a9ae9c65066e8` : quatre FAQ et deux panneaux JSON ouverts avec Entrée puis fermés avec Espace. Tab depuis les deux résumés ouverts atteint respectivement collection-preview et submission-preview. Quatre mesures des panneaux ouverts à 320/768 sans débordement horizontal. La première tentative de mesure pendant Chargement est écartée ; résultats conservés après stabilisation.
+
+Preuve : `qa/disclosure-browser-20260915.json`. Aucun code produit, cache ou infrastructure modifié. JSON de brouillons initiaux seulement ; longs imports arbitraires et lecteur d’écran non certifiés. **VF NON VALIDÉE**, manques fonctionnels et externes inchangés.
