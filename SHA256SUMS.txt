@@ -5,7 +5,7 @@
 c515e535e9fae58f857edd7a37d270b37f578061880d05a4a00ed5ab5bb95a66  ./assets/catalog.js
 d208e5e35e791c8e17d74b28da101d85486caa0af572b979cae11b3c405a46d9  ./assets/community.js
 db09c5a11d225a89c50c9f4c9e2985d53d862076c5ea0a9a65c83ce1d83bf350  ./assets/creator-studio.css
-40f272a1193b203b5d9098e4e936e746a3805fc0ef6f134ef949c3015603a1dd  ./assets/creator-studio.js
+3dc1e6ea918337da2ffd4fa876448cb9c4faa2b72efbef4e45c553db319a61b7  ./assets/creator-studio.js
 74deefbbeca6a11fd5a475a70c1f822789993d7c844cd1f172cefadc89dcd1b1  ./assets/downloads.js
 33a0530ceb4cafa33a6e0f05cc04994d086b8d11308d5f5f2a9fac20861efe81  ./assets/forge-field.svg
 bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-schema-lite.js
@@ -34,7 +34,7 @@ f90348520048d546761e0e1b794ab6d22aa02f06d06f95f54e9855bf89b345dc  ./assets/token
 e79df504c5cecd24839b757380cd2e5815a61095bb899ba9dbf7643ee2b8807b  ./assets/verify.js
 6e2d0c5d17a321c3e795dd0daf3b24245b5ca1e77d543b336d5005cf2f6a82c8  ./catalog.html
 700357e258390295dc48844706c68bee286ea491a36c003ca4ad5985e256f353  ./community.html
-061056795bce92fe9080c94cc707e937341395f1406a56e98b919d7a5b3bef65  ./creator-studio.html
+6777eeebffabcb9e17b02980aae7b615aa9ac1d4ed25d280facbb34b32c32934  ./creator-studio.html
 c1f4f33d00cde1352dbf130dc1a7fe08e6afe6a011432852124871483c7596ea  ./data/catalog.json
 08f9810bea5a8afc20acbf7a6f5b23c5cb4647621f6a1787d42a3fa212981283  ./data/compatibility-graph.json
 d73dfcd98b56cee519ee1772c855298ebbd550dd94be4667b2a1f273e631040a  ./data/search-index.json
@@ -69,7 +69,7 @@ c2a65511fef5fe723f6e10e3af17bad0ff912918b3f00e391ac34cf12c3b9b84  ./schemas/univ
 2fdd57aa51150af5c2470518eb6c1a07d11bbe95b8cf457b024badb2de4561ba  ./search.html
 948ff533daee117a773975ae944ccb3ff8a045d5daa44497fba411f2e4d3e639  ./security.html
 95381433ad3296afcf2befa6bac332088f72180439f276575b22515f661e0912  ./site.webmanifest
-7faa6664ca30f0cba490a2ca8d3abdab61b498f7f766f75fc62ae5755ba9c266  ./sw.js
+2a38cdd3a446542fb0d4e2c61fa96ae8f913983e4e9445e1164580d86ad4e8a8  ./sw.js
 cbffe9845399e9ed0d82ee13fa3477f0461c1c7dc649a6624da720179f73292a  ./verify.html
 75f187f2d5404edc13193ac0d31bcade97653d0dadd264e8052f9e2fa6ae0be7  assets/modaryx-foundations.css
 25244395f7714ce0da8247cb3ed7b58312cc7cf0a893ec32fc575cb6c359f5f8  assets/modaryx-wolf-dragon-hero.webp

@@ -34,6 +34,24 @@
   let validationRequested = false;
 
   const read = (key) => String(fields[key]?.value ?? "").trim();
+  function updateReceiptFields() {
+    for (const [key, required] of [
+      ["evidenceReceipt", read("evidence") === "measured"],
+      ["provenanceReceipt", read("provenanceState") === "verified"]
+    ]) {
+      const field = fields[key];
+      if (!field) continue;
+      const value = read(key);
+      const invalid = (required && !value) || (value && !RECEIPT_RE.test(value));
+      field.required = required;
+      field.setCustomValidity(required && !value ? "Renseignez le justificatif requis pour ce niveau déclaré." : value && !RECEIPT_RE.test(value)
+        ? "Utilisez receipt: suivi de 2 à 192 caractères minuscules : lettres, chiffres, point, tiret, soulignement ou deux-points."
+        : "");
+      if (validationRequested && invalid) field.setAttribute("aria-invalid", "true");
+      else field.removeAttribute("aria-invalid");
+    }
+  }
+
   const uniqueSorted = (value) => [...new Set(String(value).split(",").map((part) => part.trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, "en"));
   const boolToken = (value, label) => {
     const normalized = String(value).trim().toLowerCase();
@@ -146,6 +164,7 @@
   };
 
   function render() {
+    updateReceiptFields();
     try {
       const manifest = buildManifest();
       lastManifest = manifest;

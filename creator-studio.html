@@ -69,7 +69,7 @@
         <div><p class="eyebrow">Compatibilité</p><h2>Preuve, dépendances et conflits</h2></div>
         <fieldset id="studio-compatibility"><legend>Compatibilité</legend>
           <label for="compatibility-evidence"><span>Niveau de preuve déclaré</span><select id="compatibility-evidence" name="evidence"><option value="unknown">Inconnu</option><option value="estimated">Estimé</option><option value="measured">Mesuré</option></select></label>
-          <label for="evidence-receipt"><span>Receipt de mesure</span><input id="evidence-receipt" name="evidenceReceipt" autocomplete="off" placeholder="receipt:compat.example"></label>
+          <label for="evidence-receipt"><span id="evidence-receipt-label">Justificatif de mesure</span><input id="evidence-receipt" name="evidenceReceipt" aria-labelledby="evidence-receipt-label" aria-describedby="evidence-receipt-help" autocomplete="off" placeholder="receipt:compat.example"><small id="evidence-receipt-help">Requis pour « Mesuré ». Exemple : receipt:compat.example. Le format valide n’atteste pas la mesure.</small></label>
           <label class="wide" for="compatibility-notes"><span>Notes de compatibilité</span><textarea id="compatibility-notes" name="compatibilityNotes" maxlength="2000" placeholder="Limites et informations encore inconnues."></textarea></label>
           <label class="wide" for="dependencies"><span>Dépendances — une par ligne</span><textarea id="dependencies" name="dependencies" placeholder="core-lib | >=1.2 <2 | false"></textarea><small>Format : <code>id | versionRange | optional</code>.</small></label>
           <label class="wide" for="conflicts"><span>Conflits — un par ligne</span><textarea id="conflicts" name="conflicts" placeholder="other-mod | >=2 | false"></textarea><small>Format : <code>id | versionRange | optional</code>.</small></label>
@@ -87,7 +87,7 @@
         <div><p class="eyebrow">Provenance déclarée</p><h2>Documenter la source</h2></div>
         <fieldset id="studio-provenance"><legend>Provenance</legend>
           <label for="provenance-state"><span>État déclaré</span><select id="provenance-state" name="provenanceState"><option value="unknown">Inconnu</option><option value="declared-unattested">Déclaré, non attesté</option><option value="verified">Vérifié — receipt requis</option></select></label>
-          <label for="provenance-receipt"><span>Receipt de provenance</span><input id="provenance-receipt" name="provenanceReceipt" autocomplete="off" placeholder="receipt:provenance.example"></label>
+          <label for="provenance-receipt"><span id="provenance-receipt-label">Justificatif de provenance</span><input id="provenance-receipt" name="provenanceReceipt" aria-labelledby="provenance-receipt-label" aria-describedby="provenance-receipt-help" autocomplete="off" placeholder="receipt:provenance.example"><small id="provenance-receipt-help">Requis pour « Vérifié ». Exemple : receipt:provenance.example. Le Studio ne vérifie pas l’authenticité du justificatif.</small></label>
           <label class="wide" for="source-uri"><span>URI source déclarée</span><input id="source-uri" name="sourceUri" type="url" autocomplete="off" placeholder="https://example.invalid/source"></label>
           <label class="wide" for="provenance-notes"><span>Notes de provenance</span><textarea id="provenance-notes" name="provenanceNotes" maxlength="2000" placeholder="Le Studio n’atteste aucune provenance automatiquement."></textarea></label>
         </fieldset>

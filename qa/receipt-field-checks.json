@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "scope": "Six source function scenarios; native focus covered separately in Chrome",
+  "checks": [
+    "Unknown states leave both receipt fields optional",
+    "Declared measured/verified require receipts without premature aria-invalid",
+    "Blank and whitespace-only required receipt blocks native validation",
+    "Malformed receipt provides actionable format guidance",
+    "Correct format clears error without attesting authenticity",
+    "Returning to unknown clears requirement and stale error"
+  ]
+}
