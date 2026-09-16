@@ -566,3 +566,7 @@ Cinq groupes Node ciblés réussis (`qa/download-recovery-checks.json`) après �
 ### Observation après publication de 59c39da
 
 Statut normal, zéro artefact et bouton Réessayer masqué observés dans le navigateur. Composition de la section Disponibilité inspectée à 1348 px ; deux mesures de reflow, cadres 320/768 (utiles 305/753), sans débordement. Preuve : `qa/download-status-native-20260916.json`. Cette observation ferme le rendu normal ciblé ; elle ne ferme ni la panne native ni le cycle PWA. VF NON VALIDÉE.
+
+## 2026-09-16 — Langage public et conditions de publication
+
+Accueil, Documentation et Écosystème : « Preuves requises », « Service non connecté » et explications françaises remplacent le jargon visible fail-closed/backend. Métadonnées Sécurité et Téléchargements clarifiées. Contrats et identifiants techniques conservés ; absence de services toujours explicite. Structure 17 pages, 13 scripts, 77 empreintes vérifiée ; 34 assertions cache réussies, v97, 799145/800000 octets. Aucun test fonctionnel inchangé rejoué. Reflow des trois corps de page modifiés à confirmer après publication ; aucun statut VF.

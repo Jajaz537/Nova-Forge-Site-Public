@@ -13,7 +13,7 @@
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="MODARYX MODS">
   <meta property="og:title" content="Documentation publique — MODARYX MODS">
-  <meta property="og:description" content="Règles publiques MODARYX MODS de vérification, statut machine-readable, vie privée navigateur et publication fail-closed.">
+  <meta property="og:description" content="Vérification des fichiers, données locales et conditions de publication : les règles publiques MODARYX MODS.">
   <title>Documentation publique — MODARYX MODS</title>
   <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
@@ -57,7 +57,7 @@
         <p class="eyebrow">Portée</p>
         <ul class="feature-list">
           <li><span>01</span><div><strong>Public uniquement</strong><small>Aucun secret, mécanisme réservé ou contenu privé/interne.</small></div></li>
-          <li><span>02</span><div><strong>Fail closed</strong><small>Une preuve absente reste absente.</small></div></li>
+          <li><span>02</span><div><strong>Preuves requises</strong><small>Une preuve absente reste absente.</small></div></li>
           <li><span>03</span><div><strong>Build servi</strong><small>Le statut et la provenance publique décrivent uniquement la surface livrée.</small></div></li>
           <li><span>04</span><div><strong>Pas de promesse implicite</strong><small>Une fonction non connectée n’est pas présentée comme disponible.</small></div></li>
         </ul>
@@ -80,7 +80,7 @@
         <div role="listitem"><strong>Provenance</strong><span>La source et la chaîne de livraison déclarées doivent être qualifiées avant d’accorder de la confiance à un fichier.</span></div>
         <div role="listitem"><strong>Signature</strong><span>Lorsqu’une signature est requise, elle doit être présente et vérifiable ; son absence ne doit jamais être masquée par un badge visuel.</span></div>
       </div>
-      <div class="security-note"><strong>Outils publics :</strong> le <a href="./verify.html">vérificateur SHA-256</a> calcule l’empreinte d’un fichier dans le navigateur sans l’exécuter ni l’envoyer. Une correspondance de hash prouve l’intégrité par rapport à la valeur fournie ; elle ne prouve pas à elle seule l’identité, l’auteur ou la provenance. Le <a href="./security.html">contrat Sécurité & provenance</a> détaille la séparation de ces preuves et leurs états fail-closed.</div>
+      <div class="security-note"><strong>Outils publics :</strong> le <a href="./verify.html">vérificateur SHA-256</a> calcule l’empreinte d’un fichier dans le navigateur sans l’exécuter ni l’envoyer. Une empreinte identique confirme l’intégrité par rapport à la valeur fournie ; elle ne prouve pas à elle seule l’identité, l’auteur ou la provenance. Le <a href="./security.html">contrat Sécurité & provenance</a> explique ces preuves distinctes et les situations qui bloquent la publication.</div>
     </section>
 
     <section class="section" id="status" aria-labelledby="status-title">
