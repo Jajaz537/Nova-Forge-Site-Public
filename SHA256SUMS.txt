@@ -39,7 +39,7 @@ a1d756c67a07e522f23d20c5a28f433e03473eec0f2ac51101f13b2c8a90ec83  ./assets/verif
 92736f4afba835879723e51fcbab193d521d222e699ce7ff8112388a9b4b211a  ./assets/verify.js
 b40f0cc65a0de9de1a435011012f0d2329f81fc873c66058ef65f3d646bb53a4  ./catalog.html
 e7369043f1516b7f573fffd333c7a05e6d2cf24807d9bcc8f81da953d5c103a3  ./community.html
-7436d364b3451322ef1e7a4b508afccb62a6dbdf2ebadb159e249c0beab466e8  ./creator-studio.html
+41f3220af0e556353b516e7c8a41d22db680afa5b3ef375f044209f62ccec705  ./creator-studio.html
 010737ea4c600d6111d3fa94d6f86e454595dd6f0b5ddb4e0ab01b689b70fbd3  ./data/catalog.json
 08f9810bea5a8afc20acbf7a6f5b23c5cb4647621f6a1787d42a3fa212981283  ./data/compatibility-graph.json
 6e0ba5cbf31c7ed012de0cbc787e01220554205e8507efed2f81626f264309fa  ./data/integration-readiness.json

@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-16T19:19:39.428Z",
+  "measuredAt": "2026-09-16T19:23:49.141Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -465,8 +465,8 @@
     "uniqueLocalFiles": 75,
     "missing": [],
     "files": 75,
-    "rawBytes": 795610,
-    "gzipEstimateBytes": 504997
+    "rawBytes": 796584,
+    "gzipEstimateBytes": 505230
   },
   "pages": [
     {
@@ -488,8 +488,8 @@
       "htmlBytes": 10761,
       "css": {
         "files": 7,
-        "rawBytes": 68959,
-        "gzipEstimateBytes": 19306
+        "rawBytes": 69917,
+        "gzipEstimateBytes": 19536
       },
       "js": {
         "files": 2,
@@ -513,11 +513,11 @@
     },
     {
       "page": "creator-studio.html",
-      "htmlBytes": 13737,
+      "htmlBytes": 13753,
       "css": {
         "files": 8,
-        "rawBytes": 66620,
-        "gzipEstimateBytes": 18906
+        "rawBytes": 67976,
+        "gzipEstimateBytes": 19230
       },
       "js": {
         "files": 3,
@@ -572,8 +572,8 @@
       "htmlBytes": 5324,
       "css": {
         "files": 7,
-        "rawBytes": 67674,
-        "gzipEstimateBytes": 19033
+        "rawBytes": 68632,
+        "gzipEstimateBytes": 19263
       },
       "js": {
         "files": 1,
@@ -614,8 +614,8 @@
       "htmlBytes": 7159,
       "css": {
         "files": 7,
-        "rawBytes": 67674,
-        "gzipEstimateBytes": 19033
+        "rawBytes": 68632,
+        "gzipEstimateBytes": 19263
       },
       "js": {
         "files": 2,
@@ -628,8 +628,8 @@
       "htmlBytes": 6919,
       "css": {
         "files": 7,
-        "rawBytes": 67674,
-        "gzipEstimateBytes": 19033
+        "rawBytes": 68632,
+        "gzipEstimateBytes": 19263
       },
       "js": {
         "files": 2,
@@ -642,8 +642,8 @@
       "htmlBytes": 7129,
       "css": {
         "files": 7,
-        "rawBytes": 67674,
-        "gzipEstimateBytes": 19033
+        "rawBytes": 68632,
+        "gzipEstimateBytes": 19263
       },
       "js": {
         "files": 2,
@@ -656,8 +656,8 @@
       "htmlBytes": 4620,
       "css": {
         "files": 7,
-        "rawBytes": 67674,
-        "gzipEstimateBytes": 19033
+        "rawBytes": 68632,
+        "gzipEstimateBytes": 19263
       },
       "js": {
         "files": 1,
@@ -771,7 +771,7 @@
     "checks": [
       {
         "name": "Unique precache bytes",
-        "actualBytes": 795610,
+        "actualBytes": 796584,
         "limitBytes": 800000,
         "passed": true
       },
@@ -793,7 +793,7 @@
       },
       {
         "name": "catalog.html: direct CSS",
-        "actualBytes": 68959,
+        "actualBytes": 69917,
         "limitBytes": 70000,
         "passed": true
       },
@@ -817,7 +817,7 @@
       },
       {
         "name": "creator-studio.html: direct CSS",
-        "actualBytes": 66620,
+        "actualBytes": 67976,
         "limitBytes": 70000,
         "passed": true
       },
@@ -865,7 +865,7 @@
       },
       {
         "name": "games/index.html: direct CSS",
-        "actualBytes": 67674,
+        "actualBytes": 68632,
         "limitBytes": 70000,
         "passed": true
       },
@@ -901,7 +901,7 @@
       },
       {
         "name": "project-balanced-latency-pack.html: direct CSS",
-        "actualBytes": 67674,
+        "actualBytes": 68632,
         "limitBytes": 70000,
         "passed": true
       },
@@ -913,7 +913,7 @@
       },
       {
         "name": "project-ember-textures.html: direct CSS",
-        "actualBytes": 67674,
+        "actualBytes": 68632,
         "limitBytes": 70000,
         "passed": true
       },
@@ -925,7 +925,7 @@
       },
       {
         "name": "project-forge-night-experience.html: direct CSS",
-        "actualBytes": 67674,
+        "actualBytes": 68632,
         "limitBytes": 70000,
         "passed": true
       },
@@ -937,7 +937,7 @@
       },
       {
         "name": "project.html: direct CSS",
-        "actualBytes": 67674,
+        "actualBytes": 68632,
         "limitBytes": 70000,
         "passed": true
       },
