@@ -516,3 +516,9 @@ Dix groupes vérificateur réussis, avec Web Crypto réel dans Node pour les ré
 Depuis e776167 : ajout de `/games/`, index statique généré depuis les trois jeux publics du catalogue de démonstration. Liens vers les fiches, entrée depuis le catalogue et la recherche (15 entrées). Pas de hubs GTA 6/RDR2, pages de catégories, corpus réel, téléchargement ou partenariat implicite. Générateur `qa/build-games-index.py`, dérive vérifiée par check-site -- le fichier généré doit rester conforme aux données.
 
 Route indexée dans le shell/cache, alias `/games/`, `/games/index` et `/games/index.html` contrôlés. QA structurelle et budgets étendus à la 17e page et aux chemins relatifs imbriqués. Schémas JSON compactés : 7586 octets économisés et égalité JSON vérifiée, aucune clé/contrat renommé. 34 assertions cache, neuf contrôles entrée PWA, huit groupes recherche et structure 17 pages/13 scripts/77 empreintes réussis. Cache v91 : 796606 octets bruts. Aucun fichier d’infrastructure, sitemap ou robots modifié. Preuves navigateur de la nouvelle page encore à produire ; VF NON VALIDÉE.
+
+## Index jeux — recette native et répertoire de secours
+
+Sur fdb51cb, entrée depuis Catalogue, trois liens de fiches activés par Entrée et découverte via recherche (« Jeux du catalogue », un résultat). Quatre cadres 320/430/768/1440 sans débordement ; composition desktop et haut mobile inspectés. Preuve `qa/games-directory-native-20260916.json`, limites explicites. Un premier screenshot mobile encore rendu à 1440 a été écarté et repris après mesure stabilisée.
+
+Correction liée : ajout du résultat Jeux au répertoire HTML de secours de la recherche ; comparaison automatisée des ensembles de liens avec l’index. Structure/génération/77 empreintes et 34 assertions cache réussies. Cache v92, 796791 octets bruts. Ces observations ne valent ni recette exhaustive de la 17e page, ni hors ligne réel, ni VF. Hubs et catégories restent ouverts.

@@ -22,7 +22,7 @@ Les parcours FAQ/JSON, contenus longs, variantes Avis/Commentaire et liens du v�
 1. EN COURS — compléter la matrice des états/parcours uniquement là où les preuves existantes ne couvrent pas le comportement ; isoler tout défaut avant correction.
 2. PREUVE MANQUANTE — lecteur d’écran natif, zoom observé 200/400 %, appareils physiques et autres moteurs navigateur. L’environnement présent ne permet pas de les certifier.
 3. PREUVE MANQUANTE — cycle réel PWA déconnecté/mise à jour/reprise, cache froid, réseau contrôlé, LCP/CLS/INP. Le worker actif et les simulations source ne ferment pas ces preuves.
-4. EN COURS — hubs GTA 6/RDR2, index jeux/catégories, corpus réel : préparer sources, droits et contenu substantiel avant intégration ; aucun support de mods présumé, aucune page vide.
+4. EN COURS — hubs GTA 6/RDR2, pages de catégories, corpus réel : préparer sources, droits et contenu substantiel avant intégration ; aucun support de mods présumé, aucune page vide.
 5. EN COURS — capacités absentes : comptes, profils éditables, publication/modération distante, Guide connecté, Storage Resolver/Repair Network et pont OS. Les contrats existants ne sont pas des services livrés.
 6. BLOQUÉ — distribution réelle : aucun artefact public, empreinte et signature de publication disponible. Conserver l’état indisponible.
 7. NON RÉCUPÉRÉ — intégralité de la Master NDI et des décisions historiques ; ne pas affirmer l’anti-oubli exhaustif.
@@ -50,3 +50,7 @@ Il n’est pas établi que tout le travail autonome possible soit épuisé. Aucu
 - EN COURS : choisir un état non couvert ou un lot fonctionnel précisément documenté. Les hubs, comptes et services absents sont du développement restant, pas un simple travail de recette.
 
 La consolidation des 26 scripts reste attachée à 82d958f. Les suites ciblées ultérieures ne deviennent pas rétroactivement une validation globale de fae489a. Cette mise à jour est documentaire ; aucun nouveau test exécuté pour la justifier.
+
+## Après ajout de l’index jeux
+
+`/games/` est ajouté avec trois jeux de démonstration et leurs fiches. Génération depuis les données, découverte via Catalogue/Recherche, pré-cache et alias de route intégrés ; preuve navigateur dédiée `qa/games-directory-native-20260916.json`. Les contrôles structurels portent désormais sur 17 pages. L’index ne clôture pas les hubs, catégories, corpus ou services absents. Recherche : 15 entrées ; égalité des liens du répertoire statique et de l’index contrôlée. Prochain lot produit : catégories ou corpus éditorial substantiel à partir des sources disponibles ; ne pas recommencer les quatre reflows acquis sans changement.

@@ -19,6 +19,10 @@ class Page(HTMLParser):
 
 public_paths=[p for p in ROOT.glob('*.html') if p.stem not in ('review','comparison')]+list((ROOT/'games').glob('*.html'))
 pages={str(p.relative_to(ROOT)):Page(p) for p in public_paths}
+search_entries=json.loads((ROOT/'data/search-index.json').read_text())['entries']
+search_links=[a.get('href') for t,a in pages['search.html'].tags if t=='a' and a.get('class')=='search-result']
+assert len(search_links)==len(set(search_links)), 'Duplicate static search entries'
+assert set(search_links)=={entry['href'] for entry in search_entries}, 'Static search fallback differs from index'
 report=[]
 for name,page in sorted(pages.items()):
     errors=[]; ids=[a['id'] for _,a in page.tags if 'id' in a]
