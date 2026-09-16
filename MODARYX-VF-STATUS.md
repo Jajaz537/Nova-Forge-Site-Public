@@ -1,6 +1,6 @@
 # MODARYX Premium HD — état du candidat
 
-**EN COURS — aucune VF ni validation globale complète annoncée.**
+**VF TECHNICALLY MAXIMAL CANDIDATE — aucune VF officielle annoncée.**
 
 Périmètre : MODARYX / MODARYX MODS, plateforme web. Nova Forge OS est un produit distinct. PR #12, branche `design/modaryx-premium-hd-20260914-work`. Base de reprise `9084686f02af0a9b4c8d1ab879e0c8d66915caec`.
 
@@ -33,6 +33,12 @@ Périmètre : MODARYX / MODARYX MODS, plateforme web. Nova Forge OS est un produ
 Aucun artefact de téléchargement autorisé ; comptes, Guide, publication et services distants non connectés. Hubs jeux GTA6/RDR2 et corpus éditorial/médias correspondants encore manquants. Aucun de ces éléments n'est réputé terminé par la présence d'un schéma.
 
 Une PR, un commit, un build ou une fusion ne clôture pas ces écarts. La surveillance d'achèvement ne doit pas notifier une VF à partir de ce document.
+
+## Gate source consolidée — 16 septembre 2026
+
+Le commit `02cb40464822bf77cd180d7ab71732b33c3d740c` clôt les contrôles autonomes actuels du dépôt. Après isolation et correction du mock DOM de métadonnées, le micro-test concerné passe avec six scénarios, puis la validation globale source passe **30/30**. Build statique : 17 pages sans erreur, 13 scripts valides, 84 empreintes conformes. Cache/PWA simulé : 34 assertions réussies, 76 fichiers locaux présents, 799981 / 800000 octets bruts et aucune modification protégée. Déploiement immuable réussi : `https://cf70d50e.nova-forge-site-public.pages.dev`.
+
+Ce statut signifie uniquement que rien d’autre de réalisable de façon autonome dans le dépôt et l’environnement actuel n’est connu comme ouvert. Les lignes de `FINAL-EXTERNAL-VALIDATION-MATRIX.md`, les capacités sans backend/corpus/artefact/droits et les preuves natives indisponibles restent ouvertes. Elles interdisent toujours les libellés « VF officielle », « 100 % terminé » ou « validé ».
 
 ## Revue visuelle déployée — 16 septembre 2026
 
