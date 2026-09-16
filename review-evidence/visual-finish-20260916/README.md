@@ -38,6 +38,10 @@ Ces captures comparent la baseline déployée avant la passe cinématique et le 
 | Communauté — cartes et atelier | `community-f884b919-workspace.jpg` | Parcours numéroté visible et continuité avec l’atelier Collection |
 | Documentation — ouverture | `documentation-f884b919-viewport.jpg` | Hero cinématique, portée numérotée et navigation contextuelle |
 | Sécurité — ouverture | `security-f884b919-viewport.jpg` | Hero cinématique, principes actifs et actions principales |
+| Profils — avant profondeur | `profiles-3e8caef-before.jpg` | Écart constaté : hero trop plat face aux autres surfaces |
+| Profils — après profondeur | `profiles-b6298ad-after.jpg` | Matière Loup/Dragon restaurée sans nouvel asset ni changement fonctionnel |
+| Téléchargements — dernier candidat | `downloads-3e8caef-viewport.jpg` | Hero, état actuel et contrat de publication revérifiés |
+| Écosystème — dernier candidat | `ecosystem-3e8caef-viewport.jpg` | Hero, règles actives et parcours revérifiés |
 
 Ces comparaisons ont été recapturées sur les déploiements immuables correspondant aux corrections. La navigation et Profils ont été vérifiés sur `https://17c68919.nova-forge-site-public.pages.dev` au commit `4f772f9`. Smart Profile a été revérifié sur `https://8b62addf.nova-forge-site-public.pages.dev` au commit `9634880`. Communauté, Documentation et Sécurité ont été revérifiées sur `https://9fdb3c34.nova-forge-site-public.pages.dev` au commit `f884b919`. Elles étendent la preuve au-delà des ouvertures, mais ne déclarent pas encore l’ensemble des pages visuellement finalisé.
 
