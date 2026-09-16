@@ -570,3 +570,7 @@ Statut normal, zéro artefact et bouton Réessayer masqué observés dans le nav
 ## 2026-09-16 — Langage public et conditions de publication
 
 Accueil, Documentation et Écosystème : « Preuves requises », « Service non connecté » et explications françaises remplacent le jargon visible fail-closed/backend. Métadonnées Sécurité et Téléchargements clarifiées. Contrats et identifiants techniques conservés ; absence de services toujours explicite. Structure 17 pages, 13 scripts, 77 empreintes vérifiée ; 34 assertions cache réussies, v97, 799145/800000 octets. Aucun test fonctionnel inchangé rejoué. Reflow des trois corps de page modifiés à confirmer après publication ; aucun statut VF.
+
+### Contrôle après d575f4c
+
+Trois mesures navigateur à 320 px (305 px utiles) sur Accueil, Documentation et Écosystème : aucun débordement horizontal observé. Nouveaux libellés présents dans le DOM : deux « Preuves requises » sur l’accueil, un en Documentation, trois « Service non connecté » sur Écosystème. Preuve `qa/public-language-native-20260916.json`. Portée limitée au reflow étroit et aux textes déployés ; pas de nouvelle certification visuelle exhaustive, zoom ou lecteur d’écran.
