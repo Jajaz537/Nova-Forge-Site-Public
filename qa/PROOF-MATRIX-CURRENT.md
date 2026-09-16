@@ -47,3 +47,7 @@ Tester un parcours absent de cette matrice ou intégrer un contenu/capacité don
 ## Textes du catalogue — preuve ciblée du 16 septembre
 
 Source `0c1c809` : dix mesures navigateur sur accueil, Catalogue et les trois fiches, cadres 320/768 px (largeurs utiles 305/753), sans débordement horizontal observé. Après chargement, les trois liens d’accueil affichent « Voir la fiche » avec un nom accessible propre au projet. Preuve : `qa/catalog-copy-native-20260916.json`. Ceci ne certifie ni lecteur d’écran, ni zoom natif, ni totalité des états visuels. Aucun runtime modifié par ce lot de preuve.
+
+## Téléchargements — récupération et statut
+
+Sur `59c39da` : cinq groupes Node dans `download-recovery-checks.json` distinguent erreur réseau/HTTP/contrat, disponibilité vide et copie périmée, avec nouvelle tentative non concurrente et retour du focus. `download-status-native-20260916.json` confirme le statut normal après chargement, zéro artefact et bouton masqué ; composition desktop inspectée, reflow 320/768 sans débordement. Les états de panne/récupération ne sont pas validés nativement. Cache v96, 34 assertions et 799191/800000 octets bruts ; aucune conclusion CWV.

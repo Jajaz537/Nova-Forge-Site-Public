@@ -562,3 +562,7 @@ TERMINÉ sur ce périmètre : dix mesures navigateur des cinq pages modifiées p
 Défaut reproduit : un fetch rejeté affichait « Aucun téléchargement public déclaré disponible », comme une réponse valide sans fichiers. Correction : statut de chargement puis erreur explicite, bouton Réessayer, requêtes simultanées ignorées, focus rendu au statut ou au bouton après tentative. Le statut quitte le badge étroit pour un paragraphe accessible. Une copie hors ligne reste verrouillée et propose une nouvelle tentative ; aucun artefact ajouté.
 
 Cinq groupes Node ciblés réussis (`qa/download-recovery-checks.json`) après échec initial reproduit ; six contrôles de métadonnées publiques préservés. Cache v96 : 34 assertions, 799191/800000 octets bruts ; structure 17 pages, 13 scripts, 77 empreintes vérifiée. Rendu navigateur après publication encore à observer ; récupération native après panne et lecteur d’écran PREUVE MANQUANTE. Aucune VF.
+
+### Observation après publication de 59c39da
+
+Statut normal, zéro artefact et bouton Réessayer masqué observés dans le navigateur. Composition de la section Disponibilité inspectée à 1348 px ; deux mesures de reflow, cadres 320/768 (utiles 305/753), sans débordement. Preuve : `qa/download-status-native-20260916.json`. Cette observation ferme le rendu normal ciblé ; elle ne ferme ni la panne native ni le cycle PWA. VF NON VALIDÉE.
