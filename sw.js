@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nova-site-shell-v113-modaryx-profile-hero';
+const CACHE_NAME = 'nova-site-shell-v114-modaryx-download-gate';
 const BASE_URL = new URL('./', self.location.href);
 const PUBLIC_PAGE_PATHS = [
   './',
