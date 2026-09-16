@@ -8,8 +8,18 @@ Ces captures comparent la baseline déployée avant la passe cinématique et le 
 | Catalogue — ouverture | `catalog-before.webp` | `catalog-after.webp` | Hiérarchie du hero, matière, panneau de contrat et rythme d’ouverture |
 | Fiche Ember Textures | `project-before.webp` | `project-after.webp` | Composition du hero de fiche et métadonnées principales |
 | Creator Studio — ouverture | `studio-before.webp` | `studio-after.webp` | Hiérarchie du hero après correction de la grille desktop |
+| Communauté | `community-before.webp` | `community-after.webp` | Hero, panneau de préparation et identité Loup/Dragon |
+| Jeux | `games-before.webp` | `games-after.webp` | Introduction, illustration Portails et rythme des cartes |
+| Écosystème | `ecosystem-before.webp` | `ecosystem-after.webp` | Hero, panneau de règles et profondeur cinématique |
+| Sécurité | `security-before.webp` | `security-after.webp` | Hero de confiance et hiérarchie des principes |
+| Profils | `profiles-before.webp` | `profiles-after.webp` | Hero, panneau de disponibilité et composition |
+| Téléchargements | `downloads-before.webp` | `downloads-after.webp` | Hero d’indisponibilité et contrat de publication |
+| Vérificateur | `verify-before.webp` | `verify-after.webp` | Hero SHA-256 et panneau de portée de la preuve |
+| Documentation | `documentation-before.webp` | `documentation-after.webp` | Hero, portée et appels à l’action |
+| Recherche | `search-before.webp` | `search-after.webp` | Hero cinématique après correction de l’échelle typographique |
+| 404 | `404-before.webp` | `404-after.webp` | État d’erreur global et actions de retour |
 
-Le lot a aussi été inspecté sur les sections Catalogue, formulaire Studio, Communauté, Jeux, Écosystème, Sécurité, Profils, Téléchargements, Vérificateur et Documentation. Les captures non versées ici restent des contrôles de travail et ne sont pas revendiquées comme preuve exhaustive page par page.
+Le lot a aussi été inspecté sous le hero : résultats du Catalogue, formulaire et aperçu Studio, collections, chaîne de confiance, contrat de téléchargement, outil de vérification, tâches de la documentation et parcours de l’écosystème. Les captures ci-dessus prouvent l’ouverture desktop de chaque surface ; elles ne suffisent pas à certifier tous les états et toutes les sections d’une page.
 
 ## Limites
 
