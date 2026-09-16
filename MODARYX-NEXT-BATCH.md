@@ -85,3 +85,12 @@ Conserver la PR #12 en brouillon et le statut **VF NON VALIDÉE** tant que ces l
 - EN COURS : états asynchrones non encore observés nativement. Prioriser un état réellement déclenchable dans le navigateur ; ne pas simuler une panne pour la déclarer native et ne pas rejouer les parcours déjà fermés.
 
 Dernier contrôle affecté par la navigation : structure/build PASS, 84 empreintes valides, 34 assertions cache PASS, précache 799 842/800 000 octets. Ces résultats ne ferment aucune preuve externe de la matrice finale.
+
+
+## Smart Profile — état rendu et garde étroite (16 septembre 2026)
+
+- TERMINÉ avec capture déployée au commit `9634880` : l’état local Smart Profile a été réellement déclenché ; valeurs et qualifications sont séparées visuellement. Preuves avant/après dans `review-evidence/visual-finish-20260916/` et aperçu immuable `https://8b62addf.nova-forge-site-public.pages.dev`.
+- TERMINÉ avec preuve source et déploiement au commit `4089b19` : les lignes de résultat autorisent désormais le retour à la ligne (`flex-wrap: wrap`) afin d’éviter une compression sur écran étroit. Build/structure PASS, 84 empreintes, 34 assertions cache PASS, précache 799 978/800 000 octets. Cloudflare confirme le déploiement `https://db339cd2.nova-forge-site-public.pages.dev` et la feuille servie contient la règle attendue.
+- PREUVE MANQUANTE : aucune nouvelle capture native étroite de cet état asynchrone n’est revendiquée dans ce lot ; le navigateur disponible n’exposait pas de redimensionnement. Ne pas transformer la garde CSS et les preuves source en validation appareil/mobile.
+
+Prochain bloc légitime : observer un autre état asynchrone réellement déclenchable avec une capacité navigateur disponible. Si aucune nouvelle capacité n’est accessible, conserver les états panne/offline, WebAuthn partiel, import natif, zoom, lecteurs d’écran et appareils dans la matrice externe au lieu de les simuler.
