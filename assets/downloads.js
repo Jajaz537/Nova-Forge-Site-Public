@@ -99,6 +99,7 @@
     loading = true;
     if (retry) { retry.disabled = true; retry.hidden = !fromRetry; }
     failClosed('Vérification de la disponibilité…');
+    state.dataset.state='loading';state.setAttribute('aria-busy','true');
     delete state.dataset.freshness;
     let recoverable = false;
     try {
@@ -133,6 +134,7 @@
       failClosed('Impossible de confirmer la disponibilité. Les téléchargements restent verrouillés. Réessayez dans un instant.');
     } finally {
       loading = false;
+      state.removeAttribute('aria-busy');
       if (retry) { retry.disabled = false; retry.hidden = !recoverable; }
       if (fromRetry) (recoverable && retry ? retry : state).focus();
     }

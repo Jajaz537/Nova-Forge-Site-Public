@@ -4,6 +4,7 @@
   "checks": [
     "Network failure is distinct from declared absence and never exposes artifacts",
     "Retry is deduplicated and returns focus to the resulting status",
+    "Loading status exposes and clears aria-busy",
     "HTTP error, invalid contract and invalid JSON keep distribution locked with recovery",
     "Repeated failure keeps keyboard focus on retry",
     "Stale manifest remains locked and offers a fresh attempt"
