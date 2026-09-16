@@ -159,8 +159,7 @@ self.addEventListener('fetch', (event) => {
     if (!CACHEABLE_PUBLIC.has(url.href)) return;
     operation = FRESH_PUBLIC.has(url.href)
       ? networkFirst(event.request, url.href, true)
-      // CSS/JS URLs have no content hash. Revalidate them with the network so a
-      // freshly fetched page does not indefinitely reuse an older UI resource.
+      // Revalidate unhashed UI assets.
       : /\.(?:css|js)$/.test(url.pathname)
       ? networkFirst(event.request, url.href, false, true)
       : readCache(url.href).then(async (cached) => {

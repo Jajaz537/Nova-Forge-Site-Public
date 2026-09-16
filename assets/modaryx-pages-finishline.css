@@ -17,7 +17,7 @@
 @media(max-width:820px){.catalog-trust{min-height:0;padding-right:clamp(1rem,3vw,2.7rem)!important;background:linear-gradient(100deg,#171714f7,#0c0d0cf3),url("./modaryx-world-portals.webp") center/cover no-repeat!important}.catalog-trust:before{display:none}}
 @media(max-width:620px){.catalog-controls .filter-grid{padding:.85rem}.catalog-trust:after{opacity:.45}}
 
-.project-grid{grid-template-columns:minmax(0,1.15fr) minmax(19rem,.85fr);gap:1rem}
+.project-grid:not(.project-directory){grid-template-columns:minmax(0,1.15fr) minmax(19rem,.85fr);gap:1rem}
 .project-grid>.project-section:first-child{grid-row:auto}
 .project-section{isolation:isolate}
 .project-section:nth-child(2){border-color:#d8ad5838!important}
