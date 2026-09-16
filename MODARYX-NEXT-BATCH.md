@@ -94,3 +94,12 @@ Dernier contrôle affecté par la navigation : structure/build PASS, 84 empreint
 - PREUVE MANQUANTE : aucune nouvelle capture native étroite de cet état asynchrone n’est revendiquée dans ce lot ; le navigateur disponible n’exposait pas de redimensionnement. Ne pas transformer la garde CSS et les preuves source en validation appareil/mobile.
 
 Prochain bloc légitime : observer un autre état asynchrone réellement déclenchable avec une capacité navigateur disponible. Si aucune nouvelle capacité n’est accessible, conserver les états panne/offline, WebAuthn partiel, import natif, zoom, lecteurs d’écran et appareils dans la matrice externe au lieu de les simuler.
+
+
+## Profils — suppression du panneau-placeholder (16 septembre 2026)
+
+- CORRIGÉ au commit `8bfab47` : la grande zone presque vide « Comptes à venir » observée dans la capture déployée est remplacée par trois frontières lisibles — profil public, connexion privée, indisponibilité actuelle — sans présenter les comptes comme livrés.
+- CONTRÔLÉ : build/structure PASS, 84 empreintes valides, 34 assertions cache PASS ; précache 799 717/800 000 octets après retrait de règles CSS héritées non utilisées par les pages qui chargent cette feuille.
+- PROTECTION RESPECTÉE : `site.webmanifest` a été restauré à l’octet après que le contrôle des fichiers protégés a refusé sa modification ; empreinte locale et déployée identique `95381433…`.
+- DÉPLOYÉ : `https://d7d135ab.nova-forge-site-public.pages.dev` expose les trois nouveaux éléments.
+- PREUVE MANQUANTE : la correction n’est pas déclarée visuellement finalisée tant qu’une capture après déploiement n’a pas été produite et inspectée dans un navigateur disponible.
