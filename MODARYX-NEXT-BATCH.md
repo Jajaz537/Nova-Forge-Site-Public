@@ -62,3 +62,15 @@ Le travail autonome démontrable est consolidé dans `VF-TECHNICALLY-MAXIMAL-CAN
 Il ne reste pas de lot autonome légitime à fabriquer à partir des seules sources présentes. La suite exige une preuve externe (lecteurs d'écran, zoom natif, appareils/moteurs, PWA hors ligne, CWV, imports/exports) ou une entrée produit absente (corpus/droits, comptes, publication, stockage/réparation, artefacts signés, pont Guide/OS, Master NDI). Procédures et sévérités : `FINAL-EXTERNAL-VALIDATION-MATRIX.md`.
 
 Ne pas promouvoir en VF officielle sur la seule base de ce checkpoint. PR #12 maintenue en brouillon ; aucun changement d'infrastructure ni de `main`.
+
+## Réouverture visuelle — point de reprise actuel
+
+Le checkpoint technique a été dépassé par une demande explicite de finition visuelle globale. Ne pas réutiliser « 17 pages techniquement vertes » comme preuve de qualité visuelle.
+
+- TERMINÉ avec captures bornées : passe cinématique Accueil, Catalogue, fiches, Creator Studio et comparaison avant/après archivée dans `review-evidence/visual-finish-20260916/`.
+- TERMINÉ avec inspection de travail : ouvertures et sections clés de Communauté, Jeux, Écosystème, Sécurité, Profils, Téléchargements, Vérificateur, Documentation, Recherche et 404.
+- TERMINÉ : reflow Chromium 17 routes à 320/768 px et 320 px avec expansion synthétique +35 %, zéro débordement après correction du Studio.
+- EN COURS : compléter les paires avant/après des pages secondaires si elles doivent être promues comme visuellement finalisées ; contrôler les états asynchrones visuellement, pas seulement leurs contrats source.
+- PREUVE MANQUANTE inchangée : lecteur d’écran natif, zoom 200/400 %, appareils physiques, Safari/Firefox réels, CWV représentatifs et cycle PWA hors ligne complet.
+
+Conserver la PR #12 en brouillon et le statut **VF NON VALIDÉE** tant que ces limites et la revue visuelle exhaustive ne sont pas closes.

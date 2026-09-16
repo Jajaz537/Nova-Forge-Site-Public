@@ -592,3 +592,13 @@ Stress pseudo-localisé +35 % : 34 mesures, 17 pages à 320/768 px, zéro débor
 Replay source global exécuté une seule fois : 30 scripts, 30 PASS, 0 échec (`qa/final-source-validation.json`). `npm run lint` et `npm run build` PASS : 17 pages, 13 scripts, 80 empreintes, index Jeux conforme. Cache : 34 assertions PASS, 799990/800000 octets bruts, estimation gzip 520627 ; marge de 10 octets à préserver.
 
 Statut : **VF TECHNICALLY MAXIMAL CANDIDATE**. Ce statut clôt le travail autonome démontrable dans l'environnement courant ; il ne constitue ni une VF officielle ni un 100 %. Les validations natives/externes et les capacités sans données, services, droits ou décisions restent dans `FINAL-EXTERNAL-VALIDATION-MATRIX.md` et `VF-TECHNICALLY-MAXIMAL-CANDIDATE.md`.
+
+## 2026-09-16 — Réouverture de la finition visuelle cinématique
+
+Le statut technique précédent ne valait pas validation visuelle. Une nouvelle revue par captures a confirmé que plusieurs surfaces restaient trop proches d’une maquette fonctionnelle après le hero. Le chantier visuel a donc été rouvert avec le hero Loup/Dragon comme niveau de référence.
+
+Depuis `71c4664`, l’Accueil utilise une composition cinématique dédiée. Depuis `4ff12e0`, les pages Catalogue, fiches, Creator Studio, Communauté, Jeux, Écosystème, Sécurité, Profils, Téléchargements, Vérificateur, Documentation, Recherche et 404 partagent une couche de matière, de profondeur, de rythme et d’états interactifs. Les scripts et contrats fonctionnels n’ont pas été réécrits. Deux défauts trouvés par les captures ont été corrigés : grille Creator Studio cassée puis débordante sous 900 px, et titre Recherche coupé en desktop.
+
+Preuves bornées avant/après : `review-evidence/visual-finish-20260916/`. Mesures après correction : 17/17 routes sans débordement horizontal à 320 et 768 px ; 17/17 à 320 px avec expansion synthétique +35 %. Ce sont des mesures Chromium distant, pas des appareils physiques, un zoom natif ou une validation lecteur d’écran.
+
+Dernier contrôle source du lot : 34 assertions cache PASS, 796081/800000 octets précachés au commit `3d5ccfc`; contrats Recherche huit groupes PASS ; Téléchargements cinq groupes PASS. Le lot de preuves visuelles est archivé séparément après ce commit. **Aucune page n’est déclarée visuellement finalisée sur la seule base de son hero ; VF officielle toujours non validée.**
