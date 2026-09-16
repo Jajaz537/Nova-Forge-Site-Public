@@ -494,3 +494,9 @@ Structure des seize pages, syntaxe des treize scripts, 76 empreintes et 31 asser
 ## Catalogue — noms de liens observés, 16 septembre 2026
 
 Sur 3d641a6 : trois libellés visibles « Voir la fiche », chacun inclus dans son aria-label distinct. Observés avant hydratation puis après data-hydrated ; les liens enrichis incluent le suffixe Preview. Reflow du catalogue enrichi à 320/768 : largeurs utiles et scrollWidth identiques 305/753, aucun tabindex positif. Preuve `qa/catalog-link-names-native-20260916.json`. Aucun lecteur d’écran, activation des liens ni audit visuel exhaustif dans ce lot. VF NON VALIDÉE.
+
+## Catalogue dégradé — contrôles honnêtes, 16 septembre 2026
+
+Depuis 6c334c3, échec du catalogue enrichi : filtres, réinitialisation, sauvegarde/application de vue désactivés ; consultation des cartes, favoris et suppression des vues conservées. Sélectionner une vue ne réactive plus Appliquer lorsque les données sont absentes. Les messages distinguent l’échec en ligne du hors ligne et proposent de recharger. Aucun effacement de données locales.
+
+Sept groupes contrat catalogue (dont dix variantes malformées et deux rejets réseau), deux scénarios de qualification cache, 31 assertions service worker et contrôles structure/empreintes réussis. Preuves Node uniquement pour la panne réseau. Index recherche compacté sans changement des données (égalité JSON vérifiée), 1578 octets économisés. Cache v89 : 798633 octets bruts. VF NON VALIDÉE.

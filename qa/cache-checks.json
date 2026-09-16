@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-16T01:50:06.576Z",
+  "measuredAt": "2026-09-16T02:09:59.963Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -127,7 +127,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "5245d0fb9d595d006f6c429c0014f1d2953877809fa78539fdd2b39d43f8bf5a",
+  "serviceWorkerSha256": "5ffb506b31b0aa2d6c678f0f20cb8ccd3e807333dd97d8f881ef101badcbb359",
   "probes": [
     {
       "url": "/catalog.html",
@@ -423,8 +423,8 @@
     "uniqueLocalFiles": 69,
     "missing": [],
     "files": 69,
-    "rawBytes": 799970,
-    "gzipEstimateBytes": 518930
+    "rawBytes": 798633,
+    "gzipEstimateBytes": 518913
   },
   "pages": [
     {
@@ -451,8 +451,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 19272,
-        "gzipEstimateBytes": 5756
+        "rawBytes": 19513,
+        "gzipEstimateBytes": 5814
       }
     },
     {
@@ -715,7 +715,7 @@
     "checks": [
       {
         "name": "Unique precache bytes",
-        "actualBytes": 799970,
+        "actualBytes": 798633,
         "limitBytes": 800000,
         "passed": true
       },
@@ -743,7 +743,7 @@
       },
       {
         "name": "catalog.html: direct JS",
-        "actualBytes": 19272,
+        "actualBytes": 19513,
         "limitBytes": 30000,
         "passed": true
       },

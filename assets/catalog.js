@@ -75,7 +75,7 @@
     savedViews.forEach((view) => viewSelect.add(new Option(view.name, view.id)));
     if (savedViews.some((view) => view.id === selected)) viewSelect.value = selected;
     const hasSelection = Boolean(viewSelect.value);
-    if (applyViewButton) applyViewButton.disabled = !hasSelection;
+    if (applyViewButton) applyViewButton.disabled = !hasSelection || !items.length;
     if (deleteViewButton) deleteViewButton.disabled = !hasSelection;
   }
 
@@ -251,7 +251,9 @@
       render();
     } catch {
       items = [];
-      stateNode.textContent = navigator.onLine ? "Le catalogue enrichi n’a pas pu être chargé. Le contenu HTML statique initial reste disponible." : "Hors ligne : le contenu HTML statique initial reste disponible ; les données enrichies ne sont pas dans le cache courant.";
+      form.querySelectorAll('input, select').forEach(control => { control.disabled = true; });
+      for (const control of [resetButton, saveViewButton, applyViewButton]) if (control) control.disabled = true;
+      stateNode.textContent = navigator.onLine ? "Chargement impossible. Filtres indisponibles ; fiches et favoris restent accessibles. Rechargez pour réessayer." : "Hors ligne : filtres indisponibles. Fiches et favoris restent accessibles. Reconnectez-vous puis rechargez.";
       countNode.textContent = `${grid.querySelectorAll(".catalog-card").length} entrées statiques`;
       bindStaticFavorites();
     }
@@ -308,7 +310,7 @@
   deleteViewButton?.addEventListener("click", deleteSelectedView);
   viewSelect?.addEventListener("change", () => {
     const hasSelection = Boolean(viewSelect.value);
-    if (applyViewButton) applyViewButton.disabled = !hasSelection;
+    if (applyViewButton) applyViewButton.disabled = !hasSelection || !items.length;
     if (deleteViewButton) deleteViewButton.disabled = !hasSelection;
     if (viewsStateNode) viewsStateNode.textContent = hasSelection ? "Vue locale prête à être appliquée." : "Les vues enregistrées restent uniquement dans ce navigateur.";
   });
