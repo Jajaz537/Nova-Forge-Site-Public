@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-16T03:20:52.612Z",
+  "measuredAt": "2026-09-16T03:41:05.433Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -139,7 +139,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "71e5fbac2d8a7e73ce2ddce7cbc379c02c41d10dce60d907aaa0c22e0ef70aef",
+  "serviceWorkerSha256": "66452323999955f64bcc4ea7e4bbd693579122979493c2f8690bff415712ea08",
   "probes": [
     {
       "url": "/catalog.html",
@@ -465,8 +465,8 @@
     "uniqueLocalFiles": 70,
     "missing": [],
     "files": 70,
-    "rawBytes": 797635,
-    "gzipEstimateBytes": 520056
+    "rawBytes": 798035,
+    "gzipEstimateBytes": 519975
   },
   "pages": [
     {
@@ -479,13 +479,13 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 22040,
-        "gzipEstimateBytes": 6807
+        "rawBytes": 22108,
+        "gzipEstimateBytes": 6816
       }
     },
     {
       "page": "catalog.html",
-      "htmlBytes": 10746,
+      "htmlBytes": 10820,
       "css": {
         "files": 8,
         "rawBytes": 69802,
@@ -535,8 +535,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 22040,
-        "gzipEstimateBytes": 6807
+        "rawBytes": 22108,
+        "gzipEstimateBytes": 6816
       }
     },
     {
@@ -549,8 +549,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 27028,
-        "gzipEstimateBytes": 8516
+        "rawBytes": 27096,
+        "gzipEstimateBytes": 8525
       }
     },
     {
@@ -563,8 +563,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 22040,
-        "gzipEstimateBytes": 6807
+        "rawBytes": 22108,
+        "gzipEstimateBytes": 6816
       }
     },
     {
@@ -583,7 +583,7 @@
     },
     {
       "page": "index.html",
-      "htmlBytes": 18127,
+      "htmlBytes": 18329,
       "css": {
         "files": 4,
         "rawBytes": 44203,
@@ -591,8 +591,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 23080,
-        "gzipEstimateBytes": 7252
+        "rawBytes": 23148,
+        "gzipEstimateBytes": 7261
       }
     },
     {
@@ -611,7 +611,7 @@
     },
     {
       "page": "project-balanced-latency-pack.html",
-      "htmlBytes": 7206,
+      "htmlBytes": 7218,
       "css": {
         "files": 8,
         "rawBytes": 68518,
@@ -625,7 +625,7 @@
     },
     {
       "page": "project-ember-textures.html",
-      "htmlBytes": 6968,
+      "htmlBytes": 6978,
       "css": {
         "files": 8,
         "rawBytes": 68518,
@@ -639,7 +639,7 @@
     },
     {
       "page": "project-forge-night-experience.html",
-      "htmlBytes": 7182,
+      "htmlBytes": 7188,
       "css": {
         "files": 8,
         "rawBytes": 68518,
@@ -689,8 +689,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 22040,
-        "gzipEstimateBytes": 6807
+        "rawBytes": 22108,
+        "gzipEstimateBytes": 6816
       }
     },
     {
@@ -703,8 +703,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 27148,
-        "gzipEstimateBytes": 8581
+        "rawBytes": 27216,
+        "gzipEstimateBytes": 8590
       }
     }
   ],
@@ -771,7 +771,7 @@
     "checks": [
       {
         "name": "Unique precache bytes",
-        "actualBytes": 797635,
+        "actualBytes": 798035,
         "limitBytes": 800000,
         "passed": true
       },
@@ -787,7 +787,7 @@
       },
       {
         "name": "404.html: direct JS",
-        "actualBytes": 22040,
+        "actualBytes": 22108,
         "limitBytes": 30000,
         "passed": true
       },
@@ -835,7 +835,7 @@
       },
       {
         "name": "documentation.html: direct JS",
-        "actualBytes": 22040,
+        "actualBytes": 22108,
         "limitBytes": 30000,
         "passed": true
       },
@@ -847,7 +847,7 @@
       },
       {
         "name": "downloads.html: direct JS",
-        "actualBytes": 27028,
+        "actualBytes": 27096,
         "limitBytes": 30000,
         "passed": true
       },
@@ -859,7 +859,7 @@
       },
       {
         "name": "ecosystem.html: direct JS",
-        "actualBytes": 22040,
+        "actualBytes": 22108,
         "limitBytes": 30000,
         "passed": true
       },
@@ -883,7 +883,7 @@
       },
       {
         "name": "index.html: direct JS",
-        "actualBytes": 23080,
+        "actualBytes": 23148,
         "limitBytes": 30000,
         "passed": true
       },
@@ -967,7 +967,7 @@
       },
       {
         "name": "security.html: direct JS",
-        "actualBytes": 22040,
+        "actualBytes": 22108,
         "limitBytes": 30000,
         "passed": true
       },
@@ -979,7 +979,7 @@
       },
       {
         "name": "verify.html: direct JS",
-        "actualBytes": 27148,
+        "actualBytes": 27216,
         "limitBytes": 30000,
         "passed": true
       }

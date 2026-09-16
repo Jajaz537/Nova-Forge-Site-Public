@@ -56,7 +56,8 @@
       const link = document.createElement('a');
       link.className = 'text-link';
       link.href = `./project-${encodeURIComponent(item.id)}.html`;
-      link.textContent = 'Voir le mini-hub';
+      link.textContent = 'Voir la fiche';
+      link.setAttribute('aria-label', `Voir la fiche : ${item.name}`);
       article.append(kicker, title, copy, meta, link);
       return article;
     }));

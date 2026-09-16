@@ -546,3 +546,9 @@ Sur 048db73 : image chargée, capture desktop inspectée (texte/image côte à c
 Depuis a7d9025 : doublon de projet public reproduit dans un répertoire temporaire, accepté à tort par le générateur alors que le catalogue le refuse. Garde explicite ajoutée avant toute écriture. Cinq groupes de contrôles isolés réussis : trois groupes actuels et détection de dérive sans écriture, exclusion d’entrée privée incomplète, échappement des noms, refus du doublon, préservation de la page lors de données vides/chemin invalide/téléchargement actif/identité de jeu contradictoire. `qa/games-generator-checks.json`.
 
 Mode --check réussi sur les données courantes ; page générée strictement inchangée. Aucun runtime, visuel, cache ou fichier d’infrastructure modifié ; pas de nouvelle recette navigateur nécessaire pour ce correctif du générateur. VF NON VALIDÉE.
+
+## Descriptions publiques harmonisées, 16 septembre 2026
+
+Depuis db808eb : trois descriptions communes aux données, à l’accueil, au catalogue et aux fiches statiques. Jargon « pipeline de métadonnées », « local-first » et « artefact publié » retiré de ces résumés, sans modifier les états de compatibilité/distribution. Les liens accueil deviennent « Voir la fiche » avec nom accessible contextualisé, comme le catalogue. Index de recherche conservé : ses résumés courts étaient déjà cohérents avec ces limites.
+
+Sept scénarios catalogue accueil, structure 17 pages/13 scripts/77 empreintes, 34 assertions cache et budgets réussis. Cache v95 : 798035 octets bruts. Recette responsive des textes modifiés non réexécutée dans ce lot ; ne pas réattribuer les captures précédentes. VF NON VALIDÉE.
