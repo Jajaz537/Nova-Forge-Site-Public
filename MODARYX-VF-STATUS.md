@@ -34,6 +34,12 @@ Aucun artefact de téléchargement autorisé ; comptes, Guide, publication et se
 
 Une PR, un commit, un build ou une fusion ne clôture pas ces écarts. La surveillance d'achèvement ne doit pas notifier une VF à partir de ce document.
 
+## Revue visuelle déployée — 16 septembre 2026
+
+Le candidat `b6298ad70adecc46c3ae798543da991660f8dbac` a été déployé sur l’aperçu immuable `https://d97cce52.nova-forge-site-public.pages.dev`. Une comparaison Chromium avant/après a isolé puis corrigé le manque de profondeur du hero Profils en réutilisant l’asset Loup/Dragon existant. Communauté, Documentation, Sécurité, Téléchargements et Écosystème ont également été recapturés sur des aperçus immuables. Les fichiers et leur portée exacte sont consignés dans `review-evidence/visual-finish-20260916/README.md` au commit de preuve `d7b45d24cf0fdebf583e54167ce765988b7fbabb`.
+
+Après la correction Profils : structure des 17 pages sans erreur, syntaxe des 13 scripts valide, 84 empreintes conformes et 34 assertions cache/PWA simulées réussies. Précache : 799981 / 800000 octets bruts ; aucune modification des fichiers d’infrastructure protégés. Ces résultats ferment l’écart visuel ciblé, mais ne prouvent toujours pas lecteur d’écran natif, appareils physiques, zoom natif 200/400 %, matrice Firefox/Safari, Core Web Vitals terrain ou cycle hors ligne HTTPS complet. **VF NON VALIDÉE.**
+
 ## Complément de recette navigateur
 
 - Aperçu HTTPS de branche chargé après publication du candidat ; accueil et navigation vers le Studio observés. Cela ne prouve pas l'installation PWA ni le hors ligne.
