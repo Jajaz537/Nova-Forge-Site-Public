@@ -552,3 +552,7 @@ Mode --check réussi sur les données courantes ; page générée strictement in
 Depuis db808eb : trois descriptions communes aux données, à l’accueil, au catalogue et aux fiches statiques. Jargon « pipeline de métadonnées », « local-first » et « artefact publié » retiré de ces résumés, sans modifier les états de compatibilité/distribution. Les liens accueil deviennent « Voir la fiche » avec nom accessible contextualisé, comme le catalogue. Index de recherche conservé : ses résumés courts étaient déjà cohérents avec ces limites.
 
 Sept scénarios catalogue accueil, structure 17 pages/13 scripts/77 empreintes, 34 assertions cache et budgets réussis. Cache v95 : 798035 octets bruts. Recette responsive des textes modifiés non réexécutée dans ce lot ; ne pas réattribuer les captures précédentes. VF NON VALIDÉE.
+
+## 2026-09-16 — Reflow des textes Catalogue et accueil
+
+TERMINÉ sur ce périmètre : dix mesures navigateur des cinq pages modifiées par `0c1c809`, aux cadres 320/768 px, sans débordement horizontal ; trois noms accessibles contextualisés observés après chargement sur l’accueil. Voir `qa/catalog-copy-native-20260916.json`. Aucun changement runtime ni nouveau test source nécessaire pour ce lot documentaire. VF NON VALIDÉE ; les limites de la matrice restent ouvertes.

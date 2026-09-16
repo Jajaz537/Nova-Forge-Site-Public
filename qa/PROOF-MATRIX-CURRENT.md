@@ -43,3 +43,7 @@ Cette matrice remplace les anciens « prochains blocs » devenus partiellement a
 Tester un parcours absent de cette matrice ou intégrer un contenu/capacité dont les sources et le contrat sont réellement disponibles. Ne pas accumuler des copies de contrôles déjà acquis. Tout nouveau défaut doit être isolé, corrigé et vérifié sur son périmètre avant de continuer.
 
 **VF NON VALIDÉE.** Aucune fusion, infrastructure ou fonction OS modifiée. Les limites fonctionnelles ne sont ni annulées ni transformées en PASS par cette consolidation.
+
+## Textes du catalogue — preuve ciblée du 16 septembre
+
+Source `0c1c809` : dix mesures navigateur sur accueil, Catalogue et les trois fiches, cadres 320/768 px (largeurs utiles 305/753), sans débordement horizontal observé. Après chargement, les trois liens d’accueil affichent « Voir la fiche » avec un nom accessible propre au projet. Preuve : `qa/catalog-copy-native-20260916.json`. Ceci ne certifie ni lecteur d’écran, ni zoom natif, ni totalité des états visuels. Aucun runtime modifié par ce lot de preuve.
