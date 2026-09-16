@@ -30,7 +30,16 @@ Ces captures comparent la baseline déployée avant la passe cinématique et le 
 | Profils — groupes impairs | — | `profiles-groups-deployed.jpg` | Derniers groupes étendus sans cellule vide accidentelle ; aucun débordement à 1 348 px |
 | Accueil — Smart Profile | `smart-profile-before.jpg` | `smart-profile-after.jpg` | Valeurs et qualifications séparées ; état local réellement déclenché dans Chromium |
 
-Ces comparaisons ont été recapturées sur les déploiements immuables correspondant aux corrections. La navigation et Profils ont été vérifiés sur `https://17c68919.nova-forge-site-public.pages.dev` au commit `4f772f9`. Smart Profile a été revérifié sur `https://8b62addf.nova-forge-site-public.pages.dev` au commit `9634880`. Elles étendent la preuve au-delà des ouvertures, mais ne déclarent pas encore l’ensemble des pages visuellement finalisé.
+### Recaptures du candidat `f884b919`
+
+| Surface | Capture déployée | Vérification |
+|---|---|---|
+| Communauté — ouverture | `community-f884b919-viewport.jpg` | Direction Loup/Dragon, panneau de préparation et hiérarchie du hero |
+| Communauté — cartes et atelier | `community-f884b919-workspace.jpg` | Parcours numéroté visible et continuité avec l’atelier Collection |
+| Documentation — ouverture | `documentation-f884b919-viewport.jpg` | Hero cinématique, portée numérotée et navigation contextuelle |
+| Sécurité — ouverture | `security-f884b919-viewport.jpg` | Hero cinématique, principes actifs et actions principales |
+
+Ces comparaisons ont été recapturées sur les déploiements immuables correspondant aux corrections. La navigation et Profils ont été vérifiés sur `https://17c68919.nova-forge-site-public.pages.dev` au commit `4f772f9`. Smart Profile a été revérifié sur `https://8b62addf.nova-forge-site-public.pages.dev` au commit `9634880`. Communauté, Documentation et Sécurité ont été revérifiées sur `https://9fdb3c34.nova-forge-site-public.pages.dev` au commit `f884b919`. Elles étendent la preuve au-delà des ouvertures, mais ne déclarent pas encore l’ensemble des pages visuellement finalisé.
 
 Le lot a aussi été inspecté sous le hero : résultats du Catalogue, formulaire et aperçu Studio, collections, chaîne de confiance, contrat de téléchargement, outil de vérification, tâches de la documentation et parcours de l’écosystème. Les captures ci-dessus prouvent l’ouverture desktop de chaque surface ; elles ne suffisent pas à certifier tous les états et toutes les sections d’une page.
 
