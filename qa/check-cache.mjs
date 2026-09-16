@@ -29,10 +29,10 @@ async function probe(url,mode='navigate',method='GET'){
   const record={url,mode,method,intercepted,networkCalls:networkCalls-before,waitUntilCalls:waits.length,status:result?.status,stale:result?.headers?.get('X-Modaryx-Cache')||null};
   probes.push(record);return {record,result};
 }
-for(const url of ['/catalog.html','/catalog.html?game=demo','/catalog','/catalog?game=demo']){
+for(const url of ['/catalog.html','/catalog.html?game=demo','/catalog','/catalog?game=demo','/games/','/games/index.html','/games/index']){
   const {record}=await probe(url);check('Public alias '+url,record.intercepted&&record.networkCalls===1&&record.waitUntilCalls===1);
 }
-check('Aliases write canonical key',writes.length===4&&writes.every(key=>key==='https://example.test/catalog.html'));
+check('Aliases write canonical key',writes.length===7&&writes.slice(0,4).every(key=>key==='https://example.test/catalog.html')&&writes.slice(4).every(key=>key==='https://example.test/games/index.html'));
 for(const [url,mode,method] of [['/private.html','navigate','GET'],['/catalog.html','navigate','POST'],['https://other.test/catalog.html','navigate','GET'],['/downloads.json?private=1','cors','GET'],['/catalogue','navigate','GET']]){
   check('Excluded '+method+' '+url,!(await probe(url,mode,method)).record.intercepted);
 }
@@ -71,9 +71,9 @@ for(const failure of ['match','open']){
 const cachePaths=[...new Set(added.map(url=>new URL(url).pathname.slice(1)||'index.html'))];
 const missing=cachePaths.filter(name=>!fs.existsSync(path.join(root,name)));
 const measures=names=>{let raw=0,gzip=0;for(const name of names){const bytes=fs.readFileSync(path.join(root,name));raw+=bytes.length;gzip+=zlib.gzipSync(bytes,{level:9}).length;}return {files:names.length,rawBytes:raw,gzipEstimateBytes:gzip};};
-const pages=fs.readdirSync(root).filter(name=>name.endsWith('.html')&&!['review.html','comparison.html'].includes(name)).sort().map(name=>{
+const pages=fs.readdirSync(root).filter(name=>name.endsWith('.html')&&!['review.html','comparison.html'].includes(name)).concat('games/index.html').sort().map(name=>{
   const html=fs.readFileSync(path.join(root,name),'utf8');
-  const resources=[...html.matchAll(/<(?:link|script)\b[^>]*(?:href|src)=["']([^"']+\.(?:css|js))["'][^>]*>/g)].map(m=>m[1].replace(/^\.\//,''));
+  const resources=[...html.matchAll(/<(?:link|script)\b[^>]*(?:href|src)=["']([^"']+\.(?:css|js))["'][^>]*>/g)].map(m=>path.posix.normalize(path.posix.join(path.posix.dirname(name),m[1])));
   return {page:name,htmlBytes:Buffer.byteLength(html),css:measures(resources.filter(p=>p.endsWith('.css'))),js:measures(resources.filter(p=>p.endsWith('.js')))};
 });
 const baseline=path.resolve(root,'../site-baseline');

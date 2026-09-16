@@ -1,8 +1,9 @@
-const CACHE_NAME = 'nova-site-shell-v90-modaryx-premium';
+const CACHE_NAME = 'nova-site-shell-v91-modaryx-premium';
 const BASE_URL = new URL('./', self.location.href);
 const PUBLIC_PAGE_PATHS = [
   './',
   './index.html',
+  './games/index.html',
   './catalog.html',
   './search.html',
   './creator-studio.html',
@@ -93,6 +94,7 @@ const PAGE_KEYS = new Map();
 for (const href of PUBLIC_PAGES) {
   const page = new URL(href);
   PAGE_KEYS.set(page.pathname, href);
+  if (page.pathname.endsWith('/index.html')) PAGE_KEYS.set(page.pathname.slice(0, -10), href);
   if (page.pathname.endsWith('.html')) PAGE_KEYS.set(page.pathname.slice(0, -5), href);
 }
 const readCache = async (key) => {

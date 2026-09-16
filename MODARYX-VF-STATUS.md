@@ -510,3 +510,9 @@ Sur ec835ba, données enrichies observées dans Chrome HTTPS : filtre Minecraft 
 Depuis 63c3f1a, changement de sélection pendant arrayBuffer : le hachage n’est plus lancé après la fin de cette lecture. Défaut reproduit avant correction : un appel digest au lieu de zéro. La lecture déjà engagée n’est pas annulée. La garde après digest reste nécessaire et conservée pour les changements pendant un calcul déjà lancé.
 
 Dix groupes vérificateur réussis, avec Web Crypto réel dans Node pour les résultats de hachage et délais simulés pour les courses ; bouton libéré et résultat périmé masqué dans les deux phases. 31 assertions cache et budgets, structure et 76 empreintes réussis. Cache v90 : 798679 octets. Aucun gain de durée chiffré ni course native navigateur revendiqué. VF NON VALIDÉE.
+
+## Index jeux — capacité retenue intégrée au candidat, 16 septembre 2026
+
+Depuis e776167 : ajout de `/games/`, index statique généré depuis les trois jeux publics du catalogue de démonstration. Liens vers les fiches, entrée depuis le catalogue et la recherche (15 entrées). Pas de hubs GTA 6/RDR2, pages de catégories, corpus réel, téléchargement ou partenariat implicite. Générateur `qa/build-games-index.py`, dérive vérifiée par check-site -- le fichier généré doit rester conforme aux données.
+
+Route indexée dans le shell/cache, alias `/games/`, `/games/index` et `/games/index.html` contrôlés. QA structurelle et budgets étendus à la 17e page et aux chemins relatifs imbriqués. Schémas JSON compactés : 7586 octets économisés et égalité JSON vérifiée, aucune clé/contrat renommé. 34 assertions cache, neuf contrôles entrée PWA, huit groupes recherche et structure 17 pages/13 scripts/77 empreintes réussis. Cache v91 : 796606 octets bruts. Aucun fichier d’infrastructure, sitemap ou robots modifié. Preuves navigateur de la nouvelle page encore à produire ; VF NON VALIDÉE.

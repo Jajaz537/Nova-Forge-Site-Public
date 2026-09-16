@@ -2,9 +2,10 @@
 from pathlib import Path
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
-import json, hashlib, subprocess
+import json, hashlib, subprocess, sys
 
 ROOT=Path(__file__).resolve().parents[1]
+subprocess.run([sys.executable, str(ROOT/'qa/build-games-index.py'), '--check'], check=True, stdout=subprocess.DEVNULL)
 class Page(HTMLParser):
     def __init__(self, path):
         super().__init__(); self.tags=[]; self.stack=[]; self.feed(path.read_text())
@@ -16,7 +17,8 @@ class Page(HTMLParser):
     def handle_endtag(self, name):
         if name in self.stack: self.stack=self.stack[:len(self.stack)-1-self.stack[::-1].index(name)]
 
-pages={p.name:Page(p) for p in ROOT.glob('*.html') if p.stem not in ('review','comparison')}
+public_paths=[p for p in ROOT.glob('*.html') if p.stem not in ('review','comparison')]+list((ROOT/'games').glob('*.html'))
+pages={str(p.relative_to(ROOT)):Page(p) for p in public_paths}
 report=[]
 for name,page in sorted(pages.items()):
     errors=[]; ids=[a['id'] for _,a in page.tags if 'id' in a]
@@ -32,11 +34,13 @@ for name,page in sorted(pages.items()):
             if key not in attrs: continue
             url=urlsplit(attrs[key])
             if url.scheme or url.netloc: continue
-            target=ROOT/(unquote(url.path) or name)
+            target=((ROOT/name).parent/unquote(url.path)) if url.path else ROOT/name
+            target=target.resolve()
             if target.is_dir():target=target/'index.html'
             if not target.exists():errors.append('Missing file: '+attrs[key]);continue
-            if url.fragment and target.name in pages and not url.fragment.startswith('sha256='):
-                if not any(a.get('id')==unquote(url.fragment) for _,a in pages[target.name].tags):errors.append('Missing anchor: '+attrs[key])
+            target_key=str(target.relative_to(ROOT))
+            if url.fragment and target_key in pages and not url.fragment.startswith('sha256='):
+                if not any(a.get('id')==unquote(url.fragment) for _,a in pages[target_key].tags):errors.append('Missing anchor: '+attrs[key])
     report.append(dict(page=name,errors=errors))
 scripts=[]
 for p in sorted((ROOT/'assets').glob('*.js'))+[ROOT/'sw.js']:

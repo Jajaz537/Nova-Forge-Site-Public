@@ -2,7 +2,7 @@
   "status": "PASS",
   "scope": "Nine structural and Node VM checks; not native PWA installation/offline proof",
   "checks": [
-    "All 16 public pages load the shared entry exactly once; no duplicate registration in app.js",
+    "All 17 public pages load the shared entry exactly once; no duplicate registration in app.js",
     "HTTPS page without a navigation element still registers",
     "Subdirectory deployment uses shell location, not document URL",
     "Insecure context skipped",

@@ -5,7 +5,7 @@ Réconciliée le 15 septembre 2026 avec `CHECKPOINT-CANONIQUE-NOVA-FORGE-MODARYX
 
 ## Surface existante
 
-Le site reste statique et local-first. Ses seize pages sont : accueil, catalogue, recherche, Creator Studio, communauté, profils, écosystème, documentation, sécurité, vérification, téléchargements, fiche générique, trois fiches de démonstration et 404. Les chemins effectifs sont recensés dans `qa/MODARYX-ANTI-OUBLI.md`.
+Le site reste statique et local-first. Les seize pages initiales sont : accueil, catalogue, recherche, Creator Studio, communauté, profils, écosystème, documentation, sécurité, vérification, téléchargements, fiche générique, trois fiches de démonstration et 404. Les chemins effectifs sont recensés dans `qa/MODARYX-ANTI-OUBLI.md`.
 
 Navigation de découverte : catalogue → fiche → outils pertinents. Navigation d'assistance : documentation, sécurité, vérification. CTA principal : **Explorer les mods** ; CTA contextuel : **Créer un projet**. Aucun CTA de téléchargement actif sans artefact réellement publié dans `downloads.json`.
 
@@ -21,14 +21,14 @@ Navigation de découverte : catalogue → fiche → outils pertinents. Navigatio
 
 L'ancien libellé « Modaryx OS » décrivait historiquement l'aperçu et un pont applicatif envisagé. Il ne nomme plus un produit actuel. Le pont Nova Forge reste une intégration distincte, déclarée `not_connected` dans `public-status.json` ; il ne doit pas devenir une promesse de service connecté.
 
-## Architecture jeux retenue, encore absente
+## Architecture jeux
 
-- `/games/` : index jeux.
+- `/games/` : index statique des trois jeux représentés dans les démonstrations ; généré depuis `data/catalog.json` avec `python3 qa/build-games-index.py`. Ajout du 17e écran. Catégories et hubs éditoriaux restent absents.
 - `/gta-6/`, `/gta-6/mods/`, catégories et guides substantiels.
 - `/red-dead-redemption-2/`, `/red-dead-redemption-2/mods/`, catégories et guides substantiels.
 - Modèle extensible à d'autres jeux.
 
-Ces routes sont une architecture cible, pas des pages publiées. Les trois entrées actuelles concernent Skyrim Special Edition, Cyberpunk 2077 et Minecraft, toutes classées `demonstration`. Aucun support de mods, sortie PC, droit de redistribution ou téléchargement GTA 6/RDR2 ne doit être déduit de ce plan. La publication exige contenu original utile, sources actuelles et droits des assets vérifiés ; aucune page SEO vide.
+Les routes GTA 6/RDR2 restent une architecture cible, pas des pages publiées. Les trois entrées actuelles concernent Skyrim Special Edition, Cyberpunk 2077 et Minecraft, toutes classées `demonstration`. Aucun support de mods, sortie PC, droit de redistribution ou téléchargement GTA 6/RDR2 ne doit être déduit de ce plan. La publication exige contenu original utile, sources actuelles et droits des assets vérifiés ; aucune page SEO vide.
 
 ## Contrat d'une fiche
 

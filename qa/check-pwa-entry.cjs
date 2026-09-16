@@ -1,11 +1,11 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),source=fs.readFileSync(path.join(root,'assets/shell.js'),'utf8');
 const entry=source.slice(0,source.indexOf('\n\n(() =>'));
-const pages=fs.readdirSync(root).filter(n=>n.endsWith('.html')&&!['review.html','comparison.html'].includes(n));
-assert.equal(pages.length,16);
-for(const page of pages){const html=fs.readFileSync(path.join(root,page),'utf8');assert.equal((html.match(/src="\.\/assets\/shell\.js"/g)||[]).length,1,page);}
+const pages=fs.readdirSync(root).filter(n=>n.endsWith('.html')&&!['review.html','comparison.html'].includes(n)).concat('games/index.html');
+assert.equal(pages.length,17);
+for(const page of pages){const html=fs.readFileSync(path.join(root,page),'utf8');assert.equal((html.match(/src="\.\.?\/assets\/shell\.js"/g)||[]).length,1,page);}
 assert.ok(!fs.readFileSync(path.join(root,'assets/app.js'),'utf8').includes('serviceWorker.register'));
-const checks=['All 16 public pages load the shared entry exactly once; no duplicate registration in app.js'];
+const checks=['All 17 public pages load the shared entry exactly once; no duplicate registration in app.js'];
 async function scenario(name,options={},expected=1){
  const calls=[];const context={URL,window:{isSecureContext:options.secure!==false},location:{origin:'https://modaryx.test'},document:{currentScript:options.noScript?null:{src:options.src||'https://modaryx.test/assets/shell.js'}},navigator:options.unsupported?{}:{serviceWorker:{register:(url,opts)=>{calls.push({url:url.href,...opts});if(options.syncFail)throw Error('blocked');return options.reject?Promise.reject(Error('refused')):Promise.resolve({});}}}};
  await vm.runInNewContext(entry,context);assert.equal(calls.length,expected,name);
