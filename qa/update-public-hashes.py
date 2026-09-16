@@ -10,6 +10,7 @@ for line in MANIFEST.read_text(encoding="utf-8").splitlines():
         paths.append(line.split(maxsplit=1)[1].lstrip("*"))
 for new_path in (
     "./assets/modaryx-home-cinematic.css",
+    "./assets/modaryx-cinematic-system.css",
     "./assets/verify-picker.css",
     "./data/integration-readiness.json",
     "./schemas/integration-readiness.schema.json",
