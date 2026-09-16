@@ -54,3 +54,11 @@ La consolidation des 26 scripts reste attachée à 82d958f. Les suites ciblées 
 ## Après ajout de l’index jeux
 
 `/games/` est ajouté avec trois jeux de démonstration et leurs fiches. Génération depuis les données, découverte via Catalogue/Recherche, pré-cache et alias de route intégrés ; preuve navigateur dédiée `qa/games-directory-native-20260916.json`. Les contrôles structurels portent désormais sur 17 pages. L’index ne clôture pas les hubs, catégories, corpus ou services absents. Recherche : 15 entrées ; égalité des liens du répertoire statique et de l’index contrôlée. Prochain lot produit : catégories ou corpus éditorial substantiel à partir des sources disponibles ; ne pas recommencer les quatre reflows acquis sans changement.
+
+## Checkpoint final autonome — 16 septembre 2026
+
+Le travail autonome démontrable est consolidé dans `VF-TECHNICALLY-MAXIMAL-CANDIDATE.md`. Replay final : 30/30 scripts PASS ; lint et build PASS ; 17/17 routes navigateur sans échec structurel/visuel ciblé ; 34/34 mesures pseudo-localisées sans débordement.
+
+Il ne reste pas de lot autonome légitime à fabriquer à partir des seules sources présentes. La suite exige une preuve externe (lecteurs d'écran, zoom natif, appareils/moteurs, PWA hors ligne, CWV, imports/exports) ou une entrée produit absente (corpus/droits, comptes, publication, stockage/réparation, artefacts signés, pont Guide/OS, Master NDI). Procédures et sévérités : `FINAL-EXTERNAL-VALIDATION-MATRIX.md`.
+
+Ne pas promouvoir en VF officielle sur la seule base de ce checkpoint. PR #12 maintenue en brouillon ; aucun changement d'infrastructure ni de `main`.

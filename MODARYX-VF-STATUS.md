@@ -582,3 +582,13 @@ Accueil, Documentation et Écosystème : « Preuves requises », « Service non 
 ### Contrôle après d575f4c
 
 Trois mesures navigateur à 320 px (305 px utiles) sur Accueil, Documentation et Écosystème : aucun débordement horizontal observé. Nouveaux libellés présents dans le DOM : deux « Preuves requises » sur l’accueil, un en Documentation, trois « Service non connecté » sur Écosystème. Preuve `qa/public-language-native-20260916.json`. Portée limitée au reflow étroit et aux textes déployés ; pas de nouvelle certification visuelle exhaustive, zoom ou lecteur d’écran.
+
+## 2026-09-16 — VF TECHNICALLY MAXIMAL CANDIDATE
+
+Revue post-publication sur `76cbe6d` : les concepts Portails Loup/Dragon sont effectivement rendus sur Jeux et Écosystème ; le sélecteur de fichier français du vérificateur et son focus visible sont observés ; Profils n'identifie plus Communauté comme destination courante.
+
+Stress pseudo-localisé +35 % : 34 mesures, 17 pages à 320/768 px, zéro débordement horizontal, zéro `tabindex` positif, service worker activé sur 34/34. Revue desktop consolidée : 17/17 routes avec titre, h1 et main uniques, aucune image cassée, aucun identifiant dupliqué et aucun débordement observé. Preuves : `qa/pseudolocalization-browser-20260916.json` et `qa/final-browser-review-20260916.json`.
+
+Replay source global exécuté une seule fois : 30 scripts, 30 PASS, 0 échec (`qa/final-source-validation.json`). `npm run lint` et `npm run build` PASS : 17 pages, 13 scripts, 80 empreintes, index Jeux conforme. Cache : 34 assertions PASS, 799990/800000 octets bruts, estimation gzip 520627 ; marge de 10 octets à préserver.
+
+Statut : **VF TECHNICALLY MAXIMAL CANDIDATE**. Ce statut clôt le travail autonome démontrable dans l'environnement courant ; il ne constitue ni une VF officielle ni un 100 %. Les validations natives/externes et les capacités sans données, services, droits ou décisions restent dans `FINAL-EXTERNAL-VALIDATION-MATRIX.md` et `VF-TECHNICALLY-MAXIMAL-CANDIDATE.md`.
