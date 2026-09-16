@@ -44,6 +44,10 @@ Tester un parcours absent de cette matrice ou intégrer un contenu/capacité don
 
 **VF NON VALIDÉE.** Aucune fusion, infrastructure ou fonction OS modifiée. Les limites fonctionnelles ne sont ni annulées ni transformées en PASS par cette consolidation.
 
+## Nouvelles tentatives des portes externes — 16 septembre 2026
+
+Sur le preview immuable `https://3f488769.nova-forge-site-public.pages.dev/` du commit `67989b4`, deux variantes du raccourci de zoom ont été tentées après remise à 100 %. Largeur, DPR et échelle visuelle sont restés strictement identiques : aucun zoom 200/400 % n’est revendiqué. L’inspection runtime du service worker et de CacheStorage n’est pas exposée par le contexte contrôlé, qui ne fournit pas non plus de bascule réseau hors ligne. Enfin, le sélecteur natif du Studio s’est ouvert, mais la permission d’y placer le manifeste témoin a été refusée ; aucun contournement n’a été tenté. Résultats structurés : `external-gate-attempts-20260916.json`. Ces trois lignes restent **PREUVE MANQUANTE**.
+
 ## Textes du catalogue — preuve ciblée du 16 septembre
 
 Source `0c1c809` : dix mesures navigateur sur accueil, Catalogue et les trois fiches, cadres 320/768 px (largeurs utiles 305/753), sans débordement horizontal observé. Après chargement, les trois liens d’accueil affichent « Voir la fiche » avec un nom accessible propre au projet. Preuve : `qa/catalog-copy-native-20260916.json`. Ceci ne certifie ni lecteur d’écran, ni zoom natif, ni totalité des états visuels. Aucun runtime modifié par ce lot de preuve.
