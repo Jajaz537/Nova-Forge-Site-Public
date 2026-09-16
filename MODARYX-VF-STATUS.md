@@ -530,3 +530,9 @@ Depuis e383029 : ajout du jeu dans le fil d’Ariane des trois fiches, lien vers
 ## Retour fiche → jeu — recette native, 16 septembre 2026
 
 Sur 9f0d4f0, les trois fils d’Ariane ouverts par Entrée aboutissent aux ancres Skyrim, Cyberpunk et Minecraft attendues. Trois mesures des fiches à 320 : largeur et scrollWidth 305, aucun tabindex positif. Skyrim desktop : cible top 99,92 px sous l’en-tête à 76 px. Minecraft mobile : capture inspectée, titre et carte sous l’en-tête fixe ; mesure géométrique du cadre indisponible, aucun chiffre revendiqué. Preuve `qa/project-game-return-native-20260916.json`. Délais de lecture DOM isolés, pas de correction produit nécessaire. VF NON VALIDÉE.
+
+## Index jeux — composition des portails, 16 septembre 2026
+
+Depuis 60299be : introduction en deux colonnes sur desktop, une colonne sur mobile, avec le visuel de portails MODARYX déjà utilisé à l’accueil. Asset inchangé, explicitement décrit comme illustration d’ambiance et non capture des jeux. Dimensions intrinsèques 1200×675, ratio préservé, aucun nouveau script ni animation. Générateur et page synchronisés.
+
+Structure 17 pages/77 empreintes et 34 assertions cache/budgets réussies. Cache v94, 797635 octets bruts ; image déjà précachée, aucun fichier image ajouté. Recette visuelle du nouveau cadrage à effectuer après publication candidate. VF NON VALIDÉE.

@@ -3,3 +3,5 @@
 @media(min-width:861px){.project-directory{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
 .game-projects{list-style:none;padding:0;display:grid;gap:.75rem}.game-projects .button{white-space:normal;text-align:start}
+
+.games-intro{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:2rem}.games-art{margin:0}.games-art img{display:block;width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--line)}.games-art figcaption{color:var(--muted);font-size:.8rem;margin-top:.7rem}@media(max-width:860px){.games-intro{grid-template-columns:1fr;gap:1.5rem}}
