@@ -21,13 +21,23 @@ const fixtures={collection:{schemaVersion:1,id:'imported',name:'Imported',descri
    if(action==='edit'){field.value='Recent';await form.fire('input',{target:field});}
    if(action==='file-change')await picker.fire('change');
    if(action==='clear')await get('#'+kind+'-clear').fire('click');
-   if(action==='newer-import'){picker.files=[{text:async()=>JSON.stringify({...fixtures[kind],name:'Newest',body:'Newest'})}];await button.fire('click');assert.equal(field.value,'Newest');}
+   if(action==='newer-import'){picker.files=[{text:async()=>JSON.stringify({...fixtures[kind],[kind==='collection'?'name':'body']:'Newest'})}];await button.fire('click');assert.equal(field.value,'Newest');}
    const expected=field.value;
    finish(action==='invalid-json'?'{broken':JSON.stringify(fixtures[kind]));await pending;
    assert.equal(field.value,expected,kind+' '+action+' preserves newer form');
    if(action==='invalid-json')assert.match(get('#'+kind+'-status').textContent,/Import bloqué/);
    checks.push(kind+': '+action+' preserves correct draft');
   }
+ }
+ for(const kind of ['collection','submission']){
+  const invalid=[{...fixtures[kind],unexpectedAssertion:'verified'},{...fixtures[kind],id:42}];
+  if(kind==='submission')invalid.push({...fixtures[kind],kind:'comment',title:undefined,parentSubmissionId:42});
+  for(const fixture of invalid){
+   const get=await setup(),field=get(kind==='collection'?'#collection-name':'#submission-body');field.value='Keep current';
+   get('#'+kind+'-import-file').files=[{text:async()=>JSON.stringify(fixture)}];await get('#'+kind+'-import').fire('click');
+   assert.equal(field.value,'Keep current');assert.match(get('#'+kind+'-status').textContent,/Import bloqué/);
+  }
+  checks.push(kind+': extra properties and non-string IDs refused without replacing draft');
  }
  const report={scope:'Node VM with deferred file reads; no native file-picker or screen-reader proof',checks};fs.writeFileSync(path.join(__dirname,'import-race-checks.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
 })().catch(e=>{console.error(e);process.exitCode=1});

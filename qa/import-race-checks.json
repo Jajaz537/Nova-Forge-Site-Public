@@ -10,6 +10,8 @@
     "submission: file-change preserves correct draft",
     "submission: clear preserves correct draft",
     "submission: newer-import preserves correct draft",
-    "submission: invalid-json preserves correct draft"
+    "submission: invalid-json preserves correct draft",
+    "collection: extra properties and non-string IDs refused without replacing draft",
+    "submission: extra properties and non-string IDs refused without replacing draft"
   ]
 }

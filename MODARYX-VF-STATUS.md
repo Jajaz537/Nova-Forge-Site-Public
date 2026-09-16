@@ -430,3 +430,11 @@ Départ `99d4e302b1a067d259615b7db8e2976096999adb`. Révision du brouillon suivi
 Tentative depuis le candidat `6cf86a2a7722237120cdf91c532252d962979391` : le sélecteur de fichiers documenté a été ouvert sur Communauté avec un fichier JSON synthétique, sans données personnelles et sans sauvegarde prévue. L’action setFiles a été rejetée par le contrôle d’autorisation du navigateur, motif retourné : permission utilisateur déclinée. Aucun contournement tenté, aucun bouton Importer ensuite activé, aucune preuve de sélection/import ajoutée.
 
 **PREUVE MANQUANTE** : imports natifs et courses temporelles en navigateur. Les résultats Node précédents gardent leur portée simulée. Cette limite d’autorisation remplace l’hypothèse d’absence technique du sélecteur : l’API existe, son usage a été refusé pour cette destination. La reprise de ce parcours exige une autorisation navigateur effectivement accordée ; ne pas redemander ou réessayer automatiquement. Aucune modification produit/infrastructure. VF NON VALIDÉE.
+
+## Contrats d’import — champs inconnus et types, 16 septembre 2026
+
+Départ `b2a34a7b62113cf0a5565090f504b7e3114a183c`. Les contrats Collection/Contribution interdisent additionalProperties, mais les imports acceptaient des champs supplémentaires ; le JSON d’une contribution pouvait les afficher. Les propriétés non reconnues sont maintenant refusées avant application, ainsi que les identifiants numériques précédemment convertis en chaînes (ID et parent). Aucun schéma historique renommé, aucune migration de marque.
+
+Douze contrôles d’import source réussis, dont deux groupes ajoutés couvrant cinq fichiers hors contrat ; brouillon courant préservé. Le premier passage a révélé un défaut de fixture concurrente (name et body ajoutés aux deux types) : fixture corrigée pour respecter chaque contrat, puis test rejoué avec succès. Douze contrôles d’états, 25 assertions cache, 16 pages/13 scripts/76 empreintes réussis. Cache v83 : 799211 octets bruts.
+
+Les fichiers ne sont pas nettoyés silencieusement : l’import est refusé avec message. Import natif toujours bloqué par l’autorisation navigateur antérieure ; aucun nouvel essai de sélection. VF NON VALIDÉE.

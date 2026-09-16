@@ -146,8 +146,9 @@
   }
 
   function applyCollection(value) {
+    if (Object.keys(value || {}).some(k => !["schemaVersion","id","name","description","ownerProfileId","itemIds","visibility","syncState"].includes(k))) throw new Error("Champ de collection inconnu ; import refusé.");
     if (!catalogReady) throw new Error("Catalogue indisponible ou en cours de chargement.");
-    if (!value || value.schemaVersion !== 1 || !ID_RE.test(String(value.id || "")) || typeof value.name !== "string") throw new Error("Collection V1 invalide.");
+    if (!value || value.schemaVersion !== 1 || (typeof value.id !== "string" || !ID_RE.test(value.id)) || typeof value.name !== "string") throw new Error("Collection V1 invalide.");
     if (!value.name.trim() || value.name.length > 160 || (value.description !== undefined && (typeof value.description !== "string" || value.description.length > 1200))) throw new Error("Nom ou description de collection invalide ; brouillon précédent conservé.");
     if (value.syncState !== "local-only") throw new Error("Seules les collections local-only peuvent être importées sans service de synchronisation.");
     if (value.visibility !== "private-local") throw new Error("La visibilité distante n’est pas disponible sans service réel.");
@@ -276,7 +277,8 @@
   }
 
   function applySubmission(value) {
-    if (!value || value.schemaVersion !== 1 || !ID_RE.test(String(value.id || ""))) throw new Error("Contribution locale V1 invalide.");
+    if (Object.keys(value || {}).some(k => !["schemaVersion","id","kind","targetId","body","title","rating","parentSubmissionId","authorProfileId","syncState","publicationState","moderationState"].includes(k))) throw new Error("Champ de contribution inconnu ; import refusé.");
+    if (!value || value.schemaVersion !== 1 || (typeof value.id !== "string" || !ID_RE.test(value.id))) throw new Error("Contribution locale V1 invalide.");
     if (!new Set(["discussion", "review", "comment"]).has(value.kind)) throw new Error("Type de contribution inconnu.");
     if (value.authorProfileId !== null || value.syncState !== "local-only" || value.publicationState !== "local-draft" || value.moderationState !== "not-submitted") {
       throw new Error("Un brouillon local ne peut affirmer ni auteur distant, ni synchronisation, ni publication, ni modération.");
@@ -285,7 +287,7 @@
     if (!known.has(value.targetId)) throw new Error("ID catalogue ciblé inconnu.");
     if (typeof value.body !== "string" || !value.body.trim() || value.body.length > 8000) throw new Error("Contenu de contribution invalide.");
     if (value.kind === "comment") {
-      if (!ID_RE.test(String(value.parentSubmissionId || "")) || "title" in value || "rating" in value) throw new Error("Contrat commentaire invalide.");
+      if ((typeof value.parentSubmissionId !== "string" || !ID_RE.test(value.parentSubmissionId)) || "title" in value || "rating" in value) throw new Error("Contrat commentaire invalide.");
     } else {
       if (typeof value.title !== "string" || !value.title.trim() || value.title.length > 180 || "parentSubmissionId" in value) throw new Error("Contrat titre/parent invalide.");
       if (value.kind === "review" && (!Number.isInteger(value.rating) || value.rating < 1 || value.rating > 5)) throw new Error("Note de review invalide.");
