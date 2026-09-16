@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-16T20:21:17.491Z",
+  "measuredAt": "2026-09-16T20:30:09.861Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -465,8 +465,8 @@
     "uniqueLocalFiles": 76,
     "missing": [],
     "files": 76,
-    "rawBytes": 799961,
-    "gzipEstimateBytes": 506328
+    "rawBytes": 799879,
+    "gzipEstimateBytes": 506274
   },
   "pages": [
     {
@@ -600,8 +600,8 @@
       "htmlBytes": 6468,
       "css": {
         "files": 7,
-        "rawBytes": 65576,
-        "gzipEstimateBytes": 18431
+        "rawBytes": 65494,
+        "gzipEstimateBytes": 18377
       },
       "js": {
         "files": 2,
@@ -771,7 +771,7 @@
     "checks": [
       {
         "name": "Unique precache bytes",
-        "actualBytes": 799961,
+        "actualBytes": 799879,
         "limitBytes": 800000,
         "passed": true
       },
@@ -889,7 +889,7 @@
       },
       {
         "name": "profiles.html: direct CSS",
-        "actualBytes": 65576,
+        "actualBytes": 65494,
         "limitBytes": 70000,
         "passed": true
       },

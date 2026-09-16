@@ -26,7 +26,7 @@ ea3ceb226c6cd2903c513bb3cede5863802e345ee29cd1d33354f581c27b334b  ./assets/nova-
 b47929a65e2a8facebee212aa8b1d0d0c8dcc83d35b56639148b4eca08067ba6  ./assets/nova-premium-hd.css
 947867b01e8b12ee6e9a9853c175590fd154233d5a2e8596592ed37420e0ef6b  ./assets/nova-premium-hd.js
 4cc40ac150b517f9112966ec438b934d85b11c1154fafa5e7165adbc8045b508  ./assets/official.css
-8c61748add33fcc030cf66991fe6c84d8857ae5edd164b24e79d4386478c46a3  ./assets/profiles.css
+ffcea620edbe92ac3f0264c40625d6a6b30427eb50cf56abaaa3d44e91cb72f3  ./assets/profiles.css
 aa04a79025a5da6b532b5a06f08c7eefd3dbc9ad2d54e7e050006b6b64a90d3f  ./assets/profiles.js
 db79e4b5d933284c9ba12ec8974cce0bb75110f3c7b5134c670e77eb508b4586  ./assets/project-hub.css
 3aa9a4b17c14f6fea264f2de9bb04431448b9d2e7ab1cc0293a339084504b0e2  ./assets/project-hub.js
