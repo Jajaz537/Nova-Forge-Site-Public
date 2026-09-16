@@ -500,3 +500,7 @@ Sur 3d641a6 : trois libellés visibles « Voir la fiche », chacun inclus dans s
 Depuis 6c334c3, échec du catalogue enrichi : filtres, réinitialisation, sauvegarde/application de vue désactivés ; consultation des cartes, favoris et suppression des vues conservées. Sélectionner une vue ne réactive plus Appliquer lorsque les données sont absentes. Les messages distinguent l’échec en ligne du hors ligne et proposent de recharger. Aucun effacement de données locales.
 
 Sept groupes contrat catalogue (dont dix variantes malformées et deux rejets réseau), deux scénarios de qualification cache, 31 assertions service worker et contrôles structure/empreintes réussis. Preuves Node uniquement pour la panne réseau. Index recherche compacté sans changement des données (égalité JSON vérifiée), 1578 octets économisés. Cache v89 : 798633 octets bruts. VF NON VALIDÉE.
+
+## Catalogue — parcours normal après garde dégradée, 16 septembre 2026
+
+Sur ec835ba, données enrichies observées dans Chrome HTTPS : filtre Minecraft 1 entrée, création d’une vue locale temporaire et activation d’Appliquer, réinitialisation 3 entrées, application 1 entrée. Vue de test supprimée, confirmation affichée, Appliquer désactivé ; réinitialisation finale à 3 entrées. `qa/catalog-normal-after-failure-guard-20260916.json`. Ce résultat protège le parcours normal concerné ; aucun échec réseau natif ni lecteur d’écran testé. VF NON VALIDÉE.
