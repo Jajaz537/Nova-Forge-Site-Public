@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nova-site-shell-v108-modaryx-community-finishline';
+const CACHE_NAME = 'nova-site-shell-v109-modaryx-navigation-unified';
 const BASE_URL = new URL('./', self.location.href);
 const PUBLIC_PAGE_PATHS = [
   './',
