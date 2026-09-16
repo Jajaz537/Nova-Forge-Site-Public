@@ -602,3 +602,11 @@ Depuis `71c4664`, l’Accueil utilise une composition cinématique dédiée. Dep
 Preuves bornées avant/après : `review-evidence/visual-finish-20260916/`. Les ouvertures desktop de l’Accueil, du Catalogue, des fiches, du Studio et des dix surfaces secondaires y sont comparées à la baseline historique. Mesures après correction : 17/17 routes sans débordement horizontal à 320 et 768 px ; 17/17 à 320 px avec expansion synthétique +35 %. Ce sont des mesures Chromium distant, pas des appareils physiques, un zoom natif ou une validation lecteur d’écran.
 
 Dernier contrôle source du lot : 34 assertions cache PASS, 796081/800000 octets précachés au commit `3d5ccfc`; contrats Recherche huit groupes PASS ; Téléchargements cinq groupes PASS. Le lot de preuves visuelles est archivé séparément après ce commit. **Aucune page n’est déclarée visuellement finalisée sur la seule base de son hero ; VF officielle toujours non validée.**
+
+## 2026-09-16 — Navigation globale et preuve Profils déployée
+
+Depuis `4f772f9`, l’accueil emploie la même taxonomie de navigation que les seize autres routes publiques. Le CTA d’en-tête redondant est retiré ; Téléchargements reste accessible dans le contenu et le footer. Contrôle statique : une seule variante de navigation et une seule variante de footer sur 17 routes, aucun lien local mort.
+
+Le déploiement immuable `https://17c68919.nova-forge-site-public.pages.dev` a été inspecté en Chromium. La navigation tient sans collision au cadre observé de 1 348 px. La correction Profils de `a722a28` est enfin prouvée déployée : les derniers groupes impairs occupent la largeur prévue, sans cellule vide accidentelle ; largeur utile et scrollWidth égales à 1 348 px.
+
+Build et structure PASS, 84 empreintes valides, 34 assertions cache PASS, précache 799 842/800 000 octets. Captures avant/après et preuve Profils archivées dans `review-evidence/visual-finish-20260916/` au commit `c497d03`. Documentation, FAQ, liens de poursuite et footer ont aussi été inspectés sans nouveau défaut produit isolé. **VF officielle toujours non validée** : limites externes et états asynchrones non observés inchangés.

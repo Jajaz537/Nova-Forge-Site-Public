@@ -75,3 +75,13 @@ Le checkpoint technique a été dépassé par une demande explicite de finition 
 - PREUVE MANQUANTE inchangée : lecteur d’écran natif, zoom 200/400 %, appareils physiques, Safari/Firefox réels, CWV représentatifs et cycle PWA hors ligne complet.
 
 Conserver la PR #12 en brouillon et le statut **VF NON VALIDÉE** tant que ces limites et la revue visuelle exhaustive ne sont pas closes.
+
+## Point de reprise après c497d03 — 16 septembre 2026
+
+- TERMINÉ avec preuve déployée : navigation principale harmonisée sur les 17 routes (`Catalogue`, `Créer`, `Communauté`, `Écosystème`, `Recherche`, `Sécurité`, `Aide`). Aucun lien local mort ; footer identique sur les 17 routes.
+- TERMINÉ avec capture déployée : correction des groupes impairs de Profils, sans cellule vide accidentelle ni débordement à 1 348 px.
+- TERMINÉ avec inspection bornée : Documentation, FAQ de l’accueil, liens de poursuite et footer. Aucun défaut produit supplémentaire isolé dans ces surfaces.
+- PREUVES : `review-evidence/visual-finish-20260916/`, déploiement immuable `https://17c68919.nova-forge-site-public.pages.dev`, commits `4f772f9` puis `c497d03`.
+- EN COURS : états asynchrones non encore observés nativement. Prioriser un état réellement déclenchable dans le navigateur ; ne pas simuler une panne pour la déclarer native et ne pas rejouer les parcours déjà fermés.
+
+Dernier contrôle affecté par la navigation : structure/build PASS, 84 empreintes valides, 34 assertions cache PASS, précache 799 842/800 000 octets. Ces résultats ne ferment aucune preuve externe de la matrice finale.
