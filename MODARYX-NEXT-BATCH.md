@@ -1,6 +1,6 @@
 # MODARYX — prochain bloc et conditions de clôture
 
-Actualisé le 16 septembre 2026 après `f4372eeb08704abd9cffb5910ff66b777c5689b8`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
+Actualisé le 16 septembre 2026 après `fae489a72465e140849e89b4c1b1944f9a7838f1`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
 
 ## Validation source consolidée
 
@@ -41,3 +41,12 @@ Séparer la suite en trois catégories :
 - Développement produit restant : corpus réel et droits des hubs, jeux/catégories, comptes/profils éditables, services de publication/modération, Guide et intégrations. Préparer un lot de développement avec son contrat et ses données ; ne pas les marquer réalisés par un schéma ou une page de présentation.
 
 Il n’est pas établi que tout le travail autonome possible soit épuisé. Aucun pourcentage global de VF n’est calculable à partir de la seule quantité de tests.
+
+## Point de reprise consolidé après fae489a
+
+- TERMINÉ sur leur périmètre : catalogue (noms de liens, reflow ciblé, parcours normal des vues) ; preuves liées dans la matrice. Ne pas refaire ces parcours inchangés.
+- TERMINÉ en simulation source : garde du catalogue dégradé, repli réseau si le cache est illisible, abandon du digest devenu périmé. Leur équivalent navigateur en panne reste PREUVE MANQUANTE.
+- PREUVE MANQUANTE : essai de zoom par raccourci sans effet observé (largeur 1363, DPR 1 inchangés). Ne pas le présenter comme 200/400 % ; ne pas répéter le même essai sans nouvelle capacité.
+- EN COURS : choisir un état non couvert ou un lot fonctionnel précisément documenté. Les hubs, comptes et services absents sont du développement restant, pas un simple travail de recette.
+
+La consolidation des 26 scripts reste attachée à 82d958f. Les suites ciblées ultérieures ne deviennent pas rétroactivement une validation globale de fae489a. Cette mise à jour est documentaire ; aucun nouveau test exécuté pour la justifier.
