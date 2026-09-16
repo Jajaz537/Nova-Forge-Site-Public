@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nova-site-shell-v107-modaryx-page-finishline';
+const CACHE_NAME = 'nova-site-shell-v108-modaryx-community-finishline';
 const BASE_URL = new URL('./', self.location.href);
 const PUBLIC_PAGE_PATHS = [
   './',
@@ -72,6 +72,7 @@ const SHELL_PATHS = [
   './assets/modaryx-home-finishline.css',
   './assets/modaryx-cinematic-system.css',
   './assets/modaryx-pages-finishline.css',
+  './assets/modaryx-community-finishline.css',
   './assets/modaryx-studio-cinematic-fix.css',
   './assets/modaryx-search-cinematic-fix.css',
   './assets/modaryx-wolf-dragon-hero.webp',

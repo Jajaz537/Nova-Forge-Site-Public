@@ -13,14 +13,14 @@
   <link rel="manifest" href="./site.webmanifest">
   <link rel="stylesheet" href="./assets/tokens.css">
   <link rel="stylesheet" href="./assets/site.css">
-  <link rel="stylesheet" href="./assets/official.css">
   <script src="./assets/shell.js" defer></script>
   <script src="./assets/community.js" defer></script>
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
   <link rel="stylesheet" href="./assets/modaryx-foundations.css">
   <link rel="stylesheet" href="./assets/modaryx-cinematic-system.css">
+  <link rel="stylesheet" href="./assets/modaryx-community-finishline.css">
 </head>
-<body>
+<body class="community-page">
   <a class="skip-link" href="#main">Aller au contenu</a>
   <header class="topbar">
     <a class="brand" href="./index.html" aria-label="MODARYX MODS, accueil"><img class="brand-logo" src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="32" height="32"><span>MODARYX MODS</span></a>
@@ -41,7 +41,7 @@
     </section>
 
     <nav class="section-nav" aria-label="Outils communautaires"><a href="#collections">Ma collection</a><a href="#contributions">Mon brouillon</a><a href="./profiles.html">Profils</a></nav>
-    <section class="section" aria-labelledby="community-surfaces-title">
+    <section class="section community-toolkit" aria-labelledby="community-surfaces-title">
       <p class="eyebrow">À votre disposition</p><h2 id="community-surfaces-title">Des outils pour préparer votre contribution.</h2>
       <div class="cards three">
         <article class="card"><h3>Collections & favoris</h3><p>Rassemblez les entrées du catalogue et retrouvez vos favoris. Conservez une copie grâce à l’import et à l’export JSON.</p><span class="badge">Local V1</span></article>
@@ -53,10 +53,10 @@
       </div>
     </section>
 
-    <section class="section" id="collections" aria-labelledby="collections-title">
+    <section class="section community-workspace community-collection" id="collections" aria-labelledby="collections-title">
       <p class="eyebrow">Collections locales V1</p><h2 id="collections-title">Rassemblez vos favoris dans une collection.</h2>
       <p class="section-intro">Enregistrez une collection dans ce navigateur ou exportez-en une copie. Un import remplit le brouillon sans l’enregistrer automatiquement. Seuls les contenus du catalogue actuel sont acceptés.</p>
-      <form id="collection-form" class="panel" novalidate>
+      <form id="collection-form" class="panel community-form" novalidate>
         <label class="field" for="collection-id"><span>Identifiant local stable</span><input id="collection-id" name="collection-id" value="ma-collection" required pattern="[a-z0-9][a-z0-9._-]{1,127}" maxlength="128" autocomplete="off"></label>
         <label class="field" for="collection-name"><span>Nom</span><input id="collection-name" name="collection-name" value="Ma collection MODARYX" required maxlength="160" autocomplete="off"></label>
         <label class="field" for="collection-description"><span>Description facultative</span><textarea id="collection-description" name="collection-description" maxlength="1200" rows="3"></textarea></label>
@@ -70,10 +70,10 @@
       <div class="security-note"><strong>NON SYNCHRONISÉ.</strong> `local-only` signifie uniquement ce navigateur. Exporter un JSON ne constitue ni une publication, ni une preuve de propriété, ni une provenance vérifiée.</div>
     </section>
 
-    <section class="section" id="contributions" aria-labelledby="submission-title">
+    <section class="section community-workspace community-contribution" id="contributions" aria-labelledby="submission-title">
       <p class="eyebrow">Contribution locale V1</p><h2 id="submission-title">Préparez un avis, une discussion ou une réponse.</h2>
       <p class="section-intro">Le brouillon est lié à un ID du catalogue public et peut être sauvegardé ou exporté localement. Aucun auteur distant, état de modération ou publication n’est inventé.</p>
-      <form id="submission-form" class="panel" novalidate>
+      <form id="submission-form" class="panel community-form" novalidate>
         <label class="field" for="submission-id"><span>Identifiant local stable</span><input id="submission-id" value="ma-contribution" required pattern="[a-z0-9][a-z0-9._-]{1,127}" maxlength="128" autocomplete="off"></label>
         <label class="field" for="submission-kind"><span>Type</span><select id="submission-kind"><option value="discussion">Discussion</option><option value="review">Avis</option><option value="comment">Commentaire</option></select></label>
         <label class="field" for="submission-target"><span>Contenu ciblé</span><select id="submission-target" required><option value="">Chargement du catalogue…</option></select></label>
@@ -90,7 +90,7 @@
       <div class="security-note"><strong>Brouillon privé sur cet appareil.</strong> Exporter une copie ne la publie pas. Aucun auteur distant ni décision de modération ne sont associés à votre brouillon.</div>
     </section>
 
-    <section class="section" aria-labelledby="community-contracts-title">
+    <section class="section community-contracts" aria-labelledby="community-contracts-title">
       <p class="eyebrow">Contrats publics</p><h2 id="community-contracts-title">Les formats de vos exports.</h2>
       <div class="actions"><a class="button" href="./schemas/collection.schema.json">Collection V1</a><a class="button" href="./schemas/community-submission.schema.json">Contribution locale V1</a><a class="button" href="./schemas/community-write.schema.json">Écriture + Abuse Shield</a><a class="button" href="./schemas/moderation-receipt.schema.json">Receipts de modération</a><a class="button" href="./schemas/moderation-export.schema.json">Export modération</a><a class="button" href="./schemas/public-profile.schema.json">Profil public</a></div>
       <div class="security-note"><strong>DSA-ready ≠ conformité prouvée.</strong> Les contrats séparent signal automatisé, décision humaine, appel et provenance, avec export provider-neutral et rétention explicite. La conformité juridique dépendra aussi du service réel, de ses procédures, de sa juridiction et de validations dédiées.</div>
