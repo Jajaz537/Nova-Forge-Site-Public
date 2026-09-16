@@ -3,6 +3,7 @@
 
   const fileInput = document.querySelector('#verify-file');
   const expectedInput = document.querySelector('#expected-sha256');
+  const fileName = document.querySelector('#verify-file-name');
   const button = document.querySelector('[data-verify-file]');
   const result = document.querySelector('[data-verify-result]');
 
@@ -110,7 +111,10 @@
     }
   }
 
-  fileInput?.addEventListener("change", invalidateResult);
+  fileInput?.addEventListener("change", () => {
+    if (fileName) fileName.textContent = fileInput.files?.[0]?.name || 'Aucun fichier sélectionné';
+    invalidateResult();
+  });
   expectedInput?.addEventListener("input", invalidateResult);
   prefillExpectedFromFragment();
   window.addEventListener('hashchange', prefillExpectedFromFragment);

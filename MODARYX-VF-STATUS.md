@@ -567,6 +567,14 @@ Cinq groupes Node ciblés réussis (`qa/download-recovery-checks.json`) après �
 
 Statut normal, zéro artefact et bouton Réessayer masqué observés dans le navigateur. Composition de la section Disponibilité inspectée à 1348 px ; deux mesures de reflow, cadres 320/768 (utiles 305/753), sans débordement. Preuve : `qa/download-status-native-20260916.json`. Cette observation ferme le rendu normal ciblé ; elle ne ferme ni la panne native ni le cycle PWA. VF NON VALIDÉE.
 
+## 2026-09-16 — Finish line autonome maximale, lot de préparation
+
+Audit visuel courant des 17 pages : faux repère « Communauté » retiré de Profils ; illustration Loup/Dragon Jeux/Écosystème priorisée lors d’une visite directe ; sélecteur de fichier du vérificateur remplacé par une surface française contrôlée avec nom de fichier et focus visible. Le jargon visible « Fail closed » restant sur le vérificateur devient « Preuves requises ».
+
+Ajout d’un stress de pseudo-localisation +35 % dans le harnais responsive. Ajout de `data/integration-readiness.json` et de son schéma : prérequis, permissions, états loading/empty/error/unavailable et portes de publication pour hubs, comptes, communauté, stockage/réparation, distribution et intégrations Guide/OS. Aucun service absent n’est présenté comme livré. La matrice `FINAL-EXTERNAL-VALIDATION-MATRIX.md` conserve les validations réellement externes et leurs procédures exactes.
+
+Contrôles ciblés avant publication : vérificateur 10 groupes PASS, états 12 groupes PASS, générateur Jeux 5 groupes PASS, readiness 6 capacités PASS, contrats finish-line 4 groupes PASS. La recette navigateur des changements et le replay source global restent à effectuer après publication. Statut : **CANDIDAT EN COURS**, pas de VF.
+
 ## 2026-09-16 — Langage public et conditions de publication
 
 Accueil, Documentation et Écosystème : « Preuves requises », « Service non connecté » et explications françaises remplacent le jargon visible fail-closed/backend. Métadonnées Sécurité et Téléchargements clarifiées. Contrats et identifiants techniques conservés ; absence de services toujours explicite. Structure 17 pages, 13 scripts, 77 empreintes vérifiée ; 34 assertions cache réussies, v97, 799145/800000 octets. Aucun test fonctionnel inchangé rejoué. Reflow des trois corps de page modifiés à confirmer après publication ; aucun statut VF.

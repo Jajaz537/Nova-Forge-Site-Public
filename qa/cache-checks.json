@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-16T04:11:13.620Z",
+  "measuredAt": "2026-09-16T08:09:09.203Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -139,7 +139,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "4c1aadfca745ec1eb4e06b79e44b6d78c9d725cbaec0d88a2185546bcf5e8dbe",
+  "serviceWorkerSha256": "a16ccebaa044f2e918d6d9cebc8ff534b4dc44400af9a068241f7c5016ec4faf",
   "probes": [
     {
       "url": "/catalog.html",
@@ -465,8 +465,8 @@
     "uniqueLocalFiles": 70,
     "missing": [],
     "files": 70,
-    "rawBytes": 799145,
-    "gzipEstimateBytes": 520275
+    "rawBytes": 799947,
+    "gzipEstimateBytes": 520585
   },
   "pages": [
     {
@@ -555,7 +555,7 @@
     },
     {
       "page": "ecosystem.html",
-      "htmlBytes": 9800,
+      "htmlBytes": 9822,
       "css": {
         "files": 7,
         "rawBytes": 65754,
@@ -569,7 +569,7 @@
     },
     {
       "page": "games/index.html",
-      "htmlBytes": 5347,
+      "htmlBytes": 5384,
       "css": {
         "files": 8,
         "rawBytes": 68518,
@@ -597,7 +597,7 @@
     },
     {
       "page": "profiles.html",
-      "htmlBytes": 6563,
+      "htmlBytes": 6543,
       "css": {
         "files": 8,
         "rawBytes": 66715,
@@ -695,7 +695,7 @@
     },
     {
       "page": "verify.html",
-      "htmlBytes": 6478,
+      "htmlBytes": 7056,
       "css": {
         "files": 7,
         "rawBytes": 65754,
@@ -703,8 +703,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 27216,
-        "gzipEstimateBytes": 8590
+        "rawBytes": 27401,
+        "gzipEstimateBytes": 8638
       }
     }
   ],
@@ -771,7 +771,7 @@
     "checks": [
       {
         "name": "Unique precache bytes",
-        "actualBytes": 799145,
+        "actualBytes": 799947,
         "limitBytes": 800000,
         "passed": true
       },
@@ -979,7 +979,7 @@
       },
       {
         "name": "verify.html: direct JS",
-        "actualBytes": 27216,
+        "actualBytes": 27401,
         "limitBytes": 30000,
         "passed": true
       }

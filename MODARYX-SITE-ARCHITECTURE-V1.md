@@ -38,4 +38,6 @@ Nom, jeu, créateur, version, date et résumé ; aperçu autorisé ; compatibili
 
 Les schémas décrivent des contrats, pas des services réalisés. Le backend communautaire, la publication distante, le Storage Resolver et le Repair Network ne sont pas connectés. Le calcul SHA-256 local ne prouve ni auteur ni innocuité. Les identifiants `nova-*` de schéma, stockage et provenance sont conservés tant qu'une migration compatible n'est pas spécifiée.
 
+`data/integration-readiness.json`, validé par `schemas/integration-readiness.schema.json` et le contrôle source dédié, regroupe les prérequis, permissions, états UI et portes de publication des capacités non connectées. Ce manifeste prépare leur intégration sans créer de faux service, faux compte, faux corpus ou faux artefact.
+
 L'ancien projet getnova/getnovaforge.com est abandonné. Les protections `OLD_DOMAIN_UNTOUCHED` restent actives. Aucun changement DNS, DNSSEC, nameservers, IONOS ou Cloudflare critique ne découle de cette architecture.
