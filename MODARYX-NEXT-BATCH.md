@@ -70,7 +70,8 @@ Le checkpoint technique a été dépassé par une demande explicite de finition 
 - TERMINÉ avec captures bornées : passe cinématique Accueil, Catalogue, fiches, Creator Studio et comparaison avant/après archivée dans `review-evidence/visual-finish-20260916/`.
 - TERMINÉ avec inspection de travail : ouvertures et sections clés de Communauté, Jeux, Écosystème, Sécurité, Profils, Téléchargements, Vérificateur, Documentation, Recherche et 404.
 - TERMINÉ : reflow Chromium 17 routes à 320/768 px et 320 px avec expansion synthétique +35 %, zéro débordement après correction du Studio.
-- EN COURS : compléter les paires avant/après des pages secondaires si elles doivent être promues comme visuellement finalisées ; contrôler les états asynchrones visuellement, pas seulement leurs contrats source.
+- TERMINÉ avec portée bornée : paires avant/après des ouvertures desktop des pages secondaires archivées au commit `75ea757`. Elles ne certifient pas chaque état interne.
+- EN COURS : contrôler les états asynchrones visuellement, pas seulement leurs contrats source, avant toute promotion d’une page comme visuellement finalisée.
 - PREUVE MANQUANTE inchangée : lecteur d’écran natif, zoom 200/400 %, appareils physiques, Safari/Firefox réels, CWV représentatifs et cycle PWA hors ligne complet.
 
 Conserver la PR #12 en brouillon et le statut **VF NON VALIDÉE** tant que ces limites et la revue visuelle exhaustive ne sont pas closes.
