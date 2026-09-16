@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-16T19:16:26.245Z",
+  "measuredAt": "2026-09-16T19:19:39.428Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -465,8 +465,8 @@
     "uniqueLocalFiles": 75,
     "missing": [],
     "files": 75,
-    "rawBytes": 794406,
-    "gzipEstimateBytes": 504648
+    "rawBytes": 795610,
+    "gzipEstimateBytes": 504997
   },
   "pages": [
     {
@@ -488,8 +488,8 @@
       "htmlBytes": 10761,
       "css": {
         "files": 7,
-        "rawBytes": 67835,
-        "gzipEstimateBytes": 18978
+        "rawBytes": 68959,
+        "gzipEstimateBytes": 19306
       },
       "js": {
         "files": 2,
@@ -569,11 +569,11 @@
     },
     {
       "page": "games/index.html",
-      "htmlBytes": 5308,
+      "htmlBytes": 5324,
       "css": {
         "files": 7,
-        "rawBytes": 67276,
-        "gzipEstimateBytes": 18939
+        "rawBytes": 67674,
+        "gzipEstimateBytes": 19033
       },
       "js": {
         "files": 1,
@@ -611,11 +611,11 @@
     },
     {
       "page": "project-balanced-latency-pack.html",
-      "htmlBytes": 7143,
+      "htmlBytes": 7159,
       "css": {
         "files": 7,
-        "rawBytes": 67276,
-        "gzipEstimateBytes": 18939
+        "rawBytes": 67674,
+        "gzipEstimateBytes": 19033
       },
       "js": {
         "files": 2,
@@ -625,11 +625,11 @@
     },
     {
       "page": "project-ember-textures.html",
-      "htmlBytes": 6903,
+      "htmlBytes": 6919,
       "css": {
         "files": 7,
-        "rawBytes": 67276,
-        "gzipEstimateBytes": 18939
+        "rawBytes": 67674,
+        "gzipEstimateBytes": 19033
       },
       "js": {
         "files": 2,
@@ -639,11 +639,11 @@
     },
     {
       "page": "project-forge-night-experience.html",
-      "htmlBytes": 7113,
+      "htmlBytes": 7129,
       "css": {
         "files": 7,
-        "rawBytes": 67276,
-        "gzipEstimateBytes": 18939
+        "rawBytes": 67674,
+        "gzipEstimateBytes": 19033
       },
       "js": {
         "files": 2,
@@ -653,11 +653,11 @@
     },
     {
       "page": "project.html",
-      "htmlBytes": 4604,
+      "htmlBytes": 4620,
       "css": {
         "files": 7,
-        "rawBytes": 67276,
-        "gzipEstimateBytes": 18939
+        "rawBytes": 67674,
+        "gzipEstimateBytes": 19033
       },
       "js": {
         "files": 1,
@@ -771,7 +771,7 @@
     "checks": [
       {
         "name": "Unique precache bytes",
-        "actualBytes": 794406,
+        "actualBytes": 795610,
         "limitBytes": 800000,
         "passed": true
       },
@@ -793,7 +793,7 @@
       },
       {
         "name": "catalog.html: direct CSS",
-        "actualBytes": 67835,
+        "actualBytes": 68959,
         "limitBytes": 70000,
         "passed": true
       },
@@ -865,7 +865,7 @@
       },
       {
         "name": "games/index.html: direct CSS",
-        "actualBytes": 67276,
+        "actualBytes": 67674,
         "limitBytes": 70000,
         "passed": true
       },
@@ -901,7 +901,7 @@
       },
       {
         "name": "project-balanced-latency-pack.html: direct CSS",
-        "actualBytes": 67276,
+        "actualBytes": 67674,
         "limitBytes": 70000,
         "passed": true
       },
@@ -913,7 +913,7 @@
       },
       {
         "name": "project-ember-textures.html: direct CSS",
-        "actualBytes": 67276,
+        "actualBytes": 67674,
         "limitBytes": 70000,
         "passed": true
       },
@@ -925,7 +925,7 @@
       },
       {
         "name": "project-forge-night-experience.html: direct CSS",
-        "actualBytes": 67276,
+        "actualBytes": 67674,
         "limitBytes": 70000,
         "passed": true
       },
@@ -937,7 +937,7 @@
       },
       {
         "name": "project.html: direct CSS",
-        "actualBytes": 67276,
+        "actualBytes": 67674,
         "limitBytes": 70000,
         "passed": true
       },
