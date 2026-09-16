@@ -26,8 +26,10 @@ Ces captures comparent la baseline déployée avant la passe cinématique et le 
 | Accueil — catalogue intégré | `home-catalog-pass2-before.jpg` | `home-catalog-pass2-after.jpg` | Rythme vertical resserré, repère éditorial et cartes numérotées |
 | Catalogue — filtres | `catalog-filters-pass2-before.jpg` | `catalog-filters-pass2-after.jpg` | Filtres réunis en poste de contrôle, matière et hiérarchie renforcées |
 | Fiche projet — grille basse | `project-layout-pass2-before.jpg` | `project-layout-pass2-after.jpg` | Suppression du grand vide, grille 2×2 et état sans média assumé |
+| Navigation globale — accueil | `home-navigation-before.jpg` | `home-navigation-after.jpg` | Taxonomie alignée sur les 17 routes : Catalogue, Créer, Communauté, Écosystème, Recherche, Sécurité, Aide |
+| Profils — groupes impairs | — | `profiles-groups-deployed.jpg` | Derniers groupes étendus sans cellule vide accidentelle ; aucun débordement à 1 348 px |
 
-Ces comparaisons ont été recapturées sur les déploiements immuables correspondant aux corrections. Elles étendent la preuve au-delà des ouvertures, mais ne déclarent pas encore l’ensemble des pages visuellement finalisé.
+Ces comparaisons ont été recapturées sur les déploiements immuables correspondant aux corrections. La navigation et Profils ont été vérifiés sur `https://17c68919.nova-forge-site-public.pages.dev` au commit `4f772f9`. Elles étendent la preuve au-delà des ouvertures, mais ne déclarent pas encore l’ensemble des pages visuellement finalisé.
 
 Le lot a aussi été inspecté sous le hero : résultats du Catalogue, formulaire et aperçu Studio, collections, chaîne de confiance, contrat de téléchargement, outil de vérification, tâches de la documentation et parcours de l’écosystème. Les captures ci-dessus prouvent l’ouverture desktop de chaque surface ; elles ne suffisent pas à certifier tous les états et toutes les sections d’une page.
 
