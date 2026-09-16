@@ -27,7 +27,8 @@ assert.match(verify, /id="verify-file-name"[^>]+aria-live="polite">Aucun fichier
 assert.doesNotMatch(verify, /<strong>Fail closed<\/strong>/);
 const verifyScript = read('assets/verify.js');
 assert.match(verifyScript, /fileName\.textContent = fileInput\.files\?\.\[0\]\?\.name \|\| 'Aucun fichier sélectionné'/);
-assert.match(verify, /\.file-picker input:focus-visible\+label/);
+assert.match(verify, /assets\/verify-picker\.css/);
+assert.match(read('assets/verify-picker.css'), /\.file-picker input:focus-visible\+label/);
 checks.push('Verifier exposes a French custom file-picker surface, selected filename status and visible keyboard focus');
 
 const review = read('qa/responsive-review.js');
