@@ -4,6 +4,7 @@ const source = fs.readFileSync(path.join(root, 'assets/search.js'), 'utf8');
 const actual = JSON.parse(fs.readFileSync(path.join(root, 'data/search-index.json'), 'utf8'));
 class Element {
   constructor() { this.value = ''; this.textContent = ''; this.children = ['static directory']; this.disabled = true; this.hidden = true; this.events = {}; }
+  focus() { this.focused = true; }
   addEventListener(name, callback) { this.events[name] = callback; }
   append(...children) { this.children.push(...children); }
   replaceChildren(...children) { this.children = children; }
@@ -17,6 +18,7 @@ async function setup(payload, offline = false, stale = false) {
   } };
   vm.runInNewContext(source, context);
   await new Promise(resolve => setImmediate(resolve));
+  get.context = context;
   return get;
 }
 (async () => {
@@ -62,7 +64,19 @@ async function setup(payload, offline = false, stale = false) {
   assert.match(cached('#search-state').textContent, /Copie en cache/);
   assert.doesNotMatch(get('#search-state').textContent, /Copie en cache/);
   checks.push('Cache age warning survives local filtering and is absent from network index');
-  const report = { result: 'PASS', scope: 'Six grouped Node VM scenarios, including four malformed entry variants; not browser proof', checks };
+  let recover, calls=0;
+  offline.context.fetch=()=>{calls++;return new Promise(r=>recover=r)};
+  const retry=offline('#search-state').children.at(-1);
+  const attempt=retry.events.click();await retry.events.click();assert.equal(calls,1);
+  recover({ok:true,json:async()=>actual});await attempt;
+  assert.equal(offline('#site-search').disabled,false);assert.equal(offline('#site-search').focused,true);
+  assert.equal(offline('#search-results').children.length,actual.entries.length);
+  checks.push('Retry deduplicates pending requests and restores search focus after recovery');
+  const failed=await setup(actual,true);await failed('#search-state').children.at(-1).events.click();
+  assert.equal(failed('#search-state').children.at(-1).focused,true);
+  assert.deepEqual(failed('#search-results').children,['static directory']);
+  checks.push('Repeated failure keeps fallback and focuses the new retry control');
+  const report = { result: 'PASS', scope: 'Eight grouped Node VM scenarios, including four malformed entry variants; not browser proof', checks };
   fs.writeFileSync(path.join(__dirname, 'search-contract-checks.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report, null, 2));
 })().catch(error => { console.error(error); process.exitCode = 1; });

@@ -452,3 +452,9 @@ Référence `82d958f99fe9eed064602fec45163173a6045580`. Les 26 scripts check-* o
 Chrome HTTPS : 16 routes ouvertes, chacune avec titre, h1 et main uniques ; aucun débordement horizontal aux largeurs desktop observées (1348/1363 px). `qa/routes-consolidated-20260916.json`. Ce ne sont pas 16 nouveaux audits visuels ni une validation de tous les chargements asynchrones. Les 30 erreurs consultées provenaient d’une extension de navigateur, pas de source MODARYX ; aucun PASS global console déduit de cet échantillon.
 
 Aucun runtime/infrastructure modifié. Les imports natifs restent bloqués par autorisation, les autres limites externes et capacités produit absentes restent ouvertes. VF NON VALIDÉE.
+
+## Recherche — récupération depuis la page, 16 septembre 2026
+
+Après `3f457a2edc89d55ebd5e4166d7e30d5e0f3f266c`, ajout d’un bouton Réessayer quand l’index enrichi est indisponible. Le répertoire HTML reste accessible pendant la relance. Une seule requête peut être en attente ; le focus revient dans la recherche en cas de succès, ou sur le nouveau bouton en cas d’échec répété. Aucun service distant supplémentaire.
+
+Huit groupes de contrôles recherche source réussis, dont récupération, déduplication et focus après nouvel échec. 25 assertions cache et budgets réussis ; structure 16 pages/13 scripts/76 empreintes vérifiée. Cache v84 : 799674 octets bruts. Panne/récupération testée en Node uniquement ; pas de panne réseau native provoquée ni de preuve lecteur d’écran ajoutée. VF NON VALIDÉE.
