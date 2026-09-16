@@ -6,12 +6,16 @@ ROOT = Path(__file__).resolve().parents[1]
 payload = json.loads((ROOT/'data/catalog.json').read_text())
 assert payload['schemaVersion'] == 1 and payload['dataClass'] == 'demonstration'
 games = {}
+project_ids = set()
 for item in payload['items']:
     if item.get('public') is not True:
         continue
     game = item['game']
     assert re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', game['id'])
     assert re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', item['id'])
+    if item['id'] in project_ids:
+        raise ValueError('Duplicate public project ID: ' + item['id'])
+    project_ids.add(item['id'])
     group = games.setdefault(game['id'], {'name': game['name'], 'items': []})
     assert group['name'] == game['name']
     assert item['distribution']['downloadable'] is False

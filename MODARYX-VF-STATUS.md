@@ -540,3 +540,9 @@ Structure 17 pages/77 empreintes et 34 assertions cache/budgets réussies. Cache
 ## Index jeux — recette des portails
 
 Sur 048db73 : image chargée, capture desktop inspectée (texte/image côte à côte), capture mobile 320 inspectée après défilement (trois portails entiers, légende lisible, aucun recouvrement visible). Reflow 320/768/1440 : scrollWidth égale à la largeur utile 305/753/1425. `qa/games-portals-native-20260916.json`. Ni CLS/LCP, ni appareil physique, ni zoom natif prouvés. VF NON VALIDÉE.
+
+## Génération jeux — intégrité des données, 16 septembre 2026
+
+Depuis a7d9025 : doublon de projet public reproduit dans un répertoire temporaire, accepté à tort par le générateur alors que le catalogue le refuse. Garde explicite ajoutée avant toute écriture. Cinq groupes de contrôles isolés réussis : trois groupes actuels et détection de dérive sans écriture, exclusion d’entrée privée incomplète, échappement des noms, refus du doublon, préservation de la page lors de données vides/chemin invalide/téléchargement actif/identité de jeu contradictoire. `qa/games-generator-checks.json`.
+
+Mode --check réussi sur les données courantes ; page générée strictement inchangée. Aucun runtime, visuel, cache ou fichier d’infrastructure modifié ; pas de nouvelle recette navigateur nécessaire pour ce correctif du générateur. VF NON VALIDÉE.
