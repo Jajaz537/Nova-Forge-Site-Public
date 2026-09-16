@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-16T02:55:37.182Z",
+  "measuredAt": "2026-09-16T03:00:26.814Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -139,7 +139,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "2fb3e329404c0ad5e80c8f53e49c68378044cb8eefdaf9ca3230770407e89755",
+  "serviceWorkerSha256": "25dd46465206c150745d0ac083904dbff4c5ab3da2f12b2d6200209ca1f8b526",
   "probes": [
     {
       "url": "/catalog.html",
@@ -465,8 +465,8 @@
     "uniqueLocalFiles": 70,
     "missing": [],
     "files": 70,
-    "rawBytes": 796791,
-    "gzipEstimateBytes": 519823
+    "rawBytes": 797039,
+    "gzipEstimateBytes": 519872
   },
   "pages": [
     {
@@ -611,7 +611,7 @@
     },
     {
       "page": "project-balanced-latency-pack.html",
-      "htmlBytes": 7121,
+      "htmlBytes": 7206,
       "css": {
         "files": 8,
         "rawBytes": 68154,
@@ -625,7 +625,7 @@
     },
     {
       "page": "project-ember-textures.html",
-      "htmlBytes": 6880,
+      "htmlBytes": 6968,
       "css": {
         "files": 8,
         "rawBytes": 68154,
@@ -639,7 +639,7 @@
     },
     {
       "page": "project-forge-night-experience.html",
-      "htmlBytes": 7107,
+      "htmlBytes": 7182,
       "css": {
         "files": 8,
         "rawBytes": 68154,
@@ -771,7 +771,7 @@
     "checks": [
       {
         "name": "Unique precache bytes",
-        "actualBytes": 796791,
+        "actualBytes": 797039,
         "limitBytes": 800000,
         "passed": true
       },

@@ -522,3 +522,7 @@ Route indexée dans le shell/cache, alias `/games/`, `/games/index` et `/games/i
 Sur fdb51cb, entrée depuis Catalogue, trois liens de fiches activés par Entrée et découverte via recherche (« Jeux du catalogue », un résultat). Quatre cadres 320/430/768/1440 sans débordement ; composition desktop et haut mobile inspectés. Preuve `qa/games-directory-native-20260916.json`, limites explicites. Un premier screenshot mobile encore rendu à 1440 a été écarté et repris après mesure stabilisée.
 
 Correction liée : ajout du résultat Jeux au répertoire HTML de secours de la recherche ; comparaison automatisée des ensembles de liens avec l’index. Structure/génération/77 empreintes et 34 assertions cache réussies. Cache v92, 796791 octets bruts. Ces observations ne valent ni recette exhaustive de la 17e page, ni hors ligne réel, ni VF. Hubs et catégories restent ouverts.
+
+## Parcours fiches → jeux, 16 septembre 2026
+
+Depuis e383029 : ajout du jeu dans le fil d’Ariane des trois fiches, lien vers son ancre dans `/games/`. Mapping issu de data/catalog.json, sans modification des données ou de la distribution. Contrôle structurel des 17 pages : liens et ancres présents ; 77 empreintes et 34 assertions cache vérifiées. Cache v93 : 797039 octets. Aucun test natif de ce nouveau trajet retour revendiqué à ce stade ; VF NON VALIDÉE.
