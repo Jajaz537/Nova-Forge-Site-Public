@@ -1,6 +1,6 @@
 # MODARYX — prochain bloc et conditions de clôture
 
-Actualisé le 16 septembre 2026 après `82d958f99fe9eed064602fec45163173a6045580`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
+Actualisé le 16 septembre 2026 après `f4372eeb08704abd9cffb5910ff66b777c5689b8`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
 
 ## Validation source consolidée
 
@@ -30,3 +30,14 @@ Les parcours FAQ/JSON, contenus longs, variantes Avis/Commentaire et liens du v�
 Le registre `qa/MODARYX-ANTI-OUBLI.md` conserve les capacités retenues. Les manques fonctionnels ne doivent pas être reclassés comme de simples tests externes. Aucune idée n’est annulée implicitement.
 
 **VF NON VALIDÉE.** MODARYX reste le web ; les OS Nova Forge et toute infrastructure restent hors périmètre. Aucune fusion main ni promotion officielle déduite d’un commit ou d’un build.
+
+## Reprise ciblée après récupération de recherche
+
+La consolidation des 26 scripts porte sur 82d958f, avant le dernier changement de recherche. Pour f4372ee, huit groupes recherche, cache/budgets et structure/empreintes ont été rejoués ; parcours normal natif confirmé dans `qa/search-recovery-native-20260916.json`. Panne/récupération native non certifiée. Éviter de réattribuer rétroactivement la consolidation à ce nouveau SHA.
+
+Séparer la suite en trois catégories :
+- Réalisable sur les sources présentes : défaut nouveau reproductible, couverture d’un état non testé, contenu existant vérifiable. Ne pas créer de changements artificiels pour prolonger la recette.
+- Preuve externe ou autorisation requise : imports natifs refusés, lecteur d’écran, zoom effectif, appareils/moteurs supplémentaires, réseau/offline contrôlés et CWV représentatifs.
+- Développement produit restant : corpus réel et droits des hubs, jeux/catégories, comptes/profils éditables, services de publication/modération, Guide et intégrations. Préparer un lot de développement avec son contrat et ses données ; ne pas les marquer réalisés par un schéma ou une page de présentation.
+
+Il n’est pas établi que tout le travail autonome possible soit épuisé. Aucun pourcentage global de VF n’est calculable à partir de la seule quantité de tests.
