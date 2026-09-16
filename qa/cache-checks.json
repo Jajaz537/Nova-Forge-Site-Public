@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-16T21:50:18.850Z",
+  "measuredAt": "2026-09-16T22:00:05.989Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -139,7 +139,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "391407ccaa4289e6e78d54d4622751ddc9c1fd83fb6ce653a98bbaa539bc9bfd",
+  "serviceWorkerSha256": "e426b1c0a6972457e82917b9856167aff0d34d84497bcda8a55e1818a533fa72",
   "probes": [
     {
       "url": "/catalog.html",
@@ -465,8 +465,8 @@
     "uniqueLocalFiles": 76,
     "missing": [],
     "files": 76,
-    "rawBytes": 799783,
-    "gzipEstimateBytes": 506205
+    "rawBytes": 799931,
+    "gzipEstimateBytes": 506250
   },
   "pages": [
     {
@@ -681,7 +681,7 @@
     },
     {
       "page": "security.html",
-      "htmlBytes": 10799,
+      "htmlBytes": 10947,
       "css": {
         "files": 6,
         "rawBytes": 63678,
@@ -771,7 +771,7 @@
     "checks": [
       {
         "name": "Unique precache bytes",
-        "actualBytes": 799783,
+        "actualBytes": 799931,
         "limitBytes": 800000,
         "passed": true
       },
