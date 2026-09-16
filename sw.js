@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nova-site-shell-v117-modaryx-path-order';
+const CACHE_NAME = 'nova-site-shell-v118-community-sequence';
 const BASE_URL = new URL('./', self.location.href);
 const PUBLIC_PAGE_PATHS = [
   './',
