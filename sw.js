@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nova-site-shell-v86-modaryx-premium';
+const CACHE_NAME = 'nova-site-shell-v87-modaryx-premium';
 const BASE_URL = new URL('./', self.location.href);
 const PUBLIC_PAGE_PATHS = [
   './',
@@ -95,7 +95,10 @@ for (const href of PUBLIC_PAGES) {
   PAGE_KEYS.set(page.pathname, href);
   if (page.pathname.endsWith('.html')) PAGE_KEYS.set(page.pathname.slice(0, -5), href);
 }
-const readCache = async (key) => (await caches.open(CACHE_NAME)).match(key);
+const readCache = async (key) => {
+  try { return await (await caches.open(CACHE_NAME)).match(key); }
+  catch { return undefined; } // Unavailable cache is a miss; online assets can still load.
+};
 const storeResponse = async (key, response) => {
   if (!response || response.status !== 200 || response.type !== 'basic') return;
   try { await (await caches.open(CACHE_NAME)).put(key, response.clone()); }

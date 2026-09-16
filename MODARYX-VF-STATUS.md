@@ -478,3 +478,9 @@ Source : 25 assertions cache, budgets, structure 16 pages/13 scripts/76 empreint
 ## Index projets — reprise native, 16 septembre 2026
 
 Sur d2929d0, les trois liens explicites ont ouvert les bonnes fiches par Entrée. Reflow 320/768 : largeurs utiles 305/753, scrollWidth identique, aucun tabindex positif. Preuve `qa/project-directory-native-20260916.json`. Inspection de la portion tablette affichée : en-tête, introduction et première carte lisibles. Le contrôle interrompu précédent est complété pour ce périmètre uniquement. Une sélection h1 ambiguë dans le test a été corrigée sans modifier le produit. Pas de parcours Tab complet, appareil physique, zoom natif, lecteur d’écran, offline ni CWV ajouté. VF NON VALIDÉE.
+
+## Cache indisponible — repli réseau, 16 septembre 2026
+
+Départ 952f2dedac3ac0ddc86c6ab95812a76e97f05e0e. Défaut reproduit par injection d’un échec cache.match : une ressource cache-first rejetait sans tenter le réseau. readCache traite maintenant les échecs d’ouverture/lecture comme une absence d’entrée. Réseau disponible : ressource servie ; réseau et cache indisponibles : erreur réseau explicite pour les métadonnées. L’installation reste stricte : aucun succès d’installation sans précache complet.
+
+31 assertions source cache réussies, dont six nouvelles sur les échecs match/open. Budgets statiques respectés (799800 octets bruts), fichiers protégés inchangés. Version cache v87, empreintes recalculées. Aucun test réseau/offline natif revendiqué ; VF NON VALIDÉE.

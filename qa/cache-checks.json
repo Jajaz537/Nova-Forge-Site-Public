@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-16T01:09:30.248Z",
+  "measuredAt": "2026-09-16T01:29:58.276Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -101,9 +101,33 @@
     {
       "name": "Quota failure preserves network response",
       "passed": true
+    },
+    {
+      "name": "Cache match failure falls back to network asset",
+      "passed": true
+    },
+    {
+      "name": "Cache match failure preserves online metadata",
+      "passed": true
+    },
+    {
+      "name": "Cache match failure offline gives explicit network error",
+      "passed": true
+    },
+    {
+      "name": "Cache open failure falls back to network asset",
+      "passed": true
+    },
+    {
+      "name": "Cache open failure preserves online metadata",
+      "passed": true
+    },
+    {
+      "name": "Cache open failure offline gives explicit network error",
+      "passed": true
     }
   ],
-  "serviceWorkerSha256": "fb00acaa3fc343bfea71002f3179ea8e1dcb78b1573a0011e5e62727763fa788",
+  "serviceWorkerSha256": "4e8d93e2de824718b905d82cdf15a0830e019227df425275a78b80cd82822b3f",
   "probes": [
     {
       "url": "/catalog.html",
@@ -328,6 +352,66 @@
       "networkCalls": 1,
       "waitUntilCalls": 1,
       "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/assets/modaryx-mark.svg",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/downloads.json",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/downloads.json",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 0,
+      "stale": null
+    },
+    {
+      "url": "/assets/modaryx-mark.svg",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/downloads.json",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 200,
+      "stale": null
+    },
+    {
+      "url": "/downloads.json",
+      "mode": "cors",
+      "method": "GET",
+      "intercepted": true,
+      "networkCalls": 1,
+      "waitUntilCalls": 1,
+      "status": 0,
       "stale": null
     }
   ],

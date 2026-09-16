@@ -11,10 +11,10 @@ const source=fs.readFileSync(path.join(root,'sw.js'),'utf8');
 const handlers={}, deleted=[], added=[], writes=[];
 const activeCache=source.match(/const CACHE_NAME = '([^']+)'/)[1];
 const entries=new Map();
-let networkCalls=0, networkOffline=false, networkStatus=200, failWrites=false, lastFetchOptions;
+let networkCalls=0, networkOffline=false, networkStatus=200, failWrites=false, failReads=false, failOpen=false, lastFetchOptions;
 const response=(body='fresh',status=200)=>({status,statusText:'',type:'basic',body,headers:new Headers(),clone(){return response(body,status);}});
-const cache={addAll:async urls=>{added.push(...urls);for(const url of urls)entries.set(url,response('cached'));},match:async key=>entries.get(key),put:async (key,value)=>{if(failWrites)throw new Error('quota');writes.push(key);entries.set(key,value);}};
-const context={URL,Set,Map,Promise,Response,Headers,self:{location:new URL('https://example.test/sw.js'),addEventListener:(type,fn)=>handlers[type]=fn,skipWaiting:async()=>{},clients:{claim:async()=>{}}},caches:{open:async()=>cache,keys:async()=>['unrelated-application-cache','nova-site-shell-old',activeCache],delete:async key=>deleted.push(key)},fetch:async(request,options)=>{lastFetchOptions=options;networkCalls++;if(networkOffline)throw new Error('offline');return response('fresh',networkStatus);}};
+const cache={addAll:async urls=>{added.push(...urls);for(const url of urls)entries.set(url,response('cached'));},match:async key=>{if(failReads)throw new Error('cache-read');return entries.get(key)},put:async (key,value)=>{if(failWrites)throw new Error('quota');writes.push(key);entries.set(key,value);}};
+const context={URL,Set,Map,Promise,Response,Headers,self:{location:new URL('https://example.test/sw.js'),addEventListener:(type,fn)=>handlers[type]=fn,skipWaiting:async()=>{},clients:{claim:async()=>{}}},caches:{open:async()=>{if(failOpen)throw new Error('cache-open');return cache},keys:async()=>['unrelated-application-cache','nova-site-shell-old',activeCache],delete:async key=>deleted.push(key)},fetch:async(request,options)=>{lastFetchOptions=options;networkCalls++;if(networkOffline)throw new Error('offline');return response('fresh',networkStatus);}};
 vm.runInNewContext(source,context,{filename:'sw.js'});
 let installPromise;handlers.install({waitUntil:p=>installPromise=p});await installPromise;
 let activatePromise;handlers.activate({waitUntil:p=>activatePromise=p});await activatePromise;
@@ -59,6 +59,15 @@ check('HTTP 404 retained',(await probe('/downloads.json','cors')).record.status=
 networkStatus=200;failWrites=true;
 check('Quota failure preserves network response',(await probe('/downloads.json','cors')).record.status===200);
 failWrites=false;
+for(const failure of ['match','open']){
+  failReads=failure==='match';failOpen=failure==='open';
+  const asset=await probe('/assets/modaryx-mark.svg','cors');
+  check('Cache '+failure+' failure falls back to network asset',asset.record.networkCalls===1&&asset.result.body==='fresh');
+  check('Cache '+failure+' failure preserves online metadata',(await probe('/downloads.json','cors')).record.status===200);
+  networkOffline=true;
+  check('Cache '+failure+' failure offline gives explicit network error',(await probe('/downloads.json','cors')).result.type==='error');
+  networkOffline=false;failReads=false;failOpen=false;
+}
 const cachePaths=[...new Set(added.map(url=>new URL(url).pathname.slice(1)||'index.html'))];
 const missing=cachePaths.filter(name=>!fs.existsSync(path.join(root,name)));
 const measures=names=>{let raw=0,gzip=0;for(const name of names){const bytes=fs.readFileSync(path.join(root,name));raw+=bytes.length;gzip+=zlib.gzipSync(bytes,{level:9}).length;}return {files:names.length,rawBytes:raw,gzipEstimateBytes:gzip};};
