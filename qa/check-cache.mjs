@@ -1,5 +1,6 @@
 // Node mocks verify source semantics only: not browser HTTPS/offline or runtime performance proof.
 import fs from 'node:fs';
+import {budgetChecks, limits} from './performance-limits.mjs';
 import path from 'node:path';
 import vm from 'node:vm';
 import crypto from 'node:crypto';
@@ -72,6 +73,7 @@ function walk(dir,prefix=''){return fs.readdirSync(dir,{withFileTypes:true}).fla
 if(fs.existsSync(path.join(root,'.github')))protectedPaths.push(...walk(path.join(root,'.github')).map(p=>'.github/'+p));
 const protectedFiles=protectedPaths.map(file=>({file,unchanged:fs.existsSync(path.join(baseline,file))&&fs.readFileSync(path.join(root,file)).equals(fs.readFileSync(path.join(baseline,file)))}));
 const results={measuredAt:new Date().toISOString(),scope:'Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim',assertions,serviceWorkerSha256:crypto.createHash('sha256').update(source).digest('hex'),probes,activationDeletedCaches:deleted,precache:{requests:added.length,uniqueLocalFiles:cachePaths.length,missing,...(missing.length?{}:measures(cachePaths))},pages,protectedFiles};
+results.budgets={limits,checks:budgetChecks(results.precache,pages)};
 fs.writeFileSync(path.join(root,'qa/cache-checks.json'),JSON.stringify(results,null,2)+'\n');
-console.log(JSON.stringify({assertions:assertions.length,failed:assertions.filter(a=>!a.passed),precache:results.precache,protectedChanges:protectedFiles.filter(p=>!p.unchanged)},null,2));
-if(assertions.some(a=>!a.passed)||missing.length||protectedFiles.some(p=>!p.unchanged))process.exitCode=1;
+console.log(JSON.stringify({assertions:assertions.length,failed:assertions.filter(a=>!a.passed),precache:results.precache,budgetFailures:results.budgets.checks.filter(c=>!c.passed),protectedChanges:protectedFiles.filter(p=>!p.unchanged)},null,2));
+if(results.budgets.checks.some(c=>!c.passed)||assertions.some(a=>!a.passed)||missing.length||protectedFiles.some(p=>!p.unchanged))process.exitCode=1;

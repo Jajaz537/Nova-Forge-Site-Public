@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-16T00:08:52.950Z",
+  "measuredAt": "2026-09-16T00:19:12.364Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -621,5 +621,216 @@
       "file": ".github/workflows/cloudflare-modaryx-probe.yml",
       "unchanged": true
     }
-  ]
+  ],
+  "budgets": {
+    "limits": {
+      "precache": 800000,
+      "cssPerPage": 70000,
+      "jsPerPage": 30000
+    },
+    "checks": [
+      {
+        "name": "Unique precache bytes",
+        "actualBytes": 799211,
+        "limitBytes": 800000,
+        "passed": true
+      },
+      {
+        "name": "Page inventory is nonempty",
+        "passed": true
+      },
+      {
+        "name": "404.html: direct CSS",
+        "actualBytes": 65754,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "404.html: direct JS",
+        "actualBytes": 22040,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "catalog.html: direct CSS",
+        "actualBytes": 69802,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "catalog.html: direct JS",
+        "actualBytes": 19199,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "community.html: direct CSS",
+        "actualBytes": 65754,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "community.html: direct JS",
+        "actualBytes": 27807,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "creator-studio.html: direct CSS",
+        "actualBytes": 67648,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "creator-studio.html: direct JS",
+        "actualBytes": 29002,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "documentation.html: direct CSS",
+        "actualBytes": 65754,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "documentation.html: direct JS",
+        "actualBytes": 22040,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "downloads.html: direct CSS",
+        "actualBytes": 65754,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "downloads.html: direct JS",
+        "actualBytes": 27028,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "ecosystem.html: direct CSS",
+        "actualBytes": 65754,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "ecosystem.html: direct JS",
+        "actualBytes": 22040,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "index.html: direct CSS",
+        "actualBytes": 44203,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "index.html: direct JS",
+        "actualBytes": 23080,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "profiles.html: direct CSS",
+        "actualBytes": 66715,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "profiles.html: direct JS",
+        "actualBytes": 5322,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "project-balanced-latency-pack.html: direct CSS",
+        "actualBytes": 68028,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "project-balanced-latency-pack.html: direct JS",
+        "actualBytes": 10848,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "project-ember-textures.html: direct CSS",
+        "actualBytes": 68028,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "project-ember-textures.html: direct JS",
+        "actualBytes": 10848,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "project-forge-night-experience.html: direct CSS",
+        "actualBytes": 68028,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "project-forge-night-experience.html: direct JS",
+        "actualBytes": 10848,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "project.html: direct CSS",
+        "actualBytes": 68028,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "project.html: direct JS",
+        "actualBytes": 3478,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "search.html: direct CSS",
+        "actualBytes": 66501,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "search.html: direct JS",
+        "actualBytes": 6756,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "security.html: direct CSS",
+        "actualBytes": 65754,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "security.html: direct JS",
+        "actualBytes": 22040,
+        "limitBytes": 30000,
+        "passed": true
+      },
+      {
+        "name": "verify.html: direct CSS",
+        "actualBytes": 65754,
+        "limitBytes": 70000,
+        "passed": true
+      },
+      {
+        "name": "verify.html: direct JS",
+        "actualBytes": 27102,
+        "limitBytes": 30000,
+        "passed": true
+      }
+    ]
+  }
 }

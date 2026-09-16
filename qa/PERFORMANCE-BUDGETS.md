@@ -1,5 +1,13 @@
 # MODARYX — budgets et limites de la preuve
 
+## État courant — 16 septembre 2026
+
+Les budgets statiques sont désormais bloquants dans `node qa/check-cache.mjs`, via `performance-limits.mjs` : précache unique ≤ 800000 octets, CSS directement déclarées ≤ 70000/page, JS directement déclaré ≤ 30000/page. Un poids manquant/invalide ou un inventaire vide échoue aussi. `node qa/check-performance-limits.mjs` vérifie dix limites et cas invalides avec données synthétiques. Aucun workflow de déploiement n’a été modifié : cette porte s’applique lorsque le script est exécuté, elle n’est pas annoncée comme une CI obligatoire.
+
+Source produit examinée : `4fa6532720c6f1ef9c679fac523064921281d346`. Précache 799211 octets (marge 789), CSS max 69802 (marge 198), JS max 29002 (marge 998). 34 évaluations de budget et 25 assertions cache réussies. Ces marges étroites doivent être prises en compte lors des prochaines modifications. Aucun gain CWV ou de vitesse réelle n’est déduit de ces tailles.
+
+Les sections datées ci-dessous sont historiques ; leurs anciens seuils et états ne remplacent pas cet état courant. Les API du navigateur de recette ne permettent toujours pas une qualification CWV/hors ligne complète.
+
 Statut du lot ciblé cache : **TERMINÉ** pour la correction source et ses 21 assertions Node. Performance navigateur et fonctionnement hors ligne HTTPS : **PREUVE MANQUANTE**. Le site final reste **EN COURS**.
 
 Périmètre : site MODARYX uniquement. Aucun changement DNS, Cloudflare, IONOS ou OS. Le script `node qa/check-cache.mjs` régénère `qa/cache-checks.json` avec la date et le SHA-256 du service worker effectivement examiné. Ce fichier de résultats est la référence chiffrée si le candidat évolue. Les simulations ne remplacent pas une validation de production.

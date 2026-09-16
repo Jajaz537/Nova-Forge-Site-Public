@@ -438,3 +438,9 @@ Départ `b2a34a7b62113cf0a5565090f504b7e3114a183c`. Les contrats Collection/Cont
 Douze contrôles d’import source réussis, dont deux groupes ajoutés couvrant cinq fichiers hors contrat ; brouillon courant préservé. Le premier passage a révélé un défaut de fixture concurrente (name et body ajoutés aux deux types) : fixture corrigée pour respecter chaque contrat, puis test rejoué avec succès. Douze contrôles d’états, 25 assertions cache, 16 pages/13 scripts/76 empreintes réussis. Cache v83 : 799211 octets bruts.
 
 Les fichiers ne sont pas nettoyés silencieusement : l’import est refusé avec message. Import natif toujours bloqué par l’autorisation navigateur antérieure ; aucun nouvel essai de sélection. VF NON VALIDÉE.
+
+## Budgets statiques bloquants — 16 septembre 2026
+
+Le contrôle de cache mesurait les poids sans échouer sur dépassement. `qa/performance-limits.mjs` formalise les seuils déjà retenus (800000/70000/30000 octets) ; `qa/check-cache.mjs` sort maintenant en erreur en cas de dépassement, mesure invalide ou inventaire vide. Dix contrôles synthétiques de limites réussis ; 34 évaluations sur le site actuel et 25 assertions cache réussies. Précache 799211, CSS max 69802, JS max 29002.
+
+Aucun runtime, asset, cache versionné ni workflow de déploiement modifié ; la porte est exécutée par le script, pas revendiquée comme contrôle GitHub obligatoire. Pas de preuve CWV ajoutée. VF NON VALIDÉE.
