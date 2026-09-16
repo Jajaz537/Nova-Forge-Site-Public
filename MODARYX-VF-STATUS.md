@@ -474,3 +474,7 @@ Quatorze contrôles import/restauration réussis, dont deux nouveaux cas différ
 `ccbfdf3ee57817272fa205f4afcc0f35ac39db1b` : « Mini-hubs publics » devient « Projets de démonstration » ; les trois liens nomment chacun leur projet ; le lien technique indique « Données de compatibilité (JSON) ». Les routes, le statut démonstration, l’absence de téléchargement et l’art restent inchangés. Méta-description clarifiée.
 
 Source : 25 assertions cache, budgets, structure 16 pages/13 scripts/76 empreintes réussis ; précache v86 : 799800 octets. 217 fichiers Git comparés au miroir, aucune différence. Chrome HTTPS a effectivement affiché les trois nouveaux libellés. La séquence suivante navigation/reflow a expiré et réinitialisé le navigateur : aucun résultat de cette séquence n’est revendiqué, responsive des nouveaux intitulés PREUVE MANQUANTE. Aucun contournement du refus d’import. VF NON VALIDÉE.
+
+## Index projets — reprise native, 16 septembre 2026
+
+Sur d2929d0, les trois liens explicites ont ouvert les bonnes fiches par Entrée. Reflow 320/768 : largeurs utiles 305/753, scrollWidth identique, aucun tabindex positif. Preuve `qa/project-directory-native-20260916.json`. Inspection de la portion tablette affichée : en-tête, introduction et première carte lisibles. Le contrôle interrompu précédent est complété pour ce périmètre uniquement. Une sélection h1 ambiguë dans le test a été corrigée sans modifier le produit. Pas de parcours Tab complet, appareil physique, zoom natif, lecteur d’écran, offline ni CWV ajouté. VF NON VALIDÉE.

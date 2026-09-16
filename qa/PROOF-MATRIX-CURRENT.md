@@ -14,6 +14,7 @@ Cette matrice remplace les anciens « prochains blocs » devenus partiellement a
 | Brouillons Studio/Communauté | `draft-edit-state-20260915.json`, `draft-persistence-browser-20260915.json` | Édition non sauvegardée signalée ; validation, sauvegarde et rechargement ciblés. Pas de serveur de publication. |
 | Catalogue, favoris/vues | `catalog-persistence-browser-20260915.json` | Persistance et actions ciblées, focus de retrait/suppression ; données de test retirées. |
 | Fiches, droits et favoris | `project-browser-20260915.json` | Trois allers-retours favoris, droits non inventés, six mesures de reflow. Aucun artefact distribué. |
+| Index projets | `project-directory-native-20260916.json` | Trois liens activés par Entrée vers les bonnes fiches ; aucun débordement dans les cadres 320/768. Pas un parcours Tab complet ni un zoom natif. |
 | Recherche | `search-browser-20260915.json` | Accents, résultat vide, effacement, navigation clavier et contenu observés ; 14 entrées locales. |
 | Profil local et essai manuel | `profile-browser-20260915.json` | Libellés français, trois réponses UI, fermeture et reflow ouvert 320/768. Aucun benchmark de jeu effectué. |
 | Variantes de contribution | `submission-variants-browser-20260915.json` | Avis : notes 0/6/2,5 refusées, 5 acceptée ; commentaire : parent obligatoire ; retour Discussion sans note/parent dans le JSON. |
