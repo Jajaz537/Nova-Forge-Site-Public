@@ -490,3 +490,7 @@ Départ 952f2dedac3ac0ddc86c6ab95812a76e97f05e0e. Défaut reproduit par injectio
 Depuis ce73e85 : liens « Voir la fiche », chacun avec un nom accessible contenant le libellé visible et le nom du projet, dans le HTML de secours et le rendu enrichi. « Fail-closed » devient « Preuves requises » ; la description technique de la première carte statique est simplifiée. Routes, données, favoris, filtres et direction Loup/Dragon inchangés.
 
 Structure des seize pages, syntaxe des treize scripts, 76 empreintes et 31 assertions cache contrôlées sans erreur. Cache v88, 799970 octets bruts sous le budget 800000 ; marge seulement 30 octets. Aucun lecteur d’écran natif ni nouvelle recette visuelle revendiqué. VF NON VALIDÉE.
+
+## Catalogue — noms de liens observés, 16 septembre 2026
+
+Sur 3d641a6 : trois libellés visibles « Voir la fiche », chacun inclus dans son aria-label distinct. Observés avant hydratation puis après data-hydrated ; les liens enrichis incluent le suffixe Preview. Reflow du catalogue enrichi à 320/768 : largeurs utiles et scrollWidth identiques 305/753, aucun tabindex positif. Preuve `qa/catalog-link-names-native-20260916.json`. Aucun lecteur d’écran, activation des liens ni audit visuel exhaustif dans ce lot. VF NON VALIDÉE.
