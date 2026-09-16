@@ -188,8 +188,9 @@
     favoriteButton.dataset.favoriteId = item.id;
     favoriteButton.setAttribute("aria-label", `Favori : ${item.name}`);
     favoriteButton.setAttribute("aria-pressed", favorite ? "true" : "false");
-    const projectLink = make("a", "text-link", "Voir le mini-hub");
+    const projectLink = make("a", "text-link", "Voir la fiche");
     projectLink.href = projectHref(item.id);
+    projectLink.setAttribute("aria-label", `Voir la fiche : ${item.name}`);
     actions.append(favoriteButton, projectLink);
     article.append(top, title, summary, details, actions);
     return article;

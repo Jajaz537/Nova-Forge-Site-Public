@@ -484,3 +484,9 @@ Sur d2929d0, les trois liens explicites ont ouvert les bonnes fiches par Entrée
 Départ 952f2dedac3ac0ddc86c6ab95812a76e97f05e0e. Défaut reproduit par injection d’un échec cache.match : une ressource cache-first rejetait sans tenter le réseau. readCache traite maintenant les échecs d’ouverture/lecture comme une absence d’entrée. Réseau disponible : ressource servie ; réseau et cache indisponibles : erreur réseau explicite pour les métadonnées. L’installation reste stricte : aucun succès d’installation sans précache complet.
 
 31 assertions source cache réussies, dont six nouvelles sur les échecs match/open. Budgets statiques respectés (799800 octets bruts), fichiers protégés inchangés. Version cache v87, empreintes recalculées. Aucun test réseau/offline natif revendiqué ; VF NON VALIDÉE.
+
+## Catalogue — liens de fiches et langage public, 16 septembre 2026
+
+Depuis ce73e85 : liens « Voir la fiche », chacun avec un nom accessible contenant le libellé visible et le nom du projet, dans le HTML de secours et le rendu enrichi. « Fail-closed » devient « Preuves requises » ; la description technique de la première carte statique est simplifiée. Routes, données, favoris, filtres et direction Loup/Dragon inchangés.
+
+Structure des seize pages, syntaxe des treize scripts, 76 empreintes et 31 assertions cache contrôlées sans erreur. Cache v88, 799970 octets bruts sous le budget 800000 ; marge seulement 30 octets. Aucun lecteur d’écran natif ni nouvelle recette visuelle revendiqué. VF NON VALIDÉE.
