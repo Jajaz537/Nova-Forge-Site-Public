@@ -468,3 +468,9 @@ Huit groupes de contrôles recherche source réussis, dont récupération, dédu
 Départ `467245945927bdde16d54cde266ef0d902242c0c`. Défaut reproduit en Node avant correction : « Fresh before catalog » remplacé par « Imported » à la résolution tardive du catalogue. La restauration automatique est maintenant conditionnée à l’absence de révision du formulaire concerné. Une collection éditée n’empêche pas la restauration d’une contribution intacte, et inversement. Les copies stockées ne sont pas supprimées.
 
 Quatorze contrôles import/restauration réussis, dont deux nouveaux cas différés ; cinq groupes contrat catalogue réussis. Le test unitaire qui extrait loadCatalog a d’abord échoué faute de revisions dans son contexte ; ajout de la dépendance dans le mock, puis réussite. 25 assertions cache/budgets, structure 16 pages/13 scripts/76 empreintes vérifiés. Cache v85 : 799740 octets. Course temporelle prouvée en simulation uniquement ; aucune nouvelle sélection native de fichier. VF NON VALIDÉE.
+
+## Index projets — intitulés explicites, 16 septembre 2026
+
+`ccbfdf3ee57817272fa205f4afcc0f35ac39db1b` : « Mini-hubs publics » devient « Projets de démonstration » ; les trois liens nomment chacun leur projet ; le lien technique indique « Données de compatibilité (JSON) ». Les routes, le statut démonstration, l’absence de téléchargement et l’art restent inchangés. Méta-description clarifiée.
+
+Source : 25 assertions cache, budgets, structure 16 pages/13 scripts/76 empreintes réussis ; précache v86 : 799800 octets. 217 fichiers Git comparés au miroir, aucune différence. Chrome HTTPS a effectivement affiché les trois nouveaux libellés. La séquence suivante navigation/reflow a expiré et réinitialisé le navigateur : aucun résultat de cette séquence n’est revendiqué, responsive des nouveaux intitulés PREUVE MANQUANTE. Aucun contournement du refus d’import. VF NON VALIDÉE.
