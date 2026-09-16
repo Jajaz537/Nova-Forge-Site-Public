@@ -526,3 +526,7 @@ Correction liée : ajout du résultat Jeux au répertoire HTML de secours de la 
 ## Parcours fiches → jeux, 16 septembre 2026
 
 Depuis e383029 : ajout du jeu dans le fil d’Ariane des trois fiches, lien vers son ancre dans `/games/`. Mapping issu de data/catalog.json, sans modification des données ou de la distribution. Contrôle structurel des 17 pages : liens et ancres présents ; 77 empreintes et 34 assertions cache vérifiées. Cache v93 : 797039 octets. Aucun test natif de ce nouveau trajet retour revendiqué à ce stade ; VF NON VALIDÉE.
+
+## Retour fiche → jeu — recette native, 16 septembre 2026
+
+Sur 9f0d4f0, les trois fils d’Ariane ouverts par Entrée aboutissent aux ancres Skyrim, Cyberpunk et Minecraft attendues. Trois mesures des fiches à 320 : largeur et scrollWidth 305, aucun tabindex positif. Skyrim desktop : cible top 99,92 px sous l’en-tête à 76 px. Minecraft mobile : capture inspectée, titre et carte sous l’en-tête fixe ; mesure géométrique du cadre indisponible, aucun chiffre revendiqué. Preuve `qa/project-game-return-native-20260916.json`. Délais de lecture DOM isolés, pas de correction produit nécessaire. VF NON VALIDÉE.
