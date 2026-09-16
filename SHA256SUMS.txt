@@ -23,7 +23,7 @@ aab06baccdffcd82f2eb0ee9d8a8b392c189a27a34d9c069b19799d0b9ea211e  ./assets/modar
 a9d20d30f4ad4afbdf615f4d235d9ab95446bfc388b3d85f005f4861a4c90632  ./assets/nova-mark-512.png
 e8afe9ea440ac2bd423e1baaac751efae9791c1870e793d734168d5ddc97a0a0  ./assets/nova-mark.svg
 ea3ceb226c6cd2903c513bb3cede5863802e345ee29cd1d33354f581c27b334b  ./assets/nova-premium-hd-secondary.css
-b47929a65e2a8facebee212aa8b1d0d0c8dcc83d35b56639148b4eca08067ba6  ./assets/nova-premium-hd.css
+fcdc1bd71f136a73d8d7d4eeeed53bd671c7b8534e17c54177b640deaba41e6e  ./assets/nova-premium-hd.css
 947867b01e8b12ee6e9a9853c175590fd154233d5a2e8596592ed37420e0ef6b  ./assets/nova-premium-hd.js
 4cc40ac150b517f9112966ec438b934d85b11c1154fafa5e7165adbc8045b508  ./assets/official.css
 ffcea620edbe92ac3f0264c40625d6a6b30427eb50cf56abaaa3d44e91cb72f3  ./assets/profiles.css
@@ -33,7 +33,7 @@ db79e4b5d933284c9ba12ec8974cce0bb75110f3c7b5134c670e77eb508b4586  ./assets/proje
 f13f4711d6c83dc23c7f0577abd3a408f051978fbebb85bf91098b8e4f7d7e42  ./assets/search.css
 7c7e55801dc9d59d2f90977086c840c667741a18209698d711b3c5aedccfae6e  ./assets/search.js
 9a1ea3df8661dae18e07d616e9357644a69b0d68e2e600f681f22344630220a3  ./assets/shell.js
-76fb93e283ffc236f50810185caa9f02bd1e26b1c1c1b633657c2e6cd0b9cfbd  ./assets/site.css
+641d94df66d34087ab4c1632f99d8238e77c941c06e8ae552b2520a10b334b18  ./assets/site.css
 f90348520048d546761e0e1b794ab6d22aa02f06d06f95f54e9855bf89b345dc  ./assets/tokens.css
 a1d756c67a07e522f23d20c5a28f433e03473eec0f2ac51101f13b2c8a90ec83  ./assets/verify-picker.css
 92736f4afba835879723e51fcbab193d521d222e699ce7ff8112388a9b4b211a  ./assets/verify.js
@@ -44,7 +44,7 @@ b40f0cc65a0de9de1a435011012f0d2329f81fc873c66058ef65f3d646bb53a4  ./catalog.html
 08f9810bea5a8afc20acbf7a6f5b23c5cb4647621f6a1787d42a3fa212981283  ./data/compatibility-graph.json
 6e0ba5cbf31c7ed012de0cbc787e01220554205e8507efed2f81626f264309fa  ./data/integration-readiness.json
 fd77943e2b758314ee5beb7a6b89680a4a16c7958e6f4b6e8ad7f250d7feed80  ./data/search-index.json
-d6d6cd19673fce767cde85c15e9abbc6a0fdc8830669b83a8a753605bb51d7d7  ./documentation.html
+b4322fc3a865e55dc1732e5ab920b17e7f55e6352fe2471aaefec49398c36092  ./documentation.html
 75c384b7fefa2300c8d30d1a2a3901563c9ce76e8839aa6917a6a7ed19daa78e  ./downloads.html
 d60000a6ce45fe5caef1906d8d0d15d26ecab82402aecff396c1b23f32fc8ec0  ./downloads.json
 88fa693e888663255aaa0363c3cf2ff8d0a8c789459cea164d225bf782939c6a  ./ecosystem.html
@@ -77,7 +77,7 @@ ebf1f260fd02d0576593a613a1d808a1a4f60f38d9349654bf5cde23faf32b31  ./schemas/stor
 f9efeca9b4ddaf4c82d3099258174a72266cef03b4df6740ed13145f5f931adc  ./search.html
 f89614db8f5ecb7b9ab9e117d5b74b9402f600502f70da7bdbccfe8600f39577  ./security.html
 95381433ad3296afcf2befa6bac332088f72180439f276575b22515f661e0912  ./site.webmanifest
-0781c32787660952e22589e68b0cd5f63afbdb1c785e3fe9a78f157c6a13b809  ./sw.js
+391407ccaa4289e6e78d54d4622751ddc9c1fd83fb6ce653a98bbaa539bc9bfd  ./sw.js
 f7236a62662631fc3e9956322b36cf09656e49ae9a27e1a505b964b0e12ab818  ./verify.html
 237a7bdc9c73b424dee3e17de6febb04b4daa36730e21768b84978b233d5585c  assets/modaryx-foundations.css
 9ee6d9aa22724604d1a21eb88f473aa04f22039392d80ca140bd20aebb6f059f  assets/modaryx-wolf-dragon-hero.webp
