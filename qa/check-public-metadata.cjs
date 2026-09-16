@@ -11,6 +11,7 @@ class Element {
   append(...nodes) { this.children.push(...nodes); }
   replaceChildren(...nodes) { this.children = nodes; }
   addEventListener(event, handler) { this.listeners[event] = handler; }
+  setAttribute(name, value) { this[name] = String(value); }
   removeAttribute(name) { delete this[name]; }
   querySelector(selector) { return this.children.find(node => node.tag === selector) || null; }
   cloneNode() { const copy = new Element(this.tag); copy.dataset = {...this.dataset}; copy.textContent = this.textContent; copy.children = this.children.map(node => node.cloneNode()); return copy; }

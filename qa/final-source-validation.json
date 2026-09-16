@@ -1,5 +1,5 @@
 {
-  "executedAt": "2026-09-16T19:40:56.521758+00:00",
+  "executedAt": "2026-09-16T23:01:00.216883+00:00",
   "scope": "All current check-* source scripts; browser, physical-device and external-service claims excluded",
   "scripts": 30,
   "passed": 30,
@@ -8,7 +8,7 @@
     {
       "script": "qa/check-cache.mjs",
       "exitCode": 0,
-      "stdout": "{\n  \"assertions\": 34,\n  \"failed\": [],\n  \"precache\": {\n    \"requests\": 77,\n    \"uniqueLocalFiles\": 76,\n    \"missing\": [],\n    \"files\": 76,\n    \"rawBytes\": 799937,\n    \"gzipEstimateBytes\": 506314\n  },\n  \"budgetFailures\": [],\n  \"protectedChanges\": []\n}\n",
+      "stdout": "{\n  \"assertions\": 34,\n  \"failed\": [],\n  \"precache\": {\n    \"requests\": 77,\n    \"uniqueLocalFiles\": 76,\n    \"missing\": [],\n    \"files\": 76,\n    \"rawBytes\": 799981,\n    \"gzipEstimateBytes\": 506310\n  },\n  \"budgetFailures\": [],\n  \"protectedChanges\": []\n}\n",
       "stderr": ""
     },
     {
@@ -50,7 +50,7 @@
     {
       "script": "qa/check-download-recovery.cjs",
       "exitCode": 0,
-      "stdout": "{\"result\":\"PASS\",\"scope\":\"Five grouped Node VM scenarios; not native offline or screen reader proof\",\"checks\":[\"Network failure is distinct from declared absence and never exposes artifacts\",\"Retry is deduplicated and returns focus to the resulting status\",\"HTTP error, invalid contract and invalid JSON keep distribution locked with recovery\",\"Repeated failure keeps keyboard focus on retry\",\"Stale manifest remains locked and offers a fresh attempt\"]}\n",
+      "stdout": "{\"result\":\"PASS\",\"scope\":\"Five grouped Node VM scenarios; not native offline or screen reader proof\",\"checks\":[\"Network failure is distinct from declared absence and never exposes artifacts\",\"Retry is deduplicated and returns focus to the resulting status\",\"Loading status exposes and clears aria-busy\",\"HTTP error, invalid contract and invalid JSON keep distribution locked with recovery\",\"Repeated failure keeps keyboard focus on retry\",\"Stale manifest remains locked and offers a fresh attempt\"]}\n",
       "stderr": ""
     },
     {
