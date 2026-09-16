@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "scope": "Five grouped Node VM scenarios; not native offline or screen reader proof",
+  "checks": [
+    "Network failure is distinct from declared absence and never exposes artifacts",
+    "Retry is deduplicated and returns focus to the resulting status",
+    "HTTP error, invalid contract and invalid JSON keep distribution locked with recovery",
+    "Repeated failure keeps keyboard focus on retry",
+    "Stale manifest remains locked and offers a fresh attempt"
+  ]
+}

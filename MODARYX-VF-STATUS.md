@@ -556,3 +556,9 @@ Sept scénarios catalogue accueil, structure 17 pages/13 scripts/77 empreintes, 
 ## 2026-09-16 — Reflow des textes Catalogue et accueil
 
 TERMINÉ sur ce périmètre : dix mesures navigateur des cinq pages modifiées par `0c1c809`, aux cadres 320/768 px, sans débordement horizontal ; trois noms accessibles contextualisés observés après chargement sur l’accueil. Voir `qa/catalog-copy-native-20260916.json`. Aucun changement runtime ni nouveau test source nécessaire pour ce lot documentaire. VF NON VALIDÉE ; les limites de la matrice restent ouvertes.
+
+## 2026-09-16 — Téléchargements : distinguer absence et panne
+
+Défaut reproduit : un fetch rejeté affichait « Aucun téléchargement public déclaré disponible », comme une réponse valide sans fichiers. Correction : statut de chargement puis erreur explicite, bouton Réessayer, requêtes simultanées ignorées, focus rendu au statut ou au bouton après tentative. Le statut quitte le badge étroit pour un paragraphe accessible. Une copie hors ligne reste verrouillée et propose une nouvelle tentative ; aucun artefact ajouté.
+
+Cinq groupes Node ciblés réussis (`qa/download-recovery-checks.json`) après échec initial reproduit ; six contrôles de métadonnées publiques préservés. Cache v96 : 34 assertions, 799191/800000 octets bruts ; structure 17 pages, 13 scripts, 77 empreintes vérifiée. Rendu navigateur après publication encore à observer ; récupération native après panne et lecteur d’écran PREUVE MANQUANTE. Aucune VF.
