@@ -1,0 +1,86 @@
+{
+  "scope": "Targeted Chrome homepage disclosure test, not full accessibility certification",
+  "before": "Enter then Tab skipped navigation and focused hero CTA; observed screenshot at 390 CSS px",
+  "after": [
+    "Enter then Tab focuses Mods; visible focus observed screenshot at 390 CSS px",
+    "Escape closes disclosure; aria-expanded false"
+  ],
+  "layouts": [
+    {
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 320,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 390,
+      "scroll": 390,
+      "width": 390
+    },
+    {
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 430,
+      "scroll": 430,
+      "width": 430
+    },
+    {
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 768,
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 960,
+      "scroll": 960,
+      "width": 960
+    },
+    {
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 1024,
+      "scroll": 1024,
+      "width": 1024
+    },
+    {
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 1280,
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 1440,
+      "scroll": 1440,
+      "width": 1440
+    },
+    {
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 1920,
+      "scroll": 1920,
+      "width": 1920
+    }
+  ],
+  "limitations": [
+    "Offline network emulation not exposed",
+    "No physical devices, screen reader or browser zoom validation"
+  ]
+}

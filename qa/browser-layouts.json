@@ -1,0 +1,390 @@
+{
+  "scope": "Chrome rendered iframe widths; no physical device, zoom, screen reader or performance claim",
+  "measuredAt": "2026-09-14T22:39:30.367Z",
+  "results": [
+    {
+      "h1": "Cette page est introuvable.",
+      "height": 820,
+      "overflow": [],
+      "page": "404",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Cette page est introuvable.",
+      "height": 1114,
+      "overflow": [],
+      "page": "404",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Cette page est introuvable.",
+      "height": 1553,
+      "overflow": [],
+      "page": "404",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Explorez les projets, jeu par jeu.",
+      "height": 2288,
+      "overflow": [],
+      "page": "catalog",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Explorez les projets, jeu par jeu.",
+      "height": 3422,
+      "overflow": [],
+      "page": "catalog",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Explorez les projets, jeu par jeu.",
+      "height": 5730,
+      "overflow": [],
+      "page": "catalog",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Vos collections. Vos idées. À votre rythme.",
+      "height": 5077,
+      "overflow": [],
+      "page": "community",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Vos collections. Vos idées. À votre rythme.",
+      "height": 5827,
+      "overflow": [],
+      "page": "community",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Vos collections. Vos idées. À votre rythme.",
+      "height": 8628,
+      "overflow": [],
+      "page": "community",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Préparez la fiche de votre création.",
+      "height": 4646,
+      "overflow": [],
+      "page": "creator-studio",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Préparez la fiche de votre création.",
+      "height": 6049,
+      "overflow": [],
+      "page": "creator-studio",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Préparez la fiche de votre création.",
+      "height": 7417,
+      "overflow": [],
+      "page": "creator-studio",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Trouvez le bon outil. Comprenez ses limites.",
+      "height": 3648,
+      "overflow": [],
+      "page": "documentation",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Trouvez le bon outil. Comprenez ses limites.",
+      "height": 4704,
+      "overflow": [],
+      "page": "documentation",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Trouvez le bon outil. Comprenez ses limites.",
+      "height": 8155,
+      "overflow": [],
+      "page": "documentation",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Les téléchargements ne sont pas encore ouverts.",
+      "height": 2316,
+      "overflow": [],
+      "page": "downloads",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Les téléchargements ne sont pas encore ouverts.",
+      "height": 2613,
+      "overflow": [],
+      "page": "downloads",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Les téléchargements ne sont pas encore ouverts.",
+      "height": 4224,
+      "overflow": [],
+      "page": "downloads",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Un atelier web pour chaque étape.",
+      "height": 2406,
+      "overflow": [],
+      "page": "ecosystem",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Un atelier web pour chaque étape.",
+      "height": 3311,
+      "overflow": [],
+      "page": "ecosystem",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Un atelier web pour chaque étape.",
+      "height": 5282,
+      "overflow": [],
+      "page": "ecosystem",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Vos mods.Des choix éclairés.",
+      "height": 6445,
+      "overflow": [],
+      "page": "index",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Vos mods.Des choix éclairés.",
+      "height": 9495,
+      "overflow": [],
+      "page": "index",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Vos mods.Des choix éclairés.",
+      "height": 12315,
+      "overflow": [],
+      "page": "index",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Votre profil, vos moyens de connexion.",
+      "height": 2167,
+      "overflow": [],
+      "page": "profiles",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Votre profil, vos moyens de connexion.",
+      "height": 2644,
+      "overflow": [],
+      "page": "profiles",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Votre profil, vos moyens de connexion.",
+      "height": 3817,
+      "overflow": [],
+      "page": "profiles",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Balanced Latency Pack — Preview",
+      "height": 1791,
+      "overflow": [],
+      "page": "project-balanced-latency-pack",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Balanced Latency Pack — Preview",
+      "height": 2834,
+      "overflow": [],
+      "page": "project-balanced-latency-pack",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Balanced Latency Pack — Preview",
+      "height": 3920,
+      "overflow": [],
+      "page": "project-balanced-latency-pack",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Ember Textures — Preview",
+      "height": 1686,
+      "overflow": [],
+      "page": "project-ember-textures",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Ember Textures — Preview",
+      "height": 2681,
+      "overflow": [],
+      "page": "project-ember-textures",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Ember Textures — Preview",
+      "height": 3730,
+      "overflow": [],
+      "page": "project-ember-textures",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Forge Night Experience — Preview",
+      "height": 1766,
+      "overflow": [],
+      "page": "project-forge-night-experience",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Forge Night Experience — Preview",
+      "height": 2809,
+      "overflow": [],
+      "page": "project-forge-night-experience",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Forge Night Experience — Preview",
+      "height": 3861,
+      "overflow": [],
+      "page": "project-forge-night-experience",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Les projets à explorer.",
+      "height": 1368,
+      "overflow": [],
+      "page": "project",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Les projets à explorer.",
+      "height": 1527,
+      "overflow": [],
+      "page": "project",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Les projets à explorer.",
+      "height": 2378,
+      "overflow": [],
+      "page": "project",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Retrouvez un projet ou un outil.",
+      "height": 2285,
+      "overflow": [],
+      "page": "search",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Retrouvez un projet ou un outil.",
+      "height": 2491,
+      "overflow": [],
+      "page": "search",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Retrouvez un projet ou un outil.",
+      "height": 3788,
+      "overflow": [],
+      "page": "search",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Sachez ce que les preuves établissent.",
+      "height": 3235,
+      "overflow": [],
+      "page": "security",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Sachez ce que les preuves établissent.",
+      "height": 4118,
+      "overflow": [],
+      "page": "security",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Sachez ce que les preuves établissent.",
+      "height": 6683,
+      "overflow": [],
+      "page": "security",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "h1": "Vérifier un fichier sans l’envoyer.",
+      "height": 1717,
+      "overflow": [],
+      "page": "verify",
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "h1": "Vérifier un fichier sans l’envoyer.",
+      "height": 2249,
+      "overflow": [],
+      "page": "verify",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "h1": "Vérifier un fichier sans l’envoyer.",
+      "height": 3051,
+      "overflow": [],
+      "page": "verify",
+      "scroll": 320,
+      "width": 320
+    }
+  ]
+}

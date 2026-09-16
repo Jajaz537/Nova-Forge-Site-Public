@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "scope": "Two Node VM source scenarios; not native HTTPS/offline proof",
+  "checks": [
+    "Network response never receives an unsupported stale label",
+    "Cache response remains qualified after favorites filter rerender"
+  ]
+}

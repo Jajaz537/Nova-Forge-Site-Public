@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-15",
+  "sourceCommit": "a1437aacb275de6e3ffa90ec3a0941a10e4a8e2d",
+  "method": "Chrome HTTPS candidate, native file chooser and Web Crypto",
+  "fixture": {
+    "name": "modaryx-qa-abc.txt",
+    "bytes": 3,
+    "content": "abc",
+    "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+  },
+  "checks": [
+    {
+      "case": "no file",
+      "message": "Aucun fichier sélectionné",
+      "focused": "local file picker"
+    },
+    {
+      "case": "abc expected hash",
+      "text": "Correspondance exacte\n\nLe SHA-256 calculé correspond exactement à l’empreinte attendue : ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad."
+    },
+    {
+      "case": "input invalidation",
+      "text": "Vérification à relancer\n\nLe fichier ou l’empreinte attendue a changé. Relancez le calcul pour vérifier cette sélection."
+    },
+    {
+      "case": "mismatch",
+      "text": "Empreinte différente\n\nCalculé : ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad. La valeur ne correspond pas à l’empreinte attendue. Le fichier ne doit pas être considéré comme identique sur cette seule vérification."
+    },
+    {
+      "case": "malformed hash",
+      "field": {
+        "focused": true,
+        "invalid": "true"
+      },
+      "text": "Empreinte attendue invalide\n\nLa valeur attendue doit contenir exactement 64 caractères hexadécimaux. Corrigez-la, ou effacez-la pour calculer uniquement l’empreinte du fichier. Aucun fichier n’a été lu."
+    },
+    {
+      "case": "hash only, no expected value",
+      "field": {
+        "invalid": null,
+        "value": ""
+      },
+      "method": "Ctrl+A then Backspace; fill(empty) did not change browser value and was excluded",
+      "text": "Empreinte calculée\n\nSHA-256 : ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad. Aucune empreinte attendue n’a été fournie, donc aucune correspondance n’est affirmée."
+    }
+  ],
+  "limits": [
+    "No screen reader",
+    "No large-file stress, I/O fault, double-click race or network capture proof",
+    "Displayed no-read/no-upload wording is not independent network instrumentation"
+  ]
+}

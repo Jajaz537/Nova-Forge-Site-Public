@@ -25,6 +25,7 @@
   const viewsStateNode = document.querySelector("#catalog-views-state");
 
   let items = [];
+  let staleCatalog = false;
   let favorites = loadFavorites();
   let savedViews = loadSavedViews();
 
@@ -37,7 +38,7 @@
   }
 
   function saveFavorites() {
-    try { localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites].sort())); } catch {}
+    try { localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites].sort())); return true; } catch { return false; }
   }
 
   function loadSavedViews() {
@@ -74,22 +75,29 @@
     savedViews.forEach((view) => viewSelect.add(new Option(view.name, view.id)));
     if (savedViews.some((view) => view.id === selected)) viewSelect.value = selected;
     const hasSelection = Boolean(viewSelect.value);
-    if (applyViewButton) applyViewButton.disabled = !hasSelection;
+    if (applyViewButton) applyViewButton.disabled = !hasSelection || !items.length;
     if (deleteViewButton) deleteViewButton.disabled = !hasSelection;
   }
 
   function applySavedView(view) {
     if (!view?.filters) return;
     const filters = view.filters;
+    let adjusted = false;
+    const restoreOption = (select, value, fallback) => {
+      const available = typeof value === "string" && [...select.options].some((option) => option.value === value);
+      select.value = available ? value : fallback;
+      if (!available && value !== undefined && value !== fallback) adjusted = true;
+    };
     queryInput.value = typeof filters.q === "string" ? filters.q : "";
-    kindSelect.value = typeof filters.kind === "string" ? filters.kind : "";
-    if (typeof filters.game === "string" && [...gameSelect.options].some((option) => option.value === filters.game)) gameSelect.value = filters.game;
-    else gameSelect.value = "";
-    evidenceSelect.value = typeof filters.evidence === "string" ? filters.evidence : "";
-    sortSelect.value = typeof filters.sort === "string" ? filters.sort : "featured";
+    restoreOption(kindSelect, filters.kind, "");
+    restoreOption(gameSelect, filters.game, "");
+    restoreOption(evidenceSelect, filters.evidence, "");
+    restoreOption(sortSelect, filters.sort, "featured");
     favoritesOnly.checked = filters.favoritesOnly === true;
     if (items.length) render();
-    if (viewsStateNode) viewsStateNode.textContent = `Vue « ${view.name} » appliquée localement.`;
+    if (viewsStateNode) viewsStateNode.textContent = adjusted
+      ? `Vue « ${view.name} » appliquée avec les filtres disponibles. Les choix devenus indisponibles ont été réinitialisés ; la vue enregistrée reste inchangée.`
+      : `Vue « ${view.name} » appliquée localement.`;
   }
 
   function saveCurrentView() {
@@ -100,10 +108,12 @@
       viewNameInput.focus();
       return;
     }
+    const previousViews = savedViews;
     const now = Date.now();
     const id = `view-${now.toString(36)}`;
     savedViews = [{id, name, filters: currentFilters()}, ...savedViews.filter((view) => view.name.toLocaleLowerCase("fr") !== name.toLocaleLowerCase("fr"))].slice(0, 12);
     if (!persistSavedViews()) {
+      savedViews = previousViews;
       if (viewsStateNode) viewsStateNode.textContent = "Le navigateur a refusé l’enregistrement local de cette vue.";
       return;
     }
@@ -118,9 +128,16 @@
   function deleteSelectedView() {
     if (!viewSelect?.value) return;
     const target = savedViews.find((view) => view.id === viewSelect.value);
+    const previousViews = savedViews;
     savedViews = savedViews.filter((view) => view.id !== viewSelect.value);
-    persistSavedViews();
+    if (!persistSavedViews()) {
+      savedViews = previousViews;
+      if (viewsStateNode) viewsStateNode.textContent = "Suppression impossible : le navigateur a refusé la modification locale.";
+      return;
+    }
+    const restoreFocus = document.activeElement === deleteViewButton;
     refreshSavedViews();
+    if (restoreFocus) viewSelect.focus();
     if (viewsStateNode) viewsStateNode.textContent = target ? `Vue « ${target.name} » supprimée de ce navigateur.` : "Vue locale supprimée.";
   }
 
@@ -169,9 +186,11 @@
     const favoriteButton = make("button", `text-button${favorite ? " favorite-active" : ""}`, favorite ? "★ Favori" : "☆ Favori");
     favoriteButton.type = "button";
     favoriteButton.dataset.favoriteId = item.id;
+    favoriteButton.setAttribute("aria-label", `Favori : ${item.name}`);
     favoriteButton.setAttribute("aria-pressed", favorite ? "true" : "false");
-    const projectLink = make("a", "text-link", "Voir le mini-hub");
+    const projectLink = make("a", "text-link", "Voir la fiche");
     projectLink.href = projectHref(item.id);
+    projectLink.setAttribute("aria-label", `Voir la fiche : ${item.name}`);
     actions.append(favoriteButton, projectLink);
     article.append(top, title, summary, details, actions);
     return article;
@@ -201,21 +220,40 @@
     grid.replaceChildren(...filtered.map(buildCard));
     countNode.textContent = `${filtered.length} ${filtered.length === 1 ? "entrée" : "entrées"}`;
     emptyNode.hidden = filtered.length !== 0;
-    stateNode.textContent = onlyFavorites ? "Filtrage local des favoris activé. Aucune synchronisation distante." : "Catalogue hydraté depuis les données publiques du même site. Recherche et tri exécutés localement.";
+    stateNode.textContent = onlyFavorites ? "Filtrage local des favoris activé. Aucune synchronisation distante." : "Catalogue chargé. Recherche et tri effectués dans votre navigateur.";
+    if (staleCatalog) stateNode.textContent += " Copie en cache : les informations peuvent avoir changé depuis leur enregistrement.";
+  }
+
+  function readPublicItems(payload) {
+    if (!payload || payload.schemaVersion !== 1 || !Array.isArray(payload.items)) throw new Error("catalog-contract-invalid");
+    const visible = payload.items.filter((item) => item?.public === true);
+    const text = (value) => typeof value === "string" && value.trim().length > 0;
+    const valid = (item) => text(item.id) && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.id) &&
+      ["mod", "pack", "experience"].includes(item.kind) && text(item.name) && text(item.version) &&
+      typeof item.summary === "string" && text(item.game?.name) && text(item.creator?.displayName) &&
+      ["unknown", "estimated", "measured"].includes(item.compatibility?.evidence) &&
+      text(item.provenance?.label) && text(item.distribution?.label) &&
+      (item.tags === undefined || (Array.isArray(item.tags) && item.tags.every((tag) => typeof tag === "string"))) &&
+      (item.featuredRank === undefined || (typeof item.featuredRank === "number" && Number.isFinite(item.featuredRank)));
+    if (!visible.every(valid) || new Set(visible.map((item) => item.id)).size !== visible.length) throw new Error("catalog-entry-invalid");
+    return visible;
   }
 
   async function hydrate() {
     try {
       const response = await fetch(DATA_URL, {headers: {Accept: "application/json"}});
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      staleCatalog = response.headers?.get('X-Modaryx-Cache') === 'offline-stale';
       const payload = await response.json();
-      if (!payload || payload.schemaVersion !== 1 || !Array.isArray(payload.items)) throw new Error("catalog-contract-invalid");
-      items = payload.items.filter((item) => item && item.public === true && typeof item.id === "string");
+      items = readPublicItems(payload);
       refreshGames();
       refreshSavedViews();
       render();
     } catch {
-      stateNode.textContent = navigator.onLine ? "Le catalogue enrichi n’a pas pu être chargé. Le contenu HTML statique initial reste disponible." : "Hors ligne : le contenu HTML statique initial reste disponible ; les données enrichies ne sont pas dans le cache courant.";
+      items = [];
+      form.querySelectorAll('input, select').forEach(control => { control.disabled = true; });
+      for (const control of [resetButton, saveViewButton, applyViewButton]) if (control) control.disabled = true;
+      stateNode.textContent = navigator.onLine ? "Chargement impossible. Filtres indisponibles ; fiches et favoris restent accessibles. Rechargez pour réessayer." : "Hors ligne : filtres indisponibles. Fiches et favoris restent accessibles. Reconnectez-vous puis rechargez.";
       countNode.textContent = `${grid.querySelectorAll(".catalog-card").length} entrées statiques`;
       bindStaticFavorites();
     }
@@ -223,16 +261,32 @@
 
   function toggleFavorite(id, button) {
     if (favorites.has(id)) favorites.delete(id); else favorites.add(id);
-    saveFavorites();
+    if (!saveFavorites()) {
+      if (favorites.has(id)) favorites.delete(id); else favorites.add(id);
+      stateNode.textContent = "Favori non modifié : le navigateur a refusé l’enregistrement local.";
+      return;
+    }
     const active = favorites.has(id);
     button.setAttribute("aria-pressed", active ? "true" : "false");
     button.textContent = active ? "★ Favori" : "☆ Favori";
     button.classList.toggle("favorite-active", active);
-    if (items.length && favoritesOnly.checked) render();
+    if (items.length && favoritesOnly.checked) {
+      const buttons = [...grid.querySelectorAll("[data-favorite-id]")];
+      const position = buttons.indexOf(button);
+      const restoreFocus = document.activeElement === button;
+      render();
+      if (restoreFocus) {
+        const remaining = [...grid.querySelectorAll("[data-favorite-id]")];
+        const target = remaining[Math.min(Math.max(position, 0), remaining.length - 1)];
+        (target || queryInput).focus();
+      }
+    }
   }
 
   function bindStaticFavorites() {
     grid.querySelectorAll("[data-favorite-id]").forEach((button) => {
+      const title = button.closest(".catalog-card")?.querySelector("h3")?.textContent;
+      if (title) button.setAttribute("aria-label", `Favori : ${title}`);
       const active = favorites.has(button.dataset.favoriteId);
       button.setAttribute("aria-pressed", active ? "true" : "false");
       button.textContent = active ? "★ Favori" : "☆ Favori";
@@ -256,7 +310,7 @@
   deleteViewButton?.addEventListener("click", deleteSelectedView);
   viewSelect?.addEventListener("change", () => {
     const hasSelection = Boolean(viewSelect.value);
-    if (applyViewButton) applyViewButton.disabled = !hasSelection;
+    if (applyViewButton) applyViewButton.disabled = !hasSelection || !items.length;
     if (deleteViewButton) deleteViewButton.disabled = !hasSelection;
     if (viewsStateNode) viewsStateNode.textContent = hasSelection ? "Vue locale prête à être appliquée." : "Les vues enregistrées restent uniquement dans ce navigateur.";
   });

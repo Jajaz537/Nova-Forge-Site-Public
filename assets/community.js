@@ -50,7 +50,10 @@
   };
 
   let catalogItems = [];
+  let catalogReady = false;
   let selectedIds = new Set();
+  const revisions = new WeakMap();
+  const revise = target => { const n = (revisions.get(target) || 0) + 1; revisions.set(target, n); return n; };
 
   const canonicalize = (value) => {
     if (Array.isArray(value)) return value.map(canonicalize);
@@ -62,20 +65,37 @@
   function downloadJson(value, filename) {
     const blob = new Blob([canonicalText(value)], {type: "application/json"});
     const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = filename;
-    anchor.click();
-    URL.revokeObjectURL(url);
+    let anchor;
+    try {
+      anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = filename;
+      anchor.rel = "noopener";
+      document.body.append(anchor);
+      anchor.click();
+    } finally {
+      anchor?.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
   }
 
-  function buildCollection() {
+  function buildCollection(focusInvalid = false) {
+    if (focusInvalid) Object.values(fields).forEach(field => field.removeAttribute("aria-invalid"));
+    if (!catalogReady) throw new Error("Catalogue indisponible ou en cours de chargement. Réessayez après son chargement.");
+    const check = (valid, key, message) => {
+      if (valid) return;
+      if (focusInvalid) {
+        fields[key].setAttribute("aria-invalid", "true");
+        fields[key].focus();
+      }
+      throw new Error(message);
+    };
     const id = String(fields.id?.value || "").trim().toLowerCase();
     const name = String(fields.name?.value || "").trim();
     const description = String(fields.description?.value || "").trim();
-    if (!ID_RE.test(id)) throw new Error("Identifiant : 2 à 128 caractères minuscules, chiffres, point, tiret ou underscore.");
-    if (!name || name.length > 160) throw new Error("Nom requis, 160 caractères maximum.");
-    if (description.length > 1200) throw new Error("Description : 1200 caractères maximum.");
+    check(ID_RE.test(id), "id", "Identifiant : 2 à 128 caractères minuscules, chiffres, point, tiret ou underscore.");
+    check(name && name.length <= 160, "name", "Nom requis, 160 caractères maximum.");
+    check(description.length <= 1200, "description", "Description : 1200 caractères maximum.");
     const known = new Set(catalogItems.map((item) => item.id));
     const itemIds = [...selectedIds].filter((idValue) => known.has(idValue)).sort();
     const collection = {schemaVersion: 1, id, name, itemIds, syncState: "local-only", visibility: "private-local", ownerProfileId: null};
@@ -95,7 +115,17 @@
   }
 
   function renderItems() {
-    itemList.replaceChildren();
+    const legend = document.createElement("legend");
+    legend.textContent = "Contenus du catalogue";
+    itemList.replaceChildren(legend);
+    if (!catalogItems.length) {
+      const message = document.createElement("p");
+      message.className = "muted";
+      message.textContent = catalogReady
+        ? "Aucun contenu disponible dans le catalogue. Vous pouvez préparer une collection vide."
+        : "Le catalogue n’est pas disponible. Rechargez la page pour réessayer ; votre copie locale est conservée.";
+      itemList.append(message);
+    }
     for (const item of catalogItems) {
       const label = document.createElement("label");
       label.className = "collection-choice";
@@ -105,6 +135,7 @@
       input.checked = selectedIds.has(item.id);
       input.addEventListener("change", () => {
         if (input.checked) selectedIds.add(item.id); else selectedIds.delete(item.id);
+        markEdited(status);
         renderPreview();
       });
       const text = document.createElement("span");
@@ -115,7 +146,10 @@
   }
 
   function applyCollection(value) {
-    if (!value || value.schemaVersion !== 1 || !ID_RE.test(String(value.id || "")) || typeof value.name !== "string") throw new Error("Collection V1 invalide.");
+    if (Object.keys(value || {}).some(k => !["schemaVersion","id","name","description","ownerProfileId","itemIds","visibility","syncState"].includes(k))) throw new Error("Champ de collection inconnu ; import refusé.");
+    if (!catalogReady) throw new Error("Catalogue indisponible ou en cours de chargement.");
+    if (!value || value.schemaVersion !== 1 || (typeof value.id !== "string" || !ID_RE.test(value.id)) || typeof value.name !== "string") throw new Error("Collection V1 invalide.");
+    if (!value.name.trim() || value.name.length > 160 || (value.description !== undefined && (typeof value.description !== "string" || value.description.length > 1200))) throw new Error("Nom ou description de collection invalide ; brouillon précédent conservé.");
     if (value.syncState !== "local-only") throw new Error("Seules les collections local-only peuvent être importées sans service de synchronisation.");
     if (value.visibility !== "private-local") throw new Error("La visibilité distante n’est pas disponible sans service réel.");
     if (value.ownerProfileId !== null) throw new Error("Une identité de compte ne peut pas être affirmée dans ce mode local.");
@@ -126,6 +160,7 @@
     fields.id.value = value.id;
     fields.name.value = value.name;
     fields.description.value = value.description || "";
+    Object.values(fields).forEach(field => field.removeAttribute("aria-invalid"));
     selectedIds = new Set(value.itemIds);
     renderItems();
     renderPreview();
@@ -152,6 +187,9 @@
     submissionFields.heading.required = !isComment;
     submissionFields.rating.required = isReview;
     submissionFields.parent.required = isComment;
+    for (const key of ["id", "kind", "target", "heading", "body", "rating", "parent"]) {
+      submissionFields[key].removeAttribute("aria-invalid");
+    }
   }
 
   function renderSubmissionTargets() {
@@ -159,7 +197,7 @@
     submissionFields.target.replaceChildren();
     const empty = document.createElement("option");
     empty.value = "";
-    empty.textContent = "Choisir un contenu";
+    empty.textContent = !catalogReady ? "Catalogue indisponible" : catalogItems.length ? "Choisir un contenu" : "Aucun contenu disponible";
     submissionFields.target.append(empty);
     for (const item of catalogItems) {
       const option = document.createElement("option");
@@ -170,7 +208,20 @@
     if (catalogItems.some((item) => item.id === previous)) submissionFields.target.value = previous;
   }
 
-  function buildSubmission() {
+  function buildSubmission(focusInvalid = false) {
+    const check = (valid, key, message) => {
+      if (valid) return;
+      if (focusInvalid) {
+        submissionFields[key].setAttribute("aria-invalid", "true");
+        submissionFields[key].focus();
+      }
+      throw new Error(message);
+    };
+    if (focusInvalid) {
+      for (const key of ["id", "kind", "target", "heading", "body", "rating", "parent"]) {
+        submissionFields[key].removeAttribute("aria-invalid");
+      }
+    }
     const id = String(submissionFields.id?.value || "").trim().toLowerCase();
     const kind = String(submissionFields.kind?.value || "");
     const targetId = String(submissionFields.target?.value || "");
@@ -180,10 +231,10 @@
     const ratingRaw = String(submissionFields.rating?.value || "").trim();
     const known = new Set(catalogItems.map((item) => item.id));
 
-    if (!ID_RE.test(id)) throw new Error("Identifiant de contribution invalide.");
-    if (!new Set(["discussion", "review", "comment"]).has(kind)) throw new Error("Type de contribution invalide.");
-    if (!known.has(targetId)) throw new Error("La contribution doit cibler un ID du catalogue public.");
-    if (!body || body.length > 8000) throw new Error("Contenu requis, 8000 caractères maximum.");
+    check(ID_RE.test(id), "id", "Identifiant : 2 à 128 caractères, lettres minuscules, chiffres, point, tiret ou underscore.");
+    check(new Set(["discussion", "review", "comment"]).has(kind), "kind", "Choisissez un type de contribution disponible.");
+    check(known.has(targetId), "target", "Choisissez un contenu du catalogue public.");
+    check(body && body.length <= 8000, "body", "Contenu requis, 8000 caractères maximum.");
 
     const submission = {
       schemaVersion: 1,
@@ -198,16 +249,16 @@
     };
 
     if (kind === "discussion" || kind === "review") {
-      if (!heading || heading.length > 180) throw new Error("Titre requis, 180 caractères maximum.");
+      check(heading && heading.length <= 180, "heading", "Titre requis, 180 caractères maximum.");
       submission.title = heading;
     }
     if (kind === "review") {
       const rating = Number(ratingRaw);
-      if (!Number.isInteger(rating) || rating < 1 || rating > 5) throw new Error("La note doit être un entier de 1 à 5.");
+      check(Number.isInteger(rating) && rating >= 1 && rating <= 5, "rating", "La note doit être un entier de 1 à 5.");
       submission.rating = rating;
     }
     if (kind === "comment") {
-      if (!ID_RE.test(parent)) throw new Error("Un commentaire exige un ID parent valide.");
+      check(ID_RE.test(parent), "parent", "Identifiant de la contribution parente : 2 à 128 caractères, lettres minuscules, chiffres, point, tiret ou underscore.");
       submission.parentSubmissionId = parent;
     }
     return submission;
@@ -215,7 +266,7 @@
 
   function renderSubmissionPreview(showError = false) {
     try {
-      const submission = buildSubmission();
+      const submission = buildSubmission(showError);
       submissionPreview.textContent = canonicalText(submission);
       return submission;
     } catch (error) {
@@ -226,7 +277,8 @@
   }
 
   function applySubmission(value) {
-    if (!value || value.schemaVersion !== 1 || !ID_RE.test(String(value.id || ""))) throw new Error("Contribution locale V1 invalide.");
+    if (Object.keys(value || {}).some(k => !["schemaVersion","id","kind","targetId","body","title","rating","parentSubmissionId","authorProfileId","syncState","publicationState","moderationState"].includes(k))) throw new Error("Champ de contribution inconnu ; import refusé.");
+    if (!value || value.schemaVersion !== 1 || (typeof value.id !== "string" || !ID_RE.test(value.id))) throw new Error("Contribution locale V1 invalide.");
     if (!new Set(["discussion", "review", "comment"]).has(value.kind)) throw new Error("Type de contribution inconnu.");
     if (value.authorProfileId !== null || value.syncState !== "local-only" || value.publicationState !== "local-draft" || value.moderationState !== "not-submitted") {
       throw new Error("Un brouillon local ne peut affirmer ni auteur distant, ni synchronisation, ni publication, ni modération.");
@@ -235,7 +287,7 @@
     if (!known.has(value.targetId)) throw new Error("ID catalogue ciblé inconnu.");
     if (typeof value.body !== "string" || !value.body.trim() || value.body.length > 8000) throw new Error("Contenu de contribution invalide.");
     if (value.kind === "comment") {
-      if (!ID_RE.test(String(value.parentSubmissionId || "")) || "title" in value || "rating" in value) throw new Error("Contrat commentaire invalide.");
+      if ((typeof value.parentSubmissionId !== "string" || !ID_RE.test(value.parentSubmissionId)) || "title" in value || "rating" in value) throw new Error("Contrat commentaire invalide.");
     } else {
       if (typeof value.title !== "string" || !value.title.trim() || value.title.length > 180 || "parentSubmissionId" in value) throw new Error("Contrat titre/parent invalide.");
       if (value.kind === "review" && (!Number.isInteger(value.rating) || value.rating < 1 || value.rating > 5)) throw new Error("Note de review invalide.");
@@ -269,27 +321,49 @@
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       if (data?.schemaVersion !== 1 || data?.dataClass !== "demonstration" || !Array.isArray(data.items)) throw new Error("catalog-contract-invalid");
-      catalogItems = data.items.filter((item) => item?.public === true && ID_RE.test(String(item.id || "")));
+      const publicItems = data.items.filter((item) => item?.public === true);
+      const ids = new Set();
+      for (const item of publicItems) {
+        if (typeof item.id !== "string" || !ID_RE.test(item.id) || ids.has(item.id) ||
+            typeof item.name !== "string" || !item.name.trim() ||
+            typeof item.game?.name !== "string" || !item.game.name.trim()) {
+          throw new Error("catalog-item-invalid");
+        }
+        ids.add(item.id);
+      }
+      catalogItems = publicItems;
+      catalogReady = true;
       renderItems();
       renderSubmissionTargets();
-      loadSavedCollection();
-      loadSavedSubmission();
+      if (!revisions.has(status)) loadSavedCollection();
+      if (!revisions.has(submissionStatus)) loadSavedSubmission();
       renderPreview();
       renderSubmissionPreview();
     } catch {
+      catalogReady = false;
       catalogItems = [];
       renderItems();
       renderSubmissionTargets();
-      status.textContent = "Catalogue public indisponible : collection locale bloquée en mode fail-closed.";
-      submissionStatus.textContent = "Catalogue public indisponible : contribution locale bloquée en mode fail-closed.";
+      status.textContent = "Catalogue indisponible. Rechargez la page pour réessayer. La copie locale de votre collection est conservée.";
+      submissionStatus.textContent = "Catalogue indisponible : choisissez un contenu après son chargement pour valider une contribution. Votre copie locale est conservée.";
     }
   }
 
-  form.addEventListener("input", renderPreview);
+  function markEdited(target) {
+    revise(target);
+    const message = target === status ? "Modifications non sauvegardées · sauvegardez pour les conserver · NON SYNCHRONISÉ." : "Modifications non sauvegardées · validez ou sauvegardez à nouveau · NON PUBLIÉ.";
+    if (target.textContent !== message) target.textContent = message;
+  }
+
+  form.addEventListener("input", (event) => {
+    if (event.target.type !== "file") markEdited(status);
+    event.target.removeAttribute("aria-invalid");
+    renderPreview();
+  });
 
   saveButton.addEventListener("click", () => {
     try {
-      const collection = buildCollection();
+      const collection = buildCollection(true);
       localStorage.setItem(COLLECTION_KEY, canonicalText(collection));
       status.textContent = "Collection sauvegardée uniquement dans ce navigateur · NON SYNCHRONISÉE.";
       preview.textContent = canonicalText(collection);
@@ -302,6 +376,7 @@
     try {
       const parsed = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
       const known = new Set(catalogItems.map((item) => item.id));
+      revise(status);
       selectedIds = new Set(Array.isArray(parsed) ? parsed.filter((id) => known.has(id)) : []);
       renderItems();
       renderPreview();
@@ -313,14 +388,15 @@
 
   exportButton.addEventListener("click", () => {
     try {
-      const collection = buildCollection();
+      const collection = buildCollection(true);
       downloadJson(collection, `${collection.id}.nova-collection.json`);
-      status.textContent = "Export déterministe créé localement. Aucun contenu n’a été envoyé.";
+      status.textContent = "Export préparé. Vérifiez les téléchargements de votre navigateur. Aucun contenu n’a été envoyé.";
     } catch (error) {
       status.textContent = `Export bloqué : ${error.message}`;
     }
   });
 
+  importFile.addEventListener("change", () => revise(status));
   importButton.addEventListener("click", async () => {
     const file = importFile.files?.[0];
     if (!file) {
@@ -328,20 +404,28 @@
       importFile.focus();
       return;
     }
+    const revision = revise(status);
     try {
       const value = JSON.parse(await file.text());
+      if (revision !== revisions.get(status)) return;
       applyCollection(value);
       status.textContent = "Collection importée en mémoire seulement. Utilisez Sauvegarder pour la conserver localement.";
     } catch (error) {
+      if (revision !== revisions.get(status)) return;
       status.textContent = `Import bloqué : ${error.message}`;
     }
   });
 
   clearButton.addEventListener("click", () => {
-    localStorage.removeItem(COLLECTION_KEY);
+    try { localStorage.removeItem(COLLECTION_KEY); } catch {
+      status.textContent = "Suppression locale impossible. La collection affichée est conservée et n’est pas déclarée effacée.";
+      return;
+    }
+    revise(status);
     fields.id.value = "ma-collection";
     fields.name.value = "Ma collection MODARYX";
     fields.description.value = "";
+    Object.values(fields).forEach(field => field.removeAttribute("aria-invalid"));
     selectedIds = new Set();
     renderItems();
     renderPreview();
@@ -349,10 +433,15 @@
   });
 
   submissionFields.kind.addEventListener("change", () => {
+    markEdited(submissionStatus);
     updateSubmissionFields();
     renderSubmissionPreview();
   });
-  submissionForm.addEventListener("input", () => renderSubmissionPreview());
+  submissionForm.addEventListener("input", (event) => {
+    if (event.target.type !== "file") markEdited(submissionStatus);
+    event.target.removeAttribute("aria-invalid");
+    renderSubmissionPreview();
+  });
 
   submissionValidate.addEventListener("click", () => {
     const submission = renderSubmissionPreview(true);
@@ -361,7 +450,7 @@
 
   submissionSave.addEventListener("click", () => {
     try {
-      const submission = buildSubmission();
+      const submission = buildSubmission(true);
       localStorage.setItem(SUBMISSION_KEY, canonicalText(submission));
       submissionPreview.textContent = canonicalText(submission);
       submissionStatus.textContent = "Brouillon sauvegardé uniquement dans ce navigateur · NON PUBLIÉ.";
@@ -372,14 +461,15 @@
 
   submissionExport.addEventListener("click", () => {
     try {
-      const submission = buildSubmission();
+      const submission = buildSubmission(true);
       downloadJson(submission, `${submission.id}.nova-community-draft.json`);
-      submissionStatus.textContent = "Export déterministe créé localement · NON PUBLIÉ · aucun contenu envoyé.";
+      submissionStatus.textContent = "Export préparé. Vérifiez les téléchargements de votre navigateur · NON PUBLIÉ · aucun contenu envoyé.";
     } catch (error) {
       submissionStatus.textContent = `Export bloqué : ${error.message}`;
     }
   });
 
+  submissionImportFile.addEventListener("change", () => revise(submissionStatus));
   submissionImport.addEventListener("click", async () => {
     const file = submissionImportFile.files?.[0];
     if (!file) {
@@ -387,17 +477,24 @@
       submissionImportFile.focus();
       return;
     }
+    const revision = revise(submissionStatus);
     try {
       const value = JSON.parse(await file.text());
+      if (revision !== revisions.get(submissionStatus)) return;
       applySubmission(value);
       submissionStatus.textContent = "Brouillon importé en mémoire seulement · NON PUBLIÉ.";
     } catch (error) {
+      if (revision !== revisions.get(submissionStatus)) return;
       submissionStatus.textContent = `Import bloqué : ${error.message}`;
     }
   });
 
   submissionClear.addEventListener("click", () => {
-    localStorage.removeItem(SUBMISSION_KEY);
+    try { localStorage.removeItem(SUBMISSION_KEY); } catch {
+      submissionStatus.textContent = "Suppression locale impossible. Le brouillon affiché est conservé et n’est pas déclaré effacé.";
+      return;
+    }
+    revise(submissionStatus);
     submissionFields.id.value = "ma-contribution";
     submissionFields.kind.value = "discussion";
     submissionFields.target.value = "";

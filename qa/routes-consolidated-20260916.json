@@ -1,0 +1,221 @@
+{
+  "sourceCommit": "82d958f99fe9eed064602fec45163173a6045580",
+  "date": "2026-09-16",
+  "scope": "Chrome HTTPS route load and DOM landmarks; not full visual or interaction certification",
+  "routes": [
+    {
+      "page": "index.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+      "dom": {
+        "h1": [
+          "Des mondes à explorer.Des idées à forger."
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "MODARYX MODS — Gaming, Mods & Modding Tools",
+        "width": 1348
+      }
+    },
+    {
+      "page": "catalog.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/catalog",
+      "dom": {
+        "h1": [
+          "Explorez les projets, jeu par jeu."
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Catalogue — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "community.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/community",
+      "dom": {
+        "h1": [
+          "Vos collections. Vos idées. À votre rythme."
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Communauté — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "creator-studio.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/creator-studio",
+      "dom": {
+        "h1": [
+          "Préparez la fiche de votre création."
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Creator Studio — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "documentation.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/documentation",
+      "dom": {
+        "h1": [
+          "Trouvez le bon outil. Comprenez ses limites."
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Documentation publique — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "downloads.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/downloads",
+      "dom": {
+        "h1": [
+          "Les téléchargements ne sont pas encore ouverts."
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Téléchargements publics — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "ecosystem.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/ecosystem",
+      "dom": {
+        "h1": [
+          "Un atelier web pour chaque étape."
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Écosystème public — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "profiles.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/profiles",
+      "dom": {
+        "h1": [
+          "Votre profil, vos moyens de connexion."
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Profils et accès — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "project.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project",
+      "dom": {
+        "h1": [
+          "Les projets à explorer."
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Projets — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "project-balanced-latency-pack.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project-balanced-latency-pack",
+      "dom": {
+        "h1": [
+          "Balanced Latency Pack — Preview"
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Balanced Latency Pack — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "project-ember-textures.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project-ember-textures",
+      "dom": {
+        "h1": [
+          "Ember Textures — Preview"
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Ember Textures — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "project-forge-night-experience.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project-forge-night-experience",
+      "dom": {
+        "h1": [
+          "Forge Night Experience — Preview"
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Forge Night Experience — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "search.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/search",
+      "dom": {
+        "h1": [
+          "Retrouvez un projet ou un outil."
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Recherche — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "security.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/security",
+      "dom": {
+        "h1": [
+          "Sachez ce que les preuves établissent."
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Sécurité & provenance — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "verify.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/verify",
+      "dom": {
+        "h1": [
+          "Vérifier un fichier sans l’envoyer."
+        ],
+        "main": 1,
+        "scroll": 1348,
+        "title": "Vérificateur SHA-256 — MODARYX MODS",
+        "width": 1348
+      }
+    },
+    {
+      "page": "404.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/404",
+      "dom": {
+        "h1": [
+          "Cette page est introuvable."
+        ],
+        "main": 1,
+        "scroll": 1363,
+        "title": "Page introuvable — MODARYX MODS",
+        "width": 1363
+      }
+    }
+  ],
+  "limitations": [
+    "DOM landmarks and horizontal width only; not a new visual comparison",
+    "Initial documents can render before all asynchronous content finishes",
+    "Last 30 error logs were browser-extension metadata errors; no comprehensive application-console certification",
+    "No import retry, offline update cycle, native zoom, screen reader or physical-device test"
+  ]
+}

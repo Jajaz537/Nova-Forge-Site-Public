@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "kind": "Node VM with real Web Crypto digest; not native browser or screen-reader proof",
+  "checks": [
+    "Missing file focuses the local file picker and reports a warning",
+    "Malformed expected hash is rejected before reading bytes, with field focus",
+    "Editing clears stale field error; empty expected hash remains a neutral calculation",
+    "Real Node Web Crypto digest accepts normalized hash and distinguishes mismatch",
+    "Concurrent activation is ignored and changed inputs suppress stale digest output",
+    "Read failure restores button availability without a trust result",
+    "Missing Web Crypto does not read or claim verification",
+    "Malformed, empty and undecodable hash links show an error and prevent file reads",
+    "Invalid fragment interrupts stale digest output; a subsequent valid link restores neutral prefill"
+  ]
+}

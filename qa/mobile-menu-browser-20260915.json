@@ -1,0 +1,141 @@
+{
+  "bridgeMessage": [
+    "Pont local optionnel inactifAucun protocole local, exécutable ou service n’a été lancé. Le pont local reste optionnel et nécessitera une action utilisateur explicite."
+  ],
+  "checks": [
+    {
+      "case": "initial",
+      "expanded": "false",
+      "page": "home"
+    },
+    {
+      "case": "open by Enter",
+      "expanded": "true",
+      "page": "home"
+    },
+    {
+      "case": "close by Escape",
+      "expanded": "false",
+      "page": "home"
+    },
+    {
+      "case": "anchor closes menu",
+      "expanded": "false",
+      "page": "home"
+    },
+    {
+      "case": "initial",
+      "expanded": "false",
+      "page": "catalog"
+    },
+    {
+      "case": "open Enter",
+      "expanded": "true",
+      "page": "catalog"
+    },
+    {
+      "case": "close Escape",
+      "expanded": "false",
+      "page": "catalog"
+    }
+  ],
+  "date": "2026-09-15T21:47:41.684Z",
+  "destination": [
+    "Préparez la fiche de votre création.",
+    "Reprendre un brouillon",
+    "Décrire le contenu",
+    "Jeu, versions et loaders",
+    "Preuve, dépendances et conflits",
+    "Attribution et redistribution",
+    "Documenter la source",
+    "Chemins, tailles et SHA-256",
+    "Votre fichier JSON"
+  ],
+  "homeReflow": [
+    {
+      "contentHeight": 12205,
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 322.4,
+        "loadEndMs": 337.6,
+        "responseEndMs": 154.3,
+        "type": "navigate"
+      },
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 320,
+      "scroll": 305,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+      "width": 305
+    },
+    {
+      "contentHeight": 9897,
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 322.4,
+        "loadEndMs": 337.6,
+        "responseEndMs": 154.3,
+        "type": "navigate"
+      },
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 768,
+      "scroll": 753,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+      "width": 753
+    }
+  ],
+  "openMeasure": {
+    "contentHeight": 6060,
+    "h1": "Explorez les projets, jeu par jeu.",
+    "height": 900,
+    "navigation": {
+      "domContentLoadedEndMs": 402.5,
+      "loadEndMs": 409.2,
+      "responseEndMs": 108.7,
+      "type": "navigate"
+    },
+    "page": "catalog.html",
+    "positiveTabindex": 0,
+    "requested": 320,
+    "scroll": 305,
+    "serviceWorker": {
+      "controller": {
+        "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+        "state": "activated"
+      },
+      "secure": true,
+      "supported": true
+    },
+    "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+    "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/catalog",
+    "width": 305
+  },
+  "menuCommit": "51241fccc616ad037618ec05f6ee16bb04ceee70",
+  "copyCommit": "dc0f8bf2f8be665786209ffcd932fca5ea28db5d",
+  "limits": [
+    "aria-expanded and resulting page observed through iframe controls; no native screen reader or exhaustive tab-order proof.",
+    "No direct focus assertion after Escape; only menu state was measured.",
+    "OS-link action observed as informative text; no operating-system integration activated."
+  ]
+}
