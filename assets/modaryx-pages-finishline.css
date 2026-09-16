@@ -31,10 +31,11 @@
 
 /* Creator Studio: make the long form read as a deliberate sequence. */
 .studio-form{counter-reset:studio-stage}
-.studio-form>h2{position:relative;padding-left:3.2rem}
-.studio-form>h2:before{counter-increment:studio-stage;content:"0" counter(studio-stage);position:absolute;left:0;top:.14em;color:#d8ad586d;font-family:var(--modaryx-display-font,serif);font-size:.62em;font-weight:500}
+.studio-form>div{counter-increment:studio-stage}
+.studio-form>div>h2{position:relative;padding-left:3.2rem}
+.studio-form>div>h2:before{content:"0" counter(studio-stage);position:absolute;left:0;top:.14em;color:#d8ad586d;font-family:var(--modaryx-display-font,serif);font-size:.62em;font-weight:500}
 .studio-form>fieldset{position:relative;border-left-color:#d8ad5842!important}
 .studio-form>fieldset:nth-of-type(even){border-left-color:#70a4db3d!important;background:linear-gradient(145deg,#0d1113a8,#080a09b8)}
 .studio-preview{isolation:isolate;overflow:hidden}
 .studio-preview:before{content:"";position:absolute;z-index:-1;right:-9rem;top:-8rem;width:22rem;height:22rem;border:1px solid #d8ad5818;border-radius:50%;box-shadow:0 0 0 3.5rem #70a4db07,0 0 0 7rem #d8ad5804}
-@media(max-width:620px){.studio-form>h2{padding-left:2.5rem}.studio-preview:before{opacity:.5}}
+@media(max-width:620px){.studio-form>div>h2{padding-left:2.5rem}.studio-preview:before{opacity:.5}}

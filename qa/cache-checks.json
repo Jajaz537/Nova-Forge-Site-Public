@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-16T19:23:49.141Z",
+  "measuredAt": "2026-09-16T19:26:12.756Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -465,8 +465,8 @@
     "uniqueLocalFiles": 75,
     "missing": [],
     "files": 75,
-    "rawBytes": 796584,
-    "gzipEstimateBytes": 505230
+    "rawBytes": 796614,
+    "gzipEstimateBytes": 505233
   },
   "pages": [
     {
@@ -488,8 +488,8 @@
       "htmlBytes": 10761,
       "css": {
         "files": 7,
-        "rawBytes": 69917,
-        "gzipEstimateBytes": 19536
+        "rawBytes": 69947,
+        "gzipEstimateBytes": 19539
       },
       "js": {
         "files": 2,
@@ -516,8 +516,8 @@
       "htmlBytes": 13753,
       "css": {
         "files": 8,
-        "rawBytes": 67976,
-        "gzipEstimateBytes": 19230
+        "rawBytes": 68006,
+        "gzipEstimateBytes": 19233
       },
       "js": {
         "files": 3,
@@ -572,8 +572,8 @@
       "htmlBytes": 5324,
       "css": {
         "files": 7,
-        "rawBytes": 68632,
-        "gzipEstimateBytes": 19263
+        "rawBytes": 68662,
+        "gzipEstimateBytes": 19266
       },
       "js": {
         "files": 1,
@@ -614,8 +614,8 @@
       "htmlBytes": 7159,
       "css": {
         "files": 7,
-        "rawBytes": 68632,
-        "gzipEstimateBytes": 19263
+        "rawBytes": 68662,
+        "gzipEstimateBytes": 19266
       },
       "js": {
         "files": 2,
@@ -628,8 +628,8 @@
       "htmlBytes": 6919,
       "css": {
         "files": 7,
-        "rawBytes": 68632,
-        "gzipEstimateBytes": 19263
+        "rawBytes": 68662,
+        "gzipEstimateBytes": 19266
       },
       "js": {
         "files": 2,
@@ -642,8 +642,8 @@
       "htmlBytes": 7129,
       "css": {
         "files": 7,
-        "rawBytes": 68632,
-        "gzipEstimateBytes": 19263
+        "rawBytes": 68662,
+        "gzipEstimateBytes": 19266
       },
       "js": {
         "files": 2,
@@ -656,8 +656,8 @@
       "htmlBytes": 4620,
       "css": {
         "files": 7,
-        "rawBytes": 68632,
-        "gzipEstimateBytes": 19263
+        "rawBytes": 68662,
+        "gzipEstimateBytes": 19266
       },
       "js": {
         "files": 1,
@@ -771,7 +771,7 @@
     "checks": [
       {
         "name": "Unique precache bytes",
-        "actualBytes": 796584,
+        "actualBytes": 796614,
         "limitBytes": 800000,
         "passed": true
       },
@@ -793,7 +793,7 @@
       },
       {
         "name": "catalog.html: direct CSS",
-        "actualBytes": 69917,
+        "actualBytes": 69947,
         "limitBytes": 70000,
         "passed": true
       },
@@ -817,7 +817,7 @@
       },
       {
         "name": "creator-studio.html: direct CSS",
-        "actualBytes": 67976,
+        "actualBytes": 68006,
         "limitBytes": 70000,
         "passed": true
       },
@@ -865,7 +865,7 @@
       },
       {
         "name": "games/index.html: direct CSS",
-        "actualBytes": 68632,
+        "actualBytes": 68662,
         "limitBytes": 70000,
         "passed": true
       },
@@ -901,7 +901,7 @@
       },
       {
         "name": "project-balanced-latency-pack.html: direct CSS",
-        "actualBytes": 68632,
+        "actualBytes": 68662,
         "limitBytes": 70000,
         "passed": true
       },
@@ -913,7 +913,7 @@
       },
       {
         "name": "project-ember-textures.html: direct CSS",
-        "actualBytes": 68632,
+        "actualBytes": 68662,
         "limitBytes": 70000,
         "passed": true
       },
@@ -925,7 +925,7 @@
       },
       {
         "name": "project-forge-night-experience.html: direct CSS",
-        "actualBytes": 68632,
+        "actualBytes": 68662,
         "limitBytes": 70000,
         "passed": true
       },
@@ -937,7 +937,7 @@
       },
       {
         "name": "project.html: direct CSS",
-        "actualBytes": 68632,
+        "actualBytes": 68662,
         "limitBytes": 70000,
         "passed": true
       },
