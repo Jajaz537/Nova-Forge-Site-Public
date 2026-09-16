@@ -504,3 +504,9 @@ Sept groupes contrat catalogue (dont dix variantes malformées et deux rejets r�
 ## Catalogue — parcours normal après garde dégradée, 16 septembre 2026
 
 Sur ec835ba, données enrichies observées dans Chrome HTTPS : filtre Minecraft 1 entrée, création d’une vue locale temporaire et activation d’Appliquer, réinitialisation 3 entrées, application 1 entrée. Vue de test supprimée, confirmation affichée, Appliquer désactivé ; réinitialisation finale à 3 entrées. `qa/catalog-normal-after-failure-guard-20260916.json`. Ce résultat protège le parcours normal concerné ; aucun échec réseau natif ni lecteur d’écran testé. VF NON VALIDÉE.
+
+## Vérificateur — calcul périmé évité, 16 septembre 2026
+
+Depuis 63c3f1a, changement de sélection pendant arrayBuffer : le hachage n’est plus lancé après la fin de cette lecture. Défaut reproduit avant correction : un appel digest au lieu de zéro. La lecture déjà engagée n’est pas annulée. La garde après digest reste nécessaire et conservée pour les changements pendant un calcul déjà lancé.
+
+Dix groupes vérificateur réussis, avec Web Crypto réel dans Node pour les résultats de hachage et délais simulés pour les courses ; bouton libéré et résultat périmé masqué dans les deux phases. 31 assertions cache et budgets, structure et 76 empreintes réussis. Cache v90 : 798679 octets. Aucun gain de durée chiffré ni course native navigateur revendiqué. VF NON VALIDÉE.

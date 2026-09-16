@@ -60,7 +60,8 @@ const checks = [];
   assert.equal(e.result.dataset.state, 'mismatch');
   checks.push('Real Node Web Crypto digest accepts normalized hash and distinguishes mismatch');
 
-  e = setup();
+  let digests = 0;
+  e = setup({subtle:{digest:async (...args)=>{digests++;return webcrypto.subtle.digest(...args);}}});
   let release;
   reads = 0;
   e.file.files = [{ name: 'pending', arrayBuffer: () => { reads++; return new Promise(resolve => { release = resolve; }); } }];
@@ -75,7 +76,22 @@ const checks = [];
   assert.equal(e.result.children[0].textContent, 'Vérification à relancer');
   assert.equal(e.button.disabled, false);
   assert.equal(e.button.attrs['aria-busy'], undefined);
-  checks.push('Concurrent activation is ignored and changed inputs suppress stale digest output');
+  assert.equal(digests, 0, 'Do not hash an obsolete selection after its read completes');
+  checks.push('Concurrent activation is ignored; input changes during reading skip obsolete digest work');
+
+  let finishDigest;
+  e = setup({subtle:{digest:()=>new Promise(resolve=>{finishDigest=resolve;})}});
+  e.file.files = [{name:'hashing',arrayBuffer:async()=>new ArrayBuffer(0)}];
+  const hashing=e.button.fire('click');
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(typeof finishDigest,'function');
+  await e.file.fire('change');
+  finishDigest(new Uint8Array(32).buffer);
+  await hashing;
+  assert.equal(e.result.children[0].textContent,'Vérification à relancer');
+  assert.equal(e.button.disabled,false);
+  assert.equal(e.button.attrs['aria-busy'],undefined);
+  checks.push('Input change during an already running digest still suppresses stale output and releases the button');
 
   e = setup();
   e.file.files = [{ name: 'unreadable', arrayBuffer: async () => { throw Error('denied'); } }];

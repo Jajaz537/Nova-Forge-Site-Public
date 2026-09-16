@@ -86,6 +86,7 @@
 
     try {
       const data = await file.arrayBuffer();
+      if (revision !== inputRevision) return;
       const digest = toHex(await crypto.subtle.digest('SHA-256', data));
       if (revision !== inputRevision) return;
 
