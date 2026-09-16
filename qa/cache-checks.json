@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-16T19:13:41.482Z",
+  "measuredAt": "2026-09-16T19:16:26.245Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -139,7 +139,7 @@
       "passed": true
     }
   ],
-  "serviceWorkerSha256": "5f5f8fa08c1a1c7e07e5fed5e5ea24232f4026a9cfe4da7531eecf1176d6b987",
+  "serviceWorkerSha256": "0f8355d19d7d9ee79fb76ef75dcbc92d1332c7b53367c511d194727f9fcd0b8f",
   "probes": [
     {
       "url": "/catalog.html",
@@ -461,12 +461,12 @@
     "nova-site-shell-old"
   ],
   "precache": {
-    "requests": 77,
-    "uniqueLocalFiles": 76,
+    "requests": 76,
+    "uniqueLocalFiles": 75,
     "missing": [],
-    "files": 76,
-    "rawBytes": 799849,
-    "gzipEstimateBytes": 506379
+    "files": 75,
+    "rawBytes": 794406,
+    "gzipEstimateBytes": 504648
   },
   "pages": [
     {
@@ -485,11 +485,11 @@
     },
     {
       "page": "catalog.html",
-      "htmlBytes": 10745,
+      "htmlBytes": 10761,
       "css": {
         "files": 7,
-        "rawBytes": 68561,
-        "gzipEstimateBytes": 19212
+        "rawBytes": 67835,
+        "gzipEstimateBytes": 18978
       },
       "js": {
         "files": 2,
@@ -771,7 +771,7 @@
     "checks": [
       {
         "name": "Unique precache bytes",
-        "actualBytes": 799849,
+        "actualBytes": 794406,
         "limitBytes": 800000,
         "passed": true
       },
@@ -793,7 +793,7 @@
       },
       {
         "name": "catalog.html: direct CSS",
-        "actualBytes": 68561,
+        "actualBytes": 67835,
         "limitBytes": 70000,
         "passed": true
       },
