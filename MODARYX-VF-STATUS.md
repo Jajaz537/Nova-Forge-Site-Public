@@ -536,3 +536,7 @@ Sur 9f0d4f0, les trois fils d’Ariane ouverts par Entrée aboutissent aux ancre
 Depuis 60299be : introduction en deux colonnes sur desktop, une colonne sur mobile, avec le visuel de portails MODARYX déjà utilisé à l’accueil. Asset inchangé, explicitement décrit comme illustration d’ambiance et non capture des jeux. Dimensions intrinsèques 1200×675, ratio préservé, aucun nouveau script ni animation. Générateur et page synchronisés.
 
 Structure 17 pages/77 empreintes et 34 assertions cache/budgets réussies. Cache v94, 797635 octets bruts ; image déjà précachée, aucun fichier image ajouté. Recette visuelle du nouveau cadrage à effectuer après publication candidate. VF NON VALIDÉE.
+
+## Index jeux — recette des portails
+
+Sur 048db73 : image chargée, capture desktop inspectée (texte/image côte à côte), capture mobile 320 inspectée après défilement (trois portails entiers, légende lisible, aucun recouvrement visible). Reflow 320/768/1440 : scrollWidth égale à la largeur utile 305/753/1425. `qa/games-portals-native-20260916.json`. Ni CLS/LCP, ni appareil physique, ni zoom natif prouvés. VF NON VALIDÉE.

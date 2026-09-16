@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-16",
+  "sourceHead": "048db73f40c367db1c711526d8ea8b99d03efee1",
+  "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/games/",
+  "desktop": {
+    "width": 1348,
+    "scroll": 1348,
+    "imageComplete": true,
+    "imageWidth": 574,
+    "imageHeight": 324.015625
+  },
+  "reflow": [
+    {
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "contentHeight": 2962
+    },
+    {
+      "requested": 768,
+      "width": 753,
+      "scroll": 753,
+      "contentHeight": 2333
+    },
+    {
+      "requested": 1440,
+      "width": 1425,
+      "scroll": 1425,
+      "contentHeight": 1539
+    }
+  ],
+  "visual": "Desktop : introduction et illustration côte à côte, trois cartes alignées. Mobile 320 : image entière sous le texte, trois portails visibles, légende sur deux lignes, aucune superposition visible. Asset existant réutilisé, pas une capture de jeu.",
+  "limits": "Inspection de captures du viewport et mesures iframe dans Chrome HTTPS. Pas de mesure CLS/LCP, appareil physique, zoom, lecteur d’écran ou audit complet de tous les états.",
+  "vfValidated": false
+}
