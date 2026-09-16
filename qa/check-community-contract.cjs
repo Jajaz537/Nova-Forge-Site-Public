@@ -9,7 +9,7 @@ async function load(payload) {
     catalogItems: [], catalogReady: false, selectedIds: new Set(['existing-draft-item']),
     fields: { id: { value: 'kept-draft' }, name: { value: 'Brouillon conservé' }, description: { value: '' } },
     fetch: async () => ({ ok: true, json: async () => payload }),
-    status: {}, submissionStatus: {},
+    status: {}, submissionStatus: {}, revisions: new WeakMap(),
     renderItems() { displayed.push(context.catalogItems.map(item => item.id)); },
     renderSubmissionTargets() {}, renderPreview() {}, renderSubmissionPreview() {},
     loadSavedCollection() { restored.push('collection'); }, loadSavedSubmission() { restored.push('submission'); }

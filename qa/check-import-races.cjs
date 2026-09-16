@@ -7,9 +7,11 @@ class Element {
  append(...x){this.children.push(...x)} replaceChildren(...x){this.children=x}
  removeAttribute(){} setAttribute(){} focus(){}
 }
-async function setup(){
+async function setup(options={}){
  const nodes=new Map(),get=id=>{if(!nodes.has(id))nodes.set(id,new Element());return nodes.get(id)};
  const context={console,document:{querySelector:get,createElement:()=>new Element()},localStorage:{getItem:()=>null,removeItem(){},setItem(){}},fetch:async()=>({ok:true,json:async()=>({schemaVersion:1,dataClass:'demonstration',items:[{public:true,id:'demo',name:'Demo',game:{name:'Game'}}]})})};
+ if(options.fetch)context.fetch=options.fetch;
+ if(options.saved)context.localStorage.getItem=key=>key.includes(':collection:')?JSON.stringify(fixtures.collection):key.includes(':submission:')?JSON.stringify(fixtures.submission):null;
  vm.runInNewContext(source,context);await new Promise(r=>setImmediate(r));return get;
 }
 const fixtures={collection:{schemaVersion:1,id:'imported',name:'Imported',description:'',syncState:'local-only',visibility:'private-local',ownerProfileId:null,itemIds:[]},submission:{schemaVersion:1,id:'imported',kind:'discussion',authorProfileId:null,syncState:'local-only',publicationState:'local-draft',moderationState:'not-submitted',targetId:'demo',body:'Imported body',title:'Imported title'}};
@@ -38,6 +40,15 @@ const fixtures={collection:{schemaVersion:1,id:'imported',name:'Imported',descri
    assert.equal(field.value,'Keep current');assert.match(get('#'+kind+'-status').textContent,/Import bloqué/);
   }
   checks.push(kind+': extra properties and non-string IDs refused without replacing draft');
+ }
+ for(const kind of ['collection','submission']){
+  let deliver;const get=await setup({saved:true,fetch:()=>new Promise(r=>deliver=r)});
+  const field=get(kind==='collection'?'#collection-name':'#submission-body');field.value='Fresh before catalog';
+  await get('#'+kind+'-form').fire('input',{target:field});
+  deliver({ok:true,json:async()=>({schemaVersion:1,dataClass:'demonstration',items:[{public:true,id:'demo',name:'Demo',game:{name:'Game'}}]})});
+  await new Promise(r=>setImmediate(r));assert.equal(field.value,'Fresh before catalog');
+  assert.equal(get(kind==='collection'?'#submission-body':'#collection-name').value,kind==='collection'?'Imported body':'Imported');
+  checks.push(kind+': delayed catalog preserves editing while untouched form restores');
  }
  const report={scope:'Node VM with deferred file reads; no native file-picker or screen-reader proof',checks};fs.writeFileSync(path.join(__dirname,'import-race-checks.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
 })().catch(e=>{console.error(e);process.exitCode=1});

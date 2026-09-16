@@ -462,3 +462,9 @@ Huit groupes de contrôles recherche source réussis, dont récupération, dédu
 ## Recherche après publication — 16 septembre 2026
 
 `qa/search-recovery-native-20260916.json` sur f4372ee : index chargé, champ actif, 14 résultats ; Skyrim donne une fiche ; effacement clavier rétablit 14 résultats. Aucun bouton Réessayer lorsque le chargement réussit. Ces trois observations natives ne prouvent pas une panne/récupération réelle, encore simulée uniquement. Point de reprise clarifié en distinguant couverture source, preuves externes et développement produit absent. Aucun runtime modifié. VF NON VALIDÉE.
+
+## Restauration différée Communauté — 16 septembre 2026
+
+Départ `467245945927bdde16d54cde266ef0d902242c0c`. Défaut reproduit en Node avant correction : « Fresh before catalog » remplacé par « Imported » à la résolution tardive du catalogue. La restauration automatique est maintenant conditionnée à l’absence de révision du formulaire concerné. Une collection éditée n’empêche pas la restauration d’une contribution intacte, et inversement. Les copies stockées ne sont pas supprimées.
+
+Quatorze contrôles import/restauration réussis, dont deux nouveaux cas différés ; cinq groupes contrat catalogue réussis. Le test unitaire qui extrait loadCatalog a d’abord échoué faute de revisions dans son contexte ; ajout de la dépendance dans le mock, puis réussite. 25 assertions cache/budgets, structure 16 pages/13 scripts/76 empreintes vérifiés. Cache v85 : 799740 octets. Course temporelle prouvée en simulation uniquement ; aucune nouvelle sélection native de fichier. VF NON VALIDÉE.

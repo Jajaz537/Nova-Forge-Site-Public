@@ -335,8 +335,8 @@
       catalogReady = true;
       renderItems();
       renderSubmissionTargets();
-      loadSavedCollection();
-      loadSavedSubmission();
+      if (!revisions.has(status)) loadSavedCollection();
+      if (!revisions.has(submissionStatus)) loadSavedSubmission();
       renderPreview();
       renderSubmissionPreview();
     } catch {

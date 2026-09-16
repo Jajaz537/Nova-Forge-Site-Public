@@ -12,6 +12,8 @@
     "submission: newer-import preserves correct draft",
     "submission: invalid-json preserves correct draft",
     "collection: extra properties and non-string IDs refused without replacing draft",
-    "submission: extra properties and non-string IDs refused without replacing draft"
+    "submission: extra properties and non-string IDs refused without replacing draft",
+    "collection: delayed catalog preserves editing while untouched form restores",
+    "submission: delayed catalog preserves editing while untouched form restores"
   ]
 }
