@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nova-site-shell-v103-modaryx-cinematic';
+const CACHE_NAME = 'nova-site-shell-v104-modaryx-cinematic';
 const BASE_URL = new URL('./', self.location.href);
 const PUBLIC_PAGE_PATHS = [
   './',
