@@ -1,6 +1,12 @@
 # MODARYX — prochain bloc et conditions de clôture
 
-Actualisé le 15 septembre 2026 après `5d0f3de054d17b03b4795a1cd9168bf3d92c55f0`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
+Actualisé le 16 septembre 2026 après `82d958f99fe9eed064602fec45163173a6045580`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
+
+## Validation source consolidée
+
+26 scripts exécutés, tous à code 0 : `qa/source-consolidated-20260916.json`. Les 16 routes HTTPS présentent un titre, un h1 et un main uniques, sans débordement horizontal à la largeur desktop observée : `qa/routes-consolidated-20260916.json`. Cette observation DOM ne recertifie pas tous les états visuels ou asynchrones. Ne pas relancer ces contrôles inchangés.
+
+Import natif : sélection de fichier refusée par le contrôle d’autorisation ; ne pas réessayer sans nouvelle autorisation effectivement accordée. Les courses d’import restent prouvées par simulation uniquement.
 
 ## Acquis à conserver
 

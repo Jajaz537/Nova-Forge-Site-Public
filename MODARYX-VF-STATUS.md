@@ -444,3 +444,11 @@ Les fichiers ne sont pas nettoyés silencieusement : l’import est refusé avec
 Le contrôle de cache mesurait les poids sans échouer sur dépassement. `qa/performance-limits.mjs` formalise les seuils déjà retenus (800000/70000/30000 octets) ; `qa/check-cache.mjs` sort maintenant en erreur en cas de dépassement, mesure invalide ou inventaire vide. Dix contrôles synthétiques de limites réussis ; 34 évaluations sur le site actuel et 25 assertions cache réussies. Précache 799211, CSS max 69802, JS max 29002.
 
 Aucun runtime, asset, cache versionné ni workflow de déploiement modifié ; la porte est exécutée par le script, pas revendiquée comme contrôle GitHub obligatoire. Pas de preuve CWV ajoutée. VF NON VALIDÉE.
+
+## Consolidation source et routes — 16 septembre 2026
+
+Référence `82d958f99fe9eed064602fec45163173a6045580`. Les 26 scripts check-* ont été exécutés avec arrêt prévu au premier échec : tous terminent à code 0, sans correction supplémentaire. Résultats complets dans `qa/source-consolidated-20260916.json`. Les rapports générés sont identiques au Git sauf l’horodatage du rapport cache.
+
+Chrome HTTPS : 16 routes ouvertes, chacune avec titre, h1 et main uniques ; aucun débordement horizontal aux largeurs desktop observées (1348/1363 px). `qa/routes-consolidated-20260916.json`. Ce ne sont pas 16 nouveaux audits visuels ni une validation de tous les chargements asynchrones. Les 30 erreurs consultées provenaient d’une extension de navigateur, pas de source MODARYX ; aucun PASS global console déduit de cet échantillon.
+
+Aucun runtime/infrastructure modifié. Les imports natifs restent bloqués par autorisation, les autres limites externes et capacités produit absentes restent ouvertes. VF NON VALIDÉE.
