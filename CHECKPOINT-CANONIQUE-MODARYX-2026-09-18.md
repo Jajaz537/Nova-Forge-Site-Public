@@ -108,3 +108,43 @@ Aucune de ces capacités n’est déclarée réalisée par un schéma, un contra
 2. Fermer les preuves externes dès qu’un environnement réel les rend possibles.
 3. Pour toute capacité produit retenue non livrée, n’ouvrir un lot de développement que lorsque ses données, droits, services ou décisions nécessaires existent réellement.
 4. Conserver PR #12 en brouillon ; aucune fusion `main`, production ou infrastructure critique sans décision séparée.
+
+
+## Mise à jour canonique — corpus hubs et limites externes
+
+Preuve Git fraîche avant cette mise à jour documentaire :
+
+- HEAD de branche vérifié : `85ebbbd9685cdaf3366448f25d16ab9106a10285`.
+- PR #12 : ouverte, brouillon, fusionnable, non fusionnée.
+- Preview immuable confirmée par Cloudflare Pages pour ce HEAD : `https://b1b14bc9.nova-forge-site-public.pages.dev`.
+- Le lot précédent `39903d56e8171303e861536be997e775cf2aece4` reste le dernier changement de surface publique : canonical explicite de `/games/`, générateur synchronisé, manifeste PWA minifié sans changement sémantique, empreintes mises à jour.
+- Le commit `85ebbbd9685cdaf3366448f25d16ab9106a10285` ajoute uniquement le corpus éditorial préparatoire `qa/GAME-HUBS-EDITORIAL-RESEARCH-20260918.md`.
+- Aucun hub GTA VI/RDR2 n’est publié par ce lot, aucun asset tiers n’est ajouté et aucune compatibilité/mod disponible n’est inventée.
+
+### État produit retenu
+
+- Surface publique actuelle : **CANDIDAT VF — PREUVES EXTERNES RESTANTES**.
+- Hubs GTA VI/RDR2 : corpus factuel initial préparé à partir de sources officielles ; droits médias, décision de catégories/profondeur éditoriale et catalogue réel restent **PREUVE MANQUANTE**.
+- Comptes/profils réels, publication/modération distante, Storage Resolver / Repair Network, distribution réelle et Guide/pont OS restent **développement produit non livré** faute de services, données, droits ou décisions nécessaires.
+- Master Nova Design Intelligence complète : **NON RÉCUPÉRÉE / PREUVE MANQUANTE**.
+- Vie privée locale : documentée sur la surface actuelle.
+- Identité d’éditeur, contact public, contact sécurité, mentions légales et `security.txt` : **PREUVE MANQUANTE** ; ne rien inventer.
+- Historique Git complet des secrets : **PREUVE MANQUANTE** dans l’environnement actuel.
+- SEO : canonical `/games/` fermé ; présence de `/games/` dans `sitemap.xml` reste tracée mais le fichier est protégé par le harnais et n’a pas été modifié sans stratégie dédiée.
+
+### Preuves externes toujours requises
+
+- lecteur d’écran natif ;
+- zoom/reflow natif 200 % et 400 % ;
+- Firefox réel ;
+- Safari réel ;
+- appareils physiques ;
+- cycle PWA offline/update réel ;
+- Core Web Vitals représentatifs ;
+- import/export avec vrais fichiers reçus.
+
+Chromium/Playwright est présent dans l’environnement courant, mais l’accès réseau à la preview Cloudflare est bloqué par la politique d’exécution ; aucune preuve navigateur externe supplémentaire n’est donc revendiquée.
+
+### Prochain point logique
+
+Ne pas relancer les audits déjà verts. Continuer uniquement si une nouvelle capacité externe devient disponible, si une donnée produit réelle arrive, ou si un défaut précis est isolé. Conserver PR #12 en brouillon et ne pas toucher à `main`, production, DNS, DNSSEC, IONOS, SSL ou paramètres Cloudflare critiques sans décision séparée.
