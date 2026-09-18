@@ -345,3 +345,96 @@ Statut :
 - action checkout mutable : **CORRIGÉE** ;
 - secret Cloudflare sur probe automatique : **SUPPRIMÉ DU CHEMIN PUSH**.
 
+## Mise à jour canonique — durcissement sécurité final
+
+Preuves reçues et fermées le 18 septembre 2026.
+
+### Cloudflare
+
+État confirmé par contrôle externe :
+- Full (strict) ciblé sur `modaryxmods.com` : **TERMINÉ / PASS** ;
+- mode SSL global : **Full**, conservé volontairement ;
+- Automatic SSL/TLS : actif ;
+- Always Use HTTPS : **ON** ;
+- minimum TLS : **1.2** ;
+- TLS 1.3 : **ON** ;
+- 0-RTT : **OFF** ;
+- HSTS observé : `max-age=31536000` ;
+- HTTPS : 200 sur racine, catalogue, sécurité, CSS, JS et image ;
+- aucune erreur 521, 522, 525 ou 526 ;
+- DNSSEC : actif et inchangé ;
+- mail / IONOS / nameservers : inchangés.
+
+DDoS :
+- Cloudflare documente la protection DDoS autonome comme disponible sur tous les plans et les rulesets DDoS comme activés par défaut sur les zones onboardées ;
+- statut opérationnel : **TERMINÉ — protection fournisseur automatique**.
+
+WAF :
+- l'interface inspectée a présenté le Cloudflare Managed Ruleset payant comme indisponible ;
+- la documentation Cloudflare confirme toutefois que le **Free Managed Ruleset** est disponible sur Free et déployé par défaut ;
+- état spécifique de la zone non observé explicitement dans le dashboard : **PREUVE MANQUANTE COMPTE**.
+
+Browser Integrity Check :
+- Cloudflare le documente comme activé par défaut ;
+- état spécifique de la zone non observé explicitement : **PREUVE MANQUANTE COMPTE**.
+
+Bot Fight Mode :
+- disponible sur le plan Free ;
+- non confirmé actif : **PREUVE MANQUANTE / NON ACTIVÉ**.
+
+Token API Cloudflare :
+- aucun changement réalisé ;
+- moindre privilège exact : **PREUVE MANQUANTE**.
+
+### GitHub
+
+Durcissement CI/CD :
+- PR #13 fusionnée sur `main` au commit `7cc2368e7c72d775bd6d4a9fc64da0dd641b96fd` ;
+- déclenchements Cloudflare mutatifs automatiques supprimés ;
+- probe secret rendu manuel ;
+- `actions/checkout` épinglé à un SHA complet vérifié.
+
+CodeQL / supply chain :
+- PR #14 fusionnée sur `main` au commit `a22a22e5590fe8aa88fc66bc8161470853ec2c15` ;
+- CodeQL JavaScript/TypeScript avec `security-extended` ;
+- run PR #14 `35383368739` : **SUCCESS** ;
+- `actions/checkout@v6` épinglé à `d23441a48e516b6c34aea4fa41551a30e30af803` ;
+- `github/codeql-action@v4` épinglé à `1c5b675653bb5c22dbe9b12b556ec555138e09fd` ;
+- Dependabot hebdomadaire pour GitHub Actions ajouté.
+
+Secret scanning :
+- dépôt public ;
+- GitHub documente Secret Scanning comme automatique et gratuit sur les dépôts publics ;
+- recherche ciblée sur `main` pour signatures de secrets haute confiance : aucun résultat pour AWS AKIA, GitHub PAT, clés privées, Stripe live, Google API ;
+- nombre exact d'alertes Secret Scanning non lisible via le connecteur : **PREUVE MANQUANTE**.
+
+Réglages administratifs GitHub restant non prouvés :
+- protection `main` / force-push / suppression ;
+- Actions default permissions au niveau Settings ;
+- politique obligatoire de pin SHA ;
+- repository Push Protection ;
+- état exact des alertes Dependabot ;
+- private vulnerability reporting.
+
+Le connecteur GitHub disponible peut lire/écrire le contenu et les PR, mais n'expose pas les écritures d'administration nécessaires à ces réglages. Aucun état non observé n'est inventé.
+
+### Conclusion sécurité
+
+La surface livrée dispose maintenant de :
+- DNSSEC ;
+- HTTPS forcé ;
+- Full (strict) ciblé et prouvé ;
+- TLS 1.2 minimum + TLS 1.3 ;
+- 0-RTT désactivé ;
+- HSTS ;
+- protection DDoS Cloudflare automatique ;
+- CI/CD Cloudflare non mutatif sur simple push ;
+- actions critiques épinglées par SHA ;
+- CodeQL `security-extended` actif ;
+- Dependabot GitHub Actions configuré ;
+- Secret Scanning fournisseur actif sur le dépôt public.
+
+Statut global : **EN COURS — durcissement maximal compatible largement fermé, quelques réglages compte/admin restent PREUVE MANQUANTE**.
+
+Les manques restants ne justifient aucune modification DNS/IONOS ni régression de configuration déjà verte.
+
