@@ -312,3 +312,36 @@ Ce 404 est donc séparé du PASS TLS et cohérent avec l'état de livraison actu
 
 Preuve : `qa/FULL-STRICT-APEX-PROOF-20260918.md`.
 
+## Mise à jour canonique — durcissement CI/CD appliqué
+
+Autorisation explicite de durcissement sécurité reçue le 18 septembre 2026.
+
+Lot sécurité séparé créé depuis `main`, PR #13 :
+`Security: harden MODARYX Cloudflare workflows`.
+
+La PR #13 a été fusionnée sur `main` au commit :
+`7cc2368e7c72d775bd6d4a9fc64da0dd641b96fd`.
+
+Changements effectifs :
+- `actions/checkout` du workflow cutover épinglé au SHA officiel vérifié `11d5960a326750d5838078e36cf38b85af677262` ;
+- suppression du déclenchement `push` automatique du workflow Cloudflare cutover mutatif ;
+- workflow HTTP/3 converti en `workflow_dispatch` manuel avec `status` non mutatif par défaut et `disable` explicite ;
+- diagnostic probe converti en `workflow_dispatch` manuel afin que le secret Cloudflare ne soit plus exercé automatiquement sur simple push ;
+- `permissions: contents: read` conservé ;
+- aucune mutation DNS, DNSSEC, SSL, Pages, IONOS, mail ou valeur de secret pendant ce lot.
+
+Micro-preuve avant fusion :
+- diff borné à 3 workflows ;
+- aucun déclencheur `push` restant dans ces trois workflows ;
+- pin SHA checkout officiel vérifié ;
+- aucun workflow Cloudflare exécuté pendant la validation ;
+- PR #13 fusionnable, sans review bloquante.
+
+La branche candidate MODARYX reprend ces fichiers depuis le nouveau `main` par merge contrôlé, sans écraser le travail produit.
+
+Statut :
+- durcissement CI/CD protégé : **TERMINÉ** ;
+- déclenchements mutatifs automatiques Cloudflare : **SUPPRIMÉS** ;
+- action checkout mutable : **CORRIGÉE** ;
+- secret Cloudflare sur probe automatique : **SUPPRIMÉ DU CHEMIN PUSH**.
+

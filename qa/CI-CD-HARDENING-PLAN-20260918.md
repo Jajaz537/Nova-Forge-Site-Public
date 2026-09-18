@@ -1,6 +1,6 @@
 # MODARYX — plan de durcissement CI/CD protégé — 18 septembre 2026
 
-Statut : **PLAN PRÊT — NON APPLIQUÉ**.
+Statut : **APPLIQUÉ SUR `main` — PR #13 / `7cc2368e7c72d775bd6d4a9fc64da0dd641b96fd`**.
 
 Ce document ferme l’analyse des trois constats CI/CD classés MOYENNE sans modifier les workflows protégés, `main`, Cloudflare, DNS, SSL, IONOS ou la production.
 
@@ -174,5 +174,6 @@ Ne pas déclarer CI/CD durci tant que :
 
 - analyse des trois constats : **TERMINÉE** ;
 - plan de correction : **TERMINÉ** ;
-- application du correctif aux workflows protégés : **BLOQUÉE / AUTORISATION EXPLICITE REQUISE** ;
-- preuve après modification : **PREUVE MANQUANTE**.
+- application du correctif aux workflows protégés : **TERMINÉE** via PR #13 ;
+- preuve après modification : **TERMINÉE** sur le périmètre statique/non mutatif ;
+- exécution Cloudflare mutative pendant la validation : **NON**.
