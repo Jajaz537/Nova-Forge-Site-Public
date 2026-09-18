@@ -271,3 +271,44 @@ Statut :
 
 Ne pas généraliser ce blocage au hostname principal : le canari Pages a déjà démontré la compatibilité Full (strict) sur la même origine Cloudflare Pages.
 
+## Mise à jour canonique — Full (strict) ciblé sur l'apex
+
+Preuve externe reçue le 18 septembre 2026 après le blocage volontaire de la bascule globale :
+
+- règle créée : oui ;
+- expression exacte : `(http.host eq "modaryxmods.com")` ;
+- Cloudflare Trace apex : **Matched** ;
+- statut HTTP apex : **200 OK** ;
+- aucune erreur 521, 522, 525 ou 526 ;
+- `_domainconnect.modaryxmods.com` ne matche pas la règle ;
+- mode SSL global conservé sur **Full** ;
+- Automatic SSL/TLS reste actif ;
+- DNS, DNSSEC, nameservers, IONOS et mail inchangés ;
+- aucun rollback nécessaire.
+
+Contrôles HTTPS verts :
+- `/`
+- `/catalog.html`
+- `/security.html`
+- CSS
+- JavaScript
+- image
+
+Conclusion bornée :
+
+**PASS — `modaryxmods.com` utilise Full (strict) via Configuration Rule ciblée.**
+
+Le mode global reste volontairement **Full** afin de ne pas embarquer `_domainconnect.modaryxmods.com`, origine IONOS distincte.
+
+### Observation séparée : `/games/`
+
+Le contrôle externe de `/games/` retourne actuellement la page 404 MODARYX normale, sans erreur TLS.
+
+Isolation Git fraîche :
+- `games/index.html` existe sur la branche candidate ;
+- `games/index.html` est absent du `main` actuel `026b401328487db9382be67be194c5454ef958e6`.
+
+Ce 404 est donc séparé du PASS TLS et cohérent avec l'état de livraison actuel. Ne pas le traiter comme une régression Full (strict).
+
+Preuve : `qa/FULL-STRICT-APEX-PROOF-20260918.md`.
+
