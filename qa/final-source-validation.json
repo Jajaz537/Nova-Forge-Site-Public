@@ -1,14 +1,14 @@
 {
-  "executedAt": "2026-09-18T12:14:41.037900+00:00",
+  "executedAt": "2026-09-18T12:23:43.455177+00:00",
   "scope": "All current check-* source scripts; browser, physical-device and external-service claims excluded",
-  "scripts": 31,
-  "passed": 31,
+  "scripts": 32,
+  "passed": 32,
   "failed": [],
   "results": [
     {
       "script": "qa/check-cache.mjs",
       "exitCode": 0,
-      "stdout": "{\n  \"assertions\": 34,\n  \"failed\": [],\n  \"precache\": {\n    \"requests\": 77,\n    \"uniqueLocalFiles\": 76,\n    \"missing\": [],\n    \"files\": 76,\n    \"rawBytes\": 799921,\n    \"gzipEstimateBytes\": 506239\n  },\n  \"budgetFailures\": [],\n  \"protectedChanges\": []\n}\n",
+      "stdout": "{\n  \"assertions\": 35,\n  \"failed\": [],\n  \"precache\": {\n    \"requests\": 77,\n    \"uniqueLocalFiles\": 76,\n    \"missing\": [],\n    \"files\": 76,\n    \"rawBytes\": 799909,\n    \"gzipEstimateBytes\": 506234\n  },\n  \"budgetFailures\": [],\n  \"protectedChanges\": []\n}\n",
       "stderr": ""
     },
     {
@@ -102,6 +102,12 @@
       "stderr": ""
     },
     {
+      "script": "qa/check-preview-server.mjs",
+      "exitCode": 0,
+      "stdout": "Preview server: 4 targeted checks passed\n",
+      "stderr": ""
+    },
+    {
       "script": "qa/check-profile-detection.cjs",
       "exitCode": 0,
       "stdout": "{\n  \"scope\": \"Node VM simulated API outcomes, not native passkey verification\",\n  \"checks\": [\n    \"Absent WebAuthn remains unavailable\",\n    \"Resolved capabilities true retain their real result\",\n    \"Resolved capabilities false retain their real result\",\n    \"Missing method remains partial: isUserVerifyingPlatformAuthenticatorAvailable\",\n    \"Rejected method remains unknown: isUserVerifyingPlatformAuthenticatorAvailable\",\n    \"Missing method remains partial: isConditionalMediationAvailable\",\n    \"Rejected method remains unknown: isConditionalMediationAvailable\"\n  ]\n}\n",
@@ -122,7 +128,7 @@
     {
       "script": "qa/check-public-metadata.cjs",
       "exitCode": 0,
-      "stdout": "{\n  \"status\": \"PASS\",\n  \"scope\": \"targeted Node VM consumer checks\",\n  \"checks\": [\n    \"Offline status/build visibly unqualified; old availability and digest are not presented as current.\",\n    \"Fresh metadata remains a declaration, not cryptographic verification; optional bridge copy is separate.\",\n    \"Unavailable status and missing build digest display explicit uncertainty.\",\n    \"Even a formerly available offline manifest cannot enable downloads.\",\n    \"Fresh conforming publication manifest enables links with explicit verification limits.\",\n    \"Non-local download paths still fail closed.\"\n  ]\n}\n",
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"scope\": \"targeted Node VM consumer checks\",\n  \"checks\": [\n    \"PWA metadata identifies MODARYX as the web platform without reviving the obsolete Modaryx OS product name.\",\n    \"Offline status/build visibly unqualified; old availability and digest are not presented as current.\",\n    \"Fresh metadata remains a declaration, not cryptographic verification; optional bridge copy is separate.\",\n    \"Unavailable status and missing build digest display explicit uncertainty.\",\n    \"Even a formerly available offline manifest cannot enable downloads.\",\n    \"Fresh conforming publication manifest enables links with explicit verification limits.\",\n    \"Non-local download paths still fail closed.\"\n  ]\n}\n",
       "stderr": ""
     },
     {
