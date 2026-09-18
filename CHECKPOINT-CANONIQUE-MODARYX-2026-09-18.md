@@ -438,3 +438,63 @@ Statut global : **EN COURS — durcissement maximal compatible largement fermé,
 
 Les manques restants ne justifient aucune modification DNS/IONOS ni régression de configuration déjà verte.
 
+## Mise à jour canonique — fermeture sécurité compte
+
+Preuve externe reçue le 18 septembre 2026.
+
+### Cloudflare
+
+Confirmé :
+- Full (strict) apex : **ACTIF** ;
+- Always Use HTTPS : **ACTIF** ;
+- TLS minimum : **1.2** ;
+- TLS 1.3 : **ACTIF** ;
+- 0-RTT : **DÉSACTIVÉ** ;
+- HSTS : **ACTIF — 31 536 000 secondes** ;
+- Free Managed Ruleset : **ACTIF** ;
+- Browser Integrity Check : **ACTIF** ;
+- Bot Fight Mode : **ACTIF** ;
+- DDoS : **ACTIF** ;
+- token API least privilege : **VALIDÉ** ;
+- MFA : **ACTION UTILISATEUR REQUISE — inactive**.
+
+### GitHub
+
+Confirmé :
+- protection `main` : **ACTIVE** ;
+- PR obligatoire : **OUI** ;
+- force-push : **BLOQUÉ** ;
+- suppression `main` : **BLOQUÉE** ;
+- Actions default permissions : **LECTURE SEULE** ;
+- Actions create/approve PR : **DÉSACTIVÉ** ;
+- full-SHA policy : **ACTIVE** ;
+- Secret Scanning : **ACTIF** ;
+- Push Protection : **ACTIF** ;
+- alertes secrets ouvertes : **0** ;
+- Dependency graph : **ACTIF** ;
+- Dependabot alerts : **ACTIF** ;
+- Dependabot security updates : **ACTIF** ;
+- alertes Dependabot ouvertes : **0** ;
+- CodeQL : **ACTIF — fonctionnement normal** ;
+- alertes CodeQL ouvertes : **0** ;
+- Private Vulnerability Reporting : **ACTIF** ;
+- MFA : **ACTION UTILISATEUR REQUISE — inactive**.
+
+### Validation
+
+- HTTPS : **OK** ;
+- 521/522/525/526 : **ABSENTES** ;
+- DNSSEC : **INCHANGÉ / ACTIF** ;
+- DNS/nameservers : **INCHANGÉS** ;
+- mail/IONOS : **INCHANGÉS** ;
+- PR #12 : **ouverte, brouillon, non fusionnée** ;
+- rollback : **NON**.
+
+### Conclusion
+
+**BLOQUÉ UNIQUEMENT SUR ACTION UTILISATEUR — MFA GitHub + MFA Cloudflare.**
+
+Toutes les autres protections ciblées sont configurées et les catégories d'alertes GitHub relevées affichent **0 alerte ouverte**.
+
+Ne pas déclarer `SÉCURITÉ MAXIMALE COMPATIBLE — TERMINÉ` tant que les deux MFA ne sont pas activées et vérifiées.
+
