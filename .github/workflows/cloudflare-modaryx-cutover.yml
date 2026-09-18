@@ -13,10 +13,6 @@ on:
           - attach-pages
           - repair-apex-pages
           - enable-dnssec
-  push:
-    branches: [main]
-    paths:
-      - '.github/cloudflare-control.json'
 
 permissions:
   contents: read
@@ -40,7 +36,7 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
       - name: Checkout control state
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
           fetch-depth: 1
@@ -50,11 +46,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            mode="${{ inputs.mode }}"
-          else
-            mode="$(jq -r '.mode' .github/cloudflare-control.json)"
-          fi
+          mode="${{ inputs.mode }}"
           case "$mode" in
             status|attach-pages|repair-apex-pages|enable-dnssec) ;;
             *) echo "Unsupported mode: $mode"; exit 1 ;;

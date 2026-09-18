@@ -1,42 +1,75 @@
-name: Cloudflare MODARYX disable HTTP3
+name: Cloudflare MODARYX HTTP3 control
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/cloudflare-http3-off.json'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: HTTP/3 control action
+        required: true
+        default: status
+        type: choice
+        options:
+          - status
+          - disable
 
 permissions:
   contents: read
 
 concurrency:
-  group: modaryx-cloudflare-http3-off
-  cancel-in-progress: true
+  group: modaryx-cloudflare-http3-control
+  cancel-in-progress: false
 
 env:
   CLOUDFLARE_ZONE_NAME: modaryxmods.com
 
 jobs:
-  disable-http3:
+  http3-control:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
-      - name: Disable HTTP3 only for MODARYX
+      - name: Read or disable HTTP3 only for MODARYX
         shell: bash
         run: |
           set -euo pipefail
+          mode="${{ inputs.mode }}"
+          case "$mode" in
+            status|disable) ;;
+            *) echo "Unsupported mode: $mode"; exit 1 ;;
+          esac
+
+          if [ -z "${CLOUDFLARE_API_TOKEN:-}" ]; then
+            echo "Missing repository secret CLOUDFLARE_API_TOKEN"
+            exit 1
+          fi
+
           api="https://api.cloudflare.com/client/v4"
           auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
 
-          zones="$(curl -sS "${auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}")"
+          verify_json="$(curl -fsS "${auth[@]}" "${api}/user/tokens/verify")"
+          test "$(jq -r '.success' <<<"$verify_json")" = "true"
+          test "$(jq -r '.result.status' <<<"$verify_json")" = "active"
+
+          zones="$(curl -fsS "${auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}")"
           test "$(jq -r '.success' <<<"$zones")" = "true"
+          test "$(jq '.result | length' <<<"$zones")" -eq 1
           zone_id="$(jq -r '.result[0].id' <<<"$zones")"
           test -n "$zone_id"
           test "$zone_id" != "null"
 
-          response="$(curl -sS -X PATCH "${auth[@]}" \
+          current="$(curl -fsS "${auth[@]}" "${api}/zones/${zone_id}/settings/http3")"
+          test "$(jq -r '.success' <<<"$current")" = "true"
+          echo "HTTP3_CURRENT=$(jq -r '.result.value' <<<"$current")"
+
+          if [ "$mode" = "status" ]; then
+            echo "HTTP3_MUTATION=no"
+            echo "DNSSEC_NOT_CHANGED=yes"
+            echo "OLD_DOMAIN_UNTOUCHED=getnovaforge.com"
+            exit 0
+          fi
+
+          response="$(curl -fsS -X PATCH "${auth[@]}" \
             --data '{"value":"off"}' \
             "${api}/zones/${zone_id}/settings/http3")"
 
@@ -47,7 +80,7 @@ jobs:
           test "$(jq -r '.result.value' <<<"$response")" = "off"
 
           echo "HTTPS_AFTER_CHANGE"
-          curl -sSIL --max-time 20 "https://${CLOUDFLARE_ZONE_NAME}/" | sed -n '1,12p'
+          curl -fsSIL --max-time 20 "https://${CLOUDFLARE_ZONE_NAME}/" | sed -n '1,12p'
 
           echo "HTTP3_DISABLED=yes"
           echo "DNSSEC_NOT_CHANGED=yes"
