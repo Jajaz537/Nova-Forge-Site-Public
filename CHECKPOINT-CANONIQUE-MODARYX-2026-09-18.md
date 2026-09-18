@@ -212,3 +212,13 @@ La checklist `qa/FINAL-MANUAL-CHECKLIST.md` inclut désormais, en plus des preuv
 
 Cette mise à jour est documentaire. Elle ne transforme aucun manque en PASS et ne modifie aucun runtime, workflow protégé, `main`, production ou infrastructure critique.
 
+## Mise à jour canonique — garde anti-reprise obsolète
+
+Les documents historiques suivants portent désormais un bandeau explicite de priorité canonique :
+
+- `MODARYX-VF-STATUS.md`
+- `MODARYX-NEXT-BATCH.md`
+- `VF-TECHNICALLY-MAXIMAL-CANDIDATE.md`
+
+Leur historique et leurs preuves par SHA sont conservés, mais leurs anciennes valeurs de HEAD, métriques ou « prochain bloc » ne doivent plus être interprétées comme l’état opérationnel courant. Toute reprise doit partir du présent CHECKPOINT-CANONIQUE puis d’une vérification Git fraîche.
+

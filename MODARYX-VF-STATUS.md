@@ -1,5 +1,8 @@
 # MODARYX Premium HD — état du candidat
 
+> **SOURCE DE VÉRITÉ OPÉRATIONNELLE :** ce document conserve des preuves et états historiques attachés à leurs SHA d’origine. Il ne doit pas être utilisé seul pour déterminer le HEAD, le statut VF ou le prochain point actuel. Relire d’abord `CHECKPOINT-CANONIQUE-MODARYX-2026-09-18.md` et vérifier le HEAD Git frais avant toute écriture. Les valeurs historiques ci-dessous ne sont pas réattribuées au candidat courant.
+
+
 **VF TECHNICALLY MAXIMAL CANDIDATE — aucune VF officielle annoncée.**
 
 Périmètre : MODARYX / MODARYX MODS, plateforme web. Nova Forge OS est un produit distinct. PR #12, branche `design/modaryx-premium-hd-20260914-work`. Base de reprise `9084686f02af0a9b4c8d1ab879e0c8d66915caec`.

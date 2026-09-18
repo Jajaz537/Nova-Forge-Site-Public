@@ -1,5 +1,8 @@
 # MODARYX — VF TECHNICALLY MAXIMAL CANDIDATE
 
+> **SOURCE DE VÉRITÉ OPÉRATIONNELLE :** ce document conserve des preuves et états historiques attachés à leurs SHA d’origine. Il ne doit pas être utilisé seul pour déterminer le HEAD, le statut VF ou le prochain point actuel. Relire d’abord `CHECKPOINT-CANONIQUE-MODARYX-2026-09-18.md` et vérifier le HEAD Git frais avant toute écriture. Les valeurs historiques ci-dessous ne sont pas réattribuées au candidat courant.
+
+
 Date de consolidation : 16 septembre 2026  
 Branche : `design/modaryx-premium-hd-20260914-work`  
 PR : [#12](https://github.com/Jajaz537/Nova-Forge-Site-Public/pull/12) — brouillon  

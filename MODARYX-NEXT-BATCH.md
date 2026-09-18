@@ -1,5 +1,8 @@
 # MODARYX — prochain bloc et conditions de clôture
 
+> **SOURCE DE VÉRITÉ OPÉRATIONNELLE :** ce document conserve des preuves et états historiques attachés à leurs SHA d’origine. Il ne doit pas être utilisé seul pour déterminer le HEAD, le statut VF ou le prochain point actuel. Relire d’abord `CHECKPOINT-CANONIQUE-MODARYX-2026-09-18.md` et vérifier le HEAD Git frais avant toute écriture. Les valeurs historiques ci-dessous ne sont pas réattribuées au candidat courant.
+
+
 Actualisé le 16 septembre 2026 après `fae489a72465e140849e89b4c1b1944f9a7838f1`. PR #12, branche `design/modaryx-premium-hd-20260914-work`, brouillon. Relire le checkpoint canonique et le HEAD réel avant toute écriture.
 
 ## Validation source consolidée
