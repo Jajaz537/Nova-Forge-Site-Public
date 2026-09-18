@@ -6,14 +6,14 @@ Ce document remplace les états Git plus anciens pour la reprise du chantier web
 
 - Dépôt : `Jajaz537/Nova-Forge-Site-Public`
 - Branche distante de la PR #12 : `design/modaryx-premium-hd-20260914-work`
-- HEAD distant vérifié : `7454e13a80e78c6680b1499ee115bdd697ec2e0a`
+- HEAD distant avant mise à jour documentaire de ce checkpoint : `18ee360ef371d1ee30a1699f51d7b25c473ac41a`
 - Worktree isolé : branche locale `security/modaryx-vf-gate-20260918`
 - HEAD local avant le commit de ce checkpoint : `082f503`
-- État avant checkpoint : propre ; branche locale en avance de 6 commits sur le HEAD distant
-- Push : **BLOQUÉ** — Git HTTPS ne dispose d’aucun identifiant dans cet environnement (`could not read Username for 'https://github.com'`)
+- Authentification : le push Git HTTPS direct reste indisponible, mais le connecteur GitHub Work authentifié a publié la chaîne en fast-forward, sans force-push.
+- Intégrité : le tree distant du candidat `0e3acc1` correspond exactement au tree local attendu `a5599e7d66f61e8dccaf029ed7acde37fd6a409c`.
 - Le worktree historique `modaryx-finishline` est divergent et sale ; il n’a pas été modifié.
 
-Commits locaux à conserver, dans l’ordre :
+Commits d’origine conservés sémantiquement dans la chaîne distante :
 
 1. `3144468` — `Add MODARYX static security gate`
 2. `12a954f` — `Reconcile MODARYX PWA product identity`
@@ -21,6 +21,9 @@ Commits locaux à conserver, dans l’ordre :
 4. `bbcc9b3` — `Record the current MODARYX branch preview audit`
 5. `105e2e1` — `Map the MODARYX static security gate to ASVS`
 6. `082f503` — `Ignore generated Python bytecode`
+7. `39a3bd1` — `Checkpoint the MODARYX VF security lane`
+
+L’API GitHub a initialement omis trois fichiers du deuxième commit. Un commit fast-forward correctif, `0e3acc1`, a rétabli les fichiers manquants ; le contrôle de tree final est PASS. Le commit documentaire `18ee360` ajoute uniquement `qa/post-deploy-proof-20260918.json`.
 
 ## TERMINÉ avec preuve locale
 
@@ -32,22 +35,23 @@ Commits locaux à conserver, dans l’ordre :
 - Preview de branche inspecté dans Chromium : 17/17 routes avec un `h1`, un `main`, un footer, aucune image cassée, aucun lien vide anonyme et aucun débordement horizontal au viewport contrôlé.
 - Premiers écrans inspectés : accueil Loup/Dragon, Catalogue, Creator Studio, Communauté, Écosystème et Sécurité. Direction graphite/or/bleu cohérente observée.
 - Preuve structurée : `qa/preview-visual-structure-20260918.json`.
+- Déploiement fonctionnel prouvé : commit `0e3acc1`, URL immuable `https://747e35ca.nova-forge-site-public.pages.dev`.
+- Micro-preuves post-déploiement : menu partagé/source identique, identité PWA PASS, serveur local 4/4, structure 17/17, gate sécurité PASS, 35 assertions PWA source PASS.
+- Preuve post-déploiement : `qa/post-deploy-proof-20260918.json`.
 
 ## EN COURS
 
-- Candidat VF de la PR #12 : les six commits locaux ci-dessus ne sont pas encore sur la branche distante.
-- Réconciliation finale des preuves : la source statique est consolidée, mais les validations natives externes restent ouvertes.
+- Candidat VF de la PR #12 : branche distante mise à jour et déploiements Pages réussis ; la PR reste brouillon et n’est pas fusionnée.
+- Réconciliation finale des preuves : la source statique et le déploiement affecté sont consolidés, mais les validations natives externes restent ouvertes.
 - Durcissement CI/CD : trois constats MOYENNE documentés (`actions/checkout@v4`, cutover mutatif possible sur push, workflow HTTP/3-off sur push). Les workflows sont protégés par le harnais et n’ont pas été modifiés sans stratégie dédiée.
 
 ## BLOQUÉ
 
-- Push GitHub des commits locaux : authentification Git absente.
 - Paramètres du compte Cloudflare : vérification humaine du navigateur Work.
 - Infrastructure gelée : aucun changement SSL global, DNS, DNSSEC, nameserver, IONOS, email ou Cloudflare critique.
 
 ## PREUVE MANQUANTE
 
-- SHA réellement déployé derrière l’alias de preview : aucun marqueur public ne relie le contenu à un commit Git.
 - Lecteur d’écran natif, zoom natif 200/400 %, Firefox/Safari réels, appareils physiques.
 - Cycle PWA réellement hors ligne et mise à jour après nouvelle publication.
 - Core Web Vitals représentatifs ; Navigation Timing n’est pas utilisé comme substitut.
@@ -58,9 +62,11 @@ Commits locaux à conserver, dans l’ordre :
 ## Environnements
 
 - Preview Loup/Dragon observé : `https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/`
+- Preview immuable fonctionnel `0e3acc1` : `https://747e35ca.nova-forge-site-public.pages.dev`
+- Preview immuable de la preuve documentaire `18ee360` : `https://bd807b62.nova-forge-site-public.pages.dev`
 - Production : `https://modaryxmods.com/` ; elle affiche encore une présentation antérieure et n’est pas déclarée alignée sur le candidat.
 - Aucune promotion, fusion de `main` ou modification d’infrastructure effectuée.
 
 ## Prochain point exact
 
-Une fois l’authentification Git disponible, re-vérifier que la branche distante vaut toujours `7454e13`, puis pousser la chaîne locale sur `design/modaryx-premium-hd-20260914-work`. Attendre le déploiement Cloudflare Pages, relever l’URL immuable si disponible, vérifier le marqueur de révision ou comparer un manifeste de build, puis rejouer uniquement les contrôles affectés : menu partagé, manifeste PWA, `npm run dev`, structure des 17 routes et gate sécurité. Ne pas relancer les validations externes déjà classées impossibles dans cet environnement.
+Fermer uniquement les preuves externes lorsqu’un environnement adapté devient réellement disponible : lecteur d’écran natif, zoom 200/400 %, Firefox/Safari, appareils physiques, cycle PWA offline/update et mesures LCP/CLS/INP représentatives. Ne pas relancer les preuves autonomes déjà vertes et ne pas substituer une simulation à ces validations.
