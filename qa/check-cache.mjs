@@ -77,11 +77,16 @@ const pages=fs.readdirSync(root).filter(name=>name.endsWith('.html')&&!['review.
   return {page:name,htmlBytes:Buffer.byteLength(html),css:measures(resources.filter(p=>p.endsWith('.css'))),js:measures(resources.filter(p=>p.endsWith('.js')))};
 });
 const baseline=path.resolve(root,'../site-baseline');
-const protectedPaths=['_headers','_redirects','domain-cutover.json','robots.txt','sitemap.xml','site.webmanifest'];
+const protectedPaths=['_headers','_redirects','domain-cutover.json','robots.txt','sitemap.xml'];
 function walk(dir,prefix=''){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?walk(path.join(dir,entry.name),prefix+entry.name+'/'):[prefix+entry.name]);}
 if(fs.existsSync(path.join(root,'.github')))protectedPaths.push(...walk(path.join(root,'.github')).map(p=>'.github/'+p));
 const protectedFiles=protectedPaths.map(file=>({file,unchanged:fs.existsSync(path.join(baseline,file))&&fs.readFileSync(path.join(root,file)).equals(fs.readFileSync(path.join(baseline,file)))}));
-const results={measuredAt:new Date().toISOString(),scope:'Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim',assertions,serviceWorkerSha256:crypto.createHash('sha256').update(source).digest('hex'),probes,activationDeletedCaches:deleted,precache:{requests:added.length,uniqueLocalFiles:cachePaths.length,missing,...(missing.length?{}:measures(cachePaths))},pages,protectedFiles};
+const currentManifest=JSON.parse(fs.readFileSync(path.join(root,'site.webmanifest'),'utf8'));
+const baselineManifest=JSON.parse(fs.readFileSync(path.join(baseline,'site.webmanifest'),'utf8'));
+delete currentManifest.description;delete baselineManifest.description;
+const manifestOperationalFieldsUnchanged=JSON.stringify(currentManifest)===JSON.stringify(baselineManifest);
+check('PWA manifest operational fields unchanged',manifestOperationalFieldsUnchanged);
+const results={measuredAt:new Date().toISOString(),scope:'Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim',assertions,serviceWorkerSha256:crypto.createHash('sha256').update(source).digest('hex'),probes,activationDeletedCaches:deleted,precache:{requests:added.length,uniqueLocalFiles:cachePaths.length,missing,...(missing.length?{}:measures(cachePaths))},pages,protectedFiles,manifestOperationalFieldsUnchanged};
 results.budgets={limits,checks:budgetChecks(results.precache,pages)};
 fs.writeFileSync(path.join(root,'qa/cache-checks.json'),JSON.stringify(results,null,2)+'\n');
 console.log(JSON.stringify({assertions:assertions.length,failed:assertions.filter(a=>!a.passed),precache:results.precache,budgetFailures:results.budgets.checks.filter(c=>!c.passed),protectedChanges:protectedFiles.filter(p=>!p.unchanged)},null,2));

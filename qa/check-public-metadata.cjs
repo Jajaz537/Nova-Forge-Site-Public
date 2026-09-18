@@ -45,6 +45,11 @@ const statusManifest = {schema: 'nova-forge-public-site-status/v1', stage: 'pre-
 const downloadManifest = {schema: 'nova-forge-public-downloads/v1', policy: 'verified-artifacts-only', available: true, artifacts: [{id: 'example', name: 'Example', version: '1', filename: 'example.zip', size_bytes: 64, sha256: 'b'.repeat(64), provenance: 'Test fixture only', download_path: './example.zip', signature_status: 'verified'}]};
 (async () => {
   const checks = [];
+  const manifest = fs.readFileSync(path.join(base, 'site.webmanifest'), 'utf8');
+  assert.match(manifest, /Plateforme publique MODARYX MODS/);
+  assert.doesNotMatch(manifest, /Modaryx OS/i);
+  checks.push('PWA metadata identifies MODARYX as the web platform without reviving the obsolete Modaryx OS product name.');
+
   const stale = appFixture({'public-status.json': response(statusManifest, true), 'public-build.json': response(buildManifest, true)});
   await flush();
   assert.match(stale.message.textContent, /Statut non actualisé/);
