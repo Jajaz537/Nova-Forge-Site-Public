@@ -28,7 +28,9 @@ for key, game in sorted(games.items(), key=lambda pair: pair[1]['name'].casefold
     parts.append(f'<article class="project-section" id="{key}"><p class="eyebrow">{count} fiche'+('s' if count != 1 else '')+f' de démonstration</p><h2>{escape(game["name"])}</h2><p>Consultez le projet, sa compatibilité déclarée et ses limites. Aucun fichier à télécharger.</p><ul class="game-projects">{cards}</ul></article>')
 source = (ROOT/'project.html').read_text()
 source = source.replace('Fiches des trois projets de démonstration MODARYX MODS.', 'Les jeux représentés dans le catalogue de démonstration MODARYX MODS et leurs fiches.')
-source = source.replace('<title>Projets —', '<title>Jeux —').replace('href="./','href="../').replace('src="./','src="../')
+source = source.replace('<title>Projets —', '<title>Jeux —', 1)
+source = source.replace('</title>', '</title>\\n  <link rel="canonical" href="https://modaryxmods.com/games/">', 1)
+source = source.replace('href="./','href="../').replace('src="./','src="../')
 start, end = source.index('  <main '), source.index('  </main>') + len('  </main>')
 main = '''  <main id="main" class="project-page">
     <nav class="page-trail" aria-label="Fil d’Ariane"><a href="../index.html">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Jeux</span></nav>
