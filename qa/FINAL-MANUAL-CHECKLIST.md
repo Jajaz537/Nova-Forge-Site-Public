@@ -23,3 +23,37 @@ Si l'import/export reste dans le périmètre du candidat, exécuter aussi avec u
 ## Règle de consignation
 
 Pour chaque ligne, inscrire uniquement `PASS`, `FAIL` ou `BLOQUÉ`, avec lien vers la preuve. Un `FAIL` déclenche : erreur exacte → isolation → correction ciblée → micro-test de cette seule ligne. Aucun full replay.
+
+## Garde-fous de sortie non couverts par les tests appareil
+
+Ces points ne se ferment pas par un screenshot de navigateur et doivent être traités séparément avant une déclaration VF officielle.
+
+| Sujet | État actuel | Condition de fermeture |
+|---|---|---|
+| Provenance technique des assets actuels | TERMINÉ sur le périmètre inspecté | Conserver `qa/ASSET-RIGHTS-PROVENANCE-20260918.md` attaché au candidat. |
+| Validation juridique complète des assets/références | PREUVE MANQUANTE | Confirmer les droits nécessaires sur les références amont lorsque cette preuve est requise ; ne pas déduire la propriété juridique de la seule génération ImageGen. |
+| Identité de l’éditeur/exploitant, contact public, contact sécurité, mentions légales | PREUVE MANQUANTE | Fournir les données réelles et décider les notices applicables. Ne rien inventer dans le site. |
+| `/.well-known/security.txt` | PREUVE MANQUANTE | Publier uniquement lorsqu’un contact sécurité réel est validé. |
+| Historique Git complet des secrets | PREUVE MANQUANTE | Exécuter un contrôle historique adapté ; la recherche du dépôt courant ne suffit pas. |
+| CI/CD Cloudflare protégé | PLAN TERMINÉ / APPLICATION BLOQUÉE | Appliquer le plan `qa/CI-CD-HARDENING-PLAN-20260918.md` uniquement avec autorisation explicite, puis micro-prouver les chemins non mutatifs. |
+| SEO `/games/` canonical | TERMINÉ | Canonical explicite présent et générateur synchronisé. |
+| SEO `/games/` dans `sitemap.xml` | EN COURS / FICHIER PROTÉGÉ | Modifier uniquement dans un lot dédié compatible avec le baseline protégé ; ne pas neutraliser le harnais. |
+| Périmètre produit historique | EN COURS | Décider explicitement si la VF signifie « surface publique actuelle » ou « toutes les capacités historiques retenues » ; aucune réduction implicite. |
+| Hubs GTA VI / RDR2 | CORPUS INITIAL SOURCÉ / NON PUBLIÉ | Droits médias, catégories/profondeur éditoriale et contenu substantiel réel avant publication. |
+| Comptes/profils, publication/modération, Resolver/Repair, distribution réelle, Guide/pont OS | NON LIVRÉ | Nécessitent services/données/artefacts/décisions réels ; un schéma ou un état indisponible ne vaut pas livraison. |
+| Master Nova Design Intelligence complète | NON RÉCUPÉRÉE | Ne pas inventer la liste manquante ; conserver le statut PREUVE MANQUANTE. |
+
+### Règle de décision VF
+
+La checklist appareil peut être entièrement verte sans que ces garde-fous soient automatiquement fermés.
+
+Avant toute déclaration **VF Premium HD**, consolider séparément :
+
+1. preuves externes appareil/navigateur ;
+2. garde-fous sécurité, légal et provenance ;
+3. décision explicite de périmètre produit ;
+4. état Git/PR exact du candidat ;
+5. absence de blocker critique/haut confirmé.
+
+Une preuve absente reste `PREUVE MANQUANTE`; une décision produit non prise ne doit pas être transformée en PASS.
+

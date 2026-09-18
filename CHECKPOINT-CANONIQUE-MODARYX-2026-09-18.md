@@ -197,3 +197,18 @@ Statuts :
 - plan de durcissement : **TERMINÉ** ;
 - application : **BLOQUÉE** ;
 - micro-preuve post-application : **PREUVE MANQUANTE**.
+
+## Mise à jour canonique — checklist finale élargie
+
+La checklist `qa/FINAL-MANUAL-CHECKLIST.md` inclut désormais, en plus des preuves appareil/navigateur, les garde-fous de sortie suivants :
+
+- provenance et limites juridiques des assets ;
+- identité/contact/mentions légales et `security.txt` ;
+- historique Git complet des secrets ;
+- application du plan CI/CD protégé ;
+- écart sitemap `/games/` ;
+- décision explicite du périmètre VF ;
+- capacités produit historiques non livrées et Master NDI non récupérée.
+
+Cette mise à jour est documentaire. Elle ne transforme aucun manque en PASS et ne modifie aucun runtime, workflow protégé, `main`, production ou infrastructure critique.
+
