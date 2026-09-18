@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-18T12:14:38.154Z",
+  "measuredAt": "2026-09-18T12:18:42.171Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -49,940 +49,108 @@
     {
       "name": "Excluded GET https://other.test/catalog.html",
       "passed": true
+#m9�[h��춻�q�^t{
+          "src": "./assets/modaryx-mark.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
     },
     {
-      "name": "Excluded GET /downloads.json?private=1",
-      "passed": true
+      "name": "Modding Creator Studio",
+      "short_name": "Studio",
+      "url": "./creator-studio.html",
+      "icons": [
+        {
+          "src": "./assets/modaryx-mark.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
     },
     {
-      "name": "Excluded GET /catalogue",
-      "passed": true
+      "name": "Profils & Passkeys",
+      "short_name": "Profils",
+      "url": "./profiles.html",
+      "icons": [
+        {
+          "src": "./assets/modaryx-mark.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
     },
     {
-      "name": "Metadata network first /public-build.json",
-      "passed": true
+      "name": "Communauté MODARYX MODS",
+      "short_name": "Communauté",
+      "url": "./community.html",
+      "icons": [
+        {
+          "src": "./assets/modaryx-mark.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
     },
     {
-      "name": "Metadata network first /downloads.json",
-      "passed": true
+      "name": "Écosystème MODARYX MODS",
+      "short_name": "Écosystème",
+      "url": "./ecosystem.html",
+      "icons": [
+        {
+          "src": "./assets/modaryx-mark.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
     },
     {
-      "name": "Metadata network first /public-status.json",
-      "passed": true
+      "name": "Téléchargements publics",
+      "short_name": "Téléchargements",
+      "url": "./downloads.html",
+      "icons": [
+        {
+          "src": "./assets/modaryx-mark.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
     },
     {
-      "name": "Metadata network first /SHA256SUMS.txt",
-      "passed": true
+      "name": "Sécurité & provenance",
+      "short_name": "Sécurité",
+      "url": "./security.html",
+      "icons": [
+        {
+          "src": "./assets/modaryx-mark.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
     },
     {
-      "name": "Metadata network first /data/catalog.json",
-      "passed": true
+      "name": "Vérificateur SHA-256",
+      "short_name": "Vérifier",
+      "url": "./verify.html",
+      "icons": [
+        {
+          "src": "./assets/modaryx-mark.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
     },
     {
-      "name": "Mutable UI resource revalidated /assets/modaryx-foundations.css",
-      "passed": true
-    },
-    {
-      "name": "Mutable UI resource revalidated /assets/shell.js",
-      "passed": true
-    },
-    {
-      "name": "Mutable UI offline fallback /assets/modaryx-foundations.css",
-      "passed": true
-    },
-    {
-      "name": "Mutable UI offline fallback /assets/shell.js",
-      "passed": true
-    },
-    {
-      "name": "Offline explicit stale /catalog?game=demo",
-      "passed": true
-    },
-    {
-      "name": "Offline explicit stale /downloads.json",
-      "passed": true
-    },
-    {
-      "name": "No cached metadata is network error",
-      "passed": true
-    },
-    {
-      "name": "HTTP 404 retained",
-      "passed": true
-    },
-    {
-      "name": "Quota failure preserves network response",
-      "passed": true
-    },
-    {
-      "name": "Cache match failure falls back to network asset",
-      "passed": true
-    },
-    {
-      "name": "Cache match failure preserves online metadata",
-      "passed": true
-    },
-    {
-      "name": "Cache match failure offline gives explicit network error",
-      "passed": true
-    },
-    {
-      "name": "Cache open failure falls back to network asset",
-      "passed": true
-    },
-    {
-      "name": "Cache open failure preserves online metadata",
-      "passed": true
-    },
-    {
-      "name": "Cache open failure offline gives explicit network error",
-      "passed": true
+      "name": "Documentation publique",
+      "short_name": "Docs",
+      "url": "./documentation.html",
+      "icons": [
+        {
+          "src": "./assets/modaryx-mark.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
     }
-  ],
-  "serviceWorkerSha256": "aded853aaf9777bc6efb7b1c5c98f557415c303eeb0201852a1009f02e114d61",
-  "probes": [
-    {
-      "url": "/catalog.html",
-      "mode": "navigate",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/catalog.html?game=demo",
-      "mode": "navigate",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/catalog",
-      "mode": "navigate",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/catalog?game=demo",
-      "mode": "navigate",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/games/",
-      "mode": "navigate",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/games/index.html",
-      "mode": "navigate",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/games/index",
-      "mode": "navigate",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/private.html",
-      "mode": "navigate",
-      "method": "GET",
-      "intercepted": false,
-      "networkCalls": 0,
-      "waitUntilCalls": 0,
-      "stale": null
-    },
-    {
-      "url": "/catalog.html",
-      "mode": "navigate",
-      "method": "POST",
-      "intercepted": false,
-      "networkCalls": 0,
-      "waitUntilCalls": 0,
-      "stale": null
-    },
-    {
-      "url": "https://other.test/catalog.html",
-      "mode": "navigate",
-      "method": "GET",
-      "intercepted": false,
-      "networkCalls": 0,
-      "waitUntilCalls": 0,
-      "stale": null
-    },
-    {
-      "url": "/downloads.json?private=1",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": false,
-      "networkCalls": 0,
-      "waitUntilCalls": 0,
-      "stale": null
-    },
-    {
-      "url": "/catalogue",
-      "mode": "navigate",
-      "method": "GET",
-      "intercepted": false,
-      "networkCalls": 0,
-      "waitUntilCalls": 0,
-      "stale": null
-    },
-    {
-      "url": "/public-build.json",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/downloads.json",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/public-status.json",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/SHA256SUMS.txt",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/data/catalog.json",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/assets/modaryx-foundations.css",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/assets/shell.js",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/assets/modaryx-foundations.css",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": "offline-stale"
-    },
-    {
-      "url": "/assets/shell.js",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": "offline-stale"
-    },
-    {
-      "url": "/catalog?game=demo",
-      "mode": "navigate",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": "offline-stale"
-    },
-    {
-      "url": "/downloads.json",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": "offline-stale"
-    },
-    {
-      "url": "/public-build.json",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 0,
-      "stale": null
-    },
-    {
-      "url": "/downloads.json",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 404,
-      "stale": null
-    },
-    {
-      "url": "/downloads.json",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/assets/modaryx-mark.svg",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/downloads.json",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/downloads.json",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 0,
-      "stale": null
-    },
-    {
-      "url": "/assets/modaryx-mark.svg",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/downloads.json",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 200,
-      "stale": null
-    },
-    {
-      "url": "/downloads.json",
-      "mode": "cors",
-      "method": "GET",
-      "intercepted": true,
-      "networkCalls": 1,
-      "waitUntilCalls": 1,
-      "status": 0,
-      "stale": null
-    }
-  ],
-  "activationDeletedCaches": [
-    "nova-site-shell-old"
-  ],
-  "precache": {
-    "requests": 77,
-    "uniqueLocalFiles": 76,
-    "missing": [],
-    "files": 76,
-    "rawBytes": 799921,
-    "gzipEstimateBytes": 506239
-  },
-  "pages": [
-    {
-      "page": "404.html",
-      "htmlBytes": 4068,
-      "css": {
-        "files": 6,
-        "rawBytes": 63678,
-        "gzipEstimateBytes": 17787
-      },
-      "js": {
-        "files": 2,
-        "rawBytes": 22048,
-        "gzipEstimateBytes": 6745
-      }
-    },
-    {
-      "page": "catalog.html",
-      "htmlBytes": 10761,
-      "css": {
-        "files": 7,
-        "rawBytes": 68783,
-        "gzipEstimateBytes": 19215
-      },
-      "js": {
-        "files": 2,
-        "rawBytes": 19453,
-        "gzipEstimateBytes": 5743
-      }
-    },
-    {
-      "page": "community.html",
-      "htmlBytes": 13440,
-      "css": {
-        "files": 6,
-        "rawBytes": 63905,
-        "gzipEstimateBytes": 17786
-      },
-      "js": {
-        "files": 2,
-        "rawBytes": 27813,
-        "gzipEstimateBytes": 6843
-      }
-    },
-    {
-      "page": "creator-studio.html",
-      "htmlBytes": 13753,
-      "css": {
-        "files": 8,
-        "rawBytes": 66842,
-        "gzipEstimateBytes": 18909
-      },
-      "js": {
-        "files": 3,
-        "rawBytes": 28942,
-        "gzipEstimateBytes": 8819
-      }
-    },
-    {
-      "page": "documentation.html",
-      "htmlBytes": 12754,
-      "css": {
-        "files": 6,
-        "rawBytes": 63678,
-        "gzipEstimateBytes": 17787
-      },
-      "js": {
-        "files": 2,
-        "rawBytes": 22048,
-        "gzipEstimateBytes": 6745
-      }
-    },
-    {
-      "page": "downloads.html",
-      "htmlBytes": 8523,
-      "css": {
-        "files": 6,
-        "rawBytes": 63678,
-        "gzipEstimateBytes": 17787
-      },
-      "js": {
-        "files": 3,
-        "rawBytes": 28093,
-        "gzipEstimateBytes": 8773
-      }
-    },
-    {
-      "page": "ecosystem.html",
-      "htmlBytes": 9765,
-      "css": {
-        "files": 6,
-        "rawBytes": 63678,
-        "gzipEstimateBytes": 17787
-      },
-      "js": {
-        "files": 2,
-        "rawBytes": 22048,
-        "gzipEstimateBytes": 6745
-      }
-    },
-    {
-      "page": "games/index.html",
-      "htmlBytes": 5324,
-      "css": {
-        "files": 7,
-        "rawBytes": 67498,
-        "gzipEstimateBytes": 18942
-      },
-      "js": {
-        "files": 1,
-        "rawBytes": 3418,
-        "gzipEstimateBytes": 1259
-      }
-    },
-    {
-      "page": "index.html",
-      "htmlBytes": 18431,
-      "css": {
-        "files": 6,
-        "rawBytes": 57121,
-        "gzipEstimateBytes": 15693
-      },
-      "js": {
-        "files": 3,
-        "rawBytes": 23088,
-        "gzipEstimateBytes": 7190
-      }
-    },
-    {
-      "page": "profiles.html",
-      "htmlBytes": 6897,
-      "css": {
-        "files": 7,
-        "rawBytes": 64659,
-        "gzipEstimateBytes": 18259
-      },
-      "js": {
-        "files": 2,
-        "rawBytes": 5262,
-        "gzipEstimateBytes": 1919
-      }
-    },
-    {
-      "page": "project-balanced-latency-pack.html",
-      "htmlBytes": 7159,
-      "css": {
-        "files": 7,
-        "rawBytes": 67498,
-        "gzipEstimateBytes": 18942
-      },
-      "js": {
-        "files": 2,
-        "rawBytes": 10788,
-        "gzipEstimateBytes": 3843
-      }
-    },
-    {
-      "page": "project-ember-textures.html",
-      "htmlBytes": 6919,
-      "css": {
-        "files": 7,
-        "rawBytes": 67498,
-        "gzipEstimateBytes": 18942
-      },
-      "js": {
-        "files": 2,
-        "rawBytes": 10788,
-        "gzipEstimateBytes": 3843
-      }
-    },
-    {
-      "page": "project-forge-night-experience.html",
-      "htmlBytes": 7129,
-      "css": {
-        "files": 7,
-        "rawBytes": 67498,
-        "gzipEstimateBytes": 18942
-      },
-      "js": {
-        "files": 2,
-        "rawBytes": 10788,
-        "gzipEstimateBytes": 3843
-      }
-    },
-    {
-      "page": "project.html",
-      "htmlBytes": 4620,
-      "css": {
-        "files": 7,
-        "rawBytes": 67498,
-        "gzipEstimateBytes": 18942
-      },
-      "js": {
-        "files": 1,
-        "rawBytes": 3418,
-        "gzipEstimateBytes": 1259
-      }
-    },
-    {
-      "page": "search.html",
-      "htmlBytes": 7709,
-      "css": {
-        "files": 8,
-        "rawBytes": 64532,
-        "gzipEstimateBytes": 18296
-      },
-      "js": {
-        "files": 2,
-        "rawBytes": 7159,
-        "gzipEstimateBytes": 2712
-      }
-    },
-    {
-      "page": "security.html",
-      "htmlBytes": 10947,
-      "css": {
-        "files": 6,
-        "rawBytes": 63678,
-        "gzipEstimateBytes": 17787
-      },
-      "js": {
-        "files": 2,
-        "rawBytes": 22048,
-        "gzipEstimateBytes": 6745
-      }
-    },
-    {
-      "page": "verify.html",
-      "htmlBytes": 6784,
-      "css": {
-        "files": 7,
-        "rawBytes": 63918,
-        "gzipEstimateBytes": 17972
-      },
-      "js": {
-        "files": 3,
-        "rawBytes": 27341,
-        "gzipEstimateBytes": 8567
-      }
-    }
-  ],
-  "protectedFiles": [
-    {
-      "file": "_headers",
-      "unchanged": true
-    },
-    {
-      "file": "_redirects",
-      "unchanged": true
-    },
-    {
-      "file": "domain-cutover.json",
-      "unchanged": true
-    },
-    {
-      "file": "robots.txt",
-      "unchanged": true
-    },
-    {
-      "file": "sitemap.xml",
-      "unchanged": true
-    },
-    {
-      "file": "site.webmanifest",
-      "unchanged": true
-    },
-    {
-      "file": ".github/cloudflare-control.json",
-      "unchanged": true
-    },
-    {
-      "file": ".github/cloudflare-http3-off.json",
-      "unchanged": true
-    },
-    {
-      "file": ".github/cloudflare-probe.json",
-      "unchanged": true
-    },
-    {
-      "file": ".github/site-vf-session.json",
-      "unchanged": true
-    },
-    {
-      "file": ".github/workflows/cloudflare-modaryx-cutover.yml",
-      "unchanged": true
-    },
-    {
-      "file": ".github/workflows/cloudflare-modaryx-http3-off.yml",
-      "unchanged": true
-    },
-    {
-      "file": ".github/workflows/cloudflare-modaryx-probe.yml",
-      "unchanged": true
-    }
-  ],
-  "budgets": {
-    "limits": {
-      "precache": 800000,
-      "cssPerPage": 70000,
-      "jsPerPage": 30000
-    },
-    "checks": [
-      {
-        "name": "Unique precache bytes",
-        "actualBytes": 799921,
-        "limitBytes": 800000,
-        "passed": true
-      },
-      {
-        "name": "Page inventory is nonempty",
-        "passed": true
-      },
-      {
-        "name": "404.html: direct CSS",
-        "actualBytes": 63678,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "404.html: direct JS",
-        "actualBytes": 22048,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "catalog.html: direct CSS",
-        "actualBytes": 68783,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "catalog.html: direct JS",
-        "actualBytes": 19453,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "community.html: direct CSS",
-        "actualBytes": 63905,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "community.html: direct JS",
-        "actualBytes": 27813,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "creator-studio.html: direct CSS",
-        "actualBytes": 66842,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "creator-studio.html: direct JS",
-        "actualBytes": 28942,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "documentation.html: direct CSS",
-        "actualBytes": 63678,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "documentation.html: direct JS",
-        "actualBytes": 22048,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "downloads.html: direct CSS",
-        "actualBytes": 63678,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "downloads.html: direct JS",
-        "actualBytes": 28093,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "ecosystem.html: direct CSS",
-        "actualBytes": 63678,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "ecosystem.html: direct JS",
-        "actualBytes": 22048,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "games/index.html: direct CSS",
-        "actualBytes": 67498,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "games/index.html: direct JS",
-        "actualBytes": 3418,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "index.html: direct CSS",
-        "actualBytes": 57121,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "index.html: direct JS",
-        "actualBytes": 23088,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "profiles.html: direct CSS",
-        "actualBytes": 64659,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "profiles.html: direct JS",
-        "actualBytes": 5262,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "project-balanced-latency-pack.html: direct CSS",
-        "actualBytes": 67498,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "project-balanced-latency-pack.html: direct JS",
-        "actualBytes": 10788,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "project-ember-textures.html: direct CSS",
-        "actualBytes": 67498,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "project-ember-textures.html: direct JS",
-        "actualBytes": 10788,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "project-forge-night-experience.html: direct CSS",
-        "actualBytes": 67498,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "project-forge-night-experience.html: direct JS",
-        "actualBytes": 10788,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "project.html: direct CSS",
-        "actualBytes": 67498,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "project.html: direct JS",
-        "actualBytes": 3418,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "search.html: direct CSS",
-        "actualBytes": 64532,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "search.html: direct JS",
-        "actualBytes": 7159,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "security.html: direct CSS",
-        "actualBytes": 63678,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "security.html: direct JS",
-        "actualBytes": 22048,
-        "limitBytes": 30000,
-        "passed": true
-      },
-      {
-        "name": "verify.html: direct CSS",
-        "actualBytes": 63918,
-        "limitBytes": 70000,
-        "passed": true
-      },
-      {
-        "name": "verify.html: direct JS",
-        "actualBytes": 27341,
-        "limitBytes": 30000,
-        "passed": true
-      }
-    ]
-  }
+  ]
 }
