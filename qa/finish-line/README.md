@@ -60,3 +60,9 @@ Le registre [MODARYX-ANTI-OUBLI](../MODARYX-ANTI-OUBLI.md) et l’inventaire d�
 La Master NDI complète et toutes les décisions historiques ne sont pas récupérées : **NON RÉCUPÉRÉ** pour l’exhaustivité de ce corpus. Les références Loup/Dragon récupérées et la séparation MODARYX web / Nova Forge OS restent applicables.
 
 **VF NON VALIDÉE.** Ce lot ferme les défauts visuels reproduits, pas l’intégralité du produit ni une conformité d’accessibilité. La PR reste en brouillon. Aucun OS, domaine ou réglage d’infrastructure modifié.
+
+## Contrôle de continuité — 18 septembre 2026
+
+Le preview de branche a été rouvert dans Chromium à l’URL `https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/`. Les 17 routes publiques ont chacune un titre, un `h1`, un `main`, un footer, aucune image cassée après `networkidle`, aucun lien vide sans nom accessible et aucun débordement horizontal au viewport du contrôle. Les premiers écrans de l’accueil, du Catalogue, de Creator Studio, de Communauté, de l’Écosystème et de Sécurité ont été inspectés : la direction Loup/Dragon et les surfaces cinématiques MODARYX sont présentes.
+
+Preuve structurée : `qa/preview-visual-structure-20260918.json`. La révision réellement déployée reste **PREUVE MANQUANTE** : le preview ne publie aucun marqueur reliant son contenu à un SHA Git. Le HEAD distant lu juste avant le contrôle était `7454e13a80e78c6680b1499ee115bdd697ec2e0a`. La production `modaryxmods.com` affiche encore une présentation antérieure et n’est pas déclarée alignée sur ce candidat.
