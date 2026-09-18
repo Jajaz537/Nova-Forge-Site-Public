@@ -70,3 +70,5 @@ L’API GitHub a initialement omis trois fichiers du deuxième commit. Un commit
 ## Prochain point exact
 
 Fermer uniquement les preuves externes lorsqu’un environnement adapté devient réellement disponible : lecteur d’écran natif, zoom 200/400 %, Firefox/Safari, appareils physiques, cycle PWA offline/update et mesures LCP/CLS/INP représentatives. Ne pas relancer les preuves autonomes déjà vertes et ne pas substituer une simulation à ces validations.
+
+Protocole compact exécutable : `qa/FINAL-MANUAL-CHECKLIST.md`. Statut consolidé : **CANDIDAT VF — PREUVES EXTERNES RESTANTES**. Cette mise à jour est strictement documentaire : aucun runtime, test déjà vert, déploiement de production ni paramètre d’infrastructure n’est modifié.
