@@ -173,3 +173,27 @@ Statuts :
 - validation juridique complète : **PREUVE MANQUANTE** ;
 - droits formels du pack de références Loup/Dragon : **PREUVE MANQUANTE** si une preuve juridique est requise ;
 - identité d’éditeur, contact public, contact sécurité et mentions légales : **PREUVE MANQUANTE**.
+
+
+## Mise à jour canonique — plan CI/CD protégé
+
+Preuve Git fraîche avant cette mise à jour documentaire :
+
+- HEAD de branche vérifié : `99409ea6df23ee63f6786366d62fa5e3114c59ad`.
+- Le commit ajoute uniquement `qa/CI-CD-HARDENING-PLAN-20260918.md`.
+- Aucun workflow protégé, `main`, secret, paramètre Cloudflare, DNS, SSL, IONOS ou production n’est modifié.
+
+Résultat du lot :
+
+- le tag `actions/checkout@v4` résout actuellement vers le commit officiel `11d5960a326750d5838078e36cf38b85af677262` ;
+- le plan propose de l’épingler sur ce SHA dans le workflow cutover ;
+- le plan propose de supprimer les déclencheurs `push` des workflows mutatifs Cloudflare concernés ;
+- le workflow probe est laissé hors de ce lot car sa surface est principalement diagnostique ;
+- l’application réelle reste **BLOQUÉE / AUTORISATION EXPLICITE REQUISE**, car les workflows sont une zone protégée et peuvent toucher l’infrastructure.
+
+Statuts :
+
+- analyse CI/CD : **TERMINÉE** ;
+- plan de durcissement : **TERMINÉ** ;
+- application : **BLOQUÉE** ;
+- micro-preuve post-application : **PREUVE MANQUANTE**.
