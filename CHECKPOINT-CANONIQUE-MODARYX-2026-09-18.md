@@ -222,3 +222,30 @@ Les documents historiques suivants portent désormais un bandeau explicite de pr
 
 Leur historique et leurs preuves par SHA sont conservés, mais leurs anciennes valeurs de HEAD, métriques ou « prochain bloc » ne doivent plus être interprétées comme l’état opérationnel courant. Toute reprise doit partir du présent CHECKPOINT-CANONIQUE puis d’une vérification Git fraîche.
 
+## Mise à jour canonique — canari Cloudflare Full (strict)
+
+Preuve externe reçue le 18 septembre 2026 :
+
+- Automatic SSL/TLS global observé : activé, mode exécuté **Full** ;
+- aucun changement global effectué ;
+- canari : `strict-test.modaryxmods.com` ;
+- projet Pages : `nova-forge-site-public` ;
+- hostname Pages : **Active — SSL enabled** ;
+- règle ciblée : `Canary Pages – Full strict` ;
+- expression : `(http.host eq "strict-test.modaryxmods.com")` ;
+- action unique : `SSL = Strict` ;
+- Cloudflare Trace : règle **Matched**, action `set_config`, résultat **200 OK** ;
+- page MODARYX, CSS, JavaScript et images chargés ;
+- aucune boucle de redirection ;
+- aucune erreur 521, 522, 525 ou 526 observée ;
+- `modaryxmods.com` principal reste fonctionnel et conserve le mode global **Full** ;
+- aucun autre réglage DNS, DNSSEC, mail, IONOS ou Pages modifié.
+
+Conclusion bornée :
+
+**PASS CIBLÉ — Full (strict) compatible sur le canari**
+
+Ce PASS ne vaut pas basculement global du domaine principal. Toute promotion de `modaryxmods.com` en Full (strict) exige une décision séparée.
+
+Preuve : `qa/FULL-STRICT-CANARY-PROOF-20260918.md`.
+
