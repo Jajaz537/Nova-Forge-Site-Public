@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-16T23:01:01.311Z",
+  "measuredAt": "2026-09-18T12:14:38.154Z",
   "scope": "Node mocked service-worker semantics and static file sizes; no browser offline or runtime performance claim",
   "assertions": [
     {
@@ -465,8 +465,8 @@
     "uniqueLocalFiles": 76,
     "missing": [],
     "files": 76,
-    "rawBytes": 799981,
-    "gzipEstimateBytes": 506310
+    "rawBytes": 799921,
+    "gzipEstimateBytes": 506239
   },
   "pages": [
     {
@@ -479,8 +479,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 22108,
-        "gzipEstimateBytes": 6816
+        "rawBytes": 22048,
+        "gzipEstimateBytes": 6745
       }
     },
     {
@@ -493,8 +493,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 19513,
-        "gzipEstimateBytes": 5814
+        "rawBytes": 19453,
+        "gzipEstimateBytes": 5743
       }
     },
     {
@@ -507,8 +507,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 27873,
-        "gzipEstimateBytes": 6914
+        "rawBytes": 27813,
+        "gzipEstimateBytes": 6843
       }
     },
     {
@@ -521,8 +521,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 29002,
-        "gzipEstimateBytes": 8890
+        "rawBytes": 28942,
+        "gzipEstimateBytes": 8819
       }
     },
     {
@@ -535,8 +535,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 22108,
-        "gzipEstimateBytes": 6816
+        "rawBytes": 22048,
+        "gzipEstimateBytes": 6745
       }
     },
     {
@@ -549,8 +549,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 28153,
-        "gzipEstimateBytes": 8844
+        "rawBytes": 28093,
+        "gzipEstimateBytes": 8773
       }
     },
     {
@@ -563,8 +563,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 22108,
-        "gzipEstimateBytes": 6816
+        "rawBytes": 22048,
+        "gzipEstimateBytes": 6745
       }
     },
     {
@@ -577,8 +577,8 @@
       },
       "js": {
         "files": 1,
-        "rawBytes": 3478,
-        "gzipEstimateBytes": 1330
+        "rawBytes": 3418,
+        "gzipEstimateBytes": 1259
       }
     },
     {
@@ -591,8 +591,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 23148,
-        "gzipEstimateBytes": 7261
+        "rawBytes": 23088,
+        "gzipEstimateBytes": 7190
       }
     },
     {
@@ -605,8 +605,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 5322,
-        "gzipEstimateBytes": 1990
+        "rawBytes": 5262,
+        "gzipEstimateBytes": 1919
       }
     },
     {
@@ -619,8 +619,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 10848,
-        "gzipEstimateBytes": 3914
+        "rawBytes": 10788,
+        "gzipEstimateBytes": 3843
       }
     },
     {
@@ -633,8 +633,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 10848,
-        "gzipEstimateBytes": 3914
+        "rawBytes": 10788,
+        "gzipEstimateBytes": 3843
       }
     },
     {
@@ -647,8 +647,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 10848,
-        "gzipEstimateBytes": 3914
+        "rawBytes": 10788,
+        "gzipEstimateBytes": 3843
       }
     },
     {
@@ -661,8 +661,8 @@
       },
       "js": {
         "files": 1,
-        "rawBytes": 3478,
-        "gzipEstimateBytes": 1330
+        "rawBytes": 3418,
+        "gzipEstimateBytes": 1259
       }
     },
     {
@@ -675,8 +675,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 7219,
-        "gzipEstimateBytes": 2783
+        "rawBytes": 7159,
+        "gzipEstimateBytes": 2712
       }
     },
     {
@@ -689,8 +689,8 @@
       },
       "js": {
         "files": 2,
-        "rawBytes": 22108,
-        "gzipEstimateBytes": 6816
+        "rawBytes": 22048,
+        "gzipEstimateBytes": 6745
       }
     },
     {
@@ -703,8 +703,8 @@
       },
       "js": {
         "files": 3,
-        "rawBytes": 27401,
-        "gzipEstimateBytes": 8638
+        "rawBytes": 27341,
+        "gzipEstimateBytes": 8567
       }
     }
   ],
@@ -771,7 +771,7 @@
     "checks": [
       {
         "name": "Unique precache bytes",
-        "actualBytes": 799981,
+        "actualBytes": 799921,
         "limitBytes": 800000,
         "passed": true
       },
@@ -787,7 +787,7 @@
       },
       {
         "name": "404.html: direct JS",
-        "actualBytes": 22108,
+        "actualBytes": 22048,
         "limitBytes": 30000,
         "passed": true
       },
@@ -799,7 +799,7 @@
       },
       {
         "name": "catalog.html: direct JS",
-        "actualBytes": 19513,
+        "actualBytes": 19453,
         "limitBytes": 30000,
         "passed": true
       },
@@ -811,7 +811,7 @@
       },
       {
         "name": "community.html: direct JS",
-        "actualBytes": 27873,
+        "actualBytes": 27813,
         "limitBytes": 30000,
         "passed": true
       },
@@ -823,7 +823,7 @@
       },
       {
         "name": "creator-studio.html: direct JS",
-        "actualBytes": 29002,
+        "actualBytes": 28942,
         "limitBytes": 30000,
         "passed": true
       },
@@ -835,7 +835,7 @@
       },
       {
         "name": "documentation.html: direct JS",
-        "actualBytes": 22108,
+        "actualBytes": 22048,
         "limitBytes": 30000,
         "passed": true
       },
@@ -847,7 +847,7 @@
       },
       {
         "name": "downloads.html: direct JS",
-        "actualBytes": 28153,
+        "actualBytes": 28093,
         "limitBytes": 30000,
         "passed": true
       },
@@ -859,7 +859,7 @@
       },
       {
         "name": "ecosystem.html: direct JS",
-        "actualBytes": 22108,
+        "actualBytes": 22048,
         "limitBytes": 30000,
         "passed": true
       },
@@ -871,7 +871,7 @@
       },
       {
         "name": "games/index.html: direct JS",
-        "actualBytes": 3478,
+        "actualBytes": 3418,
         "limitBytes": 30000,
         "passed": true
       },
@@ -883,7 +883,7 @@
       },
       {
         "name": "index.html: direct JS",
-        "actualBytes": 23148,
+        "actualBytes": 23088,
         "limitBytes": 30000,
         "passed": true
       },
@@ -895,7 +895,7 @@
       },
       {
         "name": "profiles.html: direct JS",
-        "actualBytes": 5322,
+        "actualBytes": 5262,
         "limitBytes": 30000,
         "passed": true
       },
@@ -907,7 +907,7 @@
       },
       {
         "name": "project-balanced-latency-pack.html: direct JS",
-        "actualBytes": 10848,
+        "actualBytes": 10788,
         "limitBytes": 30000,
         "passed": true
       },
@@ -919,7 +919,7 @@
       },
       {
         "name": "project-ember-textures.html: direct JS",
-        "actualBytes": 10848,
+        "actualBytes": 10788,
         "limitBytes": 30000,
         "passed": true
       },
@@ -931,7 +931,7 @@
       },
       {
         "name": "project-forge-night-experience.html: direct JS",
-        "actualBytes": 10848,
+        "actualBytes": 10788,
         "limitBytes": 30000,
         "passed": true
       },
@@ -943,7 +943,7 @@
       },
       {
         "name": "project.html: direct JS",
-        "actualBytes": 3478,
+        "actualBytes": 3418,
         "limitBytes": 30000,
         "passed": true
       },
@@ -955,7 +955,7 @@
       },
       {
         "name": "search.html: direct JS",
-        "actualBytes": 7219,
+        "actualBytes": 7159,
         "limitBytes": 30000,
         "passed": true
       },
@@ -967,7 +967,7 @@
       },
       {
         "name": "security.html: direct JS",
-        "actualBytes": 22108,
+        "actualBytes": 22048,
         "limitBytes": 30000,
         "passed": true
       },
@@ -979,7 +979,7 @@
       },
       {
         "name": "verify.html: direct JS",
-        "actualBytes": 27401,
+        "actualBytes": 27341,
         "limitBytes": 30000,
         "passed": true
       }

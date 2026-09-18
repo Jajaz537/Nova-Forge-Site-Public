@@ -12,8 +12,7 @@
       updateViaCache: 'none'
     });
   } catch {
-    // Optional enhancement: failure must not block navigation or local tools.
-    // Registration alone is not a claim that offline installation completed.
+    // Optional: registration failure never blocks navigation or local tools.
   }
 })();
 
@@ -61,7 +60,9 @@
   toggle.className = 'nav-toggle';
   toggle.setAttribute('aria-controls', nav.id);
   toggle.setAttribute('aria-expanded', 'false');
-  toggle.innerHTML = '<span aria-hidden="true"></span><span class="nav-toggle-label">Menu</span>';
+  const toggleIcon=document.createElement('span');
+  toggleIcon.ariaHidden='true';
+  toggle.append(toggleIcon,Object.assign(document.createElement('span'),{className:'nav-toggle-label',textContent:'Menu'}));
 
   const close = () => {
     header.removeAttribute('data-nav-open');
@@ -83,7 +84,6 @@
   header.insertBefore(toggle, nav);
   header.setAttribute('data-nav-ready', 'true');
 
-  // Anchor destinations must clear the actual sticky header, including wrapped controls.
   const updateAnchorOffset = () => {
     document.documentElement.style.setProperty('--modaryx-header-height', `${Math.ceil(header.getBoundingClientRect().height)}px`);
   };

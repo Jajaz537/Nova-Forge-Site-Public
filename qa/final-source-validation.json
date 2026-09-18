@@ -1,14 +1,14 @@
 {
-  "executedAt": "2026-09-16T23:01:00.216883+00:00",
+  "executedAt": "2026-09-18T12:14:41.037900+00:00",
   "scope": "All current check-* source scripts; browser, physical-device and external-service claims excluded",
-  "scripts": 30,
-  "passed": 30,
+  "scripts": 31,
+  "passed": 31,
   "failed": [],
   "results": [
     {
       "script": "qa/check-cache.mjs",
       "exitCode": 0,
-      "stdout": "{\n  \"assertions\": 34,\n  \"failed\": [],\n  \"precache\": {\n    \"requests\": 77,\n    \"uniqueLocalFiles\": 76,\n    \"missing\": [],\n    \"files\": 76,\n    \"rawBytes\": 799981,\n    \"gzipEstimateBytes\": 506310\n  },\n  \"budgetFailures\": [],\n  \"protectedChanges\": []\n}\n",
+      "stdout": "{\n  \"assertions\": 34,\n  \"failed\": [],\n  \"precache\": {\n    \"requests\": 77,\n    \"uniqueLocalFiles\": 76,\n    \"missing\": [],\n    \"files\": 76,\n    \"rawBytes\": 799921,\n    \"gzipEstimateBytes\": 506239\n  },\n  \"budgetFailures\": [],\n  \"protectedChanges\": []\n}\n",
       "stderr": ""
     },
     {
@@ -147,6 +147,12 @@
       "script": "qa/check-search-contract.cjs",
       "exitCode": 0,
       "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Eight grouped Node VM scenarios, including four malformed entry variants; not browser proof\",\n  \"checks\": [\n    \"Four malformed-entry variants preserve static directory and keep filtering disabled\",\n    \"Duplicate identifiers reject the index without erasing fallback\",\n    \"Current index hydrates, folds accents/case and exposes no-match state\",\n    \"Valid empty index remains usable and distinct from failure\",\n    \"Network failure preserves static navigation\",\n    \"Cache age warning survives local filtering and is absent from network index\",\n    \"Retry deduplicates pending requests and restores search focus after recovery\",\n    \"Repeated failure keeps fallback and focuses the new retry control\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-security-baseline.py",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Static source gate only; Cloudflare account, native browser, TLS origin and external services excluded\",\n  \"publicPages\": 17,\n  \"dangerousDomSinks\": 0,\n  \"serverRuntimeFiles\": [],\n  \"workflowFindings\": [\n    \"MOYENNE: actions/checkout utilise le tag mutable v4\",\n    \"MOYENNE: le workflow cutover ne refuse pas explicitement les modes mutatifs sur push\",\n    \"MOYENNE: la désactivation HTTP/3 peut être déclenchée par push sur main\"\n  ],\n  \"errors\": []\n}\n",
       "stderr": ""
     },
     {
