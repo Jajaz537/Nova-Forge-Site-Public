@@ -72,3 +72,39 @@ L’API GitHub a initialement omis trois fichiers du deuxième commit. Un commit
 Fermer uniquement les preuves externes lorsqu’un environnement adapté devient réellement disponible : lecteur d’écran natif, zoom 200/400 %, Firefox/Safari, appareils physiques, cycle PWA offline/update et mesures LCP/CLS/INP représentatives. Ne pas relancer les preuves autonomes déjà vertes et ne pas substituer une simulation à ces validations.
 
 Protocole compact exécutable : `qa/FINAL-MANUAL-CHECKLIST.md`. Statut consolidé : **CANDIDAT VF — PREUVES EXTERNES RESTANTES**. Cette mise à jour est strictement documentaire : aucun runtime, test déjà vert, déploiement de production ni paramètre d’infrastructure n’est modifié.
+
+
+## Mise à jour canonique complémentaire — après micro-lot SEO
+
+Preuve Git fraîche :
+
+- HEAD candidat : `39903d56e8171303e861536be997e775cf2aece4`.
+- Parent : `bcfce789cece940e07fcef1e5c3719ea27d6d262`.
+- Micro-lot : canonical explicite de `/games/`, générateur synchronisé, manifeste PWA minifié sans changement sémantique, empreintes publiques mises à jour.
+- Diff ciblé : 4 fichiers uniquement (`games/index.html`, `qa/build-games-index.py`, `site.webmanifest`, `SHA256SUMS.txt`).
+- Fichiers d’infrastructure protégés `_headers`, `sitemap.xml`, `robots.txt` : inchangés.
+- Calcul statique ciblé : précache brut estimé `798705 / 800000` après le lot, contre `799909 / 800000` avant. Cette valeur est un calcul déterministe sur les deux fichiers précachés modifiés ; elle ne remplace pas un nouveau replay global.
+- Cloudflare Pages a confirmé un déploiement réussi de `39903d5` sur `https://b9712f72.nova-forge-site-public.pages.dev`.
+
+### Réconciliation anti-oubli
+
+Le statut **CANDIDAT VF — PREUVES EXTERNES RESTANTES** décrit la validation de la surface web actuellement livrée. Il ne transforme pas les capacités produit explicitement retenues mais absentes en simples tests externes.
+
+Restent explicitement tracés comme **développement produit non livré / entrées manquantes** :
+
+- hubs éditoriaux GTA 6 / RDR2 et catégories/corpus associés ;
+- comptes et profils éditables réels ;
+- publication/modération distante ;
+- Storage Resolver / Repair Network ;
+- distribution réelle avec artefacts autorisés, empreintes/provenance/signatures ;
+- Guide connecté et pont optionnel Nova Forge OS ;
+- Master Nova Design Intelligence complète non récupérée.
+
+Aucune de ces capacités n’est déclarée réalisée par un schéma, un contrat ou un état UI « indisponible ». Une VF limitée à la surface publique actuelle exige encore les preuves externes listées plus haut. Une VF comprenant **toutes les idées historiquement retenues** exige en plus la livraison réelle de ces capacités ou une décision produit écrite de périmètre ; aucune réduction implicite n’est admise.
+
+### Prochain point logique
+
+1. Ne pas rejouer les audits déjà verts.
+2. Fermer les preuves externes dès qu’un environnement réel les rend possibles.
+3. Pour toute capacité produit retenue non livrée, n’ouvrir un lot de développement que lorsque ses données, droits, services ou décisions nécessaires existent réellement.
+4. Conserver PR #12 en brouillon ; aucune fusion `main`, production ou infrastructure critique sans décision séparée.
