@@ -21,3 +21,5 @@ Périmètre : candidat PR #12 à partir de `7454e13`. Cette preuve couvre unique
 - Le mode SSL global, DNS, DNSSEC, IONOS, MX et paramètres Cloudflare restent gelés et inchangés.
 
 Preuve automatisée : `qa/check-security-baseline.py` et `qa/security-baseline-checks.json`.
+
+Couverture de référence adaptée aux familles OWASP ASVS : `qa/SECURITY-ASVS-COVERAGE.md`.
