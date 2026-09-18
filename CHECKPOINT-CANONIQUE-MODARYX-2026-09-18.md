@@ -249,3 +249,25 @@ Ce PASS ne vaut pas basculement global du domaine principal. Toute promotion de 
 
 Preuve : `qa/FULL-STRICT-CANARY-PROOF-20260918.md`.
 
+## Mise à jour canonique — bascule globale Full (strict) bloquée
+
+Tentative contrôlée de préparation au passage global après le PASS canari :
+
+- hostnames proxifiés relevés :
+  - `modaryxmods.com` → `nova-forge-site-public.pages.dev`
+  - `strict-test.modaryxmods.com` → `nova-forge-site-public.pages.dev`
+  - `_domainconnect.modaryxmods.com` → `_domainconnect.ionos.com`
+- `_domainconnect.modaryxmods.com` utilise une origine IONOS distincte ;
+- le certificat d’origine de ce hostname n’a pas été validé en Full (strict) ;
+- le mode global est donc resté **Full** ;
+- aucune bascule globale n’a été effectuée ;
+- canari Full (strict) toujours fonctionnel ;
+- DNS, DNSSEC, nameservers, IONOS et mail inchangés ;
+- aucun rollback nécessaire.
+
+Statut :
+- bascule globale zone entière : **BLOQUÉE / PREUVE MANQUANTE** à cause de `_domainconnect.modaryxmods.com` ;
+- solution sûre identifiée : conserver le global en Full et appliquer une **Configuration Rule SSL = Strict uniquement à `modaryxmods.com`**, ce qui évite d’embarquer `_domainconnect.modaryxmods.com`.
+
+Ne pas généraliser ce blocage au hostname principal : le canari Pages a déjà démontré la compatibilité Full (strict) sur la même origine Cloudflare Pages.
+
