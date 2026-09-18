@@ -148,3 +148,28 @@ Chromium/Playwright est présent dans l’environnement courant, mais l’accès
 ### Prochain point logique
 
 Ne pas relancer les audits déjà verts. Continuer uniquement si une nouvelle capacité externe devient disponible, si une donnée produit réelle arrive, ou si un défaut précis est isolé. Conserver PR #12 en brouillon et ne pas toucher à `main`, production, DNS, DNSSEC, IONOS, SSL ou paramètres Cloudflare critiques sans décision séparée.
+
+
+## Mise à jour canonique — provenance des assets
+
+Preuve Git fraîche avant cette mise à jour documentaire :
+
+- HEAD de branche vérifié : `5d002455e1e59784fec72d51890e04e7d6065923`.
+- Le commit ajoute uniquement `qa/ASSET-RIGHTS-PROVENANCE-20260918.md`.
+- Aucun runtime, page publique, asset binaire, `main`, production ou infrastructure critique n’est modifié.
+
+Résultat de la revue :
+
+- aucune dépendance npm runtime tierce déclarée ;
+- aucun asset Linear/Raycast/Vercel/Framer/Stripe importé ;
+- les deux WebP Loup/Dragon sont documentés comme générés via ImageGen à partir de références fournies par l’utilisateur ;
+- aucun média Rockstar n’a été intégré au dépôt ;
+- les anciens assets `nova-*` restent classés legacy / produit distinct Nova Forge ;
+- aucun fichier de police local `.woff/.woff2/.ttf/.otf` détecté dans le périmètre assets inspecté.
+
+Statuts :
+
+- provenance technique des assets actuels : **TERMINÉE SUR LE PÉRIMÈTRE INSPECTÉ** ;
+- validation juridique complète : **PREUVE MANQUANTE** ;
+- droits formels du pack de références Loup/Dragon : **PREUVE MANQUANTE** si une preuve juridique est requise ;
+- identité d’éditeur, contact public, contact sécurité et mentions légales : **PREUVE MANQUANTE**.
