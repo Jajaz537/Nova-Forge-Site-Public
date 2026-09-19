@@ -913,3 +913,25 @@ Intégration :
 
 Limites conservées : **PREUVE MANQUANTE** pour zoom natif 400 %, lecteur d'écran, Firefox/Safari, appareils physiques, PWA offline réelle et CWV.
 
+## Candidat ciblé — preuve navigateur des fonctions locales — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-local-functional-browser-proof-20260919`, base fraîche `f0646934d148f88c0cf5108fb65e8cda48645d58`.
+
+Ajouts QA uniquement :
+
+- `qa/check-local-functional-browser.mjs` ;
+- `.github/workflows/modaryx-local-functional-browser-proof.yml` ;
+- `qa/MODARYX-LOCAL-FUNCTIONAL-BROWSER-PROOF-20260919.md`.
+
+Périmètre :
+
+- catalogue : filtre + favori local + persistance ;
+- recherche locale ;
+- collection et contribution Communauté avec persistance ;
+- brouillon Creator Studio V2 avec distribution verrouillée ;
+- validation des fragments SHA-256 du Vérificateur.
+
+État : **EN COURS — micro-preuve CI requise avant intégration**.
+
+Limites : aucun backend simulé ; import/export par vrai fichier utilisateur reste **PREUVE MANQUANTE**.
+
