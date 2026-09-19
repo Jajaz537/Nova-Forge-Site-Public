@@ -1500,3 +1500,42 @@ Budget corrigé :
 
 État : **EN COURS — micro-preuve ciblée après correction requise avant fusion**. Aucun full replay lancé.
 
+## Intégration contrôlée — architecture de croissance visuelle en couches — 19 septembre 2026
+
+PR #40 : **TERMINÉE — fusionnée**.
+
+- commit d'intégration : `a6da29eb5ea94e176a0e3e8319e90de2411df72e` ;
+- contrat `layered-stage-assets-v1` intégré ;
+- environnement séparé + cinq stades pour `wolf` et `dragon` ;
+- activation future atomique, same-origin, `current-stage-only`, `runtime-on-demand` ;
+- état courant volontaire : `awaiting-assets` ;
+- aucun asset de croissance inventé ;
+- panorama composite actuel conservé tant que les vrais assets Premium HD ne sont pas présents.
+
+Procédure d'erreur respectée :
+
+- run performance initial `35470244794` : **FAIL CIBLÉ** — accueil mobile LCP **3100 ms > 2500** ;
+- isolation : logique de couches inutilement placée sur le chemin critique alors qu'aucun asset final n'existe encore ;
+- correction : runtime visuel déplacé vers `living-world-visual-growth.mjs` + CSS chargés uniquement lorsque `status=ready` ;
+- aucun full replay lancé.
+
+Micro-preuves après correction :
+
+- Layered Growth Contract `35470524835` — **success / PASS CIBLÉ** ;
+- Lab Performance `35470524821` — **success / PASS CIBLÉ** ;
+- accueil mobile corrigé : LCP **2156 ms**, CLS **0** ;
+- Site First Source, Living World Offline, Local Functional, Real File, Accessibility Chromium, Reflow et PWA Offline du même candidat : **success**.
+
+Budget courant :
+
+- noyau précaché : **114977 octets** ;
+- marge : **685023 octets** ;
+- runtime monde vivant chargé courant : **15135 octets** ;
+- runtime visuel dormant : **7080 octets**, chargé uniquement si les vrais assets passent à `ready`.
+
+État :
+
+- **TERMINÉ** — contrat, moteur lazy et mapping visuel des cinq stades ;
+- **EN COURS** — production/intégration des vrais assets séparés environnement + loup + dragon ;
+- croissance visuelle individuelle réelle non déclarée terminée avant preuve des assets.
+
