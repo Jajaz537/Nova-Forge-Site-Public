@@ -9,7 +9,7 @@ d381131783627707943e8361e22cb4294682f44e57b9c01e5d0c1cc28eacf505  ./assets/commu
 01fa07ab10924bf4637e2830830cd7fb5c50452a495870f00fd8f0a65dc5a62f  ./assets/downloads.js
 33a0530ceb4cafa33a6e0f05cc04994d086b8d11308d5f5f2a9fac20861efe81  ./assets/forge-field.svg
 bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-schema-lite.js
-aab06baccdffcd82f2eb0ee9d8a8b392c189a27a34d9c069b19799d0b9ea211e  ./assets/modaryx-cinematic-system.css
+059384a5489a60305dac03b925c3eccd40d14066a1e893d92edc0b942dc307b7  assets/modaryx-cinematic-system.css
 32a014bfa790bc6f0cecf68f2743e7969201ad5d8eea613cf1d3e84862773a0e  ./assets/modaryx-home-cinematic.css
 06b1dae65f9c0706fabc9b85a46cd3c50d7a5a5d2e6015b2be064b751d7b8189  ./assets/modaryx-mark-192.png
 38eb20983b8118843446d8a64dd5afa4991f43d927b41703b21b34fc30a1aa40  ./assets/modaryx-mark-512.png

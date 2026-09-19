@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-19",
+  "scope": "Targeted in-app Chromium audit after Premium HD continuation; not Firefox, native screen-reader, 400 percent zoom, physical-device or complete VF proof.",
+  "viewports": [
+    {"requested": "390x844", "clientWidth": 375},
+    {"requested": "1280x900", "clientWidth": 1265}
+  ],
+  "routes": 17,
+  "mobile": {
+    "horizontalOverflow": 0,
+    "brokenImages": 0,
+    "unnamedVisibleControls": 0,
+    "clippedControls": ["verify-file native input; visually replaced by the existing labelled custom picker"]
+  },
+  "desktop": {
+    "horizontalOverflow": 0,
+    "brokenImages": 0,
+    "controlsOutsideViewport": 0,
+    "clippedControls": ["verify-file native input; visually replaced by the existing labelled custom picker"]
+  },
+  "interactions": {
+    "mobileMenu": "TERMINÉ — seven destinations visible in the expanded menu",
+    "motionControl": "TERMINÉ — control changed from Mouvement système to Mouvement réduit with checked state"
+  },
+  "defects": [
+    {
+      "page": "downloads.html",
+      "before": "At 1280 px the H1 split téléchargements inside the word; at 390 px the flex/grid cascade created a 3724 px hero with the H1 near y=1922.",
+      "fix": "The cinematic hero now explicitly uses grid; its desktop title measure is widened and the Downloads title receives a compact mobile size inside the existing breakpoint.",
+      "after": "At 390 px the hero is grid, the H1 is visible near y=388, clientWidth equals scrollWidth (375), and the complete word fits. At 1280 px the complete word is visible and clientWidth equals scrollWidth (1265)."
+    }
+  ],
+  "limits": [
+    "Screenshots were inspected in the current audit session but are not a native assistive-technology proof.",
+    "400 percent zoom, real screen reader, canonical cache baseline and physical devices remain open."
+  ]
+}

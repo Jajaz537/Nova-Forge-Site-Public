@@ -640,3 +640,13 @@ Build et structure PASS, 84 empreintes valides, 34 assertions cache PASS, préca
 - **PREUVE MANQUANTE — appareils physiques :** contrôle séparé inchangé.
 
 La passe 200 % antérieure reste une preuve ciblée. Ces constats ne constituent pas une VF complète.
+
+## 2026-09-19 — Audit Premium HD ciblé après reprise
+
+**TERMINÉ sur le périmètre ciblé :** 17 routes contrôlées dans Chromium intégré aux largeurs demandées 390 et 1280 px. Aucun débordement horizontal, aucune image cassée et aucun contrôle visible sans nom accessible. Le menu mobile expose ses sept destinations ; le contrôle de mouvement bascule vers « Mouvement réduit » avec état coché.
+
+Deux manifestations d'un même conflit de cascade ont été reproduites puis corrigées sur Téléchargements : mot « téléchargements » coupé en desktop et héros mobile de 3724 px repoussant le titre près de y=1922. Après correction, le héros est explicitement en grille, le titre complet reste visible à 390 et 1280 px, et scrollWidth égale clientWidth (375 puis 1265). Preuve structurée : `qa/premium-hd-targeted-audit-20260919.json`.
+
+La feuille cinématique gagne 52 octets ; projection du précache 799961/800000 octets à partir de la dernière mesure conservée. Le contrôle structurel réussit sur 17 pages, 13 scripts et 84 empreintes. `check-cache.mjs` reste **BLOQUÉ / PREUVE MANQUANTE** par l'absence du baseline canonique ; la projection ne remplace pas son exécution.
+
+**VF NON VALIDÉE** : 400 %, lecteur d'écran réel, baseline cache canonique et appareils physiques restent ouverts.
