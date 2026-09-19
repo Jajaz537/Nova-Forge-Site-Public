@@ -1438,3 +1438,33 @@ PR #39 : **TERMINÉE — fusionnée**.
 - croissance visuelle individuelle : **EN COURS** ;
 - preview HTTPS finale, appareils physiques, lecteur d'écran natif, zoom natif 400 %, Safari/Firefox finaux et CWV représentatifs : **PREUVE MANQUANTE**.
 
+## Candidat ciblé — architecture de croissance visuelle en couches — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-layered-growth-contract-20260919`, base fraîche `aeb24f276cd7c542f55b2ef2b2856684e1e969b0`. CodeQL de la base : **success** (run `35469618100`).
+
+Objectif : avancer la croissance visuelle réelle sans inventer d'assets ni dupliquer le loup/dragon déjà présents dans le panorama composite.
+
+Implémentation :
+
+- contrat `visualGrowth.model=layered-stage-assets-v1` ;
+- environnement séparé + slots `wolf` et `dragon` ;
+- cinq stades canoniques par compagnon ;
+- activation `atomic-current-stage` ;
+- assets limités à `./assets/living-world/` et même origine ;
+- chargement `current-stage-only` ;
+- cache `runtime-on-demand` ;
+- fallback garanti vers `modaryx-wolf-dragon-hero.webp` tant que les couches finales sont absentes ;
+- configuration `ready` incomplète ou URL externe : fail-closed.
+
+État produit actuel : `visualGrowth.status=awaiting-assets`. Aucun faux visuel de stade n'est publié.
+
+Budget candidat :
+
+- runtime monde vivant : **19707 octets** ;
+- noyau dérivé : **115329 octets** ;
+- marge sous 800000 : **684671 octets**.
+
+État : **EN COURS — micro-preuve ciblée CI requise avant intégration**.
+
+La croissance visuelle individuelle reste **EN COURS** tant que les vrais assets Premium HD séparés ne sont pas présents et prouvés.
+
