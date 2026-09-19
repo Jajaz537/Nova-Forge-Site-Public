@@ -212,3 +212,19 @@ Preuves acquises sur origine loopback digne de confiance :
 
 Limites maintenues : preview publique HTTPS, mise à jour A→B, autres navigateurs, appareils physiques, quota sous pression et CWV.
 
+## Mise à jour PWA A → B — Chromium — 19 septembre 2026
+
+PR #34 / merge `6871d3a52ea1ad7dd6e6d8979f146cb7f95bec2c`.  
+Run final `35465473185` : **success / PASS CIBLÉ**.
+
+Preuves acquises sur copie temporaire du candidat :
+
+- Stage A installé ;
+- `registration.update()` exécuté ;
+- Stage B activé ;
+- ancien cache MODARYX supprimé ;
+- nouveau cache utilisé hors ligne après arrêt réel du serveur ;
+- la page offline servie correspond bien à la version B.
+
+La preuve couvre la mécanique d'update du service worker en Chromium loopback. Elle ne vaut pas preview publique HTTPS ni appareil physique.
+
