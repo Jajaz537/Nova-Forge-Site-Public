@@ -91,5 +91,16 @@
     "remote_profile_upload_required": false,
     "fps_guarantee": false,
     "stability_guarantee": false
+  },
+  "living_world": {
+    "execution": "browser-shared-timeline",
+    "clock_model": "shared-world-utc",
+    "timeline_path": "./data/living-world.json",
+    "day_phase_active": true,
+    "companion_growth_logic_active": true,
+    "visible_growth_milestones": true,
+    "layered_character_visual_growth": false,
+    "reduced_motion_respected": true,
+    "remote_account_required": false
   }
 }
