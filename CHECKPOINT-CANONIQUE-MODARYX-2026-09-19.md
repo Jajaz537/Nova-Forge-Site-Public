@@ -1739,3 +1739,34 @@ Fonctionnalité intégrée :
 - marge : **684152 octets** ;
 - `main`, DNS, DNSSEC, IONOS, secrets et configuration Cloudflare critique : inchangés.
 
+
+
+## Mise à jour anti-oubli — synchronisation monde réel intégrée — 20 septembre 2026
+
+Vérification Git fraîche avant cette mise à jour documentaire :
+
+- branche active PR #12 : `design/modaryx-premium-hd-20260914-work` ;
+- HEAD observé après correction du registre anti-oubli : `42da5d9809c7d4dcb11d9c3ea25fe70460940a92` ;
+- PR #12 : ouverte, brouillon, non fusionnée ;
+- `main` et infrastructure critique : inchangés.
+
+Écart documentaire isolé :
+
+- le présent checkpoint documentait déjà correctement l'intégration de la synchronisation monde réel ;
+- `qa/MODARYX-ANTI-OUBLI.md` conservait encore l'ancien libellé « candidat / preuve CI requise avant fusion » ;
+- cet ancien libellé était devenu obsolète après la fusion de PR #43 et les micro-preuves ciblées vertes.
+
+Correction ciblée :
+
+- registre anti-oubli réconcilié au commit `42da5d9809c7d4dcb11d9c3ea25fe70460940a92` ;
+- aucun runtime, asset, workflow, `main`, DNS, DNSSEC, IONOS ou paramètre Cloudflare critique modifié.
+
+État canonique à reprendre :
+
+- **TERMINÉ sur le périmètre ciblé** — moteur automatique saison Nord/Sud/tropical + heure locale + fusion météo normalisée + confidentialité ;
+- PR #43 : **TERMINÉE — fusionnée** au commit `e728670d763bdd872b670b798b323e1cfc8597f7` ;
+- preuves ciblées : `PASS_TARGETED_REAL_WORLD_SYNC`, `PASS_TARGETED_REAL_WORLD_SYNC_BROWSER`, performance labo verte ;
+- **PREUVE MANQUANTE** — exécution réelle de la Pages Function sur une preview HTTPS avec `request.cf` ;
+- **BLOQUÉ / décision externe** — météo réelle production tant que fournisseur, licence et attribution ne sont pas validés.
+
+Aucun full replay n'a été relancé pour cette réconciliation documentaire.
