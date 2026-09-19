@@ -2019,3 +2019,45 @@ Preuves ciblées PR #51 :
 5. poursuivre ensuite juvénile → adolescent → jeune adulte → adulte du dragon ;
 6. seulement après 10/10, préparer l'activation réelle de la croissance visuelle sans faux PASS.
 
+## Asset compagnon — Dragonneau — 20 septembre 2026
+
+PR #52 : **TERMINÉE — fusionnée** dans la branche active PR #12.
+
+- commit d'intégration : `19c0da457d8f6e587b8d48500ca6b35692efb660` ;
+- asset : `assets/living-world/dragon-baby.png` ;
+- dimensions : **1600 × 900** ;
+- PNG RGBA, `alpha=true` ;
+- SHA-256 : `3f2067fcbe7ea7ceb3a1fe76611f3438dcd1807723c9d2bc1e8c03d9945adb66` ;
+- direction : Dragonneau réaliste, anatomie juvénile, expression calme, composition trois-quarts, sans armure, accessoire, texte ni autre animal ;
+- asset gardé **non référencé** ; `visualGrowth.status=awaiting-assets` inchangé.
+
+Preuves ciblées PR #52 :
+
+- Layered Growth Asset Gate `35477467690` — **success** avec `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ;
+- `dragon-baby.png` détecté comme `candidate-layer` : 1600 × 900, alpha=true, failures=[] ;
+- Site First Source `35477467766` — **success** ;
+- PWA Offline `35477467671` — **success** ;
+- Browser Accessibility `35477467702` — **success** ;
+- Browser Reflow `35477467706` — **success** ;
+- Lab Performance `35477467667` — **success**.
+
+État :
+
+- environnement séparé : **TERMINÉ** ;
+- couches compagnon : **6/10 TERMINÉES** ;
+- loup, cinq stades : **TERMINÉ sur les assets séparés prouvés** ;
+- Dragonneau : **TERMINÉ sur l'asset séparé prouvé** ;
+- **EN COURS** — dragon juvénile / adolescent / jeune adulte / adulte ;
+- validation artistique humaine finale du bundle complet : **PREUVE MANQUANTE** ;
+- aucun passage `ready` avant bundle complet ;
+- `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
+
+### Prochain point logique
+
+1. vérifier Git frais avant toute nouvelle écriture ;
+2. dériver le **dragon juvénile** du Dragonneau pour conserver strictement son identité visuelle ;
+3. détourage + PNG 1600 × 900 avec alpha ;
+4. intégration isolée + PR brouillon + micro-preuves ciblées ;
+5. poursuivre ensuite adolescent → jeune adulte → adulte ;
+6. seulement après 10/10, préparer l'activation réelle de la croissance visuelle sans faux PASS.
+
