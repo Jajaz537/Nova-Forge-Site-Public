@@ -12,11 +12,31 @@
       "label": "Loup",
       "bornAt": "2026-09-19T00:00:00Z",
       "stages": [
-        {"id": "baby", "fromDay": 0, "label": "Louveteau"},
-        {"id": "juvenile", "fromDay": 45, "label": "Loup juvénile"},
-        {"id": "adolescent", "fromDay": 120, "label": "Loup adolescent"},
-        {"id": "young-adult", "fromDay": 270, "label": "Jeune adulte"},
-        {"id": "adult", "fromDay": 540, "label": "Loup adulte"}
+        {
+          "id": "baby",
+          "fromDay": 0,
+          "label": "Louveteau"
+        },
+        {
+          "id": "juvenile",
+          "fromDay": 45,
+          "label": "Loup juvénile"
+        },
+        {
+          "id": "adolescent",
+          "fromDay": 120,
+          "label": "Loup adolescent"
+        },
+        {
+          "id": "young-adult",
+          "fromDay": 270,
+          "label": "Jeune adulte"
+        },
+        {
+          "id": "adult",
+          "fromDay": 540,
+          "label": "Loup adulte"
+        }
       ]
     },
     {
@@ -24,25 +44,78 @@
       "label": "Dragon",
       "bornAt": "2026-09-19T00:00:00Z",
       "stages": [
-        {"id": "baby", "fromDay": 0, "label": "Dragonneau"},
-        {"id": "juvenile", "fromDay": 60, "label": "Dragon juvénile"},
-        {"id": "adolescent", "fromDay": 150, "label": "Dragon adolescent"},
-        {"id": "young-adult", "fromDay": 330, "label": "Jeune adulte"},
-        {"id": "adult", "fromDay": 720, "label": "Dragon adulte"}
+        {
+          "id": "baby",
+          "fromDay": 0,
+          "label": "Dragonneau"
+        },
+        {
+          "id": "juvenile",
+          "fromDay": 60,
+          "label": "Dragon juvénile"
+        },
+        {
+          "id": "adolescent",
+          "fromDay": 150,
+          "label": "Dragon adolescent"
+        },
+        {
+          "id": "young-adult",
+          "fromDay": 330,
+          "label": "Jeune adulte"
+        },
+        {
+          "id": "adult",
+          "fromDay": 720,
+          "label": "Dragon adulte"
+        }
       ]
     }
   ],
   "dayPhases": [
-    {"id": "night", "fromHour": 0, "label": "Nuit calme"},
-    {"id": "dawn", "fromHour": 5, "label": "Aube"},
-    {"id": "day", "fromHour": 8, "label": "Journée vivante"},
-    {"id": "dusk", "fromHour": 18, "label": "Crépuscule"},
-    {"id": "night", "fromHour": 22, "label": "Nuit calme"}
+    {
+      "id": "night",
+      "fromHour": 0,
+      "label": "Nuit calme"
+    },
+    {
+      "id": "dawn",
+      "fromHour": 5,
+      "label": "Aube"
+    },
+    {
+      "id": "day",
+      "fromHour": 8,
+      "label": "Journée vivante"
+    },
+    {
+      "id": "dusk",
+      "fromHour": 18,
+      "label": "Crépuscule"
+    },
+    {
+      "id": "night",
+      "fromHour": 22,
+      "label": "Nuit calme"
+    }
   ],
   "principles": {
     "sharedProgression": true,
     "noRemoteAccountRequired": true,
     "reducedMotionRespected": true,
-    "visualGrowthRequiresLayeredCharacterAssets": true
+    "visualGrowthRequiresLayeredCharacterAssets": true,
+    "sharedStageOrder": true,
+    "independentGrowthPace": true
+  },
+  "growthModel": {
+    "id": "shared-companion-life-stages-v1",
+    "order": [
+      "baby",
+      "juvenile",
+      "adolescent",
+      "young-adult",
+      "adult"
+    ],
+    "pace": "independent-per-species"
   }
 }

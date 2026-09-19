@@ -133,3 +133,16 @@ Ressources nouvelles chargées en runtime, donc hors install-précache :
 
 Le JSON de chronologie est classé comme donnée fraîche explicite ; les CSS/JS restent couverts par le cache runtime. Le lot ne relève pas le seuil de 800000.
 
+### Modèle de croissance partagé — mise à jour runtime
+
+La clarification « mêmes stades, rythme indépendant » ne modifie pas le noyau install-précaché : **111076 octets**, marge **688924 octets** sous 800000.
+
+Les deux fichiers runtime concernés ont grandi légèrement pour déclarer et valider le modèle canonique :
+
+- `assets/living-world.js` : **4985 octets** ;
+- `assets/living-world.css` : **3649 octets** ;
+- `data/living-world.json` : **2431 octets** ;
+- total runtime monde vivant : **11065 octets**.
+
+Cette hausse runtime de 1450 octets n'est pas ajoutée au précache d'installation.
+

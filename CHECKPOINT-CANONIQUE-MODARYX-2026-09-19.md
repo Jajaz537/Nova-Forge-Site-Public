@@ -411,3 +411,28 @@ Après micro-preuves ciblées et vérification Git fraîche :
 
 La règle produit reste : MODARYX doit devenir un univers qui évolue, pas un fond animé décoratif ni une collection d'images figées.
 
+## Décision canonique — mêmes stades pour le loup et le dragon — 19 septembre 2026
+
+L'utilisateur confirme explicitement la règle suivante :
+
+- **Louveteau / Dragonneau** au départ ;
+- puis, pour les deux compagnons : **juvénile → adolescent → jeune adulte → adulte** ;
+- même ordre de stades pour le loup et le dragon ;
+- vitesse de croissance configurable indépendamment par espèce.
+
+Implémentation isolée sur `chatgpt/modaryx-shared-growth-model-20260919` depuis le HEAD actif `062adc2758a369c3773fd7bc7829c8a534a0eed6`.
+
+Le contrat `data/living-world.json` déclare maintenant `growthModel.order` = `baby / juvenile / adolescent / young-adult / adult` et `pace: independent-per-species`. Le moteur `assets/living-world.js` refuse une configuration où un compagnon ne respecte pas cet ordre canonique.
+
+Micro-preuve ciblée : **PASS CIBLÉ**.
+
+- ordre partagé déclaré : conforme ;
+- ordre du loup : conforme ;
+- ordre du dragon : conforme ;
+- seuils de chaque espèce strictement croissants ;
+- rythme déclaré indépendant ;
+- validation moteur du modèle et des habitants présente ;
+- empreintes SHA-256 JS/JSON réconciliées.
+
+Le noyau précaché reste **111076 octets**. Le runtime monde vivant passe à **11065 octets**. La croissance visuelle individuelle reste **EN COURS** tant que les personnages ne sont pas séparés du panorama composite.
+

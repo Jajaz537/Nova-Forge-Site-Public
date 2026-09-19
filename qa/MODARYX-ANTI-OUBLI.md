@@ -98,3 +98,13 @@ Décision utilisateur à conserver avant la VF : MODARYX ne doit pas rester une 
 
 Première base technique : `data/living-world.json`, `assets/living-world.js`, `assets/living-world.css` et `qa/MODARYX-LIVING-WORLD-SYSTEM-20260919.md`.
 
+### Règle canonique de croissance des compagnons — 19 septembre 2026
+
+Décision utilisateur explicite à ne pas perdre :
+
+- **Louveteau / Dragonneau** au départ ;
+- puis pour les deux : **juvénile → adolescent → jeune adulte → adulte** ;
+- le loup et le dragon utilisent donc le **même ordre de stades** ;
+- leurs vitesses de croissance peuvent être réglées séparément ;
+- toute future couche visuelle doit respecter ce modèle partagé et montrer le stade réellement calculé, sans sauter directement à une apparence adulte.
+
