@@ -6,6 +6,7 @@
   const statusNode = document.querySelector('[data-world-status]');
   const phaseNode = document.querySelector('[data-world-phase]');
   const ageNode = document.querySelector('[data-world-age]');
+  const chronicleNode = document.querySelector('[data-world-chronicle]');
   const inhabitantNodes = new Map(
     [...document.querySelectorAll('[data-world-inhabitant]')]
       .map((node) => [node.dataset.worldInhabitant, node])
@@ -15,7 +16,7 @@
       .map((node) => [node.dataset.worldNext, node])
   );
 
-  if (!statusNode && !phaseNode && !ageNode && inhabitantNodes.size === 0 && nextStageNodes.size === 0) return;
+  if (!statusNode && !phaseNode && !ageNode && !chronicleNode && inhabitantNodes.size === 0 && nextStageNodes.size === 0) return;
 
   const DAY_MS = 24 * 60 * 60 * 1000;
   const REQUIRED_GROWTH_ORDER = ['baby', 'juvenile', 'adolescent', 'young-adult', 'adult'];
@@ -78,12 +79,32 @@
     return active;
   }
 
+  function ambientSignalFor(now, phase, worldDays) {
+    const model = config?.ambientSignals;
+    const entries = Array.isArray(model?.entries)
+      ? model.entries.filter((entry) =>
+          typeof entry?.id === 'string' &&
+          typeof entry?.text === 'string' &&
+          Array.isArray(entry?.phases) &&
+          entry.phases.includes(phase.id)
+        )
+      : [];
+    if (!entries.length) return null;
+
+    const cadence = Number(model?.cadenceHours);
+    const cadenceHours = Number.isFinite(cadence) ? Math.max(1, Math.floor(cadence)) : 3;
+    const hourSlot = Math.floor(worldHourFor(now) / cadenceHours);
+    const day = Number.isFinite(worldDays) ? worldDays : 0;
+    return entries[(day + hourSlot) % entries.length];
+  }
+
   function render(now = new Date()) {
     if (!config) return;
 
     const epoch = validDate(config?.clock?.epoch);
     const worldDays = epoch ? elapsedDays(epoch, now) : null;
     const phase = dayPhaseFor(now);
+    const signal = ambientSignalFor(now, phase, worldDays);
 
     root.dataset.worldPhase = phase.id;
     if (worldDays !== null) root.dataset.worldAgeDays = String(worldDays);
@@ -96,6 +117,14 @@
           ? 'Jour de fondation'
           : `Jour ${worldDays + 1} du monde`;
     }
+
+    if (chronicleNode) {
+      chronicleNode.textContent = signal?.text || 'Le royaume suit son rythme quotidien.';
+      if (signal?.id) chronicleNode.dataset.worldSignal = signal.id;
+      else delete chronicleNode.dataset.worldSignal;
+    }
+    if (signal?.id) root.dataset.worldSignal = signal.id;
+    else delete root.dataset.worldSignal;
 
     for (const inhabitant of config.inhabitants || []) {
       const node = inhabitantNodes.get(inhabitant.id);
