@@ -76,27 +76,32 @@
     {
       "id": "night",
       "fromHour": 0,
-      "label": "Nuit calme"
+      "label": "Nuit calme",
+      "activity": "Le royaume ralentit · veille nocturne"
     },
     {
       "id": "dawn",
       "fromHour": 5,
-      "label": "Aube"
+      "label": "Aube",
+      "activity": "Le royaume s’éveille · première lumière"
     },
     {
       "id": "day",
       "fromHour": 8,
-      "label": "Journée vivante"
+      "label": "Journée vivante",
+      "activity": "Le royaume vit pleinement · activité du jour"
     },
     {
       "id": "dusk",
       "fromHour": 18,
-      "label": "Crépuscule"
+      "label": "Crépuscule",
+      "activity": "Le royaume ralentit · lumières du soir"
     },
     {
       "id": "night",
       "fromHour": 22,
-      "label": "Nuit calme"
+      "label": "Nuit calme",
+      "activity": "Le royaume ralentit · veille nocturne"
     }
   ],
   "principles": {

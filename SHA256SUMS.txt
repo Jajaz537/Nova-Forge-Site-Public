@@ -9,8 +9,8 @@ d381131783627707943e8361e22cb4294682f44e57b9c01e5d0c1cc28eacf505  ./assets/commu
 01fa07ab10924bf4637e2830830cd7fb5c50452a495870f00fd8f0a65dc5a62f  ./assets/downloads.js
 33a0530ceb4cafa33a6e0f05cc04994d086b8d11308d5f5f2a9fac20861efe81  ./assets/forge-field.svg
 bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-schema-lite.js
-85c1f58b7033889e60e9c0620f1cd6546194e13850b2fd6866bf575e80c1e895  ./assets/living-world.css
-c2b6ab9f6105c715c33eb722dce530e8a3e622c2b146b5479fd3651026113aa0  ./assets/living-world.js
+6a6faf7b4e1a4a5624494e54f77655969655507d2777e27db6d0c9e4389da0d9  ./assets/living-world.css
+e2d65432772bf50487085fbfc4a7cae4dc2f949b20a990e80840871546b0ad28  ./assets/living-world.js
 6953d4b684b13f1afdcf6452d0452c809f5307ad5a8362da00c72e8d454a28e2  ./assets/modaryx-cinematic-system.css
 32a014bfa790bc6f0cecf68f2743e7969201ad5d8eea613cf1d3e84862773a0e  ./assets/modaryx-home-cinematic.css
 06b1dae65f9c0706fabc9b85a46cd3c50d7a5a5d2e6015b2be064b751d7b8189  ./assets/modaryx-mark-192.png
@@ -45,7 +45,7 @@ b40f0cc65a0de9de1a435011012f0d2329f81fc873c66058ef65f3d646bb53a4  ./catalog.html
 010737ea4c600d6111d3fa94d6f86e454595dd6f0b5ddb4e0ab01b689b70fbd3  ./data/catalog.json
 08f9810bea5a8afc20acbf7a6f5b23c5cb4647621f6a1787d42a3fa212981283  ./data/compatibility-graph.json
 6e0ba5cbf31c7ed012de0cbc787e01220554205e8507efed2f81626f264309fa  ./data/integration-readiness.json
-ea0fbef9fd177ef4c75af6e71b912c1461b218b7fd9a8fb29de09300cddb7500  ./data/living-world.json
+c536a182d277c390d3e956038f20650d677e6811d1d00cc39b0dbfba9c938463  ./data/living-world.json
 fd77943e2b758314ee5beb7a6b89680a4a16c7958e6f4b6e8ad7f250d7feed80  ./data/search-index.json
 b4322fc3a865e55dc1732e5ab920b17e7f55e6352fe2471aaefec49398c36092  ./documentation.html
 75c384b7fefa2300c8d30d1a2a3901563c9ce76e8839aa6917a6a7ed19daa78e  ./downloads.html
@@ -53,7 +53,7 @@ d60000a6ce45fe5caef1906d8d0d15d26ecab82402aecff396c1b23f32fc8ec0  ./downloads.js
 72018ca9e81dca07685833c5d4f38f514cf3e4b1c50445679deff9eb3d7d3c52  ./ecosystem.html
 261acad337661d82075248de35bf8e8f935d5b2709b5f9dc0ebdf3740c5d1dfc  ./favicon.svg
 2433335ff10bbe343c02227c18a6251a8279fda04eb7ce9905f8ec93f7c4b4bc  ./games/index.html
-8c8d929b1c7b26e9ef6bba3f161c069c24b389828f10ea7c8e46cb045b8e1545  ./index.html
+01352adcf4d76e61978784f55d4510795f936bfb24e19dc46c31f2ec56502fda  ./index.html
 8bc91afa3e4cb0db77dd1c192c93cf568506b77eb605965254dae7c63151102a  ./profiles.html
 63e81934a3512eba251c3feb9f1c7e6e84e32f7cdc1688a9279adfa4a72ab764  ./project-balanced-latency-pack.html
 0d239c42fecfca3e1bd5ecc23337c4fd0c7499a39dd837ec7c89bf3df869c08c  ./project-ember-textures.html
