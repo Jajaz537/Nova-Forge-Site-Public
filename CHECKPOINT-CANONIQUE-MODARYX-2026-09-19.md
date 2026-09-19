@@ -1417,3 +1417,24 @@ Lot documentaire uniquement :
 
 État : **EN COURS — revue diff + intégration contrôlée requises**.
 
+## Intégration contrôlée — réconciliation matrice finale — 19 septembre 2026
+
+PR #39 : **TERMINÉE — fusionnée**.
+
+- commit d'intégration : `3a795f443f2adc01588596a27e402af7e279f424` ;
+- lot documentaire uniquement ;
+- `FINAL-EXTERNAL-VALIDATION-MATRIX.md` et `MODARYX-VF-STATUS.md` alignés avec les preuves intégrées ;
+- les anciennes métriques historiques restent conservées mais ne décrivent plus l'état courant ;
+- aucune preuve native/externe manquante n'a été transformée en PASS ;
+- `main`, produit, DNS, DNSSEC, IONOS et Cloudflare critique : inchangés.
+
+État courant consolidé :
+
+- 17 pages publiques ;
+- noyau précaché : **114977 octets** ;
+- marge : **685023 octets** ;
+- runtime monde vivant : **13287 octets** ;
+- PWA Chromium, vrais fichiers, accessibilité Chromium, reflow et performance labo : **TERMINÉS sur leurs périmètres ciblés** ;
+- croissance visuelle individuelle : **EN COURS** ;
+- preview HTTPS finale, appareils physiques, lecteur d'écran natif, zoom natif 400 %, Safari/Firefox finaux et CWV représentatifs : **PREUVE MANQUANTE**.
+
