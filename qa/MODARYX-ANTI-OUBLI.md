@@ -151,7 +151,9 @@ Statuts à conserver :
 - PR #46 : **TERMINÉE — fusionnée** au commit `8e9fc9bb2bdc73c047f6b65bd0b223a7b297e744` ; `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING`, Source, PWA Offline, Reflow Chromium, Accessibility Chromium et Lab Performance : **success** ;
 - **TERMINÉ — 1/10 couche compagnon** — `assets/living-world/wolf-baby.png` (Louveteau), **1600 × 900 RGBA / alpha=true**, PR #47 fusionnée au commit `ad1de7ce2e99030474e303de9d7044c788c9eb76` ;
 - PR #47 : `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ; Source, PWA Offline, Reflow Chromium, Accessibility Chromium et Lab Performance : **success** ;
-- **EN COURS** — 4 couches loup restantes + 5 couches dragon avec alpha ;
+- **TERMINÉ — 2/10 couches compagnon** — `assets/living-world/wolf-juvenile.png` (Loup juvénile), **1600 × 900 RGBA / alpha=true**, SHA-256 `ae7397920f962352e5e47f67f7973fd4711d059e33d83e2188e7b7e73a8a2c03`, PR #48 fusionnée au commit `01af14c8e5623e86ee5166cbcefee32f34603b2f` ;
+- PR #48 : `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ; Source, PWA Offline, Reflow Chromium, Accessibility Chromium et Lab Performance : **success** ;
+- **EN COURS** — 3 couches loup restantes + 5 couches dragon avec alpha ;
 - `visualGrowth.status=awaiting-assets` reste obligatoire tant que les dix couches compagnon ne sont pas toutes présentes et prouvées ;
 - la croissance visuelle individuelle ne devient **TERMINÉE** qu'après présence, rendu et preuve des assets réels.
 
