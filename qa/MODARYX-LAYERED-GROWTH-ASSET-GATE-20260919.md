@@ -13,8 +13,10 @@ En état `ready`, la garde exigera :
 - chemins sous `./assets/living-world/` uniquement ;
 - fichiers réellement présents ;
 - dimensions exactement égales au canevas `1600 × 900` ;
-- PNG ou WebP reconnu ;
-- transparence alpha sur chaque couche de compagnon ;
+- environnement : PNG, JPEG ou WebP reconnu ;
+- couches loup/dragon : PNG ou WebP avec transparence alpha obligatoire ;
 - chemins uniques.
+
+En état `awaiting-assets`, tout fichier candidat `environment-*` déjà présent est également contrôlé sur son format lisible et ses dimensions `1600 × 900`, sans pour autant être activé.
 
 La garde ne fabrique aucun visuel et ne remplace pas une recette humaine de cohérence artistique.
