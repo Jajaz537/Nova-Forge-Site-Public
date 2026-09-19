@@ -89,3 +89,4 @@ b042d8cea4c041dda9f4433bee8691c5ab7fe6a330d2ab5707940bfc4a331746  ./sw.js
 3a95d6d3b05c922bf2a747ebc5ab7558b6a6a7ee66269f8de7610fab7b920a4e  ./assets/living-world-visual-growth.css
 3a4ea7cb430f7d7e4d9a3f15e4399ed461127cb361cfc1c69f4e692259c5608f  ./assets/real-world-sync.mjs
 1d4bbafcd1a269da87cc6abb78cf65aa392cc7a3f3b49aa40cf8119dc6432e85  ./assets/real-world-sync.css
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./assets/living-world/environment-premium.jpg
