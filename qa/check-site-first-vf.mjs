@@ -67,6 +67,20 @@ function textContent(fragment) {
     .trim();
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\function textContent(fragment) {
+  return fragment
+    .replace(/<script\b[\s\S]*?<\/script>/gi, '')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+');
+}
+
 for (const page of pages) {
   if (!exists(page)) {
     fail(`missing public page: ${page}`);
@@ -130,7 +144,11 @@ for (const page of pages) {
     const type = attr(control, 'type');
     if (!id || type === 'hidden') continue;
     const labelled = attr(control, 'aria-label') || attr(control, 'aria-labelledby');
-    const labelFor = new RegExp(`<label\\b[^>]*\\sfor=["']${id.replace(/[.*+?^$()|[\\]\\]/g, '\\  const refs = [...html.matchAll(/(?:href|src)=["']([^"']+)["']/gi)].map((match) => match[1]);
+    const labelFor = new RegExp(`<label\\b[^>]*\\sfor=["']${escapeRegExp(id)}["'][^>]*>`, 'i').test(html);
+    if (!labelled && !labelFor) fail(`${page}: form control #${id} has no explicit label`);
+  }
+
+  const refs = [...html.matchAll(/(?:href|src)=["']([^"']+)["']/gi)].map((match) => match[1]);
 ')}["'][^>]*>`, 'i').test(html);
     if (!labelled && !labelFor) fail(`${page}: form control #${id} has no explicit label`);
   }
