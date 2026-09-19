@@ -1888,3 +1888,30 @@ Gate candidat PR #47 :
 - **EN COURS** — loup juvénile/adolescent/jeune adulte/adulte + cinq stades dragon ;
 - aucun passage `ready` avant bundle complet ;
 - `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
+
+
+## Asset compagnon — Loup juvénile — 20 septembre 2026
+
+PR #48 : **TERMINÉE — fusionnée** dans la branche active PR #12.
+
+- commit d'intégration : `01af14c8e5623e86ee5166cbcefee32f34603b2f` ;
+- asset : `assets/living-world/wolf-juvenile.png` ;
+- dimensions : **1600 × 900** ;
+- PNG RGBA, `alpha=true` ;
+- SHA-256 : `ae7397920f962352e5e47f67f7973fd4711d059e33d83e2188e7b7e73a8a2c03` ;
+- identité visuelle dérivée du Louveteau avec progression juvénile vérifiée ;
+- asset gardé **non référencé** ; `visualGrowth.status=awaiting-assets` inchangé.
+
+Gate candidat PR #48 :
+
+- `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ;
+- `wolf-juvenile.png` détecté : 1600 × 900, alpha=true, failures=[] ;
+- Site First Source, PWA Offline, Reflow Chromium, Accessibility Chromium et Lab Performance : **success**.
+
+État :
+
+- environnement séparé : **TERMINÉ** ;
+- couches compagnon : **2/10 TERMINÉES** ;
+- **EN COURS** — loup adolescent / jeune adulte / adulte + cinq stades dragon ;
+- aucun passage `ready` avant bundle complet ;
+- `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
