@@ -344,7 +344,7 @@ try {
     assert(invalid.heading === 'Lien de vérification invalide', 'invalid fragment status missing');
 
     const hash='a'.repeat(64);
-    await navigate(cdp, 'verify.html#sha256=' + hash);
+    await evaluate(cdp, `(() => { location.hash = '#sha256=' + '${hash}'; return true; })()`);
     const valid = await waitFor(cdp,
       `(() => {
         const input=document.querySelector('#expected-sha256');
