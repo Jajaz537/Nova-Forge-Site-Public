@@ -159,3 +159,18 @@ La chronologie inclut désormais une chronique déterministe par créneaux de 3 
 - **EN COURS** — représentation visuelle réelle des habitants, animaux et compagnons quand les assets Premium HD correspondants existent ;
 - ne jamais confondre un signal narratif avec une preuve que le personnage est visible dans l'image.
 
+## Synchronisation monde réel — décision approuvée — 20 septembre 2026
+
+Décision utilisateur explicitement retenue pour la VF :
+
+- MODARYX doit mélanger **saison locale + heure locale + météo réelle** pour sa lentille atmosphérique ;
+- l’adaptation saisonnière doit être automatique et ne pas gêner l’utilisateur avec une demande GPS ;
+- hémisphère Nord et Sud doivent être inversés correctement ;
+- les zones tropicales doivent utiliser un profil tropical plutôt qu’un faux hiver tempéré ;
+- pluie, neige, brouillard, vent et orage doivent influencer l’ambiance avec intensité plafonnée, lisibilité et performances prioritaires ;
+- la chronologie MODARYX, les événements du royaume et la croissance loup/dragon restent partagés et indépendants de cette couche locale ;
+- aucun fournisseur météo ne doit être activé silencieusement sans validation de licence, attribution et confidentialité ;
+- aucune localisation exacte ne doit être renvoyée au navigateur ni conservée pour cette fonctionnalité.
+
+État candidat : moteur automatique saison/heure + contrat météo et endpoint same-origin intégrés sur branche isolée. **PREUVE CI requise avant fusion**. Météo réelle production : **BLOQUÉE tant que le fournisseur/licence ne sont pas validés**.
+

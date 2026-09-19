@@ -339,3 +339,29 @@ Même candidat :
 
 Portée : la chronique rend le monde narrativement vivant et partagé ; elle ne prétend pas que les habitants cités sont déjà rendus visuellement dans le panorama.
 
+## Synchronisation monde réel — saison + heure + météo — 20 septembre 2026
+
+PR #43, candidat ciblé.
+
+Preuves exactes sur le HEAD produit `1e2a6969c4e28f36f6bb13527e5386f5fe4f67e8` :
+
+- Local Functional Browser `35473223025` — **success** ;
+  - marker `PASS_TARGETED_REAL_WORLD_SYNC` ;
+  - marker `PASS_TARGETED_REAL_WORLD_SYNC_BROWSER` ;
+  - janvier Nord → hiver ;
+  - janvier Sud → été ;
+  - profil tropical → tropical ;
+  - pluie / neige / brouillard / orage normalisés ;
+  - aucune permission GPS ;
+  - aucune coordonnée exacte renvoyée ;
+  - arrondi serveur fournisseur : **0,1°** ;
+  - fallback navigateur observé : saison + heure locale actives, météo indisponible sans fournisseur ;
+  - scénario synthétique Sud + pluie : été + pluie modérée + couche météo visible + attribution.
+- Lab Performance `35473223046` — **success / PASS CIBLÉ** ;
+  - accueil mobile : LCP **2180 ms**, CLS **0** ;
+  - accueil desktop : LCP **2072 ms**, CLS **0,0033** ;
+  - tous les budgets laboratoire restent respectés.
+- Site First Source, Reflow, Accessibility Chromium, PWA Offline, PWA Update, PWA Installability, Living Chronicle, Living World Offline et Layered Growth Contract — **success** sur le même candidat.
+
+Portée : saison et heure locales sont prouvées automatiquement sans GPS. Le moteur météo et ses effets sont prouvés avec données synthétiques normalisées. Une météo réelle de production reste distincte : fournisseur/licence/attribution et preview Pages Function réelle sont encore à fermer.
+

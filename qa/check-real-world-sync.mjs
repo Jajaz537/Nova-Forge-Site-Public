@@ -1,0 +1,97 @@
+import fs from 'node:fs';
+import {
+  inferClimateBandFromTimezone,
+  seasonState,
+  localDaypart,
+  visualMix
+} from '../assets/real-world-sync.mjs';
+import {
+  roundCoordinate,
+  climateBandForLatitude,
+  coarseContextFromCf,
+  normalizeOpenMeteoCurrent
+} from '../functions/_lib/local-context.mjs';
+
+const failures=[];
+const assert=(name,condition)=>{if(!condition)failures.push(name);};
+
+assert('Sydney timezone must map south',inferClimateBandFromTimezone('Australia/Sydney')==='south-temperate');
+assert('Singapore timezone must map tropical',inferClimateBandFromTimezone('Asia/Singapore')==='tropical');
+assert('Paris fallback must map north',inferClimateBandFromTimezone('Europe/Paris')==='north-temperate');
+
+assert('north January winter',seasonState(new Date('2026-01-15T12:00:00Z'),'north-temperate','UTC').season==='winter');
+assert('north July summer',seasonState(new Date('2026-07-15T12:00:00Z'),'north-temperate','UTC').season==='summer');
+assert('south January summer',seasonState(new Date('2026-01-15T12:00:00Z'),'south-temperate','UTC').season==='summer');
+assert('south July winter',seasonState(new Date('2026-07-15T12:00:00Z'),'south-temperate','UTC').season==='winter');
+assert('tropical stays tropical',seasonState(new Date('2026-07-15T12:00:00Z'),'tropical','UTC').season==='tropical');
+
+const janStart=seasonState(new Date('2026-01-02T12:00:00Z'),'north-temperate','UTC');
+const febEnd=seasonState(new Date('2026-02-27T12:00:00Z'),'north-temperate','UTC');
+assert('season progress must advance',janStart.progress<febEnd.progress);
+
+assert('dawn daypart',localDaypart(new Date('2026-01-15T06:00:00Z'),'UTC')==='dawn');
+assert('day daypart',localDaypart(new Date('2026-01-15T12:00:00Z'),'UTC')==='day');
+assert('dusk daypart',localDaypart(new Date('2026-01-15T19:00:00Z'),'UTC')==='dusk');
+assert('night daypart',localDaypart(new Date('2026-01-15T23:00:00Z'),'UTC')==='night');
+
+assert('latitude north band',climateBandForLatitude(52.1)==='north-temperate');
+assert('latitude south band',climateBandForLatitude(-33.9)==='south-temperate');
+assert('latitude tropical band',climateBandForLatitude(1.3)==='tropical');
+assert('coordinate rounding',roundCoordinate(-33.8688,0.1)===-33.9);
+
+const coarse=coarseContextFromCf({
+  latitude:'52.12345',longitude:'4.98765',timezone:'Europe/Amsterdam',
+  city:'ShouldNotEscape',postalCode:'0000'
+});
+assert('coarse source',coarse.source==='cloudflare-coarse');
+assert('coarse timezone',coarse.timezone==='Europe/Amsterdam');
+assert('coarse climate band',coarse.climateBand==='north-temperate');
+assert('provider latitude rounded',coarse.providerCoordinates.latitude===52.1);
+assert('provider longitude rounded',coarse.providerCoordinates.longitude===5);
+
+const rain=normalizeOpenMeteoCurrent({current:{
+  time:'2026-09-20T00:00',weather_code:61,precipitation:2.4,rain:2.4,snowfall:0,
+  cloud_cover:92,wind_speed_10m:24,temperature_2m:12,apparent_temperature:10,is_day:0
+}});
+assert('rain normalized live',rain.status==='live'&&rain.condition==='rain'&&rain.intensity>0);
+const snow=normalizeOpenMeteoCurrent({current:{
+  time:'2026-01-20T20:00',weather_code:73,precipitation:1.2,rain:0,snowfall:1.5,
+  cloud_cover:100,wind_speed_10m:18,temperature_2m:-2,apparent_temperature:-6,is_day:0
+}});
+assert('snow normalized',snow.condition==='snow'&&snow.intensity>0);
+const fog=normalizeOpenMeteoCurrent({current:{
+  time:'2026-10-20T07:00',weather_code:45,precipitation:0,rain:0,snowfall:0,
+  cloud_cover:100,wind_speed_10m:4,temperature_2m:8,apparent_temperature:7,is_day:1
+}});
+assert('fog normalized',fog.condition==='fog');
+const storm=normalizeOpenMeteoCurrent({current:{
+  time:'2026-08-20T16:00',weather_code:95,precipitation:5,rain:5,snowfall:0,
+  cloud_cover:100,wind_speed_10m:52,temperature_2m:24,apparent_temperature:26,is_day:1
+}});
+assert('storm normalized',storm.condition==='storm');
+
+const mix=visualMix('winter','night',snow);
+assert('winter night mix dims',mix.day.bright<1);
+assert('snow weather mix exists',mix.weather.bright>=1);
+
+const functionSource=fs.readFileSync(new URL('../functions/api/local-context.js',import.meta.url),'utf8');
+const headers=fs.readFileSync(new URL('../_headers',import.meta.url),'utf8');
+assert('function must not return exact coordinates',functionSource.includes('exactCoordinatesReturned: false'));
+assert('function must not return city',functionSource.includes('cityReturned: false')&&!functionSource.includes('context.request.cf.city'));
+assert('function must not request GPS',functionSource.includes('gpsPermissionRequested: false'));
+assert('site permissions policy keeps geolocation disabled',headers.includes('geolocation=()'));
+assert('weather provider defaults off',functionSource.includes("MODARYX_WEATHER_MODE || 'off'"));
+assert('provider coordinates are rounded before weather request',functionSource.includes('providerCoordinates.latitude'));
+
+console.log(JSON.stringify({
+  marker:failures.length?'FAIL_TARGETED_REAL_WORLD_SYNC':'PASS_TARGETED_REAL_WORLD_SYNC',
+  seasons:{
+    northJanuary:seasonState(new Date('2026-01-15T12:00:00Z'),'north-temperate','UTC'),
+    southJanuary:seasonState(new Date('2026-01-15T12:00:00Z'),'south-temperate','UTC'),
+    tropical:seasonState(new Date('2026-01-15T12:00:00Z'),'tropical','UTC')
+  },
+  weather:{rain:rain.condition,snow:snow.condition,fog:fog.condition,storm:storm.condition},
+  privacy:{gps:false,exactCoordinatesReturned:false,providerRoundedDegrees:0.1},
+  failures
+},null,2));
+if(failures.length)process.exitCode=1;

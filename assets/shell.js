@@ -107,3 +107,18 @@
   note.textContent = 'MODARYX MODS et Nova Forge OS sont deux produits distincts créés par la même équipe.';
   identity.append(note);
 })();
+
+(() => {
+  'use strict';
+  if (!document.querySelector('.modaryx-realm-hero')) return;
+  const scriptSource = document.currentScript?.src;
+  if (!scriptSource) return;
+  const start = () => {
+    const load = () => import(new URL('./real-world-sync.mjs', scriptSource).href).catch(() => {});
+    if ('requestIdleCallback' in window) window.requestIdleCallback(load, {timeout: 1400});
+    else window.setTimeout(load, 180);
+  };
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start, {once: true});
+})();
+

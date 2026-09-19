@@ -1644,3 +1644,65 @@ Budget :
 - **EN COURS** — vrais assets Premium HD séparés pour croissance et habitants visibles ;
 - `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
 
+## Candidat ciblé — synchronisation monde réel — 20 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-real-world-sync-20260920`, base fraîche `b26036851377e5f584c9a09aff5024df1a3773d0`. CodeQL de la base : **success** (run `35471613348`).
+
+Décision utilisateur intégrée dans le candidat :
+
+- fusion **saison locale + heure locale + météo réelle** pour l’atmosphère ;
+- aucune demande GPS pour le fonctionnement automatique ;
+- détection Nord / Sud / tropical via contexte réseau approximatif same-origin, avec fallback fuseau navigateur ;
+- inversion correcte des saisons Nord/Sud ;
+- effets pluie/neige/brouillard/orage prévus avec reduced-motion et intensité plafonnée ;
+- chronologie mondiale, croissance loup/dragon et événements partagés conservés indépendants ;
+- endpoint Pages Function `/api/local-context` sans retour de ville/code postal/coordonnées exactes ;
+- coordonnées réseau arrondies à **0,1°** côté serveur avant tout fournisseur météo ;
+- `Permissions-Policy: geolocation=()` conservée ;
+- météo fournisseur **off par défaut**.
+
+L’adaptateur Open-Meteo est préparé mais non activé. Aucune activation production n’est faite sans décision/licence/attribution appropriée.
+
+Budget candidat dérivé : noyau **115848 octets**, marge **684152 octets**. Runtime local atmosphère : **14190 octets**, chargé après `load` / idle.
+
+État : **EN COURS — micro-preuves source + navigateur + performance requises avant intégration**.
+
+`main`, DNS, DNSSEC, IONOS, secrets et configuration Cloudflare critique : inchangés.
+
+## Micro-preuves — synchronisation monde réel — 20 septembre 2026
+
+PR #43 candidat, HEAD produit prouvé : `1e2a6969c4e28f36f6bb13527e5386f5fe4f67e8`.
+
+Preuves :
+
+- Local Functional Browser `35473223025` — **success** ;
+  - `PASS_TARGETED_REAL_WORLD_SYNC` ;
+  - `PASS_TARGETED_REAL_WORLD_SYNC_BROWSER` ;
+  - Nord janvier = hiver, Sud janvier = été, tropical = tropical ;
+  - pluie/neige/brouillard/orage normalisés ;
+  - GPS = false ;
+  - coordonnées exactes renvoyées = false ;
+  - arrondi fournisseur = **0,1°** ;
+  - fallback automatique via fuseau navigateur observé ;
+  - scénario synthétique Sud + pluie validé.
+- Lab Performance `35473223046` — **success / PASS CIBLÉ** ;
+  - mobile : LCP **2180 ms**, CLS **0** ;
+  - desktop : LCP **2072 ms**, CLS **0,0033**.
+- Site First, reflow, accessibilité Chromium, PWA offline/update/installability, chronique vivante, état offline du monde et contrat de croissance — **success** sur le même candidat.
+
+Raffinement effectué après un premier run pourtant vert : le layout de la ligne Atmosphère locale est maintenant réservé dans la CSS déjà chargée, ce qui ramène le CLS desktop de ~0,0595 à ~0,0033.
+
+Budget :
+
+- noyau : **115848 octets** ;
+- marge : **684152 octets** ;
+- module local atmosphère : **10606 octets** ;
+- CSS lazy atmosphère : **2935 octets**.
+
+État :
+
+- **TERMINÉ sur le périmètre ciblé** — moteur saison Nord/Sud/tropical + heure locale + fusion météo + confidentialité + navigateur + performance ;
+- **PREUVE MANQUANTE** — vraie preview Cloudflare Pages exécutant `request.cf` ;
+- **BLOQUÉ / décision externe** — activation de météo réelle en production tant que fournisseur, licence et attribution ne sont pas validés ;
+- aucune configuration Cloudflare critique, DNS, secret ou `main` modifié.
+

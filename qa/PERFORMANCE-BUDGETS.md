@@ -278,3 +278,34 @@ Delta du candidat par rapport à la base `7f5a1309...` :
 
 Le noyau précaché dérivé passe de **114977** à **115126 octets**, soit **684874 octets** de marge sous 800000. Les données/JS/CSS du monde vivant restent hors précache cœur conformément à l'architecture scalable-cache.
 
+## Synchronisation monde réel — impact candidat — 20 septembre 2026
+
+Par rapport au HEAD de base `b2603685...` :
+
+- `index.html` : **+174 octets** dans le noyau ;
+- `assets/shell.js` : **+548 octets** dans le noyau ;
+- noyau dérivé : **115848 octets** ;
+- marge sous 800000 : **684152 octets** ;
+- `assets/real-world-sync.mjs` : **10606 octets**, chargé après `load` / idle uniquement sur l’accueil ;
+- `assets/real-world-sync.css` : **3584 octets**, chargé par le module ;
+- ces deux fichiers de synchronisation restent hors précache cœur.
+
+La météo externe est désactivée par défaut ; elle n’ajoute donc aucun appel fournisseur au candidat courant.
+
+### Réservation de layout — synchronisation monde réel
+
+Le premier candidat était déjà sous budgets, mais l'accueil desktop montrait un CLS laboratoire de **0,0595** car la ligne « Atmosphère locale » recevait une partie de sa géométrie via la feuille chargée après `load`.
+
+Correction ciblée premium :
+
+- géométrie de `.world-local-context` et de l'attribution déplacée dans `living-world.css`, déjà présent avant rendu ;
+- `real-world-sync.css` rendu layout-neutral ;
+- aucun coût ajouté au noyau précaché par ce déplacement ;
+- CSS runtime monde vivant : **5130 octets** ;
+- CSS lazy synchronisation : **2935 octets** ;
+- module synchronisation : **10606 octets** ;
+- noyau courant du candidat : **115848 octets** ;
+- marge : **684152 octets**.
+
+Micro-preuve après correction : run `35473223046` **success** — accueil mobile LCP **2180 ms / CLS 0**, desktop LCP **2072 ms / CLS 0,0033**.
+
