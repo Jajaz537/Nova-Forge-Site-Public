@@ -14,6 +14,7 @@
   if (!statusNode && !phaseNode && !ageNode && inhabitantNodes.size === 0) return;
 
   const DAY_MS = 24 * 60 * 60 * 1000;
+  const REQUIRED_GROWTH_ORDER = ['baby', 'juvenile', 'adolescent', 'young-adult', 'adult'];
   let timer = null;
   let config = null;
 
@@ -107,6 +108,16 @@
       const data = await response.json();
       if (data?.schemaVersion !== 1 || data?.worldId !== 'modaryx-living-world') {
         throw new Error('living-world-invalid');
+      }
+      const declaredOrder = Array.isArray(data?.growthModel?.order) ? data.growthModel.order : [];
+      if (declaredOrder.join('|') !== REQUIRED_GROWTH_ORDER.join('|')) {
+        throw new Error('living-world-growth-model-invalid');
+      }
+      for (const inhabitant of data.inhabitants || []) {
+        const order = Array.isArray(inhabitant?.stages) ? inhabitant.stages.map((stage) => stage?.id) : [];
+        if (order.join('|') !== REQUIRED_GROWTH_ORDER.join('|')) {
+          throw new Error('living-world-growth-stages-invalid');
+        }
       }
       config = data;
       render(new Date());
