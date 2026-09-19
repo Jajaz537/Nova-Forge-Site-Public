@@ -1310,3 +1310,25 @@ Budget runtime monde vivant : **13287 octets**. Noyau précaché : inchangé à 
 
 État : **EN COURS — micro-preuve ciblée CI requise avant intégration**.
 
+## Micro-preuve — monde vivant hors ligne honnête — 19 septembre 2026
+
+PR #37 candidat :
+
+- Living World Offline State `35468410746` — **success / PASS CIBLÉ** ;
+- Site First Source `35468410714` — success ;
+- PWA Offline `35468410669` — success ;
+- Reflow `35468410836` — success ;
+- Accessibility Chromium `35468410848` — success ;
+- Lab Performance `35468410673` — success.
+
+Résultat ciblé :
+
+- une réponse `X-Modaryx-Cache: offline-stale` n'est plus présentée comme fraîche ;
+- le monde continue sa chronologie locale à partir de la dernière configuration connue ;
+- l'interface expose explicitement l'état hors ligne ;
+- sans cache, l'état devient `unavailable` sans bloquer le contenu principal ;
+- noyau précaché inchangé : **114977 octets** ;
+- runtime monde vivant : **13287 octets**.
+
+État : **TERMINÉ sur la micro-preuve ciblée ; fusion PR #37 requise avant intégration canonique**.
+
