@@ -76,3 +76,15 @@ Lot ciblé de préparation VF sur les 17 pages publiques :
 
 Ces règles sont des **garde-fous source**. Elles ne constituent pas une preuve native 400 % ni une validation Windows High Contrast. Les preuves navigateur/accessibilité externes restent requises.
 
+## Métadonnées de partage et canonicals — 19 septembre 2026
+
+Finition Site First sur les pages indexables :
+
+- URL canonique explicite alignée sur les routes publiques du sitemap ;
+- Open Graph harmonisé : `type`, `locale`, `site_name`, `title`, `description`, `url` ;
+- `og:url` doit être strictement identique au canonical ;
+- la 404 reste volontairement hors index et n'est pas dotée d'un canonical artificiel ;
+- aucun `og:image` n'est inventé tant qu'une image sociale dédiée et validée n'est pas explicitement retenue.
+
+Le contrôle Site First bloque désormais les métadonnées manquantes ou dupliquées sur les pages indexables.
+
