@@ -631,3 +631,12 @@ Depuis `4f772f9`, l’accueil emploie la même taxonomie de navigation que les s
 Le déploiement immuable `https://17c68919.nova-forge-site-public.pages.dev` a été inspecté en Chromium. La navigation tient sans collision au cadre observé de 1 348 px. La correction Profils de `a722a28` est enfin prouvée déployée : les derniers groupes impairs occupent la largeur prévue, sans cellule vide accidentelle ; largeur utile et scrollWidth égales à 1 348 px.
 
 Build et structure PASS, 84 empreintes valides, 34 assertions cache PASS, précache 799 842/800 000 octets. Captures avant/après et preuve Profils archivées dans `review-evidence/visual-finish-20260916/` au commit `c497d03`. Documentation, FAQ, liens de poursuite et footer ont aussi été inspectés sans nouveau défaut produit isolé. **VF officielle toujours non validée** : limites externes et états asynchrones non observés inchangés.
+
+## 2026-09-19 — Portes 400 %, lecteur d'écran et baseline cache
+
+- **PREUVE MANQUANTE — 400 % natif :** Firefox et Edge/Chromium pilotés imposent une largeur interne minimale d'environ 483–500 px dans cet environnement. La tentative ne démontre donc pas le reflow natif demandé à 400 % et ne produit ni PASS ni correction visuelle.
+- **BLOQUÉ / PREUVE MANQUANTE — lecteur d'écran réel :** aucun NVDA, Narrator ou autre lecteur d'écran pilotable n'est exposé. Les acquis clavier/DOM restent des précontrôles et ne ferment pas cette lane.
+- **BLOQUÉ / PREUVE MANQUANTE — cache :** `qa/check-cache.mjs` exige l'instantané externe frère `../site-baseline`. Son contrat a été retrouvé, mais ni sa provenance canonique ni son commit de référence ne sont conservés. Aucun dossier n'a été inventé. Voir `qa/CACHE-BASELINE-CONTRACT-20260919.md`.
+- **PREUVE MANQUANTE — appareils physiques :** contrôle séparé inchangé.
+
+La passe 200 % antérieure reste une preuve ciblée. Ces constats ne constituent pas une VF complète.
