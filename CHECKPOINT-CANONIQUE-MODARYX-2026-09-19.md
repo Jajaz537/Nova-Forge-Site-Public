@@ -454,3 +454,39 @@ La règle approuvée « mêmes stades, rythme indépendant » est maintenant int
 
 La croissance visuelle individuelle des personnages reste **EN COURS** tant que le panorama actuel n'est pas séparé en couches dédiées.
 
+## Confirmation utilisateur — état à conserver — 19 septembre 2026
+
+L'utilisateur demande explicitement de conserver comme référence de projet les décisions et résultats suivants :
+
+### Monde vivant
+
+- MODARYX doit être un **monde vivant**, pas une galerie d'images figées.
+- La direction visuelle actuellement approuvée est conservée ; ne pas relancer de nouvelles recherches d'illustrations sans besoin précis.
+- Le monde doit évoluer dans le temps : lumière, ambiance, activité discrète, animaux, habitants, gardes et évolutions progressives.
+- La croissance logique du loup et du dragon est déjà intégrée.
+- Ordre canonique commun : **bébé → juvénile → adolescent → jeune adulte → adulte**.
+- Libellés initiaux : **Louveteau** et **Dragonneau**.
+- La vitesse de croissance peut rester indépendante par espèce.
+- La croissance visuelle individuelle reste **EN COURS** jusqu'à séparation des personnages et du décor en couches dédiées.
+
+### Architecture octets / cache pour le futur
+
+- L'ancien modèle quasi global était proche de la saturation : **794167 / 800000 octets**, soit seulement **5833 octets** de marge.
+- La solution retenue est structurelle : **précache cœur compact + runtime cache contrôlé**.
+- Noyau courant dérivé : **111076 octets**.
+- Marge sous le garde-fou 800000 : **688924 octets**.
+- Les gros visuels, le monde vivant et les futurs jeux/mods/modules ne doivent pas être ajoutés mécaniquement au précache global.
+- Les contenus futurs doivent être chargés à la demande puis éventuellement mis en cache en runtime.
+- Runtime cache borné à **80 entrées non cœur**.
+- Le seuil **800000** reste un garde-fou ; ne pas l'augmenter arbitrairement pour masquer un problème d'architecture.
+- Runtime monde vivant courant : **11065 octets**, hors install-précache.
+- Objectif long terme : la croissance du catalogue, du monde vivant et des contenus ne doit plus faire grossir mécaniquement le précache cœur.
+
+### État de preuve
+
+- **TERMINÉ** : architecture cache structurelle intégrée ; croissance logique partagée loup/dragon intégrée.
+- **EN COURS** : croissance visuelle réelle des personnages et enrichissement progressif du monde vivant.
+- **PREUVE MANQUANTE** : validation PWA/offline HTTPS réelle, appareils physiques et autres preuves externes déjà listées.
+
+Cette section doit rester une référence de reprise et ne doit pas être rétrogradée par une ancienne conversation ou une ancienne estimation.
+
