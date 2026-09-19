@@ -234,3 +234,19 @@ Ajout de l'état explicite `fresh / offline-stale / unavailable` :
 
 Delta par rapport au lot précédent : **+756 octets runtime**. Aucun de ces octets n'entre dans le précache cœur ; le noyau reste **114977 octets** avant toute autre modification du présent lot.
 
+## Contrat visuel en couches — impact candidat — 19 septembre 2026
+
+Évolution runtime du monde vivant :
+
+- `assets/living-world.js` : **11048 octets** ;
+- `assets/living-world.css` : **5012 octets** ;
+- `data/living-world.json` : **3647 octets** ;
+- total runtime monde vivant : **19707 octets** ;
+- delta runtime : **+6420 octets**.
+
+Ces trois fichiers restent hors du précache cœur.
+
+`index.html` gagne **352 octets** pour les slots visuels et le fallback d'environnement. Noyau candidat dérivé : **115329 octets**, soit une marge de **684671 octets** sous 800000.
+
+Aucun asset de croissance lourd n'est ajouté au précache. Les futurs assets de stades suivent la politique `runtime-on-demand` et `current-stage-only`.
+
