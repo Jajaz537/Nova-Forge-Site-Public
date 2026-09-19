@@ -106,7 +106,6 @@ try{
       layerHidden:document.querySelector('[data-real-weather-layer]')?.hidden,
       text:document.querySelector('[data-real-world-context]')?.textContent||'',
       activity:document.querySelector('[data-local-world-activity]')?.textContent||'',
-      activity:document.querySelector('[data-local-world-activity]')?.textContent||'',
       chronicle:document.querySelector('[data-world-chronicle]')?.textContent||'',
       attribution:document.querySelector('[data-weather-attribution]')?.textContent||''
     };
@@ -135,7 +134,8 @@ try{
     return {
       weather:document.documentElement.dataset.localWeather,
       layerHidden:document.querySelector('[data-real-weather-layer]')?.hidden,
-      text:document.querySelector('[data-real-world-context]')?.textContent||''
+      text:document.querySelector('[data-real-world-context]')?.textContent||'',
+      activity:document.querySelector('[data-local-world-activity]')?.textContent||''
     };
   })()`,true);
   assert('clear spells state active',clearSpells.weather==='partly-cloudy');
