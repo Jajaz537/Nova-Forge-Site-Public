@@ -828,3 +828,28 @@ Aucun fichier du noyau précaché n'est modifié : noyau **113993 octets**, marg
 
 État : **EN COURS — micro-preuve CI requise avant intégration**.
 
+## Intégration contrôlée — canonical + Open Graph — 19 septembre 2026
+
+PR #29 : **TERMINÉE — fusionnée**.
+
+Micro-preuve préalable :
+
+- workflow **MODARYX Site First Targeted Source Proof** ;
+- run `35463339884` ;
+- conclusion : **success / PASS CIBLÉ**.
+
+Intégration :
+
+- commit de merge : `7bb0963091fe52fd98bf141734eaa584faee8335` ;
+- canonical explicite harmonisé sur les routes publiques des pages indexables ;
+- Open Graph harmonisé : type, locale, site_name, title, description, url ;
+- `og:url` aligné sur le canonical ;
+- 404 conservée en `noindex` sans canonical artificiel ;
+- empreintes des pages modifiées réconciliées ;
+- contrôle Site First renforcé contre métadonnées manquantes/dupliquées ;
+- noyau install-précaché inchangé à **113993 octets** ;
+- marge sous 800000 : **686007 octets** ;
+- `main` et infrastructure critique : inchangées.
+
+État : **TERMINÉ** sur la cohérence source des métadonnées ; validation de rendu des cartes sociales externes non revendiquée.
+
