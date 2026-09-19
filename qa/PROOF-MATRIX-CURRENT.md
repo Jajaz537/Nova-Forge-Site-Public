@@ -157,3 +157,22 @@ Après correction :
 
 Portée : Chromium headless sur serveur local. Cette preuve **ne ferme pas** le zoom navigateur natif 400 %, Firefox/Safari, lecteur d'écran, tactile/appareil physique, PWA réellement hors ligne ou CWV.
 
+## Fonctions locales — micro-preuve Chromium — 19 septembre 2026
+
+PR #31 / merge `033e3227fe9b776c4ca58c022dcceec2dbcc3c2a`.
+
+Premier run `35463958957` : **FAIL ciblé du harnais** sur une attente `Page.loadEventFired` après changement de fragment du Vérificateur. Catalogue, Recherche, Communauté et Creator Studio étaient déjà verts. La correction a uniquement adapté le harnais à une navigation même-document.
+
+Run corrigé `35464005629` : **success / PASS CIBLÉ**.
+
+Périmètre réellement observé dans Chromium headless :
+
+- filtre Catalogue + favori local + persistance ;
+- Recherche locale ;
+- collection Communauté locale + persistance ;
+- avis local + persistance ;
+- Creator Studio V2 + restauration, distribution verrouillée ;
+- fragment SHA-256 invalide puis valide dans Vérificateur.
+
+Limites : le sélecteur de fichiers natif, l'import par vrai fichier choisi par l'utilisateur et la vérification SHA-256 d'un vrai fichier restent des preuves séparées.
+
