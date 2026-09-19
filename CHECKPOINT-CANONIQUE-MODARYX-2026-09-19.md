@@ -1139,3 +1139,41 @@ Le contrôle ouvre les 17 pages publiques dans Chromium headless et vérifie : u
 
 Cette preuve ne remplace pas un lecteur d'écran natif ni une validation humaine complète.
 
+## Intégration contrôlée — accessibilité Chromium — 19 septembre 2026
+
+PR #35 : **TERMINÉE — fusionnée**.
+
+Premier run `35465633037` : **FAIL ciblé du harnais**.
+
+Erreur exacte :
+
+- le contrôle source considérait à tort comme non labellisés les champs inclus directement dans un `<label>` ;
+- l'arbre d'accessibilité Chromium indiquait pourtant déjà **0 contrôle interactif sans nom accessible**.
+
+Isolation :
+
+- champs Catalogue : labels englobants valides ;
+- cases Communauté générées : labels englobants valides ;
+- aucun défaut produit démontré.
+
+Correction ciblée :
+
+- le harnais accepte désormais `el.closest('label')` ;
+- aucun fichier produit modifié ;
+- aucun full replay.
+
+Micro-preuve finale :
+
+- run `35465685575` — **success / PASS CIBLÉ** ;
+- 17 pages contrôlées ;
+- H1 unique, main, skip-link, IDs, alt, labels, arbre AX et premier parcours clavier contrôlés ;
+- 0 contrôle interactif sans nom accessible détecté.
+
+Merge : `6966eb52a4fe1bc6a5deea5c75a4f3df4395805e`.
+
+État :
+
+- **TERMINÉ** — micro-preuve accessibilité structurelle/browser Chromium ;
+- **PREUVE MANQUANTE** — lecteur d'écran natif et validation humaine complète ;
+- aucun changement produit, `main`, DNS ou Cloudflare critique.
+
