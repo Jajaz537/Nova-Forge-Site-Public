@@ -127,14 +127,6 @@ const networkFirst = async (request, key, metadata = false, revalidate = false) 
   }
 };
 
-const cacheFirst = async (request, key) => {
-  const cached = await readCache(key);
-  if (cached) return cached;
-  const response = await fetch(request);
-  await storeResponse(key, response);
-  return response;
-};
-
 const runtimeStaticKey = (url) => {
   if (url.origin !== BASE_URL.origin || !url.pathname.startsWith(BASE_URL.pathname)) return null;
   if (!STATIC_EXTENSIONS.test(url.pathname)) return null;
@@ -179,7 +171,7 @@ self.addEventListener('fetch', (event) => {
     if (!key) return;
     operation = /\.(?:css|js)$/i.test(url.pathname)
       ? networkFirst(event.request, key, false, true)
-      : cacheFirst(event.request, key);
+      : networkFirst(event.request, key);
   }
 
   event.respondWith(operation);
