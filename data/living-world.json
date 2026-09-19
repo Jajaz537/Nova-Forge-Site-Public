@@ -122,5 +122,44 @@
       "adult"
     ],
     "pace": "independent-per-species"
+  },
+  "visualGrowth": {
+    "model": "layered-stage-assets-v1",
+    "status": "awaiting-assets",
+    "canvas": {
+      "width": 1600,
+      "height": 900
+    },
+    "fallback": "composite-hero",
+    "environmentAsset": null,
+    "activation": "atomic-current-stage",
+    "assetPolicy": {
+      "sameOrigin": true,
+      "allowedPrefix": "./assets/living-world/",
+      "loading": "current-stage-only",
+      "cache": "runtime-on-demand"
+    },
+    "slots": [
+      {
+        "inhabitantId": "wolf",
+        "stages": {
+          "baby": null,
+          "juvenile": null,
+          "adolescent": null,
+          "young-adult": null,
+          "adult": null
+        }
+      },
+      {
+        "inhabitantId": "dragon",
+        "stages": {
+          "baby": null,
+          "juvenile": null,
+          "adolescent": null,
+          "young-adult": null,
+          "adult": null
+        }
+      }
+    ]
   }
 }

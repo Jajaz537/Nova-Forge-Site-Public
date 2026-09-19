@@ -10,7 +10,7 @@ d381131783627707943e8361e22cb4294682f44e57b9c01e5d0c1cc28eacf505  ./assets/commu
 33a0530ceb4cafa33a6e0f05cc04994d086b8d11308d5f5f2a9fac20861efe81  ./assets/forge-field.svg
 bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-schema-lite.js
 5e6d2be40cd9b8e8acdec0dfadfbe0541d990be420fd2d12c837cfb62ef444f9  ./assets/living-world.css
-7f145683a4e516df9233524b57c1381a1e8cfe99a2f5ba4d61d71161ac4c7d13  ./assets/living-world.js
+29d89f9be8fbde68a476cd7adc164260ea9fbce526412f2d3443ffcb812713fc  ./assets/living-world.js
 6953d4b684b13f1afdcf6452d0452c809f5307ad5a8362da00c72e8d454a28e2  ./assets/modaryx-cinematic-system.css
 eb6f0664c33e98f8918b8cde38cfaea673a39f72f8a6110f39bb0e07d2aab952  ./assets/modaryx-home-cinematic.css
 06b1dae65f9c0706fabc9b85a46cd3c50d7a5a5d2e6015b2be064b751d7b8189  ./assets/modaryx-mark-192.png
@@ -45,7 +45,7 @@ a90b528864f0453c4a89dd4fd888f6230d962c8515e1b35eec936e7631b8be2a  ./catalog.html
 010737ea4c600d6111d3fa94d6f86e454595dd6f0b5ddb4e0ab01b689b70fbd3  ./data/catalog.json
 08f9810bea5a8afc20acbf7a6f5b23c5cb4647621f6a1787d42a3fa212981283  ./data/compatibility-graph.json
 6e0ba5cbf31c7ed012de0cbc787e01220554205e8507efed2f81626f264309fa  ./data/integration-readiness.json
-c536a182d277c390d3e956038f20650d677e6811d1d00cc39b0dbfba9c938463  ./data/living-world.json
+940e872fd0199adb3c87299cc18fd191c0cce36a7e4b2e289fcb9bcc3b8737ad  ./data/living-world.json
 fd77943e2b758314ee5beb7a6b89680a4a16c7958e6f4b6e8ad7f250d7feed80  ./data/search-index.json
 cb5466b2c442b8bb17339f7b1b0817d1498ed78071ce5a385b43487363a0640e  ./documentation.html
 a57f398f4c55e92bc1dbfbed8c52a42fa27c0727e7d772a0c43c5a5a1f54c53d  ./downloads.html
@@ -85,3 +85,5 @@ b042d8cea4c041dda9f4433bee8691c5ab7fe6a330d2ab5707940bfc4a331746  ./sw.js
 109cfc15e7739d8174d3cfdf56c5fdd42a4a8974653687ec3a8e8dbfdc145da4  assets/modaryx-foundations.css
 8211d85acc6d18450010903bd0934ac5f0ea4e5f42d38daa7bcd8d3c590578f6  assets/modaryx-wolf-dragon-hero.webp
 1997aac139789ade6441d9896aab57444b36a26f3b4d32e35e8630eec4253b0a  assets/modaryx-world-portals.webp
+8658be18d73b76139d66db5f57512a36432d00fbd5f6e51dc8804659f7aa1042  ./assets/living-world-visual-growth.mjs
+3a95d6d3b05c922bf2a747ebc5ab7558b6a6a7ee66269f8de7610fab7b920a4e  ./assets/living-world-visual-growth.css

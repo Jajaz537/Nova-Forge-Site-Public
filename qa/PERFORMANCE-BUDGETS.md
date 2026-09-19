@@ -234,3 +234,36 @@ Ajout de l'état explicite `fresh / offline-stale / unavailable` :
 
 Delta par rapport au lot précédent : **+756 octets runtime**. Aucun de ces octets n'entre dans le précache cœur ; le noyau reste **114977 octets** avant toute autre modification du présent lot.
 
+## Contrat visuel en couches — impact candidat — 19 septembre 2026
+
+Évolution runtime du monde vivant :
+
+- `assets/living-world.js` : **11048 octets** ;
+- `assets/living-world.css` : **5012 octets** ;
+- `data/living-world.json` : **3647 octets** ;
+- total runtime monde vivant : **19707 octets** ;
+- delta runtime : **+6420 octets**.
+
+Ces trois fichiers restent hors du précache cœur.
+
+`index.html` gagne **352 octets** pour les slots visuels et le fallback d'environnement. Noyau candidat dérivé : **115329 octets**, soit une marge de **684671 octets** sous 800000.
+
+Aucun asset de croissance lourd n'est ajouté au précache. Les futurs assets de stades suivent la politique `runtime-on-demand` et `current-stage-only`.
+
+### Correction du coût critique — croissance visuelle en couches
+
+La première variante ajoutait **+6420 octets** au runtime monde vivant chargé sur l'accueil et **+352 octets** à `index.html`. Le run labo `35470244794` a échoué sur l'accueil mobile avec **LCP 3100 ms**.
+
+Après isolation :
+
+- `index.html` revient à **19411 octets**, soit **0 octet de delta** par rapport à la base ;
+- `assets/living-world.css` revient à **4049 octets** ;
+- `assets/living-world.js` : **7439 octets** ;
+- `data/living-world.json` : **3647 octets** ;
+- runtime monde vivant chargé courant : **15135 octets**, delta **+1848 octets** ;
+- module dormant `living-world-visual-growth.mjs` : **6071 octets** ;
+- CSS dormant `living-world-visual-growth.css` : **1009 octets** ;
+- ces deux fichiers ne sont demandés qu'après passage explicite à `visualGrowth.status=ready`.
+
+Le noyau install-précaché revient donc à **114977 octets**, marge **685023 octets** sous 800000. La micro-preuve performance doit confirmer cette correction avant fusion.
+

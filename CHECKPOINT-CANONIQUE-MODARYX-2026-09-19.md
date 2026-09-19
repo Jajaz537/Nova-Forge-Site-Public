@@ -1438,3 +1438,65 @@ PR #39 : **TERMINÉE — fusionnée**.
 - croissance visuelle individuelle : **EN COURS** ;
 - preview HTTPS finale, appareils physiques, lecteur d'écran natif, zoom natif 400 %, Safari/Firefox finaux et CWV représentatifs : **PREUVE MANQUANTE**.
 
+## Candidat ciblé — architecture de croissance visuelle en couches — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-layered-growth-contract-20260919`, base fraîche `aeb24f276cd7c542f55b2ef2b2856684e1e969b0`. CodeQL de la base : **success** (run `35469618100`).
+
+Objectif : avancer la croissance visuelle réelle sans inventer d'assets ni dupliquer le loup/dragon déjà présents dans le panorama composite.
+
+Implémentation :
+
+- contrat `visualGrowth.model=layered-stage-assets-v1` ;
+- environnement séparé + slots `wolf` et `dragon` ;
+- cinq stades canoniques par compagnon ;
+- activation `atomic-current-stage` ;
+- assets limités à `./assets/living-world/` et même origine ;
+- chargement `current-stage-only` ;
+- cache `runtime-on-demand` ;
+- fallback garanti vers `modaryx-wolf-dragon-hero.webp` tant que les couches finales sont absentes ;
+- configuration `ready` incomplète ou URL externe : fail-closed.
+
+État produit actuel : `visualGrowth.status=awaiting-assets`. Aucun faux visuel de stade n'est publié.
+
+Budget candidat :
+
+- runtime monde vivant : **19707 octets** ;
+- noyau dérivé : **115329 octets** ;
+- marge sous 800000 : **684671 octets**.
+
+État : **EN COURS — micro-preuve ciblée CI requise avant intégration**.
+
+La croissance visuelle individuelle reste **EN COURS** tant que les vrais assets Premium HD séparés ne sont pas présents et prouvés.
+
+## Erreur ciblée et correction — croissance visuelle / performance — 19 septembre 2026
+
+Run performance `35470244794` : **FAIL CIBLÉ**.
+
+Erreur exacte :
+
+- `index.html mobile: LCP 3100.0ms > 2500`.
+- le reste du run restait dans les budgets ; accueil desktop LCP **2036 ms**, CLS **0,0024**.
+
+Isolation :
+
+- le premier candidat avait ajouté la logique de couches directement au JS/CSS critiques et des slots dormants dans l'accueil ;
+- aucun asset de croissance réel n'existe encore, donc ce coût critique n'apportait aucun bénéfice visuel actuel.
+
+Correction ciblée :
+
+- `index.html` et `living-world.css` restaurés au chemin critique précédent ;
+- moteur de couches déplacé dans `assets/living-world-visual-growth.mjs` + CSS associé ;
+- chargement dynamique uniquement si `visualGrowth.status=ready` ;
+- état courant `awaiting-assets` : aucun téléchargement du module/couche ;
+- activation future atomique après préchargement environnement + loup + dragon ;
+- fail-closed sur bundle incomplet, URL externe ou échec de chargement.
+
+Budget corrigé :
+
+- noyau : **114977 octets** ;
+- marge : **685023 octets** ;
+- runtime monde vivant chargé courant : **15135 octets** ;
+- runtime visuel dormant : **7080 octets**, à la demande uniquement.
+
+État : **EN COURS — micro-preuve ciblée après correction requise avant fusion**. Aucun full replay lancé.
+

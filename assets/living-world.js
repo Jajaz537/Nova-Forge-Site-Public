@@ -129,6 +129,22 @@
       statusNode.dataset.worldSource = sourceState;
     }
     root.dataset.worldSource = sourceState;
+    root.dataset.worldVisualGrowth = config?.visualGrowth?.status || 'awaiting-assets';
+    if (config?.visualGrowth?.status === 'ready') {
+      import(new URL('./assets/living-world-visual-growth.mjs', document.baseURI).href)
+        .then((module) => module.renderVisualGrowth({
+          config,
+          document,
+          root,
+          stages: Object.fromEntries(
+            (config.inhabitants || []).map((inhabitant) => [
+              inhabitant.id,
+              root.dataset[`world${inhabitant.id[0].toUpperCase() + inhabitant.id.slice(1)}Stage`]
+            ])
+          )
+        }))
+        .catch(() => { root.dataset.worldVisualGrowth = 'fallback'; });
+    }
   }
 
   function schedule() {
@@ -161,6 +177,10 @@
         if (order.join('|') !== REQUIRED_GROWTH_ORDER.join('|')) {
           throw new Error('living-world-growth-stages-invalid');
         }
+      }
+      const visualGrowth = data?.visualGrowth;
+      if (!visualGrowth || visualGrowth.model !== 'layered-stage-assets-v1' || !['awaiting-assets', 'ready'].includes(visualGrowth.status)) {
+        throw new Error('living-world-visual-growth-contract-invalid');
       }
       config = data;
       render(new Date());
