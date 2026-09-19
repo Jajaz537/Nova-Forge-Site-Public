@@ -1575,3 +1575,20 @@ La garde future refusera `ready` si l'environnement + les 10 couches loup/dragon
 - **EN COURS** — production/intégration des vrais assets Premium HD ;
 - croissance visuelle individuelle réelle toujours non déclarée terminée.
 
+## Candidat ciblé — chronique vivante partagée — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-living-chronicle-20260919`, base fraîche `7f5a1309e6a17f0aa821c56054c24d7367d20a1f`. CodeQL de la base : **success** (run `35470947024`).
+
+Implémentation :
+
+- chronique ambiante partagée par créneaux de 3 heures ;
+- sélection déterministe via jour du monde + créneau horaire ;
+- activités cohérentes avec la direction approuvée : gardes, ateliers, marchés, oiseaux, faune, patrouilles, quais et veilleurs ;
+- texte séparé du statut technique et de la croissance des compagnons ;
+- aucune prétention de rendu visuel de ces habitants ;
+- empreintes réconciliées.
+
+Budget candidat : noyau dérivé **115126 octets**, marge **684874 octets**.
+
+État : **EN COURS — micro-preuve ciblée CI requise avant intégration**.
+
