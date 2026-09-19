@@ -3,7 +3,7 @@ import fs from 'node:fs';
 
 const ORIGIN = process.env.MODARYX_TEST_ORIGIN || 'http://127.0.0.1:4173';
 const CHROME_BIN = process.env.CHROME_BIN || 'google-chrome';
-const DEBUG_PORT = Number(process.env.CHROME_DEBUG_PORT || 9225);
+const DEBUG_PORT = Number(process.env.CHROME_DEBUG_PORT || (20000 + (process.pid % 20000)));
 const CACHE_NAME = 'modaryx-site-v120-scalable';
 const failures = [];
 const observations = {};
