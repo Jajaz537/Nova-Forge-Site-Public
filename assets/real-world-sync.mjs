@@ -65,7 +65,7 @@ export function zonedParts(date = new Date(), timezone = null) {
 }
 
 function seasonQuarter(month) {
-  return Math.floor(((month % 12) + 1) / 3) % 4;
+  return Math.floor((month % 12) / 3) % 4;
 }
 
 function seasonBounds(year, month) {
