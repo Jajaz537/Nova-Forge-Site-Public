@@ -997,3 +997,32 @@ Le navigateur écrit et relit des fichiers réels du runner. Le dialogue graphiq
 
 État : **EN COURS — micro-preuve CI requise avant intégration**.
 
+## Intégration contrôlée — fichiers réels Chromium — 19 septembre 2026
+
+PR #32 : **TERMINÉE — fusionnée**.
+
+Micro-preuve :
+
+- workflow **MODARYX Real File Browser Proof** ;
+- run `35464233996` ;
+- conclusion : **success / PASS CIBLÉ**.
+
+Preuves obtenues :
+
+- Vérificateur : vrai fichier + SHA-256 exact ;
+- Communauté : collection JSON exportée, lue, puis réimportée ;
+- Communauté : avis JSON exporté, lu, puis réimporté ;
+- Creator Studio : manifeste JSON exporté, lu, puis réimporté ;
+- distribution Studio restée `locked`, `downloadable=false`, `releaseReceipt=null`.
+
+Intégration :
+
+- merge `b2674dbc9cbfe6dc84fbd550bf5754e64c7e4640` ;
+- aucun fichier produit modifié par ce lot QA ;
+- `main`, backend et infrastructure critique inchangés.
+
+État :
+
+- **TERMINÉ** — lecture/écriture de vrais fichiers via les fonctions web en Chromium ;
+- **PREUVE MANQUANTE** — dialogue graphique natif du sélecteur de fichier OS.
+
