@@ -21,6 +21,7 @@
   const REQUIRED_GROWTH_ORDER = ['baby', 'juvenile', 'adolescent', 'young-adult', 'adult'];
   let timer = null;
   let config = null;
+  let sourceState = 'fresh';
 
   function validDate(value) {
     const date = new Date(value);
@@ -120,9 +121,14 @@
     }
 
     if (statusNode) {
-      statusNode.textContent = phase.activity || 'Le monde évolue avec le temps, même entre deux visites.';
+      const activity = phase.activity || 'Le monde évolue avec le temps, même entre deux visites.';
+      statusNode.textContent = sourceState === 'offline-stale'
+        ? `${activity} · dernière configuration connue hors ligne`
+        : activity;
       statusNode.dataset.worldReady = 'true';
+      statusNode.dataset.worldSource = sourceState;
     }
+    root.dataset.worldSource = sourceState;
   }
 
   function schedule() {
@@ -139,6 +145,9 @@
         credentials: 'same-origin'
       });
       if (!response.ok) throw new Error('living-world-unavailable');
+      sourceState = response.headers?.get('X-Modaryx-Cache') === 'offline-stale'
+        ? 'offline-stale'
+        : 'fresh';
       const data = await response.json();
       if (data?.schemaVersion !== 1 || data?.worldId !== 'modaryx-living-world') {
         throw new Error('living-world-invalid');
@@ -157,9 +166,11 @@
       render(new Date());
       schedule();
     } catch {
+      root.dataset.worldSource = 'unavailable';
       if (statusNode) {
         statusNode.textContent = 'Le monde vivant est momentanément indisponible ; le contenu principal reste accessible.';
         statusNode.dataset.worldReady = 'false';
+        statusNode.dataset.worldSource = 'unavailable';
       }
     }
   }

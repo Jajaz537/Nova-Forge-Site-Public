@@ -282,3 +282,22 @@ Les runs source, reflow, accessibilité Chromium, fonctions locales, PWA offline
 
 Portée : **laboratoire Chromium uniquement**. Les CWV représentatifs en production restent **PREUVE MANQUANTE**.
 
+## Monde vivant — fraîcheur offline — 19 septembre 2026
+
+PR #37, candidat ciblé.
+
+Run `35468410746` : **success / PASS CIBLÉ** — marker `PASS_TARGETED_LIVING_WORLD_OFFLINE_STATE`.
+
+Preuves :
+
+- source fraîche → `worldSource=fresh` ;
+- copie service worker stale → `worldSource=offline-stale` ;
+- le statut annonce explicitement « dernière configuration connue hors ligne » ;
+- la chronologie et les stades restent calculés depuis les règles mises en cache ;
+- sans configuration disponible → `worldSource=unavailable`, état non prêt et message explicite ;
+- styles stale/unavailable présents.
+
+Contrôles automatiquement déclenchés sur le même candidat : Site First source, PWA offline, reflow, accessibilité Chromium et performance labo — **success**.
+
+Portée : la preuve couvre la logique et l'intégration navigateur existante ; elle ne remplace pas une preview HTTPS publique ni un appareil physique.
+

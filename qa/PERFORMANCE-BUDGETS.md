@@ -223,3 +223,14 @@ Run final `35466565740` : **PASS CIBLÉ laboratoire**, avec LCP accueil **2012 m
 
 Ces chiffres ne sont pas des CWV réels utilisateurs.
 
+## Monde vivant — état de fraîcheur offline — impact runtime
+
+Ajout de l'état explicite `fresh / offline-stale / unavailable` :
+
+- `assets/living-world.js` : **6490 octets** ;
+- `assets/living-world.css` : **4049 octets** ;
+- `data/living-world.json` : **2748 octets** ;
+- runtime monde vivant total : **13287 octets**.
+
+Delta par rapport au lot précédent : **+756 octets runtime**. Aucun de ces octets n'entre dans le précache cœur ; le noyau reste **114977 octets** avant toute autre modification du présent lot.
+
