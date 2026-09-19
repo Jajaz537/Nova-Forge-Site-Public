@@ -176,3 +176,18 @@ Périmètre réellement observé dans Chromium headless :
 
 Limites : le sélecteur de fichiers natif, l'import par vrai fichier choisi par l'utilisateur et la vérification SHA-256 d'un vrai fichier restent des preuves séparées.
 
+## Imports/exports avec vrais fichiers — Chromium — 19 septembre 2026
+
+PR #32 / merge `b2674dbc9cbfe6dc84fbd550bf5754e64c7e4640`.  
+Run `35464233996` : **success / PASS CIBLÉ**.
+
+Preuves acquises :
+
+- Vérificateur sur un vrai fichier du runner avec correspondance SHA-256 exacte ;
+- export + lecture + réimport d'une collection Communauté réelle ;
+- export + lecture + réimport d'un avis Communauté réel ;
+- export + lecture + réimport d'un manifeste Creator Studio réel ;
+- contrats locaux et verrouillage de distribution conservés.
+
+La preuve ferme la lecture/écriture de fichiers réels par les fonctions web dans Chromium. Elle **ne ferme pas** l'UX du sélecteur graphique natif OS, qui n'est pas piloté.
+
