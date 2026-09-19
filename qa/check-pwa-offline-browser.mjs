@@ -232,11 +232,13 @@ try {
   const offlineCatalog = await evaluate(cdp, `(() => ({
     title:document.querySelector('h1')?.textContent||'',
     main:Boolean(document.querySelector('#main')),
+    filters:Boolean(document.querySelector('#catalog-filter-form')),
     controller:Boolean(navigator.serviceWorker.controller),
     ready:document.readyState
   }))()`);
+  observations.offlineCatalog = offlineCatalog;
   assert(!offlineCatalogNav.errorText, 'catalog offline navigation failed: ' + offlineCatalogNav.errorText);
-  assert(offlineCatalog.main && /catalogue/i.test(offlineCatalog.title), 'catalog offline page content missing');
+  assert(offlineCatalog.main && offlineCatalog.filters && /Explorez les projets/i.test(offlineCatalog.title), 'catalog offline page content missing');
   assert(offlineCatalog.controller, 'catalog offline page lost service worker controller');
 
   const offlineAliasNav = await navigate(cdp, 'catalog?game=demo', {allowError: true});
@@ -244,10 +246,12 @@ try {
   const offlineAlias = await evaluate(cdp, `(() => ({
     title:document.querySelector('h1')?.textContent||'',
     main:Boolean(document.querySelector('#main')),
+    filters:Boolean(document.querySelector('#catalog-filter-form')),
     href:location.href
   }))()`);
+  observations.offlineAlias = offlineAlias;
   assert(!offlineAliasNav.errorText, 'catalog query offline navigation failed: ' + offlineAliasNav.errorText);
-  assert(offlineAlias.main && /catalogue/i.test(offlineAlias.title), 'catalog query offline content missing');
+  assert(offlineAlias.main && offlineAlias.filters && /Explorez les projets/i.test(offlineAlias.title), 'catalog query offline content missing');
 
   const offlineData = await evaluate(cdp, `(async () => {
     try {
