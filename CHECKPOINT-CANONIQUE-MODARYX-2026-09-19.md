@@ -1177,3 +1177,19 @@ Merge : `6966eb52a4fe1bc6a5deea5c75a4f3df4395805e`.
 - **PREUVE MANQUANTE** — lecteur d'écran natif et validation humaine complète ;
 - aucun changement produit, `main`, DNS ou Cloudflare critique.
 
+## Candidat ciblé — performance laboratoire Chromium — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-lab-performance-proof-20260919`, base fraîche `52c2af892694e98dd1560a8a0e371cd7d2574835`.
+
+Ajouts QA uniquement :
+
+- `qa/check-lab-performance.mjs` ;
+- `.github/workflows/modaryx-lab-performance-microproof.yml` ;
+- `qa/MODARYX-LAB-PERFORMANCE-PROOF-20260919.md`.
+
+Le harnais teste 5 pages prioritaires sur deux profils (mobile et desktop), avec cache navigateur désactivé, service worker contourné, réseau limité et CPU ralenti.
+
+État : **EN COURS — micro-preuve CI requise avant intégration**.
+
+Cette preuve ne remplace pas des CWV représentatifs en conditions réelles.
+
