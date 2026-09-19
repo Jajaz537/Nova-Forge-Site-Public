@@ -272,6 +272,15 @@
     const downloadAvailable = !stale && status?.distribution?.public_download_available === true;
     const bridge = status?.integrations?.nova_forge_os_bridge === 'not_connected' ? 'non connecté' : 'état non qualifié';
     const profile = status?.smart_profile?.execution === 'browser-local' ? 'navigateur local' : 'état non qualifié';
+    const livingWorld = !stale
+      && status?.living_world?.execution === 'browser-shared-timeline'
+      && status?.living_world?.clock_model === 'shared-world-utc'
+      && status?.living_world?.companion_growth_logic_active === true
+      && status?.living_world?.visible_growth_milestones === true
+      ? 'chronologie partagée active'
+      : stale
+        ? 'non confirmé hors ligne'
+        : 'état non qualifié';
     const currentBuildNode = getPublicBuildFact();
     const buildNode = currentBuildNode?.cloneNode(true) ?? null;
 
@@ -285,7 +294,8 @@
     const facts = [
       ['Distribution', stale ? 'non confirmée hors ligne' : downloadAvailable ? 'déclarée disponible' : 'verrouillée'],
       ['Pont vers Nova Forge OS', bridge],
-      ['Smart Profile', profile]
+      ['Smart Profile', profile],
+      ['Monde vivant', livingWorld]
     ];
 
     const nodes = facts.map(([label, value]) => {
