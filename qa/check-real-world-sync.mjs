@@ -69,12 +69,28 @@ const storm=normalizeOpenMeteoCurrent({current:{
   cloud_cover:100,wind_speed_10m:52,temperature_2m:24,apparent_temperature:26,is_day:1
 }});
 assert('storm normalized',storm.condition==='storm');
+const wind=normalizeOpenMeteoCurrent({current:{
+  time:'2026-09-20T14:00',weather_code:0,precipitation:0,rain:0,snowfall:0,
+  cloud_cover:18,wind_speed_10m:58,temperature_2m:17,apparent_temperature:15,is_day:1
+}});
+assert('wind normalized',wind.condition==='wind'&&wind.intensity>0);
+const cloud=normalizeOpenMeteoCurrent({current:{
+  time:'2026-09-20T14:00',weather_code:3,precipitation:0,rain:0,snowfall:0,
+  cloud_cover:88,wind_speed_10m:12,temperature_2m:17,apparent_temperature:17,is_day:1
+}});
+assert('cloud normalized',cloud.condition==='cloud'&&cloud.intensity>.7);
+const clearSpells=normalizeOpenMeteoCurrent({current:{
+  time:'2026-09-20T14:00',weather_code:1,precipitation:0,rain:0,snowfall:0,
+  cloud_cover:46,wind_speed_10m:10,temperature_2m:18,apparent_temperature:18,is_day:1
+}});
+assert('clear spells normalized',clearSpells.condition==='partly-cloudy'&&clearSpells.intensity>0);
 
 const mix=visualMix('winter','night',snow);
 assert('winter night mix dims',mix.day.bright<1);
 assert('snow weather mix exists',mix.weather.bright>=1);
 
 const functionSource=fs.readFileSync(new URL('../functions/api/local-context.js',import.meta.url),'utf8');
+const weatherCss=fs.readFileSync(new URL('../assets/real-world-sync.css',import.meta.url),'utf8');
 const headers=fs.readFileSync(new URL('../_headers',import.meta.url),'utf8');
 assert('function must not return exact coordinates',functionSource.includes('exactCoordinatesReturned: false'));
 assert('function must not return city',functionSource.includes('cityReturned: false')&&!functionSource.includes('context.request.cf.city'));
@@ -82,6 +98,10 @@ assert('function must not request GPS',functionSource.includes('gpsPermissionReq
 assert('site permissions policy keeps geolocation disabled',headers.includes('geolocation=()'));
 assert('weather provider defaults off',functionSource.includes("MODARYX_WEATHER_MODE || 'off'"));
 assert('provider coordinates are rounded before weather request',functionSource.includes('providerCoordinates.latitude'));
+assert('wind visual layer exists',weatherCss.includes('data-local-weather=wind')&&weatherCss.includes('mx-wind-sweep'));
+assert('cloud visual layer exists',weatherCss.includes('data-local-weather=cloud')&&weatherCss.includes('mx-cloud-drift'));
+assert('clear-spell visual layer exists',weatherCss.includes('data-local-weather=partly-cloudy')&&weatherCss.includes('mx-clear-spell'));
+assert('reduced motion disables weather transitions',weatherCss.includes('real-world-weather-layer{transition:none!important}'));
 
 console.log(JSON.stringify({
   marker:failures.length?'FAIL_TARGETED_REAL_WORLD_SYNC':'PASS_TARGETED_REAL_WORLD_SYNC',
@@ -90,7 +110,7 @@ console.log(JSON.stringify({
     southJanuary:seasonState(new Date('2026-01-15T12:00:00Z'),'south-temperate','UTC'),
     tropical:seasonState(new Date('2026-01-15T12:00:00Z'),'tropical','UTC')
   },
-  weather:{rain:rain.condition,snow:snow.condition,fog:fog.condition,storm:storm.condition},
+  weather:{rain:rain.condition,snow:snow.condition,fog:fog.condition,storm:storm.condition,wind:wind.condition,cloud:cloud.condition,clearSpells:clearSpells.condition},
   privacy:{gps:false,exactCoordinatesReturned:false,providerRoundedDegrees:0.1},
   failures
 },null,2));

@@ -56,6 +56,7 @@ function weatherConditionFromCode(code, current) {
   if (numericCode === 45 || numericCode === 48) return 'fog';
   if (wind >= 45) return 'wind';
   if (cloud >= 70 || numericCode === 2 || numericCode === 3) return 'cloud';
+  if (numericCode === 1 || cloud >= 25) return 'partly-cloudy';
   return 'clear';
 }
 
@@ -78,6 +79,7 @@ export function normalizeOpenMeteoCurrent(payload = {}) {
   else if (condition === 'wind') intensity = clamp01(wind / 90);
   else if (condition === 'fog') intensity = 0.55;
   else if (condition === 'cloud') intensity = clamp01((Number(current.cloud_cover) || 0) / 100);
+  else if (condition === 'partly-cloudy') intensity = clamp01(((Number(current.cloud_cover) || 0) - 20) / 60);
 
   return {
     status: 'live',

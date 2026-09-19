@@ -9,6 +9,7 @@ const SEASON_LABELS = {
 const WEATHER_LABELS = {
   clear: 'ciel dégagé',
   cloud: 'ciel couvert',
+  'partly-cloudy': 'éclaircies',
   rain: 'pluie',
   snow: 'neige',
   fog: 'brouillard',
@@ -130,6 +131,7 @@ export function visualMix(season, daypart, weather = {}) {
   const weatherMix = {
     clear: {sat: 1, bright: 1, contrast: 1},
     cloud: {sat: 0.94, bright: 0.94, contrast: 1.02},
+    'partly-cloudy': {sat: 1.01, bright: 1.01, contrast: 1.01},
     rain: {sat: 0.86, bright: 0.86, contrast: 1.05},
     snow: {sat: 0.9, bright: 1.04, contrast: 1.01},
     fog: {sat: 0.88, bright: 0.98, contrast: 0.88},
@@ -161,6 +163,7 @@ function weatherLayer(document) {
     layer.setAttribute('aria-hidden', 'true');
     hero.insertBefore(layer, hero.firstChild);
   }
+  layer.hidden = false;
   return layer;
 }
 
@@ -284,8 +287,7 @@ export async function applyRealitySync({
   if (contextNode) contextNode.textContent = describe(state);
   attributionNode(document, state.weather);
 
-  const layer = weatherLayer(document);
-  if (layer) layer.hidden = !(state.weather?.status === 'live' && state.weather.condition !== 'clear');
+  weatherLayer(document);
   return state;
 }
 

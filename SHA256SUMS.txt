@@ -34,7 +34,7 @@ db79e4b5d933284c9ba12ec8974cce0bb75110f3c7b5134c670e77eb508b4586  ./assets/proje
 3aa9a4b17c14f6fea264f2de9bb04431448b9d2e7ab1cc0293a339084504b0e2  ./assets/project-hub.js
 f13f4711d6c83dc23c7f0577abd3a408f051978fbebb85bf91098b8e4f7d7e42  ./assets/search.css
 7c7e55801dc9d59d2f90977086c840c667741a18209698d711b3c5aedccfae6e  ./assets/search.js
-990a36daf3bd867d55f971c116f0f5f73787d275ce760e47ad88ffe542b31852  ./assets/shell.js
+4ed4bb2585df0c1844b4e0b86064fb50a8e996f750ab118687aaeb57b19c7f47  ./assets/shell.js
 d5a57de6ac8bb73d85db3c481856a8beb876ab50e2378d7fae2d18ba44b69061  ./assets/site.css
 f90348520048d546761e0e1b794ab6d22aa02f06d06f95f54e9855bf89b345dc  ./assets/tokens.css
 a1d756c67a07e522f23d20c5a28f433e03473eec0f2ac51101f13b2c8a90ec83  ./assets/verify-picker.css
@@ -87,5 +87,5 @@ b042d8cea4c041dda9f4433bee8691c5ab7fe6a330d2ab5707940bfc4a331746  ./sw.js
 1997aac139789ade6441d9896aab57444b36a26f3b4d32e35e8630eec4253b0a  assets/modaryx-world-portals.webp
 8658be18d73b76139d66db5f57512a36432d00fbd5f6e51dc8804659f7aa1042  ./assets/living-world-visual-growth.mjs
 3a95d6d3b05c922bf2a747ebc5ab7558b6a6a7ee66269f8de7610fab7b920a4e  ./assets/living-world-visual-growth.css
-2ae4d10ebe3f10430125ab1df212c81e75cc8b38b6289b2e446534fe884e4641  ./assets/real-world-sync.mjs
-f333294f586078e6253b2e92e72030e1ed57e082bda5d8f701dcb046dc149a6f  ./assets/real-world-sync.css
+839ff203ebe2fc9f8dfad6b0f2351a0b6f6ac66d824d76053e2af3794f3005c5  ./assets/real-world-sync.mjs
+1d4bbafcd1a269da87cc6abb78cf65aa392cc7a3f3b49aa40cf8119dc6432e85  ./assets/real-world-sync.css

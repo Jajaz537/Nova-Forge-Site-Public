@@ -8,11 +8,20 @@ html[data-reality-sync=active] .modaryx-realm-art{
     saturate(var(--mx-weather-sat,1))
     brightness(var(--mx-weather-bright,1))
     contrast(var(--mx-weather-contrast,1));
-  transition:filter 1.8s ease;
+  transition:filter 2.6s ease;
 }
 .modaryx-realm-hero .hero-grid{position:relative;z-index:1}
-.real-world-weather-layer{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:calc(.18 + var(--mx-weather-intensity,0) * .42);transition:opacity 1.2s ease}
+.real-world-weather-layer{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:0;transition:opacity 2.4s ease}
 .real-world-weather-layer:before,.real-world-weather-layer:after{content:"";position:absolute;inset:-20%;pointer-events:none}
+html[data-local-weather=rain] .real-world-weather-layer,
+html[data-local-weather=storm] .real-world-weather-layer,
+html[data-local-weather=snow] .real-world-weather-layer,
+html[data-local-weather=fog] .real-world-weather-layer,
+html[data-local-weather=wind] .real-world-weather-layer,
+html[data-local-weather=cloud] .real-world-weather-layer,
+html[data-local-weather=partly-cloudy] .real-world-weather-layer{
+  opacity:calc(.12 + var(--mx-weather-intensity,0) * .38);
+}
 html[data-local-weather=rain] .real-world-weather-layer:before,
 html[data-local-weather=storm] .real-world-weather-layer:before{
   background:repeating-linear-gradient(108deg,transparent 0 18px,rgba(188,214,235,.28) 19px 20px,transparent 21px 38px);
@@ -31,6 +40,30 @@ html[data-local-weather=fog] .real-world-weather-layer:before{
   filter:blur(22px);
   animation:mx-fog-drift 18s ease-in-out infinite alternate;
 }
+html[data-local-weather=cloud] .real-world-weather-layer:before{
+  background:
+    radial-gradient(ellipse at 18% 34%,rgba(208,219,228,.20),transparent 32%),
+    radial-gradient(ellipse at 52% 26%,rgba(196,209,221,.18),transparent 34%),
+    radial-gradient(ellipse at 84% 38%,rgba(215,224,232,.16),transparent 30%);
+  filter:blur(18px);
+  animation:mx-cloud-drift 26s ease-in-out infinite alternate;
+}
+html[data-local-weather=partly-cloudy] .real-world-weather-layer:before{
+  background:
+    radial-gradient(ellipse at 24% 32%,rgba(210,220,228,.13),transparent 28%),
+    radial-gradient(ellipse at 72% 26%,rgba(205,217,227,.11),transparent 30%);
+  filter:blur(16px);
+  animation:mx-cloud-drift 30s ease-in-out infinite alternate;
+}
+html[data-local-weather=partly-cloudy] .real-world-weather-layer:after{
+  background:radial-gradient(circle at 68% 18%,rgba(255,238,185,.18),transparent 24%);
+  animation:mx-clear-spell 10s ease-in-out infinite alternate;
+}
+html[data-local-weather=wind] .real-world-weather-layer:before{
+  background:repeating-linear-gradient(168deg,transparent 0 34px,rgba(215,228,235,.10) 35px 37px,transparent 38px 70px);
+  filter:blur(2px);
+  animation:mx-wind-sweep 4.8s linear infinite;
+}
 html[data-local-season=winter] .living-world-status{border-color:rgba(162,194,220,.3)}
 html[data-local-season=spring] .living-world-status{border-color:rgba(144,190,139,.3)}
 html[data-local-season=summer] .living-world-status{border-color:rgba(229,190,103,.34)}
@@ -39,7 +72,15 @@ html[data-local-climate=tropical] .living-world-status{border-color:rgba(116,187
 @keyframes mx-rain-fall{to{transform:translate3d(4%,18%,0)}}
 @keyframes mx-snow-fall{to{background-position:18px 180px,2px 220px}}
 @keyframes mx-fog-drift{to{transform:translate3d(8%,1%,0)}}
+@keyframes mx-cloud-drift{to{transform:translate3d(7%,1%,0)}}
+@keyframes mx-clear-spell{to{opacity:.45;transform:translate3d(-2%,1%,0)}}
+@keyframes mx-wind-sweep{to{transform:translate3d(16%,0,0)}}
 @keyframes mx-storm-light{0%,91%,94%,100%{opacity:0}92%,93%{opacity:1}}
+html[data-motion=reduced] .modaryx-realm-art,
+html[data-motion=reduced] .real-world-weather-layer{transition:none!important}
 html[data-motion=reduced] .real-world-weather-layer:before,
 html[data-motion=reduced] .real-world-weather-layer:after{animation:none!important}
-@media(prefers-reduced-motion:reduce){.real-world-weather-layer:before,.real-world-weather-layer:after{animation:none!important}}
+@media(prefers-reduced-motion:reduce){
+  .modaryx-realm-art,.real-world-weather-layer{transition:none!important}
+  .real-world-weather-layer:before,.real-world-weather-layer:after{animation:none!important}
+}
