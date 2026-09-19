@@ -7,6 +7,15 @@ on:
     paths:
       - '.github/workflows/modaryx-local-functional-browser-proof.yml'
       - 'qa/check-local-functional-browser.mjs'
+      - 'qa/check-real-world-sync.mjs'
+      - 'qa/check-real-world-sync-browser.mjs'
+      - 'assets/real-world-sync.mjs'
+      - 'assets/real-world-sync.css'
+      - 'assets/shell.js'
+      - 'functions/**'
+      - '_headers'
+      - 'documentation.html'
+      - 'index.html'
       - 'catalog.html'
       - 'search.html'
       - 'community.html'
@@ -72,6 +81,9 @@ jobs:
           set -euo pipefail
           node --version
           node qa/check-local-functional-browser.mjs
+          node qa/check-real-world-sync.mjs
+          node --input-type=module --check < functions/api/local-context.js
+          node qa/check-real-world-sync-browser.mjs
 
       - name: Stop local HTTP server
         if: always()
