@@ -1124,3 +1124,18 @@ Merge : `6871d3a52ea1ad7dd6e6d8979f146cb7f95bec2c`.
 - **PREUVE MANQUANTE** — update sur preview HTTPS publique et appareil physique ;
 - aucun fichier produit, `main`, DNS ou Cloudflare critique modifié par ce lot.
 
+## Candidat ciblé — micro-preuve accessibilité Chromium — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-browser-a11y-microproof-20260919`, base fraîche `9283afd4aecf78a4ac5ef53291d980185e37ab5c`.
+
+Ajouts QA uniquement :
+
+- `qa/check-browser-a11y.mjs` ;
+- `.github/workflows/modaryx-browser-a11y-microproof.yml`.
+
+Le contrôle ouvre les 17 pages publiques dans Chromium headless et vérifie : un H1 unique, `#main`, skip-link vers `#main`, IDs dupliqués, images sans `alt`, contrôles de formulaire sans label explicite, contrôles interactifs sans nom dans l'arbre d'accessibilité Chromium, premier focus clavier sur le skip-link et activation clavier vers `#main`.
+
+État : **EN COURS — micro-preuve CI requise avant intégration**.
+
+Cette preuve ne remplace pas un lecteur d'écran natif ni une validation humaine complète.
+
