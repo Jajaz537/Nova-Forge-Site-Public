@@ -204,3 +204,17 @@ Les phases partagées possèdent également un libellé d'activité sobre, utili
 
 Limite conservée : **cela rend la progression lisible et temporellement visible, mais ne transforme pas encore physiquement le loup ou le dragon dans l'illustration composite**. La croissance visuelle du personnage lui-même reste EN COURS et nécessite toujours des couches séparées.
 
+## État de fraîcheur hors ligne — 19 septembre 2026
+
+Le moteur distingue désormais explicitement trois états de source :
+
+- `fresh` : configuration obtenue normalement ;
+- `offline-stale` : configuration fournie par le service worker depuis sa dernière copie connue ;
+- `unavailable` : aucune configuration exploitable disponible.
+
+Lorsque `X-Modaryx-Cache: offline-stale` est présent, la chronologie **continue localement à partir des règles mises en cache** : l'âge du monde et les stades restent calculés avec l'heure courante. L'interface l'indique cependant clairement par « dernière configuration connue hors ligne » et une signature visuelle distincte.
+
+Le mode hors ligne ne transforme donc jamais une donnée mise en cache en donnée fraîche. Si aucune copie n'existe, le contenu principal reste accessible et le monde vivant passe explicitement à l'état indisponible.
+
+Micro-preuve dédiée : `qa/check-living-world-offline-state.mjs`.
+
