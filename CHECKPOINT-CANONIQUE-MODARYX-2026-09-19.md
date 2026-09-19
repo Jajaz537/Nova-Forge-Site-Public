@@ -629,3 +629,40 @@ Impact runtime : **+544 octets**, aucun changement du noyau précaché (**111822
 
 État avant intégration : **EN COURS — PR et micro-preuve CI requises**.
 
+## Intégration contrôlée — finition Premium HD des interactions secondaires — 19 septembre 2026
+
+PR #25 : **TERMINÉE — fusionnée**.
+
+Avant intégration, le premier run ciblé `35462006075` a échoué avec l'erreur exacte :
+
+- `SHA256SUMS: mismatch assets/modaryx-cinematic-system.css` ;
+- cause isolée : une seconde entrée historique sans préfixe `./` pointait vers le même fichier avec l'ancienne empreinte.
+
+Procédure respectée :
+
+1. erreur exacte isolée ;
+2. aucun full run relancé ;
+3. suppression ciblée de l'entrée dupliquée obsolète ;
+4. garde ajouté pour interdire désormais les chemins SHA-256 dupliqués après normalisation ;
+5. micro-preuve ciblée relancée uniquement après correction.
+
+Micro-preuve :
+
+- run `35462055949` : **success / PASS CIBLÉ**.
+
+Intégration :
+
+- commit de merge : `31ed87567b31d1c8d935b7f89a884ccae30e0df4` ;
+- sticky section-nav suit la hauteur mesurée du header ;
+- hover de carte réservé aux périphériques hover + pointeur précis ;
+- focus-within clavier ajouté ;
+- fallbacks Safari blur/mask ajoutés ;
+- scroll horizontal mobile stabilisé ;
+- 16 pages secondaires couvertes par le système cinématique commun ;
+- empreinte CSS réconciliée et doublon SHA supprimé ;
+- impact : **+544 octets runtime**, noyau install-précaché inchangé à **111822 octets** ;
+- `main` et infrastructure critique : inchangées ;
+- CodeQL du nouveau HEAD est **EN COURS / queued** au moment de cette entrée.
+
+Ce lot améliore la cohérence et la robustesse Premium HD mais ne vaut pas validation visuelle finale navigateur/appareil.
+
