@@ -286,3 +286,35 @@ Cette preuve est **ciblée et statique**. Elle ne couvre pas automatiquement les
 - **EN COURS** — correction artistique des illustrations selon le quality gate monde vivant.
 - **PREUVE MANQUANTE** — validations externes précédemment listées.
 
+## Mise à jour ciblée — fraîcheur runtime après cache évolutif — 19 septembre 2026
+
+Risque isolé après la première intégration : les images/schémas runtime utilisaient `cache-first`. Or MODARYX remplace parfois un asset au **même chemin**, ce qui pouvait conserver une ancienne copie tant qu'aucune nouvelle version de cache n'était activée.
+
+Correction ciblée :
+
+- assets runtime non CSS/JS : `network-first` avec fallback cache ;
+- CSS/JS : révalidation réseau conservée ;
+- données fraîches : `network-first` + `cache: no-store` conservé ;
+- plafond runtime 80 conservé ;
+- noyau précaché inchangé ;
+- aucune grande illustration réintroduite dans l'install-précache.
+
+Micro-preuve sur le contenu exact des blobs candidats :
+
+- `node --check sw.js` : **PASS CIBLÉ** ;
+- futur asset chargé en ligne : nouvelle version réseau servie et recachée ;
+- passage hors ligne : dernière copie mise en cache servie avec marque `offline-stale` ;
+- plafond runtime : **80** après stress de 100 assets ;
+- noyau non évincé : **PASS CIBLÉ** ;
+- empreinte fraîche `sw.js` : `f27348c7b3a038cccf65eb6b5089f6d3ce07239d43accd9d70c8a5fc46c14697` ;
+- `SHA256SUMS.txt` réconcilié dans le même lot.
+
+Intégration :
+
+- PR #18 : **TERMINÉE — fusionnée** ;
+- commit d'intégration dans la branche Work : `c29736f737f005dbb90b840a4df0660bd272bd75` ;
+- `main` : inchangée ;
+- infrastructure critique : inchangée.
+
+Cette preuve reste source/simulée. Installation/activation HTTPS réelle, update réel, cache froid/chaud, quotas navigateur et CWV restent **PREUVE MANQUANTE**.
+
