@@ -9,6 +9,8 @@ on:
       - 'qa/check-layered-growth-contract.mjs'
       - 'assets/living-world.js'
       - 'assets/living-world.css'
+      - 'assets/living-world-visual-growth.mjs'
+      - 'assets/living-world-visual-growth.css'
       - 'data/living-world.json'
       - 'index.html'
   workflow_dispatch:
