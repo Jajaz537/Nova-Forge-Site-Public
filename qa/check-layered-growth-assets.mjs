@@ -141,6 +141,22 @@ if(visual.status==='awaiting-assets'){
       `${file}: expected ${visual.canvas.width}x${visual.canvas.height}, got ${info.width}x${info.height}`);
     notes.push({kind:'candidate-environment',file,info});
   }
+  for(const slot of slots){
+    for(const stageId of order){
+      const prefix=`${slot.inhabitantId}-${stageId}.`;
+      for(const name of existing.filter((candidate)=>candidate.startsWith(prefix))){
+        const file=path.join(assetDir,name);
+        const info=imageInfo(file);
+        assert(Boolean(info),`candidate layer malformed: ${file}`);
+        if(!info) continue;
+        assert(['png','webp'].includes(info.format),`${file}: companion candidate must be PNG or WebP`);
+        assert(info.width===visual.canvas.width&&info.height===visual.canvas.height,
+          `${file}: expected ${visual.canvas.width}x${visual.canvas.height}, got ${info.width}x${info.height}`);
+        assert(info.alpha===true,`${file}: companion candidate must preserve alpha transparency`);
+        notes.push({kind:'candidate-layer',inhabitantId:slot.inhabitantId,stageId,file,info});
+      }
+    }
+  }
   notes.push({status:'awaiting-assets',existingUnreferencedFiles:existing});
 }else{
   assert(typeof visual.environmentAsset==='string','ready status requires environment asset');
