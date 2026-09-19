@@ -59,3 +59,82 @@ Source `0c1c809` : dix mesures navigateur sur accueil, Catalogue et les trois fi
 ## Téléchargements — récupération et statut
 
 Sur `59c39da` : cinq groupes Node dans `download-recovery-checks.json` distinguent erreur réseau/HTTP/contrat, disponibilité vide et copie périmée, avec nouvelle tentative non concurrente et retour du focus. `download-status-native-20260916.json` confirme le statut normal après chargement, zéro artefact et bouton masqué ; composition desktop inspectée, reflow 320/768 sans débordement. Les états de panne/récupération ne sont pas validés nativement. Cache v96, 34 assertions et 799191/800000 octets bruts ; aucune conclusion CWV.
+
+## Mise à jour courante — Site First — 19 septembre 2026
+
+HEAD de référence au début de cette mise à jour : `442477b69fdcb4c8f8aa38eb9bc03e80d20129b6`, branche `design/modaryx-premium-hd-20260914-work`.
+
+Les anciennes lignes ci-dessus restent historiques pour leurs SHA respectifs. Elles ne doivent plus être utilisées pour décrire l'architecture cache courante lorsqu'elles mentionnent les anciens précaches ~798–799 kB.
+
+### Preuve source ciblée courante
+
+Workflow : **MODARYX Site First Targeted Source Proof**  
+Run : **35461493088**  
+Conclusion : **PASS CIBLÉ / success** sur le HEAD `442477b69fdcb4c8f8aa38eb9bc03e80d20129b6`.
+
+Le contrôle lecture seule vérifie sur le checkout exact :
+
+- 17 pages publiques présentes ;
+- shell partagé, foundations, footer, skip-link, main et title sur les pages ;
+- références locales `href/src` existantes ;
+- absence du libellé visible historique « Modaryx OS » ;
+- relation « même équipe / produits distincts » ;
+- modèle de croissance partagé loup/dragon ;
+- reduced motion du monde vivant ;
+- runtime cache borné à 80 ;
+- grandes illustrations exclues de l'install-précache ;
+- précache sous le garde-fou 800000 ;
+- toutes les lignes de `SHA256SUMS.txt` vérifiées contre les octets réels du checkout.
+
+Cette preuve ne remplace ni navigateur réel, ni lecteur d'écran, ni appareil physique, ni CWV.
+
+### Architecture cache courante
+
+- ancien modèle mesuré : **794167 octets / 76 fichiers uniques**, marge 5833 ;
+- architecture actuelle : **précache cœur compact + runtime cache contrôlé** ;
+- noyau après signature « même équipe » : **111822 octets** ;
+- marge sous 800000 : **688178 octets** ;
+- runtime non cœur borné à **80 entrées** ;
+- gros visuels et futurs jeux/mods/modules : hors précache global par défaut.
+
+Les anciennes lignes « cache v90/v96 ~799k » restent des preuves historiques de leurs commits, pas l'état courant.
+
+### Monde vivant courant
+
+- chronologie partagée : intégrée ;
+- cycle nuit/aube/jour/crépuscule : intégré ;
+- Louveteau et Dragonneau : même ordre de stades **bébé → juvénile → adolescent → jeune adulte → adulte** ;
+- rythme indépendant par espèce : intégré ;
+- croissance visuelle individuelle : **EN COURS**, car le panorama reste composite ;
+- design visuel de référence : approuvé ; ne pas relancer de nouvelles recherches d'images sans besoin précis.
+
+### Relation MODARYX / Nova Forge
+
+- **MODARYX MODS = plateforme web** ;
+- **Nova Forge OS = logiciel / OS** ;
+- les deux produits : **même équipe**, identités distinctes ;
+- signature discrète partagée dans le footer ;
+- section statique dédiée dans Écosystème ;
+- aucune marque groupe/studio ou destination OS inventée.
+
+### Priorité de livraison
+
+Décision utilisateur : **MODARYX Site First jusqu'à VF ultra haut de gamme**.
+
+Restent ouverts avant une déclaration 100 % / VF :
+
+- croissance visuelle réelle des éléments du monde vivant ;
+- recette Premium HD exhaustive des 17 pages et états ;
+- PWA HTTPS offline/update réelle ;
+- zoom/reflow 400 % natif ;
+- lecteur d'écran natif ;
+- appareils physiques/tactile ;
+- CWV représentatifs ;
+- import/export avec vrais fichiers si maintenu dans le périmètre final ;
+- identité/contact/mentions légales réels lorsqu'ils sont requis ;
+- dépendances produit réelles : comptes, publication/modération, Resolver/Repair, distribution, Guide connecté, OS Bridge ;
+- droits/catégories/contenu substantiel avant publication des hubs GTA VI/RDR2 ;
+- Master NDI complète : toujours NON RÉCUPÉRÉE.
+
+**VF NON VALIDÉE** malgré le PASS source ciblé.
+
