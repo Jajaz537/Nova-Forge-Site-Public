@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 
 const source=fs.readFileSync(new URL('../assets/living-world.js',import.meta.url),'utf8');
-const config=JSON.parse(fs.readFileSync(new URL('../data/living-world.json',import.meta.url),'utf8');
+const config=JSON.parse(fs.readFileSync(new URL('../data/living-world.json',import.meta.url),'utf8'));
 
 function node(dataset={}){return {dataset:{...dataset},textContent:''};}
 function fixedDate(iso){
