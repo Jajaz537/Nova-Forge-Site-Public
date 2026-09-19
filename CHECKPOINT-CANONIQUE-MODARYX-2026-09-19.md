@@ -1042,3 +1042,42 @@ Le contrôle vise un vrai service worker Chromium sur loopback, des caches navig
 
 Même en cas de PASS, la preview HTTPS publique et la mise à jour A→B resteront des preuves séparées.
 
+## Intégration contrôlée — PWA offline Chromium — 19 septembre 2026
+
+PR #33 : **TERMINÉE — fusionnée**.
+
+La mise au point a suivi la procédure erreur exacte → isolation → correction ciblée → micro-preuve, sans full replay.
+
+Écarts de harnais isolés successivement :
+
+- attente trop précoce de l'activation SW ;
+- émulation réseau CDP page insuffisante pour garantir la panne du fetch SW ;
+- processus serveur redémarré non terminé ;
+- assertion textuelle Catalogue incorrecte ;
+- port DevTools fixe susceptible de collision.
+
+Aucun de ces points n'a nécessité une modification produit.
+
+Micro-preuve finale :
+
+- run `35464732269` — **success / PASS CIBLÉ** ;
+- service worker activé et contrôlant ;
+- cache initial **17 entrées** ;
+- cache runtime observé après visites ;
+- vraie panne réseau par arrêt du serveur ;
+- Catalogue + alias avec paramètres disponibles offline ;
+- accueil précaché disponible offline ;
+- `data/catalog.json` offline avec `X-Modaryx-Cache: offline-stale` ;
+- retour online réussi et donnée de nouveau fraîche.
+
+Intégration :
+
+- merge `bc7876a1ed56cbe560e95b7383cc583fb2bef854` ;
+- aucun changement produit dans ce lot QA ;
+- `main`, Cloudflare/DNS et infrastructure critique inchangés.
+
+État :
+
+- **TERMINÉ** — comportement PWA offline/recovery ciblé en Chromium loopback ;
+- **PREUVE MANQUANTE** — preview publique HTTPS, update A→B, appareils physiques, autres navigateurs, quota réel et CWV.
+
