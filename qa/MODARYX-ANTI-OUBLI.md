@@ -167,7 +167,7 @@ Décision utilisateur explicitement retenue pour la VF :
 - l’adaptation saisonnière est automatique et ne demande pas de permission GPS ;
 - hémisphère Nord et Sud sont inversés correctement ;
 - les zones tropicales utilisent un profil tropical plutôt qu’un faux hiver tempéré ;
-- pluie, neige, brouillard et orage peuvent influencer l’ambiance avec intensité plafonnée, lisibilité, reduced motion et performances prioritaires ;
+- pluie, neige, brouillard, orage, **vent, nuages et éclaircies** peuvent influencer l’ambiance avec intensité plafonnée, transitions progressives, lisibilité, reduced motion et performances prioritaires ;
 - la chronologie MODARYX, les événements du royaume et la croissance loup/dragon restent partagés et indépendants de cette couche locale ;
 - aucun fournisseur météo ne doit être activé silencieusement sans validation de licence, attribution et confidentialité ;
 - aucune ville, code postal ou coordonnée exacte n’est renvoyée au navigateur pour cette fonctionnalité ; les coordonnées destinées au fournisseur sont arrondies à **0,1°** côté serveur.
@@ -175,7 +175,9 @@ Décision utilisateur explicitement retenue pour la VF :
 État vérifié :
 - **TERMINÉ sur le périmètre ciblé** — moteur saison Nord/Sud/tropical + heure locale + fusion météo normalisée + endpoint same-origin + confidentialité ;
 - PR #43 : **TERMINÉE — fusionnée** dans la branche active de PR #12 au commit `e728670d763bdd872b670b798b323e1cfc8597f7` ;
-- micro-preuves : `PASS_TARGETED_REAL_WORLD_SYNC` et `PASS_TARGETED_REAL_WORLD_SYNC_BROWSER` ; performance labo ciblée verte (LCP 2180 ms mobile, 2072 ms desktop ; CLS 0 / 0,0033) ;
+- PR #44 : **TERMINÉE — fusionnée** au commit `7a91f813e60279bfffaf60bdcf750fa003c78a15` pour compléter vent, nuages et éclaircies ;
+- micro-preuves : `PASS_TARGETED_REAL_WORLD_SYNC` et `PASS_TARGETED_REAL_WORLD_SYNC_BROWSER` ; source, fonctions locales, reflow, accessibilité Chromium, PWA offline/update et performance labo du candidat PR #44 : **success** ;
+- erreur performance PR #44 isolée : accueil mobile `7 long tasks > 5` ; correction ciblée : import atmosphère non critique déplacé hors chemin initial ; micro-preuve performance suivante : **success**, sans assouplir le seuil ;
 - **PREUVE MANQUANTE** — exécution réelle de la Pages Function sur une preview HTTPS avec `request.cf` ;
 - **BLOQUÉ / décision externe** — activation de la météo réelle en production tant que fournisseur, licence et attribution ne sont pas validés ;
 - `main`, DNS, DNSSEC, IONOS, secrets et configuration Cloudflare critique restent inchangés.
