@@ -11,6 +11,7 @@ const deletedCaches=[];
 let networkOffline=false;
 let networkCalls=0;
 let lastFetchOptions;
+let networkBody='fresh';
 
 const response=(body='fresh',status=200)=>({
   status,statusText:'',type:'basic',body,headers:new Headers(),
@@ -42,7 +43,7 @@ const context={
     networkCalls++;
     lastFetchOptions=options;
     if(networkOffline)throw new Error('offline');
-    return response('fresh');
+    return response(networkBody);
   }
 };
 
@@ -105,13 +106,18 @@ async function probe(url,mode='cors',method='GET'){
 }
 
 let result=await probe('/assets/future-game-art.webp?v=123');
-assert('future public asset should runtime-cache without SW allowlist edit',result.intercepted&&result.networkCalls===1);
+assert('future public asset should runtime-cache without SW allowlist edit',result.intercepted&&result.networkCalls===1&&result.result?.body==='fresh');
 assert('runtime static queries must canonicalize',entries.has('https://example.test/assets/future-game-art.webp'));
+
+networkBody='updated';
+result=await probe('/assets/future-game-art.webp?v=999');
+assert('runtime art should refresh online even when cached',result.intercepted&&result.networkCalls===1&&result.result?.body==='updated');
 
 networkOffline=true;
 result=await probe('/assets/future-game-art.webp?v=999');
-assert('runtime art should remain available offline after first use',result.intercepted&&result.networkCalls===0&&result.result?.body==='fresh');
+assert('runtime art should fall back to the latest cached copy offline',result.intercepted&&result.networkCalls===1&&result.result?.headers?.get('X-Modaryx-Cache')==='offline-stale');
 networkOffline=false;
+networkBody='fresh';
 
 result=await probe('/catalog','navigate');
 assert('known public page should network-first cache',result.intercepted&&result.networkCalls===1&&entries.has('https://example.test/catalog.html'));
@@ -139,6 +145,7 @@ console.log(JSON.stringify({
   runtimeEntriesAfterStress:runtimeEntries.length,
   heavyArtInstallPrecached:false,
   futureAssetRuntimeCaching:'PASS',
+  runtimeAssetFreshness:'PASS',
   pageOfflineAfterVisit:'PASS',
   metadataNetworkFirst:'PASS',
   cacheCleanupScope:'PASS'
