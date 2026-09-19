@@ -174,6 +174,40 @@ function intensityLabel(value) {
   return 'marquée';
 }
 
+export function localActivityLens(state = {}) {
+  const weather = state.weather?.status === 'live' ? state.weather.condition : 'unavailable';
+  const time = {
+    dawn: 'Premiers ateliers et chemins reprennent',
+    day: 'Routes, jardins et ateliers restent actifs',
+    dusk: 'Lanternes renforcées · retours vers les quartiers habités',
+    night: 'Lanternes et veille renforcées · déplacements plus calmes'
+  }[state.daypart] || 'Le royaume adapte son rythme local';
+
+  const weatherText = {
+    storm: 'activités extérieures réduites · passages abrités privilégiés',
+    rain: 'marchés et travaux se replient sous couvert',
+    snow: 'chemins surveillés · activités rapprochées des foyers',
+    fog: 'circulation ralentie · veilleurs aux carrefours',
+    wind: 'étals protégés · traversées exposées réduites',
+    cloud: 'activité normale sous lumière diffuse',
+    'partly-cloudy': 'activité extérieure maintenue pendant les éclaircies'
+  }[weather] || '';
+
+  const seasonText = {
+    winter: 'foyers et ateliers plus présents',
+    spring: 'jardins et sentiers reprennent',
+    summer: 'jardins, quais et marchés plus animés',
+    autumn: 'récoltes et ateliers plus actifs',
+    tropical: 'activité extérieure étalée autour des zones ombragées'
+  }[state.season] || '';
+
+  const pieces = [time, weatherText || seasonText].filter(Boolean);
+  return {
+    id: [state.daypart || 'local', weather, state.season || 'season'].join('-'),
+    text: pieces.join(' · ')
+  };
+}
+
 function describe(state) {
   const season = SEASON_LABELS[state.season] || state.season;
   const daypart = DAYPART_LABELS[state.daypart] || state.daypart;
@@ -285,6 +319,13 @@ export async function applyRealitySync({
 
   const contextNode = document.querySelector('[data-real-world-context]');
   if (contextNode) contextNode.textContent = describe(state);
+  const activity = localActivityLens(state);
+  const activityNode = document.querySelector('[data-local-world-activity]');
+  if (activityNode) {
+    activityNode.textContent = activity.text;
+    activityNode.dataset.localActivity = activity.id;
+  }
+  document.documentElement.dataset.localActivity = activity.id;
   attributionNode(document, state.weather);
 
   weatherLayer(document);
