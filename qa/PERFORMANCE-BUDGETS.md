@@ -158,3 +158,14 @@ Le lot « même équipe, produits distincts » ajoute uniquement une signature l
 
 La section statique ajoutée à `ecosystem.html` reste une page runtime et ne réintroduit pas un précache global.
 
+### Horloge monde vivant réellement partagée — impact runtime
+
+Correction ciblée : le contrat `shared-world-utc` est maintenant respecté par le moteur de phase.
+
+- `assets/living-world.js` : **5152 octets** ;
+- `assets/living-world.css` : **3649 octets** ;
+- `data/living-world.json` : **2431 octets** ;
+- total runtime monde vivant : **11232 octets**.
+
+Delta par rapport au lot précédent : **+167 octets runtime**. Le noyau install-précaché reste **111822 octets** après la signature d'équipe ; aucune ressource lourde n'est réintroduite.
+
