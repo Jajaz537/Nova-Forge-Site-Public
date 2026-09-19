@@ -105,8 +105,9 @@
         <article class="card"><h3>Consultation sans compte</h3><p>Le contenu public est conçu pour être consultable sans compte MODARYX MODS et sans profil distant requis par le noyau actuel.</p></article>
         <article class="card"><h3>Smart Profile</h3><p>Lorsque l’utilisateur déclenche l’analyse, le résultat est calculé dans le navigateur à partir des informations exposées par celui-ci. Le noyau actuel ne transmet pas ce résultat à un service distant.</p></article>
         <article class="card"><h3>Vérificateur local</h3><p>Le fichier choisi pour un calcul SHA-256 est lu par le navigateur et transmis uniquement à l’API Web Crypto locale. Le site ne l’exécute pas et ne l’envoie pas à un backend.</p></article>
+        <article class="card"><h3>Atmosphère locale automatique</h3><p>La saison et l’heure locale peuvent adapter l’ambiance sans demander l’accès GPS. Sur Cloudflare Pages, un endpoint même origine peut réduire la géolocalisation réseau à un fuseau et une bande climatique ; la ville, le code postal et les coordonnées exactes ne sont pas renvoyés au navigateur.</p></article>
       </div>
-      <div class="security-note"><strong>Réseau :</strong> les ressources du noyau actuel sont servies depuis la même origine et peuvent être mises en cache par le service worker pour la consultation hors ligne. Aucun domaine tiers n’est requis par cette surface.</div>
+      <div class="security-note"><strong>Réseau :</strong> les ressources du noyau restent servies depuis la même origine. La synchronisation saison + heure fonctionne sans fournisseur météo tiers. La météo réelle possède un adaptateur serveur volontairement désactivé tant qu’un fournisseur, sa licence et son attribution ne sont pas validés ; si elle est activée, seules des coordonnées réseau approximatives arrondies côté serveur sont envoyées au fournisseur, jamais l’adresse ni une permission GPS.</div>
     </section>
 
     <section class="section" id="limits" aria-labelledby="limits-title">
