@@ -53,7 +53,7 @@ d60000a6ce45fe5caef1906d8d0d15d26ecab82402aecff396c1b23f32fc8ec0  ./downloads.js
 0e391c4798f5a29215d63b27602bc6ba8253018efa319679570c989beaa63adc  ./ecosystem.html
 261acad337661d82075248de35bf8e8f935d5b2709b5f9dc0ebdf3740c5d1dfc  ./favicon.svg
 d4a78dd46dadb6a5ad6a3bc91947b6ae5172d6947b4fa9d86e5338146c892050  ./games/index.html
-7b25a2e78112b11ff39ff681e7852bc217d0cc6f8517dc6cbd0c09b1ac71b51f  ./index.html
+9fbe8b4e3526d24cce5f7becc9bc7e502d749bfa4ad03539fe23a85257cd027f  ./index.html
 2305edc70268c0b938976d2f9b63adc5b19091955d53527e0a34d09c5fb47631  ./profiles.html
 08574617059bd2cba252ec1dbc1e583faf56a9571bed1d9023e0f18531f819b8  ./project-balanced-latency-pack.html
 553e94564c2148681030e2c03d5b8a13384e1e6c8dfd3651334c7b666d194f0a  ./project-ember-textures.html
@@ -87,5 +87,5 @@ b042d8cea4c041dda9f4433bee8691c5ab7fe6a330d2ab5707940bfc4a331746  ./sw.js
 1997aac139789ade6441d9896aab57444b36a26f3b4d32e35e8630eec4253b0a  assets/modaryx-world-portals.webp
 8658be18d73b76139d66db5f57512a36432d00fbd5f6e51dc8804659f7aa1042  ./assets/living-world-visual-growth.mjs
 3a95d6d3b05c922bf2a747ebc5ab7558b6a6a7ee66269f8de7610fab7b920a4e  ./assets/living-world-visual-growth.css
-839ff203ebe2fc9f8dfad6b0f2351a0b6f6ac66d824d76053e2af3794f3005c5  ./assets/real-world-sync.mjs
+3a4ea7cb430f7d7e4d9a3f15e4399ed461127cb361cfc1c69f4e692259c5608f  ./assets/real-world-sync.mjs
 1d4bbafcd1a269da87cc6abb78cf65aa392cc7a3f3b49aa40cf8119dc6432e85  ./assets/real-world-sync.css
