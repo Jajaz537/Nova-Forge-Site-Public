@@ -1978,3 +1978,44 @@ Preuves ciblées PR #50 :
 - **EN COURS** — loup adulte + cinq stades dragon ;
 - aucun passage `ready` avant bundle complet ;
 - `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
+
+## Asset compagnon — Loup adulte — 20 septembre 2026
+
+PR #51 : **TERMINÉE — fusionnée** dans la branche active PR #12.
+
+- commit d'intégration : `f429b4eec281d2d1e5740e5fad8095604fa1da84` ;
+- asset : `assets/living-world/wolf-adult.png` ;
+- dimensions : **1600 × 900** ;
+- PNG RGBA, `alpha=true` ;
+- SHA-256 : `96ef42acd3e209a77602087c0e174335b06f7b85662d3bde53b86c359b56b0d8` ;
+- progression visuelle : adulte final clairement plus imposant et mature que le jeune adulte, anatomie naturelle, expression calme/protectrice, sans armure, accessoire, décor ni autre animal ;
+- asset gardé **non référencé** ; `visualGrowth.status=awaiting-assets` inchangé.
+
+Preuves ciblées PR #51 :
+
+- Layered Growth Asset Gate `35477224017` — **success** avec `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ;
+- `wolf-adult.png` détecté comme `candidate-layer` : 1600 × 900, alpha=true, failures=[] ;
+- Site First Source `35477224046` — **success** ;
+- PWA Offline `35477224004` — **success** ;
+- Browser Accessibility `35477224002` — **success** ;
+- Browser Reflow `35477224010` — **success** ;
+- Lab Performance `35477224220` — **success**.
+
+État :
+
+- environnement séparé : **TERMINÉ** ;
+- couches compagnon : **5/10 TERMINÉES** ;
+- loup, cinq stades : **TERMINÉ sur les assets séparés prouvés** ;
+- **EN COURS** — cinq stades dragon ;
+- aucun passage `ready` avant bundle complet ;
+- `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
+
+### Prochain point logique
+
+1. vérifier Git frais avant toute nouvelle écriture ;
+2. produire le **Dragonneau** comme 6e couche compagnon avec alpha et composition compatible ;
+3. intégrer via branche isolée + PR brouillon ;
+4. exécuter uniquement les micro-preuves ciblées ;
+5. poursuivre ensuite juvénile → adolescent → jeune adulte → adulte du dragon ;
+6. seulement après 10/10, préparer l'activation réelle de la croissance visuelle sans faux PASS.
+
