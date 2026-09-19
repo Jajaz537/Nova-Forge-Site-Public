@@ -1370,3 +1370,18 @@ Le harnais utilise Chromium sur loopback de confiance et contrôle le manifeste 
 
 Cette preuve ne remplace pas une installation manuelle sur preview HTTPS publique ni un appareil physique.
 
+## Micro-preuve — installabilité PWA Chromium — 19 septembre 2026
+
+PR #38 candidat :
+
+- run `35469301347` — **success / PASS CIBLÉ** ;
+- service worker activé et contrôlant ;
+- manifeste détecté sans erreur ;
+- **0 erreur d'installabilité Chromium** ;
+- id/start_url/scope/display conformes ;
+- icônes 192/512/SVG réellement chargées.
+
+État : **TERMINÉ sur la micro-preuve ciblée ; fusion PR #38 requise avant intégration canonique**.
+
+Limite : installation manuelle sur preview HTTPS publique et appareil physique toujours **PREUVE MANQUANTE**.
+
