@@ -436,3 +436,21 @@ Micro-preuve ciblée : **PASS CIBLÉ**.
 
 Le noyau précaché reste **111076 octets**. Le runtime monde vivant passe à **11065 octets**. La croissance visuelle individuelle reste **EN COURS** tant que les personnages ne sont pas séparés du panorama composite.
 
+## Intégration contrôlée — modèle de croissance partagé — 19 septembre 2026
+
+La règle approuvée « mêmes stades, rythme indépendant » est maintenant intégrée dans la branche active.
+
+- PR #20 : **TERMINÉE — fusionnée** ;
+- commit d'intégration : `26075d86ff06dbf254e3f766b492932ea83301c9` ;
+- ordre canonique pour le loup et le dragon : **bébé → juvénile → adolescent → jeune adulte → adulte** ;
+- libellés initiaux : **Louveteau** et **Dragonneau** ;
+- rythme du loup et du dragon réglable séparément ;
+- validation moteur active contre tout ordre divergent ;
+- empreintes SHA-256 réconciliées ;
+- noyau install-précaché inchangé à **111076 octets** ;
+- runtime monde vivant : **11065 octets** ;
+- `main` et infrastructure critique : inchangées ;
+- CodeQL du commit d'intégration : **EN COURS / queued** au moment de cette mise à jour.
+
+La croissance visuelle individuelle des personnages reste **EN COURS** tant que le panorama actuel n'est pas séparé en couches dédiées.
+
