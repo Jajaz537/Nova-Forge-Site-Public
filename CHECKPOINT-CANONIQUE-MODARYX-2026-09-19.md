@@ -1468,3 +1468,35 @@ Budget candidat :
 
 La croissance visuelle individuelle reste **EN COURS** tant que les vrais assets Premium HD séparés ne sont pas présents et prouvés.
 
+## Erreur ciblée et correction — croissance visuelle / performance — 19 septembre 2026
+
+Run performance `35470244794` : **FAIL CIBLÉ**.
+
+Erreur exacte :
+
+- `index.html mobile: LCP 3100.0ms > 2500`.
+- le reste du run restait dans les budgets ; accueil desktop LCP **2036 ms**, CLS **0,0024**.
+
+Isolation :
+
+- le premier candidat avait ajouté la logique de couches directement au JS/CSS critiques et des slots dormants dans l'accueil ;
+- aucun asset de croissance réel n'existe encore, donc ce coût critique n'apportait aucun bénéfice visuel actuel.
+
+Correction ciblée :
+
+- `index.html` et `living-world.css` restaurés au chemin critique précédent ;
+- moteur de couches déplacé dans `assets/living-world-visual-growth.mjs` + CSS associé ;
+- chargement dynamique uniquement si `visualGrowth.status=ready` ;
+- état courant `awaiting-assets` : aucun téléchargement du module/couche ;
+- activation future atomique après préchargement environnement + loup + dragon ;
+- fail-closed sur bundle incomplet, URL externe ou échec de chargement.
+
+Budget corrigé :
+
+- noyau : **114977 octets** ;
+- marge : **685023 octets** ;
+- runtime monde vivant chargé courant : **15135 octets** ;
+- runtime visuel dormant : **7080 octets**, à la demande uniquement.
+
+État : **EN COURS — micro-preuve ciblée après correction requise avant fusion**. Aucun full replay lancé.
+
