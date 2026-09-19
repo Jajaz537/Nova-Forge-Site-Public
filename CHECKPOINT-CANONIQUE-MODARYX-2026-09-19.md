@@ -1861,3 +1861,30 @@ Incident ciblé pendant la préparation :
 - **EN COURS** — cinq couches loup + cinq couches dragon avec alpha ;
 - **PREUVE MANQUANTE** — rendu intégré complet et croissance visuelle active ;
 - `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
+
+
+## Asset compagnon — Louveteau — 20 septembre 2026
+
+PR #47 : **TERMINÉE — fusionnée** dans la branche active PR #12.
+
+- commit d'intégration : `ad1de7ce2e99030474e303de9d7044c788c9eb76` ;
+- asset : `assets/living-world/wolf-baby.png` ;
+- dimensions : **1600 × 900** ;
+- PNG RGBA, `alpha=true` ;
+- SHA-256 : `8224d7b79d6ea1372b8897a046fd39ff57ed5c439c879249f936282aeabc9758` ;
+- Louveteau visuellement vérifié : corps entier, oreilles/pattes non coupées, espace gauche conservé ;
+- asset gardé **non référencé** ; `visualGrowth.status=awaiting-assets` inchangé.
+
+Gate candidat PR #47 :
+
+- `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ;
+- `wolf-baby.png` détecté comme `candidate-layer` : 1600 × 900, alpha=true, failures=[] ;
+- Site First Source, PWA Offline, Reflow Chromium, Accessibility Chromium et Lab Performance : **success**.
+
+État :
+
+- environnement séparé : **TERMINÉ** ;
+- couches compagnon : **1/10 TERMINÉE** ;
+- **EN COURS** — loup juvénile/adolescent/jeune adulte/adulte + cinq stades dragon ;
+- aucun passage `ready` avant bundle complet ;
+- `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
