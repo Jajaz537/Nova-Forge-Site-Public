@@ -115,8 +115,11 @@
   if (!scriptSource) return;
   const start = () => {
     const load = () => import(new URL('./real-world-sync.mjs', scriptSource).href).catch(() => {});
-    if ('requestIdleCallback' in window) window.requestIdleCallback(load, {timeout: 1400});
-    else window.setTimeout(load, 180);
+    const scheduleIdle = () => {
+      if ('requestIdleCallback' in window) window.requestIdleCallback(load, {timeout: 1600});
+      else load();
+    };
+    window.setTimeout(scheduleIdle, 2200);
   };
   if (document.readyState === 'complete') start();
   else window.addEventListener('load', start, {once: true});
