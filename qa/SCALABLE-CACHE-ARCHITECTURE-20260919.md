@@ -126,3 +126,27 @@ Avec un noyau d'environ 110457 octets, le seuil historique redevient un garde-fo
 3. Déployer uniquement sur preview de branche si l'intégration est décidée.
 4. Vérifier installation, mise à jour, navigation visitée hors ligne, reprise réseau et non-régression visuelle dans un navigateur réel.
 5. Ne déclarer aucun PASS natif pour les points non observés.
+
+## Raffinement ciblé — fraîcheur des assets runtime
+
+Une inspection après la première intégration a isolé un risque : les images/schémas runtime utilisaient `cache-first`. Or MODARYX remplace parfois un asset au **même chemin**. Sans changement de version du cache, une ancienne copie pouvait donc rester servie trop longtemps.
+
+Correction ciblée :
+
+- CSS/JS : restent `network-first` avec révalidation explicite ;
+- images, icônes, fontes et schémas publics runtime : passent à `network-first` avec fallback cache ;
+- les données fraîches explicites restent `network-first` + `cache: no-store` ;
+- aucune ressource lourde n'est réintroduite dans le précache d'installation.
+
+Micro-preuve exécutée sur le contenu exact des blobs GitHub candidats :
+
+- `node --check sw.js` : PASS CIBLÉ ;
+- premier chargement d'un futur asset : réseau + cache ;
+- deuxième chargement en ligne avec contenu serveur modifié : la nouvelle version est servie puis remplace la copie runtime ;
+- chargement hors ligne ensuite : fallback sur la **dernière** copie mise en cache ;
+- plafond runtime 80 et protection du noyau toujours verts ;
+- empreinte `sw.js` candidate : `f27348c7b3a038cccf65eb6b5089f6d3ce07239d43accd9d70c8a5fc46c14697` ;
+- `SHA256SUMS.txt` réconcilié dans le même lot.
+
+Cette preuve reste simulée/source. Le navigateur HTTPS réel demeure PREUVE MANQUANTE.
+
