@@ -490,3 +490,50 @@ L'utilisateur demande explicitement de conserver comme référence de projet les
 
 Cette section doit rester une référence de reprise et ne doit pas être rétrogradée par une ancienne conversation ou une ancienne estimation.
 
+## Priorité produit — MODARYX Site First jusqu'à VF ultra haut de gamme — 19 septembre 2026
+
+Décision utilisateur : **terminer MODARYX en priorité avant de reprendre la finition finale des deux OS**.
+
+Cette priorité n'autorise aucun faux 100 %. La VF ne sera déclarée qu'après fermeture réelle des preuves nécessaires.
+
+### Lot « même équipe, produits distincts »
+
+Objectif : permettre aux visiteurs de comprendre que MODARYX MODS et Nova Forge OS sont créés par la même équipe sans fusionner leurs identités.
+
+Implémentation isolée sur `chatgpt/modaryx-site-first-vf-20260919`, base fraîche `3cfb2e1e3e76a3b13a957a79c38663384adb7f93`.
+
+- `assets/shell.js` ajoute une signature discrète dans le footer commun : MODARYX MODS et Nova Forge OS sont deux produits distincts créés par la même équipe ;
+- `ecosystem.html` contient désormais une section statique « Même équipe · produits distincts » ;
+- aucune marque groupe/studio inventée ;
+- aucun lien Nova Forge OS public inventé ;
+- séparation officielle préservée : MODARYX = web, Nova Forge = logiciel/OS.
+
+Micro-preuve : **PASS CIBLÉ** sur le périmètre source.
+
+- syntaxe shell valide ;
+- copie « même équipe / produits distincts » présente ;
+- section Écosystème présente ;
+- style footer présent ;
+- empreintes publiques réconciliées ;
+- les 17 pages publiques avaient déjà été vérifiées avec le shell, la feuille foundations et un footer sur la base ; ce lot n'en retire aucun.
+
+### Budget après ce lot
+
+- noyau avant : **111076 octets** ;
+- delta shell + foundations : **+746 octets** ;
+- noyau dérivé : **111822 octets** ;
+- marge sous 800000 : **688178 octets**.
+
+### Ordre de travail courant
+
+1. intégrer ce lot si Git reste aligné ;
+2. vérifier le HEAD intégré et les statuts de contrôle ;
+3. reprendre l'accueil / monde vivant avec preuve ciblée ;
+4. poursuivre la finition Premium HD des 17 pages ;
+5. fermer les fonctionnalités locales ;
+6. traiter les dépendances externes sans les simuler ;
+7. fermer les preuves navigateur/accessibilité/appareils ;
+8. seulement ensuite déclarer la VF.
+
+Plan détaillé : `qa/MODARYX-SITE-FIRST-VF-PLAN-20260919.md`.
+
