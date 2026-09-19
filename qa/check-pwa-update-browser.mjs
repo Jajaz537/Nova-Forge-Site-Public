@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const CHROME_BIN = process.env.CHROME_BIN || 'google-chrome';
 const ORIGIN = 'http://127.0.0.1:4174';
-const DEBUG_PORT = Number(process.env.CHROME_DEBUG_PORT || (24000 + (process.pid % 16000)));
+const USER_DATA_DIR = '/tmp/modaryx-pwa-update-browser-' + process.pid;
 const ROOT = '/tmp/modaryx-pwa-update-' + process.pid;
 const CACHE_A = 'modaryx-site-v120-scalable';
 const CACHE_B = 'modaryx-site-v121-update-proof';
@@ -15,6 +15,19 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function assert(condition, message) {
   if (!condition) failures.push(message);
+}
+
+async function waitForDevToolsPort(timeoutMs = 12000) {
+  const file = path.join(USER_DATA_DIR, 'DevToolsActivePort');
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (fs.existsSync(file)) {
+      const [port] = fs.readFileSync(file, 'utf8').trim().split(/\r?\n/);
+      if (/^\d+$/.test(port)) return Number(port);
+    }
+    await sleep(120);
+  }
+  throw new Error('DevToolsActivePort not created');
 }
 
 async function waitForJson(url, timeoutMs = 10000) {
@@ -173,16 +186,17 @@ await waitServerUp();
 const chrome = spawn(CHROME_BIN,[
   '--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-background-networking',
   '--disable-default-apps','--disable-extensions','--disable-sync','--metrics-recording-only','--no-first-run',
-  '--remote-debugging-address=127.0.0.1','--remote-debugging-port=' + DEBUG_PORT,
-  '--user-data-dir=/tmp/modaryx-pwa-update-browser-' + process.pid,'about:blank'
+  '--remote-debugging-address=127.0.0.1','--remote-debugging-port=0',
+  '--user-data-dir=' + USER_DATA_DIR,'about:blank'
 ],{stdio:['ignore','ignore','pipe']});
 
 let chromeStderr='';
 chrome.stderr.on('data',(chunk)=>{chromeStderr=(chromeStderr+String(chunk)).slice(-12000);});
 
 try {
-  await waitForJson('http://127.0.0.1:' + DEBUG_PORT + '/json/version');
-  const tabResponse = await fetch('http://127.0.0.1:' + DEBUG_PORT + '/json/new?' + encodeURIComponent('about:blank'),{method:'PUT'});
+  const debugPort = await waitForDevToolsPort();
+  await waitForJson('http://127.0.0.1:' + debugPort + '/json/version');
+  const tabResponse = await fetch('http://127.0.0.1:' + debugPort + '/json/new?' + encodeURIComponent('about:blank'),{method:'PUT'});
   if (!tabResponse.ok) throw new Error('cannot create Chrome target: HTTP ' + tabResponse.status);
   const tab = await tabResponse.json();
   const cdp = new Cdp(tab.webSocketDebuggerUrl);
