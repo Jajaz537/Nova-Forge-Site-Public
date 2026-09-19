@@ -697,3 +697,26 @@ Intégration :
 - cette preuve source ne remplace toujours pas NVDA/Narrator/VoiceOver ni les appareils physiques ;
 - `main` et infrastructure critique : inchangées.
 
+## Candidat ciblé — progression visible du monde vivant — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-visible-growth-status-20260919`, base fraîche `44913db21ddc5cadcd5cd9e214435fcd095a7efb`.
+
+Ajouts :
+
+- prochain stade visible du Louveteau et du Dragonneau avec délai calculé ;
+- libellés d'activité liés aux phases partagées du monde ;
+- statut du monde exposé comme `role=status` / `aria-live=polite` ;
+- transition de lumière plus douce entre les phases ;
+- empreintes des quatre fichiers publics modifiés réconciliées ;
+- contrôle Site First renforcé pour empêcher la perte de ces hooks.
+
+Budget candidat :
+
+- noyau dérivé : **112068 octets** ;
+- marge : **687932 octets** ;
+- runtime monde vivant : **12531 octets**.
+
+État : **EN COURS — micro-preuve CI requise avant intégration**.
+
+La croissance physique du loup/dragon dans l'image reste **EN COURS** : ce lot rend la progression temporelle visible sans prétendre que l'illustration composite est déjà découpée en couches.
+
