@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "worldId": "modaryx-living-world",
+  "clock": {
+    "model": "shared-world-utc",
+    "epoch": "2026-09-19T00:00:00Z",
+    "refreshSeconds": 60
+  },
+  "inhabitants": [
+    {
+      "id": "wolf",
+      "label": "Loup",
+      "bornAt": "2026-09-19T00:00:00Z",
+      "stages": [
+        {"id": "baby", "fromDay": 0, "label": "Jeune loup"},
+        {"id": "juvenile", "fromDay": 45, "label": "Loup juvénile"},
+        {"id": "adolescent", "fromDay": 120, "label": "Loup adolescent"},
+        {"id": "young-adult", "fromDay": 270, "label": "Jeune adulte"},
+        {"id": "adult", "fromDay": 540, "label": "Loup adulte"}
+      ]
+    },
+    {
+      "id": "dragon",
+      "label": "Dragon",
+      "bornAt": "2026-09-19T00:00:00Z",
+      "stages": [
+        {"id": "baby", "fromDay": 0, "label": "Jeune dragon"},
+        {"id": "juvenile", "fromDay": 60, "label": "Dragon juvénile"},
+        {"id": "adolescent", "fromDay": 150, "label": "Dragon adolescent"},
+        {"id": "young-adult", "fromDay": 330, "label": "Jeune adulte"},
+        {"id": "adult", "fromDay": 720, "label": "Dragon adulte"}
+      ]
+    }
+  ],
+  "dayPhases": [
+    {"id": "night", "fromHour": 0, "label": "Nuit calme"},
+    {"id": "dawn", "fromHour": 5, "label": "Aube"},
+    {"id": "day", "fromHour": 8, "label": "Journée vivante"},
+    {"id": "dusk", "fromHour": 18, "label": "Crépuscule"},
+    {"id": "night", "fromHour": 22, "label": "Nuit calme"}
+  ],
+  "principles": {
+    "sharedProgression": true,
+    "noRemoteAccountRequired": true,
+    "reducedMotionRespected": true,
+    "visualGrowthRequiresLayeredCharacterAssets": true
+  }
+}
