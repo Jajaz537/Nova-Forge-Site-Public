@@ -96,6 +96,14 @@ if (!ecosystem.includes('MODARYX MODS et Nova Forge OS sont créés par la même
   fail('ecosystem: explicit brand separation copy missing');
 }
 
+const cinematic = read('assets/modaryx-cinematic-system.css');
+if (!cinematic.includes('top:calc(var(--modaryx-header-height,76px) + 8px)')) fail('cinematic system: sticky section nav does not follow measured header height');
+if (!cinematic.includes('@media(hover:hover) and (pointer:fine)')) fail('cinematic system: hover elevation is not restricted to precise hover devices');
+if (!cinematic.includes('.card:focus-within')) fail('cinematic system: keyboard focus-within premium state missing');
+if (!cinematic.includes('-webkit-backdrop-filter')) fail('cinematic system: Safari backdrop-filter fallback missing');
+if (!cinematic.includes('-webkit-mask-image')) fail('cinematic system: Safari mask-image fallback missing');
+if (!cinematic.includes('overscroll-behavior-inline:contain')) fail('cinematic system: mobile section-nav overscroll containment missing');
+
 const living = JSON.parse(read('data/living-world.json'));
 const expectedStages = ['baby', 'juvenile', 'adolescent', 'young-adult', 'adult'];
 if (living?.growthModel?.order?.join('|') !== expectedStages.join('|')) fail('living world: canonical shared stage order mismatch');
