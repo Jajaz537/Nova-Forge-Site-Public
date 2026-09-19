@@ -12,7 +12,7 @@
       "label": "Loup",
       "bornAt": "2026-09-19T00:00:00Z",
       "stages": [
-        {"id": "baby", "fromDay": 0, "label": "Jeune loup"},
+        {"id": "baby", "fromDay": 0, "label": "Louveteau"},
         {"id": "juvenile", "fromDay": 45, "label": "Loup juvénile"},
         {"id": "adolescent", "fromDay": 120, "label": "Loup adolescent"},
         {"id": "young-adult", "fromDay": 270, "label": "Jeune adulte"},
@@ -24,7 +24,7 @@
       "label": "Dragon",
       "bornAt": "2026-09-19T00:00:00Z",
       "stages": [
-        {"id": "baby", "fromDay": 0, "label": "Jeune dragon"},
+        {"id": "baby", "fromDay": 0, "label": "Dragonneau"},
         {"id": "juvenile", "fromDay": 60, "label": "Dragon juvénile"},
         {"id": "adolescent", "fromDay": 150, "label": "Dragon adolescent"},
         {"id": "young-adult", "fromDay": 330, "label": "Jeune adulte"},
