@@ -1915,3 +1915,39 @@ Gate candidat PR #48 :
 - **EN COURS** — loup adolescent / jeune adulte / adulte + cinq stades dragon ;
 - aucun passage `ready` avant bundle complet ;
 - `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
+
+
+## Asset compagnon — Loup adolescent — 20 septembre 2026
+
+PR #49 : **TERMINÉE — fusionnée** dans la branche active PR #12.
+
+- commit d'intégration : `7a229e034aa3f403e12fe689d4731e74d2b40e79` ;
+- asset : `assets/living-world/wolf-adolescent.png` ;
+- dimensions : **1600 × 900** ;
+- PNG RGBA, `alpha=true` ;
+- SHA-256 final : `79a5676ac09523c691e650d097d9ed18011bd5bff597657e9ab0262bd3856b97` ;
+- progression visuelle : adolescent clairement plus grand et athlétique que le stade juvénile, sans basculer jeune adulte ;
+- asset gardé **non référencé** ; `visualGrowth.status=awaiting-assets` inchangé.
+
+Preuves ciblées PR #49 :
+
+- `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ;
+- `wolf-adolescent.png` détecté comme `candidate-layer` : 1600 × 900, alpha=true, failures=[] ;
+- Site First Source, PWA Offline, Reflow Chromium, Accessibility Chromium et Lab Performance : **success**.
+
+Incident ciblé :
+
+- premier checksum enregistré : `fd9eb367…` ;
+- Source Proof : **failure** avec empreinte réelle `79a5676a…` ;
+- cause isolée avant fusion ;
+- seule la ligne `SHA256SUMS.txt` du nouvel asset a été corrigée ;
+- micro-proof Source suivant : **success** ;
+- aucune relance full run.
+
+État :
+
+- environnement séparé : **TERMINÉ** ;
+- couches compagnon : **3/10 TERMINÉES** ;
+- **EN COURS** — loup jeune adulte / adulte + cinq stades dragon ;
+- aucun passage `ready` avant bundle complet ;
+- `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
