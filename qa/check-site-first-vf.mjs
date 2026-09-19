@@ -52,6 +52,21 @@ function referenceExists(relativePath) {
   return fs.existsSync(indexPath);
 }
 
+function attr(tag, name) {
+  const match = tag.match(new RegExp(`\\s${name}=["']([^"']*)["']`, 'i'));
+  return match ? match[1] : null;
+}
+
+function textContent(fragment) {
+  return fragment
+    .replace(/<script\b[\s\S]*?<\/script>/gi, '')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 for (const page of pages) {
   if (!exists(page)) {
     fail(`missing public page: ${page}`);
@@ -74,6 +89,51 @@ for (const page of pages) {
   if (!html.includes(foundationRef)) fail(`${page}: modaryx-foundations.css missing`);
   if (page !== 'index.html' && !html.includes(cinematicRef)) fail(`${page}: modaryx-cinematic-system.css missing`);
   if (/\bModaryx OS\b/i.test(html)) fail(`${page}: deprecated visible product label "Modaryx OS"`);
+
+  const h1Count = (html.match(/<h1\b/gi) || []).length;
+  if (h1Count !== 1) fail(`${page}: expected exactly one h1, found ${h1Count}`);
+
+  const idValues = [...html.matchAll(/\sid=["']([^"']+)["']/gi)].map((match) => match[1]);
+  const idSet = new Set();
+  for (const id of idValues) {
+    if (idSet.has(id)) fail(`${page}: duplicate id ${id}`);
+    idSet.add(id);
+  }
+
+  for (const img of html.match(/<img\b[^>]*>/gi) || []) {
+    if (!/\salt=["'][^"']*["']/i.test(img)) fail(`${page}: img missing alt attribute: ${img.slice(0, 120)}`);
+  }
+
+  for (const button of html.match(/<button\b[^>]*>[\s\S]*?<\/button>/gi) || []) {
+    const opening = button.match(/^<button\b[^>]*>/i)?.[0] || '';
+    const label = attr(opening, 'aria-label');
+    if (!label && !textContent(button)) fail(`${page}: button without accessible text`);
+  }
+
+  for (const anchor of html.match(/<a\b[^>]*>[\s\S]*?<\/a>/gi) || []) {
+    const opening = anchor.match(/^<a\b[^>]*>/i)?.[0] || '';
+    const label = attr(opening, 'aria-label');
+    if (!label && !textContent(anchor)) fail(`${page}: link without accessible text`);
+  }
+
+  for (const ariaName of ['aria-labelledby', 'aria-describedby', 'aria-controls']) {
+    const regex = new RegExp(`\\s${ariaName}=["']([^"']+)["']`, 'gi');
+    for (const match of html.matchAll(regex)) {
+      for (const target of match[1].trim().split(/\s+/).filter(Boolean)) {
+        if (!idSet.has(target)) fail(`${page}: ${ariaName} references missing id ${target}`);
+      }
+    }
+  }
+
+  for (const control of html.match(/<(?:input|select|textarea)\b[^>]*>/gi) || []) {
+    const id = attr(control, 'id');
+    const type = attr(control, 'type');
+    if (!id || type === 'hidden') continue;
+    const labelled = attr(control, 'aria-label') || attr(control, 'aria-labelledby');
+    const labelFor = new RegExp(`<label\\b[^>]*\\sfor=["']${id.replace(/[.*+?^$()|[\\]\\]/g, '\\  const refs = [...html.matchAll(/(?:href|src)=["']([^"']+)["']/gi)].map((match) => match[1]);
+')}["'][^>]*>`, 'i').test(html);
+    if (!labelled && !labelFor) fail(`${page}: form control #${id} has no explicit label`);
+  }
 
   const refs = [...html.matchAll(/(?:href|src)=["']([^"']+)["']/gi)].map((match) => match[1]);
   for (const raw of refs) {
@@ -195,6 +255,7 @@ const result = {
   precacheMargin: 800000 - precacheBytes,
   runtimeEntryCap: 80,
   livingWorldStages: expectedStages,
+  structuralA11yChecks: true,
   failures
 };
 
