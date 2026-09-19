@@ -164,6 +164,7 @@ const checksumLines = read('SHA256SUMS.txt')
   .filter(Boolean);
 
 let checksumCount = 0;
+const checksumPaths = new Set();
 for (const line of checksumLines) {
   const match = line.match(/^([0-9a-f]{64})\s{2}(.+)$/);
   if (!match) {
@@ -172,6 +173,8 @@ for (const line of checksumLines) {
   }
   const [, expected, rawPath] = match;
   const relativePath = rawPath.replace(/^\.\//, '');
+  if (checksumPaths.has(relativePath)) fail(`SHA256SUMS: duplicate normalized path ${relativePath}`);
+  checksumPaths.add(relativePath);
   if (!exists(relativePath)) {
     fail(`SHA256SUMS: listed file missing: ${rawPath}`);
     continue;
