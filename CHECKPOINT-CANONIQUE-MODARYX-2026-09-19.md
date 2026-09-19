@@ -1081,3 +1081,19 @@ Intégration :
 - **TERMINÉ** — comportement PWA offline/recovery ciblé en Chromium loopback ;
 - **PREUVE MANQUANTE** — preview publique HTTPS, update A→B, appareils physiques, autres navigateurs, quota réel et CWV.
 
+## Candidat ciblé — mise à jour PWA A → B — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-pwa-update-proof-20260919`, base fraîche `bd9c5fa9f7267070a853f7b7b7f799721a6ecd25`.
+
+Ajouts QA uniquement :
+
+- `qa/check-pwa-update-browser.mjs` ;
+- `.github/workflows/modaryx-pwa-update-browser-proof.yml` ;
+- `qa/MODARYX-PWA-UPDATE-BROWSER-PROOF-20260919.md`.
+
+Le harnais copie le candidat dans un dossier temporaire, installe l'étape A, transforme uniquement la copie temporaire en étape B, déclenche `registration.update()`, exige l'activation du nouveau cache et la suppression de l'ancien, puis arrête réellement le serveur et exige que la version B soit disponible hors ligne.
+
+État : **EN COURS — micro-preuve CI requise avant intégration**.
+
+Aucun fichier produit, `main`, DNS ou Cloudflare critique n'est modifié par ce lot.
+
