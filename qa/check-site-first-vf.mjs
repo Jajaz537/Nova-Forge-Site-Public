@@ -1,0 +1,182 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+
+const root = process.cwd();
+const failures = [];
+const pages = [
+  'index.html',
+  'catalog.html',
+  'search.html',
+  'creator-studio.html',
+  'community.html',
+  'profiles.html',
+  'ecosystem.html',
+  'documentation.html',
+  'security.html',
+  'verify.html',
+  'downloads.html',
+  'project.html',
+  'project-ember-textures.html',
+  'project-balanced-latency-pack.html',
+  'project-forge-night-experience.html',
+  '404.html',
+  'games/index.html'
+];
+
+const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'utf8');
+const exists = (relativePath) => fs.existsSync(path.join(root, relativePath));
+const hashFile = (relativePath) => crypto
+  .createHash('sha256')
+  .update(fs.readFileSync(path.join(root, relativePath)))
+  .digest('hex');
+
+const fail = (message) => failures.push(message);
+
+function normalizeLocalReference(page, raw) {
+  if (!raw || raw.startsWith('#')) return null;
+  if (/^(?:https?:|mailto:|tel:|data:|javascript:|blob:|\/\/)/i.test(raw)) return null;
+  const clean = raw.split('#')[0].split('?')[0];
+  if (!clean) return null;
+  const base = new URL(page, 'https://modaryx.example/');
+  const resolved = new URL(clean, base);
+  if (resolved.origin !== 'https://modaryx.example') return null;
+  return decodeURIComponent(resolved.pathname.replace(/^\//, ''));
+}
+
+function referenceExists(relativePath) {
+  if (!relativePath) return true;
+  const absolute = path.join(root, relativePath);
+  if (fs.existsSync(absolute)) return true;
+  const indexPath = path.join(absolute, 'index.html');
+  return fs.existsSync(indexPath);
+}
+
+for (const page of pages) {
+  if (!exists(page)) {
+    fail(`missing public page: ${page}`);
+    continue;
+  }
+
+  const html = read(page);
+  const nested = page.includes('/');
+  const shellRef = nested ? '../assets/shell.js' : './assets/shell.js';
+  const foundationRef = nested ? '../assets/modaryx-foundations.css' : './assets/modaryx-foundations.css';
+
+  if (!html.includes('<meta charset="utf-8">')) fail(`${page}: charset missing`);
+  if (!html.includes('name="viewport"')) fail(`${page}: viewport missing`);
+  if (!/<title>[^<]+<\/title>/i.test(html)) fail(`${page}: title missing`);
+  if (!html.includes('class="skip-link"')) fail(`${page}: skip link missing`);
+  if (!html.includes('id="main"')) fail(`${page}: main landmark id missing`);
+  if (!html.includes('class="site-footer"')) fail(`${page}: shared footer missing`);
+  if (!html.includes(shellRef)) fail(`${page}: shell.js missing`);
+  if (!html.includes(foundationRef)) fail(`${page}: modaryx-foundations.css missing`);
+  if (/\bModaryx OS\b/i.test(html)) fail(`${page}: deprecated visible product label "Modaryx OS"`);
+
+  const refs = [...html.matchAll(/(?:href|src)=["']([^"']+)["']/gi)].map((match) => match[1]);
+  for (const raw of refs) {
+    const local = normalizeLocalReference(page, raw);
+    if (local && !referenceExists(local)) fail(`${page}: missing local reference ${raw} -> ${local}`);
+  }
+}
+
+const shell = read('assets/shell.js');
+new Function(shell);
+if (!shell.includes('MODARYX MODS et Nova Forge OS sont deux produits distincts créés par la même équipe.')) {
+  fail('shared shell: same-team product relationship missing');
+}
+if (!shell.includes('data-product-family-note') && !shell.includes('productFamilyNote')) {
+  fail('shared shell: product-family de-duplication hook missing');
+}
+
+const ecosystem = read('ecosystem.html');
+if (!ecosystem.includes('id="family"')) fail('ecosystem: same-team section missing');
+if (!ecosystem.includes('Même équipe · produits distincts')) fail('ecosystem: same-team heading missing');
+if (!ecosystem.includes('MODARYX MODS et Nova Forge OS sont créés par la même équipe, mais restent deux produits séparés.')) {
+  fail('ecosystem: explicit brand separation copy missing');
+}
+
+const living = JSON.parse(read('data/living-world.json'));
+const expectedStages = ['baby', 'juvenile', 'adolescent', 'young-adult', 'adult'];
+if (living?.growthModel?.order?.join('|') !== expectedStages.join('|')) fail('living world: canonical shared stage order mismatch');
+if (living?.growthModel?.pace !== 'independent-per-species') fail('living world: independent pacing contract missing');
+for (const inhabitant of living?.inhabitants || []) {
+  const order = (inhabitant?.stages || []).map((stage) => stage?.id);
+  if (order.join('|') !== expectedStages.join('|')) fail(`living world: ${inhabitant?.id || 'unknown'} stage order mismatch`);
+  for (let i = 1; i < (inhabitant?.stages || []).length; i += 1) {
+    if (!(inhabitant.stages[i].fromDay > inhabitant.stages[i - 1].fromDay)) {
+      fail(`living world: ${inhabitant?.id || 'unknown'} thresholds are not strictly increasing`);
+    }
+  }
+}
+
+const livingCss = read('assets/living-world.css');
+if (!livingCss.includes('prefers-reduced-motion')) fail('living world: prefers-reduced-motion guard missing');
+if (!livingCss.includes('html[data-motion=reduced]')) fail('living world: explicit reduced-motion guard missing');
+
+const index = read('index.html');
+for (const hook of ['data-world-phase', 'data-world-age', 'data-world-inhabitant="wolf"', 'data-world-inhabitant="dragon"', 'data-world-status']) {
+  if (!index.includes(hook)) fail(`index: living-world hook missing: ${hook}`);
+}
+
+const sw = read('sw.js');
+if (!sw.includes("const MAX_RUNTIME_ENTRIES = 80")) fail('service worker: runtime entry cap is not 80');
+if (!sw.includes("'./data/living-world.json'")) fail('service worker: living-world data is not in fresh public paths');
+for (const heavy of ['./assets/modaryx-wolf-dragon-hero.webp', './assets/modaryx-world-portals.webp']) {
+  const precacheSection = sw.slice(sw.indexOf('const PRECACHE_PATHS'), sw.indexOf('const FRESH_PUBLIC_PATHS'));
+  if (precacheSection.includes(`'${heavy}'`)) fail(`service worker: heavyweight art returned to install precache: ${heavy}`);
+}
+
+const precacheSection = sw.slice(sw.indexOf('const PRECACHE_PATHS'), sw.indexOf('const FRESH_PUBLIC_PATHS'));
+if (!precacheSection.startsWith('const PRECACHE_PATHS')) fail('service worker: PRECACHE_PATHS section missing');
+const precacheRequests = [...precacheSection.matchAll(/'\.\/([^']*)'/g)].map((match) => match[1] || 'index.html');
+const precacheFiles = [...new Set(precacheRequests.map((item) => item === '' ? 'index.html' : item))];
+let precacheBytes = 0;
+for (const relativePath of precacheFiles) {
+  if (!exists(relativePath)) {
+    fail(`service worker: precache file missing: ${relativePath}`);
+    continue;
+  }
+  precacheBytes += fs.statSync(path.join(root, relativePath)).size;
+}
+if (precacheBytes > 800000) fail(`service worker: precache budget exceeded: ${precacheBytes} > 800000`);
+
+const checksumLines = read('SHA256SUMS.txt')
+  .split(/\r?\n/)
+  .map((line) => line.trimEnd())
+  .filter(Boolean);
+
+let checksumCount = 0;
+for (const line of checksumLines) {
+  const match = line.match(/^([0-9a-f]{64})\s{2}(.+)$/);
+  if (!match) {
+    fail(`SHA256SUMS: malformed line: ${line}`);
+    continue;
+  }
+  const [, expected, rawPath] = match;
+  const relativePath = rawPath.replace(/^\.\//, '');
+  if (!exists(relativePath)) {
+    fail(`SHA256SUMS: listed file missing: ${rawPath}`);
+    continue;
+  }
+  const actual = hashFile(relativePath);
+  if (actual !== expected) fail(`SHA256SUMS: mismatch ${rawPath} expected=${expected} actual=${actual}`);
+  checksumCount += 1;
+}
+
+const result = {
+  marker: failures.length ? 'FAIL_TARGETED_SITE_FIRST_SOURCE_PROOF' : 'PASS_TARGETED_SITE_FIRST_SOURCE_PROOF',
+  pages: pages.length,
+  checksumCount,
+  precacheUniqueFiles: precacheFiles.length,
+  precacheRequests: precacheRequests.length,
+  precacheBytes,
+  precacheBudget: 800000,
+  precacheMargin: 800000 - precacheBytes,
+  runtimeEntryCap: 80,
+  livingWorldStages: expectedStages,
+  failures
+};
+
+console.log(JSON.stringify(result, null, 2));
+if (failures.length) process.exit(1);

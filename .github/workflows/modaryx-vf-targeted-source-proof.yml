@@ -1,0 +1,49 @@
+name: MODARYX Site First Targeted Source Proof
+
+on:
+  push:
+    branches:
+      - design/modaryx-premium-hd-20260914-work
+      - chatgpt/modaryx-vf-source-proof-20260919
+    paths:
+      - '.github/workflows/modaryx-vf-targeted-source-proof.yml'
+      - 'qa/check-site-first-vf.mjs'
+      - '*.html'
+      - 'games/**'
+      - 'assets/**'
+      - 'data/**'
+      - 'sw.js'
+      - 'SHA256SUMS.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-site-first-source-proof-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-proof:
+    name: Targeted source proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Record runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --version
+          git rev-parse HEAD
+
+      - name: Run targeted Site First source proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-site-first-vf.mjs
