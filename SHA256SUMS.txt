@@ -10,7 +10,7 @@ d381131783627707943e8361e22cb4294682f44e57b9c01e5d0c1cc28eacf505  ./assets/commu
 33a0530ceb4cafa33a6e0f05cc04994d086b8d11308d5f5f2a9fac20861efe81  ./assets/forge-field.svg
 bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-schema-lite.js
 85c1f58b7033889e60e9c0620f1cd6546194e13850b2fd6866bf575e80c1e895  ./assets/living-world.css
-7ef88a44263d08d711ea6bc901b7f0d8aae9cc4560184326f5c38829fbaba737  ./assets/living-world.js
+93cd5839cebdc3347d8314a473b041edaac9bf3a08f2c6703ae6114f75e35256  ./assets/living-world.js
 d4bc4ad5575952da5c75a9cd45940acf622e73555e7a9ece046dbe39b3d014e8  ./assets/modaryx-cinematic-system.css
 32a014bfa790bc6f0cecf68f2743e7969201ad5d8eea613cf1d3e84862773a0e  ./assets/modaryx-home-cinematic.css
 06b1dae65f9c0706fabc9b85a46cd3c50d7a5a5d2e6015b2be064b751d7b8189  ./assets/modaryx-mark-192.png
@@ -45,7 +45,7 @@ b40f0cc65a0de9de1a435011012f0d2329f81fc873c66058ef65f3d646bb53a4  ./catalog.html
 010737ea4c600d6111d3fa94d6f86e454595dd6f0b5ddb4e0ab01b689b70fbd3  ./data/catalog.json
 08f9810bea5a8afc20acbf7a6f5b23c5cb4647621f6a1787d42a3fa212981283  ./data/compatibility-graph.json
 6e0ba5cbf31c7ed012de0cbc787e01220554205e8507efed2f81626f264309fa  ./data/integration-readiness.json
-dca732309b36a8320e824cb6ec2cc1af40f2ce38546fa2f89a9110f15e245e91  ./data/living-world.json
+ea0fbef9fd177ef4c75af6e71b912c1461b218b7fd9a8fb29de09300cddb7500  ./data/living-world.json
 fd77943e2b758314ee5beb7a6b89680a4a16c7958e6f4b6e8ad7f250d7feed80  ./data/search-index.json
 b4322fc3a865e55dc1732e5ab920b17e7f55e6352fe2471aaefec49398c36092  ./documentation.html
 75c384b7fefa2300c8d30d1a2a3901563c9ce76e8839aa6917a6a7ed19daa78e  ./downloads.html
