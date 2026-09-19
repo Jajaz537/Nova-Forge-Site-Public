@@ -11,7 +11,7 @@ d381131783627707943e8361e22cb4294682f44e57b9c01e5d0c1cc28eacf505  ./assets/commu
 bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-schema-lite.js
 85c1f58b7033889e60e9c0620f1cd6546194e13850b2fd6866bf575e80c1e895  ./assets/living-world.css
 c2b6ab9f6105c715c33eb722dce530e8a3e622c2b146b5479fd3651026113aa0  ./assets/living-world.js
-d4bc4ad5575952da5c75a9cd45940acf622e73555e7a9ece046dbe39b3d014e8  ./assets/modaryx-cinematic-system.css
+6953d4b684b13f1afdcf6452d0452c809f5307ad5a8362da00c72e8d454a28e2  ./assets/modaryx-cinematic-system.css
 32a014bfa790bc6f0cecf68f2743e7969201ad5d8eea613cf1d3e84862773a0e  ./assets/modaryx-home-cinematic.css
 06b1dae65f9c0706fabc9b85a46cd3c50d7a5a5d2e6015b2be064b751d7b8189  ./assets/modaryx-mark-192.png
 38eb20983b8118843446d8a64dd5afa4991f43d927b41703b21b34fc30a1aa40  ./assets/modaryx-mark-512.png
@@ -82,7 +82,6 @@ f9efeca9b4ddaf4c82d3099258174a72266cef03b4df6740ed13145f5f931adc  ./search.html
 7cb545dbc373c308acd554f3a53048d753bcdb5042bf9b86821f6547f078a47a  ./site.webmanifest
 b042d8cea4c041dda9f4433bee8691c5ab7fe6a330d2ab5707940bfc4a331746  ./sw.js
 f7236a62662631fc3e9956322b36cf09656e49ae9a27e1a505b964b0e12ab818  ./verify.html
-d4bc4ad5575952da5c75a9cd45940acf622e73555e7a9ece046dbe39b3d014e8  assets/modaryx-cinematic-system.css
 f2080efdb50cfa1ab9f06156e131cf468fd972d84b01178e3db62859533ca839  assets/modaryx-foundations.css
 8211d85acc6d18450010903bd0934ac5f0ea4e5f42d38daa7bcd8d3c590578f6  assets/modaryx-wolf-dragon-hero.webp
 1997aac139789ade6441d9896aab57444b36a26f3b4d32e35e8630eec4253b0a  assets/modaryx-world-portals.webp

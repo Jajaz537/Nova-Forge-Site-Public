@@ -611,3 +611,21 @@ Après correction ciblée et micro-preuve CI :
 
 Cette intégration ne ferme pas la croissance visuelle individuelle, la preuve navigateur réelle ni les portes externes de VF.
 
+## Finition ciblée — interactions Premium HD des pages secondaires — 19 septembre 2026
+
+Lot isolé sur `chatgpt/modaryx-premium-interaction-polish-20260919`, base fraîche `9b7ae6258d165db8b67df7f0dfa47ce6d735c710`.
+
+Améliorations :
+
+- section-nav sticky alignée sur la hauteur réelle du header ;
+- hover premium réservé aux pointeurs précis ;
+- état `:focus-within` pour navigation clavier ;
+- compatibilité Safari renforcée pour blur et masque ;
+- scroll horizontal mobile des section-nav stabilisé ;
+- contrôle Site First renforcé : les 16 pages secondaires doivent charger le système cinématique partagé ;
+- empreinte `modaryx-cinematic-system.css` réconciliée.
+
+Impact runtime : **+544 octets**, aucun changement du noyau précaché (**111822 octets**).
+
+État avant intégration : **EN COURS — PR et micro-preuve CI requises**.
+

@@ -62,6 +62,7 @@ for (const page of pages) {
   const nested = page.includes('/');
   const shellRef = nested ? '../assets/shell.js' : './assets/shell.js';
   const foundationRef = nested ? '../assets/modaryx-foundations.css' : './assets/modaryx-foundations.css';
+  const cinematicRef = nested ? '../assets/modaryx-cinematic-system.css' : './assets/modaryx-cinematic-system.css';
 
   if (!html.includes('<meta charset="utf-8">')) fail(`${page}: charset missing`);
   if (!html.includes('name="viewport"')) fail(`${page}: viewport missing`);
@@ -71,6 +72,7 @@ for (const page of pages) {
   if (!html.includes('class="site-footer"')) fail(`${page}: shared footer missing`);
   if (!html.includes(shellRef)) fail(`${page}: shell.js missing`);
   if (!html.includes(foundationRef)) fail(`${page}: modaryx-foundations.css missing`);
+  if (page !== 'index.html' && !html.includes(cinematicRef)) fail(`${page}: modaryx-cinematic-system.css missing`);
   if (/\bModaryx OS\b/i.test(html)) fail(`${page}: deprecated visible product label "Modaryx OS"`);
 
   const refs = [...html.matchAll(/(?:href|src)=["']([^"']+)["']/gi)].map((match) => match[1]);
@@ -95,6 +97,14 @@ if (!ecosystem.includes('Même équipe · produits distincts')) fail('ecosystem:
 if (!ecosystem.includes('MODARYX MODS et Nova Forge OS sont créés par la même équipe, mais restent deux produits séparés.')) {
   fail('ecosystem: explicit brand separation copy missing');
 }
+
+const cinematic = read('assets/modaryx-cinematic-system.css');
+if (!cinematic.includes('top:calc(var(--modaryx-header-height,76px) + 8px)')) fail('cinematic system: sticky section nav does not follow measured header height');
+if (!cinematic.includes('@media(hover:hover) and (pointer:fine)')) fail('cinematic system: hover elevation is not restricted to precise hover devices');
+if (!cinematic.includes('.card:focus-within')) fail('cinematic system: keyboard focus-within premium state missing');
+if (!cinematic.includes('-webkit-backdrop-filter')) fail('cinematic system: Safari backdrop-filter fallback missing');
+if (!cinematic.includes('-webkit-mask-image')) fail('cinematic system: Safari mask-image fallback missing');
+if (!cinematic.includes('overscroll-behavior-inline:contain')) fail('cinematic system: mobile section-nav overscroll containment missing');
 
 const living = JSON.parse(read('data/living-world.json'));
 const expectedStages = ['baby', 'juvenile', 'adolescent', 'young-adult', 'adult'];
@@ -154,6 +164,7 @@ const checksumLines = read('SHA256SUMS.txt')
   .filter(Boolean);
 
 let checksumCount = 0;
+const checksumPaths = new Set();
 for (const line of checksumLines) {
   const match = line.match(/^([0-9a-f]{64})\s{2}(.+)$/);
   if (!match) {
@@ -162,6 +173,8 @@ for (const line of checksumLines) {
   }
   const [, expected, rawPath] = match;
   const relativePath = rawPath.replace(/^\.\//, '');
+  if (checksumPaths.has(relativePath)) fail(`SHA256SUMS: duplicate normalized path ${relativePath}`);
+  checksumPaths.add(relativePath);
   if (!exists(relativePath)) {
     fail(`SHA256SUMS: listed file missing: ${rawPath}`);
     continue;

@@ -169,3 +169,9 @@ Correction ciblée : le contrat `shared-world-utc` est maintenant respecté par 
 
 Delta par rapport au lot précédent : **+167 octets runtime**. Le noyau install-précaché reste **111822 octets** après la signature d'équipe ; aucune ressource lourde n'est réintroduite.
 
+## Finition d'interaction secondaire — impact runtime — 19 septembre 2026
+
+`assets/modaryx-cinematic-system.css` passe de **9672** à **10216 octets**, soit **+544 octets**.
+
+Cette feuille reste chargée en runtime sur les pages secondaires et n'est pas ajoutée au noyau install-précaché. Le noyau reste donc **111822 octets**, marge **688178 octets** sous le garde-fou 800000.
+
