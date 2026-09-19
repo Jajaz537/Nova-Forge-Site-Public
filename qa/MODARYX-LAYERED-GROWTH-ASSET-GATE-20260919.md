@@ -19,4 +19,6 @@ En état `ready`, la garde exigera :
 
 En état `awaiting-assets`, tout fichier candidat `environment-*` déjà présent est également contrôlé sur son format lisible et ses dimensions `1600 × 900`, sans pour autant être activé.
 
+Les couches candidates nommées `<inhabitant>-<stage>.png|webp` déjà présentes sont elles aussi contrôlées en `awaiting-assets` : format compagnon autorisé, dimensions `1600 × 900` et canal alpha obligatoire. Leur présence ne remplit pas automatiquement les chemins JSON et ne passe jamais le système en `ready`.
+
 La garde ne fabrique aucun visuel et ne remplace pas une recette humaine de cohérence artistique.
