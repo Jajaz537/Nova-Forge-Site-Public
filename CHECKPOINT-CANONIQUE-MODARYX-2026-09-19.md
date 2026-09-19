@@ -568,3 +568,9 @@ CodeQL du même HEAD est encore **EN COURS** au moment de cette entrée ; aucun 
 
 Le PASS source n'est pas un PASS VF. Les portes navigateur, accessibilité native, appareils physiques, CWV et croissance visuelle réelle restent ouvertes.
 
+### Mise à jour CodeQL du même HEAD
+
+Le workflow CodeQL du HEAD `442477b69fdcb4c8f8aa38eb9bc03e80d20129b6` est maintenant **TERMINÉ — success** (run `35461496530`).
+
+Cette réussite ferme uniquement le contrôle CodeQL de ce HEAD ; elle ne change pas l'état des preuves navigateur, accessibilité, appareils, CWV ou VF.
+
