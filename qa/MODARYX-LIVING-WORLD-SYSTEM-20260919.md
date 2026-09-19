@@ -140,3 +140,37 @@ Cette preuve ne vaut pas validation visuelle navigateur ni preuve d'appareil phy
 3. conserver la composition artistique approuvée ;
 4. passer ensuite de l'illustration composite aux couches dynamiques séparées pour rendre la croissance du loup/dragon réellement visible ;
 5. étendre progressivement l'activité du monde sans créer un décor agité ou artificiel.
+
+## Modèle de croissance partagé — décision canonique
+
+Le loup et le dragon suivent désormais **exactement le même ordre de stades** :
+
+1. bébé ;
+2. juvénile ;
+3. adolescent ;
+4. jeune adulte ;
+5. adulte.
+
+Les noms d'espèce restent naturels dans l'interface :
+
+- loup : **Louveteau** → Loup juvénile → Loup adolescent → Jeune adulte → Loup adulte ;
+- dragon : **Dragonneau** → Dragon juvénile → Dragon adolescent → Jeune adulte → Dragon adulte.
+
+Le rythme peut rester différent selon l'espèce. La règle canonique est donc : **mêmes stades, vitesse de croissance indépendante**.
+
+Cette règle est maintenant déclarée dans `data/living-world.json` via `growthModel.order` et contrôlée par `assets/living-world.js`. Si un compagnon futur ne respecte pas l'ordre canonique, le moteur refuse de charger cette configuration comme valide au lieu de dériver silencieusement.
+
+Les seuils actuels restent narratifs et configurables :
+
+- loup : J0 / J45 / J120 / J270 / J540 ;
+- dragon : J0 / J60 / J150 / J330 / J720.
+
+Impact runtime après cette clarification :
+
+- `assets/living-world.js` : **4985 octets** ;
+- `assets/living-world.css` : **3649 octets** ;
+- `data/living-world.json` : **2431 octets** ;
+- total runtime monde vivant : **11065 octets**.
+
+Le noyau install-précaché reste inchangé à **111076 octets**.
+
