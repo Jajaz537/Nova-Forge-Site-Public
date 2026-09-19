@@ -1827,3 +1827,37 @@ Preuves finales candidat PR #45 : Site First Source, Living Chronicle, Local Fun
 - **EN COURS** — représentation visuelle réelle des habitants/animaux et croissance physique loup/dragon ;
 - **PREUVE MANQUANTE** — vrais assets séparés environnement + loup + dragon et inspection artistique finale des WebP actuels ;
 - `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
+
+
+## Asset séparé — environnement monde vivant — 20 septembre 2026
+
+PR #46 : **TERMINÉE — fusionnée** dans la branche active PR #12.
+
+- commit d'intégration : `8e9fc9bb2bdc73c047f6b65bd0b223a7b297e744` ;
+- asset réel ajouté : `assets/living-world/environment-premium.jpg` ;
+- dimensions prouvées : **1600 × 900** ;
+- format : JPEG ; l'environnement n'exige pas de canal alpha ;
+- les couches loup/dragon conservent l'exigence PNG/WebP avec alpha ;
+- l'asset reste volontairement **non référencé** et `visualGrowth.status=awaiting-assets` reste inchangé ;
+- aucun passage `ready` avant présence et preuve des cinq stades loup + cinq stades dragon.
+
+Gate PR #46 :
+
+- `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ;
+- candidat environnement détecté : `environment-premium.jpg`, JPEG, 1600 × 900 ;
+- Site First Source, PWA Offline, Reflow Chromium, Accessibility Chromium et Lab Performance : **success**.
+
+Incident ciblé pendant la préparation :
+
+- une première ligne SHA-256 vide a été produite parce que la lecture binaire GitHub renvoyait `content=""` ;
+- cause isolée avant PR ;
+- empreinte recalculée depuis la même charge binaire Adobe utilisée pour créer le blob ;
+- checksum final : `2f8200d72fd07230d1c9d125e80a29fe434ec5517643dd892319a32d3f6cc2d7` ;
+- preuve source finale : **success**.
+
+État :
+
+- **TERMINÉ sur l'environnement séparé** ;
+- **EN COURS** — cinq couches loup + cinq couches dragon avec alpha ;
+- **PREUVE MANQUANTE** — rendu intégré complet et croissance visuelle active ;
+- `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
