@@ -392,3 +392,22 @@ Cette preuve ne vaut pas validation visuelle navigateur ni appareil physique.
 5. poursuivre la séparation future des couches de personnages afin que leur croissance devienne réellement visible ;
 6. continuer la finition Premium HD et les preuves externes restantes.
 
+## Intégration contrôlée — monde vivant — 19 septembre 2026
+
+Après micro-preuves ciblées et vérification Git fraîche :
+
+- PR #19 : **TERMINÉE — fusionnée** ;
+- commit d'intégration dans la branche active PR #12 : `8c06f45ec9c9c5f3de38c1dd6619eb312646b11a` ;
+- PR #12 : toujours ouverte et brouillon ;
+- `main` : inchangée ;
+- aucune modification DNS/DNSSEC/nameservers/IONOS/Cloudflare critique ;
+- CodeQL du commit d'intégration : **EN COURS / en file d'attente** au moment de cette mise à jour, donc aucun PASS annoncé.
+
+État du monde vivant après intégration :
+
+- **TERMINÉ** — chronologie partagée, croissance logique du loup/dragon, cycle journalier, ambiance dynamique sobre, reduced motion, cache et empreintes ;
+- **EN COURS** — croissance visuelle individuelle réelle des personnages, car le hero demeure actuellement une image composite ;
+- **PREUVE MANQUANTE** — contrôle navigateur réel de la nouvelle couche, responsive visuel ciblé, comportement reduced motion réel et appareils physiques.
+
+La règle produit reste : MODARYX doit devenir un univers qui évolue, pas un fond animé décoratif ni une collection d'images figées.
+
