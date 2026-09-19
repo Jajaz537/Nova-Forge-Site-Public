@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "scope": "Five grouped isolated source scenarios; not browser proof",
+  "checks": [
+    "Current catalogue generates three groups; check mode detects drift without modifying output",
+    "Private incomplete record is excluded from public output",
+    "Project display name is escaped as text",
+    "Duplicate project ID rejects generation and preserves the existing page",
+    "Empty catalogue, invalid path, downloadable record and conflicting game identity preserve prior page"
+  ]
+}

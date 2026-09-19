@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "surface": "modaryx-web",
+  "capabilities": [
+    {
+      "id": "game-hubs.gta6-rdr2",
+      "state": "blocked-inputs",
+      "contractPaths": ["./MODARYX-SITE-ARCHITECTURE-V1.md"],
+      "requiredInputs": ["Corpus éditorial substantiel et sourcé", "Droits des visuels", "Décision produit sur les catégories publiées"],
+      "permissions": ["Lecture publique uniquement après validation éditoriale et juridique"],
+      "uiStates": {
+        "loading": "Chargement du contenu éditorial validé.",
+        "empty": "Aucun contenu public validé pour ce jeu.",
+        "error": "Le contenu de ce jeu ne peut pas être chargé.",
+        "unavailable": "Ce hub n’est pas publié tant que son contenu et ses droits ne sont pas validés."
+      },
+      "publicationGate": "Interdire toute page vide, toute compatibilité présumée et tout asset sans droits vérifiés."
+    },
+    {
+      "id": "accounts.profiles",
+      "state": "not-connected",
+      "contractPaths": ["./schemas/public-profile.schema.json", "./schemas/account-security.schema.json"],
+      "requiredInputs": ["Service d’identité", "Politique de récupération", "Politique de conservation des sessions"],
+      "permissions": ["Clé privée jamais demandée ni stockée", "Réauthentification des actions privilégiées", "Révocation de session"],
+      "uiStates": {
+        "loading": "Vérification de la disponibilité du service de compte.",
+        "empty": "Aucun profil public n’est encore associé à ce compte.",
+        "error": "Le service de compte est momentanément indisponible.",
+        "unavailable": "La création de compte et la connexion ne sont pas disponibles."
+      },
+      "publicationGate": "Aucun compte simulé et aucune promesse d’authentification sans backend et politique de sécurité validés."
+    },
+    {
+      "id": "community.publication-moderation",
+      "state": "local-only",
+      "contractPaths": ["./schemas/community-submission.schema.json", "./schemas/community-write.schema.json", "./schemas/moderation-receipt.schema.json", "./schemas/moderation-export.schema.json"],
+      "requiredInputs": ["API de publication", "Service de modération", "Politique d’abus et d’appel"],
+      "permissions": ["Écriture distante après authentification", "Modération séparée", "Appel traçable"],
+      "uiStates": {
+        "loading": "Envoi de la contribution vers le service autorisé.",
+        "empty": "Aucune contribution publiée.",
+        "error": "La contribution n’a pas été envoyée ; le brouillon local est conservé.",
+        "unavailable": "Seuls les brouillons locaux sont disponibles."
+      },
+      "publicationGate": "Aucune écriture distante ni modération déclarée active tant que les services ne sont pas connectés."
+    },
+    {
+      "id": "storage.resolver-repair",
+      "state": "not-connected",
+      "contractPaths": ["./schemas/storage-resolver.schema.json", "./schemas/repair-network.schema.json"],
+      "requiredInputs": ["Origines de stockage autorisées", "Manifestes et empreintes signés", "Service de résolution"],
+      "permissions": ["Lecture limitée aux origines autorisées", "Aucune substitution silencieuse", "Refus des empreintes divergentes"],
+      "uiStates": {
+        "loading": "Recherche d’une copie correspondant exactement à l’identité attendue.",
+        "empty": "Aucune copie vérifiée n’est disponible.",
+        "error": "La résolution a échoué sans modifier le fichier local.",
+        "unavailable": "La résolution et la réparation distantes ne sont pas connectées."
+      },
+      "publicationGate": "Ne jamais annoncer une réparation sans correspondance d’identité, de manifeste et d’empreinte."
+    },
+    {
+      "id": "distribution.artifacts",
+      "state": "distribution-locked",
+      "contractPaths": ["./downloads.json", "./schemas/publication-receipt.schema.json"],
+      "requiredInputs": ["Artefact autorisé", "Empreinte SHA-256", "Provenance", "Signature lorsque requise"],
+      "permissions": ["Téléchargement same-origin d’un artefact explicitement publié"],
+      "uiStates": {
+        "loading": "Vérification de la disponibilité des artefacts publics.",
+        "empty": "Aucun téléchargement public déclaré disponible.",
+        "error": "Impossible de confirmer la disponibilité ; les téléchargements restent verrouillés.",
+        "unavailable": "La distribution reste verrouillée jusqu’à publication des preuves requises."
+      },
+      "publicationGate": "Le manifeste doit être frais, conforme, complet et limité aux chemins publics same-origin."
+    },
+    {
+      "id": "integrations.guide-os-bridge",
+      "state": "not-connected",
+      "contractPaths": ["./public-status.json"],
+      "requiredInputs": ["Contrat du Guide connecté", "Protocole local du pont OS", "Consentement utilisateur explicite"],
+      "permissions": ["Connexion optionnelle", "Moindre privilège", "Aucune session partagée implicite"],
+      "uiStates": {
+        "loading": "Recherche d’une intégration locale autorisée.",
+        "empty": "Aucune intégration locale détectée.",
+        "error": "L’intégration locale n’a pas pu être établie.",
+        "unavailable": "Le Guide connecté et le pont Nova Forge OS ne sont pas connectés."
+      },
+      "publicationGate": "MODARYX reste autonome ; ne jamais fusionner son identité avec Nova Forge OS."
+    }
+  ]
+}

@@ -30,8 +30,29 @@
 
   let schema = null;
   let lastManifest = null;
+  let draftEdited = false;
+  let draftRevision = 0;
+  let validationRequested = false;
 
   const read = (key) => String(fields[key]?.value ?? "").trim();
+  function updateReceiptFields() {
+    for (const [key, required] of [
+      ["evidenceReceipt", read("evidence") === "measured"],
+      ["provenanceReceipt", read("provenanceState") === "verified"]
+    ]) {
+      const field = fields[key];
+      if (!field) continue;
+      const value = read(key);
+      const invalid = (required && !value) || (value && !RECEIPT_RE.test(value));
+      field.required = required;
+      field.setCustomValidity(required && !value ? "Renseignez le justificatif requis pour ce niveau déclaré." : value && !RECEIPT_RE.test(value)
+        ? "Utilisez receipt: suivi de 2 à 192 caractères minuscules : lettres, chiffres, point, tiret, soulignement ou deux-points."
+        : "");
+      if (validationRequested && invalid) field.setAttribute("aria-invalid", "true");
+      else field.removeAttribute("aria-invalid");
+    }
+  }
+
   const uniqueSorted = (value) => [...new Set(String(value).split(",").map((part) => part.trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, "en"));
   const boolToken = (value, label) => {
     const normalized = String(value).trim().toLowerCase();
@@ -137,21 +158,63 @@
     return errors;
   }
 
+  const friendlyError = (message) => {
+    const names = {"$.content.id": "Identifiant du projet", "$.content.name": "Nom du projet", "$.content.version": "Version", "$.target.gameId": "Identifiant du jeu", "$.target.gameName": "Nom du jeu", "$.creator.id": "Identifiant créateur", "$.creator.displayName": "Nom du créateur", "$.rights.license": "Licence", "$.compatibility.evidenceReceipt": "Justificatif de mesure", "$.provenance.receiptId": "Justificatif de provenance"};
+    for (const [path, label] of Object.entries(names)) message = message.replace(path + ":", label + ":");
+    return message.replace("longueur minimale 1", "champ à renseigner");
+  };
+
+  function renderErrorList(errors) {
+    const targets = {"$.content.id":"contentId","$.content.name":"name","$.content.version":"version","$.target.gameId":"gameId","$.target.gameName":"gameName","$.creator.id":"creatorId","$.creator.displayName":"creatorName","$.rights.license":"license","$.compatibility.evidenceReceipt":"evidenceReceipt","$.provenance.receiptId":"provenanceReceipt"};
+    const heading = document.createElement("p");
+    heading.textContent = `À corriger : ${errors.length} point(s).`;
+    const list = document.createElement("ul");
+    for (const message of errors) {
+      const item = document.createElement("li");
+      const field = fields[targets[message.split(":")[0]]];
+      if (field) {
+        const link = document.createElement("a");
+        link.href = `#${field.id}`;
+        link.textContent = friendlyError(message);
+        link.addEventListener("click", (event) => { event.preventDefault(); field.focus(); });
+        item.append(link);
+      } else item.textContent = friendlyError(message);
+      list.append(item);
+    }
+    schemaStatus.replaceChildren(heading, list);
+  }
+
   function render() {
+    updateReceiptFields();
+    for (const field of Object.values(fields)) {
+      if (validationRequested && field?.validity && !field.validity.valid) field.setAttribute("aria-invalid", "true");
+      else field?.removeAttribute("aria-invalid");
+    }
     try {
       const manifest = buildManifest();
       lastManifest = manifest;
       preview.textContent = canonicalText(manifest);
       const errors = schemaErrors(manifest);
-      schemaStatus.textContent = errors.length ? `Validation locale : ${errors.length} erreur(s). ${errors.slice(0, 3).join(" · ")}` : "Validation locale : brouillon conforme au schéma UMM chargé. Cela ne constitue pas une preuve de provenance, signature ou mesure.";
+      schemaStatus.textContent = !schema
+        ? "Chargement du format de validation. L’export reste indisponible pour le moment."
+        : errors.length
+          ? validationRequested
+            ? `À corriger : ${errors.length} point(s).`
+            : "Votre brouillon est en cours. Renseignez les champs obligatoires, puis choisissez Valider l’aperçu."
+          : "Format du brouillon conforme. Cela ne vérifie ni la provenance, ni la signature, ni la compatibilité réelle.";
+      if (schema && validationRequested && errors.length) renderErrorList(errors);
       return {manifest, errors};
     } catch (error) {
+      lastManifest = null;
+      preview.textContent = "Brouillon incomplet : corrigez les champs signalés pour actualiser l’aperçu.";
       schemaStatus.textContent = `Brouillon non valide : ${error.message}`;
       return {manifest: null, errors: [error.message]};
     }
   }
 
   function requireValidDraft() {
+    validationRequested = true;
+    render();
     if (!form.checkValidity()) {
       form.reportValidity();
       status.textContent = "Complétez les champs requis avant sauvegarde ou export.";
@@ -172,6 +235,8 @@
     if (!manifest || manifest.schemaVersion !== 1 || manifest.distribution?.state !== "locked" || manifest.distribution?.downloadable !== false || manifest.releaseReceipt !== null) {
       throw new Error("Seuls les brouillons UMM v1 verrouillés, non téléchargeables et sans releaseReceipt peuvent être importés.");
     }
+    const importErrors = schemaErrors(manifest);
+    if (importErrors.length) throw new Error(`Brouillon non conforme : ${importErrors.slice(0, 3).join(" · ")}`);
     const mapping = {
       contentId: manifest.content?.id, version: manifest.content?.version, name: manifest.content?.name, kind: manifest.content?.kind, summary: manifest.content?.summary,
       gameId: manifest.target?.gameId, gameName: manifest.target?.gameName, gameVersions: (manifest.target?.versions || []).join(", "), gameLoaders: (manifest.target?.loaders || []).join(", "),
@@ -181,9 +246,14 @@
       provenanceState: manifest.provenance?.state, provenanceReceipt: manifest.provenance?.receiptId, sourceUri: manifest.provenance?.sourceUri, provenanceNotes: manifest.provenance?.notes,
       files: fileLines(manifest.files)
     };
+    const previous = Object.fromEntries(Object.entries(fields).map(([key, node]) => [key, node?.value]));
     for (const [key, node] of Object.entries(fields)) if (node) node.value = mapping[key] ?? "";
     const result = render();
-    if (result.errors.length) throw new Error(`Brouillon importé mais non conforme : ${result.errors.slice(0, 3).join(" · ")}`);
+    if (result.errors.length) {
+      for (const [key, node] of Object.entries(fields)) if (node) node.value = previous[key];
+      render();
+      throw new Error(`Import refusé, brouillon précédent conservé : ${result.errors.slice(0, 3).join(" · ")}`);
+    }
   }
 
   async function loadSchema() {
@@ -251,18 +321,33 @@
       importFile.focus();
       return;
     }
+    draftEdited = true;
+    const revision = ++draftRevision;
     try {
+      await schemaReady;
+      if (revision !== draftRevision) return;
       const imported = JSON.parse(await file.text());
+      if (revision !== draftRevision) return;
       applyManifest(imported);
       status.textContent = "Brouillon importé localement et validé. Il n’est ni sauvegardé ni publié tant que vous ne le demandez pas explicitement.";
     } catch (error) {
+      if (revision !== draftRevision) return;
       status.textContent = `Import refusé : ${error.message}`;
     }
   });
 
   clearButton.addEventListener("click", () => {
-    try { localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(LEGACY_STORAGE_KEY); } catch {}
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(LEGACY_STORAGE_KEY);
+    } catch {
+      status.textContent = "Suppression locale impossible ou incomplète. Le brouillon affiché est conservé ; les données stockées ne sont pas déclarées effacées.";
+      return;
+    }
+    draftEdited = true;
+    draftRevision++;
     form.reset();
+    validationRequested = false;
     importFile.value = "";
     lastManifest = null;
     preview.textContent = "{}";
@@ -274,24 +359,41 @@
   downloadButton.addEventListener("click", () => {
     const manifest = requireValidDraft();
     if (!manifest) return;
-    const blob = new Blob([canonicalText(manifest)], {type: "application/json"});
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    const safeId = read("contentId").replace(/[^a-z0-9._-]/gi, "-").toLowerCase() || "nova-forge-draft";
-    anchor.href = url;
-    anchor.download = `${safeId}.nova-manifest.json`;
-    anchor.rel = "noopener";
-    document.body.append(anchor);
-    anchor.click();
-    anchor.remove();
-    URL.revokeObjectURL(url);
-    status.textContent = "Export JSON déterministe généré localement. Le manifest reste NON PUBLIÉ et distribution=locked.";
+    let url;
+    let anchor;
+    try {
+      const blob = new Blob([canonicalText(manifest)], {type: "application/json"});
+      url = URL.createObjectURL(blob);
+      anchor = document.createElement("a");
+      const safeId = read("contentId").replace(/[^a-z0-9._-]/gi, "-").toLowerCase() || "nova-forge-draft";
+      anchor.href = url;
+      anchor.download = `${safeId}.nova-manifest.json`;
+      anchor.rel = "noopener";
+      document.body.append(anchor);
+      anchor.click();
+      status.textContent = "Export JSON préparé. Vérifiez les téléchargements de votre navigateur. Le brouillon reste NON PUBLIÉ.";
+    } catch {
+      status.textContent = "Export impossible dans ce navigateur. Votre brouillon est conservé ; vous pouvez réessayer ou enregistrer une copie locale.";
+    } finally {
+      anchor?.remove();
+      if (url) setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
   });
 
-  form.addEventListener("input", () => render());
-  form.addEventListener("change", () => render());
+  function markDraftEdited(event) {
+    draftEdited = true;
+    draftRevision++;
+    render();
+    if (event.target.type === "file") return;
+    const message = "Modifications non sauvegardées · validez ou sauvegardez à nouveau · NON PUBLIÉ.";
+    if (status.textContent !== message) status.textContent = message;
+  }
+  form.addEventListener("input", markDraftEdited);
+  form.addEventListener("change", markDraftEdited);
 
   render();
-  loadSavedDraft();
-  loadSchema();
+  const schemaReady = loadSchema();
+  schemaReady.then(() => {
+    if (!draftEdited && schema) loadSavedDraft();
+  });
 })();

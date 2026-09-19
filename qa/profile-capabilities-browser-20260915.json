@@ -1,0 +1,70 @@
+{
+  "sourceCommit": "5d0f3de054d17b03b4795a1cd9168bf3d92c55f0",
+  "date": "2026-09-15",
+  "scope": "Chrome HTTPS DOM and reflow; native unavailable branch only",
+  "dom": {
+    "api": "Indisponible dans ce navigateur.",
+    "conditional": "Non testable sans WebAuthn.",
+    "platform": "Non testable sans WebAuthn.",
+    "status": "WebAuthn indisponible"
+  },
+  "reflow": [
+    {
+      "page": "profiles.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/profiles",
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "height": 900,
+      "contentHeight": 3961,
+      "h1": "Votre profil, vos moyens de connexion.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 419.3,
+        "loadEndMs": 419.5,
+        "responseEndMs": 218.7
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    },
+    {
+      "page": "profiles.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/profiles",
+      "requested": 768,
+      "width": 753,
+      "scroll": 753,
+      "height": 900,
+      "contentHeight": 2719,
+      "h1": "Votre profil, vos moyens de connexion.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 419.3,
+        "loadEndMs": 419.5,
+        "responseEndMs": 218.7
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    }
+  ],
+  "limitations": [
+    "Native WebAuthn unavailable in this browser; partial/completed branches remain Node simulated only",
+    "No account, credential or authentication tested",
+    "No native screen reader, zoom or physical device tested"
+  ]
+}

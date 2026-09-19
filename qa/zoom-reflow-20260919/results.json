@@ -1,0 +1,438 @@
+{
+  "generatedAt": "2026-09-19T14:43:27.044Z",
+  "base": "http://127.0.0.1:4173",
+  "results": [
+    {
+      "engine": "firefox",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "route": "/",
+      "clientWidth": 703,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 720,
+      "offenders": [],
+      "outerWidth": 720,
+      "scrollWidth": 703,
+      "visualScale": 1
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "route": "/catalog.html",
+      "clientWidth": 703,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 720,
+      "offenders": [],
+      "outerWidth": 720,
+      "scrollWidth": 703,
+      "visualScale": 1
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "route": "/creator-studio.html",
+      "clientWidth": 703,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 720,
+      "offenders": [],
+      "outerWidth": 720,
+      "scrollWidth": 703,
+      "visualScale": 1
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "route": "/community.html",
+      "clientWidth": 703,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 720,
+      "offenders": [],
+      "outerWidth": 720,
+      "scrollWidth": 703,
+      "visualScale": 1
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "route": "/security.html",
+      "clientWidth": 703,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 720,
+      "offenders": [],
+      "outerWidth": 720,
+      "scrollWidth": 703,
+      "visualScale": 1
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "route": "/games/",
+      "clientWidth": 703,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 720,
+      "offenders": [],
+      "outerWidth": 720,
+      "scrollWidth": 703,
+      "visualScale": 1
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "name": "responsive",
+        "width": 800,
+        "height": 900
+      },
+      "route": "/",
+      "clientWidth": 483,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 500,
+      "offenders": [],
+      "outerWidth": 500,
+      "scrollWidth": 483,
+      "visualScale": 1
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "name": "responsive",
+        "width": 800,
+        "height": 900
+      },
+      "route": "/catalog.html",
+      "clientWidth": 483,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 500,
+      "offenders": [],
+      "outerWidth": 500,
+      "scrollWidth": 483,
+      "visualScale": 1
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "name": "responsive",
+        "width": 800,
+        "height": 900
+      },
+      "route": "/creator-studio.html",
+      "clientWidth": 483,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 500,
+      "offenders": [],
+      "outerWidth": 500,
+      "scrollWidth": 483,
+      "visualScale": 1
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "name": "responsive",
+        "width": 800,
+        "height": 900
+      },
+      "route": "/community.html",
+      "clientWidth": 483,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 500,
+      "offenders": [],
+      "outerWidth": 500,
+      "scrollWidth": 483,
+      "visualScale": 1
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "name": "responsive",
+        "width": 800,
+        "height": 900
+      },
+      "route": "/security.html",
+      "clientWidth": 483,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 500,
+      "offenders": [],
+      "outerWidth": 500,
+      "scrollWidth": 483,
+      "visualScale": 1
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "name": "responsive",
+        "width": 800,
+        "height": 900
+      },
+      "route": "/games/",
+      "clientWidth": 483,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 500,
+      "offenders": [],
+      "outerWidth": 500,
+      "scrollWidth": 483,
+      "visualScale": 1
+    },
+    {
+      "engine": "chromium-edge",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "route": "/",
+      "clientWidth": 681,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 696,
+      "offenders": [],
+      "outerWidth": 720,
+      "scrollWidth": 681,
+      "visualScale": 1
+    },
+    {
+      "engine": "chromium-edge",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "route": "/catalog.html",
+      "clientWidth": 681,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 696,
+      "offenders": [],
+      "outerWidth": 720,
+      "scrollWidth": 681,
+      "visualScale": 1
+    },
+    {
+      "engine": "chromium-edge",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "route": "/creator-studio.html",
+      "clientWidth": 681,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 696,
+      "offenders": [],
+      "outerWidth": 720,
+      "scrollWidth": 681,
+      "visualScale": 1
+    },
+    {
+      "engine": "chromium-edge",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "route": "/community.html",
+      "clientWidth": 681,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 696,
+      "offenders": [],
+      "outerWidth": 720,
+      "scrollWidth": 681,
+      "visualScale": 1
+    },
+    {
+      "engine": "chromium-edge",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "route": "/security.html",
+      "clientWidth": 681,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 696,
+      "offenders": [],
+      "outerWidth": 720,
+      "scrollWidth": 681,
+      "visualScale": 1
+    },
+    {
+      "engine": "chromium-edge",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "route": "/games/",
+      "clientWidth": 681,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 696,
+      "offenders": [],
+      "outerWidth": 720,
+      "scrollWidth": 681,
+      "visualScale": 1
+    },
+    {
+      "engine": "chromium-edge",
+      "viewport": {
+        "name": "responsive",
+        "width": 800,
+        "height": 900
+      },
+      "route": "/",
+      "clientWidth": 469,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 484,
+      "offenders": [],
+      "outerWidth": 508,
+      "scrollWidth": 469,
+      "visualScale": 1
+    },
+    {
+      "engine": "chromium-edge",
+      "viewport": {
+        "name": "responsive",
+        "width": 800,
+        "height": 900
+      },
+      "route": "/catalog.html",
+      "clientWidth": 469,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 484,
+      "offenders": [],
+      "outerWidth": 508,
+      "scrollWidth": 469,
+      "visualScale": 1
+    },
+    {
+      "engine": "chromium-edge",
+      "viewport": {
+        "name": "responsive",
+        "width": 800,
+        "height": 900
+      },
+      "route": "/creator-studio.html",
+      "clientWidth": 469,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 484,
+      "offenders": [],
+      "outerWidth": 508,
+      "scrollWidth": 469,
+      "visualScale": 1
+    },
+    {
+      "engine": "chromium-edge",
+      "viewport": {
+        "name": "responsive",
+        "width": 800,
+        "height": 900
+      },
+      "route": "/community.html",
+      "clientWidth": 469,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 484,
+      "offenders": [],
+      "outerWidth": 508,
+      "scrollWidth": 469,
+      "visualScale": 1
+    },
+    {
+      "engine": "chromium-edge",
+      "viewport": {
+        "name": "responsive",
+        "width": 800,
+        "height": 900
+      },
+      "route": "/security.html",
+      "clientWidth": 469,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 484,
+      "offenders": [],
+      "outerWidth": 508,
+      "scrollWidth": 469,
+      "visualScale": 1
+    },
+    {
+      "engine": "chromium-edge",
+      "viewport": {
+        "name": "responsive",
+        "width": 800,
+        "height": 900
+      },
+      "route": "/games/",
+      "clientWidth": 469,
+      "clippedControls": [],
+      "devicePixelRatio": 2,
+      "horizontalOverflow": false,
+      "innerWidth": 484,
+      "offenders": [],
+      "outerWidth": 508,
+      "scrollWidth": 469,
+      "visualScale": 1
+    }
+  ]
+}

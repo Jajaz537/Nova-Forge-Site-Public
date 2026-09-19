@@ -13,7 +13,7 @@
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="MODARYX MODS">
   <meta property="og:title" content="Documentation publique — MODARYX MODS">
-  <meta property="og:description" content="Règles publiques MODARYX MODS de vérification, statut machine-readable, vie privée navigateur et publication fail-closed.">
+  <meta property="og:description" content="Vérification des fichiers, données locales et conditions de publication : les règles publiques MODARYX MODS.">
   <title>Documentation publique — MODARYX MODS</title>
   <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
@@ -24,7 +24,8 @@
   <script src="./assets/shell.js" defer></script>
   <script src="./assets/app.js" defer></script>
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
-  <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">
+  <link rel="stylesheet" href="./assets/modaryx-foundations.css">
+  <link rel="stylesheet" href="./assets/modaryx-cinematic-system.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Aller au contenu</a>
@@ -33,32 +34,40 @@
       <img class="brand-logo" src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="32" height="32">
       <span>MODARYX MODS</span>
     </a>
-    <nav aria-label="Documentation publique">
+    <nav aria-label="Navigation principale"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html" aria-current="page">Aide</a></nav>
+  </header>
+
+  <main id="main">
+    <nav class="page-trail" aria-label="Fil d’Ariane"><a href="./index.html">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Documentation</span></nav>
+    <nav class="section-nav" aria-label="Documentation publique">
       <a href="#verification">Vérification</a>
       <a href="#status">Statut</a>
       <a href="#privacy">Vie privée</a>
       <a href="#limits">Limites</a>
     </nav>
-  </header>
-
-  <main id="main">
     <section class="hero" aria-labelledby="docs-hero-title">
       <div class="hero-copy">
         <p class="eyebrow">MODARYX MODS · documentation publique</p>
-        <h1 id="docs-hero-title">Comprendre ce que le site affirme — et ce qu’il n’affirme pas.</h1>
-        <p class="lede">Cette documentation couvre uniquement la surface publique du site officiel. Elle décrit les règles visibles de vérification, de confidentialité et de publication sans documenter les composants privés ou internes de Modaryx OS.</p>
+        <h1 id="docs-hero-title">Trouvez le bon outil. Comprenez ses limites.</h1>
+        <p class="lede">Explorez les projets, préparez une création ou vérifiez un fichier. Cette documentation explique les outils web MODARYX, leurs données locales et les conditions de publication.</p>
         <div class="actions"><a class="button primary" href="./security.html">Sécurité & provenance</a><a class="button" href="./verify.html">Vérifier un SHA-256</a><a class="button" href="./public-status.json">Statut public JSON</a><a class="button" href="./">Retour au site officiel</a></div>
       </div>
       <aside class="hero-panel" aria-label="Portée de cette documentation">
         <p class="eyebrow">Portée</p>
         <ul class="feature-list">
           <li><span>01</span><div><strong>Public uniquement</strong><small>Aucun secret, mécanisme réservé ou contenu privé/interne.</small></div></li>
-          <li><span>02</span><div><strong>Fail closed</strong><small>Une preuve absente reste absente.</small></div></li>
+          <li><span>02</span><div><strong>Preuves requises</strong><small>Une preuve absente reste absente.</small></div></li>
           <li><span>03</span><div><strong>Build servi</strong><small>Le statut et la provenance publique décrivent uniquement la surface livrée.</small></div></li>
           <li><span>04</span><div><strong>Pas de promesse implicite</strong><small>Une fonction non connectée n’est pas présentée comme disponible.</small></div></li>
         </ul>
       </aside>
     </section>
+
+    <section class="section" aria-labelledby="tasks-title"><p class="eyebrow">Par où commencer ?</p><h2 id="tasks-title">Choisissez votre tâche.</h2><div class="cards three">
+      <article class="card"><p class="card-kicker">01 · Explorer</p><h3>Trouver un projet</h3><p>Filtrez par jeu, ouvrez une fiche et consultez les informations de compatibilité. Les favoris restent locaux au navigateur.</p><a class="text-link" href="./catalog.html">Explorer le catalogue →</a></article>
+      <article class="card"><p class="card-kicker">02 · Créer</p><h3>Préparer une création</h3><p>Renseignez le nom, le jeu cible et les droits dans Creator Studio. Validez le format puis exportez une copie JSON avant de quitter l’appareil.</p><a class="text-link" href="./creator-studio.html">Ouvrir le Studio →</a></article>
+      <article class="card"><p class="card-kicker">03 · Conserver</p><h3>Conserver une sélection</h3><p>Copiez vos favoris dans une collection, sauvegardez-la explicitement puis exportez un fichier pour en garder une copie indépendante.</p><a class="text-link" href="./community.html">Ouvrir les collections →</a></article>
+    </div></section>
 
     <section class="section" id="verification" aria-labelledby="verification-title">
       <p class="eyebrow">Vérification publique</p>
@@ -70,7 +79,7 @@
         <div role="listitem"><strong>Provenance</strong><span>La source et la chaîne de livraison déclarées doivent être qualifiées avant d’accorder de la confiance à un fichier.</span></div>
         <div role="listitem"><strong>Signature</strong><span>Lorsqu’une signature est requise, elle doit être présente et vérifiable ; son absence ne doit jamais être masquée par un badge visuel.</span></div>
       </div>
-      <div class="security-note"><strong>Outils publics :</strong> le <a href="./verify.html">vérificateur SHA-256</a> calcule l’empreinte d’un fichier dans le navigateur sans l’exécuter ni l’envoyer. Une correspondance de hash prouve l’intégrité par rapport à la valeur fournie ; elle ne prouve pas à elle seule l’identité, l’auteur ou la provenance. Le <a href="./security.html">contrat Sécurité & provenance</a> détaille la séparation de ces preuves et leurs états fail-closed.</div>
+      <div class="security-note"><strong>Outils publics :</strong> le <a href="./verify.html">vérificateur SHA-256</a> calcule l’empreinte d’un fichier dans le navigateur sans l’exécuter ni l’envoyer. Une empreinte identique confirme l’intégrité par rapport à la valeur fournie ; elle ne prouve pas à elle seule l’identité, l’auteur ou la provenance. Le <a href="./security.html">contrat Sécurité & provenance</a> explique ces preuves distinctes et les situations qui bloquent la publication.</div>
     </section>
 
     <section class="section" id="status" aria-labelledby="status-title">
@@ -98,7 +107,7 @@
       <p class="eyebrow">Limites actuelles</p>
       <h2 id="limits-title">Ce qui n’est pas encore disponible.</h2>
       <div class="cards">
-        <article class="card"><h3>Installation Modaryx OS</h3><p>Aucune procédure d’installation publique n’est publiée tant qu’un build autorisé et sa chaîne de confiance ne sont pas disponibles.</p><span class="badge neutral">Verrouillé</span></article>
+        <article class="card"><h3>Installation de contenus</h3><p>Les entrées actuelles sont des démonstrations. Les procédures d’installation propres à chaque contenu ne seront proposées qu’avec des fichiers autorisés et des informations vérifiables.</p><span class="badge neutral">Verrouillé</span></article>
         <article class="card"><h3>Services réseau</h3><p>Les fonctions qui nécessitent un backend réel restent explicitement non connectées. Elles ne sont pas simulées pour donner l’impression d’une disponibilité.</p><span class="badge neutral">Non connecté</span></article>
         <article class="card"><h3>Communauté</h3><p>La modération, les appels et les décisions sont décrits comme des contrats futurs, mais aucun backend communautaire n’est présenté comme actif.</p><span class="badge neutral">Non connecté</span></article>
         <article class="card"><h3>Signature cryptographique du site</h3><p>Le shell empaqueté dispose d’empreintes SHA-256 publiques, mais aucune signature cryptographique du site n’est annoncée tant qu’une clé et une procédure publiques réellement vérifiables ne sont pas publiées.</p><span class="badge neutral">Non annoncée</span></article>
@@ -106,9 +115,6 @@
     </section>
   </main>
 
-  <footer>
-    <div><strong>MODARYX MODS</strong><p>Documentation publique · surface pré-VF.</p></div>
-    <div class="footer-meta"><p>Cette page documente uniquement les comportements publics visibles.</p><p><a href="./">Site officiel</a> · <a href="./security.html">Sécurité & provenance</a> · <a href="./verify.html">Vérificateur SHA-256</a> · <a href="./public-status.json">Statut public JSON</a></p></div>
-  </footer>
+  <footer class="site-footer"><div><strong>MODARYX MODS</strong><p>Explorez des créations et préparez vos projets avec des outils locaux.</p></div><nav aria-label="Navigation de pied de page"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./profiles.html">Profils</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a><a href="./downloads.html">Téléchargements</a><a href="./documentation.html#privacy">Données locales</a><a href="./public-status.json">Statut public</a></nav></footer>
 </body>
 </html>

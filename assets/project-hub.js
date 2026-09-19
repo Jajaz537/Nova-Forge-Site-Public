@@ -14,6 +14,9 @@
   const favoriteButton = node("project-favorite");
 
   const labels = {
+    mod: "Mod", pack: "Pack", experience: "Expérience", tool: "Outil", resource: "Ressource",
+    targets: "Cible déclarée", supports: "Compatibilité déclarée", requires: "Dépendance",
+    optional: "Dépendance facultative", "conflicts-with": "Conflit déclaré", "tested-on": "Environnement d’évaluation déclaré",
     measured: "Mesurée",
     estimated: "Estimée",
     unknown: "Inconnue",
@@ -45,7 +48,10 @@
     const id = root.dataset.projectId;
     const favorites = loadFavorites();
     if (favorites.has(id)) favorites.delete(id); else favorites.add(id);
-    try { localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites].sort())); } catch {}
+    try { localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites].sort())); } catch {
+      state.textContent = "Favori non modifié : le navigateur a refusé l’enregistrement local.";
+      return;
+    }
     renderFavorite(id);
     state.textContent = favorites.has(id) ? "Ajouté aux favoris de ce navigateur uniquement." : "Retiré des favoris de ce navigateur uniquement.";
   }
@@ -63,7 +69,7 @@
     head.append(title, evidence);
     const type = document.createElement("span");
     type.className = "relation-type";
-    type.textContent = edge.relation;
+    type.textContent = labels[edge.relation] || "Relation non qualifiée";
     const notes = document.createElement("p");
     notes.textContent = edge.notes || "Aucune note publique.";
     card.append(head, type, notes);
@@ -75,7 +81,19 @@
       state.textContent = "Identité enrichie incohérente ; le fallback statique est conservé.";
       return;
     }
-    node("project-kind").textContent = `${item.kind} · aperçu public`;
+    // Prepare relations before replacing any visible project information.
+    if (typeof item.name !== 'string' || !item.name.trim() || typeof item.summary !== 'string' ||
+        !Array.isArray(graph.nodes) || !Array.isArray(graph.edges)) throw new Error('project-data-invalid');
+    if (!graph.nodes.every((entry) => entry && typeof entry.id === 'string') ||
+        !graph.edges.every((edge) => edge && typeof edge.from === 'string' && typeof edge.to === 'string' && typeof edge.relation === 'string')) throw new Error('project-graph-invalid');
+    const graphNodeId = `content:${item.id}`;
+    const nodeMap = new Map(graph.nodes.map((entry) => [entry.id, entry]));
+    const edges = graph.edges.filter((edge) => edge.from === graphNodeId || edge.to === graphNodeId);
+    const cards = edges.map((edge) => {
+      const peerId = edge.from === graphNodeId ? edge.to : edge.from;
+      return relationCard(edge, nodeMap.get(peerId));
+    });
+    node("project-kind").textContent = `${labels[item.kind] || 'Contenu'} · aperçu public`;
     node("project-title").textContent = item.name;
     node("project-summary").textContent = item.summary;
     node("project-game").textContent = item.game?.name || "Inconnu";
@@ -84,20 +102,13 @@
     node("project-evidence").textContent = labels[item.compatibility?.evidence] || "Inconnue";
     node("project-distribution").textContent = item.distribution?.label || "Verrouillée";
     node("project-provenance").textContent = item.provenance?.label || "Inconnue";
-    node("project-license").textContent = item.rights?.license || "Inconnue";
+    node("project-license").textContent = item.rights?.license === "UNSPECIFIED-PREVIEW" ? "Non précisée — aperçu" : item.rights?.license || "Inconnue";
     node("project-redistribution").textContent = labels[item.rights?.redistribution] || "Inconnue";
 
-    const graphNodeId = `content:${item.id}`;
-    const nodeMap = new Map((graph.nodes || []).map((entry) => [entry.id, entry]));
-    const edges = (graph.edges || []).filter((edge) => edge.from === graphNodeId || edge.to === graphNodeId);
-    relationsRoot.replaceChildren();
-    edges.forEach((edge) => {
-      const peerId = edge.from === graphNodeId ? edge.to : edge.from;
-      relationsRoot.append(relationCard(edge, nodeMap.get(peerId)));
-    });
+    relationsRoot.replaceChildren(...cards);
     relationsEmpty.hidden = edges.length !== 0;
     renderFavorite(item.id);
-    state.textContent = "Mini-hub hydraté depuis le catalogue et le Compatibility Graph publics du même site.";
+    state.textContent = "Informations du catalogue chargées. Cette fiche reste une démonstration sans téléchargement.";
     document.title = `${item.name} — MODARYX MODS`;
   }
 
@@ -118,6 +129,12 @@
         return;
       }
       renderProject(item, graph);
+      if ([catalogResponse, graphResponse].some((response) => response.headers?.get('X-Modaryx-Cache') === 'offline-stale')) {
+        const notice = document.createElement('p');
+        notice.className = 'muted';
+        notice.textContent = 'Copie en cache : les informations du projet ou de ses relations peuvent avoir changé depuis leur enregistrement.';
+        state.insertAdjacentElement('afterend', notice);
+      }
     } catch {
       state.textContent = navigator.onLine ? "Données enrichies indisponibles ; le fallback statique reste affiché." : "Hors ligne : le fallback statique et les données déjà mises en cache restent prioritaires.";
       renderFavorite(root.dataset.projectId);

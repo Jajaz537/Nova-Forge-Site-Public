@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-16",
+  "sourceHead": "3d641a6d305b61879427ae13d51f0a38a76af309",
+  "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/catalog",
+  "links": [
+    {
+      "visible": "Voir la fiche",
+      "staticLabel": "Voir la fiche : Ember Textures",
+      "hydratedLabel": "Voir la fiche : Ember Textures — Preview",
+      "href": "./project-ember-textures.html"
+    },
+    {
+      "visible": "Voir la fiche",
+      "staticLabel": "Voir la fiche : Balanced Latency Pack",
+      "hydratedLabel": "Voir la fiche : Balanced Latency Pack — Preview",
+      "href": "./project-balanced-latency-pack.html"
+    },
+    {
+      "visible": "Voir la fiche",
+      "staticLabel": "Voir la fiche : Forge Night Experience",
+      "hydratedLabel": "Voir la fiche : Forge Night Experience — Preview",
+      "href": "./project-forge-night-experience.html"
+    }
+  ],
+  "reflow": [
+    {
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "contentHeight": 5672,
+      "positiveTabindex": 0
+    },
+    {
+      "requested": 768,
+      "width": 753,
+      "scroll": 753,
+      "contentHeight": 3318,
+      "positiveTabindex": 0
+    }
+  ],
+  "scope": "Chrome HTTPS DOM : liens statiques observés après rechargement, liens enrichis après présence de data-hydrated. Mesures en iframe, pas une recette visuelle exhaustive, un appareil physique, un zoom natif ou un lecteur d’écran. Routes lues mais pas activées dans ce lot.",
+  "vfValidated": false
+}

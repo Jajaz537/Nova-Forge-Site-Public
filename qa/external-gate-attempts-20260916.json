@@ -1,0 +1,43 @@
+{
+  "measuredAt": "2026-09-16",
+  "candidate": {
+    "sha": "67989b4ba73577132e4a35c2b1681a4b34583dd0",
+    "preview": "https://3f488769.nova-forge-site-public.pages.dev/",
+    "environment": "Cloud Chrome controlled browser"
+  },
+  "zoom": {
+    "status": "PREUVE MANQUANTE",
+    "attempts": [
+      "Ctrl+0 then five Ctrl++ activations",
+      "Five Ctrl+= activations"
+    ],
+    "baseline": {
+      "innerWidth": 1363,
+      "clientWidth": 1348,
+      "scrollWidth": 1348,
+      "devicePixelRatio": 1,
+      "visualViewportScale": 1
+    },
+    "afterEachAttempt": {
+      "innerWidth": 1363,
+      "clientWidth": 1348,
+      "scrollWidth": 1348,
+      "devicePixelRatio": 1,
+      "visualViewportScale": 1
+    },
+    "conclusion": "No measurable browser zoom occurred; no 200% or 400% PASS claimed."
+  },
+  "serviceWorkerRuntimeInspection": {
+    "status": "PREUVE MANQUANTE",
+    "attempt": "Read service-worker registration, controller and CacheStorage on the immutable HTTPS preview.",
+    "limitation": "The controlled read-only page context does not expose navigator or caches, and the browser provides no offline-network control.",
+    "conclusion": "Source simulation remains valid only for its documented scope; no offline or update-cycle PASS claimed."
+  },
+  "studioNativeImport": {
+    "status": "PREUVE MANQUANTE",
+    "fixture": "Generated non-sensitive universal manifest fixture",
+    "attempt": "Open the native chooser on Creator Studio and select the fixture.",
+    "result": "The chooser opened, but browser permission denied setFiles. No workaround attempted.",
+    "conclusion": "Native import and field restoration were not executed."
+  }
+}

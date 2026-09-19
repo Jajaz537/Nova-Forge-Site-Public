@@ -1,0 +1,37 @@
+{
+  "status": "TERMINÉ",
+  "scope": "Revue de direction artistique distincte des validations techniques, sur 17 routes publiques en desktop et les parcours principaux en mobile.",
+  "reviewedFamilies": {
+    "brand": ["/"],
+    "discovery": ["/catalog.html", "/search.html", "/games/", "/project.html", "/project-ember-textures.html", "/project-balanced-latency-pack.html", "/project-forge-night-experience.html"],
+    "creation": ["/creator-studio.html", "/community.html", "/profiles.html"],
+    "guidance": ["/ecosystem.html", "/documentation.html", "/404.html"],
+    "trust": ["/security.html", "/verify.html", "/downloads.html"]
+  },
+  "findings": [
+    {
+      "problem": "La page Sécurité répétait la composition hero des pages d'information, ce qui affaiblissait sa fonction de chaîne de confiance.",
+      "change": "Composition desktop inversée, panneau de principes placé en premier, lueur froide déplacée et texte resserré.",
+      "result": "La famille confiance est visuellement identifiable sans nouvel asset ni changement de l'ordre DOM mobile."
+    },
+    {
+      "problem": "Le contrôle de mouvement occupait toute la largeur sous l'en-tête mobile.",
+      "change": "Le contrôle reste sur sa propre ligne mais adopte sa largeur de contenu et s'aligne à droite.",
+      "result": "Largeur mesurée après correction : 143.25 px dans un viewport de 390 px."
+    }
+  ],
+  "constraints": {
+    "newAssets": 0,
+    "precacheProjectedBytes": 799989,
+    "precacheLimitBytes": 800000,
+    "remainingBytes": 11,
+    "reducedMotionPreserved": true
+  },
+  "openVFProofs": {
+    "real400Percent": "PREUVE MANQUANTE",
+    "realScreenReader": "BLOQUÉ / PREUVE MANQUANTE",
+    "canonicalSiteBaseline": "BLOQUÉ / PREUVE MANQUANTE",
+    "physicalDevices": "PREUVE MANQUANTE",
+    "completeVF": "EN COURS"
+  }
+}

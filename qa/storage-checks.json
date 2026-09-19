@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "checks": 3,
+  "scope": "Rejected storage preserves catalog favorite, saved view and project favorite states; source transaction units"
+}

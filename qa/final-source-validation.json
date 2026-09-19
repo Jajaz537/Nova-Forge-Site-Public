@@ -1,0 +1,201 @@
+{
+  "executedAt": "2026-09-18T12:23:43.455177+00:00",
+  "scope": "All current check-* source scripts; browser, physical-device and external-service claims excluded",
+  "scripts": 32,
+  "passed": 32,
+  "failed": [],
+  "results": [
+    {
+      "script": "qa/check-cache.mjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"assertions\": 35,\n  \"failed\": [],\n  \"precache\": {\n    \"requests\": 77,\n    \"uniqueLocalFiles\": 76,\n    \"missing\": [],\n    \"files\": 76,\n    \"rawBytes\": 799909,\n    \"gzipEstimateBytes\": 506234\n  },\n  \"budgetFailures\": [],\n  \"protectedChanges\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-catalog-cache-label.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Two Node VM source scenarios; not native HTTPS/offline proof\",\n  \"checks\": [\n    \"Network response never receives an unsupported stale label\",\n    \"Cache response remains qualified after favorites filter rerender\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-catalog-contract.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Seven grouped Node VM source scenarios, including ten malformed variants; not native browser proof\",\n  \"checks\": [\n    \"Current records load with filters usable\",\n    \"Ten malformed public record variants retain static cards without invoking enriched rendering\",\n    \"Duplicate public identifiers reject enriched catalogue\",\n    \"Non-public and null entries are excluded from public rendering\",\n    \"Empty valid catalogue reaches empty rendering rather than failure\",\n    \"Unsupported contract preserves static fallback\",\n    \"Network rejection disables ineffective controls, preserves static actions and explains online/offline recovery\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-catalog-focus.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Six source transaction scenarios in Node VM; not browser or screen reader\",\n  \"checks\": [\n    \"Removing focused middle favorite moves focus to the following card\",\n    \"Removing focused last card moves focus to previous remaining card\",\n    \"Removing only favorite returns focus to search\",\n    \"Action without focus on favorite does not steal focus\",\n    \"Storage failure retains favorite and card without moving focus\",\n    \"Unfiltered toggle retains its original button without rerender\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-collection-focus.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Five grouped Node VM source scenarios, not assistive technology proof\",\n  \"checks\": [\n    \"Whitespace name stays passive in preview and receives focus only after explicit validation\",\n    \"Identifier and oversized description errors target their fields and clear prior markers\",\n    \"Valid collection preserves selected content without focus movement\",\n    \"Successful import clears stale invalid markers\",\n    \"Unavailable catalogue is a system error and does not mislabel a user field\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-community-contract.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Five grouped Node VM source scenarios, not native browser or actual storage restoration proof\",\n  \"checks\": [\n    \"Current catalogue loads before saved drafts are restored\",\n    \"Six malformed variants reject the whole catalogue before restoration; draft fields and selection remain intact and collection validation is blocked\",\n    \"Duplicate identifiers block collection and contribution catalogue loading\",\n    \"Non-public records are excluded before public field validation\",\n    \"Valid empty catalogue remains distinct from an invalid response\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-community-empty.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Three Node VM rendering scenarios, not native offline proof\",\n  \"checks\": [\n    \"Valid empty catalogue explains empty collection and offers no nonexistent contribution target\",\n    \"Failed loading has a distinct message and target placeholder\",\n    \"Populated catalogue replaces the empty message with actual choices\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-download-recovery.cjs",
+      "exitCode": 0,
+      "stdout": "{\"result\":\"PASS\",\"scope\":\"Five grouped Node VM scenarios; not native offline or screen reader proof\",\"checks\":[\"Network failure is distinct from declared absence and never exposes artifacts\",\"Retry is deduplicated and returns focus to the resulting status\",\"Loading status exposes and clears aria-busy\",\"HTTP error, invalid contract and invalid JSON keep distribution locked with recovery\",\"Repeated failure keeps keyboard focus on retry\",\"Stale manifest remains locked and offers a fresh attempt\"]}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-exports.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"scope\": \"Six source-handler Node simulations; browser delivery and filesystem receipt not certified\",\n  \"checks\": [\n    \"studio: handoff and deferred cleanup\",\n    \"studio: create failure, retained draft and cleanup\",\n    \"studio: click failure, retained draft and cleanup\",\n    \"community: handoff and deferred cleanup\",\n    \"community: create failure, retained draft and cleanup\",\n    \"community: click failure, retained draft and cleanup\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-fallback-content.py",
+      "exitCode": 0,
+      "stdout": "{\"status\": \"PASS\", \"scope\": \"Five source/HTML checks, not screen reader or disabled-JavaScript browser proof\", \"checks\": [\"All 14 indexed entries have matching linked HTML title and summary\", \"Unavailable search filter disabled and described before index hydration\", \"Both result counts expose polite atomic status semantics\", \"All three demonstration cards have matching source copy and working local routes\", \"Superseded placeholder and unsupported community fallback removed\"]}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-finish-line-contract.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Static finish-line contracts; native rendering requires separate browser evidence\",\n  \"checks\": [\n    \"Profiles page does not misidentify Community as the current primary destination\",\n    \"Above-fold or near-fold Loup/Dragon portal art receives explicit eager/high priority, including generated games source\",\n    \"Verifier exposes a French custom file-picker surface, selected filename status and visible keyboard focus\",\n    \"Responsive harness can apply bounded pseudo-localization stress and records that mode in measurements\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-games-generator.py",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Five grouped isolated source scenarios; not browser proof\",\n  \"checks\": [\n    \"Current catalogue generates three groups; check mode detects drift without modifying output\",\n    \"Private incomplete record is excluded from public output\",\n    \"Project display name is escaped as text\",\n    \"Duplicate project ID rejects generation and preserves the existing page\",\n    \"Empty catalogue, invalid path, downloadable record and conflicting game identity preserve prior page\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-home-catalogue.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"scope\": \"Seven actual-source Node scenarios, not network throttling or screen-reader certification\",\n  \"checks\": [\n    \"Pending load is busy/loading, then renders three cards and enables search\",\n    \"Valid empty catalogue is not reported as an error\",\n    \"Invalid contract fails closed with explicit retry\",\n    \"Network failure retries once during concurrent activation and restores search focus\",\n    \"Unmatched filter has a distinct empty-results state\",\n    \"Repeated failure restores focus to the replacement retry button\",\n    \"Cache notice survives filtering including empty results\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-import-races.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"scope\": \"Node VM with deferred file reads; no native file-picker or screen-reader proof\",\n  \"checks\": [\n    \"collection: edit preserves correct draft\",\n    \"collection: file-change preserves correct draft\",\n    \"collection: clear preserves correct draft\",\n    \"collection: newer-import preserves correct draft\",\n    \"collection: invalid-json preserves correct draft\",\n    \"submission: edit preserves correct draft\",\n    \"submission: file-change preserves correct draft\",\n    \"submission: clear preserves correct draft\",\n    \"submission: newer-import preserves correct draft\",\n    \"submission: invalid-json preserves correct draft\",\n    \"collection: extra properties and non-string IDs refused without replacing draft\",\n    \"submission: extra properties and non-string IDs refused without replacing draft\",\n    \"collection: delayed catalog preserves editing while untouched form restores\",\n    \"submission: delayed catalog preserves editing while untouched form restores\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-integration-readiness.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Contract and source readiness only; no missing service is claimed as implemented\",\n  \"capabilities\": [\n    {\n      \"id\": \"game-hubs.gta6-rdr2\",\n      \"state\": \"blocked-inputs\"\n    },\n    {\n      \"id\": \"accounts.profiles\",\n      \"state\": \"not-connected\"\n    },\n    {\n      \"id\": \"community.publication-moderation\",\n      \"state\": \"local-only\"\n    },\n    {\n      \"id\": \"storage.resolver-repair\",\n      \"state\": \"not-connected\"\n    },\n    {\n      \"id\": \"distribution.artifacts\",\n      \"state\": \"distribution-locked\"\n    },\n    {\n      \"id\": \"integrations.guide-os-bridge\",\n      \"state\": \"not-connected\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-performance-limits.mjs",
+      "exitCode": 0,
+      "stdout": "10 budget boundary checks passed; synthetic data only.\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-preview-server.mjs",
+      "exitCode": 0,
+      "stdout": "Preview server: 4 targeted checks passed\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-profile-detection.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"scope\": \"Node VM simulated API outcomes, not native passkey verification\",\n  \"checks\": [\n    \"Absent WebAuthn remains unavailable\",\n    \"Resolved capabilities true retain their real result\",\n    \"Resolved capabilities false retain their real result\",\n    \"Missing method remains partial: isUserVerifyingPlatformAuthenticatorAvailable\",\n    \"Rejected method remains unknown: isUserVerifyingPlatformAuthenticatorAvailable\",\n    \"Missing method remains partial: isConditionalMediationAvailable\",\n    \"Rejected method remains unknown: isConditionalMediationAvailable\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-project-cache-label.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Three Node VM source scenarios; not native offline proof\",\n  \"checks\": [\n    \"Network-only data has no cache notice\",\n    \"catalog cache notice survives a favorite action\",\n    \"graph cache notice survives a favorite action\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-project-render.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Four grouped source Node VM scenarios; not native browser proof\",\n  \"checks\": [\n    \"Four malformed graph variants cannot partially overwrite static project fields\",\n    \"Relation preparation failure preserves visible fields and previous relations\",\n    \"Actual project data replaces fields and its two prepared relations\",\n    \"Missing project title cannot erase static content\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-public-metadata.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"scope\": \"targeted Node VM consumer checks\",\n  \"checks\": [\n    \"PWA metadata identifies MODARYX as the web platform without reviving the obsolete Modaryx OS product name.\",\n    \"Offline status/build visibly unqualified; old availability and digest are not presented as current.\",\n    \"Fresh metadata remains a declaration, not cryptographic verification; optional bridge copy is separate.\",\n    \"Unavailable status and missing build digest display explicit uncertainty.\",\n    \"Even a formerly available offline manifest cannot enable downloads.\",\n    \"Fresh conforming publication manifest enables links with explicit verification limits.\",\n    \"Non-local download paths still fail closed.\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-pwa-entry.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"scope\": \"Nine structural and Node VM checks; not native PWA installation/offline proof\",\n  \"checks\": [\n    \"All 17 public pages load the shared entry exactly once; no duplicate registration in app.js\",\n    \"HTTPS page without a navigation element still registers\",\n    \"Subdirectory deployment uses shell location, not document URL\",\n    \"Insecure context skipped\",\n    \"Unsupported browser skipped\",\n    \"Missing script URL skipped\",\n    \"Foreign script origin skipped\",\n    \"Registration promise rejection contained\",\n    \"Synchronous registration failure contained\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-receipt-fields.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"scope\": \"Six source function scenarios; native focus covered separately in Chrome\",\n  \"checks\": [\n    \"Unknown states leave both receipt fields optional\",\n    \"Declared measured/verified require receipts without premature aria-invalid\",\n    \"Blank and whitespace-only required receipt blocks native validation\",\n    \"Malformed receipt provides actionable format guidance\",\n    \"Correct format clears error without attesting authenticity\",\n    \"Returning to unknown clears requirement and stale error\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-saved-view-options.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Four source Node VM scenarios; not native browser proof\",\n  \"checks\": [\n    \"Available saved options, query and favorites are restored unchanged\",\n    \"Removed options reset to real defaults and announce adjustment without overwriting saved view\",\n    \"Malformed option values cannot leave selects without a valid selection\",\n    \"Omitted legacy fields use defaults without a false unavailable-choice warning\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-search-contract.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Eight grouped Node VM scenarios, including four malformed entry variants; not browser proof\",\n  \"checks\": [\n    \"Four malformed-entry variants preserve static directory and keep filtering disabled\",\n    \"Duplicate identifiers reject the index without erasing fallback\",\n    \"Current index hydrates, folds accents/case and exposes no-match state\",\n    \"Valid empty index remains usable and distinct from failure\",\n    \"Network failure preserves static navigation\",\n    \"Cache age warning survives local filtering and is absent from network index\",\n    \"Retry deduplicates pending requests and restores search focus after recovery\",\n    \"Repeated failure keeps fallback and focuses the new retry control\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-security-baseline.py",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Static source gate only; Cloudflare account, native browser, TLS origin and external services excluded\",\n  \"publicPages\": 17,\n  \"dangerousDomSinks\": 0,\n  \"serverRuntimeFiles\": [],\n  \"workflowFindings\": [\n    \"MOYENNE: actions/checkout utilise le tag mutable v4\",\n    \"MOYENNE: le workflow cutover ne refuse pas explicitement les modes mutatifs sur push\",\n    \"MOYENNE: la désactivation HTTP/3 peut être déclenchée par push sur main\"\n  ],\n  \"errors\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-site.py",
+      "exitCode": 0,
+      "stdout": "{\n  \"scope\": \"Static structure, JS syntax and declared file digests only\",\n  \"pages\": [\n    {\n      \"page\": \"404.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"catalog.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"community.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"creator-studio.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"documentation.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"downloads.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"ecosystem.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"games/index.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"index.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"profiles.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"project-balanced-latency-pack.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"project-ember-textures.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"project-forge-night-experience.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"project.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"search.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"security.html\",\n      \"errors\": []\n    },\n    {\n      \"page\": \"verify.html\",\n      \"errors\": []\n    }\n  ],\n  \"scripts\": [\n    {\n      \"file\": \"assets/app.js\",\n      \"valid\": true,\n      \"error\": \"\"\n    },\n    {\n      \"file\": \"assets/catalog.js\",\n      \"valid\": true,\n      \"error\": \"\"\n    },\n    {\n      \"file\": \"assets/community.js\",\n      \"valid\": true,\n      \"error\": \"\"\n    },\n    {\n      \"file\": \"assets/creator-studio.js\",\n      \"valid\": true,\n      \"error\": \"\"\n    },\n    {\n      \"file\": \"assets/downloads.js\",\n      \"valid\": true,\n      \"error\": \"\"\n    },\n    {\n      \"file\": \"assets/json-schema-lite.js\",\n      \"valid\": true,\n      \"error\": \"\"\n    },\n    {\n      \"file\": \"assets/nova-premium-hd.js\",\n      \"valid\": true,\n      \"error\": \"\"\n    },\n    {\n      \"file\": \"assets/profiles.js\",\n      \"valid\": true,\n      \"error\": \"\"\n    },\n    {\n      \"file\": \"assets/project-hub.js\",\n      \"valid\": true,\n      \"error\": \"\"\n    },\n    {\n      \"file\": \"assets/search.js\",\n      \"valid\": true,\n      \"error\": \"\"\n    },\n    {\n      \"file\": \"assets/shell.js\",\n      \"valid\": true,\n      \"error\": \"\"\n    },\n    {\n      \"file\": \"assets/verify.js\",\n      \"valid\": true,\n      \"error\": \"\"\n    },\n    {\n      \"file\": \"sw.js\",\n      \"valid\": true,\n      \"error\": \"\"\n    }\n  ],\n  \"hashes\": {\n    \"count\": 84,\n    \"errors\": []\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-states.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"kind\": \"Node VM targeted behavioral checks; no browser claim\",\n  \"checks\": [\n    \"Changed file during digest cannot publish stale match\",\n    \"Actual SHA256 empty-file match and invalidation after editing expected hash\",\n    \"Offline catalogue blocks collection export; refused deletes retain both community drafts\",\n    \"Saved Studio draft restores only once real schema and validator are available\",\n    \"Schema-invalid Studio import and storage-refused deletion preserve existing draft\",\n    \"Delayed schema response cannot overwrite newly typed Studio work\",\n    \"Valid empty search index keeps an explicit empty result state\",\n    \"Studio delayed import cannot override edit\",\n    \"Studio delayed import cannot override clear\",\n    \"Studio delayed import cannot override newer-import\",\n    \"Studio delayed import cannot override file-change\",\n    \"Editing during schema wait cancels import before reading the file\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-storage.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"checks\": 3,\n  \"scope\": \"Rejected storage preserves catalog favorite, saved view and project favorite states; source transaction units\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-studio-error-list.cjs",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"PASS\",\"assertions\":9,\"scope\":\"Actual error-list renderer in Node DOM model; not a native accessibility proof\"}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-submission-focus.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Five grouped Node VM source scenarios; not screen-reader proof\",\n  \"checks\": [\n    \"Passive preview never marks or focuses an invalid field\",\n    \"Explicit validation focuses and identifies the missing target with an actionable message\",\n    \"Subsequent validation clears previous errors and identifies whitespace-only content\",\n    \"Review rating and comment parent errors target the relevant control; hidden rating loses stale invalid state\",\n    \"Valid draft clears invalid markers without focus movement; save and export request interactive validation\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "qa/check-verify.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"kind\": \"Node VM with real Web Crypto digest; not native browser or screen-reader proof\",\n  \"checks\": [\n    \"Missing file focuses the local file picker and reports a warning\",\n    \"Malformed expected hash is rejected before reading bytes, with field focus\",\n    \"Editing clears stale field error; empty expected hash remains a neutral calculation\",\n    \"Real Node Web Crypto digest accepts normalized hash and distinguishes mismatch\",\n    \"Concurrent activation is ignored; input changes during reading skip obsolete digest work\",\n    \"Input change during an already running digest still suppresses stale output and releases the button\",\n    \"Read failure restores button availability without a trust result\",\n    \"Missing Web Crypto does not read or claim verification\",\n    \"Malformed, empty and undecodable hash links show an error and prevent file reads\",\n    \"Invalid fragment interrupts stale digest output; a subsequent valid link restores neutral prefill\"\n  ]\n}\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -8,12 +8,12 @@
   <meta name="referrer" content="no-referrer">
   <meta name="application-name" content="MODARYX MODS">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
-  <meta name="description" content="Sécurité et provenance MODARYX MODS : identité, intégrité SHA-256, provenance, signature et publication fail-closed de la surface officielle.">
+  <meta name="description" content="Sécurité MODARYX MODS : comprendre l’identité, l’empreinte SHA-256, la provenance et la signature d’un fichier.">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="MODARYX MODS">
   <meta property="og:title" content="Sécurité & provenance — MODARYX MODS">
-  <meta property="og:description" content="Contrat public MODARYX MODS de vérification et de publication fail-closed, sans exposition du cœur privé.">
+  <meta property="og:description" content="Comprendre les preuves requises avant publication et les limites des vérifications proposées par MODARYX MODS.">
   <title>Sécurité & provenance — MODARYX MODS</title>
   <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
@@ -24,30 +24,33 @@
   <script src="./assets/shell.js" defer></script>
   <script src="./assets/app.js" defer></script>
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
-  <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">
+  <link rel="stylesheet" href="./assets/modaryx-foundations.css">
+  <link rel="stylesheet" href="./assets/modaryx-cinematic-system.css">
 </head>
-<body>
+<body class="trust-page">
   <a class="skip-link" href="#main">Aller au contenu</a>
   <header class="topbar">
     <a class="brand" href="./" aria-label="MODARYX MODS, retour au site officiel"><img class="brand-logo" src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="32" height="32"><span>MODARYX MODS</span></a>
-    <nav aria-label="Sécurité et provenance"><a href="#chain">Chaîne de confiance</a><a href="#states">États</a><a href="#proofs">Preuves publiques</a><a href="#limits">Limites</a></nav>
+    <nav aria-label="Navigation principale"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html" aria-current="page">Sécurité</a><a href="./documentation.html">Aide</a></nav>
   </header>
 
   <main id="main">
+    <nav class="page-trail" aria-label="Fil d’Ariane"><a href="./index.html">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Sécurité</span></nav>
+    <nav class="section-nav" aria-label="Sécurité et provenance"><a href="#chain">Chaîne de confiance</a><a href="#states">États</a><a href="#proofs">Preuves publiques</a><a href="#limits">Limites</a></nav>
     <section class="hero" aria-labelledby="security-hero-title">
       <div class="hero-copy">
         <p class="eyebrow">MODARYX MODS · sécurité publique</p>
-        <h1 id="security-hero-title">La confiance doit rester vérifiable, séparée et révocable.</h1>
-        <p class="lede">Cette page décrit uniquement le contrat de sécurité visible de la surface publique MODARYX MODS. Elle ne révèle aucun mécanisme privé et ne transforme jamais l’absence de preuve en validation.</p>
+        <h1 id="security-hero-title">Sachez ce que les preuves établissent.</h1>
+        <p class="lede">Avant d’utiliser un contenu, distinguez son identité, son intégrité, sa provenance et sa signature. MODARYX signale l’inconnu ; une belle fiche ne garantit pas un fichier sûr.</p>
         <div class="actions"><a class="button primary" href="./verify.html">Vérifier un SHA-256</a><a class="button" href="./downloads.html">Voir les téléchargements</a><a class="button" href="./documentation.html#verification">Lire la procédure</a></div>
       </div>
       <aside class="hero-panel" aria-label="Principes de sécurité publics">
         <p class="eyebrow">Principes actifs</p>
         <ul class="feature-list">
           <li><span>01</span><div><strong>Preuves distinctes</strong><small>Identité, intégrité, provenance et signature ne se remplacent pas.</small></div></li>
-          <li><span>02</span><div><strong>Fail closed</strong><small>Une preuve absente ou invalide maintient l’état non vérifié.</small></div></li>
-          <li><span>03</span><div><strong>Public-only</strong><small>La preuve publique porte sur la surface distribuée, pas sur le cœur privé.</small></div></li>
-          <li><span>04</span><div><strong>Pas de confiance visuelle</strong><small>Un badge ou une apparence ne remplace jamais une preuve correspondante.</small></div></li>
+          <li><span>02</span><div><strong>Sans preuve, non vérifié</strong><small>Une preuve absente ou invalide maintient l’état non vérifié.</small></div></li>
+          <li><span>03</span><div><strong>Périmètre explicite</strong><small>Une preuve concerne le contenu et la version qu’elle identifie. Elle ne valide pas tous les services.</small></div></li>
+          <li><span>04</span><div><strong>Au-delà de l’apparence</strong><small>Un badge ou une apparence ne remplace jamais une preuve correspondante.</small></div></li>
         </ul>
       </aside>
     </section>
@@ -55,7 +58,7 @@
     <section class="section" id="chain" aria-labelledby="chain-title">
       <p class="eyebrow">Chaîne de confiance</p>
       <h2 id="chain-title">Quatre preuves, quatre rôles.</h2>
-      <p class="section-intro">Un artefact ne devient distribuable publiquement que lorsque son identité et les preuves requises peuvent être qualifiées. Chaque élément répond à une question différente.</p>
+      <p class="section-intro">Un artefact devient distribuable quand son identité et les preuves requises sont qualifiées. Chaque élément a un rôle.</p>
       <div class="requirements" role="list" aria-label="Chaîne de confiance publique">
         <div role="listitem"><strong>Identité</strong><span>Quel artefact précis est attendu : nom, version et fichier annoncé.</span></div>
         <div role="listitem"><strong>Intégrité</strong><span>Le SHA-256 reçu correspond-il exactement à l’empreinte publiée pour cet artefact ?</span></div>
@@ -66,11 +69,11 @@
     </section>
 
     <section class="section" id="states" aria-labelledby="states-title">
-      <div class="section-heading"><div><p class="eyebrow">États publics</p><h2 id="states-title">« Inconnu » reste différent de « vérifié ».</h2></div><span class="badge">Fail closed</span></div>
+      <div class="section-heading"><div><p class="eyebrow">États publics</p><h2 id="states-title">« Inconnu » reste différent de « vérifié ».</h2></div><span class="badge">Preuve requise</span></div>
       <div class="cards three">
-        <article class="card"><h3>Vérifié</h3><p>L’état ne peut être présenté comme vérifié que lorsque la preuve correspondante est réellement disponible et qualifiée pour l’objet concerné.</p></article>
-        <article class="card"><h3>Non vérifié</h3><p>Une preuve manquante, invalide ou non qualifiée ne doit pas être compensée par une hypothèse, une estimation ou un élément d’interface rassurant.</p></article>
-        <article class="card"><h3>Non applicable</h3><p>Lorsqu’une preuve n’est pas requise par le contrat de l’artefact, cet état doit être déclaré explicitement plutôt que confondu avec une réussite de vérification.</p></article>
+        <article class="card"><p class="card-kicker">01 · Preuve qualifiée</p><h3>Vérifié</h3><p>L’état exige une preuve disponible et qualifiée pour l’objet concerné.</p></article>
+        <article class="card"><p class="card-kicker">02 · Preuve absente</p><h3>Non vérifié</h3><p>Une preuve manquante, invalide ou non qualifiée ne peut être compensée par une hypothèse ou une interface rassurante.</p></article>
+        <article class="card"><p class="card-kicker">03 · Preuve non requise</p><h3>Non applicable</h3><p>Une preuve hors contrat doit être déclarée explicitement, sans être confondue avec une vérification réussie.</p></article>
       </div>
     </section>
 
@@ -78,7 +81,7 @@
       <p class="eyebrow">Preuves publiques disponibles</p>
       <h2 id="proofs-title">Ce que la surface actuelle permet de contrôler.</h2>
       <div class="cards three">
-        <article class="card"><h3>Statut machine-readable</h3><p><code>public-status.json</code> déclare la phase publique, les principes actifs et la disponibilité de la distribution. Il reste déclaratif et n’est pas une signature cryptographique.</p><a class="text-link" href="./public-status.json">Consulter le statut JSON</a></article>
+        <article class="card"><h3>Statut public en JSON</h3><p><code>public-status.json</code> déclare la phase publique, les principes actifs et la disponibilité de la distribution. Il reste déclaratif et n’est pas une signature cryptographique.</p><a class="text-link" href="./public-status.json">Consulter le statut JSON</a></article>
         <article class="card"><h3>Manifeste de téléchargements</h3><p><code>downloads.json</code> reste verrouillé tant qu’aucun artefact public autorisé ne satisfait le contrat de preuves requis.</p><a class="text-link" href="./downloads.json">Consulter le manifeste</a></article>
         <article class="card"><h3>Vérification locale</h3><p>Le vérificateur lit un fichier dans le navigateur et calcule son SHA-256 sans l’exécuter ni l’envoyer à un service MODARYX MODS distant.</p><a class="text-link" href="./verify.html">Ouvrir le vérificateur</a></article>
       </div>
@@ -97,6 +100,6 @@
     </section>
   </main>
 
-  <footer><div><strong>MODARYX MODS</strong><p>Sécurité & provenance · contrat public pré-VF.</p></div><div class="footer-meta"><p>Une information absente reste absente.</p><p><a href="./documentation.html">Documentation publique</a> · <a href="./verify.html">Vérificateur SHA-256</a> · <a href="./public-status.json">Statut public JSON</a></p></div></footer>
+  <footer class="site-footer"><div><strong>MODARYX MODS</strong><p>Explorez des créations et préparez vos projets avec des outils locaux.</p></div><nav aria-label="Navigation de pied de page"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./profiles.html">Profils</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a><a href="./downloads.html">Téléchargements</a><a href="./documentation.html#privacy">Données locales</a><a href="./public-status.json">Statut public</a></nav></footer>
 </body>
 </html>

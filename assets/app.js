@@ -10,6 +10,9 @@
   const publicStatusFacts = bySelector('[data-public-status-facts]');
   const getPublicBuildFact = () => bySelector('[data-public-build-fact]');
   let catalogueItems = [];
+  let catalogueState = 'loading';
+  let catalogueRequestPending = false;
+  let catalogueStale = false;
 
   function makeBadge(text, neutral = true) {
     const badge = document.createElement('span');
@@ -22,6 +25,15 @@
 
   function renderCatalogue(query = '') {
     if (!catalogRoot) return;
+    catalogRoot.setAttribute('aria-busy', String(catalogueState === 'loading'));
+    if (search) search.disabled = catalogueState !== 'ready';
+    if (catalogueState === 'loading') {
+      const loading = document.createElement('p');
+      loading.className = 'muted';
+      loading.textContent = 'Chargement du catalogue…';
+      catalogRoot.replaceChildren(loading);
+      return;
+    }
     const term = query.trim().toLocaleLowerCase('fr');
     const rows = catalogueItems.filter((item) => {
       const searchable = [item.name, item.game?.name, item.kind, item.summary, ...(item.tags || [])].join(' ').toLocaleLowerCase('fr');
@@ -44,40 +56,69 @@
       const link = document.createElement('a');
       link.className = 'text-link';
       link.href = `./project-${encodeURIComponent(item.id)}.html`;
-      link.textContent = 'Voir le mini-hub';
+      link.textContent = 'Voir la fiche';
+      link.setAttribute('aria-label', `Voir la fiche : ${item.name}`);
       article.append(kicker, title, copy, meta, link);
       return article;
     }));
 
+    if (catalogueState === 'ready' && catalogueStale) {
+      const notice = document.createElement('p');
+      notice.className = 'muted';
+      notice.textContent = 'Copie en cache : les informations du catalogue peuvent avoir changé depuis leur enregistrement.';
+      catalogRoot.append(notice);
+    }
     if (!rows.length) {
       const empty = document.createElement('p');
       empty.className = 'muted';
-      empty.textContent = catalogueItems.length
-        ? 'Aucune entrée publique ne correspond à cette recherche locale.'
-        : 'Les données du Catalogue V1 sont indisponibles. Aucun contenu alternatif n’est substitué.';
+      empty.textContent = catalogueState === 'error'
+        ? 'Le catalogue ne peut pas être chargé pour le moment.'
+        : catalogueItems.length
+          ? 'Aucune entrée publique ne correspond à cette recherche locale.'
+          : 'Aucune création publique n’est référencée pour le moment.';
       catalogRoot.append(empty);
+      if (catalogueState === 'error') {
+        const retry = document.createElement('button');
+        retry.type = 'button';
+        retry.className = 'button';
+        retry.textContent = 'Réessayer';
+        retry.addEventListener('click', () => loadCatalogue(true));
+        catalogRoot.append(retry);
+      }
       if (!catalogueItems.length) {
         const link = document.createElement('a');
         link.className = 'text-link';
         link.href = './catalog.html';
-        link.textContent = 'Ouvrir le Catalogue V1';
+        link.textContent = 'Ouvrir le catalogue';
         catalogRoot.append(link);
       }
     }
   }
 
-  async function loadCatalogue() {
-    if (!catalogRoot) return;
+  async function loadCatalogue(restoreFocus = false) {
+    if (!catalogRoot || catalogueRequestPending) return;
+    catalogueRequestPending = true;
+    catalogueState = 'loading';
+    renderCatalogue();
     try {
       const response = await fetch(new URL(CATALOGUE_URL, document.baseURI), { credentials: 'same-origin' });
       if (!response.ok) throw new Error('catalogue-unavailable');
+      catalogueStale = response.headers?.get('X-Modaryx-Cache') === 'offline-stale';
       const payload = await response.json();
       if (payload?.schemaVersion !== 1 || payload?.dataClass !== 'demonstration' || !Array.isArray(payload.items)) throw new Error('catalogue-contract-invalid');
+      catalogueState = 'ready';
       catalogueItems = payload.items.filter((item) => item?.public === true && typeof item.id === 'string');
       renderCatalogue(search?.value || '');
     } catch {
+      catalogueState = 'error';
       catalogueItems = [];
       renderCatalogue();
+    } finally {
+      catalogueRequestPending = false;
+      if (restoreFocus) {
+        if (catalogueState === 'ready') search?.focus();
+        else catalogRoot.querySelector('button')?.focus();
+      }
     }
   }
 
@@ -103,8 +144,8 @@
         ? observation('Largeur écran exposée', null, 'Unknown', 'unavailable', 'Non disponible')
         : observation('Largeur écran exposée', width, 'Measured', 'browser-api', `${width} px`),
       dpr === null
-        ? observation('Device Pixel Ratio', null, 'Unknown', 'unavailable', 'Non disponible')
-        : observation('Device Pixel Ratio', dpr, 'Measured', 'browser-api', String(dpr))
+        ? observation('Rapport de pixels', null, 'Unknown', 'unavailable', 'Non disponible')
+        : observation('Rapport de pixels', dpr, 'Measured', 'browser-api', String(dpr))
     ];
 
     const recommendation = cores && cores >= 8 && (!memory || memory >= 8)
@@ -123,7 +164,7 @@
       left.title = `Source : ${item.source}`;
       const right = document.createElement('span');
       right.className = 'evidence';
-      right.textContent = item.evidence;
+      right.textContent = {Measured:'Observé', Estimated:'Estimé', Unknown:'Inconnu'}[item.evidence];
       row.append(left, right);
       grid.append(row);
     });
@@ -135,13 +176,13 @@
     recommendationText.title = 'Estimation locale dérivée des observations disponibles.';
     const recommendationEvidence = document.createElement('span');
     recommendationEvidence.className = 'evidence';
-    recommendationEvidence.textContent = 'Estimated';
+    recommendationEvidence.textContent = 'Estimé';
     recommendationRow.append(recommendationText, recommendationEvidence);
     grid.append(recommendationRow);
 
     const disclaimer = document.createElement('p');
     disclaimer.className = 'muted';
-    disclaimer.textContent = 'Analyse browser-local indicative uniquement. « Measured » signifie observé via une API du navigateur pour cette session ; cela ne certifie pas le matériel physique sous-jacent. Aucun FPS ni niveau de stabilité n’est garanti.';
+    disclaimer.textContent = 'Analyse locale indicative : « Observé » décrit une valeur exposée par ce navigateur, sans certifier le matériel physique. Aucun FPS ni niveau de stabilité n’est garanti.';
 
     const tryButton = document.createElement('button');
     tryButton.className = 'button';
@@ -175,11 +216,11 @@
 
     const steps = document.createElement('ol');
     [
-      'Risque : la recommandation reste Estimated/Unknown tant qu’aucune mesure réelle du jeu n’est fournie.',
-      'Snapshot / backup : notez vos réglages actuels et utilisez, si le jeu le permet, une sauvegarde ou un profil de configuration réversible.',
+      'Risque : la recommandation reste une estimation tant qu’aucune mesure réelle du jeu n’est fournie.',
+      'Sauvegarde : notez vos réglages actuels et utilisez, si le jeu le permet, une sauvegarde ou un profil de configuration réversible.',
       'Test borné : limitez l’essai à une courte session reproductible (par exemple 10 minutes, même zone/scène, mêmes réglages hors variable testée).',
       'Mesure / comparaison : comparez fluidité, latence ressentie, stabilité et erreurs avec votre état de référence.',
-      'Décision : conservez seulement si le résultat est acceptable ; sinon revenez au snapshot ou baissez un seul réglage ciblé.'
+      'Décision : conservez seulement si le résultat est acceptable ; sinon restaurez vos réglages ou baissez un seul réglage ciblé.'
     ].forEach((text) => {
       const item = document.createElement('li');
       item.textContent = text;
@@ -199,8 +240,8 @@
 
     [
       ['Acceptable / stable', 'Résultat local noté : acceptable. Conservez le changement uniquement pour ce scénario testé ; cela ne devient pas une garantie générale.'],
-      ['Dégradé / instable', 'Résultat local noté : dégradé. Recommandation : rollback vers le snapshot, puis baisse ciblée d’un seul réglage avant un nouveau test borné.'],
-      ['Inconnu / non concluant', 'Résultat local noté : non concluant. Recommandation : ne promouvez pas le profil ; revenez au réglage prudent ou refaites un test plus reproductible.']
+      ['Dégradé / instable', 'Résultat local noté : dégradé. Restaurez vos réglages, puis baissez un seul réglage avant un nouvel essai.'],
+      ['Inconnu / non concluant', 'Résultat local noté : non concluant. Gardez le réglage prudent ou refaites un essai plus reproductible.']
     ].forEach(([label, message]) => {
       const button = document.createElement('button');
       button.className = 'button small';
@@ -217,30 +258,33 @@
   function renderBridgeState() {
     if (!profilePanel) return;
     const title = document.createElement('strong');
-    title.textContent = 'Bridge OS inactif';
+    title.textContent = 'Pont local optionnel inactif';
     const copy = document.createElement('p');
     copy.className = 'muted';
-    copy.textContent = 'Aucun protocole local, exécutable ou service Modaryx OS n’a été lancé. L’intégration reste optionnelle et devra nécessiter une action utilisateur explicite.';
+    copy.textContent = 'Aucun protocole local, exécutable ou service n’a été lancé. Le pont local reste optionnel et nécessitera une action utilisateur explicite.';
     profilePanel.replaceChildren(title, copy);
   }
 
-  function renderPublicStatus(status) {
+  function renderPublicStatus(status, stale = false) {
     if (!publicStatusMessage || !publicStatusFacts) return;
     const stage = status?.stage === 'pre-vf' ? 'pré-VF' : 'état non qualifié';
     const publicOnly = status?.principles?.public_only === true;
-    const downloadAvailable = status?.distribution?.public_download_available === true;
+    const downloadAvailable = !stale && status?.distribution?.public_download_available === true;
     const bridge = status?.integrations?.nova_forge_os_bridge === 'not_connected' ? 'non connecté' : 'état non qualifié';
     const profile = status?.smart_profile?.execution === 'browser-local' ? 'navigateur local' : 'état non qualifié';
     const currentBuildNode = getPublicBuildFact();
     const buildNode = currentBuildNode?.cloneNode(true) ?? null;
 
-    publicStatusMessage.textContent = publicOnly
-      ? `Le manifeste livré avec ce build déclare une surface ${stage}, public-only et fail-closed. ${downloadAvailable ? 'Un téléchargement public est déclaré disponible.' : 'Aucun téléchargement public n’est déclaré disponible.'}`
-      : 'Le manifeste de statut ne permet pas de qualifier cette surface comme public-only.';
+    publicStatusMessage.dataset.freshness = stale ? 'offline-stale' : 'network';
+    publicStatusMessage.textContent = stale
+      ? 'Statut non actualisé : seule une copie hors ligne est disponible. La disponibilité actuelle des téléchargements ne peut pas être confirmée.'
+      : publicOnly
+      ? `MODARYX est en ${stage}. Les téléchargements restent verrouillés tant que les preuves de publication requises ne sont pas réunies. ${downloadAvailable ? 'Un téléchargement public est déclaré disponible.' : 'Aucun téléchargement public n’est déclaré disponible.'}`
+      : 'Le statut public ne peut pas être confirmé pour cette version.';
 
     const facts = [
-      ['Distribution', downloadAvailable ? 'déclarée disponible' : 'verrouillée'],
-      ['Bridge OS', bridge],
+      ['Distribution', stale ? 'non confirmée hors ligne' : downloadAvailable ? 'déclarée disponible' : 'verrouillée'],
+      ['Pont vers Nova Forge OS', bridge],
       ['Smart Profile', profile]
     ];
 
@@ -264,12 +308,29 @@
         cache: 'no-cache',
         credentials: 'same-origin'
       });
-      if (!response.ok) return;
+      if (response.headers?.get('X-Modaryx-Cache') === 'offline-stale') {
+        renderPublicStatus(null, true);
+        return;
+      }
+      if (!response.ok) throw new Error('status-unavailable');
       const status = await response.json();
-      if (status?.schema !== 'nova-forge-public-site-status/v1') return;
+      if (status?.schema !== 'nova-forge-public-site-status/v1') throw new Error('status-invalid');
       renderPublicStatus(status);
     } catch {
-      /* Le contenu statique de repli reste la source affichée. */
+      publicStatusMessage.textContent = 'Statut non actualisé : le manifeste public est indisponible. Aucune disponibilité actuelle n’est confirmée.';
+      publicStatusMessage.dataset.freshness = 'unavailable';
+    }
+  }
+
+  function markBuildUnavailable(stale = false) {
+    const buildFact = getPublicBuildFact();
+    if (!buildFact) return;
+    buildFact.dataset.freshness = stale ? 'offline-stale' : 'unavailable';
+    delete buildFact.dataset.reported;
+    const small = buildFact.querySelector('small');
+    if (small) {
+      small.textContent = stale ? 'Build non actualisé · copie hors ligne' : 'Empreinte de build non disponible';
+      small.removeAttribute('title');
     }
   }
 
@@ -280,20 +341,26 @@
         cache: 'no-cache',
         credentials: 'same-origin'
       });
-      if (!response.ok) return;
+      if (response.headers?.get('X-Modaryx-Cache') === 'offline-stale') {
+        markBuildUnavailable(true);
+        return;
+      }
+      if (!response.ok) throw new Error('build-unavailable');
       const build = await response.json();
       const digest = typeof build?.surface_digest_sha256 === 'string' ? build.surface_digest_sha256 : '';
-      if (build?.schema !== 'nova-forge-public-site-build/v1' || build?.source_revision !== 'withheld-private-source' || !/^[0-9a-f]{64}$/.test(digest)) return;
+      if (build?.schema !== 'nova-forge-public-site-build/v1' || build?.source_revision !== 'withheld-private-source' || !/^[0-9a-f]{64}$/.test(digest)) throw new Error('build-digest-unavailable');
       const buildFact = getPublicBuildFact();
       if (!buildFact) return;
       const small = buildFact.querySelector('small');
       if (small) {
-        small.textContent = `SHA-256 ${digest.slice(0, 12)}…`;
+        small.textContent = `SHA-256 déclaré ${digest.slice(0, 12)}…`;
         small.title = digest;
       }
-      buildFact.dataset.verified = 'true';
+      // Reading a claimed digest does not verify the served bytes.
+      buildFact.dataset.reported = 'true';
+      buildFact.dataset.freshness = 'network';
     } catch {
-      /* L’absence du manifeste de build conserve l’état fail-closed. */
+      markBuildUnavailable();
     }
   }
 
@@ -332,10 +399,5 @@
   bySelector('[data-smart-profile]')?.addEventListener('click', renderProfile);
   bySelector('[data-os-bridge]')?.addEventListener('click', renderBridgeState);
 
-  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-    const serviceWorkerUrl = new URL('./sw.js', document.baseURI);
-    navigator.serviceWorker.register(serviceWorkerUrl, { scope: './' }).catch(() => {
-      /* L’amélioration hors-ligne est optionnelle ; le contenu reste static-first. */
-    });
-  }
+
 })();

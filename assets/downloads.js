@@ -5,10 +5,13 @@
   const state = document.querySelector('[data-download-state]');
   if (!root || !state) return;
 
+  const retry = document.querySelector('[data-download-retry]');
+  let loading = false;
+
   const SHA256_RE = /^[0-9a-f]{64}$/;
   const SAFE_ID_RE = /^[a-z0-9][a-z0-9._-]{0,95}$/;
 
-  function failClosed(message = 'Aucun téléchargement public validé') {
+  function failClosed(message = 'Aucun téléchargement public déclaré disponible') {
     root.replaceChildren();
     state.textContent = message;
     state.dataset.state = 'locked';
@@ -91,31 +94,52 @@
     return article;
   }
 
-  async function load() {
-    failClosed();
+  async function load(fromRetry = false) {
+    if (loading) return;
+    loading = true;
+    if (retry) { retry.disabled = true; retry.hidden = !fromRetry; }
+    failClosed('Vérification de la disponibilité…');
+    state.dataset.state='loading';state.setAttribute('aria-busy','true');
+    delete state.dataset.freshness;
+    let recoverable = false;
     try {
       const response = await fetch(new URL('./downloads.json', document.baseURI), {
         cache: 'no-cache',
         credentials: 'same-origin'
       });
-      if (!response.ok) return;
+      if (response.headers?.get('X-Modaryx-Cache') === 'offline-stale') {
+        failClosed('Téléchargements verrouillés : le manifeste est une copie hors ligne non actualisée. Reconnectez-vous pour vérifier la disponibilité actuelle.');
+        state.dataset.freshness = 'offline-stale';
+        recoverable = true;
+        return;
+      }
+      if (!response.ok) throw new Error('unavailable');
       const manifest = await response.json();
-      if (manifest?.schema !== 'nova-forge-public-downloads/v1') return;
-      if (manifest?.policy !== 'verified-artifacts-only') return;
-      if (manifest?.available !== true) return;
-      if (!Array.isArray(manifest?.artifacts) || !manifest.artifacts.length) return;
-      if (!manifest.artifacts.every(validateArtifact)) return;
+      if (manifest?.schema !== 'nova-forge-public-downloads/v1') throw new Error('invalid');
+      if (manifest?.policy !== 'verified-artifacts-only') throw new Error('invalid');
+      if (manifest?.available === false) { failClosed(); return; }
+      if (manifest?.available !== true) throw new Error('invalid');
+      if (!Array.isArray(manifest?.artifacts) || !manifest.artifacts.length) throw new Error('invalid');
+      if (!manifest.artifacts.every(validateArtifact)) throw new Error('invalid');
 
       const ids = new Set(manifest.artifacts.map((item) => item.id));
-      if (ids.size !== manifest.artifacts.length) return;
+      if (ids.size !== manifest.artifacts.length) throw new Error('invalid');
 
       root.replaceChildren(...manifest.artifacts.map(renderArtifact));
-      state.textContent = `${manifest.artifacts.length} artefact${manifest.artifacts.length > 1 ? 's' : ''} public${manifest.artifacts.length > 1 ? 's' : ''} vérifié${manifest.artifacts.length > 1 ? 's' : ''}`;
+      state.textContent = `${manifest.artifacts.length} artefact${manifest.artifacts.length > 1 ? 's' : ''} public${manifest.artifacts.length > 1 ? 's' : ''} déclaré${manifest.artifacts.length > 1 ? 's' : ''} disponible${manifest.artifacts.length > 1 ? 's' : ''} dans le manifeste de publication. Ce navigateur n’a vérifié ni les fichiers ni leur signature.`;
       state.dataset.state = 'available';
+      state.dataset.freshness = 'network';
     } catch {
-      failClosed();
+      recoverable = true;
+      failClosed('Impossible de confirmer la disponibilité. Les téléchargements restent verrouillés. Réessayez dans un instant.');
+    } finally {
+      loading = false;
+      state.removeAttribute('aria-busy');
+      if (retry) { retry.disabled = false; retry.hidden = !recoverable; }
+      if (fromRetry) (recoverable && retry ? retry : state).focus();
     }
   }
 
+  retry?.addEventListener('click', () => load(true));
   load();
 })();

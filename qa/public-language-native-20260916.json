@@ -1,0 +1,95 @@
+{
+  "sourceHead": "d575f4c426cefb078a1d894497b2118c0964aded",
+  "date": "2026-09-16",
+  "scope": "Three narrow iframe reflow observations and deployed DOM labels, not full visual accessibility certification",
+  "measurements": [
+    {
+      "page": "documentation.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/documentation",
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "height": 900,
+      "contentHeight": 8180,
+      "h1": "Trouvez le bon outil. Comprenez ses limites.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 461.9,
+        "loadEndMs": 462.1,
+        "responseEndMs": 308.9
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    },
+    {
+      "page": "ecosystem.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/ecosystem",
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "height": 900,
+      "contentHeight": 5978,
+      "h1": "Un atelier web pour chaque étape.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 283.7,
+        "loadEndMs": 287,
+        "responseEndMs": 142.3
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    },
+    {
+      "page": "index.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "height": 900,
+      "contentHeight": 12106,
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 265.1,
+        "loadEndMs": 282.5,
+        "responseEndMs": 88.3
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    }
+  ],
+  "labels": {
+    "documentation": "Preuves requises: 1 occurrence",
+    "ecosystem": "Service non connecté: 3 occurrences",
+    "home": "Preuves requises: 2 occurrences"
+  },
+  "limitations": [
+    "No native zoom, physical device or screen reader proof.",
+    "No exhaustive visual or interactive-state review.",
+    "Navigation timing and active worker do not prove CWV or offline update lifecycle."
+  ]
+}
