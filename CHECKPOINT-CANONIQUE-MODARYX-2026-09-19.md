@@ -1097,3 +1097,30 @@ Le harnais copie le candidat dans un dossier temporaire, installe l'étape A, tr
 
 Aucun fichier produit, `main`, DNS ou Cloudflare critique n'est modifié par ce lot.
 
+## Intégration contrôlée — mise à jour PWA A → B — 19 septembre 2026
+
+PR #34 : **TERMINÉE — fusionnée**.
+
+Procédure d'erreur respectée sans full replay :
+
+- run `35465374096` : FAIL syntaxe du harnais → correction ciblée ;
+- run `35465415608` : FAIL initialisation DevTools avant observation produit → port Chrome auto-assigné via `DevToolsActivePort` ;
+- run `35465473185` : **success / PASS CIBLÉ**.
+
+Résultat :
+
+- Stage A installée avec cache v120 ;
+- update explicite vers Stage B ;
+- nouveau cache activé ;
+- ancien cache nettoyé ;
+- serveur réellement arrêté ;
+- version B disponible offline.
+
+Merge : `6871d3a52ea1ad7dd6e6d8979f146cb7f95bec2c`.
+
+État :
+
+- **TERMINÉ** — mécanique A→B ciblée en Chromium loopback ;
+- **PREUVE MANQUANTE** — update sur preview HTTPS publique et appareil physique ;
+- aucun fichier produit, `main`, DNS ou Cloudflare critique modifié par ce lot.
+
