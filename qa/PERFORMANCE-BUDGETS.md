@@ -189,3 +189,11 @@ Le lot de visibilité de progression ajoute les prochains jalons du loup et du d
 
 Aucun visuel lourd n'est ajouté au précache global.
 
+## Fondations reflow + contraste — impact candidat — 19 septembre 2026
+
+`assets/modaryx-foundations.css` : **8810 → 10735 octets**, soit **+1925 octets**.
+
+Cette feuille appartient au noyau install-précaché. À partir du noyau courant de 112068 octets, le noyau dérivé candidat devient **113993 octets**, soit une marge de **686007 octets** sous 800000.
+
+La micro-preuve CI doit confirmer la mesure réelle du précache avant intégration.
+
