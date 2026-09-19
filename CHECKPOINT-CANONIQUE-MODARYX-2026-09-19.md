@@ -1355,3 +1355,18 @@ Budget :
 - **EN COURS** — croissance visuelle individuelle réelle des personnages ;
 - **PREUVE MANQUANTE** — preview HTTPS publique, appareils physiques, lecteur d'écran natif, zoom natif 400 % et CWV représentatifs.
 
+## Candidat ciblé — installabilité PWA Chromium — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-pwa-installability-proof-20260919`, base fraîche `d60b5ff1a399e5854eda1398d99e54abfb44d25a`. CodeQL de la base : **success** (run `35468521463`).
+
+Ajouts QA uniquement :
+
+- `qa/check-pwa-installability.mjs` ;
+- `.github/workflows/modaryx-pwa-installability-proof.yml`.
+
+Le harnais utilise Chromium sur loopback de confiance et contrôle le manifeste via CDP, les erreurs d'installabilité, l'activation/contrôle du service worker, les champs id/start_url/scope/display et le chargement réel des icônes déclarées.
+
+État : **EN COURS — micro-preuve CI requise avant intégration**.
+
+Cette preuve ne remplace pas une installation manuelle sur preview HTTPS publique ni un appareil physique.
+
