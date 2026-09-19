@@ -92,3 +92,4 @@ b042d8cea4c041dda9f4433bee8691c5ab7fe6a330d2ab5707940bfc4a331746  ./sw.js
 2f8200d72fd07230d1c9d125e80a29fe434ec5517643dd892319a32d3f6cc2d7  ./assets/living-world/environment-premium.jpg
 8224d7b79d6ea1372b8897a046fd39ff57ed5c439c879249f936282aeabc9758  ./assets/living-world/wolf-baby.png
 ae7397920f962352e5e47f67f7973fd4711d059e33d83e2188e7b7e73a8a2c03  ./assets/living-world/wolf-juvenile.png
+79a5676ac09523c691e650d097d9ed18011bd5bff597657e9ab0262bd3856b97  ./assets/living-world/wolf-adolescent.png
