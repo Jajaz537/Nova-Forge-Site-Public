@@ -778,3 +778,33 @@ Budget candidat dérivé :
 
 Important : ce lot ne transforme pas une garde source en preuve de zoom natif 400 %, lecteur d'écran, Windows High Contrast ou appareil physique.
 
+## Intégration contrôlée — fondations reflow + contraste — 19 septembre 2026
+
+PR #28 : **TERMINÉE — fusionnée**.
+
+Micro-preuve préalable :
+
+- workflow **MODARYX Site First Targeted Source Proof** ;
+- run `35463076727` ;
+- conclusion : **success / PASS CIBLÉ**.
+
+Intégration :
+
+- commit de merge : `949210c61cb0e37874438eba49152763e6bc8c64` ;
+- garde globale contre le débordement horizontal ;
+- médias fluides ;
+- contenus longs, boutons, liens, badges, navigation et footer autorisés à revenir à la ligne ;
+- garde spécifique ≤400px ;
+- règles `forced-colors` ;
+- règles `prefers-reduced-transparency` ;
+- empreinte foundations réconciliée ;
+- noyau dérivé : **113993 octets** ;
+- marge sous 800000 : **686007 octets** ;
+- `main` et infrastructure critique : inchangées.
+
+État de preuve :
+
+- **TERMINÉ** — garde-fous source reflow/contraste ;
+- **PREUVE MANQUANTE** — zoom natif 400 %, Windows High Contrast, lecteur d'écran et appareils physiques ;
+- aucun faux PASS natif n'est attribué à ce lot.
+
