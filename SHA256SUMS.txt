@@ -45,7 +45,7 @@ b40f0cc65a0de9de1a435011012f0d2329f81fc873c66058ef65f3d646bb53a4  ./catalog.html
 010737ea4c600d6111d3fa94d6f86e454595dd6f0b5ddb4e0ab01b689b70fbd3  ./data/catalog.json
 08f9810bea5a8afc20acbf7a6f5b23c5cb4647621f6a1787d42a3fa212981283  ./data/compatibility-graph.json
 6e0ba5cbf31c7ed012de0cbc787e01220554205e8507efed2f81626f264309fa  ./data/integration-readiness.json
-9cb024f4ae0e93a6b417035532a53443d75633aa6c2cba5dc4e014898b8bd0a6  ./data/living-world.json
+dca732309b36a8320e824cb6ec2cc1af40f2ce38546fa2f89a9110f15e245e91  ./data/living-world.json
 fd77943e2b758314ee5beb7a6b89680a4a16c7958e6f4b6e8ad7f250d7feed80  ./data/search-index.json
 b4322fc3a865e55dc1732e5ab920b17e7f55e6352fe2471aaefec49398c36092  ./documentation.html
 75c384b7fefa2300c8d30d1a2a3901563c9ce76e8839aa6917a6a7ed19daa78e  ./downloads.html
@@ -53,7 +53,7 @@ d60000a6ce45fe5caef1906d8d0d15d26ecab82402aecff396c1b23f32fc8ec0  ./downloads.js
 23f88aafdf993cfaf9bbdefcb62887511f85f403fa769c27dbd83d300daf9663  ./ecosystem.html
 261acad337661d82075248de35bf8e8f935d5b2709b5f9dc0ebdf3740c5d1dfc  ./favicon.svg
 2433335ff10bbe343c02227c18a6251a8279fda04eb7ce9905f8ec93f7c4b4bc  ./games/index.html
-d5aa64900a3d63a05cdbb33dabb3612fc8c66605f8013cc9665e7ff88b944a33  ./index.html
+8c8d929b1c7b26e9ef6bba3f161c069c24b389828f10ea7c8e46cb045b8e1545  ./index.html
 8bc91afa3e4cb0db77dd1c192c93cf568506b77eb605965254dae7c63151102a  ./profiles.html
 63e81934a3512eba251c3feb9f1c7e6e84e32f7cdc1688a9279adfa4a72ab764  ./project-balanced-latency-pack.html
 0d239c42fecfca3e1bd5ecc23337c4fd0c7499a39dd837ec7c89bf3df869c08c  ./project-ember-textures.html
