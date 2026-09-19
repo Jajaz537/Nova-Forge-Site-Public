@@ -109,8 +109,9 @@
       }
 
       if (nextNode) {
+        const delay = stage.daysUntilNext === 1 ? '1 jour' : `${stage.daysUntilNext} jours`;
         nextNode.textContent = stage.next
-          ? `Prochaine étape : ${stage.next.label} dans ${stage.daysUntilNext} j`
+          ? `Prochaine étape : ${stage.next.label} dans ${delay}`
           : 'Croissance : stade adulte';
         nextNode.dataset.growthStage = stage.id;
       }
