@@ -1951,3 +1951,30 @@ Incident ciblé :
 - **EN COURS** — loup jeune adulte / adulte + cinq stades dragon ;
 - aucun passage `ready` avant bundle complet ;
 - `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
+
+
+## Asset compagnon — Loup jeune adulte — 20 septembre 2026
+
+PR #50 : **TERMINÉE — fusionnée** dans la branche active PR #12.
+
+- commit d'intégration : `75f264a347945f9771829201ffd7821d1f83fb8f` ;
+- asset : `assets/living-world/wolf-young-adult.png` ;
+- dimensions : **1600 × 900** ;
+- PNG RGBA, `alpha=true` ;
+- SHA-256 : `137d2bfee47bd270c7760474c7c83cb5cf596355966f364f1d208b9fcdb14535` ;
+- progression visuelle : plus grand, plus puissant et plus assuré que l’adolescent, mais encore distinct du stade adulte final ;
+- asset gardé **non référencé** ; `visualGrowth.status=awaiting-assets` inchangé.
+
+Preuves ciblées PR #50 :
+
+- `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ;
+- `wolf-young-adult.png` détecté comme `candidate-layer` : 1600 × 900, alpha=true, failures=[] ;
+- Site First Source, PWA Offline, Reflow Chromium, Accessibility Chromium et Lab Performance : **success**.
+
+État :
+
+- environnement séparé : **TERMINÉ** ;
+- couches compagnon : **4/10 TERMINÉES** ;
+- **EN COURS** — loup adulte + cinq stades dragon ;
+- aucun passage `ready` avant bundle complet ;
+- `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
