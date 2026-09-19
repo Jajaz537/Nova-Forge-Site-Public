@@ -1,0 +1,78 @@
+name: MODARYX PWA Offline Browser Proof
+
+on:
+  pull_request:
+    branches:
+      - design/modaryx-premium-hd-20260914-work
+    paths:
+      - '.github/workflows/modaryx-pwa-offline-browser-proof.yml'
+      - 'qa/check-pwa-offline-browser.mjs'
+      - 'sw.js'
+      - 'assets/shell.js'
+      - 'assets/app.js'
+      - '*.html'
+      - 'games/**'
+      - 'assets/**'
+      - 'data/**'
+      - 'site.webmanifest'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-pwa-offline-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pwa-offline:
+    name: Chromium PWA offline proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Start trustworthy loopback server
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/modaryx-http.log 2>&1 &
+          echo $! >/tmp/modaryx-http.pid
+          for attempt in {1..40}; do
+            if curl --fail --silent --show-error http://127.0.0.1:4173/index.html >/dev/null; then
+              exit 0
+            fi
+            sleep 0.25
+          done
+          cat /tmp/modaryx-http.log
+          exit 1
+
+      - name: Run PWA offline browser proof
+        shell: bash
+        env:
+          MODARYX_TEST_ORIGIN: http://127.0.0.1:4173
+        run: |
+          set -euo pipefail
+          node --version
+          node qa/check-pwa-offline-browser.mjs
+
+      - name: Stop loopback server
+        if: always()
+        shell: bash
+        run: |
+          if test -f /tmp/modaryx-http.pid; then
+            kill "$(cat /tmp/modaryx-http.pid)" 2>/dev/null || true
+          fi

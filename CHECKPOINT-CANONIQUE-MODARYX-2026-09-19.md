@@ -1026,3 +1026,19 @@ Intégration :
 - **TERMINÉ** — lecture/écriture de vrais fichiers via les fonctions web en Chromium ;
 - **PREUVE MANQUANTE** — dialogue graphique natif du sélecteur de fichier OS.
 
+## Candidat ciblé — PWA offline Chromium — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-pwa-offline-browser-proof-20260919`, base fraîche `9b2e5da59ec5ef8d53f7f125a9207f4cac59d52b`.
+
+Ajouts QA uniquement :
+
+- `qa/check-pwa-offline-browser.mjs` ;
+- `.github/workflows/modaryx-pwa-offline-browser-proof.yml` ;
+- `qa/MODARYX-PWA-OFFLINE-BROWSER-PROOF-20260919.md`.
+
+Le contrôle vise un vrai service worker Chromium sur loopback, des caches navigateur réels et la transition online → offline → online.
+
+État : **EN COURS — micro-preuve CI requise avant intégration**.
+
+Même en cas de PASS, la preview HTTPS publique et la mise à jour A→B resteront des preuves séparées.
+
