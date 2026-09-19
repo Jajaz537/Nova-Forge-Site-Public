@@ -9,7 +9,7 @@ d381131783627707943e8361e22cb4294682f44e57b9c01e5d0c1cc28eacf505  ./assets/commu
 01fa07ab10924bf4637e2830830cd7fb5c50452a495870f00fd8f0a65dc5a62f  ./assets/downloads.js
 33a0530ceb4cafa33a6e0f05cc04994d086b8d11308d5f5f2a9fac20861efe81  ./assets/forge-field.svg
 bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-schema-lite.js
-059384a5489a60305dac03b925c3eccd40d14066a1e893d92edc0b942dc307b7  assets/modaryx-cinematic-system.css
+d4bc4ad5575952da5c75a9cd45940acf622e73555e7a9ece046dbe39b3d014e8  ./assets/modaryx-cinematic-system.css
 32a014bfa790bc6f0cecf68f2743e7969201ad5d8eea613cf1d3e84862773a0e  ./assets/modaryx-home-cinematic.css
 06b1dae65f9c0706fabc9b85a46cd3c50d7a5a5d2e6015b2be064b751d7b8189  ./assets/modaryx-mark-192.png
 38eb20983b8118843446d8a64dd5afa4991f43d927b41703b21b34fc30a1aa40  ./assets/modaryx-mark-512.png
@@ -33,7 +33,7 @@ db79e4b5d933284c9ba12ec8974cce0bb75110f3c7b5134c670e77eb508b4586  ./assets/proje
 f13f4711d6c83dc23c7f0577abd3a408f051978fbebb85bf91098b8e4f7d7e42  ./assets/search.css
 7c7e55801dc9d59d2f90977086c840c667741a18209698d711b3c5aedccfae6e  ./assets/search.js
 157700b7adbe96ad691e1d767e346187cb0caa478c8d4aea03f364f3b01604e3  ./assets/shell.js
-641d94df66d34087ab4c1632f99d8238e77c941c06e8ae552b2520a10b334b18  ./assets/site.css
+d5a57de6ac8bb73d85db3c481856a8beb876ab50e2378d7fae2d18ba44b69061  ./assets/site.css
 f90348520048d546761e0e1b794ab6d22aa02f06d06f95f54e9855bf89b345dc  ./assets/tokens.css
 a1d756c67a07e522f23d20c5a28f433e03473eec0f2ac51101f13b2c8a90ec83  ./assets/verify-picker.css
 92736f4afba835879723e51fcbab193d521d222e699ce7ff8112388a9b4b211a  ./assets/verify.js
@@ -75,10 +75,11 @@ b81b115d11098e2c95b8f7dab4ba36cf78da24e63e949a4730b23294aac963c2  ./schemas/publ
 ebf1f260fd02d0576593a613a1d808a1a4f60f38d9349654bf5cde23faf32b31  ./schemas/storage-resolver.schema.json
 7c67eaabcf0ac47c9ba9f0466f61f8467e94fadcc4e2f207d51068e8eb06fa31  ./schemas/universal-mod-manifest.schema.json
 f9efeca9b4ddaf4c82d3099258174a72266cef03b4df6740ed13145f5f931adc  ./search.html
-c0768695b1164d80e1cd0186cce10e0575d8d325b57bf8b83b23059ca96e9827  ./security.html
+605257b08f1ec3cc98df38f1c3ee66774bb4bdb2e064df36b661685effb781fc  ./security.html
 7cb545dbc373c308acd554f3a53048d753bcdb5042bf9b86821f6547f078a47a  ./site.webmanifest
 aded853aaf9777bc6efb7b1c5c98f557415c303eeb0201852a1009f02e114d61  ./sw.js
 f7236a62662631fc3e9956322b36cf09656e49ae9a27e1a505b964b0e12ab818  ./verify.html
+d4bc4ad5575952da5c75a9cd45940acf622e73555e7a9ece046dbe39b3d014e8  assets/modaryx-cinematic-system.css
 237a7bdc9c73b424dee3e17de6febb04b4daa36730e21768b84978b233d5585c  assets/modaryx-foundations.css
 9ee6d9aa22724604d1a21eb88f473aa04f22039392d80ca140bd20aebb6f059f  assets/modaryx-wolf-dragon-hero.webp
 019063752388949888db40bfbde29f4482ce58ffb0f1ba24c30704d3e8b52cc4  assets/modaryx-world-portals.webp

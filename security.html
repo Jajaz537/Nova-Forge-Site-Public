@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="./assets/modaryx-foundations.css">
   <link rel="stylesheet" href="./assets/modaryx-cinematic-system.css">
 </head>
-<body>
+<body class="trust-page">
   <a class="skip-link" href="#main">Aller au contenu</a>
   <header class="topbar">
     <a class="brand" href="./" aria-label="MODARYX MODS, retour au site officiel"><img class="brand-logo" src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="32" height="32"><span>MODARYX MODS</span></a>
@@ -41,7 +41,7 @@
       <div class="hero-copy">
         <p class="eyebrow">MODARYX MODS · sécurité publique</p>
         <h1 id="security-hero-title">Sachez ce que les preuves établissent.</h1>
-        <p class="lede">Avant d’utiliser un contenu, distinguez son identité, son intégrité, sa provenance et sa signature. MODARYX affiche les informations inconnues comme telles ; la qualité visuelle d’une fiche ne garantit pas la sécurité de son fichier.</p>
+        <p class="lede">Avant d’utiliser un contenu, distinguez son identité, son intégrité, sa provenance et sa signature. MODARYX signale l’inconnu ; une belle fiche ne garantit pas un fichier sûr.</p>
         <div class="actions"><a class="button primary" href="./verify.html">Vérifier un SHA-256</a><a class="button" href="./downloads.html">Voir les téléchargements</a><a class="button" href="./documentation.html#verification">Lire la procédure</a></div>
       </div>
       <aside class="hero-panel" aria-label="Principes de sécurité publics">
@@ -58,7 +58,7 @@
     <section class="section" id="chain" aria-labelledby="chain-title">
       <p class="eyebrow">Chaîne de confiance</p>
       <h2 id="chain-title">Quatre preuves, quatre rôles.</h2>
-      <p class="section-intro">Un artefact ne devient distribuable publiquement que lorsque son identité et les preuves requises peuvent être qualifiées. Chaque élément répond à une question différente.</p>
+      <p class="section-intro">Un artefact devient distribuable quand son identité et les preuves requises sont qualifiées. Chaque élément a un rôle.</p>
       <div class="requirements" role="list" aria-label="Chaîne de confiance publique">
         <div role="listitem"><strong>Identité</strong><span>Quel artefact précis est attendu : nom, version et fichier annoncé.</span></div>
         <div role="listitem"><strong>Intégrité</strong><span>Le SHA-256 reçu correspond-il exactement à l’empreinte publiée pour cet artefact ?</span></div>
@@ -71,9 +71,9 @@
     <section class="section" id="states" aria-labelledby="states-title">
       <div class="section-heading"><div><p class="eyebrow">États publics</p><h2 id="states-title">« Inconnu » reste différent de « vérifié ».</h2></div><span class="badge">Preuve requise</span></div>
       <div class="cards three">
-        <article class="card"><p class="card-kicker">01 · Preuve qualifiée</p><h3>Vérifié</h3><p>L’état ne peut être présenté comme vérifié que lorsque la preuve correspondante est réellement disponible et qualifiée pour l’objet concerné.</p></article>
-        <article class="card"><p class="card-kicker">02 · Preuve absente</p><h3>Non vérifié</h3><p>Une preuve manquante, invalide ou non qualifiée ne doit pas être compensée par une hypothèse, une estimation ou un élément d’interface rassurant.</p></article>
-        <article class="card"><p class="card-kicker">03 · Preuve non requise</p><h3>Non applicable</h3><p>Lorsqu’une preuve n’est pas requise par le contrat de l’artefact, cet état doit être déclaré explicitement plutôt que confondu avec une réussite de vérification.</p></article>
+        <article class="card"><p class="card-kicker">01 · Preuve qualifiée</p><h3>Vérifié</h3><p>L’état exige une preuve disponible et qualifiée pour l’objet concerné.</p></article>
+        <article class="card"><p class="card-kicker">02 · Preuve absente</p><h3>Non vérifié</h3><p>Une preuve manquante, invalide ou non qualifiée ne peut être compensée par une hypothèse ou une interface rassurante.</p></article>
+        <article class="card"><p class="card-kicker">03 · Preuve non requise</p><h3>Non applicable</h3><p>Une preuve hors contrat doit être déclarée explicitement, sans être confondue avec une vérification réussie.</p></article>
       </div>
     </section>
 
