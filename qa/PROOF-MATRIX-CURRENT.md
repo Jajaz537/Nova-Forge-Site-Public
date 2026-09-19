@@ -228,3 +228,27 @@ Preuves acquises sur copie temporaire du candidat :
 
 La preuve couvre la mécanique d'update du service worker en Chromium loopback. Elle ne vaut pas preview publique HTTPS ni appareil physique.
 
+## Accessibilité navigateur — Chromium — 19 septembre 2026
+
+PR #35 / merge `6966eb52a4fe1bc6a5deea5c75a4f3df4395805e`.
+
+Premier run `35465633037` : **FAIL ciblé du harnais**. Le contrôle de labels source ne reconnaissait pas les labels englobants HTML, alors que l'arbre d'accessibilité Chromium exposait déjà **0 contrôle interactif sans nom accessible**. Catalogue et cases Communauté utilisaient bien des `<label>…<input>…</label>`.
+
+Correction limitée au harnais : reconnaissance de `el.closest('label')`.
+
+Run corrigé `35465685575` : **success / PASS CIBLÉ**.
+
+Sur les 17 pages publiques, la micro-preuve couvre :
+
+- un H1 unique ;
+- landmark `#main` ;
+- skip-link vers `#main` ;
+- pas d'ID dupliqué détecté ;
+- pas d'image sans `alt` détectée ;
+- pas de contrôle formulaire sans label détecté ;
+- pas de contrôle interactif sans nom dans l'arbre AX Chromium ;
+- premier focus clavier sur « Aller au contenu » ;
+- activation clavier du skip-link vers `#main`.
+
+Limite : cette preuve Chromium ne remplace pas un lecteur d'écran natif ni une validation humaine complète.
+
