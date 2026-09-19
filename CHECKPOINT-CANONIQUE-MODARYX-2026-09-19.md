@@ -935,3 +935,44 @@ Périmètre :
 
 Limites : aucun backend simulé ; import/export par vrai fichier utilisateur reste **PREUVE MANQUANTE**.
 
+## Intégration contrôlée — fonctions locales Chromium — 19 septembre 2026
+
+PR #31 : **TERMINÉE — fusionnée**.
+
+Premier run ciblé `35463958957` : **FAIL ciblé**.
+
+Erreur exacte :
+
+- `verify-fragment-validation: timeout waiting for Page.loadEventFired`.
+
+Isolation :
+
+- le second changement de SHA-256 ne rechargeait pas la page : il s'agissait d'une navigation même-document par fragment ;
+- Catalogue, Recherche, Communauté et Creator Studio étaient déjà **PASS CIBLÉ** ;
+- aucun défaut produit n'a été attribué à cette erreur de harnais.
+
+Correction ciblée :
+
+- test du Vérificateur via changement réel de `location.hash` et gestionnaire `hashchange` existant ;
+- aucun fichier produit modifié ;
+- aucun full replay.
+
+Micro-preuve après correction :
+
+- run `35464005629` — **success / PASS CIBLÉ**.
+
+Fonctions observées :
+
+- Catalogue : filtre + favori local + persistance ;
+- Recherche : index local ;
+- Communauté : collection locale + avis local + restauration ;
+- Creator Studio : brouillon V2 + restauration, distribution toujours verrouillée ;
+- Vérificateur : fragment SHA-256 invalide puis valide.
+
+Intégration :
+
+- merge `033e3227fe9b776c4ca58c022dcceec2dbcc3c2a` ;
+- `main`, backend et infrastructure critique inchangés.
+
+Reste **PREUVE MANQUANTE** : vrai parcours import/export avec fichiers utilisateur, sélecteur natif, lecture SHA-256 d'un vrai fichier et portes externes VF.
+
