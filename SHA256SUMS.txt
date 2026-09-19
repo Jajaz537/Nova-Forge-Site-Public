@@ -95,3 +95,4 @@ ae7397920f962352e5e47f67f7973fd4711d059e33d83e2188e7b7e73a8a2c03  ./assets/livin
 79a5676ac09523c691e650d097d9ed18011bd5bff597657e9ab0262bd3856b97  ./assets/living-world/wolf-adolescent.png
 137d2bfee47bd270c7760474c7c83cb5cf596355966f364f1d208b9fcdb14535  ./assets/living-world/wolf-young-adult.png
 96ef42acd3e209a77602087c0e174335b06f7b85662d3bde53b86c359b56b0d8  ./assets/living-world/wolf-adult.png
+3f2067fcbe7ea7ceb3a1fe76611f3438dcd1807723c9d2bc1e8c03d9945adb66  ./assets/living-world/dragon-baby.png
