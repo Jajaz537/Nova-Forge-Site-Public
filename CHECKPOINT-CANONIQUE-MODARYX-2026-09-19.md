@@ -1254,3 +1254,38 @@ Budget :
 
 Important : CWV représentatifs, appareils physiques, lecteur d'écran natif et autres preuves externes restent **PREUVE MANQUANTE**.
 
+## Intégration contrôlée — performance laboratoire Premium HD — 19 septembre 2026
+
+PR #36 : **TERMINÉE — fusionnée**.
+
+- commit d'intégration : `56546fd567be138ced8e0338535a6ad7a484552d` ;
+- candidat produit effectivement prouvé : `39708373d6f1f1d725b9b0efa92ba067ca531511` ;
+- les quatre commits suivants avant fusion étaient uniquement documentaires.
+
+Micro-preuve finale du candidat :
+
+- Lab Performance `35466565740` — **success / PASS CIBLÉ** ;
+- Site First Source `35466565752` — success ;
+- Reflow `35466565753` — success ;
+- Accessibility `35466565756` — success ;
+- PWA Offline `35466565761` — success ;
+- Local Functional `35466565765` — success ;
+- PWA Update `35466565747` — success.
+
+Améliorations intégrées :
+
+- accueil : LCP labo **2012 ms mobile / 1964 ms desktop** ;
+- Catalogue desktop : CLS labo **0** ;
+- navigation pré-JS stabilisée ;
+- géométrie Catalogue statique/hydratée stabilisée ;
+- hero LCP priorisé ;
+- visuel monde secondaire différé après chargement critique ;
+- noyau dérivé : **114977 octets** ;
+- marge sous 800000 : **685023 octets**.
+
+`main`, DNS, DNSSEC, IONOS et Cloudflare critique : inchangés.
+
+CodeQL du commit d'intégration `56546fd...` : **EN COURS** au moment de cette entrée. Aucun PASS CodeQL anticipé.
+
+Limites conservées : cette preuve est laboratoire Chromium. CWV représentatifs, lecteur d'écran natif, zoom natif 400 %, appareils physiques et preview HTTPS finale restent **PREUVE MANQUANTE**.
+
