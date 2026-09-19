@@ -48,16 +48,15 @@ function referenceExists(relativePath) {
   if (!relativePath) return true;
   const absolute = path.join(root, relativePath);
   if (fs.existsSync(absolute)) return true;
-  const indexPath = path.join(absolute, 'index.html');
-  return fs.existsSync(indexPath);
+  return fs.existsSync(path.join(absolute, 'index.html'));
 }
 
 function attr(tag, name) {
-  const match = tag.match(new RegExp(`\\s${name}=["']([^"']*)["']`, 'i'));
+  const match = tag.match(new RegExp('\\s' + name + '=["\\\']([^"\\\']*)["\\\']', 'i'));
   return match ? match[1] : null;
 }
 
-function textContent(fragment) {
+function visibleText(fragment) {
   return fragment
     .replace(/<script\b[\s\S]*?<\/script>/gi, '')
     .replace(/<style\b[\s\S]*?<\/style>/gi, '')
@@ -65,25 +64,11 @@ function textContent(fragment) {
     .replace(/&nbsp;/gi, ' ')
     .replace(/\s+/g, ' ')
     .trim();
-}
-
-function escapeRegExp(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\function textContent(fragment) {
-  return fragment
-    .replace(/<script\b[\s\S]*?<\/script>/gi, '')
-    .replace(/<style\b[\s\S]*?<\/style>/gi, '')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&nbsp;/gi, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-');
 }
 
 for (const page of pages) {
   if (!exists(page)) {
-    fail(`missing public page: ${page}`);
+    fail('missing public page: ' + page);
     continue;
   }
 
@@ -93,48 +78,57 @@ for (const page of pages) {
   const foundationRef = nested ? '../assets/modaryx-foundations.css' : './assets/modaryx-foundations.css';
   const cinematicRef = nested ? '../assets/modaryx-cinematic-system.css' : './assets/modaryx-cinematic-system.css';
 
-  if (!html.includes('<meta charset="utf-8">')) fail(`${page}: charset missing`);
-  if (!html.includes('name="viewport"')) fail(`${page}: viewport missing`);
-  if (!/<title>[^<]+<\/title>/i.test(html)) fail(`${page}: title missing`);
-  if (!html.includes('class="skip-link"')) fail(`${page}: skip link missing`);
-  if (!html.includes('id="main"')) fail(`${page}: main landmark id missing`);
-  if (!html.includes('class="site-footer"')) fail(`${page}: shared footer missing`);
-  if (!html.includes(shellRef)) fail(`${page}: shell.js missing`);
-  if (!html.includes(foundationRef)) fail(`${page}: modaryx-foundations.css missing`);
-  if (page !== 'index.html' && !html.includes(cinematicRef)) fail(`${page}: modaryx-cinematic-system.css missing`);
-  if (/\bModaryx OS\b/i.test(html)) fail(`${page}: deprecated visible product label "Modaryx OS"`);
+  if (!html.includes('<meta charset="utf-8">')) fail(page + ': charset missing');
+  if (!html.includes('name="viewport"')) fail(page + ': viewport missing');
+  if (!/<title>[^<]+<\/title>/i.test(html)) fail(page + ': title missing');
+  if (!html.includes('class="skip-link"')) fail(page + ': skip link missing');
+  if (!html.includes('id="main"')) fail(page + ': main landmark id missing');
+  if (!html.includes('class="site-footer"')) fail(page + ': shared footer missing');
+  if (!html.includes(shellRef)) fail(page + ': shell.js missing');
+  if (!html.includes(foundationRef)) fail(page + ': modaryx-foundations.css missing');
+  if (page !== 'index.html' && !html.includes(cinematicRef)) fail(page + ': modaryx-cinematic-system.css missing');
+  if (/\bModaryx OS\b/i.test(html)) fail(page + ': deprecated visible product label "Modaryx OS"');
 
   const h1Count = (html.match(/<h1\b/gi) || []).length;
-  if (h1Count !== 1) fail(`${page}: expected exactly one h1, found ${h1Count}`);
+  if (h1Count !== 1) fail(page + ': expected exactly one h1, found ' + h1Count);
 
   const idValues = [...html.matchAll(/\sid=["']([^"']+)["']/gi)].map((match) => match[1]);
   const idSet = new Set();
   for (const id of idValues) {
-    if (idSet.has(id)) fail(`${page}: duplicate id ${id}`);
+    if (idSet.has(id)) fail(page + ': duplicate id ' + id);
     idSet.add(id);
   }
 
+  const labelFors = new Set(
+    [...html.matchAll(/<label\b[^>]*\sfor=["']([^"']+)["'][^>]*>/gi)].map((match) => match[1])
+  );
+
   for (const img of html.match(/<img\b[^>]*>/gi) || []) {
-    if (!/\salt=["'][^"']*["']/i.test(img)) fail(`${page}: img missing alt attribute: ${img.slice(0, 120)}`);
+    if (!/\salt=["'][^"']*["']/i.test(img)) {
+      fail(page + ': img missing alt attribute: ' + img.slice(0, 120));
+    }
   }
 
   for (const button of html.match(/<button\b[^>]*>[\s\S]*?<\/button>/gi) || []) {
     const opening = button.match(/^<button\b[^>]*>/i)?.[0] || '';
-    const label = attr(opening, 'aria-label');
-    if (!label && !textContent(button)) fail(`${page}: button without accessible text`);
+    if (!attr(opening, 'aria-label') && !visibleText(button)) {
+      fail(page + ': button without accessible text');
+    }
   }
 
   for (const anchor of html.match(/<a\b[^>]*>[\s\S]*?<\/a>/gi) || []) {
     const opening = anchor.match(/^<a\b[^>]*>/i)?.[0] || '';
-    const label = attr(opening, 'aria-label');
-    if (!label && !textContent(anchor)) fail(`${page}: link without accessible text`);
+    if (!attr(opening, 'aria-label') && !visibleText(anchor)) {
+      fail(page + ': link without accessible text');
+    }
   }
 
   for (const ariaName of ['aria-labelledby', 'aria-describedby', 'aria-controls']) {
-    const regex = new RegExp(`\\s${ariaName}=["']([^"']+)["']`, 'gi');
+    const regex = new RegExp('\\s' + ariaName + '=["\\\']([^"\\\']+)["\\\']', 'gi');
     for (const match of html.matchAll(regex)) {
-      for (const target of match[1].trim().split(/\s+/).filter(Boolean)) {
-        if (!idSet.has(target)) fail(`${page}: ${ariaName} references missing id ${target}`);
+      const targets = match[1].trim().split(/\s+/).filter(Boolean);
+      for (const target of targets) {
+        if (!idSet.has(target)) fail(page + ': ' + ariaName + ' references missing id ' + target);
       }
     }
   }
@@ -144,19 +138,17 @@ for (const page of pages) {
     const type = attr(control, 'type');
     if (!id || type === 'hidden') continue;
     const labelled = attr(control, 'aria-label') || attr(control, 'aria-labelledby');
-    const labelFor = new RegExp(`<label\\b[^>]*\\sfor=["']${escapeRegExp(id)}["'][^>]*>`, 'i').test(html);
-    if (!labelled && !labelFor) fail(`${page}: form control #${id} has no explicit label`);
-  }
-
-  const refs = [...html.matchAll(/(?:href|src)=["']([^"']+)["']/gi)].map((match) => match[1]);
-')}["'][^>]*>`, 'i').test(html);
-    if (!labelled && !labelFor) fail(`${page}: form control #${id} has no explicit label`);
+    if (!labelled && !labelFors.has(id)) {
+      fail(page + ': form control #' + id + ' has no explicit label');
+    }
   }
 
   const refs = [...html.matchAll(/(?:href|src)=["']([^"']+)["']/gi)].map((match) => match[1]);
   for (const raw of refs) {
     const local = normalizeLocalReference(page, raw);
-    if (local && !referenceExists(local)) fail(`${page}: missing local reference ${raw} -> ${local}`);
+    if (local && !referenceExists(local)) {
+      fail(page + ': missing local reference ' + raw + ' -> ' + local);
+    }
   }
 }
 
@@ -177,31 +169,47 @@ if (!ecosystem.includes('MODARYX MODS et Nova Forge OS sont créés par la même
 }
 
 const cinematic = read('assets/modaryx-cinematic-system.css');
-if (!cinematic.includes('top:calc(var(--modaryx-header-height,76px) + 8px)')) fail('cinematic system: sticky section nav does not follow measured header height');
-if (!cinematic.includes('@media(hover:hover) and (pointer:fine)')) fail('cinematic system: hover elevation is not restricted to precise hover devices');
+if (!cinematic.includes('top:calc(var(--modaryx-header-height,76px) + 8px)')) {
+  fail('cinematic system: sticky section nav does not follow measured header height');
+}
+if (!cinematic.includes('@media(hover:hover) and (pointer:fine)')) {
+  fail('cinematic system: hover elevation is not restricted to precise hover devices');
+}
 if (!cinematic.includes('.card:focus-within')) fail('cinematic system: keyboard focus-within premium state missing');
 if (!cinematic.includes('-webkit-backdrop-filter')) fail('cinematic system: Safari backdrop-filter fallback missing');
 if (!cinematic.includes('-webkit-mask-image')) fail('cinematic system: Safari mask-image fallback missing');
-if (!cinematic.includes('overscroll-behavior-inline:contain')) fail('cinematic system: mobile section-nav overscroll containment missing');
+if (!cinematic.includes('overscroll-behavior-inline:contain')) {
+  fail('cinematic system: mobile section-nav overscroll containment missing');
+}
 
 const living = JSON.parse(read('data/living-world.json'));
 const expectedStages = ['baby', 'juvenile', 'adolescent', 'young-adult', 'adult'];
-if (living?.growthModel?.order?.join('|') !== expectedStages.join('|')) fail('living world: canonical shared stage order mismatch');
-if (living?.growthModel?.pace !== 'independent-per-species') fail('living world: independent pacing contract missing');
+if (living?.growthModel?.order?.join('|') !== expectedStages.join('|')) {
+  fail('living world: canonical shared stage order mismatch');
+}
+if (living?.growthModel?.pace !== 'independent-per-species') {
+  fail('living world: independent pacing contract missing');
+}
 for (const inhabitant of living?.inhabitants || []) {
   const order = (inhabitant?.stages || []).map((stage) => stage?.id);
-  if (order.join('|') !== expectedStages.join('|')) fail(`living world: ${inhabitant?.id || 'unknown'} stage order mismatch`);
+  if (order.join('|') !== expectedStages.join('|')) {
+    fail('living world: ' + (inhabitant?.id || 'unknown') + ' stage order mismatch');
+  }
   for (let i = 1; i < (inhabitant?.stages || []).length; i += 1) {
     if (!(inhabitant.stages[i].fromDay > inhabitant.stages[i - 1].fromDay)) {
-      fail(`living world: ${inhabitant?.id || 'unknown'} thresholds are not strictly increasing`);
+      fail('living world: ' + (inhabitant?.id || 'unknown') + ' thresholds are not strictly increasing');
     }
   }
 }
 
 const livingJs = read('assets/living-world.js');
-if (!livingJs.includes("config?.clock?.model === 'shared-world-utc'")) fail('living world: shared UTC clock model is not handled by the engine');
-if (!livingJs.includes('now.getUTCHours()')) fail('living world: shared UTC phase does not use UTC hours');
-
+new Function(livingJs);
+if (!livingJs.includes("config?.clock?.model === 'shared-world-utc'")) {
+  fail('living world: shared UTC clock model is not handled by the engine');
+}
+if (!livingJs.includes('now.getUTCHours()')) {
+  fail('living world: shared UTC phase does not use UTC hours');
+}
 const utcProbe = new Date('2026-09-19T23:30:00Z');
 if (utcProbe.getUTCHours() !== 23) fail('living world proof: UTC probe is not deterministic');
 
@@ -210,31 +218,51 @@ if (!livingCss.includes('prefers-reduced-motion')) fail('living world: prefers-r
 if (!livingCss.includes('html[data-motion=reduced]')) fail('living world: explicit reduced-motion guard missing');
 
 const index = read('index.html');
-for (const hook of ['data-world-phase', 'data-world-age', 'data-world-inhabitant="wolf"', 'data-world-inhabitant="dragon"', 'data-world-status']) {
-  if (!index.includes(hook)) fail(`index: living-world hook missing: ${hook}`);
+for (const hook of [
+  'data-world-phase',
+  'data-world-age',
+  'data-world-inhabitant="wolf"',
+  'data-world-inhabitant="dragon"',
+  'data-world-status'
+]) {
+  if (!index.includes(hook)) fail('index: living-world hook missing: ' + hook);
 }
 
 const sw = read('sw.js');
-if (!sw.includes("const MAX_RUNTIME_ENTRIES = 80")) fail('service worker: runtime entry cap is not 80');
-if (!sw.includes("'./data/living-world.json'")) fail('service worker: living-world data is not in fresh public paths');
-for (const heavy of ['./assets/modaryx-wolf-dragon-hero.webp', './assets/modaryx-world-portals.webp']) {
-  const precacheSection = sw.slice(sw.indexOf('const PRECACHE_PATHS'), sw.indexOf('const FRESH_PUBLIC_PATHS'));
-  if (precacheSection.includes(`'${heavy}'`)) fail(`service worker: heavyweight art returned to install precache: ${heavy}`);
+if (!sw.includes('const MAX_RUNTIME_ENTRIES = 80')) {
+  fail('service worker: runtime entry cap is not 80');
+}
+if (!sw.includes("'./data/living-world.json'")) {
+  fail('service worker: living-world data is not in fresh public paths');
 }
 
-const precacheSection = sw.slice(sw.indexOf('const PRECACHE_PATHS'), sw.indexOf('const FRESH_PUBLIC_PATHS'));
-if (!precacheSection.startsWith('const PRECACHE_PATHS')) fail('service worker: PRECACHE_PATHS section missing');
-const precacheRequests = [...precacheSection.matchAll(/'\.\/([^']*)'/g)].map((match) => match[1] || 'index.html');
+const precacheStart = sw.indexOf('const PRECACHE_PATHS');
+const freshStart = sw.indexOf('const FRESH_PUBLIC_PATHS');
+const precacheSection = sw.slice(precacheStart, freshStart);
+if (precacheStart < 0 || freshStart < 0 || !precacheSection.startsWith('const PRECACHE_PATHS')) {
+  fail('service worker: PRECACHE_PATHS section missing');
+}
+
+for (const heavy of ['./assets/modaryx-wolf-dragon-hero.webp', './assets/modaryx-world-portals.webp']) {
+  if (precacheSection.includes("'" + heavy + "'")) {
+    fail('service worker: heavyweight art returned to install precache: ' + heavy);
+  }
+}
+
+const precacheRequests = [...precacheSection.matchAll(/'\.\/([^']*)'/g)]
+  .map((match) => match[1] || 'index.html');
 const precacheFiles = [...new Set(precacheRequests.map((item) => item === '' ? 'index.html' : item))];
 let precacheBytes = 0;
 for (const relativePath of precacheFiles) {
   if (!exists(relativePath)) {
-    fail(`service worker: precache file missing: ${relativePath}`);
+    fail('service worker: precache file missing: ' + relativePath);
     continue;
   }
   precacheBytes += fs.statSync(path.join(root, relativePath)).size;
 }
-if (precacheBytes > 800000) fail(`service worker: precache budget exceeded: ${precacheBytes} > 800000`);
+if (precacheBytes > 800000) {
+  fail('service worker: precache budget exceeded: ' + precacheBytes + ' > 800000');
+}
 
 const checksumLines = read('SHA256SUMS.txt')
   .split(/\r?\n/)
@@ -246,25 +274,35 @@ const checksumPaths = new Set();
 for (const line of checksumLines) {
   const match = line.match(/^([0-9a-f]{64})\s{2}(.+)$/);
   if (!match) {
-    fail(`SHA256SUMS: malformed line: ${line}`);
+    fail('SHA256SUMS: malformed line: ' + line);
     continue;
   }
-  const [, expected, rawPath] = match;
+
+  const expected = match[1];
+  const rawPath = match[2];
   const relativePath = rawPath.replace(/^\.\//, '');
-  if (checksumPaths.has(relativePath)) fail(`SHA256SUMS: duplicate normalized path ${relativePath}`);
+
+  if (checksumPaths.has(relativePath)) {
+    fail('SHA256SUMS: duplicate normalized path ' + relativePath);
+  }
   checksumPaths.add(relativePath);
+
   if (!exists(relativePath)) {
-    fail(`SHA256SUMS: listed file missing: ${rawPath}`);
+    fail('SHA256SUMS: listed file missing: ' + rawPath);
     continue;
   }
+
   const actual = hashFile(relativePath);
-  if (actual !== expected) fail(`SHA256SUMS: mismatch ${rawPath} expected=${expected} actual=${actual}`);
+  if (actual !== expected) {
+    fail('SHA256SUMS: mismatch ' + rawPath + ' expected=' + expected + ' actual=' + actual);
+  }
   checksumCount += 1;
 }
 
 const result = {
   marker: failures.length ? 'FAIL_TARGETED_SITE_FIRST_SOURCE_PROOF' : 'PASS_TARGETED_SITE_FIRST_SOURCE_PROOF',
   pages: pages.length,
+  structuralA11yChecks: true,
   checksumCount,
   precacheUniqueFiles: precacheFiles.length,
   precacheRequests: precacheRequests.length,
@@ -273,7 +311,6 @@ const result = {
   precacheMargin: 800000 - precacheBytes,
   runtimeEntryCap: 80,
   livingWorldStages: expectedStages,
-  structuralA11yChecks: true,
   failures
 };
 
