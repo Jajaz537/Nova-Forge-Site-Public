@@ -1,4 +1,5 @@
 import {spawn} from 'node:child_process';
+import fs from 'node:fs';
 
 const ORIGIN = process.env.MODARYX_TEST_ORIGIN || 'http://127.0.0.1:4173';
 const CHROME_BIN = process.env.CHROME_BIN || 'google-chrome';
@@ -20,6 +21,41 @@ async function waitForJson(url, timeoutMs = 10000) {
     await sleep(120);
   }
   throw lastError || new Error('timeout waiting for ' + url);
+}
+
+async function stopLoopbackServer() {
+  const pidPath = '/tmp/modaryx-http.pid';
+  const pid = Number(fs.readFileSync(pidPath, 'utf8').trim());
+  if (!Number.isInteger(pid) || pid <= 0) throw new Error('invalid loopback server pid');
+  try { process.kill(pid, 'SIGTERM'); } catch {}
+  const deadline = Date.now() + 5000;
+  while (Date.now() < deadline) {
+    try {
+      await fetch(ORIGIN + '/index.html', {cache: 'no-store'});
+    } catch {
+      return;
+    }
+    await sleep(100);
+  }
+  throw new Error('loopback server did not stop');
+}
+
+async function startLoopbackServer() {
+  const server = spawn('python3', ['-m', 'http.server', '4173', '--bind', '127.0.0.1'], {
+    cwd: process.cwd(),
+    stdio: ['ignore', 'ignore', 'ignore']
+  });
+  fs.writeFileSync('/tmp/modaryx-http.pid', String(server.pid));
+  const deadline = Date.now() + 5000;
+  while (Date.now() < deadline) {
+    try {
+      const response = await fetch(ORIGIN + '/index.html', {cache: 'no-store'});
+      if (response.ok) return server;
+    } catch {}
+    await sleep(100);
+  }
+  try { server.kill('SIGTERM'); } catch {}
+  throw new Error('loopback server did not restart');
 }
 
 class Cdp {
@@ -143,15 +179,11 @@ try {
   const swReady = await waitFor(cdp, `(async () => {
     if (!('serviceWorker' in navigator)) return null;
     const reg = await navigator.serviceWorker.ready;
-    return reg?.active ? {state:reg.active.state,scope:reg.scope,controller:Boolean(navigator.serviceWorker.controller)} : null;
-  })()`, 'service worker ready', 12000);
+    return reg?.active?.state === 'activated' && navigator.serviceWorker.controller
+      ? {state:reg.active.state,scope:reg.scope,controller:true}
+      : null;
+  })()`, 'service worker activated and controlling', 12000);
   observations.serviceWorkerReady = swReady;
-  assert(swReady.state === 'activated', 'service worker not activated');
-
-  if (!swReady.controller) {
-    await navigate(cdp, 'index.html');
-    await waitFor(cdp, `(() => Boolean(navigator.serviceWorker.controller))()`, 'service worker controller');
-  }
 
   const initialCache = await evaluate(cdp, `(async () => {
     const names = await caches.keys();
@@ -191,13 +223,8 @@ try {
   assert(runtimeCache.hasStudioPage, 'creator studio page not cached after online visit');
   assert(runtimeCache.hasGamesPage, 'games page not cached after online visit');
 
-  await cdp.send('Network.emulateNetworkConditions', {
-    offline: true,
-    latency: 0,
-    downloadThroughput: 0,
-    uploadThroughput: 0,
-    connectionType: 'none'
-  });
+  await stopLoopbackServer();
+  observations.loopbackOffline = true;
 
   const offlineCatalogNav = await navigate(cdp, 'catalog.html', {allowError: true});
   observations.offlineCatalogNavigation = offlineCatalogNav.errorText || 'served';
@@ -248,13 +275,8 @@ try {
   assert(!offlineIndexNav.errorText, 'precache index offline navigation failed: ' + offlineIndexNav.errorText);
   assert(offlineIndex.main && offlineIndex.title.length > 0, 'offline index content missing');
 
-  await cdp.send('Network.emulateNetworkConditions', {
-    offline: false,
-    latency: 0,
-    downloadThroughput: -1,
-    uploadThroughput: -1,
-    connectionType: 'wifi'
-  });
+  const restartedServer = await startLoopbackServer();
+  observations.loopbackRecovered = Boolean(restartedServer?.pid);
 
   const onlineData = await evaluate(cdp, `(async () => {
     const response = await fetch('./data/catalog.json', {cache:'no-store'});
