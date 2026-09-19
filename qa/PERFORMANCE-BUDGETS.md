@@ -114,3 +114,22 @@ Le contrôle ciblé `qa/check-scalable-cache.mjs` a été exécuté après `node
 
 Cette évolution **ne vaut pas encore PASS PWA natif**. Restent PREUVE MANQUANTE : installation/activation HTTPS réelle, mise à jour après nouvelle publication, online → offline → online, quota navigateur, cache froid/chaud, CWV et appareils physiques. Les anciennes mesures proches de 800000 ci-dessus restent historiques pour leurs commits respectifs et ne doivent pas être utilisées comme état courant de cette branche isolée.
 
+## Monde vivant — impact ciblé — 19 septembre 2026
+
+Le lot `modaryx-living-world` ne réintroduit pas de médias lourds dans l'install-précache.
+
+Dérivation depuis le noyau mesuré à 110457 octets avant ce lot :
+
+- `index.html` : 18431 → 19050 octets, soit **+619 octets** dans le noyau ;
+- nouveau noyau dérivé : **111076 octets** ;
+- marge sous 800000 : **688924 octets**.
+
+Ressources nouvelles chargées en runtime, donc hors install-précache :
+
+- `assets/living-world.js` : **4336 octets** ;
+- `assets/living-world.css` : **3649 octets** ;
+- `data/living-world.json` : **1630 octets** ;
+- total runtime : **9615 octets**.
+
+Le JSON de chronologie est classé comme donnée fraîche explicite ; les CSS/JS restent couverts par le cache runtime. Le lot ne relève pas le seuil de 800000.
+

@@ -51,7 +51,8 @@ const FRESH_PUBLIC_PATHS = [
   './SHA256SUMS.txt',
   './data/catalog.json',
   './data/compatibility-graph.json',
-  './data/search-index.json'
+  './data/search-index.json',
+  './data/living-world.json'
 ];
 
 const STATIC_EXTENSIONS = /\.(?:css|js|json|svg|png|webp|avif|jpe?g|woff2?)$/i;

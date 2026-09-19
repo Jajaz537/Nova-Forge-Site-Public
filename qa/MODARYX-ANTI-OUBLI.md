@@ -84,3 +84,17 @@ Ces éléments étaient déjà partiellement représentés dans le registre par 
 - L'existence de schémas JSON, états UI ou contrats ne vaut jamais preuve qu'un service distant existe.
 - Ces quatre entrées doivent rester tracées jusqu'à livraison réelle ou décision produit explicite ; aucune suppression implicite avant la VF.
 
+## Monde vivant — exigence retenue pour la VF — 19 septembre 2026
+
+Décision utilisateur à conserver avant la VF : MODARYX ne doit pas rester une galerie d'images figées.
+
+- La direction visuelle générale actuelle est **approuvée** ; arrêter la recherche par nouvelles photos/illustrations tant qu'aucun besoin précis de production ne réouvre ce sujet.
+- Le monde doit évoluer avec le temps.
+- Le loup et le dragon doivent grandir progressivement dans la chronologie du monde.
+- Les animaux, habitants, gardes, lumières, eau et végétation doivent pouvoir gagner une activité discrète et cohérente au fil des versions.
+- Le héros reste occasionnel et ne doit pas dominer chaque scène.
+- Reduced motion doit couper les animations sans arrêter la progression logique du monde.
+- Une illustration composite seule n'est pas une preuve de « monde vivant » : la croissance visuelle individuelle nécessite des couches/éléments séparés et reste à fermer avant la VF si elle est retenue comme exigence visuelle finale.
+
+Première base technique : `data/living-world.json`, `assets/living-world.js`, `assets/living-world.css` et `qa/MODARYX-LIVING-WORLD-SYSTEM-20260919.md`.
+

@@ -318,3 +318,77 @@ Intégration :
 
 Cette preuve reste source/simulée. Installation/activation HTTPS réelle, update réel, cache froid/chaud, quotas navigateur et CWV restent **PREUVE MANQUANTE**.
 
+## Mise à jour — monde vivant approuvé et première couche technique — 19 septembre 2026
+
+Décision utilisateur : la direction visuelle actuelle est **approuvée**. Arrêt de la recherche par nouvelles photos/illustrations ; reprise du travail produit/technique. La cible reste un **monde vivant**, pas une suite d'images figées.
+
+### Branche isolée
+
+- base vérifiée avant écriture : branche PR #12 `design/modaryx-premium-hd-20260914-work` au HEAD `05eeaa250a1bbfd53cf5c45ee47d90468fae4aab` ;
+- continuation : `chatgpt/modaryx-living-world-20260919` ;
+- `main` non modifiée ;
+- aucune infrastructure critique modifiée.
+
+### Première implémentation monde vivant
+
+Ajouts :
+
+- `data/living-world.json` : chronologie partagée UTC ;
+- `assets/living-world.js` : moteur de progression ;
+- `assets/living-world.css` : mouvement de profondeur et lumière ambiante sobres ;
+- `index.html` : état du monde visible (phase, âge du monde, loup, dragon) ;
+- `sw.js` : chronologie classée comme donnée fraîche explicite ;
+- `qa/MODARYX-LIVING-WORLD-SYSTEM-20260919.md` : contrat d'architecture.
+
+Chronologie initiale :
+
+- loup : **Louveteau** à J0, juvénile à J45, adolescent à J120, jeune adulte à J270, adulte à J540 ;
+- dragon : **Dragonneau** à J0, juvénile à J60, adolescent à J150, jeune adulte à J330, adulte à J720.
+
+Ces seuils sont narratifs et pilotés par les données ; ils ne sont pas présentés comme des affirmations biologiques.
+
+### Mouvement et accessibilité
+
+- cycle local nuit/aube/jour/crépuscule ;
+- ambiance lumineuse et mouvement de profondeur très lents ;
+- le réglage `Mouvement réduit` et `prefers-reduced-motion` désactivent les animations ;
+- la chronologie et la croissance logique continuent même en reduced motion.
+
+### Limite explicitement conservée
+
+Le hero actuel reste une illustration composite. La progression d'âge est désormais réelle dans les données et l'UI, mais **la croissance visuelle individuelle du loup et du dragon n'est pas encore démontrée**. Pour cela, il faudra séparer décor, loup, dragon, héros et couches d'ambiance afin de pouvoir faire évoluer les personnages sans régénérer tout le panorama.
+
+État : **EN COURS**, pas de faux PASS visuel.
+
+### Micro-preuve ciblée
+
+Résultat : **PASS CIBLÉ** sur le périmètre source :
+
+- `living-world.js` compilable ;
+- JSON parse + schéma valides ;
+- Louveteau à J0 et transition juvénile J45 ;
+- Dragonneau à J0 et transition juvénile J60 ;
+- hooks home présents ;
+- reduced motion présent ;
+- donnée monde vivant couverte par le service worker ;
+- empreintes SHA-256 de `index.html`, `sw.js`, `assets/living-world.js`, `assets/living-world.css` et `data/living-world.json` réconciliées.
+
+Cette preuve ne vaut pas validation visuelle navigateur ni appareil physique.
+
+### Octets
+
+- noyau précédent : 110457 octets ;
+- `index.html` : +619 octets ;
+- noyau dérivé : **111076 octets** ;
+- marge sous 800000 : **688924 octets** ;
+- JS/CSS/JSON monde vivant runtime : **9615 octets**, hors install-précache.
+
+### Prochain point logique
+
+1. vérifier Git frais et l'absence de collision avec la branche Work ;
+2. intégrer ce micro-lot de manière contrôlée si la branche Work n'a pas bougé ;
+3. obtenir une preview navigateur réelle du monde vivant ;
+4. vérifier desktop/mobile/reduced-motion sans full replay ;
+5. poursuivre la séparation future des couches de personnages afin que leur croissance devienne réellement visible ;
+6. continuer la finition Premium HD et les preuves externes restantes.
+
