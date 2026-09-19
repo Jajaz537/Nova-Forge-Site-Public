@@ -1706,3 +1706,36 @@ Budget :
 - **BLOQUÉ / décision externe** — activation de météo réelle en production tant que fournisseur, licence et attribution ne sont pas validés ;
 - aucune configuration Cloudflare critique, DNS, secret ou `main` modifié.
 
+## Intégration contrôlée — synchronisation monde réel — 20 septembre 2026
+
+PR #43 : **TERMINÉE — fusionnée**.
+
+- commit d'intégration : `e728670d763bdd872b670b798b323e1cfc8597f7` ;
+- candidat produit prouvé : `1e2a6969c4e28f36f6bb13527e5386f5fe4f67e8` ;
+- Local Functional Browser `35473223025` — **success** avec `PASS_TARGETED_REAL_WORLD_SYNC` et `PASS_TARGETED_REAL_WORLD_SYNC_BROWSER` ;
+- Lab Performance `35473223046` — **success / PASS CIBLÉ** ;
+- accueil mobile : LCP **2180 ms / CLS 0** ;
+- accueil desktop : LCP **2072 ms / CLS 0,0033** ;
+- Site First, reflow, accessibilité Chromium, PWA offline/update/installability, chronique vivante, état offline du monde et contrat de croissance : **success** sur le candidat.
+
+Fonctionnalité intégrée :
+
+- saison locale automatique Nord / Sud / tropical ;
+- heure locale intégrée à la lentille atmosphérique ;
+- fusion saison + heure + météo normalisée ;
+- effets pluie, neige, brouillard et orage avec reduced-motion ;
+- fallback par fuseau navigateur sans permission GPS ;
+- endpoint same-origin `/api/local-context` préparé pour contexte réseau approximatif Cloudflare ;
+- aucune ville, code postal ou coordonnée exacte renvoyée au navigateur ;
+- coordonnées fournisseur arrondies à **0,1°** côté serveur ;
+- météo fournisseur **désactivée par défaut**.
+
+État :
+
+- **TERMINÉ** — moteur automatique saison + heure et architecture météo/confidentialité ciblée ;
+- **PREUVE MANQUANTE** — exécution réelle de la Pages Function sur preview HTTPS avec `request.cf` ;
+- **BLOQUÉ / décision externe** — météo réelle de production tant que fournisseur, licence et attribution ne sont pas validés ;
+- noyau précaché : **115848 octets** ;
+- marge : **684152 octets** ;
+- `main`, DNS, DNSSEC, IONOS, secrets et configuration Cloudflare critique : inchangés.
+
