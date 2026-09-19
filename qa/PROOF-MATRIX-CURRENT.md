@@ -10,6 +10,7 @@ Cette matrice remplace les anciens « prochains blocs » devenus partiellement a
 | 16 pages, composition Loup/Dragon | `finish-line/README.md`, 19 captures | Revue desktop documentée, défauts Studio/Catalogue/Projets corrigés. Tous les états visuels ne sont pas certifiés. |
 | Index jeux (17e page) | `games-directory-native-20260916.json` | Sur fdb51cb : entrée Catalogue, trois fiches au clavier, résultat de recherche ; quatre reflows 320/430/768/1440 sans débordement. Haut mobile et composition desktop inspectés. Démonstrations seulement. |
 | Reflow initial des 16 pages | `finish-line/final-reflow.json` | 32 mesures à 320/960 ; contrôles ciblés postérieurs dans les dossiers ci-dessous. Ni zoom natif ni téléphone physique. |
+| Zoom/reflow 200 % ciblé | `zoom-reflow-20260919/README.md`, `zoom-reflow-20260919/results.json` | Firefox 156 et Edge/Chromium : 24 contrôles sur six pages, deux largeurs CSS équivalentes au zoom 200 %, menu compact ouvert ; aucun débordement, contrôle coupé ou lien masqué. Preuve bornée, pas de lecteur d'écran, appareil physique, 400 % ou VF. |
 | Studio, erreurs et accès correctif | `studio-errors-browser-20260915.json`, `studio-error-navigation-20260915.json` | Liste complète, correction progressive et accès clavier aux champs observés. |
 | Imports différés | `import-race-checks.json`, `studio-import-state-checks.json` | Révisions de brouillon : protection contre les lectures périmées en simulation Node. Course temporelle native non prouvée. |
 | Brouillons Studio/Communauté | `draft-edit-state-20260915.json`, `draft-persistence-browser-20260915.json` | Édition non sauvegardée signalée ; validation, sauvegarde et rechargement ciblés. Pas de serveur de publication. |
@@ -31,7 +32,7 @@ Cette matrice remplace les anciens « prochains blocs » devenus partiellement a
 
 ## Ce qui reste réellement ouvert
 
-- **PREUVE MANQUANTE** : lecteur d’écran natif, zoom navigateur effectif 200/400 %, appareils physiques, autres moteurs ; aucun équivalent DOM n’est présenté comme ces preuves.
+- **PREUVE MANQUANTE** : lecteur d’écran natif, zoom/reflow 400 %, appareils physiques et tactile réel. La passe 200 % ciblée est documentée sur Firefox et Chromium ; elle ne couvre pas toutes les pages ni tous les états.
 - **PREUVE MANQUANTE** : cycle PWA déconnecté/mise à jour/reprise, conditions réseau/cache froid maîtrisées, LCP/CLS/INP représentatifs. L’environnement de recette ne fournit pas ces contrôles.
 - **EN COURS** : recette exhaustive de chaque état interactif ; les preuves ci-dessus sont ciblées et ne valent pas toutes les combinaisons d’états.
 - **EN COURS / capacités absentes** : hubs GTA 6/RDR2, pages de catégories et corpus autorisé (index des trois jeux de démonstration ajouté), profils éditables/comptes, publication et modération distantes, Guide connecté, Storage Resolver/Repair Network, pont OS. Voir `MODARYX-ANTI-OUBLI.md`. Ce sont des manques produit, pas seulement des preuves externes.

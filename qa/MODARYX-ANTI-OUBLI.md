@@ -33,7 +33,7 @@ Les observations ci-dessous portent sur les fichiers du candidat local issu de `
 | Pont vers les OS Nova Forge | `public-status.json` : `nova_forge_os_bridge: not_connected` | Intégration historique non connectée ; ne pas fusionner les produits ou suggérer une session partagée. | EN COURS — capacité non livrée |
 | Storage Resolver / Repair Network | Deux schémas dédiés ; `public-status.json` : `not_connected` | Contrats seulement. Ne pas fabriquer une preuve de stockage, réparation ou récupération distante. | EN COURS — capacité non livrée |
 | SEO par jeu / catégorie / mod | HTML actuels, `sitemap.xml`, `robots.txt` | Architecture éditoriale cible incomplète. Vérifier métadonnées contre les pages réellement disponibles avant changement ; préserver la configuration actuelle dans ce lot. | EN COURS |
-| Responsive / navigation / accessibilité | Shell, contrôles et styles des seize pages | Revue visuelle et parcours clavier, zoom, états et mouvement réduit à documenter page par page. | EN COURS |
+| Responsive / navigation / accessibilité | Shell, contrôles et styles des seize pages | Zoom/reflow 200 % ciblé acquis sur six pages dans Firefox et Chromium ; lecteur d'écran, 400 %, tactile et états restants à documenter. | EN COURS |
 | Performance | Site statique, assets locaux, service worker à liste autorisée | Coûts et chargement à mesurer ; ne pas conclure « optimisé » à partir de la seule fluidité perçue. | PREUVE MANQUANTE |
 
 ## Surface à couvrir dans la matrice QA

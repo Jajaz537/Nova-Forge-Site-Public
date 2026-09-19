@@ -25,7 +25,7 @@ Périmètre : MODARYX / MODARYX MODS, plateforme web. Nova Forge OS est un produ
 
 ## PREUVE MANQUANTE
 
-- Lecteur d'écran réel, zoom navigateur 200/400 %, appareils physiques, tactile réel et matrice multi-navigateurs.
+- Lecteur d'écran réel, zoom/reflow 400 %, appareils physiques et tactile réel. La passe 200 % ciblée couvre désormais six pages dans Firefox et Chromium, sans valoir recette exhaustive.
 - Performance de rendu et mesures CWV sur hébergement réel ; poids statiques seulement mesurés dans `qa/PERFORMANCE-BUDGETS.md`.
 - Installation PWA, cycle de mise à jour et hors ligne HTTPS réels. Le cache a des tests simulés, pas un PASS navigateur natif.
 - Contraste exhaustif des gradients/transparences et état de chaque composant.
@@ -36,6 +36,12 @@ Périmètre : MODARYX / MODARYX MODS, plateforme web. Nova Forge OS est un produ
 Aucun artefact de téléchargement autorisé ; comptes, Guide, publication et services distants non connectés. Hubs jeux GTA6/RDR2 et corpus éditorial/médias correspondants encore manquants. Aucun de ces éléments n'est réputé terminé par la présence d'un schéma.
 
 Une PR, un commit, un build ou une fusion ne clôture pas ces écarts. La surveillance d'achèvement ne doit pas notifier une VF à partir de ce document.
+
+## Zoom/reflow 200 % ciblé — 19 septembre 2026
+
+Sur le HEAD `b489b0a`, Firefox 156 et Edge/Chromium ont rendu l’accueil, le Catalogue, le Creator Studio, la Communauté, la Sécurité et l’index Jeux à deux largeurs équivalentes au reflow 200 %. Les 24 combinaisons passent sans débordement horizontal, contrôle coupé, élément interactif hors écran ni lien de menu compact masqué. Aucun défaut reproductible n’a nécessité de correction source. Preuves : `qa/zoom-reflow-20260919/README.md` et `results.json`.
+
+Cette passe ferme seulement la lane visuelle 200 % sur ce périmètre. Le 400 %, le lecteur d’écran, le tactile, les appareils physiques et les états non exercés restent ouverts. **VF NON VALIDÉE.**
 
 ## Gate source consolidée — 16 septembre 2026
 
