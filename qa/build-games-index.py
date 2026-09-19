@@ -3,7 +3,7 @@ from pathlib import Path
 from html import escape
 import json, re, sys
 ROOT = Path(__file__).resolve().parents[1]
-payload = json.loads((ROOT/'data/catalog.json').read_text())
+payload = json.loads((ROOT/'data/catalog.json').read_text(encoding='utf-8'))
 assert payload['schemaVersion'] == 1 and payload['dataClass'] == 'demonstration'
 games = {}
 project_ids = set()
@@ -26,10 +26,10 @@ for key, game in sorted(games.items(), key=lambda pair: pair[1]['name'].casefold
     count = len(game['items'])
     cards = ''.join(f'<li><a class="button" href="../project-{item["id"]}.html">{escape(item["name"])}</a></li>' for item in game['items'])
     parts.append(f'<article class="project-section" id="{key}"><p class="eyebrow">{count} fiche'+('s' if count != 1 else '')+f' de démonstration</p><h2>{escape(game["name"])}</h2><p>Consultez le projet, sa compatibilité déclarée et ses limites. Aucun fichier à télécharger.</p><ul class="game-projects">{cards}</ul></article>')
-source = (ROOT/'project.html').read_text()
+source = (ROOT/'project.html').read_text(encoding='utf-8')
 source = source.replace('Fiches des trois projets de démonstration MODARYX MODS.', 'Les jeux représentés dans le catalogue de démonstration MODARYX MODS et leurs fiches.')
 source = source.replace('<title>Projets —', '<title>Jeux —', 1)
-source = source.replace('</title>', '</title>\\n  <link rel="canonical" href="https://modaryxmods.com/games/">', 1)
+source = source.replace('</title>', '</title>\n  <link rel="canonical" href="https://modaryxmods.com/games/">', 1)
 source = source.replace('href="./','href="../').replace('src="./','src="../')
 start, end = source.index('  <main '), source.index('  </main>') + len('  </main>')
 main = '''  <main id="main" class="project-page">
@@ -40,8 +40,8 @@ main = '''  <main id="main" class="project-page">
   </main>'''
 source = source[:start] + main + source[end:]
 if '--check' in sys.argv:
-    assert (ROOT/'games/index.html').read_text() == source, 'Regenerate with python3 qa/build-games-index.py'
+    assert (ROOT/'games/index.html').read_text(encoding='utf-8') == source, 'Regenerate with python3 qa/build-games-index.py'
 else:
     (ROOT/'games').mkdir(exist_ok=True)
-    (ROOT/'games/index.html').write_text(source)
+    (ROOT/'games/index.html').write_text(source, encoding='utf-8', newline='\n')
 print(f'{len(games)} jeux, {sum(len(g["items"]) for g in games.values())} fiches : games/index.html')

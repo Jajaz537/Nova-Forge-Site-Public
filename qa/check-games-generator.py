@@ -2,7 +2,7 @@
 from pathlib import Path
 import copy, json, shutil, subprocess, sys, tempfile
 ROOT = Path(__file__).resolve().parents[1]
-data = json.loads((ROOT/'data/catalog.json').read_text())
+data = json.loads((ROOT/'data/catalog.json').read_text(encoding='utf-8'))
 checks = []
 def run(payload, valid=True):
     with tempfile.TemporaryDirectory() as directory:
@@ -11,21 +11,21 @@ def run(payload, valid=True):
             (root/name).mkdir()
         shutil.copy(ROOT/'qa/build-games-index.py', root/'qa/build-games-index.py')
         shutil.copy(ROOT/'project.html', root/'project.html')
-        (root/'data/catalog.json').write_text(json.dumps(payload))
+        (root/'data/catalog.json').write_text(json.dumps(payload), encoding='utf-8')
         target = root/'games/index.html'
-        target.write_text('existing page')
-        result = subprocess.run([sys.executable, str(root/'qa/build-games-index.py')], capture_output=True, text=True)
+        target.write_text('existing page', encoding='utf-8')
+        result = subprocess.run([sys.executable, str(root/'qa/build-games-index.py')], capture_output=True, text=True, encoding='utf-8')
         if not valid:
             assert result.returncode != 0, 'Invalid data unexpectedly published'
-            assert target.read_text() == 'existing page', 'Invalid generation overwrote prior output'
+            assert target.read_text(encoding='utf-8') == 'existing page', 'Invalid generation overwrote prior output'
             return ''
         assert result.returncode == 0, result.stderr
-        html = target.read_text()
+        html = target.read_text(encoding='utf-8')
         check = subprocess.run([sys.executable, str(root/'qa/build-games-index.py'), '--check'], capture_output=True)
         assert check.returncode == 0
-        target.write_text(html+'drift')
+        target.write_text(html+'drift', encoding='utf-8')
         check = subprocess.run([sys.executable, str(root/'qa/build-games-index.py'), '--check'], capture_output=True)
-        assert check.returncode != 0 and target.read_text() == html+'drift'
+        assert check.returncode != 0 and target.read_text(encoding='utf-8') == html+'drift'
         return html
 html = run(data)
 assert html.count('1 fiche de démonstration') == 3
@@ -52,5 +52,5 @@ for mutation in ['empty','path','download','game-conflict']:
     run(payload, False)
 checks.append('Empty catalogue, invalid path, downloadable record and conflicting game identity preserve prior page')
 report = {'result':'PASS','scope':'Five grouped isolated source scenarios; not browser proof','checks':checks}
-(ROOT/'qa/games-generator-checks.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+(ROOT/'qa/games-generator-checks.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n', encoding='utf-8', newline='\n')
 print(json.dumps(report,ensure_ascii=False,indent=2))
