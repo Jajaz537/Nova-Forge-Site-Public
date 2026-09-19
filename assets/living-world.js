@@ -84,10 +84,12 @@
   function validVisualGrowth(data) {
     const visual = data?.visualGrowth;
     if (!visual || visual.model !== 'layered-stage-assets-v1') return false;
+    if (!['awaiting-assets', 'ready'].includes(visual.status)) return false;
     if (visual.activation !== 'atomic-current-stage' || visual.fallback !== 'composite-hero') return false;
     if (visual.assetPolicy?.loading !== 'current-stage-only' || visual.assetPolicy?.cache !== 'runtime-on-demand') return false;
     if (!Number.isFinite(visual.canvas?.width) || !Number.isFinite(visual.canvas?.height)) return false;
 
+    if (!Array.isArray(visual.slots) || visual.slots.length !== (data.inhabitants || []).length) return false;
     const ids = new Set();
     for (const inhabitant of data.inhabitants || []) {
       const slot = visualSlotFor(inhabitant.id, visual);
@@ -97,10 +99,12 @@
       if (keys.join('|') !== REQUIRED_GROWTH_ORDER.join('|')) return false;
       for (const stageId of REQUIRED_GROWTH_ORDER) {
         const value = slot.stages[stageId];
+        if (visual.status === 'ready' && typeof value !== 'string') return false;
         if (value !== null && resolveVisualAsset(value, visual) === null) return false;
       }
     }
 
+    if (visual.status === 'ready' && typeof visual.environmentAsset !== 'string') return false;
     if (visual.environmentAsset !== null && resolveVisualAsset(visual.environmentAsset, visual) === null) return false;
     return true;
   }
@@ -135,7 +139,9 @@
         node.dataset.visualReady = 'false';
         if (stage) node.dataset.growthStage = stage.id;
       }
-      root.dataset.worldVisualGrowth = visual?.status || 'awaiting-assets';
+      root.dataset.worldVisualGrowth = visual?.status === 'ready'
+        ? 'fallback'
+        : visual?.status || 'awaiting-assets';
       return;
     }
 
