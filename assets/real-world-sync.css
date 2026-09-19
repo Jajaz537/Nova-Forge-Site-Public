@@ -10,9 +10,6 @@ html[data-reality-sync=active] .modaryx-realm-art{
     contrast(var(--mx-weather-contrast,1));
   transition:filter 1.8s ease;
 }
-.world-local-context{grid-column:1/-1!important;display:flex!important;align-items:baseline;gap:.55rem;margin:0!important;padding:7px 10px 2px!important;background:transparent!important;border-top:1px solid rgba(112,164,219,.12);color:#aeb8c1;font-size:.72rem;line-height:1.4}
-.world-local-context strong{flex:0 0 auto;color:#a9c8e8;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase}
-.world-weather-attribution{margin-left:auto;color:#8798a8;font-size:.64rem;text-decoration:underline;text-underline-offset:.16rem}
 .modaryx-realm-hero .hero-grid{position:relative;z-index:1}
 .real-world-weather-layer{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:calc(.18 + var(--mx-weather-intensity,0) * .42);transition:opacity 1.2s ease}
 .real-world-weather-layer:before,.real-world-weather-layer:after{content:"";position:absolute;inset:-20%;pointer-events:none}
@@ -46,4 +43,3 @@ html[data-local-climate=tropical] .living-world-status{border-color:rgba(116,187
 html[data-motion=reduced] .real-world-weather-layer:before,
 html[data-motion=reduced] .real-world-weather-layer:after{animation:none!important}
 @media(prefers-reduced-motion:reduce){.real-world-weather-layer:before,.real-world-weather-layer:after{animation:none!important}}
-@media(max-width:600px){.world-local-context{display:grid!important;gap:.2rem}.world-weather-attribution{margin-left:0}}
