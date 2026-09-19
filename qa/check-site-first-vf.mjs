@@ -110,6 +110,13 @@ for (const inhabitant of living?.inhabitants || []) {
   }
 }
 
+const livingJs = read('assets/living-world.js');
+if (!livingJs.includes("config?.clock?.model === 'shared-world-utc'")) fail('living world: shared UTC clock model is not handled by the engine');
+if (!livingJs.includes('now.getUTCHours()')) fail('living world: shared UTC phase does not use UTC hours');
+
+const utcProbe = new Date('2026-09-19T23:30:00Z');
+if (utcProbe.getUTCHours() !== 23) fail('living world proof: UTC probe is not deterministic');
+
 const livingCss = read('assets/living-world.css');
 if (!livingCss.includes('prefers-reduced-motion')) fail('living world: prefers-reduced-motion guard missing');
 if (!livingCss.includes('html[data-motion=reduced]')) fail('living world: explicit reduced-motion guard missing');

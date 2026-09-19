@@ -4,7 +4,18 @@ on:
   push:
     branches:
       - design/modaryx-premium-hd-20260914-work
-      - chatgpt/modaryx-vf-source-proof-20260919
+    paths:
+      - '.github/workflows/modaryx-vf-targeted-source-proof.yml'
+      - 'qa/check-site-first-vf.mjs'
+      - '*.html'
+      - 'games/**'
+      - 'assets/**'
+      - 'data/**'
+      - 'sw.js'
+      - 'SHA256SUMS.txt'
+  pull_request:
+    branches:
+      - design/modaryx-premium-hd-20260914-work
     paths:
       - '.github/workflows/modaryx-vf-targeted-source-proof.yml'
       - 'qa/check-site-first-vf.mjs'

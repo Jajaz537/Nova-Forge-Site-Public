@@ -574,3 +574,24 @@ Le workflow CodeQL du HEAD `442477b69fdcb4c8f8aa38eb9bc03e80d20129b6` est mainte
 
 Cette réussite ferme uniquement le contrôle CodeQL de ce HEAD ; elle ne change pas l'état des preuves navigateur, accessibilité, appareils, CWV ou VF.
 
+## Correction ciblée — phase du monde partagée en UTC — 19 septembre 2026
+
+Erreur exacte isolée : `data/living-world.json` déclarait `clock.model: shared-world-utc`, mais `assets/living-world.js` calculait encore la phase avec `Date.getHours()`. Deux visiteurs situés dans des fuseaux différents pouvaient donc voir des phases différentes au même instant, contradiction avec la chronologie partagée.
+
+Correction isolée sur `chatgpt/modaryx-shared-utc-clock-fix-20260919`, base fraîche `b2c21c6f7620b887356bef2e2dfdbdadf15f4263` :
+
+- `worldHourFor()` utilise `getUTCHours()` pour le modèle `shared-world-utc` ;
+- fallback local conservé uniquement pour un futur modèle non partagé ;
+- le contrôle Site First exige désormais explicitement le chemin UTC ;
+- empreinte `assets/living-world.js` réconciliée ;
+- workflow Site First étendu aux pull requests vers la branche Work pour obtenir les micro-preuves avant intégration.
+
+Impact :
+
+- moteur monde vivant : **5152 octets** ;
+- runtime monde vivant total : **11232 octets** ;
+- noyau install-précaché : inchangé à **111822 octets** ;
+- `main` et infrastructure critique : inchangées.
+
+État avant intégration : **EN COURS — micro-preuve CI à obtenir sur la PR**.
+

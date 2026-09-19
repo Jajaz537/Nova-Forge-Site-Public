@@ -42,15 +42,22 @@
     return active ? {...active, days} : null;
   }
 
+  function worldHourFor(now) {
+    return config?.clock?.model === 'shared-world-utc'
+      ? now.getUTCHours()
+      : now.getHours();
+  }
+
   function dayPhaseFor(now) {
     const phases = Array.isArray(config?.dayPhases)
       ? config.dayPhases
           .filter((phase) => Number.isFinite(phase?.fromHour) && typeof phase?.id === 'string')
           .sort((a, b) => a.fromHour - b.fromHour)
       : [];
+    const hour = worldHourFor(now);
     let active = phases[0] || {id: 'day', label: 'Monde vivant'};
     for (const phase of phases) {
-      if (now.getHours() >= phase.fromHour) active = phase;
+      if (hour >= phase.fromHour) active = phase;
       else break;
     }
     return active;
