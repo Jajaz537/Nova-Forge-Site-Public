@@ -205,3 +205,16 @@ Décision utilisateur explicitement retenue pour la VF :
 - asset gardé **non référencé** ; `visualGrowth.status=awaiting-assets` inchangé ;
 - couches compagnon : **3/10 TERMINÉES** ;
 - **EN COURS** — loup jeune adulte / adulte + cinq stades dragon.
+
+
+## Asset compagnon — Loup jeune adulte — 20 septembre 2026
+
+- PR #50 : **TERMINÉE — fusionnée** au commit `75f264a347945f9771829201ffd7821d1f83fb8f` ;
+- asset réel : `assets/living-world/wolf-young-adult.png` ;
+- dimensions : **1600 × 900** ;
+- PNG RGBA, `alpha=true` ;
+- SHA-256 : `137d2bfee47bd270c7760474c7c83cb5cf596355966f364f1d208b9fcdb14535` ;
+- `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ; Source, PWA Offline, Reflow Chromium, Accessibility Chromium et Lab Performance : **success** ;
+- asset gardé **non référencé** ; `visualGrowth.status=awaiting-assets` inchangé ;
+- couches compagnon : **4/10 TERMINÉES** ;
+- **EN COURS** — loup adulte + cinq stades dragon.
