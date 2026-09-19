@@ -45,3 +45,20 @@ Accueil : illustration immersive et titre éditorial serif. Écosystème : panor
 - `assets/modaryx-wolf-dragon-hero.webp` : 212218 octets.
 
 - `assets/modaryx-world-portals.webp` : 180174 octets.
+
+## Finition d'interaction partagée — 19 septembre 2026
+
+Lot ciblé de finition VF sur les 16 pages secondaires qui chargent `assets/modaryx-cinematic-system.css`.
+
+Décisions :
+
+- la navigation de section sticky suit désormais la **hauteur réellement mesurée du header** via `--modaryx-header-height`, au lieu d'un `76px` fixe ;
+- les élévations au survol sont limitées aux périphériques disposant d'un **hover précis** afin d'éviter les états collants/décalages sur tactile ;
+- les cartes reçoivent un état `:focus-within` premium équivalent pour le clavier, sans imposer de déplacement ;
+- les surfaces avec blur ajoutent les préfixes Safari `-webkit-backdrop-filter` ;
+- le voile de grille ajoute `-webkit-mask-image` ;
+- la navigation horizontale mobile limite le sur-scroll et conserve le défilement tactile natif ;
+- le contrôle Site First impose désormais la présence du système cinématique partagé sur toutes les pages secondaires.
+
+Le home conserve son système visuel dédié et n'est pas forcé à charger cette feuille secondaire.
+
