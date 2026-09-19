@@ -250,3 +250,20 @@ La correction isole donc le runtime de croissance visuelle dans `assets/living-w
 
 Le module futur précharge atomiquement l'environnement + les deux couches du stade courant avant tout remplacement, puis échoue vers le composite si un asset manque ou ne charge pas.
 
+## Chronique vivante partagée — 19 septembre 2026
+
+Le monde vivant expose désormais une **chronique ambiante déterministe** distincte des stades de croissance.
+
+Le modèle `ambientSignals` utilise :
+
+- une cadence de **3 heures** ;
+- l'heure du monde partagé ;
+- le nombre de jours écoulés depuis l'epoch ;
+- les phases `dawn / day / dusk / night`.
+
+Le signal sélectionné reste identique pour tous les visiteurs pendant le même créneau logique et change avec la chronologie, sans compte ni backend.
+
+Les textes décrivent une activité calme et cohérente avec la direction artistique approuvée : gardes, ateliers, marchés, oiseaux, faune, patrouilles, quais et veilleurs. Ils n'affirment pas que ces personnages sont déjà rendus visuellement dans le panorama.
+
+La croissance loup/dragon reste indépendante de cette chronique.
+

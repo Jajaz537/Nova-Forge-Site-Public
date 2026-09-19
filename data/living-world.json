@@ -161,5 +161,74 @@
         }
       }
     ]
+  },
+  "ambientSignals": {
+    "model": "shared-world-cycle-v1",
+    "cadenceHours": 3,
+    "entries": [
+      {
+        "id": "dawn-watch",
+        "phases": [
+          "dawn"
+        ],
+        "text": "Les gardes relèvent la veille · les oiseaux quittent les remparts"
+      },
+      {
+        "id": "dawn-paths",
+        "phases": [
+          "dawn"
+        ],
+        "text": "Les sentiers s’éclairent · les premiers ateliers ouvrent"
+      },
+      {
+        "id": "day-market",
+        "phases": [
+          "day"
+        ],
+        "text": "Les ateliers travaillent · les marchés et jardins reprennent vie"
+      },
+      {
+        "id": "day-wildlife",
+        "phases": [
+          "day"
+        ],
+        "text": "Des oiseaux longent les falaises · la faune gagne les lisières"
+      },
+      {
+        "id": "day-patrol",
+        "phases": [
+          "day"
+        ],
+        "text": "Une patrouille traverse les ponts · les routes restent paisibles"
+      },
+      {
+        "id": "dusk-return",
+        "phases": [
+          "dusk"
+        ],
+        "text": "Les patrouilles rentrent · les lanternes s’allument près des ponts"
+      },
+      {
+        "id": "dusk-harbor",
+        "phases": [
+          "dusk"
+        ],
+        "text": "Les quais ralentissent · les lumières gagnent les façades"
+      },
+      {
+        "id": "night-watch",
+        "phases": [
+          "night"
+        ],
+        "text": "Les veilleurs parcourent les remparts · le royaume se calme"
+      },
+      {
+        "id": "night-wildlife",
+        "phases": [
+          "night"
+        ],
+        "text": "La vie nocturne reprend dans les bois · les chemins se font discrets"
+      }
+    ]
   }
 }

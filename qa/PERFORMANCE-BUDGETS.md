@@ -267,3 +267,14 @@ Après isolation :
 
 Le noyau install-précaché revient donc à **114977 octets**, marge **685023 octets** sous 800000. La micro-preuve performance doit confirmer cette correction avant fusion.
 
+## Chronique vivante — impact runtime
+
+Delta du candidat par rapport à la base `7f5a1309...` :
+
+- `living-world.js` : **+1241 octets** ;
+- `living-world.css` : **+432 octets** ;
+- `living-world.json` : **+1707 octets** ;
+- `index.html` : **+149 octets**.
+
+Le noyau précaché dérivé passe de **114977** à **115126 octets**, soit **684874 octets** de marge sous 800000. Les données/JS/CSS du monde vivant restent hors précache cœur conformément à l'architecture scalable-cache.
+

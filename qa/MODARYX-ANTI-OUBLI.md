@@ -150,3 +150,12 @@ Statuts à conserver :
 - **EN COURS** — production/intégration des vrais assets loup + dragon + environnement séparé ;
 - la croissance visuelle individuelle ne devient **TERMINÉE** qu'après présence, rendu et preuve des assets réels.
 
+## Monde vivant — chronique ambiante partagée — 19 septembre 2026
+
+La chronologie inclut désormais une chronique déterministe par créneaux de 3 heures : gardes, ateliers, marchés, oiseaux, faune, patrouilles, quais et veilleurs.
+
+- **TERMINÉ** — logique partagée, sélection déterministe et présentation accessible ;
+- **TERMINÉ** — performance/reflow/accessibilité ciblés du candidat ;
+- **EN COURS** — représentation visuelle réelle des habitants, animaux et compagnons quand les assets Premium HD correspondants existent ;
+- ne jamais confondre un signal narratif avec une preuve que le personnage est visible dans l'image.
+

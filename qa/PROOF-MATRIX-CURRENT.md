@@ -317,3 +317,25 @@ Preuves :
 
 Portée : Chromium sur loopback de confiance. L'installation manuelle sur preview HTTPS publique et appareil physique reste une preuve distincte.
 
+## Chronique vivante partagée — 19 septembre 2026
+
+PR #42.
+
+Premier run dédié `35471407486` : **FAIL ciblé du harnais** avant observation produit, pour une parenthèse manquante dans `qa/check-living-chronicle.mjs`. Correction limitée au script QA ; aucun full replay.
+
+Run corrigé `35471449672` : **success / PASS CIBLÉ** — marker `PASS_TARGETED_LIVING_CHRONICLE`.
+
+Preuves :
+
+- signal déterministe stable dans un même créneau de 3 heures ;
+- couverture aube / jour / crépuscule / nuit ;
+- exemples observés : relève des gardes, faune des lisières, retour des patrouilles, vie nocturne ;
+- croissance logique du loup et du dragon inchangée.
+
+Même candidat :
+
+- performance labo `35471449668` — **success**, accueil mobile LCP **2128 ms / CLS 0**, desktop LCP **2060 ms / CLS 0,0021** ;
+- Site First Source, reflow, accessibilité Chromium, PWA offline/update/installability, fichiers réels, fonctions locales, croissance en couches et asset gate — **success**.
+
+Portée : la chronique rend le monde narrativement vivant et partagé ; elle ne prétend pas que les habitants cités sont déjà rendus visuellement dans le panorama.
+
