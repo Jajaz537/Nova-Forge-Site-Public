@@ -1289,3 +1289,24 @@ CodeQL du commit d'intégration `56546fd...` : **EN COURS** au moment de cette e
 
 Limites conservées : cette preuve est laboratoire Chromium. CWV représentatifs, lecteur d'écran natif, zoom natif 400 %, appareils physiques et preview HTTPS finale restent **PREUVE MANQUANTE**.
 
+## Candidat ciblé — monde vivant hors ligne honnête — 19 septembre 2026
+
+Base fraîche : `879403b24839946ece0b3617c8ac9c083de18087`. CodeQL de cette base : **success** (run `35466793056`).
+
+Branche isolée : `chatgpt/modaryx-living-world-offline-state-20260919`.
+
+Objectif : fermer le cas où `data/living-world.json` est servi depuis le cache offline avec `X-Modaryx-Cache: offline-stale` sans que l'interface puisse distinguer la dernière configuration connue d'une réponse fraîche.
+
+Implémentation :
+
+- état `fresh / offline-stale / unavailable` exposé sur le root et le statut ;
+- message explicite « dernière configuration connue hors ligne » quand le service worker sert une copie stale ;
+- chronologie et croissance continuent localement à partir des règles mises en cache ;
+- état indisponible explicite si aucune configuration n'est disponible ;
+- signal visuel stale/unavailable distinct du signal frais ;
+- empreintes SHA-256 réconciliées.
+
+Budget runtime monde vivant : **13287 octets**. Noyau précaché : inchangé à **114977 octets**.
+
+État : **EN COURS — micro-preuve ciblée CI requise avant intégration**.
+
