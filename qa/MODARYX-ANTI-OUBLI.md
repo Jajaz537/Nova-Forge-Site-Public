@@ -123,3 +123,18 @@ Décision utilisateur explicite à ne pas perdre :
 - état courant de référence : noyau 111076 octets, marge 688924 octets, runtime monde vivant 11065 octets ;
 - validation PWA/offline réelle encore PREUVE MANQUANTE.
 
+## Priorité confirmée — Site First jusqu'à VF — 19 septembre 2026
+
+Décision utilisateur : **MODARYX est désormais la priorité n°1 jusqu'à sa VF ultra haut de gamme**.
+
+À conserver :
+
+- poursuivre automatiquement MODARYX avant la finition finale des OS ;
+- ne jamais fusionner les identités MODARYX et Nova Forge OS ;
+- rendre visible que les deux produits sont créés par la même équipe ;
+- garder MODARYX comme univers web vivant et Nova Forge OS comme logiciel/OS distinct ;
+- ne déclarer ni 100 % ni VF tant que les preuves correspondantes ne sont pas réellement fermées ;
+- toute capacité dépendant d'un backend, de droits, d'artefacts, d'un protocole ou d'une interface OS stabilisée reste BLOQUÉE/EN COURS plutôt que simulée.
+
+Plan de reprise : `qa/MODARYX-SITE-FIRST-VF-PLAN-20260919.md`.
+
