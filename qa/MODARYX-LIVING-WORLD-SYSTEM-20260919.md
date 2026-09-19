@@ -242,3 +242,11 @@ Une configuration marquée `ready` mais incomplète échoue fermée. Les URLs ex
 
 La micro-preuve dédiée `qa/check-layered-growth-contract.mjs` vérifie le fallback actuel, un bundle synthétique complet, le passage baby → juvenile et les cas invalides.
 
+### Correction d'architecture après micro-preuve performance
+
+Le premier branchement chargeait toute la logique de couches dans le chemin critique de l'accueil. Le run labo a signalé un LCP mobile à **3100 ms**, supérieur au budget 2500 ms.
+
+La correction isole donc le runtime de croissance visuelle dans `assets/living-world-visual-growth.mjs` et sa feuille `living-world-visual-growth.css`. Ils ne sont chargés que si `visualGrowth.status=ready`. Tant que les assets finaux sont absents, le site ne télécharge ni le module ni sa feuille et conserve exactement le panorama composite.
+
+Le module futur précharge atomiquement l'environnement + les deux couches du stade courant avant tout remplacement, puis échoue vers le composite si un asset manque ou ne charge pas.
+
