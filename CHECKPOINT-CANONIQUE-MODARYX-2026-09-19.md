@@ -211,3 +211,40 @@ Ne pas transformer leur absence en simple « test externe ».
 - Ne pas modifier DNS, DNSSEC, nameservers, IONOS ou Cloudflare critique sans instruction explicite.
 - Ne pas écraser le travail d'un autre agent/conversation.
 - Utiliser autant que possible : **TERMINÉ / EN COURS / BLOQUÉ / PREUVE MANQUANTE**.
+
+## Mise à jour post-intégration contrôlée — 19 septembre 2026
+
+Vérification Git fraîche après la tentative d'intégration :
+
+- la première tentative de merge de PR #16 a été refusée par GitHub car la PR était encore en brouillon (**erreur exacte 405 — Pull Request is still a draft**) ;
+- aucune relance globale n'a été faite ;
+- correction ciblée : PR #16 marquée prête pour revue ;
+- micro-vérification : HEAD inchangé `d7c8b15a03cd82f4ec7a6f1c85b2d2f833da3d01`, base inchangée `f649f823856228ee51848f64d2e71299dfc307ef`, PR fusionnable ;
+- merge ensuite réussi sans force-push.
+
+État intégré :
+
+- PR #16 : **TERMINÉE — fusionnée** ;
+- commit de merge dans la branche Work : `450ec83cc39058f5a2d2f42173ffd32e0db40fad` ;
+- branche active PR #12 : `design/modaryx-premium-hd-20260914-work` ;
+- PR #12 : toujours ouverte et brouillon ;
+- `main` : inchangée par ce lot ;
+- infrastructure critique : inchangée.
+
+La nouvelle architecture cache, le quality gate « monde vivant » affiné, les entrées anti-oubli récupérées et le présent checkpoint font désormais partie de la branche active de la PR #12.
+
+### État après intégration
+
+- **TERMINÉ** — isolation + micro-preuve source + intégration contrôlée du lot cache/documentation.
+- **EN COURS** — validation navigateur HTTPS/offline réelle de la nouvelle architecture.
+- **EN COURS** — correction artistique réelle des deux illustrations contre le quality gate affiné.
+- **PREUVE MANQUANTE** — 400 % natif, lecteur d'écran natif, appareils physiques, CWV représentatifs et autres preuves externes déjà listées.
+
+### Prochain point logique après intégration
+
+1. Ne pas rejouer un full run.
+2. Vérifier d'abord le déploiement/preview du nouveau HEAD si une preuve externe de branche devient disponible.
+3. Effectuer ensuite uniquement les contrôles ciblés nécessaires au nouveau service worker.
+4. Reprendre les illustrations : zéro île/objet flottant, eau moins répétitive, château réellement imposant, animaux réels + quelques habitants/gardes, héros occasionnel.
+5. Continuer la finition Premium HD sans déclarer la VF.
+
