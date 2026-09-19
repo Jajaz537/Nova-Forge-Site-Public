@@ -218,3 +218,27 @@ Le mode hors ligne ne transforme donc jamais une donnée mise en cache en donné
 
 Micro-preuve dédiée : `qa/check-living-world-offline-state.mjs`.
 
+## Contrat de croissance visuelle en couches — 19 septembre 2026
+
+Le moteur possède maintenant une architecture explicite pour remplacer, **sans rupture**, l'illustration composite actuelle par des couches de personnages indépendantes lorsque les assets finaux seront disponibles.
+
+Contrat `visualGrowth` :
+
+- modèle : `layered-stage-assets-v1` ;
+- canevas commun : **1600 × 900** ;
+- environnement séparé obligatoire ;
+- deux slots indépendants : `wolf` et `dragon` ;
+- cinq assets attendus par compagnon, dans l'ordre canonique bébé → juvénile → adolescent → jeune adulte → adulte ;
+- assets autorisés uniquement sous `./assets/living-world/` et sur la même origine ;
+- chargement **current-stage-only** ;
+- cache **runtime-on-demand** ;
+- activation **atomic-current-stage** : l'environnement séparé et les deux assets du stade courant doivent être présents ensemble avant de remplacer le composite.
+
+État actuel : `awaiting-assets`.
+
+Conséquence importante : tant que les assets finaux séparés ne sont pas présents, le panorama composite `modaryx-wolf-dragon-hero.webp` reste l'unique rendu visuel. Le moteur ne fabrique aucun personnage, ne duplique pas le loup/dragon existant et ne prétend pas que la croissance visuelle est terminée.
+
+Une configuration marquée `ready` mais incomplète échoue fermée. Les URLs externes ou hors du préfixe autorisé sont rejetées.
+
+La micro-preuve dédiée `qa/check-layered-growth-contract.mjs` vérifie le fallback actuel, un bundle synthétique complet, le passage baby → juvenile et les cas invalides.
+
