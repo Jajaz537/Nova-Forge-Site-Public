@@ -498,3 +498,39 @@ Toutes les autres protections ciblées sont configurées et les catégories d'al
 
 Ne pas déclarer `SÉCURITÉ MAXIMALE COMPATIBLE — TERMINÉ` tant que les deux MFA ne sont pas activées et vérifiées.
 
+
+
+## Mise à jour canonique — fermeture MFA — 19 septembre 2026
+
+Preuves utilisateur fraîches reçues :
+
+### GitHub
+
+- page `Settings → Password and authentication` observée ;
+- authentification à deux facteurs : **ACTIVE** ;
+- méthode préférée : **application d’authentification** ;
+- application d’authentification : **Configuré** ;
+- section codes de récupération présente.
+
+### Cloudflare
+
+- page `My Profile → Authentication` observée ;
+- message explicite : **« L’authentification mobile à 2 facteurs est active. »** ;
+- méthode TOTP / application mobile configurée ;
+- contrôles `Reconfigurer` / `Supprimer` visibles, confirmant une méthode active ;
+- section codes de sauvegarde présente.
+
+### Conclusion sécurité
+
+Les deux derniers bloqueurs utilisateur sont fermés :
+
+- MFA GitHub : **TERMINÉ** ;
+- MFA Cloudflare : **TERMINÉ**.
+
+**SÉCURITÉ MAXIMALE COMPATIBLE — TERMINÉ** sur le périmètre de durcissement ciblé déjà documenté.
+
+Cette clôture ne constitue pas une déclaration de VF MODARYX. La PR #12 doit rester en brouillon tant que les preuves externes VF restent ouvertes. Aucun changement DNS, DNSSEC, nameservers, IONOS, mail, SSL global, Cloudflare Pages ou production n’est requis par cette clôture MFA.
+
+### Prochain point logique
+
+Reprendre uniquement les preuves externes encore manquantes, en priorité la preuve Firefox avec zoom natif explicitement visible à **200 % puis 400 %**, puis lecteur d’écran natif, Safari réel, appareils physiques, cycle PWA offline/update réel, Core Web Vitals représentatifs et import/export avec vrais fichiers. Ne pas rejouer les audits déjà verts.
