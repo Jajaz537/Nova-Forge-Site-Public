@@ -10,8 +10,12 @@
     [...document.querySelectorAll('[data-world-inhabitant]')]
       .map((node) => [node.dataset.worldInhabitant, node])
   );
+  const nextStageNodes = new Map(
+    [...document.querySelectorAll('[data-world-next]')]
+      .map((node) => [node.dataset.worldNext, node])
+  );
 
-  if (!statusNode && !phaseNode && !ageNode && inhabitantNodes.size === 0) return;
+  if (!statusNode && !phaseNode && !ageNode && inhabitantNodes.size === 0 && nextStageNodes.size === 0) return;
 
   const DAY_MS = 24 * 60 * 60 * 1000;
   const REQUIRED_GROWTH_ORDER = ['baby', 'juvenile', 'adolescent', 'young-adult', 'adult'];
@@ -34,12 +38,22 @@
     const stages = inhabitant.stages
       .filter((stage) => Number.isFinite(stage?.fromDay) && typeof stage?.id === 'string')
       .sort((a, b) => a.fromDay - b.fromDay);
-    let active = stages[0] || null;
-    for (const stage of stages) {
-      if (days >= stage.fromDay) active = stage;
+    if (!stages.length) return null;
+
+    let activeIndex = 0;
+    for (let index = 0; index < stages.length; index += 1) {
+      if (days >= stages[index].fromDay) activeIndex = index;
       else break;
     }
-    return active ? {...active, days} : null;
+
+    const active = stages[activeIndex];
+    const next = stages[activeIndex + 1] || null;
+    return {
+      ...active,
+      days,
+      next,
+      daysUntilNext: next ? Math.max(0, next.fromDay - days) : 0
+    };
   }
 
   function worldHourFor(now) {
@@ -84,16 +98,28 @@
 
     for (const inhabitant of config.inhabitants || []) {
       const node = inhabitantNodes.get(inhabitant.id);
+      const nextNode = nextStageNodes.get(inhabitant.id);
       const stage = stageFor(inhabitant, now);
-      if (!node || !stage) continue;
-      node.textContent = stage.label || inhabitant.label || inhabitant.id;
-      node.dataset.growthStage = stage.id;
-      node.dataset.ageDays = String(stage.days);
+      if (!stage) continue;
+
+      if (node) {
+        node.textContent = stage.label || inhabitant.label || inhabitant.id;
+        node.dataset.growthStage = stage.id;
+        node.dataset.ageDays = String(stage.days);
+      }
+
+      if (nextNode) {
+        nextNode.textContent = stage.next
+          ? `Prochaine étape : ${stage.next.label} dans ${stage.daysUntilNext} j`
+          : 'Croissance : stade adulte';
+        nextNode.dataset.growthStage = stage.id;
+      }
+
       root.dataset[`world${inhabitant.id[0].toUpperCase() + inhabitant.id.slice(1)}Stage`] = stage.id;
     }
 
     if (statusNode) {
-      statusNode.textContent = 'Le monde évolue avec le temps, même entre deux visites.';
+      statusNode.textContent = phase.activity || 'Le monde évolue avec le temps, même entre deux visites.';
       statusNode.dataset.worldReady = 'true';
     }
   }
