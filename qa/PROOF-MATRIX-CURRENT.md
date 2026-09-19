@@ -191,3 +191,24 @@ Preuves acquises :
 
 La preuve ferme la lecture/écriture de fichiers réels par les fonctions web dans Chromium. Elle **ne ferme pas** l'UX du sélecteur graphique natif OS, qui n'est pas piloté.
 
+## PWA offline — preuve Chromium avec vraie panne réseau — 19 septembre 2026
+
+PR #33 / merge `bc7876a1ed56cbe560e95b7383cc583fb2bef854`.
+
+Après isolation/correction du harnais, le run final `35464732269` est **success / PASS CIBLÉ**.
+
+Preuves acquises sur origine loopback digne de confiance :
+
+- service worker activé + contrôleur ;
+- cache réel `modaryx-site-v120-scalable` ;
+- précache initial 17 entrées ;
+- pages/données runtime mises en cache après visite ;
+- serveur HTTP réellement arrêté ;
+- Catalogue et alias avec paramètres servis hors ligne ;
+- accueil servi hors ligne depuis le précache ;
+- `data/catalog.json` servi hors ligne avec `X-Modaryx-Cache: offline-stale` ;
+- serveur redémarré ;
+- donnée réseau redevenue fraîche sans marqueur stale.
+
+Limites maintenues : preview publique HTTPS, mise à jour A→B, autres navigateurs, appareils physiques, quota sous pression et CWV.
+
