@@ -1770,3 +1770,31 @@ Correction ciblée :
 - **BLOQUÉ / décision externe** — météo réelle production tant que fournisseur, licence et attribution ne sont pas validés.
 
 Aucun full replay n'a été relancé pour cette réconciliation documentaire.
+
+
+## Intégration contrôlée — vent, nuages et éclaircies — 20 septembre 2026
+
+PR #44 : **TERMINÉE — fusionnée** dans la branche active PR #12.
+
+- commit d'intégration : `7a91f813e60279bfffaf60bdcf750fa003c78a15` ;
+- météo normalisée complétée avec `wind`, `cloud` et `partly-cloudy` / éclaircies ;
+- couches visuelles sobres ajoutées pour vent, nuages et éclaircies ;
+- transitions atmosphériques rendues plus progressives ;
+- reduced motion désactive animations et transitions météo ;
+- aucun GPS, aucune localisation précise et aucune activation fournisseur production ajoutés.
+
+Erreur ciblée pendant la preuve :
+
+- premier run performance : **FAIL CIBLÉ** — accueil mobile `7 long tasks > 5` ;
+- isolation : import atmosphère non critique encore exécuté dans la fenêtre initiale mesurée ;
+- correction ciblée : chargement différé après le chemin critique, sans modifier le seuil ;
+- micro-preuve suivante : **success**.
+
+Preuves finales candidat PR #44 : Site First Source, Local Functional Browser, Reflow Chromium, Accessibility Chromium, PWA Offline, PWA Update et Lab Performance : **success**.
+
+État :
+
+- **TERMINÉ sur le périmètre ciblé** — pluie, neige, brouillard, orage, vent, nuages et éclaircies ;
+- **PREUVE MANQUANTE** — exécution réelle Pages Function `request.cf` sur preview HTTPS ;
+- **BLOQUÉ / décision externe** — activation météo réelle production tant que fournisseur/licence/attribution ne sont pas validés ;
+- `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
