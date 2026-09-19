@@ -101,3 +101,16 @@ Ce lot ferme la vérification du fonctionnement des diagnostics et de la présen
 ## Mesures du lot visuel c7d91ee
 
 `cache-checks.json` et `finish-line/source-validation.json` : CSS max 69776 octets/page, JS directement déclaré max 26968, précache 797096 octets bruts / 518897 gzip estimés ; 70 fichiers / 71 requêtes, aucune ressource manquante, 25 assertions source réussies, aucun changement des fichiers protégés. Budgets proposés actuels 70000 / 30000 / 800000 respectés. Les captures QA ne sont pas référencées par le site ni préchargées. Ce contrôle ne ferme pas les mesures CWV, peinture, CPU/GPU, mémoire, réseau réel ou cache froid.
+
+## Architecture évolutive isolée — 19 septembre 2026
+
+Source de départ vérifiée : branche PR #12 `design/modaryx-premium-hd-20260914-work`, HEAD `f649f823856228ee51848f64d2e71299dfc307ef`.
+
+Le service worker de ce HEAD installait encore un ensemble quasi global. Une mesure déterministe fraîche sur l'arbre Git et la liste unique du précache donne **794167 octets / 76 fichiers uniques**. Les deux grandes illustrations WebP représentaient **367522 octets** de cet ensemble et étaient téléchargées à l'installation.
+
+La branche isolée `chatgpt/modaryx-scalable-cache-20260919` introduit un **précache cœur + runtime cache borné**. Le noyau statique unique est estimé à **110457 octets**, soit **689543 octets de marge** sous le seuil existant de **800000**. Le seuil n'est ni supprimé ni relevé.
+
+Le contrôle ciblé `qa/check-scalable-cache.mjs` a été exécuté après `node --check sw.js` et passe sur la sémantique simulée : grandes illustrations hors install-précache, futur asset public mis en cache après usage, page publique visitée disponible en fallback simulé, données fraîches network-first/no-store, runtime borné à 80 entrées non cœur, noyau préservé, nettoyage limité aux caches du site.
+
+Cette évolution **ne vaut pas encore PASS PWA natif**. Restent PREUVE MANQUANTE : installation/activation HTTPS réelle, mise à jour après nouvelle publication, online → offline → online, quota navigateur, cache froid/chaud, CWV et appareils physiques. Les anciennes mesures proches de 800000 ci-dessus restent historiques pour leurs commits respectifs et ne doivent pas être utilisées comme état courant de cette branche isolée.
+

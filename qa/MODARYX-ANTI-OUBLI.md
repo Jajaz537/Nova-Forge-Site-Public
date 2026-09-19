@@ -65,3 +65,22 @@ La revue des pages existantes est documentée dans `finish-line/README.md`. Aucu
 ## Qualification des écarts — 16 septembre 2026
 
 Huit capacités absentes sont reclassées « EN COURS — capacité non livrée » : leur absence ne peut pas être résolue par une simple preuve de test. Aucun périmètre annulé ni service déclaré livré. La matrice de preuves courante détaille séparément les tests externes manquants et les acquis sur les seize pages existantes. Cette qualification ne constitue pas une nouvelle validation produit.
+
+## Mémo récupéré — dépendances de développement à ne pas oublier — 19 septembre 2026
+
+Ces éléments étaient déjà partiellement représentés dans le registre par leurs contrats ou états `not_connected`. Le présent ajout conserve explicitement les **conditions de déclenchement** retrouvées dans les mémos utilisateur afin qu'elles ne soient pas perdues avant la VF complète.
+
+| Capacité | Condition retenue | État | Règle de reprise |
+|---|---|---|---|
+| OS Bridge | Après stabilisation de l'interface publique de **Nova Forge OS** | **EN COURS — capacité non livrée / dépendance externe** | Ne pas anticiper ni simuler le pont. MODARYX et Nova Forge OS restent deux produits distincts ; le pont éventuel doit utiliser une interface publique stabilisée et documentée. |
+| Storage Resolver | Lorsque le service de stockage sera disponible | **EN COURS — capacité non livrée / dépendance service** | Le schéma actuel ne constitue pas le service. Ne développer l'intégration réelle qu'avec un stockage disponible, sécurisé et vérifiable. |
+| Repair Network | Lorsque son protocole public sera finalisé | **EN COURS — capacité non livrée / dépendance protocole** | Le schéma actuel ne constitue pas le réseau. Attendre un protocole public finalisé ; ne pas inventer d'endpoint, de réparation distante ou de preuve de récupération. |
+| Backend communautaire | Lorsqu'une solution sécurisée respectant le budget de **0 €** sera prête | **EN COURS — capacité non livrée / solution à qualifier** | Ne pas fabriquer de backend temporaire présenté comme final. Toute solution retenue doit être sécurisée, compatible avec le budget de 0 €, documentée et validée avant activation de publication/modération distante. |
+
+### Anti-confusion
+
+- **OS Bridge** est une intégration optionnelle de la plateforme web MODARYX avec l'interface publique de Nova Forge OS ; il ne fusionne pas les identités des deux produits.
+- **Storage Resolver**, **Repair Network** et le **backend communautaire** restent des capacités MODARYX non livrées tant que leurs dépendances réelles ne sont pas disponibles.
+- L'existence de schémas JSON, états UI ou contrats ne vaut jamais preuve qu'un service distant existe.
+- Ces quatre entrées doivent rester tracées jusqu'à livraison réelle ou décision produit explicite ; aucune suppression implicite avant la VF.
+
