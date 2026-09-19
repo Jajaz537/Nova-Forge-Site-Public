@@ -176,8 +176,10 @@ Décision utilisateur explicitement retenue pour la VF :
 - **TERMINÉ sur le périmètre ciblé** — moteur saison Nord/Sud/tropical + heure locale + fusion météo normalisée + endpoint same-origin + confidentialité ;
 - PR #43 : **TERMINÉE — fusionnée** dans la branche active de PR #12 au commit `e728670d763bdd872b670b798b323e1cfc8597f7` ;
 - PR #44 : **TERMINÉE — fusionnée** au commit `7a91f813e60279bfffaf60bdcf750fa003c78a15` pour compléter vent, nuages et éclaircies ;
+- PR #45 : **TERMINÉE — fusionnée** au commit `dc61a0372d9ecab7eae8f4a2091b5e0066e3b316` ; la chronique mondiale reste commune tandis qu’un **rythme local** distinct adapte les activités affichées à saison + heure locale + météo ;
 - micro-preuves : `PASS_TARGETED_REAL_WORLD_SYNC` et `PASS_TARGETED_REAL_WORLD_SYNC_BROWSER` ; source, fonctions locales, reflow, accessibilité Chromium, PWA offline/update et performance labo du candidat PR #44 : **success** ;
 - erreur performance PR #44 isolée : accueil mobile `7 long tasks > 5` ; correction ciblée : import atmosphère non critique déplacé hors chemin initial ; micro-preuve performance suivante : **success**, sans assouplir le seuil ;
+- PR #45 : Source, Living Chronicle, Local Functional, Layered Growth, Reflow, Accessibility, PWA Offline/Installability/Update et Lab Performance : **success** ; un timeout PWA Update a été isolé avec `sw.js` strictement inchangé, puis seul le job échoué a été relancé et a réussi ;
 - **PREUVE MANQUANTE** — exécution réelle de la Pages Function sur une preview HTTPS avec `request.cf` ;
 - **BLOQUÉ / décision externe** — activation de la météo réelle en production tant que fournisseur, licence et attribution ne sont pas validés ;
 - `main`, DNS, DNSSEC, IONOS, secrets et configuration Cloudflare critique restent inchangés.
