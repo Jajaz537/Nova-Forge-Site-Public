@@ -131,7 +131,7 @@
     root.dataset.worldSource = sourceState;
     root.dataset.worldVisualGrowth = config?.visualGrowth?.status || 'awaiting-assets';
     if (config?.visualGrowth?.status === 'ready') {
-      import(new URL('./assets/living-world-visual-growth.js', document.baseURI).href)
+      import(new URL('./assets/living-world-visual-growth.mjs', document.baseURI).href)
         .then((module) => module.renderVisualGrowth({
           config,
           document,
