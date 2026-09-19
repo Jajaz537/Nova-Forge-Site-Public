@@ -159,18 +159,24 @@ La chronologie inclut désormais une chronique déterministe par créneaux de 3 
 - **EN COURS** — représentation visuelle réelle des habitants, animaux et compagnons quand les assets Premium HD correspondants existent ;
 - ne jamais confondre un signal narratif avec une preuve que le personnage est visible dans l'image.
 
-## Synchronisation monde réel — décision approuvée — 20 septembre 2026
+## Synchronisation monde réel — intégrée sur la branche PR #12 — 20 septembre 2026
 
 Décision utilisateur explicitement retenue pour la VF :
 
-- MODARYX doit mélanger **saison locale + heure locale + météo réelle** pour sa lentille atmosphérique ;
-- l’adaptation saisonnière doit être automatique et ne pas gêner l’utilisateur avec une demande GPS ;
-- hémisphère Nord et Sud doivent être inversés correctement ;
-- les zones tropicales doivent utiliser un profil tropical plutôt qu’un faux hiver tempéré ;
-- pluie, neige, brouillard, vent et orage doivent influencer l’ambiance avec intensité plafonnée, lisibilité et performances prioritaires ;
+- MODARYX mélange **saison locale + heure locale + météo réelle** pour sa lentille atmosphérique ;
+- l’adaptation saisonnière est automatique et ne demande pas de permission GPS ;
+- hémisphère Nord et Sud sont inversés correctement ;
+- les zones tropicales utilisent un profil tropical plutôt qu’un faux hiver tempéré ;
+- pluie, neige, brouillard et orage peuvent influencer l’ambiance avec intensité plafonnée, lisibilité, reduced motion et performances prioritaires ;
 - la chronologie MODARYX, les événements du royaume et la croissance loup/dragon restent partagés et indépendants de cette couche locale ;
 - aucun fournisseur météo ne doit être activé silencieusement sans validation de licence, attribution et confidentialité ;
-- aucune localisation exacte ne doit être renvoyée au navigateur ni conservée pour cette fonctionnalité.
+- aucune ville, code postal ou coordonnée exacte n’est renvoyée au navigateur pour cette fonctionnalité ; les coordonnées destinées au fournisseur sont arrondies à **0,1°** côté serveur.
 
-État candidat : moteur automatique saison/heure + contrat météo et endpoint same-origin intégrés sur branche isolée. **PREUVE CI requise avant fusion**. Météo réelle production : **BLOQUÉE tant que le fournisseur/licence ne sont pas validés**.
+État vérifié :
+- **TERMINÉ sur le périmètre ciblé** — moteur saison Nord/Sud/tropical + heure locale + fusion météo normalisée + endpoint same-origin + confidentialité ;
+- PR #43 : **TERMINÉE — fusionnée** dans la branche active de PR #12 au commit `e728670d763bdd872b670b798b323e1cfc8597f7` ;
+- micro-preuves : `PASS_TARGETED_REAL_WORLD_SYNC` et `PASS_TARGETED_REAL_WORLD_SYNC_BROWSER` ; performance labo ciblée verte (LCP 2180 ms mobile, 2072 ms desktop ; CLS 0 / 0,0033) ;
+- **PREUVE MANQUANTE** — exécution réelle de la Pages Function sur une preview HTTPS avec `request.cf` ;
+- **BLOQUÉ / décision externe** — activation de la météo réelle en production tant que fournisseur, licence et attribution ne sont pas validés ;
+- `main`, DNS, DNSSEC, IONOS, secrets et configuration Cloudflare critique restent inchangés.
 
