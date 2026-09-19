@@ -138,3 +138,22 @@ Restent ouverts avant une déclaration 100 % / VF :
 
 **VF NON VALIDÉE** malgré le PASS source ciblé.
 
+## Micro-preuve Chromium reflow — 19 septembre 2026
+
+PR #30 / commit d'intégration `1fd480d721ab3f5780be881da33b24c3da0a10f5`.
+
+Le premier run navigateur ciblé `35463522362` a détecté un overflow réel de **33 px à 320 px** sur les trois fiches projet. Cause isolée : conflit de spécificité CSS sur `.project-grid:not(.project-directory)`. La correction a été limitée à la règle mobile correspondante.
+
+Après correction :
+
+- run navigateur `35463591149` : **success / PASS CIBLÉ** ;
+- 17 pages × 320/400/768/1440 = **68 navigations** ;
+- aucun overflow horizontal >1 px ;
+- H1/main/footer présents ;
+- menus mobiles ouverts aux largeurs étroites lorsqu'ils existent ;
+- aucune exception JavaScript remontée par le contrôle ;
+- reduced motion émulé sur l'accueil, animation principale désactivée ;
+- run source `35463591245` : **success**.
+
+Portée : Chromium headless sur serveur local. Cette preuve **ne ferme pas** le zoom navigateur natif 400 %, Firefox/Safari, lecteur d'écran, tactile/appareil physique, PWA réellement hors ligne ou CWV.
+
