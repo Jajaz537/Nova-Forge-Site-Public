@@ -1332,3 +1332,26 @@ Résultat ciblé :
 
 État : **TERMINÉ sur la micro-preuve ciblée ; fusion PR #37 requise avant intégration canonique**.
 
+## Intégration contrôlée — monde vivant hors ligne honnête — 19 septembre 2026
+
+PR #37 : **TERMINÉE — fusionnée**.
+
+- commit d'intégration : `123e7dc261ba11b086934d1820bb46669e81f6fe` ;
+- micro-preuve dédiée `35468410746` : **success / PASS CIBLÉ** ;
+- Site First source, PWA offline, reflow, accessibilité Chromium et performance labo du candidat : **success**.
+
+Le moteur expose désormais `fresh / offline-stale / unavailable`. Une configuration servie depuis le cache avec `X-Modaryx-Cache: offline-stale` reste exploitable pour continuer la chronologie, mais l'interface indique explicitement qu'il s'agit de la **dernière configuration connue hors ligne**.
+
+Budget :
+
+- noyau précaché : **114977 octets**, inchangé par le lot ;
+- runtime monde vivant : **13287 octets**.
+
+`main`, backend, DNS, DNSSEC, IONOS et Cloudflare critique : inchangés.
+
+État :
+
+- **TERMINÉ** — fraîcheur/offline du monde vivant honnêtement exposée ;
+- **EN COURS** — croissance visuelle individuelle réelle des personnages ;
+- **PREUVE MANQUANTE** — preview HTTPS publique, appareils physiques, lecteur d'écran natif, zoom natif 400 % et CWV représentatifs.
+
