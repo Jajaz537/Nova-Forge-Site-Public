@@ -871,3 +871,45 @@ Aucun fichier produit n'est modifié par ce lot.
 
 Cette preuve ne remplace pas zoom natif 400 %, Firefox/Safari, lecteur d'écran, appareil physique, PWA offline ou CWV.
 
+## Intégration contrôlée — micro-preuve Chromium reflow — 19 septembre 2026
+
+PR #30 : **TERMINÉE — fusionnée**.
+
+Premier run ciblé `35463522362` : **FAIL ciblé**.
+
+Erreur exacte :
+
+- trois fiches projet débordaient horizontalement de **33 px à 320 px** ;
+- toutes les autres pages/largeurs contrôlées étaient sans overflow.
+
+Isolation :
+
+- `.project-grid:not(.project-directory)` imposait la grille desktop ;
+- la règle mobile utilisait seulement `.project-grid` ;
+- la spécificité supérieure de la règle desktop empêchait l'écrasement à 320 px.
+
+Correction ciblée :
+
+- règle mobile alignée sur `.project-grid:not(.project-directory)` ;
+- grille projet forcée à une seule colonne sous 820 px ;
+- delta CSS : **+24 octets runtime** ;
+- aucun full replay lancé.
+
+Micro-preuves après correction :
+
+- navigateur Chromium : run `35463591149` — **success / PASS CIBLÉ** ;
+- source Site First : run `35463591245` — **success / PASS CIBLÉ** ;
+- navigateur : **68 navigations** sur 17 pages aux largeurs 320/400/768/1440 ;
+- 0 overflow horizontal >1 px ;
+- H1/main/footer présents ;
+- menus mobiles contrôlés aux largeurs étroites ;
+- aucune exception JS détectée ;
+- reduced motion émulé : panorama principal sans animation.
+
+Intégration :
+
+- commit de merge : `1fd480d721ab3f5780be881da33b24c3da0a10f5` ;
+- aucun changement de `main`, DNS, Cloudflare critique ou autre infrastructure.
+
+Limites conservées : **PREUVE MANQUANTE** pour zoom natif 400 %, lecteur d'écran, Firefox/Safari, appareils physiques, PWA offline réelle et CWV.
+
