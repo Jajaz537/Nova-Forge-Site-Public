@@ -808,3 +808,23 @@ Intégration :
 - **PREUVE MANQUANTE** — zoom natif 400 %, Windows High Contrast, lecteur d'écran et appareils physiques ;
 - aucun faux PASS natif n'est attribué à ce lot.
 
+## Candidat ciblé — métadonnées canonical + Open Graph — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-seo-metadata-finishline-20260919`, base fraîche `2fae96d80a736a5eab4322295a7e2b2a53892bb1`.
+
+Le lot harmonise les pages indexables secondaires avec l'accueil :
+
+- canonical explicite sur les routes publiques sans extension, cohérent avec le sitemap existant ;
+- `og:type=website` ;
+- `og:locale=fr_FR` ;
+- `og:site_name=MODARYX MODS` ;
+- titre et description Open Graph dérivés du titre/description propres à chaque page ;
+- `og:url` aligné sur le canonical ;
+- la 404 conserve `noindex` et ne reçoit pas de canonical artificiel ;
+- empreintes des pages modifiées réconciliées ;
+- contrôle Site First renforcé contre métadonnées manquantes/dupliquées.
+
+Aucun fichier du noyau précaché n'est modifié : noyau **113993 octets**, marge **686007 octets**.
+
+État : **EN COURS — micro-preuve CI requise avant intégration**.
+
