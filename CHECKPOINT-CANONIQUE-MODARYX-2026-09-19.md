@@ -1798,3 +1798,32 @@ Preuves finales candidat PR #44 : Site First Source, Local Functional Browser, R
 - **PREUVE MANQUANTE** — exécution réelle Pages Function `request.cf` sur preview HTTPS ;
 - **BLOQUÉ / décision externe** — activation météo réelle production tant que fournisseur/licence/attribution ne sont pas validés ;
 - `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
+
+
+## Intégration contrôlée — rythme local du royaume — 20 septembre 2026
+
+PR #45 : **TERMINÉE — fusionnée** dans la branche active PR #12.
+
+- commit d'intégration : `dc61a0372d9ecab7eae8f4a2091b5e0066e3b316` ;
+- la **chronique mondiale partagée** reste déterministe et commune à tous les visiteurs ;
+- une couche distincte **Rythme local** adapte uniquement l'activité affichée au contexte local : saison + heure locale + météo ;
+- pluie, neige, brouillard, orage, vent, nuages et éclaircies peuvent modifier ce rythme local sans réécrire la chronique mondiale ;
+- exemples : activités sous couvert sous la pluie, chemins surveillés sous la neige, lanternes/veille renforcées la nuit, étals protégés par vent fort ;
+- aucune prétention n'est faite que ces habitants sont déjà rendus visuellement dans l'illustration composite.
+
+Procédure d'erreur :
+
+- premier run PWA Update : **FAIL CIBLÉ** — timeout d'activation Stage B ;
+- isolation : `sw.js` strictement inchangé entre base et candidat, PWA Offline/Installability et les autres preuves restaient vertes ;
+- aucun full replay ;
+- seul le job PWA Update échoué a été relancé ;
+- rerun : **success**.
+
+Preuves finales candidat PR #45 : Site First Source, Living Chronicle, Local Functional Browser, Layered Growth, Reflow Chromium, Accessibility Chromium, PWA Offline, PWA Installability, PWA Update et Lab Performance : **success**.
+
+État :
+
+- **TERMINÉ sur le périmètre logique/UI** — activités locales adaptées sans dérive de la chronologie mondiale ;
+- **EN COURS** — représentation visuelle réelle des habitants/animaux et croissance physique loup/dragon ;
+- **PREUVE MANQUANTE** — vrais assets séparés environnement + loup + dragon et inspection artistique finale des WebP actuels ;
+- `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
