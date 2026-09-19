@@ -278,3 +278,17 @@ Delta du candidat par rapport à la base `7f5a1309...` :
 
 Le noyau précaché dérivé passe de **114977** à **115126 octets**, soit **684874 octets** de marge sous 800000. Les données/JS/CSS du monde vivant restent hors précache cœur conformément à l'architecture scalable-cache.
 
+## Synchronisation monde réel — impact candidat — 20 septembre 2026
+
+Par rapport au HEAD de base `b2603685...` :
+
+- `index.html` : **+174 octets** dans le noyau ;
+- `assets/shell.js` : **+548 octets** dans le noyau ;
+- noyau dérivé : **115848 octets** ;
+- marge sous 800000 : **684152 octets** ;
+- `assets/real-world-sync.mjs` : **10606 octets**, chargé après `load` / idle uniquement sur l’accueil ;
+- `assets/real-world-sync.css` : **3584 octets**, chargé par le module ;
+- ces deux fichiers de synchronisation restent hors précache cœur.
+
+La météo externe est désactivée par défaut ; elle n’ajoute donc aucun appel fournisseur au candidat courant.
+
