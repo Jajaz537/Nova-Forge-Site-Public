@@ -149,8 +149,10 @@ Statuts à conserver :
 - **TERMINÉ** — contrat de couches, mapping des cinq stades, politique same-origin/runtime-on-demand et fallback composite ;
 - **TERMINÉ sur le premier asset** — environnement séparé Premium réel `assets/living-world/environment-premium.jpg`, **1600 × 900**, ajouté par PR #46 et gardé non référencé tant que le bundle compagnon n'est pas complet ;
 - PR #46 : **TERMINÉE — fusionnée** au commit `8e9fc9bb2bdc73c047f6b65bd0b223a7b297e744` ; `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING`, Source, PWA Offline, Reflow Chromium, Accessibility Chromium et Lab Performance : **success** ;
-- **EN COURS** — production/intégration des cinq couches loup + cinq couches dragon avec alpha ;
-- `visualGrowth.status=awaiting-assets` reste obligatoire tant que ces dix couches ne sont pas toutes présentes et prouvées ;
+- **TERMINÉ — 1/10 couche compagnon** — `assets/living-world/wolf-baby.png` (Louveteau), **1600 × 900 RGBA / alpha=true**, PR #47 fusionnée au commit `ad1de7ce2e99030474e303de9d7044c788c9eb76` ;
+- PR #47 : `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ; Source, PWA Offline, Reflow Chromium, Accessibility Chromium et Lab Performance : **success** ;
+- **EN COURS** — 4 couches loup restantes + 5 couches dragon avec alpha ;
+- `visualGrowth.status=awaiting-assets` reste obligatoire tant que les dix couches compagnon ne sont pas toutes présentes et prouvées ;
 - la croissance visuelle individuelle ne devient **TERMINÉE** qu'après présence, rendu et preuve des assets réels.
 
 ## Monde vivant — chronique ambiante partagée — 19 septembre 2026
