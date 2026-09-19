@@ -650,3 +650,23 @@ Deux manifestations d'un même conflit de cascade ont été reproduites puis cor
 La feuille cinématique gagne 52 octets ; projection du précache 799961/800000 octets à partir de la dernière mesure conservée. Le contrôle structurel réussit sur 17 pages, 13 scripts et 84 empreintes. `check-cache.mjs` reste **BLOQUÉ / PREUVE MANQUANTE** par l'absence du baseline canonique ; la projection ne remplace pas son exécution.
 
 **VF NON VALIDÉE** : 400 %, lecteur d'écran réel, baseline cache canonique et appareils physiques restent ouverts.
+
+## État courant consolidé — 19 septembre 2026
+
+Cette entrée prime sur les anciennes métriques de cache et anciennes mentions « 16 pages » de ce document.
+
+- pages publiques actuelles : **17** ;
+- noyau install-précaché courant : **114977 octets** ;
+- marge sous le garde-fou 800000 : **685023 octets** ;
+- runtime monde vivant : **13287 octets** ;
+- PWA Chromium loopback : installation/offline/update/installabilité **TERMINÉES sur leur périmètre ciblé** ;
+- imports/exports avec vrais fichiers Chromium : **TERMINÉS sur leur périmètre ciblé** ;
+- accessibilité structurelle Chromium : **TERMINÉE sur son périmètre ciblé** ;
+- reflow Chromium 320/400/768/1440 : **TERMINÉ sur son périmètre ciblé** ;
+- performance laboratoire 5 pages × 2 profils : **TERMINÉE sur son périmètre ciblé** ;
+- monde vivant : chronologie, croissance logique et états offline **TERMINÉS** ; croissance visuelle individuelle réelle **EN COURS**.
+
+Toujours **PREUVE MANQUANTE** : preview HTTPS finale, appareils physiques, lecteur d'écran natif, zoom natif 400 %, Safari/Firefox finaux et CWV représentatifs.
+
+**VF NON VALIDÉE**.
+

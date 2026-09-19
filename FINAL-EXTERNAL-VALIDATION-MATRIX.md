@@ -30,3 +30,34 @@ Cette matrice ne transforme aucune validation non exécutée en PASS.
 - Un test simulé ou automatisé peut préparer une ligne, mais ne remplace jamais la validation externe décrite.
 - Toute réduction du périmètre officiel exige une décision produit écrite ; elle ne peut pas être déduite de l’absence de données ou de service.
 - DNS, DNSSEC, nameservers, IONOS et configuration Cloudflare critique restent hors de cette matrice et inchangés.
+
+## Réconciliation après micro-preuves intégrées — 19 septembre 2026
+
+Cette section actualise la portée des lignes ci-dessus sans réécrire leur historique.
+
+### Couverture maintenant acquise
+
+- **PWA Chromium loopback — TERMINÉ sur ce périmètre** : installation du worker, contrôle de page, offline/recovery, update A→B, nettoyage de l'ancien cache et installabilité Chromium sont couverts par les runs `35464233996`, `35465473185` et `35469301347`.
+- **Imports/exports avec vrais fichiers — TERMINÉ sur ce périmètre** : Vérificateur, Communauté et Creator Studio lisent/écrivent de vrais fichiers du runner en Chromium ; run `35464233996`.
+- **Accessibilité structurelle/browser Chromium — TERMINÉ sur ce périmètre** : 17 pages, arbre AX, labels, alt, skip-link et premier parcours clavier ; run `35465685575`.
+- **Reflow Chromium — TERMINÉ sur les largeurs ciblées** : 17 pages × 320/400/768/1440, 68 navigations ; run `35463591149`.
+- **Performance laboratoire — TERMINÉ sur 5 pages × 2 profils** : budgets labo respectés ; run `35466565740`.
+
+### Lignes restant réellement externes
+
+Les éléments suivants restent **PREUVE MANQUANTE** et continuent à bloquer une VF officielle :
+
+- lecteur d'écran natif Windows et VoiceOver ;
+- zoom navigateur natif 200/400 % réellement mesuré ;
+- appareils tactiles physiques ;
+- Safari/Firefox réels sur les parcours finaux ;
+- CWV représentatifs sur une URL HTTPS stable ;
+- installation PWA manuelle et cycle sur preview HTTPS publique/appareil physique ;
+- dialogue graphique natif du sélecteur de fichier ;
+- droits/licences et informations légales finales ;
+- services produit réellement absents : comptes, publication/modération, artefacts, Guide connecté, OS Bridge, Resolver/Repair ;
+- corpus/droits substantiels des hubs retenus ;
+- Master NDI complète non récupérée.
+
+Les preuves automatisées intégrées réduisent le risque mais ne doivent pas être requalifiées en preuves natives quand la matrice exige explicitement un navigateur/OS/appareil réel.
+
