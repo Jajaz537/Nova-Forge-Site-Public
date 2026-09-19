@@ -1220,3 +1220,37 @@ Corrections ciblées appliquées avant micro-preuve :
 
 État : **EN COURS — micro-preuve labo et source requises après correction**.
 
+## Micro-preuve finale du candidat performance — 19 septembre 2026
+
+Après isolation successive des défauts, le candidat PR #36 obtient :
+
+- run labo `35466565740` — **success / PASS CIBLÉ** ;
+- source Site First `35466565752` — success ;
+- fonctions locales `35466565765` — success ;
+- PWA update `35466565747` — success ;
+- PWA offline `35466565761` — success ;
+- accessibilité Chromium `35466565756` — success ;
+- reflow Chromium `35466565753` — success.
+
+Corrections finales :
+
+- fallback nav desktop stabilisé avant initialisation JS ;
+- Catalogue statique aligné sur la géométrie hydratée ;
+- hero LCP priorisé ;
+- visuel décoratif sous la ligne de flottaison différé après `load` + idle.
+
+Performance finale du harnais :
+
+- accueil mobile : **LCP 2012 ms / CLS 0** ;
+- accueil desktop : **LCP 1964 ms / CLS 0,0024** ;
+- Catalogue desktop : **CLS 0**.
+
+Budget :
+
+- noyau dérivé : **114977 octets** ;
+- marge : **685023 octets** sous 800000.
+
+État avant intégration : **TERMINÉ sur la micro-preuve ciblée ; fusion PR #36 encore requise**.
+
+Important : CWV représentatifs, appareils physiques, lecteur d'écran natif et autres preuves externes restent **PREUVE MANQUANTE**.
+
