@@ -1193,3 +1193,30 @@ Le harnais teste 5 pages prioritaires sur deux profils (mobile et desktop), avec
 
 Cette preuve ne remplace pas des CWV représentatifs en conditions réelles.
 
+## Correction ciblée — performance laboratoire — 19 septembre 2026
+
+Premier run labo `35465864883` : **FAIL ciblé**.
+
+Écarts observés :
+
+- accueil mobile : LCP 2912 ms ;
+- accueil desktop : LCP 2844 ms ;
+- catalogue desktop : CLS 0,1399 ;
+- jeux desktop : CLS 0,1347 sur ce run.
+
+Diagnostic renforcé `35465974453` :
+
+- LCP accueil confirmé sur `IMG.modaryx-realm-art` : 2840 ms mobile / 2836 ms desktop ;
+- catalogue desktop CLS 0,1399 confirmé ;
+- jeux desktop retombé à CLS 0 sur le second run, donc non retenu comme défaut stable ;
+- sources de shift Catalogue : hero/main/controls/navigation.
+
+Corrections ciblées appliquées avant micro-preuve :
+
+- preload explicite de l'image hero ;
+- hero déclaré `loading=eager`, `fetchpriority=high`, décodage sync pour avancer le rendu LCP ;
+- cartes HTML initiales Catalogue alignées structurellement sur le rendu hydraté (mêmes 4 lignes Jeu/Version/Provenance/Distribution) afin d'éviter le changement de géométrie au chargement des données ;
+- empreintes index/catalogue réconciliées.
+
+État : **EN COURS — micro-preuve labo et source requises après correction**.
+
