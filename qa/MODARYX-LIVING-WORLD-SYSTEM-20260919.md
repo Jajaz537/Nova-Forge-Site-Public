@@ -34,7 +34,7 @@ Ces seuils sont des règles narratives MODARYX, pas des affirmations biologiques
 
 ### 3. Cycle quotidien
 
-Le navigateur calcule une phase locale :
+Le moteur calcule une phase **partagée en UTC**, cohérente avec `clock.model: shared-world-utc` :
 
 - nuit ;
 - aube ;
@@ -174,3 +174,16 @@ Impact runtime après cette clarification :
 
 Le noyau install-précaché reste inchangé à **111076 octets**.
 
+
+
+## Correction ciblée — horloge réellement partagée en UTC
+
+Écart isolé : le contrat déclarait `shared-world-utc`, mais le calcul de phase utilisait encore `Date.getHours()`, donc l'aube/jour/crépuscule/nuit pouvait différer selon le fuseau du visiteur.
+
+Correction :
+
+- `worldHourFor()` utilise désormais `getUTCHours()` lorsque le modèle est `shared-world-utc` ;
+- fallback local conservé uniquement pour un éventuel futur modèle non partagé ;
+- le contrôle Site First exige explicitement le chemin UTC.
+
+Conséquence : à un instant donné, tous les visiteurs reçoivent la **même phase du monde**, indépendamment de leur fuseau local. Cela aligne enfin l'ambiance visuelle avec la chronologie partagée.
