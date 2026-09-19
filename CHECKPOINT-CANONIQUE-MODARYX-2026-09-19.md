@@ -1592,3 +1592,31 @@ Budget candidat : noyau dérivé **115126 octets**, marge **684874 octets**.
 
 État : **EN COURS — micro-preuve ciblée CI requise avant intégration**.
 
+## Micro-preuve — chronique vivante partagée — 19 septembre 2026
+
+PR #42 candidat.
+
+Erreur ciblée :
+
+- run `35471407486` : FAIL du harnais avant observation produit — parenthèse manquante dans le script de preuve ;
+- correction limitée à `qa/check-living-chronicle.mjs` ;
+- aucun full replay.
+
+Micro-preuve corrigée :
+
+- Living Chronicle `35471449672` — **success / PASS CIBLÉ** ;
+- Lab Performance `35471449668` — **success** ;
+- accueil mobile : LCP **2128 ms / CLS 0** ;
+- accueil desktop : LCP **2060 ms / CLS 0,0021** ;
+- tous les autres workflows ciblés déclenchés sur le candidat : **success**.
+
+Résultat :
+
+- activités partagées et déterministes par créneaux de 3 heures ;
+- croissance loup/dragon inchangée ;
+- aucune fausse revendication de représentation visuelle ;
+- noyau dérivé : **115126 octets** ;
+- marge : **684874 octets**.
+
+État : **TERMINÉ sur la micro-preuve ciblée ; fusion PR #42 requise avant intégration canonique**.
+
