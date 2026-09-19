@@ -25,6 +25,30 @@ function pngInfo(buffer){
   return {format:'png',width,height,alpha:colorType===4||colorType===6};
 }
 
+function jpegInfo(buffer){
+  if(buffer.length<4||buffer[0]!==0xff||buffer[1]!==0xd8) return null;
+  let offset=2;
+  while(offset+8<buffer.length){
+    if(buffer[offset]!==0xff){offset+=1;continue;}
+    const marker=buffer[offset+1];
+    offset+=2;
+    if(marker===0xd8||marker===0xd9) continue;
+    if(offset+2>buffer.length) break;
+    const size=buffer.readUInt16BE(offset);
+    if(size<2||offset+size>buffer.length) break;
+    if([0xc0,0xc1,0xc2,0xc3,0xc5,0xc6,0xc7,0xc9,0xca,0xcb,0xcd,0xce,0xcf].includes(marker)){
+      return {
+        format:'jpeg',
+        width:buffer.readUInt16BE(offset+5),
+        height:buffer.readUInt16BE(offset+3),
+        alpha:false
+      };
+    }
+    offset+=size;
+  }
+  return null;
+}
+
 function read24le(buffer,offset){
   return buffer[offset]|(buffer[offset+1]<<8)|(buffer[offset+2]<<16);
 }
@@ -68,7 +92,7 @@ function webpInfo(buffer){
 
 function imageInfo(file){
   const buffer=fs.readFileSync(file);
-  return pngInfo(buffer)||webpInfo(buffer);
+  return pngInfo(buffer)||webpInfo(buffer)||jpegInfo(buffer);
 }
 
 assert(config.schemaVersion===1,'living-world schemaVersion must remain 1');
@@ -107,6 +131,16 @@ if(visual.status==='awaiting-assets'){
   const existing=fs.existsSync(assetDir)
     ? fs.readdirSync(assetDir,{withFileTypes:true}).filter(x=>x.isFile()).map(x=>x.name)
     : [];
+  const candidates=existing.filter((name)=>name.startsWith('environment-'));
+  for(const name of candidates){
+    const file=path.join(assetDir,name);
+    const info=imageInfo(file);
+    assert(Boolean(info),`candidate environment malformed: ${file}`);
+    if(!info) continue;
+    assert(info.width===visual.canvas.width&&info.height===visual.canvas.height,
+      `${file}: expected ${visual.canvas.width}x${visual.canvas.height}, got ${info.width}x${info.height}`);
+    notes.push({kind:'candidate-environment',file,info});
+  }
   notes.push({status:'awaiting-assets',existingUnreferencedFiles:existing});
 }else{
   assert(typeof visual.environmentAsset==='string','ready status requires environment asset');
