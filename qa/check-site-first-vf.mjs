@@ -172,6 +172,18 @@ if (!ecosystem.includes('MODARYX MODS et Nova Forge OS sont créés par la même
   fail('ecosystem: explicit brand separation copy missing');
 }
 
+const foundations = read('assets/modaryx-foundations.css');
+for (const guard of [
+  'html,body{max-width:100%;overflow-x:clip}',
+  '@media(max-width:400px)',
+  '@media(forced-colors:active)',
+  '@media(prefers-reduced-transparency:reduce)',
+  'white-space:pre-wrap',
+  'overflow-wrap:anywhere'
+]) {
+  if (!foundations.includes(guard)) fail('foundations: reflow/contrast guard missing: ' + guard);
+}
+
 const cinematic = read('assets/modaryx-cinematic-system.css');
 if (!cinematic.includes('top:calc(var(--modaryx-header-height,76px) + 8px)')) {
   fail('cinematic system: sticky section nav does not follow measured header height');

@@ -751,3 +751,30 @@ Intégration :
 
 Aucun PASS CodeQL n'est attribué au nouveau HEAD tant qu'un run correspondant n'est pas observé.
 
+## Candidat ciblé — fondations reflow et contraste — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-reflow-contrast-foundations-20260919`, base fraîche `a545e6a3dc2f97c0e2e16d0d0f5b411e97159542`.
+
+Objectif : avancer la recette Premium HD des 17 pages sans prétendre fermer les preuves natives.
+
+Ajouts source :
+
+- garde globale contre le débordement horizontal ;
+- médias et contenus longs repliables ;
+- boutons/liens/badges/nav/footer compatibles avec lignes multiples ;
+- garde dédiée petits écrans ≤400px ;
+- règles `forced-colors` ;
+- règles `prefers-reduced-transparency` ;
+- contrôle Site First renforcé pour empêcher leur régression ;
+- empreinte foundations réconciliée.
+
+Budget candidat dérivé :
+
+- foundations : **10735 octets** ;
+- noyau : **113993 octets** ;
+- marge sous 800000 : **686007 octets**.
+
+État : **EN COURS — micro-preuve CI requise avant intégration**.
+
+Important : ce lot ne transforme pas une garde source en preuve de zoom natif 400 %, lecteur d'écran, Windows High Contrast ou appareil physique.
+
