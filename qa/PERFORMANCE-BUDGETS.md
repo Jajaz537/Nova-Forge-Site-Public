@@ -292,3 +292,20 @@ Par rapport au HEAD de base `b2603685...` :
 
 La météo externe est désactivée par défaut ; elle n’ajoute donc aucun appel fournisseur au candidat courant.
 
+### Réservation de layout — synchronisation monde réel
+
+Le premier candidat était déjà sous budgets, mais l'accueil desktop montrait un CLS laboratoire de **0,0595** car la ligne « Atmosphère locale » recevait une partie de sa géométrie via la feuille chargée après `load`.
+
+Correction ciblée premium :
+
+- géométrie de `.world-local-context` et de l'attribution déplacée dans `living-world.css`, déjà présent avant rendu ;
+- `real-world-sync.css` rendu layout-neutral ;
+- aucun coût ajouté au noyau précaché par ce déplacement ;
+- CSS runtime monde vivant : **5130 octets** ;
+- CSS lazy synchronisation : **2935 octets** ;
+- module synchronisation : **10606 octets** ;
+- noyau courant du candidat : **115848 octets** ;
+- marge : **684152 octets**.
+
+Micro-preuve après correction : run `35473223046` **success** — accueil mobile LCP **2180 ms / CLS 0**, desktop LCP **2072 ms / CLS 0,0033**.
+
