@@ -195,7 +195,7 @@ try {
   const stageA = await evaluate(cdp,`(async()=>({marker:document.body.dataset.pwaUpdateProof,caches:await caches.keys()}))()`,true);
   observations.stageA=stageA;
   assert(stageA.marker==='A','stage A page marker missing');
-  assert(stageA.caches.includes(${JSON.stringify(CACHE_A)}),'stage A cache missing');
+  assert(stageA.caches.includes(CACHE_A),'stage A cache missing');
 
   mutateToB();
 
