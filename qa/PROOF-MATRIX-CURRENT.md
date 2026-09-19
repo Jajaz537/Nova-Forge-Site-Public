@@ -301,3 +301,19 @@ Contrôles automatiquement déclenchés sur le même candidat : Site First sourc
 
 Portée : la preuve couvre la logique et l'intégration navigateur existante ; elle ne remplace pas une preview HTTPS publique ni un appareil physique.
 
+## Installabilité PWA — Chromium — 19 septembre 2026
+
+PR #38, candidat ciblé.
+
+Run `35469301347` : **success / PASS CIBLÉ** — marker `PASS_TARGETED_PWA_INSTALLABILITY_PROOF`.
+
+Preuves :
+
+- service worker activé et contrôlant la page ;
+- manifeste détecté par Chromium sans erreur de parsing ;
+- `Page.getInstallabilityErrors` retourne **0 erreur** ;
+- `id=./`, `start_url=./`, `scope=./`, `display=standalone` ;
+- icônes 192, 512 et SVG chargées réellement en HTTP 200 avec leurs types attendus.
+
+Portée : Chromium sur loopback de confiance. L'installation manuelle sur preview HTTPS publique et appareil physique reste une preuve distincte.
+
