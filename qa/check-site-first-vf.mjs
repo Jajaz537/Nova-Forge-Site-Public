@@ -89,6 +89,23 @@ for (const page of pages) {
   if (page !== 'index.html' && !html.includes(cinematicRef)) fail(page + ': modaryx-cinematic-system.css missing');
   if (/\bModaryx OS\b/i.test(html)) fail(page + ': deprecated visible product label "Modaryx OS"');
 
+  if (page === '404.html') {
+    if (!/<meta\s+name=["']robots["']\s+content=["'][^"']*noindex[^"']*["'][^>]*>/i.test(html)) {
+      fail(page + ': noindex robots directive missing');
+    }
+  } else {
+    const canonicalMatches = [...html.matchAll(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["'][^>]*>/gi)];
+    if (canonicalMatches.length !== 1) fail(page + ': expected exactly one canonical link');
+    const canonicalUrl = canonicalMatches[0]?.[1] || '';
+    for (const property of ['type','locale','site_name','title','description','url']) {
+      const matches = [...html.matchAll(new RegExp('<meta\\s+property=["\\\']og:' + property + '["\\\']\\s+content=["\\\']([^"\\\']+)["\\\'][^>]*>', 'gi'))];
+      if (matches.length !== 1) fail(page + ': expected exactly one og:' + property);
+      if (property === 'url' && matches[0]?.[1] !== canonicalUrl) {
+        fail(page + ': og:url does not match canonical');
+      }
+    }
+  }
+
   const h1Count = (html.match(/<h1\b/gi) || []).length;
   if (h1Count !== 1) fail(page + ': expected exactly one h1, found ' + h1Count);
 
@@ -334,6 +351,7 @@ const result = {
   marker: failures.length ? 'FAIL_TARGETED_SITE_FIRST_SOURCE_PROOF' : 'PASS_TARGETED_SITE_FIRST_SOURCE_PROOF',
   pages: pages.length,
   structuralA11yChecks: true,
+  seoMetadataChecks: true,
   checksumCount,
   precacheUniqueFiles: precacheFiles.length,
   precacheRequests: precacheRequests.length,
