@@ -165,6 +165,36 @@ if (!shell.includes('data-product-family-note') && !shell.includes('productFamil
   fail('shared shell: product-family de-duplication hook missing');
 }
 
+const publicStatus = JSON.parse(read('public-status.json'));
+if (publicStatus?.schema !== 'nova-forge-public-site-status/v1') {
+  fail('public status: historical schema contract changed unexpectedly');
+}
+if (publicStatus?.living_world?.execution !== 'browser-shared-timeline') {
+  fail('public status: living-world execution state missing');
+}
+if (publicStatus?.living_world?.clock_model !== 'shared-world-utc') {
+  fail('public status: shared UTC clock is not declared');
+}
+if (publicStatus?.living_world?.companion_growth_logic_active !== true
+  || publicStatus?.living_world?.visible_growth_milestones !== true) {
+  fail('public status: active living-world growth state is incomplete');
+}
+if (publicStatus?.living_world?.layered_character_visual_growth !== false) {
+  fail('public status: layered visual growth must remain false until actually delivered');
+}
+if (publicStatus?.living_world?.reduced_motion_respected !== true) {
+  fail('public status: reduced-motion living-world contract missing');
+}
+
+const app = read('assets/app.js');
+new Function(app);
+if (!app.includes("['Monde vivant', livingWorld]")) {
+  fail('public status UI: living-world fact is not rendered');
+}
+if (!app.includes("'chronologie partagée active'")) {
+  fail('public status UI: living-world active label missing');
+}
+
 const ecosystem = read('ecosystem.html');
 if (!ecosystem.includes('id="family"')) fail('ecosystem: same-team section missing');
 if (!ecosystem.includes('Même équipe · produits distincts')) fail('ecosystem: same-team heading missing');
@@ -245,6 +275,9 @@ for (const hook of [
 }
 if (!index.includes('data-world-status role="status" aria-live="polite"')) {
   fail('index: living-world status is not exposed as a polite live status');
+}
+if (!index.includes('<strong>Monde vivant</strong><small>chronologie partagée active</small>')) {
+  fail('index: public status fallback omits living-world state');
 }
 
 const sw = read('sw.js');
