@@ -62,3 +62,17 @@ Décisions :
 
 Le home conserve son système visuel dédié et n'est pas forcé à charger cette feuille secondaire.
 
+## Fondations reflow + contraste — 19 septembre 2026
+
+Lot ciblé de préparation VF sur les 17 pages publiques :
+
+- largeur globale bornée sans min-width implicite ;
+- médias fluides ;
+- boutons, badges, liens, navigation et footer autorisés à revenir à la ligne ;
+- `pre` et contenus longs repliables au lieu de forcer le débordement ;
+- garde mobile à 400px pour réduire les risques de collision navigation/branding ;
+- traitement `forced-colors` pour focus, bordures, surfaces et action principale ;
+- retrait du blur dans `prefers-reduced-transparency`.
+
+Ces règles sont des **garde-fous source**. Elles ne constituent pas une preuve native 400 % ni une validation Windows High Contrast. Les preuves navigateur/accessibilité externes restent requises.
+
