@@ -405,7 +405,13 @@
 (() => {
   'use strict';
   const revealDecor = () => {
-    const apply = () => { document.documentElement.dataset.homeDecorReady = 'true'; };
+    const apply = () => {
+      document.querySelectorAll('img[data-deferred-src]').forEach((image) => {
+        if (!image.getAttribute('src')) image.src = image.dataset.deferredSrc;
+        image.removeAttribute('data-deferred-src');
+      });
+      document.documentElement.dataset.homeDecorReady = 'true';
+    };
     if ('requestIdleCallback' in window) window.requestIdleCallback(apply, {timeout: 1200});
     else window.setTimeout(apply, 250);
   };
