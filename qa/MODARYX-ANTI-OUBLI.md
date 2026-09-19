@@ -138,3 +138,15 @@ Décision utilisateur : **MODARYX est désormais la priorité n°1 jusqu'à sa V
 
 Plan de reprise : `qa/MODARYX-SITE-FIRST-VF-PLAN-20260919.md`.
 
+## Croissance visuelle — architecture prête, assets finaux encore manquants — 19 septembre 2026
+
+Le contrat `layered-stage-assets-v1` et ses deux slots `wolf` / `dragon` sont désormais intégrés au candidat. Le moteur sait associer le stade logique courant à une couche visuelle indépendante, avec environnement séparé et activation atomique.
+
+Aucun asset de stade n'est inventé : `visualGrowth.status=awaiting-assets` et les chemins restent nuls tant que de vrais visuels cohérents Premium HD ne sont pas disponibles.
+
+Statuts à conserver :
+
+- **TERMINÉ** — contrat de couches, mapping des cinq stades, politique same-origin/runtime-on-demand et fallback composite ;
+- **EN COURS** — production/intégration des vrais assets loup + dragon + environnement séparé ;
+- la croissance visuelle individuelle ne devient **TERMINÉE** qu'après présence, rendu et preuve des assets réels.
+
