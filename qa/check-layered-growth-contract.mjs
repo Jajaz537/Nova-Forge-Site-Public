@@ -1,86 +1,61 @@
 import fs from 'node:fs';
-import vm from 'node:vm';
+import {validateVisualGrowth, renderVisualGrowth} from '../assets/living-world-visual-growth.mjs';
 
-const source=fs.readFileSync(new URL('../assets/living-world.js',import.meta.url),'utf8');
 const baseConfig=JSON.parse(fs.readFileSync(new URL('../data/living-world.json',import.meta.url),'utf8'));
+const mainSource=fs.readFileSync(new URL('../assets/living-world.js',import.meta.url),'utf8');
+const indexSource=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
 
-function makeNode(dataset={}){
+function node(dataset={}){
   const attrs=new Map();
   return {
     dataset:{...dataset},
     textContent:'',
+    className:'',
     hidden:false,
+    children:[],
     setAttribute(name,value){attrs.set(name,String(value)); if(name==='src') this.src=String(value);},
     getAttribute(name){return attrs.has(name)?attrs.get(name):null;},
-    removeAttribute(name){attrs.delete(name); if(name==='src') delete this.src;},
+    append(child){this.children.push(child);},
+    querySelector(selector){
+      const match=selector.match(/^\[data-world-visual="([^"]+)"\]$/);
+      if(match) return this.children.find(x=>x.dataset?.worldVisual===match[1])||null;
+      return null;
+    },
     _attrs:attrs
   };
 }
 
-function fixedDateClass(iso){
-  return class FixedDate extends Date {
-    constructor(value){super(value===undefined?iso:value);}
-    static now(){return new Date(iso).getTime();}
-  };
-}
-
-async function runScenario(config,iso='2026-09-19T12:00:00Z'){
-  const root=makeNode();
-  const status=makeNode();
-  const phase=makeNode();
-  const age=makeNode();
-  const wolfLabel=makeNode({worldInhabitant:'wolf'});
-  const dragonLabel=makeNode({worldInhabitant:'dragon'});
-  const wolfNext=makeNode({worldNext:'wolf'});
-  const dragonNext=makeNode({worldNext:'dragon'});
-  const environment=makeNode({worldFallbackSrc:'./assets/modaryx-wolf-dragon-hero.webp'});
+function documentMock(){
+  const root=node();
+  const hero=node();
+  const environment=node({worldFallbackSrc:'./assets/modaryx-wolf-dragon-hero.webp'});
+  environment.className='modaryx-realm-art';
   environment.setAttribute('src','./assets/modaryx-wolf-dragon-hero.webp');
-  const wolfVisual=makeNode({worldVisual:'wolf'});
-  const dragonVisual=makeNode({worldVisual:'dragon'});
-  wolfVisual.hidden=true;
-  dragonVisual.hidden=true;
+  const head=node();
 
-  const document={
-    documentElement:root,
-    baseURI:'https://modaryx.test/index.html',
-    hidden:false,
-    querySelector(selector){
-      if(selector==='[data-world-status]') return status;
-      if(selector==='[data-world-phase]') return phase;
-      if(selector==='[data-world-age]') return age;
-      if(selector==='[data-world-environment]') return environment;
-      return null;
-    },
-    querySelectorAll(selector){
-      if(selector==='[data-world-inhabitant]') return [wolfLabel,dragonLabel];
-      if(selector==='[data-world-next]') return [wolfNext,dragonNext];
-      if(selector==='[data-world-visual]') return [wolfVisual,dragonVisual];
-      return [];
-    },
-    addEventListener(){}
-  };
-
-  const intervals=[];
-  const context={
-    URL,Map,Set,Number,String,Array,Math,Promise,
-    Date:fixedDateClass(iso),
-    document,
-    fetch:async()=>({
-      ok:true,
-      headers:{get(){return null;}},
-      async json(){return JSON.parse(JSON.stringify(config));}
-    }),
-    window:{
-      setInterval(fn,ms){intervals.push({fn,ms});return intervals.length;},
-      clearInterval(){}
+  return {
+    root,hero,environment,head,
+    document:{
+      documentElement:root,
+      baseURI:'https://modaryx.test/index.html',
+      head,
+      querySelector(selector){
+        if(selector==='[data-world-environment], .modaryx-realm-art') return environment;
+        if(selector==='.modaryx-realm-hero') return hero;
+        if(selector==='[data-world-visual-layers]') return hero.children.find(x=>x.dataset?.worldVisualLayers==='true')||null;
+        if(selector==='link[data-world-visual-growth-style]') return head.children.find(x=>x.dataset?.worldVisualGrowthStyle==='true')||null;
+        return null;
+      },
+      createElement(tag){
+        const el=node();
+        el.tagName=String(tag).toUpperCase();
+        el.alt='';
+        el.width=0;
+        el.height=0;
+        return el;
+      }
     }
   };
-
-  vm.runInNewContext(source,context,{filename:'assets/living-world.js'});
-  await new Promise(resolve=>setTimeout(resolve,0));
-  await new Promise(resolve=>setTimeout(resolve,0));
-
-  return {root,status,phase,age,wolfLabel,dragonLabel,wolfNext,dragonNext,environment,wolfVisual,dragonVisual,intervals};
 }
 
 function assert(name,condition){
@@ -99,41 +74,80 @@ function readyConfig(){
   return config;
 }
 
-const fallback=await runScenario(baseConfig);
-assert('current contract must remain awaiting-assets',fallback.root.dataset.worldVisualGrowth==='awaiting-assets');
-assert('fallback composite must remain selected',fallback.environment.src==='./assets/modaryx-wolf-dragon-hero.webp');
-assert('wolf layer must remain hidden without art',fallback.wolfVisual.hidden===true&&!fallback.wolfVisual.src);
-assert('dragon layer must remain hidden without art',fallback.dragonVisual.hidden===true&&!fallback.dragonVisual.src);
-assert('logical wolf stage remains baby',fallback.root.dataset.worldWolfStage==='baby');
-assert('logical dragon stage remains baby',fallback.root.dataset.worldDragonStage==='baby');
+assert('current visual contract must validate',validateVisualGrowth(baseConfig,'https://modaryx.test/index.html'));
+assert('current status must await assets',baseConfig.visualGrowth.status==='awaiting-assets');
+assert('current contract must not invent environment asset',baseConfig.visualGrowth.environmentAsset===null);
+assert('main runtime must lazy-load visual module only for ready status',
+  mainSource.includes("config?.visualGrowth?.status === 'ready'") &&
+  mainSource.includes("living-world-visual-growth.mjs"));
+assert('visual layer markup must not burden current critical HTML',!indexSource.includes('data-world-visual-layers'));
 
-const ready=await runScenario(readyConfig());
-assert('complete bundle must activate',ready.root.dataset.worldVisualGrowth==='active');
-assert('environment layer must replace composite',ready.environment.src==='https://modaryx.test/assets/living-world/environment.webp');
-assert('wolf baby layer active',ready.wolfVisual.hidden===false&&ready.wolfVisual.src.endsWith('/assets/living-world/wolf-baby.webp'));
-assert('dragon baby layer active',ready.dragonVisual.hidden===false&&ready.dragonVisual.src.endsWith('/assets/living-world/dragon-baby.webp'));
+const fallbackDoc=documentMock();
+const fallbackResult=await renderVisualGrowth({
+  config:baseConfig,
+  document:fallbackDoc.document,
+  root:fallbackDoc.root,
+  stages:{wolf:'baby',dragon:'baby'},
+  loadImage:async()=>true
+});
+assert('awaiting-assets must not activate layers',fallbackResult===false&&fallbackDoc.root.dataset.worldVisualGrowth==='awaiting-assets');
+assert('fallback composite must remain untouched',fallbackDoc.environment.src==='./assets/modaryx-wolf-dragon-hero.webp');
 
-const juvenile=await runScenario(readyConfig(),'2026-11-20T12:00:00Z');
-assert('wolf must use juvenile visual at day 62',juvenile.wolfVisual.src.endsWith('/assets/living-world/wolf-juvenile.webp'));
-assert('dragon must use juvenile visual at day 62',juvenile.dragonVisual.src.endsWith('/assets/living-world/dragon-juvenile.webp'));
-assert('wolf logical stage juvenile',juvenile.root.dataset.worldWolfStage==='juvenile');
-assert('dragon logical stage juvenile',juvenile.root.dataset.worldDragonStage==='juvenile');
+const ready=readyConfig();
+assert('synthetic ready contract must validate',validateVisualGrowth(ready,'https://modaryx.test/index.html'));
+const readyDoc=documentMock();
+const loaded=[];
+const readyResult=await renderVisualGrowth({
+  config:ready,
+  document:readyDoc.document,
+  root:readyDoc.root,
+  stages:{wolf:'baby',dragon:'baby'},
+  loadImage:async(url)=>{loaded.push(url);return true;}
+});
+assert('complete ready bundle must activate',readyResult===true&&readyDoc.root.dataset.worldVisualGrowth==='active');
+assert('environment must switch atomically',readyDoc.environment.src==='https://modaryx.test/assets/living-world/environment.webp');
+const layer=readyDoc.hero.children.find(x=>x.dataset?.worldVisualLayers==='true');
+assert('layer container must be created',Boolean(layer));
+const wolf=layer.querySelector('[data-world-visual="wolf"]');
+const dragon=layer.querySelector('[data-world-visual="dragon"]');
+assert('wolf baby layer must activate',wolf&&!wolf.hidden&&wolf.src.endsWith('/assets/living-world/wolf-baby.webp'));
+assert('dragon baby layer must activate',dragon&&!dragon.hidden&&dragon.src.endsWith('/assets/living-world/dragon-baby.webp'));
+assert('environment and current stages must preload before activation',loaded.length===3);
+
+const juvenileDoc=documentMock();
+await renderVisualGrowth({
+  config:ready,
+  document:juvenileDoc.document,
+  root:juvenileDoc.root,
+  stages:{wolf:'juvenile',dragon:'juvenile'},
+  loadImage:async()=>true
+});
+const juvenileLayer=juvenileDoc.hero.children.find(x=>x.dataset?.worldVisualLayers==='true');
+assert('wolf juvenile mapping',juvenileLayer.querySelector('[data-world-visual="wolf"]').src.endsWith('/assets/living-world/wolf-juvenile.webp'));
+assert('dragon juvenile mapping',juvenileLayer.querySelector('[data-world-visual="dragon"]').src.endsWith('/assets/living-world/dragon-juvenile.webp'));
 
 const incomplete=readyConfig();
 incomplete.visualGrowth.slots.find(s=>s.inhabitantId==='dragon').stages.baby=null;
-const failedClosed=await runScenario(incomplete);
-assert('ready bundle with missing stage must fail closed',failedClosed.root.dataset.worldSource==='unavailable');
-assert('failed bundle must not activate layers',failedClosed.wolfVisual.hidden===true&&failedClosed.dragonVisual.hidden===true);
+assert('ready bundle missing a stage must fail validation',!validateVisualGrowth(incomplete,'https://modaryx.test/index.html'));
 
 const external=readyConfig();
 external.visualGrowth.slots.find(s=>s.inhabitantId==='wolf').stages.baby='https://example.com/wolf.webp';
-const rejected=await runScenario(external);
-assert('external visual asset must be rejected',rejected.root.dataset.worldSource==='unavailable');
+assert('external stage asset must fail validation',!validateVisualGrowth(external,'https://modaryx.test/index.html'));
+
+const failedLoadDoc=documentMock();
+const failedLoad=await renderVisualGrowth({
+  config:ready,
+  document:failedLoadDoc.document,
+  root:failedLoadDoc.root,
+  stages:{wolf:'baby',dragon:'baby'},
+  loadImage:async()=>{throw new Error('missing asset');}
+});
+assert('asset load failure must preserve fallback',failedLoad===false&&failedLoadDoc.root.dataset.worldVisualGrowth==='fallback');
+assert('failed load must keep composite',failedLoadDoc.environment.src==='./assets/modaryx-wolf-dragon-hero.webp');
 
 console.log(JSON.stringify({
   marker:'PASS_TARGETED_LAYERED_GROWTH_CONTRACT',
-  current:{visualState:fallback.root.dataset.worldVisualGrowth,wolf:fallback.root.dataset.worldWolfStage,dragon:fallback.root.dataset.worldDragonStage},
-  syntheticReady:{visualState:ready.root.dataset.worldVisualGrowth,environment:ready.environment.src,wolf:ready.wolfVisual.src,dragon:ready.dragonVisual.src},
-  juvenile:{wolf:juvenile.wolfVisual.src,dragon:juvenile.dragonVisual.src},
+  current:{status:baseConfig.visualGrowth.status,criticalHtmlSlots:false},
+  syntheticReady:{active:true,preloaded:loaded.length,wolf:wolf.src,dragon:dragon.src},
   failClosed:true
 },null,2));
