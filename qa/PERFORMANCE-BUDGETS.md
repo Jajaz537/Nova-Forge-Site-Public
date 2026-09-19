@@ -175,3 +175,17 @@ Delta par rapport au lot précédent : **+167 octets runtime**. Le noyau install
 
 Cette feuille reste chargée en runtime sur les pages secondaires et n'est pas ajoutée au noyau install-précaché. Le noyau reste donc **111822 octets**, marge **688178 octets** sous le garde-fou 800000.
 
+## Monde vivant — jalons de croissance visibles — 19 septembre 2026
+
+Le lot de visibilité de progression ajoute les prochains jalons du loup et du dragon dans le panneau du monde vivant et des libellés d'activité par phase.
+
+- `index.html` : **19050 → 19296 octets**, soit **+246 octets** dans le noyau ;
+- noyau dérivé : **112068 octets** ;
+- marge sous 800000 : **687932 octets** ;
+- `assets/living-world.js` : **5991 octets** ;
+- `assets/living-world.css` : **3792 octets** ;
+- `data/living-world.json` : **2748 octets** ;
+- runtime monde vivant total : **12531 octets**.
+
+Aucun visuel lourd n'est ajouté au précache global.
+
