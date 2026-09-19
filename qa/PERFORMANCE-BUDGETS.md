@@ -250,3 +250,20 @@ Ces trois fichiers restent hors du précache cœur.
 
 Aucun asset de croissance lourd n'est ajouté au précache. Les futurs assets de stades suivent la politique `runtime-on-demand` et `current-stage-only`.
 
+### Correction du coût critique — croissance visuelle en couches
+
+La première variante ajoutait **+6420 octets** au runtime monde vivant chargé sur l'accueil et **+352 octets** à `index.html`. Le run labo `35470244794` a échoué sur l'accueil mobile avec **LCP 3100 ms**.
+
+Après isolation :
+
+- `index.html` revient à **19411 octets**, soit **0 octet de delta** par rapport à la base ;
+- `assets/living-world.css` revient à **4049 octets** ;
+- `assets/living-world.js` : **7439 octets** ;
+- `data/living-world.json` : **3647 octets** ;
+- runtime monde vivant chargé courant : **15135 octets**, delta **+1848 octets** ;
+- module dormant `living-world-visual-growth.mjs` : **6071 octets** ;
+- CSS dormant `living-world-visual-growth.css` : **1009 octets** ;
+- ces deux fichiers ne sont demandés qu'après passage explicite à `visualGrowth.status=ready`.
+
+Le noyau install-précaché revient donc à **114977 octets**, marge **685023 octets** sous 800000. La micro-preuve performance doit confirmer cette correction avant fusion.
+
