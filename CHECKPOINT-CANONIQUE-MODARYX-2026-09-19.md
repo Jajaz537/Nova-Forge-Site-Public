@@ -248,3 +248,41 @@ La nouvelle architecture cache, le quality gate « monde vivant » affiné, les 
 4. Reprendre les illustrations : zéro île/objet flottant, eau moins répétitive, château réellement imposant, animaux réels + quelques habitants/gardes, héros occasionnel.
 5. Continuer la finition Premium HD sans déclarer la VF.
 
+## Mise à jour ciblée — empreinte `sw.js` et couverture statique — 19 septembre 2026
+
+### Erreur isolée après intégration cache
+
+Après l'intégration de la nouvelle architecture, `SHA256SUMS.txt` contenait encore l'ancienne empreinte SHA-256 de `sw.js` :
+
+- ancienne valeur : `aded853aaf9777bc6efb7b1c5c98f557415c303eeb0201852a1009f02e114d61` ;
+- contenu exact du nouveau blob GitHub `sw.js` : blob `cc5be375a444fd8e32ae546e628ddc0a4ddd06e2`, 6289 octets ;
+- SHA-256 fraîche du contenu exact : `35fe17798188f658fc94a5f289e666f25ef7177658869ce118b921d604706873`.
+
+Procédure appliquée : erreur exacte → isolation sur `chatgpt/modaryx-fingerprint-fix-20260919` → correction d'une seule ligne → micro-preuve → intégration contrôlée via PR #17.
+
+Résultat :
+
+- PR #17 : **TERMINÉE — fusionnée** ;
+- commit d'intégration : `3baf4fc046f719b39b646d63862718fae5beb899` ;
+- `SHA256SUMS.txt` contient désormais une seule entrée `./sw.js` et elle correspond à la nouvelle empreinte ;
+- aucun autre fichier public modifié par ce micro-lot ;
+- `main` et infrastructure critique inchangées.
+
+### Micro-preuve de couverture statique de la stratégie cache
+
+Inspection ciblée du HEAD intégré après la restructuration :
+
+- 17 pages publiques extraites de `PUBLIC_PAGE_PATHS` ;
+- 654 références locales `href/src` inspectées ;
+- 0 référence locale non couverte par l'une des catégories attendues : page publique connue, cœur précaché, donnée fraîche explicite, ou asset runtime autorisé.
+
+Cette preuve est **ciblée et statique**. Elle ne couvre pas automatiquement les URLs construites dynamiquement par JavaScript et ne vaut pas preuve navigateur/offline réelle.
+
+### État courant après ce micro-lot
+
+- **TERMINÉ** — architecture cache intégrée sur la branche active PR #12 avec empreinte `sw.js` réconciliée.
+- **TERMINÉ** — couverture statique `href/src` des 17 pages vérifiée sur le périmètre inspecté.
+- **EN COURS** — validation PWA HTTPS réelle et comportement offline/update natif.
+- **EN COURS** — correction artistique des illustrations selon le quality gate monde vivant.
+- **PREUVE MANQUANTE** — validations externes précédemment listées.
+
