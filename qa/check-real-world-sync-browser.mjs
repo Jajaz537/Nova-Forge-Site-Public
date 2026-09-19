@@ -83,7 +83,7 @@ try{
   assert('weather stays unavailable without provider',automatic.weather==='unavailable');
   assert('automatic UI copy',automatic.text.startsWith('Automatique · '));
   assert('sync CSS loaded',automatic.style===true);
-  assert('weather layer hidden',automatic.layerHidden===true);
+  assert('weather layer stays mounted for soft transitions',automatic.layerHidden===false);
 
   const synthetic=await evalv(cdp,`(async()=>{
     const m=await import('./assets/real-world-sync.mjs');
@@ -112,10 +112,52 @@ try{
   assert('copy mentions rain',synthetic.text.includes('pluie'));
   assert('attribution visible',synthetic.attribution.includes('Proof weather'));
 
+  const clearSpells=await evalv(cdp,`(async()=>{
+    const m=await import('./assets/real-world-sync.mjs');
+    const state=await m.applyRealitySync({
+      document,
+      now:new Date('2026-09-20T13:00:00Z'),
+      contextOverride:{
+        schemaVersion:1,
+        source:'proof-coarse',
+        context:{timezone:'Europe/Paris',climateBand:'north-temperate'},
+        weather:{status:'live',condition:'partly-cloudy',intensity:.43,attribution:{label:'Proof weather',url:location.origin+'/source'}}
+      }
+    });
+    return {
+      weather:document.documentElement.dataset.localWeather,
+      layerHidden:document.querySelector('[data-real-weather-layer]')?.hidden,
+      text:document.querySelector('[data-real-world-context]')?.textContent||''
+    };
+  })()`,true);
+  assert('clear spells state active',clearSpells.weather==='partly-cloudy');
+  assert('clear spells layer remains mounted',clearSpells.layerHidden===false);
+  assert('copy mentions clear spells',clearSpells.text.includes('éclaircies'));
+
+  const wind=await evalv(cdp,`(async()=>{
+    const m=await import('./assets/real-world-sync.mjs');
+    await m.applyRealitySync({
+      document,
+      now:new Date('2026-09-20T13:00:00Z'),
+      contextOverride:{
+        schemaVersion:1,
+        source:'proof-coarse',
+        context:{timezone:'Europe/Paris',climateBand:'north-temperate'},
+        weather:{status:'live',condition:'wind',intensity:.64,attribution:{label:'Proof weather',url:location.origin+'/source'}}
+      }
+    });
+    return {
+      weather:document.documentElement.dataset.localWeather,
+      text:document.querySelector('[data-real-world-context]')?.textContent||''
+    };
+  })()`,true);
+  assert('wind state active',wind.weather==='wind');
+  assert('copy mentions wind',wind.text.includes('vent soutenu'));
+
   cdp.close();
   console.log(JSON.stringify({
     marker:failures.length?'FAIL_TARGETED_REAL_WORLD_SYNC_BROWSER':'PASS_TARGETED_REAL_WORLD_SYNC_BROWSER',
-    automatic,syntheticSouthRain:synthetic,failures
+    automatic,syntheticSouthRain:synthetic,syntheticClearSpells:clearSpells,syntheticWind:wind,failures
   },null,2));
   if(failures.length)process.exitCode=1;
 }catch(error){
