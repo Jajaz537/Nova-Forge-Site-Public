@@ -146,3 +146,15 @@ Les deux fichiers runtime concernés ont grandi légèrement pour déclarer et v
 
 Cette hausse runtime de 1450 octets n'est pas ajoutée au précache d'installation.
 
+## Signature d'équipe partagée — impact ciblé — 19 septembre 2026
+
+Le lot « même équipe, produits distincts » ajoute uniquement une signature légère au shell commun et son style.
+
+- noyau avant ce lot : **111076 octets** ;
+- `assets/shell.js` : **+502 octets** ;
+- `assets/modaryx-foundations.css` : **+244 octets** ;
+- nouveau noyau dérivé : **111822 octets** ;
+- marge sous 800000 : **688178 octets**.
+
+La section statique ajoutée à `ecosystem.html` reste une page runtime et ne réintroduit pas un précache global.
+
