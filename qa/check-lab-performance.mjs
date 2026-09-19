@@ -54,9 +54,9 @@ try{
   await cdp.send('Network.setBypassServiceWorker',{bypass:true});
   await cdp.send('Network.setCacheDisabled',{cacheDisabled:true});
   await cdp.send('Page.addScriptToEvaluateOnNewDocument',{source:`
-    window.__mxPerf={lcp:0,cls:0,longTasks:0};
-    new PerformanceObserver(list=>{for(const e of list.getEntries()) window.__mxPerf.lcp=Math.max(window.__mxPerf.lcp,e.startTime||0);}).observe({type:'largest-contentful-paint',buffered:true});
-    new PerformanceObserver(list=>{for(const e of list.getEntries()) if(!e.hadRecentInput) window.__mxPerf.cls+=e.value||0;}).observe({type:'layout-shift',buffered:true});
+    window.__mxPerf={lcp:0,lcpElement:'',cls:0,shiftSources:[],longTasks:0};
+    new PerformanceObserver(list=>{for(const e of list.getEntries()){if((e.startTime||0)>=window.__mxPerf.lcp){window.__mxPerf.lcp=e.startTime||0;const n=e.element;window.__mxPerf.lcpElement=n?(n.tagName+(n.id?'#'+n.id:'')+(n.className&&typeof n.className==='string'?'.'+n.className.trim().replace(/\\s+/g,'.'):'')):'';}}}).observe({type:'largest-contentful-paint',buffered:true});
+    new PerformanceObserver(list=>{for(const e of list.getEntries()) if(!e.hadRecentInput){window.__mxPerf.cls+=e.value||0;for(const s of e.sources||[]){const n=s.node;if(n){const label=n.tagName+(n.id?'#'+n.id:'')+(n.className&&typeof n.className==='string'?'.'+n.className.trim().replace(/\\s+/g,'.'):'');if(label&&!window.__mxPerf.shiftSources.includes(label))window.__mxPerf.shiftSources.push(label);}}}}).observe({type:'layout-shift',buffered:true});
     new PerformanceObserver(list=>{window.__mxPerf.longTasks+=list.getEntries().length;}).observe({type:'longtask',buffered:true});
   `});
 
@@ -73,7 +73,9 @@ try{
         const r=performance.getEntriesByType('resource');
         return {
           lcp:window.__mxPerf?.lcp||0,
+          lcpElement:window.__mxPerf?.lcpElement||'',
           cls:window.__mxPerf?.cls||0,
+          shiftSources:window.__mxPerf?.shiftSources||[],
           longTasks:window.__mxPerf?.longTasks||0,
           fcp:performance.getEntriesByName('first-contentful-paint')[0]?.startTime||0,
           domContentLoaded:nav?.domContentLoadedEventEnd||0,
