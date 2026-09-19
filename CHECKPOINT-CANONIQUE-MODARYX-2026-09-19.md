@@ -595,3 +595,19 @@ Impact :
 
 État avant intégration : **EN COURS — micro-preuve CI à obtenir sur la PR**.
 
+## Intégration contrôlée — horloge monde vivant partagée — 19 septembre 2026
+
+Après correction ciblée et micro-preuve CI :
+
+- PR #24 : **TERMINÉE — fusionnée** ;
+- commit d'intégration : `f5fcbccece6b5b53a3d1028c65d8bfbb8b496b1e` ;
+- workflow **MODARYX Site First Targeted Source Proof** sur la PR #24 : run `35461824549`, conclusion **success / PASS CIBLÉ** ;
+- la phase du monde respecte désormais réellement `shared-world-utc` via `getUTCHours()` ;
+- deux visiteurs voient la même phase du monde au même instant, indépendamment de leur fuseau local ;
+- runtime monde vivant : **11232 octets** ;
+- noyau install-précaché : **111822 octets** ;
+- `main` et infrastructure critique : inchangées ;
+- CodeQL du nouveau HEAD est **EN COURS** au moment de cette entrée.
+
+Cette intégration ne ferme pas la croissance visuelle individuelle, la preuve navigateur réelle ni les portes externes de VF.
+
