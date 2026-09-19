@@ -191,3 +191,17 @@ Décision utilisateur explicitement retenue pour la VF :
 - **BLOQUÉ / décision externe** — activation de la météo réelle en production tant que fournisseur, licence et attribution ne sont pas validés ;
 - `main`, DNS, DNSSEC, IONOS, secrets et configuration Cloudflare critique restent inchangés.
 
+
+
+## Asset compagnon — Loup adolescent — 20 septembre 2026
+
+- PR #49 : **TERMINÉE — fusionnée** au commit `7a229e034aa3f403e12fe689d4731e74d2b40e79` ;
+- asset réel : `assets/living-world/wolf-adolescent.png` ;
+- dimensions : **1600 × 900** ;
+- PNG RGBA, `alpha=true` ;
+- SHA-256 final : `79a5676ac09523c691e650d097d9ed18011bd5bff597657e9ab0262bd3856b97` ;
+- `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ; Source, PWA Offline, Reflow Chromium, Accessibility Chromium et Lab Performance : **success** ;
+- incident ciblé : premier checksum faux `fd9e…` ; Source Proof a mesuré l’empreinte réelle `79a5676a…`, seule la ligne checksum a été corrigée, puis micro-proof Source : **success** ;
+- asset gardé **non référencé** ; `visualGrowth.status=awaiting-assets` inchangé ;
+- couches compagnon : **3/10 TERMINÉES** ;
+- **EN COURS** — loup jeune adulte / adulte + cinq stades dragon.
