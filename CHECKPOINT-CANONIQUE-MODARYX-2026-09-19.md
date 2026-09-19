@@ -853,3 +853,21 @@ Intégration :
 
 État : **TERMINÉ** sur la cohérence source des métadonnées ; validation de rendu des cartes sociales externes non revendiquée.
 
+## Candidat ciblé — micro-preuve navigateur reflow — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-browser-reflow-microproof-20260919`, base fraîche `b555d337f983518effa6a2c8e77a4380f8493fef`.
+
+Ajouts QA uniquement :
+
+- `qa/check-browser-reflow.mjs` ;
+- `.github/workflows/modaryx-browser-reflow-microproof.yml` ;
+- `qa/MODARYX-BROWSER-REFLOW-MICROPROOF-20260919.md`.
+
+Le contrôle vise 17 pages × 4 largeurs (320/400/768/1440), soit 68 navigations Chromium headless, et vérifie reflow, H1/main/footer, exceptions runtime, menu mobile et reduced motion.
+
+Aucun fichier produit n'est modifié par ce lot.
+
+État : **EN COURS — micro-preuve CI à exécuter sur la PR**.
+
+Cette preuve ne remplace pas zoom natif 400 %, Firefox/Safari, lecteur d'écran, appareil physique, PWA offline ou CWV.
+
