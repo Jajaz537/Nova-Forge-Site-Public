@@ -102,6 +102,10 @@ for (const page of pages) {
   const labelFors = new Set(
     [...html.matchAll(/<label\b[^>]*\sfor=["']([^"']+)["'][^>]*>/gi)].map((match) => match[1])
   );
+  const wrappedControlIds = new Set(
+    [...html.matchAll(/<label\b[^>]*>[\s\S]*?<(?:input|select|textarea)\b[^>]*\sid=["']([^"']+)["'][^>]*>[\s\S]*?<\/label>/gi)]
+      .map((match) => match[1])
+  );
 
   for (const img of html.match(/<img\b[^>]*>/gi) || []) {
     if (!/\salt=["'][^"']*["']/i.test(img)) {
@@ -138,8 +142,8 @@ for (const page of pages) {
     const type = attr(control, 'type');
     if (!id || type === 'hidden') continue;
     const labelled = attr(control, 'aria-label') || attr(control, 'aria-labelledby');
-    if (!labelled && !labelFors.has(id)) {
-      fail(page + ': form control #' + id + ' has no explicit label');
+    if (!labelled && !labelFors.has(id) && !wrappedControlIds.has(id)) {
+      fail(page + ': form control #' + id + ' has no explicit or wrapping label');
     }
   }
 
