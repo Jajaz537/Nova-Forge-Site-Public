@@ -218,3 +218,16 @@ Décision utilisateur explicitement retenue pour la VF :
 - asset gardé **non référencé** ; `visualGrowth.status=awaiting-assets` inchangé ;
 - couches compagnon : **4/10 TERMINÉES** ;
 - **EN COURS** — loup adulte + cinq stades dragon.
+
+## Couche compagnon — Loup adulte — 20 septembre 2026
+
+- **TERMINÉ** — PR #51 fusionnée dans la branche Work au commit `f429b4eec281d2d1e5740e5fad8095604fa1da84`.
+- Asset : `assets/living-world/wolf-adult.png`.
+- Format prouvé : PNG RGBA, **1600 × 900**, alpha=true.
+- SHA-256 : `96ef42acd3e209a77602087c0e174335b06f7b85662d3bde53b86c359b56b0d8`.
+- Progression visuelle : adulte final pleinement mature, plus imposant et puissant que le jeune adulte, sans agressivité ni dérive monstrueuse ; composition entière conservée avec espace utile à gauche.
+- Asset volontairement non référencé ; `visualGrowth.status=awaiting-assets` reste inchangé.
+- Preuves ciblées : Layered Growth Asset Gate `35477224017`, Site First Source `35477224046`, PWA Offline `35477224004`, Accessibility `35477224002`, Reflow `35477224010`, Lab Performance `35477224220` — toutes **success**.
+- Couches compagnon : **5/10 TERMINÉES**.
+- **EN COURS** — cinq stades dragon restent à produire, intégrer et prouver avant tout passage `ready`.
+
