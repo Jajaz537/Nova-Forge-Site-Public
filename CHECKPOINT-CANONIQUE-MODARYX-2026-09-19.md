@@ -1385,3 +1385,22 @@ PR #38 candidat :
 
 Limite : installation manuelle sur preview HTTPS publique et appareil physique toujours **PREUVE MANQUANTE**.
 
+## Intégration contrôlée — installabilité PWA Chromium — 19 septembre 2026
+
+PR #38 : **TERMINÉE — fusionnée**.
+
+- commit d'intégration : `3fb18950ac2f760d1b8e4532850d71224e401d13` ;
+- run `35469301347` : **success / PASS CIBLÉ** ;
+- service worker activé et contrôlant ;
+- manifeste Chromium sans erreur ;
+- **0 erreur d'installabilité** retournée par CDP ;
+- `id=./`, `start_url=./`, `scope=./`, `display=standalone` ;
+- icônes 192, 512 et SVG chargées réellement en HTTP 200 ;
+- aucun fichier produit modifié par ce lot QA ;
+- `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
+
+État :
+
+- **TERMINÉ** — installabilité PWA ciblée en Chromium loopback ;
+- **PREUVE MANQUANTE** — installation manuelle sur preview HTTPS publique et appareil physique.
+
