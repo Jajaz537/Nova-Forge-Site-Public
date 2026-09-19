@@ -666,3 +666,34 @@ Intégration :
 
 Ce lot améliore la cohérence et la robustesse Premium HD mais ne vaut pas validation visuelle finale navigateur/appareil.
 
+## Intégration contrôlée — garde-fous structurels accessibilité — 19 septembre 2026
+
+PR #26 : **TERMINÉE — fusionnée**.
+
+Premier run ciblé `35462211868` : **FAIL ciblé**.
+
+Erreur exacte :
+
+- huit contrôles du catalogue étaient signalés « sans label explicite ».
+
+Isolation :
+
+- les huit contrôles étaient en réalité correctement imbriqués dans des éléments `<label>` ;
+- le défaut appartenait donc au nouveau vérificateur source, pas au produit.
+
+Correction ciblée :
+
+- le contrôle reconnaît désormais les deux formes valides : `label[for]` et contrôle imbriqué dans `<label>` ;
+- aucun HTML produit modifié pour masquer le problème de preuve.
+
+Micro-preuve après correction :
+
+- run `35462254451` : **success / PASS CIBLÉ**.
+
+Intégration :
+
+- commit de merge : `a6b5e86c5f2c22a7d7614707044e9fd7ef83bd30` ;
+- le contrôle Site First vérifie maintenant sur les 17 pages : un H1 unique, IDs uniques, attributs alt, noms accessibles statiques des liens/boutons, références ARIA existantes et étiquetage structurel des contrôles de formulaire ;
+- cette preuve source ne remplace toujours pas NVDA/Narrator/VoiceOver ni les appareils physiques ;
+- `main` et infrastructure critique : inchangées.
+
