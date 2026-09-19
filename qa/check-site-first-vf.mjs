@@ -194,6 +194,11 @@ if (living?.growthModel?.order?.join('|') !== expectedStages.join('|')) {
 if (living?.growthModel?.pace !== 'independent-per-species') {
   fail('living world: independent pacing contract missing');
 }
+for (const phase of living?.dayPhases || []) {
+  if (typeof phase?.activity !== 'string' || !phase.activity.trim()) {
+    fail('living world: phase activity label missing for ' + (phase?.id || 'unknown'));
+  }
+}
 for (const inhabitant of living?.inhabitants || []) {
   const order = (inhabitant?.stages || []).map((stage) => stage?.id);
   if (order.join('|') !== expectedStages.join('|')) {
@@ -214,12 +219,17 @@ if (!livingJs.includes("config?.clock?.model === 'shared-world-utc'")) {
 if (!livingJs.includes('now.getUTCHours()')) {
   fail('living world: shared UTC phase does not use UTC hours');
 }
+if (!livingJs.includes('nextStageNodes') || !livingJs.includes('daysUntilNext')) {
+  fail('living world: visible companion growth milestones are not wired');
+}
 const utcProbe = new Date('2026-09-19T23:30:00Z');
 if (utcProbe.getUTCHours() !== 23) fail('living world proof: UTC probe is not deterministic');
 
 const livingCss = read('assets/living-world.css');
 if (!livingCss.includes('prefers-reduced-motion')) fail('living world: prefers-reduced-motion guard missing');
 if (!livingCss.includes('html[data-motion=reduced]')) fail('living world: explicit reduced-motion guard missing');
+if (!livingCss.includes('.world-growth-next')) fail('living world: visible growth milestone style missing');
+if (!livingCss.includes('transition:filter 2.4s ease')) fail('living world: phase filter transition missing');
 
 const index = read('index.html');
 for (const hook of [
@@ -227,9 +237,14 @@ for (const hook of [
   'data-world-age',
   'data-world-inhabitant="wolf"',
   'data-world-inhabitant="dragon"',
+  'data-world-next="wolf"',
+  'data-world-next="dragon"',
   'data-world-status'
 ]) {
   if (!index.includes(hook)) fail('index: living-world hook missing: ' + hook);
+}
+if (!index.includes('data-world-status role="status" aria-live="polite"')) {
+  fail('index: living-world status is not exposed as a polite live status');
 }
 
 const sw = read('sw.js');
