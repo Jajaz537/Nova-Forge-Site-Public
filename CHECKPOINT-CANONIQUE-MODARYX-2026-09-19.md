@@ -976,3 +976,24 @@ Intégration :
 
 Reste **PREUVE MANQUANTE** : vrai parcours import/export avec fichiers utilisateur, sélecteur natif, lecture SHA-256 d'un vrai fichier et portes externes VF.
 
+## Candidat ciblé — fichiers réels import/export — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-real-file-browser-proof-20260919`, base fraîche `c57fe107a63fcfd7d35bb534415d8e4b6f6490d9`.
+
+Ajouts QA uniquement :
+
+- `qa/check-real-file-browser.mjs` ;
+- `.github/workflows/modaryx-real-file-browser-proof.yml` ;
+- `qa/MODARYX-REAL-FILE-BROWSER-PROOF-20260919.md`.
+
+Périmètre :
+
+- Vérificateur : vrai fichier + SHA-256 ;
+- Communauté : collection exportée/importée en vrai JSON ;
+- Communauté : contribution exportée/importée en vrai JSON ;
+- Creator Studio : manifeste exporté/importé en vrai JSON.
+
+Le navigateur écrit et relit des fichiers réels du runner. Le dialogue graphique natif du sélecteur de fichier n'est pas piloté et reste une preuve distincte.
+
+État : **EN COURS — micro-preuve CI requise avant intégration**.
+
