@@ -123,6 +123,7 @@ try {
       const badControls=[...document.querySelectorAll('input,select,textarea')].filter(el=>{
         if(el.type==='hidden'||el.disabled) return false;
         if(el.getAttribute('aria-label')||el.getAttribute('aria-labelledby')) return false;
+        if(el.closest('label')) return false;
         return !(el.id && document.querySelector('label[for="'+CSS.escape(el.id)+'"]'));
       }).map(el=>el.id||el.outerHTML.slice(0,100));
       return {
