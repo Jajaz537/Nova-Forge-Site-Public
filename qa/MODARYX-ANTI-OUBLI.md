@@ -147,7 +147,10 @@ Aucun asset de stade n'est inventé : `visualGrowth.status=awaiting-assets` et l
 Statuts à conserver :
 
 - **TERMINÉ** — contrat de couches, mapping des cinq stades, politique same-origin/runtime-on-demand et fallback composite ;
-- **EN COURS** — production/intégration des vrais assets loup + dragon + environnement séparé ;
+- **TERMINÉ sur le premier asset** — environnement séparé Premium réel `assets/living-world/environment-premium.jpg`, **1600 × 900**, ajouté par PR #46 et gardé non référencé tant que le bundle compagnon n'est pas complet ;
+- PR #46 : **TERMINÉE — fusionnée** au commit `8e9fc9bb2bdc73c047f6b65bd0b223a7b297e744` ; `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING`, Source, PWA Offline, Reflow Chromium, Accessibility Chromium et Lab Performance : **success** ;
+- **EN COURS** — production/intégration des cinq couches loup + cinq couches dragon avec alpha ;
+- `visualGrowth.status=awaiting-assets` reste obligatoire tant que ces dix couches ne sont pas toutes présentes et prouvées ;
 - la croissance visuelle individuelle ne devient **TERMINÉE** qu'après présence, rendu et preuve des assets réels.
 
 ## Monde vivant — chronique ambiante partagée — 19 septembre 2026
