@@ -154,6 +154,7 @@ const chrome = spawn(CHROME_BIN, [
   'about:blank'
 ], {stdio: ['ignore', 'ignore', 'pipe']});
 
+let restartedLoopback = null;
 let chromeStderr = '';
 chrome.stderr.on('data', (chunk) => {
   chromeStderr += String(chunk);
@@ -275,8 +276,8 @@ try {
   assert(!offlineIndexNav.errorText, 'precache index offline navigation failed: ' + offlineIndexNav.errorText);
   assert(offlineIndex.main && offlineIndex.title.length > 0, 'offline index content missing');
 
-  const restartedServer = await startLoopbackServer();
-  observations.loopbackRecovered = Boolean(restartedServer?.pid);
+  restartedLoopback = await startLoopbackServer();
+  observations.loopbackRecovered = Boolean(restartedLoopback?.pid);
 
   const onlineData = await evaluate(cdp, `(async () => {
     const response = await fetch('./data/catalog.json', {cache:'no-store'});
@@ -305,6 +306,9 @@ try {
   }, null, 2));
   process.exitCode = 1;
 } finally {
+  if (restartedLoopback && !restartedLoopback.killed) {
+    try { restartedLoopback.kill('SIGTERM'); } catch {}
+  }
   chrome.kill('SIGTERM');
   await sleep(150);
   if (!chrome.killed) chrome.kill('SIGKILL');
