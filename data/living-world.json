@@ -131,6 +131,8 @@
       "height": 900
     },
     "fallback": "composite-hero",
+    "environmentAsset": null,
+    "activation": "atomic-current-stage",
     "assetPolicy": {
       "sameOrigin": true,
       "allowedPrefix": "./assets/living-world/",
