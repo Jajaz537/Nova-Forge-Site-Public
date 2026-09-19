@@ -197,3 +197,9 @@ Cette feuille appartient au noyau install-précaché. À partir du noyau courant
 
 La micro-preuve CI doit confirmer la mesure réelle du précache avant intégration.
 
+## Métadonnées SEO/sociales — impact cache — 19 septembre 2026
+
+Le lot canonical/Open Graph modifie uniquement les pages secondaires indexables. Il ne modifie ni `index.html`, ni `404.html`, ni les ressources du noyau install-précaché.
+
+Le noyau reste donc **113993 octets**, marge **686007 octets** sous 800000. Les métadonnées supplémentaires suivent le chargement normal des pages.
+
