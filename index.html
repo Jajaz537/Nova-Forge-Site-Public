@@ -20,6 +20,7 @@
   <link rel="canonical" href="https://modaryxmods.com/">
   <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
+  <link rel="preload" as="image" href="./assets/modaryx-wolf-dragon-hero.webp" fetchpriority="high">
   <link rel="alternate" type="application/json" href="./public-status.json" title="MODARYX MODS — statut public">
   <link rel="stylesheet" href="./assets/tokens.css">
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
@@ -56,7 +57,7 @@
 
   <main id="main" class="site-main">
     <section class="hero modaryx-realm-hero" id="top" aria-labelledby="hero-title">
-      <img class="modaryx-realm-art" src="./assets/modaryx-wolf-dragon-hero.webp" width="1600" height="900" alt="" fetchpriority="high" decoding="async">
+      <img class="modaryx-realm-art" src="./assets/modaryx-wolf-dragon-hero.webp" width="1600" height="900" alt="" loading="eager" fetchpriority="high" decoding="sync">
       <div class="shell hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">MODARYX MODS · Gaming • Mods • Modding Tools</p>
@@ -88,7 +89,7 @@
 
     <section class="modaryx-portals" aria-label="Les univers MODARYX">
       <div class="shell"><figure>
-        <img src="./assets/modaryx-world-portals.webp" width="1200" height="675" alt="" loading="lazy" decoding="async">
+        <img data-deferred-src="./assets/modaryx-world-portals.webp" width="1200" height="675" alt="" decoding="async">
         <nav class="modaryx-portal-links" aria-label="Choisir un parcours">
           <a href="./creator-studio.html"><strong>Créer</strong><span>Préparez et exportez le manifeste de votre projet.</span></a>
           <a href="./catalog.html"><strong>Explorer</strong><span>Découvrez les créations du catalogue de démonstration.</span></a>

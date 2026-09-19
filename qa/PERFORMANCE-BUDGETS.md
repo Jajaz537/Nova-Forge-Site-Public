@@ -203,3 +203,23 @@ Le lot canonical/Open Graph modifie uniquement les pages secondaires indexables.
 
 Le noyau reste donc **113993 octets**, marge **686007 octets** sous 800000. Les métadonnées supplémentaires suivent le chargement normal des pages.
 
+## Fermeture ciblée performance laboratoire — 19 septembre 2026
+
+Le lot performance modifie quatre fichiers du noyau par rapport à la base Work `52c2af892694e98dd1560a8a0e371cd7d2574835` :
+
+- `index.html` : **+115 octets** ;
+- `assets/modaryx-foundations.css` : **+112 octets** ;
+- `assets/modaryx-home-cinematic.css` : **+115 octets** ;
+- `assets/app.js` : **+642 octets**.
+
+Delta noyau : **+984 octets**.
+
+Noyau dérivé : **114977 octets**.  
+Marge sous le garde-fou 800000 : **685023 octets**.
+
+Le gain laboratoire provient surtout de l'ordre/priorité de chargement et de la stabilité du layout, pas d'une hausse du budget. Le gros visuel `modaryx-world-portals.webp` reste hors précache d'installation et sa requête d'accueil est différée après le chargement critique.
+
+Run final `35466565740` : **PASS CIBLÉ laboratoire**, avec LCP accueil **2012 ms mobile / 1964 ms desktop** et CLS Catalogue desktop **0**.
+
+Ces chiffres ne sont pas des CWV réels utilisateurs.
+
