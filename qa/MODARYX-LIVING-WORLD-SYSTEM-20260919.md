@@ -187,3 +187,20 @@ Correction :
 - le contrôle Site First exige explicitement le chemin UTC.
 
 Conséquence : à un instant donné, tous les visiteurs reçoivent la **même phase du monde**, indépendamment de leur fuseau local. Cela aligne enfin l'ambiance visuelle avec la chronologie partagée.
+
+## Jalons visibles — progression des compagnons
+
+La progression logique n'est plus seulement interne : l'accueil expose désormais, pour chaque compagnon, **le prochain stade et le nombre de jours restant**.
+
+Exemples de comportement :
+
+- Louveteau → « prochaine étape : Loup juvénile dans 45 jours » au jour de fondation ;
+- Dragonneau → « prochaine étape : Dragon juvénile dans 60 jours » au jour de fondation ;
+- au stade adulte : « Croissance : stade adulte ».
+
+Les libellés sont calculés depuis les mêmes données `stages[].fromDay` que le moteur de croissance ; aucun compteur parallèle n'est maintenu.
+
+Les phases partagées possèdent également un libellé d'activité sobre, utilisé dans le statut du monde. La transition de filtre du panorama est adoucie pour éviter un changement brutal lors d'un basculement de phase.
+
+Limite conservée : **cela rend la progression lisible et temporellement visible, mais ne transforme pas encore physiquement le loup ou le dragon dans l'illustration composite**. La croissance visuelle du personnage lui-même reste EN COURS et nécessite toujours des couches séparées.
+
