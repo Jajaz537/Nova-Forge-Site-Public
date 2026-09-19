@@ -252,3 +252,33 @@ Sur les 17 pages publiques, la micro-preuve couvre :
 
 Limite : cette preuve Chromium ne remplace pas un lecteur d'écran natif ni une validation humaine complète.
 
+## Performance laboratoire Chromium — 19 septembre 2026
+
+PR #36, candidat final `39708373d6f1f1d725b9b0efa92ba067ca531511`.
+
+Séquence ciblée :
+
+- `35465864883` : FAIL — LCP accueil + CLS Catalogue/Jeux ;
+- `35465974453` : diagnostic LCP/CLS ;
+- `35466131162` : FAIL après première correction ;
+- `35466417012` : CLS Catalogue fermé, LCP accueil encore ouvert ;
+- `35466565740` : **success / PASS CIBLÉ**.
+
+Corrections produit retenues :
+
+- priorité explicite du hero LCP ;
+- géométrie HTML Catalogue alignée sur le rendu hydraté ;
+- fallback nav pré-JS borné aux breakpoints mobiles/tablette ;
+- image décorative `modaryx-world-portals.webp` différée après `load` + idle.
+
+Résultat final :
+
+- accueil mobile : LCP **2012 ms**, CLS **0** ;
+- accueil desktop : LCP **1964 ms**, CLS **0,0024** ;
+- Catalogue desktop : CLS **0** ;
+- tous les budgets labo des 5 pages × 2 profils sont respectés.
+
+Les runs source, reflow, accessibilité Chromium, fonctions locales, PWA offline et PWA update du même candidat sont également **success**.
+
+Portée : **laboratoire Chromium uniquement**. Les CWV représentatifs en production restent **PREUVE MANQUANTE**.
+
