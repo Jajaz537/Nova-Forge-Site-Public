@@ -1404,3 +1404,16 @@ PR #38 : **TERMINÉE — fusionnée**.
 - **TERMINÉ** — installabilité PWA ciblée en Chromium loopback ;
 - **PREUVE MANQUANTE** — installation manuelle sur preview HTTPS publique et appareil physique.
 
+## Candidat ciblé — réconciliation matrice finale — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-final-matrix-reconcile-20260919`, base fraîche `de06a111546e6e91892627a428f1409a62224508`.
+
+Lot documentaire uniquement :
+
+- `FINAL-EXTERNAL-VALIDATION-MATRIX.md` réconciliée avec les micro-preuves réellement intégrées ;
+- `MODARYX-VF-STATUS.md` complété avec 17 pages, noyau **114977 octets**, marge **685023**, runtime monde vivant **13287 octets** ;
+- anciennes métriques historiques conservées mais explicitement non courantes ;
+- aucune preuve native manquante n'est convertie artificiellement en PASS.
+
+État : **EN COURS — revue diff + intégration contrôlée requises**.
+
