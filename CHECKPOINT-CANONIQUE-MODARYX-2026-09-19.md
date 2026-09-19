@@ -1539,3 +1539,19 @@ Budget courant :
 - **EN COURS** — production/intégration des vrais assets séparés environnement + loup + dragon ;
 - croissance visuelle individuelle réelle non déclarée terminée avant preuve des assets.
 
+## Candidat ciblé — garde d’intégration des assets de croissance — 19 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-layered-asset-gate-20260919`, base fraîche `3a57e1e86cd1fcbb8e36a91281bd447269ad4c22`. CodeQL de la base : **success** (run `35470638249`).
+
+Ajouts QA uniquement :
+
+- `qa/check-layered-growth-assets.mjs` ;
+- `.github/workflows/modaryx-layered-growth-asset-gate.yml` ;
+- `qa/MODARYX-LAYERED-GROWTH-ASSET-GATE-20260919.md`.
+
+La garde refuse qu’un bundle passe à `ready` sans environnement séparé + 5 stades loup + 5 stades dragon réellement présents, sous `./assets/living-world/`, au canevas 1600 × 900, avec transparence sur les couches de personnages.
+
+État actuel attendu : `awaiting-assets` avec tous les chemins nuls. Aucun chemin ou visuel fictif n’est ajouté.
+
+État : **EN COURS — micro-preuve CI requise avant intégration**.
+

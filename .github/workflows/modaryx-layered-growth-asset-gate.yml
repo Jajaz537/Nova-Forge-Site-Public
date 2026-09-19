@@ -1,0 +1,32 @@
+name: MODARYX Layered Growth Asset Gate
+
+on:
+  pull_request:
+    branches:
+      - design/modaryx-premium-hd-20260914-work
+    paths:
+      - '.github/workflows/modaryx-layered-growth-asset-gate.yml'
+      - 'qa/check-layered-growth-assets.mjs'
+      - 'data/living-world.json'
+      - 'assets/living-world/**'
+      - 'assets/living-world-visual-growth.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  layered-asset-gate:
+    name: Layered growth asset gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate layered visual asset state
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-layered-growth-assets.mjs
