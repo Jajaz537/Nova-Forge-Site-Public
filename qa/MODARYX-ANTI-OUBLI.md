@@ -108,3 +108,18 @@ Décision utilisateur explicite à ne pas perdre :
 - leurs vitesses de croissance peuvent être réglées séparément ;
 - toute future couche visuelle doit respecter ce modèle partagé et montrer le stade réellement calculé, sans sauter directement à une apparence adulte.
 
+## Confirmation anti-oubli — monde vivant + cache durable — 19 septembre 2026
+
+À conserver avant toute VF :
+
+- monde vivant évolutif obligatoire, pas de galerie d'images figées ;
+- Louveteau et Dragonneau suivent le même ordre de stades : bébé → juvénile → adolescent → jeune adulte → adulte ;
+- rythme de croissance indépendant possible selon l'espèce ;
+- croissance visuelle réelle à terminer via couches séparées ;
+- précache cœur compact comme architecture permanente ;
+- ne jamais remettre jeux/mods/modules/visuels lourds dans le précache global par défaut ;
+- utiliser chargement à la demande + runtime cache borné ;
+- garde-fou 800000 conservé sans hausse arbitraire ;
+- état courant de référence : noyau 111076 octets, marge 688924 octets, runtime monde vivant 11065 octets ;
+- validation PWA/offline réelle encore PREUVE MANQUANTE.
+
