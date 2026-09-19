@@ -1644,3 +1644,28 @@ Budget :
 - **EN COURS** — vrais assets Premium HD séparés pour croissance et habitants visibles ;
 - `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
 
+## Candidat ciblé — synchronisation monde réel — 20 septembre 2026
+
+Branche isolée : `chatgpt/modaryx-real-world-sync-20260920`, base fraîche `b26036851377e5f584c9a09aff5024df1a3773d0`. CodeQL de la base : **success** (run `35471613348`).
+
+Décision utilisateur intégrée dans le candidat :
+
+- fusion **saison locale + heure locale + météo réelle** pour l’atmosphère ;
+- aucune demande GPS pour le fonctionnement automatique ;
+- détection Nord / Sud / tropical via contexte réseau approximatif same-origin, avec fallback fuseau navigateur ;
+- inversion correcte des saisons Nord/Sud ;
+- effets pluie/neige/brouillard/orage prévus avec reduced-motion et intensité plafonnée ;
+- chronologie mondiale, croissance loup/dragon et événements partagés conservés indépendants ;
+- endpoint Pages Function `/api/local-context` sans retour de ville/code postal/coordonnées exactes ;
+- coordonnées réseau arrondies à **0,1°** côté serveur avant tout fournisseur météo ;
+- `Permissions-Policy: geolocation=()` conservée ;
+- météo fournisseur **off par défaut**.
+
+L’adaptateur Open-Meteo est préparé mais non activé. Aucune activation production n’est faite sans décision/licence/attribution appropriée.
+
+Budget candidat dérivé : noyau **115848 octets**, marge **684152 octets**. Runtime local atmosphère : **14190 octets**, chargé après `load` / idle.
+
+État : **EN COURS — micro-preuves source + navigateur + performance requises avant intégration**.
+
+`main`, DNS, DNSSEC, IONOS, secrets et configuration Cloudflare critique : inchangés.
+
