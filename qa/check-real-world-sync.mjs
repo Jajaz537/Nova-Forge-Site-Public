@@ -3,7 +3,8 @@ import {
   inferClimateBandFromTimezone,
   seasonState,
   localDaypart,
-  visualMix
+  visualMix,
+  localActivityLens
 } from '../assets/real-world-sync.mjs';
 import {
   roundCoordinate,
@@ -89,6 +90,13 @@ const mix=visualMix('winter','night',snow);
 assert('winter night mix dims',mix.day.bright<1);
 assert('snow weather mix exists',mix.weather.bright>=1);
 
+const stormActivity=localActivityLens({season:'summer',daypart:'day',weather:storm});
+const nightActivity=localActivityLens({season:'winter',daypart:'night',weather:{status:'not-connected'}});
+const clearSummerActivity=localActivityLens({season:'summer',daypart:'day',weather:{status:'live',condition:'clear',intensity:0}});
+assert('storm activity shelters kingdom',stormActivity.text.includes('abrités'));
+assert('night activity strengthens lanterns',nightActivity.text.includes('Lanternes'));
+assert('clear summer activity uses season rhythm',clearSummerActivity.text.includes('marchés plus animés'));
+
 const functionSource=fs.readFileSync(new URL('../functions/api/local-context.js',import.meta.url),'utf8');
 const weatherCss=fs.readFileSync(new URL('../assets/real-world-sync.css',import.meta.url),'utf8');
 const headers=fs.readFileSync(new URL('../_headers',import.meta.url),'utf8');
@@ -102,6 +110,7 @@ assert('wind visual layer exists',weatherCss.includes('data-local-weather=wind')
 assert('cloud visual layer exists',weatherCss.includes('data-local-weather=cloud')&&weatherCss.includes('mx-cloud-drift'));
 assert('clear-spell visual layer exists',weatherCss.includes('data-local-weather=partly-cloudy')&&weatherCss.includes('mx-clear-spell'));
 assert('reduced motion disables weather transitions',weatherCss.includes('real-world-weather-layer{transition:none!important}'));
+assert('reality sync must not rewrite shared chronicle',!fs.readFileSync(new URL('../assets/real-world-sync.mjs',import.meta.url),'utf8').includes("[data-world-chronicle]"));
 
 console.log(JSON.stringify({
   marker:failures.length?'FAIL_TARGETED_REAL_WORLD_SYNC':'PASS_TARGETED_REAL_WORLD_SYNC',
@@ -111,6 +120,7 @@ console.log(JSON.stringify({
     tropical:seasonState(new Date('2026-01-15T12:00:00Z'),'tropical','UTC')
   },
   weather:{rain:rain.condition,snow:snow.condition,fog:fog.condition,storm:storm.condition,wind:wind.condition,cloud:cloud.condition,clearSpells:clearSpells.condition},
+  activities:{storm:stormActivity.text,night:nightActivity.text,summer:clearSummerActivity.text},
   privacy:{gps:false,exactCoordinatesReturned:false,providerRoundedDegrees:0.1},
   failures
 },null,2));

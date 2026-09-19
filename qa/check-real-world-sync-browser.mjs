@@ -74,6 +74,8 @@ try{
     daypart:document.documentElement.dataset.localDaypart,
     weather:document.documentElement.dataset.localWeather,
     text:document.querySelector('[data-real-world-context]')?.textContent||'',
+    activity:document.querySelector('[data-local-world-activity]')?.textContent||'',
+    chronicle:document.querySelector('[data-world-chronicle]')?.textContent||'',
     style:Boolean(document.querySelector('link[data-real-world-sync-style]')),
     layerHidden:document.querySelector('[data-real-weather-layer]')?.hidden
   }))()`);
@@ -82,6 +84,7 @@ try{
   assert('daypart detected',Boolean(automatic.daypart));
   assert('weather stays unavailable without provider',automatic.weather==='unavailable');
   assert('automatic UI copy',automatic.text.startsWith('Automatique · '));
+  assert('automatic local activity copy',automatic.activity.length>20);
   assert('sync CSS loaded',automatic.style===true);
   assert('weather layer stays mounted for soft transitions',automatic.layerHidden===false);
 
@@ -102,6 +105,8 @@ try{
       weather:document.documentElement.dataset.localWeather,
       layerHidden:document.querySelector('[data-real-weather-layer]')?.hidden,
       text:document.querySelector('[data-real-world-context]')?.textContent||'',
+      activity:document.querySelector('[data-local-world-activity]')?.textContent||'',
+      chronicle:document.querySelector('[data-world-chronicle]')?.textContent||'',
       attribution:document.querySelector('[data-weather-attribution]')?.textContent||''
     };
   })()`,true);
@@ -110,6 +115,8 @@ try{
   assert('rain layer visible',synthetic.layerHidden===false);
   assert('copy mentions summer',synthetic.text.includes('été'));
   assert('copy mentions rain',synthetic.text.includes('pluie'));
+  assert('rain activity moves work under cover',synthetic.activity.includes('sous couvert'));
+  assert('shared chronicle is not rewritten by local rain',synthetic.chronicle===automatic.chronicle);
   assert('attribution visible',synthetic.attribution.includes('Proof weather'));
 
   const clearSpells=await evalv(cdp,`(async()=>{
@@ -127,12 +134,14 @@ try{
     return {
       weather:document.documentElement.dataset.localWeather,
       layerHidden:document.querySelector('[data-real-weather-layer]')?.hidden,
-      text:document.querySelector('[data-real-world-context]')?.textContent||''
+      text:document.querySelector('[data-real-world-context]')?.textContent||'',
+      activity:document.querySelector('[data-local-world-activity]')?.textContent||''
     };
   })()`,true);
   assert('clear spells state active',clearSpells.weather==='partly-cloudy');
   assert('clear spells layer remains mounted',clearSpells.layerHidden===false);
   assert('copy mentions clear spells',clearSpells.text.includes('éclaircies'));
+  assert('clear-spell activity stays outdoors',clearSpells.activity.includes('éclaircies'));
 
   const wind=await evalv(cdp,`(async()=>{
     const m=await import('./assets/real-world-sync.mjs');
@@ -148,11 +157,13 @@ try{
     });
     return {
       weather:document.documentElement.dataset.localWeather,
-      text:document.querySelector('[data-real-world-context]')?.textContent||''
+      text:document.querySelector('[data-real-world-context]')?.textContent||'',
+      activity:document.querySelector('[data-local-world-activity]')?.textContent||''
     };
   })()`,true);
   assert('wind state active',wind.weather==='wind');
   assert('copy mentions wind',wind.text.includes('vent soutenu'));
+  assert('wind activity protects stalls',wind.activity.includes('étals protégés'));
 
   cdp.close();
   console.log(JSON.stringify({
