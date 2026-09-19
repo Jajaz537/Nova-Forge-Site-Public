@@ -720,3 +720,34 @@ Budget candidat :
 
 La croissance physique du loup/dragon dans l'image reste **EN COURS** : ce lot rend la progression temporelle visible sans prétendre que l'illustration composite est déjà découpée en couches.
 
+## Intégration contrôlée — jalons visibles du monde vivant — 19 septembre 2026
+
+PR #27 : **TERMINÉE — fusionnée**.
+
+Micro-preuve préalable :
+
+- workflow **MODARYX Site First Targeted Source Proof** ;
+- run `35462522870` ;
+- conclusion : **success / PASS CIBLÉ** sur le HEAD candidat `c5c2aa354fa0e13b454131be436f2998728cf939`.
+
+Intégration :
+
+- commit de merge : `7ee4f3e54ab0c1d890babe9a2344d7177360df15` ;
+- prochain stade et délai visibles pour Louveteau et Dragonneau ;
+- libellés d'activité de phase partagés ;
+- statut du monde en `role=status` / `aria-live=polite` ;
+- transition lumineuse de phase adoucie ;
+- empreintes publiques réconciliées ;
+- noyau install-précaché dérivé : **112068 octets** ;
+- marge sous 800000 : **687932 octets** ;
+- runtime monde vivant : **12531 octets** ;
+- `main` et infrastructure critique : inchangées.
+
+État :
+
+- **TERMINÉ** — progression temporelle lisible publiquement ;
+- **EN COURS** — transformation physique du loup et du dragon, qui nécessite toujours la séparation de l'illustration composite en couches ;
+- **PREUVE MANQUANTE** — recette navigateur réelle de cette nouvelle présentation et portes externes déjà listées.
+
+Aucun PASS CodeQL n'est attribué au nouveau HEAD tant qu'un run correspondant n'est pas observé.
+
