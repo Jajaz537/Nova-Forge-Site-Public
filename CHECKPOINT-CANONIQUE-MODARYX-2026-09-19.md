@@ -1620,3 +1620,27 @@ Résultat :
 
 État : **TERMINÉ sur la micro-preuve ciblée ; fusion PR #42 requise avant intégration canonique**.
 
+## Intégration contrôlée — chronique vivante partagée — 19 septembre 2026
+
+PR #42 : **TERMINÉE — fusionnée**.
+
+- commit d'intégration : `3b3da0582a5a7aafc4621a7080026c20c584d7de` ;
+- run dédié final `35471449672` : **success / PASS CIBLÉ** ;
+- performance labo `35471449668` : **success** ;
+- accueil mobile : LCP **2128 ms / CLS 0** ;
+- accueil desktop : LCP **2060 ms / CLS 0,0021** ;
+- Site First, reflow, accessibilité Chromium, PWA offline/update/installability, fonctions locales, fichiers réels, croissance en couches et garde d'assets : **success** sur le candidat produit.
+
+Le monde vivant dispose maintenant d'une chronique partagée par créneaux de 3 heures, liée au jour du monde et à l'heure partagée. Les signaux couvrent gardes, ateliers, marchés, oiseaux, faune, patrouilles, quais et veilleurs, sans prétendre que ces éléments sont déjà rendus visuellement.
+
+Budget :
+
+- noyau précaché : **115126 octets** ;
+- marge : **684874 octets**.
+
+État :
+
+- **TERMINÉ** — chronique partagée logique + UI + micro-preuves ciblées ;
+- **EN COURS** — vrais assets Premium HD séparés pour croissance et habitants visibles ;
+- `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
+
