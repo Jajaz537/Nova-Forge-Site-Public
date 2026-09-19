@@ -231,3 +231,16 @@ Décision utilisateur explicitement retenue pour la VF :
 - Couches compagnon : **5/10 TERMINÉES**.
 - **EN COURS** — cinq stades dragon restent à produire, intégrer et prouver avant tout passage `ready`.
 
+## Couche compagnon — Dragonneau — 20 septembre 2026
+
+- **TERMINÉ** — PR #52 fusionnée dans la branche Work au commit `19c0da457d8f6e587b8d48500ca6b35692efb660`.
+- Asset : `assets/living-world/dragon-baby.png`.
+- Format prouvé : PNG RGBA, **1600 × 900**, alpha=true.
+- SHA-256 : `3f2067fcbe7ea7ceb3a1fe76611f3438dcd1807723c9d2bc1e8c03d9945adb66`.
+- Direction : Dragonneau réaliste, proportions juvéniles, expression calme, composition trois-quarts, sans armure/accessoire/texte/autre animal.
+- Asset volontairement non référencé ; `visualGrowth.status=awaiting-assets` reste inchangé.
+- Preuves ciblées : Layered Growth Asset Gate `35477467690`, Site First Source `35477467766`, PWA Offline `35477467671`, Accessibility `35477467702`, Reflow `35477467706`, Lab Performance `35477467667` — toutes **success**.
+- Couches compagnon : **6/10 TERMINÉES**.
+- **EN COURS** — dragon juvénile / adolescent / jeune adulte / adulte restent à produire, intégrer et prouver avant tout passage `ready`.
+- Validation artistique humaine finale du bundle complet : **PREUVE MANQUANTE** tant que les 10 couches ne sont pas réunies dans leur rendu intégré.
+
