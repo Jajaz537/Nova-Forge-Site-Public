@@ -1555,3 +1555,23 @@ La garde refuse qu’un bundle passe à `ready` sans environnement séparé + 5 
 
 État : **EN COURS — micro-preuve CI requise avant intégration**.
 
+## Intégration contrôlée — garde d’intégration des assets de croissance — 19 septembre 2026
+
+PR #41 : **TERMINÉE — fusionnée**.
+
+- commit d'intégration : `0117d297cc657a76d2c323a6dcac3c3cbc5b5fd2` ;
+- run `35470891730` — **success / PASS CIBLÉ** ;
+- marker : `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ;
+- état confirmé : `awaiting-assets` ;
+- canevas : **1600 × 900** ;
+- **0 référence d'asset revendiquée** ;
+- **0 fichier de couche présent** sous `assets/living-world/`.
+
+La garde future refusera `ready` si l'environnement + les 10 couches loup/dragon ne sont pas réellement présents, au bon canevas et avec alpha sur les couches de personnages.
+
+État :
+
+- **TERMINÉ** — garde de readiness des assets ;
+- **EN COURS** — production/intégration des vrais assets Premium HD ;
+- croissance visuelle individuelle réelle toujours non déclarée terminée.
+
