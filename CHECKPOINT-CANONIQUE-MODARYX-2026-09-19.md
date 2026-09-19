@@ -537,3 +537,34 @@ Micro-preuve : **PASS CIBLÉ** sur le périmètre source.
 
 Plan détaillé : `qa/MODARYX-SITE-FIRST-VF-PLAN-20260919.md`.
 
+## Intégrations Site First et preuve source — 19 septembre 2026
+
+### PR #21 — relation d'équipe + priorité Site First
+
+- **TERMINÉE — fusionnée** ;
+- commit d'intégration : `4e8a2f30d230fad0f5dca156f56361caecd6b564` ;
+- même équipe rendue visible sans fusion des marques ;
+- plan Site First ajouté ;
+- noyau dérivé après lot : **111822 octets**, marge **688178**.
+
+### PR #22 — preuve source ciblée
+
+- **TERMINÉE — fusionnée** ;
+- commit d'intégration : `442477b69fdcb4c8f8aa38eb9bc03e80d20129b6` ;
+- script : `qa/check-site-first-vf.mjs` ;
+- workflow lecture seule : `.github/workflows/modaryx-vf-targeted-source-proof.yml` ;
+- aucun secret, aucun déploiement, aucun changement Cloudflare/DNS.
+
+Preuve fraîche :
+
+- workflow **MODARYX Site First Targeted Source Proof** ;
+- run **35461493088** ;
+- conclusion : **success / PASS CIBLÉ** ;
+- portée : 17 pages, références locales, identité produit, monde vivant, service worker, budget précache, empreintes SHA-256.
+
+CodeQL du même HEAD est encore **EN COURS** au moment de cette entrée ; aucun PASS CodeQL n'est anticipé.
+
+### Limite
+
+Le PASS source n'est pas un PASS VF. Les portes navigateur, accessibilité native, appareils physiques, CWV et croissance visuelle réelle restent ouvertes.
+
