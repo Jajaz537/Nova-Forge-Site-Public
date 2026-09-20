@@ -2103,3 +2103,41 @@ Preuves ciblées PR #53 :
 5. poursuivre ensuite jeune adulte → adulte ;
 6. seulement après 10/10, préparer l'activation réelle de la croissance visuelle sans faux PASS.
 
+## Asset compagnon — Dragon adolescent — 20 septembre 2026
+
+PR #54 : **TERMINÉE — fusionnée** dans la branche active PR #12.
+
+- commit d'intégration : `15e2993fa3e93c02cd69834672b97fe3ffc2cb1e` ;
+- asset : `assets/living-world/dragon-adolescent.png` ;
+- dimensions : **1600 × 900** ; PNG RGBA, `alpha=true` ;
+- SHA-256 : `288859aba608a4c57ccdfb43ab4c4004c25b10bcecddb84e40be8f472960500f` ;
+- asset gardé non référencé ; `visualGrowth.status=awaiting-assets` inchangé.
+
+Preuves ciblées PR #54 :
+
+- Layered Growth Asset Gate `35477956449` — **success** ;
+- Site First Source `35477956448` — **success** ;
+- PWA Offline `35477956440` — **success** ;
+- Browser Accessibility `35477956461` — **success** ;
+- Lab Performance `35477956479` — **success** ;
+- Browser Reflow `35477956465` — tentative 1 **failure** avec `FAIL_TARGETED_BROWSER_REFLOW_MICROPROOF`, fatal `fetch failed`; erreur isolée au micro-proof/loopback sans modification du candidat ; re-run ciblé du seul job échoué, tentative 2 **success**.
+
+État :
+
+- environnement séparé : **TERMINÉ** ;
+- couches compagnon : **8/10 TERMINÉES** ;
+- loup, cinq stades : **TERMINÉ** sur assets séparés prouvés ;
+- dragon : Dragonneau + juvénile + adolescent **TERMINÉS** sur assets séparés prouvés ;
+- **EN COURS** — dragon jeune adulte / adulte ;
+- validation artistique humaine finale du bundle complet : **PREUVE MANQUANTE** ;
+- aucun passage `ready` avant bundle complet ; `main` et infrastructure critique inchangés.
+
+### Prochain point logique
+
+1. vérifier Git frais ;
+2. dériver le **dragon jeune adulte** de l'adolescent en conservant strictement l'identité ;
+3. détourage + PNG 1600 × 900 alpha ;
+4. PR isolée + micro-preuves ciblées ;
+5. produire ensuite le dragon adulte final ;
+6. à 10/10 seulement, préparer l'activation réelle de la croissance visuelle.
+
