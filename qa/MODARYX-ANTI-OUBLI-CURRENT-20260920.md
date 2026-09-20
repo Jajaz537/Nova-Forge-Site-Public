@@ -115,6 +115,8 @@ Les mentions historiques suivantes restent conservées pour provenance mais **ne
 
 ## 9. Règle de fermeture anti-oubli avant VF
 
+- **TERMINÉ — garde machine courante** — PR #84 fusionnée dans Work au merge `ce1368423734996137662f5d3901e52c6b8a4177` ; run `35511815106`, marker `PASS_TARGETED_ANTI_OUBLI_GATE`. La lane vérifie les états courants, bloque le retour des compteurs/états obsolètes et exige que les blockers humains, externes et services restent explicitement tracés.
+
 Chaque idée explicitement retenue dans le registre historique courant est maintenant soit :
 
 - **TERMINÉE** sur un périmètre prouvé ;

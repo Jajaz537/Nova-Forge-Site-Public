@@ -666,3 +666,56 @@ Cette section est la lecture la plus récente pour la readiness jeux et le SEO a
 3. Fermer ce qui reste uniquement par vraies preuves humaines/externes ou vraies entrées produit ; ne rien simuler.
 4. Garder tous les services distants dans leur état réel `not-connected` / `blocked-inputs`.
 5. Full replay unique uniquement à la toute fin.
+
+
+## Mise à jour canonique — PR #84 — garde anti-oubli — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour la fermeture anti-oubli automatisée.
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #84 : `ce1368423734996137662f5d3901e52c6b8a4177`.
+- `main` n'a pas été modifiée.
+- Aucun sitemap, DNS, DNSSEC, nameserver, IONOS ou réglage Cloudflare critique modifié.
+- Aucun full replay final exécuté.
+
+### PR #84 — garde anti-oubli machine-enforced
+
+- **TERMINÉE / fusionnée dans Work** au merge `ce1368423734996137662f5d3901e52c6b8a4177`.
+- Nouveau checker : `qa/check-anti-oubli-current.cjs`.
+- Nouveau marker : `PASS_TARGETED_ANTI_OUBLI_GATE`.
+- Run `35511815106` — **success** :
+  - `PASS_TARGETED_SITE_FIRST_SOURCE_PROOF`
+  - `PASS_TARGETED_INTEGRATION_READINESS`
+  - `PASS_TARGETED_SEO_CONTRACT`
+  - `PASS_TARGETED_ANTI_OUBLI_GATE`
+- Le garde protège notamment :
+  - couverture courante 23 routes ;
+  - SEO on-page terminé et sitemap séparé ;
+  - hubs éditoriaux `contract-ready` ;
+  - corpus GTA VI/RDR2 `blocked-inputs` ;
+  - présence explicite des blockers humains/externes/services ;
+  - rejet du retour aux anciens états 17 pages / SEO global EN COURS / hubs non livrés.
+- Le run courant rapporte **24 lignes ouvertes** au sens large `EN COURS | BLOQUÉ | PREUVE MANQUANTE` ; ce nombre ne vaut pas 24 defects produit, car il regroupe capacités non connectées, décisions externes et preuves terrain manquantes.
+- Les triggers `pull_request` de la lane source couvrent désormais aussi les checkers readiness, SEO, anti-oubli et leurs sources.
+
+### État autonome courant
+
+Aucun écart local autonome supplémentaire n'est actuellement démontré par une preuve fraîche sur le périmètre déjà couvert. Les éléments encore ouverts appartiennent à l'une des catégories suivantes :
+
+- garde sitemap explicitement protégée ;
+- vraies capacités produit non connectées / entrées manquantes ;
+- décisions fournisseur/licence/confidentialité ;
+- validation humaine, appareil physique, moteur navigateur ou preuve terrain ;
+- source historique Master NDI non récupérée.
+
+Cela ne constitue pas une VF ni un 100 %. Aucun de ces éléments ne doit être simulé pour augmenter le pourcentage.
+
+## Prochain point logique actualisé
+
+1. Ne pas créer de retouche locale sans défaut frais reproduit.
+2. Conserver le sitemap inchangé tant que sa garde n'est pas explicitement levée.
+3. Fermer les capacités restantes uniquement avec de vraies entrées produit/services.
+4. Fermer les preuves externes sur les environnements appropriés.
+5. Exécuter le full replay unique seulement lorsque les blockers réellement fermables auront été fermés.
