@@ -297,7 +297,12 @@ try {
     observations,
     failures
   };
-  fs.writeFileSync(path.join(OUT, 'visual-capture.json'), JSON.stringify(result, null, 2) + '\n');
+  const artifactFailure = {
+    marker: 'FAIL_TARGETED_PREVIEW_VISUAL_CAPTURE',
+    fatal: 'capture failed; inspect the workflow log for diagnostic details',
+    failures: ['capture-failed']
+  };
+  fs.writeFileSync(path.join(OUT, 'visual-capture.json'), JSON.stringify(artifactFailure, null, 2) + '\n');
   console.error(JSON.stringify(result, null, 2));
   process.exitCode = 1;
 } finally {
