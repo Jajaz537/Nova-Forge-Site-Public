@@ -205,6 +205,12 @@ try {
   await cdp.send('Page.enable');
   await cdp.send('Runtime.enable');
   await cdp.send('Network.enable');
+  await cdp.send('Emulation.setDeviceMetricsOverride', {
+    width: 1440,
+    height: 1000,
+    deviceScaleFactor: 1,
+    mobile: false
+  });
   await cdp.send('Fetch.disable').catch(() => {});
 
   await runCheck('search-empty-state', async () => {
@@ -229,6 +235,8 @@ try {
     assert(state.emptyHidden === false, 'search empty panel is hidden');
     assert(/^0 résultats$/.test(state.count), 'search empty count mismatch: ' + state.count);
     assert(/Recherche exécutée localement/.test(state.state), 'search local-state copy missing');
+    await evaluate(cdp, `document.querySelector('#search-empty')?.scrollIntoView({block:'center'}); true`);
+    await sleep(120);
     await capture(cdp, 'search-empty');
     return state;
   });
@@ -251,6 +259,8 @@ try {
     assert(failed.disabled === true, 'search input must remain disabled after index failure');
     assert(failed.staticLinks > 0, 'static search directory disappeared on failure');
     assert(failed.retryText === 'Réessayer', 'search retry action missing');
+    await evaluate(cdp, `document.querySelector('#search-state')?.scrollIntoView({block:'center'}); true`);
+    await sleep(120);
     await capture(cdp, 'search-error');
 
     await release();
@@ -280,6 +290,8 @@ try {
     })()`, 'downloads failure state');
     assert(failed.state === 'locked', 'downloads failure must fail closed');
     assert(failed.artifacts === 0, 'downloads failure exposed artifacts');
+    await evaluate(cdp, `document.querySelector('[data-download-state]')?.scrollIntoView({block:'center'}); true`);
+    await sleep(120);
     await capture(cdp, 'downloads-error');
 
     await release();
@@ -300,6 +312,8 @@ try {
     })()`, 'downloads retry recovery');
     assert(recovered.state === 'locked', 'downloads recovered manifest must remain locked');
     assert(recovered.artifacts === 0, 'downloads recovered manifest unexpectedly exposed artifacts');
+    await evaluate(cdp, `document.querySelector('[data-download-state]')?.scrollIntoView({block:'center'}); true`);
+    await sleep(120);
     await capture(cdp, 'downloads-locked');
     return {failed, recovered};
   });
