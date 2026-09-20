@@ -35,7 +35,9 @@ const requiredCurrent = [
   'PASS_TARGETED_DISTRIBUTION_LOCK_CONTRACTS',
   'Smart Profile — état local indicatif | **TERMINÉ — périmètre local ciblé + contrat prouvé**',
   'Contrats locaux collection / compatibilité / search adapter | **TERMINÉ — preuve ciblée**',
-  'PASS_TARGETED_LOCAL_PLATFORM_CONTRACTS'
+  'PASS_TARGETED_LOCAL_PLATFORM_CONTRACTS',
+  'Work Phase 2 — qualification externe | **TERMINÉ — preuve de préparation/limitation**',
+  'MODARYX-WORK-PHASE2-EXTERNAL-EVIDENCE-20260920.md'
 ];
 for (const token of requiredCurrent) assert.ok(ledger.includes(token), 'anti-forget current missing: ' + token);
 
