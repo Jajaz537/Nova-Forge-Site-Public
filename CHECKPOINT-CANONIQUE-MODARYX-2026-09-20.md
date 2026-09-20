@@ -479,3 +479,60 @@ La PR #75 prépare un registre courant séparé :
 4. Garder l'écart `/games/` → sitemap tracé sans modifier le fichier gardé sans autorisation explicite.
 5. Fermer les preuves externes lorsque les environnements appropriés deviennent disponibles.
 6. Full replay uniquement une fois, à la toute fin.
+
+
+## Mise à jour canonique — PR #76 / 23 routes — 20 septembre 2026
+
+Cette section supersède les anciens compteurs de routes et les mentions présentant encore GTA VI / RDR2 comme simples cibles futures.
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #76 : `f3271ce468bb493b470145ec1bf61e315aab3d6a`.
+- Base `main` observée lors de la vérification de ce lot : `a22a22e5590fe8aa88fc66bc8161470853ec2c15`.
+- Aucun DNS, DNSSEC, nameserver, IONOS ou réglage Cloudflare critique modifié.
+- Aucun full replay exécuté.
+
+### PR #76 — GTA VI / Red Dead Redemption 2
+
+- **TERMINÉE / fusionnée dans Work** au merge `f3271ce468bb493b470145ec1bf61e315aab3d6a`.
+- Six routes éditoriales livrées :
+  - `/gta-6/`
+  - `/gta-6/mods/`
+  - `/gta-6/guides/`
+  - `/red-dead-redemption-2/`
+  - `/red-dead-redemption-2/mods/`
+  - `/red-dead-redemption-2/guides/`
+- GTA VI : informations officielles datées et sourcées ; aucun support PC/mod, chargeur ou téléchargement inventé.
+- RDR2 : repères PC officiels, taxonomie et guides ; aucun fichier distribué sans corpus autorisé.
+- Aucun média Rockstar copié dans le dépôt.
+- Recherche locale, fallback statique, service worker et gardes QA raccordés.
+
+### Couverture prouvée après PR #76
+
+- `PASS_TARGETED_SITE_FIRST_SOURCE_PROOF` — run `35509547383` — **23 pages**, failures `[]`.
+- `PASS_TARGETED_BROWSER_A11Y_MICROPROOF` — run `35509547366` — **23 pages**, failures `[]`.
+- `PASS_TARGETED_BROWSER_REFLOW_MICROPROOF` — run `35509547357` — **23 pages × 4 largeurs = 92 navigations**, failures `[]`.
+- Les workflows automatiques PWA update/install/offline, cycle preview HTTPS, performance labo, états locaux, fichiers réels et fonctions locales déclenchés par ce bloc sont également revenus **success**.
+- Cette couverture ne constitue pas un full replay final ni une validation artistique humaine globale.
+
+### Anti-oubli — distinction courante
+
+- **TERMINÉ — périmètre éditorial sourcé** : hubs GTA VI/RDR2, catégories et guides.
+- **EN COURS — capacité non livrée** : corpus réels de mods GTA VI/RDR2, droits de redistribution, compatibilité versionnée et artefacts réels.
+- Ne jamais reclasser l'absence du corpus réel comme simple preuve QA manquante.
+- Le design Premium HD couvre désormais **23 routes publiques** dans les gardes source/reflow/accessibilité.
+
+### SEO
+
+- Les six routes nouvelles possèdent leurs canonicals dédiés.
+- `/games/` et les nouvelles routes ne doivent pas être ajoutés au sitemap tant que la garde de `sitemap.xml` n'est pas explicitement levée.
+- 404 conserve `noindex,nofollow`.
+
+## Prochain point logique actualisé
+
+1. Ne plus utiliser les anciens compteurs 16/17 pages comme état courant ; la couverture canonique est désormais 23 routes.
+2. Ne pas rejouer les preuves vertes sans modification pertinente.
+3. Continuer uniquement les écarts Premium HD réellement isolés par preuve fraîche.
+4. Garder les corpus réels de mods, services distants et preuves externes dans leur état réel.
+5. Full replay unique uniquement à la toute fin.
