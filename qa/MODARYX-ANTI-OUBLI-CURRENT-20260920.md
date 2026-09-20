@@ -75,7 +75,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Corpus réels de mods GTA VI / RDR2 | **EN COURS — capacité non livrée / droits et preuves requis** | Les hubs éditoriaux sont livrés, mais le catalogue de mods reste à 0 tant qu'un corpus autorisé, versionné, attribué et vérifiable n'existe pas. |
 | Storage Resolver | **EN COURS — dépendance service** | Stockage/résolution sécurisé et vérifiable réel. |
 | Repair Network | **EN COURS — dépendance protocole** | Protocole public finalisé ; aucune réparation distante fictive. |
-| Backend communautaire | **EN COURS — solution à qualifier** | Solution sécurisée compatible avec le budget retenu et politique de données. |
+| Backend communautaire | **EN COURS — qualification technique réalisée, non connecté** | Data plane candidat privilégié : Pages Functions/Workers + D1 + R2 + Turnstile. Supabase reste candidat qualifié pour l'identité/passkeys, mais passkeys encore expérimentales et aucun service n'est connecté. |
 | Guide MODARYX connecté | **EN COURS — capacité non livrée** | Moteur/contrat réel ; rester distinct de Nova Guide des OS. |
 | Pont Nova Forge OS | **EN COURS — dépendance Nova Forge OS** | Interface publique stabilisée, consentement et modèle de permissions ; aucun partage implicite. |
 
