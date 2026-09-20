@@ -536,3 +536,75 @@ Cette section supersède les anciens compteurs de routes et les mentions présen
 3. Continuer uniquement les écarts Premium HD réellement isolés par preuve fraîche.
 4. Garder les corpus réels de mods, services distants et preuves externes dans leur état réel.
 5. Full replay unique uniquement à la toute fin.
+
+
+## Mise à jour canonique — PR #78 / #79 — sweep visuel 23 routes — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour la preuve visuelle Premium HD initiale.
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #79 : `de093b45fa1cb1b12a07f28858bb1cf480a48bb6`.
+- `main` n'a pas été modifiée par ces lots.
+- Aucun sitemap, DNS, DNSSEC, nameserver, IONOS ou réglage Cloudflare critique modifié.
+- Aucun full replay fonctionnel exécuté.
+
+### PR #78 — extension visuelle GTA VI / RDR2
+
+- **TERMINÉE / fusionnée dans Work** au merge `d953e6613572a0e1b195e5212cc997a20300230c`.
+- Le harnais visuel couvre désormais les six hubs GTA VI / RDR2.
+- Run `35510243999` — **success** — marker `PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW`.
+- Les captures desktop 1440×1000 et mobile 390×844 des six hubs ont été inspectées de façon assistée.
+- Aucun défaut bloquant de composition n'a été isolé ; aucun runtime produit n'a été modifié.
+
+### PR #79 — balayage visuel des 23 routes
+
+Première tentative, run `35510440300` : **failure ciblée du harnais**.
+
+Erreur exacte :
+- `project desktop: hero not visible`
+- `project mobile: hero not visible`
+
+Isolation :
+- `project.html` présentait zéro overflow, zéro image cassée et zéro contrôle coupé ;
+- l'index Projets utilise volontairement une première `.section` comme composition d'ouverture et non une classe hero générique ;
+- aucune régression design produit n'était démontrée.
+
+Correction ciblée QA :
+- le harnais reconnaît `.project-page > .section:first-of-type` comme composition d'ouverture valide ;
+- aucun fichier runtime/public n'a été modifié.
+
+Micro-proof final :
+- run `35510526508` — **success** ;
+- marker `PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW` ;
+- **23 routes × 2 cadres = 46 observations** ;
+- desktop 1440×1000 + mobile 390×844 ;
+- overflow horizontal : **0** ;
+- images cassées : **0** ;
+- contrôles visibles coupés : **0** ;
+- H1 manquant : **0** ;
+- composition d'ouverture manquante : **0** ;
+- footer manquant : **0** ;
+- failures : `[]`.
+
+Les 46 captures ont été regroupées et inspectées de façon assistée. Aucun défaut visuel bloquant n'a été isolé dans l'état initial des 23 routes. Cette preuve ne remplace pas la validation artistique humaine finale, les états interactifs non déclenchés, les lecteurs d'écran natifs, les appareils physiques ou les preuves terrain.
+
+### État Premium HD courant
+
+- **TERMINÉ — preuve visuelle initiale ciblée** : 23 routes publiques desktop/mobile.
+- **TERMINÉ — reflow ciblé** : 23 pages × 4 largeurs = 92 navigations, run `35509547357`.
+- **TERMINÉ — accessibilité structurelle Chromium ciblée** : 23 pages, run `35509547366`.
+- **TERMINÉ sur scénarios ciblés** : états locaux Recherche, Téléchargements, Profils, Catalogue, Communauté, Creator Studio, Project Hub et Accueil.
+- **PREUVE MANQUANTE** : validation artistique humaine finale, lecteur d'écran natif, zoom natif 400 %, appareils physiques/tactile, Safari final, Firefox final élargi, CWV représentatifs, installation PWA manuelle, validation juridique complète.
+- **EN COURS / capacités non livrées** : comptes, publication/modération distante, corpus réels de mods GTA VI/RDR2, Guide connecté, Storage Resolver, Repair Network et OS Bridge réel.
+- **BLOQUÉ** : téléchargements publics réels sans artefacts/preuves ; météo production sans décision fournisseur/licence/attribution/confidentialité.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Ne plus retoucher le design des 23 routes sans défaut frais reproduit ou décision artistique explicite.
+2. Fermer les preuves externes et humaines lorsque les environnements appropriés sont disponibles.
+3. Continuer séparément les capacités produit réellement non livrées ; ne pas les simuler.
+4. Conserver le sitemap protégé inchangé tant que sa garde n'est pas explicitement levée.
+5. Full replay unique uniquement à la toute fin.
