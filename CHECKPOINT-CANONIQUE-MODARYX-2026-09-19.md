@@ -2182,3 +2182,43 @@ Preuves ciblées PR #55 :
 4. PR isolée + micro-preuves ciblées ;
 5. à **10/10 seulement**, préparer l’activation réelle de la croissance visuelle ;
 6. ne pas déclarer VF/PASS final sans validation artistique intégrée et preuves restantes.
+
+
+## Asset compagnon — Dragon adulte final — 20 septembre 2026
+
+PR #56 : **TERMINÉE — fusionnée** dans la branche active PR #12.
+
+- commit d’intégration : `d34d3efa6e9d88650280764634071c0090399f0f` ;
+- asset : `assets/living-world/dragon-adult.png` ;
+- dimensions : **1600 × 900** ; PNG RGBA 8-bit, `alpha=true` ;
+- SHA-256 : `b4c0805fe39e4ca9e0cdc60410fbb62acbeff6c661c25267bb958473d16c233c` ;
+- asset gardé non référencé pendant ce lot ; `visualGrowth.status=awaiting-assets` inchangé.
+
+Preuves ciblées PR #56 :
+
+- Layered Growth Asset Gate `35479965713` — **success** avec `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ;
+- `dragon-adult.png` détecté comme `candidate-layer` : 1600 × 900, alpha=true, failures=[] ;
+- Site First Source `35479965731` — **success** ;
+- PWA Offline `35479965803` — **success** ;
+- Browser Accessibility `35479965703` — **success** ;
+- Browser Reflow `35479965684` — **success** ;
+- Lab Performance `35479965704` — **success**.
+
+État :
+
+- environnement séparé : **TERMINÉ** ;
+- couches compagnon : **10/10 TERMINÉES sur les assets séparés prouvés** ;
+- loup : **5/5 TERMINÉ** ;
+- dragon : **5/5 TERMINÉ** ;
+- validation artistique humaine finale du bundle complet : **PREUVE MANQUANTE** ;
+- activation réelle de la croissance visuelle : **EN COURS — prochaine étape** ;
+- aucune VF/PASS final déclaré ; `main` et infrastructure critique inchangés.
+
+### Prochain point logique
+
+1. vérifier Git frais ;
+2. inspecter le moteur `assets/living-world-visual-growth.mjs` et son contrat ;
+3. préparer une activation ciblée des 10 couches sans casser la chronologie, le reduced-motion, l’offline ni le fallback ;
+4. passer `visualGrowth.status` à l’état approprié uniquement avec preuve ciblée ;
+5. exécuter les micro-preuves nécessaires ;
+6. conserver la validation artistique humaine intégrée en **PREUVE MANQUANTE** tant qu’elle n’est pas faite.

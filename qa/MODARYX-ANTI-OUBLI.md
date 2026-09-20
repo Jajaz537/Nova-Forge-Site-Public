@@ -294,3 +294,28 @@ Preuves ciblées PR #55 :
 - Lab Performance `35479371003` — **success**.
 
 Aucun full replay n’a été lancé. `main`, DNS, DNSSEC, IONOS et Cloudflare critique restent inchangés.
+
+
+## Dragon adulte final — couche compagnon — 20 septembre 2026
+
+- **TERMINÉ** — PR #56 fusionnée dans la branche active PR #12.
+- commit d’intégration : `d34d3efa6e9d88650280764634071c0090399f0f` ;
+- asset : `assets/living-world/dragon-adult.png` ;
+- PNG 1600 × 900, RGBA 8-bit, alpha=true ;
+- SHA-256 : `b4c0805fe39e4ca9e0cdc60410fbb62acbeff6c661c25267bb958473d16c233c` ;
+- couche gardée non référencée pendant ce lot ; `visualGrowth.status=awaiting-assets` reste inchangé ;
+- bundle compagnon : **10/10 TERMINÉES sur les assets séparés prouvés** ;
+- loup : 5/5 ; dragon : 5/5 ;
+- validation artistique humaine finale du bundle complet : **PREUVE MANQUANTE** ;
+- activation réelle de la croissance visuelle : **EN COURS / étape suivante séparée**.
+
+Preuves ciblées PR #56 :
+
+- Layered Growth Asset Gate `35479965713` — **success**, marker `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING`, `dragon-adult.png` 1600 × 900, alpha=true, failures=[] ;
+- Site First Source `35479965731` — **success** ;
+- PWA Offline `35479965803` — **success** ;
+- Browser Accessibility `35479965703` — **success** ;
+- Browser Reflow `35479965684` — **success** ;
+- Lab Performance `35479965704` — **success**.
+
+Aucun full replay n’a été lancé. `main`, DNS, DNSSEC, IONOS et Cloudflare critique restent inchangés.
