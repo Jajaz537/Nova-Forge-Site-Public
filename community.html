@@ -13,7 +13,7 @@
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="MODARYX MODS">
   <meta property="og:title" content="Communauté — MODARYX MODS">
-  <meta property="og:description" content="Préparez vos collections, avis et discussions avec MODARYX MODS. Sauvegarde dans votre navigateur et export JSON ; publication en ligne non disponible.">
+  <meta property="og:description" content="Préparez vos collections, avis et discussions avec MODARYX MODS. Brouillons locaux, envoi contrôlé et publication uniquement après modération réelle.">
   <meta property="og:url" content="https://modaryxmods.com/community">
   <link rel="canonical" href="https://modaryxmods.com/community">
   <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
@@ -42,21 +42,21 @@
         <p class="eyebrow">Communauté · vos brouillons locaux</p>
         <h1 id="community-title">Vos collections. Vos idées. À votre rythme.</h1>
         <p class="lede">Rassemblez vos favoris, préparez un avis ou une discussion et gardez votre brouillon local. Lorsque le service distant est réellement disponible, une contribution peut être envoyée séparément pour modération sans être publiée automatiquement.</p>
-        <div class="release-status"><span class="status-dot" aria-hidden="true"></span><span><strong>Vos brouillons restent privés dans ce navigateur.</strong> Enregistrez-les ici ou exportez une copie JSON. Aucun contenu n’est publié en ligne.</span></div>
+        <div class="release-status"><span class="status-dot" aria-hidden="true"></span><span><strong>Vos brouillons restent privés dans ce navigateur.</strong> Une contribution distante n’apparaît publiquement qu’après une décision de modération réelle.</span></div>
       </div>
       <aside class="hero-panel" aria-label="Fonctionnement de la communauté"><p class="eyebrow">Votre espace de préparation</p><ul class="feature-list"><li><span>01</span><div><strong>Rassemblez</strong><small>Choisissez les créations du catalogue à conserver dans une collection.</small></div></li><li><span>02</span><div><strong>Rédigez</strong><small>Préparez une discussion, un avis ou un commentaire sous forme de brouillon.</small></div></li><li><span>03</span><div><strong>Conservez une copie</strong><small>Enregistrez dans ce navigateur ou exportez un fichier JSON à garder sur votre appareil.</small></div></li><li><span>04</span><div><strong>Envoi contrôlé</strong><small>La voie distante ne s’active qu’avec une session réelle et une vérification anti-abus ; toute contribution reste en attente de modération.</small></div></li></ul></aside>
     </section>
 
-    <nav class="section-nav" aria-label="Outils communautaires"><a href="#collections">Ma collection</a><a href="#contributions">Mon brouillon</a><a href="./profiles.html">Profils</a></nav>
+    <nav class="section-nav" aria-label="Outils communautaires"><a href="#collections">Ma collection</a><a href="#contributions">Mon brouillon</a><a href="#publications">Publications</a><a href="./profiles.html">Profils</a></nav>
     <section class="section community-toolkit" aria-labelledby="community-surfaces-title">
       <p class="eyebrow">À votre disposition</p><h2 id="community-surfaces-title">Des outils pour préparer votre contribution.</h2>
       <div class="cards three">
         <article class="card"><h3>01 · Collections & favoris</h3><p>Rassemblez les entrées du catalogue et vos favoris. Conservez une copie par import ou export JSON.</p><span class="badge">Local V1</span></article>
-        <article class="card"><h3>02 · Profils créateurs</h3><p>Découvrez les profils prévus et leur sécurité. La création de compte et la connexion restent indisponibles.</p><a class="text-link" href="./profiles.html">Découvrir les profils</a></article>
+        <article class="card"><h3>02 · Profils créateurs</h3><p>Consultez les profils publics quand le service distant les expose, sans révéler les moyens de connexion.</p><a class="text-link" href="./profiles.html">Découvrir les profils</a></article>
         <article class="card"><h3>03 · Fiches des créations</h3><p>Consultez les démonstrations, leurs versions et les informations de compatibilité disponibles.</p><a class="text-link" href="./project.html">Explorer une fiche</a></article>
-        <article class="card"><h3>04 · Discussions</h3><p>Préparez et exportez un brouillon local portable. Aucune discussion distante n’est publiée.</p><span class="badge">Brouillon local V1</span></article>
-        <article class="card"><h3>05 · Avis</h3><p>Rédigez un avis et une note de 1 à 5. Ce brouillon local n’est ni publié ni modéré.</p><span class="badge">Brouillon local V1</span></article>
-        <article class="card"><h3>06 · Commentaires</h3><p>Préparez une réponse liée à l’identifiant de sa contribution parente. Rien n’est envoyé en ligne.</p><span class="badge">Brouillon local V1</span></article>
+        <article class="card"><h3>04 · Discussions</h3><p>Préparez un brouillon local puis, si vous le choisissez, envoyez-le vers la modération. Aucune auto-publication.</p><span class="badge">Brouillon + modération</span></article>
+        <article class="card"><h3>05 · Avis</h3><p>Rédigez un avis et une note de 1 à 5. La publication distante exige une décision de modération.</p><span class="badge">Brouillon + modération</span></article>
+        <article class="card"><h3>06 · Commentaires</h3><p>Préparez une réponse liée à sa contribution parente. Un envoi distant reste en attente tant qu’il n’est pas modéré.</p><span class="badge">Brouillon + modération</span></article>
       </div>
     </section>
 
@@ -109,6 +109,18 @@
       </form>
       <details class="modaryx-disclosure"><summary>Voir le JSON de ma contribution</summary><pre id="submission-preview" tabindex="0">Brouillon local incomplet.</pre></details>
       <div class="security-note"><strong>Brouillon privé sur cet appareil.</strong> Exporter une copie ne la publie pas. Aucun auteur distant ni décision de modération ne sont associés à votre brouillon.</div>
+    </section>
+
+    <section class="section community-publications" id="publications" aria-labelledby="publications-title" data-public-state="loading">
+      <div class="section-heading">
+        <div><p class="eyebrow">Communauté publiée</p><h2 id="publications-title">Uniquement après modération.</h2></div>
+        <button class="button" id="community-public-refresh" type="button">Actualiser</button>
+      </div>
+      <p class="section-intro" id="community-public-status" role="status" aria-live="polite">Chargement des contributions réellement publiées…</p>
+      <div class="community-public-grid" id="community-public-list" aria-live="polite" aria-busy="true">
+        <article class="card community-public-empty"><h3>Chargement</h3><p>MODARYX vérifie la surface publique. Aucun brouillon local n’est utilisé comme contenu de remplacement.</p></article>
+      </div>
+      <div class="security-note"><strong>Publication explicite.</strong> Cette surface affiche uniquement les contributions dont l’état serveur est <code>passed / accepted / published</code>. Un profil auteur privé n’est pas dévoilé.</div>
     </section>
 
     <section class="section community-contracts" aria-labelledby="community-contracts-title">

@@ -8,6 +8,7 @@ const html=fs.readFileSync(path.join(root,'community.html'),'utf8');
 const js=fs.readFileSync(path.join(root,'assets/community.js'),'utf8');
 const css=fs.readFileSync(path.join(root,'assets/modaryx-community-finishline.css'),'utf8');
 const endpoint=fs.readFileSync(path.join(root,'functions/api/v1/community/submissions.js'),'utf8');
+const publicEndpoint=fs.readFileSync(path.join(root,'functions/api/v1/community/public.js'),'utf8');
 
 for(const token of [
   'id="community-remote"',
@@ -15,6 +16,11 @@ for(const token of [
   'id="community-login"',
   'id="community-submit-remote"',
   'id="community-turnstile"',
+  'id="publications"',
+  'data-public-state="loading"',
+  'id="community-public-list"',
+  'id="community-public-refresh"',
+  'Uniquement après modération.',
   'Envoyer pour modération',
   'https://challenges.cloudflare.com'
 ]) assert.ok(html.includes(token),'community html invariant missing: '+token);
@@ -29,7 +35,11 @@ for(const token of [
   'publicationState !== "received"',
   'distributable !== false',
   'Contribution reçue pour modération · NON PUBLIÉE',
-  'Le brouillon local est conservé'
+  'Le brouillon local est conservé',
+  'fetch("/api/v1/community/public?limit=12"',
+  'item.moderationState !== "accepted"',
+  'item.publicationState !== "published"',
+  'Aucun brouillon local n’est affiché à sa place'
 ]) assert.ok(js.includes(token),'community JS invariant missing: '+token);
 
 assert.ok(!js.includes('access_token'),'community UI must never handle Auth0 access tokens');
@@ -42,7 +52,10 @@ assert.ok(js.includes('remoteBackend?.turnstile?.siteKeyConfigured'));
 for(const token of [
   '.community-remote-bridge{',
   '[data-remote-state="authenticated"]',
-  '.community-remote-result{'
+  '.community-remote-result{',
+  '.community-publications{',
+  '.community-public-grid{',
+  '.community-public-card'
 ]) assert.ok(css.includes(token),'community remote CSS invariant missing: '+token);
 
 for(const token of [
@@ -53,17 +66,25 @@ for(const token of [
 ]) assert.ok(endpoint.includes(token),'community endpoint invariant missing: '+token);
 
 assert.ok(!endpoint.includes("publicationState:'published'"),'community endpoint must not auto-publish');
+for(const token of [
+  "s.abuse_state = 'passed'",
+  "s.moderation_state = 'accepted'",
+  "s.publication_state = 'published'",
+  "row.profile_visibility === 'public'"
+]) assert.ok(publicEndpoint.includes(token),'public community endpoint invariant missing: '+token);
 
 console.log(JSON.stringify({
   marker:'PASS_TARGETED_COMMUNITY_REMOTE_UI',
   result:'PASS',
-  scope:'Community remote UI source contract only; no real Auth0 session, D1 write, Turnstile challenge or moderation service is claimed',
+  scope:'Community remote/public UI source contract; live moderation provider proof remains separate',
   invariants:[
     'local drafts remain independent and local-first',
     'remote path is session/backend/Turnstile gated',
     'remote submissions are sent for moderation, never auto-published',
     'failed remote writes do not claim success',
-    'browser never handles Auth0 access tokens'
+    'browser never handles Auth0 access tokens',
+    'public feed renders only accepted/published server responses',
+    'public feed fails closed instead of substituting local drafts'
   ],
   failures:[]
 },null,2));

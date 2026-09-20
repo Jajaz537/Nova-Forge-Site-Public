@@ -323,14 +323,21 @@ try {
       const login=document.querySelector('#community-login');
       const submit=document.querySelector('#community-submit-remote');
       const result=document.querySelector('#community-remote-result');
-      if (!panel || !status || !login || !submit || !result) return null;
-      if (panel.dataset.remoteState==='checking') return null;
+      const publicSection=document.querySelector('#publications');
+      const publicStatus=document.querySelector('#community-public-status');
+      const publicList=document.querySelector('#community-public-list');
+      if (!panel || !status || !login || !submit || !result || !publicSection || !publicStatus || !publicList) return null;
+      if (panel.dataset.remoteState==='checking' || publicSection.dataset.publicState==='loading') return null;
       return {
         state:panel.dataset.remoteState,
         status:status.textContent.trim(),
         loginDisabled:login.getAttribute('aria-disabled'),
         submitDisabled:submit.disabled,
         result:result.textContent.trim(),
+        publicState:publicSection.dataset.publicState,
+        publicStatus:publicStatus.textContent.trim(),
+        publicCards:publicList.querySelectorAll('.community-public-card').length,
+        publicEmpty:publicList.querySelectorAll('.community-public-empty').length,
         storedDraft:localStorage.getItem('nova-forge:community:submission:v1')
       };
     })()`, 'community remote fail-closed');
@@ -340,6 +347,9 @@ try {
     assert(remote.loginDisabled === 'true', 'remote login must stay disabled without backend');
     assert(remote.submitDisabled === true, 'remote submit must stay disabled without backend');
     assert(/Aucun contenu n’est envoyé en ligne/i.test(remote.result), 'remote fail-closed copy missing');
+    assert(remote.publicState === 'error', 'public community must fail closed on static origin');
+    assert(/Impossible de confirmer les contributions publiées/i.test(remote.publicStatus), 'public community fail-closed status missing');
+    assert(remote.publicCards === 0 && remote.publicEmpty === 1, 'public community must not render unverified cards');
     return remote;
   });
 
