@@ -14,6 +14,10 @@ on:
       - 'qa/check-download-recovery.cjs'
       - 'qa/check-distribution-lock-contracts.cjs'
       - 'qa/check-local-platform-contracts.cjs'
+      - 'qa/check-backend-dev-foundation.mjs'
+      - 'qa/MODARYX-BACKEND-DEV-PROVISIONING-20260920.md'
+      - 'functions/**'
+      - 'migrations/**'
       - 'qa/check-receipt-fields.cjs'
       - 'qa/check-seo-contract.cjs'
       - 'qa/check-anti-oubli-current.cjs'
@@ -60,6 +64,10 @@ on:
       - 'qa/check-download-recovery.cjs'
       - 'qa/check-distribution-lock-contracts.cjs'
       - 'qa/check-local-platform-contracts.cjs'
+      - 'qa/check-backend-dev-foundation.mjs'
+      - 'qa/MODARYX-BACKEND-DEV-PROVISIONING-20260920.md'
+      - 'functions/**'
+      - 'migrations/**'
       - 'qa/check-receipt-fields.cjs'
       - 'qa/check-seo-contract.cjs'
       - 'qa/check-anti-oubli-current.cjs'
@@ -163,6 +171,12 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-local-platform-contracts.cjs
+
+      - name: Run targeted backend DEV foundation proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-backend-dev-foundation.mjs
 
       - name: Run targeted SEO contract proof
         shell: bash
