@@ -16,6 +16,8 @@ on:
       - 'qa/check-local-platform-contracts.cjs'
       - 'qa/check-backend-dev-foundation.mjs'
       - 'qa/check-remote-write-endpoints.mjs'
+      - 'qa/check-auth-bff.mjs'
+      - 'qa/MODARYX-AUTH-BFF-SESSION-20260920.md'
       - 'qa/MODARYX-REMOTE-WRITE-ENDPOINTS-20260920.md'
       - 'qa/MODARYX-BACKEND-DEV-PROVISIONING-20260920.md'
       - 'functions/**'
@@ -68,6 +70,8 @@ on:
       - 'qa/check-local-platform-contracts.cjs'
       - 'qa/check-backend-dev-foundation.mjs'
       - 'qa/check-remote-write-endpoints.mjs'
+      - 'qa/check-auth-bff.mjs'
+      - 'qa/MODARYX-AUTH-BFF-SESSION-20260920.md'
       - 'qa/MODARYX-REMOTE-WRITE-ENDPOINTS-20260920.md'
       - 'qa/MODARYX-BACKEND-DEV-PROVISIONING-20260920.md'
       - 'functions/**'
@@ -187,6 +191,12 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-remote-write-endpoints.mjs
+
+      - name: Run targeted Auth0 BFF session proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-auth-bff.mjs
 
       - name: Run targeted SEO contract proof
         shell: bash
