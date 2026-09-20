@@ -62,6 +62,18 @@ function assert(name,condition){
   if(!condition) throw new Error(name);
 }
 
+function awaitingConfig(){
+  const config=JSON.parse(JSON.stringify(baseConfig));
+  config.visualGrowth.status='awaiting-assets';
+  config.visualGrowth.environmentAsset=null;
+  for(const slot of config.visualGrowth.slots){
+    for(const stageId of config.growthModel.order){
+      slot.stages[stageId]=null;
+    }
+  }
+  return config;
+}
+
 function readyConfig(){
   const config=JSON.parse(JSON.stringify(baseConfig));
   config.visualGrowth.status='ready';
@@ -75,16 +87,18 @@ function readyConfig(){
 }
 
 assert('current visual contract must validate',validateVisualGrowth(baseConfig,'https://modaryx.test/index.html'));
-assert('current status must await assets',baseConfig.visualGrowth.status==='awaiting-assets');
-assert('current contract must not invent environment asset',baseConfig.visualGrowth.environmentAsset===null);
+assert('current visual status must be ready',baseConfig.visualGrowth.status==='ready');
+assert('current ready contract must declare environment asset',typeof baseConfig.visualGrowth.environmentAsset==='string');
 assert('main runtime must lazy-load visual module only for ready status',
   mainSource.includes("config?.visualGrowth?.status === 'ready'") &&
   mainSource.includes("living-world-visual-growth.mjs"));
 assert('visual layer markup must not burden current critical HTML',!indexSource.includes('data-world-visual-layers'));
 
+const awaiting=awaitingConfig();
+assert('synthetic awaiting contract must validate',validateVisualGrowth(awaiting,'https://modaryx.test/index.html'));
 const fallbackDoc=documentMock();
 const fallbackResult=await renderVisualGrowth({
-  config:baseConfig,
+  config:awaiting,
   document:fallbackDoc.document,
   root:fallbackDoc.root,
   stages:{wolf:'baby',dragon:'baby'},
@@ -147,7 +161,7 @@ assert('failed load must keep composite',failedLoadDoc.environment.src==='./asse
 
 console.log(JSON.stringify({
   marker:'PASS_TARGETED_LAYERED_GROWTH_CONTRACT',
-  current:{status:baseConfig.visualGrowth.status,criticalHtmlSlots:false},
+  current:{status:baseConfig.visualGrowth.status,environment:baseConfig.visualGrowth.environmentAsset,criticalHtmlSlots:false},
   syntheticReady:{active:true,preloaded:loaded.length,wolf:wolf.src,dragon:dragon.src},
   failClosed:true
 },null,2));
