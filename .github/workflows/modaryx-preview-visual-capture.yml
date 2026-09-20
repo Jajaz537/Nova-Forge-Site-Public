@@ -66,9 +66,18 @@ jobs:
                 const user = item.user?.login || "";
                 if (user !== "cloudflare-workers-and-pages[bot]") continue;
                 if (!body.includes("Deploy successful") || !body.includes("<code>" + short + "</code>")) continue;
-                const match = body.match(/Preview URL:<\\/strong><\\/td><td>\\s*<a href=\\x27(https:\\/\\/[^\\x27]+)\\x27/);
-                if (match) {
-                  process.stdout.write(match[1]);
+                const marker = "Preview URL:</strong></td><td>";
+                const markerAt = body.indexOf(marker);
+                if (markerAt < 0) continue;
+                const hrefMarker = "<a href=\x27";
+                const hrefAt = body.indexOf(hrefMarker, markerAt);
+                if (hrefAt < 0) continue;
+                const start = hrefAt + hrefMarker.length;
+                const end = body.indexOf("\x27", start);
+                if (end < 0) continue;
+                const url = body.slice(start, end);
+                if (url.startsWith("https://")) {
+                  process.stdout.write(url);
                   break;
                 }
               }
