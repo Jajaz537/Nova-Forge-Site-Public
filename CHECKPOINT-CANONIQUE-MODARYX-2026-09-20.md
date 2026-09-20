@@ -1749,3 +1749,68 @@ WebKit ne vaut toujours pas Safari final.
 2. Examiner la surface Communauté pour connecter proprement le endpoint distant déjà codé sans casser le mode local.
 3. Ensuite basculer vers Work pour provisionnement Auth0/Cloudflare DEV réel.
 4. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — PR #112 — UI Communauté distante modérée — 20 septembre 2026
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- Candidat final PR #112 : `667b3f823dd161004a1d67619380ecd373ea605c`.
+- Merge PR #112 dans Work : `79b033ea3bc022f8679043f546bcccd7e5a485c5`.
+- Base vérifiée avant fusion : `10751a67d985d09856ed201e53b00adaa4ddfeb6`.
+- PR #112 : **TERMINÉE / fusionnée** dans Work.
+- `main` inchangée.
+- Aucun tenant Auth0, D1, Turnstile, binding, secret, DNS ou service de modération réel n'a été provisionné par ce lot.
+- Aucun full replay final exécuté.
+
+### UI livrée
+
+La surface `community.html` conserve le brouillon local comme voie indépendante et ajoute une voie distante progressive :
+
+- login BFF uniquement si le backend/session réels sont disponibles ;
+- session réelle obligatoire avant envoi distant ;
+- Turnstile action `community-write` ;
+- réutilisation de la validation locale avant POST ;
+- POST `/api/v1/community/submissions` ;
+- succès accepté uniquement si `moderationState=pending`, `publicationState=received` et `distributable=false` ;
+- aucune auto-publication ;
+- aucun access token Auth0 géré dans le navigateur ;
+- un échec distant ne supprime pas le brouillon local et ne simule pas un succès.
+
+### Preuves ciblées finales du candidat `667b3f823dd161004a1d67619380ecd373ea605c`
+
+Les 11 workflows automatiques associés au candidat final sont **success** :
+
+- MODARYX Site First Targeted Source Proof — run `35523673854`
+  - étape `Run targeted community remote UI proof` : success ;
+  - marker source : `PASS_TARGETED_COMMUNITY_REMOTE_UI` ;
+  - la garde anti-oubli ciblée est également exécutée dans ce job.
+- MODARYX Catalog Community States Proof — run `35523673848` — success ;
+- MODARYX Real File Browser Proof — run `35523673867` — success ;
+- MODARYX Lab Performance Micro-Proof — run `35523673879` — success ;
+- MODARYX PWA Offline Browser Proof — run `35523673842` — success ;
+- MODARYX Local Functional Browser Proof — run `35523673836` — success ;
+- MODARYX Browser Accessibility Micro-Proof — run `35523673835` — success ;
+- MODARYX Browser Reflow Micro-Proof — run `35523673827` — success ;
+- MODARYX Firefox 23 Route Proof — run `35523673824` — success ;
+- MODARYX Static Premium HD Review — run `35523673831` — success ;
+- MODARYX WebKit 23 Route Preflight — run `35523673833` — success.
+
+WebKit reste une preuve moteur ciblée et ne vaut pas Safari final.
+
+### État honnête
+
+- **TERMINÉ — UI Communauté distante modérée ciblée**.
+- **TERMINÉ — fallback distant fail-closed ciblé, brouillon local conservé**.
+- **EN COURS — Auth0 DEV réel, D1, Turnstile, bindings/secrets et login réseau réel**.
+- **EN COURS — modération distante réelle et cycle bout-en-bout fournisseur**.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Ne plus traiter l'UI Communauté distante comme absente.
+2. Passer au provisioning **DEV** réel Auth0 + Cloudflare uniquement dans un environnement fournisseur autorisé, sans toucher à `main`, DNS ou production.
+3. Après provisioning, exécuter des micro-proofs bout-en-bout : login/session HttpOnly, Turnstile, D1, profil réseau et soumission Communauté en `pending/received/distributable=false`.
+4. En cas d'erreur : erreur exacte → isolation → correction ciblée → micro-proof.
+5. Aucun full replay avant la toute fin.
