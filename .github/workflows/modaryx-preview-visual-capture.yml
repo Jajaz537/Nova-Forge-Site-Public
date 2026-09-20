@@ -1,0 +1,109 @@
+name: MODARYX Preview Visual Capture
+
+on:
+  pull_request:
+    branches:
+      - design/modaryx-premium-hd-20260914-work
+    paths:
+      - '.github/workflows/modaryx-preview-visual-capture.yml'
+      - 'qa/check-preview-visual-capture.mjs'
+      - 'index.html'
+      - 'assets/living-world.js'
+      - 'assets/living-world-visual-growth.mjs'
+      - 'assets/living-world-visual-growth.css'
+      - 'assets/real-world-sync.mjs'
+      - 'assets/real-world-sync.css'
+      - 'data/living-world.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+concurrency:
+  group: modaryx-preview-visual-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preview-visual:
+    name: Chromium deployed-preview visual capture
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Resolve immutable Cloudflare preview
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test -n "$PR_NUMBER"
+          SHORT_SHA="${HEAD_SHA:0:7}"
+          for attempt in {1..60}; do
+            COMMENTS="$(curl --fail --silent --show-error               -H "Accept: application/vnd.github+json"               -H "Authorization: Bearer $GH_TOKEN"               -H "X-GitHub-Api-Version: 2022-11-28"               "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments?per_page=100")"
+            PREVIEW="$(COMMENTS="$COMMENTS" SHORT_SHA="$SHORT_SHA" node -e '
+              const comments = JSON.parse(process.env.COMMENTS);
+              const short = process.env.SHORT_SHA;
+              for (const item of [...comments].reverse()) {
+                const body = item.body || "";
+                const user = item.user?.login || "";
+                if (user !== "cloudflare-workers-and-pages[bot]") continue;
+                if (!body.includes("Deploy successful") || !body.includes("<code>" + short + "</code>")) continue;
+                const marker = "Preview URL:</strong></td><td>";
+                const markerAt = body.indexOf(marker);
+                if (markerAt < 0) continue;
+                const hrefMarker = "<a href=\x27";
+                const hrefAt = body.indexOf(hrefMarker, markerAt);
+                if (hrefAt < 0) continue;
+                const start = hrefAt + hrefMarker.length;
+                const end = body.indexOf("\x27", start);
+                if (end < 0) continue;
+                const url = body.slice(start, end);
+                if (url.startsWith("https://")) {
+                  process.stdout.write(url);
+                  break;
+                }
+              }
+            ')"
+            if test -n "$PREVIEW"; then
+              echo "MODARYX_VISUAL_ORIGIN=$PREVIEW" >> "$GITHUB_ENV"
+              echo "Resolved preview: $PREVIEW"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "No Cloudflare preview found for candidate $HEAD_SHA" >&2
+          exit 1
+
+      - name: Capture integrated desktop mobile and reduced-motion proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          export MODARYX_VISUAL_OUT="$RUNNER_TEMP/modaryx-preview-visual"
+          node qa/check-preview-visual-capture.mjs
+
+      - name: Upload visual evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: modaryx-preview-visual-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/modaryx-preview-visual
+          if-no-files-found: error
+          retention-days: 7
