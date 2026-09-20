@@ -1,4 +1,5 @@
-html[data-reality-sync=active] .modaryx-realm-art{
+html[data-reality-sync=active] .modaryx-realm-art,
+html[data-reality-sync=active][data-world-visual-growth=active] .living-world-visual-layers{
   filter:
     saturate(var(--mx-season-sat,1))
     brightness(var(--mx-season-bright,1))
@@ -77,10 +78,11 @@ html[data-local-climate=tropical] .living-world-status{border-color:rgba(116,187
 @keyframes mx-wind-sweep{to{transform:translate3d(16%,0,0)}}
 @keyframes mx-storm-light{0%,91%,94%,100%{opacity:0}92%,93%{opacity:1}}
 html[data-motion=reduced] .modaryx-realm-art,
+html[data-motion=reduced] .living-world-visual-layers,
 html[data-motion=reduced] .real-world-weather-layer{transition:none!important}
 html[data-motion=reduced] .real-world-weather-layer:before,
 html[data-motion=reduced] .real-world-weather-layer:after{animation:none!important}
 @media(prefers-reduced-motion:reduce){
-  .modaryx-realm-art,.real-world-weather-layer{transition:none!important}
+  .modaryx-realm-art,.living-world-visual-layers,.real-world-weather-layer{transition:none!important}
   .real-world-weather-layer:before,.real-world-weather-layer:after{animation:none!important}
 }

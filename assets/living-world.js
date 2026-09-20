@@ -20,6 +20,7 @@
 
   const DAY_MS = 24 * 60 * 60 * 1000;
   const REQUIRED_GROWTH_ORDER = ['baby', 'juvenile', 'adolescent', 'young-adult', 'adult'];
+  const VISUAL_GROWTH_DELAY_MS = 2200;
   let timer = null;
   let config = null;
   let sourceState = 'fresh';
@@ -159,21 +160,49 @@
     }
     root.dataset.worldSource = sourceState;
     root.dataset.worldVisualGrowth = config?.visualGrowth?.status || 'awaiting-assets';
-    if (config?.visualGrowth?.status === 'ready') {
-      import(new URL('./assets/living-world-visual-growth.mjs', document.baseURI).href)
-        .then((module) => module.renderVisualGrowth({
-          config,
-          document,
-          root,
-          stages: Object.fromEntries(
-            (config.inhabitants || []).map((inhabitant) => [
-              inhabitant.id,
-              root.dataset[`world${inhabitant.id[0].toUpperCase() + inhabitant.id.slice(1)}Stage`]
-            ])
-          )
-        }))
-        .catch(() => { root.dataset.worldVisualGrowth = 'fallback'; });
+    if (config?.visualGrowth?.status === 'ready') scheduleVisualGrowth();
+  }
+
+  let visualGrowthWaitingForLoad = false;
+
+  function activateVisualGrowth() {
+    if (config?.visualGrowth?.status !== 'ready') return;
+    import(new URL('./assets/living-world-visual-growth.mjs', document.baseURI).href)
+      .then((module) => module.renderVisualGrowth({
+        config,
+        document,
+        root,
+        stages: Object.fromEntries(
+          (config.inhabitants || []).map((inhabitant) => [
+            inhabitant.id,
+            root.dataset[`world${inhabitant.id[0].toUpperCase() + inhabitant.id.slice(1)}Stage`]
+          ])
+        )
+      }))
+      .catch(() => { root.dataset.worldVisualGrowth = 'fallback'; });
+  }
+
+  function scheduleVisualGrowth() {
+    const run = () => {
+      visualGrowthWaitingForLoad = false;
+      const activate = () => activateVisualGrowth();
+      const idle = () => {
+        if (typeof window.requestIdleCallback === 'function') {
+          window.requestIdleCallback(activate, {timeout: 1500});
+        } else {
+          window.setTimeout(activate, 0);
+        }
+      };
+      window.setTimeout(idle, VISUAL_GROWTH_DELAY_MS);
+    };
+
+    if (document.readyState === 'complete') {
+      run();
+      return;
     }
+    if (visualGrowthWaitingForLoad) return;
+    visualGrowthWaitingForLoad = true;
+    window.addEventListener('load', run, {once: true});
   }
 
   function schedule() {
