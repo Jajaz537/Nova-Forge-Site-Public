@@ -94,7 +94,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 ## 7. Finition Premium HD encore active
 
 - **EN COURS** — finition cohérente des 17 pages : composition, hiérarchie, surfaces, responsive, états, navigation, typographie, motion et contrôles visuels.
-- **EN COURS** — surfaces statiques Écosystème / Sécurité / Documentation / Jeux / 404 : lane de revue dédiée ouverte en PR #74 ; aucun statut final avant son micro-proof et l'inspection des captures.
+- **TERMINÉ — preuve ciblée navigateur** — surfaces statiques Écosystème / Sécurité / Documentation / Jeux / 404 : PR #74 fusionnée dans Work au merge `29fab6f549c5d9192359c0e8c9cbad2d4edec39a` ; run `35508894415`, marker `PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW` ; desktop 1440×1000 + mobile 390×844, zéro overflow, aucune image cassée ni contrôle coupé. Les captures ont été inspectées de façon assistée sans défaut bloquant isolé ; cela ne ferme pas la validation artistique humaine finale.
 - **TERMINÉ sur leurs scénarios ciblés** — états locaux Recherche, Téléchargements, Profils, Catalogue, Communauté, Creator Studio, Project Hub et Accueil. Ne pas les rejouer sans modification pertinente.
 
 ## 8. États historiques explicitement supersédés
@@ -125,8 +125,8 @@ Aucune idée n'est supprimée implicitement pour améliorer un pourcentage. Une 
 
 ## 10. Prochain point logique
 
-1. Fermer la lane visuelle statique PR #74 par micro-proof et inspection assistée.
-2. Corriger seulement les défauts réellement isolés, puis rejouer uniquement la preuve affectée.
-3. Consolider le SEO autonome sans modifier les fichiers gardés/infra sans autorisation explicite.
-4. Continuer les surfaces Premium HD restantes et garder les capacités distantes dans leur état réel.
+1. Ne pas rejouer la preuve statique PR #74 sans modification pertinente.
+2. Consolider le SEO autonome sans modifier les fichiers gardés/infra sans autorisation explicite ; l'écart connu `/games/` → sitemap reste tracé.
+3. Continuer la finition Premium HD globale uniquement là où une preuve ou une inspection fraîche révèle un défaut réel.
+4. Fermer séparément les preuves externes quand un environnement approprié est disponible et garder les capacités distantes dans leur état réel.
 5. Aucun full replay avant la toute fin.
