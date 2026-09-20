@@ -17,7 +17,7 @@ class Page(HTMLParser):
     def handle_endtag(self, name):
         if name in self.stack: self.stack=self.stack[:len(self.stack)-1-self.stack[::-1].index(name)]
 
-public_paths=[p for p in ROOT.glob('*.html') if p.stem not in ('review','comparison')]+list((ROOT/'games').glob('*.html'))
+public_paths=[p for p in ROOT.glob('*.html') if p.stem not in ('review','comparison')]+list((ROOT/'games').rglob('*.html'))+list((ROOT/'gta-6').rglob('*.html'))+list((ROOT/'red-dead-redemption-2').rglob('*.html'))
 pages={str(p.relative_to(ROOT)):Page(p) for p in public_paths}
 search_entries=json.loads((ROOT/'data/search-index.json').read_text())['entries']
 search_links=[a.get('href') for t,a in pages['search.html'].tags if t=='a' and a.get('class')=='search-result']
