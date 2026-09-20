@@ -20,6 +20,7 @@ export function backendState(env = {}) {
   const clientId = nonEmpty(env.AUTH0_CLIENT_ID);
   const clientSecret = nonEmpty(env.AUTH0_CLIENT_SECRET);
   const turnstileSecret = Boolean(nonEmpty(env.MODARYX_TURNSTILE_SECRET));
+  const turnstileSiteKey = nonEmpty(env.MODARYX_TURNSTILE_SITE_KEY);
 
   return {
     schemaVersion: 1,
@@ -37,7 +38,9 @@ export function backendState(env = {}) {
       clientSecretConfigured: Boolean(clientSecret)
     },
     turnstile: {
-      secretConfigured: turnstileSecret
+      secretConfigured: turnstileSecret,
+      siteKeyConfigured: Boolean(turnstileSiteKey),
+      publicSiteKey: turnstileSiteKey
     },
     remoteWritesReady: Boolean(env.MODARYX_DB && issuer && audience && turnstileSecret)
   };

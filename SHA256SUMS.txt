@@ -28,8 +28,8 @@ ea3ceb226c6cd2903c513bb3cede5863802e345ee29cd1d33354f581c27b334b  ./assets/nova-
 fcdc1bd71f136a73d8d7d4eeeed53bd671c7b8534e17c54177b640deaba41e6e  ./assets/nova-premium-hd.css
 947867b01e8b12ee6e9a9853c175590fd154233d5a2e8596592ed37420e0ef6b  ./assets/nova-premium-hd.js
 4cc40ac150b517f9112966ec438b934d85b11c1154fafa5e7165adbc8045b508  ./assets/official.css
-0f8b3d05f73b1bbaac031866565c10e9aae4e52af8ce8303520d985a399ed0de  ./assets/profiles.css
-aa04a79025a5da6b532b5a06f08c7eefd3dbc9ad2d54e7e050006b6b64a90d3f  ./assets/profiles.js
+95bad03b7f6d5b2cce8eccdd55320e6ef3b5100f5ae4f4cf13a75e1b3f3799be  ./assets/profiles.css
+5a0adc375896a4e67dc56fbb2aa5f9be9ffd918bf5235689c11b2e39127eaf0a  ./assets/profiles.js
 db79e4b5d933284c9ba12ec8974cce0bb75110f3c7b5134c670e77eb508b4586  ./assets/project-hub.css
 3aa9a4b17c14f6fea264f2de9bb04431448b9d2e7ab1cc0293a339084504b0e2  ./assets/project-hub.js
 f13f4711d6c83dc23c7f0577abd3a408f051978fbebb85bf91098b8e4f7d7e42  ./assets/search.css
@@ -54,7 +54,7 @@ d60000a6ce45fe5caef1906d8d0d15d26ecab82402aecff396c1b23f32fc8ec0  ./downloads.js
 261acad337661d82075248de35bf8e8f935d5b2709b5f9dc0ebdf3740c5d1dfc  ./favicon.svg
 82c116d64880b49c0870ddc94912165b496d821b7cf32be2e67821a16ac6c24c  ./games/index.html
 9fbe8b4e3526d24cce5f7becc9bc7e502d749bfa4ad03539fe23a85257cd027f  ./index.html
-2305edc70268c0b938976d2f9b63adc5b19091955d53527e0a34d09c5fb47631  ./profiles.html
+e115255fed3222cf4bf9e814e4d9e82b9c2b4ee412de847fbad985c1dc034738  ./profiles.html
 08574617059bd2cba252ec1dbc1e583faf56a9571bed1d9023e0f18531f819b8  ./project-balanced-latency-pack.html
 553e94564c2148681030e2c03d5b8a13384e1e6c8dfd3651334c7b666d194f0a  ./project-ember-textures.html
 c8733d2cf0baa5ebdfd75609251bae2ffeb10533f4568dc15cb5e438724da633  ./project-forge-night-experience.html

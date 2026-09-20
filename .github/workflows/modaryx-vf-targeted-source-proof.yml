@@ -17,6 +17,8 @@ on:
       - 'qa/check-backend-dev-foundation.mjs'
       - 'qa/check-remote-write-endpoints.mjs'
       - 'qa/check-auth-bff.mjs'
+      - 'qa/check-profiles-account-ui.cjs'
+      - 'qa/MODARYX-PROFILES-ACCOUNT-UI-20260920.md'
       - 'qa/MODARYX-AUTH-BFF-SESSION-20260920.md'
       - 'qa/MODARYX-REMOTE-WRITE-ENDPOINTS-20260920.md'
       - 'qa/MODARYX-BACKEND-DEV-PROVISIONING-20260920.md'
@@ -71,6 +73,8 @@ on:
       - 'qa/check-backend-dev-foundation.mjs'
       - 'qa/check-remote-write-endpoints.mjs'
       - 'qa/check-auth-bff.mjs'
+      - 'qa/check-profiles-account-ui.cjs'
+      - 'qa/MODARYX-PROFILES-ACCOUNT-UI-20260920.md'
       - 'qa/MODARYX-AUTH-BFF-SESSION-20260920.md'
       - 'qa/MODARYX-REMOTE-WRITE-ENDPOINTS-20260920.md'
       - 'qa/MODARYX-BACKEND-DEV-PROVISIONING-20260920.md'
@@ -197,6 +201,12 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-auth-bff.mjs
+
+      - name: Run targeted profiles account UI proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-profiles-account-ui.cjs
 
       - name: Run targeted SEO contract proof
         shell: bash

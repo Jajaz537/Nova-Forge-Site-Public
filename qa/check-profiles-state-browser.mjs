@@ -140,27 +140,40 @@ async function runCase(cdp, spec) {
     const platform=document.querySelector('#platform-authenticator');
     const conditional=document.querySelector('#conditional-mediation');
     const note=document.querySelector('.profiles-note');
+    const account=document.querySelector('#account-console');
+    const accountStatus=document.querySelector('#account-status');
+    const accountCopy=document.querySelector('#account-status-copy');
+    const login=document.querySelector('#account-login');
+    const logout=document.querySelector('#account-logout');
+    const fields=document.querySelector('#profile-editor-fields');
     const cards=[...document.querySelectorAll('.profiles-grid .profile-card')];
     const body=document.body;
     const root=document.documentElement;
-    if (!status || !api || !platform || !conditional || !note) return null;
+    if (!status || !api || !platform || !conditional || !note || !account || !accountStatus || !accountCopy || !login || !logout || !fields) return null;
     if (status.textContent.trim()==='Non vérifié') return null;
+    if (account.dataset.accountState==='checking') return null;
     return {
       status:status.textContent.trim(),
       api:api.textContent.trim(),
       platform:platform.textContent.trim(),
       conditional:conditional.textContent.trim(),
       note:note.textContent.trim(),
+      accountState:account.dataset.accountState,
+      accountStatus:accountStatus.textContent.trim(),
+      accountCopy:accountCopy.textContent.trim(),
+      loginDisabled:login.getAttribute('aria-disabled'),
+      loginHidden:login.hidden,
+      logoutHidden:logout.hidden,
+      editorDisabled:fields.disabled,
       cardCount:cards.length,
       overflow:Math.max(body.scrollWidth,root.scrollWidth)-root.clientWidth,
       h1:document.querySelector('h1')?.textContent?.trim()||'',
       boundaries:[...document.querySelectorAll('[aria-labelledby="boundaries-title"] .profile-card h3')].map(x=>x.textContent.trim()),
-      webauthnCards:[...document.querySelectorAll('[aria-labelledby="webauthn-title"] .profile-card h3')].map(x=>x.textContent.trim()),
-      accountCopy:[...document.querySelectorAll('.profile-card p')].map(x=>x.textContent).join(' | ')
+      webauthnCards:[...document.querySelectorAll('[aria-labelledby="webauthn-title"] .profile-card h3')].map(x=>x.textContent.trim())
     };
-  })()`, spec.name + ' profile detection');
+  })()`, spec.name + ' profile/account detection');
 
-  assert(state.h1 === 'Votre profil, vos moyens de connexion.', spec.name + ': profile title mismatch');
+  assert(state.h1 === 'Votre identité MODARYX, sans exposer vos moyens de connexion.', spec.name + ': profile title mismatch');
   assert(state.cardCount >= 8, spec.name + ': profile cards missing');
   assert(state.boundaries.length === 5, spec.name + ': account boundary cards mismatch');
   assert(state.webauthnCards.length === 3, spec.name + ': WebAuthn cards mismatch');
@@ -172,11 +185,22 @@ async function runCase(cdp, spec) {
   assert(/Ce résultat ne prouve l’existence d’aucune passkey|Non testable sans WebAuthn/.test(state.platform), spec.name + ': platform caution missing');
   assert(/Aucun flux de connexion n’est lancé|Non testable sans WebAuthn/.test(state.conditional), spec.name + ': conditional caution missing');
   assert(/ne prouvent pas qu’un compte existe/i.test(state.note), spec.name + ': account limitation note missing');
-  assert(/aucun historique de compte|aucun n’est actuellement activé|n’est pas encore disponible/i.test(state.accountCopy), spec.name + ': unavailable account boundaries missing');
+
+  assert(state.accountState === 'unavailable', spec.name + ': static proof must stay unavailable, got ' + state.accountState);
+  assert(state.accountStatus === 'Service non provisionné', spec.name + ': unavailable account status mismatch');
+  assert(/ne simule aucune session/i.test(state.accountCopy), spec.name + ': fail-closed account copy missing');
+  assert(state.loginDisabled === 'true', spec.name + ': login must stay disabled without backend');
+  assert(state.loginHidden === false, spec.name + ': login action should remain visible');
+  assert(state.logoutHidden === true, spec.name + ': logout must stay hidden without session');
+  assert(state.editorDisabled === true, spec.name + ': editor must stay disabled without backend');
+
+  await evaluate(cdp, `document.querySelector('#account-console')?.scrollIntoView({block:'center'}); true`);
+  await sleep(120);
+  await capture(cdp, spec.name + '-account.png');
 
   await evaluate(cdp, `document.querySelector('[aria-labelledby="webauthn-title"]')?.scrollIntoView({block:'center'}); true`);
   await sleep(120);
-  await capture(cdp, spec.name + '.png');
+  await capture(cdp, spec.name + '-webauthn.png');
   return state;
 }
 

@@ -46,6 +46,7 @@ Variables non secrètes :
 - `AUTH0_ISSUER_BASE_URL`
 - `AUTH0_AUDIENCE`
 - `AUTH0_CLIENT_ID`
+- `MODARYX_TURNSTILE_SITE_KEY`
 - `MODARYX_SESSION_TTL_SECONDS` optionnel
 
 Secrets :
@@ -144,3 +145,19 @@ Passkeys :
 - aucune custom login page incompatible.
 
 La session MODARYX ne persiste aucun access token Auth0.
+
+
+## Turnstile UI profil
+
+Variable publique :
+- `MODARYX_TURNSTILE_SITE_KEY`
+
+Secret serveur :
+- `MODARYX_TURNSTILE_SECRET`
+
+La site key peut être exposée par `/api/v1/status` pour rendre le widget. Le secret ne doit jamais être retourné.
+
+Action profil :
+- `profile-write`
+
+Le script Turnstile n'est chargé par la page Profils que lorsque site key + secret sont réellement déclarés prêts par le backend.
