@@ -1872,3 +1872,30 @@ Cloudflare Pages check du candidat : **success**.
 4. Exécuter ensuite uniquement les micro-proofs réels nécessaires : status, login/callback/session, profil, Communauté, fail-closed Turnstile/hostname/session.
 5. En cas d'erreur : erreur exacte → isolation → correction ciblée → micro-proof.
 6. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — Provider DEV réel — 21 septembre 2026
+
+### Preuves finales
+
+- Auth0/login/callback/session : **OK**.
+- Profil DEV privé + `profile-write` : **OK**.
+- `community-write` : **OK**.
+- Réponse : `pending / received / distributable=false`.
+- Fail-closed session : `401 authentication-required`.
+- Fail-closed origine absente : `403 origin-required`.
+- Fail-closed origine/hostname : `403 origin-mismatch`.
+- Turnstile invalide : `403 turnstile-rejected`.
+- Hostname Turnstile incorrect : `403 turnstile-hostname-mismatch`.
+- Hostname correct restauré : **OUI**.
+- Harness retiré : **OUI**.
+- `/api/v1/status` final sain, `remoteWritesReady=true`.
+- Aucun secret exposé.
+- Git propre.
+- OAuth Wrangler déconnecté.
+
+### État
+
+- **TERMINÉ — Provider DEV réel et micro-proofs bout-en-bout ciblés**.
+- Aucune VF / aucun 100 %.
+- Aucun full replay final encore exécuté.
