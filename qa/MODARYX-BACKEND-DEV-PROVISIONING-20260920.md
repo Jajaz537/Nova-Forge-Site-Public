@@ -47,6 +47,7 @@ Variables non secrètes :
 - `AUTH0_AUDIENCE`
 - `AUTH0_CLIENT_ID`
 - `MODARYX_TURNSTILE_SITE_KEY`
+- `MODARYX_TURNSTILE_HOSTNAME` recommandé en DEV pour pinner exactement le hostname de la preview stable
 - `MODARYX_SESSION_TTL_SECONDS` optionnel
 
 Secrets :
@@ -78,13 +79,19 @@ Le socle supporte :
 - action attendue ;
 - fail-closed si provider indisponible.
 
+Pour DEV :
+- configurer la site key Turnstile pour le **hostname exact** de la preview stable ;
+- définir le même hostname, sans schéma ni chemin, dans `MODARYX_TURNSTILE_HOSTNAME` ;
+- actions attendues : `profile-write` et `community-write`.
+
 ## D1
 
-Migration :
+Migrations à appliquer dans cet ordre sur **D1 DEV uniquement** :
 
-`migrations/0001_modaryx_dev_foundation.sql`
+1. `migrations/0001_modaryx_dev_foundation.sql`
+2. `migrations/0002_modaryx_auth_sessions.sql`
 
-Tables :
+Tables produit :
 - `modaryx_profiles`
 - `modaryx_community_submissions`
 
@@ -94,6 +101,11 @@ Contraintes :
 - états abuse/modération/publication bornés ;
 - FK profil → contributions ;
 - indexes minimaux.
+
+Tables BFF/session :
+- `modaryx_auth_transactions` ;
+- `modaryx_sessions` ;
+- state OAuth et token de session stockés uniquement sous forme hashée côté D1.
 
 ## API status
 
@@ -119,7 +131,11 @@ Avant toute activation distante :
 4. configurer tenant Auth0 DEV ;
 5. créer Turnstile DEV séparé ;
 6. micro-proofs sur preview ;
-7. seulement après preuve, planifier production.
+7. vérifier `/api/v1/status` sur la preview DEV : D1 présent, Auth0 login configuré, Turnstile site key + secret présents et `remoteWritesReady=true` ;
+8. micro-proof réel login/session HttpOnly ;
+9. micro-proof réel profil avec action `profile-write` ;
+10. micro-proof réel Communauté avec action `community-write` et réponse `pending/received/distributable=false` ;
+11. seulement après preuve, planifier production.
 
 Aucun DNS/DNSSEC/nameserver n'est requis pour cette fondation.
 
@@ -137,6 +153,15 @@ Architecture retenue :
 Callback à enregistrer dans Auth0 DEV :
 
 `https://<origine-preview-stable>/api/v1/auth/callback`
+
+Checklist Auth0 DEV :
+- application de type **Regular Web Application** ;
+- API Auth0 dédiée avec identifiant strictement égal à `AUTH0_AUDIENCE` ;
+- algorithme de signature **RS256** ;
+- Allowed Callback URL exactement égale à la callback ci-dessus ;
+- `AUTH0_ISSUER_BASE_URL` = issuer HTTPS canonique du tenant ;
+- `AUTH0_CLIENT_ID` en variable non secrète et `AUTH0_CLIENT_SECRET` en secret serveur ;
+- le logout actuel ferme la session MODARYX locale ; il ne prétend pas fermer une session SSO fournisseur globale.
 
 Passkeys :
 - Database Connection Auth0 ;
