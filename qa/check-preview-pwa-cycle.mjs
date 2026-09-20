@@ -73,11 +73,11 @@ class Cdp {
       }
     });
   }
-  async send(method, params = {}) {
+  async send(method, params = {}, sessionId = null) {
     await this.opened;
     const id = this.nextId++;
     const promise = new Promise((resolve, reject) => this.pending.set(id, {resolve, reject}));
-    this.ws.send(JSON.stringify({id, method, params}));
+    this.ws.send(JSON.stringify(sessionId ? {id, method, params, sessionId} : {id, method, params}));
     return promise;
   }
   once(method, timeoutMs = 15000) {
@@ -136,14 +136,18 @@ async function waitFor(cdp, expression, label, timeoutMs = 15000) {
   throw new Error('timeout: ' + label + '; last=' + JSON.stringify(last));
 }
 
-async function setOffline(cdp, offline) {
-  await cdp.send('Network.emulateNetworkConditions', {
+async function setOffline(cdp, offline, serviceWorkerSessionId = null) {
+  const conditions = {
     offline,
     latency: 0,
     downloadThroughput: -1,
     uploadThroughput: -1,
     connectionType: offline ? 'none' : 'wifi'
-  });
+  };
+  await cdp.send('Network.emulateNetworkConditions', conditions);
+  if (serviceWorkerSessionId) {
+    await cdp.send('Network.emulateNetworkConditions', conditions, serviceWorkerSessionId);
+  }
 }
 
 const chrome = spawn(CHROME_BIN, [
@@ -181,6 +185,7 @@ try {
   await cdp.send('Page.enable');
   await cdp.send('Runtime.enable');
   await cdp.send('Network.enable');
+  await cdp.send('Target.setDiscoverTargets', {discover: true});
 
   await navigate(cdp, 'index.html?preview-pwa-proof=warmup');
 
@@ -202,6 +207,29 @@ try {
     })()`, 'service worker controlling after reload', 15000);
   }
   observations.serviceWorker = sw;
+
+  const serviceWorkerTarget = await waitFor(cdp, `(async () => true)()`, 'service worker target wait', 1000)
+    .then(async () => {
+      const {targetInfos} = await cdp.send('Target.getTargets');
+      return targetInfos.find((target) =>
+        target.type === 'service_worker' &&
+        target.url.startsWith(ORIGIN + '/sw.js')
+      ) || null;
+    });
+  assert(Boolean(serviceWorkerTarget), 'service worker CDP target not found');
+  let serviceWorkerSessionId = null;
+  if (serviceWorkerTarget) {
+    const attached = await cdp.send('Target.attachToTarget', {
+      targetId: serviceWorkerTarget.targetId,
+      flatten: true
+    });
+    serviceWorkerSessionId = attached.sessionId || null;
+    assert(Boolean(serviceWorkerSessionId), 'service worker CDP session not attached');
+    if (serviceWorkerSessionId) {
+      await cdp.send('Network.enable', {}, serviceWorkerSessionId);
+    }
+  }
+  observations.serviceWorkerNetworkSession = Boolean(serviceWorkerSessionId);
 
   await navigate(cdp, 'catalog.html?preview-pwa-proof=warm');
   const catalogWarm = await waitFor(cdp, `(() => {
@@ -236,7 +264,8 @@ try {
   assert(cachedUrls.some((url) => /\/catalog\.html(?:$|\?)/.test(url)), 'catalog page not found in preview cache');
   assert(cachedUrls.some((url) => /\/data\/catalog\.json(?:$|\?)/.test(url)), 'catalog data not found in preview cache');
 
-  await setOffline(cdp, true);
+  await cdp.send('Network.clearBrowserCache');
+  await setOffline(cdp, true, serviceWorkerSessionId);
   observations.networkOffline = true;
 
   const offlineCatalogNav = await navigate(cdp, 'catalog.html?preview-pwa-proof=offline', true);
@@ -277,7 +306,7 @@ try {
   assert(!offlineIndexNav.errorText, 'index offline navigation failed: ' + offlineIndexNav.errorText);
   assert(offlineIndex.controller, 'index offline page lost service worker controller');
 
-  await setOffline(cdp, false);
+  await setOffline(cdp, false, serviceWorkerSessionId);
   observations.networkRecovered = true;
 
   const freshData = await evaluate(cdp, `(async () => {
