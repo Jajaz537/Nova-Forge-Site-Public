@@ -67,9 +67,9 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 
 | Élément retenu | État courant | Condition de fermeture |
 |---|---|---|
-| Comptes / authentification / passkeys réels | **EN COURS — candidat identité qualifié, non connecté** | Auth0 = candidat privilégié non connecté (Free 25k MAU, passkeys, custom domain) ; WorkOS/Clerk/Supabase comparés. Tenant, domaine, session, récupération et vraie cérémonie passkey restent à prouver. |
-| Profils publics éditables | **EN COURS — capacité non livrée** | Identité, stockage et politique de publication réels. |
-| Publication / modération distante | **EN COURS — contrats receipts acquis, backend distant non connecté** | Contrats notice/décision/appel/export prouvés par run `35515669822`, marker `PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS`; backend sécurisé, rôles, politique d'abus et exécution distante restent à connecter. |
+| Comptes / authentification / passkeys réels | **EN COURS — candidat identité + contrat sécurité acquis, non connecté** | Auth0 = candidat privilégié non connecté ; contrat compte/passkey machine-enforced par `PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS`. Tenant, domaine, session, récupération et vraie cérémonie passkey restent à prouver. |
+| Profils publics éditables | **EN COURS — contrat profil public acquis, édition distante non connectée** | Schéma profil public machine-enforced par `PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS` ; identité, stockage et publication réels restent requis. |
+| Publication / modération distante | **EN COURS — contrats receipts + write-intent acquis, backend distant non connecté** | Receipts prouvés par run `35515669822`; brouillon local + Abuse Shield/write-intent machine-enforced par `PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS`. Backend sécurisé, rôles et exécution distante restent à connecter. |
 | Signatures / attestations de provenance | **EN COURS — contrats provenance acquis, signer/attestation réel non connecté** | Publication receipt fail-closed prouvé par run `35515669822`, marker `PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS`; un `receipt:` bien formé n'atteste toujours aucune authenticité. |
 | Téléchargements publics réels | **BLOQUÉ** | Artefact autorisé + identité + SHA-256 + provenance + signature lorsque requise. |
 | Corpus réels de mods GTA VI / RDR2 | **EN COURS — capacité non livrée / droits et preuves requis** | Les hubs éditoriaux sont livrés, mais le catalogue de mods reste à 0 tant qu'un corpus autorisé, versionné, attribué et vérifiable n'existe pas. |

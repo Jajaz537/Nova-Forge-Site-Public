@@ -25,9 +25,12 @@ const requiredCurrent = [
   'Storage Resolver | **EN COURS — contrat acquis, service non connecté**',
   'Repair Network | **EN COURS — protocole contractuel acquis, exécution distante non connectée**',
   'PASS_TARGETED_STORAGE_REPAIR_CONTRACTS',
-  'Publication / modération distante | **EN COURS — contrats receipts acquis, backend distant non connecté**',
   'Signatures / attestations de provenance | **EN COURS — contrats provenance acquis, signer/attestation réel non connecté**',
-  'PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS'
+  'PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS',
+  'Comptes / authentification / passkeys réels | **EN COURS — candidat identité + contrat sécurité acquis, non connecté**',
+  'Profils publics éditables | **EN COURS — contrat profil public acquis, édition distante non connectée**',
+  'Publication / modération distante | **EN COURS — contrats receipts + write-intent acquis, backend distant non connecté**',
+  'PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS'
 ];
 for (const token of requiredCurrent) assert.ok(ledger.includes(token), 'anti-forget current missing: ' + token);
 

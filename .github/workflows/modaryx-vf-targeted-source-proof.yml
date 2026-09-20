@@ -10,6 +10,7 @@ on:
       - 'qa/check-integration-readiness.cjs'
       - 'qa/check-storage-repair-contracts.cjs'
       - 'qa/check-provenance-receipt-contracts.cjs'
+      - 'qa/check-account-community-contracts.cjs'
       - 'qa/check-receipt-fields.cjs'
       - 'qa/check-seo-contract.cjs'
       - 'qa/check-anti-oubli-current.cjs'
@@ -21,6 +22,10 @@ on:
       - 'schemas/publication-receipt.schema.json'
       - 'schemas/moderation-receipt.schema.json'
       - 'schemas/moderation-export.schema.json'
+      - 'schemas/public-profile.schema.json'
+      - 'schemas/account-security.schema.json'
+      - 'schemas/community-submission.schema.json'
+      - 'schemas/community-write.schema.json'
       - '*.html'
       - 'games/**'
       - 'gta-6/**'
@@ -40,6 +45,7 @@ on:
       - 'qa/check-integration-readiness.cjs'
       - 'qa/check-storage-repair-contracts.cjs'
       - 'qa/check-provenance-receipt-contracts.cjs'
+      - 'qa/check-account-community-contracts.cjs'
       - 'qa/check-receipt-fields.cjs'
       - 'qa/check-seo-contract.cjs'
       - 'qa/check-anti-oubli-current.cjs'
@@ -51,6 +57,10 @@ on:
       - 'schemas/publication-receipt.schema.json'
       - 'schemas/moderation-receipt.schema.json'
       - 'schemas/moderation-export.schema.json'
+      - 'schemas/public-profile.schema.json'
+      - 'schemas/account-security.schema.json'
+      - 'schemas/community-submission.schema.json'
+      - 'schemas/community-write.schema.json'
       - '*.html'
       - 'games/**'
       - 'gta-6/**'
@@ -112,6 +122,12 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-provenance-receipt-contracts.cjs
+
+      - name: Run targeted account and community contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-account-community-contracts.cjs
 
       - name: Run targeted SEO contract proof
         shell: bash
