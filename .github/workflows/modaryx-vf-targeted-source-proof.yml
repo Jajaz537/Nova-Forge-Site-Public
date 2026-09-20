@@ -9,6 +9,9 @@ on:
       - 'qa/check-site-first-vf.mjs'
       - 'qa/check-integration-readiness.cjs'
       - 'qa/check-seo-contract.cjs'
+      - 'qa/check-anti-oubli-current.cjs'
+      - 'qa/MODARYX-ANTI-OUBLI-CURRENT-20260920.md'
+      - 'CHECKPOINT-CANONIQUE-MODARYX-2026-09-20.md'
       - 'schemas/integration-readiness.schema.json'
       - '*.html'
       - 'games/**'
@@ -26,6 +29,12 @@ on:
     paths:
       - '.github/workflows/modaryx-vf-targeted-source-proof.yml'
       - 'qa/check-site-first-vf.mjs'
+      - 'qa/check-integration-readiness.cjs'
+      - 'qa/check-seo-contract.cjs'
+      - 'qa/check-anti-oubli-current.cjs'
+      - 'qa/MODARYX-ANTI-OUBLI-CURRENT-20260920.md'
+      - 'CHECKPOINT-CANONIQUE-MODARYX-2026-09-20.md'
+      - 'schemas/integration-readiness.schema.json'
       - '*.html'
       - 'games/**'
       - 'gta-6/**'
@@ -81,3 +90,9 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-seo-contract.cjs
+
+      - name: Run targeted anti-forget gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-anti-oubli-current.cjs
