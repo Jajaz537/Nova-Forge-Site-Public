@@ -7,6 +7,8 @@ on:
     paths:
       - '.github/workflows/modaryx-vf-targeted-source-proof.yml'
       - 'qa/check-site-first-vf.mjs'
+      - 'qa/check-integration-readiness.cjs'
+      - 'schemas/integration-readiness.schema.json'
       - '*.html'
       - 'games/**'
       - 'assets/**'
@@ -58,3 +60,9 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-site-first-vf.mjs
+
+      - name: Run targeted integration readiness proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-integration-readiness.cjs

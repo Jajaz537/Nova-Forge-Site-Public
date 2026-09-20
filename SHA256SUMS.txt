@@ -44,7 +44,7 @@ a90b528864f0453c4a89dd4fd888f6230d962c8515e1b35eec936e7631b8be2a  ./catalog.html
 796e8e926b9447ab73f8b42ec19266e87bd7114036773a400dad6387af0627f7  ./creator-studio.html
 010737ea4c600d6111d3fa94d6f86e454595dd6f0b5ddb4e0ab01b689b70fbd3  ./data/catalog.json
 08f9810bea5a8afc20acbf7a6f5b23c5cb4647621f6a1787d42a3fa212981283  ./data/compatibility-graph.json
-6e0ba5cbf31c7ed012de0cbc787e01220554205e8507efed2f81626f264309fa  ./data/integration-readiness.json
+6dd5d4c1d4bcc94d0db9c150fd399fc8debed92e3b2444acc925eecab1838525  ./data/integration-readiness.json
 efd5eb4d53b3ce296d82e181abba8ed8128f19331465e908aedd09c7e01eaf24  ./data/living-world.json
 ada35177244946a10160f77b73afb43b723c17a6a9340891634beb1c5300bb44  ./data/search-index.json
 bcfb0fa301c8d2db258137de7705ea741419c315130393e9c6c12b4a844d0d85  ./documentation.html
