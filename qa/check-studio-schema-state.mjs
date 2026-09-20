@@ -207,6 +207,7 @@ try {
   await cdp.send('Runtime.enable');
 
   await runCheck('schema-unavailable-fail-closed', async () => {
+    await navigate(cdp, 'index.html?state-proof=studio-schema-setup');
     await evaluate(cdp, `localStorage.removeItem(${JSON.stringify(STORAGE_KEY)}); true`);
     const release = await failSchemaRequests(cdp);
     await navigate(cdp, 'creator-studio.html?state-proof=schema-unavailable');
