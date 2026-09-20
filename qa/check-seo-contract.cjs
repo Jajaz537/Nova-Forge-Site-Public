@@ -30,15 +30,7 @@ const pages = [
   '404.html'
 ];
 
-const expectedGuardedSitemapGaps = new Set([
-  'https://modaryxmods.com/games/',
-  'https://modaryxmods.com/gta-6/',
-  'https://modaryxmods.com/gta-6/mods/',
-  'https://modaryxmods.com/gta-6/guides/',
-  'https://modaryxmods.com/red-dead-redemption-2/',
-  'https://modaryxmods.com/red-dead-redemption-2/mods/',
-  'https://modaryxmods.com/red-dead-redemption-2/guides/'
-]);
+const expectedGuardedSitemapGaps = new Set();
 
 const one = (html, pattern, label, file) => {
   const matches = [...html.matchAll(pattern)];
@@ -100,7 +92,7 @@ for (const url of sitemapUrls) assert.ok(canonicals.has(url), `sitemap: URL has 
 
 const missingFromSitemap = [...canonicals.keys()].filter(url => !sitemapUrls.includes(url)).sort();
 const expectedMissing = [...expectedGuardedSitemapGaps].sort();
-assert.deepEqual(missingFromSitemap, expectedMissing, 'sitemap guarded-gap set changed; do not edit sitemap implicitly');
+assert.deepEqual(missingFromSitemap, expectedMissing, 'sitemap must list every live canonical');
 
 console.log(JSON.stringify({
   marker:'PASS_TARGETED_SEO_CONTRACT',
@@ -112,6 +104,6 @@ console.log(JSON.stringify({
   uniqueDescriptions:descriptions.size,
   uniqueCanonicals:canonicals.size,
   robots:{allowRoot:true},
-  sitemap:{listed:sitemapUrls.length,guardedMissing:missingFromSitemap},
+  sitemap:{listed:sitemapUrls.length,complete:missingFromSitemap.length===0,missing:missingFromSitemap},
   failures:[]
 },null,2));

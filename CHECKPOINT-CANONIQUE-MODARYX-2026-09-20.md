@@ -1899,3 +1899,29 @@ Cloudflare Pages check du candidat : **success**.
 - **TERMINÉ — Provider DEV réel et micro-proofs bout-en-bout ciblés**.
 - Aucune VF / aucun 100 %.
 - Aucun full replay final encore exécuté.
+
+
+## Mise à jour canonique — PR #118 — sitemap complet — 21 septembre 2026
+
+### Git frais
+
+- Branche de lot : `seo/modaryx-sitemap-complete-20260921`.
+- Base Work vérifiée : `8b0d0d91c08b3e84b24ce1b698c58382f7bb696d`.
+- Candidat source initial : `d8563c9b78e8391638a458e89596e3a02f02e24a`.
+- `main`, production, DNS/DNSSEC/nameservers : inchangés.
+- Aucun full replay final exécuté.
+
+### Fermeture SEO ciblée
+
+- `sitemap.xml` contient désormais les 22 canonicals indexables connus.
+- Les 7 anciennes lacunes sont fermées : `/games/`, les trois routes GTA VI et les trois routes Red Dead Redemption 2.
+- Le contrat SEO n'accepte plus de gap sitemap protégé : toute nouvelle canonical indexable absente doit faire échouer la preuve.
+- Micro-preuve locale ciblée : 22 attendues / 22 présentes, 0 manquante, 0 extra, 0 doublon.
+- Run source initial `35541619985` — **success**.
+
+### État
+
+- **TERMINÉ — sitemap MODARYX complet sur les 22 canonicals indexables**.
+- Les capacités produit et preuves externes restantes conservent leur état propre.
+- Aucune VF / aucun 100 % déclaré.
+- Aucun full replay final encore exécuté.
