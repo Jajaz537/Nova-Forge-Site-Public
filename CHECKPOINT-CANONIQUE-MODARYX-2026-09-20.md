@@ -1434,3 +1434,73 @@ Document : `qa/MODARYX-WORK-PHASE2-EXTERNAL-EVIDENCE-20260920.md`.
 - Aucun blocker final n'a été fermé artificiellement.
 - Prochain progrès externe exige soit une action utilisateur/fournisseur explicite, soit un environnement natif/appareil approprié.
 - **Aucune VF / aucun 100 % déclaré.**
+
+
+## Mise à jour canonique — PR #104 — fondation backend DEV — 20 septembre 2026
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #104 : `15d5491457d053f732d44bbad8a4664ce7e89d8d`.
+- `main` inchangée.
+- Aucun tenant Auth0, D1, R2, Turnstile, secret, binding, DNS ou production activé.
+- Aucun full replay final exécuté.
+
+### Implémentation ajoutée
+
+- `functions/_lib/backend-config.mjs`
+- `functions/_lib/auth0.mjs`
+- `functions/_lib/turnstile.mjs`
+- `functions/api/v1/status.js`
+- `migrations/0001_modaryx_dev_foundation.sql`
+- `qa/check-backend-dev-foundation.mjs`
+- `qa/MODARYX-BACKEND-DEV-PROVISIONING-20260920.md`
+
+### Invariants
+
+- Auth0 : access token RS256/JWKS, issuer HTTPS, audience exacte, exp/nbf/sub.
+- Turnstile : validation serveur fail-closed, secret jamais côté client, hostname/action pinables.
+- D1 : profils + contributions avec états bornés, FK et indexes.
+- Status API : présence/configuration uniquement, aucune valeur secrète.
+- Remote write readiness = false tant que D1 + Auth0 + Turnstile ne sont pas réellement configurés.
+
+### Historique d'erreur / micro-proof
+
+Première tentative source :
+- backend foundation : **PASS** ;
+- anti-oubli : **FAIL** car le marker `PASS_TARGETED_BACKEND_DEV_FOUNDATION` n'était pas encore exposé textuellement dans le registre.
+
+Correction ciblée :
+- ajout du marker au registre uniquement.
+
+Deuxième tentative :
+- backend foundation : **PASS** ;
+- anti-oubli : **FAIL** car `MODARYX-BACKEND-DEV-PROVISIONING-20260920.md` n'était pas encore référencé dans le registre.
+
+Correction ciblée :
+- ajout d'une ligne de preuve Fondation backend DEV uniquement.
+
+Micro-proof final :
+- run source `35519643634` — **success** ;
+- `PASS_TARGETED_BACKEND_DEV_FOUNDATION` ;
+- `PASS_TARGETED_ANTI_OUBLI_GATE` ;
+- `PASS_TARGETED_SEO_CONTRACT` ;
+- toutes les autres gardes existantes vertes ;
+- `failures: []`.
+- browser proof run `35519643639` — **success**.
+
+### État honnête
+
+- **TERMINÉ — fondation backend DEV ciblée**.
+- **EN COURS — ressources Cloudflare réelles**.
+- **EN COURS — tenant Auth0 réel**.
+- **EN COURS — endpoints d'écriture distante**.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Ajouter les endpoints distants profils/communauté sur cette fondation.
+2. Exiger Auth0 + Turnstile + D1 avant toute écriture.
+3. Tester en local/mock avant provisioning fournisseur.
+4. Provisionner DEV uniquement lorsque l'accès fournisseur devient disponible.
+5. Aucun full replay avant la toute fin.
