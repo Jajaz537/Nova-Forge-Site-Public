@@ -402,3 +402,23 @@ Cette section complète la synthèse fraîche précédente.
 - La preuve PWA HTTPS ferme le comportement technique ciblé du service worker sur preview, pas les appareils physiques ni les stores/UX d'installation.
 - Les téléchargements publics réels restent **BLOQUÉS** tant qu'artefacts, identité, empreinte, provenance et signature requise ne sont pas disponibles.
 - Aucun élément du registre anti-oubli n'est retiré implicitement.
+
+## Synthèse fraîche anti-oubli — Profils + Catalogue + Communauté — 20 septembre 2026
+
+| Élément suivi | État courant | Preuve / règle |
+|---|---|---|
+| Profils — détection WebAuthn locale | **TERMINÉ — preuve ciblée navigateur** | PR #66, run `35488704409`, desktop + mobile, aucun overflow observé ; API détectée sans inventer de compte/passkey. |
+| Comptes / passkeys réels | **EN COURS — capacité non livrée** | La détection d'API ne vaut ni compte, ni passkey inscrite, ni connexion ; backend d'identité réel requis. |
+| Catalogue — zéro résultat + reset | **TERMINÉ — preuve ciblée navigateur** | PR #67, run `35488828426`, panneau vide + remise à zéro + focus restauré. |
+| Catalogue — panne de données / fallback | **TERMINÉ — preuve ciblée navigateur** | 3 cartes statiques conservées, filtres désactivés, favoris locaux toujours utilisables. |
+| Catalogue — récupération | **TERMINÉ — preuve ciblée navigateur** | Réhydratation à 3 cartes et favori local conservé après retour des données. |
+| Communauté — catalogue indisponible | **TERMINÉ — preuve ciblée navigateur** | États collection/contribution explicitement indisponibles, copie locale annoncée conservée. |
+| Communauté — récupération catalogue | **TERMINÉ — preuve ciblée navigateur** | 3 choix collection + 4 options de cible restaurés après récupération. |
+| Publication / modération distante | **EN COURS — capacité non livrée** | Aucun backend ni synchronisation distante simulé par ces preuves. |
+
+### Incident QA PR #67
+
+Le premier run `35488709371` n'a pas observé les états dégradés car le service worker répondait avant l'interception réseau de la page. La correction a été limitée au harnais : bypass temporaire du service worker pendant l'injection de panne. Le run final `35488828426` est **success**. Aucun changement produit n'a été requis.
+
+Ces fermetures ne retirent aucune autre entrée de l'anti-oubli et ne constituent ni VF ni full replay.
+
