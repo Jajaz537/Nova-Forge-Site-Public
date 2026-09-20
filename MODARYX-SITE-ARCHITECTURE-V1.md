@@ -23,12 +23,12 @@ L'ancien libellé « Modaryx OS » décrivait historiquement l'aperçu et un pon
 
 ## Architecture jeux
 
-- `/games/` : index statique des trois jeux représentés dans les démonstrations ; généré depuis `data/catalog.json` avec `python3 qa/build-games-index.py`. Ajout du 17e écran. Catégories et hubs éditoriaux restent absents.
-- `/gta-6/`, `/gta-6/mods/`, catégories et guides substantiels.
-- `/red-dead-redemption-2/`, `/red-dead-redemption-2/mods/`, catégories et guides substantiels.
+- `/games/` : index public combinant les trois jeux du catalogue de démonstration et deux hubs éditoriaux sourcés ; la partie démonstration reste générée depuis `data/catalog.json` avec `python3 qa/build-games-index.py`.
+- `/gta-6/`, `/gta-6/mods/`, `/gta-6/guides/` : hub, taxonomie et guides éditoriaux livrés ; aucun support PC/mod, chargeur, compatibilité ou téléchargement n'est inventé.
+- `/red-dead-redemption-2/`, `/red-dead-redemption-2/mods/`, `/red-dead-redemption-2/guides/` : hub PC, taxonomie et guides éditoriaux livrés ; aucun fichier RDR2 n'est distribué sans corpus autorisé et vérifiable.
 - Modèle extensible à d'autres jeux.
 
-Les routes GTA 6/RDR2 restent une architecture cible, pas des pages publiées. Les trois entrées actuelles concernent Skyrim Special Edition, Cyberpunk 2077 et Minecraft, toutes classées `demonstration`. Aucun support de mods, sortie PC, droit de redistribution ou téléchargement GTA 6/RDR2 ne doit être déduit de ce plan. La publication exige contenu original utile, sources actuelles et droits des assets vérifiés ; aucune page SEO vide.
+Les trois entrées de `data/catalog.json` restent Skyrim Special Edition, Cyberpunk 2077 et Minecraft, toutes classées `demonstration`. Les six routes GTA VI/RDR2 sont des surfaces éditoriales distinctes du catalogue distribué : elles utilisent du contenu original MODARYX, des liens vers des sources officielles consultées et aucun média tiers copié. Le corpus réel de mods, les droits de redistribution, la compatibilité versionnée et les téléchargements restent des capacités séparées non livrées tant que leurs preuves ne sont pas disponibles.
 
 ## Contrat d'une fiche
 
