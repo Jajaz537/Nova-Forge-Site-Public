@@ -8,9 +8,14 @@ on:
       - '.github/workflows/modaryx-vf-targeted-source-proof.yml'
       - 'qa/check-site-first-vf.mjs'
       - 'qa/check-integration-readiness.cjs'
+      - 'qa/check-seo-contract.cjs'
       - 'schemas/integration-readiness.schema.json'
       - '*.html'
       - 'games/**'
+      - 'gta-6/**'
+      - 'red-dead-redemption-2/**'
+      - 'robots.txt'
+      - 'sitemap.xml'
       - 'assets/**'
       - 'data/**'
       - 'sw.js'
@@ -23,6 +28,10 @@ on:
       - 'qa/check-site-first-vf.mjs'
       - '*.html'
       - 'games/**'
+      - 'gta-6/**'
+      - 'red-dead-redemption-2/**'
+      - 'robots.txt'
+      - 'sitemap.xml'
       - 'assets/**'
       - 'data/**'
       - 'sw.js'
@@ -66,3 +75,9 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-integration-readiness.cjs
+
+      - name: Run targeted SEO contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-seo-contract.cjs
