@@ -1,1 +1,53 @@
-.profiles-page{width:min(1180px,calc(100% - 2rem));margin:auto}.profiles-hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:clamp(1.5rem,5vw,4rem);padding:clamp(4.5rem,9vw,7rem) 0 3rem;border-bottom:1px solid rgba(58,57,49,.62);background:linear-gradient(100deg,#090a09f8,#0d0e0dc2 50%,#090a0955),url("./modaryx-world-portals.webp") 62% center/cover no-repeat}.profiles-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;padding:3rem 0}.profiles-grid>.section-heading,.profiles-grid>.profiles-note,.profiles-grid>.profile-card:last-of-type{grid-column:1/-1}.profile-card h3{margin-top:0}.profile-card p,.profiles-note{color:var(--muted)}.profiles-note{border-left:2px solid var(--blue);padding:.8rem 1rem;background:#83aee80a}@media(max-width:820px){.profiles-hero,.profiles-grid{grid-template-columns:1fr}.profiles-grid>.section-heading,.profiles-grid>.profiles-note,.profiles-grid>.profile-card:last-of-type{grid-column:auto}}
+.profiles-page{width:min(1180px,calc(100% - 2rem));margin:auto}
+.profiles-hero{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);gap:clamp(1.5rem,5vw,4rem);padding:clamp(4.5rem,9vw,7rem) 0 3.5rem;border-bottom:1px solid rgba(130,137,122,.22);background:linear-gradient(100deg,#090a09f8,#0d0e0dc2 50%,#090a0955),url("./modaryx-world-portals.webp") 62% center/cover no-repeat}
+.profiles-hero::after{content:"";position:absolute;inset:auto 0 0;height:1px;background:linear-gradient(90deg,transparent,rgba(136,177,235,.56),transparent)}
+.profiles-hero-copy{align-self:center}
+.profiles-hero-signals{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.4rem}
+.profiles-hero-signals span,.account-privacy-pill{display:inline-flex;align-items:center;min-height:2rem;padding:.35rem .7rem;border:1px solid rgba(147,164,143,.22);border-radius:999px;background:rgba(9,12,10,.58);color:var(--muted);font-size:.78rem;letter-spacing:.02em;backdrop-filter:blur(14px)}
+.profiles-trust-panel{align-self:end;background:linear-gradient(155deg,rgba(19,23,20,.92),rgba(9,11,10,.78));box-shadow:0 24px 80px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.025)}
+.account-console{position:relative;margin:2rem 0 1rem;padding:clamp(1.25rem,3vw,2rem);overflow:hidden;border:1px solid rgba(130,150,133,.2);border-radius:28px;background:radial-gradient(circle at 85% 5%,rgba(86,126,181,.16),transparent 34%),linear-gradient(145deg,rgba(17,21,18,.97),rgba(8,10,9,.98));box-shadow:0 30px 90px rgba(0,0,0,.28)}
+.account-console::before{content:"";position:absolute;width:20rem;height:20rem;right:-8rem;top:-10rem;border-radius:50%;background:radial-gradient(circle,rgba(117,157,217,.12),transparent 70%);pointer-events:none}
+.account-console-heading{position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;padding-bottom:1.35rem;border-bottom:1px solid rgba(132,145,130,.14)}
+.account-console-heading h2{margin:.1rem 0 .45rem}
+.account-console-heading p:last-child{margin:0;max-width:62rem;color:var(--muted)}
+.account-state-badge{display:inline-flex;align-items:center;gap:.45rem;white-space:nowrap;padding:.48rem .72rem;border:1px solid rgba(157,173,159,.22);border-radius:999px;background:rgba(8,11,9,.7);font-size:.78rem;color:var(--muted)}
+.account-state-badge::before{content:"";width:.48rem;height:.48rem;border-radius:50%;background:#8c948e;box-shadow:0 0 0 4px rgba(140,148,142,.08)}
+.account-console[data-account-state="ready"] .account-state-badge::before{background:#8eb7ec;box-shadow:0 0 0 4px rgba(142,183,236,.1)}
+.account-console[data-account-state="authenticated"] .account-state-badge::before{background:#96c69a;box-shadow:0 0 0 4px rgba(150,198,154,.11)}
+.account-console[data-account-state="error"] .account-state-badge::before{background:#db9f8f}
+.account-console-grid{position:relative;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:1rem;margin-top:1rem}
+.account-access-card,.account-profile-card{min-width:0;padding:clamp(1rem,2.2vw,1.45rem);border:1px solid rgba(129,145,131,.14);border-radius:22px;background:linear-gradient(145deg,rgba(22,27,23,.82),rgba(10,13,11,.74));box-shadow:inset 0 1px rgba(255,255,255,.02)}
+.account-access-card h3,.account-profile-card h3{margin:.65rem 0 .5rem}
+.account-card-kicker{display:flex;align-items:center;justify-content:space-between;gap:.7rem;color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}
+.account-card-kicker>span:first-child{display:inline-flex;align-items:center;gap:.5rem}
+.account-orb{width:.62rem;height:.62rem;border-radius:50%;background:radial-gradient(circle at 35% 30%,#c6dcfb,#6f9ad8 48%,#385577 75%);box-shadow:0 0 24px rgba(111,154,216,.42)}
+.account-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin:1.15rem 0 .8rem}
+.account-primary-action[aria-disabled="true"]{opacity:.48;cursor:not-allowed;filter:saturate(.55)}
+.account-secondary-action[hidden]{display:none}
+.account-fineprint,.account-console-note{color:var(--muted);font-size:.86rem;line-height:1.55}
+.account-console-note{position:relative;margin:1rem 0 0;padding:.85rem 1rem;border-left:2px solid rgba(121,166,227,.72);background:rgba(91,130,183,.06)}
+#profile-editor fieldset{margin:0;padding:0;border:0;min-width:0}
+#profile-editor fieldset:disabled{opacity:.58}
+.profile-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.profile-form-grid-bottom{align-items:end}
+#profile-editor label{display:grid;gap:.38rem;margin-bottom:.8rem;color:var(--muted);font-size:.82rem}
+#profile-editor input,#profile-editor textarea,#profile-editor select{width:100%;box-sizing:border-box;padding:.78rem .85rem;border:1px solid rgba(133,151,136,.22);border-radius:12px;background:rgba(5,8,6,.74);color:var(--text);font:inherit;outline:none;transition:border-color .18s ease,box-shadow .18s ease,background .18s ease}
+#profile-editor textarea{resize:vertical;min-height:7rem}
+#profile-editor input:focus,#profile-editor textarea:focus,#profile-editor select:focus{border-color:rgba(125,169,226,.62);box-shadow:0 0 0 3px rgba(125,169,226,.09);background:rgba(9,13,11,.94)}
+.profile-check{display:flex!important;grid-template-columns:auto 1fr!important;align-items:center;align-self:center;gap:.7rem!important;padding:.72rem .8rem;border:1px solid rgba(133,151,136,.16);border-radius:12px;background:rgba(6,9,7,.46)}
+.profile-check input{width:auto!important;margin:0}
+.profile-editor-actions{display:flex;align-items:center;flex-wrap:wrap;gap:.8rem;margin-top:.2rem}
+#profile-form-status{color:var(--muted);font-size:.82rem}
+.turnstile-slot{min-height:66px;margin:.7rem 0}
+.turnstile-slot[hidden]{display:none}
+.profiles-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;padding:3rem 0}
+.profiles-grid>.section-heading,.profiles-grid>.profiles-note,.profiles-grid>.profile-card:last-of-type{grid-column:1/-1}
+.profile-card{position:relative;overflow:hidden}
+.profile-card::after{content:"";position:absolute;inset:auto -20% -60% 35%;height:8rem;background:radial-gradient(ellipse,rgba(113,154,209,.07),transparent 70%);pointer-events:none}
+.profile-card h3{margin-top:0}
+.profile-card p,.profiles-note{color:var(--muted)}
+.profiles-note{border-left:2px solid var(--blue);padding:.8rem 1rem;background:#83aee80a}
+@media(max-width:900px){.profiles-hero,.account-console-grid{grid-template-columns:1fr}.profiles-trust-panel{align-self:stretch}.account-console-heading{align-items:flex-start}.account-state-badge{white-space:normal}}
+@media(max-width:820px){.profiles-grid{grid-template-columns:1fr}.profiles-grid>.section-heading,.profiles-grid>.profiles-note,.profiles-grid>.profile-card:last-of-type{grid-column:auto}.profile-form-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.profiles-page{width:min(100% - 1rem,1180px)}.profiles-hero{padding-top:3.6rem}.account-console{border-radius:20px;padding:1rem}.account-console-heading{display:grid}.account-state-badge{justify-self:start}.account-actions{display:grid}.account-actions .button{width:100%;box-sizing:border-box;text-align:center}.profile-editor-actions{display:grid}.profile-editor-actions .button{width:100%}}
+@media(prefers-reduced-motion:reduce){#profile-editor input,#profile-editor textarea,#profile-editor select{transition:none}}
