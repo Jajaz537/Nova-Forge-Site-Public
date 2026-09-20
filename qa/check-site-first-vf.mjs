@@ -21,7 +21,13 @@ const pages = [
   'project-balanced-latency-pack.html',
   'project-forge-night-experience.html',
   '404.html',
-  'games/index.html'
+  'games/index.html',
+  'gta-6/index.html',
+  'gta-6/mods/index.html',
+  'gta-6/guides/index.html',
+  'red-dead-redemption-2/index.html',
+  'red-dead-redemption-2/mods/index.html',
+  'red-dead-redemption-2/guides/index.html'
 ];
 
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'utf8');
@@ -100,10 +106,11 @@ for (const page of pages) {
   }
 
   const html = read(page);
-  const nested = page.includes('/');
-  const shellRef = nested ? '../assets/shell.js' : './assets/shell.js';
-  const foundationRef = nested ? '../assets/modaryx-foundations.css' : './assets/modaryx-foundations.css';
-  const cinematicRef = nested ? '../assets/modaryx-cinematic-system.css' : './assets/modaryx-cinematic-system.css';
+  const depth = page.split('/').length - 1;
+  const prefix = depth ? '../'.repeat(depth) : './';
+  const shellRef = prefix + 'assets/shell.js';
+  const foundationRef = prefix + 'assets/modaryx-foundations.css';
+  const cinematicRef = prefix + 'assets/modaryx-cinematic-system.css';
 
   if (!html.includes('<meta charset="utf-8">')) fail(page + ': charset missing');
   if (!html.includes('name="viewport"')) fail(page + ': viewport missing');

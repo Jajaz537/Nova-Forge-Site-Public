@@ -21,7 +21,13 @@ const pages = [
   'project-balanced-latency-pack.html',
   'project-forge-night-experience.html',
   '404.html',
-  'games/index.html'
+  'games/index.html',
+  'gta-6/index.html',
+  'gta-6/mods/index.html',
+  'gta-6/guides/index.html',
+  'red-dead-redemption-2/index.html',
+  'red-dead-redemption-2/mods/index.html',
+  'red-dead-redemption-2/guides/index.html'
 ];
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

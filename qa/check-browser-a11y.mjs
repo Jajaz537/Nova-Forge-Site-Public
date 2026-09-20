@@ -7,7 +7,8 @@ const pages = [
   'index.html','catalog.html','search.html','creator-studio.html','community.html','profiles.html',
   'ecosystem.html','documentation.html','security.html','verify.html','downloads.html','project.html',
   'project-ember-textures.html','project-balanced-latency-pack.html','project-forge-night-experience.html',
-  '404.html','games/index.html'
+  '404.html','games/index.html','gta-6/index.html','gta-6/mods/index.html','gta-6/guides/index.html',
+  'red-dead-redemption-2/index.html','red-dead-redemption-2/mods/index.html','red-dead-redemption-2/guides/index.html'
 ];
 const failures = [];
 const results = [];
