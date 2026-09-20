@@ -1035,3 +1035,80 @@ Repair Network :
 2. Garder les services distants EN COURS tant qu'aucun stockage/origine/manifeste signé réel n'est connecté.
 3. Continuer uniquement les capacités ou preuves qui peuvent être fermées avec des entrées réelles.
 4. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — PR #95 — provenance / receipts — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour les contrats publication, provenance et modération.
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #95 : `a6e79684459c071e539dcb24eef1d34306bb3cd9`.
+- `main` n'a pas été modifiée.
+- Aucun signer, service d'attestation, backend de modération, distribution publique, sitemap ou infrastructure critique activé.
+- Aucun full replay final exécuté.
+
+### Sources contractuelles
+
+- `schemas/publication-receipt.schema.json`
+- `schemas/moderation-receipt.schema.json`
+- `schemas/moderation-export.schema.json`
+- `qa/check-receipt-fields.cjs`
+- `data/integration-readiness.json`.
+
+Les IDs historiques `urn:nova-forge:schemas:...` restent conservés pour compatibilité/provenance technique et ne fusionnent pas les marques Nova Forge / MODARYX.
+
+### PR #95 — preuve contractuelle
+
+- **TERMINÉE / fusionnée dans Work** au merge `a6e79684459c071e539dcb24eef1d34306bb3cd9`.
+- Checker : `qa/check-provenance-receipt-contracts.cjs`.
+- Document : `qa/MODARYX-PROVENANCE-RECEIPT-CONTRACT-20260920.md`.
+- Run `35515669822` — **success** :
+  - `PASS_TARGETED_SITE_FIRST_SOURCE_PROOF`
+  - `PASS_TARGETED_INTEGRATION_READINESS`
+  - `PASS_TARGETED_STORAGE_REPAIR_CONTRACTS`
+  - `PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS`
+  - `PASS_TARGETED_SEO_CONTRACT`
+  - `PASS_TARGETED_ANTI_OUBLI_GATE`
+- `historicalSchemaIdsRetained: true`.
+- Readiness conservée :
+  - `community.publication-moderation = local-only`
+  - `distribution.artifacts = distribution-locked`
+- `failures: []`.
+
+### Invariants désormais protégés
+
+Publication :
+- identité release + manifest/artifacts SHA-256 ;
+- `distributable=true` seulement si published + provenance verified + rights verified + moderation clear ;
+- withdrawn/revoked non distribuable ;
+- removed/restricted non distribuable.
+
+Modération :
+- notice immuable ;
+- décision avec statement of reasons ;
+- appel et résultat d'appel explicites ;
+- chaîne de provenance des receipts ;
+- export provider-neutral ;
+- rétention bornée hors legal hold.
+
+### Limite essentielle
+
+Le champ local `receipt:...` ne valide qu'un format. Le checker Creator Studio conserve explicitement la règle « correct format ... without attesting authenticity ».
+
+Donc :
+- **TERMINÉ — contrats receipts/provenance/modération ciblés** ;
+- **EN COURS — signer/attestation réelle** ;
+- **EN COURS — backend publication/modération distant** ;
+- **BLOQUÉ — distribution publique réelle** tant que artefact, droits, provenance et preuves requises ne sont pas disponibles ;
+- aucun receipt local n'est une preuve cryptographique.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Ne plus traiter les contrats de receipts/modération comme absents.
+2. Garder signatures/attestations réelles et publication distante EN COURS tant que les services et preuves réels manquent.
+3. Ne jamais déverrouiller la distribution sur un receipt local bien formé.
+4. Continuer uniquement les preuves externes ou capacités avec entrées réelles.
+5. Aucun full replay avant la toute fin.
