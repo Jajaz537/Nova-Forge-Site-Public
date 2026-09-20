@@ -78,6 +78,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Storage Resolver | **EN COURS — contrat acquis, service non connecté** | Contrat provider-neutral v1 prouvé par run `35515388240`, marker `PASS_TARGETED_STORAGE_REPAIR_CONTRACTS` : digest + manifest binding obligatoires, alias mutable non fiable rejeté. Le service distant réel reste absent. |
 | Repair Network | **EN COURS — protocole contractuel acquis, exécution distante non connectée** | Contrat fail-closed v1 prouvé par run `35515388240`, marker `PASS_TARGETED_STORAGE_REPAIR_CONTRACTS` : substitution silencieuse et redistribution révoquée interdites. Aucun réseau distant réel n'est annoncé. |
 | Backend communautaire | **EN COURS — fondation DEV codée, ressources distantes non provisionnées** | `PASS_TARGETED_BACKEND_DEV_FOUNDATION` : Pages Functions + garde D1/R2 + Turnstile serveur + migration D1 + status API ; aucune ressource Cloudflare réelle, aucun binding/secret, aucune écriture distante active. |
+| Fondation backend DEV | **TERMINÉ — preuve ciblée de code** | `qa/MODARYX-BACKEND-DEV-PROVISIONING-20260920.md` + `PASS_TARGETED_BACKEND_DEV_FOUNDATION` ; ne vaut pas provisioning fournisseur ni activation distante. |
 | Guide MODARYX connecté | **EN COURS — capacité non livrée** | Moteur/contrat réel ; rester distinct de Nova Guide des OS. |
 | Pont Nova Forge OS | **EN COURS — dépendance Nova Forge OS** | Interface publique stabilisée, consentement et modèle de permissions ; aucun partage implicite. |
 
