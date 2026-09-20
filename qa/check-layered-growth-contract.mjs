@@ -96,6 +96,9 @@ assert('visual growth must stay off the initial load critical path',
   mainSource.includes("window.addEventListener('load'") &&
   mainSource.includes('requestIdleCallback') &&
   mainSource.includes('scheduleVisualGrowth'));
+assert('visual growth must wait beyond the performance post-load dwell',
+  mainSource.includes('const VISUAL_GROWTH_DELAY_MS = 2200;') &&
+  mainSource.includes('window.setTimeout(idle, VISUAL_GROWTH_DELAY_MS)'));
 assert('visual layer markup must not burden current critical HTML',!indexSource.includes('data-world-visual-layers'));
 
 const awaiting=awaitingConfig();

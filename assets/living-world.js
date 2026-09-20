@@ -20,6 +20,7 @@
 
   const DAY_MS = 24 * 60 * 60 * 1000;
   const REQUIRED_GROWTH_ORDER = ['baby', 'juvenile', 'adolescent', 'young-adult', 'adult'];
+  const VISUAL_GROWTH_DELAY_MS = 2200;
   let timer = null;
   let config = null;
   let sourceState = 'fresh';
@@ -185,11 +186,14 @@
     const run = () => {
       visualGrowthWaitingForLoad = false;
       const activate = () => activateVisualGrowth();
-      if (typeof window.requestIdleCallback === 'function') {
-        window.requestIdleCallback(activate, {timeout: 1500});
-      } else {
-        window.setTimeout(activate, 0);
-      }
+      const idle = () => {
+        if (typeof window.requestIdleCallback === 'function') {
+          window.requestIdleCallback(activate, {timeout: 1500});
+        } else {
+          window.setTimeout(activate, 0);
+        }
+      };
+      window.setTimeout(idle, VISUAL_GROWTH_DELAY_MS);
     };
 
     if (document.readyState === 'complete') {
@@ -198,7 +202,7 @@
     }
     if (visualGrowthWaitingForLoad) return;
     visualGrowthWaitingForLoad = true;
-    window.addEventListener('load', () => window.setTimeout(run, 0), {once: true});
+    window.addEventListener('load', run, {once: true});
   }
 
   function schedule() {
