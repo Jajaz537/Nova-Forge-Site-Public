@@ -41,7 +41,7 @@ assert.deepEqual(security.$defs.recovery.properties.mode.enum,['none','recovery-
 assert.deepEqual(security.$defs.recovery.properties.state.enum,['not-configured','configured','suspended']);
 assert.deepEqual(security.$defs.session.properties.state.enum,['active','revoked','expired']);
 assert.deepEqual(security.$defs.privilegedAction.properties.action.enum,[
-  'publish','moderate','change-credentials','change-recovery','revoke-session'
+  'publish','moderate','review-appeal','change-credentials','change-recovery','revoke-session'
 ]);
 assert.equal(security.$defs.privilegedAction.properties.reauthenticationRequired.const,true);
 assert.equal(security.$defs.privilegedAction.properties.maximumAuthenticationAgeSeconds.maximum,3600);
