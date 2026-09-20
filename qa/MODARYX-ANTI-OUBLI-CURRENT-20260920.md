@@ -15,7 +15,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Nova Forge OS Public / Fondateur = logiciel distinct | **TERMINÉ — contrat courant** | Références web uniquement pour relation de produit ou intégration future explicite. |
 | `getnovaforge.com` / getnova | **TERMINÉ — classification historique** | Ancien projet web ; références historiques conservées seulement quand nécessaires à la provenance, compatibilité ou protection technique. |
 | Identité visuelle MODARYX visible sur les 17 routes | **TERMINÉ — périmètre source courant** | Le garde source rejette le libellé visible « Modaryx OS » ; la validation artistique globale reste séparée. |
-| Design system Premium HD des 17 pages | **EN COURS** | Cohérence globale encore en finition ; aucune page n'hérite automatiquement de la preuve d'une autre. |
+| Design system Premium HD des 23 routes publiques | **EN COURS** | Cohérence globale encore en finition ; aucune route n'hérite automatiquement de la preuve d'une autre. |
 
 ## 2. Monde vivant / Loup / Dragon
 
@@ -47,7 +47,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Smart Profile — état local indicatif | **TERMINÉ — périmètre local ciblé** | Rendu déployé et garde étroite documentés dans `MODARYX-NEXT-BATCH.md`; aucun benchmark/FPS garanti. |
 | Vérificateur SHA-256 local | **TERMINÉ — périmètre local ciblé** | Calcul/comparaison locale ; une empreinte n'établit ni provenance, ni auteur, ni innocuité. |
 | Imports/exports fichiers réels Chromium | **TERMINÉ — périmètre automatisé ciblé** | Matrice externe : run `35464233996`. Dialogue natif utilisateur/appareil reste distinct. |
-| Accessibilité structurelle Chromium | **TERMINÉ — périmètre ciblé** | 17 pages, arbre AX/labels/skip-link dans la lane automatisée. |
+| Accessibilité structurelle Chromium | **TERMINÉ — périmètre ciblé** | 23 pages, arbre AX/labels/skip-link ; run `35509547366`, marker `PASS_TARGETED_BROWSER_A11Y_MICROPROOF`. |
 | Reflow Chromium 320/400/768/1440 | **TERMINÉ — périmètre ciblé** | 68 navigations dans la lane automatisée. |
 | Performance laboratoire 5 pages × 2 profils | **TERMINÉ — périmètre ciblé** | Budgets labo respectés ; ce n'est pas du CWV terrain. |
 | CodeQL PR #12 — constats historiques visibles | **TERMINÉ** | 11/11 threads historiques résolus ; run HEAD documenté `35484967852`. |
@@ -59,8 +59,8 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Catalogue multigaming local | **TERMINÉ — périmètre démonstration** | Trois créations de démonstration ; pas de catalogue de distribution réel. |
 | Index `/games/` | **TERMINÉ — périmètre actuel** | Trois jeux de démonstration, canonical explicite, recette navigateur ciblée. |
 | Fiches de créations | **TERMINÉ — périmètre local ciblé** | Fallback/récupération et navigation documentés ; galerie réelle, versions distribuées et compatibilité mesurée restent absentes. |
-| SEO des pages réellement disponibles | **EN COURS** | Canonicals présents sur les pages indexables ; 404 en `noindex,nofollow`. `/games/` n'est pas encore dans `sitemap.xml` et ce fichier ne doit pas être modifié sans lever explicitement sa garde. |
-| Hubs GTA VI / RDR2, catégories et guides | **EN COURS — capacité non livrée** | Corpus substantiel, sources, droits médias et décisions éditoriales encore nécessaires. Aucune page SEO vide ne doit être créée. |
+| SEO des pages réellement disponibles | **EN COURS** | Canonicals présents sur les pages indexables ; 404 en `noindex,nofollow`. Les six hubs éditoriaux ont des canonicals dédiés. `/games/` et les nouvelles routes ne sont pas intégrés au sitemap tant que sa garde n'est pas explicitement levée. |
+| Hubs GTA VI / RDR2, catégories et guides éditoriaux | **TERMINÉ — périmètre éditorial sourcé** | Six routes livrées via PR #76 ; GTA VI reste sans support PC/mod supposé, RDR2 s'appuie sur ses repères PC officiels. Aucun média Rockstar copié, aucun faux téléchargement. |
 
 ## 5. Capacités retenues non livrées
 
@@ -71,6 +71,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Publication / modération distante | **EN COURS — capacité non livrée** | Backend sécurisé, rôles, politique d'abus, journal d'audit et voies d'appel. |
 | Signatures / attestations de provenance | **EN COURS — capacité non livrée** | Service ou chaîne de preuve réelle ; un receipt saisi localement ne suffit pas. |
 | Téléchargements publics réels | **BLOQUÉ** | Artefact autorisé + identité + SHA-256 + provenance + signature lorsque requise. |
+| Corpus réels de mods GTA VI / RDR2 | **EN COURS — capacité non livrée / droits et preuves requis** | Les hubs éditoriaux sont livrés, mais le catalogue de mods reste à 0 tant qu'un corpus autorisé, versionné, attribué et vérifiable n'existe pas. |
 | Storage Resolver | **EN COURS — dépendance service** | Stockage/résolution sécurisé et vérifiable réel. |
 | Repair Network | **EN COURS — dépendance protocole** | Protocole public finalisé ; aucune réparation distante fictive. |
 | Backend communautaire | **EN COURS — solution à qualifier** | Solution sécurisée compatible avec le budget retenu et politique de données. |
@@ -93,7 +94,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 
 ## 7. Finition Premium HD encore active
 
-- **EN COURS** — finition cohérente des 17 pages : composition, hiérarchie, surfaces, responsive, états, navigation, typographie, motion et contrôles visuels.
+- **EN COURS** — finition cohérente des 23 routes publiques : composition, hiérarchie, surfaces, responsive, états, navigation, typographie, motion et contrôles visuels.
 - **TERMINÉ — preuve ciblée navigateur** — surfaces statiques Écosystème / Sécurité / Documentation / Jeux / 404 : PR #74 fusionnée dans Work au merge `29fab6f549c5d9192359c0e8c9cbad2d4edec39a` ; run `35508894415`, marker `PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW` ; desktop 1440×1000 + mobile 390×844, zéro overflow, aucune image cassée ni contrôle coupé. Les captures ont été inspectées de façon assistée sans défaut bloquant isolé ; cela ne ferme pas la validation artistique humaine finale.
 - **TERMINÉ sur leurs scénarios ciblés** — états locaux Recherche, Téléchargements, Profils, Catalogue, Communauté, Creator Studio, Project Hub et Accueil. Ne pas les rejouer sans modification pertinente.
 
@@ -125,8 +126,9 @@ Aucune idée n'est supprimée implicitement pour améliorer un pourcentage. Une 
 
 ## 10. Prochain point logique
 
-1. Ne pas rejouer la preuve statique PR #74 sans modification pertinente.
-2. Consolider le SEO autonome sans modifier les fichiers gardés/infra sans autorisation explicite ; l'écart connu `/games/` → sitemap reste tracé.
-3. Continuer la finition Premium HD globale uniquement là où une preuve ou une inspection fraîche révèle un défaut réel.
-4. Fermer séparément les preuves externes quand un environnement approprié est disponible et garder les capacités distantes dans leur état réel.
-5. Aucun full replay avant la toute fin.
+1. Ne pas rejouer les preuves déjà vertes sur les 23 routes sans modification pertinente.
+2. Continuer la finition Premium HD globale uniquement là où une preuve ou une inspection fraîche révèle un défaut réel.
+3. Garder le sitemap protégé inchangé tant que sa garde n'est pas explicitement levée ; l'écart SEO reste tracé.
+4. Conserver les corpus réels de mods GTA VI / RDR2 comme capacité distincte non livrée jusqu'aux droits, versions et preuves nécessaires.
+5. Fermer séparément les preuves externes quand un environnement approprié est disponible.
+6. Aucun full replay avant la toute fin.
