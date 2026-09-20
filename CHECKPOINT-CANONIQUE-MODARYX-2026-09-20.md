@@ -950,3 +950,88 @@ Document : `qa/MODARYX-IDENTITY-PASSKEY-QUALIFICATION-20260920.md`.
 2. Garder les comptes/auth/passkeys en EN COURS tant que les preuves réelles ne sont pas acquises.
 3. Utiliser Auth0 comme candidat privilégié pour la conception contractuelle, sans en faire un fait de production.
 4. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — PR #93 — Storage Resolver / Repair Network — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour les contrats Storage Resolver / Repair Network.
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #93 : `325257c59386aa70b489bc29422a3178ebefa6c5`.
+- `main` n'a pas été modifiée.
+- Aucun stockage distant, resolver, réseau de réparation, DNS, sitemap ou infrastructure critique activé.
+- Aucun full replay final exécuté.
+
+### Source contractuelle existante
+
+- `schemas/storage-resolver.schema.json`
+- `schemas/repair-network.schema.json`
+- `data/integration-readiness.json` → `storage.resolver-repair = not-connected`.
+
+Les identifiants historiques `urn:nova-forge:schemas:...` sont conservés pour compatibilité/provenance. Ils ne fusionnent pas l'identité MODARYX avec Nova Forge et ne doivent pas être renommés globalement.
+
+### PR #93 — preuve contractuelle
+
+- **TERMINÉE / fusionnée dans Work** au merge `325257c59386aa70b489bc29422a3178ebefa6c5`.
+- Checker : `qa/check-storage-repair-contracts.cjs`.
+- Document : `qa/MODARYX-STORAGE-REPAIR-CONTRACT-20260920.md`.
+
+Première tentative, run `35515352077` : **failure ciblée du checker**.
+
+Erreur exacte :
+- `AssertionError [ERR_ASSERTION]: failureReason`.
+
+Isolation :
+- le contrat Repair Network utilise `result.reason` dans la règle d'échec finale ;
+- `failureReason` appartient aux candidats/origines et ne devait pas être recherché dans ce `allOf` ;
+- aucun défaut du schéma ou du produit n'était démontré.
+
+Correction ciblée QA :
+- assertion remplacée par la vérification de `required: ["reason"]` ;
+- aucun schéma, runtime ou service modifié.
+
+Micro-proof final :
+- run `35515388240` — **success** ;
+- `PASS_TARGETED_SITE_FIRST_SOURCE_PROOF` ;
+- `PASS_TARGETED_INTEGRATION_READINESS` ;
+- `PASS_TARGETED_STORAGE_REPAIR_CONTRACTS` ;
+- `PASS_TARGETED_SEO_CONTRACT` ;
+- `PASS_TARGETED_ANTI_OUBLI_GATE` ;
+- `historicalSchemaIdsRetained: true` ;
+- `readinessState: not-connected` ;
+- `failures: []`.
+
+### Invariants désormais protégés
+
+Storage Resolver :
+- digest obligatoire ;
+- manifest binding obligatoire ;
+- mismatch rejeté ;
+- alias mutable non fiable rejeté ;
+- résolution vérifiée liée à une origine + empreinte.
+
+Repair Network :
+- resolver vérifié requis ;
+- digest/manifeste exacts ;
+- substitution silencieuse interdite ;
+- distribution révoquée interdite ;
+- réparation réussie seulement sur release active et identité exacte ;
+- échec non distribuable et motivé.
+
+### État courant
+
+- **TERMINÉ — contrat Storage Resolver ciblé**.
+- **TERMINÉ — protocole contractuel Repair Network ciblé**.
+- **EN COURS — service Storage Resolver réel**.
+- **EN COURS — exécution Repair Network réelle**.
+- Les services restent `not-connected` ; aucune réparation distante fictive n'est annoncée.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Ne plus traiter Storage Resolver / Repair Network comme des protocoles absents.
+2. Garder les services distants EN COURS tant qu'aucun stockage/origine/manifeste signé réel n'est connecté.
+3. Continuer uniquement les capacités ou preuves qui peuvent être fermées avec des entrées réelles.
+4. Aucun full replay avant la toute fin.
