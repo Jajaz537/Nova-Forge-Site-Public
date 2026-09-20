@@ -608,3 +608,61 @@ Les 46 captures ont été regroupées et inspectées de façon assistée. Aucun 
 3. Continuer séparément les capacités produit réellement non livrées ; ne pas les simuler.
 4. Conserver le sitemap protégé inchangé tant que sa garde n'est pas explicitement levée.
 5. Full replay unique uniquement à la toute fin.
+
+
+## Mise à jour canonique — PR #81 / #82 — readiness + SEO — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour la readiness jeux et le SEO autonome.
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #82 : `b0270779bedb449b0697c0a0d7c864dcc3ad764e`.
+- `main` n'a pas été modifiée.
+- Aucun sitemap, DNS, DNSSEC, nameserver, IONOS ou réglage Cloudflare critique modifié.
+- Aucun full replay final exécuté.
+
+### PR #81 — readiness jeux correctement séparée
+
+- **TERMINÉE / fusionnée dans Work** au merge `9d6d15388c4276a9f873cb930085ccbe69cd60d3`.
+- `game-hubs.gta6-rdr2` = `contract-ready` pour les surfaces éditoriales déjà livrées.
+- `game-corpus.gta6-rdr2` = `blocked-inputs` pour les vrais mods, droits, versions et preuves de provenance.
+- Le validateur vérifie aussi l'existence des six routes GTA VI/RDR2.
+- Run `35511410562` — **success** :
+  - `PASS_TARGETED_SITE_FIRST_SOURCE_PROOF`
+  - `PASS_TARGETED_INTEGRATION_READINESS`
+- Scope explicitement contractuel : aucun service manquant n'est déclaré implémenté.
+- Les lanes PWA offline, fonctionnelle locale, fichiers réels et performance labo déclenchées automatiquement sur le même candidat sont également revenues **success**.
+
+### PR #82 — contrat SEO des 23 routes
+
+- **TERMINÉE / fusionnée dans Work** au merge `b0270779bedb449b0697c0a0d7c864dcc3ad764e`.
+- Run `35511580074` — **success** :
+  - `PASS_TARGETED_SITE_FIRST_SOURCE_PROOF`
+  - `PASS_TARGETED_INTEGRATION_READINESS`
+  - `PASS_TARGETED_SEO_CONTRACT`
+- **22 pages indexables** : titre unique, description unique, canonical unique et exact.
+- **404** : `noindex,nofollow`, aucun canonical artificiel.
+- `robots.txt` autorise la racine.
+- Toutes les URLs déjà présentes dans `sitemap.xml` correspondent à des canonicals réels.
+- Le checker encadre exactement les **7 gaps sitemap connus** : `/games/` + six routes GTA VI/RDR2.
+- La lane source se déclenche désormais explicitement sur `gta-6/**`, `red-dead-redemption-2/**`, `robots.txt` et `sitemap.xml`.
+
+### État courant
+
+- **TERMINÉ — SEO on-page ciblé** : 23 routes, avec 22 indexables + 404 noindex.
+- **EN COURS / garde** : sitemap incomplet sur 7 routes ; ne pas modifier sans autorisation explicite de lever sa protection.
+- **TERMINÉ — readiness éditoriale** : hubs GTA VI/RDR2.
+- **EN COURS / blocked-inputs** : corpus réels de mods GTA VI/RDR2.
+- **PREUVE MANQUANTE** : validations humaines et externes déjà listées.
+- **EN COURS / non connectés** : comptes, publication/modération distante, Guide connecté, Storage Resolver, Repair Network, OS Bridge.
+- **BLOQUÉ** : téléchargements publics réels et météo production tant que leurs entrées/décisions réelles manquent.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Ne plus retoucher les 23 routes ni le SEO on-page sans défaut frais reproduit.
+2. Conserver le sitemap gardé tel quel tant que sa protection n'est pas explicitement levée.
+3. Fermer ce qui reste uniquement par vraies preuves humaines/externes ou vraies entrées produit ; ne rien simuler.
+4. Garder tous les services distants dans leur état réel `not-connected` / `blocked-inputs`.
+5. Full replay unique uniquement à la toute fin.
