@@ -64,7 +64,7 @@ for(const token of [
   '"distributable":{"const":true}',
   'selectedOriginId',
   'verifiedArtifactSha256',
-  'failureReason'
+  '"required":["reason"]'
 ]) assert.ok(repairRules.includes(token),token);
 
 const capability=readiness.capabilities.find(item=>item.id==='storage.resolver-repair');
