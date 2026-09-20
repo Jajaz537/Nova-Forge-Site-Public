@@ -1,18 +1,19 @@
 import {spawn} from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import crypto from 'node:crypto';
 
 const ORIGIN = process.env.MODARYX_TEST_ORIGIN || 'http://127.0.0.1:4173';
 const CHROME_BIN = process.env.CHROME_BIN || 'google-chrome';
 const DEBUG_PORT = Number(process.env.CHROME_DEBUG_PORT || 9224);
-const ROOT = '/tmp/modaryx-real-file-proof';
+const ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'modaryx-real-file-proof-'));
 const DOWNLOADS = path.join(ROOT, 'downloads');
 const INPUTS = path.join(ROOT, 'inputs');
+const CHROME_PROFILE = path.join(ROOT, 'chrome-profile');
 const failures = [];
 const checks = [];
 
-fs.rmSync(ROOT, {recursive: true, force: true});
 fs.mkdirSync(DOWNLOADS, {recursive: true});
 fs.mkdirSync(INPUTS, {recursive: true});
 
@@ -161,7 +162,7 @@ const chrome = spawn(CHROME_BIN, [
   '--no-first-run',
   '--remote-debugging-address=127.0.0.1',
   '--remote-debugging-port=' + DEBUG_PORT,
-  '--user-data-dir=/tmp/modaryx-real-file-browser-' + process.pid,
+  '--user-data-dir=' + CHROME_PROFILE,
   'about:blank'
 ], {stdio: ['ignore', 'ignore', 'pipe']});
 
@@ -357,4 +358,5 @@ try {
   chrome.kill('SIGTERM');
   await sleep(150);
   if (!chrome.killed) chrome.kill('SIGKILL');
+  fs.rmSync(ROOT, {recursive: true, force: true});
 }

@@ -49,15 +49,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/modaryx-http.log 2>&1 &
-          echo $! >/tmp/modaryx-http.pid
+          python3 -m http.server 4173 --bind 127.0.0.1 >"$RUNNER_TEMP/modaryx-http.log" 2>&1 &
+          SERVER_PID=$!
+          echo "MODARYX_SERVER_PID=$SERVER_PID" >> "$GITHUB_ENV"
           for attempt in {1..40}; do
             if curl --fail --silent --show-error http://127.0.0.1:4173/index.html >/dev/null; then
               exit 0
             fi
             sleep 0.25
           done
-          cat /tmp/modaryx-http.log
+          cat "$RUNNER_TEMP/modaryx-http.log"
           exit 1
 
       - name: Run PWA offline browser proof
@@ -73,6 +74,6 @@ jobs:
         if: always()
         shell: bash
         run: |
-          if test -f /tmp/modaryx-http.pid; then
-            kill "$(cat /tmp/modaryx-http.pid)" 2>/dev/null || true
+          if test -n "${MODARYX_SERVER_PID:-}"; then
+            kill "$MODARYX_SERVER_PID" 2>/dev/null || true
           fi

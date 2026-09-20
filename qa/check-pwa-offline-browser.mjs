@@ -1,10 +1,14 @@
 import {spawn} from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 
 const ORIGIN = process.env.MODARYX_TEST_ORIGIN || 'http://127.0.0.1:4173';
 const CHROME_BIN = process.env.CHROME_BIN || 'google-chrome';
 const DEBUG_PORT = Number(process.env.CHROME_DEBUG_PORT || (20000 + (process.pid % 20000)));
 const CACHE_NAME = 'modaryx-site-v120-scalable';
+const TEMP_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'modaryx-pwa-offline-'));
+const CHROME_PROFILE = path.join(TEMP_ROOT, 'chrome-profile');
 const failures = [];
 const observations = {};
 
@@ -24,8 +28,7 @@ async function waitForJson(url, timeoutMs = 10000) {
 }
 
 async function stopLoopbackServer() {
-  const pidPath = '/tmp/modaryx-http.pid';
-  const pid = Number(fs.readFileSync(pidPath, 'utf8').trim());
+  const pid = Number(process.env.MODARYX_SERVER_PID || 0);
   if (!Number.isInteger(pid) || pid <= 0) throw new Error('invalid loopback server pid');
   try { process.kill(pid, 'SIGTERM'); } catch {}
   const deadline = Date.now() + 5000;
@@ -45,7 +48,6 @@ async function startLoopbackServer() {
     cwd: process.cwd(),
     stdio: ['ignore', 'ignore', 'ignore']
   });
-  fs.writeFileSync('/tmp/modaryx-http.pid', String(server.pid));
   const deadline = Date.now() + 5000;
   while (Date.now() < deadline) {
     try {
@@ -150,7 +152,7 @@ const chrome = spawn(CHROME_BIN, [
   '--no-first-run',
   '--remote-debugging-address=127.0.0.1',
   '--remote-debugging-port=' + DEBUG_PORT,
-  '--user-data-dir=/tmp/modaryx-pwa-proof-' + process.pid,
+  '--user-data-dir=' + CHROME_PROFILE,
   'about:blank'
 ], {stdio: ['ignore', 'ignore', 'pipe']});
 
@@ -316,4 +318,5 @@ try {
   chrome.kill('SIGTERM');
   await sleep(150);
   if (!chrome.killed) chrome.kill('SIGKILL');
+  fs.rmSync(TEMP_ROOT, {recursive: true, force: true});
 }
