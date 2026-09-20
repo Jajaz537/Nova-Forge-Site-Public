@@ -54,7 +54,7 @@ class FakeStatement {
     if (sql.startsWith('SELECT state_hash, code_verifier, return_to, expires_at FROM modaryx_auth_transactions')) {
       return this.db.transactions.get(this.args[0]) || null;
     }
-    if (sql.startsWith('SELECT identity_sub, scope_json, permissions_json, expires_at FROM modaryx_sessions')) {
+    if (sql.startsWith('SELECT identity_sub, scope_json, permissions_json, created_at, expires_at FROM modaryx_sessions')) {
       return this.db.sessions.get(this.args[0]) || null;
     }
     throw new Error('Unhandled first SQL: '+sql);
@@ -123,6 +123,7 @@ let identity=await getSessionIdentity(request,fakeDb,{nowMs:1_800_000_100_000});
 assert.equal(identity.sub,'auth0|user-123');
 assert.deepEqual(identity.scope,['openid','profile']);
 assert.deepEqual(identity.permissions,['profile:write']);
+assert.equal(identity.createdAt,new Date(1_800_000_000_000).toISOString());
 await destroySession(request,fakeDb);
 identity=await getSessionIdentity(request,fakeDb,{nowMs:1_800_000_100_000});
 assert.equal(identity,null);
