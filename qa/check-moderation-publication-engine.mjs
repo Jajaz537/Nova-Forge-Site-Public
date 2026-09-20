@@ -1,12 +1,20 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {
+  APPEALS_REVIEW_PERMISSION,
   MODERATION_PERMISSION,
+  appealOutcomeTransition,
+  auditActorKey,
+  authorizeAppealsReviewer,
   authorizeModerator,
+  buildAppealOutcomeReceipt,
+  buildAppealReceipt,
   buildModerationDecisionReceipt,
   moderationActorKey,
   moderationAuthMaxAgeSeconds,
   moderationTransition,
+  validateAppealOutcome,
+  validateAppealRequest,
   validateModerationDecision
 } from '../functions/_lib/moderation.mjs';
 import {createSession, sessionCookie} from '../functions/_lib/auth-session.mjs';
@@ -53,6 +61,7 @@ class FakeDb {
 
 const checks = [];
 assert.equal(MODERATION_PERMISSION,'community:moderate');
+assert.equal(APPEALS_REVIEW_PERMISSION,'community:appeals-review');
 assert.equal(moderationAuthMaxAgeSeconds({}),900);
 assert.equal(moderationAuthMaxAgeSeconds({MODARYX_PRIVILEGED_AUTH_MAX_AGE_SECONDS:'5'}),60);
 assert.equal(moderationAuthMaxAgeSeconds({MODARYX_PRIVILEGED_AUTH_MAX_AGE_SECONDS:'9000'}),3600);
@@ -119,6 +128,22 @@ assert.equal(access.ok,false);
 assert.equal(access.reason,'moderator-permission-required');
 checks.push('Moderator access rejects missing permission and stale privileged sessions');
 
+const appealsDb = new FakeDb();
+const appealsSession = await createSession(appealsDb,{
+  sub:'auth0|appeals-reviewer-1',
+  scope:['openid'],
+  permissions:['community:appeals-review']
+},{},{nowMs});
+const appealsCookie = sessionCookie(appealsSession.token,appealsSession.ttl).split(';')[0];
+const appealsRequest = new Request('https://preview.example/api/v1/moderation/appeals',{headers:{cookie:appealsCookie}});
+access = await authorizeAppealsReviewer({request:appealsRequest,env:{MODARYX_DB:appealsDb}},{nowMs:nowMs+1000});
+assert.equal(access.ok,true);
+const wrongAppealsRequest = new Request('https://preview.example/api/v1/moderation/appeals',{headers:{cookie:userCookie}});
+access = await authorizeAppealsReviewer({request:wrongAppealsRequest,env:{MODARYX_DB:dbNoPermission}},{nowMs:nowMs+1000});
+assert.equal(access.ok,false);
+assert.equal(access.reason,'appeals-review-permission-required');
+checks.push('Appeals review uses a permission distinct from first-line moderation');
+
 let decision = validateModerationDecision({
   submissionId:'submission-11111111-2222-4333-8444-555555555555',
   outcome:'publish',
@@ -183,6 +208,69 @@ assert.equal(receipt.provenance.previousReceiptId,null);
 assert.match(await moderationActorKey('auth0|moderator-1'),/^moderator:[a-f0-9]{40}$/);
 checks.push('Decision receipts are immutable-shaped and moderator identities are pseudonymized');
 
+const restrictiveDecision = {
+  ...receipt,
+  receiptId:'moderation:22222222-2222-4222-8222-222222222222',
+  category:'policy-violation',
+  decision:{
+    ...receipt.decision,
+    action:'remove',
+    statementOfReasons:'Rejet après revue humaine.'
+  }
+};
+const appealValidation = validateAppealRequest({
+  submissionId:pending.submission_id,
+  grounds:'Le contexte de la contribution justifie une nouvelle revue.'
+});
+assert.equal(appealValidation.ok,true);
+assert.equal(validateAppealRequest({submissionId:pending.submission_id,grounds:''}).reason,'appeal-grounds-invalid');
+
+const appealReceipt = buildAppealReceipt({
+  receiptId:'moderation:33333333-3333-4333-8333-333333333333',
+  submission:pending,
+  decisionReceipt:restrictiveDecision,
+  grounds:appealValidation.value.grounds,
+  now:'2026-09-21T00:10:00.000Z'
+});
+assert.equal(appealReceipt.receiptType,'appeal');
+assert.equal(appealReceipt.appeal.state,'submitted');
+assert.equal(appealReceipt.appeal.decisionReceiptId,restrictiveDecision.receiptId);
+assert.equal(appealReceipt.provenance.recordedBy,'system');
+
+const outcomeValidation = validateAppealOutcome({
+  appealReceiptId:appealReceipt.receiptId,
+  result:'reversed',
+  reason:'Décision initiale infirmée après revue indépendante.'
+});
+assert.equal(outcomeValidation.ok,true);
+assert.equal(validateAppealOutcome({...outcomeValidation.value,result:'auto'}).reason,'appeal-result-invalid');
+
+let appealTransition = appealOutcomeTransition({...pending,moderation_state:'rejected'},'upheld');
+assert.equal(appealTransition.moderationState,'rejected');
+assert.equal(appealTransition.distributable,false);
+appealTransition = appealOutcomeTransition({...pending,moderation_state:'rejected'},'modified');
+assert.equal(appealTransition.moderationState,'held-for-review');
+assert.equal(appealTransition.publicationState,'received');
+appealTransition = appealOutcomeTransition({...pending,moderation_state:'rejected'},'reversed');
+assert.equal(appealTransition.moderationState,'accepted');
+assert.equal(appealTransition.publicationState,'published');
+assert.equal(appealTransition.distributable,true);
+assert.equal(appealOutcomeTransition({...pending,abuse_state:'blocked'},'reversed').reason,'abuse-state-not-passed');
+
+const outcomeReceipt = buildAppealOutcomeReceipt({
+  receiptId:'moderation:44444444-4444-4444-8444-444444444444',
+  submission:pending,
+  appealReceipt,
+  result:'reversed',
+  reason:outcomeValidation.value.reason,
+  now:'2026-09-21T00:15:00.000Z'
+});
+assert.equal(outcomeReceipt.receiptType,'appeal-outcome');
+assert.equal(outcomeReceipt.outcome.appealReceiptId,appealReceipt.receiptId);
+assert.equal(outcomeReceipt.provenance.recordedBy,'appeals-reviewer');
+assert.match(await auditActorKey('auth0|appeals-reviewer-1','appeals-reviewer'),/^appeals-reviewer:[a-f0-9]{40}$/);
+checks.push('Appeal receipts, independent review permission and appeal outcomes are bounded and auditable');
+
 const migration=fs.readFileSync(new URL('../migrations/0003_modaryx_moderation_publication.sql',import.meta.url),'utf8');
 for(const token of [
   'CREATE TABLE IF NOT EXISTS modaryx_moderation_receipts',
@@ -198,6 +286,10 @@ const queue=fs.readFileSync(new URL('../functions/api/v1/moderation/queue.js',im
 const decisions=fs.readFileSync(new URL('../functions/api/v1/moderation/decisions.js',import.meta.url),'utf8');
 const publicFeed=fs.readFileSync(new URL('../functions/api/v1/community/public.js',import.meta.url),'utf8');
 const submission=fs.readFileSync(new URL('../functions/api/v1/community/submissions.js',import.meta.url),'utf8');
+const submissionStatus=fs.readFileSync(new URL('../functions/api/v1/community/submissions/[id].js',import.meta.url),'utf8');
+const appealSubmit=fs.readFileSync(new URL('../functions/api/v1/community/appeals.js',import.meta.url),'utf8');
+const appealsQueue=fs.readFileSync(new URL('../functions/api/v1/moderation/appeals.js',import.meta.url),'utf8');
+const appealOutcomes=fs.readFileSync(new URL('../functions/api/v1/moderation/appeal-outcomes.js',import.meta.url),'utf8');
 const securitySchema=fs.readFileSync(new URL('../schemas/account-security.schema.json',import.meta.url),'utf8');
 
 for(const token of [
@@ -228,10 +320,42 @@ assert.ok(securitySchema.includes('"publish"'));
 assert.ok(securitySchema.includes('"reauthenticationRequired":{"const":true}'));
 checks.push('Queue, decisions and public feed preserve no-auto-publish and privileged-action reauthentication boundaries');
 
+for(const token of [
+  'authenticateRead(context)',
+  'p.identity_sub = ?',
+  'appealAvailable',
+  "receipt.receiptType === 'appeal-outcome'"
+]) assert.ok(submissionStatus.includes(token),'submission status invariant missing: '+token);
+
+for(const token of [
+  'authorizeCommunityMemberWrite',
+  "receipt_type = 'appeal'",
+  'decision-not-appealable',
+  'appeal-already-submitted',
+  "auditActorKey(access.identity.sub, 'appellant')"
+]) assert.ok(appealSubmit.includes(token),'appeal submit invariant missing: '+token);
+
+for(const token of [
+  'authorizeAppealsReviewer(context)',
+  "a.receipt_type = 'appeal'",
+  "o.receipt_type = 'appeal-outcome'",
+  'o.receipt_id IS NULL'
+]) assert.ok(appealsQueue.includes(token),'appeals queue invariant missing: '+token);
+
+for(const token of [
+  'requireRecentAuthentication:true',
+  'appealOutcomeTransition',
+  "receipt_type = 'appeal-outcome'",
+  "'appeals-reviewer'",
+  'appeal-already-decided'
+]) assert.ok(appealOutcomes.includes(token),'appeal outcome invariant missing: '+token);
+
+checks.push('Author follow-up and appeal review remain identity-bound, single-decision and fail-closed');
+
 console.log(JSON.stringify({
   marker:'PASS_TARGETED_MODERATION_PUBLICATION_ENGINE',
   result:'PASS',
-  scope:'Moderation/publication engine source and local contract proof only; no D1 0003 migration, Auth0 moderator permission or live moderation decision is claimed',
+  scope:'Moderation/publication/appeal engine source and local contract proof only; no D1 0003 migration, Auth0 moderation permissions or live decision/appeal cycle is claimed',
   checks,
   failures:[]
 },null,2));
