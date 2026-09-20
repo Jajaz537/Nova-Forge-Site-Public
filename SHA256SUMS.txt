@@ -99,3 +99,4 @@ ae7397920f962352e5e47f67f7973fd4711d059e33d83e2188e7b7e73a8a2c03  ./assets/livin
 3ee8b9a0a9ea83000b3cbd2e1e0560690e7923d5764c7f20a0a171d228c0cde3  ./assets/living-world/dragon-juvenile.png
 288859aba608a4c57ccdfb43ab4c4004c25b10bcecddb84e40be8f472960500f  ./assets/living-world/dragon-adolescent.png
 f19e00f3ae9dee33a502b9bc78d3bfefabd82a8db377d8ac270fd69e95901615  ./assets/living-world/dragon-young-adult.png
+b4c0805fe39e4ca9e0cdc60410fbb62acbeff6c661c25267bb958473d16c233c  ./assets/living-world/dragon-adult.png
