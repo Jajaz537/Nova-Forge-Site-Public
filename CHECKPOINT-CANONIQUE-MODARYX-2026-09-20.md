@@ -1504,3 +1504,75 @@ Micro-proof final :
 3. Tester en local/mock avant provisioning fournisseur.
 4. Provisionner DEV uniquement lorsque l'accès fournisseur devient disponible.
 5. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — PR #106 — endpoints distants profils / communauté — 20 septembre 2026
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #106 : `264768966955026ad3d007b2d3e6821fbb5f4a01`.
+- `main` inchangée.
+- Aucun tenant Auth0, D1, Turnstile, binding, secret, DNS ou production activé.
+- Aucun full replay final exécuté.
+
+### Endpoints ajoutés
+
+- `GET /api/v1/profile`
+- `PUT /api/v1/profile`
+- `GET /api/v1/profiles/:handle`
+- `POST /api/v1/community/submissions`
+
+### Invariants protégés
+
+- écritures same-origin uniquement ;
+- JSON borné ;
+- D1 + Auth0 + Turnstile obligatoires ;
+- profileId public dérivé par hash du subject Auth0 ;
+- liens publics HTTPS ;
+- profil public lisible seulement si `visibility=public` ;
+- contributions review/discussion/comment bornées ;
+- contribution distante initiale = `abuse=passed`, `moderation=pending`, `publication=received` ;
+- `distributable=false` ;
+- aucune auto-publication.
+
+### Historique d'erreur / micro-proof
+
+Première tentative :
+- endpoint proof : **PASS** ;
+- anti-oubli : **FAIL** car `PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS` avait disparu textuellement du registre après évolution des lignes profils/publication.
+
+Correction ciblée :
+- restauration d'une ligne de preuve contractuelle historique uniquement.
+
+Deuxième tentative :
+- endpoint proof : **PASS** ;
+- browser proof : **PASS** ;
+- anti-oubli : **FAIL** sur l'ancien libellé backend `fondation DEV codée, ressources distantes non provisionnées`.
+
+Correction ciblée :
+- suppression du token stale de la garde uniquement.
+
+Micro-proof final :
+- run source `35520142277` — **success** ;
+- `PASS_TARGETED_REMOTE_WRITE_ENDPOINTS` ;
+- `PASS_TARGETED_BACKEND_DEV_FOUNDATION` ;
+- `PASS_TARGETED_ANTI_OUBLI_GATE` ;
+- toutes les autres gardes existantes vertes ;
+- `failures: []`.
+- browser proof run `35520142174` — **success**.
+
+### État honnête
+
+- **TERMINÉ — code endpoints distants profils/communauté ciblé**.
+- **EN COURS — Auth0/D1/Turnstile réels**.
+- **EN COURS — connexion utilisateur réelle**.
+- **EN COURS — modération distante réelle**.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Ajouter le flux de connexion Auth0 côté serveur sans exposer de token navigateur.
+2. Utiliser session HttpOnly/D1 et Authorization Code + PKCE.
+3. Rester fail-closed tant que le tenant Auth0 DEV n'est pas provisionné.
+4. Aucun full replay avant la toute fin.
