@@ -14,8 +14,8 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | MODARYX / MODARYX MODS = plateforme web | **TERMINÉ — contrat courant** | Identité web conservée ; aucune migration MODARYX → Nova Forge. |
 | Nova Forge OS Public / Fondateur = logiciel distinct | **TERMINÉ — contrat courant** | Références web uniquement pour relation de produit ou intégration future explicite. |
 | `getnovaforge.com` / getnova | **TERMINÉ — classification historique** | Ancien projet web ; références historiques conservées seulement quand nécessaires à la provenance, compatibilité ou protection technique. |
-| Identité visuelle MODARYX visible sur les 17 routes | **TERMINÉ — périmètre source courant** | Le garde source rejette le libellé visible « Modaryx OS » ; la validation artistique globale reste séparée. |
-| Design system Premium HD des 23 routes publiques | **EN COURS** | Cohérence globale encore en finition ; aucune route n'hérite automatiquement de la preuve d'une autre. |
+| Identité visuelle MODARYX visible sur les 23 routes | **TERMINÉ — périmètre source courant** | Le garde source rejette le libellé visible « Modaryx OS » ; la validation artistique globale reste séparée. |
+| Design system Premium HD des 23 routes publiques | **EN COURS — preuve visuelle initiale acquise** | Sweep ciblé PR #79 : 23 routes × desktop/mobile, inspection assistée sans défaut bloquant isolé. Validation artistique humaine finale et preuves externes restent séparées. |
 
 ## 2. Monde vivant / Loup / Dragon
 
@@ -48,7 +48,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Vérificateur SHA-256 local | **TERMINÉ — périmètre local ciblé** | Calcul/comparaison locale ; une empreinte n'établit ni provenance, ni auteur, ni innocuité. |
 | Imports/exports fichiers réels Chromium | **TERMINÉ — périmètre automatisé ciblé** | Matrice externe : run `35464233996`. Dialogue natif utilisateur/appareil reste distinct. |
 | Accessibilité structurelle Chromium | **TERMINÉ — périmètre ciblé** | 23 pages, arbre AX/labels/skip-link ; run `35509547366`, marker `PASS_TARGETED_BROWSER_A11Y_MICROPROOF`. |
-| Reflow Chromium 320/400/768/1440 | **TERMINÉ — périmètre ciblé** | 68 navigations dans la lane automatisée. |
+| Reflow Chromium 320/400/768/1440 | **TERMINÉ — périmètre ciblé** | 23 pages × 4 largeurs = 92 navigations ; run `35509547357`, marker `PASS_TARGETED_BROWSER_REFLOW_MICROPROOF`. |
 | Performance laboratoire 5 pages × 2 profils | **TERMINÉ — périmètre ciblé** | Budgets labo respectés ; ce n'est pas du CWV terrain. |
 | CodeQL PR #12 — constats historiques visibles | **TERMINÉ** | 11/11 threads historiques résolus ; run HEAD documenté `35484967852`. |
 
@@ -94,8 +94,9 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 
 ## 7. Finition Premium HD encore active
 
-- **EN COURS** — finition cohérente des 23 routes publiques : composition, hiérarchie, surfaces, responsive, états, navigation, typographie, motion et contrôles visuels.
+- **TERMINÉ — preuve visuelle initiale ciblée** — 23 routes publiques, desktop 1440×1000 + mobile 390×844 : run `35510526508`, marker `PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW`, 46 observations, zéro overflow, image cassée, contrôle coupé, H1/ouverture/footer manquant ; captures inspectées de façon assistée sans défaut bloquant isolé. Cela ne ferme pas la validation artistique humaine finale ni les états non déclenchés.
 - **TERMINÉ — preuve ciblée navigateur** — surfaces statiques Écosystème / Sécurité / Documentation / Jeux / 404 : PR #74 fusionnée dans Work au merge `29fab6f549c5d9192359c0e8c9cbad2d4edec39a` ; run `35508894415`, marker `PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW` ; desktop 1440×1000 + mobile 390×844, zéro overflow, aucune image cassée ni contrôle coupé. Les captures ont été inspectées de façon assistée sans défaut bloquant isolé ; cela ne ferme pas la validation artistique humaine finale.
+- **TERMINÉ — extension hubs jeux** — PR #78 fusionnée dans Work au merge `d953e6613572a0e1b195e5212cc997a20300230c` ; six hubs GTA VI/RDR2 ajoutés au harnais visuel, run `35510243999` vert, captures desktop/mobile inspectées sans défaut bloquant isolé.
 - **TERMINÉ sur leurs scénarios ciblés** — états locaux Recherche, Téléchargements, Profils, Catalogue, Communauté, Creator Studio, Project Hub et Accueil. Ne pas les rejouer sans modification pertinente.
 
 ## 8. États historiques explicitement supersédés
