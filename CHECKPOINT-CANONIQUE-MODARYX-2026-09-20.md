@@ -1373,3 +1373,64 @@ Restent notamment :
 2. Passer au mode externe ciblé : Work uniquement pour les tâches qu'il peut réellement accomplir.
 3. Garder les preuves matériel/humain PREUVE MANQUANTE tant qu'un environnement approprié n'existe pas.
 4. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — Work Phase 2 — preuves externes ciblées — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour la mission externe Work Phase 2.
+
+### Git / collision
+
+- HEAD distant vérifié par Work : `d0c9d775da5aa18c6524a3982c4108ca5bc26353`.
+- Work a lu le checkpoint et l'anti-oubli du 20 septembre directement depuis ce commit.
+- Son ancien worktree local sale a été laissé intact.
+- Zéro écriture Git.
+- Zéro déploiement.
+- Zéro création de compte.
+- Zéro full replay.
+
+Document : `qa/MODARYX-WORK-PHASE2-EXTERNAL-EVIDENCE-20260920.md`.
+
+### Safari
+
+- **PREUVE MANQUANTE**.
+- Work ne dispose que du navigateur Chromium intégré.
+- Aucun Safari/macOS/iOS/device lab réel accessible.
+- WebKit Playwright ne ferme toujours pas Safari final.
+
+### Auth0
+
+- **EN COURS — préparation qualifiée, non connecté**.
+- Offre Free actuelle revérifiée : 0 €, inscription sans carte, jusqu'à 25 000 MAU.
+- Passkeys disponibles sur database connections.
+- Flux natif actuel : New Universal Login + Identifier First.
+- Custom domain Free annoncé avec vérification carte.
+- Point d'arrêt exact : avant création/connexion du tenant dev.
+- Aucune callback/session/passkey réelle configurée.
+
+### Backend Cloudflare
+
+- **EN COURS — non connecté**.
+- Architecture candidate inchangée : Pages Functions/Workers + D1 + R2 + Turnstile.
+- Aucun dashboard Cloudflare authentifié accessible à Work.
+- Aucune ressource créée.
+- Toute création de ressource dev, binding ou secret requiert approbation explicite.
+
+### CWV terrain
+
+- **PREUVE MANQUANTE**.
+- Rapport PageSpeed/Lighthouse frais acquis sur l'URL stable.
+- Rapport : **Aucune donnée** pour l'expérience utilisateur réelle.
+- Les résultats labo restent distincts du CrUX/INP terrain.
+
+### PWA
+
+- **PREUVE MANQUANTE**.
+- Aucun dialogue d'installation utilisateur, lancement standalone ou appareil réel disponible dans l'environnement Work.
+
+### Conclusion
+
+- **TERMINÉ — qualification externe Work Phase 2**.
+- Aucun blocker final n'a été fermé artificiellement.
+- Prochain progrès externe exige soit une action utilisateur/fournisseur explicite, soit un environnement natif/appareil approprié.
+- **Aucune VF / aucun 100 % déclaré.**
