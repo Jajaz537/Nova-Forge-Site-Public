@@ -194,6 +194,93 @@ async function runCase(cdp, spec) {
   assert(state.logoutHidden === true, spec.name + ': logout must stay hidden without session');
   assert(state.editorDisabled === true, spec.name + ': editor must stay disabled without backend');
 
+  const publicProfile = await evaluate(cdp, `(() => {
+    const originalFetch = window.fetch.bind(window);
+    window.fetch = async (input, init) => {
+      const url = typeof input === 'string' ? input : input?.url || '';
+      if (url === '/api/v1/profiles/proof.creator') {
+        return new Response(JSON.stringify({
+          schemaVersion:1,
+          profileId:'profile:proofcreator000000000000000000000000',
+          handle:'proof.creator',
+          displayName:'Proof Creator',
+          bio:'Profil public de preuve navigateur.',
+          visibility:'public',
+          creator:{isCreator:true,displayLabel:'Créateur vérifié'},
+          links:[{label:'Portfolio HTTPS',url:'https://example.com/portfolio'}],
+          collections:[],
+          createdAt:'2026-09-21T00:00:00.000Z',
+          updatedAt:'2026-09-21T00:00:00.000Z'
+        }), {status:200, headers:{'content-type':'application/json'}});
+      }
+      if (url === '/api/v1/profiles/private.user') {
+        return new Response(JSON.stringify({error:'profile-not-found'}), {status:404, headers:{'content-type':'application/json'}});
+      }
+      return originalFetch(input, init);
+    };
+    const input = document.querySelector('#public-profile-handle');
+    const form = document.querySelector('#public-profile-search');
+    input.value = 'proof.creator';
+    form.requestSubmit();
+    return true;
+  })()`, true);
+  assert(publicProfile === true, spec.name + ': public profile mock setup failed');
+
+  const publicState = await waitFor(cdp, `(() => {
+    const root=document.querySelector('#public-profile');
+    const card=document.querySelector('#public-profile-card');
+    if (!root || !card || root.dataset.publicProfileState !== 'found' || card.hidden) return null;
+    return {
+      state:root.dataset.publicProfileState,
+      status:document.querySelector('#public-profile-state')?.textContent?.trim()||'',
+      handle:document.querySelector('#public-profile-handle-label')?.textContent?.trim()||'',
+      name:document.querySelector('#public-profile-display-name')?.textContent?.trim()||'',
+      bio:document.querySelector('#public-profile-bio')?.textContent?.trim()||'',
+      creatorHidden:document.querySelector('#public-profile-creator')?.hidden,
+      creator:document.querySelector('#public-profile-creator')?.textContent?.trim()||'',
+      links:[...document.querySelectorAll('#public-profile-links a')].map(a=>({text:a.textContent.trim(),href:a.href,rel:a.rel}))
+    };
+  })()`, spec.name + ' public profile rendering');
+
+  assert(publicState.state === 'found', spec.name + ': public profile state mismatch');
+  assert(publicState.status === 'Profil public', spec.name + ': public profile status mismatch');
+  assert(publicState.handle === '@proof.creator', spec.name + ': public handle mismatch');
+  assert(publicState.name === 'Proof Creator', spec.name + ': public display name mismatch');
+  assert(publicState.bio === 'Profil public de preuve navigateur.', spec.name + ': public bio mismatch');
+  assert(publicState.creatorHidden === false && publicState.creator === 'Créateur vérifié', spec.name + ': creator badge mismatch');
+  assert(publicState.links.length === 1, spec.name + ': public HTTPS link missing');
+  assert(publicState.links[0].href === 'https://example.com/portfolio', spec.name + ': public link href mismatch');
+  assert(/noopener/.test(publicState.links[0].rel) && /noreferrer/.test(publicState.links[0].rel), spec.name + ': public link rel guard missing');
+
+  await evaluate(cdp, `document.querySelector('#public-profile')?.scrollIntoView({block:'center'}); true`);
+  await sleep(120);
+  await capture(cdp, spec.name + '-public-profile.png');
+
+  await evaluate(cdp, `(() => {
+    const input=document.querySelector('#public-profile-handle');
+    input.value='private.user';
+    document.querySelector('#public-profile-search').requestSubmit();
+    return true;
+  })()`, true);
+
+  const hiddenState = await waitFor(cdp, `(() => {
+    const root=document.querySelector('#public-profile');
+    const card=document.querySelector('#public-profile-card');
+    if (!root || root.dataset.publicProfileState !== 'empty') return null;
+    return {
+      state:root.dataset.publicProfileState,
+      cardHidden:card?.hidden,
+      status:document.querySelector('#public-profile-state')?.textContent?.trim()||'',
+      copy:document.querySelector('#public-profile-search-status')?.textContent?.trim()||''
+    };
+  })()`, spec.name + ' private profile fail-closed');
+
+  assert(hiddenState.cardHidden === true, spec.name + ': hidden/private profile card must stay hidden');
+  assert(hiddenState.status === 'Introuvable', spec.name + ': hidden/private public status mismatch');
+  assert(/Aucun profil public/.test(hiddenState.copy), spec.name + ': hidden/private fail-closed copy missing');
+
+  observations[spec.name + 'PublicProfile'] = {public:publicState, hidden:hiddenState};
+
   await evaluate(cdp, `document.querySelector('#account-console')?.scrollIntoView({block:'center'}); true`);
   await sleep(120);
   await capture(cdp, spec.name + '-account.png');
