@@ -9,9 +9,21 @@ const OUT=process.env.MODARYX_STATIC_REVIEW_OUT||path.join(process.cwd(),'static
 const TEMP_ROOT=fs.mkdtempSync(path.join(os.tmpdir(),'modaryx-static-premium-'));
 const USER_DATA_DIR=path.join(TEMP_ROOT,'chrome-profile');
 const pages=[
+  {id:'home',path:'index.html'},
+  {id:'catalog',path:'catalog.html'},
+  {id:'search',path:'search.html'},
+  {id:'creator-studio',path:'creator-studio.html'},
+  {id:'community',path:'community.html'},
+  {id:'profiles',path:'profiles.html'},
   {id:'ecosystem',path:'ecosystem.html'},
-  {id:'security',path:'security.html'},
   {id:'documentation',path:'documentation.html'},
+  {id:'security',path:'security.html'},
+  {id:'verify',path:'verify.html'},
+  {id:'downloads',path:'downloads.html'},
+  {id:'project',path:'project.html'},
+  {id:'project-ember-textures',path:'project-ember-textures.html'},
+  {id:'project-balanced-latency-pack',path:'project-balanced-latency-pack.html'},
+  {id:'project-forge-night-experience',path:'project-forge-night-experience.html'},
   {id:'games',path:'games/index.html'},
   {id:'gta-6',path:'gta-6/index.html'},
   {id:'gta-6-mods',path:'gta-6/mods/index.html'},
@@ -137,7 +149,7 @@ async function capture(cdp,page,viewport){
     const de=document.documentElement;
     const body=document.body;
     const h1=document.querySelector('h1');
-    const hero=document.querySelector('.hero,.catalog-hero,.project-hero,.studio-hero,.profiles-hero,.games-intro');
+    const hero=document.querySelector('.hero,.catalog-hero,.project-hero,.studio-hero,.profiles-hero,.games-intro,.modaryx-realm-hero,.project-page > .section:first-of-type');
     const header=document.querySelector('.topbar,.nova-topbar');
     const footer=document.querySelector('.site-footer');
     const nav=document.querySelector('.section-nav');
