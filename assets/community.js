@@ -507,6 +507,195 @@
     submissionStatus.textContent = "Brouillon local supprimé de ce navigateur.";
   });
 
+  const remotePanel = document.querySelector("#community-remote");
+  const remoteStatusNode = document.querySelector("#community-remote-status");
+  const remoteCopy = document.querySelector("#community-remote-copy");
+  const remoteResult = document.querySelector("#community-remote-result");
+  const remoteLogin = document.querySelector("#community-login");
+  const remoteSubmit = document.querySelector("#community-submit-remote");
+  const remoteTurnstile = document.querySelector("#community-turnstile");
+
+  let remoteBackend = null;
+  let remoteTurnstileToken = "";
+  let remoteTurnstileWidget = null;
+  let remoteTurnstileScript = null;
+
+  function setRemoteState(state, label, copy) {
+    if (remotePanel) remotePanel.dataset.remoteState = state;
+    if (remoteStatusNode) remoteStatusNode.textContent = label;
+    if (remoteCopy) remoteCopy.textContent = copy;
+  }
+
+  function setRemoteLoginEnabled(enabled) {
+    if (!remoteLogin) return;
+    remoteLogin.setAttribute("aria-disabled", enabled ? "false" : "true");
+    if (enabled) {
+      const returnTo = `${window.location.pathname || "/community"}#contributions`;
+      remoteLogin.href = `/api/v1/auth/login?returnTo=${encodeURIComponent(returnTo)}`;
+    } else {
+      remoteLogin.href = "./community.html#contributions";
+    }
+  }
+
+  async function remoteJson(url, options = {}) {
+    const response = await fetch(url, {
+      cache: "no-store",
+      credentials: "same-origin",
+      headers: {accept: "application/json", ...(options.headers || {})},
+      ...options
+    });
+    const type = response.headers.get("content-type") || "";
+    if (!type.includes("application/json")) throw new Error("response-not-json");
+    return {response, data: await response.json()};
+  }
+
+  function loadRemoteTurnstile() {
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (remoteTurnstileScript) return remoteTurnstileScript;
+    remoteTurnstileScript = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      script.dataset.modaryxCommunityTurnstile = "true";
+      script.addEventListener("load", () => window.turnstile ? resolve(window.turnstile) : reject(new Error("turnstile-api-missing")), {once: true});
+      script.addEventListener("error", () => reject(new Error("turnstile-script-failed")), {once: true});
+      document.head.append(script);
+    });
+    return remoteTurnstileScript;
+  }
+
+  async function prepareRemoteTurnstile() {
+    const siteKey = remoteBackend?.turnstile?.publicSiteKey;
+    const ready = remoteBackend?.turnstile?.secretConfigured &&
+      remoteBackend?.turnstile?.siteKeyConfigured &&
+      typeof siteKey === "string" &&
+      siteKey.length > 0;
+    if (!ready || !remoteTurnstile || !remoteSubmit) {
+      if (remoteResult) remoteResult.textContent = "Envoi distant verrouillé : vérification anti-abus non provisionnée.";
+      return false;
+    }
+
+    try {
+      const api = await loadRemoteTurnstile();
+      remoteTurnstile.hidden = false;
+      remoteTurnstile.replaceChildren();
+      remoteTurnstileWidget = api.render(remoteTurnstile, {
+        sitekey: siteKey,
+        action: "community-write",
+        theme: "dark",
+        callback(token) {
+          remoteTurnstileToken = token;
+          remoteSubmit.disabled = false;
+          if (remoteResult) remoteResult.textContent = "Vérification prête. Le brouillon peut être envoyé pour modération.";
+        },
+        "expired-callback"() {
+          remoteTurnstileToken = "";
+          remoteSubmit.disabled = true;
+          if (remoteResult) remoteResult.textContent = "Vérification expirée. Revalidez avant l’envoi.";
+        },
+        "error-callback"() {
+          remoteTurnstileToken = "";
+          remoteSubmit.disabled = true;
+          if (remoteResult) remoteResult.textContent = "Vérification anti-abus temporairement indisponible.";
+        }
+      });
+      return true;
+    } catch {
+      remoteSubmit.disabled = true;
+      if (remoteResult) remoteResult.textContent = "Envoi distant indisponible : le contrôle anti-abus n’a pas pu être chargé.";
+      return false;
+    }
+  }
+
+  async function initRemoteCommunity() {
+    if (!remotePanel || !remoteStatusNode || !remoteSubmit || !remoteLogin) return;
+    remoteSubmit.disabled = true;
+    setRemoteLoginEnabled(false);
+
+    try {
+      const {response, data} = await remoteJson("/api/v1/status");
+      if (!response.ok || data?.service !== "modaryx-backend") throw new Error("backend-unavailable");
+      remoteBackend = data;
+    } catch {
+      setRemoteState("unavailable", "Service non provisionné", "Le backend distant n’est pas disponible sur cette origine. Vos brouillons restent strictement locaux.");
+      if (remoteResult) remoteResult.textContent = "Aucun contenu n’est envoyé en ligne.";
+      return;
+    }
+
+    if (!remoteBackend?.bindings?.d1 || !remoteBackend?.auth0?.loginConfigured) {
+      setRemoteState("unavailable", "Provisionnement requis", "La voie distante est prête en code mais le backend de compte n’est pas entièrement provisionné.");
+      return;
+    }
+
+    setRemoteLoginEnabled(true);
+    setRemoteState("ready", "Déconnecté", "Connectez-vous pour pouvoir envoyer un brouillon validé vers la file de modération.");
+
+    let session;
+    try {
+      const result = await remoteJson("/api/v1/auth/session");
+      if (!result.response.ok) throw new Error(result.data?.error || "session-load-failed");
+      session = result.data;
+    } catch {
+      setRemoteState("error", "Session indisponible", "Le backend répond mais la session n’a pas pu être vérifiée. Aucun envoi n’est autorisé.");
+      return;
+    }
+
+    if (!session?.authenticated) return;
+
+    setRemoteState("authenticated", "Session confirmée", "Votre session est active. La contribution restera en attente de modération après l’envoi.");
+    remoteLogin.hidden = true;
+    await prepareRemoteTurnstile();
+  }
+
+  remoteLogin?.addEventListener("click", (event) => {
+    if (remoteLogin.getAttribute("aria-disabled") === "true") event.preventDefault();
+  });
+
+  remoteSubmit?.addEventListener("click", async () => {
+    if (remoteSubmit.disabled || !remoteTurnstileToken) return;
+    let draft;
+    try {
+      draft = buildSubmission(true);
+    } catch (error) {
+      if (remoteResult) remoteResult.textContent = `Envoi bloqué : ${error.message}`;
+      return;
+    }
+
+    const payload = {
+      kind: draft.kind,
+      targetId: draft.targetId,
+      body: draft.body,
+      turnstileToken: remoteTurnstileToken
+    };
+    if (draft.title) payload.title = draft.title;
+    if (draft.rating !== undefined) payload.rating = draft.rating;
+    if (draft.parentSubmissionId) payload.parentSubmissionId = draft.parentSubmissionId;
+
+    remoteSubmit.disabled = true;
+    if (remoteResult) remoteResult.textContent = "Envoi sécurisé vers la file de modération…";
+
+    try {
+      const {response, data} = await remoteJson("/api/v1/community/submissions", {
+        method: "POST",
+        headers: {"content-type": "application/json"},
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error(data?.error || "remote-submit-failed");
+      if (data?.moderationState !== "pending" || data?.publicationState !== "received" || data?.distributable !== false) {
+        throw new Error("remote-state-invalid");
+      }
+      if (remoteResult) remoteResult.textContent = `Contribution reçue pour modération · NON PUBLIÉE · référence ${data.id || "reçue"}.`;
+      remoteTurnstileToken = "";
+      if (window.turnstile && remoteTurnstileWidget !== null) window.turnstile.reset(remoteTurnstileWidget);
+    } catch {
+      if (remoteResult) remoteResult.textContent = "Envoi non confirmé. Le brouillon local est conservé et rien n’est déclaré publié.";
+      if (window.turnstile && remoteTurnstileWidget !== null) window.turnstile.reset(remoteTurnstileWidget);
+      remoteTurnstileToken = "";
+    }
+  });
+
   updateSubmissionFields();
+  initRemoteCommunity();
   loadCatalog();
 })();

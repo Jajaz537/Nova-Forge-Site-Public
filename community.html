@@ -6,8 +6,8 @@
   <meta name="theme-color" content="#171715">
   <meta name="color-scheme" content="dark">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
-  <meta name="description" content="Préparez vos collections, avis et discussions avec MODARYX MODS. Sauvegarde dans votre navigateur et export JSON ; publication en ligne non disponible.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self' data:; connect-src 'self' https://challenges.cloudflare.com; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src https://challenges.cloudflare.com">
+  <meta name="description" content="Préparez vos collections, avis et discussions avec MODARYX MODS. Brouillons locaux préservés, avec envoi distant pour modération uniquement lorsque le service réel est disponible.">
   <title>Communauté — MODARYX MODS</title>
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
@@ -41,10 +41,10 @@
       <div class="hero-copy">
         <p class="eyebrow">Communauté · vos brouillons locaux</p>
         <h1 id="community-title">Vos collections. Vos idées. À votre rythme.</h1>
-        <p class="lede">Rassemblez vos favoris, préparez un avis ou une discussion, puis conservez une copie JSON. Ces brouillons restent sur votre appareil : la publication et la synchronisation ne sont pas disponibles.</p>
+        <p class="lede">Rassemblez vos favoris, préparez un avis ou une discussion et gardez votre brouillon local. Lorsque le service distant est réellement disponible, une contribution peut être envoyée séparément pour modération sans être publiée automatiquement.</p>
         <div class="release-status"><span class="status-dot" aria-hidden="true"></span><span><strong>Vos brouillons restent privés dans ce navigateur.</strong> Enregistrez-les ici ou exportez une copie JSON. Aucun contenu n’est publié en ligne.</span></div>
       </div>
-      <aside class="hero-panel" aria-label="Fonctionnement de la communauté"><p class="eyebrow">Votre espace de préparation</p><ul class="feature-list"><li><span>01</span><div><strong>Rassemblez</strong><small>Choisissez les créations du catalogue à conserver dans une collection.</small></div></li><li><span>02</span><div><strong>Rédigez</strong><small>Préparez une discussion, un avis ou un commentaire sous forme de brouillon.</small></div></li><li><span>03</span><div><strong>Conservez une copie</strong><small>Enregistrez dans ce navigateur ou exportez un fichier JSON à garder sur votre appareil.</small></div></li><li><span>04</span><div><strong>Publication à venir</strong><small>Comptes, publication et modération en ligne ne sont pas encore disponibles.</small></div></li></ul></aside>
+      <aside class="hero-panel" aria-label="Fonctionnement de la communauté"><p class="eyebrow">Votre espace de préparation</p><ul class="feature-list"><li><span>01</span><div><strong>Rassemblez</strong><small>Choisissez les créations du catalogue à conserver dans une collection.</small></div></li><li><span>02</span><div><strong>Rédigez</strong><small>Préparez une discussion, un avis ou un commentaire sous forme de brouillon.</small></div></li><li><span>03</span><div><strong>Conservez une copie</strong><small>Enregistrez dans ce navigateur ou exportez un fichier JSON à garder sur votre appareil.</small></div></li><li><span>04</span><div><strong>Envoi contrôlé</strong><small>La voie distante ne s’active qu’avec une session réelle et une vérification anti-abus ; toute contribution reste en attente de modération.</small></div></li></ul></aside>
     </section>
 
     <nav class="section-nav" aria-label="Outils communautaires"><a href="#collections">Ma collection</a><a href="#contributions">Mon brouillon</a><a href="./profiles.html">Profils</a></nav>
@@ -80,6 +80,20 @@
     <section class="section community-workspace community-contribution" id="contributions" aria-labelledby="submission-title">
       <p class="eyebrow">Contribution locale V1</p><h2 id="submission-title">Préparez un avis, une discussion ou une réponse.</h2>
       <p class="section-intro">Le brouillon est lié à un ID du catalogue public et peut être sauvegardé ou exporté localement. Aucun auteur distant, état de modération ou publication n’est inventé.</p>
+      <aside class="community-remote-bridge" id="community-remote" data-remote-state="checking" aria-labelledby="community-remote-title">
+        <div>
+          <p class="eyebrow">Voie distante · optionnelle</p>
+          <h3 id="community-remote-title">Envoyer pour modération, sans auto-publication.</h3>
+          <p id="community-remote-copy">Vérification du backend et de votre session…</p>
+        </div>
+        <div class="community-remote-controls">
+          <span class="community-remote-badge" id="community-remote-status" role="status" aria-live="polite">Vérification…</span>
+          <a class="button" id="community-login" href="./community.html#contributions" aria-disabled="true">Se connecter</a>
+          <button class="button primary" id="community-submit-remote" type="button" disabled>Envoyer pour modération</button>
+        </div>
+        <div id="community-turnstile" class="community-turnstile" hidden aria-label="Vérification anti-abus"></div>
+        <p class="community-remote-result" id="community-remote-result" role="status" aria-live="polite">Le brouillon local reste indépendant de tout envoi réseau.</p>
+      </aside>
       <form id="submission-form" class="panel community-form" novalidate>
         <label class="field" for="submission-id"><span>Identifiant local stable</span><input id="submission-id" value="ma-contribution" required pattern="[a-z0-9][a-z0-9._-]{1,127}" maxlength="128" autocomplete="off"></label>
         <label class="field" for="submission-kind"><span>Type</span><select id="submission-kind"><option value="discussion">Discussion</option><option value="review">Avis</option><option value="comment">Commentaire</option></select></label>

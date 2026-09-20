@@ -315,6 +315,34 @@ try {
     return {failed, recovered};
   });
 
+  await runCheck('community-remote-fail-closed', async () => {
+    await navigate(cdp, 'community.html?state-proof=remote');
+    const remote = await waitFor(cdp, `(() => {
+      const panel=document.querySelector('#community-remote');
+      const status=document.querySelector('#community-remote-status');
+      const login=document.querySelector('#community-login');
+      const submit=document.querySelector('#community-submit-remote');
+      const result=document.querySelector('#community-remote-result');
+      if (!panel || !status || !login || !submit || !result) return null;
+      if (panel.dataset.remoteState==='checking') return null;
+      return {
+        state:panel.dataset.remoteState,
+        status:status.textContent.trim(),
+        loginDisabled:login.getAttribute('aria-disabled'),
+        submitDisabled:submit.disabled,
+        result:result.textContent.trim(),
+        storedDraft:localStorage.getItem('nova-forge:community:submission:v1')
+      };
+    })()`, 'community remote fail-closed');
+
+    assert(remote.state === 'unavailable', 'remote community state must stay unavailable without backend');
+    assert(remote.status === 'Service non provisionné', 'remote community unavailable label mismatch');
+    assert(remote.loginDisabled === 'true', 'remote login must stay disabled without backend');
+    assert(remote.submitDisabled === true, 'remote submit must stay disabled without backend');
+    assert(/Aucun contenu n’est envoyé en ligne/i.test(remote.result), 'remote fail-closed copy missing');
+    return remote;
+  });
+
   cdp.close();
 
   console.log(JSON.stringify({
