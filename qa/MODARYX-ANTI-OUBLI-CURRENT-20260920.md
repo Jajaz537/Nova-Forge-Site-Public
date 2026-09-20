@@ -87,7 +87,8 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | VoiceOver macOS/iOS | **PREUVE MANQUANTE** | Environnement Apple réel requis. |
 | Zoom navigateur natif 200/400 % final | **PREUVE MANQUANTE** | La lane 400 % native reste non démontrée dans l'environnement actuel. |
 | Appareils tactiles physiques | **PREUVE MANQUANTE** | Android/iOS/tablette physiques requis. |
-| Safari final + Firefox final élargi | **PREUVE MANQUANTE** | Parité finale des parcours à exécuter sur moteurs réels supportés. |
+| Firefox final élargi | **TERMINÉ — preuve ciblée** | PR #87, run `35512379997`, marker `PASS_TARGETED_FIREFOX_23_ROUTE_PROOF` : Firefox 155.0 via Playwright 1.63.0, 23 routes × desktop/mobile = 46 observations, failures `[]`; captures inspectées sans défaut visuel bloquant isolé. |
+| Safari final | **PREUVE MANQUANTE** | Environnement WebKit/Safari réel final encore requis ; aucune preuve Firefox ne valide Safari. |
 | CWV représentatifs | **PREUVE MANQUANTE** | Les budgets labo ne remplacent pas des mesures représentatives sur URL stable. |
 | Installation PWA manuelle sur appareil | **PREUVE MANQUANTE** | Le cycle HTTPS automatisé est acquis ; l'expérience d'installation utilisateur réelle reste séparée. |
 | Validation juridique / droits / licences | **PREUVE MANQUANTE** | Identité d'éditeur, contacts, droits et autorisations doivent venir de données réelles. |
