@@ -119,7 +119,7 @@ export async function getSessionIdentity(request, db, {nowMs=Date.now()} = {}) {
   if (!token || token.length < 20 || token.length > 512) return null;
   const sessionHash = await hashToken(token);
   const row = await db.prepare(
-    'SELECT identity_sub, scope_json, permissions_json, expires_at FROM modaryx_sessions WHERE session_hash = ? LIMIT 1'
+    'SELECT identity_sub, scope_json, permissions_json, created_at, expires_at FROM modaryx_sessions WHERE session_hash = ? LIMIT 1'
   ).bind(sessionHash).first();
   if (!row) return null;
 
@@ -137,6 +137,7 @@ export async function getSessionIdentity(request, db, {nowMs=Date.now()} = {}) {
     sub:row.identity_sub,
     scope:Array.isArray(scope) ? scope : [],
     permissions:Array.isArray(permissions) ? permissions : [],
+    createdAt:row.created_at,
     sessionHash
   };
 }
