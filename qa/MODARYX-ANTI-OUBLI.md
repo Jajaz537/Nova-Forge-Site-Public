@@ -319,3 +319,22 @@ Preuves ciblées PR #56 :
 - Lab Performance `35479965704` — **success**.
 
 Aucun full replay n’a été lancé. `main`, DNS, DNSSEC, IONOS et Cloudflare critique restent inchangés.
+
+
+## Activation croissance visuelle intégrée — PR #57 — 20 septembre 2026
+
+- **TERMINÉ sur le périmètre source / navigateur ciblé** — PR #57 fusionnée dans la branche Work.
+- candidat final : `8f0d61c03137cf9a4e262e1e8da8a47c1f83e813`.
+- commit d'intégration : `beb4074c6ac8eff27c6ca01f4359228f1e6ae93d`.
+- `visualGrowth.status` : `ready`.
+- environnement + 10 stades compagnon référencés.
+- activation courante uniquement, fallback composite conservé, reduced-motion conservé.
+- saison + météo réelle + heure locale appliquées aussi aux couches compagnon quand le reality sync est actif.
+- correctif performance : `VISUAL_GROWTH_DELAY_MS = 2200` après load puis idle ; budgets inchangés.
+- performance finale ciblée : **success** — index mobile LCP 2152/load 2111, catalogue mobile LCP 1816/load 1778.5, index desktop LCP 2028/load 1968.4, catalogue desktop LCP 1832/load 1776.7.
+- erreur de harnais offline `fresh source state` isolée : mock navigateur incomplet ; correction test-only ; micro-proof `PASS_TARGETED_LIVING_WORLD_OFFLINE_STATE`.
+- 11 workflows ciblés du candidat final : **success**.
+- aucun full replay.
+- `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
+- **PREUVE MANQUANTE** — validation artistique humaine du rendu intégré environnement + loup + dragon sur une preview réelle.
+- **EN COURS** — prochain point : inspection intégrée desktop/mobile + reduced-motion + interaction reality sync, puis correction ciblée uniquement si nécessaire.
