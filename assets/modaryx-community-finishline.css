@@ -15,3 +15,19 @@
 .community-remote-result{grid-column:1/-1;margin:0!important;padding:.72rem .9rem;border-left:2px solid #70a4db66;background:#70a4db09;color:#b9c7d4!important;font-size:.84rem}
 @media(max-width:860px){.community-remote-bridge{grid-template-columns:1fr}.community-remote-controls{justify-content:flex-start}}
 @media(max-width:560px){.community-remote-controls{display:grid}.community-remote-controls .button{width:100%;box-sizing:border-box;text-align:center}}
+
+.community-publications{position:relative;overflow:hidden;isolation:isolate}
+.community-publications:before{content:"";position:absolute;z-index:-1;right:-8rem;top:-10rem;width:24rem;height:24rem;border:1px solid #70a4db18;border-radius:50%;box-shadow:0 0 0 3rem #70a4db05,0 0 0 6rem #d8ad5804}
+.community-publications .section-heading{align-items:center}
+.community-public-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1.1rem}
+.community-public-card,.community-public-empty{min-width:0;border-color:#70a4db20!important;background:linear-gradient(145deg,#121713e8,#090b0ae8)!important;box-shadow:inset 0 1px #ffffff08,0 18px 50px #0004}
+.community-public-card h3,.community-public-empty h3{margin:.7rem 0 .55rem}
+.community-public-meta,.community-public-footer{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
+.community-public-target,.community-public-footer{color:#aab8c5;font-size:.8rem}
+.community-public-body{margin:.65rem 0 1rem;color:#c9d3dc;white-space:pre-wrap;overflow-wrap:anywhere}
+.community-public-footer{padding-top:.8rem;border-top:1px solid #ffffff10}
+.community-public-rating{display:inline-flex;align-items:center;justify-content:center;min-width:2.6rem;padding:.24rem .5rem;border:1px solid #d8ad5830;border-radius:999px;background:#d8ad580b;color:#e6cc96;font-weight:800}
+.community-public-empty{grid-column:1/-1}
+.community-publications[data-public-state="error"] #community-public-status{color:#d9b0a5}
+.community-publications[data-public-state="ready"] #community-public-status{color:#bdd7bf}
+@media(max-width:760px){.community-public-grid{grid-template-columns:1fr}.community-publications .section-heading{align-items:flex-start}.community-publications .section-heading .button{width:100%;text-align:center}}
