@@ -287,3 +287,45 @@ Cette section est plus récente que les sections précédentes et complète l'é
 2. Prioriser ensuite les pages/capacités locales restantes dont les états peuvent être prouvés sans backend fictif.
 3. Conserver toutes les dépendances produit dans l'anti-oubli jusqu'à livraison réelle ou blocage explicitement documenté.
 4. Full replay uniquement à la toute fin.
+
+## Mise à jour canonique — Profils + états Catalogue/Communauté — 20 septembre 2026
+
+### PR #66 — état local Profils / WebAuthn
+
+- **TERMINÉE / fusionnée** dans Work au merge `49d11667ff4530a7ce1224008abe4b80f59b9147`.
+- Candidat : `a9dd92fcf40c6e1f0d9fd800ec6ea16d6f68a52d`.
+- Workflow ciblé : `MODARYX Profiles State Browser Proof` run `35488704409` — **success**.
+- Marker : `PASS_TARGETED_PROFILES_STATE_BROWSER_PROOF`.
+- Desktop + mobile : aucun overflow horizontal dans le périmètre observé.
+- WebAuthn réel Chromium : API disponible, authentificateur plateforme non détecté, médiation conditionnelle disponible.
+- La copie UI rappelle explicitement que cette détection ne prouve ni compte, ni passkey enregistrée, ni authentification réussie.
+- Artefact de captures : ID `10597907697`.
+- Aucun backend d'identité n'a été simulé ; comptes/authentification restent **EN COURS — capacité non livrée**.
+
+### PR #67 — états dégradés Catalogue / Communauté
+
+- **TERMINÉE / fusionnée** dans Work au merge `7f512ffd8ecec90e8f8da54c7ccc6fc5525fd418`.
+- Premier run `35488709371` : **failure ciblée du harnais** — l'interception réseau de la page ne contournait pas le service worker, donc la panne de `data/catalog.json` n'était pas réellement injectée.
+- Correction ciblée QA : `Network.setBypassServiceWorker(true)` uniquement pendant l'injection de panne ; aucun changement runtime produit.
+- Micro-proof final : run `35488828426` — **success**, marker `PASS_TARGETED_CATALOG_COMMUNITY_STATES`.
+- Catalogue : état zéro résultat + reset/focus prouvés ; panne de chargement garde les 3 cartes statiques, désactive les filtres, conserve les favoris locaux ; récupération réhydrate le catalogue et conserve le favori.
+- Communauté : panne catalogue affiche les états d'indisponibilité sans perdre la copie locale ; récupération restaure les 3 choix de collection et 4 options de cible de contribution.
+- Aucun backend, aucune publication distante et aucune synchronisation distante n'ont été simulés.
+
+### État courant après PR #66 / #67
+
+- **TERMINÉ** — état local Profils/WebAuthn prouvé sur desktop/mobile Chromium.
+- **TERMINÉ** — états Catalogue vide/reset et panne/récupération avec favoris locaux.
+- **TERMINÉ** — états Communauté catalogue indisponible/récupéré.
+- **EN COURS** — finition Premium HD page par page et fermeture du registre anti-oubli.
+- **BLOQUÉ / dépendance réelle** — comptes réels, publication/modération distante et autres services externes déjà tracés.
+- **PREUVE MANQUANTE** — validation artistique humaine finale, lecteur d'écran natif, zoom natif 400 %, appareils physiques/tactile, Safari/Firefox finaux, CWV représentatifs, installation PWA manuelle et validation juridique complète.
+- Aucun full replay exécuté.
+
+## Prochain point logique actualisé
+
+1. Continuer uniquement sur les états locaux encore réellement observables et non déjà prouvés.
+2. Prioriser Creator Studio / états de schéma indisponible-récupéré ou autre surface locale non couverte, sans rejouer les preuves déjà vertes.
+3. Conserver toutes les capacités distantes dans l'anti-oubli jusqu'à livraison réelle ou blocage documenté.
+4. Ne lancer le full replay qu'à la toute fin.
+
