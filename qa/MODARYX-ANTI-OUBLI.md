@@ -256,3 +256,16 @@ Décision utilisateur explicitement retenue pour la VF :
 - Couches compagnon : **7/10 TERMINÉES**.
 - **EN COURS** — dragon adolescent / jeune adulte / adulte.
 
+## Couche compagnon — Dragon adolescent — 20 septembre 2026
+
+- **TERMINÉ** — PR #54 fusionnée dans la branche Work au commit `15e2993fa3e93c02cd69834672b97fe3ffc2cb1e`.
+- Asset : `assets/living-world/dragon-adolescent.png`.
+- Format prouvé : PNG RGBA, **1600 × 900**, alpha=true.
+- SHA-256 : `288859aba608a4c57ccdfb43ab4c4004c25b10bcecddb84e40be8f472960500f`.
+- Dérivé du dragon juvénile ; développement intermédiaire sans atteindre le jeune adulte.
+- Asset volontairement non référencé ; `visualGrowth.status=awaiting-assets` reste inchangé.
+- Preuves ciblées : Asset Gate `35477956449`, Source `35477956448`, PWA `35477956440`, Accessibility `35477956461`, Lab Performance `35477956479` — **success**.
+- Reflow `35477956465` : tentative 1 **failure** exacte `FAIL_TARGETED_BROWSER_REFLOW_MICROPROOF / fetch failed`; isolation infrastructure/loopback, aucun changement de code ; re-run ciblé du seul job échoué, tentative 2 **success**.
+- Couches compagnon : **8/10 TERMINÉES**.
+- **EN COURS** — dragon jeune adulte / adulte.
+
