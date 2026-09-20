@@ -396,3 +396,86 @@ Cette section est plus récente que les sections précédentes et complète l'é
 3. Fermer séparément les preuves externes lorsqu’un environnement approprié existe.
 4. Conserver chaque capacité distante dans l’anti-oubli avec son statut réel ; aucune suppression implicite.
 5. Full replay uniquement à la toute fin.
+
+
+## Mise à jour canonique — revue statique Premium HD + anti-oubli courant — 20 septembre 2026
+
+Cette section est plus récente que les sections précédentes et les complète sans effacer leur historique.
+
+### Git frais et PR #74 — surfaces statiques
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après intégration : `29fab6f549c5d9192359c0e8c9cbad2d4edec39a`.
+- PR #74 `chatgpt/modaryx-static-premium-review-20260920` : **TERMINÉE / fusionnée dans Work**.
+- La PR #74 ne modifie aucun runtime ni aucune page publique : elle ajoute uniquement un harnais QA et son workflow ciblé.
+- `main`, DNS, DNSSEC, nameservers, IONOS et configuration Cloudflare critique : inchangés.
+- Aucun full replay exécuté.
+
+### Incident ciblé puis micro-proof final
+
+Première tentative, run `35508729216` : **failure ciblée**.
+
+Erreur exacte :
+
+- `games desktop: hero not visible`
+- `games mobile: hero not visible`
+
+Isolation :
+
+- aucun overflow, aucune image cassée ni aucun contrôle coupé n'était observé sur `/games/` ;
+- la page Jeux utilise volontairement la composition `.games-intro`, pas la classe générique `.hero` ;
+- l'échec provenait donc d'une hypothèse trop étroite du harnais QA, pas d'une régression produit démontrée.
+
+Correction ciblée :
+
+- le sélecteur du harnais reconnaît désormais `.games-intro` comme composition d'ouverture de la page Jeux ;
+- aucun fichier runtime produit n'a été modifié.
+
+Micro-proof final :
+
+- run `35508894415` — **success** ;
+- marker : `PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW` ;
+- surfaces : Écosystème, Sécurité, Documentation, Jeux et 404 ;
+- cadres : desktop **1440×1000** + mobile **390×844** ;
+- 10/10 cas : overflow horizontal **0** ;
+- images cassées : **0** ;
+- contrôles visibles coupés hors viewport : **0** ;
+- H1 et composition d'ouverture visibles sur les 10 cas.
+
+Les 10 captures du run corrigé ont été inspectées de façon assistée. Aucun défaut de composition bloquant n'a été isolé dans ce périmètre. Cette inspection ne remplace pas la validation artistique humaine finale.
+
+### Registre anti-oubli courant — PR #75
+
+La PR #75 prépare un registre courant séparé :
+
+- `qa/MODARYX-ANTI-OUBLI-CURRENT-20260920.md` = lecture courante prioritaire ;
+- `qa/MODARYX-ANTI-OUBLI.md` = historique détaillé / provenance conservée ;
+- les anciens compteurs de couches, `awaiting-assets`, anciennes couvertures 16 pages et anciens états PWA/CodeQL sont explicitement marqués comme supersédés lorsqu'une preuve plus récente existe ;
+- chaque idée récupérée reste classée **TERMINÉ**, **EN COURS**, **BLOQUÉ** ou **PREUVE MANQUANTE** ;
+- la Master Nova Design Intelligence complète reste **PREUVE MANQUANTE / NON RÉCUPÉRÉE** et aucune entrée perdue n'est inventée.
+
+### SEO autonome
+
+- 404 : `noindex,nofollow` volontaire et correct ; aucun canonical artificiel ajouté.
+- `/games/` : canonical courant présent.
+- `/games/` reste absent de `sitemap.xml`.
+- Cet écart reste **EN COURS / garde à respecter** : ne pas modifier `sitemap.xml` sans lever explicitement la protection déjà tracée autour de ce fichier.
+
+### État courant après PR #74
+
+- **TERMINÉ — preuve ciblée navigateur** — cinq surfaces statiques Écosystème / Sécurité / Documentation / Jeux / 404, desktop + mobile.
+- **TERMINÉ sur leurs scénarios ciblés** — Recherche, Téléchargements, Profils, Catalogue, Communauté, Creator Studio, Project Hub et Accueil.
+- **TERMINÉ — périmètre ciblé** — monde vivant, croissance visuelle, reduced-motion et cycle PWA HTTPS automatisé déjà documentés.
+- **EN COURS** — consolidation documentaire anti-oubli PR #75 et finition Premium HD globale uniquement sur les écarts réels encore identifiés.
+- **BLOQUÉ / dépendance réelle** — comptes, publication/modération distante, artefacts/signatures, météo production, Storage Resolver, Repair Network, OS Bridge réel, corpus/droits GTA VI/RDR2.
+- **PREUVE MANQUANTE** — validation artistique humaine finale, lecteur d'écran natif, zoom natif 400 %, appareils physiques/tactile, Safari final, Firefox final élargi, CWV représentatifs, installation PWA manuelle, validation juridique complète et Master NDI complète.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Intégrer le registre anti-oubli courant de la PR #75 après vérification de collision.
+2. Ne pas rejouer les scénarios locaux ou la revue statique déjà verts sans modification pertinente.
+3. Continuer uniquement les écarts Premium HD réellement isolés par une preuve fraîche.
+4. Garder l'écart `/games/` → sitemap tracé sans modifier le fichier gardé sans autorisation explicite.
+5. Fermer les preuves externes lorsque les environnements appropriés deviennent disponibles.
+6. Full replay uniquement une fois, à la toute fin.

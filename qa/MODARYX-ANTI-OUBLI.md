@@ -1,4 +1,4 @@
-# MODARYX — Registre anti-oubli de la finition Premium HD
+> **LECTURE COURANTE PRIORITAIRE — 20 septembre 2026 :** pour l'état anti-oubli actuel, lire d'abord [MODARYX-ANTI-OUBLI-CURRENT-20260920.md](./MODARYX-ANTI-OUBLI-CURRENT-20260920.md). Le présent fichier conserve l'historique détaillé et les preuves de provenance ; ses anciens compteurs/statuts peuvent être supersédés par le registre courant.\n\n# MODARYX — Registre anti-oubli de la finition Premium HD
 
 Revue documentaire et lecture des sources, 15 septembre 2026. Référence de périmètre : `CHECKPOINT-CANONIQUE-NOVA-FORGE-MODARYX-2026-09-15.md`. Candidat : PR #12. **Cette revue ne constitue ni une recette navigateur ni une déclaration de VF.**
 
