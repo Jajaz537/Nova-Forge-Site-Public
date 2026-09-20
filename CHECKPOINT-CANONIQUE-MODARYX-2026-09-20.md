@@ -803,3 +803,44 @@ Cette section est la lecture la plus récente pour la preuve Firefox.
 2. Garder Safari explicitement PREUVE MANQUANTE jusqu'à preuve séparée.
 3. Continuer uniquement les preuves externes/humaines ou capacités produit réellement non livrées.
 4. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — PR #89 — WebKit 23 routes — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour le préflight WebKit.
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #89 : `99cb2b981a58c00d6c3b625855c2c84ed47d3ce1`.
+- `main` n'a pas été modifiée.
+- Aucun sitemap, DNS, DNSSEC, nameserver, IONOS, secret ou réglage Cloudflare critique modifié.
+- Aucun full replay final exécuté.
+
+### PR #89 — WebKit 23 routes
+
+- **TERMINÉE / fusionnée dans Work** au merge `99cb2b981a58c00d6c3b625855c2c84ed47d3ce1`.
+- Run `35514304174` — **success**.
+- Marker exact : `PASS_TARGETED_WEBKIT_23_ROUTE_PREFLIGHT`.
+- Moteur : **WebKit 26.6** via **Playwright 1.63.0**.
+- Couverture : **23 routes × 2 viewports = 46 observations**.
+- Viewports : desktop 1440×1000 et mobile 390×844.
+- Service worker bloqué pour isoler rendu/routing ; `reducedMotion: reduce` utilisé pour stabiliser la capture.
+- Résultat : `failures: []`, zéro overflow horizontal, zéro image cassée, zéro contrôle coupé et aucune erreur JavaScript non interceptée relevée.
+- Les 46 captures pleine page ont été inspectées de façon assistée ; aucun défaut visuel bloquant n'a été isolé.
+- Artefact du run : `modaryx-webkit-23-route-6a618bcf27d86c1bb995c0fb2fb87c86e8074191`, digest `sha256:d8433bb71b307c76ccac693db23a19ecb4fed7c78a80b8099e5f24056b79210e`.
+
+### Limite impérative
+
+- **TERMINÉ — préflight WebKit ciblé** : signal de compatibilité moteur sur les 23 routes.
+- **PREUVE MANQUANTE — Safari final** : WebKit Playwright n'est pas Safari et ne ferme pas cette preuve.
+- Firefox ciblé reste séparément TERMINÉ via PR #87.
+- Aucun de ces résultats ne remplace appareil physique, lecteur d'écran natif, zoom navigateur natif 400 %, CWV terrain ou full replay final.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Conserver Firefox et le préflight WebKit fermés tant qu'aucune modification pertinente ne justifie un nouveau test.
+2. Garder Safari final explicitement PREUVE MANQUANTE jusqu'à preuve Safari réelle.
+3. Continuer uniquement les preuves externes/humaines ou capacités produit réellement non livrées.
+4. Aucun full replay avant la toute fin.
