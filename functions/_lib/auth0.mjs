@@ -6,8 +6,7 @@ const CACHE_MS = 5 * 60 * 1000;
 function decodeBase64Url(value) {
   const normalized = value.replace(/-/g, '+').replace(/_/g, '/');
   const padded = normalized + '='.repeat((4 - normalized.length % 4) % 4);
-  const bytes = Uint8Array.from(atob(padded), (char) => char.charCodeAt(0));
-  return bytes;
+  return Uint8Array.from(atob(padded), (char) => char.charCodeAt(0));
 }
 
 function decodeJson(value) {
@@ -35,10 +34,38 @@ async function fetchJwks(issuer, fetchImpl) {
   return body.keys;
 }
 
+function value(env, name) {
+  return typeof env?.[name] === 'string' ? env[name].trim() : '';
+}
+
 export function bearerToken(request) {
   const header = request?.headers?.get?.('authorization') || '';
   const match = /^Bearer\s+([^\s]+)$/i.exec(header);
   return match ? match[1] : null;
+}
+
+export function auth0LoginConfig(env = {}) {
+  const issuer = normalizeIssuer(env.AUTH0_ISSUER_BASE_URL);
+  const audience = value(env,'AUTH0_AUDIENCE');
+  const clientId = value(env,'AUTH0_CLIENT_ID');
+  const clientSecret = value(env,'AUTH0_CLIENT_SECRET');
+  if (!issuer || !audience || !clientId || !clientSecret) return null;
+  return {issuer,audience,clientId,clientSecret};
+}
+
+export function buildAuth0AuthorizationUrl({env = {}, redirectUri, state, codeChallenge}) {
+  const config = auth0LoginConfig(env);
+  if (!config) return null;
+  const url = new URL('authorize', config.issuer);
+  url.searchParams.set('response_type','code');
+  url.searchParams.set('client_id',config.clientId);
+  url.searchParams.set('redirect_uri',redirectUri);
+  url.searchParams.set('scope','openid profile email');
+  url.searchParams.set('audience',config.audience);
+  url.searchParams.set('state',state);
+  url.searchParams.set('code_challenge',codeChallenge);
+  url.searchParams.set('code_challenge_method','S256');
+  return url;
 }
 
 export async function verifyAuth0AccessToken({
@@ -48,7 +75,7 @@ export async function verifyAuth0AccessToken({
   nowSeconds = Math.floor(Date.now() / 1000)
 }) {
   const issuer = normalizeIssuer(env.AUTH0_ISSUER_BASE_URL);
-  const audience = typeof env.AUTH0_AUDIENCE === 'string' ? env.AUTH0_AUDIENCE.trim() : '';
+  const audience = value(env,'AUTH0_AUDIENCE');
   if (!issuer || !audience) return {ok: false, status: 503, reason: 'auth0-not-configured'};
   if (typeof token !== 'string' || token.length < 20 || token.length > 8192) {
     return {ok: false, status: 401, reason: 'bearer-token-invalid'};
@@ -112,5 +139,60 @@ export async function verifyAuth0AccessToken({
       permissions: Array.isArray(payload.permissions) ? payload.permissions.filter((item) => typeof item === 'string') : []
     },
     claims: payload
+  };
+}
+
+export async function exchangeAuth0AuthorizationCode({
+  env = {},
+  code,
+  codeVerifier,
+  redirectUri,
+  fetchImpl = fetch
+}) {
+  const config = auth0LoginConfig(env);
+  if (!config) return {ok:false,status:503,reason:'auth0-login-not-configured'};
+  if (typeof code !== 'string' || !code || typeof codeVerifier !== 'string' || !codeVerifier) {
+    return {ok:false,status:400,reason:'authorization-code-invalid'};
+  }
+
+  const body = new URLSearchParams();
+  body.set('grant_type','authorization_code');
+  body.set('client_id',config.clientId);
+  body.set('client_secret',config.clientSecret);
+  body.set('code',code);
+  body.set('code_verifier',codeVerifier);
+  body.set('redirect_uri',redirectUri);
+
+  let response;
+  let payload;
+  try {
+    response = await fetchImpl(new URL('oauth/token', config.issuer), {
+      method:'POST',
+      headers:{
+        'accept':'application/json',
+        'content-type':'application/x-www-form-urlencoded'
+      },
+      body
+    });
+    payload = await response.json();
+  } catch {
+    return {ok:false,status:503,reason:'auth0-token-exchange-unavailable'};
+  }
+  if (!response.ok || typeof payload?.access_token !== 'string') {
+    return {ok:false,status:401,reason:'auth0-token-exchange-rejected'};
+  }
+
+  const verified = await verifyAuth0AccessToken({
+    token:payload.access_token,
+    env,
+    fetchImpl
+  });
+  if (!verified.ok) return verified;
+
+  return {
+    ok:true,
+    status:200,
+    reason:null,
+    identity:verified.identity
   };
 }
