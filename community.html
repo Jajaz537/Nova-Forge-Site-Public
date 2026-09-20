@@ -94,6 +94,26 @@
         <div id="community-turnstile" class="community-turnstile" hidden aria-label="Vérification anti-abus"></div>
         <p class="community-remote-result" id="community-remote-result" role="status" aria-live="polite">Le brouillon local reste indépendant de tout envoi réseau.</p>
       </aside>
+      <aside class="community-followup" id="community-followup" data-followup-state="idle" aria-labelledby="community-followup-title">
+        <div class="community-followup-heading">
+          <div><p class="eyebrow">Suivi & recours</p><h3 id="community-followup-title">Suivre une contribution distante.</h3></div>
+          <span class="community-followup-badge" id="community-followup-badge" role="status" aria-live="polite">Prêt</span>
+        </div>
+        <div class="community-followup-search">
+          <label class="field" for="community-followup-id"><span>Référence de contribution</span><input id="community-followup-id" autocomplete="off" placeholder="submission-…" pattern="submission-[a-z0-9-]{16,96}" maxlength="107"></label>
+          <button class="button" id="community-followup-check" type="button">Vérifier l’état</button>
+        </div>
+        <p class="community-followup-status" id="community-followup-status">Connectez-vous puis utilisez la référence reçue après l’envoi. Seules vos propres contributions peuvent être consultées ici.</p>
+        <div class="community-followup-summary" id="community-followup-summary" hidden>
+          <div><span>Modération</span><strong id="community-followup-moderation">—</strong></div>
+          <div><span>Publication</span><strong id="community-followup-publication">—</strong></div>
+          <p id="community-followup-reason">Aucune décision détaillée disponible.</p>
+        </div>
+        <div class="community-appeal-panel" id="community-appeal-panel" hidden>
+          <label class="field" for="community-appeal-grounds"><span>Motif du recours</span><textarea id="community-appeal-grounds" maxlength="8000" rows="4" placeholder="Expliquez précisément pourquoi vous contestez la décision."></textarea></label>
+          <div class="community-appeal-actions"><button class="button" id="community-appeal-submit" type="button">Envoyer le recours</button><span id="community-appeal-status" role="status" aria-live="polite"></span></div>
+        </div>
+      </aside>
       <form id="submission-form" class="panel community-form" novalidate>
         <label class="field" for="submission-id"><span>Identifiant local stable</span><input id="submission-id" value="ma-contribution" required pattern="[a-z0-9][a-z0-9._-]{1,127}" maxlength="128" autocomplete="off"></label>
         <label class="field" for="submission-kind"><span>Type</span><select id="submission-kind"><option value="discussion">Discussion</option><option value="review">Avis</option><option value="comment">Commentaire</option></select></label>
