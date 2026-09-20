@@ -72,7 +72,8 @@ jobs:
                   break;
                 }
               }
-            ')"            if test -n "$PREVIEW"; then
+            ')"
+            if test -n "$PREVIEW"; then
               echo "MODARYX_VISUAL_ORIGIN=$PREVIEW" >> "$GITHUB_ENV"
               echo "Resolved preview: $PREVIEW"
               exit 0
