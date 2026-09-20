@@ -50,7 +50,7 @@ const requiredCurrent = [
   'UI compte / profil premium | **TERMINÉ — preuve ciblée de code**',
   'PASS_TARGETED_PROFILES_ACCOUNT_UI',
   'MODARYX-PROFILES-ACCOUNT-UI-20260920.md',
-  'UI communauté distante modérée | **TERMINÉ — preuve ciblée de code**',
+  'UI communauté distante modérée | **TERMINÉ — envoi + surface publique + suivi/recours ciblés**',
   'PASS_TARGETED_COMMUNITY_REMOTE_UI',
   'MODARYX-COMMUNITY-REMOTE-UI-20260920.md',
   'Provider DEV réel + micro-proofs bout-en-bout | **TERMINÉ — périmètre profils + ingestion communautaire**',
