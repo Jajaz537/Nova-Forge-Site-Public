@@ -1112,3 +1112,96 @@ Donc :
 3. Ne jamais déverrouiller la distribution sur un receipt local bien formé.
 4. Continuer uniquement les preuves externes ou capacités avec entrées réelles.
 5. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — PR #97 — comptes / profils / communauté — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour les contrats comptes, profils et write-intents communautaires.
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #97 : `db7b333f12b9f7aeef2dce4239857439d1c07f8c`.
+- `main` n'a pas été modifiée.
+- Aucun tenant, backend, profil distant, publication distante, secret, sitemap ou infrastructure critique activé.
+- Aucun full replay final exécuté.
+
+### Sources contractuelles
+
+- `schemas/public-profile.schema.json`
+- `schemas/account-security.schema.json`
+- `schemas/community-submission.schema.json`
+- `schemas/community-write.schema.json`
+- `data/integration-readiness.json`
+
+Les identifiants historiques Nova Forge des schémas restent conservés pour compatibilité/provenance ; ils ne fusionnent pas l'identité MODARYX avec Nova Forge.
+
+### PR #97 — preuve contractuelle
+
+- **TERMINÉE / fusionnée dans Work** au merge `db7b333f12b9f7aeef2dce4239857439d1c07f8c`.
+- Checker : `qa/check-account-community-contracts.cjs`.
+- Document : `qa/MODARYX-ACCOUNT-COMMUNITY-CONTRACT-20260920.md`.
+
+Première tentative, run `35517153887` :
+- nouveau checker comptes/communauté : **PASS** ;
+- garde anti-oubli : **FAIL** ;
+- erreur exacte : ancien libellé `Publication / modération distante | **EN COURS — contrats receipts acquis, backend distant non connecté**` encore exigé par la garde après évolution du registre.
+
+Isolation :
+- registre courant correct ;
+- contrats corrects ;
+- seul un token stale du checker anti-oubli était en cause.
+
+Correction ciblée :
+- suppression du token stale uniquement ;
+- aucun schéma ou runtime modifié.
+
+Micro-proof final, run `35517194516` — **success** :
+- `PASS_TARGETED_SITE_FIRST_SOURCE_PROOF`
+- `PASS_TARGETED_INTEGRATION_READINESS`
+- `PASS_TARGETED_STORAGE_REPAIR_CONTRACTS`
+- `PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS`
+- `PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS`
+- `PASS_TARGETED_SEO_CONTRACT`
+- `PASS_TARGETED_ANTI_OUBLI_GATE`
+- `failures: []`.
+
+### Invariants désormais protégés
+
+Profil public :
+- visibilité explicite `public | unlisted | private` ;
+- champs publics bornés ;
+- aucun profil réel n'est inféré de la seule présence du schéma.
+
+Sécurité compte :
+- aucune clé privée demandée ou stockée ;
+- passkeys représentées uniquement par des enregistrements publics ;
+- sessions révocables ;
+- actions privilégiées avec réauthentification obligatoire ;
+- récupération bornée par états explicites.
+
+Communauté :
+- brouillon local = `local-only / local-draft / not-submitted` ;
+- write-intent provider-neutral ;
+- Abuse Shield obligatoire ;
+- un état `blocked` ne peut pas router directement vers `accepted`.
+
+### Readiness conservée
+
+- `accounts.profiles = not-connected`
+- `community.publication-moderation = local-only`
+
+Donc :
+- **TERMINÉ — contrats compte/profil ciblés** ;
+- **TERMINÉ — contrats brouillon/write-intent ciblés** ;
+- **EN COURS — identité/passkeys réels** ;
+- **EN COURS — profils publics éditables distants** ;
+- **EN COURS — publication/modération distante réelle** ;
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Ne plus traiter les contrats compte/profil/community-write comme absents.
+2. Garder les services réels EN COURS tant que tenant/backend/stockage distant ne sont pas connectés.
+3. Examiner ensuite le verrou local de distribution/téléchargements sans inventer d'artefact réel.
+4. Aucun full replay avant la toute fin.
