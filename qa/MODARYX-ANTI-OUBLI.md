@@ -338,3 +338,42 @@ Aucun full replay n’a été lancé. `main`, DNS, DNSSEC, IONOS et Cloudflare c
 - `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
 - **PREUVE MANQUANTE** — validation artistique humaine du rendu intégré environnement + loup + dragon sur une preview réelle.
 - **EN COURS** — prochain point : inspection intégrée desktop/mobile + reduced-motion + interaction reality sync, puis correction ciblée uniquement si nécessaire.
+
+---
+
+## Synthèse fraîche anti-oubli — 20 septembre 2026 — après PR #61
+
+**Cette synthèse est la lecture courante du registre.** Les sections historiques ci-dessus restent conservées pour provenance mais leurs anciens libellés `awaiting-assets`, nombres de couches incomplets ou anciennes PREUVE MANQUANTE ne doivent pas être interprétés comme l'état actuel lorsqu'une ligne ci-dessous les supersède.
+
+| Élément suivi | État courant | Preuve / règle |
+|---|---|---|
+| Environnement séparé Premium HD | **TERMINÉ** | Asset réel intégré au bundle de croissance. |
+| Loup — 5 stades | **TERMINÉ 5/5** | bébé → juvénile → adolescent → jeune adulte → adulte. |
+| Dragon — 5 stades | **TERMINÉ 5/5** | bébé → juvénile → adolescent → jeune adulte → adulte. |
+| Activation croissance visuelle | **TERMINÉ — périmètre ciblé** | `visualGrowth.status=ready`, environnement + 10 assets référencés. |
+| Preview HTTPS du monde vivant | **TERMINÉ — preuve ciblée** | Run `35483330153`, marker `PASS_TARGETED_PREVIEW_VISUAL_CAPTURE`, desktop + mobile + reduced-motion. |
+| Reduced motion du monde vivant | **TERMINÉ — preuve ciblée déployée** | animation couches `none`, transitions `0s` dans le cas reduced-motion. |
+| Saison + heure locale via contexte grossier | **TERMINÉ — preuve ciblée déployée** | reality sync `active`, source `cloudflare-coarse`, saison/daypart observés. |
+| Météo réelle production | **BLOQUÉ / décision externe** | Fournisseur, licence, attribution et confidentialité à valider ; aucune activation silencieuse. |
+| Validation artistique humaine finale | **PREUVE MANQUANTE** | Captures réelles disponibles et inspectées de façon assistée, mais validation humaine finale distincte. |
+| CodeQL PR #12 | **TERMINÉ sur les constats actuellement ouverts** | Run `35484967852` success ; 11/11 threads historiques résolus. |
+| Finition Premium HD 17 pages | **EN COURS** | Poursuivre page par page ; une page n'hérite pas automatiquement de la preuve d'une autre. |
+| Accessibilité externe | **PREUVE MANQUANTE** | Lecteur d'écran natif, 400 % réel, tactile/appareils physiques à fermer. |
+| PWA réelle HTTPS | **PREUVE MANQUANTE** | Installation/update/offline/online sur environnement réel à fermer. |
+| CWV représentatifs | **PREUVE MANQUANTE** | Les budgets labo ciblés déjà verts ne remplacent pas les données représentatives réelles. |
+| Validation juridique complète | **PREUVE MANQUANTE** | Ne pas inventer identité légale, droits ou attestations. |
+| Comptes / authentification | **EN COURS — capacité non livrée** | Backend d'identité réel requis. |
+| Publication / modération distante | **EN COURS — capacité non livrée** | Backend sécurisé réel requis. |
+| Storage Resolver | **EN COURS — capacité non livrée / dépendance service** | Aucun faux service. |
+| Repair Network | **EN COURS — capacité non livrée / dépendance protocole** | Aucun faux protocole/endpoints. |
+| OS Bridge | **EN COURS — capacité non livrée / dépendance Nova Forge OS** | Produits distincts ; attendre une interface publique stabilisée. |
+| Téléchargements réels | **BLOQUÉ** | Artefacts + identité + hash + provenance + signature lorsque requise. |
+| GTA 6 / RDR2 / catégories / guides | **EN COURS — capacité non livrée** | Contenu substantiel, sources et droits nécessaires ; aucune page SEO vide. |
+| Guide MODARYX connecté | **EN COURS — capacité non livrée** | Ne pas confondre avec Nova Guide des OS. |
+
+### Règle de fermeture
+
+Avant la VF, chaque entrée retenue doit finir dans l'un de ces états documentés : **TERMINÉ**, **EN COURS**, **BLOQUÉ** ou **PREUVE MANQUANTE**. Rien n'est supprimé implicitement pour faire monter un pourcentage.
+
+PR #58, #59, #60 et #61 sont des lots QA/sécurité/preuve ; ils ne transforment pas une capacité produit distante en fonctionnalité livrée. Aucun full replay n'a été exécuté pendant leur fermeture.
+
