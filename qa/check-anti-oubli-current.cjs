@@ -29,7 +29,7 @@ const requiredCurrent = [
   'PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS',
   'Comptes / authentification / passkeys réels | **EN COURS — login/callback/session DEV réels prouvés ; passkey finale non prouvée**',
   'Profils publics éditables | **TERMINÉ — parcours DEV bout-en-bout ciblé**',
-  'Publication / modération distante | **EN COURS — ingestion distante DEV réelle prouvée ; modération/publication finale non connectée**',
+  'Publication / modération distante | **EN COURS — moteur complet codé/prouvé ; activation fournisseur DEV restante**',
   'PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS',
   'Téléchargements publics réels | **BLOQUÉ — verrou local prouvé, artefact réel absent**',
   'PASS_TARGETED_DISTRIBUTION_LOCK_CONTRACTS',
@@ -40,7 +40,7 @@ const requiredCurrent = [
   'MODARYX-WORK-PHASE2-EXTERNAL-EVIDENCE-20260920.md',
   'PASS_TARGETED_BACKEND_DEV_FOUNDATION',
   'MODARYX-BACKEND-DEV-PROVISIONING-20260920.md',
-  'Backend communautaire | **EN COURS — Provider DEV réel et write path prouvés ; cycle de modération final non livré**',
+  'Backend communautaire | **EN COURS — Provider DEV + writes réels ; moteur modération/recours codé, activation réelle restante**',
   'Endpoints profils / communauté distants | **TERMINÉ — code + micro-proofs provider DEV**',
   'PASS_TARGETED_REMOTE_WRITE_ENDPOINTS',
   'MODARYX-REMOTE-WRITE-ENDPOINTS-20260920.md',
@@ -50,10 +50,13 @@ const requiredCurrent = [
   'UI compte / profil premium | **TERMINÉ — preuve ciblée de code**',
   'PASS_TARGETED_PROFILES_ACCOUNT_UI',
   'MODARYX-PROFILES-ACCOUNT-UI-20260920.md',
-  'UI communauté distante modérée | **TERMINÉ — preuve ciblée de code**',
+  'UI communauté distante modérée | **TERMINÉ — envoi + surface publique + suivi/recours ciblés**',
   'PASS_TARGETED_COMMUNITY_REMOTE_UI',
   'MODARYX-COMMUNITY-REMOTE-UI-20260920.md',
-  'Provider DEV réel + micro-proofs bout-en-bout | **TERMINÉ — périmètre ciblé**',
+  'Provider DEV réel + micro-proofs bout-en-bout | **TERMINÉ — périmètre profils + ingestion communautaire**',
+  'Moteur modération / publication / recours | **TERMINÉ — code + preuves ciblées ; provider réel restant**',
+  'PASS_TARGETED_MODERATION_PUBLICATION_ENGINE',
+  'MODARYX-MODERATION-PUBLICATION-ENGINE-20260921.md',
   '403 turnstile-rejected',
   '403 turnstile-hostname-mismatch'
 ];
@@ -69,6 +72,8 @@ const forbiddenCurrent = [
   'Profils publics éditables | **EN COURS — écriture profil DEV réelle prouvée ; exposition publique complète non fermée**',
   'Publication / modération distante | **EN COURS — UI d’envoi + endpoint codés, modération distante non provisionnée**',
   'Backend communautaire | **EN COURS — fondation + endpoints + session BFF codés, ressources non provisionnées**',
+  'Publication / modération distante | **EN COURS — ingestion distante DEV réelle prouvée ; modération/publication finale non connectée**',
+  'Backend communautaire | **EN COURS — Provider DEV réel et write path prouvés ; cycle de modération final non livré**',
   'Sitemap des routes jeux/hubs | **EN COURS — garde explicite**'
 ];
 for (const token of forbiddenCurrent) assert.ok(!ledger.includes(token), 'stale current state returned: ' + token);
@@ -118,6 +123,9 @@ assert.ok(checkpoint.includes('## Mise à jour canonique — PR #118 — sitemap
 assert.ok(checkpoint.includes('TERMINÉ — sitemap MODARYX complet sur les 22 canonicals indexables'));
 assert.ok(checkpoint.includes('## Mise à jour canonique — micro-preuve profil public DEV — 21 septembre 2026'));
 assert.ok(checkpoint.includes('TERMINÉ — parcours profil public DEV bout-en-bout ciblé'));
+assert.ok(checkpoint.includes('## Mise à jour canonique — PR #121 à #123 — modération, publication et recours — 21 septembre 2026'));
+assert.ok(checkpoint.includes('TERMINÉ — moteur modération / publication / recours en code avec preuves ciblées'));
+assert.ok(checkpoint.includes('5403b265f3fd3300960db476ffbbe9bce1f0649c'));
 assert.ok(checkpoint.includes('Aucune VF / aucun 100 % déclaré.'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
 
