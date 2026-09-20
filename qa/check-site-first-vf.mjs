@@ -57,10 +57,37 @@ function attr(tag, name) {
 }
 
 function visibleText(fragment) {
-  return fragment
-    .replace(/<script\b[\s\S]*?<\/script>/gi, '')
-    .replace(/<style\b[\s\S]*?<\/style>/gi, '')
-    .replace(/<[^>]+>/g, ' ')
+  let text = '';
+  let index = 0;
+  let blockedTag = null;
+
+  while (index < fragment.length) {
+    if (fragment[index] !== '<') {
+      if (!blockedTag) text += fragment[index];
+      index += 1;
+      continue;
+    }
+
+    const end = fragment.indexOf('>', index + 1);
+    if (end < 0) break;
+
+    const rawTag = fragment.slice(index + 1, end).trim();
+    const closing = rawTag.startsWith('/');
+    const nameSource = closing ? rawTag.slice(1).trimStart() : rawTag;
+    const nameMatch = nameSource.match(/^[A-Za-z][A-Za-z0-9:-]*/);
+    const name = nameMatch?.[0]?.toLowerCase() || '';
+
+    if (!closing && (name === 'script' || name === 'style')) {
+      blockedTag = name;
+    } else if (closing && blockedTag === name) {
+      blockedTag = null;
+    }
+
+    text += ' ';
+    index = end + 1;
+  }
+
+  return text
     .replace(/&nbsp;/gi, ' ')
     .replace(/\s+/g, ' ')
     .trim();
