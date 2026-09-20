@@ -13,6 +13,12 @@ const pages=[
   {id:'security',path:'security.html'},
   {id:'documentation',path:'documentation.html'},
   {id:'games',path:'games/index.html'},
+  {id:'gta-6',path:'gta-6/index.html'},
+  {id:'gta-6-mods',path:'gta-6/mods/index.html'},
+  {id:'gta-6-guides',path:'gta-6/guides/index.html'},
+  {id:'rdr2',path:'red-dead-redemption-2/index.html'},
+  {id:'rdr2-mods',path:'red-dead-redemption-2/mods/index.html'},
+  {id:'rdr2-guides',path:'red-dead-redemption-2/guides/index.html'},
   {id:'404',path:'404.html'}
 ];
 const viewports=[
