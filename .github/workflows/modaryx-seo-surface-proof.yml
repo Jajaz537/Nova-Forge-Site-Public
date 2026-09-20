@@ -1,0 +1,40 @@
+name: MODARYX SEO Surface Proof
+
+on:
+  pull_request:
+    branches:
+      - design/modaryx-premium-hd-20260914-work
+    paths:
+      - '.github/workflows/modaryx-seo-surface-proof.yml'
+      - 'qa/check-seo-surface.mjs'
+      - '*.html'
+      - 'games/**'
+      - 'sitemap.xml'
+      - 'robots.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-seo-surface-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  seo-surface:
+    name: Canonical and sitemap proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Run targeted SEO surface proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --version
+          node qa/check-seo-surface.mjs
