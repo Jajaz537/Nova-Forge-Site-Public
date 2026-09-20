@@ -1,6 +1,6 @@
 # MODARYX — ANTI-OUBLI COURANT CANONIQUE — 20 septembre 2026
 
-**Base Git vérifiée avant cette synchronisation :** `design/modaryx-premium-hd-20260914-work` @ `7c24371c1fb4b00d01671e599111ec8ecb342688`.  
+**Base Git vérifiée avant la fermeture sitemap :** `design/modaryx-premium-hd-20260914-work` @ `8b0d0d91c08b3e84b24ce1b698c58382f7bb696d`.  
 **Statut :** registre courant prioritaire pour la fermeture anti-oubli.  
 **Portée :** MODARYX / MODARYX MODS uniquement. Nova Forge OS reste un produit distinct.  
 **Règle :** ce document n'efface pas l'historique ; il supersède seulement les anciens états devenus obsolètes.
@@ -61,7 +61,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Index `/games/` | **TERMINÉ — périmètre actuel** | Trois jeux de démonstration, canonical explicite, recette navigateur ciblée. |
 | Fiches de créations | **TERMINÉ — périmètre local ciblé** | Fallback/récupération et navigation documentés ; galerie réelle, versions distribuées et compatibilité mesurée restent absentes. |
 | SEO on-page des 23 routes | **TERMINÉ — preuve ciblée** | PR #82, run `35511580074`, marker `PASS_TARGETED_SEO_CONTRACT` : 22 pages indexables avec titres/descriptions/canonicals uniques et exacts ; 404 en `noindex,nofollow` sans canonical. |
-| Sitemap des routes jeux/hubs | **EN COURS — garde explicite** | 7 URLs connues restent absentes : `/games/` + les six hubs GTA VI/RDR2. Le checker borne exactement ce gap ; ne pas modifier `sitemap.xml` sans lever explicitement sa garde. |
+| Sitemap des routes jeux/hubs | **TERMINÉ — preuve ciblée** | PR #118 : les 22 canonicals indexables sont présents dans `sitemap.xml`, sans URL manquante, extra ni doublon ; run source initial `35541619985` — success. |
 | Hubs GTA VI / RDR2, catégories et guides éditoriaux | **TERMINÉ — périmètre éditorial sourcé + readiness contractuelle** | Six routes livrées via PR #76 ; PR #81 classe `game-hubs.gta6-rdr2` en `contract-ready` et sépare `game-corpus.gta6-rdr2` en `blocked-inputs`. Aucun support PC/mod GTA VI supposé, aucun média Rockstar copié, aucun faux téléchargement. |
 
 ## 5. Capacités retenues non livrées
@@ -146,7 +146,7 @@ Aucune idée n'est supprimée implicitement pour améliorer un pourcentage. Une 
 1. Considérer le Provider DEV ciblé comme **TERMINÉ** ; ne pas le rejouer sans modification pertinente.
 2. Ne pas rejouer les preuves déjà vertes sur les 23 routes et ne pas retoucher le design sans défaut frais reproduit ou décision artistique explicite.
 3. Fermer les écarts produit encore réels sans les simuler : passkey finale, exposition publique des profils, moteur de modération/publication, corpus réels, distribution, Storage Resolver, Repair Network, Guide et pont OS selon leurs dépendances.
-4. Garder le sitemap protégé inchangé tant que sa garde n'est pas explicitement levée ; le gap SEO reste tracé séparément.
+4. Considérer le sitemap des routes indexables comme **TERMINÉ** ; ne le rouvrir que si une nouvelle route canonique indexable est ajoutée.
 5. Garder météo réelle production **BLOQUÉE** tant que licence/confidentialité/attribution/disclaimer ne sont pas validés.
 6. Fermer séparément les preuves humaines/externes (lecteurs d’écran natifs, zoom 400 %, appareils physiques, Safari réel, PWA install appareil, CWV terrain, juridique) quand un environnement approprié est disponible.
 7. Aucun full replay avant la toute fin.
