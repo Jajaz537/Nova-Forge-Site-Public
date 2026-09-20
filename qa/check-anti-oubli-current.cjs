@@ -19,7 +19,9 @@ const requiredCurrent = [
   'PASS_TARGETED_BROWSER_A11Y_MICROPROOF',
   'PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW',
   'Firefox final élargi | **TERMINÉ — preuve ciblée**',
-  'PASS_TARGETED_FIREFOX_23_ROUTE_PROOF'
+  'PASS_TARGETED_FIREFOX_23_ROUTE_PROOF',
+  'WebKit 23 routes — préflight | **TERMINÉ — preuve ciblée moteur**',
+  'PASS_TARGETED_WEBKIT_23_ROUTE_PREFLIGHT'
 ];
 for (const token of requiredCurrent) assert.ok(ledger.includes(token), 'anti-forget current missing: ' + token);
 
