@@ -59,8 +59,9 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Catalogue multigaming local | **TERMINÉ — périmètre démonstration** | Trois créations de démonstration ; pas de catalogue de distribution réel. |
 | Index `/games/` | **TERMINÉ — périmètre actuel** | Trois jeux de démonstration, canonical explicite, recette navigateur ciblée. |
 | Fiches de créations | **TERMINÉ — périmètre local ciblé** | Fallback/récupération et navigation documentés ; galerie réelle, versions distribuées et compatibilité mesurée restent absentes. |
-| SEO des pages réellement disponibles | **EN COURS** | Canonicals présents sur les pages indexables ; 404 en `noindex,nofollow`. Les six hubs éditoriaux ont des canonicals dédiés. `/games/` et les nouvelles routes ne sont pas intégrés au sitemap tant que sa garde n'est pas explicitement levée. |
-| Hubs GTA VI / RDR2, catégories et guides éditoriaux | **TERMINÉ — périmètre éditorial sourcé** | Six routes livrées via PR #76 ; GTA VI reste sans support PC/mod supposé, RDR2 s'appuie sur ses repères PC officiels. Aucun média Rockstar copié, aucun faux téléchargement. |
+| SEO on-page des 23 routes | **TERMINÉ — preuve ciblée** | PR #82, run `35511580074`, marker `PASS_TARGETED_SEO_CONTRACT` : 22 pages indexables avec titres/descriptions/canonicals uniques et exacts ; 404 en `noindex,nofollow` sans canonical. |
+| Sitemap des routes jeux/hubs | **EN COURS — garde explicite** | 7 URLs connues restent absentes : `/games/` + les six hubs GTA VI/RDR2. Le checker borne exactement ce gap ; ne pas modifier `sitemap.xml` sans lever explicitement sa garde. |
+| Hubs GTA VI / RDR2, catégories et guides éditoriaux | **TERMINÉ — périmètre éditorial sourcé + readiness contractuelle** | Six routes livrées via PR #76 ; PR #81 classe `game-hubs.gta6-rdr2` en `contract-ready` et sépare `game-corpus.gta6-rdr2` en `blocked-inputs`. Aucun support PC/mod GTA VI supposé, aucun média Rockstar copié, aucun faux téléchargement. |
 
 ## 5. Capacités retenues non livrées
 
@@ -128,8 +129,8 @@ Aucune idée n'est supprimée implicitement pour améliorer un pourcentage. Une 
 ## 10. Prochain point logique
 
 1. Ne pas rejouer les preuves déjà vertes sur les 23 routes sans modification pertinente.
-2. Continuer la finition Premium HD globale uniquement là où une preuve ou une inspection fraîche révèle un défaut réel.
-3. Garder le sitemap protégé inchangé tant que sa garde n'est pas explicitement levée ; l'écart SEO reste tracé.
-4. Conserver les corpus réels de mods GTA VI / RDR2 comme capacité distincte non livrée jusqu'aux droits, versions et preuves nécessaires.
-5. Fermer séparément les preuves externes quand un environnement approprié est disponible.
+2. Ne pas retoucher le design sans défaut frais reproduit ou décision artistique explicite.
+3. Garder le sitemap protégé inchangé tant que sa garde n'est pas explicitement levée ; seul ce gap SEO reste ouvert.
+4. Conserver les corpus réels de mods et les services distants comme capacités distinctes non livrées jusqu'aux entrées réelles requises.
+5. Fermer séparément les preuves humaines/externes quand un environnement approprié est disponible.
 6. Aucun full replay avant la toute fin.
