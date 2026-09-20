@@ -142,6 +142,8 @@ async function runCheck(name, fn) {
 }
 
 async function failRequests(cdp, pattern) {
+  await cdp.send('Network.enable');
+  await cdp.send('Network.setBypassServiceWorker', {bypass: true});
   await cdp.send('Fetch.enable', {patterns: [{urlPattern: pattern, requestStage: 'Request'}]});
   const remove = cdp.on('Fetch.requestPaused', async (params) => {
     await cdp.send('Fetch.failRequest', {requestId: params.requestId, errorReason: 'Failed'});
@@ -149,6 +151,7 @@ async function failRequests(cdp, pattern) {
   return async () => {
     remove();
     await cdp.send('Fetch.disable');
+    await cdp.send('Network.setBypassServiceWorker', {bypass: false});
   };
 }
 
