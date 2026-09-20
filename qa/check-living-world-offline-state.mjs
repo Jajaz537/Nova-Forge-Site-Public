@@ -29,6 +29,7 @@ async function scenario(mode){
     documentElement:root,
     baseURI:'https://example.test/index.html',
     hidden:false,
+    readyState:'loading',
     querySelector(selector){
       if(selector==='[data-world-status]') return status;
       if(selector==='[data-world-phase]') return phase;
@@ -56,6 +57,8 @@ async function scenario(mode){
     document,
     fetch:async()=>{if(mode==='unavailable') throw new Error('offline-no-cache'); return response;},
     window:{
+      addEventListener(type,fn){listeners[`window:${type}`]=fn;},
+      setTimeout(){return 1;},
       setInterval(fn,ms){intervals.push({fn,ms}); return intervals.length;},
       clearInterval(){}
     }
@@ -65,7 +68,7 @@ async function scenario(mode){
   await new Promise(resolve=>setTimeout(resolve,0));
   await new Promise(resolve=>setTimeout(resolve,0));
 
-  return {root,status,phase,age,wolf,dragon,wolfNext,dragonNext,intervals};
+  return {root,status,phase,age,wolf,dragon,wolfNext,dragonNext,intervals,listeners};
 }
 
 function assert(name,condition){
@@ -74,6 +77,7 @@ function assert(name,condition){
 
 const fresh=await scenario('fresh');
 assert('fresh source state',fresh.root.dataset.worldSource==='fresh'&&fresh.status.dataset.worldSource==='fresh');
+assert('fresh visual growth defers through a load listener',typeof fresh.listeners['window:load']==='function');
 assert('fresh ready',fresh.status.dataset.worldReady==='true');
 assert('fresh status must not claim offline',!fresh.status.textContent.includes('hors ligne'));
 assert('fresh chronology',fresh.age.textContent==='Jour de fondation');
@@ -82,6 +86,7 @@ assert('fresh dragon stage',fresh.dragon.textContent==='Dragonneau');
 
 const stale=await scenario('stale');
 assert('stale source state',stale.root.dataset.worldSource==='offline-stale'&&stale.status.dataset.worldSource==='offline-stale');
+assert('stale visual growth defers through a load listener',typeof stale.listeners['window:load']==='function');
 assert('stale remains usable',stale.status.dataset.worldReady==='true');
 assert('stale status must be explicit',stale.status.textContent.includes('dernière configuration connue hors ligne'));
 assert('stale chronology continues from cached rules',stale.age.textContent==='Jour de fondation');
