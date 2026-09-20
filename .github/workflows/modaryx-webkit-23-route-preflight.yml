@@ -1,0 +1,85 @@
+name: MODARYX WebKit 23 Route Preflight
+
+on:
+  pull_request:
+    branches:
+      - design/modaryx-premium-hd-20260914-work
+    paths:
+      - '.github/workflows/modaryx-webkit-23-route-preflight.yml'
+      - 'qa/check-webkit-23-route.mjs'
+      - '*.html'
+      - 'games/**'
+      - 'gta-6/**'
+      - 'red-dead-redemption-2/**'
+      - 'assets/**'
+      - 'data/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-webkit-23-route-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  webkit-parity:
+    name: WebKit 23-route preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Install pinned Playwright library
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save --package-lock=false --ignore-scripts playwright@1.63.0
+          npx playwright --version
+
+      - name: Install WebKit runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx playwright install --with-deps webkit
+
+      - name: Start local HTTP server
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4182 --bind 127.0.0.1 >"$RUNNER_TEMP/modaryx-webkit-http.log" 2>&1 &
+          echo $! >"$RUNNER_TEMP/modaryx-webkit-http.pid"
+          for attempt in {1..40}; do
+            curl --fail --silent http://127.0.0.1:4182/index.html >/dev/null && exit 0
+            sleep 0.25
+          done
+          cat "$RUNNER_TEMP/modaryx-webkit-http.log"
+          exit 1
+
+      - name: Run WebKit 23-route preflight
+        shell: bash
+        env:
+          MODARYX_TEST_ORIGIN: http://127.0.0.1:4182
+          MODARYX_WEBKIT_OUT: ${{ runner.temp }}/modaryx-webkit-23-route
+        run: |
+          set -euo pipefail
+          node qa/check-webkit-23-route.mjs
+
+      - name: Upload WebKit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: modaryx-webkit-23-route-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/modaryx-webkit-23-route
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Stop local HTTP server
+        if: always()
+        shell: bash
+        run: |
+          test -f "$RUNNER_TEMP/modaryx-webkit-http.pid" && kill "$(cat "$RUNNER_TEMP/modaryx-webkit-http.pid")" 2>/dev/null || true
