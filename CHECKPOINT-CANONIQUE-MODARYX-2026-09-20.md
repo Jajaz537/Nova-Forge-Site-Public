@@ -1952,3 +1952,80 @@ Cloudflare Pages check du candidat : **success**.
 - Cette preuve ferme l'exposition/lecture publique DEV ciblée ; elle n'active pas la production et ne vaut pas preuve de passkey finale.
 - Aucune VF / aucun 100 % déclaré.
 - Aucun full replay final encore exécuté.
+
+
+## Mise à jour canonique — PR #121 à #123 — modération, publication et recours — 21 septembre 2026
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #123 : `5403b265f3fd3300960db476ffbbe9bce1f0649c`.
+- PR #121 merge : `e826f338e346603f2792400d1409f0b49debf2a9`.
+- PR #122 merge : `9410408c6bcddd61cdedcd53b7ba6342ad2ac371`.
+- PR #123 merge : `5403b265f3fd3300960db476ffbbe9bce1f0649c`.
+- `main`, production, DNS/DNSSEC/nameservers : inchangés.
+- Aucun full replay final exécuté.
+
+### Moteur modération / publication
+
+PR #121 ajoute :
+- migration D1 `0003_modaryx_moderation_publication.sql` ;
+- file modérateur protégée par `community:moderate` ;
+- décisions `publish / hold / reject` avec réauthentification récente ;
+- receipts de décision chaînés et identité modérateur pseudonymisée ;
+- endpoint public limité à `abuse=passed / moderation=accepted / publication=published` ;
+- aucune auto-publication depuis l'endpoint de soumission.
+
+Run source #121 `35544228418` — **success**, marker `PASS_TARGETED_MODERATION_PUBLICATION_ENGINE`.
+
+### Surface publique Communauté
+
+PR #122 ajoute :
+- surface Premium HD des contributions réellement publiées ;
+- lecture de `/api/v1/community/public` ;
+- refus UI de tout item non `accepted / published` ;
+- aucun brouillon local utilisé comme faux contenu public ;
+- auteur masqué lorsque le profil n'est pas public.
+
+Candidat final #122 `494dc476816f1962910008e863f41bd4d7cfd1ee` :
+- source `35544470500` — **success** ;
+- Catalog Community States — success ;
+- accessibilité, reflow, performance labo, PWA, fonctionnel, Static Premium HD, Firefox et WebKit — success.
+
+### Suivi auteur + recours
+
+PR #123 ajoute :
+- lecture propriétaire d'une contribution distante ;
+- recours uniquement contre une dernière décision restrictive ;
+- un seul recours par décision ;
+- permission distincte `community:appeals-review` ;
+- file des recours sans issue ;
+- décisions de recours `upheld / modified / reversed` ;
+- réauthentification récente pour la revue ;
+- `reversed` ne republie que si Abuse Shield reste `passed` ;
+- receipts `appeal` / `appeal-outcome` chaînés ;
+- UI Premium HD de suivi et recours ;
+- contrat sécurité enrichi avec action privilégiée `review-appeal`.
+
+Candidat final #123 `3c266603ae9001052d77a88c66a64079377dcf7c` :
+- source `35544873531` — **success** ;
+- `PASS_TARGETED_MODERATION_PUBLICATION_ENGINE` — success ;
+- `PASS_TARGETED_COMMUNITY_REMOTE_UI` — success ;
+- anti-oubli — success ;
+- Catalog Community States, accessibilité, reflow, performance labo, PWA, fonctionnel, Static Premium HD, Firefox et WebKit — success.
+
+### État honnête
+
+- **TERMINÉ — moteur modération / publication / recours en code avec preuves ciblées**.
+- **TERMINÉ — surface publique et UI de suivi/recours en code avec preuves ciblées**.
+- **EN COURS — activation fournisseur DEV du lot** : migration D1 `0003`, RBAC Auth0 `community:moderate` + `community:appeals-review`, puis micro-preuve réelle décision → publication/retrait → recours/issue.
+- Aucune VF / aucun 100 % déclaré.
+- Aucun full replay final encore exécuté.
+
+## Prochain point logique actualisé
+
+1. Passer à Work sur le HEAD exact `5403b265f3fd3300960db476ffbbe9bce1f0649c`.
+2. DEV/Preview uniquement : appliquer migration D1 0003, activer RBAC Auth0 et les deux permissions de preuve.
+3. Micro-prouver sans full replay : accès file, décision, surface publique/UI, retrait, suivi auteur, recours, file recours et issue.
+4. Restaurer les données de preuve dans un état non public et ne laisser aucune capacité temporaire.
+5. Canoniser seulement après preuve fournisseur réelle.
