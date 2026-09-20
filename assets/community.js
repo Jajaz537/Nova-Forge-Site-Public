@@ -518,11 +518,25 @@
   const publicStatus = document.querySelector("#community-public-status");
   const publicList = document.querySelector("#community-public-list");
   const publicRefresh = document.querySelector("#community-public-refresh");
+  const followupPanel = document.querySelector("#community-followup");
+  const followupBadge = document.querySelector("#community-followup-badge");
+  const followupId = document.querySelector("#community-followup-id");
+  const followupCheck = document.querySelector("#community-followup-check");
+  const followupStatus = document.querySelector("#community-followup-status");
+  const followupSummary = document.querySelector("#community-followup-summary");
+  const followupModeration = document.querySelector("#community-followup-moderation");
+  const followupPublication = document.querySelector("#community-followup-publication");
+  const followupReason = document.querySelector("#community-followup-reason");
+  const appealPanel = document.querySelector("#community-appeal-panel");
+  const appealGrounds = document.querySelector("#community-appeal-grounds");
+  const appealSubmit = document.querySelector("#community-appeal-submit");
+  const appealStatus = document.querySelector("#community-appeal-status");
 
   let remoteBackend = null;
   let remoteTurnstileToken = "";
   let remoteTurnstileWidget = null;
   let remoteTurnstileScript = null;
+  let trackedSubmission = null;
 
   function setRemoteState(state, label, copy) {
     if (remotePanel) remotePanel.dataset.remoteState = state;
@@ -675,6 +689,139 @@
     }
   }
 
+  function setFollowupState(state, label, message) {
+    if (followupPanel) followupPanel.dataset.followupState = state;
+    if (followupBadge) followupBadge.textContent = label;
+    if (followupStatus) followupStatus.textContent = message;
+  }
+
+  function normalizeSubmissionReference(value) {
+    const normalized = String(value || "").trim().toLowerCase();
+    return /^submission-[a-z0-9-]{16,96}$/.test(normalized) ? normalized : "";
+  }
+
+  function renderTrackedSubmission(data) {
+    trackedSubmission = data;
+    if (followupSummary) followupSummary.hidden = false;
+    if (followupModeration) followupModeration.textContent = data.moderationState || "inconnu";
+    if (followupPublication) followupPublication.textContent = data.publicationState || "inconnu";
+
+    const decisionReason = data.decision?.decision?.statementOfReasons;
+    if (followupReason) {
+      followupReason.textContent = decisionReason
+        ? "Motif de décision : " + decisionReason
+        : "Aucune décision détaillée disponible. La contribution peut encore être en attente.";
+    }
+
+    const canAppeal = data.appealAvailable === true;
+    if (appealPanel) appealPanel.hidden = !canAppeal;
+
+    if (data.outcome?.outcome) {
+      setFollowupState(
+        "resolved",
+        "Recours traité",
+        "Résultat du recours : " + data.outcome.outcome.result + ". " + data.outcome.outcome.reason
+      );
+      if (appealStatus) appealStatus.textContent = "Le recours a reçu une décision.";
+      return;
+    }
+
+    if (data.appeal?.appeal) {
+      setFollowupState("appealed", "Recours envoyé", "Votre recours est enregistré et attend une revue.");
+      if (appealStatus) appealStatus.textContent = "Recours déjà transmis pour cette décision.";
+      return;
+    }
+
+    if (canAppeal) {
+      setFollowupState("appealable", "Recours disponible", "Une décision restrictive a été enregistrée. Vous pouvez la contester ci-dessous.");
+      if (appealStatus) appealStatus.textContent = "Aucun recours envoyé pour cette décision.";
+      return;
+    }
+
+    setFollowupState(
+      "tracked",
+      "État confirmé",
+      data.moderationState === "pending"
+        ? "Contribution reçue. Elle reste en attente de modération."
+        : "État distant confirmé pour votre contribution."
+    );
+    if (appealStatus) appealStatus.textContent = "";
+  }
+
+  async function loadTrackedSubmission(rawId = followupId?.value) {
+    const id = normalizeSubmissionReference(rawId);
+    if (!id) {
+      trackedSubmission = null;
+      if (followupSummary) followupSummary.hidden = true;
+      if (appealPanel) appealPanel.hidden = true;
+      setFollowupState("invalid", "Référence invalide", "Utilisez la référence submission-… reçue après un envoi distant.");
+      return;
+    }
+
+    if (followupId) followupId.value = id;
+    setFollowupState("loading", "Vérification…", "Lecture de l’état distant de votre contribution…");
+    if (followupCheck) followupCheck.disabled = true;
+
+    try {
+      const {response, data} = await remoteJson("/api/v1/community/submissions/" + encodeURIComponent(id));
+      if (response.status === 401) {
+        throw new Error("authentication-required");
+      }
+      if (response.status === 404) {
+        trackedSubmission = null;
+        if (followupSummary) followupSummary.hidden = true;
+        if (appealPanel) appealPanel.hidden = true;
+        setFollowupState("empty", "Introuvable", "Cette référence n’est pas disponible pour votre session.");
+        return;
+      }
+      if (!response.ok || data?.schemaVersion !== 1 || data?.id !== id) {
+        throw new Error(data?.error || "followup-invalid");
+      }
+      renderTrackedSubmission(data);
+    } catch (error) {
+      trackedSubmission = null;
+      if (followupSummary) followupSummary.hidden = true;
+      if (appealPanel) appealPanel.hidden = true;
+      setFollowupState(
+        "error",
+        "Suivi indisponible",
+        error?.message === "authentication-required"
+          ? "Connectez-vous pour consulter une contribution distante."
+          : "Impossible de confirmer l’état de cette contribution pour le moment."
+      );
+    } finally {
+      if (followupCheck) followupCheck.disabled = false;
+    }
+  }
+
+  async function submitTrackedAppeal() {
+    if (!trackedSubmission?.appealAvailable) return;
+    const grounds = String(appealGrounds?.value || "").trim();
+    if (!grounds || grounds.length > 8000) {
+      if (appealStatus) appealStatus.textContent = "Expliquez votre recours en 1 à 8000 caractères.";
+      appealGrounds?.focus();
+      return;
+    }
+
+    if (appealSubmit) appealSubmit.disabled = true;
+    if (appealStatus) appealStatus.textContent = "Envoi sécurisé du recours…";
+    try {
+      const {response, data} = await remoteJson("/api/v1/community/appeals", {
+        method:"POST",
+        headers:{"content-type":"application/json"},
+        body:JSON.stringify({submissionId:trackedSubmission.id, grounds})
+      });
+      if (!response.ok || data?.state !== "submitted") throw new Error(data?.error || "appeal-submit-failed");
+      if (appealGrounds) appealGrounds.value = "";
+      if (appealStatus) appealStatus.textContent = "Recours enregistré.";
+      await loadTrackedSubmission(trackedSubmission.id);
+    } catch {
+      if (appealStatus) appealStatus.textContent = "Le recours n’a pas été enregistré. Réessayez sans perdre votre texte.";
+    } finally {
+      if (appealSubmit) appealSubmit.disabled = false;
+    }
+  }
+
   function loadRemoteTurnstile() {
     if (window.turnstile) return Promise.resolve(window.turnstile);
     if (remoteTurnstileScript) return remoteTurnstileScript;
@@ -812,6 +959,10 @@
         throw new Error("remote-state-invalid");
       }
       if (remoteResult) remoteResult.textContent = `Contribution reçue pour modération · NON PUBLIÉE · référence ${data.id || "reçue"}.`;
+      if (data.id && followupId) {
+        followupId.value = data.id;
+        await loadTrackedSubmission(data.id);
+      }
       remoteTurnstileToken = "";
       if (window.turnstile && remoteTurnstileWidget !== null) window.turnstile.reset(remoteTurnstileWidget);
     } catch {
@@ -820,6 +971,15 @@
       remoteTurnstileToken = "";
     }
   });
+
+  followupCheck?.addEventListener("click", () => loadTrackedSubmission());
+  followupId?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      loadTrackedSubmission();
+    }
+  });
+  appealSubmit?.addEventListener("click", submitTrackedAppeal);
 
   publicRefresh?.addEventListener("click", loadPublicCommunity);
 
