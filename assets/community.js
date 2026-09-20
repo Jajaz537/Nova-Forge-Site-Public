@@ -514,6 +514,10 @@
   const remoteLogin = document.querySelector("#community-login");
   const remoteSubmit = document.querySelector("#community-submit-remote");
   const remoteTurnstile = document.querySelector("#community-turnstile");
+  const publicSection = document.querySelector("#publications");
+  const publicStatus = document.querySelector("#community-public-status");
+  const publicList = document.querySelector("#community-public-list");
+  const publicRefresh = document.querySelector("#community-public-refresh");
 
   let remoteBackend = null;
   let remoteTurnstileToken = "";
@@ -547,6 +551,128 @@
     const type = response.headers.get("content-type") || "";
     if (!type.includes("application/json")) throw new Error("response-not-json");
     return {response, data: await response.json()};
+  }
+
+  function setPublicCommunityState(state, message) {
+    if (publicSection) publicSection.dataset.publicState = state;
+    if (publicStatus) publicStatus.textContent = message;
+    if (publicList) publicList.setAttribute("aria-busy", state === "loading" ? "true" : "false");
+  }
+
+  function publicKindLabel(kind) {
+    return kind === "review" ? "Avis" : kind === "comment" ? "Commentaire" : "Discussion";
+  }
+
+  function renderPublicCommunity(items) {
+    if (!publicList) return;
+    publicList.replaceChildren();
+
+    if (!items.length) {
+      const empty = document.createElement("article");
+      empty.className = "card community-public-empty";
+      const title = document.createElement("h3");
+      title.textContent = "Aucune contribution publiée";
+      const copy = document.createElement("p");
+      copy.textContent = "La file publique est vide. Les brouillons locaux et les contributions encore en modération ne sont jamais affichés ici.";
+      empty.append(title, copy);
+      publicList.append(empty);
+      setPublicCommunityState("empty", "Aucune contribution publique n’est disponible actuellement.");
+      return;
+    }
+
+    for (const item of items) {
+      if (
+        !item ||
+        item.moderationState !== "accepted" ||
+        item.publicationState !== "published" ||
+        typeof item.id !== "string" ||
+        typeof item.body !== "string"
+      ) {
+        throw new Error("public-community-item-invalid");
+      }
+
+      const card = document.createElement("article");
+      card.className = "card community-public-card";
+
+      const meta = document.createElement("div");
+      meta.className = "community-public-meta";
+      const kind = document.createElement("span");
+      kind.className = "badge";
+      kind.textContent = publicKindLabel(item.kind);
+      const target = document.createElement("span");
+      target.className = "community-public-target";
+      target.textContent = item.targetId ? "Cible · " + item.targetId : "Cible non précisée";
+      meta.append(kind, target);
+
+      const heading = document.createElement("h3");
+      heading.textContent = item.title || (item.kind === "review" ? "Avis publié" : item.kind === "comment" ? "Commentaire publié" : "Discussion publiée");
+
+      const body = document.createElement("p");
+      body.className = "community-public-body";
+      body.textContent = item.body;
+
+      const footer = document.createElement("div");
+      footer.className = "community-public-footer";
+
+      const author = document.createElement("span");
+      if (item.author?.handle && item.author?.displayName) {
+        const link = document.createElement("a");
+        link.className = "text-link";
+        link.href = "./profiles.html?profile=" + encodeURIComponent(item.author.handle) + "#public-profile";
+        link.textContent = item.author.displayName + " · @" + item.author.handle;
+        author.append("Par ", link);
+      } else {
+        author.textContent = "Auteur privé";
+      }
+      footer.append(author);
+
+      if (Number.isInteger(item.rating) && item.rating >= 1 && item.rating <= 5) {
+        const rating = document.createElement("span");
+        rating.className = "community-public-rating";
+        rating.setAttribute("aria-label", "Note " + item.rating + " sur 5");
+        rating.textContent = item.rating + "/5";
+        footer.append(rating);
+      }
+
+      card.append(meta, heading, body, footer);
+      publicList.append(card);
+    }
+
+    setPublicCommunityState(
+      "ready",
+      items.length + " contribution" + (items.length > 1 ? "s" : "") + " publiée" + (items.length > 1 ? "s" : "") + " après modération."
+    );
+  }
+
+  async function loadPublicCommunity() {
+    if (!publicSection || !publicStatus || !publicList) return;
+    setPublicCommunityState("loading", "Chargement des contributions réellement publiées…");
+
+    try {
+      const response = await fetch("/api/v1/community/public?limit=12", {
+        cache: "no-store",
+        credentials: "same-origin",
+        headers: {accept: "application/json"}
+      });
+      const type = response.headers.get("content-type") || "";
+      if (!type.includes("application/json")) throw new Error("public-feed-not-json");
+      const data = await response.json();
+      if (!response.ok || data?.schemaVersion !== 1 || !Array.isArray(data.items)) {
+        throw new Error(data?.error || "public-feed-invalid");
+      }
+      renderPublicCommunity(data.items);
+    } catch {
+      publicList.replaceChildren();
+      const unavailable = document.createElement("article");
+      unavailable.className = "card community-public-empty";
+      const title = document.createElement("h3");
+      title.textContent = "Publications indisponibles";
+      const copy = document.createElement("p");
+      copy.textContent = "La surface publique ne peut pas être vérifiée sur cette origine. Aucun brouillon local n’est affiché à sa place.";
+      unavailable.append(title, copy);
+      publicList.append(unavailable);
+      setPublicCommunityState("error", "Impossible de confirmer les contributions publiées pour le moment.");
+    }
   }
 
   function loadRemoteTurnstile() {
@@ -695,7 +821,10 @@
     }
   });
 
+  publicRefresh?.addEventListener("click", loadPublicCommunity);
+
   updateSubmissionFields();
   initRemoteCommunity();
+  loadPublicCommunity();
   loadCatalog();
 })();
