@@ -88,3 +88,19 @@ Le système limite volontairement l’intensité : la météo réelle influence 
 - **EN COURS** : preuve CI et navigateur du candidat.
 - **PREUVE MANQUANTE** : exécution du endpoint sur une vraie preview Cloudflare Pages avec `request.cf`.
 - **BLOQUÉ / décision externe** : activation météo réelle en production tant que fournisseur/licence/attribution ne sont pas explicitement validés.
+
+
+## Qualification fournisseur production — 20 septembre 2026
+
+La comparaison officielle est tracée dans `qa/MODARYX-WEATHER-PROVIDER-QUALIFICATION-20260920.md`.
+
+Décision courante :
+
+- `MODARYX_WEATHER_MODE` reste **`off` en production** ;
+- WeatherAPI est le **candidat privilégié non activé** pour un scénario commercial à coût nul, uniquement via le proxy same-origin et une clé serveur confidentielle ;
+- toute activation WeatherAPI exigerait attribution visible, disclaimer météo utilisateur, validation confidentialité/juridique et respect des limites de cache/appels ;
+- Open-Meteo Free reste inadapté comme base d'un usage commercial garanti ;
+- OpenWeather n'est pas privilégié tant que l'impact de la licence ouverte ShareAlike n'est pas juridiquement validé ;
+- aucun fournisseur, secret Cloudflare, GPS navigateur ou réglage d'infrastructure n'est activé par cette qualification.
+
+La couche saison + heure locale reste pleinement fonctionnelle sans météo réelle. Le blocker production reste **BLOQUÉ / décision externe**.
