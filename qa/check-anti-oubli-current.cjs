@@ -32,7 +32,10 @@ const requiredCurrent = [
   'Publication / modération distante | **EN COURS — contrats receipts + write-intent acquis, backend distant non connecté**',
   'PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS',
   'Téléchargements publics réels | **BLOQUÉ — verrou local prouvé, artefact réel absent**',
-  'PASS_TARGETED_DISTRIBUTION_LOCK_CONTRACTS'
+  'PASS_TARGETED_DISTRIBUTION_LOCK_CONTRACTS',
+  'Smart Profile — état local indicatif | **TERMINÉ — périmètre local ciblé + contrat prouvé**',
+  'Contrats locaux collection / compatibilité / search adapter | **TERMINÉ — preuve ciblée**',
+  'PASS_TARGETED_LOCAL_PLATFORM_CONTRACTS'
 ];
 for (const token of requiredCurrent) assert.ok(ledger.includes(token), 'anti-forget current missing: ' + token);
 
