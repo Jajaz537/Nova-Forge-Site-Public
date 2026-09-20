@@ -2,6 +2,7 @@ import {backendState, requireRemoteWriteFoundation} from './backend-config.mjs';
 import {bearerToken, verifyAuth0AccessToken} from './auth0.mjs';
 import {verifyTurnstile} from './turnstile.mjs';
 import {clientIp, readJson, requireSameOrigin} from './api-security.mjs';
+import {getSessionIdentity} from './auth-session.mjs';
 
 const HANDLE_RE = /^[a-z0-9][a-z0-9._-]{2,31}$/;
 const ID_RE = /^[a-z0-9][a-z0-9._-]{1,127}$/;
@@ -124,13 +125,34 @@ export function validateSubmissionPayload(input) {
   };
 }
 
-export async function authenticateRead(context) {
+async function authenticateIdentity(context) {
   const state = backendState(context.env || {});
   if (!state.bindings.d1) return {ok:false, status:503, reason:'d1-binding-missing'};
+
+  const session = await getSessionIdentity(context.request, context.env.MODARYX_DB);
+  if (session) {
+    return {
+      ok:true,
+      status:200,
+      reason:null,
+      authMethod:'session',
+      identity:{
+        sub:session.sub,
+        scope:session.scope,
+        permissions:session.permissions
+      }
+    };
+  }
+
   if (!state.auth0.configured) return {ok:false, status:503, reason:'auth0-not-configured'};
   const token = bearerToken(context.request);
-  if (!token) return {ok:false, status:401, reason:'bearer-token-missing'};
-  return verifyAuth0AccessToken({token, env:context.env});
+  if (!token) return {ok:false, status:401, reason:'authentication-required'};
+  const verified = await verifyAuth0AccessToken({token, env:context.env});
+  return verified.ok ? {...verified, authMethod:'bearer'} : verified;
+}
+
+export async function authenticateRead(context) {
+  return authenticateIdentity(context);
 }
 
 export async function authorizeWrite(context, {action, maxBytes=20_000} = {}) {
@@ -140,9 +162,7 @@ export async function authorizeWrite(context, {action, maxBytes=20_000} = {}) {
   const foundation = requireRemoteWriteFoundation(context.env || {});
   if (!foundation.ok) return foundation;
 
-  const token = bearerToken(context.request);
-  if (!token) return {ok:false, status:401, reason:'bearer-token-missing'};
-  const identity = await verifyAuth0AccessToken({token, env:context.env});
+  const identity = await authenticateIdentity(context);
   if (!identity.ok) return identity;
 
   const parsed = await readJson(context.request, maxBytes);
