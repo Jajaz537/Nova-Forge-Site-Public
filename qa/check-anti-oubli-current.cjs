@@ -17,14 +17,17 @@ const requiredCurrent = [
   'PASS_TARGETED_SEO_CONTRACT',
   'PASS_TARGETED_BROWSER_REFLOW_MICROPROOF',
   'PASS_TARGETED_BROWSER_A11Y_MICROPROOF',
-  'PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW'
+  'PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW',
+  'Firefox final élargi | **TERMINÉ — preuve ciblée**',
+  'PASS_TARGETED_FIREFOX_23_ROUTE_PROOF'
 ];
 for (const token of requiredCurrent) assert.ok(ledger.includes(token), 'anti-forget current missing: ' + token);
 
 const forbiddenCurrent = [
   'Design system Premium HD des 17 pages',
   'SEO des pages réellement disponibles | **EN COURS**',
-  'Hubs GTA VI / RDR2, catégories et guides | **EN COURS — capacité non livrée**'
+  'Hubs GTA VI / RDR2, catégories et guides | **EN COURS — capacité non livrée**',
+  'Safari final + Firefox final élargi | **PREUVE MANQUANTE**'
 ];
 for (const token of forbiddenCurrent) assert.ok(!ledger.includes(token), 'stale current state returned: ' + token);
 
@@ -46,7 +49,7 @@ const expectedOpen = new Map([
   ['VoiceOver macOS/iOS', 'PREUVE MANQUANTE'],
   ['Zoom navigateur natif 200/400 % final', 'PREUVE MANQUANTE'],
   ['Appareils tactiles physiques', 'PREUVE MANQUANTE'],
-  ['Safari final + Firefox final élargi', 'PREUVE MANQUANTE'],
+  ['Safari final', 'PREUVE MANQUANTE'],
   ['CWV représentatifs', 'PREUVE MANQUANTE'],
   ["Installation PWA manuelle sur appareil", 'PREUVE MANQUANTE'],
   ['Validation juridique / droits / licences', 'PREUVE MANQUANTE'],

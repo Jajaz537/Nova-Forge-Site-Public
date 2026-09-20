@@ -761,3 +761,45 @@ Document : `qa/MODARYX-WEATHER-PROVIDER-QUALIFICATION-20260920.md`.
 - Aucun fournisseur sélectionné contractuellement, aucune clé créée, aucune donnée météo réelle activée.
 - Saison + heure locale restent opérationnelles sans météo.
 - **Aucune VF / aucun 100 % déclaré.**
+
+
+## Mise à jour canonique — PR #87 — Firefox 23 routes — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour la preuve Firefox.
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #87 : `e3252d73d4ccc1f38acd12ddb7d61c97b8c809ff`.
+- `main` n'a pas été modifiée.
+- Aucun sitemap, DNS, DNSSEC, nameserver, IONOS, secret ou réglage Cloudflare critique modifié.
+- Aucun full replay final exécuté.
+
+### PR #87 — Firefox 23 routes
+
+- **TERMINÉE / fusionnée dans Work** au merge `e3252d73d4ccc1f38acd12ddb7d61c97b8c809ff`.
+- Run `35512379997` — **success**.
+- Marker exact : `PASS_TARGETED_FIREFOX_23_ROUTE_PROOF`.
+- Moteur : **Firefox 155.0** via **Playwright 1.63.0**.
+- Couverture : **23 routes × 2 viewports = 46 observations**.
+- Viewports : desktop 1440×1000 et mobile 390×844.
+- Service worker bloqué dans cette lane pour isoler rendu/routing ; `reducedMotion: reduce` utilisé pour stabiliser les captures.
+- Contrôles : navigation HTTP, document complet, largeur viewport, overflow horizontal, H1, composition d'ouverture, footer, images cassées, contrôles coupés, erreurs JavaScript non interceptées.
+- Résultat : `failures: []`, zéro overflow, zéro image cassée, zéro contrôle coupé et aucune erreur JS relevée.
+- Les 46 captures pleine page ont été inspectées de façon assistée ; aucun défaut visuel bloquant n'a été isolé.
+- Artefact du run : `modaryx-firefox-23-route-bc5f6bf5259b4aa4be10bec24e2ca967344dec3f`, digest `sha256:698147a86e158eebc8910a11fc9f7644e2632806ae6c0de25548089d8ef03c6a`.
+
+### Distinction navigateur
+
+- **TERMINÉ — preuve ciblée Firefox** : 23 routes desktop/mobile.
+- **PREUVE MANQUANTE — Safari final** : doit être prouvé séparément sur environnement WebKit/Safari approprié.
+- Une preuve Firefox ne valide pas Safari.
+- La preuve Firefox ne vaut pas appareil physique, lecteur d'écran, zoom natif 400 %, CWV terrain ni full replay final.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Conserver Firefox fermé tant qu'aucune modification pertinente ne justifie un nouveau test.
+2. Garder Safari explicitement PREUVE MANQUANTE jusqu'à preuve séparée.
+3. Continuer uniquement les preuves externes/humaines ou capacités produit réellement non livrées.
+4. Aucun full replay avant la toute fin.
