@@ -719,3 +719,45 @@ Cela ne constitue pas une VF ni un 100 %. Aucun de ces éléments ne doit être 
 3. Fermer les capacités restantes uniquement avec de vraies entrées produit/services.
 4. Fermer les preuves externes sur les environnements appropriés.
 5. Exécuter le full replay unique seulement lorsque les blockers réellement fermables auront été fermés.
+
+
+## Mise à jour canonique — qualification fournisseur météo — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour le blocker météo production.
+
+### Git frais avant qualification
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work de départ : `b208a988bcd9c7bc4b9d917ca2d6f852c49e163e`.
+- `main` : inchangée.
+- Aucun DNS, DNSSEC, nameserver, IONOS, secret ou réglage Cloudflare critique modifié.
+- Aucun full replay exécuté.
+
+### Architecture déjà en place
+
+- saison locale + heure locale indépendantes de la chronologie mondiale partagée ;
+- endpoint same-origin `/api/local-context` ;
+- contexte réseau approximatif côté serveur ;
+- coordonnées fournisseur arrondies à 0,1° ;
+- aucune ville, code postal ou coordonnée exacte renvoyés au navigateur ;
+- aucune permission GPS demandée ;
+- `Permissions-Policy: geolocation=()` conservée ;
+- météo fail-soft et `MODARYX_WEATHER_MODE=off` par défaut.
+
+### Qualification officielle des fournisseurs
+
+Document : `qa/MODARYX-WEATHER-PROVIDER-QUALIFICATION-20260920.md`.
+
+- **WeatherAPI** : offre Free à 0 $ / 100k appels mensuels annoncée, usage commercial autorisé par les conditions ; attribution Free, clé confidentielle côté serveur et disclaimer utilisateur requis. **Candidat privilégié, non activé**.
+- **Open-Meteo** : Free API explicitement non commerciale ; logs de dépannage pouvant contenir IP/coordonnées, suppression annoncée à 90 jours ; une offre commerciale reste possible séparément.
+- **OpenWeather** : licence ouverte permettant le commercial mais imposant attribution + ShareAlike à la solution dérivée ; non privilégié sans validation juridique de cette contrainte.
+- **Geolocation navigateur** : permission explicite requise lorsqu'elle est sollicitée ; la stratégie MODARYX sans popup GPS est conservée.
+
+### État courant
+
+- **TERMINÉ — qualification technique/documentaire** : options fournisseur comparées et architecture d'activation encadrée.
+- **BLOQUÉ / décision externe** : activation production réelle.
+- Conditions de fermeture : validation licence/confidentialité/attribution/disclaimer, choix explicite du fournisseur, secret serveur si requis, micro-proof réel du proxy, limites de cache/appels et fail-soft prouvés.
+- Aucun fournisseur sélectionné contractuellement, aucune clé créée, aucune donnée météo réelle activée.
+- Saison + heure locale restent opérationnelles sans météo.
+- **Aucune VF / aucun 100 % déclaré.**
