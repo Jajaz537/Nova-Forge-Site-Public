@@ -21,7 +21,10 @@ const requiredCurrent = [
   'Firefox final élargi | **TERMINÉ — preuve ciblée**',
   'PASS_TARGETED_FIREFOX_23_ROUTE_PROOF',
   'WebKit 23 routes — préflight | **TERMINÉ — preuve ciblée moteur**',
-  'PASS_TARGETED_WEBKIT_23_ROUTE_PREFLIGHT'
+  'PASS_TARGETED_WEBKIT_23_ROUTE_PREFLIGHT',
+  'Storage Resolver | **EN COURS — contrat acquis, service non connecté**',
+  'Repair Network | **EN COURS — protocole contractuel acquis, exécution distante non connectée**',
+  'PASS_TARGETED_STORAGE_REPAIR_CONTRACTS'
 ];
 for (const token of requiredCurrent) assert.ok(ledger.includes(token), 'anti-forget current missing: ' + token);
 

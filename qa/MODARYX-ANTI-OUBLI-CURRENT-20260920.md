@@ -73,8 +73,8 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Signatures / attestations de provenance | **EN COURS — capacité non livrée** | Service ou chaîne de preuve réelle ; un receipt saisi localement ne suffit pas. |
 | Téléchargements publics réels | **BLOQUÉ** | Artefact autorisé + identité + SHA-256 + provenance + signature lorsque requise. |
 | Corpus réels de mods GTA VI / RDR2 | **EN COURS — capacité non livrée / droits et preuves requis** | Les hubs éditoriaux sont livrés, mais le catalogue de mods reste à 0 tant qu'un corpus autorisé, versionné, attribué et vérifiable n'existe pas. |
-| Storage Resolver | **EN COURS — dépendance service** | Stockage/résolution sécurisé et vérifiable réel. |
-| Repair Network | **EN COURS — dépendance protocole** | Protocole public finalisé ; aucune réparation distante fictive. |
+| Storage Resolver | **EN COURS — contrat acquis, service non connecté** | Contrat provider-neutral v1 prouvé par `PASS_TARGETED_STORAGE_REPAIR_CONTRACTS` : digest + manifest binding obligatoires, alias mutable non fiable rejeté. Le service distant réel reste absent. |
+| Repair Network | **EN COURS — protocole contractuel acquis, exécution distante non connectée** | Contrat fail-closed v1 prouvé par `PASS_TARGETED_STORAGE_REPAIR_CONTRACTS` : substitution silencieuse et redistribution révoquée interdites. Aucun réseau distant réel n'est annoncé. |
 | Backend communautaire | **EN COURS — qualification technique réalisée, non connecté** | Data plane candidat privilégié : Pages Functions/Workers + D1 + R2 + Turnstile. Supabase reste candidat qualifié pour l'identité/passkeys, mais passkeys encore expérimentales et aucun service n'est connecté. |
 | Guide MODARYX connecté | **EN COURS — capacité non livrée** | Moteur/contrat réel ; rester distinct de Nova Guide des OS. |
 | Pont Nova Forge OS | **EN COURS — dépendance Nova Forge OS** | Interface publique stabilisée, consentement et modèle de permissions ; aucun partage implicite. |
