@@ -24,7 +24,10 @@ const requiredCurrent = [
   'PASS_TARGETED_WEBKIT_23_ROUTE_PREFLIGHT',
   'Storage Resolver | **EN COURS — contrat acquis, service non connecté**',
   'Repair Network | **EN COURS — protocole contractuel acquis, exécution distante non connectée**',
-  'PASS_TARGETED_STORAGE_REPAIR_CONTRACTS'
+  'PASS_TARGETED_STORAGE_REPAIR_CONTRACTS',
+  'Publication / modération distante | **EN COURS — contrats receipts acquis, backend distant non connecté**',
+  'Signatures / attestations de provenance | **EN COURS — contrats provenance acquis, signer/attestation réel non connecté**',
+  'PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS'
 ];
 for (const token of requiredCurrent) assert.ok(ledger.includes(token), 'anti-forget current missing: ' + token);
 

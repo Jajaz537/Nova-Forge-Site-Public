@@ -9,6 +9,8 @@ on:
       - 'qa/check-site-first-vf.mjs'
       - 'qa/check-integration-readiness.cjs'
       - 'qa/check-storage-repair-contracts.cjs'
+      - 'qa/check-provenance-receipt-contracts.cjs'
+      - 'qa/check-receipt-fields.cjs'
       - 'qa/check-seo-contract.cjs'
       - 'qa/check-anti-oubli-current.cjs'
       - 'qa/MODARYX-ANTI-OUBLI-CURRENT-20260920.md'
@@ -16,6 +18,9 @@ on:
       - 'schemas/integration-readiness.schema.json'
       - 'schemas/storage-resolver.schema.json'
       - 'schemas/repair-network.schema.json'
+      - 'schemas/publication-receipt.schema.json'
+      - 'schemas/moderation-receipt.schema.json'
+      - 'schemas/moderation-export.schema.json'
       - '*.html'
       - 'games/**'
       - 'gta-6/**'
@@ -34,6 +39,8 @@ on:
       - 'qa/check-site-first-vf.mjs'
       - 'qa/check-integration-readiness.cjs'
       - 'qa/check-storage-repair-contracts.cjs'
+      - 'qa/check-provenance-receipt-contracts.cjs'
+      - 'qa/check-receipt-fields.cjs'
       - 'qa/check-seo-contract.cjs'
       - 'qa/check-anti-oubli-current.cjs'
       - 'qa/MODARYX-ANTI-OUBLI-CURRENT-20260920.md'
@@ -41,6 +48,9 @@ on:
       - 'schemas/integration-readiness.schema.json'
       - 'schemas/storage-resolver.schema.json'
       - 'schemas/repair-network.schema.json'
+      - 'schemas/publication-receipt.schema.json'
+      - 'schemas/moderation-receipt.schema.json'
+      - 'schemas/moderation-export.schema.json'
       - '*.html'
       - 'games/**'
       - 'gta-6/**'
@@ -96,6 +106,12 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-storage-repair-contracts.cjs
+
+      - name: Run targeted provenance receipt contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-provenance-receipt-contracts.cjs
 
       - name: Run targeted SEO contract proof
         shell: bash
