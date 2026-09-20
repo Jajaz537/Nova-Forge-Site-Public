@@ -15,6 +15,8 @@ on:
       - 'qa/check-distribution-lock-contracts.cjs'
       - 'qa/check-local-platform-contracts.cjs'
       - 'qa/check-backend-dev-foundation.mjs'
+      - 'qa/check-dev-provider-readiness.cjs'
+      - 'qa/MODARYX-DEV-PROVIDER-READINESS-20260920.md'
       - 'qa/check-remote-write-endpoints.mjs'
       - 'qa/check-auth-bff.mjs'
       - 'qa/check-profiles-account-ui.cjs'
@@ -73,6 +75,8 @@ on:
       - 'qa/check-distribution-lock-contracts.cjs'
       - 'qa/check-local-platform-contracts.cjs'
       - 'qa/check-backend-dev-foundation.mjs'
+      - 'qa/check-dev-provider-readiness.cjs'
+      - 'qa/MODARYX-DEV-PROVIDER-READINESS-20260920.md'
       - 'qa/check-remote-write-endpoints.mjs'
       - 'qa/check-auth-bff.mjs'
       - 'qa/check-profiles-account-ui.cjs'
@@ -193,6 +197,12 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-backend-dev-foundation.mjs
+
+      - name: Run targeted DEV provider readiness proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-dev-provider-readiness.cjs
 
       - name: Run targeted remote write endpoint proof
         shell: bash
