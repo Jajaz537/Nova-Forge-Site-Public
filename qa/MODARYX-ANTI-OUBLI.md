@@ -436,4 +436,21 @@ Ces fermetures ne retirent aucune autre entrée de l'anti-oubli et ne constituen
 Le run `35489112739` a échoué dans le harnais car `localStorage` était manipulé depuis `about:blank`. Le scénario de récupération était déjà vert. La correction a uniquement établi une origine locale avant le nettoyage de stockage. Le micro-proof `35489189427` est **success**. Aucun runtime produit n'a été modifié.
 
 Cette fermeture n'enlève aucune dépendance du registre et ne constitue ni VF ni full replay.
+## Fermeture ciblée de nouveaux états locaux — 20 septembre 2026
 
+### Project Hub
+
+- **TERMINÉ sur le scénario ciblé** — fallback statique quand les données enrichies sont indisponibles, puis récupération sans perte du favori local.
+- Preuve : PR #71, run `35489515272`, marker `PASS_TARGETED_PROJECT_HUB_STATES`, merge `59a570bd25fd3fc4e2885725abb005bc1880a7c2`.
+- Cette preuve ne crée ni galerie réelle, ni version distribuée, ni compatibilité mesurée.
+
+### Accueil / données publiques
+
+- **TERMINÉ sur le scénario ciblé** — panne puis récupération du catalogue + statut public.
+- Preuve finale : PR #72, run `35489918720`, marker `PASS_TARGETED_HOME_PUBLIC_STATES`, merge `2758d5400b9f8a3265f719a4d7c82b41bf7853fc`.
+- Le manifeste de build garde volontairement `surface_digest_sha256: null` : l’UI reste donc **fail-closed / empreinte indisponible**, même après récupération du réseau.
+- Le pont Nova Forge OS reste **inactif / non connecté** ; aucune session partagée ou intégration réelle n’est revendiquée.
+
+### Règle anti-oubli après ces preuves
+
+Ces fermetures réduisent les états locaux non couverts mais **ne ferment pas** les capacités distantes ou éditoriales encore absentes. Restent tracés jusqu’à livraison ou blocage explicite : comptes, profils publics réels, publication/modération distante, signatures, distribution, Guide connecté, OS Bridge réel, Storage Resolver, Repair Network, backend communautaire, corpus/droits GTA VI/RDR2, preuves juridiques et validations externes.

@@ -357,4 +357,42 @@ Cette section est plus récente que les sections précédentes et complète l'é
 2. Prioriser les autres pages à états réellement observables, puis la finition visuelle page par page.
 3. Garder toutes les capacités dépendantes dans l'anti-oubli avec leur statut réel.
 4. Full replay uniquement à la toute fin.
+## Mise à jour canonique — Project Hub + Accueil états locaux — 20 septembre 2026
 
+### PR #71 — Project Hub fallback / récupération
+
+- **TERMINÉE / fusionnée** dans Work au merge `59a570bd25fd3fc4e2885725abb005bc1880a7c2`.
+- Candidat : `c99afde064393385b51f2f861a8ca5fa180b2db1`.
+- Micro-proof : run `35489515272` — **success**, marker `PASS_TARGETED_PROJECT_HUB_STATES`.
+- État dégradé réellement observé : données enrichies indisponibles, fallback statique conservé.
+- Récupération ciblée : retour des données sans perdre l’état local du favori.
+- Aucun service distant, artefact ou compatibilité réelle n’a été simulé.
+
+### PR #72 — Accueil données publiques fail-closed / récupération
+
+- **TERMINÉE / fusionnée** dans Work au merge `2758d5400b9f8a3265f719a4d7c82b41bf7853fc`.
+- Candidat final : `224a9ff0689c0acac514852dc15298463494a778`.
+- Premier run `35489521919` : **failure ciblée du harnais**, détail `home-public-data-failure-recovery: timeout: home public-data recovery; last=null`.
+- Isolation : `public-build.json` conserve volontairement `surface_digest_sha256: null`; le harnais attendait à tort un digest déclaré après récupération.
+- Correction ciblée QA : le scénario exige désormais le statut public frais + catalogue récupéré, tout en conservant l’empreinte de build **indisponible** tant que le digest public reste intentionnellement absent.
+- Micro-proof final : run `35489918720` — **success**, marker `PASS_TARGETED_HOME_PUBLIC_STATES`.
+- En panne : catalogue fail-closed, recherche désactivée, statut public indisponible, empreinte de build indisponible.
+- Après récupération : catalogue 3 cartes + recherche réactivée + statut public `network`; build toujours `unavailable` et `reported=null`, conformément au contrat réel.
+- Pont Nova Forge OS : état inactif explicite, aucun protocole/exécutable/service lancé.
+- Aucun full replay exécuté.
+
+### État courant après PR #71 / #72
+
+- **TERMINÉ** — états locaux ciblés : Recherche, Téléchargements, Profils, Catalogue, Communauté, Creator Studio, Project Hub et Accueil.
+- **EN COURS** — finition Premium HD page par page et fermeture du registre anti-oubli.
+- **BLOQUÉ / dépendance réelle** — comptes, publication/modération distante, artefacts/signatures, Guide connecté, Storage Resolver, Repair Network, OS Bridge réel, corpus/droits GTA VI/RDR2.
+- **PREUVE MANQUANTE** — validation artistique humaine finale, lecteur d’écran natif, zoom natif 400 %, appareils physiques/tactile, Safari final, Firefox final élargi, CWV représentatifs, installation PWA manuelle, validation juridique complète.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Ne plus rejouer les états locaux ciblés déjà fermés sans modification pertinente.
+2. Passer à la finition Premium HD des surfaces statiques restantes et aux contrôles SEO/documentation réellement autonomes.
+3. Fermer séparément les preuves externes lorsqu’un environnement approprié existe.
+4. Conserver chaque capacité distante dans l’anti-oubli avec son statut réel ; aucune suppression implicite.
+5. Full replay uniquement à la toute fin.
