@@ -269,3 +269,28 @@ Décision utilisateur explicitement retenue pour la VF :
 - Couches compagnon : **8/10 TERMINÉES**.
 - **EN COURS** — dragon jeune adulte / adulte.
 
+
+
+## Dragon jeune adulte — couche compagnon — 20 septembre 2026
+
+- **TERMINÉ** — PR #55 fusionnée dans la branche active PR #12.
+- commit d’intégration : `6568976457c2df0115f6d103572bc713a5cae23d` ;
+- asset : `assets/living-world/dragon-young-adult.png` ;
+- PNG 1600 × 900, RGBA 8-bit, alpha=true ;
+- SHA-256 : `f19e00f3ae9dee33a502b9bc78d3bfefabd82a8db377d8ac270fd69e95901615` ;
+- couche gardée non référencée ; `visualGrowth.status=awaiting-assets` reste inchangé ;
+- progression visuelle : plus grand, plus puissant et plus assuré que l’adolescent, sans atteindre encore le dragon adulte final ;
+- bundle compagnon : **9/10 TERMINÉES** ;
+- reste : **dragon adulte final** ;
+- validation artistique humaine finale du bundle complet : **PREUVE MANQUANTE**.
+
+Preuves ciblées PR #55 :
+
+- Layered Growth Asset Gate `35479370917` — **success**, marker `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING`, candidat 1600 × 900, alpha=true, failures=[] ;
+- Site First Source `35479370904` — **success** ;
+- PWA Offline `35479371297` — **success** ;
+- Browser Accessibility `35479370936` — **success** ;
+- Browser Reflow `35479371074` — **success** ;
+- Lab Performance `35479371003` — **success**.
+
+Aucun full replay n’a été lancé. `main`, DNS, DNSSEC, IONOS et Cloudflare critique restent inchangés.

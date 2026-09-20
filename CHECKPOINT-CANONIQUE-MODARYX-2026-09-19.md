@@ -2141,3 +2141,44 @@ Preuves ciblées PR #54 :
 5. produire ensuite le dragon adulte final ;
 6. à 10/10 seulement, préparer l'activation réelle de la croissance visuelle.
 
+
+
+## Asset compagnon — Dragon jeune adulte — 20 septembre 2026
+
+PR #55 : **TERMINÉE — fusionnée** dans la branche active PR #12.
+
+- commit d’intégration : `6568976457c2df0115f6d103572bc713a5cae23d` ;
+- asset : `assets/living-world/dragon-young-adult.png` ;
+- dimensions : **1600 × 900** ; PNG RGBA 8-bit, `alpha=true` ;
+- SHA-256 : `f19e00f3ae9dee33a502b9bc78d3bfefabd82a8db377d8ac270fd69e95901615` ;
+- asset gardé non référencé ; `visualGrowth.status=awaiting-assets` inchangé ;
+- progression : stade jeune adulte clairement plus développé que l’adolescent, sans atteindre la masse ni la majesté du dragon adulte final.
+
+Preuves ciblées PR #55 :
+
+- Layered Growth Asset Gate `35479370917` — **success** avec `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ;
+- `dragon-young-adult.png` détecté comme `candidate-layer` : 1600 × 900, alpha=true, failures=[] ;
+- Site First Source `35479370904` — **success** ;
+- PWA Offline `35479371297` — **success** ;
+- Browser Accessibility `35479370936` — **success** ;
+- Browser Reflow `35479371074` — **success** ;
+- Lab Performance `35479371003` — **success**.
+
+État :
+
+- environnement séparé : **TERMINÉ** ;
+- couches compagnon : **9/10 TERMINÉES** ;
+- loup, cinq stades : **TERMINÉ** sur assets séparés prouvés ;
+- dragon : Dragonneau + juvénile + adolescent + jeune adulte **TERMINÉS** sur assets séparés prouvés ;
+- **EN COURS** — dragon adulte final ;
+- validation artistique humaine finale du bundle complet : **PREUVE MANQUANTE** ;
+- aucun passage `ready` avant bundle complet ; `main` et infrastructure critique inchangés.
+
+### Prochain point logique
+
+1. vérifier Git frais ;
+2. dériver le **dragon adulte final** du jeune adulte en conservant strictement l’identité visuelle ;
+3. détourage + PNG 1600 × 900 alpha ;
+4. PR isolée + micro-preuves ciblées ;
+5. à **10/10 seulement**, préparer l’activation réelle de la croissance visuelle ;
+6. ne pas déclarer VF/PASS final sans validation artistique intégrée et preuves restantes.
