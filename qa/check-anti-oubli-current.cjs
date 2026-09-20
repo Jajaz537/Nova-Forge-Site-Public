@@ -30,7 +30,9 @@ const requiredCurrent = [
   'Comptes / authentification / passkeys réels | **EN COURS — candidat identité + contrat sécurité acquis, non connecté**',
   'Profils publics éditables | **EN COURS — contrat profil public acquis, édition distante non connectée**',
   'Publication / modération distante | **EN COURS — contrats receipts + write-intent acquis, backend distant non connecté**',
-  'PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS'
+  'PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS',
+  'Téléchargements publics réels | **BLOQUÉ — verrou local prouvé, artefact réel absent**',
+  'PASS_TARGETED_DISTRIBUTION_LOCK_CONTRACTS'
 ];
 for (const token of requiredCurrent) assert.ok(ledger.includes(token), 'anti-forget current missing: ' + token);
 

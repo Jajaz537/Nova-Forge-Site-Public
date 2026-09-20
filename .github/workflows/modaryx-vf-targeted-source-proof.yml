@@ -11,6 +11,8 @@ on:
       - 'qa/check-storage-repair-contracts.cjs'
       - 'qa/check-provenance-receipt-contracts.cjs'
       - 'qa/check-account-community-contracts.cjs'
+      - 'qa/check-download-recovery.cjs'
+      - 'qa/check-distribution-lock-contracts.cjs'
       - 'qa/check-receipt-fields.cjs'
       - 'qa/check-seo-contract.cjs'
       - 'qa/check-anti-oubli-current.cjs'
@@ -26,6 +28,8 @@ on:
       - 'schemas/account-security.schema.json'
       - 'schemas/community-submission.schema.json'
       - 'schemas/community-write.schema.json'
+      - 'schemas/universal-mod-manifest.schema.json'
+      - 'downloads.json'
       - '*.html'
       - 'games/**'
       - 'gta-6/**'
@@ -46,6 +50,8 @@ on:
       - 'qa/check-storage-repair-contracts.cjs'
       - 'qa/check-provenance-receipt-contracts.cjs'
       - 'qa/check-account-community-contracts.cjs'
+      - 'qa/check-download-recovery.cjs'
+      - 'qa/check-distribution-lock-contracts.cjs'
       - 'qa/check-receipt-fields.cjs'
       - 'qa/check-seo-contract.cjs'
       - 'qa/check-anti-oubli-current.cjs'
@@ -61,6 +67,8 @@ on:
       - 'schemas/account-security.schema.json'
       - 'schemas/community-submission.schema.json'
       - 'schemas/community-write.schema.json'
+      - 'schemas/universal-mod-manifest.schema.json'
+      - 'downloads.json'
       - '*.html'
       - 'games/**'
       - 'gta-6/**'
@@ -128,6 +136,13 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-account-community-contracts.cjs
+
+      - name: Run targeted distribution lock proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-download-recovery.cjs
+          node qa/check-distribution-lock-contracts.cjs
 
       - name: Run targeted SEO contract proof
         shell: bash
