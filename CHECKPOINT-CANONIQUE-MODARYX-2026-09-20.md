@@ -329,3 +329,32 @@ Cette section est plus récente que les sections précédentes et complète l'é
 3. Conserver toutes les capacités distantes dans l'anti-oubli jusqu'à livraison réelle ou blocage documenté.
 4. Ne lancer le full replay qu'à la toute fin.
 
+## Mise à jour canonique — Creator Studio schéma fail-closed / récupération — 20 septembre 2026
+
+### PR #69 — état schéma Creator Studio
+
+- **TERMINÉE / fusionnée** dans Work au merge `498afa45ee95f42c91262a93315b88963a877166`.
+- Candidat final : `066e0a98703fe64109970047a22c1aaa0f39255c`.
+- Premier run `35489112739` : **failure ciblée du harnais**, détail `schema-unavailable-fail-closed: Uncaught`.
+- Isolation : le harnais tentait d'effacer `localStorage` depuis `about:blank`, origine où cette opération n'est pas disponible ; le scénario de récupération était déjà vert.
+- Correction ciblée QA : établir d'abord l'origine locale via `index.html`, puis nettoyer le brouillon ; aucun fichier runtime produit modifié.
+- Micro-proof final : run `35489189427` — **success**, marker `PASS_TARGETED_STUDIO_SCHEMA_STATE`.
+- Schéma indisponible : état explicite, sauvegarde/export bloqués en fail-closed, aucun brouillon persisté.
+- Après récupération : brouillon valide sauvegardé localement ; `distribution.state=locked`, `downloadable=false`, `releaseReceipt=null` conservés.
+- Aucun backend, aucune publication distante et aucune attestation de provenance n'ont été simulés.
+- Aucun full replay exécuté.
+
+### État courant après PR #69
+
+- **TERMINÉ** — état Creator Studio schéma indisponible / fail-closed / récupération.
+- **EN COURS** — finition Premium HD page par page et fermeture du registre anti-oubli.
+- **BLOQUÉ / dépendance réelle** — publication réelle, signature distante, identité, distribution et autres services déjà tracés.
+- **PREUVE MANQUANTE** — validation artistique humaine finale, lecteur d'écran natif, zoom natif 400 %, appareils physiques/tactile, Safari/Firefox finaux, CWV représentatifs, installation PWA manuelle et validation juridique complète.
+
+## Prochain point logique actualisé
+
+1. Continuer les états locaux encore non couverts sans répéter Recherche, Téléchargements, Profils, Catalogue, Communauté ou Creator Studio déjà fermés sur leurs scénarios ciblés.
+2. Prioriser les autres pages à états réellement observables, puis la finition visuelle page par page.
+3. Garder toutes les capacités dépendantes dans l'anti-oubli avec leur statut réel.
+4. Full replay uniquement à la toute fin.
+
