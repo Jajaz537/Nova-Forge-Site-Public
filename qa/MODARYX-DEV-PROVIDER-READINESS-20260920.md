@@ -29,7 +29,9 @@ Le runtime transmet déjà ce hostname comme `expectedHostname` à la validation
 - signature attendue : `RS256` ;
 - callback DEV : `https://<origine-preview-stable>/api/v1/auth/callback` ;
 - utiliser une origine de preview stable pour éviter de changer la callback à chaque commit ;
-- pour la modération DEV, activer RBAC sur l'API, inclure les permissions dans l'access token et attribuer `community:moderate` uniquement au compte modérateur de preuve.
+- pour la modération DEV, activer RBAC sur l'API et inclure les permissions dans l'access token ;
+- attribuer `community:moderate` au compte modérateur de preuve ;
+- attribuer séparément `community:appeals-review` au compte de preuve chargé des recours.
 
 ## Portée Cloudflare
 
@@ -50,5 +52,8 @@ Pour profils + Communauté actuels :
 8. Après migration 0003 + RBAC, file modération lisible uniquement avec `community:moderate`.
 9. Décision privilégiée refuse une session trop ancienne avec `reauthentication-required`.
 10. Publication réelle n'apparaît dans `/api/v1/community/public` qu'après décision `publish`; `hold`/`reject` retirent le contenu public.
+11. L'auteur peut relire uniquement sa propre soumission et déposer un seul recours contre une décision restrictive.
+12. La file de recours refuse `community:moderate` seul et exige `community:appeals-review`.
+13. Issue de recours `upheld / modified / reversed` créée avec receipt chaîné ; `reversed` ne publie que si `abuse=passed`.
 
 Aucun DNS, production, `main`, tenant, binding ou secret réel n'est créé par ce document.
