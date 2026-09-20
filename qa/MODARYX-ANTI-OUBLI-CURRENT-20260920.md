@@ -67,7 +67,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 
 | Élément retenu | État courant | Condition de fermeture |
 |---|---|---|
-| Comptes / authentification / passkeys réels | **EN COURS — capacité non livrée** | Backend d'identité, politique de session/récupération et environnement de test réels. |
+| Comptes / authentification / passkeys réels | **EN COURS — candidat identité qualifié, non connecté** | Auth0 = candidat privilégié non connecté (Free 25k MAU, passkeys, custom domain) ; WorkOS/Clerk/Supabase comparés. Tenant, domaine, session, récupération et vraie cérémonie passkey restent à prouver. |
 | Profils publics éditables | **EN COURS — capacité non livrée** | Identité, stockage et politique de publication réels. |
 | Publication / modération distante | **EN COURS — capacité non livrée** | Backend sécurisé, rôles, politique d'abus, journal d'audit et voies d'appel. |
 | Signatures / attestations de provenance | **EN COURS — capacité non livrée** | Service ou chaîne de preuve réelle ; un receipt saisi localement ne suffit pas. |

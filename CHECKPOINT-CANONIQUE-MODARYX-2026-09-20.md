@@ -893,3 +893,60 @@ Document : `qa/MODARYX-COMMUNITY-BACKEND-QUALIFICATION-20260920.md`.
 2. Conserver les profils/publications/modération comme local-only/non connectés tant que les migrations, rôles, allow/deny, audit et politiques d'abus ne sont pas prouvés.
 3. Continuer les qualifications documentaires des autres capacités uniquement lorsqu'elles réduisent un vrai blocker.
 4. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — qualification identité/passkeys — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour comptes/auth/passkeys.
+
+### Git frais avant qualification
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work de départ : `cbf496dce8e480f48da0203898a37d6779afd9c4`.
+- `main` : inchangée.
+- Aucun tenant, secret, domaine, callback, DNS, binding ou backend connecté.
+- Aucun full replay exécuté.
+
+### Qualification
+
+Document : `qa/MODARYX-IDENTITY-PASSKEY-QUALIFICATION-20260920.md`.
+
+- **Auth0 = candidat privilégié non connecté**.
+  - Free documenté jusqu'à 25 000 MAU.
+  - 1 custom domain inclus sur la page tarifaire Free, avec vérification carte liée à cette fonctionnalité.
+  - passkeys disponibles avec les database connections / Universal Login.
+  - Identifier First requis pour les flows passkey courants.
+- **WorkOS AuthKit** :
+  - AuthKit annoncé gratuit jusqu'à 1 M MAU ;
+  - production nécessite informations de facturation ;
+  - passkeys actuellement via hosted AuthKit ;
+  - custom domains documentés comme service payant.
+- **Clerk** :
+  - Hobby Free 50 000 MRU ;
+  - support passkeys documenté ;
+  - passkeys de production classées hors cible gratuite actuelle dans la documentation tarifaire 2026.
+- **Supabase** :
+  - Free 50 000 MAU ;
+  - passkeys disponibles mais encore expérimentales ;
+  - Free susceptible de pause après une semaine d'inactivité.
+
+### Architecture courante
+
+- identité séparée du data plane communautaire ;
+- data plane candidat : Cloudflare Pages Functions/Workers + D1 + R2 + Turnstile ;
+- D1 conserve uniquement le mapping/les profils métier nécessaires, pas les secrets/credentials d'identité ;
+- aucune implémentation WebAuthn maison retenue par défaut.
+
+### État courant
+
+- **TERMINÉ — qualification fournisseur identité**.
+- **EN COURS — capacité réelle** : aucun tenant/fournisseur connecté.
+- **PREUVE MANQUANTE** : vraie cérémonie passkey, récupération, révocation, session, rôles/claims et appareils appropriés.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Ne pas créer de tenant ou modifier DNS sans décision explicite d'activation.
+2. Garder les comptes/auth/passkeys en EN COURS tant que les preuves réelles ne sont pas acquises.
+3. Utiliser Auth0 comme candidat privilégié pour la conception contractuelle, sans en faire un fait de production.
+4. Aucun full replay avant la toute fin.
