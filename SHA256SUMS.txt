@@ -45,7 +45,7 @@ a90b528864f0453c4a89dd4fd888f6230d962c8515e1b35eec936e7631b8be2a  ./catalog.html
 010737ea4c600d6111d3fa94d6f86e454595dd6f0b5ddb4e0ab01b689b70fbd3  ./data/catalog.json
 08f9810bea5a8afc20acbf7a6f5b23c5cb4647621f6a1787d42a3fa212981283  ./data/compatibility-graph.json
 6e0ba5cbf31c7ed012de0cbc787e01220554205e8507efed2f81626f264309fa  ./data/integration-readiness.json
-7b9205cdeadd772ea5c7b9950a2eeb5ad85cab12df668141987338f8b8ff1df5  ./data/living-world.json
+efd5eb4d53b3ce296d82e181abba8ed8128f19331465e908aedd09c7e01eaf24  ./data/living-world.json
 fd77943e2b758314ee5beb7a6b89680a4a16c7958e6f4b6e8ad7f250d7feed80  ./data/search-index.json
 bcfb0fa301c8d2db258137de7705ea741419c315130393e9c6c12b4a844d0d85  ./documentation.html
 a57f398f4c55e92bc1dbfbed8c52a42fa27c0727e7d772a0c43c5a5a1f54c53d  ./downloads.html
@@ -88,7 +88,7 @@ b042d8cea4c041dda9f4433bee8691c5ab7fe6a330d2ab5707940bfc4a331746  ./sw.js
 8658be18d73b76139d66db5f57512a36432d00fbd5f6e51dc8804659f7aa1042  ./assets/living-world-visual-growth.mjs
 3a95d6d3b05c922bf2a747ebc5ab7558b6a6a7ee66269f8de7610fab7b920a4e  ./assets/living-world-visual-growth.css
 3a4ea7cb430f7d7e4d9a3f15e4399ed461127cb361cfc1c69f4e692259c5608f  ./assets/real-world-sync.mjs
-1d4bbafcd1a269da87cc6abb78cf65aa392cc7a3f3b49aa40cf8119dc6432e85  ./assets/real-world-sync.css
+a5d90837a1324b941617920a3b7a633a810bea49f32bfec0c3cfb2a08c135286  ./assets/real-world-sync.css
 2f8200d72fd07230d1c9d125e80a29fe434ec5517643dd892319a32d3f6cc2d7  ./assets/living-world/environment-premium.jpg
 8224d7b79d6ea1372b8897a046fd39ff57ed5c439c879249f936282aeabc9758  ./assets/living-world/wolf-baby.png
 ae7397920f962352e5e47f67f7973fd4711d059e33d83e2188e7b7e73a8a2c03  ./assets/living-world/wolf-juvenile.png

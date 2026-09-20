@@ -125,13 +125,13 @@
   },
   "visualGrowth": {
     "model": "layered-stage-assets-v1",
-    "status": "awaiting-assets",
+    "status": "ready",
     "canvas": {
       "width": 1600,
       "height": 900
     },
     "fallback": "composite-hero",
-    "environmentAsset": null,
+    "environmentAsset": "./assets/living-world/environment-premium.jpg",
     "activation": "atomic-current-stage",
     "assetPolicy": {
       "sameOrigin": true,
@@ -143,21 +143,21 @@
       {
         "inhabitantId": "wolf",
         "stages": {
-          "baby": null,
-          "juvenile": null,
-          "adolescent": null,
-          "young-adult": null,
-          "adult": null
+          "baby": "./assets/living-world/wolf-baby.png",
+          "juvenile": "./assets/living-world/wolf-juvenile.png",
+          "adolescent": "./assets/living-world/wolf-adolescent.png",
+          "young-adult": "./assets/living-world/wolf-young-adult.png",
+          "adult": "./assets/living-world/wolf-adult.png"
         }
       },
       {
         "inhabitantId": "dragon",
         "stages": {
-          "baby": null,
-          "juvenile": null,
-          "adolescent": null,
-          "young-adult": null,
-          "adult": null
+          "baby": "./assets/living-world/dragon-baby.png",
+          "juvenile": "./assets/living-world/dragon-juvenile.png",
+          "adolescent": "./assets/living-world/dragon-adolescent.png",
+          "young-adult": "./assets/living-world/dragon-young-adult.png",
+          "adult": "./assets/living-world/dragon-adult.png"
         }
       }
     ]
