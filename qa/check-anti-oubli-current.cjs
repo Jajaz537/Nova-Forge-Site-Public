@@ -28,8 +28,8 @@ const requiredCurrent = [
   'Signatures / attestations de provenance | **EN COURS — contrats provenance acquis, signer/attestation réel non connecté**',
   'PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS',
   'Comptes / authentification / passkeys réels | **EN COURS — vérification Auth0 backend codée, tenant non connecté**',
-  'Profils publics éditables | **EN COURS — contrat profil public acquis, édition distante non connectée**',
-  'Publication / modération distante | **EN COURS — contrats receipts + write-intent acquis, backend distant non connecté**',
+  'Profils publics éditables | **EN COURS — endpoint distant codé, service non provisionné**',
+  'Publication / modération distante | **EN COURS — endpoint de soumission codé, modération distante non provisionnée**',
   'PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS',
   'Téléchargements publics réels | **BLOQUÉ — verrou local prouvé, artefact réel absent**',
   'PASS_TARGETED_DISTRIBUTION_LOCK_CONTRACTS',
@@ -38,9 +38,12 @@ const requiredCurrent = [
   'PASS_TARGETED_LOCAL_PLATFORM_CONTRACTS',
   'Work Phase 2 — qualification externe | **TERMINÉ — preuve de préparation/limitation**',
   'MODARYX-WORK-PHASE2-EXTERNAL-EVIDENCE-20260920.md',
-  'Backend communautaire | **EN COURS — fondation DEV codée, ressources distantes non provisionnées**',
   'PASS_TARGETED_BACKEND_DEV_FOUNDATION',
-  'MODARYX-BACKEND-DEV-PROVISIONING-20260920.md'
+  'MODARYX-BACKEND-DEV-PROVISIONING-20260920.md',
+  'Backend communautaire | **EN COURS — fondation + endpoints distants codés, ressources non provisionnées**',
+  'Endpoints profils / communauté distants | **TERMINÉ — preuve ciblée de code**',
+  'PASS_TARGETED_REMOTE_WRITE_ENDPOINTS',
+  'MODARYX-REMOTE-WRITE-ENDPOINTS-20260920.md'
 ];
 for (const token of requiredCurrent) assert.ok(ledger.includes(token), 'anti-forget current missing: ' + token);
 
