@@ -156,3 +156,84 @@ Aucun full replay n'a été exécuté pour fermer ces erreurs.
 5. Si une anomalie est trouvée : erreur exacte → isolation → correction ciblée → micro-proof.
 6. Seulement après validation artistique intégrée, fermer cette PREUVE MANQUANTE.
 7. Continuer ensuite la finition Premium HD et les preuves externes restantes, sans full replay prématuré.
+
+---
+
+## Mise à jour canonique — sécurité QA + preuve visuelle déployée — 20 septembre 2026
+
+Cette section est plus récente que les sections précédentes du présent fichier et les complète sans effacer leur historique.
+
+### Git / intégrations récentes
+
+- PR #58 — **TERMINÉE / fusionnée** : durcissement des chemins temporaires des preuves navigateur QA ; merge `6b5e6c5339427138805269239676897834a8bfe0`.
+- PR #59 — **TERMINÉE / fusionnée** : capture visuelle ciblée de la preview Cloudflare déployée ; merge `0c774005f895961921e8072f2230aff6b5c7bf00`.
+- PR #60 — **TERMINÉE / fusionnée** : durcissement de l'artefact d'échec de capture visuelle ; merge `bb31db3015a659074c4d8a38f62544d39bf98793`.
+- PR #61 — **TERMINÉE / fusionnée** : fermeture ciblée des cinq derniers constats CodeQL HTML/QA ; merge `7ed6e6a9c21d9235b9f35819cb7063221201fa04`.
+- `main` n'a pas été modifiée par ces lots.
+- Aucun full replay n'a été exécuté.
+
+### Preuve déployée du monde vivant
+
+Workflow `MODARYX Preview Visual Capture` :
+
+- run `35483330153` — **success** ;
+- marker : `PASS_TARGETED_PREVIEW_VISUAL_CAPTURE` ;
+- artefact : `modaryx-preview-visual-98aa651608af1e6f5033183b23f7a37c5a613c07`, ID `10596672085` ;
+- preview immuable inspectée : `https://9360feb3.nova-forge-site-public.pages.dev`.
+
+Les trois cas capturés sont **desktop 1440×1000**, **mobile 390×844** et **prefers-reduced-motion**.
+
+Observations prouvées dans le navigateur déployé :
+
+- `data-world-visual-growth=active` ;
+- environnement séparé chargé en **1600×900** ;
+- loup courant `baby` chargé en **1600×900** ;
+- dragon courant `baby` chargé en **1600×900** ;
+- reality sync : `active` ;
+- source de contexte : `cloudflare-coarse` ;
+- climat observé : `north-temperate` ;
+- saison observée : `autumn` ;
+- moment local observé : `dusk` ;
+- météo : `unavailable`, conformément au fait qu'aucun fournisseur météo production n'est encore activé ;
+- en reduced-motion : animation des couches = `none`, transition des couches = `0s`, transition météo = `0s`.
+
+Inspection assistée des captures : aucune coupure bloquante du héros, du loup ou du dragon n'a été observée sur les captures desktop/mobile ; la lisibilité du contenu principal reste exploitable. Cette inspection assistée **ne remplace pas** une validation artistique humaine finale.
+
+Statuts mis à jour :
+
+- **TERMINÉ** — preuve de rendu intégré sur preview HTTPS réelle, desktop + mobile.
+- **TERMINÉ** — preuve déployée reduced-motion pour les couches du monde vivant.
+- **TERMINÉ sur le contexte grossier** — preuve que la preview reçoit et applique le contexte `cloudflare-coarse`.
+- **BLOQUÉ / décision externe** — météo réelle tant que fournisseur, licence, attribution et confidentialité ne sont pas validés.
+- **PREUVE MANQUANTE** — validation artistique humaine finale du rendu intégré.
+
+### Sécurité / CodeQL
+
+Après les PR #58, #60 et #61 :
+
+- CodeQL sur le HEAD Work `bb31db3015a659074c4d8a38f62544d39bf98793` : run `35484590405` — **success** ;
+- micro-proof Site First de PR #61 : run `35484927948` — **success** ;
+- CodeQL sur le HEAD Work `7ed6e6a9c21d9235b9f35819cb7063221201fa04` : run `35484967852` — **success** ;
+- les **11/11 threads CodeQL** ouverts historiquement sur PR #12 sont désormais résolus ;
+- aucune baisse de seuil, aucun contournement de scan et aucune modification runtime de production n'ont été utilisés pour les fermer.
+
+### État opérationnel après cette mise à jour
+
+- **TERMINÉ** — 10/10 assets compagnons séparés.
+- **TERMINÉ** — activation technique ciblée de la croissance visuelle.
+- **TERMINÉ** — preuve de preview déployée environnement + loup + dragon, desktop/mobile/reduced-motion.
+- **TERMINÉ** — dette CodeQL actuellement visible sur PR #12 : 11/11 threads résolus.
+- **EN COURS** — finition Premium HD page par page et fermeture de l'anti-oubli.
+- **PREUVE MANQUANTE** — validation artistique humaine finale.
+- **PREUVE MANQUANTE** — lecteur d'écran natif, appareils physiques, PWA HTTPS offline/update réelle, CWV représentatifs, validation juridique complète et autres preuves externes explicitement tracées.
+- Aucune VF / aucun 100 % n'est déclaré.
+
+## Prochain point logique actualisé
+
+1. Conserver l'anti-oubli comme registre exhaustif : aucune idée retenue ne disparaît.
+2. Continuer la finition Premium HD **page par page** sur les 17 pages actuelles, en micro-lots isolés.
+3. Fermer en parallèle les fonctions locales réellement disponibles et leurs états empty/error/unavailable.
+4. Fermer les preuves externes quand un environnement réel approprié est disponible.
+5. Ne pas simuler les capacités dépendant d'un backend, de droits, d'artefacts, d'un protocole ou de Nova Forge OS.
+6. Full replay uniquement à la toute fin, après fermeture des bloqueurs ciblés.
+
