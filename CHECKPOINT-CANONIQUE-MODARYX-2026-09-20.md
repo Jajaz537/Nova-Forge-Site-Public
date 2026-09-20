@@ -237,3 +237,53 @@ Après les PR #58, #60 et #61 :
 5. Ne pas simuler les capacités dépendant d'un backend, de droits, d'artefacts, d'un protocole ou de Nova Forge OS.
 6. Full replay uniquement à la toute fin, après fermeture des bloqueurs ciblés.
 
+
+
+## Mise à jour canonique — états de pages + PWA HTTPS déployée — 20 septembre 2026
+
+Cette section est plus récente que les sections précédentes et complète l'état opérationnel courant.
+
+### PR #64 — états locaux Recherche / Téléchargements
+
+- **TERMINÉE / fusionnée** dans Work au merge `9cd07604daff663d02f8026b4f44635edcf85726`.
+- Candidat final : `4aa4450dcff748c811b3a34b6ecbe32760cc912b`.
+- Workflow ciblé : `MODARYX Page States Browser Proof` run `35487557212` — **success**.
+- Marker : `PASS_TARGETED_PAGE_STATES_BROWSER_PROOF`.
+- Recherche : état vide observé avec `0 résultats` ; état panne observé avec répertoire statique conservé ; retry observé avec retour du focus sur `#site-search`.
+- Téléchargements : panne réseau observée en **fail-closed**, 0 artefact exposé ; retry observé vers l'état volontairement verrouillé, 0 artefact exposé et focus restauré sur le statut.
+- Artefact de captures : ID `10597941478`.
+- Aucun comportement runtime de production n'a été modifié par ce lot.
+
+### PR #63 — cycle PWA sur preview HTTPS réelle
+
+- **TERMINÉE / fusionnée** dans Work au merge `be2f218d200805937279cb9b81802eee440b9a29`.
+- Candidat final réconcilié avec Work : `0bd6534bd2464f2b7ea2f242cb6e00cf2e3b201f`.
+- Première tentative `35485418540` : **failure ciblée** — la page était mise hors ligne mais le service worker conservait un accès réseau CDP ; le header `offline-stale` manquait alors que les pages restaient servies.
+- Correction ciblée du harnais : attacher la session CDP du service worker et appliquer l'émulation offline au contexte page **et** au service worker ; aucun changement produit.
+- Micro-proof final : run `35487895759` — **success**, marker `PASS_TARGETED_PREVIEW_PWA_CYCLE`.
+- Preview HTTPS immuable : `https://98f242f7.nova-forge-site-public.pages.dev`.
+- Service worker : `activated`, contrôleur présent, session réseau SW attachée.
+- Cache observé : `modaryx-site-v120-scalable`, 27 entrées après warmup.
+- Offline réel : Catalogue et Accueil servis sans erreur de navigation ; `data/catalog.json` retourne HTTP 200 avec `X-Modaryx-Cache: offline-stale` et `schemaVersion=1`.
+- Reconnexion : donnée fraîche HTTP 200 sans marqueur stale ; `registration.update()` laisse le worker actif et contrôlant.
+- Cette preuve ferme le **cycle automatisé HTTPS offline → online + health-check update** sur preview réelle. Elle ne remplace pas l'installation manuelle PWA sur appareil physique ni les preuves iOS/Android.
+
+### État courant actualisé
+
+- **TERMINÉ** — 10/10 assets compagnon et activation visuelle ciblée.
+- **TERMINÉ** — preview monde vivant desktop/mobile/reduced-motion.
+- **TERMINÉ** — états navigateur ciblés Recherche vide/panne/retry et Téléchargements panne/retry/verrouillé.
+- **TERMINÉ sur preview HTTPS ciblée** — cycle PWA offline/online + récupération + update health-check.
+- **TERMINÉ** — CodeQL historique visible fermé sur les lots précédents ; le scan du HEAD Work après fusion PR #63 est à lire séparément avant toute nouvelle conclusion de sécurité.
+- **EN COURS** — finition Premium HD page par page et fermeture du registre anti-oubli.
+- **PREUVE MANQUANTE** — validation artistique humaine finale.
+- **PREUVE MANQUANTE** — lecteur d'écran natif, zoom natif 400 %, appareils physiques/tactile, Safari/Firefox finaux, CWV représentatifs, installation PWA manuelle sur appareil, validation juridique complète.
+- **BLOQUÉ / dépendance réelle** — météo de production, téléchargements publics réels, comptes/backend, publication/modération distante, Storage Resolver, Repair Network, OS Bridge et autres capacités dépendantes explicitement tracées.
+- Aucun full replay n'a été exécuté. Aucune VF / aucun 100 % déclaré.
+
+## Prochain point logique actualisé
+
+1. Continuer les micro-lots page par page sur les états réellement observables, sans rejouer les preuves déjà fermées.
+2. Prioriser ensuite les pages/capacités locales restantes dont les états peuvent être prouvés sans backend fictif.
+3. Conserver toutes les dépendances produit dans l'anti-oubli jusqu'à livraison réelle ou blocage explicitement documenté.
+4. Full replay uniquement à la toute fin.
