@@ -21,6 +21,8 @@ on:
       - 'qa/check-auth-bff.mjs'
       - 'qa/check-profiles-account-ui.cjs'
       - 'qa/check-community-remote-ui.cjs'
+      - 'qa/check-moderation-publication-engine.mjs'
+      - 'qa/MODARYX-MODERATION-PUBLICATION-ENGINE-20260921.md'
       - 'qa/MODARYX-COMMUNITY-REMOTE-UI-20260920.md'
       - 'qa/MODARYX-PROFILES-ACCOUNT-UI-20260920.md'
       - 'qa/MODARYX-AUTH-BFF-SESSION-20260920.md'
@@ -81,6 +83,8 @@ on:
       - 'qa/check-auth-bff.mjs'
       - 'qa/check-profiles-account-ui.cjs'
       - 'qa/check-community-remote-ui.cjs'
+      - 'qa/check-moderation-publication-engine.mjs'
+      - 'qa/MODARYX-MODERATION-PUBLICATION-ENGINE-20260921.md'
       - 'qa/MODARYX-COMMUNITY-REMOTE-UI-20260920.md'
       - 'qa/MODARYX-PROFILES-ACCOUNT-UI-20260920.md'
       - 'qa/MODARYX-AUTH-BFF-SESSION-20260920.md'
@@ -227,6 +231,12 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-community-remote-ui.cjs
+
+      - name: Run targeted moderation publication engine proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-moderation-publication-engine.mjs
 
       - name: Run targeted SEO contract proof
         shell: bash

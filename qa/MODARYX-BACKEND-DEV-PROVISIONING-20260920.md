@@ -49,6 +49,7 @@ Variables non secrètes :
 - `MODARYX_TURNSTILE_SITE_KEY`
 - `MODARYX_TURNSTILE_HOSTNAME` recommandé en DEV pour pinner exactement le hostname de la preview stable
 - `MODARYX_SESSION_TTL_SECONDS` optionnel
+- `MODARYX_PRIVILEGED_AUTH_MAX_AGE_SECONDS` optionnel, 900 s par défaut, borné à 60–3600 s
 
 Secrets :
 - `AUTH0_CLIENT_SECRET`
@@ -90,6 +91,7 @@ Migrations à appliquer dans cet ordre sur **D1 DEV uniquement** :
 
 1. `migrations/0001_modaryx_dev_foundation.sql`
 2. `migrations/0002_modaryx_auth_sessions.sql`
+3. `migrations/0003_modaryx_moderation_publication.sql`
 
 Tables produit :
 - `modaryx_profiles`
@@ -106,6 +108,11 @@ Tables BFF/session :
 - `modaryx_auth_transactions` ;
 - `modaryx_sessions` ;
 - state OAuth et token de session stockés uniquement sous forme hashée côté D1.
+
+Table modération :
+- `modaryx_moderation_receipts` ;
+- receipts de décision chaînés via `previous_receipt_id` ;
+- subject modérateur non stocké en clair dans le receipt.
 
 ## API status
 
@@ -135,7 +142,10 @@ Avant toute activation distante :
 8. micro-proof réel login/session HttpOnly ;
 9. micro-proof réel profil avec action `profile-write` ;
 10. micro-proof réel Communauté avec action `community-write` et réponse `pending/received/distributable=false` ;
-11. seulement après preuve, planifier production.
+11. appliquer 0003 sur D1 DEV avant d'activer le moteur de modération ;
+12. activer RBAC Auth0 DEV et la permission `community:moderate` uniquement pour le compte de preuve ;
+13. micro-prouver file → décision → publication publique → retrait ;
+14. seulement après preuve, planifier production.
 
 Aucun DNS/DNSSEC/nameserver n'est requis pour cette fondation.
 

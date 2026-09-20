@@ -10,8 +10,9 @@ Appliquer les migrations dans cet ordre, sur une base DEV isolée uniquement :
 
 1. `migrations/0001_modaryx_dev_foundation.sql`
 2. `migrations/0002_modaryx_auth_sessions.sql`
+3. `migrations/0003_modaryx_moderation_publication.sql`
 
-La seconde migration est nécessaire au flux BFF/session déjà codé.
+La seconde migration est nécessaire au flux BFF/session. La troisième ajoute les receipts de modération nécessaires au moteur publication/modération.
 
 ## Turnstile DEV
 
@@ -27,7 +28,8 @@ Le runtime transmet déjà ce hostname comme `expectedHostname` à la validation
 - l'identifiant de l'API Auth0 doit correspondre exactement à `AUTH0_AUDIENCE` ;
 - signature attendue : `RS256` ;
 - callback DEV : `https://<origine-preview-stable>/api/v1/auth/callback` ;
-- utiliser une origine de preview stable pour éviter de changer la callback à chaque commit.
+- utiliser une origine de preview stable pour éviter de changer la callback à chaque commit ;
+- pour la modération DEV, activer RBAC sur l'API, inclure les permissions dans l'access token et attribuer `community:moderate` uniquement au compte modérateur de preuve.
 
 ## Portée Cloudflare
 
@@ -45,5 +47,8 @@ Pour profils + Communauté actuels :
 5. Soumission Communauté avec action `community-write`.
 6. Réponse Communauté uniquement `pending/received/distributable=false`.
 7. Échec Turnstile/hostname/session reste fail-closed.
+8. Après migration 0003 + RBAC, file modération lisible uniquement avec `community:moderate`.
+9. Décision privilégiée refuse une session trop ancienne avec `reauthentication-required`.
+10. Publication réelle n'apparaît dans `/api/v1/community/public` qu'après décision `publish`; `hold`/`reject` retirent le contenu public.
 
 Aucun DNS, production, `main`, tenant, binding ou secret réel n'est créé par ce document.
