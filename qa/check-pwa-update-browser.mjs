@@ -1,11 +1,13 @@
 import {spawn} from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 
 const CHROME_BIN = process.env.CHROME_BIN || 'google-chrome';
 const ORIGIN = 'http://127.0.0.1:4174';
-const USER_DATA_DIR = '/tmp/modaryx-pwa-update-browser-' + process.pid;
-const ROOT = '/tmp/modaryx-pwa-update-' + process.pid;
+const ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'modaryx-pwa-update-'));
+const USER_DATA_DIR = path.join(ROOT, 'chrome-profile');
+const CANDIDATE_DIR = path.join(ROOT, 'candidate');
 const CACHE_A = 'modaryx-site-v120-scalable';
 const CACHE_B = 'modaryx-site-v121-update-proof';
 const failures = [];
@@ -44,20 +46,19 @@ async function waitForJson(url, timeoutMs = 10000) {
 }
 
 function copyCandidate() {
-  fs.rmSync(ROOT, {recursive:true, force:true});
-  fs.cpSync(process.cwd(), ROOT, {
+  fs.cpSync(process.cwd(), CANDIDATE_DIR, {
     recursive:true,
     filter:(source) => !source.includes(path.sep + '.git' + path.sep) && !source.endsWith(path.sep + '.git')
   });
-  const indexPath = path.join(ROOT, 'index.html');
+  const indexPath = path.join(CANDIDATE_DIR, 'index.html');
   let index = fs.readFileSync(indexPath, 'utf8');
   index = index.replace('<body', '<body data-pwa-update-proof="A"');
   fs.writeFileSync(indexPath, index);
 }
 
 function mutateToB() {
-  const swPath = path.join(ROOT, 'sw.js');
-  const indexPath = path.join(ROOT, 'index.html');
+  const swPath = path.join(CANDIDATE_DIR, 'sw.js');
+  const indexPath = path.join(CANDIDATE_DIR, 'index.html');
   let sw = fs.readFileSync(swPath, 'utf8');
   if (!sw.includes(CACHE_A)) throw new Error('stage A cache name missing in copied sw.js');
   sw = sw.replace(CACHE_A, CACHE_B);
@@ -70,7 +71,7 @@ function mutateToB() {
 
 function startServer() {
   const child = spawn('python3', ['-m','http.server','4174','--bind','127.0.0.1'], {
-    cwd:ROOT,
+    cwd:CANDIDATE_DIR,
     stdio:['ignore','ignore','ignore']
   });
   return child;
