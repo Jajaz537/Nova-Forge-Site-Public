@@ -3,7 +3,7 @@ aac184980131c277739d73eb12e589eacaaed916c7c452ae380c905297d09507  ./404.html
 31db6f25cc44e29cb076a6df7fc695d9f7906afae2c7df5314ed6fdad222294c  ./assets/app.js
 dea2e4d99f8159188b234eb5fdb7af7f2b98b1d09f031afffb22feb98c03bef9  ./assets/catalog.css
 aad8c8aca8381b5af2362aaafce4e35f53e5df33624ad98d504732c27021fe04  ./assets/catalog.js
-96757ca2feb3a016834a43ec965b51c51d5726ef1d260d84f3c766206e47efdd  ./assets/community.js
+f9fa44e131192fb7f655ac3431e2abcec4d90992e60e0abaf94aebce64d8f2c5  ./assets/community.js
 7a8e4630a3ae45d23c6a32eedfa29a42f5f43819b478f4a06af56ee9c7170bf3  ./assets/creator-studio.css
 61cc3065ebd76685c88c7d92ad3bc070d3f8b1ea87aabd046cfa0d8fc76b35d0  ./assets/creator-studio.js
 01fa07ab10924bf4637e2830830cd7fb5c50452a495870f00fd8f0a65dc5a62f  ./assets/downloads.js
@@ -40,7 +40,7 @@ f90348520048d546761e0e1b794ab6d22aa02f06d06f95f54e9855bf89b345dc  ./assets/token
 a1d756c67a07e522f23d20c5a28f433e03473eec0f2ac51101f13b2c8a90ec83  ./assets/verify-picker.css
 92736f4afba835879723e51fcbab193d521d222e699ce7ff8112388a9b4b211a  ./assets/verify.js
 a90b528864f0453c4a89dd4fd888f6230d962c8515e1b35eec936e7631b8be2a  ./catalog.html
-4f394f7c8ce939f54c269bbd3654fc52f718408f770daf365fcb1397af82c43c  ./community.html
+720d4983a35ba67e55b97dd528c313fd19d353746854e317a3cd202dd7ad6f61  ./community.html
 796e8e926b9447ab73f8b42ec19266e87bd7114036773a400dad6387af0627f7  ./creator-studio.html
 010737ea4c600d6111d3fa94d6f86e454595dd6f0b5ddb4e0ab01b689b70fbd3  ./data/catalog.json
 08f9810bea5a8afc20acbf7a6f5b23c5cb4647621f6a1787d42a3fa212981283  ./data/compatibility-graph.json
@@ -62,7 +62,7 @@ e0de3d768104ad988e7544e44915b6df8fcfc8893bd919c27289b1f71950ab22  ./project.html
 80163080d252e14292028eb077c6d8bd7c493b07e17ceda329ccedbe8c9189ac  ./public-build.json
 43d2dfa4afa6d13dbeae2feb44286098af575c31b39fcfacdc57710b73e56594  ./public-status.json
 16ceb5ee3e0dc13aa9adf31a3ebbe45a1d965b8c2b9f72eaf84e5911e140ed95  ./robots.txt
-f5294292e5f55e66d101a1beef7de8f8a2947d14e74a52b42999701c617f4b89  ./schemas/account-security.schema.json
+050cdcdcf860f6037168280d133a06021f44b065ad5cbce768f2c06834f357fd  ./schemas/account-security.schema.json
 a8b44f9f965e0fa3036b66e72157e37b1c3cc558a9827802deaccc99ff91d1fb  ./schemas/collection.schema.json
 9eabb1794a39ce8ac67836b1755a1a287eaab98c688fcf5a2ebf50da484d66aa  ./schemas/community-submission.schema.json
 ea718a7f387bf9038423c1091d9b35ad0d5556c665a13b6540079bd90193e8ab  ./schemas/community-write.schema.json
