@@ -1205,3 +1205,70 @@ Donc :
 2. Garder les services réels EN COURS tant que tenant/backend/stockage distant ne sont pas connectés.
 3. Examiner ensuite le verrou local de distribution/téléchargements sans inventer d'artefact réel.
 4. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — PR #99 — verrou distribution — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour la distribution/téléchargements publics.
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #99 : `9086a86251b27218d8208a60ca66ca8315a828a7`.
+- `main` n'a pas été modifiée.
+- Aucun artefact public, stockage distant, téléchargement réel, secret, sitemap ou infrastructure critique activé.
+- Aucun full replay final exécuté.
+
+### Sources
+
+- `downloads.json`
+- `assets/downloads.js`
+- `qa/check-download-recovery.cjs`
+- `qa/check-distribution-lock-contracts.cjs`
+- `schemas/universal-mod-manifest.schema.json`
+- `data/integration-readiness.json`
+
+L'identifiant historique `urn:nova-forge:schemas:universal-mod-manifest:v1` est conservé pour provenance/compatibilité technique, sans fusion d'identité produit.
+
+### PR #99 — preuve ciblée
+
+- **TERMINÉE / fusionnée dans Work** au merge `9086a86251b27218d8208a60ca66ca8315a828a7`.
+- Document : `qa/MODARYX-DISTRIBUTION-LOCK-CONTRACT-20260920.md`.
+- Run `35517484673` — **success** :
+  - `PASS_TARGETED_SITE_FIRST_SOURCE_PROOF`
+  - `PASS_TARGETED_INTEGRATION_READINESS`
+  - `PASS_TARGETED_STORAGE_REPAIR_CONTRACTS`
+  - `PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS`
+  - `PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS`
+  - `PASS_TARGETED_DISTRIBUTION_LOCK_CONTRACTS`
+  - `PASS_TARGETED_SEO_CONTRACT`
+  - `PASS_TARGETED_ANTI_OUBLI_GATE`
+- `readinessState: distribution-locked`.
+- `artifactCount: 0`.
+- `failures: []`.
+
+### Invariants protégés
+
+- manifeste courant `pre-vf`, `available=false`, zéro artefact ;
+- politique `verified-artifacts-only` ;
+- identité + SHA-256 + provenance + signature lorsque requise ;
+- chemins publics same-origin relatifs, sans traversée parent ;
+- manifeste stale, invalide, vide ou indisponible => fail-closed ;
+- recovery ciblé conservant zéro artefact ;
+- universal manifest : `withdrawn/revoked => downloadable=false`.
+
+### État courant
+
+- **TERMINÉ — verrou local de distribution ciblé**.
+- **TERMINÉ — recovery fail-closed ciblé**.
+- **TERMINÉ — sémantique de manifeste ciblée**.
+- **BLOQUÉ — téléchargement public réel** : aucun artefact autorisé réel avec identité, intégrité, provenance et signature lorsque requise.
+- `distribution.artifacts` reste correctement `distribution-locked`.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Ne plus traiter le verrou local de distribution comme une capacité absente.
+2. Garder le téléchargement public réel BLOQUÉ tant qu'aucun artefact autorisé n'existe.
+3. Auditer les derniers blockers pour distinguer ce qui reste fermable ici de ce qui nécessite Work, appareil, fournisseur ou entrée utilisateur réelle.
+4. Aucun full replay avant la toute fin.
