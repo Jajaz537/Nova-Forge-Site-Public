@@ -204,6 +204,7 @@ try {
   await cdp.opened;
   await cdp.send('Page.enable');
   await cdp.send('Runtime.enable');
+  await cdp.send('Network.enable');
   await cdp.send('Fetch.disable').catch(() => {});
 
   await runCheck('search-empty-state', async () => {
@@ -233,6 +234,8 @@ try {
   });
 
   await runCheck('search-error-recovery', async () => {
+    await cdp.send('Network.setBypassServiceWorker', {bypass: true});
+    await cdp.send('Network.setCacheDisabled', {cacheDisabled: true});
     const release = await failRequests(cdp, '*data/search-index.json*');
     await navigate(cdp, 'search.html?state-proof=error');
     const failed = await waitFor(cdp, `(() => {
