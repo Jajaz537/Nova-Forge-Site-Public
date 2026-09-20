@@ -149,7 +149,7 @@ async function capture(cdp,page,viewport){
     const de=document.documentElement;
     const body=document.body;
     const h1=document.querySelector('h1');
-    const hero=document.querySelector('.hero,.catalog-hero,.project-hero,.studio-hero,.profiles-hero,.games-intro,.modaryx-realm-hero');
+    const hero=document.querySelector('.hero,.catalog-hero,.project-hero,.studio-hero,.profiles-hero,.games-intro,.modaryx-realm-hero,.project-page > .section:first-of-type');
     const header=document.querySelector('.topbar,.nova-topbar');
     const footer=document.querySelector('.site-footer');
     const nav=document.querySelector('.section-nav');
