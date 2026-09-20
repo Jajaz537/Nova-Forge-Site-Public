@@ -1272,3 +1272,104 @@ L'identifiant historique `urn:nova-forge:schemas:universal-mod-manifest:v1` est 
 2. Garder le téléchargement public réel BLOQUÉ tant qu'aucun artefact autorisé n'existe.
 3. Auditer les derniers blockers pour distinguer ce qui reste fermable ici de ce qui nécessite Work, appareil, fournisseur ou entrée utilisateur réelle.
 4. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — PR #101 — contrats plateforme locale — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour les derniers contrats purement locaux.
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #101 : `934047aaf0df6dfcb559454c84f651dd14ffba6f`.
+- `main` n'a pas été modifiée.
+- Aucun backend, moteur Guide, pont OS, recherche externe, télémétrie, secret, sitemap ou infrastructure critique activé.
+- Aucun full replay final exécuté.
+
+### Sources
+
+- `public-status.json`
+- `schemas/smart-profile.schema.json`
+- `schemas/collection.schema.json`
+- `schemas/compatibility-graph.schema.json`
+- `data/compatibility-graph.json`
+- `schemas/search-adapter.schema.json`
+
+Les identifiants historiques Nova Forge des schémas restent conservés pour compatibilité/provenance technique sans fusion de marque.
+
+### PR #101 — preuve ciblée
+
+- **TERMINÉE / fusionnée dans Work** au merge `934047aaf0df6dfcb559454c84f651dd14ffba6f`.
+- Checker : `qa/check-local-platform-contracts.cjs`.
+- Document : `qa/MODARYX-LOCAL-PLATFORM-CONTRACTS-20260920.md`.
+- Run `35517826441` — **success** :
+  - `PASS_TARGETED_SITE_FIRST_SOURCE_PROOF`
+  - `PASS_TARGETED_INTEGRATION_READINESS`
+  - `PASS_TARGETED_STORAGE_REPAIR_CONTRACTS`
+  - `PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS`
+  - `PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS`
+  - `PASS_TARGETED_DISTRIBUTION_LOCK_CONTRACTS`
+  - `PASS_TARGETED_LOCAL_PLATFORM_CONTRACTS`
+  - `PASS_TARGETED_SEO_CONTRACT`
+  - `PASS_TARGETED_ANTI_OUBLI_GATE`
+- `failures: []`.
+
+### Invariants protégés
+
+Public status :
+- static-first ;
+- local-first ;
+- fail-closed ;
+- public-only ;
+- pas de compte, télémétrie distante ou dépendance runtime tierce obligatoire ;
+- hash correspondant != preuve de provenance.
+
+Smart Profile :
+- browser-local ;
+- evidence measured / estimated / unknown bornée ;
+- unknown => unavailable/null ;
+- recommandation estimée ;
+- aucune garantie FPS ou stabilité.
+
+Collections :
+- visibilité explicite ;
+- défaut `private-local` ;
+- items uniques.
+
+Compatibilité :
+- schéma demonstration/published explicite ;
+- toute mesure exige receipt ;
+- données actuelles = `demonstration` ;
+- zéro arête `measured`.
+
+Search adapter :
+- externe optionnel ;
+- `requiredForCore=false` ;
+- préservation des content IDs locaux ;
+- état public courant = `not_required`.
+
+### Frontière locale atteinte
+
+Après cette preuve, aucun blocker encore ouvert dans le registre ne peut être honnêtement fermé par un simple contrat local supplémentaire sans inventer une capacité ou une preuve.
+
+Restent notamment :
+- services/tenants distants réels ;
+- corpus/artefacts autorisés réels ;
+- météo production sur décision fournisseur ;
+- Guide MODARYX connecté sans contrat/moteur récupéré ;
+- pont Nova Forge OS dépendant d'une interface OS stabilisée ;
+- preuves Safari/lecteurs d'écran/VoiceOver/zoom natif/appareils physiques/PWA réelle ;
+- CWV terrain ;
+- validation humaine artistique ;
+- validation juridique ;
+- sitemap gardé ;
+- Master NDI non récupéré.
+
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Considérer les couches locales contractuelles comme fermées tant qu'aucune modification pertinente ne les invalide.
+2. Passer au mode externe ciblé : Work uniquement pour les tâches qu'il peut réellement accomplir.
+3. Garder les preuves matériel/humain PREUVE MANQUANTE tant qu'un environnement approprié n'existe pas.
+4. Aucun full replay avant la toute fin.
