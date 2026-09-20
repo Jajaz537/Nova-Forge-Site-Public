@@ -9,6 +9,8 @@ const js=fs.readFileSync(path.join(root,'assets/community.js'),'utf8');
 const css=fs.readFileSync(path.join(root,'assets/modaryx-community-finishline.css'),'utf8');
 const endpoint=fs.readFileSync(path.join(root,'functions/api/v1/community/submissions.js'),'utf8');
 const publicEndpoint=fs.readFileSync(path.join(root,'functions/api/v1/community/public.js'),'utf8');
+const appealEndpoint=fs.readFileSync(path.join(root,'functions/api/v1/community/appeals.js'),'utf8');
+const statusEndpoint=fs.readFileSync(path.join(root,'functions/api/v1/community/submissions/[id].js'),'utf8');
 
 for(const token of [
   'id="community-remote"',
@@ -20,6 +22,12 @@ for(const token of [
   'data-public-state="loading"',
   'id="community-public-list"',
   'id="community-public-refresh"',
+  'id="community-followup"',
+  'data-followup-state="idle"',
+  'id="community-followup-id"',
+  'id="community-followup-check"',
+  'id="community-appeal-panel"',
+  'id="community-appeal-submit"',
   'Uniquement après modération.',
   'Envoyer pour modération',
   'https://challenges.cloudflare.com'
@@ -39,7 +47,11 @@ for(const token of [
   'fetch("/api/v1/community/public?limit=12"',
   'item.moderationState !== "accepted"',
   'item.publicationState !== "published"',
-  'Aucun brouillon local n’est affiché à sa place'
+  'Aucun brouillon local n’est affiché à sa place',
+  'remoteJson("/api/v1/community/submissions/" + encodeURIComponent(id))',
+  'remoteJson("/api/v1/community/appeals"',
+  'data?.state !== "submitted"',
+  'trackedSubmission?.appealAvailable'
 ]) assert.ok(js.includes(token),'community JS invariant missing: '+token);
 
 assert.ok(!js.includes('access_token'),'community UI must never handle Auth0 access tokens');
@@ -55,7 +67,10 @@ for(const token of [
   '.community-remote-result{',
   '.community-publications{',
   '.community-public-grid{',
-  '.community-public-card'
+  '.community-public-card',
+  '.community-followup{',
+  '.community-followup-summary{',
+  '.community-appeal-panel{'
 ]) assert.ok(css.includes(token),'community remote CSS invariant missing: '+token);
 
 for(const token of [
@@ -73,6 +88,23 @@ for(const token of [
   "row.profile_visibility === 'public'"
 ]) assert.ok(publicEndpoint.includes(token),'public community endpoint invariant missing: '+token);
 
+for(const token of [
+  'authorizeCommunityMemberWrite',
+  "receipt_type = 'appeal'",
+  "decision-not-appealable",
+  "appeal-already-submitted",
+  "'system'"
+]) assert.ok(appealEndpoint.includes(token),'community appeal endpoint invariant missing: '+token);
+
+for(const token of [
+  'authenticateRead(context)',
+  'p.identity_sub = ?',
+  "receipt.receiptType === 'decision'",
+  "receipt.receiptType === 'appeal'",
+  "receipt.receiptType === 'appeal-outcome'",
+  'appealAvailable'
+]) assert.ok(statusEndpoint.includes(token),'community follow-up endpoint invariant missing: '+token);
+
 console.log(JSON.stringify({
   marker:'PASS_TARGETED_COMMUNITY_REMOTE_UI',
   result:'PASS',
@@ -84,7 +116,9 @@ console.log(JSON.stringify({
     'failed remote writes do not claim success',
     'browser never handles Auth0 access tokens',
     'public feed renders only accepted/published server responses',
-    'public feed fails closed instead of substituting local drafts'
+    'public feed fails closed instead of substituting local drafts',
+    'owners can inspect only their own remote submission state',
+    'appeal UI is exposed only when the server reports an appealable restrictive decision'
   ],
   failures:[]
 },null,2));
