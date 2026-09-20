@@ -244,3 +244,15 @@ Décision utilisateur explicitement retenue pour la VF :
 - **EN COURS** — dragon juvénile / adolescent / jeune adulte / adulte restent à produire, intégrer et prouver avant tout passage `ready`.
 - Validation artistique humaine finale du bundle complet : **PREUVE MANQUANTE** tant que les 10 couches ne sont pas réunies dans leur rendu intégré.
 
+## Couche compagnon — Dragon juvénile — 20 septembre 2026
+
+- **TERMINÉ** — PR #53 fusionnée dans la branche Work au commit `35b70b87bfb0c19ce4e9051f95adb51ab413a480`.
+- Asset : `assets/living-world/dragon-juvenile.png`.
+- Format prouvé : PNG RGBA, **1600 × 900**, alpha=true.
+- SHA-256 : `3ee8b9a0a9ea83000b3cbd2e1e0560690e7923d5764c7f20a0a171d228c0cde3`.
+- Dérivé du Dragonneau pour maintenir la continuité d'identité ; stade juvénile plus grand et plus assuré, sans basculer adolescent.
+- Asset volontairement non référencé ; `visualGrowth.status=awaiting-assets` reste inchangé.
+- Preuves ciblées : Layered Growth Asset Gate `35477746978`, Site First Source `35477746997`, PWA Offline `35477746983`, Accessibility `35477746988`, Reflow `35477746993`, Lab Performance `35477746982` — toutes **success**.
+- Couches compagnon : **7/10 TERMINÉES**.
+- **EN COURS** — dragon adolescent / jeune adulte / adulte.
+
