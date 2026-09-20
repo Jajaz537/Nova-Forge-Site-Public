@@ -61,6 +61,17 @@
   const creatorInput = document.querySelector("#profile-creator");
   const formStatus = document.querySelector("#profile-form-status");
   const turnstileSlot = document.querySelector("#turnstile-slot");
+  const publicProfileConsole = document.querySelector("#public-profile");
+  const publicProfileState = document.querySelector("#public-profile-state");
+  const publicProfileSearch = document.querySelector("#public-profile-search");
+  const publicProfileHandleInput = document.querySelector("#public-profile-handle");
+  const publicProfileSearchStatus = document.querySelector("#public-profile-search-status");
+  const publicProfileCard = document.querySelector("#public-profile-card");
+  const publicProfileHandleLabel = document.querySelector("#public-profile-handle-label");
+  const publicProfileDisplayName = document.querySelector("#public-profile-display-name");
+  const publicProfileCreator = document.querySelector("#public-profile-creator");
+  const publicProfileBio = document.querySelector("#public-profile-bio");
+  const publicProfileLinks = document.querySelector("#public-profile-links");
 
   let backendStatus = null;
   let turnstileToken = "";
@@ -271,6 +282,99 @@
     await prepareTurnstile();
   }
 
+  function normalizePublicHandle(value) {
+    const normalized = String(value || "").trim().toLowerCase().replace(/^@/, "");
+    return /^[a-z0-9][a-z0-9._-]{2,31}$/.test(normalized) ? normalized : "";
+  }
+
+  function setPublicProfileState(state, label, message) {
+    if (publicProfileConsole) publicProfileConsole.dataset.publicProfileState = state;
+    set(publicProfileState, label);
+    set(publicProfileSearchStatus, message);
+  }
+
+  function renderPublicProfile(profile) {
+    if (!publicProfileCard || !profile || profile.visibility !== "public") return false;
+
+    set(publicProfileHandleLabel, `@${profile.handle || ""}`);
+    set(publicProfileDisplayName, profile.displayName || profile.handle || "Profil public");
+    set(publicProfileBio, profile.bio || "Ce profil n’a pas encore ajouté de présentation.");
+
+    if (publicProfileCreator) {
+      const isCreator = Boolean(profile.creator?.isCreator);
+      publicProfileCreator.hidden = !isCreator;
+      publicProfileCreator.textContent = profile.creator?.displayLabel || "Créateur";
+    }
+
+    if (publicProfileLinks) {
+      publicProfileLinks.replaceChildren();
+      for (const item of Array.isArray(profile.links) ? profile.links : []) {
+        if (!item || typeof item.label !== "string" || typeof item.url !== "string") continue;
+        let url;
+        try {
+          url = new URL(item.url);
+        } catch {
+          continue;
+        }
+        if (url.protocol !== "https:") continue;
+        const link = document.createElement("a");
+        link.className = "button public-profile-link";
+        link.href = url.href;
+        link.rel = "noopener noreferrer";
+        link.textContent = item.label;
+        publicProfileLinks.append(link);
+      }
+    }
+
+    publicProfileCard.hidden = false;
+    return true;
+  }
+
+  async function loadPublicProfile(rawHandle, {updateUrl = true} = {}) {
+    const handle = normalizePublicHandle(rawHandle);
+    if (!handle) {
+      if (publicProfileCard) publicProfileCard.hidden = true;
+      setPublicProfileState("invalid", "Pseudonyme invalide", "Utilisez 3 à 32 caractères : lettres, chiffres, point, tiret ou underscore.");
+      return;
+    }
+
+    if (publicProfileHandleInput) publicProfileHandleInput.value = handle;
+    if (publicProfileCard) publicProfileCard.hidden = true;
+    setPublicProfileState("loading", "Recherche…", `Chargement du profil public @${handle}…`);
+
+    try {
+      const {response, data} = await fetchJson(`/api/v1/profiles/${encodeURIComponent(handle)}`);
+      if (response.status === 404) {
+        setPublicProfileState("empty", "Introuvable", "Aucun profil public n’est disponible pour ce pseudonyme.");
+        return;
+      }
+      if (!response.ok) throw new Error(data?.error || "public-profile-load-failed");
+      if (!renderPublicProfile(data)) throw new Error("public-profile-visibility-invalid");
+
+      setPublicProfileState("found", "Profil public", `Profil @${handle} chargé depuis le backend same-origin.`);
+      if (updateUrl && window.history?.replaceState) {
+        const url = new URL(window.location.href);
+        url.searchParams.set("profile", handle);
+        url.hash = "public-profile";
+        window.history.replaceState(null, "", url);
+      }
+    } catch {
+      setPublicProfileState("error", "Indisponible", "Le profil public n’a pas pu être chargé. Aucun contenu privé n’est affiché en remplacement.");
+    }
+  }
+
+  function initPublicProfileLookup() {
+    if (!publicProfileSearch || !publicProfileHandleInput) return;
+
+    publicProfileSearch.addEventListener("submit", (event) => {
+      event.preventDefault();
+      loadPublicProfile(publicProfileHandleInput.value);
+    });
+
+    const requested = new URLSearchParams(window.location.search).get("profile");
+    if (requested) loadPublicProfile(requested, {updateUrl: false});
+  }
+
   if (login) {
     login.addEventListener("click", (event) => {
       if (login.getAttribute("aria-disabled") === "true") event.preventDefault();
@@ -334,5 +438,6 @@
   }
 
   detectWebAuthn();
+  initPublicProfileLookup();
   initAccount();
 })();

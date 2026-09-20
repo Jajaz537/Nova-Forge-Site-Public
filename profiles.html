@@ -107,6 +107,39 @@
       <p class="account-console-note">En environnement non provisionné, cette console reste volontairement verrouillée. Une réponse locale, un cache ou une détection WebAuthn ne sont jamais interprétés comme une authentification réussie.</p>
     </section>
 
+    <section class="public-profile-console" id="public-profile" aria-labelledby="public-profile-title" data-public-profile-state="idle">
+      <div class="public-profile-heading">
+        <div>
+          <p class="eyebrow">Découvrir un profil public</p>
+          <h2 id="public-profile-title">Une identité publique, jamais une session privée.</h2>
+          <p>Recherchez un pseudonyme public. Les profils privés ou non listés ne sont jamais révélés par cette surface.</p>
+        </div>
+        <span class="public-profile-state-badge" id="public-profile-state" role="status" aria-live="polite">Prêt</span>
+      </div>
+
+      <form class="public-profile-search" id="public-profile-search" novalidate>
+        <label for="public-profile-handle">Pseudonyme public</label>
+        <div class="public-profile-search-row">
+          <input id="public-profile-handle" name="profile" autocomplete="off" minlength="3" maxlength="32" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,31}" placeholder="@pseudo" required>
+          <button class="button" type="submit">Afficher le profil</button>
+        </div>
+        <p id="public-profile-search-status">Saisissez un pseudonyme pour charger uniquement les données déclarées publiques.</p>
+      </form>
+
+      <article class="public-profile-card" id="public-profile-card" hidden aria-live="polite">
+        <div class="public-profile-identity">
+          <div>
+            <p class="eyebrow" id="public-profile-handle-label">@profil</p>
+            <h3 id="public-profile-display-name">Profil public</h3>
+          </div>
+          <span class="badge neutral" id="public-profile-creator" hidden>Créateur</span>
+        </div>
+        <p class="public-profile-bio" id="public-profile-bio"></p>
+        <div class="public-profile-links" id="public-profile-links" aria-label="Liens publics du profil"></div>
+        <p class="public-profile-fineprint">Cette carte n’expose ni subject fournisseur, ni session, ni moyen de connexion. Seules les données d’un profil avec visibilité <strong>public</strong> sont servies.</p>
+      </article>
+    </section>
+
     <section class="profiles-grid" aria-labelledby="boundaries-title">
       <div class="section-heading"><div><p class="eyebrow">Séparation des responsabilités</p><h2 id="boundaries-title">Cinq domaines distincts</h2></div></div>
       <article class="profile-card"><h3>Identité publique</h3><p>Pseudonyme, nom affiché, biographie et collections composent votre présentation. Le subject d’identité fournisseur n’est pas exposé publiquement.</p></article>
