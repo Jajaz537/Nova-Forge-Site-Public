@@ -208,19 +208,19 @@ try {
       const search=document.querySelector('#mod-search');
       const cards=document.querySelectorAll('[data-mod-catalog] article.card');
       if (!status || !build || !search) return null;
-      return status.dataset.freshness==='network' && build.dataset.freshness==='network' && build.dataset.reported==='true' && !search.disabled && cards.length===3
+      return status.dataset.freshness==='network' && build.dataset.freshness==='unavailable' && build.dataset.reported===undefined && !search.disabled && cards.length===3
         ? {
             status:status.textContent||'',
             statusFreshness:status.dataset.freshness,
             buildText:build.querySelector('small')?.textContent||'',
             buildFreshness:build.dataset.freshness,
-            buildReported:build.dataset.reported,
+            buildReported:build.dataset.reported ?? null,
             cards:cards.length
           }
         : null;
     })()`, 'home public-data recovery');
     assert(/Aucun téléchargement public n’est déclaré disponible/.test(recovered.status), 'recovered public status drifted');
-    assert(/^SHA-256 déclaré /.test(recovered.buildText), 'recovered public build digest not displayed');
+    assert(recovered.buildText === 'Empreinte de build non disponible', 'public build must stay unavailable while the digest is intentionally null');
 
     await evaluate(cdp, `document.querySelector('[data-os-bridge]')?.click(); true`);
     const bridge = await waitFor(cdp, `(() => {
