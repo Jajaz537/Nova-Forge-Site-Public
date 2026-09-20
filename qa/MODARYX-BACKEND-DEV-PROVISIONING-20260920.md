@@ -143,9 +143,11 @@ Avant toute activation distante :
 9. micro-proof réel profil avec action `profile-write` ;
 10. micro-proof réel Communauté avec action `community-write` et réponse `pending/received/distributable=false` ;
 11. appliquer 0003 sur D1 DEV avant d'activer le moteur de modération ;
-12. activer RBAC Auth0 DEV et la permission `community:moderate` uniquement pour le compte de preuve ;
-13. micro-prouver file → décision → publication publique → retrait ;
-14. seulement après preuve, planifier production.
+12. activer RBAC Auth0 DEV et la permission `community:moderate` pour le compte modérateur de preuve ;
+13. attribuer séparément `community:appeals-review` au compte de revue des recours ;
+14. micro-prouver file → décision → publication publique → retrait ;
+15. micro-prouver suivi auteur → recours → file recours → issue `upheld/modified/reversed` avec receipts chaînés ;
+16. seulement après preuve, planifier production.
 
 Aucun DNS/DNSSEC/nameserver n'est requis pour cette fondation.
 
