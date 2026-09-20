@@ -1576,3 +1576,70 @@ Micro-proof final :
 2. Utiliser session HttpOnly/D1 et Authorization Code + PKCE.
 3. Rester fail-closed tant que le tenant Auth0 DEV n'est pas provisionné.
 4. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — PR #108 — Auth0 BFF / session — 20 septembre 2026
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #108 : `6f9e8eca517bf117768574cd41fb24c4d33e4fb9`.
+- `main` inchangée.
+- Aucun tenant Auth0 réel, client secret réel, D1 distant, Turnstile, DNS ou production activé.
+- Aucun full replay final exécuté.
+
+### Architecture ajoutée
+
+- Auth0 Universal Login côté fournisseur.
+- Authorization Code + PKCE S256.
+- transaction OAuth courte et single-use dans D1.
+- callback serveur.
+- échange code -> access token côté serveur.
+- vérification JWT Auth0 côté serveur.
+- session MODARYX aléatoire.
+- stockage en D1 du hash de session uniquement.
+- cookie `HttpOnly; Secure; SameSite=Lax`.
+- logout same-origin.
+- APIs profils/communauté : session BFF prioritaire, bearer Auth0 fallback API.
+
+### Routes ajoutées
+
+- `GET /api/v1/auth/login`
+- `GET /api/v1/auth/callback`
+- `GET /api/v1/auth/session`
+- `POST /api/v1/auth/logout`
+
+### Migration
+
+- `migrations/0002_modaryx_auth_sessions.sql`
+- tables `modaryx_auth_transactions` et `modaryx_sessions`.
+- états OAuth single-use et sessions bornées par expiration.
+
+### Preuves
+
+Run source `35522509780` — **success** :
+- `PASS_TARGETED_BACKEND_DEV_FOUNDATION`
+- `PASS_TARGETED_REMOTE_WRITE_ENDPOINTS`
+- `PASS_TARGETED_AUTH_BFF_SESSION`
+- `PASS_TARGETED_SEO_CONTRACT`
+- `PASS_TARGETED_ANTI_OUBLI_GATE`
+- autres gardes existantes vertes ;
+- `failures: []`.
+
+Browser proof run `35522509745` — **success**.
+
+### État honnête
+
+- **TERMINÉ — architecture BFF/session ciblée**.
+- **EN COURS — tenant Auth0 DEV réel**.
+- **EN COURS — D1/Turnstile/bindings réels**.
+- **EN COURS — login utilisateur réel / cérémonie passkey**.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Intégrer l'UI compte/profil côté site sur `/api/v1/auth/session`, login/logout et `/api/v1/profile`.
+2. Garder l'UI fail-soft lorsque le backend n'est pas provisionné.
+3. Tester source + browser sans fournisseur.
+4. Ensuite passer à Work pour provisionnement Auth0/Cloudflare DEV réel.
+5. Aucun full replay avant la toute fin.
