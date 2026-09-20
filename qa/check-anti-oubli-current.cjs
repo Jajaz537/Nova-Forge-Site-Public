@@ -11,7 +11,7 @@ const readiness = JSON.parse(fs.readFileSync(path.join(root, 'data/integration-r
 const requiredCurrent = [
   'Design system Premium HD des 23 routes publiques',
   'SEO on-page des 23 routes | **TERMINÉ — preuve ciblée**',
-  'Sitemap des routes jeux/hubs | **EN COURS — garde explicite**',
+  'Sitemap des routes jeux/hubs | **TERMINÉ — preuve ciblée**',
   'Hubs GTA VI / RDR2, catégories et guides éditoriaux | **TERMINÉ — périmètre éditorial sourcé + readiness contractuelle**',
   'Corpus réels de mods GTA VI / RDR2 | **EN COURS — capacité non livrée / droits et preuves requis**',
   'PASS_TARGETED_SEO_CONTRACT',
@@ -67,7 +67,8 @@ const forbiddenCurrent = [
   'Comptes / authentification / passkeys réels | **EN COURS — flux BFF/session codé, tenant non provisionné**',
   'Profils publics éditables | **EN COURS — UI premium + endpoint + session BFF codés, service non provisionné**',
   'Publication / modération distante | **EN COURS — UI d’envoi + endpoint codés, modération distante non provisionnée**',
-  'Backend communautaire | **EN COURS — fondation + endpoints + session BFF codés, ressources non provisionnées**'
+  'Backend communautaire | **EN COURS — fondation + endpoints + session BFF codés, ressources non provisionnées**',
+  'Sitemap des routes jeux/hubs | **EN COURS — garde explicite**'
 ];
 for (const token of forbiddenCurrent) assert.ok(!ledger.includes(token), 'stale current state returned: ' + token);
 
@@ -113,6 +114,8 @@ assert.equal(byId.get('integrations.guide-os-bridge')?.state, 'not-connected');
 assert.ok(checkpoint.includes('## Mise à jour canonique — PR #81 / #82 — readiness + SEO — 20 septembre 2026'));
 assert.ok(checkpoint.includes('## Mise à jour canonique — Provider DEV réel — 21 septembre 2026'));
 assert.ok(checkpoint.includes('TERMINÉ — Provider DEV réel et micro-proofs bout-en-bout ciblés'));
+assert.ok(checkpoint.includes('## Mise à jour canonique — PR #118 — sitemap complet — 21 septembre 2026'));
+assert.ok(checkpoint.includes('TERMINÉ — sitemap MODARYX complet sur les 22 canonicals indexables'));
 assert.ok(checkpoint.includes('Aucune VF / aucun 100 % déclaré.'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
 
