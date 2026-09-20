@@ -2061,3 +2061,45 @@ Preuves ciblées PR #52 :
 5. poursuivre ensuite adolescent → jeune adulte → adulte ;
 6. seulement après 10/10, préparer l'activation réelle de la croissance visuelle sans faux PASS.
 
+## Asset compagnon — Dragon juvénile — 20 septembre 2026
+
+PR #53 : **TERMINÉE — fusionnée** dans la branche active PR #12.
+
+- commit d'intégration : `35b70b87bfb0c19ce4e9051f95adb51ab413a480` ;
+- asset : `assets/living-world/dragon-juvenile.png` ;
+- dimensions : **1600 × 900** ;
+- PNG RGBA, `alpha=true` ;
+- SHA-256 : `3ee8b9a0a9ea83000b3cbd2e1e0560690e7923d5764c7f20a0a171d228c0cde3` ;
+- continuité : dérivé du Dragonneau, progression vers un stade juvénile plus grand et assuré sans atteindre l'adolescent ;
+- asset gardé **non référencé** ; `visualGrowth.status=awaiting-assets` inchangé.
+
+Preuves ciblées PR #53 :
+
+- Layered Growth Asset Gate `35477746978` — **success** avec `PASS_TARGETED_LAYERED_ASSET_GATE_AWAITING` ;
+- `dragon-juvenile.png` détecté comme `candidate-layer` : 1600 × 900, alpha=true, failures=[] ;
+- Site First Source `35477746997` — **success** ;
+- PWA Offline `35477746983` — **success** ;
+- Browser Accessibility `35477746988` — **success** ;
+- Browser Reflow `35477746993` — **success** ;
+- Lab Performance `35477746982` — **success**.
+
+État :
+
+- environnement séparé : **TERMINÉ** ;
+- couches compagnon : **7/10 TERMINÉES** ;
+- loup, cinq stades : **TERMINÉ sur les assets séparés prouvés** ;
+- dragon : Dragonneau + juvénile **TERMINÉS sur les assets séparés prouvés** ;
+- **EN COURS** — dragon adolescent / jeune adulte / adulte ;
+- validation artistique humaine finale du bundle complet : **PREUVE MANQUANTE** ;
+- aucun passage `ready` avant bundle complet ;
+- `main`, DNS, DNSSEC, IONOS et Cloudflare critique inchangés.
+
+### Prochain point logique
+
+1. vérifier Git frais avant toute nouvelle écriture ;
+2. dériver le **dragon adolescent** du juvénile pour conserver strictement l'identité visuelle ;
+3. détourage + PNG 1600 × 900 avec alpha ;
+4. branche isolée + PR brouillon + micro-preuves ciblées ;
+5. poursuivre ensuite jeune adulte → adulte ;
+6. seulement après 10/10, préparer l'activation réelle de la croissance visuelle sans faux PASS.
+
