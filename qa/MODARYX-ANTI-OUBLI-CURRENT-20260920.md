@@ -84,6 +84,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Contrats comptes / communauté | **TERMINÉ — preuve ciblée contractuelle** | run `35517194516`, marker `PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS` ; contrats acquis, services réels séparés. |
 | Endpoints profils / communauté distants | **TERMINÉ — preuve ciblée de code** | `qa/MODARYX-REMOTE-WRITE-ENDPOINTS-20260920.md` + `PASS_TARGETED_REMOTE_WRITE_ENDPOINTS` ; ne vaut pas provisioning fournisseur ni publication distante active. |
 | Fondation backend DEV | **TERMINÉ — preuve ciblée de code** | `qa/MODARYX-BACKEND-DEV-PROVISIONING-20260920.md` + run `35519643634`, marker `PASS_TARGETED_BACKEND_DEV_FOUNDATION` ; ne vaut pas provisioning fournisseur ni activation distante. |
+| Préparation fournisseur DEV | **TERMINÉ — preuve ciblée provider-independent** | `qa/MODARYX-DEV-PROVIDER-READINESS-20260920.md` + run `35528841637`, marker `PASS_TARGETED_DEV_PROVIDER_READINESS` ; ordre D1 0001→0002, hostname Turnstile, actions profil/Communauté et audience Auth0/RS256 verrouillés sans créer de ressource fournisseur. |
 | Guide MODARYX connecté | **EN COURS — capacité non livrée** | Moteur/contrat réel ; rester distinct de Nova Guide des OS. |
 | Pont Nova Forge OS | **EN COURS — dépendance Nova Forge OS** | Interface publique stabilisée, consentement et modèle de permissions ; aucun partage implicite. |
 
