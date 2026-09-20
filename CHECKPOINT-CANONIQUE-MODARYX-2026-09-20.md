@@ -1814,3 +1814,61 @@ WebKit reste une preuve moteur ciblée et ne vaut pas Safari final.
 3. Après provisioning, exécuter des micro-proofs bout-en-bout : login/session HttpOnly, Turnstile, D1, profil réseau et soumission Communauté en `pending/received/distributable=false`.
 4. En cas d'erreur : erreur exacte → isolation → correction ciblée → micro-proof.
 5. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — PR #114 — préparation fournisseur DEV — 20 septembre 2026
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- Candidat final PR #114 : `21d5fbda77820be2e6ad84585dd0f33136533a3b`.
+- Merge PR #114 dans Work : `408caca90483588de92c343b7536910258951db7`.
+- PR #114 : **TERMINÉE / fusionnée** dans Work.
+- `main` inchangée.
+- Aucun tenant Auth0, D1, R2, Turnstile, binding, secret, DNS ou production créé par ce lot.
+- Aucun full replay final exécuté.
+
+### Préparation provider-independent fermée
+
+Le lot ajoute :
+- `qa/MODARYX-DEV-PROVIDER-READINESS-20260920.md` ;
+- `qa/check-dev-provider-readiness.cjs` ;
+- branchement du check dans `MODARYX Site First Targeted Source Proof`.
+
+Le contrat verrouille avant provisioning :
+- D1 DEV : migrations `0001` puis `0002` ;
+- Turnstile : hostname stable via `MODARYX_TURNSTILE_HOSTNAME` ;
+- actions exactes `profile-write` et `community-write` ;
+- Auth0 : audience exacte + RS256 + callback sur origine de preview stable ;
+- R2 non requis pour fermer profils + Communauté actuels ;
+- micro-proofs réels à exécuter après provisioning, sans jamais transformer le status endpoint en preuve de bout-en-bout.
+
+### Micro-proof final
+
+Run source `35528841637` — **success** :
+- `PASS_TARGETED_DEV_PROVIDER_READINESS` ;
+- backend DEV foundation : success ;
+- endpoints distants : success ;
+- Auth0 BFF/session : success ;
+- UI profils : success ;
+- UI Communauté distante : success ;
+- SEO : success ;
+- anti-oubli : success.
+
+Cloudflare Pages check du candidat : **success**.
+
+### État honnête
+
+- **TERMINÉ — préparation source/provider-independent pour provisioning DEV**.
+- **EN COURS / dépendance fournisseur réelle — tenant Auth0 DEV, D1 réel, Turnstile réel, bindings et secrets DEV**.
+- **EN COURS — micro-proofs réseau bout-en-bout après provisioning**.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Passer à ChatGPT Work / environnement fournisseur autorisé pour provisionner **DEV uniquement**.
+2. Créer/configurer Auth0 DEV, D1 DEV et Turnstile DEV selon le contrat canonique ; garder R2 optionnel tant qu'aucun artefact réel n'en dépend.
+3. Ne toucher ni à `main`, ni DNS/DNSSEC/nameservers, ni production.
+4. Exécuter ensuite uniquement les micro-proofs réels nécessaires : status, login/callback/session, profil, Communauté, fail-closed Turnstile/hostname/session.
+5. En cas d'erreur : erreur exacte → isolation → correction ciblée → micro-proof.
+6. Aucun full replay avant la toute fin.
