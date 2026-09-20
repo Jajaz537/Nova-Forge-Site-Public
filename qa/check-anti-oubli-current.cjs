@@ -38,7 +38,6 @@ const requiredCurrent = [
   'PASS_TARGETED_LOCAL_PLATFORM_CONTRACTS',
   'Work Phase 2 — qualification externe | **TERMINÉ — preuve de préparation/limitation**',
   'MODARYX-WORK-PHASE2-EXTERNAL-EVIDENCE-20260920.md',
-  'Backend communautaire | **EN COURS — fondation DEV codée, ressources distantes non provisionnées**',
   'PASS_TARGETED_BACKEND_DEV_FOUNDATION',
   'MODARYX-BACKEND-DEV-PROVISIONING-20260920.md',
   'Backend communautaire | **EN COURS — fondation + endpoints distants codés, ressources non provisionnées**',
