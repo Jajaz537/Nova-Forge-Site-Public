@@ -28,7 +28,7 @@ const requiredCurrent = [
   'Signatures / attestations de provenance | **EN COURS — contrats provenance acquis, signer/attestation réel non connecté**',
   'PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS',
   'Comptes / authentification / passkeys réels | **EN COURS — login/callback/session DEV réels prouvés ; passkey finale non prouvée**',
-  'Profils publics éditables | **EN COURS — écriture profil DEV réelle prouvée ; exposition publique complète non fermée**',
+  'Profils publics éditables | **TERMINÉ — parcours DEV bout-en-bout ciblé**',
   'Publication / modération distante | **EN COURS — ingestion distante DEV réelle prouvée ; modération/publication finale non connectée**',
   'PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS',
   'Téléchargements publics réels | **BLOQUÉ — verrou local prouvé, artefact réel absent**',
@@ -66,6 +66,7 @@ const forbiddenCurrent = [
   'Safari final + Firefox final élargi | **PREUVE MANQUANTE**',
   'Comptes / authentification / passkeys réels | **EN COURS — flux BFF/session codé, tenant non provisionné**',
   'Profils publics éditables | **EN COURS — UI premium + endpoint + session BFF codés, service non provisionné**',
+  'Profils publics éditables | **EN COURS — écriture profil DEV réelle prouvée ; exposition publique complète non fermée**',
   'Publication / modération distante | **EN COURS — UI d’envoi + endpoint codés, modération distante non provisionnée**',
   'Backend communautaire | **EN COURS — fondation + endpoints + session BFF codés, ressources non provisionnées**',
   'Sitemap des routes jeux/hubs | **EN COURS — garde explicite**'
@@ -76,7 +77,6 @@ const expectedOpen = new Map([
   ['Météo réelle production', 'BLOQUÉ'],
   ['Validation artistique humaine finale', 'PREUVE MANQUANTE'],
   ['Comptes / authentification / passkeys réels', 'EN COURS'],
-  ['Profils publics éditables', 'EN COURS'],
   ['Publication / modération distante', 'EN COURS'],
   ['Signatures / attestations de provenance', 'EN COURS'],
   ['Téléchargements publics réels', 'BLOQUÉ'],
@@ -116,6 +116,8 @@ assert.ok(checkpoint.includes('## Mise à jour canonique — Provider DEV réel 
 assert.ok(checkpoint.includes('TERMINÉ — Provider DEV réel et micro-proofs bout-en-bout ciblés'));
 assert.ok(checkpoint.includes('## Mise à jour canonique — PR #118 — sitemap complet — 21 septembre 2026'));
 assert.ok(checkpoint.includes('TERMINÉ — sitemap MODARYX complet sur les 22 canonicals indexables'));
+assert.ok(checkpoint.includes('## Mise à jour canonique — micro-preuve profil public DEV — 21 septembre 2026'));
+assert.ok(checkpoint.includes('TERMINÉ — parcours profil public DEV bout-en-bout ciblé'));
 assert.ok(checkpoint.includes('Aucune VF / aucun 100 % déclaré.'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
 

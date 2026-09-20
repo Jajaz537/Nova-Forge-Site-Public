@@ -1925,3 +1925,30 @@ Cloudflare Pages check du candidat : **success**.
 - Les capacités produit et preuves externes restantes conservent leur état propre.
 - Aucune VF / aucun 100 % déclaré.
 - Aucun full replay final encore exécuté.
+
+
+## Mise à jour canonique — micro-preuve profil public DEV — 21 septembre 2026
+
+### Git frais
+
+- Branche Work vérifiée : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work vérifié avant la preuve : `d95bbc1f48ee6dcf4d84822d614316b046c6aa8f`.
+- Aucune modification Git par Work pendant la micro-preuve.
+- `main`, production, DNS/DNSSEC/nameservers : inchangés.
+- Aucun full replay final exécuté.
+
+### Micro-preuve réelle
+
+- profil DEV temporairement passé en visibilité `public` : **OK** ;
+- lecture anonyme `GET /api/v1/profiles/<handle>` : **HTTP 200**, profil public réel retourné ;
+- surface UI `profiles.html?profile=<handle>#public-profile` : **OK** ;
+- profil non public ou inexistant : **HTTP 404 — `profile-not-found`** ;
+- profil de preuve restauré en visibilité `private` : **OUI** ;
+- après restauration, aucune donnée privée n'est exposée via la route publique.
+
+### État
+
+- **TERMINÉ — parcours profil public DEV bout-en-bout ciblé**.
+- Cette preuve ferme l'exposition/lecture publique DEV ciblée ; elle n'active pas la production et ne vaut pas preuve de passkey finale.
+- Aucune VF / aucun 100 % déclaré.
+- Aucun full replay final encore exécuté.
