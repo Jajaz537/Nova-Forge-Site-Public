@@ -68,7 +68,8 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 
 | Élément retenu | État courant | Condition de fermeture |
 |---|---|---|
-| Comptes / authentification / passkeys réels | **EN COURS — candidat identité + contrat sécurité acquis, non connecté** | Auth0 = candidat privilégié non connecté ; contrat compte/passkey prouvé par run `35517194516`, marker `PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS`. Tenant, domaine, session, récupération et vraie cérémonie passkey restent à prouver. |
+| Comptes / authentification / passkeys réels | **EN COURS — candidat identité + contrat sécurité acquis, non connecté** | Auth0 reste candidat privilégié ; Work Phase 2 a confirmé Free 25k MAU/passkeys et s'est arrêté avant création/connexion du tenant dev. Tenant, domaine/origine, callbacks, session, récupération et vraie cérémonie passkey restent à prouver. |
+| Work Phase 2 — qualification externe | **TERMINÉ — preuve de préparation/limitation** | `qa/MODARYX-WORK-PHASE2-EXTERNAL-EVIDENCE-20260920.md` : HEAD distant canonique vérifié, zéro écriture/déploiement/compte ; points d'arrêt Safari/Auth0/Cloudflare/CWV/PWA documentés. |
 | Profils publics éditables | **EN COURS — contrat profil public acquis, édition distante non connectée** | Schéma profil public prouvé par run `35517194516`, marker `PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS` ; identité, stockage et publication réels restent requis. |
 | Publication / modération distante | **EN COURS — contrats receipts + write-intent acquis, backend distant non connecté** | Receipts prouvés par run `35515669822`; brouillon local + Abuse Shield/write-intent prouvés par run `35517194516`, marker `PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS`. Backend sécurisé, rôles et exécution distante restent à connecter. |
 | Signatures / attestations de provenance | **EN COURS — contrats provenance acquis, signer/attestation réel non connecté** | Publication receipt fail-closed prouvé par run `35515669822`, marker `PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS`; un `receipt:` bien formé n'atteste toujours aucune authenticité. |
@@ -76,7 +77,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Corpus réels de mods GTA VI / RDR2 | **EN COURS — capacité non livrée / droits et preuves requis** | Les hubs éditoriaux sont livrés, mais le catalogue de mods reste à 0 tant qu'un corpus autorisé, versionné, attribué et vérifiable n'existe pas. |
 | Storage Resolver | **EN COURS — contrat acquis, service non connecté** | Contrat provider-neutral v1 prouvé par run `35515388240`, marker `PASS_TARGETED_STORAGE_REPAIR_CONTRACTS` : digest + manifest binding obligatoires, alias mutable non fiable rejeté. Le service distant réel reste absent. |
 | Repair Network | **EN COURS — protocole contractuel acquis, exécution distante non connectée** | Contrat fail-closed v1 prouvé par run `35515388240`, marker `PASS_TARGETED_STORAGE_REPAIR_CONTRACTS` : substitution silencieuse et redistribution révoquée interdites. Aucun réseau distant réel n'est annoncé. |
-| Backend communautaire | **EN COURS — qualification technique réalisée, non connecté** | Data plane candidat privilégié : Pages Functions/Workers + D1 + R2 + Turnstile. Supabase reste candidat qualifié pour l'identité/passkeys, mais passkeys encore expérimentales et aucun service n'est connecté. |
+| Backend communautaire | **EN COURS — qualification technique réalisée, non connecté** | Data plane candidat : Pages Functions/Workers + D1 + R2 + Turnstile. Work Phase 2 n'avait aucun dashboard Cloudflare authentifié et n'a créé aucune ressource ; connexion dev requiert approbation explicite. |
 | Guide MODARYX connecté | **EN COURS — capacité non livrée** | Moteur/contrat réel ; rester distinct de Nova Guide des OS. |
 | Pont Nova Forge OS | **EN COURS — dépendance Nova Forge OS** | Interface publique stabilisée, consentement et modèle de permissions ; aucun partage implicite. |
 
@@ -90,9 +91,9 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Appareils tactiles physiques | **PREUVE MANQUANTE** | Android/iOS/tablette physiques requis. |
 | Firefox final élargi | **TERMINÉ — preuve ciblée** | PR #87, run `35512379997`, marker `PASS_TARGETED_FIREFOX_23_ROUTE_PROOF` : Firefox 155.0 via Playwright 1.63.0, 23 routes × desktop/mobile = 46 observations, failures `[]`; captures inspectées sans défaut visuel bloquant isolé. |
 | WebKit 23 routes — préflight | **TERMINÉ — preuve ciblée moteur** | PR #89, run `35514304174`, marker `PASS_TARGETED_WEBKIT_23_ROUTE_PREFLIGHT` : WebKit 26.6 via Playwright 1.63.0, 23 routes × desktop/mobile = 46 observations, failures `[]`; captures inspectées sans défaut visuel bloquant isolé. Ne vaut pas Safari final. |
-| Safari final | **PREUVE MANQUANTE** | Une preuve Safari réelle sur environnement approprié reste requise ; WebKit Playwright et Firefox ne valident pas Safari final. |
-| CWV représentatifs | **PREUVE MANQUANTE** | Les budgets labo ne remplacent pas des mesures représentatives sur URL stable. |
-| Installation PWA manuelle sur appareil | **PREUVE MANQUANTE** | Le cycle HTTPS automatisé est acquis ; l'expérience d'installation utilisateur réelle reste séparée. |
+| Safari final | **PREUVE MANQUANTE** | Work Phase 2 a confirmé : Chromium intégré uniquement, aucun Safari/macOS/iOS/device lab accessible. Une preuve Safari réelle reste requise ; WebKit Playwright ne suffit pas. |
+| CWV représentatifs | **PREUVE MANQUANTE** | Work Phase 2 : rapport PageSpeed frais acquis mais « Aucune donnée » utilisateur réelle/CrUX ; les excellents résultats labo ne ferment pas le terrain. |
+| Installation PWA manuelle sur appareil | **PREUVE MANQUANTE** | Work Phase 2 n'expose ni dialogue d'installation démontrable, ni lancement standalone/appareil réel ; cycle HTTPS automatisé seul insuffisant. |
 | Validation juridique / droits / licences | **PREUVE MANQUANTE** | Identité d'éditeur, contacts, droits et autorisations doivent venir de données réelles. |
 | Master Nova Design Intelligence complète | **PREUVE MANQUANTE / NON RÉCUPÉRÉE** | Le référentiel historique complet n'est pas présent ; ne pas inventer les éléments manquants. |
 
