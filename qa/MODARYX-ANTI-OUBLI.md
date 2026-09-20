@@ -377,3 +377,28 @@ Avant la VF, chaque entrée retenue doit finir dans l'un de ces états document�
 
 PR #58, #59, #60 et #61 sont des lots QA/sécurité/preuve ; ils ne transforment pas une capacité produit distante en fonctionnalité livrée. Aucun full replay n'a été exécuté pendant leur fermeture.
 
+
+
+## Synthèse fraîche anti-oubli — états locaux + PWA HTTPS — 20 septembre 2026
+
+Cette section complète la synthèse fraîche précédente.
+
+| Élément suivi | État courant | Preuve / règle |
+|---|---|---|
+| Recherche — état vide | **TERMINÉ — preuve ciblée navigateur** | PR #64, run `35487557212`, 0 résultat et panneau vide visibles. |
+| Recherche — panne / retry | **TERMINÉ — preuve ciblée navigateur** | Répertoire statique conservé en panne ; retry récupère l'index et restaure le focus. |
+| Téléchargements — panne | **TERMINÉ — preuve ciblée navigateur** | Fail-closed, 0 artefact exposé, retry disponible. |
+| Téléchargements — retour état verrouillé | **TERMINÉ — preuve ciblée navigateur** | Retry revient à l'état intentionnel `available:false`, 0 artefact exposé ; cela ne livre aucun téléchargement réel. |
+| PWA preview HTTPS — offline/online | **TERMINÉ — preuve ciblée déployée** | PR #63, run `35487895759`, preview `98f242f7…pages.dev`, navigation offline réelle puis reconnexion. |
+| PWA preview HTTPS — donnée stale explicite | **TERMINÉ — preuve ciblée déployée** | `data/catalog.json` offline retourne `X-Modaryx-Cache: offline-stale`. |
+| PWA preview HTTPS — update health-check | **TERMINÉ — preuve ciblée déployée** | Après reconnexion, `registration.update()` conserve worker actif et contrôlant. |
+| Installation PWA manuelle appareil physique | **PREUVE MANQUANTE** | La preuve automatisée HTTPS ne remplace pas une installation utilisateur réelle sur appareils supportés. |
+| Profils / comptes | **EN COURS — capacité non livrée** | La détection locale WebAuthn peut être prouvée séparément ; aucun compte/backend ne doit être simulé. |
+| Finition Premium HD 17 pages | **EN COURS** | Continuer états réellement déclenchables page par page. |
+
+### Rappel anti-confusion
+
+- La fermeture des états **Recherche** et **Téléchargements** ne transforme pas les fonctions distantes absentes en services livrés.
+- La preuve PWA HTTPS ferme le comportement technique ciblé du service worker sur preview, pas les appareils physiques ni les stores/UX d'installation.
+- Les téléchargements publics réels restent **BLOQUÉS** tant qu'artefacts, identité, empreinte, provenance et signature requise ne sont pas disponibles.
+- Aucun élément du registre anti-oubli n'est retiré implicitement.
