@@ -28,7 +28,7 @@ const requiredCurrent = [
   'Signatures / attestations de provenance | **EN COURS — contrats provenance acquis, signer/attestation réel non connecté**',
   'PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS',
   'Comptes / authentification / passkeys réels | **EN COURS — flux BFF/session codé, tenant non provisionné**',
-  'Profils publics éditables | **EN COURS — endpoint + session BFF codés, service non provisionné**',
+  'Profils publics éditables | **EN COURS — UI premium + endpoint + session BFF codés, service non provisionné**',
   'Publication / modération distante | **EN COURS — endpoint de soumission codé, modération distante non provisionnée**',
   'PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS',
   'Téléchargements publics réels | **BLOQUÉ — verrou local prouvé, artefact réel absent**',
@@ -46,7 +46,10 @@ const requiredCurrent = [
   'MODARYX-REMOTE-WRITE-ENDPOINTS-20260920.md',
   'Flux Auth0 BFF / session | **TERMINÉ — preuve ciblée de code**',
   'PASS_TARGETED_AUTH_BFF_SESSION',
-  'MODARYX-AUTH-BFF-SESSION-20260920.md'
+  'MODARYX-AUTH-BFF-SESSION-20260920.md',
+  'UI compte / profil premium | **TERMINÉ — preuve ciblée de code**',
+  'PASS_TARGETED_PROFILES_ACCOUNT_UI',
+  'MODARYX-PROFILES-ACCOUNT-UI-20260920.md'
 ];
 for (const token of requiredCurrent) assert.ok(ledger.includes(token), 'anti-forget current missing: ' + token);
 
