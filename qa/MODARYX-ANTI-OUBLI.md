@@ -422,3 +422,18 @@ Le premier run `35488709371` n'a pas observé les états dégradés car le servi
 
 Ces fermetures ne retirent aucune autre entrée de l'anti-oubli et ne constituent ni VF ni full replay.
 
+## Synthèse fraîche anti-oubli — Creator Studio schéma — 20 septembre 2026
+
+| Élément suivi | État courant | Preuve / règle |
+|---|---|---|
+| Creator Studio — schéma indisponible | **TERMINÉ — preuve ciblée navigateur** | PR #69, run `35489189427` : fail-closed explicite, sauvegarde/export bloqués, aucun brouillon persisté. |
+| Creator Studio — récupération schéma | **TERMINÉ — preuve ciblée navigateur** | Après retour du schéma, sauvegarde locale valide observée ; distribution reste `locked` / `downloadable=false`, `releaseReceipt=null`. |
+| Publication réelle depuis Studio | **EN COURS — capacité non livrée / dépendance backend** | Le Studio reste local et NON PUBLIÉ ; aucune publication distante simulée. |
+| Attestation de provenance/signature | **EN COURS — capacité non livrée** | Un état déclaré ou un receipt saisi ne vaut pas preuve distante réelle. |
+
+### Incident QA PR #69
+
+Le run `35489112739` a échoué dans le harnais car `localStorage` était manipulé depuis `about:blank`. Le scénario de récupération était déjà vert. La correction a uniquement établi une origine locale avant le nettoyage de stockage. Le micro-proof `35489189427` est **success**. Aucun runtime produit n'a été modifié.
+
+Cette fermeture n'enlève aucune dépendance du registre et ne constitue ni VF ni full replay.
+
