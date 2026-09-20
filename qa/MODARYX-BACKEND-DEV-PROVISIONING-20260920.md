@@ -45,8 +45,11 @@ Le socle ne publie aucun artefact.
 Variables non secrètes :
 - `AUTH0_ISSUER_BASE_URL`
 - `AUTH0_AUDIENCE`
+- `AUTH0_CLIENT_ID`
+- `MODARYX_SESSION_TTL_SECONDS` optionnel
 
-Secret :
+Secrets :
+- `AUTH0_CLIENT_SECRET`
 - `MODARYX_TURNSTILE_SECRET`
 
 Ne jamais committer une valeur réelle.
@@ -118,3 +121,26 @@ Avant toute activation distante :
 7. seulement après preuve, planifier production.
 
 Aucun DNS/DNSSEC/nameserver n'est requis pour cette fondation.
+
+
+## BFF Auth0 DEV
+
+Architecture retenue :
+- Auth0 Regular Web Application ;
+- New Universal Login ;
+- Authorization Code ;
+- PKCE S256 ;
+- callback serveur ;
+- session MODARYX HttpOnly stockée par hash dans D1.
+
+Callback à enregistrer dans Auth0 DEV :
+
+`https://<origine-preview-stable>/api/v1/auth/callback`
+
+Passkeys :
+- Database Connection Auth0 ;
+- New Universal Login ;
+- Identifier First ;
+- aucune custom login page incompatible.
+
+La session MODARYX ne persiste aucun access token Auth0.
