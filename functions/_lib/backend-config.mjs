@@ -10,14 +10,16 @@ export function normalizeIssuer(value) {
   }
 }
 
+function nonEmpty(value) {
+  return typeof value === 'string' && value.trim() ? value.trim() : null;
+}
+
 export function backendState(env = {}) {
   const issuer = normalizeIssuer(env.AUTH0_ISSUER_BASE_URL);
-  const audience = typeof env.AUTH0_AUDIENCE === 'string' && env.AUTH0_AUDIENCE.trim()
-    ? env.AUTH0_AUDIENCE.trim()
-    : null;
-  const turnstileSecret = typeof env.MODARYX_TURNSTILE_SECRET === 'string' && env.MODARYX_TURNSTILE_SECRET.trim()
-    ? true
-    : false;
+  const audience = nonEmpty(env.AUTH0_AUDIENCE);
+  const clientId = nonEmpty(env.AUTH0_CLIENT_ID);
+  const clientSecret = nonEmpty(env.AUTH0_CLIENT_SECRET);
+  const turnstileSecret = Boolean(nonEmpty(env.MODARYX_TURNSTILE_SECRET));
 
   return {
     schemaVersion: 1,
@@ -28,8 +30,11 @@ export function backendState(env = {}) {
     },
     auth0: {
       configured: Boolean(issuer && audience),
+      loginConfigured: Boolean(issuer && audience && clientId && clientSecret),
       issuerConfigured: Boolean(issuer),
-      audienceConfigured: Boolean(audience)
+      audienceConfigured: Boolean(audience),
+      clientIdConfigured: Boolean(clientId),
+      clientSecretConfigured: Boolean(clientSecret)
     },
     turnstile: {
       secretConfigured: turnstileSecret
@@ -44,4 +49,11 @@ export function requireRemoteWriteFoundation(env = {}) {
   if (!state.auth0.configured) return {ok: false, status: 503, reason: 'auth0-not-configured', state};
   if (!state.turnstile.secretConfigured) return {ok: false, status: 503, reason: 'turnstile-secret-missing', state};
   return {ok: true, status: 200, reason: null, state};
+}
+
+export function requireAuthLoginFoundation(env = {}) {
+  const state = backendState(env);
+  if (!state.bindings.d1) return {ok:false, status:503, reason:'d1-binding-missing', state};
+  if (!state.auth0.loginConfigured) return {ok:false, status:503, reason:'auth0-login-not-configured', state};
+  return {ok:true, status:200, reason:null, state};
 }
