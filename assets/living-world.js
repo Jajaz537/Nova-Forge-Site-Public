@@ -159,21 +159,46 @@
     }
     root.dataset.worldSource = sourceState;
     root.dataset.worldVisualGrowth = config?.visualGrowth?.status || 'awaiting-assets';
-    if (config?.visualGrowth?.status === 'ready') {
-      import(new URL('./assets/living-world-visual-growth.mjs', document.baseURI).href)
-        .then((module) => module.renderVisualGrowth({
-          config,
-          document,
-          root,
-          stages: Object.fromEntries(
-            (config.inhabitants || []).map((inhabitant) => [
-              inhabitant.id,
-              root.dataset[`world${inhabitant.id[0].toUpperCase() + inhabitant.id.slice(1)}Stage`]
-            ])
-          )
-        }))
-        .catch(() => { root.dataset.worldVisualGrowth = 'fallback'; });
+    if (config?.visualGrowth?.status === 'ready') scheduleVisualGrowth();
+  }
+
+  let visualGrowthWaitingForLoad = false;
+
+  function activateVisualGrowth() {
+    if (config?.visualGrowth?.status !== 'ready') return;
+    import(new URL('./assets/living-world-visual-growth.mjs', document.baseURI).href)
+      .then((module) => module.renderVisualGrowth({
+        config,
+        document,
+        root,
+        stages: Object.fromEntries(
+          (config.inhabitants || []).map((inhabitant) => [
+            inhabitant.id,
+            root.dataset[`world${inhabitant.id[0].toUpperCase() + inhabitant.id.slice(1)}Stage`]
+          ])
+        )
+      }))
+      .catch(() => { root.dataset.worldVisualGrowth = 'fallback'; });
+  }
+
+  function scheduleVisualGrowth() {
+    const run = () => {
+      visualGrowthWaitingForLoad = false;
+      const activate = () => activateVisualGrowth();
+      if (typeof window.requestIdleCallback === 'function') {
+        window.requestIdleCallback(activate, {timeout: 1500});
+      } else {
+        window.setTimeout(activate, 0);
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      run();
+      return;
     }
+    if (visualGrowthWaitingForLoad) return;
+    visualGrowthWaitingForLoad = true;
+    window.addEventListener('load', () => window.setTimeout(run, 0), {once: true});
   }
 
   function schedule() {

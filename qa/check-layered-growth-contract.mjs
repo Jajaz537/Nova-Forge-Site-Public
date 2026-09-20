@@ -92,6 +92,10 @@ assert('current ready contract must declare environment asset',typeof baseConfig
 assert('main runtime must lazy-load visual module only for ready status',
   mainSource.includes("config?.visualGrowth?.status === 'ready'") &&
   mainSource.includes("living-world-visual-growth.mjs"));
+assert('visual growth must stay off the initial load critical path',
+  mainSource.includes("window.addEventListener('load'") &&
+  mainSource.includes('requestIdleCallback') &&
+  mainSource.includes('scheduleVisualGrowth'));
 assert('visual layer markup must not burden current critical HTML',!indexSource.includes('data-world-visual-layers'));
 
 const awaiting=awaitingConfig();
