@@ -1643,3 +1643,109 @@ Browser proof run `35522509745` — **success**.
 3. Tester source + browser sans fournisseur.
 4. Ensuite passer à Work pour provisionnement Auth0/Cloudflare DEV réel.
 5. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — PR #110 — console compte / profil Premium HD — 20 septembre 2026
+
+### Git frais
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work après PR #110 : `eefccac3989a71b6784d9f55760b61031890434e`.
+- `main` inchangée.
+- Aucun tenant Auth0, D1, Turnstile, secret, DNS ou production activé.
+- Aucun full replay final exécuté.
+
+### UI livrée
+
+La page `profiles.html` possède désormais une console compte/profil progressive :
+
+- état backend réel ;
+- connexion BFF same-origin ;
+- lecture session HttpOnly ;
+- logout ;
+- lecture/édition profil ;
+- Turnstile chargé uniquement lorsque site key + secret sont réellement prêts ;
+- aucun access token dans le navigateur ;
+- aucun `localStorage` / `sessionStorage` pour l'auth.
+
+États UI :
+
+- service non provisionné ;
+- prêt / déconnecté ;
+- connecté ;
+- erreur.
+
+### Fail-closed
+
+En environnement statique sans backend :
+- `data-account-state=unavailable` ;
+- login désactivé ;
+- logout caché ;
+- éditeur désactivé ;
+- aucune session simulée.
+
+### Erreur ciblée et correction
+
+Premier source run `35523013210` :
+- **FAIL** uniquement sur `SHA256SUMS.txt` ;
+- trois empreintes obsolètes :
+  - `assets/profiles.css`
+  - `assets/profiles.js`
+  - `profiles.html`.
+
+Isolation :
+- browser Profils initial : **success** ;
+- browser fonctionnel initial : **success** ;
+- aucun défaut UI fonctionnel isolé.
+
+Correction ciblée :
+- mise à jour de ces trois SHA-256 uniquement.
+
+Micro-proofs finaux sur HEAD `8d1860015d27f45e716f0f101e95e5be2b913768` :
+
+- source run `35523072639` — **success**
+  - `PASS_TARGETED_PROFILES_ACCOUNT_UI`
+  - `PASS_TARGETED_AUTH_BFF_SESSION`
+  - `PASS_TARGETED_REMOTE_WRITE_ENDPOINTS`
+  - `PASS_TARGETED_BACKEND_DEV_FOUNDATION`
+  - `PASS_TARGETED_SEO_CONTRACT`
+  - `PASS_TARGETED_ANTI_OUBLI_GATE`
+  - `failures: []`
+- profils browser run `35523072623` — **success**
+  - `PASS_TARGETED_PROFILES_STATE_BROWSER_PROOF`
+  - artifact digest `sha256:21ea49ed31632dc688703d81f54048403060d43559321c7f79b8688338ede0a6`
+- performance labo run `35523072568` — **success**
+  - `PASS_TARGETED_LAB_PERFORMANCE_PROOF`
+- accessibilité Chromium run `35523072633` — **success**
+  - `PASS_TARGETED_BROWSER_A11Y_MICROPROOF`
+- reflow run `35523072685` — **success**
+  - `PASS_TARGETED_BROWSER_REFLOW_MICROPROOF`
+- PWA targeted run `35523072640` — **success**
+- local functional run `35523072649` — **success**
+- Static Premium HD run `35523072648` — **success**
+  - `PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW`
+  - artifact digest `sha256:87b8183e94847dcc80ac54af009df22d35ac3cc47713c89819068d455cb78c02`
+- Firefox run `35523072569` — **success**
+  - `PASS_TARGETED_FIREFOX_23_ROUTE_PROOF`
+  - artifact digest `sha256:6daf5dee15d2e13f022bef5acd8806678217d3faf1f1fb689a009d8bee3261b7`
+- WebKit run `35523072699` — **success**
+  - `PASS_TARGETED_WEBKIT_23_ROUTE_PREFLIGHT`
+  - artifact digest `sha256:7968b44c5339259b3cefa129e046bd7bdc47686b06f27ac41adbb6d809e3b9d5`.
+
+WebKit ne vaut toujours pas Safari final.
+
+### État honnête
+
+- **TERMINÉ — UI compte/profil Premium HD ciblée**.
+- **TERMINÉ — fallback statique fail-closed ciblé**.
+- **EN COURS — tenant Auth0/D1/Turnstile réels**.
+- **EN COURS — login/passkey réel**.
+- **EN COURS — édition profil réseau réelle**.
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Ne plus traiter l'UI compte/profil comme absente.
+2. Examiner la surface Communauté pour connecter proprement le endpoint distant déjà codé sans casser le mode local.
+3. Ensuite basculer vers Work pour provisionnement Auth0/Cloudflare DEV réel.
+4. Aucun full replay avant la toute fin.
