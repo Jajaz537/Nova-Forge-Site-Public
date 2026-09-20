@@ -12,6 +12,8 @@ on:
       - 'documentation.html'
       - '404.html'
       - 'games/index.html'
+      - 'gta-6/**'
+      - 'red-dead-redemption-2/**'
       - 'assets/site.css'
       - 'assets/official.css'
       - 'assets/nova-premium-hd.css'
