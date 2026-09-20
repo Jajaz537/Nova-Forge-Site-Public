@@ -69,7 +69,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Élément retenu | État courant | Condition de fermeture |
 |---|---|---|
 | Comptes / authentification / passkeys réels | **EN COURS — flux BFF/session codé, tenant non provisionné** | Auth0 Universal Login + Authorization Code/PKCE + session D1 HttpOnly hashée codés ; tenant DEV, client secret réel, récupération et vraie cérémonie passkey restent à prouver. |
-| Flux Auth0 BFF / session | **TERMINÉ — preuve ciblée de code** | `qa/MODARYX-AUTH-BFF-SESSION-20260920.md` + `PASS_TARGETED_AUTH_BFF_SESSION` ; ne vaut pas tenant Auth0 réel ni cérémonie passkey. |
+| Flux Auth0 BFF / session | **TERMINÉ — preuve ciblée de code** | `qa/MODARYX-AUTH-BFF-SESSION-20260920.md` + run `35522509780`, marker `PASS_TARGETED_AUTH_BFF_SESSION` ; ne vaut pas tenant Auth0 réel ni cérémonie passkey. |
 | Work Phase 2 — qualification externe | **TERMINÉ — preuve de préparation/limitation** | `qa/MODARYX-WORK-PHASE2-EXTERNAL-EVIDENCE-20260920.md` : HEAD distant canonique vérifié, zéro écriture/déploiement/compte ; points d'arrêt Safari/Auth0/Cloudflare/CWV/PWA documentés. |
 | Profils publics éditables | **EN COURS — endpoint + session BFF codés, service non provisionné** | Endpoint profil acquis ; authentification web préfère désormais session HttpOnly D1, avec bearer fallback API. D1/Auth0/Turnstile réels restent à provisionner. |
 | Publication / modération distante | **EN COURS — endpoint de soumission codé, modération distante non provisionnée** | Receipts/write-intent acquis ; endpoint distant Auth0 + Turnstile + D1 ajouté, état initial forcé `passed/pending/received`, jamais auto-publié. Service de modération réel reste à connecter. |
