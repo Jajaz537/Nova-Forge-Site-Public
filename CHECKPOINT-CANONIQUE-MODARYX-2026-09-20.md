@@ -844,3 +844,52 @@ Cette section est la lecture la plus récente pour le préflight WebKit.
 2. Garder Safari final explicitement PREUVE MANQUANTE jusqu'à preuve Safari réelle.
 3. Continuer uniquement les preuves externes/humaines ou capacités produit réellement non livrées.
 4. Aucun full replay avant la toute fin.
+
+
+## Mise à jour canonique — qualification backend communautaire — 20 septembre 2026
+
+Cette section est la lecture la plus récente pour le backend communautaire.
+
+### Git frais avant qualification
+
+- Branche Work : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work de départ : `d4db7e1884c7f27e2562d3ae003532b224180745`.
+- `main` : inchangée.
+- Aucun backend, binding, secret, DNS, sitemap ou réglage Cloudflare critique modifié.
+- Aucun full replay exécuté.
+
+### Qualification
+
+Document : `qa/MODARYX-COMMUNITY-BACKEND-QUALIFICATION-20260920.md`.
+
+- **Data plane candidat privilégié** : Pages Functions/Workers + D1 + R2 + Turnstile.
+- Justification : cohérence avec l'hébergement actuel, bindings Pages natifs et paliers Free documentés.
+- D1 Free documenté : 5 M lignes lues/jour, 100 k écrites/jour, 5 Go.
+- R2 Free documenté : 10 Go-mois, 1 M Class A, 10 M Class B/mois, egress Internet gratuit.
+- Turnstile Free : jusqu'à 20 widgets, challenges illimités.
+- Workers Free : 100 k requêtes/jour.
+
+### Identité
+
+- **Supabase Auth = candidat qualifié, non sélectionné**.
+- Free documenté : 50 k MAU, base 500 Mo, stockage 1 Go, 5 Go egress.
+- RLS Postgres permet des règles d'accès par ligne.
+- Les passkeys/WebAuthn existent mais sont encore **expérimentales** dans la documentation actuelle.
+- Les projets Free peuvent être mis en pause après une semaine d'inactivité.
+- Aucun secret/service role ne doit être exposé au frontend.
+- Aucune implémentation WebAuthn maison n'est retenue comme raccourci.
+
+### État courant
+
+- **TERMINÉ — qualification technique/documentaire** : architectures comparées et candidat data plane identifié.
+- **EN COURS — capacité non connectée** : backend communautaire réel.
+- **EN COURS — identité/passkeys** : fournisseur et politique de session/récupération restent à approuver et connecter.
+- **Aucun service distant simulé ou déclaré livré.**
+- **Aucune VF / aucun 100 % déclaré.**
+
+## Prochain point logique actualisé
+
+1. Ne pas déployer le backend sans validation explicite du data plane et de l'identité.
+2. Conserver les profils/publications/modération comme local-only/non connectés tant que les migrations, rôles, allow/deny, audit et politiques d'abus ne sont pas prouvés.
+3. Continuer les qualifications documentaires des autres capacités uniquement lorsqu'elles réduisent un vrai blocker.
+4. Aucun full replay avant la toute fin.
