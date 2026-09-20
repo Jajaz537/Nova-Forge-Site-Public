@@ -1,6 +1,6 @@
 # MODARYX — ANTI-OUBLI COURANT CANONIQUE — 20 septembre 2026
 
-**Base Git vérifiée avant rédaction :** `design/modaryx-premium-hd-20260914-work` @ `1b2ca020cf846cd3008cd3bbcc69f4ad18a076d9`.  
+**Base Git vérifiée avant cette synchronisation :** `design/modaryx-premium-hd-20260914-work` @ `7c24371c1fb4b00d01671e599111ec8ecb342688`.  
 **Statut :** registre courant prioritaire pour la fermeture anti-oubli.  
 **Portée :** MODARYX / MODARYX MODS uniquement. Nova Forge OS reste un produit distinct.  
 **Règle :** ce document n'efface pas l'historique ; il supersède seulement les anciens états devenus obsolètes.
@@ -68,23 +68,24 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 
 | Élément retenu | État courant | Condition de fermeture |
 |---|---|---|
-| Comptes / authentification / passkeys réels | **EN COURS — flux BFF/session codé, tenant non provisionné** | Auth0 Universal Login + Authorization Code/PKCE + session D1 HttpOnly hashée codés ; tenant DEV, client secret réel, récupération et vraie cérémonie passkey restent à prouver. |
-| Flux Auth0 BFF / session | **TERMINÉ — preuve ciblée de code** | `qa/MODARYX-AUTH-BFF-SESSION-20260920.md` + run `35522509780`, marker `PASS_TARGETED_AUTH_BFF_SESSION` ; ne vaut pas tenant Auth0 réel ni cérémonie passkey. |
+| Comptes / authentification / passkeys réels | **EN COURS — login/callback/session DEV réels prouvés ; passkey finale non prouvée** | Auth0 DEV + Authorization Code/PKCE + session D1 HttpOnly sont provisionnés et le parcours login → callback → session est prouvé. La vraie cérémonie passkey, la récupération et leur qualification finale restent séparées. |
+| Flux Auth0 BFF / session | **TERMINÉ — code + preuve provider DEV ciblée** | Le contrat source reste prouvé par `qa/MODARYX-AUTH-BFF-SESSION-20260920.md` / run `35522509780`, marker `PASS_TARGETED_AUTH_BFF_SESSION`; le provider DEV réel confirme en plus login, callback et session backend active. Cela ne vaut toujours pas cérémonie passkey finale. |
 | Work Phase 2 — qualification externe | **TERMINÉ — preuve de préparation/limitation** | `qa/MODARYX-WORK-PHASE2-EXTERNAL-EVIDENCE-20260920.md` : HEAD distant canonique vérifié, zéro écriture/déploiement/compte ; points d'arrêt Safari/Auth0/Cloudflare/CWV/PWA documentés. |
-| Profils publics éditables | **EN COURS — UI premium + endpoint + session BFF codés, service non provisionné** | Console compte/profil progressive reliée au BFF ; login/session/logout/profil restent verrouillés tant que D1/Auth0/Turnstile ne sont pas réellement provisionnés. |
+| Profils publics éditables | **EN COURS — écriture profil DEV réelle prouvée ; exposition publique complète non fermée** | Profil DEV privé `@modaryx-dev-proof` enregistré avec `profile-write` réel. Le parcours authentifié est donc opérationnel en DEV, mais publication/découverte publique complète et passkey finale restent à qualifier séparément. |
 | UI compte / profil premium | **TERMINÉ — preuve ciblée de code** | `qa/MODARYX-PROFILES-ACCOUNT-UI-20260920.md` + run source `35523072639`, marker `PASS_TARGETED_PROFILES_ACCOUNT_UI` ; browser proof run `35523072623`, marker `PASS_TARGETED_PROFILES_STATE_BROWSER_PROOF`, vérifie le fallback statique fail-closed. |
-| Publication / modération distante | **EN COURS — UI d’envoi + endpoint codés, modération distante non provisionnée** | Brouillon local conservé ; voie distante séparée Auth0 + D1 + Turnstile envoie uniquement vers `passed/pending/received`, jamais auto-publiée. Service de modération réel reste à connecter. |
+| Publication / modération distante | **EN COURS — ingestion distante DEV réelle prouvée ; modération/publication finale non connectée** | `community-write` réel accepte uniquement le flux attendu vers `pending / received / distributable=false`. Aucune auto-publication. Le service de décision de modération et la publication/distribution finales restent à connecter. |
 | UI communauté distante modérée | **TERMINÉ — preuve ciblée de code** | `qa/MODARYX-COMMUNITY-REMOTE-UI-20260920.md` + run source `35523673854`, marker `PASS_TARGETED_COMMUNITY_REMOTE_UI` ; browser states run `35523673848`, marker `PASS_TARGETED_CATALOG_COMMUNITY_STATES`, vérifie le fallback distant fail-closed tout en conservant le brouillon local. |
 | Signatures / attestations de provenance | **EN COURS — contrats provenance acquis, signer/attestation réel non connecté** | Publication receipt fail-closed prouvé par run `35515669822`, marker `PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS`; un `receipt:` bien formé n'atteste toujours aucune authenticité. |
 | Téléchargements publics réels | **BLOQUÉ — verrou local prouvé, artefact réel absent** | run `35517484673`, marker `PASS_TARGETED_DISTRIBUTION_LOCK_CONTRACTS` protège available=false, zéro artefact, recovery fail-closed, same-origin, SHA-256 et gating de signature ; artefact autorisé + identité + provenance + signature réelle lorsque requise restent nécessaires. |
 | Corpus réels de mods GTA VI / RDR2 | **EN COURS — capacité non livrée / droits et preuves requis** | Les hubs éditoriaux sont livrés, mais le catalogue de mods reste à 0 tant qu'un corpus autorisé, versionné, attribué et vérifiable n'existe pas. |
 | Storage Resolver | **EN COURS — contrat acquis, service non connecté** | Contrat provider-neutral v1 prouvé par run `35515388240`, marker `PASS_TARGETED_STORAGE_REPAIR_CONTRACTS` : digest + manifest binding obligatoires, alias mutable non fiable rejeté. Le service distant réel reste absent. |
 | Repair Network | **EN COURS — protocole contractuel acquis, exécution distante non connectée** | Contrat fail-closed v1 prouvé par run `35515388240`, marker `PASS_TARGETED_STORAGE_REPAIR_CONTRACTS` : substitution silencieuse et redistribution révoquée interdites. Aucun réseau distant réel n'est annoncé. |
-| Backend communautaire | **EN COURS — fondation + endpoints + session BFF codés, ressources non provisionnées** | Backend DEV + endpoints distants + session D1/PKCE codés ; aucun tenant Auth0/D1/Turnstile réel, aucun binding/secret ou login réseau prouvé. |
+| Backend communautaire | **EN COURS — Provider DEV réel et write path prouvés ; cycle de modération final non livré** | D1 DEV, Auth0 DEV, Turnstile, bindings/secrets et login réseau sont réellement provisionnés et les écritures profil/Communauté sont prouvées. Restent le moteur de modération/publication final et les capacités produit dépendantes non simulées. |
 | Contrats comptes / communauté | **TERMINÉ — preuve ciblée contractuelle** | run `35517194516`, marker `PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS` ; contrats acquis, services réels séparés. |
-| Endpoints profils / communauté distants | **TERMINÉ — preuve ciblée de code** | `qa/MODARYX-REMOTE-WRITE-ENDPOINTS-20260920.md` + `PASS_TARGETED_REMOTE_WRITE_ENDPOINTS` ; ne vaut pas provisioning fournisseur ni publication distante active. |
+| Endpoints profils / communauté distants | **TERMINÉ — code + micro-proofs provider DEV** | `qa/MODARYX-REMOTE-WRITE-ENDPOINTS-20260920.md` + `PASS_TARGETED_REMOTE_WRITE_ENDPOINTS`, complétés par `profile-write` et `community-write` réels en DEV. La publication automatique reste interdite et non livrée. |
 | Fondation backend DEV | **TERMINÉ — preuve ciblée de code** | `qa/MODARYX-BACKEND-DEV-PROVISIONING-20260920.md` + run `35519643634`, marker `PASS_TARGETED_BACKEND_DEV_FOUNDATION` ; ne vaut pas provisioning fournisseur ni activation distante. |
-| Préparation fournisseur DEV | **TERMINÉ — preuve ciblée provider-independent** | `qa/MODARYX-DEV-PROVIDER-READINESS-20260920.md` + run `35528841637`, marker `PASS_TARGETED_DEV_PROVIDER_READINESS` ; ordre D1 0001→0002, hostname Turnstile, actions profil/Communauté et audience Auth0/RS256 verrouillés sans créer de ressource fournisseur. |
+| Préparation fournisseur DEV | **TERMINÉ — preuve ciblée provider-independent** | `qa/MODARYX-DEV-PROVIDER-READINESS-20260920.md` + run `35528841637`, marker `PASS_TARGETED_DEV_PROVIDER_READINESS` ; ordre D1 0001→0002, hostname Turnstile, actions profil/Communauté et audience Auth0/RS256 verrouillés. |
+| Provider DEV réel + micro-proofs bout-en-bout | **TERMINÉ — périmètre ciblé** | Checkpoint canonique 21 septembre : login/callback/session OK ; `profile-write` OK ; `community-write` OK avec `pending/received/distributable=false` ; fail-closed `401 authentication-required`, `403 origin-required`, `403 origin-mismatch`, `403 turnstile-rejected`, `403 turnstile-hostname-mismatch`; hostname restauré, harness retiré, `/api/v1/status` sain et aucun secret exposé. |
 | Guide MODARYX connecté | **EN COURS — capacité non livrée** | Moteur/contrat réel ; rester distinct de Nova Guide des OS. |
 | Pont Nova Forge OS | **EN COURS — dépendance Nova Forge OS** | Interface publique stabilisée, consentement et modèle de permissions ; aucun partage implicite. |
 
@@ -122,7 +123,8 @@ Les mentions historiques suivantes restent conservées pour provenance mais **ne
 - ancienne couverture à 16 pages ;
 - anciens compteurs de cache/précache antérieurs aux mesures courantes ;
 - threads CodeQL historiques encore ouverts ;
-- anciens « prochain point » déjà dépassés par les PR #63 à #72.
+- anciens « prochain point » déjà dépassés par les PR #63 à #72 ;
+- mentions « tenant Auth0/D1/Turnstile non provisionné » et « aucun login réseau prouvé » antérieures à la fermeture Provider DEV du 21 septembre 2026.
 
 ## 9. Règle de fermeture anti-oubli avant VF
 
@@ -141,9 +143,10 @@ Aucune idée n'est supprimée implicitement pour améliorer un pourcentage. Une 
 
 ## 10. Prochain point logique
 
-1. Ne pas rejouer les preuves déjà vertes sur les 23 routes sans modification pertinente.
-2. Ne pas retoucher le design sans défaut frais reproduit ou décision artistique explicite.
-3. Garder le sitemap protégé inchangé tant que sa garde n'est pas explicitement levée ; seul ce gap SEO reste ouvert.
-4. Conserver les corpus réels de mods et les services distants comme capacités distinctes non livrées jusqu'aux entrées réelles requises.
-5. Fermer séparément les preuves humaines/externes quand un environnement approprié est disponible.
-6. Aucun full replay avant la toute fin.
+1. Considérer le Provider DEV ciblé comme **TERMINÉ** ; ne pas le rejouer sans modification pertinente.
+2. Ne pas rejouer les preuves déjà vertes sur les 23 routes et ne pas retoucher le design sans défaut frais reproduit ou décision artistique explicite.
+3. Fermer les écarts produit encore réels sans les simuler : passkey finale, exposition publique des profils, moteur de modération/publication, corpus réels, distribution, Storage Resolver, Repair Network, Guide et pont OS selon leurs dépendances.
+4. Garder le sitemap protégé inchangé tant que sa garde n'est pas explicitement levée ; le gap SEO reste tracé séparément.
+5. Garder météo réelle production **BLOQUÉE** tant que licence/confidentialité/attribution/disclaimer ne sont pas validés.
+6. Fermer séparément les preuves humaines/externes (lecteurs d’écran natifs, zoom 400 %, appareils physiques, Safari réel, PWA install appareil, CWV terrain, juridique) quand un environnement approprié est disponible.
+7. Aucun full replay avant la toute fin.

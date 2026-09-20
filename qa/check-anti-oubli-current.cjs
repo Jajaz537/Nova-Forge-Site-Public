@@ -27,9 +27,9 @@ const requiredCurrent = [
   'PASS_TARGETED_STORAGE_REPAIR_CONTRACTS',
   'Signatures / attestations de provenance | **EN COURS — contrats provenance acquis, signer/attestation réel non connecté**',
   'PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS',
-  'Comptes / authentification / passkeys réels | **EN COURS — flux BFF/session codé, tenant non provisionné**',
-  'Profils publics éditables | **EN COURS — UI premium + endpoint + session BFF codés, service non provisionné**',
-  'Publication / modération distante | **EN COURS — UI d’envoi + endpoint codés, modération distante non provisionnée**',
+  'Comptes / authentification / passkeys réels | **EN COURS — login/callback/session DEV réels prouvés ; passkey finale non prouvée**',
+  'Profils publics éditables | **EN COURS — écriture profil DEV réelle prouvée ; exposition publique complète non fermée**',
+  'Publication / modération distante | **EN COURS — ingestion distante DEV réelle prouvée ; modération/publication finale non connectée**',
   'PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS',
   'Téléchargements publics réels | **BLOQUÉ — verrou local prouvé, artefact réel absent**',
   'PASS_TARGETED_DISTRIBUTION_LOCK_CONTRACTS',
@@ -40,11 +40,11 @@ const requiredCurrent = [
   'MODARYX-WORK-PHASE2-EXTERNAL-EVIDENCE-20260920.md',
   'PASS_TARGETED_BACKEND_DEV_FOUNDATION',
   'MODARYX-BACKEND-DEV-PROVISIONING-20260920.md',
-  'Backend communautaire | **EN COURS — fondation + endpoints + session BFF codés, ressources non provisionnées**',
-  'Endpoints profils / communauté distants | **TERMINÉ — preuve ciblée de code**',
+  'Backend communautaire | **EN COURS — Provider DEV réel et write path prouvés ; cycle de modération final non livré**',
+  'Endpoints profils / communauté distants | **TERMINÉ — code + micro-proofs provider DEV**',
   'PASS_TARGETED_REMOTE_WRITE_ENDPOINTS',
   'MODARYX-REMOTE-WRITE-ENDPOINTS-20260920.md',
-  'Flux Auth0 BFF / session | **TERMINÉ — preuve ciblée de code**',
+  'Flux Auth0 BFF / session | **TERMINÉ — code + preuve provider DEV ciblée**',
   'PASS_TARGETED_AUTH_BFF_SESSION',
   'MODARYX-AUTH-BFF-SESSION-20260920.md',
   'UI compte / profil premium | **TERMINÉ — preuve ciblée de code**',
@@ -52,7 +52,10 @@ const requiredCurrent = [
   'MODARYX-PROFILES-ACCOUNT-UI-20260920.md',
   'UI communauté distante modérée | **TERMINÉ — preuve ciblée de code**',
   'PASS_TARGETED_COMMUNITY_REMOTE_UI',
-  'MODARYX-COMMUNITY-REMOTE-UI-20260920.md'
+  'MODARYX-COMMUNITY-REMOTE-UI-20260920.md',
+  'Provider DEV réel + micro-proofs bout-en-bout | **TERMINÉ — périmètre ciblé**',
+  '403 turnstile-rejected',
+  '403 turnstile-hostname-mismatch'
 ];
 for (const token of requiredCurrent) assert.ok(ledger.includes(token), 'anti-forget current missing: ' + token);
 
@@ -60,7 +63,11 @@ const forbiddenCurrent = [
   'Design system Premium HD des 17 pages',
   'SEO des pages réellement disponibles | **EN COURS**',
   'Hubs GTA VI / RDR2, catégories et guides | **EN COURS — capacité non livrée**',
-  'Safari final + Firefox final élargi | **PREUVE MANQUANTE**'
+  'Safari final + Firefox final élargi | **PREUVE MANQUANTE**',
+  'Comptes / authentification / passkeys réels | **EN COURS — flux BFF/session codé, tenant non provisionné**',
+  'Profils publics éditables | **EN COURS — UI premium + endpoint + session BFF codés, service non provisionné**',
+  'Publication / modération distante | **EN COURS — UI d’envoi + endpoint codés, modération distante non provisionnée**',
+  'Backend communautaire | **EN COURS — fondation + endpoints + session BFF codés, ressources non provisionnées**'
 ];
 for (const token of forbiddenCurrent) assert.ok(!ledger.includes(token), 'stale current state returned: ' + token);
 
@@ -104,6 +111,8 @@ assert.equal(byId.get('distribution.artifacts')?.state, 'distribution-locked');
 assert.equal(byId.get('integrations.guide-os-bridge')?.state, 'not-connected');
 
 assert.ok(checkpoint.includes('## Mise à jour canonique — PR #81 / #82 — readiness + SEO — 20 septembre 2026'));
+assert.ok(checkpoint.includes('## Mise à jour canonique — Provider DEV réel — 21 septembre 2026'));
+assert.ok(checkpoint.includes('TERMINÉ — Provider DEV réel et micro-proofs bout-en-bout ciblés'));
 assert.ok(checkpoint.includes('Aucune VF / aucun 100 % déclaré.'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
 
