@@ -65,6 +65,13 @@ assert.equal((await fetchBoundedHttps({
   timeoutMs:15
 })).reason,'transport-url-invalid');
 
+const publicHostResult=await fetchBoundedHttps({
+  url:'https://fc.example/artifact.bin',
+  fetchImpl:async()=>new Response('ok',{status:200}),
+  timeoutMs:15
+});
+assert.equal(publicHostResult.ok,true);
+
 const identity={manifestSha256:'a'.repeat(64),artifactSha256:'b'.repeat(64)};
 const repairTimeout=await resolveAndPlanRepair({
   logicalIdentity:identity,
@@ -98,6 +105,19 @@ assert.equal((await discoverGuideService({
   fetchImpl:async()=>new Response('{}',{status:200,headers:{'content-type':'application/json'}}),
   timeoutMs:15
 })).reason,'discovery-endpoint-invalid');
+
+const publicGuide=await discoverGuideService({
+  endpointUri:'https://fc.example/.well-known/modaryx-guide',
+  requestedScopes:['guide.read'],
+  fetchImpl:async()=>new Response(JSON.stringify({
+    schema:'modaryx-guide-discovery/v1',
+    product:'modaryx-guide',
+    state:'available',
+    supportedScopes:['guide.read']
+  }),{status:200,headers:{'content-type':'application/json'}}),
+  timeoutMs:15
+});
+assert.equal(publicGuide.ok,true);
 
 console.log(JSON.stringify({
   marker:'PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING',

@@ -17,7 +17,7 @@ function uniqueCapabilities(values,max=16){
 function unsafeRemoteHostname(hostname){
   const host=hostname.toLowerCase().replace(/^\[|\]$/g,'');
   if(host==='localhost' || host.endsWith('.localhost') || host.endsWith('.local')) return true;
-  if(host==='::1' || host.startsWith('fe80:') || host.startsWith('fc') || host.startsWith('fd')) return true;
+  if(host.includes(':') && (host==='::1' || host.startsWith('fe80:') || host.startsWith('fc') || host.startsWith('fd'))) return true;
   const parts=host.split('.');
   if(parts.length===4 && parts.every(part=>/^\d{1,3}$/.test(part) && Number(part)<=255)){
     const [a,b]=parts.map(Number);
