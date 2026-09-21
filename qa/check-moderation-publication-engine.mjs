@@ -18,6 +18,7 @@ import {
   validateModerationDecision
 } from '../functions/_lib/moderation.mjs';
 import {createSession, sessionCookie} from '../functions/_lib/auth-session.mjs';
+import {ADMIN_PERMISSION, FOUNDER_PERMISSION} from '../functions/_lib/access-control.mjs';
 
 class FakeStatement {
   constructor(db, sql) {
@@ -143,6 +144,32 @@ access = await authorizeAppealsReviewer({request:wrongAppealsRequest,env:{MODARY
 assert.equal(access.ok,false);
 assert.equal(access.reason,'appeals-review-permission-required');
 checks.push('Appeals review uses a permission distinct from first-line moderation');
+
+const privilegedDb = new FakeDb();
+const founderSession = await createSession(privilegedDb,{
+  sub:'auth0|founder-1',
+  scope:['openid'],
+  permissions:[FOUNDER_PERMISSION]
+},{},{nowMs});
+const founderCookie=sessionCookie(founderSession.token,founderSession.ttl).split(';')[0];
+const founderRequest=new Request('https://preview.example/api/v1/moderation/decisions',{headers:{cookie:founderCookie}});
+access=await authorizeModerator({request:founderRequest,env:{MODARYX_DB:privilegedDb}},{nowMs:nowMs+1000});
+assert.equal(access.ok,true);
+access=await authorizeAppealsReviewer({request:founderRequest,env:{MODARYX_DB:privilegedDb}},{nowMs:nowMs+1000});
+assert.equal(access.ok,true);
+
+const adminSession = await createSession(privilegedDb,{
+  sub:'auth0|admin-1',
+  scope:['openid'],
+  permissions:[ADMIN_PERMISSION]
+},{},{nowMs});
+const adminCookie=sessionCookie(adminSession.token,adminSession.ttl).split(';')[0];
+const adminRequest=new Request('https://preview.example/api/v1/moderation/appeals',{headers:{cookie:adminCookie}});
+access=await authorizeModerator({request:adminRequest,env:{MODARYX_DB:privilegedDb}},{nowMs:nowMs+1000});
+assert.equal(access.ok,true);
+access=await authorizeAppealsReviewer({request:adminRequest,env:{MODARYX_DB:privilegedDb}},{nowMs:nowMs+1000});
+assert.equal(access.ok,true);
+checks.push('Founder and Administrator inherit current moderation/appeals capabilities server-side');
 
 let decision = validateModerationDecision({
   submissionId:'submission-11111111-2222-4333-8444-555555555555',
