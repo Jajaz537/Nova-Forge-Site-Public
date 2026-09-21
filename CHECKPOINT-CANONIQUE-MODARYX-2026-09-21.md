@@ -48,7 +48,7 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 - **TERMINÉ — communauté distante ciblée** : ingestion, surface publique modérée, suivi auteur et recours.
 - **TERMINÉ — modération/publication/recours Provider DEV** : migration D1 0003, RBAC séparé, publication/retrait, recours/issue, receipts pseudonymisés.
 - Production reste distincte et non activée.
-- **EN COURS — compte Fondateur / Administrateur** : autorité serveur `modaryx:founder` / `modaryx:admin`, héritage administration + modération + recours et affichage same-origin intégrés sur la branche de preuve ; attribution réelle au compte Auth0 Fondateur et micro-preuves Preview restent requises avant fermeture.
+- **EN COURS — compte Fondateur / Administrateur** : autorité serveur `modaryx:founder` / `modaryx:admin`, héritage administration + modération + recours et affichage same-origin **fusionnés dans Work via PR #142** au merge `0c3ecf397d68b4dc6df00119bb86a09131282cf6`. Source Proof `35646403025`, Profiles State Browser `35646403023`, A11y ciblé `35646402912` après rerun du seul job en échec infra, WebKit `35646402911`, Static Premium HD `35646402908` et CodeQL post-merge `35646685466` : **success**. Attribution réelle au compte Auth0 Fondateur et micro-preuves Preview avec `authority.role=founder` restent requises avant fermeture.
 - Les rôles web n'exposent jamais automatiquement les secrets Cloudflare, GitHub, DNS/DNSSEC, Auth0, WeatherAPI ou clés privées de signature.
 
 ## 5. Passkeys
@@ -154,6 +154,7 @@ Ne jamais supprimer implicitement un blocker pour améliorer un pourcentage. Une
 1. Vérifier Git frais avant toute écriture.
 2. Ne pas rejouer les preuves déjà vertes sans modification pertinente.
 3. Fermer uniquement les dépendances réelles encore ouvertes quand un environnement adapté existe :
+   - attribution réelle du compte Fondateur/Auth0 + preuve Preview ;
    - passkey appareil ;
    - signer / trust anchor réel ;
    - artefact de distribution autorisé ;
