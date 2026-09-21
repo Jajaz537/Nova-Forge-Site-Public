@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:modaryx:schemas:guide-connection:v1",
+  "title": "MODARYX Guide Connection Contract",
+  "description": "Provider-neutral contract for an optional MODARYX Guide connection. It requires explicit consent, least privilege, no implicit session sharing and no credential forwarding.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "product",
+    "state",
+    "consent",
+    "requestedScopes",
+    "grantedScopes",
+    "sessionSharing",
+    "credentialForwarding",
+    "remoteTelemetryRequired"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "product": {
+      "const": "modaryx-guide"
+    },
+    "state": {
+      "enum": [
+        "not-connected",
+        "discovering",
+        "available",
+        "connected",
+        "error"
+      ]
+    },
+    "consent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required",
+        "granted",
+        "grantedAt"
+      ],
+      "properties": {
+        "required": {
+          "const": true
+        },
+        "granted": {
+          "type": "boolean"
+        },
+        "grantedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "requestedScopes": {
+      "type": "array",
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9.-]{2,63}$"
+      }
+    },
+    "grantedScopes": {
+      "type": "array",
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9.-]{2,63}$"
+      }
+    },
+    "sessionSharing": {
+      "const": false
+    },
+    "credentialForwarding": {
+      "const": false
+    },
+    "remoteTelemetryRequired": {
+      "const": false
+    },
+    "endpointUri": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "lastError": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "connected"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "consent": {
+            "properties": {
+              "granted": {
+                "const": true
+              }
+            }
+          }
+        },
+        "required": [
+          "endpointUri"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "consent": {
+            "properties": {
+              "granted": {
+                "const": false
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "not": {
+          "properties": {
+            "state": {
+              "const": "connected"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
