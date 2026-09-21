@@ -212,6 +212,13 @@ assert.ok(checkpoint.includes('SOURCE DE REPRISE PRIORITAIRE — VF NON DÉCLAR�
 assert.ok(checkpoint.includes('design/modaryx-premium-hd-20260914-work'));
 assert.ok(checkpoint.includes('62c47f9fd46cb9183ad5f46fc24f254852fcb5cf'));
 assert.ok(checkpoint.includes('PR #133 : **TERMINÉE / fusionnée**'));
+assert.ok(checkpoint.includes('PR #134 : **TERMINÉE / fusionnée**'));
+assert.ok(checkpoint.includes('249e7b2003865b6f2e2dd6ff4768fbd4cdcfb4b8'));
+assert.ok(checkpoint.includes('35635858561'));
+assert.ok(checkpoint.includes('PR #135 : **TERMINÉE / fusionnée**'));
+assert.ok(checkpoint.includes('01718643b54171b23a066063941d17ae9cfb54f8'));
+assert.ok(checkpoint.includes('35636183749'));
+assert.ok(checkpoint.includes('35636268976'));
 assert.ok(checkpoint.includes('23 routes publiques'));
 assert.ok(checkpoint.includes('Provider DEV ciblé'));
 assert.ok(checkpoint.includes('PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING'));
