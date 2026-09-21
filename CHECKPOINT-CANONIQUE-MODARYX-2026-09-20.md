@@ -2085,3 +2085,125 @@ Cette section est la lecture la plus récente pour l'activation fournisseur DEV 
 3. Fermer séparément les preuves humaines/externes encore manquantes.
 4. Garder la météo production bloquée tant que licence/confidentialité/attribution/disclaimer ne sont pas validés.
 5. Full replay unique uniquement à la toute fin, après fermeture des bloqueurs ciblés.
+
+## Mise à jour canonique — PR #126 — préparation multi-rôle des écarts pré-VF — 21 septembre 2026
+
+Cette section est la lecture la plus récente pour les trois lanes source exécutées sans ChatGPT Work.
+
+### Git frais
+
+- Branche Work vérifiée : `design/modaryx-premium-hd-20260914-work`.
+- Base Work avant PR #126 : `035dcdb90fcad11ea6a140d699ae46a35a468025`.
+- Candidat final PR #126 : `b825ad8707293037c3a444a50a40d06fb9073d85`.
+- Merge PR #126 dans Work : `a63684d7ffc6d4cebd86926b8bf252e258624f84`.
+- `main`, production, DNS/DNSSEC/nameservers : inchangés.
+- Aucun provider, secret ou configuration Auth0/Cloudflare modifié par ce lot.
+- Aucun full replay final exécuté.
+
+### Lane identité / passkeys
+
+Ajouts :
+- `qa/MODARYX-PASSKEY-PROVIDER-READINESS-20260921.md`
+- `qa/check-passkey-provider-readiness.cjs`
+
+Le contrat source verrouille :
+- Auth0 New Universal Login comme frontière de cérémonie ;
+- aucune implémentation WebAuthn maison côté MODARYX ;
+- aucune clé privée demandée ou stockée ;
+- détection WebAuthn locale non probante pour l'existence d'une passkey ;
+- changements credentials/récupération/session comme actions privilégiées ;
+- handoff fournisseur minimal avant vraie cérémonie appareil.
+
+Marker :
+- `PASS_TARGETED_PASSKEY_PROVIDER_READINESS`
+
+État :
+- **TERMINÉ — préparation source passkey finale ciblée**.
+- **EN COURS — activation/configuration passkey fournisseur + vraie cérémonie sur appareil + récupération/révocation**.
+
+### Lane signature / attestation
+
+Ajouts :
+- `schemas/signature-attestation.schema.json`
+- `qa/MODARYX-SIGNATURE-ATTESTATION-CONTRACT-20260921.md`
+- `qa/check-signature-attestation-contract.cjs`
+
+Le contrat impose :
+- signature détachée liée à un SHA-256 exact ;
+- algorithmes bornés `ES256 | EdDSA` ;
+- empreinte publique de clé ;
+- états `unverified | verified | failed | revoked` ;
+- raison obligatoire pour échec/révocation ;
+- `privateKeyMaterialPresent=false`.
+
+Marker :
+- `PASS_TARGETED_SIGNATURE_ATTESTATION_CONTRACT`
+
+État :
+- **TERMINÉ — contrat d'attestation/signature ciblé**.
+- **EN COURS — signer réel, clé publique de confiance, rotation/révocation et preuve cryptographique réelle**.
+- Distribution publique reste verrouillée.
+
+### Lane Guide MODARYX / pont Nova Forge OS
+
+Ajouts :
+- `schemas/modaryx-guide-connection.schema.json`
+- `schemas/nova-forge-os-bridge.schema.json`
+- `qa/MODARYX-GUIDE-OS-BRIDGE-CONTRACT-20260921.md`
+- `qa/check-guide-os-bridge-contracts.cjs`
+
+Invariants :
+- MODARYX et Nova Forge OS restent deux produits distincts ;
+- consentement explicite requis ;
+- moindre privilège ;
+- aucune session partagée implicitement ;
+- aucun credential forwarding ;
+- aucun account linking implicite vers Nova Forge OS ;
+- `data/integration-readiness.json` reste `not-connected`.
+
+Marker :
+- `PASS_TARGETED_GUIDE_OS_BRIDGE_CONTRACTS`
+
+État :
+- **TERMINÉ — contrats Guide/pont ciblés**.
+- **EN COURS — service Guide réel et runtime pont côté Nova Forge OS**.
+
+### Erreurs ciblées et corrections
+
+Run source `35605870736` :
+- **failure ciblée** sur `SHA256SUMS.txt` uniquement ;
+- mismatch exact : `data/integration-readiness.json`.
+- Correction : mise à jour de cette empreinte uniquement.
+
+Run source `35605980509` :
+- Site First, integration readiness, storage/repair, provenance, signature et Guide/OS : **success** ;
+- échec ciblé uniquement dans le checker passkey : assertion cherchait littéralement `/authorize` alors que le builder réel utilise `new URL('authorize', config.issuer)`.
+- Correction : alignement de l'assertion sur le builder réel ; aucun runtime modifié.
+
+Run final `35606102721` :
+- **success** ;
+- `PASS_TARGETED_PASSKEY_PROVIDER_READINESS` ;
+- `PASS_TARGETED_SIGNATURE_ATTESTATION_CONTRACT` ;
+- `PASS_TARGETED_GUIDE_OS_BRIDGE_CONTRACTS` ;
+- les preuves source existantes incluses dans cette lane restent vertes.
+
+La procédure erreur exacte → isolation → correction ciblée → micro-proof a été respectée. Aucun full replay n'a été lancé.
+
+### État honnête après PR #126
+
+- **TERMINÉ — préparation source passkey ciblée**.
+- **TERMINÉ — contrat signature/attestation ciblé**.
+- **TERMINÉ — contrats Guide MODARYX / pont Nova Forge OS ciblés**.
+- **EN COURS — vraie passkey provider/appareil**.
+- **EN COURS — signer/attestation réel**.
+- **EN COURS — Guide connecté réel**.
+- **EN COURS — runtime pont Nova Forge OS réel**.
+- Aucune VF / aucun 100 % déclaré.
+
+## Prochain point logique actualisé
+
+1. Continuer ici tout ce qui reste fermable sans fournisseur ni appareil réel.
+2. Garder ChatGPT Work pour une intervention fournisseur passkey courte et ciblée seulement lorsqu'elle devient indispensable.
+3. Ne pas simuler signer, artefact, Storage Resolver, Repair Network, Guide ou runtime OS en l'absence d'entrées réelles.
+4. Fermer séparément les preuves humaines/externes encore manquantes.
+5. Full replay unique uniquement à la toute fin.
