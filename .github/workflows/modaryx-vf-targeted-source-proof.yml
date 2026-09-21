@@ -38,6 +38,8 @@ on:
       - 'qa/MODARYX-DEV-PROVIDER-READINESS-20260920.md'
       - 'qa/check-remote-write-endpoints.mjs'
       - 'qa/check-auth-bff.mjs'
+      - 'qa/check-founder-dev-proof-surface.cjs'
+      - 'qa/MODARYX-FOUNDER-DEV-PROOF-SURFACE-20260921.md'
       - 'qa/check-profiles-account-ui.cjs'
       - 'qa/check-community-remote-ui.cjs'
       - 'qa/check-moderation-publication-engine.mjs'
@@ -127,6 +129,8 @@ on:
       - 'qa/MODARYX-DEV-PROVIDER-READINESS-20260920.md'
       - 'qa/check-remote-write-endpoints.mjs'
       - 'qa/check-auth-bff.mjs'
+      - 'qa/check-founder-dev-proof-surface.cjs'
+      - 'qa/MODARYX-FOUNDER-DEV-PROOF-SURFACE-20260921.md'
       - 'qa/check-profiles-account-ui.cjs'
       - 'qa/check-community-remote-ui.cjs'
       - 'qa/check-moderation-publication-engine.mjs'
@@ -345,6 +349,12 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-auth-bff.mjs
+
+      - name: Run targeted Founder DEV proof surface guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-founder-dev-proof-surface.cjs
 
       - name: Run targeted profiles account UI proof
         shell: bash

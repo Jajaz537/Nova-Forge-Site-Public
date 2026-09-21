@@ -50,6 +50,7 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 - Production reste distincte et non activée.
 - **EN COURS — compte Fondateur / Administrateur** : code/UI et héritage serveur fusionnés via PR #142. **Attribution réelle Auth0 DEV acquise** : tenant `modaryx-dev` EU, rôle `MODARYX Founder`, permission `modaryx:founder`, session renouvelée avec `authority.role=founder` et capacités founder/administration/modération/recours confirmées, sans secret/token exposé. Les **preuves runtime modération/recours restent manquantes** : Work a rencontré `TypeError: fetch is not a function` et n'a ni `fetch`, ni XHR, ni `sendBeacon` dans ce contexte authentifié. Cookie HttpOnly non extrait. Source : `qa/MODARYX-FOUNDER-AUTH0-DEV-EVIDENCE-20260921.md`.
 - Les rôles web n'exposent jamais automatiquement les secrets Cloudflare, GitHub, DNS/DNSSEC, Auth0, WeatherAPI ou clés privées de signature.
+- **EN COURS — micro-surface Fondateur DEV temporaire** : `/founder-proof-dev`, limitée au hostname Preview stable exact, sans JavaScript, protégée par session `modaryx:founder` + same-origin, réutilisant les vrais handlers de mutation modération/recours avec fixtures D1 éphémères. Le succès exige receipt créé + nettoyage confirmé. **Retrait obligatoire immédiatement après acquisition des deux preuves ; cette route ne doit jamais entrer dans la VF/production.**
 
 ## 5. Passkeys
 
@@ -154,7 +155,7 @@ Ne jamais supprimer implicitement un blocker pour améliorer un pourcentage. Une
 1. Vérifier Git frais avant toute écriture.
 2. Ne pas rejouer les preuves déjà vertes sans modification pertinente.
 3. Fermer uniquement les dépendances réelles encore ouvertes quand un environnement adapté existe :
-   - preuves runtime Fondateur : accès modération + revue des recours avec la session Auth0 DEV existante, sans extraction du cookie HttpOnly ;
+   - exécuter les deux mutations via `/founder-proof-dev` sur Preview Work, acquérir receipt + cleanup pour modération et recours, puis retirer immédiatement la micro-surface et micro-prouver son retrait ;
    - passkey appareil ;
    - signer / trust anchor réel ;
    - artefact de distribution autorisé ;
