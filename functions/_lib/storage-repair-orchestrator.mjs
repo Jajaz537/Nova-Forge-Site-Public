@@ -27,7 +27,8 @@ export async function resolveAndPlanRepair({
   origins=[],
   fetchImpl=fetch,
   manifestMaxBytes=4*1024*1024,
-  artifactMaxBytes=64*1024*1024
+  artifactMaxBytes=64*1024*1024,
+  transportTimeoutMs=8000
 }={}){
   if(!validIdentity(logicalIdentity)){
     return {
@@ -40,6 +41,9 @@ export async function resolveAndPlanRepair({
   }
   if(!Array.isArray(origins) || origins.length>8){
     return {ok:false,reason:'origin-set-invalid',resolution:null,repair:null,observations:[]};
+  }
+  if(!Number.isSafeInteger(transportTimeoutMs) || transportTimeoutMs<10 || transportTimeoutMs>60000){
+    return {ok:false,reason:'transport-timeout-invalid',resolution:null,repair:null,observations:[]};
   }
 
   if(releaseState==='withdrawn' || releaseState==='revoked'){
@@ -72,7 +76,8 @@ export async function resolveAndPlanRepair({
       logicalIdentity,
       fetchImpl,
       manifestMaxBytes,
-      artifactMaxBytes
+      artifactMaxBytes,
+      timeoutMs:transportTimeoutMs
     });
     return observed.ok
       ? {...origin,ok:true,reason:null,...observed.observation}
