@@ -2454,3 +2454,102 @@ Cette preuve ne transforme ni le trust store vide en signer réel, ni le transpo
 4. Ne pas déverrouiller les téléchargements sans artefact autorisé, droits, provenance, trust anchor et signature réelle lorsqu'elle est requise.
 5. Fermer séparément les preuves humaines/externes.
 6. Full replay unique uniquement à la toute fin.
+
+
+## Mise à jour canonique — PR #131 — runtime multi-lane confiance / réparation / découverte — 21 septembre 2026
+
+Cette section est la lecture la plus récente pour le batch runtime exécuté en parallèle sur trois lanes sans fournisseur externe supplémentaire.
+
+### Git frais et collision safety
+
+- Branche Work vérifiée avant écriture : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work exact avant branchement : `5e5f61e27bcbbd297be3b73851c9ca2df5302a67`.
+- Branche isolée : `feature/modaryx-supernova-runtime-batch-20260921`.
+- Candidat code : `cb5ecbac68a88a6feb1f0fe516b12f0349284d4a`.
+- Aucun changement concurrent n’a été observé sur Work au moment de l’ouverture de la PR #131.
+- `main`, production, DNS/DNSSEC/nameservers : inchangés.
+- Aucun full replay final exécuté.
+
+### Lane distribution — chaîne de confiance composée
+
+Ajouts :
+- `functions/_lib/artifact-trust.mjs`
+- `qa/check-distribution-trust-chain.mjs`
+- `qa/MODARYX-DISTRIBUTION-TRUST-CHAIN-20260921.md`
+
+Le moteur lie désormais dans une seule décision :
+- taille d’artefact attendue ;
+- SHA-256 des octets réellement vérifiés ;
+- identifiant et digest exacts du sujet d’attestation ;
+- trust anchor public explicite via le registre de signers existant.
+
+Une signature requise ne peut pas être considérée comme vérifiée sur la seule base d’un statut dans le manifeste.
+
+Marker :
+- `PASS_TARGETED_DISTRIBUTION_TRUST_CHAIN`.
+
+État :
+- **TERMINÉ — composition source ciblée de la chaîne de confiance**.
+- **BLOQUÉ — téléchargement public réel**, tant qu’artefact autorisé, droits, provenance et signer/trust anchor réel ne sont pas fournis.
+
+### Lane Storage Resolver / Repair — orchestration runtime
+
+Ajouts :
+- `functions/_lib/storage-repair-orchestrator.mjs`
+- `qa/check-storage-repair-orchestrator.mjs`
+- `qa/MODARYX-STORAGE-REPAIR-ORCHESTRATOR-20260921.md`
+
+L’orchestrateur compose la primitive de transport et le moteur décisionnel existants :
+- origines éligibles observées en parallèle ;
+- aliases mutables et origines inactives non récupérés ;
+- manifeste puis artefact validés au SHA-256 exact ;
+- seule une copie exacte peut devenir origine de réparation ;
+- release `withdrawn` ou `revoked` : aucune récupération réseau.
+
+Marker :
+- `PASS_TARGETED_STORAGE_REPAIR_ORCHESTRATOR`.
+
+État :
+- **TERMINÉ — orchestration source ciblée**.
+- **EN COURS — endpoints/origines Storage réels et exécution Repair distante**, toujours absents.
+
+### Lane Guide MODARYX / pont Nova Forge OS — découverte runtime
+
+Ajouts :
+- `functions/_lib/integration-discovery.mjs`
+- `qa/check-integration-discovery-runtime.mjs`
+- `qa/MODARYX-INTEGRATION-DISCOVERY-RUNTIME-20260921.md`
+
+La découverte :
+- Guide : HTTPS uniquement ;
+- pont OS : HTTPS, ou HTTP uniquement sur loopback ;
+- GET sans credentials, sans referrer, sans redirection ;
+- réponse JSON bornée ;
+- identité produit et capacités supportées vérifiées ;
+- consentement explicite toujours requis avant activation.
+
+Marker :
+- `PASS_TARGETED_INTEGRATION_DISCOVERY_RUNTIME`.
+
+État :
+- **TERMINÉ — couche de découverte/préparation d’activation ciblée**.
+- **EN COURS — Guide réel et runtime pont Nova Forge OS réel**, toujours non connectés.
+
+### Micro-preuves du candidat
+
+Sur `cb5ecbac68a88a6feb1f0fe516b12f0349284d4a` :
+
+- `MODARYX Site First Targeted Source Proof` — run `35630267754` — **success** ;
+- `MODARYX Local Functional Browser Proof` — run `35630268011` — **success**.
+
+Ces runs prouvent le code ciblé et l’absence de régression fonctionnelle observée dans cette lane. Ils ne constituent ni un full replay, ni une preuve de services distants réels, ni une validation humaine finale.
+
+### État honnête après ce batch
+
+- **TERMINÉ — chaîne de confiance distribution en code ciblé**.
+- **TERMINÉ — orchestration Storage/Repair en code ciblé**.
+- **TERMINÉ — découverte Guide/OS bridge en code ciblé**.
+- **BLOQUÉ / EN COURS** — signer réel, artefact réel, Storage/Repair distants, Guide réel et runtime OS réel restent dépendants d’entrées ou services réels.
+- **PREUVE MANQUANTE** — passkey appareil, Safari réel, lecteurs d’écran natifs, zoom natif final, appareils tactiles, PWA install réelle, CWV terrain, validation juridique et validation artistique humaine.
+- Aucune VF / aucun 100 % déclaré.
+- Full replay unique uniquement à la toute fin.
