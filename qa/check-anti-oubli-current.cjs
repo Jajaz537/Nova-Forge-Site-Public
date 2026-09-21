@@ -25,9 +25,9 @@ const requiredCurrent = [
   'Storage Resolver | **EN COURS — contrat acquis, service non connecté**',
   'Repair Network | **EN COURS — protocole contractuel acquis, exécution distante non connectée**',
   'PASS_TARGETED_STORAGE_REPAIR_CONTRACTS',
-  'Signatures / attestations de provenance | **EN COURS — contrats provenance acquis, signer/attestation réel non connecté**',
+  'Signatures / attestations de provenance | **EN COURS — contrat d’attestation/signature acquis ; signer réel non connecté**',
   'PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS',
-  'Comptes / authentification / passkeys réels | **EN COURS — login/callback/session DEV réels prouvés ; passkey finale non prouvée**',
+  'Comptes / authentification / passkeys réels | **EN COURS — préparation source passkey finale acquise ; cérémonie provider/appareil réelle non prouvée**',
   'Profils publics éditables | **TERMINÉ — parcours DEV bout-en-bout ciblé**',
   'Publication / modération distante | **TERMINÉ — cycle Provider DEV bout-en-bout ciblé**',
   'PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS',
@@ -55,6 +55,14 @@ const requiredCurrent = [
   'MODARYX-COMMUNITY-REMOTE-UI-20260920.md',
   'Provider DEV réel + micro-proofs bout-en-bout | **TERMINÉ — profils + ingestion + modération/recours ciblés**',
   'Moteur modération / publication / recours | **TERMINÉ — code + preuves ciblées + Provider DEV réel**',
+  'Guide MODARYX connecté | **EN COURS — contrat de connexion acquis ; service réel non connecté**',
+  'Pont Nova Forge OS | **EN COURS — contrat de pont acquis ; runtime OS non connecté**',
+  'PASS_TARGETED_PASSKEY_PROVIDER_READINESS',
+  'MODARYX-PASSKEY-PROVIDER-READINESS-20260921.md',
+  'PASS_TARGETED_SIGNATURE_ATTESTATION_CONTRACT',
+  'MODARYX-SIGNATURE-ATTESTATION-CONTRACT-20260921.md',
+  'PASS_TARGETED_GUIDE_OS_BRIDGE_CONTRACTS',
+  'MODARYX-GUIDE-OS-BRIDGE-CONTRACT-20260921.md',
   'PASS_TARGETED_MODERATION_PUBLICATION_ENGINE',
   'MODARYX-MODERATION-PUBLICATION-ENGINE-20260921.md',
   '403 turnstile-rejected',
@@ -78,7 +86,11 @@ const forbiddenCurrent = [
   'Publication / modération distante | **EN COURS — moteur complet codé/prouvé ; activation fournisseur DEV restante**',
   'Backend communautaire | **EN COURS — Provider DEV + writes réels ; moteur modération/recours codé, activation réelle restante**',
   'Provider DEV réel + micro-proofs bout-en-bout | **TERMINÉ — périmètre profils + ingestion communautaire**',
-  'Moteur modération / publication / recours | **TERMINÉ — code + preuves ciblées ; provider réel restant**'
+  'Moteur modération / publication / recours | **TERMINÉ — code + preuves ciblées ; provider réel restant**',
+  'Comptes / authentification / passkeys réels | **EN COURS — login/callback/session DEV réels prouvés ; passkey finale non prouvée**',
+  'Signatures / attestations de provenance | **EN COURS — contrats provenance acquis, signer/attestation réel non connecté**',
+  'Guide MODARYX connecté | **EN COURS — capacité non livrée**',
+  'Pont Nova Forge OS | **EN COURS — dépendance Nova Forge OS**'
 ];
 for (const token of forbiddenCurrent) assert.ok(!ledger.includes(token), 'stale current state returned: ' + token);
 
@@ -133,6 +145,12 @@ assert.ok(checkpoint.includes('TERMINÉ — activation fournisseur DEV réelle d
 assert.ok(checkpoint.includes('70c023a15525def9ead6ac8b6787389e7e6a62de'));
 assert.ok(checkpoint.includes('moderator-permission-required'));
 assert.ok(checkpoint.includes('appeals-review-permission-required'));
+assert.ok(checkpoint.includes('## Mise à jour canonique — PR #126 — préparation multi-rôle des écarts pré-VF — 21 septembre 2026'));
+assert.ok(checkpoint.includes('PASS_TARGETED_PASSKEY_PROVIDER_READINESS'));
+assert.ok(checkpoint.includes('PASS_TARGETED_SIGNATURE_ATTESTATION_CONTRACT'));
+assert.ok(checkpoint.includes('PASS_TARGETED_GUIDE_OS_BRIDGE_CONTRACTS'));
+assert.ok(checkpoint.includes('35606102721'));
+assert.ok(checkpoint.includes('a63684d7ffc6d4cebd86926b8bf252e258624f84'));
 assert.ok(checkpoint.includes('Aucune VF / aucun 100 % déclaré.'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
 
