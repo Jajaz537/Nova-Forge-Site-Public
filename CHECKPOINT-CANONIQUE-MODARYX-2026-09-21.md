@@ -17,14 +17,17 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 
 - Dépôt : `Jajaz537/Nova-Forge-Site-Public`
 - Branche Work : `design/modaryx-premium-hd-20260914-work`
-- HEAD Work vérifié : `b63452a36dab6ffc66acf111c3a7e3250c1204fb`
+- **HEAD Work observé avant cette maintenance documentaire** : `01718643b54171b23a066063941d17ae9cfb54f8`.
+- À chaque reprise, le HEAD réel doit être revérifié dans GitHub ; le SHA inscrit ici est un point d’observation, pas une auto-référence au commit documentaire qui porte ce fichier.
 - PR principale : **#12 — ouverte, draft, mergeable**
 - PR #131 : **TERMINÉE / fusionnée**
 - PR #132 : **TERMINÉE / fusionnée** dans Work au merge `a8a544dc8a6d8b4c435d3d2acf56d9988141bbfd`
 - PR #133 : **TERMINÉE / fusionnée** — création de ce checkpoint canonique 21/09 ; merge Work `62c47f9fd46cb9183ad5f46fc24f254852fcb5cf`.
-- HEAD Work au point de branchement de la garde anti-oubli courante : `62c47f9fd46cb9183ad5f46fc24f254852fcb5cf`.
-- CodeQL du HEAD précédent `b63452a36dab6ffc66acf111c3a7e3250c1204fb` : run `35632222080` — **success**.
-- CodeQL du merge #133 `62c47f9fd46cb9183ad5f46fc24f254852fcb5cf` : run `35635578672` — **EN COURS au dernier contrôle** ; ne pas le compter vert avant conclusion.
+- PR #134 : **TERMINÉE / fusionnée** — garde anti-oubli du checkpoint 21/09 ; merge Work `249e7b2003865b6f2e2dd6ff4768fbd4cdcfb4b8`; micro-proof source/anti-oubli run `35635858561` — **success**.
+- PR #135 : **TERMINÉE / fusionnée** — routage des sources canoniques 21/09 ; merge Work `01718643b54171b23a066063941d17ae9cfb54f8`; micro-proof source run `35636183749` — **success**.
+- CodeQL du merge #133 `62c47f9fd46cb9183ad5f46fc24f254852fcb5cf` : run `35635578672` — **success**.
+- CodeQL du merge #134 `249e7b2003865b6f2e2dd6ff4768fbd4cdcfb4b8` : run `35635925505` — **success**.
+- CodeQL du HEAD observé `01718643b54171b23a066063941d17ae9cfb54f8` : run `35636268976` — **success**.
 - Aucun full replay final exécuté.
 - Aucun changement `main`, DNS, DNSSEC, nameservers ou production dans les derniers lots runtime.
 
@@ -124,9 +127,11 @@ Candidat `9bd769e927bc07ff5ea2cd40054cfdec0c30f610` :
 - `MODARYX Local Functional Browser Proof` — run `35631864027` — **success**
 - marker : `PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING`
 
-HEAD Work courant :
+HEAD Work observé avant maintenance documentaire :
 
-- CodeQL — run `35632222080` — **success**
+- `01718643b54171b23a066063941d17ae9cfb54f8`
+- CodeQL — run `35636268976` — **success**
+- source routing / anti-oubli le plus récent : run `35636183749` — **success**
 
 ## 13. Anti-oubli
 
