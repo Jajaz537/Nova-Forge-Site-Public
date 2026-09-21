@@ -14,7 +14,7 @@ for(const token of [
   "onRequestPost as decideAppeal",
   "/api/v1/moderation/decisions",
   "/api/v1/moderation/appeal-outcomes",
-  "method="post"",
+  'method="post"',
   "form-action 'self'",
   "x-robots-tag",
   "noindex, nofollow, noarchive",
