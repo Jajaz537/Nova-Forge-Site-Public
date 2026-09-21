@@ -2466,6 +2466,7 @@ Cette section est la lecture la plus récente pour le batch runtime exécuté en
 - HEAD Work exact avant branchement : `5e5f61e27bcbbd297be3b73851c9ca2df5302a67`.
 - Branche isolée : `feature/modaryx-supernova-runtime-batch-20260921`.
 - Candidat code : `cb5ecbac68a88a6feb1f0fe516b12f0349284d4a`.
+- PR #131 fusionnée dans Work : `89e31e938b2eec2b6e3af3ea5679ead1d2b770a2`.
 - Aucun changement concurrent n’a été observé sur Work au moment de l’ouverture de la PR #131.
 - `main`, production, DNS/DNSSEC/nameservers : inchangés.
 - Aucun full replay final exécuté.

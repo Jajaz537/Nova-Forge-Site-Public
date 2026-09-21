@@ -196,6 +196,7 @@ assert.ok(checkpoint.includes('PASS_TARGETED_STORAGE_REPAIR_ORCHESTRATOR'));
 assert.ok(checkpoint.includes('PASS_TARGETED_INTEGRATION_DISCOVERY_RUNTIME'));
 assert.ok(checkpoint.includes('35630267754'));
 assert.ok(checkpoint.includes('cb5ecbac68a88a6feb1f0fe516b12f0349284d4a'));
+assert.ok(checkpoint.includes('89e31e938b2eec2b6e3af3ea5679ead1d2b770a2'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
 
 const openRows = tableLines.filter(line => /\*\*(?:EN COURS|BLOQUÉ|PREUVE MANQUANTE)/.test(line));
