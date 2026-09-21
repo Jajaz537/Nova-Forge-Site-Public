@@ -1,6 +1,5 @@
 import {getSessionIdentity} from './_lib/auth-session.mjs';
 import {FOUNDER_PERMISSION, hasPermission, publicAuthoritySummary} from './_lib/access-control.mjs';
-import {requireSameOrigin} from './_lib/api-security.mjs';
 import {onRequestPost as decideModeration} from './api/v1/moderation/decisions.js';
 import {onRequestPost as decideAppeal} from './api/v1/moderation/appeal-outcomes.js';
 
@@ -100,6 +99,32 @@ function allowedPreview(request) {
   } catch {
     return false;
   }
+}
+
+function authorizeProofPostOrigin(request) {
+  let requestUrl;
+  try {
+    requestUrl = new URL(request.url);
+  } catch {
+    return {ok:false, status:400, reason:'request-url-invalid'};
+  }
+
+  if (requestUrl.protocol !== 'https:' || requestUrl.hostname !== PREVIEW_HOST) {
+    return {ok:false, status:403, reason:'preview-origin-required'};
+  }
+
+  const expectedOrigin = `https://${PREVIEW_HOST}`;
+  const origin = request.headers.get('origin');
+  if (origin === expectedOrigin) {
+    return {ok:true, status:200, reason:null, signal:'origin'};
+  }
+
+  const fetchSite = (request.headers.get('sec-fetch-site') || '').trim().toLowerCase();
+  if (fetchSite === 'same-origin') {
+    return {ok:true, status:200, reason:null, signal:'sec-fetch-site'};
+  }
+
+  return {ok:false, status:403, reason:'origin-mismatch'};
 }
 
 async function authorizeFounder(context) {
@@ -344,7 +369,7 @@ export async function onRequestPost(context) {
   const access = await authorizeFounder(context);
   if (!access.ok) return access.response;
 
-  const origin = requireSameOrigin(context.request);
+  const origin = authorizeProofPostOrigin(context.request);
   if (!origin.ok) {
     return page({status:origin.status, authority:access.authority, message:origin.reason});
   }

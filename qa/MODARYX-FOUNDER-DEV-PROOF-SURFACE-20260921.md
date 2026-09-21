@@ -16,6 +16,31 @@ Les tentatives suivantes ont échoué pour une raison navigateur, pas pour une r
 
 Le cookie MODARYX reste HttpOnly et ne doit pas être extrait.
 
+
+### Échec runtime ciblé après déploiement #145
+
+Première exécution du bouton modération :
+- rôle serveur `founder` confirmé ;
+- administration / modération / recours : `oui / oui / oui` ;
+- session Fondateur présente ;
+- aucun token/secret exposé ;
+- résultat : **ÉCHEC — `origin-mismatch`** avant création du résultat de preuve ;
+- recours non exécuté conformément à la procédure d'arrêt.
+
+Cause isolée :
+le garde générique comparait strictement `Origin` à `request.url.origin`. Le navigateur Work fournit un contexte de navigation Preview qui peut conserver un signal navigateur `Sec-Fetch-Site: same-origin` tout en faisant échouer cette comparaison stricte.
+
+Correction ciblée :
+- hostname serveur exact Preview toujours obligatoire ;
+- HTTPS toujours obligatoire ;
+- session `modaryx:founder` toujours obligatoire ;
+- POST accepté uniquement si :
+  - `Origin` vaut exactement `https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev`, **ou**
+  - `Sec-Fetch-Site` vaut exactement `same-origin` ;
+- `same-site` et `cross-site` ne sont jamais acceptés comme fallback.
+
+Après cette correction, rejouer **la preuve modération seule**. Le recours reste interdit tant que modération n'est pas verte.
+
 ## Route temporaire
 
 `/founder-proof-dev`

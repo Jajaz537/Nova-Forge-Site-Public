@@ -22,7 +22,9 @@ for(const token of [
   "cleanupSucceeded",
   "receiptCreated",
   "getSessionIdentity",
-  "requireSameOrigin"
+  "authorizeProofPostOrigin",
+  "sec-fetch-site",
+  "same-origin"
 ]) assert.ok(source.includes(token),'Founder DEV proof invariant missing: '+token);
 
 for(const forbidden of [
@@ -36,6 +38,8 @@ for(const forbidden of [
 assert.ok(!source.includes('fetch('),'Founder DEV proof must not depend on browser/server fetch');
 assert.ok(source.includes("headers.set('cookie', cookie)"),'HttpOnly session forwarding into the real handler is missing');
 assert.ok(!source.includes('document.cookie'),'Cookie extraction must never be used');
+assert.ok(!source.includes("fetchSite === 'same-site'"),'Same-site fallback must not be accepted for the proof POST');
+assert.ok(!source.includes("fetchSite === 'cross-site'"),'Cross-site fallback must not be accepted for the proof POST');
 assert.ok(source.includes("result.cleanupSucceeded === true"),'Success must require fixture cleanup');
 assert.ok(source.includes("DELETE FROM modaryx_moderation_receipts WHERE submission_id = ?"),'Receipt cleanup missing');
 assert.ok(source.includes("DELETE FROM modaryx_community_submissions WHERE submission_id = ?"),'Submission cleanup missing');
@@ -47,7 +51,7 @@ console.log(JSON.stringify({
   scope:'Temporary DEV-only proof surface; source proof only, runtime proof remains separate',
   checks:[
     'exact stable Preview hostname is enforced',
-    'founder permission and same-origin session are required',
+    'founder permission plus exact Preview host and same-origin browser signal are required',
     'real moderation and appeals mutation handlers are reused',
     'no browser fetch/XHR/sendBeacon or cookie extraction is used',
     'success requires receipt creation and confirmed fixture cleanup',
