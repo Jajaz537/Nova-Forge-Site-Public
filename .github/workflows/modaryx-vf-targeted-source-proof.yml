@@ -11,6 +11,12 @@ on:
       - 'qa/check-storage-repair-contracts.cjs'
       - 'qa/check-provenance-receipt-contracts.cjs'
       - 'qa/check-signature-attestation-contract.cjs'
+      - 'qa/check-signature-verification-engine.mjs'
+      - 'qa/MODARYX-SIGNATURE-VERIFICATION-ENGINE-20260921.md'
+      - 'qa/check-storage-repair-decision-engine.mjs'
+      - 'qa/MODARYX-STORAGE-REPAIR-DECISION-ENGINE-20260921.md'
+      - 'qa/check-integration-consent-engine.mjs'
+      - 'qa/MODARYX-INTEGRATION-CONSENT-ENGINE-20260921.md'
       - 'qa/MODARYX-SIGNATURE-ATTESTATION-CONTRACT-20260921.md'
       - 'qa/check-guide-os-bridge-contracts.cjs'
       - 'qa/MODARYX-GUIDE-OS-BRIDGE-CONTRACT-20260921.md'
@@ -82,6 +88,12 @@ on:
       - 'qa/check-storage-repair-contracts.cjs'
       - 'qa/check-provenance-receipt-contracts.cjs'
       - 'qa/check-signature-attestation-contract.cjs'
+      - 'qa/check-signature-verification-engine.mjs'
+      - 'qa/MODARYX-SIGNATURE-VERIFICATION-ENGINE-20260921.md'
+      - 'qa/check-storage-repair-decision-engine.mjs'
+      - 'qa/MODARYX-STORAGE-REPAIR-DECISION-ENGINE-20260921.md'
+      - 'qa/check-integration-consent-engine.mjs'
+      - 'qa/MODARYX-INTEGRATION-CONSENT-ENGINE-20260921.md'
       - 'qa/MODARYX-SIGNATURE-ATTESTATION-CONTRACT-20260921.md'
       - 'qa/check-guide-os-bridge-contracts.cjs'
       - 'qa/MODARYX-GUIDE-OS-BRIDGE-CONTRACT-20260921.md'
@@ -206,6 +218,24 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-signature-attestation-contract.cjs
+
+      - name: Run targeted signature verification engine proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-signature-verification-engine.mjs
+
+      - name: Run targeted storage repair decision engine proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-storage-repair-decision-engine.mjs
+
+      - name: Run targeted integration consent engine proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-integration-consent-engine.mjs
 
       - name: Run targeted Guide and OS bridge contract proof
         shell: bash
