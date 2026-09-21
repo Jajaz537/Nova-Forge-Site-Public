@@ -17,7 +17,10 @@ for(const token of [
   'AUTH0_AUDIENCE',
   'RS256',
   'community:moderate',
-  'community:appeals-review'
+  'community:appeals-review',
+  'modaryx:admin',
+  'modaryx:founder',
+  'authority.role=founder'
 ]) assert.ok(doc.includes(token),'DEV readiness doc invariant missing: '+token);
 
 assert.ok(remote.includes('MODARYX_TURNSTILE_HOSTNAME'),'remote-write hostname pin variable missing');
@@ -31,7 +34,7 @@ console.log(JSON.stringify({
     'D1 migrations 0001 then 0002 then 0003 are explicit',
     'Turnstile stable hostname pin is explicit',
     'profile-write and community-write actions are explicit',
-    'Auth0 audience, RS256, community:moderate and community:appeals-review RBAC expectations are explicit',
+    'Auth0 audience, RS256, moderation/appeals plus modaryx:admin and modaryx:founder RBAC expectations are explicit',
     'R2 is not falsely required for current profile/community DEV proof'
   ],
   failures:[]
