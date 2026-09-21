@@ -127,3 +127,26 @@ Une future option GPS explicite ne pourrait être envisagée que comme choix vol
 ## Condition de fermeture du blocker
 
 Le statut **BLOQUÉ / décision externe** ne peut passer à TERMINÉ que lorsqu'un fournisseur a été explicitement accepté et que l'activation a été prouvée avec les garde-fous ci-dessus. La simple existence d'un adaptateur ou d'un compte gratuit ne suffit pas.
+
+
+## Revalidation et readiness WeatherAPI — 21 septembre 2026
+
+Sources officielles revérifiées :
+- WeatherAPI pricing : usage commercial annoncé sur le plan Free, 100 000 appels/mois ;
+- WeatherAPI terms : attribution obligatoire sur le plan Free, clé API confidentielle, disclaimer utilisateur obligatoire, cache courant limité à 60 minutes ;
+- WeatherAPI documentation : endpoint `/v1/current.json`, authentification par clé, localisation par latitude/longitude et codes de condition officiels téléchargeables.
+
+Readiness locale ajoutée sans activation :
+- nouveau mode `MODARYX_WEATHER_MODE=weatherapi` ;
+- appel fournisseur uniquement dans `functions/api/local-context.js` ;
+- secret `MODARYX_WEATHER_API_KEY` requis côté serveur ;
+- requête avec coordonnées déjà arrondies par le contexte coarse ;
+- normalisation WeatherAPI vers `clear / cloud / partly-cloudy / rain / snow / fog / storm / wind` ;
+- attribution `WeatherAPI.com` renvoyée au client uniquement avec la météo normalisée ;
+- disclaimer météo utilisateur inclus avec les données WeatherAPI live ;
+- aucune donnée `location` du fournisseur n'est renvoyée au navigateur ;
+- mode par défaut toujours `off`.
+
+État : **TERMINÉ — readiness WeatherAPI en code ciblé ; BLOQUÉ — compte/clé/acceptation contractuelle et preuve réelle non fournis**.
+
+Marker ciblé attendu : `PASS_TARGETED_WEATHERAPI_READINESS`.

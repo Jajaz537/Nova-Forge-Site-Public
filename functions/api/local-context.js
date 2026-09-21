@@ -1,6 +1,7 @@
 import {
   coarseContextFromCf,
-  normalizeOpenMeteoCurrent
+  normalizeOpenMeteoCurrent,
+  normalizeWeatherApiCurrent
 } from '../_lib/local-context.mjs';
 
 const json = (value, status = 200) => new Response(JSON.stringify(value), {
@@ -13,9 +14,14 @@ const json = (value, status = 200) => new Response(JSON.stringify(value), {
 });
 
 function weatherEndpoint(mode) {
+  if (mode === 'weatherapi') return 'https://api.weatherapi.com/v1/current.json';
   if (mode === 'open-meteo-noncommercial') return 'https://api.open-meteo.com/v1/forecast';
   if (mode === 'open-meteo-commercial') return 'https://customer-api.open-meteo.com/v1/forecast';
   return null;
+}
+
+function weatherModeRequiresKey(mode) {
+  return mode === 'weatherapi' || mode === 'open-meteo-commercial';
 }
 
 async function fetchWeather(context, coarse) {
@@ -24,20 +30,29 @@ async function fetchWeather(context, coarse) {
   if (!endpoint) return {status: 'not-connected', reason: 'provider-not-configured'};
   if (!coarse.providerCoordinates) return {status: 'unavailable', reason: 'coarse-location-unavailable'};
 
-  if (mode === 'open-meteo-commercial' && !context.env?.MODARYX_WEATHER_API_KEY) {
-    return {status: 'unavailable', reason: 'commercial-api-key-missing'};
+  if (weatherModeRequiresKey(mode) && !context.env?.MODARYX_WEATHER_API_KEY) {
+    return {status: 'unavailable', reason: 'provider-api-key-missing'};
   }
 
   const url = new URL(endpoint);
-  url.searchParams.set('latitude', String(coarse.providerCoordinates.latitude));
-  url.searchParams.set('longitude', String(coarse.providerCoordinates.longitude));
-  url.searchParams.set(
-    'current',
-    'temperature_2m,apparent_temperature,is_day,precipitation,rain,snowfall,weather_code,cloud_cover,wind_speed_10m'
-  );
-  url.searchParams.set('timezone', 'auto');
-  if (mode === 'open-meteo-commercial') {
-    url.searchParams.set('apikey', context.env.MODARYX_WEATHER_API_KEY);
+  if (mode === 'weatherapi') {
+    url.searchParams.set('key', context.env.MODARYX_WEATHER_API_KEY);
+    url.searchParams.set(
+      'q',
+      coarse.providerCoordinates.latitude + ',' + coarse.providerCoordinates.longitude
+    );
+    url.searchParams.set('aqi', 'no');
+  } else {
+    url.searchParams.set('latitude', String(coarse.providerCoordinates.latitude));
+    url.searchParams.set('longitude', String(coarse.providerCoordinates.longitude));
+    url.searchParams.set(
+      'current',
+      'temperature_2m,apparent_temperature,is_day,precipitation,rain,snowfall,weather_code,cloud_cover,wind_speed_10m'
+    );
+    url.searchParams.set('timezone', 'auto');
+    if (mode === 'open-meteo-commercial') {
+      url.searchParams.set('apikey', context.env.MODARYX_WEATHER_API_KEY);
+    }
   }
 
   try {
@@ -46,7 +61,9 @@ async function fetchWeather(context, coarse) {
     });
     if (!response.ok) return {status: 'unavailable', reason: 'provider-http-' + response.status};
     const payload = await response.json();
-    return normalizeOpenMeteoCurrent(payload);
+    return mode === 'weatherapi'
+      ? normalizeWeatherApiCurrent(payload)
+      : normalizeOpenMeteoCurrent(payload);
   } catch {
     return {status: 'unavailable', reason: 'provider-fetch-failed'};
   }

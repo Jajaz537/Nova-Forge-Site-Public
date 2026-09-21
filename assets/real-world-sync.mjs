@@ -262,6 +262,23 @@ function attributionNode(document, weather) {
   link.textContent = 'Météo : ' + (weather.attribution.label || 'source externe');
 }
 
+function disclaimerNode(document, weather) {
+  const host = document.querySelector('[data-real-world-context]')?.parentElement;
+  if (!host) return;
+  let note = host.querySelector('[data-weather-disclaimer]');
+  if (weather?.status !== 'live' || !weather.disclaimer) {
+    note?.remove();
+    return;
+  }
+  if (!note) {
+    note = document.createElement('p');
+    note.dataset.weatherDisclaimer = '';
+    note.className = 'world-weather-disclaimer';
+    host.append(note);
+  }
+  note.textContent = weather.disclaimer;
+}
+
 export async function resolveRealityContext({
   document = globalThis.document,
   now = new Date(),
@@ -327,6 +344,7 @@ export async function applyRealitySync({
   }
   document.documentElement.dataset.localActivity = activity.id;
   attributionNode(document, state.weather);
+  disclaimerNode(document, state.weather);
 
   weatherLayer(document);
   return state;

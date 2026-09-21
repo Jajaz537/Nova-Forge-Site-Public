@@ -10,7 +10,8 @@ import {
   roundCoordinate,
   climateBandForLatitude,
   coarseContextFromCf,
-  normalizeOpenMeteoCurrent
+  normalizeOpenMeteoCurrent,
+  normalizeWeatherApiCurrent
 } from '../functions/_lib/local-context.mjs';
 
 const failures=[];
@@ -86,6 +87,51 @@ const clearSpells=normalizeOpenMeteoCurrent({current:{
 }});
 assert('clear spells normalized',clearSpells.condition==='partly-cloudy'&&clearSpells.intensity>0);
 
+
+const weatherApiRain=normalizeWeatherApiCurrent({current:{
+  last_updated:'2026-09-21 18:00',temp_c:15,feelslike_c:14,is_day:1,
+  condition:{code:1189,text:'Moderate rain'},wind_kph:22,precip_mm:2.8,cloud:91
+}});
+assert('WeatherAPI rain normalized',weatherApiRain.status==='live'&&weatherApiRain.condition==='rain'&&weatherApiRain.intensity>0);
+assert('WeatherAPI attribution normalized',weatherApiRain.attribution?.label==='WeatherAPI.com'&&weatherApiRain.attribution?.url==='https://www.weatherapi.com/');
+assert('WeatherAPI disclaimer normalized',typeof weatherApiRain.disclaimer==='string'&&weatherApiRain.disclaimer.includes('services météorologiques officiels'));
+
+const weatherApiSnow=normalizeWeatherApiCurrent({current:{
+  last_updated:'2026-01-21 18:00',temp_c:-3,feelslike_c:-8,is_day:0,
+  condition:{code:1225,text:'Heavy snow'},wind_kph:28,precip_mm:2.2,cloud:100
+}});
+assert('WeatherAPI snow normalized',weatherApiSnow.condition==='snow'&&weatherApiSnow.intensity>0);
+
+const weatherApiFog=normalizeWeatherApiCurrent({current:{
+  last_updated:'2026-10-21 07:00',temp_c:7,feelslike_c:6,is_day:1,
+  condition:{code:1135,text:'Fog'},wind_kph:4,precip_mm:0,cloud:100
+}});
+assert('WeatherAPI fog normalized',weatherApiFog.condition==='fog');
+
+const weatherApiStorm=normalizeWeatherApiCurrent({current:{
+  last_updated:'2026-08-21 16:00',temp_c:24,feelslike_c:27,is_day:1,
+  condition:{code:1276,text:'Moderate or heavy rain with thunder'},wind_kph:54,precip_mm:6,cloud:100
+}});
+assert('WeatherAPI storm normalized',weatherApiStorm.condition==='storm'&&weatherApiStorm.intensity>.6);
+
+const weatherApiCloud=normalizeWeatherApiCurrent({current:{
+  last_updated:'2026-09-21 14:00',temp_c:17,feelslike_c:17,is_day:1,
+  condition:{code:1009,text:'Overcast'},wind_kph:11,precip_mm:0,cloud:95
+}});
+assert('WeatherAPI cloud normalized',weatherApiCloud.condition==='cloud'&&weatherApiCloud.intensity>.8);
+
+const weatherApiPartly=normalizeWeatherApiCurrent({current:{
+  last_updated:'2026-09-21 14:00',temp_c:18,feelslike_c:18,is_day:1,
+  condition:{code:1003,text:'Partly cloudy'},wind_kph:10,precip_mm:0,cloud:48
+}});
+assert('WeatherAPI partly-cloudy normalized',weatherApiPartly.condition==='partly-cloudy');
+
+const weatherApiWind=normalizeWeatherApiCurrent({current:{
+  last_updated:'2026-09-21 14:00',temp_c:18,feelslike_c:16,is_day:1,
+  condition:{code:1000,text:'Sunny'},wind_kph:58,precip_mm:0,cloud:8
+}});
+assert('WeatherAPI wind normalized',weatherApiWind.condition==='wind'&&weatherApiWind.intensity>0);
+
 const mix=visualMix('winter','night',snow);
 assert('winter night mix dims',mix.day.bright<1);
 assert('snow weather mix exists',mix.weather.bright>=1);
@@ -105,6 +151,10 @@ assert('function must not return city',functionSource.includes('cityReturned: fa
 assert('function must not request GPS',functionSource.includes('gpsPermissionRequested: false'));
 assert('site permissions policy keeps geolocation disabled',headers.includes('geolocation=()'));
 assert('weather provider defaults off',functionSource.includes("MODARYX_WEATHER_MODE || 'off'"));
+assert('WeatherAPI provider mode exists',functionSource.includes("mode === 'weatherapi'")&&functionSource.includes('https://api.weatherapi.com/v1/current.json'));
+assert('WeatherAPI key is server-side env only',functionSource.includes('MODARYX_WEATHER_API_KEY')&&!fs.readFileSync(new URL('../assets/real-world-sync.mjs',import.meta.url),'utf8').includes('MODARYX_WEATHER_API_KEY'));
+assert('WeatherAPI provider requires key',functionSource.includes('weatherModeRequiresKey(mode)'));
+assert('WeatherAPI disables AQI payload',functionSource.includes("url.searchParams.set('aqi', 'no')"));
 assert('provider coordinates are rounded before weather request',functionSource.includes('providerCoordinates.latitude'));
 assert('wind visual layer exists',weatherCss.includes('data-local-weather=wind')&&weatherCss.includes('mx-wind-sweep'));
 assert('cloud visual layer exists',weatherCss.includes('data-local-weather=cloud')&&weatherCss.includes('mx-cloud-drift'));
@@ -120,8 +170,10 @@ console.log(JSON.stringify({
     tropical:seasonState(new Date('2026-01-15T12:00:00Z'),'tropical','UTC')
   },
   weather:{rain:rain.condition,snow:snow.condition,fog:fog.condition,storm:storm.condition,wind:wind.condition,cloud:cloud.condition,clearSpells:clearSpells.condition},
+  weatherApi:{rain:weatherApiRain.condition,snow:weatherApiSnow.condition,fog:weatherApiFog.condition,storm:weatherApiStorm.condition,wind:weatherApiWind.condition,cloud:weatherApiCloud.condition,partlyCloudy:weatherApiPartly.condition},
   activities:{storm:stormActivity.text,night:nightActivity.text,summer:clearSummerActivity.text},
   privacy:{gps:false,exactCoordinatesReturned:false,providerRoundedDegrees:0.1},
+  weatherProviderMarker:failures.length?'FAIL_TARGETED_WEATHERAPI_READINESS':'PASS_TARGETED_WEATHERAPI_READINESS',
   failures
 },null,2));
 if(failures.length)process.exitCode=1;

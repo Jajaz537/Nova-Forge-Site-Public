@@ -86,3 +86,14 @@ html[data-motion=reduced] .real-world-weather-layer:after{animation:none!importa
   .modaryx-realm-art,.living-world-visual-layers,.real-world-weather-layer{transition:none!important}
   .real-world-weather-layer:before,.real-world-weather-layer:after{animation:none!important}
 }
+
+.world-weather-attribution,
+.world-weather-disclaimer{
+  display:block;
+  margin-top:.45rem;
+  font-size:.78rem;
+  line-height:1.45;
+  color:var(--text-muted,#b7c3ca);
+}
+.world-weather-attribution{width:max-content;max-width:100%}
+.world-weather-disclaimer{max-width:70ch}

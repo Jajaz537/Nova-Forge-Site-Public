@@ -98,7 +98,8 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 ## 9. Météo / monde vivant
 
 - **TERMINÉ** — monde vivant, croissance visuelle et synchronisation contexte grossier ciblés.
-- **BLOQUÉ / décision externe** — météo réelle production tant que fournisseur, licence, confidentialité, attribution et disclaimer ne sont pas validés.
+- **TERMINÉ — readiness WeatherAPI ciblée** : mode `weatherapi`, proxy same-origin, clé serveur obligatoire, normalisation, attribution et disclaimer utilisateur ; aucune activation réelle.
+- **BLOQUÉ / activation externe** — météo réelle production tant que compte/clé, acceptation des conditions, confidentialité/juridique et preuve réelle ne sont pas validés.
 - Ne pas activer un fournisseur météo réel sans validation explicite.
 
 ## 10. Corpus / contenus réels

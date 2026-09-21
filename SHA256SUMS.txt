@@ -87,8 +87,8 @@ e61eb097b579369f8f99f4518dca67af1b87ff261a6fd1031601baaf29e9dbce  ./search.html
 1997aac139789ade6441d9896aab57444b36a26f3b4d32e35e8630eec4253b0a  assets/modaryx-world-portals.webp
 8658be18d73b76139d66db5f57512a36432d00fbd5f6e51dc8804659f7aa1042  ./assets/living-world-visual-growth.mjs
 3a95d6d3b05c922bf2a747ebc5ab7558b6a6a7ee66269f8de7610fab7b920a4e  ./assets/living-world-visual-growth.css
-3a4ea7cb430f7d7e4d9a3f15e4399ed461127cb361cfc1c69f4e692259c5608f  ./assets/real-world-sync.mjs
-a5d90837a1324b941617920a3b7a633a810bea49f32bfec0c3cfb2a08c135286  ./assets/real-world-sync.css
+c19425874818a91612f9d9bc9f502ec5ce1f1a93063af7c52e38d1c2549840cc  ./assets/real-world-sync.mjs
+ee1476a7159ea072404684a844017ba5a16779e426df6601ab0bb2c2efeb87b7  ./assets/real-world-sync.css
 2f8200d72fd07230d1c9d125e80a29fe434ec5517643dd892319a32d3f6cc2d7  ./assets/living-world/environment-premium.jpg
 8224d7b79d6ea1372b8897a046fd39ff57ed5c439c879249f936282aeabc9758  ./assets/living-world/wolf-baby.png
 ae7397920f962352e5e47f67f7973fd4711d059e33d83e2188e7b7e73a8a2c03  ./assets/living-world/wolf-juvenile.png
