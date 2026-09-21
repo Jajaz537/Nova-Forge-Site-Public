@@ -94,7 +94,10 @@ const weatherApiRain=normalizeWeatherApiCurrent({current:{
 }});
 assert('WeatherAPI rain normalized',weatherApiRain.status==='live'&&weatherApiRain.condition==='rain'&&weatherApiRain.intensity>0);
 assert('WeatherAPI attribution normalized',weatherApiRain.attribution?.label==='WeatherAPI.com'&&weatherApiRain.attribution?.url==='https://www.weatherapi.com/');
-assert('WeatherAPI disclaimer normalized',typeof weatherApiRain.disclaimer==='string'&&weatherApiRain.disclaimer.includes('services météorologiques officiels'));
+assert('WeatherAPI disclaimer is present',typeof weatherApiRain.disclaimer==='string');
+assert('WeatherAPI disclaimer covers uncertainty',weatherApiRain.disclaimer.includes('indicatives')&&weatherApiRain.disclaimer.includes('inexactes'));
+assert('WeatherAPI disclaimer covers safety-critical use',weatherApiRain.disclaimer.includes('sécurité')&&weatherApiRain.disclaimer.includes('aviation')&&weatherApiRain.disclaimer.includes('navigation maritime')&&weatherApiRain.disclaimer.includes('urgences'));
+assert('WeatherAPI disclaimer points to official weather services',weatherApiRain.disclaimer.includes('services météorologiques officiels'));
 
 const weatherApiSnow=normalizeWeatherApiCurrent({current:{
   last_updated:'2026-01-21 18:00',temp_c:-3,feelslike_c:-8,is_day:0,
