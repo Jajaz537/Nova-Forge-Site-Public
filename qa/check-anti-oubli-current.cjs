@@ -73,6 +73,12 @@ const requiredCurrent = [
   'MODARYX-TRUSTED-SIGNERS-GATE-20260921.md',
   'PASS_TARGETED_STORAGE_TRANSPORT_PRIMITIVE',
   'MODARYX-STORAGE-TRANSPORT-PRIMITIVE-20260921.md',
+  'PASS_TARGETED_DISTRIBUTION_TRUST_CHAIN',
+  'MODARYX-DISTRIBUTION-TRUST-CHAIN-20260921.md',
+  'PASS_TARGETED_STORAGE_REPAIR_ORCHESTRATOR',
+  'MODARYX-STORAGE-REPAIR-ORCHESTRATOR-20260921.md',
+  'PASS_TARGETED_INTEGRATION_DISCOVERY_RUNTIME',
+  'MODARYX-INTEGRATION-DISCOVERY-RUNTIME-20260921.md',
   'MODARYX-PASSKEY-PROVIDER-DEV-EVIDENCE-20260921.md',
   'PASS_TARGETED_MODERATION_PUBLICATION_ENGINE',
   'MODARYX-MODERATION-PUBLICATION-ENGINE-20260921.md',
@@ -184,6 +190,12 @@ assert.ok(checkpoint.includes('PASS_TARGETED_STORAGE_TRANSPORT_PRIMITIVE'));
 assert.ok(checkpoint.includes('35610823157'));
 assert.ok(checkpoint.includes('d0be675e86b51174b834f6764fbbce40f56b67a9'));
 assert.ok(checkpoint.includes('Aucune VF / aucun 100 % déclaré.'));
+assert.ok(checkpoint.includes('## Mise à jour canonique — PR #131 — runtime multi-lane confiance / réparation / découverte — 21 septembre 2026'));
+assert.ok(checkpoint.includes('PASS_TARGETED_DISTRIBUTION_TRUST_CHAIN'));
+assert.ok(checkpoint.includes('PASS_TARGETED_STORAGE_REPAIR_ORCHESTRATOR'));
+assert.ok(checkpoint.includes('PASS_TARGETED_INTEGRATION_DISCOVERY_RUNTIME'));
+assert.ok(checkpoint.includes('35630267754'));
+assert.ok(checkpoint.includes('cb5ecbac68a88a6feb1f0fe516b12f0349284d4a'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
 
 const openRows = tableLines.filter(line => /\*\*(?:EN COURS|BLOQUÉ|PREUVE MANQUANTE)/.test(line));
