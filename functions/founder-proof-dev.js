@@ -241,6 +241,8 @@ async function responseSummary(response, kind) {
 
 async function runModerationProof(context, access) {
   const ids = proofIds('moderation');
+  let summary = null;
+  let cleanupSucceeded = false;
   try {
     await seedProfileAndSubmission(access.db, ids);
     const request = childRequest(context.request, '/api/v1/moderation/decisions', {
@@ -252,14 +254,22 @@ async function runModerationProof(context, access) {
       automatedSignalUsed:false
     });
     const response = await decideModeration({request, env:context.env});
-    return await responseSummary(response, 'moderation');
+    summary = await responseSummary(response, 'moderation');
   } finally {
-    await cleanupFixture(access.db, ids).catch(() => {});
+    try {
+      await cleanupFixture(access.db, ids);
+      cleanupSucceeded = true;
+    } catch {
+      cleanupSucceeded = false;
+    }
   }
+  return {...(summary || {proof:'moderation', httpStatus:500, error:'proof-runtime-failed'}), cleanupSucceeded};
 }
 
 async function runAppealsProof(context, access) {
   const ids = proofIds('appeals');
+  let summary = null;
+  let cleanupSucceeded = false;
   try {
     const now = await seedProfileAndSubmission(access.db, ids, {
       moderationState:'rejected',
@@ -309,10 +319,16 @@ async function runAppealsProof(context, access) {
       reason:'Temporary DEV-only founder authorization proof.'
     });
     const response = await decideAppeal({request, env:context.env});
-    return await responseSummary(response, 'appeals');
+    summary = await responseSummary(response, 'appeals');
   } finally {
-    await cleanupFixture(access.db, ids).catch(() => {});
+    try {
+      await cleanupFixture(access.db, ids);
+      cleanupSucceeded = true;
+    } catch {
+      cleanupSucceeded = false;
+    }
   }
+  return {...(summary || {proof:'appeals', httpStatus:500, error:'proof-runtime-failed'}), cleanupSucceeded};
 }
 
 export async function onRequestGet(context) {
@@ -354,13 +370,13 @@ export async function onRequestPost(context) {
     result = {proof, httpStatus:500, error:'proof-runtime-failed'};
   }
 
-  const ok = result.httpStatus >= 200 && result.httpStatus < 300 && result.receiptCreated === true;
+  const ok = result.httpStatus >= 200 && result.httpStatus < 300 && result.receiptCreated === true && result.cleanupSucceeded === true;
   return page({
     status:ok ? 200 : result.httpStatus || 500,
     authority:access.authority,
     result,
     message:ok
-      ? 'Mutation réelle exécutée avec la session Fondateur puis fixture DEV nettoyée.'
+      ? 'Mutation réelle exécutée avec la session Fondateur et nettoyage du fixture DEV confirmé.'
       : 'La preuve n’est pas acquise. Relever le résultat exact sans contourner la session.'
   });
 }
