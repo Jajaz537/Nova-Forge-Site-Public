@@ -2565,6 +2565,7 @@ Cette section est la lecture la plus récente pour le hardening transversal des 
 - Work vérifié avant écriture : `design/modaryx-premium-hd-20260914-work` @ `36e20e3ce9a148358608f42f202122b0f551995e`.
 - Branche isolée : `feature/modaryx-runtime-resilience-20260921`.
 - Candidat final avant canonisation : `9bd769e927bc07ff5ea2cd40054cfdec0c30f610`.
+- PR #132 fusionnée dans Work : `a8a544dc8a6d8b4c435d3d2acf56d9988141bbfd`.
 - Aucun changement concurrent observé sur Work au point de branchement.
 - Aucun `main`, production, DNS/DNSSEC/nameserver.
 - Aucun full replay.

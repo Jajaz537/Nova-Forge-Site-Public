@@ -203,6 +203,7 @@ assert.ok(checkpoint.includes('## Mise à jour canonique — PR #132 — durciss
 assert.ok(checkpoint.includes('PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING'));
 assert.ok(checkpoint.includes('35631864195'));
 assert.ok(checkpoint.includes('9bd769e927bc07ff5ea2cd40054cfdec0c30f610'));
+assert.ok(checkpoint.includes('a8a544dc8a6d8b4c435d3d2acf56d9988141bbfd'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
 
 const openRows = tableLines.filter(line => /\*\*(?:EN COURS|BLOQUÉ|PREUVE MANQUANTE)/.test(line));
