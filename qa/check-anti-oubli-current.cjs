@@ -7,6 +7,7 @@ const root = path.resolve(__dirname, '..');
 const ledger = fs.readFileSync(path.join(root, 'qa/MODARYX-ANTI-OUBLI-CURRENT-20260920.md'), 'utf8');
 const historicalCheckpoint = fs.readFileSync(path.join(root, 'CHECKPOINT-CANONIQUE-MODARYX-2026-09-20.md'), 'utf8');
 const checkpoint = fs.readFileSync(path.join(root, 'CHECKPOINT-CANONIQUE-MODARYX-2026-09-21.md'), 'utf8');
+const externalMatrix = fs.readFileSync(path.join(root, 'FINAL-EXTERNAL-VALIDATION-MATRIX.md'), 'utf8');
 const readiness = JSON.parse(fs.readFileSync(path.join(root, 'data/integration-readiness.json'), 'utf8'));
 
 const requiredCurrent = [
@@ -226,6 +227,15 @@ assert.ok(checkpoint.includes('PREUVE MANQUANTE** — enrôlement, reconnexion e
 assert.ok(checkpoint.includes('BLOQUÉ / décision externe** — météo réelle production'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin'));
 assert.ok(checkpoint.includes('Aucune VF / aucun 100 %'));
+
+assert.ok(externalMatrix.includes('## Réconciliation canonique — 21 septembre 2026'));
+assert.ok(externalMatrix.includes('23 routes publiques'));
+assert.ok(externalMatrix.includes('Comptes / profils Provider DEV'));
+assert.ok(externalMatrix.includes('Publication / modération / recours Provider DEV'));
+assert.ok(externalMatrix.includes('Passkey finale'));
+assert.ok(externalMatrix.includes('Storage Resolver / Repair Network réels'));
+assert.ok(externalMatrix.includes('Safari réel'));
+assert.ok(externalMatrix.includes('La VF officielle reste non déclarée'));
 
 const openRows = tableLines.filter(line => /\*\*(?:EN COURS|BLOQUÉ|PREUVE MANQUANTE)/.test(line));
 console.log(JSON.stringify({
