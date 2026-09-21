@@ -31,7 +31,7 @@ assert.match(profilesHtml,/détection WebAuthn/i);
 
 assert.match(login,/buildAuth0AuthorizationUrl/);
 assert.match(login,/codeChallenge/);
-assert.match(auth0,/\/authorize/);
+assert.match(auth0,/new URL\('authorize', config\.issuer\)/);
 assert.match(authBff,/Authorization Code \+ PKCE/);
 assert.match(authBff,/access token/i);
 assert.match(checkpoint,/TERMINÉ — Provider DEV réel et micro-proofs bout-en-bout ciblés/);
