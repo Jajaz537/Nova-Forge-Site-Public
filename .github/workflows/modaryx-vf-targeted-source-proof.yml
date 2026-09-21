@@ -10,6 +10,12 @@ on:
       - 'qa/check-integration-readiness.cjs'
       - 'qa/check-storage-repair-contracts.cjs'
       - 'qa/check-provenance-receipt-contracts.cjs'
+      - 'qa/check-signature-attestation-contract.cjs'
+      - 'qa/MODARYX-SIGNATURE-ATTESTATION-CONTRACT-20260921.md'
+      - 'qa/check-guide-os-bridge-contracts.cjs'
+      - 'qa/MODARYX-GUIDE-OS-BRIDGE-CONTRACT-20260921.md'
+      - 'qa/check-passkey-provider-readiness.cjs'
+      - 'qa/MODARYX-PASSKEY-PROVIDER-READINESS-20260921.md'
       - 'qa/check-account-community-contracts.cjs'
       - 'qa/check-download-recovery.cjs'
       - 'qa/check-distribution-lock-contracts.cjs'
@@ -40,6 +46,9 @@ on:
       - 'schemas/storage-resolver.schema.json'
       - 'schemas/repair-network.schema.json'
       - 'schemas/publication-receipt.schema.json'
+      - 'schemas/signature-attestation.schema.json'
+      - 'schemas/modaryx-guide-connection.schema.json'
+      - 'schemas/nova-forge-os-bridge.schema.json'
       - 'schemas/moderation-receipt.schema.json'
       - 'schemas/moderation-export.schema.json'
       - 'schemas/public-profile.schema.json'
@@ -72,6 +81,12 @@ on:
       - 'qa/check-integration-readiness.cjs'
       - 'qa/check-storage-repair-contracts.cjs'
       - 'qa/check-provenance-receipt-contracts.cjs'
+      - 'qa/check-signature-attestation-contract.cjs'
+      - 'qa/MODARYX-SIGNATURE-ATTESTATION-CONTRACT-20260921.md'
+      - 'qa/check-guide-os-bridge-contracts.cjs'
+      - 'qa/MODARYX-GUIDE-OS-BRIDGE-CONTRACT-20260921.md'
+      - 'qa/check-passkey-provider-readiness.cjs'
+      - 'qa/MODARYX-PASSKEY-PROVIDER-READINESS-20260921.md'
       - 'qa/check-account-community-contracts.cjs'
       - 'qa/check-download-recovery.cjs'
       - 'qa/check-distribution-lock-contracts.cjs'
@@ -102,6 +117,9 @@ on:
       - 'schemas/storage-resolver.schema.json'
       - 'schemas/repair-network.schema.json'
       - 'schemas/publication-receipt.schema.json'
+      - 'schemas/signature-attestation.schema.json'
+      - 'schemas/modaryx-guide-connection.schema.json'
+      - 'schemas/nova-forge-os-bridge.schema.json'
       - 'schemas/moderation-receipt.schema.json'
       - 'schemas/moderation-export.schema.json'
       - 'schemas/public-profile.schema.json'
@@ -182,6 +200,24 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-account-community-contracts.cjs
+
+      - name: Run targeted signature attestation contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-signature-attestation-contract.cjs
+
+      - name: Run targeted Guide and OS bridge contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-guide-os-bridge-contracts.cjs
+
+      - name: Run targeted passkey provider readiness proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-passkey-provider-readiness.cjs
 
       - name: Run targeted distribution lock proof
         shell: bash
