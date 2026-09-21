@@ -171,3 +171,15 @@ Ne jamais supprimer implicitement un blocker pour améliorer un pourcentage. Une
 Pour toute nouvelle conversation ou agent :
 
 > Lire ce checkpoint en priorité, puis vérifier GitHub frais. En cas de contradiction avec un état plus ancien, ce checkpoint prévaut sauf preuve technique fraîche contraire. Ne jamais reconstruire l’état depuis d’anciens chats si cette source fournit déjà l’information.
+
+## 16. Reprise externe contrôlée — 21 septembre 2026
+
+- Git frais vérifié sur `design/modaryx-premium-hd-20260914-work` au SHA `18761119719f339ff9bda22ffb79bd30a66b74ed`, merge de la PR #138 WeatherAPI readiness. Aucun changement parallèle observé au moment du contrôle.
+- WeatherAPI : aucun compte DEV déjà authentifié n’est disponible dans Work ; la page fournisseur demande une connexion. Aucun `MODARYX_WEATHER_MODE` ni `MODARYX_WEATHER_API_KEY` n’est configuré dans l’environnement Cloudflare Pages Preview. Aucun compte, secret ou acceptation contractuelle n’a été créé.
+- Micro-preuve Preview réelle : `GET /api/local-context` retourne `HTTP 200`, `weather.status=not-connected` et `weather.reason=provider-not-configured`, avec `Cache-Control: no-store` et sans coordonnées exactes, ville, code postal ni demande GPS. Le repli fail-soft est donc réellement prouvé ; les données WeatherAPI live, leur normalisation, attribution et disclaimer restent **BLOQUÉES** faute de compte/clé et de validation contractuelle/juridique.
+- Passkey : **PREUVE MANQUANTE** maintenue ; Work ne détecte aucun authentificateur de plateforme compatible et aucune cérémonie n’a été simulée.
+- Safari/macOS/iOS, lecteur d’écran natif, installation PWA sur appareil et zoom navigateur natif 400 % : **PREUVE MANQUANTE** maintenue ; l’environnement Work expose uniquement son navigateur Chromium intégré.
+- CWV terrain : **PREUVE MANQUANTE** maintenue. La tentative PageSpeed Insights API a renvoyé `HTTP 429 RESOURCE_EXHAUSTED` (`RATE_LIMIT_EXCEEDED`) et l’interface n’a livré aucune donnée terrain exploitable. Aucun résultat Lighthouse labo n’a été substitué.
+- Signer/trust anchor, artefact public autorisé, corpus GTA VI/RDR2, Storage/Repair, Guide MODARYX et pont Nova Forge OS : états inchangés ; aucune ressource, autorisation ou endpoint réel supplémentaire n’a été fourni.
+- Validation juridique, droits/licences et validation artistique humaine : **PREUVE MANQUANTE** maintenue.
+- Aucun full replay, aucune activation production et aucun changement `main`, DNS/DNSSEC, nameservers ou IONOS.
