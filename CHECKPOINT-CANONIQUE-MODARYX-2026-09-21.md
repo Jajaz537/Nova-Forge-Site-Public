@@ -21,7 +21,10 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 - PR principale : **#12 — ouverte, draft, mergeable**
 - PR #131 : **TERMINÉE / fusionnée**
 - PR #132 : **TERMINÉE / fusionnée** dans Work au merge `a8a544dc8a6d8b4c435d3d2acf56d9988141bbfd`
-- CodeQL frais sur le HEAD Work : run `35632222080` — **success**
+- PR #133 : **TERMINÉE / fusionnée** — création de ce checkpoint canonique 21/09 ; merge Work `62c47f9fd46cb9183ad5f46fc24f254852fcb5cf`.
+- HEAD Work au point de branchement de la garde anti-oubli courante : `62c47f9fd46cb9183ad5f46fc24f254852fcb5cf`.
+- CodeQL du HEAD précédent `b63452a36dab6ffc66acf111c3a7e3250c1204fb` : run `35632222080` — **success**.
+- CodeQL du merge #133 `62c47f9fd46cb9183ad5f46fc24f254852fcb5cf` : run `35635578672` — **EN COURS au dernier contrôle** ; ne pas le compter vert avant conclusion.
 - Aucun full replay final exécuté.
 - Aucun changement `main`, DNS, DNSSEC, nameservers ou production dans les derniers lots runtime.
 
