@@ -5,7 +5,8 @@ const assert = require('node:assert/strict');
 
 const root = path.resolve(__dirname, '..');
 const ledger = fs.readFileSync(path.join(root, 'qa/MODARYX-ANTI-OUBLI-CURRENT-20260920.md'), 'utf8');
-const checkpoint = fs.readFileSync(path.join(root, 'CHECKPOINT-CANONIQUE-MODARYX-2026-09-20.md'), 'utf8');
+const historicalCheckpoint = fs.readFileSync(path.join(root, 'CHECKPOINT-CANONIQUE-MODARYX-2026-09-20.md'), 'utf8');
+const checkpoint = fs.readFileSync(path.join(root, 'CHECKPOINT-CANONIQUE-MODARYX-2026-09-21.md'), 'utf8');
 const readiness = JSON.parse(fs.readFileSync(path.join(root, 'data/integration-readiness.json'), 'utf8'));
 
 const requiredCurrent = [
@@ -158,57 +159,71 @@ assert.equal(byId.get('accounts.profiles')?.state, 'not-connected');
 assert.equal(byId.get('distribution.artifacts')?.state, 'distribution-locked');
 assert.equal(byId.get('integrations.guide-os-bridge')?.state, 'not-connected');
 
-assert.ok(checkpoint.includes('## Mise à jour canonique — PR #81 / #82 — readiness + SEO — 20 septembre 2026'));
-assert.ok(checkpoint.includes('## Mise à jour canonique — Provider DEV réel — 21 septembre 2026'));
-assert.ok(checkpoint.includes('TERMINÉ — Provider DEV réel et micro-proofs bout-en-bout ciblés'));
-assert.ok(checkpoint.includes('## Mise à jour canonique — PR #118 — sitemap complet — 21 septembre 2026'));
-assert.ok(checkpoint.includes('TERMINÉ — sitemap MODARYX complet sur les 22 canonicals indexables'));
-assert.ok(checkpoint.includes('## Mise à jour canonique — micro-preuve profil public DEV — 21 septembre 2026'));
-assert.ok(checkpoint.includes('TERMINÉ — parcours profil public DEV bout-en-bout ciblé'));
-assert.ok(checkpoint.includes('## Mise à jour canonique — PR #121 à #123 — modération, publication et recours — 21 septembre 2026'));
-assert.ok(checkpoint.includes('TERMINÉ — moteur modération / publication / recours en code avec preuves ciblées'));
-assert.ok(checkpoint.includes('5403b265f3fd3300960db476ffbbe9bce1f0649c'));
-assert.ok(checkpoint.includes('## Mise à jour canonique — activation DEV modération / publication / recours — 21 septembre 2026'));
-assert.ok(checkpoint.includes('TERMINÉ — activation fournisseur DEV réelle du moteur modération / publication / recours avec micro-preuves bout-en-bout ciblées'));
-assert.ok(checkpoint.includes('70c023a15525def9ead6ac8b6787389e7e6a62de'));
-assert.ok(checkpoint.includes('moderator-permission-required'));
-assert.ok(checkpoint.includes('appeals-review-permission-required'));
-assert.ok(checkpoint.includes('## Mise à jour canonique — PR #126 — préparation multi-rôle des écarts pré-VF — 21 septembre 2026'));
-assert.ok(checkpoint.includes('PASS_TARGETED_PASSKEY_PROVIDER_READINESS'));
-assert.ok(checkpoint.includes('PASS_TARGETED_SIGNATURE_ATTESTATION_CONTRACT'));
-assert.ok(checkpoint.includes('PASS_TARGETED_GUIDE_OS_BRIDGE_CONTRACTS'));
-assert.ok(checkpoint.includes('35606102721'));
-assert.ok(checkpoint.includes('a63684d7ffc6d4cebd86926b8bf252e258624f84'));
-assert.ok(checkpoint.includes('## Mise à jour canonique — PR #128 — moteurs de confiance pré-VF — 21 septembre 2026'));
-assert.ok(checkpoint.includes('PASS_TARGETED_SIGNATURE_VERIFICATION_ENGINE'));
-assert.ok(checkpoint.includes('PASS_TARGETED_STORAGE_REPAIR_DECISION_ENGINE'));
-assert.ok(checkpoint.includes('PASS_TARGETED_INTEGRATION_CONSENT_ENGINE'));
-assert.ok(checkpoint.includes('35607369026'));
-assert.ok(checkpoint.includes('cd21d60f2ee6dc00b3b70f2bd46a616e4d52fa30'));
-assert.ok(checkpoint.includes('## Mise à jour canonique — batch Super Nova passkey / trust / transport — 21 septembre 2026'));
-assert.ok(checkpoint.includes('PREUVE MANQUANTE — cérémonie WebAuthn réelle sur appareil compatible, reconnexion, récupération et révocation'));
-assert.ok(checkpoint.includes('PASS_TARGETED_TRUSTED_SIGNER_GATE'));
-assert.ok(checkpoint.includes('PASS_TARGETED_STORAGE_TRANSPORT_PRIMITIVE'));
-assert.ok(checkpoint.includes('35610823157'));
-assert.ok(checkpoint.includes('d0be675e86b51174b834f6764fbbce40f56b67a9'));
-assert.ok(checkpoint.includes('Aucune VF / aucun 100 % déclaré.'));
-assert.ok(checkpoint.includes('## Mise à jour canonique — PR #131 — runtime multi-lane confiance / réparation / découverte — 21 septembre 2026'));
-assert.ok(checkpoint.includes('PASS_TARGETED_DISTRIBUTION_TRUST_CHAIN'));
-assert.ok(checkpoint.includes('PASS_TARGETED_STORAGE_REPAIR_ORCHESTRATOR'));
-assert.ok(checkpoint.includes('PASS_TARGETED_INTEGRATION_DISCOVERY_RUNTIME'));
-assert.ok(checkpoint.includes('35630267754'));
-assert.ok(checkpoint.includes('cb5ecbac68a88a6feb1f0fe516b12f0349284d4a'));
-assert.ok(checkpoint.includes('89e31e938b2eec2b6e3af3ea5679ead1d2b770a2'));
-assert.ok(checkpoint.includes('## Mise à jour canonique — PR #132 — durcissement résilience runtime — 21 septembre 2026'));
+assert.ok(historicalCheckpoint.includes('## Mise à jour canonique — PR #81 / #82 — readiness + SEO — 20 septembre 2026'));
+assert.ok(historicalCheckpoint.includes('## Mise à jour canonique — Provider DEV réel — 21 septembre 2026'));
+assert.ok(historicalCheckpoint.includes('TERMINÉ — Provider DEV réel et micro-proofs bout-en-bout ciblés'));
+assert.ok(historicalCheckpoint.includes('## Mise à jour canonique — PR #118 — sitemap complet — 21 septembre 2026'));
+assert.ok(historicalCheckpoint.includes('TERMINÉ — sitemap MODARYX complet sur les 22 canonicals indexables'));
+assert.ok(historicalCheckpoint.includes('## Mise à jour canonique — micro-preuve profil public DEV — 21 septembre 2026'));
+assert.ok(historicalCheckpoint.includes('TERMINÉ — parcours profil public DEV bout-en-bout ciblé'));
+assert.ok(historicalCheckpoint.includes('## Mise à jour canonique — PR #121 à #123 — modération, publication et recours — 21 septembre 2026'));
+assert.ok(historicalCheckpoint.includes('TERMINÉ — moteur modération / publication / recours en code avec preuves ciblées'));
+assert.ok(historicalCheckpoint.includes('5403b265f3fd3300960db476ffbbe9bce1f0649c'));
+assert.ok(historicalCheckpoint.includes('## Mise à jour canonique — activation DEV modération / publication / recours — 21 septembre 2026'));
+assert.ok(historicalCheckpoint.includes('TERMINÉ — activation fournisseur DEV réelle du moteur modération / publication / recours avec micro-preuves bout-en-bout ciblées'));
+assert.ok(historicalCheckpoint.includes('70c023a15525def9ead6ac8b6787389e7e6a62de'));
+assert.ok(historicalCheckpoint.includes('moderator-permission-required'));
+assert.ok(historicalCheckpoint.includes('appeals-review-permission-required'));
+assert.ok(historicalCheckpoint.includes('## Mise à jour canonique — PR #126 — préparation multi-rôle des écarts pré-VF — 21 septembre 2026'));
+assert.ok(historicalCheckpoint.includes('PASS_TARGETED_PASSKEY_PROVIDER_READINESS'));
+assert.ok(historicalCheckpoint.includes('PASS_TARGETED_SIGNATURE_ATTESTATION_CONTRACT'));
+assert.ok(historicalCheckpoint.includes('PASS_TARGETED_GUIDE_OS_BRIDGE_CONTRACTS'));
+assert.ok(historicalCheckpoint.includes('35606102721'));
+assert.ok(historicalCheckpoint.includes('a63684d7ffc6d4cebd86926b8bf252e258624f84'));
+assert.ok(historicalCheckpoint.includes('## Mise à jour canonique — PR #128 — moteurs de confiance pré-VF — 21 septembre 2026'));
+assert.ok(historicalCheckpoint.includes('PASS_TARGETED_SIGNATURE_VERIFICATION_ENGINE'));
+assert.ok(historicalCheckpoint.includes('PASS_TARGETED_STORAGE_REPAIR_DECISION_ENGINE'));
+assert.ok(historicalCheckpoint.includes('PASS_TARGETED_INTEGRATION_CONSENT_ENGINE'));
+assert.ok(historicalCheckpoint.includes('35607369026'));
+assert.ok(historicalCheckpoint.includes('cd21d60f2ee6dc00b3b70f2bd46a616e4d52fa30'));
+assert.ok(historicalCheckpoint.includes('## Mise à jour canonique — batch Super Nova passkey / trust / transport — 21 septembre 2026'));
+assert.ok(historicalCheckpoint.includes('PREUVE MANQUANTE — cérémonie WebAuthn réelle sur appareil compatible, reconnexion, récupération et révocation'));
+assert.ok(historicalCheckpoint.includes('PASS_TARGETED_TRUSTED_SIGNER_GATE'));
+assert.ok(historicalCheckpoint.includes('PASS_TARGETED_STORAGE_TRANSPORT_PRIMITIVE'));
+assert.ok(historicalCheckpoint.includes('35610823157'));
+assert.ok(historicalCheckpoint.includes('d0be675e86b51174b834f6764fbbce40f56b67a9'));
+assert.ok(historicalCheckpoint.includes('Aucune VF / aucun 100 % déclaré.'));
+assert.ok(historicalCheckpoint.includes('## Mise à jour canonique — PR #131 — runtime multi-lane confiance / réparation / découverte — 21 septembre 2026'));
+assert.ok(historicalCheckpoint.includes('PASS_TARGETED_DISTRIBUTION_TRUST_CHAIN'));
+assert.ok(historicalCheckpoint.includes('PASS_TARGETED_STORAGE_REPAIR_ORCHESTRATOR'));
+assert.ok(historicalCheckpoint.includes('PASS_TARGETED_INTEGRATION_DISCOVERY_RUNTIME'));
+assert.ok(historicalCheckpoint.includes('35630267754'));
+assert.ok(historicalCheckpoint.includes('cb5ecbac68a88a6feb1f0fe516b12f0349284d4a'));
+assert.ok(historicalCheckpoint.includes('89e31e938b2eec2b6e3af3ea5679ead1d2b770a2'));
+assert.ok(historicalCheckpoint.includes('## Mise à jour canonique — PR #132 — durcissement résilience runtime — 21 septembre 2026'));
+assert.ok(historicalCheckpoint.includes('PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING'));
+assert.ok(historicalCheckpoint.includes('35631864195'));
+assert.ok(historicalCheckpoint.includes('9bd769e927bc07ff5ea2cd40054cfdec0c30f610'));
+assert.ok(historicalCheckpoint.includes('a8a544dc8a6d8b4c435d3d2acf56d9988141bbfd'));
+assert.ok(historicalCheckpoint.includes('Full replay unique uniquement à la toute fin.'));
+
+assert.ok(checkpoint.includes('# CHECKPOINT CANONIQUE — MODARYX — 21 septembre 2026'));
+assert.ok(checkpoint.includes('SOURCE DE REPRISE PRIORITAIRE — VF NON DÉCLARÉE'));
+assert.ok(checkpoint.includes('design/modaryx-premium-hd-20260914-work'));
+assert.ok(checkpoint.includes('62c47f9fd46cb9183ad5f46fc24f254852fcb5cf'));
+assert.ok(checkpoint.includes('PR #133 : **TERMINÉE / fusionnée**'));
+assert.ok(checkpoint.includes('23 routes publiques'));
+assert.ok(checkpoint.includes('Provider DEV ciblé'));
 assert.ok(checkpoint.includes('PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING'));
-assert.ok(checkpoint.includes('35631864195'));
-assert.ok(checkpoint.includes('9bd769e927bc07ff5ea2cd40054cfdec0c30f610'));
-assert.ok(checkpoint.includes('a8a544dc8a6d8b4c435d3d2acf56d9988141bbfd'));
-assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
+assert.ok(checkpoint.includes('PREUVE MANQUANTE** — enrôlement, reconnexion et révocation sur appareil WebAuthn compatible'));
+assert.ok(checkpoint.includes('BLOQUÉ / décision externe** — météo réelle production'));
+assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin'));
+assert.ok(checkpoint.includes('Aucune VF / aucun 100 %'));
 
 const openRows = tableLines.filter(line => /\*\*(?:EN COURS|BLOQUÉ|PREUVE MANQUANTE)/.test(line));
 console.log(JSON.stringify({
   marker:'PASS_TARGETED_ANTI_OUBLI_GATE',
+  canonicalCheckpoint:'CHECKPOINT-CANONIQUE-MODARYX-2026-09-21.md',
   result:'PASS',
   currentRoutes:23,
   readiness:{
