@@ -72,6 +72,12 @@
   const publicProfileCreator = document.querySelector("#public-profile-creator");
   const publicProfileBio = document.querySelector("#public-profile-bio");
   const publicProfileLinks = document.querySelector("#public-profile-links");
+  const authorityCard = document.querySelector("#account-authority-card");
+  const authorityRole = document.querySelector("#account-authority-role");
+  const authoritySummary = document.querySelector("#account-authority-summary");
+  const authorityAdmin = document.querySelector("#account-cap-admin");
+  const authorityModeration = document.querySelector("#account-cap-moderation");
+  const authorityAppeals = document.querySelector("#account-cap-appeals");
 
   let backendStatus = null;
   let turnstileToken = "";
@@ -82,6 +88,34 @@
     if (consoleNode) consoleNode.dataset.accountState = state;
     set(accountStatus, label);
     set(accountStatusCopy, copy);
+  }
+
+  function renderAuthority(authority) {
+    if (!authorityCard) return;
+    authorityCard.hidden = false;
+
+    const role = authority?.role || "member";
+    const labels = {
+      founder: "Fondateur",
+      administrator: "Administrateur",
+      moderator: "Modérateur",
+      "appeals-reviewer": "Reviewer recours",
+      member: "Membre"
+    };
+    const caps = authority?.capabilities || {};
+
+    set(authorityRole, labels[role] || "Membre");
+    set(
+      authoritySummary,
+      role === "founder"
+        ? "Autorité maximale MODARYX accordée côté serveur. Les secrets d’infrastructure restent séparés."
+        : role === "administrator"
+          ? "Administration courante MODARYX accordée côté serveur."
+          : "Les capacités affichées reflètent uniquement les permissions confirmées par la session."
+    );
+    set(authorityAdmin, caps.administration ? "Accès accordé." : "Non accordé.");
+    set(authorityModeration, caps.moderation ? "Publication, retrait et revue accordés." : "Non accordée.");
+    set(authorityAppeals, caps.appealsReview ? "Revue des recours accordée." : "Non accordée.");
   }
 
   function setLoginEnabled(enabled) {
@@ -254,6 +288,7 @@
     }
 
     if (!session?.authenticated) {
+      if (authorityCard) authorityCard.hidden = true;
       setAccountState("ready", "Déconnecté", "Le service est disponible et aucune session active n’est associée à ce navigateur.");
       set(sessionTitle, "Prêt à vous connecter");
       set(sessionSummary, "La connexion s’ouvre via Universal Login puis revient vers MODARYX avec une session HttpOnly.");
@@ -264,6 +299,7 @@
     setLoginEnabled(false);
     if (login) login.hidden = true;
     if (logout) logout.hidden = false;
+    renderAuthority(session.authority);
 
     const profile = session.profile;
     set(sessionTitle, profile?.displayName ? `Bonjour, ${profile.displayName}` : "Session active");
