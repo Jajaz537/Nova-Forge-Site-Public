@@ -177,6 +177,12 @@ assert.ok(checkpoint.includes('PASS_TARGETED_STORAGE_REPAIR_DECISION_ENGINE'));
 assert.ok(checkpoint.includes('PASS_TARGETED_INTEGRATION_CONSENT_ENGINE'));
 assert.ok(checkpoint.includes('35607369026'));
 assert.ok(checkpoint.includes('cd21d60f2ee6dc00b3b70f2bd46a616e4d52fa30'));
+assert.ok(checkpoint.includes('## Mise à jour canonique — batch Super Nova passkey / trust / transport — 21 septembre 2026'));
+assert.ok(checkpoint.includes('PREUVE MANQUANTE — cérémonie WebAuthn réelle sur appareil compatible, reconnexion, récupération et révocation'));
+assert.ok(checkpoint.includes('PASS_TARGETED_TRUSTED_SIGNER_GATE'));
+assert.ok(checkpoint.includes('PASS_TARGETED_STORAGE_TRANSPORT_PRIMITIVE'));
+assert.ok(checkpoint.includes('35610823157'));
+assert.ok(checkpoint.includes('d0be675e86b51174b834f6764fbbce40f56b67a9'));
 assert.ok(checkpoint.includes('Aucune VF / aucun 100 % déclaré.'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
 
