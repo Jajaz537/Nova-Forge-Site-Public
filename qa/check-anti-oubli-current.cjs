@@ -224,7 +224,7 @@ assert.ok(checkpoint.includes('23 routes publiques'));
 assert.ok(checkpoint.includes('Provider DEV ciblé'));
 assert.ok(checkpoint.includes('PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING'));
 assert.ok(checkpoint.includes('PREUVE MANQUANTE** — enrôlement, reconnexion et révocation sur appareil WebAuthn compatible'));
-assert.ok(checkpoint.includes('BLOQUÉ / décision externe** — météo réelle production'));
+assert.ok(checkpoint.includes('TERMINÉ — readiness WeatherAPI ciblée'));\nassert.ok(checkpoint.includes('BLOQUÉ / activation externe** — météo réelle production'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin'));
 assert.ok(checkpoint.includes('Aucune VF / aucun 100 %'));
 
