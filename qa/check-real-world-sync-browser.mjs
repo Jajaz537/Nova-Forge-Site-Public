@@ -97,7 +97,7 @@ try{
         schemaVersion:1,
         source:'proof-coarse',
         context:{timezone:'Australia/Sydney',climateBand:'south-temperate'},
-        weather:{status:'live',condition:'rain',intensity:.45,attribution:{label:'Proof weather',url:location.origin+'/source'}}
+        weather:{status:'live',condition:'rain',intensity:.45,attribution:{label:'WeatherAPI.com',url:location.origin+'/source'},disclaimer:'Données météo indicatives. Consultez les services météorologiques officiels pour les décisions critiques.'}
       }
     });
     return {
@@ -107,7 +107,8 @@ try{
       text:document.querySelector('[data-real-world-context]')?.textContent||'',
       activity:document.querySelector('[data-local-world-activity]')?.textContent||'',
       chronicle:document.querySelector('[data-world-chronicle]')?.textContent||'',
-      attribution:document.querySelector('[data-weather-attribution]')?.textContent||''
+      attribution:document.querySelector('[data-weather-attribution]')?.textContent||'',
+      disclaimer:document.querySelector('[data-weather-disclaimer]')?.textContent||''
     };
   })()`,true);
   assert('southern January summer',synthetic.season==='summer');
@@ -117,7 +118,8 @@ try{
   assert('copy mentions rain',synthetic.text.includes('pluie'));
   assert('rain activity moves work under cover',synthetic.activity.includes('sous couvert'));
   assert('shared chronicle is not rewritten by local rain',synthetic.chronicle===automatic.chronicle);
-  assert('attribution visible',synthetic.attribution.includes('Proof weather'));
+  assert('attribution visible',synthetic.attribution.includes('WeatherAPI.com'));
+  assert('weather disclaimer visible',synthetic.disclaimer.includes('services météorologiques officiels'));
 
   const clearSpells=await evalv(cdp,`(async()=>{
     const m=await import('./assets/real-world-sync.mjs');
