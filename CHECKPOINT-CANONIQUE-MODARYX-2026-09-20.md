@@ -2554,3 +2554,66 @@ Ces runs prouvent le code ciblé et l’absence de régression fonctionnelle obs
 - **PREUVE MANQUANTE** — passkey appareil, Safari réel, lecteurs d’écran natifs, zoom natif final, appareils tactiles, PWA install réelle, CWV terrain, validation juridique et validation artistique humaine.
 - Aucune VF / aucun 100 % déclaré.
 - Full replay unique uniquement à la toute fin.
+
+
+## Mise à jour canonique — PR #132 — durcissement résilience runtime — 21 septembre 2026
+
+Cette section est la lecture la plus récente pour le hardening transversal des lanes confiance, Storage/Repair et découverte d’intégrations.
+
+### Git frais
+
+- Work vérifié avant écriture : `design/modaryx-premium-hd-20260914-work` @ `36e20e3ce9a148358608f42f202122b0f551995e`.
+- Branche isolée : `feature/modaryx-runtime-resilience-20260921`.
+- Candidat final avant canonisation : `9bd769e927bc07ff5ea2cd40054cfdec0c30f610`.
+- Aucun changement concurrent observé sur Work au point de branchement.
+- Aucun `main`, production, DNS/DNSSEC/nameserver.
+- Aucun full replay.
+
+### Trust anchors
+
+`functions/_lib/trusted-signers.mjs` refuse maintenant explicitement :
+
+- matériel JWK privé ou symétrique ;
+- `key_ops` contenant autre chose que `verify` ;
+- formes/courbes incompatibles avec ES256 ou EdDSA ;
+- trust store actif sans `updatedAt` valide ;
+- fenêtres `validFrom/validUntil` incohérentes ;
+- révocation antérieure au début de validité.
+
+Aucune clé réelle n’est ajoutée.
+
+### Storage Resolver / Repair
+
+`functions/_lib/storage-transport.mjs` et l’orchestrateur ajoutent :
+
+- timeout borné de transport ;
+- propagation fail-closed du timeout ;
+- refus des cibles locales/privées évidentes pour les origines publiques ;
+- conservation du digest exact et des limites d’octets déjà acquises.
+
+Cette garde ne remplace pas une politique réseau fournisseur complète contre le DNS rebinding.
+
+### Guide MODARYX / pont Nova Forge OS
+
+La découverte runtime ajoute :
+
+- timeout borné ;
+- refus des cibles distantes locales/privées évidentes pour le Guide ;
+- conservation de l’exception locale volontaire du pont Nova Forge OS : HTTP uniquement sur loopback, HTTPS sinon ;
+- consentement toujours obligatoire avant activation.
+
+### Micro-preuves
+
+Candidat `9bd769e927bc07ff5ea2cd40054cfdec0c30f610` :
+
+- `MODARYX Site First Targeted Source Proof` — run `35631864195` — **success** ;
+- `MODARYX Local Functional Browser Proof` — run `35631864027` — **success** ;
+- marker ajouté : `PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING`.
+
+### État
+
+- **TERMINÉ — hardening résilience runtime ciblé**.
+- **EN COURS / BLOQUÉ** — signer réel, artefact réel, Storage/Repair distants, Guide réel et runtime OS réel restent non connectés.
+- **PREUVE MANQUANTE** — preuves appareil/humaines/terrain inchangées.
+- Aucune VF / aucun 100 % déclaré.
+- Full replay unique uniquement à la toute fin.
