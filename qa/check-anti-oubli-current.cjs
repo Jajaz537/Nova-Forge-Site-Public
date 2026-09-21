@@ -22,10 +22,10 @@ const requiredCurrent = [
   'PASS_TARGETED_FIREFOX_23_ROUTE_PROOF',
   'WebKit 23 routes — préflight | **TERMINÉ — preuve ciblée moteur**',
   'PASS_TARGETED_WEBKIT_23_ROUTE_PREFLIGHT',
-  'Storage Resolver | **EN COURS — contrat acquis, service non connecté**',
-  'Repair Network | **EN COURS — protocole contractuel acquis, exécution distante non connectée**',
+  'Storage Resolver | **EN COURS — contrat + moteur décisionnel acquis ; service/transport non connecté**',
+  'Repair Network | **EN COURS — protocole + moteur décisionnel acquis ; exécution distante non connectée**',
   'PASS_TARGETED_STORAGE_REPAIR_CONTRACTS',
-  'Signatures / attestations de provenance | **EN COURS — contrat d’attestation/signature acquis ; signer réel non connecté**',
+  'Signatures / attestations de provenance | **EN COURS — contrat + moteur de vérification acquis ; signer réel non connecté**',
   'PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS',
   'Comptes / authentification / passkeys réels | **EN COURS — préparation source passkey finale acquise ; cérémonie provider/appareil réelle non prouvée**',
   'Profils publics éditables | **TERMINÉ — parcours DEV bout-en-bout ciblé**',
@@ -55,14 +55,20 @@ const requiredCurrent = [
   'MODARYX-COMMUNITY-REMOTE-UI-20260920.md',
   'Provider DEV réel + micro-proofs bout-en-bout | **TERMINÉ — profils + ingestion + modération/recours ciblés**',
   'Moteur modération / publication / recours | **TERMINÉ — code + preuves ciblées + Provider DEV réel**',
-  'Guide MODARYX connecté | **EN COURS — contrat de connexion acquis ; service réel non connecté**',
-  'Pont Nova Forge OS | **EN COURS — contrat de pont acquis ; runtime OS non connecté**',
+  'Guide MODARYX connecté | **EN COURS — contrat + gate de consentement acquis ; service réel non connecté**',
+  'Pont Nova Forge OS | **EN COURS — contrat + gate de consentement acquis ; runtime OS non connecté**',
   'PASS_TARGETED_PASSKEY_PROVIDER_READINESS',
   'MODARYX-PASSKEY-PROVIDER-READINESS-20260921.md',
   'PASS_TARGETED_SIGNATURE_ATTESTATION_CONTRACT',
   'MODARYX-SIGNATURE-ATTESTATION-CONTRACT-20260921.md',
   'PASS_TARGETED_GUIDE_OS_BRIDGE_CONTRACTS',
   'MODARYX-GUIDE-OS-BRIDGE-CONTRACT-20260921.md',
+  'PASS_TARGETED_SIGNATURE_VERIFICATION_ENGINE',
+  'MODARYX-SIGNATURE-VERIFICATION-ENGINE-20260921.md',
+  'PASS_TARGETED_STORAGE_REPAIR_DECISION_ENGINE',
+  'MODARYX-STORAGE-REPAIR-DECISION-ENGINE-20260921.md',
+  'PASS_TARGETED_INTEGRATION_CONSENT_ENGINE',
+  'MODARYX-INTEGRATION-CONSENT-ENGINE-20260921.md',
   'PASS_TARGETED_MODERATION_PUBLICATION_ENGINE',
   'MODARYX-MODERATION-PUBLICATION-ENGINE-20260921.md',
   '403 turnstile-rejected',
@@ -90,7 +96,12 @@ const forbiddenCurrent = [
   'Comptes / authentification / passkeys réels | **EN COURS — login/callback/session DEV réels prouvés ; passkey finale non prouvée**',
   'Signatures / attestations de provenance | **EN COURS — contrats provenance acquis, signer/attestation réel non connecté**',
   'Guide MODARYX connecté | **EN COURS — capacité non livrée**',
-  'Pont Nova Forge OS | **EN COURS — dépendance Nova Forge OS**'
+  'Pont Nova Forge OS | **EN COURS — dépendance Nova Forge OS**',
+  'Storage Resolver | **EN COURS — contrat acquis, service non connecté**',
+  'Repair Network | **EN COURS — protocole contractuel acquis, exécution distante non connectée**',
+  'Signatures / attestations de provenance | **EN COURS — contrat d’attestation/signature acquis ; signer réel non connecté**',
+  'Guide MODARYX connecté | **EN COURS — contrat de connexion acquis ; service réel non connecté**',
+  'Pont Nova Forge OS | **EN COURS — contrat de pont acquis ; runtime OS non connecté**'
 ];
 for (const token of forbiddenCurrent) assert.ok(!ledger.includes(token), 'stale current state returned: ' + token);
 
@@ -151,6 +162,12 @@ assert.ok(checkpoint.includes('PASS_TARGETED_SIGNATURE_ATTESTATION_CONTRACT'));
 assert.ok(checkpoint.includes('PASS_TARGETED_GUIDE_OS_BRIDGE_CONTRACTS'));
 assert.ok(checkpoint.includes('35606102721'));
 assert.ok(checkpoint.includes('a63684d7ffc6d4cebd86926b8bf252e258624f84'));
+assert.ok(checkpoint.includes('## Mise à jour canonique — PR #128 — moteurs de confiance pré-VF — 21 septembre 2026'));
+assert.ok(checkpoint.includes('PASS_TARGETED_SIGNATURE_VERIFICATION_ENGINE'));
+assert.ok(checkpoint.includes('PASS_TARGETED_STORAGE_REPAIR_DECISION_ENGINE'));
+assert.ok(checkpoint.includes('PASS_TARGETED_INTEGRATION_CONSENT_ENGINE'));
+assert.ok(checkpoint.includes('35607369026'));
+assert.ok(checkpoint.includes('cd21d60f2ee6dc00b3b70f2bd46a616e4d52fa30'));
 assert.ok(checkpoint.includes('Aucune VF / aucun 100 % déclaré.'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
 

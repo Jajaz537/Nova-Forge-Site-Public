@@ -2207,3 +2207,130 @@ La procédure erreur exacte → isolation → correction ciblée → micro-proof
 3. Ne pas simuler signer, artefact, Storage Resolver, Repair Network, Guide ou runtime OS en l'absence d'entrées réelles.
 4. Fermer séparément les preuves humaines/externes encore manquantes.
 5. Full replay unique uniquement à la toute fin.
+
+## Mise à jour canonique — PR #128 — moteurs de confiance pré-VF — 21 septembre 2026
+
+Cette section est la lecture la plus récente pour les moteurs provider-neutral fermés ici sans ChatGPT Work.
+
+### Git frais
+
+- Branche Work vérifiée : `design/modaryx-premium-hd-20260914-work`.
+- Base Work avant PR #128 : `9b91ba24c8b994d4f8cd388493a94a26b81ad6d5`.
+- Candidat final PR #128 : `00b7b042d3734da6b1c2aa89edaba8c91a15533f`.
+- Merge PR #128 dans Work : `cd21d60f2ee6dc00b3b70f2bd46a616e4d52fa30`.
+- `main`, production, DNS/DNSSEC/nameservers : inchangés.
+- Aucun provider, secret, signer, stockage ou runtime Nova Forge OS connecté par ce lot.
+- Aucun full replay final exécuté.
+
+### Lane signature / attestation — moteur de vérification
+
+Ajouts :
+- `functions/_lib/attestation.mjs`
+- `qa/check-signature-verification-engine.mjs`
+- `qa/MODARYX-SIGNATURE-VERIFICATION-ENGINE-20260921.md`
+
+Le moteur :
+- construit un payload canonique `MODARYX-ATTESTATION-V1` ;
+- lie la signature au type, identifiant et SHA-256 exacts du sujet ;
+- calcule et compare l'empreinte SHA-256 de la clé publique ;
+- vérifie `ES256` et `EdDSA / Ed25519` ;
+- refuse une clé explicitement révoquée ;
+- refuse fingerprint divergent, digest attendu divergent et contenu signé altéré ;
+- refuse toute attestation qui prétend contenir du matériel de clé privée.
+
+Marker :
+- `PASS_TARGETED_SIGNATURE_VERIFICATION_ENGINE`
+
+La micro-preuve utilise uniquement des paires de clés éphémères de test. Aucun signer de production n'est revendiqué.
+
+État :
+- **TERMINÉ — moteur de vérification cryptographique ciblé**.
+- **EN COURS — signer réel, trust anchor public, rotation/révocation opérationnelle et signature d'artefact réel**.
+
+### Lane Storage Resolver / Repair Network — moteur décisionnel
+
+Ajouts :
+- `functions/_lib/storage-repair-engine.mjs`
+- `qa/check-storage-repair-decision-engine.mjs`
+- `qa/MODARYX-STORAGE-REPAIR-DECISION-ENGINE-20260921.md`
+
+La résolution n'accepte une origine vérifiée que si :
+- l'origine est active ;
+- elle n'est pas un alias mutable non fiable ;
+- le manifeste observé correspond exactement au SHA-256 attendu ;
+- l'artefact observé correspond exactement au SHA-256 attendu.
+
+La réparation :
+- ne sélectionne qu'une copie déjà vérifiée au digest exact ;
+- refuse les copies au digest divergent ;
+- garde `withdrawn` et `revoked` non distribuables ;
+- n'effectue aucune substitution silencieuse.
+
+Marker :
+- `PASS_TARGETED_STORAGE_REPAIR_DECISION_ENGINE`
+
+Le moteur est volontairement sans I/O réseau. Il ne simule aucun stockage ni réseau de réparation.
+
+État :
+- **TERMINÉ — logique décisionnelle Storage Resolver / Repair ciblée**.
+- **EN COURS — transport, résolution distante, récupération des octets et exécution de réparation réels**.
+
+### Lane Guide MODARYX / pont Nova Forge OS — gate de consentement
+
+Ajouts :
+- `functions/_lib/integration-consent.mjs`
+- `qa/check-integration-consent-engine.mjs`
+- `qa/MODARYX-INTEGRATION-CONSENT-ENGINE-20260921.md`
+
+Le gate impose :
+- consentement explicite avant état activable ;
+- grants toujours sous-ensemble des scopes/permissions demandés ;
+- Guide distant en HTTPS ;
+- pont OS en HTTPS, ou HTTP uniquement sur loopback ;
+- version de protocole explicite pour le pont OS ;
+- aucune liaison de compte implicite ;
+- aucune session partagée ;
+- aucun credential forwarding ;
+- frontière produit explicite `modaryx-web → nova-forge-os`.
+
+Marker :
+- `PASS_TARGETED_INTEGRATION_CONSENT_ENGINE`
+
+État :
+- **TERMINÉ — gate consentement/permissions ciblé**.
+- **EN COURS — Guide MODARYX réel et runtime pont Nova Forge OS réel**.
+
+### Preuve ciblée
+
+Workflow `MODARYX Site First Targeted Source Proof` :
+- run `35607369026` — **success**.
+
+Ce run inclut et valide :
+- `PASS_TARGETED_SIGNATURE_VERIFICATION_ENGINE` ;
+- `PASS_TARGETED_STORAGE_REPAIR_DECISION_ENGINE` ;
+- `PASS_TARGETED_INTEGRATION_CONSENT_ENGINE` ;
+- les contrats préexistants de signature, Storage/Repair, Guide/pont et passkey ;
+- les autres preuves source ciblées de la lane.
+
+Aucune preuve fournisseur ou appareil n'est déduite de ce run.
+
+### État honnête après PR #128
+
+- **TERMINÉ — vérification cryptographique provider-neutral en code ciblé**.
+- **TERMINÉ — moteur décisionnel Storage/Repair ciblé**.
+- **TERMINÉ — gate consentement Guide/pont ciblé**.
+- **EN COURS — signer réel**.
+- **EN COURS — transport/services Storage Resolver / Repair Network réels**.
+- **EN COURS — Guide MODARYX réel**.
+- **EN COURS — runtime pont Nova Forge OS réel**.
+- **EN COURS — vraie passkey provider/appareil**, inchangée par ce lot.
+- Aucune VF / aucun 100 % déclaré.
+
+## Prochain point logique actualisé
+
+1. Continuer ici les couches serveur/locales encore fermables sans inventer de fournisseur.
+2. Garder Work uniquement pour les interactions fournisseur indispensables, en particulier l'activation passkey Auth0 DEV si aucun autre accès direct n'est disponible.
+3. Ne pas déverrouiller les téléchargements sans artefact autorisé, droits, provenance et signature réelle lorsqu'elle est requise.
+4. Ne pas annoncer Storage Resolver, Repair Network, Guide ou pont OS comme connectés avant transport/service/runtime réels.
+5. Fermer séparément les preuves humaines/externes.
+6. Full replay unique uniquement à la toute fin.
