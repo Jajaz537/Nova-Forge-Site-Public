@@ -1,5 +1,7 @@
 # MODARYX — FINAL EXTERNAL VALIDATION MATRIX
 
+> **RÈGLE DE LECTURE COURANTE — 21 septembre 2026 :** ce fichier conserve la matrice historique créée le 16 septembre et ses réconciliations successives. Pour l’état opérationnel actuel, lire d’abord `CHECKPOINT-CANONIQUE-MODARYX-2026-09-21.md` et `qa/MODARYX-ANTI-OUBLI-CURRENT-20260920.md`, puis vérifier Git frais. Les mentions historiques « 17 pages », « comptes/backend absents », « Firefox non prouvé » ou « PWA HTTPS non prouvée » ne doivent pas être réinterprétées comme l’état courant lorsqu’une section plus récente les supersède.
+
 Date de consolidation : 16 septembre 2026.  
 Statut cible avant fermeture de cette matrice : **VF TECHNICALLY MAXIMAL CANDIDATE**.  
 Cette matrice ne transforme aucune validation non exécutée en PASS.
@@ -61,3 +63,49 @@ Les éléments suivants restent **PREUVE MANQUANTE** et continuent à bloquer un
 
 Les preuves automatisées intégrées réduisent le risque mais ne doivent pas être requalifiées en preuves natives quand la matrice exige explicitement un navigateur/OS/appareil réel.
 
+
+
+## Réconciliation canonique — 21 septembre 2026
+
+Cette section est **plus récente** que la matrice initiale et la réconciliation du 19 septembre. Elle met à jour uniquement l’état courant ; les lignes historiques ci-dessus restent conservées pour provenance.
+
+### TERMINÉ sur périmètre ciblé
+
+- **Surface Premium HD** : 23 routes publiques couvertes par les preuves visuelles/browser ciblées actuelles.
+- **Firefox final élargi ciblé** : 23 routes × desktop/mobile prouvées par la lane dédiée ; cela ne vaut pas Safari.
+- **WebKit Playwright** : préflight 23 routes acquis ; cela ne vaut pas Safari réel.
+- **PWA HTTPS automatisée** : service worker, cache, offline-stale, reconnexion/update prouvés sur preview HTTPS ciblée ; installation manuelle sur appareil reste séparée.
+- **Imports/exports Chromium ciblés** : vrais fichiers du runner déjà exercés ; aucune nouvelle exigence de dialogue natif n’est déduite de cette preuve.
+- **Comptes / profils Provider DEV** : login/callback/session, écritures profil, exposition publique ciblée et fail-closed privé/inexistant acquis.
+- **Publication / modération / recours Provider DEV** : migration D1 0003, RBAC, publication/retrait, suivi, recours/issue et receipts ciblés acquis.
+- **Signatures / attestations** : contrat, moteur de vérification, trust-anchor gate et chaîne de confiance de distribution acquis en code/preuves ciblées.
+- **Storage Resolver / Repair Network** : contrats, moteur décisionnel, transport HTTPS borné et orchestrateur acquis en code/preuves ciblées.
+- **Guide MODARYX / pont Nova Forge OS** : contrats, consentement/permissions, découverte runtime et hardening borné acquis en code/preuves ciblées.
+
+### EN COURS / BLOQUÉ — dépendances réelles
+
+- **Passkey finale** : **PREUVE MANQUANTE** sur appareil WebAuthn compatible pour enrôlement, reconnexion et révocation.
+- **Signer / trust anchor réels** : **EN COURS** ; aucun signer de production ni trust anchor réel publié.
+- **Téléchargements publics** : **BLOQUÉ** ; aucun artefact réel autorisé, versionné et vérifiable n’est disponible, le verrou fail-closed reste requis.
+- **Corpus GTA VI / RDR2 réel** : **EN COURS** ; hubs éditoriaux présents mais corpus de mods autorisé/versionné/attribué absent.
+- **Storage Resolver / Repair Network réels** : **EN COURS** ; endpoints/origines/exécution distante réels non connectés.
+- **Guide MODARYX réel** : **EN COURS** ; service réel non connecté.
+- **Pont Nova Forge OS réel** : **EN COURS** ; runtime Nova Forge OS réel non connecté.
+- **Météo réelle production** : **BLOQUÉ / décision externe** tant que fournisseur, licence, confidentialité, attribution et disclaimer ne sont pas validés.
+
+### PREUVE MANQUANTE — humaine / appareil / terrain
+
+- lecteur d’écran natif Windows ;
+- VoiceOver macOS/iOS ;
+- zoom navigateur natif 200/400 % final ;
+- appareils tactiles physiques ;
+- Safari réel ;
+- installation PWA manuelle sur appareil ;
+- CWV terrain représentatifs ;
+- validation artistique humaine finale ;
+- validation juridique / droits / licences ;
+- Master Nova Design Intelligence complète — **NON RÉCUPÉRÉE**.
+
+### Règle de clôture actuelle
+
+Aucune ligne historique ne doit rouvrir une capacité déjà fermée sur son périmètre ciblé, et aucune preuve ciblée ne doit être extrapolée en preuve appareil, humaine, juridique, terrain ou service réel. La VF officielle reste non déclarée. Le full replay final reste réservé à la toute fin.
