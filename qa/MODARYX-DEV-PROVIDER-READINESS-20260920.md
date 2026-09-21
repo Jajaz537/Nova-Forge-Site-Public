@@ -32,6 +32,9 @@ Le runtime transmet déjà ce hostname comme `expectedHostname` à la validation
 - pour la modération DEV, activer RBAC sur l'API et inclure les permissions dans l'access token ;
 - attribuer `community:moderate` au compte modérateur de preuve ;
 - attribuer séparément `community:appeals-review` au compte de preuve chargé des recours.
+- définir également les permissions produit `modaryx:founder` et `modaryx:admin` dans l'API Auth0 DEV ;
+- attribuer `modaryx:founder` uniquement au compte Fondateur DEV prévu ; le rôle Fondateur hérite côté MODARYX des capacités administration, modération et recours via le moteur serveur ;
+- ne jamais considérer le rôle Auth0 comme une autorisation d'accès aux secrets Cloudflare, GitHub, DNS, Auth0, WeatherAPI ou clés privées.
 
 ## Portée Cloudflare
 
@@ -55,5 +58,7 @@ Pour profils + Communauté actuels :
 11. L'auteur peut relire uniquement sa propre soumission et déposer un seul recours contre une décision restrictive.
 12. La file de recours refuse `community:moderate` seul et exige `community:appeals-review`.
 13. Issue de recours `upheld / modified / reversed` créée avec receipt chaîné ; `reversed` ne publie que si `abuse=passed`.
+14. Compte Fondateur DEV renouvelé : `/api/v1/auth/session` retourne `authority.role=founder` avec capacités founder/administration/modération/recours.
+15. La preuve Fondateur ne ferme les opérations privilégiées que lorsque modération et revue des recours sont également démontrées avec la même session, sans extraire le cookie HttpOnly.
 
 Aucun DNS, production, `main`, tenant, binding ou secret réel n'est créé par ce document.

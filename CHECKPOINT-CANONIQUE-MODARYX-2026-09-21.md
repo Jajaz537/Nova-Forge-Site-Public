@@ -48,7 +48,7 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 - **TERMINÉ — communauté distante ciblée** : ingestion, surface publique modérée, suivi auteur et recours.
 - **TERMINÉ — modération/publication/recours Provider DEV** : migration D1 0003, RBAC séparé, publication/retrait, recours/issue, receipts pseudonymisés.
 - Production reste distincte et non activée.
-- **EN COURS — compte Fondateur / Administrateur** : autorité serveur `modaryx:founder` / `modaryx:admin`, héritage administration + modération + recours et affichage same-origin **fusionnés dans Work via PR #142** au merge `0c3ecf397d68b4dc6df00119bb86a09131282cf6`. Source Proof `35646403025`, Profiles State Browser `35646403023`, A11y ciblé `35646402912` après rerun du seul job en échec infra, WebKit `35646402911`, Static Premium HD `35646402908` et CodeQL post-merge `35646685466` : **success**. attribution réelle au compte Auth0 Fondateur et micro-preuves Preview avec `authority.role=founder` restent requises avant fermeture.
+- **EN COURS — compte Fondateur / Administrateur** : code/UI et héritage serveur fusionnés via PR #142. **Attribution réelle Auth0 DEV acquise** : tenant `modaryx-dev` EU, rôle `MODARYX Founder`, permission `modaryx:founder`, session renouvelée avec `authority.role=founder` et capacités founder/administration/modération/recours confirmées, sans secret/token exposé. Les **preuves runtime modération/recours restent manquantes** : Work a rencontré `TypeError: fetch is not a function` et n'a ni `fetch`, ni XHR, ni `sendBeacon` dans ce contexte authentifié. Cookie HttpOnly non extrait. Source : `qa/MODARYX-FOUNDER-AUTH0-DEV-EVIDENCE-20260921.md`.
 - Les rôles web n'exposent jamais automatiquement les secrets Cloudflare, GitHub, DNS/DNSSEC, Auth0, WeatherAPI ou clés privées de signature.
 
 ## 5. Passkeys
@@ -154,7 +154,7 @@ Ne jamais supprimer implicitement un blocker pour améliorer un pourcentage. Une
 1. Vérifier Git frais avant toute écriture.
 2. Ne pas rejouer les preuves déjà vertes sans modification pertinente.
 3. Fermer uniquement les dépendances réelles encore ouvertes quand un environnement adapté existe :
-   - attribution réelle du compte Fondateur/Auth0 + preuve Preview ;
+   - preuves runtime Fondateur : accès modération + revue des recours avec la session Auth0 DEV existante, sans extraction du cookie HttpOnly ;
    - passkey appareil ;
    - signer / trust anchor réel ;
    - artefact de distribution autorisé ;
@@ -185,4 +185,5 @@ Pour toute nouvelle conversation ou agent :
 - CWV terrain : **PREUVE MANQUANTE** maintenue. La tentative PageSpeed Insights API a renvoyé `HTTP 429 RESOURCE_EXHAUSTED` (`RATE_LIMIT_EXCEEDED`) et l’interface n’a livré aucune donnée terrain exploitable. Aucun résultat Lighthouse labo n’a été substitué.
 - Signer/trust anchor, artefact public autorisé, corpus GTA VI/RDR2, Storage/Repair, Guide MODARYX et pont Nova Forge OS : états inchangés ; aucune ressource, autorisation ou endpoint réel supplémentaire n’a été fourni.
 - Validation juridique, droits/licences et validation artistique humaine : **PREUVE MANQUANTE** maintenue.
+- Compte Fondateur Auth0 DEV : attribution `modaryx:founder` et session `authority.role=founder` rapportées comme acquises ; modération/recours runtime restent **BLOQUÉS** par l'absence de primitives `fetch`/XHR/`sendBeacon` dans Work. Priorité : tenter la navigation directe same-origin vers les endpoints GET privilégiés avant toute micro-surface temporaire.
 - Aucun full replay, aucune activation production et aucun changement `main`, DNS/DNSSEC, nameservers ou IONOS.
