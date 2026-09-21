@@ -3,6 +3,14 @@ import fs from 'node:fs';
 import {backendState, requireAuthLoginFoundation} from '../functions/_lib/backend-config.mjs';
 import {buildAuth0AuthorizationUrl, exchangeAuth0AuthorizationCode} from '../functions/_lib/auth0.mjs';
 import {
+  ADMIN_PERMISSION,
+  FOUNDER_PERMISSION,
+  APPEALS_REVIEW_PERMISSION,
+  MODERATION_PERMISSION,
+  authorityForIdentity,
+  hasPermission
+} from '../functions/_lib/access-control.mjs';
+import {
   clearSessionCookie,
   consumeAuthTransaction,
   createAuthTransaction,
@@ -73,6 +81,18 @@ const env={
   AUTH0_CLIENT_SECRET:'server-secret'
 };
 const fakeDb=new FakeDb();
+
+const founderIdentity={sub:'auth0|founder',permissions:[FOUNDER_PERMISSION]};
+const adminIdentity={sub:'auth0|admin',permissions:[ADMIN_PERMISSION]};
+assert.equal(authorityForIdentity(founderIdentity).role,'founder');
+assert.equal(authorityForIdentity(adminIdentity).role,'administrator');
+assert.equal(hasPermission(founderIdentity,MODERATION_PERMISSION),true);
+assert.equal(hasPermission(founderIdentity,APPEALS_REVIEW_PERMISSION),true);
+assert.equal(hasPermission(adminIdentity,MODERATION_PERMISSION),true);
+assert.equal(hasPermission(adminIdentity,APPEALS_REVIEW_PERMISSION),true);
+assert.equal(hasPermission(founderIdentity,'infrastructure:secrets'),false);
+checks.push('Founder/Admin authority is explicit, server-side and never implies infrastructure secrets');
+
 
 let state=backendState({...env,MODARYX_DB:fakeDb});
 assert.equal(state.auth0.configured,true);
@@ -199,6 +219,7 @@ const callback=fs.readFileSync(new URL('../functions/api/v1/auth/callback.js',im
 const logout=fs.readFileSync(new URL('../functions/api/v1/auth/logout.js',import.meta.url),'utf8');
 const remote=fs.readFileSync(new URL('../functions/_lib/remote-write.mjs',import.meta.url),'utf8');
 const sessionSource=fs.readFileSync(new URL('../functions/_lib/auth-session.mjs',import.meta.url),'utf8');
+const sessionApi=fs.readFileSync(new URL('../functions/api/v1/auth/session.js',import.meta.url),'utf8');
 
 assert.ok(login.includes("'/api/v1/auth/callback'"));
 assert.ok(login.includes('codeChallenge:transaction.codeChallenge'));
@@ -211,6 +232,7 @@ assert.ok(logout.includes('requireSameOrigin'));
 assert.ok(remote.includes('getSessionIdentity'));
 assert.ok(remote.includes("authMethod:'session'"));
 assert.ok(remote.includes("authMethod:'bearer'"));
+assert.ok(sessionApi.includes('publicAuthoritySummary(identity)'));
 checks.push('BFF routes keep provider tokens server-side, require same-origin logout and prefer HttpOnly sessions');
 
 console.log(JSON.stringify({
