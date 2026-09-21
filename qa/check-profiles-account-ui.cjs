@@ -22,6 +22,11 @@ for(const token of [
   'data-public-profile-state="idle"',
   'id="public-profile-search"',
   'id="public-profile-card"',
+  'id="account-authority-card"',
+  'id="account-authority-role"',
+  'id="account-cap-admin"',
+  'id="account-cap-moderation"',
+  'id="account-cap-appeals"',
   'https://challenges.cloudflare.com'
 ]) assert.ok(html.includes(token),'profiles html invariant missing: '+token);
 
@@ -38,7 +43,11 @@ for(const token of [
   'Provisionnement requis',
   '/api/v1/profiles/${encodeURIComponent(handle)}',
   'profile.visibility !== "public"',
-  'new URLSearchParams(window.location.search).get("profile")'
+  'new URLSearchParams(window.location.search).get("profile")',
+  'renderAuthority(session.authority)',
+  'Fondateur',
+  'Administrateur',
+  'Les secrets d’infrastructure restent séparés.'
 ]) assert.ok(js.includes(token),'profiles JS invariant missing: '+token);
 
 assert.ok(!js.includes('localStorage'),'profiles UI must not persist auth state in localStorage');
@@ -81,7 +90,9 @@ console.log(JSON.stringify({
     'WebAuthn detection remains non-authenticating',
     'public profile lookup reads only the visibility=public endpoint',
     'remote profile fields are rendered with DOM-safe text nodes and HTTPS-only links',
-    'private and unlisted profiles remain fail-closed at the server endpoint'
+    'private and unlisted profiles remain fail-closed at the server endpoint',
+    'authenticated authority is rendered from the same-origin server session without raw permission exposure',
+    'founder/admin UI explicitly keeps infrastructure secrets outside the web account boundary'
   ],
   failures:[]
 },null,2));

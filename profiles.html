@@ -102,6 +102,18 @@
             </fieldset>
           </form>
         </article>
+
+        <article class="account-access-card" id="account-authority-card" hidden>
+          <div class="account-card-kicker"><span class="account-orb" aria-hidden="true"></span><span>Autorité MODARYX</span></div>
+          <h3 id="account-authority-role">Compte membre</h3>
+          <p id="account-authority-summary">Les privilèges sont calculés côté serveur à partir de la session authentifiée.</p>
+          <ul class="feature-list" aria-label="Capacités du compte">
+            <li><span>01</span><div><strong>Administration</strong><small id="account-cap-admin">Non accordée.</small></div></li>
+            <li><span>02</span><div><strong>Modération</strong><small id="account-cap-moderation">Non accordée.</small></div></li>
+            <li><span>03</span><div><strong>Recours</strong><small id="account-cap-appeals">Non accordée.</small></div></li>
+            <li><span>04</span><div><strong>Infrastructure</strong><small>Les secrets Cloudflare, GitHub, DNS, Auth0 et fournisseurs ne sont jamais exposés au compte web.</small></div></li>
+          </ul>
+        </article>
       </div>
 
       <p class="account-console-note">En environnement non provisionné, cette console reste volontairement verrouillée. Une réponse locale, un cache ou une détection WebAuthn ne sont jamais interprétés comme une authentification réussie.</p>

@@ -48,6 +48,8 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 - **TERMINÉ — communauté distante ciblée** : ingestion, surface publique modérée, suivi auteur et recours.
 - **TERMINÉ — modération/publication/recours Provider DEV** : migration D1 0003, RBAC séparé, publication/retrait, recours/issue, receipts pseudonymisés.
 - Production reste distincte et non activée.
+- **EN COURS — compte Fondateur / Administrateur** : autorité serveur `modaryx:founder` / `modaryx:admin`, héritage administration + modération + recours et affichage same-origin intégrés sur la branche de preuve ; attribution réelle au compte Auth0 Fondateur et micro-preuves Preview restent requises avant fermeture.
+- Les rôles web n'exposent jamais automatiquement les secrets Cloudflare, GitHub, DNS/DNSSEC, Auth0, WeatherAPI ou clés privées de signature.
 
 ## 5. Passkeys
 
