@@ -51,6 +51,7 @@ La météo réelle est **désactivée par défaut** tant qu’un fournisseur et 
 L’adaptateur actuel sait normaliser Open-Meteo, mais son activation est conditionnée par `MODARYX_WEATHER_MODE` :
 
 - `off` — défaut ;
+- `weatherapi` — candidat commercial privilégié ; clé serveur obligatoire, attribution + disclaimer utilisateur ;
 - `open-meteo-noncommercial` — uniquement si l’usage non commercial et l’attribution sont réellement appropriés ;
 - `open-meteo-commercial` — nécessite une clé commerciale.
 
@@ -104,3 +105,17 @@ Décision courante :
 - aucun fournisseur, secret Cloudflare, GPS navigateur ou réglage d'infrastructure n'est activé par cette qualification.
 
 La couche saison + heure locale reste pleinement fonctionnelle sans météo réelle. Le blocker production reste **BLOQUÉ / décision externe**.
+
+
+### Readiness WeatherAPI — 21 septembre 2026
+
+Le runtime sait désormais préparer WeatherAPI sans l'activer :
+- proxy same-origin uniquement ;
+- clé serveur non exposée ;
+- coordonnées coarse arrondies ;
+- normalisation des conditions officielles WeatherAPI ;
+- attribution visible ;
+- disclaimer utilisateur live ;
+- fail-soft vers saison + heure locale si le fournisseur échoue ou n'est pas configuré.
+
+Cette readiness ne vaut ni compte fournisseur, ni secret Cloudflare, ni acceptation contractuelle, ni preuve production.
