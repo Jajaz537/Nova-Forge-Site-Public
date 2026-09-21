@@ -2029,3 +2029,59 @@ Candidat final #123 `3c266603ae9001052d77a88c66a64079377dcf7c` :
 3. Micro-prouver sans full replay : accès file, décision, surface publique/UI, retrait, suivi auteur, recours, file recours et issue.
 4. Restaurer les données de preuve dans un état non public et ne laisser aucune capacité temporaire.
 5. Canoniser seulement après preuve fournisseur réelle.
+
+## Mise à jour canonique — activation DEV modération / publication / recours — 21 septembre 2026
+
+Cette section est la lecture la plus récente pour l'activation fournisseur DEV du moteur de modération, publication et recours.
+
+### Git frais
+
+- Branche Work vérifiée : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work vérifié avant la preuve : `70c023a15525def9ead6ac8b6787389e7e6a62de`.
+- Work n'a effectué **aucune modification Git** pendant cette preuve fournisseur.
+- `main`, production, DNS/DNSSEC/nameservers : inchangés.
+- Aucun full replay final exécuté.
+
+### Activation fournisseur DEV réelle
+
+- Migration D1 `0003_modaryx_moderation_publication.sql` : **OK — DEV uniquement**.
+- Auth0 DEV RBAC : **OK**, avec permissions incluses dans l'access token.
+- Permissions réelles activées et prouvées :
+  - `community:moderate` ;
+  - `community:appeals-review`.
+- Session normale sur la modération : **HTTP 403 — `moderator-permission-required`**.
+- Session modérateur seule sur la revue de recours : **HTTP 403 — `appeals-review-permission-required`**.
+
+### Cycle réel publication → retrait → recours
+
+- Publication : **HTTP 200**, état `accepted / published / distributable=true` ; API et UI publiques validées.
+- Retrait : **HTTP 200**, état `held-for-review / withdrawn / distributable=false` ; surface publique vide.
+- Suivi auteur : **HTTP 200**, décision visible et recours disponible.
+- Dépôt du recours : **HTTP 201 — `submitted`**.
+- Issue du recours : **HTTP 200 — `upheld`** ; la contribution reste non publique.
+- Receipts D1 : chaîne **`decision → appeal → appeal-outcome`** vérifiée.
+- Aucun subject Auth0 brut n'est exposé dans les receipts.
+
+### Restauration et état final
+
+- Contribution de preuve restaurée dans un état **non public**.
+- Permissions élevées temporaires du compte retirées.
+- Session de preuve fermée.
+- Harness retiré : **HTTP 404**.
+- OAuth Wrangler déconnecté.
+- `/api/v1/status` final : **HTTP 200**, sain, `remoteWritesReady=true`.
+
+### État
+
+- **TERMINÉ — activation fournisseur DEV réelle du moteur modération / publication / recours avec micro-preuves bout-en-bout ciblées**.
+- **TERMINÉ — backend communautaire DEV ciblé sur ingestion, publication/retrait, suivi auteur et recours/issue**.
+- Cette fermeture ne vaut ni activation production, ni VF, ni 100 %.
+- Aucun full replay final encore exécuté.
+
+## Prochain point logique actualisé
+
+1. Ne pas rejouer ce cycle Provider DEV sans modification pertinente.
+2. Continuer sur les écarts produit réellement ouverts : passkey finale, signatures/attestations réelles, téléchargements/corpus autorisés, Storage Resolver, Repair Network, Guide MODARYX et pont Nova Forge OS.
+3. Fermer séparément les preuves humaines/externes encore manquantes.
+4. Garder la météo production bloquée tant que licence/confidentialité/attribution/disclaimer ne sont pas validés.
+5. Full replay unique uniquement à la toute fin, après fermeture des bloqueurs ciblés.
