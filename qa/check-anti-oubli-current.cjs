@@ -52,8 +52,9 @@ const requiredCurrent = [
   'UI compte / profil premium | **TERMINÉ — preuve ciblée de code**',
   'PASS_TARGETED_PROFILES_ACCOUNT_UI',
   'MODARYX-PROFILES-ACCOUNT-UI-20260920.md',
-  'Compte Fondateur / Administrateur MODARYX | **EN COURS — autorité serveur et UI intégrées ; attribution Auth0 réelle restante**',
+  'Compte Fondateur / Administrateur MODARYX | **EN COURS — compte Fondateur Auth0 DEV attribué ; preuves runtime privilégiées restantes**',
   'MODARYX-FOUNDER-ADMIN-ACCESS-20260921.md',
+  'MODARYX-FOUNDER-AUTH0-DEV-EVIDENCE-20260921.md',
   'UI communauté distante modérée | **TERMINÉ — envoi + surface publique + suivi/recours ciblés**',
   'PASS_TARGETED_COMMUNITY_REMOTE_UI',
   'MODARYX-COMMUNITY-REMOTE-UI-20260920.md',
@@ -227,7 +228,9 @@ assert.ok(checkpoint.includes('23 routes publiques'));
 assert.ok(checkpoint.includes('Provider DEV ciblé'));
 assert.ok(checkpoint.includes('EN COURS — compte Fondateur / Administrateur'));
 assert.ok(checkpoint.includes('modaryx:founder'));
-assert.ok(checkpoint.includes('attribution réelle au compte Auth0 Fondateur'));
+assert.ok(checkpoint.includes('Attribution réelle Auth0 DEV acquise'));
+assert.ok(checkpoint.includes('authority.role=founder'));
+assert.ok(checkpoint.includes('preuves runtime modération/recours restent manquantes'));
 assert.ok(checkpoint.includes('PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING'));
 assert.ok(checkpoint.includes('PREUVE MANQUANTE** — enrôlement, reconnexion et révocation sur appareil WebAuthn compatible'));
 assert.ok(checkpoint.includes('TERMINÉ — readiness WeatherAPI ciblée'));
