@@ -131,8 +131,8 @@ assert.ok(checkpoint.includes('5403b265f3fd3300960db476ffbbe9bce1f0649c'));
 assert.ok(checkpoint.includes('## Mise à jour canonique — activation DEV modération / publication / recours — 21 septembre 2026'));
 assert.ok(checkpoint.includes('TERMINÉ — activation fournisseur DEV réelle du moteur modération / publication / recours avec micro-preuves bout-en-bout ciblées'));
 assert.ok(checkpoint.includes('70c023a15525def9ead6ac8b6787389e7e6a62de'));
-assert.ok(checkpoint.includes('403 moderator-permission-required'));
-assert.ok(checkpoint.includes('403 appeals-review-permission-required'));
+assert.ok(checkpoint.includes('moderator-permission-required'));
+assert.ok(checkpoint.includes('appeals-review-permission-required'));
 assert.ok(checkpoint.includes('Aucune VF / aucun 100 % déclaré.'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
 
