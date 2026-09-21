@@ -2334,3 +2334,123 @@ Aucune preuve fournisseur ou appareil n'est déduite de ce run.
 4. Ne pas annoncer Storage Resolver, Repair Network, Guide ou pont OS comme connectés avant transport/service/runtime réels.
 5. Fermer séparément les preuves humaines/externes.
 6. Full replay unique uniquement à la toute fin.
+
+## Mise à jour canonique — batch Super Nova passkey / trust / transport — 21 septembre 2026
+
+Cette section est la lecture la plus récente pour le lot multi-lane regroupé dans la PR #130.
+
+### Git frais
+
+- Branche Work vérifiée avant écriture : `design/modaryx-premium-hd-20260914-work`.
+- HEAD Work vérifié : `d0be675e86b51174b834f6764fbbce40f56b67a9`.
+- Branche isolée : `feature/modaryx-supernova-batch-20260921`.
+- `main`, production, DNS/DNSSEC/nameservers : inchangés.
+- Aucun full replay final exécuté.
+
+### Passkey Auth0 DEV — fournisseur prêt, appareil manquant
+
+Work a vérifié le SHA `d0be675e86b51174b834f6764fbbce40f56b67a9` avant l'intervention fournisseur puis a confirmé :
+
+- Universal Login : actif ;
+- Custom Login Page : désactivée ;
+- Identifier First : actif ;
+- passkeys activées uniquement sur `Username-Password-Authentication` ;
+- récupération Auth0 disponible ;
+- personnalisation incompatible désactivée ;
+- configuration DEV finale saine ;
+- aucune configuration temporaire restante.
+
+Point d'arrêt réel :
+
+- aucun authentificateur de plateforme détecté dans le navigateur Work ;
+- aucun enrôlement passkey réel ;
+- reconnexion passkey non testable ;
+- révocation non testable sans passkey enrôlée.
+
+Document : `qa/MODARYX-PASSKEY-PROVIDER-DEV-EVIDENCE-20260921.md`.
+
+État :
+- **TERMINÉ — configuration fournisseur DEV requise pour les passkeys**.
+- **PREUVE MANQUANTE — cérémonie WebAuthn réelle sur appareil compatible, reconnexion, récupération et révocation**.
+
+### Trust anchors / signatures
+
+Le batch ajoute :
+
+- `schemas/trusted-signer-set.schema.json` ;
+- `data/trusted-signers.json` ;
+- `functions/_lib/trusted-signers.mjs` ;
+- `qa/MODARYX-TRUSTED-SIGNERS-GATE-20260921.md`.
+
+Le trust store public courant reste volontairement vide et fail-closed :
+
+- `state = no-trust-anchor-published` ;
+- `signers = []`.
+
+Une attestation ne peut devenir fiable que si la clé publique est explicitement approuvée, dans sa fenêtre de validité, non révoquée et cohérente avec l'algorithme/fingerprint de l'attestation.
+
+Marker :
+- `PASS_TARGETED_TRUSTED_SIGNER_GATE`.
+
+État :
+- **TERMINÉ — gate de trust anchors ciblé**.
+- **EN COURS — signer réel, trust anchor public réel, rotation/révocation opérationnelle et artefact signé réel**.
+
+### Storage Resolver / Repair — transport vérifié
+
+Le batch ajoute :
+
+- `functions/_lib/storage-transport.mjs` ;
+- `qa/MODARYX-STORAGE-TRANSPORT-PRIMITIVE-20260921.md`.
+
+La primitive :
+
+- accepte HTTPS uniquement ;
+- n'envoie ni credentials ni referrer ;
+- impose des limites d'octets ;
+- calcule SHA-256 sur les octets réellement reçus ;
+- vérifie séparément manifeste et artefact ;
+- échoue fermement sur digest divergent ;
+- produit une observation exploitable par le moteur décisionnel déjà livré.
+
+Marker :
+- `PASS_TARGETED_STORAGE_TRANSPORT_PRIMITIVE`.
+
+État :
+- **TERMINÉ — primitive de transport vérifié ciblée**.
+- **EN COURS — endpoints/origines Storage réels et exécution Repair distante réelle**.
+
+### Preuve source du lot
+
+Candidat code initial : `70fa740aedd87feb126e4be1612dbe67e1a173cb`.
+
+Workflow `MODARYX Site First Targeted Source Proof` :
+- run `35610823157` — **success**.
+
+Ce run valide notamment :
+- `PASS_TARGETED_TRUSTED_SIGNER_GATE` ;
+- `PASS_TARGETED_STORAGE_TRANSPORT_PRIMITIVE` ;
+- les moteurs signature/trust, Storage/Repair, Guide/pont et passkey déjà présents dans la lane ;
+- les autres preuves source ciblées existantes.
+
+Cette preuve ne transforme ni le trust store vide en signer réel, ni le transport injecté en endpoint distant réel, ni la configuration Auth0 en cérémonie passkey appareil.
+
+### État honnête après ce batch
+
+- **TERMINÉ — configuration passkey Provider DEV**.
+- **PREUVE MANQUANTE — vraie cérémonie passkey appareil**.
+- **TERMINÉ — trust-anchor gate source ciblé**.
+- **TERMINÉ — transport HTTPS + digest source ciblé**.
+- **EN COURS — signer/trust anchor de production**.
+- **EN COURS — Storage Resolver / Repair Network réels**.
+- **EN COURS — Guide MODARYX réel et runtime pont Nova Forge OS réel**.
+- Aucune VF / aucun 100 % déclaré.
+
+## Prochain point logique actualisé
+
+1. Faire la preuve passkey sur appareil réel compatible sans utiliser davantage Work pour ce point.
+2. Continuer ici les lanes signer/trust, Storage/Repair, Guide et pont OS tant qu'un travail réel peut être fermé sans fournisseur externe.
+3. Regrouper les prochains changements en lots multi-lane quand leurs dépendances sont indépendantes, plutôt qu'en micro-PR systématiques.
+4. Ne pas déverrouiller les téléchargements sans artefact autorisé, droits, provenance, trust anchor et signature réelle lorsqu'elle est requise.
+5. Fermer séparément les preuves humaines/externes.
+6. Full replay unique uniquement à la toute fin.

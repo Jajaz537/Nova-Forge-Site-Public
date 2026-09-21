@@ -22,12 +22,12 @@ const requiredCurrent = [
   'PASS_TARGETED_FIREFOX_23_ROUTE_PROOF',
   'WebKit 23 routes — préflight | **TERMINÉ — preuve ciblée moteur**',
   'PASS_TARGETED_WEBKIT_23_ROUTE_PREFLIGHT',
-  'Storage Resolver | **EN COURS — contrat + moteur décisionnel acquis ; service/transport non connecté**',
-  'Repair Network | **EN COURS — protocole + moteur décisionnel acquis ; exécution distante non connectée**',
+  'Storage Resolver | **EN COURS — contrat + décision + transport vérifié acquis ; service distant non connecté**',
+  'Repair Network | **EN COURS — protocole + décision + transport vérifié acquis ; exécution distante non connectée**',
   'PASS_TARGETED_STORAGE_REPAIR_CONTRACTS',
-  'Signatures / attestations de provenance | **EN COURS — contrat + moteur de vérification acquis ; signer réel non connecté**',
+  'Signatures / attestations de provenance | **EN COURS — vérification + trust-anchor gate acquis ; signer réel non connecté**',
   'PASS_TARGETED_PROVENANCE_RECEIPT_CONTRACTS',
-  'Comptes / authentification / passkeys réels | **EN COURS — préparation source passkey finale acquise ; cérémonie provider/appareil réelle non prouvée**',
+  'Comptes / authentification / passkeys réels | **PREUVE MANQUANTE — appareil réel requis ; Provider DEV configuré**',
   'Profils publics éditables | **TERMINÉ — parcours DEV bout-en-bout ciblé**',
   'Publication / modération distante | **TERMINÉ — cycle Provider DEV bout-en-bout ciblé**',
   'PASS_TARGETED_ACCOUNT_COMMUNITY_CONTRACTS',
@@ -69,6 +69,11 @@ const requiredCurrent = [
   'MODARYX-STORAGE-REPAIR-DECISION-ENGINE-20260921.md',
   'PASS_TARGETED_INTEGRATION_CONSENT_ENGINE',
   'MODARYX-INTEGRATION-CONSENT-ENGINE-20260921.md',
+  'PASS_TARGETED_TRUSTED_SIGNER_GATE',
+  'MODARYX-TRUSTED-SIGNERS-GATE-20260921.md',
+  'PASS_TARGETED_STORAGE_TRANSPORT_PRIMITIVE',
+  'MODARYX-STORAGE-TRANSPORT-PRIMITIVE-20260921.md',
+  'MODARYX-PASSKEY-PROVIDER-DEV-EVIDENCE-20260921.md',
   'PASS_TARGETED_MODERATION_PUBLICATION_ENGINE',
   'MODARYX-MODERATION-PUBLICATION-ENGINE-20260921.md',
   '403 turnstile-rejected',
@@ -101,14 +106,18 @@ const forbiddenCurrent = [
   'Repair Network | **EN COURS — protocole contractuel acquis, exécution distante non connectée**',
   'Signatures / attestations de provenance | **EN COURS — contrat d’attestation/signature acquis ; signer réel non connecté**',
   'Guide MODARYX connecté | **EN COURS — contrat de connexion acquis ; service réel non connecté**',
-  'Pont Nova Forge OS | **EN COURS — contrat de pont acquis ; runtime OS non connecté**'
+  'Pont Nova Forge OS | **EN COURS — contrat de pont acquis ; runtime OS non connecté**',
+  'Comptes / authentification / passkeys réels | **EN COURS — préparation source passkey finale acquise ; cérémonie provider/appareil réelle non prouvée**',
+  'Storage Resolver | **EN COURS — contrat + moteur décisionnel acquis ; service/transport non connecté**',
+  'Repair Network | **EN COURS — protocole + moteur décisionnel acquis ; exécution distante non connectée**',
+  'Signatures / attestations de provenance | **EN COURS — contrat + moteur de vérification acquis ; signer réel non connecté**'
 ];
 for (const token of forbiddenCurrent) assert.ok(!ledger.includes(token), 'stale current state returned: ' + token);
 
 const expectedOpen = new Map([
   ['Météo réelle production', 'BLOQUÉ'],
   ['Validation artistique humaine finale', 'PREUVE MANQUANTE'],
-  ['Comptes / authentification / passkeys réels', 'EN COURS'],
+  ['Comptes / authentification / passkeys réels', 'PREUVE MANQUANTE'],
   ['Signatures / attestations de provenance', 'EN COURS'],
   ['Téléchargements publics réels', 'BLOQUÉ'],
   ['Corpus réels de mods GTA VI / RDR2', 'EN COURS'],
@@ -168,6 +177,12 @@ assert.ok(checkpoint.includes('PASS_TARGETED_STORAGE_REPAIR_DECISION_ENGINE'));
 assert.ok(checkpoint.includes('PASS_TARGETED_INTEGRATION_CONSENT_ENGINE'));
 assert.ok(checkpoint.includes('35607369026'));
 assert.ok(checkpoint.includes('cd21d60f2ee6dc00b3b70f2bd46a616e4d52fa30'));
+assert.ok(checkpoint.includes('## Mise à jour canonique — batch Super Nova passkey / trust / transport — 21 septembre 2026'));
+assert.ok(checkpoint.includes('PREUVE MANQUANTE — cérémonie WebAuthn réelle sur appareil compatible, reconnexion, récupération et révocation'));
+assert.ok(checkpoint.includes('PASS_TARGETED_TRUSTED_SIGNER_GATE'));
+assert.ok(checkpoint.includes('PASS_TARGETED_STORAGE_TRANSPORT_PRIMITIVE'));
+assert.ok(checkpoint.includes('35610823157'));
+assert.ok(checkpoint.includes('d0be675e86b51174b834f6764fbbce40f56b67a9'));
 assert.ok(checkpoint.includes('Aucune VF / aucun 100 % déclaré.'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
 

@@ -12,6 +12,11 @@ on:
       - 'qa/check-provenance-receipt-contracts.cjs'
       - 'qa/check-signature-attestation-contract.cjs'
       - 'qa/check-signature-verification-engine.mjs'
+      - 'qa/check-trusted-signers-gate.mjs'
+      - 'qa/MODARYX-TRUSTED-SIGNERS-GATE-20260921.md'
+      - 'qa/check-storage-transport-primitive.mjs'
+      - 'qa/MODARYX-STORAGE-TRANSPORT-PRIMITIVE-20260921.md'
+      - 'qa/MODARYX-PASSKEY-PROVIDER-DEV-EVIDENCE-20260921.md'
       - 'qa/MODARYX-SIGNATURE-VERIFICATION-ENGINE-20260921.md'
       - 'qa/check-storage-repair-decision-engine.mjs'
       - 'qa/MODARYX-STORAGE-REPAIR-DECISION-ENGINE-20260921.md'
@@ -53,6 +58,8 @@ on:
       - 'schemas/repair-network.schema.json'
       - 'schemas/publication-receipt.schema.json'
       - 'schemas/signature-attestation.schema.json'
+      - 'schemas/trusted-signer-set.schema.json'
+      - 'data/trusted-signers.json'
       - 'schemas/modaryx-guide-connection.schema.json'
       - 'schemas/nova-forge-os-bridge.schema.json'
       - 'schemas/moderation-receipt.schema.json'
@@ -89,6 +96,11 @@ on:
       - 'qa/check-provenance-receipt-contracts.cjs'
       - 'qa/check-signature-attestation-contract.cjs'
       - 'qa/check-signature-verification-engine.mjs'
+      - 'qa/check-trusted-signers-gate.mjs'
+      - 'qa/MODARYX-TRUSTED-SIGNERS-GATE-20260921.md'
+      - 'qa/check-storage-transport-primitive.mjs'
+      - 'qa/MODARYX-STORAGE-TRANSPORT-PRIMITIVE-20260921.md'
+      - 'qa/MODARYX-PASSKEY-PROVIDER-DEV-EVIDENCE-20260921.md'
       - 'qa/MODARYX-SIGNATURE-VERIFICATION-ENGINE-20260921.md'
       - 'qa/check-storage-repair-decision-engine.mjs'
       - 'qa/MODARYX-STORAGE-REPAIR-DECISION-ENGINE-20260921.md'
@@ -130,6 +142,8 @@ on:
       - 'schemas/repair-network.schema.json'
       - 'schemas/publication-receipt.schema.json'
       - 'schemas/signature-attestation.schema.json'
+      - 'schemas/trusted-signer-set.schema.json'
+      - 'data/trusted-signers.json'
       - 'schemas/modaryx-guide-connection.schema.json'
       - 'schemas/nova-forge-os-bridge.schema.json'
       - 'schemas/moderation-receipt.schema.json'
@@ -224,6 +238,18 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-signature-verification-engine.mjs
+
+      - name: Run targeted trusted signer gate proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-trusted-signers-gate.mjs
+
+      - name: Run targeted storage transport primitive proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-storage-transport-primitive.mjs
 
       - name: Run targeted storage repair decision engine proof
         shell: bash

@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:modaryx:schemas:trusted-signer-set:v1",
+  "title": "MODARYX Trusted Signer Set",
+  "description": "Public trust-anchor registry for signature verification. It contains public verification material only; private keys are forbidden.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "state",
+    "updatedAt",
+    "signers"
+  ],
+  "properties": {
+    "schema": {
+      "const": "modaryx-trusted-signers/v1"
+    },
+    "state": {
+      "enum": [
+        "no-trust-anchor-published",
+        "active"
+      ]
+    },
+    "updatedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "signers": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "keyId",
+          "algorithm",
+          "publicKeyFingerprintSha256",
+          "publicKeyJwk",
+          "status",
+          "validFrom",
+          "validUntil"
+        ],
+        "properties": {
+          "keyId": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 160
+          },
+          "algorithm": {
+            "enum": [
+              "ES256",
+              "EdDSA"
+            ]
+          },
+          "publicKeyFingerprintSha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "publicKeyJwk": {
+            "type": "object",
+            "minProperties": 3,
+            "maxProperties": 12
+          },
+          "status": {
+            "enum": [
+              "active",
+              "revoked"
+            ]
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "revokedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "revocationReason": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 500
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "revoked"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "revokedAt"
+              ],
+              "properties": {
+                "revocationReason": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "no-trust-anchor-published"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "signers": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "active"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "signers": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}
