@@ -157,6 +157,8 @@ assert('weather provider defaults off',functionSource.includes("MODARYX_WEATHER_
 assert('WeatherAPI provider mode exists',functionSource.includes("mode === 'weatherapi'")&&functionSource.includes('https://api.weatherapi.com/v1/current.json'));
 assert('WeatherAPI key is server-side env only',functionSource.includes('MODARYX_WEATHER_API_KEY')&&!fs.readFileSync(new URL('../assets/real-world-sync.mjs',import.meta.url),'utf8').includes('MODARYX_WEATHER_API_KEY'));
 assert('WeatherAPI provider requires key',functionSource.includes('weatherModeRequiresKey(mode)'));
+assert('weather provider fetch has bounded timeout',functionSource.includes('WEATHER_PROVIDER_TIMEOUT_MS = 3500')&&functionSource.includes('AbortSignal.timeout(WEATHER_PROVIDER_TIMEOUT_MS)'));
+assert('weather provider timeout stays fail-soft',functionSource.includes("reason: 'provider-timeout'"));
 assert('WeatherAPI disables AQI payload',functionSource.includes("url.searchParams.set('aqi', 'no')"));
 assert('provider coordinates are rounded before weather request',functionSource.includes('providerCoordinates.latitude'));
 assert('wind visual layer exists',weatherCss.includes('data-local-weather=wind')&&weatherCss.includes('mx-wind-sweep'));

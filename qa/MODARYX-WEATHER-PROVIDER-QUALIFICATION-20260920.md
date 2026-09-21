@@ -146,6 +146,7 @@ Readiness locale ajoutée sans activation :
 - disclaimer météo utilisateur inclus avec les données WeatherAPI live ;
 - aucune donnée `location` du fournisseur n'est renvoyée au navigateur ;
 - mode par défaut toujours `off`.
+- timeout fournisseur borné à 3,5 s côté serveur ; dépassement → `weather.status=unavailable`, `reason=provider-timeout`, sans bloquer saison + heure locale ;
 
 État : **TERMINÉ — readiness WeatherAPI en code ciblé ; BLOQUÉ — compte/clé/acceptation contractuelle et preuve réelle non fournis**.
 
