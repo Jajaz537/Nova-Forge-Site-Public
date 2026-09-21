@@ -69,6 +69,14 @@ Le backend vérifie des access tokens RS256 via JWKS et impose :
 
 La présence du code ne signifie pas qu'un tenant Auth0 existe.
 
+RBAC produit attendu en DEV :
+- `community:moderate` pour la modération ;
+- `community:appeals-review` pour la revue des recours ;
+- `modaryx:admin` pour l'administration courante ;
+- `modaryx:founder` pour le compte Fondateur.
+
+Le moteur serveur MODARYX applique l'héritage des capacités. Auth0 fournit les permissions racines ; il ne donne jamais accès aux secrets d'infrastructure.
+
 ## Turnstile
 
 Toute future écriture distante protégée doit appeler Siteverify côté serveur.
@@ -145,9 +153,11 @@ Avant toute activation distante :
 11. appliquer 0003 sur D1 DEV avant d'activer le moteur de modération ;
 12. activer RBAC Auth0 DEV et la permission `community:moderate` pour le compte modérateur de preuve ;
 13. attribuer séparément `community:appeals-review` au compte de revue des recours ;
-14. micro-prouver file → décision → publication publique → retrait ;
-15. micro-prouver suivi auteur → recours → file recours → issue `upheld/modified/reversed` avec receipts chaînés ;
-16. seulement après preuve, planifier production.
+14. définir `modaryx:admin` et `modaryx:founder` dans l'API Auth0 DEV ; attribuer `modaryx:founder` uniquement au compte Fondateur DEV prévu ;
+15. renouveler la session Fondateur et vérifier `authority.role=founder` ainsi que les capacités administration/modération/recours sans exposer les permissions sensibles ni les secrets ;
+16. micro-prouver file → décision → publication publique → retrait ;
+17. micro-prouver suivi auteur → recours → file recours → issue `upheld/modified/reversed` avec receipts chaînés ;
+18. seulement après preuve, planifier production.
 
 Aucun DNS/DNSSEC/nameserver n'est requis pour cette fondation.
 
