@@ -24,6 +24,8 @@ function weatherModeRequiresKey(mode) {
   return mode === 'weatherapi' || mode === 'open-meteo-commercial';
 }
 
+const WEATHER_PROVIDER_TIMEOUT_MS = 3500;
+
 async function fetchWeather(context, coarse) {
   const mode = context.env?.MODARYX_WEATHER_MODE || 'off';
   const endpoint = weatherEndpoint(mode);
@@ -57,14 +59,18 @@ async function fetchWeather(context, coarse) {
 
   try {
     const response = await fetch(url, {
-      headers: {'accept': 'application/json'}
+      headers: {'accept': 'application/json'},
+      signal: AbortSignal.timeout(WEATHER_PROVIDER_TIMEOUT_MS)
     });
     if (!response.ok) return {status: 'unavailable', reason: 'provider-http-' + response.status};
     const payload = await response.json();
     return mode === 'weatherapi'
       ? normalizeWeatherApiCurrent(payload)
       : normalizeOpenMeteoCurrent(payload);
-  } catch {
+  } catch (error) {
+    if (error?.name === 'TimeoutError' || error?.name === 'AbortError') {
+      return {status: 'unavailable', reason: 'provider-timeout'};
+    }
     return {status: 'unavailable', reason: 'provider-fetch-failed'};
   }
 }
