@@ -28,7 +28,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Preview HTTPS environnement + compagnons | **TERMINÉ — preuve ciblée déployée** | Run `35483330153`, desktop + mobile + reduced-motion. |
 | Reduced motion monde vivant | **TERMINÉ — preuve ciblée déployée** | Animations/transitions neutralisées dans le cas réduit. |
 | Saison + heure locale via contexte grossier | **TERMINÉ — preuve ciblée déployée** | Reality sync `cloudflare-coarse` observé avec saison/daypart. |
-| Météo réelle production | **BLOQUÉ / décision externe — qualification fournisseur réalisée** | WeatherAPI = candidat privilégié non activé via proxy same-origin/secret serveur ; Open-Meteo Free = non commercial ; OpenWeather ouvert = attribution + ShareAlike. Activation toujours conditionnée à validation licence/confidentialité/attribution/disclaimer et preuve réelle. |
+| Météo réelle production | **BLOQUÉ / activation externe — readiness WeatherAPI acquise** | Mode `weatherapi` préparé côté proxy same-origin avec clé serveur obligatoire, normalisation, attribution et disclaimer ; marker ciblé `PASS_TARGETED_WEATHERAPI_READINESS`. Aucun compte/secret/fournisseur réel activé. Activation toujours conditionnée à acceptation des conditions, validation confidentialité/juridique et micro-proof réel. |
 | Validation artistique humaine finale | **PREUVE MANQUANTE** | Les captures techniques ne remplacent pas le jugement humain final sur composition/cadrage. |
 
 ## 3. Capacités locales déjà prouvées
