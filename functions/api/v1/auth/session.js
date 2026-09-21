@@ -1,5 +1,6 @@
 import {json} from '../../../_lib/api-security.mjs';
 import {getSessionIdentity} from '../../../_lib/auth-session.mjs';
+import {publicAuthoritySummary} from '../../../_lib/access-control.mjs';
 
 export async function onRequestGet(context) {
   const db = context.env?.MODARYX_DB;
@@ -14,6 +15,7 @@ export async function onRequestGet(context) {
 
   return json({
     authenticated:true,
+    authority:publicAuthoritySummary(identity),
     profile:profile ? {
       profileId:profile.profile_id,
       handle:profile.handle,
