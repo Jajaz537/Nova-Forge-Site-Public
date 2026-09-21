@@ -80,6 +80,8 @@ const requiredCurrent = [
   'PASS_TARGETED_INTEGRATION_DISCOVERY_RUNTIME',
   'MODARYX-INTEGRATION-DISCOVERY-RUNTIME-20260921.md',
   'MODARYX-PASSKEY-PROVIDER-DEV-EVIDENCE-20260921.md',
+  'PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING',
+  'MODARYX-RUNTIME-RESILIENCE-HARDENING-20260921.md',
   'PASS_TARGETED_MODERATION_PUBLICATION_ENGINE',
   'MODARYX-MODERATION-PUBLICATION-ENGINE-20260921.md',
   '403 turnstile-rejected',
@@ -197,6 +199,10 @@ assert.ok(checkpoint.includes('PASS_TARGETED_INTEGRATION_DISCOVERY_RUNTIME'));
 assert.ok(checkpoint.includes('35630267754'));
 assert.ok(checkpoint.includes('cb5ecbac68a88a6feb1f0fe516b12f0349284d4a'));
 assert.ok(checkpoint.includes('89e31e938b2eec2b6e3af3ea5679ead1d2b770a2'));
+assert.ok(checkpoint.includes('## Mise à jour canonique — PR #132 — durcissement résilience runtime — 21 septembre 2026'));
+assert.ok(checkpoint.includes('PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING'));
+assert.ok(checkpoint.includes('35631864195'));
+assert.ok(checkpoint.includes('9bd769e927bc07ff5ea2cd40054cfdec0c30f610'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin.'));
 
 const openRows = tableLines.filter(line => /\*\*(?:EN COURS|BLOQUÉ|PREUVE MANQUANTE)/.test(line));

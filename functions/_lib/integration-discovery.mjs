@@ -14,16 +14,31 @@ function uniqueCapabilities(values,max=16){
   return out;
 }
 
+function unsafeRemoteHostname(hostname){
+  const host=hostname.toLowerCase().replace(/^\[|\]$/g,'');
+  if(host==='localhost' || host.endsWith('.localhost') || host.endsWith('.local')) return true;
+  if(host.includes(':') && (host==='::1' || host.startsWith('fe80:') || host.startsWith('fc') || host.startsWith('fd'))) return true;
+  const parts=host.split('.');
+  if(parts.length===4 && parts.every(part=>/^\d{1,3}$/.test(part) && Number(part)<=255)){
+    const [a,b]=parts.map(Number);
+    if(a===0 || a===10 || a===127) return true;
+    if(a===169 && b===254) return true;
+    if(a===172 && b>=16 && b<=31) return true;
+    if(a===192 && b===168) return true;
+  }
+  return false;
+}
+
 function safeEndpoint(value,{local=false}={}){
   if(typeof value!=='string' || !value.trim()) return null;
   try{
     const url=new URL(value.trim());
     if(url.username || url.password || url.hash) return null;
+    const loopback=url.hostname==='localhost'||url.hostname==='127.0.0.1'||url.hostname==='[::1]';
     if(local){
-      const loopback=url.hostname==='localhost'||url.hostname==='127.0.0.1'||url.hostname==='[::1]';
       if(url.protocol!=='https:' && !(url.protocol==='http:'&&loopback)) return null;
-    }else if(url.protocol!=='https:'){
-      return null;
+    }else{
+      if(url.protocol!=='https:' || unsafeRemoteHostname(url.hostname)) return null;
     }
     return url;
   }catch{
@@ -67,35 +82,65 @@ async function readJsonBounded(response,maxBytes){
   }
 }
 
-async function probe({endpointUri,local,fetchImpl,maxBytes=64*1024}){
+async function probe({endpointUri,local,fetchImpl,maxBytes=64*1024,timeoutMs=5000}){
   const endpoint=safeEndpoint(endpointUri,{local});
   if(!endpoint) return {ok:false,reason:'discovery-endpoint-invalid'};
-  let response;
-  try{
-    response=await fetchImpl(endpoint,{
-      method:'GET',
-      redirect:'error',
-      credentials:'omit',
-      referrerPolicy:'no-referrer',
-      headers:{accept:'application/json'}
-    });
-  }catch{
-    return {ok:false,reason:'discovery-unavailable'};
+  if(!Number.isSafeInteger(timeoutMs) || timeoutMs<10 || timeoutMs>30000){
+    return {ok:false,reason:'discovery-timeout-invalid'};
   }
-  if(!response?.ok) return {ok:false,reason:'discovery-http-'+String(response?.status||0)};
-  const parsed=await readJsonBounded(response,maxBytes);
-  return parsed.ok ? {ok:true,endpointUri:endpoint.href,value:parsed.value} : parsed;
+
+  const controller=new AbortController();
+  let timedOut=false;
+  let timerId=null;
+
+  const operation=(async()=>{
+    let response;
+    try{
+      response=await fetchImpl(endpoint,{
+        method:'GET',
+        redirect:'error',
+        credentials:'omit',
+        referrerPolicy:'no-referrer',
+        headers:{accept:'application/json'},
+        signal:controller.signal
+      });
+    }catch{
+      return {ok:false,reason:timedOut?'discovery-timeout':'discovery-unavailable'};
+    }
+    if(!response?.ok) return {ok:false,reason:'discovery-http-'+String(response?.status||0)};
+    try{
+      const parsed=await readJsonBounded(response,maxBytes);
+      return parsed.ok ? {ok:true,endpointUri:endpoint.href,value:parsed.value} : parsed;
+    }catch{
+      return {ok:false,reason:timedOut?'discovery-timeout':'discovery-read-failed'};
+    }
+  })();
+
+  const timeout=new Promise(resolve=>{
+    timerId=setTimeout(()=>{
+      timedOut=true;
+      try{controller.abort();}catch{}
+      resolve({ok:false,reason:'discovery-timeout'});
+    },timeoutMs);
+  });
+
+  try{
+    return await Promise.race([operation,timeout]);
+  }finally{
+    if(timerId!==null) clearTimeout(timerId);
+  }
 }
 
 export async function discoverGuideService({
   endpointUri,
   requestedScopes=[],
   fetchImpl=fetch,
-  maxBytes=64*1024
+  maxBytes=64*1024,
+  timeoutMs=5000
 }={}){
   const requested=uniqueCapabilities(requestedScopes);
   if(!requested) return {ok:false,reason:'guide-requested-scopes-invalid'};
-  const response=await probe({endpointUri,local:false,fetchImpl,maxBytes});
+  const response=await probe({endpointUri,local:false,fetchImpl,maxBytes,timeoutMs});
   if(!response.ok) return response;
   const data=response.value;
   if(data?.schema!=='modaryx-guide-discovery/v1' || data?.product!=='modaryx-guide' || data?.state!=='available'){
@@ -136,11 +181,12 @@ export async function discoverNovaForgeBridge({
   localEndpointUri,
   requestedPermissions=[],
   fetchImpl=fetch,
-  maxBytes=64*1024
+  maxBytes=64*1024,
+  timeoutMs=5000
 }={}){
   const requested=uniqueCapabilities(requestedPermissions);
   if(!requested) return {ok:false,reason:'os-bridge-requested-permissions-invalid'};
-  const response=await probe({endpointUri:localEndpointUri,local:true,fetchImpl,maxBytes});
+  const response=await probe({endpointUri:localEndpointUri,local:true,fetchImpl,maxBytes,timeoutMs});
   if(!response.ok) return response;
   const data=response.value;
   if(

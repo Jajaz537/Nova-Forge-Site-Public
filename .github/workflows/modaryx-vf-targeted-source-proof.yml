@@ -21,6 +21,8 @@ on:
       - 'qa/check-storage-repair-decision-engine.mjs'
       - 'qa/MODARYX-STORAGE-REPAIR-DECISION-ENGINE-20260921.md'
       - 'qa/check-integration-consent-engine.mjs'
+      - 'qa/check-runtime-resilience-hardening.mjs'
+      - 'qa/MODARYX-RUNTIME-RESILIENCE-HARDENING-20260921.md'
       - 'qa/MODARYX-INTEGRATION-CONSENT-ENGINE-20260921.md'
       - 'qa/MODARYX-SIGNATURE-ATTESTATION-CONTRACT-20260921.md'
       - 'qa/check-guide-os-bridge-contracts.cjs'
@@ -105,6 +107,8 @@ on:
       - 'qa/check-storage-repair-decision-engine.mjs'
       - 'qa/MODARYX-STORAGE-REPAIR-DECISION-ENGINE-20260921.md'
       - 'qa/check-integration-consent-engine.mjs'
+      - 'qa/check-runtime-resilience-hardening.mjs'
+      - 'qa/MODARYX-RUNTIME-RESILIENCE-HARDENING-20260921.md'
       - 'qa/MODARYX-INTEGRATION-CONSENT-ENGINE-20260921.md'
       - 'qa/MODARYX-SIGNATURE-ATTESTATION-CONTRACT-20260921.md'
       - 'qa/check-guide-os-bridge-contracts.cjs'
@@ -280,6 +284,12 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-integration-discovery-runtime.mjs
+
+      - name: Run targeted runtime resilience hardening proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-runtime-resilience-hardening.mjs
 
       - name: Run targeted Guide and OS bridge contract proof
         shell: bash

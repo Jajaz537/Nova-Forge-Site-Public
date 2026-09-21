@@ -1,6 +1,45 @@
 import {verifySignatureAttestation} from './attestation.mjs';
 
 const SHA256_RE=/^[a-f0-9]{64}$/;
+const B64URL_RE=/^[A-Za-z0-9_-]+$/;
+const PRIVATE_JWK_FIELDS=['d','p','q','dp','dq','qi','oth','k'];
+
+function b64urlByteLength(value){
+  if(typeof value!=='string' || !value || !B64URL_RE.test(value)) return null;
+  try{
+    const normalized=value.replace(/-/g,'+').replace(/_/g,'/');
+    const padded=normalized+'='.repeat((4-normalized.length%4)%4);
+    return atob(padded).length;
+  }catch{
+    return null;
+  }
+}
+
+function validPublicJwk(jwk,algorithm){
+  if(!jwk || typeof jwk!=='object' || Array.isArray(jwk)) return false;
+  if(PRIVATE_JWK_FIELDS.some(field=>Object.prototype.hasOwnProperty.call(jwk,field))) return false;
+  if(jwk.use!==undefined && jwk.use!=='sig') return false;
+  if(jwk.key_ops!==undefined){
+    if(!Array.isArray(jwk.key_ops) || !jwk.key_ops.length) return false;
+    if(jwk.key_ops.some(operation=>operation!=='verify')) return false;
+  }
+
+  if(algorithm==='ES256'){
+    if(jwk.kty!=='EC' || jwk.crv!=='P-256') return false;
+    if(b64urlByteLength(jwk.x)!==32 || b64urlByteLength(jwk.y)!==32) return false;
+    if(jwk.alg!==undefined && jwk.alg!=='ES256') return false;
+    return true;
+  }
+
+  if(algorithm==='EdDSA'){
+    if(jwk.kty!=='OKP' || jwk.crv!=='Ed25519') return false;
+    if(b64urlByteLength(jwk.x)!==32) return false;
+    if(jwk.alg!==undefined && jwk.alg!=='EdDSA') return false;
+    return true;
+  }
+
+  return false;
+}
 
 function validDate(value){
   return typeof value==='string' && Number.isFinite(Date.parse(value));
@@ -11,12 +50,16 @@ function normalizeSigner(item){
   if(typeof item.keyId!=='string' || item.keyId.trim().length<3 || item.keyId.trim().length>160) return null;
   if(!['ES256','EdDSA'].includes(item.algorithm)) return null;
   if(!SHA256_RE.test(item.publicKeyFingerprintSha256||'')) return null;
-  if(!item.publicKeyJwk || typeof item.publicKeyJwk!=='object' || Array.isArray(item.publicKeyJwk)) return null;
+  if(!validPublicJwk(item.publicKeyJwk,item.algorithm)) return null;
   if(!['active','revoked'].includes(item.status)) return null;
   if(!validDate(item.validFrom)) return null;
   if(item.validUntil!==null && item.validUntil!==undefined && !validDate(item.validUntil)) return null;
+  const validFromMs=Date.parse(item.validFrom);
+  const validUntilMs=item.validUntil ? Date.parse(item.validUntil) : null;
+  if(validUntilMs!==null && validUntilMs<=validFromMs) return null;
   if(item.status==='revoked'){
     if(!validDate(item.revokedAt)) return null;
+    if(Date.parse(item.revokedAt)<validFromMs) return null;
     if(typeof item.revocationReason!=='string' || !item.revocationReason.trim()) return null;
   }
   return {
@@ -38,6 +81,12 @@ export function normalizeTrustedSignerSet(input){
   }
   if(!['no-trust-anchor-published','active'].includes(input.state)) {
     return {ok:false,reason:'trusted-signer-state-invalid'};
+  }
+  if(input.updatedAt!==null && input.updatedAt!==undefined && !validDate(input.updatedAt)){
+    return {ok:false,reason:'trusted-signer-updated-at-invalid'};
+  }
+  if(input.state==='active' && !validDate(input.updatedAt)){
+    return {ok:false,reason:'trusted-signer-updated-at-required'};
   }
   if(!Array.isArray(input.signers) || input.signers.length>64) {
     return {ok:false,reason:'trusted-signer-list-invalid'};
