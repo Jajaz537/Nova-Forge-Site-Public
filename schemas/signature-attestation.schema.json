@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:modaryx:schemas:signature-attestation:v1",
+  "title": "MODARYX Provider-Neutral Signature Attestation",
+  "description": "Detached signature attestation for a manifest, artifact or publication receipt. The record carries verification metadata only and must never contain private key material.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "attestationId",
+    "subject",
+    "signer",
+    "signature",
+    "signedAt",
+    "verification",
+    "privateKeyMaterialPresent"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "attestationId": {
+      "type": "string",
+      "pattern": "^attestation:[a-z0-9][a-z0-9._:-]{7,191}$"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "subjectId",
+        "sha256"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "manifest",
+            "artifact",
+            "publication-receipt"
+          ]
+        },
+        "subjectId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 200
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "signer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "keyId",
+        "algorithm",
+        "publicKeyFingerprintSha256"
+      ],
+      "properties": {
+        "keyId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "algorithm": {
+          "enum": [
+            "ES256",
+            "EdDSA"
+          ]
+        },
+        "publicKeyFingerprintSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{40,1024}$"
+    },
+    "signedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "verifiedAt",
+        "reason"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "unverified",
+            "verified",
+            "failed",
+            "revoked"
+          ]
+        },
+        "verifiedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        }
+      }
+    },
+    "privateKeyMaterialPresent": {
+      "const": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "verification": {
+            "properties": {
+              "state": {
+                "const": "verified"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "verification": {
+            "properties": {
+              "verifiedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verification": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "failed",
+                  "revoked"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "verification": {
+            "properties": {
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

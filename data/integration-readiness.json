@@ -130,7 +130,8 @@
       "state": "distribution-locked",
       "contractPaths": [
         "./downloads.json",
-        "./schemas/publication-receipt.schema.json"
+        "./schemas/publication-receipt.schema.json",
+        "./schemas/signature-attestation.schema.json"
       ],
       "requiredInputs": [
         "Artefact autorisé",
@@ -153,11 +154,13 @@
       "id": "integrations.guide-os-bridge",
       "state": "not-connected",
       "contractPaths": [
-        "./public-status.json"
+        "./public-status.json",
+        "./schemas/modaryx-guide-connection.schema.json",
+        "./schemas/nova-forge-os-bridge.schema.json"
       ],
       "requiredInputs": [
-        "Contrat du Guide connecté",
-        "Protocole local du pont OS",
+        "Service Guide MODARYX réel",
+        "Runtime local du pont Nova Forge OS compatible",
         "Consentement utilisateur explicite"
       ],
       "permissions": [
