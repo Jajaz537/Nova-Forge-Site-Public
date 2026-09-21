@@ -173,6 +173,7 @@ console.log(JSON.stringify({
   weatherApi:{rain:weatherApiRain.condition,snow:weatherApiSnow.condition,fog:weatherApiFog.condition,storm:weatherApiStorm.condition,wind:weatherApiWind.condition,cloud:weatherApiCloud.condition,partlyCloudy:weatherApiPartly.condition},
   activities:{storm:stormActivity.text,night:nightActivity.text,summer:clearSummerActivity.text},
   privacy:{gps:false,exactCoordinatesReturned:false,providerRoundedDegrees:0.1},
+  weatherProviderMarker:failures.length?'FAIL_TARGETED_WEATHERAPI_READINESS':'PASS_TARGETED_WEATHERAPI_READINESS',
   failures
 },null,2));
 if(failures.length)process.exitCode=1;
