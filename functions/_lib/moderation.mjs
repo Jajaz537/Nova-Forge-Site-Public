@@ -1,8 +1,12 @@
 import {readJson, requireSameOrigin} from './api-security.mjs';
 import {getSessionIdentity} from './auth-session.mjs';
+import {
+  APPEALS_REVIEW_PERMISSION,
+  MODERATION_PERMISSION,
+  hasPermission
+} from './access-control.mjs';
 
-export const MODERATION_PERMISSION = 'community:moderate';
-export const APPEALS_REVIEW_PERMISSION = 'community:appeals-review';
+export {APPEALS_REVIEW_PERMISSION, MODERATION_PERMISSION};
 
 const OUTCOMES = new Set(['publish', 'hold', 'reject']);
 const CATEGORIES = new Set([
@@ -61,7 +65,7 @@ export async function authorizeModerator(context, {
 
   const identity = await getSessionIdentity(context.request, db, {nowMs});
   if (!identity) return {ok:false, status:401, reason:'authentication-required'};
-  if (!identity.permissions.includes(permissionOverride)) {
+  if (!hasPermission(identity, permissionOverride)) {
     return {
       ok:false,
       status:403,
