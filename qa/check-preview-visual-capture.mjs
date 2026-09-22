@@ -315,8 +315,18 @@ try {
   console.error(JSON.stringify(result, null, 2));
   process.exitCode = 1;
 } finally {
-  chrome.kill('SIGTERM');
-  await sleep(150);
-  if (!chrome.killed) chrome.kill('SIGKILL');
-  fs.rmSync(TEMP_ROOT, {recursive: true, force: true});
+  const waitForChromeClose = () => new Promise((resolve) => {
+    if (chrome.exitCode !== null || chrome.signalCode !== null) return resolve();
+    chrome.once('close', resolve);
+    setTimeout(resolve, 1200);
+  });
+  if (chrome.exitCode === null && chrome.signalCode === null) {
+    chrome.kill('SIGTERM');
+    await waitForChromeClose();
+  }
+  if (chrome.exitCode === null && chrome.signalCode === null) {
+    chrome.kill('SIGKILL');
+    await waitForChromeClose();
+  }
+  fs.rmSync(TEMP_ROOT, {recursive: true, force: true, maxRetries: 5, retryDelay: 100});
 }
