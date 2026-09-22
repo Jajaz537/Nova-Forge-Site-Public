@@ -148,11 +148,18 @@ async function captureCase(cdp, spec) {
     `(() => {
       const root = document.documentElement;
       const layers = document.querySelector('[data-world-visual-layers]');
-      const ready = [...document.querySelectorAll('[data-world-visual]')]
-        .filter((node) => node.dataset.visualReady === 'true' && node.complete && node.naturalWidth > 0);
-      return root.dataset.worldVisualGrowth === 'active' && layers && ready.length === 2 && root.dataset.realitySync === 'active';
+      const companions = document.querySelectorAll('[data-world-visual]');
+      const environment = document.querySelector('[data-world-environment], .modaryx-realm-art');
+      const approvedHero = environment && (environment.currentSrc || environment.src || '').includes('/assets/modaryx-wolf-dragon-hero.webp');
+      return root.dataset.worldVisualGrowth === 'awaiting-assets'
+        && !layers
+        && companions.length === 0
+        && approvedHero
+        && environment.complete
+        && environment.naturalWidth > 0
+        && root.dataset.realitySync === 'active';
     })()`,
-    spec.name + ' integrated living world',
+    spec.name + ' approved composite living world',
     15000
   );
 
@@ -175,6 +182,7 @@ async function captureCase(cdp, spec) {
     const heroRect = hero?.getBoundingClientRect();
     const layerRect = layers?.getBoundingClientRect();
     const layerStyle = layers ? getComputedStyle(layers) : null;
+    const environmentStyle = environment ? getComputedStyle(environment) : null;
     const weatherLayer = document.querySelector('[data-real-weather-layer]');
     const weatherStyle = weatherLayer ? getComputedStyle(weatherLayer) : null;
     return {
@@ -206,6 +214,8 @@ async function captureCase(cdp, spec) {
       },
       layerAnimation: layerStyle?.animationName || null,
       layerTransition: layerStyle?.transitionDuration || null,
+      environmentAnimation: environmentStyle?.animationName || null,
+      environmentTransition: environmentStyle?.transitionDuration || null,
       weatherAnimation: weatherStyle?.animationName || null,
       weatherTransition: weatherStyle?.transitionDuration || null
     };
@@ -219,19 +229,18 @@ async function captureCase(cdp, spec) {
   fs.writeFileSync(path.join(OUT, spec.name + '.png'), Buffer.from(shot.data, 'base64'));
   observations[spec.name] = state;
 
-  assert(state.worldVisualGrowth === 'active', spec.name + ': visual growth not active');
+  assert(state.worldVisualGrowth === 'awaiting-assets', spec.name + ': visual growth must remain awaiting human-approved layered art');
   assert(state.realitySync === 'active', spec.name + ': reality sync not active');
-  assert(state.companions.length === 2, spec.name + ': expected two companion layers');
-  assert(state.companions.every((item) => item.ready && item.complete && item.naturalWidth === 1600 && item.naturalHeight === 900),
-    spec.name + ': companion layer dimensions/readiness drifted');
-  assert(state.environment.complete && state.environment.naturalWidth > 0, spec.name + ': environment not loaded');
+  assert(state.companions.length === 0, spec.name + ': unapproved companion layers must not activate');
+  assert(state.environment.complete && state.environment.naturalWidth > 0, spec.name + ': approved composite hero not loaded');
+  assert(state.environment.src.includes('/assets/modaryx-wolf-dragon-hero.webp'), spec.name + ': approved Loup/Dragon hero was replaced');
   assert(Boolean(state.localSeason) && Boolean(state.localDaypart), spec.name + ': local season/daypart missing');
-  assert(Boolean(state.geometry.hero) && Boolean(state.geometry.layers), spec.name + ': integrated hero/layers geometry missing');
+  assert(Boolean(state.geometry.hero) && state.geometry.layers === null, spec.name + ': unexpected layered visual geometry');
 
   if (spec.reduced) {
     assert(state.reducedMotion === true, spec.name + ': reduced-motion emulation not active');
-    assert(state.layerAnimation === 'none', spec.name + ': living-world animation still active under reduced motion');
-    assert(state.layerTransition === '0s', spec.name + ': living-world transition still active under reduced motion');
+    assert(state.environmentAnimation === 'none', spec.name + ': approved hero animation still active under reduced motion');
+    assert(state.environmentTransition === '0s', spec.name + ': approved hero transition still active under reduced motion');
   }
 }
 
