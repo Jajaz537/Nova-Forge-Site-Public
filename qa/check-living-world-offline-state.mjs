@@ -1,3 +1,4 @@
+// Approved composite hero remains the expected visual fallback until layered art is human-approved.
 import fs from 'node:fs';
 import vm from 'node:vm';
 
