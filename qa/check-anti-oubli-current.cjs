@@ -233,7 +233,8 @@ assert.ok(checkpoint.includes('EN COURS — compte Fondateur / Administrateur'))
 assert.ok(checkpoint.includes('modaryx:founder'));
 assert.ok(checkpoint.includes('Attribution réelle Auth0 DEV acquise'));
 assert.ok(checkpoint.includes('authority.role=founder'));
-assert.ok(checkpoint.includes('TERMINÉ — preuve runtime modération Fondateur DEV'));\nassert.ok(checkpoint.includes('EN COURS — preuve runtime recours seule restante'));
+assert.ok(checkpoint.includes('TERMINÉ — preuve runtime modération Fondateur DEV'));
+assert.ok(checkpoint.includes('EN COURS — preuve runtime recours seule restante'));
 assert.ok(checkpoint.includes('PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING'));
 assert.ok(checkpoint.includes('PREUVE MANQUANTE** — enrôlement, reconnexion et révocation sur appareil WebAuthn compatible'));
 assert.ok(checkpoint.includes('TERMINÉ — readiness WeatherAPI ciblée'));
