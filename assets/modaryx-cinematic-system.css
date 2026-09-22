@@ -9,7 +9,7 @@
   .hero[aria-labelledby="downloads-page-title"],
   .hero[aria-labelledby="ecosystem-title"],
   .hero[aria-labelledby="security-hero-title"],
-  .verify-hero,
+  .hero.verify-hero,
   .search-page .hero,
   .catalog-hero,
   .studio-hero,
@@ -42,7 +42,7 @@
 /* Confiance / fichiers : coffre, preuve, précision — plus minéral que paysager. */
 .hero[aria-labelledby="downloads-page-title"],
 .hero[aria-labelledby="security-hero-title"],
-.verify-hero,
+.hero.verify-hero,
 .search-page .hero{
   background:
     radial-gradient(circle at 76% 35%,rgba(112,164,219,.19),transparent 15rem),
@@ -52,7 +52,7 @@
 }
 .hero[aria-labelledby="downloads-page-title"]:after,
 .hero[aria-labelledby="security-hero-title"]:after,
-.verify-hero:after,
+.hero.verify-hero:after,
 .search-page .hero:after{
   content:"";
   position:absolute;
@@ -173,7 +173,7 @@ body.game-hub-page:has(.page-trail a[href*="red-dead-redemption-2"]) .hero{
   .hero[aria-labelledby="ecosystem-title"],
   .hero[aria-labelledby="downloads-page-title"],
   .hero[aria-labelledby="security-hero-title"],
-  .verify-hero,
+  .hero.verify-hero,
   .search-page .hero,
   .project-page .project-hero{
     padding-top:clamp(9rem,42vw,13rem)!important;
@@ -202,6 +202,6 @@ body.game-hub-page:has(.page-trail a[href*="red-dead-redemption-2"]) .hero{
 @media(forced-colors:active){
   .hero[aria-labelledby="downloads-page-title"]:after,
   .hero[aria-labelledby="security-hero-title"]:after,
-  .verify-hero:after,
+  .hero.verify-hero:after,
   .search-page .hero:after{display:none}
 }
