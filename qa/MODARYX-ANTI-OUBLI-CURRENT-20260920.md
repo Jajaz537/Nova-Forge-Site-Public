@@ -15,7 +15,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Nova Forge OS Public / Fondateur = logiciel distinct | **TERMINÉ — contrat courant** | Références web uniquement pour relation de produit ou intégration future explicite. |
 | `getnovaforge.com` / getnova | **TERMINÉ — classification historique** | Ancien projet web ; références historiques conservées seulement quand nécessaires à la provenance, compatibilité ou protection technique. |
 | Identité visuelle MODARYX visible sur les 23 routes | **TERMINÉ — périmètre source courant** | Le garde source rejette le libellé visible « Modaryx OS » ; la validation artistique globale reste séparée. |
-| Design system Premium HD des 23 routes publiques | **EN COURS — preuve visuelle initiale acquise** | Sweep ciblé PR #79 : 23 routes × desktop/mobile, inspection assistée sans défaut bloquant isolé. Validation artistique humaine finale et preuves externes restent séparées. |
+| Design system Premium HD des 23 routes publiques | **EN COURS — refonte artistique globale réouverte** | Les preuves techniques 23 routes desktop/mobile restent acquises pour non-régression. Retour humain frais du 22/09 : le rendu global reste trop proche d’un « site sombre à cartes » ; macro-refonte Premium HD des 23 routes lancée. Validation artistique humaine finale reste séparée. |
 
 ## 2. Monde vivant / Loup / Dragon
 
@@ -24,12 +24,12 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Environnement Premium HD séparé | **TERMINÉ** | Asset réel intégré. |
 | Loup — bébé, juvénile, adolescent, jeune adulte, adulte | **TERMINÉ 5/5** | Cinq assets séparés prouvés. |
 | Dragon — bébé, juvénile, adolescent, jeune adulte, adulte | **TERMINÉ 5/5** | Cinq assets séparés prouvés. |
-| Activation de la croissance visuelle | **TERMINÉ — périmètre ciblé** | `visualGrowth.status=ready`, couche courante chargée à la demande, fallback conservé. |
-| Preview HTTPS environnement + compagnons | **TERMINÉ — preuve ciblée déployée** | Run `35483330153`, desktop + mobile + reduced-motion. |
+| Activation de la croissance visuelle | **EN COURS — verrou artistique actif** | PR #149 remet `visualGrowth.status=awaiting-assets` : les assets séparés restent candidats mais ne remplacent plus le hero approuvé tant qu’une validation artistique humaine explicite n’a pas eu lieu. |
+| Preview HTTPS hero / monde vivant | **TERMINÉ — preuve ciblée courante** | PR #149 : Preview desktop + mobile + reduced-motion confirme `modaryx-wolf-dragon-hero.webp`, zéro couche compagnon active, `worldVisualGrowth=awaiting-assets` et reality sync active. |
 | Reduced motion monde vivant | **TERMINÉ — preuve ciblée déployée** | Animations/transitions neutralisées dans le cas réduit. |
 | Saison + heure locale via contexte grossier | **TERMINÉ — preuve ciblée déployée** | Reality sync `cloudflare-coarse` observé avec saison/daypart. |
 | Météo réelle production | **BLOQUÉ / activation externe — readiness WeatherAPI acquise, fail-soft Preview réel prouvé** | Mode `weatherapi` préparé côté proxy same-origin avec clé serveur obligatoire, normalisation, attribution et disclaimer ; marker ciblé `PASS_TARGETED_WEATHERAPI_READINESS`. Reprise externe du 21/09 : aucun compte WeatherAPI authentifié ni variable/secret WeatherAPI en Preview ; `GET /api/local-context` réel retourne `HTTP 200`, `not-connected / provider-not-configured`, `no-store`, sans localisation précise ni demande GPS. Aucun fournisseur réel activé. Activation toujours conditionnée à un compte/secret autorisé, acceptation des conditions, validation confidentialité/juridique et micro-proof live. |
-| Validation artistique humaine finale | **PREUVE MANQUANTE** | Les captures techniques ne remplacent pas le jugement humain final sur composition/cadrage. |
+| Validation artistique humaine finale | **PREUVE MANQUANTE** | Retour humain frais du 22/09 a rouvert le Bloc 1 : une refonte artistique globale des 23 routes est requise avant cette validation finale. Les captures techniques ne remplacent pas ce jugement. |
 
 ## 3. Capacités locales déjà prouvées
 
@@ -110,6 +110,9 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 
 ## 7. Finition Premium HD encore active
 
+- **EN COURS — macro-refonte artistique globale 22/09** — retour humain frais par vidéo : cohérence artistique, profondeur, transitions, surfaces, typographie, navigation, motion et densité doivent être remontées ensemble sur les 23 routes. Priorité aux couches partagées ; aucune simplification fonctionnelle ni fausse preuve.
+- **TERMINÉ — correction hero PR #149** — le composite Loup/Dragon approuvé reste affiché ; `visualGrowth.status=awaiting-assets` empêche l’activation des couches non validées. Merge Work `14650dd7d0cb1a501ccc88e6f9caa112b4eda550`.
+
 - **TERMINÉ — preuve visuelle initiale ciblée** — 23 routes publiques, desktop 1440×1000 + mobile 390×844 : run `35510526508`, marker `PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW`, 46 observations, zéro overflow, image cassée, contrôle coupé, H1/ouverture/footer manquant ; captures inspectées de façon assistée sans défaut bloquant isolé. Cela ne ferme pas la validation artistique humaine finale ni les états non déclenchés.
 - **TERMINÉ — preuve ciblée navigateur** — surfaces statiques Écosystème / Sécurité / Documentation / Jeux / 404 : PR #74 fusionnée dans Work au merge `29fab6f549c5d9192359c0e8c9cbad2d4edec39a` ; run `35508894415`, marker `PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW` ; desktop 1440×1000 + mobile 390×844, zéro overflow, aucune image cassée ni contrôle coupé. Les captures ont été inspectées de façon assistée sans défaut bloquant isolé ; cela ne ferme pas la validation artistique humaine finale.
 - **TERMINÉ — extension hubs jeux** — PR #78 fusionnée dans Work au merge `d953e6613572a0e1b195e5212cc997a20300230c` ; six hubs GTA VI/RDR2 ajoutés au harnais visuel, run `35510243999` vert, captures desktop/mobile inspectées sans défaut bloquant isolé.
@@ -147,7 +150,7 @@ Aucune idée n'est supprimée implicitement pour améliorer un pourcentage. Une 
 ## 10. Prochain point logique
 
 1. Considérer le Provider DEV ciblé comme **TERMINÉ** ; ne pas le rejouer sans modification pertinente.
-2. Ne pas rejouer les preuves déjà vertes sur les 23 routes et ne pas retoucher le design sans défaut frais reproduit ou décision artistique explicite.
+2. La décision artistique explicite du 22/09 rouvre le Bloc 1 : exécuter la refonte Premium HD globale des 23 routes, tout en conservant les preuves techniques déjà vertes et sans réactiver les couches Loup/Dragon non validées.
 3. Fermer les écarts produit encore réels sans les simuler : passkey finale, corpus réels, distribution, signatures/attestations, Storage Resolver, Repair Network, Guide et pont OS selon leurs dépendances.
 4. Considérer le sitemap des routes indexables comme **TERMINÉ** ; ne le rouvrir que si une nouvelle route canonique indexable est ajoutée.
 5. Garder météo réelle production **BLOQUÉE** tant que licence/confidentialité/attribution/disclaimer ne sont pas validés.
