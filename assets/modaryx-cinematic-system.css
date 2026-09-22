@@ -4,11 +4,11 @@
 /* MODARYX — Ultra Premium global pass 2
    Couche cinématique finale : familles de pages distinctes, même univers. */
 :is(
-  [aria-labelledby="not-found-title"],
-  [aria-labelledby="docs-hero-title"],
-  [aria-labelledby="downloads-page-title"],
-  [aria-labelledby="ecosystem-title"],
-  [aria-labelledby="security-hero-title"],
+  .hero[aria-labelledby="not-found-title"],
+  .hero[aria-labelledby="docs-hero-title"],
+  .hero[aria-labelledby="downloads-page-title"],
+  .hero[aria-labelledby="ecosystem-title"],
+  .hero[aria-labelledby="security-hero-title"],
   .verify-hero,
   .search-page .hero,
   .catalog-hero,
@@ -23,16 +23,16 @@
 }
 
 /* Connaissance / écosystème : architecture abstraite, plus documentaire. */
-[aria-labelledby="docs-hero-title"],
-[aria-labelledby="ecosystem-title"]{
+.hero[aria-labelledby="docs-hero-title"],
+.hero[aria-labelledby="ecosystem-title"]{
   background:
     linear-gradient(102deg,rgba(5,9,10,.98) 0,rgba(8,15,16,.94) 47%,rgba(10,18,17,.76) 100%),
     radial-gradient(circle at 78% 28%,rgba(95,153,132,.2),transparent 18rem),
     radial-gradient(circle at 60% 88%,rgba(201,147,65,.12),transparent 24rem),
     url("./forge-field.svg") 70% center/cover no-repeat;
 }
-[aria-labelledby="docs-hero-title"]:before,
-[aria-labelledby="ecosystem-title"]:before{
+.hero[aria-labelledby="docs-hero-title"]:before,
+.hero[aria-labelledby="ecosystem-title"]:before{
   opacity:.72;
   background:
     linear-gradient(180deg,transparent 28%,rgba(4,8,9,.88)),
@@ -40,8 +40,8 @@
 }
 
 /* Confiance / fichiers : coffre, preuve, précision — plus minéral que paysager. */
-[aria-labelledby="downloads-page-title"],
-[aria-labelledby="security-hero-title"],
+.hero[aria-labelledby="downloads-page-title"],
+.hero[aria-labelledby="security-hero-title"],
 .verify-hero,
 .search-page .hero{
   background:
@@ -50,8 +50,8 @@
     linear-gradient(110deg,#06090b 0,#0a1114 46%,#0b1110 100%),
     url("./forge-field.svg") 76% center/cover no-repeat;
 }
-[aria-labelledby="downloads-page-title"]:after,
-[aria-labelledby="security-hero-title"]:after,
+.hero[aria-labelledby="downloads-page-title"]:after,
+.hero[aria-labelledby="security-hero-title"]:after,
 .verify-hero:after,
 .search-page .hero:after{
   content:"";
@@ -123,7 +123,7 @@ body.game-hub-page:has(.page-trail a[href*="red-dead-redemption-2"]) .hero{
     radial-gradient(circle at 78% 30%,rgba(206,146,63,.18),transparent 19rem),
     url("./forge-field.svg") 72% center/cover no-repeat;
 }
-[aria-labelledby="not-found-title"]{
+.hero[aria-labelledby="not-found-title"]{
   background:
     linear-gradient(100deg,rgba(6,8,9,.98),rgba(9,14,14,.9) 48%,rgba(8,13,13,.45) 76%,rgba(6,9,10,.78)),
     radial-gradient(circle at 28% 74%,rgba(70,112,90,.18),transparent 20rem),
@@ -169,10 +169,10 @@ body.game-hub-page:has(.page-trail a[href*="red-dead-redemption-2"]) .hero{
 .profiles-grid .profile-card{border-top-color:rgba(112,164,219,.22)!important}
 
 @media(max-width:620px){
-  [aria-labelledby="docs-hero-title"],
-  [aria-labelledby="ecosystem-title"],
-  [aria-labelledby="downloads-page-title"],
-  [aria-labelledby="security-hero-title"],
+  .hero[aria-labelledby="docs-hero-title"],
+  .hero[aria-labelledby="ecosystem-title"],
+  .hero[aria-labelledby="downloads-page-title"],
+  .hero[aria-labelledby="security-hero-title"],
   .verify-hero,
   .search-page .hero,
   .project-page .project-hero{
@@ -183,7 +183,7 @@ body.game-hub-page:has(.page-trail a[href*="red-dead-redemption-2"]) .hero{
   .catalog-hero,
   .studio-hero,
   body.game-hub-page .hero,
-  [aria-labelledby="not-found-title"]{
+  .hero[aria-labelledby="not-found-title"]{
     padding-top:clamp(15rem,67vw,23rem)!important;
   }
   body.community-page .hero{background-position:center,center,18% top}
@@ -192,7 +192,7 @@ body.game-hub-page:has(.page-trail a[href*="red-dead-redemption-2"]) .hero{
   .studio-hero{background-position:center,center,86% top}
   body.game-hub-page:has(.page-trail a[href*="gta-6"]) .hero{background-position:center,center,82% top}
   body.game-hub-page:has(.page-trail a[href*="red-dead-redemption-2"]) .hero{background-position:center,center,28% top}
-  [aria-labelledby="not-found-title"]{background-position:center,center,46% top}
+  .hero[aria-labelledby="not-found-title"]{background-position:center,center,46% top}
   .catalog-controls:before,
   .catalog-results:before,
   .project-grid:before,
@@ -200,8 +200,8 @@ body.game-hub-page:has(.page-trail a[href*="red-dead-redemption-2"]) .hero{
   .profiles-grid:before{margin-bottom:1rem}
 }
 @media(forced-colors:active){
-  [aria-labelledby="downloads-page-title"]:after,
-  [aria-labelledby="security-hero-title"]:after,
+  .hero[aria-labelledby="downloads-page-title"]:after,
+  .hero[aria-labelledby="security-hero-title"]:after,
   .verify-hero:after,
   .search-page .hero:after{display:none}
 }

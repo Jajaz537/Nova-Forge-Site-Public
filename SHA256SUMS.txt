@@ -11,7 +11,7 @@ f9fa44e131192fb7f655ac3431e2abcec4d90992e60e0abaf94aebce64d8f2c5  ./assets/commu
 bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-schema-lite.js
 ca7837533043fa10c06515aeba63844e1baf01bc0ff25433f803d54d6c89d2fd  ./assets/living-world.css
 8ea81aea13c72bb7d8064f9ed26416e55ba807a39c93b80a4ea9e3dd7b51c1e6  ./assets/living-world.js
-fdbbe7d01203971afadd48ca794092e88dc11d5f594dfd7d36a5367e986da43e  ./assets/modaryx-cinematic-system.css
+a87b7d09768f243490cf919327e65ff1f16523b8d4d16940cb8f7c32ba6c72d6  ./assets/modaryx-cinematic-system.css
 eb6f0664c33e98f8918b8cde38cfaea673a39f72f8a6110f39bb0e07d2aab952  ./assets/modaryx-home-cinematic.css
 06b1dae65f9c0706fabc9b85a46cd3c50d7a5a5d2e6015b2be064b751d7b8189  ./assets/modaryx-mark-192.png
 38eb20983b8118843446d8a64dd5afa4991f43d927b41703b21b34fc30a1aa40  ./assets/modaryx-mark-512.png
