@@ -48,9 +48,9 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 - **TERMINÉ — communauté distante ciblée** : ingestion, surface publique modérée, suivi auteur et recours.
 - **TERMINÉ — modération/publication/recours Provider DEV** : migration D1 0003, RBAC séparé, publication/retrait, recours/issue, receipts pseudonymisés.
 - Production reste distincte et non activée.
-- **EN COURS — compte Fondateur / Administrateur** : code/UI et héritage serveur fusionnés via PR #142. **Attribution réelle Auth0 DEV acquise** : tenant `modaryx-dev` EU, rôle `MODARYX Founder`, permission `modaryx:founder`, session renouvelée avec `authority.role=founder` et capacités founder/administration/modération/recours confirmées, sans secret/token exposé. **TERMINÉ — preuve runtime modération Fondateur DEV** le 22 septembre 2026 après réauthentification : HTTP `200`, `moderationState=held-for-review`, `publicationState=received`, `receiptCreated=true`, `cleanupSucceeded=true`, aucune erreur. **EN COURS — preuve runtime recours seule restante**. Cookie HttpOnly non extrait. Sources : `qa/MODARYX-FOUNDER-AUTH0-DEV-EVIDENCE-20260921.md` + `qa/MODARYX-FOUNDER-DEV-PROOF-SURFACE-20260921.md`.
+- **TERMINÉ — compte Fondateur / Administrateur DEV ciblé** : code/UI et héritage serveur fusionnés via PR #142 ; Auth0 DEV `modaryx:founder`, `authority.role=founder` et capacités founder/administration/modération/recours confirmées. **TERMINÉ — preuve runtime modération Fondateur** : HTTP `200`, `moderationState=held-for-review`, `publicationState=received`, `receiptCreated=true`, `cleanupSucceeded=true`. **TERMINÉ — preuve runtime recours Fondateur** : HTTP `200`, `result=upheld`, `moderationState=rejected`, `publicationState=received`, `receiptCreated=true`, `cleanupSucceeded=true`. Aucune erreur finale, aucun secret/token exposé, cookie HttpOnly non extrait. Sources : `qa/MODARYX-FOUNDER-AUTH0-DEV-EVIDENCE-20260921.md` + `qa/MODARYX-FOUNDER-DEV-PROOF-SURFACE-20260921.md`.
 - Les rôles web n'exposent jamais automatiquement les secrets Cloudflare, GitHub, DNS/DNSSEC, Auth0, WeatherAPI ou clés privées de signature.
-- **EN COURS — micro-surface Fondateur DEV temporaire** : `/founder-proof-dev`, limitée au hostname Preview stable exact, sans JavaScript, protégée par session `modaryx:founder` + same-origin, réutilisant les vrais handlers de mutation modération/recours avec fixtures D1 éphémères. Le succès exige receipt créé + nettoyage confirmé. **Retrait obligatoire immédiatement après acquisition des deux preuves ; cette route ne doit jamais entrer dans la VF/production.**
+- **TERMINÉ — micro-surface Fondateur DEV retirée du candidat de fermeture** : les deux preuves runtime ont été acquises ; `functions/founder-proof-dev.js` est supprimé et le checker dédié devient un garde anti-résurrection. La route ne doit jamais réapparaître dans la VF/production.
 
 ## 5. Passkeys
 
@@ -155,7 +155,6 @@ Ne jamais supprimer implicitement un blocker pour améliorer un pourcentage. Une
 1. Vérifier Git frais avant toute écriture.
 2. Ne pas rejouer les preuves déjà vertes sans modification pertinente.
 3. Fermer uniquement les dépendances réelles encore ouvertes quand un environnement adapté existe :
-   - exécuter **uniquement la mutation recours** via `/founder-proof-dev` sur Preview Work ; la modération est déjà prouvée. Après receipt + cleanup verts sur recours, retirer immédiatement la micro-surface et micro-prouver son retrait ;
    - passkey appareil ;
    - signer / trust anchor réel ;
    - artefact de distribution autorisé ;
@@ -186,7 +185,7 @@ Pour toute nouvelle conversation ou agent :
 - CWV terrain : **PREUVE MANQUANTE** maintenue. La tentative PageSpeed Insights API a renvoyé `HTTP 429 RESOURCE_EXHAUSTED` (`RATE_LIMIT_EXCEEDED`) et l’interface n’a livré aucune donnée terrain exploitable. Aucun résultat Lighthouse labo n’a été substitué.
 - Signer/trust anchor, artefact public autorisé, corpus GTA VI/RDR2, Storage/Repair, Guide MODARYX et pont Nova Forge OS : états inchangés ; aucune ressource, autorisation ou endpoint réel supplémentaire n’a été fourni.
 - Validation juridique, droits/licences et validation artistique humaine : **PREUVE MANQUANTE** maintenue.
-- Compte Fondateur Auth0 DEV : attribution `modaryx:founder` et session `authority.role=founder` rapportées comme acquises ; modération/recours runtime restent **BLOQUÉS** par l'absence de primitives `fetch`/XHR/`sendBeacon` dans Work. Priorité : tenter la navigation directe same-origin vers les endpoints GET privilégiés avant toute micro-surface temporaire.
+- Compte Fondateur Auth0 DEV : attribution `modaryx:founder`, session `authority.role=founder` et les deux mutations privilégiées sont désormais acquises. Les anciens blocages `fetch`/XHR/`sendBeacon`, `origin-mismatch` et `reauthentication-required` sont historiques et ont été fermés par la micro-surface temporaire sécurisée, son correctif d'origine et une réauthentification complète.
 - Aucun full replay, aucune activation production et aucun changement `main`, DNS/DNSSEC, nameservers ou IONOS.
 
 
@@ -194,5 +193,6 @@ Pour toute nouvelle conversation ou agent :
 
 - **TERMINÉ — modération Fondateur DEV** : `proof=moderation`, HTTP `200`, `held-for-review`, `received`, receipt créé, cleanup confirmé, aucune erreur.
 - L'échec précédent `reauthentication-required` a été résolu par une réauthentification complète ; aucun changement de code n'a été nécessaire pour cette étape.
-- **EN COURS — recours Fondateur DEV** : seule mutation privilégiée restante avant retrait obligatoire de la micro-surface temporaire.
+- **TERMINÉ — recours Fondateur DEV** : `proof=appeals`, HTTP `200`, `result=upheld`, `moderationState=rejected`, `publicationState=received`, receipt créé, cleanup confirmé, aucune erreur.
+- **TERMINÉ — retrait candidat de la micro-surface** : `functions/founder-proof-dev.js` supprimé ; checker converti en garde anti-résurrection. La fermeture définitive de ce lot exige la micro-proof source verte et la fusion dans Work.
 - Aucun full replay, aucun `main`, aucune production, aucun DNS/DNSSEC/nameserver.

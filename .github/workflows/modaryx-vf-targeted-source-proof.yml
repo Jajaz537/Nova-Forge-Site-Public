@@ -350,7 +350,7 @@ jobs:
           set -euo pipefail
           node qa/check-auth-bff.mjs
 
-      - name: Run targeted Founder DEV proof surface guard
+      - name: Run targeted Founder DEV proof surface removal guard
         shell: bash
         run: |
           set -euo pipefail

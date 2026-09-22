@@ -4,58 +4,33 @@ const path=require('node:path');
 const assert=require('node:assert/strict');
 
 const root=path.resolve(__dirname,'..');
-const source=fs.readFileSync(path.join(root,'functions/founder-proof-dev.js'),'utf8');
+const routePath=path.join(root,'functions/founder-proof-dev.js');
+const evidence=fs.readFileSync(path.join(root,'qa/MODARYX-FOUNDER-DEV-PROOF-SURFACE-20260921.md'),'utf8');
+
+assert.ok(!fs.existsSync(routePath),'Temporary Founder DEV proof route must be removed after runtime proof');
 
 for(const token of [
-  "design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev",
-  "FOUNDER_PERMISSION",
-  "hasPermission(identity, FOUNDER_PERMISSION)",
-  "onRequestPost as decideModeration",
-  "onRequestPost as decideAppeal",
-  "/api/v1/moderation/decisions",
-  "/api/v1/moderation/appeal-outcomes",
-  'method="post"',
-  "form-action 'self'",
-  "x-robots-tag",
-  "noindex, nofollow, noarchive",
-  "cleanupFixture",
-  "cleanupSucceeded",
-  "receiptCreated",
-  "getSessionIdentity",
-  "authorizeProofPostOrigin",
-  "sec-fetch-site",
-  "same-origin"
-]) assert.ok(source.includes(token),'Founder DEV proof invariant missing: '+token);
-
-for(const forbidden of [
-  'XMLHttpRequest',
-  'sendBeacon',
-  'AUTH0_CLIENT_SECRET',
-  'MODARYX_TURNSTILE_SECRET',
-  'MODARYX_WEATHER_API_KEY'
-]) assert.ok(!source.includes(forbidden),'Founder DEV proof forbidden token present: '+forbidden);
-
-assert.ok(!source.includes('fetch('),'Founder DEV proof must not depend on browser/server fetch');
-assert.ok(source.includes("headers.set('cookie', cookie)"),'HttpOnly session forwarding into the real handler is missing');
-assert.ok(!source.includes('document.cookie'),'Cookie extraction must never be used');
-assert.ok(!source.includes("fetchSite === 'same-site'"),'Same-site fallback must not be accepted for the proof POST');
-assert.ok(!source.includes("fetchSite === 'cross-site'"),'Cross-site fallback must not be accepted for the proof POST');
-assert.ok(source.includes("result.cleanupSucceeded === true"),'Success must require fixture cleanup');
-assert.ok(source.includes("DELETE FROM modaryx_moderation_receipts WHERE submission_id = ?"),'Receipt cleanup missing');
-assert.ok(source.includes("DELETE FROM modaryx_community_submissions WHERE submission_id = ?"),'Submission cleanup missing');
-assert.ok(source.includes("DELETE FROM modaryx_profiles WHERE profile_id = ?"),'Profile cleanup missing');
+  'TERMINÉ — preuves runtime Fondateur acquises',
+  'proof=moderation',
+  'httpStatus=200',
+  'proof=appeals',
+  'result=upheld',
+  'receiptCreated=true',
+  'cleanupSucceeded=true',
+  'functions/founder-proof-dev.js',
+  'garde anti-résurrection'
+]) assert.ok(evidence.includes(token),'Founder proof removal evidence missing: '+token);
 
 console.log(JSON.stringify({
-  marker:'PASS_TARGETED_FOUNDER_DEV_PROOF_SURFACE',
+  marker:'PASS_TARGETED_FOUNDER_DEV_PROOF_SURFACE_REMOVED',
   result:'PASS',
-  scope:'Temporary DEV-only proof surface; source proof only, runtime proof remains separate',
+  scope:'Founder DEV runtime proofs retained as evidence; temporary runtime route removed',
   checks:[
-    'exact stable Preview hostname is enforced',
-    'founder permission plus exact Preview host and same-origin browser signal are required',
-    'real moderation and appeals mutation handlers are reused',
-    'no browser fetch/XHR/sendBeacon or cookie extraction is used',
-    'success requires receipt creation and confirmed fixture cleanup',
-    'no provider secret variable is exposed'
+    'temporary founder proof route is absent',
+    'moderation runtime proof is retained',
+    'appeals runtime proof is retained',
+    'receipt and cleanup success are retained',
+    'anti-resurrection guard remains active'
   ],
   failures:[]
 },null,2));
