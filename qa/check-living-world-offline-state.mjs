@@ -77,7 +77,7 @@ function assert(name,condition){
 
 const fresh=await scenario('fresh');
 assert('fresh source state',fresh.root.dataset.worldSource==='fresh'&&fresh.status.dataset.worldSource==='fresh');
-assert('fresh visual growth defers through a load listener',typeof fresh.listeners['window:load']==='function');
+assert('fresh visual growth remains on approved composite fallback',fresh.root.dataset.worldVisualGrowth==='awaiting-assets'&&typeof fresh.listeners['window:load']!=='function');
 assert('fresh ready',fresh.status.dataset.worldReady==='true');
 assert('fresh status must not claim offline',!fresh.status.textContent.includes('hors ligne'));
 assert('fresh chronology',fresh.age.textContent==='Jour de fondation');
@@ -86,7 +86,7 @@ assert('fresh dragon stage',fresh.dragon.textContent==='Dragonneau');
 
 const stale=await scenario('stale');
 assert('stale source state',stale.root.dataset.worldSource==='offline-stale'&&stale.status.dataset.worldSource==='offline-stale');
-assert('stale visual growth defers through a load listener',typeof stale.listeners['window:load']==='function');
+assert('stale visual growth remains on approved composite fallback',stale.root.dataset.worldVisualGrowth==='awaiting-assets'&&typeof stale.listeners['window:load']!=='function');
 assert('stale remains usable',stale.status.dataset.worldReady==='true');
 assert('stale status must be explicit',stale.status.textContent.includes('dernière configuration connue hors ligne'));
 assert('stale chronology continues from cached rules',stale.age.textContent==='Jour de fondation');
@@ -103,7 +103,7 @@ assert('unavailable css state present',css.includes('[data-world-source=unavaila
 
 console.log(JSON.stringify({
   marker:'PASS_TARGETED_LIVING_WORLD_OFFLINE_STATE',
-  fresh:{source:fresh.root.dataset.worldSource,status:fresh.status.textContent},
-  stale:{source:stale.root.dataset.worldSource,status:stale.status.textContent,wolf:stale.wolf.textContent,dragon:stale.dragon.textContent},
+  fresh:{source:fresh.root.dataset.worldSource,status:fresh.status.textContent,visual:fresh.root.dataset.worldVisualGrowth},
+  stale:{source:stale.root.dataset.worldSource,status:stale.status.textContent,wolf:stale.wolf.textContent,dragon:stale.dragon.textContent,visual:stale.root.dataset.worldVisualGrowth},
   unavailable:{source:unavailable.root.dataset.worldSource,status:unavailable.status.textContent}
 },null,2));
