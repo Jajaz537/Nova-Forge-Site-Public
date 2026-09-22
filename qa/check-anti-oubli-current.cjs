@@ -52,7 +52,7 @@ const requiredCurrent = [
   'UI compte / profil premium | **TERMINÉ — preuve ciblée de code**',
   'PASS_TARGETED_PROFILES_ACCOUNT_UI',
   'MODARYX-PROFILES-ACCOUNT-UI-20260920.md',
-  'Compte Fondateur / Administrateur MODARYX | **EN COURS — compte Fondateur Auth0 DEV attribué ; preuves runtime privilégiées restantes**',
+  'Compte Fondateur / Administrateur MODARYX | **EN COURS — compte Fondateur Auth0 DEV attribué ; modération runtime TERMINÉE ; recours runtime restant**',
   'MODARYX-FOUNDER-ADMIN-ACCESS-20260921.md',
   'MODARYX-FOUNDER-AUTH0-DEV-EVIDENCE-20260921.md',
   'Micro-surface Fondateur DEV temporaire | **EN COURS — preuve runtime uniquement ; retrait obligatoire après preuve**',
@@ -233,7 +233,7 @@ assert.ok(checkpoint.includes('EN COURS — compte Fondateur / Administrateur'))
 assert.ok(checkpoint.includes('modaryx:founder'));
 assert.ok(checkpoint.includes('Attribution réelle Auth0 DEV acquise'));
 assert.ok(checkpoint.includes('authority.role=founder'));
-assert.ok(checkpoint.includes('preuves runtime modération/recours restent manquantes'));
+assert.ok(checkpoint.includes('TERMINÉ — preuve runtime modération Fondateur DEV'));\nassert.ok(checkpoint.includes('EN COURS — preuve runtime recours seule restante'));
 assert.ok(checkpoint.includes('PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING'));
 assert.ok(checkpoint.includes('PREUVE MANQUANTE** — enrôlement, reconnexion et révocation sur appareil WebAuthn compatible'));
 assert.ok(checkpoint.includes('TERMINÉ — readiness WeatherAPI ciblée'));
