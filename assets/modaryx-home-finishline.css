@@ -47,3 +47,24 @@
 .explore{padding-bottom:54px}
 }
 .profile-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}.evidence{color:var(--nova-gold-light);font-weight:800}
+
+/* Accueil — continuite paysagere apres le hero composite approuve. */
+.site-main{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 94% 18%,rgba(47,90,112,.13),transparent 34rem),radial-gradient(ellipse at 8% 48%,rgba(72,103,78,.13),transparent 38rem),radial-gradient(ellipse at 78% 76%,rgba(151,99,43,.11),transparent 40rem)}
+.modaryx-realm-hero{box-shadow:0 46px 130px rgba(0,0,0,.48)}
+.modaryx-realm-hero:after{background:linear-gradient(90deg,#05090ef5,#05090ee0 28%,#05090e99 45%,#05090e00 65%),linear-gradient(0deg,#0a1112 0%,rgba(9,14,20,.88) 12%,transparent 34%)}
+.site-main>:is(.proof-strip,.modaryx-portals,.section,.security-band,.download-band,.faq,.explore-more){position:relative;z-index:1}
+.site-main .proof-strip{margin-top:0;padding-block:clamp(2rem,4vw,3.5rem);border-block:1px solid rgba(231,199,128,.1);background:linear-gradient(90deg,rgba(10,17,18,.96),rgba(18,28,25,.9),rgba(8,13,16,.96));box-shadow:0 28px 80px rgba(0,0,0,.28)}
+.site-main .modaryx-portals{padding-block:clamp(5rem,10vw,9rem);background:radial-gradient(ellipse at 50% 38%,rgba(116,155,135,.12),transparent 38rem),linear-gradient(180deg,rgba(9,15,16,.7),transparent)}
+.site-main .modaryx-portals figure{border-color:rgba(231,199,128,.28);border-radius:clamp(1.2rem,2.4vw,2rem);box-shadow:0 42px 120px rgba(0,0,0,.52),inset 0 1px rgba(255,255,255,.05)}
+.site-main .modaryx-portals img{max-height:clamp(26rem,52vw,46rem);filter:saturate(.9) contrast(1.04)}
+.site-main .modaryx-portal-links{background:linear-gradient(100deg,rgba(13,22,21,.98),rgba(20,24,19,.97))}
+.site-main>.section{margin:0;padding-block:var(--mx-section-space);border:0;background:transparent;box-shadow:none}
+.site-main>.section+.section:before{content:"";position:absolute;top:0;left:7%;right:7%;height:1px;background:linear-gradient(90deg,transparent,rgba(231,199,128,.28),rgba(112,164,219,.2),transparent)}
+.site-main .section-title{max-width:13ch;font-size:clamp(2.6rem,5.5vw,5.8rem);line-height:.94;letter-spacing:-.05em}
+.site-main .section-copy{color:#c6ccc5;font-size:clamp(1rem,1.35vw,1.16rem);line-height:1.75}
+.site-main .cards .card,.site-main .edition-card{background:linear-gradient(145deg,rgba(29,38,34,.9),rgba(8,13,15,.96))!important;border-color:rgba(231,199,128,.13)!important;box-shadow:0 28px 74px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.05)!important}
+.site-main .cards .card:nth-child(even),.site-main .edition-card:nth-child(even){background:linear-gradient(145deg,rgba(22,34,41,.9),rgba(8,12,15,.97))!important}
+.site-main .security-band,.site-main .download-band{margin-block:clamp(4rem,9vw,8rem);border-block:1px solid rgba(231,199,128,.12);background:linear-gradient(95deg,rgba(8,12,14,.97),rgba(20,29,25,.9)),url("./forge-field.svg") center/cover no-repeat;box-shadow:0 34px 100px rgba(0,0,0,.32)}
+.site-main .faq,.site-main .explore-more{padding-block:clamp(5rem,10vw,9rem)}
+@media(max-width:700px){.site-main .modaryx-portals{padding-block:4rem}.site-main>.section{padding-block:4.5rem}.site-main .section-title{font-size:clamp(2.35rem,12vw,3.8rem)}}
+@media(forced-colors:active){.site-main,.site-main>.section,.site-main .proof-strip,.site-main .security-band,.site-main .download-band{background:Canvas!important}.site-main>.section+.section:before{background:CanvasText}}
