@@ -1,6 +1,6 @@
 # MODARYX — micro-surface temporaire de preuve Fondateur DEV — 21 septembre 2026
 
-Statut : **EN COURS — preuve runtime modération Fondateur acquise ; preuve recours restante ; retrait toujours obligatoire après fermeture**.
+Statut : **TERMINÉ — preuves runtime Fondateur acquises ; micro-surface retirée dans le candidat de fermeture**.
 
 ## Pourquoi cette surface existe
 
@@ -58,7 +58,7 @@ Résultat exact :
 
 La fixture et ses receipts temporaires ont été nettoyés. Aucune donnée de preuve persistante n'est revendiquée.
 
-Le prochain point logique est désormais **la preuve recours seule**, avec session Fondateur encore fraîche. La modération ne doit pas être rejouée sans nouvelle raison technique.
+La modération ne doit pas être rejouée sans nouvelle raison technique.
 
 ## Route temporaire
 
@@ -121,19 +121,42 @@ Elle affiche uniquement :
 - booléen receipt créé ;
 - booléen nettoyage confirmé.
 
+### Preuve runtime recours acquise — 22 septembre 2026
+
+La mutation de recours Fondateur DEV a été exécutée via le vrai handler après confirmation de la session Fondateur et de la capacité Recours.
+
+Résultat exact :
+- `proof=appeals` ;
+- `httpStatus=200` ;
+- `result=upheld` ;
+- `moderationState=rejected` ;
+- `publicationState=received` ;
+- `receiptCreated=true` ;
+- `cleanupSucceeded=true` ;
+- erreur : aucune.
+
+État : **TERMINÉ — preuve runtime recours Fondateur DEV acquise**.
+
+Les deux preuves privilégiées Fondateur sont donc acquises :
+- modération : HTTP 200 + receipt créé + cleanup confirmé ;
+- recours : HTTP 200 + receipt créé + cleanup confirmé.
+
+Aucun cookie, token ou secret n'a été extrait ou affiché.
+
+### Retrait de la micro-surface
+
+Dans ce candidat de fermeture :
+- `functions/founder-proof-dev.js` est supprimé ;
+- `qa/check-founder-dev-proof-surface.cjs` devient un garde anti-résurrection qui exige l'absence de la route ;
+- le workflow source conserve ce garde afin d'empêcher une réintroduction accidentelle ;
+- les documents de preuve restent conservés pour historique et provenance.
+
+La surface temporaire ne fait donc plus partie du candidat MODARYX.
+
 ## Règle de retrait
 
 Cette surface est **temporaire**.
 
-Dès que Work a fourni les deux preuves runtime :
-- modération = 2xx + receipt + cleanup ;
-- recours = 2xx + receipt + cleanup ;
-
-alors :
-1. tracer la preuve ;
-2. retirer `functions/founder-proof-dev.js` ;
-3. retirer son checker dédié du workflow si devenu inutile ;
-4. micro-prouver le retrait ;
-5. seulement ensuite considérer la mission Fondateur DEV fermée.
+Les deux preuves runtime ont été acquises et le candidat de fermeture retire `functions/founder-proof-dev.js`. Le checker dédié est conservé sous forme de garde anti-résurrection. La mission Fondateur DEV ne doit être considérée fermée qu'après micro-proof verte de ce retrait et fusion du candidat dans Work.
 
 Aucun `main`, production, DNS/DNSSEC/nameserver ni full replay.
