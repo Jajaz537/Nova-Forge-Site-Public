@@ -33,13 +33,14 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 
 ## 3. Premium HD / surface publique
 
-- **TERMINÉ — preuve visuelle ciblée** sur **23 routes publiques**, desktop + mobile.
+- **TERMINÉ — preuve technique de non-régression visuelle ciblée** sur **23 routes publiques**, desktop + mobile ; elle prouve absence de cassure/overflow mais ne vaut pas validation artistique.
 - **TERMINÉ — Firefox ciblé** sur 23 routes.
 - **TERMINÉ — WebKit Playwright ciblé** sur 23 routes ; ne vaut pas Safari réel.
 - **TERMINÉ — cycle PWA HTTPS automatisé ciblé** : service worker, cache, offline-stale, reconnexion/update.
 - **TERMINÉ sur scénarios ciblés** — états empty/error/unavailable/retry des principales surfaces.
-- **PREUVE MANQUANTE** — validation artistique humaine finale.
-- Ne pas retoucher le design sans défaut frais reproduit ou décision artistique explicite.
+- **EN COURS — Bloc 1/4 Design Ultra Haut de Gamme réouvert le 22 septembre 2026** après retour humain frais sur le Preview : le site entier reste jugé trop proche d’un « site sombre à cartes » et doit recevoir une passe artistique globale cohérente sur les 23 routes.
+- **PREUVE MANQUANTE** — validation artistique humaine finale après cette refonte globale.
+- Une décision artistique explicite existe désormais pour cette refonte. Conserver les fonctions et preuves déjà vertes ; ne pas remplacer une composition approuvée par un visuel non validé.
 
 ## 4. Backend / communauté / profils
 
@@ -100,7 +101,7 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 
 ## 9. Météo / monde vivant
 
-- **TERMINÉ** — monde vivant, croissance visuelle et synchronisation contexte grossier ciblés.
+- **TERMINÉ — monde vivant logique + synchronisation contexte grossier ciblés**. **EN COURS — croissance visuelle artistique** : les assets séparés existent mais leur activation est revenue à `visualGrowth.status=awaiting-assets` via PR #149. Le hero approuvé `assets/modaryx-wolf-dragon-hero.webp` reste le rendu actif jusqu’à validation artistique humaine explicite des nouvelles couches.
 - **TERMINÉ — readiness WeatherAPI ciblée** : mode `weatherapi`, proxy same-origin, clé serveur obligatoire, normalisation, attribution et disclaimer utilisateur ; aucune activation réelle.
 - **BLOQUÉ / activation externe** — météo réelle production tant que compte/clé, acceptation des conditions, confidentialité/juridique et preuve réelle ne sont pas validés.
 - Ne pas activer un fournisseur météo réel sans validation explicite.
@@ -154,7 +155,8 @@ Ne jamais supprimer implicitement un blocker pour améliorer un pourcentage. Une
 
 1. Vérifier Git frais avant toute écriture.
 2. Ne pas rejouer les preuves déjà vertes sans modification pertinente.
-3. Fermer uniquement les dépendances réelles encore ouvertes quand un environnement adapté existe :
+3. Priorité produit courante : fermer le **Bloc 1/4 — refonte artistique globale Premium HD** sur les 23 routes sans réintroduire les couches Loup/Dragon non validées.
+4. Fermer ensuite uniquement les dépendances réelles encore ouvertes quand un environnement adapté existe :
    - passkey appareil ;
    - signer / trust anchor réel ;
    - artefact de distribution autorisé ;
@@ -165,9 +167,9 @@ Ne jamais supprimer implicitement un blocker pour améliorer un pourcentage. Une
    - météo si la décision fournisseur est validée ;
    - preuves humaines/appareils/terrain.
 4. Après erreur : **erreur exacte → isolation → correction ciblée → micro-proof → continuation**.
-5. Ne pas toucher à `main`, DNS/DNSSEC/nameservers, IONOS ou production sans instruction explicite.
-6. **Full replay unique uniquement à la toute fin**, après fermeture de tous les blockers ciblés.
-7. Aucune VF / aucun 100 % tant que les preuves requises ne sont pas acquises.
+6. Ne pas toucher à `main`, DNS/DNSSEC/nameservers, IONOS ou production sans instruction explicite.
+7. **Full replay unique uniquement à la toute fin**, après fermeture de tous les blockers ciblés.
+8. Aucune VF / aucun 100 % tant que les preuves requises ne sont pas acquises.
 
 ## 15. Règle de reprise
 
@@ -196,3 +198,16 @@ Pour toute nouvelle conversation ou agent :
 - **TERMINÉ — recours Fondateur DEV** : `proof=appeals`, HTTP `200`, `result=upheld`, `moderationState=rejected`, `publicationState=received`, receipt créé, cleanup confirmé, aucune erreur.
 - **TERMINÉ — retrait candidat de la micro-surface** : `functions/founder-proof-dev.js` supprimé ; checker converti en garde anti-résurrection. La fermeture définitive de ce lot exige la micro-proof source verte et la fusion dans Work.
 - Aucun full replay, aucun `main`, aucune production, aucun DNS/DNSSEC/nameserver.
+
+
+## Mise à jour canonique — 22 septembre 2026 — hero approuvé / direction artistique
+
+- HEAD Work après PR #149 : `14650dd7d0cb1a501ccc88e6f9caa112b4eda550`.
+- **TERMINÉ — correction du remplacement intempestif du hero** : l’accueil ne remplace plus après ~2,2 s le composite approuvé `assets/modaryx-wolf-dragon-hero.webp` par `environment-premium.jpg` + couches compagnon non validées.
+- Cause fermée : `visualGrowth.status=ready` avait été activé avant validation artistique humaine des couches séparées.
+- État courant : `visualGrowth.status=awaiting-assets`, environnement/couches de croissance non actifs ; chronologie, croissance logique, contexte local/météo et reduced-motion restent actifs.
+- PR #149 : fusionnée dans Work au merge `14650dd7d0cb1a501ccc88e6f9caa112b4eda550`.
+- Candidat final #149 : Source Proof, Local Functional, PWA, Real File, Lab Performance, Preview Visual, Firefox 23 routes, WebKit 23 routes, contrat croissance, asset gate, offline state et chronique : **success**.
+- Preview Visual confirme desktop/mobile/reduced-motion : hero `modaryx-wolf-dragon-hero.webp`, zéro couche compagnon active, `worldVisualGrowth=awaiting-assets`, reality sync active.
+- **EN COURS — Bloc 1/4** : retour humain frais par vidéo sur le Preview ; la qualité artistique globale des 23 routes doit être remontée au niveau VF Premium HD / ultra haut de gamme. Les anciennes preuves techniques restent valides comme non-régression, mais ne ferment plus le design artistique.
+- Ne jamais réactiver les couches de croissance visuelle avant validation humaine explicite de la nouvelle composition.
