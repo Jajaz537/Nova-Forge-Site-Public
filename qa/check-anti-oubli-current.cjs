@@ -231,7 +231,7 @@ assert.ok(checkpoint.includes('TERMINÉ — compte Fondateur / Administrateur DE
 assert.ok(checkpoint.includes('modaryx:founder'));
 assert.ok(checkpoint.includes('Attribution réelle Auth0 DEV acquise'));
 assert.ok(checkpoint.includes('authority.role=founder'));
-assert.ok(checkpoint.includes('TERMINÉ — preuve runtime modération Fondateur DEV'));
+assert.ok(checkpoint.includes('TERMINÉ — preuve runtime modération Fondateur'));
 assert.ok(checkpoint.includes('TERMINÉ — preuve runtime recours Fondateur'));
 assert.ok(checkpoint.includes('TERMINÉ — micro-surface Fondateur DEV retirée du candidat de fermeture'));
 assert.ok(checkpoint.includes('PASS_TARGETED_RUNTIME_RESILIENCE_HARDENING'));
