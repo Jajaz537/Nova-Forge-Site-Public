@@ -48,7 +48,7 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 - **TERMINÉ — communauté distante ciblée** : ingestion, surface publique modérée, suivi auteur et recours.
 - **TERMINÉ — modération/publication/recours Provider DEV** : migration D1 0003, RBAC séparé, publication/retrait, recours/issue, receipts pseudonymisés.
 - Production reste distincte et non activée.
-- **EN COURS — compte Fondateur / Administrateur** : code/UI et héritage serveur fusionnés via PR #142. **Attribution réelle Auth0 DEV acquise** : tenant `modaryx-dev` EU, rôle `MODARYX Founder`, permission `modaryx:founder`, session renouvelée avec `authority.role=founder` et capacités founder/administration/modération/recours confirmées, sans secret/token exposé. Les **preuves runtime modération/recours restent manquantes** : Work a rencontré `TypeError: fetch is not a function` et n'a ni `fetch`, ni XHR, ni `sendBeacon` dans ce contexte authentifié. Cookie HttpOnly non extrait. Source : `qa/MODARYX-FOUNDER-AUTH0-DEV-EVIDENCE-20260921.md`.
+- **EN COURS — compte Fondateur / Administrateur** : code/UI et héritage serveur fusionnés via PR #142. **Attribution réelle Auth0 DEV acquise** : tenant `modaryx-dev` EU, rôle `MODARYX Founder`, permission `modaryx:founder`, session renouvelée avec `authority.role=founder` et capacités founder/administration/modération/recours confirmées, sans secret/token exposé. **TERMINÉ — preuve runtime modération Fondateur DEV** le 22 septembre 2026 après réauthentification : HTTP `200`, `moderationState=held-for-review`, `publicationState=received`, `receiptCreated=true`, `cleanupSucceeded=true`, aucune erreur. **EN COURS — preuve runtime recours seule restante**. Cookie HttpOnly non extrait. Sources : `qa/MODARYX-FOUNDER-AUTH0-DEV-EVIDENCE-20260921.md` + `qa/MODARYX-FOUNDER-DEV-PROOF-SURFACE-20260921.md`.
 - Les rôles web n'exposent jamais automatiquement les secrets Cloudflare, GitHub, DNS/DNSSEC, Auth0, WeatherAPI ou clés privées de signature.
 - **EN COURS — micro-surface Fondateur DEV temporaire** : `/founder-proof-dev`, limitée au hostname Preview stable exact, sans JavaScript, protégée par session `modaryx:founder` + same-origin, réutilisant les vrais handlers de mutation modération/recours avec fixtures D1 éphémères. Le succès exige receipt créé + nettoyage confirmé. **Retrait obligatoire immédiatement après acquisition des deux preuves ; cette route ne doit jamais entrer dans la VF/production.**
 
@@ -155,7 +155,7 @@ Ne jamais supprimer implicitement un blocker pour améliorer un pourcentage. Une
 1. Vérifier Git frais avant toute écriture.
 2. Ne pas rejouer les preuves déjà vertes sans modification pertinente.
 3. Fermer uniquement les dépendances réelles encore ouvertes quand un environnement adapté existe :
-   - exécuter les deux mutations via `/founder-proof-dev` sur Preview Work, acquérir receipt + cleanup pour modération et recours, puis retirer immédiatement la micro-surface et micro-prouver son retrait ;
+   - exécuter **uniquement la mutation recours** via `/founder-proof-dev` sur Preview Work ; la modération est déjà prouvée. Après receipt + cleanup verts sur recours, retirer immédiatement la micro-surface et micro-prouver son retrait ;
    - passkey appareil ;
    - signer / trust anchor réel ;
    - artefact de distribution autorisé ;
@@ -188,3 +188,11 @@ Pour toute nouvelle conversation ou agent :
 - Validation juridique, droits/licences et validation artistique humaine : **PREUVE MANQUANTE** maintenue.
 - Compte Fondateur Auth0 DEV : attribution `modaryx:founder` et session `authority.role=founder` rapportées comme acquises ; modération/recours runtime restent **BLOQUÉS** par l'absence de primitives `fetch`/XHR/`sendBeacon` dans Work. Priorité : tenter la navigation directe same-origin vers les endpoints GET privilégiés avant toute micro-surface temporaire.
 - Aucun full replay, aucune activation production et aucun changement `main`, DNS/DNSSEC, nameservers ou IONOS.
+
+
+## Mise à jour canonique — 22 septembre 2026 — preuve runtime Fondateur
+
+- **TERMINÉ — modération Fondateur DEV** : `proof=moderation`, HTTP `200`, `held-for-review`, `received`, receipt créé, cleanup confirmé, aucune erreur.
+- L'échec précédent `reauthentication-required` a été résolu par une réauthentification complète ; aucun changement de code n'a été nécessaire pour cette étape.
+- **EN COURS — recours Fondateur DEV** : seule mutation privilégiée restante avant retrait obligatoire de la micro-surface temporaire.
+- Aucun full replay, aucun `main`, aucune production, aucun DNS/DNSSEC/nameserver.
