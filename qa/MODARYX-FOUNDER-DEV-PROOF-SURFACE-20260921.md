@@ -1,6 +1,6 @@
 # MODARYX — micro-surface temporaire de preuve Fondateur DEV — 21 septembre 2026
 
-Statut : **EN COURS — surface temporaire prête à micro-prouver en Preview Work**.
+Statut : **EN COURS — preuve runtime modération Fondateur acquise ; preuve recours restante ; retrait toujours obligatoire après fermeture**.
 
 ## Pourquoi cette surface existe
 
@@ -40,6 +40,25 @@ Correction ciblée :
 - `same-site` et `cross-site` ne sont jamais acceptés comme fallback.
 
 Après cette correction, rejouer **la preuve modération seule**. Le recours reste interdit tant que modération n'est pas verte.
+
+### Preuve runtime modération acquise — 22 septembre 2026
+
+Après réauthentification complète du compte Fondateur DEV, la mutation modération a été exécutée via le vrai handler.
+
+Résultat exact :
+- `proof=moderation` ;
+- `httpStatus=200` ;
+- `moderationState=held-for-review` ;
+- `publicationState=received` ;
+- `receiptCreated=true` ;
+- `cleanupSucceeded=true` ;
+- erreur : aucune.
+
+État : **TERMINÉ — preuve runtime modération Fondateur DEV acquise**.
+
+La fixture et ses receipts temporaires ont été nettoyés. Aucune donnée de preuve persistante n'est revendiquée.
+
+Le prochain point logique est désormais **la preuve recours seule**, avec session Fondateur encore fraîche. La modération ne doit pas être rejouée sans nouvelle raison technique.
 
 ## Route temporaire
 
