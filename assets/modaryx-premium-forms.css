@@ -1,0 +1,298 @@
+/* MODARYX Premium Form System — editorial controls, accessible states. */
+:root{
+  --mx-form-paper:#f4eedf;
+  --mx-form-paper-hover:#fbf6e9;
+  --mx-form-ink:#17271f;
+  --mx-form-muted:#5d6b63;
+  --mx-form-line:rgba(31,49,40,.3);
+  --mx-form-line-strong:#8a612f;
+  --mx-form-copper:#9b672f;
+  --mx-form-forest:#173126;
+  --mx-form-focus:#285f73;
+  --mx-form-error:#9a3f32;
+  --mx-form-success:#2f6a4c;
+}
+
+/* Form structure: open chapters instead of nested dashboard cards. */
+.studio-form,
+.community-workspace,
+.account-profile-card,
+.public-profile-search,
+.catalog-controls{
+  --mx-form-section-gap:clamp(1.25rem,2.6vw,2rem);
+}
+.studio-form{
+  padding:clamp(1.25rem,3vw,2.4rem)!important;
+  gap:var(--mx-form-section-gap)!important;
+  background:rgba(255,255,255,.34)!important;
+}
+.studio-form fieldset{
+  padding-top:var(--mx-form-section-gap)!important;
+  gap:clamp(.9rem,1.8vw,1.25rem)!important;
+  border:0!important;
+  border-top:1px solid rgba(31,49,40,.18)!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+.studio-form fieldset:first-of-type{padding-top:.35rem!important;border-top:0}
+.community-workspace form,
+#profile-editor,
+.public-profile-search,
+.catalog-controls form{accent-color:var(--mx-form-copper)}
+.community-form,
+.account-profile-card,
+.public-profile-console{
+  border-color:rgba(31,49,40,.18)!important;
+  border-radius:2px!important;
+  background:rgba(255,255,255,.3)!important;
+  box-shadow:0 18px 50px rgba(31,49,40,.07)!important;
+}
+.community-form{padding:clamp(1.1rem,2.6vw,2rem)!important}
+.account-console,
+.public-profile-console{
+  overflow:visible;
+  padding:clamp(1.25rem,3vw,2.25rem) 0!important;
+  border:0!important;
+  border-block:1px solid rgba(31,49,40,.2)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--mx-form-ink)!important;
+}
+.account-console:before{display:none}
+.account-console-heading h2,.public-profile-heading h2{color:var(--mx-form-ink)}
+.account-console-heading p:last-child,.public-profile-heading p:last-child{color:var(--mx-form-muted)!important}
+.account-console-grid{gap:0}
+.account-access-card{
+  padding:clamp(1.2rem,2.6vw,2rem)!important;
+  border:0!important;
+  border-right:1px solid rgba(31,49,40,.2)!important;
+  border-radius:0!important;
+  background:var(--mx-form-forest)!important;
+  box-shadow:none!important;
+  color:#f2ead8;
+}
+.account-access-card :is(h3,strong){color:#f2ead8}
+.account-access-card :is(p,.account-card-kicker,.account-fineprint){color:#cbd4cc!important}
+.account-profile-card{padding:clamp(1.2rem,2.6vw,2rem)!important;border:0!important;box-shadow:none!important}
+.public-profile-console{padding-inline:clamp(1.2rem,2.6vw,2rem)!important;background:rgba(255,255,255,.22)!important}
+.filter-grid{
+  padding:clamp(1rem,2vw,1.5rem) 0;
+  border-block:1px solid rgba(31,49,40,.2);
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.saved-view-panel{
+  padding:clamp(1rem,2vw,1.5rem);
+  border-left:2px solid rgba(155,103,47,.5);
+  background:rgba(255,255,255,.24)!important;
+}
+
+.studio-form label,
+.community-workspace label.field,
+#profile-editor label,
+.public-profile-search>label,
+.filter-grid label,
+.saved-view-controls label{
+  gap:.5rem;
+  color:var(--mx-form-ink)!important;
+  font-size:.78rem!important;
+  font-weight:800!important;
+  line-height:1.35;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+}
+.studio-form label small,
+.community-workspace label small,
+#profile-editor label small,
+.catalog-controls label small{
+  color:var(--mx-form-muted);
+  font-size:.78rem;
+  font-weight:500;
+  line-height:1.55;
+  letter-spacing:0;
+  text-transform:none;
+}
+
+/* Controls: warm paper, quiet geometry, strong copper/river states. */
+.studio-form :is(input,select,textarea),
+.community-workspace :is(input,select,textarea),
+#profile-editor :is(input,select,textarea),
+.public-profile-search input,
+.filter-grid :is(input,select),
+.saved-view-controls :is(input,select){
+  width:100%;
+  min-height:3.25rem;
+  padding:.82rem .95rem;
+  border:1px solid var(--mx-form-line)!important;
+  border-radius:2px!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(244,238,223,.96))!important;
+  color:var(--mx-form-ink)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.9),0 1px 0 rgba(23,49,38,.06)!important;
+  font:600 .96rem/1.45 var(--nova-font,Inter,ui-sans-serif,system-ui,sans-serif);
+  letter-spacing:0;
+  text-transform:none;
+  outline:0;
+  transition:border-color .16s ease,background .16s ease,box-shadow .16s ease,transform .16s ease;
+}
+.studio-form textarea,
+.community-workspace textarea,
+#profile-editor textarea{min-height:7.5rem;resize:vertical;line-height:1.6}
+.studio-form ::placeholder,
+.community-workspace ::placeholder,
+#profile-editor ::placeholder,
+.public-profile-search ::placeholder,
+.catalog-controls ::placeholder{color:#737d76!important;font-weight:500;opacity:1}
+
+@media(hover:hover) and (pointer:fine){
+  .studio-form :is(input,select,textarea):not(:disabled):hover,
+  .community-workspace :is(input,select,textarea):not(:disabled):hover,
+  #profile-editor :is(input,select,textarea):not(:disabled):hover,
+  .public-profile-search input:not(:disabled):hover,
+  .filter-grid :is(input,select):not(:disabled):hover,
+  .saved-view-controls :is(input,select):not(:disabled):hover{
+    border-color:rgba(138,97,47,.64)!important;
+    background:var(--mx-form-paper-hover)!important;
+  }
+}
+.studio-form :is(input,select,textarea):focus-visible,
+.community-workspace :is(input,select,textarea):focus-visible,
+#profile-editor :is(input,select,textarea):focus-visible,
+.public-profile-search input:focus-visible,
+.filter-grid :is(input,select):focus-visible,
+.saved-view-controls :is(input,select):focus-visible{
+  border-color:var(--mx-form-focus)!important;
+  outline:3px solid #fff8e8!important;
+  outline-offset:2px!important;
+  box-shadow:0 0 0 5px rgba(40,95,115,.55),inset 0 1px rgba(255,255,255,.9)!important;
+  background:#fffaf0!important;
+}
+.studio-form :is(input,select,textarea):active,
+.community-workspace :is(input,select,textarea):active,
+#profile-editor :is(input,select,textarea):active,
+.public-profile-search input:active,
+.filter-grid :is(input,select):active,
+.saved-view-controls :is(input,select):active{border-color:var(--mx-form-copper)!important}
+
+.studio-form :is(input,select,textarea)[aria-invalid="true"],
+.community-workspace :is(input,select,textarea)[aria-invalid="true"],
+#profile-editor :is(input,select,textarea)[aria-invalid="true"]{
+  border-color:var(--mx-form-error)!important;
+  box-shadow:inset 4px 0 var(--mx-form-error),0 0 0 1px rgba(154,63,50,.12)!important;
+}
+.studio-form :is(input,select,textarea)[data-state="success"],
+.community-workspace :is(input,select,textarea)[data-state="success"],
+#profile-editor :is(input,select,textarea)[data-state="success"]{
+  border-color:var(--mx-form-success)!important;
+  box-shadow:inset 4px 0 var(--mx-form-success)!important;
+}
+.studio-form :is(input,select,textarea):disabled,
+.community-workspace :is(input,select,textarea):disabled,
+#profile-editor :is(input,select,textarea):disabled,
+.public-profile-search input:disabled,
+.filter-grid :is(input,select):disabled,
+.saved-view-controls :is(input,select):disabled{
+  cursor:not-allowed;
+  border-color:rgba(31,49,40,.16)!important;
+  background:#d8d3c7!important;
+  color:#667069!important;
+  box-shadow:none!important;
+  opacity:.72;
+}
+
+/* Native specialty controls remain semantic, but join the same material system. */
+.studio-form input[type="file"],
+.community-workspace input[type="file"]{padding:.42rem .5rem}
+.studio-form input[type="file"]::file-selector-button,
+.community-workspace input[type="file"]::file-selector-button{
+  min-height:2.35rem;
+  margin-right:.8rem;
+  padding:.48rem .8rem;
+  border:1px solid rgba(31,49,40,.28);
+  border-radius:1px;
+  background:var(--mx-form-forest);
+  color:#f2ead8;
+  font:800 .75rem/1 var(--nova-font,Inter,ui-sans-serif,system-ui,sans-serif);
+  letter-spacing:.045em;
+  text-transform:uppercase;
+}
+.profile-check,.check-control{
+  min-height:3.25rem;
+  padding:.72rem .85rem!important;
+  border:1px solid rgba(31,49,40,.18)!important;
+  border-radius:2px!important;
+  background:rgba(255,255,255,.26)!important;
+  color:var(--mx-form-ink)!important;
+}
+.profile-check input,.check-control input{width:1.25rem!important;height:1.25rem!important;min-height:0!important;flex:0 0 auto}
+
+/* Status copy reads as a receipt, not generic helper chrome. */
+.studio-status,
+.community-workspace [id$="-status"],
+#profile-form-status,
+#public-profile-search-status,
+.catalog-state{
+  min-height:1.5rem;
+  margin-top:.35rem;
+  padding-left:.8rem;
+  border-left:2px solid rgba(138,97,47,.54);
+  color:var(--mx-form-muted)!important;
+  font-size:.82rem!important;
+  line-height:1.55;
+}
+
+@media(max-width:620px){
+  .studio-form{padding:1rem!important;gap:1rem!important}
+  .studio-form fieldset{padding-top:1rem!important;gap:.8rem!important}
+  .studio-form label,
+  .community-workspace label.field,
+  #profile-editor label,
+  .public-profile-search>label,
+  .filter-grid label,
+  .saved-view-controls label{gap:.38rem;margin-bottom:.55rem;font-size:.74rem!important}
+  .studio-form :is(input,select,textarea),
+  .community-workspace :is(input,select,textarea),
+  #profile-editor :is(input,select,textarea),
+  .public-profile-search input,
+  .filter-grid :is(input,select),
+  .saved-view-controls :is(input,select){min-height:3rem;padding:.72rem .78rem}
+  .studio-form textarea,.community-workspace textarea,#profile-editor textarea{min-height:6.5rem}
+  .account-console-grid{gap:1rem}
+  .account-access-card{border-right:0!important;border-bottom:1px solid rgba(31,49,40,.2)!important}
+  .filter-grid{padding:.8rem 0}
+  .saved-view-panel{padding:1rem}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .studio-form :is(input,select,textarea),
+  .community-workspace :is(input,select,textarea),
+  #profile-editor :is(input,select,textarea),
+  .public-profile-search input,
+  .filter-grid :is(input,select),
+  .saved-view-controls :is(input,select){transition:none}
+}
+
+@media(forced-colors:active){
+  .studio-form :is(input,select,textarea),
+  .community-workspace :is(input,select,textarea),
+  #profile-editor :is(input,select,textarea),
+  .public-profile-search input,
+  .filter-grid :is(input,select),
+  .saved-view-controls :is(input,select),
+  .profile-check,.check-control{
+    border:1px solid FieldText!important;
+    background:Field!important;
+    color:FieldText!important;
+    forced-color-adjust:auto;
+  }
+  .studio-form :is(input,select,textarea):focus-visible,
+  .community-workspace :is(input,select,textarea):focus-visible,
+  #profile-editor :is(input,select,textarea):focus-visible,
+  .public-profile-search input:focus-visible,
+  .filter-grid :is(input,select):focus-visible,
+  .saved-view-controls :is(input,select):focus-visible{outline:3px solid Highlight!important;box-shadow:none!important}
+  .studio-form :is(input,select,textarea)[aria-invalid="true"],
+  .community-workspace :is(input,select,textarea)[aria-invalid="true"],
+  #profile-editor :is(input,select,textarea)[aria-invalid="true"]{border:3px solid Mark!important;box-shadow:none!important}
+}

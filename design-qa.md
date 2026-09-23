@@ -32,4 +32,15 @@
 
 Aucun finding P0, P1 ou P2 restant sur le périmètre de la refonte canonique et de son extension aux pages secondaires. La validation artistique humaine demeure une décision externe à cette QA d’implémentation.
 
+## Passe ciblée — Premium Form System
+
+- Périmètre : Creator Studio, Communauté, Profils et filtres du Catalogue, inspectés à 1440 × 1000 et 390 × 844.
+- Matériaux : champs ivoire chaud, texte forêt et accents cuivre/bleu rivière ; suppression des gros fonds gris autour des filtres et des groupes du Studio.
+- Hiérarchie : labels courts en petites capitales, aide en casse naturelle, groupes séparés par des filets fins et statuts présentés comme des reçus discrets.
+- États : hover cuivre, focus visible double contraste, active, disabled, `aria-invalid=true` et succès déclaratif couverts sans modifier la validation métier.
+- Contrôles spécialisés : fichiers, cases à cocher, zones de texte et sélecteurs conservent leur sémantique native et leurs cibles tactiles.
+- Mobile : contrôles de 48 px minimum, marges et espacements resserrés sans masquer de contenu ; aucun débordement horizontal sur les quatre pages.
+- Accessibilité : labels et ordre DOM inchangés, focus clavier conservé, `prefers-reduced-motion` et `forced-colors` explicitement préservés.
+- Verrou artistique : hero canonique inchangé ; aucune couche Loup/Dragon séparée ; `visualGrowth.status=awaiting-assets` confirmé.
+
 final result: passed
