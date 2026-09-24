@@ -227,8 +227,8 @@ main{background:linear-gradient(180deg,#e9e2d3,#dcd4c3 54%,#eae4d7);padding-bott
 .hero:after,.catalog-hero:after,.project-hero:after,.studio-hero:after,.profiles-hero:after{left:0;right:0;background:linear-gradient(90deg,#d4a75a,#6f9ba5,transparent 82%)}
 
 /* Paysage humain : communauté et profils, cadrage sur les compagnons. */
-body.community-page .hero,.profiles-hero{background:linear-gradient(90deg,rgba(7,14,11,.94) 0,rgba(8,16,13,.76) 42%,rgba(8,15,13,.18) 72%),url("./modaryx-wolf-dragon-hero.webp") 18% center/cover no-repeat}
-.profiles-hero{background:linear-gradient(90deg,rgba(7,14,11,.95),rgba(8,16,13,.76) 44%,rgba(8,15,13,.2) 72%),url("./modaryx-wolf-dragon-hero.webp") 30% center/cover no-repeat}
+body.community-page .hero{background:linear-gradient(90deg,rgba(7,14,11,.94) 0,rgba(8,16,13,.76) 42%,rgba(8,15,13,.18) 72%),url("./modaryx-world-community.webp") 52% center/cover no-repeat}
+.profiles-hero{background:linear-gradient(90deg,rgba(7,14,11,.95),rgba(8,16,13,.76) 44%,rgba(8,15,13,.2) 72%),url("./modaryx-world-profiles.webp") 58% center/cover no-repeat}
 
 /* Découverte : château et rivière, sans réutiliser l'ancien panorama. */
 .catalog-hero{background:linear-gradient(90deg,rgba(8,15,12,.95),rgba(9,17,14,.76) 43%,rgba(8,15,13,.14) 75%),url("./modaryx-wolf-dragon-hero.webp") 72% center/cover no-repeat}
