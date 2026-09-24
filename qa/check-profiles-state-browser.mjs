@@ -358,7 +358,8 @@ try {
   process.exitCode = 1;
 } finally {
   chrome.kill('SIGTERM');
-  await sleep(150);
-  if (!chrome.killed) chrome.kill('SIGKILL');
-  fs.rmSync(TEMP_ROOT, {recursive:true, force:true});
+  for (let attempt = 0; attempt < 20 && chrome.exitCode === null; attempt++) await sleep(100);
+  if (chrome.exitCode === null) chrome.kill('SIGKILL');
+  for (let attempt = 0; attempt < 10 && chrome.exitCode === null; attempt++) await sleep(100);
+  fs.rmSync(TEMP_ROOT, {recursive:true, force:true, maxRetries:10, retryDelay:100});
 }
