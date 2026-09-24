@@ -242,3 +242,10 @@ Pour toute nouvelle conversation ou agent :
 - Les checks automatisés restent des preuves techniques uniquement et ne valent jamais validation artistique.
 - État artistique courant : **TERMINÉ — dernière passe vidéo exhaustive examinée et acceptée par Nova**. Cette acceptation ne vaut pas VF globale.
 - Ne jamais réactiver les couches de croissance visuelle avant validation humaine explicite de la nouvelle composition.
+
+## Mise à jour canonique — 24 septembre 2026 — kit de preuves manuelles finales
+
+- **TERMINÉ — préparation documentaire uniquement** : le kit `qa/manual-final-evidence/` fournit les protocoles utilisateur/appareil, la matrice des dépendances externes, le modèle de rapport, le handoff et un manifeste borné au candidat `03e41855c7b51fcd499ae7aaaebf0eb21d4da493` et à sa Preview immuable `https://6f813d33.nova-forge-site-public.pages.dev`.
+- Les protocoles préparés ne valent aucune exécution : passkey réelle, Safari, VoiceOver, lecteur d'écran Windows, zoom natif 200/400 %, tactile physique, PWA appareil et CWV terrain restent **PREUVE MANQUANTE**.
+- Juridique/licences et Master Nova Design Intelligence restent **PREUVE MANQUANTE** ; corpus GTA VI/RDR2 reste **EN COURS — ENTRÉES ABSENTES** ; signer/trust anchor, artefact public autorisé, Storage/Repair réels, Guide MODARYX réel, pont Nova Forge OS réel et météo production restent **BLOQUÉS**.
+- Aucun état externe n'est artificiellement fermé. Aucun full replay n'a été lancé. La VF globale reste non déclarée et `visualGrowth.status=awaiting-assets` reste actif.

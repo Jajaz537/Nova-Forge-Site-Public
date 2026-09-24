@@ -1,0 +1,18 @@
+{
+  "head": "03e41855c7b51fcd499ae7aaaebf0eb21d4da493",
+  "preview": "https://6f813d33.nova-forge-site-public.pages.dev",
+  "files": [
+    "EVIDENCE-REPORT-TEMPLATE.md",
+    "EXTERNAL-DEPENDENCIES.md",
+    "HANDOFF-TO-WORK.md",
+    "PASSKEY-REAL-DEVICE.md",
+    "PWA-PHYSICAL-DEVICE.md",
+    "README.md",
+    "SAFARI-VOICEOVER.md",
+    "TOUCH-DEVICE.md",
+    "WINDOWS-SCREEN-READER.md",
+    "ZOOM-200-400.md"
+  ],
+  "routes_count": 23,
+  "status": "PREPARATION_ONLY"
+}

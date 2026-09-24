@@ -167,3 +167,13 @@ Aucune idée n'est supprimée implicitement pour améliorer un pourcentage. Une 
 5. Garder météo réelle production **BLOQUÉE** tant que licence/confidentialité/attribution/disclaimer ne sont pas validés.
 6. Fermer séparément les preuves humaines/externes (lecteurs d’écran natifs, zoom 400 %, appareils physiques, Safari réel, PWA install appareil, CWV terrain, juridique) quand un environnement approprié est disponible.
 7. Aucun full replay avant la toute fin.
+
+## 11. Kit de preuves manuelles finales — 24 septembre 2026
+
+| Élément | État courant | Preuve / garde |
+|---|---|---|
+| Kit de preuves manuelles finales | **TERMINÉ — préparation documentaire uniquement** | `qa/manual-final-evidence/README.md` et `qa/manual-final-evidence/MANIFEST.json`, bornés au SHA `03e41855c7b51fcd499ae7aaaebf0eb21d4da493` et à la Preview immuable `https://6f813d33.nova-forge-site-public.pages.dev`. |
+
+- Le kit prépare les protocoles et la collecte ; il ne constitue jamais une preuve utilisateur, appareil, terrain, juridique ou fournisseur.
+- Les états ouverts de la section 6 restent inchangés jusqu'à réception d'une preuve réelle.
+- `visualGrowth.status=awaiting-assets` reste actif ; aucun changement visuel, aucune VF globale et aucun full replay.
