@@ -104,3 +104,5 @@ body[data-mx-canon=true] .site-footer nav a{color:#d6c79f!important}
 @media(max-width:480px){body[data-mx-world=home] .modaryx-realm-hero .shell{width:calc(100% - 32px)}body[data-mx-world=home] .hero-actions{display:grid}body[data-mx-world=home] .hero-actions .button{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}body[data-mx-canon=true] *,body[data-mx-canon=true] *::before,body[data-mx-canon=true] *::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
 @media(forced-colors:active){body[data-mx-canon=true]::before,body[data-mx-canon=true]::after{display:none}body[data-mx-canon=true] :is(.card,.panel,.catalog-card,.project-section,.studio-form,.studio-preview,.site-footer){background:Canvas!important;color:CanvasText!important;border-color:CanvasText!important;box-shadow:none!important}}
+
+/* QA sync marker: canonical rebuild candidate; no visual delta. */
