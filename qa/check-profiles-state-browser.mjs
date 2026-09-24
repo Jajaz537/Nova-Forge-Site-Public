@@ -12,6 +12,7 @@ const failures = [];
 const observations = {};
 
 fs.mkdirSync(OUT, {recursive: true});
+fs.mkdirSync(USER_DATA_DIR, {recursive: true});
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
