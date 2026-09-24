@@ -6,7 +6,6 @@ import crypto from 'node:crypto';
 
 const ORIGIN = process.env.MODARYX_TEST_ORIGIN || 'http://127.0.0.1:4173';
 const CHROME_BIN = process.env.CHROME_BIN || 'google-chrome';
-const DEBUG_PORT = Number(process.env.CHROME_DEBUG_PORT || 9224);
 const ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'modaryx-real-file-proof-'));
 const DOWNLOADS = path.join(ROOT, 'downloads');
 const INPUTS = path.join(ROOT, 'inputs');
@@ -16,6 +15,7 @@ const checks = [];
 
 fs.mkdirSync(DOWNLOADS, {recursive: true});
 fs.mkdirSync(INPUTS, {recursive: true});
+fs.mkdirSync(CHROME_PROFILE, {recursive: true});
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -32,6 +32,19 @@ async function waitForJson(url, timeoutMs = 10000) {
     await sleep(120);
   }
   throw lastError || new Error('timeout waiting for ' + url);
+}
+
+async function waitForDevToolsPort(timeoutMs = 12000) {
+  const file = path.join(CHROME_PROFILE, 'DevToolsActivePort');
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (fs.existsSync(file)) {
+      const [port] = fs.readFileSync(file, 'utf8').trim().split(/\r?\n/);
+      if (/^\d+$/.test(port)) return Number(port);
+    }
+    await sleep(120);
+  }
+  throw new Error('DevToolsActivePort not created');
 }
 
 class Cdp {
@@ -161,7 +174,7 @@ const chrome = spawn(CHROME_BIN, [
   '--metrics-recording-only',
   '--no-first-run',
   '--remote-debugging-address=127.0.0.1',
-  '--remote-debugging-port=' + DEBUG_PORT,
+  '--remote-debugging-port=0',
   '--user-data-dir=' + CHROME_PROFILE,
   'about:blank'
 ], {stdio: ['ignore', 'ignore', 'pipe']});
@@ -173,9 +186,10 @@ chrome.stderr.on('data', (chunk) => {
 });
 
 try {
-  await waitForJson('http://127.0.0.1:' + DEBUG_PORT + '/json/version');
+  const debugPort = await waitForDevToolsPort();
+  await waitForJson('http://127.0.0.1:' + debugPort + '/json/version');
   const tabResponse = await fetch(
-    'http://127.0.0.1:' + DEBUG_PORT + '/json/new?' + encodeURIComponent('about:blank'),
+    'http://127.0.0.1:' + debugPort + '/json/new?' + encodeURIComponent('about:blank'),
     {method: 'PUT'}
   );
   if (!tabResponse.ok) throw new Error('cannot create Chrome target: HTTP ' + tabResponse.status);
