@@ -1,8 +1,12 @@
 import {spawn} from 'node:child_process';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 
 const ORIGIN = process.env.MODARYX_TEST_ORIGIN || 'http://127.0.0.1:4175';
 const CHROME_BIN = process.env.CHROME_BIN || 'google-chrome';
-const DEBUG_PORT = Number(process.env.CHROME_DEBUG_PORT || (26000 + (process.pid % 12000)));
+const TEMP_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'modaryx-a11y-proof-'));
+const USER_DATA_DIR = path.join(TEMP_ROOT, 'chrome-profile');
 const pages = [
   'index.html','catalog.html','search.html','creator-studio.html','community.html','profiles.html',
   'ecosystem.html','documentation.html','security.html','verify.html','downloads.html','project.html',
@@ -13,6 +17,23 @@ const pages = [
 const failures = [];
 const results = [];
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+fs.mkdirSync(USER_DATA_DIR, {recursive: true});
+
+async function waitForDevToolsPort(timeoutMs = 12000) {
+  const file = path.join(USER_DATA_DIR, 'DevToolsActivePort');
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (fs.existsSync(file)) {
+      const [port] = fs.readFileSync(file, 'utf8').trim().split(/\r?\n/);
+      if (/^\d+$/.test(port)) return Number(port);
+    }
+    const announced = chromeStderr.match(/DevTools listening on ws:\/\/127\.0\.0\.1:(\d+)\//);
+    if (announced) return Number(announced[1]);
+    await sleep(120);
+  }
+  throw new Error('DevToolsActivePort not created');
+}
 
 async function waitForJson(url, timeoutMs = 10000) {
   const deadline = Date.now() + timeoutMs;
@@ -93,7 +114,7 @@ async function navigate(cdp,relative){
 const chrome=spawn(CHROME_BIN,[
   '--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-background-networking',
   '--disable-default-apps','--disable-extensions','--disable-sync','--metrics-recording-only','--no-first-run',
-  '--remote-debugging-address=127.0.0.1','--remote-debugging-port='+DEBUG_PORT,
+  '--remote-debugging-address=127.0.0.1','--remote-debugging-port=0','--user-data-dir='+USER_DATA_DIR,
   '--user-data-dir=/tmp/modaryx-a11y-proof-'+process.pid,'about:blank'
 ],{stdio:['ignore','ignore','pipe']});
 
@@ -101,8 +122,9 @@ let chromeStderr='';
 chrome.stderr.on('data',(chunk)=>{chromeStderr=(chromeStderr+String(chunk)).slice(-12000);});
 
 try {
-  await waitForJson('http://127.0.0.1:'+DEBUG_PORT+'/json/version');
-  const tabResponse=await fetch('http://127.0.0.1:'+DEBUG_PORT+'/json/new?'+encodeURIComponent('about:blank'),{method:'PUT'});
+  const debugPort=await waitForDevToolsPort();
+  await waitForJson('http://127.0.0.1:'+debugPort+'/json/version');
+  const tabResponse=await fetch('http://127.0.0.1:'+debugPort+'/json/new?'+encodeURIComponent('about:blank'),{method:'PUT'});
   if(!tabResponse.ok) throw new Error('cannot create Chrome target: HTTP '+tabResponse.status);
   const tab=await tabResponse.json();
   const cdp=new Cdp(tab.webSocketDebuggerUrl);
@@ -203,4 +225,5 @@ try {
   chrome.kill('SIGTERM');
   await sleep(150);
   if(!chrome.killed) chrome.kill('SIGKILL');
+  fs.rmSync(TEMP_ROOT,{recursive:true,force:true,maxRetries:5,retryDelay:100});
 }

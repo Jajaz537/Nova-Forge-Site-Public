@@ -29,6 +29,8 @@ async function waitForDevToolsPort(timeoutMs = 12000) {
       const [port] = fs.readFileSync(file, 'utf8').trim().split(/\r?\n/);
       if (/^\d+$/.test(port)) return Number(port);
     }
+    const announced = chromeStderr.match(/DevTools listening on ws:\/\/127\.0\.0\.1:(\d+)\//);
+    if (announced) return Number(announced[1]);
     await sleep(120);
   }
   throw new Error('DevToolsActivePort not created');
