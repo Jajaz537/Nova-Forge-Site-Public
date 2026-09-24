@@ -111,6 +111,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 ## 7. Finition Premium HD encore active
 
 - **EN COURS — macro-refonte artistique globale 22/09** — retour humain frais par vidéo : cohérence artistique, profondeur, transitions, surfaces, typographie, navigation, motion et densité doivent être remontées ensemble sur les 23 routes. Priorité aux couches partagées ; aucune simplification fonctionnelle ni fausse preuve.
+- **RÈGLE PERMANENTE JUSQU’À LA VF — vidéo fraîche obligatoire** — après chaque passe artistique importante : correction → micro-preuves → nouveau Preview → vidéo desktop complète + vidéo mobile complète liées au SHA → analyse visuelle Nova. Toute vidéo antérieure devient caduque après une modification visuelle importante. Les checks verts ne constituent qu’une preuve technique et ne ferment jamais la validation artistique.
 - **TERMINÉ — correction hero PR #149** — le composite Loup/Dragon approuvé reste affiché ; `visualGrowth.status=awaiting-assets` empêche l’activation des couches non validées. Merge Work `14650dd7d0cb1a501ccc88e6f9caa112b4eda550`.
 
 - **TERMINÉ — preuve visuelle initiale ciblée** — 23 routes publiques, desktop 1440×1000 + mobile 390×844 : run `35510526508`, marker `PASS_TARGETED_STATIC_PREMIUM_HD_REVIEW`, 46 observations, zéro overflow, image cassée, contrôle coupé, H1/ouverture/footer manquant ; captures inspectées de façon assistée sans défaut bloquant isolé. Cela ne ferme pas la validation artistique humaine finale ni les états non déclenchés.

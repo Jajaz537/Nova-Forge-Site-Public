@@ -210,4 +210,12 @@ Pour toute nouvelle conversation ou agent :
 - Candidat final #149 : Source Proof, Local Functional, PWA, Real File, Lab Performance, Preview Visual, Firefox 23 routes, WebKit 23 routes, contrat croissance, asset gate, offline state et chronique : **success**.
 - Preview Visual confirme desktop/mobile/reduced-motion : hero `modaryx-wolf-dragon-hero.webp`, zéro couche compagnon active, `worldVisualGrowth=awaiting-assets`, reality sync active.
 - **EN COURS — Bloc 1/4** : retour humain frais par vidéo sur le Preview ; la qualité artistique globale des 23 routes doit être remontée au niveau VF Premium HD / ultra haut de gamme. Les anciennes preuves techniques restent valides comme non-régression, mais ne ferment plus le design artistique.
+
+### Règle vidéo permanente jusqu’à la VF — 2026-09-24
+
+- Toute passe artistique importante suit obligatoirement : correction → micro-preuves → nouveau Preview → vidéos desktop et mobile fraîches → analyse visuelle humaine par Nova.
+- Les deux vidéos doivent correspondre exactement au SHA et au Preview livrés ; une vidéo antérieure devient caduque après toute modification visuelle importante.
+- La couverture minimale comprend les 23 routes publiques, les pages longues jusqu’au footer, les menus, formulaires, filtres, états interactifs accessibles et les viewports desktop/mobile.
+- Les checks automatisés restent des preuves techniques uniquement et ne valent jamais validation artistique.
+- État artistique : **EN COURS — validation humaine refusée tant que la dernière vidéo complète n’a pas été examinée et acceptée**.
 - Ne jamais réactiver les couches de croissance visuelle avant validation humaine explicite de la nouvelle composition.

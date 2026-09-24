@@ -42,5 +42,6 @@ Aucun finding P0, P1 ou P2 restant sur le périmètre de la refonte canonique et
 - Mobile : contrôles de 48 px minimum, marges et espacements resserrés sans masquer de contenu ; aucun débordement horizontal sur les quatre pages.
 - Accessibilité : labels et ordre DOM inchangés, focus clavier conservé, `prefers-reduced-motion` et `forced-colors` explicitement préservés.
 - Verrou artistique : hero canonique inchangé ; aucune couche Loup/Dragon séparée ; `visualGrowth.status=awaiting-assets` confirmé.
+- Revue vidéo exhaustive : une première capture des 23 routes a révélé des libellés forts, liens de sources et résumés de disclosures encore trop clairs sur ivoire ; la couche canonique force désormais encre forêt/cuivre dans ces notes, y compris en mobile et forced-colors.
 
 final result: passed

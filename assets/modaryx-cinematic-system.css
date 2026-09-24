@@ -284,6 +284,30 @@ input::placeholder,textarea::placeholder{color:#6a756e!important}
 .catalog-hero .catalog-contract p,.catalog-hero .catalog-contract strong,.catalog-hero .catalog-contract span,.profiles-hero>.panel p,.profiles-hero>.panel strong,.profiles-hero>.panel span{color:#ece5d6}
 .site-footer{margin-top:0;background:linear-gradient(105deg,#0c1713,#1b2922);border-top:1px solid rgba(236,229,214,.16)}
 
+/* Revue vidéo 2026-09-24 : retirer les derniers héritages clairs du thème sombre sur ivoire. */
+.section .security-note strong,
+.catalog-controls .security-note strong,
+.catalog-results .security-note strong,
+.project-grid .security-note strong,
+.profiles-grid .security-note strong,
+.studio-layout .security-note strong,
+.section .trust-summary strong,
+.section dt,
+.panel dt{color:#203128!important}
+.section .security-note a,
+.catalog-controls .security-note a,
+.catalog-results .security-note a,
+.project-grid .security-note a,
+.profiles-grid .security-note a,
+.studio-layout .security-note a{color:#68471f!important;font-weight:750;text-decoration-color:rgba(104,71,31,.48)}
+.section .modaryx-disclosure summary,
+.catalog-controls .modaryx-disclosure summary,
+.catalog-results .modaryx-disclosure summary,
+.project-grid .modaryx-disclosure summary,
+.profiles-grid .modaryx-disclosure summary,
+.studio-layout .modaryx-disclosure summary{color:#27382f!important}
+.section code,.studio-form code{border-color:rgba(31,49,40,.2);background:rgba(31,49,40,.07);color:#3f321f}
+
 @media(max-width:900px){.hero,.catalog-hero,.project-hero,.studio-hero,.profiles-hero{min-height:34rem}.hero-panel,.catalog-contract,.profiles-hero>.panel{margin-top:2rem}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.card:nth-child(2n){border-right:0!important}.card:nth-child(n+3){border-top:1px solid rgba(31,49,40,.16)!important}}
 @media(max-width:620px){main{padding-bottom:4rem}.page-trail{padding-inline:1rem}.section-nav{margin-inline:1rem}.hero,.catalog-hero,.project-hero,.studio-hero,.profiles-hero{min-height:0;margin-inline:0;border-radius:0;padding:6rem 1.25rem 3rem!important;background-position:center top!important}body.community-page .hero,.profiles-hero,.catalog-hero{padding-top:clamp(16rem,74vw,24rem)!important}.hero h1,.catalog-hero h1,.project-hero h1,.studio-hero h1,.profiles-hero h1{font-size:clamp(2.8rem,13vw,4.5rem)}.hero-panel,.catalog-contract,.profiles-hero>.panel{padding:1.25rem 0 0!important;border-left:0!important;border-top:1px solid rgba(240,209,139,.38)!important;background:transparent!important}.section,.catalog-controls,.catalog-results,.project-grid,.studio-layout,.profiles-grid{padding:4.25rem 1rem!important}.section-heading h2,.section>h2{font-size:clamp(2.45rem,11vw,3.8rem)}.cards{grid-template-columns:1fr}.card,.project-section,.catalog-card,.profile-card,.relation-card{border-right:0!important;border-bottom:1px solid rgba(31,49,40,.16)!important}.requirements{grid-template-columns:1fr}.studio-preview{position:relative;top:auto}}
-@media(forced-colors:active){body,main,.section,.catalog-controls,.catalog-results,.project-grid,.studio-layout,.profiles-grid,.card,.project-section,.catalog-card,.profile-card,.panel,.studio-form,.studio-preview,.requirements,.security-note,.locked-panel{background:Canvas!important;color:CanvasText!important}}
+@media(forced-colors:active){body,main,.section,.catalog-controls,.catalog-results,.project-grid,.studio-layout,.profiles-grid,.card,.project-section,.catalog-card,.profile-card,.panel,.studio-form,.studio-preview,.requirements,.security-note,.locked-panel{background:Canvas!important;color:CanvasText!important}.section .security-note strong,.section .security-note a,.section .modaryx-disclosure summary,.section .trust-summary strong,.section dt,.panel dt,.section code,.studio-form code{color:CanvasText!important}}
