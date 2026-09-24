@@ -14,10 +14,13 @@ const budgets={lcpMs:2500,cls:0.10,longTasks:5,loadMs:5000};
 const failures=[]; const results=[];
 const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
 
+fs.mkdirSync(USER_DATA_DIR,{recursive:true});
+
 async function waitForPort(timeoutMs=12000){
   const f=path.join(USER_DATA_DIR,'DevToolsActivePort'); const deadline=Date.now()+timeoutMs;
   while(Date.now()<deadline){
     if(fs.existsSync(f)){const p=fs.readFileSync(f,'utf8').trim().split(/\r?\n/)[0]; if(/^\d+$/.test(p)) return Number(p);}
+    const announced=stderr.match(/DevTools listening on ws:\/\/127\.0\.0\.1:(\d+)\//); if(announced) return Number(announced[1]);
     await sleep(120);
   }
   throw new Error('DevToolsActivePort not created');
