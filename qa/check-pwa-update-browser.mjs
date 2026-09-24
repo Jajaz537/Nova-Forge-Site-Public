@@ -13,6 +13,8 @@ const CACHE_B = 'modaryx-site-v121-update-proof';
 const failures = [];
 const observations = {};
 
+fs.mkdirSync(USER_DATA_DIR, {recursive: true});
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function assert(condition, message) {

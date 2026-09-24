@@ -1,10 +1,16 @@
 import {spawn} from 'node:child_process';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 
 const ORIGIN = process.env.MODARYX_TEST_ORIGIN || 'http://127.0.0.1:4173';
 const CHROME_BIN = process.env.CHROME_BIN || 'google-chrome';
-const DEBUG_PORT = Number(process.env.CHROME_DEBUG_PORT || 9223);
+const TEMP_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'modaryx-functional-proof-'));
+const USER_DATA_DIR = path.join(TEMP_ROOT, 'chrome-profile');
 const failures = [];
 const checks = [];
+
+fs.mkdirSync(USER_DATA_DIR, {recursive: true});
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -21,6 +27,19 @@ async function waitForJson(url, timeoutMs = 10000) {
     await sleep(120);
   }
   throw lastError || new Error('timeout waiting for ' + url);
+}
+
+async function waitForDevToolsPort(timeoutMs = 12000) {
+  const file = path.join(USER_DATA_DIR, 'DevToolsActivePort');
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (fs.existsSync(file)) {
+      const [port] = fs.readFileSync(file, 'utf8').trim().split(/\r?\n/);
+      if (/^\d+$/.test(port)) return Number(port);
+    }
+    await sleep(120);
+  }
+  throw new Error('DevToolsActivePort not created');
 }
 
 class Cdp {
@@ -122,8 +141,8 @@ const chrome = spawn(CHROME_BIN, [
   '--metrics-recording-only',
   '--no-first-run',
   '--remote-debugging-address=127.0.0.1',
-  '--remote-debugging-port=' + DEBUG_PORT,
-  '--user-data-dir=/tmp/modaryx-functional-proof-' + process.pid,
+  '--remote-debugging-port=0',
+  '--user-data-dir=' + USER_DATA_DIR,
   'about:blank'
 ], {stdio: ['ignore', 'ignore', 'pipe']});
 
@@ -134,9 +153,10 @@ chrome.stderr.on('data', (chunk) => {
 });
 
 try {
-  await waitForJson('http://127.0.0.1:' + DEBUG_PORT + '/json/version');
+  const debugPort = await waitForDevToolsPort();
+  await waitForJson('http://127.0.0.1:' + debugPort + '/json/version');
   const tabResponse = await fetch(
-    'http://127.0.0.1:' + DEBUG_PORT + '/json/new?' + encodeURIComponent('about:blank'),
+    'http://127.0.0.1:' + debugPort + '/json/new?' + encodeURIComponent('about:blank'),
     {method: 'PUT'}
   );
   if (!tabResponse.ok) throw new Error('cannot create Chrome target: HTTP ' + tabResponse.status);
@@ -379,4 +399,5 @@ try {
   chrome.kill('SIGTERM');
   await sleep(150);
   if (!chrome.killed) chrome.kill('SIGKILL');
+  fs.rmSync(TEMP_ROOT, {recursive: true, force: true});
 }
