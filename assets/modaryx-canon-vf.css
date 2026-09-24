@@ -1,5 +1,5 @@
 /* MODARYX — canonical kingdom rebuild, 2026-09-24. Visual-only layer. */
-:root{--mx-ink:#060908;--mx-ink2:#0a100e;--mx-forest:#0d1712;--mx-river:#173849;--mx-gold:#d9b66b;--mx-gold-hi:#f2d797;--mx-blue:#7099c5;--mx-paper:#f1ead8;--mx-text:#f3eee2;--mx-muted:#b9beb5;--mx-line:rgba(225,195,128,.18);--mx-line-strong:rgba(237,207,145,.38);--mx-glass:rgba(10,16,13,.72);--mx-shadow:0 34px 100px rgba(0,0,0,.42);--mx-radius:18px;--mx-serif:Georgia,"Times New Roman",serif;--mx-sans:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mx-scene:url("./modaryx-world-portals.webp");--mx-scene-position:72% center;--mx-scene-accent:rgba(217,182,107,.22)}
+:root{--mx-ink:#060908;--mx-ink2:#0a100e;--mx-forest:#0d1712;--mx-river:#173849;--mx-gold:#d9b66b;--mx-gold-hi:#f2d797;--mx-blue:#7099c5;--mx-paper:#f1ead8;--mx-text:#f3eee2;--mx-muted:#b9beb5;--mx-line:rgba(225,195,128,.18);--mx-line-strong:rgba(237,207,145,.38);--mx-glass:rgba(10,16,13,.72);--mx-shadow:0 34px 100px rgba(0,0,0,.42);--mx-radius:18px;--mx-serif:Georgia,"Times New Roman",serif;--mx-sans:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mx-scene:url("./modaryx-world-home-village.webp");--mx-scene-position:72% center;--mx-scene-accent:rgba(217,182,107,.22)}
 html{color-scheme:dark;background:var(--mx-ink);scroll-behavior:smooth}
 body[data-mx-canon=true]{position:relative;isolation:isolate;min-height:100vh;margin:0;color:var(--mx-text);font-family:var(--mx-sans);background:radial-gradient(circle at 12% 8%,rgba(55,104,77,.13),transparent 30rem),radial-gradient(circle at 90% 20%,rgba(50,102,133,.12),transparent 34rem),linear-gradient(180deg,#060908 0,#0b100e 36rem,#0b100f 100%)}
 body[data-mx-canon=true]::before{content:"";position:fixed;z-index:-3;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(4,7,6,.72),rgba(6,10,8,.94) 42rem,#080c0a 100%),var(--mx-scene) var(--mx-scene-position)/cover no-repeat;opacity:.32;filter:saturate(.82) contrast(1.05);transform:scale(1.02)}
@@ -305,5 +305,25 @@ body[data-mx-world=games] .project-page>.section:not(.games-intro){
   body[data-mx-world=home] .modaryx-realm-hero .display{
     max-width:12ch!important;
     font-size:clamp(3rem,13vw,4.8rem)!important;
+  }
+}
+
+/* Canon compliance: no floating-island artwork on any rebuilt route. */
+body[data-mx-world=catalog]{--mx-scene:url("./modaryx-world-games.webp");--mx-scene-position:66% center}
+body[data-mx-world=knowledge],
+body[data-mx-world=trust],
+body[data-mx-world=lost]{--mx-scene:url("./modaryx-world-home-village.webp");--mx-scene-position:68% center}
+body[data-mx-world=project]{--mx-scene:url("./modaryx-world-games.webp");--mx-scene-position:66% center}
+body[data-mx-world=project] .project-page>.section:first-of-type{
+  background:
+    linear-gradient(90deg,rgba(4,8,7,.96),rgba(5,9,8,.78) 38%,rgba(5,8,7,.16) 70%),
+    linear-gradient(0deg,#080c0a,transparent 34%),
+    url("./modaryx-world-games.webp") 66% center/cover no-repeat!important;
+}
+@media(max-width:620px){
+  body[data-mx-world=project] .project-page>.section:first-of-type{
+    background:
+      linear-gradient(0deg,#080c0a 0,rgba(5,9,7,.92) 55%,rgba(5,9,7,.08) 88%),
+      url("./modaryx-world-games.webp") 64% top/auto 360px no-repeat!important;
   }
 }
