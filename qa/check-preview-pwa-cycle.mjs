@@ -360,5 +360,5 @@ try {
   chrome.kill('SIGTERM');
   await sleep(150);
   if (!chrome.killed) chrome.kill('SIGKILL');
-  fs.rmSync(TEMP_ROOT, {recursive: true, force: true});
+  fs.rmSync(TEMP_ROOT, {recursive: true, force: true, maxRetries: 5, retryDelay: 100});
 }
