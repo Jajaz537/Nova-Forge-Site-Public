@@ -69,9 +69,11 @@ try{
     await cdp.send('Network.emulateNetworkConditions',{offline:false,latency:150,downloadThroughput:200000,uploadThroughput:93750,connectionType:'cellular4g'});
 
     for(const page of pages){
-      await cdp.send('Network.clearBrowserCache');
-      await navigate(cdp,ORIGIN.replace(/\/$/,'')+'/'+page);
-      const m=await evalv(cdp,`(() => {
+      const samples=[];
+      for(let sample=1;sample<=3;sample++){
+        await cdp.send('Network.clearBrowserCache');
+        await navigate(cdp,ORIGIN.replace(/\/$/,'')+'/'+page+'?lab-sample='+sample);
+        samples.push(await evalv(cdp,`(() => {
         const nav=performance.getEntriesByType('navigation')[0];
         const r=performance.getEntriesByType('resource');
         return {
@@ -86,9 +88,14 @@ try{
           requests:r.length+1,
           transferBytes:r.reduce((s,e)=>s+(e.transferSize||0),nav?.transferSize||0)
         };
-      })()`);
+        })()`));
+      }
 
-      const row={page,profile:profile.name,...m}; results.push(row);
+      const median=(key)=>[...samples].sort((a,b)=>a[key]-b[key])[1][key];
+      const representative=[...samples].sort((a,b)=>a.lcp-b.lcp)[1];
+      const m={...representative,lcp:median('lcp'),cls:median('cls'),longTasks:median('longTasks'),load:median('load')};
+
+      const row={page,profile:profile.name,...m,samples:samples.map(({lcp,cls,longTasks,load})=>({lcp,cls,longTasks,load}))}; results.push(row);
       if(m.lcp>budgets.lcpMs) failures.push(page+' '+profile.name+': LCP '+m.lcp.toFixed(1)+'ms > '+budgets.lcpMs);
       if(m.cls>budgets.cls) failures.push(page+' '+profile.name+': CLS '+m.cls.toFixed(4)+' > '+budgets.cls);
       if(m.longTasks>budgets.longTasks) failures.push(page+' '+profile.name+': long tasks '+m.longTasks+' > '+budgets.longTasks);
