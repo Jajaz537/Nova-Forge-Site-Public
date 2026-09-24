@@ -1,11 +1,13 @@
 # MODARYX — ANTI-OUBLI COURANT CANONIQUE — 20 septembre 2026
 
-**Base Git vérifiée avant le batch Super Nova :** `design/modaryx-premium-hd-20260914-work` @ `d0be675e86b51174b834f6764fbbce40f56b67a9`.  
+**Candidat Git courant vérifié :** PR #152 @ `a499f505abdcff4fea3f297a83ea04198758bcc9`, vers `design/modaryx-premium-hd-20260914-work`.
 **Statut :** registre courant prioritaire pour la fermeture anti-oubli.  
 **Portée :** MODARYX / MODARYX MODS uniquement. Nova Forge OS reste un produit distinct.  
 **Règle :** ce document n'efface pas l'historique ; il supersède seulement les anciens états devenus obsolètes.
 
 Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion vers `main` ou de validation humaine finale.
+
+**Automatisation courante : TERMINÉ — 20 workflows visibles sur `a499f505...` sont SUCCESS au contrôle GitHub frais Nova.** Cette couverture automatisée ne ferme aucune preuve externe, native, juridique ou terrain.
 
 ## 1. Séparation de produit et identité
 
@@ -15,7 +17,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Nova Forge OS Public / Fondateur = logiciel distinct | **TERMINÉ — contrat courant** | Références web uniquement pour relation de produit ou intégration future explicite. |
 | `getnovaforge.com` / getnova | **TERMINÉ — classification historique** | Ancien projet web ; références historiques conservées seulement quand nécessaires à la provenance, compatibilité ou protection technique. |
 | Identité visuelle MODARYX visible sur les 23 routes | **TERMINÉ — périmètre source courant** | Le garde source rejette le libellé visible « Modaryx OS » ; la validation artistique globale reste séparée. |
-| Design system Premium HD des 23 routes publiques | **EN COURS — refonte artistique globale réouverte** | Les preuves techniques 23 routes desktop/mobile restent acquises pour non-régression. Retour humain frais du 22/09 : le rendu global reste trop proche d’un « site sombre à cartes » ; macro-refonte Premium HD des 23 routes lancée. Validation artistique humaine finale reste séparée. |
+| Design system Premium HD des 23 routes publiques | **TERMINÉ — passe artistique courante validée humainement** | Nova a validé les vidéos exhaustives desktop + mobile du SHA `2b07154`; les changements ultérieurs jusqu'à `a499f505...` sont techniques et n'ont pas modifié visiblement le rendu. Ne vaut ni VF globale ni 100 %. |
 
 ## 2. Monde vivant / Loup / Dragon
 
@@ -24,12 +26,12 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Environnement Premium HD séparé | **TERMINÉ** | Asset réel intégré. |
 | Loup — bébé, juvénile, adolescent, jeune adulte, adulte | **TERMINÉ 5/5** | Cinq assets séparés prouvés. |
 | Dragon — bébé, juvénile, adolescent, jeune adulte, adulte | **TERMINÉ 5/5** | Cinq assets séparés prouvés. |
-| Activation de la croissance visuelle | **EN COURS — verrou artistique actif** | PR #149 remet `visualGrowth.status=awaiting-assets` : les assets séparés restent candidats mais ne remplacent plus le hero approuvé tant qu’une validation artistique humaine explicite n’a pas eu lieu. |
+| Activation de la croissance visuelle | **EN COURS — verrou artistique actif** | `visualGrowth.status=awaiting-assets` est l'état courant actif : les assets séparés restent candidats et ne remplacent pas le hero composite approuvé. |
 | Preview HTTPS hero / monde vivant | **TERMINÉ — preuve ciblée courante** | PR #149 : Preview desktop + mobile + reduced-motion confirme `modaryx-wolf-dragon-hero.webp`, zéro couche compagnon active, `worldVisualGrowth=awaiting-assets` et reality sync active. |
 | Reduced motion monde vivant | **TERMINÉ — preuve ciblée déployée** | Animations/transitions neutralisées dans le cas réduit. |
 | Saison + heure locale via contexte grossier | **TERMINÉ — preuve ciblée déployée** | Reality sync `cloudflare-coarse` observé avec saison/daypart. |
 | Météo réelle production | **BLOQUÉ / activation externe — readiness WeatherAPI acquise, fail-soft Preview réel prouvé** | Mode `weatherapi` préparé côté proxy same-origin avec clé serveur obligatoire, normalisation, attribution et disclaimer ; marker ciblé `PASS_TARGETED_WEATHERAPI_READINESS`. Reprise externe du 21/09 : aucun compte WeatherAPI authentifié ni variable/secret WeatherAPI en Preview ; `GET /api/local-context` réel retourne `HTTP 200`, `not-connected / provider-not-configured`, `no-store`, sans localisation précise ni demande GPS. Aucun fournisseur réel activé. Activation toujours conditionnée à un compte/secret autorisé, acceptation des conditions, validation confidentialité/juridique et micro-proof live. |
-| Validation artistique humaine finale | **PREUVE MANQUANTE** | Retour humain frais du 22/09 a rouvert le Bloc 1 : une refonte artistique globale des 23 routes est requise avant cette validation finale. Les captures techniques ne remplacent pas ce jugement. |
+| Validation artistique humaine de la passe courante | **TERMINÉ** | Vidéos exhaustives desktop + mobile du SHA `2b07154` examinées et validées par Nova ; aucune modification visuelle ultérieure. VF globale toujours non déclarée. |
 
 ## 3. Capacités locales déjà prouvées
 
@@ -107,10 +109,18 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 | Installation PWA manuelle sur appareil | **PREUVE MANQUANTE** | Work Phase 2 n'expose ni dialogue d'installation démontrable, ni lancement standalone/appareil réel ; cycle HTTPS automatisé seul insuffisant. |
 | Validation juridique / droits / licences | **PREUVE MANQUANTE** | Identité d'éditeur, contacts, droits et autorisations doivent venir de données réelles. |
 | Master Nova Design Intelligence complète | **PREUVE MANQUANTE / NON RÉCUPÉRÉE** | Le référentiel historique complet n'est pas présent ; ne pas inventer les éléments manquants. |
+| Passkey sur appareil réel | **PREUVE MANQUANTE** | Enrôlement, reconnexion et révocation exigent un authentificateur WebAuthn réel. |
+| Signer / trust anchor réel | **BLOQUÉ** | Aucune clé de confiance réelle autorisée n'est publiée. |
+| Artefact public autorisé | **BLOQUÉ** | Aucun artefact distribuable autorisé, versionné et attesté n'est fourni. |
+| Corpus GTA VI / RDR2 réel | **PREUVE MANQUANTE / ENTRÉES ABSENTES** | Corpus autorisé, attribué et vérifiable non fourni. |
+| Storage / Repair réels | **BLOQUÉ** | Endpoints et autorisations fournisseur réels absents. |
+| Guide MODARYX réel | **BLOQUÉ** | Service réel non connecté. |
+| Pont Nova Forge OS réel | **BLOQUÉ** | Runtime OS réel non connecté. |
+| Météo production | **BLOQUÉ / VALIDATION EXTERNE** | Activation fournisseur, conditions, confidentialité et juridique non validés. |
 
 ## 7. Finition Premium HD encore active
 
-- **EN COURS — macro-refonte artistique globale 22/09** — retour humain frais par vidéo : cohérence artistique, profondeur, transitions, surfaces, typographie, navigation, motion et densité doivent être remontées ensemble sur les 23 routes. Priorité aux couches partagées ; aucune simplification fonctionnelle ni fausse preuve.
+- **TERMINÉ — passe artistique globale courante** — vidéos desktop/mobile exhaustives du SHA `2b07154` validées par Nova ; aucune modification visuelle ultérieure. La VF globale reste distincte et non déclarée.
 - **RÈGLE PERMANENTE JUSQU’À LA VF — vidéo fraîche obligatoire** — après chaque passe artistique importante : correction → micro-preuves → nouveau Preview → vidéo desktop complète + vidéo mobile complète liées au SHA → analyse visuelle Nova. Toute vidéo antérieure devient caduque après une modification visuelle importante. Les checks verts ne constituent qu’une preuve technique et ne ferment jamais la validation artistique.
 - **TERMINÉ — correction hero PR #149** — le composite Loup/Dragon approuvé reste affiché ; `visualGrowth.status=awaiting-assets` empêche l’activation des couches non validées. Merge Work `14650dd7d0cb1a501ccc88e6f9caa112b4eda550`.
 
@@ -124,7 +134,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 Les mentions historiques suivantes restent conservées pour provenance mais **ne représentent plus l'état courant** :
 
 - compteurs de couches compagnon inférieurs à 10/10 ;
-- `visualGrowth.status=awaiting-assets` ;
+- anciennes affirmations selon lesquelles `visualGrowth.status=awaiting-assets` serait supersédé ; l'état courant reste au contraire `awaiting-assets` ;
 - croissance visuelle « non activée » ;
 - PWA HTTPS automatisée indiquée entièrement PREUVE MANQUANTE ;
 - ancienne couverture à 16 pages ;
@@ -151,7 +161,7 @@ Aucune idée n'est supprimée implicitement pour améliorer un pourcentage. Une 
 ## 10. Prochain point logique
 
 1. Considérer le Provider DEV ciblé comme **TERMINÉ** ; ne pas le rejouer sans modification pertinente.
-2. La décision artistique explicite du 22/09 rouvre le Bloc 1 : exécuter la refonte Premium HD globale des 23 routes, tout en conservant les preuves techniques déjà vertes et sans réactiver les couches Loup/Dragon non validées.
+2. Considérer le Bloc 1 artistique de la passe courante comme **TERMINÉ** après validation Nova de `2b07154`, tout en conservant `visualGrowth.status=awaiting-assets` et sans déclarer la VF globale.
 3. Fermer les écarts produit encore réels sans les simuler : passkey finale, corpus réels, distribution, signatures/attestations, Storage Resolver, Repair Network, Guide et pont OS selon leurs dépendances.
 4. Considérer le sitemap des routes indexables comme **TERMINÉ** ; ne le rouvrir que si une nouvelle route canonique indexable est ajoutée.
 5. Garder météo réelle production **BLOQUÉE** tant que licence/confidentialité/attribution/disclaimer ne sont pas validés.

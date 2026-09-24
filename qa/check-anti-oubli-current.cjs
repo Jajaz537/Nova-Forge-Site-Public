@@ -12,6 +12,10 @@ const readiness = JSON.parse(fs.readFileSync(path.join(root, 'data/integration-r
 
 const requiredCurrent = [
   'Design system Premium HD des 23 routes publiques',
+  'Design system Premium HD des 23 routes publiques | **TERMINÉ — passe artistique courante validée humainement**',
+  'Validation artistique humaine de la passe courante | **TERMINÉ**',
+  '20 workflows visibles sur `a499f505...` sont SUCCESS',
+  'visualGrowth.status=awaiting-assets` est l\'état courant actif',
   'SEO on-page des 23 routes | **TERMINÉ — preuve ciblée**',
   'Sitemap des routes jeux/hubs | **TERMINÉ — preuve ciblée**',
   'Hubs GTA VI / RDR2, catégories et guides éditoriaux | **TERMINÉ — périmètre éditorial sourcé + readiness contractuelle**',
@@ -131,7 +135,6 @@ for (const token of forbiddenCurrent) assert.ok(!ledger.includes(token), 'stale 
 
 const expectedOpen = new Map([
   ['Météo réelle production', 'BLOQUÉ'],
-  ['Validation artistique humaine finale', 'PREUVE MANQUANTE'],
   ['Comptes / authentification / passkeys réels', 'PREUVE MANQUANTE'],
   ['Signatures / attestations de provenance', 'EN COURS'],
   ['Téléchargements publics réels', 'BLOQUÉ'],
@@ -214,7 +217,11 @@ assert.ok(historicalCheckpoint.includes('a8a544dc8a6d8b4c435d3d2acf56d9988141bbf
 assert.ok(historicalCheckpoint.includes('Full replay unique uniquement à la toute fin.'));
 
 assert.ok(checkpoint.includes('# CHECKPOINT CANONIQUE — MODARYX — 21 septembre 2026'));
-assert.ok(checkpoint.includes('SOURCE DE REPRISE PRIORITAIRE — VF NON DÉCLARÉE'));
+assert.ok(checkpoint.includes('SOURCE DE REPRISE PRIORITAIRE — RÉCONCILIÉE AU 24 SEPTEMBRE 2026 — VF NON DÉCLARÉE'));
+assert.ok(checkpoint.includes('a499f505abdcff4fea3f297a83ea04198758bcc9'));
+assert.ok(checkpoint.includes('20 workflows automatisés visibles sur ce HEAD : SUCCESS'));
+assert.ok(checkpoint.includes('TERMINÉ — Bloc 1 artistique, passe courante validée humainement par Nova'));
+assert.ok(checkpoint.includes('visualGrowth.status=awaiting-assets` est l\'état courant actif'));
 assert.ok(checkpoint.includes('design/modaryx-premium-hd-20260914-work'));
 assert.ok(checkpoint.includes('62c47f9fd46cb9183ad5f46fc24f254852fcb5cf'));
 assert.ok(checkpoint.includes('PR #133 : **TERMINÉE / fusionnée**'));
