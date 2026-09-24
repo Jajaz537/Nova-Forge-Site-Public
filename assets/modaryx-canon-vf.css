@@ -109,3 +109,6 @@ body[data-mx-canon=true] .site-footer nav a{color:#d6c79f!important}
 
 /* Targeted reduced-motion micro-fix: keep approved composite fully static. */
 @media(prefers-reduced-motion:reduce){body[data-mx-world=home] .modaryx-realm-art{animation:none!important;transition:none!important;transition-duration:0s!important}}
+
+/* Targeted mobile Studio nav fix: wrap real controls instead of clipping them off-canvas. */
+@media(max-width:820px){body[data-mx-canon=true] .studio-step-links{position:relative;top:auto;width:100%;margin:18px 0 0;padding:10px!important;display:flex;flex-wrap:wrap!important;overflow:visible;border-radius:14px}body[data-mx-canon=true] .studio-step-links a{flex:1 1 140px;justify-content:center;text-align:center}}
