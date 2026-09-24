@@ -296,3 +296,70 @@
   .community-workspace :is(input,select,textarea)[aria-invalid="true"],
   #profile-editor :is(input,select,textarea)[aria-invalid="true"]{border:3px solid Mark!important;box-shadow:none!important}
 }
+
+/* Revue vidéo Nova 2026-09-24 — contraste ciblé Communauté / Profils. */
+.community-form{
+  border-color:rgba(209,176,108,.42)!important;
+  background:linear-gradient(145deg,#193126,#10231b)!important;
+  color:#f4eedf!important;
+}
+.community-form :is(label,legend,.field>span),
+.community-form :is(h2,h3,strong){color:#f4eedf!important}
+.community-form :is(small,.muted,.field-help,p:not([role="status"])){
+  color:#d3ddd5!important;
+}
+.community-form fieldset{
+  border-color:rgba(244,238,223,.22)!important;
+  background:rgba(5,13,9,.24)!important;
+}
+.community-form fieldset label{border-top-color:rgba(244,238,223,.15)!important}
+.community-form [role="status"]{
+  border-left-color:#86b8c2!important;
+  background:rgba(134,184,194,.12)!important;
+  color:#e4eef0!important;
+}
+.community-public-card,
+.community-public-empty,
+.community-remote-bridge,
+.community-followup{
+  border-color:rgba(209,176,108,.3)!important;
+  background:linear-gradient(145deg,#1a3026,#0e2119)!important;
+  color:#f4eedf!important;
+}
+.community-public-card :is(h3,strong),
+.community-public-empty :is(h3,strong),
+.community-remote-bridge :is(h3,strong),
+.community-followup :is(h3,strong){color:#f4eedf!important}
+.community-public-card :is(p,span),
+.community-public-empty :is(p,span),
+.community-remote-bridge p,
+.community-followup :is(p,span){color:#d0dbd3!important}
+.account-console-note,
+.profiles-note{
+  border-left-color:#285f73!important;
+  background:rgba(40,95,115,.12)!important;
+  color:#304940!important;
+}
+.account-console-note :is(strong,a),
+.profiles-note :is(strong,a){color:#203c42!important}
+
+@media(forced-colors:active){
+  .community-form,
+  .community-public-card,
+  .community-public-empty,
+  .community-remote-bridge,
+  .community-followup,
+  .account-console-note,
+  .profiles-note{
+    border-color:CanvasText!important;
+    background:Canvas!important;
+    color:CanvasText!important;
+  }
+  .community-form :is(label,legend,.field>span,h2,h3,strong,small,.muted,.field-help,p),
+  .community-public-card :is(h3,strong,p,span),
+  .community-public-empty :is(h3,strong,p,span),
+  .community-remote-bridge :is(h3,strong,p),
+  .community-followup :is(h3,strong,p,span),
+  .account-console-note :is(strong,a),
+  .profiles-note :is(strong,a){color:CanvasText!important}
+}
