@@ -48,7 +48,8 @@ jobs:
           fi
           command -v ffmpeg
           "$CHROME_BIN" --version
-          ffmpeg -version | head -n 1
+          ffmpeg -version >"$RUNNER_TEMP/ffmpeg-version.txt" 2>&1
+          head -n 1 "$RUNNER_TEMP/ffmpeg-version.txt"
           echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
       - name: Resolve immutable Cloudflare preview
         shell: bash

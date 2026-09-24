@@ -115,7 +115,7 @@ const chrome=spawn(CHROME_BIN,[
   '--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-background-networking',
   '--disable-default-apps','--disable-extensions','--disable-sync','--metrics-recording-only','--no-first-run',
   '--remote-debugging-address=127.0.0.1','--remote-debugging-port=0','--user-data-dir='+USER_DATA_DIR,
-  '--user-data-dir=/tmp/modaryx-a11y-proof-'+process.pid,'about:blank'
+  'about:blank'
 ],{stdio:['ignore','ignore','pipe']});
 
 let chromeStderr='';
