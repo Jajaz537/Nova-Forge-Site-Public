@@ -399,3 +399,60 @@ body[data-mx-world=home] .living-world-rail .world-chronicle{
   }
   body[data-mx-world=home] .living-world-rail .world-chronicle{grid-column:auto}
 }
+
+
+/* Home finish pass — 2026-09-25: stronger editorial hero + cheaper below-fold paint. */
+body[data-mx-world=home] .site-main > :is(.modaryx-portals,.editions,.chapters,.catalogue-zone,.security-stage,.download-stage,.modaryx-faq,.explore){
+  content-visibility:auto;
+  contain-intrinsic-size:auto 900px;
+}
+@media(min-width:901px){
+  body[data-mx-world=home] .modaryx-realm-hero .hero-copy{
+    width:min(700px,50vw)!important;
+    max-width:700px!important;
+  }
+  body[data-mx-world=home] .modaryx-realm-hero .display{
+    max-width:12.5ch!important;
+    font-size:clamp(3.7rem,4.55vw,5.7rem)!important;
+    line-height:.94!important;
+    letter-spacing:-.045em!important;
+  }
+  body[data-mx-world=home] .modaryx-realm-hero .lede{max-width:52ch!important}
+  body[data-mx-world=home] .modaryx-realm-hero::after{
+    background:
+      linear-gradient(90deg,rgba(3,7,5,.91) 0,rgba(3,7,5,.66) 31%,rgba(3,7,5,.12) 54%,rgba(3,7,5,0) 70%),
+      linear-gradient(180deg,rgba(3,7,5,.18) 0,rgba(3,7,5,0) 54%,rgba(7,11,9,.32) 100%),
+      radial-gradient(circle at 79% 18%,rgba(246,198,105,.14),transparent 27rem)!important;
+  }
+}
+@media(max-width:620px){
+  body[data-mx-world=home] .modaryx-realm-hero{
+    min-height:0!important;
+    padding:0 0 48px!important;
+    align-items:start!important;
+  }
+  body[data-mx-world=home] .modaryx-realm-art{
+    position:relative!important;
+    z-index:0!important;
+    width:100%!important;
+    height:auto!important;
+    aspect-ratio:16/10;
+    object-position:64% center!important;
+  }
+  body[data-mx-world=home] .modaryx-realm-hero::after{
+    z-index:1!important;
+    bottom:auto!important;
+    height:min(63vw,390px);
+    background:linear-gradient(0deg,#070b09 0,rgba(7,11,9,.06) 58%,rgba(3,7,5,.12) 100%)!important;
+  }
+  body[data-mx-world=home] .modaryx-realm-hero .shell{
+    position:relative;z-index:2;
+    width:calc(100% - 32px)!important;
+    margin-top:-22px;
+  }
+  body[data-mx-world=home] .modaryx-realm-hero .display{
+    max-width:11.5ch!important;
+    font-size:clamp(2.85rem,12.5vw,4.25rem)!important;
+    line-height:.94!important;
+  }
+}
