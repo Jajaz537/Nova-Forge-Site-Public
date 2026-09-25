@@ -43,9 +43,9 @@
     <nav class="page-trail" aria-label="Fil d’Ariane"><a href="./index.html">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Creator Studio</span></nav>
     
     <section class="studio-hero" aria-labelledby="studio-title">
-      <p class="eyebrow">Creator Studio V2 · brouillon local</p>
+      <p class="eyebrow">Atelier de création MODARYX</p>
       <h1 id="studio-title">Préparez la fiche de votre création.</h1>
-      <p class="lede">Décrivez votre projet, son jeu cible et ses droits. Le Studio contrôle le format de votre fiche, appelée manifeste, puis vous permet de l’enregistrer dans ce navigateur ou de l’exporter en JSON.</p>
+      <p class="lede">Décrivez votre projet, son jeu cible et ses droits. Le Studio vous guide pour préparer une fiche claire et portable, l’enregistrer dans ce navigateur et conserver une copie locale lorsque vous le souhaitez.</p>
       <div class="release-status"><span class="status-dot" aria-hidden="true"></span><span><strong>NON PUBLIÉ.</strong> Les brouillons restent dans ce navigateur uniquement après action explicite. Un état déclaré n’est jamais présenté comme une preuve vérifiée par le Studio.</span></div>
     </section>
 
@@ -110,7 +110,7 @@
         <div class="studio-actions">
           <button class="button primary" type="submit">Valider l’aperçu</button>
           <button class="button" id="save-draft" type="button">Sauvegarder localement</button>
-          <button class="button" id="download-draft" type="button">Exporter JSON déterministe</button>
+          <button class="button" id="download-draft" type="button">Télécharger une copie du projet</button>
           <button class="button" id="clear-draft" type="button">Effacer le brouillon local</button>
         </div>
         <div id="schema-status" class="studio-status" role="status" aria-live="polite">Schéma public non chargé.</div>
@@ -118,11 +118,11 @@
       </form>
 
       <aside class="studio-preview" aria-labelledby="preview-title">
-        <p class="eyebrow">Universal Mod Manifest v1</p>
-        <h2 id="preview-title">Votre fichier JSON</h2>
-        <p>Le JSON ci-dessous est calculé localement et trié de façon déterministe. Il ne constitue ni une publication, ni une signature, ni une attestation de provenance ou de mesure.</p>
-        <pre id="manifest-preview" tabindex="0" aria-label="Aperçu JSON du manifeste">{}</pre>
-        <div class="actions"><a class="button" href="./schemas/universal-mod-manifest.schema.json">Ouvrir le schéma public</a><a class="button" href="./security.html">Contrat de confiance</a></div>
+        <p class="eyebrow">Aperçu du projet</p>
+        <h2 id="preview-title">Votre fiche en préparation</h2>
+        <p>Vérifiez ici les informations de votre création avant de sauvegarder ou d’exporter votre brouillon. Les détails techniques restent disponibles dans la documentation, sans encombrer le parcours principal.</p>
+        <pre id="manifest-preview" class="studio-technical-preview" tabindex="0" aria-label="Données techniques du projet">{}</pre>
+        <div class="actions"><a class="button" href="./documentation.html">Documentation technique</a><a class="button" href="./security.html">Sécurité et confiance</a></div>
       </aside>
     </section>
   </main>
