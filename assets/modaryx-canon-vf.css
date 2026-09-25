@@ -327,3 +327,75 @@ body[data-mx-world=project] .project-page>.section:first-of-type{
       url("./modaryx-world-games.webp") 64% top/auto 360px no-repeat!important;
   }
 }
+
+
+/* Home canon v2 — keep the companions visible and move live telemetry out of the artwork. */
+@media(min-width:901px){
+  body[data-mx-world=home] .modaryx-realm-hero{
+    align-items:start!important;
+    padding-top:clamp(84px,8vw,126px)!important;
+    padding-bottom:clamp(70px,7vw,104px)!important;
+  }
+  body[data-mx-world=home] .modaryx-realm-hero::after{
+    background:
+      linear-gradient(90deg,rgba(3,7,5,.90) 0,rgba(3,7,5,.64) 29%,rgba(3,7,5,.18) 49%,rgba(3,7,5,0) 67%),
+      linear-gradient(180deg,rgba(3,7,5,.24) 0,rgba(3,7,5,0) 55%,rgba(7,11,9,.22) 100%),
+      radial-gradient(circle at 79% 18%,rgba(246,198,105,.12),transparent 27rem)!important;
+  }
+  body[data-mx-world=home] .modaryx-realm-hero .hero-copy{
+    width:min(620px,45vw)!important;
+    max-width:620px!important;
+    min-width:0!important;
+  }
+  body[data-mx-world=home] .modaryx-realm-hero .display{
+    max-width:10.8ch!important;
+    font-size:clamp(3.55rem,4.7vw,5.75rem)!important;
+    line-height:.91!important;
+  }
+  body[data-mx-world=home] .modaryx-realm-hero .lede{
+    max-width:46ch!important;
+  }
+}
+body[data-mx-world=home] .living-world-rail{
+  position:relative!important;
+  z-index:3;
+  width:min(1480px,calc(100% - clamp(36px,7vw,110px)))!important;
+  max-width:1480px!important;
+  margin:clamp(22px,3vw,36px) auto!important;
+  padding:18px 20px!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px 24px!important;
+  border:1px solid rgba(225,195,128,.14)!important;
+  border-radius:16px!important;
+  background:
+    linear-gradient(120deg,rgba(14,25,19,.88),rgba(7,13,10,.95))!important;
+  box-shadow:0 24px 70px rgba(0,0,0,.22)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+body[data-mx-world=home] .living-world-rail>span{
+  min-width:0!important;
+  padding:0 0 10px!important;
+  border-bottom:1px solid rgba(225,195,128,.09);
+}
+body[data-mx-world=home] .living-world-rail>p{
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  font-size:.78rem;
+  line-height:1.55;
+}
+body[data-mx-world=home] .living-world-rail .world-chronicle{
+  grid-column:span 2;
+}
+@media(max-width:900px){
+  body[data-mx-world=home] .living-world-rail{
+    width:calc(100% - 32px)!important;
+    grid-template-columns:1fr!important;
+    margin:18px auto 28px!important;
+    padding:16px!important;
+  }
+  body[data-mx-world=home] .living-world-rail .world-chronicle{grid-column:auto}
+}
