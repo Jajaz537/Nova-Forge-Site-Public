@@ -110,7 +110,7 @@ for (const page of pages) {
   const prefix = depth ? '../'.repeat(depth) : './';
   const shellRef = prefix + 'assets/shell.js';
   const foundationRef = prefix + 'assets/modaryx-foundations.css';
-  const cinematicRef = prefix + 'assets/modaryx-cinematic-system.css';
+  const canonRef = prefix + 'assets/modaryx-canon-vf.css';
 
   if (!html.includes('<meta charset="utf-8">')) fail(page + ': charset missing');
   if (!html.includes('name="viewport"')) fail(page + ': viewport missing');
@@ -120,7 +120,7 @@ for (const page of pages) {
   if (!html.includes('class="site-footer"')) fail(page + ': shared footer missing');
   if (!html.includes(shellRef)) fail(page + ': shell.js missing');
   if (!html.includes(foundationRef)) fail(page + ': modaryx-foundations.css missing');
-  if (page !== 'index.html' && !html.includes(cinematicRef)) fail(page + ': modaryx-cinematic-system.css missing');
+  if (!html.includes(canonRef)) fail(page + ': canonical modaryx-canon-vf.css missing');
   if (/\bModaryx OS\b/i.test(html)) fail(page + ': deprecated visible product label "Modaryx OS"');
 
   if (page === '404.html') {

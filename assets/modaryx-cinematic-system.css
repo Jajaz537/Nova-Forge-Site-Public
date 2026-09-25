@@ -1,1 +1,313 @@
 :root{--mx-gold:#d9ad58;--mx-gold-hi:#f0d18b;--mx-ember:#c76737;--mx-line:rgba(255,255,255,.075);--mx-gold-line:rgba(231,199,128,.17);--mx-shadow:0 28px 90px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.035)}body{background-color:#090a09;background-image:radial-gradient(circle at 12% 8%,rgba(198,102,52,.075),transparent 29rem),radial-gradient(circle at 88% 14%,rgba(87,121,166,.065),transparent 31rem),linear-gradient(180deg,#0b0c0b,#10110f 42rem,#0a0b0a);background-attachment:fixed}body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.17;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:72px 72px;-webkit-mask-image:linear-gradient(#000,transparent 78%);mask-image:linear-gradient(#000,transparent 78%)}.topbar{background:linear-gradient(rgba(11,12,11,.94),rgba(11,12,11,.79));border-bottom-color:rgba(226,191,116,.14);box-shadow:0 14px 42px rgba(0,0,0,.28);-webkit-backdrop-filter:blur(22px) saturate(125%);backdrop-filter:blur(22px) saturate(125%)}.page-trail{margin-top:clamp(1rem,3vw,1.8rem);color:#99998f}.page-trail a{color:#c8b98f}.section-nav{position:sticky;top:calc(var(--modaryx-header-height,76px) + 8px);z-index:8;margin-inline:auto;border:1px solid var(--mx-line);border-radius:999px;background:rgba(13,14,13,.76);box-shadow:0 12px 35px #0004;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);padding:.35rem}.section-nav a{border-radius:999px;padding:.6rem .85rem}.section-nav a:is(:hover,:focus-visible){background:#d8ad5819;color:var(--mx-gold-hi)}.hero,.catalog-hero,.project-hero,.studio-hero,.profiles-hero{display:grid;position:relative;isolation:isolate;overflow:hidden;margin-top:1rem;border:1px solid var(--mx-gold-line)!important;border-radius:clamp(1.3rem,2.5vw,2.1rem);padding:clamp(3.5rem,7vw,6.6rem) clamp(1.25rem,4.5vw,4.8rem)!important;background:linear-gradient(100deg,#090a09fc,#0d0e0ded 50%,#090a09a3),url("./modaryx-world-portals.webp") center right/cover no-repeat;box-shadow:var(--mx-shadow)}.hero:before,.catalog-hero:before,.project-hero:before,.studio-hero:before,.profiles-hero:before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 80% 44%,#d7a24930,transparent 21rem);pointer-events:none}.hero:after,.catalog-hero:after,.project-hero:after,.studio-hero:after,.profiles-hero:after{content:"";position:absolute;left:4%;right:4%;bottom:0;height:1px;background:linear-gradient(90deg,var(--mx-ember),var(--mx-gold-hi) 44%,transparent);opacity:.72}.hero-copy,.catalog-hero>div:first-child,.project-hero>div:first-child,.studio-hero>div:first-child,.profiles-hero>div:first-child{position:relative;z-index:1;max-width:46rem}.hero h1,.catalog-hero h1,.project-hero h1,.studio-hero h1,.profiles-hero h1{max-width:16ch;text-wrap:balance;letter-spacing:-.045em;line-height:.94;text-shadow:0 3px 30px #000a}.hero .lede,.catalog-hero .lede,.project-hero .lede,.studio-hero .lede,.profiles-hero .lede{max-width:60ch;color:#c6c4bb;font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.68}.hero-panel,.catalog-contract,.profiles-hero>.panel{position:relative;overflow:hidden;border-color:#e8c27033!important;background:linear-gradient(145deg,#22221de0,#0c0d0cdb)!important;box-shadow:0 22px 55px #0006,inset 0 1px #ffffff0e!important;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}.hero-panel .feature-list li{padding:.75rem 0;border-bottom:1px solid var(--mx-line)}.section,.catalog-controls,.catalog-results,.project-grid,.studio-layout,.profiles-grid{position:relative;margin-top:clamp(1.2rem,2.8vw,2.4rem);padding:clamp(2rem,4vw,4rem) clamp(1rem,3vw,2.7rem)!important;border:1px solid var(--mx-line)!important;border-radius:clamp(1.1rem,2vw,1.65rem);background:linear-gradient(145deg,#161714d4,#0b0c0beb);box-shadow:0 22px 65px #0004,inset 0 1px #ffffff07}.section:nth-of-type(even),.catalog-results{background:linear-gradient(145deg,#0f1111eb,#12110ed6)}.section-heading{gap:1.2rem;margin-bottom:clamp(1.3rem,2.5vw,2.2rem)}.section-heading h2,.section>h2{max-width:18ch;text-wrap:balance;letter-spacing:-.025em}.section-intro{max-width:66ch;color:#b8b7af;font-size:1.02rem;line-height:1.7}.eyebrow{color:var(--mx-gold-hi);letter-spacing:.17em}.eyebrow:before{content:"";display:inline-block;width:1.6rem;height:1px;margin:0 .65rem .25rem 0;background:linear-gradient(90deg,var(--mx-ember),var(--mx-gold-hi))}.cards{gap:clamp(.9rem,1.8vw,1.35rem)}.card,.panel,.project-section,.catalog-card,.profile-card,.studio-form,.studio-preview,.relation-card{position:relative;overflow:hidden;border-color:var(--mx-line)!important;background:linear-gradient(148deg,#232420d1,#10110ff5)!important;box-shadow:0 16px 38px #0004,inset 0 1px #ffffff0a!important;transition:transform .22s,border-color .22s,box-shadow .22s}.card:before,.project-section:before,.catalog-card:before,.profile-card:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,#efcd867f,transparent);opacity:.28}.card:focus-within,.project-section:focus-within,.catalog-card:focus-within,.profile-card:focus-within{border-color:#e1b96642!important;box-shadow:0 24px 56px #0005,inset 0 1px #ffffff0d!important}@media(hover:hover) and (pointer:fine){.card:hover,.project-section:hover,.catalog-card:hover,.profile-card:hover{transform:translateY(-3px);border-color:#e1b96642!important;box-shadow:0 24px 56px #0005,inset 0 1px #ffffff0d!important}}.card p,.project-section p,.catalog-card p,.profile-card p{line-height:1.65}.button{border-radius:.72rem;min-height:44px;transition:transform .16s,box-shadow .16s}.button:hover{transform:translateY(-1px)}.button.primary{box-shadow:0 10px 30px #be743029,inset 0 1px #ffffff2e}.button:focus-visible,.text-link:focus-visible,.section-nav a:focus-visible{outline:2px solid var(--focus,var(--mx-gold-hi));outline-offset:3px}input,select,textarea,.file-picker{border-color:#ffffff18!important;background:linear-gradient(#0a0b0aeb,#121311eb)!important;box-shadow:inset 0 1px 5px #0005}input:focus,select:focus,textarea:focus{border-color:#eecb82a6!important;box-shadow:0 0 0 3px #d8ad5819,inset 0 1px 5px #0005}.catalog-page,.project-page,.studio-page,.profiles-page{padding-bottom:clamp(3rem,7vw,7rem)}.catalog-card{min-height:20rem;padding:1.45rem}.catalog-card:nth-child(3n+1){background:linear-gradient(148deg,#2c251bdb,#10110ff7)!important}.catalog-card:nth-child(3n+2){background:linear-gradient(148deg,#181f22db,#10110ff7)!important}.catalog-card-top{padding-bottom:.7rem;border-bottom:1px solid var(--mx-line)}.catalog-contract{padding:1.35rem!important}.project-state{display:inline-flex;align-items:center;margin-top:1rem;padding:.55rem .75rem;border:1px solid #d8ad582b;border-radius:999px;background:#090a0994}.project-section{padding:1.55rem!important}.project-grid>.project-section:first-child{grid-row:span 2;background:linear-gradient(148deg,#2a2219de,#0f100ef5)!important}.relation-card{padding:1rem 1.1rem!important}.trust-summary div{border-left-color:var(--mx-gold-hi);background:linear-gradient(90deg,#d8ad5814,transparent);border-radius:0 .7rem .7rem 0}.studio-hero{display:grid;grid-template-columns:minmax(0,1.3fr) auto;gap:2rem;align-items:end}.studio-layout{grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);align-items:start}.studio-form,.studio-preview{padding:clamp(1.25rem,2vw,2rem)!important}.studio-form fieldset{padding:1.15rem;border:1px solid var(--mx-line);border-radius:1rem;background:#06070638}.studio-preview{position:sticky;top:90px;background:linear-gradient(150deg,#1d1f1def,#090a09fa)!important}.studio-preview pre{border-color:#d8ad5824;background:#090a09;color:#d7d4ca}.profile-card{padding:1.55rem;min-height:12rem}.profile-card:nth-of-type(odd){background:linear-gradient(148deg,#2a2219d6,#10110ff7)!important}.games-intro{overflow:hidden;background:linear-gradient(120deg,#0d0e0df5,#14120ed1)!important}.games-art img{box-shadow:0 24px 70px #0008;border-color:#e8c27038}.project-directory .project-section{min-height:18rem;display:flex;flex-direction:column}.game-projects{margin-top:auto}.verify-grid{gap:1.15rem}.verify-form,.verify-result{padding:clamp(1.25rem,2.5vw,2rem)!important;min-height:22rem}.file-picker{border-style:dashed!important;padding:1.3rem;border-radius:1rem}.requirements,.security-note,.locked-panel{border-radius:1rem;border:1px solid var(--mx-line);background:linear-gradient(145deg,#1e1e1ac7,#0d0e0ce5)}.site-footer{position:relative;margin-top:clamp(3rem,7vw,7rem);border-top-color:#d8ad582b;background:linear-gradient(#0c0d0c33,#070807e0)}@media(max-width:900px){.hero,.catalog-hero,.project-hero,.studio-hero,.profiles-hero{grid-template-columns:1fr!important;background-position:64% center}.studio-preview{position:relative;top:auto}.section-nav{position:relative;top:auto;border-radius:1rem}}@media(max-width:620px){body{background-attachment:scroll}.hero,.catalog-hero,.project-hero,.studio-hero,.profiles-hero{margin-top:.6rem;border-radius:1.15rem;padding:3rem 1.15rem!important;background-position:70% center}.hero h1,.catalog-hero h1,.project-hero h1,.studio-hero h1,.profiles-hero h1{font-size:clamp(2.35rem,14vw,3.6rem)}#downloads-page-title{font-size:10.5vw}.section,.catalog-controls,.catalog-results,.project-grid,.studio-layout,.profiles-grid{border-radius:1.05rem;padding:1.55rem 1rem!important}.card,.project-section,.catalog-card,.profile-card,.studio-form,.studio-preview{padding:1.15rem!important}.catalog-card{min-height:auto}.section-nav{display:flex;overflow-x:auto;justify-content:flex-start;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin}.section-nav a{flex:none}}@media(min-width:901px){.trust-page .hero{grid-template-columns:minmax(18rem,.65fr) minmax(0,1.35fr);background-position:left center}.trust-page .hero-copy{order:2}.trust-page .hero-panel{order:1}.trust-page .hero:before{background:radial-gradient(circle at 25% 44%,#70a4db30,transparent 21rem)}}@media(prefers-reduced-motion:reduce){.card,.project-section,.catalog-card,.profile-card,.button{transition:none}.card:hover,.project-section:hover,.catalog-card:hover,.profile-card:hover,.button:hover{transform:none}}
+
+
+/* MODARYX — Ultra Premium global pass 2
+   Couche cinématique finale : familles de pages distinctes, même univers. */
+:is(
+  .hero[aria-labelledby="not-found-title"],
+  .hero[aria-labelledby="docs-hero-title"],
+  .hero[aria-labelledby="downloads-page-title"],
+  .hero[aria-labelledby="ecosystem-title"],
+  .hero[aria-labelledby="security-hero-title"],
+  .hero.verify-hero,
+  .search-page .hero,
+  .catalog-hero,
+  .studio-hero,
+  .profiles-hero,
+  body.community-page .hero,
+  body.game-hub-page .hero,
+  .project-page .project-hero
+){
+  isolation:isolate;
+  overflow:hidden;
+}
+
+/* Connaissance / écosystème : architecture abstraite, plus documentaire. */
+.hero[aria-labelledby="docs-hero-title"],
+.hero[aria-labelledby="ecosystem-title"]{
+  background:
+    linear-gradient(102deg,rgba(5,9,10,.98) 0,rgba(8,15,16,.94) 47%,rgba(10,18,17,.76) 100%),
+    radial-gradient(circle at 78% 28%,rgba(95,153,132,.2),transparent 18rem),
+    radial-gradient(circle at 60% 88%,rgba(201,147,65,.12),transparent 24rem),
+    url("./forge-field.svg") 70% center/cover no-repeat;
+}
+.hero[aria-labelledby="docs-hero-title"]:before,
+.hero[aria-labelledby="ecosystem-title"]:before{
+  opacity:.72;
+  background:
+    linear-gradient(180deg,transparent 28%,rgba(4,8,9,.88)),
+    linear-gradient(118deg,transparent 0 56%,rgba(231,199,128,.07) 56.1% 56.25%,transparent 56.4%);
+}
+
+/* Confiance / fichiers : coffre, preuve, précision — plus minéral que paysager. */
+.hero[aria-labelledby="downloads-page-title"],
+.hero[aria-labelledby="security-hero-title"],
+.hero.verify-hero,
+.search-page .hero{
+  background:
+    radial-gradient(circle at 76% 35%,rgba(112,164,219,.19),transparent 15rem),
+    radial-gradient(circle at 66% 58%,rgba(231,199,128,.12),transparent 26rem),
+    linear-gradient(110deg,#06090b 0,#0a1114 46%,#0b1110 100%),
+    url("./forge-field.svg") 76% center/cover no-repeat;
+}
+.hero[aria-labelledby="downloads-page-title"]:after,
+.hero[aria-labelledby="security-hero-title"]:after,
+.hero.verify-hero:after,
+.search-page .hero:after{
+  content:"";
+  position:absolute;
+  inset:auto 6% 8% auto;
+  width:clamp(10rem,24vw,22rem);
+  aspect-ratio:1;
+  border:1px solid rgba(231,199,128,.12);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 2.8rem rgba(112,164,219,.025),
+    0 0 0 5.6rem rgba(231,199,128,.018);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Communauté / profils : monde organique, cadrage plus humain. */
+body.community-page .hero,
+.profiles-hero{
+  background:
+    linear-gradient(94deg,rgba(5,8,9,.98) 0,rgba(8,13,13,.91) 43%,rgba(7,12,12,.45) 72%,rgba(6,9,10,.78) 100%),
+    radial-gradient(circle at 22% 72%,rgba(83,126,91,.18),transparent 22rem),
+    url("./modaryx-world-portals.webp") 26% center/cover no-repeat;
+}
+.profiles-hero{
+  background:
+    linear-gradient(96deg,rgba(6,8,9,.98) 0,rgba(10,14,13,.92) 46%,rgba(9,14,13,.44) 75%,rgba(6,9,10,.8) 100%),
+    radial-gradient(circle at 76% 26%,rgba(112,164,219,.18),transparent 19rem),
+    url("./modaryx-world-portals.webp") 38% center/cover no-repeat;
+}
+
+/* Catalogue / création : même monde, deux signatures lumineuses distinctes. */
+.catalog-hero{
+  background:
+    linear-gradient(96deg,rgba(5,8,9,.98) 0,rgba(8,12,13,.9) 44%,rgba(8,12,12,.4) 76%,rgba(6,9,10,.78) 100%),
+    radial-gradient(circle at 84% 30%,rgba(217,168,80,.24),transparent 17rem),
+    url("./modaryx-world-portals.webp") 78% center/cover no-repeat;
+}
+.studio-hero{
+  background:
+    linear-gradient(100deg,rgba(6,8,10,.98),rgba(9,13,16,.92) 48%,rgba(8,14,17,.5) 76%,rgba(6,9,11,.8)),
+    radial-gradient(circle at 82% 30%,rgba(112,164,219,.22),transparent 18rem),
+    url("./modaryx-world-portals.webp") 88% center/cover no-repeat;
+}
+
+/* Pages jeux : deux atmosphères dans la même famille visuelle. */
+body.game-hub-page .hero{
+  background:
+    linear-gradient(98deg,rgba(5,8,9,.98),rgba(9,13,13,.9) 46%,rgba(7,12,12,.4) 76%,rgba(6,9,10,.78)),
+    url("./modaryx-world-portals.webp") 72% center/cover no-repeat;
+}
+body.game-hub-page:has(.page-trail a[href*="gta-6"]) .hero{
+  background:
+    linear-gradient(98deg,rgba(7,8,7,.98),rgba(15,13,9,.9) 44%,rgba(18,13,7,.38) 74%,rgba(7,9,9,.78)),
+    radial-gradient(circle at 82% 28%,rgba(229,164,70,.28),transparent 19rem),
+    url("./modaryx-world-portals.webp") 84% center/cover no-repeat;
+}
+body.game-hub-page:has(.page-trail a[href*="red-dead-redemption-2"]) .hero{
+  background:
+    linear-gradient(98deg,rgba(5,8,10,.98),rgba(7,14,15,.9) 44%,rgba(6,16,17,.38) 74%,rgba(6,9,10,.78)),
+    radial-gradient(circle at 24% 72%,rgba(75,118,104,.23),transparent 22rem),
+    url("./modaryx-world-portals.webp") 34% center/cover no-repeat;
+}
+
+/* Projets / 404 : composition éditoriale, moins "hero cloné". */
+.project-page .project-hero{
+  background:
+    linear-gradient(112deg,rgba(6,8,9,.99),rgba(13,15,13,.94) 56%,rgba(18,15,10,.78)),
+    radial-gradient(circle at 78% 30%,rgba(206,146,63,.18),transparent 19rem),
+    url("./forge-field.svg") 72% center/cover no-repeat;
+}
+.hero[aria-labelledby="not-found-title"]{
+  background:
+    linear-gradient(100deg,rgba(6,8,9,.98),rgba(9,14,14,.9) 48%,rgba(8,13,13,.45) 76%,rgba(6,9,10,.78)),
+    radial-gradient(circle at 28% 74%,rgba(70,112,90,.18),transparent 20rem),
+    url("./modaryx-world-portals.webp") 48% center/cover no-repeat;
+}
+
+/* Les vrais composants restent visuels ; les grands conteneurs cessent d'être des cartes. */
+.catalog-controls,
+.catalog-results,
+.project-grid,
+.studio-layout,
+.profiles-grid{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.catalog-controls,
+.catalog-results{
+  padding-inline:0!important;
+}
+.catalog-controls:before,
+.catalog-results:before,
+.project-grid:before,
+.studio-layout:before,
+.profiles-grid:before{
+  content:"";
+  display:block;
+  grid-column:1/-1;
+  height:1px;
+  margin:0 0 clamp(1.25rem,2.4vw,2rem);
+  background:linear-gradient(90deg,rgba(231,199,128,.42),rgba(112,164,219,.18),transparent 72%);
+}
+.catalog-grid .catalog-card,
+.project-grid .project-section,
+.profiles-grid .profile-card,
+.studio-layout .studio-form,
+.studio-layout .studio-preview{
+  box-shadow:inset 0 1px rgba(255,255,255,.045),0 16px 42px rgba(0,0,0,.22)!important;
+}
+.catalog-grid .catalog-card{border-top-color:rgba(231,199,128,.28)!important}
+.project-grid .project-section,
+.profiles-grid .profile-card{border-top-color:rgba(112,164,219,.22)!important}
+
+@media(max-width:620px){
+  .hero[aria-labelledby="docs-hero-title"],
+  .hero[aria-labelledby="ecosystem-title"],
+  .hero[aria-labelledby="downloads-page-title"],
+  .hero[aria-labelledby="security-hero-title"],
+  .hero.verify-hero,
+  .search-page .hero,
+  .project-page .project-hero{
+    padding-top:clamp(9rem,42vw,13rem)!important;
+  }
+  body.community-page .hero,
+  .profiles-hero,
+  .catalog-hero,
+  .studio-hero,
+  body.game-hub-page .hero,
+  .hero[aria-labelledby="not-found-title"]{
+    padding-top:clamp(15rem,67vw,23rem)!important;
+  }
+  body.community-page .hero{background-position:center,center,18% top}
+  .profiles-hero{background-position:center,center,34% top}
+  .catalog-hero{background-position:center,center,72% top}
+  .studio-hero{background-position:center,center,86% top}
+  body.game-hub-page:has(.page-trail a[href*="gta-6"]) .hero{background-position:center,center,82% top}
+  body.game-hub-page:has(.page-trail a[href*="red-dead-redemption-2"]) .hero{background-position:center,center,28% top}
+  .hero[aria-labelledby="not-found-title"]{background-position:center,center,46% top}
+  .catalog-controls:before,
+  .catalog-results:before,
+  .project-grid:before,
+  .studio-layout:before,
+  .profiles-grid:before{margin-bottom:1rem}
+}
+@media(forced-colors:active){
+  .hero[aria-labelledby="downloads-page-title"]:after,
+  .hero[aria-labelledby="security-hero-title"]:after,
+  .hero.verify-hero:after,
+  .search-page .hero:after{display:none}
+}
+
+/* 2026-09-23 — passe canonique secondaire : un monde, plusieurs chapitres. */
+:root{--mx-ivory:#ece5d6;--mx-ivory-deep:#dcd3c1;--mx-ink:#18231e;--mx-forest:#14231c;--mx-river:#668e99;--mx-bronze:#a87338}
+body{background:#e8e1d2;background-image:none;color:#1d2923}
+body:before{display:none}
+.topbar{background:linear-gradient(180deg,rgba(9,17,14,.96),rgba(10,18,15,.9));border-bottom:1px solid rgba(236,229,214,.14);box-shadow:0 12px 36px rgba(12,20,16,.18)}
+.topbar .brand,.topbar nav a,.topbar .motion-toggle{color:#e9e4d8}
+.topbar .brand{font-family:var(--modaryx-display-font);letter-spacing:.02em}
+.topbar nav a{letter-spacing:.045em;text-transform:uppercase;font-size:.78rem}
+main{background:linear-gradient(180deg,#e9e2d3,#dcd4c3 54%,#eae4d7);padding-bottom:clamp(4rem,8vw,8rem)}
+.page-trail{color:#607067}.page-trail a{color:#654b2c}.page-trail span[aria-hidden]{color:#9a8e79}
+.section-nav{position:relative;top:auto;justify-content:flex-start;margin-block:1rem 0;padding:.35rem 0;border:0;border-block:1px solid rgba(31,49,40,.18);border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none}
+.section-nav a{color:#35483e;border-radius:0;padding:.75rem 1rem}.section-nav a:first-child{padding-left:0}.section-nav a:is(:hover,:focus-visible){color:#6d4d27;background:transparent;text-decoration:underline;text-underline-offset:.35rem}
+.hero,.catalog-hero,.project-hero,.studio-hero,.profiles-hero{min-height:clamp(30rem,52vw,45rem);align-content:end;margin-top:clamp(1rem,2vw,2rem);padding:clamp(3rem,7vw,7rem)!important;border:0!important;border-radius:0;box-shadow:0 38px 100px rgba(24,35,30,.2);background-color:#14231c}
+.hero-copy,.catalog-hero>div:first-child,.project-hero>div:first-child,.studio-hero>div:first-child,.profiles-hero>div:first-child{max-width:50rem}
+.hero h1,.catalog-hero h1,.project-hero h1,.studio-hero h1,.profiles-hero h1{font-family:var(--modaryx-display-font);font-size:clamp(3.2rem,6.5vw,7rem);font-weight:500;line-height:.88;letter-spacing:-.055em;max-width:12ch;color:#f3ead7;text-shadow:0 5px 35px rgba(0,0,0,.52)}
+.hero .lede,.catalog-hero .lede,.project-hero .lede,.studio-hero .lede,.profiles-hero .lede{color:#e1e4da;font-size:clamp(1.03rem,1.45vw,1.2rem);line-height:1.7}
+.hero-panel,.catalog-contract,.profiles-hero>.panel{align-self:end;padding:1.5rem 0 1.5rem 1.5rem!important;border:0!important;border-left:1px solid rgba(240,209,139,.5)!important;border-radius:0!important;background:linear-gradient(90deg,rgba(7,14,11,.54),transparent)!important;box-shadow:none!important;backdrop-filter:none}
+.hero-panel .feature-list li{border-bottom-color:rgba(236,229,214,.15)}
+.hero:after,.catalog-hero:after,.project-hero:after,.studio-hero:after,.profiles-hero:after{left:0;right:0;background:linear-gradient(90deg,#d4a75a,#6f9ba5,transparent 82%)}
+
+/* Paysage humain : communauté et profils, cadrage sur les compagnons. */
+body.community-page .hero{background:linear-gradient(90deg,rgba(7,14,11,.94) 0,rgba(8,16,13,.76) 42%,rgba(8,15,13,.18) 72%),url("./modaryx-world-community.webp") 52% center/cover no-repeat}
+.profiles-hero{background:linear-gradient(90deg,rgba(7,14,11,.95),rgba(8,16,13,.76) 44%,rgba(8,15,13,.2) 72%),url("./modaryx-world-profiles.webp") 58% center/cover no-repeat}
+
+/* Découverte : château et rivière, sans réutiliser l'ancien panorama. */
+.catalog-hero{background:linear-gradient(90deg,rgba(8,15,12,.95),rgba(9,17,14,.76) 43%,rgba(8,15,13,.14) 75%),url("./modaryx-wolf-dragon-hero.webp") 72% center/cover no-repeat}
+body.game-hub-page .hero{background:linear-gradient(90deg,rgba(8,15,12,.95),rgba(10,19,15,.76) 44%,rgba(8,15,13,.15) 75%),url("./modaryx-wolf-dragon-hero.webp") 82% center/cover no-repeat}
+body.game-family-gta .hero{background:radial-gradient(circle at 82% 24%,rgba(198,138,74,.28),transparent 19rem),linear-gradient(112deg,#241d14,#171d17 58%,#302819)}
+body.game-family-rdr2 .hero{background:radial-gradient(circle at 18% 76%,rgba(80,132,127,.26),transparent 20rem),linear-gradient(112deg,#10201d,#172a25 58%,#1e302b)}
+
+/* Savoirs : papier, relief typographique et architecture calme. */
+.hero[aria-labelledby="docs-hero-title"],.hero[aria-labelledby="ecosystem-title"]{background:linear-gradient(112deg,#203229 0,#12221b 55%,#26372d 100%),url("./forge-field.svg") 75% center/cover no-repeat}
+.hero[aria-labelledby="docs-hero-title"]:before,.hero[aria-labelledby="ecosystem-title"]:before{opacity:.36;background:linear-gradient(145deg,rgba(234,223,198,.08),transparent 50%),radial-gradient(circle at 78% 35%,rgba(203,161,86,.22),transparent 22rem)}
+
+/* Atelier : cuivre et encre ; confiance : pierre bleue ; 404 : forêt silencieuse. */
+.studio-hero{background:linear-gradient(110deg,#251c14,#141b17 58%,#26302a),url("./forge-field.svg") 82% center/cover no-repeat}
+.hero[aria-labelledby="downloads-page-title"],.hero[aria-labelledby="security-hero-title"],.hero.verify-hero,.search-page .hero{background:radial-gradient(circle at 82% 26%,rgba(105,150,161,.3),transparent 20rem),linear-gradient(112deg,#111d1c,#172724 58%,#24322f),url("./forge-field.svg") 75% center/cover no-repeat}
+.project-page .project-hero{background:linear-gradient(112deg,#1f2e26,#121e19 58%,#30271b),url("./forge-field.svg") 72% center/cover no-repeat}
+.hero[aria-labelledby="not-found-title"]{background:linear-gradient(112deg,#182820,#0d1914 58%,#26342b),url("./forge-field.svg") 45% center/cover no-repeat}
+
+/* Les sections deviennent des pages éditoriales ; les outils restent des îlots utiles. */
+.section,.catalog-controls,.catalog-results,.project-grid,.studio-layout,.profiles-grid{margin-top:0;padding:clamp(4.5rem,8vw,8rem) clamp(1rem,3vw,2.7rem)!important;border:0!important;border-radius:0;background:transparent;box-shadow:none;color:#1d2923}
+.section:nth-of-type(even),.catalog-results{background:rgba(255,255,255,.22)}
+.section+.section{border-top:1px solid rgba(31,49,40,.15)!important}
+.section-heading{align-items:end;padding-bottom:1.4rem;border-bottom:1px solid rgba(31,49,40,.2)}
+.section-heading h2,.section>h2{font-family:var(--modaryx-display-font);font-size:clamp(2.5rem,5vw,5.3rem);font-weight:500;line-height:.92;letter-spacing:-.045em;max-width:14ch;color:#19261f}
+.section-intro,.section>p,.section-heading p{color:#526159;line-height:1.75}
+.section .eyebrow,.catalog-controls .eyebrow,.catalog-results .eyebrow{color:#78572f}
+.cards{gap:0;border-block:1px solid rgba(31,49,40,.18)}
+.card,.project-section,.catalog-card,.profile-card,.relation-card{padding:clamp(1.4rem,2.5vw,2.4rem)!important;border:0!important;border-right:1px solid rgba(31,49,40,.16)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#1d2923}
+.catalog-grid .catalog-card,.project-grid .project-section,.profiles-grid .profile-card{border-color:rgba(31,49,40,.16)!important;background:transparent!important;box-shadow:none!important}
+.catalog-grid .catalog-card:nth-child(3n+1),.catalog-grid .catalog-card:nth-child(3n+2),.project-grid>.project-section:first-child,.profiles-grid .profile-card:nth-of-type(odd){background:rgba(255,255,255,.16)!important}
+.card:last-child,.catalog-card:last-child,.profile-card:last-child{border-right:0!important}
+.card:before,.project-section:before,.catalog-card:before,.profile-card:before{display:none}
+.card h3,.project-section h3,.catalog-card h2,.catalog-card h3,.profile-card h2,.profile-card h3{font-family:var(--modaryx-display-font);font-weight:500;color:#1a2821}
+.card p,.project-section p,.catalog-card p,.profile-card p{color:#526159}
+.card .text-link,.project-section .text-link,.catalog-card .text-link,.profile-card .text-link{color:#704e26}
+@media(hover:hover) and (pointer:fine){.card:hover,.project-section:hover,.catalog-card:hover,.profile-card:hover{transform:none;background:rgba(255,255,255,.3)!important;box-shadow:none!important}}
+.panel,.studio-form,.studio-preview,.community-remote-bridge,.community-followup,.requirements,.security-note,.locked-panel{border:1px solid rgba(31,49,40,.18)!important;border-radius:2px!important;background:rgba(255,255,255,.35)!important;box-shadow:0 18px 50px rgba(31,49,40,.08)!important;color:#1d2923}
+.panel h3,.studio-form h2,.studio-preview h2,.community-remote-bridge h3,.community-followup h3,.locked-panel h3{color:#1d2923}
+.panel p,.community-remote-bridge p,.community-followup p,.security-note{color:#526159}
+.section label,.section legend,.panel label,.panel legend{color:#26352d}
+.requirements>div strong,.requirements>div span,.locked-panel .feature-list strong,.locked-panel .feature-list small{color:#2b3931}
+.studio-layout{grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr)}
+.studio-form fieldset{border:0;border-top:1px solid rgba(31,49,40,.18);border-radius:0;background:transparent}
+.studio-preview{position:sticky;top:90px;background:#182720!important;color:#ece5d6}
+.studio-preview h2,.studio-preview p,.studio-preview label{color:#ece5d6}
+input,select,textarea,.file-picker{border-color:rgba(31,49,40,.24)!important;background:rgba(255,255,255,.62)!important;color:#18231e!important;box-shadow:inset 0 1px 4px rgba(31,49,40,.08)}
+input::placeholder,textarea::placeholder{color:#6a756e!important}
+.badge,.project-state,.community-remote-badge,.community-followup-badge{border-color:rgba(92,72,43,.25);background:rgba(255,255,255,.38);color:#493d2c}
+.requirements{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;padding:0!important}
+.requirements>div{padding:1.25rem;border-bottom:1px solid rgba(31,49,40,.14)}
+.locked-panel{padding:clamp(2rem,4vw,4rem)!important;border-left:3px solid #a87338!important}
+.catalog-hero .catalog-contract,.profiles-hero>.panel{border:0!important;border-left:1px solid rgba(240,209,139,.5)!important;border-radius:0!important;background:linear-gradient(90deg,rgba(7,14,11,.78),rgba(7,14,11,.34))!important;box-shadow:none!important;color:#ece5d6}
+.catalog-hero .catalog-contract{display:grid;grid-template-columns:1fr;gap:.35rem;max-width:22rem}.catalog-hero .catalog-contract span{margin-bottom:.65rem;color:#cad2c9!important;line-height:1.45}
+.catalog-hero .catalog-contract p,.catalog-hero .catalog-contract strong,.catalog-hero .catalog-contract span,.profiles-hero>.panel p,.profiles-hero>.panel strong,.profiles-hero>.panel span{color:#ece5d6}
+.site-footer{margin-top:0;background:linear-gradient(105deg,#0c1713,#1b2922);border-top:1px solid rgba(236,229,214,.16)}
+
+/* Revue vidéo 2026-09-24 : retirer les derniers héritages clairs du thème sombre sur ivoire. */
+.section .security-note strong,
+.catalog-controls .security-note strong,
+.catalog-results .security-note strong,
+.project-grid .security-note strong,
+.profiles-grid .security-note strong,
+.studio-layout .security-note strong,
+.section .trust-summary strong,
+.section dt,
+.panel dt{color:#203128!important}
+.section .security-note a,
+.catalog-controls .security-note a,
+.catalog-results .security-note a,
+.project-grid .security-note a,
+.profiles-grid .security-note a,
+.studio-layout .security-note a{color:#68471f!important;font-weight:750;text-decoration-color:rgba(104,71,31,.48)}
+.section .modaryx-disclosure summary,
+.catalog-controls .modaryx-disclosure summary,
+.catalog-results .modaryx-disclosure summary,
+.project-grid .modaryx-disclosure summary,
+.profiles-grid .modaryx-disclosure summary,
+.studio-layout .modaryx-disclosure summary{color:#27382f!important}
+.section code,.studio-form code{border-color:rgba(31,49,40,.2);background:rgba(31,49,40,.07);color:#3f321f}
+
+@media(max-width:900px){.hero,.catalog-hero,.project-hero,.studio-hero,.profiles-hero{min-height:34rem}.hero-panel,.catalog-contract,.profiles-hero>.panel{margin-top:2rem}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.card:nth-child(2n){border-right:0!important}.card:nth-child(n+3){border-top:1px solid rgba(31,49,40,.16)!important}}
+@media(max-width:620px){main{padding-bottom:4rem}.page-trail{padding-inline:1rem}.section-nav{margin-inline:1rem}.hero,.catalog-hero,.project-hero,.studio-hero,.profiles-hero{min-height:0;margin-inline:0;border-radius:0;padding:6rem 1.25rem 3rem!important;background-position:center top!important}body.community-page .hero,.profiles-hero,.catalog-hero{padding-top:clamp(16rem,74vw,24rem)!important}.hero h1,.catalog-hero h1,.project-hero h1,.studio-hero h1,.profiles-hero h1{font-size:clamp(2.8rem,13vw,4.5rem)}.hero-panel,.catalog-contract,.profiles-hero>.panel{padding:1.25rem 0 0!important;border-left:0!important;border-top:1px solid rgba(240,209,139,.38)!important;background:transparent!important}.section,.catalog-controls,.catalog-results,.project-grid,.studio-layout,.profiles-grid{padding:4.25rem 1rem!important}.section-heading h2,.section>h2{font-size:clamp(2.45rem,11vw,3.8rem)}.cards{grid-template-columns:1fr}.card,.project-section,.catalog-card,.profile-card,.relation-card{border-right:0!important;border-bottom:1px solid rgba(31,49,40,.16)!important}.requirements{grid-template-columns:1fr}.studio-preview{position:relative;top:auto}}
+@media(forced-colors:active){body,main,.section,.catalog-controls,.catalog-results,.project-grid,.studio-layout,.profiles-grid,.card,.project-section,.catalog-card,.profile-card,.panel,.studio-form,.studio-preview,.requirements,.security-note,.locked-panel{background:Canvas!important;color:CanvasText!important}.section .security-note strong,.section .security-note a,.section .modaryx-disclosure summary,.section .trust-summary strong,.section dt,.panel dt,.section code,.studio-form code{color:CanvasText!important}}

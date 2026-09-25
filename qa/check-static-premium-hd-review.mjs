@@ -43,7 +43,7 @@ fs.mkdirSync(OUT,{recursive:true});
 
 const sleep=(ms)=>new Promise((resolve)=>setTimeout(resolve,ms));
 
-async function waitForDevToolsPort(timeoutMs=12000){
+async function waitForDevToolsPort(timeoutMs=20000){
   const file=path.join(USER_DATA_DIR,'DevToolsActivePort');
   const deadline=Date.now()+timeoutMs;
   while(Date.now()<deadline){
@@ -51,7 +51,14 @@ async function waitForDevToolsPort(timeoutMs=12000){
       const [port]=fs.readFileSync(file,'utf8').trim().split(/\r?\n/);
       if(/^\d+$/.test(port)) return Number(port);
     }
-    await sleep(100);
+    const marker='DevTools listening on ws://127.0.0.1:';
+    const markerAt=chromeStderr.lastIndexOf(marker);
+    if(markerAt>=0){
+      const rest=chromeStderr.slice(markerAt+marker.length);
+      const portText=rest.split('/')[0];
+      if(/^\d+$/.test(portText)) return Number(portText);
+    }
+    await sleep(120);
   }
   throw new Error('DevToolsActivePort not created');
 }

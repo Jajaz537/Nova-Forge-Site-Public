@@ -1,6 +1,6 @@
 # CHECKPOINT CANONIQUE — MODARYX — 21 septembre 2026
 
-**Statut : SOURCE DE REPRISE PRIORITAIRE — VF NON DÉCLARÉE**
+**Statut : SOURCE DE REPRISE PRIORITAIRE — RÉCONCILIÉE AU 24 SEPTEMBRE 2026 — VF NON DÉCLARÉE**
 
 Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septembre 2026. Il remplace, pour la reprise, les états plus anciens lorsque ceux-ci sont contradictoires. Il ne constitue ni une fusion vers `main`, ni une promotion production, ni une déclaration de VF.
 
@@ -14,6 +14,12 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 - Aucune migration MODARYX → Nova Forge.
 
 ## 2. Git courant
+
+- **Candidat courant de la PR #152** : `a499f505abdcff4fea3f297a83ea04198758bcc9`.
+- Branche candidate : `design/modaryx-ultra-premium-global-pass2-20260922`, vers la branche Work `design/modaryx-premium-hd-20260914-work`.
+- PR #152 : **ouverte, non fusionnée, mergeable** au dernier contrôle Nova.
+- **20 workflows automatisés visibles sur ce HEAD : SUCCESS** au dernier contrôle Nova.
+- Les dernières stabilisations CI n'ont modifié aucun rendu visuel.
 
 - Dépôt : `Jajaz537/Nova-Forge-Site-Public`
 - Branche Work : `design/modaryx-premium-hd-20260914-work`
@@ -38,8 +44,8 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 - **TERMINÉ — WebKit Playwright ciblé** sur 23 routes ; ne vaut pas Safari réel.
 - **TERMINÉ — cycle PWA HTTPS automatisé ciblé** : service worker, cache, offline-stale, reconnexion/update.
 - **TERMINÉ sur scénarios ciblés** — états empty/error/unavailable/retry des principales surfaces.
-- **EN COURS — Bloc 1/4 Design Ultra Haut de Gamme réouvert le 22 septembre 2026** après retour humain frais sur le Preview : le site entier reste jugé trop proche d’un « site sombre à cartes » et doit recevoir une passe artistique globale cohérente sur les 23 routes.
-- **PREUVE MANQUANTE** — validation artistique humaine finale après cette refonte globale.
+- **TERMINÉ — Bloc 1 artistique, passe courante validée humainement par Nova** à partir des vidéos exhaustives desktop + mobile du SHA `2b0715431faf14e7d121ea8e2654fe45dbd699fe`. Les compositions Accueil / Jeux / Communauté / Profils / Écosystème sont distinctes dans le même monde canonique ; aucun changement visuel ultérieur n'a invalidé cette décision.
+- Cette validation porte sur la passe artistique courante et **ne constitue ni une VF globale ni un 100 %**.
 - Une décision artistique explicite existe désormais pour cette refonte. Conserver les fonctions et preuves déjà vertes ; ne pas remplacer une composition approuvée par un visuel non validé.
 
 ## 4. Backend / communauté / profils
@@ -101,7 +107,7 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 
 ## 9. Météo / monde vivant
 
-- **TERMINÉ — monde vivant logique + synchronisation contexte grossier ciblés**. **EN COURS — croissance visuelle artistique** : les assets séparés existent mais leur activation est revenue à `visualGrowth.status=awaiting-assets` via PR #149. Le hero approuvé `assets/modaryx-wolf-dragon-hero.webp` reste le rendu actif jusqu’à validation artistique humaine explicite des nouvelles couches.
+- **TERMINÉ — monde vivant logique + synchronisation contexte grossier ciblés**. **EN COURS — croissance visuelle artistique séparée** : `visualGrowth.status=awaiting-assets` est l'état courant actif et doit rester fail-closed. Les assets séparés existent mais ne sont pas réactivés ; le hero composite approuvé reste actif.
 - **TERMINÉ — readiness WeatherAPI ciblée** : mode `weatherapi`, proxy same-origin, clé serveur obligatoire, normalisation, attribution et disclaimer utilisateur ; aucune activation réelle.
 - **BLOQUÉ / activation externe** — météo réelle production tant que compte/clé, acceptation des conditions, confidentialité/juridique et preuve réelle ne sont pas validés.
 - Ne pas activer un fournisseur météo réel sans validation explicite.
@@ -114,6 +120,7 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 
 ## 11. Preuves externes encore ouvertes
 
+- **PREUVE MANQUANTE** — passkey : enrôlement, reconnexion et révocation sur appareil WebAuthn réel.
 - **PREUVE MANQUANTE** — lecteur d’écran natif Windows.
 - **PREUVE MANQUANTE** — VoiceOver macOS/iOS.
 - **PREUVE MANQUANTE** — zoom navigateur natif 200/400 % final.
@@ -122,9 +129,25 @@ Ce checkpoint synthétise l’état opérationnel courant de MODARYX au 21 septe
 - **PREUVE MANQUANTE** — installation PWA manuelle sur appareil.
 - **PREUVE MANQUANTE** — CWV terrain représentatifs.
 - **PREUVE MANQUANTE** — validation juridique / droits / licences.
+- **BLOQUÉ** — signer et trust anchor réels absents.
+- **BLOQUÉ** — artefact de distribution public autorisé absent.
+- **PREUVE MANQUANTE / ENTRÉES ABSENTES** — corpus réels GTA VI / RDR2 autorisés, versionnés et attribués.
+- **BLOQUÉ** — Storage Resolver / Repair Network réels : endpoints et autorisations externes absents.
+- **BLOQUÉ** — Guide MODARYX réel non connecté.
+- **BLOQUÉ** — pont Nova Forge OS réel non connecté.
+- **BLOQUÉ / VALIDATION FOURNISSEUR-JURIDIQUE** — météo production non activée.
 - **PREUVE MANQUANTE / NON RÉCUPÉRÉE** — Master Nova Design Intelligence complète.
 
 ## 12. Micro-preuves runtime les plus récentes
+
+Candidat PR #152 `a499f505abdcff4fea3f297a83ea04198758bcc9` :
+
+- **20 workflows automatisés visibles : SUCCESS**, contrôle GitHub frais effectué par Nova ;
+- Preview HTTPS PWA Cycle `36048593459` — **success** ;
+- Preview Visual Capture `36048593662` — **success** ;
+- PWA Update Browser `36048593583` — **success** ;
+- Browser Accessibility `36048593449` — **success** ;
+- validation artistique humaine de la passe vidéo `2b07154` conservée, car aucun commit ultérieur n'a modifié visiblement le rendu.
 
 Candidat `9bd769e927bc07ff5ea2cd40054cfdec0c30f610` :
 
@@ -155,8 +178,8 @@ Ne jamais supprimer implicitement un blocker pour améliorer un pourcentage. Une
 
 1. Vérifier Git frais avant toute écriture.
 2. Ne pas rejouer les preuves déjà vertes sans modification pertinente.
-3. Priorité produit courante : fermer le **Bloc 1/4 — refonte artistique globale Premium HD** sur les 23 routes sans réintroduire les couches Loup/Dragon non validées.
-4. Fermer ensuite uniquement les dépendances réelles encore ouvertes quand un environnement adapté existe :
+3. Considérer le **Bloc 1 artistique de la passe courante comme TERMINÉ**, sans déclarer la VF globale et sans réactiver les couches Loup/Dragon séparées ; conserver `visualGrowth.status=awaiting-assets`.
+4. Fermer uniquement les dépendances réelles encore ouvertes quand un environnement adapté existe :
    - passkey appareil ;
    - signer / trust anchor réel ;
    - artefact de distribution autorisé ;
@@ -186,7 +209,7 @@ Pour toute nouvelle conversation ou agent :
 - Safari/macOS/iOS, lecteur d’écran natif, installation PWA sur appareil et zoom navigateur natif 400 % : **PREUVE MANQUANTE** maintenue ; l’environnement Work expose uniquement son navigateur Chromium intégré.
 - CWV terrain : **PREUVE MANQUANTE** maintenue. La tentative PageSpeed Insights API a renvoyé `HTTP 429 RESOURCE_EXHAUSTED` (`RATE_LIMIT_EXCEEDED`) et l’interface n’a livré aucune donnée terrain exploitable. Aucun résultat Lighthouse labo n’a été substitué.
 - Signer/trust anchor, artefact public autorisé, corpus GTA VI/RDR2, Storage/Repair, Guide MODARYX et pont Nova Forge OS : états inchangés ; aucune ressource, autorisation ou endpoint réel supplémentaire n’a été fourni.
-- Validation juridique, droits/licences et validation artistique humaine : **PREUVE MANQUANTE** maintenue.
+- Validation juridique et droits/licences : **PREUVE MANQUANTE** maintenue. L'ancienne mention de validation artistique manquante est supersédée par la validation humaine Nova de la passe vidéo `2b07154` ; cela ne ferme pas la VF globale.
 - Compte Fondateur Auth0 DEV : attribution `modaryx:founder`, session `authority.role=founder` et les deux mutations privilégiées sont désormais acquises. Les anciens blocages `fetch`/XHR/`sendBeacon`, `origin-mismatch` et `reauthentication-required` sont historiques et ont été fermés par la micro-surface temporaire sécurisée, son correctif d'origine et une réauthentification complète.
 - Aucun full replay, aucune activation production et aucun changement `main`, DNS/DNSSEC, nameservers ou IONOS.
 
@@ -209,5 +232,20 @@ Pour toute nouvelle conversation ou agent :
 - PR #149 : fusionnée dans Work au merge `14650dd7d0cb1a501ccc88e6f9caa112b4eda550`.
 - Candidat final #149 : Source Proof, Local Functional, PWA, Real File, Lab Performance, Preview Visual, Firefox 23 routes, WebKit 23 routes, contrat croissance, asset gate, offline state et chronique : **success**.
 - Preview Visual confirme desktop/mobile/reduced-motion : hero `modaryx-wolf-dragon-hero.webp`, zéro couche compagnon active, `worldVisualGrowth=awaiting-assets`, reality sync active.
-- **EN COURS — Bloc 1/4** : retour humain frais par vidéo sur le Preview ; la qualité artistique globale des 23 routes doit être remontée au niveau VF Premium HD / ultra haut de gamme. Les anciennes preuves techniques restent valides comme non-régression, mais ne ferment plus le design artistique.
+- **TERMINÉ — Bloc 1 artistique, passe courante** : la passe vidéo exhaustive `2b07154` a été validée humainement par Nova. Les corrections techniques ultérieures n'ont pas modifié visiblement le rendu. `visualGrowth.status=awaiting-assets` reste actif.
+
+### Règle vidéo permanente jusqu’à la VF — 2026-09-24
+
+- Toute passe artistique importante suit obligatoirement : correction → micro-preuves → nouveau Preview → vidéos desktop et mobile fraîches → analyse visuelle humaine par Nova.
+- Les deux vidéos doivent correspondre exactement au SHA et au Preview livrés ; une vidéo antérieure devient caduque après toute modification visuelle importante.
+- La couverture minimale comprend les 23 routes publiques, les pages longues jusqu’au footer, les menus, formulaires, filtres, états interactifs accessibles et les viewports desktop/mobile.
+- Les checks automatisés restent des preuves techniques uniquement et ne valent jamais validation artistique.
+- État artistique courant : **TERMINÉ — dernière passe vidéo exhaustive examinée et acceptée par Nova**. Cette acceptation ne vaut pas VF globale.
 - Ne jamais réactiver les couches de croissance visuelle avant validation humaine explicite de la nouvelle composition.
+
+## Mise à jour canonique — 24 septembre 2026 — kit de preuves manuelles finales
+
+- **TERMINÉ — préparation documentaire uniquement** : le kit `qa/manual-final-evidence/` fournit les protocoles utilisateur/appareil, la matrice des dépendances externes, le modèle de rapport, le handoff et un manifeste borné au candidat `03e41855c7b51fcd499ae7aaaebf0eb21d4da493` et à sa Preview immuable `https://6f813d33.nova-forge-site-public.pages.dev`.
+- Les protocoles préparés ne valent aucune exécution : passkey réelle, Safari, VoiceOver, lecteur d'écran Windows, zoom natif 200/400 %, tactile physique, PWA appareil et CWV terrain restent **PREUVE MANQUANTE**.
+- Juridique/licences et Master Nova Design Intelligence restent **PREUVE MANQUANTE** ; corpus GTA VI/RDR2 reste **EN COURS — ENTRÉES ABSENTES** ; signer/trust anchor, artefact public autorisé, Storage/Repair réels, Guide MODARYX réel, pont Nova Forge OS réel et météo production restent **BLOQUÉS**.
+- Aucun état externe n'est artificiellement fermé. Aucun full replay n'a été lancé. La VF globale reste non déclarée et `visualGrowth.status=awaiting-assets` reste actif.
