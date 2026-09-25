@@ -16,7 +16,7 @@ const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
 
 fs.mkdirSync(USER_DATA_DIR,{recursive:true});
 
-async function waitForPort(timeoutMs=12000){
+async function waitForPort(timeoutMs=20000){
   const f=path.join(USER_DATA_DIR,'DevToolsActivePort'); const deadline=Date.now()+timeoutMs;
   while(Date.now()<deadline){
     if(fs.existsSync(f)){const p=fs.readFileSync(f,'utf8').trim().split(/\r?\n/)[0]; if(/^\d+$/.test(p)) return Number(p);}
@@ -108,5 +108,7 @@ try{
 }catch(error){
   console.error(JSON.stringify({marker:'FAIL_TARGETED_LAB_PERFORMANCE_PROOF',fatal:error.message,chromeStderr:stderr,failures},null,2));process.exitCode=1;
 }finally{
-  chrome.kill('SIGTERM');await sleep(150);if(!chrome.killed)chrome.kill('SIGKILL');
+  chrome.kill('SIGTERM');
+  for(let attempt=0;attempt<20&&chrome.exitCode===null;attempt++) await sleep(100);
+  if(chrome.exitCode===null) chrome.kill('SIGKILL');
 }
