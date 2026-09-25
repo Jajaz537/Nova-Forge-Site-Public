@@ -8,7 +8,7 @@ const USER_DATA_DIR='/tmp/modaryx-installability-'+process.pid;
 const failures=[];
 const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
 
-async function waitPort(timeoutMs=12000){
+async function waitPort(timeoutMs=20000){
   const f=path.join(USER_DATA_DIR,'DevToolsActivePort');
   const deadline=Date.now()+timeoutMs;
   while(Date.now()<deadline){
@@ -16,6 +16,8 @@ async function waitPort(timeoutMs=12000){
       const p=fs.readFileSync(f,'utf8').trim().split(/\r?\n/)[0];
       if(/^\d+$/.test(p)) return Number(p);
     }
+    const announced=stderr.match(/DevTools listening on ws:\/\/127\.0\.0\.1:(\d+)\//);
+    if(announced) return Number(announced[1]);
     await sleep(120);
   }
   throw new Error('DevToolsActivePort not created');
@@ -96,5 +98,7 @@ try{
 }catch(error){
   console.error(JSON.stringify({marker:'FAIL_TARGETED_PWA_INSTALLABILITY_PROOF',fatal:error.message,chromeStderr:stderr,failures},null,2));process.exitCode=1;
 }finally{
-  chrome.kill('SIGTERM');await sleep(150);if(!chrome.killed)chrome.kill('SIGKILL');
+  chrome.kill('SIGTERM');
+  for(let attempt=0;attempt<20&&chrome.exitCode===null;attempt++) await sleep(100);
+  if(chrome.exitCode===null) chrome.kill('SIGKILL');
 }
