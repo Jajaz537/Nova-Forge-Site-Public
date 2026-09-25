@@ -456,3 +456,44 @@ body[data-mx-world=home] .site-main > :is(.modaryx-portals,.editions,.chapters,.
     line-height:.94!important;
   }
 }
+
+
+/* VF direction lock — 2026-09-25. Preserve the approved luminous kingdom and living-world readability. */
+body[data-mx-world=home] .modaryx-realm-art{
+  object-position:center 48%!important;
+  filter:saturate(1.08) brightness(1.06) contrast(1.02)!important;
+}
+@media(min-width:901px){
+  body[data-mx-world=home] .modaryx-realm-hero{
+    min-height:max(820px,calc(100svh - 72px))!important;
+    align-items:end!important;
+    padding-top:clamp(96px,9vw,138px)!important;
+  }
+  body[data-mx-world=home] .modaryx-realm-hero .hero-copy{
+    width:min(660px,47vw)!important;
+    max-width:660px!important;
+    padding:22px 24px 24px!important;
+    border-left:1px solid rgba(242,215,151,.3)!important;
+    border-radius:0 18px 18px 0!important;
+    background:linear-gradient(90deg,rgba(3,7,5,.72),rgba(3,7,5,.32) 72%,transparent)!important;
+    -webkit-backdrop-filter:blur(3px);
+    backdrop-filter:blur(3px);
+  }
+  body[data-mx-world=home] .modaryx-realm-hero::after{
+    background:
+      linear-gradient(90deg,rgba(3,7,5,.66) 0,rgba(3,7,5,.38) 29%,rgba(3,7,5,.05) 54%,transparent 72%),
+      linear-gradient(0deg,rgba(7,11,9,.7) 0,rgba(7,11,9,.08) 31%,transparent 58%),
+      radial-gradient(circle at 76% 16%,rgba(255,202,106,.14),transparent 25rem)!important;
+  }
+}
+html[data-local-season=winter] body[data-mx-world=home] .modaryx-realm-art{filter:saturate(.98) brightness(1.03) contrast(1.02) hue-rotate(-3deg)!important}
+html[data-local-season=summer] body[data-mx-world=home] .modaryx-realm-art{filter:saturate(1.1) brightness(1.08) contrast(1.01)!important}
+html[data-local-season=autumn] body[data-mx-world=home] .modaryx-realm-art{filter:saturate(1.1) brightness(1.04) sepia(.035)!important}
+html[data-local-season=spring] body[data-mx-world=home] .modaryx-realm-art{filter:saturate(1.08) brightness(1.07)!important}
+html[data-local-daypart=night] body[data-mx-world=home] .modaryx-realm-art{filter:saturate(.88) brightness(.72) contrast(1.06)!important}
+html[data-local-daypart=dawn] body[data-mx-world=home] .modaryx-realm-art{filter:saturate(1.02) brightness(.94)!important}
+html[data-local-daypart=dusk] body[data-mx-world=home] .modaryx-realm-art{filter:saturate(1.06) brightness(.9) sepia(.045)!important}
+@media(max-width:620px){
+  body[data-mx-world=home] .modaryx-realm-art{object-position:60% center!important;filter:saturate(1.06) brightness(1.04) contrast(1.02)!important}
+  body[data-mx-world=home] .modaryx-realm-hero .shell{margin-top:-10px!important}
+}
