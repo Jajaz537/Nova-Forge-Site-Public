@@ -7,6 +7,8 @@
   const phaseNode = document.querySelector('[data-world-phase]');
   const ageNode = document.querySelector('[data-world-age]');
   const chronicleNode = document.querySelector('[data-world-chronicle]');
+  const realWorldContextNode = document.querySelector('[data-real-world-context]');
+  const localWorldActivityNode = document.querySelector('[data-local-world-activity]');
   const inhabitantNodes = new Map(
     [...document.querySelectorAll('[data-world-inhabitant]')]
       .map((node) => [node.dataset.worldInhabitant, node])
@@ -24,6 +26,7 @@
   let timer = null;
   let config = null;
   let sourceState = 'fresh';
+  let localContext = null;
 
   function validDate(value) {
     const date = new Date(value);
@@ -99,6 +102,43 @@
     return entries[(day + hourSlot) % entries.length];
   }
 
+  function seasonFor(now, climateBand) {
+    if (climateBand === 'tropical') return 'tropical';
+    const month = now.getMonth() + 1;
+    const south = climateBand === 'south-temperate';
+    const northSeason = month === 12 || month <= 2 ? 'winter' : month <= 5 ? 'spring' : month <= 8 ? 'summer' : 'autumn';
+    if (!south) return northSeason;
+    return ({winter:'summer', spring:'autumn', summer:'winter', autumn:'spring'})[northSeason];
+  }
+
+  function localNowFor(now, timezone) {
+    if (!timezone) return now;
+    try {
+      const parts = new Intl.DateTimeFormat('en-CA', {timeZone: timezone, year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit', hourCycle:'h23'}).formatToParts(now);
+      const value = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+      return new Date(`${value.year}-${value.month}-${value.day}T${value.hour}:${value.minute}:${value.second}`);
+    } catch { return now; }
+  }
+
+  function renderLocalContext(now = new Date()) {
+    if (!localContext) return;
+    const timezone = localContext.context?.timezone || null;
+    const localNow = localNowFor(now, timezone);
+    const season = seasonFor(localNow, localContext.context?.climateBand);
+    const hour = localNow.getHours();
+    const daypart = hour < 5 ? 'night' : hour < 8 ? 'dawn' : hour < 18 ? 'day' : hour < 22 ? 'dusk' : 'night';
+    const weather = localContext.weather || {status:'not-connected'};
+    root.dataset.localSeason = season;
+    root.dataset.localDaypart = daypart;
+    root.dataset.localWeather = weather.status === 'live' ? weather.condition : 'not-connected';
+    if (weather.status === 'live') root.dataset.localWeatherIntensity = String(weather.intensity ?? 0);
+    else delete root.dataset.localWeatherIntensity;
+    const seasonLabels = {winter:'Hiver', spring:'Printemps', summer:'Été', autumn:'Automne', tropical:'Climat tropical'};
+    const dayLabels = {night:'nuit', dawn:'aube', day:'journée', dusk:'soirée'};
+    if (realWorldContextNode) realWorldContextNode.textContent = `${seasonLabels[season] || 'Saison locale'} · ${dayLabels[daypart] || 'rythme local'}${weather.status === 'live' ? ` · ${weather.condition}` : ''}`;
+    if (localWorldActivityNode) localWorldActivityNode.textContent = daypart === 'night' ? 'Le royaume ralentit avec votre nuit locale.' : daypart === 'dawn' ? 'Le royaume s’éveille avec votre aube locale.' : daypart === 'dusk' ? 'Les lanternes et activités du soir prennent le relais.' : 'Le royaume suit le rythme de votre journée locale.';
+  }
+
   function render(now = new Date()) {
     if (!config) return;
 
@@ -161,6 +201,7 @@
     root.dataset.worldSource = sourceState;
     root.dataset.worldVisualGrowth = config?.visualGrowth?.status || 'awaiting-assets';
     if (config?.visualGrowth?.status === 'ready') scheduleVisualGrowth();
+    renderLocalContext(now);
   }
 
   let visualGrowthWaitingForLoad = false;
@@ -212,6 +253,21 @@
     timer = window.setInterval(() => render(new Date()), interval);
   }
 
+  async function loadLocalContext() {
+    try {
+      const response = await fetch(new URL('./api/local-context', document.baseURI), {cache:'no-store', credentials:'same-origin'});
+      if (!response.ok) throw new Error('local-context-unavailable');
+      const data = await response.json();
+      if (data?.schemaVersion !== 1) throw new Error('local-context-invalid');
+      localContext = data;
+      renderLocalContext(new Date());
+    } catch {
+      root.dataset.localContext = 'unavailable';
+      if (realWorldContextNode) realWorldContextNode.textContent = 'Contexte local momentanément indisponible.';
+      if (localWorldActivityNode) localWorldActivityNode.textContent = 'Le monde vivant conserve son rythme partagé.';
+    }
+  }
+
   async function load() {
     try {
       const response = await fetch(new URL(WORLD_URL, document.baseURI), {
@@ -258,4 +314,5 @@
   });
 
   load();
+  loadLocalContext();
 })();
