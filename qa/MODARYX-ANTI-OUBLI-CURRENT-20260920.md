@@ -121,6 +121,7 @@ Aucune ligne ci-dessous ne constitue une déclaration de VF, de 100 %, de fusion
 ## 7. Finition Premium HD encore active
 
 - **TERMINÉ — passe artistique globale courante** — vidéos desktop/mobile exhaustives du SHA `2b07154` validées par Nova ; aucune modification visuelle ultérieure. La VF globale reste distincte et non déclarée.
+- **EN COURS — preuve visuelle fraîche requise après la passe du 25/09** — le hero approuvé a été restauré et l’ambiance saison/heure locale a reçu une nouvelle passe visuelle sur la branche `fix/modaryx-public-product-surface-20260925` (HEAD source `59129fe`). Les vidéos antérieures sont donc caduques pour cette passe ; aucun PASS artistique/VF tant qu’une vidéo desktop complète + mobile complète du Preview correspondant n’a pas été examinée. La météo fournisseur réelle reste BLOQUÉE et ne doit pas être activée pour cette preuve.
 - **RÈGLE PERMANENTE JUSQU’À LA VF — vidéo fraîche obligatoire** — après chaque passe artistique importante : correction → micro-preuves → nouveau Preview → vidéo desktop complète + vidéo mobile complète liées au SHA → analyse visuelle Nova. Toute vidéo antérieure devient caduque après une modification visuelle importante. Les checks verts ne constituent qu’une preuve technique et ne ferment jamais la validation artistique.
 - **TERMINÉ — correction hero PR #149** — le composite Loup/Dragon approuvé reste affiché ; `visualGrowth.status=awaiting-assets` empêche l’activation des couches non validées. Merge Work `14650dd7d0cb1a501ccc88e6f9caa112b4eda550`.
 
