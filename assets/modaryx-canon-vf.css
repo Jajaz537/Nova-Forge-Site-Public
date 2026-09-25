@@ -12,7 +12,7 @@ body[data-mx-world=games],body[data-mx-world=gta],body[data-mx-world=rdr2]{--mx-
 body[data-mx-world=gta]{--mx-scene-accent:rgba(223,137,79,.25)}
 body[data-mx-world=rdr2]{--mx-scene-accent:rgba(183,111,62,.26)}
 body[data-mx-world=trust]{--mx-scene-position:78% center;--mx-scene-accent:rgba(112,153,197,.22)}
-body[data-mx-world=studio]{--mx-scene-position:74% center;--mx-scene-accent:rgba(217,182,107,.26)}
+body[data-mx-world=studio]{--mx-scene:url("./modaryx-world-ecosystem.webp");--mx-scene-position:74% center;--mx-scene-accent:rgba(217,182,107,.26)}
 body[data-mx-world=catalog]{--mx-scene-position:66% center}
 body[data-mx-canon=true] :is(h1,h2,h3,.display,.section-title){font-family:var(--mx-serif);font-weight:500;letter-spacing:-.035em;color:var(--mx-paper);text-wrap:balance}
 body[data-mx-canon=true] h1{letter-spacing:-.05em}
