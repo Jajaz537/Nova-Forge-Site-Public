@@ -159,7 +159,7 @@ async function captureRoute(cdp, route, spec, index) {
   })()`);
   assert(state.scrollWidth <= spec.width+1,key+': horizontal overflow '+state.scrollWidth+'/'+spec.width);
   assert(state.heading && state.footer,key+': heading/footer absent');
-  if(route==='search.html' && spec.name==='desktop') assert(state.searchInput?.top<1000,key+': search control below first viewport');
+  if(route==='search.html' && spec.name==='desktop') assert(state.searchInput?.bottom<=spec.height+1,key+': search control below first viewport');
   const shot=async(suffix)=>{
     const image=await cdp.send('Page.captureScreenshot',{format:'jpeg',quality:65,fromSurface:true,captureBeyondViewport:false});
     fs.writeFileSync(path.join(OUT,key+suffix+'.jpg'),Buffer.from(image.data,'base64'));
