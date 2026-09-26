@@ -247,17 +247,17 @@ async function captureCase(cdp, spec) {
     await sleep(350);
     await frame(2);
     await evaluate(cdp, "scrollTo({top: 0, behavior: 'instant'})");
-    await evaluate(cdp, "document.querySelector('[data-menu-button]')?.click()");
+    await evaluate(cdp, "document.querySelector('.nav-toggle')?.click()");
     await sleep(250);
     await frame(3);
     const interaction = await evaluate(cdp, `(() => ({
       scrollWidth: document.documentElement.scrollWidth,
       viewportWidth: innerWidth,
-      menuExpanded: document.querySelector('[data-menu-button]')?.getAttribute('aria-expanded'),
-      menuVisible: getComputedStyle(document.querySelector('[data-menu-button]')).display !== 'none',
+      menuExpanded: document.querySelector('.nav-toggle')?.getAttribute('aria-expanded'),
+      menuVisible: getComputedStyle(document.querySelector('.nav-toggle')).display !== 'none',
       primaryHref: document.querySelector('.modaryx-realm-hero .button.primary')?.getAttribute('href')
     }))()`);
-    await evaluate(cdp, "document.querySelector('[data-menu-button]')?.click()");
+    await evaluate(cdp, "document.querySelector('.nav-toggle')?.click()");
     await evaluate(cdp, "scrollTo({top: document.documentElement.scrollHeight - innerHeight, behavior: 'instant'})");
     await sleep(350);
     await frame(4);
@@ -327,11 +327,11 @@ async function captureCatalog(cdp, spec) {
   await frame(1);
   const filterCount = await evaluate(cdp, "document.querySelectorAll('.catalog-card:not([hidden])').length");
   await evaluate(cdp, "document.querySelector('#catalog-reset').click()");
-  await evaluate(cdp, "document.querySelector('[data-menu-button]')?.click()");
+  await evaluate(cdp, "document.querySelector('.nav-toggle')?.click()");
   await sleep(200);
   await frame(2);
-  const menuExpanded = await evaluate(cdp, "document.querySelector('[data-menu-button]')?.getAttribute('aria-expanded')");
-  await evaluate(cdp, "document.querySelector('[data-menu-button]')?.click()");
+  const menuExpanded = await evaluate(cdp, "document.querySelector('.nav-toggle')?.getAttribute('aria-expanded')");
+  await evaluate(cdp, "document.querySelector('.nav-toggle')?.click()");
   await evaluate(cdp, "scrollTo({top: document.documentElement.scrollHeight - innerHeight, behavior: 'instant'})");
   await sleep(250);
   await frame(3);
@@ -346,6 +346,7 @@ async function captureCatalog(cdp, spec) {
   assert(initial.cardCount === 3 && filterCount === 1, prefix + ': catalogue filter mismatch');
   assert(initial.statementWidths.every(w => w > 180), prefix + ': contract statements too narrow');
   assert(footerSeen, prefix + ': footer not reached');
+  if (spec.mobile) assert(menuExpanded === 'true', prefix + ': mobile menu failed to open');
   assert(Boolean(TARGET_SHA), prefix + ': target SHA absent');
 }
 
