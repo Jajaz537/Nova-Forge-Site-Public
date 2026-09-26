@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "scope": "Four source Node VM scenarios; not native browser proof",
+  "checks": [
+    "Available saved options, query and favorites are restored unchanged",
+    "Removed options reset to real defaults and announce adjustment without overwriting saved view",
+    "Malformed option values cannot leave selects without a valid selection",
+    "Omitted legacy fields use defaults without a false unavailable-choice warning"
+  ]
+}

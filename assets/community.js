@@ -50,7 +50,10 @@
   };
 
   let catalogItems = [];
+  let catalogReady = false;
   let selectedIds = new Set();
+  const revisions = new WeakMap();
+  const revise = target => { const n = (revisions.get(target) || 0) + 1; revisions.set(target, n); return n; };
 
   const canonicalize = (value) => {
     if (Array.isArray(value)) return value.map(canonicalize);
@@ -62,20 +65,37 @@
   function downloadJson(value, filename) {
     const blob = new Blob([canonicalText(value)], {type: "application/json"});
     const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = filename;
-    anchor.click();
-    URL.revokeObjectURL(url);
+    let anchor;
+    try {
+      anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = filename;
+      anchor.rel = "noopener";
+      document.body.append(anchor);
+      anchor.click();
+    } finally {
+      anchor?.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
   }
 
-  function buildCollection() {
+  function buildCollection(focusInvalid = false) {
+    if (focusInvalid) Object.values(fields).forEach(field => field.removeAttribute("aria-invalid"));
+    if (!catalogReady) throw new Error("Catalogue indisponible ou en cours de chargement. Réessayez après son chargement.");
+    const check = (valid, key, message) => {
+      if (valid) return;
+      if (focusInvalid) {
+        fields[key].setAttribute("aria-invalid", "true");
+        fields[key].focus();
+      }
+      throw new Error(message);
+    };
     const id = String(fields.id?.value || "").trim().toLowerCase();
     const name = String(fields.name?.value || "").trim();
     const description = String(fields.description?.value || "").trim();
-    if (!ID_RE.test(id)) throw new Error("Identifiant : 2 à 128 caractères minuscules, chiffres, point, tiret ou underscore.");
-    if (!name || name.length > 160) throw new Error("Nom requis, 160 caractères maximum.");
-    if (description.length > 1200) throw new Error("Description : 1200 caractères maximum.");
+    check(ID_RE.test(id), "id", "Identifiant : 2 à 128 caractères minuscules, chiffres, point, tiret ou underscore.");
+    check(name && name.length <= 160, "name", "Nom requis, 160 caractères maximum.");
+    check(description.length <= 1200, "description", "Description : 1200 caractères maximum.");
     const known = new Set(catalogItems.map((item) => item.id));
     const itemIds = [...selectedIds].filter((idValue) => known.has(idValue)).sort();
     const collection = {schemaVersion: 1, id, name, itemIds, syncState: "local-only", visibility: "private-local", ownerProfileId: null};
@@ -95,7 +115,17 @@
   }
 
   function renderItems() {
-    itemList.replaceChildren();
+    const legend = document.createElement("legend");
+    legend.textContent = "Contenus du catalogue";
+    itemList.replaceChildren(legend);
+    if (!catalogItems.length) {
+      const message = document.createElement("p");
+      message.className = "muted";
+      message.textContent = catalogReady
+        ? "Aucun contenu disponible dans le catalogue. Vous pouvez préparer une collection vide."
+        : "Le catalogue n’est pas disponible. Rechargez la page pour réessayer ; votre copie locale est conservée.";
+      itemList.append(message);
+    }
     for (const item of catalogItems) {
       const label = document.createElement("label");
       label.className = "collection-choice";
@@ -105,6 +135,7 @@
       input.checked = selectedIds.has(item.id);
       input.addEventListener("change", () => {
         if (input.checked) selectedIds.add(item.id); else selectedIds.delete(item.id);
+        markEdited(status);
         renderPreview();
       });
       const text = document.createElement("span");
@@ -115,7 +146,10 @@
   }
 
   function applyCollection(value) {
-    if (!value || value.schemaVersion !== 1 || !ID_RE.test(String(value.id || "")) || typeof value.name !== "string") throw new Error("Collection V1 invalide.");
+    if (Object.keys(value || {}).some(k => !["schemaVersion","id","name","description","ownerProfileId","itemIds","visibility","syncState"].includes(k))) throw new Error("Champ de collection inconnu ; import refusé.");
+    if (!catalogReady) throw new Error("Catalogue indisponible ou en cours de chargement.");
+    if (!value || value.schemaVersion !== 1 || (typeof value.id !== "string" || !ID_RE.test(value.id)) || typeof value.name !== "string") throw new Error("Collection V1 invalide.");
+    if (!value.name.trim() || value.name.length > 160 || (value.description !== undefined && (typeof value.description !== "string" || value.description.length > 1200))) throw new Error("Nom ou description de collection invalide ; brouillon précédent conservé.");
     if (value.syncState !== "local-only") throw new Error("Seules les collections local-only peuvent être importées sans service de synchronisation.");
     if (value.visibility !== "private-local") throw new Error("La visibilité distante n’est pas disponible sans service réel.");
     if (value.ownerProfileId !== null) throw new Error("Une identité de compte ne peut pas être affirmée dans ce mode local.");
@@ -126,6 +160,7 @@
     fields.id.value = value.id;
     fields.name.value = value.name;
     fields.description.value = value.description || "";
+    Object.values(fields).forEach(field => field.removeAttribute("aria-invalid"));
     selectedIds = new Set(value.itemIds);
     renderItems();
     renderPreview();
@@ -152,6 +187,9 @@
     submissionFields.heading.required = !isComment;
     submissionFields.rating.required = isReview;
     submissionFields.parent.required = isComment;
+    for (const key of ["id", "kind", "target", "heading", "body", "rating", "parent"]) {
+      submissionFields[key].removeAttribute("aria-invalid");
+    }
   }
 
   function renderSubmissionTargets() {
@@ -159,7 +197,7 @@
     submissionFields.target.replaceChildren();
     const empty = document.createElement("option");
     empty.value = "";
-    empty.textContent = "Choisir un contenu";
+    empty.textContent = !catalogReady ? "Catalogue indisponible" : catalogItems.length ? "Choisir un contenu" : "Aucun contenu disponible";
     submissionFields.target.append(empty);
     for (const item of catalogItems) {
       const option = document.createElement("option");
@@ -170,7 +208,20 @@
     if (catalogItems.some((item) => item.id === previous)) submissionFields.target.value = previous;
   }
 
-  function buildSubmission() {
+  function buildSubmission(focusInvalid = false) {
+    const check = (valid, key, message) => {
+      if (valid) return;
+      if (focusInvalid) {
+        submissionFields[key].setAttribute("aria-invalid", "true");
+        submissionFields[key].focus();
+      }
+      throw new Error(message);
+    };
+    if (focusInvalid) {
+      for (const key of ["id", "kind", "target", "heading", "body", "rating", "parent"]) {
+        submissionFields[key].removeAttribute("aria-invalid");
+      }
+    }
     const id = String(submissionFields.id?.value || "").trim().toLowerCase();
     const kind = String(submissionFields.kind?.value || "");
     const targetId = String(submissionFields.target?.value || "");
@@ -180,10 +231,10 @@
     const ratingRaw = String(submissionFields.rating?.value || "").trim();
     const known = new Set(catalogItems.map((item) => item.id));
 
-    if (!ID_RE.test(id)) throw new Error("Identifiant de contribution invalide.");
-    if (!new Set(["discussion", "review", "comment"]).has(kind)) throw new Error("Type de contribution invalide.");
-    if (!known.has(targetId)) throw new Error("La contribution doit cibler un ID du catalogue public.");
-    if (!body || body.length > 8000) throw new Error("Contenu requis, 8000 caractères maximum.");
+    check(ID_RE.test(id), "id", "Identifiant : 2 à 128 caractères, lettres minuscules, chiffres, point, tiret ou underscore.");
+    check(new Set(["discussion", "review", "comment"]).has(kind), "kind", "Choisissez un type de contribution disponible.");
+    check(known.has(targetId), "target", "Choisissez un contenu du catalogue public.");
+    check(body && body.length <= 8000, "body", "Contenu requis, 8000 caractères maximum.");
 
     const submission = {
       schemaVersion: 1,
@@ -198,16 +249,16 @@
     };
 
     if (kind === "discussion" || kind === "review") {
-      if (!heading || heading.length > 180) throw new Error("Titre requis, 180 caractères maximum.");
+      check(heading && heading.length <= 180, "heading", "Titre requis, 180 caractères maximum.");
       submission.title = heading;
     }
     if (kind === "review") {
       const rating = Number(ratingRaw);
-      if (!Number.isInteger(rating) || rating < 1 || rating > 5) throw new Error("La note doit être un entier de 1 à 5.");
+      check(Number.isInteger(rating) && rating >= 1 && rating <= 5, "rating", "La note doit être un entier de 1 à 5.");
       submission.rating = rating;
     }
     if (kind === "comment") {
-      if (!ID_RE.test(parent)) throw new Error("Un commentaire exige un ID parent valide.");
+      check(ID_RE.test(parent), "parent", "Identifiant de la contribution parente : 2 à 128 caractères, lettres minuscules, chiffres, point, tiret ou underscore.");
       submission.parentSubmissionId = parent;
     }
     return submission;
@@ -215,7 +266,7 @@
 
   function renderSubmissionPreview(showError = false) {
     try {
-      const submission = buildSubmission();
+      const submission = buildSubmission(showError);
       submissionPreview.textContent = canonicalText(submission);
       return submission;
     } catch (error) {
@@ -226,7 +277,8 @@
   }
 
   function applySubmission(value) {
-    if (!value || value.schemaVersion !== 1 || !ID_RE.test(String(value.id || ""))) throw new Error("Contribution locale V1 invalide.");
+    if (Object.keys(value || {}).some(k => !["schemaVersion","id","kind","targetId","body","title","rating","parentSubmissionId","authorProfileId","syncState","publicationState","moderationState"].includes(k))) throw new Error("Champ de contribution inconnu ; import refusé.");
+    if (!value || value.schemaVersion !== 1 || (typeof value.id !== "string" || !ID_RE.test(value.id))) throw new Error("Contribution locale V1 invalide.");
     if (!new Set(["discussion", "review", "comment"]).has(value.kind)) throw new Error("Type de contribution inconnu.");
     if (value.authorProfileId !== null || value.syncState !== "local-only" || value.publicationState !== "local-draft" || value.moderationState !== "not-submitted") {
       throw new Error("Un brouillon local ne peut affirmer ni auteur distant, ni synchronisation, ni publication, ni modération.");
@@ -235,7 +287,7 @@
     if (!known.has(value.targetId)) throw new Error("ID catalogue ciblé inconnu.");
     if (typeof value.body !== "string" || !value.body.trim() || value.body.length > 8000) throw new Error("Contenu de contribution invalide.");
     if (value.kind === "comment") {
-      if (!ID_RE.test(String(value.parentSubmissionId || "")) || "title" in value || "rating" in value) throw new Error("Contrat commentaire invalide.");
+      if ((typeof value.parentSubmissionId !== "string" || !ID_RE.test(value.parentSubmissionId)) || "title" in value || "rating" in value) throw new Error("Contrat commentaire invalide.");
     } else {
       if (typeof value.title !== "string" || !value.title.trim() || value.title.length > 180 || "parentSubmissionId" in value) throw new Error("Contrat titre/parent invalide.");
       if (value.kind === "review" && (!Number.isInteger(value.rating) || value.rating < 1 || value.rating > 5)) throw new Error("Note de review invalide.");
@@ -269,27 +321,49 @@
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       if (data?.schemaVersion !== 1 || data?.dataClass !== "demonstration" || !Array.isArray(data.items)) throw new Error("catalog-contract-invalid");
-      catalogItems = data.items.filter((item) => item?.public === true && ID_RE.test(String(item.id || "")));
+      const publicItems = data.items.filter((item) => item?.public === true);
+      const ids = new Set();
+      for (const item of publicItems) {
+        if (typeof item.id !== "string" || !ID_RE.test(item.id) || ids.has(item.id) ||
+            typeof item.name !== "string" || !item.name.trim() ||
+            typeof item.game?.name !== "string" || !item.game.name.trim()) {
+          throw new Error("catalog-item-invalid");
+        }
+        ids.add(item.id);
+      }
+      catalogItems = publicItems;
+      catalogReady = true;
       renderItems();
       renderSubmissionTargets();
-      loadSavedCollection();
-      loadSavedSubmission();
+      if (!revisions.has(status)) loadSavedCollection();
+      if (!revisions.has(submissionStatus)) loadSavedSubmission();
       renderPreview();
       renderSubmissionPreview();
     } catch {
+      catalogReady = false;
       catalogItems = [];
       renderItems();
       renderSubmissionTargets();
-      status.textContent = "Catalogue public indisponible : collection locale bloquée en mode fail-closed.";
-      submissionStatus.textContent = "Catalogue public indisponible : contribution locale bloquée en mode fail-closed.";
+      status.textContent = "Catalogue indisponible. Rechargez la page pour réessayer. La copie locale de votre collection est conservée.";
+      submissionStatus.textContent = "Catalogue indisponible : choisissez un contenu après son chargement pour valider une contribution. Votre copie locale est conservée.";
     }
   }
 
-  form.addEventListener("input", renderPreview);
+  function markEdited(target) {
+    revise(target);
+    const message = target === status ? "Modifications non sauvegardées · sauvegardez pour les conserver · NON SYNCHRONISÉ." : "Modifications non sauvegardées · validez ou sauvegardez à nouveau · NON PUBLIÉ.";
+    if (target.textContent !== message) target.textContent = message;
+  }
+
+  form.addEventListener("input", (event) => {
+    if (event.target.type !== "file") markEdited(status);
+    event.target.removeAttribute("aria-invalid");
+    renderPreview();
+  });
 
   saveButton.addEventListener("click", () => {
     try {
-      const collection = buildCollection();
+      const collection = buildCollection(true);
       localStorage.setItem(COLLECTION_KEY, canonicalText(collection));
       status.textContent = "Collection sauvegardée uniquement dans ce navigateur · NON SYNCHRONISÉE.";
       preview.textContent = canonicalText(collection);
@@ -302,6 +376,7 @@
     try {
       const parsed = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
       const known = new Set(catalogItems.map((item) => item.id));
+      revise(status);
       selectedIds = new Set(Array.isArray(parsed) ? parsed.filter((id) => known.has(id)) : []);
       renderItems();
       renderPreview();
@@ -313,14 +388,15 @@
 
   exportButton.addEventListener("click", () => {
     try {
-      const collection = buildCollection();
+      const collection = buildCollection(true);
       downloadJson(collection, `${collection.id}.nova-collection.json`);
-      status.textContent = "Export déterministe créé localement. Aucun contenu n’a été envoyé.";
+      status.textContent = "Export préparé. Vérifiez les téléchargements de votre navigateur. Aucun contenu n’a été envoyé.";
     } catch (error) {
       status.textContent = `Export bloqué : ${error.message}`;
     }
   });
 
+  importFile.addEventListener("change", () => revise(status));
   importButton.addEventListener("click", async () => {
     const file = importFile.files?.[0];
     if (!file) {
@@ -328,20 +404,28 @@
       importFile.focus();
       return;
     }
+    const revision = revise(status);
     try {
       const value = JSON.parse(await file.text());
+      if (revision !== revisions.get(status)) return;
       applyCollection(value);
       status.textContent = "Collection importée en mémoire seulement. Utilisez Sauvegarder pour la conserver localement.";
     } catch (error) {
+      if (revision !== revisions.get(status)) return;
       status.textContent = `Import bloqué : ${error.message}`;
     }
   });
 
   clearButton.addEventListener("click", () => {
-    localStorage.removeItem(COLLECTION_KEY);
+    try { localStorage.removeItem(COLLECTION_KEY); } catch {
+      status.textContent = "Suppression locale impossible. La collection affichée est conservée et n’est pas déclarée effacée.";
+      return;
+    }
+    revise(status);
     fields.id.value = "ma-collection";
     fields.name.value = "Ma collection MODARYX";
     fields.description.value = "";
+    Object.values(fields).forEach(field => field.removeAttribute("aria-invalid"));
     selectedIds = new Set();
     renderItems();
     renderPreview();
@@ -349,10 +433,15 @@
   });
 
   submissionFields.kind.addEventListener("change", () => {
+    markEdited(submissionStatus);
     updateSubmissionFields();
     renderSubmissionPreview();
   });
-  submissionForm.addEventListener("input", () => renderSubmissionPreview());
+  submissionForm.addEventListener("input", (event) => {
+    if (event.target.type !== "file") markEdited(submissionStatus);
+    event.target.removeAttribute("aria-invalid");
+    renderSubmissionPreview();
+  });
 
   submissionValidate.addEventListener("click", () => {
     const submission = renderSubmissionPreview(true);
@@ -361,7 +450,7 @@
 
   submissionSave.addEventListener("click", () => {
     try {
-      const submission = buildSubmission();
+      const submission = buildSubmission(true);
       localStorage.setItem(SUBMISSION_KEY, canonicalText(submission));
       submissionPreview.textContent = canonicalText(submission);
       submissionStatus.textContent = "Brouillon sauvegardé uniquement dans ce navigateur · NON PUBLIÉ.";
@@ -372,14 +461,15 @@
 
   submissionExport.addEventListener("click", () => {
     try {
-      const submission = buildSubmission();
+      const submission = buildSubmission(true);
       downloadJson(submission, `${submission.id}.nova-community-draft.json`);
-      submissionStatus.textContent = "Export déterministe créé localement · NON PUBLIÉ · aucun contenu envoyé.";
+      submissionStatus.textContent = "Export préparé. Vérifiez les téléchargements de votre navigateur · NON PUBLIÉ · aucun contenu envoyé.";
     } catch (error) {
       submissionStatus.textContent = `Export bloqué : ${error.message}`;
     }
   });
 
+  submissionImportFile.addEventListener("change", () => revise(submissionStatus));
   submissionImport.addEventListener("click", async () => {
     const file = submissionImportFile.files?.[0];
     if (!file) {
@@ -387,17 +477,24 @@
       submissionImportFile.focus();
       return;
     }
+    const revision = revise(submissionStatus);
     try {
       const value = JSON.parse(await file.text());
+      if (revision !== revisions.get(submissionStatus)) return;
       applySubmission(value);
       submissionStatus.textContent = "Brouillon importé en mémoire seulement · NON PUBLIÉ.";
     } catch (error) {
+      if (revision !== revisions.get(submissionStatus)) return;
       submissionStatus.textContent = `Import bloqué : ${error.message}`;
     }
   });
 
   submissionClear.addEventListener("click", () => {
-    localStorage.removeItem(SUBMISSION_KEY);
+    try { localStorage.removeItem(SUBMISSION_KEY); } catch {
+      submissionStatus.textContent = "Suppression locale impossible. Le brouillon affiché est conservé et n’est pas déclaré effacé.";
+      return;
+    }
+    revise(submissionStatus);
     submissionFields.id.value = "ma-contribution";
     submissionFields.kind.value = "discussion";
     submissionFields.target.value = "";
@@ -410,6 +507,484 @@
     submissionStatus.textContent = "Brouillon local supprimé de ce navigateur.";
   });
 
+  const remotePanel = document.querySelector("#community-remote");
+  const remoteStatusNode = document.querySelector("#community-remote-status");
+  const remoteCopy = document.querySelector("#community-remote-copy");
+  const remoteResult = document.querySelector("#community-remote-result");
+  const remoteLogin = document.querySelector("#community-login");
+  const remoteSubmit = document.querySelector("#community-submit-remote");
+  const remoteTurnstile = document.querySelector("#community-turnstile");
+  const publicSection = document.querySelector("#publications");
+  const publicStatus = document.querySelector("#community-public-status");
+  const publicList = document.querySelector("#community-public-list");
+  const publicRefresh = document.querySelector("#community-public-refresh");
+  const followupPanel = document.querySelector("#community-followup");
+  const followupBadge = document.querySelector("#community-followup-badge");
+  const followupId = document.querySelector("#community-followup-id");
+  const followupCheck = document.querySelector("#community-followup-check");
+  const followupStatus = document.querySelector("#community-followup-status");
+  const followupSummary = document.querySelector("#community-followup-summary");
+  const followupModeration = document.querySelector("#community-followup-moderation");
+  const followupPublication = document.querySelector("#community-followup-publication");
+  const followupReason = document.querySelector("#community-followup-reason");
+  const appealPanel = document.querySelector("#community-appeal-panel");
+  const appealGrounds = document.querySelector("#community-appeal-grounds");
+  const appealSubmit = document.querySelector("#community-appeal-submit");
+  const appealStatus = document.querySelector("#community-appeal-status");
+
+  let remoteBackend = null;
+  let remoteTurnstileToken = "";
+  let remoteTurnstileWidget = null;
+  let remoteTurnstileScript = null;
+  let trackedSubmission = null;
+
+  function setRemoteState(state, label, copy) {
+    if (remotePanel) remotePanel.dataset.remoteState = state;
+    if (remoteStatusNode) remoteStatusNode.textContent = label;
+    if (remoteCopy) remoteCopy.textContent = copy;
+  }
+
+  function setRemoteLoginEnabled(enabled) {
+    if (!remoteLogin) return;
+    remoteLogin.setAttribute("aria-disabled", enabled ? "false" : "true");
+    if (enabled) {
+      const returnTo = `${window.location.pathname || "/community"}#contributions`;
+      remoteLogin.href = `/api/v1/auth/login?returnTo=${encodeURIComponent(returnTo)}`;
+    } else {
+      remoteLogin.href = "./community.html#contributions";
+    }
+  }
+
+  async function remoteJson(url, options = {}) {
+    const response = await fetch(url, {
+      cache: "no-store",
+      credentials: "same-origin",
+      headers: {accept: "application/json", ...(options.headers || {})},
+      ...options
+    });
+    const type = response.headers.get("content-type") || "";
+    if (!type.includes("application/json")) throw new Error("response-not-json");
+    return {response, data: await response.json()};
+  }
+
+  function setPublicCommunityState(state, message) {
+    if (publicSection) publicSection.dataset.publicState = state;
+    if (publicStatus) publicStatus.textContent = message;
+    if (publicList) publicList.setAttribute("aria-busy", state === "loading" ? "true" : "false");
+  }
+
+  function publicKindLabel(kind) {
+    return kind === "review" ? "Avis" : kind === "comment" ? "Commentaire" : "Discussion";
+  }
+
+  function renderPublicCommunity(items) {
+    if (!publicList) return;
+    publicList.replaceChildren();
+
+    if (!items.length) {
+      const empty = document.createElement("article");
+      empty.className = "card community-public-empty";
+      const title = document.createElement("h3");
+      title.textContent = "Aucune contribution publiée";
+      const copy = document.createElement("p");
+      copy.textContent = "La file publique est vide. Les brouillons locaux et les contributions encore en modération ne sont jamais affichés ici.";
+      empty.append(title, copy);
+      publicList.append(empty);
+      setPublicCommunityState("empty", "Aucune contribution publique n’est disponible actuellement.");
+      return;
+    }
+
+    for (const item of items) {
+      if (
+        !item ||
+        item.moderationState !== "accepted" ||
+        item.publicationState !== "published" ||
+        typeof item.id !== "string" ||
+        typeof item.body !== "string"
+      ) {
+        throw new Error("public-community-item-invalid");
+      }
+
+      const card = document.createElement("article");
+      card.className = "card community-public-card";
+
+      const meta = document.createElement("div");
+      meta.className = "community-public-meta";
+      const kind = document.createElement("span");
+      kind.className = "badge";
+      kind.textContent = publicKindLabel(item.kind);
+      const target = document.createElement("span");
+      target.className = "community-public-target";
+      target.textContent = item.targetId ? "Cible · " + item.targetId : "Cible non précisée";
+      meta.append(kind, target);
+
+      const heading = document.createElement("h3");
+      heading.textContent = item.title || (item.kind === "review" ? "Avis publié" : item.kind === "comment" ? "Commentaire publié" : "Discussion publiée");
+
+      const body = document.createElement("p");
+      body.className = "community-public-body";
+      body.textContent = item.body;
+
+      const footer = document.createElement("div");
+      footer.className = "community-public-footer";
+
+      const author = document.createElement("span");
+      if (item.author?.handle && item.author?.displayName) {
+        const link = document.createElement("a");
+        link.className = "text-link";
+        link.href = "./profiles.html?profile=" + encodeURIComponent(item.author.handle) + "#public-profile";
+        link.textContent = item.author.displayName + " · @" + item.author.handle;
+        author.append("Par ", link);
+      } else {
+        author.textContent = "Auteur privé";
+      }
+      footer.append(author);
+
+      if (Number.isInteger(item.rating) && item.rating >= 1 && item.rating <= 5) {
+        const rating = document.createElement("span");
+        rating.className = "community-public-rating";
+        rating.setAttribute("aria-label", "Note " + item.rating + " sur 5");
+        rating.textContent = item.rating + "/5";
+        footer.append(rating);
+      }
+
+      card.append(meta, heading, body, footer);
+      publicList.append(card);
+    }
+
+    setPublicCommunityState(
+      "ready",
+      items.length + " contribution" + (items.length > 1 ? "s" : "") + " publiée" + (items.length > 1 ? "s" : "") + " après modération."
+    );
+  }
+
+  async function loadPublicCommunity() {
+    if (!publicSection || !publicStatus || !publicList) return;
+    setPublicCommunityState("loading", "Chargement des contributions réellement publiées…");
+
+    try {
+      const response = await fetch("/api/v1/community/public?limit=12", {
+        cache: "no-store",
+        credentials: "same-origin",
+        headers: {accept: "application/json"}
+      });
+      const type = response.headers.get("content-type") || "";
+      if (!type.includes("application/json")) throw new Error("public-feed-not-json");
+      const data = await response.json();
+      if (!response.ok || data?.schemaVersion !== 1 || !Array.isArray(data.items)) {
+        throw new Error(data?.error || "public-feed-invalid");
+      }
+      renderPublicCommunity(data.items);
+    } catch {
+      publicList.replaceChildren();
+      const unavailable = document.createElement("article");
+      unavailable.className = "card community-public-empty";
+      const title = document.createElement("h3");
+      title.textContent = "Publications indisponibles";
+      const copy = document.createElement("p");
+      copy.textContent = "La surface publique ne peut pas être vérifiée sur cette origine. Aucun brouillon local n’est affiché à sa place.";
+      unavailable.append(title, copy);
+      publicList.append(unavailable);
+      setPublicCommunityState("error", "Impossible de confirmer les contributions publiées pour le moment.");
+    }
+  }
+
+  function setFollowupState(state, label, message) {
+    if (followupPanel) followupPanel.dataset.followupState = state;
+    if (followupBadge) followupBadge.textContent = label;
+    if (followupStatus) followupStatus.textContent = message;
+  }
+
+  function normalizeSubmissionReference(value) {
+    const normalized = String(value || "").trim().toLowerCase();
+    return /^submission-[a-z0-9-]{16,96}$/.test(normalized) ? normalized : "";
+  }
+
+  function renderTrackedSubmission(data) {
+    trackedSubmission = data;
+    if (followupSummary) followupSummary.hidden = false;
+    if (followupModeration) followupModeration.textContent = data.moderationState || "inconnu";
+    if (followupPublication) followupPublication.textContent = data.publicationState || "inconnu";
+
+    const decisionReason = data.decision?.decision?.statementOfReasons;
+    if (followupReason) {
+      followupReason.textContent = decisionReason
+        ? "Motif de décision : " + decisionReason
+        : "Aucune décision détaillée disponible. La contribution peut encore être en attente.";
+    }
+
+    const canAppeal = data.appealAvailable === true;
+    if (appealPanel) appealPanel.hidden = !canAppeal;
+
+    if (data.outcome?.outcome) {
+      setFollowupState(
+        "resolved",
+        "Recours traité",
+        "Résultat du recours : " + data.outcome.outcome.result + ". " + data.outcome.outcome.reason
+      );
+      if (appealStatus) appealStatus.textContent = "Le recours a reçu une décision.";
+      return;
+    }
+
+    if (data.appeal?.appeal) {
+      setFollowupState("appealed", "Recours envoyé", "Votre recours est enregistré et attend une revue.");
+      if (appealStatus) appealStatus.textContent = "Recours déjà transmis pour cette décision.";
+      return;
+    }
+
+    if (canAppeal) {
+      setFollowupState("appealable", "Recours disponible", "Une décision restrictive a été enregistrée. Vous pouvez la contester ci-dessous.");
+      if (appealStatus) appealStatus.textContent = "Aucun recours envoyé pour cette décision.";
+      return;
+    }
+
+    setFollowupState(
+      "tracked",
+      "État confirmé",
+      data.moderationState === "pending"
+        ? "Contribution reçue. Elle reste en attente de modération."
+        : "État distant confirmé pour votre contribution."
+    );
+    if (appealStatus) appealStatus.textContent = "";
+  }
+
+  async function loadTrackedSubmission(rawId = followupId?.value) {
+    const id = normalizeSubmissionReference(rawId);
+    if (!id) {
+      trackedSubmission = null;
+      if (followupSummary) followupSummary.hidden = true;
+      if (appealPanel) appealPanel.hidden = true;
+      setFollowupState("invalid", "Référence invalide", "Utilisez la référence submission-… reçue après un envoi distant.");
+      return;
+    }
+
+    if (followupId) followupId.value = id;
+    setFollowupState("loading", "Vérification…", "Lecture de l’état distant de votre contribution…");
+    if (followupCheck) followupCheck.disabled = true;
+
+    try {
+      const {response, data} = await remoteJson("/api/v1/community/submissions/" + encodeURIComponent(id));
+      if (response.status === 401) {
+        throw new Error("authentication-required");
+      }
+      if (response.status === 404) {
+        trackedSubmission = null;
+        if (followupSummary) followupSummary.hidden = true;
+        if (appealPanel) appealPanel.hidden = true;
+        setFollowupState("empty", "Introuvable", "Cette référence n’est pas disponible pour votre session.");
+        return;
+      }
+      if (!response.ok || data?.schemaVersion !== 1 || data?.id !== id) {
+        throw new Error(data?.error || "followup-invalid");
+      }
+      renderTrackedSubmission(data);
+    } catch (error) {
+      trackedSubmission = null;
+      if (followupSummary) followupSummary.hidden = true;
+      if (appealPanel) appealPanel.hidden = true;
+      setFollowupState(
+        "error",
+        "Suivi indisponible",
+        error?.message === "authentication-required"
+          ? "Connectez-vous pour consulter une contribution distante."
+          : "Impossible de confirmer l’état de cette contribution pour le moment."
+      );
+    } finally {
+      if (followupCheck) followupCheck.disabled = false;
+    }
+  }
+
+  async function submitTrackedAppeal() {
+    if (!trackedSubmission?.appealAvailable) return;
+    const grounds = String(appealGrounds?.value || "").trim();
+    if (!grounds || grounds.length > 8000) {
+      if (appealStatus) appealStatus.textContent = "Expliquez votre recours en 1 à 8000 caractères.";
+      appealGrounds?.focus();
+      return;
+    }
+
+    if (appealSubmit) appealSubmit.disabled = true;
+    if (appealStatus) appealStatus.textContent = "Envoi sécurisé du recours…";
+    try {
+      const {response, data} = await remoteJson("/api/v1/community/appeals", {
+        method:"POST",
+        headers:{"content-type":"application/json"},
+        body:JSON.stringify({submissionId:trackedSubmission.id, grounds})
+      });
+      if (!response.ok || data?.state !== "submitted") throw new Error(data?.error || "appeal-submit-failed");
+      if (appealGrounds) appealGrounds.value = "";
+      if (appealStatus) appealStatus.textContent = "Recours enregistré.";
+      await loadTrackedSubmission(trackedSubmission.id);
+    } catch {
+      if (appealStatus) appealStatus.textContent = "Le recours n’a pas été enregistré. Réessayez sans perdre votre texte.";
+    } finally {
+      if (appealSubmit) appealSubmit.disabled = false;
+    }
+  }
+
+  function loadRemoteTurnstile() {
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (remoteTurnstileScript) return remoteTurnstileScript;
+    remoteTurnstileScript = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      script.dataset.modaryxCommunityTurnstile = "true";
+      script.addEventListener("load", () => window.turnstile ? resolve(window.turnstile) : reject(new Error("turnstile-api-missing")), {once: true});
+      script.addEventListener("error", () => reject(new Error("turnstile-script-failed")), {once: true});
+      document.head.append(script);
+    });
+    return remoteTurnstileScript;
+  }
+
+  async function prepareRemoteTurnstile() {
+    const siteKey = remoteBackend?.turnstile?.publicSiteKey;
+    const ready = remoteBackend?.turnstile?.secretConfigured &&
+      remoteBackend?.turnstile?.siteKeyConfigured &&
+      typeof siteKey === "string" &&
+      siteKey.length > 0;
+    if (!ready || !remoteTurnstile || !remoteSubmit) {
+      if (remoteResult) remoteResult.textContent = "Envoi distant verrouillé : vérification anti-abus non provisionnée.";
+      return false;
+    }
+
+    try {
+      const api = await loadRemoteTurnstile();
+      remoteTurnstile.hidden = false;
+      remoteTurnstile.replaceChildren();
+      remoteTurnstileWidget = api.render(remoteTurnstile, {
+        sitekey: siteKey,
+        action: "community-write",
+        theme: "dark",
+        callback(token) {
+          remoteTurnstileToken = token;
+          remoteSubmit.disabled = false;
+          if (remoteResult) remoteResult.textContent = "Vérification prête. Le brouillon peut être envoyé pour modération.";
+        },
+        "expired-callback"() {
+          remoteTurnstileToken = "";
+          remoteSubmit.disabled = true;
+          if (remoteResult) remoteResult.textContent = "Vérification expirée. Revalidez avant l’envoi.";
+        },
+        "error-callback"() {
+          remoteTurnstileToken = "";
+          remoteSubmit.disabled = true;
+          if (remoteResult) remoteResult.textContent = "Vérification anti-abus temporairement indisponible.";
+        }
+      });
+      return true;
+    } catch {
+      remoteSubmit.disabled = true;
+      if (remoteResult) remoteResult.textContent = "Envoi distant indisponible : le contrôle anti-abus n’a pas pu être chargé.";
+      return false;
+    }
+  }
+
+  async function initRemoteCommunity() {
+    if (!remotePanel || !remoteStatusNode || !remoteSubmit || !remoteLogin) return;
+    remoteSubmit.disabled = true;
+    setRemoteLoginEnabled(false);
+
+    try {
+      const {response, data} = await remoteJson("/api/v1/status");
+      if (!response.ok || data?.service !== "modaryx-backend") throw new Error("backend-unavailable");
+      remoteBackend = data;
+    } catch {
+      setRemoteState("unavailable", "Service non provisionné", "Le backend distant n’est pas disponible sur cette origine. Vos brouillons restent strictement locaux.");
+      if (remoteResult) remoteResult.textContent = "Aucun contenu n’est envoyé en ligne.";
+      return;
+    }
+
+    if (!remoteBackend?.bindings?.d1 || !remoteBackend?.auth0?.loginConfigured) {
+      setRemoteState("unavailable", "Provisionnement requis", "La voie distante est prête en code mais le backend de compte n’est pas entièrement provisionné.");
+      return;
+    }
+
+    setRemoteLoginEnabled(true);
+    setRemoteState("ready", "Déconnecté", "Connectez-vous pour pouvoir envoyer un brouillon validé vers la file de modération.");
+
+    let session;
+    try {
+      const result = await remoteJson("/api/v1/auth/session");
+      if (!result.response.ok) throw new Error(result.data?.error || "session-load-failed");
+      session = result.data;
+    } catch {
+      setRemoteState("error", "Session indisponible", "Le backend répond mais la session n’a pas pu être vérifiée. Aucun envoi n’est autorisé.");
+      return;
+    }
+
+    if (!session?.authenticated) return;
+
+    setRemoteState("authenticated", "Session confirmée", "Votre session est active. La contribution restera en attente de modération après l’envoi.");
+    remoteLogin.hidden = true;
+    await prepareRemoteTurnstile();
+  }
+
+  remoteLogin?.addEventListener("click", (event) => {
+    if (remoteLogin.getAttribute("aria-disabled") === "true") event.preventDefault();
+  });
+
+  remoteSubmit?.addEventListener("click", async () => {
+    if (remoteSubmit.disabled || !remoteTurnstileToken) return;
+    let draft;
+    try {
+      draft = buildSubmission(true);
+    } catch (error) {
+      if (remoteResult) remoteResult.textContent = `Envoi bloqué : ${error.message}`;
+      return;
+    }
+
+    const payload = {
+      kind: draft.kind,
+      targetId: draft.targetId,
+      body: draft.body,
+      turnstileToken: remoteTurnstileToken
+    };
+    if (draft.title) payload.title = draft.title;
+    if (draft.rating !== undefined) payload.rating = draft.rating;
+    if (draft.parentSubmissionId) payload.parentSubmissionId = draft.parentSubmissionId;
+
+    remoteSubmit.disabled = true;
+    if (remoteResult) remoteResult.textContent = "Envoi sécurisé vers la file de modération…";
+
+    try {
+      const {response, data} = await remoteJson("/api/v1/community/submissions", {
+        method: "POST",
+        headers: {"content-type": "application/json"},
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error(data?.error || "remote-submit-failed");
+      if (data?.moderationState !== "pending" || data?.publicationState !== "received" || data?.distributable !== false) {
+        throw new Error("remote-state-invalid");
+      }
+      if (remoteResult) remoteResult.textContent = `Contribution reçue pour modération · NON PUBLIÉE · référence ${data.id || "reçue"}.`;
+      if (data.id && followupId) {
+        followupId.value = data.id;
+        await loadTrackedSubmission(data.id);
+      }
+      remoteTurnstileToken = "";
+      if (window.turnstile && remoteTurnstileWidget !== null) window.turnstile.reset(remoteTurnstileWidget);
+    } catch {
+      if (remoteResult) remoteResult.textContent = "Envoi non confirmé. Le brouillon local est conservé et rien n’est déclaré publié.";
+      if (window.turnstile && remoteTurnstileWidget !== null) window.turnstile.reset(remoteTurnstileWidget);
+      remoteTurnstileToken = "";
+    }
+  });
+
+  followupCheck?.addEventListener("click", () => loadTrackedSubmission());
+  followupId?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      loadTrackedSubmission();
+    }
+  });
+  appealSubmit?.addEventListener("click", submitTrackedAppeal);
+
+  publicRefresh?.addEventListener("click", loadPublicCommunity);
+
   updateSubmissionFields();
+  initRemoteCommunity();
+  loadPublicCommunity();
   loadCatalog();
 })();

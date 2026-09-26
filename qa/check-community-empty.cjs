@@ -1,0 +1,14 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..'),source=fs.readFileSync(path.join(root,'assets/community.js'),'utf8');
+const unit=name=>source.match(new RegExp('  function '+name+'\\([^]*?\\n  }'))[0];
+const node=()=>({children:[],value:'',append(...children){this.children.push(...children)},replaceChildren(...children){this.children=children},addEventListener(){}});
+const c={document:{createElement:node},itemList:node(),submissionFields:{target:node()},catalogItems:[],catalogReady:true,selectedIds:new Set()};
+vm.createContext(c);vm.runInContext(unit('renderItems')+'\n'+unit('renderSubmissionTargets'),c);
+const run=()=>{c.renderItems();c.renderSubmissionTargets()}; const checks=[];
+run();assert.match(c.itemList.children[1].textContent,/collection vide/);assert.equal(c.submissionFields.target.children[0].textContent,'Aucun contenu disponible');
+checks.push('Valid empty catalogue explains empty collection and offers no nonexistent contribution target');
+c.catalogReady=false;run();assert.match(c.itemList.children[1].textContent,/Rechargez/);assert.equal(c.submissionFields.target.children[0].textContent,'Catalogue indisponible');
+checks.push('Failed loading has a distinct message and target placeholder');
+c.catalogReady=true;c.catalogItems=[{id:'demo',name:'Demo',game:{name:'Jeu'}}];run();assert.equal(c.itemList.children.length,2);assert.equal(c.itemList.children[1].children[0].type,'checkbox');assert.equal(c.submissionFields.target.children.length,2);assert.equal(c.submissionFields.target.children[0].textContent,'Choisir un contenu');
+checks.push('Populated catalogue replaces the empty message with actual choices');
+const report={result:'PASS',scope:'Three Node VM rendering scenarios, not native offline proof',checks};fs.writeFileSync(path.join(__dirname,'community-empty-checks.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));

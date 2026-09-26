@@ -1,0 +1,84 @@
+{
+  "result": "PASS",
+  "scope": "Static source gate only; Cloudflare account, native browser, TLS origin and external services excluded",
+  "publicPages": 17,
+  "pages": [
+    {
+      "page": "404.html",
+      "errors": []
+    },
+    {
+      "page": "catalog.html",
+      "errors": []
+    },
+    {
+      "page": "community.html",
+      "errors": []
+    },
+    {
+      "page": "creator-studio.html",
+      "errors": []
+    },
+    {
+      "page": "documentation.html",
+      "errors": []
+    },
+    {
+      "page": "downloads.html",
+      "errors": []
+    },
+    {
+      "page": "ecosystem.html",
+      "errors": []
+    },
+    {
+      "page": "index.html",
+      "errors": []
+    },
+    {
+      "page": "profiles.html",
+      "errors": []
+    },
+    {
+      "page": "project-balanced-latency-pack.html",
+      "errors": []
+    },
+    {
+      "page": "project-ember-textures.html",
+      "errors": []
+    },
+    {
+      "page": "project-forge-night-experience.html",
+      "errors": []
+    },
+    {
+      "page": "project.html",
+      "errors": []
+    },
+    {
+      "page": "search.html",
+      "errors": []
+    },
+    {
+      "page": "security.html",
+      "errors": []
+    },
+    {
+      "page": "verify.html",
+      "errors": []
+    },
+    {
+      "page": "games/index.html",
+      "errors": []
+    }
+  ],
+  "dangerousDomSinks": 0,
+  "serverRuntimeFiles": [],
+  "serverInjectionSurface": "NON APPLICABLE in current repository",
+  "workflowFindings": [
+    "MOYENNE: actions/checkout utilise le tag mutable v4",
+    "MOYENNE: le workflow cutover ne refuse pas explicitement les modes mutatifs sur push",
+    "MOYENNE: la désactivation HTTP/3 peut être déclenchée par push sur main"
+  ],
+  "errors": []
+}

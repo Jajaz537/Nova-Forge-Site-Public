@@ -1,0 +1,43 @@
+{
+  "measuredAt": "2026-09-18",
+  "environment": "Cloud Browser Chromium, Cloudflare Pages branch preview",
+  "previewUrl": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+  "remoteBranchHeadAtAudit": "7454e13a80e78c6680b1499ee115bdd697ec2e0a",
+  "deployedRevision": null,
+  "deployedRevisionState": "PREUVE MANQUANTE — aucun marqueur public ne lie cryptographiquement le preview à un SHA Git",
+  "scope": "Structure rendue et premier écran ; ce contrôle ne vaut ni revue pixel-level complète, ni validation mobile, lecteur d'écran ou zoom natif",
+  "checks": {
+    "pages": 17,
+    "pagesWithOneH1": 17,
+    "pagesWithOneMain": 17,
+    "pagesWithFooter": 17,
+    "pagesWithoutHorizontalOverflowAtAuditViewport": 17,
+    "pagesWithoutBrokenImagesAfterNetworkIdle": 17,
+    "pagesWithoutUnnamedEmptyLinks": 17
+  },
+  "paths": [
+    "/",
+    "/catalog.html",
+    "/community.html",
+    "/creator-studio.html",
+    "/documentation.html",
+    "/downloads.html",
+    "/ecosystem.html",
+    "/games/",
+    "/profiles.html",
+    "/project.html",
+    "/project-balanced-latency-pack.html",
+    "/project-ember-textures.html",
+    "/project-forge-night-experience.html",
+    "/search.html",
+    "/security.html",
+    "/verify.html",
+    "/404.html"
+  ],
+  "observations": [
+    "Le hero Loup/Dragon et les portails MODARYX sont visibles sur le preview de branche.",
+    "Catalogue, Creator Studio, Communauté, Écosystème et Sécurité utilisent la composition cinématique graphite/or/bleu du candidat.",
+    "Le domaine public modaryxmods.com sert encore une présentation plus ancienne ; aucune promotion production n'est revendiquée.",
+    "Les erreurs de console observées provenaient de l'extension du navigateur cloud, pas des scripts MODARYX."
+  ]
+}

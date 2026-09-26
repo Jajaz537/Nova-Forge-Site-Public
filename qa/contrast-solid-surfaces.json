@@ -1,0 +1,113 @@
+{
+  "scope": "Computed text colors on solid opaque ancestor backgrounds. Gradients, translucency and opacity excluded; not full WCAG certification. Empty decorative status-dot findings are not text contrast failures.",
+  "results": [
+    {
+      "fail": [],
+      "page": "404",
+      "skipped": 3,
+      "tested": 41
+    },
+    {
+      "fail": [],
+      "page": "catalog",
+      "skipped": 15,
+      "tested": 78
+    },
+    {
+      "fail": [
+        {
+          "cls": "status-dot",
+          "ratio": 1.7608814170905092,
+          "text": ""
+        }
+      ],
+      "page": "community",
+      "skipped": 26,
+      "tested": 100
+    },
+    {
+      "fail": [
+        {
+          "cls": "status-dot",
+          "ratio": 1.7608814170905092,
+          "text": ""
+        }
+      ],
+      "page": "creator-studio",
+      "skipped": 11,
+      "tested": 109
+    },
+    {
+      "fail": [],
+      "page": "documentation",
+      "skipped": 10,
+      "tested": 99
+    },
+    {
+      "fail": [],
+      "page": "downloads",
+      "skipped": 8,
+      "tested": 64
+    },
+    {
+      "fail": [],
+      "page": "ecosystem",
+      "skipped": 9,
+      "tested": 81
+    },
+    {
+      "fail": [],
+      "page": "index",
+      "skipped": 27,
+      "tested": 161
+    },
+    {
+      "fail": [],
+      "page": "profiles",
+      "skipped": 6,
+      "tested": 53
+    },
+    {
+      "fail": [],
+      "page": "project-balanced-latency-pack",
+      "skipped": 26,
+      "tested": 51
+    },
+    {
+      "fail": [],
+      "page": "project-ember-textures",
+      "skipped": 22,
+      "tested": 51
+    },
+    {
+      "fail": [],
+      "page": "project-forge-night-experience",
+      "skipped": 26,
+      "tested": 51
+    },
+    {
+      "fail": [],
+      "page": "project",
+      "skipped": 7,
+      "tested": 38
+    },
+    {
+      "fail": [],
+      "page": "search",
+      "skipped": 41,
+      "tested": 36
+    },
+    {
+      "fail": [],
+      "page": "security",
+      "skipped": 10,
+      "tested": 87
+    },
+    {
+      "fail": [],
+      "page": "verify",
+      "skipped": 6,
+      "tested": 52
+    }
+  ]
+}

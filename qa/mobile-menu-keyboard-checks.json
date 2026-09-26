@@ -1,0 +1,245 @@
+{
+  "date": "2026-09-15",
+  "sourceCommit": "4f9a3da4f95151f33de32edd15d6e6391efba446",
+  "method": "Chrome desktop local, iframe de recette de largeur demandée 390 px. Activation du bouton par locator.press('Enter') (mise au focus ciblée), puis Tab et Escape par clavier natif. États aria-expanded et lignes actives du snapshot DOM observés.",
+  "lastPageMeasurement": {
+    "page": "404.html",
+    "requested": 390,
+    "width": 375,
+    "scroll": 375,
+    "h1": "Cette page est introuvable.",
+    "positiveTabindex": 0
+  },
+  "checks": [
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Ouvrir le menu\" [active]"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Mods\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "index",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "catalog",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "search",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "creator-studio",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "community",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "profiles",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "ecosystem",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "documentation",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "security",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "verify",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "downloads",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "project",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "project-ember-textures",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "project-balanced-latency-pack",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "project-forge-night-experience",
+      "passed": true
+    },
+    {
+      "activeClosed": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "      - button \"Menu\" [active]:"
+      ],
+      "activeOpen": [
+        "  - iframe [active] [id=\"screen\"]:",
+        "        - link \"Catalogue\" [active]:"
+      ],
+      "closed": "false",
+      "opened": "true",
+      "page": "404",
+      "passed": true
+    }
+  ],
+  "limits": [
+    "Pas de preuve de découverte initiale du bouton par Tab : activation ciblée du bouton.",
+    "Largeur utile 375 px mesurée sur la dernière page ; les seize largeurs utiles ne sont pas recensées dans ce lot.",
+    "Pas de téléphone physique, lecteur d’écran, zoom natif, ordre complet de tabulation ou navigation de tous les liens.",
+    "16 parcours distincts des 108 scénarios source ; aucune validation VF."
+  ]
+}

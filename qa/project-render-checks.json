@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "scope": "Four grouped source Node VM scenarios; not native browser proof",
+  "checks": [
+    "Four malformed graph variants cannot partially overwrite static project fields",
+    "Relation preparation failure preserves visible fields and previous relations",
+    "Actual project data replaces fields and its two prepared relations",
+    "Missing project title cannot erase static content"
+  ]
+}

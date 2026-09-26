@@ -1,0 +1,41 @@
+.modaryx-realm-hero{--world-glow:rgba(244,190,102,.16);--world-veil:rgba(58,105,144,.04)}
+.modaryx-realm-hero:before{content:"";position:absolute;inset:-8%;z-index:-1;pointer-events:none;background:radial-gradient(circle at 78% 28%,var(--world-glow),transparent 34%),linear-gradient(115deg,transparent 34%,var(--world-veil) 55%,transparent 76%);opacity:.8;animation:modaryx-world-light 18s ease-in-out infinite alternate}
+.modaryx-realm-art{transform-origin:68% 46%;animation:modaryx-world-drift 32s ease-in-out infinite alternate;transition:filter 2.4s ease;will-change:transform,filter}
+html[data-world-phase=dawn] .modaryx-realm-hero{--world-glow:rgba(255,190,116,.2);--world-veil:rgba(107,128,158,.05)}
+html[data-world-phase=day] .modaryx-realm-hero{--world-glow:rgba(242,199,118,.13);--world-veil:rgba(92,143,166,.035)}
+html[data-world-phase=dusk] .modaryx-realm-hero{--world-glow:rgba(240,153,83,.22);--world-veil:rgba(91,87,137,.07)}
+html[data-world-phase=night] .modaryx-realm-hero{--world-glow:rgba(93,131,176,.13);--world-veil:rgba(32,46,78,.16)}
+html[data-world-phase=night] .modaryx-realm-art{filter:saturate(.88) brightness(.78) contrast(1.04)}
+html[data-world-phase=dawn] .modaryx-realm-art{filter:saturate(.96) brightness(.92)}
+html[data-world-phase=dusk] .modaryx-realm-art{filter:saturate(1.02) brightness(.9) sepia(.04)}
+
+.living-world-status{display:grid;grid-template-columns:minmax(0,1.35fr) repeat(2,minmax(0,.8fr));gap:10px;margin-top:24px;padding:12px;border:1px solid rgba(225,190,116,.28);border-radius:14px;background:rgba(7,11,15,.72);box-shadow:inset 0 1px rgba(255,255,255,.045),0 18px 45px rgba(0,0,0,.24);backdrop-filter:blur(12px)}
+.living-world-status>span{display:grid;gap:3px;min-width:0;padding:9px 10px;border-radius:10px;background:rgba(255,255,255,.025)}
+.living-world-status>span:first-child{border-left:2px solid rgba(224,184,103,.62)}
+.living-world-status strong{font-size:.78rem;letter-spacing:.04em;color:#f2d79f}
+.living-world-status small{color:#c5ccd3;line-height:1.35}
+.world-growth-next{display:block;margin-top:2px;color:#8f9aa4;font-size:.68rem;line-height:1.35;font-style:normal}
+.living-world-status [data-world-status]{grid-column:1/-1;margin:0;padding:2px 10px 4px;color:#9faab4;font-size:.78rem}
+.living-world-status [data-world-status][data-world-ready=true]:before{content:"";display:inline-block;width:6px;height:6px;margin:0 8px 1px 0;border-radius:50%;background:#86bb83;box-shadow:0 0 12px rgba(134,187,131,.55);animation:modaryx-world-pulse 2.8s ease-in-out infinite}
+.living-world-status [data-world-status][data-world-source=offline-stale]:before{background:#d4ae61;box-shadow:0 0 12px rgba(212,174,97,.45)}
+.living-world-status [data-world-status][data-world-source=unavailable]:before{background:#c87a7a;box-shadow:none}
+.world-chronicle{grid-column:1/-1;display:flex!important;align-items:baseline;gap:.55rem;margin:0!important;padding:7px 10px 2px!important;background:transparent!important;border-top:1px solid rgba(225,190,116,.12);color:#aeb8c1;font-size:.72rem;line-height:1.4}
+.world-chronicle strong{flex:0 0 auto;color:#d8bd86;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase}
+.world-chronicle [data-world-chronicle]{min-width:0}
+.world-local-context{grid-column:1/-1!important;display:flex!important;align-items:baseline;gap:.55rem;margin:0!important;padding:7px 10px 2px!important;background:transparent!important;border-top:1px solid rgba(112,164,219,.12);color:#aeb8c1;font-size:.72rem;line-height:1.4}
+.world-local-context strong{flex:0 0 auto;color:#a9c8e8;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase}
+.world-weather-attribution{margin-left:auto;color:#8798a8;font-size:.64rem;text-decoration:underline;text-underline-offset:.16rem}
+.living-world-status [data-growth-stage]{transition:opacity .2s ease}
+
+@keyframes modaryx-world-drift{0%{transform:scale(1.006) translate3d(0,0,0)}100%{transform:scale(1.022) translate3d(-.35%,.18%,0)}}
+@keyframes modaryx-world-light{0%{transform:translate3d(-1%,0,0);opacity:.58}100%{transform:translate3d(1.2%,-.6%,0);opacity:.92}}
+@keyframes modaryx-world-pulse{0%,100%{opacity:.48;transform:scale(.85)}50%{opacity:1;transform:scale(1.08)}}
+
+@media(max-width:760px){.living-world-status{grid-template-columns:1fr 1fr}.living-world-status>span:first-child{grid-column:1/-1}.living-world-status [data-world-status]{grid-column:1/-1}}
+@media(max-width:480px){.living-world-status{grid-template-columns:1fr}.living-world-status>span:first-child,.living-world-status [data-world-status]{grid-column:auto}}
+@media(max-width:600px){.world-local-context{display:grid!important;gap:.2rem}.world-weather-attribution{margin-left:0}}
+
+html[data-motion=reduced] .modaryx-realm-art,
+html[data-motion=reduced] .modaryx-realm-hero:before,
+html[data-motion=reduced] .living-world-status [data-world-status][data-world-ready=true]:before{animation:none!important;transform:none!important}
+@media(prefers-reduced-motion:reduce){.modaryx-realm-art,.modaryx-realm-hero:before,.living-world-status [data-world-status][data-world-ready=true]:before{animation:none!important;transform:none!important}}

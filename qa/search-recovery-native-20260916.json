@@ -1,0 +1,25 @@
+{
+  "sourceCommit": "f4372eeb08704abd9cffb5910ff66b777c5689b8",
+  "date": "2026-09-16",
+  "scope": "Chrome HTTPS normal hydration after retry change; failure and retry branches NOT exercised natively",
+  "observations": [
+    {
+      "step": "loaded",
+      "state": {
+        "count": "14 résultats",
+        "disabled": false,
+        "retryButtons": 0,
+        "state": "Recherche exécutée localement dans l’index public pré-calculé. Aucun service distant interrogé."
+      }
+    },
+    {
+      "step": "filter",
+      "text": "Ember Textures — PreviewAperçu de démonstration Skyrim Special Edition, sans fichier téléchargeable.",
+      "count": "1 résultat"
+    },
+    {
+      "step": "clear",
+      "count": "14 résultats"
+    }
+  ]
+}

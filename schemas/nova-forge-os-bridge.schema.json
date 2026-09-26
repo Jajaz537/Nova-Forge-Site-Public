@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:modaryx:schemas:nova-forge-os-bridge:v1",
+  "title": "MODARYX to Nova Forge OS Bridge Contract",
+  "description": "Explicit product-boundary contract for an optional local bridge from MODARYX web to Nova Forge OS. MODARYX and Nova Forge remain distinct products; no implicit account/session sharing is allowed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceProduct",
+    "targetProduct",
+    "state",
+    "consent",
+    "requestedPermissions",
+    "grantedPermissions",
+    "implicitAccountLinking",
+    "sessionSharing",
+    "credentialForwarding"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "sourceProduct": {
+      "const": "modaryx-web"
+    },
+    "targetProduct": {
+      "const": "nova-forge-os"
+    },
+    "state": {
+      "enum": [
+        "not-connected",
+        "discovering",
+        "available",
+        "connected",
+        "error"
+      ]
+    },
+    "consent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required",
+        "granted",
+        "grantedAt"
+      ],
+      "properties": {
+        "required": {
+          "const": true
+        },
+        "granted": {
+          "type": "boolean"
+        },
+        "grantedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "requestedPermissions": {
+      "type": "array",
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9.-]{2,63}$"
+      }
+    },
+    "grantedPermissions": {
+      "type": "array",
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9.-]{2,63}$"
+      }
+    },
+    "implicitAccountLinking": {
+      "const": false
+    },
+    "sessionSharing": {
+      "const": false
+    },
+    "credentialForwarding": {
+      "const": false
+    },
+    "localEndpointUri": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "protocolVersion": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^v[0-9]+(?:\\.[0-9]+){0,2}$"
+    },
+    "lastError": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "connected"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "consent": {
+            "properties": {
+              "granted": {
+                "const": true
+              }
+            }
+          }
+        },
+        "required": [
+          "localEndpointUri",
+          "protocolVersion"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "consent": {
+            "properties": {
+              "granted": {
+                "const": false
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "not": {
+          "properties": {
+            "state": {
+              "const": "connected"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

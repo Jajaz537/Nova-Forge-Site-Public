@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "scope": "Six source-handler Node simulations; browser delivery and filesystem receipt not certified",
+  "checks": [
+    "studio: handoff and deferred cleanup",
+    "studio: create failure, retained draft and cleanup",
+    "studio: click failure, retained draft and cleanup",
+    "community: handoff and deferred cleanup",
+    "community: create failure, retained draft and cleanup",
+    "community: click failure, retained draft and cleanup"
+  ]
+}

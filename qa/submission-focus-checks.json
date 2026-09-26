@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "scope": "Five grouped Node VM source scenarios; not screen-reader proof",
+  "checks": [
+    "Passive preview never marks or focuses an invalid field",
+    "Explicit validation focuses and identifies the missing target with an actionable message",
+    "Subsequent validation clears previous errors and identifies whitespace-only content",
+    "Review rating and comment parent errors target the relevant control; hidden rating loses stale invalid state",
+    "Valid draft clears invalid markers without focus movement; save and export request interactive validation"
+  ]
+}

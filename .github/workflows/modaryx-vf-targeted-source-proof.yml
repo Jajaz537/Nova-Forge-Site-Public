@@ -1,0 +1,387 @@
+name: MODARYX Site First Targeted Source Proof
+
+on:
+  push:
+    branches:
+      - design/modaryx-premium-hd-20260914-work
+    paths:
+      - '.github/workflows/modaryx-vf-targeted-source-proof.yml'
+      - 'qa/check-site-first-vf.mjs'
+      - 'qa/check-integration-readiness.cjs'
+      - 'qa/check-storage-repair-contracts.cjs'
+      - 'qa/check-provenance-receipt-contracts.cjs'
+      - 'qa/check-signature-attestation-contract.cjs'
+      - 'qa/check-signature-verification-engine.mjs'
+      - 'qa/check-trusted-signers-gate.mjs'
+      - 'qa/MODARYX-TRUSTED-SIGNERS-GATE-20260921.md'
+      - 'qa/check-storage-transport-primitive.mjs'
+      - 'qa/MODARYX-STORAGE-TRANSPORT-PRIMITIVE-20260921.md'
+      - 'qa/MODARYX-PASSKEY-PROVIDER-DEV-EVIDENCE-20260921.md'
+      - 'qa/MODARYX-SIGNATURE-VERIFICATION-ENGINE-20260921.md'
+      - 'qa/check-storage-repair-decision-engine.mjs'
+      - 'qa/MODARYX-STORAGE-REPAIR-DECISION-ENGINE-20260921.md'
+      - 'qa/check-integration-consent-engine.mjs'
+      - 'qa/check-runtime-resilience-hardening.mjs'
+      - 'qa/MODARYX-RUNTIME-RESILIENCE-HARDENING-20260921.md'
+      - 'qa/MODARYX-INTEGRATION-CONSENT-ENGINE-20260921.md'
+      - 'qa/MODARYX-SIGNATURE-ATTESTATION-CONTRACT-20260921.md'
+      - 'qa/check-guide-os-bridge-contracts.cjs'
+      - 'qa/MODARYX-GUIDE-OS-BRIDGE-CONTRACT-20260921.md'
+      - 'qa/check-passkey-provider-readiness.cjs'
+      - 'qa/MODARYX-PASSKEY-PROVIDER-READINESS-20260921.md'
+      - 'qa/check-account-community-contracts.cjs'
+      - 'qa/check-download-recovery.cjs'
+      - 'qa/check-distribution-lock-contracts.cjs'
+      - 'qa/check-local-platform-contracts.cjs'
+      - 'qa/check-backend-dev-foundation.mjs'
+      - 'qa/check-dev-provider-readiness.cjs'
+      - 'qa/MODARYX-DEV-PROVIDER-READINESS-20260920.md'
+      - 'qa/check-remote-write-endpoints.mjs'
+      - 'qa/check-auth-bff.mjs'
+      - 'qa/check-founder-dev-proof-surface.cjs'
+      - 'qa/MODARYX-FOUNDER-DEV-PROOF-SURFACE-20260921.md'
+      - 'qa/check-profiles-account-ui.cjs'
+      - 'qa/check-community-remote-ui.cjs'
+      - 'qa/check-moderation-publication-engine.mjs'
+      - 'qa/MODARYX-MODERATION-PUBLICATION-ENGINE-20260921.md'
+      - 'qa/MODARYX-COMMUNITY-REMOTE-UI-20260920.md'
+      - 'qa/MODARYX-PROFILES-ACCOUNT-UI-20260920.md'
+      - 'qa/MODARYX-AUTH-BFF-SESSION-20260920.md'
+      - 'qa/MODARYX-REMOTE-WRITE-ENDPOINTS-20260920.md'
+      - 'qa/MODARYX-BACKEND-DEV-PROVISIONING-20260920.md'
+      - 'functions/**'
+      - 'migrations/**'
+      - 'qa/check-receipt-fields.cjs'
+      - 'qa/check-seo-contract.cjs'
+      - 'qa/check-anti-oubli-current.cjs'
+      - 'qa/MODARYX-ANTI-OUBLI-CURRENT-20260920.md'
+      - 'qa/MODARYX-WORK-PHASE2-EXTERNAL-EVIDENCE-20260920.md'
+      - 'CHECKPOINT-CANONIQUE-MODARYX-2026-09-20.md'
+      - 'CHECKPOINT-CANONIQUE-MODARYX-2026-09-21.md'
+      - 'MODARYX-VF-STATUS.md'
+      - 'FINAL-EXTERNAL-VALIDATION-MATRIX.md'
+      - 'schemas/integration-readiness.schema.json'
+      - 'schemas/storage-resolver.schema.json'
+      - 'schemas/repair-network.schema.json'
+      - 'schemas/publication-receipt.schema.json'
+      - 'schemas/signature-attestation.schema.json'
+      - 'schemas/trusted-signer-set.schema.json'
+      - 'data/trusted-signers.json'
+      - 'schemas/modaryx-guide-connection.schema.json'
+      - 'schemas/nova-forge-os-bridge.schema.json'
+      - 'schemas/moderation-receipt.schema.json'
+      - 'schemas/moderation-export.schema.json'
+      - 'schemas/public-profile.schema.json'
+      - 'schemas/account-security.schema.json'
+      - 'schemas/community-submission.schema.json'
+      - 'schemas/community-write.schema.json'
+      - 'schemas/universal-mod-manifest.schema.json'
+      - 'schemas/smart-profile.schema.json'
+      - 'schemas/collection.schema.json'
+      - 'schemas/compatibility-graph.schema.json'
+      - 'schemas/search-adapter.schema.json'
+      - 'public-status.json'
+      - 'downloads.json'
+      - '*.html'
+      - 'games/**'
+      - 'gta-6/**'
+      - 'red-dead-redemption-2/**'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'assets/**'
+      - 'data/**'
+      - 'sw.js'
+      - 'SHA256SUMS.txt'
+  pull_request:
+    branches:
+      - design/modaryx-premium-hd-20260914-work
+    paths:
+      - '.github/workflows/modaryx-vf-targeted-source-proof.yml'
+      - 'qa/check-site-first-vf.mjs'
+      - 'qa/check-integration-readiness.cjs'
+      - 'qa/check-storage-repair-contracts.cjs'
+      - 'qa/check-provenance-receipt-contracts.cjs'
+      - 'qa/check-signature-attestation-contract.cjs'
+      - 'qa/check-signature-verification-engine.mjs'
+      - 'qa/check-trusted-signers-gate.mjs'
+      - 'qa/MODARYX-TRUSTED-SIGNERS-GATE-20260921.md'
+      - 'qa/check-storage-transport-primitive.mjs'
+      - 'qa/MODARYX-STORAGE-TRANSPORT-PRIMITIVE-20260921.md'
+      - 'qa/MODARYX-PASSKEY-PROVIDER-DEV-EVIDENCE-20260921.md'
+      - 'qa/MODARYX-SIGNATURE-VERIFICATION-ENGINE-20260921.md'
+      - 'qa/check-storage-repair-decision-engine.mjs'
+      - 'qa/MODARYX-STORAGE-REPAIR-DECISION-ENGINE-20260921.md'
+      - 'qa/check-integration-consent-engine.mjs'
+      - 'qa/check-runtime-resilience-hardening.mjs'
+      - 'qa/MODARYX-RUNTIME-RESILIENCE-HARDENING-20260921.md'
+      - 'qa/MODARYX-INTEGRATION-CONSENT-ENGINE-20260921.md'
+      - 'qa/MODARYX-SIGNATURE-ATTESTATION-CONTRACT-20260921.md'
+      - 'qa/check-guide-os-bridge-contracts.cjs'
+      - 'qa/MODARYX-GUIDE-OS-BRIDGE-CONTRACT-20260921.md'
+      - 'qa/check-passkey-provider-readiness.cjs'
+      - 'qa/MODARYX-PASSKEY-PROVIDER-READINESS-20260921.md'
+      - 'qa/check-account-community-contracts.cjs'
+      - 'qa/check-download-recovery.cjs'
+      - 'qa/check-distribution-lock-contracts.cjs'
+      - 'qa/check-local-platform-contracts.cjs'
+      - 'qa/check-backend-dev-foundation.mjs'
+      - 'qa/check-dev-provider-readiness.cjs'
+      - 'qa/MODARYX-DEV-PROVIDER-READINESS-20260920.md'
+      - 'qa/check-remote-write-endpoints.mjs'
+      - 'qa/check-auth-bff.mjs'
+      - 'qa/check-founder-dev-proof-surface.cjs'
+      - 'qa/MODARYX-FOUNDER-DEV-PROOF-SURFACE-20260921.md'
+      - 'qa/check-profiles-account-ui.cjs'
+      - 'qa/check-community-remote-ui.cjs'
+      - 'qa/check-moderation-publication-engine.mjs'
+      - 'qa/MODARYX-MODERATION-PUBLICATION-ENGINE-20260921.md'
+      - 'qa/MODARYX-COMMUNITY-REMOTE-UI-20260920.md'
+      - 'qa/MODARYX-PROFILES-ACCOUNT-UI-20260920.md'
+      - 'qa/MODARYX-AUTH-BFF-SESSION-20260920.md'
+      - 'qa/MODARYX-REMOTE-WRITE-ENDPOINTS-20260920.md'
+      - 'qa/MODARYX-BACKEND-DEV-PROVISIONING-20260920.md'
+      - 'functions/**'
+      - 'migrations/**'
+      - 'qa/check-receipt-fields.cjs'
+      - 'qa/check-seo-contract.cjs'
+      - 'qa/check-anti-oubli-current.cjs'
+      - 'qa/MODARYX-ANTI-OUBLI-CURRENT-20260920.md'
+      - 'qa/MODARYX-WORK-PHASE2-EXTERNAL-EVIDENCE-20260920.md'
+      - 'CHECKPOINT-CANONIQUE-MODARYX-2026-09-20.md'
+      - 'CHECKPOINT-CANONIQUE-MODARYX-2026-09-21.md'
+      - 'MODARYX-VF-STATUS.md'
+      - 'FINAL-EXTERNAL-VALIDATION-MATRIX.md'
+      - 'schemas/integration-readiness.schema.json'
+      - 'schemas/storage-resolver.schema.json'
+      - 'schemas/repair-network.schema.json'
+      - 'schemas/publication-receipt.schema.json'
+      - 'schemas/signature-attestation.schema.json'
+      - 'schemas/trusted-signer-set.schema.json'
+      - 'data/trusted-signers.json'
+      - 'schemas/modaryx-guide-connection.schema.json'
+      - 'schemas/nova-forge-os-bridge.schema.json'
+      - 'schemas/moderation-receipt.schema.json'
+      - 'schemas/moderation-export.schema.json'
+      - 'schemas/public-profile.schema.json'
+      - 'schemas/account-security.schema.json'
+      - 'schemas/community-submission.schema.json'
+      - 'schemas/community-write.schema.json'
+      - 'schemas/universal-mod-manifest.schema.json'
+      - 'schemas/smart-profile.schema.json'
+      - 'schemas/collection.schema.json'
+      - 'schemas/compatibility-graph.schema.json'
+      - 'schemas/search-adapter.schema.json'
+      - 'public-status.json'
+      - 'downloads.json'
+      - '*.html'
+      - 'games/**'
+      - 'gta-6/**'
+      - 'red-dead-redemption-2/**'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'assets/**'
+      - 'data/**'
+      - 'sw.js'
+      - 'SHA256SUMS.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-site-first-source-proof-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-proof:
+    name: Targeted source proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Record runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --version
+          git rev-parse HEAD
+
+      - name: Run targeted Site First source proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-site-first-vf.mjs
+
+      - name: Run targeted integration readiness proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-integration-readiness.cjs
+
+      - name: Run targeted storage and repair contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-storage-repair-contracts.cjs
+
+      - name: Run targeted provenance receipt contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-provenance-receipt-contracts.cjs
+
+      - name: Run targeted account and community contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-account-community-contracts.cjs
+
+      - name: Run targeted signature attestation contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-signature-attestation-contract.cjs
+
+      - name: Run targeted signature verification engine proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-signature-verification-engine.mjs
+
+      - name: Run targeted trusted signer gate proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-trusted-signers-gate.mjs
+
+      - name: Run targeted distribution trust chain proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-distribution-trust-chain.mjs
+
+      - name: Run targeted storage transport primitive proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-storage-transport-primitive.mjs
+
+      - name: Run targeted Storage / Repair orchestrator proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-storage-repair-orchestrator.mjs
+
+      - name: Run targeted storage repair decision engine proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-storage-repair-decision-engine.mjs
+
+      - name: Run targeted integration consent engine proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-integration-consent-engine.mjs
+
+      - name: Run targeted integration discovery runtime proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-integration-discovery-runtime.mjs
+
+      - name: Run targeted runtime resilience hardening proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-runtime-resilience-hardening.mjs
+
+      - name: Run targeted Guide and OS bridge contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-guide-os-bridge-contracts.cjs
+
+      - name: Run targeted passkey provider readiness proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-passkey-provider-readiness.cjs
+
+      - name: Run targeted distribution lock proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-download-recovery.cjs
+          node qa/check-distribution-lock-contracts.cjs
+
+      - name: Run targeted local platform contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-local-platform-contracts.cjs
+
+      - name: Run targeted backend DEV foundation proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-backend-dev-foundation.mjs
+
+      - name: Run targeted DEV provider readiness proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-dev-provider-readiness.cjs
+
+      - name: Run targeted remote write endpoint proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-remote-write-endpoints.mjs
+
+      - name: Run targeted Auth0 BFF session proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-auth-bff.mjs
+
+      - name: Run targeted Founder DEV proof surface removal guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-founder-dev-proof-surface.cjs
+
+      - name: Run targeted profiles account UI proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-profiles-account-ui.cjs
+
+      - name: Run targeted community remote UI proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-community-remote-ui.cjs
+
+      - name: Run targeted moderation publication engine proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-moderation-publication-engine.mjs
+
+      - name: Run targeted SEO contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-seo-contract.cjs
+
+      - name: Run targeted anti-forget gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-anti-oubli-current.cjs

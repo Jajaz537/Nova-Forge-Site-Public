@@ -1,0 +1,1 @@
+{"name":"modaryx-isolated-design-review","private":true,"scripts":{"dev":"node preview.mjs","build":"python3 qa/build-games-index.py --check && python3 qa/check-site.py","lint":"python3 qa/check-site.py","test":"python3 qa/run-final-source-validation.py"}}

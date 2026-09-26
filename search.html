@@ -9,6 +9,13 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
   <meta name="description" content="Recherche locale MODARYX MODS : index public pré-calculé, sans service distant obligatoire.">
   <title>Recherche — MODARYX MODS</title>
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="MODARYX MODS">
+  <meta property="og:title" content="Recherche — MODARYX MODS">
+  <meta property="og:description" content="Recherche locale MODARYX MODS : index public pré-calculé, sans service distant obligatoire.">
+  <meta property="og:url" content="https://modaryxmods.com/search">
+  <link rel="canonical" href="https://modaryxmods.com/search">
   <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
   <link rel="stylesheet" href="./assets/tokens.css">
@@ -18,33 +25,53 @@
   <script src="./assets/shell.js" defer></script>
   <script src="./assets/search.js" defer></script>
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
-  <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">
+  <link rel="stylesheet" href="./assets/modaryx-foundations.css">
+  <link rel="stylesheet" href="./assets/modaryx-cinematic-system.css">
+  <link rel="stylesheet" href="./assets/modaryx-search-cinematic-fix.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Aller au contenu</a>
   <header class="topbar">
     <a class="brand" href="./index.html" aria-label="MODARYX MODS, accueil"><img class="brand-logo" src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="32" height="32"><span>MODARYX MODS</span></a>
-    <nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./catalog.html">Catalogue</a><a href="./search.html" aria-current="page">Recherche</a><a href="./community.html">Communauté</a><a href="./security.html">Sécurité</a></nav>
+    <nav aria-label="Navigation principale"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html" aria-current="page">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Aide</a></nav>
   </header>
   <main id="main" class="search-page">
-    <section class="search-hero" aria-labelledby="search-title">
-      <div><p class="eyebrow">Recherche · zero-cost · local-first</p><h1 id="search-title">Chercher sans service distant obligatoire.</h1><p class="lede">L’index V1 est un fichier public pré-calculé. La recherche s’exécute dans ce navigateur et reste utilisable hors ligne une fois la surface mise en cache.</p></div>
-      <aside class="panel"><strong>Adapter externe : optionnel.</strong><p>Un futur moteur externe pourra compléter l’index local, mais ne remplacera jamais l’identité des résultats et ne sera pas requis pour le cœur.</p></aside>
+    <nav class="page-trail" aria-label="Fil d’Ariane"><a href="./index.html">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Recherche</span></nav>
+    
+    <section class="search-hero hero" aria-labelledby="search-title">
+      <div><p class="eyebrow">Recherche · index du site</p><h1 id="search-title">Retrouvez un projet ou un outil.</h1><p class="lede">Recherchez un jeu, un projet ou une fonction dans les pages référencées par MODARYX. Votre saisie est filtrée dans ce navigateur ; elle n’est pas envoyée à un moteur de recherche distant.</p></div>
+      <aside class="panel hero-panel"><strong>Le périmètre de la recherche.</strong><p>Les résultats proviennent de l’index public du site. Les projets présentés sont des démonstrations ; leur présence ne signifie pas qu’un fichier est téléchargeable.</p></aside>
     </section>
     <section class="section" aria-labelledby="query-title">
-      <div class="section-heading"><div><p class="eyebrow">Index public</p><h2 id="query-title">Recherche locale</h2></div><span class="badge" id="search-count" aria-live="polite">9 entrées statiques</span></div>
-      <label class="field" for="site-search"><span>Rechercher</span><input id="site-search" type="search" autocomplete="off" placeholder="Catalogue, passkeys, Skyrim, provenance…"></label>
+      <div class="section-heading"><div><p class="eyebrow">Index public</p><h2 id="query-title">Recherche locale</h2></div><span class="badge" id="search-count" role="status" aria-live="polite" aria-atomic="true">Répertoire du site</span></div>
+      <label class="field" for="site-search"><span>Rechercher</span><input id="site-search" type="search" disabled aria-describedby="search-state" autocomplete="off" placeholder="Catalogue, passkeys, Skyrim, provenance…"></label>
       <p id="search-state" role="status" aria-live="polite">Le répertoire statique reste disponible. Le filtre local s’active si JavaScript est disponible.</p>
       <div id="search-results" class="search-results">
-        <a class="search-result" href="./catalog.html"><strong>Catalogue multigaming</strong><span>Mods, packs et expériences publics.</span></a>
-        <a class="search-result" href="./creator-studio.html"><strong>Creator Studio</strong><span>Manifestes locaux et export déterministe.</span></a>
-        <a class="search-result" href="./profiles.html"><strong>Profiles & Passkeys</strong><span>Identité publique et frontière WebAuthn.</span></a>
-        <a class="search-result" href="./community.html"><strong>Communauté</strong><span>Abuse Shield et modération avant écriture.</span></a>
-        <a class="search-result" href="./security.html"><strong>Sécurité & provenance</strong><span>Confiance fail-closed et vérification.</span></a>
+        <a class="search-result" href="./catalog.html"><strong>Catalogue multigaming</strong><span>Explorer les contenus de démonstration et leurs informations. Aucun téléchargement disponible.</span></a>
+        <a class="search-result" href="./creator-studio.html"><strong>Creator Studio</strong><span>Préparer la fiche de sa création, contrôler le format et exporter un manifeste JSON.</span></a>
+        <a class="search-result" href="./profiles.html"><strong>Profils et accès</strong><span>Comprendre les profils et les méthodes de connexion prévues. Aucun compte distant connecté.</span></a>
+        <a class="search-result" href="./community.html"><strong>Communauté</strong><span>Collections, favoris et brouillons de discussions ou avis sauvegardés et exportés localement.</span></a>
+        <a class="search-result" href="./security.html"><strong>Sécurité &amp; provenance</strong><span>Comprendre la provenance, les signatures, les empreintes et les limites des preuves.</span></a>
+        <a class="search-result" href="./downloads.html"><strong>Téléchargements publics</strong><span>Distribution verrouillée jusqu’à présence des preuves requises.</span></a>
+        <a class="search-result" href="./project-ember-textures.html"><strong>Ember Textures — Preview</strong><span>Aperçu de démonstration Skyrim Special Edition, sans fichier téléchargeable.</span></a>
+        <a class="search-result" href="./project-balanced-latency-pack.html"><strong>Balanced Latency Pack — Preview</strong><span>Pack de démonstration Cyberpunk 2077, estimation sans garantie de FPS.</span></a>
+        <a class="search-result" href="./project-forge-night-experience.html"><strong>Forge Night Experience — Preview</strong><span>Expérience de démonstration Minecraft ; compatibilité non vérifiée.</span></a>
+        <a class="search-result" href="./documentation.html"><strong>Documentation</strong><span>Retrouver les outils, comprendre les données locales et les limites.</span></a>
+        <a class="search-result" href="./ecosystem.html"><strong>Écosystème MODARYX</strong><span>Outils disponibles et intégrations encore en préparation.</span></a>
+        <a class="search-result" href="./verify.html"><strong>Vérifier un fichier</strong><span>Calculer localement une empreinte SHA-256 et comparer un fichier.</span></a>
+        <a class="search-result" href="./project.html"><strong>Les projets</strong><span>Fiches des trois projets de démonstration du catalogue.</span></a>
+        <a class="search-result" href="./index.html"><strong>Des mondes à explorer. Des idées à forger.</strong><span>MODARYX MODS : catalogue de démonstration, création locale et collections. Univers visuel Loup et Dragon.</span></a>
+        <a class="search-result" href="./games/index.html"><strong>Jeux du catalogue</strong><span>Jeux représentés et fiches de démonstration, sans fichiers distribués.</span></a>
+        <a class="search-result" href="./gta-6/"><strong>GTA VI — hub éditorial</strong><span>Faits officiels, catégories prévues et limites explicites sans inventer de support mod.</span></a>
+        <a class="search-result" href="./gta-6/mods/"><strong>Mods GTA VI — état du catalogue</strong><span>Catalogue fermé tant que plateforme, version, droits et provenance ne sont pas prouvés.</span></a>
+        <a class="search-result" href="./gta-6/guides/"><strong>Guides GTA VI</strong><span>Repères datés pour distinguer faits officiels, préparation MODARYX et compatibilité inconnue.</span></a>
+        <a class="search-result" href="./red-dead-redemption-2/"><strong>Red Dead Redemption 2 — hub éditorial</strong><span>Hub PC sourcé, taxonomie de mods et état réel de la distribution MODARYX.</span></a>
+        <a class="search-result" href="./red-dead-redemption-2/mods/"><strong>Mods Red Dead Redemption 2</strong><span>Catégories de mods RDR2 et exigences de preuve avant toute publication.</span></a>
+        <a class="search-result" href="./red-dead-redemption-2/guides/"><strong>Guides Red Dead Redemption 2</strong><span>Préparer un environnement PC, documenter la version et vérifier les fichiers avant usage.</span></a>
       </div>
-      <div id="search-empty" class="panel" hidden><h3>Aucun résultat local</h3><p>Aucun résultat distant n’est substitué silencieusement.</p></div>
+      <div id="search-empty" class="panel" hidden><h3>Aucun résultat local</h3><p>Essayez un terme plus court, le nom du jeu ou une fonction comme « collection ». Vous pouvez aussi <a href="./catalog.html">ouvrir le catalogue</a>.</p></div>
     </section>
   </main>
-  <footer><div><strong>MODARYX MODS Search</strong><p>Index local pré-calculé · adapter externe optionnel.</p></div><p>Pré-VF · zéro service payant obligatoire</p></footer>
+  <footer class="site-footer"><div><strong>MODARYX MODS</strong><p>Explorez des créations et préparez vos projets avec des outils locaux.</p></div><nav aria-label="Navigation de pied de page"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./profiles.html">Profils</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a><a href="./downloads.html">Téléchargements</a><a href="./documentation.html#privacy">Données locales</a><a href="./public-status.json">Statut public</a></nav></footer>
 </body>
 </html>

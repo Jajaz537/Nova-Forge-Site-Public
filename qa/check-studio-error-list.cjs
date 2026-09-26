@@ -1,0 +1,25 @@
+// Actual renderer, minimal DOM model: completeness and literal text, not screen-reader certification.
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const source=fs.readFileSync(require('node:path').join(__dirname,'../assets/creator-studio.js'),'utf8');
+const code=source.slice(source.indexOf('  const friendlyError ='),source.indexOf('  function render()'));
+const node=tag=>({tag,textContent:'',children:[],append(child){this.children.push(child);}});
+const schemaStatus={children:[],replaceChildren(...children){this.children=children;}};
+const context={schemaStatus,fields:{},document:{createElement:node}};vm.createContext(context);vm.runInContext(code,context);
+const messages=['$.content.id: format invalide','$.content.name: longueur minimale 1','$.content.version: longueur minimale 1','$.target.gameId: longueur minimale 1','$.target.gameName: longueur minimale 1','$.creator.id: longueur minimale 1','$.creator.displayName: longueur minimale 1','$.rights.license: longueur minimale 1'];
+context.renderErrorList(messages);
+assert.equal(schemaStatus.children[0].textContent,'À corriger : 8 point(s).');
+assert.equal(schemaStatus.children[1].children.length,8,'Every error, including the last five, must remain available');
+assert.equal(schemaStatus.children[1].children[7].textContent,'Licence: champ à renseigner');
+context.renderErrorList(['<img src=x onerror=alert(1)>']);
+assert.equal(schemaStatus.children[1].children.length,1,'Replacement must not append stale errors');
+assert.equal(schemaStatus.children[1].children[0].textContent,'<img src=x onerror=alert(1)>','Message is literal text, never parsed markup');
+let focused=false,prevented=false;
+context.fields.license={id:'license',focus(){focused=true;}};
+context.document.createElement=tag=>({...node(tag),addEventListener(type,callback){this[type]=callback;}});
+context.renderErrorList(['$.rights.license: longueur minimale 1']);
+const link=schemaStatus.children[1].children[0].children[0];
+assert.equal(link.href,'#license');
+assert.equal(link.textContent,'Licence: champ à renseigner');
+link.click({preventDefault(){prevented=true;}});
+assert.equal(focused,true);assert.equal(prevented,true);
+console.log(JSON.stringify({status:'PASS',assertions:9,scope:'Actual error-list renderer in Node DOM model; not a native accessibility proof'}));

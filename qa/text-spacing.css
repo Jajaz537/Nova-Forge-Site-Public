@@ -1,0 +1,4 @@
+/* QA override only. Never loaded by production pages.
+ * https://www.w3.org/WAI/WCAG22/Understanding/text-spacing */
+* { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }
+p { margin-bottom: 2em !important; }
