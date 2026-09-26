@@ -69,9 +69,9 @@ jobs:
           fi
           command -v ffmpeg
           mkdir -p visual-proof/frames
-          find visual-proof -type f \( -name '*.mp4' -o -name '*.webm' \) -print0 | while IFS= read -r -d '' video; do
+          find "$PWD/visual-proof" -type f \( -name '*.mp4' -o -name '*.webm' \) -print0 | while IFS= read -r -d '' video; do
             base="$(basename -- "$video")"; base="${base%.*}"; base="${base#-}"
-            ffmpeg -hide_banner -loglevel error -y -i "$video" -vf "fps=1/12,scale='min(1280,iw)':-2" -frames:v 8 "visual-proof/frames/${base}-%02d.jpg"
+            ffmpeg -hide_banner -loglevel error -y -i "$video" -vf "fps=1/12,scale='min(1280,iw)':-2" -frames:v 8 "$PWD/visual-proof/frames/${base}-%02d.jpg"
           done
           test -n "$(find visual-proof/frames -name '*.jpg' -print -quit)"
 
