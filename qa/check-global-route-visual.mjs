@@ -241,4 +241,4 @@ try {
 } catch(error){
  fs.writeFileSync(path.join(OUT,'route-proof-error.json'),JSON.stringify({targetSha:TARGET_SHA,origin:ORIGIN,error:error.message,observations,failures},null,2));
  console.error(error);process.exitCode=1;
-} finally{chrome.kill();fs.rmSync(TEMP_ROOT,{recursive:true,force:true});}
+} finally{chrome.kill();fs.rmSync(TEMP_ROOT,{recursive:true,force:true,maxRetries:8,retryDelay:200});}
