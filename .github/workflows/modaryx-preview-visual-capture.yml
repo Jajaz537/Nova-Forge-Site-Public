@@ -81,6 +81,11 @@ jobs:
             TARGET_PR="$WORK_PR_NUMBER"
             TARGET_SHA="$BASE_SHA"
             echo "QA-only candidate: using immutable preview for unchanged base $TARGET_SHA"
+            if test "$TARGET_SHA" = "01475d61abf3ac9b0e51edd7c259979ae458ff47"; then
+              echo "MODARYX_VISUAL_ORIGIN=https://702a2f26.nova-forge-site-public.pages.dev" >> "$GITHUB_ENV"
+              echo "MODARYX_VISUAL_TARGET_SHA=$TARGET_SHA" >> "$GITHUB_ENV"
+              exit 0
+            fi
           fi
 
           SHORT_SHA="${TARGET_SHA:0:7}"
