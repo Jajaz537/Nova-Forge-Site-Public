@@ -1,14 +1,17 @@
-name: MODARYX Preview Visual Capture
+name: MODARYX Global Route Visual Proof
 
 on:
   pull_request:
     branches:
       - design/modaryx-premium-hd-20260914-work
     paths:
-      - '.github/workflows/modaryx-preview-visual-capture.yml'
-      - 'qa/check-preview-visual-capture.mjs'
-      - 'index.html'
-      - 'catalog.html'
+      - '.github/workflows/modaryx-global-route-visual.yml'
+      - 'qa/check-global-route-visual.mjs'
+      - '**/*.html'
+      - '*.html'
+      - 'assets/modaryx-search-cinematic-fix.css'
+      - 'qa/build-games-index.py'
+      - 'SHA256SUMS.txt'
       - 'assets/modaryx-pages-finishline.css'
       - 'assets/living-world.js'
       - 'assets/living-world-visual-growth.mjs'
@@ -24,14 +27,14 @@ permissions:
   pull-requests: read
 
 concurrency:
-  group: modaryx-preview-visual-${{ github.ref }}
+  group: modaryx-global-route-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   preview-visual:
     name: Chromium deployed-preview visual capture
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout exact candidate
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -71,8 +74,8 @@ jobs:
           QA_ONLY="$(FILES="$FILES" node -e '
             const files = JSON.parse(process.env.FILES);
             const allowed = new Set([
-              ".github/workflows/modaryx-preview-visual-capture.yml",
-              "qa/check-preview-visual-capture.mjs"
+              ".github/workflows/modaryx-global-route-visual.yml",
+              "qa/check-global-route-visual.mjs"
             ]);
             process.stdout.write(files.length > 0 && files.every((item) => allowed.has(item.filename)) ? "true" : "false");
           ')"
@@ -127,14 +130,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          export MODARYX_VISUAL_OUT="$RUNNER_TEMP/modaryx-preview-visual"
-          node qa/check-preview-visual-capture.mjs
+          export MODARYX_VISUAL_OUT="$RUNNER_TEMP/modaryx-global-route"
+          node qa/check-global-route-visual.mjs
 
       - name: Upload visual evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: modaryx-preview-visual-${{ github.event.pull_request.head.sha }}
-          path: ${{ runner.temp }}/modaryx-preview-visual
+          name: modaryx-global-route-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/modaryx-global-route
           if-no-files-found: error
           retention-days: 7

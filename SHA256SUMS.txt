@@ -18,7 +18,7 @@ eb6f0664c33e98f8918b8cde38cfaea673a39f72f8a6110f39bb0e07d2aab952  ./assets/modar
 261acad337661d82075248de35bf8e8f935d5b2709b5f9dc0ebdf3740c5d1dfc  ./assets/modaryx-mark.svg
 33cb772423a0be1e0f10eb21d883c489dde1a735b5775c2dce2896ea3501e9c5  ./assets/modaryx-platform-refinement.css
 98f50f037117844be8f2e348194952a0398b810a32585c313831e3d14a85d237  ./assets/modaryx-premium-refinement.css
-34a91e01dec43c880d5630df9de99cd0a5ae575ec3bc127bd8263dadd8428798  ./assets/modaryx-search-cinematic-fix.css
+5d56d1d4ff52f695a4d2534e288aefb4b83300545bb39f178f8754ea08ca7d65  ./assets/modaryx-search-cinematic-fix.css
 5b409b4e73b6959a0120d6f5bbd8039f846bdad7b6e313f1f272d956e9ece656  ./assets/modaryx-studio-cinematic-fix.css
 56ef2de2c164aec0e4dcb4c8582e3d25a7e123576d34b78639fea9fff9942334  ./assets/nova-kingdom-panorama.svg
 884fc8a9fa04105a294f8bea4e6c61c7ff0f3de94e227b9412d2f757c5a3c4f4  ./assets/nova-mark-192.png
