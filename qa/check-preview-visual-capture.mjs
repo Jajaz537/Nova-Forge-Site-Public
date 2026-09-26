@@ -1,4 +1,5 @@
 import {spawn} from 'node:child_process';
+import {execFileSync} from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -6,6 +7,7 @@ import path from 'node:path';
 const ORIGIN = (process.env.MODARYX_VISUAL_ORIGIN || '').replace(/\/$/, '');
 const CHROME_BIN = process.env.CHROME_BIN || 'google-chrome';
 const OUT = process.env.MODARYX_VISUAL_OUT || path.join(process.cwd(), 'visual-proof-output');
+const TARGET_SHA = process.env.MODARYX_VISUAL_TARGET_SHA || '';
 const TEMP_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'modaryx-preview-visual-'));
 const USER_DATA_DIR = path.join(TEMP_ROOT, 'chrome-profile');
 const failures = [];
@@ -229,6 +231,47 @@ async function captureCase(cdp, spec) {
   fs.writeFileSync(path.join(OUT, spec.name + '.png'), Buffer.from(shot.data, 'base64'));
   observations[spec.name] = state;
 
+  if (!spec.reduced) {
+    const frames = path.join(OUT, spec.name + '-frames');
+    fs.mkdirSync(frames, {recursive: true});
+    const frame = async (index) => {
+      const image = await cdp.send('Page.captureScreenshot', {
+        format: 'png', fromSurface: true, captureBeyondViewport: false
+      });
+      fs.writeFileSync(path.join(frames, String(index).padStart(2, '0') + '.png'), Buffer.from(image.data, 'base64'));
+    };
+    await frame(0);
+    await sleep(600);
+    await frame(1);
+    await evaluate(cdp, "scrollTo({top: Math.min(300, document.documentElement.scrollHeight - innerHeight), behavior: 'instant'})");
+    await sleep(350);
+    await frame(2);
+    await evaluate(cdp, "scrollTo({top: 0, behavior: 'instant'})");
+    await evaluate(cdp, "document.querySelector('[data-menu-button]')?.click()");
+    await sleep(250);
+    await frame(3);
+    const interaction = await evaluate(cdp, `(() => ({
+      scrollWidth: document.documentElement.scrollWidth,
+      viewportWidth: innerWidth,
+      menuExpanded: document.querySelector('[data-menu-button]')?.getAttribute('aria-expanded'),
+      menuVisible: getComputedStyle(document.querySelector('[data-menu-button]')).display !== 'none',
+      primaryHref: document.querySelector('.modaryx-realm-hero .button.primary')?.getAttribute('href')
+    }))()`);
+    await evaluate(cdp, "document.querySelector('[data-menu-button]')?.click()");
+    await evaluate(cdp, "scrollTo({top: document.documentElement.scrollHeight - innerHeight, behavior: 'instant'})");
+    await sleep(350);
+    await frame(4);
+    interaction.footerSeen = await evaluate(cdp, "document.querySelector('.site-footer')?.getBoundingClientRect().top < innerHeight");
+    await evaluate(cdp, "scrollTo({top: 0, behavior: 'instant'})");
+    await frame(5);
+    execFileSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-framerate', '1',
+      '-i', path.join(frames, '%02d.png'), '-c:v', 'libx264', '-pix_fmt', 'yuv420p',
+      path.join(OUT, spec.name + '.mp4')]);
+    state.interaction = interaction;
+    state.videoFrames = 6;
+    state.video = spec.name + '.mp4';
+  }
+
   assert(state.worldVisualGrowth === 'awaiting-assets', spec.name + ': visual growth must remain awaiting human-approved layered art');
   assert(state.realitySync === 'active', spec.name + ': reality sync not active');
   assert(state.companions.length === 0, spec.name + ': unapproved companion layers must not activate');
@@ -282,6 +325,9 @@ try {
   for (const spec of [
     {name: 'desktop', width: 1440, height: 1000, mobile: false, reduced: false},
     {name: 'mobile', width: 390, height: 844, mobile: true, reduced: false},
+    {name: 'mobile-small', width: 320, height: 640, mobile: true, reduced: false},
+    {name: 'mobile-large', width: 430, height: 932, mobile: true, reduced: false},
+    {name: 'mobile-landscape', width: 844, height: 390, mobile: true, reduced: false},
     {name: 'reduced-motion', width: 1440, height: 1000, mobile: false, reduced: true}
   ]) {
     await captureCase(cdp, spec);
@@ -291,6 +337,7 @@ try {
   const result = {
     marker: failures.length ? 'FAIL_TARGETED_PREVIEW_VISUAL_CAPTURE' : 'PASS_TARGETED_PREVIEW_VISUAL_CAPTURE',
     origin: ORIGIN,
+    targetSha: TARGET_SHA,
     observations,
     failures
   };
