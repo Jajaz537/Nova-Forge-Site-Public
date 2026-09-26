@@ -105,6 +105,7 @@ jobs:
             ')"
             if test -n "$PREVIEW"; then
               echo "MODARYX_VISUAL_ORIGIN=$PREVIEW" >> "$GITHUB_ENV"
+              echo "MODARYX_VISUAL_TARGET_SHA=$TARGET_SHA" >> "$GITHUB_ENV"
               echo "Resolved preview: $PREVIEW"
               exit 0
             fi
