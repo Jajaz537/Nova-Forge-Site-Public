@@ -11,6 +11,7 @@ for line in MANIFEST.read_text(encoding="utf-8").splitlines():
 for new_path in (
     "./assets/modaryx-home-cinematic.css",
     "./assets/modaryx-cinematic-system.css",
+    "./assets/modaryx-realm-canon-hero.png",
     "./assets/modaryx-studio-cinematic-fix.css",
     "./assets/modaryx-search-cinematic-fix.css",
     "./assets/verify-picker.css",

@@ -109,7 +109,7 @@
       preview.textContent = canonicalText(collection);
       return collection;
     } catch {
-      preview.textContent = "Brouillon local incomplet.";
+      preview.textContent = "Complétez les champs pour afficher le résumé.";
       return null;
     }
   }
@@ -148,8 +148,8 @@
   function applyCollection(value) {
     if (Object.keys(value || {}).some(k => !["schemaVersion","id","name","description","ownerProfileId","itemIds","visibility","syncState"].includes(k))) throw new Error("Champ de collection inconnu ; import refusé.");
     if (!catalogReady) throw new Error("Catalogue indisponible ou en cours de chargement.");
-    if (!value || value.schemaVersion !== 1 || (typeof value.id !== "string" || !ID_RE.test(value.id)) || typeof value.name !== "string") throw new Error("Collection V1 invalide.");
-    if (!value.name.trim() || value.name.length > 160 || (value.description !== undefined && (typeof value.description !== "string" || value.description.length > 1200))) throw new Error("Nom ou description de collection invalide ; brouillon précédent conservé.");
+    if (!value || value.schemaVersion !== 1 || (typeof value.id !== "string" || !ID_RE.test(value.id)) || typeof value.name !== "string") throw new Error("Cette copie de collection n’est pas compatible.");
+    if (!value.name.trim() || value.name.length > 160 || (value.description !== undefined && (typeof value.description !== "string" || value.description.length > 1200))) throw new Error("Nom ou description de collection invalide ; collection précédente conservée.");
     if (value.syncState !== "local-only") throw new Error("Seules les collections local-only peuvent être importées sans service de synchronisation.");
     if (value.visibility !== "private-local") throw new Error("La visibilité distante n’est pas disponible sans service réel.");
     if (value.ownerProfileId !== null) throw new Error("Une identité de compte ne peut pas être affirmée dans ce mode local.");
@@ -270,7 +270,7 @@
       submissionPreview.textContent = canonicalText(submission);
       return submission;
     } catch (error) {
-      submissionPreview.textContent = "Brouillon local incomplet.";
+      submissionPreview.textContent = "Complétez les champs pour afficher le résumé.";
       if (showError) submissionStatus.textContent = `Validation bloquée : ${error.message}`;
       return null;
     }
@@ -278,10 +278,10 @@
 
   function applySubmission(value) {
     if (Object.keys(value || {}).some(k => !["schemaVersion","id","kind","targetId","body","title","rating","parentSubmissionId","authorProfileId","syncState","publicationState","moderationState"].includes(k))) throw new Error("Champ de contribution inconnu ; import refusé.");
-    if (!value || value.schemaVersion !== 1 || (typeof value.id !== "string" || !ID_RE.test(value.id))) throw new Error("Contribution locale V1 invalide.");
+    if (!value || value.schemaVersion !== 1 || (typeof value.id !== "string" || !ID_RE.test(value.id))) throw new Error("Cette copie de contribution n’est pas compatible.");
     if (!new Set(["discussion", "review", "comment"]).has(value.kind)) throw new Error("Type de contribution inconnu.");
     if (value.authorProfileId !== null || value.syncState !== "local-only" || value.publicationState !== "local-draft" || value.moderationState !== "not-submitted") {
-      throw new Error("Un brouillon local ne peut affirmer ni auteur distant, ni synchronisation, ni publication, ni modération.");
+      throw new Error("Une contribution privée ne peut affirmer ni auteur distant, ni synchronisation, ni publication, ni modération.");
     }
     const known = new Set(catalogItems.map((item) => item.id));
     if (!known.has(value.targetId)) throw new Error("ID catalogue ciblé inconnu.");
@@ -309,9 +309,9 @@
       const raw = localStorage.getItem(SUBMISSION_KEY);
       if (!raw) return;
       applySubmission(JSON.parse(raw));
-      submissionStatus.textContent = "Brouillon local restauré. Il reste NON PUBLIÉ et non synchronisé.";
+      submissionStatus.textContent = "Contribution restaurée. Elle reste privée et non synchronisée.";
     } catch {
-      submissionStatus.textContent = "Le brouillon local existant est incompatible ; il n’a pas été utilisé.";
+      submissionStatus.textContent = "La contribution locale existante est incompatible ; elle n’a pas été utilisée.";
     }
   }
 
@@ -380,7 +380,7 @@
       selectedIds = new Set(Array.isArray(parsed) ? parsed.filter((id) => known.has(id)) : []);
       renderItems();
       renderPreview();
-      status.textContent = "Favoris locaux copiés dans le brouillon de collection. Rien n’est sauvegardé avant action explicite.";
+      status.textContent = "Favoris locaux ajoutés à la collection. Rien n’est sauvegardé avant une action explicite.";
     } catch {
       status.textContent = "Favoris locaux illisibles ; aucun élément importé.";
     }
@@ -400,7 +400,7 @@
   importButton.addEventListener("click", async () => {
     const file = importFile.files?.[0];
     if (!file) {
-      status.textContent = "Choisissez d’abord un fichier de collection JSON local.";
+      status.textContent = "Choisissez d’abord une copie locale de votre collection.";
       importFile.focus();
       return;
     }
@@ -445,7 +445,7 @@
 
   submissionValidate.addEventListener("click", () => {
     const submission = renderSubmissionPreview(true);
-    if (submission) submissionStatus.textContent = "Brouillon local valide · NON PUBLIÉ · aucune écriture réseau.";
+    if (submission) submissionStatus.textContent = "Contribution valide · PRIVÉE · aucune écriture réseau.";
   });
 
   submissionSave.addEventListener("click", () => {
@@ -453,7 +453,7 @@
       const submission = buildSubmission(true);
       localStorage.setItem(SUBMISSION_KEY, canonicalText(submission));
       submissionPreview.textContent = canonicalText(submission);
-      submissionStatus.textContent = "Brouillon sauvegardé uniquement dans ce navigateur · NON PUBLIÉ.";
+      submissionStatus.textContent = "Contribution sauvegardée uniquement dans ce navigateur · PRIVÉE.";
     } catch (error) {
       submissionStatus.textContent = `Sauvegarde bloquée : ${error.message}`;
     }
@@ -473,7 +473,7 @@
   submissionImport.addEventListener("click", async () => {
     const file = submissionImportFile.files?.[0];
     if (!file) {
-      submissionStatus.textContent = "Choisissez d’abord un brouillon JSON local.";
+      submissionStatus.textContent = "Choisissez d’abord une copie locale de votre contribution.";
       submissionImportFile.focus();
       return;
     }
@@ -482,7 +482,7 @@
       const value = JSON.parse(await file.text());
       if (revision !== revisions.get(submissionStatus)) return;
       applySubmission(value);
-      submissionStatus.textContent = "Brouillon importé en mémoire seulement · NON PUBLIÉ.";
+      submissionStatus.textContent = "Contribution importée en mémoire seulement · PRIVÉE.";
     } catch (error) {
       if (revision !== revisions.get(submissionStatus)) return;
       submissionStatus.textContent = `Import bloqué : ${error.message}`;
@@ -491,7 +491,7 @@
 
   submissionClear.addEventListener("click", () => {
     try { localStorage.removeItem(SUBMISSION_KEY); } catch {
-      submissionStatus.textContent = "Suppression locale impossible. Le brouillon affiché est conservé et n’est pas déclaré effacé.";
+      submissionStatus.textContent = "Suppression locale impossible. La contribution affichée est conservée et n’est pas déclarée effacée.";
       return;
     }
     revise(submissionStatus);
@@ -504,7 +504,7 @@
     submissionFields.parent.value = "";
     updateSubmissionFields();
     renderSubmissionPreview();
-    submissionStatus.textContent = "Brouillon local supprimé de ce navigateur.";
+    submissionStatus.textContent = "Contribution locale supprimée de ce navigateur.";
   });
 
   const remotePanel = document.querySelector("#community-remote");
@@ -587,7 +587,7 @@
       const title = document.createElement("h3");
       title.textContent = "Aucune contribution publiée";
       const copy = document.createElement("p");
-      copy.textContent = "La file publique est vide. Les brouillons locaux et les contributions encore en modération ne sont jamais affichés ici.";
+      copy.textContent = "La file publique est vide. Les contributions privées ou encore en modération ne sont jamais affichées ici.";
       empty.append(title, copy);
       publicList.append(empty);
       setPublicCommunityState("empty", "Aucune contribution publique n’est disponible actuellement.");
@@ -682,7 +682,7 @@
       const title = document.createElement("h3");
       title.textContent = "Publications indisponibles";
       const copy = document.createElement("p");
-      copy.textContent = "La surface publique ne peut pas être vérifiée sur cette origine. Aucun brouillon local n’est affiché à sa place.";
+      copy.textContent = "La surface publique ne peut pas être vérifiée sur cette origine. Aucun contenu privé n’est affiché à sa place.";
       unavailable.append(title, copy);
       publicList.append(unavailable);
       setPublicCommunityState("error", "Impossible de confirmer les contributions publiées pour le moment.");
@@ -860,7 +860,7 @@
         callback(token) {
           remoteTurnstileToken = token;
           remoteSubmit.disabled = false;
-          if (remoteResult) remoteResult.textContent = "Vérification prête. Le brouillon peut être envoyé pour modération.";
+          if (remoteResult) remoteResult.textContent = "Vérification prête. La contribution peut être envoyée pour modération.";
         },
         "expired-callback"() {
           remoteTurnstileToken = "";
@@ -891,7 +891,7 @@
       if (!response.ok || data?.service !== "modaryx-backend") throw new Error("backend-unavailable");
       remoteBackend = data;
     } catch {
-      setRemoteState("unavailable", "Service non provisionné", "Le backend distant n’est pas disponible sur cette origine. Vos brouillons restent strictement locaux.");
+      setRemoteState("unavailable", "Service non provisionné", "Le service distant n’est pas disponible sur cette origine. Vos contributions restent strictement privées.");
       if (remoteResult) remoteResult.textContent = "Aucun contenu n’est envoyé en ligne.";
       return;
     }
@@ -902,7 +902,7 @@
     }
 
     setRemoteLoginEnabled(true);
-    setRemoteState("ready", "Déconnecté", "Connectez-vous pour pouvoir envoyer un brouillon validé vers la file de modération.");
+    setRemoteState("ready", "Déconnecté", "Connectez-vous pour pouvoir envoyer une contribution validée vers la file de modération.");
 
     let session;
     try {
@@ -966,7 +966,7 @@
       remoteTurnstileToken = "";
       if (window.turnstile && remoteTurnstileWidget !== null) window.turnstile.reset(remoteTurnstileWidget);
     } catch {
-      if (remoteResult) remoteResult.textContent = "Envoi non confirmé. Le brouillon local est conservé et rien n’est déclaré publié.";
+      if (remoteResult) remoteResult.textContent = "Envoi non confirmé. La contribution locale est conservée et rien n’est déclaré publié.";
       if (window.turnstile && remoteTurnstileWidget !== null) window.turnstile.reset(remoteTurnstileWidget);
       remoteTurnstileToken = "";
     }
