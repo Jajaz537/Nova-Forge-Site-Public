@@ -6,8 +6,8 @@ body[data-mx-canon=true]::before{content:"";position:fixed;z-index:-3;inset:0;po
 body[data-mx-canon=true]::after{content:"";position:fixed;z-index:-2;inset:0;pointer-events:none;opacity:.42;background:radial-gradient(ellipse at 50% 0,rgba(255,224,154,.06),transparent 45rem),linear-gradient(90deg,rgba(217,182,107,.018) 1px,transparent 1px),linear-gradient(rgba(112,153,197,.015) 1px,transparent 1px);background-size:auto,72px 72px,72px 72px;-webkit-mask-image:linear-gradient(#000 0 55%,transparent 96%);mask-image:linear-gradient(#000 0 55%,transparent 96%)}
 body[data-mx-world=home]{--mx-scene:url("./modaryx-wolf-dragon-hero.webp");--mx-scene-position:68% center}
 body[data-mx-world=community]{--mx-scene:url("./modaryx-realm-community-vf.webp");--mx-scene-position:62% center}
-body[data-mx-world=profiles]{--mx-scene:url("./modaryx-world-profiles.webp");--mx-scene-position:65% center}
-body[data-mx-world=ecosystem]{--mx-scene:url("./modaryx-world-ecosystem.webp");--mx-scene-position:67% center}
+body[data-mx-world=profiles]{--mx-scene:url("./modaryx-realm-profiles-vf.webp");--mx-scene-position:65% center}
+body[data-mx-world=ecosystem]{--mx-scene:url("./modaryx-realm-ecosystem-vf.webp");--mx-scene-position:67% center}
 body[data-mx-world=games],body[data-mx-world=gta],body[data-mx-world=rdr2]{--mx-scene:url("./modaryx-world-games.webp");--mx-scene-position:66% center}
 body[data-mx-world=gta]{--mx-scene-accent:rgba(223,137,79,.25)}
 body[data-mx-world=rdr2]{--mx-scene-accent:rgba(183,111,62,.26)}
