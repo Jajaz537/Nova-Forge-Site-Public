@@ -243,10 +243,10 @@ async function captureCase(cdp, spec) {
     await frame(0);
     await sleep(600);
     await frame(1);
-    await evaluate(cdp, 'scrollTo(0, Math.min(300, document.documentElement.scrollHeight - innerHeight))');
+    await evaluate(cdp, "scrollTo({top: Math.min(300, document.documentElement.scrollHeight - innerHeight), behavior: 'instant'})");
     await sleep(350);
     await frame(2);
-    await evaluate(cdp, 'scrollTo(0, 0)');
+    await evaluate(cdp, "scrollTo({top: 0, behavior: 'instant'})");
     await evaluate(cdp, "document.querySelector('[data-menu-button]')?.click()");
     await sleep(250);
     await frame(3);
@@ -258,10 +258,11 @@ async function captureCase(cdp, spec) {
       primaryHref: document.querySelector('.modaryx-realm-hero .button.primary')?.getAttribute('href')
     }))()`);
     await evaluate(cdp, "document.querySelector('[data-menu-button]')?.click()");
-    await evaluate(cdp, 'scrollTo(0, document.documentElement.scrollHeight - innerHeight)');
+    await evaluate(cdp, "scrollTo({top: document.documentElement.scrollHeight - innerHeight, behavior: 'instant'})");
     await sleep(350);
     await frame(4);
-    await evaluate(cdp, 'scrollTo(0, 0)');
+    interaction.footerSeen = await evaluate(cdp, "document.querySelector('.site-footer')?.getBoundingClientRect().top < innerHeight");
+    await evaluate(cdp, "scrollTo({top: 0, behavior: 'instant'})");
     await frame(5);
     execFileSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-framerate', '1',
       '-i', path.join(frames, '%02d.png'), '-c:v', 'libx264', '-pix_fmt', 'yuv420p',
@@ -326,6 +327,7 @@ try {
     {name: 'mobile', width: 390, height: 844, mobile: true, reduced: false},
     {name: 'mobile-small', width: 320, height: 640, mobile: true, reduced: false},
     {name: 'mobile-large', width: 430, height: 932, mobile: true, reduced: false},
+    {name: 'mobile-landscape', width: 844, height: 390, mobile: true, reduced: false},
     {name: 'reduced-motion', width: 1440, height: 1000, mobile: false, reduced: true}
   ]) {
     await captureCase(cdp, spec);
