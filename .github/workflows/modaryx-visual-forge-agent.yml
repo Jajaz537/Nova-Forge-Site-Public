@@ -69,12 +69,12 @@ jobs:
           fi
           command -v ffmpeg
           mkdir -p visual-proof/frames
-          find visual-proof -type f \( -name '*.mp4' -o -name '*.webm' \) -print0 | while IFS= read -r -d '' video; do
+          while IFS= read -r video; do
             base="$(basename -- "$video")"; base="${base%.*}"; base="${base#-}"
             video_abs="$(realpath -- "$video")"
             out_abs="$(realpath visual-proof/frames)/${base}-%02d.jpg"
             ffmpeg -hide_banner -loglevel error -y -i "$video_abs" -vf "fps=1/12,scale='min(1280,iw)':-2" -frames:v 8 "$out_abs"
-          done
+          done < <(find visual-proof -type f \( -name '*.mp4' -o -name '*.webm' \) -print)
           test -n "$(find visual-proof/frames -name '*.jpg' -print -quit)"
 
       - name: Run bounded visual agent
