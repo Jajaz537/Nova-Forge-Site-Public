@@ -74,13 +74,13 @@ body.community-page .hero,
   background:
     linear-gradient(94deg,rgba(5,8,9,.98) 0,rgba(8,13,13,.91) 43%,rgba(7,12,12,.45) 72%,rgba(6,9,10,.78) 100%),
     radial-gradient(circle at 22% 72%,rgba(83,126,91,.18),transparent 22rem),
-    url("./modaryx-world-portals.webp") 26% center/cover no-repeat;
+    url("./modaryx-realm-canon-hero.png") 26% center/cover no-repeat;
 }
 .profiles-hero{
   background:
     linear-gradient(96deg,rgba(6,8,9,.98) 0,rgba(10,14,13,.92) 46%,rgba(9,14,13,.44) 75%,rgba(6,9,10,.8) 100%),
     radial-gradient(circle at 76% 26%,rgba(112,164,219,.18),transparent 19rem),
-    url("./modaryx-world-portals.webp") 38% center/cover no-repeat;
+    url("./modaryx-realm-canon-hero.png") 38% center/cover no-repeat;
 }
 
 /* Catalogue / création : même monde, deux signatures lumineuses distinctes. */
@@ -88,32 +88,32 @@ body.community-page .hero,
   background:
     linear-gradient(96deg,rgba(5,8,9,.98) 0,rgba(8,12,13,.9) 44%,rgba(8,12,12,.4) 76%,rgba(6,9,10,.78) 100%),
     radial-gradient(circle at 84% 30%,rgba(217,168,80,.24),transparent 17rem),
-    url("./modaryx-world-portals.webp") 78% center/cover no-repeat;
+    url("./modaryx-realm-canon-hero.png") 78% center/cover no-repeat;
 }
 .studio-hero{
   background:
     linear-gradient(100deg,rgba(6,8,10,.98),rgba(9,13,16,.92) 48%,rgba(8,14,17,.5) 76%,rgba(6,9,11,.8)),
     radial-gradient(circle at 82% 30%,rgba(112,164,219,.22),transparent 18rem),
-    url("./modaryx-world-portals.webp") 88% center/cover no-repeat;
+    url("./modaryx-realm-canon-hero.png") 88% center/cover no-repeat;
 }
 
 /* Pages jeux : deux atmosphères dans la même famille visuelle. */
 body.game-hub-page .hero{
   background:
     linear-gradient(98deg,rgba(5,8,9,.98),rgba(9,13,13,.9) 46%,rgba(7,12,12,.4) 76%,rgba(6,9,10,.78)),
-    url("./modaryx-world-portals.webp") 72% center/cover no-repeat;
+    url("./modaryx-realm-canon-hero.png") 72% center/cover no-repeat;
 }
 body.game-hub-page:has(.page-trail a[href*="gta-6"]) .hero{
   background:
     linear-gradient(98deg,rgba(7,8,7,.98),rgba(15,13,9,.9) 44%,rgba(18,13,7,.38) 74%,rgba(7,9,9,.78)),
     radial-gradient(circle at 82% 28%,rgba(229,164,70,.28),transparent 19rem),
-    url("./modaryx-world-portals.webp") 84% center/cover no-repeat;
+    url("./modaryx-realm-canon-hero.png") 84% center/cover no-repeat;
 }
 body.game-hub-page:has(.page-trail a[href*="red-dead-redemption-2"]) .hero{
   background:
     linear-gradient(98deg,rgba(5,8,10,.98),rgba(7,14,15,.9) 44%,rgba(6,16,17,.38) 74%,rgba(6,9,10,.78)),
     radial-gradient(circle at 24% 72%,rgba(75,118,104,.23),transparent 22rem),
-    url("./modaryx-world-portals.webp") 34% center/cover no-repeat;
+    url("./modaryx-realm-canon-hero.png") 34% center/cover no-repeat;
 }
 
 /* Projets / 404 : composition éditoriale, moins "hero cloné". */
@@ -127,7 +127,7 @@ body.game-hub-page:has(.page-trail a[href*="red-dead-redemption-2"]) .hero{
   background:
     linear-gradient(100deg,rgba(6,8,9,.98),rgba(9,14,14,.9) 48%,rgba(8,13,13,.45) 76%,rgba(6,9,10,.78)),
     radial-gradient(circle at 28% 74%,rgba(70,112,90,.18),transparent 20rem),
-    url("./modaryx-world-portals.webp") 48% center/cover no-repeat;
+    url("./modaryx-realm-canon-hero.png") 48% center/cover no-repeat;
 }
 
 /* Les vrais composants restent visuels ; les grands conteneurs cessent d'être des cartes. */
@@ -227,8 +227,8 @@ main{background:linear-gradient(180deg,#e9e2d3,#dcd4c3 54%,#eae4d7);padding-bott
 .hero:after,.catalog-hero:after,.project-hero:after,.studio-hero:after,.profiles-hero:after{left:0;right:0;background:linear-gradient(90deg,#d4a75a,#6f9ba5,transparent 82%)}
 
 /* Paysage humain : communauté et profils, cadrage sur les compagnons. */
-body.community-page .hero{background:linear-gradient(90deg,rgba(7,14,11,.94) 0,rgba(8,16,13,.76) 42%,rgba(8,15,13,.18) 72%),url("./modaryx-world-community.webp") 52% center/cover no-repeat}
-.profiles-hero{background:linear-gradient(90deg,rgba(7,14,11,.95),rgba(8,16,13,.76) 44%,rgba(8,15,13,.2) 72%),url("./modaryx-world-profiles.webp") 58% center/cover no-repeat}
+body.community-page .hero{background:linear-gradient(90deg,rgba(7,14,11,.94) 0,rgba(8,16,13,.76) 42%,rgba(8,15,13,.18) 72%),url("./modaryx-realm-canon-hero.png") 52% center/cover no-repeat}
+.profiles-hero{background:linear-gradient(90deg,rgba(7,14,11,.95),rgba(8,16,13,.76) 44%,rgba(8,15,13,.2) 72%),url("./modaryx-realm-canon-hero.png") 58% center/cover no-repeat}
 
 /* Découverte : château et rivière, sans réutiliser l'ancien panorama. */
 .catalog-hero{background:linear-gradient(90deg,rgba(8,15,12,.95),rgba(9,17,14,.76) 43%,rgba(8,15,13,.14) 75%),url("./modaryx-wolf-dragon-hero.webp") 72% center/cover no-repeat}

@@ -7,7 +7,7 @@
   <meta name="color-scheme" content="dark">
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
-  <meta name="description" content="Creator Studio MODARYX MODS : éditer localement un Universal Mod Manifest sans publication implicite ni backend obligatoire.">
+  <meta name="description" content="Creator Studio MODARYX MODS : éditer localement un préparer une création localement avant toute publication.">
   <title>Creator Studio — MODARYX MODS</title>
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
@@ -18,7 +18,7 @@
   <link rel="canonical" href="https://modaryxmods.com/creator-studio">
   <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
-  <link rel="preload" as="image" href="./assets/modaryx-world-ecosystem.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="./assets/modaryx-realm-canon-hero.png" fetchpriority="high">
   <link rel="stylesheet" href="./assets/tokens.css">
   <link rel="stylesheet" href="./assets/site.css">
   <link rel="stylesheet" href="./assets/creator-studio.css">
@@ -43,19 +43,19 @@
     <nav class="page-trail" aria-label="Fil d’Ariane"><a href="./index.html">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Creator Studio</span></nav>
     
     <section class="studio-hero" aria-labelledby="studio-title">
-      <p class="eyebrow">Creator Studio V2 · brouillon local</p>
+      <p class="eyebrow">Atelier de création MODARYX</p>
       <h1 id="studio-title">Préparez la fiche de votre création.</h1>
-      <p class="lede">Décrivez votre projet, son jeu cible et ses droits. Le Studio contrôle le format de votre fiche, appelée manifeste, puis vous permet de l’enregistrer dans ce navigateur ou de l’exporter en JSON.</p>
-      <div class="release-status"><span class="status-dot" aria-hidden="true"></span><span><strong>NON PUBLIÉ.</strong> Les brouillons restent dans ce navigateur uniquement après action explicite. Un état déclaré n’est jamais présenté comme une preuve vérifiée par le Studio.</span></div>
+      <p class="lede">Décrivez votre projet, son jeu cible et ses droits. Le Studio vous guide pour préparer une fiche claire et portable, l’enregistrer dans ce navigateur et conserver une copie locale lorsque vous le souhaitez.</p>
+      <div class="release-status"><span class="status-dot" aria-hidden="true"></span><span><strong>NON PUBLIÉ.</strong> Vos projets restent dans ce navigateur uniquement après action explicite. Un état déclaré n’est jamais présenté comme une preuve vérifiée par le Studio.</span></div>
     </section>
 
     <nav class="studio-step-links" aria-label="Étapes du Studio"><a href="#studio-identity">Identité du contenu</a><a href="#studio-game">Jeu cible</a><a href="#studio-compatibility">Compatibilité</a><a href="#studio-rights">Créateur et droits</a><a href="#studio-provenance">Provenance</a><a href="#studio-files">Fichiers</a></nav>
-    <section class="studio-layout" aria-label="Éditeur de manifeste">
+    <section class="studio-layout" aria-label="Éditeur de projet">
       <form id="creator-form" class="studio-form" novalidate>
-        <div><p class="eyebrow">Import</p><h2>Reprendre un brouillon</h2></div>
-        <fieldset id="studio-import"><legend>Importer un brouillon</legend>
-          <label class="wide" for="import-draft-file"><span>Fichier JSON local</span><input id="import-draft-file" name="importDraft" type="file" accept="application/json,.json"></label>
-          <div class="wide studio-inline-actions"><button class="button" id="import-draft" type="button" aria-describedby="import-draft-help">Importer le brouillon</button><span id="import-draft-help">Seuls les manifestes verrouillés et non publiés sont acceptés.</span></div>
+        <div><p class="eyebrow">Import</p><h2>Reprendre un projet</h2></div>
+        <fieldset id="studio-import"><legend>Importer un projet</legend>
+          <label class="wide" for="import-draft-file"><span>Copie locale du projet</span><input id="import-draft-file" name="importDraft" type="file" accept="application/json,.json"></label>
+          <div class="wide studio-inline-actions"><button class="button" id="import-draft" type="button" aria-describedby="import-draft-help">Importer le projet</button><span id="import-draft-help">Seules les copies locales compatibles et non publiées sont acceptées.</span></div>
         </fieldset>
 
         <div><p class="eyebrow">Identité</p><h2>Décrire le contenu</h2></div>
@@ -106,27 +106,27 @@
           <label class="wide" for="files"><span>Fichiers — un par ligne</span><textarea id="files" name="files" placeholder="textures/main.dds | 1024 | 0123…64 hex… | image/vnd-ms.dds | false"></textarea><small>Format : <code>path | size | sha256 | mediaType | executable</code>. Aucun fichier n’est lu ni exécuté par le Studio.</small></label>
         </fieldset>
 
-        <div class="studio-note"><strong>Distribution verrouillée.</strong> Tout brouillon généré ou importé est forcé à <code>state: locked</code>, <code>downloadable: false</code> et <code>releaseReceipt: null</code>. Le SHA-256 décrit l’intégrité attendue des octets ; il ne prouve ni auteur, ni licence, ni provenance.</div>
+        <div class="studio-note"><strong>Distribution verrouillée.</strong> Un projet préparé ici reste privé et non téléchargeable publiquement. Une empreinte d’intégrité peut vérifier un fichier, mais ne prouve ni son auteur, ni sa licence, ni sa provenance.</div>
         <div class="studio-actions">
           <button class="button primary" type="submit">Valider l’aperçu</button>
           <button class="button" id="save-draft" type="button">Sauvegarder localement</button>
-          <button class="button" id="download-draft" type="button">Exporter JSON déterministe</button>
-          <button class="button" id="clear-draft" type="button">Effacer le brouillon local</button>
+          <button class="button" id="download-draft" type="button">Télécharger une copie du projet</button>
+          <button class="button" id="clear-draft" type="button">Effacer le projet local</button>
         </div>
-        <div id="schema-status" class="studio-status" role="status" aria-live="polite">Schéma public non chargé.</div>
-        <p id="studio-status" class="studio-status" role="status" aria-live="polite">Aucun brouillon sauvegardé dans cette session.</p>
+        <div id="schema-status" class="studio-status" role="status" aria-live="polite">Vérification locale en préparation.</div>
+        <p id="studio-status" class="studio-status" role="status" aria-live="polite">Aucun projet sauvegardé dans cette session.</p>
       </form>
 
       <aside class="studio-preview" aria-labelledby="preview-title">
-        <p class="eyebrow">Universal Mod Manifest v1</p>
-        <h2 id="preview-title">Votre fichier JSON</h2>
-        <p>Le JSON ci-dessous est calculé localement et trié de façon déterministe. Il ne constitue ni une publication, ni une signature, ni une attestation de provenance ou de mesure.</p>
-        <pre id="manifest-preview" tabindex="0" aria-label="Aperçu JSON du manifeste">{}</pre>
-        <div class="actions"><a class="button" href="./schemas/universal-mod-manifest.schema.json">Ouvrir le schéma public</a><a class="button" href="./security.html">Contrat de confiance</a></div>
+        <p class="eyebrow">Aperçu du projet</p>
+        <h2 id="preview-title">Votre fiche en préparation</h2>
+        <p>Vérifiez ici les informations de votre création avant de sauvegarder ou de conserver une copie de votre projet. Les détails techniques restent disponibles dans la documentation, sans encombrer le parcours principal.</p>
+        <details class="modaryx-disclosure studio-technical-details" hidden aria-hidden="true"><summary>Informations avancées</summary><pre id="manifest-preview" class="studio-technical-preview" tabindex="-1" aria-label="Informations avancées du projet">Complétez les champs pour afficher le résumé.</pre></details>
+        <div class="actions"><a class="button" href="./documentation.html">Documentation technique</a><a class="button" href="./security.html">Sécurité et confiance</a></div>
       </aside>
     </section>
   </main>
 
-  <footer class="site-footer"><div><strong>MODARYX MODS</strong><p>Explorez des créations et préparez vos projets avec des outils locaux.</p></div><nav aria-label="Navigation de pied de page"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./profiles.html">Profils</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a><a href="./downloads.html">Téléchargements</a><a href="./documentation.html#privacy">Données locales</a><a href="./public-status.json">Statut public</a></nav></footer>
+  <footer class="site-footer"><div><strong>MODARYX MODS</strong><p>Explorez des créations et préparez vos projets avec des outils locaux.</p></div><nav aria-label="Navigation de pied de page"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./profiles.html">Profils</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a><a href="./downloads.html">Téléchargements</a><a href="./documentation.html#privacy">Données locales</a><a href="./verify.html">Statut public</a></nav></footer>
 </body>
 </html>

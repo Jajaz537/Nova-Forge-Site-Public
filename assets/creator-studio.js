@@ -151,8 +151,8 @@
     if (!schema) return ["Schéma public indisponible : export bloqué en mode fail-closed."];
     if (!window.NovaJsonSchemaLite?.validate) return ["Validateur local du schéma indisponible."];
     const errors = window.NovaJsonSchemaLite.validate(schema, manifest);
-    if (manifest.distribution?.state !== "locked" || manifest.distribution?.downloadable !== false) errors.push("$.distribution: un brouillon Studio doit rester locked/downloadable=false");
-    if (manifest.releaseReceipt !== null) errors.push("$.releaseReceipt: un brouillon Studio doit rester null");
+    if (manifest.distribution?.state !== "locked" || manifest.distribution?.downloadable !== false) errors.push("La distribution du projet doit rester verrouillée et non téléchargeable");
+    if (manifest.releaseReceipt !== null) errors.push("Un projet privé ne peut pas contenir de justificatif de publication");
     if (manifest.compatibility?.evidence === "measured" && !RECEIPT_RE.test(manifest.compatibility?.evidenceReceipt || "")) errors.push("$.compatibility.evidenceReceipt: receipt requis pour Mesuré");
     if (manifest.provenance?.state === "verified" && !RECEIPT_RE.test(manifest.provenance?.receiptId || "")) errors.push("$.provenance.receiptId: receipt requis pour Vérifié");
     return errors;
@@ -200,14 +200,14 @@
         : errors.length
           ? validationRequested
             ? `À corriger : ${errors.length} point(s).`
-            : "Votre brouillon est en cours. Renseignez les champs obligatoires, puis choisissez Valider l’aperçu."
-          : "Format du brouillon conforme. Cela ne vérifie ni la provenance, ni la signature, ni la compatibilité réelle.";
+            : "Votre projet est en cours. Renseignez les champs obligatoires, puis choisissez Valider l’aperçu."
+          : "Format du projet conforme. Cela ne vérifie ni la provenance, ni la signature, ni la compatibilité réelle.";
       if (schema && validationRequested && errors.length) renderErrorList(errors);
       return {manifest, errors};
     } catch (error) {
       lastManifest = null;
-      preview.textContent = "Brouillon incomplet : corrigez les champs signalés pour actualiser l’aperçu.";
-      schemaStatus.textContent = `Brouillon non valide : ${error.message}`;
+      preview.textContent = "Projet incomplet : corrigez les champs signalés pour actualiser l’aperçu.";
+      schemaStatus.textContent = `Projet non valide : ${error.message}`;
       return {manifest: null, errors: [error.message]};
     }
   }
@@ -222,7 +222,7 @@
     }
     const result = render();
     if (!result.manifest || result.errors.length) {
-      status.textContent = "Brouillon bloqué : corrigez la validation locale avant sauvegarde ou export.";
+      status.textContent = "Projet bloqué : corrigez la validation locale avant sauvegarde ou export.";
       return null;
     }
     return result.manifest;
@@ -233,10 +233,10 @@
 
   function applyManifest(manifest) {
     if (!manifest || manifest.schemaVersion !== 1 || manifest.distribution?.state !== "locked" || manifest.distribution?.downloadable !== false || manifest.releaseReceipt !== null) {
-      throw new Error("Seuls les brouillons UMM v1 verrouillés, non téléchargeables et sans releaseReceipt peuvent être importés.");
+      throw new Error("Seuls les projets UMM compatibles, verrouillés, non téléchargeables et sans justificatif de publication peuvent être importés.");
     }
     const importErrors = schemaErrors(manifest);
-    if (importErrors.length) throw new Error(`Brouillon non conforme : ${importErrors.slice(0, 3).join(" · ")}`);
+    if (importErrors.length) throw new Error(`Projet non conforme : ${importErrors.slice(0, 3).join(" · ")}`);
     const mapping = {
       contentId: manifest.content?.id, version: manifest.content?.version, name: manifest.content?.name, kind: manifest.content?.kind, summary: manifest.content?.summary,
       gameId: manifest.target?.gameId, gameName: manifest.target?.gameName, gameVersions: (manifest.target?.versions || []).join(", "), gameLoaders: (manifest.target?.loaders || []).join(", "),
@@ -252,7 +252,7 @@
     if (result.errors.length) {
       for (const [key, node] of Object.entries(fields)) if (node) node.value = previous[key];
       render();
-      throw new Error(`Import refusé, brouillon précédent conservé : ${result.errors.slice(0, 3).join(" · ")}`);
+      throw new Error(`Import refusé, projet précédent conservé : ${result.errors.slice(0, 3).join(" · ")}`);
     }
   }
 
@@ -277,7 +277,7 @@
         const saved = JSON.parse(raw);
         if (saved?.draftSchema === 2) {
           applyManifest(saved.manifest);
-          status.textContent = "Brouillon V2 restauré depuis ce navigateur uniquement. Aucune donnée n’a été envoyée.";
+          status.textContent = "Projet restauré depuis ce navigateur uniquement. Aucune donnée n’a été envoyée.";
           return;
         }
       }
@@ -290,9 +290,9 @@
         if (fields[key] && typeof legacyMap[key] === "string") fields[key].value = legacyMap[key];
       }
       render();
-      status.textContent = "Ancien brouillon V1 chargé en mémoire. Il ne sera migré vers V2 qu’après une sauvegarde explicite.";
+      status.textContent = "Ancien projet chargé en mémoire. Il sera actualisé uniquement après une sauvegarde explicite.";
     } catch {
-      status.textContent = "Le brouillon local existant est illisible ou incompatible ; il n’a pas été utilisé.";
+      status.textContent = "Le projet local existant est illisible ou incompatible ; il n’a pas été utilisé.";
     }
   }
 
@@ -300,7 +300,7 @@
     event.preventDefault();
     const manifest = requireValidDraft();
     if (!manifest) return;
-    status.textContent = "Brouillon validé localement. Rien n’a été sauvegardé ni publié automatiquement.";
+    status.textContent = "Projet validé localement. Rien n’a été sauvegardé ni publié automatiquement.";
   });
 
   saveButton.addEventListener("click", () => {
@@ -308,16 +308,16 @@
     if (!manifest) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({draftSchema: 2, manifest: canonicalize(manifest)}));
-      status.textContent = "Brouillon NON PUBLIÉ sauvegardé uniquement dans ce navigateur.";
+      status.textContent = "Projet privé sauvegardé uniquement dans ce navigateur.";
     } catch {
-      status.textContent = "Sauvegarde locale indisponible. Le brouillon reste visible dans cette page seulement.";
+      status.textContent = "Sauvegarde locale indisponible. Le projet reste visible dans cette page seulement.";
     }
   });
 
   importButton.addEventListener("click", async () => {
     const file = importFile.files?.[0];
     if (!file) {
-      status.textContent = "Choisissez d’abord un fichier JSON local à importer.";
+      status.textContent = "Choisissez d’abord une copie locale à importer.";
       importFile.focus();
       return;
     }
@@ -329,7 +329,7 @@
       const imported = JSON.parse(await file.text());
       if (revision !== draftRevision) return;
       applyManifest(imported);
-      status.textContent = "Brouillon importé localement et validé. Il n’est ni sauvegardé ni publié tant que vous ne le demandez pas explicitement.";
+      status.textContent = "Projet importé localement et validé. Il n’est ni sauvegardé ni publié tant que vous ne le demandez pas explicitement.";
     } catch (error) {
       if (revision !== draftRevision) return;
       status.textContent = `Import refusé : ${error.message}`;
@@ -341,7 +341,7 @@
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem(LEGACY_STORAGE_KEY);
     } catch {
-      status.textContent = "Suppression locale impossible ou incomplète. Le brouillon affiché est conservé ; les données stockées ne sont pas déclarées effacées.";
+      status.textContent = "Suppression locale impossible ou incomplète. Le projet affiché est conservé ; les données stockées ne sont pas déclarées effacées.";
       return;
     }
     draftEdited = true;
@@ -352,7 +352,7 @@
     lastManifest = null;
     preview.textContent = "{}";
     render();
-    status.textContent = "Brouillons locaux effacés. Aucune suppression distante n’était nécessaire.";
+    status.textContent = "Projets locaux effacés. Aucune suppression distante n’était nécessaire.";
     fields.contentId?.focus();
   });
 
@@ -371,9 +371,9 @@
       anchor.rel = "noopener";
       document.body.append(anchor);
       anchor.click();
-      status.textContent = "Export JSON préparé. Vérifiez les téléchargements de votre navigateur. Le brouillon reste NON PUBLIÉ.";
+      status.textContent = "Copie du projet préparée. Vérifiez les téléchargements de votre navigateur. Le projet reste privé.";
     } catch {
-      status.textContent = "Export impossible dans ce navigateur. Votre brouillon est conservé ; vous pouvez réessayer ou enregistrer une copie locale.";
+      status.textContent = "Copie impossible dans ce navigateur. Votre projet est conservé ; vous pouvez réessayer ou enregistrer une copie locale.";
     } finally {
       anchor?.remove();
       if (url) setTimeout(() => URL.revokeObjectURL(url), 1000);

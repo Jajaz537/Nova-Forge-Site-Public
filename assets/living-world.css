@@ -39,3 +39,19 @@ html[data-motion=reduced] .modaryx-realm-art,
 html[data-motion=reduced] .modaryx-realm-hero:before,
 html[data-motion=reduced] .living-world-status [data-world-status][data-world-ready=true]:before{animation:none!important;transform:none!important}
 @media(prefers-reduced-motion:reduce){.modaryx-realm-art,.modaryx-realm-hero:before,.living-world-status [data-world-status][data-world-ready=true]:before{animation:none!important;transform:none!important}}
+
+/* Privacy-preserving coarse local season/daypart ambience. Weather styling activates only when the same-origin endpoint reports live data. */
+html[data-local-season=winter] .modaryx-realm-hero{--world-veil:rgba(126,166,204,.11)}
+html[data-local-season=summer] .modaryx-realm-hero{--world-glow:rgba(255,197,96,.2)}
+html[data-local-season=autumn] .modaryx-realm-hero{--world-glow:rgba(222,139,72,.19)}
+html[data-local-season=spring] .modaryx-realm-hero{--world-veil:rgba(108,160,128,.06)}
+html[data-local-daypart=night] .modaryx-realm-art{filter:saturate(.88) brightness(.78) contrast(1.04)}
+html[data-local-daypart=dawn] .modaryx-realm-art{filter:saturate(.96) brightness(.92)}
+html[data-local-daypart=dusk] .modaryx-realm-art{filter:saturate(1.02) brightness(.9) sepia(.04)}
+html[data-local-weather=rain] .modaryx-realm-hero:after,html[data-local-weather=snow] .modaryx-realm-hero:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.28}
+html[data-local-weather=rain] .modaryx-realm-hero:after{background:repeating-linear-gradient(104deg,transparent 0 14px,rgba(185,210,230,.18) 15px 16px,transparent 17px 31px);animation:modaryx-local-rain 1.2s linear infinite}
+html[data-local-weather=snow] .modaryx-realm-hero:after{background-image:radial-gradient(circle,rgba(244,249,255,.72) 0 1px,transparent 1.8px);background-size:24px 30px;animation:modaryx-local-snow 8s linear infinite}
+@keyframes modaryx-local-rain{to{background-position:-38px 72px}}
+@keyframes modaryx-local-snow{to{background-position:18px 70px}}
+@media(prefers-reduced-motion:reduce){html[data-local-weather=rain] .modaryx-realm-hero:after,html[data-local-weather=snow] .modaryx-realm-hero:after{animation:none!important}}
+html[data-motion=reduced][data-local-weather=rain] .modaryx-realm-hero:after,html[data-motion=reduced][data-local-weather=snow] .modaryx-realm-hero:after{animation:none!important}
