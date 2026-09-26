@@ -1,4 +1,5 @@
 import {spawn} from 'node:child_process';
+import {execFileSync} from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -6,6 +7,7 @@ import path from 'node:path';
 const ORIGIN = (process.env.MODARYX_VISUAL_ORIGIN || '').replace(/\/$/, '');
 const CHROME_BIN = process.env.CHROME_BIN || 'google-chrome';
 const OUT = process.env.MODARYX_VISUAL_OUT || path.join(process.cwd(), 'visual-proof-output');
+const TARGET_SHA = process.env.MODARYX_VISUAL_TARGET_SHA || '';
 const TEMP_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'modaryx-preview-visual-'));
 const USER_DATA_DIR = path.join(TEMP_ROOT, 'chrome-profile');
 const failures = [];
@@ -229,6 +231,47 @@ async function captureCase(cdp, spec) {
   fs.writeFileSync(path.join(OUT, spec.name + '.png'), Buffer.from(shot.data, 'base64'));
   observations[spec.name] = state;
 
+  if (!spec.reduced) {
+    const frames = path.join(OUT, spec.name + '-frames');
+    fs.mkdirSync(frames, {recursive: true});
+    const frame = async (index) => {
+      const image = await cdp.send('Page.captureScreenshot', {
+        format: 'png', fromSurface: true, captureBeyondViewport: false
+      });
+      fs.writeFileSync(path.join(frames, String(index).padStart(2, '0') + '.png'), Buffer.from(image.data, 'base64'));
+    };
+    await frame(0);
+    await sleep(600);
+    await frame(1);
+    await evaluate(cdp, "scrollTo({top: Math.min(300, document.documentElement.scrollHeight - innerHeight), behavior: 'instant'})");
+    await sleep(350);
+    await frame(2);
+    await evaluate(cdp, "scrollTo({top: 0, behavior: 'instant'})");
+    await evaluate(cdp, "document.querySelector('[data-menu-button]')?.click()");
+    await sleep(250);
+    await frame(3);
+    const interaction = await evaluate(cdp, `(() => ({
+      scrollWidth: document.documentElement.scrollWidth,
+      viewportWidth: innerWidth,
+      menuExpanded: document.querySelector('[data-menu-button]')?.getAttribute('aria-expanded'),
+      menuVisible: getComputedStyle(document.querySelector('[data-menu-button]')).display !== 'none',
+      primaryHref: document.querySelector('.modaryx-realm-hero .button.primary')?.getAttribute('href')
+    }))()`);
+    await evaluate(cdp, "document.querySelector('[data-menu-button]')?.click()");
+    await evaluate(cdp, "scrollTo({top: document.documentElement.scrollHeight - innerHeight, behavior: 'instant'})");
+    await sleep(350);
+    await frame(4);
+    interaction.footerSeen = await evaluate(cdp, "document.querySelector('.site-footer')?.getBoundingClientRect().top < innerHeight");
+    await evaluate(cdp, "scrollTo({top: 0, behavior: 'instant'})");
+    await frame(5);
+    execFileSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-framerate', '1',
+      '-i', path.join(frames, '%02d.png'), '-c:v', 'libx264', '-pix_fmt', 'yuv420p',
+      path.join(OUT, spec.name + '.mp4')]);
+    state.interaction = interaction;
+    state.videoFrames = 6;
+    state.video = spec.name + '.mp4';
+  }
+
   assert(state.worldVisualGrowth === 'awaiting-assets', spec.name + ': visual growth must remain awaiting human-approved layered art');
   assert(state.realitySync === 'active', spec.name + ': reality sync not active');
   assert(state.companions.length === 0, spec.name + ': unapproved companion layers must not activate');
@@ -242,6 +285,68 @@ async function captureCase(cdp, spec) {
     assert(state.environmentAnimation === 'none', spec.name + ': approved hero animation still active under reduced motion');
     assert(state.environmentTransition === '0s', spec.name + ': approved hero transition still active under reduced motion');
   }
+}
+
+async function captureCatalog(cdp, spec) {
+  await cdp.send('Emulation.setDeviceMetricsOverride', {
+    width: spec.width, height: spec.height, deviceScaleFactor: 1, mobile: spec.mobile
+  });
+  const loaded = cdp.once('Page.loadEventFired', 15000);
+  const nav = await cdp.send('Page.navigate', {url: ORIGIN + '/catalog.html?preview-visual-proof=' + spec.name});
+  if (nav.errorText) throw new Error(spec.name + ' navigation failed: ' + nav.errorText);
+  await loaded;
+  await waitFor(cdp, "document.querySelectorAll('.catalog-card').length === 3", spec.name + ' catalogue ready');
+  await sleep(400);
+  const prefix = 'catalog-' + spec.name;
+  const frameDir = path.join(OUT, prefix + '-frames');
+  fs.mkdirSync(frameDir, {recursive: true});
+  const frame = async (number) => {
+    const shot = await cdp.send('Page.captureScreenshot', {
+      format: 'png', fromSurface: true, captureBeyondViewport: false
+    });
+    const bytes = Buffer.from(shot.data, 'base64');
+    fs.writeFileSync(path.join(frameDir, String(number).padStart(2, '0') + '.png'), bytes);
+    if (number === 0) fs.writeFileSync(path.join(OUT, prefix + '.png'), bytes);
+  };
+  const initial = await evaluate(cdp, `(() => {
+    const panel = document.querySelector('.catalog-contract');
+    const spans = [...panel.querySelectorAll('span')];
+    const css = getComputedStyle(panel);
+    return {
+      href: location.href, viewport: {width: innerWidth, height: innerHeight},
+      scrollWidth: document.documentElement.scrollWidth,
+      panelColumns: css.gridTemplateColumns, panelWidth: panel.getBoundingClientRect().width,
+      statementWidths: spans.map(x => Math.round(x.getBoundingClientRect().width)),
+      image: getComputedStyle(document.querySelector('.catalog-hero')).backgroundImage,
+      cardCount: document.querySelectorAll('.catalog-card:not([hidden])').length
+    };
+  })()`);
+  await frame(0);
+  await evaluate(cdp, "document.querySelector('#catalog-kind').value='pack'; document.querySelector('#catalog-kind').dispatchEvent(new Event('change',{bubbles:true}))");
+  await sleep(200);
+  await frame(1);
+  const filterCount = await evaluate(cdp, "document.querySelectorAll('.catalog-card:not([hidden])').length");
+  await evaluate(cdp, "document.querySelector('#catalog-reset').click()");
+  await evaluate(cdp, "document.querySelector('[data-menu-button]')?.click()");
+  await sleep(200);
+  await frame(2);
+  const menuExpanded = await evaluate(cdp, "document.querySelector('[data-menu-button]')?.getAttribute('aria-expanded')");
+  await evaluate(cdp, "document.querySelector('[data-menu-button]')?.click()");
+  await evaluate(cdp, "scrollTo({top: document.documentElement.scrollHeight - innerHeight, behavior: 'instant'})");
+  await sleep(250);
+  await frame(3);
+  const footerSeen = await evaluate(cdp, "document.querySelector('.site-footer')?.getBoundingClientRect().top < innerHeight");
+  await evaluate(cdp, "scrollTo({top: 0, behavior: 'instant'})");
+  await frame(4);
+  execFileSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-framerate', '1',
+    '-i', path.join(frameDir, '%02d.png'), '-c:v', 'libx264', '-pix_fmt', 'yuv420p',
+    path.join(OUT, prefix + '.mp4')]);
+  observations[prefix] = {...initial, filterCount, menuExpanded, footerSeen, videoFrames: 5};
+  assert(initial.scrollWidth <= initial.viewport.width, prefix + ': horizontal overflow');
+  assert(initial.cardCount === 3 && filterCount === 1, prefix + ': catalogue filter mismatch');
+  assert(initial.statementWidths.every(w => w > 180), prefix + ': contract statements too narrow');
+  assert(footerSeen, prefix + ': footer not reached');
+  assert(Boolean(TARGET_SHA), prefix + ': target SHA absent');
 }
 
 const chrome = spawn(CHROME_BIN, [
@@ -282,15 +387,28 @@ try {
   for (const spec of [
     {name: 'desktop', width: 1440, height: 1000, mobile: false, reduced: false},
     {name: 'mobile', width: 390, height: 844, mobile: true, reduced: false},
+    {name: 'mobile-small', width: 320, height: 640, mobile: true, reduced: false},
+    {name: 'mobile-large', width: 430, height: 932, mobile: true, reduced: false},
+    {name: 'mobile-landscape', width: 844, height: 390, mobile: true, reduced: false},
     {name: 'reduced-motion', width: 1440, height: 1000, mobile: false, reduced: true}
   ]) {
     await captureCase(cdp, spec);
+  }
+  for (const spec of [
+    {name: 'desktop', width: 1440, height: 1000, mobile: false},
+    {name: 'mobile-small', width: 320, height: 640, mobile: true},
+    {name: 'mobile', width: 390, height: 844, mobile: true},
+    {name: 'mobile-large', width: 430, height: 932, mobile: true},
+    {name: 'mobile-landscape', width: 844, height: 390, mobile: true}
+  ]) {
+    await captureCatalog(cdp, spec);
   }
 
   cdp.close();
   const result = {
     marker: failures.length ? 'FAIL_TARGETED_PREVIEW_VISUAL_CAPTURE' : 'PASS_TARGETED_PREVIEW_VISUAL_CAPTURE',
     origin: ORIGIN,
+    targetSha: TARGET_SHA,
     observations,
     failures
   };

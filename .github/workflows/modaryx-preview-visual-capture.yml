@@ -8,6 +8,8 @@ on:
       - '.github/workflows/modaryx-preview-visual-capture.yml'
       - 'qa/check-preview-visual-capture.mjs'
       - 'index.html'
+      - 'catalog.html'
+      - 'assets/modaryx-pages-finishline.css'
       - 'assets/living-world.js'
       - 'assets/living-world-visual-growth.mjs'
       - 'assets/living-world-visual-growth.css'
@@ -45,6 +47,13 @@ jobs:
           test -n "$CHROME_BIN"
           "$CHROME_BIN" --version
           echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Install free video encoder
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
 
       - name: Resolve immutable Cloudflare preview
         shell: bash
@@ -105,6 +114,7 @@ jobs:
             ')"
             if test -n "$PREVIEW"; then
               echo "MODARYX_VISUAL_ORIGIN=$PREVIEW" >> "$GITHUB_ENV"
+              echo "MODARYX_VISUAL_TARGET_SHA=$TARGET_SHA" >> "$GITHUB_ENV"
               echo "Resolved preview: $PREVIEW"
               exit 0
             fi
