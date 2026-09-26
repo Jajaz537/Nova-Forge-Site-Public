@@ -3,7 +3,7 @@ name: MODARYX Fresh Full-Site Video
 on:
   pull_request:
     branches:
-      - design/modaryx-premium-hd-20260914-work
+      - fix/modaryx-public-product-surface-20260925
     paths:
       - '.github/workflows/modaryx-preview-video.yml'
       - 'qa/capture-preview-video.mjs'
