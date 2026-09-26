@@ -46,6 +46,13 @@ jobs:
           "$CHROME_BIN" --version
           echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
 
+      - name: Install free video encoder
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+
       - name: Resolve immutable Cloudflare preview
         shell: bash
         env:
