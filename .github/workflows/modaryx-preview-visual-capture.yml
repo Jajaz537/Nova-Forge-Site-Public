@@ -79,13 +79,13 @@ jobs:
           TARGET_SHA="$HEAD_SHA"
           if test "$QA_ONLY" = "true"; then
             TARGET_PR="$WORK_PR_NUMBER"
-            TARGET_SHA="$BASE_SHA"
-            echo "QA-only candidate: using immutable preview for unchanged base $TARGET_SHA"
-            if test "$TARGET_SHA" = "01475d61abf3ac9b0e51edd7c259979ae458ff47"; then
-              echo "MODARYX_VISUAL_ORIGIN=https://702a2f26.nova-forge-site-public.pages.dev" >> "$GITHUB_ENV"
-              echo "MODARYX_VISUAL_TARGET_SHA=$TARGET_SHA" >> "$GITHUB_ENV"
-              exit 0
-            fi
+            TARGET_SHA="ace528d296ca411d7ef081c2a4812edabbe01e0f"
+            CURRENT="$(curl --fail --silent --show-error -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GH_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/git/ref/heads/design/modaryx-premium-hd-20260914-work" | node -e 'let s="";process.stdin.on("data",x=>s+=x).on("end",()=>process.stdout.write(JSON.parse(s).object.sha))')"
+            test "$CURRENT" = "$TARGET_SHA"
+            echo "QA-only candidate: using immutable Work preview for $TARGET_SHA"
+            echo "MODARYX_VISUAL_ORIGIN=https://70deecff.nova-forge-site-public.pages.dev" >> "$GITHUB_ENV"
+            echo "MODARYX_VISUAL_TARGET_SHA=$TARGET_SHA" >> "$GITHUB_ENV"
+            exit 0
           fi
 
           SHORT_SHA="${TARGET_SHA:0:7}"
