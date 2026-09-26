@@ -46,16 +46,16 @@
       <p class="eyebrow">Atelier de création MODARYX</p>
       <h1 id="studio-title">Préparez la fiche de votre création.</h1>
       <p class="lede">Décrivez votre projet, son jeu cible et ses droits. Le Studio vous guide pour préparer une fiche claire et portable, l’enregistrer dans ce navigateur et conserver une copie locale lorsque vous le souhaitez.</p>
-      <div class="release-status"><span class="status-dot" aria-hidden="true"></span><span><strong>NON PUBLIÉ.</strong> Les brouillons restent dans ce navigateur uniquement après action explicite. Un état déclaré n’est jamais présenté comme une preuve vérifiée par le Studio.</span></div>
+      <div class="release-status"><span class="status-dot" aria-hidden="true"></span><span><strong>NON PUBLIÉ.</strong> Vos projets restent dans ce navigateur uniquement après action explicite. Un état déclaré n’est jamais présenté comme une preuve vérifiée par le Studio.</span></div>
     </section>
 
     <nav class="studio-step-links" aria-label="Étapes du Studio"><a href="#studio-identity">Identité du contenu</a><a href="#studio-game">Jeu cible</a><a href="#studio-compatibility">Compatibilité</a><a href="#studio-rights">Créateur et droits</a><a href="#studio-provenance">Provenance</a><a href="#studio-files">Fichiers</a></nav>
-    <section class="studio-layout" aria-label="Éditeur de manifeste">
+    <section class="studio-layout" aria-label="Éditeur de projet">
       <form id="creator-form" class="studio-form" novalidate>
-        <div><p class="eyebrow">Import</p><h2>Reprendre un brouillon</h2></div>
-        <fieldset id="studio-import"><legend>Importer un brouillon</legend>
+        <div><p class="eyebrow">Import</p><h2>Reprendre un projet</h2></div>
+        <fieldset id="studio-import"><legend>Importer un projet</legend>
           <label class="wide" for="import-draft-file"><span>Copie locale du projet</span><input id="import-draft-file" name="importDraft" type="file" accept="application/json,.json"></label>
-          <div class="wide studio-inline-actions"><button class="button" id="import-draft" type="button" aria-describedby="import-draft-help">Importer le brouillon</button><span id="import-draft-help">Seuls les manifestes verrouillés et non publiés sont acceptés.</span></div>
+          <div class="wide studio-inline-actions"><button class="button" id="import-draft" type="button" aria-describedby="import-draft-help">Importer le projet</button><span id="import-draft-help">Seules les copies locales compatibles et non publiées sont acceptées.</span></div>
         </fieldset>
 
         <div><p class="eyebrow">Identité</p><h2>Décrire le contenu</h2></div>
@@ -106,22 +106,22 @@
           <label class="wide" for="files"><span>Fichiers — un par ligne</span><textarea id="files" name="files" placeholder="textures/main.dds | 1024 | 0123…64 hex… | image/vnd-ms.dds | false"></textarea><small>Format : <code>path | size | sha256 | mediaType | executable</code>. Aucun fichier n’est lu ni exécuté par le Studio.</small></label>
         </fieldset>
 
-        <div class="studio-note"><strong>Distribution verrouillée.</strong> Tout brouillon généré ou importé est forcé à <code>state: locked</code>, <code>downloadable: false</code> et <code>releaseReceipt: null</code>. Le SHA-256 décrit l’intégrité attendue des octets ; il ne prouve ni auteur, ni licence, ni provenance.</div>
+        <div class="studio-note"><strong>Distribution verrouillée.</strong> Un projet préparé ici reste privé et non téléchargeable publiquement. Une empreinte d’intégrité peut vérifier un fichier, mais ne prouve ni son auteur, ni sa licence, ni sa provenance.</div>
         <div class="studio-actions">
           <button class="button primary" type="submit">Valider l’aperçu</button>
           <button class="button" id="save-draft" type="button">Sauvegarder localement</button>
           <button class="button" id="download-draft" type="button">Télécharger une copie du projet</button>
-          <button class="button" id="clear-draft" type="button">Effacer le brouillon local</button>
+          <button class="button" id="clear-draft" type="button">Effacer le projet local</button>
         </div>
-        <div id="schema-status" class="studio-status" role="status" aria-live="polite">Schéma public non chargé.</div>
-        <p id="studio-status" class="studio-status" role="status" aria-live="polite">Aucun brouillon sauvegardé dans cette session.</p>
+        <div id="schema-status" class="studio-status" role="status" aria-live="polite">Vérification locale en préparation.</div>
+        <p id="studio-status" class="studio-status" role="status" aria-live="polite">Aucun projet sauvegardé dans cette session.</p>
       </form>
 
       <aside class="studio-preview" aria-labelledby="preview-title">
         <p class="eyebrow">Aperçu du projet</p>
         <h2 id="preview-title">Votre fiche en préparation</h2>
-        <p>Vérifiez ici les informations de votre création avant de sauvegarder ou d’exporter votre brouillon. Les détails techniques restent disponibles dans la documentation, sans encombrer le parcours principal.</p>
-        <details class="modaryx-disclosure studio-technical-details"><summary>Détails techniques</summary><pre id="manifest-preview" class="studio-technical-preview" tabindex="0" aria-label="Données techniques du projet">{}</pre></details>
+        <p>Vérifiez ici les informations de votre création avant de sauvegarder ou de conserver une copie de votre projet. Les détails techniques restent disponibles dans la documentation, sans encombrer le parcours principal.</p>
+        <details class="modaryx-disclosure studio-technical-details"><summary>Détails techniques</summary><pre id="manifest-preview" class="studio-technical-preview" tabindex="0" aria-label="Données techniques du projet">Aucune donnée technique à afficher.</pre></details>
         <div class="actions"><a class="button" href="./documentation.html">Documentation technique</a><a class="button" href="./security.html">Sécurité et confiance</a></div>
       </aside>
     </section>
