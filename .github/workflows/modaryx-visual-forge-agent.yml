@@ -1,0 +1,104 @@
+name: MODARYX Visual Forge Agent
+
+on:
+  pull_request:
+    branches:
+      - fix/modaryx-public-product-surface-20260925
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: read
+
+concurrency:
+  group: modaryx-visual-forge-agent
+  cancel-in-progress: false
+
+jobs:
+  visual-agent:
+    if: github.event.pull_request.head.ref == 'automation/modaryx-visual-forge-loop-20260926'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: automation/modaryx-visual-forge-loop-20260926
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Guard exact source SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$OPENAI_API_KEY"
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+
+      - name: Wait for exact-SHA video proof
+        id: video
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for attempt in {1..80}; do
+            RUN_ID="$(gh api "/repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$SOURCE_SHA&event=pull_request&per_page=30" --jq '.workflow_runs[] | select(.name=="MODARYX Fresh Full-Site Video" and .conclusion=="success") | .id' | head -n1)"
+            if test -n "$RUN_ID"; then echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"; exit 0; fi
+            sleep 10
+          done
+          echo "Exact-SHA video proof not available" >&2
+          exit 1
+
+      - name: Download exact video proof
+        uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e
+        with:
+          name: modaryx-preview-video-${{ github.event.pull_request.head.sha }}
+          path: visual-proof
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.video.outputs.run_id }}
+
+      - name: Extract evidence frames
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y ffmpeg
+          fi
+          command -v ffmpeg
+          mkdir -p visual-proof/frames
+          n=0
+          for video in visual-proof/*.mp4 visual-proof/*.webm; do
+            [ -f "$video" ] || continue
+            n=$((n + 1))
+            ffmpeg -hide_banner -loglevel error -y -i "$video" -vf "fps=1/12,scale='min(1280,iw)':-2" -frames:v 8 "visual-proof/frames/evidence-${n}-%02d.jpg"
+          done
+          test "$n" -gt 0
+          test -n "$(find visual-proof/frames -name '*.jpg' -print -quit)"
+
+      - name: Run bounded visual agent
+        shell: bash
+        run: node qa/modaryx-visual-forge-agent.mjs
+
+      - name: Apply agent patch only if source is still current
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin automation/modaryx-visual-forge-loop-20260926
+          test "$(git rev-parse origin/automation/modaryx-visual-forge-loop-20260926)" = "$SOURCE_SHA" || {
+            echo "Branch advanced; stale agent result discarded."
+            exit 0
+          }
+          test -f visual-proof/agent.patch || exit 0
+          test -s visual-proof/agent.patch || exit 0
+          git apply --check visual-proof/agent.patch
+          git apply visual-proof/agent.patch
+          git diff --check
+          git config user.name "MODARYX Visual Forge"
+          git config user.email "actions@users.noreply.github.com"
+          git add assets qa
+          git diff --cached --quiet && exit 0
+          git commit -m "fix(visual): autonomous evidence-driven refinement"
+          git push origin HEAD:automation/modaryx-visual-forge-loop-20260926

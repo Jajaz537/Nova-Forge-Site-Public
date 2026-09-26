@@ -531,3 +531,38 @@ body[data-mx-world=home] .modaryx-realm-hero .display span{
     white-space:nowrap!important;
   }
 }
+
+
+/* Visual Forge cycle 01 — evidence 7333f575: lift crushed blacks without changing canon geography. */
+body[data-mx-canon=true]{
+  --mx-surface:#0d1712;
+  --mx-surface-2:#132019;
+  --mx-text:#f0eee5;
+  --mx-muted:#c7cec5;
+  background:
+    radial-gradient(circle at 78% 8%,rgba(218,177,92,.075),transparent 34rem),
+    linear-gradient(180deg,#0d1712 0,#09110d 52%,#0c1510 100%)!important;
+}
+body[data-mx-canon=true] :is(.section,.catalog-controls,.catalog-results,.project-grid,.studio-layout,.profiles-grid) :is(p,li,dd,dt,label,legend,small){
+  color:#c9d0c8!important;
+}
+body[data-mx-canon=true] :is(.project-grid,.catalog-grid,.profiles-grid) :is(.project-section,.catalog-card,.profile-card),
+body[data-mx-canon=true] .cards>.card{
+  border-color:rgba(235,204,137,.22)!important;
+  background:linear-gradient(145deg,rgba(25,40,31,.95),rgba(11,20,15,.98))!important;
+  box-shadow:0 22px 58px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.055)!important;
+}
+body[data-mx-canon=true] :is(.project-grid,.catalog-grid,.profiles-grid) :is(.project-section,.catalog-card,.profile-card):nth-child(3n+2),
+body[data-mx-canon=true] .cards>.card:nth-child(3n+2){
+  background:linear-gradient(145deg,rgba(22,38,41,.96),rgba(10,19,17,.98))!important;
+}
+body[data-mx-canon=true] :is(.project-grid,.catalog-grid,.profiles-grid) :is(.project-section,.catalog-card,.profile-card) p,
+body[data-mx-canon=true] .cards>.card p{color:#c8d0c7!important}
+body[data-mx-canon=true] :is(input,textarea,select){
+  background:#101c16!important;
+  border-color:rgba(235,204,137,.22)!important;
+  color:#f3efe4!important;
+}
+@media(max-width:620px){
+  body[data-mx-canon=true]{background:linear-gradient(180deg,#101b15,#09110d 58%,#0d1712)!important}
+}
