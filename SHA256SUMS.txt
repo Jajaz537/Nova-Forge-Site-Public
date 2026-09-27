@@ -11,14 +11,14 @@ f9fa44e131192fb7f655ac3431e2abcec4d90992e60e0abaf94aebce64d8f2c5  ./assets/commu
 bfa93ddc93cd34ac6454e8e069b95d9c083e650da07a41a3353a98447088553f  ./assets/json-schema-lite.js
 ca7837533043fa10c06515aeba63844e1baf01bc0ff25433f803d54d6c89d2fd  ./assets/living-world.css
 8ea81aea13c72bb7d8064f9ed26416e55ba807a39c93b80a4ea9e3dd7b51c1e6  ./assets/living-world.js
-6953d4b684b13f1afdcf6452d0452c809f5307ad5a8362da00c72e8d454a28e2  ./assets/modaryx-cinematic-system.css
+d293f1b015b1e47cd4f80e792fc9366cdb1ce0827d204f97cf9cf6e396482222  ./assets/modaryx-cinematic-system.css
 eb6f0664c33e98f8918b8cde38cfaea673a39f72f8a6110f39bb0e07d2aab952  ./assets/modaryx-home-cinematic.css
 06b1dae65f9c0706fabc9b85a46cd3c50d7a5a5d2e6015b2be064b751d7b8189  ./assets/modaryx-mark-192.png
 38eb20983b8118843446d8a64dd5afa4991f43d927b41703b21b34fc30a1aa40  ./assets/modaryx-mark-512.png
 261acad337661d82075248de35bf8e8f935d5b2709b5f9dc0ebdf3740c5d1dfc  ./assets/modaryx-mark.svg
 33cb772423a0be1e0f10eb21d883c489dde1a735b5775c2dce2896ea3501e9c5  ./assets/modaryx-platform-refinement.css
 98f50f037117844be8f2e348194952a0398b810a32585c313831e3d14a85d237  ./assets/modaryx-premium-refinement.css
-34a91e01dec43c880d5630df9de99cd0a5ae575ec3bc127bd8263dadd8428798  ./assets/modaryx-search-cinematic-fix.css
+5d56d1d4ff52f695a4d2534e288aefb4b83300545bb39f178f8754ea08ca7d65  ./assets/modaryx-search-cinematic-fix.css
 5b409b4e73b6959a0120d6f5bbd8039f846bdad7b6e313f1f272d956e9ece656  ./assets/modaryx-studio-cinematic-fix.css
 56ef2de2c164aec0e4dcb4c8582e3d25a7e123576d34b78639fea9fff9942334  ./assets/nova-kingdom-panorama.svg
 884fc8a9fa04105a294f8bea4e6c61c7ff0f3de94e227b9412d2f757c5a3c4f4  ./assets/nova-mark-192.png
@@ -40,7 +40,7 @@ f90348520048d546761e0e1b794ab6d22aa02f06d06f95f54e9855bf89b345dc  ./assets/token
 a1d756c67a07e522f23d20c5a28f433e03473eec0f2ac51101f13b2c8a90ec83  ./assets/verify-picker.css
 92736f4afba835879723e51fcbab193d521d222e699ce7ff8112388a9b4b211a  ./assets/verify.js
 a90b528864f0453c4a89dd4fd888f6230d962c8515e1b35eec936e7631b8be2a  ./catalog.html
-720d4983a35ba67e55b97dd528c313fd19d353746854e317a3cd202dd7ad6f61  ./community.html
+895b761085d02a5a3b1614a69f6b7267fd14747a234ecb5ef4e1c6aad66722b6  ./community.html
 796e8e926b9447ab73f8b42ec19266e87bd7114036773a400dad6387af0627f7  ./creator-studio.html
 010737ea4c600d6111d3fa94d6f86e454595dd6f0b5ddb4e0ab01b689b70fbd3  ./data/catalog.json
 08f9810bea5a8afc20acbf7a6f5b23c5cb4647621f6a1787d42a3fa212981283  ./data/compatibility-graph.json
@@ -107,3 +107,4 @@ ce74efb3779ca05a90de07e42bcf0b4a197b3422e4658f7eb370c6e04980f71b  ./gta-6/mods/i
 413cf1e2cd636421a7482644a45c8bfc7fa3f51e7eaeb3beaa0d87d3ff35ec22  ./red-dead-redemption-2/index.html
 b58d4605011f7bfa111cd2fd755b65f8cea7daec1af22f0c353fe4f015d2429c  ./red-dead-redemption-2/mods/index.html
 ba3901e72fd9d7de865dc2331de25b6dc043f89a1a44cedac1cfd3b3e2253d40  ./red-dead-redemption-2/guides/index.html
+2a7ced74c0ef8e35ca60c4121e5376b631f5ede20c0750b848b098d527b18522  ./assets/modaryx-realm-vista-reduced.webp

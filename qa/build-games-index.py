@@ -29,8 +29,11 @@ for key, game in sorted(games.items(), key=lambda pair: pair[1]['name'].casefold
 source = (ROOT/'project.html').read_text(encoding='utf-8')
 source = source.replace('Fiches des trois projets de démonstration MODARYX MODS.', 'Jeux représentés dans le catalogue de démonstration et hubs éditoriaux GTA VI / Red Dead Redemption 2, sans fichiers distribués.')
 source = source.replace('<title>Projets —', '<title>Jeux —', 1)
-source = source.replace('</title>', '</title>\n  <link rel="canonical" href="https://modaryxmods.com/games/">', 1)
+source = source.replace('<meta property="og:title" content="Projets —', '<meta property="og:title" content="Jeux —', 1)
+source = source.replace('content="https://modaryxmods.com/project"', 'content="https://modaryxmods.com/games/"', 1)
+source = source.replace('href="https://modaryxmods.com/project"', 'href="https://modaryxmods.com/games/"', 1)
 source = source.replace('href="./','href="../').replace('src="./','src="../')
+source = source.replace('  <link rel="icon"', '<link rel="icon"', 1)
 start, end = source.index('  <main '), source.index('  </main>') + len('  </main>')
 main = '''  <main id="main" class="project-page">
     <nav class="page-trail" aria-label="Fil d’Ariane"><a href="../index.html">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Jeux</span></nav>

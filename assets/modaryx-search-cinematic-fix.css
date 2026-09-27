@@ -1,1 +1,1 @@
-.search-hero h1{font-size:clamp(3rem,5.2vw,4.8rem);max-width:11ch}@media(max-width:820px){.search-hero h1{font-size:clamp(2.45rem,11vw,4rem)}}
+.search-page .search-hero{min-height:0;padding-block:1.5rem!important}.search-page .search-hero + .section{padding-top:0!important}.search-page .section-heading{margin-bottom:1rem}.search-page .search-hero h1{margin-bottom:1rem}.search-hero h1{font-size:clamp(3rem,5.2vw,4.8rem);max-width:11ch}@media(max-width:820px){.search-hero h1{font-size:clamp(2.45rem,11vw,4rem)}}
