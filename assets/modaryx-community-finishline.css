@@ -47,3 +47,5 @@
 .community-appeal-actions{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-top:.75rem}.community-appeal-actions [role=status]{color:#b9c7d4;font-size:.82rem}
 @media(max-width:680px){.community-followup-heading,.community-followup-search{display:grid;grid-template-columns:1fr}.community-followup-badge{justify-self:start}.community-followup-search .button,.community-appeal-actions .button{width:100%;box-sizing:border-box;text-align:center}.community-followup-summary{grid-template-columns:1fr}.community-followup-summary>p{grid-column:auto}}
 
+/* The earlier ring inherited a centered gold fill from the shared hero pseudo-element and obscured the title. */
+.community-page .hero:after{display:none}
