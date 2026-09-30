@@ -55,3 +55,16 @@ Chaque vue doit sembler photographiée depuis un autre point du même monde.
 Préserver les fonctionnalités et preuves déjà PASS sur la base 806a4fe. Les changements artistiques sont consolidés avant validation. Pas de propagation d'un asset non validé. Pas de substitution automatique par les anciens wolf-*.png, dragon-*.png ou environment-premium.jpg.
 
 Aucune fusion de PR ni déclaration de version finale sans validation explicite du candidat complet.
+
+
+## Source image canonique récupérée
+
+Source rétablie dans la conversation le 1er octobre 2026 : `nouveaux design 3(1).png`.
+
+- Dimensions : 1672 × 941 px.
+- SHA-256 des octets source : `141f90dd3ab403627a8279db8c66c2e9711ad88771b359c1ea4ce26c212ed81e`.
+- Cette image est la référence visuelle directe du royaume pour la Finish Line.
+- Ne pas la remplacer par une régénération textuelle, un ancien panorama ou une approximation.
+- Toute dérivation de route doit conserver le château, la vallée, les cours d'eau, ponts, ville, terres et reliefs de cette source.
+- Les textes et composants d'interface du site doivent rester en HTML/CSS lorsque possible ; ne pas dépendre du texte rasterisé de l'image pour l'accessibilité ou la navigation.
+- L'intégration binaire de cette source doit être vérifiée par son SHA-256 avant propagation aux familles de routes.
