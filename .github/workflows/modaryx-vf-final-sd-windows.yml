@@ -48,12 +48,60 @@ jobs:
           $deadline=(Get-Date).AddSeconds(20)
           do { try { $ok=(Invoke-WebRequest -UseBasicParsing http://127.0.0.1:4175/index.html -TimeoutSec 2).StatusCode -eq 200 } catch { $ok=$false }; if(-not $ok){Start-Sleep -Milliseconds 300} } until($ok -or (Get-Date) -gt $deadline)
           if(-not $ok){ throw 'Preview did not become ready' }
-      - name: PWA installability targeted proof
+      - name: Targeted Finish Line source proof
+        shell: powershell
+        run: node qa/check-site-first-vf.mjs
+
+      - name: Import race proof
+        shell: powershell
+        run: node qa/check-import-races.cjs
+
+      - name: Profile detection proof
+        shell: powershell
+        run: node qa/check-profile-detection.cjs
+
+      - name: Public metadata proof
+        shell: powershell
+        run: node qa/check-public-metadata.cjs
+
+      - name: Living chronicle proof
+        shell: powershell
+        run: node qa/check-living-chronicle.mjs
+
+      - name: Living world offline state proof
+        shell: powershell
+        run: node qa/check-living-world-offline-state.mjs
+
+      - name: Layered growth contract and asset gate
+        shell: powershell
+        run: |
+          node qa/check-layered-growth-contract.mjs
+          node qa/check-layered-growth-assets.mjs
+
+      - name: Browser accessibility proof
+        shell: powershell
+        run: node qa/check-browser-a11y.mjs
+
+      - name: Browser reflow proof
+        shell: powershell
+        run: node qa/check-browser-reflow.mjs
+
+      - name: Local functional browser proof
+        shell: powershell
+        run: node qa/check-local-functional-browser.mjs
+
+      - name: PWA installability proof
         shell: powershell
         run: node qa/check-pwa-installability.mjs
 
-      - name: Lab performance supplemental targeted proof
+      - name: Lab performance supplemental proof
         continue-on-error: true
         timeout-minutes: 3
         shell: powershell
         run: node qa/check-lab-performance.mjs
+
+      - name: Real-world sync browser supplemental proof
+        continue-on-error: true
+        timeout-minutes: 3
+        shell: powershell
+        run: node qa/check-real-world-sync-browser.mjs
