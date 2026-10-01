@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: modaryx-vf-final-sd-windows
+  group: modaryx-vf-final-sd-windows-v2
   cancel-in-progress: false
 
 jobs:
