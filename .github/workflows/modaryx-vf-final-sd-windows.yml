@@ -89,7 +89,11 @@ jobs:
             "$env:ProgramFiles(x86)\Microsoft\Edge\Application\msedge.exe",
             "$env:ProgramFiles\Microsoft\Edge\Application\msedge.exe",
             "$env:ProgramFiles\Google\Chrome\Application\chrome.exe",
-            "$env:ProgramFiles(x86)\Google\Chrome\Application\chrome.exe"
+            "$env:ProgramFiles(x86)\Google\Chrome\Application\chrome.exe",
+            "E:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+            "E:\Program Files\Microsoft\Edge\Application\msedge.exe",
+            "E:\Program Files\Google\Chrome\Application\chrome.exe",
+            "E:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
           )
           $browser = $candidates | Where-Object { $_ -and (Test-Path $_) } | Select-Object -First 1
           if (-not $browser) { throw 'No supported Chromium browser found on SD-MODARYX' }
