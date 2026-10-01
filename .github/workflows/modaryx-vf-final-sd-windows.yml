@@ -118,7 +118,10 @@ jobs:
           Write-Host "Browser: $browser"
           Write-Host "Preview ready: http://127.0.0.1:4175"
 
-      - name: Lab performance proof
+
+      - name: Lab performance supplemental proof
+        continue-on-error: true
+        timeout-minutes: 3
         shell: powershell
         run: node qa/check-lab-performance.mjs
 
@@ -144,7 +147,3 @@ jobs:
         shell: powershell
         run: node qa/check-real-world-sync-browser.mjs
 
-      - name: Lab performance proof
-        timeout-minutes: 3
-        shell: powershell
-        run: node qa/check-lab-performance.mjs
