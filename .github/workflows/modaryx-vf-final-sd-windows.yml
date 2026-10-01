@@ -88,6 +88,16 @@ jobs:
           } until($ok -or (Get-Date) -gt $deadline)
           if(-not $ok){ throw 'MODARYX preview did not become ready on port 4175' }
 
-      - name: Browser reflow targeted proof
+      - name: Local functional targeted proof
         shell: powershell
-        run: node qa/check-browser-reflow.mjs
+        run: node qa/check-local-functional-browser.mjs
+
+      - name: PWA installability targeted proof
+        shell: powershell
+        run: node qa/check-pwa-installability.mjs
+
+      - name: Lab performance supplemental targeted proof
+        continue-on-error: true
+        timeout-minutes: 3
+        shell: powershell
+        run: node qa/check-lab-performance.mjs
