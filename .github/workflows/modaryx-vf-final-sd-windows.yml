@@ -1,0 +1,107 @@
+name: MODARYX VF Final SD Windows Gate
+
+on:
+  push:
+    branches:
+      - runner/modaryx-vf-final-sd-20261001
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-vf-final-sd-windows
+  cancel-in-progress: false
+
+jobs:
+  final-sd-windows:
+    name: Final SD Windows replay
+    runs-on: [self-hosted, Windows]
+    timeout-minutes: 90
+    env:
+      CANDIDATE_SHA: b6def6e17c0a40b3acee39fd2d1af48f537cfd81
+    steps:
+      - name: Checkout exact frozen candidate
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.CANDIDATE_SHA }}
+          fetch-depth: 1
+
+      - name: Verify exact candidate SHA
+        shell: powershell
+        run: |
+          $actual = (git rev-parse HEAD).Trim()
+          if ($actual -ne $env:CANDIDATE_SHA) { throw "Wrong candidate: $actual" }
+          Write-Host "Exact candidate verified: $actual"
+
+      - name: Runtime inventory
+        shell: powershell
+        run: |
+          node --version
+          npm --version
+          python --version
+          git --version
+
+      - name: Install project dependencies
+        shell: powershell
+        run: |
+          if (Test-Path package-lock.json) { npm ci } else { npm install --ignore-scripts }
+
+      - name: Build and source validation
+        shell: powershell
+        run: |
+          npm run build
+          npm test
+
+      - name: Targeted Finish Line source proof
+        shell: powershell
+        run: node qa/check-site-first-vf.mjs
+
+      - name: Import race proof
+        shell: powershell
+        run: node qa/check-import-races.cjs
+
+      - name: Profile detection proof
+        shell: powershell
+        run: node qa/check-profile-detection.cjs
+
+      - name: Public metadata proof
+        shell: powershell
+        run: node qa/check-public-metadata.cjs
+
+      - name: Living chronicle proof
+        shell: powershell
+        run: node qa/check-living-chronicle.mjs
+
+      - name: Living world offline state proof
+        shell: powershell
+        run: node qa/check-living-world-offline-state.mjs
+
+      - name: Layered growth contract and asset gate
+        shell: powershell
+        run: |
+          node qa/check-layered-growth-contract.mjs
+          node qa/check-layered-growth-asset-gate.mjs
+
+      - name: Browser accessibility proof
+        shell: powershell
+        run: node qa/check-browser-a11y.mjs
+
+      - name: Browser reflow proof
+        shell: powershell
+        run: node qa/check-browser-reflow.mjs
+
+      - name: Local functional browser proof
+        shell: powershell
+        run: node qa/check-local-functional-browser.mjs
+
+      - name: PWA installability proof
+        shell: powershell
+        run: node qa/check-pwa-installability.mjs
+
+      - name: Real-world sync browser proof
+        shell: powershell
+        run: node qa/check-real-world-sync-browser.mjs
+
+      - name: Lab performance proof
+        shell: powershell
+        run: node qa/check-lab-performance.mjs
