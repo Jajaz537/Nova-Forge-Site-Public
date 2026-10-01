@@ -14,7 +14,7 @@ jobs:
     runs-on: [self-hosted, Windows, X64]
     timeout-minutes: 90
     env:
-      CANDIDATE_SHA: de0772373d74fee8b42515e345ad5b17deaa0254
+      CANDIDATE_SHA: ae8ed8be42bb9e62cb6bfdfe5d92183adf0fa2c3
     steps:
       - name: Checkout exact frozen candidate
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
