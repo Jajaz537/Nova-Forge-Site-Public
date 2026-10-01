@@ -14,7 +14,7 @@ jobs:
     runs-on: [self-hosted, Windows, X64]
     timeout-minutes: 90
     env:
-      CANDIDATE_SHA: 8f81f5167bdb5eca45485fcb8b0383e476b4cf2b
+      CANDIDATE_SHA: ae8ed8be42bb9e62cb6bfdfe5d92183adf0fa2c3
     steps:
       - name: Checkout exact frozen candidate
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -117,6 +117,10 @@ jobs:
           if(-not $ok){ throw 'MODARYX preview did not become ready on port 4175' }
           Write-Host "Browser: $browser"
           Write-Host "Preview ready: http://127.0.0.1:4175"
+
+      - name: Lab performance proof
+        shell: powershell
+        run: node qa/check-lab-performance.mjs
 
       - name: Browser accessibility proof
         shell: powershell
