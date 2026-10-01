@@ -3,6 +3,7 @@
   const button=document.querySelector('[data-menu-button]');
   const nav=document.querySelector('[data-primary-nav]');
   if(!button||!nav)return;
+  document.querySelector('.nova-topbar')?.setAttribute('data-nav-ready','true');
   const setOpen=(open,restoreFocus=false)=>{
     nav.setAttribute('data-open',open?'true':'false');
     button.setAttribute('aria-expanded',open?'true':'false');

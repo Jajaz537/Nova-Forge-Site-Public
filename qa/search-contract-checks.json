@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "scope": "Eight grouped Node VM scenarios, including four malformed entry variants; not browser proof",
+  "checks": [
+    "Four malformed-entry variants preserve static directory and keep filtering disabled",
+    "Duplicate identifiers reject the index without erasing fallback",
+    "Current index hydrates, folds accents/case and exposes no-match state",
+    "Valid empty index remains usable and distinct from failure",
+    "Network failure preserves static navigation",
+    "Cache age warning survives local filtering and is absent from network index",
+    "Retry deduplicates pending requests and restores search focus after recovery",
+    "Repeated failure keeps fallback and focuses the new retry control"
+  ]
+}

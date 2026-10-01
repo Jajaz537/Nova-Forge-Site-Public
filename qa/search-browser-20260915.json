@@ -1,0 +1,164 @@
+{
+  "checks": [
+    {
+      "count": "2 résultats",
+      "emptyVisible": false,
+      "focus": "site-search",
+      "links": [
+        "./creator-studio.html",
+        "./index.html"
+      ],
+      "query": "CRÉER"
+    },
+    {
+      "count": "2 résultats",
+      "emptyVisible": false,
+      "focus": "site-search",
+      "links": [
+        "./creator-studio.html",
+        "./index.html"
+      ],
+      "query": "creer"
+    },
+    {
+      "count": "0 résultats",
+      "emptyVisible": true,
+      "focus": "site-search",
+      "links": [],
+      "query": "zzzz-nova-qa-no-match"
+    },
+    {
+      "case": "clear via keyboard",
+      "count": "14 résultats",
+      "emptyVisible": false,
+      "links": 14,
+      "query": ""
+    }
+  ],
+  "date": "2026-09-15T21:07:22.560Z",
+  "emptyReflow": {
+    "contentHeight": 2000,
+    "h1": "Retrouvez un projet ou un outil.",
+    "height": 900,
+    "navigation": {
+      "domContentLoadedEndMs": 361.7,
+      "loadEndMs": 365.7,
+      "responseEndMs": 182.7,
+      "type": "navigate"
+    },
+    "page": "search.html",
+    "positiveTabindex": 0,
+    "requested": 320,
+    "scroll": 305,
+    "serviceWorker": {
+      "controller": {
+        "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+        "state": "activated"
+      },
+      "secure": true,
+      "supported": true
+    },
+    "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+    "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/search",
+    "width": 305
+  },
+  "finalCopy": [
+    "Aller au contenu",
+    "MODARYX MODS",
+    "Accueil",
+    "Catalogue multigamingExplorer les contenus de démonstration et leurs informations. Aucun téléchargement disponible.",
+    "Creator StudioPréparer la fiche de sa création, contrôler le format et exporter un manifeste JSON.",
+    "Profils et accèsComprendre les profils et les méthodes de connexion prévues. Aucun compte distant connecté.",
+    "CommunautéCollections, favoris et brouillons de discussions ou avis sauvegardés et exportés localement.",
+    "Sécurité & provenanceComprendre la provenance, les signatures, les empreintes et les limites des preuves.",
+    "Téléchargements publicsDistribution verrouillée jusqu’à présence des preuves requises.",
+    "Ember Textures — PreviewAperçu de démonstration Skyrim Special Edition, sans fichier téléchargeable.",
+    "Balanced Latency Pack — PreviewPack de démonstration Cyberpunk 2077, estimation sans garantie de FPS.",
+    "Forge Night Experience — PreviewExpérience de démonstration Minecraft ; compatibilité non vérifiée.",
+    "DocumentationRetrouver les outils, comprendre les données locales et les limites.",
+    "Écosystème MODARYXOutils disponibles et intégrations encore en préparation.",
+    "Vérifier un fichierCalculer localement une empreinte SHA-256 et comparer un fichier.",
+    "Les projetsFiches des trois projets de démonstration du catalogue.",
+    "Des mondes à explorer. Des idées à forger.MODARYX MODS : catalogue de démonstration, création locale et collections. Univers visuel Loup et Dragon.",
+    "Catalogue",
+    "Créer",
+    "Communauté",
+    "Profils",
+    "Écosystème",
+    "Recherche",
+    "Sécurité",
+    "Documentation",
+    "Téléchargements",
+    "Données locales",
+    "Statut public"
+  ],
+  "keyboardDestination": {
+    "h1": "Préparez la fiche de votre création.",
+    "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/creator-studio"
+  },
+  "removedTerm": [
+    "0 résultats",
+    "Recherche exécutée localement dans l’index public pré-calculé. Aucun service distant interrogé."
+  ],
+  "responsive": [
+    {
+      "contentHeight": 3976,
+      "h1": "Retrouvez un projet ou un outil.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 361.7,
+        "loadEndMs": 365.7,
+        "responseEndMs": 182.7,
+        "type": "navigate"
+      },
+      "page": "search.html",
+      "positiveTabindex": 0,
+      "requested": 320,
+      "scroll": 305,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/search",
+      "width": 305
+    },
+    {
+      "contentHeight": 2689,
+      "h1": "Retrouvez un projet ou un outil.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 361.7,
+        "loadEndMs": 365.7,
+        "responseEndMs": 182.7,
+        "type": "navigate"
+      },
+      "page": "search.html",
+      "positiveTabindex": 0,
+      "requested": 768,
+      "scroll": 753,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/search",
+      "width": 753
+    }
+  ],
+  "sourceCommit": "a0c8a39b4ded8a89262b746d602f14be695ac8f4",
+  "baselineCommit": "8d90fbe2f67d2b372e52e1ca9ebfc17c82407c73",
+  "limits": [
+    "Initial query and keyboard navigation observations before editorial update; final copy and responsive observations after update.",
+    "Empty fill call did not clear browser input; excluded and replaced by observed Ctrl+A/Backspace.",
+    "Network failure and disabled-JavaScript fallback tested in source model only, not browser offline; no screen-reader proof."
+  ]
+}

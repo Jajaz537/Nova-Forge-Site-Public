@@ -1,0 +1,12 @@
+{
+  "scope": "Node VM simulated API outcomes, not native passkey verification",
+  "checks": [
+    "Absent WebAuthn remains unavailable",
+    "Resolved capabilities true retain their real result",
+    "Resolved capabilities false retain their real result",
+    "Missing method remains partial: isUserVerifyingPlatformAuthenticatorAvailable",
+    "Rejected method remains unknown: isUserVerifyingPlatformAuthenticatorAvailable",
+    "Missing method remains partial: isConditionalMediationAvailable",
+    "Rejected method remains unknown: isConditionalMediationAvailable"
+  ]
+}

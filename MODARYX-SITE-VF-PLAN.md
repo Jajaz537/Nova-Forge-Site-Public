@@ -1,57 +1,32 @@
-# MODARYX MODS — Site VF Premium HD
+# MODARYX MODS — Plan de finition Premium HD
 
-## Règle de travail
+Actualisé le 15 septembre 2026 d'après le checkpoint canonique. **Site MODARYX ; OS Nova Forge.** Le candidat est la PR brouillon #12, sans promotion implicite.
 
-La version finale du site doit intégrer les idées produit pertinentes avant gel visuel. Le design final ne doit pas déplacer arbitrairement les blocs déjà décidés : il conserve la hiérarchie et les placements structurants, puis améliore finition, profondeur, cohérence, responsive, accessibilité et performance.
+## Direction conservée
 
-## Direction visuelle verrouillée
+Graphite profond, métal doré/ambre et bleu Guide discret. Texte du hero à gauche, aperçu web MODARYX à droite. Hiérarchie, proportions, surfaces nuancées, bordures fines et cohérence des contrôles priment sur les effets. Motion courte, `prefers-reduced-motion` prioritaire, assets locaux, mobile recomposé. L'ancien libellé « aperçu Modaryx OS » est historique.
 
-- Univers sombre graphite / noir profond.
-- Accents métal doré / ambre forgé, avec bleu guide utilisé avec parcimonie.
-- Identité MODARYX MODS nette, premium, technique et gaming sans surcharge.
-- Hero : texte principal à gauche, aperçu Modaryx OS à droite.
-- Barre de navigation premium et discrète en haut.
-- Rythme éditorial large, grandes respirations, cartes profondes et bordures fines.
-- Animations légères, respect de `prefers-reduced-motion`, aucun effet gadget.
-- Pas de dépendance à des polices ou images distantes obligatoires.
+## Ordre de consolidation
 
-## Inventaire fonctionnel à préserver / finaliser
+1. Revue des idées explicitement retenues et des écarts : `qa/MODARYX-ANTI-OUBLI.md`.
+2. Fondations, shell, navigation, contrôles et états communs.
+3. Accueil : produit compréhensible, démonstration explicite, parcours et CTA réels.
+4. Harmonisation des seize pages existantes : catalogue, recherche, Creator Studio, communauté, profils, écosystème, documentation, sécurité, téléchargements, vérification, fiches et 404.
+5. Hubs GTA 6/RDR2 et modèle jeux/catégories/guides : toujours retenus, actuellement absents. Préparer un contenu substantiel et sourcé avant publication ; ne pas inventer disponibilité ou compatibilité de mods.
+6. SEO adapté aux routes réellement publiées. Examiner toute modification des canoniques, sitemap, robots ou manifest séparément avant application.
+7. Revue visuelle responsive, clavier, contraste, contenu, états et régression ; preuves liées au candidat exact.
+8. Candidat consolidé et revue finale ; publication uniquement après autorisation applicable et preuves suffisantes.
 
-### Déjà présent ou partiellement présent
-- Catalogue multigaming.
-- Creator Studio / Universal Mod Manifest.
-- Profils et communauté locale/exportable.
-- Provenance, signatures et états de confiance fail-closed.
-- Smart Profile local.
-- Modaryx Guide.
-- Téléchargements, documentation, sécurité, vérification.
-- Pont conceptuel avec Modaryx OS Public.
+## Limites fonctionnelles à préserver
 
-### À intégrer avant VF
-- Hubs de jeux structurants : GTA 6 en pilier principal, Red Dead Redemption 2, puis architecture extensible à d’autres jeux.
-- Pages `/jeu/mods/`, catégories, guides et pages de mods individuelles.
-- Navigation et recherche pensées d’abord pour découvrir jeux, mods et outils.
-- SEO propre par jeu/catégorie/mod, sans pages vides ou spammy.
-- Données structurées utiles et cohérentes avec le contenu réellement publié.
-- Mise à jour complète sitemap/robots/canoniques pour `modaryxmods.com`.
-- Nettoyage final des références de marque Nova Forge visibles ou publiques ; conserver les noms internes historiques seulement lorsqu’ils protègent compatibilité/provenance.
-- Design system MODARYX harmonisé sur toutes les pages, pas seulement l’accueil.
-- Responsive mobile/tablette/desktop premium.
-- Accessibilité clavier, contraste et réduction de mouvement.
-- Budget de performance : HTML/CSS/JS statique léger, images optimisées, pas d’assets décoratifs excessifs.
+Le catalogue est démonstratif et aucun artefact téléchargeable n'est publié. Creator Studio et communauté produisent des brouillons locaux ; la conformité JSON n'atteste pas leur provenance. Smart Profile n'est pas un benchmark. Les profils disposent de contrats et d'une détection WebAuthn, pas d'un service de comptes. Guide, pont Nova Forge, publication distante, Storage Resolver et Repair Network ne doivent pas être présentés comme connectés.
 
-## Ordre d’intégration
+## Porte de sortie du design
 
-1. Audit complet des idées ChatGPT + GitHub + surface actuelle.
-2. Architecture informationnelle jeux / mods / guides / outils.
-3. Design system final MODARYX et shell global.
-4. Accueil Premium HD en conservant les placements décidés.
-5. Hubs GTA 6 et RDR2 + catégories / modèles de pages mod.
-6. Harmonisation catalogue, recherche, Creator Studio, communauté, profils, sécurité, docs, téléchargements.
-7. SEO technique, sitemap, robots, canoniques, manifest.
-8. QA responsive, accessibilité, performance et régression.
-9. Mise en production par changements ciblés et vérifiés.
+Pour chaque page : état initial, modifications, responsive, accessibilité, contenu, navigation, cohérence visuelle et preuves. Statuts autorisés : **TERMINÉ / EN COURS / BLOQUÉ / PREUVE MANQUANTE**. Un build ou une PR seuls ne ferment aucune revue visuelle.
 
-## Infrastructure séparée
+Clôturer exige la revue des seize pages, des états vide/erreur/loading/succès pertinents, des largeurs mobile/tablette/desktop, de la navigation clavier et des labels, du zoom et du mouvement réduit, des assets/droits et des liens, plus les mesures de performance effectivement exécutées. Les limites non testées restent visibles. Les idées retenues encore manquantes empêchent de déclarer la VF complète sans décision explicite.
 
-Le chantier design/contenu peut avancer pendant l’attente du DS DNSSEC IONOS. Aucune suppression de `getnovaforge.com` dans Cloudflare avant DNSSEC `modaryxmods.com` complètement validé et preuve HTTPS fraîche.
+## Infrastructure hors périmètre
+
+La consigne historique « supprimer getnovaforge.com après DNSSEC et HTTPS » est révoquée pour ce chantier. Getnova est abandonné ; aucune suppression, activation, bascule de domaine ou modification DNS/DNSSEC/nameservers/IONOS/Cloudflare critique n'est autorisée ici. Conserver les protections `OLD_DOMAIN_UNTOUCHED` et les fichiers de déploiement.

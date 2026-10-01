@@ -1,0 +1,116 @@
+{
+  "native": {
+    "date": "2026-09-15T20:43:26.052Z",
+    "sourceCommit": "c2b251b54ef306c4ea1ed90c8f9a229cd78a7af2",
+    "scope": "Native Chrome HTTPS preview, no screen reader certification",
+    "observations": [
+      {
+        "case": "empty validation via Enter",
+        "errors": 8,
+        "focus": "content-id",
+        "invalid": [
+          "content-id",
+          "content-version",
+          "content-name",
+          "game-id",
+          "game-name",
+          "creator-id",
+          "creator-name",
+          "license"
+        ]
+      },
+      {
+        "case": "correct one field",
+        "contentIdInvalid": null,
+        "errors": 7,
+        "invalid": 7
+      },
+      {
+        "case": "complete required fields",
+        "invalid": 0,
+        "overflow": false,
+        "status": "Format du brouillon conforme. Cela ne vérifie ni la provenance, ni la signature, ni la compatibilité réelle."
+      }
+    ]
+  },
+  "responsive": [
+    {
+      "page": "creator-studio.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/creator-studio",
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "height": 900,
+      "contentHeight": 7877,
+      "h1": "Préparez la fiche de votre création.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 392.3,
+        "loadEndMs": 395.2,
+        "responseEndMs": 120
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    },
+    {
+      "page": "creator-studio.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/creator-studio",
+      "requested": 390,
+      "width": 375,
+      "scroll": 375,
+      "height": 900,
+      "contentHeight": 7319,
+      "h1": "Préparez la fiche de votre création.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 392.3,
+        "loadEndMs": 395.2,
+        "responseEndMs": 120
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    },
+    {
+      "page": "creator-studio.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/creator-studio",
+      "requested": 768,
+      "width": 753,
+      "scroll": 753,
+      "height": 900,
+      "contentHeight": 6288,
+      "h1": "Préparez la fiche de votre création.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 392.3,
+        "loadEndMs": 395.2,
+        "responseEndMs": 120
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    }
+  ]
+}

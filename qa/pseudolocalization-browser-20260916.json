@@ -1,0 +1,48 @@
+{
+  "date": "2026-09-16",
+  "sourceHead": "76cbe6d0beb9fabee2eb40924bc28085d89cd4eb",
+  "preview": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+  "runner": "qa/responsive-review.html",
+  "browser": "Chromium distant",
+  "pages": [
+    "index.html",
+    "catalog.html",
+    "games/index.html",
+    "community.html",
+    "creator-studio.html",
+    "documentation.html",
+    "downloads.html",
+    "ecosystem.html",
+    "profiles.html",
+    "project.html",
+    "project-balanced-latency-pack.html",
+    "project-ember-textures.html",
+    "project-forge-night-experience.html",
+    "search.html",
+    "security.html",
+    "verify.html",
+    "404.html"
+  ],
+  "requestedWidths": [320, 768],
+  "measurements": 34,
+  "textExpansion": "+35 % synthétique",
+  "results": {
+    "pseudoLocalized": 34,
+    "horizontalOverflows": 0,
+    "positiveTabindex": 0,
+    "serviceWorkerActivated": 34
+  },
+  "navigationTimingMs": {
+    "responseEndMedian": 117.2,
+    "domContentLoadedEndMedian": 360.8,
+    "loadEndMedian": 369.3,
+    "loadEndMin": 280.9,
+    "loadEndMax": 442.7
+  },
+  "interpretation": "PASS borné pour le stress de reflow et d'expansion textuelle de ces 34 mesures.",
+  "limitations": [
+    "La pseudo-localisation n'est pas une traduction.",
+    "Les mesures Navigation Timing ne sont pas des Core Web Vitals.",
+    "Ce contrôle ne prouve ni le zoom natif, ni un lecteur d'écran, ni un appareil physique, ni un cycle hors ligne réel."
+  ]
+}

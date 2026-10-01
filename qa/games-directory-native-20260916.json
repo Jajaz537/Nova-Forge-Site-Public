@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-16",
+  "sourceHead": "fdb51cb8cd4996a8cc5b1d1041990b6125a54678",
+  "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/games/",
+  "entry": "Catalogue > Explorer par jeu",
+  "keyboardDestinations": [
+    "/project-balanced-latency-pack",
+    "/project-forge-night-experience",
+    "/project-ember-textures"
+  ],
+  "reflow": [
+    {
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "contentHeight": 2732,
+      "positiveTabindex": 0
+    },
+    {
+      "requested": 430,
+      "width": 415,
+      "scroll": 415,
+      "contentHeight": 2250,
+      "positiveTabindex": 0
+    },
+    {
+      "requested": 768,
+      "width": 753,
+      "scroll": 753,
+      "contentHeight": 1871,
+      "positiveTabindex": 0
+    },
+    {
+      "requested": 1440,
+      "width": 1425,
+      "scroll": 1425,
+      "contentHeight": 1479,
+      "positiveTabindex": 0
+    }
+  ],
+  "search": {
+    "query": "Jeux du catalogue",
+    "results": 1,
+    "destination": "/games/"
+  },
+  "visual": "Capture desktop : trois cartes alignées. Capture du haut mobile stabilisé : marque, menu, titre et introduction lisibles. La première capture après redimensionnement était encore à 1440 ; elle a été écartée comme preuve mobile. Boutons mobiles : clientWidth et scrollWidth 229, aucun débordement interne.",
+  "limits": "Reflow iframe Chrome HTTPS ; pas un appareil physique, lecteur d’écran ou zoom. Activation Entrée ciblée, pas parcours Tab exhaustif. Worker actif ne prouve pas offline.",
+  "vfValidated": false
+}

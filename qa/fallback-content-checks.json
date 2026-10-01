@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "scope": "Five source/HTML checks, not screen reader or disabled-JavaScript browser proof",
+  "checks": [
+    "All 14 indexed entries have matching linked HTML title and summary",
+    "Unavailable search filter disabled and described before index hydration",
+    "Both result counts expose polite atomic status semantics",
+    "All three demonstration cards have matching source copy and working local routes",
+    "Superseded placeholder and unsupported community fallback removed"
+  ]
+}

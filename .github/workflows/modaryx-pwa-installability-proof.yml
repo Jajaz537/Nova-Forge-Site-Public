@@ -1,0 +1,62 @@
+name: MODARYX PWA Installability Proof
+
+on:
+  pull_request:
+    branches:
+      - design/modaryx-premium-hd-20260914-work
+    paths:
+      - '.github/workflows/modaryx-pwa-installability-proof.yml'
+      - 'qa/check-pwa-installability.mjs'
+      - 'index.html'
+      - 'site.webmanifest'
+      - 'sw.js'
+      - 'assets/modaryx-mark-192.png'
+      - 'assets/modaryx-mark-512.png'
+      - 'assets/modaryx-mark.svg'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pwa-installability:
+    name: Chromium PWA installability
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+      - name: Start trustworthy loopback server
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4177 --bind 127.0.0.1 >/tmp/modaryx-install-http.log 2>&1 &
+          echo $! >/tmp/modaryx-install-http.pid
+          for attempt in {1..40}; do
+            curl --fail --silent http://127.0.0.1:4177/index.html >/dev/null && exit 0
+            sleep 0.25
+          done
+          cat /tmp/modaryx-install-http.log
+          exit 1
+      - name: Run PWA installability proof
+        shell: bash
+        env:
+          MODARYX_TEST_ORIGIN: http://127.0.0.1:4177
+        run: |
+          set -euo pipefail
+          node qa/check-pwa-installability.mjs
+      - name: Stop loopback server
+        if: always()
+        shell: bash
+        run: |
+          test -f /tmp/modaryx-install-http.pid && kill "$(cat /tmp/modaryx-install-http.pid)" 2>/dev/null || true

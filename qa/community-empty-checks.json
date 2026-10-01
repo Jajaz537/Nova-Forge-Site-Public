@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "scope": "Three Node VM rendering scenarios, not native offline proof",
+  "checks": [
+    "Valid empty catalogue explains empty collection and offers no nonexistent contribution target",
+    "Failed loading has a distinct message and target placeholder",
+    "Populated catalogue replaces the empty message with actual choices"
+  ]
+}

@@ -9,6 +9,13 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
   <meta name="description" content="Vérificateur SHA-256 local MODARYX MODS : calculez une empreinte dans votre navigateur sans envoyer ni exécuter le fichier.">
   <title>Vérificateur SHA-256 — MODARYX MODS</title>
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="MODARYX MODS">
+  <meta property="og:title" content="Vérificateur SHA-256 — MODARYX MODS">
+  <meta property="og:description" content="Vérificateur SHA-256 local MODARYX MODS : calculez une empreinte dans votre navigateur sans envoyer ni exécuter le fichier.">
+  <meta property="og:url" content="https://modaryxmods.com/verify">
+  <link rel="canonical" href="https://modaryxmods.com/verify">
   <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
   <link rel="stylesheet" href="./assets/tokens.css">
@@ -18,16 +25,20 @@
   <script src="./assets/app.js" defer></script>
   <script src="./assets/verify.js" defer></script>
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
-  <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">
+  <link rel="stylesheet" href="./assets/modaryx-foundations.css">
+  <link rel="stylesheet" href="./assets/verify-picker.css">
+  <link rel="stylesheet" href="./assets/modaryx-cinematic-system.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Aller au contenu</a>
   <header class="topbar">
     <a class="brand" href="./" aria-label="MODARYX MODS, accueil"><img class="brand-logo" src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="32" height="32"><span>MODARYX MODS</span></a>
-    <nav aria-label="Navigation de vérification"><a href="./">Site officiel</a><a href="./security.html">Sécurité & provenance</a><a href="./documentation.html#verification">Guide public</a></nav>
+    <nav aria-label="Navigation principale"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html" aria-current="true">Sécurité</a><a href="./documentation.html">Aide</a></nav>
   </header>
 
   <main id="main">
+    <nav class="page-trail" aria-label="Fil d’Ariane"><a href="./index.html">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Vérifier un fichier</span></nav>
+    
     <section class="hero verify-hero" aria-labelledby="verify-title">
       <div class="hero-copy">
         <p class="eyebrow">Intégrité locale · SHA-256</p>
@@ -39,7 +50,7 @@
         <ul class="feature-list">
           <li><span>01</span><div><strong>Intégrité</strong><small>Une correspondance prouve seulement l’égalité de l’empreinte SHA-256 fournie et calculée.</small></div></li>
           <li><span>02</span><div><strong>Pas d’identité implicite</strong><small>Une empreinte correcte ne prouve pas à elle seule l’auteur, la licence ou la provenance.</small></div></li>
-          <li><span>03</span><div><strong>Fail closed</strong><small>Une valeur attendue absente ou invalide n’est jamais transformée en validation.</small></div></li>
+          <li><span>03</span><div><strong>Preuves requises</strong><small>Une valeur attendue absente ou invalide n’est jamais transformée en validation.</small></div></li>
         </ul>
       </aside>
     </section>
@@ -48,12 +59,12 @@
       <div class="section-heading"><div><p class="eyebrow">Outil navigateur</p><h2 id="tool-title">Calculer et comparer</h2></div><span class="badge">Traitement local</span></div>
       <div class="verify-grid">
         <div class="panel verify-form">
-          <label class="field" for="verify-file"><span>Fichier local</span><input id="verify-file" type="file"></label>
-          <label class="field" for="expected-sha256"><span>SHA-256 attendu <small>(facultatif)</small></span><input id="expected-sha256" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="71" placeholder="64 caractères hexadécimaux"></label>
+          <div class="field"><span id="verify-file-label">Fichier local</span><div class="file-picker"><input class="file-picker-input" id="verify-file" type="file" aria-labelledby="verify-file-label verify-file-button" aria-describedby="verify-file-name verify-result"><label class="button" id="verify-file-button" for="verify-file">Choisir un fichier</label><span id="verify-file-name" class="muted" aria-live="polite">Aucun fichier sélectionné</span></div></div>
+          <label class="field" for="expected-sha256"><span>SHA-256 attendu <small>(facultatif)</small></span><input id="expected-sha256" type="text" aria-describedby="verify-result" inputmode="text" autocomplete="off" spellcheck="false" maxlength="71" placeholder="64 caractères hexadécimaux"></label>
           <button class="button primary" type="button" data-verify-file>Calculer le SHA-256</button>
           <p class="muted verify-note">Pour de très gros fichiers, le navigateur peut utiliser une quantité importante de mémoire pendant le calcul.</p>
         </div>
-        <div class="panel verify-result" data-verify-result data-state="neutral" role="status" aria-live="polite">
+        <div id="verify-result" class="panel verify-result" data-verify-result data-state="neutral" role="status" aria-live="polite">
           <strong>Aucun calcul lancé</strong>
           <p class="muted">Sélectionnez un fichier. Une empreinte attendue est nécessaire uniquement si vous voulez vérifier une correspondance exacte.</p>
         </div>
@@ -68,6 +79,6 @@
     </section>
   </main>
 
-  <footer><div><strong>MODARYX MODS</strong><p>Vérificateur public local · aucune exécution du fichier.</p></div><div class="footer-meta"><p>Le calcul reste dans le navigateur.</p><p><a href="./security.html">Sécurité & provenance</a> · <a href="./">Retour au site officiel</a></p></div></footer>
+  <footer class="site-footer"><div><strong>MODARYX MODS</strong><p>Explorez des créations et préparez vos projets avec des outils locaux.</p></div><nav aria-label="Navigation de pied de page"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./profiles.html">Profils</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a><a href="./downloads.html">Téléchargements</a><a href="./documentation.html#privacy">Données locales</a><a href="./public-status.json">Statut public</a></nav></footer>
 </body>
 </html>

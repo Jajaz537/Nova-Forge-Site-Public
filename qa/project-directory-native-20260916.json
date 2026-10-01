@@ -1,0 +1,47 @@
+{
+  "date": "2026-09-16",
+  "sourceHead": "d2929d070f2d8d90405e4cec24edf002cdbbcfab",
+  "preview": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project",
+  "keyboardNavigation": [
+    {
+      "link": "Découvrir Ember Textures",
+      "action": "Enter",
+      "destination": "/project-ember-textures",
+      "h1": "Ember Textures — Preview"
+    },
+    {
+      "link": "Découvrir Balanced Latency Pack",
+      "action": "Enter",
+      "destination": "/project-balanced-latency-pack",
+      "h1": "Balanced Latency Pack — Preview"
+    },
+    {
+      "link": "Découvrir Forge Night Experience",
+      "action": "Enter",
+      "destination": "/project-forge-night-experience",
+      "h1": "Forge Night Experience — Preview"
+    }
+  ],
+  "reflow": [
+    {
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "height": 900,
+      "contentHeight": 2347,
+      "positiveTabindex": 0
+    },
+    {
+      "requested": 768,
+      "width": 753,
+      "scroll": 753,
+      "height": 900,
+      "contentHeight": 1539,
+      "positiveTabindex": 0
+    }
+  ],
+  "visualInspection": "Capture tablette : en-tête, introduction et première carte lisibles dans la portion affichée.",
+  "testCorrection": "Sélection multiple après filtre level non pris en charge : lecture ciblée de h1. Aucun défaut produit déduit.",
+  "scope": "Liens activés par Entrée depuis leurs locators, pas un parcours Tab complet. Reflow iframe Chrome HTTPS ; pas un appareil physique, zoom natif, lecteur d’écran, audit visuel intégral, offline ou CWV.",
+  "vfValidated": false
+}

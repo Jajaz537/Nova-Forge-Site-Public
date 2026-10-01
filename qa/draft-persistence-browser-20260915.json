@@ -1,0 +1,118 @@
+{
+  "community": {
+    "baseline": {
+      "collection": "Aucune synchronisation réseau n’est active.",
+      "id": "ma-collection",
+      "submission": "Brouillon NON PUBLIÉ · aucune écriture réseau.",
+      "submissionId": "ma-contribution"
+    },
+    "checks": [
+      {
+        "case": "save both drafts",
+        "collection": "Collection sauvegardée uniquement dans ce navigateur · NON SYNCHRONISÉE.",
+        "submission": "Brouillon sauvegardé uniquement dans ce navigateur · NON PUBLIÉ."
+      },
+      {
+        "body": "Contenu QA initial non publié",
+        "case": "reload saved drafts",
+        "collection": "Collection locale restaurée depuis ce navigateur. Aucune synchronisation réseau n’a eu lieu.",
+        "collectionName": "Collection témoin QA",
+        "selected": 1,
+        "submission": "Brouillon local restauré. Il reste NON PUBLIÉ et non synchronisé."
+      },
+      {
+        "case": "invalid saves blocked",
+        "collection": "Sauvegarde bloquée : Nom requis, 160 caractères maximum.",
+        "submission": "Sauvegarde bloquée : Contenu requis, 8000 caractères maximum."
+      },
+      {
+        "body": "Contenu QA initial non publié",
+        "case": "invalid saves preserve old drafts",
+        "collectionName": "Collection témoin QA"
+      }
+    ],
+    "date": "2026-09-15T21:28:23.454Z",
+    "final": {
+      "body": "",
+      "collection": "Aucune synchronisation réseau n’est active.",
+      "collectionName": "Ma collection MODARYX",
+      "id": "ma-collection",
+      "selected": 0,
+      "submission": "Brouillon NON PUBLIÉ · aucune écriture réseau.",
+      "submissionId": "ma-contribution"
+    }
+  },
+  "studio": {
+    "baseline": {
+      "id": "",
+      "status": "Aucun brouillon sauvegardé dans cette session.",
+      "statuses": [
+        "Votre brouillon est en cours. Renseignez les champs obligatoires, puis choisissez Valider l’aperçu.",
+        "Aucun brouillon sauvegardé dans cette session."
+      ]
+    },
+    "checks": [
+      {
+        "case": "save valid draft",
+        "statuses": [
+          "Format du brouillon conforme. Cela ne vérifie ni la provenance, ni la signature, ni la compatibilité réelle.",
+          "Brouillon NON PUBLIÉ sauvegardé uniquement dans ce navigateur."
+        ]
+      },
+      {
+        "case": "edit without saving",
+        "name": "QA modification non sauvegardée",
+        "statuses": [
+          "Format du brouillon conforme. Cela ne vérifie ni la provenance, ni la signature, ni la compatibilité réelle.",
+          "Modifications non sauvegardées · validez ou sauvegardez à nouveau · NON PUBLIÉ."
+        ]
+      },
+      {
+        "case": "reload restores saved version",
+        "id": "qa-persistence-20260915",
+        "name": "QA sauvegarde initiale",
+        "statuses": [
+          "Format du brouillon conforme. Cela ne vérifie ni la provenance, ni la signature, ni la compatibilité réelle.",
+          "Brouillon V2 restauré depuis ce navigateur uniquement. Aucune donnée n’a été envoyée."
+        ]
+      },
+      {
+        "case": "invalid save attempt",
+        "name": " ",
+        "statuses": [
+          "À corriger : 1 point(s).Nom du projet: champ à renseigner",
+          "Brouillon bloqué : corrigez la validation locale avant sauvegarde ou export."
+        ]
+      },
+      {
+        "case": "invalid attempt preserves last saved version",
+        "name": "QA sauvegarde initiale"
+      },
+      {
+        "case": "explicit save persists revision",
+        "id": "qa-persistence-20260915",
+        "name": "QA sauvegarde révisée"
+      },
+      {
+        "case": "clear test draft",
+        "focus": "content-id",
+        "id": "",
+        "name": "",
+        "status": "Brouillons locaux effacés. Aucune suppression distante n’était nécessaire."
+      }
+    ],
+    "date": "2026-09-15T21:27:39.257Z",
+    "final": {
+      "id": "",
+      "name": "",
+      "status": "Aucun brouillon sauvegardé dans cette session."
+    }
+  },
+  "sourceCommit": "4fed30d2162e6e97e8c7b385951ad798833ca0f4",
+  "scope": "Chrome HTTPS, native form actions and same-session reloads; only deliberately created QA data saved and removed.",
+  "limits": [
+    "Not a browser restart or physical-device proof.",
+    "No storage quota failure, real offline cycle or screen-reader certification.",
+    "No remote publication or synchronization tested."
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "baseline": {
+    "favorites": [
+      {
+        "id": "ember-textures",
+        "pressed": "false"
+      },
+      {
+        "id": "balanced-latency-pack",
+        "pressed": "false"
+      },
+      {
+        "id": "forge-night-experience",
+        "pressed": "false"
+      }
+    ],
+    "views": [
+      {
+        "text": "Choisir une vue…",
+        "value": ""
+      }
+    ]
+  },
+  "checks": [
+    {
+      "case": "favorite survives navigation reload",
+      "pressed": "true"
+    },
+    {
+      "case": "remove last filtered favorite",
+      "count": "0 entrées",
+      "focus": "catalog-query"
+    },
+    {
+      "case": "save named view",
+      "count": "1 entrée",
+      "views": [
+        "Choisir une vue…",
+        "QA persistence 20260915"
+      ]
+    },
+    {
+      "case": "restore saved view after reload",
+      "count": "1 entrée",
+      "game": "Skyrim Special Edition"
+    },
+    {
+      "case": "delete test view",
+      "focus": "catalog-saved-view",
+      "views": [
+        "Choisir une vue…"
+      ]
+    }
+  ],
+  "date": "2026-09-15T21:17:24.511Z",
+  "final": {
+    "count": "3 entrées",
+    "favorites": [
+      {
+        "id": "ember-textures",
+        "pressed": "false"
+      },
+      {
+        "id": "balanced-latency-pack",
+        "pressed": "false"
+      },
+      {
+        "id": "forge-night-experience",
+        "pressed": "false"
+      }
+    ],
+    "views": [
+      {
+        "text": "Choisir une vue…",
+        "value": ""
+      }
+    ]
+  },
+  "sourceCommit": "06f8bf8643e743940358ca13f8bb29eee91135ab",
+  "scope": "Native Chrome HTTPS: existing UI controls, one same-session navigation reload, no cross-device claim.",
+  "limits": [
+    "Storage refusal remains source-model evidence, not a native browser quota test.",
+    "No browser restart, screen reader, physical device, offline or cross-tab synchronization proof.",
+    "Only test-created favorite and named view removed; final visible state matches initial state."
+  ]
+}

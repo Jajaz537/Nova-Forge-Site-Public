@@ -1,0 +1,779 @@
+{
+  "date": "2026-09-15",
+  "sourceCommit": "20556b8dd00a1064745c1268a8e430e4b81ec373",
+  "environment": "Chrome local, navigation directe des fichiers HTML avec requête de recette ; lecture du DOM après apparition de main.",
+  "checks": [
+    {
+      "brokenImages": [],
+      "h1": [
+        "Des mondes à explorer.Des idées à forger."
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": null,
+          "href": "#catalogue",
+          "text": "Mods"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Documentation"
+        }
+      ],
+      "path": "/index.html",
+      "scroll": 1348,
+      "title": "MODARYX MODS — Gaming, Mods & Modding Tools",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Explorez les projets, jeu par jeu."
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": "page",
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/catalog.html",
+      "scroll": 1348,
+      "title": "Catalogue — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Retrouvez un projet ou un outil."
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": null,
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": "page",
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/search.html",
+      "scroll": 1348,
+      "title": "Recherche — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Préparez la fiche de votre création."
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": null,
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": "page",
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/creator-studio.html",
+      "scroll": 1348,
+      "title": "Creator Studio — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Vos collections. Vos idées. À votre rythme."
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": null,
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": "page",
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/community.html",
+      "scroll": 1348,
+      "title": "Communauté — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Votre profil, vos moyens de connexion."
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": null,
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": "true",
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/profiles.html",
+      "scroll": 1348,
+      "title": "Profils et accès — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Un atelier web pour chaque étape."
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": null,
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": "page",
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/ecosystem.html",
+      "scroll": 1348,
+      "title": "Écosystème public — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Trouvez le bon outil. Comprenez ses limites."
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": null,
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": "page",
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/documentation.html",
+      "scroll": 1348,
+      "title": "Documentation publique — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Sachez ce que les preuves établissent."
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": null,
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": "page",
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/security.html",
+      "scroll": 1348,
+      "title": "Sécurité & provenance — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Vérifier un fichier sans l’envoyer."
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": null,
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": "true",
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/verify.html",
+      "scroll": 1348,
+      "title": "Vérificateur SHA-256 — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Les téléchargements ne sont pas encore ouverts."
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": null,
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": "true",
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/downloads.html",
+      "scroll": 1348,
+      "title": "Téléchargements publics — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Les projets à explorer."
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": "true",
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/project.html",
+      "scroll": 1348,
+      "title": "Projets — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Ember Textures — Preview"
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": "true",
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/project-ember-textures.html",
+      "scroll": 1348,
+      "title": "Ember Textures — Preview — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Balanced Latency Pack — Preview"
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": "true",
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/project-balanced-latency-pack.html",
+      "scroll": 1348,
+      "title": "Balanced Latency Pack — Preview — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Forge Night Experience — Preview"
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": "true",
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/project-forge-night-experience.html",
+      "scroll": 1348,
+      "title": "Forge Night Experience — Preview — MODARYX MODS",
+      "width": 1348
+    },
+    {
+      "brokenImages": [],
+      "h1": [
+        "Cette page est introuvable."
+      ],
+      "main": 1,
+      "nav": [
+        {
+          "current": null,
+          "href": "./catalog.html",
+          "text": "Catalogue"
+        },
+        {
+          "current": null,
+          "href": "./creator-studio.html",
+          "text": "Créer"
+        },
+        {
+          "current": null,
+          "href": "./community.html",
+          "text": "Communauté"
+        },
+        {
+          "current": null,
+          "href": "./ecosystem.html",
+          "text": "Écosystème"
+        },
+        {
+          "current": null,
+          "href": "./search.html",
+          "text": "Recherche"
+        },
+        {
+          "current": null,
+          "href": "./security.html",
+          "text": "Sécurité"
+        },
+        {
+          "current": null,
+          "href": "./documentation.html",
+          "text": "Aide"
+        }
+      ],
+      "path": "/404.html",
+      "scroll": 1363,
+      "title": "Page introuvable — MODARYX MODS",
+      "width": 1363
+    }
+  ],
+  "observations": {
+    "pages": 16,
+    "uniqueMain": true,
+    "uniqueH1": true,
+    "nonemptyTitle": true,
+    "horizontalOverflow": []
+  },
+  "limits": [
+    "Largeurs utiles desktop observées 1348 px et 1363 px selon présence de scrollbar ; aucun test de zoom natif.",
+    "Ouverture directe de 404.html uniquement : ne prouve pas le statut HTTP d’une route inexistante sur l’hébergement.",
+    "La liste brokenImages n’inclut que les images dont le chargement était terminé ; elle ne certifie pas toutes les images différées.",
+    "Contrôle DOM de navigation, pas revue pixel par pixel de toutes les sections, ni clavier/lecteur d’écran/appareils physiques.",
+    "Ne remplace pas les preuves HTTPS/PWA/performance terrain ni la validation VF."
+  ]
+}

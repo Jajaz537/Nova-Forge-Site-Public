@@ -1,0 +1,99 @@
+{
+  "date": "2026-09-15",
+  "sourceCommit": "8daaf440c7da1d1e8b8aa382242e7c31791390d2",
+  "scope": "Unsaved UI input and preview behavior; no import/export or screen-reader certification",
+  "beforeScroll": {
+    "body": 8000,
+    "description": 1200,
+    "previews": [
+      {
+        "children": 0,
+        "height": 447,
+        "id": "collection-preview",
+        "scrollHeight": 447,
+        "scrollWidth": 1251,
+        "textLength": 1411,
+        "width": 1251
+      },
+      {
+        "children": 0,
+        "height": 544,
+        "id": "submission-preview",
+        "scrollHeight": 1657,
+        "scrollWidth": 1236,
+        "textLength": 8288,
+        "width": 1236
+      }
+    ]
+  },
+  "keyboardEnd": {
+    "focus": "submission-preview",
+    "max": 1113,
+    "top": 1113
+  },
+  "reflow": [
+    {
+      "page": "community.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/community",
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "height": 900,
+      "contentHeight": 9449,
+      "h1": "Vos collections. Vos idées. À votre rythme.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 491.4,
+        "loadEndMs": 501.4,
+        "responseEndMs": 213.7
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    },
+    {
+      "page": "community.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/community",
+      "requested": 768,
+      "width": 753,
+      "scroll": 753,
+      "height": 900,
+      "contentHeight": 6653,
+      "h1": "Vos collections. Vos idées. À votre rythme.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 491.4,
+        "loadEndMs": 501.4,
+        "responseEndMs": 213.7
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    }
+  ],
+  "afterReload": {
+    "body": "",
+    "description": "",
+    "title": ""
+  },
+  "limitations": [
+    "No draft saved, imported or exported",
+    "No claim of full Unicode/RTL layout coverage",
+    "Ctrl+End scroll measured after settling; immediate measurement was zero",
+    "No physical-device or native screen-reader proof"
+  ]
+}

@@ -9,12 +9,18 @@
   <meta name="application-name" content="MODARYX MODS">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
   <meta name="description" content="Téléchargements publics MODARYX MODS : seuls les artefacts autorisés, identifiés et vérifiables peuvent apparaître sur cette surface.">
+
+
+
+
+<title>Téléchargements publics — MODARYX MODS</title>
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="MODARYX MODS">
   <meta property="og:title" content="Téléchargements publics — MODARYX MODS">
-  <meta property="og:description" content="Surface fail-closed de distribution MODARYX MODS : aucun artefact n’est publié sans identité, SHA-256, provenance et statut de signature.">
-  <title>Téléchargements publics — MODARYX MODS</title>
+  <meta property="og:description" content="Téléchargements publics MODARYX MODS : seuls les artefacts autorisés, identifiés et vérifiables peuvent apparaître sur cette surface.">
+  <meta property="og:url" content="https://modaryxmods.com/downloads">
+  <link rel="canonical" href="https://modaryxmods.com/downloads">
   <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
   <link rel="alternate" type="application/json" href="./downloads.json" title="MODARYX MODS — téléchargements publics">
@@ -25,39 +31,44 @@
   <script src="./assets/app.js" defer></script>
   <script src="./assets/downloads.js" defer></script>
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
-  <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">
+  <link rel="stylesheet" href="./assets/modaryx-foundations.css">
+  <link rel="stylesheet" href="./assets/modaryx-cinematic-system.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Aller au contenu</a>
   <header class="topbar">
     <a class="brand" href="./" aria-label="MODARYX MODS, retour au site officiel"><img class="brand-logo" src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="32" height="32"><span>MODARYX MODS</span></a>
-    <nav aria-label="Téléchargements publics"><a href="#availability">Disponibilité</a><a href="#contract">Contrat</a><a href="#verify">Vérifier</a></nav>
+    <nav aria-label="Navigation principale"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Aide</a></nav>
   </header>
 
   <main id="main">
+    <nav class="page-trail" aria-label="Fil d’Ariane"><a href="./index.html">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Téléchargements</span></nav>
+    <nav class="section-nav" aria-label="Téléchargements publics"><a href="#availability">Disponibilité</a><a href="#contract">Contrat</a><a href="#verify">Vérifier</a></nav>
     <section class="hero" aria-labelledby="downloads-page-title">
       <div class="hero-copy">
-        <p class="eyebrow">Distribution publique · fail-closed</p>
-        <h1 id="downloads-page-title">Aucun fichier sans chaîne de confiance.</h1>
-        <p class="lede">Cette page est la surface officielle prévue pour les artefacts publics MODARYX MODS. Elle reste volontairement vide tant qu’aucun fichier autorisé ne possède les preuves minimales nécessaires à une vérification indépendante.</p>
-        <div class="actions"><a class="button primary" href="#contract">Voir le contrat de publication</a><a class="button" href="./downloads.json">Manifeste JSON</a></div>
+        <p class="eyebrow">Téléchargements · disponibilité</p>
+        <h1 id="downloads-page-title">Les téléchargements ne sont pas encore ouverts.</h1>
+        <p class="lede">Aucun fichier MODARYX MODS n’est disponible au téléchargement pour le moment. Vous pouvez consulter les conditions de publication et apprendre à vérifier un fichier avant de l’utiliser.</p>
+        <div class="actions"><a class="button primary" href="#contract">Comprendre les vérifications requises</a><a class="button" href="./downloads.json">Consulter le manifeste JSON</a></div>
       </div>
       <aside class="hero-panel" aria-label="État actuel des téléchargements">
         <p class="eyebrow">État actuel</p>
         <ul class="feature-list">
-          <li><span>01</span><div><strong>Disponibilité</strong><small>Aucun artefact public déclaré disponible.</small></div></li>
-          <li><span>02</span><div><strong>Liens</strong><small>Aucun faux bouton ni URL de téléchargement de démonstration.</small></div></li>
+          <li><span>01</span><div><strong>Disponibilité</strong><small>Aucun fichier public déclaré disponible.</small></div></li>
+          <li><span>02</span><div><strong>Liens</strong><small>Les liens seront proposés lorsque les fichiers auront satisfait aux vérifications requises.</small></div></li>
           <li><span>03</span><div><strong>Preuves</strong><small>Identité, SHA-256, provenance et statut de signature sont requis avant publication.</small></div></li>
         </ul>
       </aside>
     </section>
 
     <section class="section" id="availability" aria-labelledby="availability-title">
-      <div class="section-heading"><div><p class="eyebrow">Disponibilité</p><h2 id="availability-title">Distribution verrouillée.</h2></div><span class="badge neutral" data-download-state data-state="locked">0 artefact</span></div>
+      <div class="section-heading"><div><p class="eyebrow">Disponibilité</p><h2 id="availability-title">Distribution verrouillée.</h2></div><span class="badge neutral">Publication contrôlée</span></div>
+      <p data-download-state data-state="locked" role="status" aria-live="polite" tabindex="-1">Aucun téléchargement public déclaré disponible.</p>
+      <button class="button" type="button" data-download-retry hidden>Réessayer</button>
       <div class="panel locked-panel">
-        <span class="lock-icon" aria-hidden="true">◇</span>
+        <p class="eyebrow">Porte de publication</p>
         <h3>Aucun téléchargement public validé</h3>
-        <p>Le manifeste <code>downloads.json</code> déclare actuellement <code>available=false</code> et une liste <code>artifacts=[]</code>. Cette page ne déduit jamais une disponibilité à partir d’un fichier présent ailleurs.</p>
+        <ul class="feature-list"><li><span>01</span><div><strong>Artefact</strong><small>Aucun fichier public autorisé.</small></div></li><li><span>02</span><div><strong>Preuves</strong><small>Identité, intégrité et provenance requises.</small></div></li><li><span>03</span><div><strong>Accès</strong><small>Les liens restent verrouillés jusqu’à validation.</small></div></li></ul>
       </div>
       <div class="cards" data-download-artifacts aria-live="polite"></div>
     </section>
@@ -84,6 +95,6 @@
     </section>
   </main>
 
-  <footer><div><strong>MODARYX MODS</strong><p>Téléchargements publics · surface pré-VF.</p></div><div class="footer-meta"><p>Aucun artefact public n’est déclaré disponible.</p><p><a href="./downloads.json">Manifeste JSON</a> · <a href="./public-status.json">Statut public</a></p></div></footer>
+  <footer class="site-footer"><div><strong>MODARYX MODS</strong><p>Explorez des créations et préparez vos projets avec des outils locaux.</p></div><nav aria-label="Navigation de pied de page"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./profiles.html">Profils</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a><a href="./downloads.html">Téléchargements</a><a href="./documentation.html#privacy">Données locales</a><a href="./public-status.json">Statut public</a></nav></footer>
 </body>
 </html>

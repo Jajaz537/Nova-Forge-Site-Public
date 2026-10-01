@@ -1,0 +1,30 @@
+const fs = require('node:fs'), path = require('node:path'), vm = require('node:vm'), assert = require('node:assert/strict');
+const source = fs.readFileSync(path.join(__dirname, '../assets/catalog.js'), 'utf8');
+const unit = source.match(/  function applySavedView\([^]*?\n  }/)[0];
+const select = values => ({ value: '', options: values.map(value => ({ value })) });
+function run(filters) {
+  const context = { queryInput: {}, kindSelect: select(['', 'mod', 'pack', 'experience']), gameSelect: select(['', 'Minecraft']), evidenceSelect: select(['', 'unknown', 'estimated', 'measured']), sortSelect: select(['featured', 'name', 'updated']), favoritesOnly: {}, items: [1], render() {}, viewsStateNode: {} };
+  const view = { name: 'Saved', filters }; const before = JSON.stringify(view);
+  vm.createContext(context); vm.runInContext(unit, context); context.applySavedView(view);
+  assert.equal(JSON.stringify(view), before, 'Stored view must not be rewritten');
+  return context;
+}
+const checks = [];
+let result = run({ q: 'Ember', kind: 'pack', game: 'Minecraft', evidence: 'estimated', sort: 'name', favoritesOnly: true });
+assert.equal(result.kindSelect.value, 'pack'); assert.equal(result.sortSelect.value, 'name'); assert.equal(result.queryInput.value, 'Ember'); assert.equal(result.favoritesOnly.checked, true);
+assert.match(result.viewsStateNode.textContent, /appliquée localement/);
+checks.push('Available saved options, query and favorites are restored unchanged');
+result = run({ kind: 'retired', game: 'Old game', evidence: 'old-state', sort: 'old-order' });
+assert.equal(result.kindSelect.value, ''); assert.equal(result.gameSelect.value, ''); assert.equal(result.evidenceSelect.value, ''); assert.equal(result.sortSelect.value, 'featured');
+assert.match(result.viewsStateNode.textContent, /indisponibles/);
+checks.push('Removed options reset to real defaults and announce adjustment without overwriting saved view');
+result = run({ kind: {}, game: 42, evidence: null, sort: false });
+assert.equal(result.kindSelect.value, ''); assert.equal(result.sortSelect.value, 'featured');
+assert.match(result.viewsStateNode.textContent, /réinitialisés/);
+checks.push('Malformed option values cannot leave selects without a valid selection');
+result = run({});
+assert.equal(result.sortSelect.value, 'featured'); assert.match(result.viewsStateNode.textContent, /appliquée localement/);
+checks.push('Omitted legacy fields use defaults without a false unavailable-choice warning');
+const report = { result: 'PASS', scope: 'Four source Node VM scenarios; not native browser proof', checks };
+fs.writeFileSync(path.join(__dirname, 'saved-view-options-checks.json'), JSON.stringify(report, null, 2) + '\n');
+console.log(JSON.stringify(report, null, 2));

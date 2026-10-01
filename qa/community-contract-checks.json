@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "scope": "Five grouped Node VM source scenarios, not native browser or actual storage restoration proof",
+  "checks": [
+    "Current catalogue loads before saved drafts are restored",
+    "Six malformed variants reject the whole catalogue before restoration; draft fields and selection remain intact and collection validation is blocked",
+    "Duplicate identifiers block collection and contribution catalogue loading",
+    "Non-public records are excluded before public field validation",
+    "Valid empty catalogue remains distinct from an invalid response"
+  ]
+}

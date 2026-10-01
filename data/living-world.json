@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "worldId": "modaryx-living-world",
+  "clock": {
+    "model": "shared-world-utc",
+    "epoch": "2026-09-19T00:00:00Z",
+    "refreshSeconds": 60
+  },
+  "inhabitants": [
+    {
+      "id": "wolf",
+      "label": "Loup",
+      "bornAt": "2026-09-19T00:00:00Z",
+      "stages": [
+        {
+          "id": "baby",
+          "fromDay": 0,
+          "label": "Louveteau"
+        },
+        {
+          "id": "juvenile",
+          "fromDay": 45,
+          "label": "Loup juvénile"
+        },
+        {
+          "id": "adolescent",
+          "fromDay": 120,
+          "label": "Loup adolescent"
+        },
+        {
+          "id": "young-adult",
+          "fromDay": 270,
+          "label": "Jeune adulte"
+        },
+        {
+          "id": "adult",
+          "fromDay": 540,
+          "label": "Loup adulte"
+        }
+      ]
+    },
+    {
+      "id": "dragon",
+      "label": "Dragon",
+      "bornAt": "2026-09-19T00:00:00Z",
+      "stages": [
+        {
+          "id": "baby",
+          "fromDay": 0,
+          "label": "Dragonneau"
+        },
+        {
+          "id": "juvenile",
+          "fromDay": 60,
+          "label": "Dragon juvénile"
+        },
+        {
+          "id": "adolescent",
+          "fromDay": 150,
+          "label": "Dragon adolescent"
+        },
+        {
+          "id": "young-adult",
+          "fromDay": 330,
+          "label": "Jeune adulte"
+        },
+        {
+          "id": "adult",
+          "fromDay": 720,
+          "label": "Dragon adulte"
+        }
+      ]
+    }
+  ],
+  "dayPhases": [
+    {
+      "id": "night",
+      "fromHour": 0,
+      "label": "Nuit calme",
+      "activity": "Le royaume ralentit · veille nocturne"
+    },
+    {
+      "id": "dawn",
+      "fromHour": 5,
+      "label": "Aube",
+      "activity": "Le royaume s’éveille · première lumière"
+    },
+    {
+      "id": "day",
+      "fromHour": 8,
+      "label": "Journée vivante",
+      "activity": "Le royaume vit pleinement · activité du jour"
+    },
+    {
+      "id": "dusk",
+      "fromHour": 18,
+      "label": "Crépuscule",
+      "activity": "Le royaume ralentit · lumières du soir"
+    },
+    {
+      "id": "night",
+      "fromHour": 22,
+      "label": "Nuit calme",
+      "activity": "Le royaume ralentit · veille nocturne"
+    }
+  ],
+  "principles": {
+    "sharedProgression": true,
+    "noRemoteAccountRequired": true,
+    "reducedMotionRespected": true,
+    "visualGrowthRequiresLayeredCharacterAssets": true,
+    "sharedStageOrder": true,
+    "independentGrowthPace": true
+  },
+  "growthModel": {
+    "id": "shared-companion-life-stages-v1",
+    "order": [
+      "baby",
+      "juvenile",
+      "adolescent",
+      "young-adult",
+      "adult"
+    ],
+    "pace": "independent-per-species"
+  },
+  "visualGrowth": {
+    "model": "layered-stage-assets-v1",
+    "status": "awaiting-assets",
+    "canvas": {
+      "width": 1600,
+      "height": 900
+    },
+    "fallback": "composite-hero",
+    "environmentAsset": null,
+    "activation": "atomic-current-stage",
+    "assetPolicy": {
+      "sameOrigin": true,
+      "allowedPrefix": "./assets/living-world/",
+      "loading": "current-stage-only",
+      "cache": "runtime-on-demand"
+    },
+    "slots": [
+      {
+        "inhabitantId": "wolf",
+        "stages": {
+          "baby": null,
+          "juvenile": null,
+          "adolescent": null,
+          "young-adult": null,
+          "adult": null
+        }
+      },
+      {
+        "inhabitantId": "dragon",
+        "stages": {
+          "baby": null,
+          "juvenile": null,
+          "adolescent": null,
+          "young-adult": null,
+          "adult": null
+        }
+      }
+    ]
+  },
+  "ambientSignals": {
+    "model": "shared-world-cycle-v1",
+    "cadenceHours": 3,
+    "entries": [
+      {
+        "id": "dawn-watch",
+        "phases": [
+          "dawn"
+        ],
+        "text": "Les gardes relèvent la veille · les oiseaux quittent les remparts"
+      },
+      {
+        "id": "dawn-paths",
+        "phases": [
+          "dawn"
+        ],
+        "text": "Les sentiers s’éclairent · les premiers ateliers ouvrent"
+      },
+      {
+        "id": "day-market",
+        "phases": [
+          "day"
+        ],
+        "text": "Les ateliers travaillent · les marchés et jardins reprennent vie"
+      },
+      {
+        "id": "day-wildlife",
+        "phases": [
+          "day"
+        ],
+        "text": "Des oiseaux longent les falaises · la faune gagne les lisières"
+      },
+      {
+        "id": "day-patrol",
+        "phases": [
+          "day"
+        ],
+        "text": "Une patrouille traverse les ponts · les routes restent paisibles"
+      },
+      {
+        "id": "dusk-return",
+        "phases": [
+          "dusk"
+        ],
+        "text": "Les patrouilles rentrent · les lanternes s’allument près des ponts"
+      },
+      {
+        "id": "dusk-harbor",
+        "phases": [
+          "dusk"
+        ],
+        "text": "Les quais ralentissent · les lumières gagnent les façades"
+      },
+      {
+        "id": "night-watch",
+        "phases": [
+          "night"
+        ],
+        "text": "Les veilleurs parcourent les remparts · le royaume se calme"
+      },
+      {
+        "id": "night-wildlife",
+        "phases": [
+          "night"
+        ],
+        "text": "La vie nocturne reprend dans les bois · les chemins se font discrets"
+      }
+    ]
+  }
+}

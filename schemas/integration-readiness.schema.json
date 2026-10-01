@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:modaryx:schemas:integration-readiness:v1",
+  "title": "MODARYX Integration Readiness V1",
+  "description": "Contract-only readiness map. It describes safe UI and integration boundaries without claiming that a remote service, licensed corpus or distributable artifact exists.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "surface", "capabilities"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "surface": {"const": "modaryx-web"},
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "state", "contractPaths", "requiredInputs", "permissions", "uiStates", "publicationGate"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9.-]+$"},
+          "state": {"enum": ["local-only", "contract-ready", "blocked-inputs", "not-connected", "distribution-locked"]},
+          "contractPaths": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^\\./"}},
+          "requiredInputs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "permissions": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "uiStates": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["loading", "empty", "error", "unavailable"],
+            "properties": {
+              "loading": {"type": "string", "minLength": 1},
+              "empty": {"type": "string", "minLength": 1},
+              "error": {"type": "string", "minLength": 1},
+              "unavailable": {"type": "string", "minLength": 1}
+            }
+          },
+          "publicationGate": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

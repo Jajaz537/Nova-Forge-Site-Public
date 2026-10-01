@@ -1,0 +1,99 @@
+{
+  "date": "2026-09-15",
+  "sourceCommit": "4e8e87ce94be43f8bbf45ceb78d0bd2ec07c9d36",
+  "scope": "Chrome HTTPS preview; interface responses only, no game test or benchmark",
+  "observations": [
+    {
+      "step": "Analyze",
+      "text": [
+        "CPU logique exposé : 5ObservéMémoire appareil exposée : 8 GiB environEstiméLargeur écran exposée : 1364 pxObservéRapport de pixels : 1ObservéProfil local suggéré : MoyenEstiméAnalyse locale indicative : « Observé » décrit une valeur exposée par ce navigateur, sans certifier le matériel physique. Aucun FPS ni niveau de stabilité n’est garanti.Préparer un essai borné"
+      ]
+    },
+    {
+      "step": "Acceptable / stable",
+      "text": [
+        "CPU logique exposé : 5ObservéMémoire appareil exposée : 8 GiB environEstiméLargeur écran exposée : 1364 pxObservéRapport de pixels : 1ObservéProfil local suggéré : MoyenEstiméAnalyse locale indicative : « Observé » décrit une valeur exposée par ce navigateur, sans certifier le matériel physique. Aucun FPS ni niveau de stabilité n’est garanti.Fermer le protocole d’essaiEssai borné — aucune modification automatiqueCe protocole ne mesure pas vos FPS et ne change aucun réglage. Il vous aide à tester manuellement une option plus ambitieuse sans transformer une estimation en garantie.Risque : la recommandation reste une estimation tant qu’aucune mesure réelle du jeu n’est fournie.Sauvegarde : notez vos réglages actuels et utilisez, si le jeu le permet, une sauvegarde ou un profil de configuration réversible.Test borné : limitez l’essai à une courte session reproductible (par exemple 10 minutes, même zone/scène, mêmes réglages hors variable testée).Mesure / comparaison : comparez fluidité, latence ressentie, stabilité et erreurs avec votre état de référence.Décision : conservez seulement si le résultat est acceptable ; sinon restaurez vos réglages ou baissez un seul réglage ciblé.Après votre test manuel, indiquez uniquement le résultat local :Acceptable / stableDégradé / instableInconnu / non concluantRésultat local noté : acceptable. Conservez le changement uniquement pour ce scénario testé ; cela ne devient pas une garantie générale.",
+        "Résultat local noté : acceptable. Conservez le changement uniquement pour ce scénario testé ; cela ne devient pas une garantie générale."
+      ]
+    },
+    {
+      "step": "Dégradé / instable",
+      "text": [
+        "CPU logique exposé : 5ObservéMémoire appareil exposée : 8 GiB environEstiméLargeur écran exposée : 1364 pxObservéRapport de pixels : 1ObservéProfil local suggéré : MoyenEstiméAnalyse locale indicative : « Observé » décrit une valeur exposée par ce navigateur, sans certifier le matériel physique. Aucun FPS ni niveau de stabilité n’est garanti.Fermer le protocole d’essaiEssai borné — aucune modification automatiqueCe protocole ne mesure pas vos FPS et ne change aucun réglage. Il vous aide à tester manuellement une option plus ambitieuse sans transformer une estimation en garantie.Risque : la recommandation reste une estimation tant qu’aucune mesure réelle du jeu n’est fournie.Sauvegarde : notez vos réglages actuels et utilisez, si le jeu le permet, une sauvegarde ou un profil de configuration réversible.Test borné : limitez l’essai à une courte session reproductible (par exemple 10 minutes, même zone/scène, mêmes réglages hors variable testée).Mesure / comparaison : comparez fluidité, latence ressentie, stabilité et erreurs avec votre état de référence.Décision : conservez seulement si le résultat est acceptable ; sinon restaurez vos réglages ou baissez un seul réglage ciblé.Après votre test manuel, indiquez uniquement le résultat local :Acceptable / stableDégradé / instableInconnu / non concluantRésultat local noté : dégradé. Restaurez vos réglages, puis baissez un seul réglage avant un nouvel essai.",
+        "Résultat local noté : dégradé. Restaurez vos réglages, puis baissez un seul réglage avant un nouvel essai."
+      ]
+    },
+    {
+      "step": "Inconnu / non concluant",
+      "text": [
+        "CPU logique exposé : 5ObservéMémoire appareil exposée : 8 GiB environEstiméLargeur écran exposée : 1364 pxObservéRapport de pixels : 1ObservéProfil local suggéré : MoyenEstiméAnalyse locale indicative : « Observé » décrit une valeur exposée par ce navigateur, sans certifier le matériel physique. Aucun FPS ni niveau de stabilité n’est garanti.Fermer le protocole d’essaiEssai borné — aucune modification automatiqueCe protocole ne mesure pas vos FPS et ne change aucun réglage. Il vous aide à tester manuellement une option plus ambitieuse sans transformer une estimation en garantie.Risque : la recommandation reste une estimation tant qu’aucune mesure réelle du jeu n’est fournie.Sauvegarde : notez vos réglages actuels et utilisez, si le jeu le permet, une sauvegarde ou un profil de configuration réversible.Test borné : limitez l’essai à une courte session reproductible (par exemple 10 minutes, même zone/scène, mêmes réglages hors variable testée).Mesure / comparaison : comparez fluidité, latence ressentie, stabilité et erreurs avec votre état de référence.Décision : conservez seulement si le résultat est acceptable ; sinon restaurez vos réglages ou baissez un seul réglage ciblé.Après votre test manuel, indiquez uniquement le résultat local :Acceptable / stableDégradé / instableInconnu / non concluantRésultat local noté : non concluant. Gardez le réglage prudent ou refaites un essai plus reproductible.",
+        "Résultat local noté : non concluant. Gardez le réglage prudent ou refaites un essai plus reproductible."
+      ]
+    },
+    {
+      "step": "Close",
+      "text": [
+        "CPU logique exposé : 5ObservéMémoire appareil exposée : 8 GiB environEstiméLargeur écran exposée : 1364 pxObservéRapport de pixels : 1ObservéProfil local suggéré : MoyenEstiméAnalyse locale indicative : « Observé » décrit une valeur exposée par ce navigateur, sans certifier le matériel physique. Aucun FPS ni niveau de stabilité n’est garanti.Préparer un essai borné"
+      ]
+    }
+  ],
+  "reflow": [
+    {
+      "page": "index.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "height": 900,
+      "contentHeight": 14196,
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 367.4,
+        "loadEndMs": 368.9,
+        "responseEndMs": 156.3
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    },
+    {
+      "page": "index.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+      "requested": 768,
+      "width": 753,
+      "scroll": 753,
+      "height": 900,
+      "contentHeight": 10598,
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 367.4,
+        "loadEndMs": 368.9,
+        "responseEndMs": 156.3
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    }
+  ],
+  "limitations": [
+    "UI outcomes selected for testing only; no real game session performed",
+    "No native screen reader, physical device, native zoom or offline/update-cycle proof",
+    "Missing browser APIs and alternate hardware branches not exercised natively"
+  ]
+}

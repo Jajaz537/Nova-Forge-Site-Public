@@ -6,9 +6,16 @@
   <meta name="theme-color" content="#171715">
   <meta name="color-scheme" content="dark">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
-  <meta name="description" content="Contrats publics MODARYX MODS pour profils, passkeys WebAuthn, récupération, sessions et actions privilégiées.">
-  <title>Profiles & Passkeys — MODARYX MODS</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self' data:; connect-src 'self' https://challenges.cloudflare.com; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src https://challenges.cloudflare.com">
+  <meta name="description" content="Profil, accès et session MODARYX MODS : identité publique séparée, connexion sécurisée, passkeys et contrôles de confidentialité.">
+  <title>Profils et accès — MODARYX MODS</title>
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="MODARYX MODS">
+  <meta property="og:title" content="Profils et accès — MODARYX MODS">
+  <meta property="og:description" content="Profil, accès et session MODARYX MODS : identité publique séparée, connexion sécurisée, passkeys et contrôles de confidentialité.">
+  <meta property="og:url" content="https://modaryxmods.com/profiles">
+  <link rel="canonical" href="https://modaryxmods.com/profiles">
   <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
   <link rel="stylesheet" href="./assets/tokens.css">
@@ -18,39 +25,147 @@
   <script src="./assets/shell.js" defer></script>
   <script src="./assets/profiles.js" defer></script>
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
-  <link rel="stylesheet" href="./assets/nova-premium-hd-secondary.css">
+  <link rel="stylesheet" href="./assets/modaryx-foundations.css">
+  <link rel="stylesheet" href="./assets/modaryx-cinematic-system.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Aller au contenu</a>
   <header class="topbar">
     <a class="brand" href="./index.html" aria-label="MODARYX MODS, accueil"><img class="brand-logo" src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="32" height="32"><span>MODARYX MODS</span></a>
-    <nav aria-label="Navigation principale"><a href="./index.html">Accueil</a><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Creator Studio</a><a href="./profiles.html" aria-current="page">Profiles</a><a href="./security.html">Sécurité</a></nav>
+    <nav aria-label="Navigation principale"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Aide</a></nav>
   </header>
 
   <main id="main" class="profiles-page">
+    <nav class="page-trail" aria-label="Fil d’Ariane"><a href="./index.html">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Profils</span></nav>
+
     <section class="profiles-hero" aria-labelledby="profiles-title">
-      <div>
-        <p class="eyebrow">Identité publique · WebAuthn · provider-neutral</p>
-        <h1 id="profiles-title">Séparer ce qui est public de ce qui authentifie.</h1>
-        <p class="lede">Un profil public ne contient ni credential, ni session, ni mécanisme de récupération. Les passkeys restent des credentials WebAuthn ; MODARYX MODS n’a jamais besoin de stocker leur clé privée.</p>
+      <div class="profiles-hero-copy">
+        <p class="eyebrow">Profils · accès privé · identité publique</p>
+        <h1 id="profiles-title">Votre identité MODARYX, sans exposer vos moyens de connexion.</h1>
+        <p class="lede">Le profil public, la session de compte et les moyens de récupération restent séparés. L’interface ci-dessous s’active uniquement lorsque le backend DEV ou production correspondant est réellement provisionné.</p>
+        <div class="profiles-hero-signals" aria-label="Principes du compte">
+          <span>Session HttpOnly</span>
+          <span>Connexion Universal Login</span>
+          <span>Profil public séparé</span>
+        </div>
       </div>
-      <aside class="panel" aria-label="État de la surface"><strong>Contrat uniquement.</strong><p>Aucun compte n’est créé depuis cette page. Aucun credential n’est enregistré et aucun challenge d’authentification n’est simulé.</p></aside>
+      <aside class="panel profiles-trust-panel" aria-label="Architecture du compte">
+        <p class="eyebrow">Architecture fail-closed</p>
+        <ul class="feature-list">
+          <li><span>01</span><div><strong>Connexion déléguée</strong><small>Le navigateur ne conserve pas l’access token Auth0 dans son stockage local.</small></div></li>
+          <li><span>02</span><div><strong>Session privée</strong><small>La session MODARYX utilise un cookie HttpOnly et un identifiant hashé côté serveur.</small></div></li>
+          <li><span>03</span><div><strong>Disponibilité réelle</strong><small>L’interface ne prétend jamais qu’un compte est actif si les services ne sont pas provisionnés.</small></div></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="account-console" id="account-console" aria-labelledby="account-console-title" data-account-state="checking">
+      <div class="account-console-heading">
+        <div>
+          <p class="eyebrow">Console de compte</p>
+          <h2 id="account-console-title">Accès, session et profil public</h2>
+          <p id="account-status-copy">Vérification du service de compte…</p>
+        </div>
+        <span class="account-state-badge" id="account-status" role="status" aria-live="polite">Vérification…</span>
+      </div>
+
+      <div class="account-console-grid">
+        <article class="account-access-card">
+          <div class="account-card-kicker"><span class="account-orb" aria-hidden="true"></span><span>Accès sécurisé</span></div>
+          <h3 id="account-session-title">Aucune session confirmée</h3>
+          <p id="account-session-summary">MODARYX vérifie uniquement l’état fourni par le backend same-origin. Aucun état connecté n’est simulé localement.</p>
+          <div class="account-actions">
+            <a class="button account-primary-action" id="account-login" href="./profiles.html#account-console" aria-disabled="true">Se connecter</a>
+            <button class="button account-secondary-action" id="account-logout" type="button" hidden>Se déconnecter</button>
+          </div>
+          <p class="account-fineprint">La connexion passe par Universal Login puis revient sur MODARYX avec une session HttpOnly. Les moyens de connexion ne sont jamais affichés dans votre profil public.</p>
+        </article>
+
+        <article class="account-profile-card">
+          <div class="account-card-kicker"><span>Profil public</span><span class="account-privacy-pill">Contrôlé par vous</span></div>
+          <form id="profile-editor" novalidate>
+            <fieldset id="profile-editor-fields" disabled>
+              <div class="profile-form-grid">
+                <label><span>Pseudonyme</span><input id="profile-handle" name="handle" autocomplete="username" minlength="3" maxlength="32" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,31}" required placeholder="votre.pseudo"></label>
+                <label><span>Nom affiché</span><input id="profile-display-name" name="displayName" autocomplete="nickname" maxlength="80" required placeholder="Nom visible"></label>
+              </div>
+              <label><span>Présentation</span><textarea id="profile-bio" name="bio" maxlength="500" rows="4" placeholder="Quelques mots sur vos créations et vos univers."></textarea></label>
+              <div class="profile-form-grid profile-form-grid-bottom">
+                <label><span>Visibilité</span><select id="profile-visibility" name="visibility"><option value="private">Privé</option><option value="unlisted">Non listé</option><option value="public">Public</option></select></label>
+                <label class="profile-check"><input id="profile-creator" name="isCreator" type="checkbox"><span>Afficher mon statut de créateur</span></label>
+              </div>
+              <div id="turnstile-slot" class="turnstile-slot" hidden aria-label="Vérification anti-abus"></div>
+              <div class="profile-editor-actions">
+                <button class="button" id="profile-save" type="submit">Enregistrer le profil</button>
+                <span id="profile-form-status" role="status" aria-live="polite">Connectez-vous pour éditer votre profil.</span>
+              </div>
+            </fieldset>
+          </form>
+        </article>
+
+        <article class="account-access-card" id="account-authority-card" hidden>
+          <div class="account-card-kicker"><span class="account-orb" aria-hidden="true"></span><span>Autorité MODARYX</span></div>
+          <h3 id="account-authority-role">Compte membre</h3>
+          <p id="account-authority-summary">Les privilèges sont calculés côté serveur à partir de la session authentifiée.</p>
+          <ul class="feature-list" aria-label="Capacités du compte">
+            <li><span>01</span><div><strong>Administration</strong><small id="account-cap-admin">Non accordée.</small></div></li>
+            <li><span>02</span><div><strong>Modération</strong><small id="account-cap-moderation">Non accordée.</small></div></li>
+            <li><span>03</span><div><strong>Recours</strong><small id="account-cap-appeals">Non accordée.</small></div></li>
+            <li><span>04</span><div><strong>Infrastructure</strong><small>Les secrets Cloudflare, GitHub, DNS, Auth0 et fournisseurs ne sont jamais exposés au compte web.</small></div></li>
+          </ul>
+        </article>
+      </div>
+
+      <p class="account-console-note">En environnement non provisionné, cette console reste volontairement verrouillée. Une réponse locale, un cache ou une détection WebAuthn ne sont jamais interprétés comme une authentification réussie.</p>
+    </section>
+
+    <section class="public-profile-console" id="public-profile" aria-labelledby="public-profile-title" data-public-profile-state="idle">
+      <div class="public-profile-heading">
+        <div>
+          <p class="eyebrow">Découvrir un profil public</p>
+          <h2 id="public-profile-title">Une identité publique, jamais une session privée.</h2>
+          <p>Recherchez un pseudonyme public. Les profils privés ou non listés ne sont jamais révélés par cette surface.</p>
+        </div>
+        <span class="public-profile-state-badge" id="public-profile-state" role="status" aria-live="polite">Prêt</span>
+      </div>
+
+      <form class="public-profile-search" id="public-profile-search" novalidate>
+        <label for="public-profile-handle">Pseudonyme public</label>
+        <div class="public-profile-search-row">
+          <input id="public-profile-handle" name="profile" autocomplete="off" minlength="3" maxlength="32" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,31}" placeholder="@pseudo" required>
+          <button class="button" type="submit">Afficher le profil</button>
+        </div>
+        <p id="public-profile-search-status">Saisissez un pseudonyme pour charger uniquement les données déclarées publiques.</p>
+      </form>
+
+      <article class="public-profile-card" id="public-profile-card" hidden aria-live="polite">
+        <div class="public-profile-identity">
+          <div>
+            <p class="eyebrow" id="public-profile-handle-label">@profil</p>
+            <h3 id="public-profile-display-name">Profil public</h3>
+          </div>
+          <span class="badge neutral" id="public-profile-creator" hidden>Créateur</span>
+        </div>
+        <p class="public-profile-bio" id="public-profile-bio"></p>
+        <div class="public-profile-links" id="public-profile-links" aria-label="Liens publics du profil"></div>
+        <p class="public-profile-fineprint">Cette carte n’expose ni subject fournisseur, ni session, ni moyen de connexion. Seules les données d’un profil avec visibilité <strong>public</strong> sont servies.</p>
+      </article>
     </section>
 
     <section class="profiles-grid" aria-labelledby="boundaries-title">
-      <div class="section-heading"><div><p class="eyebrow">Frontières</p><h2 id="boundaries-title">Cinq domaines séparés</h2></div></div>
-      <article class="profile-card"><h3>Identité publique</h3><p>Handle, nom affiché, bio, visibilité, rôle créateur et collections. Contrat : <code>public-profile.schema.json</code>.</p></article>
-      <article class="profile-card"><h3>Credentials</h3><p>Passkeys WebAuthn actives ou révoquées, algorithme public, transports et politique de vérification utilisateur. Aucune clé privée dans MODARYX MODS.</p></article>
-      <article class="profile-card"><h3>Récupération</h3><p>État distinct du credential principal. Aucun mécanisme n’est présenté comme configuré sans preuve réelle.</p></article>
-      <article class="profile-card"><h3>Sessions & appareils</h3><p>Journal utilisateur des sessions actives, révoquées ou expirées, séparé du profil public.</p></article>
-      <article class="profile-card"><h3>Actions privilégiées</h3><p>Publication, modération et changements de sécurité exigent une ré-authentification récente.</p></article>
+      <div class="section-heading"><div><p class="eyebrow">Séparation des responsabilités</p><h2 id="boundaries-title">Cinq domaines distincts</h2></div></div>
+      <article class="profile-card"><h3>Identité publique</h3><p>Pseudonyme, nom affiché, biographie et collections composent votre présentation. Le subject d’identité fournisseur n’est pas exposé publiquement.</p></article>
+      <article class="profile-card"><h3>Moyens de connexion</h3><p>La connexion est déléguée à un fournisseur d’identité. Les secrets et access tokens restent hors du profil public et du stockage navigateur.</p></article>
+      <article class="profile-card"><h3>Récupération</h3><p>Les mécanismes de récupération restent gérés séparément du profil. Leur disponibilité dépend du tenant d’identité réellement provisionné.</p></article>
+      <article class="profile-card"><h3>Sessions & appareils</h3><p>La session web MODARYX est bornée dans le temps et révocable. Les données de session ne deviennent jamais des données de profil public.</p></article>
+      <article class="profile-card"><h3>Actions sensibles</h3><p>Les écritures distantes exigent une session réelle et des contrôles serveur. Les contributions communautaires restent soumises à modération.</p></article>
     </section>
 
     <section class="profiles-grid" aria-labelledby="webauthn-title">
       <div class="section-heading"><div><p class="eyebrow">Détection locale</p><h2 id="webauthn-title">Capacités WebAuthn de ce navigateur</h2></div><span class="badge" id="passkey-status" role="status" aria-live="polite">Non vérifié</span></div>
       <article class="profile-card"><h3>WebAuthn API</h3><p id="webauthn-api">État non vérifié.</p></article>
       <article class="profile-card"><h3>Authentificateur de plateforme</h3><p id="platform-authenticator">État non vérifié.</p></article>
-      <article class="profile-card"><h3>Conditional mediation</h3><p id="conditional-mediation">État non vérifié.</p></article>
+      <article class="profile-card"><h3>Suggestion de clés à la connexion</h3><p id="conditional-mediation">État non vérifié.</p></article>
       <p class="profiles-note">Ces contrôles mesurent uniquement la disponibilité d’API dans le navigateur. Ils ne prouvent pas qu’un compte existe, qu’une passkey est enregistrée, ni qu’une authentification a réussi.</p>
     </section>
 
@@ -60,6 +175,6 @@
     </section>
   </main>
 
-  <footer><div><strong>MODARYX MODS Profiles</strong><p>Identité publique séparée des credentials et des sessions.</p></div><p>Pré-VF · aucune authentification simulée</p></footer>
+  <footer class="site-footer"><div><strong>MODARYX MODS</strong><p>Explorez des créations et préparez vos projets avec des outils locaux.</p></div><nav aria-label="Navigation de pied de page"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./profiles.html">Profils</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a><a href="./downloads.html">Téléchargements</a><a href="./documentation.html#privacy">Données locales</a><a href="./public-status.json">Statut public</a></nav></footer>
 </body>
 </html>

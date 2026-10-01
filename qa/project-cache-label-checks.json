@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "scope": "Three Node VM source scenarios; not native offline proof",
+  "checks": [
+    "Network-only data has no cache notice",
+    "catalog cache notice survives a favorite action",
+    "graph cache notice survives a favorite action"
+  ]
+}

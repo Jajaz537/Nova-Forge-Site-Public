@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "kind": "Node VM targeted behavioral checks; no browser claim",
+  "checks": [
+    "Changed file during digest cannot publish stale match",
+    "Actual SHA256 empty-file match and invalidation after editing expected hash",
+    "Offline catalogue blocks collection export; refused deletes retain both community drafts",
+    "Saved Studio draft restores only once real schema and validator are available",
+    "Schema-invalid Studio import and storage-refused deletion preserve existing draft",
+    "Delayed schema response cannot overwrite newly typed Studio work",
+    "Valid empty search index keeps an explicit empty result state"
+  ]
+}

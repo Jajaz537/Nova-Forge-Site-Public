@@ -1,0 +1,105 @@
+{
+  "sourceCommit": "653bec05706d26cc975142f1ff3de12b1b684d8b",
+  "date": "2026-09-15",
+  "scope": "Chrome HTTPS, unsaved drafts; rendered state and JSON only",
+  "checks": [
+    {
+      "type": "review",
+      "rating": "0",
+      "dom": {
+        "focus": "submission-rating",
+        "invalid": "true",
+        "preview": "Brouillon local incomplet.",
+        "status": "Validation bloquée : La note doit être un entier de 1 à 5."
+      }
+    },
+    {
+      "type": "review",
+      "rating": "6",
+      "dom": {
+        "focus": "submission-rating",
+        "invalid": "true",
+        "preview": "Brouillon local incomplet.",
+        "status": "Validation bloquée : La note doit être un entier de 1 à 5."
+      }
+    },
+    {
+      "type": "review",
+      "rating": "2.5",
+      "dom": {
+        "focus": "submission-rating",
+        "invalid": "true",
+        "preview": "Brouillon local incomplet.",
+        "status": "Validation bloquée : La note doit être un entier de 1 à 5."
+      }
+    },
+    {
+      "type": "review",
+      "rating": "5",
+      "dom": {
+        "focus": "submission-validate",
+        "invalid": null,
+        "preview": "{\n  \"authorProfileId\": null,\n  \"body\": \"Contribution de recette non publiée.\",\n  \"id\": \"ma-contribution\",\n  \"kind\": \"review\",\n  \"moderationState\": \"not-submitted\",\n  \"publicationState\": \"local-draft\",\n  \"rating\": 5,\n  \"schemaVersion\": 1,\n  \"syncState\": \"local-only\",\n  \"targetId\": \"ember-textures\",\n  \"title\": \"Recette avis\"\n}\n",
+        "status": "Brouillon local valide · NON PUBLIÉ · aucune écriture réseau."
+      }
+    },
+    {
+      "type": "comment-empty-parent",
+      "dom": {
+        "focus": "submission-parent",
+        "invalid": "true",
+        "status": "Validation bloquée : Identifiant de la contribution parente : 2 à 128 caractères, lettres minuscules, chiffres, point, tiret ou underscore."
+      }
+    },
+    {
+      "type": "comment-valid",
+      "dom": {
+        "hiddenRating": true,
+        "preview": {
+          "authorProfileId": null,
+          "body": "Contribution de recette non publiée.",
+          "id": "ma-contribution",
+          "kind": "comment",
+          "moderationState": "not-submitted",
+          "parentSubmissionId": "parent-recette",
+          "publicationState": "local-draft",
+          "schemaVersion": 1,
+          "syncState": "local-only",
+          "targetId": "ember-textures"
+        },
+        "status": "Brouillon local valide · NON PUBLIÉ · aucune écriture réseau."
+      }
+    },
+    {
+      "type": "discussion-after-comment",
+      "dom": {
+        "hiddenParent": true,
+        "preview": {
+          "authorProfileId": null,
+          "body": "Contribution de recette non publiée.",
+          "id": "ma-contribution",
+          "kind": "discussion",
+          "moderationState": "not-submitted",
+          "publicationState": "local-draft",
+          "schemaVersion": 1,
+          "syncState": "local-only",
+          "targetId": "ember-textures",
+          "title": "Recette avis"
+        },
+        "status": "Brouillon local valide · NON PUBLIÉ · aucune écriture réseau."
+      }
+    }
+  ],
+  "restored": {
+    "body": "",
+    "kind": "discussion",
+    "parent": "",
+    "rating": "",
+    "title": ""
+  },
+  "limitations": [
+    "No save, import, export or server submission performed",
+    "Parent ID format validated, not existence of a real remote contribution",
+    "No native screen-reader or physical-device proof"
+  ]
+}

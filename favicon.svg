@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="MODARYX MODS">
-  <rect width="512" height="512" rx="112" fill="#171715"/>
-  <path d="M118 390V122L256 296L394 122V390" fill="none" stroke="#d8ad58" stroke-width="62" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="350" y="82" width="42" height="98" rx="10" fill="#cf7046"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#171715"/><path d="M118 390V122L256 296L394 122V390" fill="none" stroke="#d8ad58" stroke-width="62" stroke-linecap="round" stroke-linejoin="round"/><rect x="350" y="82" width="42" height="98" rx="10" fill="#cf7046"/></svg>

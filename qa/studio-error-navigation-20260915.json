@@ -1,0 +1,161 @@
+{
+  "checks": [
+    {
+      "bottom": 540.375,
+      "focus": "content-id",
+      "invalid": "true",
+      "outline": "solid",
+      "top": 492.375,
+      "viewport": 936
+    },
+    {
+      "bottom": 607.25,
+      "focus": "content-name",
+      "invalid": "true",
+      "outline": "solid",
+      "top": 559.25,
+      "viewport": 936
+    },
+    {
+      "bottom": 496.375,
+      "focus": "content-version",
+      "invalid": "true",
+      "outline": "solid",
+      "top": 448.375,
+      "viewport": 936
+    },
+    {
+      "bottom": 1055.40625,
+      "focus": "game-id",
+      "invalid": "true",
+      "outline": "solid",
+      "top": 1007.40625,
+      "viewport": 936
+    },
+    {
+      "bottom": 1044.40625,
+      "focus": "game-name",
+      "invalid": "true",
+      "outline": "solid",
+      "top": 996.40625,
+      "viewport": 936
+    },
+    {
+      "bottom": 2244.15625,
+      "focus": "creator-id",
+      "invalid": "true",
+      "outline": "solid",
+      "top": 2196.15625,
+      "viewport": 936
+    },
+    {
+      "bottom": 2232.15625,
+      "focus": "creator-name",
+      "invalid": "true",
+      "outline": "solid",
+      "top": 2184.15625,
+      "viewport": 936
+    },
+    {
+      "bottom": 2313.03125,
+      "focus": "license",
+      "invalid": "true",
+      "outline": "solid",
+      "top": 2265.03125,
+      "viewport": 936
+    }
+  ],
+  "date": "2026-09-15T20:49:14.355Z",
+  "responsive": [
+    {
+      "contentHeight": 7916,
+      "h1": "Préparez la fiche de votre création.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 413.5,
+        "loadEndMs": 425.3,
+        "responseEndMs": 197.4,
+        "type": "navigate"
+      },
+      "page": "creator-studio.html",
+      "positiveTabindex": 0,
+      "requested": 320,
+      "scroll": 305,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/creator-studio",
+      "width": 305
+    },
+    {
+      "contentHeight": 7358,
+      "h1": "Préparez la fiche de votre création.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 413.5,
+        "loadEndMs": 425.3,
+        "responseEndMs": 197.4,
+        "type": "navigate"
+      },
+      "page": "creator-studio.html",
+      "positiveTabindex": 0,
+      "requested": 390,
+      "scroll": 375,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/creator-studio",
+      "width": 375
+    },
+    {
+      "contentHeight": 6327,
+      "h1": "Préparez la fiche de votre création.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 413.5,
+        "loadEndMs": 425.3,
+        "responseEndMs": 197.4,
+        "type": "navigate"
+      },
+      "page": "creator-studio.html",
+      "positiveTabindex": 0,
+      "requested": 768,
+      "scroll": 753,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/creator-studio",
+      "width": 753
+    }
+  ],
+  "settledLast": {
+    "bottom": 542.03125,
+    "focus": "license",
+    "top": 494.03125,
+    "viewport": 936
+  },
+  "sourceCommit": "565e821a6257af23efc5c980c4a2a992162b99e6",
+  "limitations": [
+    "Activation with Enter observed for eight links; not a full tab-order or screen-reader test.",
+    "Immediate geometry sampled during smooth scrolling is not a visibility PASS. Only final license geometry was rechecked after settling.",
+    "No native zoom, physical device, offline cycle or CWV claim."
+  ]
+}

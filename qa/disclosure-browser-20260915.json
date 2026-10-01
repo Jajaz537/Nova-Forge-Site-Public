@@ -1,0 +1,301 @@
+{
+  "date": "2026-09-15",
+  "sourceCommit": "a4911e16e02e403a3cf97b8d952a9ae9c65066e8",
+  "scope": "Chrome HTTPS; native details keyboard activation and DOM state",
+  "checks": [
+    {
+      "page": "index.html",
+      "title": "Puis-je déjà télécharger les mods présentés ?",
+      "action": "Enter",
+      "details": [
+        {
+          "open": true,
+          "text": "Puis-je déjà télécharger les mods présentés ?Les créations actuellement affichées sont des entrées de démonstration. Aucun binaire ni téléchargement n’est fourni. Consultez le statut public pour connaître la disponibilité réelle.",
+          "title": "Puis-je déjà télécharger les mods présentés ?"
+        },
+        {
+          "open": false,
+          "text": "Que deviennent mes projets et mes collections ?Les outils du site permettent une préparation locale et des exports explicites. Exportez les données que vous souhaitez conserver : le stockage du navigateur peut être effacé. Une publication distante n’est jamais implicite.",
+          "title": "Que deviennent mes projets et mes collections ?"
+        },
+        {
+          "open": false,
+          "text": "Une provenance connue garantit-elle la compatibilité ?Non. L’origine, l’intégrité, les droits et la compatibilité sont des informations distinctes. Une compatibilité inconnue reste inconnue, même lorsqu’une source est identifiée.",
+          "title": "Une provenance connue garantit-elle la compatibilité ?"
+        },
+        {
+          "open": false,
+          "text": "MODARYX peut-il modifier mon jeu depuis cette page ?Aucun exécutable, protocole local ou service système n’est lancé par cette présentation. Les actions sensibles doivent rester explicites et respecter les règles du jeu concerné.",
+          "title": "MODARYX peut-il modifier mon jeu depuis cette page ?"
+        }
+      ]
+    },
+    {
+      "page": "index.html",
+      "title": "Puis-je déjà télécharger les mods présentés ?",
+      "action": "Space",
+      "open": 0
+    },
+    {
+      "page": "index.html",
+      "title": "Que deviennent mes projets et mes collections ?",
+      "action": "Enter",
+      "details": [
+        {
+          "open": false,
+          "text": "Puis-je déjà télécharger les mods présentés ?Les créations actuellement affichées sont des entrées de démonstration. Aucun binaire ni téléchargement n’est fourni. Consultez le statut public pour connaître la disponibilité réelle.",
+          "title": "Puis-je déjà télécharger les mods présentés ?"
+        },
+        {
+          "open": true,
+          "text": "Que deviennent mes projets et mes collections ?Les outils du site permettent une préparation locale et des exports explicites. Exportez les données que vous souhaitez conserver : le stockage du navigateur peut être effacé. Une publication distante n’est jamais implicite.",
+          "title": "Que deviennent mes projets et mes collections ?"
+        },
+        {
+          "open": false,
+          "text": "Une provenance connue garantit-elle la compatibilité ?Non. L’origine, l’intégrité, les droits et la compatibilité sont des informations distinctes. Une compatibilité inconnue reste inconnue, même lorsqu’une source est identifiée.",
+          "title": "Une provenance connue garantit-elle la compatibilité ?"
+        },
+        {
+          "open": false,
+          "text": "MODARYX peut-il modifier mon jeu depuis cette page ?Aucun exécutable, protocole local ou service système n’est lancé par cette présentation. Les actions sensibles doivent rester explicites et respecter les règles du jeu concerné.",
+          "title": "MODARYX peut-il modifier mon jeu depuis cette page ?"
+        }
+      ]
+    },
+    {
+      "page": "index.html",
+      "title": "Que deviennent mes projets et mes collections ?",
+      "action": "Space",
+      "open": 0
+    },
+    {
+      "page": "index.html",
+      "title": "Une provenance connue garantit-elle la compatibilité ?",
+      "action": "Enter",
+      "details": [
+        {
+          "open": false,
+          "text": "Puis-je déjà télécharger les mods présentés ?Les créations actuellement affichées sont des entrées de démonstration. Aucun binaire ni téléchargement n’est fourni. Consultez le statut public pour connaître la disponibilité réelle.",
+          "title": "Puis-je déjà télécharger les mods présentés ?"
+        },
+        {
+          "open": false,
+          "text": "Que deviennent mes projets et mes collections ?Les outils du site permettent une préparation locale et des exports explicites. Exportez les données que vous souhaitez conserver : le stockage du navigateur peut être effacé. Une publication distante n’est jamais implicite.",
+          "title": "Que deviennent mes projets et mes collections ?"
+        },
+        {
+          "open": true,
+          "text": "Une provenance connue garantit-elle la compatibilité ?Non. L’origine, l’intégrité, les droits et la compatibilité sont des informations distinctes. Une compatibilité inconnue reste inconnue, même lorsqu’une source est identifiée.",
+          "title": "Une provenance connue garantit-elle la compatibilité ?"
+        },
+        {
+          "open": false,
+          "text": "MODARYX peut-il modifier mon jeu depuis cette page ?Aucun exécutable, protocole local ou service système n’est lancé par cette présentation. Les actions sensibles doivent rester explicites et respecter les règles du jeu concerné.",
+          "title": "MODARYX peut-il modifier mon jeu depuis cette page ?"
+        }
+      ]
+    },
+    {
+      "page": "index.html",
+      "title": "Une provenance connue garantit-elle la compatibilité ?",
+      "action": "Space",
+      "open": 0
+    },
+    {
+      "page": "index.html",
+      "title": "MODARYX peut-il modifier mon jeu depuis cette page ?",
+      "action": "Enter",
+      "details": [
+        {
+          "open": false,
+          "text": "Puis-je déjà télécharger les mods présentés ?Les créations actuellement affichées sont des entrées de démonstration. Aucun binaire ni téléchargement n’est fourni. Consultez le statut public pour connaître la disponibilité réelle.",
+          "title": "Puis-je déjà télécharger les mods présentés ?"
+        },
+        {
+          "open": false,
+          "text": "Que deviennent mes projets et mes collections ?Les outils du site permettent une préparation locale et des exports explicites. Exportez les données que vous souhaitez conserver : le stockage du navigateur peut être effacé. Une publication distante n’est jamais implicite.",
+          "title": "Que deviennent mes projets et mes collections ?"
+        },
+        {
+          "open": false,
+          "text": "Une provenance connue garantit-elle la compatibilité ?Non. L’origine, l’intégrité, les droits et la compatibilité sont des informations distinctes. Une compatibilité inconnue reste inconnue, même lorsqu’une source est identifiée.",
+          "title": "Une provenance connue garantit-elle la compatibilité ?"
+        },
+        {
+          "open": true,
+          "text": "MODARYX peut-il modifier mon jeu depuis cette page ?Aucun exécutable, protocole local ou service système n’est lancé par cette présentation. Les actions sensibles doivent rester explicites et respecter les règles du jeu concerné.",
+          "title": "MODARYX peut-il modifier mon jeu depuis cette page ?"
+        }
+      ]
+    },
+    {
+      "page": "index.html",
+      "title": "MODARYX peut-il modifier mon jeu depuis cette page ?",
+      "action": "Space",
+      "open": 0
+    },
+    {
+      "page": "community.html",
+      "title": "Voir le JSON de ma collection",
+      "action": "Enter then Tab",
+      "dom": {
+        "focus": "collection-preview",
+        "open": [
+          {
+            "open": true,
+            "title": "Voir le JSON de ma collection"
+          },
+          {
+            "open": false,
+            "title": "Voir le JSON de ma contribution"
+          }
+        ],
+        "tag": "PRE"
+      }
+    },
+    {
+      "page": "community.html",
+      "title": "Voir le JSON de ma collection",
+      "action": "Space",
+      "open": 0
+    },
+    {
+      "page": "community.html",
+      "title": "Voir le JSON de ma contribution",
+      "action": "Enter then Tab",
+      "dom": {
+        "focus": "submission-preview",
+        "open": [
+          {
+            "open": false,
+            "title": "Voir le JSON de ma collection"
+          },
+          {
+            "open": true,
+            "title": "Voir le JSON de ma contribution"
+          }
+        ],
+        "tag": "PRE"
+      }
+    },
+    {
+      "page": "community.html",
+      "title": "Voir le JSON de ma contribution",
+      "action": "Space",
+      "open": 0
+    }
+  ],
+  "reflow": [
+    {
+      "page": "index.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "height": 900,
+      "contentHeight": 12886,
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 449.5,
+        "loadEndMs": 451.2,
+        "responseEndMs": 239
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    },
+    {
+      "page": "index.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+      "requested": 768,
+      "width": 753,
+      "scroll": 753,
+      "height": 900,
+      "contentHeight": 10291,
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 449.5,
+        "loadEndMs": 451.2,
+        "responseEndMs": 239
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    },
+    {
+      "page": "community.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/community",
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "height": 900,
+      "contentHeight": 8597,
+      "h1": "Vos collections. Vos idées. À votre rythme.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 331.4,
+        "loadEndMs": 337.4,
+        "responseEndMs": 87.2
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    },
+    {
+      "page": "community.html",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/community",
+      "requested": 768,
+      "width": 753,
+      "scroll": 753,
+      "height": 900,
+      "contentHeight": 5808,
+      "h1": "Vos collections. Vos idées. À votre rythme.",
+      "positiveTabindex": 0,
+      "navigation": {
+        "type": "navigate",
+        "domContentLoadedEndMs": 331.4,
+        "loadEndMs": 337.4,
+        "responseEndMs": 87.2
+      },
+      "serviceWorker": {
+        "supported": true,
+        "secure": true,
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        }
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof"
+    }
+  ],
+  "limitations": [
+    "Targeted activation, not full tab-order or native screen-reader certification",
+    "Community JSON tested with current empty drafts, not arbitrary long imported data",
+    "Initial measurement while loading discarded; retained measurements taken after document stabilization",
+    "No runtime modification or new global suite run"
+  ]
+}

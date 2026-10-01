@@ -1,0 +1,39 @@
+{
+  "date": "2026-09-16",
+  "sourceHead": "59c39da8babb46722f8c1c34bd9a94fcf1b0ac43",
+  "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/downloads",
+  "normalState": {
+    "text": "Aucun téléchargement public déclaré disponible",
+    "role": "status",
+    "retryHidden": true,
+    "artifactCount": 0
+  },
+  "desktop": {
+    "width": 1348,
+    "scroll": 1348,
+    "screenshotInspected": "Availability section: separate status paragraph, badge, locked panel; no visible overlap"
+  },
+  "reflow": [
+    {
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "height": 900,
+      "contentHeight": 4183,
+      "positiveTabindex": 0
+    },
+    {
+      "requested": 768,
+      "width": 753,
+      "scroll": 753,
+      "height": 900,
+      "contentHeight": 2646,
+      "positiveTabindex": 0
+    }
+  ],
+  "limitations": [
+    "Normal state only; failure and recovery tested in Node simulation, not native network interruption.",
+    "Iframe reflow is not physical-device or native zoom proof.",
+    "No screen reader, native offline lifecycle or CWV claim."
+  ]
+}

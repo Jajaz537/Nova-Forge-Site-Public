@@ -1,0 +1,43 @@
+{
+  "sourceCommit": "c518b4c4bb4cec286bf258bd00a05330b712a4ad",
+  "date": "2026-09-15",
+  "scope": "Chrome HTTPS direct navigation and DOM observations; no screen-reader claim",
+  "observations": [
+    {
+      "fragment": "incorrect",
+      "dom": {
+        "invalid": "true",
+        "message": "Lien de vérification invalideCorrigez ou effacez l’empreinte attendue avant le calcul.",
+        "state": "warning",
+        "value": "incorrect"
+      }
+    },
+    {
+      "fragment": "",
+      "dom": {
+        "invalid": "true",
+        "message": "Lien de vérification invalideCorrigez ou effacez l’empreinte attendue avant le calcul.",
+        "state": "warning",
+        "value": "?"
+      }
+    },
+    {
+      "fragment": "%E0%A4%A",
+      "dom": {
+        "invalid": "true",
+        "message": "Lien de vérification invalideCorrigez ou effacez l’empreinte attendue avant le calcul.",
+        "state": "warning",
+        "value": "%e0%a4%a"
+      }
+    },
+    {
+      "fragment": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "dom": {
+        "invalid": null,
+        "message": "Empreinte attendue préremplieChoisissez maintenant le fichier local à comparer. Le fragment d’URL n’est pas envoyé au serveur.",
+        "state": "neutral",
+        "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    }
+  ]
+}

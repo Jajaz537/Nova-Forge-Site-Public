@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "scope": "targeted Node VM consumer checks",
+  "checks": [
+    "Offline status/build visibly unqualified; old availability and digest are not presented as current.",
+    "Fresh metadata remains a declaration, not cryptographic verification; optional bridge copy is separate.",
+    "Unavailable status and missing build digest display explicit uncertainty.",
+    "Even a formerly available offline manifest cannot enable downloads.",
+    "Fresh conforming publication manifest enables links with explicit verification limits.",
+    "Non-local download paths still fail closed."
+  ]
+}

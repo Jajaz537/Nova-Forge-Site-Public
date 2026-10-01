@@ -1,0 +1,94 @@
+name: MODARYX Static Premium HD Review
+
+on:
+  pull_request:
+    branches:
+      - design/modaryx-premium-hd-20260914-work
+    paths:
+      - '.github/workflows/modaryx-static-premium-hd-review.yml'
+      - 'qa/check-static-premium-hd-review.mjs'
+      - '*.html'
+      - 'games/**'
+      - 'gta-6/**'
+      - 'red-dead-redemption-2/**'
+      - 'assets/site.css'
+      - 'assets/official.css'
+      - 'assets/project-hub.css'
+      - 'assets/catalog.css'
+      - 'assets/creator-studio.css'
+      - 'assets/profiles.css'
+      - 'assets/search.css'
+      - 'assets/verify-picker.css'
+      - 'assets/nova-premium-hd.css'
+      - 'assets/modaryx-foundations.css'
+      - 'assets/modaryx-cinematic-system.css'
+      - 'assets/modaryx-pages-finishline.css'
+      - 'assets/modaryx-home-cinematic.css'
+      - 'assets/modaryx-home-finishline.css'
+      - 'assets/living-world.css'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-static-premium-hd-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static-premium-review:
+    name: Chromium static Premium HD review
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Start local HTTP server
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4179 --bind 127.0.0.1 >"$RUNNER_TEMP/modaryx-static-http.log" 2>&1 &
+          echo $! >"$RUNNER_TEMP/modaryx-static-http.pid"
+          for attempt in {1..40}; do
+            curl --fail --silent http://127.0.0.1:4179/ecosystem.html >/dev/null && exit 0
+            sleep 0.25
+          done
+          cat "$RUNNER_TEMP/modaryx-static-http.log"
+          exit 1
+
+      - name: Run static Premium HD browser review
+        shell: bash
+        env:
+          MODARYX_TEST_ORIGIN: http://127.0.0.1:4179
+          MODARYX_STATIC_REVIEW_OUT: ${{ runner.temp }}/modaryx-static-premium-review
+        run: |
+          set -euo pipefail
+          node qa/check-static-premium-hd-review.mjs
+
+      - name: Upload static visual evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: modaryx-static-premium-review-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/modaryx-static-premium-review
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Stop local HTTP server
+        if: always()
+        shell: bash
+        run: |
+          test -f "$RUNNER_TEMP/modaryx-static-http.pid" && kill "$(cat "$RUNNER_TEMP/modaryx-static-http.pid")" 2>/dev/null || true

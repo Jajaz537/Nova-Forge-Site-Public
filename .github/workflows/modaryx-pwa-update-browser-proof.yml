@@ -1,0 +1,48 @@
+name: MODARYX PWA Update Browser Proof
+
+on:
+  pull_request:
+    branches:
+      - design/modaryx-premium-hd-20260914-work
+    paths:
+      - '.github/workflows/modaryx-pwa-update-browser-proof.yml'
+      - 'qa/check-pwa-update-browser.mjs'
+      - 'sw.js'
+      - 'assets/shell.js'
+      - 'index.html'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-pwa-update-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pwa-update:
+    name: Chromium PWA A-to-B update proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Run PWA A-to-B update proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --version
+          node qa/check-pwa-update-browser.mjs

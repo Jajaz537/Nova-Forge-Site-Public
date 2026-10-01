@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-16",
+  "sourceHead": "9f0d4f04bdd9c936f7525aee0fd295b508710f7d",
+  "keyboardReturnURLs": [
+    "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/games/#skyrim-se",
+    "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/games/#cyberpunk-2077",
+    "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/games/#minecraft"
+  ],
+  "reflow": [
+    {
+      "page": "project-ember-textures.html",
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "contentHeight": 3736,
+      "positiveTabindex": 0
+    },
+    {
+      "page": "project-balanced-latency-pack.html",
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "contentHeight": 3834,
+      "positiveTabindex": 0
+    },
+    {
+      "page": "project-forge-night-experience.html",
+      "requested": 320,
+      "width": 305,
+      "scroll": 305,
+      "contentHeight": 3842,
+      "positiveTabindex": 0
+    }
+  ],
+  "desktopAnchor": {
+    "target": "skyrim-se",
+    "targetTop": 99.921875,
+    "headerBottom": 76
+  },
+  "mobileAnchor": "Retour Minecraft activé dans le cadre 320 ; capture inspectée : carte Minecraft et titre visibles sous la barre fixe, texte et bouton sur plusieurs lignes sans chevauchement visible.",
+  "toolLimits": "Lectures par locator.evaluate interrompues par délais ; mesure desktop obtenue via DOM read-only. Géométrie mobile non obtenue après navigation du cadre ; inspection visuelle utilisée sans mesure chiffrée inventée.",
+  "scope": "Activations Entrée ciblées et reflow iframe Chrome. Ni parcours Tab exhaustif, appareil physique, lecteur d’écran, zoom natif ni cycle offline.",
+  "vfValidated": false
+}

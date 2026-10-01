@@ -1,0 +1,233 @@
+{
+  "checks": [
+    {
+      "before": {
+        "downloadLinks": 0,
+        "status": "Fiche de démonstration. Aucun fichier à télécharger.",
+        "title": "Ember Textures — Preview"
+      },
+      "catalogPressed": "true",
+      "id": "ember-textures",
+      "restored": "false"
+    },
+    {
+      "before": {
+        "downloadLinks": 0,
+        "status": "Informations du catalogue chargées. Cette fiche reste une démonstration sans téléchargement.",
+        "title": "Balanced Latency Pack — Preview"
+      },
+      "catalogPressed": "true",
+      "id": "balanced-latency-pack",
+      "restored": "false"
+    },
+    {
+      "before": {
+        "downloadLinks": 0,
+        "status": "Fiche de démonstration. Aucun fichier à télécharger.",
+        "title": "Forge Night Experience — Preview"
+      },
+      "catalogPressed": "true",
+      "id": "forge-night-experience",
+      "restored": "false"
+    }
+  ],
+  "date": "2026-09-15T21:58:12.745Z",
+  "reflow": [
+    {
+      "contentHeight": 3755,
+      "h1": "Ember Textures — Preview",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 389.8,
+        "loadEndMs": 394.6,
+        "responseEndMs": 161.7,
+        "type": "navigate"
+      },
+      "page": "project-ember-textures.html",
+      "positiveTabindex": 0,
+      "requested": 320,
+      "scroll": 305,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project-ember-textures",
+      "width": 305
+    },
+    {
+      "contentHeight": 2653,
+      "h1": "Ember Textures — Preview",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 389.8,
+        "loadEndMs": 394.6,
+        "responseEndMs": 161.7,
+        "type": "navigate"
+      },
+      "page": "project-ember-textures.html",
+      "positiveTabindex": 0,
+      "requested": 768,
+      "scroll": 753,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project-ember-textures",
+      "width": 753
+    },
+    {
+      "contentHeight": 3804,
+      "h1": "Balanced Latency Pack — Preview",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 309,
+        "loadEndMs": 312.3,
+        "responseEndMs": 89.3,
+        "type": "navigate"
+      },
+      "page": "project-balanced-latency-pack.html",
+      "positiveTabindex": 0,
+      "requested": 320,
+      "scroll": 305,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project-balanced-latency-pack",
+      "width": 305
+    },
+    {
+      "contentHeight": 2858,
+      "h1": "Balanced Latency Pack — Preview",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 309,
+        "loadEndMs": 312.3,
+        "responseEndMs": 89.3,
+        "type": "navigate"
+      },
+      "page": "project-balanced-latency-pack.html",
+      "positiveTabindex": 0,
+      "requested": 768,
+      "scroll": 753,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project-balanced-latency-pack",
+      "width": 753
+    },
+    {
+      "contentHeight": 3911,
+      "h1": "Forge Night Experience — Preview",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 397.6,
+        "loadEndMs": 399.7,
+        "responseEndMs": 122.1,
+        "type": "navigate"
+      },
+      "page": "project-forge-night-experience.html",
+      "positiveTabindex": 0,
+      "requested": 320,
+      "scroll": 305,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project-forge-night-experience",
+      "width": 305
+    },
+    {
+      "contentHeight": 2833,
+      "h1": "Forge Night Experience — Preview",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 397.6,
+        "loadEndMs": 399.7,
+        "responseEndMs": 122.1,
+        "type": "navigate"
+      },
+      "page": "project-forge-night-experience.html",
+      "positiveTabindex": 0,
+      "requested": 768,
+      "scroll": 753,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project-forge-night-experience",
+      "width": 753
+    }
+  ],
+  "returnLink": {
+    "title": "Explorez les projets, jeu par jeu.",
+    "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/catalog"
+  },
+  "rights": [
+    {
+      "license": [
+        "Non précisée — aperçu"
+      ],
+      "page": "project-ember-textures.html",
+      "redistribution": [
+        "Non autorisée"
+      ]
+    },
+    {
+      "license": [
+        "Non précisée — aperçu"
+      ],
+      "page": "project-balanced-latency-pack.html",
+      "redistribution": [
+        "Non autorisée"
+      ]
+    },
+    {
+      "license": [
+        "Non précisée — aperçu"
+      ],
+      "page": "project-forge-night-experience.html",
+      "redistribution": [
+        "Non autorisée"
+      ]
+    }
+  ],
+  "interactionCommit": "e8bc038713aa501e2fcc43aa9c1520c15dfc6ddb",
+  "copyCommit": "1aeb909e02e42d2d38ea31d2aa45bdca4b65b187",
+  "limits": [
+    "Native Chrome same-session navigation, not cross-tab or cross-device synchronization.",
+    "No files downloaded; preview status and absence of download attributes observed, not distribution certification.",
+    "Early old-revision response before publication excluded; no screen-reader or physical-device proof."
+  ]
+}

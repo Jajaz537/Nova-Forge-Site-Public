@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-16",
+  "sourceHead": "ec835bac2c8b2e955db4b1ab3572a9a3996fad7a",
+  "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/catalog",
+  "scope": "Chrome HTTPS, données enrichies chargées ; contrôle ciblé du parcours normal après modification des contrôles en état dégradé. Ni panne réseau native, ni lecteur d’écran, ni audit complet.",
+  "observations": [
+    "Minecraft sélectionné : 1 entrée",
+    "Vue QA MODARYX ec835ba enregistrée localement ; Appliquer activé",
+    "Réinitialisation : 3 entrées",
+    "Application de la vue : 1 entrée, confirmation affichée",
+    "Vue de test supprimée : confirmation affichée, Appliquer désactivé",
+    "Réinitialisation finale : 3 entrées"
+  ],
+  "testDataRemoved": true,
+  "vfValidated": false
+}

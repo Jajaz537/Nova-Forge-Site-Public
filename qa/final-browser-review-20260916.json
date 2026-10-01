@@ -1,0 +1,48 @@
+{
+  "date": "2026-09-16",
+  "sourceHead": "76cbe6d0beb9fabee2eb40924bc28085d89cd4eb",
+  "preview": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+  "browser": "Chromium distant",
+  "routesReviewed": 17,
+  "checksPerRoute": [
+    "titre non vide",
+    "un h1 unique",
+    "un main unique",
+    "absence de débordement horizontal au viewport desktop observé",
+    "absence d'identifiant dupliqué",
+    "absence d'image terminée avec largeur naturelle nulle"
+  ],
+  "results": {
+    "routesPassing": 17,
+    "routesFailing": 0,
+    "brokenImages": 0,
+    "duplicateIds": 0,
+    "horizontalOverflows": 0
+  },
+  "targetedVisualChecks": [
+    {
+      "route": "games/index.html",
+      "result": "PASS",
+      "evidence": "Le concept Portails Loup/Dragon est visible après chargement réseau complet ; image naturelle 1199 x 675, composition rendue."
+    },
+    {
+      "route": "ecosystem.html",
+      "result": "PASS",
+      "evidence": "Le concept Portails Loup/Dragon est visible et intégré à la composition de la page."
+    },
+    {
+      "route": "profiles.html",
+      "result": "PASS",
+      "evidence": "Aucun faux état courant Communauté dans la navigation."
+    },
+    {
+      "route": "verify.html",
+      "result": "PASS",
+      "evidence": "Sélecteur de fichier visible en français ; le focus clavier du champ réel rend le contour du libellé visible."
+    }
+  ],
+  "limitations": [
+    "La revue visuelle distante ne remplace pas Firefox, Safari, les appareils physiques ou les technologies d'assistance natives.",
+    "Les états asynchrones ou dépendants de services absents restent couverts par contrats, mocks explicitement identifiés et matrice externe, pas par une revendication de production."
+  ]
+}

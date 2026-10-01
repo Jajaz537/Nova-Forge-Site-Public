@@ -1,0 +1,54 @@
+{
+  "measuredAt": "2026-09-18",
+  "scope": "Targeted post-deployment proof for the files changed after 7454e13; no previously green audit was repeated",
+  "git": {
+    "pr": "https://github.com/Jajaz537/Nova-Forge-Site-Public/pull/12",
+    "branch": "design/modaryx-premium-hd-20260914-work",
+    "deployedCommit": "0e3acc1c3263ef29a464f6c920ffbf43fbf8a7ab",
+    "preDeploymentHead": "7454e13a80e78c6680b1499ee115bdd697ec2e0a",
+    "finalTree": "a5599e7d66f61e8dccaf029ed7acde37fd6a409c",
+    "localAndRemoteTreeMatch": true
+  },
+  "cloudflarePages": {
+    "status": "Deploy successful",
+    "immutablePreview": "https://747e35ca.nova-forge-site-public.pages.dev",
+    "branchPreview": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev",
+    "evidence": "Cloudflare Pages bot comment on PR #12 identifies latest commit 0e3acc1 and the immutable preview URL"
+  },
+  "affectedProofs": {
+    "sharedMenu": {
+      "status": "PASS",
+      "evidence": "Deployed assets/shell.js SHA-256 equals candidate; security gate reports zero dangerous DOM sinks; rendered navigation is named and present"
+    },
+    "pwaIdentityAndManifest": {
+      "status": "PASS",
+      "evidence": "Deployed site.webmanifest SHA-256 equals candidate; seven targeted metadata scenarios pass; description identifies MODARYX web and does not revive Modaryx OS"
+    },
+    "localPreviewServer": {
+      "status": "PASS",
+      "evidence": "Four targeted checks pass: home, clean route, JavaScript asset and real 404; deployed preview.mjs SHA-256 equals candidate"
+    },
+    "publicRouteStructure": {
+      "status": "PASS",
+      "evidence": "17/17 immutable-preview routes have a title, one h1, one main, one footer, zero broken images and zero horizontal overflow at the controlled viewport"
+    },
+    "staticSecurityGate": {
+      "status": "PASS",
+      "evidence": "17 public pages, zero dangerous DOM sinks, zero server runtime files and zero gate errors; Cloudflare account and origin TLS excluded"
+    },
+    "pwaSourceSemantics": {
+      "status": "PASS",
+      "evidence": "35 simulated assertions, 76 local files, 799909/800000 raw precache bytes, no missing file, no protected change; not an offline-browser claim"
+    }
+  },
+  "externalProofs": {
+    "exactDeploymentSha": "PASS",
+    "screenReader": "PREUVE MANQUANTE — no native screen reader available",
+    "nativeZoom200And400": "PREUVE MANQUANTE — prior remote-browser attempt produced no measurable zoom change",
+    "firefoxSafari": "PREUVE MANQUANTE — unavailable in current environment",
+    "physicalDevices": "PREUVE MANQUANTE — unavailable in current environment",
+    "pwaOfflineAndUpdate": "PREUVE MANQUANTE — browser exposes no controlled offline/update cycle",
+    "coreWebVitals": "PREUVE MANQUANTE — no stable LCP/CLS/INP profiler; Navigation Timing is not substituted"
+  },
+  "infrastructureChanges": []
+}

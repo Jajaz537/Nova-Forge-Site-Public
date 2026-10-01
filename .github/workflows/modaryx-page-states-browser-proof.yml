@@ -1,0 +1,87 @@
+name: MODARYX Page States Browser Proof
+
+on:
+  pull_request:
+    branches:
+      - design/modaryx-premium-hd-20260914-work
+    paths:
+      - '.github/workflows/modaryx-page-states-browser-proof.yml'
+      - 'qa/check-page-states-browser.mjs'
+      - 'search.html'
+      - 'downloads.html'
+      - 'assets/search.js'
+      - 'assets/downloads.js'
+      - 'data/search-index.json'
+      - 'downloads.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-page-states-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  page-states:
+    name: Chromium page states proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Start local HTTP server
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4173 --bind 127.0.0.1 >"$RUNNER_TEMP/modaryx-page-states-http.log" 2>&1 &
+          SERVER_PID=$!
+          echo "MODARYX_PAGE_STATES_SERVER_PID=$SERVER_PID" >> "$GITHUB_ENV"
+          for attempt in {1..40}; do
+            if curl --fail --silent --show-error http://127.0.0.1:4173/search.html >/dev/null; then
+              exit 0
+            fi
+            sleep 0.25
+          done
+          cat "$RUNNER_TEMP/modaryx-page-states-http.log"
+          exit 1
+
+      - name: Run page states browser proof
+        shell: bash
+        env:
+          MODARYX_TEST_ORIGIN: http://127.0.0.1:4173
+        run: |
+          set -euo pipefail
+          export MODARYX_STATE_OUT="$RUNNER_TEMP/modaryx-page-states"
+          node --version
+          node qa/check-page-states-browser.mjs
+
+      - name: Upload state screenshots
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: modaryx-page-states-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/modaryx-page-states
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Stop local HTTP server
+        if: always()
+        shell: bash
+        run: |
+          if test -n "${MODARYX_PAGE_STATES_SERVER_PID:-}"; then
+            kill "$MODARYX_PAGE_STATES_SERVER_PID" 2>/dev/null || true
+          fi

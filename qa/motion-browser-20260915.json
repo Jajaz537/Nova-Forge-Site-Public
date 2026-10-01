@@ -1,0 +1,244 @@
+{
+  "after": [
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/catalog"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/community"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/creator-studio"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/documentation"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/downloads"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/ecosystem"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/profiles"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project-balanced-latency-pack"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project-ember-textures"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/project-forge-night-experience"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": null,
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/search"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/security"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/verify"
+    },
+    {
+      "controlHeight": 44,
+      "pressed": "true",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/404"
+    }
+  ],
+  "baseline": {
+    "reduced": false,
+    "scroll": "smooth",
+    "transition": "0.16s, 0.16s, 0.16s, 0.16s"
+  },
+  "checks": [
+    {
+      "page": "catalog",
+      "reduced": "reduced",
+      "scroll": "auto",
+      "transition": "1e-05s"
+    },
+    {
+      "page": "home before fix",
+      "reduced": null,
+      "scroll": "smooth",
+      "transition": "0.16s, 0.16s, 0.16s, 0.16s"
+    }
+  ],
+  "date": "2026-09-15T21:37:28.328Z",
+  "responsive": [
+    {
+      "contentHeight": 12106,
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 632.3,
+        "loadEndMs": 635.4,
+        "responseEndMs": 278.4,
+        "type": "navigate"
+      },
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 320,
+      "scroll": 305,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+      "width": 305
+    },
+    {
+      "contentHeight": 9847,
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 632.3,
+        "loadEndMs": 635.4,
+        "responseEndMs": 278.4,
+        "type": "navigate"
+      },
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 768,
+      "scroll": 753,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+      "width": 753
+    },
+    {
+      "contentHeight": 7046,
+      "h1": "Des mondes à explorer.Des idées à forger.",
+      "height": 900,
+      "navigation": {
+        "domContentLoadedEndMs": 632.3,
+        "loadEndMs": 635.4,
+        "responseEndMs": 278.4,
+        "type": "navigate"
+      },
+      "page": "index.html",
+      "positiveTabindex": 0,
+      "requested": 1280,
+      "scroll": 1265,
+      "serviceWorker": {
+        "controller": {
+          "script": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/sw.js",
+          "state": "activated"
+        },
+        "secure": true,
+        "supported": true
+      },
+      "timingScope": "Single iframe navigation in this browser; not CWV, cold-cache, offline or physical-device proof",
+      "url": "https://design-modaryx-premium-hd-20.nova-forge-site-public.pages.dev/",
+      "width": 1265
+    }
+  ],
+  "restored": {
+    "label": "Mouvement système",
+    "pressed": "false",
+    "reduced": false,
+    "scroll": "smooth"
+  },
+  "sourceCommit": "fa54d0be9eabe1606e1d098ad3abcf84d74d92d1",
+  "limits": [
+    "Explicit site preference measured in Chrome HTTPS, not operating-system preference switching.",
+    "Computed duration and scroll behavior are observations, not a full animation inventory or screen-reader certification.",
+    "No change to physical-device, offline or CWV evidence."
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "schema": "modaryx-trusted-signers/v1",
+  "state": "no-trust-anchor-published",
+  "updatedAt": null,
+  "signers": []
+}

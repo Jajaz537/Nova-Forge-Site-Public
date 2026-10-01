@@ -1,0 +1,205 @@
+{
+  "date": "2026-09-15",
+  "sourceCommit": "7f391007afce45166827e1562b6fe7eb9b897173",
+  "method": "Chrome local desktop. Navigation directe, Tab réel via clavier, lecture activeElement, Entrée réelle, Tab réel, vérification de l’appartenance du focus à main. Aucun focus programmatique dans cette séquence finale.",
+  "checks": [
+    {
+      "page": "index",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Explorer les mods"
+      },
+      "passed": true
+    },
+    {
+      "page": "catalog",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "search",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "creator-studio",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "community",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "profiles",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "ecosystem",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "documentation",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "security",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "verify",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "downloads",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "project",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "project-ember-textures",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "project-balanced-latency-pack",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "project-forge-night-experience",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    },
+    {
+      "page": "404",
+      "first": {
+        "href": "#main",
+        "text": "Aller au contenu"
+      },
+      "after": {
+        "inMain": true,
+        "text": "Accueil"
+      },
+      "passed": true
+    }
+  ],
+  "limits": [
+    "Parcours limité au lien d’évitement, pas à l’ordre complet de tabulation.",
+    "Sur quinze pages, la reprise atteint le lien Accueil du fil d’Ariane à l’intérieur de main ; sur l’accueil, Explorer les mods.",
+    "Pas de lecteur d’écran, autre navigateur ou appareil physique.",
+    "Pas de validation complète WCAG ni VF."
+  ]
+}

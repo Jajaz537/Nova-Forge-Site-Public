@@ -1,38 +1,38 @@
 # MODARYX MODS — Inventaire d'idées avant VF
 
-Statuts : `INTÉGRÉ`, `PARTIEL`, `À FAIRE`, `BLOQUÉ EXTERNE`.
+Réconciliation du 15 septembre 2026. Source opérationnelle : `CHECKPOINT-CANONIQUE-NOVA-FORGE-MODARYX-2026-09-15.md`. **MODARYX web et Nova Forge OS sont distincts.**
 
-| Axe | Statut | Décision VF |
+Le registre détaillé avec fichiers observés, écarts et actions est `qa/MODARYX-ANTI-OUBLI.md`. Les statuts ci-dessous concernent l'idée complète, pas uniquement l'existence d'un fichier. Une lecture de code ne vaut pas validation d'usage.
+
+| Idée retenue | État | Décision / reste à faire |
 |---|---|---|
-| Identité MODARYX MODS | PARTIEL | Terminer le nettoyage public de l'ancienne marque et uniformiser logo/favicon/manifest. |
-| Design Premium HD global | PARTIEL | Garder la structure/placement décidé, refaire la finition de toutes les pages au même niveau. |
-| Catalogue multigaming | PARTIEL | Le faire évoluer vers une découverte par jeu, catégorie, compatibilité et confiance. |
-| GTA 6 Mods | À FAIRE | Créer un hub SEO éditorial riche, architecture de catégories, guides et fiches mod. |
-| Red Dead Redemption 2 Mods | À FAIRE | Créer le deuxième hub de référence sur la même architecture extensible. |
-| Autres jeux | À FAIRE | Prévoir un modèle réutilisable, sans créer de pages vides. |
-| Recherche | PARTIEL | Recherche globale jeu/mod/catégorie/créateur avec états compréhensibles. |
-| Creator Studio | PARTIEL | Conserver le manifeste local-first et améliorer onboarding, aperçu et UX Premium HD. |
-| Profils créateurs | PARTIEL | Uniformiser design, provenance, projets, collections et export local. |
-| Communauté | PARTIEL | Préserver modèle local/exportable, rendre l'expérience cohérente avec le catalogue. |
-| Provenance / signatures | INTÉGRÉ-PARTIEL | Conserver fail-closed, mieux exposer les preuves sans faux badge. |
-| Smart Profile | PARTIEL | Garder local-only, clarifier ce qui est analysé et ce qui reste inconnu. |
-| Modaryx Guide | PARTIEL | Assistance contextuelle, bornée, explicative, jamais substitut aux frontières de sécurité. |
-| Sécurité | PARTIEL | Harmoniser avec le nouveau branding et renforcer lisibilité des preuves/limites. |
-| Téléchargements | PARTIEL | Design final + états de version/hash/provenance explicites. |
-| Documentation | PARTIEL | Repenser navigation, guides par tâche, liens vers jeux/mods/outils. |
-| SEO par jeu/catégorie/mod | À FAIRE | Titres, metas, canoniques, données structurées et contenu substantiel. |
-| Sitemap / robots | PARTIEL | Finaliser pour `modaryxmods.com` après architecture définitive. |
-| Responsive / accessibilité | PARTIEL | QA complète clavier, contraste, mobile/tablette, reduced-motion. |
-| Performance | PARTIEL | Garder le statique léger, optimiser assets et limiter animations coûteuses. |
-| DNSSEC `modaryxmods.com` | BLOQUÉ EXTERNE | Attente IONOS pour publication DS ; ne bloque pas design/contenu. |
-| Suppression Cloudflare `getnovaforge.com` | BLOQUÉ EXTERNE | Seulement après DNSSEC complet + preuve HTTPS fraîche. |
+| Identité MODARYX MODS | EN COURS | Conserver marques M et assets MODARYX ; vérifier les libellés visibles et les noms accessibles. |
+| Design Premium HD global | EN COURS | Harmoniser seize pages ; preuves visuelles et responsive par page avant clôture. |
+| Catalogue multigaming | EN COURS | Trois entrées de démonstration, filtres et favoris présents ; contenu réel encore absent. |
+| Hubs GTA 6 et RDR2 | PREUVE MANQUANTE | Routes et contenu absents ; idée retenue non annulée. Publication conditionnée aux sources, droits et contenu substantiel. |
+| Autres jeux / catégories / guides | EN COURS | Modèle de données réutilisable présent ; architecture éditoriale complète absente. |
+| Recherche | EN COURS | Index statique local présent ; pas de service de recherche externe revendiqué. |
+| Creator Studio | EN COURS | Brouillon UMM, validation de format, sauvegarde/export locaux ; publication distante absente. |
+| Profils créateurs | PREUVE MANQUANTE | Contrats et diagnostic WebAuthn présents ; édition de profil et authentification de compte absentes. |
+| Communauté et collections | EN COURS | Brouillons/collections locaux exportables ; aucun backend de publication. |
+| Provenance et signatures | EN COURS | Empreinte locale et états séparés présents ; pas de signature du site ni attestation des démos. |
+| Smart Profile | EN COURS | Observation indicative du navigateur ; aucune mesure de performances en jeu. |
+| Guide MODARYX | PREUVE MANQUANTE | Présentation conceptuelle et assistance éditoriale ; pas de moteur de Guide connecté démontré. |
+| Sécurité, documentation, vérification | EN COURS | Pages existantes ; précision des limites et QA à consolider. |
+| Téléchargements | BLOQUÉ | `downloads.json` : `available:false`, zéro artefact ; conserver l'état indisponible. |
+| SEO jeux / catégories / mods | PREUVE MANQUANTE | Hubs retenus absents ; ne pas générer de pages vides. |
+| Sitemap / robots / canoniques | EN COURS | Évaluer les liens après architecture réelle ; configuration actuelle à préserver dans ce lot. |
+| Responsive / accessibilité | EN COURS | Suivi par page, largeur et parcours ; pas de conformité globale sans preuves. |
+| Performance | PREUVE MANQUANTE | Architecture statique conservée ; mesures navigateur et budgets à documenter. |
 
-## Points GitHub récupérés
+## Instructions historiques révoquées
 
-- Les anciennes branches `site/premium-hd-final-v1` et `site/supernova-premium-hd-v1` sont derrière `main` et n'ont plus de commits uniques à récupérer.
-- La PR brouillon de cutover domaine contient encore des éléments à trier (`robots.txt`, `sitemap.xml`, documentation de cutover) et ne doit pas être fusionnée en bloc dans son état historique.
-- Les noms internes historiques `nova-*` peuvent rester temporairement si leur renommage n'apporte aucun bénéfice utilisateur et risque de casser compatibilité/provenance ; aucune ancienne marque ne doit rester visible comme identité publique.
+L'inventaire précédent contenait une attente DS DNSSEC IONOS et une suppression Cloudflare de `getnovaforge.com` conditionnée à DNSSEC/HTTPS. **Ce sont des traces de l'ancien chantier, pas des tâches autorisées du chantier actuel.** L'ancien projet est abandonné ; ne pas supprimer, réactiver ou migrer d'infrastructure. Conserver `OLD_DOMAIN_UNTOUCHED`.
 
-## Critère de sortie
+Les mentions des branches `site/premium-hd-final-v1`, `site/supernova-premium-hd-v1` et d'une PR de cutover reflètent une inspection historique. Leur état n'est pas une preuve actuelle. Le candidat de travail est la PR brouillon #12 ; vérifier son HEAD avant mutation, ne pas fusionner l'ancienne PR en bloc.
 
-La VF visuelle ne sera considérée prête que lorsque chaque ligne `À FAIRE` pertinente pour le lancement aura été intégrée ou explicitement remplacée par une meilleure solution, puis vérifiée sur desktop et mobile.
+Les noms internes `nova-*` ne sont pas automatiquement obsolètes : schémas, clés de stockage et provenance exigent une migration distincte. Une mention de Nova Forge qui décrit réellement les OS peut rester, sans fusion des identités.
+
+## Sortie
+
+Une idée retenue doit être reliée à une capacité réelle, intégrée avec preuve, ou rester explicitement manquante. Ce registre ne valide ni ne reporte tacitement les hubs ou services absents. La VF n'est pas déclarée prête.
