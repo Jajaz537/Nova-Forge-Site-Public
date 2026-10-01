@@ -27,17 +27,6 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: Provide python3 compatibility on Windows
-        shell: powershell
-        run: |
-          $python = (Get-Command python -ErrorAction Stop).Source
-          $shimDir = Join-Path $env:RUNNER_TEMP 'modaryx-python-shim'
-          New-Item -ItemType Directory -Force -Path $shimDir | Out-Null
-          "@echo off`r`n\"$python\" %*" | Set-Content -Encoding ASCII (Join-Path $shimDir 'python3.cmd')
-          $shimDir | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          python --version
-          & (Join-Path $shimDir 'python3.cmd') --version
-
       - name: Verify exact candidate SHA
         shell: powershell
         run: |
