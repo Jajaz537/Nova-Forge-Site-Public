@@ -5,6 +5,10 @@ on:
     branches:
       - runner/modaryx-vf-final-sd-20261001
 
+concurrency:
+  group: modaryx-vf-final-sd-windows-v3
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
@@ -119,25 +123,23 @@ jobs:
           Write-Host "Preview ready: http://127.0.0.1:4175"
 
 
-      - name: Lab performance supplemental proof
-        continue-on-error: true
-        timeout-minutes: 3
-        shell: powershell
-        run: node qa/check-lab-performance.mjs
-
       - name: Browser accessibility proof
+        timeout-minutes: 5
         shell: powershell
         run: node qa/check-browser-a11y.mjs
 
       - name: Browser reflow proof
+        timeout-minutes: 5
         shell: powershell
         run: node qa/check-browser-reflow.mjs
 
       - name: Local functional browser proof
+        timeout-minutes: 5
         shell: powershell
         run: node qa/check-local-functional-browser.mjs
 
       - name: PWA installability proof
+        timeout-minutes: 5
         shell: powershell
         run: node qa/check-pwa-installability.mjs
 
@@ -146,4 +148,11 @@ jobs:
         timeout-minutes: 3
         shell: powershell
         run: node qa/check-real-world-sync-browser.mjs
+
+      - name: Lab performance supplemental proof
+        continue-on-error: true
+        timeout-minutes: 3
+        shell: powershell
+        run: node qa/check-lab-performance.mjs
+
 
