@@ -15,7 +15,7 @@ concurrency:
 jobs:
   final-sd-windows:
     name: Final SD Windows replay
-    runs-on: [self-hosted, Windows]
+    runs-on: self-hosted
     timeout-minutes: 90
     env:
       CANDIDATE_SHA: b6def6e17c0a40b3acee39fd2d1af48f537cfd81
