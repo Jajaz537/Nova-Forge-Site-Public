@@ -17,7 +17,7 @@ jobs:
       CANDIDATE_SHA: b6def6e17c0a40b3acee39fd2d1af48f537cfd81
     steps:
       - name: Checkout exact frozen candidate
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: ${{ env.CANDIDATE_SHA }}
           fetch-depth: 1
