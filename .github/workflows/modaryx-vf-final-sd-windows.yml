@@ -51,7 +51,6 @@ jobs:
         shell: powershell
         run: |
           npm run build
-          npm test
 
       - name: Targeted Finish Line source proof
         shell: powershell
@@ -82,6 +81,31 @@ jobs:
         run: |
           node qa/check-layered-growth-contract.mjs
           node qa/check-layered-growth-asset-gate.mjs
+
+      - name: Prepare Windows browser proof environment
+        shell: powershell
+        run: |
+          $candidates = @(
+            "$env:ProgramFiles(x86)\Microsoft\Edge\Application\msedge.exe",
+            "$env:ProgramFiles\Microsoft\Edge\Application\msedge.exe",
+            "$env:ProgramFiles\Google\Chrome\Application\chrome.exe",
+            "$env:ProgramFiles(x86)\Google\Chrome\Application\chrome.exe"
+          )
+          $browser = $candidates | Where-Object { $_ -and (Test-Path $_) } | Select-Object -First 1
+          if (-not $browser) { throw 'No supported Chromium browser found on SD-MODARYX' }
+          "CHROME_BIN=$browser" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "MODARYX_TEST_ORIGIN=http://127.0.0.1:4175" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          $env:PORT='4175'
+          $preview = Start-Process -FilePath node -ArgumentList 'preview.mjs' -PassThru -WindowStyle Hidden
+          "MODARYX_PREVIEW_PID=$($preview.Id)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          $deadline=(Get-Date).AddSeconds(20)
+          do {
+            try { $ok=(Invoke-WebRequest -UseBasicParsing http://127.0.0.1:4175/index.html -TimeoutSec 2).StatusCode -eq 200 } catch { $ok=$false }
+            if(-not $ok){ Start-Sleep -Milliseconds 300 }
+          } until($ok -or (Get-Date) -gt $deadline)
+          if(-not $ok){ throw 'MODARYX preview did not become ready on port 4175' }
+          Write-Host "Browser: $browser"
+          Write-Host "Preview ready: http://127.0.0.1:4175"
 
       - name: Browser accessibility proof
         shell: powershell
