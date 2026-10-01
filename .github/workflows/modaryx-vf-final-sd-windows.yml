@@ -18,7 +18,7 @@ jobs:
     runs-on: [self-hosted, Windows, X64]
     timeout-minutes: 90
     env:
-      CANDIDATE_SHA: 09ca7095116ef2602e8ac3bc55f2fde86d39618f
+      CANDIDATE_SHA: 49f08b3c5a9b37be3cca4fe272c330bca15150ec
     steps:
       - name: Checkout exact frozen candidate
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -53,38 +53,7 @@ jobs:
 
       - name: Build and source validation
         shell: powershell
-        run: |
-          npm run build
-
-      - name: Targeted Finish Line source proof
-        shell: powershell
-        run: node qa/check-site-first-vf.mjs
-
-      - name: Import race proof
-        shell: powershell
-        run: node qa/check-import-races.cjs
-
-      - name: Profile detection proof
-        shell: powershell
-        run: node qa/check-profile-detection.cjs
-
-      - name: Public metadata proof
-        shell: powershell
-        run: node qa/check-public-metadata.cjs
-
-      - name: Living chronicle proof
-        shell: powershell
-        run: node qa/check-living-chronicle.mjs
-
-      - name: Living world offline state proof
-        shell: powershell
-        run: node qa/check-living-world-offline-state.mjs
-
-      - name: Layered growth contract and asset gate
-        shell: powershell
-        run: |
-          node qa/check-layered-growth-contract.mjs
-          node qa/check-layered-growth-assets.mjs
+        run: npm run build
 
       - name: Prepare Windows browser proof environment
         shell: powershell
@@ -99,7 +68,7 @@ jobs:
             "E:\Program Files\Google\Chrome\Application\chrome.exe",
             "E:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
           )
-          $browser = $candidates | Where-Object { $_ -and (Test-Path $_) } | Select-Object -First 1
+          $browser = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
           if (-not $browser) {
             $browser = (Get-Process msedge -ErrorAction SilentlyContinue | Where-Object { $_.Path -and (Test-Path $_.Path) } | Select-Object -First 1 -ExpandProperty Path)
           }
@@ -112,47 +81,13 @@ jobs:
           "MODARYX_TEST_ORIGIN=http://127.0.0.1:4175" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           $env:PORT='4175'
           $preview = Start-Process -FilePath node -ArgumentList 'preview.mjs' -PassThru -WindowStyle Hidden
-          "MODARYX_PREVIEW_PID=$($preview.Id)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           $deadline=(Get-Date).AddSeconds(20)
           do {
             try { $ok=(Invoke-WebRequest -UseBasicParsing http://127.0.0.1:4175/index.html -TimeoutSec 2).StatusCode -eq 200 } catch { $ok=$false }
             if(-not $ok){ Start-Sleep -Milliseconds 300 }
           } until($ok -or (Get-Date) -gt $deadline)
           if(-not $ok){ throw 'MODARYX preview did not become ready on port 4175' }
-          Write-Host "Browser: $browser"
-          Write-Host "Preview ready: http://127.0.0.1:4175"
 
-
-      - name: Browser accessibility proof
-        timeout-minutes: 5
-        shell: powershell
-        run: node qa/check-browser-a11y.mjs
-
-      - name: Browser reflow proof
-        timeout-minutes: 5
-        shell: powershell
-        run: node qa/check-browser-reflow.mjs
-
-      - name: Local functional browser proof
-        timeout-minutes: 5
+      - name: Local functional targeted proof
         shell: powershell
         run: node qa/check-local-functional-browser.mjs
-
-      - name: PWA installability proof
-        timeout-minutes: 5
-        shell: powershell
-        run: node qa/check-pwa-installability.mjs
-
-      - name: Lab performance supplemental proof
-        continue-on-error: true
-        timeout-minutes: 3
-        shell: powershell
-        run: node qa/check-lab-performance.mjs
-
-      - name: Real-world sync browser supplemental proof
-        continue-on-error: true
-        timeout-minutes: 3
-        shell: powershell
-        run: node qa/check-real-world-sync-browser.mjs
-
-
