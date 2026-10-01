@@ -80,7 +80,7 @@ jobs:
         shell: powershell
         run: |
           node qa/check-layered-growth-contract.mjs
-          node qa/check-layered-growth-asset-gate.mjs
+          node qa/check-layered-growth-assets.mjs
 
       - name: Prepare Windows browser proof environment
         shell: powershell
