@@ -96,6 +96,13 @@ jobs:
             "E:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
           )
           $browser = $candidates | Where-Object { $_ -and (Test-Path $_) } | Select-Object -First 1
+          if (-not $browser) {
+            $browser = (Get-Process msedge -ErrorAction SilentlyContinue | Where-Object { $_.Path -and (Test-Path $_.Path) } | Select-Object -First 1 -ExpandProperty Path)
+          }
+          if (-not $browser) {
+            $cmd = Get-Command msedge,chrome -ErrorAction SilentlyContinue | Select-Object -First 1
+            if ($cmd) { $browser = $cmd.Source }
+          }
           if (-not $browser) { throw 'No supported Chromium browser found on SD-MODARYX' }
           "CHROME_BIN=$browser" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           "MODARYX_TEST_ORIGIN=http://127.0.0.1:4175" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
