@@ -8,15 +8,10 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: modaryx-vf-final-sd-windows-v2
-  cancel-in-progress: false
-
 jobs:
   final-sd-windows:
     name: Final SD Windows replay
-    runs-on: self-hosted
-    # dispatch-marker: sd-replay-2
+    runs-on: [self-hosted, Windows, X64]
     timeout-minutes: 90
     env:
       CANDIDATE_SHA: b6def6e17c0a40b3acee39fd2d1af48f537cfd81
