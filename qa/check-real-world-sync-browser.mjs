@@ -1,10 +1,11 @@
 import {spawn} from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 
 const ORIGIN=process.env.MODARYX_TEST_ORIGIN||'http://127.0.0.1:4178';
 const CHROME_BIN=process.env.CHROME_BIN||'google-chrome';
-const USER_DATA_DIR='/tmp/modaryx-reality-'+process.pid;
+const USER_DATA_DIR=path.join(os.tmpdir(),'modaryx-reality-'+process.pid);
 const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
 const failures=[];
 const assert=(name,condition)=>{if(!condition)failures.push(name);};

@@ -1,4 +1,6 @@
 import {spawn} from 'node:child_process';
+import os from 'node:os';
+import path from 'node:path';
 
 const ORIGIN = process.env.MODARYX_TEST_ORIGIN || 'http://127.0.0.1:4175';
 const CHROME_BIN = process.env.CHROME_BIN || 'google-chrome';
@@ -94,7 +96,7 @@ const chrome=spawn(CHROME_BIN,[
   '--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-background-networking',
   '--disable-default-apps','--disable-extensions','--disable-sync','--metrics-recording-only','--no-first-run',
   '--remote-debugging-address=127.0.0.1','--remote-debugging-port='+DEBUG_PORT,
-  '--user-data-dir=/tmp/modaryx-a11y-proof-'+process.pid,'about:blank'
+  '--user-data-dir='+path.join(os.tmpdir(),'modaryx-a11y-proof-'+process.pid),'about:blank'
 ],{stdio:['ignore','ignore','pipe']});
 
 let chromeStderr='';

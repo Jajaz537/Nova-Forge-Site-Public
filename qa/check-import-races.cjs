@@ -1,7 +1,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'../assets/community.js'),'utf8');
 class Element {
- constructor(){this.value='';this.type='text';this.children=[];this.files=[];this.events={};this.textContent='';}
+ constructor(){this.value='';this.type='text';this.children=[];this.files=[];this.events={};this.textContent='';this.dataset={};}
  addEventListener(n,f){(this.events[n]??=[]).push(f)}
  async fire(n,event={target:this}){for(const f of this.events[n]||[])await f(event)}
  append(...x){this.children.push(...x)} replaceChildren(...x){this.children=x}

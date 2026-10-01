@@ -1,10 +1,11 @@
 import {spawn} from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 
 const ORIGIN=process.env.MODARYX_TEST_ORIGIN||'http://127.0.0.1:4177';
 const CHROME_BIN=process.env.CHROME_BIN||'google-chrome';
-const USER_DATA_DIR='/tmp/modaryx-installability-'+process.pid;
+const USER_DATA_DIR=path.join(os.tmpdir(),'modaryx-installability-'+process.pid);
 const failures=[];
 const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
 

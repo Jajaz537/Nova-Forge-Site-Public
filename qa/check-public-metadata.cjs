@@ -22,9 +22,18 @@ function appFixture(responses) {
   const nodes = {'[data-public-status-message]': message, '[data-public-status-facts]': facts, '[data-profile-result]': profile, '[data-os-bridge]': bridgeButton};
   const context = {
     URL, navigator: {}, location: {protocol: 'https:'},
-    document: {baseURI: 'https://example.test/', createElement: tag => new Element(tag), querySelector: selector => selector === '[data-public-build-fact]' ? facts.children.find(node => node.dataset.buildFact) : nodes[selector] || null},
+    document: {
+      baseURI: 'https://example.test/',
+      readyState: 'loading',
+      documentElement: {dataset: {}},
+      createElement: tag => new Element(tag),
+      querySelector: selector => selector === '[data-public-build-fact]' ? facts.children.find(node => node.dataset.buildFact) : nodes[selector] || null,
+      querySelectorAll: () => []
+    },
     fetch: async url => responses[path.basename(url.pathname)]()
   };
+  context.addEventListener = () => {};
+  context.setTimeout = () => {};
   context.window = context;
   vm.runInNewContext(fs.readFileSync(path.join(base, 'assets/app.js'), 'utf8'), context);
   return {message, facts, bridgeButton, profile, build: () => context.document.querySelector('[data-public-build-fact]')};

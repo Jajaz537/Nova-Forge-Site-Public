@@ -1,4 +1,6 @@
 import {spawn} from 'node:child_process';
+import os from 'node:os';
+import path from 'node:path';
 
 const ORIGIN = process.env.MODARYX_TEST_ORIGIN || 'http://127.0.0.1:4173';
 const CHROME_BIN = process.env.CHROME_BIN || 'google-chrome';
@@ -123,7 +125,7 @@ const chrome = spawn(CHROME_BIN, [
   '--no-first-run',
   '--remote-debugging-address=127.0.0.1',
   '--remote-debugging-port=' + DEBUG_PORT,
-  '--user-data-dir=/tmp/modaryx-functional-proof-' + process.pid,
+  '--user-data-dir=' + path.join(os.tmpdir(), 'modaryx-functional-proof-' + process.pid),
   'about:blank'
 ], {stdio: ['ignore', 'ignore', 'pipe']});
 

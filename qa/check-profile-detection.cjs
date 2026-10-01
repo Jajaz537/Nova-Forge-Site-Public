@@ -5,8 +5,25 @@ const path = require('node:path');
 const source = fs.readFileSync(path.join(__dirname, '../assets/profiles.js'), 'utf8');
 async function run(methods) {
   const nodes = new Map();
-  const get = id => { if (!nodes.has(id)) nodes.set(id, {textContent: ''}); return nodes.get(id); };
-  const context = {document: {querySelector: get}};
+  const get = id => {
+    if (!nodes.has(id)) nodes.set(id, {
+      textContent: '',
+      addEventListener() {},
+      getAttribute() { return null; }
+    });
+    return nodes.get(id);
+  };
+  const context = {
+    URL,
+    URLSearchParams,
+    location: {search: '', pathname: '/profiles'},
+    document: {querySelector: id => [
+      '#passkey-status',
+      '#webauthn-api',
+      '#platform-authenticator',
+      '#conditional-mediation'
+    ].includes(id) ? get(id) : null}
+  };
   context.window = context;
   if (methods) context.PublicKeyCredential = Object.assign(function () {}, methods);
   vm.runInNewContext(source, context);
