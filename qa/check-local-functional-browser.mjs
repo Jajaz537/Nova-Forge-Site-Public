@@ -164,7 +164,11 @@ try {
       return true;
     })()`);
     const filtered = await waitFor(cdp,
-      `(() => ({count:document.querySelector('#catalog-count')?.textContent||'', ids:[...document.querySelectorAll('[data-catalog-id]')].map(n=>n.dataset.catalogId)}))()`,
+      `(() => {
+        const count=document.querySelector('#catalog-count')?.textContent||'';
+        const ids=[...document.querySelectorAll('[data-catalog-id]')].map(n=>n.dataset.catalogId);
+        return count.startsWith('1 ') && ids.length===1 ? {count,ids} : null;
+      })()`,
       'catalog filtered'
     );
     assert(filtered.count.startsWith('1 '), 'catalog did not filter to one item: ' + filtered.count);
