@@ -85,11 +85,23 @@ async function evaluate(cdp,expression,awaitPromise=false){
 }
 
 async function navigate(cdp,relative){
-  const loaded=cdp.once('Page.loadEventFired',12000);
-  const nav=await cdp.send('Page.navigate',{url:ORIGIN.replace(/\/$/,'')+'/'+relative});
-  if(nav.errorText) throw new Error('navigation failed: '+nav.errorText);
-  await loaded;
-  await sleep(220);
+  const url=ORIGIN.replace(/\/$/,'')+'/'+relative;
+  let lastError;
+  for(let attempt=1;attempt<=3;attempt++){
+    try{
+      await cdp.send('Page.stopLoading').catch(()=>{});
+      const loaded=cdp.once('Page.loadEventFired',20000);
+      const nav=await cdp.send('Page.navigate',{url});
+      if(nav.errorText) throw new Error('navigation failed: '+nav.errorText);
+      await loaded;
+      await sleep(300);
+      return;
+    }catch(error){
+      lastError=error;
+      if(attempt<3) await sleep(500*attempt);
+    }
+  }
+  throw lastError;
 }
 
 const chrome=spawn(CHROME_BIN,[
