@@ -178,12 +178,12 @@ img{display:block;max-width:100%}
 .mx-route-footer strong{
   color:var(--gold);font-family:Georgia,"Times New Roman",serif;letter-spacing:.12em;font-weight:500;
 }
-.mx-route-hero--univers .mx-route-hero__art{object-position:63% 44%}
-.mx-route-hero--compagnons .mx-route-hero__art{object-position:24% 55%}
-.mx-route-hero--aventures .mx-route-hero__art{object-position:50% 58%}
-.mx-route-hero--lieux .mx-route-hero__art{object-position:70% 46%}
-.mx-route-hero--factions .mx-route-hero__art{object-position:82% 68%}
-.mx-route-hero--communaute .mx-route-hero__art{object-position:35% 58%}
+.mx-route-hero--univers{background-position:82% 31%}
+.mx-route-hero--compagnons{background-position:17% 46%}
+.mx-route-hero--aventures{background-position:38% 62%}
+.mx-route-hero--lieux{background-position:100% 28%}
+.mx-route-hero--factions{background-position:91% 52%}
+.mx-route-hero--communaute{background-position:21% 47%}
 @media(max-width:1000px){
   .mx-route-nav{display:none}
   .mx-route-intro{grid-template-columns:1fr}
