@@ -181,4 +181,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: cancel-stale-runs
+# qa-trigger: final-editorial-routes
