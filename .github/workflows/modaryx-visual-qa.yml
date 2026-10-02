@@ -16,6 +16,8 @@ on:
       - 'communaute.html'
       - '404.html'
       - 'site.webmanifest'
+      - 'robots.txt'
+      - 'sitemap.xml'
       - '_redirects'
       - '_headers'
       - 'assets/modaryx-public-home.css'
@@ -80,6 +82,8 @@ jobs:
             file: 'factions.html'
           - name: communaute
             file: 'communaute.html'
+          - name: not-found
+            file: '404.html'
     steps:
       - name: Checkout exact candidate
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -240,4 +244,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: powershell-canon-gate
+# qa-trigger: full-public-surface
