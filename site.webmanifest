@@ -39,32 +39,32 @@
     {
       "name": "Univers",
       "short_name": "Univers",
-      "url": "./univers.html"
+      "url": "/univers"
     },
     {
       "name": "Compagnons",
       "short_name": "Compagnons",
-      "url": "./compagnons.html"
+      "url": "/compagnons"
     },
     {
       "name": "Aventures",
       "short_name": "Aventures",
-      "url": "./aventures.html"
+      "url": "/aventures"
     },
     {
       "name": "Lieux",
       "short_name": "Lieux",
-      "url": "./lieux.html"
+      "url": "/lieux"
     },
     {
       "name": "Factions",
       "short_name": "Factions",
-      "url": "./factions.html"
+      "url": "/factions"
     },
     {
       "name": "Communauté",
       "short_name": "Communauté",
-      "url": "./communaute.html"
+      "url": "/communaute"
     }
   ]
 }
