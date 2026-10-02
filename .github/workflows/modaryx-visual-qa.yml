@@ -1,0 +1,58 @@
+name: MODARYX Visual QA
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - design/modaryx-true-finishline-20261002
+    paths:
+      - '.github/workflows/modaryx-visual-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    name: Capture desktop and mobile preview
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 10
+    steps:
+      - name: Find browser and capture MODARYX preview
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $url = 'https://design-modaryx-true-finishli.nova-forge-site-public.pages.dev'
+          $pf86 = [Environment]::GetFolderPath('ProgramFilesX86')
+          $candidates = @(
+            "$env:ProgramFiles\Google\Chrome\Application\chrome.exe",
+            "$pf86\Google\Chrome\Application\chrome.exe",
+            "$env:ProgramFiles\Microsoft\Edge\Application\msedge.exe",
+            "$pf86\Microsoft\Edge\Application\msedge.exe"
+          )
+          $browser = $candidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+          if (-not $browser) {
+            $cmd = Get-Command chrome.exe, msedge.exe -ErrorAction SilentlyContinue | Select-Object -First 1
+            if ($cmd) { $browser = $cmd.Source }
+          }
+          if (-not $browser) { throw 'BROWSER_NOT_FOUND' }
+
+          New-Item -ItemType Directory -Force -Path visual-qa | Out-Null
+
+          & $browser --headless=new --disable-gpu --hide-scrollbars --window-size=1440,1200 --virtual-time-budget=8000 --screenshot="$PWD\visual-qa\desktop.png" $url
+          if ($LASTEXITCODE -ne 0) { throw "DESKTOP_CAPTURE_FAILED exit=$LASTEXITCODE" }
+
+          & $browser --headless=new --disable-gpu --hide-scrollbars --window-size=390,844 --force-device-scale-factor=1 --virtual-time-budget=8000 --screenshot="$PWD\visual-qa\mobile.png" $url
+          if ($LASTEXITCODE -ne 0) { throw "MOBILE_CAPTURE_FAILED exit=$LASTEXITCODE" }
+
+          if (-not (Test-Path visual-qa\desktop.png)) { throw 'DESKTOP_SCREENSHOT_MISSING' }
+          if (-not (Test-Path visual-qa\mobile.png)) { throw 'MOBILE_SCREENSHOT_MISSING' }
+
+          Write-Host 'VISUAL_QA_CAPTURED'
+
+      - name: Upload visual QA screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: modaryx-visual-qa
+          path: visual-qa/*.png
+          if-no-files-found: error
+          retention-days: 3
