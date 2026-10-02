@@ -23,17 +23,17 @@ jobs:
           - name: home
             path: ''
           - name: univers
-            path: '/univers'
+            path: '/univers.html'
           - name: compagnons
-            path: '/compagnons'
+            path: '/compagnons.html'
           - name: aventures
-            path: '/aventures'
+            path: '/aventures.html'
           - name: lieux
-            path: '/lieux'
+            path: '/lieux.html'
           - name: factions
-            path: '/factions'
+            path: '/factions.html'
           - name: communaute
-            path: '/communaute'
+            path: '/communaute.html'
     steps:
       - name: Capture route
         shell: powershell
@@ -126,4 +126,5 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: one-route-per-job
+
+# qa-trigger: direct-html-route-capture
