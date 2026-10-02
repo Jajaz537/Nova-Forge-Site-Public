@@ -415,3 +415,24 @@ img{max-width:100%}
     overflow-wrap:break-word;
   }
 }
+
+
+@media(max-width:700px){
+  .mx-realm-dashboard{
+    width:100vw!important;
+    max-width:100vw!important;
+    padding-left:10px!important;
+    padding-right:10px!important;
+  }
+  .mx-realm-panel{
+    width:calc(100vw - 20px)!important;
+    max-width:calc(100vw - 20px)!important;
+  }
+  .mx-panel-body p,
+  .mx-realm-panel--join p{
+    max-width:30ch!important;
+  }
+  .mx-event-list span{
+    max-width:32ch!important;
+  }
+}
