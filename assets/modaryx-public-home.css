@@ -311,10 +311,10 @@ img{max-width:100%}
   .mx-canon-stage__art{
     position:absolute;
     left:50%;
-    top:-10%;
+    top:-18%;
     width:auto;
     max-width:none;
-    height:124%;
+    height:150%;
     aspect-ratio:auto;
     object-fit:cover;
     transform:translateX(-48%)!important;
