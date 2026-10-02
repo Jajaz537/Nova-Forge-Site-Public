@@ -95,16 +95,20 @@ jobs:
         shell: powershell
         run: node qa/check-finishline-canon.mjs
 
-      - name: Commit exact binary to isolated branch
+      - name: Activate canonical homepage hero only
+        shell: powershell
+        run: node qa/activate-finishline-home.mjs
+
+      - name: Commit exact binary and gated homepage activation to isolated branch
         shell: powershell
         run: |
           $ErrorActionPreference = 'Stop'
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- assets/modaryx-finishline-canon.png
+          git add -- assets/modaryx-finishline-canon.png index.html
           if (git diff --cached --quiet) {
             Write-Host 'CANON_ALREADY_COMMITTED'
             exit 0
           }
-          git commit -m 'assets: import exact MODARYX Finish Line canon [skip ci]'
+          git commit -m 'design: activate exact MODARYX Finish Line homepage [skip ci]'
           git push origin HEAD:design/modaryx-true-finishline-20261002
