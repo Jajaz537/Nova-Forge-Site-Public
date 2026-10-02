@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://modaryxmods.com/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://modaryxmods.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://modaryxmods.com/univers</loc><priority>0.9</priority></url>
+  <url><loc>https://modaryxmods.com/compagnons</loc><priority>0.9</priority></url>
+  <url><loc>https://modaryxmods.com/aventures</loc><priority>0.9</priority></url>
+  <url><loc>https://modaryxmods.com/lieux</loc><priority>0.9</priority></url>
+  <url><loc>https://modaryxmods.com/factions</loc><priority>0.9</priority></url>
+  <url><loc>https://modaryxmods.com/communaute</loc><priority>0.9</priority></url>
 </urlset>
