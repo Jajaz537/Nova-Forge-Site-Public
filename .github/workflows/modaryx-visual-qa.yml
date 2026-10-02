@@ -42,21 +42,35 @@ jobs:
           $profile = Join-Path $env:RUNNER_TEMP 'modaryx-visual-qa-profile'
           New-Item -ItemType Directory -Force -Path $profile | Out-Null
 
-          $desktop = Join-Path $PWD 'visual-qa\desktop.png'
-          $desktopArgs = @(
-            '--headless=new','--disable-gpu','--hide-scrollbars',
-            '--no-first-run','--no-default-browser-check',
-            ('--user-data-dir=' + $profile),
-            '--window-size=1440,1200','--virtual-time-budget=8000',
-            ('--screenshot=' + $desktop), $url
+          $routes = @(
+            @{ Name='home'; Path='' },
+            @{ Name='univers'; Path='/univers' },
+            @{ Name='compagnons'; Path='/compagnons' },
+            @{ Name='aventures'; Path='/aventures' },
+            @{ Name='lieux'; Path='/lieux' },
+            @{ Name='factions'; Path='/factions' },
+            @{ Name='communaute'; Path='/communaute' }
           )
-          $p1 = Start-Process -FilePath $browser -ArgumentList $desktopArgs -Wait -PassThru
-          if (-not (Test-Path -LiteralPath $desktop)) { throw ('DESKTOP_SCREENSHOT_MISSING exit=' + $p1.ExitCode) }
+
+          foreach ($route in $routes) {
+            Remove-Item -Recurse -Force $profile -ErrorAction SilentlyContinue
+            New-Item -ItemType Directory -Force -Path $profile | Out-Null
+            $target = $url + $route.Path
+            $shot = Join-Path $PWD ('visual-qa\' + $route.Name + '-desktop.png')
+            $args = @(
+              '--headless=new','--disable-gpu','--hide-scrollbars',
+              '--no-first-run','--no-default-browser-check',
+              ('--user-data-dir=' + $profile),
+              '--window-size=1440,1000','--virtual-time-budget=7000',
+              ('--screenshot=' + $shot), $target
+            )
+            $p = Start-Process -FilePath $browser -ArgumentList $args -Wait -PassThru
+            if (-not (Test-Path -LiteralPath $shot)) { throw ($route.Name.ToUpper() + '_DESKTOP_SCREENSHOT_MISSING exit=' + $p.ExitCode) }
+          }
 
           Remove-Item -Recurse -Force $profile -ErrorAction SilentlyContinue
           New-Item -ItemType Directory -Force -Path $profile | Out-Null
-
-          $mobile = Join-Path $PWD 'visual-qa\mobile.png'
+          $mobile = Join-Path $PWD 'visual-qa\home-mobile.png'
           $mobileArgs = @(
             '--headless=new','--disable-gpu','--hide-scrollbars',
             '--no-first-run','--no-default-browser-check',
@@ -83,4 +97,5 @@ jobs:
 
 
 
-# qa-trigger: post-cloudflare-final
+
+# qa-trigger: route-matrix
