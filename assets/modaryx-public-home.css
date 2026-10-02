@@ -507,15 +507,15 @@ img{max-width:100%}
   font-size:clamp(.7rem,1vw,1rem);
   letter-spacing:.1em;
 }
-.mx-name-mask--aerion{left:8.0%;top:12.4%;width:10.8%;height:7.2%}
-.mx-name-mask--kaelor{left:13.7%;top:19.0%;width:11.7%;height:9.2%}
-.mx-name-mask--lyra{left:25.7%;top:21.8%;width:11.7%;height:8.8%}
-.mx-name-mask--nova{left:38.7%;top:26.4%;width:12.8%;height:9.8%}
-.mx-name-mask--elara{left:50.4%;top:37.0%;width:12.6%;height:9.7%}
-.mx-name-mask--zyrion{left:78.4%;top:0.9%;width:12.8%;height:9.5%}
-.mx-name-mask--kael{left:1.9%;top:63.8%;width:11.0%;height:8.7%}
-.mx-name-mask--lumia{left:21.4%;top:64.8%;width:11.8%;height:8.7%}
-.mx-name-mask--shiro{left:62.2%;top:66.6%;width:10.8%;height:7.6%}
+.mx-name-mask--01{left:8.0%;top:12.4%;width:10.8%;height:7.2%}
+.mx-name-mask--02{left:13.7%;top:19.0%;width:11.7%;height:9.2%}
+.mx-name-mask--03{left:25.7%;top:21.8%;width:11.7%;height:8.8%}
+.mx-name-mask--04{left:38.7%;top:26.4%;width:12.8%;height:9.8%}
+.mx-name-mask--05{left:50.4%;top:37.0%;width:12.6%;height:9.7%}
+.mx-name-mask--06{left:78.4%;top:0.9%;width:12.8%;height:9.5%}
+.mx-name-mask--07{left:1.9%;top:63.8%;width:11.0%;height:8.7%}
+.mx-name-mask--08{left:21.4%;top:64.8%;width:11.8%;height:8.7%}
+.mx-name-mask--09{left:62.2%;top:66.6%;width:10.8%;height:7.6%}
 
 @media(max-width:700px){
   .mx-name-masks{display:none}
