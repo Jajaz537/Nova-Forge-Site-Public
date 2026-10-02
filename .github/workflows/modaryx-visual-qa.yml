@@ -89,9 +89,10 @@ jobs:
               '--window-size=1440,1000','--virtual-time-budget=8000',
               ('--screenshot=' + $shot), $target
             )
-            $p = Start-Process -FilePath $browser -ArgumentList $args -Wait -PassThru
-            for ($i = 0; $i -lt 20 -and -not (Test-Path -LiteralPath $shot); $i++) { Start-Sleep -Milliseconds 500 }
-            if (-not (Test-Path -LiteralPath $shot)) { throw ('SCREENSHOT_MISSING exit=' + $p.ExitCode) }
+            $p = Start-Process -FilePath $browser -ArgumentList $args -PassThru
+            for ($i = 0; $i -lt 40 -and -not (Test-Path -LiteralPath $shot); $i++) { Start-Sleep -Milliseconds 500 }
+            if (-not (Test-Path -LiteralPath $shot)) { throw 'SCREENSHOT_MISSING' }
+            if ($p -and -not $p.HasExited) { Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue }
             Write-Host ('CAPTURED ${{ matrix.name }} ' + $target)
           } finally {
             if ($server -and -not $server.HasExited) { Stop-Process -Id $server.Id -Force -ErrorAction SilentlyContinue }
@@ -165,9 +166,10 @@ jobs:
               '--virtual-time-budget=8000',
               ('--screenshot=' + $shot), $target
             )
-            $p = Start-Process -FilePath $browser -ArgumentList $args -Wait -PassThru
-            for ($i = 0; $i -lt 20 -and -not (Test-Path -LiteralPath $shot); $i++) { Start-Sleep -Milliseconds 500 }
-            if (-not (Test-Path -LiteralPath $shot)) { throw ('MOBILE_SCREENSHOT_MISSING exit=' + $p.ExitCode) }
+            $p = Start-Process -FilePath $browser -ArgumentList $args -PassThru
+            for ($i = 0; $i -lt 40 -and -not (Test-Path -LiteralPath $shot); $i++) { Start-Sleep -Milliseconds 500 }
+            if (-not (Test-Path -LiteralPath $shot)) { throw 'MOBILE_SCREENSHOT_MISSING' }
+            if ($p -and -not $p.HasExited) { Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue }
             Write-Host 'CAPTURED home mobile through local HTTP'
           } finally {
             if ($server -and -not $server.HasExited) { Stop-Process -Id $server.Id -Force -ErrorAction SilentlyContinue }
@@ -181,4 +183,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: exact-local-http-candidate
+# qa-trigger: poll-screenshot-not-process
