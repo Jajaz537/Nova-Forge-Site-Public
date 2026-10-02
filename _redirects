@@ -66,3 +66,12 @@
 /communaute /communaute.html 200
 /community /communaute.html 302
 /community.html /communaute.html 302
+
+/data/* / 302
+/migrations/* / 302
+/games /aventures.html 302
+/games/* /aventures.html 302
+/gta-6 /aventures.html 302
+/gta-6/* /aventures.html 302
+/red-dead-redemption-2 /aventures.html 302
+/red-dead-redemption-2/* /aventures.html 302
