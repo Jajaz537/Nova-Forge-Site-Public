@@ -31,7 +31,34 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  canon-gate:
+    name: Verify exact MODARYX canon
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          clean: true
+
+      - name: Verify canonical PNG
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $path = 'assets/modaryx-finishline-canon.png'
+          $expectedHash = '141F90DD3AB403627A8279DB8C66C2E9711AD88771B359C1EA4CE26C212ED81E'
+          $expectedSize = 4231234
+          if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw 'CANON_MISSING' }
+          $item = Get-Item -LiteralPath $path
+          if ($item.Length -ne $expectedSize) { throw 'CANON_SIZE_MISMATCH' }
+          $actualHash = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash
+          if ($actualHash -ne $expectedHash) { throw 'CANON_HASH_MISMATCH' }
+          Write-Host ('CANON_OK size=' + $item.Length + ' sha256=' + $actualHash)
+
   route-capture:
+    needs: canon-gate
     name: Capture ${{ matrix.name }} desktop
     runs-on: [self-hosted, Windows, X64]
     timeout-minutes: 8
@@ -131,6 +158,7 @@ jobs:
           retention-days: 3
 
   mobile-capture:
+    needs: canon-gate
     name: Capture home mobile
     runs-on: [self-hosted, Windows, X64]
     timeout-minutes: 8
@@ -212,4 +240,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: powershell-static-server
+# qa-trigger: powershell-canon-gate
