@@ -57,3 +57,12 @@
 /security.html / 302
 /verify / 302
 /verify.html / 302
+
+/univers /univers.html 200
+/compagnons /compagnons.html 200
+/aventures /aventures.html 200
+/lieux /lieux.html 200
+/factions /factions.html 200
+/communaute /communaute.html 200
+/community /communaute.html 302
+/community.html /communaute.html 302
