@@ -39,8 +39,8 @@ jobs:
           New-Item -ItemType Directory -Force -Path visual-qa | Out-Null
 
           Write-Host ('BROWSER=' + [IO.Path]::GetFileName($browser))
-          $profile = Join-Path $env:RUNNER_TEMP 'modaryx-visual-qa-profile'
-          New-Item -ItemType Directory -Force -Path $profile | Out-Null
+          $profileRoot = Join-Path $env:RUNNER_TEMP 'modaryx-visual-qa-profiles'
+          New-Item -ItemType Directory -Force -Path $profileRoot | Out-Null
 
           $routes = @(
             @{ Name='home'; Path='' },
@@ -53,14 +53,15 @@ jobs:
           )
 
           foreach ($route in $routes) {
-            Remove-Item -Recurse -Force $profile -ErrorAction SilentlyContinue
-            New-Item -ItemType Directory -Force -Path $profile | Out-Null
+            $routeProfile = Join-Path $profileRoot $route.Name
+            Remove-Item -Recurse -Force $routeProfile -ErrorAction SilentlyContinue
+            New-Item -ItemType Directory -Force -Path $routeProfile | Out-Null
             $target = $url + $route.Path
             $shot = Join-Path $PWD ('visual-qa\' + $route.Name + '-desktop.png')
             $args = @(
               '--headless=new','--disable-gpu','--hide-scrollbars',
               '--no-first-run','--no-default-browser-check',
-              ('--user-data-dir=' + $profile),
+              ('--user-data-dir=' + $routeProfile),
               '--window-size=1440,1000','--virtual-time-budget=7000',
               ('--screenshot=' + $shot), $target
             )
@@ -68,13 +69,14 @@ jobs:
             if (-not (Test-Path -LiteralPath $shot)) { throw ($route.Name.ToUpper() + '_DESKTOP_SCREENSHOT_MISSING exit=' + $p.ExitCode) }
           }
 
-          Remove-Item -Recurse -Force $profile -ErrorAction SilentlyContinue
-          New-Item -ItemType Directory -Force -Path $profile | Out-Null
+          $mobileProfile = Join-Path $profileRoot 'home-mobile'
+          Remove-Item -Recurse -Force $mobileProfile -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force -Path $mobileProfile | Out-Null
           $mobile = Join-Path $PWD 'visual-qa\home-mobile.png'
           $mobileArgs = @(
             '--headless=new','--disable-gpu','--hide-scrollbars',
             '--no-first-run','--no-default-browser-check',
-            ('--user-data-dir=' + $profile),
+            ('--user-data-dir=' + $mobileProfile),
             '--window-size=390,1600','--force-device-scale-factor=1',
             '--virtual-time-budget=8000',
             ('--screenshot=' + $mobile), $url
@@ -98,4 +100,5 @@ jobs:
 
 
 
-# qa-trigger: route-matrix
+
+# qa-trigger: isolated-route-profiles
