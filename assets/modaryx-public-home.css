@@ -529,8 +529,8 @@ img{max-width:100%}
       linear-gradient(180deg,rgba(5,9,14,.03) 58%,rgba(5,9,14,.82) 100%),
       url(./modaryx-finishline-canon.png);
     background-repeat:no-repeat;
-    background-size:auto 155%;
-    background-position:center, 92% 52%;
+    background-size:auto 190%;
+    background-position:center, 96% 50%;
   }
   .mx-canon-stage__art{display:none}
 }
