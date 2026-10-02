@@ -56,15 +56,12 @@ jobs:
           }
           if (-not $browser) { throw 'BROWSER_NOT_FOUND' }
 
-          $python = Get-Command python.exe, python3.exe, py.exe -ErrorAction SilentlyContinue | Select-Object -First 1
-          if (-not $python) { throw 'PYTHON_NOT_FOUND' }
+          $node = Get-Command node.exe, node -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $node) { throw 'NODE_NOT_FOUND' }
           $port = 4173
-          if ($python.Name -ieq 'py.exe') {
-            $serverArgs = @('-3','-m','http.server',"$port",'--bind','127.0.0.1','--directory',$env:GITHUB_WORKSPACE)
-          } else {
-            $serverArgs = @('-m','http.server',"$port",'--bind','127.0.0.1','--directory',$env:GITHUB_WORKSPACE)
-          }
-          $server = Start-Process -FilePath $python.Source -ArgumentList $serverArgs -PassThru -WindowStyle Hidden
+          $serverScript = Join-Path $env:GITHUB_WORKSPACE 'qa\modaryx-static-server.mjs'
+          if (-not (Test-Path -LiteralPath $serverScript)) { throw 'STATIC_SERVER_SCRIPT_MISSING' }
+          $server = Start-Process -FilePath $node.Source -ArgumentList @($serverScript,"$port") -WorkingDirectory $env:GITHUB_WORKSPACE -PassThru -WindowStyle Hidden
 
           try {
             $target = 'http://127.0.0.1:' + $port + '/${{ matrix.file }}'
@@ -132,15 +129,12 @@ jobs:
           }
           if (-not $browser) { throw 'BROWSER_NOT_FOUND' }
 
-          $python = Get-Command python.exe, python3.exe, py.exe -ErrorAction SilentlyContinue | Select-Object -First 1
-          if (-not $python) { throw 'PYTHON_NOT_FOUND' }
+          $node = Get-Command node.exe, node -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $node) { throw 'NODE_NOT_FOUND' }
           $port = 4173
-          if ($python.Name -ieq 'py.exe') {
-            $serverArgs = @('-3','-m','http.server',"$port",'--bind','127.0.0.1','--directory',$env:GITHUB_WORKSPACE)
-          } else {
-            $serverArgs = @('-m','http.server',"$port",'--bind','127.0.0.1','--directory',$env:GITHUB_WORKSPACE)
-          }
-          $server = Start-Process -FilePath $python.Source -ArgumentList $serverArgs -PassThru -WindowStyle Hidden
+          $serverScript = Join-Path $env:GITHUB_WORKSPACE 'qa\modaryx-static-server.mjs'
+          if (-not (Test-Path -LiteralPath $serverScript)) { throw 'STATIC_SERVER_SCRIPT_MISSING' }
+          $server = Start-Process -FilePath $node.Source -ArgumentList @($serverScript,"$port") -WorkingDirectory $env:GITHUB_WORKSPACE -PassThru -WindowStyle Hidden
 
           try {
             $target = 'http://127.0.0.1:' + $port + '/index.html'
@@ -183,4 +177,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: poll-screenshot-not-process
+# qa-trigger: node-static-server
