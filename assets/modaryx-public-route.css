@@ -215,3 +215,18 @@ img{display:block;max-width:100%}
   .mx-route-footer{width:calc(100% - 20px);min-height:100px;align-items:flex-start;justify-content:center;flex-direction:column;gap:6px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.mx-skip{
+  position:fixed;
+  left:14px;
+  top:10px;
+  z-index:999;
+  transform:translateY(-180%);
+  padding:9px 13px;
+  border:1px solid rgba(243,207,132,.65);
+  border-radius:5px;
+  background:#d99d34;
+  color:#160f05;
+  font-weight:800;
+}
+.mx-skip:focus{transform:none}
