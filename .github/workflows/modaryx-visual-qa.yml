@@ -38,43 +38,64 @@ jobs:
       - name: Checkout exact candidate
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
-      - name: Capture route from exact candidate
+      - name: Capture route through local HTTP
         shell: powershell
         run: |
           $ErrorActionPreference = 'Stop'
           $pf86 = [Environment]::GetFolderPath('ProgramFilesX86')
-          $candidates = @(
+          $browserCandidates = @(
             "$env:ProgramFiles\Google\Chrome\Application\chrome.exe",
             "$pf86\Google\Chrome\Application\chrome.exe",
             "$env:ProgramFiles\Microsoft\Edge\Application\msedge.exe",
             "$pf86\Microsoft\Edge\Application\msedge.exe"
           )
-          $browser = $candidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+          $browser = $browserCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
           if (-not $browser) {
             $cmd = Get-Command chrome.exe, msedge.exe -ErrorAction SilentlyContinue | Select-Object -First 1
             if ($cmd) { $browser = $cmd.Source }
           }
           if (-not $browser) { throw 'BROWSER_NOT_FOUND' }
 
-          New-Item -ItemType Directory -Force -Path visual-qa | Out-Null
-          $profile = Join-Path $env:RUNNER_TEMP ('modaryx-local-${{ matrix.name }}-' + $env:GITHUB_RUN_ATTEMPT)
-          New-Item -ItemType Directory -Force -Path $profile | Out-Null
+          $python = Get-Command python.exe, python3.exe, py.exe -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $python) { throw 'PYTHON_NOT_FOUND' }
+          $port = 4173
+          if ($python.Name -ieq 'py.exe') {
+            $serverArgs = @('-3','-m','http.server',"$port",'--bind','127.0.0.1','--directory',$env:GITHUB_WORKSPACE)
+          } else {
+            $serverArgs = @('-m','http.server',"$port",'--bind','127.0.0.1','--directory',$env:GITHUB_WORKSPACE)
+          }
+          $server = Start-Process -FilePath $python.Source -ArgumentList $serverArgs -PassThru -WindowStyle Hidden
 
-          $source = Join-Path $env:GITHUB_WORKSPACE '${{ matrix.file }}'
-          if (-not (Test-Path -LiteralPath $source)) { throw ('SOURCE_MISSING ' + $source) }
-          $target = 'file:///' + ($source -replace '\\','/')
-          $shot = Join-Path $PWD 'visual-qa\${{ matrix.name }}-desktop.png'
-          $args = @(
-            '--headless=new','--disable-gpu','--hide-scrollbars',
-            '--allow-file-access-from-files','--no-first-run','--no-default-browser-check',
-            ('--user-data-dir=' + $profile),
-            '--window-size=1440,1000','--virtual-time-budget=8000',
-            ('--screenshot=' + $shot), $target
-          )
-          $p = Start-Process -FilePath $browser -ArgumentList $args -Wait -PassThru
-          for ($i = 0; $i -lt 20 -and -not (Test-Path -LiteralPath $shot); $i++) { Start-Sleep -Milliseconds 500 }
-          if (-not (Test-Path -LiteralPath $shot)) { throw ('SCREENSHOT_MISSING exit=' + $p.ExitCode) }
-          Write-Host ('CAPTURED ${{ matrix.name }} FROM ' + $target)
+          try {
+            $target = 'http://127.0.0.1:' + $port + '/${{ matrix.file }}'
+            for ($i = 0; $i -lt 30; $i++) {
+              try {
+                $response = Invoke-WebRequest -UseBasicParsing -Uri $target -TimeoutSec 2
+                if ($response.StatusCode -eq 200) { break }
+              } catch {}
+              Start-Sleep -Milliseconds 500
+            }
+            if (-not $response -or $response.StatusCode -ne 200) { throw ('LOCAL_HTTP_UNAVAILABLE ' + $target) }
+
+            New-Item -ItemType Directory -Force -Path visual-qa | Out-Null
+            $profile = Join-Path $env:RUNNER_TEMP ('modaryx-http-${{ matrix.name }}-' + $env:GITHUB_RUN_ATTEMPT)
+            Remove-Item -Recurse -Force $profile -ErrorAction SilentlyContinue
+            New-Item -ItemType Directory -Force -Path $profile | Out-Null
+            $shot = Join-Path $PWD 'visual-qa\${{ matrix.name }}-desktop.png'
+            $args = @(
+              '--headless=new','--disable-gpu','--hide-scrollbars',
+              '--no-first-run','--no-default-browser-check',
+              ('--user-data-dir=' + $profile),
+              '--window-size=1440,1000','--virtual-time-budget=8000',
+              ('--screenshot=' + $shot), $target
+            )
+            $p = Start-Process -FilePath $browser -ArgumentList $args -Wait -PassThru
+            for ($i = 0; $i -lt 20 -and -not (Test-Path -LiteralPath $shot); $i++) { Start-Sleep -Milliseconds 500 }
+            if (-not (Test-Path -LiteralPath $shot)) { throw ('SCREENSHOT_MISSING exit=' + $p.ExitCode) }
+            Write-Host ('CAPTURED ${{ matrix.name }} ' + $target)
+          } finally {
+            if ($server -and -not $server.HasExited) { Stop-Process -Id $server.Id -Force -ErrorAction SilentlyContinue }
+          }
 
       - name: Upload route screenshot
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -92,42 +113,65 @@ jobs:
       - name: Checkout exact candidate
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
-      - name: Capture mobile homepage from exact candidate
+      - name: Capture mobile homepage through local HTTP
         shell: powershell
         run: |
           $ErrorActionPreference = 'Stop'
           $pf86 = [Environment]::GetFolderPath('ProgramFilesX86')
-          $candidates = @(
+          $browserCandidates = @(
             "$env:ProgramFiles\Google\Chrome\Application\chrome.exe",
             "$pf86\Google\Chrome\Application\chrome.exe",
             "$env:ProgramFiles\Microsoft\Edge\Application\msedge.exe",
             "$pf86\Microsoft\Edge\Application\msedge.exe"
           )
-          $browser = $candidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+          $browser = $browserCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
           if (-not $browser) {
             $cmd = Get-Command chrome.exe, msedge.exe -ErrorAction SilentlyContinue | Select-Object -First 1
             if ($cmd) { $browser = $cmd.Source }
           }
           if (-not $browser) { throw 'BROWSER_NOT_FOUND' }
 
-          New-Item -ItemType Directory -Force -Path visual-qa | Out-Null
-          $profile = Join-Path $env:RUNNER_TEMP ('modaryx-local-mobile-' + $env:GITHUB_RUN_ATTEMPT)
-          New-Item -ItemType Directory -Force -Path $profile | Out-Null
-          $source = Join-Path $env:GITHUB_WORKSPACE 'index.html'
-          $target = 'file:///' + ($source -replace '\\','/')
-          $shot = Join-Path $PWD 'visual-qa\home-mobile.png'
-          $args = @(
-            '--headless=new','--disable-gpu','--hide-scrollbars',
-            '--allow-file-access-from-files','--no-first-run','--no-default-browser-check',
-            ('--user-data-dir=' + $profile),
-            '--window-size=390,1600','--force-device-scale-factor=1',
-            '--virtual-time-budget=8000',
-            ('--screenshot=' + $shot), $target
-          )
-          $p = Start-Process -FilePath $browser -ArgumentList $args -Wait -PassThru
-          for ($i = 0; $i -lt 20 -and -not (Test-Path -LiteralPath $shot); $i++) { Start-Sleep -Milliseconds 500 }
-          if (-not (Test-Path -LiteralPath $shot)) { throw ('MOBILE_SCREENSHOT_MISSING exit=' + $p.ExitCode) }
-          Write-Host 'CAPTURED home mobile from exact candidate'
+          $python = Get-Command python.exe, python3.exe, py.exe -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $python) { throw 'PYTHON_NOT_FOUND' }
+          $port = 4173
+          if ($python.Name -ieq 'py.exe') {
+            $serverArgs = @('-3','-m','http.server',"$port",'--bind','127.0.0.1','--directory',$env:GITHUB_WORKSPACE)
+          } else {
+            $serverArgs = @('-m','http.server',"$port",'--bind','127.0.0.1','--directory',$env:GITHUB_WORKSPACE)
+          }
+          $server = Start-Process -FilePath $python.Source -ArgumentList $serverArgs -PassThru -WindowStyle Hidden
+
+          try {
+            $target = 'http://127.0.0.1:' + $port + '/index.html'
+            for ($i = 0; $i -lt 30; $i++) {
+              try {
+                $response = Invoke-WebRequest -UseBasicParsing -Uri $target -TimeoutSec 2
+                if ($response.StatusCode -eq 200) { break }
+              } catch {}
+              Start-Sleep -Milliseconds 500
+            }
+            if (-not $response -or $response.StatusCode -ne 200) { throw ('LOCAL_HTTP_UNAVAILABLE ' + $target) }
+
+            New-Item -ItemType Directory -Force -Path visual-qa | Out-Null
+            $profile = Join-Path $env:RUNNER_TEMP ('modaryx-http-mobile-' + $env:GITHUB_RUN_ATTEMPT)
+            Remove-Item -Recurse -Force $profile -ErrorAction SilentlyContinue
+            New-Item -ItemType Directory -Force -Path $profile | Out-Null
+            $shot = Join-Path $PWD 'visual-qa\home-mobile.png'
+            $args = @(
+              '--headless=new','--disable-gpu','--hide-scrollbars',
+              '--no-first-run','--no-default-browser-check',
+              ('--user-data-dir=' + $profile),
+              '--window-size=390,1600','--force-device-scale-factor=1',
+              '--virtual-time-budget=8000',
+              ('--screenshot=' + $shot), $target
+            )
+            $p = Start-Process -FilePath $browser -ArgumentList $args -Wait -PassThru
+            for ($i = 0; $i -lt 20 -and -not (Test-Path -LiteralPath $shot); $i++) { Start-Sleep -Milliseconds 500 }
+            if (-not (Test-Path -LiteralPath $shot)) { throw ('MOBILE_SCREENSHOT_MISSING exit=' + $p.ExitCode) }
+            Write-Host 'CAPTURED home mobile through local HTTP'
+          } finally {
+            if ($server -and -not $server.HasExited) { Stop-Process -Id $server.Id -Force -ErrorAction SilentlyContinue }
+          }
 
       - name: Upload mobile screenshot
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -137,4 +181,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: exact-local-candidate
+# qa-trigger: exact-local-http-candidate
