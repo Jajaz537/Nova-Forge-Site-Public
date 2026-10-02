@@ -412,8 +412,8 @@ button,input,textarea,select{font:inherit}
   .mx-header__cta{padding:8px 10px;font-size:.67rem}
   .mx-hero{
     min-height:690px;
-    background-size:auto 165%;
-    background-position:88% 32%;
+    background-size:auto 190%;
+    background-position:90% 28%;
   }
   .mx-hero__shade{
     background:
@@ -424,7 +424,11 @@ button,input,textarea,select{font:inherit}
     width:100%;
     padding:170px 18px 34px;
   }
-  .mx-hero h1{font-size:clamp(3.25rem,16vw,5.2rem)}
+  .mx-hero h1{
+    max-width:100%;
+    font-size:clamp(3rem,12.5vw,4.3rem);
+    letter-spacing:-.05em;
+  }
   .mx-hero__lead{font-size:.95rem;line-height:1.58}
   .mx-hero__actions{display:grid;grid-template-columns:1fr;max-width:360px}
   .mx-hero__sigil{display:none}
@@ -435,7 +439,11 @@ button,input,textarea,select{font:inherit}
   }
   .mx-section-heading{margin-bottom:26px}
   .mx-section-heading h2,
-  .mx-story__copy h2{font-size:2.55rem}
+  .mx-story__copy h2{
+    max-width:100%;
+    font-size:2.22rem;
+    overflow-wrap:normal;
+  }
   .mx-portal-grid{grid-template-columns:1fr}
   .mx-portal{min-height:170px;padding:20px}
   .mx-story{
@@ -459,10 +467,10 @@ button,input,textarea,select{font:inherit}
   .mx-footer__nav{justify-content:flex-start}
 }
 @media(max-width:430px){
-  .mx-hero{min-height:650px;background-size:auto 172%;background-position:90% 30%}
-  .mx-hero h1{font-size:3.35rem}
+  .mx-hero{min-height:650px;background-size:auto 195%;background-position:92% 26%}
+  .mx-hero h1{font-size:clamp(2.85rem,12vw,3.25rem)}
   .mx-section-heading h2,
-  .mx-story__copy h2{font-size:2.25rem}
+  .mx-story__copy h2{font-size:2.08rem}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
