@@ -21,26 +21,30 @@ jobs:
       matrix:
         include:
           - name: home
-            path: ''
+            file: 'index.html'
           - name: univers
-            path: '/univers.html'
+            file: 'univers.html'
           - name: compagnons
-            path: '/compagnons.html'
+            file: 'compagnons.html'
           - name: aventures
-            path: '/aventures.html'
+            file: 'aventures.html'
           - name: lieux
-            path: '/lieux.html'
+            file: 'lieux.html'
           - name: factions
-            path: '/factions.html'
+            file: 'factions.html'
           - name: communaute
-            path: '/communaute.html'
+            file: 'communaute.html'
     steps:
-      - name: Capture route
+      - name: Checkout exact branch snapshot
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Capture local route
         shell: powershell
         run: |
           $ErrorActionPreference = 'Stop'
-          $base = 'https://design-modaryx-true-finishli.nova-forge-site-public.pages.dev'
-          $target = $base + '${{ matrix.path }}'
+          $local = Join-Path $PWD '${{ matrix.file }}'
+          if (-not (Test-Path -LiteralPath $local)) { throw 'ROUTE_FILE_NOT_FOUND' }
+          $target = ([System.Uri]::new($local)).AbsoluteUri
           $pf86 = [Environment]::GetFolderPath('ProgramFilesX86')
           $candidates = @(
             "$env:ProgramFiles\Google\Chrome\Application\chrome.exe",
@@ -54,21 +58,23 @@ jobs:
             if ($cmd) { $browser = $cmd.Source }
           }
           if (-not $browser) { throw 'BROWSER_NOT_FOUND' }
+          Write-Host ('BROWSER=' + $browser)
+          Write-Host ('TARGET=' + $target)
           New-Item -ItemType Directory -Force -Path visual-qa | Out-Null
-          $profile = Join-Path $env:RUNNER_TEMP ('modaryx-qa-${{ matrix.name }}-' + $env:GITHUB_RUN_ATTEMPT)
+          $profile = Join-Path $env:RUNNER_TEMP ('modaryx-local-${{ matrix.name }}-' + $env:GITHUB_RUN_ATTEMPT)
           New-Item -ItemType Directory -Force -Path $profile | Out-Null
           $shot = Join-Path $PWD 'visual-qa\${{ matrix.name }}-desktop.png'
           $args = @(
-            '--headless=new','--disable-gpu','--hide-scrollbars',
+            '--headless=new','--disable-gpu','--hide-scrollbars','--allow-file-access-from-files',
             '--no-first-run','--no-default-browser-check',
             ('--user-data-dir=' + $profile),
-            '--window-size=1440,1000','--virtual-time-budget=8000',
+            '--window-size=1440,1000','--virtual-time-budget=5000',
             ('--screenshot=' + $shot), $target
           )
           $p = Start-Process -FilePath $browser -ArgumentList $args -Wait -PassThru
           for ($i = 0; $i -lt 20 -and -not (Test-Path -LiteralPath $shot); $i++) { Start-Sleep -Milliseconds 500 }
           if (-not (Test-Path -LiteralPath $shot)) { throw ('SCREENSHOT_MISSING exit=' + $p.ExitCode) }
-          Write-Host ('CAPTURED ${{ matrix.name }} ' + $target)
+          Write-Host 'CAPTURED_LOCAL_ROUTE'
 
       - name: Upload route screenshot
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -83,11 +89,15 @@ jobs:
     runs-on: [self-hosted, Windows, X64]
     timeout-minutes: 8
     steps:
-      - name: Capture mobile homepage
+      - name: Checkout exact branch snapshot
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Capture local mobile homepage
         shell: powershell
         run: |
           $ErrorActionPreference = 'Stop'
-          $target = 'https://design-modaryx-true-finishli.nova-forge-site-public.pages.dev'
+          $local = Join-Path $PWD 'index.html'
+          $target = ([System.Uri]::new($local)).AbsoluteUri
           $pf86 = [Environment]::GetFolderPath('ProgramFilesX86')
           $candidates = @(
             "$env:ProgramFiles\Google\Chrome\Application\chrome.exe",
@@ -102,21 +112,19 @@ jobs:
           }
           if (-not $browser) { throw 'BROWSER_NOT_FOUND' }
           New-Item -ItemType Directory -Force -Path visual-qa | Out-Null
-          $profile = Join-Path $env:RUNNER_TEMP ('modaryx-qa-mobile-' + $env:GITHUB_RUN_ATTEMPT)
+          $profile = Join-Path $env:RUNNER_TEMP ('modaryx-local-mobile-' + $env:GITHUB_RUN_ATTEMPT)
           New-Item -ItemType Directory -Force -Path $profile | Out-Null
           $shot = Join-Path $PWD 'visual-qa\home-mobile.png'
           $args = @(
-            '--headless=new','--disable-gpu','--hide-scrollbars',
+            '--headless=new','--disable-gpu','--hide-scrollbars','--allow-file-access-from-files',
             '--no-first-run','--no-default-browser-check',
             ('--user-data-dir=' + $profile),
-            '--window-size=390,1600','--force-device-scale-factor=1',
-            '--virtual-time-budget=8000',
+            '--window-size=390,1600','--force-device-scale-factor=1','--virtual-time-budget=5000',
             ('--screenshot=' + $shot), $target
           )
           $p = Start-Process -FilePath $browser -ArgumentList $args -Wait -PassThru
           for ($i = 0; $i -lt 20 -and -not (Test-Path -LiteralPath $shot); $i++) { Start-Sleep -Milliseconds 500 }
           if (-not (Test-Path -LiteralPath $shot)) { throw ('MOBILE_SCREENSHOT_MISSING exit=' + $p.ExitCode) }
-          Write-Host 'CAPTURED mobile homepage'
 
       - name: Upload mobile screenshot
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -126,5 +134,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-
-# qa-trigger: direct-html-route-capture
+# qa-trigger: local-static-capture
