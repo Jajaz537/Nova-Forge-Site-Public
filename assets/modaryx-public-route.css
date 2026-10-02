@@ -233,3 +233,29 @@ img{display:block;max-width:100%}
   font-weight:800;
 }
 .mx-skip:focus{transform:none}
+
+
+.mx-route-footer__brand{display:grid;gap:5px}
+.mx-route-footer__nav{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px 18px;
+}
+.mx-route-footer__nav a{
+  color:#a49e92;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:.73rem;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+}
+.mx-route-footer__nav a:hover,
+.mx-route-footer__nav a:focus-visible{color:var(--gold)}
+
+@media(max-width:700px){
+  .mx-route-footer__nav{
+    justify-content:flex-start;
+    gap:10px 16px;
+  }
+}
