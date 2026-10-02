@@ -1,0 +1,15 @@
+/* MODARYX True Finish Line — homepage scaffold
+   Canon source: nouveaux design 3(1).png
+   SHA-256: 141f90dd3ab403627a8279db8c66c2e9711ad88771b359c1ea4ce26c212ed81e
+   This file is intentionally dormant until the exact binary source is present in-repo. */
+:root{--mx-gold:#d9ae55;--mx-ink:#071018;--mx-blue:#0d2943;--mx-ivory:#fff4dc}
+.mx-finishline-hero{position:relative;min-height:calc(100svh - 76px);isolation:isolate;background:#071018;overflow:hidden}
+.mx-finishline-hero__art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2}
+.mx-finishline-hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,8,12,.12),rgba(3,8,12,0) 42%,rgba(3,8,12,.58))}
+.mx-finishline-hero__ui{min-height:inherit;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(18px,3vw,42px)}
+.mx-finishline-portals{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:0 auto;width:min(1580px,100%)}
+.mx-finishline-portals a{min-height:128px;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;border:1px solid rgba(217,174,85,.72);background:linear-gradient(180deg,rgba(7,16,24,.2),rgba(7,16,24,.9));box-shadow:inset 0 0 0 1px rgba(255,244,220,.08);text-align:center}
+.mx-finishline-portals strong{font-family:Georgia,serif;color:var(--mx-ivory);font-size:1.15rem;letter-spacing:.08em;text-transform:uppercase}
+.mx-finishline-portals span{margin-top:5px;color:#e7d7b6;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:900px){.mx-finishline-hero{min-height:780px}.mx-finishline-hero__art{object-position:62% center}.mx-finishline-portals{grid-template-columns:1fr 1fr}.mx-finishline-portals a:last-child{grid-column:1/-1}}
+@media(max-width:560px){.mx-finishline-hero{min-height:720px}.mx-finishline-hero__art{object-position:58% center}.mx-finishline-portals{grid-template-columns:1fr}.mx-finishline-portals a:last-child{grid-column:auto}}
