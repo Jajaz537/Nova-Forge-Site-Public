@@ -81,4 +81,5 @@ jobs:
 
 
 
-# qa-trigger: mobile-long-pass
+
+# qa-trigger: mobile-width-pass
