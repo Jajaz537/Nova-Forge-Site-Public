@@ -487,35 +487,21 @@ img{max-width:100%}
 .mx-name-mask{
   position:absolute;
   display:block;
-  background:
-    radial-gradient(circle at 50% 45%,rgba(231,179,79,.08),transparent 45%),
-    linear-gradient(180deg,rgba(9,15,22,.99),rgba(3,7,11,.99));
-  border:1px solid rgba(218,170,78,.78);
-  box-shadow:
-    inset 0 0 0 1px rgba(255,220,145,.08),
-    0 8px 18px rgba(0,0,0,.28);
-  clip-path:polygon(5% 0,95% 0,100% 12%,100% 88%,95% 100%,5% 100%,0 88%,0 12%);
+  border-radius:2px;
+  background:rgba(4,9,14,.78);
+  -webkit-backdrop-filter:blur(7px) saturate(.7);
+  backdrop-filter:blur(7px) saturate(.7);
+  box-shadow:inset 0 0 18px rgba(2,5,8,.34);
 }
-.mx-name-mask:after{
-  content:"✦";
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  color:rgba(229,181,88,.72);
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(.7rem,1vw,1rem);
-  letter-spacing:.1em;
-}
-.mx-name-mask--01{left:8.0%;top:12.4%;width:10.8%;height:7.2%}
-.mx-name-mask--02{left:13.7%;top:19.0%;width:11.7%;height:9.2%}
-.mx-name-mask--03{left:25.7%;top:21.8%;width:11.7%;height:8.8%}
-.mx-name-mask--04{left:38.7%;top:26.4%;width:12.8%;height:9.8%}
-.mx-name-mask--05{left:50.4%;top:37.0%;width:12.6%;height:9.7%}
-.mx-name-mask--06{left:78.4%;top:0.9%;width:12.8%;height:9.5%}
-.mx-name-mask--07{left:1.9%;top:63.8%;width:11.0%;height:8.7%}
-.mx-name-mask--08{left:21.4%;top:64.8%;width:11.8%;height:8.7%}
-.mx-name-mask--09{left:62.2%;top:66.6%;width:10.8%;height:7.6%}
+.mx-name-mask--01{left:11.85%;top:13.0%;width:6.55%;height:5.7%}
+.mx-name-mask--02{left:17.45%;top:20.0%;width:7.05%;height:7.1%}
+.mx-name-mask--03{left:29.55%;top:22.6%;width:7.55%;height:6.9%}
+.mx-name-mask--04{left:43.30%;top:27.3%;width:7.95%;height:7.6%}
+.mx-name-mask--05{left:54.30%;top:38.0%;width:7.70%;height:7.1%}
+.mx-name-mask--06{left:83.25%;top:1.6%;width:7.45%;height:6.9%}
+.mx-name-mask--07{left:5.95%;top:64.5%;width:6.25%;height:7.0%}
+.mx-name-mask--08{left:25.35%;top:65.5%;width:7.05%;height:7.0%}
+.mx-name-mask--09{left:65.95%;top:67.3%;width:7.25%;height:6.1%}
 
 @media(max-width:700px){
   .mx-name-masks{display:none}
