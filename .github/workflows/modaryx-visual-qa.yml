@@ -61,7 +61,7 @@ jobs:
             '--headless=new','--disable-gpu','--hide-scrollbars',
             '--no-first-run','--no-default-browser-check',
             ('--user-data-dir=' + $profile),
-            '--window-size=390,844','--force-device-scale-factor=1',
+            '--window-size=390,1600','--force-device-scale-factor=1',
             '--virtual-time-budget=8000',
             ('--screenshot=' + $mobile), $url
           )
@@ -80,4 +80,5 @@ jobs:
 
 
 
-# qa-trigger: mobile-pass-4
+
+# qa-trigger: mobile-long-pass
