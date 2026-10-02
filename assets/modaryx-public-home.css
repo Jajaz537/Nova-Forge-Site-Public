@@ -401,6 +401,35 @@ button,input,textarea,select{font:inherit}
   .mx-card:last-child{grid-column:1/-1}
 }
 @media(max-width:700px){
+  html,body,.mx-site,main{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+  .mx-hero,
+  .mx-hero__content,
+  .mx-portals,
+  .mx-section-heading,
+  .mx-portal-grid,
+  .mx-story,
+  .mx-latest,
+  .mx-footer{
+    min-width:0;
+    max-width:100vw;
+  }
+  .mx-hero__content{
+    flex:0 0 100%;
+    width:100%;
+  }
+  .mx-hero__lead{
+    width:auto!important;
+    max-width:calc(100vw - 36px)!important;
+  }
+  .mx-section-heading>p:last-child{
+    width:auto!important;
+    max-width:calc(100vw - 20px)!important;
+  }
+
   .mx-header{
     position:absolute;
     min-height:62px;
