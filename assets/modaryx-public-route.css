@@ -54,7 +54,7 @@ img{display:block;max-width:100%}
 }
 .mx-route-hero{
   position:relative;
-  min-height:min(72vw,760px);
+  min-height:min(72vw,680px);
   overflow:hidden;
   border-bottom:1px solid rgba(231,179,79,.18);
   background:#06090d;
@@ -71,7 +71,7 @@ img{display:block;max-width:100%}
   content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
     linear-gradient(90deg,rgba(4,8,13,.90) 0%,rgba(4,8,13,.62) 34%,rgba(4,8,13,.18) 64%,rgba(4,8,13,.18) 100%),
-    linear-gradient(180deg,rgba(5,9,14,.88) 0%,rgba(5,9,14,.24) 15%,rgba(5,9,14,.04) 42%,rgba(5,9,14,.16) 68%,rgba(5,9,14,.95) 100%);
+    linear-gradient(180deg,rgba(5,9,14,.88) 0%,rgba(5,9,14,.24) 15%,rgba(5,9,14,.04) 42%,rgba(5,9,14,.12) 74%,rgba(5,9,14,.92) 92%,#05090e 100%);
 }
 .mx-route-hero__copy{
   position:relative;z-index:2;
