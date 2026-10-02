@@ -277,12 +277,11 @@ img{max-width:100%}
     z-index:90;
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    gap:16px;
+    justify-content:center;
     min-height:58px;
     padding:0 15px;
     border-bottom:1px solid rgba(231,179,79,.20);
-    background:rgba(5,9,14,.94);
+    background:rgba(5,9,14,.97);
     backdrop-filter:blur(14px);
   }
   .mx-mobile-brand{
@@ -291,20 +290,11 @@ img{max-width:100%}
     font-size:1.14rem;
     letter-spacing:.14em;
   }
-  .mx-mobile-explore{
-    padding:8px 12px;
-    border:1px solid rgba(231,179,79,.45);
-    border-radius:4px;
-    color:#f2cf83;
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:.78rem;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-  }
+  .mx-mobile-explore{display:none}
   .mx-canon-stage{
-    height:74svh;
-    min-height:560px;
-    max-height:760px;
+    height:68svh;
+    min-height:520px;
+    max-height:690px;
     overflow:hidden;
     background:#06090d;
   }
@@ -320,19 +310,20 @@ img{max-width:100%}
   }
   .mx-canon-stage__art{
     position:absolute;
-    inset:0 auto 0 50%;
+    left:50%;
+    top:-10%;
     width:auto;
     max-width:none;
-    height:100%;
+    height:124%;
     aspect-ratio:auto;
     object-fit:cover;
-    transform:translateX(-49%)!important;
+    transform:translateX(-48%)!important;
   }
   .mx-canon-hotspots{display:none}
   .mx-mobile-portals{
     display:grid;
     width:min(100% - 20px,660px);
-    margin:-28px auto 0;
+    margin:-18px auto 0;
     position:relative;
     z-index:10;
     border:1px solid rgba(231,179,79,.18);
