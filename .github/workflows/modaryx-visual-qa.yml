@@ -11,6 +11,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: modaryx-visual-qa-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   route-capture:
     name: Capture ${{ matrix.name }} desktop
@@ -177,4 +181,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: node-static-server
+# qa-trigger: cancel-stale-runs
