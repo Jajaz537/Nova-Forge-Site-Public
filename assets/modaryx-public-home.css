@@ -429,7 +429,22 @@ button,input,textarea,select{font:inherit}
     font-size:clamp(3rem,12.5vw,4.3rem);
     letter-spacing:-.05em;
   }
-  .mx-hero__lead{font-size:.95rem;line-height:1.58}
+  .mx-hero__lead{
+    width:100%;
+    max-width:100%;
+    font-size:.95rem;
+    line-height:1.58;
+    overflow-wrap:break-word;
+  }
+  .mx-section-heading{
+    width:100%;
+    max-width:100%;
+  }
+  .mx-section-heading>p:last-child{
+    width:100%;
+    max-width:100%;
+    overflow-wrap:break-word;
+  }
   .mx-hero__actions{display:grid;grid-template-columns:1fr;max-width:360px}
   .mx-hero__sigil{display:none}
   .mx-portals,
