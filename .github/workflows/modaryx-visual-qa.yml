@@ -134,4 +134,5 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: local-static-capture
+
+# qa-trigger: route-crop-review
