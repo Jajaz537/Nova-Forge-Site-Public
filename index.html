@@ -3,150 +3,99 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#090b0e">
+  <meta name="theme-color" content="#071019">
   <meta name="color-scheme" content="dark">
   <meta name="referrer" content="no-referrer">
-  <meta name="application-name" content="MODARYX MODS">
+  <meta name="application-name" content="MODARYX">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
-  <meta name="description" content="MODARYX MODS — plateforme web multigaming : explorez le catalogue de démonstration, préparez vos projets et vos collections, vérifiez vos fichiers localement.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'">
+  <meta name="description" content="MODARYX — un monde, une histoire, sans limite. Découvrez le royaume, ses compagnons, ses aventures, ses lieux et ses factions.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:site_name" content="MODARYX MODS">
-  <meta property="og:title" content="MODARYX MODS — Gaming, Mods & Modding Tools">
-  <meta property="og:description" content="Découvrez MODARYX MODS : mods multigaming, outils de création, catalogue, sécurité et provenance dans une plateforme web indépendante.">
+  <meta property="og:site_name" content="MODARYX">
+  <meta property="og:title" content="MODARYX — Un monde. Une histoire. Sans limite.">
+  <meta property="og:description" content="Entrez dans le royaume MODARYX et découvrez ses personnages, ses compagnons et ses terres.">
   <meta property="og:url" content="https://modaryxmods.com/">
-  <title>MODARYX MODS — Gaming, Mods & Modding Tools</title>
+  <title>MODARYX — Un monde. Une histoire. Sans limite.</title>
   <link rel="canonical" href="https://modaryxmods.com/">
-  <link rel="icon" href="./favicon.svg?v=modaryx-20260911-2" type="image/svg+xml">
+  <link rel="icon" href="./favicon.svg?v=modaryx-20261002" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
   <link rel="preload" as="image" href="./assets/modaryx-finishline-canon.png" fetchpriority="high">
-  <link rel="alternate" type="application/json" href="./public-status.json" title="MODARYX MODS — statut public">
-  <script src="./assets/shell.js" defer></script>
-  <script src="./assets/app.js" defer></script>
-  <script src="./assets/nova-premium-hd.js" defer></script>
-  <script src="./assets/living-world.js" defer></script>
   <link rel="stylesheet" href="./assets/modaryx-home-finishline.css">
-  <link rel="stylesheet" href="./assets/modaryx-foundations.css" disabled>
 </head>
-<body>
-  <a class="skip-link" href="#main">Aller au contenu</a>
-  <noscript><p class="noscript-note">JavaScript est désactivé. Le contenu officiel reste accessible ; les démonstrations locales enrichies sont simplement indisponibles.</p></noscript>
+<body class="mx-site">
+  <a class="mx-skip" href="#royaume">Aller au royaume</a>
 
-  <header class="nova-topbar">
-    <a class="brand" href="#top" aria-label="MODARYX MODS, accueil">
-      <img src="./favicon.svg?v=modaryx-visible-m-3" alt="" width="34" height="34">
-      <span class="brand-word">MODARYX MODS<small>Gaming · Mods · Modding Tools</small></span>
+  <header class="mx-header" aria-label="En-tête MODARYX">
+    <a class="mx-brand" href="#royaume" aria-label="MODARYX, accueil">
+      <span class="mx-brand__mark" aria-hidden="true">✧</span>
+      <span class="mx-brand__text">
+        <strong>MODARYX</strong>
+        <small>UN MONDE. UNE HISTOIRE. SANS LIMITE.</small>
+      </span>
     </a>
-      <button class="menu-button" type="button" aria-label="Ouvrir le menu" aria-controls="primary-navigation" aria-expanded="false" data-menu-button><span></span><span></span><span></span></button>
-    <nav id="primary-navigation" class="nova-nav" data-primary-nav data-open="false" aria-label="Navigation principale">
-      <a href="./catalog.html">Catalogue</a>
-      <a href="./creator-studio.html">Créer</a>
-      <a href="./community.html">Communauté</a>
-      <a href="./ecosystem.html">Écosystème</a>
-      <a href="./search.html">Recherche</a>
-      <a href="./security.html">Sécurité</a>
-      <a href="./documentation.html">Aide</a>
+
+    <nav class="mx-header__nav" aria-label="Navigation principale">
+      <a href="#univers">Univers</a>
+      <a href="#compagnons">Compagnons</a>
+      <a href="#aventures">Aventures</a>
+      <a href="#lieux">Lieux</a>
+      <a href="#factions">Factions</a>
+      <a href="#communaute">Communauté</a>
     </nav>
+
+    <a class="mx-header__cta" href="#communaute">Commencer <span aria-hidden="true">›</span></a>
   </header>
 
-  <main id="main" class="site-main">
-    <section class="mx-finishline-hero" id="top" aria-label="Le Royaume MODARYX">
-  <img class="mx-finishline-hero__art" src="./assets/modaryx-finishline-canon.png"
-       width="1672" height="941" alt="" loading="eager" fetchpriority="high" decoding="async">
-  <div class="mx-finishline-hero__ui">
-    <nav class="mx-finishline-portals" aria-label="Explorer le Royaume MODARYX">
-      <a href="./ecosystem.html"><strong>Univers</strong><span>Le royaume MODARYX</span></a>
-      <a href="./community.html#companions"><strong>Compagnons</strong><span>Les gardiens du royaume</span></a>
-      <a href="./games/"><strong>Aventures</strong><span>Jeux et expériences</span></a>
-      <a href="./search.html"><strong>Lieux</strong><span>Explorer les horizons</span></a>
-      <a href="./community.html"><strong>Factions</strong><span>Communautés et alliances</span></a>
-    </nav>
-  </div>
-</section>
+  <main id="royaume">
+    <section class="mx-canon-stage" aria-label="Le Royaume MODARYX">
+      <img class="mx-canon-stage__art"
+           src="./assets/modaryx-finishline-canon.png"
+           width="1672" height="941"
+           alt="Le Royaume MODARYX au coucher du soleil, avec Kaëlor, Lyra, Nova, Élara, leurs compagnons Kael, Lumia, Aerion et Shiro, et Zyrion le dragon ancien."
+           loading="eager" fetchpriority="high" decoding="async">
 
-    <div class="trust-rail" aria-label="Garanties publiques">
-      <div class="shell"><span><b></b>Navigation publique sans compte</span><span><b></b>Aucune télémétrie distante requise</span><span><b></b>Smart Profile local</span><span><b></b>Aucun exécutable lancé par le site</span></div>
-    </div>
-
-
-    <section class="modaryx-portals" aria-label="Les univers MODARYX">
-      <div class="shell"><figure>
-        <img data-deferred-src="./assets/modaryx-world-portals.webp" width="1200" height="675" alt="" decoding="async">
-        <nav class="modaryx-portal-links" aria-label="Choisir un parcours">
-          <a href="./creator-studio.html"><strong>Créer</strong><span>Préparez et exportez le manifeste de votre projet.</span></a>
-          <a href="./catalog.html"><strong>Explorer</strong><span>Découvrez les créations du catalogue de démonstration.</span></a>
-          <a href="./community.html#collections"><strong>Rassembler</strong><span>Organisez vos favoris dans une collection locale.</span></a>
-        </nav>
-      </figure></div>
+      <nav class="mx-canon-hotspots" aria-label="Explorer le Royaume MODARYX">
+        <a id="univers" class="mx-hotspot mx-hotspot--univers" href="#royaume-news"><span>Univers</span></a>
+        <a id="compagnons" class="mx-hotspot mx-hotspot--compagnons" href="#communaute"><span>Compagnons</span></a>
+        <a id="aventures" class="mx-hotspot mx-hotspot--aventures" href="#royaume-news"><span>Aventures</span></a>
+        <a id="lieux" class="mx-hotspot mx-hotspot--lieux" href="#royaume-news"><span>Lieux</span></a>
+        <a id="factions" class="mx-hotspot mx-hotspot--factions" href="#communaute"><span>Factions</span></a>
+      </nav>
     </section>
 
-    <section class="editions" id="os" aria-labelledby="editions-title">
-      <div class="shell">
-        <div class="section-head"><div><p class="eyebrow">Deux façons de commencer</p><h2 class="section-title" id="editions-title">Trouvez votre prochain projet.<br>Ou préparez le vôtre.</h2></div><p class="section-copy">Passez de la découverte à la préparation avec les mêmes repères : le jeu, le créateur, la compatibilité et les preuves disponibles.</p></div>
-        <div class="edition-duo">
-          <article class="edition-panel public">
-            <span class="edition-tag">Pour explorer</span><h3>Repérez.<br>Comparez.<br>Conservez.</h3><p>Filtrez les entrées par jeu et compatibilité, ouvrez leur fiche et retrouvez vos favoris dans une collection locale. Le catalogue contient actuellement des démonstrations.</p><a class="text-link" href="./catalog.html">Ouvrir le catalogue →</a>
-            <div class="edition-bottom"><strong>Catalogue MODARYX</strong><span>Sans compte</span></div>
-          </article>
-          <article class="edition-panel universe">
-            <span class="edition-tag">Pour créer</span><h3>Décrivez.<br>Vérifiez.<br>Exportez.</h3><p>Renseignez la cible, les droits, les dépendances et les fichiers de votre projet. Le Studio vérifie le format du brouillon avant son export JSON ; il ne publie rien.</p><a class="text-link" href="./creator-studio.html">Ouvrir le Studio →</a>
-            <div class="edition-bottom"><strong>Creator Studio</strong><span>Brouillon local</span></div>
-          </article>
+    <section class="mx-realm-dashboard" id="royaume-news" aria-label="La vie du Royaume">
+      <article class="mx-realm-panel mx-realm-panel--news">
+        <p class="mx-panel-kicker">Actualités</p>
+        <div class="mx-panel-body">
+          <span class="mx-panel-badge">MISE À JOUR</span>
+          <h2>Le Royaume s’agrandit</h2>
+          <p>De nouvelles terres, histoires et expériences rejoindront progressivement MODARYX.</p>
+          <time datetime="2026-10-02">2 octobre 2026</time>
         </div>
-      </div>
-    </section>
+      </article>
 
-    <section class="chapters" aria-label="Principes MODARYX MODS">
-      <div class="shell">
-        <article class="chapter">
-          <div class="chapter-copy"><p class="eyebrow">01 · Local-first</p><h2 class="section-title">Vos brouillons restent<br>dans votre navigateur.</h2><p>Enregistrez explicitement vos projets et vos collections sur cet appareil. Exportez-les en JSON pour en garder une copie : les données du navigateur peuvent être effacées, et aucune synchronisation distante n’est active.</p><div class="chapter-points"><div><span>01</span><div><strong>Copie locale</strong><small>Vous choisissez quand enregistrer et exporter.</small></div></div><div><span>02</span><div><strong>Actions explicites</strong><small>Aucune mutation sensible déclenchée en silence.</small></div></div></div></div>
-          <div class="chapter-visual"><div class="local-map"><div class="local-node"><small>Votre navigateur</small><strong>Brouillon local</strong><em>Enregistrement explicite</em></div><div class="link-line"></div><div class="local-node"><small>Votre fichier JSON</small><strong>Copie exportée</strong><em>À conserver</em></div></div></div>
-        </article>
+      <article class="mx-realm-panel mx-realm-panel--events">
+        <p class="mx-panel-kicker">Événements</p>
+        <div class="mx-event-list">
+          <p><strong>Défi des Factions</strong><span>À venir</span></p>
+          <p><strong>Exploration des Terres</strong><span>À venir</span></p>
+          <p><strong>Chroniques du Royaume</strong><span>À venir</span></p>
+        </div>
+      </article>
 
-        <article class="chapter">
-          <div class="chapter-copy"><p class="eyebrow">02 · Comprendre les preuves</p><h2 class="section-title">La confiance est une chaîne,<br>pas un badge décoratif.</h2><p>Source, créateur, artefact, signature, provenance et sécurité restent des relations vérifiables. Une information inconnue reste inconnue plutôt que d’être embellie.</p><div class="chapter-points"><div><span>01</span><div><strong>Provenance explicite</strong><small>Identité et lignée restent liées au contenu.</small></div></div><div><span>02</span><div><strong>Preuves requises</strong><small>Une preuve manquante ne devient jamais une validation implicite.</small></div></div></div></div>
-          <div class="chapter-visual"><div class="trust-graph"><div class="trust-lines"></div><div class="trust-node creator"><strong>Créateur</strong><small>identité</small></div><div class="trust-node artifact"><strong>Artefact</strong><small>hash attendu</small></div><div class="trust-node signature"><strong>Signature</strong><small>preuve</small></div><div class="trust-node provenance"><strong>Provenance</strong><small>lignée</small></div><div class="trust-node security"><strong>Sécurité</strong><small>inspection</small></div></div></div>
-        </article>
-
-        <article class="chapter">
-          <div class="chapter-copy"><p class="eyebrow guide">03 · Modaryx Guide</p><h2 class="section-title">Une aide qui explique<br>avant d’agir.</h2><p>La direction retenue pour Modaryx Guide est une aide contextuelle qui explique les informations connues et les limites. L’échange ci-contre illustre ce principe ; ce n’est pas une conversation avec un assistant connecté.</p><div class="chapter-points"><div><span>01</span><div><strong>Compréhensible</strong><small>Cause, action et conséquence sont séparées.</small></div></div><div><span>02</span><div><strong>Borné</strong><small>Le Guide ne remplace pas les frontières de sécurité.</small></div></div></div></div>
-          <div class="chapter-visual"><div class="guide-surface"><div class="guide-rail"><b>M</b><b>?</b><b>✓</b></div><div class="guide-chat"><div class="bubble">Cette ressource est-elle sûre à utiliser ?</div><div class="bubble nova">Cette fiche de démonstration ne suffit pas à établir la sécurité du fichier. Consultez sa source et ses preuves ; une estimation de compatibilité ne garantit pas sa stabilité.</div><span class="guide-chip">Exemple de réponse · Guide non connecté</span></div></div></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="catalogue-zone" id="catalogue" aria-labelledby="catalogue-title">
-      <div class="shell catalogue-shell">
-        <div><p class="eyebrow">Catalogue de mods multigaming</p><h2 class="section-title" id="catalogue-title">Découvrir les mods sans bruit inutile.</h2><p class="section-copy">Le catalogue public organise les créations par jeu, catégorie et compatibilité tout en gardant les états de confiance et de provenance lisibles.</p><label class="field" for="mod-search"><span>Rechercher</span><input id="mod-search" type="search" disabled autocomplete="off" placeholder="Mod, jeu, catégorie…"></label><div class="inline-actions"><button class="text-button" type="button" data-smart-profile>Analyser ce navigateur</button><button class="text-button" type="button" data-os-bridge>Lien avec Nova Forge OS</button></div></div>
-        <div><div data-mod-catalog aria-live="polite"><article class="card"><p class="card-kicker">Skyrim Special Edition</p><h3>Ember Textures — Preview</h3><p>Aperçu de textures pour Skyrim Special Edition. Aucun fichier à télécharger ; compatibilité non vérifiée.</p><span class="badge neutral">Compatibilité : Inconnue</span><a class="text-link" href="./project-ember-textures.html" aria-label="Voir la fiche : Ember Textures — Preview">Voir la fiche</a></article><article class="card"><p class="card-kicker">Cyberpunk 2077</p><h3>Balanced Latency Pack — Preview</h3><p>Pack de démonstration pour Cyberpunk 2077. Aucune mesure de performance ni gain de FPS garanti.</p><span class="badge neutral">Compatibilité : Estimée</span><a class="text-link" href="./project-balanced-latency-pack.html" aria-label="Voir la fiche : Balanced Latency Pack — Preview">Voir la fiche</a></article><article class="card"><p class="card-kicker">Minecraft</p><h3>Forge Night Experience — Preview</h3><p>Expérience de démonstration pour Minecraft. Aucun fichier à télécharger ; compatibilité non vérifiée.</p><span class="badge neutral">Compatibilité : Inconnue</span><a class="text-link" href="./project-forge-night-experience.html" aria-label="Voir la fiche : Forge Night Experience — Preview">Voir la fiche</a></article></div><div class="panel profile-panel" data-profile-result role="status" aria-live="polite"><p class="muted" data-os-status>Aucune analyse locale exécutée.</p></div></div>
-      </div>
-    </section>
-
-    <section class="security-stage" id="security" aria-labelledby="security-title">
-      <div class="shell security-hero">
-        <div><p class="eyebrow">Sécurité & provenance</p><h2 class="section-title" id="security-title">La preuve avant la promesse.</h2><p class="section-copy">MODARYX MODS n’utilise pas le design pour simuler la confiance. Le site ne transforme jamais « inconnu » en « vérifié » et ne publie pas un artefact sans chaîne de confiance suffisante.</p><div class="hero-actions"><a class="button" href="./security.html">Contrat de sécurité</a><a class="button ghost" href="./verify.html">Vérifier un fichier</a></div></div>
-        <div class="security-seal" aria-hidden="true"><div class="seal-core">MODARYX<br>TRUST</div><span class="seal-status">Preuves requises</span></div>
-      </div>
-    </section>
-
-    <section class="download-stage" id="downloads" aria-labelledby="downloads-title">
-      <div class="shell"><div class="download-box"><div><p class="eyebrow">Téléchargements publics</p><h2 id="downloads-title">Les téléchargements<br>ne sont pas encore ouverts.</h2><p data-public-status-message>Les distributions restent verrouillées tant qu’un artefact public autorisé n’a pas l’identité, l’intégrité et la provenance nécessaires à une vérification indépendante.</p></div><div class="download-lock"><strong>Publication verrouillée</strong><small>Aucun fichier disponible actuellement.</small><div class="status-summary" data-public-status-facts aria-live="polite"><span><strong>Distribution</strong><small>verrouillée</small></span><span><strong>Pont vers Nova Forge OS</strong><small>non connecté</small></span><span><strong>Smart Profile</strong><small>navigateur local</small></span><span data-public-build-fact><strong>Empreinte</strong><small>Empreinte non disponible</small></span></div><a class="text-link" href="./public-status.json">Consulter le statut public</a></div></div></div>
-    </section>
-
-    <section class="modaryx-faq" id="faq" aria-labelledby="faq-title">
-      <div class="shell faq-layout"><div><p class="eyebrow">Avant de commencer</p><h2 class="section-title" id="faq-title">Des réponses claires.<br>Des choix éclairés.</h2></div><div>
-        <details><summary>Puis-je déjà télécharger les mods présentés ?</summary><p>Les créations actuellement affichées sont des entrées de démonstration. Aucun binaire ni téléchargement n’est fourni. Consultez le statut public pour connaître la disponibilité réelle.</p></details>
-        <details><summary>Que deviennent mes projets et mes collections ?</summary><p>Les outils du site permettent une préparation locale et des exports explicites. Exportez les données que vous souhaitez conserver : le stockage du navigateur peut être effacé. Une publication distante n’est jamais implicite.</p></details>
-        <details><summary>Une provenance connue garantit-elle la compatibilité ?</summary><p>Non. L’origine, l’intégrité, les droits et la compatibilité sont des informations distinctes. Une compatibilité inconnue reste inconnue, même lorsqu’une source est identifiée.</p></details>
-        <details><summary>MODARYX peut-il modifier mon jeu depuis cette page ?</summary><p>Aucun exécutable, protocole local ou service système n’est lancé par cette présentation. Les actions sensibles doivent rester explicites et respecter les règles du jeu concerné.</p></details>
-      </div></div>
-    </section>
-    <section class="explore" aria-label="Explorer MODARYX MODS">
-      <div class="shell explore-grid"><a class="explore-link" href="./creator-studio.html"><small>Création</small><strong>Creator Studio</strong><span>Préparer, valider le format et exporter localement.</span></a><a class="explore-link" href="./documentation.html"><small>Comprendre</small><strong>Documentation</strong><span>Contrats, limites et preuves publiques.</span></a><a class="explore-link" href="./community.html"><small>Écosystème</small><strong>Communauté</strong><span>Découvrir les surfaces publiques disponibles.</span></a></div>
+      <article class="mx-realm-panel mx-realm-panel--join" id="communaute">
+        <p class="mx-panel-kicker">Rejoignez l’aventure</p>
+        <h2>Le Royaume se construit ensemble.</h2>
+        <p>Découvrez les personnages, partagez vos créations et suivez l’évolution de MODARYX.</p>
+        <a class="mx-gold-button" href="./community.html">Découvrir la communauté <span aria-hidden="true">›</span></a>
+      </article>
     </section>
   </main>
 
-  <footer class="site-footer"><div><strong>MODARYX MODS</strong><p>Explorez des créations et préparez vos projets avec des outils locaux.</p></div><nav aria-label="Navigation de pied de page"><a href="./catalog.html">Catalogue</a><a href="./creator-studio.html">Créer</a><a href="./community.html">Communauté</a><a href="./profiles.html">Profils</a><a href="./ecosystem.html">Écosystème</a><a href="./search.html">Recherche</a><a href="./security.html">Sécurité</a><a href="./documentation.html">Documentation</a><a href="./downloads.html">Téléchargements</a><a href="./documentation.html#privacy">Données locales</a><a href="./public-status.json">Statut public</a></nav></footer>
+  <footer class="mx-footer">
+    <strong>MODARYX</strong>
+    <span>Un monde. Une histoire. Sans limite.</span>
+  </footer>
 </body>
 </html>
