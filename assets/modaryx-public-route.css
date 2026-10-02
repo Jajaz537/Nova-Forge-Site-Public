@@ -57,16 +57,12 @@ img{display:block;max-width:100%}
   min-height:min(72vw,680px);
   overflow:hidden;
   border-bottom:1px solid rgba(231,179,79,.18);
-  background:#06090d;
+  background-color:#06090d;
+  background-image:url(./modaryx-finishline-canon.png);
+  background-repeat:no-repeat;
+  background-size:225% auto;
 }
-.mx-route-hero__art{
-  position:absolute;inset:0;
-  width:100%;height:100%;max-width:none;
-  object-fit:cover;
-  filter:saturate(.94) contrast(1.02);
-  transform:scale(1.33);
-  transform-origin:center center;
-}
+.mx-route-hero__art{display:none}
 .mx-route-hero:after{
   content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
@@ -194,10 +190,15 @@ img{display:block;max-width:100%}
   .mx-route-brand{font-size:1.12rem}
   .mx-route-home{font-size:.72rem;padding:7px 10px}
   .mx-route-hero{min-height:640px}
-  .mx-route-hero__art{
-    width:auto;height:152%;left:50%;right:auto;top:-20%;
-    transform:translateX(-50%);
+  .mx-route-hero{
+    background-size:auto 158%;
   }
+  .mx-route-hero--univers{background-position:76% 42%}
+  .mx-route-hero--compagnons{background-position:28% 48%}
+  .mx-route-hero--aventures{background-position:44% 58%}
+  .mx-route-hero--lieux{background-position:84% 38%}
+  .mx-route-hero--factions{background-position:80% 48%}
+  .mx-route-hero--communaute{background-position:34% 48%}
   .mx-route-hero:after{
     background:
       linear-gradient(180deg,rgba(5,9,14,.16) 25%,rgba(5,9,14,.54) 62%,rgba(5,9,14,.96) 100%);
