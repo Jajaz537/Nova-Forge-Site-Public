@@ -21,6 +21,7 @@ on:
       - 'assets/modaryx-public-home.css'
       - 'assets/modaryx-public-route.css'
       - 'assets/modaryx-finishline-canon.png'
+      - 'qa/modaryx-static-server.mjs'
 
 permissions:
   contents: read
@@ -203,4 +204,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: force-run-sha
+# qa-trigger: secure-static-server
