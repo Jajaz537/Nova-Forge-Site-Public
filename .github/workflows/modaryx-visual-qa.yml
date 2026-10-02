@@ -7,6 +7,20 @@ on:
       - design/modaryx-true-finishline-20261002
     paths:
       - '.github/workflows/modaryx-visual-qa.yml'
+      - 'index.html'
+      - 'univers.html'
+      - 'compagnons.html'
+      - 'aventures.html'
+      - 'lieux.html'
+      - 'factions.html'
+      - 'communaute.html'
+      - '404.html'
+      - 'site.webmanifest'
+      - '_redirects'
+      - '_headers'
+      - 'assets/modaryx-public-home.css'
+      - 'assets/modaryx-public-route.css'
+      - 'assets/modaryx-finishline-canon.png'
 
 permissions:
   contents: read
@@ -181,4 +195,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: final-editorial-routes
+# qa-trigger: public-surface
