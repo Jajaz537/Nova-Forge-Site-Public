@@ -3,7 +3,6 @@
 
 /public-status.json / 302
 /public-build.json / 302
-/public-build.json / 302
 /domain-cutover.json / 302
 /downloads.json / 302
 /package.json / 302
@@ -75,3 +74,9 @@
 /gta-6/* /aventures.html 302
 /red-dead-redemption-2 /aventures.html 302
 /red-dead-redemption-2/* /aventures.html 302
+/univers.html /univers 301
+/compagnons.html /compagnons 301
+/aventures.html /aventures 301
+/lieux.html /lieux 301
+/factions.html /factions 301
+/communaute.html /communaute 301
