@@ -386,3 +386,32 @@ img{max-width:100%}
     overflow-wrap:anywhere;
   }
 }
+
+
+@media(max-width:700px){
+  html,body,.mx-site,main{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+  .mx-realm-dashboard{
+    width:100%;
+    max-width:none;
+    margin-left:0;
+    margin-right:0;
+    padding-left:10px;
+    padding-right:10px;
+  }
+  .mx-realm-panel{
+    width:100%;
+    max-width:100%;
+    margin:0 0 12px;
+  }
+  .mx-realm-panel p,
+  .mx-realm-panel h2,
+  .mx-event-list span{
+    white-space:normal;
+    word-break:normal;
+    overflow-wrap:break-word;
+  }
+}
