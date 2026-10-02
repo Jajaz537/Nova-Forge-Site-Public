@@ -38,14 +38,35 @@ jobs:
 
           New-Item -ItemType Directory -Force -Path visual-qa | Out-Null
 
-          & $browser --headless=new --disable-gpu --hide-scrollbars --window-size=1440,1200 --virtual-time-budget=8000 --screenshot="$PWD\visual-qa\desktop.png" $url
-          if ($LASTEXITCODE -ne 0) { throw "DESKTOP_CAPTURE_FAILED exit=$LASTEXITCODE" }
+          Write-Host ('BROWSER=' + [IO.Path]::GetFileName($browser))
+          $profile = Join-Path $env:RUNNER_TEMP 'modaryx-visual-qa-profile'
+          New-Item -ItemType Directory -Force -Path $profile | Out-Null
 
-          & $browser --headless=new --disable-gpu --hide-scrollbars --window-size=390,844 --force-device-scale-factor=1 --virtual-time-budget=8000 --screenshot="$PWD\visual-qa\mobile.png" $url
-          if ($LASTEXITCODE -ne 0) { throw "MOBILE_CAPTURE_FAILED exit=$LASTEXITCODE" }
+          $desktop = Join-Path $PWD 'visual-qa\desktop.png'
+          $desktopArgs = @(
+            '--headless=new','--disable-gpu','--hide-scrollbars',
+            '--no-first-run','--no-default-browser-check',
+            ('--user-data-dir=' + $profile),
+            '--window-size=1440,1200','--virtual-time-budget=8000',
+            ('--screenshot=' + $desktop), $url
+          )
+          $p1 = Start-Process -FilePath $browser -ArgumentList $desktopArgs -Wait -PassThru
+          if (-not (Test-Path -LiteralPath $desktop)) { throw ('DESKTOP_SCREENSHOT_MISSING exit=' + $p1.ExitCode) }
 
-          if (-not (Test-Path visual-qa\desktop.png)) { throw 'DESKTOP_SCREENSHOT_MISSING' }
-          if (-not (Test-Path visual-qa\mobile.png)) { throw 'MOBILE_SCREENSHOT_MISSING' }
+          Remove-Item -Recurse -Force $profile -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force -Path $profile | Out-Null
+
+          $mobile = Join-Path $PWD 'visual-qa\mobile.png'
+          $mobileArgs = @(
+            '--headless=new','--disable-gpu','--hide-scrollbars',
+            '--no-first-run','--no-default-browser-check',
+            ('--user-data-dir=' + $profile),
+            '--window-size=390,844','--force-device-scale-factor=1',
+            '--virtual-time-budget=8000',
+            ('--screenshot=' + $mobile), $url
+          )
+          $p2 = Start-Process -FilePath $browser -ArgumentList $mobileArgs -Wait -PassThru
+          if (-not (Test-Path -LiteralPath $mobile)) { throw ('MOBILE_SCREENSHOT_MISSING exit=' + $p2.ExitCode) }
 
           Write-Host 'VISUAL_QA_CAPTURED'
 
