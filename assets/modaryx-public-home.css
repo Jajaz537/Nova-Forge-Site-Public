@@ -450,3 +450,29 @@ img{max-width:100%}
   text-transform:uppercase;
 }
 .mx-panel-link:hover,.mx-panel-link:focus-visible{text-decoration:underline;text-underline-offset:4px}
+
+
+.mx-footer__brand{display:grid;gap:5px}
+.mx-footer__nav{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px 18px;
+}
+.mx-footer__nav a{
+  color:#aaa394;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:.74rem;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+}
+.mx-footer__nav a:hover,
+.mx-footer__nav a:focus-visible{color:#e7b34f}
+
+@media(max-width:700px){
+  .mx-footer__nav{
+    justify-content:flex-start;
+    gap:10px 16px;
+  }
+}
