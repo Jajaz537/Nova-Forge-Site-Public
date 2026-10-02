@@ -55,6 +55,10 @@ jobs:
     steps:
       - name: Checkout exact candidate
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          clean: true
 
       - name: Capture route through local HTTP
         shell: powershell
@@ -128,6 +132,10 @@ jobs:
     steps:
       - name: Checkout exact candidate
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          clean: true
 
       - name: Capture mobile homepage through local HTTP
         shell: powershell
@@ -195,4 +203,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: public-surface
+# qa-trigger: force-run-sha
