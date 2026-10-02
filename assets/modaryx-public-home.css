@@ -520,3 +520,50 @@ button,input,textarea,select{font:inherit}
   html{scroll-behavior:auto}
   .mx-portal{transition:none}
 }
+
+
+.mx-error{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:32px;
+  background:
+    linear-gradient(90deg,rgba(5,9,14,.92),rgba(5,9,14,.48)),
+    url(./modaryx-finishline-canon.png);
+  background-repeat:no-repeat;
+  background-size:cover,300% auto;
+  background-position:center,100% 24%;
+}
+.mx-error__panel{
+  width:min(760px,100%);
+  padding:clamp(30px,6vw,68px);
+  border:1px solid rgba(230,178,81,.22);
+  background:rgba(7,15,23,.90);
+  backdrop-filter:blur(14px);
+  box-shadow:0 30px 90px rgba(0,0,0,.44);
+}
+.mx-error__panel h1{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(2.5rem,6.5vw,5.8rem);
+  font-weight:500;
+  line-height:.95;
+  letter-spacing:-.035em;
+}
+.mx-error__panel>p:last-of-type{
+  max-width:48ch;
+  margin:20px 0 0;
+  color:var(--mx-muted);
+  line-height:1.7;
+}
+.mx-error__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:28px;
+}
+@media(max-width:700px){
+  .mx-error{padding:16px;background-size:cover,390% auto;background-position:center,88% 28%}
+  .mx-error__panel{padding:28px 20px}
+  .mx-error__actions{display:grid}
+}
