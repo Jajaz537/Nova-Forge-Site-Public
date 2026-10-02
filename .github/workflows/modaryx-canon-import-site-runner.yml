@@ -1,0 +1,85 @@
+name: MODARYX Canon Import - Site Runner
+
+on:
+  push:
+    branches:
+      - design/modaryx-true-finishline-20261002
+    paths:
+      - '.github/workflows/modaryx-canon-import-site-runner.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: modaryx-canon-import-site-runner
+  cancel-in-progress: false
+
+jobs:
+  import-exact-canon:
+    name: Locate and import exact Finish Line canon
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 15
+    steps:
+      - name: Checkout isolated Finish Line branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: design/modaryx-true-finishline-20261002
+          fetch-depth: 1
+
+      - name: Locate exact canonical PNG without exposing local paths
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $expectedHash = '141F90DD3AB403627A8279DB8C66C2E9711AD88771B359C1EA4CE26C212ED81E'
+          $expectedSize = 4231234
+          $roots = @(
+            [Environment]::GetFolderPath('Desktop'),
+            [Environment]::GetFolderPath('MyDocuments'),
+            (Join-Path $env:USERPROFILE 'Downloads'),
+            (Join-Path $env:USERPROFILE 'OneDrive\Desktop'),
+            (Join-Path $env:USERPROFILE 'OneDrive\Documents')
+          ) | Where-Object { $_ -and (Test-Path -LiteralPath $_) } | Select-Object -Unique
+          $names = @('nouveaux design 3(1).png','nouveaux design 3 (1).png')
+          $match = $null
+          foreach ($root in $roots) {
+            foreach ($name in $names) {
+              $items = Get-ChildItem -LiteralPath $root -Filter $name -File -Recurse -ErrorAction SilentlyContinue
+              foreach ($item in $items) {
+                if ($item.Length -ne $expectedSize) { continue }
+                $hash = (Get-FileHash -LiteralPath $item.FullName -Algorithm SHA256).Hash
+                if ($hash -eq $expectedHash) { $match = $item; break }
+              }
+              if ($match) { break }
+            }
+            if ($match) { break }
+          }
+          if (-not $match) {
+            Write-Error 'CANON_NOT_FOUND: exact SHA-256 canonical PNG was not found in the approved user folders.'
+          }
+          New-Item -ItemType Directory -Force -Path assets | Out-Null
+          Copy-Item -LiteralPath $match.FullName -Destination 'assets/modaryx-finishline-canon.png' -Force
+          $copied = Get-Item 'assets/modaryx-finishline-canon.png'
+          $copiedHash = (Get-FileHash -LiteralPath $copied.FullName -Algorithm SHA256).Hash
+          if ($copied.Length -ne $expectedSize -or $copiedHash -ne $expectedHash) {
+            Write-Error 'CANON_COPY_MISMATCH'
+          }
+          Write-Host ('CANON_FOUND_AND_VERIFIED size=' + $copied.Length + ' sha256=' + $copiedHash)
+
+      - name: Run repository fail-closed canon gate
+        shell: powershell
+        run: node qa/check-finishline-canon.mjs
+
+      - name: Commit exact binary to isolated branch
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- assets/modaryx-finishline-canon.png
+          if (git diff --cached --quiet) {
+            Write-Host 'CANON_ALREADY_COMMITTED'
+            exit 0
+          }
+          git commit -m 'assets: import exact MODARYX Finish Line canon [skip ci]'
+          git push origin HEAD:design/modaryx-true-finishline-20261002
