@@ -34,5 +34,37 @@
       "type": "image/svg+xml",
       "purpose": "any"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "Univers",
+      "short_name": "Univers",
+      "url": "./univers.html"
+    },
+    {
+      "name": "Compagnons",
+      "short_name": "Compagnons",
+      "url": "./compagnons.html"
+    },
+    {
+      "name": "Aventures",
+      "short_name": "Aventures",
+      "url": "./aventures.html"
+    },
+    {
+      "name": "Lieux",
+      "short_name": "Lieux",
+      "url": "./lieux.html"
+    },
+    {
+      "name": "Factions",
+      "short_name": "Factions",
+      "url": "./factions.html"
+    },
+    {
+      "name": "Communauté",
+      "short_name": "Communauté",
+      "url": "./communaute.html"
+    }
   ]
 }
