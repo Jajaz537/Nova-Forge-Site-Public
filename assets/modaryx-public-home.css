@@ -423,11 +423,11 @@ button,input,textarea,select{font:inherit}
   }
   .mx-hero__lead{
     width:auto!important;
-    max-width:calc(100vw - 36px)!important;
+    max-width:31ch!important;
   }
   .mx-section-heading>p:last-child{
     width:auto!important;
-    max-width:calc(100vw - 20px)!important;
+    max-width:32ch!important;
   }
 
   .mx-header{
