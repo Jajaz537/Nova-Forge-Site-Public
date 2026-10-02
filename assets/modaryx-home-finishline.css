@@ -275,3 +275,341 @@ html[data-motion=reduced] .living-world-status [data-world-status][data-world-re
     transform:none;
   }
 }
+
+
+/* MODARYX HOMEPAGE REBUILD — canonical kingdom */
+html{background:#05090e}
+body.mx-site{
+  margin:0;
+  min-width:320px;
+  background:
+    radial-gradient(900px 520px at 50% -12%,rgba(213,159,61,.10),transparent 72%),
+    #05090e;
+  color:#f4eee3;
+  font-family:"Segoe UI Variable","Segoe UI",system-ui,sans-serif;
+  overflow-x:hidden;
+}
+.mx-site *{box-sizing:border-box}
+.mx-site a{color:inherit;text-decoration:none}
+.mx-skip{
+  position:fixed;
+  left:16px;
+  top:12px;
+  z-index:999;
+  transform:translateY(-180%);
+  padding:10px 14px;
+  border-radius:8px;
+  background:#f0b544;
+  color:#160f06;
+  font-weight:800;
+}
+.mx-skip:focus{transform:none}
+.mx-header{
+  position:sticky;
+  top:0;
+  z-index:80;
+  min-height:78px;
+  display:grid;
+  grid-template-columns:minmax(260px,auto) 1fr auto;
+  align-items:center;
+  gap:28px;
+  padding:10px clamp(18px,3.2vw,54px);
+  border-bottom:1px solid rgba(231,176,66,.34);
+  background:
+    linear-gradient(180deg,rgba(5,11,18,.97),rgba(5,10,16,.93));
+  box-shadow:0 16px 50px rgba(0,0,0,.34);
+  backdrop-filter:blur(16px) saturate(115%);
+}
+.mx-brand{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  min-width:0;
+}
+.mx-brand__mark{
+  flex:0 0 auto;
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(237,187,79,.72);
+  border-radius:50%;
+  color:#f4bd4e;
+  font-size:2rem;
+  line-height:1;
+  box-shadow:0 0 28px rgba(232,170,47,.13),inset 0 0 0 4px rgba(232,170,47,.05);
+}
+.mx-brand__text{display:grid;line-height:1}
+.mx-brand__text strong{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(1.6rem,2.2vw,2.35rem);
+  font-weight:500;
+  letter-spacing:.08em;
+  color:#f0c66e;
+  text-shadow:0 2px 20px rgba(220,154,39,.18);
+}
+.mx-brand__text small{
+  margin-top:5px;
+  color:#c6b991;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:.61rem;
+  letter-spacing:.15em;
+  white-space:nowrap;
+}
+.mx-header__nav{
+  justify-self:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(10px,1.55vw,26px);
+}
+.mx-header__nav a{
+  position:relative;
+  min-height:44px;
+  display:flex;
+  align-items:center;
+  color:#e9e0cf;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:.78rem;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+}
+.mx-header__nav a:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:100%;
+  bottom:6px;
+  height:1px;
+  background:#e5ad45;
+  transition:right .18s ease;
+}
+.mx-header__nav a:hover:after,
+.mx-header__nav a:focus-visible:after{right:0}
+.mx-header__cta,
+.mx-gold-button{
+  min-height:46px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:0 20px;
+  border:1px solid rgba(255,199,83,.86);
+  border-radius:4px;
+  background:linear-gradient(180deg,#f4bd4d,#d99727);
+  color:#191004!important;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:.77rem;
+  font-weight:800;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  box-shadow:0 0 24px rgba(222,157,40,.20),inset 0 1px rgba(255,255,255,.38);
+}
+.mx-header__cta:hover,
+.mx-gold-button:hover{filter:brightness(1.05)}
+.mx-canon-stage{
+  position:relative;
+  width:100%;
+  margin:0;
+  background:#06090d;
+  overflow:hidden;
+}
+.mx-canon-stage__art{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:1672/941;
+  object-fit:contain;
+  object-position:center;
+  background:#06090d;
+}
+.mx-canon-hotspots{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  pointer-events:none;
+}
+.mx-hotspot{
+  position:absolute;
+  bottom:1.7%;
+  height:19.5%;
+  pointer-events:auto;
+  border:1px solid transparent;
+  border-radius:8px;
+}
+.mx-hotspot span{
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  white-space:nowrap;
+}
+.mx-hotspot:focus-visible{
+  outline:2px solid #ffd373;
+  outline-offset:-4px;
+  background:rgba(247,189,73,.06);
+  box-shadow:inset 0 0 0 2px rgba(255,211,115,.38);
+}
+.mx-hotspot--univers{left:1.45%;width:18.05%}
+.mx-hotspot--compagnons{left:20.25%;width:19.15%}
+.mx-hotspot--aventures{left:40.2%;width:18.65%}
+.mx-hotspot--lieux{left:59.65%;width:18.7%}
+.mx-hotspot--factions{left:79.1%;width:18.1%}
+.mx-realm-dashboard{
+  width:min(1480px,calc(100% - 48px));
+  margin:28px auto 0;
+  display:grid;
+  grid-template-columns:1.15fr .8fr 1.05fr;
+  gap:16px;
+  padding-bottom:34px;
+}
+.mx-realm-panel{
+  position:relative;
+  min-height:230px;
+  overflow:hidden;
+  padding:24px 26px;
+  border:1px solid rgba(102,135,160,.35);
+  border-radius:8px;
+  background:
+    linear-gradient(135deg,rgba(14,24,33,.96),rgba(5,12,18,.98));
+  box-shadow:0 20px 60px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.03);
+}
+.mx-realm-panel:after{
+  content:"";
+  position:absolute;
+  inset:auto -70px -110px auto;
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  border:1px solid rgba(233,175,66,.11);
+  box-shadow:0 0 0 34px rgba(233,175,66,.025),0 0 0 68px rgba(112,164,219,.018);
+  pointer-events:none;
+}
+.mx-panel-kicker{
+  margin:0 0 18px;
+  color:#f0c66e;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:.95rem;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+}
+.mx-panel-body h2,
+.mx-realm-panel--join h2{
+  margin:8px 0 10px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(1.5rem,2.1vw,2.1rem);
+  font-weight:500;
+  line-height:1.05;
+  color:#f6eee0;
+}
+.mx-panel-body p,
+.mx-realm-panel--join p{
+  max-width:50ch;
+  margin:0;
+  color:#b9c0c6;
+  font-size:.94rem;
+  line-height:1.55;
+}
+.mx-panel-body time{
+  display:block;
+  margin-top:18px;
+  color:#8997a2;
+  font-size:.8rem;
+}
+.mx-panel-badge{
+  display:inline-flex;
+  padding:5px 8px;
+  border:1px solid rgba(77,165,204,.35);
+  border-radius:999px;
+  color:#7fd2f7;
+  background:rgba(29,119,158,.10);
+  font-size:.64rem;
+  font-weight:800;
+  letter-spacing:.07em;
+}
+.mx-event-list{display:grid;gap:14px}
+.mx-event-list p{
+  margin:0;
+  display:grid;
+  gap:3px;
+  padding-left:18px;
+  border-left:2px solid rgba(231,176,66,.56);
+}
+.mx-event-list strong{
+  color:#eee4d5;
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:500;
+}
+.mx-event-list span{color:#9ba7b0;font-size:.82rem}
+.mx-realm-panel--join{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+.mx-realm-panel--join .mx-gold-button{margin-top:auto}
+.mx-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:24px clamp(24px,4vw,64px) 34px;
+  border-top:1px solid rgba(231,176,66,.16);
+  color:#988f80;
+  background:#05090e;
+}
+.mx-footer strong{
+  color:#e6bb64;
+  font-family:Georgia,"Times New Roman",serif;
+  letter-spacing:.1em;
+}
+@media(max-width:1180px){
+  .mx-header{grid-template-columns:1fr auto}
+  .mx-header__nav{
+    grid-column:1/-1;
+    order:3;
+    width:100%;
+    overflow-x:auto;
+    justify-content:flex-start;
+    padding-bottom:2px;
+  }
+  .mx-header__cta{justify-self:end}
+  .mx-realm-dashboard{grid-template-columns:1fr 1fr}
+  .mx-realm-panel--join{grid-column:1/-1}
+}
+@media(max-width:760px){
+  .mx-header{
+    position:relative;
+    min-height:auto;
+    padding:12px 16px;
+    gap:12px;
+  }
+  .mx-brand__mark{width:40px;height:40px;font-size:1.55rem}
+  .mx-brand__text strong{font-size:1.38rem}
+  .mx-brand__text small{font-size:.49rem;letter-spacing:.11em}
+  .mx-header__cta{display:none}
+  .mx-header__nav{gap:18px}
+  .mx-header__nav a{font-size:.71rem}
+  .mx-canon-stage{overflow-x:auto;scrollbar-width:thin}
+  .mx-canon-stage__art{
+    width:max(100%,920px);
+    max-width:none;
+  }
+  .mx-canon-hotspots{
+    width:max(100%,920px);
+  }
+  .mx-realm-dashboard{
+    width:min(100% - 28px,720px);
+    grid-template-columns:1fr;
+    margin-top:18px;
+  }
+  .mx-realm-panel--join{grid-column:auto}
+  .mx-footer{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:520px){
+  .mx-brand__text small{display:none}
+  .mx-realm-panel{padding:21px 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  .mx-header__nav a:after{transition:none}
+}
