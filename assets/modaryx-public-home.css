@@ -486,13 +486,32 @@ img{max-width:100%}
 }
 .mx-name-mask{
   position:absolute;
-  display:block;
+  display:grid;
+  place-items:center;
   border-radius:2px;
   background:rgba(4,9,14,.96);
   -webkit-backdrop-filter:blur(9px) saturate(.6);
   backdrop-filter:blur(9px) saturate(.6);
   box-shadow:inset 0 0 18px rgba(2,5,8,.34);
+  color:#efe5ce;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(.46rem,.72vw,.86rem);
+  line-height:1.1;
+  letter-spacing:.055em;
+  text-align:center;
+  text-transform:uppercase;
+  padding:.18em .35em;
+  text-shadow:0 1px 8px rgba(0,0,0,.7);
 }
+.mx-name-mask--01::after{content:"Aigle royal"}
+.mx-name-mask--02::after{content:"Roi / Fondateur"}
+.mx-name-mask--03::after{content:"Commandante"}
+.mx-name-mask--04::after{content:"Gardienne"}
+.mx-name-mask--05::after{content:"Exploratrice"}
+.mx-name-mask--06::after{content:"Dragon ancien"}
+.mx-name-mask--07::after{content:"Loup noir"}
+.mx-name-mask--08::after{content:"Louve blanche"}
+.mx-name-mask--09::after{content:"Panthère des neiges"}
 .mx-name-mask--01{left:11.5%;top:12.4%;width:7.2%;height:6.7%}
 .mx-name-mask--02{left:17.1%;top:18.9%;width:7.7%;height:8.8%}
 .mx-name-mask--03{left:28.5%;top:21.6%;width:8.9%;height:8.6%}
