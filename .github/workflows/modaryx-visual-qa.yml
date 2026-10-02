@@ -21,7 +21,7 @@ on:
       - 'assets/modaryx-public-home.css'
       - 'assets/modaryx-public-route.css'
       - 'assets/modaryx-finishline-canon.png'
-      - 'qa/modaryx-static-server.mjs'
+      - 'qa/modaryx-static-server.ps1'
 
 permissions:
   contents: read
@@ -79,12 +79,16 @@ jobs:
           }
           if (-not $browser) { throw 'BROWSER_NOT_FOUND' }
 
-          $node = Get-Command node.exe, node -ErrorAction SilentlyContinue | Select-Object -First 1
-          if (-not $node) { throw 'NODE_NOT_FOUND' }
           $port = 4173
-          $serverScript = Join-Path $env:GITHUB_WORKSPACE 'qa\modaryx-static-server.mjs'
+          $serverScript = Join-Path $env:GITHUB_WORKSPACE 'qa\modaryx-static-server.ps1'
           if (-not (Test-Path -LiteralPath $serverScript)) { throw 'STATIC_SERVER_SCRIPT_MISSING' }
-          $server = Start-Process -FilePath $node.Source -ArgumentList @($serverScript,"$port") -WorkingDirectory $env:GITHUB_WORKSPACE -PassThru -WindowStyle Hidden
+          $serverArgs = @(
+            '-NoProfile','-ExecutionPolicy','Bypass','-File',
+            ('"' + $serverScript + '"'),
+            '-Port',"$port",
+            '-Root',('"' + $env:GITHUB_WORKSPACE + '"')
+          )
+          $server = Start-Process -FilePath 'powershell.exe' -ArgumentList $serverArgs -PassThru -WindowStyle Hidden
 
           try {
             $target = 'http://127.0.0.1:' + $port + '/${{ matrix.file }}'
@@ -156,12 +160,16 @@ jobs:
           }
           if (-not $browser) { throw 'BROWSER_NOT_FOUND' }
 
-          $node = Get-Command node.exe, node -ErrorAction SilentlyContinue | Select-Object -First 1
-          if (-not $node) { throw 'NODE_NOT_FOUND' }
           $port = 4173
-          $serverScript = Join-Path $env:GITHUB_WORKSPACE 'qa\modaryx-static-server.mjs'
+          $serverScript = Join-Path $env:GITHUB_WORKSPACE 'qa\modaryx-static-server.ps1'
           if (-not (Test-Path -LiteralPath $serverScript)) { throw 'STATIC_SERVER_SCRIPT_MISSING' }
-          $server = Start-Process -FilePath $node.Source -ArgumentList @($serverScript,"$port") -WorkingDirectory $env:GITHUB_WORKSPACE -PassThru -WindowStyle Hidden
+          $serverArgs = @(
+            '-NoProfile','-ExecutionPolicy','Bypass','-File',
+            ('"' + $serverScript + '"'),
+            '-Port',"$port",
+            '-Root',('"' + $env:GITHUB_WORKSPACE + '"')
+          )
+          $server = Start-Process -FilePath 'powershell.exe' -ArgumentList $serverArgs -PassThru -WindowStyle Hidden
 
           try {
             $target = 'http://127.0.0.1:' + $port + '/index.html'
@@ -204,4 +212,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: secure-static-server
+# qa-trigger: powershell-static-server
