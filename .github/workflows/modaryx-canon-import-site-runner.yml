@@ -19,7 +19,7 @@ jobs:
   import-exact-canon:
     name: Locate and import exact Finish Line canon
     runs-on: [self-hosted, Windows, X64]
-    timeout-minutes: 15
+    timeout-minutes: 8
     steps:
       - name: Checkout isolated Finish Line branch
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
@@ -34,11 +34,36 @@ jobs:
           $expectedHash = '141F90DD3AB403627A8279DB8C66C2E9711AD88771B359C1EA4CE26C212ED81E'
           $expectedSize = 4231234
           $names = @('nouveaux design 3(1).png','nouveaux design 3 (1).png')
-          $roots = @($env:USERPROFILE)
-          Get-PSDrive -PSProvider FileSystem | ForEach-Object {
-            if ($_.Root -and (Test-Path -LiteralPath $_.Root)) { $roots += $_.Root }
+
+          # Search only user-facing folders plus likely ChatGPT/Codex caches.
+          # Never print matched local paths.
+          $roots = New-Object System.Collections.Generic.List[string]
+          $seedRoots = @(
+            (Join-Path $env:USERPROFILE 'Desktop'),
+            (Join-Path $env:USERPROFILE 'Documents'),
+            (Join-Path $env:USERPROFILE 'Downloads'),
+            (Join-Path $env:USERPROFILE '.codex'),
+            (Join-Path $env:USERPROFILE '.chatgpt'),
+            $env:TEMP
+          )
+          foreach ($root in $seedRoots) {
+            if ($root -and (Test-Path -LiteralPath $root)) { $roots.Add($root) }
           }
-          $roots = $roots | Where-Object { $_ -and (Test-Path -LiteralPath $_) } | Select-Object -Unique
+
+          foreach ($base in @($env:LOCALAPPDATA, $env:APPDATA)) {
+            if (-not $base -or -not (Test-Path -LiteralPath $base)) { continue }
+            Get-ChildItem -LiteralPath $base -Directory -Force -ErrorAction SilentlyContinue |
+              Where-Object { $_.Name -match '(?i)(openai|chatgpt|codex)' } |
+              ForEach-Object { $roots.Add($_.FullName) }
+            Get-ChildItem -LiteralPath $base -Directory -Force -ErrorAction SilentlyContinue |
+              ForEach-Object {
+                Get-ChildItem -LiteralPath $_.FullName -Directory -Force -ErrorAction SilentlyContinue |
+                  Where-Object { $_.Name -match '(?i)(openai|chatgpt|codex)' } |
+                  ForEach-Object { $roots.Add($_.FullName) }
+              }
+          }
+
+          $roots = $roots | Select-Object -Unique
           $match = $null
           foreach ($root in $roots) {
             foreach ($name in $names) {
@@ -52,9 +77,11 @@ jobs:
             }
             if ($match) { break }
           }
+
           if (-not $match) {
-            Write-Error 'CANON_NOT_FOUND: exact SHA-256 canonical PNG was not found on accessible local filesystem volumes.'
+            Write-Error 'CANON_NOT_FOUND_TARGETED: exact SHA-256 canonical PNG was not found in user folders or likely ChatGPT/Codex caches.'
           }
+
           New-Item -ItemType Directory -Force -Path assets | Out-Null
           Copy-Item -LiteralPath $match.FullName -Destination 'assets/modaryx-finishline-canon.png' -Force
           $copied = Get-Item 'assets/modaryx-finishline-canon.png'
