@@ -66,6 +66,7 @@ jobs:
               ('--screenshot=' + $shot), $target
             )
             $p = Start-Process -FilePath $browser -ArgumentList $args -Wait -PassThru
+            for ($i = 0; $i -lt 20 -and -not (Test-Path -LiteralPath $shot); $i++) { Start-Sleep -Milliseconds 500 }
             if (-not (Test-Path -LiteralPath $shot)) { throw ($route.Name.ToUpper() + '_DESKTOP_SCREENSHOT_MISSING exit=' + $p.ExitCode) }
           }
 
@@ -82,6 +83,7 @@ jobs:
             ('--screenshot=' + $mobile), $url
           )
           $p2 = Start-Process -FilePath $browser -ArgumentList $mobileArgs -Wait -PassThru
+          for ($i = 0; $i -lt 20 -and -not (Test-Path -LiteralPath $mobile); $i++) { Start-Sleep -Milliseconds 500 }
           if (-not (Test-Path -LiteralPath $mobile)) { throw ('MOBILE_SCREENSHOT_MISSING exit=' + $p2.ExitCode) }
 
           Write-Host 'VISUAL_QA_CAPTURED'
@@ -101,4 +103,5 @@ jobs:
 
 
 
-# qa-trigger: isolated-route-profiles
+
+# qa-trigger: screenshot-write-wait
