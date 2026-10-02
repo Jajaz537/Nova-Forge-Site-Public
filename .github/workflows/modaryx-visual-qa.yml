@@ -219,7 +219,7 @@ jobs:
               '--headless=new','--disable-gpu','--hide-scrollbars',
               '--no-first-run','--no-default-browser-check',
               ('--user-data-dir=' + $profile),
-              '--window-size=390,1600','--force-device-scale-factor=1',
+              '--window-size=400,1600','--force-device-scale-factor=1',
               '--virtual-time-budget=8000',
               ('--screenshot=' + $shot), $target
             )
