@@ -42,13 +42,13 @@ Ensemble versionné et installable avec manifeste/contraintes.
 ### Profile / Loadout
 Configuration utilisateur concrète, locale ou synchronisée.
 
-**Libellé UI français provisoire préféré après test humain P01 :**
+**Libellé UI français retenu :**
 - **Profils de jeu**
 - microcopy : **Configurations enregistrées de mods et versions**
 
-Le terme `Profile/Loadout` reste dans le domaine interne et les contrats techniques. **Configurations de jeu** reste une alternative testée par simulation IA, mais n'est pas retenue comme libellé primaire après le choix humain P01.
+Le terme `Profile/Loadout` reste dans le domaine interne et les contrats techniques. **Configurations de jeu** n'est plus une alternative active de wording ; il reste uniquement historique dans les documents de recherche.
 
-Le problème restant porte surtout sur la trouvabilité : le Game Hub doit offrir un accès contextualisé aux profils du jeu.
+Le Game Hub doit offrir un accès contextualisé aux profils du jeu.
 
 ### Release
 Version publiée d'un ContentItem.
@@ -163,7 +163,7 @@ Abonnement aux mises à jour.
 Requête + filtres mémorisés.
 
 ### Profils de jeu
-Libellé UI provisoire préféré pour les `Profile/Loadout` après test humain P01.
+Libellé UI retenu pour les `Profile/Loadout`.
 
 Description :
 - configurations enregistrées de mods et versions ;
@@ -368,4 +368,13 @@ Décisions actuelles :
 - **Non vérifié** = interdit seul ;
 - **Profils de jeu** reste le libellé UI provisoire actuel car préféré par P01, mais **Configurations de jeu** reste l'alternative principale soutenue par Work pour le grand public.
 
-**État : convergence forte sur 5/6 points ; arbitrage Profils de jeu vs Configurations de jeu EN COURS.**
+**État : décision produit TERMINÉE — **Profils de jeu** retenu. Référence : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-GAME-PROFILES-20261003.md`.**
+
+
+## Décision produit finale — Profils de jeu
+
+Le libellé retenu est **Profils de jeu**.
+
+Microcopy standard : **Configurations enregistrées de mods, versions et réglages.**
+
+Référence : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-GAME-PROFILES-20261003.md`.
