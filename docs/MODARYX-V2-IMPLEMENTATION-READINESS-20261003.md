@@ -195,10 +195,11 @@ Chaque surface doit avoir :
 - Guard CI anti-contamination : **TERMINÉ — micro-proof frais**
 - Frontières modules/adapters : **TERMINÉ — conception**
 - Matrice V1→V2 : **TERMINÉ — conception**
+- Mapping V1→V2 détaillé : **TERMINÉ — pertes/unknowns documentés**
 - Threat model : **TERMINÉ — conception**
 - Plan routes/cutover : **TERMINÉ — conception**
 - Runtime V2 réel : **NON CRÉÉ**
-- CSP/headers V2 : **EN COURS**
+- CSP/headers V2 : **TERMINÉ — conception**
 - SW migration browser : **PREUVE MANQUANTE**
 - Tree testing humain : **PREUVE MANQUANTE**
 
