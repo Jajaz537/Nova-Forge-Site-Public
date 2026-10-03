@@ -44,7 +44,7 @@ Configuration utilisateur concrète, locale ou synchronisée.
 
 **Libellé UI français retenu :**
 - **Profils de jeu**
-- microcopy : **Configurations enregistrées de mods et versions**
+- microcopy : **Configurations enregistrées de mods, versions et réglages.**
 
 Le terme `Profile/Loadout` reste dans le domaine interne et les contrats techniques. **Configurations de jeu** n'est plus une alternative active de wording ; il reste uniquement historique dans les documents de recherche.
 
@@ -166,7 +166,7 @@ Requête + filtres mémorisés.
 Libellé UI retenu pour les `Profile/Loadout`.
 
 Description :
-- configurations enregistrées de mods et versions ;
+- configurations enregistrées de mods, versions et réglages ;
 - privées/locales par défaut ;
 - distinctes des Collections et Modpacks.
 
@@ -229,7 +229,7 @@ Ces libellés restent à tester humainement.
 
 ## 14. Parapluie de contenus
 
-Après benchmark externe puis mini-test humain P01, le libellé utilisateur provisoire préféré devient **Mods & contenus**.
+Après benchmark externe, mini-test humain P01, test assistant indépendant et rapport Work indépendant, le libellé utilisateur retenu devient **Mods & contenus**.
 
 Microcopy :
 
@@ -272,7 +272,7 @@ Peuvent apparaître en microcopy/ambiance :
 
 Ils ne remplacent jamais comme libellé primaire :
 - Jeux
-- Mods & Plugins
+- Mods & contenus
 - Collections
 - Créateurs
 - Recherche
@@ -339,7 +339,7 @@ Candidats prioritaires à tester humainement :
 2. **Mods & contenus**
 3. **Créations**
 
-Décision actuelle : **Mods & contenus** devient le libellé utilisateur provisoire préféré après choix humain P01. **Contenus de jeu** et **Créations** restent des alternatives documentées, non retenues à ce stade.
+Décision produit : **Mods & contenus** est le libellé utilisateur retenu. **Contenus de jeu** et **Créations** restent des alternatives documentées, non retenues.
 
 Référence : `docs/MODARYX-V2-MULTIGAMING-MODDING-TERMINOLOGY-BENCHMARK-20261003.md`.
 
@@ -361,12 +361,12 @@ Document : `docs/MODARYX-V2-HUMAN-CONTENT-UMBRELLA-MINITEST-P01-20261003.md`.
 Document : `docs/MODARYX-V2-FINAL-TERMINOLOGY-CROSS-ANALYSIS-P01-ASSISTANT-WORK-20261003.md`.
 
 Décisions actuelles :
-- **Mods & contenus** = parapluie UI provisoire principal ;
+- **Mods & contenus** = parapluie UI retenu ;
 - **Mods & Plugins** = ne plus utiliser comme parapluie universel ;
 - **Collection** = conservé, capacité d'installation explicitée ;
 - **Bibliothèque** = conservé comme espace personnel ;
 - **Non vérifié** = interdit seul ;
-- **Profils de jeu** reste le libellé UI provisoire actuel car préféré par P01, mais **Configurations de jeu** reste l'alternative principale soutenue par Work pour le grand public.
+- **Profils de jeu** est le libellé UI retenu ; **Configurations de jeu** reste uniquement une alternative historique documentée par Work.
 
 **État : décision produit TERMINÉE — **Profils de jeu** retenu. Référence : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-GAME-PROFILES-20261003.md`.**
 
