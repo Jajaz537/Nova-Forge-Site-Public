@@ -133,7 +133,19 @@ Exemples possibles :
 
 Elles ne doivent pas être codées dans la homepage générale.
 
-## 10. Collections
+## 10. Accès aux profils de jeu
+
+Une preuve humaine réelle a montré que le contexte **jeu** est un point d'entrée naturel pour retrouver une configuration personnelle.
+
+Le Game Hub doit donc proposer, lorsque la fonction existe réellement, un accès visible de type :
+
+- **Mes profils pour ce jeu**
+
+Cet accès complète **Bibliothèque → Profils de jeu** ; il ne crée pas un second type d'objet.
+
+Le but est d'éviter d'obliger l'utilisateur à comprendre d'abord le contenant abstrait « Bibliothèque ».
+
+## 11. Collections
 
 Afficher :
 
@@ -143,7 +155,7 @@ Afficher :
 
 Une collection éditoriale n'est pas présentée comme installable sans manifeste de modpack/profil approprié.
 
-## 11. Créateurs
+## 12. Créateurs
 
 Afficher :
 
@@ -153,7 +165,7 @@ Afficher :
 
 Aucune métrique de popularité ne remplace provenance, droits ou compatibilité.
 
-## 12. Guides
+## 13. Guides
 
 Les guides peuvent couvrir :
 
@@ -166,7 +178,7 @@ Les guides peuvent couvrir :
 
 Les guides éditoriaux restent séparés du statut de distribution.
 
-## 13. Activité
+## 14. Activité
 
 Activité utile uniquement :
 
@@ -178,7 +190,7 @@ Activité utile uniquement :
 
 Éviter un feed social générique.
 
-## 14. États
+## 15. États
 
 ### Aucun corpus
 
@@ -205,7 +217,7 @@ Les contenus en cache peuvent être consultés avec état de fraîcheur.
 
 Toute action de distribution reste fail-closed si la fraîcheur nécessaire manque.
 
-## 15. Mobile
+## 16. Mobile
 
 Priorité :
 
@@ -219,7 +231,7 @@ Priorité :
 
 Le sélecteur de version doit rester accessible sans ouvrir un menu profond.
 
-## 16. Desktop
+## 17. Desktop
 
 Peut utiliser :
 
@@ -230,7 +242,7 @@ Peut utiliser :
 - grille de contenus ;
 - sections horizontales seulement si elles ne masquent pas la densité.
 
-## 17. Accessibilité
+## 18. Accessibilité
 
 - titre H1 unique ;
 - tabs accessibles clavier ;
@@ -239,7 +251,7 @@ Peut utiliser :
 - états support annoncés textuellement ;
 - aucune compatibilité uniquement par couleur.
 
-## 18. Performance
+## 19. Performance
 
 Le Game Hub ne doit pas charger toutes les catégories/collections avant le contenu essentiel.
 
@@ -251,7 +263,7 @@ Ordre recommandé :
 4. sections secondaires ;
 5. ambiance monde vivant après contenu critique.
 
-## 19. Critère high-fi
+## 20. Critère high-fi
 
 High-fi autorisé uniquement quand :
 
@@ -265,7 +277,7 @@ High-fi autorisé uniquement quand :
 **État : TERMINÉ pour le contrat produit / NON IMPLÉMENTÉ volontairement.**
 
 
-## 20. Clarifications issues de la simulation experte
+## 21. Clarifications issues de la simulation experte
 
 - `Mods & Plugins` conservé comme libellé primaire, taxonomie complète exposée par microcopy/filtres.
 - `catalog-enabled` ne doit jamais être interprété visuellement comme une preuve de téléchargement disponible.
