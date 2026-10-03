@@ -899,7 +899,7 @@ Aucun front V2 production n'a été écrit.
 - Tree testing humain : **EN COURS — P01 réel terminé / autres profils utiles pour consolider**
 - Direction artistique exploratoire : **LIVING THRESHOLD SÉLECTIONNÉE / PALETTE HYBRIDE 2+3 / prototype réversible créé**
 - Design system préparatoire : **TERMINÉ — couleurs, surfaces, typographie, grille, spacing, composants, états, responsive, accessibilité, motion, iconographie, illustration et identité documentés**
-- QA visuelle formelle du prototype : **BLOQUÉE — rendu navigateur inspecté mais preuve de comparaison archivable manquante**
+- QA visuelle formelle du prototype : **EN COURS — captures navigateur desktop/mobile archivées par micro-proof GitHub Actions ; comparaison normalisée à la source + checks a11y formels encore manquants**
 - Direction artistique finale : **BLOQUÉE — la sélection exploratoire ne vaut pas gel high-fi**
 - High-fi final : **BLOQUÉ — autres validations humaines/visuelles encore requises ; wordings `Profils de jeu` et `Mods & contenus` désormais figés par décision produit**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
@@ -926,8 +926,9 @@ Aucun front V2 production n'a été écrit.
 13. Décisions produit fermées : **Profils de jeu** et **Mods & contenus**. La validation humaine globale reste EN COURS et ne doit pas être confondue avec ces décisions de wording.
 14. Direction artistique exploratoire : **TERMINÉE** avec sélection humaine de `Living Threshold` et affinage palette 2+3. Référence : `docs/MODARYX-V2-LIVING-THRESHOLD-DESIGN-SYSTEM-20261003.md`.
 15. Prototype autonome créé dans `review-evidence/modaryx-v2-living-threshold-prototype-20261003/` pour Home, Game Hub, Catalog, Content Detail, Library, Community et mobile. Il reste une preuve de conception réversible, pas le frontend V2 de production.
-16. Prochain blocker réel : produire une capture navigateur archivable et une comparaison normalisée, puis obtenir une revue humaine multi-écrans. Aucun gel high-fi final avant fermeture de ces preuves.
-17. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
+16. Capture navigateur archivable : **TERMINÉE** — workflow `MODARYX V2 Living Threshold Visual Proof`, run `37157794569`, artifact `11286254258`, commit `87245c939c42daf1a0b04879d26039eb4b5daae1`.
+17. Prochain blocker réel : archiver la référence source/approved reference pour comparaison normalisée, exécuter contrast/keyboard checks formels, puis obtenir une revue humaine multi-écrans. Aucun gel high-fi final avant fermeture de ces preuves.
+18. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
 ## 30. Règle de reprise
 
@@ -1009,3 +1010,18 @@ Elles ne lèvent ni le gate Figma, ni le tree testing humain, ni le gate High-Fi
 
 Règle :
 > Aucun premier code frontend V2 tant que les risques de contamination actifs n'ont pas été inventoriés et isolés.
+
+
+## Preuve visuelle archivable Living Threshold
+
+**TERMINÉE pour l'export navigateur / comparaison normalisée encore ouverte**
+
+- workflow : `.github/workflows/modaryx-v2-living-threshold-visual-proof.yml`
+- run : `37157794569` — **SUCCESS**
+- commit capturé : `87245c939c42daf1a0b04879d26039eb4b5daae1`
+- artifact : `modaryx-v2-living-threshold-visual-proof` / id `11286254258`
+- artifact digest : `sha256:ee91b7e87f9d04a804b49873c0e1ba3249087d7cd05b0165787b8e71cca3a03c`
+- desktop : `game-hub-desktop-1440x1024.png`, SHA-256 `9cccc32bc23d661d9ea6bd823e51cf7e09d4df9d0805bb132d4e57607ae1f417`
+- mobile : `game-hub-mobile-390x844.png`, SHA-256 `52b0e3762591371b3c8a9b1c4dc038e44bbf80c403a94c4dfd5baa870a11b49c`
+- source visuelle Work : toujours non archivée dans le dépôt ; comparaison source-vs-implémentation = **PREUVE MANQUANTE**
+- aucun PASS esthétique final déduit de ce run.
