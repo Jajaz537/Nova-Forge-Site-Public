@@ -61,13 +61,17 @@ async function navigateHome(width, height) {
 async function clickByText(selector, text) {
   const ok = await evaluate(`(() => {
     const target=[...document.querySelectorAll(${JSON.stringify(selector)})]
-      .find(el => el.textContent.trim() === ${JSON.stringify(text)});
+      .find(el => {
+        if (el.textContent.trim() !== ${JSON.stringify(text)}) return false;
+        const r=el.getBoundingClientRect(), s=getComputedStyle(el);
+        return s.display!=='none' && s.visibility!=='hidden' && r.width>0 && r.height>0;
+      });
     if(!target) return false;
     target.click();
     return true;
   })()`);
-  if (!ok) throw new Error("target not found: " + selector + " / " + text);
-  await sleep(250);
+  if (!ok) throw new Error("visible target not found: " + selector + " / " + text);
+  await sleep(100);
 }
 async function clickSelector(selector) {
   const ok = await evaluate(`(() => {
@@ -80,8 +84,18 @@ async function clickSelector(selector) {
   await sleep(250);
 }
 async function capture(file, width, height, expectedText) {
-  const textOk = expectedText ? await evaluate(`document.body.innerText.includes(${JSON.stringify(expectedText)})`) : true;
-  if (!textOk) throw new Error("expected text missing before capture: " + expectedText);
+  let textOk = !expectedText;
+  if (expectedText) {
+    for (let i = 0; i < 30; i++) {
+      textOk = await evaluate(`document.body.innerText.includes(${JSON.stringify(expectedText)})`);
+      if (textOk) break;
+      await sleep(100);
+    }
+  }
+  if (!textOk) {
+    const visibleText = await evaluate("document.body.innerText.slice(0,1200)");
+    throw new Error("expected text missing before capture: " + expectedText + "\\nVISIBLE_TEXT:\\n" + visibleText);
+  }
   const shot = await send("Page.captureScreenshot", {
     format: "png",
     fromSurface: true,
