@@ -193,6 +193,14 @@ try{
   await fill(".creators-search input","");
   assertEqual(await count(".creator-index-card"),3,"creators reset count");
 
+  await clickText(".global-nav button","Communauté");
+  await waitText("Des échanges utiles autour des créations.");
+  await clickText(".community-tabs button","Questions");
+  await clickText(".community-board .primary","Créer un brouillon local");
+  await waitText("Brouillon local — non envoyé");
+  await clickText(".community-tabs button","Studios / équipes");
+  await waitText("Équipes de création");
+
   await clickText(".global-nav button","Mods & contenus");
   await waitText("Catalogue global");
   await fill(".catalog-search input","sommets");
@@ -238,6 +246,11 @@ try{
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav button","Créateurs");
   await waitText("Créateurs, équipes et studios.");
+  await clickAria("Ouvrir le menu");
+  await clickText(".global-nav button","Communauté");
+  await waitText("Des échanges utiles autour des créations.");
+  await clickText(".community-tabs button","Questions");
+  await waitText("Préparer une question");
 
   console.log("PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS");
 } finally {
