@@ -77,7 +77,7 @@ Propriétés :
 
 ## 5. Profile / Loadout
 
-**Libellé UI provisoire : Configurations de jeu**
+**Libellé UI provisoire préféré après test humain P01 : Profils de jeu**
 
 Fonction :
 - représenter une configuration utilisateur concrète.
@@ -172,8 +172,8 @@ Peut être :
 - unlisted
 - public
 
-### Configuration de jeu (`Profile` interne)
-Privée/locale par défaut.
+### Profil de jeu (`Profile` interne)
+Privé/local par défaut.
 
 ### Modpack
 Partage seulement si :
@@ -223,7 +223,7 @@ Collections :
 - notes ;
 - actions principales.
 
-Configurations de jeu :
+Profils de jeu :
 - état local/sync ;
 - conflicts ;
 - releases ;
@@ -253,5 +253,6 @@ Avant high-fi :
 ## Convergence P01 + Work + étude indépendante
 
 - `Collection` reste l'objet domaine, mais son caractère éditorial / installable doit être explicite.
-- `Profile/Loadout` reste interne ; **Configurations de jeu** devient le libellé utilisateur provisoire.
-- Ces choix restent à revalider humainement avant gel high-fi final.
+- `Profile/Loadout` reste interne ; **Profils de jeu** redevient le libellé utilisateur provisoire préféré après le choix réel de P01.
+- **Configurations de jeu** reste une alternative issue des simulations IA, non retenue comme primaire à ce stade.
+- La trouvabilité des Profils de jeu depuis le Game Hub reste à renforcer.
