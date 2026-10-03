@@ -282,6 +282,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | Global Search desktop | TERMINÉ — low-fi HTML / BLOQUÉ Figma uniquement | MISSING-WIREFRAME-BLUEPRINTS / LOWFI-REVIEW |
 | Community desktop | TERMINÉ — low-fi HTML / BLOQUÉ Figma uniquement | MISSING-WIREFRAME-BLUEPRINTS / LOWFI-REVIEW |
 | Game Hub mobile | TERMINÉ — low-fi HTML / BLOQUÉ Figma uniquement | MISSING-WIREFRAME-BLUEPRINTS / LOWFI-REVIEW |
+| Boucle visuelle locale Chromium/Playwright | TERMINÉ — micro-preuve environnement courant ; revalider à chaque session ; `file://`/localhost bloqués, utiliser `page.set_content` | CHECKPOINT / LOWFI-REVIEW |
 | High-fi final | BLOQUÉ volontairement ; exploration réversible autorisée | HIGH-FI-GATE |
 | Direction artistique finale | BLOQUÉ volontairement | HIGH-FI-GATE |
 | Tree test humain | EN COURS — P01 réel + mini-test terminologique P01 terminés, validation globale incomplète | HUMAN-MINI-TREE-TEST-P01 / HUMAN-TERMINOLOGY-MINITEST-P01 / CROSS-ANALYSIS |
