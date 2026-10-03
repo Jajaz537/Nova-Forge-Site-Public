@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`3795cf8a7ac5f6448b1a0c31beca969a82b84147`
+`cd5de383e6e31b7d98a6771cc7c9a9064da7ed80`
 
 PR :
 
@@ -653,6 +653,15 @@ Erreur exacte :
 
 Aucune relance immédiate.
 
+### Retry Figma ciblé — 2026-10-03 20:12 Europe/Paris
+
+Une seule tentative de reprise en lecture via `use_figma` a été effectuée après reprise canonique.
+
+Résultat : **même erreur de quota Starter**.
+
+Aucune écriture canvas n'a eu lieu.
+Aucune nouvelle relance Figma n'est autorisée tant qu'un changement réel de quota/plan ou de fenêtre d'accès n'est pas prouvé.
+
 ## 24. Wireframes encore manquants
 
 **BLOQUÉ Figma / EN COURS conception**
@@ -782,7 +791,7 @@ Aucun front V2 production n'a été écrit.
 
 1. Audit code anti-contamination : fermé pour le périmètre actuel ; garder le guard actif.
 2. Les frontières modules/adapters, mapping V1→V2, threat model, policy CSP et gate de stack sont prêts ; ne créer aucune nouvelle spec si elle ne ferme pas un risque réel.
-3. Ne pas relancer Figma tant que le quota Starter reste bloqué.
+3. Ne pas relancer Figma tant que le quota Starter reste bloqué ; retry ciblé du 2026-10-03 20:12 = toujours BLOQUÉ EXTERNE.
 4. Maintenir le registre anti-oubli et intégrer uniquement les améliorations justifiées.
 5. Dès disponibilité Figma :
    - ajouter Game Hub ;
