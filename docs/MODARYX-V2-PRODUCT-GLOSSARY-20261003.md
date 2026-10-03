@@ -42,13 +42,13 @@ Ensemble versionné et installable avec manifeste/contraintes.
 ### Profile / Loadout
 Configuration utilisateur concrète, locale ou synchronisée.
 
-**Libellé UI français provisoire recommandé :**
-- **Configurations de jeu**
-- microcopy : **Mods et versions actifs enregistrés**
+**Libellé UI français provisoire préféré après test humain P01 :**
+- **Profils de jeu**
+- microcopy : **Configurations enregistrées de mods et versions**
 
-Le terme `Profile/Loadout` reste dans le domaine interne et les contrats techniques. **Profils de jeu** peut rester un synonyme secondaire/historique, mais n'est plus le libellé primaire proposé.
+Le terme `Profile/Loadout` reste dans le domaine interne et les contrats techniques. **Configurations de jeu** reste une alternative testée par simulation IA, mais n'est pas retenue comme libellé primaire après le choix humain P01.
 
-Cette formulation doit encore être revalidée humainement avant gel high-fi final.
+Le problème restant porte surtout sur la trouvabilité : le Game Hub doit offrir un accès contextualisé aux profils du jeu.
 
 ### Release
 Version publiée d'un ContentItem.
@@ -162,11 +162,11 @@ Abonnement aux mises à jour.
 ### Recherche sauvegardée
 Requête + filtres mémorisés.
 
-### Configurations de jeu
-Libellé UI provisoire recommandé pour les `Profile/Loadout`.
+### Profils de jeu
+Libellé UI provisoire préféré pour les `Profile/Loadout` après test humain P01.
 
 Description :
-- mods et versions actifs enregistrés ;
+- configurations enregistrées de mods et versions ;
 - privées/locales par défaut ;
 - distinctes des Collections et Modpacks.
 
@@ -181,7 +181,7 @@ Récupération d'un fichier autorisé.
 ### Ajouter à une Collection
 Organisation éditoriale.
 
-### Ajouter à une Configuration de jeu
+### Ajouter à un Profil de jeu
 Préparation d'une configuration utilisateur.
 
 Ne pas utiliser “Installer” pour ces trois actions différentes.
@@ -296,7 +296,7 @@ Tester :
 - Support vs Signalement ;
 - Catalogue disponible vs Distribution disponible ;
 - “Mods & Plugins” comme entrée parapluie ;
-- “Configurations de jeu” vs “Profils de jeu” comme libellé utilisateur ;
+- trouvabilité de “Profils de jeu” dans les parcours ;
 - microcopy et capacité de Collection ;
 - compréhension de Bibliothèque.
 
@@ -309,3 +309,20 @@ Avant high-fi final :
 - validation humaine encore souhaitable mais non inventée.
 
 **État : TERMINÉ pour le glossaire de travail + convergence P01/Work/étude indépendante intégrée / validation humaine globale EN COURS.**
+
+
+## 20. Interdiction du libellé générique “Non vérifié”
+
+Le test humain P01 montre que **Non vérifié** peut être compris simultanément comme : danger potentiel, absence de test et provenance inconnue.
+
+Ne jamais afficher ce libellé seul. Toujours qualifier la dimension :
+- **Compatibilité non vérifiée** ;
+- **Provenance inconnue** ou **provenance non vérifiée** selon la preuve ;
+- **Non analysé** lorsqu'aucun scan n'a été exécuté ;
+- un risque réel doit être nommé explicitement et ne doit jamais être déduit d'un simple manque de vérification.
+
+## 21. “Mods & Plugins” — statut après test humain
+
+Le test humain P01 ne comprend pas naturellement **Mods & Plugins** comme englobant addons, scripts, outils, maps, shaders et presets.
+
+Conséquence : ce libellé reste **NON STABILISÉ comme entrée parapluie finale**. Il peut rester un libellé de travail, mais une alternative plus large doit être testée avant le gel high-fi.
