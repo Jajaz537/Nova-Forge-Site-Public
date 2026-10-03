@@ -822,19 +822,18 @@ Aucun front V2 production n'a été écrit.
   - rapport ingéré dans `docs/MODARYX-V2-WORK-TERMINOLOGY-REPORT-INGEST-20261003.md` ;
   - indépendance déclarée vis-à-vis de P01 et du test assistant.
 - Décision produit finale — **Profils de jeu** : **TERMINÉ**
-
-- Décision produit finale — **Mods & contenus** : **TERMINÉ**
-  - document : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-CONTENT-UMBRELLA-20261003.md`
-  - UI : **Mods & contenus**
-  - microcopy : **Mods, plugins, addons, scripts, maps, shaders, presets, outils et autres contenus pour vos jeux.**
-  - arbitrage parapluie : **FERMÉ**
-  - validation humaine globale : **EN COURS**
   - document : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-GAME-PROFILES-20261003.md`
   - UI : **Profils de jeu**
   - microcopy : **Configurations enregistrées de mods, versions et réglages.**
   - Game Hub : **Mes profils pour ce jeu**
   - domaine interne : `Profile/Loadout`
   - arbitrage `Profils de jeu` vs `Configurations de jeu` : **FERMÉ**
+- Décision produit finale — **Mods & contenus** : **TERMINÉ**
+  - document : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-CONTENT-UMBRELLA-20261003.md`
+  - UI : **Mods & contenus**
+  - microcopy : **Mods, plugins, addons, scripts, maps, shaders, presets, outils et autres contenus pour vos jeux.**
+  - arbitrage parapluie : **FERMÉ**
+  - validation humaine globale : **EN COURS**
 - Rapport Work terminologique indépendant : **TERMINÉ — 9 écosystèmes / 6 profils synthétiques / 36 réponses**
   - ingestion : `docs/MODARYX-V2-WORK-TERMINOLOGY-REPORT-INGEST-20261003.md`
   - analyse croisée finale : `docs/MODARYX-V2-FINAL-TERMINOLOGY-CROSS-ANALYSIS-P01-ASSISTANT-WORK-20261003.md`
