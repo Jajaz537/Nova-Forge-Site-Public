@@ -32,17 +32,23 @@ Programme ou utilitaire qui aide à créer, gérer, installer ou modifier.
 ### Collection
 Liste éditoriale organisée par un curateur.
 
+**Microcopy utilisateur provisoire :** **Sélection organisée à partager**.
+
+La capacité doit être explicite. Une Collection ne doit jamais être supposée installable à cause de son nom. Afficher l'état réel, par exemple **Installation non disponible** ou une capacité d'installation seulement lorsqu'elle est réellement prouvée.
+
 ### Modpack
 Ensemble versionné et installable avec manifeste/contraintes.
 
-### Profil / Loadout
+### Profile / Loadout
 Configuration utilisateur concrète, locale ou synchronisée.
 
-**Libellé UI français recommandé :**
-- **Profils de jeu**
-- microcopy : **Configurations enregistrées de mods et versions**
+**Libellé UI français provisoire recommandé :**
+- **Configurations de jeu**
+- microcopy : **Mods et versions actifs enregistrés**
 
-Le terme `Profile/Loadout` reste acceptable dans le domaine interne et les contrats techniques.
+Le terme `Profile/Loadout` reste dans le domaine interne et les contrats techniques. **Profils de jeu** peut rester un synonyme secondaire/historique, mais n'est plus le libellé primaire proposé.
+
+Cette formulation doit encore être revalidée humainement avant gel high-fi final.
 
 ### Release
 Version publiée d'un ContentItem.
@@ -156,11 +162,11 @@ Abonnement aux mises à jour.
 ### Recherche sauvegardée
 Requête + filtres mémorisés.
 
-### Profils de jeu
-Libellé UI recommandé pour les `Profile/Loadout`.
+### Configurations de jeu
+Libellé UI provisoire recommandé pour les `Profile/Loadout`.
 
 Description :
-- configurations enregistrées de mods et versions ;
+- mods et versions actifs enregistrés ;
 - privées/locales par défaut ;
 - distinctes des Collections et Modpacks.
 
@@ -175,7 +181,7 @@ Récupération d'un fichier autorisé.
 ### Ajouter à une Collection
 Organisation éditoriale.
 
-### Ajouter à un Profil
+### Ajouter à une Configuration de jeu
 Préparation d'une configuration utilisateur.
 
 Ne pas utiliser “Installer” pour ces trois actions différentes.
@@ -203,18 +209,21 @@ Ne pas utiliser “Installer” pour ces trois actions différentes.
 
 États internes :
 - Éditorial uniquement
-- Catalogue disponible
-- Distribution disponible
+- catalog-enabled
+- distribution-enabled
 - Support archivé
 
 ### Clarification UI obligatoire
 
-Le libellé **Catalogue disponible** ne doit jamais apparaître seul lorsque la distribution n'est pas prouvée.
+Le libellé utilisateur **Catalogue disponible** ne doit pas apparaître seul lorsque la distribution n'est pas prouvée.
 
 Formulation recommandée :
 - **Catalogue consultable — téléchargement non garanti**
 
-`Distribution disponible` reste réservé aux cas où une distribution réelle est prouvée.
+Employer **Téléchargement disponible** seulement lorsqu'un fichier réel est distribuable.
+Employer **Installation via manager disponible** seulement lorsqu'un manager/capability réel est connecté.
+
+Les états techniques internes peuvent rester `catalog-enabled` et `distribution-enabled`.
 
 Ces libellés restent à tester humainement.
 
@@ -234,7 +243,14 @@ Pour l'interface française, préférer :
 
 **Compatibilité et prérequis**
 
-Sous-sections :
+Microcopy recommandée : **Versions compatibles et éléments nécessaires avant installation.**
+
+Séparer visuellement :
+- **Compatibilité avec votre configuration** ;
+- **Éléments nécessaires** ;
+- **Conflits connus avec d'autres contenus**.
+
+Sous-sections de relation :
 - Requis
 - Optionnel
 - Recommandé
@@ -280,7 +296,9 @@ Tester :
 - Support vs Signalement ;
 - Catalogue disponible vs Distribution disponible ;
 - “Mods & Plugins” comme entrée parapluie ;
-- “Profils de jeu” comme libellé utilisateur.
+- “Configurations de jeu” vs “Profils de jeu” comme libellé utilisateur ;
+- microcopy et capacité de Collection ;
+- compréhension de Bibliothèque.
 
 ## 19. Gate
 
@@ -290,4 +308,4 @@ Avant high-fi final :
 - lore limité à la couche de marque ;
 - validation humaine encore souhaitable mais non inventée.
 
-**État : TERMINÉ pour le glossaire de travail + clarifications sûres / PREUVE MANQUANTE pour validation humaine.**
+**État : TERMINÉ pour le glossaire de travail + convergence P01/Work/étude indépendante intégrée / validation humaine globale EN COURS.**
