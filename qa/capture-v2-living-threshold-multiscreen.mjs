@@ -202,6 +202,12 @@ try {
   await clickByText(".global-nav button", "Communauté");
   manifest.captures.push(await capture("desktop-community.png", 1440, 1024, "Des échanges utiles autour des créations"));
 
+  await clickByAriaLabel("Notifications");
+  manifest.captures.push(await capture("desktop-notifications.png", 1440, 1024, "Centre de notifications"));
+
+  await clickByAriaLabel("Compte");
+  manifest.captures.push(await capture("desktop-account.png", 1440, 1024, "Vous explorez MODARYX en mode invité"));
+
   await clickByText(".global-nav button", "Créer");
   manifest.captures.push(await capture("desktop-creator-studio.png", 1440, 1024, "Creator Studio"));
 
@@ -243,6 +249,14 @@ try {
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Communauté");
   manifest.captures.push(await capture("mobile-community.png", 390, 844, "Des échanges utiles autour des créations"));
+
+  await clickSelector(".mobile-menu");
+  await clickByText(".global-nav .mobile-nav-utility", "Notifications");
+  manifest.captures.push(await capture("mobile-notifications.png", 390, 844, "Centre de notifications"));
+
+  await clickSelector(".mobile-menu");
+  await clickByText(".global-nav .mobile-nav-utility", "Compte");
+  manifest.captures.push(await capture("mobile-account.png", 390, 844, "Vous explorez MODARYX en mode invité"));
 
   const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/manifest.json";
   writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
