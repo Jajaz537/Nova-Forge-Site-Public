@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`adc1cfbf85bc05290068570a527c06501e3e00bd`
+`704e86d91d47a0f855fff7f4894119816dc551c9`
 
 PR :
 
@@ -127,9 +127,9 @@ Objets métier principaux :
 - ProvenanceReceipt
 - ModerationDecision
 
-## 7. Taxonomie
+## 7. Taxonomie et schémas
 
-**TERMINÉ — draft de taxonomie**
+**TERMINÉ — conception**
 
 Familles prévues :
 
@@ -152,11 +152,7 @@ Familles prévues :
 
 Le `kind` historique du Universal Mod Manifest est considéré trop large pour la navigation V2.
 
-Aucune migration de schéma effectuée.
-
-### Analyse des écarts de schémas
-
-**TERMINÉ — conception**
+### Analyse des écarts
 
 Document :
 
@@ -165,7 +161,6 @@ Document :
 Constats :
 
 - Universal Mod Manifest v1 mélange encore projet et release ;
-- `kind` est trop grossier pour V2 ;
 - target doit pouvoir évoluer vers plateforme/DLC/environnement ;
 - relations required/optional/recommended/incompatible/replaces à structurer ;
 - compatibilité doit devenir multi-claim ;
@@ -175,12 +170,37 @@ Constats :
 - search-index legacy doit être reconstruit ;
 - Integration Readiness reste une source de garde-fous à préserver.
 
+### Plan v2
+
+Document :
+
+`docs/MODARYX-V2-SCHEMA-PLAN-20261003.md`
+
+Schémas prévus conceptuellement :
+
+- game
+- content-type
+- content-item
+- release
+- dependency
+- compatibility-claim
+- file-artifact
+- collection-v2
+- modpack
+- profile-loadout
+- creator
+- team
+- search-document
+
 Stratégie :
 
 1. préserver les schémas v1 ;
 2. définir des schémas v2 séparés ;
 3. mapper explicitement ;
-4. migrer uniquement après validation.
+4. migrer uniquement après validation ;
+5. aucun nouvel ID web V2 sous namespace Nova Forge.
+
+Aucun schéma v1 n'a été modifié.
 
 ## 8. Audit legacy
 
@@ -247,13 +267,13 @@ Décisions principales :
 
 **TERMINÉ — conception**
 
-Documents ajoutés :
+Documents :
 
 - `docs/MODARYX-V2-INTERACTION-STATES-20261003.md`
 - `docs/MODARYX-V2-A11Y-PERF-DESIGN-SYSTEM-CONTRACT-20261003.md`
 - `docs/MODARYX-V2-SCREEN-ACCEPTANCE-CRITERIA-20261003.md`
 
-Principes désormais tracés :
+Principes :
 
 - états nominal/loading/empty/error/offline/unavailable/auth/incompatible/success ;
 - focus visible/non masqué ;
@@ -264,7 +284,7 @@ Principes désormais tracés :
 - Core Web Vitals comme objectifs production ;
 - critères d'acceptation écran par écran.
 
-Références de performance retenues :
+Références de performance :
 
 - LCP ≤ 2,5 s au p75 ;
 - INP ≤ 200 ms au p75 ;
@@ -403,11 +423,11 @@ Aucune relance immédiate.
 - Desktop Community
 - Mobile Game Hub
 
-Blueprints textuels déjà préparés dans :
+Blueprints textuels :
 
 `docs/MODARYX-V2-MISSING-WIREFRAME-BLUEPRINTS-20261003.md`
 
-La revue de couverture est tracée dans :
+Revue de couverture :
 
 `docs/MODARYX-V2-WIREFRAME-COVERAGE-20261003.md`
 
@@ -421,7 +441,7 @@ Interdiction d'ouvrir la direction artistique finale tant que :
 - tree testing humain non exécuté ;
 - quota Figma bloque les écrans manquants.
 
-Gate documenté dans :
+Gate :
 
 `docs/MODARYX-V2-HIGH-FI-GATE-20261003.md`
 
@@ -429,7 +449,7 @@ Gate documenté dans :
 
 **PREUVE MANQUANTE**
 
-Script de test prêt :
+Script de test :
 
 `docs/MODARYX-V2-HUMAN-LOWFI-TEST-20261003.md`
 
@@ -465,6 +485,7 @@ Aucun front V2 production n'a été écrit.
 - Audit legacy : **TERMINÉ**
 - Audit modules legacy ciblés : **TERMINÉ pour périmètre inspecté**
 - Analyse des écarts de schémas : **TERMINÉ — conception**
+- Plan schémas V2 : **TERMINÉ — conception**
 - Benchmark : **TERMINÉ**
 - Architecture produit : **TERMINÉ — draft**
 - Taxonomie : **TERMINÉ — draft**
@@ -484,17 +505,18 @@ Aucun front V2 production n'a été écrit.
 
 1. Continuer recherche/specification et audit ne nécessitant pas Figma.
 2. Ne pas relancer Figma tant que le quota Starter reste bloqué.
-3. Préparer le plan de schémas V2 et leurs critères sans modifier les schémas v1.
-4. Dès disponibilité Figma :
+3. Préparer la stratégie de données/fixtures V2 sans créer de faux contenu public.
+4. Préparer les critères de migration localStorage/service worker/cache.
+5. Dès disponibilité Figma :
    - ajouter Game Hub ;
    - ajouter Global Search ;
    - ajouter Community ;
    - ajouter Mobile Game Hub ;
    - micro-vérifier clipping/overflow.
-5. Exécuter/obtenir tree testing humain.
-6. Corriger les ambiguïtés.
-7. Seulement après : direction artistique, design system final, prototype high-fi.
-8. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
+6. Exécuter/obtenir tree testing humain.
+7. Corriger les ambiguïtés.
+8. Seulement après : direction artistique, design system final, prototype high-fi.
+9. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
 ## 20. Règle de reprise
 
