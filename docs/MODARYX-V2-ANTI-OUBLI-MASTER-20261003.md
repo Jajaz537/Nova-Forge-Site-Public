@@ -193,7 +193,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | Progression réelle uniquement | TERMINÉ — conception | INSTALL-MANAGER |
 | Update | TERMINÉ — conception | INSTALL-MANAGER |
 | Rollback | TERMINÉ — conception | INSTALL-MANAGER |
-| Manager réel MODARYX | PREUVE MANQUANTE / non implémenté | aucun runtime prouvé |
+| Runtime MODARYX Forge réel | PREUVE MANQUANTE / non implémenté | aucun runtime desktop prouvé |
 
 ## 15. Monde vivant / identité
 
@@ -303,7 +303,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 - Storage Resolver ;
 - Repair Network ;
 - Guide MODARYX ;
-- pont Nova Forge OS ;
+- pont MODARYX Forge (références techniques/historiques `Nova Forge` à classifier avant migration) ;
 - vérificateur SHA-256 ;
 - PWA offline/stale ;
 - Smart Profile ;
@@ -419,3 +419,35 @@ Référence : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-CONTENT-UMBRELLA-20261003.m
 - QA formelle reste **BLOQUÉE** jusqu'à preuve visuelle archivable et comparaison normalisée.
 
 Référence : `docs/MODARYX-V2-LIVING-THRESHOLD-DESIGN-SYSTEM-20261003.md`.
+
+
+## Benchmark écosystèmes modding / transfert MODARYX Forge
+
+**EN COURS — recherche retenue et tracée / aucune parité concurrent déclarée**
+
+Document :
+`docs/MODARYX-V2-MODDING-ECOSYSTEM-BENCHMARK-TRANSFER-20261003.md`
+
+Références étudiées notamment : ModDropV, Vortex/Nexus, Mod Organizer 2, Prism Launcher, ATLauncher, Thunderstore/r2modman, Modrinth, Wabbajack, OpenIV/OIV, Reloaded-II, CurseForge, mod.io, Steam Workshop, Bethesda Creations et outils spécialisés apportant une capacité distincte.
+
+À ne pas oublier avant VF :
+- compatibilité, release, dépendances et conflits lisibles avant toute action ;
+- Collection != Modpack != Profil de jeu ;
+- profils partageables sous forme de recette/manifeste respectant les droits ;
+- revue du delta avant acceptation d'une mise à jour de profil partagé ;
+- Creator Studio : projet, releases, fichiers, dépendances, conflits, compatibilité, droits, provenance et packaging ;
+- connecteurs/adapters autorisés, jamais de scraping universel contournant les restrictions ;
+- provenance, intégrité, scan, compatibilité, droits, modération et distribution restent des dimensions séparées ;
+- installation locale, protection, rollback et receipt appartiennent à **MODARYX Forge**, pas au navigateur ;
+- un CTA `Installer avec MODARYX Forge` reste interdit tant que le runtime et le pont d'intégration ne sont pas réellement prouvés ;
+- benchmark continu jusqu'à la VF : nouvelle idée retenue = intégrer, mapper vers équivalent prouvé ou rejeter explicitement.
+
+### Nomenclature produit retenue
+
+- **MODARYX Forge** = logiciel / écosystème desktop ;
+- **MODARYX Public** = édition publique ;
+- **MODARYX Founder** = édition Founder ;
+- **MODARYX / MODARYX MODS** = plateforme web ;
+- `Nova Forge` = historique/legacy technique jusqu'à classification ; aucun remplacement global aveugle.
+
+**Pont MODARYX ↔ MODARYX Forge : EN COURS — contrat à formaliser / runtime PREUVE MANQUANTE.**
