@@ -190,7 +190,7 @@ try {
 
   await clickByText("footer button", "Game Hub");
   await clickSelector('[aria-label="Bibliothèque"]');
-  manifest.captures.push(await capture("desktop-library.png", 1440, 1024, "Retrouvez vos jeux"));
+  manifest.captures.push(await capture("desktop-library.png", 1440, 1024, "Retrouvez favoris, suivis, collections et profils"));
 
   await clickByText(".global-nav button", "Communauté");
   manifest.captures.push(await capture("desktop-community.png", 1440, 1024, "Des idées qui font vivre les mondes"));
