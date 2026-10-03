@@ -38,11 +38,20 @@ Ensemble versionné et installable avec manifeste/contraintes.
 ### Profil / Loadout
 Configuration utilisateur concrète, locale ou synchronisée.
 
+**Libellé UI français recommandé :**
+- **Profils de jeu**
+- microcopy : **Configurations enregistrées de mods et versions**
+
+Le terme `Profile/Loadout` reste acceptable dans le domaine interne et les contrats techniques.
+
 ### Release
 Version publiée d'un ContentItem.
 
 ### Fichier
 Artefact téléchargeable lié à une Release.
+
+**Libellé UI recommandé dans une release :**
+- **Fichiers de cette version**
 
 ### Dépendance
 Autre contenu requis, optionnel ou recommandé.
@@ -147,8 +156,13 @@ Abonnement aux mises à jour.
 ### Recherche sauvegardée
 Requête + filtres mémorisés.
 
-### Profil / Loadout
-Configuration de contenus.
+### Profils de jeu
+Libellé UI recommandé pour les `Profile/Loadout`.
+
+Description :
+- configurations enregistrées de mods et versions ;
+- privées/locales par défaut ;
+- distinctes des Collections et Modpacks.
 
 ## 10. Installation
 
@@ -187,14 +201,48 @@ Ne pas utiliser “Installer” pour ces trois actions différentes.
 
 ## 13. Support jeu
 
+États internes :
 - Éditorial uniquement
 - Catalogue disponible
 - Distribution disponible
 - Support archivé
 
-Ces libellés doivent être testés humainement.
+### Clarification UI obligatoire
 
-## 14. Termes lore secondaires
+Le libellé **Catalogue disponible** ne doit jamais apparaître seul lorsque la distribution n'est pas prouvée.
+
+Formulation recommandée :
+- **Catalogue consultable — téléchargement non garanti**
+
+`Distribution disponible` reste réservé aux cas où une distribution réelle est prouvée.
+
+Ces libellés restent à tester humainement.
+
+## 14. “Mods & Plugins” comme entrée parapluie
+
+Le libellé primaire reste **Mods & Plugins** pour la navigation.
+
+Quand la surface le permet, ajouter une microcopy explicite :
+
+> Mods, plugins, addons, scripts, outils et autres contenus compatibles.
+
+Les filtres doivent exposer la taxonomie complète du jeu courant.
+
+## 15. Compatibilité et prérequis
+
+Pour l'interface française, préférer :
+
+**Compatibilité et prérequis**
+
+Sous-sections :
+- Requis
+- Optionnel
+- Recommandé
+- Incompatible
+
+Le terme technique `requirements` peut rester dans les routes et contrats internes.
+
+## 16. Termes lore secondaires
 
 Peuvent apparaître en microcopy/ambiance :
 - Royaume
@@ -212,7 +260,7 @@ Ils ne remplacent jamais comme libellé primaire :
 - Recherche
 - Bibliothèque
 
-## 15. Termes à éviter
+## 17. Termes à éviter
 
 - “Safe” sans définition précise ;
 - “Verified” sans preuve réelle ;
@@ -222,7 +270,7 @@ Ils ne remplacent jamais comme libellé primaire :
 - “Compte connecté” sur simple détection WebAuthn ;
 - “Collection installable” sans manifeste/résolution.
 
-## 16. Questions de tree testing liées au vocabulaire
+## 18. Questions de tree testing liées au vocabulaire
 
 Tester :
 - Collection vs Profil ;
@@ -230,14 +278,16 @@ Tester :
 - Compatible vs Non vérifié ;
 - Créateur vs Équipe ;
 - Support vs Signalement ;
-- Catalogue disponible vs Distribution disponible.
+- Catalogue disponible vs Distribution disponible ;
+- “Mods & Plugins” comme entrée parapluie ;
+- “Profils de jeu” comme libellé utilisateur.
 
-## 17. Gate
+## 19. Gate
 
-Avant high-fi :
-- termes critiques testés ;
+Avant high-fi final :
+- ambiguïtés internes corrigées ;
 - synonymes principaux connus ;
-- ambiguïtés corrigées ;
-- lore limité à la couche de marque.
+- lore limité à la couche de marque ;
+- validation humaine encore souhaitable mais non inventée.
 
-**État : TERMINÉ pour le glossaire de travail / PREUVE MANQUANTE pour validation humaine.**
+**État : TERMINÉ pour le glossaire de travail + clarifications sûres / PREUVE MANQUANTE pour validation humaine.**
