@@ -1,20 +1,28 @@
 # Design QA — MODARYX V2 Living Threshold
 
 - source visual truth path: `C:\Users\steph\.codex\generated_images\01a1033a-47d2-7910-92b8-05aa89cfb208\exec-197fd322-f242-4a81-a337-91f52572641b.png`
-- implementation screenshot path: unavailable — browser capture inspected in-session but the active browser bridge did not expose a filesystem export
+- implementation screenshots: archived by GitHub Actions artifact `modaryx-v2-living-threshold-visual-proof`, run `37157794569`, artifact id `11286254258`
+- artifact digest: `sha256:ee91b7e87f9d04a804b49873c0e1ba3249087d7cd05b0165787b8e71cca3a03c`
+- desktop screenshot SHA-256: `9cccc32bc23d661d9ea6bd823e51cf7e09d4df9d0805bb132d4e57607ae1f417`
+- mobile screenshot SHA-256: `52b0e3762591371b3c8a9b1c4dc038e44bbf80c403a94c4dfd5baa870a11b49c`
 - desktop viewport: 1440 × 1024 CSS px, device scale 1
 - mobile viewport: 390 × 844 CSS px, device scale 1
 - state: Game Hub / `Pour votre version`, plus Catalog and Content Detail interaction checks
 - source dimensions: 1488 × 1058 px
-- implementation dimensions: browser-rendered viewport 1440 × 1024 CSS px; no normalized screenshot file available
+- implementation dimensions: desktop 1440 × 1024 px; mobile 390 × 844 px; device scale 1
 
 **Findings**
 
-- [P2] Archivable side-by-side evidence missing
+- [CLOSED] Implementation screenshot export missing
   Location: QA evidence pipeline.
-  Evidence: both the source visual and implementation were opened and inspected, but the implementation capture could not be exported as a local file for a durable composite comparison.
-  Impact: a formal fidelity PASS cannot be reproduced independently.
-  Fix: export the browser-rendered desktop and mobile screenshots, normalize the desktop capture to the source crop, then run a side-by-side comparison.
+  Evidence: targeted workflow `MODARYX V2 Living Threshold Visual Proof` run `37157794569` completed successfully and archived exact desktop/mobile browser renders plus SHA-256 manifest.
+  Result: implementation captures are now reproducible for commit `87245c939c42daf1a0b04879d26039eb4b5daae1`.
+
+- [P2] Normalized source-vs-implementation comparison still missing
+  Location: QA evidence pipeline.
+  Evidence: source visual remains only at the Work-local path listed above and is not versioned in the repository/artifact.
+  Impact: formal fidelity PASS against the selected source image is still not independently reproducible.
+  Fix: archive the source visual or an approved normalized reference, then run the side-by-side/overlay comparison.
 
 **Verified in browser**
 
@@ -40,8 +48,8 @@
 
 **Implementation Checklist**
 
-1. Export comparable desktop and mobile screenshots.
-2. Run normalized side-by-side visual comparison.
+1. ~~Export comparable desktop and mobile screenshots.~~ **TERMINÉ — run 37157794569**.
+2. Run normalized side-by-side visual comparison once the source reference is archivable.
 3. Fix any P0/P1/P2 differences found.
 4. Perform contrast and keyboard checks before any high-fi gate update.
 
@@ -50,4 +58,4 @@
 - Consider a dedicated compact mobile profile affordance after human review.
 - Revisit typeface selection only after the visual direction is accepted.
 
-final result: blocked
+final result: blocked — implementation capture closed; normalized source comparison + formal a11y checks remain open
