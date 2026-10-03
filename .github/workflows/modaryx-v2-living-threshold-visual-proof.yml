@@ -8,6 +8,7 @@ on:
       - '.github/workflows/modaryx-v2-living-threshold-visual-proof.yml'
       - 'qa/check-v2-living-threshold-static-a11y.mjs'
       - 'qa/check-v2-living-threshold-browser-a11y.mjs'
+      - 'qa/capture-v2-living-threshold-multiscreen.mjs'
       - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/**'
   workflow_dispatch:
 
@@ -76,6 +77,14 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-v2-living-threshold-browser-a11y.mjs
+
+      - name: Capture multi-screen review evidence
+        shell: bash
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4174
+        run: |
+          set -euo pipefail
+          node qa/capture-v2-living-threshold-multiscreen.mjs
 
       - name: Capture exact browser renders
         shell: bash
