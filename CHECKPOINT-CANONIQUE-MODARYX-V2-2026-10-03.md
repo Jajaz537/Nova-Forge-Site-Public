@@ -96,7 +96,7 @@ Navigation cible :
 
 - Découvrir
 - Jeux
-- Mods & Plugins
+- Mods & contenus
 - Collections
 - Créateurs
 - Communauté
@@ -678,6 +678,18 @@ Blueprints textuels :
 Revue de couverture :
 
 `docs/MODARYX-V2-WIREFRAME-COVERAGE-20261003.md`
+
+### Boucle visuelle locale dans le chat standard
+
+**TERMINÉ — micro-preuve d’outillage dans l’environnement courant / À REVALIDER À CHAQUE SESSION**
+
+- Chromium est disponible via `/usr/bin/chromium` ;
+- Playwright Python est disponible et a lancé Chromium en headless avec succès ;
+- le prototype low-fi peut être injecté avec `page.set_content`, rendu, inspecté par sélecteurs puis capturé en image ;
+- les navigations directes `file://` et `http://127.0.0.1` sont bloquées par la politique de l’environnement (`ERR_BLOCKED_BY_ADMINISTRATOR`) : ne pas les relancer en boucle ;
+- micro-preuve ciblée : 4 frames rendues, libellé actif `Mods & contenus` présent 3 fois et `Mods & Plugins` actif absent après correction ;
+- cette capacité permet ici la boucle **rendre → inspecter → corriger → comparer → recommencer** pour les prototypes isolés ; elle ne remplace pas une validation humaine ni un gel High-Fi final ;
+- revalider la disponibilité de Chromium/Playwright au début d’une nouvelle session avant de s’y fier.
 
 ## 25. High‑Fi
 
