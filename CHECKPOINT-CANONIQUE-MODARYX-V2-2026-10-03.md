@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`704e86d91d47a0f855fff7f4894119816dc551c9`
+`0f131b59d321c24f9d9f6cbc523df42460477a86`
 
 PR :
 
@@ -316,7 +316,29 @@ Contrats :
 
 Aucun de ces éléments n'est encore implémenté.
 
-## 12. Figma
+## 12. Données, fixtures et migration navigateur
+
+**TERMINÉ — conception**
+
+Documents :
+
+- `docs/MODARYX-V2-DATA-FIXTURE-STRATEGY-20261003.md`
+- `docs/MODARYX-V2-STORAGE-CACHE-SW-MIGRATION-20261003.md`
+
+Règles :
+
+- distinguer production réelle / démonstration / fixture technique / placeholder UI ;
+- aucun faux compteur, auteur, badge verified ou compatibilité mesurée ;
+- fixtures isolées du build public ;
+- namespace localStorage V2 sous `modaryx:v2:` ;
+- migration non destructive ;
+- aucun remapping silencieux d'ID ou de type ;
+- SW V2 séparé ;
+- purge cache uniquement par liste explicite ;
+- test obligatoire navigateur neuf + navigateur legacy + offline + upgrade interrompu ;
+- aucun changement Cloudflare critique nécessaire pour cette phase.
+
+## 13. Figma
 
 Fichier :
 
@@ -380,7 +402,7 @@ Mobile :
 
 Recherche, fiche, installation, collection/profil, Creator Studio et Community ont leurs principaux états définis.
 
-## 13. Erreurs Figma et procédure
+## 14. Erreurs Figma et procédure
 
 ### Erreur 1
 
@@ -414,7 +436,7 @@ Erreur exacte :
 
 Aucune relance immédiate.
 
-## 14. Wireframes encore manquants
+## 15. Wireframes encore manquants
 
 **BLOQUÉ Figma / EN COURS conception**
 
@@ -431,7 +453,7 @@ Revue de couverture :
 
 `docs/MODARYX-V2-WIREFRAME-COVERAGE-20261003.md`
 
-## 15. High‑Fi
+## 16. High‑Fi
 
 **BLOQUÉ**
 
@@ -445,7 +467,7 @@ Gate :
 
 `docs/MODARYX-V2-HIGH-FI-GATE-20261003.md`
 
-## 16. Validation humaine
+## 17. Validation humaine
 
 **PREUVE MANQUANTE**
 
@@ -464,7 +486,7 @@ Script de test :
 
 Aucune validation humaine n'est inventée.
 
-## 17. Production / infrastructure
+## 18. Production / infrastructure
 
 Inchangés :
 
@@ -480,7 +502,7 @@ Inchangés :
 
 Aucun front V2 production n'a été écrit.
 
-## 18. États courants
+## 19. États courants
 
 - Audit legacy : **TERMINÉ**
 - Audit modules legacy ciblés : **TERMINÉ pour périmètre inspecté**
@@ -494,6 +516,8 @@ Aucun front V2 production n'a été écrit.
 - Contrat accessibilité/performance/design system : **TERMINÉ — conception**
 - Critères d'acceptation écrans : **TERMINÉ — conception**
 - Architecture isolation frontend : **TERMINÉ — conception**
+- Stratégie données/fixtures : **TERMINÉ — conception**
+- Migration storage/cache/SW : **TERMINÉ — conception**
 - Wireframes core : **EN COURS**
 - Écriture Figma supplémentaire : **BLOQUÉ EXTERNE**
 - Tree testing humain : **PREUVE MANQUANTE**
@@ -501,24 +525,23 @@ Aucun front V2 production n'a été écrit.
 - High-fi : **BLOQUÉ**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
 
-## 19. Prochain point logique automatique
+## 20. Prochain point logique automatique
 
 1. Continuer recherche/specification et audit ne nécessitant pas Figma.
 2. Ne pas relancer Figma tant que le quota Starter reste bloqué.
-3. Préparer la stratégie de données/fixtures V2 sans créer de faux contenu public.
-4. Préparer les critères de migration localStorage/service worker/cache.
-5. Dès disponibilité Figma :
+3. Continuer l'audit des contrats et préparer les critères de test/QA V2 sans implémenter le front.
+4. Dès disponibilité Figma :
    - ajouter Game Hub ;
    - ajouter Global Search ;
    - ajouter Community ;
    - ajouter Mobile Game Hub ;
    - micro-vérifier clipping/overflow.
-6. Exécuter/obtenir tree testing humain.
-7. Corriger les ambiguïtés.
-8. Seulement après : direction artistique, design system final, prototype high-fi.
-9. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
+5. Exécuter/obtenir tree testing humain.
+6. Corriger les ambiguïtés.
+7. Seulement après : direction artistique, design system final, prototype high-fi.
+8. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
-## 20. Règle de reprise
+## 21. Règle de reprise
 
 Pour toute nouvelle conversation :
 
