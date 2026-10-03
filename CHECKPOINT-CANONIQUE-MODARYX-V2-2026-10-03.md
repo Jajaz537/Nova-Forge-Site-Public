@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`a89d7ec5b765984ae4ff0deeac2c0c4a98c383b5`
+`78fcbde0dc921d7687030106e4cab2b973cca6af`
 
 PR :
 
@@ -815,7 +815,7 @@ Aucun front V2 production n'a été écrit.
    - matérialiser Community ;
    - matérialiser Mobile Game Hub ;
    - micro-vérifier clipping/overflow.
-7. Exécuter/obtenir tree testing humain.
+7. QA mécanique low-fi fermée ; exécuter/obtenir désormais le tree testing humain.
 8. Corriger les ambiguïtés.
 9. Seulement après : direction artistique, design system final, prototype high-fi.
 10. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
