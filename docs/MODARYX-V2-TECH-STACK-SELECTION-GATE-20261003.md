@@ -223,3 +223,49 @@ Un choix précoce pourrait forcer le design à suivre la technologie.
 - supply-chain runtime V2 : **AUCUNE**
 - frontend V2 : **NON COMMENCÉ**
 
+
+
+## 20. Réévaluation Cloudflare et shortlist — 4 octobre 2026
+
+Documentation officielle fraîche consultée :
+- Cloudflare Pages framework guides — dernière mise à jour observée août 2026 ;
+- Cloudflare Workers web application guides ;
+- Cloudflare Workers Astro ;
+- Astro Cloudflare adapter ;
+- Cloudflare Workers React + Vite ;
+- Cloudflare Pages Static HTML.
+
+Constat :
+- Cloudflare présente désormais **Workers** comme sa plateforme principale pour construire de nouvelles applications ;
+- Pages reste supporté mais ne doit plus être supposé automatiquement comme cible future V2 ;
+- l'adapter Cloudflare Astro moderne cible Workers et ne supporte plus Pages dans sa génération récente ;
+- aucune migration de la production MODARYX actuelle n'est autorisée par ce constat.
+
+Comparaison préparatoire :
+`docs/MODARYX-V2-STACK-COMPARISON-20261004.md`
+
+Shortlist non engageante :
+1. vanilla/static-first + Vite léger ;
+2. Astro + Cloudflare Workers ;
+3. React + Vite + Cloudflare Workers.
+
+La shortlist ne change pas les règles de ce gate :
+- aucune stack finale sélectionnée ;
+- aucun nouveau root frontend V2 ;
+- aucun déploiement Workers ;
+- aucun changement Pages/DNS/Cloudflare ;
+- aucun `main` modifié.
+
+Critères supplémentaires à mesurer au moment du choix :
+- JavaScript initial réel ;
+- HTML initial ;
+- prerender/SSR par surface ;
+- compatibilité CSP ;
+- routing 404/410/redirects ;
+- Service Worker contrôlé ;
+- preview immutable liée au SHA ;
+- intégration auth/backend ;
+- migration des composants Living Threshold ;
+- supply-chain.
+
+**État : comparaison préparatoire TERMINÉE / sélection finale toujours BLOQUÉE par le gate de validation.**
