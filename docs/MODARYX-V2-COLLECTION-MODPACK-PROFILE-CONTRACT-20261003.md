@@ -38,6 +38,16 @@ Propriétés :
 
 Une Collection n'est pas automatiquement installable.
 
+### Microcopy utilisateur
+
+Une preuve humaine réelle montre que le mot **Collection** n'est pas nécessairement le premier terme spontané pour une sélection thématique partageable.
+
+Conserver `Collection` comme objet produit, mais l'accompagner d'une microcopy claire, par exemple :
+
+**Sélections de mods à organiser et partager**
+
+Le produit peut employer « recommandations » comme langage secondaire lorsque le contexte est éditorial, sans créer un nouveau type de domaine.
+
 ## 4. Modpack
 
 Fonction :
