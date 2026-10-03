@@ -35,6 +35,7 @@ function Topbar({ active, onNavigate }) {
     <button className="mobile-menu" aria-label="Ouvrir le menu" aria-expanded={open} onClick={() => setOpen(v => !v)}>{open ? <X /> : <List />}</button>
     <nav className={open ? "global-nav open" : "global-nav"} aria-label="Navigation principale">
       {navItems.map(item => <button key={item} className={active === item ? "active" : ""} onClick={() => { onNavigate(item); setOpen(false); }}>{item}</button>)}
+      <button className="mobile-nav-utility" onClick={() => { onNavigate("Bibliothèque"); setOpen(false); }}><BookOpen />Bibliothèque</button>
     </nav>
     <div className="top-actions"><button aria-label="Recherche globale" onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button><button aria-label="Bibliothèque" onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button aria-label="Notifications"><Bell /></button><button className="avatar" aria-label="Compte">M</button></div>
   </header>;
