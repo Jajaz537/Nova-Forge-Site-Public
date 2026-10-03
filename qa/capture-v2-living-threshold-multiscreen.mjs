@@ -1,0 +1,172 @@
+import { spawn } from "node:child_process";
+import { writeFileSync, mkdirSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { setTimeout as sleep } from "node:timers/promises";
+
+const chrome = process.env.CHROME_BIN;
+const origin = process.env.MODARYX_REVIEW_ORIGIN || "http://127.0.0.1:4174";
+if (!chrome) throw new Error("CHROME_BIN missing");
+
+const port = 9224;
+const proc = spawn(chrome, [
+  "--headless=new",
+  "--no-sandbox",
+  "--disable-gpu",
+  "--hide-scrollbars",
+  "--remote-debugging-port=" + port,
+  "--user-data-dir=/tmp/modaryx-v2-cdp-multiscreen",
+  "about:blank",
+], { stdio: "ignore" });
+
+let ws;
+let nextId = 1;
+const pending = new Map();
+
+function send(method, params = {}) {
+  const id = nextId++;
+  ws.send(JSON.stringify({ id, method, params }));
+  return new Promise((resolve, reject) => pending.set(id, { resolve, reject }));
+}
+async function waitJson(path) {
+  let last;
+  for (let i = 0; i < 80; i++) {
+    try {
+      const r = await fetch(`http://127.0.0.1:${port}${path}`);
+      if (r.ok) return await r.json();
+      last = new Error("HTTP " + r.status);
+    } catch (e) { last = e; }
+    await sleep(100);
+  }
+  throw last || new Error("CDP unavailable");
+}
+async function evaluate(expression) {
+  const r = await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true });
+  if (r.exceptionDetails) throw new Error(r.exceptionDetails.text || "Runtime.evaluate failed");
+  return r.result?.result?.value;
+}
+async function setViewport(width, height) {
+  await send("Emulation.setDeviceMetricsOverride", {
+    width, height, deviceScaleFactor: 1, mobile: width < 760,
+  });
+}
+async function navigateHome(width, height) {
+  await setViewport(width, height);
+  await send("Page.navigate", { url: origin });
+  for (let i = 0; i < 60; i++) {
+    if (await evaluate("document.readyState === 'complete'")) break;
+    await sleep(100);
+  }
+  await sleep(300);
+}
+async function clickByText(selector, text) {
+  const ok = await evaluate(`(() => {
+    const target=[...document.querySelectorAll(${JSON.stringify(selector)})]
+      .find(el => el.textContent.trim() === ${JSON.stringify(text)});
+    if(!target) return false;
+    target.click();
+    return true;
+  })()`);
+  if (!ok) throw new Error("target not found: " + selector + " / " + text);
+  await sleep(250);
+}
+async function clickSelector(selector) {
+  const ok = await evaluate(`(() => {
+    const target=document.querySelector(${JSON.stringify(selector)});
+    if(!target) return false;
+    target.click();
+    return true;
+  })()`);
+  if (!ok) throw new Error("selector not found: " + selector);
+  await sleep(250);
+}
+async function capture(file, width, height, expectedText) {
+  const textOk = expectedText ? await evaluate(`document.body.innerText.includes(${JSON.stringify(expectedText)})`) : true;
+  if (!textOk) throw new Error("expected text missing before capture: " + expectedText);
+  const shot = await send("Page.captureScreenshot", {
+    format: "png",
+    fromSurface: true,
+    captureBeyondViewport: false,
+    clip: { x: 0, y: 0, width, height, scale: 1 },
+  });
+  const data = Buffer.from(shot.result.data, "base64");
+  const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/" + file;
+  mkdirSync(out.substring(0, out.lastIndexOf("/")), { recursive: true });
+  writeFileSync(out, data);
+  return {
+    file,
+    width,
+    height,
+    sha256: createHash("sha256").update(data).digest("hex"),
+  };
+}
+
+try {
+  await waitJson("/json/version");
+  const targets = await waitJson("/json/list");
+  const target = targets.find(x => x.type === "page");
+  if (!target?.webSocketDebuggerUrl) throw new Error("page target missing");
+
+  ws = new WebSocket(target.webSocketDebuggerUrl);
+  await new Promise((resolve, reject) => {
+    ws.addEventListener("open", resolve, { once: true });
+    ws.addEventListener("error", reject, { once: true });
+  });
+  ws.addEventListener("message", event => {
+    const msg = JSON.parse(event.data);
+    if (!msg.id || !pending.has(msg.id)) return;
+    const p = pending.get(msg.id);
+    pending.delete(msg.id);
+    if (msg.error) p.reject(new Error(msg.error.message));
+    else p.resolve(msg);
+  });
+  await send("Page.enable");
+  await send("Runtime.enable");
+
+  const manifest = { commit: process.env.GITHUB_SHA, captures: [] };
+
+  // Desktop states
+  await navigateHome(1440, 1024);
+  manifest.captures.push(await capture("desktop-game-hub.png", 1440, 1024, "Mes profils pour ce jeu"));
+
+  await clickByText(".global-nav button", "Découvrir");
+  manifest.captures.push(await capture("desktop-home.png", 1440, 1024, "Redécouvrez vos jeux"));
+
+  await clickByText(".global-nav button", "Mods & contenus");
+  manifest.captures.push(await capture("desktop-catalog.png", 1440, 1024, "Catalogue global"));
+
+  await clickSelector(".card-hit");
+  manifest.captures.push(await capture("desktop-content-detail.png", 1440, 1024, "Avant d’ajouter"));
+
+  await clickByText("footer button", "Game Hub");
+  await clickSelector('[aria-label="Bibliothèque"]');
+  manifest.captures.push(await capture("desktop-library.png", 1440, 1024, "Retrouvez vos jeux"));
+
+  await clickByText(".global-nav button", "Communauté");
+  manifest.captures.push(await capture("desktop-community.png", 1440, 1024, "Des idées qui font vivre les mondes"));
+
+  await clickByText(".global-nav button", "Créer");
+  manifest.captures.push(await capture("desktop-creator-studio.png", 1440, 1024, "Creator Studio"));
+
+  // Mobile states
+  await navigateHome(390, 844);
+  manifest.captures.push(await capture("mobile-game-hub.png", 390, 844, "Mes profils pour ce jeu"));
+
+  await clickSelector(".mobile-menu");
+  await clickByText(".global-nav button", "Découvrir");
+  manifest.captures.push(await capture("mobile-home.png", 390, 844, "Redécouvrez vos jeux"));
+
+  await clickSelector(".mobile-menu");
+  await clickByText(".global-nav button", "Mods & contenus");
+  manifest.captures.push(await capture("mobile-catalog.png", 390, 844, "Catalogue global"));
+
+  await clickSelector(".card-hit");
+  manifest.captures.push(await capture("mobile-content-detail.png", 390, 844, "Avant d’ajouter"));
+
+  const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/manifest.json";
+  writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
+  console.log("MULTISCREEN_CAPTURE_COUNT", manifest.captures.length);
+  console.log("PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE");
+} finally {
+  try { ws?.close(); } catch {}
+  proc.kill("SIGTERM");
+}
