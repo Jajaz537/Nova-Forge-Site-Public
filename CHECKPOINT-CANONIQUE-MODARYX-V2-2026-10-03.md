@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`4d39404e8547747196b15bf2162c0044225c04ba`
+`8c2f9a7131a7752a893eab24fe231df6fdd5f479`
 
 PR :
 
@@ -387,7 +387,30 @@ Décisions :
 - provenance/hash/scan présentés avec limites explicites ;
 - mobile priorise identité → compatibilité → action → requirements.
 
-## 15. Figma
+## 15. Contrats de surfaces produit supplémentaires
+
+**TERMINÉ — conception**
+
+Documents :
+
+- `docs/MODARYX-V2-GAME-HUB-CONTRACT-20261003.md`
+- `docs/MODARYX-V2-CREATOR-STUDIO-CONTRACT-20261003.md`
+- `docs/MODARYX-V2-COMMUNITY-LIBRARY-NAV-CONTRACT-20261003.md`
+
+Décisions principales :
+
+- Game Hub = pivot jeu/version/recherche/contenus ;
+- un hub éditorial ne prouve pas un corpus distribuable ;
+- Creator Studio sépare Project et Release ;
+- brouillon local préservé après erreur ;
+- Community reste centrée sur le modding ;
+- Library sépare favoris, suivis, collections, modpacks, profils/loadouts et saved searches ;
+- navigation mobile garde Recherche/Jeux/Découvrir/Bibliothèque/Compte en priorité ;
+- vocabulaire fonctionnel avant lore.
+
+Un premier envoi du document Community/Library/Nav a été bloqué par un contrôle de sécurité externe. Procédure appliquée : erreur exacte → vérification du SHA inchangé → simplification ciblée du document → micro-proof par commit réussi. Aucun full replay.
+
+## 16. Figma
 
 Fichier :
 
@@ -451,7 +474,7 @@ Mobile :
 
 Recherche, fiche, installation, collection/profil, Creator Studio et Community ont leurs principaux états définis.
 
-## 16. Erreurs Figma et procédure
+## 17. Erreurs Figma et procédure
 
 ### Erreur 1
 
@@ -485,7 +508,7 @@ Erreur exacte :
 
 Aucune relance immédiate.
 
-## 17. Wireframes encore manquants
+## 18. Wireframes encore manquants
 
 **BLOQUÉ Figma / EN COURS conception**
 
@@ -502,7 +525,7 @@ Revue de couverture :
 
 `docs/MODARYX-V2-WIREFRAME-COVERAGE-20261003.md`
 
-## 18. High‑Fi
+## 19. High‑Fi
 
 **BLOQUÉ**
 
@@ -516,7 +539,7 @@ Gate :
 
 `docs/MODARYX-V2-HIGH-FI-GATE-20261003.md`
 
-## 19. Validation humaine
+## 20. Validation humaine
 
 **PREUVE MANQUANTE**
 
@@ -535,7 +558,7 @@ Script de test :
 
 Aucune validation humaine n'est inventée.
 
-## 20. Production / infrastructure
+## 21. Production / infrastructure
 
 Inchangés :
 
@@ -551,7 +574,7 @@ Inchangés :
 
 Aucun front V2 production n'a été écrit.
 
-## 21. États courants
+## 22. États courants
 
 - Audit legacy : **TERMINÉ**
 - Audit modules legacy ciblés : **TERMINÉ pour périmètre inspecté**
@@ -570,6 +593,9 @@ Aucun front V2 production n'a été écrit.
 - Stratégie QA : **TERMINÉ — conception, NON EXÉCUTÉ**
 - Recherche/filtres/découverte : **TERMINÉ — conception**
 - Fiche contenu : **TERMINÉ — conception**
+- Game Hub : **TERMINÉ — conception**
+- Creator Studio : **TERMINÉ — conception**
+- Community/Library/Navigation : **TERMINÉ — conception**
 - Wireframes core : **EN COURS**
 - Écriture Figma supplémentaire : **BLOQUÉ EXTERNE**
 - Tree testing humain : **PREUVE MANQUANTE**
@@ -577,11 +603,11 @@ Aucun front V2 production n'a été écrit.
 - High-fi : **BLOQUÉ**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
 
-## 22. Prochain point logique automatique
+## 23. Prochain point logique automatique
 
 1. Continuer recherche/specification et audit ne nécessitant pas Figma.
 2. Ne pas relancer Figma tant que le quota Starter reste bloqué.
-3. Continuer l'audit des contrats et préparer les critères de test/QA V2 sans implémenter le front.
+3. Continuer l'audit des contrats de produit encore non détaillés (collections/modpacks/profiles, trust/provenance, installation/manager) sans implémenter le front.
 4. Dès disponibilité Figma :
    - ajouter Game Hub ;
    - ajouter Global Search ;
@@ -593,7 +619,7 @@ Aucun front V2 production n'a été écrit.
 7. Seulement après : direction artistique, design system final, prototype high-fi.
 8. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
-## 23. Règle de reprise
+## 24. Règle de reprise
 
 Pour toute nouvelle conversation :
 
