@@ -822,6 +822,13 @@ Aucun front V2 production n'a été écrit.
   - rapport ingéré dans `docs/MODARYX-V2-WORK-TERMINOLOGY-REPORT-INGEST-20261003.md` ;
   - indépendance déclarée vis-à-vis de P01 et du test assistant.
 - Décision produit finale — **Profils de jeu** : **TERMINÉ**
+
+- Décision produit finale — **Mods & contenus** : **TERMINÉ**
+  - document : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-CONTENT-UMBRELLA-20261003.md`
+  - UI : **Mods & contenus**
+  - microcopy : **Mods, plugins, addons, scripts, maps, shaders, presets, outils et autres contenus pour vos jeux.**
+  - arbitrage parapluie : **FERMÉ**
+  - validation humaine globale : **EN COURS**
   - document : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-GAME-PROFILES-20261003.md`
   - UI : **Profils de jeu**
   - microcopy : **Configurations enregistrées de mods, versions et réglages.**
