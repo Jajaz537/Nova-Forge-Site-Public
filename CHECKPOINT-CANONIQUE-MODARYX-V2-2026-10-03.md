@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`a7b05547cf79d266163c04f48c1a15d72ea70a3b`
+`1975339ae9796032ef92f2680a29321b5b6f9a86`
 
 PR :
 
@@ -693,7 +693,7 @@ Revue de couverture :
 - convergence croisée : TERMINÉE ;
 - validation humaine globale : EN COURS ;
 - résultats terminologiques P01 : **Profils de jeu** préféré à Configurations de jeu ; **Collection** comprise comme sélection organisée ; **Bibliothèque** comprise comme espace personnel ; **Mods & Plugins** jugé trop étroit comme parapluie ; **Non vérifié** jugé ambigu ;
-- principal libellé encore à revalider : alternative plus large à **Mods & Plugins** ;
+- libellé parapluie provisoire préféré après benchmark + P01 : **Mods & contenus** ; validation humaine globale toujours EN COURS ;
 - `Non vérifié` générique est désormais interdit : toujours qualifier la dimension ;
 - Figma MCP : BLOQUÉ EXTERNE pour nouvelles écritures.
 
@@ -820,7 +820,7 @@ Aucun front V2 production n'a été écrit.
   - confirme **Collection** mais capacité d'installation à rendre explicite ;
   - confirme **Bibliothèque** comme convention crédible d'espace personnel ;
   - confirme que **Mods & Plugins** est trop étroit comme parapluie universel ;
-  - shortlist à tester : **Contenus de jeu**, **Mods & contenus**, **Créations** ;
+  - shortlist testée auprès de P01 : **Mods & contenus** choisi devant **Contenus de jeu** et **Créations** ;
   - confirme l'interdiction du libellé générique **Non vérifié**.
 - Rapport Work indépendant : **TERMINÉ — 5 profils × 16 tâches / P01 non consulté**
   - ingestion : `docs/MODARYX-V2-WORK-REPORT-INGEST-20261003.md`
@@ -861,10 +861,11 @@ Aucun front V2 production n'a été écrit.
 7. QA mécanique low-fi fermée ; simulation experte multi-profils fermée avec clarifications sûres intégrées.
 8. P01 réel + étude indépendante interne 5×16 + étude Work 5×16 : comparaison croisée TERMINÉE. Ne pas généraliser P01 ni transformer les simulations IA en statistiques humaines.
 9. Mini-test terminologique P01 TERMINÉ : **Profils de jeu** préféré ; Collection et Bibliothèque comprises ; **Mods & Plugins** trop étroit comme parapluie ; **Non vérifié** générique écarté.
-10. Benchmark externe multi-gaming TERMINÉ : les trois candidats à tester à la place de **Mods & Plugins** sont **Contenus de jeu**, **Mods & contenus** et **Créations**.
-11. Prochain risque UX à fermer : mini-test humain comparatif de ces trois libellés, sans révéler le candidat favori du benchmark.
-12. Continuer en parallèle vers la direction artistique exploratoire et le design system préparatoire ; aucun gel high-fi/microcopy finale sans preuve humaine suffisante.
-13. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
+10. Benchmark externe multi-gaming TERMINÉ : **Contenus de jeu**, **Mods & contenus** et **Créations** ont été comparés.
+11. Mini-test humain parapluie P01 TERMINÉ : **Mods & contenus** choisi. Document : `docs/MODARYX-V2-HUMAN-CONTENT-UMBRELLA-MINITEST-P01-20261003.md`.
+12. Prochain risque UX : consolider ce libellé avec d'autres humains lors de la prochaine validation, sans bloquer l'exploration réversible.
+13. Continuer en parallèle vers la direction artistique exploratoire et le design system préparatoire ; aucun gel high-fi/microcopy finale sans preuve humaine suffisante.
+14. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
 ## 30. Règle de reprise
 
