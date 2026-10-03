@@ -359,3 +359,20 @@ Ne remplace pas une preuve humaine.
 **PREUVE MANQUANTE — mission prête / rapport non reçu**
 
 Le protocole Work doit rester indépendant de P01 et du test assistant jusqu'à son propre verdict.
+
+
+## 27. Rapport Work terminologique indépendant
+
+**TERMINÉ — 6 profils × 6 questions / 36 simulations**
+
+Source reçue : **Rapport indépendant — Test terminologique MODARYX V2**.
+
+Indépendance déclarée : P01 et test assistant non consultés avant rédaction des résultats.
+
+Analyse croisée finale :
+`docs/MODARYX-V2-FINAL-TERMINOLOGY-CROSS-ANALYSIS-P01-ASSISTANT-WORK-20261003.md`
+
+À retenir :
+- **Mods & contenus** converge P01 + assistant + Work ;
+- **Collection**, **Bibliothèque** et l'interdiction de **Non vérifié** convergent ;
+- **Profils de jeu** vs **Configurations de jeu** reste le seul arbitrage terminologique majeur ouvert.
