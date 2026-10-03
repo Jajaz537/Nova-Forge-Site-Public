@@ -37,7 +37,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | Communauté | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
 | Créer / Studio | TERMINÉ — conception | CREATOR-STUDIO |
 | Bibliothèque | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
-| Recherche globale | TERMINÉ — conception / wireframe manquant | SEARCH-FILTER-DISCOVERY |
+| Recherche globale | TERMINÉ — conception + low-fi HTML ; portée globale/contextuelle explicite | SEARCH-FILTER-DISCOVERY / CROSS-ANALYSIS |
 | Navigation mobile prioritaire | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
 | Breadcrumbs | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
 
@@ -46,7 +46,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | Élément | État V2 | Référence |
 |---|---|---|
 | Games index | TERMINÉ — low-fi existant | FIGMA |
-| Game Hub | TERMINÉ — contrat / BLOQUÉ wireframe | GAME-HUB |
+| Game Hub | TERMINÉ — contrat + low-fi HTML / matérialisation Figma BLOQUÉE | GAME-HUB / LOWFI-REVIEW |
 | Version active du jeu | TERMINÉ — conception | GAME-HUB |
 | Types/catégories par jeu | TERMINÉ — conception | TAXONOMY |
 | Statut support jeu | TERMINÉ — conception | GAME-SUPPORT-LIFECYCLE |
@@ -117,9 +117,10 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | Élément | État V2 | Référence |
 |---|---|---|
 | Favoris | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
-| Collections | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
+| Collections | EN COURS — terminologie/capacité | COLLECTION-MODPACK-PROFILE / CROSS-ANALYSIS |
 | Modpacks | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
-| Profiles / Loadouts | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
+| Profile / Loadout interne → **Configurations de jeu** UI provisoire | EN COURS — revalidation humaine | COLLECTION-MODPACK-PROFILE / PRODUCT-GLOSSARY / CROSS-ANALYSIS |
+| Capacité Collection explicite (sélection / installation réelle) | TERMINÉ — conception / revalidation wording | COLLECTION-MODPACK-PROFILE / CROSS-ANALYSIS |
 | Conversion explicite entre objets | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
 | Version pinning | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
 | Sync states | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
@@ -276,13 +277,13 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | Home mobile | TERMINÉ — low-fi | Figma |
 | Catalog mobile | TERMINÉ — low-fi | Figma |
 | Content Detail mobile | TERMINÉ — low-fi | Figma |
-| Game Hub desktop | BLOQUÉ — quota Figma | MISSING-WIREFRAME-BLUEPRINTS |
-| Global Search desktop | BLOQUÉ — quota Figma | MISSING-WIREFRAME-BLUEPRINTS |
-| Community desktop | BLOQUÉ — quota Figma | MISSING-WIREFRAME-BLUEPRINTS |
-| Game Hub mobile | BLOQUÉ — quota Figma | MISSING-WIREFRAME-BLUEPRINTS |
-| High-fi | BLOQUÉ volontairement | HIGH-FI-GATE |
+| Game Hub desktop | TERMINÉ — low-fi HTML / BLOQUÉ Figma uniquement | MISSING-WIREFRAME-BLUEPRINTS / LOWFI-REVIEW |
+| Global Search desktop | TERMINÉ — low-fi HTML / BLOQUÉ Figma uniquement | MISSING-WIREFRAME-BLUEPRINTS / LOWFI-REVIEW |
+| Community desktop | TERMINÉ — low-fi HTML / BLOQUÉ Figma uniquement | MISSING-WIREFRAME-BLUEPRINTS / LOWFI-REVIEW |
+| Game Hub mobile | TERMINÉ — low-fi HTML / BLOQUÉ Figma uniquement | MISSING-WIREFRAME-BLUEPRINTS / LOWFI-REVIEW |
+| High-fi final | BLOQUÉ volontairement ; exploration réversible autorisée | HIGH-FI-GATE |
 | Direction artistique finale | BLOQUÉ volontairement | HIGH-FI-GATE |
-| Tree test humain | PREUVE MANQUANTE | HUMAN-LOWFI-TEST |
+| Tree test humain | EN COURS — P01 réel terminé, validation globale incomplète | HUMAN-MINI-TREE-TEST-P01 / CROSS-ANALYSIS |
 
 ## 22. Capacités historiques à ne pas perdre
 
