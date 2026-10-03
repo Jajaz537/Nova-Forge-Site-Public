@@ -55,7 +55,7 @@ Sans manager connecté, MODARYX ne doit pas prétendre connaître l'état réel 
 Navigation primaire :
 - Découvrir
 - Jeux
-- Mods & Plugins
+- Mods & contenus
 - Collections
 - Créateurs
 - Communauté
@@ -77,7 +77,7 @@ Priorités :
 - Compte / Menu
 
 Menu complet :
-- Mods & Plugins
+- Mods & contenus
 - Collections
 - Créateurs
 - Communauté
@@ -190,8 +190,10 @@ La Bibliothèque doit afficher immédiatement ses sous-objets : Favoris, Suivis,
 **État : P01 comprend Bibliothèque comme espace personnel ; trouvabilité de Profils de jeu à renforcer depuis le Game Hub.**
 
 
-## Mods & Plugins — statut humain
+## Mods & contenus — statut humain
 
-P01 comprend ce libellé comme limité aux mods et plugins. Il ne doit donc pas être considéré comme un parapluie final pour addons, scripts, outils, maps, shaders et presets sans test d'alternative.
+Après benchmark externe et mini-test comparatif P01, **Mods & contenus** devient le libellé parapluie utilisateur provisoire préféré.
 
-**État : À REVALIDER avant gel high-fi.**
+Il doit rester accompagné d'une taxonomie claire par jeu et ne vaut pas validation humaine globale.
+
+**État : préférence P01 obtenue / validation globale EN COURS.**
