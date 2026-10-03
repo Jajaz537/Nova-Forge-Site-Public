@@ -125,7 +125,7 @@ Libellés fonctionnels d'abord ; personnalité MODARYX dans la présentation, pa
 
 - **Découvrir**
 - **Jeux**
-- **Mods & Plugins**
+- **Mods & contenus**
 - **Collections**
 - **Créateurs**
 - **Communauté**
@@ -364,7 +364,7 @@ Header jeu :
 
 Sous-navigation :
 - Aperçu
-- Mods & Plugins
+- Mods & contenus
 - Collections
 - Créateurs
 - Guides
