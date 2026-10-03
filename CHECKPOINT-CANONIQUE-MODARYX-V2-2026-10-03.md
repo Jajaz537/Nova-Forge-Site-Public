@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`585bcc4a4bd3641808266fd525c150719e2d125b`
+`22bb057612512cdebf33ccc653aa42d3431e6489`
 
 PR :
 
@@ -181,6 +181,27 @@ Capacités à préserver après audit :
 - Guide/OS bridge ;
 - monde vivant.
 
+### Audit approfondi modules
+
+**TERMINÉ pour les modules inspectés**
+
+Documents :
+
+- `docs/MODARYX-V2-LEGACY-LOGIC-DEEP-AUDIT-20261003.md`
+- `docs/MODARYX-V2-COMMUNITY-PROFILES-DEEP-AUDIT-20261003.md`
+
+Décisions principales :
+
+- préserver la logique catalogue/recherche, pas leur DOM ;
+- préserver fail-closed downloads ;
+- préserver vérification SHA-256 locale sans surpromesse de sécurité ;
+- préserver Creator Studio local/locked et validation schema ;
+- séparer Collection / Modpack / Profile ;
+- séparer Account / Public Profile / Creator / Team / Authority ;
+- rôles uniquement confirmés serveur ;
+- Turnstile/WebAuthn restent des capacités réelles, jamais simulées ;
+- monde vivant séparé en Reality Context Engine + Experience Adapter.
+
 ## 9. Classification assets
 
 **TERMINÉ — classification initiale**
@@ -223,7 +244,31 @@ Références de performance retenues :
 
 Ces seuils ne valent pas PASS tant que V2 n'existe pas en production mesurable.
 
-## 11. Figma
+## 11. Architecture technique d'isolation
+
+**TERMINÉ — conception**
+
+Document :
+
+`docs/MODARYX-V2-FRONTEND-ISOLATION-ARCHITECTURE-20261003.md`
+
+Contrats :
+
+- nouveau shell ;
+- nouveau namespace UI ;
+- aucun CSS legacy ;
+- aucun renderer DOM legacy ;
+- routing V2 explicite ;
+- nouveau cache/service worker ;
+- namespace localStorage V2 ;
+- build V2 séparé ;
+- tests anti-contamination CI ;
+- preview séparé ;
+- cutover et rollback contrôlés.
+
+Aucun de ces éléments n'est encore implémenté.
+
+## 12. Figma
 
 Fichier :
 
@@ -287,7 +332,7 @@ Mobile :
 
 Recherche, fiche, installation, collection/profil, Creator Studio et Community ont leurs principaux états définis.
 
-## 12. Erreurs Figma et procédure
+## 13. Erreurs Figma et procédure
 
 ### Erreur 1
 
@@ -321,7 +366,7 @@ Erreur exacte :
 
 Aucune relance immédiate.
 
-## 13. Wireframes encore manquants
+## 14. Wireframes encore manquants
 
 **BLOQUÉ Figma / EN COURS conception**
 
@@ -338,7 +383,7 @@ La revue de couverture est tracée dans :
 
 `docs/MODARYX-V2-WIREFRAME-COVERAGE-20261003.md`
 
-## 14. High‑Fi
+## 15. High‑Fi
 
 **BLOQUÉ**
 
@@ -352,7 +397,7 @@ Gate documenté dans :
 
 `docs/MODARYX-V2-HIGH-FI-GATE-20261003.md`
 
-## 15. Validation humaine
+## 16. Validation humaine
 
 **PREUVE MANQUANTE**
 
@@ -371,7 +416,7 @@ Script de test prêt :
 
 Aucune validation humaine n'est inventée.
 
-## 16. Production / infrastructure
+## 17. Production / infrastructure
 
 Inchangés :
 
@@ -387,9 +432,10 @@ Inchangés :
 
 Aucun front V2 production n'a été écrit.
 
-## 17. États courants
+## 18. États courants
 
 - Audit legacy : **TERMINÉ**
+- Audit modules legacy ciblés : **TERMINÉ pour périmètre inspecté**
 - Benchmark : **TERMINÉ**
 - Architecture produit : **TERMINÉ — draft**
 - Taxonomie : **TERMINÉ — draft**
@@ -397,6 +443,7 @@ Aucun front V2 production n'a été écrit.
 - Matrice d'états : **TERMINÉ — conception**
 - Contrat accessibilité/performance/design system : **TERMINÉ — conception**
 - Critères d'acceptation écrans : **TERMINÉ — conception**
+- Architecture isolation frontend : **TERMINÉ — conception**
 - Wireframes core : **EN COURS**
 - Écriture Figma supplémentaire : **BLOQUÉ EXTERNE**
 - Tree testing humain : **PREUVE MANQUANTE**
@@ -404,22 +451,23 @@ Aucun front V2 production n'a été écrit.
 - High-fi : **BLOQUÉ**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
 
-## 18. Prochain point logique automatique
+## 19. Prochain point logique automatique
 
 1. Continuer recherche/specification et audit ne nécessitant pas Figma.
 2. Ne pas relancer Figma tant que le quota Starter reste bloqué.
-3. Dès disponibilité Figma :
+3. Auditer les derniers contrats/données qui pourraient limiter la taxonomie V2.
+4. Dès disponibilité Figma :
    - ajouter Game Hub ;
    - ajouter Global Search ;
    - ajouter Community ;
    - ajouter Mobile Game Hub ;
    - micro-vérifier clipping/overflow.
-4. Exécuter/obtenir tree testing humain.
-5. Corriger les ambiguïtés.
-6. Seulement après : direction artistique, design system final, prototype high-fi.
-7. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
+5. Exécuter/obtenir tree testing humain.
+6. Corriger les ambiguïtés.
+7. Seulement après : direction artistique, design system final, prototype high-fi.
+8. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
-## 19. Règle de reprise
+## 20. Règle de reprise
 
 Pour toute nouvelle conversation :
 
