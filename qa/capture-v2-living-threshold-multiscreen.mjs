@@ -170,6 +170,14 @@ try {
   // Desktop states
   await navigateHome(1440, 1024);
   manifest.captures.push(await capture("desktop-game-hub.png", 1440, 1024, "Mes profils pour ce jeu"));
+  await clickByText(".local-nav button", "Collections");
+  manifest.captures.push(await capture("desktop-game-hub-collections.png", 1440, 1024, "Sélections organisées"));
+  await clickByText(".local-nav button", "Créateurs");
+  manifest.captures.push(await capture("desktop-game-hub-creators.png", 1440, 1024, "Écosystème créateur"));
+  await clickByText(".local-nav button", "Guides");
+  manifest.captures.push(await capture("desktop-game-hub-guides.png", 1440, 1024, "Guides de démonstration indisponibles"));
+  await clickByText(".local-nav button", "Activité");
+  manifest.captures.push(await capture("desktop-game-hub-activity.png", 1440, 1024, "Activité de démonstration"));
 
   await clickByText(".global-nav button", "Jeux");
   manifest.captures.push(await capture("desktop-games-index.png", 1440, 1024, "Trouvez votre prochain terrain de jeu"));
@@ -214,6 +222,10 @@ try {
   // Mobile states
   await navigateHome(390, 844);
   manifest.captures.push(await capture("mobile-game-hub.png", 390, 844, "Mes profils pour ce jeu"));
+  await clickByText(".local-nav button", "Collections");
+  manifest.captures.push(await capture("mobile-game-hub-collections.png", 390, 844, "Sélections organisées"));
+  await clickByText(".local-nav button", "Guides");
+  manifest.captures.push(await capture("mobile-game-hub-guides.png", 390, 844, "Guides de démonstration indisponibles"));
 
   await clickByAriaLabel("Recherche globale");
   manifest.captures.push(await capture("mobile-global-search.png", 390, 844, "Rechercher dans MODARYX"));
