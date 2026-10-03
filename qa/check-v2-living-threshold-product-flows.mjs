@@ -184,9 +184,12 @@ try{
   await waitText("Support indisponible dans cette démo");
   await clickText(".detail-tabs button","Signalement");
   await waitText("Signaler ce contenu");
-  await waitText("Droits / licence");
+  await clickText(".report-section .primary","Préparer le signalement local");
+  await waitText("Choisissez une raison avant de préparer le signalement.");
+  await selectValue(".report-field select","Droits / licence");
   await clickText(".report-section .primary","Préparer le signalement local");
   await waitText("Brouillon de signalement — non envoyé");
+  console.log("FLOW_ASSERT report validation error retry recovered");
   await clickText(".detail-tabs button","Permissions");
   await waitText("Aucune licence de distribution réelle");
 
