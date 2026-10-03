@@ -787,3 +787,48 @@ Aucun front V2 production n'a été écrit.
 Pour toute nouvelle conversation :
 
 > Lire ce checkpoint en priorité, vérifier Git frais, puis continuer au prochain point logique sans reconstruire l'état depuis les anciens chats.
+
+
+## AUDIT EXHAUSTIF DU CODE — PRIORITÉ N°1
+
+**Décision utilisateur : priorité absolue avant tout nouveau frontend V2.**
+
+État frais de départ :
+- dépôt `Jajaz537/Nova-Forge-Site-Public`
+- `main` : `d8d5ea5509f07c5bf5a4424293cfa404643c239f`
+- inventaire : **525 fichiers**
+- frontend V2 : **BLOQUÉ volontairement** jusqu'à fermeture suffisante de l'audit anti-contamination.
+
+Phases terminées :
+- `docs/MODARYX-V2-CODE-AUDIT-PHASE1-20261003.md`
+- `docs/MODARYX-V2-CODE-AUDIT-PHASE2-SCRIPTS-20261003.md`
+- `docs/MODARYX-V2-CODE-AUDIT-PHASE3-CSS-20261003.md`
+
+Findings critiques déjà prouvés :
+- `sw.js` précache et peut resservir des CSS/JS legacy ;
+- `shell.js` enregistre automatiquement le SW et mélange navigation, préférences, DOM et monde vivant ;
+- plusieurs scripts utiles sont fortement couplés au DOM V1 et doivent être **extraits**, pas importés ;
+- plusieurs CSS redéfinissent `:root`, `body`, `nav`, `.card`, `.button`, `.panel` et autres sélecteurs globaux ;
+- `modaryx-home-finishline.css` embarque du CSS/tokens Nova historiques ;
+- aucun stylesheet V1 ne doit être importé dans V2.
+
+Classification obligatoire :
+- RÉUTILISABLE
+- À EXTRAIRE
+- LEGACY VISUEL
+- HISTORIQUE / PROVENANCE
+- À BLOQUER
+- À REVALIDER
+
+Prochain ordre d'audit :
+1. `functions/`
+2. `schemas/`
+3. `data/`
+4. `.github/workflows/`
+5. `qa/`
+6. `migrations/`
+7. pages jeu / projet / docs ;
+8. générateurs et pipeline build.
+
+Règle :
+> Aucun premier code frontend V2 tant que les risques de contamination actifs n'ont pas été inventoriés et isolés.
