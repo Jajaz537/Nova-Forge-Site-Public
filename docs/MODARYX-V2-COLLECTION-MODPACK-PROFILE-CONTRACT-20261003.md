@@ -38,6 +38,15 @@ Propriétés :
 
 Une Collection n'est pas automatiquement installable.
 
+### Capacité visible
+
+Le nom **Collection** ne suffit pas à indiquer sa capacité. L'UI doit afficher explicitement son statut, par exemple :
+- **Sélection organisée** ;
+- **Installation non disponible** lorsque c'est le cas ;
+- une capacité d'installation uniquement si un mécanisme réel, résolu et autorisé existe.
+
+Microcopy de travail : **Sélection organisée à partager**.
+
 ### Microcopy utilisateur
 
 Une preuve humaine réelle montre que le mot **Collection** n'est pas nécessairement le premier terme spontané pour une sélection thématique partageable.
@@ -67,6 +76,8 @@ Propriétés :
 - état de distribution.
 
 ## 5. Profile / Loadout
+
+**Libellé UI provisoire : Configurations de jeu**
 
 Fonction :
 - représenter une configuration utilisateur concrète.
@@ -161,8 +172,8 @@ Peut être :
 - unlisted
 - public
 
-### Profile
-Privé/local par défaut.
+### Configuration de jeu (`Profile` interne)
+Privée/locale par défaut.
 
 ### Modpack
 Partage seulement si :
@@ -212,7 +223,7 @@ Collections :
 - notes ;
 - actions principales.
 
-Profiles :
+Configurations de jeu :
 - état local/sync ;
 - conflicts ;
 - releases ;
@@ -237,3 +248,10 @@ Avant high-fi :
 - confidentialité définie.
 
 **État : TERMINÉ pour le contrat produit / NON IMPLÉMENTÉ volontairement.**
+
+
+## Convergence P01 + Work + étude indépendante
+
+- `Collection` reste l'objet domaine, mais son caractère éditorial / installable doit être explicite.
+- `Profile/Loadout` reste interne ; **Configurations de jeu** devient le libellé utilisateur provisoire.
+- Ces choix restent à revalider humainement avant gel high-fi final.
