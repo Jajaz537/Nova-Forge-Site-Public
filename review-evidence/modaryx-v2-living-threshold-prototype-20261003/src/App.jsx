@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ArrowRight, Bell, BookOpen, Check, FunnelSimple, GameController, GridFour,
   List, MagnifyingGlass, Plus, SlidersHorizontal, Stack, UsersThree, X
@@ -413,6 +413,13 @@ export function App() {
   const [active, setActive] = useState("Jeux");
   const [detail, setDetail] = useState(null);
   const [gameHubOpen,setGameHubOpen]=useState(true);
+  const [online,setOnline]=useState(()=>typeof navigator==="undefined"?true:navigator.onLine);
+  useEffect(()=>{
+    const syncConnectivity=()=>setOnline(navigator.onLine);
+    window.addEventListener("online",syncConnectivity);
+    window.addEventListener("offline",syncConnectivity);
+    return ()=>{window.removeEventListener("online",syncConnectivity);window.removeEventListener("offline",syncConnectivity);};
+  },[]);
   const navigate = item => { setDetail(null); setGameHubOpen(false); setActive(item); window.scrollTo({top:0,behavior:'smooth'}); };
   const openGameHub=()=>{setDetail(null);setActive("Jeux");setGameHubOpen(true);window.scrollTo({top:0,behavior:'smooth'});};
   const openContent=item=>{setDetail(item);window.scrollTo({top:0,behavior:'smooth'});};
@@ -430,5 +437,5 @@ export function App() {
   else if(active==='Créer') screen=<CreatorStudio/>;
   else if(active==='Bibliothèque') screen=<Library/>;
   else screen=<GameHub onOpen={openContent}/>;
-  return <div className="app-shell"><Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button></footer></div>;
+  return <div className="app-shell">{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button></footer></div>;
 }
