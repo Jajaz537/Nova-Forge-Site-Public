@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`1975339ae9796032ef92f2680a29321b5b6f9a86`
+`2d698e947e8a4671117caf6065f514266046ff33`
 
 PR :
 
@@ -814,6 +814,13 @@ Aucun front V2 production n'a été écrit.
 - Script low-fi humain : **MIS À JOUR — 14 tâches, PREUVE MANQUANTE pour exécution**
 - Kit validation humaine IA : **TERMINÉ — protocole prêt ; P01 réel partiellement exécuté**
 - Simulation experte multi-profils du tree test : **TERMINÉ — ne remplace pas une validation humaine**
+- Test terminologique indépendant assistant : **TERMINÉ — 6 profils synthétiques × 6 questions**
+  - document : `docs/MODARYX-V2-ASSISTANT-INDEPENDENT-TERMINOLOGY-TEST-20261003.md`
+  - simulation IA uniquement, aucune statistique humaine ;
+  - convergence interne : Profils de jeu défendable, Collection + capacité explicite, Bibliothèque valide, Mods & Plugins trop étroit, Non vérifié trop ambigu, Mods & contenus meilleur compromis simulé.
+- Test terminologique Work : **PREUVE MANQUANTE — mission prête, rapport non reçu**
+  - mission locale préparée dans `MODARYX-V2-WORK-TERMINOLOGY-PACK-20261003.zip` ;
+  - doit rester indépendant de P01 et du test assistant jusqu'à son propre verdict.
 - Benchmark terminologique multi-gaming / gaming / modding : **TERMINÉ — Nexus, CurseForge, Modrinth, Thunderstore, Steam Workshop, Bethesda, mod.io, ModDB, GameBanana**
   - document : `docs/MODARYX-V2-MULTIGAMING-MODDING-TERMINOLOGY-BENCHMARK-20261003.md`
   - confirme **Profils de jeu** comme convention défendable ;
@@ -863,9 +870,10 @@ Aucun front V2 production n'a été écrit.
 9. Mini-test terminologique P01 TERMINÉ : **Profils de jeu** préféré ; Collection et Bibliothèque comprises ; **Mods & Plugins** trop étroit comme parapluie ; **Non vérifié** générique écarté.
 10. Benchmark externe multi-gaming TERMINÉ : **Contenus de jeu**, **Mods & contenus** et **Créations** ont été comparés.
 11. Mini-test humain parapluie P01 TERMINÉ : **Mods & contenus** choisi. Document : `docs/MODARYX-V2-HUMAN-CONTENT-UMBRELLA-MINITEST-P01-20261003.md`.
-12. Prochain risque UX : consolider ce libellé avec d'autres humains lors de la prochaine validation, sans bloquer l'exploration réversible.
-13. Continuer en parallèle vers la direction artistique exploratoire et le design system préparatoire ; aucun gel high-fi/microcopy finale sans preuve humaine suffisante.
-14. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
+12. Test assistant 6×6 TERMINÉ ; lancer maintenant le même protocole chez Work en aveugle. Résultat Work : PREUVE MANQUANTE tant que le rapport n'est pas revenu.
+13. Ensuite comparer P01 + assistant + Work, puis seulement consolider le libellé avec d'autres humains si nécessaire.
+14. Continuer en parallèle vers la direction artistique exploratoire et le design system préparatoire ; aucun gel high-fi/microcopy finale sans preuve humaine suffisante.
+15. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
 ## 30. Règle de reprise
 
