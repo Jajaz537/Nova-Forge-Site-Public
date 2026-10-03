@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`4dcdc1e11d186b457fccccb0e6af66a36b6cb33e`
+`dd01067bf2155c7e7fbf88fe4477bbdae7a2d5d2`
 
 PR :
 
@@ -821,12 +821,19 @@ Aucun front V2 production n'a été écrit.
 - Test terminologique Work : **PREUVE MANQUANTE — mission prête, rapport non reçu**
   - mission locale préparée dans `MODARYX-V2-WORK-TERMINOLOGY-PACK-20261003.zip` ;
   - doit rester indépendant de P01 et du test assistant jusqu'à son propre verdict.
+- Décision produit finale — **Profils de jeu** : **TERMINÉ**
+  - document : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-GAME-PROFILES-20261003.md`
+  - UI : **Profils de jeu**
+  - microcopy : **Configurations enregistrées de mods, versions et réglages.**
+  - Game Hub : **Mes profils pour ce jeu**
+  - domaine interne : `Profile/Loadout`
+  - arbitrage `Profils de jeu` vs `Configurations de jeu` : **FERMÉ**
 - Rapport Work terminologique indépendant : **TERMINÉ — 9 écosystèmes / 6 profils synthétiques / 36 réponses**
   - ingestion : `docs/MODARYX-V2-WORK-TERMINOLOGY-REPORT-INGEST-20261003.md`
   - analyse croisée finale : `docs/MODARYX-V2-FINAL-TERMINOLOGY-CROSS-ANALYSIS-P01-ASSISTANT-WORK-20261003.md`
   - indépendance déclarée : P01 et test assistant non consultés avant rédaction ;
   - convergence forte : **Mods & contenus**, Collection avec capacité explicite, Bibliothèque personnelle, suppression de `Non vérifié` générique ;
-  - divergence restante : **Profils de jeu** vs **Configurations de jeu**.
+  - divergence de recherche documentée : **Profils de jeu** vs **Configurations de jeu** ; décision produit désormais FERMÉE en faveur de **Profils de jeu**.
 - Benchmark terminologique multi-gaming / gaming / modding : **TERMINÉ — Nexus, CurseForge, Modrinth, Thunderstore, Steam Workshop, Bethesda, mod.io, ModDB, GameBanana**
   - document : `docs/MODARYX-V2-MULTIGAMING-MODDING-TERMINOLOGY-BENCHMARK-20261003.md`
   - confirme **Profils de jeu** comme convention défendable ;
@@ -855,7 +862,7 @@ Aucun front V2 production n'a été écrit.
 - Écriture Figma supplémentaire : **BLOQUÉ EXTERNE**
 - Tree testing humain : **EN COURS — P01 réel terminé / autres profils utiles pour consolider**
 - Direction artistique : **EXPLORATION RÉVERSIBLE AUTORISÉE / finale BLOQUÉE**
-- High-fi final : **BLOQUÉ — validation humaine globale et microcopy critique non figées**
+- High-fi final : **BLOQUÉ — autres validations humaines/visuelles encore requises ; wording `Profils de jeu` désormais figé par décision produit**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
 
 ## 29. Prochain point logique automatique
