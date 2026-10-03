@@ -163,9 +163,29 @@ jobs:
 
   mobile-capture:
     needs: canon-gate
-    name: Capture home mobile
+    name: Capture ${{ matrix.name }} mobile
     runs-on: [self-hosted, Windows, X64]
     timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: home
+            file: 'index.html'
+          - name: univers
+            file: 'univers.html'
+          - name: compagnons
+            file: 'compagnons.html'
+          - name: aventures
+            file: 'aventures.html'
+          - name: lieux
+            file: 'lieux.html'
+          - name: factions
+            file: 'factions.html'
+          - name: communaute
+            file: 'communaute.html'
+          - name: not-found
+            file: '404.html'
     steps:
       - name: Checkout exact candidate
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -174,7 +194,7 @@ jobs:
           fetch-depth: 1
           clean: true
 
-      - name: Capture mobile homepage through local HTTP
+      - name: Capture mobile route through local HTTP
         shell: powershell
         run: |
           $ErrorActionPreference = 'Stop'
@@ -204,7 +224,7 @@ jobs:
           $server = Start-Process -FilePath 'powershell.exe' -ArgumentList $serverArgs -PassThru -WindowStyle Hidden
 
           try {
-            $target = 'http://127.0.0.1:' + $port + '/index.html?qa=' + $env:GITHUB_SHA
+            $target = 'http://127.0.0.1:' + $port + '/${{ matrix.file }}?qa=' + $env:GITHUB_SHA
             for ($i = 0; $i -lt 30; $i++) {
               try {
                 $response = Invoke-WebRequest -UseBasicParsing -Uri $target -TimeoutSec 2
@@ -215,10 +235,10 @@ jobs:
             if (-not $response -or $response.StatusCode -ne 200) { throw ('LOCAL_HTTP_UNAVAILABLE ' + $target) }
 
             New-Item -ItemType Directory -Force -Path visual-qa | Out-Null
-            $profile = Join-Path $env:RUNNER_TEMP ('modaryx-http-mobile-' + $env:GITHUB_RUN_ID + '-' + $env:GITHUB_RUN_ATTEMPT)
+            $profile = Join-Path $env:RUNNER_TEMP ('modaryx-http-mobile-${{ matrix.name }}-' + $env:GITHUB_RUN_ID + '-' + $env:GITHUB_RUN_ATTEMPT)
             Remove-Item -Recurse -Force $profile -ErrorAction SilentlyContinue
             New-Item -ItemType Directory -Force -Path $profile | Out-Null
-            $shot = Join-Path $PWD 'visual-qa\home-mobile.png'
+            $shot = Join-Path $PWD 'visual-qa\${{ matrix.name }}-mobile.png'
             $args = @(
               '--headless=new','--disable-gpu','--hide-scrollbars',
               '--no-first-run','--no-default-browser-check',
@@ -231,7 +251,7 @@ jobs:
             for ($i = 0; $i -lt 40 -and -not (Test-Path -LiteralPath $shot); $i++) { Start-Sleep -Milliseconds 500 }
             if (-not (Test-Path -LiteralPath $shot)) { throw 'MOBILE_SCREENSHOT_MISSING' }
             if ($p -and -not $p.HasExited) { Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue }
-            Write-Host 'CAPTURED home mobile through local HTTP'
+            Write-Host ('CAPTURED ${{ matrix.name }} mobile ' + $target)
           } finally {
             if ($server -and -not $server.HasExited) { Stop-Process -Id $server.Id -Force -ErrorAction SilentlyContinue }
           }
@@ -239,9 +259,9 @@ jobs:
       - name: Upload mobile screenshot
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: modaryx-visual-home-mobile
-          path: visual-qa/home-mobile.png
+          name: modaryx-visual-${{ matrix.name }}-mobile
+          path: visual-qa/${{ matrix.name }}-mobile.png
           if-no-files-found: error
           retention-days: 3
 
-# qa-trigger: full-public-surface
+# qa-trigger: exhaustive-desktop-mobile-surface
