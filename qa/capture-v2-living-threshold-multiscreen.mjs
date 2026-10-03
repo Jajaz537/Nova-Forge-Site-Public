@@ -185,6 +185,13 @@ try {
   await clickByText(".global-nav button", "Mods & contenus");
   manifest.captures.push(await capture("desktop-catalog.png", 1440, 1024, "Catalogue global"));
 
+  await clickByText(".global-nav button", "Collections");
+  manifest.captures.push(await capture("desktop-collections.png", 1440, 1024, "Sélections de mods à organiser et partager"));
+
+  await clickByText(".global-nav button", "Créateurs");
+  manifest.captures.push(await capture("desktop-creators.png", 1440, 1024, "Créateurs, équipes et studios"));
+
+  await clickByText(".global-nav button", "Mods & contenus");
   await clickSelector(".card-hit");
   manifest.captures.push(await capture("desktop-content-detail.png", 1440, 1024, "Avant d’ajouter"));
 
@@ -224,6 +231,14 @@ try {
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Créer");
   manifest.captures.push(await capture("mobile-creator-studio.png", 390, 844, "Creator Studio"));
+
+  await clickSelector(".mobile-menu");
+  await clickByText(".global-nav button", "Collections");
+  manifest.captures.push(await capture("mobile-collections.png", 390, 844, "Sélections de mods à organiser et partager"));
+
+  await clickSelector(".mobile-menu");
+  await clickByText(".global-nav button", "Créateurs");
+  manifest.captures.push(await capture("mobile-creators.png", 390, 844, "Créateurs, équipes et studios"));
 
   const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/manifest.json";
   writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
