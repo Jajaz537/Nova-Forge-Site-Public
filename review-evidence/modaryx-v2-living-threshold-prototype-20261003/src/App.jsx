@@ -190,7 +190,49 @@ function Catalog({ onOpen }) {
 function Detail({ item, onBack }) {
   const selected=item||contentItems[0];
   const [added,setAdded]=useState(false);
-  return <main className="detail"><button className="back" onClick={onBack}>← Retour aux contenus</button><div className="detail-grid"><Media pos={selected.pos} className="detail-media"/><section className="detail-copy"><span className="kicker">{selected.kind}</span><h1>{selected.title}</h1><div className="detail-states"><Compatibility/><span className="version-pill">Aetherlands 1.4.2</span></div><p className="lede">Une proposition visuelle et narrative qui enrichit le monde sans rompre son équilibre. Contenu de démonstration non contractuel.</p><div className="trust-panel"><h2>Avant d’ajouter</h2><dl><div><dt>Version</dt><dd>1.4.2</dd></div><div><dt>Dépendances</dt><dd>Aucune</dd></div><div><dt>Source</dt><dd>Créateur de démonstration</dd></div></dl></div><button className={added?'primary success':'primary'} onClick={()=>setAdded(v=>!v)}>{added?<><Check/>Ajouté au profil Exploration</>:<><Plus/>Ajouter à un profil</>}</button></section></div></main>;
+  const [tab,setTab]=useState("Aperçu");
+  const tabs=["Aperçu","Fichiers","Versions","Compatibilité et prérequis","Changelog","Support","Permissions"];
+
+  const tabContent = {
+    "Aperçu": <section className="detail-section"><h2>À propos</h2><p>Cette fiche matérialise la décision avant ajout à un profil. Le contenu présenté ici est une démonstration : aucune donnée de popularité, aucun téléchargement et aucun scan réel ne sont simulés.</p><div className="detail-feature-grid"><article><strong>But</strong><span>Enrichir l’exploration sans modifier les règles de base.</span></article><article><strong>Installation</strong><span>Ajout à un profil uniquement dans ce prototype.</span></article><article><strong>Limitation</strong><span>Aucun runtime MODARYX Forge connecté à cette démo.</span></article></div></section>,
+    "Fichiers": <section className="detail-section"><h2>Fichiers de cette version</h2><article className="file-row"><div><strong>Package de démonstration</strong><span>Version du mod 1.4.2 · canal stable de démonstration</span></div><dl><div><dt>SHA-256</dt><dd>Non calculé — démonstration</dd></div><div><dt>Distribution</dt><dd>Indisponible au téléchargement</dd></div><div><dt>Scan</dt><dd>Aucun scan réel associé</dd></div></dl></article></section>,
+    "Versions": <section className="detail-section"><h2>Versions</h2><div className="version-history"><article><strong>1.4.2</strong><span>Version actuelle de démonstration · compatible avec Aetherlands 1.4.2</span></article><article><strong>1.4.1</strong><span>Historique de démonstration · distribution non exposée</span></article></div></section>,
+    "Compatibilité et prérequis": <section className="detail-section"><h2>Compatibilité et prérequis</h2><p>Versions compatibles et éléments nécessaires avant installation.</p><div className="requirements-grid"><article><span className="requirement-kind">Compatibilité</span><strong>Aetherlands 1.4.2</strong><p>Compatible dans le contexte de démonstration.</p></article><article><span className="requirement-kind">Requis</span><strong>Aether Core</strong><p>Dépendance fictive de démonstration · version 1.x.</p></article><article><span className="requirement-kind">Conflits connus</span><strong>Aucun conflit déclaré</strong><p>Cela ne constitue pas une vérification réelle.</p></article></div></section>,
+    "Changelog": <section className="detail-section"><h2>Changelog</h2><article className="changelog-row"><strong>1.4.2</strong><span>Démonstration : amélioration des sentiers, correction de transitions visuelles, aucune migration réelle requise.</span></article></section>,
+    "Support": <section className="detail-section"><h2>Support</h2><p>Les questions, bugs et discussions de cette démo ne sont pas connectés à un service réel.</p><button className="quiet" disabled>Support indisponible dans cette démo</button></section>,
+    "Permissions": <section className="detail-section"><h2>Permissions</h2><dl className="permissions-list"><div><dt>Licence</dt><dd>Démonstration — aucune licence de distribution réelle</dd></div><div><dt>Redistribution</dt><dd>Non définie</dd></div><div><dt>Modification</dt><dd>Non définie</dd></div><div><dt>Provenance</dt><dd>Asset de démonstration MODARYX V2</dd></div></dl></section>,
+  };
+
+  return <main className="detail">
+    <button className="back" onClick={onBack}>← Retour aux contenus</button>
+    <div className="detail-grid">
+      <div className="detail-main">
+        <Media pos={selected.pos} className="detail-media"/>
+        <nav className="detail-tabs" aria-label="Sections de la fiche contenu">{tabs.map(value=><button key={value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>
+        {tabContent[tab]}
+      </div>
+      <aside className="detail-copy">
+        <span className="kicker">{selected.kind}</span>
+        <h1>{selected.title}</h1>
+        <p className="creator-line">par <strong>{selected.creator}</strong> · Aetherlands</p>
+        <div className="detail-states"><Compatibility/><span className="version-pill">Version du jeu 1.4.2</span><span className="version-pill">Version du mod 1.4.2</span></div>
+        <p className="lede">Une proposition visuelle et narrative qui enrichit le monde sans rompre son équilibre. Contenu de démonstration non contractuel.</p>
+        <div className="decision-panel">
+          <h2>Avant d’ajouter</h2>
+          <div className="decision-alert"><Check weight="bold"/><span><strong>Compatible avec votre configuration de démonstration</strong><small>Aetherlands 1.4.2</small></span></div>
+          <dl>
+            <div><dt>Prérequis obligatoire</dt><dd>Aether Core 1.x</dd></div>
+            <div><dt>Conflit majeur connu</dt><dd>Aucun déclaré</dd></div>
+            <div><dt>Distribution</dt><dd>Démonstration uniquement</dd></div>
+            <div><dt>Provenance</dt><dd>Démo locale — non attestée</dd></div>
+            <div><dt>Scan de sécurité</dt><dd>Aucun scan réel</dd></div>
+          </dl>
+        </div>
+        <button className={added?'primary success':'primary'} onClick={()=>setAdded(v=>!v)}>{added?<><Check/>Ajouté au profil Exploration</>:<><Plus/>Ajouter à un profil</>}</button>
+        <p className="action-note">Aucune installation locale n’est déclenchée par ce prototype.</p>
+      </aside>
+    </div>
+  </main>;
 }
 
 function Library() { return <main className="page-section library"><span className="kicker">Votre espace</span><h1>Bibliothèque</h1><p className="page-intro">Retrouvez vos jeux, profils et contenus enregistrés.</p><div className="library-grid"><section className="library-focus"><Media pos="50% 100%"/><div><span className="demo-label">Jeu actif</span><h2>Aetherlands</h2><p>3 profils · version 1.4.2</p><button className="primary">Ouvrir le Game Hub <ArrowRight/></button></div></section><ProfilesRail/></div></main>; }
