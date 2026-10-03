@@ -217,7 +217,20 @@ La comparaison n'implique aucune copie de leur identité.
 3. P01 humain : mini-test critique + mini-test terminologique TERMINÉS ; validation humaine globale : EN COURS ;
 4. convergence P01 + Work + étude indépendante : TERMINÉE ;
 5. P01 préfère **Profils de jeu**, comprend **Collection** et **Bibliothèque** ; ces points restent à consolider avec d'autres humains mais ne sont plus les principaux risques de wording ;
-6. **Mods & contenus** devient le libellé parapluie provisoire préféré après benchmark externe + choix humain P01 ; validation globale encore EN COURS ;
+6. **Mods & contenus** devient le libellé parapluie provisoire préféré après benchmark externe + P01 + simulation assistant + simulation Work ; validation humaine globale encore EN COURS ;
 7. le badge générique **Non vérifié** est écarté : toujours qualifier Compatibilité / Provenance / Scan / risque réel.
 
 Ce blocage n'empêche pas la direction artistique exploratoire, le design system préparatoire ni les prototypes comparatifs réversibles. Il interdit uniquement de présenter la microcopy ou le high-fi comme humainement validés/finalisés.
+
+
+## 14. État terminologique après test Work en aveugle
+
+Convergences suffisantes pour poursuivre l'exploration réversible :
+- **Mods & contenus** ;
+- Collection avec capacité explicite ;
+- Bibliothèque comme espace personnel ;
+- suppression de **Non vérifié** générique.
+
+Le **seul arbitrage terminologique majeur encore ouvert** est **Profils de jeu** vs **Configurations de jeu**.
+
+Ce point ne bloque pas l'exploration artistique, mais bloque le gel final de la microcopy.
