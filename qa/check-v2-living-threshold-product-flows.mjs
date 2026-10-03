@@ -200,6 +200,11 @@ try{
   await waitText("Sélections organisées");
   await clickText(".library-tabs button","Profils de jeu");
   await waitText("Connexion MODARYX Forge");
+  await clickText(".profile-library article:first-child .quiet","Ouvrir");
+  await waitText("Configuration personnelle de démonstration pour Aetherlands 1.4.2");
+  await waitText("Manager non connecté");
+  await clickText(".back","Retour à la Bibliothèque");
+  await waitText("Retrouvez favoris, suivis, collections et profils sans les confondre.");
 
   await clickText(".global-nav button","Créer");
   await waitText("Creator Studio");
@@ -220,6 +225,11 @@ try{
   await clickText(".filter-chips button","Toutes");
   await fill(".collections-page .catalog-search input","");
   assertEqual(await count(".collection-card"),3,"collections reset count");
+  await clickText(".collection-mode-tabs button","Modpacks");
+  await waitText("Aetherlands — Essentiel");
+  await waitText("PREUVE MANQUANTE — aucun manifeste réel");
+  const modpackDisabled=await evaluate(`(() => {const b=document.querySelector('.modpack-surface .primary');return !!b&&b.disabled;})()`);
+  if(!modpackDisabled) throw new Error("modpack install action must stay disabled without runtime");
 
   await clickText(".global-nav button","Créateurs");
   await waitText("Créateurs, équipes et studios.");
@@ -282,6 +292,9 @@ try{
   await waitText("Retrouvez favoris, suivis, collections et profils sans les confondre.");
   await clickText(".library-tabs button","Profils de jeu");
   await waitText("Connexion MODARYX Forge");
+  await clickText(".profile-library article:first-child .quiet","Ouvrir");
+  await waitText("Manager non connecté");
+  await clickText(".back","Retour à la Bibliothèque");
 
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav button","Créer");
@@ -291,7 +304,9 @@ try{
 
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav button","Collections");
-  await waitText("Sélections de mods à organiser et partager.");
+  await waitText("Organiser n’est pas installer.");
+  await clickText(".collection-mode-tabs button","Modpacks");
+  await waitText("Aetherlands — Essentiel");
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav button","Créateurs");
   await waitText("Créateurs, équipes et studios.");
