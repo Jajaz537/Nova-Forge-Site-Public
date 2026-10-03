@@ -170,6 +170,13 @@ try{
   await clickText(".detail-tabs button","Fichiers");
   await waitText("Fichiers de cette version");
   await waitText("Aucun scan réel associé");
+  await clickText(".detail-tabs button","Support");
+  await waitText("Support indisponible dans cette démo");
+  await clickText(".detail-tabs button","Signalement");
+  await waitText("Signaler ce contenu");
+  await waitText("Droits / licence");
+  await clickText(".report-section .primary","Préparer le signalement local");
+  await waitText("Brouillon de signalement — non envoyé");
   await clickText(".detail-tabs button","Permissions");
   await waitText("Aucune licence de distribution réelle");
 
