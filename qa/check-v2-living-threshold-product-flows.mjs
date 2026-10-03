@@ -159,6 +159,20 @@ try{
   await clickText(".detail-tabs button","Permissions");
   await waitText("Aucune licence de distribution réelle");
 
+  await clickAria("Notifications");
+  await waitText("Centre de notifications");
+  await waitText("Aucune notification réelle");
+  await clickText(".account-nav button","Confidentialité");
+  await waitText("Privé par défaut");
+
+  await clickAria("Compte");
+  await waitText("Vous explorez MODARYX en mode invité.");
+  await clickText(".account-panel .primary","Découvrir l’onboarding joueur");
+  await waitText("Onboarding joueur · 1/4");
+  await clickText(".onboarding-actions .primary","Suivant");
+  await waitText("Types de contenus");
+  await clickText(".onboarding-actions .quiet","Passer l’onboarding");
+
   await clickAria("Bibliothèque");
   await waitText("Retrouvez favoris, suivis, collections et profils sans les confondre.");
   await clickText(".library-tabs button","Collections");
@@ -228,6 +242,13 @@ try{
   await waitText("Sentiers de l’aube");
 
   await load(390,844);
+  await clickAria("Ouvrir le menu");
+  await clickText(".global-nav .mobile-nav-utility","Notifications");
+  await waitText("Centre de notifications");
+  await clickAria("Ouvrir le menu");
+  await clickText(".global-nav .mobile-nav-utility","Compte");
+  await waitText("Vous explorez MODARYX en mode invité.");
+
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav .mobile-nav-utility","Bibliothèque");
   await waitText("Retrouvez favoris, suivis, collections et profils sans les confondre.");
