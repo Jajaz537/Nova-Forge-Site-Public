@@ -1,0 +1,51 @@
+import fs from "node:fs";
+
+const path = "qa/modaryx-v2-production-surface-map.json";
+const data = JSON.parse(fs.readFileSync(path, "utf8"));
+
+const required = [
+  "homepage","games-index","game-hub","catalog","global-search","content-detail",
+  "requirements-dependencies","release-files","collection","modpack","profile-loadout",
+  "creator-profile","creator-studio","community","library","security-trust",
+  "mobile-navigation","mobile-catalog","mobile-content-detail",
+  "account-settings","notifications","offline-stale"
+];
+
+if (data.schemaVersion !== 1) throw new Error("unexpected schemaVersion");
+if (!Array.isArray(data.surfaces)) throw new Error("surfaces missing");
+const ids = data.surfaces.map(x => x.id);
+if (new Set(ids).size !== ids.length) throw new Error("duplicate surface id");
+
+for (const id of required) {
+  if (!ids.includes(id)) throw new Error("missing required surface: " + id);
+}
+
+for (const surface of data.surfaces) {
+  for (const field of ["id","acceptance","prototypeStatus","productionStatus","mobile"]) {
+    if (!surface[field]) throw new Error(`surface ${surface.id || "unknown"} missing ${field}`);
+  }
+  for (const field of ["components","domains","states"]) {
+    if (!Array.isArray(surface[field]) || surface[field].length === 0) {
+      throw new Error(`surface ${surface.id} missing non-empty ${field}`);
+    }
+  }
+  if (surface.productionStatus !== "BLOCKED_GATE") {
+    throw new Error(`surface ${surface.id} must remain BLOCKED_GATE before production root approval`);
+  }
+}
+
+const unresolved = new Set(data.unresolvedRealRuntimeStates || []);
+for (const requiredState of [
+  "session-expired-real",
+  "permission-denied-server-real",
+  "backend-error-real",
+  "sync-conflict-real",
+  "pwa-service-worker-production",
+  "modaryx-forge-install-runtime"
+]) {
+  if (!unresolved.has(requiredState)) throw new Error("missing unresolved runtime state: " + requiredState);
+}
+
+console.log("SURFACE_MAP_COUNT", data.surfaces.length);
+console.log("UNRESOLVED_RUNTIME_COUNT", unresolved.size);
+console.log("PASS_V2_PRODUCTION_SURFACE_MAP");
