@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`da09e9ae391c59da33b93ca583c753ac56893e42`
+`526132c88a96d8302f14e18330eddf7c0620b788`
 
 PR :
 
@@ -687,12 +687,14 @@ Revue de couverture :
 
 - couverture conceptuelle core : TERMINÉE ;
 - prototype low-fi HTML des 4 écrans complémentaires : TERMINÉ et QA mécanique verte ;
-- P01 humain : TERMINÉ pour 5 questions critiques ;
+- P01 humain : mini-test critique + mini-test terminologique TERMINÉS ;
 - étude indépendante interne 5×16 : TERMINÉE ;
 - étude Work indépendante 5×16 : TERMINÉE ;
 - convergence croisée : TERMINÉE ;
 - validation humaine globale : EN COURS ;
-- libellés critiques encore à revalider avant gel final : **Configurations de jeu**, capacité des **Collections**, **Bibliothèque**, portée de **Mods & Plugins**, états **Non vérifié** ;
+- résultats terminologiques P01 : **Profils de jeu** préféré à Configurations de jeu ; **Collection** comprise comme sélection organisée ; **Bibliothèque** comprise comme espace personnel ; **Mods & Plugins** jugé trop étroit comme parapluie ; **Non vérifié** jugé ambigu ;
+- principal libellé encore à revalider : alternative plus large à **Mods & Plugins** ;
+- `Non vérifié` générique est désormais interdit : toujours qualifier la dimension ;
 - Figma MCP : BLOQUÉ EXTERNE pour nouvelles écritures.
 
 Gate :
@@ -722,9 +724,13 @@ Une première preuve humaine réelle existe désormais :
 - document : `docs/MODARYX-V2-HUMAN-MINI-TREE-TEST-P01-20261003.md` ;
 - Favoris : compris naturellement ;
 - `Catalogue consultable` : compris comme consultation sans téléchargement garanti ;
-- Profils de jeu : trouvabilité insuffisante depuis Bibliothèque seule ;
-- Collection : terme non spontané, besoin de microcopy ;
+- Profils de jeu : trouvabilité insuffisante depuis Bibliothèque seule ; le mini-test terminologique P01 préfère néanmoins **Profils de jeu** à **Configurations de jeu** ;
+- Collection : terme non spontané au premier test, mais compris comme sélection organisée dans le mini-test terminologique ; capacité d'installation toujours explicite ;
 - conflits/prérequis : attente d'avertissement proactif avant action.
+- document : `docs/MODARYX-V2-HUMAN-TERMINOLOGY-MINITEST-P01-20261003.md` ;
+- Bibliothèque : comprise comme espace personnel ;
+- Mods & Plugins : **ne couvre pas spontanément** addons/scripts/outils/maps/shaders/presets pour P01 ;
+- Non vérifié : compris simultanément comme danger potentiel, absence de test et provenance inconnue → libellé générique à écarter.
 
 **Validation humaine globale : EN COURS — ne pas généraliser à tous les utilisateurs à partir d'un seul participant.**
 
@@ -811,7 +817,7 @@ Aucun front V2 production n'a été écrit.
 - Rapport Work indépendant : **TERMINÉ — 5 profils × 16 tâches / P01 non consulté**
   - ingestion : `docs/MODARYX-V2-WORK-REPORT-INGEST-20261003.md`
   - analyse croisée : `docs/MODARYX-V2-CROSS-ANALYSIS-P01-WORK-INTERNAL-20261003.md`
-  - convergences : Collection ambiguë, `Configurations de jeu` provisoire, compatibilité/prérequis proactifs, version→fichiers, recherche globale/contextuelle, catalogue≠distribution
+  - convergences : Collection/capacité explicite, compatibilité/prérequis proactifs, version→fichiers, recherche globale/contextuelle, catalogue≠distribution ; `Configurations de jeu` n'est plus prioritaire après préférence humaine P01 pour **Profils de jeu**
 - Recherche UX indépendante + 80 simulations : **TERMINÉ — 5 profils × 16 tâches**
   - document : `docs/MODARYX-V2-INDEPENDENT-UX-RESEARCH-TREE-SIMULATION-20261003.md`
   - sources actuelles étudiées : Nexus Mods, CurseForge, Modrinth, Thunderstore + signaux communautaires
@@ -846,9 +852,10 @@ Aucun front V2 production n'a été écrit.
    - micro-vérifier clipping/overflow.
 7. QA mécanique low-fi fermée ; simulation experte multi-profils fermée avec clarifications sûres intégrées.
 8. P01 réel + étude indépendante interne 5×16 + étude Work 5×16 : comparaison croisée TERMINÉE. Ne pas généraliser P01 ni transformer les simulations IA en statistiques humaines.
-9. Prochain risque UX à fermer : revalidation humaine courte de **Configurations de jeu**, capacité **Collection**, compréhension **Bibliothèque**, portée **Mods & Plugins** et **Non vérifié**.
-10. Continuer en parallèle vers la direction artistique exploratoire et le design system préparatoire ; aucun gel high-fi/microcopy finale sans preuve humaine suffisante.
-11. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
+9. Mini-test terminologique P01 TERMINÉ : **Profils de jeu** préféré ; Collection et Bibliothèque comprises ; **Mods & Plugins** trop étroit comme parapluie ; **Non vérifié** générique écarté.
+10. Prochain risque UX à fermer : tester quelques alternatives plus larges à **Mods & Plugins** sans perdre la compréhension immédiate.
+11. Continuer en parallèle vers la direction artistique exploratoire et le design system préparatoire ; aucun gel high-fi/microcopy finale sans preuve humaine suffisante.
+12. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
 ## 30. Règle de reprise
 
