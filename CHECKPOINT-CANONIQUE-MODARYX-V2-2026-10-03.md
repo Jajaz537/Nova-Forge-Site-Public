@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`65db2a7d99cf9787f5af3f704c3ea9bca86f1805`
+`7ffea0d198c2ba2350b0f4b68fedc6dc127738e4`
 
 PR :
 
@@ -464,7 +464,27 @@ Le registre couvre :
 
 Aucune idée explicitement retenue ne doit disparaître silencieusement.
 
-## 18. Figma
+## 18. Veille actuelle et gouvernance API
+
+**TERMINÉ — recherche / conception**
+
+Documents :
+
+- `docs/MODARYX-V2-RESEARCH-DELTA-20261003.md`
+- `docs/MODARYX-V2-API-GOVERNANCE-CONTRACT-20261003.md`
+
+Décisions ajoutées :
+
+- prévoir plusieurs installations/instances d'un même jeu ;
+- proposer profil existant ou nouveau profil lors d'une installation manager ;
+- support du curateur de Collection explicite ;
+- facettes spécifiques aux Collections ;
+- recommandation de profil propre à tester selon capacités manager ;
+- API V2 avec versioning, dépréciation documentée, migration guidée et contract tests.
+
+Les contrats Collection/Modpack/Profile et Installation/Manager ont été mis à jour avec ces résultats de benchmark.
+
+## 19. Figma
 
 Fichier :
 
@@ -528,7 +548,7 @@ Mobile :
 
 Recherche, fiche, installation, collection/profil, Creator Studio et Community ont leurs principaux états définis.
 
-## 19. Erreurs Figma et procédure
+## 20. Erreurs Figma et procédure
 
 ### Erreur 1
 
@@ -562,7 +582,7 @@ Erreur exacte :
 
 Aucune relance immédiate.
 
-## 20. Wireframes encore manquants
+## 21. Wireframes encore manquants
 
 **BLOQUÉ Figma / EN COURS conception**
 
@@ -579,7 +599,7 @@ Revue de couverture :
 
 `docs/MODARYX-V2-WIREFRAME-COVERAGE-20261003.md`
 
-## 21. High‑Fi
+## 22. High‑Fi
 
 **BLOQUÉ**
 
@@ -593,7 +613,7 @@ Gate :
 
 `docs/MODARYX-V2-HIGH-FI-GATE-20261003.md`
 
-## 22. Validation humaine
+## 23. Validation humaine
 
 **PREUVE MANQUANTE**
 
@@ -612,7 +632,7 @@ Script de test :
 
 Aucune validation humaine n'est inventée.
 
-## 23. Production / infrastructure
+## 24. Production / infrastructure
 
 Inchangés :
 
@@ -628,7 +648,7 @@ Inchangés :
 
 Aucun front V2 production n'a été écrit.
 
-## 24. États courants
+## 25. États courants
 
 - Audit legacy : **TERMINÉ**
 - Audit modules legacy ciblés : **TERMINÉ pour périmètre inspecté**
@@ -655,6 +675,8 @@ Aucun front V2 production n'a été écrit.
 - Installation/Manager : **TERMINÉ — conception**
 - SEO/I18n/Content : **TERMINÉ — conception**
 - Anti-oubli V2 maître : **TERMINÉ — consolidation actuelle, À MAINTENIR**
+- Veille actuelle / benchmark delta : **TERMINÉ — 2026-10-03**
+- Gouvernance API V2 : **TERMINÉ — conception**
 - Onboarding/Compte/Créateur : **TERMINÉ — conception**
 - Notifications/Préférences : **TERMINÉ — conception**
 - Modération/Appels : **TERMINÉ — conception**
@@ -666,13 +688,11 @@ Aucun front V2 production n'a été écrit.
 - High-fi : **BLOQUÉ**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
 
-## 25. Prochain point logique automatique
+## 26. Prochain point logique automatique
 
-1. Continuer recherche/specification et audit ne nécessitant pas Figma.
+1. Continuer recherche, audit et préparation de tests ne nécessitant pas Figma.
 2. Ne pas relancer Figma tant que le quota Starter reste bloqué.
-3. Continuer uniquement les contrats, audits et préparation de tests ne nécessitant pas Figma ni modification du front public.
-4. Nouveaux contrats tracés : onboarding/compte/créateur, notifications/préférences, modération/appels et cycle de vie des jeux.
-4. Le contrat SEO/I18n/Content est tracé dans `docs/MODARYX-V2-SEO-I18N-CONTENT-CONTRACT-20261003.md`.
+3. Maintenir le registre anti-oubli et intégrer uniquement les améliorations justifiées.
 4. Dès disponibilité Figma :
    - ajouter Game Hub ;
    - ajouter Global Search ;
@@ -684,7 +704,7 @@ Aucun front V2 production n'a été écrit.
 7. Seulement après : direction artistique, design system final, prototype high-fi.
 8. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
-## 26. Règle de reprise
+## 27. Règle de reprise
 
 Pour toute nouvelle conversation :
 
