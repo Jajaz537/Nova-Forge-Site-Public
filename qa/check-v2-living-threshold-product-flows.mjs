@@ -219,7 +219,7 @@ try{
   await waitText("Projet sans titre");
 
   await clickText(".global-nav button","Collections");
-  await waitText("Sélections de mods à organiser et partager.");
+  await waitText("Organiser n’est pas installer.");
   await fill(".collections-page .catalog-search input","graphismes");
   assertEqual(await count(".collection-card"),1,"collections query count");
   await clickText(".filter-chips button","Toutes");
