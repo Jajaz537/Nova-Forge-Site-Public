@@ -1220,3 +1220,35 @@ Ces preuves ne ferment pas :
 - PWA/SW offline production ;
 - screen reader/appareil physique ;
 - high-fi final ou VF.
+
+
+## Mapping prototype → production / anti-oubli machine-readable — 4 octobre 2026
+
+**TERMINÉ pour la préparation technique / root production toujours BLOQUÉ**
+
+Documents et policy :
+- `docs/MODARYX-V2-LIVING-THRESHOLD-PRODUCTION-MAPPING-20261004.md`
+- `qa/modaryx-v2-production-surface-map.json`
+- `qa/check-v2-production-surface-map.mjs`
+- `.github/workflows/modaryx-v2-production-surface-map-proof.yml`
+
+Micro-proof :
+- run `37163081008` — **SUCCESS**
+- commit : `8059e6dd9c0fab3ca58e8b6f09e9f25a60978657`
+- marqueur : `PASS_V2_PRODUCTION_SURFACE_MAP`
+- surfaces obligatoires mappées : **22**
+- états runtime restant volontairement non prouvés : **6**
+  - session expirée réelle ;
+  - permission denied serveur réelle ;
+  - erreur backend réelle ;
+  - sync conflict réel ;
+  - PWA/SW production ;
+  - installation MODARYX Forge réelle.
+
+Décision :
+- le prototype Living Threshold possède désormais un mapping explicite vers composants, domaines, adapters, états et routing production ;
+- `Requirements / Dependencies` est explicitement couvert comme surface de production, et non plus seulement implicitement via Content Detail ;
+- toute surface reste `BLOCKED_GATE` côté production jusqu'à décision canonique de création du root V2 ;
+- aucune modification de `main`, du frontend public, DNS/Cloudflare ou du cutover n'a été réalisée.
+
+**Prochain point logique interne : comparaison de stack non engageante + blueprint root, puis arrêt au gate externe/humain si aucun autre blocker interne n'est récupérable.**
