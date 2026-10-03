@@ -388,3 +388,15 @@ Analyse croisée finale :
 - domaine interne : `Profile/Loadout`
 
 Référence : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-GAME-PROFILES-20261003.md`.
+
+## Décision finale — parapluie de contenus
+
+**TERMINÉ — wording produit**
+
+- UI : **Mods & contenus**
+- microcopy : **Mods, plugins, addons, scripts, maps, shaders, presets, outils et autres contenus pour vos jeux.**
+- **Mods & Plugins** n'est plus le parapluie universel.
+- validation humaine globale : **EN COURS**
+- High-Fi final : reste **BLOQUÉ**
+
+Référence : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-CONTENT-UMBRELLA-20261003.md`.
