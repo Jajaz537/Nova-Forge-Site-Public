@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`ff7b5e19bf76c5e6ca44dfffbe109fd792366e4f`
+`e6820d5113e8a79002bdc222bbfa154ccf9da2b6`
 
 PR :
 
@@ -723,6 +723,8 @@ Aucun front V2 production n'a été écrit.
 
 - Audit legacy : **TERMINÉ**
 - Audit modules legacy ciblés : **TERMINÉ pour périmètre inspecté**
+- Audit exhaustif code — phases 1 à 7 : **TERMINÉ pour les périmètres inspectés / EN COURS global**
+- Registre maître anti-contamination : **EN COURS**
 - Analyse des écarts de schémas : **TERMINÉ — conception**
 - Plan schémas V2 : **TERMINÉ — conception**
 - Benchmark : **TERMINÉ**
@@ -768,9 +770,10 @@ Aucun front V2 production n'a été écrit.
 
 ## 29. Prochain point logique automatique
 
-1. Continuer recherche, audit et préparation de tests ne nécessitant pas Figma.
-2. Ne pas relancer Figma tant que le quota Starter reste bloqué.
-3. Maintenir le registre anti-oubli et intégrer uniquement les améliorations justifiées.
+1. Priorité absolue : terminer l'audit exhaustif anti-contamination du dépôt.
+2. Construire blacklist/allowlist et dépendances entrantes avant tout code frontend.
+3. Ne pas relancer Figma tant que le quota Starter reste bloqué.
+4. Maintenir le registre anti-oubli et intégrer uniquement les améliorations justifiées.
 4. Dès disponibilité Figma :
    - ajouter Game Hub ;
    - ajouter Global Search ;
@@ -800,9 +803,13 @@ Pour toute nouvelle conversation :
 - frontend V2 : **BLOQUÉ volontairement** jusqu'à fermeture suffisante de l'audit anti-contamination.
 
 Phases terminées :
-- `docs/MODARYX-V2-CODE-AUDIT-PHASE1-20261003.md`
-- `docs/MODARYX-V2-CODE-AUDIT-PHASE2-SCRIPTS-20261003.md`
-- `docs/MODARYX-V2-CODE-AUDIT-PHASE3-CSS-20261003.md`
+- `docs/MODARYX-V2-CODE-AUDIT-PHASE1-20261003.md` — entrées, SW, manifest, build ;
+- `docs/MODARYX-V2-CODE-AUDIT-PHASE2-SCRIPTS-20261003.md` — scripts assets ;
+- `docs/MODARYX-V2-CODE-AUDIT-PHASE3-CSS-20261003.md` — CSS ;
+- `docs/MODARYX-V2-CODE-AUDIT-PHASE4-BACKEND-20261003.md` — functions/API ;
+- `docs/MODARYX-V2-CODE-AUDIT-PHASE5-SCHEMAS-DATA-20261003.md` — schémas/données ;
+- `docs/MODARYX-V2-CODE-AUDIT-PHASE6-CI-QA-MIGRATIONS-20261003.md` — CI/QA/migrations ;
+- `docs/MODARYX-V2-CODE-AUDIT-PHASE7-ROOT-PAGES-CONFIG-20261003.md` — pages/racine/config.
 
 Findings critiques déjà prouvés :
 - `sw.js` précache et peut resservir des CSS/JS legacy ;
@@ -810,7 +817,14 @@ Findings critiques déjà prouvés :
 - plusieurs scripts utiles sont fortement couplés au DOM V1 et doivent être **extraits**, pas importés ;
 - plusieurs CSS redéfinissent `:root`, `body`, `nav`, `.card`, `.button`, `.panel` et autres sélecteurs globaux ;
 - `modaryx-home-finishline.css` embarque du CSS/tokens Nova historiques ;
-- aucun stylesheet V1 ne doit être importé dans V2.
+- aucun stylesheet V1 ne doit être importé dans V2 ;
+- les API/backend contiennent beaucoup de logique réutilisable mais leurs contrats/routes v1 restent à adapter, pas à casser ;
+- de nombreux schémas v1 utilisent encore des IDs historiques `urn:nova-forge:...` : compatibilité uniquement, jamais nouveau namespace V2 ;
+- le search-index, le sitemap, le webmanifest, les status/build manifests et le pipeline npm restent V1 ;
+- la plupart des workflows UI/browser sont liés à l'ancienne branche design et/ou aux 23 routes V1 ;
+- `build-games-index.py`, `run-final-source-validation.py` et plusieurs gates QA ne doivent pas devenir le pipeline V2 ;
+- `domain-cutover.json` vise encore getnovaforge.com et est **historique / à bloquer** pour MODARYX V2 ;
+- les workflows Cloudflare mutateurs restent hors exécution sans instruction explicite.
 
 Classification obligatoire :
 - RÉUTILISABLE
@@ -821,14 +835,11 @@ Classification obligatoire :
 - À REVALIDER
 
 Prochain ordre d'audit :
-1. `functions/`
-2. `schemas/`
-3. `data/`
-4. `.github/workflows/`
-5. `qa/`
-6. `migrations/`
-7. pages jeu / projet / docs ;
-8. générateurs et pipeline build.
+1. construire le registre maître fichier/groupe → classification → risque → action V2 ;
+2. vérifier le reliquat non-code pouvant être chargé au runtime : assets médias, fonts, icônes, artefacts et références croisées ;
+3. produire la blacklist/allowlist anti-contamination V2 ;
+4. vérifier les dépendances entrantes : qui charge/import/register chaque élément bloqué ;
+5. seulement après cette fermeture, décider si un micro-outillage anti-contamination isolé peut être codé avant le frontend.
 
 Règle :
 > Aucun premier code frontend V2 tant que les risques de contamination actifs n'ont pas été inventoriés et isolés.
