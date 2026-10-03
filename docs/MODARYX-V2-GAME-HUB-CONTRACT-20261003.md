@@ -74,7 +74,7 @@ Si aucune version n'est choisie :
 Onglets proposés :
 
 - Aperçu
-- Mods & Plugins
+- Mods & contenus
 - Collections
 - Créateurs
 - Guides
@@ -82,7 +82,7 @@ Onglets proposés :
 
 Les labels restent fonctionnels.
 
-`Mods & Plugins` reste l'entrée primaire courte. Quand l'espace le permet, une microcopy précise : **Mods, plugins, addons, scripts, outils et autres contenus compatibles.**
+`Mods & contenus` devient l'entrée primaire provisoire. Quand l'espace le permet, une microcopy précise : **Mods, plugins, addons, scripts, maps, shaders, presets, outils et autres contenus compatibles.**
 
 ## 7. Aperçu
 
@@ -279,7 +279,7 @@ High-fi autorisé uniquement quand :
 
 ## 21. Clarifications issues de la simulation experte
 
-- `Mods & Plugins` reste un libellé de travail mais n'est plus considéré comme parapluie final stabilisé : P01 le comprend comme limité aux mods et plugins.
+- `Mods & contenus` devient le libellé parapluie provisoire préféré après benchmark externe et choix humain P01 ; validation globale encore EN COURS.
 - `catalog-enabled` ne doit jamais être interprété visuellement comme une preuve de téléchargement disponible.
 
 **État : intégré ; validation humaine toujours PREUVE MANQUANTE.**
