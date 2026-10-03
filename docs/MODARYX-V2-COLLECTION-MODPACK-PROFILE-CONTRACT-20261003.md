@@ -77,7 +77,7 @@ Propriétés :
 
 ## 5. Profile / Loadout
 
-**Libellé UI provisoire préféré après test humain P01 : Profils de jeu**
+**Libellé UI retenu : Profils de jeu**
 
 Fonction :
 - représenter une configuration utilisateur concrète.
@@ -253,6 +253,6 @@ Avant high-fi :
 ## Convergence P01 + Work + étude indépendante
 
 - `Collection` reste l'objet domaine, mais son caractère éditorial / installable doit être explicite.
-- `Profile/Loadout` reste interne ; **Profils de jeu** redevient le libellé utilisateur provisoire préféré après le choix réel de P01.
-- **Configurations de jeu** reste une alternative issue des simulations IA, non retenue comme primaire à ce stade.
-- La trouvabilité des Profils de jeu depuis le Game Hub reste à renforcer.
+- `Profile/Loadout` reste interne ; **Profils de jeu** est le libellé utilisateur retenu.
+- **Configurations de jeu** n'est plus une alternative UI active.
+- La trouvabilité des Profils de jeu est renforcée par le Game Hub.
