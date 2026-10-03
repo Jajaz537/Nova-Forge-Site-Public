@@ -86,8 +86,21 @@ try {
 
   await send("Page.enable");
   await send("Runtime.enable");
+  await send("Accessibility.enable");
 
   await navigate(1440, 1024);
+  const axResponse=await send("Accessibility.getFullAXTree");
+  const axNodes=axResponse.result?.nodes||[];
+  const axUseful=axNodes.filter(node=>!node.ignored);
+  const axNames=axUseful.map(node=>({role:node.role?.value||"",name:node.name?.value||""}));
+  const hasMainNav=axNames.some(node=>node.role==="navigation"&&node.name==="Navigation principale");
+  const hasGameHeading=axNames.some(node=>node.role==="heading"&&node.name==="Aetherlands");
+  const hasGameSearch=axNames.some(node=>node.role==="textbox"&&node.name==="Rechercher dans ce jeu");
+  if(!hasMainNav) fail("AX tree missing named primary navigation");
+  if(!hasGameHeading) fail("AX tree missing Aetherlands heading");
+  if(!hasGameSearch) fail("AX tree missing contextual game search textbox");
+  console.log("AX_TREE_NODES",axUseful.length);
+  console.log("AX_ASSERT primary navigation / game heading / contextual search");
   const desktopOverflow = await evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth");
   if (desktopOverflow > 1) fail("desktop horizontal overflow " + desktopOverflow);
 
