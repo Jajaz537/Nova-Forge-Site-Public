@@ -205,15 +205,21 @@ L'URL publique pourra plus tard inclure des slugs lisibles sans faire dépendre 
 
 ### /content/:id/files
 
-Versions/fichiers.
+Fichiers distribuables et artefacts de la release sélectionnée.
+
+### /content/:id/versions
+
+Historique des releases/versions.
 
 ### /content/:id/changelog
 
-Historique.
+Historique des changements par release.
 
-### /content/:id/dependencies
+### /content/:id/requirements
 
-Dépendances/conflits détaillés.
+Dépendances, recommandations et conflits détaillés.
+
+Le libellé produit **Requirements** reste cohérent entre navigation, URL et documentation ; “Dependencies” reste un sous-concept structuré à l'intérieur.
 
 ### /collections
 
