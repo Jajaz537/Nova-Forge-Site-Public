@@ -134,3 +134,40 @@ Remaining before final high-fi:
 - additional human multi-screen review;
 - screen-reader/device proof;
 - expansion of incomplete product surfaces and critical states.
+
+
+## Product-flow micro-proof
+
+**TERMINÉ — prototype interactions / not production runtime**
+
+Targeted run: `37159148521`  
+Candidate commit: `d24e00372e513741dac54316a5e9357e945efc31`  
+Artifact: `11286822252`  
+Artifact SHA-256: `292083586f83740a9712f354db4396abce261ba6bfef00923d57310b2ec74a34`
+
+Fresh assertions:
+- `FLOW_ASSERT games search result count 1`
+- `FLOW_ASSERT global search actionable result count 1`
+- `FLOW_ASSERT catalog query count 1`
+- `FLOW_ASSERT catalog kind filter count 1`
+- `FLOW_ASSERT catalog reset count 6`
+- `FLOW_ASSERT catalog no-results recovery count 6`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 15`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Covered interactions:
+- Games Index search → Aetherlands → Game Hub;
+- Global Search → content result → Content Detail;
+- Catalog query → filters → kind selection → sort → reset;
+- Catalog no-results → recovery;
+- mobile Global Search access and result rendering.
+
+New archived review surfaces include:
+- desktop Games Index;
+- desktop Global Search empty/start state;
+- desktop Global Search results;
+- mobile Global Search.
+
+Limit:
+these are demo/local prototype flows. They do not prove real backend search, real content data, real installation, production routing, or production deployment.
