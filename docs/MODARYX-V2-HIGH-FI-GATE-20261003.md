@@ -195,22 +195,27 @@ La comparaison n'implique aucune copie de leur identité.
 - couverture wireframes core ;
 - validation heuristique sans blocker majeur.
 
-### PREUVE MANQUANTE / humaine
+### Validation humaine encore incomplète
 
-- tree testing humain ;
-- compréhension de la homepage ;
-- compréhension de la fiche ;
-- validation mobile ;
-- validation de la direction artistique après génération des concepts.
+- P01 réel : mini-test critique TERMINÉ ;
+- étude Work 5 profils × 16 tâches : TERMINÉE, simulation IA ;
+- étude indépendante interne 5 profils × 16 tâches : TERMINÉE, simulation IA ;
+- validation humaine supplémentaire requise avant gel de la microcopy critique ;
+- compréhension de la homepage : PREUVE MANQUANTE ;
+- compréhension complète de la fiche : PREUVE PARTIELLE ;
+- validation mobile réelle : PREUVE MANQUANTE ;
+- validation de la direction artistique après génération des concepts : PREUVE MANQUANTE.
 
 ## 13. État courant
 
-**BLOQUÉ — High‑Fi non autorisé pour le moment.**
+**BLOQUÉ pour gel high-fi final — exploration réversible autorisée.**
 
-Causes :
+État réel :
 
-1. wireframes Game Hub / Global Search / Community / Mobile Game Hub encore à matérialiser ;
-2. quota Figma MCP Starter actuellement atteint ;
-3. tree testing humain non exécuté.
+1. couverture conceptuelle core : TERMINÉE ; quatre écrans supplémentaires existent en prototype low-fi HTML isolé mais restent non matérialisés dans Figma ;
+2. quota Figma MCP Starter : BLOQUÉ EXTERNE ;
+3. P01 humain : TERMINÉ pour 5 questions critiques ; validation humaine globale : EN COURS ;
+4. convergence P01 + Work + étude indépendante : TERMINÉE ;
+5. microcopy critique encore À REVALIDER : **Configurations de jeu**, capacité des **Collections**, compréhension de **Bibliothèque**, portée de **Mods & Plugins** et états **Non vérifié**.
 
-Ce blocage n'empêche pas la recherche, la spécification, la préparation de tests ni l'audit legacy.
+Ce blocage n'empêche pas la direction artistique exploratoire, le design system préparatoire ni les prototypes comparatifs réversibles. Il interdit uniquement de présenter la microcopy ou le high-fi comme humainement validés/finalisés.
