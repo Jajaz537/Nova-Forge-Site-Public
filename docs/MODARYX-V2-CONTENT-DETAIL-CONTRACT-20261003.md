@@ -364,3 +364,14 @@ La maquette high-fi de la fiche ne peut démarrer qu'après validation de :
 - Les artefacts d'une Release sont présentés sous **Fichiers de cette version** pour éviter la confusion Release/Fichier.
 
 **État : intégré suite à simulation experte multi-profils ; validation humaine toujours PREUVE MANQUANTE.**
+
+
+## Preuve humaine P01 — avertissements proactifs
+
+Le participant réel P01 attend que MODARYX prévienne automatiquement lorsqu'un mod peut entrer en conflit avec un autre mod/plugin.
+
+Décision de conception : avant installation ou téléchargement, faire remonter proactivement les informations critiques connues : dépendance obligatoire, conflit connu, version requise et incompatibilité majeure.
+
+La section **Compatibilité et prérequis** garde le détail, mais les risques critiques ne doivent pas être enfouis dans un onglet secondaire.
+
+**État : À INTÉGRER dans les futurs wireframes/high-fi.**
