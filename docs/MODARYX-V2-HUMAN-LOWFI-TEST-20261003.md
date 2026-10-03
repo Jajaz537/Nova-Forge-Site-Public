@@ -61,40 +61,68 @@ Fiche → requirements / conflits.
 Succès attendu :
 Fiche → versions/files.
 
-### T6 — Collection
+### T6 — Favori
 
-“Tu veux garder ce mod dans une liste pour plus tard.”
+“Tu veux simplement retrouver ce mod plus tard, sans créer de sélection particulière.”
 
 Succès attendu :
-Fiche/quick view → ajouter à collection.
+Fiche/quick view → Favori.
 
-### T7 — Profil
+### T7 — Collection
 
-“Tu veux sauvegarder une configuration de mods précise.”
+“Tu prépares une sélection de mods à organiser ou partager autour d'un thème.”
+
+Succès attendu :
+Fiche/quick view → Ajouter à une Collection / Bibliothèque → Collections.
+
+### T8 — Profil
+
+“Tu veux enregistrer exactement les mods, versions et états actifs dans une configuration de jeu que tu utilises.”
 
 Succès attendu :
 Bibliothèque → Profils / Loadouts.
 
-### T8 — Publier
+### T9 — Publier
 
 “Tu es créateur et tu veux publier une nouvelle version.”
 
 Succès attendu :
 Créer → Creator Studio → Project → Releases.
 
-### T9 — Créateur
+### T10 — Créateur
 
 “Tu connais le nom d'un créateur et veux retrouver ses projets.”
 
 Succès attendu :
 Recherche globale ou Créateurs → profil.
 
-### T10 — Signaler
+### T11 — Support
 
-“Tu as un problème avec un contenu.”
+“Le mod ne fonctionne pas comme prévu et tu veux demander de l'aide.”
 
 Succès attendu :
-Fiche → support/signalement.
+Fiche → Support / Questions / Issues selon le type de problème.
+
+### T12 — Signaler
+
+“Tu penses que ce contenu enfreint les règles ou présente un risque et tu veux le signaler.”
+
+Succès attendu :
+Fiche → Signalement.
+
+### T13 — Release vs fichier
+
+“Tu veux revenir à la version 1.4 d'un mod et télécharger le fichier correspondant.”
+
+Succès attendu :
+Fiche → Versions → Release 1.4 → Files.
+
+### T14 — Statut jeu
+
+“Un jeu indique « Catalogue disponible ». Est-ce que tu t'attends à pouvoir télécharger immédiatement ? Explique ce que tu comprends.”
+
+Succès attendu :
+Le participant distingue disponibilité du catalogue et disponibilité de distribution.
 
 ## 5. Mesures
 
@@ -123,7 +151,7 @@ Une tâche critique doit être corrigée avant high‑fi si :
 
 - “En une phrase, à quoi sert MODARYX ?”
 - “Où chercherais-tu d'abord un mod pour ton jeu ?”
-- “Quelle différence comprends-tu entre collection et profil ?”
+- “Quelle différence comprends-tu entre favori, collection, modpack et profil ?”
 - “Où vérifies-tu si quelque chose est compatible ?”
 - “Qu'est-ce qui te mettrait en confiance avant d'installer ?”
 - “Quel élément t'a paru inutile ou confus ?”
