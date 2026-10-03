@@ -145,21 +145,40 @@ function GameHub({ onOpen }) {
   const [tab, setTab] = useState("Aperçu");
   const [query, setQuery] = useState("");
   const [version, setVersion] = useState("1.4.2");
-  const visible = useMemo(() => contentItems.filter(x => x.title.toLowerCase().includes(query.toLowerCase())), [query]);
-  const sectionTitle = tab === "Aperçu" ? "Pour votre version" : tab;
+  const normalized=query.trim().toLocaleLowerCase("fr");
+  const visibleContent = useMemo(() => contentItems.filter(x => (x.title+" "+x.kind+" "+x.creator).toLocaleLowerCase("fr").includes(normalized)), [normalized]);
+  const visibleCollections = useMemo(() => collectionDetails.filter(x => (x.title+" "+x.curator+" "+x.category).toLocaleLowerCase("fr").includes(normalized)), [normalized]);
+  const visibleCreators = useMemo(() => creatorDetails.filter(x => (x.name+" "+x.role+" "+x.focus).toLocaleLowerCase("fr").includes(normalized)), [normalized]);
+  const meta={
+    "Aperçu":["Sélection adaptative","Pour votre version",`Contenus de démonstration contextualisés pour Aetherlands ${version}.`],
+    "Mods & contenus":["Catalogue du jeu","Mods & contenus",`Contenus de démonstration pour Aetherlands ${version}.`],
+    "Collections":["Sélections organisées","Collections",`Collections de démonstration liées à Aetherlands ${version}.`],
+    "Créateurs":["Écosystème créateur","Créateurs",`Créateurs et équipes de démonstration actifs autour d’Aetherlands.`],
+    "Guides":["Guides","Guides",`Guides contextualisés pour Aetherlands ${version}.`],
+    "Activité":["Activité","Activité",`Événements utiles liés à Aetherlands, sans fil social générique.`],
+  };
+  const [kicker,title,description]=meta[tab];
+
+  let body;
+  if(tab==="Aperçu") body=<div className="content-grid">{visibleContent.slice(0,3).map(item=><ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div>;
+  else if(tab==="Mods & contenus") body=visibleContent.length?<div className="content-grid">{visibleContent.map(item=><ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div>:<div className="empty"><MagnifyingGlass/><h3>Aucun contenu trouvé</h3><p>Essayez un autre terme.</p><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>;
+  else if(tab==="Collections") body=visibleCollections.length?<div className="hub-collection-grid">{visibleCollections.map(item=><article key={item.title}><strong>{item.title}</strong><span>{item.curator} · {item.category}</span><small>{item.items} éléments de démonstration</small><div className="hub-capability">Sélection organisée · installation non disponible</div></article>)}</div>:<div className="empty"><Stack/><h3>Aucune collection trouvée</h3><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>;
+  else if(tab==="Créateurs") body=visibleCreators.length?<div className="hub-creator-grid">{visibleCreators.map(item=><article key={item.name}><div className="creator-avatar static"><UsersThree/></div><div><strong>{item.name}</strong><span>{item.role}</span><small>{item.focus}</small></div></article>)}</div>:<div className="empty"><UsersThree/><h3>Aucun créateur trouvé</h3><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>;
+  else if(tab==="Guides") body=<div className="hub-info-state"><BookOpen/><div><strong>Guides de démonstration indisponibles</strong><span>Aucun guide éditorial réel n’est connecté à ce prototype. La navigation existe sans inventer de contenu.</span></div></div>;
+  else body=<div className="hub-activity"><article><span className="activity-dot"/><div><strong>Activité de démonstration</strong><small>Exemple : une release compatible avec Aetherlands 1.4.2 serait affichée ici.</small></div></article><article><span className="activity-dot"/><div><strong>Aucun événement serveur réel</strong><small>Les notifications et changements distants ne sont pas simulés.</small></div></article></div>;
+
   return <>
     <section className="game-hero">
       <div className="hero-shade" />
-      <div className="game-identity"><span className="demo-label">Démonstration</span><h1>Aetherlands</h1><label>Version<select value={version} onChange={e => setVersion(e.target.value)}><option>1.4.2</option><option>1.4.1</option></select></label></div>
+      <div className="game-identity"><span className="demo-label">Démonstration</span><h1>Aetherlands</h1><div className="game-support">Catalogue consultable — téléchargement non garanti</div><label>Version<select value={version} onChange={e => setVersion(e.target.value)}><option>1.4.2</option><option>1.4.1</option></select></label></div>
       <form className="hero-search" onSubmit={e => e.preventDefault()}><MagnifyingGlass /><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Rechercher dans ce jeu" aria-label="Rechercher dans ce jeu"/><button type="button" aria-label="Filtres"><SlidersHorizontal /></button></form>
-      <button className="primary">Explorer les contenus <ArrowRight /></button>
+      <button className="primary" onClick={()=>setTab("Mods & contenus")}>Explorer les contenus <ArrowRight /></button>
     </section>
     <nav className="local-nav" aria-label="Navigation du jeu">{["Aperçu","Mods & contenus","Collections","Créateurs","Guides","Activité"].map(x => <button key={x} className={tab===x?'active':''} onClick={() => setTab(x)}>{x}</button>)}</nav>
     <main className="hub-layout">
-      <section className="hub-content"><div className="section-heading"><div><span className="kicker">Sélection adaptative</span><h2>{sectionTitle}</h2><p>Contenus compatibles avec Aetherlands {version}.</p></div><button className="quiet"><FunnelSimple />Affiner</button></div>
-      <div className="content-grid">{visible.map(item => <ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div>
-      {visible.length===0 && <div className="empty"><MagnifyingGlass/><h3>Aucun contenu trouvé</h3><p>Essayez un autre terme ou effacez la recherche.</p><button onClick={() => setQuery('')}>Effacer la recherche</button></div>}</section>
-      <ProfilesRail /></main>
+      <section className="hub-content"><div className="section-heading"><div><span className="kicker">{kicker}</span><h2>{title}</h2><p>{description}</p></div></div>{body}</section>
+      <ProfilesRail />
+    </main>
   </>;
 }
 
