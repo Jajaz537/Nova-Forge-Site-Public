@@ -1,0 +1,459 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_MAPPING",
+  "sourceAcceptance": "docs/MODARYX-V2-SCREEN-ACCEPTANCE-CRITERIA-20261003.md",
+  "sourcePrototype": "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx",
+  "sourceMapping": "docs/MODARYX-V2-LIVING-THRESHOLD-PRODUCTION-MAPPING-20261004.md",
+  "productionRule": "No surface is production-ready until the V2 root gate is lifted. Prototype coverage is not production proof.",
+  "surfaces": [
+    {
+      "id": "homepage",
+      "acceptance": "Homepage",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "DiscoverPage"
+      ],
+      "domains": [
+        "DiscoveryFeed"
+      ],
+      "states": [
+        "nominal"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "games-index",
+      "acceptance": "Games index",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "GamesIndexPage",
+        "GameCard"
+      ],
+      "domains": [
+        "Game",
+        "GameSupportState"
+      ],
+      "states": [
+        "nominal",
+        "empty"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "game-hub",
+      "acceptance": "Game Hub",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "GameHubPage",
+        "GameHubHeader",
+        "GameProfileRail"
+      ],
+      "domains": [
+        "Game",
+        "ContentItem",
+        "Profile"
+      ],
+      "states": [
+        "nominal",
+        "empty",
+        "unavailable"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "catalog",
+      "acceptance": "Catalogue",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "CatalogShell",
+        "ContentCard",
+        "FilterGroup"
+      ],
+      "domains": [
+        "ContentItem",
+        "ContentType"
+      ],
+      "states": [
+        "nominal",
+        "empty",
+        "no-results"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "global-search",
+      "acceptance": "Global Search",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "GlobalSearchPage"
+      ],
+      "domains": [
+        "SearchDocument"
+      ],
+      "states": [
+        "nominal",
+        "empty",
+        "no-results"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "content-detail",
+      "acceptance": "Content Detail",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "ContentDetailPage",
+        "DetailDecisionPanel",
+        "CompatibilityBadge",
+        "ProvenancePanel"
+      ],
+      "domains": [
+        "ContentItem",
+        "Release",
+        "CompatibilityClaim"
+      ],
+      "states": [
+        "nominal",
+        "unavailable",
+        "validation-error",
+        "success-local"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "requirements-dependencies",
+      "acceptance": "Requirements / Dependencies",
+      "prototypeStatus": "MATERIALIZED_WITHIN_CONTENT_DETAIL",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "DependencyRow",
+        "ConflictRow",
+        "CompatibilityBadge"
+      ],
+      "domains": [
+        "Dependency",
+        "Conflict",
+        "CompatibilityClaim"
+      ],
+      "states": [
+        "nominal",
+        "incompatible",
+        "unverified"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "release-files",
+      "acceptance": "Release / Files",
+      "prototypeStatus": "MATERIALIZED_WITHIN_CONTENT_DETAIL",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "ReleaseSelector",
+        "FileRow",
+        "DistributionState"
+      ],
+      "domains": [
+        "Release",
+        "File"
+      ],
+      "states": [
+        "nominal",
+        "unavailable",
+        "revoked"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "collection",
+      "acceptance": "Collection",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "CollectionsIndexPage",
+        "CollectionCard"
+      ],
+      "domains": [
+        "Collection"
+      ],
+      "states": [
+        "nominal",
+        "empty",
+        "unavailable"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "modpack",
+      "acceptance": "Modpack",
+      "prototypeStatus": "MATERIALIZED_DEMO",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "ModpackDetail",
+        "InstallCapability"
+      ],
+      "domains": [
+        "Modpack",
+        "Dependency",
+        "Conflict"
+      ],
+      "states": [
+        "nominal",
+        "unavailable"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "profile-loadout",
+      "acceptance": "Profile / Loadout",
+      "prototypeStatus": "MATERIALIZED_DEMO",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "GameProfileCard",
+        "GameProfileDetail",
+        "ProfileStatus"
+      ],
+      "domains": [
+        "Profile"
+      ],
+      "states": [
+        "local-only",
+        "unsynced",
+        "manager-unavailable"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "creator-profile",
+      "acceptance": "Creator Profile",
+      "prototypeStatus": "MATERIALIZED_INDEX",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "CreatorsIndexPage",
+        "CreatorCard"
+      ],
+      "domains": [
+        "Creator",
+        "Team"
+      ],
+      "states": [
+        "nominal",
+        "unverified"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "creator-studio",
+      "acceptance": "Creator Studio",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "CreatorDashboardShell",
+        "LocalDraftState"
+      ],
+      "domains": [
+        "Creator",
+        "Team",
+        "Project",
+        "Release"
+      ],
+      "states": [
+        "nominal",
+        "empty",
+        "local-only",
+        "unavailable"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "community",
+      "acceptance": "Community",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "CommunityPage",
+        "LocalDraftState"
+      ],
+      "domains": [
+        "SupportThread",
+        "Question",
+        "Discussion",
+        "TeamActivity"
+      ],
+      "states": [
+        "nominal",
+        "local-only",
+        "unavailable"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "library",
+      "acceptance": "Library",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "LibraryShell",
+        "GameProfileCard"
+      ],
+      "domains": [
+        "Favorite",
+        "Follow",
+        "Collection",
+        "Profile",
+        "SavedSearch"
+      ],
+      "states": [
+        "nominal",
+        "local-only",
+        "manager-unavailable"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "security-trust",
+      "acceptance": "Security / Trust",
+      "prototypeStatus": "MATERIALIZED_WITHIN_CONTENT_DETAIL",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "ProvenancePanel",
+        "ModerationStatus",
+        "DistributionState"
+      ],
+      "domains": [
+        "ProvenanceReceipt",
+        "ModerationDecision",
+        "Release",
+        "File"
+      ],
+      "states": [
+        "nominal",
+        "unverified",
+        "unavailable"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "mobile-navigation",
+      "acceptance": "Mobile Navigation",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "MobileNav"
+      ],
+      "domains": [
+        "Route"
+      ],
+      "states": [
+        "nominal"
+      ],
+      "mobile": "PRIMARY"
+    },
+    {
+      "id": "mobile-catalog",
+      "acceptance": "Mobile Catalog",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "CatalogShell",
+        "FilterDrawer"
+      ],
+      "domains": [
+        "ContentItem"
+      ],
+      "states": [
+        "nominal",
+        "no-results"
+      ],
+      "mobile": "PRIMARY"
+    },
+    {
+      "id": "mobile-content-detail",
+      "acceptance": "Mobile Content Detail",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "ContentDetailPage",
+        "DetailDecisionPanel"
+      ],
+      "domains": [
+        "ContentItem",
+        "Release",
+        "Dependency"
+      ],
+      "states": [
+        "nominal",
+        "unavailable"
+      ],
+      "mobile": "PRIMARY"
+    },
+    {
+      "id": "account-settings",
+      "acceptance": "Account / Settings",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "AccountSettingsShell",
+        "StatusBanner"
+      ],
+      "domains": [
+        "Account",
+        "Preferences"
+      ],
+      "states": [
+        "anonymous",
+        "local-only",
+        "unavailable"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "notifications",
+      "acceptance": "Notifications",
+      "prototypeStatus": "MATERIALIZED",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "NotificationsCenter"
+      ],
+      "domains": [
+        "Notification"
+      ],
+      "states": [
+        "empty",
+        "unavailable"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "offline-stale",
+      "acceptance": "Offline / Stale",
+      "prototypeStatus": "MATERIALIZED_BROWSER_PROOF",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "ConnectivityBanner"
+      ],
+      "domains": [
+        "ConnectivityState"
+      ],
+      "states": [
+        "offline",
+        "stale"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
+    }
+  ],
+  "unresolvedRealRuntimeStates": [
+    "session-expired-real",
+    "permission-denied-server-real",
+    "backend-error-real",
+    "sync-conflict-real",
+    "pwa-service-worker-production",
+    "modaryx-forge-install-runtime"
+  ]
+}
