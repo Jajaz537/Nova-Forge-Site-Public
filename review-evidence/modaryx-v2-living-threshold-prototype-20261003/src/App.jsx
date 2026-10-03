@@ -4,7 +4,7 @@ import {
   List, MagnifyingGlass, Plus, SlidersHorizontal, Stack, UsersThree, X
 } from "@phosphor-icons/react";
 
-const navItems = ["Découvrir", "Jeux", "Mods & contenus", "Collections", "Créateurs", "Communauté"];
+const navItems = ["Découvrir", "Jeux", "Mods & contenus", "Collections", "Créateurs", "Communauté", "Créer"];
 const contentItems = [
   { title: "Sentiers de l’aube", kind: "Exploration", pos: "0% 0%", tone: "cyan" },
   { title: "Vestiges suspendus", kind: "Environnements", pos: "50% 0%", tone: "violet" },
@@ -26,7 +26,7 @@ function Topbar({ active, onNavigate }) {
     <nav className={open ? "global-nav open" : "global-nav"} aria-label="Navigation principale">
       {navItems.map(item => <button key={item} className={active === item ? "active" : ""} onClick={() => { onNavigate(item); setOpen(false); }}>{item}</button>)}
     </nav>
-    <div className="top-actions"><button aria-label="Notifications"><Bell /></button><button className="avatar" aria-label="Compte">M</button></div>
+    <div className="top-actions"><button aria-label="Bibliothèque" onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button aria-label="Notifications"><Bell /></button><button className="avatar" aria-label="Compte">M</button></div>
   </header>;
 }
 
@@ -65,10 +65,11 @@ function ProfilesRail() {
 }
 
 function GameHub({ onOpen }) {
-  const [tab, setTab] = useState("Pour votre version");
+  const [tab, setTab] = useState("Aperçu");
   const [query, setQuery] = useState("");
   const [version, setVersion] = useState("1.4.2");
   const visible = useMemo(() => contentItems.filter(x => x.title.toLowerCase().includes(query.toLowerCase())), [query]);
+  const sectionTitle = tab === "Aperçu" ? "Pour votre version" : tab;
   return <>
     <section className="game-hero">
       <div className="hero-shade" />
@@ -76,9 +77,9 @@ function GameHub({ onOpen }) {
       <form className="hero-search" onSubmit={e => e.preventDefault()}><MagnifyingGlass /><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Rechercher dans ce jeu" aria-label="Rechercher dans ce jeu"/><button type="button" aria-label="Filtres"><SlidersHorizontal /></button></form>
       <button className="primary">Explorer les contenus <ArrowRight /></button>
     </section>
-    <nav className="local-nav" aria-label="Navigation du jeu">{["Aperçu","Pour votre version","Mods & contenus","Collections","Créateurs","Communauté"].map(x => <button key={x} className={tab===x?'active':''} onClick={() => setTab(x)}>{x}</button>)}</nav>
+    <nav className="local-nav" aria-label="Navigation du jeu">{["Aperçu","Mods & contenus","Collections","Créateurs","Guides","Activité"].map(x => <button key={x} className={tab===x?'active':''} onClick={() => setTab(x)}>{x}</button>)}</nav>
     <main className="hub-layout">
-      <section className="hub-content"><div className="section-heading"><div><span className="kicker">Sélection adaptative</span><h2>{tab}</h2><p>Contenus compatibles avec Aetherlands {version}.</p></div><button className="quiet"><FunnelSimple />Affiner</button></div>
+      <section className="hub-content"><div className="section-heading"><div><span className="kicker">Sélection adaptative</span><h2>{sectionTitle}</h2><p>Contenus compatibles avec Aetherlands {version}.</p></div><button className="quiet"><FunnelSimple />Affiner</button></div>
       <div className="content-grid">{visible.map(item => <ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div>
       {visible.length===0 && <div className="empty"><MagnifyingGlass/><h3>Aucun contenu trouvé</h3><p>Essayez un autre terme ou effacez la recherche.</p><button onClick={() => setQuery('')}>Effacer la recherche</button></div>}</section>
       <ProfilesRail /></main>
@@ -102,6 +103,10 @@ function Detail({ item, onBack }) {
 
 function Library() { return <main className="page-section library"><span className="kicker">Votre espace</span><h1>Bibliothèque</h1><p className="page-intro">Retrouvez vos jeux, profils et contenus enregistrés.</p><div className="library-grid"><section className="library-focus"><Media pos="50% 100%"/><div><span className="demo-label">Jeu actif</span><h2>Aetherlands</h2><p>3 profils · version 1.4.2</p><button className="primary">Ouvrir le Game Hub <ArrowRight/></button></div></section><ProfilesRail/></div></main>; }
 
+function CreatorStudio() {
+  return <main className="page-section creator-studio"><span className="kicker">Créer</span><h1>Creator Studio</h1><p className="page-intro">Préparez un projet, structurez une release et vérifiez ses informations avant publication.</p><div className="creator-studio-grid"><section className="trust-panel"><h2>Nouveau projet</h2><p className="page-intro">Commencez par le jeu, le type de contenu et l’identité du projet. Aucun fichier n’est publié sans action explicite.</p><button className="primary"><Plus/>Créer un projet</button></section><section className="trust-panel"><h2>Pipeline de publication</h2><dl><div><dt>Métadonnées</dt><dd>À préparer</dd></div><div><dt>Compatibilité</dt><dd>À déclarer</dd></div><div><dt>Provenance</dt><dd>À vérifier</dd></div><div><dt>Release</dt><dd>Brouillon</dd></div></dl></section></div></main>;
+}
+
 function Community() { return <main className="page-section community"><span className="kicker">Communauté</span><h1>Des idées qui font vivre les mondes.</h1><p className="page-intro">Suivez des créateurs, découvrez leurs collections publiques et partagez vos trouvailles.</p><div className="community-grid">{['Atelier Boréal','Lueur Collective','Les Cartographes'].map((name,i)=><article key={name}><Media pos={contentItems[i+1].pos}/><div><div className="creator-avatar"><UsersThree/></div><h2>{name}</h2><p>Curations et créations autour de l’exploration.</p><button>Voir le profil <ArrowRight/></button></div></article>)}</div></main>; }
 
 export function App() {
@@ -113,6 +118,7 @@ export function App() {
   else if(active==='Découvrir') screen=<Discover onOpen={setDetail}/>;
   else if(active==='Mods & contenus' || active==='Collections' || active==='Créateurs') screen=<Catalog onOpen={setDetail}/>;
   else if(active==='Communauté') screen=<Community/>;
+  else if(active==='Créer') screen=<CreatorStudio/>;
   else if(active==='Bibliothèque') screen=<Library/>;
   else screen=<GameHub onOpen={setDetail}/>;
   return <div className="app-shell"><Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={()=>navigate('Jeux')}><GameController/>Game Hub</button><button onClick={()=>setActive('Bibliothèque')}><BookOpen/>Bibliothèque</button></footer></div>;
