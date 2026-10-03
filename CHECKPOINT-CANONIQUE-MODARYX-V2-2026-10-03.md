@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`22bb057612512cdebf33ccc653aa42d3431e6489`
+`adc1cfbf85bc05290068570a527c06501e3e00bd`
 
 PR :
 
@@ -153,6 +153,34 @@ Familles prévues :
 Le `kind` historique du Universal Mod Manifest est considéré trop large pour la navigation V2.
 
 Aucune migration de schéma effectuée.
+
+### Analyse des écarts de schémas
+
+**TERMINÉ — conception**
+
+Document :
+
+`docs/MODARYX-V2-SCHEMA-GAP-ANALYSIS-20261003.md`
+
+Constats :
+
+- Universal Mod Manifest v1 mélange encore projet et release ;
+- `kind` est trop grossier pour V2 ;
+- target doit pouvoir évoluer vers plateforme/DLC/environnement ;
+- relations required/optional/recommended/incompatible/replaces à structurer ;
+- compatibilité doit devenir multi-claim ;
+- Collection doit rester distincte de Modpack/Profile ;
+- Search Adapter local-first reste une bonne base ;
+- le catalogue actuel est explicitement démonstration ;
+- search-index legacy doit être reconstruit ;
+- Integration Readiness reste une source de garde-fous à préserver.
+
+Stratégie :
+
+1. préserver les schémas v1 ;
+2. définir des schémas v2 séparés ;
+3. mapper explicitement ;
+4. migrer uniquement après validation.
 
 ## 8. Audit legacy
 
@@ -436,6 +464,7 @@ Aucun front V2 production n'a été écrit.
 
 - Audit legacy : **TERMINÉ**
 - Audit modules legacy ciblés : **TERMINÉ pour périmètre inspecté**
+- Analyse des écarts de schémas : **TERMINÉ — conception**
 - Benchmark : **TERMINÉ**
 - Architecture produit : **TERMINÉ — draft**
 - Taxonomie : **TERMINÉ — draft**
@@ -455,7 +484,7 @@ Aucun front V2 production n'a été écrit.
 
 1. Continuer recherche/specification et audit ne nécessitant pas Figma.
 2. Ne pas relancer Figma tant que le quota Starter reste bloqué.
-3. Auditer les derniers contrats/données qui pourraient limiter la taxonomie V2.
+3. Préparer le plan de schémas V2 et leurs critères sans modifier les schémas v1.
 4. Dès disponibilité Figma :
    - ajouter Game Hub ;
    - ajouter Global Search ;
