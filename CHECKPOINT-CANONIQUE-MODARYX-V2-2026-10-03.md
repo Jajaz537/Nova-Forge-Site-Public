@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`0e4412382b8c8f163cbba2b45f08c630c2e345c7`
+`dce24f8cee7cf25d394f02b0c096f1d39e119db9`
 
 PR :
 
@@ -618,6 +618,7 @@ Aucun front V2 production n'a été écrit.
 - Collections/Modpacks/Profiles : **TERMINÉ — conception**
 - Trust/Provenance/Distribution : **TERMINÉ — conception**
 - Installation/Manager : **TERMINÉ — conception**
+- SEO/I18n/Content : **TERMINÉ — conception**
 - Wireframes core : **EN COURS**
 - Écriture Figma supplémentaire : **BLOQUÉ EXTERNE**
 - Tree testing humain : **PREUVE MANQUANTE**
@@ -630,6 +631,7 @@ Aucun front V2 production n'a été écrit.
 1. Continuer recherche/specification et audit ne nécessitant pas Figma.
 2. Ne pas relancer Figma tant que le quota Starter reste bloqué.
 3. Continuer les derniers contrats produit et préparer les tests sans implémenter le front ni contourner le blocage Figma.
+4. Le contrat SEO/I18n/Content est tracé dans `docs/MODARYX-V2-SEO-I18N-CONTENT-CONTRACT-20261003.md`.
 4. Dès disponibilité Figma :
    - ajouter Game Hub ;
    - ajouter Global Search ;
