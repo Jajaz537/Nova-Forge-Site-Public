@@ -24,7 +24,7 @@ Un risque n'est pas fermé parce qu'il est documenté.
 | localStorage historique pollue V2 | EN COURS | Élevé | namespace/migrator définis ; preuve navigateur manquante |
 | Ancien design réapparaît | EN COURS | Très élevé | imports legacy bloqués ; validation artistique humaine encore requise |
 | Faux contenu de démo perçu comme réel | EN COURS | Élevé | dataClass explicite + fixtures isolées |
-| Collection/Modpack/Profile confondus | EN COURS — terminologie | Élevé | contrats séparés + capacité Collection explicite + `Configurations de jeu` provisoire ; validation humaine supplémentaire requise |
+| Collection/Modpack/Profile confondus | EN COURS — terminologie | Élevé | contrats séparés + capacité Collection explicite + **Profils de jeu** préféré par P01 ; validation humaine globale encore incomplète |
 | Projet/Release confondus | TERMINÉ — conception | Élevé | schémas séparés |
 | Compatibilité présentée sans preuve | EN COURS | Très élevé | CompatibilityClaim + états explicites |
 | Installation manager simulée | EN COURS | Très élevé | capability detection + fallback |
@@ -68,9 +68,11 @@ Document :
 | Risque | État | Mitigation |
 |---|---|---|
 | Navigation trop large | EN COURS | tree testing |
-| Profil de compte vs configuration de jeu | EN COURS | libellé provisoire **Configurations de jeu** + accès Game Hub/Bibliothèque ; revalidation humaine |
+| Profil de compte vs profil de jeu | EN COURS | **Profils de jeu** préféré par P01 + accès direct Game Hub/Bibliothèque ; surveiller la collision avec profil de compte |
 | Collection perçue comme installable | EN COURS | capacité visible + statut d'installation explicite |
 | Catalogue consultable perçu comme téléchargeable | EN COURS | ne jamais employer `disponible` seul ; statut distribution séparé |
+| Mods & Plugins trop étroit comme parapluie | EN COURS | P01 l'interprète littéralement ; tester un libellé plus large avant gel high-fi |
+| “Non vérifié” générique ambigu | TERMINÉ — principe | interdire le badge seul ; qualifier Compatibilité / Provenance / Scan / risque réel |
 | Trop de filtres | EN COURS | filtres contextuels + progressive disclosure |
 | Fiche trop dense | EN COURS | zone décision + tabs |
 | Dépendances invisibles | TERMINÉ — conception | Requirements first-class |
