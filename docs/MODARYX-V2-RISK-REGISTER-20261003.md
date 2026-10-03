@@ -24,15 +24,15 @@ Un risque n'est pas fermé parce qu'il est documenté.
 | localStorage historique pollue V2 | EN COURS | Élevé | namespace/migrator définis ; preuve navigateur manquante |
 | Ancien design réapparaît | EN COURS | Très élevé | imports legacy bloqués ; validation artistique humaine encore requise |
 | Faux contenu de démo perçu comme réel | EN COURS | Élevé | dataClass explicite + fixtures isolées |
-| Collection/Modpack/Profile confondus | TERMINÉ — conception | Élevé | contrats séparés |
+| Collection/Modpack/Profile confondus | EN COURS — terminologie | Élevé | contrats séparés + capacité Collection explicite + `Configurations de jeu` provisoire ; validation humaine supplémentaire requise |
 | Projet/Release confondus | TERMINÉ — conception | Élevé | schémas séparés |
 | Compatibilité présentée sans preuve | EN COURS | Très élevé | CompatibilityClaim + états explicites |
 | Installation manager simulée | EN COURS | Très élevé | capability detection + fallback |
 | Hash/signature présentés comme “safe” | TERMINÉ — conception | Élevé | vocabulaire trust strict |
 | High-fi lancé trop tôt | BLOQUÉ volontairement | Très élevé | High-Fi Gate |
 | Direction artistique pilotée par ancien code | BLOQUÉ volontairement | Très élevé | prototype avant frontend |
-| Wireframes incomplets | BLOQUÉ Figma | Élevé | blueprints prêts, reprise au quota |
-| Tree testing non effectué | PREUVE MANQUANTE | Élevé | protocole humain prêt |
+| Matérialisation Figma core incomplète | BLOQUÉ EXTERNE | Élevé | couverture conceptuelle + prototype low-fi HTML présents ; reprise Figma seulement si quota change |
+| Validation humaine globale incomplète | EN COURS | Élevé | P01 réel terminé + études IA indépendantes terminées ; compléter sur libellés critiques avant gel high-fi |
 | Figma Starter quota | BLOQUÉ EXTERNE | Moyen | ne pas contourner, avancer hors Figma |
 | Design “site sombre à cartes” réapparaît | EN COURS | Élevé | diversité de patterns/layouts, validation humaine |
 | Univers/lore masque le produit | TERMINÉ — principe | Élevé | vocabulaire fonctionnel prioritaire |
@@ -68,6 +68,9 @@ Document :
 | Risque | État | Mitigation |
 |---|---|---|
 | Navigation trop large | EN COURS | tree testing |
+| Profil de compte vs configuration de jeu | EN COURS | libellé provisoire **Configurations de jeu** + accès Game Hub/Bibliothèque ; revalidation humaine |
+| Collection perçue comme installable | EN COURS | capacité visible + statut d'installation explicite |
+| Catalogue consultable perçu comme téléchargeable | EN COURS | ne jamais employer `disponible` seul ; statut distribution séparé |
 | Trop de filtres | EN COURS | filtres contextuels + progressive disclosure |
 | Fiche trop dense | EN COURS | zone décision + tabs |
 | Dépendances invisibles | TERMINÉ — conception | Requirements first-class |
