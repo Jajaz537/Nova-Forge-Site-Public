@@ -31,7 +31,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 |---|---|---|
 | Découvrir | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
 | Jeux | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
-| Mods & Plugins | EN COURS — libellé parapluie non stabilisé après test humain P01 | PRODUCT-ARCHITECTURE / HUMAN-TERMINOLOGY-MINITEST-P01 |
+| Mods & Plugins | EN COURS — libellé parapluie non stabilisé après P01 + benchmark externe ; shortlist `Contenus de jeu` / `Mods & contenus` / `Créations` | PRODUCT-ARCHITECTURE / HUMAN-TERMINOLOGY-MINITEST-P01 / MULTIGAMING-MODDING-TERMINOLOGY-BENCHMARK |
 | Collections | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
 | Créateurs | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
 | Communauté | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
@@ -328,3 +328,19 @@ Avant toute VF V2 :
 6. aucun full replay avant fermeture ciblée des blockers.
 
 **État du registre : TERMINÉ pour la consolidation actuelle / À MAINTENIR jusqu'à la VF.**
+
+
+## 25. Benchmark terminologique multi-gaming / modding
+
+**TERMINÉ — recherche externe**
+
+Document :
+`docs/MODARYX-V2-MULTIGAMING-MODDING-TERMINOLOGY-BENCHMARK-20261003.md`
+
+Résultats à ne pas oublier :
+- **Profils de jeu** reste défendable et préféré par P01 ;
+- **Collection** reste valable mais sa capacité d'installation doit être explicite ;
+- **Bibliothèque** est cohérente avec les conventions gaming ;
+- **Mods & Plugins** n'est pas assez large comme parapluie final ;
+- **Non vérifié** générique reste interdit ;
+- candidats parapluie à tester : **Contenus de jeu**, **Mods & contenus**, **Créations**.
