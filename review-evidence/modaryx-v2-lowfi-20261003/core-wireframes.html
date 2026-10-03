@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MODARYX V2 — Low-Fi Core Wireframes</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f4f4;color:#111}
+  header{padding:20px 24px;background:#fff;border-bottom:1px solid #bbb;position:sticky;top:0;z-index:10}
+  header h1{margin:0 0 6px;font-size:20px}
+  header p{margin:0;color:#555;font-size:14px}
+  main{padding:24px;display:grid;gap:28px}
+  .frame{background:#fff;border:2px solid #222;border-radius:10px;overflow:hidden}
+  .frame.desktop{width:min(100%,1440px);margin:auto}
+  .frame.mobile{width:390px;max-width:100%;margin:auto}
+  .bar{display:flex;gap:12px;align-items:center;padding:14px 18px;border-bottom:1px solid #bbb;background:#fafafa}
+  .logo{font-weight:700}
+  .spacer{flex:1}
+  .btn,.chip,.input,.card,.panel,.row,.tab{border:1px solid #888;background:#fff;border-radius:7px}
+  .btn,.chip,.tab{padding:9px 12px}
+  .input{padding:12px 14px;min-height:42px;color:#666}
+  .content{padding:18px}
+  .grid{display:grid;gap:16px}
+  .grid.cols2{grid-template-columns:2fr 1fr}
+  .grid.cols3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols4{grid-template-columns:repeat(4,1fr)}
+  .section{margin-top:22px}
+  .section h2{font-size:16px;margin:0 0 10px}
+  .hero{padding:18px;border-bottom:1px solid #ccc}
+  .hero h2{margin:0 0 6px}
+  .muted{color:#666;font-size:13px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .card{padding:14px;min-height:110px}
+  .card strong,.row strong{display:block;margin-bottom:6px}
+  .row{padding:12px;margin-bottom:10px}
+  .filters{padding:14px;border:1px solid #aaa;border-radius:8px}
+  .stack{display:grid;gap:10px}
+  .two-col-search{display:grid;grid-template-columns:280px 1fr;gap:18px}
+  .community{display:grid;grid-template-columns:1fr 320px;gap:18px}
+  .notice{padding:12px;border:1px dashed #777;border-radius:7px;background:#fafafa}
+  .mobile .bar{padding:12px}
+  .mobile .content{padding:14px}
+  .mobile .grid.cols4,.mobile .grid.cols3,.mobile .grid.cols2{grid-template-columns:1fr}
+  .mobile .tabs{display:grid;grid-template-columns:1fr 1fr}
+  .mobile .card{min-height:88px}
+  .caption{font-size:12px;color:#555;margin:10px 0 0}
+  @media(max-width:900px){.grid.cols4,.grid.cols3,.grid.cols2,.two-col-search,.community{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>MODARYX V2 — Low-Fi Core Wireframes</h1>
+  <p>Prototype local gratuit. Aucun high-fi, aucun asset legacy, aucun code du site public modifié.</p>
+</header>
+<main>
+<section class="frame desktop">
+  <div class="bar">
+    <div class="logo">MODARYX</div>
+    <div class="chip">Jeux</div><div class="chip">Mods & Plugins</div><div class="chip">Collections</div>
+    <div class="spacer"></div><div class="chip">Recherche</div><div class="chip">Bibliothèque</div><div class="chip">Compte</div>
+  </div>
+  <div class="hero">
+    <div class="muted">Jeux › Exemple de jeu</div>
+    <div class="grid cols2">
+      <div><h2>Exemple de jeu</h2><div class="muted">Support state · Version active 1.21.1</div></div>
+      <div class="stack"><div class="btn">Changer de version</div><div class="btn">Suivre</div></div>
+    </div>
+    <div class="input" style="margin-top:14px">Rechercher dans ce jeu…</div>
+  </div>
+  <div class="content">
+    <div class="tabs"><div class="tab">Mods & Plugins</div><div class="tab">Collections</div><div class="tab">Créateurs</div><div class="tab">Guides</div></div>
+    <div class="section"><h2>Pour votre version</h2><div class="grid cols4">
+      <div class="card"><strong>Mod exemple</strong><span class="muted">Compatible · v2.4 · Créateur</span></div>
+      <div class="card"><strong>Plugin exemple</strong><span class="muted">Compatibilité estimée</span></div>
+      <div class="card"><strong>Outil exemple</strong><span class="muted">Dépendance requise</span></div>
+      <div class="card"><strong>Pack exemple</strong><span class="muted">Distribution indisponible</span></div>
+    </div></div>
+    <div class="section"><h2>Populaires</h2><div class="grid cols3"><div class="card"></div><div class="card"></div><div class="card"></div></div></div>
+    <div class="section"><h2>Nouveautés</h2><div class="grid cols3"><div class="card"></div><div class="card"></div><div class="card"></div></div></div>
+    <div class="section"><h2>Collections</h2><div class="grid cols3"><div class="card"></div><div class="card"></div><div class="card"></div></div></div>
+    <div class="section"><h2>Créateurs actifs</h2><div class="grid cols4"><div class="card"></div><div class="card"></div><div class="card"></div><div class="card"></div></div></div>
+  </div>
+  <div class="caption">Desktop Game Hub</div>
+</section>
+
+<section class="frame desktop">
+  <div class="bar"><div class="logo">MODARYX</div><div class="spacer"></div><div class="chip">Compte</div></div>
+  <div class="content">
+    <h2>Recherche globale</h2>
+    <div class="input">Rechercher jeux, contenus, collections ou créateurs…</div>
+    <div class="tabs" style="margin-top:12px"><div class="tab">Tous</div><div class="tab">Jeux</div><div class="tab">Contenus</div><div class="tab">Collections</div><div class="tab">Créateurs</div></div>
+    <div class="two-col-search section">
+      <aside class="filters stack">
+        <strong>Filtres</strong>
+        <div class="chip">Jeu</div><div class="chip">Type</div><div class="chip">Auteur</div><div class="chip">Date</div><div class="chip">Statut</div><div class="chip">Compatibilité</div>
+      </aside>
+      <div>
+        <div class="muted" style="margin-bottom:10px">Filtres actifs : jeu · compatible</div>
+        <div class="row"><strong>[Jeu] Exemple</strong><span class="muted">Résultat de type jeu</span></div>
+        <div class="row"><strong>[Mod] Exemple de contenu</strong><span class="muted">Jeu · Créateur · v2.4 · Compatible</span></div>
+        <div class="row"><strong>[Collection] Sélection exemple</strong><span class="muted">Jeu · Curateur</span></div>
+        <div class="row"><strong>[Créateur] Nom exemple</strong><span class="muted">12 créations</span></div>
+        <div class="notice">Si la recherche externe est indisponible, les résultats locaux restent disponibles.</div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">Desktop Global Search</div>
+</section>
+
+<section class="frame desktop">
+  <div class="bar"><div class="logo">MODARYX</div><div class="spacer"></div><div class="chip">Recherche</div><div class="chip">Compte</div></div>
+  <div class="content">
+    <h2>Communauté</h2>
+    <p class="muted">Support, questions et discussions centrés sur le modding.</p>
+    <div class="input">Rechercher dans la communauté…</div>
+    <div class="tabs" style="margin-top:12px"><div class="tab">Support</div><div class="tab">Questions</div><div class="tab">Discussions</div><div class="tab">Studios</div></div>
+    <div class="community section">
+      <div>
+        <div class="row"><strong>[Support] Le mod ne démarre plus après la mise à jour</strong><span class="muted">Jeu · Release · Non résolu · 12 min</span></div>
+        <div class="row"><strong>[Question] Quelle version du loader utiliser ?</strong><span class="muted">Jeu · 3 réponses</span></div>
+        <div class="row"><strong>[Discussion] Configuration recommandée</strong><span class="muted">Jeu · 8 réponses</span></div>
+        <div class="row"><strong>[Studio] Équipe exemple</strong><span class="muted">Créations liées</span></div>
+      </div>
+      <aside class="stack">
+        <div class="panel" style="padding:14px"><strong>Contexte</strong><p class="muted">Jeu / contenu sélectionné</p></div>
+        <div class="panel" style="padding:14px"><strong>Besoin d’aide ?</strong><p class="muted">Créer une demande de support</p></div>
+        <div class="panel" style="padding:14px"><strong>Signaler</strong><p class="muted">Action distincte du support</p></div>
+      </aside>
+    </div>
+  </div>
+  <div class="caption">Desktop Community</div>
+</section>
+
+<section class="frame mobile">
+  <div class="bar"><div class="logo">MODARYX</div><div class="spacer"></div><div class="chip">☰</div></div>
+  <div class="content">
+    <div class="muted">Jeux › Exemple</div>
+    <h2>Exemple de jeu</h2>
+    <div class="chip">Version 1.21.1 ▾</div>
+    <div class="input" style="margin-top:10px">Rechercher dans ce jeu…</div>
+    <div class="tabs" style="margin-top:12px"><div class="tab">Mods</div><div class="tab">Collections</div><div class="tab">Guides</div><div class="tab">Créateurs</div></div>
+    <div class="section"><h2>Pour votre version</h2>
+      <div class="row"><strong>Mod exemple</strong><span class="muted">Compatible · v2.4</span></div>
+      <div class="row"><strong>Plugin exemple</strong><span class="muted">Dépendance requise</span></div>
+    </div>
+    <div class="section"><h2>Populaires</h2><div class="card"></div><div class="card" style="margin-top:10px"></div></div>
+    <div class="section"><h2>Nouveautés</h2><div class="card"></div></div>
+    <div class="section"><h2>Catégories</h2><div class="tabs"><div class="chip">Gameplay</div><div class="chip">Visuel</div><div class="chip">Outils</div><div class="chip">Packs</div></div></div>
+    <div class="section"><h2>Collections</h2><div class="card"></div></div>
+    <div class="section"><h2>Créateurs</h2><div class="card"></div></div>
+  </div>
+  <div class="caption">Mobile Game Hub · 390 px</div>
+</section>
+</main>
+</body>
+</html>
