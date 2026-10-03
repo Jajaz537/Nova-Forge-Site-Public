@@ -1,2 +1,17 @@
 User-agent: *
 Allow: /
+Disallow: /.github/
+Disallow: /docs/
+Disallow: /qa/
+Disallow: /review-evidence/
+Disallow: /schemas/
+Disallow: /data/
+Disallow: /migrations/
+Disallow: /public-status.json
+Disallow: /public-build.json
+Disallow: /domain-cutover.json
+Disallow: /downloads.json
+Disallow: /package.json
+Disallow: /preview.mjs
+
+Sitemap: https://modaryxmods.com/sitemap.xml

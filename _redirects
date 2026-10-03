@@ -1,2 +1,82 @@
-# Cloudflare Pages path redirects only.
-# Domain-level www -> apex redirect must be configured as a Cloudflare Redirect Rule after DNS activation.
+# MODARYX public surface.
+# Legacy/internal repository material must never render as a public page.
+
+/public-status.json / 302
+/public-build.json / 302
+/domain-cutover.json / 302
+/downloads.json / 302
+/package.json / 302
+/preview.mjs / 302
+
+/CHECKPOINT-CANONIQUE-MODARYX-2026-09-18.md / 302
+/CHECKPOINT-CANONIQUE-MODARYX-2026-09-19.md / 302
+/CHECKPOINT-CANONIQUE-MODARYX-2026-09-20.md / 302
+/CHECKPOINT-CANONIQUE-MODARYX-2026-09-21.md / 302
+/FINAL-EXTERNAL-VALIDATION-MATRIX.md / 302
+/MODARYX-DESIGN-CONTRACT.md / 302
+/MODARYX-NEXT-BATCH.md / 302
+/MODARYX-SITE-ARCHITECTURE-V1.md / 302
+/MODARYX-SITE-IDEAS-INVENTORY.md / 302
+/MODARYX-SITE-VF-PLAN.md / 302
+/MODARYX-VF-FINISHLINE-WORK-CHECKPOINT-2026-10.md / 302
+/MODARYX-VF-STATUS.md / 302
+/NOVA-CONTINUITY-PUBLIC.md / 302
+/README-domain-cutover.md / 302
+/VF-TECHNICALLY-MAXIMAL-CANDIDATE.md / 302
+
+/.github/* / 302
+/docs/* / 302
+/qa/* / 302
+/review-evidence/* / 302
+/schemas/* / 302
+
+/catalog / 302
+/catalog.html / 302
+/creator-studio / 302
+/creator-studio.html / 302
+/documentation / 302
+/documentation.html / 302
+/downloads / 302
+/downloads.html / 302
+/ecosystem / 302
+/ecosystem.html / 302
+/profiles / 302
+/profiles.html / 302
+/project / 302
+/project.html / 302
+/project-balanced-latency-pack / 302
+/project-balanced-latency-pack.html / 302
+/project-ember-textures / 302
+/project-ember-textures.html / 302
+/project-forge-night-experience / 302
+/project-forge-night-experience.html / 302
+/search / 302
+/search.html / 302
+/security / 302
+/security.html / 302
+/verify / 302
+/verify.html / 302
+
+/univers /univers.html 200
+/compagnons /compagnons.html 200
+/aventures /aventures.html 200
+/lieux /lieux.html 200
+/factions /factions.html 200
+/communaute /communaute.html 200
+/community /communaute.html 302
+/community.html /communaute.html 302
+
+/data/* / 302
+/migrations/* / 302
+/games /aventures.html 302
+/games/* /aventures.html 302
+/gta-6 /aventures.html 302
+/gta-6/* /aventures.html 302
+/red-dead-redemption-2 /aventures.html 302
+/red-dead-redemption-2/* /aventures.html 302
+/univers.html /univers 301
+/compagnons.html /compagnons 301
+/aventures.html /aventures 301
+/lieux.html /lieux 301
+/factions.html /factions 301
+/communaute.html /communaute 301
