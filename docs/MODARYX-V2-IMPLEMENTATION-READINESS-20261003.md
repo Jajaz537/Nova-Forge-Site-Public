@@ -228,3 +228,87 @@ Uniquement si nécessaire et isolé :
 Mais même ces éléments ne doivent pas être introduits sans nécessité, branche isolée et micro-proof.
 
 **État global : BLOQUÉ volontairement pour le frontend / préparation technique avancée.**
+
+
+## 23. Réévaluation après expansion Living Threshold — 4 octobre 2026
+
+**Statut : prototype exploratoire largement matérialisé / root frontend V2 de production toujours BLOQUÉ**
+
+La matrice ci-dessus décrit l'état avant l'expansion Living Threshold. Elle reste historique pour expliquer le gate initial, mais plusieurs lignes `PREUVE MANQUANTE` ou `NON IMPLÉMENTÉ` ont depuis été fermées **au niveau prototype exploratoire uniquement**.
+
+### Preuve consolidée de référence
+
+- run `37161527706` — **SUCCESS** ;
+- commit capturé : `03858bea92232b3040d76923e53d9a71d822712c` ;
+- artifact : `11288295345` ;
+- `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y` ;
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y` ;
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS` ;
+- `MULTISCREEN_CAPTURE_COUNT 37` ;
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Preuve transverse plus récente :
+- run `37161856917` — **SUCCESS** ;
+- offline navigateur réel + validation error/retry locale prouvés ;
+- `MULTISCREEN_CAPTURE_COUNT 39`.
+
+### Surfaces désormais matérialisées et exercées dans le prototype
+
+| Surface | État prototype | État production V2 |
+|---|---|---|
+| Homepage / Discover | TERMINÉ — exploratoire | NON COMMENCÉ |
+| Games Index | TERMINÉ — exploratoire | NON COMMENCÉ |
+| Game Hub desktop/mobile | TERMINÉ — exploratoire | NON COMMENCÉ |
+| Global Search desktop/mobile | TERMINÉ — exploratoire | NON COMMENCÉ |
+| Catalog | TERMINÉ pour recherche/filtres/tri/reset/no-results | NON COMMENCÉ |
+| Content Detail | TERMINÉ pour tabs décision/fichiers/versions/compatibilité/changelog/support/permissions/report local | NON COMMENCÉ |
+| Collections | TERMINÉ — surface distincte | NON COMMENCÉ |
+| Modpack | TERMINÉ — démonstration distincte, install indisponible | NON COMMENCÉ |
+| Profil de jeu | TERMINÉ — détail local/private/components/order/sync unavailable | NON COMMENCÉ |
+| Créateurs | TERMINÉ — surface distincte | NON COMMENCÉ |
+| Community | TERMINÉ — Support/Questions/Discussions/Studios/Activité | NON COMMENCÉ |
+| Library | TERMINÉ — objets séparés + profil ouvrable | NON COMMENCÉ |
+| Creator Studio | TERMINÉ — couverture exploratoire étendue | NON COMMENCÉ |
+| Account / Settings | TERMINÉ — guest-first, privacy, onboarding facultatif, préférences locales | NON COMMENCÉ |
+| Notifications | TERMINÉ — états sans faux événements | NON COMMENCÉ |
+| Offline / stale | TERMINÉ — prototype browser event | NON COMMENCÉ |
+| Validation error / retry | TERMINÉ — signalement local | NON COMMENCÉ |
+
+### Gaps internes encore faisables avant root V2
+
+- états loading/skeleton documentés ou exercés uniquement lorsque la future latence le justifie ;
+- preview explicite de session expirée / permission denied sans prétendre à une session serveur réelle ;
+- preview explicite de sync conflict sans prétendre à une synchronisation réelle ;
+- inventaire final des composants/tokens réellement utilisés par Living Threshold ;
+- mapping prototype → composants V2 production ;
+- stratégie de données fixtures → adapters V2 ;
+- choix de stack encore bloqué par les critères du gate technique et la validation humaine requise.
+
+### Blockers restant avant premier root/frontend V2 de production
+
+- revue humaine multi-écrans supplémentaire ;
+- validation mobile humaine réelle ;
+- référence visuelle approuvée archivable + comparaison normalisée ;
+- screen reader réel ;
+- appareils physiques ;
+- décision contrôlée de stack/root après fermeture ou reclassification prouvée des blockers requis.
+
+### Décision
+
+L'expansion du prototype **ne lève pas** automatiquement les conditions de la section 21.
+
+Ce qui est autorisé :
+- continuer les preuves et états réversibles du prototype ;
+- préparer mapping composants/tokens/data ;
+- préparer tooling/contract tests/policies isolés ;
+- documenter précisément le futur root V2.
+
+Ce qui reste interdit sans nouvelle décision canonique :
+- présenter Living Threshold comme frontend production ;
+- cutover public ;
+- modification de `main` ;
+- réutilisation visuelle V1 ;
+- migration Cloudflare/DNS ;
+- déclaration High-Fi/VF finale.
+
+**État global réévalué : préparation technique très avancée ; prototype exploratoire substantiel ; root V2 production encore BLOQUÉ par gate de validation.**
