@@ -284,7 +284,10 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | Game Hub mobile | TERMINÉ — low-fi HTML / BLOQUÉ Figma uniquement | MISSING-WIREFRAME-BLUEPRINTS / LOWFI-REVIEW |
 | Boucle visuelle locale Chromium/Playwright | TERMINÉ — micro-preuve environnement courant ; revalider à chaque session ; `file://`/localhost bloqués, utiliser `page.set_content` | CHECKPOINT / LOWFI-REVIEW |
 | High-fi final | BLOQUÉ volontairement ; exploration réversible autorisée | HIGH-FI-GATE |
-| Direction artistique finale | BLOQUÉ volontairement | HIGH-FI-GATE |
+| Direction artistique exploratoire | TERMINÉ — option 2 sélectionnée, palette hybride 2+3, prototype isolé | LIVING-THRESHOLD-DESIGN-SYSTEM / review-evidence |
+| Design system préparatoire | TERMINÉ — tokens, composants, responsive, a11y, motion, identité documentés | LIVING-THRESHOLD-DESIGN-SYSTEM |
+| QA visuelle archivable du prototype | BLOQUÉE — capture navigateur inspectée mais export fichier/comparaison normalisée manquants | review-evidence/.../design-qa.md |
+| Direction artistique finale | BLOQUÉ volontairement — sélection exploratoire ≠ gel high-fi | HIGH-FI-GATE |
 | Tree test humain | EN COURS — P01 réel + mini-test terminologique P01 terminés, validation globale incomplète | HUMAN-MINI-TREE-TEST-P01 / HUMAN-TERMINOLOGY-MINITEST-P01 / CROSS-ANALYSIS |
 
 ## 22. Capacités historiques à ne pas perdre
@@ -401,3 +404,18 @@ Référence : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-GAME-PROFILES-20261003.md`.
 - High-Fi final : reste **BLOQUÉ**
 
 Référence : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-CONTENT-UMBRELLA-20261003.md`.
+
+## Direction artistique exploratoire — Living Threshold hybride
+
+**TERMINÉ — sélection et prototype réversibles / HIGH-FI BLOQUÉ**
+
+- option humaine retenue : **Living Threshold** ;
+- affinage humain : couleurs des options 2 et 3 ;
+- cyan = action/compatibilité, violet = profils/secondaire, ambre = lumière du monde uniquement ;
+- prototype autonome : `review-evidence/modaryx-v2-living-threshold-prototype-20261003/` ;
+- aucun import CSS/DOM/renderer/asset V1 ;
+- aucun frontend public, DNS, Cloudflare ou production modifié ;
+- Figma reste **BLOQUÉ EXTERNE** ;
+- QA formelle reste **BLOQUÉE** jusqu'à preuve visuelle archivable et comparaison normalisée.
+
+Référence : `docs/MODARYX-V2-LIVING-THRESHOLD-DESIGN-SYSTEM-20261003.md`.

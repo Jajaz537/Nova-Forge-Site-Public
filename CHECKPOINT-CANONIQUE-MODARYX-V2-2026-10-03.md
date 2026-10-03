@@ -879,7 +879,10 @@ Aucun front V2 production n'a été écrit.
 - Wireframes core : **TERMINÉ pour conception textuelle + prototype low-fi local des 4 écrans / validation humaine EN COURS**
 - Écriture Figma supplémentaire : **BLOQUÉ EXTERNE**
 - Tree testing humain : **EN COURS — P01 réel terminé / autres profils utiles pour consolider**
-- Direction artistique : **EXPLORATION RÉVERSIBLE AUTORISÉE / finale BLOQUÉE**
+- Direction artistique exploratoire : **LIVING THRESHOLD SÉLECTIONNÉE / PALETTE HYBRIDE 2+3 / prototype réversible créé**
+- Design system préparatoire : **TERMINÉ — couleurs, surfaces, typographie, grille, spacing, composants, états, responsive, accessibilité, motion, iconographie, illustration et identité documentés**
+- QA visuelle formelle du prototype : **BLOQUÉE — rendu navigateur inspecté mais preuve de comparaison archivable manquante**
+- Direction artistique finale : **BLOQUÉE — la sélection exploratoire ne vaut pas gel high-fi**
 - High-fi final : **BLOQUÉ — autres validations humaines/visuelles encore requises ; wordings `Profils de jeu` et `Mods & contenus` désormais figés par décision produit**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
 
@@ -903,8 +906,10 @@ Aucun front V2 production n'a été écrit.
 11. Mini-test humain parapluie P01 TERMINÉ : **Mods & contenus** choisi. Document : `docs/MODARYX-V2-HUMAN-CONTENT-UMBRELLA-MINITEST-P01-20261003.md`.
 12. Test assistant 6×6 + rapport Work indépendant TERMINÉS ; comparaison P01 + assistant + Work TERMINÉE.
 13. Décisions produit fermées : **Profils de jeu** et **Mods & contenus**. La validation humaine globale reste EN COURS et ne doit pas être confondue avec ces décisions de wording.
-14. Prochain travail interne : direction artistique exploratoire et design system préparatoire réversibles ; aucun gel high-fi final sans preuves humaines/visuelles suffisantes.
-15. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
+14. Direction artistique exploratoire : **TERMINÉE** avec sélection humaine de `Living Threshold` et affinage palette 2+3. Référence : `docs/MODARYX-V2-LIVING-THRESHOLD-DESIGN-SYSTEM-20261003.md`.
+15. Prototype autonome créé dans `review-evidence/modaryx-v2-living-threshold-prototype-20261003/` pour Home, Game Hub, Catalog, Content Detail, Library, Community et mobile. Il reste une preuve de conception réversible, pas le frontend V2 de production.
+16. Prochain blocker réel : produire une capture navigateur archivable et une comparaison normalisée, puis obtenir une revue humaine multi-écrans. Aucun gel high-fi final avant fermeture de ces preuves.
+17. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
 ## 30. Règle de reprise
 
