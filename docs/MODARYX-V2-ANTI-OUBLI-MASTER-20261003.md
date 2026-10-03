@@ -1,0 +1,328 @@
+# MODARYX V2 — Registre anti-oubli maître
+
+**Date : 2026-10-03**
+**Statut : registre de conception V2 — aucune VF déclarée**
+
+## 1. Règle
+
+Aucune idée explicitement retenue n'est supprimée silencieusement.
+
+Chaque élément doit être dans un état :
+- TERMINÉ
+- EN COURS
+- BLOQUÉ
+- PREUVE MANQUANTE
+
+Une capacité non implémentée reste non implémentée même si son contrat est terminé.
+
+## 2. Identité produit
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| MODARYX = plateforme web multigaming | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
+| Nova Forge OS reste distinct | TERMINÉ — contrat | CHECKPOINT |
+| getnova/getnovaforge = historique | TERMINÉ — classification | LEGACY-AUDIT |
+| Univers MODARYX conservé sans masquer le produit | TERMINÉ — principe | BENCHMARK / PRODUCT-ARCHITECTURE |
+| Ancien front non canonique visuellement | TERMINÉ — décision | LEGACY-AUDIT |
+
+## 3. Architecture et navigation
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Découvrir | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
+| Jeux | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
+| Mods & Plugins | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
+| Collections | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
+| Créateurs | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
+| Communauté | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
+| Créer / Studio | TERMINÉ — conception | CREATOR-STUDIO |
+| Bibliothèque | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
+| Recherche globale | TERMINÉ — conception / wireframe manquant | SEARCH-FILTER-DISCOVERY |
+| Navigation mobile prioritaire | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
+| Breadcrumbs | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
+
+## 4. Jeux et hubs
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Games index | TERMINÉ — low-fi existant | FIGMA |
+| Game Hub | TERMINÉ — contrat / BLOQUÉ wireframe | GAME-HUB |
+| Version active du jeu | TERMINÉ — conception | GAME-HUB |
+| Types/catégories par jeu | TERMINÉ — conception | TAXONOMY |
+| Statut support jeu | TERMINÉ — conception | GAME-SUPPORT-LIFECYCLE |
+| Hubs editorial-only possibles | TERMINÉ — conception | GAME-SUPPORT-LIFECYCLE |
+| Distribution séparée du hub éditorial | TERMINÉ — conception | GAME-SUPPORT-LIFECYCLE |
+
+## 5. Recherche / découverte / filtres
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Search local-first | TERMINÉ — conception | SEARCH-FILTER-DISCOVERY |
+| Moteur externe optionnel | TERMINÉ — conception | SEARCH-FILTER-DISCOVERY |
+| Applied filters toujours visibles | TERMINÉ — conception | SEARCH-FILTER-DISCOVERY |
+| Multi-select | TERMINÉ — conception | SEARCH-FILTER-DISCOVERY |
+| OR intra-facette / AND inter-facettes | TERMINÉ — conception | SEARCH-FILTER-DISCOVERY |
+| Filtres contextuels par jeu/type | TERMINÉ — conception | SEARCH-FILTER-DISCOVERY |
+| No-results utile | TERMINÉ — conception | SEARCH-FILTER-DISCOVERY |
+| Saved searches | TERMINÉ — conception | SEARCH-FILTER-DISCOVERY |
+| Quick View | TERMINÉ — conception | SEARCH-FILTER-DISCOVERY |
+
+## 6. Types de contenu
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Mod | TERMINÉ — taxonomie | CONTENT-TAXONOMY |
+| Plugin | TERMINÉ — taxonomie | CONTENT-TAXONOMY |
+| Addon | TERMINÉ — taxonomie | CONTENT-TAXONOMY |
+| Script | TERMINÉ — taxonomie | CONTENT-TAXONOMY |
+| Map | TERMINÉ — taxonomie | CONTENT-TAXONOMY |
+| Shader / preset | TERMINÉ — taxonomie | CONTENT-TAXONOMY |
+| Tool / utility | TERMINÉ — taxonomie | CONTENT-TAXONOMY |
+| Library / framework / loader | TERMINÉ — taxonomie | CONTENT-TAXONOMY |
+| Pack / resource / texture | TERMINÉ — taxonomie | CONTENT-TAXONOMY |
+| Patch / translation | TERMINÉ — taxonomie | CONTENT-TAXONOMY |
+| Types extensibles par jeu | TERMINÉ — conception | CONTENT-TAXONOMY |
+
+## 7. Fiche contenu / releases
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| ContentItem séparé de Release | TERMINÉ — conception | SCHEMA-PLAN / CONTENT-DETAIL |
+| Compatibilité above-the-fold | TERMINÉ — conception | CONTENT-DETAIL |
+| Requirements | TERMINÉ — conception | CONTENT-DETAIL |
+| Dependencies | TERMINÉ — conception | CONTENT-DETAIL |
+| Conflicts | TERMINÉ — conception | CONTENT-DETAIL |
+| Files | TERMINÉ — conception | CONTENT-DETAIL |
+| Versions | TERMINÉ — conception | CONTENT-DETAIL |
+| Changelog | TERMINÉ — conception | CONTENT-DETAIL |
+| Permissions/licence | TERMINÉ — conception | CONTENT-DETAIL |
+| Media | TERMINÉ — conception | CONTENT-DETAIL |
+| Support / issues | TERMINÉ — conception | CONTENT-DETAIL |
+| Archived/removed/quarantined/revoked | TERMINÉ — conception | CONTENT-DETAIL |
+
+## 8. Compatibilité / dépendances
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| compatible / partial / incompatible / unknown | TERMINÉ — conception | SCHEMA-PLAN |
+| measured / declared / estimated / unknown | TERMINÉ — conception | SCHEMA-PLAN |
+| required | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
+| optional | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
+| recommended | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
+| incompatible | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
+| replaces sans substitution silencieuse | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
+
+## 9. Favoris / Collections / Modpacks / Profiles
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Favoris | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
+| Collections | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
+| Modpacks | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
+| Profiles / Loadouts | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
+| Conversion explicite entre objets | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
+| Version pinning | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
+| Sync states | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
+| Confidentialité local/private par défaut | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
+
+## 10. Créateurs / équipes / Studio
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Creator profile | TERMINÉ — conception | ONBOARDING-ACCOUNT-CREATOR |
+| Team / Studio | TERMINÉ — conception | CREATOR-STUDIO |
+| Rôles d'équipe | TERMINÉ — conception | ONBOARDING-ACCOUNT-CREATOR |
+| Creator Studio dashboard | TERMINÉ — conception | CREATOR-STUDIO |
+| Projects | TERMINÉ — conception | CREATOR-STUDIO |
+| Releases | TERMINÉ — conception | CREATOR-STUDIO |
+| Upload | TERMINÉ — conception | CREATOR-STUDIO |
+| Analytics réelles seulement | TERMINÉ — conception | CREATOR-STUDIO |
+| Brouillon local préservé | TERMINÉ — conception | CREATOR-STUDIO |
+| Publication / modération séparées | TERMINÉ — conception | CREATOR-STUDIO |
+
+## 11. Compte / profils / auth
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Guest-first | TERMINÉ — conception | ONBOARDING-ACCOUNT-CREATOR |
+| Account séparé du Public Profile | TERMINÉ — conception | ONBOARDING-ACCOUNT-CREATOR |
+| Creator séparé du compte | TERMINÉ — conception | ONBOARDING-ACCOUNT-CREATOR |
+| Authority séparée du rôle créateur | TERMINÉ — conception | COMMUNITY-PROFILES-DEEP-AUDIT |
+| Session states | TERMINÉ — conception | ONBOARDING-ACCOUNT-CREATOR |
+| Passkeys réelles | PREUVE MANQUANTE | anti-oubli historique |
+| Auth backend DEV historique | TERMINÉ — preuve historique, à reconnecter V2 plus tard | anti-oubli historique |
+
+## 12. Community / modération
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Support | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
+| Questions | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
+| Discussions | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
+| Studios / clubs | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
+| Signalements | TERMINÉ — conception | MODERATION-APPEALS |
+| Modération | TERMINÉ — conception | MODERATION-APPEALS |
+| Appeals | TERMINÉ — conception | MODERATION-APPEALS |
+| Quarantine | TERMINÉ — conception | MODERATION-APPEALS |
+| Permissions serveur | TERMINÉ — principe | MODERATION-APPEALS |
+
+## 13. Confiance / provenance / distribution
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Provenance | TERMINÉ — conception | TRUST-PROVENANCE-DISTRIBUTION |
+| SHA-256 | TERMINÉ — conception | TRUST-PROVENANCE-DISTRIBUTION |
+| Signature | TERMINÉ — conception / signer prod absent | TRUST-PROVENANCE-DISTRIBUTION |
+| Scan réel seulement | TERMINÉ — conception | TRUST-PROVENANCE-DISTRIBUTION |
+| Licence / droits | TERMINÉ — conception | TRUST-PROVENANCE-DISTRIBUTION |
+| Distribution locked/published/withdrawn/revoked | TERMINÉ — conception | TRUST-PROVENANCE-DISTRIBUTION |
+| Téléchargements réels | BLOQUÉ | artefact réel autorisé absent |
+| Signer / trust anchor prod | BLOQUÉ | service/clé réel non connecté |
+
+## 14. Installation / manager
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Install with manager | TERMINÉ — contrat / runtime non connecté | INSTALL-MANAGER |
+| Manual download | TERMINÉ — contrat / artefact réel requis | INSTALL-MANAGER |
+| Preflight | TERMINÉ — conception | INSTALL-MANAGER |
+| Dependency resolution | TERMINÉ — conception | INSTALL-MANAGER |
+| Conflict resolution | TERMINÉ — conception | INSTALL-MANAGER |
+| Progression réelle uniquement | TERMINÉ — conception | INSTALL-MANAGER |
+| Update | TERMINÉ — conception | INSTALL-MANAGER |
+| Rollback | TERMINÉ — conception | INSTALL-MANAGER |
+| Manager réel MODARYX | PREUVE MANQUANTE / non implémenté | aucun runtime prouvé |
+
+## 15. Monde vivant / identité
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Loup / dragon / compagnons conservés comme candidats | TERMINÉ — classification | ASSET-CLASSIFICATION |
+| Univers comme couche de marque | TERMINÉ — principe | PRODUCT-ARCHITECTURE |
+| Saison | TERMINÉ — capacité legacy, V2 à adapter | LEGACY-LOGIC-DEEP-AUDIT |
+| Heure locale | TERMINÉ — capacité legacy, V2 à adapter | LEGACY-LOGIC-DEEP-AUDIT |
+| Météo réelle | BLOQUÉ | fournisseur / confidentialité / preuve réelle |
+| Reduced motion | TERMINÉ — conception | A11Y-PERF |
+| Reality Context Engine séparé | TERMINÉ — conception | LEGACY-LOGIC-DEEP-AUDIT |
+| Experience Adapter | TERMINÉ — conception | LEGACY-LOGIC-DEEP-AUDIT |
+
+## 16. Notifications / préférences
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Notifications in-app | TERMINÉ — conception | NOTIFICATIONS-PREFERENCES |
+| Email/push | BLOQUÉ tant que service absent | NOTIFICATIONS-PREFERENCES |
+| Préférences locales | TERMINÉ — conception | NOTIFICATIONS-PREFERENCES |
+| Préférences distantes | EN COURS — dépend backend | NOTIFICATIONS-PREFERENCES |
+| Sync conflict | TERMINÉ — conception | NOTIFICATIONS-PREFERENCES |
+
+## 17. SEO / i18n / contenu
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Canonical / sitemap / titles | TERMINÉ — conception | SEO-I18N-CONTENT |
+| Indexation filtres contrôlée | TERMINÉ — conception | SEO-I18N-CONTENT |
+| i18n-ready | TERMINÉ — conception | SEO-I18N-CONTENT |
+| Long text | TERMINÉ — conception | SEO-I18N-CONTENT |
+| États éditoriaux | TERMINÉ — conception | SEO-I18N-CONTENT |
+
+## 18. PWA / cache / migration
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| SW V2 séparé | TERMINÉ — architecture / non implémenté | STORAGE-CACHE-SW |
+| Cache allowlist | TERMINÉ — conception | STORAGE-CACHE-SW |
+| Migration localStorage non destructive | TERMINÉ — conception | STORAGE-CACHE-SW |
+| Namespace modaryx:v2 | TERMINÉ — conception | STORAGE-CACHE-SW |
+| Upgrade legacy → V2 | TERMINÉ — plan / PREUVE MANQUANTE | STORAGE-CACHE-SW |
+| PWA install physique | PREUVE MANQUANTE | anti-oubli historique |
+
+## 19. Accessibilité / responsive / performance
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Focus visible | TERMINÉ — conception | A11Y-PERF |
+| Target size | TERMINÉ — conception | A11Y-PERF |
+| Reduced motion | TERMINÉ — conception | A11Y-PERF |
+| Mobile recomposé | TERMINÉ — principe | PRODUCT-ARCHITECTURE |
+| Core Web Vitals budgets | TERMINÉ — objectif / mesures V2 manquantes | A11Y-PERF |
+| Screen reader natif | PREUVE MANQUANTE | anti-oubli historique |
+| Safari réel | PREUVE MANQUANTE | anti-oubli historique |
+| Appareils physiques | PREUVE MANQUANTE | anti-oubli historique |
+
+## 20. Isolation legacy
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Aucun CSS legacy dans V2 | TERMINÉ — contrat | FRONTEND-ISOLATION |
+| Aucun shell.js/app.js renderer direct | TERMINÉ — contrat | FRONTEND-ISOLATION |
+| Routes V2 séparées | TERMINÉ — architecture | FRONTEND-ISOLATION |
+| SW/cache V2 séparés | TERMINÉ — architecture | FRONTEND-ISOLATION |
+| localStorage V2 séparé | TERMINÉ — architecture | FRONTEND-ISOLATION |
+| Anti-import CI | TERMINÉ — conception / non implémenté | FRONTEND-ISOLATION |
+
+## 21. Wireframes / design
+
+| Élément | État V2 | Référence |
+|---|---|---|
+| Home desktop | TERMINÉ — low-fi | Figma |
+| Games desktop | TERMINÉ — low-fi | Figma |
+| Catalog desktop | TERMINÉ — low-fi | Figma |
+| Content Detail desktop | TERMINÉ — low-fi | Figma |
+| Collection desktop | TERMINÉ — low-fi | Figma |
+| Creator desktop | TERMINÉ — low-fi | Figma |
+| Creator Studio desktop | TERMINÉ — low-fi | Figma |
+| Library desktop | TERMINÉ — low-fi | Figma |
+| Home mobile | TERMINÉ — low-fi | Figma |
+| Catalog mobile | TERMINÉ — low-fi | Figma |
+| Content Detail mobile | TERMINÉ — low-fi | Figma |
+| Game Hub desktop | BLOQUÉ — quota Figma | MISSING-WIREFRAME-BLUEPRINTS |
+| Global Search desktop | BLOQUÉ — quota Figma | MISSING-WIREFRAME-BLUEPRINTS |
+| Community desktop | BLOQUÉ — quota Figma | MISSING-WIREFRAME-BLUEPRINTS |
+| Game Hub mobile | BLOQUÉ — quota Figma | MISSING-WIREFRAME-BLUEPRINTS |
+| High-fi | BLOQUÉ volontairement | HIGH-FI-GATE |
+| Direction artistique finale | BLOQUÉ volontairement | HIGH-FI-GATE |
+| Tree test humain | PREUVE MANQUANTE | HUMAN-LOWFI-TEST |
+
+## 22. Capacités historiques à ne pas perdre
+
+À conserver/tracer lors du branchement V2 :
+
+- auth/session DEV ;
+- profils publics ;
+- community write/modération ;
+- founder/admin authority MODARYX ;
+- provenance/signatures ;
+- téléchargement fail-closed ;
+- Storage Resolver ;
+- Repair Network ;
+- Guide MODARYX ;
+- pont Nova Forge OS ;
+- vérificateur SHA-256 ;
+- PWA offline/stale ;
+- Smart Profile ;
+- accessibility/reflow QA ;
+- SEO guards ;
+- CodeQL/security guards.
+
+Aucune de ces capacités n'est automatiquement “V2-ready” simplement parce qu'elle a existé dans V1.
+
+## 23. Sources historiques non récupérées
+
+### Master Nova Design Intelligence complète
+**PREUVE MANQUANTE / NON RÉCUPÉRÉE**
+
+Ne pas inventer ses éléments absents.
+
+## 24. Règle de fermeture
+
+Avant toute VF V2 :
+
+1. chaque ligne de ce registre doit être TERMINÉE, BLOQUÉE explicitement hors scope avec décision humaine, ou PREUVE MANQUANTE clairement assumée ;
+2. aucune idée retenue ne doit disparaître silencieusement ;
+3. aucun état de conception ne doit être confondu avec implémentation ;
+4. aucun PASS technique ne valide l'esthétique ;
+5. aucun prototype ne valide la production ;
+6. aucun full replay avant fermeture ciblée des blockers.
+
+**État du registre : TERMINÉ pour la consolidation actuelle / À MAINTENIR jusqu'à la VF.**
