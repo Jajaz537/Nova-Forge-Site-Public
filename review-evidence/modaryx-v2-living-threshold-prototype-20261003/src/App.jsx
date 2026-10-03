@@ -6,13 +6,22 @@ import {
 
 const navItems = ["Découvrir", "Jeux", "Mods & contenus", "Collections", "Créateurs", "Communauté", "Créer"];
 const contentItems = [
-  { title: "Sentiers de l’aube", kind: "Exploration", pos: "0% 0%", tone: "cyan" },
-  { title: "Vestiges suspendus", kind: "Environnements", pos: "50% 0%", tone: "violet" },
-  { title: "Sommets silencieux", kind: "Graphismes", pos: "100% 0%", tone: "cyan" },
-  { title: "Rivages du couchant", kind: "Immersion", pos: "0% 100%", tone: "violet" },
-  { title: "Brumes des hautes terres", kind: "Gameplay", pos: "50% 100%", tone: "cyan" },
-  { title: "Le pont des veilleurs", kind: "Quêtes", pos: "100% 100%", tone: "violet" },
+  { title: "Sentiers de l’aube", kind: "Exploration", creator: "Atelier Boréal", pos: "0% 0%", tone: "cyan" },
+  { title: "Vestiges suspendus", kind: "Environnements", creator: "Lueur Collective", pos: "50% 0%", tone: "violet" },
+  { title: "Sommets silencieux", kind: "Graphismes", creator: "Les Cartographes", pos: "100% 0%", tone: "cyan" },
+  { title: "Rivages du couchant", kind: "Immersion", creator: "Atelier Boréal", pos: "0% 100%", tone: "violet" },
+  { title: "Brumes des hautes terres", kind: "Gameplay", creator: "Lueur Collective", pos: "50% 100%", tone: "cyan" },
+  { title: "Le pont des veilleurs", kind: "Quêtes", creator: "Les Cartographes", pos: "100% 100%", tone: "violet" },
 ];
+
+const gameItems = [
+  { title: "Aetherlands", status: "Catalogue consultable", detail: "Démonstration · version 1.4.2", pos: "0% 0%" },
+  { title: "Rivenfall", status: "Aperçu disponible", detail: "Démonstration · contenu à venir", pos: "50% 0%" },
+  { title: "Solstice Frontier", status: "Catalogue vide", detail: "Démonstration · aucun contenu publié", pos: "100% 0%" },
+];
+
+const creatorItems = ["Atelier Boréal", "Lueur Collective", "Les Cartographes"];
+const collectionItems = ["Exploration sereine", "Graphismes essentiels", "Immersion légère"];
 
 function Logo() {
   return <a className="logo" href="#top" aria-label="MODARYX — accueil">MODARY<span>X</span></a>;
@@ -22,11 +31,12 @@ function Topbar({ active, onNavigate }) {
   const [open, setOpen] = useState(false);
   return <header className="topbar" id="top">
     <Logo />
+    <button className="mobile-search" aria-label="Recherche globale" onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button>
     <button className="mobile-menu" aria-label="Ouvrir le menu" aria-expanded={open} onClick={() => setOpen(v => !v)}>{open ? <X /> : <List />}</button>
     <nav className={open ? "global-nav open" : "global-nav"} aria-label="Navigation principale">
       {navItems.map(item => <button key={item} className={active === item ? "active" : ""} onClick={() => { onNavigate(item); setOpen(false); }}>{item}</button>)}
     </nav>
-    <div className="top-actions"><button aria-label="Bibliothèque" onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button aria-label="Notifications"><Bell /></button><button className="avatar" aria-label="Compte">M</button></div>
+    <div className="top-actions"><button aria-label="Recherche globale" onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button><button aria-label="Bibliothèque" onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button aria-label="Notifications"><Bell /></button><button className="avatar" aria-label="Compte">M</button></div>
   </header>;
 }
 
@@ -64,6 +74,60 @@ function ProfilesRail() {
   </aside>;
 }
 
+function GamesIndex({ onOpenGame }) {
+  const [query, setQuery] = useState("");
+  const [sort, setSort] = useState("Nom");
+  const games = useMemo(() => {
+    const normalized = query.trim().toLocaleLowerCase("fr");
+    const filtered = gameItems.filter(game => game.title.toLocaleLowerCase("fr").includes(normalized));
+    return [...filtered].sort((a,b) => sort === "Nom" ? a.title.localeCompare(b.title, "fr") : a.status.localeCompare(b.status, "fr"));
+  }, [query, sort]);
+
+  return <main className="page-section games-index">
+    <span className="kicker">Jeux</span>
+    <h1>Trouvez votre prochain terrain de jeu.</h1>
+    <p className="page-intro">Recherchez un jeu et voyez immédiatement si son catalogue est réellement disponible.</p>
+    <div className="index-tools">
+      <label className="catalog-search"><MagnifyingGlass/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher un jeu" aria-label="Rechercher un jeu"/></label>
+      <label className="sort-control"><span>Trier</span><select value={sort} onChange={e=>setSort(e.target.value)}><option>Nom</option><option>État</option></select></label>
+    </div>
+    <div className="game-grid">
+      {games.map((game,i)=><article className="game-card" key={game.title}>
+        <Media pos={game.pos}/>
+        <div><span className="demo-label">Démonstration</span><h2>{game.title}</h2><p>{game.detail}</p><span className="support-state">{game.status}</span>
+        {game.title==="Aetherlands" ? <button className="primary" onClick={onOpenGame}>Ouvrir le Game Hub <ArrowRight/></button> : <button className="quiet" disabled>Indisponible dans cette démo</button>}</div>
+      </article>)}
+    </div>
+    {games.length===0 && <div className="empty"><MagnifyingGlass/><h3>Aucun jeu trouvé</h3><p>Essayez un autre terme.</p><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>}
+  </main>;
+}
+
+function GlobalSearch({ onOpenContent, onOpenGame }) {
+  const [query,setQuery]=useState("");
+  const normalized=query.trim().toLocaleLowerCase("fr");
+  const games=gameItems.filter(x=>x.title.toLocaleLowerCase("fr").includes(normalized));
+  const contents=contentItems.filter(x=>(x.title+" "+x.kind+" "+x.creator).toLocaleLowerCase("fr").includes(normalized));
+  const creators=creatorItems.filter(x=>x.toLocaleLowerCase("fr").includes(normalized));
+  const collections=collectionItems.filter(x=>x.toLocaleLowerCase("fr").includes(normalized));
+  const hasQuery=query.trim().length>0;
+  const total=(hasQuery?games.length+contents.length+creators.length+collections.length:0);
+
+  return <main className="page-section global-search-page">
+    <span className="kicker">Recherche globale</span>
+    <h1>Rechercher dans MODARYX</h1>
+    <p className="page-intro">Jeux, mods & contenus, collections et créateurs restent identifiables par type.</p>
+    <label className="global-search-field"><MagnifyingGlass/><input autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher un jeu, un contenu, une collection ou un créateur" aria-label="Recherche globale"/></label>
+    {!hasQuery && <div className="search-hint"><strong>Commencez par un nom ou un type.</strong><span>La recherche de démonstration reste locale : aucune dépendance externe.</span></div>}
+    {hasQuery && total===0 && <div className="empty"><MagnifyingGlass/><h3>Aucun résultat</h3><p>Aucun élément de démonstration ne correspond à « {query} ».</p><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>}
+    {hasQuery && total>0 && <div className="search-groups" aria-live="polite">
+      <section><div className="search-group-title"><h2>Jeux</h2><span>{games.length}</span></div>{games.map(game=><button className="search-result-row" key={game.title} onClick={game.title==="Aetherlands"?onOpenGame:undefined} disabled={game.title!=="Aetherlands"}><GameController/><span><strong>{game.title}</strong><small>{game.status}</small></span><ArrowRight/></button>)}</section>
+      <section><div className="search-group-title"><h2>Mods & contenus</h2><span>{contents.length}</span></div>{contents.map(item=><button className="search-result-row" key={item.title} onClick={()=>onOpenContent(item)}><MagnifyingGlass/><span><strong>{item.title}</strong><small>{item.kind} · {item.creator}</small></span><ArrowRight/></button>)}</section>
+      <section><div className="search-group-title"><h2>Créateurs</h2><span>{creators.length}</span></div>{creators.map(name=><div className="search-result-static" key={name}><UsersThree/><span><strong>{name}</strong><small>Créateur de démonstration</small></span></div>)}</section>
+      <section><div className="search-group-title"><h2>Collections</h2><span>{collections.length}</span></div>{collections.map(name=><div className="search-result-static" key={name}><Stack/><span><strong>{name}</strong><small>Collection de démonstration</small></span></div>)}</section>
+    </div>}
+  </main>;
+}
+
 function GameHub({ onOpen }) {
   const [tab, setTab] = useState("Aperçu");
   const [query, setQuery] = useState("");
@@ -92,7 +156,35 @@ function Discover({ onOpen }) {
 
 function Catalog({ onOpen }) {
   const [grid,setGrid]=useState(true);
-  return <main className="page-section catalog"><div className="catalog-title"><span className="kicker">Catalogue global</span><h1>Mods & contenus</h1><p>Trouvez un contenu, puis confirmez sa compatibilité avant de l’ajouter à un profil.</p></div><div className="catalog-tools"><div className="catalog-search"><MagnifyingGlass/><input placeholder="Rechercher dans tous les contenus"/></div><button><FunnelSimple/>Filtres</button><div className="view-toggle"><button className={grid?'active':''} onClick={()=>setGrid(true)} aria-label="Vue grille"><GridFour/></button><button className={!grid?'active':''} onClick={()=>setGrid(false)} aria-label="Vue liste"><List/></button></div></div><div className={grid?'content-grid catalog-grid':'content-list'}>{contentItems.map(item => <ContentCard dense={!grid} key={item.title} item={item} onOpen={onOpen}/>)}</div></main>;
+  const [query,setQuery]=useState("");
+  const [kind,setKind]=useState("Tous");
+  const [sort,setSort]=useState("Pertinence");
+  const [filtersOpen,setFiltersOpen]=useState(false);
+  const kinds=["Tous",...new Set(contentItems.map(item=>item.kind))];
+  const visible=useMemo(()=>{
+    const normalized=query.trim().toLocaleLowerCase("fr");
+    const filtered=contentItems.filter(item => (kind==="Tous"||item.kind===kind) && (item.title+" "+item.kind+" "+item.creator).toLocaleLowerCase("fr").includes(normalized));
+    if(sort==="Nom") return [...filtered].sort((a,b)=>a.title.localeCompare(b.title,"fr"));
+    if(sort==="Type") return [...filtered].sort((a,b)=>a.kind.localeCompare(b.kind,"fr"));
+    return filtered;
+  },[query,kind,sort]);
+  const reset=()=>{setQuery("");setKind("Tous");setSort("Pertinence");};
+  const activeFilters=(kind!=="Tous"?1:0)+(query.trim()?1:0)+(sort!=="Pertinence"?1:0);
+  return <main className="page-section catalog">
+    <div className="catalog-title"><span className="kicker">Catalogue global</span><h1>Mods & contenus</h1><p>Trouvez un contenu, puis confirmez sa compatibilité avant de l’ajouter à un profil.</p></div>
+    <div className="catalog-tools">
+      <label className="catalog-search"><MagnifyingGlass/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher dans tous les contenus" aria-label="Rechercher dans tous les contenus"/></label>
+      <button aria-expanded={filtersOpen} onClick={()=>setFiltersOpen(v=>!v)}><FunnelSimple/>Filtres{activeFilters>0&&<span className="filter-count">{activeFilters}</span>}</button>
+      <div className="view-toggle"><button className={grid?'active':''} onClick={()=>setGrid(true)} aria-label="Vue grille"><GridFour/></button><button className={!grid?'active':''} onClick={()=>setGrid(false)} aria-label="Vue liste"><List/></button></div>
+    </div>
+    {filtersOpen&&<section className="filter-panel" aria-label="Filtres du catalogue">
+      <div><span className="filter-label">Type</span><div className="filter-chips">{kinds.map(value=><button key={value} className={kind===value?"selected":""} onClick={()=>setKind(value)}>{value}</button>)}</div></div>
+      <label className="sort-control"><span>Trier</span><select value={sort} onChange={e=>setSort(e.target.value)}><option>Pertinence</option><option>Nom</option><option>Type</option></select></label>
+      <button className="reset-filters" onClick={reset} disabled={activeFilters===0}>Réinitialiser</button>
+    </section>}
+    <div className="catalog-summary" aria-live="polite"><strong>{visible.length} résultat{visible.length>1?"s":""}</strong><span>Données de démonstration</span>{activeFilters>0&&<button onClick={reset}>Tout réinitialiser</button>}</div>
+    {visible.length>0 ? <div className={grid?'content-grid catalog-grid':'content-list'}>{visible.map(item => <ContentCard dense={!grid} key={item.title} item={item} onOpen={onOpen}/>)}</div> : <div className="empty"><MagnifyingGlass/><h3>Aucun contenu trouvé</h3><p>Modifiez les filtres ou recommencez avec une autre recherche.</p><button onClick={reset}>Réinitialiser les filtres</button></div>}
+  </main>;
 }
 
 function Detail({ item, onBack }) {
@@ -112,14 +204,19 @@ function Community() { return <main className="page-section community"><span cla
 export function App() {
   const [active, setActive] = useState("Jeux");
   const [detail, setDetail] = useState(null);
-  const navigate = item => { setDetail(null); setActive(item); window.scrollTo({top:0,behavior:'smooth'}); };
+  const [gameHubOpen,setGameHubOpen]=useState(true);
+  const navigate = item => { setDetail(null); setGameHubOpen(false); setActive(item); window.scrollTo({top:0,behavior:'smooth'}); };
+  const openGameHub=()=>{setDetail(null);setActive("Jeux");setGameHubOpen(true);window.scrollTo({top:0,behavior:'smooth'});};
+  const openContent=item=>{setDetail(item);window.scrollTo({top:0,behavior:'smooth'});};
   let screen;
   if (detail) screen=<Detail item={detail} onBack={()=>setDetail(null)}/>;
-  else if(active==='Découvrir') screen=<Discover onOpen={setDetail}/>;
-  else if(active==='Mods & contenus' || active==='Collections' || active==='Créateurs') screen=<Catalog onOpen={setDetail}/>;
+  else if(active==='Découvrir') screen=<Discover onOpen={openContent}/>;
+  else if(active==='Recherche') screen=<GlobalSearch onOpenContent={openContent} onOpenGame={openGameHub}/>;
+  else if(active==='Jeux' && !gameHubOpen) screen=<GamesIndex onOpenGame={openGameHub}/>;
+  else if(active==='Mods & contenus' || active==='Collections' || active==='Créateurs') screen=<Catalog onOpen={openContent}/>;
   else if(active==='Communauté') screen=<Community/>;
   else if(active==='Créer') screen=<CreatorStudio/>;
   else if(active==='Bibliothèque') screen=<Library/>;
-  else screen=<GameHub onOpen={setDetail}/>;
-  return <div className="app-shell"><Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={()=>navigate('Jeux')}><GameController/>Game Hub</button><button onClick={()=>setActive('Bibliothèque')}><BookOpen/>Bibliothèque</button></footer></div>;
+  else screen=<GameHub onOpen={openContent}/>;
+  return <div className="app-shell"><Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button></footer></div>;
 }
