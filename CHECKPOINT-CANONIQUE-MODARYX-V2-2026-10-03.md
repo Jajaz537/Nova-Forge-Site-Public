@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`71c38f3995d3a3c835e138880802ccb1c503c243`
+`a3774cae7742fd46280c7f2ca7d1979c98c171af`
 
 PR :
 
@@ -695,7 +695,7 @@ Gate :
 
 ## 26. Validation humaine
 
-**PREUVE MANQUANTE pour les réponses / OUTILLAGE TERMINÉ**
+**EN COURS — 1 participant réel testé / OUTILLAGE TERMINÉ**
 
 Harness local de tree testing :
 - 16 tâches ;
@@ -710,7 +710,17 @@ SHA-256 du harness local :
 
 Le harness ne constitue une preuve humaine qu'après remplissage par un participant réel.
 
-**PREUVE MANQUANTE**
+Une première preuve humaine réelle existe désormais :
+- participant P01 ;
+- mini-test critique 5 questions ;
+- document : `docs/MODARYX-V2-HUMAN-MINI-TREE-TEST-P01-20261003.md` ;
+- Favoris : compris naturellement ;
+- `Catalogue consultable` : compris comme consultation sans téléchargement garanti ;
+- Profils de jeu : trouvabilité insuffisante depuis Bibliothèque seule ;
+- Collection : terme non spontané, besoin de microcopy ;
+- conflits/prérequis : attente d'avertissement proactif avant action.
+
+**Validation humaine globale : EN COURS — ne pas généraliser à tous les utilisateurs à partir d'un seul participant.**
 
 Script de test :
 
@@ -801,7 +811,7 @@ Aucun front V2 production n'a été écrit.
 - Cycle de vie support jeux : **TERMINÉ — conception**
 - Wireframes core : **TERMINÉ pour conception textuelle + prototype low-fi local des 4 écrans / validation humaine PREUVE MANQUANTE**
 - Écriture Figma supplémentaire : **BLOQUÉ EXTERNE**
-- Tree testing humain : **OUTILLAGE PRÊT / PREUVE MANQUANTE pour réponses de participants**
+- Tree testing humain : **EN COURS — P01 réel terminé / autres profils utiles pour consolider**
 - Direction artistique : **BLOQUÉ**
 - High-fi : **BLOQUÉ**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
@@ -820,7 +830,7 @@ Aucun front V2 production n'a été écrit.
    - matérialiser Mobile Game Hub ;
    - micro-vérifier clipping/overflow.
 7. QA mécanique low-fi fermée ; simulation experte multi-profils fermée avec clarifications sûres intégrées.
-8. Tree testing humain reste PREUVE MANQUANTE ; ne pas inventer cette preuve ni bloquer les travaux exploratoires réversibles pour cette seule raison.
+8. Tree testing humain : P01 réel terminé ; intégrer ses findings, puis comparer avec les profils Work/recherche et, si possible, d'autres participants réels. Ne pas généraliser la preuve P01.
 9. Continuer vers la direction artistique exploratoire et le design system préparatoire ; ne déclarer aucun high-fi humainement validé sans preuve réelle.
 10. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
