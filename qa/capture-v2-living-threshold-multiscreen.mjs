@@ -216,6 +216,15 @@ try {
   await clickSelector(".card-hit");
   manifest.captures.push(await capture("mobile-content-detail.png", 390, 844, "Avant d’ajouter"));
 
+  await navigateHome(390, 844);
+  await clickSelector(".mobile-menu");
+  await clickByText(".global-nav .mobile-nav-utility", "Bibliothèque");
+  manifest.captures.push(await capture("mobile-library.png", 390, 844, "Retrouvez favoris, suivis, collections et profils"));
+
+  await clickSelector(".mobile-menu");
+  await clickByText(".global-nav button", "Créer");
+  manifest.captures.push(await capture("mobile-creator-studio.png", 390, 844, "Creator Studio"));
+
   const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/manifest.json";
   writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
   console.log("MULTISCREEN_CAPTURE_COUNT", manifest.captures.length);
