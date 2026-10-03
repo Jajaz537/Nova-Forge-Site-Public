@@ -15,13 +15,13 @@ const requireMatch = (re, message) => {
 
 requireMatch(/button:focus-visible[^\{]*\{[^}]*outline:\s*3px solid var\(--cyan\)[^}]*outline-offset:\s*3px/s, "focus-visible 3px cyan rule missing");
 requireMatch(/@media \(prefers-reduced-motion:reduce\)[\s\S]*transition:none!important/, "reduced-motion transition suppression missing");
-requireMatch(/\.top-actions button,\.mobile-menu\{height:44px;min-width:44px;/, "top/mobile target below 44px");
+requireMatch(/\.top-actions button,\.mobile-menu,\.mobile-search\{height:44px;min-width:44px;/, "top/mobile target below 44px");
 requireMatch(/\.game-identity select\{min-height:44px;/, "version select target below 44px");
 requireMatch(/\.hero-search button\{height:44px;width:44px;/, "search filter target below 44px");
 requireMatch(/\.profile-add\{width:100%;min-height:44px;/, "profile add target below 44px");
 requireMatch(/\.view-toggle button\{[^}]*width:44px;min-height:44px;/, "view toggle target below 44px");
 
-for (const label of ["Mods & contenus", "Mes profils pour ce jeu", "Créer", "Guides", "Activité", "Bibliothèque"]) {
+for (const label of ["Mods & contenus", "Mes profils pour ce jeu", "Créer", "Guides", "Activité", "Bibliothèque", "Recherche globale"]) {
   if (!app.includes(label)) fail("canonical label missing: " + label);
 }
 if (!app.includes("Configurations enregistrées de mods, versions et réglages.")) {
