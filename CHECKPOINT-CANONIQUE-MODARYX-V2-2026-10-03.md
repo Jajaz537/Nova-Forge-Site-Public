@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`526132c88a96d8302f14e18330eddf7c0620b788`
+`a7b05547cf79d266163c04f48c1a15d72ea70a3b`
 
 PR :
 
@@ -814,6 +814,14 @@ Aucun front V2 production n'a été écrit.
 - Script low-fi humain : **MIS À JOUR — 14 tâches, PREUVE MANQUANTE pour exécution**
 - Kit validation humaine IA : **TERMINÉ — protocole prêt ; P01 réel partiellement exécuté**
 - Simulation experte multi-profils du tree test : **TERMINÉ — ne remplace pas une validation humaine**
+- Benchmark terminologique multi-gaming / gaming / modding : **TERMINÉ — Nexus, CurseForge, Modrinth, Thunderstore, Steam Workshop, Bethesda, mod.io, ModDB, GameBanana**
+  - document : `docs/MODARYX-V2-MULTIGAMING-MODDING-TERMINOLOGY-BENCHMARK-20261003.md`
+  - confirme **Profils de jeu** comme convention défendable ;
+  - confirme **Collection** mais capacité d'installation à rendre explicite ;
+  - confirme **Bibliothèque** comme convention crédible d'espace personnel ;
+  - confirme que **Mods & Plugins** est trop étroit comme parapluie universel ;
+  - shortlist à tester : **Contenus de jeu**, **Mods & contenus**, **Créations** ;
+  - confirme l'interdiction du libellé générique **Non vérifié**.
 - Rapport Work indépendant : **TERMINÉ — 5 profils × 16 tâches / P01 non consulté**
   - ingestion : `docs/MODARYX-V2-WORK-REPORT-INGEST-20261003.md`
   - analyse croisée : `docs/MODARYX-V2-CROSS-ANALYSIS-P01-WORK-INTERNAL-20261003.md`
@@ -853,9 +861,10 @@ Aucun front V2 production n'a été écrit.
 7. QA mécanique low-fi fermée ; simulation experte multi-profils fermée avec clarifications sûres intégrées.
 8. P01 réel + étude indépendante interne 5×16 + étude Work 5×16 : comparaison croisée TERMINÉE. Ne pas généraliser P01 ni transformer les simulations IA en statistiques humaines.
 9. Mini-test terminologique P01 TERMINÉ : **Profils de jeu** préféré ; Collection et Bibliothèque comprises ; **Mods & Plugins** trop étroit comme parapluie ; **Non vérifié** générique écarté.
-10. Prochain risque UX à fermer : tester quelques alternatives plus larges à **Mods & Plugins** sans perdre la compréhension immédiate.
-11. Continuer en parallèle vers la direction artistique exploratoire et le design system préparatoire ; aucun gel high-fi/microcopy finale sans preuve humaine suffisante.
-12. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
+10. Benchmark externe multi-gaming TERMINÉ : les trois candidats à tester à la place de **Mods & Plugins** sont **Contenus de jeu**, **Mods & contenus** et **Créations**.
+11. Prochain risque UX à fermer : mini-test humain comparatif de ces trois libellés, sans révéler le candidat favori du benchmark.
+12. Continuer en parallèle vers la direction artistique exploratoire et le design system préparatoire ; aucun gel high-fi/microcopy finale sans preuve humaine suffisante.
+13. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
 ## 30. Règle de reprise
 
