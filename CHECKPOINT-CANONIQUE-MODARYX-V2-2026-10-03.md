@@ -6,12 +6,14 @@ Ce checkpoint décrit l'état opérationnel courant du chantier **MODARYX V2**. 
 
 ## 1. Séparation officielle
 
-- **Nova Forge = logiciel / OS**
-  - Nova Forge OS Public
-  - Nova Forge OS Fondateur
+- **MODARYX Forge = logiciel / écosystème desktop**
+  - **MODARYX Public** = édition publique
+  - **MODARYX Founder** = édition Founder
 - **MODARYX / MODARYX MODS = plateforme web**
+- les deux produits appartiennent à la même famille de marque mais gardent des responsabilités distinctes : web = découverte/communauté/publication ; Forge = création locale/installation/gestion/test/réparation
+- `Nova Forge` = nom historique / legacy technique uniquement tant que les références n'ont pas été classifiées ; aucun remplacement global aveugle
 - `getnovaforge.com` / « getnova » = ancien projet web abandonné
-- aucune migration MODARYX → Nova Forge
+- aucune fusion technique aveugle entre le site et MODARYX Forge ; les ponts doivent être contractuels et prouvés
 
 ## 2. Source de reprise
 
@@ -66,17 +68,33 @@ Les fonctions, contrats et protections utiles sont préservés après audit sél
 
 **TERMINÉ — base de benchmark initiale et approfondie**
 
-Plateformes étudiées :
+Plateformes et outils étudiés, benchmark désormais élargi :
 
-- Nexus Mods
+- Nexus Mods / Vortex / Collections
 - CurseForge
 - Modrinth
-- Thunderstore
+- Thunderstore / r2modman
 - Steam Workshop
 - GameBanana
 - Mod DB
+- ModDropV et outils spécialisés GTA5-Mods
+- Mod Organizer 2
+- Prism Launcher
+- ATLauncher
+- Wabbajack
+- OpenIV / OIV Package Installer
+- Reloaded-II
+- mod.io
+- Bethesda Creations
+
+Transfert détaillé vers l'anti-oubli V2 :
+`docs/MODARYX-V2-MODDING-ECOSYSTEM-BENCHMARK-TRANSFER-20261003.md`
 
 Leçons retenues :
+
+- benchmark continu jusqu'à la VF : toute nouvelle idée explicitement retenue doit être intégrée, mappée vers un équivalent prouvé ou rejetée explicitement ;
+- MODARYX ne promet jamais une installation locale sans runtime MODARYX Forge prouvé ;
+- adapters/connecteurs autorisés plutôt que scraping universel ;
 
 - entrée par jeu ;
 - recherche/facettes centrales ;
