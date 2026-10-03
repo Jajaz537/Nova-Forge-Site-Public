@@ -1,0 +1,183 @@
+import { spawn } from "node:child_process";
+import { setTimeout as sleep } from "node:timers/promises";
+
+const chrome=process.env.CHROME_BIN;
+const origin=process.env.MODARYX_REVIEW_ORIGIN || "http://127.0.0.1:4174";
+if(!chrome) throw new Error("CHROME_BIN missing");
+
+const port=9225;
+const proc=spawn(chrome,[
+  "--headless=new","--no-sandbox","--disable-gpu","--hide-scrollbars",
+  "--remote-debugging-port="+port,
+  "--user-data-dir=/tmp/modaryx-v2-cdp-product-flows",
+  "about:blank"
+],{stdio:"ignore"});
+
+let ws; let nextId=1;
+const pending=new Map();
+function send(method,params={}) {
+  const id=nextId++;
+  ws.send(JSON.stringify({id,method,params}));
+  return new Promise((resolve,reject)=>pending.set(id,{resolve,reject}));
+}
+async function waitJson(path){
+  let last;
+  for(let i=0;i<80;i++){
+    try{const r=await fetch(`http://127.0.0.1:${port}${path}`);if(r.ok)return await r.json();last=new Error("HTTP "+r.status);}
+    catch(e){last=e;}
+    await sleep(100);
+  }
+  throw last||new Error("CDP unavailable");
+}
+async function evaluate(expression){
+  const r=await send("Runtime.evaluate",{expression,returnByValue:true,awaitPromise:true});
+  if(r.exceptionDetails) throw new Error(r.exceptionDetails.text||"Runtime.evaluate failed");
+  return r.result?.result?.value;
+}
+async function setViewport(width,height){
+  await send("Emulation.setDeviceMetricsOverride",{width,height,deviceScaleFactor:1,mobile:width<760});
+}
+async function load(width=1440,height=1024){
+  await setViewport(width,height);
+  await send("Page.navigate",{url:origin});
+  for(let i=0;i<60;i++){
+    if(await evaluate("document.readyState === 'complete'")) break;
+    await sleep(100);
+  }
+  await sleep(250);
+}
+async function waitText(text){
+  const needle=text.toLocaleLowerCase("fr");
+  for(let i=0;i<40;i++){
+    const ok=await evaluate(`document.body.innerText.toLocaleLowerCase("fr").includes(${JSON.stringify(needle)})`);
+    if(ok) return;
+    await sleep(100);
+  }
+  const body=await evaluate("document.body.innerText.slice(0,1600)");
+  throw new Error("text not found: "+text+"\n"+body);
+}
+async function clickText(selector,text){
+  const ok=await evaluate(`(() => {
+    const target=[...document.querySelectorAll(${JSON.stringify(selector)})].find(el=>{
+      if(el.textContent.trim()!==${JSON.stringify(text)}) return false;
+      const r=el.getBoundingClientRect(),s=getComputedStyle(el);
+      return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0&&!el.disabled;
+    });
+    if(!target) return false; target.click(); return true;
+  })()`);
+  if(!ok) throw new Error("visible clickable text not found: "+text);
+  await sleep(150);
+}
+async function clickAria(label){
+  const ok=await evaluate(`(() => {
+    const target=[...document.querySelectorAll('[aria-label]')].find(el=>{
+      if(el.getAttribute('aria-label')!==${JSON.stringify(label)}) return false;
+      const r=el.getBoundingClientRect(),s=getComputedStyle(el);
+      return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0&&!el.disabled;
+    });
+    if(!target) return false; target.click(); return true;
+  })()`);
+  if(!ok) throw new Error("visible aria target not found: "+label);
+  await sleep(150);
+}
+async function fill(selector,value){
+  const ok=await evaluate(`(() => {
+    const target=[...document.querySelectorAll(${JSON.stringify(selector)})].find(el=>{
+      const r=el.getBoundingClientRect(),s=getComputedStyle(el);
+      return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0;
+    });
+    if(!target) return false;
+    const setter=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;
+    setter.call(target,${JSON.stringify(value)});
+    target.dispatchEvent(new Event('input',{bubbles:true}));
+    return true;
+  })()`);
+  if(!ok) throw new Error("visible input not found: "+selector);
+  await sleep(180);
+}
+async function selectValue(selector,value){
+  const ok=await evaluate(`(() => {
+    const target=[...document.querySelectorAll(${JSON.stringify(selector)})].find(el=>{
+      const r=el.getBoundingClientRect(),s=getComputedStyle(el);
+      return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0;
+    });
+    if(!target) return false;
+    const setter=Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype,'value').set;
+    setter.call(target,${JSON.stringify(value)});
+    target.dispatchEvent(new Event('change',{bubbles:true}));
+    return true;
+  })()`);
+  if(!ok) throw new Error("visible select not found: "+selector);
+  await sleep(180);
+}
+async function count(selector){ return await evaluate(`document.querySelectorAll(${JSON.stringify(selector)}).length`); }
+function assertEqual(actual,expected,label){
+  if(actual!==expected) throw new Error(`${label}: expected ${expected}, got ${actual}`);
+  console.log("FLOW_ASSERT",label,actual);
+}
+
+try{
+  await waitJson("/json/version");
+  const targets=await waitJson("/json/list");
+  const target=targets.find(x=>x.type==="page");
+  if(!target?.webSocketDebuggerUrl) throw new Error("page target missing");
+  ws=new WebSocket(target.webSocketDebuggerUrl);
+  await new Promise((resolve,reject)=>{
+    ws.addEventListener("open",resolve,{once:true});
+    ws.addEventListener("error",reject,{once:true});
+  });
+  ws.addEventListener("message",event=>{
+    const msg=JSON.parse(event.data);
+    if(!msg.id||!pending.has(msg.id)) return;
+    const p=pending.get(msg.id);pending.delete(msg.id);
+    msg.error?p.reject(new Error(msg.error.message)):p.resolve(msg);
+  });
+  await send("Page.enable"); await send("Runtime.enable");
+
+  await load();
+  await waitText("Mes profils pour ce jeu");
+
+  await clickText(".global-nav button","Jeux");
+  await waitText("Trouvez votre prochain terrain de jeu");
+  await fill(".games-index .catalog-search input","Aetherlands");
+  assertEqual(await count(".game-card"),1,"games search result count");
+  await clickText(".game-card button","Ouvrir le Game Hub");
+  await waitText("Mes profils pour ce jeu");
+
+  await clickAria("Recherche globale");
+  await waitText("Rechercher dans MODARYX");
+  await fill(".global-search-field input","aube");
+  await waitText("Sentiers de l’aube");
+  assertEqual(await count(".search-result-row:not([disabled])"),1,"global search actionable result count");
+  await clickText(".search-result-row","Sentiers de l’aubeExploration · Atelier Boréal");
+  await waitText("Avant d’ajouter");
+
+  await clickText(".global-nav button","Mods & contenus");
+  await waitText("Catalogue global");
+  await fill(".catalog-search input","sommets");
+  assertEqual(await count(".content-card"),1,"catalog query count");
+  await clickText(".catalog-tools>button","Filtres");
+  await clickText(".filter-chips button","Graphismes");
+  assertEqual(await count(".content-card"),1,"catalog kind filter count");
+  await selectValue(".filter-panel select","Nom");
+  await waitText("Tout réinitialiser");
+  await clickText(".catalog-summary button","Tout réinitialiser");
+  assertEqual(await count(".content-card"),6,"catalog reset count");
+  await fill(".catalog-search input","zzzz");
+  await waitText("Aucun contenu trouvé");
+  await clickText(".empty button","Réinitialiser les filtres");
+  assertEqual(await count(".content-card"),6,"catalog no-results recovery count");
+
+  await load(390,844);
+  const mobileSearchSize=await evaluate(`(() => {const el=document.querySelector('.mobile-search');const r=el.getBoundingClientRect();return [Math.round(r.width),Math.round(r.height),getComputedStyle(el).display];})()`);
+  if(mobileSearchSize[0]<44||mobileSearchSize[1]<44||mobileSearchSize[2]==='none') throw new Error("mobile global search target invalid: "+JSON.stringify(mobileSearchSize));
+  await clickAria("Recherche globale");
+  await waitText("Rechercher dans MODARYX");
+  await fill(".global-search-field input","aube");
+  await waitText("Sentiers de l’aube");
+
+  console.log("PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS");
+} finally {
+  try{ws?.close();}catch{}
+  proc.kill("SIGTERM");
+}
