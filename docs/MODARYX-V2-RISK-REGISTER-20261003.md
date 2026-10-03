@@ -71,7 +71,7 @@ Document :
 | Profil de compte vs profil de jeu | EN COURS | **Profils de jeu** préféré par P01 + accès direct Game Hub/Bibliothèque ; surveiller la collision avec profil de compte |
 | Collection perçue comme installable | EN COURS | capacité visible + statut d'installation explicite |
 | Catalogue consultable perçu comme téléchargeable | EN COURS | ne jamais employer `disponible` seul ; statut distribution séparé |
-| Mods & Plugins trop étroit comme parapluie | EN COURS | P01 l'interprète littéralement ; tester un libellé plus large avant gel high-fi |
+| Parapluie de contenus trop étroit | EN COURS — réduit | **Mods & contenus** préféré par P01 après benchmark externe ; consolider avec d'autres humains avant gel final |
 | “Non vérifié” générique ambigu | TERMINÉ — principe | interdire le badge seul ; qualifier Compatibilité / Provenance / Scan / risque réel |
 | Trop de filtres | EN COURS | filtres contextuels + progressive disclosure |
 | Fiche trop dense | EN COURS | zone décision + tabs |
