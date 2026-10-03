@@ -143,6 +143,20 @@ try{
   assertEqual(await count(".game-card"),1,"games search result count");
   await clickText(".game-card button","Ouvrir le Game Hub");
   await waitText("Mes profils pour ce jeu");
+  await waitText("Catalogue consultable — téléchargement non garanti");
+  await clickText(".local-nav button","Collections");
+  await waitText("Sélections organisées");
+  await waitText("installation non disponible");
+  await clickText(".local-nav button","Créateurs");
+  await waitText("Écosystème créateur");
+  await waitText("Atelier Boréal");
+  await clickText(".local-nav button","Guides");
+  await waitText("Guides de démonstration indisponibles");
+  await clickText(".local-nav button","Activité");
+  await waitText("Activité de démonstration");
+  await clickText(".local-nav button","Mods & contenus");
+  await waitText("Catalogue du jeu");
+  assertEqual(await count(".hub-content .content-card"),6,"game hub content tab count");
 
   await clickAria("Recherche globale");
   await waitText("Rechercher dans MODARYX");
@@ -234,6 +248,13 @@ try{
   assertEqual(await count(".content-card"),6,"catalog no-results recovery count");
 
   await load(390,844);
+  await waitText("Catalogue consultable — téléchargement non garanti");
+  await clickText(".local-nav button","Collections");
+  await waitText("Sélections organisées");
+  await clickText(".local-nav button","Guides");
+  await waitText("Guides de démonstration indisponibles");
+  await clickText(".local-nav button","Aperçu");
+  await waitText("Pour votre version");
   const mobileSearchSize=await evaluate(`(() => {const el=document.querySelector('.mobile-search');const r=el.getBoundingClientRect();return [Math.round(r.width),Math.round(r.height),getComputedStyle(el).display];})()`);
   if(mobileSearchSize[0]<44||mobileSearchSize[1]<44||mobileSearchSize[2]==='none') throw new Error("mobile global search target invalid: "+JSON.stringify(mobileSearchSize));
   await clickAria("Recherche globale");
