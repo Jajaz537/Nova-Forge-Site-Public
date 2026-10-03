@@ -181,13 +181,13 @@ Community, Library et navigation ne passent en high-fi que lorsque :
 
 ## Clarifications terminologiques sûres
 
-Après test humain P01, le libellé utilisateur provisoire préféré redevient **Profils de jeu**, avec la description **Configurations enregistrées de mods et versions**.
+Le libellé utilisateur retenu est **Profils de jeu**, avec la description **Configurations enregistrées de mods, versions et réglages.**
 
-Le terme `Profile/Loadout` reste réservé au domaine interne. **Configurations de jeu** reste une alternative issue des simulations IA mais n'est pas le choix humain P01.
+Le terme `Profile/Loadout` reste réservé au domaine interne. **Configurations de jeu** n'est plus une alternative UI active.
 
 La Bibliothèque doit afficher immédiatement ses sous-objets : Favoris, Suivis, Collections, Modpacks, Profils de jeu et recherches sauvegardées, afin de ne pas obliger l'utilisateur à deviner ce qu'elle contient.
 
-**État : P01 comprend Bibliothèque comme espace personnel ; trouvabilité de Profils de jeu à renforcer depuis le Game Hub.**
+**État : wording **Profils de jeu** TERMINÉ ; trouvabilité renforcée via Game Hub.**
 
 
 ## Mods & contenus — statut humain
