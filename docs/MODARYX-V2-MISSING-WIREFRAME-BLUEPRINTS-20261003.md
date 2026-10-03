@@ -1,7 +1,7 @@
 # MODARYX V2 — Blueprints des wireframes encore manquants
 
 **Date : 2026-10-03**
-**Statut : EN COURS — préparation textuelle**
+**Statut : TERMINÉ — blueprint low-fi textuel détaillé / preuve visuelle Figma toujours BLOQUÉE**
 **Blocage externe actuel : quota d'appels Figma MCP du plan Starter atteint.**
 
 Aucun écran ci-dessous n'est revendiqué comme créé dans Figma tant que le quota n'est pas réouvert.
@@ -190,3 +190,257 @@ Lorsque le quota Figma est disponible :
 6. ne pas ouvrir high-fi avant fermeture de ces gaps.
 
 **État : BLOQUÉ pour écriture Figma / EN COURS pour conception.**
+
+
+## 9. Spécification de composition — Desktop Game Hub
+
+### Canvas
+- largeur de référence : 1440 px ;
+- contenu max : 1240 px ;
+- grille : 12 colonnes ;
+- gutters desktop : 24 px ;
+- espace vertical section : 48–64 px ;
+- aucun hero plein écran.
+
+### Ordre exact
+1. breadcrumb ;
+2. identité jeu + version ;
+3. search contextualisée ;
+4. raccourcis fonctionnels ;
+5. modules de découverte ;
+6. collections ;
+7. créateurs ;
+8. guides ;
+9. activité utile.
+
+### Zone identité
+Colonne principale :
+- nom du jeu ;
+- support state ;
+- version active ;
+- texte descriptif court.
+
+Colonne secondaire :
+- suivre ;
+- changer version ;
+- ouvrir recherche jeu.
+
+### Raccourcis
+Boutons/tabs :
+- Mods & Plugins
+- Collections
+- Créateurs
+- Guides
+
+### Module “Pour votre version”
+Chaque item :
+- ContentType
+- titre
+- creator
+- release
+- compatibility state
+- evidence state
+- dependency warning si nécessaire.
+
+### Empty state editorial-only
+Afficher explicitement :
+- jeu supporté éditorialement ;
+- aucun corpus installable prouvé ;
+- guides disponibles ;
+- aucune fausse promesse de téléchargement.
+
+### Accessibilité
+- h1 unique ;
+- version selector avec label ;
+- search avec accessible name ;
+- tabs utilisables clavier ;
+- status jamais couleur seule.
+
+## 10. Spécification de composition — Desktop Global Search
+
+### Canvas
+- largeur : 1440 px ;
+- contenu max : 1240 px ;
+- search toujours visible au-dessus du fold.
+
+### Ordre exact
+1. titre / contexte ;
+2. champ recherche principal ;
+3. tabs de type ;
+4. zone filtres ;
+5. résumé résultats ;
+6. résultats ;
+7. pagination/infinite state selon solution retenue.
+
+### Layout
+Desktop :
+- colonne filtres 280 px ;
+- colonne résultats fluide ;
+- applied filters au-dessus des résultats.
+
+### Résultat type
+Afficher :
+- type de résultat ;
+- titre ;
+- contexte jeu ;
+- creator/team ;
+- version/fraîcheur ;
+- compatibility si pertinente ;
+- statut distribution ;
+- extrait court.
+
+### No query
+Montrer :
+- recherches récentes locales si activées ;
+- jeux populaires seulement si données réelles ;
+- aucun faux trending.
+
+### No results
+Actions :
+- effacer certains filtres ;
+- élargir type ;
+- changer version jeu ;
+- ouvrir catalogue jeu.
+
+### Search externe indisponible
+Message :
+- résultats locaux affichés ;
+- service externe indisponible ;
+- aucun blocage core.
+
+## 11. Spécification de composition — Desktop Community
+
+### Canvas
+- largeur : 1440 px ;
+- contenu max : 1180–1240 px ;
+- navigation fonctionnelle en premier.
+
+### Ordre exact
+1. titre + explication courte ;
+2. search/community filter ;
+3. tabs Support / Questions / Discussions / Studios ;
+4. composer si autorisé ;
+5. contenu principal ;
+6. sidebar contexte jeu/contenu ;
+7. ressources sécurité/signalement.
+
+### Item Community
+Afficher :
+- type ;
+- titre ;
+- auteur ;
+- jeu/contenu lié ;
+- état réponse ;
+- date ;
+- modération visible seulement si nécessaire.
+
+### Support
+Mettre en avant :
+- content/release concerné ;
+- version jeu ;
+- environnement ;
+- statut résolu/non résolu.
+
+### Signalement
+Jamais dans le même composer que support.
+Action secondaire distincte.
+
+### Permission states
+- anonymous ;
+- authenticated ;
+- creator ;
+- moderator.
+
+La UI n'affiche jamais un contrôle de modération sur simple rôle local.
+
+## 12. Spécification de composition — Mobile Game Hub
+
+### Viewport de référence
+- 390 px ;
+- padding horizontal : 16 px ;
+- spacing section : 28–40 px.
+
+### Ordre exact
+1. back/breadcrumb compact ;
+2. nom jeu + support state ;
+3. version selector ;
+4. search ;
+5. raccourcis fonctionnels ;
+6. Pour votre version ;
+7. Populaires ;
+8. Nouveautés ;
+9. Catégories ;
+10. Collections ;
+11. Créateurs ;
+12. Guides.
+
+### Règles tactiles
+- target minimum 44 px pratique ;
+- filtres/version ouvrent drawer/bottom sheet ;
+- search utilisable directement ;
+- aucune action critique uniquement dans overflow menu.
+
+### Pas de desktop compressé
+Sur mobile :
+- metadata secondaire collapsible ;
+- sections moins denses ;
+- une seule colonne ;
+- cards deviennent rows quand scanning prioritaire.
+
+## 13. Mapping composants low-fi existants
+
+Réutiliser les primitives Figma low-fi déjà créées :
+
+- Search Field → Game Hub + Global Search + Community ;
+- Content Card → modules Game Hub/Search ;
+- Button → actions ;
+- Filter Chip → applied filters/tabs simples.
+
+À créer seulement si Figma se débloque :
+- Game Identity Header ;
+- Result Row ;
+- Community Topic Row ;
+- Version Selector ;
+- Support State Badge ;
+- Empty State Panel.
+
+Aucun composant high-fi à ce stade.
+
+## 14. Matrice d'états — 4 écrans
+
+| Surface | Loading | Empty | Error | Offline/Stale | Auth | Capability |
+|---|---|---|---|---|---|---|
+| Game Hub | skeleton sections | editorial-only/no corpus | hub unavailable | cached hub | follow disabled if needed | distribution hidden if absent |
+| Global Search | search pending | no query/no results | external/local error | local stale results | saved search gated | external search optional |
+| Community | topics loading | no topics | service unavailable | drafts/local read | composer gated | moderation by server role |
+| Mobile Game Hub | progressive sections | compact empty | inline retry | cached state | follow gated | install hidden if absent |
+
+## 15. Critères de fermeture low-fi hors Figma
+
+Le blueprint textuel est considéré **TERMINÉ** si :
+- hiérarchie exacte définie ;
+- états principaux définis ;
+- responsive défini ;
+- composants mappés ;
+- accessibilité de structure définie ;
+- aucune donnée fictive obligatoire ;
+- aucune capacité absente simulée.
+
+Ce critère est désormais satisfait pour les 4 surfaces.
+
+Ce qui reste **PREUVE MANQUANTE** :
+- matérialisation visuelle dans Figma/Miro ;
+- clipping/overflow réel ;
+- validation humaine ;
+- compréhension de la terminologie.
+
+## 16. Alternative gratuite à Figma
+
+Option disponible :
+- créer un prototype low-fi dans **Miro** avec les 4 écrans ;
+- aucune dépense Figma nécessaire ;
+- ce prototype resterait une preuve low-fi distincte, pas une validation high-fi.
+
+La création d'un nouveau board Miro nécessite une confirmation explicite utilisateur avant action.
+
+**État final de ce document : TERMINÉ pour conception low-fi textuelle / BLOQUÉ uniquement pour matérialisation visuelle Figma.**
