@@ -35,7 +35,7 @@ La bibliothèque personnelle sépare clairement :
 - suivis
 - collections
 - modpacks
-- profils / loadouts
+- profils de jeu (Profile/Loadout interne)
 - recherches sauvegardées
 - installations si un manager est réellement connecté
 
@@ -173,3 +173,12 @@ Community, Library et navigation ne passent en high-fi que lorsque :
 - les libellés fonctionnels sont stabilisés
 
 **État : TERMINÉ pour le contrat produit / NON IMPLÉMENTÉ volontairement.**
+
+
+## Clarifications terminologiques sûres
+
+Dans la Bibliothèque, le libellé utilisateur recommandé est **Profils de jeu** avec la description **Configurations enregistrées de mods et versions**.
+
+Le terme `Profile/Loadout` reste réservé au domaine interne lorsque nécessaire.
+
+**État : intégré suite à simulation experte multi-profils ; validation humaine toujours PREUVE MANQUANTE.**
