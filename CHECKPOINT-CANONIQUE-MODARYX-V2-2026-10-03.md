@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`e6820d5113e8a79002bdc222bbfa154ccf9da2b6`
+`ec3be1f44bd05c31590824a101b671a78e4ca52b`
 
 PR :
 
@@ -723,8 +723,11 @@ Aucun front V2 production n'a été écrit.
 
 - Audit legacy : **TERMINÉ**
 - Audit modules legacy ciblés : **TERMINÉ pour périmètre inspecté**
-- Audit exhaustif code — phases 1 à 7 : **TERMINÉ pour les périmètres inspectés / EN COURS global**
-- Registre maître anti-contamination : **EN COURS**
+- Audit exhaustif code — phases 1 à 8 : **TERMINÉ — couverture 525/525, 0 non classé**
+- Registre maître anti-contamination : **TERMINÉ — draft opérationnel**
+- Dépendances entrantes legacy critiques : **TERMINÉ**
+- Policy anti-contamination machine-readable : **TERMINÉ**
+- Guard CI anti-contamination : **TERMINÉ — micro-proof frais vert**
 - Analyse des écarts de schémas : **TERMINÉ — conception**
 - Plan schémas V2 : **TERMINÉ — conception**
 - Benchmark : **TERMINÉ**
@@ -770,20 +773,20 @@ Aucun front V2 production n'a été écrit.
 
 ## 29. Prochain point logique automatique
 
-1. Priorité absolue : terminer l'audit exhaustif anti-contamination du dépôt.
-2. Construire blacklist/allowlist et dépendances entrantes avant tout code frontend.
+1. Audit code anti-contamination : fermé pour le périmètre actuel ; garder le guard actif.
+2. Continuer uniquement les specs techniques/non-Figma utiles : adapters V2, frontières modules, migration routes/cache/data, accessibilité/performance et anti-oubli.
 3. Ne pas relancer Figma tant que le quota Starter reste bloqué.
 4. Maintenir le registre anti-oubli et intégrer uniquement les améliorations justifiées.
-4. Dès disponibilité Figma :
+5. Dès disponibilité Figma :
    - ajouter Game Hub ;
    - ajouter Global Search ;
    - ajouter Community ;
    - ajouter Mobile Game Hub ;
    - micro-vérifier clipping/overflow.
-5. Exécuter/obtenir tree testing humain.
-6. Corriger les ambiguïtés.
-7. Seulement après : direction artistique, design system final, prototype high-fi.
-8. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
+6. Exécuter/obtenir tree testing humain.
+7. Corriger les ambiguïtés.
+8. Seulement après : direction artistique, design system final, prototype high-fi.
+9. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
 ## 30. Règle de reprise
 
@@ -792,9 +795,9 @@ Pour toute nouvelle conversation :
 > Lire ce checkpoint en priorité, vérifier Git frais, puis continuer au prochain point logique sans reconstruire l'état depuis les anciens chats.
 
 
-## AUDIT EXHAUSTIF DU CODE — PRIORITÉ N°1
+## AUDIT EXHAUSTIF DU CODE — TERMINÉ POUR LE PÉRIMÈTRE ACTUEL
 
-**Décision utilisateur : priorité absolue avant tout nouveau frontend V2.**
+**Décision utilisateur respectée : l'audit code a été fermé avant tout nouveau frontend V2.**
 
 État frais de départ :
 - dépôt `Jajaz537/Nova-Forge-Site-Public`
@@ -809,7 +812,12 @@ Phases terminées :
 - `docs/MODARYX-V2-CODE-AUDIT-PHASE4-BACKEND-20261003.md` — functions/API ;
 - `docs/MODARYX-V2-CODE-AUDIT-PHASE5-SCHEMAS-DATA-20261003.md` — schémas/données ;
 - `docs/MODARYX-V2-CODE-AUDIT-PHASE6-CI-QA-MIGRATIONS-20261003.md` — CI/QA/migrations ;
-- `docs/MODARYX-V2-CODE-AUDIT-PHASE7-ROOT-PAGES-CONFIG-20261003.md` — pages/racine/config.
+- `docs/MODARYX-V2-CODE-AUDIT-PHASE7-ROOT-PAGES-CONFIG-20261003.md` — pages/racine/config ;
+- `docs/MODARYX-V2-CODE-AUDIT-PHASE8-ASSETS-20261003.md` — assets médias ;
+- `docs/MODARYX-V2-CODE-AUDIT-COVERAGE-525-20261003.md` — preuve 525/525 ;
+- `docs/MODARYX-V2-LEGACY-INBOUND-DEPENDENCY-CLOSURE-20261003.md` — dépendances entrantes ;
+- `docs/MODARYX-V2-CODE-ANTI-CONTAMINATION-MASTER-20261003.md` — blacklist/allowlist ;
+- `docs/MODARYX-V2-ANTI-CONTAMINATION-GUARD-PROOF-20261003.md` — micro-proof du guard.
 
 Findings critiques déjà prouvés :
 - `sw.js` précache et peut resservir des CSS/JS legacy ;
@@ -834,12 +842,18 @@ Classification obligatoire :
 - À BLOQUER
 - À REVALIDER
 
-Prochain ordre d'audit :
-1. construire le registre maître fichier/groupe → classification → risque → action V2 ;
-2. vérifier le reliquat non-code pouvant être chargé au runtime : assets médias, fonts, icônes, artefacts et références croisées ;
-3. produire la blacklist/allowlist anti-contamination V2 ;
-4. vérifier les dépendances entrantes : qui charge/import/register chaque élément bloqué ;
-5. seulement après cette fermeture, décider si un micro-outillage anti-contamination isolé peut être codé avant le frontend.
+Fermeture obtenue :
+1. inventaire et classification complète **525/525** ;
+2. assets médias classés ;
+3. blacklist/allowlist consolidée ;
+4. dépendances entrantes critiques fermées ;
+5. policy machine-readable créée ;
+6. checker + workflow anti-contamination créés ;
+7. première micro-preuve échouée sur regex sur-échappée, correction ciblée appliquée ;
+8. micro-proof frais GitHub Actions **SUCCESS** — run `37142295594` ;
+9. marqueurs : `PASS_V2_ANTI_CONTAMINATION_SELF_TEST` et `READY_V2_ANTI_CONTAMINATION_NO_ROOT`.
+
+Interprétation : le guard est vert ; aucun frontend V2 n'existe encore, donc aucun PASS frontend n'est déclaré.
 
 Règle :
 > Aucun premier code frontend V2 tant que les risques de contamination actifs n'ont pas été inventoriés et isolés.
