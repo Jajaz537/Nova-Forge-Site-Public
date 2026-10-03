@@ -132,10 +132,20 @@ try{
     const p=pending.get(msg.id);pending.delete(msg.id);
     msg.error?p.reject(new Error(msg.error.message)):p.resolve(msg);
   });
-  await send("Page.enable"); await send("Runtime.enable");
+  await send("Page.enable"); await send("Runtime.enable"); await send("Network.enable");
 
   await load();
   await waitText("Mes profils pour ce jeu");
+  await send("Network.emulateNetworkConditions",{offline:true,latency:0,downloadThroughput:0,uploadThroughput:0});
+  await sleep(250);
+  await waitText("Les données locales restent consultables");
+  const offlineVisible=await evaluate(`!!document.querySelector('.connectivity-banner')`);
+  if(!offlineVisible) throw new Error("offline connectivity banner not visible");
+  await send("Network.emulateNetworkConditions",{offline:false,latency:0,downloadThroughput:-1,uploadThroughput:-1});
+  await sleep(250);
+  const offlineCleared=await evaluate(`!document.querySelector('.connectivity-banner')`);
+  if(!offlineCleared) throw new Error("offline connectivity banner did not clear");
+  console.log("FLOW_ASSERT offline state real browser transition");
 
   await clickText(".global-nav button","Jeux");
   await waitText("Trouvez votre prochain terrain de jeu");
