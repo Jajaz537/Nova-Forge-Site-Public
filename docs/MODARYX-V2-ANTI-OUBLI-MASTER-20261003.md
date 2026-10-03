@@ -31,7 +31,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 |---|---|---|
 | Découvrir | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
 | Jeux | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
-| Mods & Plugins | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
+| Mods & Plugins | EN COURS — libellé parapluie non stabilisé après test humain P01 | PRODUCT-ARCHITECTURE / HUMAN-TERMINOLOGY-MINITEST-P01 |
 | Collections | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
 | Créateurs | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
 | Communauté | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
@@ -106,6 +106,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 |---|---|---|
 | compatible / partial / incompatible / unknown | TERMINÉ — conception | SCHEMA-PLAN |
 | measured / declared / estimated / unknown | TERMINÉ — conception | SCHEMA-PLAN |
+| Non vérifié générique interdit ; dimension obligatoire | TERMINÉ — principe humainement motivé | PRODUCT-GLOSSARY / HUMAN-TERMINOLOGY-MINITEST-P01 |
 | required | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
 | optional | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
 | recommended | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
@@ -119,7 +120,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | Favoris | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
 | Collections | EN COURS — terminologie/capacité | COLLECTION-MODPACK-PROFILE / CROSS-ANALYSIS |
 | Modpacks | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
-| Profile / Loadout interne → **Configurations de jeu** UI provisoire | EN COURS — revalidation humaine | COLLECTION-MODPACK-PROFILE / PRODUCT-GLOSSARY / CROSS-ANALYSIS |
+| Profile / Loadout interne → **Profils de jeu** UI provisoire préféré par P01 | EN COURS — validation globale | COLLECTION-MODPACK-PROFILE / PRODUCT-GLOSSARY / HUMAN-TERMINOLOGY-MINITEST-P01 |
 | Capacité Collection explicite (sélection / installation réelle) | TERMINÉ — conception / revalidation wording | COLLECTION-MODPACK-PROFILE / CROSS-ANALYSIS |
 | Conversion explicite entre objets | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
 | Version pinning | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
@@ -283,7 +284,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | Game Hub mobile | TERMINÉ — low-fi HTML / BLOQUÉ Figma uniquement | MISSING-WIREFRAME-BLUEPRINTS / LOWFI-REVIEW |
 | High-fi final | BLOQUÉ volontairement ; exploration réversible autorisée | HIGH-FI-GATE |
 | Direction artistique finale | BLOQUÉ volontairement | HIGH-FI-GATE |
-| Tree test humain | EN COURS — P01 réel terminé, validation globale incomplète | HUMAN-MINI-TREE-TEST-P01 / CROSS-ANALYSIS |
+| Tree test humain | EN COURS — P01 réel + mini-test terminologique P01 terminés, validation globale incomplète | HUMAN-MINI-TREE-TEST-P01 / HUMAN-TERMINOLOGY-MINITEST-P01 / CROSS-ANALYSIS |
 
 ## 22. Capacités historiques à ne pas perdre
 
