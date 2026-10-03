@@ -31,7 +31,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 |---|---|---|
 | Découvrir | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
 | Jeux | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
-| Mods & contenus | EN COURS — libellé parapluie provisoire préféré par P01 après benchmark externe ; validation humaine globale encore ouverte | PRODUCT-ARCHITECTURE / HUMAN-CONTENT-UMBRELLA-MINITEST-P01 / MULTIGAMING-MODDING-TERMINOLOGY-BENCHMARK |
+| Mods & contenus | TERMINÉ — wording produit retenu ; validation humaine globale reste EN COURS | PRODUCT-ARCHITECTURE / HUMAN-CONTENT-UMBRELLA-MINITEST-P01 / MULTIGAMING-MODDING-TERMINOLOGY-BENCHMARK / FINAL-PRODUCT-WORDING-CONTENT-UMBRELLA |
 | Collections | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
 | Créateurs | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
 | Communauté | TERMINÉ — conception | COMMUNITY-LIBRARY-NAV |
@@ -342,7 +342,7 @@ Résultats à ne pas oublier :
 - **Collection** reste valable mais sa capacité d'installation doit être explicite ;
 - **Bibliothèque** est cohérente avec les conventions gaming ;
 - **Mods & Plugins** n'est pas assez large comme parapluie final ;
-- **Mods & contenus** est le candidat primaire provisoire choisi par P01 ;
+- **Mods & contenus** est le libellé UI retenu par décision produit ;
 - **Non vérifié** générique reste interdit.
 
 
