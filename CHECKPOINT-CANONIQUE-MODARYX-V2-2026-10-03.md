@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`a3389b1ac8b69eabbad816390a68262922de5d49`
+`3795cf8a7ac5f6448b1a0c31beca969a82b84147`
 
 PR :
 
@@ -734,6 +734,7 @@ Aucun front V2 production n'a été écrit.
 - Matrice mapping V1→V2 détaillée : **TERMINÉ — conception**
 - Threat model pré-implémentation : **TERMINÉ — conception**
 - Policy CSP/headers/rich-text V2 : **TERMINÉ — conception, public inchangé**
+- Gate sélection stack technique : **TERMINÉ — critères seulement, aucune dépendance/framework sélectionné**
 - Analyse des écarts de schémas : **TERMINÉ — conception**
 - Plan schémas V2 : **TERMINÉ — conception**
 - Benchmark : **TERMINÉ**
@@ -780,7 +781,7 @@ Aucun front V2 production n'a été écrit.
 ## 29. Prochain point logique automatique
 
 1. Audit code anti-contamination : fermé pour le périmètre actuel ; garder le guard actif.
-2. Les frontières modules/adapters, mapping V1→V2, threat model et policy CSP sont prêts ; continuer seulement les specs non-Figma qui ferment un risque réel ou une preuve manquante.
+2. Les frontières modules/adapters, mapping V1→V2, threat model, policy CSP et gate de stack sont prêts ; ne créer aucune nouvelle spec si elle ne ferme pas un risque réel.
 3. Ne pas relancer Figma tant que le quota Starter reste bloqué.
 4. Maintenir le registre anti-oubli et intégrer uniquement les améliorations justifiées.
 5. Dès disponibilité Figma :
@@ -867,7 +868,8 @@ Specs ajoutées après fermeture de l'audit :
 - `docs/MODARYX-V2-ART-DIRECTION-EXPLORATION-BRIEF-20261003.md` ;
 - `docs/MODARYX-V2-V1-V2-MAPPING-MATRIX-20261003.md` ;
 - `docs/MODARYX-V2-THREAT-MODEL-20261003.md` ;
-- `docs/MODARYX-V2-CSP-HEADERS-RICH-TEXT-POLICY-20261003.md`.
+- `docs/MODARYX-V2-CSP-HEADERS-RICH-TEXT-POLICY-20261003.md` ;
+- `docs/MODARYX-V2-TECH-STACK-SELECTION-GATE-20261003.md`.
 
 Elles ne lèvent ni le gate Figma, ni le tree testing humain, ni le gate High-Fi.
 
