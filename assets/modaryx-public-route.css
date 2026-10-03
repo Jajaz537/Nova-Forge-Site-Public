@@ -62,7 +62,6 @@ img{display:block;max-width:100%}
   background-repeat:no-repeat;
   background-size:300% auto;
 }
-.mx-route-hero__art{display:none}
 .mx-route-hero:after{
   content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
