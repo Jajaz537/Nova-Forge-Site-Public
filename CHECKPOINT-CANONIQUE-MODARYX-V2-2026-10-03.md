@@ -899,7 +899,7 @@ Aucun front V2 production n'a été écrit.
 - Tree testing humain : **EN COURS — P01 réel terminé / autres profils utiles pour consolider**
 - Direction artistique exploratoire : **LIVING THRESHOLD SÉLECTIONNÉE / PALETTE HYBRIDE 2+3 / prototype réversible créé**
 - Design system préparatoire : **TERMINÉ — couleurs, surfaces, typographie, grille, spacing, composants, états, responsive, accessibilité, motion, iconographie, illustration et identité documentés**
-- QA visuelle formelle du prototype : **EN COURS — captures navigateur desktop/mobile archivées par micro-proof GitHub Actions ; comparaison normalisée à la source + checks a11y formels encore manquants**
+- QA visuelle formelle du prototype : **EN COURS — captures desktop/mobile archivées + contraste/focus/reduced-motion/clavier/touch/overflow micro-prouvés ; comparaison normalisée à la source + screen-reader/appareils + revue humaine multi-écrans encore manquants**
 - Direction artistique finale : **BLOQUÉE — la sélection exploratoire ne vaut pas gel high-fi**
 - High-fi final : **BLOQUÉ — autres validations humaines/visuelles encore requises ; wordings `Profils de jeu` et `Mods & contenus` désormais figés par décision produit**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
@@ -927,7 +927,7 @@ Aucun front V2 production n'a été écrit.
 14. Direction artistique exploratoire : **TERMINÉE** avec sélection humaine de `Living Threshold` et affinage palette 2+3. Référence : `docs/MODARYX-V2-LIVING-THRESHOLD-DESIGN-SYSTEM-20261003.md`.
 15. Prototype autonome créé dans `review-evidence/modaryx-v2-living-threshold-prototype-20261003/` pour Home, Game Hub, Catalog, Content Detail, Library, Community et mobile. Il reste une preuve de conception réversible, pas le frontend V2 de production.
 16. Capture navigateur archivable : **TERMINÉE** — workflow `MODARYX V2 Living Threshold Visual Proof`, run `37157794569`, artifact `11286254258`, commit `87245c939c42daf1a0b04879d26039eb4b5daae1`.
-17. Prochain blocker réel : archiver la référence source/approved reference pour comparaison normalisée, exécuter contrast/keyboard checks formels, puis obtenir une revue humaine multi-écrans. Aucun gel high-fi final avant fermeture de ces preuves.
+17. Contraste + clavier/touch + overflow ciblés : **TERMINÉ — run 37158374418**. Prochain blocker visuel : constituer une preuve multi-écrans archivable, puis archiver une référence approuvée pour comparaison normalisée et obtenir une revue humaine multi-écrans. Screen reader/appareils restent PREUVE MANQUANTE. Aucun gel high-fi final avant fermeture suffisante de ces preuves.
 18. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
 ## 30. Règle de reprise
@@ -1025,3 +1025,24 @@ Règle :
 - mobile : `game-hub-mobile-390x844.png`, SHA-256 `52b0e3762591371b3c8a9b1c4dc038e44bbf80c403a94c4dfd5baa870a11b49c`
 - source visuelle Work : toujours non archivée dans le dépôt ; comparaison source-vs-implémentation = **PREUVE MANQUANTE**
 - aucun PASS esthétique final déduit de ce run.
+
+
+## Micro-preuve accessibilité rendue Living Threshold
+
+**TERMINÉE pour le périmètre ciblé du prototype — pas une certification WCAG finale**
+
+- run : `37158374418` — **SUCCESS**
+- commit candidat : `6721a761034a091bf4f4f9eaff6cc7b555a49665`
+- artifact : `11287195204`
+- marqueurs :
+  - `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
+  - `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+  - `KEYBOARD_REACHABLE 35 / 35`
+  - `DESKTOP_OVERFLOW 0`
+  - `MOBILE_OVERFLOW 0`
+- contrastes token ciblés : 17.19 / 7.77 / 10.97 / 12.00 / 10.97 / 4.88 / 5.14, tous au-dessus du seuil 4.5 appliqué par ce micro-check.
+- cibles interactives mobiles visibles testées : au moins 44×44 px.
+- focus visible 3 px cyan + reduced-motion : contrat vérifié.
+- **PREUVE MANQUANTE** : screen reader réel, appareils physiques, comparaison source normalisée et revue humaine multi-écrans.
+
+Aucun PASS High-Fi final n'est déduit de cette micro-preuve.
