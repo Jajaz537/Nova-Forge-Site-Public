@@ -203,7 +203,7 @@ try{
   await clickText(".profile-library article:first-child .quiet","Ouvrir");
   await waitText("Configuration personnelle de démonstration pour Aetherlands 1.4.2");
   await waitText("Manager non connecté");
-  await clickText(".back","Retour à la Bibliothèque");
+  await clickText(".back","← Retour à la Bibliothèque");
   await waitText("Retrouvez favoris, suivis, collections et profils sans les confondre.");
 
   await clickText(".global-nav button","Créer");
@@ -294,7 +294,7 @@ try{
   await waitText("Connexion MODARYX Forge");
   await clickText(".profile-library article:first-child .quiet","Ouvrir");
   await waitText("Manager non connecté");
-  await clickText(".back","Retour à la Bibliothèque");
+  await clickText(".back","← Retour à la Bibliothèque");
 
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav button","Créer");
