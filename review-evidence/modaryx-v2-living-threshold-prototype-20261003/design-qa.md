@@ -95,3 +95,42 @@ Rendered checks:
 
 Limit:
 this closes the current prototype's targeted keyboard/touch/contrast proof only. It does **not** replace screen-reader testing, device testing, full WCAG audit, source-vs-implementation visual comparison, or human multi-screen review.
+
+
+## Multi-screen visual review evidence
+
+**TERMINÉ — archivable prototype coverage / human acceptance still open**
+
+Targeted run: `37158610507`  
+Candidate commit: `63d6a79b9fa05378d8280ff65ed05a81fa750ead`  
+Artifact: `11287155242`  
+Artifact SHA-256: `38d2a9e777feb9a8acdf1b55c4c953ce6665385fcb0251a3de240abadeb6f2c2`
+
+Marker:
+- `MULTISCREEN_CAPTURE_COUNT 11`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Archived states:
+- desktop Game Hub;
+- desktop Home;
+- desktop Catalog;
+- desktop Content Detail;
+- desktop Library;
+- desktop Community;
+- desktop Creator Studio;
+- mobile Game Hub;
+- mobile Home;
+- mobile Catalog;
+- mobile Content Detail.
+
+Visual inspection notes:
+- Home, Game Hub, Catalog and Content Detail remain visually coherent in the Living Threshold 2+3 family;
+- mobile remains recomposed rather than a simple squeezed desktop;
+- Creator Studio is intentionally **exploratory/minimal** and does not yet cover the full Creator Studio acceptance contract;
+- these captures enable a real multi-screen human review but do not themselves constitute that review.
+
+Remaining before final high-fi:
+- approved/source reference archive + normalized comparison;
+- additional human multi-screen review;
+- screen-reader/device proof;
+- expansion of incomplete product surfaces and critical states.
