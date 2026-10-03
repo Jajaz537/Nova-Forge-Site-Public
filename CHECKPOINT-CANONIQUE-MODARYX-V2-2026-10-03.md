@@ -28,7 +28,7 @@ Dépôt :
 
 `Jajaz537/Nova-Forge-Site-Public`
 
-Base `main` observée avant ce checkpoint :
+Base `main` observée avant cette mise à jour :
 
 `d8d5ea5509f07c5bf5a4424293cfa404643c239f`
 
@@ -36,9 +36,9 @@ Branche V2 :
 
 `audit/modaryx-v2-legacy-boundary-20261003`
 
-HEAD observé avant ce checkpoint :
+HEAD observé avant cette mise à jour :
 
-`668c76eb7962cc395dfdeec041456ff23b7e938e`
+`585bcc4a4bd3641808266fd525c150719e2d125b`
 
 PR :
 
@@ -194,7 +194,36 @@ Capacités à préserver après audit :
 - assets Nova : historique/provenance
 - assets royaume/compagnons : candidats uniquement, pas référence finale automatique
 
-## 10. Figma
+## 10. Contrats UX / système
+
+**TERMINÉ — conception**
+
+Documents ajoutés :
+
+- `docs/MODARYX-V2-INTERACTION-STATES-20261003.md`
+- `docs/MODARYX-V2-A11Y-PERF-DESIGN-SYSTEM-CONTRACT-20261003.md`
+- `docs/MODARYX-V2-SCREEN-ACCEPTANCE-CRITERIA-20261003.md`
+
+Principes désormais tracés :
+
+- états nominal/loading/empty/error/offline/unavailable/auth/incompatible/success ;
+- focus visible/non masqué ;
+- cibles tactiles minimales et espacements ;
+- reduced motion ;
+- design tokens primitifs + sémantiques ;
+- composants de produit ;
+- Core Web Vitals comme objectifs production ;
+- critères d'acceptation écran par écran.
+
+Références de performance retenues :
+
+- LCP ≤ 2,5 s au p75 ;
+- INP ≤ 200 ms au p75 ;
+- CLS ≤ 0,1 au p75.
+
+Ces seuils ne valent pas PASS tant que V2 n'existe pas en production mesurable.
+
+## 11. Figma
 
 Fichier :
 
@@ -258,7 +287,7 @@ Mobile :
 
 Recherche, fiche, installation, collection/profil, Creator Studio et Community ont leurs principaux états définis.
 
-## 11. Erreurs Figma et procédure
+## 12. Erreurs Figma et procédure
 
 ### Erreur 1
 
@@ -292,7 +321,7 @@ Erreur exacte :
 
 Aucune relance immédiate.
 
-## 12. Wireframes encore manquants
+## 13. Wireframes encore manquants
 
 **BLOQUÉ Figma / EN COURS conception**
 
@@ -305,7 +334,11 @@ Blueprints textuels déjà préparés dans :
 
 `docs/MODARYX-V2-MISSING-WIREFRAME-BLUEPRINTS-20261003.md`
 
-## 13. High‑Fi
+La revue de couverture est tracée dans :
+
+`docs/MODARYX-V2-WIREFRAME-COVERAGE-20261003.md`
+
+## 14. High‑Fi
 
 **BLOQUÉ**
 
@@ -319,7 +352,7 @@ Gate documenté dans :
 
 `docs/MODARYX-V2-HIGH-FI-GATE-20261003.md`
 
-## 14. Validation humaine
+## 15. Validation humaine
 
 **PREUVE MANQUANTE**
 
@@ -338,7 +371,7 @@ Script de test prêt :
 
 Aucune validation humaine n'est inventée.
 
-## 15. Production / infrastructure
+## 16. Production / infrastructure
 
 Inchangés :
 
@@ -354,7 +387,7 @@ Inchangés :
 
 Aucun front V2 production n'a été écrit.
 
-## 16. États courants
+## 17. États courants
 
 - Audit legacy : **TERMINÉ**
 - Benchmark : **TERMINÉ**
@@ -362,6 +395,8 @@ Aucun front V2 production n'a été écrit.
 - Taxonomie : **TERMINÉ — draft**
 - Parcours critiques : **TERMINÉ — low-fi**
 - Matrice d'états : **TERMINÉ — conception**
+- Contrat accessibilité/performance/design system : **TERMINÉ — conception**
+- Critères d'acceptation écrans : **TERMINÉ — conception**
 - Wireframes core : **EN COURS**
 - Écriture Figma supplémentaire : **BLOQUÉ EXTERNE**
 - Tree testing humain : **PREUVE MANQUANTE**
@@ -369,9 +404,9 @@ Aucun front V2 production n'a été écrit.
 - High-fi : **BLOQUÉ**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
 
-## 17. Prochain point logique automatique
+## 18. Prochain point logique automatique
 
-1. Continuer tout travail de recherche/specification ne nécessitant pas Figma.
+1. Continuer recherche/specification et audit ne nécessitant pas Figma.
 2. Ne pas relancer Figma tant que le quota Starter reste bloqué.
 3. Dès disponibilité Figma :
    - ajouter Game Hub ;
@@ -384,7 +419,7 @@ Aucun front V2 production n'a été écrit.
 6. Seulement après : direction artistique, design system final, prototype high-fi.
 7. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
-## 18. Règle de reprise
+## 19. Règle de reprise
 
 Pour toute nouvelle conversation :
 
