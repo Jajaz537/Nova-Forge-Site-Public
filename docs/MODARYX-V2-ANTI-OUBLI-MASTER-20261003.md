@@ -344,3 +344,18 @@ Résultats à ne pas oublier :
 - **Mods & Plugins** n'est pas assez large comme parapluie final ;
 - **Mods & contenus** est le candidat primaire provisoire choisi par P01 ;
 - **Non vérifié** générique reste interdit.
+
+
+## 27. Test terminologique indépendant assistant
+
+**TERMINÉ — simulation IA 6 profils × 6 questions**
+
+Document : `docs/MODARYX-V2-ASSISTANT-INDEPENDENT-TERMINOLOGY-TEST-20261003.md`.
+
+Ne remplace pas une preuve humaine.
+
+## 28. Test terminologique Work
+
+**PREUVE MANQUANTE — mission prête / rapport non reçu**
+
+Le protocole Work doit rester indépendant de P01 et du test assistant jusqu'à son propre verdict.
