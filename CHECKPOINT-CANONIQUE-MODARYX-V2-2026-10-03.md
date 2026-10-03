@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`2a2fd30f0c5e4a22d9c9a95e08382edbf749904b`
+`4d39404e8547747196b15bf2162c0044225c04ba`
 
 PR :
 
@@ -365,7 +365,29 @@ Couverture prévue :
 
 Règle après erreur conservée : erreur exacte → isolation → correction ciblée → micro-proof → continuation.
 
-## 14. Figma
+## 14. Contrats de découverte et fiche contenu
+
+**TERMINÉ — conception**
+
+Documents :
+
+- `docs/MODARYX-V2-SEARCH-FILTER-DISCOVERY-CONTRACT-20261003.md`
+- `docs/MODARYX-V2-CONTENT-DETAIL-CONTRACT-20261003.md`
+
+Décisions :
+
+- filtres actifs toujours visibles ;
+- multi-sélection intra-facette quand pertinente ;
+- logique OR dans une facette / AND entre facettes par défaut ;
+- filtres contextuels par jeu/type ;
+- search local-first, externe optionnel ;
+- Content Detail centrée sur compatibilité/dépendances avant installation ;
+- projet, release et fichier séparés ;
+- Requirements structurés ;
+- provenance/hash/scan présentés avec limites explicites ;
+- mobile priorise identité → compatibilité → action → requirements.
+
+## 15. Figma
 
 Fichier :
 
@@ -429,7 +451,7 @@ Mobile :
 
 Recherche, fiche, installation, collection/profil, Creator Studio et Community ont leurs principaux états définis.
 
-## 15. Erreurs Figma et procédure
+## 16. Erreurs Figma et procédure
 
 ### Erreur 1
 
@@ -463,7 +485,7 @@ Erreur exacte :
 
 Aucune relance immédiate.
 
-## 16. Wireframes encore manquants
+## 17. Wireframes encore manquants
 
 **BLOQUÉ Figma / EN COURS conception**
 
@@ -480,7 +502,7 @@ Revue de couverture :
 
 `docs/MODARYX-V2-WIREFRAME-COVERAGE-20261003.md`
 
-## 17. High‑Fi
+## 18. High‑Fi
 
 **BLOQUÉ**
 
@@ -494,7 +516,7 @@ Gate :
 
 `docs/MODARYX-V2-HIGH-FI-GATE-20261003.md`
 
-## 18. Validation humaine
+## 19. Validation humaine
 
 **PREUVE MANQUANTE**
 
@@ -513,7 +535,7 @@ Script de test :
 
 Aucune validation humaine n'est inventée.
 
-## 19. Production / infrastructure
+## 20. Production / infrastructure
 
 Inchangés :
 
@@ -529,7 +551,7 @@ Inchangés :
 
 Aucun front V2 production n'a été écrit.
 
-## 20. États courants
+## 21. États courants
 
 - Audit legacy : **TERMINÉ**
 - Audit modules legacy ciblés : **TERMINÉ pour périmètre inspecté**
@@ -546,6 +568,8 @@ Aucun front V2 production n'a été écrit.
 - Stratégie données/fixtures : **TERMINÉ — conception**
 - Migration storage/cache/SW : **TERMINÉ — conception**
 - Stratégie QA : **TERMINÉ — conception, NON EXÉCUTÉ**
+- Recherche/filtres/découverte : **TERMINÉ — conception**
+- Fiche contenu : **TERMINÉ — conception**
 - Wireframes core : **EN COURS**
 - Écriture Figma supplémentaire : **BLOQUÉ EXTERNE**
 - Tree testing humain : **PREUVE MANQUANTE**
@@ -553,7 +577,7 @@ Aucun front V2 production n'a été écrit.
 - High-fi : **BLOQUÉ**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
 
-## 21. Prochain point logique automatique
+## 22. Prochain point logique automatique
 
 1. Continuer recherche/specification et audit ne nécessitant pas Figma.
 2. Ne pas relancer Figma tant que le quota Starter reste bloqué.
@@ -569,7 +593,7 @@ Aucun front V2 production n'a été écrit.
 7. Seulement après : direction artistique, design system final, prototype high-fi.
 8. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
-## 22. Règle de reprise
+## 23. Règle de reprise
 
 Pour toute nouvelle conversation :
 
