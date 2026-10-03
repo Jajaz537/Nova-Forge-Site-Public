@@ -68,10 +68,10 @@ Document :
 | Risque | État | Mitigation |
 |---|---|---|
 | Navigation trop large | EN COURS | tree testing |
-| Profil de compte vs profil de jeu | EN COURS | **Profils de jeu** préféré par P01 + accès direct Game Hub/Bibliothèque ; surveiller la collision avec profil de compte |
+| Profil de compte vs profil de jeu | EN COURS — principal risque wording | P01 préfère **Profils de jeu** ; Work préfère **Configurations de jeu** pour novices ; retest humain ciblé requis |
 | Collection perçue comme installable | EN COURS | capacité visible + statut d'installation explicite |
 | Catalogue consultable perçu comme téléchargeable | EN COURS | ne jamais employer `disponible` seul ; statut distribution séparé |
-| Parapluie de contenus trop étroit | EN COURS — réduit | **Mods & contenus** préféré par P01 après benchmark externe ; consolider avec d'autres humains avant gel final |
+| Parapluie de contenus trop étroit | EN COURS — fortement réduit | **Mods & contenus** converge P01 + assistant + Work ; validation humaine globale encore incomplète |
 | “Non vérifié” générique ambigu | TERMINÉ — principe | interdire le badge seul ; qualifier Compatibilité / Provenance / Scan / risque réel |
 | Trop de filtres | EN COURS | filtres contextuels + progressive disclosure |
 | Fiche trop dense | EN COURS | zone décision + tabs |
