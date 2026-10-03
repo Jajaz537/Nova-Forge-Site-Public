@@ -1252,3 +1252,91 @@ Décision :
 - aucune modification de `main`, du frontend public, DNS/Cloudflare ou du cutover n'a été réalisée.
 
 **Prochain point logique interne : comparaison de stack non engageante + blueprint root, puis arrêt au gate externe/humain si aucun autre blocker interne n'est récupérable.**
+
+
+## Préparation finale avant root V2 — 4 octobre 2026
+
+**TERMINÉ pour le travail interne autorisé / root production toujours BLOQUÉ**
+
+### Mapping production
+
+- `docs/MODARYX-V2-LIVING-THRESHOLD-PRODUCTION-MAPPING-20261004.md`
+- `qa/modaryx-v2-production-surface-map.json`
+- `qa/check-v2-production-surface-map.mjs`
+- workflow `MODARYX V2 Production Surface Map Proof`
+- run `37163081008` — **SUCCESS**
+- marqueur `PASS_V2_PRODUCTION_SURFACE_MAP`
+- 22 surfaces mappées
+- 6 états runtime réels volontairement non prouvés
+
+### Stack — comparaison uniquement
+
+Document :
+`docs/MODARYX-V2-STACK-COMPARISON-20261004.md`
+
+Shortlist non engageante :
+1. vanilla/static-first + Vite léger ;
+2. Astro + Cloudflare Workers ;
+3. React + Vite + Cloudflare Workers.
+
+Fait externe frais :
+- Cloudflare recommande actuellement Workers comme plateforme principale pour les nouvelles applications ;
+- aucune migration Pages/Workers n'a été exécutée ;
+- production actuelle, DNS, Cloudflare critique et `main` restent inchangés.
+
+### Validation humaine prête
+
+Document :
+`docs/MODARYX-V2-HUMAN-MULTISCREEN-REVIEW-PACK-20261004.md`
+
+Le pack réutilise la preuve 39 captures et concentre la revue sur :
+- compréhension Home/Game Hub ;
+- Catalog/Content Detail ;
+- Collection / Modpack / Profil de jeu ;
+- Library ;
+- Creator Studio ;
+- Community ;
+- mobile ;
+- direction visuelle.
+
+Aucune réponse humaine supplémentaire n'est inventée.
+
+### Assistive / appareils prête
+
+Document :
+`docs/MODARYX-V2-ASSISTIVE-DEVICE-VALIDATION-PROTOCOL-20261004.md`
+
+Toujours PREUVE MANQUANTE réelle :
+- NVDA/VoiceOver/TalkBack réel ;
+- Safari réel ;
+- mobile physique ;
+- référence visuelle approuvée archivable + comparaison normalisée ;
+- validation humaine multi-écrans supplémentaire.
+
+### Anti-oubli
+
+`docs/MODARYX-V2-ANTI-OUBLI-MASTER-20261003.md` a été réconcilié avec les preuves actuelles :
+- anti-import CI = implémenté/prouvé ;
+- capture archivable = fermée ;
+- ancien statut Work terminologique = marqué historique supersédé ;
+- offline/error/retry = fermé au niveau prototype ;
+- mapping production et comparaison stack = tracés.
+
+### Décision courante
+
+Tout le travail interne autorisé avant création du root V2 est maintenant suffisamment préparé pour ne pas refaire l'architecture.
+
+Le prochain saut significatif vers la VF nécessite l'un des événements suivants :
+1. vraies validations humaines supplémentaires ;
+2. preuve assistive/appareil ;
+3. référence visuelle approuvée archivable ;
+4. décision canonique explicite reclassifiant le gate et autorisant le premier root/frontend V2 isolé.
+
+Jusqu'à cet événement :
+- ne pas créer un root production en contournant le gate ;
+- ne pas toucher à `main` ;
+- ne pas cutover le frontend public ;
+- ne pas changer DNS/Cloudflare critique ;
+- continuer seulement les micro-proofs/maintenance anti-oubli nécessaires.
+
+**État : EN COURS vers VF / BLOQUÉ pour root production par validations externes et humaines restantes.**
