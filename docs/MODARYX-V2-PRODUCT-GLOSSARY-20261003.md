@@ -326,3 +326,17 @@ Ne jamais afficher ce libellé seul. Toujours qualifier la dimension :
 Le test humain P01 ne comprend pas naturellement **Mods & Plugins** comme englobant addons, scripts, outils, maps, shaders et presets.
 
 Conséquence : ce libellé reste **NON STABILISÉ comme entrée parapluie finale**. Il peut rester un libellé de travail, mais une alternative plus large doit être testée avant le gel high-fi.
+
+
+## 22. Parapluie de contenus — benchmark multi-gaming
+
+Le benchmark externe Nexus / CurseForge / Modrinth / Thunderstore / Steam Workshop / Bethesda / mod.io / ModDB / GameBanana confirme que **Mods & Plugins** n'est pas une convention universelle assez large pour englober naturellement addons, scripts, outils, maps, shaders, presets et autres types.
+
+Candidats prioritaires à tester humainement :
+1. **Contenus de jeu**
+2. **Mods & contenus**
+3. **Créations**
+
+Décision actuelle : **Mods & Plugins** reste un libellé historique/de travail mais n'est pas le parapluie final validé.
+
+Référence : `docs/MODARYX-V2-MULTIGAMING-MODDING-TERMINOLOGY-BENCHMARK-20261003.md`.
