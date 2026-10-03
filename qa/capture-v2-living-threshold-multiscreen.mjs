@@ -206,6 +206,8 @@ try {
   manifest.captures.push(await capture("desktop-content-detail.png", 1440, 1024, "Avant d’ajouter"));
   await clickByText(".detail-tabs button", "Signalement");
   manifest.captures.push(await capture("desktop-content-report.png", 1440, 1024, "Signaler ce contenu"));
+  await clickByText(".report-section .primary", "Préparer le signalement local");
+  manifest.captures.push(await capture("desktop-content-report-error.png", 1440, 1024, "Choisissez une raison avant de préparer le signalement."));
 
   await clickByText("footer button", "Game Hub");
   await clickSelector('[aria-label="Bibliothèque"]');
@@ -246,6 +248,8 @@ try {
   manifest.captures.push(await capture("mobile-content-detail.png", 390, 844, "Avant d’ajouter"));
   await clickByText(".detail-tabs button", "Signalement");
   manifest.captures.push(await capture("mobile-content-report.png", 390, 844, "Signaler ce contenu"));
+  await clickByText(".report-section .primary", "Préparer le signalement local");
+  manifest.captures.push(await capture("mobile-content-report-error.png", 390, 844, "Choisissez une raison avant de préparer le signalement."));
 
   await navigateHome(390, 844);
   await clickSelector(".mobile-menu");
