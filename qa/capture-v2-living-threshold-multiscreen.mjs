@@ -200,7 +200,7 @@ try {
   manifest.captures.push(await capture("desktop-library.png", 1440, 1024, "Retrouvez favoris, suivis, collections et profils"));
 
   await clickByText(".global-nav button", "Communauté");
-  manifest.captures.push(await capture("desktop-community.png", 1440, 1024, "Des idées qui font vivre les mondes"));
+  manifest.captures.push(await capture("desktop-community.png", 1440, 1024, "Des échanges utiles autour des créations"));
 
   await clickByText(".global-nav button", "Créer");
   manifest.captures.push(await capture("desktop-creator-studio.png", 1440, 1024, "Creator Studio"));
@@ -239,6 +239,10 @@ try {
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Créateurs");
   manifest.captures.push(await capture("mobile-creators.png", 390, 844, "Créateurs, équipes et studios"));
+
+  await clickSelector(".mobile-menu");
+  await clickByText(".global-nav button", "Communauté");
+  manifest.captures.push(await capture("mobile-community.png", 390, 844, "Des échanges utiles autour des créations"));
 
   const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/manifest.json";
   writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
