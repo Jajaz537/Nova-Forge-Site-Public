@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`cd5de383e6e31b7d98a6771cc7c9a9064da7ed80`
+`8d0aaa6330231bc8d60bc92acab466f5ba210e31`
 
 PR :
 
@@ -664,12 +664,12 @@ Aucune nouvelle relance Figma n'est autorisée tant qu'un changement réel de qu
 
 ## 24. Wireframes encore manquants
 
-**BLOQUÉ Figma / EN COURS conception**
+**TERMINÉ — conception low-fi textuelle / BLOQUÉ pour matérialisation visuelle Figma**
 
-- Desktop Game Hub
-- Desktop Global Search
-- Desktop Community
-- Mobile Game Hub
+- Desktop Game Hub — blueprint détaillé TERMINÉ
+- Desktop Global Search — blueprint détaillé TERMINÉ
+- Desktop Community — blueprint détaillé TERMINÉ
+- Mobile Game Hub — blueprint détaillé TERMINÉ
 
 Blueprints textuels :
 
@@ -780,7 +780,7 @@ Aucun front V2 production n'a été écrit.
 - Notifications/Préférences : **TERMINÉ — conception**
 - Modération/Appels : **TERMINÉ — conception**
 - Cycle de vie support jeux : **TERMINÉ — conception**
-- Wireframes core : **EN COURS**
+- Wireframes core : **TERMINÉ pour conception textuelle / PREUVE VISUELLE MANQUANTE pour 4 écrans**
 - Écriture Figma supplémentaire : **BLOQUÉ EXTERNE**
 - Tree testing humain : **PREUVE MANQUANTE**
 - Direction artistique : **BLOQUÉ**
@@ -793,16 +793,17 @@ Aucun front V2 production n'a été écrit.
 2. Les frontières modules/adapters, mapping V1→V2, threat model, policy CSP et gate de stack sont prêts ; ne créer aucune nouvelle spec si elle ne ferme pas un risque réel.
 3. Ne pas relancer Figma tant que le quota Starter reste bloqué ; retry ciblé du 2026-10-03 20:12 = toujours BLOQUÉ EXTERNE.
 4. Maintenir le registre anti-oubli et intégrer uniquement les améliorations justifiées.
-5. Dès disponibilité Figma :
-   - ajouter Game Hub ;
-   - ajouter Global Search ;
-   - ajouter Community ;
-   - ajouter Mobile Game Hub ;
+5. Alternative gratuite disponible : matérialiser les 4 écrans dans un prototype low-fi Miro si l'utilisateur confirme explicitement la création d'un board ; sinon attendre le reset Figma.
+6. Dès disponibilité Figma :
+   - matérialiser Game Hub ;
+   - matérialiser Global Search ;
+   - matérialiser Community ;
+   - matérialiser Mobile Game Hub ;
    - micro-vérifier clipping/overflow.
-6. Exécuter/obtenir tree testing humain.
-7. Corriger les ambiguïtés.
-8. Seulement après : direction artistique, design system final, prototype high-fi.
-9. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
+7. Exécuter/obtenir tree testing humain.
+8. Corriger les ambiguïtés.
+9. Seulement après : direction artistique, design system final, prototype high-fi.
+10. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
 ## 30. Règle de reprise
 
