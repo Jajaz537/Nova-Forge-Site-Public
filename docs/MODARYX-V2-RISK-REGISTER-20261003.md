@@ -58,8 +58,8 @@ Document :
 
 État :
 - threat model conception : **TERMINÉ** ;
-- CSP/header policy V2 : **EN COURS** ;
-- sanitizer/rich-text policy : **À DÉFINIR si rich text** ;
+- CSP/header policy V2 : **TERMINÉ — conception** ;
+- sanitizer/rich-text policy : **TERMINÉ — conception** ;
 - supply-chain V2 : **EN COURS — dépendances non choisies** ;
 - runtime security proof : **PREUVE MANQUANTE** tant que V2 n'existe pas.
 
