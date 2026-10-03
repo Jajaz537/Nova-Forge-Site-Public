@@ -151,6 +151,13 @@ try{
   assertEqual(await count(".search-result-row:not([disabled])"),1,"global search actionable result count");
   await clickText(".search-result-row","Sentiers de l’aubeExploration · Atelier Boréal");
   await waitText("Avant d’ajouter");
+  await clickText(".detail-tabs button","Compatibilité et prérequis");
+  await waitText("Aether Core");
+  await clickText(".detail-tabs button","Fichiers");
+  await waitText("Fichiers de cette version");
+  await waitText("Aucun scan réel associé");
+  await clickText(".detail-tabs button","Permissions");
+  await waitText("Aucune licence de distribution réelle");
 
   await clickText(".global-nav button","Mods & contenus");
   await waitText("Catalogue global");
