@@ -188,7 +188,21 @@ Chaque surface doit avoir :
 - Library high-fi : BLOQUÉ
 - Code components : BLOQUÉ
 
-## 20. Conditions globales avant premier code de skin
+## 20. Readiness technique transversale
+
+- Audit code dépôt : **TERMINÉ — 525/525, 0 non classé**
+- Blacklist/allowlist anti-contamination : **TERMINÉ — draft opérationnel**
+- Guard CI anti-contamination : **TERMINÉ — micro-proof frais**
+- Frontières modules/adapters : **TERMINÉ — conception**
+- Matrice V1→V2 : **TERMINÉ — conception**
+- Threat model : **TERMINÉ — conception**
+- Plan routes/cutover : **TERMINÉ — conception**
+- Runtime V2 réel : **NON CRÉÉ**
+- CSP/headers V2 : **EN COURS**
+- SW migration browser : **PREUVE MANQUANTE**
+- Tree testing humain : **PREUVE MANQUANTE**
+
+## 21. Conditions globales avant premier code de skin
 
 Doivent être fermées :
 
@@ -199,15 +213,17 @@ Doivent être fermées :
 5. design system high-fi ;
 6. prototype comparatif validé humainement.
 
-## 21. Ce qui peut être codé avant le skin
+## 22. Ce qui peut être codé avant le skin
 
 Uniquement si nécessaire et isolé :
 - tests anti-contamination ;
 - validateurs de contrats ;
 - mappers de données purement techniques ;
 - fixtures non publiques ;
-- tooling QA.
+- tooling QA ;
+- policy headers/CSP ;
+- contract tests adapters.
 
 Mais même ces éléments ne doivent pas être introduits sans nécessité, branche isolée et micro-proof.
 
-**État global : BLOQUÉ volontairement pour le frontend / conception avancée.**
+**État global : BLOQUÉ volontairement pour le frontend / préparation technique avancée.**
