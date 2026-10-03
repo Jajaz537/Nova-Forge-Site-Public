@@ -1069,3 +1069,27 @@ Prochains écarts produit prioritaires du prototype :
 3. Catalogue avec requête/filtres/tri/résultats/reset/états réellement exercés ;
 4. Content Detail avec navigation Releases/Files/Requirements/Changelog/Support/Permissions ;
 5. Library et Creator Studio approfondis selon critères d'acceptation.
+
+
+## Micro-preuve parcours produit Living Threshold
+
+**TERMINÉE pour le prototype local — aucune preuve backend/production déduite**
+
+- run : `37159148521` — **SUCCESS**
+- commit candidat : `d24e00372e513741dac54316a5e9357e945efc31`
+- artifact : `11286822252`
+- artifact SHA-256 : `292083586f83740a9712f354db4396abce261ba6bfef00923d57310b2ec74a34`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 15`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+- Jeux : recherche locale + état de support + ouverture Game Hub prouvés ;
+- Recherche globale : regroupement multi-type + ouverture fiche prouvés ;
+- Catalogue : recherche + filtre type + tri + reset + no-results/recovery prouvés ;
+- Mobile : accès Recherche globale + résultat prouvés.
+
+État produit :
+- Games Index : **TERMINÉ — prototype exploratoire fonctionnel**
+- Global Search : **TERMINÉ — prototype exploratoire fonctionnel**
+- Catalog : **EN COURS — prototype fonctionnel pour recherche/filtre/tri/reset ; autres états/quick view encore à approfondir**
+- données : **démonstration explicite uniquement**
+- backend réel / recherche distante / production : **PREUVE MANQUANTE / non implémenté**
