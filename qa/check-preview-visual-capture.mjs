@@ -15,6 +15,7 @@ if (!/^https:\/\//.test(ORIGIN)) {
   throw new Error('MODARYX_VISUAL_ORIGIN must be an HTTPS preview origin');
 }
 fs.mkdirSync(OUT, {recursive: true});
+fs.mkdirSync(USER_DATA_DIR, {recursive: true});
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -28,7 +29,8 @@ async function waitForDevToolsPort(timeoutMs = 12000) {
     }
     await sleep(120);
   }
-  throw new Error('DevToolsActivePort not created');
+  const exit = chrome?.exitCode ?? chrome?.signalCode;
+  throw new Error('DevToolsActivePort not created' + (exit !== null ? '; Chrome exited: ' + exit : ''));
 }
 
 async function waitForJson(url, timeoutMs = 10000) {

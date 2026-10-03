@@ -9,9 +9,15 @@ const historicalCheckpoint = fs.readFileSync(path.join(root, 'CHECKPOINT-CANONIQ
 const checkpoint = fs.readFileSync(path.join(root, 'CHECKPOINT-CANONIQUE-MODARYX-2026-09-21.md'), 'utf8');
 const externalMatrix = fs.readFileSync(path.join(root, 'FINAL-EXTERNAL-VALIDATION-MATRIX.md'), 'utf8');
 const readiness = JSON.parse(fs.readFileSync(path.join(root, 'data/integration-readiness.json'), 'utf8'));
+const manualEvidenceRoot = path.join(root, 'qa/manual-final-evidence');
+const manualEvidenceManifest = JSON.parse(fs.readFileSync(path.join(manualEvidenceRoot, 'MANIFEST.json'), 'utf8'));
 
 const requiredCurrent = [
   'Design system Premium HD des 23 routes publiques',
+  'Design system Premium HD des 23 routes publiques | **TERMINÉ — passe artistique courante validée humainement**',
+  'Validation artistique humaine de la passe courante | **TERMINÉ**',
+  '20 workflows visibles sur `a499f505...` sont SUCCESS',
+  'visualGrowth.status=awaiting-assets` est l\'état courant actif',
   'SEO on-page des 23 routes | **TERMINÉ — preuve ciblée**',
   'Sitemap des routes jeux/hubs | **TERMINÉ — preuve ciblée**',
   'Hubs GTA VI / RDR2, catégories et guides éditoriaux | **TERMINÉ — périmètre éditorial sourcé + readiness contractuelle**',
@@ -92,7 +98,8 @@ const requiredCurrent = [
   'PASS_TARGETED_MODERATION_PUBLICATION_ENGINE',
   'MODARYX-MODERATION-PUBLICATION-ENGINE-20260921.md',
   '403 turnstile-rejected',
-  '403 turnstile-hostname-mismatch'
+  '403 turnstile-hostname-mismatch',
+  'Kit de preuves manuelles finales | **TERMINÉ — préparation documentaire uniquement**'
 ];
 for (const token of requiredCurrent) assert.ok(ledger.includes(token), 'anti-forget current missing: ' + token);
 
@@ -131,7 +138,6 @@ for (const token of forbiddenCurrent) assert.ok(!ledger.includes(token), 'stale 
 
 const expectedOpen = new Map([
   ['Météo réelle production', 'BLOQUÉ'],
-  ['Validation artistique humaine finale', 'PREUVE MANQUANTE'],
   ['Comptes / authentification / passkeys réels', 'PREUVE MANQUANTE'],
   ['Signatures / attestations de provenance', 'EN COURS'],
   ['Téléchargements publics réels', 'BLOQUÉ'],
@@ -214,7 +220,11 @@ assert.ok(historicalCheckpoint.includes('a8a544dc8a6d8b4c435d3d2acf56d9988141bbf
 assert.ok(historicalCheckpoint.includes('Full replay unique uniquement à la toute fin.'));
 
 assert.ok(checkpoint.includes('# CHECKPOINT CANONIQUE — MODARYX — 21 septembre 2026'));
-assert.ok(checkpoint.includes('SOURCE DE REPRISE PRIORITAIRE — VF NON DÉCLARÉE'));
+assert.ok(checkpoint.includes('SOURCE DE REPRISE PRIORITAIRE — RÉCONCILIÉE AU 24 SEPTEMBRE 2026 — VF NON DÉCLARÉE'));
+assert.ok(checkpoint.includes('a499f505abdcff4fea3f297a83ea04198758bcc9'));
+assert.ok(checkpoint.includes('20 workflows automatisés visibles sur ce HEAD : SUCCESS'));
+assert.ok(checkpoint.includes('TERMINÉ — Bloc 1 artistique, passe courante validée humainement par Nova'));
+assert.ok(checkpoint.includes('visualGrowth.status=awaiting-assets` est l\'état courant actif'));
 assert.ok(checkpoint.includes('design/modaryx-premium-hd-20260914-work'));
 assert.ok(checkpoint.includes('62c47f9fd46cb9183ad5f46fc24f254852fcb5cf'));
 assert.ok(checkpoint.includes('PR #133 : **TERMINÉE / fusionnée**'));
@@ -240,6 +250,32 @@ assert.ok(checkpoint.includes('TERMINÉ — readiness WeatherAPI ciblée'));
 assert.ok(checkpoint.includes('BLOQUÉ / activation externe** — météo réelle production'));
 assert.ok(checkpoint.includes('Full replay unique uniquement à la toute fin'));
 assert.ok(checkpoint.includes('Aucune VF / aucun 100 %'));
+assert.ok(checkpoint.includes('## Mise à jour canonique — 24 septembre 2026 — kit de preuves manuelles finales'));
+assert.ok(checkpoint.includes('qa/manual-final-evidence/'));
+
+const expectedManualEvidenceFiles = [
+  'README.md',
+  'ZOOM-200-400.md',
+  'WINDOWS-SCREEN-READER.md',
+  'PASSKEY-REAL-DEVICE.md',
+  'PWA-PHYSICAL-DEVICE.md',
+  'TOUCH-DEVICE.md',
+  'SAFARI-VOICEOVER.md',
+  'EXTERNAL-DEPENDENCIES.md',
+  'EVIDENCE-REPORT-TEMPLATE.md',
+  'HANDOFF-TO-WORK.md',
+  'MANIFEST.json'
+];
+for (const file of expectedManualEvidenceFiles) {
+  assert.ok(fs.existsSync(path.join(manualEvidenceRoot, file)), 'manual evidence file missing: ' + file);
+}
+assert.equal(manualEvidenceManifest.head, '03e41855c7b51fcd499ae7aaaebf0eb21d4da493');
+assert.equal(manualEvidenceManifest.preview, 'https://6f813d33.nova-forge-site-public.pages.dev');
+assert.equal(manualEvidenceManifest.routes_count, 23);
+const manualDependencies = fs.readFileSync(path.join(manualEvidenceRoot, 'EXTERNAL-DEPENDENCIES.md'), 'utf8');
+for (const state of ['PREUVE MANQUANTE', 'EN COURS', 'ENTRÉES ABSENTES', 'BLOQUÉ']) {
+  assert.ok(manualDependencies.includes(state), 'manual dependency state missing: ' + state);
+}
 
 assert.ok(externalMatrix.includes('## Réconciliation canonique — 21 septembre 2026'));
 assert.ok(externalMatrix.includes('23 routes publiques'));

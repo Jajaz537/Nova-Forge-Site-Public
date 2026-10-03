@@ -11,6 +11,8 @@ const failures = [];
 const checks = [];
 const STORAGE_KEY = 'nova-forge:creator:draft:v2';
 
+fs.mkdirSync(USER_DATA_DIR, {recursive: true});
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function waitForJson(url, timeoutMs = 10000) {
