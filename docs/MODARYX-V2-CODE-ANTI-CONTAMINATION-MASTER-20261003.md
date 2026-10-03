@@ -27,6 +27,9 @@ Toute réutilisation doit être :
 - `assets/search.js`
 - `assets/community.js`
 - `assets/creator-studio.js`
+- `assets/downloads.js`
+- `assets/verify.js`
+- `assets/json-schema-lite.js`
 - `assets/profiles.js`
 - `assets/project-hub.js`
 - `assets/nova-premium-hd.js`
@@ -43,6 +46,7 @@ Interdiction de charger directement :
 - `assets/tokens.css`
 - `assets/nova-premium-hd.css`
 - `assets/nova-premium-hd-secondary.css`
+- `assets/modaryx-foundations.css`
 - `assets/modaryx-cinematic-system.css`
 - `assets/modaryx-home-cinematic.css`
 - `assets/modaryx-home-finishline.css`
@@ -112,6 +116,7 @@ Candidats non autorisés automatiquement :
 - `assets/modaryx-realm-vista-reduced.webp`
 - `assets/forge-field.svg`
 - `assets/living-world/*`
+- `favicon.svg` tant que l'identité V2 finale n'est pas approuvée
 
 ## 4. Namespaces interdits pour nouveau code V2
 
@@ -280,22 +285,34 @@ Le preview V2 doit avoir :
 - aucun glob d'assets historiques ;
 - build/test V2 séparés.
 
-## 13. Ce qui reste à fermer
+## 13. Couverture dépôt
 
-Avant de déclarer l'audit exhaustif code fermé :
+Preuve : `docs/MODARYX-V2-CODE-AUDIT-COVERAGE-525-20261003.md`
 
-1. vérifier les fichiers runtime/code hors extensions principales, s'il en reste ;
-2. vérifier les références croisées des assets et fichiers bloqués ;
-3. vérifier que les 525 fichiers sont soit classés individuellement soit couverts par un groupe explicite ;
-4. produire une matrice de couverture finale ;
+- inventaire : **525 fichiers** ;
+- classés : **525 / 525** ;
+- non classés : **0** ;
+- QA code : **95 / 95 scannés individuellement** ;
+- workflows : **29 / 29 scannés individuellement** ;
+- assets code : **39 / 39 couverts par blacklist directe ou extraction explicite**.
+
+## 14. Ce qui reste à fermer
+
+Avant de déclarer l'audit anti-contamination totalement fermé :
+
+1. finaliser les références croisées des éléments bloqués ;
+2. produire une allowlist d'import V2 explicite ;
+3. implémenter un guard CI ciblé anti-contamination ;
+4. micro-prouver ce guard sans démarrer le frontend produit ;
 5. vérifier Git frais et mettre à jour le checkpoint.
 
-## 14. État
+## 15. État
 
-- Blacklist : **TERMINÉ — draft opérationnel**
+- Blacklist assets code : **TERMINÉ — 39/39 couverts**
+- Blacklist globale : **TERMINÉ — draft opérationnel**
 - Allowlist logique : **TERMINÉ — draft opérationnel**
-- Dépendances critiques : **TERMINÉ — première passe**
-- Couverture dépôt complète : **EN COURS**
+- Dépendances critiques : **EN COURS — fermeture finale**
+- Couverture dépôt complète : **TERMINÉ — 525/525, 0 non classé**
 - Frontend V2 : **BLOQUÉ volontairement**
 
 Aucune autorisation de démarrer le frontend n'est donnée par ce document.
