@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`8c2f9a7131a7752a893eab24fe231df6fdd5f479`
+`0e4412382b8c8f163cbba2b45f08c630c2e345c7`
 
 PR :
 
@@ -410,7 +410,26 @@ Décisions principales :
 
 Un premier envoi du document Community/Library/Nav a été bloqué par un contrôle de sécurité externe. Procédure appliquée : erreur exacte → vérification du SHA inchangé → simplification ciblée du document → micro-proof par commit réussi. Aucun full replay.
 
-## 16. Figma
+## 16. Contrats produit supplémentaires
+
+**TERMINÉ — conception**
+
+Documents :
+
+- `docs/MODARYX-V2-COLLECTION-MODPACK-PROFILE-CONTRACT-20261003.md`
+- `docs/MODARYX-V2-TRUST-PROVENANCE-DISTRIBUTION-CONTRACT-20261003.md`
+- `docs/MODARYX-V2-INSTALL-MANAGER-CONTRACT-20261003.md`
+
+Décisions principales :
+
+- Favori, Collection, Modpack et Profile/Loadout restent distincts ;
+- conversion entre objets uniquement par action explicite ;
+- états de provenance et distribution restent explicites ;
+- installation automatisée uniquement si la capacité réelle existe ;
+- compatibilité, dépendances et conflits sont vérifiés avant action ;
+- mobile ne montre pas de capacité absente.
+
+## 17. Figma
 
 Fichier :
 
@@ -474,7 +493,7 @@ Mobile :
 
 Recherche, fiche, installation, collection/profil, Creator Studio et Community ont leurs principaux états définis.
 
-## 17. Erreurs Figma et procédure
+## 18. Erreurs Figma et procédure
 
 ### Erreur 1
 
@@ -508,7 +527,7 @@ Erreur exacte :
 
 Aucune relance immédiate.
 
-## 18. Wireframes encore manquants
+## 19. Wireframes encore manquants
 
 **BLOQUÉ Figma / EN COURS conception**
 
@@ -525,7 +544,7 @@ Revue de couverture :
 
 `docs/MODARYX-V2-WIREFRAME-COVERAGE-20261003.md`
 
-## 19. High‑Fi
+## 20. High‑Fi
 
 **BLOQUÉ**
 
@@ -539,7 +558,7 @@ Gate :
 
 `docs/MODARYX-V2-HIGH-FI-GATE-20261003.md`
 
-## 20. Validation humaine
+## 21. Validation humaine
 
 **PREUVE MANQUANTE**
 
@@ -558,7 +577,7 @@ Script de test :
 
 Aucune validation humaine n'est inventée.
 
-## 21. Production / infrastructure
+## 22. Production / infrastructure
 
 Inchangés :
 
@@ -574,7 +593,7 @@ Inchangés :
 
 Aucun front V2 production n'a été écrit.
 
-## 22. États courants
+## 23. États courants
 
 - Audit legacy : **TERMINÉ**
 - Audit modules legacy ciblés : **TERMINÉ pour périmètre inspecté**
@@ -596,6 +615,9 @@ Aucun front V2 production n'a été écrit.
 - Game Hub : **TERMINÉ — conception**
 - Creator Studio : **TERMINÉ — conception**
 - Community/Library/Navigation : **TERMINÉ — conception**
+- Collections/Modpacks/Profiles : **TERMINÉ — conception**
+- Trust/Provenance/Distribution : **TERMINÉ — conception**
+- Installation/Manager : **TERMINÉ — conception**
 - Wireframes core : **EN COURS**
 - Écriture Figma supplémentaire : **BLOQUÉ EXTERNE**
 - Tree testing humain : **PREUVE MANQUANTE**
@@ -603,11 +625,11 @@ Aucun front V2 production n'a été écrit.
 - High-fi : **BLOQUÉ**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
 
-## 23. Prochain point logique automatique
+## 24. Prochain point logique automatique
 
 1. Continuer recherche/specification et audit ne nécessitant pas Figma.
 2. Ne pas relancer Figma tant que le quota Starter reste bloqué.
-3. Continuer l'audit des contrats de produit encore non détaillés (collections/modpacks/profiles, trust/provenance, installation/manager) sans implémenter le front.
+3. Continuer les derniers contrats produit et préparer les tests sans implémenter le front ni contourner le blocage Figma.
 4. Dès disponibilité Figma :
    - ajouter Game Hub ;
    - ajouter Global Search ;
@@ -619,7 +641,7 @@ Aucun front V2 production n'a été écrit.
 7. Seulement après : direction artistique, design system final, prototype high-fi.
 8. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
-## 24. Règle de reprise
+## 25. Règle de reprise
 
 Pour toute nouvelle conversation :
 
