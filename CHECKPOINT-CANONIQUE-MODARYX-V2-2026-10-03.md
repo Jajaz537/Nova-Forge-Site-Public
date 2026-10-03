@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`933ef58df8779ddda310d523602e4d7d6687bb67`
+`ff7b5e19bf76c5e6ca44dfffbe109fd792366e4f`
 
 PR :
 
@@ -533,7 +533,29 @@ Points toujours à tester humainement :
 - statuts de support jeu ;
 - compréhension contextualisée de “Non vérifié”.
 
-## 21. Figma
+## 21. Kit de validation humaine IA
+
+**TERMINÉ — protocole prêt / PREUVE MANQUANTE pour exécution**
+
+Document :
+
+`docs/MODARYX-V2-HUMAN-IA-TEST-KIT-20261003.md`
+
+Le kit comprend :
+
+- card sorting ;
+- hypothèses à tester ;
+- 16 tâches de tree testing ;
+- distinction Favori / Collection / Modpack / Profile ;
+- distinction Release / File ;
+- distinction Support / Signalement ;
+- test du libellé “Catalogue disponible” ;
+- test “Mods & Plugins” comme umbrella label ;
+- grille de résultats et seuils de correction.
+
+Cette préparation ne remplace pas un participant réel.
+
+## 22. Figma
 
 Fichier :
 
@@ -597,7 +619,7 @@ Mobile :
 
 Recherche, fiche, installation, collection/profil, Creator Studio et Community ont leurs principaux états définis.
 
-## 22. Erreurs Figma et procédure
+## 23. Erreurs Figma et procédure
 
 ### Erreur 1
 
@@ -631,7 +653,7 @@ Erreur exacte :
 
 Aucune relance immédiate.
 
-## 23. Wireframes encore manquants
+## 24. Wireframes encore manquants
 
 **BLOQUÉ Figma / EN COURS conception**
 
@@ -648,7 +670,7 @@ Revue de couverture :
 
 `docs/MODARYX-V2-WIREFRAME-COVERAGE-20261003.md`
 
-## 24. High‑Fi
+## 25. High‑Fi
 
 **BLOQUÉ**
 
@@ -662,7 +684,7 @@ Gate :
 
 `docs/MODARYX-V2-HIGH-FI-GATE-20261003.md`
 
-## 25. Validation humaine
+## 26. Validation humaine
 
 **PREUVE MANQUANTE**
 
@@ -681,7 +703,7 @@ Script de test :
 
 Aucune validation humaine n'est inventée.
 
-## 26. Production / infrastructure
+## 27. Production / infrastructure
 
 Inchangés :
 
@@ -697,7 +719,7 @@ Inchangés :
 
 Aucun front V2 production n'a été écrit.
 
-## 27. États courants
+## 28. États courants
 
 - Audit legacy : **TERMINÉ**
 - Audit modules legacy ciblés : **TERMINÉ pour périmètre inspecté**
@@ -732,6 +754,7 @@ Aucun front V2 production n'a été écrit.
 - Glossaire produit : **TERMINÉ — draft, PREUVE MANQUANTE pour validation humaine**
 - Revue experte IA/terminologie : **TERMINÉ — passe experte**
 - Script low-fi humain : **MIS À JOUR — 14 tâches, PREUVE MANQUANTE pour exécution**
+- Kit validation humaine IA : **TERMINÉ — protocole prêt, PREUVE MANQUANTE pour exécution**
 - Onboarding/Compte/Créateur : **TERMINÉ — conception**
 - Notifications/Préférences : **TERMINÉ — conception**
 - Modération/Appels : **TERMINÉ — conception**
@@ -743,7 +766,7 @@ Aucun front V2 production n'a été écrit.
 - High-fi : **BLOQUÉ**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
 
-## 28. Prochain point logique automatique
+## 29. Prochain point logique automatique
 
 1. Continuer recherche, audit et préparation de tests ne nécessitant pas Figma.
 2. Ne pas relancer Figma tant que le quota Starter reste bloqué.
@@ -759,7 +782,7 @@ Aucun front V2 production n'a été écrit.
 7. Seulement après : direction artistique, design system final, prototype high-fi.
 8. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
-## 29. Règle de reprise
+## 30. Règle de reprise
 
 Pour toute nouvelle conversation :
 
