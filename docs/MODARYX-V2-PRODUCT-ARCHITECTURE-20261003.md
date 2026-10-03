@@ -62,16 +62,18 @@ Besoins :
 ### Curateur / auteur de collection
 
 Objectif :
-- créer une configuration partageable.
+- organiser et recommander une sélection éditoriale partageable.
 
 Besoins :
 - ajouter/retirer ;
-- ordre ;
-- dépendances ;
-- versioning ;
+- ordre éditorial facultatif ;
 - notes ;
 - visibilité ;
-- import/export.
+- contexte jeu/version ;
+- filtres de collection ;
+- support/limitations de la collection.
+
+La création d'une configuration installable relève d'un **Modpack** ou d'un **Profile / Loadout**, pas d'une Collection simple.
 
 ### Modérateur / administrateur
 
@@ -219,7 +221,21 @@ Découverte de collections.
 
 ### /collections/:id
 
-Fiche collection/modpack/profil partageable.
+Fiche **Collection** éditoriale.
+
+### /modpacks
+
+Découverte de modpacks installables/versionnés.
+
+### /modpacks/:id
+
+Fiche **Modpack** : manifeste, version, compatibilité, dépendances, provenance et actions d'installation réelles.
+
+### /profiles/:id
+
+Surface de **Profile / Loadout** uniquement lorsqu'un profil est explicitement partageable.
+
+Un profil reste privé/local par défaut ; son absence de route publique est donc le comportement normal.
 
 ### /creators
 
@@ -301,10 +317,12 @@ Entrées directes :
 
 ### Zone 5 — Collections / configurations
 
-Valeur :
-- installation groupée ;
-- setup partagé ;
-- profils.
+Séparer visuellement :
+- Collections : curation et découverte ;
+- Modpacks : ensembles versionnés/installables ;
+- Profiles / Loadouts : configurations utilisateur privées ou explicitement partagées.
+
+Ne jamais présenter une Collection comme installable sans manifeste/résolution.
 
 ### Zone 6 — Créateurs
 
@@ -464,13 +482,13 @@ Le produit doit distinguer clairement :
 Marque-page personnel.
 
 ### Collection
-Liste éditoriale de contenus.
+Liste éditoriale de contenus organisée par un curateur.
 
 ### Modpack
-Package/version de configuration pouvant avoir dépendances.
+Ensemble versionné et installable avec manifeste, dépendances et contraintes.
 
 ### Profile / Loadout
-État d'installation/configuration utilisateur, potentiellement partageable.
+État concret d'installation/configuration utilisateur, privé/local par défaut et partageable uniquement par action explicite.
 
 Ces notions ne doivent pas être fusionnées dans une seule UI.
 
