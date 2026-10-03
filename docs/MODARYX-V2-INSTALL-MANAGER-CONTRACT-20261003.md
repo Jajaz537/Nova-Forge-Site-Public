@@ -38,7 +38,24 @@ Toujours distinct d'installer.
 
 Disponible si le modèle de profil existe, même sans installation immédiate.
 
-## 3. Préflight
+## 3. Cible d'installation
+
+Le manager doit pouvoir distinguer :
+- jeu ;
+- installation/instance locale ;
+- version ;
+- loader/framework ;
+- profil/loadout.
+
+Un jeu ne doit pas être supposé n'avoir qu'une seule installation.
+
+Avant installation, lorsque plusieurs profils sont possibles, proposer explicitement :
+- installer dans un profil existant ;
+- créer un nouveau profil.
+
+Aucun profil ne doit être choisi silencieusement.
+
+## 4. Préflight
 
 Avant installation automatisée :
 
@@ -52,7 +69,7 @@ Avant installation automatisée :
 - espace/conditions si mesurable ;
 - provenance/distribution.
 
-## 4. Dépendances
+## 5. Dépendances
 
 Le manager peut proposer :
 
@@ -63,7 +80,7 @@ Le manager peut proposer :
 
 Aucune dépendance “replaces” ne déclenche de substitution sans confirmation.
 
-## 5. Conflits
+## 6. Conflits
 
 Afficher :
 - cause ;
@@ -75,7 +92,7 @@ Si le conflit n'est pas résoluble automatiquement :
 - bloquer ou demander choix ;
 - ne jamais masquer l'incertitude.
 
-## 6. Progression
+## 7. Progression
 
 Si une progression réelle est mesurable, afficher :
 
@@ -88,7 +105,7 @@ Si une progression réelle est mesurable, afficher :
 
 Ne pas simuler un pourcentage arbitraire.
 
-## 7. Erreur
+## 8. Erreur
 
 En cas d'échec :
 
@@ -100,7 +117,7 @@ En cas d'échec :
 
 Le profil/loadout ne doit pas être marqué “installed” sans preuve.
 
-## 8. Update
+## 9. Update
 
 Types :
 - update available ;
@@ -114,7 +131,7 @@ Une mise à jour ne modifie pas silencieusement :
 - dependencies ;
 - config.
 
-## 9. Rollback
+## 10. Rollback
 
 Si supporté :
 - version précédente ;
@@ -124,7 +141,7 @@ Si supporté :
 
 Le rollback doit être explicite et vérifiable.
 
-## 10. Manager connection
+## 11. Manager connection
 
 États :
 - not detected ;
@@ -136,7 +153,7 @@ Le rollback doit être explicite et vérifiable.
 
 La simple présence d'un lien/protocole ne prouve pas une connexion réussie.
 
-## 11. Browser → manager
+## 12. Browser → manager
 
 Si deeplink/protocole futur :
 
@@ -146,7 +163,7 @@ Si deeplink/protocole futur :
 - pas d'installation silencieuse ;
 - contexte minimal signé/validé si nécessaire.
 
-## 12. Privacy
+## 13. Privacy
 
 Le site ne doit pas collecter automatiquement :
 - liste complète de mods locaux ;
@@ -155,7 +172,7 @@ Le site ne doit pas collecter automatiquement :
 
 sans consentement et nécessité.
 
-## 13. Manual install
+## 14. Manual install
 
 La fiche peut fournir :
 - fichier ;
@@ -167,14 +184,14 @@ La fiche peut fournir :
 
 Éviter les instructions ambiguës qui supposent une version du jeu.
 
-## 14. Mobile
+## 15. Mobile
 
 Sur mobile :
 - ne pas afficher “Installer avec manager” si le manager n'existe pas sur la plateforme ;
 - proposer save/collection/share ;
 - garder téléchargement manuel uniquement si pertinent.
 
-## 15. Security
+## 16. Security
 
 Avant action :
 - distribution state ;
@@ -186,7 +203,7 @@ Avant action :
 Après téléchargement :
 - vérification hash locale possible.
 
-## 16. Accessibilité
+## 17. Accessibilité
 
 - progression textuelle ;
 - erreurs annoncées ;
@@ -194,7 +211,7 @@ Après téléchargement :
 - boutons désactivés avec explication ;
 - pas de drag-only pour load order.
 
-## 17. Gate high-fi
+## 18. Gate high-fi
 
 Avant high-fi de l'installation :
 - capability states définis ;
