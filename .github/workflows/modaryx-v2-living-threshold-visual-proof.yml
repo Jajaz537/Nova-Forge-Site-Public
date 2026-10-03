@@ -6,6 +6,7 @@ on:
       - 'audit/modaryx-v2-legacy-boundary-20261003'
     paths:
       - '.github/workflows/modaryx-v2-living-threshold-visual-proof.yml'
+      - 'qa/check-v2-living-threshold-static-a11y.mjs'
       - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/**'
   workflow_dispatch:
 
@@ -36,6 +37,12 @@ jobs:
           test -n "$CHROME_BIN"
           "$CHROME_BIN" --version
           echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Run static accessibility/design-contract micro-check
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-living-threshold-static-a11y.mjs
 
       - name: Build isolated prototype
         shell: bash
