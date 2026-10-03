@@ -202,6 +202,8 @@ try {
   await clickByText(".global-nav button", "Mods & contenus");
   await clickSelector(".card-hit");
   manifest.captures.push(await capture("desktop-content-detail.png", 1440, 1024, "Avant d’ajouter"));
+  await clickByText(".detail-tabs button", "Signalement");
+  manifest.captures.push(await capture("desktop-content-report.png", 1440, 1024, "Signaler ce contenu"));
 
   await clickByText("footer button", "Game Hub");
   await clickSelector('[aria-label="Bibliothèque"]');
@@ -240,6 +242,8 @@ try {
 
   await clickSelector(".card-hit");
   manifest.captures.push(await capture("mobile-content-detail.png", 390, 844, "Avant d’ajouter"));
+  await clickByText(".detail-tabs button", "Signalement");
+  manifest.captures.push(await capture("mobile-content-report.png", 390, 844, "Signaler ce contenu"));
 
   await navigateHome(390, 844);
   await clickSelector(".mobile-menu");
