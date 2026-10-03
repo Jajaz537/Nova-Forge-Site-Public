@@ -55,7 +55,7 @@ Selon capacités réelles :
 - Installer avec manager ;
 - Télécharger manuellement ;
 - Ajouter à collection ;
-- Ajouter à profil/loadout.
+- Ajouter à configuration de jeu.
 
 L'action automatisée ne doit jamais apparaître comme disponible si le manager/runtime n'est pas réellement connecté.
 
@@ -95,6 +95,15 @@ Ne pas enterrer :
 dans de longs paragraphes de description.
 
 ## 5. Compatibilité et prérequis
+
+Résumé utilisateur recommandé : **Versions compatibles et éléments nécessaires avant installation.**
+
+Avant l'action, séparer visuellement trois questions :
+- **Compatibilité avec votre configuration** ;
+- **Éléments nécessaires** ;
+- **Conflits connus avec d'autres contenus**.
+
+Le terme **Incompatible** ne doit pas mélanger silencieusement une mauvaise version/loader avec un conflit entre contenus.
 
 Séparer explicitement :
 
@@ -375,3 +384,13 @@ Décision de conception : avant installation ou téléchargement, faire remonter
 La section **Compatibilité et prérequis** garde le détail, mais les risques critiques ne doivent pas être enfouis dans un onglet secondaire.
 
 **État : À INTÉGRER dans les futurs wireframes/high-fi.**
+
+
+## Qualification des versions
+
+Lorsque plusieurs objets versionnés coexistent, éviter le libellé isolé **Version**. Préférer :
+- **Version du jeu** ;
+- **Version du mod** ;
+- **Version du modpack**.
+
+Dans une version publiée, conserver **Fichiers de cette version**. Si un seul fichier principal est évident et distribuable, un CTA **Télécharger cette version** est acceptable, sans masquer les variantes lorsqu'elles existent.
