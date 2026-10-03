@@ -1,0 +1,52 @@
+name: MODARYX V2 Anti-Contamination Guard
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/modaryx-v2-anti-contamination.yml'
+      - 'qa/check-v2-anti-contamination.mjs'
+      - 'qa/modaryx-v2-anti-contamination-policy.json'
+      - 'v2/**'
+      - 'src-v2/**'
+      - 'modaryx-v2/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-anti-contamination-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guard:
+    name: V2 contamination guard
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Record exact candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --version
+          git rev-parse HEAD
+
+      - name: Self-test guard logic
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-anti-contamination.mjs --self-test
+
+      - name: Scan V2 candidate roots
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-anti-contamination.mjs
