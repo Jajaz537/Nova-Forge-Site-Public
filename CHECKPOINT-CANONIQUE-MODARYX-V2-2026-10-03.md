@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`2d698e947e8a4671117caf6065f514266046ff33`
+`4dcdc1e11d186b457fccccb0e6af66a36b6cb33e`
 
 PR :
 
@@ -821,6 +821,12 @@ Aucun front V2 production n'a été écrit.
 - Test terminologique Work : **PREUVE MANQUANTE — mission prête, rapport non reçu**
   - mission locale préparée dans `MODARYX-V2-WORK-TERMINOLOGY-PACK-20261003.zip` ;
   - doit rester indépendant de P01 et du test assistant jusqu'à son propre verdict.
+- Rapport Work terminologique indépendant : **TERMINÉ — 9 écosystèmes / 6 profils synthétiques / 36 réponses**
+  - ingestion : `docs/MODARYX-V2-WORK-TERMINOLOGY-REPORT-INGEST-20261003.md`
+  - analyse croisée finale : `docs/MODARYX-V2-FINAL-TERMINOLOGY-CROSS-ANALYSIS-P01-ASSISTANT-WORK-20261003.md`
+  - indépendance déclarée : P01 et test assistant non consultés avant rédaction ;
+  - convergence forte : **Mods & contenus**, Collection avec capacité explicite, Bibliothèque personnelle, suppression de `Non vérifié` générique ;
+  - divergence restante : **Profils de jeu** vs **Configurations de jeu**.
 - Benchmark terminologique multi-gaming / gaming / modding : **TERMINÉ — Nexus, CurseForge, Modrinth, Thunderstore, Steam Workshop, Bethesda, mod.io, ModDB, GameBanana**
   - document : `docs/MODARYX-V2-MULTIGAMING-MODDING-TERMINOLOGY-BENCHMARK-20261003.md`
   - confirme **Profils de jeu** comme convention défendable ;
