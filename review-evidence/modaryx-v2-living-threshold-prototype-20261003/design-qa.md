@@ -171,3 +171,54 @@ New archived review surfaces include:
 
 Limit:
 these are demo/local prototype flows. They do not prove real backend search, real content data, real installation, production routing, or production deployment.
+
+
+## Consolidated accelerated surface proof — 4 octobre 2026
+
+**TERMINÉ pour le prototype ciblé — aucun PASS production/high-fi final**
+
+Run ciblé : `37161527706` — **SUCCESS**  
+Commit capturé : `03858bea92232b3040d76923e53d9a71d822712c`  
+Artifact : `11288295345`  
+Artifact digest : `sha256:ca08469b5b434b57f68d3cbe2f1ef253596c8580fd55baa7c6f033a0cb5f21cf`
+
+Fresh markers:
+- `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
+- `KEYBOARD_REACHABLE 32 / 32`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `FLOW_ASSERT game hub content tab count 6`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 37`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Newly exercised/archived in this consolidated proof:
+- Game Hub tabs: Aperçu / Mods & contenus / Collections / Créateurs / Guides / Activité ;
+- explicit Game Hub support state: `Catalogue consultable — téléchargement non garanti` ;
+- Support distinct from Signalement on Content Detail ;
+- local report draft: reason/context + `Brouillon de signalement — non envoyé` ;
+- Library deep profile navigation;
+- Game Profile detail: local/private state, component versions/order, sync/manager unavailable;
+- Collections distinct from Modpacks;
+- Modpack demo: target/version/dependency/config/history + manifest/runtime explicitly missing;
+- Creator Studio deeper navigation and local draft;
+- Account / Notifications / Privacy / optional onboarding;
+- dedicated Collections / Creators / Community surfaces;
+- desktop + mobile captures for the expanded surface set.
+
+Error sequence closed during this tranche:
+1. stale Library capture wording → targeted expectation fix;
+2. exact profile back label mismatch → targeted QA/capture fix;
+3. stale Collections heading in product-flow QA → targeted expectation fix;
+4. final run green.
+
+Remaining external/final blockers:
+- approved/source reference archival + normalized visual comparison;
+- broader real human multi-screen review;
+- real screen-reader validation;
+- physical-device validation;
+- production V2 frontend/runtime;
+- real backend/data/integration proof.
+
+The older notes describing Creator Studio or multi-screen coverage as minimal are historical and superseded by this section for current prototype coverage.
