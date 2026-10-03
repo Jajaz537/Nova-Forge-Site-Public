@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`78fcbde0dc921d7687030106e4cab2b973cca6af`
+`71c38f3995d3a3c835e138880802ccb1c503c243`
 
 PR :
 
@@ -791,6 +791,10 @@ Aucun front V2 production n'a été écrit.
 - Revue experte IA/terminologie : **TERMINÉ — passe experte**
 - Script low-fi humain : **MIS À JOUR — 14 tâches, PREUVE MANQUANTE pour exécution**
 - Kit validation humaine IA : **TERMINÉ — protocole prêt, PREUVE MANQUANTE pour exécution**
+- Simulation experte multi-profils du tree test : **TERMINÉ — ne remplace pas une validation humaine**
+  - document : `docs/MODARYX-V2-TREE-TEST-EXPERT-SIMULATION-20261003.md`
+  - contradictions internes graves : aucune détectée
+  - clarifications sûres intégrées : Compatibilité et prérequis, Catalogue consultable, Mods & Plugins parapluie, Profils de jeu, Fichiers de cette version
 - Onboarding/Compte/Créateur : **TERMINÉ — conception**
 - Notifications/Préférences : **TERMINÉ — conception**
 - Modération/Appels : **TERMINÉ — conception**
@@ -815,9 +819,9 @@ Aucun front V2 production n'a été écrit.
    - matérialiser Community ;
    - matérialiser Mobile Game Hub ;
    - micro-vérifier clipping/overflow.
-7. QA mécanique low-fi fermée ; exécuter/obtenir désormais le tree testing humain.
-8. Corriger les ambiguïtés.
-9. Seulement après : direction artistique, design system final, prototype high-fi.
+7. QA mécanique low-fi fermée ; simulation experte multi-profils fermée avec clarifications sûres intégrées.
+8. Tree testing humain reste PREUVE MANQUANTE ; ne pas inventer cette preuve ni bloquer les travaux exploratoires réversibles pour cette seule raison.
+9. Continuer vers la direction artistique exploratoire et le design system préparatoire ; ne déclarer aucun high-fi humainement validé sans preuve réelle.
 10. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
 ## 30. Règle de reprise
