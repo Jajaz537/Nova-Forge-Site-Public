@@ -187,6 +187,7 @@ function Discover({ onOpen }) {
 }
 
 function CollectionsPage() {
+  const [mode,setMode]=useState("Collections");
   const [query,setQuery]=useState("");
   const [category,setCategory]=useState("Toutes");
   const categories=["Toutes",...new Set(collectionDetails.map(x=>x.category))];
@@ -195,13 +196,27 @@ function CollectionsPage() {
     return collectionDetails.filter(x=>(category==="Toutes"||x.category===category) && (x.title+" "+x.curator+" "+x.note).toLocaleLowerCase("fr").includes(q));
   },[query,category]);
   return <main className="page-section collections-page">
-    <span className="kicker">Collections</span><h1>Sélections de mods à organiser et partager.</h1>
-    <p className="page-intro">Une Collection est une sélection éditoriale. Elle n’est pas automatiquement installable et reste distincte d’un Modpack ou d’un Profil de jeu.</p>
-    <div className="collection-tools"><label className="catalog-search"><MagnifyingGlass/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher une collection" aria-label="Rechercher une collection"/></label><div className="filter-chips">{categories.map(value=><button key={value} className={category===value?"selected":""} onClick={()=>setCategory(value)}>{value}</button>)}</div></div>
-    <div className="collection-grid">{visible.map(item=><article className="collection-card" key={item.title}><Media pos={item.pos}/><div><span className="demo-label">Collection de démonstration</span><h2>{item.title}</h2><p>{item.note}</p><dl><div><dt>Curateur</dt><dd>{item.curator}</dd></div><div><dt>Jeu</dt><dd>{item.game} {item.version}</dd></div><div><dt>Contenus</dt><dd>{item.items} éléments de démonstration</dd></div><div><dt>Capacité</dt><dd>Sélection organisée</dd></div></dl><div className="collection-capability"><strong>Installation non disponible</strong><span>Aucun manifeste installable ni runtime MODARYX Forge n’est simulé.</span></div><button className="quiet">Voir la sélection <ArrowRight/></button></div></article>)}</div>
-    {visible.length===0&&<div className="empty"><Stack/><h3>Aucune collection trouvée</h3><p>Essayez un autre terme ou une autre catégorie.</p><button onClick={()=>{setQuery("");setCategory("Toutes")}}>Réinitialiser</button></div>}
+    <span className="kicker">Collections & Modpacks</span><h1>Organiser n’est pas installer.</h1>
+    <p className="page-intro">Une Collection est une sélection éditoriale. Un Modpack est un ensemble versionné qui ne devient installable qu’avec manifeste, droits et runtime réels. Un Profil de jeu reste une configuration personnelle distincte.</p>
+    <nav className="collection-mode-tabs" aria-label="Collections et Modpacks"><button className={mode==="Collections"?"active":""} onClick={()=>setMode("Collections")}>Collections</button><button className={mode==="Modpacks"?"active":""} onClick={()=>setMode("Modpacks")}>Modpacks</button></nav>
+    {mode==="Collections"?<>
+      <div className="collection-tools"><label className="catalog-search"><MagnifyingGlass/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher une collection" aria-label="Rechercher une collection"/></label><div className="filter-chips">{categories.map(value=><button key={value} className={category===value?"selected":""} onClick={()=>setCategory(value)}>{value}</button>)}</div></div>
+      <div className="collection-grid">{visible.map(item=><article className="collection-card" key={item.title}><Media pos={item.pos}/><div><span className="demo-label">Collection de démonstration</span><h2>{item.title}</h2><p>{item.note}</p><dl><div><dt>Curateur</dt><dd>{item.curator}</dd></div><div><dt>Jeu</dt><dd>{item.game} {item.version}</dd></div><div><dt>Contenus</dt><dd>{item.items} éléments de démonstration</dd></div><div><dt>Capacité</dt><dd>Sélection organisée</dd></div></dl><div className="collection-capability"><strong>Installation non disponible</strong><span>Aucun manifeste installable ni runtime MODARYX Forge n’est simulé.</span></div><button className="quiet">Voir la sélection <ArrowRight/></button></div></article>)}</div>
+      {visible.length===0&&<div className="empty"><Stack/><h3>Aucune collection trouvée</h3><p>Essayez un autre terme ou une autre catégorie.</p><button onClick={()=>{setQuery("");setCategory("Toutes")}}>Réinitialiser</button></div>}
+    </>:<section className="modpack-surface">
+      <div className="modpack-header"><div><span className="demo-label">Modpack de démonstration</span><h2>Aetherlands — Essentiel</h2><p>Exemple de structure versionnée pour montrer la différence avec une Collection. Aucun fichier n’est distribué.</p></div><span className="version-pill">0.3.0-démo</span></div>
+      <div className="modpack-grid">
+        <article><span className="kicker">Cible</span><strong>Aetherlands 1.4.2</strong><small>Plateforme et environnement de démonstration.</small></article>
+        <article><span className="kicker">Dépendances</span><strong>Aether Core 1.x</strong><small>Dépendance fictive, non téléchargeable.</small></article>
+        <article><span className="kicker">Configuration</span><strong>Aucune configuration redistribuée</strong><small>Les droits de partage doivent être prouvés avant inclusion.</small></article>
+        <article><span className="kicker">Historique</span><strong>Version 0.3.0-démo</strong><small>Anciennes versions non publiées dans ce prototype.</small></article>
+      </div>
+      <div className="modpack-manifest"><strong>Manifeste installable</strong><span>PREUVE MANQUANTE — aucun manifeste réel ni résolution runtime ne sont connectés.</span></div>
+      <button className="primary" disabled>Installer — runtime MODARYX Forge non connecté</button>
+    </section>}
   </main>;
 }
+
 
 function CreatorsPage() {
   const [query,setQuery]=useState("");
@@ -302,12 +317,27 @@ function Detail({ item, onBack }) {
 
 function Library() {
   const [tab,setTab]=useState("Profils de jeu");
+  const [openProfile,setOpenProfile]=useState(null);
   const tabs=["Favoris","Suivis","Collections","Profils de jeu","Recherches enregistrées"];
+  const profileComponents={
+    "Exploration":[["Sentiers de l’aube","1.4.2"],["Vestiges suspendus","1.4.2"],["Rivages du couchant","1.4.2"],["Aether Core","1.x"]],
+    "Graphismes":[["Sommets silencieux","1.4.2"],["Aether Core","1.x"]],
+    "Immersion":[["Rivages du couchant","1.4.2"],["Brumes des hautes terres","1.4.2"],["Aether Core","1.x"]],
+  };
+  if(openProfile){
+    const components=profileComponents[openProfile]||[];
+    return <main className="page-section profile-detail">
+      <button className="back" onClick={()=>setOpenProfile(null)}>← Retour à la Bibliothèque</button>
+      <span className="kicker">Profil de jeu</span><h1>{openProfile}</h1><p className="page-intro">Configuration personnelle de démonstration pour Aetherlands 1.4.2. Privée et locale par défaut.</p>
+      <div className="profile-status-row"><span className="support-state">Local uniquement</span><span className="support-state">Non synchronisé</span><span className="support-state">Manager non connecté</span></div>
+      <div className="profile-detail-grid"><section className="profile-components"><h2>Composants et versions</h2>{components.map(([name,version],index)=><article key={name}><span className="profile-order">{index+1}</span><div><strong>{name}</strong><small>Version {version} · démonstration</small></div><span className="compat compact"><Check weight="bold"/>État démo</span></article>)}</section><aside className="profile-decision"><h2>État de la configuration</h2><dl><div><dt>Jeu</dt><dd>Aetherlands 1.4.2</dd></div><div><dt>Conflits déclarés</dt><dd>Aucun dans la démo</dd></div><div><dt>Ordre</dt><dd>Affiché, non appliqué au jeu</dd></div><div><dt>Configurations</dt><dd>Locales, non partagées</dd></div><div><dt>Synchronisation</dt><dd>Indisponible</dd></div></dl><div className="manager-state"><strong>MODARYX Forge</strong><span>Aucun état d’installation réel n’est connu tant que le runtime desktop n’est pas connecté.</span></div></aside></div>
+    </main>;
+  }
   const panels={
     "Favoris": <section className="library-panel"><div className="section-heading"><div><span className="kicker">Favoris</span><h2>Contenus enregistrés</h2><p>Vos favoris personnels restent distincts des Collections et des profils.</p></div></div><div className="content-grid">{contentItems.slice(0,3).map(item=><ContentCard key={item.title} item={item} onOpen={()=>{}}/>)}</div></section>,
     "Suivis": <section className="library-panel"><span className="kicker">Suivis</span><h2>Créateurs et projets suivis</h2><div className="library-state"><strong>Atelier Boréal</strong><span>Suivi de démonstration · aucune notification distante connectée.</span></div></section>,
     "Collections": <section className="library-panel"><span className="kicker">Collections</span><h2>Sélections organisées</h2><div className="library-cards"><article><strong>Exploration nocturne</strong><span>Collection de démonstration · 4 contenus</span><small>Sélection éditoriale, pas un profil installable.</small></article><article><strong>Visuels sobres</strong><span>Collection de démonstration · 3 contenus</span><small>Aucune installation automatique dans ce prototype.</small></article></div></section>,
-    "Profils de jeu": <section className="library-panel"><span className="kicker">Profils de jeu</span><h2>Configurations enregistrées</h2><p className="page-intro">Configurations enregistrées de mods, versions et réglages.</p><div className="profile-library">{[['Exploration','4 contenus','Local uniquement'],['Graphismes','7 contenus','Local uniquement'],['Immersion','3 contenus','Local uniquement']].map(([name,count,state],i)=><article key={name}><Media pos={contentItems[i].pos}/><div><strong>{name}</strong><span>{count}</span><small>{state}</small></div><button className="quiet">Ouvrir</button></article>)}</div><div className="manager-state"><strong>Connexion MODARYX Forge</strong><span>Indisponible dans ce prototype — aucune synchronisation ni installation n’est simulée.</span></div></section>,
+    "Profils de jeu": <section className="library-panel"><span className="kicker">Profils de jeu</span><h2>Configurations enregistrées</h2><p className="page-intro">Configurations enregistrées de mods, versions et réglages.</p><div className="profile-library">{[['Exploration','4 contenus','Local uniquement'],['Graphismes','7 contenus','Local uniquement'],['Immersion','3 contenus','Local uniquement']].map(([name,count,state],i)=><article key={name}><Media pos={contentItems[i].pos}/><div><strong>{name}</strong><span>{count}</span><small>{state}</small></div><button className="quiet" onClick={()=>setOpenProfile(name)}>Ouvrir</button></article>)}</div><div className="manager-state"><strong>Connexion MODARYX Forge</strong><span>Indisponible dans ce prototype — aucune synchronisation ni installation n’est simulée.</span></div></section>,
     "Recherches enregistrées": <section className="library-panel"><span className="kicker">Recherches enregistrées</span><h2>Veilles personnelles</h2><div className="library-state"><strong>Shaders compatibles Aetherlands 1.4.x</strong><span>Recherche de démonstration enregistrée localement.</span></div></section>,
   };
   return <main className="page-section library">
@@ -317,6 +347,7 @@ function Library() {
     {panels[tab]}
   </main>;
 }
+
 
 function CreatorStudio() {
   const [tab,setTab]=useState("Dashboard");
