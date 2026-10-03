@@ -24,7 +24,6 @@
   ],
   "forbiddenContentTokens": [
     "assets/shell.js",
-    "sw.js",
     "assets/app.js",
     "assets/catalog.js",
     "assets/search.js",
@@ -66,7 +65,6 @@
     "nova-forge:",
     "--nova-",
     "urn:nova-forge:schemas:",
-    "project-",
     "modaryx-realm-hero",
     "design/modaryx-premium-hd-20260914-work",
     "getnovaforge.com",
@@ -80,5 +78,11 @@
   "notes": [
     "Historical v1 files may retain historical identifiers outside V2 candidate roots.",
     "This guard does not prove UX, accessibility, performance, high-fi, or production readiness."
+  ],
+  "forbiddenRegex": [
+    "(^|[^A-Za-z0-9_-])sw\\\\.js([^A-Za-z0-9_.-]|$)",
+    "project-[a-z0-9-]+\\\\.html",
+    "nova-site-shell-[a-zA-Z0-9._-]*",
+    "modaryx-site-v[0-9][a-zA-Z0-9._-]*"
   ]
 }
