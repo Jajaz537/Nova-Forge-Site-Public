@@ -253,7 +253,7 @@ try {
   manifest.captures.push(await capture("mobile-library.png", 390, 844, "Retrouvez favoris, suivis, collections et profils"));
   await clickByText(".profile-library article:first-child .quiet", "Ouvrir");
   manifest.captures.push(await capture("mobile-game-profile.png", 390, 844, "Manager non connecté"));
-  await clickByText(".back", "Retour à la Bibliothèque");
+  await clickByText(".back", "← Retour à la Bibliothèque");
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Créer");
