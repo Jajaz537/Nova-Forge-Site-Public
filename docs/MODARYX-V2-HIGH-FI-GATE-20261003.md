@@ -197,7 +197,7 @@ La comparaison n'implique aucune copie de leur identité.
 
 ### Validation humaine encore incomplète
 
-- P01 réel : mini-test critique TERMINÉ ;
+- P01 réel : mini-test critique + mini-test terminologique TERMINÉS ;
 - étude Work 5 profils × 16 tâches : TERMINÉE, simulation IA ;
 - étude indépendante interne 5 profils × 16 tâches : TERMINÉE, simulation IA ;
 - validation humaine supplémentaire requise avant gel de la microcopy critique ;
@@ -214,8 +214,10 @@ La comparaison n'implique aucune copie de leur identité.
 
 1. couverture conceptuelle core : TERMINÉE ; quatre écrans supplémentaires existent en prototype low-fi HTML isolé mais restent non matérialisés dans Figma ;
 2. quota Figma MCP Starter : BLOQUÉ EXTERNE ;
-3. P01 humain : TERMINÉ pour 5 questions critiques ; validation humaine globale : EN COURS ;
+3. P01 humain : mini-test critique + mini-test terminologique TERMINÉS ; validation humaine globale : EN COURS ;
 4. convergence P01 + Work + étude indépendante : TERMINÉE ;
-5. microcopy critique encore À REVALIDER : **Configurations de jeu**, capacité des **Collections**, compréhension de **Bibliothèque**, portée de **Mods & Plugins** et états **Non vérifié**.
+5. P01 préfère **Profils de jeu**, comprend **Collection** et **Bibliothèque** ; ces points restent à consolider avec d'autres humains mais ne sont plus les principaux risques de wording ;
+6. microcopy critique encore ouverte : alternative plus large à **Mods & Plugins** ;
+7. le badge générique **Non vérifié** est écarté : toujours qualifier Compatibilité / Provenance / Scan / risque réel.
 
 Ce blocage n'empêche pas la direction artistique exploratoire, le design system préparatoire ni les prototypes comparatifs réversibles. Il interdit uniquement de présenter la microcopy ou le high-fi comme humainement validés/finalisés.
