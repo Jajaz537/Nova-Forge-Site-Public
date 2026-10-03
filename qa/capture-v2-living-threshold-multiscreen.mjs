@@ -194,7 +194,9 @@ try {
   manifest.captures.push(await capture("desktop-catalog.png", 1440, 1024, "Catalogue global"));
 
   await clickByText(".global-nav button", "Collections");
-  manifest.captures.push(await capture("desktop-collections.png", 1440, 1024, "Sélections de mods à organiser et partager"));
+  manifest.captures.push(await capture("desktop-collections.png", 1440, 1024, "Organiser n’est pas installer"));
+  await clickByText(".collection-mode-tabs button", "Modpacks");
+  manifest.captures.push(await capture("desktop-modpack.png", 1440, 1024, "Aetherlands — Essentiel"));
 
   await clickByText(".global-nav button", "Créateurs");
   manifest.captures.push(await capture("desktop-creators.png", 1440, 1024, "Créateurs, équipes et studios"));
@@ -249,6 +251,9 @@ try {
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav .mobile-nav-utility", "Bibliothèque");
   manifest.captures.push(await capture("mobile-library.png", 390, 844, "Retrouvez favoris, suivis, collections et profils"));
+  await clickByText(".profile-library article:first-child .quiet", "Ouvrir");
+  manifest.captures.push(await capture("mobile-game-profile.png", 390, 844, "Manager non connecté"));
+  await clickByText(".back", "Retour à la Bibliothèque");
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Créer");
@@ -256,7 +261,9 @@ try {
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Collections");
-  manifest.captures.push(await capture("mobile-collections.png", 390, 844, "Sélections de mods à organiser et partager"));
+  manifest.captures.push(await capture("mobile-collections.png", 390, 844, "Organiser n’est pas installer"));
+  await clickByText(".collection-mode-tabs button", "Modpacks");
+  manifest.captures.push(await capture("mobile-modpack.png", 390, 844, "Aetherlands — Essentiel"));
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Créateurs");
