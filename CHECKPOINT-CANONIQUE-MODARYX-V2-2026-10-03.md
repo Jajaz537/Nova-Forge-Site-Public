@@ -1138,3 +1138,50 @@ Ce que ces preuves ne prouvent toujours pas :
 - comparaison normalisée à la référence visuelle approuvée.
 
 **Prochain axe interne : fermer les surfaces encore non matérialisées/peu profondes (compte, notifications/préférences, onboarding, états critiques transverses) puis seulement préparer le passage du prototype vers le frontend V2 de production.**
+
+
+## Consolidation automatique — surfaces produit et preuve fraîche — 4 octobre 2026
+
+**TERMINÉ pour le prototype exploratoire ciblé / aucun PASS VF**
+
+Run de référence : `37161527706` — **SUCCESS**  
+Commit capturé : `03858bea92232b3040d76923e53d9a71d822712c`  
+Artifact : `11288295345`  
+Digest : `sha256:ca08469b5b434b57f68d3cbe2f1ef253596c8580fd55baa7c6f033a0cb5f21cf`
+
+Preuves fraîches :
+- `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
+- `KEYBOARD_REACHABLE 32 / 32`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 37`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Nouvelles fermetures prototype :
+- Game Hub : onglets Aperçu / Mods & contenus / Collections / Créateurs / Guides / Activité réellement distincts et exercés ;
+- support jeu explicite : `Catalogue consultable — téléchargement non garanti` ;
+- Content Detail : Support séparé de Signalement ; signalement = brouillon local non envoyé, aucune modération simulée ;
+- Library : Profil de jeu ouvrable avec composants, versions, ordre, localité, sync/manager indisponibles explicites ;
+- Collections : Collection distincte de Modpack ;
+- Modpack : cible/version/dépendances/config/historique visibles ; manifeste/runtime réels explicitement PREUVE MANQUANTE ; installation désactivée ;
+- Creator Studio : dashboard/projects/releases/upload/analytics/support/reports/team/settings approfondis ;
+- Account/Settings : guest-first, onboarding facultatif/skippable, privacy privée par défaut, notifications sans faux événements, préférences locales ;
+- mobile : utilitaires Recherche/Bibliothèque/Notifications/Compte et captures dédiées des nouvelles surfaces.
+
+Erreurs ciblées fermées :
+- attente Library périmée ;
+- libellé exact `← Retour à la Bibliothèque` ;
+- titre Collections périmé ;
+- aucune relance full production n'a été utilisée.
+
+Blockers encore réels :
+- référence visuelle approuvée/source archivable pour comparaison normalisée ;
+- revue humaine multi-écrans supplémentaire ;
+- vrai screen reader ;
+- appareils physiques ;
+- frontend V2 de production / runtime réel ;
+- données/backend/intégrations réels.
+
+**Prochain point logique interne : fermer les états critiques transverses encore faisables dans le prototype (offline/stale/error/retry), puis réévaluer le gate de passage vers le root frontend V2 isolé sans cutover public.**
