@@ -156,7 +156,9 @@ try{
   await waitText("Catalogue global");
   await fill(".catalog-search input","sommets");
   assertEqual(await count(".content-card"),1,"catalog query count");
-  await clickText(".catalog-tools>button","Filtres");
+  const filterOpened=await evaluate(`(() => {const target=document.querySelector('.catalog-tools>button'); if(!target||target.disabled)return false; target.click(); return true;})()`);
+  if(!filterOpened) throw new Error("catalog filter control unavailable");
+  await sleep(150);
   await clickText(".filter-chips button","Graphismes");
   assertEqual(await count(".content-card"),1,"catalog kind filter count");
   await selectValue(".filter-panel select","Nom");
