@@ -66,7 +66,7 @@ Structure proposée :
 - Overview
 - Files
 - Versions
-- Requirements
+- Compatibilité et prérequis
 - Changelog
 - Media
 - Support / Posts
@@ -94,17 +94,17 @@ Ne pas enterrer :
 - conflits
 dans de longs paragraphes de description.
 
-## 5. Requirements
+## 5. Compatibilité et prérequis
 
 Séparer explicitement :
 
-### Required
+### Requis
 Indispensable.
 
-### Optional
+### Optionnel
 Améliore ou étend le contenu.
 
-### Recommended
+### Recommandé
 Non obligatoire mais recommandé.
 
 ### Incompatible
@@ -289,7 +289,7 @@ Priorité mobile :
 1. identité ;
 2. compatibilité ;
 3. action ;
-4. requirements ;
+4. compatibilité et prérequis ;
 5. media ;
 6. description ;
 7. files/versions ;
@@ -334,7 +334,7 @@ Le contenu principal garde :
 
 Interdits :
 
-- gros bouton Download avant les requirements ;
+- gros bouton Download avant la compatibilité et les prérequis ;
 - compatibilité uniquement dans la description ;
 - dépendances seulement au moment de l'erreur ;
 - mélange projet/release/fichier ;
@@ -347,7 +347,7 @@ Interdits :
 La maquette high-fi de la fiche ne peut démarrer qu'après validation de :
 
 - above-the-fold décisionnel ;
-- requirements structure ;
+- structure compatibilité/prérequis ;
 - files/releases ;
 - états de confiance ;
 - responsive ;
@@ -355,3 +355,12 @@ La maquette high-fi de la fiche ne peut démarrer qu'après validation de :
 - support/permissions.
 
 **État : TERMINÉ pour le contrat produit / NON IMPLÉMENTÉ volontairement.**
+
+
+## 21. Clarifications terminologiques sûres
+
+- Le terme de route/contrat interne `requirements` reste autorisé techniquement.
+- Le libellé utilisateur français est **Compatibilité et prérequis**.
+- Les artefacts d'une Release sont présentés sous **Fichiers de cette version** pour éviter la confusion Release/Fichier.
+
+**État : intégré suite à simulation experte multi-profils ; validation humaine toujours PREUVE MANQUANTE.**
