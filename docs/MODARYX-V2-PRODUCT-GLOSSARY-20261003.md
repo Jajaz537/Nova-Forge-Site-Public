@@ -354,3 +354,18 @@ P01 a choisi **B — Mods & contenus** parmi :
 Document : `docs/MODARYX-V2-HUMAN-CONTENT-UMBRELLA-MINITEST-P01-20261003.md`.
 
 **État : préférence humaine réelle obtenue pour P01 / validation humaine globale EN COURS.**
+
+
+## 24. Convergence finale P01 + Assistant + Work
+
+Document : `docs/MODARYX-V2-FINAL-TERMINOLOGY-CROSS-ANALYSIS-P01-ASSISTANT-WORK-20261003.md`.
+
+Décisions actuelles :
+- **Mods & contenus** = parapluie UI provisoire principal ;
+- **Mods & Plugins** = ne plus utiliser comme parapluie universel ;
+- **Collection** = conservé, capacité d'installation explicitée ;
+- **Bibliothèque** = conservé comme espace personnel ;
+- **Non vérifié** = interdit seul ;
+- **Profils de jeu** reste le libellé UI provisoire actuel car préféré par P01, mais **Configurations de jeu** reste l'alternative principale soutenue par Work pour le grand public.
+
+**État : convergence forte sur 5/6 points ; arbitrage Profils de jeu vs Configurations de jeu EN COURS.**
