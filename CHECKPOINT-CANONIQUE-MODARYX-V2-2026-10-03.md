@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`c755ffb9d7c0b4298e0f23bcc7e6337f515ae54d`
+`da09e9ae391c59da33b93ca583c753ac56893e42`
 
 PR :
 
@@ -508,7 +508,7 @@ Le frontend V2 reste volontairement bloqué tant que les gates UX/Figma/high-fi 
 
 ## 20. Revue experte IA / terminologie
 
-**TERMINÉ — passe experte, validation humaine toujours manquante**
+**TERMINÉ — passe experte ; validation humaine partielle désormais disponible**
 
 Document :
 
@@ -535,7 +535,7 @@ Points toujours à tester humainement :
 
 ## 21. Kit de validation humaine IA
 
-**TERMINÉ — protocole prêt / PREUVE MANQUANTE pour exécution**
+**TERMINÉ — protocole prêt / P01 partiellement exécuté**
 
 Document :
 
@@ -662,9 +662,9 @@ Résultat : **même erreur de quota Starter**.
 Aucune écriture canvas n'a eu lieu.
 Aucune nouvelle relance Figma n'est autorisée tant qu'un changement réel de quota/plan ou de fenêtre d'accès n'est pas prouvé.
 
-## 24. Wireframes encore manquants
+## 24. Wireframes core complémentaires
 
-**TERMINÉ — conception low-fi textuelle / BLOQUÉ pour matérialisation visuelle Figma**
+**TERMINÉ — conception textuelle + prototype low-fi HTML isolé / BLOQUÉ uniquement pour matérialisation Figma**
 
 - Desktop Game Hub — blueprint détaillé TERMINÉ
 - Desktop Global Search — blueprint détaillé TERMINÉ
@@ -681,13 +681,19 @@ Revue de couverture :
 
 ## 25. High‑Fi
 
-**BLOQUÉ**
+**BLOQUÉ POUR GEL FINAL / EXPLORATION RÉVERSIBLE AUTORISÉE**
 
-Interdiction d'ouvrir la direction artistique finale tant que :
+État réel :
 
-- couverture wireframe core incomplète ;
-- tree testing humain non exécuté ;
-- quota Figma bloque les écrans manquants.
+- couverture conceptuelle core : TERMINÉE ;
+- prototype low-fi HTML des 4 écrans complémentaires : TERMINÉ et QA mécanique verte ;
+- P01 humain : TERMINÉ pour 5 questions critiques ;
+- étude indépendante interne 5×16 : TERMINÉE ;
+- étude Work indépendante 5×16 : TERMINÉE ;
+- convergence croisée : TERMINÉE ;
+- validation humaine globale : EN COURS ;
+- libellés critiques encore à revalider avant gel final : **Configurations de jeu**, capacité des **Collections**, **Bibliothèque**, portée de **Mods & Plugins**, états **Non vérifié** ;
+- Figma MCP : BLOQUÉ EXTERNE pour nouvelles écritures.
 
 Gate :
 
@@ -797,11 +803,15 @@ Aucun front V2 production n'a été écrit.
 - Registre risques : **TERMINÉ — création initiale, À MAINTENIR**
 - Matrice readiness implémentation : **TERMINÉ — conception**
 - Blueprints secondaires : **TERMINÉ — conception textuelle**
-- Glossaire produit : **TERMINÉ — draft, PREUVE MANQUANTE pour validation humaine**
+- Glossaire produit : **TERMINÉ — draft convergé P01/Work/étude indépendante ; validation humaine globale EN COURS**
 - Revue experte IA/terminologie : **TERMINÉ — passe experte**
 - Script low-fi humain : **MIS À JOUR — 14 tâches, PREUVE MANQUANTE pour exécution**
-- Kit validation humaine IA : **TERMINÉ — protocole prêt, PREUVE MANQUANTE pour exécution**
+- Kit validation humaine IA : **TERMINÉ — protocole prêt ; P01 réel partiellement exécuté**
 - Simulation experte multi-profils du tree test : **TERMINÉ — ne remplace pas une validation humaine**
+- Rapport Work indépendant : **TERMINÉ — 5 profils × 16 tâches / P01 non consulté**
+  - ingestion : `docs/MODARYX-V2-WORK-REPORT-INGEST-20261003.md`
+  - analyse croisée : `docs/MODARYX-V2-CROSS-ANALYSIS-P01-WORK-INTERNAL-20261003.md`
+  - convergences : Collection ambiguë, `Configurations de jeu` provisoire, compatibilité/prérequis proactifs, version→fichiers, recherche globale/contextuelle, catalogue≠distribution
 - Recherche UX indépendante + 80 simulations : **TERMINÉ — 5 profils × 16 tâches**
   - document : `docs/MODARYX-V2-INDEPENDENT-UX-RESEARCH-TREE-SIMULATION-20261003.md`
   - sources actuelles étudiées : Nexus Mods, CurseForge, Modrinth, Thunderstore + signaux communautaires
@@ -814,11 +824,11 @@ Aucun front V2 production n'a été écrit.
 - Notifications/Préférences : **TERMINÉ — conception**
 - Modération/Appels : **TERMINÉ — conception**
 - Cycle de vie support jeux : **TERMINÉ — conception**
-- Wireframes core : **TERMINÉ pour conception textuelle + prototype low-fi local des 4 écrans / validation humaine PREUVE MANQUANTE**
+- Wireframes core : **TERMINÉ pour conception textuelle + prototype low-fi local des 4 écrans / validation humaine EN COURS**
 - Écriture Figma supplémentaire : **BLOQUÉ EXTERNE**
 - Tree testing humain : **EN COURS — P01 réel terminé / autres profils utiles pour consolider**
-- Direction artistique : **BLOQUÉ**
-- High-fi : **BLOQUÉ**
+- Direction artistique : **EXPLORATION RÉVERSIBLE AUTORISÉE / finale BLOQUÉE**
+- High-fi final : **BLOQUÉ — validation humaine globale et microcopy critique non figées**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
 
 ## 29. Prochain point logique automatique
@@ -835,9 +845,10 @@ Aucun front V2 production n'a été écrit.
    - matérialiser Mobile Game Hub ;
    - micro-vérifier clipping/overflow.
 7. QA mécanique low-fi fermée ; simulation experte multi-profils fermée avec clarifications sûres intégrées.
-8. Tree testing humain : P01 réel terminé. Recherche indépendante interne 5×16 terminée. Attendre/comparer le rapport Work, puis confronter les convergences et divergences sans généraliser P01 ni les simulations IA.
-9. Continuer vers la direction artistique exploratoire et le design system préparatoire ; ne déclarer aucun high-fi humainement validé sans preuve réelle.
-10. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
+8. P01 réel + étude indépendante interne 5×16 + étude Work 5×16 : comparaison croisée TERMINÉE. Ne pas généraliser P01 ni transformer les simulations IA en statistiques humaines.
+9. Prochain risque UX à fermer : revalidation humaine courte de **Configurations de jeu**, capacité **Collection**, compréhension **Bibliothèque**, portée **Mods & Plugins** et **Non vérifié**.
+10. Continuer en parallèle vers la direction artistique exploratoire et le design system préparatoire ; aucun gel high-fi/microcopy finale sans preuve humaine suffisante.
+11. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
 ## 30. Règle de reprise
 
