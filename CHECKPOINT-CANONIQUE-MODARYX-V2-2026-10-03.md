@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`ec3be1f44bd05c31590824a101b671a78e4ca52b`
+`b6eab157254218dfde6e91768d78b327bc26b146`
 
 PR :
 
@@ -728,6 +728,9 @@ Aucun front V2 production n'a été écrit.
 - Dépendances entrantes legacy critiques : **TERMINÉ**
 - Policy anti-contamination machine-readable : **TERMINÉ**
 - Guard CI anti-contamination : **TERMINÉ — micro-proof frais vert**
+- Frontières modules/adapters V2 : **TERMINÉ — conception**
+- Plan migration routes/cutover : **TERMINÉ — conception, aucun changement public**
+- Brief exploration direction artistique : **TERMINÉ — préparation, high-fi toujours BLOQUÉ**
 - Analyse des écarts de schémas : **TERMINÉ — conception**
 - Plan schémas V2 : **TERMINÉ — conception**
 - Benchmark : **TERMINÉ**
@@ -774,7 +777,7 @@ Aucun front V2 production n'a été écrit.
 ## 29. Prochain point logique automatique
 
 1. Audit code anti-contamination : fermé pour le périmètre actuel ; garder le guard actif.
-2. Continuer uniquement les specs techniques/non-Figma utiles : adapters V2, frontières modules, migration routes/cache/data, accessibilité/performance et anti-oubli.
+2. Les frontières modules/adapters et le plan routes/cutover sont prêts ; continuer seulement les specs non-Figma qui ferment un risque réel ou une preuve manquante.
 3. Ne pas relancer Figma tant que le quota Starter reste bloqué.
 4. Maintenir le registre anti-oubli et intégrer uniquement les améliorations justifiées.
 5. Dès disponibilité Figma :
@@ -854,6 +857,13 @@ Fermeture obtenue :
 9. marqueurs : `PASS_V2_ANTI_CONTAMINATION_SELF_TEST` et `READY_V2_ANTI_CONTAMINATION_NO_ROOT`.
 
 Interprétation : le guard est vert ; aucun frontend V2 n'existe encore, donc aucun PASS frontend n'est déclaré.
+
+Specs ajoutées après fermeture de l'audit :
+- `docs/MODARYX-V2-ADAPTER-MODULE-BOUNDARIES-20261003.md` ;
+- `docs/MODARYX-V2-ROUTE-CUTOVER-PLAN-20261003.md` ;
+- `docs/MODARYX-V2-ART-DIRECTION-EXPLORATION-BRIEF-20261003.md`.
+
+Elles ne lèvent ni le gate Figma, ni le tree testing humain, ni le gate High-Fi.
 
 Règle :
 > Aucun premier code frontend V2 tant que les risques de contamination actifs n'ont pas été inventoriés et isolés.
