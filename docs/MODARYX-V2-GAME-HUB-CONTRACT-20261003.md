@@ -283,3 +283,13 @@ High-fi autorisé uniquement quand :
 - `catalog-enabled` ne doit jamais être interprété visuellement comme une preuve de téléchargement disponible.
 
 **État : intégré ; validation humaine toujours PREUVE MANQUANTE.**
+
+
+## Convergence terminologique 2026-10-03
+
+- Libellé utilisateur provisoire : **Mes configurations pour ce jeu**.
+- Vue transversale correspondante : **Bibliothèque → Configurations de jeu**.
+- Recherche contextualisée : **Rechercher dans ce jeu**.
+- Passage explicite à la portée globale : **Rechercher partout sur MODARYX**.
+
+Le terme domaine `Profile/Loadout` reste interne. Ces libellés restent à revalider humainement avant gel high-fi final.
