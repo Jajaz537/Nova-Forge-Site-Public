@@ -17,12 +17,12 @@ Un risque n'est pas fermé parce qu'il est documenté.
 
 | Risque | État | Impact | Mitigation |
 |---|---|---|---|
-| CSS legacy contamine V2 | EN COURS | Très élevé | zéro import legacy, test CI anti-import |
-| Service Worker legacy sert ancien code | EN COURS | Très élevé | SW V2 séparé, migration testée, purge ciblée |
-| Redirects legacy interceptent routes V2 | EN COURS | Élevé | matrice de routes/cutover explicite |
-| Shell/app legacy mutent le DOM | EN COURS | Très élevé | aucun renderer legacy dans V2 |
-| localStorage historique pollue V2 | EN COURS | Élevé | namespace modaryx:v2 + migration stricte |
-| Ancien design réapparaît | EN COURS | Très élevé | liste blanche d'assets/components |
+| CSS legacy contamine V2 | TERMINÉ — prévention | Très élevé | blacklist 39/39 assets code + guard CI micro-prouvé |
+| Service Worker legacy sert ancien code | BLOQUÉ runtime | Très élevé | isolation requise ; migration navigateur non exécutée |
+| Redirects legacy interceptent routes V2 | EN COURS | Élevé | plan de cutover prêt ; preuve runtime manquante |
+| Shell/app legacy mutent le DOM | TERMINÉ — prévention | Très élevé | renderers V1 blacklistés + guard CI |
+| localStorage historique pollue V2 | EN COURS | Élevé | namespace/migrator définis ; preuve navigateur manquante |
+| Ancien design réapparaît | EN COURS | Très élevé | imports legacy bloqués ; validation artistique humaine encore requise |
 | Faux contenu de démo perçu comme réel | EN COURS | Élevé | dataClass explicite + fixtures isolées |
 | Collection/Modpack/Profile confondus | TERMINÉ — conception | Élevé | contrats séparés |
 | Projet/Release confondus | TERMINÉ — conception | Élevé | schémas séparés |
@@ -38,7 +38,7 @@ Un risque n'est pas fermé parce qu'il est documenté.
 | Univers/lore masque le produit | TERMINÉ — principe | Élevé | vocabulaire fonctionnel prioritaire |
 | Monde vivant dégrade performance | EN COURS | Moyen/Élevé | fail-soft, lazy, reduced motion |
 | Recherche externe devient SPOF | TERMINÉ — conception | Élevé | local-first |
-| Migration v1→v2 casse consumers | EN COURS | Très élevé | schémas versionnés + mappers |
+| Migration v1→v2 casse consumers | EN COURS | Très élevé | matrice V1→V2 explicite + adapters ; runtime non exécuté |
 | Suppression legacy trop tôt | BLOQUÉ volontairement | Élevé | rollback + conservation |
 | Cutover sans rollback | BLOQUÉ volontairement | Très élevé | stratégie rollback obligatoire |
 | Main modifié accidentellement | TERMINÉ pour branche actuelle | Très élevé | branche isolée + vérification SHA avant écriture |
@@ -50,6 +50,18 @@ Un risque n'est pas fermé parce qu'il est documenté.
 | Weather provider réel absent | BLOQUÉ | Moyen | garder fallback saison/heure |
 | Signer/trust anchor prod absent | BLOQUÉ | Très élevé | distribution reste verrouillée |
 | Corpus réel de mods absent | BLOQUÉ partiel | Très élevé | hubs éditoriaux séparés du catalogue réel |
+
+## 2.1 Threat model
+
+Document :
+`docs/MODARYX-V2-THREAT-MODEL-20261003.md`
+
+État :
+- threat model conception : **TERMINÉ** ;
+- CSP/header policy V2 : **EN COURS** ;
+- sanitizer/rich-text policy : **À DÉFINIR si rich text** ;
+- supply-chain V2 : **EN COURS — dépendances non choisies** ;
+- runtime security proof : **PREUVE MANQUANTE** tant que V2 n'existe pas.
 
 ## 3. Risques UX
 
