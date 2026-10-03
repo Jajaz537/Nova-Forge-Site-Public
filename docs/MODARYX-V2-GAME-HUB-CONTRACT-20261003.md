@@ -41,6 +41,8 @@ Le simple fait qu'un hub existe ne prouve pas qu'un corpus de mods distribuable 
 
 Le statut doit être lisible sans induire en erreur.
 
+Lorsque le backend est `catalog-enabled` sans distribution prouvée, afficher une formulation explicite comme **Catalogue consultable — téléchargement non garanti** plutôt que `Catalogue disponible` seul.
+
 ## 4. Recherche contextualisée
 
 Par défaut, la recherche reste limitée au jeu courant.
@@ -79,6 +81,8 @@ Onglets proposés :
 - Activité
 
 Les labels restent fonctionnels.
+
+`Mods & Plugins` reste l'entrée primaire courte. Quand l'espace le permet, une microcopy précise : **Mods, plugins, addons, scripts, outils et autres contenus compatibles.**
 
 ## 7. Aperçu
 
@@ -259,3 +263,11 @@ High-fi autorisé uniquement quand :
 - mobile défini.
 
 **État : TERMINÉ pour le contrat produit / NON IMPLÉMENTÉ volontairement.**
+
+
+## 20. Clarifications issues de la simulation experte
+
+- `Mods & Plugins` conservé comme libellé primaire, taxonomie complète exposée par microcopy/filtres.
+- `catalog-enabled` ne doit jamais être interprété visuellement comme une preuve de téléchargement disponible.
+
+**État : intégré ; validation humaine toujours PREUVE MANQUANTE.**
