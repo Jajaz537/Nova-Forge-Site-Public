@@ -229,4 +229,11 @@ Ordre recommandé quand le front V2 commencera :
 - aucune réutilisation d'un asset royaume comme hero sans validation artistique ;
 - aucune suppression des assets Nova historiques sans analyse de provenance.
 
-**État : TERMINÉ pour la classification initiale / EN COURS pour l'audit fichier par fichier lors du branchement.**
+**État : TERMINÉ — classification initiale + audit fichier/groupe fermé.**
+
+Preuves complémentaires :
+- `docs/MODARYX-V2-CODE-AUDIT-PHASE8-ASSETS-20261003.md` ;
+- `docs/MODARYX-V2-CODE-AUDIT-COVERAGE-525-20261003.md` ;
+- `docs/MODARYX-V2-CODE-ANTI-CONTAMINATION-MASTER-20261003.md`.
+
+La réutilisation artistique finale reste **PREUVE MANQUANTE** tant que la direction artistique high-fi n'est pas validée.
