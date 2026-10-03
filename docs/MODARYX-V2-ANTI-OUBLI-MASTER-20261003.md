@@ -118,7 +118,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | Élément | État V2 | Référence |
 |---|---|---|
 | Favoris | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
-| Collections | EN COURS — terminologie/capacité | COLLECTION-MODPACK-PROFILE / CROSS-ANALYSIS |
+| Collections | TERMINÉ — contrat + capacité explicite + prototype dédié ; validation humaine globale reste EN COURS | COLLECTION-MODPACK-PROFILE / CROSS-ANALYSIS / LIVING-THRESHOLD |
 | Modpacks | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
 | Profile / Loadout interne → **Profils de jeu** UI retenu | TERMINÉ — wording | COLLECTION-MODPACK-PROFILE / PRODUCT-GLOSSARY / FINAL-PRODUCT-WORDING-GAME-PROFILES |
 | Capacité Collection explicite (sélection / installation réelle) | TERMINÉ — conception / revalidation wording | COLLECTION-MODPACK-PROFILE / CROSS-ANALYSIS |
@@ -261,7 +261,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | Routes V2 séparées | TERMINÉ — architecture | FRONTEND-ISOLATION |
 | SW/cache V2 séparés | TERMINÉ — architecture | FRONTEND-ISOLATION |
 | localStorage V2 séparé | TERMINÉ — architecture | FRONTEND-ISOLATION |
-| Anti-import CI | TERMINÉ — conception / non implémenté | FRONTEND-ISOLATION |
+| Anti-import CI | TERMINÉ — checker + workflow implémentés / micro-proof frais vert | FRONTEND-ISOLATION / ANTI-CONTAMINATION-GUARD-PROOF |
 
 ## 21. Wireframes / design
 
@@ -286,7 +286,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | High-fi final | BLOQUÉ volontairement ; exploration réversible autorisée | HIGH-FI-GATE |
 | Direction artistique exploratoire | TERMINÉ — option 2 sélectionnée, palette hybride 2+3, prototype isolé | LIVING-THRESHOLD-DESIGN-SYSTEM / review-evidence |
 | Design system préparatoire | TERMINÉ — tokens, composants, responsive, a11y, motion, identité documentés | LIVING-THRESHOLD-DESIGN-SYSTEM |
-| QA visuelle archivable du prototype | EN COURS — export navigateur + a11y ciblée + flows + 37 captures archivées ; comparaison normalisée source + humain/screen-reader/device encore manquants | review-evidence/.../design-qa.md |
+| QA visuelle archivable du prototype | EN COURS — export navigateur + a11y ciblée + flows + 39 captures archivées ; comparaison normalisée source + humain/screen-reader/device encore manquants | review-evidence/.../design-qa.md |
 | Direction artistique finale | BLOQUÉ volontairement — sélection exploratoire ≠ gel high-fi | HIGH-FI-GATE |
 | Tree test humain | EN COURS — P01 réel + mini-test terminologique P01 terminés, validation globale incomplète | HUMAN-MINI-TREE-TEST-P01 / HUMAN-TERMINOLOGY-MINITEST-P01 / CROSS-ANALYSIS |
 
@@ -358,9 +358,9 @@ Document : `docs/MODARYX-V2-ASSISTANT-INDEPENDENT-TERMINOLOGY-TEST-20261003.md`.
 
 Ne remplace pas une preuve humaine.
 
-## 28. Test terminologique Work
+## 28. Test terminologique Work — état historique supersédé
 
-**PREUVE MANQUANTE — mission prête / rapport non reçu**
+**HISTORIQUE — la mission était prête ; le rapport a depuis été reçu et traité ci-dessous**
 
 Le protocole Work doit rester indépendant de P01 et du test assistant jusqu'à son propre verdict.
 
@@ -379,7 +379,7 @@ Analyse croisée finale :
 À retenir :
 - **Mods & contenus** converge P01 + assistant + Work ;
 - **Collection**, **Bibliothèque** et l'interdiction de **Non vérifié** convergent ;
-- **Profils de jeu** vs **Configurations de jeu** reste le seul arbitrage terminologique majeur ouvert.
+- **Historique :** à ce stade, **Profils de jeu** vs **Configurations de jeu** restait ouvert ; cet arbitrage est depuis **TERMINÉ** dans la section suivante.
 
 
 ## Décision finale Profils de jeu
@@ -416,7 +416,7 @@ Référence : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-CONTENT-UMBRELLA-20261003.m
 - aucun import CSS/DOM/renderer/asset V1 ;
 - aucun frontend public, DNS, Cloudflare ou production modifié ;
 - Figma reste **BLOQUÉ EXTERNE** ;
-- QA formelle reste **BLOQUÉE** jusqu'à preuve visuelle archivable et comparaison normalisée.
+- QA visuelle archivable : **TERMINÉE** pour captures/micro-proofs ; comparaison normalisée à la référence approuvée + validation humaine/screen-reader/device restent **PREUVE MANQUANTE**.
 
 Référence : `docs/MODARYX-V2-LIVING-THRESHOLD-DESIGN-SYSTEM-20261003.md`.
 
@@ -489,6 +489,9 @@ Toujours PREUVE MANQUANTE / externe :
 - production V2/backend/données/connecteurs réels.
 
 Prochain anti-oubli actif :
-- offline/stale/error/retry transverses ;
-- réévaluation du gate de création du root frontend V2 isolé ;
+- offline/stale/error/retry transverses : **TERMINÉ — prototype ciblé / run 37161856917** ;
+- mapping prototype → production : **TERMINÉ — document + surface-map machine-readable / run 37163081008** ;
+- comparaison de stack non engageante : **TERMINÉ — aucune stack sélectionnée** ;
+- root/frontend V2 production : **BLOQUÉ par gate de validation** ;
+- validation humaine multi-écrans, mobile humain, référence visuelle approuvée/comparaison, screen reader et appareils physiques : **PREUVE MANQUANTE / externe** ;
 - aucun cutover `main`/public avant les gates dédiés.
