@@ -159,6 +159,25 @@ try{
   await clickText(".detail-tabs button","Permissions");
   await waitText("Aucune licence de distribution réelle");
 
+  await clickAria("Bibliothèque");
+  await waitText("Retrouvez favoris, suivis, collections et profils sans les confondre.");
+  await clickText(".library-tabs button","Collections");
+  await waitText("Sélections organisées");
+  await clickText(".library-tabs button","Profils de jeu");
+  await waitText("Connexion MODARYX Forge");
+
+  await clickText(".global-nav button","Créer");
+  await waitText("Creator Studio");
+  await clickText(".studio-nav button","Releases");
+  await waitText("Préparer une release");
+  await clickText(".studio-nav button","Analytics");
+  await waitText("Données indisponibles");
+  await clickText(".studio-nav button","Dashboard");
+  await clickText(".studio-workflow .primary","Créer un projet local");
+  await waitText("Brouillon local créé");
+  await clickText(".studio-nav button","Projects");
+  await waitText("Projet sans titre");
+
   await clickText(".global-nav button","Mods & contenus");
   await waitText("Catalogue global");
   await fill(".catalog-search input","sommets");
@@ -184,6 +203,19 @@ try{
   await waitText("Rechercher dans MODARYX");
   await fill(".global-search-field input","aube");
   await waitText("Sentiers de l’aube");
+
+  await load(390,844);
+  await clickAria("Ouvrir le menu");
+  await clickText(".global-nav .mobile-nav-utility","Bibliothèque");
+  await waitText("Retrouvez favoris, suivis, collections et profils sans les confondre.");
+  await clickText(".library-tabs button","Profils de jeu");
+  await waitText("Connexion MODARYX Forge");
+
+  await clickAria("Ouvrir le menu");
+  await clickText(".global-nav button","Créer");
+  await waitText("Creator Studio");
+  await clickText(".studio-nav button","Releases");
+  await waitText("Préparer une release");
 
   console.log("PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS");
 } finally {
