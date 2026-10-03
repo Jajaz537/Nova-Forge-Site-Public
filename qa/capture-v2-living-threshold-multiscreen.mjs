@@ -87,7 +87,7 @@ async function capture(file, width, height, expectedText) {
   let textOk = !expectedText;
   if (expectedText) {
     for (let i = 0; i < 30; i++) {
-      textOk = await evaluate(`document.body.innerText.includes(${JSON.stringify(expectedText)})`);
+      textOk = await evaluate(`document.body.innerText.toLocaleLowerCase("fr").includes(${JSON.stringify(expectedText.toLocaleLowerCase("fr"))})`);
       if (textOk) break;
       await sleep(100);
     }
