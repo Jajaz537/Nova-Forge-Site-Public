@@ -73,6 +73,35 @@ async function clickByText(selector, text) {
   if (!ok) throw new Error("visible target not found: " + selector + " / " + text);
   await sleep(100);
 }
+async function clickByAriaLabel(label) {
+  const ok = await evaluate(`(() => {
+    const target=[...document.querySelectorAll('[aria-label]')].find(el => {
+      if (el.getAttribute('aria-label') !== ${JSON.stringify(label)}) return false;
+      const r=el.getBoundingClientRect(), s=getComputedStyle(el);
+      return s.display!=='none' && s.visibility!=='hidden' && r.width>0 && r.height>0;
+    });
+    if(!target) return false;
+    target.click();
+    return true;
+  })()`);
+  if (!ok) throw new Error("visible aria-label target not found: " + label);
+  await sleep(150);
+}
+async function fillVisibleInput(selector, value) {
+  const ok = await evaluate(`(() => {
+    const target=[...document.querySelectorAll(${JSON.stringify(selector)})].find(el => {
+      const r=el.getBoundingClientRect(), s=getComputedStyle(el);
+      return s.display!=='none' && s.visibility!=='hidden' && r.width>0 && r.height>0;
+    });
+    if(!target) return false;
+    const setter=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;
+    setter.call(target,${JSON.stringify(value)});
+    target.dispatchEvent(new Event('input',{bubbles:true}));
+    return true;
+  })()`);
+  if (!ok) throw new Error("visible input not found: " + selector);
+  await sleep(200);
+}
 async function clickSelector(selector) {
   const ok = await evaluate(`(() => {
     const target=document.querySelector(${JSON.stringify(selector)});
@@ -142,6 +171,14 @@ try {
   await navigateHome(1440, 1024);
   manifest.captures.push(await capture("desktop-game-hub.png", 1440, 1024, "Mes profils pour ce jeu"));
 
+  await clickByText(".global-nav button", "Jeux");
+  manifest.captures.push(await capture("desktop-games-index.png", 1440, 1024, "Trouvez votre prochain terrain de jeu"));
+
+  await clickByAriaLabel("Recherche globale");
+  manifest.captures.push(await capture("desktop-global-search.png", 1440, 1024, "Rechercher dans MODARYX"));
+  await fillVisibleInput('.global-search-field input', "aube");
+  manifest.captures.push(await capture("desktop-global-search-results.png", 1440, 1024, "Sentiers de l’aube"));
+
   await clickByText(".global-nav button", "Découvrir");
   manifest.captures.push(await capture("desktop-home.png", 1440, 1024, "Redécouvrez vos jeux"));
 
@@ -164,6 +201,9 @@ try {
   // Mobile states
   await navigateHome(390, 844);
   manifest.captures.push(await capture("mobile-game-hub.png", 390, 844, "Mes profils pour ce jeu"));
+
+  await clickByAriaLabel("Recherche globale");
+  manifest.captures.push(await capture("mobile-global-search.png", 390, 844, "Rechercher dans MODARYX"));
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Découvrir");
