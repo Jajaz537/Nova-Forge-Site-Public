@@ -1185,3 +1185,38 @@ Blockers encore réels :
 - données/backend/intégrations réels.
 
 **Prochain point logique interne : fermer les états critiques transverses encore faisables dans le prototype (offline/stale/error/retry), puis réévaluer le gate de passage vers le root frontend V2 isolé sans cutover public.**
+
+
+## États critiques transverses — preuve fraîche — 4 octobre 2026
+
+**TERMINÉ pour le prototype ciblé / pas une preuve production**
+
+Run : `37161856917` — **SUCCESS**  
+Commit capturé : `9d0bfd38052797ccbfac0e7960733e143833491f`  
+Artifact : `11288036698`  
+Digest : `sha256:92b7c046125ab389b69dbd2b6dc4c86d794acaebacc1c21769be3647e0d5e8e1`
+
+Marqueurs :
+- `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
+- `KEYBOARD_REACHABLE 32 / 32`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `FLOW_ASSERT offline state real browser transition`
+- `FLOW_ASSERT report validation error retry recovered`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 39`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Fermetures :
+- **offline/stale** : état réel `navigator.onLine`, événement navigateur réel via CDP, bandeau explicite ; données locales consultables et données distantes potentiellement indisponibles/obsolètes ;
+- **error/retry** : Signalement refuse le brouillon sans raison, erreur liée au champ, correction par sélection d'une raison, retry réussi vers `Brouillon de signalement — non envoyé` ;
+- captures desktop/mobile archivées de l'état d'erreur de signalement.
+
+Ces preuves ne ferment pas :
+- erreurs backend réelles ;
+- sync conflict réel ;
+- session expirée réelle ;
+- PWA/SW offline production ;
+- screen reader/appareil physique ;
+- high-fi final ou VF.
