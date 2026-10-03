@@ -927,7 +927,7 @@ Aucun front V2 production n'a été écrit.
 14. Direction artistique exploratoire : **TERMINÉE** avec sélection humaine de `Living Threshold` et affinage palette 2+3. Référence : `docs/MODARYX-V2-LIVING-THRESHOLD-DESIGN-SYSTEM-20261003.md`.
 15. Prototype autonome créé dans `review-evidence/modaryx-v2-living-threshold-prototype-20261003/` pour Home, Game Hub, Catalog, Content Detail, Library, Community et mobile. Il reste une preuve de conception réversible, pas le frontend V2 de production.
 16. Capture navigateur archivable : **TERMINÉE** — workflow `MODARYX V2 Living Threshold Visual Proof`, run `37157794569`, artifact `11286254258`, commit `87245c939c42daf1a0b04879d26039eb4b5daae1`.
-17. Contraste + clavier/touch + overflow ciblés : **TERMINÉ — run 37158374418**. Prochain blocker visuel : constituer une preuve multi-écrans archivable, puis archiver une référence approuvée pour comparaison normalisée et obtenir une revue humaine multi-écrans. Screen reader/appareils restent PREUVE MANQUANTE. Aucun gel high-fi final avant fermeture suffisante de ces preuves.
+17. Contraste + clavier/touch + overflow ciblés : **TERMINÉ — run 37158374418**. Preuve multi-écrans archivable : **TERMINÉ — run 37158610507 / 11 captures**. Restent : référence approuvée pour comparaison normalisée, revue humaine multi-écrans, screen reader/appareils et approfondissement des surfaces produit incomplètes. Aucun gel high-fi final avant fermeture suffisante de ces preuves.
 18. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
 ## 30. Règle de reprise
@@ -1046,3 +1046,26 @@ Règle :
 - **PREUVE MANQUANTE** : screen reader réel, appareils physiques, comparaison source normalisée et revue humaine multi-écrans.
 
 Aucun PASS High-Fi final n'est déduit de cette micro-preuve.
+
+
+## Preuve visuelle multi-écrans Living Threshold
+
+**TERMINÉE pour l'archivage / validation humaine toujours EN COURS**
+
+- run : `37158610507` — **SUCCESS**
+- commit capturé : `63d6a79b9fa05378d8280ff65ed05a81fa750ead`
+- artifact : `11287155242`
+- artifact SHA-256 : `38d2a9e777feb9a8acdf1b55c4c953ce6665385fcb0251a3de240abadeb6f2c2`
+- `MULTISCREEN_CAPTURE_COUNT 11`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+- desktop : Game Hub, Home, Catalog, Content Detail, Library, Community, Creator Studio ;
+- mobile : Game Hub, Home, Catalog, Content Detail.
+- inspection : cohérence de famille visuelle conservée ; Creator Studio reste une couverture exploratoire minimale, non une surface finale.
+- cette preuve rend possible la revue humaine multi-écrans mais ne la remplace pas.
+
+Prochains écarts produit prioritaires du prototype :
+1. Games Index réel ;
+2. Global Search réel ;
+3. Catalogue avec requête/filtres/tri/résultats/reset/états réellement exercés ;
+4. Content Detail avec navigation Releases/Files/Requirements/Changelog/Support/Permissions ;
+5. Library et Creator Studio approfondis selon critères d'acceptation.
