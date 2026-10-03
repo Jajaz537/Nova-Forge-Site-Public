@@ -234,3 +234,60 @@ Convergences suffisantes pour poursuivre l'exploration réversible :
 L'arbitrage **Profils de jeu** vs **Configurations de jeu** est **TERMINÉ** : **Profils de jeu** est retenu comme décision produit.
 
 Aucun blocker terminologique majeur ne subsiste sur ce point.
+
+
+## 15. Réévaluation après expansion Living Threshold — 4 octobre 2026
+
+**High-Fi final : BLOQUÉ — mais la couverture prototype interne a fortement progressé.**
+
+Preuve cible la plus récente :
+- run `37161856917` — SUCCESS ;
+- 39 captures desktop/mobile ;
+- flows produit ciblés : SUCCESS ;
+- keyboard/touch/overflow ciblés : SUCCESS ;
+- offline navigateur réel : SUCCESS ;
+- erreur locale → correction → retry : SUCCESS.
+
+### Critères désormais matérialisés dans le prototype navigateur
+
+- navigation primaire complète ;
+- Games Index ;
+- Game Hub desktop/mobile ;
+- Global Search desktop/mobile ;
+- Catalog ;
+- Content Detail ;
+- Collections ;
+- Modpack distinct ;
+- Profil de jeu détaillé ;
+- Créateurs ;
+- Community ;
+- Library ;
+- Creator Studio ;
+- Compte/Notifications/Préférences/Onboarding ;
+- Support séparé de Signalement ;
+- états nominal / empty / unavailable / anonymous / local-only / offline-stale / validation-error-retry / success sur les surfaces ciblées.
+
+### Limites internes encore ouvertes
+
+- loading/skeletons systématiques non exercés écran par écran ;
+- vraies erreurs backend/retry non prouvées tant que le backend V2 n'existe pas ;
+- session expirée/permission denied réelles non prouvées ;
+- sync conflict réel non prouvé ;
+- PWA/SW V2 offline production non implémenté ;
+- contenu/données réelles encore absents du prototype.
+
+### Blockers externes ou humains restant pour le gel High-Fi
+
+- référence visuelle approuvée archivable + comparaison normalisée ;
+- revue humaine multi-écrans supplémentaire ;
+- validation mobile humaine réelle ;
+- screen reader réel ;
+- appareils physiques ;
+- Figma supplémentaire toujours bloqué par quota si la matérialisation Figma reste exigée.
+
+### Décision de gate
+
+Le prototype peut continuer à être approfondi et utilisé comme référence de construction réversible.  
+Il **ne devient pas** automatiquement un frontend V2 de production ni une validation High-Fi finale.
+
+Le passage au premier root/frontend V2 de production reste régi par la matrice de readiness et doit faire l'objet d'une décision contrôlée une fois les blockers de validation requis fermés ou explicitement reclassifiés avec preuve.
