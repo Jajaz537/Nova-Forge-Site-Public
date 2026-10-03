@@ -120,7 +120,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | Favoris | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
 | Collections | EN COURS — terminologie/capacité | COLLECTION-MODPACK-PROFILE / CROSS-ANALYSIS |
 | Modpacks | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
-| Profile / Loadout interne → **Profils de jeu** UI provisoire préféré par P01 | EN COURS — validation globale | COLLECTION-MODPACK-PROFILE / PRODUCT-GLOSSARY / HUMAN-TERMINOLOGY-MINITEST-P01 |
+| Profile / Loadout interne → **Profils de jeu** UI retenu | TERMINÉ — wording | COLLECTION-MODPACK-PROFILE / PRODUCT-GLOSSARY / FINAL-PRODUCT-WORDING-GAME-PROFILES |
 | Capacité Collection explicite (sélection / installation réelle) | TERMINÉ — conception / revalidation wording | COLLECTION-MODPACK-PROFILE / CROSS-ANALYSIS |
 | Conversion explicite entre objets | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
 | Version pinning | TERMINÉ — conception | COLLECTION-MODPACK-PROFILE |
@@ -376,3 +376,15 @@ Analyse croisée finale :
 - **Mods & contenus** converge P01 + assistant + Work ;
 - **Collection**, **Bibliothèque** et l'interdiction de **Non vérifié** convergent ;
 - **Profils de jeu** vs **Configurations de jeu** reste le seul arbitrage terminologique majeur ouvert.
+
+
+## Décision finale Profils de jeu
+
+**TERMINÉ — wording produit**
+
+- UI : **Profils de jeu**
+- microcopy : **Configurations enregistrées de mods, versions et réglages.**
+- Game Hub : **Mes profils pour ce jeu**
+- domaine interne : `Profile/Loadout`
+
+Référence : `docs/MODARYX-V2-FINAL-PRODUCT-WORDING-GAME-PROFILES-20261003.md`.
