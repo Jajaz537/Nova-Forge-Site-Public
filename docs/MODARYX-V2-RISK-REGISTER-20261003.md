@@ -68,7 +68,7 @@ Document :
 | Risque | État | Mitigation |
 |---|---|---|
 | Navigation trop large | EN COURS | tree testing |
-| Profil de compte vs profil de jeu | EN COURS — principal risque wording | P01 préfère **Profils de jeu** ; Work préfère **Configurations de jeu** pour novices ; retest humain ciblé requis |
+| Profil de compte vs profil de jeu | TERMINÉ — wording | **Profils de jeu** retenu + microcopy descriptive + distinction Compte/Profil public + accès contextualisé Game Hub |
 | Collection perçue comme installable | EN COURS | capacité visible + statut d'installation explicite |
 | Catalogue consultable perçu comme téléchargeable | EN COURS | ne jamais employer `disponible` seul ; statut distribution séparé |
 | Parapluie de contenus trop étroit | EN COURS — fortement réduit | **Mods & contenus** converge P01 + assistant + Work ; validation humaine globale encore incomplète |
