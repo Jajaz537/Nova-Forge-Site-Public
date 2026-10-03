@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`8d0aaa6330231bc8d60bc92acab466f5ba210e31`
+`a89d7ec5b765984ae4ff0deeac2c0c4a98c383b5`
 
 PR :
 
@@ -695,6 +695,21 @@ Gate :
 
 ## 26. Validation humaine
 
+**PREUVE MANQUANTE pour les réponses / OUTILLAGE TERMINÉ**
+
+Harness local de tree testing :
+- 16 tâches ;
+- card sorting ;
+- questions de sortie ;
+- sauvegarde locale ;
+- export JSON ;
+- aucun service payant requis.
+
+SHA-256 du harness local :
+`9cc383f7645656a9819177147f3dc3fabfb55880eff4e5f1505fb5dd2a100534`
+
+Le harness ne constitue une preuve humaine qu'après remplissage par un participant réel.
+
 **PREUVE MANQUANTE**
 
 Script de test :
@@ -780,9 +795,9 @@ Aucun front V2 production n'a été écrit.
 - Notifications/Préférences : **TERMINÉ — conception**
 - Modération/Appels : **TERMINÉ — conception**
 - Cycle de vie support jeux : **TERMINÉ — conception**
-- Wireframes core : **TERMINÉ pour conception textuelle / PREUVE VISUELLE MANQUANTE pour 4 écrans**
+- Wireframes core : **TERMINÉ pour conception textuelle + prototype low-fi local des 4 écrans / validation humaine PREUVE MANQUANTE**
 - Écriture Figma supplémentaire : **BLOQUÉ EXTERNE**
-- Tree testing humain : **PREUVE MANQUANTE**
+- Tree testing humain : **OUTILLAGE PRÊT / PREUVE MANQUANTE pour réponses de participants**
 - Direction artistique : **BLOQUÉ**
 - High-fi : **BLOQUÉ**
 - Nouveau frontend production : **NON COMMENCÉ volontairement**
@@ -793,7 +808,7 @@ Aucun front V2 production n'a été écrit.
 2. Les frontières modules/adapters, mapping V1→V2, threat model, policy CSP et gate de stack sont prêts ; ne créer aucune nouvelle spec si elle ne ferme pas un risque réel.
 3. Ne pas relancer Figma tant que le quota Starter reste bloqué ; retry ciblé du 2026-10-03 20:12 = toujours BLOQUÉ EXTERNE.
 4. Maintenir le registre anti-oubli et intégrer uniquement les améliorations justifiées.
-5. Alternative gratuite disponible : matérialiser les 4 écrans dans un prototype low-fi Miro si l'utilisateur confirme explicitement la création d'un board ; sinon attendre le reset Figma.
+5. Alternative gratuite exécutée : prototype low-fi HTML local créé et versionné comme review evidence ; Miro indisponible pour l'organisation.
 6. Dès disponibilité Figma :
    - matérialiser Game Hub ;
    - matérialiser Global Search ;
