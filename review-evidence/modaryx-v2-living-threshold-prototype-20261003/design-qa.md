@@ -51,11 +51,47 @@
 1. ~~Export comparable desktop and mobile screenshots.~~ **TERMINÉ — run 37157794569**.
 2. Run normalized side-by-side visual comparison once the source reference is archivable.
 3. Fix any P0/P1/P2 differences found.
-4. Perform contrast and keyboard checks before any high-fi gate update.
+4. ~~Perform targeted contrast and keyboard/touch checks.~~ **TERMINÉ — run 37158374418**.
+5. Complete screen-reader/device/human multi-screen validation before any final high-fi declaration.
 
 **Follow-up Polish**
 
 - Consider a dedicated compact mobile profile affordance after human review.
 - Revisit typeface selection only after the visual direction is accepted.
 
-final result: blocked — implementation capture closed; normalized source comparison + formal a11y checks remain open
+final result: blocked — capture + targeted browser a11y closed; normalized source comparison + broader assistive/device/human review remain open
+
+
+## Rendered accessibility micro-proof
+
+**TERMINÉ — current prototype state / not a full WCAG certification**
+
+Workflow run: `37158374418`  
+Candidate commit: `6721a761034a091bf4f4f9eaff6cc7b555a49665`  
+Artifact id: `11287195204`
+
+Fresh markers:
+- `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `KEYBOARD_REACHABLE 35 / 35`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+
+Static token contrast micro-proof:
+- primary text / background: **17.19**
+- muted text / background: **7.77**
+- cyan action / background: **10.97**
+- compatibility chip: **12.00**
+- primary gradient cyan: **10.97**
+- primary gradient blue: **4.88**
+- primary gradient violet: **5.14**
+
+Rendered checks:
+- every visible focusable discovered on the desktop Game Hub was reached by keyboard Tab in the targeted run;
+- no page-level horizontal overflow at 1440×1024 or 390×844;
+- visible mobile interactive targets checked by the browser micro-proof were at least 44×44 px;
+- mobile menu target was visible and at least 44×44 px;
+- reduced-motion rule and 3 px cyan focus-visible contract were statically verified.
+
+Limit:
+this closes the current prototype's targeted keyboard/touch/contrast proof only. It does **not** replace screen-reader testing, device testing, full WCAG audit, source-vs-implementation visual comparison, or human multi-screen review.
