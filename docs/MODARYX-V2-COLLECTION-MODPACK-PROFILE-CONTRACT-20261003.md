@@ -161,7 +161,40 @@ Partage seulement si :
 - manifeste ;
 - provenance.
 
-## 12. Mobile
+## 12. Curateur et support
+
+Une Collection doit afficher clairement :
+- curateur ;
+- instructions ;
+- limitations connues ;
+- contexte jeu/version ;
+- date de dernière validation.
+
+Si un problème provient de la composition de la Collection, le produit ne doit pas renvoyer automatiquement l'utilisateur vers chaque auteur de mod.
+
+Le rôle du curateur dans le support doit être explicite.
+
+## 13. Filtres Collections
+
+Le catalogue Collections doit avoir ses propres facettes, par exemple :
+- jeu ;
+- version ;
+- catégorie ;
+- type ;
+- tags ;
+- nombre d'items lorsque pertinent.
+
+Ne pas copier aveuglément les filtres du catalogue ContentItem.
+
+## 14. Profil propre recommandé
+
+Lors d'une installation complexe via manager, MODARYX peut recommander :
+- créer un nouveau profil propre ;
+- ou choisir explicitement un profil existant.
+
+Cette recommandation dépend des capacités réelles du manager et ne doit jamais modifier un profil sans consentement.
+
+## 15. Mobile
 
 Collections :
 - liste compacte ;
@@ -175,7 +208,7 @@ Profiles :
 - releases ;
 - manager status.
 
-## 13. Accessibilité
+## 16. Accessibilité
 
 - réordonnancement non drag-only ;
 - état sync textuel ;
@@ -183,7 +216,7 @@ Profiles :
 - checkbox/toggles correctement labellisés ;
 - confirmation pour actions destructrices.
 
-## 14. Gate high-fi
+## 17. Gate high-fi
 
 Avant high-fi :
 - objets séparés ;
