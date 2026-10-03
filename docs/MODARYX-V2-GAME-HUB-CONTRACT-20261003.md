@@ -292,4 +292,11 @@ High-fi autorisé uniquement quand :
 - Recherche contextualisée : **Rechercher dans ce jeu**.
 - Passage explicite à la portée globale : **Rechercher partout sur MODARYX**.
 
-Le terme domaine `Profile/Loadout` reste interne. Après test humain P01, **Profils de jeu** est le libellé provisoire préféré ; le problème principal reste sa trouvabilité.
+Le terme domaine `Profile/Loadout` reste interne. **Profils de jeu** est le libellé UI retenu. L'accès contextualisé **Mes profils pour ce jeu** reste obligatoire lorsque la fonction existe.
+
+
+## Décision produit wording
+
+- **Profils de jeu** : libellé retenu.
+- **Mes profils pour ce jeu** : raccourci Game Hub retenu.
+- Microcopy : **Configurations enregistrées de mods, versions et réglages.**
