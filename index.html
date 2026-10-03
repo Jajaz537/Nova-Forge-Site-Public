@@ -24,17 +24,16 @@
   <link rel="alternate" type="application/json" href="./public-status.json" title="MODARYX MODS — statut public">
   <link rel="stylesheet" href="./assets/tokens.css">
   <link rel="stylesheet" href="./assets/nova-premium-hd.css">
-  <link rel="stylesheet" href="./assets/modaryx-premium-refinement.css">
-  <script src="./assets/shell.js" defer></script>
-  <script src="./assets/app.js" defer></script>
-  <script src="./assets/nova-premium-hd.js" defer></script>
-  <script src="./assets/living-world.js" defer></script>
+  <script src="./assets/shell.js" defer fetchpriority="low"></script>
+  <script src="./assets/app.js" defer fetchpriority="low"></script>
+  <script src="./assets/nova-premium-hd.js" defer fetchpriority="low"></script>
+  <script src="./assets/living-world.js" defer fetchpriority="low"></script>
   <link rel="stylesheet" href="./assets/modaryx-foundations.css">
-  <link rel="stylesheet" href="./assets/modaryx-home-cinematic.css">
   <link rel="stylesheet" href="./assets/modaryx-home-finishline.css">
   <link rel="stylesheet" href="./assets/living-world.css">
+  <link rel="stylesheet" href="./assets/modaryx-canon-vf.css">
 </head>
-<body>
+<body data-mx-canon="true" data-mx-world="home">
   <a class="skip-link" href="#main">Aller au contenu</a>
   <noscript><p class="noscript-note">JavaScript est désactivé. Le contenu officiel reste accessible ; les démonstrations locales enrichies sont simplement indisponibles.</p></noscript>
 
@@ -57,7 +56,7 @@
 
   <main id="main" class="site-main">
     <section class="hero modaryx-realm-hero" id="top" aria-labelledby="hero-title">
-      <img class="modaryx-realm-art" src="./assets/modaryx-wolf-dragon-hero.webp" width="1600" height="900" alt="" loading="eager" fetchpriority="high" decoding="sync">
+      <img class="modaryx-realm-art" src="./assets/modaryx-wolf-dragon-hero.webp" width="1600" height="900" alt="" loading="eager" fetchpriority="high" decoding="async">
       <div class="shell hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">MODARYX MODS · Gaming • Mods • Modding Tools</p>
@@ -70,20 +69,21 @@
           <div class="hero-proof" aria-label="Principes publics">
             <span><i></i>Sans compte</span><span><i></i>Brouillons locaux</span><span><i></i>Catalogue de démonstration</span>
           </div>
-          <aside class="living-world-status" aria-label="État du monde vivant MODARYX">
-            <span><strong data-world-phase>Monde vivant</strong><small data-world-age>Chronologie du monde</small></span>
-            <span><strong>Loup</strong><small data-world-inhabitant="wolf">Louveteau</small><span class="world-growth-next" data-world-next="wolf">Prochaine étape : Loup juvénile</span></span>
-            <span><strong>Dragon</strong><small data-world-inhabitant="dragon">Dragonneau</small><span class="world-growth-next" data-world-next="dragon">Prochaine étape : Dragon juvénile</span></span>
-            <p data-world-status role="status" aria-live="polite" aria-atomic="true">Le monde vivant se prépare…</p>
-            <p class="world-chronicle"><strong>Chronique</strong><span data-world-chronicle>Le royaume prépare sa prochaine activité…</span></p>
-            <p class="world-local-context"><strong>Atmosphère locale</strong><span data-real-world-context>Adaptation saisonnière automatique en préparation…</span></p>
-            <p class="world-local-context"><strong>Rythme local</strong><span data-local-world-activity>Adaptation des activités en préparation…</span></p>
-          </aside>
         </div>
 
 
       </div>
     </section>
+
+    <aside class="living-world-status living-world-rail shell" aria-label="État du monde vivant MODARYX">
+      <span><strong data-world-phase>Monde vivant</strong><small data-world-age>Chronologie du monde</small></span>
+      <span><strong>Loup</strong><small data-world-inhabitant="wolf">Louveteau</small><span class="world-growth-next" data-world-next="wolf">Prochaine étape : Loup juvénile</span></span>
+      <span><strong>Dragon</strong><small data-world-inhabitant="dragon">Dragonneau</small><span class="world-growth-next" data-world-next="dragon">Prochaine étape : Dragon juvénile</span></span>
+      <p data-world-status role="status" aria-live="polite" aria-atomic="true">Le monde vivant se prépare…</p>
+      <p class="world-chronicle"><strong>Chronique</strong><span data-world-chronicle>Le royaume prépare sa prochaine activité…</span></p>
+      <p class="world-local-context"><strong>Atmosphère locale</strong><span data-real-world-context>Adaptation saisonnière automatique en préparation…</span></p>
+      <p class="world-local-context"><strong>Rythme local</strong><span data-local-world-activity>Adaptation des activités en préparation…</span></p>
+    </aside>
 
     <div class="trust-rail" aria-label="Garanties publiques">
       <div class="shell"><span><b></b>Navigation publique sans compte</span><span><b></b>Aucune télémétrie distante requise</span><span><b></b>Smart Profile local</span><span><b></b>Aucun exécutable lancé par le site</span></div>
@@ -92,7 +92,7 @@
 
     <section class="modaryx-portals" aria-label="Les univers MODARYX">
       <div class="shell"><figure>
-        <img data-deferred-src="./assets/modaryx-world-portals.webp" width="1200" height="675" alt="" decoding="async">
+        <img data-deferred-src="./assets/modaryx-world-home-village.webp" width="1672" height="941" alt="" decoding="async">
         <nav class="modaryx-portal-links" aria-label="Choisir un parcours">
           <a href="./creator-studio.html"><strong>Créer</strong><span>Préparez et exportez le manifeste de votre projet.</span></a>
           <a href="./catalog.html"><strong>Explorer</strong><span>Découvrez les créations du catalogue de démonstration.</span></a>

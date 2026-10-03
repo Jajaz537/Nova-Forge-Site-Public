@@ -152,11 +152,18 @@ chrome.stderr.on('data', (chunk) => { chromeStderr = (chromeStderr + String(chun
 
 try {
   const portFile = path.join(USER_DATA_DIR, 'DevToolsActivePort');
-  const deadline = Date.now() + 12000;
-  while (!fs.existsSync(portFile) && Date.now() < deadline) await sleep(120);
-  if (!fs.existsSync(portFile)) throw new Error('DevToolsActivePort not created');
-  const [debugPort] = fs.readFileSync(portFile, 'utf8').trim().split(/\r?\n/);
-  if (!/^\d+$/.test(debugPort)) throw new Error('invalid DevTools port');
+  const deadline = Date.now() + 20000;
+  let debugPort = '';
+  while (Date.now() < deadline) {
+    if (fs.existsSync(portFile)) {
+      const [candidate] = fs.readFileSync(portFile, 'utf8').trim().split(/\r?\n/);
+      if (/^\d+$/.test(candidate)) { debugPort = candidate; break; }
+    }
+    const announced = chromeStderr.match(/DevTools listening on ws:\/\/127\.0\.0\.1:(\d+)\//);
+    if (announced) { debugPort = announced[1]; break; }
+    await sleep(120);
+  }
+  if (!/^\d+$/.test(debugPort)) throw new Error('DevToolsActivePort not created');
   await waitForJson('http://127.0.0.1:' + debugPort + '/json/version');
   const tabResponse = await fetch('http://127.0.0.1:' + debugPort + '/json/new?' + encodeURIComponent('about:blank'), {method: 'PUT'});
   if (!tabResponse.ok) throw new Error('cannot create Chrome target: HTTP ' + tabResponse.status);
@@ -232,7 +239,8 @@ try {
   process.exitCode = 1;
 } finally {
   chrome.kill('SIGTERM');
-  await sleep(150);
-  if (!chrome.killed) chrome.kill('SIGKILL');
-  fs.rmSync(TEMP_ROOT, {recursive: true, force: true});
+  for (let attempt = 0; attempt < 20 && chrome.exitCode === null; attempt++) await sleep(100);
+  if (chrome.exitCode === null) chrome.kill('SIGKILL');
+  for (let attempt = 0; attempt < 10 && chrome.exitCode === null; attempt++) await sleep(100);
+  fs.rmSync(TEMP_ROOT, {recursive: true, force: true, maxRetries: 10, retryDelay: 100});
 }

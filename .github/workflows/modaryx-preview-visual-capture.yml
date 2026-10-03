@@ -58,15 +58,16 @@ jobs:
           set -euo pipefail
           test -n "$PR_NUMBER"
 
-          FILES="$(curl --fail --silent --show-error -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GH_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/files?per_page=100")"
-          QA_ONLY="$(FILES="$FILES" node -e '
-            const files = JSON.parse(process.env.FILES);
+          FILES_JSON="$RUNNER_TEMP/modaryx-pr-files.json"
+          curl --fail --silent --show-error -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GH_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" -o "$FILES_JSON" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/files?per_page=100"
+          QA_ONLY="$(node -e '
+            const files = JSON.parse(require("fs").readFileSync(process.argv[1],"utf8"));
             const allowed = new Set([
               ".github/workflows/modaryx-preview-visual-capture.yml",
               "qa/check-preview-visual-capture.mjs"
             ]);
             process.stdout.write(files.length > 0 && files.every((item) => allowed.has(item.filename)) ? "true" : "false");
-          ')"
+          ' "$FILES_JSON")"
 
           TARGET_PR="$PR_NUMBER"
           TARGET_SHA="$HEAD_SHA"
@@ -78,9 +79,10 @@ jobs:
 
           SHORT_SHA="${TARGET_SHA:0:7}"
           for attempt in {1..60}; do
-            COMMENTS="$(curl --fail --silent --show-error -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GH_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/issues/$TARGET_PR/comments?per_page=100")"
-            PREVIEW="$(COMMENTS="$COMMENTS" SHORT_SHA="$SHORT_SHA" node -e '
-              const comments = JSON.parse(process.env.COMMENTS);
+            COMMENTS_JSON="$RUNNER_TEMP/modaryx-pr-comments.json"
+            curl --fail --silent --show-error -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GH_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" -o "$COMMENTS_JSON" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/issues/$TARGET_PR/comments?per_page=100"
+            PREVIEW="$(SHORT_SHA="$SHORT_SHA" node -e '
+              const comments = JSON.parse(require("fs").readFileSync(process.argv[1],"utf8"));
               const short = process.env.SHORT_SHA;
               for (const item of [...comments].reverse()) {
                 const body = item.body || "";
@@ -102,7 +104,7 @@ jobs:
                   break;
                 }
               }
-            ')"
+            ' "$COMMENTS_JSON")"
             if test -n "$PREVIEW"; then
               echo "MODARYX_VISUAL_ORIGIN=$PREVIEW" >> "$GITHUB_ENV"
               echo "Resolved preview: $PREVIEW"

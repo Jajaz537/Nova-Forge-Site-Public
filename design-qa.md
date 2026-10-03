@@ -1,0 +1,47 @@
+# MODARYX — Design QA canonique — 2026-09-23
+
+## Inputs comparés
+
+- Référence canonique : `REFERENCE-CANONIQUE-Compagnons-face-au-royaume-enchante.png` (1672 × 941).
+- Implémentation : accueil et 22 routes secondaires MODARYX, captures desktop 1440 × 1000 et mobile 390 × 844.
+- Comparaison groupée : référence et accueil examinés ensemble ; Catalogue, Documentation, Communauté, Téléchargements, GTA VI et RDR2 inspectés dans les mêmes viewports.
+
+## Couverture
+
+- Fidélité de l’image : héros humain assis, loup, bébé dragon, château dominant, grande rivière, forêt et vallée habitées tous visibles ; aucune île flottante ; cascades secondaires.
+- Composition : illustration non obstruée, récit placé dans une surface éditoriale séparée.
+- Hiérarchie : titre serif noble, CTA primaires explicites, navigation plus discrète, sections ouvertes plutôt que panneaux imbriqués.
+- Palette : vert forêt, ivoire, cuivre et bleu rivière dérivés de l’image canonique.
+- Pages secondaires : ancien panorama supprimé des héros secondaires ; Catalogue, Communauté et Profils utilisent des cadrages paysagers distincts, tandis que Documentation, Écosystème, Création, Confiance, GTA VI et RDR2 ont leurs propres signatures.
+- Surfaces : grands conteneurs sombres supprimés au profit de sections ouvertes ivoire/forêt, séparateurs fins et îlots fonctionnels réservés aux vrais outils.
+- Typographie et rythme : serif noble étendu aux héros, titres de sections et cartes ; respiration verticale harmonisée entre les familles.
+- Responsive : rendu inspecté à 1440 × 1000 et 390 × 844 ; aucun chevauchement ni rognage des sujets canoniques observé.
+- Accessibilité : ordre DOM inchangé, focus et libellés conservés, réduction des mouvements conservée, contraste lisible sur les nouvelles surfaces claires et sombres.
+
+## Résultats ciblés
+
+- `PASS_TARGETED_LAYERED_GROWTH_CONTRACT`
+- `PASS_TARGETED_LIVING_WORLD_OFFLINE_STATE`
+- Revue statique ciblée : 23 routes × 2 viewports, aucun débordement horizontal ni contrôle rogné.
+- Contrôle visuel desktop : passé sur les familles Accueil, Catalogue, Documentation et Téléchargements.
+- Contrôle visuel mobile : passé sur Accueil, Catalogue, Documentation, Communauté, GTA VI et RDR2.
+- Défaut corrigé pendant la passe : le texte recouvrait initialement les compagnons ; l’image est désormais présentée sans obstruction avant le récit.
+- Défauts corrigés pendant la passe secondaire : contraste insuffisant du contrat Catalogue, marque illisible dans l’en-tête clair, héros mobiles sans image trop longs et familles GTA VI/RDR2 insuffisamment distinctes.
+
+## Findings
+
+Aucun finding P0, P1 ou P2 restant sur le périmètre de la refonte canonique et de son extension aux pages secondaires. La validation artistique humaine demeure une décision externe à cette QA d’implémentation.
+
+## Passe ciblée — Premium Form System
+
+- Périmètre : Creator Studio, Communauté, Profils et filtres du Catalogue, inspectés à 1440 × 1000 et 390 × 844.
+- Matériaux : champs ivoire chaud, texte forêt et accents cuivre/bleu rivière ; suppression des gros fonds gris autour des filtres et des groupes du Studio.
+- Hiérarchie : labels courts en petites capitales, aide en casse naturelle, groupes séparés par des filets fins et statuts présentés comme des reçus discrets.
+- États : hover cuivre, focus visible double contraste, active, disabled, `aria-invalid=true` et succès déclaratif couverts sans modifier la validation métier.
+- Contrôles spécialisés : fichiers, cases à cocher, zones de texte et sélecteurs conservent leur sémantique native et leurs cibles tactiles.
+- Mobile : contrôles de 48 px minimum, marges et espacements resserrés sans masquer de contenu ; aucun débordement horizontal sur les quatre pages.
+- Accessibilité : labels et ordre DOM inchangés, focus clavier conservé, `prefers-reduced-motion` et `forced-colors` explicitement préservés.
+- Verrou artistique : hero canonique inchangé ; aucune couche Loup/Dragon séparée ; `visualGrowth.status=awaiting-assets` confirmé.
+- Revue vidéo exhaustive : une première capture des 23 routes a révélé des libellés forts, liens de sources et résumés de disclosures encore trop clairs sur ivoire ; la couche canonique force désormais encre forêt/cuivre dans ces notes, y compris en mobile et forced-colors.
+
+final result: passed
