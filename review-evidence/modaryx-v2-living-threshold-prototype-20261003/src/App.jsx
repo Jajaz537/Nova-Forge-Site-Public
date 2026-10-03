@@ -22,6 +22,16 @@ const gameItems = [
 
 const creatorItems = ["Atelier Boréal", "Lueur Collective", "Les Cartographes"];
 const collectionItems = ["Exploration sereine", "Graphismes essentiels", "Immersion légère"];
+const collectionDetails = [
+  { title:"Exploration sereine", curator:"Atelier Boréal", game:"Aetherlands", version:"1.4.2", items:4, category:"Exploration", note:"Parcours, ambiance et confort visuel.", pos:"0% 0%" },
+  { title:"Graphismes essentiels", curator:"Les Cartographes", game:"Aetherlands", version:"1.4.2", items:3, category:"Graphismes", note:"Sélection visuelle sobre pour cette version.", pos:"100% 0%" },
+  { title:"Immersion légère", curator:"Lueur Collective", game:"Aetherlands", version:"1.4.x", items:3, category:"Immersion", note:"Petits ajouts d’ambiance sans pack installable.", pos:"0% 100%" },
+];
+const creatorDetails = [
+  { name:"Atelier Boréal", role:"Créateur indépendant", focus:"Exploration & immersion", creations:["Sentiers de l’aube","Rivages du couchant"], pos:"0% 0%" },
+  { name:"Lueur Collective", role:"Studio de démonstration", focus:"Environnements & gameplay", creations:["Vestiges suspendus","Brumes des hautes terres"], pos:"50% 0%" },
+  { name:"Les Cartographes", role:"Équipe de démonstration", focus:"Graphismes & quêtes", creations:["Sommets silencieux","Le pont des veilleurs"], pos:"100% 0%" },
+];
 
 function Logo() {
   return <a className="logo" href="#top" aria-label="MODARYX — accueil">MODARY<span>X</span></a>;
@@ -103,7 +113,7 @@ function GamesIndex({ onOpenGame }) {
   </main>;
 }
 
-function GlobalSearch({ onOpenContent, onOpenGame }) {
+function GlobalSearch({ onOpenContent, onOpenGame, onOpenCreators, onOpenCollections }) {
   const [query,setQuery]=useState("");
   const normalized=query.trim().toLocaleLowerCase("fr");
   const games=gameItems.filter(x=>x.title.toLocaleLowerCase("fr").includes(normalized));
@@ -123,8 +133,8 @@ function GlobalSearch({ onOpenContent, onOpenGame }) {
     {hasQuery && total>0 && <div className="search-groups" aria-live="polite">
       <section><div className="search-group-title"><h2>Jeux</h2><span>{games.length}</span></div>{games.map(game=><button className="search-result-row" key={game.title} onClick={game.title==="Aetherlands"?onOpenGame:undefined} disabled={game.title!=="Aetherlands"}><GameController/><span><strong>{game.title}</strong><small>{game.status}</small></span><ArrowRight/></button>)}</section>
       <section><div className="search-group-title"><h2>Mods & contenus</h2><span>{contents.length}</span></div>{contents.map(item=><button className="search-result-row" key={item.title} onClick={()=>onOpenContent(item)}><MagnifyingGlass/><span><strong>{item.title}</strong><small>{item.kind} · {item.creator}</small></span><ArrowRight/></button>)}</section>
-      <section><div className="search-group-title"><h2>Créateurs</h2><span>{creators.length}</span></div>{creators.map(name=><div className="search-result-static" key={name}><UsersThree/><span><strong>{name}</strong><small>Créateur de démonstration</small></span></div>)}</section>
-      <section><div className="search-group-title"><h2>Collections</h2><span>{collections.length}</span></div>{collections.map(name=><div className="search-result-static" key={name}><Stack/><span><strong>{name}</strong><small>Collection de démonstration</small></span></div>)}</section>
+      <section><div className="search-group-title"><h2>Créateurs</h2><span>{creators.length}</span></div>{creators.map(name=><button className="search-result-row" key={name} onClick={onOpenCreators}><UsersThree/><span><strong>{name}</strong><small>Créateur de démonstration</small></span><ArrowRight/></button>)}</section>
+      <section><div className="search-group-title"><h2>Collections</h2><span>{collections.length}</span></div>{collections.map(name=><button className="search-result-row" key={name} onClick={onOpenCollections}><Stack/><span><strong>{name}</strong><small>Collection de démonstration</small></span><ArrowRight/></button>)}</section>
     </div>}
   </main>;
 }
@@ -153,6 +163,35 @@ function GameHub({ onOpen }) {
 
 function Discover({ onOpen }) {
   return <main><section className="editorial-hero"><div><span className="kicker">Votre monde évolue</span><h1>Redécouvrez vos jeux,<br/>une possibilité à la fois.</h1><p>Explorez des contenus, vérifiez leur compatibilité et composez des expériences qui vous ressemblent.</p><button className="primary">Découvrir maintenant <ArrowRight/></button></div></section><section className="page-section"><div className="section-heading"><div><span className="kicker">En ce moment</span><h2>Des mondes à réinventer</h2></div></div><div className="content-grid editorial">{contentItems.slice(0,3).map(item => <ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div></section></main>;
+}
+
+function CollectionsPage() {
+  const [query,setQuery]=useState("");
+  const [category,setCategory]=useState("Toutes");
+  const categories=["Toutes",...new Set(collectionDetails.map(x=>x.category))];
+  const visible=useMemo(()=>{
+    const q=query.trim().toLocaleLowerCase("fr");
+    return collectionDetails.filter(x=>(category==="Toutes"||x.category===category) && (x.title+" "+x.curator+" "+x.note).toLocaleLowerCase("fr").includes(q));
+  },[query,category]);
+  return <main className="page-section collections-page">
+    <span className="kicker">Collections</span><h1>Sélections de mods à organiser et partager.</h1>
+    <p className="page-intro">Une Collection est une sélection éditoriale. Elle n’est pas automatiquement installable et reste distincte d’un Modpack ou d’un Profil de jeu.</p>
+    <div className="collection-tools"><label className="catalog-search"><MagnifyingGlass/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher une collection" aria-label="Rechercher une collection"/></label><div className="filter-chips">{categories.map(value=><button key={value} className={category===value?"selected":""} onClick={()=>setCategory(value)}>{value}</button>)}</div></div>
+    <div className="collection-grid">{visible.map(item=><article className="collection-card" key={item.title}><Media pos={item.pos}/><div><span className="demo-label">Collection de démonstration</span><h2>{item.title}</h2><p>{item.note}</p><dl><div><dt>Curateur</dt><dd>{item.curator}</dd></div><div><dt>Jeu</dt><dd>{item.game} {item.version}</dd></div><div><dt>Contenus</dt><dd>{item.items} éléments de démonstration</dd></div><div><dt>Capacité</dt><dd>Sélection organisée</dd></div></dl><div className="collection-capability"><strong>Installation non disponible</strong><span>Aucun manifeste installable ni runtime MODARYX Forge n’est simulé.</span></div><button className="quiet">Voir la sélection <ArrowRight/></button></div></article>)}</div>
+    {visible.length===0&&<div className="empty"><Stack/><h3>Aucune collection trouvée</h3><p>Essayez un autre terme ou une autre catégorie.</p><button onClick={()=>{setQuery("");setCategory("Toutes")}}>Réinitialiser</button></div>}
+  </main>;
+}
+
+function CreatorsPage() {
+  const [query,setQuery]=useState("");
+  const visible=creatorDetails.filter(x=>(x.name+" "+x.role+" "+x.focus).toLocaleLowerCase("fr").includes(query.trim().toLocaleLowerCase("fr")));
+  return <main className="page-section creators-page">
+    <span className="kicker">Créateurs</span><h1>Créateurs, équipes et studios.</h1>
+    <p className="page-intro">Identités publiques et créations restent distinctes des rôles d’administration MODARYX. Aucun badge de vérification n’est simulé.</p>
+    <label className="catalog-search creators-search"><MagnifyingGlass/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher un créateur ou un studio" aria-label="Rechercher un créateur ou un studio"/></label>
+    <div className="creator-index-grid">{visible.map(item=><article className="creator-index-card" key={item.name}><Media pos={item.pos}/><div><div className="creator-avatar"><UsersThree/></div><span className="demo-label">Identité de démonstration</span><h2>{item.name}</h2><p>{item.role} · {item.focus}</p><div className="creator-trust-note"><strong>Vérification</strong><span>Aucune vérification réelle associée à ce prototype.</span></div><h3>Créations présentées</h3><ul>{item.creations.map(name=><li key={name}>{name}</li>)}</ul><button className="quiet">Voir les créations <ArrowRight/></button></div></article>)}</div>
+    {visible.length===0&&<div className="empty"><UsersThree/><h3>Aucun créateur trouvé</h3><p>Essayez un autre nom ou domaine.</p><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>}
+  </main>;
 }
 
 function Catalog({ onOpen }) {
@@ -287,9 +326,11 @@ export function App() {
   let screen;
   if (detail) screen=<Detail item={detail} onBack={()=>setDetail(null)}/>;
   else if(active==='Découvrir') screen=<Discover onOpen={openContent}/>;
-  else if(active==='Recherche') screen=<GlobalSearch onOpenContent={openContent} onOpenGame={openGameHub}/>;
+  else if(active==='Recherche') screen=<GlobalSearch onOpenContent={openContent} onOpenGame={openGameHub} onOpenCreators={()=>navigate('Créateurs')} onOpenCollections={()=>navigate('Collections')}/>;
   else if(active==='Jeux' && !gameHubOpen) screen=<GamesIndex onOpenGame={openGameHub}/>;
-  else if(active==='Mods & contenus' || active==='Collections' || active==='Créateurs') screen=<Catalog onOpen={openContent}/>;
+  else if(active==='Mods & contenus') screen=<Catalog onOpen={openContent}/>;
+  else if(active==='Collections') screen=<CollectionsPage/>;
+  else if(active==='Créateurs') screen=<CreatorsPage/>;
   else if(active==='Communauté') screen=<Community/>;
   else if(active==='Créer') screen=<CreatorStudio/>;
   else if(active==='Bibliothèque') screen=<Library/>;
