@@ -227,13 +227,15 @@ Les états techniques internes peuvent rester `catalog-enabled` et `distribution
 
 Ces libellés restent à tester humainement.
 
-## 14. “Mods & Plugins” comme entrée parapluie
+## 14. Parapluie de contenus
 
-Le libellé primaire reste **Mods & Plugins** pour la navigation.
+Après benchmark externe puis mini-test humain P01, le libellé utilisateur provisoire préféré devient **Mods & contenus**.
 
-Quand la surface le permet, ajouter une microcopy explicite :
+Microcopy :
 
-> Mods, plugins, addons, scripts, outils et autres contenus compatibles.
+> Mods, plugins, addons, scripts, maps, shaders, presets, outils et autres contenus compatibles.
+
+**Mods & Plugins** reste une formulation historique/de travail mais n'est plus le candidat primaire.
 
 Les filtres doivent exposer la taxonomie complète du jeu courant.
 
@@ -295,7 +297,7 @@ Tester :
 - Créateur vs Équipe ;
 - Support vs Signalement ;
 - Catalogue disponible vs Distribution disponible ;
-- “Mods & Plugins” comme entrée parapluie ;
+- “Mods & contenus” comme entrée parapluie ;
 - trouvabilité de “Profils de jeu” dans les parcours ;
 - microcopy et capacité de Collection ;
 - compréhension de Bibliothèque.
@@ -325,7 +327,7 @@ Ne jamais afficher ce libellé seul. Toujours qualifier la dimension :
 
 Le test humain P01 ne comprend pas naturellement **Mods & Plugins** comme englobant addons, scripts, outils, maps, shaders et presets.
 
-Conséquence : ce libellé reste **NON STABILISÉ comme entrée parapluie finale**. Il peut rester un libellé de travail, mais une alternative plus large doit être testée avant le gel high-fi.
+Conséquence : **Mods & Plugins** n'est plus retenu comme candidat primaire. Le mini-test comparatif P01 préfère désormais **Mods & contenus**.
 
 
 ## 22. Parapluie de contenus — benchmark multi-gaming
@@ -337,6 +339,18 @@ Candidats prioritaires à tester humainement :
 2. **Mods & contenus**
 3. **Créations**
 
-Décision actuelle : **Mods & Plugins** reste un libellé historique/de travail mais n'est pas le parapluie final validé.
+Décision actuelle : **Mods & contenus** devient le libellé utilisateur provisoire préféré après choix humain P01. **Contenus de jeu** et **Créations** restent des alternatives documentées, non retenues à ce stade.
 
 Référence : `docs/MODARYX-V2-MULTIGAMING-MODDING-TERMINOLOGY-BENCHMARK-20261003.md`.
+
+
+## 23. Mini-test humain parapluie P01
+
+P01 a choisi **B — Mods & contenus** parmi :
+- Contenus de jeu ;
+- Mods & contenus ;
+- Créations.
+
+Document : `docs/MODARYX-V2-HUMAN-CONTENT-UMBRELLA-MINITEST-P01-20261003.md`.
+
+**État : préférence humaine réelle obtenue pour P01 / validation humaine globale EN COURS.**
