@@ -38,7 +38,7 @@ Branche V2 :
 
 HEAD observé avant cette mise à jour :
 
-`a3774cae7742fd46280c7f2ca7d1979c98c171af`
+`c755ffb9d7c0b4298e0f23bcc7e6337f515ae54d`
 
 PR :
 
@@ -802,6 +802,11 @@ Aucun front V2 production n'a été écrit.
 - Script low-fi humain : **MIS À JOUR — 14 tâches, PREUVE MANQUANTE pour exécution**
 - Kit validation humaine IA : **TERMINÉ — protocole prêt, PREUVE MANQUANTE pour exécution**
 - Simulation experte multi-profils du tree test : **TERMINÉ — ne remplace pas une validation humaine**
+- Recherche UX indépendante + 80 simulations : **TERMINÉ — 5 profils × 16 tâches**
+  - document : `docs/MODARYX-V2-INDEPENDENT-UX-RESEARCH-TREE-SIMULATION-20261003.md`
+  - sources actuelles étudiées : Nexus Mods, CurseForge, Modrinth, Thunderstore + signaux communautaires
+  - risque majeur détecté : `Collection` peut être interprétée comme installable par des utilisateurs habitués à Nexus
+  - convergence : parcours jeu-d'abord, compatibilité/prérequis proactifs, profil expliqué, recherche globale multi-type
   - document : `docs/MODARYX-V2-TREE-TEST-EXPERT-SIMULATION-20261003.md`
   - contradictions internes graves : aucune détectée
   - clarifications sûres intégrées : Compatibilité et prérequis, Catalogue consultable, Mods & Plugins parapluie, Profils de jeu, Fichiers de cette version
@@ -830,7 +835,7 @@ Aucun front V2 production n'a été écrit.
    - matérialiser Mobile Game Hub ;
    - micro-vérifier clipping/overflow.
 7. QA mécanique low-fi fermée ; simulation experte multi-profils fermée avec clarifications sûres intégrées.
-8. Tree testing humain : P01 réel terminé ; intégrer ses findings, puis comparer avec les profils Work/recherche et, si possible, d'autres participants réels. Ne pas généraliser la preuve P01.
+8. Tree testing humain : P01 réel terminé. Recherche indépendante interne 5×16 terminée. Attendre/comparer le rapport Work, puis confronter les convergences et divergences sans généraliser P01 ni les simulations IA.
 9. Continuer vers la direction artistique exploratoire et le design system préparatoire ; ne déclarer aucun high-fi humainement validé sans preuve réelle.
 10. Ne pas toucher au front public ni à `main` sans stratégie contrôlée.
 
