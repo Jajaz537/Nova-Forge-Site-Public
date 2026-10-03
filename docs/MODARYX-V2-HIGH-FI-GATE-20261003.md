@@ -231,6 +231,6 @@ Convergences suffisantes pour poursuivre l'exploration réversible :
 - Bibliothèque comme espace personnel ;
 - suppression de **Non vérifié** générique.
 
-Le **seul arbitrage terminologique majeur encore ouvert** est **Profils de jeu** vs **Configurations de jeu**.
+L'arbitrage **Profils de jeu** vs **Configurations de jeu** est **TERMINÉ** : **Profils de jeu** est retenu comme décision produit.
 
-Ce point ne bloque pas l'exploration artistique, mais bloque le gel final de la microcopy.
+Aucun blocker terminologique majeur ne subsiste sur ce point.
