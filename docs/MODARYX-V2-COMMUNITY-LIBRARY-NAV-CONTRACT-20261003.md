@@ -35,7 +35,7 @@ La bibliothèque personnelle sépare clairement :
 - suivis
 - collections
 - modpacks
-- profils de jeu (Profile/Loadout interne)
+- configurations de jeu (`Profile/Loadout` interne)
 - recherches sauvegardées
 - installations si un manager est réellement connecté
 
@@ -100,6 +100,10 @@ Il ne remplace jamais les mots attendus par l'utilisateur comme Jeux, Mods, Coll
 
 ## Recherche
 
+La recherche doit rendre sa portée explicite et réversible :
+- **Rechercher dans ce jeu** pour une recherche contextualisée ;
+- **Rechercher partout sur MODARYX** pour la recherche globale.
+
 La recherche doit rester accessible :
 - depuis le header desktop
 - immédiatement sur mobile
@@ -134,7 +138,7 @@ Community :
 Library :
 - aucun favori
 - aucune collection
-- aucun profil
+- aucune configuration de jeu
 - manager non connecté
 
 Chaque état vide propose une prochaine action utile.
@@ -177,8 +181,10 @@ Community, Library et navigation ne passent en high-fi que lorsque :
 
 ## Clarifications terminologiques sûres
 
-Dans la Bibliothèque, le libellé utilisateur recommandé est **Profils de jeu** avec la description **Configurations enregistrées de mods et versions**.
+Dans la Bibliothèque, le libellé utilisateur provisoire recommandé est **Configurations de jeu** avec la description **Mods et versions actifs enregistrés**.
 
-Le terme `Profile/Loadout` reste réservé au domaine interne lorsque nécessaire.
+Le terme `Profile/Loadout` reste réservé au domaine interne. `Profils de jeu` peut rester un synonyme secondaire/historique pendant la transition terminologique.
 
-**État : intégré suite à simulation experte multi-profils ; validation humaine toujours PREUVE MANQUANTE.**
+La Bibliothèque doit afficher immédiatement ses sous-objets : Favoris, Suivis, Collections, Modpacks, Configurations de jeu et recherches sauvegardées, afin de ne pas obliger l'utilisateur à deviner ce qu'elle contient.
+
+**État : convergence P01 + Work + étude indépendante intégrée ; libellé final encore À REVALIDER humainement.**
