@@ -178,6 +178,21 @@ try{
   await clickText(".studio-nav button","Projects");
   await waitText("Projet sans titre");
 
+  await clickText(".global-nav button","Collections");
+  await waitText("Sélections de mods à organiser et partager.");
+  await fill(".collections-page .catalog-search input","graphismes");
+  assertEqual(await count(".collection-card"),1,"collections query count");
+  await clickText(".filter-chips button","Toutes");
+  await fill(".collections-page .catalog-search input","");
+  assertEqual(await count(".collection-card"),3,"collections reset count");
+
+  await clickText(".global-nav button","Créateurs");
+  await waitText("Créateurs, équipes et studios.");
+  await fill(".creators-search input","boréal");
+  assertEqual(await count(".creator-index-card"),1,"creators query count");
+  await fill(".creators-search input","");
+  assertEqual(await count(".creator-index-card"),3,"creators reset count");
+
   await clickText(".global-nav button","Mods & contenus");
   await waitText("Catalogue global");
   await fill(".catalog-search input","sommets");
@@ -216,6 +231,13 @@ try{
   await waitText("Creator Studio");
   await clickText(".studio-nav button","Releases");
   await waitText("Préparer une release");
+
+  await clickAria("Ouvrir le menu");
+  await clickText(".global-nav button","Collections");
+  await waitText("Sélections de mods à organiser et partager.");
+  await clickAria("Ouvrir le menu");
+  await clickText(".global-nav button","Créateurs");
+  await waitText("Créateurs, équipes et studios.");
 
   console.log("PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS");
 } finally {
