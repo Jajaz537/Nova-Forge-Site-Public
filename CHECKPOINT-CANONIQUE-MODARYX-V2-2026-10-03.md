@@ -1060,15 +1060,10 @@ Aucun PASS High-Fi final n'est déduit de cette micro-preuve.
 - `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
 - desktop : Game Hub, Home, Catalog, Content Detail, Library, Community, Creator Studio ;
 - mobile : Game Hub, Home, Catalog, Content Detail.
-- inspection : cohérence de famille visuelle conservée ; Creator Studio reste une couverture exploratoire minimale, non une surface finale.
+- inspection historique : cohérence de famille visuelle conservée ; cette observation sur le Creator Studio minimal a depuis été dépassée par l’expansion ciblée du 4 octobre.
 - cette preuve rend possible la revue humaine multi-écrans mais ne la remplace pas.
 
-Prochains écarts produit prioritaires du prototype :
-1. Games Index réel ;
-2. Global Search réel ;
-3. Catalogue avec requête/filtres/tri/résultats/reset/états réellement exercés ;
-4. Content Detail avec navigation Releases/Files/Requirements/Changelog/Support/Permissions ;
-5. Library et Creator Studio approfondis selon critères d'acceptation.
+Prochains écarts produit historiques de cette étape : Games Index, Global Search, Catalog, Content Detail, Library et Creator Studio. Ces surfaces ont depuis été approfondies et micro-prouvées ; voir la section d'expansion accélérée ci-dessous.
 
 
 ## Micro-preuve parcours produit Living Threshold
@@ -1093,3 +1088,53 @@ Prochains écarts produit prioritaires du prototype :
 - Catalog : **EN COURS — prototype fonctionnel pour recherche/filtre/tri/reset ; autres états/quick view encore à approfondir**
 - données : **démonstration explicite uniquement**
 - backend réel / recherche distante / production : **PREUVE MANQUANTE / non implémenté**
+
+
+## Expansion accélérée des surfaces Living Threshold — 4 octobre 2026
+
+**EN COURS — prototype exploratoire élargi / aucun PASS production**
+
+Dernier micro-run consolidé de cette tranche :
+- workflow : `MODARYX V2 Living Threshold Visual Proof`
+- run : `37160578411` — **SUCCESS**
+- commit capturé : `94fbc061d0d2915c1faf9376a01342d7caf92737`
+- artifact : `11286779471`
+- digest : `sha256:fe9629a3b042508ddd79711371d62c319c12c8d97c7db0e5eb56178a34e79046`
+- `KEYBOARD_REACHABLE 36 / 36`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 22`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Surfaces maintenant approfondies dans le prototype :
+- **Games Index** : recherche, support state, ouverture Game Hub ;
+- **Global Search** : résultats multi-type et accès mobile ;
+- **Catalog** : requête, filtres, tri, reset, no-results/recovery ;
+- **Content Detail** : décision avant ajout + tabs Fichiers / Versions / Compatibilité et prérequis / Changelog / Support / Permissions ;
+- **Library** : Favoris / Suivis / Collections / Profils de jeu / Recherches enregistrées, états local/cloud/manager explicites ;
+- **Creator Studio** : Dashboard / Projects / Releases / Upload / Analytics / Support / Reports / Team / Settings ; brouillon local et services absents non simulés ;
+- **Collections** : surface dédiée, filtres propres, curateur, jeu/version, capacité explicite `Sélection organisée` + `Installation non disponible` ;
+- **Créateurs** : surface dédiée, identité publique de démonstration, rôle/focus/créations, aucune vérification simulée ;
+- **Community** : Support / Questions / Discussions / Studios-équipe / Activité ; brouillon local non envoyé, modération avancée non simulée ;
+- **Mobile** : Bibliothèque rendue accessible depuis le menu utilitaire ; captures dédiées Library / Creator Studio / Collections / Créateurs / Community.
+
+Erreur fermée pendant cette tranche :
+- capture Library attendait l'ancienne microcopy `Retrouvez vos jeux` ;
+- erreur exacte isolée dans le script de capture ;
+- correction ciblée vers la microcopy actuelle ;
+- micro-proof de la ligne desktop/mobile ;
+- run suivant **SUCCESS**.
+
+Ce que ces preuves ne prouvent toujours pas :
+- backend réel ;
+- production V2 ;
+- téléchargement/installation MODARYX Forge ;
+- données réelles ;
+- screen reader réel ;
+- appareils physiques ;
+- revue humaine multi-écrans complète ;
+- comparaison normalisée à la référence visuelle approuvée.
+
+**Prochain axe interne : fermer les surfaces encore non matérialisées/peu profondes (compte, notifications/préférences, onboarding, états critiques transverses) puis seulement préparer le passage du prototype vers le frontend V2 de production.**
