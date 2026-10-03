@@ -46,8 +46,10 @@ function Topbar({ active, onNavigate }) {
     <nav className={open ? "global-nav open" : "global-nav"} aria-label="Navigation principale">
       {navItems.map(item => <button key={item} className={active === item ? "active" : ""} onClick={() => { onNavigate(item); setOpen(false); }}>{item}</button>)}
       <button className="mobile-nav-utility" onClick={() => { onNavigate("Bibliothèque"); setOpen(false); }}><BookOpen />Bibliothèque</button>
+      <button className="mobile-nav-utility" onClick={() => { onNavigate("Notifications"); setOpen(false); }}><Bell />Notifications</button>
+      <button className="mobile-nav-utility" onClick={() => { onNavigate("Compte"); setOpen(false); }}><UsersThree />Compte</button>
     </nav>
-    <div className="top-actions"><button aria-label="Recherche globale" onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button><button aria-label="Bibliothèque" onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button aria-label="Notifications"><Bell /></button><button className="avatar" aria-label="Compte">M</button></div>
+    <div className="top-actions"><button aria-label="Recherche globale" onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button><button aria-label="Bibliothèque" onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button aria-label="Notifications" onClick={() => onNavigate("Notifications")}><Bell /></button><button className="avatar" aria-label="Compte" onClick={() => onNavigate("Compte")}>M</button></div>
   </header>;
 }
 
@@ -314,6 +316,31 @@ function CreatorStudio() {
   </main>;
 }
 
+function AccountCenter({ initialTab="Compte" }) {
+  const [tab,setTab]=useState(initialTab);
+  const [onboarding,setOnboarding]=useState(false);
+  const [step,setStep]=useState(0);
+  const [prefs,setPrefs]=useState({ambience:true,reduced:false,compact:false});
+  const tabs=["Compte","Profil","Confidentialité","Notifications","Apparence","Accessibilité","Données locales"];
+  const onboardingSteps=[
+    ["Jeux","Choisissez quelques jeux pour contextualiser la découverte. Aucun choix n’est envoyé."],
+    ["Types de contenus","Indiquez vos préférences de découverte, sans bloquer le reste du catalogue."],
+    ["Collections et Profils de jeu","Une Collection organise et partage ; un Profil de jeu décrit une configuration personnelle."],
+    ["Bibliothèque","Favoris, suivis, Collections, Profils de jeu et recherches restent séparés et privés par défaut."],
+  ];
+  const setPref=(key)=>setPrefs(current=>({...current,[key]:!current[key]}));
+  const panel={
+    "Compte": <section className="account-panel"><span className="kicker">Compte</span><h2>Vous explorez MODARYX en mode invité.</h2><p>Recherche, jeux, contenus, Collections publiques et profils créateurs restent accessibles sans compte.</p><div className="session-state"><strong>Session</strong><span>Anonyme · aucune authentification simulée</span></div><div className="account-actions"><button className="primary" onClick={()=>{setOnboarding(true);setStep(0)}}>Découvrir l’onboarding joueur <ArrowRight/></button><button className="quiet" disabled>Se connecter — backend indisponible</button></div>{onboarding&&<div className="onboarding-card" aria-live="polite"><div><span className="kicker">Onboarding joueur · {step+1}/{onboardingSteps.length}</span><h3>{onboardingSteps[step][0]}</h3><p>{onboardingSteps[step][1]}</p></div><div className="onboarding-actions"><button className="quiet" onClick={()=>setOnboarding(false)}>Passer l’onboarding</button><button className="primary" onClick={()=>step<onboardingSteps.length-1?setStep(step+1):setOnboarding(false)}>{step<onboardingSteps.length-1?"Suivant":"Terminer"}</button></div></div>}</section>,
+    "Profil": <section className="account-panel"><span className="kicker">Profil public</span><h2>Aucun profil public actif</h2><p>Compte, profil public et capacité créateur restent trois concepts distincts. Une session réelle sera requise pour publier un profil.</p><div className="unavailable-state"><strong>Édition distante indisponible</strong><span>Les changements non sauvegardés ne doivent jamais être perdus lorsque le backend sera connecté.</span></div></section>,
+    "Confidentialité": <section className="account-panel"><span className="kicker">Confidentialité</span><h2>Privé par défaut</h2><div className="privacy-grid">{["Bibliothèque","Favoris","Profils de jeu","Brouillons","Recherches enregistrées"].map(value=><article key={value}><strong>{value}</strong><span>Privé / local par défaut</span></article>)}</div><p className="settings-note">Tout partage devra demander une action explicite.</p></section>,
+    "Notifications": <section className="account-panel notifications-center"><span className="kicker">Notifications</span><h2>Centre de notifications</h2><div className="empty notification-empty"><Bell/><h3>Aucune notification réelle</h3><p>Ce prototype n’invente ni compteur, ni événement distant.</p></div><div className="channel-grid"><article><strong>In-app</strong><span>Structure prête · aucun événement réel</span></article><article><strong>Email</strong><span>Indisponible — infrastructure non connectée</span></article><article><strong>Push</strong><span>Indisponible — infrastructure non connectée</span></article></div></section>,
+    "Apparence": <section className="account-panel"><span className="kicker">Apparence</span><h2>Préférences locales</h2><div className="settings-list"><button role="switch" aria-checked={prefs.ambience} onClick={()=>setPref("ambience")}><span><strong>Ambiance vivante</strong><small>Préférence locale de démonstration</small></span><em>{prefs.ambience?"Activée":"Désactivée"}</em></button><button role="switch" aria-checked={prefs.compact} onClick={()=>setPref("compact")}><span><strong>Densité compacte</strong><small>Préférence locale de démonstration</small></span><em>{prefs.compact?"Activée":"Désactivée"}</em></button></div></section>,
+    "Accessibilité": <section className="account-panel"><span className="kicker">Accessibilité</span><h2>Accessible sans réglage spécial</h2><p>Les préférences complètent le produit mais ne remplacent jamais un design accessible par défaut.</p><div className="settings-list"><button role="switch" aria-checked={prefs.reduced} onClick={()=>setPref("reduced")}><span><strong>Effets réduits</strong><small>Préférence locale de démonstration</small></span><em>{prefs.reduced?"Activés":"Désactivés"}</em></button></div><div className="accessibility-proof"><strong>Prototype actuel</strong><span>Focus visible 3 px · cibles tactiles ≥44 px · règle prefers-reduced-motion présente.</span></div></section>,
+    "Données locales": <section className="account-panel"><span className="kicker">Données locales</span><h2>Ce navigateur</h2><div className="data-list"><div><strong>Favoris de démonstration</strong><span>Local</span></div><div><strong>Profils de jeu de démonstration</strong><span>Local</span></div><div><strong>Brouillons de démonstration</strong><span>Local</span></div><div><strong>Migration legacy</strong><span>Non exécutée</span></div></div><button className="quiet" disabled>Exporter — fonction réelle non connectée</button></section>,
+  };
+  return <main className="page-section account-center"><span className="kicker">Paramètres</span><h1>Compte & préférences</h1><p className="page-intro">Contrôlez session, confidentialité, notifications et données locales sans transformer une capacité absente en promesse.</p><div className="account-shell"><nav className="account-nav" aria-label="Sections du compte">{tabs.map(value=><button key={value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>{panel[tab]}</div></main>;
+}
+
 function Community() {
   const [tab,setTab]=useState("Support");
   const [draft,setDraft]=useState(false);
@@ -344,6 +371,8 @@ export function App() {
   else if(active==='Collections') screen=<CollectionsPage/>;
   else if(active==='Créateurs') screen=<CreatorsPage/>;
   else if(active==='Communauté') screen=<Community/>;
+  else if(active==='Notifications') screen=<AccountCenter key="notifications" initialTab="Notifications"/>;
+  else if(active==='Compte') screen=<AccountCenter key="account" initialTab="Compte"/>;
   else if(active==='Créer') screen=<CreatorStudio/>;
   else if(active==='Bibliothèque') screen=<Library/>;
   else screen=<GameHub onOpen={openContent}/>;
