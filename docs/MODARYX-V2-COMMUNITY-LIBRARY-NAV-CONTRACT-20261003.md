@@ -35,7 +35,7 @@ La bibliothèque personnelle sépare clairement :
 - suivis
 - collections
 - modpacks
-- configurations de jeu (`Profile/Loadout` interne)
+- profils de jeu (`Profile/Loadout` interne)
 - recherches sauvegardées
 - installations si un manager est réellement connecté
 
@@ -138,7 +138,7 @@ Community :
 Library :
 - aucun favori
 - aucune collection
-- aucune configuration de jeu
+- aucun profil de jeu
 - manager non connecté
 
 Chaque état vide propose une prochaine action utile.
@@ -181,10 +181,17 @@ Community, Library et navigation ne passent en high-fi que lorsque :
 
 ## Clarifications terminologiques sûres
 
-Dans la Bibliothèque, le libellé utilisateur provisoire recommandé est **Configurations de jeu** avec la description **Mods et versions actifs enregistrés**.
+Après test humain P01, le libellé utilisateur provisoire préféré redevient **Profils de jeu**, avec la description **Configurations enregistrées de mods et versions**.
 
-Le terme `Profile/Loadout` reste réservé au domaine interne. `Profils de jeu` peut rester un synonyme secondaire/historique pendant la transition terminologique.
+Le terme `Profile/Loadout` reste réservé au domaine interne. **Configurations de jeu** reste une alternative issue des simulations IA mais n'est pas le choix humain P01.
 
-La Bibliothèque doit afficher immédiatement ses sous-objets : Favoris, Suivis, Collections, Modpacks, Configurations de jeu et recherches sauvegardées, afin de ne pas obliger l'utilisateur à deviner ce qu'elle contient.
+La Bibliothèque doit afficher immédiatement ses sous-objets : Favoris, Suivis, Collections, Modpacks, Profils de jeu et recherches sauvegardées, afin de ne pas obliger l'utilisateur à deviner ce qu'elle contient.
 
-**État : convergence P01 + Work + étude indépendante intégrée ; libellé final encore À REVALIDER humainement.**
+**État : P01 comprend Bibliothèque comme espace personnel ; trouvabilité de Profils de jeu à renforcer depuis le Game Hub.**
+
+
+## Mods & Plugins — statut humain
+
+P01 comprend ce libellé comme limité aux mods et plugins. Il ne doit donc pas être considéré comme un parapluie final pour addons, scripts, outils, maps, shaders et presets sans test d'alternative.
+
+**État : À REVALIDER avant gel high-fi.**
