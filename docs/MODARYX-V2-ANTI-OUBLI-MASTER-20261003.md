@@ -286,7 +286,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | High-fi final | BLOQUÉ volontairement ; exploration réversible autorisée | HIGH-FI-GATE |
 | Direction artistique exploratoire | TERMINÉ — option 2 sélectionnée, palette hybride 2+3, prototype isolé | LIVING-THRESHOLD-DESIGN-SYSTEM / review-evidence |
 | Design system préparatoire | TERMINÉ — tokens, composants, responsive, a11y, motion, identité documentés | LIVING-THRESHOLD-DESIGN-SYSTEM |
-| QA visuelle archivable du prototype | BLOQUÉE — capture navigateur inspectée mais export fichier/comparaison normalisée manquants | review-evidence/.../design-qa.md |
+| QA visuelle archivable du prototype | EN COURS — export navigateur + a11y ciblée + flows + 37 captures archivées ; comparaison normalisée source + humain/screen-reader/device encore manquants | review-evidence/.../design-qa.md |
 | Direction artistique finale | BLOQUÉ volontairement — sélection exploratoire ≠ gel high-fi | HIGH-FI-GATE |
 | Tree test humain | EN COURS — P01 réel + mini-test terminologique P01 terminés, validation globale incomplète | HUMAN-MINI-TREE-TEST-P01 / HUMAN-TERMINOLOGY-MINITEST-P01 / CROSS-ANALYSIS |
 
@@ -451,3 +451,44 @@ Références étudiées notamment : ModDropV, Vortex/Nexus, Mod Organizer 2, Pri
 - `Nova Forge` = historique/legacy technique jusqu'à classification ; aucun remplacement global aveugle.
 
 **Pont MODARYX ↔ MODARYX Forge : EN COURS — contrat à formaliser / runtime PREUVE MANQUANTE.**
+
+
+## 29. Expansion produit accélérée — preuve consolidée 2026-10-04
+
+**TERMINÉ pour le prototype ciblé / À MAINTENIR jusqu'à la VF**
+
+Preuve fraîche :
+- run `37161527706` — **SUCCESS**
+- commit `03858bea92232b3040d76923e53d9a71d822712c`
+- artifact `11288295345`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 37`
+- desktop/mobile overflow : 0
+- keyboard targeted proof : 32/32
+
+À ne plus perdre :
+- Game Hub tabs réellement distincts : Aperçu / Mods & contenus / Collections / Créateurs / Guides / Activité ;
+- état jeu `Catalogue consultable — téléchargement non garanti` ;
+- Support != Signalement ;
+- signalement utilisateur = raison + contexte + détail facultatif + brouillon local non envoyé tant que backend absent ;
+- Collection != Modpack != Profil de jeu matérialisés dans le prototype ;
+- Modpack non installable sans manifeste/runtime réel ;
+- Profil de jeu détaillé local/private avec composants, versions, ordre, sync/manager explicites ;
+- Bibliothèque : Favoris / Suivis / Collections / Profils de jeu / Recherches enregistrées ;
+- Creator Studio : Dashboard / Projects / Releases / Upload / Analytics / Support / Reports / Team / Settings ;
+- Compte guest-first + onboarding skippable + confidentialité privée par défaut ;
+- Notifications : aucun événement/compteur distant inventé ; canaux absents explicitement indisponibles ;
+- Collections, Créateurs, Community et leurs variantes mobile ont des surfaces dédiées ;
+- aucun bouton `Installer avec MODARYX Forge` actif tant que le runtime n'est pas prouvé.
+
+Toujours PREUVE MANQUANTE / externe :
+- source visuelle approuvée archivable + comparaison normalisée ;
+- validation humaine multi-écrans supplémentaire ;
+- screen reader réel ;
+- appareils physiques ;
+- production V2/backend/données/connecteurs réels.
+
+Prochain anti-oubli actif :
+- offline/stale/error/retry transverses ;
+- réévaluation du gate de création du root frontend V2 isolé ;
+- aucun cutover `main`/public avant les gates dédiés.
