@@ -279,7 +279,7 @@ High-fi autorisé uniquement quand :
 
 ## 21. Clarifications issues de la simulation experte
 
-- `Mods & Plugins` conservé comme libellé primaire, taxonomie complète exposée par microcopy/filtres.
+- `Mods & Plugins` reste un libellé de travail mais n'est plus considéré comme parapluie final stabilisé : P01 le comprend comme limité aux mods et plugins.
 - `catalog-enabled` ne doit jamais être interprété visuellement comme une preuve de téléchargement disponible.
 
 **État : intégré ; validation humaine toujours PREUVE MANQUANTE.**
@@ -287,9 +287,9 @@ High-fi autorisé uniquement quand :
 
 ## Convergence terminologique 2026-10-03
 
-- Libellé utilisateur provisoire : **Mes configurations pour ce jeu**.
-- Vue transversale correspondante : **Bibliothèque → Configurations de jeu**.
+- Libellé utilisateur provisoire : **Mes profils pour ce jeu**.
+- Vue transversale correspondante : **Bibliothèque → Profils de jeu**.
 - Recherche contextualisée : **Rechercher dans ce jeu**.
 - Passage explicite à la portée globale : **Rechercher partout sur MODARYX**.
 
-Le terme domaine `Profile/Loadout` reste interne. Ces libellés restent à revalider humainement avant gel high-fi final.
+Le terme domaine `Profile/Loadout` reste interne. Après test humain P01, **Profils de jeu** est le libellé provisoire préféré ; le problème principal reste sa trouvabilité.
