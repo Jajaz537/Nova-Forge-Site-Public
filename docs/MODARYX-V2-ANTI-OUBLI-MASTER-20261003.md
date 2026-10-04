@@ -1849,3 +1849,23 @@ Nouveaux contrats inclus :
 - validation humaine/appareil ;
 - High-Fi final ;
 - VF.
+
+
+## 63. VF readiness gate — 32 blockers ouverts — 4 octobre 2026
+
+**TERMINÉ pour le garde-fou machine / VF BLOQUÉE**
+
+Preuve :
+- run `37235975698` — **SUCCESS**
+- `VF_READINESS_OPEN_BLOCKER_COUNT 32`
+- `VF_READINESS_STATUS BLOCKED`
+- `PASS_V2_VF_READINESS_GATE`.
+
+Règle :
+aucun PASS prototype, navigateur, contrat, PR ou surface-map ne peut transformer automatiquement l'état en VF.
+
+Le passage à `READY` est interdit tant qu'un blocker requis des catégories suivantes reste ouvert :
+- humain/appareil ;
+- web production ;
+- MODARYX Forge runtime ;
+- droits/légal.
