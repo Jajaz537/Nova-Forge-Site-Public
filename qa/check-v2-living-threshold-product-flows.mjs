@@ -176,16 +176,26 @@ try{
   await clickText(".search-result-row","Sentiers de l’aubeExploration · Atelier Boréal");
   await waitText("Avant d’ajouter");
   await clickText(".detail-tabs button","Compatibilité et prérequis");
-  await waitText("Aether Core");
+  await waitText("Fraîcheur preuve");
+  await waitText("Required");
+  await waitText("Recommended");
+  await waitText("Suggested");
+  await waitText("Conflict");
+  await waitText("ReplacedBy");
+  await waitText("Compatibilité réelle : PREUVE MANQUANTE");
   await clickText(".detail-tabs button","Fichiers");
   await waitText("Fichiers de cette version");
-  await waitText("Source ≠ auteur");
+  await waitText("Variante pédagogique A");
+  await waitText("Source ≠ auteur ≠ variante");
   await waitText("Aucun provider réel connecté");
   await waitText("Aucun scan réel associé");
   await clickText(".detail-tabs button","Plan avancé");
   await waitText("Plan avancé — démonstration");
   await waitText("Receipt futur");
   await waitText("0 mutation réelle");
+  await waitText("Capability handshake indisponible");
+  const forgeButtonDisabled=await evaluate(`(() => {const b=document.querySelector('.manager-capability-panel button');return !!b&&b.disabled;})()`);
+  if(!forgeButtonDisabled) throw new Error("MODARYX Forge CTA must stay disabled without capability handshake");
   await clickText(".detail-tabs button","Support");
   await waitText("Support indisponible dans cette démo");
   await clickText(".detail-tabs button","Signalement");
@@ -233,6 +243,12 @@ try{
   await waitText("Rapport d’import / export — démonstration");
   await waitText("0 autorisée");
   await waitText("0 fichier importé");
+  await clickText(".profile-preview-actions .quiet","Prévisualiser impact d’une désactivation");
+  await waitText("Impact avant désactivation — démonstration");
+  await waitText("Dépendant direct");
+  await waitText("Diagnostic propre / Safe Profile — runtime indisponible");
+  const safeProfileDisabled=await evaluate(`(() => {const b=[...document.querySelectorAll('.manager-state button')].find(x=>x.textContent.includes('Safe Profile'));return !!b&&b.disabled;})()`);
+  if(!safeProfileDisabled) throw new Error("Safe Profile action must stay disabled without desktop runtime");
   await clickText(".back","← Retour à la Bibliothèque");
   await waitText("Retrouvez favoris, suivis, collections, profils et historique sans les confondre.");
 
@@ -251,6 +267,9 @@ try{
   await clickText(".studio-nav button","Releases");
   await waitText("Maturité projet : WiP");
   await waitText("Crédits & droits");
+  await waitText("Validation par plateforme");
+  await waitText("Crossplay");
+  await waitText("PREUVE MANQUANTE");
 
   await clickText(".global-nav button","Collections");
   await waitText("Organiser n’est pas installer.");
