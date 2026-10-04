@@ -267,6 +267,7 @@ Preuve cible la plus récente :
 - Support séparé de Signalement ;
 - Game Atmosphere Layer originale, avec variante desktop/mobile ;
 - Rights Dashboard admin fictif : autorisation limitée / attente / no-response / outbound indisponible ;
+- demande membre de support d’un jeu : brouillon local, validation, triage explicite, aucun Rights Case réel ;
 - états nominal / empty / unavailable / anonymous / local-only / offline-stale / validation-error-retry / success sur les surfaces ciblées.
 
 ### Limites internes encore ouvertes
