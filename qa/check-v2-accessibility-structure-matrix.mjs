@@ -184,6 +184,8 @@ try{
 
   await clickExact("footer button","Confiance & légal");
   await assertSurface("public-trust"); count++;
+  await clickExact("footer button","Aide & documentation");
+  await assertSurface("help-docs"); count++;
 
   console.log("A11Y_STRUCTURE_SURFACE_COUNT",count);
   console.log("PASS_V2_ACCESSIBILITY_STRUCTURE_MATRIX");
