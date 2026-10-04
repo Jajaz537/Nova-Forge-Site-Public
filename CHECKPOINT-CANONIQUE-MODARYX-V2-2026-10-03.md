@@ -1410,3 +1410,47 @@ Blockers externes inchangés :
 - Safari/appareils physiques ;
 - backend/données/providers réels ;
 - root/frontend V2 production.
+
+
+## Source/provider, interop et Plan avancé — preuve fraîche — 4 octobre 2026
+
+**TERMINÉ pour le prototype ciblé / aucun provider-parser-runtime réel déclaré**
+
+Séquence d'erreur respectée :
+1. run `37164306202` : `ECONNREFUSED 127.0.0.1:9223` sur readiness Chrome CDP ;
+2. isolation : build vert, erreur limitée au démarrage du micro-check navigateur ;
+3. micro-proof dédié CDP : run `37164478594` — **SUCCESS** ;
+4. correction ciblée du checker principal ;
+5. continuation seulement ensuite.
+
+Run de continuation :
+- `37164509544` — **SUCCESS**
+- commit capturé : `af4972fdf65c1df8248d25fc6f5fcc1c6c88da39`
+- artifact : `11288507788`
+- digest : `sha256:e5453441e1461c6f0c3955ba4d8a8cbfb26de38c00f64beba78c485d6f84d61b`
+- `KEYBOARD_REACHABLE 32 / 32`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 51`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Nouveaux états prototype :
+- auteur séparé de source/provider ;
+- source manuelle de démonstration + provider réel absent ;
+- Plan avancé déterministe, sans graph de conflits opaque ;
+- futur receipt explicité ;
+- rapport import/export de démonstration ;
+- champs inconnus à préserver ;
+- perte silencieuse interdite ;
+- aucun fichier importé, aucun parser réel.
+
+Toujours non prouvé :
+- provider/connecteur réel ;
+- parser/import/export réel ;
+- backend/données/routing production ;
+- runtime MODARYX Forge ;
+- high-fi final/VF.
+
+**Prochain axe interne : élargir le benchmark aux écosystèmes spécialisés encore non couverts, puis intégrer uniquement les apprentissages réellement distincts.**
