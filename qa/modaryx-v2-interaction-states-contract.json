@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-INTERACTION-STATES-20261003.md",
+  "transverseStates": [
+    "loading",
+    "skeleton",
+    "empty",
+    "no-results",
+    "error",
+    "offline",
+    "stale",
+    "unavailable",
+    "unauthorized",
+    "forbidden",
+    "removed",
+    "withdrawn",
+    "revoked",
+    "quarantined",
+    "held-for-review",
+    "archived",
+    "abandoned",
+    "incompatible",
+    "unverified",
+    "success"
+  ],
+  "publicationStates": [
+    "draft",
+    "submitted",
+    "held-for-review",
+    "accepted",
+    "published",
+    "withdrawn",
+    "rejected",
+    "appealed"
+  ],
+  "profileSyncStates": [
+    "local-only",
+    "sync-pending",
+    "synced",
+    "conflict"
+  ],
+  "accountStates": [
+    "anonymous",
+    "authenticated",
+    "session-expired",
+    "permission-required",
+    "profile-private",
+    "profile-public",
+    "profile-not-found"
+  ],
+  "invariants": [
+    "LOADING_NEVER_HIDES_ERROR_INDEFINITELY",
+    "SKELETON_NEVER_MIMICS_NONEXISTENT_DATA_DECEPTIVELY",
+    "EMPTY_HAS_USEFUL_NEXT_ACTION",
+    "NO_RESULTS_SHOWS_QUERY_CONTEXT_AND_RESET",
+    "ERROR_STATES_PRESERVE_DATA_WHEN_POSSIBLE",
+    "STALE_NEVER_PRESENTED_AS_CURRENT",
+    "UNAUTHORIZED_NEVER_CONFUSED_WITH_FORBIDDEN",
+    "REVOKED_NEVER_SILENTLY_REDISTRIBUTED",
+    "UNVERIFIED_NEVER_STYLED_AS_SUCCESS",
+    "MANAGER_ACTION_ONLY_WITH_REAL_CAPABILITY",
+    "MANUAL_DOWNLOAD_ONLY_WITH_AUTHORIZED_VALID_ARTIFACT",
+    "NO_FAKE_PROGRESS",
+    "CREATOR_DRAFT_PRESERVED_AFTER_UPLOAD_OR_VALIDATION_ERROR",
+    "PUBLICATION_AND_MODERATION_SEPARATE",
+    "MOTION_NEVER_BLOCKS_CRITICAL_TASK",
+    "REDUCED_MOTION_LOSES_NO_INFORMATION"
+  ],
+  "productionStatus": {
+    "runtimeStates": "NOT_IMPLEMENTED",
+    "realAuthStates": "NOT_IMPLEMENTED",
+    "realManagerStates": "NOT_IMPLEMENTED",
+    "realCommunityStates": "NOT_IMPLEMENTED"
+  }
+}
