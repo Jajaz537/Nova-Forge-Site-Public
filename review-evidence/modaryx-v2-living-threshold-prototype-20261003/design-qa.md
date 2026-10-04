@@ -472,3 +472,48 @@ Avant jeu réel :
 - aucune confusion d'affiliation.
 
 Aucun PASS juridique, High-Fi final ou VF n'est déclaré.
+
+
+## Rights Dashboard — workflow-safe proof — 4 octobre 2026
+
+**TERMINÉ — prototype admin fictif / aucun outbound réel**
+
+Run Living Threshold :
+- `37196769573` — **SUCCESS**
+- commit capturé : `ec8b57891858f7a25954ff60f77595be8eaf1f21`
+- artifact : `11301477422`
+- digest : `sha256:d9ad41faa1423c22aa986e5f6661447b029a32f1812ed63a3a096b269a0b0eb9`
+
+Marqueurs :
+- `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
+- `KEYBOARD_REACHABLE 36 / 36`
+- `RIGHTS_MOBILE_OVERFLOW 0`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 61`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Surface matérialisée :
+- administration fictive `Droits des jeux` ;
+- warning explicite : aucune demande réelle envoyée ;
+- cas fictifs `APPROVED_WITH_LIMITS`, `AWAITING_RESPONSE`, `NO_RESPONSE` ;
+- lecture scope par scope ;
+- MODARYX Forge séparé des droits Web ;
+- outbound désactivé sans backend ;
+- mobile sans overflow ni cibles interactives sous 44×44 dans le check ciblé.
+
+Captures nouvelles :
+- `desktop-rights-dashboard.png`
+- `mobile-rights-dashboard.png`
+
+Surface map :
+- run `37196989554` — **SUCCESS**
+- `SURFACE_MAP_COUNT 23`
+- `UNRESOLVED_RUNTIME_COUNT 6`
+- `PASS_V2_PRODUCTION_SURFACE_MAP`
+
+Cette preuve valide uniquement la surface de démonstration et les garde-fous UI/contrat. Elle ne prouve ni Game Rights Registry production, ni connexion email/API, ni contact éditeur réel, ni interprétation juridique réelle.
+
+Aucun PASS High-Fi/VF final n'est déclaré.
