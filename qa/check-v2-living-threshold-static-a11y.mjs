@@ -41,6 +41,9 @@ if (indexHtml.includes('<html lang="en">')) fail("English document language regr
 console.log("DOCUMENT_LANG fr");
 console.log("DOCUMENT_ROBOTS noindex,nofollow,noarchive");
 console.log("DOCUMENT_TITLE MODARYX V2 — Prototype Living Threshold");
+if (!app.includes("document.title=routeTitle;")) fail("SPA route title contract missing");
+if (!app.includes('active+" — MODARYX"')) fail("SPA route title fallback missing");
+console.log("ROUTE_TITLE_CONTRACT_OK");
 
 const vars = {};
 for (const match of css.matchAll(/(--[\w-]+)\s*:\s*(#[0-9a-fA-F]{6})/g)) vars[match[1]] = match[2];
