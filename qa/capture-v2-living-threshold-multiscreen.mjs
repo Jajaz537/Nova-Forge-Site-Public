@@ -170,6 +170,9 @@ try {
   // Desktop states
   await navigateHome(1440, 1024);
   manifest.captures.push(await capture("desktop-game-hub.png", 1440, 1024, "Mes profils pour ce jeu"));
+  await clickByText(".atmosphere-preview button", "Rivenfall");
+  manifest.captures.push(await capture("desktop-game-hub-atmosphere-rivenfall.png", 1440, 1024, "aucun asset éditeur utilisé"));
+  await clickByText(".atmosphere-preview button", "Aetherlands");
   await clickByText(".local-nav button", "Collections");
   manifest.captures.push(await capture("desktop-game-hub-collections.png", 1440, 1024, "Sélections organisées"));
   await clickByText(".local-nav button", "Créateurs");
@@ -252,6 +255,9 @@ try {
   // Mobile states
   await navigateHome(390, 844);
   manifest.captures.push(await capture("mobile-game-hub.png", 390, 844, "Mes profils pour ce jeu"));
+  await clickByText(".atmosphere-preview button", "Rivenfall");
+  manifest.captures.push(await capture("mobile-game-hub-atmosphere-rivenfall.png", 390, 844, "aucun asset éditeur utilisé"));
+  await clickByText(".atmosphere-preview button", "Aetherlands");
   await clickByText(".local-nav button", "Collections");
   manifest.captures.push(await capture("mobile-game-hub-collections.png", 390, 844, "Sélections organisées"));
   await clickByText(".local-nav button", "Guides");
