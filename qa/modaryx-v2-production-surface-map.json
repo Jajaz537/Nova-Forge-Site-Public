@@ -471,13 +471,15 @@
         "PublisherResponseInterpretation",
         "PublisherContactVerification",
         "PublisherRequestReadiness",
-        "RightsLifecyclePreview"
+        "RightsLifecyclePreview",
+        "IpTakedownPreview"
       ],
       "domains": [
         "RightsCase",
         "RightsScope",
         "PublisherContact",
-        "RightsLifecycle"
+        "RightsLifecycle",
+        "IpCase"
       ],
       "states": [
         "approved-with-limits-demo",
@@ -497,7 +499,12 @@
         "rights-expiring-soon-demo",
         "rights-expired-demo",
         "rights-revoked-demo",
-        "rights-dependent-scopes-reblocked-demo"
+        "rights-dependent-scopes-reblocked-demo",
+        "ip-received-demo",
+        "ip-content-located-demo",
+        "ip-temp-restricted-demo",
+        "ip-legal-review-required-demo",
+        "ip-fallback-original-modaryx-demo"
       ],
       "mobile": "DEDICATED_RESPONSIVE"
     }
