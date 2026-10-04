@@ -5,7 +5,7 @@
 
 ## 1. But
 
-Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 81 captures au hasard.
+Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 85 captures au hasard.
 
 Ce pack ne remplace pas :
 - un screen reader réel ;
@@ -18,13 +18,13 @@ Ce pack ne remplace pas :
 
 Run de capture étendu le plus récent :
 - workflow : `MODARYX V2 Living Threshold Visual Proof`
-- run : `37222125590` — **SUCCESS**
-- commit capturé : `a478afcf3eadfb1682754535d0ca632520601a26`
-- artifact : `11310576920`
-- digest : `sha256:ad2efb5f42047e36812f8a53e753adec443be53baab05a8ca2d92b44a7ca2fb3`
-- captures : **81**
+- run : `37228199151` — **SUCCESS**
+- commit capturé : `b5601ed14c224cec5c163d6783a0a351eb0e0f68`
+- artifact : `11312597804`
+- digest : `sha256:a67562f537c087e56417367be5c8f2b1da5268bd21d045dbbfc9196a0d4ab45d`
+- captures : **85**
 - desktop + mobile
-- keyboard : `38 / 38`
+- keyboard : `40 / 40`
 - desktop/mobile overflow : `0 / 0`
 - document en français, preview noindex, titre non générique ;
 - flows produit ciblés : **SUCCESS**.
@@ -54,6 +54,8 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 17. `desktop-rights-notification-preview.png` — vérifier que les événements fictifs restent clairement marqués non reçus
 18. `desktop-rights-outbound-delivered.png` — vérifier que DELIVERED n’est jamais confondu avec une autorisation
 19. `desktop-rights-inbound-ready.png` — vérifier corrélation, provenance, quarantaine et READY_FOR_INTERPRETATION sans confusion juridique
+20. `desktop-public-trust.png` — vérifier que les statuts juridiques restent honnêtes et non finaux
+21. `desktop-help-docs.png` — vérifier que l’aide explique sans inventer de fonction
 - `desktop-rights-lifecycle-expired.png` — vérifier que l’expiration rebloque clairement les usages dépendants.
 - `desktop-ip-takedown-restricted.png` — vérifier compréhension du fallback temporaire, preuves conservées et absence de décision juridique automatique.
 
@@ -76,6 +78,8 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 15. `mobile-rights-notification-preview.png` — vérifier la compréhension des notifications droits fictives sans confusion avec un événement réel
 16. `mobile-rights-outbound-delivered.png` — vérifier que la livraison reste permission-neutral sur petit écran
 17. `mobile-rights-inbound-ready.png` — vérifier que le résultat READY_FOR_INTERPRETATION ≠ autorisation reste immédiatement visible
+18. `mobile-public-trust.png` — vérifier la lisibilité des statuts de confiance sur petit écran
+19. `mobile-help-docs.png` — vérifier que l’aide reste claire et actionnable sur mobile
 - `mobile-rights-lifecycle-expired.png` — vérifier lisibilité du fallback baseline MODARYX après expiration.
 - `mobile-ip-takedown-restricted.png` — vérifier lisibilité du cas IP restreint sur petit écran.
 
@@ -214,6 +218,14 @@ Ne pas dire :
    - comprenez-vous qu’un signalement n’est pas automatiquement une décision juridique ?
    - comprenez-vous que l’asset contesté peut être restreint avec un fallback MODARYX sans suppression des preuves ?
    - comprenez-vous que `LEGAL_REVIEW_REQUIRED` bloque la restauration automatique ?
+
+### Aide & documentation
+
+24. Sur la surface d’aide :
+   - comprenez-vous quels sujets sont couverts ?
+   - comprenez-vous que la documentation finale n’est pas encore approuvée ?
+   - les raccourcis vers Jeux / contenus / Bibliothèque / Confiance paraissent-ils utiles ?
+   - une formulation laisse-t-elle croire qu’une fonction absente est déjà disponible ?
 
 ## 6. Tâches courtes recommandées
 
