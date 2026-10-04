@@ -5,7 +5,7 @@
 
 ## 1. But
 
-Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 75 captures au hasard.
+Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 77 captures au hasard.
 
 Ce pack ne remplace pas :
 - un screen reader réel ;
@@ -266,3 +266,30 @@ Elle ne suffit pas seule à déclarer :
 - performances production.
 
 **État : pack prêt / validation humaine supplémentaire toujours PREUVE MANQUANTE.**
+
+
+## Extension MODARYX IA — 4 octobre 2026
+
+Preuve la plus fraîche du prototype :
+- workflow : `MODARYX V2 Living Threshold Visual Proof`
+- run : `37211271783` — **SUCCESS**
+- commit capturé : `f8616f18876c49de45b3d208222be042dd2b543a`
+- artifact : `11306731614`
+- digest : `sha256:6cd590ef764afc4825cec9f199c504fbd57b6d7dd296a629fa311a1393495047`
+- captures : **77**
+- `KEYBOARD_REACHABLE 37 / 37`
+- `FLOW_ASSERT modaryx ai preview no fake model or action`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Captures à inclure dans la revue humaine :
+- `desktop-modaryx-ai.png`
+- `mobile-modaryx-ai.png`
+
+Questions ciblées :
+- comprend-on immédiatement que MODARYX IA n’est pas encore active ?
+- la distinction entre sources, permissions, outils et incertitude paraît-elle claire ?
+- l’IA semble-t-elle intégrée à la famille MODARYX sans devenir le centre visuel du produit ?
+- sur mobile, la hiérarchie reste-t-elle lisible et non envahissante ?
+
+Cette surface reste un **preview d’intégration**, pas une IA réelle.
