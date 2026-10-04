@@ -16,13 +16,18 @@ Ce pack ne remplace pas :
 
 ## 2. Preuve visuelle disponible
 
-Run de capture étendu :
+Run de capture étendu le plus récent :
 - workflow : `MODARYX V2 Living Threshold Visual Proof`
-- run : `37161856917` — **SUCCESS**
-- artifact : `11288036698`
-- captures : **39**
+- run : `37222125590` — **SUCCESS**
+- commit capturé : `a478afcf3eadfb1682754535d0ca632520601a26`
+- artifact : `11310576920`
+- digest : `sha256:ad2efb5f42047e36812f8a53e753adec443be53baab05a8ca2d92b44a7ca2fb3`
+- captures : **81**
 - desktop + mobile
-- offline/error/retry inclus dans la preuve produit associée.
+- keyboard : `38 / 38`
+- desktop/mobile overflow : `0 / 0`
+- document en français, preview noindex, titre non générique ;
+- flows produit ciblés : **SUCCESS**.
 
 Aucune capture ne doit être présentée comme donnée réelle : le prototype utilise des contenus explicitement de démonstration.
 
