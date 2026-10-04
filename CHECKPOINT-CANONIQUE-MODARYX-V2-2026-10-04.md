@@ -1630,3 +1630,66 @@ Toujours non final :
 - validation humaine ;
 - AT/appareils ;
 - textes juridiques finaux.
+
+
+## 51. Modération / signalements / appels
+
+**TERMINÉ pour contrat + prototype / production PREUVE MANQUANTE**
+
+Contrat source :
+`docs/MODARYX-V2-MODERATION-APPEALS-CONTRACT-20261003.md`
+
+Contrat machine :
+`qa/modaryx-v2-moderation-appeals-contract.json`
+
+Preuve contrat :
+- run `37230196601` — **SUCCESS**
+- `MODERATION_STATE_COUNT 7`
+- `MODERATION_ACTION_COUNT 6`
+- `MODERATION_INVARIANT_COUNT 12`
+- `PASS_V2_MODERATION_APPEALS_CONTRACT`.
+
+Preuve Living Threshold :
+- run `37230093681` — **SUCCESS**
+- commit `6134ec747cce538582236c39c4c656c07a0d5146`
+- artifact `11313079816`
+- digest `sha256:004e8a29f942dd177fd4b21c28cfda5d7ed4e6af2b872e18ff0cc9136262fd2e`
+- `KEYBOARD_REACHABLE 41 / 41`
+- desktop/mobile overflow `0 / 0`
+- `FLOW_ASSERT moderation appeals preserves server authority and prior decision`
+- `MULTISCREEN_CAPTURE_COUNT 87`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Accessibilité / responsive :
+- structure/touch/forced-colors run `37230250723` — **SUCCESS** après fermeture ciblée d’un `ECONNREFUSED 127.0.0.1:9243` checker ;
+- keyboard étendu run `37230361038` — **SUCCESS**, 18 surfaces, moderation `24 / 24` ;
+- text spacing `37230028555` — SUCCESS, moderation overflow/clipped 0 ;
+- narrow 320 `37230036543` — SUCCESS, moderation overflow 0 ;
+- tablet `37230040694` — SUCCESS, moderation overflow 0.
+
+Surface map :
+- run `37230139266` — **SUCCESS**
+- `SURFACE_MAP_COUNT 27`
+- `UNRESOLVED_RUNTIME_COUNT 6`
+- `PASS_V2_PRODUCTION_SURFACE_MAP`.
+
+Matérialisé :
+- RECEIVED ;
+- UNDER_REVIEW ;
+- APPEALED ;
+- état public partageable ;
+- historique conservé ;
+- appel séparé ;
+- Support ≠ Signalement ;
+- actions Hide / Quarantine / Restore désactivées sans serveur.
+
+Toujours NON IMPLÉMENTÉ :
+- backend report/modération ;
+- autorité serveur roles ;
+- quarantine/remove/restore réels ;
+- audit store ;
+- appeal backend ;
+- notifications réelles.
+
+La validation humaine, screen reader réel et appareil physique restent PREUVE MANQUANTE.
