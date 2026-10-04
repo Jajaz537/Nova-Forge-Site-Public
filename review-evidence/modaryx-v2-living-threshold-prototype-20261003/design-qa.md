@@ -276,3 +276,65 @@ Reste ouvert :
 - root/frontend V2 production.
 
 Aucun PASS High-Fi/VF final n'est déduit de ce run.
+
+
+## Source / interop / advanced-plan proof — 4 octobre 2026
+
+**TERMINÉ — prototype ciblé / aucune preuve provider, parser ou runtime réel**
+
+Erreur préalable :
+- run `37164306202` : échec ciblé sur readiness Chrome CDP ;
+- erreur exacte : `ECONNREFUSED 127.0.0.1:9223` ;
+- build prototype : SUCCESS ;
+- produit non incriminé.
+
+Isolation/correction :
+- micro-proof CDP dédié : run `37164478594` — **SUCCESS** ;
+- checker dédié : `qa/check-v2-cdp-readiness.mjs` ;
+- workflow : `.github/workflows/modaryx-v2-cdp-readiness-micro-proof.yml` ;
+- readiness CDP principal renforcé + détection d'exit Chrome + `--disable-dev-shm-usage`.
+
+Continuation après micro-proof :
+- run `37164509544` — **SUCCESS**
+- commit capturé : `af4972fdf65c1df8248d25fc6f5fcc1c6c88da39`
+- artifact : `11288507788`
+- artifact digest : `sha256:e5453441e1461c6f0c3955ba4d8a8cbfb26de38c00f64beba78c485d6f84d61b`
+
+Marqueurs frais :
+- `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `KEYBOARD_REACHABLE 32 / 32`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 51`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Nouvelles surfaces/états exercés :
+- Content Detail > Fichiers : **auteur distinct de source/provider** ;
+- provider réel absent explicitement ;
+- Content Detail > **Plan avancé** : source, artefact, dépendance, conflits, politique version, action et futur receipt dans une lecture plate ;
+- Profil de jeu > **rapport d'import/export** de démonstration ;
+- champ inconnu préservé comme extension opaque ;
+- `0 perte silencieuse autorisée` ;
+- aucun parser réel ni fichier importé.
+
+Nouvelles captures archivées :
+- desktop/mobile Content Advanced Plan ;
+- desktop/mobile Game Profile Interop.
+
+Build observé du prototype :
+- CSS ~45.45 kB / gzip ~8.87 kB ;
+- JS ~300.60 kB / gzip ~84.80 kB.
+
+Ces tailles restent des mesures du prototype exploratoire, pas un budget de production.
+
+Toujours PREUVE MANQUANTE :
+- provider/source réel ;
+- import/export parser réel ;
+- backend/routing/données production ;
+- runtime MODARYX Forge ;
+- comparaison visuelle normalisée approuvée ;
+- validation humaine et appareils/screen-reader réels.
+
+Aucun PASS High-Fi/VF n'est déclaré.
