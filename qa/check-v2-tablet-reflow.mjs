@@ -172,6 +172,9 @@ try{
   await clickText("footer button","Confiance & légal");
   await waitBodyText("Confiance, informations légales et transparence.");
   await assertNoOverflow("public-trust");
+  await clickText("footer button","Aide & documentation");
+  await waitBodyText("Comprendre MODARYX sans deviner.");
+  await assertNoOverflow("help-docs");
 
   await clickText("footer button","Droits jeux · démo admin");
   await waitBodyText("Droits des jeux");
@@ -182,7 +185,7 @@ try{
   await waitBodyText("REQUEST_READY");
   await assertNoOverflow("rights-expanded");
 
-  console.log("TABLET_REFLOW_SURFACE_COUNT",13);
+  console.log("TABLET_REFLOW_SURFACE_COUNT",14);
   console.log("PASS_V2_TABLET_REFLOW");
 }finally{
   try{ws?.close()}catch{}
