@@ -53,29 +53,40 @@ async function clickText(selector,text){
   if(!ok) throw new Error("unable to click "+text);
   await sleep(100);
 }
-async function openTabletMenu(){
-  const visible=await evaluate(`(() => {
-    const menu=document.querySelector('.mobile-menu');
-    if(!menu) return false;
-    const s=getComputedStyle(menu);
-    if(s.display==='none') return false;
-    const nav=document.querySelector('.global-nav');
-    if(nav&&nav.classList.contains('open')) return true;
-    menu.click();
-    return true;
-  })()`);
-  if(!visible) throw new Error("tablet menu unavailable");
-  await sleep(80);
-}
 async function navigatePrimary(text){
-  await openTabletMenu();
-  await clickText(".global-nav button",text);
-  await sleep(180);
+  const result=await evaluate(`(async () => {
+    const nav=document.querySelector('.global-nav');
+    const menu=document.querySelector('.mobile-menu');
+    if(!nav||!menu) return {ok:false,reason:'shell-missing'};
+    if(!nav.classList.contains('open')){
+      menu.click();
+      await new Promise(resolve=>setTimeout(resolve,180));
+    }
+    const button=[...document.querySelectorAll('.global-nav button')].find(el=>el.textContent.trim()===${JSON.stringify(text)});
+    if(!button||button.disabled||button.getBoundingClientRect().width===0) return {ok:false,reason:'target-unavailable',open:nav.classList.contains('open')};
+    button.click();
+    await new Promise(resolve=>setTimeout(resolve,260));
+    const active=[...document.querySelectorAll('.global-nav button')].find(el=>el.classList.contains('active'))?.textContent.trim()||'';
+    return {ok:true,active};
+  })()`);
+  if(!result?.ok||result.active!==text) throw new Error("tablet primary navigation failed "+text+" "+JSON.stringify(result));
 }
 async function navigateUtility(text){
-  await openTabletMenu();
-  await clickText(".global-nav .mobile-nav-utility",text);
-  await sleep(180);
+  const result=await evaluate(`(async () => {
+    const nav=document.querySelector('.global-nav');
+    const menu=document.querySelector('.mobile-menu');
+    if(!nav||!menu) return {ok:false,reason:'shell-missing'};
+    if(!nav.classList.contains('open')){
+      menu.click();
+      await new Promise(resolve=>setTimeout(resolve,180));
+    }
+    const button=[...document.querySelectorAll('.global-nav .mobile-nav-utility')].find(el=>el.textContent.trim()===${JSON.stringify(text)});
+    if(!button||button.disabled||button.getBoundingClientRect().width===0) return {ok:false,reason:'target-unavailable',open:nav.classList.contains('open')};
+    button.click();
+    await new Promise(resolve=>setTimeout(resolve,260));
+    return {ok:true};
+  })()`);
+  if(!result?.ok) throw new Error("tablet utility navigation failed "+text+" "+JSON.stringify(result));
 }
 async function assertNoOverflow(label){
   const result=await evaluate(`(() => {
