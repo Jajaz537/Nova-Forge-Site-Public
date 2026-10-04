@@ -143,6 +143,31 @@ async function capture(file, width, height, expectedText) {
   };
 }
 
+async function captureCurrentViewport(file, width, height, expectedText) {
+  let textOk = !expectedText;
+  if (expectedText) {
+    for (let i = 0; i < 30; i++) {
+      textOk = await evaluate(`document.body.innerText.toLocaleLowerCase("fr").includes(${JSON.stringify(expectedText.toLocaleLowerCase("fr"))})`);
+      if (textOk) break;
+      await sleep(100);
+    }
+  }
+  if (!textOk) throw new Error("expected text missing before viewport capture: " + expectedText);
+  const metrics = await send("Page.getLayoutMetrics");
+  const viewport = metrics.result.visualViewport || {};
+  const shot = await send("Page.captureScreenshot", {
+    format: "png",
+    fromSurface: true,
+    captureBeyondViewport: false,
+    clip: { x: viewport.pageX || 0, y: viewport.pageY || 0, width, height, scale: 1 },
+  });
+  const data = Buffer.from(shot.result.data, "base64");
+  const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/" + file;
+  mkdirSync(out.substring(0, out.lastIndexOf("/")), { recursive: true });
+  writeFileSync(out, data);
+  return { file, width, height, sha256: createHash("sha256").update(data).digest("hex") };
+}
+
 try {
   await waitJson("/json/version");
   const targets = await waitJson("/json/list");
@@ -284,7 +309,7 @@ try {
   await clickByText(".game-request-form .primary", "Préparer la demande locale");
   await evaluate("document.querySelector('.game-request-status')?.scrollIntoView({block:'center'})");
   await sleep(120);
-  manifest.captures.push(await capture("mobile-game-support-request.png", 390, 844, "Brouillon de demande — non envoyé"));
+  manifest.captures.push(await captureCurrentViewport("mobile-game-support-request.png", 390, 844, "Brouillon de demande — non envoyé"));
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Mods & contenus");
