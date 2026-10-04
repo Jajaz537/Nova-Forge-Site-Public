@@ -154,3 +154,53 @@ Avant VF publique :
 - public IP intake : **NON IMPLÉMENTÉ**
 - security contact : **PREUVE MANQUANTE**
 - legal review : **PREUVE MANQUANTE**
+
+
+## 14. Matérialisation prototype + preuves ciblées
+
+**TERMINÉ pour la structure et le prototype / contenu juridique final PREUVE MANQUANTE**
+
+Surface matérialisée :
+- entrée footer `Confiance & légal` ;
+- page publique de readiness ;
+- 8 catégories structurées ;
+- états honnêtes `PREUVE MANQUANTE / PRODUCT_FACTS_MISSING / LEGAL_DRAFT_REQUIRED` ;
+- bannière explicite : `Prototype noindex — aucun texte juridique final n'est simulé.` ;
+- aucun opérateur, DPO, adresse, durée de conservation, sous-traitant, canal sécurité ou texte légal final inventé.
+
+Preuve Living Threshold :
+- run `37227306023` — **SUCCESS**
+- commit capturé `63868585bfc89b24eb2c138a0e64889932de69b8`
+- artifact `11312436153`
+- digest `sha256:dabf001e15e97608b988105de220a6743bca97664dcbe530303aabb1cbeea1be`
+- `KEYBOARD_REACHABLE 39 / 39`
+- desktop/mobile overflow `0 / 0`
+- `MULTISCREEN_CAPTURE_COUNT 83`.
+
+Preuves accessibilité / reflow :
+- Accessibility Structure Matrix run `37227306134` — **SUCCESS**
+  - `A11Y_STRUCTURE_SURFACE_COUNT 16`
+  - `PASS_V2_KEYBOARD_REACHABILITY_MATRIX`
+  - `PASS_V2_FOCUS_VISIBLE_MATRIX`
+  - `TOUCH_MATRIX_SURFACE_COUNT 16`
+  - `FORCED_COLORS_SURFACE_COUNT 13`
+- Text spacing run `37227306076` — **SUCCESS**
+  - `TEXT_SPACING_SURFACE_COUNT 13`
+  - public-trust overflow `0`, clipped text `0`
+- Narrow 320 run `37227306114` — **SUCCESS**
+  - `NARROW_REFLOW_SURFACE_COUNT 13`
+- Tablet run `37227306108` — **SUCCESS**
+  - `TABLET_REFLOW_SURFACE_COUNT 13`.
+
+Surface map :
+- run `37227011707` — **SUCCESS**
+- `SURFACE_MAP_COUNT 25`
+- `UNRESOLVED_RUNTIME_COUNT 6`
+- `PASS_V2_PRODUCTION_SURFACE_MAP`.
+
+Cette preuve valide la **surface de readiness**, pas :
+- le contenu légal final ;
+- l'identité opérateur ;
+- la conformité juridique ;
+- les canaux de contact réels ;
+- la publication production.
