@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-SCREEN-ACCEPTANCE-CRITERIA-20261003.md",
+  "surfaces": [
+    "Homepage",
+    "GamesIndex",
+    "GameHub",
+    "Catalog",
+    "GlobalSearch",
+    "ContentDetail",
+    "Requirements",
+    "ReleaseFiles",
+    "Collection",
+    "Modpack",
+    "ProfileLoadout",
+    "CreatorProfile",
+    "CreatorStudio",
+    "Community",
+    "Library",
+    "SecurityTrust",
+    "MobileNavigation",
+    "MobileCatalog",
+    "MobileContentDetail"
+  ],
+  "globalGate": [
+    "PRIMARY_OBJECTIVE",
+    "PRIMARY_ACTION",
+    "CRITICAL_STATES",
+    "MOBILE_DEFINED",
+    "ACCESSIBILITY_PLANNED",
+    "REQUIRED_DATA_DEFINED",
+    "UNAVAILABLE_CASE_DEFINED",
+    "RUNTIME_DEPENDENCIES_EXPLICIT"
+  ],
+  "invariants": [
+    "HOMEPAGE_NEVER_READS_AS_NEWS_SITE",
+    "GAME_HUB_VERSION_NOT_HIDDEN",
+    "CONTEXTUAL_SEARCH_NEVER_SILENTLY_GLOBAL",
+    "CATALOG_FILTERS_ALWAYS_GIVE_FEEDBACK",
+    "EXTERNAL_SEARCH_FAILURE_NEVER_BREAKS_LOCAL_SEARCH",
+    "INSTALL_NEVER_PRECEDES_COMPATIBILITY",
+    "UNVERIFIED_NEVER_LOOKS_VERIFIED",
+    "REVOKED_FILE_NEVER_LOOKS_NORMAL",
+    "COLLECTION_NEVER_EQUALS_PROFILE_OR_FAVORITE",
+    "COLLECTION_NEVER_PRESENTED_INSTALLABLE_WITHOUT_MANIFEST",
+    "PROFILE_PRIVATE_BY_DEFAULT",
+    "UPLOAD_ERROR_NEVER_DESTROYS_DRAFT",
+    "COMMUNITY_NEVER_REPLACES_CRITICAL_CONTENT_INFO",
+    "HASH_OR_SIGNATURE_NEVER_MEANS_SAFE",
+    "MOBILE_SEARCH_NEVER_REQUIRES_TWO_MENUS",
+    "STICKY_CTA_NEVER_OBSCURES_FOCUS"
+  ],
+  "productionStatus": {
+    "humanScreenAcceptance": "NOT_PROVEN",
+    "mobileHumanAcceptance": "NOT_PROVEN",
+    "highFiFinal": "NOT_PROVEN"
+  }
+}
