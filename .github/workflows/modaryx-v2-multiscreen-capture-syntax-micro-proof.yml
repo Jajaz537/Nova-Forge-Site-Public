@@ -1,0 +1,32 @@
+name: MODARYX V2 Multiscreen Capture Syntax Micro-Proof
+
+on:
+  push:
+    branches:
+      - 'audit/modaryx-v2-legacy-boundary-20261003'
+    paths:
+      - '.github/workflows/modaryx-v2-multiscreen-capture-syntax-micro-proof.yml'
+      - 'qa/capture-v2-living-threshold-multiscreen.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  syntax:
+    name: Validate multiscreen capture script syntax
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Check capture script syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check qa/capture-v2-living-threshold-multiscreen.mjs
+          echo PASS_V2_MULTISCREEN_CAPTURE_SCRIPT_SYNTAX
