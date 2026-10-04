@@ -1519,3 +1519,17 @@ Limites :
 - ne remplace pas zoom navigateur humain ;
 - ne remplace pas text resize réel sur Safari/iOS ;
 - ne remplace pas screen reader ou validation humaine.
+
+
+## 48. Keyboard reachability matrix
+
+**TERMINÉ pour Chrome automatisé / validation humaine PREUVE MANQUANTE**
+
+- run `37224495290` — **SUCCESS**
+- commit `a43a8ffd95a32f727f5bb7dc5d72a912c9325ab4`
+- 15 surfaces
+- `PASS_V2_ACCESSIBILITY_STRUCTURE_MATRIX`
+- `PASS_V2_KEYBOARD_REACHABILITY_MATRIX`
+- tous les contrôles visibles ciblés atteints au clavier sur chaque surface.
+
+Cette preuve ne remplace pas un test humain clavier ni un screen reader réel.
