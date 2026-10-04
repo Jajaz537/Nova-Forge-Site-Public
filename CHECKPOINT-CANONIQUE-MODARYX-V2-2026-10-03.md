@@ -1454,3 +1454,46 @@ Toujours non prouvé :
 - high-fi final/VF.
 
 **Prochain axe interne : élargir le benchmark aux écosystèmes spécialisés encore non couverts, puis intégrer uniquement les apprentissages réellement distincts.**
+
+
+## Benchmark spécialisé — preuve Living Threshold — 4 octobre 2026
+
+**TERMINÉ pour le prototype ciblé / aucune preuve runtime réelle**
+
+Benchmark spécialisé :
+`docs/MODARYX-V2-SPECIALIZED-MOD-ECOSYSTEM-BENCHMARK-20261004.md`
+
+Run :
+- `37164976157` — **SUCCESS**
+- commit capturé : `49ce52287c900e16376e4ccab84008a02a8a92e7`
+- artifact : `11289531194`
+- digest : `sha256:699e4daa8110e2182dce58eb7d0fc9fb7648114039bf411bca81d4d7f0e6db53`
+- `KEYBOARD_REACHABLE 32 / 32`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 57`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Décisions spécialisées désormais matérialisées au niveau prototype :
+- relations de dépendance typées ;
+- reverse dependency impact ;
+- compatibilité multi-dimension + fraîcheur/workaround ;
+- variantes édition/loader ;
+- capability handshake web→MODARYX Forge avec CTA désactivé sans capacité réelle ;
+- Safe Profile affiché comme capacité indisponible ;
+- validation par plateforme ;
+- Crossplay explicitement non prouvé.
+
+Toujours PREUVE MANQUANTE :
+- compatibilité réelle ;
+- provider APIs ;
+- sync serveur/save ;
+- crossplay réel ;
+- Safe Profile réellement exécuté ;
+- MODARYX Forge runtime ;
+- backend/données production ;
+- validation humaine/appareils.
+
+**Prochain axe interne : fermer les derniers détails de modèle encore non matérialisés (Alternative/AnyOf, Supported, Minimum accepté, états de fraîcheur), puis réévaluer s'il reste du travail interne honnête avant le gate externe.**
