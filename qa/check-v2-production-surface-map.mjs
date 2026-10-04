@@ -8,7 +8,7 @@ const required = [
   "requirements-dependencies","release-files","collection","modpack","profile-loadout",
   "creator-profile","creator-studio","community","library","security-trust",
   "mobile-navigation","mobile-catalog","mobile-content-detail",
-  "account-settings","notifications","offline-stale","rights-admin","modaryx-ai-preview","public-trust"
+  "account-settings","notifications","offline-stale","rights-admin","modaryx-ai-preview","public-trust","help-docs"
 ];
 
 if (data.schemaVersion !== 1) throw new Error("unexpected schemaVersion");
@@ -61,6 +61,14 @@ for (const component of ["ModaryxAIPage","AiTrustPanel","AiDisabledComposer"]) {
 }
 for (const state of ["backend-unavailable","composer-disabled","insufficient-evidence-safe-fallback"]) {
   if (!aiPreview?.states?.includes(state)) throw new Error("modaryx-ai-preview missing state: " + state);
+}
+
+const helpDocs = data.surfaces.find(x => x.id === "help-docs");
+for (const component of ["HelpDocsPage","HelpTopicGrid","HelpActionLinks","DocumentationReadinessState"]) {
+  if (!helpDocs?.components?.includes(component)) throw new Error("help-docs missing component: " + component);
+}
+for (const state of ["prototype-help","final-documentation-missing","runtime-dependent-content","no-server-workflow-simulated"]) {
+  if (!helpDocs?.states?.includes(state)) throw new Error("help-docs missing state: " + state);
 }
 
 const publicTrust = data.surfaces.find(x => x.id === "public-trust");
