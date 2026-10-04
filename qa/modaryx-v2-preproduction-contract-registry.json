@@ -212,6 +212,30 @@
       "contract": "qa/modaryx-v2-critical-flows-contract.json",
       "checker": "qa/check-v2-critical-flows-contract.mjs",
       "source": "docs/MODARYX-V2-CRITICAL-FLOWS-20261003.md"
+    },
+    {
+      "id": "adapter-module-boundaries",
+      "contract": "qa/modaryx-v2-adapter-module-boundaries-contract.json",
+      "checker": "qa/check-v2-adapter-module-boundaries-contract.mjs",
+      "source": "docs/MODARYX-V2-ADAPTER-MODULE-BOUNDARIES-20261003.md"
+    },
+    {
+      "id": "data-fixture-strategy",
+      "contract": "qa/modaryx-v2-data-fixture-strategy-contract.json",
+      "checker": "qa/check-v2-data-fixture-strategy-contract.mjs",
+      "source": "docs/MODARYX-V2-DATA-FIXTURE-STRATEGY-20261003.md"
+    },
+    {
+      "id": "schema-plan",
+      "contract": "qa/modaryx-v2-schema-plan-contract.json",
+      "checker": "qa/check-v2-schema-plan-contract.mjs",
+      "source": "docs/MODARYX-V2-SCHEMA-PLAN-20261003.md"
+    },
+    {
+      "id": "interaction-states",
+      "contract": "qa/modaryx-v2-interaction-states-contract.json",
+      "checker": "qa/check-v2-interaction-states-contract.mjs",
+      "source": "docs/MODARYX-V2-INTERACTION-STATES-20261003.md"
     }
   ],
   "invariants": [
