@@ -8,7 +8,7 @@ const required = [
   "requirements-dependencies","release-files","collection","modpack","profile-loadout",
   "creator-profile","creator-studio","community","library","security-trust",
   "mobile-navigation","mobile-catalog","mobile-content-detail",
-  "account-settings","notifications","offline-stale","rights-admin","modaryx-ai-preview"
+  "account-settings","notifications","offline-stale","rights-admin","modaryx-ai-preview","public-trust"
 ];
 
 if (data.schemaVersion !== 1) throw new Error("unexpected schemaVersion");
@@ -61,6 +61,14 @@ for (const component of ["ModaryxAIPage","AiTrustPanel","AiDisabledComposer"]) {
 }
 for (const state of ["backend-unavailable","composer-disabled","insufficient-evidence-safe-fallback"]) {
   if (!aiPreview?.states?.includes(state)) throw new Error("modaryx-ai-preview missing state: " + state);
+}
+
+const publicTrust = data.surfaces.find(x => x.id === "public-trust");
+for (const component of ["PublicLegalTrustPage","TrustReadinessGrid","PublicTrustGate"]) {
+  if (!publicTrust?.components?.includes(component)) throw new Error("public-trust missing component: " + component);
+}
+for (const state of ["structure-ready","product-facts-missing","legal-draft-required","legal-review-required"]) {
+  if (!publicTrust?.states?.includes(state)) throw new Error("public-trust missing state: " + state);
 }
 
 const unresolved = new Set(data.unresolvedRealRuntimeStates || []);
