@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-ADAPTER-MODULE-BOUNDARIES-20261003.md",
+  "dependencyDirection": [
+    "UI_TO_APPLICATION",
+    "APPLICATION_TO_DOMAIN",
+    "DOMAIN_TO_ADAPTER_PORTS",
+    "ADAPTERS_TO_EXTERNALS"
+  ],
+  "applicationServices": [
+    "DiscoveryService",
+    "SearchService",
+    "GameHubService",
+    "ContentDetailService",
+    "LibraryService",
+    "CollectionService",
+    "ModpackService",
+    "ProfileLoadoutService",
+    "CreatorStudioService",
+    "CommunityService",
+    "AccountService",
+    "InstallService",
+    "TrustService",
+    "RealityContextService"
+  ],
+  "domainObjects": [
+    "Game",
+    "ContentItem",
+    "ContentType",
+    "Release",
+    "FileArtifact",
+    "Dependency",
+    "Conflict",
+    "CompatibilityClaim",
+    "Collection",
+    "Modpack",
+    "ProfileLoadout",
+    "Creator",
+    "Team",
+    "Account",
+    "PublicProfile",
+    "ModerationReceipt",
+    "ProvenanceReceipt"
+  ],
+  "adapterErrors": [
+    "unavailable",
+    "unauthorized",
+    "forbidden",
+    "offline",
+    "stale",
+    "incompatible",
+    "unverified",
+    "removed",
+    "quarantined",
+    "invalid-data",
+    "capability-missing"
+  ],
+  "invariants": [
+    "UI_NEVER_IMPORTS_V1_RENDERER_CSS_OR_SW",
+    "UI_NEVER_READS_HISTORICAL_LOCAL_STORAGE_DIRECTLY",
+    "DOMAIN_NEVER_DEPENDS_ON_BROWSER_CSS_AUTH0_OR_CLOUDFLARE",
+    "V1_COMPAT_READS_THROUGH_V1_COMPAT_ADAPTER",
+    "ADAPTERS_NEVER_RETURN_DOM_OR_MARKUP",
+    "EXTERNAL_SEARCH_NEVER_REPLACES_CANONICAL_LOCAL_IDS",
+    "INSTALL_UI_ONLY_EXPOSES_REAL_CAPABILITIES",
+    "ADAPTER_ERRORS_STRUCTURED_UI_OWNS_PRESENTATION",
+    "NO_SECRET_TOKEN_OR_PRIVATE_DATA_EXPOSED_TO_UI",
+    "NO_PRODUCTION_DATA_FROM_DEMO_DATASET"
+  ],
+  "productionStatus": {
+    "rootV2": "NOT_CREATED",
+    "adapters": "NOT_IMPLEMENTED",
+    "applicationServices": "NOT_IMPLEMENTED",
+    "domainRuntime": "NOT_IMPLEMENTED"
+  }
+}
