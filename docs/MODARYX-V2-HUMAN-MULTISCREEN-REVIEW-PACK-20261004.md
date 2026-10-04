@@ -5,7 +5,7 @@
 
 ## 1. But
 
-Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 61 captures au hasard.
+Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 63 captures au hasard.
 
 Ce pack ne remplace pas :
 - un screen reader réel ;
@@ -42,6 +42,7 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 10. `desktop-account.png`
 11. `desktop-game-hub-atmosphere-rivenfall.png` — variante fictive/originale MODARYX, à évaluer sur la cohérence de marque plutôt que sur la ressemblance à un jeu réel
 12. `desktop-rights-dashboard.png` — administration fictive : vérifier clarté des statuts, scopes et garde-fous
+13. `desktop-game-support-request.png` — vérifier que la demande membre paraît locale, non envoyée et soumise à triage
 
 ### Mobile — noyau
 
@@ -55,6 +56,7 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 8. `mobile-account.png`
 9. `mobile-game-hub-atmosphere-rivenfall.png` — vérifier que l’ambiance reste lisible, secondaire et clairement MODARYX sur petit écran
 10. `mobile-rights-dashboard.png` — vérifier que la hiérarchie admin reste compréhensible sur petit écran
+11. `mobile-game-support-request.png` — vérifier lisibilité du brouillon local et du statut non envoyé
 
 ### États critiques si le participant a encore du temps
 
@@ -135,6 +137,13 @@ Ne pas dire :
    - distinguez-vous autorisation limitée, attente et absence de réponse ?
    - comprenez-vous qu’un scope refusé ou absent reste bloqué ?
    - l’état MODARYX Forge paraît-il clairement séparé des droits Web ?
+
+### Demande membre de support d’un jeu
+
+15. Sur la demande de support d’un jeu :
+   - comprenez-vous que la demande reste locale dans le prototype ?
+   - comprenez-vous qu’un triage MODARYX est obligatoire avant acceptation ?
+   - comprenez-vous qu’aucune demande éditeur ni Rights Case réel n’est créé à ce stade ?
 
 ## 6. Tâches courtes recommandées
 
