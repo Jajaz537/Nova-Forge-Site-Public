@@ -160,6 +160,33 @@ try {
   })()`);
   if (!mobileMenuVisible) fail("mobile menu target not visible/44px");
 
+
+  const rightsOpened = await evaluate(`(() => {
+    const target=[...document.querySelectorAll('footer button')].find(el=>el.textContent.includes('Droits jeux'));
+    if(!target) return false;
+    target.click();
+    return true;
+  })()`);
+  if(!rightsOpened) fail("rights dashboard review entry unavailable");
+  await sleep(180);
+  const rightsTextPresent=await evaluate(`document.body.innerText.includes("Droits des jeux") && document.body.innerText.includes("Aucune demande réelle n’est envoyée dans ce prototype.")`);
+  if(!rightsTextPresent) fail("rights dashboard safety copy missing");
+  const rightsOverflow=await evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth");
+  if(rightsOverflow>1) fail("rights dashboard mobile horizontal overflow "+rightsOverflow);
+  const rightsSmallTargets=await evaluate(`(() => {
+    const selector='a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+    return [...document.querySelectorAll(selector)].filter(el => {
+      const r=el.getBoundingClientRect(), s=getComputedStyle(el);
+      return s.display!=='none' && s.visibility!=='hidden' && r.width>0 && r.height>0 && (r.width < 44 || r.height < 44);
+    }).map(el=>({label:el.getAttribute('aria-label')||el.textContent.trim().slice(0,50),width:Math.round(el.getBoundingClientRect().width*10)/10,height:Math.round(el.getBoundingClientRect().height*10)/10}));
+  })()`);
+  if(rightsSmallTargets.length){
+    console.error(JSON.stringify(rightsSmallTargets,null,2));
+    fail("rights dashboard mobile targets below 44x44: "+rightsSmallTargets.length);
+  }
+  console.log("RIGHTS_MOBILE_OVERFLOW",rightsOverflow);
+  console.log("AX_ASSERT rights dashboard safety surface");
+
   console.log("DESKTOP_OVERFLOW", desktopOverflow);
   console.log("MOBILE_OVERFLOW", mobileOverflow);
   console.log("PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y");
