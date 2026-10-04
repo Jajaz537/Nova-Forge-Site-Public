@@ -626,3 +626,20 @@ Référence :
 Le prototype local ne doit pas inventer de latence. Les skeletons ne seront matérialisés que pour des opérations réellement asynchrones. Empty, loading, refresh stale, offline et erreurs restent des états distincts.
 
 Le backend réel, les mesures de latence et les loading states production restent PREUVE MANQUANTE.
+
+
+## 28. Text spacing / reflow — preuve ciblée — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Preuve :
+- workflow `MODARYX V2 Text Spacing Reflow Micro-Proof`
+- run `37224236854` — **SUCCESS**
+- 12 surfaces ;
+- `TEXT_SPACING_SURFACE_COUNT 12`
+- `PASS_V2_TEXT_SPACING_REFLOW`
+- overflow horizontal 0 sur toutes les surfaces ciblées ;
+- clipping horizontal ciblé 0.
+
+Le test applique un override de spacing renforcé pour détecter les cassures de reflow.  
+Il ne remplace pas un test humain de zoom/text resize, Safari réel, appareil réel ou screen reader.
