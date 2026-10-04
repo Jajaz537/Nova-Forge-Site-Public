@@ -287,6 +287,11 @@ try {
   await evaluate("document.querySelector('.support-triage-result')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("desktop-rights-triage-accepted.png", 1440, 1024, "Rights Case de démonstration préparé — non créé réellement."));
+  await clickByText(".publisher-contact-actions .quiet", "Vérifier le canal de démonstration");
+  await clickByText(".publisher-contact-actions .primary", "Préparer la demande structurée");
+  await evaluate("document.querySelector('.publisher-contact-demo')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("desktop-rights-contact-verified.png", 1440, 1024, "REQUEST_READY"));
   await evaluate("document.querySelector('.rights-interpretation-demo')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("desktop-rights-response-interpretation.png", 1440, 1024, "SAFE_AUTOMATION"));
@@ -390,6 +395,11 @@ try {
   await evaluate("document.querySelector('.support-triage-result')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("mobile-rights-triage-accepted.png", 390, 844, "Rights Case de démonstration préparé — non créé réellement."));
+  await clickByText(".publisher-contact-actions .quiet", "Vérifier le canal de démonstration");
+  await clickByText(".publisher-contact-actions .primary", "Préparer la demande structurée");
+  await evaluate("document.querySelector('.publisher-contact-demo')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("mobile-rights-contact-verified.png", 390, 844, "REQUEST_READY"));
   await evaluate("document.querySelector('.rights-interpretation-demo')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("mobile-rights-response-interpretation.png", 390, 844, "SAFE_AUTOMATION"));
