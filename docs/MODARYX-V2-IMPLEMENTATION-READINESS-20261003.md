@@ -579,3 +579,27 @@ La production doit encore implémenter :
 Le prototype Rights Dashboard reste une preuve comportementale fictive, pas le Registry production.
 
 Le root/frontend production reste BLOQUÉ selon le gate canonique.
+
+
+## 31. MODARYX IA — surface d’intégration exploratoire — 4 octobre 2026
+
+- surface prototype : **TERMINÉE**
+- desktop/mobile : **MATÉRIALISÉS**
+- composer : **DÉSACTIVÉ sans backend réel**
+- sources / permissions / evals / incertitude : **MATÉRIALISÉS**
+- provider IA : **NON SÉLECTIONNÉ**
+- modèle : **NON SÉLECTIONNÉ**
+- backend IA : **NON IMPLÉMENTÉ**
+- RAG / outils / mémoire : **NON IMPLÉMENTÉS**
+- intégration production : **BLOQUÉE par le gate**
+
+Preuve :
+- run `37211271783` — **SUCCESS**
+- commit `f8616f18876c49de45b3d208222be042dd2b543a`
+- artifact `11306731614`
+- `KEYBOARD_REACHABLE 37 / 37`
+- `MULTISCREEN_CAPTURE_COUNT 77`.
+
+Surface map :
+- `modaryx-ai-preview`
+- statut production : `BLOCKED_GATE`.
