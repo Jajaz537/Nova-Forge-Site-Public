@@ -648,3 +648,27 @@ Ces éléments ne justifient pas de lever le gate frontend/High-Fi.
 - validation tactile humaine : **PREUVE MANQUANTE**
 
 Ce résultat améliore la readiness responsive mais ne reclassifie pas le gate High-Fi/root production.
+
+
+## 25. Responsive readiness — matrice multi-largeurs — 4 octobre 2026
+
+**TERMINÉ pour le navigateur automatisé ciblé.**
+
+Preuves :
+- 320×900 : run `37217511653` — SUCCESS ;
+- responsive matrix : run `37218193186` — SUCCESS ;
+- largeurs : 360 / 430 / 768 / 1024 / 1280 / 1920 ;
+- 12 surfaces testées par largeur ;
+- overflow horizontal : 0 sur les surfaces ciblées.
+
+Les corrections Account / Rights / Publisher Contact ont été prouvées par micro-proofs ciblés avant continuation.
+
+Toujours hors preuve :
+- Safari/iOS/iPadOS réels ;
+- vrais appareils ;
+- tactile humain ;
+- zoom navigateur réel ;
+- text resize réel ;
+- screen reader réel.
+
+Cela augmente la readiness mais ne reclassifie pas le gate de production.
