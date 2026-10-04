@@ -634,3 +634,17 @@ Production requise :
 - routing vers le Publisher Response Contract.
 
 Ces éléments ne justifient pas de lever le gate frontend/High-Fi.
+
+
+## 26. Tablet reflow readiness — 4 octobre 2026
+
+- breakpoint medium shell : **MATÉRIALISÉ**
+- viewport micro-proof 834×1112 : **SUCCESS**
+- 12 surfaces : overflow 0
+- run : `37215965531`
+- `PASS_V2_TABLET_REFLOW`
+- vraie tablette : **PREUVE MANQUANTE**
+- Safari/iPadOS : **PREUVE MANQUANTE**
+- validation tactile humaine : **PREUVE MANQUANTE**
+
+Ce résultat améliore la readiness responsive mais ne reclassifie pas le gate High-Fi/root production.
