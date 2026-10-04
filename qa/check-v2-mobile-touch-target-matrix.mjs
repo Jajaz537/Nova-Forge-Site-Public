@@ -149,6 +149,7 @@ try{
   await clickExact("footer button","Droits jeux · démo admin"); await assertTargets("rights-dashboard"); count++;
   await clickExact("footer button","Confiance & légal"); await assertTargets("public-trust"); count++;
   await clickExact("footer button","Aide & documentation"); await assertTargets("help-docs"); count++;
+  await clickExact("footer button","Modération · démo admin"); await assertTargets("moderation-center"); count++;
   await clickExact("footer button","Droits jeux · démo admin");
 
   await clickExact(".support-triage-actions button","Accepter la baseline sûre");
