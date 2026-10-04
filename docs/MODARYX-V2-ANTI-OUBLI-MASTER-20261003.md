@@ -495,3 +495,48 @@ Prochain anti-oubli actif :
 - root/frontend V2 production : **BLOQUÉ par gate de validation** ;
 - validation humaine multi-écrans, mobile humain, référence visuelle approuvée/comparaison, screen reader et appareils physiques : **PREUVE MANQUANTE / externe** ;
 - aucun cutover `main`/public avant les gates dédiés.
+
+
+## 30. Benchmark actuel écosystèmes de mods — 4 octobre 2026
+
+**TERMINÉ — recherche consolidée / intégration produit EN COURS**
+
+Document :
+`docs/MODARYX-V2-CURRENT-MOD-ECOSYSTEM-BENCHMARK-20261004.md`
+
+Écosystèmes étudiés dans cette passe :
+- Nexus Mods / Vortex ;
+- CurseForge ;
+- Modrinth ;
+- Thunderstore / r2modman ;
+- Steam Workshop ;
+- Bethesda Creations ;
+- mod.io ;
+- GameBanana ;
+- Mod DB ;
+- Prism Launcher ;
+- Wabbajack ;
+- signaux communautaires Reddit utilisés uniquement comme signaux UX.
+
+Décisions retenues à ne pas perdre avant VF :
+- toute application future d'une configuration doit afficher un **delta avant mutation** ;
+- sémantique **Ajouter / Remplacer / Annuler** explicite ;
+- dépendances distinguées par origine : **Choisi / Requis / Transitif / Suggéré / Inclus par curateur** ;
+- politique de version : **Auto sûr / Proposer / Épinglé** ;
+- mise à jour significative vers **copie/branche/profil séparé** avant promotion ;
+- Library doit pouvoir accueillir un **Historique** réel, privé par défaut, uniquement quand backend/runtime le prouve ;
+- Creator Studio doit distinguer la **maturité projet** (Concept / WiP / Released / Archived) du canal de release ;
+- crédits/auteurs/co-auteurs/studio/assets tiers/droits doivent devenir structurés ;
+- Collection reste curation ; son éventuelle application locale est une capacité distincte ;
+- support d'une composition complexe relève du curateur/auteur de composition, pas automatiquement des auteurs de chaque mod ;
+- source/provider doit rester distinct de l'auteur ;
+- import/export doit produire un **rapport de compatibilité/pertes**, jamais une conversion silencieuse ;
+- vue débutant recommandée + vue expert transparente sans graph de conflits incompréhensible.
+
+Prototype / production :
+- ces décisions sont **retenues comme exigences de conception** ;
+- elles ne prouvent aucun runtime MODARYX Forge ;
+- aucun téléchargement/installation/provider réel n'est simulé ;
+- toute idée ajoutée au prototype doit rester explicitement démonstration/local-only lorsque les services réels sont absents.
+
+**Prochain travail interne : matérialiser dans Living Threshold les décisions qui peuvent être démontrées honnêtement sans backend, puis micro-proof ciblé.**
