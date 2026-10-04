@@ -278,6 +278,9 @@ try {
   await clickByAriaLabel("MODARYX IA");
   manifest.captures.push(await capture("desktop-modaryx-ai.png", 1440, 1024, "MODARYX IA n’est pas active dans cette démo."));
 
+  await clickByText("footer button", "Confiance & légal");
+  manifest.captures.push(await capture("desktop-public-trust.png", 1440, 1024, "Confiance, informations légales et transparence."));
+
   await clickByText(".global-nav button", "Créer");
   manifest.captures.push(await capture("desktop-creator-studio.png", 1440, 1024, "Creator Studio"));
   await clickByText(".studio-workflow .primary", "Créer un projet local");
@@ -427,6 +430,9 @@ try {
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav .mobile-nav-utility", "MODARYX IA");
   manifest.captures.push(await capture("mobile-modaryx-ai.png", 390, 844, "MODARYX IA n’est pas active dans cette démo."));
+
+  await clickByText("footer button", "Confiance & légal");
+  manifest.captures.push(await capture("mobile-public-trust.png", 390, 844, "Confiance, informations légales et transparence."));
 
   await clickByText("footer button", "Droits jeux · démo admin");
   manifest.captures.push(await capture("mobile-rights-dashboard.png", 390, 844, "Aucune demande réelle n’est envoyée dans ce prototype."));
