@@ -153,6 +153,7 @@ try{
   await clickUtility("MODARYX IA"); await assertSurface("modaryx-ai"); count++;
   await clickExact("footer button","Droits jeux · démo admin"); await assertSurface("rights-dashboard"); count++;
   await clickExact("footer button","Confiance & légal"); await assertSurface("public-trust"); count++;
+  await clickExact("footer button","Aide & documentation"); await assertSurface("help-docs"); count++;
 
   console.log("FORCED_COLORS_SURFACE_COUNT",count);
   console.log("PASS_V2_FORCED_COLORS_SMOKE");
