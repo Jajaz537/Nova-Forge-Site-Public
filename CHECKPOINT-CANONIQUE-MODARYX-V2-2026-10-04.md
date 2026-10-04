@@ -2058,3 +2058,61 @@ Statut réel :
 - DNS/Cloudflare : `UNCHANGED`.
 
 Le contrat ne vaut pas preuve d'un vrai cutover.
+
+
+## 62. Registry contrats pré-production étendu — 35 contrats
+
+**TERMINÉ pour les contrats / implémentations réelles restent distinctes**
+
+Registry :
+`qa/modaryx-v2-preproduction-contract-registry.json`
+
+Run :
+`37235820192` — **SUCCESS**
+
+Marqueurs :
+- `PASS_V2_STORAGE_CACHE_SW_MIGRATION_CONTRACT`
+- `PASS_V2_TRUST_PROVENANCE_DISTRIBUTION_CONTRACT`
+- `PASS_V2_INSTALL_MANAGER_CONTRACT`
+- `PASS_V2_FRONTEND_ISOLATION_CONTRACT`
+- `PASS_V2_THREAT_MODEL_CONTRACT`
+- `PASS_V2_A11Y_PERF_DESIGN_SYSTEM_CONTRACT`
+- `PASS_V2_GAME_SUPPORT_LIFECYCLE_CONTRACT`
+- `PASS_V2_GAME_HUB_CONTRACT`
+- `PASS_V2_SEARCH_FILTER_DISCOVERY_CONTRACT`
+- `PASS_V2_CONTENT_DETAIL_CONTRACT`
+- `PASS_V2_COLLECTION_MODPACK_PROFILE_CONTRACT`
+- `PASS_V2_CREATOR_STUDIO_CONTRACT`
+- `PASS_V2_COMMUNITY_LIBRARY_NAV_CONTRACT`
+- `PASS_V2_CRITICAL_FLOWS_CONTRACT`
+- `PREPRODUCTION_CONTRACT_COUNT 35`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+Nouveaux garde-fous machine consolidés :
+- migration localStorage/cache/SW non destructive ;
+- provenance/hash/signature/scan/distribution fail-closed ;
+- manager/install jamais simulé ;
+- isolation frontend V2 stricte ;
+- threat model pré-implémentation ;
+- WCAG/performance/design-system contractuel ;
+- cycle de vie support jeu ;
+- Game Hub ;
+- recherche/filtres/découverte ;
+- Content Detail ;
+- Collection/Modpack/Profile ;
+- Creator Studio ;
+- Community/Library/navigation ;
+- parcours critiques.
+
+Important :
+ce run prouve les **contrats et invariants**, pas :
+- backend ;
+- auth ;
+- runtime MODARYX Forge ;
+- distribution réelle ;
+- migration SW réelle ;
+- production ;
+- validation humaine ;
+- appareils ;
+- screen readers ;
+- Core Web Vitals réels.
