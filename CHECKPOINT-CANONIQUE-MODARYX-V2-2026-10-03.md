@@ -1756,3 +1756,30 @@ Statut :
 - moteur automatique : **NON IMPLÉMENTÉ**
 - envoi réel : **NON IMPLÉMENTÉ**
 - validation de licence : **NON IMPLÉMENTÉ**
+
+
+### Micro-preuve workflow droits jeux — 4 octobre 2026
+
+**TERMINÉ pour le contrat pré-production / aucune demande réelle envoyée**
+
+Fichiers :
+- `qa/modaryx-v2-game-rights-workflow.json`
+- `qa/check-v2-game-rights-workflow.mjs`
+- `.github/workflows/modaryx-v2-game-rights-workflow-proof.yml`
+
+Preuve :
+- workflow : `MODARYX V2 Game Rights Workflow Proof`
+- run : `37196259361` — **SUCCESS**
+- commit capturé : `038a5b0e51eea76bb6859f7ead12ed18eef20894`
+- marqueur attendu : `PASS_V2_GAME_RIGHTS_WORKFLOW`
+
+Invariants verrouillés :
+- `NO_RESPONSE` ne vaut jamais autorisation ;
+- refus/expiration/révocation ne débloquent aucun droit ;
+- seuls les scopes accordés peuvent débloquer un usage ;
+- contact officiel vérifié requis avant outbound ;
+- idempotence obligatoire ;
+- droits web et MODARYX Forge séparés ;
+- statut production reste explicitement `NOT_IMPLEMENTED` tant que le backend réel n’existe pas.
+
+Cette preuve valide le **contrat et son garde-fou**, pas le moteur réel, l’envoi de mails, l’analyse juridique ni le Game Rights Registry production.
