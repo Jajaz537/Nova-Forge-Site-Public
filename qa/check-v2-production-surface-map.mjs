@@ -83,6 +83,18 @@ for (const requiredState of [
   if (!unresolved.has(requiredState)) throw new Error("missing unresolved runtime state: " + requiredState);
 }
 
+const trustContract = JSON.parse(fs.readFileSync("qa/modaryx-v2-public-trust-contract.json", "utf8"));
+if (trustContract.schemaVersion !== 1) throw new Error("public trust schemaVersion");
+if ((trustContract.categories || []).length !== 8) throw new Error("public trust categories");
+if ((trustContract.readinessStates || []).length !== 7) throw new Error("public trust readiness states");
+if ((trustContract.invariants || []).length < 10) throw new Error("public trust invariants");
+if ((trustContract.publishableStates || []).join("|") !== "APPROVED_FOR_PUBLICATION|PUBLISHED") {
+  throw new Error("public trust publishable states");
+}
+console.log("PUBLIC_TRUST_CATEGORY_COUNT", trustContract.categories.length);
+console.log("PUBLIC_TRUST_STATE_COUNT", trustContract.readinessStates.length);
+console.log("PASS_V2_PUBLIC_TRUST_CONTRACT");
+
 console.log("SURFACE_MAP_COUNT", data.surfaces.length);
 console.log("UNRESOLVED_RUNTIME_COUNT", unresolved.size);
 console.log("PASS_V2_PRODUCTION_SURFACE_MAP");
