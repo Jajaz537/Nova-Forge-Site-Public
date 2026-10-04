@@ -349,3 +349,36 @@ La surface démontre :
 - email/push restent indisponibles sans infrastructure.
 
 Cette preuve ne valide aucune notification production et ne ferme aucun blocker humain/appareil.
+
+
+## 18. Cycle de vie des droits éditeurs — preuve prototype — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Preuve Living Threshold :
+- run `37204012017` — **SUCCESS** ;
+- commit capturé `7dc36e1231872d1fdd5a7af17bed6f5ad0b717da` ;
+- artifact `11303812534` ;
+- digest `sha256:9718d2ff47e24b3ba50707bcb340adfe5fbff9bc24f7b73c0a95a93b1ff8cf00` ;
+- `FLOW_ASSERT rights lifecycle expired revoked scopes reblocked` ;
+- `MULTISCREEN_CAPTURE_COUNT 73` ;
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Preuve contrat :
+- run `37204099457` — **SUCCESS** ;
+- `RIGHTS_LIFECYCLE_STATE_COUNT 4` ;
+- `RIGHTS_LIFECYCLE_INVARIANT_COUNT 9` ;
+- `RIGHTS_LIFECYCLE_REACTIVATION_EVIDENCE_COUNT 6` ;
+- `PASS_V2_RIGHTS_LIFECYCLE_CONTRACT`.
+
+Matérialisé :
+- ACTIVE_WITH_LIMITS ;
+- EXPIRING_SOON ;
+- EXPIRED ;
+- REVOKED ;
+- expiration/révocation → usages dépendants rebloqués ;
+- fallback baseline originale MODARYX ;
+- aucune réactivation silencieuse ;
+- MODARYX Forge reste un droit distinct.
+
+Cette preuve améliore la couverture du workflow droits mais ne prouve aucun scheduler, monitor d'expiration, inbound de révocation, lock production ou licence réelle et ne lève aucun blocker humain/appareil.
