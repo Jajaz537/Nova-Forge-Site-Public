@@ -41,6 +41,7 @@ Fonctions UI actuellement présentes :
 - `RightsDashboard`
 - `PublicLegalTrust`
 - `HelpDocs`
+- `ModerationCenter`
 - `App`
 
 Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles matérialisent les comportements à conserver.
@@ -68,6 +69,7 @@ Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles mat
 | RightsDashboard | RightsAdminPage + RightsCaseList + RightsScopeMatrix + PublisherContactVerification + PublisherRequestReadiness + RightsLifecyclePreview + IpTakedownPreview | RightsCase + RightsScope + PublisherContact + RightsLifecycle + IpCase | rights registry/IP backend futur |
 | PublicLegalTrust | PublicTrustPage + TrustReadinessGrid + PublicTrustGate | LegalDocumentReadiness + PublicTrustChannel | faits opérateur + politiques + canaux réels futurs |
 | HelpDocs | HelpDocsPage + HelpTopicGrid + HelpActionLinks | HelpTopic + DocumentationReadiness + ProductCapabilityReference | contenu final + routes/capacités réelles futures |
+| ModerationCenter | ModerationAdminPage + ModerationCaseList + ModerationDecisionHistory + ModerationAppealState | Report + ModerationCase + ModerationDecision + Appeal + ModerationAuditEvent | moderation backend + server role authority futurs |
 | App | Route shell | routing | stack à sélectionner |
 
 ## 4. Primitives et composants à extraire
@@ -128,6 +130,9 @@ Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles mat
 - HelpTopicGrid
 - HelpActionLinks
 - DocumentationReadinessState
+- ModerationCaseList
+- ModerationDecisionHistory
+- ModerationAppealState
 
 Aucun de ces patterns ne doit importer le CSS V1.
 
@@ -227,6 +232,7 @@ Interfaces conceptuelles, framework-agnostic :
 - `IpCaseRepository`
 - `PublicTrustRepository`
 - `HelpRepository`
+- `ModerationRepository`
 
 Chaque adapter doit pouvoir retourner :
 - nominal ;
@@ -261,6 +267,7 @@ Le prototype utilise un état React local. La production doit utiliser des route
 - `/library`
 - `/account`
 - `/admin/rights` — administration authentifiée uniquement
+- `/admin/moderation` — modération/appels, autorité serveur uniquement
 - `/trust` — informations publiques de confiance/readiness, textes finaux uniquement après validation
 - `/help` — documentation produit finale liée aux capacités réellement livrées
 
@@ -319,6 +326,8 @@ Prototype :
 - compatibilité/prérequis ;
 - manager/runtime absent explicitement ;
 - rights workflow fictif : approved-with-limits / awaiting-response / no-response ;
+- moderation fictive : RECEIVED / UNDER_REVIEW / APPEALED ;
+- actions serveur de modération désactivées sans autorité réelle ;
 - outbound rights désactivé sans backend ;
 - triage admin support jeu : TRIAGE / ACCEPTED_SAFE_BASELINE / DECLINED_PRODUCT en démonstration.
 
@@ -396,10 +405,11 @@ Quand le gate autorisera le root :
 12. Rights admin / Game Rights Registry ;
 13. Public Trust / informations publiques ;
 14. Help / Documentation ;
-15. PWA V2 séparée ;
-16. QA complète ;
-17. upgrade/rollback V1→V2 ;
-18. cutover seulement après preuves.
+15. Moderation / Appeals ;
+16. PWA V2 séparée ;
+17. QA complète ;
+18. upgrade/rollback V1→V2 ;
+19. cutover seulement après preuves.
 
 ## 16. Gate
 
