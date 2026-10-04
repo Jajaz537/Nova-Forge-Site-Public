@@ -347,3 +347,32 @@ Toujours requis avant production :
 - recours réel ;
 - legal review opérationnelle ;
 - revue juridique externe des obligations applicables.
+
+
+### Preuve CI provenance assets prototype — 4 octobre 2026
+
+Le garde-fou de provenance est désormais matérialisé pour les assets du prototype Living Threshold.
+
+Fichiers :
+- `qa/modaryx-v2-asset-rights-manifest.json`
+- `qa/check-v2-asset-rights-provenance.mjs`
+- workflow `MODARYX V2 Asset Rights Provenance Proof`
+
+Preuve :
+- run `37205150007` — **SUCCESS**
+- `ASSET_RIGHTS_PROVENANCE_COUNT 2`
+- `ASSET_RIGHTS_REMOTE_REFERENCE_COUNT 0`
+- `PASS_V2_ASSET_RIGHTS_PROVENANCE`
+
+Le guard :
+- bloque tout asset média non listé dans le root prototype ;
+- bloque les statuts Unknown/Forbidden ;
+- exige `ALLOWED_PROTOTYPE_ONLY` pour les deux assets actuels ;
+- vérifie leur Git blob SHA ;
+- exige une référence de politique ;
+- bloque les références visuelles/média distantes HTTP(S) dans `App.jsx` / `styles.css`.
+
+Important :
+- les deux assets restent classés **prototype only** ;
+- le manifest répète explicitement qu'une archive de provenance/licence production reste requise ;
+- cette preuve ne vaut pas licence commerciale ni autorisation d'éditeur.
