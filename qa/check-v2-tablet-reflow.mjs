@@ -53,14 +53,47 @@ async function clickText(selector,text){
   if(!ok) throw new Error("unable to click "+text);
   await sleep(100);
 }
-async function clickAria(label){
-  const ok=await evaluate(`(() => {
-    const b=[...document.querySelectorAll('[aria-label]')].find(el=>el.getAttribute('aria-label')===${JSON.stringify(label)} && getComputedStyle(el).display!=='none');
-    if(!b||b.disabled) return false;
+async function openTabletMenu(){
+  const visible=await evaluate(`(() => {
+    const menu=document.querySelector('.mobile-menu');
+    if(!menu) return false;
+    const s=getComputedStyle(menu);
+    if(s.display==='none') return false;
+    const nav=document.querySelector('.global-nav');
+    if(nav&&nav.classList.contains('open')) return true;
+    menu.click();
+    return true;
+  })()`);
+  if(!visible) throw new Error("tablet menu unavailable");
+  await sleep(80);
+}
+async function navigatePrimary(text){
+  const direct=await evaluate(`(() => {
+    const b=[...document.querySelectorAll('.global-nav button')].find(el=>el.textContent.trim()===${JSON.stringify(text)});
+    if(!b) return false;
+    const s=getComputedStyle(b);
+    if(s.display==='none'||b.getBoundingClientRect().width===0) return false;
     b.click(); return true;
   })()`);
-  if(!ok) throw new Error("unable to click aria "+label);
-  await sleep(100);
+  if(!direct){
+    await openTabletMenu();
+    await clickText(".global-nav button",text);
+  } else {
+    await sleep(100);
+  }
+}
+async function navigateUtility(text){
+  const direct=await evaluate(`(() => {
+    const desktop=[...document.querySelectorAll('.top-actions button')].find(el=>el.getAttribute('aria-label')===${JSON.stringify(text)});
+    if(desktop&&getComputedStyle(desktop).display!=='none'&&desktop.getBoundingClientRect().width>0){desktop.click();return true;}
+    return false;
+  })()`);
+  if(!direct){
+    await openTabletMenu();
+    await clickText(".global-nav .mobile-nav-utility",text);
+  } else {
+    await sleep(100);
+  }
 }
 async function assertNoOverflow(label){
   const result=await evaluate(`(() => {
@@ -103,39 +136,39 @@ try{
   await waitBodyText("Catalogue consultable — téléchargement non garanti");
   await assertNoOverflow("game-hub");
 
-  await clickText(".global-nav button","Jeux");
+  await navigatePrimary("Jeux");
   await waitBodyText("Trouvez votre prochain terrain de jeu");
   await assertNoOverflow("games-index");
 
-  await clickText(".global-nav button","Mods & contenus");
+  await navigatePrimary("Mods & contenus");
   await waitBodyText("Catalogue global");
   await assertNoOverflow("catalog");
 
-  await clickText(".global-nav button","Collections");
+  await navigatePrimary("Collections");
   await waitBodyText("Organiser n’est pas installer.");
   await assertNoOverflow("collections");
 
-  await clickText(".global-nav button","Créateurs");
+  await navigatePrimary("Créateurs");
   await waitBodyText("Créateurs, équipes et studios.");
   await assertNoOverflow("creators");
 
-  await clickText(".global-nav button","Communauté");
+  await navigatePrimary("Communauté");
   await waitBodyText("Des échanges utiles autour des créations.");
   await assertNoOverflow("community");
 
-  await clickText(".global-nav button","Créer");
+  await navigatePrimary("Créer");
   await waitBodyText("Creator Studio");
   await assertNoOverflow("creator-studio");
 
-  await clickAria("Bibliothèque");
+  await navigateUtility("Bibliothèque");
   await waitBodyText("Retrouvez favoris, suivis, collections, profils et historique");
   await assertNoOverflow("library");
 
-  await clickAria("Compte");
+  await navigateUtility("Compte");
   await waitBodyText("Compte & préférences");
   await assertNoOverflow("account");
 
-  await clickAria("MODARYX IA");
+  await navigateUtility("MODARYX IA");
   await waitBodyText("Une IA native du produit, pas un chatbot greffé.");
   await assertNoOverflow("modaryx-ai");
 
