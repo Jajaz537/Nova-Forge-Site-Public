@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "BLOCKED",
+  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-04.md",
+  "rule": "NO_VF_OR_HIGH_FI_FINAL_WHILE_REQUIRED_BLOCKER_OPEN",
+  "externalHuman": [
+    {
+      "id": "human-multiscreen",
+      "state": "OPEN"
+    },
+    {
+      "id": "human-mobile",
+      "state": "OPEN"
+    },
+    {
+      "id": "approved-visual-reference",
+      "state": "OPEN"
+    },
+    {
+      "id": "normalized-visual-comparison",
+      "state": "OPEN"
+    },
+    {
+      "id": "nvda-real",
+      "state": "OPEN"
+    },
+    {
+      "id": "voiceover-real",
+      "state": "OPEN"
+    },
+    {
+      "id": "talkback-real",
+      "state": "OPEN"
+    },
+    {
+      "id": "safari-real",
+      "state": "OPEN"
+    },
+    {
+      "id": "physical-devices",
+      "state": "OPEN"
+    }
+  ],
+  "webProduction": [
+    {
+      "id": "stack-selected",
+      "state": "OPEN"
+    },
+    {
+      "id": "root-v2-created",
+      "state": "OPEN"
+    },
+    {
+      "id": "backend-real",
+      "state": "OPEN"
+    },
+    {
+      "id": "auth-passkeys-real",
+      "state": "OPEN"
+    },
+    {
+      "id": "real-data-history",
+      "state": "OPEN"
+    },
+    {
+      "id": "providers-connectors-real",
+      "state": "OPEN"
+    },
+    {
+      "id": "notifications-email-push-real",
+      "state": "OPEN"
+    },
+    {
+      "id": "pwa-service-worker-production",
+      "state": "OPEN"
+    },
+    {
+      "id": "v1-v2-browser-migration",
+      "state": "OPEN"
+    },
+    {
+      "id": "core-web-vitals-production",
+      "state": "OPEN"
+    },
+    {
+      "id": "cutover",
+      "state": "OPEN"
+    }
+  ],
+  "forgeRuntime": [
+    {
+      "id": "forge-runtime",
+      "state": "OPEN"
+    },
+    {
+      "id": "transport-protocol",
+      "state": "OPEN"
+    },
+    {
+      "id": "receipt-signature",
+      "state": "OPEN"
+    },
+    {
+      "id": "install-update-rollback",
+      "state": "OPEN"
+    },
+    {
+      "id": "safe-profile",
+      "state": "OPEN"
+    },
+    {
+      "id": "server-save-sync",
+      "state": "OPEN"
+    }
+  ],
+  "rightsLegal": [
+    {
+      "id": "game-rights-registry-production",
+      "state": "OPEN"
+    },
+    {
+      "id": "official-contact-discovery",
+      "state": "OPEN"
+    },
+    {
+      "id": "publisher-outbound",
+      "state": "OPEN"
+    },
+    {
+      "id": "publisher-response-parsing",
+      "state": "OPEN"
+    },
+    {
+      "id": "license-validation",
+      "state": "OPEN"
+    },
+    {
+      "id": "legal-review-where-required",
+      "state": "OPEN"
+    }
+  ],
+  "currentlyProven": [
+    "anti-contamination-guard",
+    "living-threshold-prototype-browser-a11y-targeted",
+    "product-flows-prototype",
+    "multiscreen-prototype-87-captures-current-code-proof",
+    "production-surface-map",
+    "preproduction-contract-registry-35",
+    "game-atmosphere-original-prototype",
+    "rights-dashboard-prototype",
+    "member-game-support-request-prototype"
+  ],
+  "invariants": [
+    "PUBLIC_GREEN_NEVER_IMPLIES_PRODUCTION_VF",
+    "PROTOTYPE_GREEN_NEVER_IMPLIES_HIGH_FI_FINAL",
+    "AUTOMATED_BROWSER_NEVER_REPLACES_REAL_SCREEN_READER_OR_DEVICE",
+    "WORK_NEVER_REPLACES_REAL_HUMAN_VALIDATION",
+    "NO_CUTOVER_WITHOUT_ROLLBACK_PROOF",
+    "NO_REAL_INSTALL_CLAIM_WITHOUT_FORGE_RUNTIME",
+    "NO_PUBLISHER_APPROVAL_CLAIM_WITHOUT_SCOPE_EVIDENCE",
+    "NO_VF_WHILE_ANY_REQUIRED_BLOCKER_OPEN"
+  ]
+}
