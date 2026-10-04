@@ -338,6 +338,21 @@ try{
   await waitText("Équipes de création");
 
 
+  await clickText("footer button","Modération · démo admin");
+  await waitText("Modération, signalements et appels.");
+  await waitText("Aucune action de modération réelle n’est exécutée dans cette démo.");
+  const moderationDisabledActions=await evaluate(`[...document.querySelectorAll('.moderation-actions button')].filter(b=>b.disabled).length`);
+  if(moderationDisabledActions!==3) throw new Error("moderation server actions must remain disabled");
+  await evaluate(`document.querySelectorAll('.moderation-case-list button')[1]?.click()`);
+  await sleep(160);
+  await waitText("UNDER_REVIEW");
+  await waitText("La quarantaine réelle nécessite une autorité serveur");
+  await evaluate(`document.querySelectorAll('.moderation-case-list button')[2]?.click()`);
+  await sleep(160);
+  await waitText("APPEALED");
+  await waitText("L’appel reste rattaché à la décision précédente");
+  console.log("FLOW_ASSERT moderation appeals preserves server authority and prior decision");
+
   await clickText("footer button","Droits jeux · démo admin");
   await waitText("Droits des jeux");
   await waitText("Aucune demande réelle n’est envoyée dans ce prototype.");
