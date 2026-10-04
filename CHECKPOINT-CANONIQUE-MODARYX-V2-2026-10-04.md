@@ -2200,3 +2200,32 @@ Verrouillé :
 - aucun faux PASS/VF.
 
 Les risques runtime, appareils, humain, production et droits restent ouverts tant que leurs preuves n'existent pas.
+
+
+## 66. Registry contrats pré-production étendu — 45 contrats
+
+**TERMINÉ pour les contrats / validation humaine et production restent BLOQUÉES**
+
+Run :
+`37236534430` — **SUCCESS**
+
+Nouveaux marqueurs :
+- `PASS_V2_SCREEN_ACCEPTANCE_CONTRACT`
+- `PASS_V2_PRODUCT_ARCHITECTURE_CONTRACT`
+- `PASS_V2_CONTENT_TAXONOMY_CONTRACT`
+- `PASS_V2_V1_V2_MAPPING_CONTRACT`
+- `PREPRODUCTION_CONTRACT_COUNT 45`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+Verrouillé en plus :
+- critères d'acceptation écran par écran ;
+- architecture produit et navigation fonctionnelle ;
+- taxonomie extensible par jeu ;
+- agrégats Collection/Modpack/Profile non confondus ;
+- V1 reste immuable ;
+- mapping V1→V2 explicite, sans invention silencieuse ;
+- demo catalog = fixture only ;
+- search index V1 = rebuild, pas migration en place ;
+- localStorage V1→V2 non destructif.
+
+Ces preuves ne ferment pas le gate humain/High-Fi ni les 32 blockers VF déjà comptabilisés.
