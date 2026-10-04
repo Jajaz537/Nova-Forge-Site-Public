@@ -1293,3 +1293,35 @@ Production toujours non implémentée :
 - observabilité ;
 - mémoire réelle ;
 - intégration MODARYX Forge.
+
+
+## 48. Publisher Outbound — transport automatique contrôlé — 4 octobre 2026
+
+**TERMINÉ pour le contrat / transport production PREUVE MANQUANTE**
+
+Preuve :
+- run `37210953700` — **SUCCESS**
+- `PUBLISHER_OUTBOUND_STATE_COUNT 11`
+- `PUBLISHER_OUTBOUND_ENQUEUE_GUARD_COUNT 9`
+- `PUBLISHER_OUTBOUND_INVARIANT_COUNT 10`
+- `PASS_V2_PUBLISHER_OUTBOUND_CONTRACT`
+
+À ne jamais perdre :
+- REQUEST_READY n’est pas envoyé ;
+- contact officiel vérifié avant queue ;
+- support accepté + Rights Case + scopes + template + canal autorisé requis ;
+- clé d’idempotence unique ;
+- refus actif / opt-out bloque la queue ;
+- transport réussi n’accorde aucun droit ;
+- bounce ne déclenche jamais la recherche d’une adresse devinée ;
+- retry technique conserve l’identité logique de la demande ;
+- relance éditeur ≠ retry technique ;
+- Web et MODARYX Forge gardent leurs scopes séparés.
+
+Toujours PREUVE MANQUANTE :
+- queue réelle ;
+- provider email/API ;
+- identité d’envoi ;
+- webhook delivery/bounce ;
+- corrélation reply ;
+- audit transport production.
