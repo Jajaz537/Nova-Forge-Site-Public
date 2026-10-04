@@ -423,14 +423,20 @@
       "prototypeStatus": "MATERIALIZED",
       "productionStatus": "BLOCKED_GATE",
       "components": [
-        "NotificationsCenter"
+        "NotificationsCenter",
+        "RightsNotificationPreview"
       ],
       "domains": [
-        "Notification"
+        "Notification",
+        "RightsCase"
       ],
       "states": [
         "empty",
-        "unavailable"
+        "unavailable",
+        "rights-approved-with-limits-demo",
+        "rights-legal-review-required-demo",
+        "email-unavailable",
+        "push-unavailable"
       ],
       "mobile": "DEDICATED_RESPONSIVE"
     },
