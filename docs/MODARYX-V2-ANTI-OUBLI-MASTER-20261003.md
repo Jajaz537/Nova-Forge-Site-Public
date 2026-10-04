@@ -812,3 +812,48 @@ Toujours PREUVE MANQUANTE / à implémenter :
 - Game Atmosphere Engine production.
 
 **Règle permanente : mieux vaut une ambiance MODARYX originale légèrement moins littérale qu'une imitation risquée de l'identité d'un éditeur.**
+
+
+## 34. Game Atmosphere Engine — matérialisation exploratoire — 4 octobre 2026
+
+**TERMINÉ pour le prototype / garde-fous droits actifs**
+
+Référence politique :
+`docs/MODARYX-V2-GAME-ATMOSPHERE-IP-POLICY-20261004.md`
+
+Matérialisé :
+- couches d'ambiance originales MODARYX ;
+- jeux fictifs uniquement dans la preuve ;
+- switching d'ambiance desktop/mobile ;
+- cartes Jeux avec tonalités différenciées ;
+- aucun asset éditeur réel ;
+- cibles tactiles corrigées à ≥44 px.
+
+Preuve :
+- micro-proof touch : run `37193592557` — **SUCCESS**
+- Living Threshold : run `37193557372` — **SUCCESS**
+- artifact `11299852513`
+- digest `sha256:15aad746b128a0be7ae3f2b59d1529c229876a431ac78935cb95c9f4d5e70eec`
+- `KEYBOARD_REACHABLE 35 / 35`
+- `MULTISCREEN_CAPTURE_COUNT 59`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`.
+
+Règles anti-oubli :
+- ne jamais créer un thème GTA/RDR/etc. avec assets officiels non autorisés ;
+- le nom du jeu peut être référentiel, mais MODARYX doit rester dominant ;
+- Game Rights Registry requis avant production ;
+- `Unknown = ne pas utiliser` ;
+- original MODARYX par défaut ;
+- aucune musique/OST officielle sans licence ;
+- aucun background marketing automatique à partir d'un screenshot utilisateur ;
+- revue éditeur + takedown/IP requis avant lancement public ;
+- thème uniforme MODARYX + reduced motion/performance fallback requis.
+
+Toujours PREUVE MANQUANTE :
+- vrais profils d'ambiance par jeux commerciaux ;
+- rights registry ;
+- checks CI droits/licences ;
+- validation juridique externe pour usages sensibles ;
+- moteur production.
+
+**Règle permanente : une ambiance premium doit renforcer MODARYX sans imiter l'identité protégée d'un éditeur.**
