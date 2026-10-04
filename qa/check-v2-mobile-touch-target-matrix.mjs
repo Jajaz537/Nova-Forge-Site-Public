@@ -85,7 +85,7 @@ async function assertTargets(label){
     const selector='button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[role="button"]';
     const targets=[...document.querySelectorAll(selector)].filter(el=>{
       const r=el.getBoundingClientRect(),s=getComputedStyle(el);
-      return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight;
+      return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0;
     });
     const small=targets.filter(el=>{
       const r=el.getBoundingClientRect();
