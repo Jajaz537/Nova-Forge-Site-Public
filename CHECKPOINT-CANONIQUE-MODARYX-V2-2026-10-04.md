@@ -1795,3 +1795,39 @@ Toujours NON IMPLÉMENTÉ :
 - CSP enforcement production ;
 - headers production ;
 - validation auth/providers/PWA sous CSP.
+
+
+## 55. Notifications / préférences — preuve contrat
+
+**TERMINÉ pour le contrat / services distants PREUVE MANQUANTE**
+
+Source :
+`docs/MODARYX-V2-NOTIFICATIONS-PREFERENCES-CONTRACT-20261003.md`
+
+Machine contract :
+`qa/modaryx-v2-notifications-preferences-contract.json`
+
+Preuve :
+- run `37232212946` — **SUCCESS**
+- commit `d9ade196211e0dabe9465c555ee8c1134bd9baa1`
+- `NOTIFICATION_TYPE_COUNT 27`
+- `NOTIFICATION_PRIORITY_COUNT 4`
+- `NOTIFICATION_INVARIANT_COUNT 10`
+- `PASS_V2_NOTIFICATIONS_PREFERENCES_CONTRACT`.
+
+Verrouillé :
+- aucune notification distante inventée ;
+- email/push cachés ou disabled sans infrastructure réelle ;
+- marketing = opt-in explicite séparé ;
+- pas d'écrasement silencieux en conflit de préférences ;
+- badge uniquement depuis un compte réel ;
+- notifications droits uniquement depuis un événement Rights réel ;
+- `LEGAL_REVIEW_REQUIRED` ne débloque aucun droit ;
+- Web et MODARYX Forge restent séparés.
+
+Toujours NON IMPLÉMENTÉ :
+- événements serveur ;
+- email ;
+- push ;
+- préférences distantes ;
+- résolution sync backend.
