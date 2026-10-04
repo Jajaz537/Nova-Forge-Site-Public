@@ -2411,3 +2411,28 @@ Types de sessions structurés :
 - VISUAL_REFERENCE_COMPARISON.
 
 État réel : toutes ces preuves externes restent `NOT_PROVEN` tant qu'une vraie session/artifact correspondant n'existe pas.
+
+
+## 72. Handoff Work — blockers externes
+
+**TERMINÉ pour la préparation / blockers externes toujours ouverts**
+
+Document :
+`docs/MODARYX-V2-WORK-HANDOFF-EXTERNAL-GATES-20261004.md`
+
+Priorité Work si utilisé :
+1. tenter de retrouver et archiver la référence visuelle source réellement approuvée ;
+2. fournir provenance + dimensions + checksum + artifact ;
+3. seulement ensuite préparer une comparaison source ↔ implémentation normalisée.
+
+Interdit :
+- recréer une fausse référence ;
+- utiliser le prototype comme sa propre source ;
+- remplacer une validation humaine réelle ;
+- remplacer NVDA/VoiceOver/TalkBack/appareil physique ;
+- fermer un blocker sans artifact.
+
+Si la source n'est pas retrouvée :
+`SOURCE_REFERENCE_NOT_RECOVERED` et le blocker reste ouvert.
+
+Ce handoff n'autorise aucun root, aucune stack, aucun cutover.
