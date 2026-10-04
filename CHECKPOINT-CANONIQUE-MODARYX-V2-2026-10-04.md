@@ -743,3 +743,51 @@ Micro-proof après correction :
 - `PASS_V2_RIGHTS_NOTIFICATION_PREVIEW`.
 
 Le full Living Threshold de continuation doit rester séparément prouvé avant d’archiver le nouveau nombre de captures.
+
+
+## 27. Cycle de vie des droits — expiration / révocation
+
+**TERMINÉ pour le contrat + prototype / automation production PREUVE MANQUANTE**
+
+Contrat :
+- `qa/modaryx-v2-rights-lifecycle-contract.json`
+- `qa/check-v2-rights-lifecycle-contract.mjs`
+- workflow `MODARYX V2 Rights Lifecycle Contract Proof`
+
+Preuve contrat :
+- run `37204099457` — **SUCCESS**
+- `RIGHTS_LIFECYCLE_STATE_COUNT 4`
+- `RIGHTS_LIFECYCLE_INVARIANT_COUNT 9`
+- `RIGHTS_LIFECYCLE_REACTIVATION_EVIDENCE_COUNT 6`
+- `PASS_V2_RIGHTS_LIFECYCLE_CONTRACT`
+
+Preuve UI :
+- Living Threshold run `37204012017` — **SUCCESS**
+- commit capturé `7dc36e1231872d1fdd5a7af17bed6f5ad0b717da`
+- artifact `11303812534`
+- digest `sha256:9718d2ff47e24b3ba50707bcb340adfe5fbff9bc24f7b73c0a95a93b1ff8cf00`
+- `FLOW_ASSERT rights lifecycle expired revoked scopes reblocked`
+- `MULTISCREEN_CAPTURE_COUNT 73`
+
+Surface map :
+- run `37204224753` — **SUCCESS**
+- `SURFACE_MAP_COUNT 23`
+- `UNRESOLVED_RUNTIME_COUNT 6`
+- `PASS_V2_PRODUCTION_SURFACE_MAP`
+
+Règles :
+- EXPIRED et REVOKED rebloquent tous les usages dépendants ;
+- EXPIRING_SOON ne crée aucun droit supplémentaire ;
+- baseline originale MODARYX comme fallback lorsque juridiquement acceptable ;
+- aucune réactivation silencieuse ;
+- nouvelle preuve nécessaire pour réactivation ;
+- droits Web et MODARYX Forge séparés ;
+- transitions auditées et locks idempotents.
+
+Toujours NON IMPLÉMENTÉ :
+- scheduler ;
+- monitor d'expiration ;
+- inbound révocation ;
+- lock automatique production ;
+- revalidation automatique ;
+- licence réelle.
