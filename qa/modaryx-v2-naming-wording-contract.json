@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRODUCT_CONTRACT",
+  "source": "docs/MODARYX-V2-NAMING-WORDING-CONTRACT-20261004.md",
+  "brands": {
+    "web": "MODARYX / MODARYX MODS",
+    "desktop": "MODARYX Forge",
+    "publicEdition": "MODARYX Public",
+    "founderEdition": "MODARYX Founder",
+    "retiredProduct": "Nova Forge OS",
+    "abandonedWeb": "getnovaforge.com"
+  },
+  "canonicalLabels": [
+    "Mods & contenus",
+    "Profils de jeu",
+    "Mes profils pour ce jeu",
+    "Ajouter à un profil de jeu",
+    "Aucun profil de jeu",
+    "Compte",
+    "Profil public",
+    "MODARYX IA"
+  ],
+  "canonicalMicrocopy": [
+    "Mods, plugins, addons, scripts, maps, shaders, presets, outils et autres contenus pour vos jeux.",
+    "Configurations enregistrées de mods, versions et réglages."
+  ],
+  "prohibitedActiveProductLabels": [
+    "MODARYX Forge Public",
+    "MODARYX Forge Founder",
+    "Nova Forge OS",
+    "Mods & Plugins"
+  ],
+  "prohibitedGenericTrustLabels": [
+    "Non vérifié"
+  ],
+  "invariants": [
+    "WEB_AND_DESKTOP_IDENTITIES_REMAIN_DISTINCT",
+    "MODARYX_FORGE_IS_UMBRELLA_NOT_EDITION_PREFIX",
+    "RETIRED_NOVA_FORGE_OS_NOT_NEW_ACTIVE_PRODUCT_LABEL",
+    "GETNOVAFORGE_NEVER_CURRENT_WEB_TARGET",
+    "LEGACY_TECHNICAL_IDS_NOT_BLINDLY_RENAMED",
+    "MODS_AND_CONTENTS_IS_GLOBAL_UMBRELLA",
+    "GAME_PROFILES_IS_USER_LABEL",
+    "ACCOUNT_PROFILE_NEVER_CONFUSED_WITH_GAME_PROFILE",
+    "GENERIC_UNVERIFIED_LABEL_FORBIDDEN",
+    "MODARYX_AI_NEVER_CLAIMS_ACTIVE_WITHOUT_REAL_RUNTIME"
+  ],
+  "productionStatus": {
+    "globalHumanValidation": "NOT_PROVEN"
+  }
+}
