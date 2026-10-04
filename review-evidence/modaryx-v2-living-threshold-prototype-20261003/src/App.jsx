@@ -245,7 +245,7 @@ function GameHub({ onOpen }) {
   else if(tab==="Guides") body=<div className="hub-info-state"><BookOpen/><div><strong>Guides de démonstration indisponibles</strong><span>Aucun guide éditorial réel n’est connecté à ce prototype. La navigation existe sans inventer de contenu.</span></div></div>;
   else body=<div className="hub-activity"><article><span className="activity-dot"/><div><strong>Activité de démonstration</strong><small>Exemple : une release compatible avec Aetherlands 1.4.2 serait affichée ici.</small></div></article><article><span className="activity-dot"/><div><strong>Aucun événement serveur réel</strong><small>Les notifications et changements distants ne sont pas simulés.</small></div></article></div>;
 
-  return <>
+  return <main id="main-content" tabIndex="-1" className="game-hub-page">
     <section className={`game-hero game-atmosphere atmosphere-${atmosphereKey}`} data-atmosphere={atmosphereKey}>
       <div className="hero-shade" />
       <div className="game-identity"><span className="demo-label">Démonstration</span><span className="atmosphere-note">Ambiance originale MODARYX · {atmosphere.title}</span><h1>Aetherlands</h1><div className="game-support">Catalogue consultable — téléchargement non garanti</div><label>Version<select value={version} onChange={e => setVersion(e.target.value)}><option>1.4.2</option><option>1.4.1</option></select></label><div className="atmosphere-preview"><span>Prévisualiser l’ambiance</span><div role="group" aria-label="Ambiances de démonstration originales MODARYX">{gameItems.map(game=><button key={game.atmosphere} type="button" aria-pressed={atmosphereKey===game.atmosphere} className={atmosphereKey===game.atmosphere?"active":""} onClick={()=>setAtmosphereKey(game.atmosphere)}>{game.title}</button>)}</div><small>{atmosphere.mood} · aucun asset éditeur utilisé</small></div></div>
@@ -253,15 +253,15 @@ function GameHub({ onOpen }) {
       <button className="primary" onClick={()=>setTab("Mods & contenus")}>Explorer les contenus <ArrowRight /></button>
     </section>
     <nav className="local-nav" aria-label="Navigation du jeu">{["Aperçu","Mods & contenus","Collections","Créateurs","Guides","Activité"].map(x => <button key={x} aria-pressed={tab===x} className={tab===x?'active':''} onClick={() => setTab(x)}>{x}</button>)}</nav>
-    <main id="main-content" tabIndex="-1" className="hub-layout">
+    <div className="hub-layout">
       <section className="hub-content"><div className="section-heading"><div><span className="kicker">{kicker}</span><h2>{title}</h2><p>{description}</p></div></div>{body}</section>
       <ProfilesRail />
-    </main>
-  </>;
+    </div>
+  </main>;
 }
 
 function Discover({ onOpen }) {
-  return <main><section className="editorial-hero"><div><span className="kicker">Votre monde évolue</span><h1>Redécouvrez vos jeux,<br/>une possibilité à la fois.</h1><p>Explorez des contenus, vérifiez leur compatibilité et composez des expériences qui vous ressemblent.</p><button className="primary">Découvrir maintenant <ArrowRight/></button></div></section><section className="page-section"><div className="section-heading"><div><span className="kicker">En ce moment</span><h2>Des mondes à réinventer</h2></div></div><div className="content-grid editorial">{contentItems.slice(0,3).map(item => <ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div></section></main>;
+  return <main id="main-content" tabIndex="-1"><section className="editorial-hero"><div><span className="kicker">Votre monde évolue</span><h1>Redécouvrez vos jeux,<br/>une possibilité à la fois.</h1><p>Explorez des contenus, vérifiez leur compatibilité et composez des expériences qui vous ressemblent.</p><button className="primary">Découvrir maintenant <ArrowRight/></button></div></section><section className="page-section"><div className="section-heading"><div><span className="kicker">En ce moment</span><h2>Des mondes à réinventer</h2></div></div><div className="content-grid editorial">{contentItems.slice(0,3).map(item => <ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div></section></main>;
 }
 
 function CollectionsPage() {
