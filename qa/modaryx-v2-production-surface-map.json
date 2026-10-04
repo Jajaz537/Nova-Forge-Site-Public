@@ -595,6 +595,33 @@
         "no-server-workflow-simulated"
       ],
       "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "moderation-center",
+      "acceptance": "Moderation / Reports / Appeals",
+      "prototypeStatus": "MATERIALIZED_DEMO",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "ModerationCenter",
+        "ModerationCaseList",
+        "ModerationDecisionHistory",
+        "ModerationAppealState"
+      ],
+      "domains": [
+        "Report",
+        "ModerationCase",
+        "ModerationDecision",
+        "Appeal",
+        "ModerationAuditEvent"
+      ],
+      "states": [
+        "received-demo",
+        "under-review-demo",
+        "appealed-demo",
+        "server-actions-disabled",
+        "audit-history-preserved"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
     }
   ],
   "unresolvedRealRuntimeStates": [
