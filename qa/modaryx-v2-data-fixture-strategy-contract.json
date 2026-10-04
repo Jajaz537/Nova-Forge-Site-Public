@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-DATA-FIXTURE-STRATEGY-20261003.md",
+  "dataClasses": [
+    "production-real",
+    "demonstration",
+    "technical-fixture",
+    "ui-placeholder"
+  ],
+  "fixtureFamilies": [
+    "Game",
+    "ContentItem",
+    "Release",
+    "Dependencies",
+    "Collection",
+    "Profile",
+    "Creator",
+    "SearchDocument"
+  ],
+  "securityFixtures": [
+    "invalid-hash",
+    "missing-receipt",
+    "provenance-unknown",
+    "rights-not-authorized",
+    "stale-distribution",
+    "revoked-artifact"
+  ],
+  "renderingFixtures": [
+    "short-text",
+    "long-text",
+    "very-long-name",
+    "no-media",
+    "multiple-media",
+    "multiple-tags",
+    "zero-metrics",
+    "high-metrics",
+    "unavailable-state",
+    "non-latin",
+    "accented",
+    "very-long-labels",
+    "multiple-errors"
+  ],
+  "invariants": [
+    "DEMONSTRATION_EXPLICITLY_MARKED",
+    "TECHNICAL_FIXTURE_NEVER_SERVED_AS_PRODUCTION",
+    "PLACEHOLDER_NEVER_IMPLIES_REAL_PROPERTY",
+    "NO_FAKE_DOWNLOAD_COUNT",
+    "NO_FAKE_AUTHOR",
+    "NO_FAKE_VERIFIED_BADGE",
+    "NO_FAKE_MEASURED_COMPATIBILITY",
+    "NO_FAKE_REVIEWS_OR_RANKING",
+    "CURRENT_DEMO_CATALOG_NEVER_AUTO_MIGRATES_TO_REAL_V2_CORPUS",
+    "FIXTURES_ISOLATED_FROM_PUBLIC_BUILD_GLOB",
+    "SECURITY_FIXTURES_FAIL_CLOSED"
+  ],
+  "productionStatus": {
+    "realCorpus": "NOT_IMPLEMENTED",
+    "fixturePath": "NOT_CREATED",
+    "productionDataPipeline": "NOT_IMPLEMENTED"
+  }
+}
