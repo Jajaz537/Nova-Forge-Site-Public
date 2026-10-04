@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT_REGISTRY",
+  "contracts": [
+    {
+      "id": "ai-integration",
+      "contract": "qa/modaryx-v2-ai-integration-contract.json",
+      "checker": "qa/check-v2-ai-integration-contract.mjs",
+      "source": "docs/MODARYX-AI-FOUNDATION-ARCHITECTURE-20261004.md"
+    },
+    {
+      "id": "asset-rights",
+      "contract": "qa/modaryx-v2-asset-rights-manifest.json",
+      "checker": "qa/check-v2-asset-rights-provenance.mjs",
+      "source": "docs/MODARYX-V2-GAME-ATMOSPHERE-IP-POLICY-20261004.md"
+    },
+    {
+      "id": "async-loading",
+      "contract": "qa/modaryx-v2-async-loading-contract.json",
+      "checker": "qa/check-v2-async-loading-contract.mjs",
+      "source": "docs/MODARYX-V2-ASYNC-LOADING-STATE-CONTRACT-20261004.md"
+    },
+    {
+      "id": "game-rights-registry",
+      "contract": "qa/modaryx-v2-game-rights-registry-contract.json",
+      "checker": "qa/check-v2-game-rights-registry-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-RIGHTS-REGISTRY-CONTRACT-20261004.md"
+    },
+    {
+      "id": "game-rights-workflow",
+      "contract": "qa/modaryx-v2-game-rights-workflow.json",
+      "checker": "qa/check-v2-game-rights-workflow.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "game-support-request",
+      "contract": "qa/modaryx-v2-game-support-request-contract.json",
+      "checker": "qa/check-v2-game-support-request-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "help-documentation",
+      "contract": "qa/modaryx-v2-help-documentation-contract.json",
+      "checker": "qa/check-v2-help-documentation-contract.mjs",
+      "source": "docs/MODARYX-V2-HELP-DOCUMENTATION-CONTRACT-20261004.md"
+    },
+    {
+      "id": "ip-takedown",
+      "contract": "qa/modaryx-v2-ip-takedown-contract.json",
+      "checker": "qa/check-v2-ip-takedown-contract.mjs",
+      "source": "docs/MODARYX-V2-IP-TAKEDOWN-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "moderation-appeals",
+      "contract": "qa/modaryx-v2-moderation-appeals-contract.json",
+      "checker": "qa/check-v2-moderation-appeals-contract.mjs",
+      "source": "docs/MODARYX-V2-MODERATION-APPEALS-CONTRACT-20261003.md"
+    },
+    {
+      "id": "publisher-inbound",
+      "contract": "qa/modaryx-v2-publisher-inbound-contract.json",
+      "checker": "qa/check-v2-publisher-inbound-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "publisher-outbound",
+      "contract": "qa/modaryx-v2-publisher-outbound-contract.json",
+      "checker": "qa/check-v2-publisher-outbound-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "publisher-response",
+      "contract": "qa/modaryx-v2-publisher-response-contract.json",
+      "checker": "qa/check-v2-publisher-response-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "rights-lifecycle",
+      "contract": "qa/modaryx-v2-rights-lifecycle-contract.json",
+      "checker": "qa/check-v2-rights-lifecycle-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "rights-notification",
+      "contract": "qa/modaryx-v2-rights-notification-contract.json",
+      "checker": "qa/check-v2-rights-notification-contract.mjs",
+      "source": "docs/MODARYX-V2-NOTIFICATIONS-PREFERENCES-CONTRACT-20261003.md"
+    },
+    {
+      "id": "seo-i18n",
+      "contract": "qa/modaryx-v2-seo-i18n-content-contract.json",
+      "checker": "qa/check-v2-seo-i18n-content-contract.mjs",
+      "source": "docs/MODARYX-V2-SEO-I18N-CONTENT-CONTRACT-20261003.md"
+    },
+    {
+      "id": "csp-headers-rich-text",
+      "contract": "qa/modaryx-v2-csp-headers-rich-text-contract.json",
+      "checker": "qa/check-v2-csp-headers-rich-text-contract.mjs",
+      "source": "docs/MODARYX-V2-CSP-HEADERS-RICH-TEXT-POLICY-20261003.md"
+    },
+    {
+      "id": "notifications-preferences",
+      "contract": "qa/modaryx-v2-notifications-preferences-contract.json",
+      "checker": "qa/check-v2-notifications-preferences-contract.mjs",
+      "source": "docs/MODARYX-V2-NOTIFICATIONS-PREFERENCES-CONTRACT-20261003.md"
+    },
+    {
+      "id": "onboarding-account-creator",
+      "contract": "qa/modaryx-v2-onboarding-account-creator-contract.json",
+      "checker": "qa/check-v2-onboarding-account-creator-contract.mjs",
+      "source": "docs/MODARYX-V2-ONBOARDING-ACCOUNT-CREATOR-CONTRACT-20261003.md"
+    },
+    {
+      "id": "api-governance",
+      "contract": "qa/modaryx-v2-api-governance-contract.json",
+      "checker": "qa/check-v2-api-governance-contract.mjs",
+      "source": "docs/MODARYX-V2-API-GOVERNANCE-CONTRACT-20261003.md"
+    }
+  ],
+  "invariants": [
+    "EVERY_CONTRACT_HAS_SOURCE",
+    "EVERY_CONTRACT_HAS_CHECKER",
+    "EVERY_MACHINE_CONTRACT_SCHEMA_VERSION_ONE",
+    "EVERY_CHECKER_MUST_PASS",
+    "REGISTRY_DOES_NOT_IMPLY_PRODUCTION_IMPLEMENTATION"
+  ]
+}
