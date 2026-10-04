@@ -517,3 +517,51 @@ Invariants verrouillés :
 - doublon ne crée pas un Rights Case dupliqué.
 
 Cette preuve valide le contrat, pas la persistance serveur, le triage réel, les notifications ni l’automatisation Rights Case.
+
+
+## 22. Contrat d’interprétation automatique des réponses éditeurs
+
+**TERMINÉ pour le contrat pré-production / parsing réel PREUVE MANQUANTE**
+
+Fichiers :
+- `qa/modaryx-v2-publisher-response-contract.json`
+- `qa/check-v2-publisher-response-contract.mjs`
+- `.github/workflows/modaryx-v2-publisher-response-contract-proof.yml`
+
+Preuve :
+- run `37199257204` — **SUCCESS**
+- commit capturé `555267e5e09c751cd4886cd10902553c98eed9b0`
+- `PUBLISHER_RESPONSE_INTERPRETATION_STATE_COUNT 4`
+- `PUBLISHER_RESPONSE_SCOPE_STATUS_COUNT 6`
+- `PASS_V2_PUBLISHER_RESPONSE_CONTRACT`
+
+États d’interprétation :
+- SAFE_AUTOMATION
+- NEEDS_REVIEW
+- LEGAL_REVIEW_REQUIRED
+- DENIED
+
+Scopes :
+- GRANTED
+- GRANTED_WITH_LIMITS
+- DENIED
+- UNADDRESSED
+- EXPIRED
+- REVOKED
+
+Invariants :
+- scope absent ≠ accordé ;
+- ambiguïté = revue ;
+- risque juridique = LEGAL_REVIEW_REQUIRED ;
+- aucun accord global inféré ;
+- droits Web et MODARYX Forge séparés ;
+- expiration/révocation rebloquent ;
+- réponse brute + provenance conservées ;
+- réponse matérielle notifiée à l’administration.
+
+Toujours non implémenté :
+- mailbox/inbound réel ;
+- parser réel ;
+- vérification de provenance réelle ;
+- notification réelle ;
+- moteur de politique de licence réel.
