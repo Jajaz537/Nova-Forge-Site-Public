@@ -2436,3 +2436,31 @@ Si la source n'est pas retrouvée :
 `SOURCE_REFERENCE_NOT_RECOVERED` et le blocker reste ouvert.
 
 Ce handoff n'autorise aucun root, aucune stack, aucun cutover.
+
+
+## 73. Validateur de preuves externes
+
+**TERMINÉ pour le validateur / aucune preuve externe réelle créée**
+
+Fichier :
+`qa/validate-v2-external-validation-evidence.mjs`
+
+Workflow :
+`.github/workflows/modaryx-v2-external-validation-evidence-validator.yml`
+
+Run :
+- `37238143495` — **SUCCESS**
+- `PASS_V2_EXTERNAL_VALIDATION_EVIDENCE_CONTRACT`
+- `PASS_V2_EXTERNAL_VALIDATION_EVIDENCE_VALIDATOR_SELF_TEST`.
+
+Le validateur rejette notamment :
+- une “preuve humaine” sans `humanParticipant=true` ;
+- un appareil physique simulé ;
+- un screen reader “réel” sans environnement réel + nom du reader ;
+- Safari réel sans navigateur Safari ;
+- une comparaison visuelle sans source approuvée archivable ;
+- un PASS avec P0/P1 ouvert ;
+- une preuve sans full commit SHA ;
+- une preuve sans artifactRefs.
+
+Ce run prouve le validateur, pas une session humaine/appareil.
