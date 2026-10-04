@@ -1,0 +1,31 @@
+name: MODARYX V2 Multiscreen Capture Integrity Micro-Proof
+
+on:
+  push:
+    branches:
+      - 'audit/modaryx-v2-legacy-boundary-20261003'
+    paths:
+      - '.github/workflows/modaryx-v2-multiscreen-capture-integrity-micro-proof.yml'
+      - 'qa/check-v2-multiscreen-capture-integrity.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    name: Self-test multiscreen capture integrity checker
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Self-test capture integrity checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-multiscreen-capture-integrity.mjs --self-test
