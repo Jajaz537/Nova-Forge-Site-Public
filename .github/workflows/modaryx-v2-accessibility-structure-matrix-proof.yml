@@ -9,6 +9,7 @@ on:
       - 'qa/check-v2-accessibility-structure-matrix.mjs'
       - 'qa/check-v2-keyboard-reachability-matrix.mjs'
       - 'qa/check-v2-mobile-touch-target-matrix.mjs'
+      - 'qa/check-v2-forced-colors-smoke.mjs'
       - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx'
       - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/styles.css'
   workflow_dispatch:
@@ -81,6 +82,14 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-v2-mobile-touch-target-matrix.mjs
+
+      - name: Validate forced colors smoke
+        shell: bash
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4174
+        run: |
+          set -euo pipefail
+          node qa/check-v2-forced-colors-smoke.mjs
 
       - name: Stop isolated preview
         if: always()
