@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-SEARCH-FILTER-DISCOVERY-CONTRACT-20261003.md",
+  "logicalRules": [
+    "OR_WITHIN_FACET",
+    "AND_BETWEEN_FACETS"
+  ],
+  "globalResultTypes": [
+    "games",
+    "content",
+    "creators",
+    "teams",
+    "collections",
+    "modpacks"
+  ],
+  "sortModes": [
+    "Pertinence",
+    "Plus populaires",
+    "Mieux notés",
+    "Récemment mis à jour",
+    "Nouveaux",
+    "Nom"
+  ],
+  "invariants": [
+    "ACTIVE_FILTERS_REMAIN_VISIBLE_WHEN_PANEL_CLOSED",
+    "FILTER_CAN_BE_REMOVED_WITHOUT_REOPENING_PANEL",
+    "FILTER_RESET_PRESERVES_TEXT_QUERY",
+    "FILTER_RESET_PRESERVES_GAME_CONTEXT_UNLESS_EXPLICIT",
+    "NO_RESULTS_NEVER_SILENTLY_SUBSTITUTES_NEARBY_VERSION",
+    "CONTEXTUAL_SEARCH_NEVER_SILENTLY_GOES_GLOBAL",
+    "LOCAL_FIRST_SEARCH_DEGRADES_IF_EXTERNAL_ENGINE_FAILS",
+    "URL_FILTERS_NEVER_EXPOSE_PRIVATE_LOCAL_DATA",
+    "SAVED_SEARCH_NEVER_PROMISES_SYNC_IF_LOCAL",
+    "NO_FAKE_COMPATIBILITY_SUGGESTION"
+  ],
+  "productionStatus": {
+    "searchIndex": "NOT_IMPLEMENTED",
+    "externalSearchAdapter": "NOT_IMPLEMENTED",
+    "savedSearchSync": "NOT_IMPLEMENTED"
+  }
+}
