@@ -3,6 +3,8 @@ import { setTimeout as sleep } from "node:timers/promises";
 
 const chrome=process.env.CHROME_BIN;
 const origin=process.env.MODARYX_REVIEW_ORIGIN||"http://127.0.0.1:4174";
+const viewportWidth=Number(process.env.MODARYX_VIEWPORT_WIDTH||320);
+const viewportHeight=Number(process.env.MODARYX_VIEWPORT_HEIGHT||900);
 if(!chrome) throw new Error("CHROME_BIN missing");
 
 const port=9239;
@@ -48,14 +50,16 @@ async function openMenu(){
   const result=await evaluate(`(async () => {
     const nav=document.querySelector('.global-nav');
     const menu=document.querySelector('.mobile-menu');
-    if(!nav||!menu) return false;
-    if(!nav.classList.contains('open')){
-      menu.click();
-      await new Promise(resolve=>setTimeout(resolve,140));
-    }
-    return nav.classList.contains('open');
+    if(!nav) return false;
+    const nr=nav.getBoundingClientRect(),ns=getComputedStyle(nav);
+    if(ns.display!=='none'&&nr.width>0&&nr.height>0) return true;
+    if(!menu) return false;
+    menu.click();
+    await new Promise(resolve=>setTimeout(resolve,140));
+    const r=nav.getBoundingClientRect(),s=getComputedStyle(nav);
+    return s.display!=='none'&&r.width>0&&r.height>0;
   })()`);
-  if(!result) throw new Error("mobile menu unavailable");
+  if(!result) throw new Error("navigation unavailable");
 }
 async function navigatePrimary(text){
   await openMenu();
@@ -69,13 +73,17 @@ async function navigatePrimary(text){
   if(!result) throw new Error("primary navigation failed: "+text);
 }
 async function navigateUtility(text){
+  const top=await evaluate(`(async () => {
+    const b=[...document.querySelectorAll('.top-actions button')].find(el=>el.getAttribute('aria-label')===${JSON.stringify(text)});
+    if(!b||b.disabled||b.getBoundingClientRect().width===0) return false;
+    b.click(); await new Promise(resolve=>setTimeout(resolve,220)); return true;
+  })()`);
+  if(top) return;
   await openMenu();
   const result=await evaluate(`(async () => {
     const b=[...document.querySelectorAll('.global-nav .mobile-nav-utility')].find(el=>el.textContent.trim()===${JSON.stringify(text)});
     if(!b||b.disabled||b.getBoundingClientRect().width===0) return false;
-    b.click();
-    await new Promise(resolve=>setTimeout(resolve,220));
-    return true;
+    b.click(); await new Promise(resolve=>setTimeout(resolve,220)); return true;
   })()`);
   if(!result) throw new Error("utility navigation failed: "+text);
 }
@@ -120,7 +128,7 @@ try{
   });
   await send("Page.enable");
   await send("Runtime.enable");
-  await send("Emulation.setDeviceMetricsOverride",{width:320,height:900,deviceScaleFactor:1,mobile:true});
+  await send("Emulation.setDeviceMetricsOverride",{width:viewportWidth,height:viewportHeight,deviceScaleFactor:1,mobile:viewportWidth<=760});
   await send("Page.navigate",{url:origin});
   for(let i=0;i<80;i++){
     if(await evaluate("document.readyState==='complete'")) break;
@@ -180,8 +188,10 @@ try{
   await waitText("REQUEST_READY");
   await assertNoOverflow("rights-expanded");
 
+  console.log("NARROW_REFLOW_VIEWPORT",viewportWidth,viewportHeight);
   console.log("NARROW_REFLOW_SURFACE_COUNT",12);
-  console.log("PASS_V2_NARROW_REFLOW_320");
+  if(viewportWidth===320) console.log("PASS_V2_NARROW_REFLOW_320");
+  console.log("PASS_V2_REFLOW_VIEWPORT_"+viewportWidth);
 }finally{
   try{ws?.close()}catch{}
   proc.kill("SIGTERM");
