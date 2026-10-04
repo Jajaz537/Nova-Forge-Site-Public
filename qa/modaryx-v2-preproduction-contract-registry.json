@@ -122,6 +122,12 @@
       "contract": "qa/modaryx-v2-public-trust-contract.json",
       "checker": "qa/check-v2-public-trust-contract.mjs",
       "source": "docs/MODARYX-V2-PUBLIC-LEGAL-TRUST-READINESS-20261004.md"
+    },
+    {
+      "id": "route-cutover",
+      "contract": "qa/modaryx-v2-route-cutover-contract.json",
+      "checker": "qa/check-v2-route-cutover-contract.mjs",
+      "source": "docs/MODARYX-V2-ROUTE-CUTOVER-PLAN-20261003.md"
     }
   ],
   "invariants": [
