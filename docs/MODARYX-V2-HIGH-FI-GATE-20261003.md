@@ -575,3 +575,16 @@ Limite : aucune lecture NVDA / VoiceOver / TalkBack réelle.
 - keyboard `38 / 38`.
 
 Cette preuve navigateur ne remplace pas un test humain clavier ni un screen reader réel.
+
+
+## 25. Landmarks / titres / noms accessibles — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+- Game Hub h1 hors main détecté puis corrigé ;
+- Discover aligné sur la cible main commune ;
+- matrice 15 surfaces : run `37219841541` — **SUCCESS** ;
+- noms accessibles / IDs / tabindex / h1 / landmark vérifiés automatiquement ;
+- continuation Living Threshold `37219841451` — **SUCCESS**.
+
+AT réels et validation humaine restent requis.
