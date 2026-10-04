@@ -985,3 +985,27 @@ Toujours PREUVE MANQUANTE :
 - parsing de réponse réel ;
 - validation de licence ;
 - revue juridique externe.
+
+
+## 38. Demande membre de support d’un jeu — matérialisation — 4 octobre 2026
+
+**TERMINÉ pour le prototype local / production PREUVE MANQUANTE**
+
+À conserver :
+- entrée depuis Games Index ;
+- formulaire nom du jeu + plateforme ;
+- validation locale récupérable ;
+- brouillon explicitement non envoyé ;
+- triage MODARYX obligatoire ;
+- aucun Rights Case réel créé dans le prototype ;
+- aucune demande éditeur réelle envoyée ;
+- après acceptation future seulement : baseline sûre + Rights Case + workflow éditeur.
+
+Preuve :
+- run `37198162015` — **SUCCESS**
+- commit capturé `103aab8b82684e65020b4c9575df0f6819a69b7f`
+- `FLOW_ASSERT game support request local-only triage`
+- `GAME_SUPPORT_REQUEST_MOBILE_OVERFLOW 0`
+- 63 captures.
+
+Ne jamais transformer une simple demande membre en support officiel, licence, partenariat ou permission éditeur.
