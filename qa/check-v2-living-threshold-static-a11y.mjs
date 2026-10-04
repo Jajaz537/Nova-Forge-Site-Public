@@ -21,7 +21,7 @@ requireMatch(/\.hero-search button\{height:44px;width:44px;/, "search filter tar
 requireMatch(/\.profile-add\{width:100%;min-height:44px;/, "profile add target below 44px");
 requireMatch(/\.view-toggle button\{[^}]*width:44px;min-height:44px;/, "view toggle target below 44px");
 
-for (const label of ["Mods & contenus", "Mes profils pour ce jeu", "Créer", "Guides", "Activité", "Bibliothèque", "Recherche globale"]) {
+for (const label of ["Mods & contenus", "Mes profils pour ce jeu", "Créer", "Guides", "Activité", "Bibliothèque", "Recherche globale", "Droits des jeux", "Aucune demande réelle n’est envoyée dans ce prototype.", "NO_RESPONSE ≠ autorisation"]) {
   if (!app.includes(label)) fail("canonical label missing: " + label);
 }
 if (!app.includes("Configurations enregistrées de mods, versions et réglages.")) {
