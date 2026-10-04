@@ -465,3 +465,25 @@ Toujours non implémenté :
 - notification membre ;
 - contact éditeur ;
 - outbound.
+
+
+## 21. Proposition de reclassification du gate frontend
+
+Document :
+`docs/MODARYX-V2-FRONTEND-GATE-RECLASSIFICATION-PROPOSAL-20261004.md`
+
+**Statut : PROPOSITION UNIQUEMENT — NON APPROUVÉE / NON ACTIVE**
+
+Objet :
+- séparer le gate **High-Fi final** du démarrage éventuel d’un **preview engineering isolé** ;
+- conserver toutes les validations humaines/appareils comme blockers avant finalisation/cutover ;
+- permettre, uniquement après décision explicite, un root preview noindex, branche dédiée, sans `main`, sans DNS/Cloudflare critique et sans exposition production.
+
+État :
+- proposition : **TERMINÉE**
+- reclassification canonique : **NON PRISE**
+- stack : **NON SÉLECTIONNÉE**
+- root preview : **NON CRÉÉ**
+- production/cutover : **BLOQUÉS**
+
+Cette proposition ne constitue pas une autorisation technique.
