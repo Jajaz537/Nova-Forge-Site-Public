@@ -561,3 +561,17 @@ Continuation UI :
 - 81 captures.
 
 Limite : aucune lecture NVDA / VoiceOver / TalkBack réelle.
+
+
+## 24. Navigation clavier SPA / skip link — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+- skip link : matérialisé ;
+- focus après changement de route : matérialisé ;
+- reduced motion sur scroll route : matérialisé ;
+- micro-proof `37219490005` — SUCCESS ;
+- Living Threshold `37219359937` — SUCCESS ;
+- keyboard `38 / 38`.
+
+Cette preuve navigateur ne remplace pas un test humain clavier ni un screen reader réel.
