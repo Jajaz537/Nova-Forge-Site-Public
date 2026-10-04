@@ -1813,3 +1813,39 @@ Toujours non exécuté :
 - migration SW browser ;
 - cutover ;
 - DNS/Cloudflare.
+
+
+## 62. Registry contrats pré-production — 35 contrats — 4 octobre 2026
+
+**TERMINÉ pour les invariants machine / production PREUVE MANQUANTE**
+
+Run consolidé :
+- `37235820192` — **SUCCESS**
+- `PREPRODUCTION_CONTRACT_COUNT 35`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+Nouveaux contrats inclus :
+- storage/cache/SW migration ;
+- trust/provenance/distribution ;
+- install manager ;
+- frontend isolation ;
+- threat model ;
+- a11y/perf/design system ;
+- game support lifecycle ;
+- Game Hub ;
+- search/filter/discovery ;
+- Content Detail ;
+- Collection/Modpack/Profile ;
+- Creator Studio ;
+- Community/Library/navigation ;
+- critical flows.
+
+À ne jamais déduire de ce PASS :
+- backend réel ;
+- auth réelle ;
+- service worker production ;
+- MODARYX Forge réel ;
+- distribution réelle ;
+- validation humaine/appareil ;
+- High-Fi final ;
+- VF.
