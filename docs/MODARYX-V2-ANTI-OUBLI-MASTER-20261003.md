@@ -1225,3 +1225,39 @@ Avant production :
 - manifest/registry pour tous assets réels ;
 - intégration avec Game Rights Registry ;
 - extension du guard au futur root/media production.
+
+
+## 46. Game Rights Registry — contrat structurel — 4 octobre 2026
+
+**TERMINÉ pour le contrat / production PREUVE MANQUANTE**
+
+À ne jamais perdre :
+- décision = jeu + scope + surface + conditions + preuve + dates ;
+- jamais `Game = APPROVED` global ;
+- GRANTED / GRANTED_WITH_LIMITS seuls statuts potentiellement autorisants ;
+- NO_RESPONSE / PENDING / LEGAL_REVIEW_REQUIRED / EXPIRED / REVOKED = non autorisants ;
+- Web et MODARYX Forge séparés ;
+- assets tiers reliés à un ScopeDecision ;
+- derived flags jamais source d'autorité ;
+- registry indisponible = fail closed ;
+- imports anciens = non vérifiés ;
+- membre ne peut pas écrire une licence ;
+- MODARYX IA ne peut pas accorder sans policy gate ;
+- audit append-only logique.
+
+Preuve :
+- run `37205429699` — **SUCCESS**
+- 8 surfaces ;
+- 18 scopes ;
+- 10 statuts ;
+- 14 activation guards ;
+- 14 invariants ;
+- `PASS_V2_GAME_RIGHTS_REGISTRY_CONTRACT`.
+
+Toujours PREUVE MANQUANTE :
+- DB/API ;
+- admin CRUD réel ;
+- policy engine ;
+- scheduler ;
+- asset linkage ;
+- audit store.
