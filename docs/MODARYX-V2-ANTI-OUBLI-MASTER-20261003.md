@@ -1325,3 +1325,35 @@ Toujours PREUVE MANQUANTE :
 - webhook delivery/bounce ;
 - corrélation reply ;
 - audit transport production.
+
+
+## 49. Publisher Inbound — réception/corrélation/provenance — 4 octobre 2026
+
+**TERMINÉ pour contrat + prototype / production PREUVE MANQUANTE**
+
+Preuves :
+- contrat run `37214242330` — **SUCCESS**, `PASS_V2_PUBLISHER_INBOUND_CONTRACT` ;
+- micro-proof run `37214564614` — **SUCCESS**, `PASS_V2_PUBLISHER_INBOUND_PREVIEW` ;
+- Living Threshold run `37214829645` — **SUCCESS** ;
+- 81 captures ;
+- `FLOW_ASSERT publisher inbound correlation provenance fail-closed`.
+
+À ne jamais perdre :
+- réception ≠ corrélation ≠ provenance ≠ interprétation ;
+- transport inbound ne donne aucun droit ;
+- corrélation requise avant interprétation automatisée ;
+- SPF/DKIM/DMARC = signaux techniques, pas autorité juridique suffisante ;
+- expéditeur inconnu ne devient jamais “vérifié” par supposition ;
+- pièces jointes mises en quarantaine, hashées et scannées avant usage ;
+- aucune macro/script/contenu actif exécuté ;
+- message brut + headers conservés ;
+- provenance ambiguë/non fiable = fail closed / revue ;
+- Web et MODARYX Forge séparés.
+
+Toujours PREUVE MANQUANTE :
+- mailbox/webhook réel ;
+- moteur corrélation ;
+- provenance réelle ;
+- scanner pièces jointes ;
+- parser/routing ;
+- audit store production.
