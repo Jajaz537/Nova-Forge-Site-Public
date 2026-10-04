@@ -906,3 +906,16 @@ Limites :
 - aucune preuve Safari/iPadOS ;
 - aucune validation tactile humaine ;
 - aucun screen reader réel.
+
+
+## Active-state semantics — 4 octobre 2026
+
+**TERMINÉ pour preuve navigateur ciblée**
+
+- run `37219118824` — **SUCCESS**
+- `PASS_V2_ACTIVE_STATE_SEMANTICS`
+- primary nav current state exposed ;
+- local tabs / view toggle / account tabs expose pressed state ;
+- Living Threshold continuation `37219047594` — SUCCESS.
+
+AT humain/réel reste PREUVE MANQUANTE.
