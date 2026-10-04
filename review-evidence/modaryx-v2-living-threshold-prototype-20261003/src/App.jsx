@@ -98,8 +98,9 @@ function Topbar({ active, onNavigate }) {
       <button className="mobile-nav-utility" onClick={() => { onNavigate("Bibliothèque"); setOpen(false); }}><BookOpen />Bibliothèque</button>
       <button className="mobile-nav-utility" onClick={() => { onNavigate("Notifications"); setOpen(false); }}><Bell />Notifications</button>
       <button className="mobile-nav-utility" onClick={() => { onNavigate("Compte"); setOpen(false); }}><UsersThree />Compte</button>
+      <button className="mobile-nav-utility" onClick={() => { onNavigate("MODARYX IA"); setOpen(false); }}><Stack />MODARYX IA</button>
     </nav>
-    <div className="top-actions"><button aria-label="Recherche globale" onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button><button aria-label="Bibliothèque" onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button aria-label="Notifications" onClick={() => onNavigate("Notifications")}><Bell /></button><button className="avatar" aria-label="Compte" onClick={() => onNavigate("Compte")}>M</button></div>
+    <div className="top-actions"><button aria-label="Recherche globale" onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button><button aria-label="Bibliothèque" onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button aria-label="Notifications" onClick={() => onNavigate("Notifications")}><Bell /></button><button aria-label="MODARYX IA" onClick={() => onNavigate("MODARYX IA")}><Stack /></button><button className="avatar" aria-label="Compte" onClick={() => onNavigate("Compte")}>M</button></div>
   </header>;
 }
 
@@ -629,6 +630,49 @@ function RightsDashboard() {
   </main>;
 }
 
+
+function ModaryxAI() {
+  const capabilities=[
+    ["Recherche & découverte","Comprendre un besoin, retrouver jeux et contenus pertinents et expliquer pourquoi un résultat est proposé."],
+    ["Compatibilité","Raisonner sur jeu, version, plateforme, loader, dépendances et fraîcheur des preuves avant toute recommandation."],
+    ["Profils de jeu","Expliquer un profil, ses dépendances, ses conflits et préparer un plan réversible avant toute action locale."],
+    ["Creator Copilot","Préparer projets, releases, crédits et contrôles sans publier silencieusement."],
+    ["Droits & éditeurs","Aider à structurer Rights Cases, scopes et réponses sans transformer une ambiguïté juridique en autorisation."],
+    ["MODARYX Forge","Préparer de futurs diagnostics locaux uniquement après capability handshake réel et permissions explicites."],
+  ];
+  return <main className="page-section modaryx-ai">
+    <span className="kicker">MODARYX IA · fondation</span>
+    <h1>Une IA native du produit, pas un chatbot greffé.</h1>
+    <p className="page-intro">Cette surface prépare l’intégration future de MODARYX IA. Aucun modèle, provider, outil distant ou mémoire IA réelle n’est connecté dans ce prototype.</p>
+    <div className="ai-safety-note"><strong>MODARYX IA n’est pas active dans cette démo.</strong><span>Aucune réponse générée, aucun historique IA et aucune action automatique ne sont simulés.</span></div>
+    <section className="ai-hero-grid">
+      <article className="ai-command-preview">
+        <span className="kicker">Assistant contextuel</span>
+        <h2>Demandez, vérifiez, puis agissez.</h2>
+        <p>Le futur assistant devra afficher ses sources, distinguer preuve et incertitude, et utiliser des outils permissionnés plutôt que prétendre avoir exécuté une action.</p>
+        <label><span>Message</span><div className="ai-input-shell"><input disabled aria-label="Message à MODARYX IA" placeholder="MODARYX IA sera connectée dans une phase dédiée"/><button className="primary" disabled>Envoyer</button></div></label>
+      </article>
+      <aside className="ai-trust-panel">
+        <span className="kicker">Confiance</span>
+        <h2>Safe by default</h2>
+        <div><strong>Sources</strong><span>Provenance et fraîcheur pour les réponses importantes.</span></div>
+        <div><strong>Permissions</strong><span>READ → PLAN → EXECUTE_SAFE → EXECUTE_SENSITIVE → BLOCKED.</span></div>
+        <div><strong>Évaluations</strong><span>Hallucination, outils, fuite de données, prompt injection et cohérence multi-tour.</span></div>
+        <div><strong>Incertain</strong><span>Le système doit dire “preuve insuffisante” plutôt qu’inventer.</span></div>
+      </aside>
+    </section>
+    <section className="ai-capabilities">
+      <div className="section-head"><div><span className="kicker">Agents spécialisés</span><h2>Un cerveau commun, des responsabilités séparées.</h2></div></div>
+      <div className="ai-capability-grid">{capabilities.map(([title,detail])=><article key={title}><strong>{title}</strong><span>{detail}</span></article>)}</div>
+    </section>
+    <section className="ai-boundaries">
+      <div><span className="kicker">Non négociable</span><h2>Ce que l’IA ne doit jamais inventer.</h2></div>
+      <ul><li>Une compatibilité non prouvée.</li><li>Une permission éditeur ou une licence.</li><li>Une installation locale non exécutée par MODARYX Forge.</li><li>Un résultat backend absent.</li><li>Une certitude lorsqu’une revue humaine ou juridique est nécessaire.</li></ul>
+    </section>
+    <div className="ai-roadmap-note"><strong>Architecture conceptuelle retenue</strong><span>AI Gateway · routing multi-modèles · RAG / Knowledge Layer · Tool Layer · Permission Engine · agents spécialisés · evals · observabilité.</span></div>
+  </main>;
+}
+
 function Community() {
   const [tab,setTab]=useState("Support");
   const [draft,setDraft]=useState(false);
@@ -671,6 +715,7 @@ export function App() {
   else if(active==='Créer') screen=<CreatorStudio/>;
   else if(active==='Bibliothèque') screen=<Library/>;
   else if(active==='Droits jeux') screen=<RightsDashboard/>;
+  else if(active==='MODARYX IA') screen=<ModaryxAI/>;
   else screen=<GameHub onOpen={openContent}/>;
   return <div className="app-shell">{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button></footer></div>;
 }
