@@ -89,13 +89,13 @@ Run :
 `37196769573` — **SUCCESS**
 
 Commit capturé :
-`ec8b57891858f7a25954ff60f77595be8eaf1f21`
+`103aab8b82684e65020b4c9575df0f6819a69b7f`
 
 Artifact :
-`11301477422`
+`11301612556`
 
 Digest :
-`sha256:d9ad41faa1423c22aa986e5f6661447b029a32f1812ed63a3a096b269a0b0eb9`
+`sha256:c567c6e27c5e4648fe3267becb48736b5861bb22c2ae85ffa31009e3626695d3`
 
 Marqueurs :
 - `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
@@ -105,7 +105,7 @@ Marqueurs :
 - `MOBILE_OVERFLOW 0`
 - `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
 - `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
-- `MULTISCREEN_CAPTURE_COUNT 61`
+- `MULTISCREEN_CAPTURE_COUNT 63`
 - `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
 
 Cette preuve n’est pas :
@@ -290,7 +290,7 @@ Documents :
 - `docs/MODARYX-V2-HUMAN-MULTISCREEN-REVIEW-PACK-20261004.md`
 - `docs/MODARYX-V2-ASSISTIVE-DEVICE-VALIDATION-PROTOCOL-20261004.md`
 
-Pack humain actuel préparé autour de la preuve **61 captures**.
+Pack humain actuel préparé autour de la preuve **63 captures**.
 
 Toujours PREUVE MANQUANTE :
 - validation humaine multi-écrans supplémentaire ;
@@ -429,3 +429,39 @@ Quand l’utilisateur dit `Suite l’ami` :
 - ne pas reconstruire depuis d’anciens chats ;
 - continuer automatiquement au prochain point logique ;
 - ne demander une clarification que si une décision réellement nécessaire manque.
+
+
+## 20. Demande membre de support d’un jeu — preuve prototype
+
+**TERMINÉ pour le prototype local / production PREUVE MANQUANTE**
+
+Flux matérialisé :
+- ouverture depuis Games Index ;
+- nom du jeu + plateforme ;
+- validation si nom absent ;
+- brouillon local explicite ;
+- `Brouillon de demande — non envoyé` ;
+- triage MODARYX requis ;
+- aucun Rights Case réel ;
+- aucune demande éditeur réelle.
+
+Preuve :
+- Living Threshold run `37198162015` — **SUCCESS**
+- commit capturé `103aab8b82684e65020b4c9575df0f6819a69b7f`
+- artifact `11301612556`
+- digest `sha256:c567c6e27c5e4648fe3267becb48736b5861bb22c2ae85ffa31009e3626695d3`
+- `GAME_SUPPORT_REQUEST_MOBILE_OVERFLOW 0`
+- `FLOW_ASSERT game support request local-only triage`
+- `MULTISCREEN_CAPTURE_COUNT 63`
+
+Captures :
+- `desktop-game-support-request.png`
+- `mobile-game-support-request.png`
+
+Toujours non implémenté :
+- persistance serveur de la demande ;
+- triage admin réel ;
+- création automatique réelle du Rights Case ;
+- notification membre ;
+- contact éditeur ;
+- outbound.
