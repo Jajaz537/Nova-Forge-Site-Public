@@ -472,14 +472,16 @@
         "PublisherContactVerification",
         "PublisherRequestReadiness",
         "RightsLifecyclePreview",
-        "IpTakedownPreview"
+        "IpTakedownPreview",
+        "PublisherOutboundPreview"
       ],
       "domains": [
         "RightsCase",
         "RightsScope",
         "PublisherContact",
         "RightsLifecycle",
-        "IpCase"
+        "IpCase",
+        "OutboundRequest"
       ],
       "states": [
         "approved-with-limits-demo",
@@ -504,7 +506,13 @@
         "ip-content-located-demo",
         "ip-temp-restricted-demo",
         "ip-legal-review-required-demo",
-        "ip-fallback-original-modaryx-demo"
+        "ip-fallback-original-modaryx-demo",
+        "outbound-not-queued-demo",
+        "outbound-queued-demo",
+        "outbound-provider-accepted-demo",
+        "outbound-delivered-demo",
+        "outbound-bounced-demo",
+        "transport-success-permission-neutral-demo"
       ],
       "mobile": "DEDICATED_RESPONSIVE"
     },
