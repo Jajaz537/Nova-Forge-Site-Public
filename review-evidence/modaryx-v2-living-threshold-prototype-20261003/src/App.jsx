@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight, Bell, BookOpen, Check, FunnelSimple, GameController, GridFour,
   List, MagnifyingGlass, Plus, SlidersHorizontal, Stack, UsersThree, X
@@ -161,7 +161,7 @@ function GamesIndex({ onOpenGame }) {
     setRequestDraft(true);
   };
 
-  return <main className="page-section games-index">
+  return <main id="main-content" tabIndex="-1" className="page-section games-index">
     <span className="kicker">Jeux</span>
     <h1>Trouvez votre prochain terrain de jeu.</h1>
     <p className="page-intro">Recherchez un jeu et voyez immédiatement si son catalogue est réellement disponible.</p>
@@ -201,7 +201,7 @@ function GlobalSearch({ onOpenContent, onOpenGame, onOpenCreators, onOpenCollect
   const hasQuery=query.trim().length>0;
   const total=(hasQuery?games.length+contents.length+creators.length+collections.length:0);
 
-  return <main className="page-section global-search-page">
+  return <main id="main-content" tabIndex="-1" className="page-section global-search-page">
     <span className="kicker">Recherche globale</span>
     <h1>Rechercher dans MODARYX</h1>
     <p className="page-intro">Jeux, mods & contenus, collections et créateurs restent identifiables par type.</p>
@@ -253,7 +253,7 @@ function GameHub({ onOpen }) {
       <button className="primary" onClick={()=>setTab("Mods & contenus")}>Explorer les contenus <ArrowRight /></button>
     </section>
     <nav className="local-nav" aria-label="Navigation du jeu">{["Aperçu","Mods & contenus","Collections","Créateurs","Guides","Activité"].map(x => <button key={x} aria-pressed={tab===x} className={tab===x?'active':''} onClick={() => setTab(x)}>{x}</button>)}</nav>
-    <main className="hub-layout">
+    <main id="main-content" tabIndex="-1" className="hub-layout">
       <section className="hub-content"><div className="section-heading"><div><span className="kicker">{kicker}</span><h2>{title}</h2><p>{description}</p></div></div>{body}</section>
       <ProfilesRail />
     </main>
@@ -275,7 +275,7 @@ function CollectionsPage() {
     const q=query.trim().toLocaleLowerCase("fr");
     return collectionDetails.filter(x=>(category==="Toutes"||x.category===category) && (x.title+" "+x.curator+" "+x.note).toLocaleLowerCase("fr").includes(q));
   },[query,category]);
-  return <main className="page-section collections-page">
+  return <main id="main-content" tabIndex="-1" className="page-section collections-page">
     <span className="kicker">Collections & Modpacks</span><h1>Organiser n’est pas installer.</h1>
     <p className="page-intro">Une Collection est une sélection éditoriale. Un Modpack est un ensemble versionné qui ne devient installable qu’avec manifeste, droits et runtime réels. Un Profil de jeu reste une configuration personnelle distincte.</p>
     <nav className="collection-mode-tabs" aria-label="Collections et Modpacks"><button aria-pressed={mode==="Collections"} className={mode==="Collections"?"active":""} onClick={()=>setMode("Collections")}>Collections</button><button aria-pressed={mode==="Modpacks"} className={mode==="Modpacks"?"active":""} onClick={()=>setMode("Modpacks")}>Modpacks</button></nav>
@@ -318,7 +318,7 @@ function CollectionsPage() {
 function CreatorsPage() {
   const [query,setQuery]=useState("");
   const visible=creatorDetails.filter(x=>(x.name+" "+x.role+" "+x.focus).toLocaleLowerCase("fr").includes(query.trim().toLocaleLowerCase("fr")));
-  return <main className="page-section creators-page">
+  return <main id="main-content" tabIndex="-1" className="page-section creators-page">
     <span className="kicker">Créateurs</span><h1>Créateurs, équipes et studios.</h1>
     <p className="page-intro">Identités publiques et créations restent distinctes des rôles d’administration MODARYX. Aucun badge de vérification n’est simulé.</p>
     <label className="catalog-search creators-search"><MagnifyingGlass/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher un créateur ou un studio" aria-label="Rechercher un créateur ou un studio"/></label>
@@ -343,7 +343,7 @@ function Catalog({ onOpen }) {
   },[query,kind,sort]);
   const reset=()=>{setQuery("");setKind("Tous");setSort("Pertinence");};
   const activeFilters=(kind!=="Tous"?1:0)+(query.trim()?1:0)+(sort!=="Pertinence"?1:0);
-  return <main className="page-section catalog">
+  return <main id="main-content" tabIndex="-1" className="page-section catalog">
     <div className="catalog-title"><span className="kicker">Catalogue global</span><h1>Mods & contenus</h1><p>Trouvez un contenu, puis confirmez sa compatibilité avant de l’ajouter à un profil.</p></div>
     <div className="catalog-tools">
       <label className="catalog-search"><MagnifyingGlass/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher dans tous les contenus" aria-label="Rechercher dans tous les contenus"/></label>
@@ -382,7 +382,7 @@ function Detail({ item, onBack }) {
     "Permissions": <section className="detail-section"><h2>Permissions</h2><dl className="permissions-list"><div><dt>Licence</dt><dd>Démonstration — aucune licence de distribution réelle</dd></div><div><dt>Redistribution</dt><dd>Non définie</dd></div><div><dt>Modification</dt><dd>Non définie</dd></div><div><dt>Provenance</dt><dd>Asset de démonstration MODARYX V2</dd></div></dl></section>,
   };
 
-  return <main className="detail">
+  return <main id="main-content" tabIndex="-1" className="detail">
     <button className="back" onClick={onBack}>← Retour aux contenus</button>
     <div className="detail-grid">
       <div className="detail-main">
@@ -441,7 +441,7 @@ function Library() {
   };
   if(openProfile){
     const components=profileComponents[openProfile]||[];
-    return <main className="page-section profile-detail">
+    return <main id="main-content" tabIndex="-1" className="page-section profile-detail">
       <button className="back" onClick={()=>{setOpenProfile(null);setShowProfileDelta(false);setShowInteropReport(false);setShowReverseImpact(false);window.scrollTo({top:0,behavior:"auto"})}}>← Retour à la Bibliothèque</button>
       <span className="kicker">Profil de jeu</span><h1>{openProfile}</h1><p className="page-intro">Configuration personnelle de démonstration pour Aetherlands 1.4.2. Privée et locale par défaut.</p>
       <div className="profile-status-row"><span className="support-state">Local uniquement</span><span className="support-state">Non synchronisé</span><span className="support-state">Manager non connecté</span></div>
@@ -459,7 +459,7 @@ function Library() {
     "Historique": <section className="library-panel"><span className="kicker">Historique</span><h2>Activité réelle, privée par défaut</h2><div className="empty history-empty"><BookOpen/><h3>Aucun historique réel disponible</h3><p>Le futur historique pourra regrouper téléchargements et actions réellement attestés, filtrables par jeu, source et date. Ce prototype n’invente aucune entrée.</p></div><div className="privacy-note"><strong>Confidentialité</strong><span>L’historique personnel devra être privé par défaut et dissocié des métriques publiques.</span></div></section>,
     "Recherches enregistrées": <section className="library-panel"><span className="kicker">Recherches enregistrées</span><h2>Veilles personnelles</h2><div className="library-state"><strong>Shaders compatibles Aetherlands 1.4.x</strong><span>Recherche de démonstration enregistrée localement.</span></div></section>,
   };
-  return <main className="page-section library">
+  return <main id="main-content" tabIndex="-1" className="page-section library">
     <span className="kicker">Votre espace</span><h1>Bibliothèque</h1><p className="page-intro">Retrouvez favoris, suivis, collections, profils et historique sans les confondre.</p>
     <section className="library-overview"><div className="library-focus"><Media pos="50% 100%"/><div><span className="demo-label">Jeu actif</span><h2>Aetherlands</h2><p>3 profils de démonstration · version 1.4.2</p><button className="primary">Ouvrir le Game Hub <ArrowRight/></button></div></div><div className="library-summary"><strong>État de la bibliothèque</strong><span>Données locales de démonstration</span><span>Aucun cloud connecté</span><span>Aucun manager connecté</span></div></section>
     <nav className="library-tabs" aria-label="Sections de la bibliothèque">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>
@@ -484,7 +484,7 @@ function CreatorStudio() {
     "Team": <section className="studio-panel"><span className="kicker">Team</span><h2>Équipe / studio</h2><div className="studio-row"><div><strong>Atelier de démonstration</strong><span>Rôles et permissions non connectés à un backend.</span></div><span className="support-state">Local uniquement</span></div></section>,
     "Settings": <section className="studio-panel"><span className="kicker">Settings</span><h2>Paramètres du Studio</h2><div className="permissions-list"><div><dt>Sauvegarde locale</dt><dd>Prévue</dd></div><div><dt>Sauvegarde distante</dt><dd>Indisponible</dd></div><div><dt>Publication</dt><dd>Action explicite requise</dd></div><div><dt>Réauthentification</dt><dd>Backend requis</dd></div></div></section>,
   };
-  return <main className="page-section creator-studio">
+  return <main id="main-content" tabIndex="-1" className="page-section creator-studio">
     <span className="kicker">Créer</span><h1>Creator Studio</h1><p className="page-intro">Créez un projet, structurez auteurs et droits, préparez une release et contrôlez provenance et validation sans simuler les services absents.</p>
     <div className="studio-shell"><nav className="studio-nav" aria-label="Navigation Creator Studio">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav><div className="studio-content">{panel[tab]}</div></div>
   </main>;
@@ -513,7 +513,7 @@ function AccountCenter({ initialTab="Compte" }) {
     "Accessibilité": <section className="account-panel"><span className="kicker">Accessibilité</span><h2>Accessible sans réglage spécial</h2><p>Les préférences complètent le produit mais ne remplacent jamais un design accessible par défaut.</p><div className="settings-list"><button role="switch" aria-checked={prefs.reduced} onClick={()=>setPref("reduced")}><span><strong>Effets réduits</strong><small>Préférence locale de démonstration</small></span><em>{prefs.reduced?"Activés":"Désactivés"}</em></button></div><div className="accessibility-proof"><strong>Prototype actuel</strong><span>Focus visible 3 px · cibles tactiles ≥44 px · règle prefers-reduced-motion présente.</span></div></section>,
     "Données locales": <section className="account-panel"><span className="kicker">Données locales</span><h2>Ce navigateur</h2><div className="data-list"><div><strong>Favoris de démonstration</strong><span>Local</span></div><div><strong>Profils de jeu de démonstration</strong><span>Local</span></div><div><strong>Brouillons de démonstration</strong><span>Local</span></div><div><strong>Migration legacy</strong><span>Non exécutée</span></div></div><button className="quiet" disabled>Exporter — fonction réelle non connectée</button></section>,
   };
-  return <main className="page-section account-center"><span className="kicker">Paramètres</span><h1>Compte & préférences</h1><p className="page-intro">Contrôlez session, confidentialité, notifications et données locales sans transformer une capacité absente en promesse.</p><div className="account-shell"><nav className="account-nav" aria-label="Sections du compte">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>{panel[tab]}</div></main>;
+  return <main id="main-content" tabIndex="-1" className="page-section account-center"><span className="kicker">Paramètres</span><h1>Compte & préférences</h1><p className="page-intro">Contrôlez session, confidentialité, notifications et données locales sans transformer une capacité absente en promesse.</p><div className="account-shell"><nav className="account-nav" aria-label="Sections du compte">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>{panel[tab]}</div></main>;
 }
 
 
@@ -531,7 +531,7 @@ function RightsDashboard() {
   const current=rightsDemoCases.find(item=>item.id===selected) || rightsDemoCases[0];
   const lifecycleLocked=lifecycleState==="EXPIRED"||lifecycleState==="REVOKED";
   const statusClass=current.status==="APPROVED_WITH_LIMITS"?"approved":current.status==="AWAITING_RESPONSE"?"pending":"neutral";
-  return <main className="page-section rights-dashboard">
+  return <main id="main-content" tabIndex="-1" className="page-section rights-dashboard">
     <span className="kicker">Administration · démonstration</span>
     <h1>Droits des jeux</h1>
     <p className="page-intro">Suivez les demandes éditeurs scope par scope sans transformer une absence de réponse ou une formulation ambiguë en autorisation.</p>
@@ -685,7 +685,7 @@ function ModaryxAI() {
     ["Droits & éditeurs","Aider à structurer Rights Cases, scopes et réponses sans transformer une ambiguïté juridique en autorisation."],
     ["MODARYX Forge","Préparer de futurs diagnostics locaux uniquement après capability handshake réel et permissions explicites."],
   ];
-  return <main className="page-section modaryx-ai">
+  return <main id="main-content" tabIndex="-1" className="page-section modaryx-ai">
     <span className="kicker">MODARYX IA · fondation</span>
     <h1>Une IA native du produit, pas un chatbot greffé.</h1>
     <p className="page-intro">Cette surface prépare l’intégration future de MODARYX IA. Aucun modèle, provider, outil distant ou mémoire IA réelle n’est connecté dans ce prototype.</p>
@@ -729,7 +729,7 @@ function Community() {
     "Studios / équipes": <section className="community-board"><span className="kicker">Studios / équipes</span><h2>Équipes de création</h2><div className="community-teams">{creatorDetails.map(item=><article key={item.name}><div className="creator-avatar static"><UsersThree/></div><div><strong>{item.name}</strong><span>{item.role}</span><small>{item.focus}</small></div></article>)}</div></section>,
     "Activité": <section className="community-board"><span className="kicker">Activité</span><h2>Contexte utile, pas un réseau social</h2><div className="activity-list"><article><span className="activity-dot"/><div><strong>Exemple de nouvelle release</strong><small>Sentiers de l’aube · démonstration uniquement</small></div></article><article><span className="activity-dot"/><div><strong>Exemple de mise à jour de Collection</strong><small>Exploration sereine · démonstration uniquement</small></div></article></div><div className="moderation-note"><strong>Modération</strong><span>Les actions avancées restent masquées sans permissions serveur réelles.</span></div></section>,
   };
-  return <main className="page-section community"><span className="kicker">Communauté</span><h1>Des échanges utiles autour des créations.</h1><p className="page-intro">Support, questions, discussions, équipes et activité restent contextualisés par le modding.</p><nav className="community-tabs" aria-label="Sections Communauté">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>{panel[tab]}</main>;
+  return <main id="main-content" tabIndex="-1" className="page-section community"><span className="kicker">Communauté</span><h1>Des échanges utiles autour des créations.</h1><p className="page-intro">Support, questions, discussions, équipes et activité restent contextualisés par le modding.</p><nav className="community-tabs" aria-label="Sections Communauté">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>{panel[tab]}</main>;
 }
 
 export function App() {
@@ -737,15 +737,22 @@ export function App() {
   const [detail, setDetail] = useState(null);
   const [gameHubOpen,setGameHubOpen]=useState(true);
   const [online,setOnline]=useState(()=>typeof navigator==="undefined"?true:navigator.onLine);
+  const firstRouteRender=useRef(true);
   useEffect(()=>{
     const syncConnectivity=()=>setOnline(navigator.onLine);
     window.addEventListener("online",syncConnectivity);
     window.addEventListener("offline",syncConnectivity);
     return ()=>{window.removeEventListener("online",syncConnectivity);window.removeEventListener("offline",syncConnectivity);};
   },[]);
-  const navigate = item => { setDetail(null); setGameHubOpen(false); setActive(item); window.scrollTo({top:0,behavior:'smooth'}); };
-  const openGameHub=()=>{setDetail(null);setActive("Jeux");setGameHubOpen(true);window.scrollTo({top:0,behavior:'smooth'});};
-  const openContent=item=>{setDetail(item);window.scrollTo({top:0,behavior:'smooth'});};
+  useEffect(()=>{
+    if(firstRouteRender.current){firstRouteRender.current=false;return;}
+    const frame=requestAnimationFrame(()=>document.getElementById("main-content")?.focus({preventScroll:true}));
+    return ()=>cancelAnimationFrame(frame);
+  },[active,detail,gameHubOpen]);
+  const scrollRouteTop=()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+  const navigate = item => { setDetail(null); setGameHubOpen(false); setActive(item); scrollRouteTop(); };
+  const openGameHub=()=>{setDetail(null);setActive("Jeux");setGameHubOpen(true);scrollRouteTop();};
+  const openContent=item=>{setDetail(item);scrollRouteTop();};
   let screen;
   if (detail) screen=<Detail item={detail} onBack={()=>setDetail(null)}/>;
   else if(active==='Découvrir') screen=<Discover onOpen={openContent}/>;
@@ -762,5 +769,5 @@ export function App() {
   else if(active==='Droits jeux') screen=<RightsDashboard/>;
   else if(active==='MODARYX IA') screen=<ModaryxAI/>;
   else screen=<GameHub onOpen={openContent}/>;
-  return <div className="app-shell">{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button></footer></div>;
+  return <div className="app-shell"><a className="skip-link" href="#main-content">Aller au contenu principal</a>{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button></footer></div>;
 }
