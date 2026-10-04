@@ -5,7 +5,7 @@
 
 ## 1. But
 
-Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 65 captures au hasard.
+Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 67 captures au hasard.
 
 Ce pack ne remplace pas :
 - un screen reader réel ;
@@ -44,6 +44,7 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 12. `desktop-rights-dashboard.png` — administration fictive : vérifier clarté des statuts, scopes et garde-fous
 13. `desktop-game-support-request.png` — vérifier que la demande membre paraît locale, non envoyée et soumise à triage
 14. `desktop-rights-triage-accepted.png` — vérifier qu’une acceptation produit n’est pas confondue avec un accord éditeur
+15. `desktop-rights-response-interpretation.png` — vérifier la lecture SAFE_AUTOMATION + fallback LEGAL_REVIEW_REQUIRED
 
 ### Mobile — noyau
 
@@ -59,6 +60,7 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 10. `mobile-rights-dashboard.png` — vérifier que la hiérarchie admin reste compréhensible sur petit écran
 11. `mobile-game-support-request.png` — vérifier lisibilité du brouillon local et du statut non envoyé
 12. `mobile-rights-triage-accepted.png` — vérifier lisibilité du triage et de la baseline sûre sur petit écran
+13. `mobile-rights-response-interpretation.png` — vérifier compréhension du parsing de réponse et du garde-fou juridique
 
 ### États critiques si le participant a encore du temps
 
@@ -151,6 +153,11 @@ Ne pas dire :
    - l’état ACCEPTED_SAFE_BASELINE vous paraît-il distinct d’une autorisation éditeur ?
    - comprenez-vous qu’aucun contact, outbound ou asset officiel n’est activé ?
    - la décision de refuser/acceptation est-elle lisible sans ambiguïté ?
+
+17. Sur l’interprétation automatique fictive :
+   - comprenez-vous que SAFE_AUTOMATION s’applique uniquement à des scopes explicites ?
+   - comprenez-vous qu’une clause ambiguë bascule en LEGAL_REVIEW_REQUIRED ?
+   - comprenez-vous qu’aucune notification réelle n’est envoyée dans ce prototype ?
 
 ## 6. Tâches courtes recommandées
 
