@@ -359,6 +359,18 @@ try{
   await waitText("Rights Case de démonstration préparé — non créé réellement.");
   await waitText("Aucun contact éditeur, aucun outbound et aucun asset officiel n’est activé par cette action locale.");
   console.log("FLOW_ASSERT member support triage accepted safe baseline only");
+  await waitText("Vérifier le canal avant toute demande");
+  await waitText("CONTACT_CANDIDATE");
+  const requestPrepareInitiallyDisabled=await evaluate(`(() => {const b=[...document.querySelectorAll('.publisher-contact-actions button')].find(x=>x.textContent.includes('Préparer la demande structurée'));return !!b&&b.disabled;})()`);
+  if(!requestPrepareInitiallyDisabled) throw new Error("publisher request preparation must stay disabled before contact verification");
+  await clickText(".publisher-contact-actions .quiet","Vérifier le canal de démonstration");
+  await waitText("CONTACT_VERIFIED");
+  await clickText(".publisher-contact-actions .primary","Préparer la demande structurée");
+  await waitText("REQUEST_READY");
+  await waitText("Demande fictive prête : scopes explicites, canal vérifié, aucun envoi réel.");
+  await waitText("Outbound réel indisponible · aucune adresse réelle utilisée.");
+  console.log("FLOW_ASSERT publisher contact verified before request ready");
+
 
   await clickText(".global-nav button","Mods & contenus");
   await waitText("Catalogue global");
@@ -433,6 +445,12 @@ try{
   await clickText(".support-triage-actions .primary","Accepter la baseline sûre");
   await waitText("ACCEPTED_SAFE_BASELINE");
   await waitText("Rights Case de démonstration préparé — non créé réellement.");
+  await waitText("Vérifier le canal avant toute demande");
+  await clickText(".publisher-contact-actions .quiet","Vérifier le canal de démonstration");
+  await waitText("CONTACT_VERIFIED");
+  await clickText(".publisher-contact-actions .primary","Préparer la demande structurée");
+  await waitText("REQUEST_READY");
+
 
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav button","Créer");
