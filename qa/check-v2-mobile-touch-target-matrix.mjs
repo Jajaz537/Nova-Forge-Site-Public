@@ -148,6 +148,7 @@ try{
   await clickUtility("MODARYX IA"); await assertTargets("modaryx-ai"); count++;
   await clickExact("footer button","Droits jeux · démo admin"); await assertTargets("rights-dashboard"); count++;
   await clickExact("footer button","Confiance & légal"); await assertTargets("public-trust"); count++;
+  await clickExact("footer button","Aide & documentation"); await assertTargets("help-docs"); count++;
   await clickExact("footer button","Droits jeux · démo admin");
 
   await clickExact(".support-triage-actions button","Accepter la baseline sûre");
