@@ -2349,3 +2349,23 @@ Toujours requis avant une éventuelle preview engineering :
 - aucun cutover implicite.
 
 **Aucune reclassification n'a été activée. Aucun root frontend n'est créé.**
+
+
+## 70. Registry 51 contrats — VF readiness incluse
+
+**TERMINÉ pour les garde-fous machine / VF reste BLOQUÉE**
+
+Run :
+- `37237609788` — **SUCCESS**
+- `VF_READINESS_OPEN_BLOCKER_COUNT 32`
+- `VF_READINESS_STATUS BLOCKED`
+- `PASS_V2_VF_READINESS_GATE`
+- `PREPRODUCTION_CONTRACT_COUNT 51`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+Correction de dérive :
+- l'ancien marqueur figé `preproduction-contract-registry-35` dans le VF readiness gate a été remplacé par `preproduction-contract-registry-current-green` ;
+- le gate référence désormais aussi le High-Fi gate machine bloqué et la proposition de reclassification frontend non active.
+
+Le registre consolidé exécute maintenant également le VF readiness gate.  
+Cette consolidation **ne ferme aucun des 32 blockers** et ne change pas le statut VF : `BLOCKED`.
