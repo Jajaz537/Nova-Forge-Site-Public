@@ -180,8 +180,14 @@ try{
   await waitText("Required");
   await waitText("Recommended");
   await waitText("Suggested");
+  await waitText("Supported");
+  await waitText("Alternative / AnyOf");
   await waitText("Conflict");
   await waitText("ReplacedBy");
+  await waitText("Current");
+  await waitText("Aging");
+  await waitText("Stale");
+  await waitText("Unknown");
   await waitText("Compatibilité réelle : PREUVE MANQUANTE");
   await clickText(".detail-tabs button","Fichiers");
   await waitText("Fichiers de cette version");
@@ -236,6 +242,7 @@ try{
   await waitText("Configuration personnelle de démonstration pour Aetherlands 1.4.2");
   await waitText("Choisi par vous");
   await waitText("Épinglé");
+  await waitText("Minimum accepté");
   await clickText(".profile-preview-actions .quiet","Prévisualiser une mise à jour");
   await waitText("Copie avant promotion");
   await waitText("1.4.2 → 1.5.0-démo");
