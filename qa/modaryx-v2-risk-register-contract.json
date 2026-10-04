@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_RISK_REGISTER",
+  "source": "docs/MODARYX-V2-RISK-REGISTER-20261003.md",
+  "allowedStates": [
+    "EN COURS",
+    "BLOQUÉ",
+    "PREUVE MANQUANTE",
+    "TERMINÉ"
+  ],
+  "criticalOpenRisks": [
+    "LEGACY_SW_SERVES_OLD_CODE",
+    "LEGACY_REDIRECTS_INTERCEPT_V2",
+    "LEGACY_LOCAL_STORAGE_POLLS_V2",
+    "OLD_DESIGN_REAPPEARS",
+    "DEMO_DATA_PERCEIVED_REAL",
+    "COMPATIBILITY_WITHOUT_PROOF",
+    "INSTALL_MANAGER_SIMULATED",
+    "HIGH_FI_TOO_EARLY",
+    "HUMAN_VALIDATION_INCOMPLETE",
+    "MIGRATION_V1_V2_BREAKS_CONSUMERS",
+    "CUTOVER_WITHOUT_ROLLBACK",
+    "FALSE_PASS_VF",
+    "FIELD_CWV_ABSENT",
+    "REAL_SAFARI_DEVICES_ABSENT",
+    "LEGAL_RIGHTS_INCOMPLETE",
+    "REAL_WEATHER_PROVIDER_ABSENT",
+    "TRUST_ANCHOR_ABSENT",
+    "REAL_MOD_CORPUS_ABSENT"
+  ],
+  "reviewGates": [
+    "before-high-fi",
+    "before-first-v2-code",
+    "before-preview",
+    "before-cutover",
+    "before-vf"
+  ],
+  "invariants": [
+    "DOCUMENTED_RISK_IS_NOT_CLOSED_RISK",
+    "NO_CUTOVER_WITHOUT_ROLLBACK",
+    "NO_REAL_DISTRIBUTION_WITHOUT_RIGHTS",
+    "NO_MANAGER_INSTALL_WITHOUT_RUNTIME",
+    "NO_COMPATIBILITY_SUCCESS_WITHOUT_EVIDENCE",
+    "NO_FIELD_CWV_CLAIM_WITHOUT_FIELD_MEASURE",
+    "NO_HUMAN_VALIDATION_CLAIM_FROM_AUTOMATION",
+    "NO_LEGACY_DELETE_BEFORE_ROLLBACK_PROOF",
+    "PARALLEL_WORK_REQUIRES_HEAD_CHECK",
+    "NO_FALSE_PASS_OR_VF"
+  ],
+  "productionStatus": {
+    "riskReviewBeforePreview": "OPEN",
+    "riskReviewBeforeCutover": "OPEN",
+    "riskReviewBeforeVf": "OPEN",
+    "runtimeSecurityProof": "NOT_PROVEN"
+  }
+}
