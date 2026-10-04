@@ -208,21 +208,26 @@ try{
   await clickText(".onboarding-actions .quiet","Passer l’onboarding");
 
   await clickAria("Bibliothèque");
-  await waitText("Retrouvez favoris, suivis, collections et profils sans les confondre.");
+  await waitText("Retrouvez favoris, suivis, collections, profils et historique sans les confondre.");
+  await clickText(".library-tabs button","Historique");
+  await waitText("Aucun historique réel disponible");
+  await waitText("Privé par défaut");
   await clickText(".library-tabs button","Collections");
   await waitText("Sélections organisées");
   await clickText(".library-tabs button","Profils de jeu");
   await waitText("Connexion MODARYX Forge");
   await clickText(".profile-library article:first-child .quiet","Ouvrir");
   await waitText("Configuration personnelle de démonstration pour Aetherlands 1.4.2");
-  await waitText("Manager non connecté");
+  await waitText("Choisi par vous");
+  await waitText("Épinglé");
+  await clickText(".profile-decision .quiet","Prévisualiser une mise à jour");
+  await waitText("Copie avant promotion");
+  await waitText("1.4.2 → 1.5.0-démo");
   await clickText(".back","← Retour à la Bibliothèque");
-  await waitText("Retrouvez favoris, suivis, collections et profils sans les confondre.");
+  await waitText("Retrouvez favoris, suivis, collections, profils et historique sans les confondre.");
 
   await clickText(".global-nav button","Créer");
   await waitText("Creator Studio");
-  await clickText(".studio-nav button","Releases");
-  await waitText("Préparer une release");
   await clickText(".studio-nav button","Analytics");
   await waitText("Données indisponibles");
   await clickText(".studio-nav button","Dashboard");
@@ -230,6 +235,12 @@ try{
   await waitText("Brouillon local créé");
   await clickText(".studio-nav button","Projects");
   await waitText("Projet sans titre");
+  await waitText("Crédits structurés");
+  await clickText(".project-maturity .filter-chips button","WiP");
+  await waitText("Maturité");
+  await clickText(".studio-nav button","Releases");
+  await waitText("Maturité projet : WiP");
+  await waitText("Crédits & droits");
 
   await clickText(".global-nav button","Collections");
   await waitText("Organiser n’est pas installer.");
@@ -240,6 +251,12 @@ try{
   assertEqual(await count(".collection-card"),3,"collections reset count");
   await clickText(".collection-mode-tabs button","Modpacks");
   await waitText("Aetherlands — Essentiel");
+  await waitText("Requis transitivement");
+  await waitText("Épinglé");
+  await clickText(".delta-trigger","Prévisualiser le delta");
+  await waitText("Avant toute mutation");
+  await clickText(".apply-mode button","Remplacer");
+  await waitText("Remplacerait la composition cible");
   await waitText("PREUVE MANQUANTE — aucun manifeste réel");
   const modpackDisabled=await evaluate(`(() => {const b=document.querySelector('.modpack-surface .primary');return !!b&&b.disabled;})()`);
   if(!modpackDisabled) throw new Error("modpack install action must stay disabled without runtime");
@@ -302,11 +319,14 @@ try{
 
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav .mobile-nav-utility","Bibliothèque");
-  await waitText("Retrouvez favoris, suivis, collections et profils sans les confondre.");
+  await waitText("Retrouvez favoris, suivis, collections, profils et historique sans les confondre.");
+  await clickText(".library-tabs button","Historique");
+  await waitText("Aucun historique réel disponible");
   await clickText(".library-tabs button","Profils de jeu");
   await waitText("Connexion MODARYX Forge");
   await clickText(".profile-library article:first-child .quiet","Ouvrir");
   await waitText("Manager non connecté");
+  await waitText("Épinglé");
   await clickText(".back","← Retour à la Bibliothèque");
 
   await clickAria("Ouvrir le menu");
