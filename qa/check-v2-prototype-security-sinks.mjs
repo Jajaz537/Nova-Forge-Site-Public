@@ -25,8 +25,8 @@ for(const [label,re] of forbidden){
 }
 
 const inlineStyleCount=(files.app.match(/style=\{\{/g)||[]).length;
-if(inlineStyleCount!==4){
-  throw new Error("inline React style count changed; review CSP remediation expectation: "+inlineStyleCount);
+if(inlineStyleCount!==0){
+  throw new Error("inline React styles forbidden in isolated prototype source: "+inlineStyleCount);
 }
 
 const localAssetRefs=[...files.css.matchAll(/url\(([^)]+)\)/g)].map(m=>m[1].replace(/['"]/g,"").trim());
@@ -43,5 +43,5 @@ if(!files.index.includes('<meta name="robots" content="noindex,nofollow,noarchiv
 console.log("PROTOTYPE_SECURITY_REMOTE_REFERENCE_COUNT",0);
 console.log("PROTOTYPE_SECURITY_DANGEROUS_SINK_COUNT",0);
 console.log("PROTOTYPE_SECURITY_INLINE_STYLE_COUNT",inlineStyleCount);
-console.log("PROTOTYPE_SECURITY_INLINE_STYLE_STATUS","PREVIEW_REMEDIATION_REQUIRED_BEFORE_STRICT_STYLE_SRC");
+console.log("PROTOTYPE_SECURITY_INLINE_STYLE_STATUS","SOURCE_CLEAN_FOR_STRICT_STYLE_SRC_EVALUATION");
 console.log("PASS_V2_PROTOTYPE_SECURITY_SINKS");
