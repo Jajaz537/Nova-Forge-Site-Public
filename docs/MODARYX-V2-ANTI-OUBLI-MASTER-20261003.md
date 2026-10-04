@@ -951,3 +951,37 @@ Le checker bloque toute régression qui ferait de `NO_RESPONSE`, `DECLINED`, `EX
 - aucun contact éditeur réel validé ;
 - aucun Game Rights Registry production ;
 - aucun moteur de licence production.
+
+
+## 37. Rights Dashboard — matérialisation et preuve — 4 octobre 2026
+
+**TERMINÉ pour le prototype / production PREUVE MANQUANTE**
+
+Preuves :
+- workflow droits : run `37196259361` — **SUCCESS** ;
+- Living Threshold : run `37196769573` — **SUCCESS** ;
+- artifact `11301477422` ;
+- digest `sha256:d9ad41faa1423c22aa986e5f6661447b029a32f1812ed63a3a096b269a0b0eb9` ;
+- `KEYBOARD_REACHABLE 36 / 36` ;
+- `RIGHTS_MOBILE_OVERFLOW 0` ;
+- `MULTISCREEN_CAPTURE_COUNT 61` ;
+- surface map : run `37196989554` — **SUCCESS**, 23 surfaces.
+
+À ne pas perdre :
+- dashboard admin séparé des surfaces publiques ;
+- aucun outbound réel dans le prototype ;
+- états de démonstration : APPROVED_WITH_LIMITS / AWAITING_RESPONSE / NO_RESPONSE ;
+- scope absent/refusé = bloqué ;
+- NO_RESPONSE ≠ autorisation ;
+- MODARYX Forge = scope distinct ;
+- parsing automatique d’une réponse doit produire des scopes structurés ;
+- ambiguïté = LEGAL_REVIEW_REQUIRED ;
+- le propriétaire MODARYX ne doit pas être forcé à interpréter seul une réponse juridique.
+
+Toujours PREUVE MANQUANTE :
+- Game Rights Registry production ;
+- email/API outbound ;
+- contact éditeur réel ;
+- parsing de réponse réel ;
+- validation de licence ;
+- revue juridique externe.
