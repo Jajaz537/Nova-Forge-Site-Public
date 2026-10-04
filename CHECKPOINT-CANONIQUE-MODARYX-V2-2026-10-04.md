@@ -1871,3 +1871,38 @@ Toujours NON IMPLÉMENTÉ :
 - passkeys ;
 - notifications distantes ;
 - export/suppression compte réels.
+
+
+## 57. Gouvernance API — preuve contrat
+
+**TERMINÉ pour la gouvernance pré-production / API réelle PREUVE MANQUANTE**
+
+Source :
+`docs/MODARYX-V2-API-GOVERNANCE-CONTRACT-20261003.md`
+
+Machine contract :
+`qa/modaryx-v2-api-governance-contract.json`
+
+Preuve :
+- run `37232488908` — **SUCCESS**
+- commit `c17231128b5ea1f72400b66bba3df1d1a01f80ed`
+- `API_MATURITY_STATE_COUNT 4`
+- `API_PUBLICATION_GATE_COUNT 6`
+- `API_INVARIANT_COUNT 8`
+- `PASS_V2_API_GOVERNANCE_CONTRACT`.
+
+Verrouillé :
+- états experimental / beta / stable / deprecated ;
+- changements additifs préférés ;
+- aucune modification sémantique silencieuse d'une API stable ;
+- aucune suppression stable sans fenêtre de migration ;
+- clients frontend centralisés ;
+- protocole MODARYX Forge versionné + capability negotiation ;
+- webhooks signés, idempotents, protégés contre replay ;
+- rollback et consumer compatibility pour évolution stable.
+
+Toujours NON IMPLÉMENTÉ :
+- API V2 publique ;
+- choix final de versionnement ;
+- runtime webhooks ;
+- protocole MODARYX Forge réel.
