@@ -252,7 +252,7 @@ try {
   })()`);
   if(!notificationsOpened) fail("notifications review entry unavailable");
   await sleep(160);
-  const rightsNotificationText=await evaluate(`document.body.innerText.includes("Réponse éditeur reçue — Aetherlands") && document.body.innerText.includes("Démonstration · non reçue") && document.body.innerText.includes("LEGAL_REVIEW_REQUIRED")`);
+  const rightsNotificationText=await evaluate(`document.body.innerText.includes("Réponse éditeur reçue — Aetherlands") && document.body.innerText.includes("DÉMONSTRATION · NON REÇUE") && document.body.innerText.includes("LEGAL_REVIEW_REQUIRED")`);
   if(!rightsNotificationText) fail("publisher rights notification safety copy missing");
   const rightsNotificationOverflow=await evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth");
   if(rightsNotificationOverflow>1) fail("publisher rights notification mobile horizontal overflow "+rightsNotificationOverflow);
