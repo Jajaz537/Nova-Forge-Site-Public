@@ -278,6 +278,18 @@
       "contract": "qa/modaryx-v2-naming-wording-contract.json",
       "checker": "qa/check-v2-naming-wording-contract.mjs",
       "source": "docs/MODARYX-V2-NAMING-WORDING-CONTRACT-20261004.md"
+    },
+    {
+      "id": "forge-handoff",
+      "contract": "qa/modaryx-v2-forge-handoff-contract.json",
+      "checker": "qa/check-v2-forge-handoff-contract.mjs",
+      "source": "docs/MODARYX-V2-FORGE-HANDOFF-CONTRACT-20261004.md"
+    },
+    {
+      "id": "tech-stack-selection-gate",
+      "contract": "qa/modaryx-v2-tech-stack-selection-gate-contract.json",
+      "checker": "qa/check-v2-tech-stack-selection-gate-contract.mjs",
+      "source": "docs/MODARYX-V2-TECH-STACK-SELECTION-GATE-20261003.md"
     }
   ],
   "invariants": [
