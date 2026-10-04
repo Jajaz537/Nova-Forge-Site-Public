@@ -1,0 +1,32 @@
+name: MODARYX V2 Workflow Action Pin Proof
+
+on:
+  push:
+    branches:
+      - 'audit/modaryx-v2-legacy-boundary-20261003'
+    paths:
+      - '.github/workflows/modaryx-v2-*.yml'
+      - '.github/workflows/modaryx-v2-*.yaml'
+      - 'qa/check-v2-workflow-action-pins.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pins:
+    name: Validate MODARYX V2 workflow action SHA pins
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate Action references
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-workflow-action-pins.mjs
