@@ -1547,3 +1547,46 @@ Le contrat Web → desktop de référence est :
 `docs/MODARYX-V2-FORGE-HANDOFF-CONTRACT-20261004.md`
 
 Cette décision remplace toute ancienne mention présentant `Nova Forge OS` comme nom produit courant.
+
+
+## Audit interne final + handoff Web → MODARYX Forge — 4 octobre 2026
+
+**TERMINÉ pour le travail interne récupérable avant gate externe**
+
+Nomenclature active confirmée :
+- **MODARYX Forge** = logiciel / écosystème desktop ;
+- **MODARYX Public** = édition publique ;
+- **MODARYX Founder** = édition Founder ;
+- `Nova Forge OS` = nom produit retiré, legacy/provenance uniquement si nécessaire.
+
+Contrat Web → desktop :
+- `docs/MODARYX-V2-FORGE-HANDOFF-CONTRACT-20261004.md`
+- contrat web : **TERMINÉ**
+- capability handshake conceptuel : **TERMINÉ**
+- runtime / transport / protocole / receipt réel : **PREUVE MANQUANTE**
+
+Anti-oubli :
+- QA prototype archivable : **57 captures**
+- benchmark général : **TERMINÉ pour le corpus actuel / intégré**
+- benchmark spécialisé : **TERMINÉ pour le corpus actuel / intégré**
+- modèle dépendances/compatibilité/version/source : **TERMINÉ pour l'exploration**
+- aucune nouvelle fonctionnalité décorative ne doit être ajoutée seulement pour faire monter un pourcentage.
+
+Aucun autre gap interne honnêtement récupérable n'a été identifié sans inventer :
+- backend ;
+- provider/connecteur ;
+- runtime MODARYX Forge ;
+- preuve humaine ;
+- appareil/screen-reader ;
+- preuve production.
+
+Reste réellement bloquant avant root/frontend V2 production :
+1. validation humaine multi-écrans supplémentaire ;
+2. validation mobile humaine réelle ;
+3. référence visuelle approuvée archivable + comparaison normalisée ;
+4. screen reader réel ;
+5. Safari/appareils physiques ;
+6. données/backend/providers réels selon surface ;
+7. décision canonique levant le gate de création du root V2.
+
+**Décision : maintenir PR #162 en draft, ne pas toucher à main/public/DNS/Cloudflare critique, et reprendre automatiquement dès qu'un de ces gates reçoit une preuve réelle ou une reclassification explicite.**
