@@ -522,6 +522,9 @@ function RightsDashboard() {
   const [contactState,setContactState]=useState("CONTACT_CANDIDATE");
   const [requestState,setRequestState]=useState("REQUEST_NOT_READY");
   const [lifecycleState,setLifecycleState]=useState("ACTIVE_WITH_LIMITS");
+  const [ipCaseState,setIpCaseState]=useState("RECEIVED");
+  const [ipAssetLocated,setIpAssetLocated]=useState(false);
+  const [ipRestricted,setIpRestricted]=useState(false);
   const current=rightsDemoCases.find(item=>item.id===selected) || rightsDemoCases[0];
   const lifecycleLocked=lifecycleState==="EXPIRED"||lifecycleState==="REVOKED";
   const statusClass=current.status==="APPROVED_WITH_LIMITS"?"approved":current.status==="AWAITING_RESPONSE"?"pending":"neutral";
@@ -594,6 +597,22 @@ function RightsDashboard() {
             <button className="quiet" onClick={()=>setLifecycleState("ACTIVE_WITH_LIMITS")}>Réinitialiser le scénario</button>
           </div>
           <div className={`rights-lifecycle-result ${lifecycleLocked?"locked":"active"}`} role="status"><strong>{lifecycleLocked?"Usages dépendants rebloqués":"Surveillance de l’autorisation"}</strong><span>{lifecycleLocked?"Aucun asset ou avantage dépendant ne reste actif dans ce scénario.":"La démonstration conserve uniquement les scopes explicitement accordés."}</span><small>Prototype local uniquement · aucune licence réelle n’est modifiée.</small></div>
+        </section>
+
+        <section className="ip-takedown-demo" aria-label="Signalement IP et takedown de démonstration">
+          <div className="ip-takedown-head"><div><span className="kicker">IP / takedown · démonstration</span><h3>Contenir un asset contesté sans perdre les preuves</h3><p>Ce scénario reste local et fictif. Un signalement ne devient pas automatiquement une décision juridique, mais MODARYX doit pouvoir isoler précisément l’asset, préserver sa provenance et basculer vers un fallback sûr.</p></div><span className={`rights-state ${ipCaseState==="LEGAL_REVIEW_REQUIRED"?"pending":ipRestricted?"neutral":"approved"}`}>{ipCaseState}</span></div>
+          <div className="ip-case-grid">
+            <article><span>Cas fictif</span><strong>IP-DEMO-014</strong><small>Asset ambiance original de démonstration · aucune personne réelle.</small></article>
+            <article><span>Autorité déclarée</span><strong>AUTHORITY_UNVERIFIED</strong><small>Aucune autorité juridique complète n’est inférée.</small></article>
+            <article><span>Preuves</span><strong>Conservées</strong><small>Provenance et historique ne sont jamais supprimés par une restriction.</small></article>
+          </div>
+          <div className="ip-case-actions">
+            <button className="quiet" onClick={()=>{setIpAssetLocated(true);setIpCaseState("CONTENT_LOCATED");}}>Localiser l’asset de démonstration</button>
+            <button className="quiet" disabled={!ipAssetLocated} onClick={()=>{setIpRestricted(true);setIpCaseState("TEMP_RESTRICTED");}}>Appliquer fallback temporaire</button>
+            <button className="quiet" disabled={!ipRestricted} onClick={()=>setIpCaseState("LEGAL_REVIEW_REQUIRED")}>Escalader en revue juridique</button>
+            <button className="quiet" onClick={()=>{setIpCaseState("RECEIVED");setIpAssetLocated(false);setIpRestricted(false);}}>Réinitialiser le cas IP</button>
+          </div>
+          <div className={`ip-case-result ${ipRestricted?"restricted":"open"}`} role="status"><strong>{ipRestricted?"Asset contesté retiré du scénario public":"Aucune restriction technique appliquée"}</strong><span>{ipRestricted?"Fallback original MODARYX actif dans la démonstration. Réupload automatique bloqué conceptuellement.":"Localisation et revue requises avant toute action."}</span><small>{ipCaseState==="LEGAL_REVIEW_REQUIRED"?"LEGAL_REVIEW_REQUIRED — aucune restauration automatique.":"Prototype local uniquement · aucun contenu réel modifié."}</small></div>
         </section>
         <section className="rights-interpretation-demo">
           <div className="rights-interpretation-head"><div><span className="kicker">Interprétation automatique · démonstration</span><h3>Lecture structurée de la réponse</h3></div><span className={`rights-state ${current.interpretation?"approved":"neutral"}`}>{current.interpretation?.state || "AUCUNE RÉPONSE INTERPRÉTABLE"}</span></div>
