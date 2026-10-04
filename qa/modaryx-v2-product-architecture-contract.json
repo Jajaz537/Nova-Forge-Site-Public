@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-PRODUCT-ARCHITECTURE-20261003.md",
+  "coreActivities": [
+    "DISCOVER",
+    "UNDERSTAND",
+    "INSTALL_MANAGE",
+    "CREATE_PUBLISH_MAINTAIN"
+  ],
+  "primaryNav": [
+    "Découvrir",
+    "Jeux",
+    "Mods & contenus",
+    "Collections",
+    "Créateurs",
+    "Communauté",
+    "Créer"
+  ],
+  "mobilePriorities": [
+    "Recherche",
+    "Jeux",
+    "Découvrir",
+    "Bibliothèque",
+    "Compte/Menu"
+  ],
+  "publicRoutes": [
+    "/",
+    "/discover",
+    "/games",
+    "/games/:game",
+    "/content/:id",
+    "/collections",
+    "/collections/:id",
+    "/modpacks",
+    "/modpacks/:id",
+    "/creators",
+    "/creators/:id",
+    "/community",
+    "/studio",
+    "/library",
+    "/search",
+    "/security",
+    "/docs"
+  ],
+  "objectSeparation": [
+    "Favorite",
+    "Collection",
+    "Modpack",
+    "ProfileLoadout"
+  ],
+  "transverseStates": [
+    "loading",
+    "skeleton",
+    "empty",
+    "no-results",
+    "error",
+    "retry",
+    "offline",
+    "stale",
+    "unauthorized",
+    "forbidden",
+    "removed",
+    "unavailable",
+    "success"
+  ],
+  "invariants": [
+    "FUNCTIONAL_LABELS_BEFORE_LORE",
+    "HOMEPAGE_IS_PRODUCT_NOT_NEWS",
+    "COLLECTION_NEVER_INSTALLABLE_WITHOUT_MANIFEST_RESOLUTION",
+    "PROFILE_LOCAL_PRIVATE_BY_DEFAULT",
+    "GAME_HUB_SEARCH_CONTEXTUAL",
+    "CONTENT_DETAIL_DECISION_SIGNALS_BEFORE_ACTION",
+    "SECURITY_TRUST_SIGNALS_IN_CONTEXT_NOT_SECURITY_PAGE_ONLY",
+    "DESKTOP_AND_MOBILE_ARE_COORDINATED_COMPOSITIONS_NOT_COMPRESSED_CLONES",
+    "HIGH_FI_NEVER_MASKS_BROKEN_INFORMATION_ARCHITECTURE"
+  ],
+  "productionStatus": {
+    "productArchitectureRuntime": "NOT_IMPLEMENTED",
+    "realTreeTestingGlobal": "NOT_PROVEN",
+    "productionRoutes": "NOT_IMPLEMENTED"
+  }
+}
