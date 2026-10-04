@@ -424,3 +424,22 @@ Toujours NON IMPLÉMENTÉ :
 - legal review opérationnelle.
 
 Cette preuve ne vaut ni procédure juridique finale ni conformité réglementaire et ne ferme aucun blocker humain/appareil.
+
+
+## MODARYX IA — extension de couverture — 4 octobre 2026
+
+Run `37211271783` : **SUCCESS**  
+Commit `f8616f18876c49de45b3d208222be042dd2b543a`  
+Artifact `11306731614`  
+Captures : **77**  
+Keyboard : `37 / 37`
+
+La surface MODARYX IA desktop/mobile est matérialisée comme preview non active :
+- aucune réponse réelle ;
+- aucun backend réel ;
+- composer désactivé ;
+- garde-fous de confiance visibles.
+
+Cela augmente la couverture du prototype sans lever les validations humaines/appareils.
+
+**High-Fi final : BLOQUÉ.**
