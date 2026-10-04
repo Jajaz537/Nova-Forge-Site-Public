@@ -1762,3 +1762,22 @@ Preuve :
 
 Règle :
 le registry prouve la cohérence des contrats, jamais la disponibilité d'un service production.
+
+
+## 65. Public trust — contrat machine — 4 octobre 2026
+
+**TERMINÉ pour le contrat / publication PREUVE MANQUANTE**
+
+Preuve :
+- public trust run `37233036635` — **SUCCESS**
+- `PASS_V2_PUBLIC_TRUST_CONTRACT`
+- registry run `37233086517` — **SUCCESS**
+- 20 contrats consolidés.
+
+À ne pas perdre :
+- aucune identité légale ou coordonnée réelle inventée ;
+- placeholder ≠ texte final ;
+- canaux publics doivent réellement exister ;
+- privacy doit refléter l'architecture déployée ;
+- disclosures IA doivent refléter les providers actifs ;
+- publication seulement après approbation réelle.
