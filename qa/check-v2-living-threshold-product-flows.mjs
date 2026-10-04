@@ -149,6 +149,17 @@ try{
 
   await clickText(".global-nav button","Jeux");
   await waitText("Trouvez votre prochain terrain de jeu");
+  await clickText(".game-support-request>.quiet","Demander le support d’un jeu");
+  await waitText("Aucune demande éditeur n’est envoyée depuis ce prototype.");
+  await clickText(".game-request-form .primary","Préparer la demande locale");
+  await waitText("Saisissez un nom de jeu avant de préparer la demande.");
+  await fill(".game-request-form input","Project Meridian");
+  await clickText(".game-request-form .primary","Préparer la demande locale");
+  await waitText("Brouillon de demande — non envoyé");
+  await waitText("Project Meridian · PC");
+  await waitText("Aucun Rights Case réel n’est créé dans ce prototype.");
+  console.log("FLOW_ASSERT game support request local-only triage");
+
   await fill(".games-index .catalog-search input","Aetherlands");
   assertEqual(await count(".game-card"),1,"games search result count");
   await clickText(".game-card button","Ouvrir le Game Hub");
@@ -353,6 +364,15 @@ try{
   await waitText("Aucun contenu trouvé");
   await clickText(".empty button","Réinitialiser les filtres");
   assertEqual(await count(".content-card"),6,"catalog no-results recovery count");
+
+  await load(390,844);
+  await clickAria("Ouvrir le menu");
+  await clickText(".global-nav button","Jeux");
+  await waitText("Trouvez votre prochain terrain de jeu");
+  await clickText(".game-support-request>.quiet","Demander le support d’un jeu");
+  await fill(".game-request-form input","Project Meridian");
+  await clickText(".game-request-form .primary","Préparer la demande locale");
+  await waitText("Brouillon de demande — non envoyé");
 
   await load(390,844);
   await waitText("Catalogue consultable — téléchargement non garanti");
