@@ -5,7 +5,7 @@
 
 ## 1. But
 
-Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 59 captures au hasard.
+Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 61 captures au hasard.
 
 Ce pack ne remplace pas :
 - un screen reader réel ;
@@ -41,6 +41,7 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 9. `desktop-creator-studio.png`
 10. `desktop-account.png`
 11. `desktop-game-hub-atmosphere-rivenfall.png` — variante fictive/originale MODARYX, à évaluer sur la cohérence de marque plutôt que sur la ressemblance à un jeu réel
+12. `desktop-rights-dashboard.png` — administration fictive : vérifier clarté des statuts, scopes et garde-fous
 
 ### Mobile — noyau
 
@@ -53,6 +54,7 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 7. `mobile-collections.png`
 8. `mobile-account.png`
 9. `mobile-game-hub-atmosphere-rivenfall.png` — vérifier que l’ambiance reste lisible, secondaire et clairement MODARYX sur petit écran
+10. `mobile-rights-dashboard.png` — vérifier que la hiérarchie admin reste compréhensible sur petit écran
 
 ### États critiques si le participant a encore du temps
 
@@ -125,6 +127,14 @@ Ne pas dire :
    - l’ambiance change-t-elle sans modifier la compréhension de la navigation ?
    - un élément décoratif gêne-t-il une information ou une action ?
    - la variante paraît-elle originale plutôt qu’une copie d’une identité de jeu connue ?
+
+### Rights Dashboard
+
+14. Sur la surface d’administration fictive :
+   - comprenez-vous immédiatement qu’aucune demande réelle n’est envoyée ?
+   - distinguez-vous autorisation limitée, attente et absence de réponse ?
+   - comprenez-vous qu’un scope refusé ou absent reste bloqué ?
+   - l’état MODARYX Forge paraît-il clairement séparé des droits Web ?
 
 ## 6. Tâches courtes recommandées
 
