@@ -268,6 +268,9 @@ try {
 
   await clickByAriaLabel("Notifications");
   manifest.captures.push(await capture("desktop-notifications.png", 1440, 1024, "Centre de notifications"));
+  await evaluate("document.querySelector('.notification-demo-list')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("desktop-rights-notification-preview.png", 1440, 1024, "Réponse éditeur reçue — Aetherlands"));
 
   await clickByAriaLabel("Compte");
   manifest.captures.push(await capture("desktop-account.png", 1440, 1024, "Vous explorez MODARYX en mode invité"));
@@ -384,6 +387,9 @@ try {
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav .mobile-nav-utility", "Notifications");
   manifest.captures.push(await capture("mobile-notifications.png", 390, 844, "Centre de notifications"));
+  await evaluate("document.querySelector('.notification-demo-list')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("mobile-rights-notification-preview.png", 390, 844, "Réponse éditeur reçue — Aetherlands"));
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav .mobile-nav-utility", "Compte");
