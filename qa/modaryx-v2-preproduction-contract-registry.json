@@ -164,6 +164,54 @@
       "contract": "qa/modaryx-v2-a11y-perf-design-system-contract.json",
       "checker": "qa/check-v2-a11y-perf-design-system-contract.mjs",
       "source": "docs/MODARYX-V2-A11Y-PERF-DESIGN-SYSTEM-CONTRACT-20261003.md"
+    },
+    {
+      "id": "game-support-lifecycle",
+      "contract": "qa/modaryx-v2-game-support-lifecycle-contract.json",
+      "checker": "qa/check-v2-game-support-lifecycle-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-LIFECYCLE-CONTRACT-20261003.md"
+    },
+    {
+      "id": "game-hub",
+      "contract": "qa/modaryx-v2-game-hub-contract.json",
+      "checker": "qa/check-v2-game-hub-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-HUB-CONTRACT-20261003.md"
+    },
+    {
+      "id": "search-filter-discovery",
+      "contract": "qa/modaryx-v2-search-filter-discovery-contract.json",
+      "checker": "qa/check-v2-search-filter-discovery-contract.mjs",
+      "source": "docs/MODARYX-V2-SEARCH-FILTER-DISCOVERY-CONTRACT-20261003.md"
+    },
+    {
+      "id": "content-detail",
+      "contract": "qa/modaryx-v2-content-detail-contract.json",
+      "checker": "qa/check-v2-content-detail-contract.mjs",
+      "source": "docs/MODARYX-V2-CONTENT-DETAIL-CONTRACT-20261003.md"
+    },
+    {
+      "id": "collection-modpack-profile",
+      "contract": "qa/modaryx-v2-collection-modpack-profile-contract.json",
+      "checker": "qa/check-v2-collection-modpack-profile-contract.mjs",
+      "source": "docs/MODARYX-V2-COLLECTION-MODPACK-PROFILE-CONTRACT-20261003.md"
+    },
+    {
+      "id": "creator-studio",
+      "contract": "qa/modaryx-v2-creator-studio-contract.json",
+      "checker": "qa/check-v2-creator-studio-contract.mjs",
+      "source": "docs/MODARYX-V2-CREATOR-STUDIO-CONTRACT-20261003.md"
+    },
+    {
+      "id": "community-library-nav",
+      "contract": "qa/modaryx-v2-community-library-nav-contract.json",
+      "checker": "qa/check-v2-community-library-nav-contract.mjs",
+      "source": "docs/MODARYX-V2-COMMUNITY-LIBRARY-NAV-CONTRACT-20261003.md"
+    },
+    {
+      "id": "critical-flows",
+      "contract": "qa/modaryx-v2-critical-flows-contract.json",
+      "checker": "qa/check-v2-critical-flows-contract.mjs",
+      "source": "docs/MODARYX-V2-CRITICAL-FLOWS-20261003.md"
     }
   ],
   "invariants": [
