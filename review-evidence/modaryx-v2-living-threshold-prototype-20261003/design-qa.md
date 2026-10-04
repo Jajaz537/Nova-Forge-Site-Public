@@ -338,3 +338,51 @@ Toujours PREUVE MANQUANTE :
 - validation humaine et appareils/screen-reader réels.
 
 Aucun PASS High-Fi/VF n'est déclaré.
+
+
+## Specialized ecosystem compatibility proof — 4 octobre 2026
+
+**TERMINÉ — prototype ciblé / aucune compatibilité réelle ni plateforme réelle déclarée**
+
+Run ciblé : `37164976157` — **SUCCESS**  
+Commit capturé : `49ce52287c900e16376e4ccab84008a02a8a92e7`  
+Artifact : `11289531194`  
+Artifact digest : `sha256:699e4daa8110e2182dce58eb7d0fc9fb7648114039bf411bca81d4d7f0e6db53`
+
+Preuves fraîches :
+- `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `KEYBOARD_REACHABLE 32 / 32`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 57`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Nouveaux états spécialisés exercés :
+- compatibilité multi-dimension : jeu/version, édition, plateforme, loader/framework, résultat, fraîcheur, workaround, channel ;
+- résultat réel explicitement `Unknown` dans la démo ;
+- relations typées : Required / Recommended / Suggested / Conflict / ReplacedBy ;
+- variantes de fichier pédagogiques par édition/loader ;
+- source/provider/auteur/variante séparés ;
+- CTA `Ouvrir avec MODARYX Forge` disabled sans capability handshake réel ;
+- reverse dependency impact avant désactivation ;
+- Safe Profile indiqué mais disabled sans runtime desktop ;
+- validation Creator Studio par plateforme ;
+- Crossplay = PREUVE MANQUANTE, jamais déduit du statut PC.
+
+Nouvelles captures archivées :
+- desktop/mobile Compatibility Specialized ;
+- desktop/mobile Reverse Dependency Impact ;
+- desktop/mobile Creator Platform Validation.
+
+Ce run ne prouve pas :
+- compatibilité réelle ;
+- provider API ;
+- crossplay ;
+- Safe Profile exécuté ;
+- MODARYX Forge ;
+- backend production ;
+- validation humaine/appareil.
+
+Aucun PASS High-Fi/VF final n'est déclaré.
