@@ -298,6 +298,11 @@ try {
   await evaluate("document.querySelector('.rights-interpretation-demo')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("desktop-rights-response-interpretation.png", 1440, 1024, "SAFE_AUTOMATION"));
+  await clickByText(".rights-lifecycle-actions .quiet", "Simuler expiration");
+  await evaluate("document.querySelector('.rights-lifecycle-demo')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("desktop-rights-lifecycle-expired.png", 1440, 1024, "Usages dépendants rebloqués"));
+  await clickByText(".rights-lifecycle-actions .quiet", "Réinitialiser le scénario");
 
   // Mobile states
   await navigateHome(390, 844);
@@ -409,6 +414,11 @@ try {
   await evaluate("document.querySelector('.rights-interpretation-demo')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("mobile-rights-response-interpretation.png", 390, 844, "SAFE_AUTOMATION"));
+  await clickByText(".rights-lifecycle-actions .quiet", "Simuler expiration");
+  await evaluate("document.querySelector('.rights-lifecycle-demo')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("mobile-rights-lifecycle-expired.png", 390, 844, "Usages dépendants rebloqués"));
+  await clickByText(".rights-lifecycle-actions .quiet", "Réinitialiser le scénario");
 
   const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/manifest.json";
   writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
