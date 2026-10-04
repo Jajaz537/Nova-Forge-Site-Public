@@ -1572,3 +1572,61 @@ Toujours PREUVE MANQUANTE :
 - canaux support/IP/sécurité réels ;
 - revue juridique ;
 - publication production.
+
+
+## 50. Help / Documentation + archive produit courante
+
+**TERMINÉ pour le prototype/contrat / production BLOQUÉE**
+
+Contrat :
+- `docs/MODARYX-V2-HELP-DOCUMENTATION-CONTRACT-20261004.md`
+- run `37229486530` — **SUCCESS**
+- `HELP_DOCS_STATE_COUNT 7`
+- `HELP_DOCS_TOPIC_COUNT 16`
+- `HELP_DOCS_INVARIANT_COUNT 11`
+- `PASS_V2_HELP_DOCUMENTATION_CONTRACT`.
+
+Surface map :
+- run `37229378669` — **SUCCESS**
+- `SURFACE_MAP_COUNT 26`
+- `UNRESOLVED_RUNTIME_COUNT 6`
+- `PASS_V2_PRODUCTION_SURFACE_MAP`.
+
+Archive Living Threshold la plus fraîche couvrant le code produit matérialisé avant les ajouts docs/QA-only ultérieurs :
+- run `37228199151` — **SUCCESS**
+- commit `b5601ed14c224cec5c163d6783a0a351eb0e0f68`
+- artifact `11312597804`
+- digest `sha256:a67562f537c087e56417367be5c8f2b1da5268bd21d045dbbfc9196a0d4ab45d`
+- `KEYBOARD_REACHABLE 40 / 40`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `MULTISCREEN_CAPTURE_COUNT 85`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Matrice structure :
+- run `37228199163` — **SUCCESS**
+- 17 surfaces structure ;
+- 17 surfaces touch ;
+- 14 surfaces forced colors ;
+- Help/Docs incluse.
+
+Responsive ciblé :
+- text spacing run `37228199140` — **SUCCESS**, 14 surfaces ;
+- narrow 320 run `37228199109` — **SUCCESS**, 14 surfaces ;
+- tablet run `37228199125` — **SUCCESS**, 14 surfaces.
+
+Help/Docs matérialise :
+- rubriques produit ;
+- raccourcis vers tâches produit ;
+- état final explicitement PREUVE MANQUANTE ;
+- aucune fonction serveur inventée.
+
+Toujours non final :
+- contenu documentation production ;
+- pipeline/repository docs ;
+- recherche docs ;
+- link/stale checks production ;
+- validation humaine ;
+- AT/appareils ;
+- textes juridiques finaux.
