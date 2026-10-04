@@ -15,9 +15,9 @@ const contentItems = [
 ];
 
 const gameItems = [
-  { title: "Aetherlands", status: "Catalogue consultable", detail: "Démonstration · version 1.4.2", pos: "0% 0%" },
-  { title: "Rivenfall", status: "Aperçu disponible", detail: "Démonstration · contenu à venir", pos: "50% 0%" },
-  { title: "Solstice Frontier", status: "Catalogue vide", detail: "Démonstration · aucun contenu publié", pos: "100% 0%" },
+  { title: "Aetherlands", status: "Catalogue consultable", detail: "Démonstration · version 1.4.2", pos: "0% 0%", atmosphere: "aetherlands", mood: "froid minéral · cyan / cobalt" },
+  { title: "Rivenfall", status: "Aperçu disponible", detail: "Démonstration · contenu à venir", pos: "50% 0%", atmosphere: "rivenfall", mood: "forêt humide · teal / violet" },
+  { title: "Solstice Frontier", status: "Catalogue vide", detail: "Démonstration · aucun contenu publié", pos: "100% 0%", atmosphere: "solstice", mood: "frontière solaire · ambre contrôlé / bleu nuit" },
 ];
 
 const creatorItems = ["Atelier Boréal", "Lueur Collective", "Les Cartographes"];
@@ -105,7 +105,7 @@ function GamesIndex({ onOpenGame }) {
       <label className="sort-control"><span>Trier</span><select value={sort} onChange={e=>setSort(e.target.value)}><option>Nom</option><option>État</option></select></label>
     </div>
     <div className="game-grid">
-      {games.map((game,i)=><article className="game-card" key={game.title}>
+      {games.map((game,i)=><article className={`game-card atmosphere-card atmosphere-${game.atmosphere}`} key={game.title}>
         <Media pos={game.pos}/>
         <div><span className="demo-label">Démonstration</span><h2>{game.title}</h2><p>{game.detail}</p><span className="support-state">{game.status}</span>
         {game.title==="Aetherlands" ? <button className="primary" onClick={onOpenGame}>Ouvrir le Game Hub <ArrowRight/></button> : <button className="quiet" disabled>Indisponible dans cette démo</button>}</div>
@@ -145,6 +145,8 @@ function GameHub({ onOpen }) {
   const [tab, setTab] = useState("Aperçu");
   const [query, setQuery] = useState("");
   const [version, setVersion] = useState("1.4.2");
+  const [atmosphereKey,setAtmosphereKey]=useState("aetherlands");
+  const atmosphere=gameItems.find(game=>game.atmosphere===atmosphereKey)||gameItems[0];
   const normalized=query.trim().toLocaleLowerCase("fr");
   const visibleContent = useMemo(() => contentItems.filter(x => (x.title+" "+x.kind+" "+x.creator).toLocaleLowerCase("fr").includes(normalized)), [normalized]);
   const visibleCollections = useMemo(() => collectionDetails.filter(x => (x.title+" "+x.curator+" "+x.category).toLocaleLowerCase("fr").includes(normalized)), [normalized]);
@@ -168,9 +170,9 @@ function GameHub({ onOpen }) {
   else body=<div className="hub-activity"><article><span className="activity-dot"/><div><strong>Activité de démonstration</strong><small>Exemple : une release compatible avec Aetherlands 1.4.2 serait affichée ici.</small></div></article><article><span className="activity-dot"/><div><strong>Aucun événement serveur réel</strong><small>Les notifications et changements distants ne sont pas simulés.</small></div></article></div>;
 
   return <>
-    <section className="game-hero">
+    <section className={`game-hero game-atmosphere atmosphere-${atmosphereKey}`} data-atmosphere={atmosphereKey}>
       <div className="hero-shade" />
-      <div className="game-identity"><span className="demo-label">Démonstration</span><h1>Aetherlands</h1><div className="game-support">Catalogue consultable — téléchargement non garanti</div><label>Version<select value={version} onChange={e => setVersion(e.target.value)}><option>1.4.2</option><option>1.4.1</option></select></label></div>
+      <div className="game-identity"><span className="demo-label">Démonstration</span><span className="atmosphere-note">Ambiance originale MODARYX · {atmosphere.title}</span><h1>Aetherlands</h1><div className="game-support">Catalogue consultable — téléchargement non garanti</div><label>Version<select value={version} onChange={e => setVersion(e.target.value)}><option>1.4.2</option><option>1.4.1</option></select></label><div className="atmosphere-preview"><span>Prévisualiser l’ambiance</span><div role="group" aria-label="Ambiances de démonstration originales MODARYX">{gameItems.map(game=><button key={game.atmosphere} type="button" aria-pressed={atmosphereKey===game.atmosphere} className={atmosphereKey===game.atmosphere?"active":""} onClick={()=>setAtmosphereKey(game.atmosphere)}>{game.title}</button>)}</div><small>{atmosphere.mood} · aucun asset éditeur utilisé</small></div></div>
       <form className="hero-search" onSubmit={e => e.preventDefault()}><MagnifyingGlass /><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Rechercher dans ce jeu" aria-label="Rechercher dans ce jeu"/><button type="button" aria-label="Filtres"><SlidersHorizontal /></button></form>
       <button className="primary" onClick={()=>setTab("Mods & contenus")}>Explorer les contenus <ArrowRight /></button>
     </section>
