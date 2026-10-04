@@ -187,6 +187,38 @@ try {
   console.log("RIGHTS_MOBILE_OVERFLOW",rightsOverflow);
   console.log("AX_ASSERT rights dashboard safety surface");
 
+
+  await navigate(390,844);
+  const supportRequestOpened=await evaluate(`(() => {
+    const menu=document.querySelector('.mobile-menu'); if(!menu) return false; menu.click();
+    const games=[...document.querySelectorAll('.global-nav button')].find(el=>el.textContent.trim()==='Jeux'); if(!games) return false; games.click();
+    return true;
+  })()`);
+  if(!supportRequestOpened) fail("game support request navigation unavailable");
+  await sleep(180);
+  const requestToggleOpened=await evaluate(`(() => {
+    const b=[...document.querySelectorAll('.game-support-request>.quiet')].find(el=>el.textContent.trim()==='Demander le support d’un jeu');
+    if(!b) return false; b.click(); return true;
+  })()`);
+  if(!requestToggleOpened) fail("game support request toggle unavailable");
+  await sleep(120);
+  const requestOverflow=await evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth");
+  if(requestOverflow>1) fail("game support request mobile horizontal overflow "+requestOverflow);
+  const requestSmallTargets=await evaluate(`(() => {
+    const root=document.querySelector('.game-support-request'); if(!root) return [{label:'missing-root',width:0,height:0}];
+    const selector='button:not([disabled]),input:not([disabled]),select:not([disabled])';
+    return [...root.querySelectorAll(selector)].filter(el=>{
+      const r=el.getBoundingClientRect(),s=getComputedStyle(el);
+      return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0&&(r.width<44||r.height<44);
+    }).map(el=>({label:el.getAttribute('aria-label')||el.textContent.trim().slice(0,50),width:Math.round(el.getBoundingClientRect().width*10)/10,height:Math.round(el.getBoundingClientRect().height*10)/10}));
+  })()`);
+  if(requestSmallTargets.length){
+    console.error(JSON.stringify(requestSmallTargets,null,2));
+    fail("game support request mobile targets below 44x44: "+requestSmallTargets.length);
+  }
+  console.log("GAME_SUPPORT_REQUEST_MOBILE_OVERFLOW",requestOverflow);
+  console.log("AX_ASSERT game support request safety surface");
+
   console.log("DESKTOP_OVERFLOW", desktopOverflow);
   console.log("MOBILE_OVERFLOW", mobileOverflow);
   console.log("PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y");
