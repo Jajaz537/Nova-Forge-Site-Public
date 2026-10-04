@@ -592,3 +592,39 @@ Captures :
 - `mobile-rights-triage-accepted.png`.
 
 Aucun triage serveur, Rights Case production, contact éditeur ou décision juridique réelle n’est prouvé.
+
+
+## Publisher response interpretation — safe automation proof — 4 octobre 2026
+
+**TERMINÉ — prototype fictif / aucun inbound ou parsing réel**
+
+Run :
+- `37200132643` — **SUCCESS**
+- commit capturé : `81ddfbb24d9ff3a3e74342121cbcc1b779810681`
+- artifact : `11302418920`
+- digest : `sha256:0f9bb8ea6d2293c1c866026f11d2a7200e1f80dd3a4b6748204dcf3463b08e35`
+
+Marqueurs :
+- `KEYBOARD_REACHABLE 36 / 36`
+- `RIGHTS_MOBILE_OVERFLOW 0`
+- `GAME_SUPPORT_REQUEST_MOBILE_OVERFLOW 0`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `FLOW_ASSERT publisher response interpretation safe automation with legal fallback`
+- `FLOW_ASSERT member support triage accepted safe baseline only`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 67`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Matérialisé :
+- `SAFE_AUTOMATION` uniquement pour une réponse fictive explicite et partielle ;
+- scopes écrits seuls applicables ;
+- notification admin indiquée comme fictive/non envoyée ;
+- clause ambiguë / conflit / portée incertaine → `LEGAL_REVIEW_REQUIRED` ;
+- aucun déblocage automatique en cas d’ambiguïté.
+
+Captures :
+- `desktop-rights-response-interpretation.png`
+- `mobile-rights-response-interpretation.png`.
+
+Aucune mailbox, provenance réelle, extraction de licence réelle ou notification production n’est prouvée.
