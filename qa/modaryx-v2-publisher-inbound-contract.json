@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md",
+  "inboundStates": [
+    "INBOUND_RECEIVED",
+    "CORRELATION_PENDING",
+    "CORRELATED",
+    "PROVENANCE_UNVERIFIED",
+    "PROVENANCE_VERIFIED",
+    "ATTACHMENT_QUARANTINED",
+    "READY_FOR_INTERPRETATION",
+    "LEGAL_REVIEW_REQUIRED",
+    "REJECTED_UNTRUSTED"
+  ],
+  "correlationEvidence": [
+    "rights_case_id",
+    "logical_request_id",
+    "message_id",
+    "in_reply_to",
+    "references",
+    "thread_token"
+  ],
+  "provenanceSignals": [
+    "sender_address",
+    "sender_domain",
+    "raw_headers",
+    "spf_result",
+    "dkim_result",
+    "dmarc_result",
+    "known_contact_match",
+    "official_domain_match"
+  ],
+  "requiredPreservation": [
+    "raw_message",
+    "raw_headers",
+    "received_at",
+    "attachment_hashes",
+    "correlation_evidence",
+    "provenance_evidence"
+  ],
+  "attachmentGuards": [
+    "quarantine_before_open",
+    "hash_before_processing",
+    "malware_scan_before_use",
+    "no_macro_execution",
+    "no_script_execution",
+    "no_external_active_content_execution"
+  ],
+  "automaticActionsAllowed": [
+    "archive_raw_inbound",
+    "compute_attachment_hashes",
+    "quarantine_attachments",
+    "attempt_case_correlation",
+    "record_authentication_signals",
+    "prepare_provenance_summary",
+    "route_to_response_interpretation_when_ready"
+  ],
+  "automaticActionsBlocked": [
+    "grant_rights_from_transport_success",
+    "grant_rights_from_sender_name_only",
+    "grant_rights_from_spf_dkim_dmarc_only",
+    "trust_unmatched_attachment",
+    "execute_attachment_content",
+    "create_new_contact_from_guess",
+    "merge_web_and_forge_rights",
+    "discard_raw_message_after_parsing"
+  ],
+  "invariants": [
+    "INBOUND_TRANSPORT_NEVER_GRANTS_RIGHTS",
+    "CORRELATION_REQUIRED_BEFORE_AUTOMATED_INTERPRETATION",
+    "PROVENANCE_SIGNAL_IS_NOT_LEGAL_AUTHORITY",
+    "UNMATCHED_RESPONSE_FAILS_CLOSED",
+    "ATTACHMENTS_ARE_QUARANTINED_BEFORE_PROCESSING",
+    "RAW_MESSAGE_AND_HEADERS_ARE_PRESERVED",
+    "UNKNOWN_SENDER_NEVER_BECOMES_VERIFIED_BY_GUESS",
+    "WEB_AND_FORGE_RIGHTS_REMAIN_SEPARATE",
+    "AMBIGUOUS_OR_UNTRUSTED_INBOUND_REQUIRES_REVIEW",
+    "RESPONSE_INTERPRETATION_CONTRACT_REMAINS_SEPARATE"
+  ],
+  "productionStatus": {
+    "inboundMailbox": "NOT_IMPLEMENTED",
+    "webhookReceiver": "NOT_IMPLEMENTED",
+    "correlationEngine": "NOT_IMPLEMENTED",
+    "provenanceVerifier": "NOT_IMPLEMENTED",
+    "attachmentScanner": "NOT_IMPLEMENTED",
+    "responseRouter": "NOT_IMPLEMENTED"
+  }
+}
