@@ -184,6 +184,10 @@ try {
 
   await clickByText(".global-nav button", "Jeux");
   manifest.captures.push(await capture("desktop-games-index.png", 1440, 1024, "Trouvez votre prochain terrain de jeu"));
+  await clickByText(".game-support-request>.quiet", "Demander le support d’un jeu");
+  await fillVisibleInput(".game-request-form input", "Project Meridian");
+  await clickByText(".game-request-form .primary", "Préparer la demande locale");
+  manifest.captures.push(await capture("desktop-game-support-request.png", 1440, 1024, "Brouillon de demande — non envoyé"));
 
   await clickByAriaLabel("Recherche globale");
   manifest.captures.push(await capture("desktop-global-search.png", 1440, 1024, "Rechercher dans MODARYX"));
@@ -272,6 +276,13 @@ try {
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Découvrir");
   manifest.captures.push(await capture("mobile-home.png", 390, 844, "Redécouvrez vos jeux"));
+
+  await clickSelector(".mobile-menu");
+  await clickByText(".global-nav button", "Jeux");
+  await clickByText(".game-support-request>.quiet", "Demander le support d’un jeu");
+  await fillVisibleInput(".game-request-form input", "Project Meridian");
+  await clickByText(".game-request-form .primary", "Préparer la demande locale");
+  manifest.captures.push(await capture("mobile-game-support-request.png", 390, 844, "Brouillon de demande — non envoyé"));
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Mods & contenus");
