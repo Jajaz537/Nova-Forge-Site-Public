@@ -519,6 +519,8 @@ function AccountCenter({ initialTab="Compte" }) {
 function RightsDashboard() {
   const [selected,setSelected]=useState("aetherlands");
   const [triageDecision,setTriageDecision]=useState("TRIAGE");
+  const [contactState,setContactState]=useState("CONTACT_CANDIDATE");
+  const [requestState,setRequestState]=useState("REQUEST_NOT_READY");
   const current=rightsDemoCases.find(item=>item.id===selected) || rightsDemoCases[0];
   const statusClass=current.status==="APPROVED_WITH_LIMITS"?"approved":current.status==="AWAITING_RESPONSE"?"pending":"neutral";
   return <main className="page-section rights-dashboard">
@@ -545,6 +547,19 @@ function RightsDashboard() {
       {triageDecision==="ACCEPTED_SAFE_BASELINE"&&<div className="support-triage-result accepted" role="status"><strong>Baseline sûre de démonstration acceptée</strong><span>Rights Case de démonstration préparé — non créé réellement.</span><small>Aucun contact éditeur, aucun outbound et aucun asset officiel n’est activé par cette action locale.</small></div>}
       {triageDecision==="DECLINED_PRODUCT"&&<div className="support-triage-result declined" role="status"><strong>Demande locale refusée</strong><span>Aucun Rights Case et aucun contact éditeur.</span></div>}
     </section>
+    {triageDecision==="ACCEPTED_SAFE_BASELINE"&&<section className="publisher-contact-demo" aria-label="Vérification du contact éditeur de démonstration">
+      <div className="publisher-contact-head"><div><span className="kicker">Contact éditeur · démonstration</span><h2>Vérifier le canal avant toute demande</h2><p>Le scénario reste fictif : aucun domaine, formulaire ou email réel n’est contacté. Une adresse devinée ne peut jamais être utilisée.</p></div><span className={`rights-state ${contactState==="CONTACT_VERIFIED"?"approved":"pending"}`}>{contactState}</span></div>
+      <div className="publisher-contact-grid">
+        <article><span>Canal candidat</span><strong>Portail juridique fictif de l’éditeur</strong><small>Source officielle simulée uniquement pour tester le workflow.</small></article>
+        <article><span>Preuve de contact</span><strong>{contactState==="CONTACT_VERIFIED"?"Domaine officiel fictif + page licensing vérifiés":"À vérifier avant tout outbound"}</strong><small>Aucun contact personnel ou forum n’est accepté comme preuve suffisante.</small></article>
+        <article><span>Scopes préparés</span><strong>Logo · key art · listing · Forge séparé</strong><small>Chaque scope reste indépendant et doit être explicitement demandé.</small></article>
+      </div>
+      <div className="publisher-contact-actions">
+        <button className="quiet" onClick={()=>{setContactState("CONTACT_VERIFIED");setRequestState("REQUEST_NOT_READY");}}>Vérifier le canal de démonstration</button>
+        <button className="primary" disabled={contactState!=="CONTACT_VERIFIED"} onClick={()=>setRequestState("REQUEST_READY")}>Préparer la demande structurée</button>
+      </div>
+      <div className="publisher-request-state" role="status"><strong>{requestState}</strong><span>{requestState==="REQUEST_READY"?"Demande fictive prête : scopes explicites, canal vérifié, aucun envoi réel.":"Vérification du contact requise avant préparation."}</span><small>Outbound réel indisponible · aucune adresse réelle utilisée.</small></div>
+    </section>}
     <section className="rights-summary" aria-label="Résumé des dossiers de démonstration">
       <article><span className="kicker">Avec limites</span><strong>1</strong><small>Scopes séparés</small></article>
       <article><span className="kicker">En attente</span><strong>1</strong><small>Aucun droit supplémentaire</small></article>
