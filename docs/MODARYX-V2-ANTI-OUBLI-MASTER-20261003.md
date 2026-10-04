@@ -857,3 +857,47 @@ Toujours PREUVE MANQUANTE :
 - moteur production.
 
 **Règle permanente : une ambiance premium doit renforcer MODARYX sans imiter l'identité protégée d'un éditeur.**
+
+
+## 35. MODARYX IA — fondation professionnelle — 4 octobre 2026
+
+**DÉCISION RETENUE — à intégrer avant toute IA publique**
+
+Référence :
+`docs/MODARYX-AI-FOUNDATION-ARCHITECTURE-20261004.md`
+
+À ne pas perdre :
+- MODARYX IA = plateforme IA native, pas simple chatbot ;
+- AI Gateway + routing multi-modèles ;
+- RAG/Knowledge Layer ;
+- outils contrôlés ;
+- Permission Engine ;
+- agents spécialisés ;
+- evals avant release ;
+- safety/prompt-injection/data-leak protections ;
+- observabilité complète ;
+- mémoire contrôlée ;
+- site contextuel + MODARYX Forge ;
+- provider independence ;
+- fine-tuning seulement après mesure ;
+- modèle propriétaire de fondation uniquement si avantage réel mesuré.
+
+Cas d'usage prioritaires :
+- recherche/discovery ;
+- compatibilité ;
+- profils/dépendances ;
+- Creator Studio ;
+- support ;
+- Rights & Publisher workflow ;
+- diagnostics MODARYX Forge.
+
+Règles :
+- pas d'action sensible silencieuse ;
+- pas de faux niveau de certitude ;
+- pas de décision juridique ambiguë automatisée comme approbation ;
+- pas d'entraînement sur données privées par défaut ;
+- pas de lancement sans eval suite.
+
+Statut :
+- architecture : TERMINÉE ;
+- implémentation : PREUVE MANQUANTE / NON COMMENCÉE.
