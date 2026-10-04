@@ -860,3 +860,25 @@ Captures :
 - `mobile-rights-inbound-ready.png`.
 
 Le prototype démontre que transport, corrélation, provenance et interprétation restent séparés et permission-neutral. Aucun message réel, header réel, fichier réel ou permission réelle n’est traité.
+
+
+## Tablet reflow — 834×1112 browser proof — 4 octobre 2026
+
+**TERMINÉ — reflow simulé / appareil réel non prouvé**
+
+Séquence :
+1. run `37215370580` — FAIL : Game Hub overflow 220 px ;
+2. isolation : topbar desktop / top-actions ;
+3. correction : navigation compactée pour 761–1050 px ;
+4. checker navigation stabilisé ;
+5. assertion textuelle rendue indépendante du text-transform ;
+6. run `37215965531` — **SUCCESS**.
+
+Surfaces testées à overflow 0 :
+Game Hub, Games Index, Catalog, Collections, Creators, Community, Creator Studio, Library, Account, MODARYX IA, Rights Dashboard, Rights expanded.
+
+Marqueurs :
+- `TABLET_REFLOW_SURFACE_COUNT 12`
+- `PASS_V2_TABLET_REFLOW`.
+
+Cette preuve valide la recomposition browser ciblée, pas le tactile ni un iPad réel.
