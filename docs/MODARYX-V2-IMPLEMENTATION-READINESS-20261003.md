@@ -827,3 +827,16 @@ Preuve :
 - `PASS_V2_PROTOTYPE_SECURITY_SINKS`.
 
 Cela améliore la readiness technique mais ne lève pas le gate frontend ni les exigences de CSP/headers production.
+
+
+## 26. CSP / rich-text readiness — 4 octobre 2026
+
+**TERMINÉ au niveau contrat / runtime non déployé**
+
+Micro-proof `37232040196` — SUCCESS :
+- 13 directives CSP baseline ;
+- 5 headers minimum ;
+- 10 invariants ;
+- `PASS_V2_CSP_HEADERS_RICH_TEXT_CONTRACT`.
+
+Le prototype source sans styles inline ciblés rend la baseline `style-src 'self'` plausible, mais aucune enforcement CSP production n’est encore prouvée.
