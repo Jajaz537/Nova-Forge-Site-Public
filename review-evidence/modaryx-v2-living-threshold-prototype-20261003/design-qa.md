@@ -932,3 +932,22 @@ AT humain/réel reste PREUVE MANQUANTE.
 - continuation Living Threshold `37219359937` — SUCCESS.
 
 Validation humaine clavier et screen reader : PREUVE MANQUANTE.
+
+
+## Accessibility structure matrix — 4 octobre 2026
+
+**TERMINÉ pour Chrome AX automatisé**
+
+Incident :
+- Game Hub `h1` hors du landmark main → détecté, isolé, corrigé.
+
+Preuve :
+- run `37219841541` — SUCCESS ;
+- 15 surfaces ;
+- `PASS_V2_ACCESSIBILITY_STRUCTURE_MATRIX`.
+
+Contrôles : main unique, h1 nommé, IDs uniques, tabindex non positif, noms accessibles DOM/AX ciblés.
+
+Living Threshold `37219841451` — SUCCESS · artifact `11310112115` · 81 captures.
+
+Screen readers réels : PREUVE MANQUANTE.
