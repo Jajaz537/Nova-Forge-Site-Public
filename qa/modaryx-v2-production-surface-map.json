@@ -507,6 +507,30 @@
         "ip-fallback-original-modaryx-demo"
       ],
       "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "modaryx-ai-preview",
+      "acceptance": "MODARYX AI integration preview",
+      "prototypeStatus": "MATERIALIZED_DEMO",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "ModaryxAIPage",
+        "AiTrustPanel",
+        "AiCapabilityGrid",
+        "AiDisabledComposer"
+      ],
+      "domains": [
+        "AiCapability",
+        "AiPermissionTier",
+        "AiEvidenceState"
+      ],
+      "states": [
+        "backend-unavailable",
+        "composer-disabled",
+        "sources-required",
+        "insufficient-evidence-safe-fallback"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
     }
   ],
   "unresolvedRealRuntimeStates": [
