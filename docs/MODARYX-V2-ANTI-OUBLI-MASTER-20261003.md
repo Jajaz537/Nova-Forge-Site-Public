@@ -565,4 +565,30 @@ Toujours à ne pas oublier / non matérialisé réellement :
 - plan avancé alimenté par données/runtime réels ;
 - backend, téléchargement, installation et historique réels.
 
-**Prochain travail interne : matérialiser honnêtement provider/source, rapport d'import/export et plan avancé en états de démonstration, sans inventer de connecteur ni parser réel.**
+**Provider/source, interop et Plan avancé : TERMINÉ pour le prototype ciblé.**
+
+Preuve fraîche :
+- micro-proof readiness CDP : run `37164478594` — **SUCCESS** ;
+- continuation Living Threshold : run `37164509544` — **SUCCESS** ;
+- commit capturé : `af4972fdf65c1df8248d25fc6f5fcc1c6c88da39` ;
+- artifact : `11288507788` ;
+- `MULTISCREEN_CAPTURE_COUNT 51` ;
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS` ;
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Matérialisé honnêtement :
+- source/provider séparé de l'auteur ;
+- provider réel absent explicitement ;
+- Plan avancé lisible sans graphe opaque ;
+- rapport import/export avec conservation des champs inconnus ;
+- perte silencieuse interdite ;
+- aucune importation réelle et aucun parser/connecteur simulé.
+
+Toujours anti-oubli :
+- connecteurs/providers réels ;
+- parser import/export réel ;
+- compatibilité/pertes mesurées sur formats réels ;
+- backend/runtime MODARYX Forge ;
+- validation humaine/externe.
+
+**Prochain travail interne : poursuivre le benchmark spécialisé et ne retenir que les capacités réellement distinctes.**
