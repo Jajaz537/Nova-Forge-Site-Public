@@ -207,6 +207,8 @@ try {
   await clickByText(".global-nav button", "Mods & contenus");
   await clickSelector(".card-hit");
   manifest.captures.push(await capture("desktop-content-detail.png", 1440, 1024, "Avant d’ajouter"));
+  await clickByText(".detail-tabs button", "Compatibilité et prérequis");
+  manifest.captures.push(await capture("desktop-content-compatibility-specialized.png", 1440, 1024, "Fraîcheur preuve"));
   await clickByText(".detail-tabs button", "Plan avancé");
   manifest.captures.push(await capture("desktop-content-advanced-plan.png", 1440, 1024, "Plan avancé — démonstration"));
   await clickByText(".detail-tabs button", "Signalement");
@@ -225,6 +227,8 @@ try {
   manifest.captures.push(await capture("desktop-game-profile-delta.png", 1440, 1024, "Copie avant promotion"));
   await clickByText(".profile-preview-actions .quiet", "Prévisualiser import / export");
   manifest.captures.push(await capture("desktop-game-profile-interop.png", 1440, 1024, "Rapport d’import / export — démonstration"));
+  await clickByText(".profile-preview-actions .quiet", "Prévisualiser impact d’une désactivation");
+  manifest.captures.push(await capture("desktop-game-profile-reverse-impact.png", 1440, 1024, "Impact avant désactivation — démonstration"));
   await clickByText(".back", "← Retour à la Bibliothèque");
 
   await clickByText(".global-nav button", "Communauté");
@@ -242,6 +246,8 @@ try {
   await clickByText(".studio-nav button", "Projects");
   await clickByText(".project-maturity .filter-chips button", "WiP");
   manifest.captures.push(await capture("desktop-creator-project.png", 1440, 1024, "Crédits structurés"));
+  await clickByText(".studio-nav button", "Releases");
+  manifest.captures.push(await capture("desktop-creator-platform-validation.png", 1440, 1024, "Validation par plateforme"));
 
   // Mobile states
   await navigateHome(390, 844);
@@ -264,6 +270,8 @@ try {
 
   await clickSelector(".card-hit");
   manifest.captures.push(await capture("mobile-content-detail.png", 390, 844, "Avant d’ajouter"));
+  await clickByText(".detail-tabs button", "Compatibilité et prérequis");
+  manifest.captures.push(await capture("mobile-content-compatibility-specialized.png", 390, 844, "Fraîcheur preuve"));
   await clickByText(".detail-tabs button", "Plan avancé");
   manifest.captures.push(await capture("mobile-content-advanced-plan.png", 390, 844, "Plan avancé — démonstration"));
   await clickByText(".detail-tabs button", "Signalement");
@@ -284,6 +292,8 @@ try {
   manifest.captures.push(await capture("mobile-game-profile-delta.png", 390, 844, "Copie avant promotion"));
   await clickByText(".profile-preview-actions .quiet", "Prévisualiser import / export");
   manifest.captures.push(await capture("mobile-game-profile-interop.png", 390, 844, "Rapport d’import / export — démonstration"));
+  await clickByText(".profile-preview-actions .quiet", "Prévisualiser impact d’une désactivation");
+  manifest.captures.push(await capture("mobile-game-profile-reverse-impact.png", 390, 844, "Impact avant désactivation — démonstration"));
   await clickByText(".back", "← Retour à la Bibliothèque");
 
   await clickSelector(".mobile-menu");
@@ -293,6 +303,8 @@ try {
   await clickByText(".studio-nav button", "Projects");
   await clickByText(".project-maturity .filter-chips button", "WiP");
   manifest.captures.push(await capture("mobile-creator-project.png", 390, 844, "Crédits structurés"));
+  await clickByText(".studio-nav button", "Releases");
+  manifest.captures.push(await capture("mobile-creator-platform-validation.png", 390, 844, "Validation par plateforme"));
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Collections");
