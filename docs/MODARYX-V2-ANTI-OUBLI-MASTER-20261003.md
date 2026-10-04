@@ -1955,3 +1955,23 @@ Preuve :
 - Configurations enregistrées de mods, versions et réglages. ;
 - Non vérifié générique interdit ;
 - MODARYX IA jamais présentée active sans runtime réel.
+
+
+## 68. Forge handoff + stack gate — 48 contrats — 4 octobre 2026
+
+**TERMINÉ pour les garde-fous / implémentation réelle PREUVE MANQUANTE**
+
+Run :
+- `37236949498` — **SUCCESS**
+- `PASS_V2_FORGE_HANDOFF_CONTRACT`
+- `PASS_V2_TECH_STACK_SELECTION_GATE_CONTRACT`
+- registry : 48 contrats.
+
+À conserver :
+- handoff web = intention structurée, jamais commande locale ;
+- handshake + revalidation Forge + confirmation locale ;
+- aucun Installed/Updated/Rollback réussi sans receipt vérifiable ;
+- transport Forge non sélectionné ;
+- aucune stack choisie tant que le gate canonique bloque ;
+- aucun root V2 créé par inertie ;
+- strict CSP / SW contrôlé / preview SHA / isolation legacy obligatoires.
