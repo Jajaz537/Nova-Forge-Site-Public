@@ -487,3 +487,33 @@ Objet :
 - production/cutover : **BLOQUÉS**
 
 Cette proposition ne constitue pas une autorisation technique.
+
+
+### Micro-preuve contrat demande membre — 4 octobre 2026
+
+**TERMINÉ pour le contrat pré-production**
+
+Fichiers :
+- `qa/modaryx-v2-game-support-request-contract.json`
+- `qa/check-v2-game-support-request-contract.mjs`
+- `.github/workflows/modaryx-v2-game-support-request-contract-proof.yml`
+
+Preuve :
+- workflow `MODARYX V2 Game Support Request Contract Proof`
+- run `37199100800` — **SUCCESS**
+- commit capturé `971de05729cfb8ebd582bce5b7244b996cfbc516`
+- `GAME_SUPPORT_REQUEST_STATE_COUNT 7`
+- `GAME_SUPPORT_REQUEST_INVARIANT_COUNT 8`
+- `PASS_V2_GAME_SUPPORT_REQUEST_CONTRACT`
+
+Invariants verrouillés :
+- brouillon local ≠ demande envoyée ;
+- demande membre ≠ permission éditeur ;
+- acceptation produit avant Rights Case ;
+- acceptation produit avant outbound éditeur ;
+- le membre ne peut pas déclarer une licence ;
+- baseline sûre reste originale MODARYX ;
+- refus produit ne contacte pas l’éditeur ;
+- doublon ne crée pas un Rights Case dupliqué.
+
+Cette preuve valide le contrat, pas la persistance serveur, le triage réel, les notifications ni l’automatisation Rights Case.
