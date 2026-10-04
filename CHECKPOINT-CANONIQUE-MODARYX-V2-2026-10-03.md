@@ -1783,3 +1783,58 @@ Invariants verrouillés :
 - statut production reste explicitement `NOT_IMPLEMENTED` tant que le backend réel n’existe pas.
 
 Cette preuve valide le **contrat et son garde-fou**, pas le moteur réel, l’envoi de mails, l’analyse juridique ni le Game Rights Registry production.
+
+
+## Rights Dashboard + preuve workflow éditeur — 4 octobre 2026
+
+**TERMINÉ pour le prototype et le contrat / backend réel PREUVE MANQUANTE**
+
+Références :
+- `docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md`
+- `qa/modaryx-v2-game-rights-workflow.json`
+- `qa/check-v2-game-rights-workflow.mjs`
+
+Preuve contrat :
+- run `37196259361` — **SUCCESS**
+- commit capturé `038a5b0e51eea76bb6859f7ead12ed18eef20894`
+- `PASS_V2_GAME_RIGHTS_WORKFLOW`
+
+Preuve surface Living Threshold :
+- run `37196769573` — **SUCCESS**
+- commit capturé `ec8b57891858f7a25954ff60f77595be8eaf1f21`
+- artifact `11301477422`
+- digest `sha256:d9ad41faa1423c22aa986e5f6661447b029a32f1812ed63a3a096b269a0b0eb9`
+- `KEYBOARD_REACHABLE 36 / 36`
+- `RIGHTS_MOBILE_OVERFLOW 0`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 61`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Surface map :
+- run `37196989554` — **SUCCESS**
+- `SURFACE_MAP_COUNT 23`
+- `UNRESOLVED_RUNTIME_COUNT 6`
+- `PASS_V2_PRODUCTION_SURFACE_MAP`
+
+Matérialisé :
+- Rights Dashboard admin fictif desktop/mobile ;
+- états `APPROVED_WITH_LIMITS`, `AWAITING_RESPONSE`, `NO_RESPONSE` ;
+- scopes séparés ;
+- `NO_RESPONSE ≠ autorisation` ;
+- MODARYX Forge séparé des droits Web ;
+- outbound désactivé sans backend ;
+- notification/interprétation automatique des réponses définie dans le contrat ;
+- ambiguïté juridique → `LEGAL_REVIEW_REQUIRED`.
+
+Toujours non implémenté :
+- Game Rights Registry production ;
+- recherche de contact officiel réelle ;
+- email/API outbound ;
+- réception/parsing réel des réponses ;
+- validation de licence réelle ;
+- revue juridique réelle.
+
+Aucune demande réelle à un éditeur n'a été envoyée.
