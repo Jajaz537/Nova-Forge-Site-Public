@@ -1431,3 +1431,25 @@ Preuve :
 - 81 captures.
 
 Ne jamais considérer cette preuve comme validation screen reader réelle.
+
+
+## 53. Skip link + focus SPA + reduced motion — 4 octobre 2026
+
+**TERMINÉ pour navigateur automatisé**
+
+À conserver :
+- skip link visible au focus ;
+- destination `#main-content` unique sur l’écran monté ;
+- changement de route SPA → focus contenu principal ;
+- motion normale → scroll smooth ;
+- `prefers-reduced-motion: reduce` → scroll auto ;
+- aucune animation obligatoire pour comprendre ou atteindre une route.
+
+Preuve :
+- micro-proof final `37219490005` — **SUCCESS**
+- `PASS_V2_ROUTE_FOCUS_AND_SKIP_LINK`
+- Living Threshold `37219359937` — **SUCCESS**
+- keyboard `38 / 38`
+- 81 captures.
+
+Screen reader et validation humaine clavier restent PREUVE MANQUANTE.
