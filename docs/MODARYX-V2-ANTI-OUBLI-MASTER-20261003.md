@@ -1009,3 +1009,20 @@ Preuve :
 - 63 captures.
 
 Ne jamais transformer une simple demande membre en support officiel, licence, partenariat ou permission éditeur.
+
+
+### Preuve ciblée contrat demande membre — 4 octobre 2026
+
+**TERMINÉ — invariants pré-production protégés par CI**
+
+Run :
+- `37199100800` — **SUCCESS**
+- `PASS_V2_GAME_SUPPORT_REQUEST_CONTRACT`
+
+À ne jamais régresser :
+- LOCAL_DRAFT n’est pas envoyé ;
+- membre ≠ source d’autorisation éditeur ;
+- aucun Rights Case ni outbound avant acceptation MODARYX ;
+- aucun claim licence/partenariat issu du membre ;
+- refus produit = aucun contact éditeur ;
+- déduplication avant création Rights Case.
