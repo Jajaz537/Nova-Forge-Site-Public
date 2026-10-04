@@ -521,7 +521,9 @@ function RightsDashboard() {
   const [triageDecision,setTriageDecision]=useState("TRIAGE");
   const [contactState,setContactState]=useState("CONTACT_CANDIDATE");
   const [requestState,setRequestState]=useState("REQUEST_NOT_READY");
+  const [lifecycleState,setLifecycleState]=useState("ACTIVE_WITH_LIMITS");
   const current=rightsDemoCases.find(item=>item.id===selected) || rightsDemoCases[0];
+  const lifecycleLocked=lifecycleState==="EXPIRED"||lifecycleState==="REVOKED";
   const statusClass=current.status==="APPROVED_WITH_LIMITS"?"approved":current.status==="AWAITING_RESPONSE"?"pending":"neutral";
   return <main className="page-section rights-dashboard">
     <span className="kicker">Administration · démonstration</span>
@@ -577,6 +579,22 @@ function RightsDashboard() {
         <div className="rights-scope-grid">
           {current.scopes.map(([scope,value])=><article key={scope}><strong>{scope}</strong><span>{value}</span></article>)}
         </div>
+
+        <section className="rights-lifecycle-demo" aria-label="Cycle de vie des autorisations de démonstration">
+          <div className="rights-lifecycle-head"><div><span className="kicker">Cycle de vie · démonstration</span><h3>Expiration et révocation</h3><p>Une autorisation ne reste jamais active indéfiniment par défaut. Le système doit rebloquer automatiquement les usages dépendants lorsqu’elle expire ou est révoquée.</p></div><span className={`rights-state ${lifecycleLocked?"neutral":lifecycleState==="EXPIRING_SOON"?"pending":"approved"}`}>{lifecycleState}</span></div>
+          <div className="rights-lifecycle-grid">
+            <article><span>Assets officiels dépendants</span><strong>{lifecycleLocked?"BLOQUÉS":"Scopes écrits uniquement"}</strong><small>{lifecycleLocked?"Fallback vers la baseline originale MODARYX.":"Aucune extension implicite des droits."}</small></article>
+            <article><span>MODARYX Forge</span><strong>BLOQUÉ</strong><small>Droit séparé, jamais déduit d’une permission Web.</small></article>
+            <article><span>Réactivation</span><strong>{lifecycleLocked?"Nouvelle preuve requise":"Surveillance active"}</strong><small>Aucune réactivation silencieuse après expiration ou révocation.</small></article>
+          </div>
+          <div className="rights-lifecycle-actions">
+            <button className="quiet" onClick={()=>setLifecycleState("EXPIRING_SOON")}>Simuler expiration proche</button>
+            <button className="quiet" onClick={()=>setLifecycleState("EXPIRED")}>Simuler expiration</button>
+            <button className="quiet" onClick={()=>setLifecycleState("REVOKED")}>Simuler révocation</button>
+            <button className="quiet" onClick={()=>setLifecycleState("ACTIVE_WITH_LIMITS")}>Réinitialiser le scénario</button>
+          </div>
+          <div className={`rights-lifecycle-result ${lifecycleLocked?"locked":"active"}`} role="status"><strong>{lifecycleLocked?"Usages dépendants rebloqués":"Surveillance de l’autorisation"}</strong><span>{lifecycleLocked?"Aucun asset ou avantage dépendant ne reste actif dans ce scénario.":"La démonstration conserve uniquement les scopes explicitement accordés."}</span><small>Prototype local uniquement · aucune licence réelle n’est modifiée.</small></div>
+        </section>
         <section className="rights-interpretation-demo">
           <div className="rights-interpretation-head"><div><span className="kicker">Interprétation automatique · démonstration</span><h3>Lecture structurée de la réponse</h3></div><span className={`rights-state ${current.interpretation?"approved":"neutral"}`}>{current.interpretation?.state || "AUCUNE RÉPONSE INTERPRÉTABLE"}</span></div>
           {current.interpretation?<><p>{current.interpretation.detail}</p><small>{current.interpretation.notification}</small></>:<p>Aucune réponse exploitable ne permet d’accorder un scope supplémentaire.</p>}
