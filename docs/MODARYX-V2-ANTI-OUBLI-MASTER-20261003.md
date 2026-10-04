@@ -1743,3 +1743,22 @@ Preuve :
 - protocoles Forge versionnés et négociés ;
 - webhooks signés/idempotents/replay-protected ;
 - contract tests + anciennes/nouvelles fixtures + rollback avant évolution stable.
+
+
+## 64. Registre consolidé contrats pré-production — 4 octobre 2026
+
+**TERMINÉ — 19 contrats protégés par une preuve commune**
+
+Incident fermé proprement :
+- run initial `37232662714` : checker async fichier manquant ;
+- isolation : unique checker manquant ;
+- correction ciblée : ajout `qa/check-v2-async-loading-contract.mjs` ;
+- continuation `37232747869` — **SUCCESS**.
+
+Preuve :
+- 19 contrats ;
+- 19 checkers verts ;
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+Règle :
+le registry prouve la cohérence des contrats, jamais la disponibilité d'un service production.
