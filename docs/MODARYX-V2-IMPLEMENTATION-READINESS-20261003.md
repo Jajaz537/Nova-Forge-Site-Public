@@ -312,3 +312,69 @@ Ce qui reste interdit sans nouvelle décision canonique :
 - déclaration High-Fi/VF finale.
 
 **État global réévalué : préparation technique très avancée ; prototype exploratoire substantiel ; root V2 production encore BLOQUÉ par gate de validation.**
+
+
+## 24. Réconciliation canonique — 4 octobre 2026
+
+**Cette section supersède la liste “Gaps internes encore faisables” de la section 23 lorsqu’elle diverge de l’état actuel.**
+
+Preuve Living Threshold la plus fraîche pour la surface code matérialisée :
+- run `37196769573` — **SUCCESS** ;
+- commit capturé `ec8b57891858f7a25954ff60f77595be8eaf1f21` ;
+- artifact `11301477422` ;
+- digest `sha256:d9ad41faa1423c22aa986e5f6661447b029a32f1812ed63a3a096b269a0b0eb9` ;
+- `KEYBOARD_REACHABLE 36 / 36` ;
+- `RIGHTS_MOBILE_OVERFLOW 0` ;
+- `DESKTOP_OVERFLOW 0` ;
+- `MOBILE_OVERFLOW 0` ;
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS` ;
+- `MULTISCREEN_CAPTURE_COUNT 61` ;
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Surface map :
+- run `37196989554` — **SUCCESS** ;
+- `SURFACE_MAP_COUNT 23` ;
+- `UNRESOLVED_RUNTIME_COUNT 6` ;
+- `PASS_V2_PRODUCTION_SURFACE_MAP`.
+
+Nouveaux éléments matérialisés depuis la section 23 :
+- Game Atmosphere Layer originale MODARYX ;
+- droits/asset policy ;
+- workflow support jeu → éditeur machine-readable + CI ;
+- Rights Dashboard admin fictif ;
+- lecture de scopes `APPROVED_WITH_LIMITS / AWAITING_RESPONSE / NO_RESPONSE` ;
+- outbound explicitement désactivé sans backend ;
+- MODARYX Forge séparé des droits Web ;
+- modèle dépendances/compatibilité/source/version exploratoire fermé ;
+- mapping prototype → production mis à jour ;
+- pack humain mis à jour pour 61 captures.
+
+Le mapping machine actuel couvre 23 surfaces et maintient **tous** les statuts production à `BLOCKED_GATE`.
+
+### Gaps internes récupérables
+
+À la date de cette réconciliation, aucun autre gap interne produit/prototype honnêtement récupérable n’est requis avant le gate sans :
+- inventer un backend ;
+- inventer un provider ;
+- inventer un runtime MODARYX Forge ;
+- inventer une preuve humaine ;
+- inventer un appareil/screen reader ;
+- ou créer du polish décoratif uniquement pour faire progresser artificiellement l’état.
+
+Les anciens exemples “preview session expirée / permission denied / sync conflict” ne doivent pas être transformés en pseudo-preuves : ces états restent correctement classés **runtime réel non résolu** dans le surface map.
+
+### Blocage actuel avant root/frontend production
+
+Toujours requis ou à reclassifier explicitement :
+- validation humaine multi-écrans supplémentaire ;
+- validation mobile humaine réelle ;
+- référence visuelle approuvée archivable + comparaison normalisée ;
+- screen reader réel ;
+- appareils physiques ;
+- choix contrôlé de stack/root après fermeture ou reclassification du gate.
+
+Stack finale : **NON SÉLECTIONNÉE**.  
+Root/frontend V2 production : **NON CRÉÉ**.
+
+Source canonique de reprise la plus récente :
+`CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-04.md`.
