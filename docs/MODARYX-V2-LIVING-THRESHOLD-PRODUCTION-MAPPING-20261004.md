@@ -113,6 +113,7 @@ Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles mat
 - RightsCaseList
 - RightsScopeMatrix
 - RightsStateBadge
+- GameSupportTriage
 
 Aucun de ces patterns ne doit importer le CSS V1.
 
@@ -299,7 +300,8 @@ Prototype :
 - compatibilité/prérequis ;
 - manager/runtime absent explicitement ;
 - rights workflow fictif : approved-with-limits / awaiting-response / no-response ;
-- outbound rights désactivé sans backend.
+- outbound rights désactivé sans backend ;
+- triage admin support jeu : TRIAGE / ACCEPTED_SAFE_BASELINE / DECLINED_PRODUCT en démonstration.
 
 États non prouvés réellement :
 - vraie session expirée ;
