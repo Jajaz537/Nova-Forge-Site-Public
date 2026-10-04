@@ -303,6 +303,12 @@ try {
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("desktop-rights-lifecycle-expired.png", 1440, 1024, "Usages dépendants rebloqués"));
   await clickByText(".rights-lifecycle-actions .quiet", "Réinitialiser le scénario");
+  await clickByText(".ip-case-actions .quiet", "Localiser l’asset de démonstration");
+  await clickByText(".ip-case-actions .quiet", "Appliquer fallback temporaire");
+  await evaluate("document.querySelector('.ip-takedown-demo')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("desktop-ip-takedown-restricted.png", 1440, 1024, "Fallback original MODARYX actif dans la démonstration."));
+  await clickByText(".ip-case-actions .quiet", "Réinitialiser le cas IP");
 
   // Mobile states
   await navigateHome(390, 844);
@@ -419,6 +425,12 @@ try {
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("mobile-rights-lifecycle-expired.png", 390, 844, "Usages dépendants rebloqués"));
   await clickByText(".rights-lifecycle-actions .quiet", "Réinitialiser le scénario");
+  await clickByText(".ip-case-actions .quiet", "Localiser l’asset de démonstration");
+  await clickByText(".ip-case-actions .quiet", "Appliquer fallback temporaire");
+  await evaluate("document.querySelector('.ip-takedown-demo')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("mobile-ip-takedown-restricted.png", 390, 844, "Fallback original MODARYX actif dans la démonstration."));
+  await clickByText(".ip-case-actions .quiet", "Réinitialiser le cas IP");
 
   const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/manifest.json";
   writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
