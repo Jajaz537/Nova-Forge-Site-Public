@@ -30,6 +30,39 @@ for (const required of ["NO_RESPONSE","DECLINED","EXPIRED","REVOKED","REQUEST_SE
   if (!noPermissionStates.has(required)) throw new Error(required + " must remain no-permission");
 }
 
+const allowedContactSources = new Set(data.allowedContactEvidenceSources || []);
+for (const source of [
+  "official_publisher_site",
+  "official_legal_or_licensing_page",
+  "official_business_or_press_contact",
+  "official_licensing_form",
+  "publisher_supplied_contact"
+]) {
+  if (!allowedContactSources.has(source)) throw new Error("missing allowed contact evidence source: " + source);
+}
+
+const forbiddenContactSources = new Set(data.forbiddenContactEvidenceSources || []);
+for (const source of [
+  "guessed_email",
+  "forum_only_contact",
+  "personal_account_without_authority_proof",
+  "scraped_unverified_contact",
+  "unverified_intermediary"
+]) {
+  if (!forbiddenContactSources.has(source)) throw new Error("missing forbidden contact source: " + source);
+}
+
+const readiness = new Set(data.requestReadinessRequires || []);
+for (const requirement of [
+  "product_support_accepted",
+  "rights_case_exists",
+  "official_contact_verified",
+  "requested_scopes_explicit",
+  "current_request_template"
+]) {
+  if (!readiness.has(requirement)) throw new Error("missing request readiness requirement: " + requirement);
+}
+
 const guards = new Set(data.requiredSendGuards || []);
 for (const guard of [
   "product_support_accepted",
@@ -61,7 +94,9 @@ for (const invariant of [
   "SAFE_BASELINE_USES_ORIGINAL_MODARYX_ASSETS",
   "OUTBOUND_REQUIRES_VERIFIED_OFFICIAL_CONTACT",
   "OUTBOUND_IS_IDEMPOTENT_AND_AUDITED",
-  "WEB_AND_FORGE_RIGHTS_REMAIN_SEPARATE"
+  "WEB_AND_FORGE_RIGHTS_REMAIN_SEPARATE",
+  "CONTACT_CANDIDATE_NEVER_ALLOWS_OUTBOUND",
+  "REQUEST_READY_REQUIRES_VERIFIED_CONTACT"
 ]) {
   if (!invariants.has(invariant)) throw new Error("missing invariant: " + invariant);
 }
@@ -74,5 +109,8 @@ for (const [key, value] of Object.entries(data.productionStatus || {})) {
 
 console.log("GAME_RIGHTS_STATE_COUNT", states.size);
 console.log("GAME_RIGHTS_SCOPE_COUNT", scopes.size);
+console.log("GAME_RIGHTS_CONTACT_ALLOWED_SOURCE_COUNT", allowedContactSources.size);
+console.log("GAME_RIGHTS_CONTACT_FORBIDDEN_SOURCE_COUNT", forbiddenContactSources.size);
+console.log("GAME_RIGHTS_REQUEST_READINESS_COUNT", readiness.size);
 console.log("GAME_RIGHTS_SEND_GUARD_COUNT", guards.size);
 console.log("PASS_V2_GAME_RIGHTS_WORKFLOW");
