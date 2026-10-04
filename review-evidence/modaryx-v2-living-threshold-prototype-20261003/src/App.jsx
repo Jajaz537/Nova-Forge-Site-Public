@@ -386,11 +386,6 @@ function Detail({ item, onBack }) {
   return <main id="main-content" tabIndex="-1" className="detail">
     <button className="back" onClick={onBack}>← Retour aux contenus</button>
     <div className="detail-grid">
-      <div className="detail-main">
-        <Media pos={selected.pos} className="detail-media"/>
-        <nav className="detail-tabs" aria-label="Sections de la fiche contenu">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>
-        {tabContent[tab]}
-      </div>
       <aside className="detail-copy">
         <span className="kicker">{selected.kind}</span>
         <h1>{selected.title}</h1>
@@ -412,6 +407,11 @@ function Detail({ item, onBack }) {
         <div className="manager-capability-panel"><strong>Installation avec MODARYX Forge</strong><span>Capability handshake indisponible : aucun runtime, protocole, adapter ou artefact réel n’est connecté.</span><button className="quiet" disabled>Ouvrir avec MODARYX Forge — indisponible</button><small>Le CTA ne sera activé que si jeu + adapter + source + runtime sont réellement supportés.</small></div>
         <p className="action-note">Aucune installation locale n’est déclenchée par ce prototype.</p>
       </aside>
+      <div className="detail-main">
+        <Media pos={selected.pos} className="detail-media"/>
+        <nav className="detail-tabs" aria-label="Sections de la fiche contenu">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>
+        {tabContent[tab]}
+      </div>
     </div>
   </main>;
 }
