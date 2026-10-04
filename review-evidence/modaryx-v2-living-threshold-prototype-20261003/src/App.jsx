@@ -190,6 +190,8 @@ function CollectionsPage() {
   const [mode,setMode]=useState("Collections");
   const [query,setQuery]=useState("");
   const [category,setCategory]=useState("Toutes");
+  const [showDelta,setShowDelta]=useState(false);
+  const [applyMode,setApplyMode]=useState("Ajouter");
   const categories=["Toutes",...new Set(collectionDetails.map(x=>x.category))];
   const visible=useMemo(()=>{
     const q=query.trim().toLocaleLowerCase("fr");
@@ -207,11 +209,28 @@ function CollectionsPage() {
       <div className="modpack-header"><div><span className="demo-label">Modpack de démonstration</span><h2>Aetherlands — Essentiel</h2><p>Exemple de structure versionnée pour montrer la différence avec une Collection. Aucun fichier n’est distribué.</p></div><span className="version-pill">0.3.0-démo</span></div>
       <div className="modpack-grid">
         <article><span className="kicker">Cible</span><strong>Aetherlands 1.4.2</strong><small>Plateforme et environnement de démonstration.</small></article>
-        <article><span className="kicker">Dépendances</span><strong>Aether Core 1.x</strong><small>Dépendance fictive, non téléchargeable.</small></article>
+        <article><span className="kicker">Dépendances</span><strong>Aether Core 1.x</strong><small><b>Requis par</b> Sentiers de l’aube · dépendance fictive.</small></article>
+        <article><span className="kicker">Versioning</span><strong>1 élément épinglé</strong><small>Sentiers de l’aube 1.4.2 · politique : Épinglé.</small></article>
         <article><span className="kicker">Configuration</span><strong>Aucune configuration redistribuée</strong><small>Les droits de partage doivent être prouvés avant inclusion.</small></article>
-        <article><span className="kicker">Historique</span><strong>Version 0.3.0-démo</strong><small>Anciennes versions non publiées dans ce prototype.</small></article>
+      </div>
+      <div className="dependency-origin-list" aria-label="Origine des composants du modpack">
+        <div><strong>Sentiers de l’aube</strong><span>Choisi par le curateur</span><em>Épinglé</em></div>
+        <div><strong>Rivages du couchant</strong><span>Inclus par le curateur</span><em>Proposer</em></div>
+        <div><strong>Aether Core</strong><span>Requis transitivement</span><em>Auto sûr</em></div>
       </div>
       <div className="modpack-manifest"><strong>Manifeste installable</strong><span>PREUVE MANQUANTE — aucun manifeste réel ni résolution runtime ne sont connectés.</span></div>
+      <button className="quiet delta-trigger" onClick={()=>setShowDelta(v=>!v)}>{showDelta?"Masquer l’aperçu du delta":"Prévisualiser le delta"}</button>
+      {showDelta&&<section className="delta-preview" aria-live="polite">
+        <div className="delta-header"><div><span className="kicker">Aperçu local</span><h3>Avant toute mutation</h3><p>Aucune modification n’est appliquée. Cet écran démontre seulement la décision.</p></div><span className="support-state">0 mutation réelle</span></div>
+        <div className="apply-mode" role="group" aria-label="Mode d’application de démonstration"><button className={applyMode==="Ajouter"?"active":""} onClick={()=>setApplyMode("Ajouter")}>Ajouter</button><button className={applyMode==="Remplacer"?"active":""} onClick={()=>setApplyMode("Remplacer")}>Remplacer</button><button onClick={()=>setShowDelta(false)}>Annuler</button></div>
+        <div className="delta-grid">
+          <article><span>Ajout</span><strong>+2 contenus</strong><small>Démonstration uniquement</small></article>
+          <article><span>Conservé</span><strong>1 élément épinglé</strong><small>Ne sera pas mis à jour automatiquement</small></article>
+          <article><span>Dépendance</span><strong>+1 transitive</strong><small>Origine affichée avant décision</small></article>
+          <article><span>Mode</span><strong>{applyMode}</strong><small>{applyMode==="Ajouter"?"Conserverait les éléments non concernés.":"Remplacerait la composition cible après confirmation réelle."}</small></article>
+        </div>
+        <div className="manager-state"><strong>MODARYX Forge requis pour appliquer</strong><span>Le site ne simule ni fichiers, ni installation, ni rollback.</span></div>
+      </section>}
       <button className="primary" disabled>Installer — runtime MODARYX Forge non connecté</button>
     </section>}
   </main>;
@@ -319,30 +338,45 @@ function Detail({ item, onBack }) {
 function Library() {
   const [tab,setTab]=useState("Profils de jeu");
   const [openProfile,setOpenProfile]=useState(null);
-  const tabs=["Favoris","Suivis","Collections","Profils de jeu","Recherches enregistrées"];
+  const [showProfileDelta,setShowProfileDelta]=useState(false);
+  const tabs=["Favoris","Suivis","Collections","Profils de jeu","Historique","Recherches enregistrées"];
   const profileComponents={
-    "Exploration":[["Sentiers de l’aube","1.4.2"],["Vestiges suspendus","1.4.2"],["Rivages du couchant","1.4.2"],["Aether Core","1.x"]],
-    "Graphismes":[["Sommets silencieux","1.4.2"],["Aether Core","1.x"]],
-    "Immersion":[["Rivages du couchant","1.4.2"],["Brumes des hautes terres","1.4.2"],["Aether Core","1.x"]],
+    "Exploration":[
+      {name:"Sentiers de l’aube",version:"1.4.2",origin:"Choisi par vous",policy:"Épinglé"},
+      {name:"Vestiges suspendus",version:"1.4.2",origin:"Choisi par vous",policy:"Proposer"},
+      {name:"Rivages du couchant",version:"1.4.2",origin:"Inclus par le profil",policy:"Auto sûr"},
+      {name:"Aether Core",version:"1.x",origin:"Requis par Sentiers de l’aube",policy:"Auto sûr"},
+    ],
+    "Graphismes":[
+      {name:"Sommets silencieux",version:"1.4.2",origin:"Choisi par vous",policy:"Épinglé"},
+      {name:"Aether Core",version:"1.x",origin:"Requis par Sommets silencieux",policy:"Auto sûr"},
+    ],
+    "Immersion":[
+      {name:"Rivages du couchant",version:"1.4.2",origin:"Choisi par vous",policy:"Proposer"},
+      {name:"Brumes des hautes terres",version:"1.4.2",origin:"Inclus par le profil",policy:"Auto sûr"},
+      {name:"Aether Core",version:"1.x",origin:"Requis transitivement",policy:"Auto sûr"},
+    ],
   };
   if(openProfile){
     const components=profileComponents[openProfile]||[];
     return <main className="page-section profile-detail">
-      <button className="back" onClick={()=>{setOpenProfile(null);window.scrollTo({top:0,behavior:"auto"})}}>← Retour à la Bibliothèque</button>
+      <button className="back" onClick={()=>{setOpenProfile(null);setShowProfileDelta(false);window.scrollTo({top:0,behavior:"auto"})}}>← Retour à la Bibliothèque</button>
       <span className="kicker">Profil de jeu</span><h1>{openProfile}</h1><p className="page-intro">Configuration personnelle de démonstration pour Aetherlands 1.4.2. Privée et locale par défaut.</p>
       <div className="profile-status-row"><span className="support-state">Local uniquement</span><span className="support-state">Non synchronisé</span><span className="support-state">Manager non connecté</span></div>
-      <div className="profile-detail-grid"><section className="profile-components"><h2>Composants et versions</h2>{components.map(([name,version],index)=><article key={name}><span className="profile-order">{index+1}</span><div><strong>{name}</strong><small>Version {version} · démonstration</small></div><span className="compat compact"><Check weight="bold"/>État démo</span></article>)}</section><aside className="profile-decision"><h2>État de la configuration</h2><dl><div><dt>Jeu</dt><dd>Aetherlands 1.4.2</dd></div><div><dt>Conflits déclarés</dt><dd>Aucun dans la démo</dd></div><div><dt>Ordre</dt><dd>Affiché, non appliqué au jeu</dd></div><div><dt>Configurations</dt><dd>Locales, non partagées</dd></div><div><dt>Synchronisation</dt><dd>Indisponible</dd></div></dl><div className="manager-state"><strong>MODARYX Forge</strong><span>Aucun état d’installation réel n’est connu tant que le runtime desktop n’est pas connecté.</span></div></aside></div>
+      <div className="profile-detail-grid"><section className="profile-components"><h2>Composants, origine et politique</h2>{components.map((component,index)=><article key={component.name}><span className="profile-order">{index+1}</span><div><strong>{component.name}</strong><small>Version {component.version} · {component.origin}</small></div><span className={"version-policy "+(component.policy==="Épinglé"?"pinned":"")}>{component.policy}</span></article>)}</section><aside className="profile-decision"><h2>État de la configuration</h2><dl><div><dt>Jeu</dt><dd>Aetherlands 1.4.2</dd></div><div><dt>Conflits déclarés</dt><dd>Aucun dans la démo</dd></div><div><dt>Ordre</dt><dd>Affiché, non appliqué au jeu</dd></div><div><dt>Éléments épinglés</dt><dd>{components.filter(x=>x.policy==="Épinglé").length}</dd></div><div><dt>Synchronisation</dt><dd>Indisponible</dd></div></dl><button className="quiet" onClick={()=>setShowProfileDelta(v=>!v)}>{showProfileDelta?"Masquer le delta":"Prévisualiser une mise à jour"}</button><div className="manager-state"><strong>MODARYX Forge</strong><span>Aucun état d’installation réel n’est connu tant que le runtime desktop n’est pas connecté.</span></div></aside></div>
+      {showProfileDelta&&<section className="profile-delta" aria-live="polite"><div><span className="kicker">Branche de mise à jour</span><h2>Copie avant promotion</h2><p>Aperçu de démonstration : le profil actuel reste intact.</p></div><div className="delta-grid"><article><span>Mettre à jour</span><strong>Vestiges suspendus</strong><small>1.4.2 → 1.5.0-démo · politique Proposer</small></article><article><span>Conserver</span><strong>Sentiers de l’aube 1.4.2</strong><small>Épinglé · aucune mise à jour automatique</small></article><article><span>Dépendance</span><strong>Aether Core 1.x</strong><small>Requis · vérification à refaire avant promotion</small></article><article><span>Résultat</span><strong>Nouvelle branche</strong><small>Aucune mutation réelle dans ce prototype</small></article></div></section>}
     </main>;
   }
   const panels={
     "Favoris": <section className="library-panel"><div className="section-heading"><div><span className="kicker">Favoris</span><h2>Contenus enregistrés</h2><p>Vos favoris personnels restent distincts des Collections et des profils.</p></div></div><div className="content-grid">{contentItems.slice(0,3).map(item=><ContentCard key={item.title} item={item} onOpen={()=>{}}/>)}</div></section>,
     "Suivis": <section className="library-panel"><span className="kicker">Suivis</span><h2>Créateurs et projets suivis</h2><div className="library-state"><strong>Atelier Boréal</strong><span>Suivi de démonstration · aucune notification distante connectée.</span></div></section>,
     "Collections": <section className="library-panel"><span className="kicker">Collections</span><h2>Sélections organisées</h2><div className="library-cards"><article><strong>Exploration nocturne</strong><span>Collection de démonstration · 4 contenus</span><small>Sélection éditoriale, pas un profil installable.</small></article><article><strong>Visuels sobres</strong><span>Collection de démonstration · 3 contenus</span><small>Aucune installation automatique dans ce prototype.</small></article></div></section>,
-    "Profils de jeu": <section className="library-panel"><span className="kicker">Profils de jeu</span><h2>Configurations enregistrées</h2><p className="page-intro">Configurations enregistrées de mods, versions et réglages.</p><div className="profile-library">{[['Exploration','4 contenus','Local uniquement'],['Graphismes','7 contenus','Local uniquement'],['Immersion','3 contenus','Local uniquement']].map(([name,count,state],i)=><article key={name}><Media pos={contentItems[i].pos}/><div><strong>{name}</strong><span>{count}</span><small>{state}</small></div><button className="quiet" onClick={()=>{setOpenProfile(name);window.scrollTo({top:0,behavior:"auto"})}}>Ouvrir</button></article>)}</div><div className="manager-state"><strong>Connexion MODARYX Forge</strong><span>Indisponible dans ce prototype — aucune synchronisation ni installation n’est simulée.</span></div></section>,
+    "Profils de jeu": <section className="library-panel"><span className="kicker">Profils de jeu</span><h2>Configurations enregistrées</h2><p className="page-intro">Configurations enregistrées de mods, versions et réglages.</p><div className="profile-library">{[['Exploration','4 contenus','Local uniquement'],['Graphismes','2 contenus','Local uniquement'],['Immersion','3 contenus','Local uniquement']].map(([name,count,state],i)=><article key={name}><Media pos={contentItems[i].pos}/><div><strong>{name}</strong><span>{count}</span><small>{state}</small></div><button className="quiet" onClick={()=>{setOpenProfile(name);setShowProfileDelta(false);window.scrollTo({top:0,behavior:"auto"})}}>Ouvrir</button></article>)}</div><div className="manager-state"><strong>Connexion MODARYX Forge</strong><span>Indisponible dans ce prototype — aucune synchronisation ni installation n’est simulée.</span></div></section>,
+    "Historique": <section className="library-panel"><span className="kicker">Historique</span><h2>Activité réelle, privée par défaut</h2><div className="empty history-empty"><BookOpen/><h3>Aucun historique réel disponible</h3><p>Le futur historique pourra regrouper téléchargements et actions réellement attestés, filtrables par jeu, source et date. Ce prototype n’invente aucune entrée.</p></div><div className="privacy-note"><strong>Confidentialité</strong><span>L’historique personnel devra être privé par défaut et dissocié des métriques publiques.</span></div></section>,
     "Recherches enregistrées": <section className="library-panel"><span className="kicker">Recherches enregistrées</span><h2>Veilles personnelles</h2><div className="library-state"><strong>Shaders compatibles Aetherlands 1.4.x</strong><span>Recherche de démonstration enregistrée localement.</span></div></section>,
   };
   return <main className="page-section library">
-    <span className="kicker">Votre espace</span><h1>Bibliothèque</h1><p className="page-intro">Retrouvez favoris, suivis, collections et profils sans les confondre.</p>
+    <span className="kicker">Votre espace</span><h1>Bibliothèque</h1><p className="page-intro">Retrouvez favoris, suivis, collections, profils et historique sans les confondre.</p>
     <section className="library-overview"><div className="library-focus"><Media pos="50% 100%"/><div><span className="demo-label">Jeu actif</span><h2>Aetherlands</h2><p>3 profils de démonstration · version 1.4.2</p><button className="primary">Ouvrir le Game Hub <ArrowRight/></button></div></div><div className="library-summary"><strong>État de la bibliothèque</strong><span>Données locales de démonstration</span><span>Aucun cloud connecté</span><span>Aucun manager connecté</span></div></section>
     <nav className="library-tabs" aria-label="Sections de la bibliothèque">{tabs.map(value=><button key={value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>
     {panels[tab]}
@@ -353,23 +387,25 @@ function Library() {
 function CreatorStudio() {
   const [tab,setTab]=useState("Dashboard");
   const [draftStarted,setDraftStarted]=useState(false);
+  const [maturity,setMaturity]=useState("Concept");
   const tabs=["Dashboard","Projects","Releases","Upload","Analytics","Support","Reports","Team","Settings"];
   const panel={
-    "Dashboard": <><div className="studio-cards"><article><span className="kicker">Brouillons</span><strong>{draftStarted?"1 brouillon local":"Aucun brouillon actif"}</strong><small>État local uniquement — aucune donnée distante.</small></article><article><span className="kicker">Publication</span><strong>Aucune soumission</strong><small>Aucun backend de publication connecté.</small></article><article><span className="kicker">Alertes</span><strong>Aucune alerte réelle</strong><small>Les métriques et alertes ne sont jamais inventées.</small></article></div><section className="studio-workflow"><div><span className="kicker">Démarrer</span><h2>Créer un projet</h2><p>Identité → jeu → type de contenu → description → catégories → créateur/équipe → droits/licence.</p><button className="primary" onClick={()=>setDraftStarted(true)}><Plus/>{draftStarted?"Brouillon local créé":"Créer un projet local"}</button></div><ol><li><strong>Projet</strong><span>Identité et droits</span></li><li><strong>Release</strong><span>Version, compatibilité, dépendances</span></li><li><strong>Fichiers</strong><span>Hash, provenance, distribution</span></li><li><strong>Validation</strong><span>Preview puis soumission explicite</span></li></ol></section></>,
-    "Projects": <section className="studio-panel"><span className="kicker">Projects</span><h2>Projets</h2>{draftStarted?<div className="studio-row"><div><strong>Projet sans titre</strong><span>Brouillon local · Aetherlands · type à choisir</span></div><button className="quiet">Continuer</button></div>:<div className="empty"><Stack/><h3>Aucun projet de démonstration</h3><p>Créez un brouillon local depuis le Dashboard.</p></div>}</section>,
-    "Releases": <section className="studio-panel"><span className="kicker">Releases</span><h2>Préparer une release</h2><div className="release-steps">{["Version","Canal","Version du jeu","Loader / framework","Dépendances","Conflits","Fichiers","Changelog","Provenance","Validation","Preview","Submit"].map((value,i)=><div key={value}><span>{String(i+1).padStart(2,"0")}</span><strong>{value}</strong><small>{i<2?"À définir":"Non renseigné"}</small></div>)}</div><p className="studio-note">Créer un projet ne crée jamais automatiquement une release.</p></section>,
+    "Dashboard": <><div className="studio-cards"><article><span className="kicker">Brouillons</span><strong>{draftStarted?"1 brouillon local":"Aucun brouillon actif"}</strong><small>État local uniquement — aucune donnée distante.</small></article><article><span className="kicker">Maturité projet</span><strong>{draftStarted?maturity:"Aucun projet actif"}</strong><small>Concept / WiP / Released / Archived restent distincts du canal de release.</small></article><article><span className="kicker">Publication</span><strong>Aucune soumission</strong><small>Aucun backend de publication connecté.</small></article></div><section className="studio-workflow"><div><span className="kicker">Démarrer</span><h2>Créer un projet</h2><p>Identité → jeu → type de contenu → auteurs/crédits → droits → maturité → release.</p><button className="primary" onClick={()=>setDraftStarted(true)}><Plus/>{draftStarted?"Brouillon local créé":"Créer un projet local"}</button></div><ol><li><strong>Projet</strong><span>Identité, maturité et droits</span></li><li><strong>Auteurs</strong><span>Créateur, co-auteurs, studio, assets tiers</span></li><li><strong>Release</strong><span>Version, compatibilité, dépendances</span></li><li><strong>Validation</strong><span>Preview puis soumission explicite</span></li></ol></section></>,
+    "Projects": <section className="studio-panel"><span className="kicker">Projects</span><h2>Projets</h2>{draftStarted?<><div className="studio-row project-row"><div><strong>Projet sans titre</strong><span>Brouillon local · Aetherlands · type à choisir</span></div><span className="support-state">{maturity}</span></div><section className="project-maturity"><div><span className="kicker">Maturité</span><h3>État du projet</h3><p>La maturité décrit le projet ; elle ne remplace pas Stable/Beta/Alpha d’une release.</p></div><div className="filter-chips" role="group" aria-label="Maturité du projet">{["Concept","WiP","Released","Archived"].map(value=><button key={value} className={maturity===value?"selected":""} onClick={()=>setMaturity(value)}>{value}</button>)}</div></section><section className="credits-panel"><span className="kicker">Crédits structurés</span><h3>Auteurs & droits</h3><div className="credits-list"><div><strong>Vous</strong><span>Auteur principal</span><em>Original</em></div><div><strong>Atelier Boréal</strong><span>Studio / équipe de démonstration</span><em>Rôle à confirmer</em></div><div><strong>Assets tiers</strong><span>Aucun déclaré</span><em>Preuve requise si ajouté</em></div></div><p>Aucune publication réelle n’est possible tant que auteurs, licences et permissions ne sont pas complets.</p></section></>:<div className="empty"><Stack/><h3>Aucun projet de démonstration</h3><p>Créez un brouillon local depuis le Dashboard.</p></div>}</section>,
+    "Releases": <section className="studio-panel"><span className="kicker">Releases</span><h2>Préparer une release</h2><div className="release-context"><strong>Maturité projet : {draftStarted?maturity:"non définie"}</strong><span>Le canal de release restera une décision séparée.</span></div><div className="release-steps">{["Version","Canal","Version du jeu","Loader / framework","Dépendances","Conflits","Fichiers","Changelog","Provenance","Crédits & droits","Validation","Submit"].map((value,i)=><div key={value}><span>{String(i+1).padStart(2,"0")}</span><strong>{value}</strong><small>{i<2?"À définir":"Non renseigné"}</small></div>)}</div><p className="studio-note">Créer un projet ne crée jamais automatiquement une release.</p></section>,
     "Upload": <section className="studio-panel"><span className="kicker">Upload</span><h2>Fichiers de release</h2><div className="upload-zone"><strong>Zone d’upload de démonstration</strong><span>Clavier accessible · aucun fichier n’est envoyé dans ce prototype.</span><button className="quiet" disabled>Sélectionner un fichier — backend indisponible</button></div><p className="studio-note">Une erreur d’upload réelle devra préserver le brouillon local.</p></section>,
     "Analytics": <section className="studio-panel"><span className="kicker">Analytics</span><h2>Mesures</h2><div className="unavailable-state"><strong>Données indisponibles</strong><span>Aucune vue, téléchargement, installation ou favori n’est simulé sans source réelle.</span></div></section>,
-    "Support": <section className="studio-panel"><span className="kicker">Support</span><h2>Support du projet</h2><div className="unavailable-state"><strong>Service non connecté</strong><span>Questions, bugs et discussions resteront séparés de la modération.</span></div></section>,
+    "Support": <section className="studio-panel"><span className="kicker">Support</span><h2>Support du projet</h2><div className="unavailable-state"><strong>Service non connecté</strong><span>Questions, bugs et discussions resteront séparés de la modération. Pour une composition, le support de composition relève de son curateur/auteur, pas automatiquement des auteurs de chaque composant.</span></div></section>,
     "Reports": <section className="studio-panel"><span className="kicker">Reports</span><h2>Signalements</h2><div className="unavailable-state"><strong>Aucun signalement réel</strong><span>Les outils de modération n’apparaissent qu’avec permissions serveur réelles.</span></div></section>,
     "Team": <section className="studio-panel"><span className="kicker">Team</span><h2>Équipe / studio</h2><div className="studio-row"><div><strong>Atelier de démonstration</strong><span>Rôles et permissions non connectés à un backend.</span></div><span className="support-state">Local uniquement</span></div></section>,
     "Settings": <section className="studio-panel"><span className="kicker">Settings</span><h2>Paramètres du Studio</h2><div className="permissions-list"><div><dt>Sauvegarde locale</dt><dd>Prévue</dd></div><div><dt>Sauvegarde distante</dt><dd>Indisponible</dd></div><div><dt>Publication</dt><dd>Action explicite requise</dd></div><div><dt>Réauthentification</dt><dd>Backend requis</dd></div></div></section>,
   };
   return <main className="page-section creator-studio">
-    <span className="kicker">Créer</span><h1>Creator Studio</h1><p className="page-intro">Créez un projet, préparez une release et contrôlez droits, provenance et validation sans simuler les services absents.</p>
+    <span className="kicker">Créer</span><h1>Creator Studio</h1><p className="page-intro">Créez un projet, structurez auteurs et droits, préparez une release et contrôlez provenance et validation sans simuler les services absents.</p>
     <div className="studio-shell"><nav className="studio-nav" aria-label="Navigation Creator Studio">{tabs.map(value=><button key={value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav><div className="studio-content">{panel[tab]}</div></div>
   </main>;
 }
+
 
 function AccountCenter({ initialTab="Compte" }) {
   const [tab,setTab]=useState(initialTab);
