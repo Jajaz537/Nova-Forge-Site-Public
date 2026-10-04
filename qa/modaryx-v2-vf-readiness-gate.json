@@ -146,10 +146,12 @@
     "product-flows-prototype",
     "multiscreen-prototype-87-captures-current-code-proof",
     "production-surface-map",
-    "preproduction-contract-registry-35",
+    "preproduction-contract-registry-current-green",
     "game-atmosphere-original-prototype",
     "rights-dashboard-prototype",
-    "member-game-support-request-prototype"
+    "member-game-support-request-prototype",
+    "high-fi-gate-machine-blocked",
+    "frontend-gate-reclassification-proposal-not-active"
   ],
   "invariants": [
     "PUBLIC_GREEN_NEVER_IMPLIES_PRODUCTION_VF",
