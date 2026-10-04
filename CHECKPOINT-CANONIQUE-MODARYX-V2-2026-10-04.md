@@ -290,7 +290,7 @@ Documents :
 - `docs/MODARYX-V2-HUMAN-MULTISCREEN-REVIEW-PACK-20261004.md`
 - `docs/MODARYX-V2-ASSISTIVE-DEVICE-VALIDATION-PROTOCOL-20261004.md`
 
-Pack humain actuel préparé autour de la preuve **67 captures**.
+Pack humain actuel préparé autour de la preuve **69 captures**.
 
 Toujours PREUVE MANQUANTE :
 - validation humaine multi-écrans supplémentaire ;
@@ -632,3 +632,52 @@ Toujours non implémenté :
 - vérification provenance ;
 - moteur licence/policy ;
 - notification admin réelle.
+
+
+## 25. Vérification contact éditeur → REQUEST_READY — preuve prototype
+
+**TERMINÉ pour le prototype et le contrat / outbound réel PREUVE MANQUANTE**
+
+Preuve UI Living Threshold :
+- run `37201151562` — **SUCCESS**
+- commit capturé `238cc7f5fae3720aa495ca2e6c3909c8baabc21a`
+- artifact `11303470181`
+- digest `sha256:853428274c5abce89cd1ab2b147005161b656f7e613ae121fd191835a69ed719`
+- `KEYBOARD_REACHABLE 36 / 36`
+- `PUBLISHER_CONTACT_MOBILE_OVERFLOW 0`
+- `RIGHTS_MOBILE_OVERFLOW 0`
+- `FLOW_ASSERT publisher contact verified before request ready`
+- `MULTISCREEN_CAPTURE_COUNT 69`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Preuve contrat droits renforcé :
+- run `37201224168` — **SUCCESS**
+- `GAME_RIGHTS_CONTACT_ALLOWED_SOURCE_COUNT 5`
+- `GAME_RIGHTS_CONTACT_FORBIDDEN_SOURCE_COUNT 5`
+- `GAME_RIGHTS_REQUEST_READINESS_COUNT 5`
+- `GAME_RIGHTS_SEND_GUARD_COUNT 7`
+- `PASS_V2_GAME_RIGHTS_WORKFLOW`
+
+Surface map :
+- run `37201297613` — **SUCCESS**
+- `SURFACE_MAP_COUNT 23`
+- `UNRESOLVED_RUNTIME_COUNT 6`
+- `PASS_V2_PRODUCTION_SURFACE_MAP`
+
+Flux matérialisé :
+`ACCEPTED_SAFE_BASELINE → CONTACT_CANDIDATE → CONTACT_VERIFIED → REQUEST_READY`.
+
+Garde-fous :
+- candidat ≠ contact vérifié ;
+- aucune adresse devinée ;
+- sources non officielles/non vérifiées interdites ;
+- REQUEST_READY exige contact vérifié + scopes explicites + Rights Case + template courant ;
+- REQUEST_READY ≠ REQUEST_SENT ;
+- aucun outbound réel dans le prototype.
+
+Toujours non implémenté :
+- découverte de contact réelle ;
+- preuve de domaine/contact réelle ;
+- outbound email/API ;
+- audit mailbox ;
+- Game Rights Registry production.
