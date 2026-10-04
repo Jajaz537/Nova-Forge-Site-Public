@@ -341,9 +341,15 @@ try{
   await waitText("Aucun droit supplémentaire");
   await clickText(".rights-case-list button","Solstice FrontierÉditeur fictif · démonstrationNO_RESPONSE");
   await waitText("NO_RESPONSE ≠ autorisation");
+  await waitText("AUCUNE RÉPONSE INTERPRÉTABLE");
+  await waitText("LEGAL_REVIEW_REQUIRED");
   await clickText(".rights-case-list button","AetherlandsÉditeur fictif · démonstrationAPPROVED_WITH_LIMITS");
   await waitText("Key art");
   await waitText("Refusé — reste bloqué");
+  await waitText("SAFE_AUTOMATION");
+  await waitText("Notification admin fictive préparée · aucune notification réelle envoyée.");
+  await waitText("LEGAL_REVIEW_REQUIRED");
+  console.log("FLOW_ASSERT publisher response interpretation safe automation with legal fallback");
   const rightsSendDisabled=await evaluate(`(() => {const b=[...document.querySelectorAll('.rights-detail button')].find(x=>x.textContent.includes('Envoyer une demande'));return !!b&&b.disabled;})()`);
   if(!rightsSendDisabled) throw new Error("rights outbound must stay disabled without backend");
   await waitText("Triage avant tout contact éditeur");
