@@ -159,6 +159,11 @@ try{
 
   await navigateUtility("Compte");
   await waitText("Compte & préférences");
+  const accountGeometry=await evaluate(`(() => {
+    const pick=(selector)=>{const el=document.querySelector(selector);if(!el)return null;const r=el.getBoundingClientRect(),s=getComputedStyle(el);return {selector,width:r.width,right:r.right,left:r.left,scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,minWidth:s.minWidth,maxWidth:s.maxWidth,widthStyle:s.width,gridTemplateColumns:s.gridTemplateColumns,overflowX:s.overflowX,display:s.display};};
+    return {viewport:document.documentElement.clientWidth,documentScrollWidth:document.documentElement.scrollWidth,page:pick('.account-center'),shell:pick('.account-shell'),nav:pick('.account-nav'),panel:pick('.account-panel'),actions:pick('.account-actions')};
+  })()`);
+  console.log("ACCOUNT_NARROW_GEOMETRY",JSON.stringify(accountGeometry));
   await assertNoOverflow("account");
 
   await navigateUtility("MODARYX IA");
