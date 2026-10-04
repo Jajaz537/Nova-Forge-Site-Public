@@ -1497,3 +1497,30 @@ Toujours PREUVE MANQUANTE :
 - validation humaine/appareils.
 
 **Prochain axe interne : fermer les derniers détails de modèle encore non matérialisés (Alternative/AnyOf, Supported, Minimum accepté, états de fraîcheur), puis réévaluer s'il reste du travail interne honnête avant le gate externe.**
+
+
+## Fermeture du modèle spécialisé Living Threshold — 4 octobre 2026
+
+**TERMINÉ pour le prototype exploratoire / aucun runtime réel validé**
+
+Run :
+- `37165177246` — **SUCCESS**
+- commit capturé : `8ecd8a139eac084348c503a65d0289d7fb30fdba`
+- artifact : `11289616195`
+- digest : `sha256:e3e680c741d79e2bb91dc94bc5b5817ea873182c9422b8dd5e71b476a4c33c76`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 57`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Derniers détails du modèle spécialisé maintenant matérialisés :
+- `Supported` ;
+- `Alternative / AnyOf` ;
+- politique `Minimum accepté` ;
+- fraîcheur `Current / Aging / Stale / Unknown`.
+
+État :
+- modèle prototype pour dépendances/compatibilité/version/source : **TERMINÉ pour l'exploration** ;
+- providers, données, preuves de compatibilité, sync, installation, validation plateforme et runtime réel : **PREUVE MANQUANTE** ;
+- root/frontend V2 production : toujours **BLOQUÉ par gate de validation**.
+
+Le prochain travail doit être choisi uniquement parmi les gaps internes réellement récupérables restants ; ne pas ajouter des fonctionnalités décoratives simplement pour faire monter le pourcentage.
