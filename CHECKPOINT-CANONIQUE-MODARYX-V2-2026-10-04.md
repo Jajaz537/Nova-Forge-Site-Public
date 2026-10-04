@@ -1163,3 +1163,37 @@ Procédure :
 - aucun full replay ;
 - correction suivante doit neutraliser la règle plus tardive ou imposer le min-width au shell/nav ;
 - relancer uniquement le micro-proof 320 avant continuation générale.
+
+
+## 36. Narrow 320 + matrice responsive — fermeture ciblée
+
+**TERMINÉ pour émulation navigateur / appareils réels PREUVE MANQUANTE**
+
+Narrow 320 :
+- workflow `MODARYX V2 Narrow Reflow 320 Micro-Proof`
+- run `37217511653` — **SUCCESS**
+- commit capturé `b57281c345aa0868208a53ec5137779185df7386`
+- `NARROW_REFLOW_SURFACE_COUNT 12`
+- `PASS_V2_NARROW_REFLOW_320`
+
+Matrice responsive :
+- workflow `MODARYX V2 Responsive Matrix Micro-Proof`
+- run `37218193186` — **SUCCESS**
+- commit capturé `eb48b1763537b1082bfece56e0d8294b0e0eee29`
+- largeurs : 360 / 430 / 768 / 1024 / 1280 / 1920
+- 12 surfaces par largeur
+- marqueurs `PASS_V2_REFLOW_VIEWPORT_<width>`
+
+Les correctifs narrow couvrent notamment :
+- Account : track `minmax(0,1fr)`, actions wrappables ;
+- Rights : actions wrappables ;
+- Publisher Contact : track contraint, `min-width:0`.
+
+Cette section **supersède l’état EN COURS de la section 35**.
+
+Limites inchangées :
+- émulation Chrome uniquement ;
+- appareil physique : PREUVE MANQUANTE ;
+- Safari/iPadOS réel : PREUVE MANQUANTE ;
+- vrai screen reader : PREUVE MANQUANTE ;
+- validation tactile humaine : PREUVE MANQUANTE.
