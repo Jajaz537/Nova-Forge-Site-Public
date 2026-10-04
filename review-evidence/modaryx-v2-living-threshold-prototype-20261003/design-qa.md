@@ -517,3 +517,40 @@ Surface map :
 Cette preuve valide uniquement la surface de démonstration et les garde-fous UI/contrat. Elle ne prouve ni Game Rights Registry production, ni connexion email/API, ni contact éditeur réel, ni interprétation juridique réelle.
 
 Aucun PASS High-Fi/VF final n'est déclaré.
+
+
+## Member game-support request — local-only proof — 4 octobre 2026
+
+**TERMINÉ — prototype local / aucun envoi ni Rights Case réel**
+
+Run :
+- `37198162015` — **SUCCESS**
+- commit capturé : `103aab8b82684e65020b4c9575df0f6819a69b7f`
+- artifact : `11301612556`
+- digest : `sha256:c567c6e27c5e4648fe3267becb48736b5861bb22c2ae85ffa31009e3626695d3`
+
+Marqueurs :
+- `KEYBOARD_REACHABLE 36 / 36`
+- `GAME_SUPPORT_REQUEST_MOBILE_OVERFLOW 0`
+- `RIGHTS_MOBILE_OVERFLOW 0`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `FLOW_ASSERT game support request local-only triage`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 63`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Flux matérialisé :
+- membre ouvre la demande de support ;
+- nom + plateforme ;
+- validation si nom absent ;
+- brouillon local explicitement **non envoyé** ;
+- triage MODARYX requis ;
+- aucun Rights Case réel créé ;
+- aucune demande éditeur réelle envoyée.
+
+Captures :
+- `desktop-game-support-request.png`
+- `mobile-game-support-request.png`
+
+Aucun backend de demande, triage serveur, notification ou outbound réel n’est prouvé.
