@@ -1289,7 +1289,7 @@ Fait externe frais :
 Document :
 `docs/MODARYX-V2-HUMAN-MULTISCREEN-REVIEW-PACK-20261004.md`
 
-Le pack réutilise la preuve 39 captures et concentre la revue sur :
+Le pack réutilise la preuve 57 captures et concentre la revue sur :
 - compréhension Home/Game Hub ;
 - Catalog/Content Detail ;
 - Collection / Modpack / Profil de jeu ;
