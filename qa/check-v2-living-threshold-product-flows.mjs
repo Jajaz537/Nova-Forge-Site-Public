@@ -399,6 +399,8 @@ try{
   await waitText("CONTACT_CANDIDATE");
   const requestPrepareInitiallyDisabled=await evaluate(`(() => {const b=[...document.querySelectorAll('.publisher-contact-actions button')].find(x=>x.textContent.includes('Préparer la demande structurée'));return !!b&&b.disabled;})()`);
   if(!requestPrepareInitiallyDisabled) throw new Error("publisher request preparation must stay disabled before contact verification");
+  const outboundQueueInitiallyDisabled=await evaluate(`(() => {const b=[...document.querySelectorAll('.publisher-outbound-actions button')].find(x=>x.textContent.includes('Simuler mise en file locale'));return !!b&&b.disabled;})()`);
+  if(!outboundQueueInitiallyDisabled) throw new Error("publisher outbound queue must stay disabled before REQUEST_READY");
   await clickText(".publisher-contact-actions .quiet","Vérifier le canal de démonstration");
   await waitText("CONTACT_VERIFIED");
   await clickText(".publisher-contact-actions .primary","Préparer la demande structurée");
@@ -406,6 +408,24 @@ try{
   await waitText("Demande fictive prête : scopes explicites, canal vérifié, aucun envoi réel.");
   await waitText("Outbound réel indisponible · aucune adresse réelle utilisée.");
   console.log("FLOW_ASSERT publisher contact verified before request ready");
+  await waitText("Transport outbound · démonstration");
+  await clickText(".publisher-outbound-actions .quiet","Simuler mise en file locale");
+  await waitText("OUTBOUND_QUEUED");
+  await waitText("Queue locale simulée — aucun envoi réel");
+  await clickText(".publisher-outbound-actions .quiet","Simuler provider accepted");
+  await waitText("PROVIDER_ACCEPTED");
+  await waitText("Provider accepté — droits inchangés");
+  await clickText(".publisher-outbound-actions .quiet","Simuler livraison");
+  await waitText("DELIVERED");
+  await waitText("DELIVERED ≠ autorisation éditeur");
+  await waitText("La livraison du message n’accorde aucun scope.");
+  await clickText(".publisher-outbound-actions .quiet","Réinitialiser le transport");
+  await waitText("NOT_QUEUED");
+  await clickText(".publisher-outbound-actions .quiet","Simuler mise en file locale");
+  await clickText(".publisher-outbound-actions .quiet","Simuler bounce");
+  await waitText("BOUNCED");
+  await waitText("Bounce : arrêt sûr, aucun contact deviné");
+  console.log("FLOW_ASSERT publisher outbound transport permission-neutral");
 
 
 
