@@ -772,3 +772,42 @@ Preuves :
 - surface map `37230139266` — SUCCESS, 27 surfaces.
 
 Aucune action de modération réelle ne doit être déduite de cette surface de démonstration.
+
+
+## 35. SEO / i18n / contenu — contrat machine — 4 octobre 2026
+
+**TERMINÉ pour le contrat pré-production / production PREUVE MANQUANTE**
+
+Contrat source :
+`docs/MODARYX-V2-SEO-I18N-CONTENT-CONTRACT-20261003.md`
+
+Machine contract :
+`qa/modaryx-v2-seo-i18n-content-contract.json`
+
+Preuve :
+- run `37230817511` — **SUCCESS**
+- `SEO_I18N_EDITORIAL_STATE_COUNT 5`
+- `SEO_I18N_INVARIANT_COUNT 12`
+- `SEO_I18N_PREVIEW_ROBOTS noindex,nofollow,noarchive`
+- `PASS_V2_SEO_I18N_CONTENT_CONTRACT`.
+
+Verrous :
+- preview noindex/nofollow/noarchive ;
+- title route SPA requis ;
+- canonicals futurs uniquement V2 ;
+- getnovaforge interdit comme cible canonical V2 ;
+- facettes non indexables sans contrôle ;
+- structured data uniquement factuelle ;
+- hub éditorial ≠ distribution ;
+- snippets sans popularité/compatibilité inventée ;
+- états DRAFT/PUBLISHED/UPDATED/ARCHIVED/REMOVED ;
+- i18n prêt pour textes plus longs, pluriels et formats locaux ;
+- traduction juridique brute non publiable.
+
+Toujours NON IMPLÉMENTÉ :
+- génération canonical V2 production ;
+- sitemap production ;
+- 404/410/removed routing production ;
+- structured data production ;
+- i18n production ;
+- workflow de localisation.
