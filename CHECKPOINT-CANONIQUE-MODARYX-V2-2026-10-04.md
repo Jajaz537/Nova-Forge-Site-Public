@@ -886,3 +886,48 @@ Toujours PREUVE MANQUANTE :
 - licences éditeurs ;
 - allowlist production ;
 - scanning de tous futurs roots/media production.
+
+
+## 30. Game Rights Registry — contrat machine-readable
+
+**TERMINÉ pour le contrat / registre production PREUVE MANQUANTE**
+
+Référence :
+`docs/MODARYX-V2-GAME-RIGHTS-REGISTRY-CONTRACT-20261004.md`
+
+Fichiers :
+- `qa/modaryx-v2-game-rights-registry-contract.json`
+- `qa/check-v2-game-rights-registry-contract.mjs`
+- workflow `MODARYX V2 Game Rights Registry Contract Proof`
+
+Preuve :
+- run `37205429699` — **SUCCESS**
+- `GAME_RIGHTS_REGISTRY_SURFACE_COUNT 8`
+- `GAME_RIGHTS_REGISTRY_SCOPE_COUNT 18`
+- `GAME_RIGHTS_REGISTRY_STATUS_COUNT 10`
+- `GAME_RIGHTS_REGISTRY_ACTIVATION_GUARD_COUNT 14`
+- `GAME_RIGHTS_REGISTRY_INVARIANT_COUNT 14`
+- `PASS_V2_GAME_RIGHTS_REGISTRY_CONTRACT`
+
+Règles verrouillées :
+- aucun statut global `APPROVED_ALL` ;
+- uniquement GRANTED / GRANTED_WITH_LIMITS peuvent autoriser ;
+- scope exact + surface exacte + preuve + dates + conditions ;
+- NO_RESPONSE / PENDING / LEGAL_REVIEW_REQUIRED n'autorisent rien ;
+- Web n'implique jamais MODARYX Forge ;
+- asset officiel doit référencer un ScopeDecision ;
+- EXPIRED / REVOKED fail closed ;
+- Registry indisponible = fail closed pour usages sensibles ;
+- import legacy démarre non vérifié ;
+- membre ne peut pas écrire GRANTED / CONTACT_VERIFIED ;
+- MODARYX IA ne peut pas créer GRANTED sans policy gate ;
+- audit historique non réécrit silencieusement.
+
+Toujours NON IMPLÉMENTÉ :
+- database ;
+- API ;
+- admin CRUD réel ;
+- policy engine ;
+- scheduler/revalidation ;
+- asset linkage production ;
+- audit store production.
