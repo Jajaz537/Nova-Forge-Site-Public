@@ -901,3 +901,32 @@ Règles :
 Statut :
 - architecture : TERMINÉE ;
 - implémentation : PREUVE MANQUANTE / NON COMMENCÉE.
+
+
+## 36. Support d’un jeu → dossier droits éditeur — 4 octobre 2026
+
+**DÉCISION RETENUE — automatisation production à implémenter**
+
+Référence :
+`docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md`
+
+Règles permanentes :
+- toute demande de support d’un jeu passe par triage MODARYX ;
+- après acceptation, la page peut exister en baseline sûre MODARYX avec ambiance originale ;
+- l’acceptation crée un Rights Case ;
+- la demande éditeur doit utiliser un canal officiel vérifié ;
+- aucune adresse ou identité de contact devinée ;
+- aucun double envoi ;
+- absence de réponse = aucun droit supplémentaire ;
+- seuls les scopes explicitement accordés peuvent être activés ;
+- expiration, révocation ou refus rebloquent les usages concernés ;
+- les droits web et les capacités MODARYX Forge restent séparés.
+
+Statut actuel :
+- contrat produit : **TERMINÉ** ;
+- Game Rights Registry : **NON IMPLÉMENTÉ** ;
+- moteur de workflow : **NON IMPLÉMENTÉ** ;
+- outbound réel : **NON IMPLÉMENTÉ** ;
+- validation automatisée de licence : **NON IMPLÉMENTÉ**.
+
+Avant VF, ce workflow doit être implémenté et testé, ou remplacé provisoirement par un processus manuel contrôlé équivalent.
