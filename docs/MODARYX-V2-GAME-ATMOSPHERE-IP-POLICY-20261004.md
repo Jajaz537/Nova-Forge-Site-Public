@@ -325,3 +325,25 @@ Toujours à implémenter avant production :
 - validation juridique externe si usage commercial sensible ou asset officiel envisagé.
 
 Cette politique réduit fortement le risque, mais ne garantit pas l’absence absolue de litige et ne remplace pas un avis juridique professionnel.
+
+
+### Avancement du workflow takedown — 4 octobre 2026
+
+Le blocker “politique de takedown opérationnelle” est désormais partiellement matérialisé au niveau **contrat + prototype**, sans backend production.
+
+Référence :
+`docs/MODARYX-V2-IP-TAKEDOWN-WORKFLOW-20261004.md`
+
+Preuves :
+- contrat run `37204583345` — **SUCCESS**, `PASS_V2_IP_TAKEDOWN_CONTRACT` ;
+- prototype Living Threshold run `37204720263` — **SUCCESS** ;
+- fallback original MODARYX et conservation des preuves exercés.
+
+Toujours requis avant production :
+- canal IP réel ;
+- backend case/audit ;
+- cache/CDN/SW invalidation ;
+- anti-reupload contrôlé ;
+- recours réel ;
+- legal review opérationnelle ;
+- revue juridique externe des obligations applicables.
