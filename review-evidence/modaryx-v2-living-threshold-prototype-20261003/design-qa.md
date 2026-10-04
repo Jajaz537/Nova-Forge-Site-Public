@@ -419,3 +419,56 @@ Interprétation :
 - les 57 captures restent des états de prototype, pas une validation humaine.
 
 Aucun PASS High-Fi/VF final n'est déclaré.
+
+
+## Game Atmosphere Layer — rights-safe proof — 4 octobre 2026
+
+**TERMINÉ — prototype ciblé / aucun asset éditeur ni intégration réelle**
+
+Politique :
+`docs/MODARYX-V2-GAME-ATMOSPHERE-IP-POLICY-20261004.md`
+
+Prototype :
+- atmosphères originales MODARYX pour jeux fictifs Aetherlands / Rivenfall / Solstice Frontier ;
+- aucune marque réelle ajoutée ;
+- aucun logo, key art, personnage, screenshot promotionnel, musique, police ou UI éditeur utilisé ;
+- Game Hub conserve le design system MODARYX et ne change que sa couche d'ambiance.
+
+Erreur ciblée initiale :
+- run `37193482024` : build **SUCCESS**, a11y rendu **FAIL** ;
+- cause exacte : 3 boutons d'ambiance à 38 px de haut sur mobile, sous le minimum 44×44 ;
+- aucune autre étape poursuivie.
+
+Correction :
+- hauteur minimale portée à 44 px ;
+- micro-proof dédié : `MODARYX V2 Game Atmosphere Touch Micro-Proof` ;
+- run `37193592557` — **SUCCESS** ;
+- marqueur : `PASS_V2_GAME_ATMOSPHERE_TOUCH_TARGETS`.
+
+Continuation après micro-proof :
+- run Living Threshold `37193557372` — **SUCCESS** ;
+- commit capturé : `a77cb6a27ecef4e61ab2b55184b518c45f6da9db` ;
+- artifact : `11299852513` ;
+- digest : `sha256:15aad746b128a0be7ae3f2b59d1529c229876a431ac78935cb95c9f4d5e70eec` ;
+- `KEYBOARD_REACHABLE 35 / 35` ;
+- `DESKTOP_OVERFLOW 0` ;
+- `MOBILE_OVERFLOW 0` ;
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y` ;
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS` ;
+- `MULTISCREEN_CAPTURE_COUNT 59` ;
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Nouvelles captures :
+- desktop Game Hub / ambiance Rivenfall originale MODARYX ;
+- mobile Game Hub / ambiance Rivenfall originale MODARYX.
+
+Cette preuve valide le mécanisme de couche d'ambiance dans le prototype, pas les futures ambiances de jeux réels.
+
+Avant jeu réel :
+- revue éditeur/droits ;
+- Game Rights Registry ;
+- assets `Unknown` interdits ;
+- création originale MODARYX par défaut ;
+- aucune confusion d'affiliation.
+
+Aucun PASS juridique, High-Fi final ou VF n'est déclaré.
