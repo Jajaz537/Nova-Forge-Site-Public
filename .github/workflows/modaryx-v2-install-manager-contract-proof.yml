@@ -1,0 +1,32 @@
+name: MODARYX V2 Install Manager Contract Proof
+
+on:
+  push:
+    branches:
+      - 'audit/modaryx-v2-legacy-boundary-20261003'
+    paths:
+      - '.github/workflows/modaryx-v2-install-manager-contract-proof.yml'
+      - 'qa/modaryx-v2-install-manager-contract.json'
+      - 'qa/check-v2-install-manager-contract.mjs'
+      - 'docs/MODARYX-V2-INSTALL-MANAGER-CONTRACT-20261003.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    name: Validate install manager invariants
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate install manager contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-install-manager-contract.mjs
