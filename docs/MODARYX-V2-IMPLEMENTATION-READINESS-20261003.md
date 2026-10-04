@@ -328,7 +328,7 @@ Preuve Living Threshold la plus fraîche pour la surface code matérialisée :
 - `DESKTOP_OVERFLOW 0` ;
 - `MOBILE_OVERFLOW 0` ;
 - `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS` ;
-- `MULTISCREEN_CAPTURE_COUNT 63` ;
+- `MULTISCREEN_CAPTURE_COUNT 65` ;
 - `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
 
 Surface map :
@@ -347,8 +347,10 @@ Nouveaux éléments matérialisés depuis la section 23 :
 - MODARYX Forge séparé des droits Web ;
 - modèle dépendances/compatibilité/source/version exploratoire fermé ;
 - mapping prototype → production mis à jour ;
-- pack humain mis à jour pour 63 captures ;
-- demande membre de support d’un jeu local-only matérialisée et exercée.
+- pack humain mis à jour pour 65 captures ;
+- demande membre de support d’un jeu local-only matérialisée et exercée ;
+- triage admin fictif des demandes de support matérialisé ;
+- ACCEPTED_SAFE_BASELINE explicitement séparé de tout accord éditeur.
 
 Le mapping machine actuel couvre 23 surfaces et maintient **tous** les statuts production à `BLOCKED_GATE`.
 
