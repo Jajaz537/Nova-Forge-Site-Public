@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "source": "docs/MODARYX-V2-PUBLIC-LEGAL-TRUST-READINESS-20261004.md",
+  "categories": [
+    "operator_information",
+    "privacy",
+    "terms",
+    "community_ugc_rules",
+    "cookies_storage",
+    "intellectual_property",
+    "security",
+    "support_contact"
+  ],
+  "readinessStates": [
+    "STRUCTURE_READY",
+    "PRODUCT_FACTS_MISSING",
+    "LEGAL_DRAFT_REQUIRED",
+    "LEGAL_REVIEW_REQUIRED",
+    "APPROVED_FOR_PUBLICATION",
+    "PUBLISHED",
+    "REVIEW_DUE"
+  ],
+  "publishableStates": [
+    "APPROVED_FOR_PUBLICATION",
+    "PUBLISHED"
+  ],
+  "prototypeBanner": "Prototype noindex — aucun texte juridique final n'est simulé.",
+  "invariants": [
+    "NO_FAKE_OPERATOR_IDENTITY",
+    "NO_FAKE_ADDRESS",
+    "NO_FAKE_DPO",
+    "NO_FAKE_RETENTION_PERIOD",
+    "NO_FAKE_PROCESSOR_LIST",
+    "NO_FAKE_SECURITY_CONTACT",
+    "NO_FAKE_SUPPORT_CHANNEL",
+    "PRIVACY_DERIVED_FROM_DEPLOYED_ARCHITECTURE",
+    "PUBLIC_CHANNELS_MUST_EXIST_BEFORE_PUBLICATION",
+    "AI_DISCLOSURES_MATCH_DEPLOYED_PROVIDERS",
+    "PLACEHOLDER_NEVER_PRESENTED_AS_FINAL"
+  ],
+  "productionStatus": {
+    "operatorIdentity": "NOT_PROVEN",
+    "finalPolicies": "NOT_WRITTEN",
+    "ipIntake": "NOT_IMPLEMENTED",
+    "securityContact": "NOT_PROVEN",
+    "legalReview": "NOT_PROVEN"
+  }
+}
