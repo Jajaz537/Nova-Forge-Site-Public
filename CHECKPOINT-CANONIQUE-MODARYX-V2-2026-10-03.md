@@ -1590,3 +1590,35 @@ Reste réellement bloquant avant root/frontend V2 production :
 7. décision canonique levant le gate de création du root V2.
 
 **Décision : maintenir PR #162 en draft, ne pas toucher à main/public/DNS/Cloudflare critique, et reprendre automatiquement dès qu'un de ces gates reçoit une preuve réelle ou une reclassification explicite.**
+
+
+## Game Atmosphere Layer + politique IP — 4 octobre 2026
+
+**TERMINÉ — décision produit et garde-fous de conception**
+
+Référence :
+`docs/MODARYX-V2-GAME-ATMOSPHERE-IP-POLICY-20261004.md`
+
+Décision :
+- le design system MODARYX reste stable sur toutes les pages de jeux ;
+- chaque Game Hub peut recevoir une ambiance originale propre au jeu ;
+- concept cible : `Game Atmosphere Engine` ;
+- l'ambiance change, l'identité MODARYX reste dominante.
+
+Règle droits :
+- nom du jeu utilisable de façon référentielle/descriptive ;
+- aucun asset officiel par défaut ;
+- logos, key arts, personnages, screenshots promotionnels, OST, polices officielles et UI copiée : interdits sans licence/permission/preuve claire ;
+- créations originales MODARYX par défaut ;
+- `Unknown = BLOQUÉ` ;
+- aucune page finale ne doit dépendre d'un asset aux droits inconnus.
+
+Avant production :
+- Game Rights Registry ;
+- revue éditeur par éditeur ;
+- allowlist/licence asset checks ;
+- workflow takedown/IP ;
+- fallback original MODARYX ;
+- revue juridique externe si usage commercial sensible ou asset officiel envisagé.
+
+Cette politique réduit le risque mais ne vaut pas garantie juridique absolue.
