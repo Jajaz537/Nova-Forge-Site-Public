@@ -1670,3 +1670,62 @@ Toujours à implémenter avant production :
 - takedown/IP workflow ;
 - Game Atmosphere Engine production ;
 - validation juridique externe si usage commercial sensible ou asset officiel envisagé.
+
+
+## MODARYX IA — fondations professionnelles — 4 octobre 2026
+
+**DÉCISION PRODUIT RETENUE — implémentation non commencée**
+
+Référence :
+`docs/MODARYX-AI-FOUNDATION-ARCHITECTURE-20261004.md`
+
+Décision :
+- MODARYX IA ne sera pas un simple chatbot ajouté après coup ;
+- architecture propriétaire MODARYX autour de modèles interchangeables ;
+- AI Gateway ;
+- Model Router ;
+- Knowledge Layer / RAG ;
+- Tool Layer ;
+- Permission Engine ;
+- agents spécialisés ;
+- evals systématiques ;
+- safety/security ;
+- observabilité ;
+- mémoire contrôlée ;
+- intégration contextuelle site + MODARYX Forge ;
+- indépendance vis-à-vis d'un provider unique.
+
+Stratégie modèles :
+- commencer avec les meilleurs modèles disponibles + RAG/tools/evals ;
+- fine-tuning ciblé ensuite ;
+- petits modèles spécialisés/local-first lorsque pertinent ;
+- modèle fondamental propriétaire uniquement si un avantage mesuré le justifie.
+
+Règles non négociables :
+- aucune certitude inventée ;
+- aucune action destructive silencieuse ;
+- aucune interprétation juridique ambiguë comme autorisation ;
+- aucune donnée privée utilisée pour entraînement par défaut ;
+- aucune production sans eval suite ;
+- aucun agent omnipotent sans permission boundaries ;
+- toute action sensible doit être auditée.
+
+MODARYX IA devra notamment pouvoir aider :
+- recherche/discovery ;
+- compatibilité ;
+- profils ;
+- dépendances/conflicts ;
+- Creator Studio ;
+- support ;
+- Rights & Publisher workflow ;
+- MODARYX Forge diagnostics/handoff.
+
+Statut :
+- architecture conceptuelle : **TERMINÉE**
+- providers/modèles : **NON SÉLECTIONNÉS**
+- backend IA : **NON IMPLÉMENTÉ**
+- eval harness : **NON IMPLÉMENTÉ**
+- site integration : **NON IMPLÉMENTÉ**
+- MODARYX Forge integration : **NON IMPLÉMENTÉ**
+
+La sélection technique devra être faite avec benchmark frais au démarrage du chantier IA.
