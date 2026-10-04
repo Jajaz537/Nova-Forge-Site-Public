@@ -5,7 +5,7 @@
 
 ## 1. But
 
-Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 69 captures au hasard.
+Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 71 captures au hasard.
 
 Ce pack ne remplace pas :
 - un screen reader réel ;
@@ -46,6 +46,7 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 14. `desktop-rights-triage-accepted.png` — vérifier qu’une acceptation produit n’est pas confondue avec un accord éditeur
 15. `desktop-rights-response-interpretation.png` — vérifier la lecture SAFE_AUTOMATION + fallback LEGAL_REVIEW_REQUIRED
 16. `desktop-rights-contact-verified.png` — vérifier que CONTACT_VERIFIED précède REQUEST_READY et qu’aucun envoi réel n’est suggéré
+17. `desktop-rights-notification-preview.png` — vérifier que les événements fictifs restent clairement marqués non reçus
 
 ### Mobile — noyau
 
@@ -63,6 +64,7 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 12. `mobile-rights-triage-accepted.png` — vérifier lisibilité du triage et de la baseline sûre sur petit écran
 13. `mobile-rights-response-interpretation.png` — vérifier compréhension du parsing de réponse et du garde-fou juridique
 14. `mobile-rights-contact-verified.png` — vérifier la lisibilité du contact vérifié et de REQUEST_READY sur petit écran
+15. `mobile-rights-notification-preview.png` — vérifier la compréhension des notifications droits fictives sans confusion avec un événement réel
 
 ### États critiques si le participant a encore du temps
 
@@ -166,6 +168,12 @@ Ne pas dire :
    - comprenez-vous que le canal doit être vérifié avant de préparer la demande ?
    - comprenez-vous que REQUEST_READY signifie “prête à envoyer”, pas “envoyée” ?
    - voyez-vous clairement qu’aucune adresse réelle n’est utilisée dans la démo ?
+
+19. Sur les notifications droits éditeurs fictives :
+   - comprenez-vous qu’elles n’ont pas réellement été reçues ?
+   - distinguez-vous APPROVED_WITH_LIMITS de LEGAL_REVIEW_REQUIRED ?
+   - comprenez-vous que LEGAL_REVIEW_REQUIRED ne débloque aucun droit ?
+   - comprenez-vous qu’email et push sont encore indisponibles ?
 
 ## 6. Tâches courtes recommandées
 
