@@ -17,7 +17,6 @@ let ws; let nextId=1; const pending=new Map();
 function send(method,params={}){const id=nextId++;ws.send(JSON.stringify({id,method,params}));return new Promise((resolve,reject)=>pending.set(id,{resolve,reject}));}
 async function waitJson(path){let last;for(let i=0;i<200;i++){try{const r=await fetch(`http://127.0.0.1:${port}${path}`);if(r.ok)return await r.json();last=new Error("HTTP "+r.status);}catch(e){last=e;}await sleep(100);}throw last||new Error("CDP unavailable");}
 async function evaluate(expression){const r=await send("Runtime.evaluate",{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw new Error(r.exceptionDetails.text||"Runtime.evaluate failed");return r.result?.result?.value;}
-async function clickText(selector,text){const ok=await evaluate(`(() => {const t=[...document.querySelector(${JSON.stringify(selector)} ? ${JSON.stringify(selector)} : '')];return false;})()`);}
 async function clickByText(selector,text){
   const ok=await evaluate(`(() => {
     const target=[...document.querySelectorAll(${JSON.stringify(selector)})].find(el=>{
