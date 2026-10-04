@@ -1955,3 +1955,24 @@ Contrats couverts :
 - API governance.
 
 Cette preuve consolide les **contrats**. Elle ne transforme aucun backend, provider, auth, email, runtime Forge ou service externe en implémentation réelle.
+
+
+## 59. Archive Living Threshold courante après hardening source
+
+**TERMINÉ pour le code produit prototype / High-Fi final BLOQUÉ**
+
+Preuve la plus fraîche couvrant le code produit après déplacement des styles inline vers CSS :
+- run `37231060131` — **SUCCESS**
+- commit `d1397e5e370bb8bc45d25b766239364291132a73`
+- artifact `11314270782`
+- digest `sha256:cedeb19b42f6e866c9823effb1d951701a90297ed619c9870eb3ccdbe4a812cf`
+- `KEYBOARD_REACHABLE 41 / 41`
+- desktop/mobile overflow `0 / 0`
+- publisher contact mobile overflow `0`
+- rights mobile overflow `0`
+- game support request mobile overflow `0`
+- rights notification mobile overflow `0`
+- product flows : PASS
+- captures : **87**.
+
+Le HEAD courant contient ensuite surtout des ajouts QA/docs/contracts ; ne pas prétendre qu'un commit docs-only est une nouvelle preuve visuelle.
