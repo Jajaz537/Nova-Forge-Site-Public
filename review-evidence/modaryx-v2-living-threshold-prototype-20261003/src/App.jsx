@@ -83,14 +83,14 @@ const rightsDemoCases = [
   },
 ];
 
-function Logo() {
-  return <a className="logo" href="#top" aria-label="MODARYX — accueil">MODARY<span>X</span></a>;
+function Logo({ onNavigate }) {
+  return <a className="logo" href="#top" aria-label="MODARYX — accueil" onClick={onNavigate?()=>onNavigate("Découvrir"):undefined}>MODARY<span>X</span></a>;
 }
 
 function Topbar({ active, onNavigate }) {
   const [open, setOpen] = useState(false);
   return <header className="topbar" id="top">
-    <Logo />
+    <Logo onNavigate={onNavigate} />
     <button className="mobile-search" aria-label="Recherche globale" onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button>
     <button className="mobile-menu" aria-label="Ouvrir le menu" aria-expanded={open} onClick={() => setOpen(v => !v)}>{open ? <X /> : <List />}</button>
     <nav className={open ? "global-nav open" : "global-nav"} aria-label="Navigation principale">
@@ -779,5 +779,5 @@ export function App() {
   else if(active==='Droits jeux') screen=<RightsDashboard/>;
   else if(active==='MODARYX IA') screen=<ModaryxAI/>;
   else screen=<GameHub onOpen={openContent}/>;
-  return <div className="app-shell"><a className="skip-link" href="#main-content">Aller au contenu principal</a>{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button></footer></div>;
+  return <div className="app-shell"><a className="skip-link" href="#main-content">Aller au contenu principal</a>{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo onNavigate={navigate}/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button></footer></div>;
 }
