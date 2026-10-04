@@ -248,6 +248,30 @@
       "contract": "qa/modaryx-v2-risk-register-contract.json",
       "checker": "qa/check-v2-risk-register-contract.mjs",
       "source": "docs/MODARYX-V2-RISK-REGISTER-20261003.md"
+    },
+    {
+      "id": "screen-acceptance",
+      "contract": "qa/modaryx-v2-screen-acceptance-contract.json",
+      "checker": "qa/check-v2-screen-acceptance-contract.mjs",
+      "source": "docs/MODARYX-V2-SCREEN-ACCEPTANCE-CRITERIA-20261003.md"
+    },
+    {
+      "id": "product-architecture",
+      "contract": "qa/modaryx-v2-product-architecture-contract.json",
+      "checker": "qa/check-v2-product-architecture-contract.mjs",
+      "source": "docs/MODARYX-V2-PRODUCT-ARCHITECTURE-20261003.md"
+    },
+    {
+      "id": "content-taxonomy",
+      "contract": "qa/modaryx-v2-content-taxonomy-contract.json",
+      "checker": "qa/check-v2-content-taxonomy-contract.mjs",
+      "source": "docs/MODARYX-V2-CONTENT-TAXONOMY-20261003.md"
+    },
+    {
+      "id": "v1-v2-mapping",
+      "contract": "qa/modaryx-v2-v1-v2-mapping-contract.json",
+      "checker": "qa/check-v2-v1-v2-mapping-contract.mjs",
+      "source": "docs/MODARYX-V2-V1-V2-MAPPING-MATRIX-20261003.md"
     }
   ],
   "invariants": [
