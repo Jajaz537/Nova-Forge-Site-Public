@@ -269,6 +269,7 @@ Preuve cible la plus récente :
 - Rights Dashboard admin fictif : autorisation limitée / attente / no-response / outbound indisponible ;
 - demande membre de support d’un jeu : brouillon local, validation, triage explicite, aucun Rights Case réel ;
 - triage admin fictif d’une demande membre : ACCEPTED_SAFE_BASELINE distinct de tout accord éditeur ;
+- interprétation automatique fictive de réponse éditeur : SAFE_AUTOMATION + LEGAL_REVIEW_REQUIRED fallback.
 - états nominal / empty / unavailable / anonymous / local-only / offline-stale / validation-error-retry / success sur les surfaces ciblées.
 
 ### Limites internes encore ouvertes
