@@ -408,6 +408,16 @@ try{
   console.log("FLOW_ASSERT publisher contact verified before request ready");
 
 
+
+  await clickAria("MODARYX IA");
+  await waitText("Une IA native du produit, pas un chatbot greffé.");
+  await waitText("MODARYX IA n’est pas active dans cette démo.");
+  await waitText("READ → PLAN → EXECUTE_SAFE → EXECUTE_SENSITIVE → BLOCKED.");
+  await waitText("preuve insuffisante");
+  const aiSendDisabled=await evaluate(`(() => {const b=document.querySelector('.ai-input-shell button');const i=document.querySelector('.ai-input-shell input');return !!b&&!!i&&b.disabled&&i.disabled;})()`);
+  if(!aiSendDisabled) throw new Error("MODARYX AI input must stay disabled without AI backend");
+  console.log("FLOW_ASSERT modaryx ai preview no fake model or action");
+
   await clickText(".global-nav button","Mods & contenus");
   await waitText("Catalogue global");
   await fill(".catalog-search input","sommets");
@@ -459,6 +469,12 @@ try{
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav .mobile-nav-utility","Compte");
   await waitText("Vous explorez MODARYX en mode invité.");
+
+
+  await clickAria("Ouvrir le menu");
+  await clickText(".global-nav .mobile-nav-utility","MODARYX IA");
+  await waitText("Une IA native du produit, pas un chatbot greffé.");
+  await waitText("Aucune réponse générée, aucun historique IA et aucune action automatique ne sont simulés.");
 
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav .mobile-nav-utility","Bibliothèque");
