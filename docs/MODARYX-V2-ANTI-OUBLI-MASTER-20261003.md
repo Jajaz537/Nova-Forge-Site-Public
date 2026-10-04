@@ -1704,3 +1704,24 @@ Preuve :
 - notification droits rattachée à un événement réel ;
 - aucune clause confidentielle ou contact privé exposé ;
 - `LEGAL_REVIEW_REQUIRED` n'accorde aucun scope.
+
+
+## 62. Onboarding / compte / créateur — contrat machine — 4 octobre 2026
+
+**TERMINÉ pour le contrat / services réels PREUVE MANQUANTE**
+
+Preuve :
+- run `37232342904` — **SUCCESS**
+- `PASS_V2_ONBOARDING_ACCOUNT_CREATOR_CONTRACT`.
+
+À ne pas perdre :
+- guest-first ;
+- onboarding optionnel et skippable ;
+- compte ≠ profil public ≠ capacité créateur ;
+- données privées par défaut ;
+- partage explicite ;
+- rôles team côté serveur ;
+- états session explicites ;
+- passkey configurée seulement après preuve réelle ;
+- pas de marketing par défaut ;
+- erreurs de sauvegarde sans perte silencieuse.
