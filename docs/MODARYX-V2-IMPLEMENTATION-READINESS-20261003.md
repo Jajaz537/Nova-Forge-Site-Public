@@ -495,3 +495,38 @@ Production toujours NON IMPLÉMENTÉE :
 - revalidation.
 
 Le root/frontend production reste BLOQUÉ selon le gate canonique.
+
+
+## 28. IP / takedown — réconciliation — 4 octobre 2026
+
+Contrat :
+- `docs/MODARYX-V2-IP-TAKEDOWN-WORKFLOW-20261004.md`
+- run `37204583345` — **SUCCESS**
+- 12 états ;
+- 12 invariants ;
+- 6 effets de restriction ;
+- `PASS_V2_IP_TAKEDOWN_CONTRACT`.
+
+Prototype :
+- run `37204720263` — **SUCCESS**
+- commit `eefd01c8ec1d35f7bd9212e40f65d2ac390479cd`
+- artifact `11304695959`
+- digest `sha256:126e3758ca6a4f1c19e85f6eb8be0c9d0b456705feb43ce1e8777ccbf77004f0`
+- 75 captures ;
+- `FLOW_ASSERT ip takedown containment preserves evidence fallback legal escalation`.
+
+Rights admin map ajoute :
+- IpTakedownPreview ;
+- IpCase ;
+- RECEIVED / CONTENT_LOCATED / TEMP_RESTRICTED / LEGAL_REVIEW_REQUIRED ;
+- fallback original MODARYX.
+
+Production toujours NON IMPLÉMENTÉE :
+- case backend ;
+- public IP form ;
+- mailbox ;
+- cache invalidation ;
+- anti-reupload ;
+- legal review workflow.
+
+Le root/frontend production reste BLOQUÉ selon le gate canonique.
