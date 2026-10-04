@@ -763,3 +763,52 @@ Décision :
 - ne pas créer de nouvelles fonctionnalités décoratives simplement pour occuper le temps ;
 - continuer uniquement la veille benchmark, la maintenance anti-oubli et les micro-proofs nécessaires tant que les gates externes restent fermés ;
 - aucun PASS VF/High-Fi final avant fermeture appropriée.
+
+
+## 33. Game Atmosphere Layer + garde-fous IP — 4 octobre 2026
+
+**TERMINÉ — décision produit + politique préventive tracées**
+
+Document de référence :
+`docs/MODARYX-V2-GAME-ATMOSPHERE-IP-POLICY-20261004.md`
+
+Décision retenue :
+- MODARYX conserve son design system, sa navigation, sa typographie et ses composants ;
+- chaque Game Hub peut recevoir une **Game Atmosphere Layer** originale adaptée au jeu ;
+- l'ambiance peut changer, l'identité produit MODARYX reste dominante ;
+- concept cible : **Game Atmosphere Engine**.
+
+Garde-fous obligatoires :
+- noms de jeux utilisés de façon référentielle/descriptive ;
+- aucun logo officiel, key art, screenshot promotionnel, personnage, OST, police officielle ou UI copiée par défaut ;
+- assets officiels uniquement avec licence/permission/preuve claire ;
+- `Unknown = ne pas utiliser` ;
+- ne jamais confondre contenu public sur Internet et contenu libre de droits ;
+- média créateur/user-supplied séparé de l'ambiance officielle MODARYX ;
+- fallback MODARYX original obligatoire ;
+- support futur d'un Game Rights Registry ;
+- review éditeur par éditeur ;
+- takedown/IP workflow avant lancement public.
+
+Accessibilité/performance :
+- thème MODARYX uniforme disponible ;
+- ambiance désactivable/réductible ;
+- reduced motion ;
+- aucun état essentiel porté par le décor ;
+- aucun asset propriétaire auto-chargé depuis un GameId.
+
+Avant VF, chaque ambiance doit être classée :
+- Original MODARYX ;
+- Licensed ;
+- Restricted ;
+- Unknown = BLOQUÉ ;
+- Forbidden = exclu.
+
+Toujours PREUVE MANQUANTE / à implémenter :
+- Game Rights Registry réel ;
+- checks CI assets/licences ;
+- workflow takedown opérationnel ;
+- revue juridique externe pour usages commerciaux sensibles ;
+- Game Atmosphere Engine production.
+
+**Règle permanente : mieux vaut une ambiance MODARYX originale légèrement moins littérale qu'une imitation risquée de l'identité d'un éditeur.**
