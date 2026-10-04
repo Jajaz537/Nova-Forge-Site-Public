@@ -739,3 +739,36 @@ Preuves :
 - Living Threshold run `37228199151` — **SUCCESS**, 85 captures, keyboard 40/40.
 
 La structure d’aide est prête à migrer lorsque le root production sera autorisé, mais son contenu final devra être dérivé du produit réellement livré.
+
+
+## 34. Modération / appels — réconciliation — 4 octobre 2026
+
+La ligne historique Community / moderation est supersédée pour le prototype actuel :
+
+- contrat produit : **TERMINÉ**
+- contrat machine + CI : **TERMINÉ**
+- surface admin desktop/mobile : **MATÉRIALISÉE**
+- Support vs Signalement : **MATÉRIALISÉ / séparé**
+- états RECEIVED / UNDER_REVIEW / APPEALED : **MATÉRIALISÉS — fictifs**
+- décision précédente conservée pendant appel : **MATÉRIALISÉ**
+- actions destructives sans serveur : **DÉSACTIVÉES**
+- structure/touch/forced-colors : **PROUVÉS navigateur ciblé**
+- keyboard matrix : **18 surfaces / SUCCESS**
+- text-spacing / 320 / tablet : **SUCCESS**
+- surface map : **27 surfaces**
+- backend modération : **NON IMPLÉMENTÉ**
+- role authority serveur : **NON IMPLÉMENTÉ**
+- quarantine/distribution lock réel : **NON IMPLÉMENTÉ**
+- audit store : **NON IMPLÉMENTÉ**
+- appels réels : **NON IMPLÉMENTÉS**
+- validation humaine / AT : **PREUVE MANQUANTE**
+- production : **BLOQUÉE par le gate**
+
+Preuves :
+- contrat run `37230196601` — SUCCESS ;
+- Living Threshold `37230093681` — SUCCESS, 87 captures ;
+- accessibility matrix `37230250723` — SUCCESS après correction CDP ciblée ;
+- keyboard matrix étendue `37230361038` — SUCCESS ;
+- surface map `37230139266` — SUCCESS, 27 surfaces.
+
+Aucune action de modération réelle ne doit être déduite de cette surface de démonstration.
