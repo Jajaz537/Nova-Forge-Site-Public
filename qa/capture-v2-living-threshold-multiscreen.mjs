@@ -449,7 +449,7 @@ try {
   await clickByText(".publisher-inbound-actions .quiet", "Corréler au Rights Case");
   await clickByText(".publisher-inbound-actions .quiet", "Vérifier la provenance");
   await clickByText(".publisher-inbound-actions .quiet", "Préparer l’interprétation");
-  await evaluate("document.querySelector('.publisher-inbound-demo')?.scrollIntoView({block:'center'})");
+  await evaluate("document.querySelector('.publisher-inbound-result')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("mobile-rights-inbound-ready.png", 390, 844, "READY_FOR_INTERPRETATION ≠ autorisation"));
   await clickByText(".publisher-inbound-actions .quiet", "Réinitialiser l’inbound");
