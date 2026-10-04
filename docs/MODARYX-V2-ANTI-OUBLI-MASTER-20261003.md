@@ -920,7 +920,10 @@ Règles permanentes :
 - absence de réponse = aucun droit supplémentaire ;
 - seuls les scopes explicitement accordés peuvent être activés ;
 - expiration, révocation ou refus rebloquent les usages concernés ;
-- les droits web et les capacités MODARYX Forge restent séparés.
+- les droits web et les capacités MODARYX Forge restent séparés ;
+- une réponse éditeur doit être transformée en scopes structurés et notifiée à l’administration ;
+- l’administrateur ne doit pas avoir à interpréter seul une réponse juridique ambiguë ;
+- ambiguïté ou clause inhabituelle = `LEGAL_REVIEW_REQUIRED`, usages concernés bloqués.
 
 Statut actuel :
 - contrat produit : **TERMINÉ** ;
