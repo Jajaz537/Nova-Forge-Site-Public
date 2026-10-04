@@ -1340,3 +1340,73 @@ Jusqu'à cet événement :
 - continuer seulement les micro-proofs/maintenance anti-oubli nécessaires.
 
 **État : EN COURS vers VF / BLOQUÉ pour root production par validations externes et humaines restantes.**
+
+
+## Benchmark écosystèmes + matérialisation Living Threshold — 4 octobre 2026
+
+**TERMINÉ pour la recherche et les états prototype ciblés / aucun PASS production**
+
+Benchmark actuel :
+`docs/MODARYX-V2-CURRENT-MOD-ECOSYSTEM-BENCHMARK-20261004.md`
+
+Écosystèmes analysés dans la passe actuelle :
+- Nexus Mods / Vortex ;
+- CurseForge ;
+- Modrinth ;
+- Thunderstore / r2modman ;
+- Steam Workshop ;
+- Bethesda Creations ;
+- mod.io ;
+- GameBanana ;
+- Mod DB ;
+- Prism Launcher ;
+- Wabbajack ;
+- signaux Reddit uniquement comme signaux UX.
+
+Décisions produit retenues et désormais matérialisées au niveau prototype quand possible :
+- delta avant mutation ;
+- `Ajouter / Remplacer / Annuler` ;
+- origine des dépendances ;
+- version `Auto sûr / Proposer / Épinglé` ;
+- mise à jour vers copie/branche avant promotion ;
+- Historique Library privé par défaut, sans fausse entrée ;
+- maturité projet `Concept / WiP / Released / Archived` séparée du canal de release ;
+- crédits/auteurs/studio/assets tiers structurés ;
+- Collection toujours distincte de son éventuelle application locale.
+
+Micro-proof frais :
+- workflow : `MODARYX V2 Living Threshold Visual Proof`
+- run : `37163931034` — **SUCCESS**
+- commit capturé : `226b41b40f49166c936cf7968391e0d35105b09e`
+- artifact : `11288409054`
+- artifact digest : `sha256:0f3c73af5ab4936fc0e10cee121612cef13363b4701a313df70041164f8df60f`
+- `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `KEYBOARD_REACHABLE 32 / 32`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 47`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Couverture supplémentaire archivée :
+- Library > Historique desktop/mobile ;
+- Profile delta desktop/mobile ;
+- Modpack delta desktop/mobile ;
+- Creator Project / crédits desktop/mobile.
+
+Règles maintenues :
+- aucune entrée d'historique fictive n'est présentée comme activité réelle ;
+- aucune mutation réelle n'est exécutée par les previews de delta ;
+- le bouton d'installation Modpack reste désactivé sans runtime MODARYX Forge ;
+- les providers/sources réels ne sont pas simulés ;
+- aucun PASS High-Fi/VF n'est déduit de ces preuves.
+
+Blockers externes inchangés :
+- validation humaine multi-écrans supplémentaire ;
+- mobile humain réel ;
+- référence visuelle approuvée archivable + comparaison normalisée ;
+- vrai screen reader ;
+- Safari/appareils physiques ;
+- backend/données/providers réels ;
+- root/frontend V2 production.
