@@ -672,3 +672,17 @@ Toujours hors preuve :
 - screen reader réel.
 
 Cela augmente la readiness mais ne reclassifie pas le gate de production.
+
+
+## 25. États asynchrones — réconciliation — 4 octobre 2026
+
+Référence :
+`docs/MODARYX-V2-ASYNC-LOADING-STATE-CONTRACT-20261004.md`
+
+Le gap de conception loading/skeleton est fermé. Le prototype local ne doit pas simuler une attente réseau inexistante.
+
+État :
+- contrat UX async : **TERMINÉ** ;
+- skeletons prototype artificiels : **NON REQUIS** ;
+- backend/adapters async réels : **NON IMPLÉMENTÉS** ;
+- loading/error/stale production : **PREUVE MANQUANTE** jusqu’aux frontières réelles.
