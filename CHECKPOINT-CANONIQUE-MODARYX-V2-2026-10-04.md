@@ -89,13 +89,13 @@ Run :
 `37196769573` — **SUCCESS**
 
 Commit capturé :
-`103aab8b82684e65020b4c9575df0f6819a69b7f`
+`d6716baabdb573012ef722d7f5fa014142f4d84d`
 
 Artifact :
-`11301612556`
+`11302751771`
 
 Digest :
-`sha256:c567c6e27c5e4648fe3267becb48736b5861bb22c2ae85ffa31009e3626695d3`
+`sha256:9af7ba96ea9c8aed64f11cf9f2b15ae74cc9fe8e89798aa4f270e8715a58cd59`
 
 Marqueurs :
 - `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
@@ -105,7 +105,7 @@ Marqueurs :
 - `MOBILE_OVERFLOW 0`
 - `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
 - `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
-- `MULTISCREEN_CAPTURE_COUNT 63`
+- `MULTISCREEN_CAPTURE_COUNT 65`
 - `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
 
 Cette preuve n’est pas :
@@ -290,7 +290,7 @@ Documents :
 - `docs/MODARYX-V2-HUMAN-MULTISCREEN-REVIEW-PACK-20261004.md`
 - `docs/MODARYX-V2-ASSISTIVE-DEVICE-VALIDATION-PROTOCOL-20261004.md`
 
-Pack humain actuel préparé autour de la preuve **63 captures**.
+Pack humain actuel préparé autour de la preuve **65 captures**.
 
 Toujours PREUVE MANQUANTE :
 - validation humaine multi-écrans supplémentaire ;
@@ -452,7 +452,7 @@ Preuve :
 - digest `sha256:c567c6e27c5e4648fe3267becb48736b5861bb22c2ae85ffa31009e3626695d3`
 - `GAME_SUPPORT_REQUEST_MOBILE_OVERFLOW 0`
 - `FLOW_ASSERT game support request local-only triage`
-- `MULTISCREEN_CAPTURE_COUNT 63`
+- `MULTISCREEN_CAPTURE_COUNT 65`
 
 Captures :
 - `desktop-game-support-request.png`
@@ -565,3 +565,39 @@ Toujours non implémenté :
 - vérification de provenance réelle ;
 - notification réelle ;
 - moteur de politique de licence réel.
+
+
+## 23. Triage administrateur des demandes de support — preuve prototype
+
+**TERMINÉ pour le prototype fictif / backend réel PREUVE MANQUANTE**
+
+Matérialisé :
+- demande membre fictive en état `TRIAGE` ;
+- contrôles existence / doublon / pertinence modding / restrictions-risque légal ;
+- décision locale `ACCEPTED_SAFE_BASELINE` ;
+- refus produit local possible ;
+- Rights Case uniquement préparé en démonstration ;
+- aucun contact éditeur ;
+- aucun outbound ;
+- aucun asset officiel débloqué.
+
+Preuve Living Threshold :
+- run `37199552009` — **SUCCESS**
+- commit capturé `d6716baabdb573012ef722d7f5fa014142f4d84d`
+- artifact `11302751771`
+- digest `sha256:9af7ba96ea9c8aed64f11cf9f2b15ae74cc9fe8e89798aa4f270e8715a58cd59`
+- `FLOW_ASSERT member support triage accepted safe baseline only`
+- `MULTISCREEN_CAPTURE_COUNT 65`
+
+Surface map :
+- run `37199751859` — **SUCCESS**
+- `SURFACE_MAP_COUNT 23`
+- `UNRESOLVED_RUNTIME_COUNT 6`
+- `PASS_V2_PRODUCTION_SURFACE_MAP`
+
+Toujours non implémenté :
+- queue serveur ;
+- triage réel ;
+- décision admin authentifiée ;
+- Rights Case production ;
+- outbound.
