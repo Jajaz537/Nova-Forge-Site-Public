@@ -882,3 +882,27 @@ Marqueurs :
 - `PASS_V2_TABLET_REFLOW`.
 
 Cette preuve valide la recomposition browser ciblée, pas le tactile ni un iPad réel.
+
+
+## Responsive reflow matrix — 4 octobre 2026
+
+**TERMINÉ pour émulation Chrome ciblée / appareils physiques PREUVE MANQUANTE**
+
+Narrow 320 :
+- run `37217511653` — **SUCCESS**
+- 12 surfaces
+- `PASS_V2_NARROW_REFLOW_320`.
+
+Matrice responsive :
+- run `37218193186` — **SUCCESS**
+- viewports : 360×900, 430×932, 768×1024, 1024×900, 1280×900, 1920×1080 ;
+- 12 surfaces par largeur ;
+- tous les marqueurs `PASS_V2_REFLOW_VIEWPORT_<width>` présents.
+
+Les incidents narrow ont été traités par correction ciblée, pas par full replay aveugle.
+
+Limites :
+- aucune preuve appareil physique ;
+- aucune preuve Safari/iPadOS ;
+- aucune validation tactile humaine ;
+- aucun screen reader réel.
