@@ -504,3 +504,15 @@ Pendant l’attente :
 - aucun asset protégé non autorisé ;
 - aucune fausse affiliation ;
 - aucune absence de réponse transformée en accord.
+
+
+### Contrat Game Rights Registry — 4 octobre 2026
+
+Le futur Game Rights Registry est désormais spécifié séparément :
+`docs/MODARYX-V2-GAME-RIGHTS-REGISTRY-CONTRACT-20261004.md`
+
+Preuve machine :
+- run `37205429699` — **SUCCESS**
+- `PASS_V2_GAME_RIGHTS_REGISTRY_CONTRACT`
+
+Cette preuve verrouille la structure, les scopes, les statuts et les activation guards. Elle ne signifie pas que la database/API/engine production sont implémentés.
