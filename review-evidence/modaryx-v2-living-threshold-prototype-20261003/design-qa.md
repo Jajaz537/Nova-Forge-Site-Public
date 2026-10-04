@@ -717,3 +717,44 @@ Surface visible :
 - aucun compteur ou événement distant inventé.
 
 Aucun event bus, email, push, unread count ou Rights Case deep-link réel n’est prouvé.
+
+
+## Publisher rights lifecycle — expiry/revocation proof — 4 octobre 2026
+
+**TERMINÉ — prototype fictif / scheduler et licences réelles PREUVE MANQUANTE**
+
+Living Threshold :
+- run `37204012017` — **SUCCESS**
+- commit capturé `7dc36e1231872d1fdd5a7af17bed6f5ad0b717da`
+- artifact `11303812534`
+- digest `sha256:9718d2ff47e24b3ba50707bcb340adfe5fbff9bc24f7b73c0a95a93b1ff8cf00`
+- `FLOW_ASSERT rights lifecycle expired revoked scopes reblocked`
+- `MULTISCREEN_CAPTURE_COUNT 73`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Contrat :
+- workflow `MODARYX V2 Rights Lifecycle Contract Proof`
+- run `37204099457` — **SUCCESS**
+- `RIGHTS_LIFECYCLE_STATE_COUNT 4`
+- `RIGHTS_LIFECYCLE_INVARIANT_COUNT 9`
+- `RIGHTS_LIFECYCLE_REACTIVATION_EVIDENCE_COUNT 6`
+- `PASS_V2_RIGHTS_LIFECYCLE_CONTRACT`
+
+États matérialisés :
+- ACTIVE_WITH_LIMITS ;
+- EXPIRING_SOON ;
+- EXPIRED ;
+- REVOKED.
+
+Règles exercées :
+- expiration/révocation → usages dépendants rebloqués ;
+- fallback baseline originale MODARYX ;
+- MODARYX Forge reste un droit séparé ;
+- aucune réactivation silencieuse ;
+- nouvelle preuve requise.
+
+Captures nouvelles :
+- `desktop-rights-lifecycle-expired.png`
+- `mobile-rights-lifecycle-expired.png`
+
+Aucun scheduler, monitor d’expiration, inbound de révocation ou lock de production réel n’est prouvé.
