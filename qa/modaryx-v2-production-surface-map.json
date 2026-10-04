@@ -460,7 +460,8 @@
         "RightsDashboard",
         "RightsCaseList",
         "RightsScopeMatrix",
-        "RightsStateBadge"
+        "RightsStateBadge",
+        "GameSupportTriage"
       ],
       "domains": [
         "RightsCase",
@@ -471,7 +472,10 @@
         "approved-with-limits-demo",
         "awaiting-response-demo",
         "no-response-demo",
-        "outbound-unavailable"
+        "outbound-unavailable",
+        "support-triage-demo",
+        "support-accepted-safe-baseline-demo",
+        "support-declined-product-demo"
       ],
       "mobile": "DEDICATED_RESPONSIVE"
     }
