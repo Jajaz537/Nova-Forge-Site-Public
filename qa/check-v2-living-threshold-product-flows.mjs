@@ -179,7 +179,13 @@ try{
   await waitText("Aether Core");
   await clickText(".detail-tabs button","Fichiers");
   await waitText("Fichiers de cette version");
+  await waitText("Source ≠ auteur");
+  await waitText("Aucun provider réel connecté");
   await waitText("Aucun scan réel associé");
+  await clickText(".detail-tabs button","Plan avancé");
+  await waitText("Plan avancé — démonstration");
+  await waitText("Receipt futur");
+  await waitText("0 mutation réelle");
   await clickText(".detail-tabs button","Support");
   await waitText("Support indisponible dans cette démo");
   await clickText(".detail-tabs button","Signalement");
@@ -220,9 +226,13 @@ try{
   await waitText("Configuration personnelle de démonstration pour Aetherlands 1.4.2");
   await waitText("Choisi par vous");
   await waitText("Épinglé");
-  await clickText(".profile-decision .quiet","Prévisualiser une mise à jour");
+  await clickText(".profile-preview-actions .quiet","Prévisualiser une mise à jour");
   await waitText("Copie avant promotion");
   await waitText("1.4.2 → 1.5.0-démo");
+  await clickText(".profile-preview-actions .quiet","Prévisualiser import / export");
+  await waitText("Rapport d’import / export — démonstration");
+  await waitText("0 autorisée");
+  await waitText("0 fichier importé");
   await clickText(".back","← Retour à la Bibliothèque");
   await waitText("Retrouvez favoris, suivis, collections, profils et historique sans les confondre.");
 
@@ -327,6 +337,8 @@ try{
   await clickText(".profile-library article:first-child .quiet","Ouvrir");
   await waitText("Manager non connecté");
   await waitText("Épinglé");
+  await clickText(".profile-preview-actions .quiet","Prévisualiser import / export");
+  await waitText("Rapport d’import / export — démonstration");
   await clickText(".back","← Retour à la Bibliothèque");
 
   await clickAria("Ouvrir le menu");
