@@ -68,32 +68,14 @@ async function openTabletMenu(){
   await sleep(80);
 }
 async function navigatePrimary(text){
-  const direct=await evaluate(`(() => {
-    const b=[...document.querySelectorAll('.global-nav button')].find(el=>el.textContent.trim()===${JSON.stringify(text)});
-    if(!b) return false;
-    const s=getComputedStyle(b);
-    if(s.display==='none'||b.getBoundingClientRect().width===0) return false;
-    b.click(); return true;
-  })()`);
-  if(!direct){
-    await openTabletMenu();
-    await clickText(".global-nav button",text);
-  } else {
-    await sleep(100);
-  }
+  await openTabletMenu();
+  await clickText(".global-nav button",text);
+  await sleep(180);
 }
 async function navigateUtility(text){
-  const direct=await evaluate(`(() => {
-    const desktop=[...document.querySelectorAll('.top-actions button')].find(el=>el.getAttribute('aria-label')===${JSON.stringify(text)});
-    if(desktop&&getComputedStyle(desktop).display!=='none'&&desktop.getBoundingClientRect().width>0){desktop.click();return true;}
-    return false;
-  })()`);
-  if(!direct){
-    await openTabletMenu();
-    await clickText(".global-nav .mobile-nav-utility",text);
-  } else {
-    await sleep(100);
-  }
+  await openTabletMenu();
+  await clickText(".global-nav .mobile-nav-utility",text);
+  await sleep(180);
 }
 async function assertNoOverflow(label){
   const result=await evaluate(`(() => {
