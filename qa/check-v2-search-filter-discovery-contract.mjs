@@ -1,0 +1,12 @@
+import fs from "node:fs";
+const d=JSON.parse(fs.readFileSync("qa/modaryx-v2-search-filter-discovery-contract.json","utf8"));
+if(d.schemaVersion!==1) throw new Error("unexpected schemaVersion");
+const logicalRules=new Set(d["logicalRules"]||[]);
+for(const x of ["OR_WITHIN_FACET","AND_BETWEEN_FACETS"]) if(!logicalRules.has(x)) throw new Error("missing logicalRules "+x);
+const globalResultTypes=new Set(d["globalResultTypes"]||[]);
+for(const x of ["games","content","creators","teams","collections","modpacks"]) if(!globalResultTypes.has(x)) throw new Error("missing globalResultTypes "+x);
+const invariants=new Set(d["invariants"]||[]);
+for(const x of ["ACTIVE_FILTERS_REMAIN_VISIBLE_WHEN_PANEL_CLOSED","NO_RESULTS_NEVER_SILENTLY_SUBSTITUTES_NEARBY_VERSION","CONTEXTUAL_SEARCH_NEVER_SILENTLY_GOES_GLOBAL","URL_FILTERS_NEVER_EXPOSE_PRIVATE_LOCAL_DATA"]) if(!invariants.has(x)) throw new Error("missing invariants "+x);
+for(const [k,v] of Object.entries(d.productionStatus||{})) if(!["NOT_IMPLEMENTED","NOT_PROVEN","NOT_MEASURED","NOT_DEPLOYED","NOT_EXECUTED"].includes(v)) throw new Error("production status drift "+k+"="+v);
+console.log("SEARCH_FILTER_DISCOVERY_INVARIANT_COUNT",(d.invariants||[]).length);
+console.log("PASS_V2_SEARCH_FILTER_DISCOVERY_CONTRACT");
