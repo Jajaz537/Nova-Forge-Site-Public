@@ -522,6 +522,7 @@ function RightsDashboard() {
   const [triageDecision,setTriageDecision]=useState("TRIAGE");
   const [contactState,setContactState]=useState("CONTACT_CANDIDATE");
   const [requestState,setRequestState]=useState("REQUEST_NOT_READY");
+  const [outboundState,setOutboundState]=useState("NOT_QUEUED");
   const [lifecycleState,setLifecycleState]=useState("ACTIVE_WITH_LIMITS");
   const [ipCaseState,setIpCaseState]=useState("RECEIVED");
   const [ipAssetLocated,setIpAssetLocated]=useState(false);
@@ -561,10 +562,30 @@ function RightsDashboard() {
         <article><span>Scopes préparés</span><strong>Logo · key art · listing · Forge séparé</strong><small>Chaque scope reste indépendant et doit être explicitement demandé.</small></article>
       </div>
       <div className="publisher-contact-actions">
-        <button className="quiet" onClick={()=>{setContactState("CONTACT_VERIFIED");setRequestState("REQUEST_NOT_READY");}}>Vérifier le canal de démonstration</button>
-        <button className="primary" disabled={contactState!=="CONTACT_VERIFIED"} onClick={()=>setRequestState("REQUEST_READY")}>Préparer la demande structurée</button>
+        <button className="quiet" onClick={()=>{setContactState("CONTACT_VERIFIED");setRequestState("REQUEST_NOT_READY");setOutboundState("NOT_QUEUED");}}>Vérifier le canal de démonstration</button>
+        <button className="primary" disabled={contactState!=="CONTACT_VERIFIED"} onClick={()=>{setRequestState("REQUEST_READY");setOutboundState("NOT_QUEUED");}}>Préparer la demande structurée</button>
       </div>
       <div className="publisher-request-state" role="status"><strong>{requestState}</strong><span>{requestState==="REQUEST_READY"?"Demande fictive prête : scopes explicites, canal vérifié, aucun envoi réel.":"Vérification du contact requise avant préparation."}</span><small>Outbound réel indisponible · aucune adresse réelle utilisée.</small></div>
+      <section className="publisher-outbound-demo" aria-label="Transport outbound éditeur de démonstration">
+        <div className="publisher-outbound-head"><div><span className="kicker">Transport outbound · démonstration</span><h3>Automatiser l’envoi sans confondre livraison et autorisation</h3><p>Cette simulation locale teste la queue, l’idempotence et les états de transport. Aucun email, formulaire ou API externe n’est appelé.</p></div><span className={`rights-state ${outboundState==="DELIVERED"?"approved":outboundState==="BOUNCED"?"neutral":"pending"}`}>{outboundState}</span></div>
+        <div className="publisher-outbound-grid">
+          <article><span>Logical request id</span><strong>PUB-DEMO-MERIDIAN-V1</strong><small>Conservé lors d’un retry technique.</small></article>
+          <article><span>Idempotence</span><strong>Une seule demande logique</strong><small>Un replay ne doit jamais créer un double envoi.</small></article>
+          <article><span>Effet sur les droits</span><strong>Aucun</strong><small>DELIVERED ne signifie jamais APPROVED.</small></article>
+        </div>
+        <div className="publisher-outbound-actions">
+          <button className="quiet" disabled={requestState!=="REQUEST_READY"||contactState!=="CONTACT_VERIFIED"||outboundState!=="NOT_QUEUED"} onClick={()=>setOutboundState("OUTBOUND_QUEUED")}>Simuler mise en file locale</button>
+          <button className="quiet" disabled={outboundState!=="OUTBOUND_QUEUED"} onClick={()=>setOutboundState("PROVIDER_ACCEPTED")}>Simuler provider accepted</button>
+          <button className="quiet" disabled={outboundState!=="PROVIDER_ACCEPTED"} onClick={()=>setOutboundState("DELIVERED")}>Simuler livraison</button>
+          <button className="quiet" disabled={!["OUTBOUND_QUEUED","PROVIDER_ACCEPTED"].includes(outboundState)} onClick={()=>setOutboundState("BOUNCED")}>Simuler bounce</button>
+          <button className="quiet" disabled={outboundState==="NOT_QUEUED"} onClick={()=>setOutboundState("NOT_QUEUED")}>Réinitialiser le transport</button>
+        </div>
+        <div className={`publisher-outbound-result ${outboundState.toLowerCase()}`} role="status">
+          <strong>{outboundState==="DELIVERED"?"DELIVERED ≠ autorisation éditeur":outboundState==="BOUNCED"?"Bounce : arrêt sûr, aucun contact deviné":outboundState==="PROVIDER_ACCEPTED"?"Provider accepté — droits inchangés":outboundState==="OUTBOUND_QUEUED"?"Queue locale simulée — aucun envoi réel":"Transport non démarré"}</strong>
+          <span>{outboundState==="DELIVERED"?"La livraison du message n’accorde aucun scope. Une réponse éditeur explicite reste nécessaire.":outboundState==="BOUNCED"?"Le scénario s’arrête sans chercher ni fabriquer une autre adresse.":outboundState==="PROVIDER_ACCEPTED"?"Le provider fictif a accepté le transport, pas la demande de droits.":outboundState==="OUTBOUND_QUEUED"?"La demande logique est seulement mise en file dans la démonstration.":"REQUEST_READY doit être atteint avant toute mise en file."}</span>
+          <small>Prototype local uniquement · queue/provider/webhook réels NON IMPLÉMENTÉS.</small>
+        </div>
+      </section>
     </section>}
     <section className="rights-summary" aria-label="Résumé des dossiers de démonstration">
       <article><span className="kicker">Avec limites</span><strong>1</strong><small>Scopes séparés</small></article>
