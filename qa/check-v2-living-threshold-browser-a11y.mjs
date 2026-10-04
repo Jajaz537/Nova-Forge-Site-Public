@@ -242,6 +242,23 @@ try {
   console.log("GAME_SUPPORT_REQUEST_MOBILE_OVERFLOW",requestOverflow);
   console.log("AX_ASSERT game support request safety surface");
 
+
+
+  await navigate(390,844);
+  const notificationsOpened=await evaluate(`(() => {
+    const menu=document.querySelector('.mobile-menu'); if(!menu) return false; menu.click();
+    const b=[...document.querySelectorAll('.global-nav .mobile-nav-utility')].find(el=>el.textContent.includes('Notifications'));
+    if(!b) return false; b.click(); return true;
+  })()`);
+  if(!notificationsOpened) fail("notifications review entry unavailable");
+  await sleep(160);
+  const rightsNotificationText=await evaluate(`document.body.innerText.includes("Réponse éditeur reçue — Aetherlands") && document.body.innerText.includes("Démonstration · non reçue") && document.body.innerText.includes("LEGAL_REVIEW_REQUIRED")`);
+  if(!rightsNotificationText) fail("publisher rights notification safety copy missing");
+  const rightsNotificationOverflow=await evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth");
+  if(rightsNotificationOverflow>1) fail("publisher rights notification mobile horizontal overflow "+rightsNotificationOverflow);
+  console.log("RIGHTS_NOTIFICATION_MOBILE_OVERFLOW",rightsNotificationOverflow);
+  console.log("AX_ASSERT publisher rights notification preview truthful");
+
   console.log("DESKTOP_OVERFLOW", desktopOverflow);
   console.log("MOBILE_OVERFLOW", mobileOverflow);
   console.log("PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y");
