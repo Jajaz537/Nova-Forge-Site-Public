@@ -1197,3 +1197,36 @@ Limites inchangées :
 - Safari/iPadOS réel : PREUVE MANQUANTE ;
 - vrai screen reader : PREUVE MANQUANTE ;
 - validation tactile humaine : PREUVE MANQUANTE.
+
+
+## 37. Sémantique des états actifs — navigation et onglets
+
+**TERMINÉ pour le prototype / screen reader réel PREUVE MANQUANTE**
+
+Correction :
+- navigation primaire : `aria-current="page"` sur la destination active ;
+- utilitaires desktop/mobile : état courant exposé ;
+- onglets/boutons de vue : `aria-pressed` synchronisé à l’état React ;
+- aucune modification de routing ou de backend.
+
+Micro-proof :
+- workflow `MODARYX V2 Active State Semantics Micro-Proof`
+- run `37219118824` — **SUCCESS**
+- commit capturé `b553336718ef0a00818c20631e9e511cafc4a5f8`
+- `ACTIVE_STATE_PRIMARY_NAV_OK`
+- `ACTIVE_STATE_LOCAL_TABS_OK`
+- `ACTIVE_STATE_VIEW_TOGGLE_OK`
+- `ACTIVE_STATE_ACCOUNT_TABS_OK`
+- `PASS_V2_ACTIVE_STATE_SEMANTICS`
+
+Continuation générale de la correction App :
+- Living Threshold run `37219047594` — **SUCCESS**
+- commit capturé `63f00b5b70485502592a4f3d687b6befd53f197f`
+- artifact `11309073492`
+- digest `sha256:9b07ae5ea4d66dc65a0f72c8efa0788b29a5f5c367301a50530609fb80159144`
+- `KEYBOARD_REACHABLE 37 / 37`
+- desktop/mobile overflow : `0 / 0`
+- `MULTISCREEN_CAPTURE_COUNT 81`
+
+Limite :
+- cette preuve navigateur ne remplace pas NVDA / VoiceOver / TalkBack réels.
