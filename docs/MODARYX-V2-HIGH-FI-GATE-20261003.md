@@ -325,3 +325,27 @@ Nouveau flux matérialisé :
 - aucune adresse réelle utilisée.
 
 Cette preuve améliore la couverture du workflow droits mais ne ferme aucun blocker humain/appareil, ne prouve aucun contact éditeur réel et ne lève pas le gate High-Fi.
+
+
+## 17. Notifications droits éditeurs — preuve prototype — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Preuves ciblées :
+- contrat notification run `37202025942` — **SUCCESS** ;
+- micro-proof rendu run `37202244972` — **SUCCESS** ;
+- Living Threshold continuation run `37202254205` — **SUCCESS** ;
+- commit capturé `ddba1f0bbf90c417600f6fdb800529b7e24248f0` ;
+- artifact `11303272811` ;
+- digest `sha256:f34ee2b0b83e561f6f550ab1e575216a80200dd60d827f9bc64f6d96a7da34a4` ;
+- 71 captures ;
+- `RIGHTS_NOTIFICATION_MOBILE_OVERFLOW 0` ;
+- `FLOW_ASSERT publisher rights notification preview truthful`.
+
+La surface démontre :
+- aucun événement réel inventé ;
+- notification d’autorisation limitée distincte de revue juridique ;
+- `LEGAL_REVIEW_REQUIRED` ne ressemble pas à une approbation ;
+- email/push restent indisponibles sans infrastructure.
+
+Cette preuve ne valide aucune notification production et ne ferme aucun blocker humain/appareil.
