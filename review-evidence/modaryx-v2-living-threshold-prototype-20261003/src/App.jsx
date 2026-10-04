@@ -523,6 +523,7 @@ function RightsDashboard() {
   const [contactState,setContactState]=useState("CONTACT_CANDIDATE");
   const [requestState,setRequestState]=useState("REQUEST_NOT_READY");
   const [outboundState,setOutboundState]=useState("NOT_QUEUED");
+  const [inboundState,setInboundState]=useState("NO_INBOUND");
   const [lifecycleState,setLifecycleState]=useState("ACTIVE_WITH_LIMITS");
   const [ipCaseState,setIpCaseState]=useState("RECEIVED");
   const [ipAssetLocated,setIpAssetLocated]=useState(false);
@@ -562,8 +563,8 @@ function RightsDashboard() {
         <article><span>Scopes préparés</span><strong>Logo · key art · listing · Forge séparé</strong><small>Chaque scope reste indépendant et doit être explicitement demandé.</small></article>
       </div>
       <div className="publisher-contact-actions">
-        <button className="quiet" onClick={()=>{setContactState("CONTACT_VERIFIED");setRequestState("REQUEST_NOT_READY");setOutboundState("NOT_QUEUED");}}>Vérifier le canal de démonstration</button>
-        <button className="primary" disabled={contactState!=="CONTACT_VERIFIED"} onClick={()=>{setRequestState("REQUEST_READY");setOutboundState("NOT_QUEUED");}}>Préparer la demande structurée</button>
+        <button className="quiet" onClick={()=>{setContactState("CONTACT_VERIFIED");setRequestState("REQUEST_NOT_READY");setOutboundState("NOT_QUEUED");setInboundState("NO_INBOUND");}}>Vérifier le canal de démonstration</button>
+        <button className="primary" disabled={contactState!=="CONTACT_VERIFIED"} onClick={()=>{setRequestState("REQUEST_READY");setOutboundState("NOT_QUEUED");setInboundState("NO_INBOUND");}}>Préparer la demande structurée</button>
       </div>
       <div className="publisher-request-state" role="status"><strong>{requestState}</strong><span>{requestState==="REQUEST_READY"?"Demande fictive prête : scopes explicites, canal vérifié, aucun envoi réel.":"Vérification du contact requise avant préparation."}</span><small>Outbound réel indisponible · aucune adresse réelle utilisée.</small></div>
       <section className="publisher-outbound-demo" aria-label="Transport outbound éditeur de démonstration">
@@ -577,13 +578,36 @@ function RightsDashboard() {
           <button className="quiet" disabled={requestState!=="REQUEST_READY"||contactState!=="CONTACT_VERIFIED"||outboundState!=="NOT_QUEUED"} onClick={()=>setOutboundState("OUTBOUND_QUEUED")}>Simuler mise en file locale</button>
           <button className="quiet" disabled={outboundState!=="OUTBOUND_QUEUED"} onClick={()=>setOutboundState("PROVIDER_ACCEPTED")}>Simuler provider accepted</button>
           <button className="quiet" disabled={outboundState!=="PROVIDER_ACCEPTED"} onClick={()=>setOutboundState("DELIVERED")}>Simuler livraison</button>
-          <button className="quiet" disabled={!["OUTBOUND_QUEUED","PROVIDER_ACCEPTED"].includes(outboundState)} onClick={()=>setOutboundState("BOUNCED")}>Simuler bounce</button>
-          <button className="quiet" disabled={outboundState==="NOT_QUEUED"} onClick={()=>setOutboundState("NOT_QUEUED")}>Réinitialiser le transport</button>
+          <button className="quiet" disabled={!["OUTBOUND_QUEUED","PROVIDER_ACCEPTED"].includes(outboundState)} onClick={()=>{setOutboundState("BOUNCED");setInboundState("NO_INBOUND");}}>Simuler bounce</button>
+          <button className="quiet" disabled={outboundState==="NOT_QUEUED"} onClick={()=>{setOutboundState("NOT_QUEUED");setInboundState("NO_INBOUND");}}>Réinitialiser le transport</button>
         </div>
         <div className={`publisher-outbound-result ${outboundState.toLowerCase()}`} role="status">
           <strong>{outboundState==="DELIVERED"?"DELIVERED ≠ autorisation éditeur":outboundState==="BOUNCED"?"Bounce : arrêt sûr, aucun contact deviné":outboundState==="PROVIDER_ACCEPTED"?"Provider accepté — droits inchangés":outboundState==="OUTBOUND_QUEUED"?"Queue locale simulée — aucun envoi réel":"Transport non démarré"}</strong>
           <span>{outboundState==="DELIVERED"?"La livraison du message n’accorde aucun scope. Une réponse éditeur explicite reste nécessaire.":outboundState==="BOUNCED"?"Le scénario s’arrête sans chercher ni fabriquer une autre adresse.":outboundState==="PROVIDER_ACCEPTED"?"Le provider fictif a accepté le transport, pas la demande de droits.":outboundState==="OUTBOUND_QUEUED"?"La demande logique est seulement mise en file dans la démonstration.":"REQUEST_READY doit être atteint avant toute mise en file."}</span>
           <small>Prototype local uniquement · queue/provider/webhook réels NON IMPLÉMENTÉS.</small>
+        </div>
+      </section>
+
+      <section className="publisher-inbound-demo" aria-label="Réception et corrélation éditeur de démonstration">
+        <div className="publisher-inbound-head"><div><span className="kicker">Inbound éditeur · démonstration</span><h3>Recevoir une réponse sans lui accorder de droits par défaut</h3><p>La réception, la corrélation et la provenance sont des étapes distinctes. Aucun message, header ou fichier réel n’est reçu dans cette simulation.</p></div><span className={`rights-state ${["PROVENANCE_VERIFIED","READY_FOR_INTERPRETATION"].includes(inboundState)?"approved":inboundState==="REJECTED_UNTRUSTED"?"neutral":"pending"}`}>{inboundState}</span></div>
+        <div className="publisher-inbound-grid">
+          <article><span>Corrélation</span><strong>{["CORRELATED","PROVENANCE_VERIFIED","READY_FOR_INTERPRETATION"].includes(inboundState)?"PUB-DEMO-MERIDIAN-V1 ↔ Rights Case fictif":"À établir"}</strong><small>Message-ID, In-Reply-To, References et token de thread sont des indices de corrélation.</small></article>
+          <article><span>Provenance</span><strong>{["PROVENANCE_VERIFIED","READY_FOR_INTERPRETATION"].includes(inboundState)?"Signaux techniques cohérents · démo":"Non vérifiée"}</strong><small>SPF/DKIM/DMARC simulés ne prouvent jamais à eux seuls l’autorité juridique.</small></article>
+          <article><span>Pièces jointes</span><strong>Quarantaine obligatoire</strong><small>Hash + scan avant usage. Aucun macro, script ou contenu actif n’est exécuté.</small></article>
+          <article><span>Effet sur les droits</span><strong>Aucun</strong><small>Même une réponse corrélée doit encore passer par le contrat d’interprétation scope par scope.</small></article>
+        </div>
+        <div className="publisher-inbound-actions">
+          <button className="quiet" disabled={outboundState!=="DELIVERED"||inboundState!=="NO_INBOUND"} onClick={()=>setInboundState("INBOUND_RECEIVED")}>Simuler réponse reçue</button>
+          <button className="quiet" disabled={inboundState!=="INBOUND_RECEIVED"} onClick={()=>setInboundState("CORRELATED")}>Corréler au Rights Case</button>
+          <button className="quiet" disabled={inboundState!=="CORRELATED"} onClick={()=>setInboundState("PROVENANCE_VERIFIED")}>Vérifier la provenance</button>
+          <button className="quiet" disabled={inboundState!=="PROVENANCE_VERIFIED"} onClick={()=>setInboundState("READY_FOR_INTERPRETATION")}>Préparer l’interprétation</button>
+          <button className="quiet" disabled={inboundState==="NO_INBOUND"} onClick={()=>setInboundState("REJECTED_UNTRUSTED")}>Simuler provenance non fiable</button>
+          <button className="quiet" disabled={inboundState==="NO_INBOUND"} onClick={()=>setInboundState("NO_INBOUND")}>Réinitialiser l’inbound</button>
+        </div>
+        <div className={`publisher-inbound-result ${inboundState.toLowerCase()}`} role="status">
+          <strong>{inboundState==="READY_FOR_INTERPRETATION"?"READY_FOR_INTERPRETATION ≠ autorisation":inboundState==="PROVENANCE_VERIFIED"?"Provenance technique vérifiée · droits inchangés":inboundState==="CORRELATED"?"Réponse corrélée · provenance encore à vérifier":inboundState==="INBOUND_RECEIVED"?"Réponse fictive reçue · corrélation requise":inboundState==="REJECTED_UNTRUSTED"?"Inbound non fiable : fail closed":"Aucune réponse réelle reçue"}</strong>
+          <span>{inboundState==="READY_FOR_INTERPRETATION"?"Le message fictif peut seulement entrer dans l’étape d’interprétation structurée.":inboundState==="PROVENANCE_VERIFIED"?"Les signaux simulés sont cohérents, mais aucun scope n’est encore accordé.":inboundState==="CORRELATED"?"Le message correspond à la demande logique fictive ; l’identité et l’autorité restent distinctes.":inboundState==="INBOUND_RECEIVED"?"Le contenu brut et les headers seraient conservés avant tout parsing.":inboundState==="REJECTED_UNTRUSTED"?"Aucun droit n’est débloqué et aucune adresse de confiance n’est créée par supposition.":"La démo attend une livraison fictive avant de simuler une réponse."}</span>
+          <small>Prototype local uniquement · mailbox, webhook, parser, scanner et provenance réels NON IMPLÉMENTÉS.</small>
         </div>
       </section>
     </section>}
