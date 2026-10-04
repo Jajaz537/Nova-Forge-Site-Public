@@ -1,0 +1,14 @@
+import fs from "node:fs";
+const d=JSON.parse(fs.readFileSync("qa/modaryx-v2-community-library-nav-contract.json","utf8"));
+if(d.schemaVersion!==1) throw new Error("unexpected schemaVersion");
+const libraryObjects=new Set(d["libraryObjects"]||[]);
+for(const x of ["Favoris","Suivis","Collections","Modpacks","Profils de jeu","Recherches sauvegardées"]) if(!libraryObjects.has(x)) throw new Error("missing libraryObjects "+x);
+const primaryNav=new Set(d["primaryNav"]||[]);
+for(const x of ["Découvrir","Jeux","Mods & contenus","Collections","Créateurs","Communauté","Créer"]) if(!primaryNav.has(x)) throw new Error("missing primaryNav "+x);
+const syncStates=new Set(d["syncStates"]||[]);
+for(const x of ["local-only","sync-pending","synced","conflict","unavailable"]) if(!syncStates.has(x)) throw new Error("missing syncStates "+x);
+const invariants=new Set(d["invariants"]||[]);
+for(const x of ["PERSONAL_LIBRARY_PRIVATE_BY_DEFAULT","NO_MANAGER_CONNECTION_MEANS_NO_LOCAL_INSTALL_STATE_CLAIM","NO_NOTIFICATION_WITHOUT_REAL_EVENT","OFFLINE_NEVER_SIMULATES_REMOTE_SEND"]) if(!invariants.has(x)) throw new Error("missing invariants "+x);
+for(const [k,v] of Object.entries(d.productionStatus||{})) if(!["NOT_IMPLEMENTED","NOT_PROVEN","NOT_MEASURED","NOT_DEPLOYED","NOT_EXECUTED"].includes(v)) throw new Error("production status drift "+k+"="+v);
+console.log("COMMUNITY_LIBRARY_NAV_INVARIANT_COUNT",(d.invariants||[]).length);
+console.log("PASS_V2_COMMUNITY_LIBRARY_NAV_CONTRACT");
