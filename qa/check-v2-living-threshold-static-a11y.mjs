@@ -2,8 +2,10 @@ import { readFileSync } from "node:fs";
 
 const cssPath = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/styles.css";
 const appPath = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx";
+const indexPath = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/index.html";
 const css = readFileSync(cssPath, "utf8");
 const app = readFileSync(appPath, "utf8");
+const indexHtml = readFileSync(indexPath, "utf8");
 
 const fail = (message) => {
   console.error("FAIL_V2_LIVING_THRESHOLD_STATIC_A11Y", message);
@@ -27,6 +29,18 @@ for (const label of ["Mods & contenus", "Mes profils pour ce jeu", "Créer", "Gu
 if (!app.includes("Configurations enregistrées de mods, versions et réglages.")) {
   fail("locked game-profile microcopy missing");
 }
+
+for (const [needle,message] of [
+  ['<html lang="fr">',"prototype document language must be fr"],
+  ['<meta name="robots" content="noindex,nofollow,noarchive" />',"prototype noindex metadata missing"],
+  ['<title>MODARYX V2 — Prototype Living Threshold</title>',"prototype title missing"],
+]) {
+  if (!indexHtml.includes(needle)) fail(message);
+}
+if (indexHtml.includes('<html lang="en">')) fail("English document language regression");
+console.log("DOCUMENT_LANG fr");
+console.log("DOCUMENT_ROBOTS noindex,nofollow,noarchive");
+console.log("DOCUMENT_TITLE MODARYX V2 — Prototype Living Threshold");
 
 const vars = {};
 for (const match of css.matchAll(/(--[\w-]+)\s*:\s*(#[0-9a-fA-F]{6})/g)) vars[match[1]] = match[2];
