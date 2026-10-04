@@ -1729,3 +1729,30 @@ Statut :
 - MODARYX Forge integration : **NON IMPLÉMENTÉ**
 
 La sélection technique devra être faite avec benchmark frais au démarrage du chantier IA.
+
+
+## Workflow support jeu → éditeur — 4 octobre 2026
+
+**DÉCISION PRODUIT RETENUE — contrat défini / moteur production non implémenté**
+
+Référence :
+`docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md`
+
+Flux cible :
+`demande membre → triage → acceptation MODARYX → baseline sûre → Rights Case → contact officiel vérifié → demande structurée → réponse → activation scope par scope`.
+
+Garde-fous :
+- baseline MODARYX originale autorisée pendant l’attente lorsque juridiquement acceptable ;
+- aucune adresse de contact devinée ;
+- aucun double envoi ;
+- refus/no-response ≠ autorisation ;
+- seuls les scopes écrits accordés débloquent un usage ;
+- droits web et MODARYX Forge séparés ;
+- expiration/révocation rebloquent les usages dépendants.
+
+Statut :
+- contrat produit : **TERMINÉ**
+- Game Rights Registry : **NON IMPLÉMENTÉ**
+- moteur automatique : **NON IMPLÉMENTÉ**
+- envoi réel : **NON IMPLÉMENTÉ**
+- validation de licence : **NON IMPLÉMENTÉ**
