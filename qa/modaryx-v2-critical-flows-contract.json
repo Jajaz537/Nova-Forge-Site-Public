@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-CRITICAL-FLOWS-20261003.md",
+  "flows": [
+    "DISCOVERY_TO_INSTALL",
+    "CREATOR_TO_PUBLICATION",
+    "COLLECTION_TO_STABLE_PROFILE"
+  ],
+  "mandatoryStates": [
+    "loading",
+    "skeleton",
+    "empty",
+    "no-results",
+    "error",
+    "retry",
+    "offline",
+    "stale",
+    "unavailable",
+    "unauthorized",
+    "forbidden",
+    "removed",
+    "quarantined",
+    "archived",
+    "incompatible",
+    "unverified",
+    "success"
+  ],
+  "treeTasks": [
+    "plugin-by-game",
+    "compatible-content-by-version",
+    "dependencies",
+    "conflicts",
+    "version-history",
+    "license-permissions",
+    "author-team",
+    "add-to-collection",
+    "create-game-profile",
+    "publish-release",
+    "report-content",
+    "installation-docs",
+    "personal-library",
+    "recently-updated"
+  ],
+  "invariants": [
+    "COMPATIBILITY_VISIBLE_BEFORE_ACTION",
+    "REQUIRED_DEPENDENCIES_NEVER_HIDDEN",
+    "UNVERIFIED_NEVER_PRESENTED_AS_COMPATIBLE",
+    "AUTOMATED_INSTALL_ONLY_WITH_REAL_MANAGER",
+    "REQUIRED_CREATOR_DATA_NEVER_SILENTLY_INVENTED",
+    "VALIDATION_FAILURE_PRESERVES_DRAFT",
+    "PUBLICATION_AND_MODERATION_SEPARATE",
+    "COLLECTION_MODPACK_PROFILE_DISTINCT",
+    "CONFLICTS_NEVER_SILENTLY_SUBSTITUTED",
+    "WITHDRAWN_REVOKED_NEVER_REDISTRIBUTED",
+    "CRITICAL_NAV_NEVER_DEPENDS_ON_DECORATIVE_LORE"
+  ],
+  "productionStatus": {
+    "treeTestingGlobal": "NOT_PROVEN",
+    "managerRuntime": "NOT_IMPLEMENTED",
+    "creatorBackend": "NOT_IMPLEMENTED",
+    "distributionBackend": "NOT_IMPLEMENTED"
+  }
+}
