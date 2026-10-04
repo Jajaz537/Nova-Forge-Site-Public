@@ -661,3 +661,59 @@ Garde-fous visibles :
 - outbound réel indisponible.
 
 Aucun contact éditeur réel, aucune demande réelle et aucune licence réelle ne sont prouvés.
+
+
+## Publisher rights notifications — truthful preview proof — 4 octobre 2026
+
+**TERMINÉ — prototype fictif / aucun événement distant réel**
+
+Incident initial :
+- Living Threshold run `37201905576` — **FAIL** sur browser a11y ;
+- erreur exacte : `publisher rights notification safety copy missing` ;
+- build/static check verts ;
+- cause produit non établie à ce stade.
+
+Isolation :
+- micro-proof dédié `MODARYX V2 Rights Notification Preview Micro-Proof` ;
+- premier run `37202147304` — **FAIL** ;
+- erreur exacte : `missing text: Démonstration · non reçue` ;
+- cause isolée : le label source est transformé visuellement par `text-transform: uppercase`.
+
+Correction ciblée :
+- assertions alignées sur le texte rendu `DÉMONSTRATION · NON REÇUE` ;
+- aucune relance full prématurée.
+
+Micro-proof :
+- run `37202244972` — **SUCCESS**
+- commit `356afffdee0280081a5684307e237ad9d4dfe51c`
+- `RIGHTS_NOTIFICATION_MOBILE_OVERFLOW 0`
+- `PASS_V2_RIGHTS_NOTIFICATION_PREVIEW`
+
+Continuation Living Threshold :
+- run `37202254205` — **SUCCESS**
+- commit capturé `ddba1f0bbf90c417600f6fdb800529b7e24248f0`
+- artifact `11303272811`
+- digest `sha256:f34ee2b0b83e561f6f550ab1e575216a80200dd60d827f9bc64f6d96a7da34a4`
+- `KEYBOARD_REACHABLE 36 / 36`
+- `PUBLISHER_CONTACT_MOBILE_OVERFLOW 0`
+- `RIGHTS_MOBILE_OVERFLOW 0`
+- `GAME_SUPPORT_REQUEST_MOBILE_OVERFLOW 0`
+- `RIGHTS_NOTIFICATION_MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `FLOW_ASSERT publisher rights notification preview truthful`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 71`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Captures :
+- `desktop-rights-notification-preview.png`
+- `mobile-rights-notification-preview.png`
+
+Surface visible :
+- `APPROVED_WITH_LIMITS` fictif ;
+- `LEGAL_REVIEW_REQUIRED` fictif ;
+- labels `DÉMONSTRATION · NON REÇUE` ;
+- email/push explicitement indisponibles ;
+- aucun compteur ou événement distant inventé.
+
+Aucun event bus, email, push, unread count ou Rights Case deep-link réel n’est prouvé.
