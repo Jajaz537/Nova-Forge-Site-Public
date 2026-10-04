@@ -951,3 +951,31 @@ Contrôles : main unique, h1 nommé, IDs uniques, tabindex non positif, noms acc
 Living Threshold `37219841451` — SUCCESS · artifact `11310112115` · 81 captures.
 
 Screen readers réels : PREUVE MANQUANTE.
+
+
+## Document language / noindex / route title — 4 octobre 2026
+
+**TERMINÉ pour le prototype**
+
+Preuve :
+- Living Threshold run `37222125590` — **SUCCESS**
+- commit `a478afcf3eadfb1682754535d0ca632520601a26`
+- artifact `11310576920`
+- digest `sha256:ad2efb5f42047e36812f8a53e753adec443be53baab05a8ca2d92b44a7ca2fb3`
+
+Marqueurs :
+- `DOCUMENT_LANG fr`
+- `DOCUMENT_ROBOTS noindex,nofollow,noarchive`
+- `DOCUMENT_TITLE MODARYX V2 — Prototype Living Threshold`
+- `ROUTE_TITLE_CONTRACT_OK`
+- `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
+- `KEYBOARD_REACHABLE 38 / 38`
+- `MULTISCREEN_CAPTURE_COUNT 81`.
+
+Règles :
+- le prototype exploratoire reste non indexable ;
+- la langue du document est cohérente avec l’UI française ;
+- le titre initial n’est plus générique ;
+- l’application possède un contrat de titre de route SPA.
+
+Aucun SEO/canonical production n’est déduit de ce prototype noindex.
