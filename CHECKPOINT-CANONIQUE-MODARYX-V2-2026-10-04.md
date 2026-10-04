@@ -1393,3 +1393,33 @@ Micro-proof :
 - `PASS_V2_ROUTE_FOCUS_AND_SKIP_LINK`.
 
 Cette fermeture concerne la fiabilité du checker ; elle ne remplace pas une validation humaine clavier ou screen reader réelle.
+
+
+## 43. Métadonnées document / titre de route
+
+**TERMINÉ pour le prototype / SEO production PREUVE MANQUANTE**
+
+Implémenté :
+- `html lang="fr"` ;
+- description prototype ;
+- `noindex,nofollow,noarchive` ;
+- titre initial `MODARYX V2 — Prototype Living Threshold` ;
+- mise à jour du titre lors des changements de route SPA.
+
+Preuve :
+- Living Threshold run `37222125590` — **SUCCESS**
+- commit `a478afcf3eadfb1682754535d0ca632520601a26`
+- artifact `11310576920`
+- digest `sha256:ad2efb5f42047e36812f8a53e753adec443be53baab05a8ca2d92b44a7ca2fb3`
+- `DOCUMENT_LANG fr`
+- `DOCUMENT_ROBOTS noindex,nofollow,noarchive`
+- `DOCUMENT_TITLE MODARYX V2 — Prototype Living Threshold`
+- `ROUTE_TITLE_CONTRACT_OK`
+- `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
+- `KEYBOARD_REACHABLE 38 / 38`
+- `MULTISCREEN_CAPTURE_COUNT 81`.
+
+Limites :
+- canonical/sitemap/SEO production non implémentés ;
+- routage production non sélectionné ;
+- preview reste volontairement noindex.
