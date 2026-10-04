@@ -2294,3 +2294,58 @@ Marqueurs :
 - migration production = `BLOCKED`.
 
 Ce PASS ne choisit aucune stack et n'autorise aucun root/frontend.
+
+
+## 69. High-Fi gate + proposition frontend — registry 50 contrats
+
+**TERMINÉ pour les garde-fous machine / gate High-Fi et root restent BLOQUÉS**
+
+Run consolidé :
+- `37237489658` — **SUCCESS**
+- `PASS_V2_HIGH_FI_GATE_CONTRACT`
+- `PASS_V2_FRONTEND_GATE_RECLASSIFICATION_PROPOSAL_CONTRACT`
+- `PREPRODUCTION_CONTRACT_COUNT 50`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+### High-Fi gate verrouillé
+- prototype PASS ≠ High-Fi final ;
+- automatisation a11y ≠ screen reader réel ;
+- émulation navigateur ≠ appareil physique ;
+- aucune référence visuelle approuvée archivable = aucun PASS fidélité normalisé ;
+- validation humaine non remplaçable par simulation IA ;
+- root/frontend requiert une décision de gate contrôlée ;
+- production reste intacte tant que le gate est bloqué.
+
+Statut machine :
+- High-Fi final : `BLOCKED`
+- root/frontend production : `BLOCKED`
+- validation humaine : `NOT_PROVEN`
+- validation appareils : `NOT_PROVEN`
+- référence visuelle : `NOT_PROVEN`.
+
+### Proposition de reclassification frontend verrouillée
+Source :
+`docs/MODARYX-V2-FRONTEND-GATE-RECLASSIFICATION-PROPOSAL-20261004.md`
+
+Statut :
+`PROPOSAL_ONLY_NOT_ACTIVE`
+
+Le contrat interdit :
+- auto-activation de la proposition ;
+- création du root sans décision canonique explicite ;
+- sélection implicite de stack ;
+- déploiement production ;
+- contournement des blockers humains/appareils ;
+- faux backend dans une preview.
+
+Toujours requis avant une éventuelle preview engineering :
+- décision canonique explicite ;
+- stack sélectionnée ;
+- root path défini ;
+- branche dédiée ;
+- budgets perf initiaux ;
+- règles CSP/routing/storage/SW ;
+- blockers humains conservés ouverts ;
+- aucun cutover implicite.
+
+**Aucune reclassification n'a été activée. Aucun root frontend n'est créé.**
