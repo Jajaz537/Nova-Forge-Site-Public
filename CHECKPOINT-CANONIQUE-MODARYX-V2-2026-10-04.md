@@ -2229,3 +2229,31 @@ Verrouillé en plus :
 - localStorage V1→V2 non destructif.
 
 Ces preuves ne ferment pas le gate humain/High-Fi ni les 32 blockers VF déjà comptabilisés.
+
+
+## 67. Naming / wording canonique — preuve machine
+
+**TERMINÉ pour le contrat de nommage / validation humaine globale reste PREUVE MANQUANTE**
+
+Source :
+`docs/MODARYX-V2-NAMING-WORDING-CONTRACT-20261004.md`
+
+Run registry :
+- `37236723146` — **SUCCESS**
+- `PASS_V2_NAMING_WORDING_CONTRACT`
+- `PREPRODUCTION_CONTRACT_COUNT 46`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+Verrouillé :
+- MODARYX / MODARYX MODS = web ;
+- MODARYX Forge = logiciel/écosystème desktop ;
+- MODARYX Public / MODARYX Founder = éditions ;
+- `Nova Forge OS` = nom produit retiré, legacy uniquement ;
+- getnovaforge = ancien projet web, jamais cible actuelle ;
+- `Mods & contenus` = parapluie UI ;
+- `Profils de jeu` / `Mes profils pour ce jeu` = wording ;
+- compte = Compte / Profil public ;
+- badge générique `Non vérifié` interdit seul ;
+- MODARYX IA ne doit pas être présentée comme active sans runtime/provider réel.
+
+Le checker confirme aussi que le prototype actif ne contient pas les libellés produits incorrects `MODARYX Forge Public`, `MODARYX Forge Founder` ou `Nova Forge OS`.
