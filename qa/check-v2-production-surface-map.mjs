@@ -8,7 +8,7 @@ const required = [
   "requirements-dependencies","release-files","collection","modpack","profile-loadout",
   "creator-profile","creator-studio","community","library","security-trust",
   "mobile-navigation","mobile-catalog","mobile-content-detail",
-  "account-settings","notifications","offline-stale"
+  "account-settings","notifications","offline-stale","rights-admin"
 ];
 
 if (data.schemaVersion !== 1) throw new Error("unexpected schemaVersion");
