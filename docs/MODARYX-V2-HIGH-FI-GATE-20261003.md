@@ -276,7 +276,7 @@ Preuve cible la plus récente :
 
 ### Limites internes encore ouvertes
 
-- loading/skeletons systématiques non exercés écran par écran ;
+- loading/skeletons : contrat UX défini ; implémentation réelle différée jusqu’aux frontières asynchrones production ;
 - vraies erreurs backend/retry non prouvées tant que le backend V2 n'existe pas ;
 - session expirée/permission denied réelles non prouvées ;
 - sync conflict réel non prouvé ;
@@ -614,3 +614,15 @@ Preuve Living Threshold :
 - `MULTISCREEN_CAPTURE_COUNT 81`.
 
 Cette preuve améliore la qualité du prototype mais ne ferme aucun blocker humain/appareil ni le gate High-Fi final.
+
+
+## 27. États asynchrones / loading — 4 octobre 2026
+
+**Conception : TERMINÉE / implémentation production différée**
+
+Référence :
+`docs/MODARYX-V2-ASYNC-LOADING-STATE-CONTRACT-20261004.md`
+
+Le prototype local ne doit pas inventer de latence. Les skeletons ne seront matérialisés que pour des opérations réellement asynchrones. Empty, loading, refresh stale, offline et erreurs restent des états distincts.
+
+Le backend réel, les mesures de latence et les loading states production restent PREUVE MANQUANTE.
