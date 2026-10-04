@@ -1130,3 +1130,34 @@ Preuves :
 - `PASS_V2_RIGHTS_NOTIFICATION_PREVIEW`.
 
 Ne pas déclarer notification production tant que event bus, Rights Case deep-link, unread count, email et push réels n’existent pas.
+
+
+## 43. Cycle de vie automatique des droits éditeurs — 4 octobre 2026
+
+**TERMINÉ pour contrat + prototype / production PREUVE MANQUANTE**
+
+À ne jamais perdre :
+- ACTIVE_WITH_LIMITS ;
+- EXPIRING_SOON ;
+- EXPIRED ;
+- REVOKED ;
+- expiration et révocation rebloquent immédiatement les usages dépendants ;
+- expiration proche ne crée aucun droit nouveau ;
+- fallback baseline originale MODARYX lorsque juridiquement acceptable ;
+- aucune réactivation silencieuse ;
+- nouvelle preuve requise avant réactivation ;
+- Web et MODARYX Forge restent séparés ;
+- transition auditée et lock idempotent.
+
+Preuves :
+- contrat run `37204099457` — **SUCCESS**, `PASS_V2_RIGHTS_LIFECYCLE_CONTRACT` ;
+- Living Threshold run `37204012017` — **SUCCESS** ;
+- `FLOW_ASSERT rights lifecycle expired revoked scopes reblocked` ;
+- 73 captures.
+
+Toujours PREUVE MANQUANTE :
+- scheduler réel ;
+- détection expiration réelle ;
+- réception révocation réelle ;
+- lock production ;
+- revalidation/licence réelle.
