@@ -1754,3 +1754,44 @@ Cette preuve prépare une CSP stricte mais ne prouve pas :
 - auth/session ;
 - supply-chain complète ;
 - absence absolue de toute vulnérabilité.
+
+
+## 54. CSP / headers / rich text — preuve contrat
+
+**TERMINÉ pour le contrat pré-production / déploiement réel PREUVE MANQUANTE**
+
+Source :
+`docs/MODARYX-V2-CSP-HEADERS-RICH-TEXT-POLICY-20261003.md`
+
+Machine contract :
+`qa/modaryx-v2-csp-headers-rich-text-contract.json`
+
+Preuve :
+- run `37232040196` — **SUCCESS**
+- commit `d1e9aae73cce1aa7941613e9806257808c73a536`
+- `CSP_DIRECTIVE_COUNT 13`
+- `CSP_REQUIRED_HEADER_COUNT 5`
+- `CSP_INVARIANT_COUNT 10`
+- `PASS_V2_CSP_HEADERS_RICH_TEXT_CONTRACT`.
+
+Verrouillé :
+- `default-src 'self'` ;
+- `script-src 'self'` ;
+- `style-src 'self'` ;
+- pas de `unsafe-inline` global ;
+- pas de `unsafe-eval` ;
+- `object-src 'none'` ;
+- `frame-src 'none'` baseline ;
+- rich text plain-text par défaut ;
+- pipeline parse → sanitize allowlist → render ;
+- liens externes http/https uniquement ;
+- SW V2 isolé du V1 ;
+- preview noindex ;
+- Report-Only avant enforcement.
+
+Toujours NON IMPLÉMENTÉ :
+- headers CSP preview réels ;
+- endpoint report réel ;
+- CSP enforcement production ;
+- headers production ;
+- validation auth/providers/PWA sous CSP.
