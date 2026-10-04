@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/modaryx-v2-accessibility-structure-matrix-proof.yml'
       - 'qa/check-v2-accessibility-structure-matrix.mjs'
+      - 'qa/check-v2-keyboard-reachability-matrix.mjs'
       - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx'
       - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/styles.css'
   workflow_dispatch:
@@ -63,6 +64,14 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-v2-accessibility-structure-matrix.mjs
+
+      - name: Validate keyboard reachability matrix
+        shell: bash
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4174
+        run: |
+          set -euo pipefail
+          node qa/check-v2-keyboard-reachability-matrix.mjs
 
       - name: Stop isolated preview
         if: always()
