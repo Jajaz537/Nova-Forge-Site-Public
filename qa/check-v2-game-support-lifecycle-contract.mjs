@@ -1,0 +1,10 @@
+import fs from "node:fs";
+const d=JSON.parse(fs.readFileSync("qa/modaryx-v2-game-support-lifecycle-contract.json","utf8"));
+if(d.schemaVersion!==1) throw new Error("unexpected schemaVersion");
+const supportStates=new Set(d["supportStates"]||[]);
+for(const x of ["editorial-only","catalog-enabled","distribution-enabled","deprecated"]) if(!supportStates.has(x)) throw new Error("missing supportStates "+x);
+const invariants=new Set(d["invariants"]||[]);
+for(const x of ["GAME_PAGE_DOES_NOT_IMPLY_DISTRIBUTION","COMPATIBILITY_SEPARATE_FROM_GAME_SUPPORT","NEW_GAME_VERSION_NEVER_AUTO_COMPATIBLE","DEPRECATED_NEVER_AUTO_DELETES_HISTORY","EDITORIAL_ONLY_NEVER_CLAIMS_MODS_AVAILABLE"]) if(!invariants.has(x)) throw new Error("missing invariants "+x);
+for(const [k,v] of Object.entries(d.productionStatus||{})) if(!["NOT_IMPLEMENTED","NOT_PROVEN","NOT_MEASURED","NOT_DEPLOYED","NOT_EXECUTED"].includes(v)) throw new Error("production status drift "+k+"="+v);
+console.log("GAME_SUPPORT_LIFECYCLE_INVARIANT_COUNT",(d.invariants||[]).length);
+console.log("PASS_V2_GAME_SUPPORT_LIFECYCLE_CONTRACT");
