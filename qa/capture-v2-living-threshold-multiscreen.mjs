@@ -246,7 +246,8 @@ try {
   await clickByText(".detail-tabs button", "Signalement");
   manifest.captures.push(await capture("desktop-content-report.png", 1440, 1024, "Signaler ce contenu"));
   await clickByText(".report-section .primary", "Préparer le signalement local");
-  await evaluate("document.querySelector('#report-reason-error')?.scrollIntoView({block:'center'})");
+  // Validation errors may move focus/scroll; capture the actual viewport rather than page origin.
+  await evaluate("document.querySelector('#report-reason-error')?.scrollIntoView({block:'center'})"
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("desktop-content-report-error.png", 1440, 1024, "Choisissez une raison avant de préparer le signalement."));
 
@@ -377,7 +378,8 @@ try {
   await clickByText(".detail-tabs button", "Signalement");
   manifest.captures.push(await capture("mobile-content-report.png", 390, 844, "Signaler ce contenu"));
   await clickByText(".report-section .primary", "Préparer le signalement local");
-  await evaluate("document.querySelector('#report-reason-error')?.scrollIntoView({block:'center'})");
+  // Validation errors may move focus/scroll; capture the actual viewport rather than page origin.
+  await evaluate("document.querySelector('#report-reason-error')?.scrollIntoView({block:'center'})"
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("mobile-content-report-error.png", 390, 844, "Choisissez une raison avant de préparer le signalement."));
 
