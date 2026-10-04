@@ -356,6 +356,19 @@ try{
   await waitText("Notification admin fictive préparée · aucune notification réelle envoyée.");
   await waitText("LEGAL_REVIEW_REQUIRED");
   console.log("FLOW_ASSERT publisher response interpretation safe automation with legal fallback");
+  await waitText("Expiration et révocation");
+  await clickText(".rights-lifecycle-actions .quiet","Simuler expiration");
+  await waitText("EXPIRED");
+  await waitText("Usages dépendants rebloqués");
+  await waitText("Fallback vers la baseline originale MODARYX.");
+  await clickText(".rights-lifecycle-actions .quiet","Réinitialiser le scénario");
+  await waitText("ACTIVE_WITH_LIMITS");
+  await clickText(".rights-lifecycle-actions .quiet","Simuler révocation");
+  await waitText("REVOKED");
+  await waitText("Aucune réactivation silencieuse après expiration ou révocation.");
+  await clickText(".rights-lifecycle-actions .quiet","Réinitialiser le scénario");
+  await waitText("ACTIVE_WITH_LIMITS");
+  console.log("FLOW_ASSERT rights lifecycle expired revoked scopes reblocked");
   const rightsSendDisabled=await evaluate(`(() => {const b=[...document.querySelectorAll('.rights-detail button')].find(x=>x.textContent.includes('Envoyer une demande'));return !!b&&b.disabled;})()`);
   if(!rightsSendDisabled) throw new Error("rights outbound must stay disabled without backend");
   await waitText("Triage avant tout contact éditeur");
@@ -458,6 +471,12 @@ try{
   await waitText("CONTACT_VERIFIED");
   await clickText(".publisher-contact-actions .primary","Préparer la demande structurée");
   await waitText("REQUEST_READY");
+  await waitText("Expiration et révocation");
+  await clickText(".rights-lifecycle-actions .quiet","Simuler expiration");
+  await waitText("EXPIRED");
+  await waitText("Usages dépendants rebloqués");
+  await clickText(".rights-lifecycle-actions .quiet","Réinitialiser le scénario");
+  await waitText("ACTIVE_WITH_LIMITS");
 
 
   await clickAria("Ouvrir le menu");
