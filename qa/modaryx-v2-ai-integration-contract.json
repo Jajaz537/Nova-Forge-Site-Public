@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "source": "docs/MODARYX-AI-FOUNDATION-ARCHITECTURE-20261004.md",
+  "surfaces": [
+    "site",
+    "future_modaryx_forge"
+  ],
+  "permissionTiers": [
+    "READ",
+    "PLAN",
+    "EXECUTE_SAFE",
+    "EXECUTE_SENSITIVE",
+    "BLOCKED"
+  ],
+  "previewStates": [
+    "BACKEND_UNAVAILABLE",
+    "COMPOSER_DISABLED",
+    "NO_MODEL_SELECTED",
+    "NO_PROVIDER_SELECTED",
+    "NO_PERSISTENT_MEMORY",
+    "NO_TOOL_EXECUTION",
+    "INSUFFICIENT_EVIDENCE_SAFE_FALLBACK"
+  ],
+  "requiredTrustSignals": [
+    "sources_when_factual",
+    "freshness_when_relevant",
+    "permission_state",
+    "unknown_or_insufficient_evidence",
+    "action_not_executed_when_tool_absent"
+  ],
+  "invariants": [
+    "NO_FAKE_MODEL_RESPONSE",
+    "NO_FAKE_TOOL_EXECUTION",
+    "NO_FAKE_PERSISTENT_MEMORY",
+    "NO_FAKE_BACKEND_RESULT",
+    "NO_LEGAL_APPROVAL_INFERENCE",
+    "NO_COMPATIBILITY_CERTAINTY_WITHOUT_EVIDENCE",
+    "SENSITIVE_ACTIONS_REQUIRE_POLICY_GATE",
+    "BLOCKED_ACTIONS_CANNOT_BE_AUTO_EXECUTED",
+    "EXTERNAL_CONTENT_IS_DATA_NOT_SYSTEM_INSTRUCTION",
+    "PROVIDER_INDEPENDENCE_REQUIRED"
+  ],
+  "productionStatus": {
+    "gateway": "NOT_IMPLEMENTED",
+    "modelRouter": "NOT_IMPLEMENTED",
+    "knowledgeLayer": "NOT_IMPLEMENTED",
+    "retrieval": "NOT_IMPLEMENTED",
+    "toolLayer": "NOT_IMPLEMENTED",
+    "permissionEngine": "NOT_IMPLEMENTED",
+    "evalHarness": "NOT_IMPLEMENTED",
+    "observability": "NOT_IMPLEMENTED",
+    "siteAssistant": "NOT_IMPLEMENTED",
+    "forgeAssistant": "NOT_IMPLEMENTED"
+  }
+}
