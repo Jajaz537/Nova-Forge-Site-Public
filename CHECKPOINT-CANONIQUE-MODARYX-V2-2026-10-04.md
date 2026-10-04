@@ -791,3 +791,56 @@ Toujours NON IMPLÉMENTÉ :
 - lock automatique production ;
 - revalidation automatique ;
 - licence réelle.
+
+
+## 28. IP / takedown — contrat + prototype
+
+**TERMINÉ pour contrat et prototype / production PREUVE MANQUANTE**
+
+Référence :
+`docs/MODARYX-V2-IP-TAKEDOWN-WORKFLOW-20261004.md`
+
+Contrat :
+- `qa/modaryx-v2-ip-takedown-contract.json`
+- `qa/check-v2-ip-takedown-contract.mjs`
+- workflow `MODARYX V2 IP Takedown Contract Proof`
+- run `37204583345` — **SUCCESS**
+- `IP_TAKEDOWN_STATE_COUNT 12`
+- `IP_TAKEDOWN_INVARIANT_COUNT 12`
+- `IP_TAKEDOWN_RESTRICTION_EFFECT_COUNT 6`
+- `PASS_V2_IP_TAKEDOWN_CONTRACT`
+
+Preuve UI :
+- Living Threshold run `37204720263` — **SUCCESS**
+- commit capturé `eefd01c8ec1d35f7bd9212e40f65d2ac390479cd`
+- artifact `11304695959`
+- digest `sha256:126e3758ca6a4f1c19e85f6eb8be0c9d0b456705feb43ce1e8777ccbf77004f0`
+- `FLOW_ASSERT ip takedown containment preserves evidence fallback legal escalation`
+- `MULTISCREEN_CAPTURE_COUNT 75`
+
+Surface map :
+- run `37204857565` — **SUCCESS**
+- `SURFACE_MAP_COUNT 23`
+- `UNRESOLVED_RUNTIME_COUNT 6`
+- `PASS_V2_PRODUCTION_SURFACE_MAP`
+
+Matérialisé :
+- RECEIVED ;
+- CONTENT_LOCATED ;
+- TEMP_RESTRICTED ;
+- fallback original MODARYX ;
+- preuves conservées ;
+- autorité non vérifiée explicitement ;
+- LEGAL_REVIEW_REQUIRED ;
+- aucune restauration automatique.
+
+Toujours NON IMPLÉMENTÉ :
+- backend IpCase ;
+- formulaire IP public ;
+- mailbox IP ;
+- invalidation cache/CDN/SW production ;
+- anti-réupload production ;
+- recours réel ;
+- legal review opérationnelle.
+
+Le contrat/prototype ne vaut pas conformité juridique finale.
