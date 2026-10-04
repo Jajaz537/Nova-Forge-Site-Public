@@ -186,6 +186,8 @@ try{
   await assertSurface("public-trust"); count++;
   await clickExact("footer button","Aide & documentation");
   await assertSurface("help-docs"); count++;
+  await clickExact("footer button","Modération · démo admin");
+  await assertSurface("moderation-center"); count++;
 
   console.log("A11Y_STRUCTURE_SURFACE_COUNT",count);
   console.log("PASS_V2_ACCESSIBILITY_STRUCTURE_MATRIX");
