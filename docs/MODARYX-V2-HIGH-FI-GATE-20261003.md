@@ -588,3 +588,29 @@ Cette preuve navigateur ne remplace pas un test humain clavier ni un screen read
 - continuation Living Threshold `37219841451` — **SUCCESS**.
 
 AT réels et validation humaine restent requis.
+
+
+## 26. Métadonnées document + titre SPA — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Correction prototype :
+- `lang="fr"` ;
+- titre initial non générique ;
+- description prototype ;
+- `robots=noindex,nofollow,noarchive` ;
+- titre de document mis à jour lors des changements de route SPA.
+
+Preuve Living Threshold :
+- run `37222125590` — **SUCCESS**
+- commit `a478afcf3eadfb1682754535d0ca632520601a26`
+- artifact `11310576920`
+- digest `sha256:ad2efb5f42047e36812f8a53e753adec443be53baab05a8ca2d92b44a7ca2fb3`
+- `DOCUMENT_LANG fr`
+- `DOCUMENT_ROBOTS noindex,nofollow,noarchive`
+- `DOCUMENT_TITLE MODARYX V2 — Prototype Living Threshold`
+- `ROUTE_TITLE_CONTRACT_OK`
+- `KEYBOARD_REACHABLE 38 / 38`
+- `MULTISCREEN_CAPTURE_COUNT 81`.
+
+Cette preuve améliore la qualité du prototype mais ne ferme aucun blocker humain/appareil ni le gate High-Fi final.
