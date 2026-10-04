@@ -94,13 +94,13 @@ function Topbar({ active, onNavigate }) {
     <button className="mobile-search" aria-label="Recherche globale" onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button>
     <button className="mobile-menu" aria-label="Ouvrir le menu" aria-expanded={open} onClick={() => setOpen(v => !v)}>{open ? <X /> : <List />}</button>
     <nav className={open ? "global-nav open" : "global-nav"} aria-label="Navigation principale">
-      {navItems.map(item => <button key={item} className={active === item ? "active" : ""} onClick={() => { onNavigate(item); setOpen(false); }}>{item}</button>)}
-      <button className="mobile-nav-utility" onClick={() => { onNavigate("Bibliothèque"); setOpen(false); }}><BookOpen />Bibliothèque</button>
-      <button className="mobile-nav-utility" onClick={() => { onNavigate("Notifications"); setOpen(false); }}><Bell />Notifications</button>
-      <button className="mobile-nav-utility" onClick={() => { onNavigate("Compte"); setOpen(false); }}><UsersThree />Compte</button>
-      <button className="mobile-nav-utility" onClick={() => { onNavigate("MODARYX IA"); setOpen(false); }}><Stack />MODARYX IA</button>
+      {navItems.map(item => <button key={item} aria-current={active===item?"page":undefined} className={active === item ? "active" : ""} onClick={() => { onNavigate(item); setOpen(false); }}>{item}</button>)}
+      <button className={active==="Bibliothèque"?"mobile-nav-utility active":"mobile-nav-utility"} aria-current={active==="Bibliothèque"?"page":undefined} onClick={() => { onNavigate("Bibliothèque"); setOpen(false); }}><BookOpen />Bibliothèque</button>
+      <button className={active==="Notifications"?"mobile-nav-utility active":"mobile-nav-utility"} aria-current={active==="Notifications"?"page":undefined} onClick={() => { onNavigate("Notifications"); setOpen(false); }}><Bell />Notifications</button>
+      <button className={active==="Compte"?"mobile-nav-utility active":"mobile-nav-utility"} aria-current={active==="Compte"?"page":undefined} onClick={() => { onNavigate("Compte"); setOpen(false); }}><UsersThree />Compte</button>
+      <button className={active==="MODARYX IA"?"mobile-nav-utility active":"mobile-nav-utility"} aria-current={active==="MODARYX IA"?"page":undefined} onClick={() => { onNavigate("MODARYX IA"); setOpen(false); }}><Stack />MODARYX IA</button>
     </nav>
-    <div className="top-actions"><button aria-label="Recherche globale" onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button><button aria-label="Bibliothèque" onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button aria-label="Notifications" onClick={() => onNavigate("Notifications")}><Bell /></button><button aria-label="MODARYX IA" onClick={() => onNavigate("MODARYX IA")}><Stack /></button><button className="avatar" aria-label="Compte" onClick={() => onNavigate("Compte")}>M</button></div>
+    <div className="top-actions"><button aria-label="Recherche globale" aria-current={active==="Recherche"?"page":undefined} onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button><button aria-label="Bibliothèque" aria-current={active==="Bibliothèque"?"page":undefined} onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button aria-label="Notifications" aria-current={active==="Notifications"?"page":undefined} onClick={() => onNavigate("Notifications")}><Bell /></button><button aria-label="MODARYX IA" aria-current={active==="MODARYX IA"?"page":undefined} onClick={() => onNavigate("MODARYX IA")}><Stack /></button><button className="avatar" aria-label="Compte" aria-current={active==="Compte"?"page":undefined} onClick={() => onNavigate("Compte")}>M</button></div>
   </header>;
 }
 
@@ -252,7 +252,7 @@ function GameHub({ onOpen }) {
       <form className="hero-search" onSubmit={e => e.preventDefault()}><MagnifyingGlass /><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Rechercher dans ce jeu" aria-label="Rechercher dans ce jeu"/><button type="button" aria-label="Filtres"><SlidersHorizontal /></button></form>
       <button className="primary" onClick={()=>setTab("Mods & contenus")}>Explorer les contenus <ArrowRight /></button>
     </section>
-    <nav className="local-nav" aria-label="Navigation du jeu">{["Aperçu","Mods & contenus","Collections","Créateurs","Guides","Activité"].map(x => <button key={x} className={tab===x?'active':''} onClick={() => setTab(x)}>{x}</button>)}</nav>
+    <nav className="local-nav" aria-label="Navigation du jeu">{["Aperçu","Mods & contenus","Collections","Créateurs","Guides","Activité"].map(x => <button key={x} aria-pressed={tab===x} className={tab===x?'active':''} onClick={() => setTab(x)}>{x}</button>)}</nav>
     <main className="hub-layout">
       <section className="hub-content"><div className="section-heading"><div><span className="kicker">{kicker}</span><h2>{title}</h2><p>{description}</p></div></div>{body}</section>
       <ProfilesRail />
@@ -278,7 +278,7 @@ function CollectionsPage() {
   return <main className="page-section collections-page">
     <span className="kicker">Collections & Modpacks</span><h1>Organiser n’est pas installer.</h1>
     <p className="page-intro">Une Collection est une sélection éditoriale. Un Modpack est un ensemble versionné qui ne devient installable qu’avec manifeste, droits et runtime réels. Un Profil de jeu reste une configuration personnelle distincte.</p>
-    <nav className="collection-mode-tabs" aria-label="Collections et Modpacks"><button className={mode==="Collections"?"active":""} onClick={()=>setMode("Collections")}>Collections</button><button className={mode==="Modpacks"?"active":""} onClick={()=>setMode("Modpacks")}>Modpacks</button></nav>
+    <nav className="collection-mode-tabs" aria-label="Collections et Modpacks"><button aria-pressed={mode==="Collections"} className={mode==="Collections"?"active":""} onClick={()=>setMode("Collections")}>Collections</button><button aria-pressed={mode==="Modpacks"} className={mode==="Modpacks"?"active":""} onClick={()=>setMode("Modpacks")}>Modpacks</button></nav>
     {mode==="Collections"?<>
       <div className="collection-tools"><label className="catalog-search"><MagnifyingGlass/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher une collection" aria-label="Rechercher une collection"/></label><div className="filter-chips">{categories.map(value=><button key={value} className={category===value?"selected":""} onClick={()=>setCategory(value)}>{value}</button>)}</div></div>
       <div className="collection-grid">{visible.map(item=><article className="collection-card" key={item.title}><Media pos={item.pos}/><div><span className="demo-label">Collection de démonstration</span><h2>{item.title}</h2><p>{item.note}</p><dl><div><dt>Curateur</dt><dd>{item.curator}</dd></div><div><dt>Jeu</dt><dd>{item.game} {item.version}</dd></div><div><dt>Contenus</dt><dd>{item.items} éléments de démonstration</dd></div><div><dt>Capacité</dt><dd>Sélection organisée</dd></div></dl><div className="collection-capability"><strong>Installation non disponible</strong><span>Aucun manifeste installable ni runtime MODARYX Forge n’est simulé.</span></div><button className="quiet">Voir la sélection <ArrowRight/></button></div></article>)}</div>
@@ -348,7 +348,7 @@ function Catalog({ onOpen }) {
     <div className="catalog-tools">
       <label className="catalog-search"><MagnifyingGlass/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher dans tous les contenus" aria-label="Rechercher dans tous les contenus"/></label>
       <button aria-expanded={filtersOpen} onClick={()=>setFiltersOpen(v=>!v)}><FunnelSimple/>Filtres{activeFilters>0&&<span className="filter-count">{activeFilters}</span>}</button>
-      <div className="view-toggle"><button className={grid?'active':''} onClick={()=>setGrid(true)} aria-label="Vue grille"><GridFour/></button><button className={!grid?'active':''} onClick={()=>setGrid(false)} aria-label="Vue liste"><List/></button></div>
+      <div className="view-toggle"><button aria-pressed={grid} className={grid?'active':''} onClick={()=>setGrid(true)} aria-label="Vue grille"><GridFour/></button><button aria-pressed={!grid} className={!grid?'active':''} onClick={()=>setGrid(false)} aria-label="Vue liste"><List/></button></div>
     </div>
     {filtersOpen&&<section className="filter-panel" aria-label="Filtres du catalogue">
       <div><span className="filter-label">Type</span><div className="filter-chips">{kinds.map(value=><button key={value} className={kind===value?"selected":""} onClick={()=>setKind(value)}>{value}</button>)}</div></div>
@@ -387,7 +387,7 @@ function Detail({ item, onBack }) {
     <div className="detail-grid">
       <div className="detail-main">
         <Media pos={selected.pos} className="detail-media"/>
-        <nav className="detail-tabs" aria-label="Sections de la fiche contenu">{tabs.map(value=><button key={value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>
+        <nav className="detail-tabs" aria-label="Sections de la fiche contenu">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>
         {tabContent[tab]}
       </div>
       <aside className="detail-copy">
@@ -462,7 +462,7 @@ function Library() {
   return <main className="page-section library">
     <span className="kicker">Votre espace</span><h1>Bibliothèque</h1><p className="page-intro">Retrouvez favoris, suivis, collections, profils et historique sans les confondre.</p>
     <section className="library-overview"><div className="library-focus"><Media pos="50% 100%"/><div><span className="demo-label">Jeu actif</span><h2>Aetherlands</h2><p>3 profils de démonstration · version 1.4.2</p><button className="primary">Ouvrir le Game Hub <ArrowRight/></button></div></div><div className="library-summary"><strong>État de la bibliothèque</strong><span>Données locales de démonstration</span><span>Aucun cloud connecté</span><span>Aucun manager connecté</span></div></section>
-    <nav className="library-tabs" aria-label="Sections de la bibliothèque">{tabs.map(value=><button key={value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>
+    <nav className="library-tabs" aria-label="Sections de la bibliothèque">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>
     {panels[tab]}
   </main>;
 }
@@ -486,7 +486,7 @@ function CreatorStudio() {
   };
   return <main className="page-section creator-studio">
     <span className="kicker">Créer</span><h1>Creator Studio</h1><p className="page-intro">Créez un projet, structurez auteurs et droits, préparez une release et contrôlez provenance et validation sans simuler les services absents.</p>
-    <div className="studio-shell"><nav className="studio-nav" aria-label="Navigation Creator Studio">{tabs.map(value=><button key={value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav><div className="studio-content">{panel[tab]}</div></div>
+    <div className="studio-shell"><nav className="studio-nav" aria-label="Navigation Creator Studio">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav><div className="studio-content">{panel[tab]}</div></div>
   </main>;
 }
 
@@ -513,7 +513,7 @@ function AccountCenter({ initialTab="Compte" }) {
     "Accessibilité": <section className="account-panel"><span className="kicker">Accessibilité</span><h2>Accessible sans réglage spécial</h2><p>Les préférences complètent le produit mais ne remplacent jamais un design accessible par défaut.</p><div className="settings-list"><button role="switch" aria-checked={prefs.reduced} onClick={()=>setPref("reduced")}><span><strong>Effets réduits</strong><small>Préférence locale de démonstration</small></span><em>{prefs.reduced?"Activés":"Désactivés"}</em></button></div><div className="accessibility-proof"><strong>Prototype actuel</strong><span>Focus visible 3 px · cibles tactiles ≥44 px · règle prefers-reduced-motion présente.</span></div></section>,
     "Données locales": <section className="account-panel"><span className="kicker">Données locales</span><h2>Ce navigateur</h2><div className="data-list"><div><strong>Favoris de démonstration</strong><span>Local</span></div><div><strong>Profils de jeu de démonstration</strong><span>Local</span></div><div><strong>Brouillons de démonstration</strong><span>Local</span></div><div><strong>Migration legacy</strong><span>Non exécutée</span></div></div><button className="quiet" disabled>Exporter — fonction réelle non connectée</button></section>,
   };
-  return <main className="page-section account-center"><span className="kicker">Paramètres</span><h1>Compte & préférences</h1><p className="page-intro">Contrôlez session, confidentialité, notifications et données locales sans transformer une capacité absente en promesse.</p><div className="account-shell"><nav className="account-nav" aria-label="Sections du compte">{tabs.map(value=><button key={value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>{panel[tab]}</div></main>;
+  return <main className="page-section account-center"><span className="kicker">Paramètres</span><h1>Compte & préférences</h1><p className="page-intro">Contrôlez session, confidentialité, notifications et données locales sans transformer une capacité absente en promesse.</p><div className="account-shell"><nav className="account-nav" aria-label="Sections du compte">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>{panel[tab]}</div></main>;
 }
 
 
@@ -729,7 +729,7 @@ function Community() {
     "Studios / équipes": <section className="community-board"><span className="kicker">Studios / équipes</span><h2>Équipes de création</h2><div className="community-teams">{creatorDetails.map(item=><article key={item.name}><div className="creator-avatar static"><UsersThree/></div><div><strong>{item.name}</strong><span>{item.role}</span><small>{item.focus}</small></div></article>)}</div></section>,
     "Activité": <section className="community-board"><span className="kicker">Activité</span><h2>Contexte utile, pas un réseau social</h2><div className="activity-list"><article><span className="activity-dot"/><div><strong>Exemple de nouvelle release</strong><small>Sentiers de l’aube · démonstration uniquement</small></div></article><article><span className="activity-dot"/><div><strong>Exemple de mise à jour de Collection</strong><small>Exploration sereine · démonstration uniquement</small></div></article></div><div className="moderation-note"><strong>Modération</strong><span>Les actions avancées restent masquées sans permissions serveur réelles.</span></div></section>,
   };
-  return <main className="page-section community"><span className="kicker">Communauté</span><h1>Des échanges utiles autour des créations.</h1><p className="page-intro">Support, questions, discussions, équipes et activité restent contextualisés par le modding.</p><nav className="community-tabs" aria-label="Sections Communauté">{tabs.map(value=><button key={value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>{panel[tab]}</main>;
+  return <main className="page-section community"><span className="kicker">Communauté</span><h1>Des échanges utiles autour des créations.</h1><p className="page-intro">Support, questions, discussions, équipes et activité restent contextualisés par le modding.</p><nav className="community-tabs" aria-label="Sections Communauté">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>{panel[tab]}</main>;
 }
 
 export function App() {
