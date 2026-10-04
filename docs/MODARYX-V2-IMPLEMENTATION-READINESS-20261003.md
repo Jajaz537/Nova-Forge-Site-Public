@@ -811,3 +811,19 @@ Toujours NON IMPLÉMENTÉ :
 - structured data production ;
 - i18n production ;
 - workflow de localisation.
+
+
+## 25. Security-source readiness update — 4 octobre 2026
+
+**TERMINÉ pour le prototype source / production PREUVE MANQUANTE**
+
+Le prototype Living Threshold a été durci pour la future CSP :
+- inline styles React ciblés : 0 ;
+- références distantes ciblées : 0 ;
+- sinks dangereux ciblés : 0.
+
+Preuve :
+- run `37231081387` — SUCCESS ;
+- `PASS_V2_PROTOTYPE_SECURITY_SINKS`.
+
+Cela améliore la readiness technique mais ne lève pas le gate frontend ni les exigences de CSP/headers production.
