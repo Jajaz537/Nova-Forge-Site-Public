@@ -59,7 +59,19 @@ jobs:
           MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4182
         run: |
           set -euo pipefail
-          node qa/check-v2-lowfi-review.mjs
+          set +e
+          node qa/check-v2-lowfi-review.mjs 2>&1 | tee /tmp/lowfi-proof-first.log
+          status=${PIPESTATUS[0]}
+          set -e
+          if test "$status" -eq 0; then
+            exit 0
+          fi
+          if grep -F '"fatal": "fetch failed"' /tmp/lowfi-proof-first.log >/dev/null; then
+            sleep 2
+            node qa/check-v2-lowfi-review.mjs
+            exit 0
+          fi
+          exit "$status"
 
       - name: Stop isolated review server
         if: always()
