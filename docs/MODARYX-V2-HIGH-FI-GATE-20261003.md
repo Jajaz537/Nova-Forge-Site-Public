@@ -643,3 +643,29 @@ Preuve :
 
 Le test applique un override de spacing renforcé pour détecter les cassures de reflow.  
 Il ne remplace pas un test humain de zoom/text resize, Safari réel, appareil réel ou screen reader.
+
+
+## Confiance publique — preuve prototype — 4 octobre 2026
+
+**TERMINÉ pour la surface exploratoire / contenu final PREUVE MANQUANTE**
+
+Preuve :
+- Living Threshold `37227306023` — **SUCCESS**
+- commit `63868585bfc89b24eb2c138a0e64889932de69b8`
+- artifact `11312436153`
+- digest `sha256:dabf001e15e97608b988105de220a6743bca97664dcbe530303aabb1cbeea1be`
+- `KEYBOARD_REACHABLE 39 / 39`
+- **83 captures**.
+
+Couverture ciblée :
+- structure/accessibilité : 16 surfaces ;
+- touch matrix : 16 surfaces ;
+- forced colors : 13 surfaces ;
+- text spacing : 13 surfaces ;
+- narrow 320 : 13 surfaces ;
+- tablet : 13 surfaces ;
+- surface map : **25 surfaces**.
+
+La surface affiche uniquement la readiness et les éléments manquants. Elle ne constitue pas une politique publiée, une validation spécialisée ou une preuve de conformité.
+
+Le gate High-Fi final reste **BLOQUÉ** par les validations humaines/appareils et la référence visuelle approuvée manquante.
