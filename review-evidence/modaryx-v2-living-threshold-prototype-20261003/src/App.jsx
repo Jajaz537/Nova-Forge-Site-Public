@@ -517,6 +517,7 @@ function AccountCenter({ initialTab="Compte" }) {
 
 function RightsDashboard() {
   const [selected,setSelected]=useState("aetherlands");
+  const [triageDecision,setTriageDecision]=useState("TRIAGE");
   const current=rightsDemoCases.find(item=>item.id===selected) || rightsDemoCases[0];
   const statusClass=current.status==="APPROVED_WITH_LIMITS"?"approved":current.status==="AWAITING_RESPONSE"?"pending":"neutral";
   return <main className="page-section rights-dashboard">
@@ -524,6 +525,25 @@ function RightsDashboard() {
     <h1>Droits des jeux</h1>
     <p className="page-intro">Suivez les demandes éditeurs scope par scope sans transformer une absence de réponse ou une formulation ambiguë en autorisation.</p>
     <div className="rights-safety-note"><strong>Aucune demande réelle n’est envoyée dans ce prototype.</strong><span>Les jeux, éditeurs, réponses et permissions ci-dessous servent uniquement à valider le workflow et l’interface.</span></div>
+    <section className="support-triage" aria-label="Triage des demandes de support de démonstration">
+      <div className="support-triage-head"><div><span className="kicker">Demandes membres · démonstration</span><h2>Triage avant tout contact éditeur</h2><p>Une demande membre ne crée ni permission, ni partenariat, ni Rights Case réel. MODARYX doit d’abord décider si le support produit est accepté.</p></div><span className={`rights-state ${triageDecision==="ACCEPTED_SAFE_BASELINE"?"approved":triageDecision==="DECLINED_PRODUCT"?"neutral":"pending"}`}>{triageDecision}</span></div>
+      <article className="support-triage-card">
+        <div><strong>Project Meridian</strong><span>PC · demande membre fictive</span><small>Motif : souhaiter un Game Hub et des contenus compatibles.</small></div>
+        <div className="support-triage-checks">
+          <span><strong>Existence du jeu</strong><em>À vérifier</em></span>
+          <span><strong>Doublon</strong><em>Aucun détecté dans la démo</em></span>
+          <span><strong>Pertinence modding</strong><em>À confirmer</em></span>
+          <span><strong>Restrictions / risque légal</strong><em>Revue requise</em></span>
+        </div>
+      </article>
+      <div className="support-triage-actions">
+        <button className="primary" onClick={()=>setTriageDecision("ACCEPTED_SAFE_BASELINE")}>Accepter la baseline sûre</button>
+        <button className="quiet" onClick={()=>setTriageDecision("DECLINED_PRODUCT")}>Refuser la demande</button>
+        {triageDecision!=="TRIAGE"&&<button className="quiet" onClick={()=>setTriageDecision("TRIAGE")}>Réinitialiser le scénario</button>}
+      </div>
+      {triageDecision==="ACCEPTED_SAFE_BASELINE"&&<div className="support-triage-result accepted" role="status"><strong>Baseline sûre de démonstration acceptée</strong><span>Rights Case de démonstration préparé — non créé réellement.</span><small>Aucun contact éditeur, aucun outbound et aucun asset officiel n’est activé par cette action locale.</small></div>}
+      {triageDecision==="DECLINED_PRODUCT"&&<div className="support-triage-result declined" role="status"><strong>Demande locale refusée</strong><span>Aucun Rights Case et aucun contact éditeur.</span></div>}
+    </section>
     <section className="rights-summary" aria-label="Résumé des dossiers de démonstration">
       <article><span className="kicker">Avec limites</span><strong>1</strong><small>Scopes séparés</small></article>
       <article><span className="kicker">En attente</span><strong>1</strong><small>Aucun droit supplémentaire</small></article>
