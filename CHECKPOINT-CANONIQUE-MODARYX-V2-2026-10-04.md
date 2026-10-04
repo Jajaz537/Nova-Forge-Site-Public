@@ -2257,3 +2257,40 @@ Verrouillé :
 - MODARYX IA ne doit pas être présentée comme active sans runtime/provider réel.
 
 Le checker confirme aussi que le prototype actif ne contient pas les libellés produits incorrects `MODARYX Forge Public`, `MODARYX Forge Founder` ou `Nova Forge OS`.
+
+
+## 68. Forge handoff + stack gate — registry 48 contrats
+
+**TERMINÉ pour les contrats / runtime et sélection restent BLOQUÉS**
+
+Run consolidé :
+`37236949498` — **SUCCESS**
+
+Marqueurs :
+- `PASS_V2_FORGE_HANDOFF_CONTRACT`
+- `PASS_V2_TECH_STACK_SELECTION_GATE_CONTRACT`
+- `PREPRODUCTION_CONTRACT_COUNT 48`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+### Forge handoff verrouillé
+- web = intention déclarative uniquement ;
+- capability handshake obligatoire ;
+- Forge revalide localement avant mutation ;
+- confirmation locale pour mutation à risque ;
+- actions exécutables arbitraires interdites : `RUN_COMMAND / EXECUTE_SCRIPT / WRITE_PATH / DELETE_PATH` ;
+- aucun path/secret/commande shell arbitraire dans le payload ;
+- ContentItem / Release / File / provider restent distincts ;
+- site ne peut afficher Installé / Mis à jour / Rollback réussi sans receipt vérifiable ;
+- transport réel reste `NOT_SELECTED` ;
+- runtime/protocole/receipt/install réels restent `NOT_IMPLEMENTED`.
+
+### Stack gate verrouillé
+- shortlist uniquement : vanilla/static-first + Vite, Astro + Workers, React + Vite + Workers ;
+- aucune sélection par habitude/popularité ;
+- strict CSP, routing contrôlé, SW contrôlé, preview SHA immutable et isolation V2 obligatoires ;
+- `unsafe-eval`, unsafe-inline généralisé, SW opaque, import glob legacy et routing incontrôlable restent disqualifiants ;
+- stack = `NOT_SELECTED` ;
+- root V2 = `NOT_CREATED` ;
+- migration production = `BLOCKED`.
+
+Ce PASS ne choisit aucune stack et n'autorise aucun root/frontend.
