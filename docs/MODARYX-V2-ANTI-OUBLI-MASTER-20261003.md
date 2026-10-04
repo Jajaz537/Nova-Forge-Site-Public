@@ -644,4 +644,30 @@ Ne pas simuler :
 - manager/runtime desktop ;
 - validation plateforme réelle.
 
-**Prochain travail interne : micro-matérialisation ciblée + preuve navigateur.**
+**Micro-matérialisation spécialisée : TERMINÉE pour le périmètre ciblé.**
+
+Preuve :
+- run `37164976157` — **SUCCESS**
+- commit capturé `49ce52287c900e16376e4ccab84008a02a8a92e7`
+- artifact `11289531194`
+- digest `sha256:699e4daa8110e2182dce58eb7d0fc9fb7648114039bf411bca81d4d7f0e6db53`
+- `MULTISCREEN_CAPTURE_COUNT 57`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+
+Matérialisé sans prétendre à un runtime réel :
+- relations Required/Recommended/Suggested/Conflict/ReplacedBy ;
+- reverse dependency impact ;
+- matrice de compatibilité multi-dimension ;
+- fraîcheur/workaround présents comme dimensions ;
+- variantes d'artefacts par édition/loader ;
+- capability handshake Forge représenté par CTA disabled + raison ;
+- Safe Profile disabled ;
+- validation plateforme et Crossplay PREUVE MANQUANTE.
+
+Toujours anti-oubli :
+- Alternative/AnyOf et Supported à matérialiser ;
+- politique Minimum accepté à matérialiser ;
+- états de fraîcheur Current/Aging/Stale à matérialiser ;
+- toutes les capacités réelles provider/runtime restent PREUVE MANQUANTE.
+
+**Prochain travail interne : fermer ces quatre derniers détails de modèle sans ajouter de faux runtime.**
