@@ -321,6 +321,21 @@
     "EVERY_CONTRACT_HAS_CHECKER",
     "EVERY_MACHINE_CONTRACT_SCHEMA_VERSION_ONE",
     "EVERY_CHECKER_MUST_PASS",
-    "REGISTRY_DOES_NOT_IMPLY_PRODUCTION_IMPLEMENTATION"
+    "REGISTRY_DOES_NOT_IMPLY_PRODUCTION_IMPLEMENTATION",
+    "EVERY_MODARYX_V2_JSON_CLASSIFIED"
+  ],
+  "nonContractJson": [
+    {
+      "path": "qa/modaryx-v2-anti-contamination-policy.json",
+      "reason": "policy/config executed by dedicated anti-contamination guard, not a preproduction business contract"
+    },
+    {
+      "path": "qa/modaryx-v2-production-surface-map.json",
+      "reason": "production mapping registry executed by dedicated surface-map checker, not a preproduction business contract"
+    },
+    {
+      "path": "qa/modaryx-v2-preproduction-contract-registry.json",
+      "reason": "registry self-file"
+    }
   ]
 }
