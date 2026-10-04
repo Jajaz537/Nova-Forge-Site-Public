@@ -1622,3 +1622,51 @@ Avant production :
 - revue juridique externe si usage commercial sensible ou asset officiel envisagé.
 
 Cette politique réduit le risque mais ne vaut pas garantie juridique absolue.
+
+
+## Game Atmosphere Layer — preuve prototype et garde-fous — 4 octobre 2026
+
+**TERMINÉ pour le mécanisme exploratoire / jeux réels non encore intégrés**
+
+Politique :
+`docs/MODARYX-V2-GAME-ATMOSPHERE-IP-POLICY-20261004.md`
+
+Principe :
+- MODARYX conserve son design system et son identité ;
+- la couche d'ambiance varie selon le jeu ;
+- proof actuelle uniquement avec jeux fictifs et assets MODARYX originaux ;
+- aucun asset éditeur réel ajouté.
+
+Séquence d'erreur respectée :
+1. run `37193482024` : 3 cibles ambiance à 38 px sur mobile ;
+2. correction ciblée → 44 px minimum ;
+3. micro-proof `37193592557` — **SUCCESS** ;
+4. seulement ensuite continuation Living Threshold.
+
+Continuation :
+- run `37193557372` — **SUCCESS**
+- commit capturé : `a77cb6a27ecef4e61ab2b55184b518c45f6da9db`
+- artifact : `11299852513`
+- digest : `sha256:15aad746b128a0be7ae3f2b59d1529c229876a431ac78935cb95c9f4d5e70eec`
+- `KEYBOARD_REACHABLE 35 / 35`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 59`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Décision VF :
+- Game Atmosphere Engine retenu ;
+- jeux réels uniquement après revue droits/éditeur ;
+- assets officiels = refus par défaut sans licence/permission/preuve claire ;
+- `Unknown = BLOQUÉ`;
+- fallback original MODARYX obligatoire ;
+- thème uniforme/réduction d'ambiance requis pour accessibilité/performance.
+
+Toujours à implémenter avant production :
+- Game Rights Registry ;
+- rights/asset CI ;
+- revue éditeur par éditeur ;
+- takedown/IP workflow ;
+- Game Atmosphere Engine production ;
+- validation juridique externe si usage commercial sensible ou asset officiel envisagé.
