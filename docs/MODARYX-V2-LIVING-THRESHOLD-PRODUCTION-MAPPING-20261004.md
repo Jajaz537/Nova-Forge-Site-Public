@@ -61,7 +61,7 @@ Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles mat
 | Detail | ContentDetailPage + DetailDecisionPanel | ContentItem + Release + File + Dependency | content adapter |
 | Library | LibraryShell | favorites/follows/collections/profiles/searches | local library adapter |
 | CreatorStudio | CreatorDashboardShell | Creator/Team/Project/Release | studio adapter/backend futur |
-| AccountCenter | AccountSettingsShell | Account / Preferences | local prefs + auth futur |
+| AccountCenter | AccountSettingsShell + NotificationsCenter + RightsNotificationPreview | Account / Preferences / Notification / RightsCase | local prefs + auth/event bus futur |
 | Community | CommunityPage | Support/Question/Discussion/TeamActivity | community adapter/backend futur |
 | RightsDashboard | RightsAdminPage + RightsCaseList + RightsScopeMatrix + PublisherContactVerification + PublisherRequestReadiness | RightsCase + RightsScope + PublisherContact | rights registry/backend futur |
 | App | Route shell | routing | stack à sélectionner |
@@ -115,6 +115,7 @@ Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles mat
 - RightsStateBadge
 - PublisherContactVerification
 - PublisherRequestReadiness
+- RightsNotificationPreview
 - GameSupportTriage
 
 Aucun de ces patterns ne doit importer le CSS V1.
