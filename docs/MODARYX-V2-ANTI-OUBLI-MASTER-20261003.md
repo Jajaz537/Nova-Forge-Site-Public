@@ -670,4 +670,28 @@ Toujours anti-oubli :
 - états de fraîcheur Current/Aging/Stale à matérialiser ;
 - toutes les capacités réelles provider/runtime restent PREUVE MANQUANTE.
 
-**Prochain travail interne : fermer ces quatre derniers détails de modèle sans ajouter de faux runtime.**
+**Derniers détails du modèle spécialisé : TERMINÉS pour le prototype exploratoire.**
+
+Preuve :
+- run `37165177246` — **SUCCESS**
+- commit capturé `8ecd8a139eac084348c503a65d0289d7fb30fdba`
+- artifact `11289616195`
+- digest `sha256:e3e680c741d79e2bb91dc94bc5b5817ea873182c9422b8dd5e71b476a4c33c76`
+- `MULTISCREEN_CAPTURE_COUNT 57`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`.
+
+Fermé au niveau modèle/prototype :
+- Supported ;
+- Alternative / AnyOf ;
+- Minimum accepté ;
+- Current / Aging / Stale / Unknown.
+
+Toujours PREUVE MANQUANTE réelle :
+- providers/connecteurs ;
+- compatibilité/relations alimentées par données réelles ;
+- synchronisation/save/server ;
+- validation plateforme/crossplay ;
+- MODARYX Forge ;
+- backend et production.
+
+**Prochain travail interne : audit des états EN COURS / PREUVE MANQUANTE pour distinguer les gaps encore récupérables ici des vrais gates externes.**
