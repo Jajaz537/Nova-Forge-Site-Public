@@ -1912,3 +1912,24 @@ Run :
 - cutover exige rollback ;
 - humain/appareils ne peuvent pas être simulés ;
 - faux PASS/VF interdit.
+
+
+## 66. Acceptance / architecture / taxonomie / mapping — 45 contrats — 4 octobre 2026
+
+**TERMINÉ pour les contrats / runtime PREUVE MANQUANTE**
+
+Run :
+- `37236534430` — **SUCCESS**
+- `PREPRODUCTION_CONTRACT_COUNT 45`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+À conserver :
+- screen acceptance global gate ;
+- architecture produit fonctionnelle avant lore ;
+- taxonomie extensible par jeu ;
+- agrégats non traités comme fichiers ordinaires ;
+- V1 immuable ;
+- aucun mapping qui invente une donnée absente ;
+- catalog demo = fixture only ;
+- search index V1 reconstruit pour V2 ;
+- migrations localStorage/routes explicites et non destructives.
