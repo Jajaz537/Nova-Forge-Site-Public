@@ -1685,3 +1685,22 @@ Preuve :
 - COOP/COEP/CORP seulement après compatibilité réelle.
 
 Aucun header public réel n'a été modifié par cette preuve.
+
+
+## 61. Notifications / préférences — contrat machine — 4 octobre 2026
+
+**TERMINÉ pour le contrat / backend PREUVE MANQUANTE**
+
+Preuve :
+- run `37232212946` — **SUCCESS**
+- `PASS_V2_NOTIFICATIONS_PREFERENCES_CONTRACT`.
+
+À conserver :
+- pas de fausse notification distante ;
+- canaux email/push indisponibles sans infra réelle ;
+- marketing séparé avec opt-in ;
+- compteur réel uniquement ;
+- sync conflict explicite, jamais écrasement silencieux ;
+- notification droits rattachée à un événement réel ;
+- aucune clause confidentielle ou contact privé exposé ;
+- `LEGAL_REVIEW_REQUIRED` n'accorde aucun scope.
