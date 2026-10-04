@@ -1725,3 +1725,21 @@ Preuve :
 - passkey configurée seulement après preuve réelle ;
 - pas de marketing par défaut ;
 - erreurs de sauvegarde sans perte silencieuse.
+
+
+## 63. Gouvernance API — contrat machine — 4 octobre 2026
+
+**TERMINÉ pour le contrat / runtime PREUVE MANQUANTE**
+
+Preuve :
+- run `37232488908` — **SUCCESS**
+- `PASS_V2_API_GOVERNANCE_CONTRACT`.
+
+À ne pas perdre :
+- versionnement explicite ;
+- dépréciation documentée avec migration ;
+- champs stables sans changement sémantique silencieux ;
+- clients frontend centralisés ;
+- protocoles Forge versionnés et négociés ;
+- webhooks signés/idempotents/replay-protected ;
+- contract tests + anciennes/nouvelles fixtures + rollback avant évolution stable.
