@@ -346,6 +346,13 @@ try{
   await waitText("Refusé — reste bloqué");
   const rightsSendDisabled=await evaluate(`(() => {const b=[...document.querySelectorAll('.rights-detail button')].find(x=>x.textContent.includes('Envoyer une demande'));return !!b&&b.disabled;})()`);
   if(!rightsSendDisabled) throw new Error("rights outbound must stay disabled without backend");
+  await waitText("Triage avant tout contact éditeur");
+  await waitText("TRIAGE");
+  await clickText(".support-triage-actions .primary","Accepter la baseline sûre");
+  await waitText("ACCEPTED_SAFE_BASELINE");
+  await waitText("Rights Case de démonstration préparé — non créé réellement.");
+  await waitText("Aucun contact éditeur, aucun outbound et aucun asset officiel n’est activé par cette action locale.");
+  console.log("FLOW_ASSERT member support triage accepted safe baseline only");
 
   await clickText(".global-nav button","Mods & contenus");
   await waitText("Catalogue global");
@@ -417,6 +424,9 @@ try{
   await waitText("Aucune demande réelle n’est envoyée dans ce prototype.");
   await clickText(".rights-case-list button","Solstice FrontierÉditeur fictif · démonstrationNO_RESPONSE");
   await waitText("NO_RESPONSE ≠ autorisation");
+  await clickText(".support-triage-actions .primary","Accepter la baseline sûre");
+  await waitText("ACCEPTED_SAFE_BASELINE");
+  await waitText("Rights Case de démonstration préparé — non créé réellement.");
 
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav button","Créer");
