@@ -1198,3 +1198,30 @@ Toujours PREUVE MANQUANTE :
 - recours ;
 - legal review opérationnelle ;
 - validation juridique externe.
+
+
+## 45. Asset rights provenance guard — 4 octobre 2026
+
+**TERMINÉ pour le prototype / production PREUVE MANQUANTE**
+
+À conserver :
+- tout asset média doit être classifié ;
+- asset non listé = bloqué ;
+- Unknown = bloqué ;
+- Forbidden = bloqué ;
+- hash/blob change = manifest à revoir ;
+- assets prototype actuels = ORIGINAL_MODARYX_DEMO / ALLOWED_PROTOTYPE_ONLY ;
+- aucune URL média distante arbitraire dans Living Threshold ;
+- classification prototype ne vaut jamais licence production.
+
+Preuve :
+- run `37205150007` — **SUCCESS**
+- 2 assets inventoriés ;
+- 0 référence média distante ;
+- `PASS_V2_ASSET_RIGHTS_PROVENANCE`.
+
+Avant production :
+- provenance/licence archivable ;
+- manifest/registry pour tous assets réels ;
+- intégration avec Game Rights Registry ;
+- extension du guard au futur root/media production.
