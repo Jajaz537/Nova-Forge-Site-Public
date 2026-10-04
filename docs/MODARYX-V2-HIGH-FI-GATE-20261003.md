@@ -382,3 +382,45 @@ Matérialisé :
 - MODARYX Forge reste un droit distinct.
 
 Cette preuve améliore la couverture du workflow droits mais ne prouve aucun scheduler, monitor d'expiration, inbound de révocation, lock production ou licence réelle et ne lève aucun blocker humain/appareil.
+
+
+## 19. IP / takedown — preuve prototype — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Contrat :
+- `docs/MODARYX-V2-IP-TAKEDOWN-WORKFLOW-20261004.md`
+- `qa/modaryx-v2-ip-takedown-contract.json`
+- run `37204583345` — **SUCCESS**
+- `IP_TAKEDOWN_STATE_COUNT 12`
+- `IP_TAKEDOWN_INVARIANT_COUNT 12`
+- `IP_TAKEDOWN_RESTRICTION_EFFECT_COUNT 6`
+- `PASS_V2_IP_TAKEDOWN_CONTRACT`.
+
+Preuve Living Threshold :
+- run `37204720263` — **SUCCESS** ;
+- commit capturé `eefd01c8ec1d35f7bd9212e40f65d2ac390479cd` ;
+- artifact `11304695959` ;
+- digest `sha256:126e3758ca6a4f1c19e85f6eb8be0c9d0b456705feb43ce1e8777ccbf77004f0` ;
+- `FLOW_ASSERT ip takedown containment preserves evidence fallback legal escalation` ;
+- `MULTISCREEN_CAPTURE_COUNT 75`.
+
+Matérialisé :
+- cas IP fictif ;
+- autorité non vérifiée explicitement ;
+- localisation asset ;
+- restriction temporaire ;
+- fallback original MODARYX ;
+- preuves conservées ;
+- escalade `LEGAL_REVIEW_REQUIRED` ;
+- aucune restauration automatique.
+
+Toujours NON IMPLÉMENTÉ :
+- backend cases ;
+- formulaire IP réel ;
+- mailbox IP ;
+- cache/CDN/SW invalidation production ;
+- anti-réupload production ;
+- legal review opérationnelle.
+
+Cette preuve ne vaut ni procédure juridique finale ni conformité réglementaire et ne ferme aucun blocker humain/appareil.
