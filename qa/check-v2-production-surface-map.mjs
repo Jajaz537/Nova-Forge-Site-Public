@@ -8,7 +8,7 @@ const required = [
   "requirements-dependencies","release-files","collection","modpack","profile-loadout",
   "creator-profile","creator-studio","community","library","security-trust",
   "mobile-navigation","mobile-catalog","mobile-content-detail",
-  "account-settings","notifications","offline-stale","rights-admin","modaryx-ai-preview","public-trust","help-docs"
+  "account-settings","notifications","offline-stale","rights-admin","modaryx-ai-preview","public-trust","help-docs","moderation-center"
 ];
 
 if (data.schemaVersion !== 1) throw new Error("unexpected schemaVersion");
@@ -61,6 +61,14 @@ for (const component of ["ModaryxAIPage","AiTrustPanel","AiDisabledComposer"]) {
 }
 for (const state of ["backend-unavailable","composer-disabled","insufficient-evidence-safe-fallback"]) {
   if (!aiPreview?.states?.includes(state)) throw new Error("modaryx-ai-preview missing state: " + state);
+}
+
+const moderationCenter = data.surfaces.find(x => x.id === "moderation-center");
+for (const component of ["ModerationCenter","ModerationCaseList","ModerationDecisionHistory","ModerationAppealState"]) {
+  if (!moderationCenter?.components?.includes(component)) throw new Error("moderation-center missing component: " + component);
+}
+for (const state of ["received-demo","under-review-demo","appealed-demo","server-actions-disabled","audit-history-preserved"]) {
+  if (!moderationCenter?.states?.includes(state)) throw new Error("moderation-center missing state: " + state);
 }
 
 const helpDocs = data.surfaces.find(x => x.id === "help-docs");
