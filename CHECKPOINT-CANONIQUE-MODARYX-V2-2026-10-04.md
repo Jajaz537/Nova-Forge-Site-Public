@@ -931,3 +931,49 @@ Toujours NON IMPLÉMENTÉ :
 - scheduler/revalidation ;
 - asset linkage production ;
 - audit store production.
+
+
+## 32. MODARYX IA — preview site + contrat d’intégration
+
+**TERMINÉ pour le prototype et le contrat / système IA réel PREUVE MANQUANTE**
+
+Preuve Living Threshold :
+- run `37211271783` — **SUCCESS**
+- commit capturé `f8616f18876c49de45b3d208222be042dd2b543a`
+- artifact `11306731614`
+- digest `sha256:6cd590ef764afc4825cec9f199c504fbd57b6d7dd296a629fa311a1393495047`
+- `KEYBOARD_REACHABLE 37 / 37`
+- `FLOW_ASSERT modaryx ai preview no fake model or action`
+- `MULTISCREEN_CAPTURE_COUNT 77`.
+
+Preuve contrat :
+- workflow `MODARYX V2 Assistant Contract Proof`
+- run `37211787695` — **SUCCESS**
+- `MODARYX_AI_PERMISSION_TIER_COUNT 5`
+- `MODARYX_AI_PREVIEW_STATE_COUNT 7`
+- `MODARYX_AI_INVARIANT_COUNT 10`
+- `PASS_V2_MODARYX_AI_INTEGRATION_CONTRACT`.
+
+Surface map :
+- `modaryx-ai-preview`
+- total : **24 surfaces**
+- toutes restent `BLOCKED_GATE`.
+
+Matérialisé :
+- entrée desktop/mobile ;
+- surface MODARYX IA dédiée ;
+- composer désactivé ;
+- absence de modèle/provider/backend explicitée ;
+- sources, permissions et incertitude rendues visibles ;
+- aucune réponse ou action IA réelle simulée.
+
+Toujours NON IMPLÉMENTÉ :
+- gateway ;
+- model router ;
+- knowledge layer / retrieval ;
+- tool layer ;
+- permission engine réel ;
+- eval harness ;
+- observabilité ;
+- assistant production ;
+- intégration MODARYX Forge.
