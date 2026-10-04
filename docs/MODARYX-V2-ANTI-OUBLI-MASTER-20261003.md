@@ -1933,3 +1933,25 @@ Run :
 - catalog demo = fixture only ;
 - search index V1 reconstruit pour V2 ;
 - migrations localStorage/routes explicites et non destructives.
+
+
+## 67. Naming / wording canonique — 46 contrats — 4 octobre 2026
+
+**TERMINÉ pour le contrat / humain global PREUVE MANQUANTE**
+
+Preuve :
+- run `37236723146` — **SUCCESS**
+- `PASS_V2_NAMING_WORDING_CONTRACT`
+- registry : 46 contrats.
+
+À ne jamais perdre :
+- MODARYX web ≠ MODARYX Forge desktop ;
+- éditions = MODARYX Public / MODARYX Founder ;
+- Nova Forge OS reste retiré comme nom produit actif ;
+- getnovaforge reste historique/abandonné ;
+- Mods & contenus ;
+- Profils de jeu ;
+- Mes profils pour ce jeu ;
+- Configurations enregistrées de mods, versions et réglages. ;
+- Non vérifié générique interdit ;
+- MODARYX IA jamais présentée active sans runtime réel.
