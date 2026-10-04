@@ -477,6 +477,10 @@ try{
   await waitText("Aucun contenu trouvé");
   await clickText(".empty button","Réinitialiser les filtres");
   assertEqual(await count(".content-card"),6,"catalog no-results recovery count");
+  const logoHome=await evaluate(`(() => {const el=document.querySelector('.topbar .logo');if(!el)return false;el.click();return true;})()`);
+  if(!logoHome) throw new Error("MODARYX logo home navigation unavailable");
+  await waitText("Redécouvrez vos jeux");
+  console.log("FLOW_ASSERT MODARYX logo returns to discover");
 
   await load(390,844);
   await clickAria("Ouvrir le menu");
