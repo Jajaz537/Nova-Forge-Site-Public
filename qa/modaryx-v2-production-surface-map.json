@@ -549,6 +549,28 @@
         "insufficient-evidence-safe-fallback"
       ],
       "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "public-trust",
+      "acceptance": "Public Trust / Legal Readiness",
+      "prototypeStatus": "MATERIALIZED_DEMO",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "PublicLegalTrustPage",
+        "TrustReadinessGrid",
+        "PublicTrustGate"
+      ],
+      "domains": [
+        "LegalDocumentReadiness",
+        "PublicTrustChannel"
+      ],
+      "states": [
+        "structure-ready",
+        "product-facts-missing",
+        "legal-draft-required",
+        "legal-review-required"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
     }
   ],
   "unresolvedRealRuntimeStates": [
