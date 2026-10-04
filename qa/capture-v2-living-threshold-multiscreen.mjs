@@ -282,6 +282,8 @@ try {
   await clickByText(".game-support-request>.quiet", "Demander le support d’un jeu");
   await fillVisibleInput(".game-request-form input", "Project Meridian");
   await clickByText(".game-request-form .primary", "Préparer la demande locale");
+  await evaluate("document.querySelector('.game-request-status')?.scrollIntoView({block:'center'})");
+  await sleep(120);
   manifest.captures.push(await capture("mobile-game-support-request.png", 390, 844, "Brouillon de demande — non envoyé"));
 
   await clickSelector(".mobile-menu");
