@@ -484,3 +484,31 @@ Toujours NON IMPLÉMENTÉ :
 - parser/routing réel.
 
 Cette preuve n’enlève aucun blocker humain/appareil et ne vaut aucune validation juridique.
+
+
+## 21. Tablet reflow navigateur — preuve ciblée — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Incident :
+- run `37215370580` : overflow horizontal 220 px à 834×1112 sur le Game Hub.
+
+Correction ciblée :
+- topbar/navigation repliée pour la plage 761–1050 px.
+
+Preuve :
+- run `37215965531` — **SUCCESS**
+- `TABLET_REFLOW_SURFACE_COUNT 12`
+- `PASS_V2_TABLET_REFLOW`
+- aucun overflow horizontal sur les 12 surfaces ciblées.
+
+La correction UI a également conservé la suite Living Threshold verte :
+- run `37215577121` — **SUCCESS**
+- 81 captures ;
+- keyboard 37/37 ;
+- desktop/mobile overflow 0.
+
+Limite :
+il s'agit d'une émulation Chrome 834×1112, **pas** d'une validation sur tablette physique ou Safari/iPadOS.
+
+Le blocker « appareils physiques » reste donc inchangé.
