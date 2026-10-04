@@ -720,6 +720,42 @@ function ModaryxAI() {
   </main>;
 }
 
+
+function PublicLegalTrust() {
+  const sections=[
+    ["Informations légales / opérateur","PREUVE MANQUANTE","Identité opérateur réelle requise avant publication."],
+    ["Confidentialité","LEGAL_DRAFT_REQUIRED","Doit refléter les données, providers, durées et transferts réellement déployés."],
+    ["Conditions d’utilisation","LEGAL_DRAFT_REQUIRED","Aucun texte final n’est simulé dans ce prototype."],
+    ["Règles communauté / UGC","LEGAL_DRAFT_REQUIRED","Doivent couvrir publication, provenance, modération, recours, fraude et contenus interdits."],
+    ["Cookies & stockage","PRODUCT_FACTS_MISSING","Dépend de la stack, des services tiers et de l’analytics réellement retenus."],
+    ["Propriété intellectuelle","PRODUCT_FACTS_MISSING","Le futur canal IP doit être réel avant publication."],
+    ["Sécurité","PREUVE MANQUANTE","Aucun contact sécurité public ne doit être inventé."],
+    ["Support & contact","PRODUCT_FACTS_MISSING","Les canaux affichés devront correspondre à des services réellement opérés."],
+  ];
+  return <main id="main-content" tabIndex="-1" className="page-section public-trust">
+    <span className="kicker">Confiance publique · prototype</span>
+    <h1>Confiance, informations légales et transparence.</h1>
+    <p className="page-intro">Cette surface prépare les informations publiques de MODARYX sans inventer de mentions légales, de politiques ou de canaux qui n’existent pas encore.</p>
+    <div className="public-trust-warning"><strong>Prototype noindex — aucun texte juridique final n’est simulé.</strong><span>Une page ne pourra être publiée comme finale qu’après validation des faits produit réels et revue juridique adaptée.</span></div>
+    <section className="public-trust-grid" aria-label="Readiness des informations publiques">
+      {sections.map(([title,status,detail])=><article key={title}>
+        <div className="public-trust-card-head"><h2>{title}</h2><span className="public-trust-state">{status}</span></div>
+        <p>{detail}</p>
+      </article>)}
+    </section>
+    <section className="public-trust-facts">
+      <div><span className="kicker">Règle de publication</span><h2>Les faits d’abord, le texte juridique ensuite.</h2></div>
+      <ul>
+        <li>Ne jamais inventer l’identité d’un opérateur, une adresse, un DPO, une durée de conservation ou un sous-traitant.</li>
+        <li>La confidentialité doit être dérivée de l’architecture réellement déployée.</li>
+        <li>Les canaux support, IP et sécurité doivent être réels et vérifiés avant publication.</li>
+        <li>MODARYX IA devra déclarer les providers, données transmises, mémoire et rétention réellement utilisés.</li>
+      </ul>
+    </section>
+    <div className="public-trust-gate"><strong>Gate VF publique</strong><span>Identité opérateur · politiques adaptées au service réel · canaux vérifiés · revue juridique · liens footer fonctionnels.</span><small>État actuel : PREUVE MANQUANTE / non prêt pour publication juridique finale.</small></div>
+  </main>;
+}
+
 function Community() {
   const [tab,setTab]=useState("Support");
   const [draft,setDraft]=useState(false);
@@ -778,6 +814,7 @@ export function App() {
   else if(active==='Bibliothèque') screen=<Library/>;
   else if(active==='Droits jeux') screen=<RightsDashboard/>;
   else if(active==='MODARYX IA') screen=<ModaryxAI/>;
+  else if(active==='Confiance & légal') screen=<PublicLegalTrust/>;
   else screen=<GameHub onOpen={openContent}/>;
-  return <div className="app-shell"><a className="skip-link" href="#main-content">Aller au contenu principal</a>{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo onNavigate={navigate}/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button></footer></div>;
+  return <div className="app-shell"><a className="skip-link" href="#main-content">Aller au contenu principal</a>{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo onNavigate={navigate}/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button><button onClick={()=>navigate('Confiance & légal')}>Confiance & légal</button></footer></div>;
 }
