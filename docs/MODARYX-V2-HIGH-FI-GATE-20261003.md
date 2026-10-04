@@ -265,6 +265,7 @@ Preuve cible la plus récente :
 - Creator Studio ;
 - Compte/Notifications/Préférences/Onboarding ;
 - Support séparé de Signalement ;
+- Game Atmosphere Layer originale, avec variante desktop/mobile ;
 - états nominal / empty / unavailable / anonymous / local-only / offline-stale / validation-error-retry / success sur les surfaces ciblées.
 
 ### Limites internes encore ouvertes
@@ -283,7 +284,8 @@ Preuve cible la plus récente :
 - validation mobile humaine réelle ;
 - screen reader réel ;
 - appareils physiques ;
-- Figma supplémentaire toujours bloqué par quota si la matérialisation Figma reste exigée.
+- Figma supplémentaire toujours bloqué par quota si la matérialisation Figma reste exigée ;
+- vraie revue humaine de la variante Game Atmosphere : PREUVE MANQUANTE.
 
 ### Décision de gate
 
