@@ -182,6 +182,9 @@ try{
   await clickExact("footer button","Droits jeux · démo admin");
   await assertSurface("rights-dashboard"); count++;
 
+  await clickExact("footer button","Confiance & légal");
+  await assertSurface("public-trust"); count++;
+
   console.log("A11Y_STRUCTURE_SURFACE_COUNT",count);
   console.log("PASS_V2_ACCESSIBILITY_STRUCTURE_MATRIX");
 }finally{
