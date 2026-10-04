@@ -714,3 +714,28 @@ Production reste bloquée par :
 - canaux support/IP/sécurité réels ;
 - revue spécialisée ;
 - stack/backend final.
+
+
+## 33. Help / Documentation — réconciliation — 4 octobre 2026
+
+La ligne historique `Docs / Help` de la section 17 est supersédée ainsi pour l’état prototype actuel :
+
+- architecture surface : **TERMINÉE — prototype**
+- surface desktop/mobile : **MATÉRIALISÉE**
+- rubriques produit : **MATÉRIALISÉES**
+- raccourcis vers surfaces produit : **MATÉRIALISÉS**
+- contrat documentation : **TERMINÉ**
+- surface map : **26 surfaces**
+- accessibilité navigateur ciblée : **COUVERTE**
+- contenu final production : **PREUVE MANQUANTE**
+- docs repository/pipeline : **NON IMPLÉMENTÉS**
+- search docs production : **NON IMPLÉMENTÉ**
+- revue humaine : **PREUVE MANQUANTE**
+- implémentation production : **BLOQUÉE par le gate**
+
+Preuves :
+- contrat run `37229486530` — **SUCCESS**, `PASS_V2_HELP_DOCUMENTATION_CONTRACT` ;
+- surface map run `37229378669` — **SUCCESS**, 26 surfaces ;
+- Living Threshold run `37228199151` — **SUCCESS**, 85 captures, keyboard 40/40.
+
+La structure d’aide est prête à migrer lorsque le root production sera autorisé, mais son contenu final devra être dérivé du produit réellement livré.
