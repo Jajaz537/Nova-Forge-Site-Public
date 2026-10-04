@@ -5,7 +5,7 @@
 
 ## 1. But
 
-Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 71 captures au hasard.
+Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 73 captures au hasard.
 
 Ce pack ne remplace pas :
 - un screen reader réel ;
@@ -47,6 +47,7 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 15. `desktop-rights-response-interpretation.png` — vérifier la lecture SAFE_AUTOMATION + fallback LEGAL_REVIEW_REQUIRED
 16. `desktop-rights-contact-verified.png` — vérifier que CONTACT_VERIFIED précède REQUEST_READY et qu’aucun envoi réel n’est suggéré
 17. `desktop-rights-notification-preview.png` — vérifier que les événements fictifs restent clairement marqués non reçus
+- `desktop-rights-lifecycle-expired.png` — vérifier que l’expiration rebloque clairement les usages dépendants.
 
 ### Mobile — noyau
 
@@ -65,6 +66,7 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 13. `mobile-rights-response-interpretation.png` — vérifier compréhension du parsing de réponse et du garde-fou juridique
 14. `mobile-rights-contact-verified.png` — vérifier la lisibilité du contact vérifié et de REQUEST_READY sur petit écran
 15. `mobile-rights-notification-preview.png` — vérifier la compréhension des notifications droits fictives sans confusion avec un événement réel
+- `mobile-rights-lifecycle-expired.png` — vérifier lisibilité du fallback baseline MODARYX après expiration.
 
 ### États critiques si le participant a encore du temps
 
@@ -174,6 +176,13 @@ Ne pas dire :
    - distinguez-vous APPROVED_WITH_LIMITS de LEGAL_REVIEW_REQUIRED ?
    - comprenez-vous que LEGAL_REVIEW_REQUIRED ne débloque aucun droit ?
    - comprenez-vous qu’email et push sont encore indisponibles ?
+
+### Cycle de vie des droits
+
+16. Dans le Rights Dashboard :
+   - comprenez-vous qu’une autorisation expirée ou révoquée rebloque immédiatement ses usages dépendants ?
+   - comprenez-vous que la baseline originale MODARYX peut rester disponible lorsqu’elle est juridiquement acceptable ?
+   - comprenez-vous qu’une réactivation exige une nouvelle preuve et ne peut pas être silencieuse ?
 
 ## 6. Tâches courtes recommandées
 
