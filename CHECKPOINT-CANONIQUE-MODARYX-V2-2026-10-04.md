@@ -1976,3 +1976,37 @@ Preuve la plus fraîche couvrant le code produit après déplacement des styles 
 - captures : **87**.
 
 Le HEAD courant contient ensuite surtout des ajouts QA/docs/contracts ; ne pas prétendre qu'un commit docs-only est une nouvelle preuve visuelle.
+
+
+## 60. Public trust — preuve contrat + registry consolidé
+
+**TERMINÉ pour le contrat / publication réelle PREUVE MANQUANTE**
+
+Public trust contract :
+- run `37233036635` — **SUCCESS**
+- commit `9294ac7dc7de19a40f14d57b44335f480349eab6`
+- `PUBLIC_TRUST_CATEGORY_COUNT 8`
+- `PUBLIC_TRUST_READINESS_STATE_COUNT 7`
+- `PUBLIC_TRUST_INVARIANT_COUNT 11`
+- `PASS_V2_PUBLIC_TRUST_CONTRACT`.
+
+Verrouillé :
+- aucune identité opérateur/adresse/DPO/canal support/sécurité inventé ;
+- politiques privacy dérivées de l'architecture réellement déployée ;
+- placeholders jamais présentés comme textes finaux ;
+- publication uniquement après état approuvé ;
+- disclosures IA alignés sur les providers réellement déployés.
+
+Registry consolidé :
+- run `37233086517` — **SUCCESS**
+- commit `21a9f3d05b3b41e852ce76d789b4767e02c7b83b`
+- `PREPRODUCTION_CONTRACT_COUNT 20`
+- public trust inclus ;
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+Toujours PREUVE MANQUANTE :
+- identité opérateur réelle ;
+- textes juridiques finaux ;
+- canaux support/IP/sécurité réels ;
+- revue juridique ;
+- publication production.
