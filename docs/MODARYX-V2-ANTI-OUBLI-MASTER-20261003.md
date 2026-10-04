@@ -1663,3 +1663,25 @@ Preuve :
 - `PASS_V2_PROTOTYPE_SECURITY_SINKS`.
 
 Ne jamais convertir ce micro-proof en certification sécurité production.
+
+
+## 60. CSP / headers / rich text — contrat machine — 4 octobre 2026
+
+**TERMINÉ pour le contrat / runtime PREUVE MANQUANTE**
+
+Preuve :
+- run `37232040196` — **SUCCESS**
+- `PASS_V2_CSP_HEADERS_RICH_TEXT_CONTRACT`.
+
+À ne pas perdre :
+- CSP stricte self-first ;
+- no global unsafe-inline ;
+- no unsafe-eval ;
+- rich text plain text par défaut ;
+- sanitize allowlist avant render ;
+- protocoles liens user http/https seulement ;
+- SW V2 isolé ;
+- preview noindex et Report-Only avant enforcement ;
+- COOP/COEP/CORP seulement après compatibilité réelle.
+
+Aucun header public réel n'a été modifié par cette preuve.
