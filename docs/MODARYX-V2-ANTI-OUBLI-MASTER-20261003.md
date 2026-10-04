@@ -2013,3 +2013,21 @@ Anti-dérive :
 - ne jamais figer un ancien nombre de contrats dans `currentlyProven` ;
 - registry vert = contrats verts, pas production verte ;
 - VF readiness vert signifie que le **garde-fou de blocage** fonctionne, pas que la VF est prête.
+
+
+## 71. Validation externe — format de preuve verrouillé
+
+**TERMINÉ pour le contrat / aucune preuve externe inventée**
+
+Run :
+- `37237801947` — SUCCESS ;
+- registry : **52 contrats**.
+
+À ne jamais oublier :
+- vraie personne ≠ simulation IA ;
+- vrai appareil ≠ émulation ;
+- vrai screen reader ≠ AX tree navigateur ;
+- vrai Safari ≠ user-agent ou moteur différent ;
+- comparaison visuelle finale exige une référence approuvée archivable ;
+- P0/P1 ouvert bloque la fermeture ;
+- toute preuve doit être liée au commit testé et à des artifacts/observations structurées.
