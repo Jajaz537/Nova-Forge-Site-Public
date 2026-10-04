@@ -1641,3 +1641,25 @@ Toujours PREUVE MANQUANTE :
 - schema.org production ;
 - pipeline localisation ;
 - revue SEO production.
+
+
+## 59. Prototype security sinks / inline styles — 4 octobre 2026
+
+**TERMINÉ pour le prototype source**
+
+À conserver :
+- aucune référence distante dans le checker ciblé ;
+- aucun sink dangereux ciblé ;
+- aucun style inline React dans la source Living Threshold ciblée ;
+- règles media/targets déplacées vers le CSS ;
+- objectif : faciliter une future CSP stricte sans `unsafe-inline` généralisé.
+
+Preuve :
+- run `37231081387` — **SUCCESS**
+- commit `50d1d2aab8146aea5e6a63189c262497c73c2df3`
+- `PROTOTYPE_SECURITY_REMOTE_REFERENCE_COUNT 0`
+- `PROTOTYPE_SECURITY_DANGEROUS_SINK_COUNT 0`
+- `PROTOTYPE_SECURITY_INLINE_STYLE_COUNT 0`
+- `PASS_V2_PROTOTYPE_SECURITY_SINKS`.
+
+Ne jamais convertir ce micro-proof en certification sécurité production.
