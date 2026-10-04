@@ -5,7 +5,7 @@
 
 ## 1. But
 
-Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 39 captures au hasard.
+Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 57 captures au hasard.
 
 Ce pack ne remplace pas :
 - un screen reader réel ;
