@@ -464,6 +464,95 @@ Résumé global possible :
 
 Le tableau de bord est une surface d’administration et ne doit pas être exposé comme une preuve publique de partenariat.
 
+
+
+## 17.3 Réception inbound, corrélation et provenance
+
+Le transport entrant doit rester séparé de l'interprétation juridique.
+
+États conceptuels :
+- `INBOUND_RECEIVED`
+- `CORRELATION_PENDING`
+- `CORRELATED`
+- `PROVENANCE_UNVERIFIED`
+- `PROVENANCE_VERIFIED`
+- `ATTACHMENT_QUARANTINED`
+- `READY_FOR_INTERPRETATION`
+- `LEGAL_REVIEW_REQUIRED`
+- `REJECTED_UNTRUSTED`
+
+Corrélation possible avec :
+- RightsCaseId ;
+- LogicalRequestId ;
+- Message-ID ;
+- In-Reply-To ;
+- References ;
+- token de thread.
+
+Ces signaux servent à rattacher un message au bon dossier. Ils ne prouvent pas à eux seuls l'autorité juridique de l'expéditeur.
+
+Signaux de provenance possibles :
+- adresse et domaine expéditeur ;
+- headers bruts ;
+- SPF ;
+- DKIM ;
+- DMARC ;
+- correspondance avec le contact officiel déjà vérifié ;
+- correspondance avec un domaine officiel connu.
+
+Règle :
+**SPF/DKIM/DMARC ou un nom d'expéditeur plausible ne suffisent jamais, seuls, à transformer une réponse en permission.**
+
+Conservation minimale :
+- message brut ;
+- headers bruts ;
+- date de réception ;
+- preuves de corrélation ;
+- preuves de provenance ;
+- hashes des pièces jointes.
+
+Pièces jointes :
+- quarantaine avant ouverture ;
+- hash avant traitement ;
+- scan de sécurité avant usage ;
+- aucune macro exécutée ;
+- aucun script exécuté ;
+- aucun contenu actif externe exécuté.
+
+Le système peut automatiquement :
+- archiver le message brut ;
+- calculer les hashes ;
+- mettre les pièces jointes en quarantaine ;
+- tenter la corrélation ;
+- enregistrer les signaux d'authentification ;
+- préparer un résumé de provenance ;
+- router vers le contrat d'interprétation lorsque les préconditions sont réunies.
+
+Le système ne peut jamais automatiquement :
+- accorder des droits parce qu'un email a été livré ;
+- accorder des droits sur la base du nom d'expéditeur seul ;
+- accorder des droits sur SPF/DKIM/DMARC seuls ;
+- faire confiance à une pièce jointe non corrélée ;
+- exécuter le contenu d'une pièce jointe ;
+- fabriquer un nouveau contact de confiance ;
+- fusionner droits Web et MODARYX Forge ;
+- supprimer le message brut après parsing.
+
+Un inbound non corrélé ou non fiable doit **fail closed** et passer en revue, pas en approbation.
+
+Contrat machine-readable :
+- `qa/modaryx-v2-publisher-inbound-contract.json`
+- `qa/check-v2-publisher-inbound-contract.mjs`
+- `.github/workflows/modaryx-v2-publisher-inbound-contract-proof.yml`
+
+Prototype :
+- réception fictive après livraison fictive ;
+- corrélation au Rights Case fictif ;
+- provenance technique fictive ;
+- préparation d'interprétation ;
+- scénario provenance non fiable → fail closed ;
+- aucune mailbox, aucun webhook et aucun parser réel.
+
 ## 18. Automatisation réelle
 
 État actuel :
