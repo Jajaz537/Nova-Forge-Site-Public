@@ -2369,3 +2369,45 @@ Correction de dérive :
 
 Le registre consolidé exécute maintenant également le VF readiness gate.  
 Cette consolidation **ne ferme aucun des 32 blockers** et ne change pas le statut VF : `BLOCKED`.
+
+
+## 71. Contrat de preuve validation externe — registry 52 contrats
+
+**TERMINÉ pour la structure de preuve / sessions externes PREUVE MANQUANTE**
+
+Source :
+`docs/MODARYX-V2-EXTERNAL-VALIDATION-EVIDENCE-CONTRACT-20261004.md`
+
+Machine :
+- `qa/modaryx-v2-external-validation-evidence-contract.json`
+- `qa/check-v2-external-validation-evidence-contract.mjs`
+
+Run consolidé :
+- `37237801947` — **SUCCESS**
+- `PASS_V2_EXTERNAL_VALIDATION_EVIDENCE_CONTRACT`
+- `PREPRODUCTION_CONTRACT_COUNT 52`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+Verrouillé :
+- automation ≠ preuve humaine ;
+- émulation ≠ appareil physique ;
+- accessibility tree CDP ≠ screen reader réel ;
+- navigateur non-Safari ≠ Safari réel ;
+- aucune référence archivable ≠ aucun PASS fidélité visuelle ;
+- P0/P1 ouvert ≠ gate fermé ;
+- INCOMPLETE ≠ PASS ;
+- preuve liée à un commit ;
+- artifact refs obligatoires ;
+- minimisation des données personnelles.
+
+Types de sessions structurés :
+- HUMAN_MULTISCREEN ;
+- HUMAN_MOBILE ;
+- NVDA_REAL ;
+- VOICEOVER_REAL ;
+- TALKBACK_REAL ;
+- SAFARI_REAL ;
+- PHYSICAL_DEVICE ;
+- VISUAL_REFERENCE_COMPARISON.
+
+État réel : toutes ces preuves externes restent `NOT_PROVEN` tant qu'une vraie session/artifact correspondant n'existe pas.
