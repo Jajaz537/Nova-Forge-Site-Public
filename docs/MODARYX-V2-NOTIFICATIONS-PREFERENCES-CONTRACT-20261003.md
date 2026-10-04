@@ -191,3 +191,36 @@ Avant high-fi :
 - mobile défini.
 
 **État : TERMINÉ pour le contrat produit / NON IMPLÉMENTÉ volontairement.**
+
+
+## 18. Événements droits éditeurs — 4 octobre 2026
+
+Les notifications de droits doivent provenir uniquement d’un événement réel du futur Game Rights Registry / workflow éditeur.
+
+Types cibles :
+- réponse éditeur reçue ;
+- autorisation accordée avec scopes ;
+- autorisation avec limites ;
+- informations complémentaires demandées ;
+- revue juridique requise ;
+- refus ;
+- expiration prochaine ;
+- expiration ;
+- révocation.
+
+Règles :
+- aucune notification “réponse reçue” sans événement inbound réellement rattaché à un Rights Case ;
+- aucune autorisation globale déduite d’une réponse partielle ;
+- un scope absent reste non accordé ;
+- `LEGAL_REVIEW_REQUIRED` n’active aucun droit ;
+- la notification doit pointer vers le Rights Case réel et afficher les scopes concernés ;
+- aucune notification ne doit exposer publiquement une adresse privée ou une clause confidentielle ;
+- Web et MODARYX Forge restent des scopes distincts ;
+- email/push restent indisponibles tant que l’infrastructure réelle n’est pas connectée ;
+- compteur/badge uniquement à partir d’un nombre réel.
+
+Prototype Living Threshold :
+- aperçu fictif explicitement marqué `Démonstration · non reçue` ;
+- ne constitue aucun événement serveur réel.
+
+**État : contrat complété / infrastructure notifications droits PREUVE MANQUANTE.**
