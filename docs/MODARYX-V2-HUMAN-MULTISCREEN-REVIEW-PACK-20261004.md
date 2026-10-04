@@ -5,7 +5,7 @@
 
 ## 1. But
 
-Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 77 captures au hasard.
+Fermer rapidement et proprement les derniers blockers humains du prototype Living Threshold sans demander aux participants de parcourir 81 captures au hasard.
 
 Ce pack ne remplace pas :
 - un screen reader réel ;
@@ -47,6 +47,8 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 15. `desktop-rights-response-interpretation.png` — vérifier la lecture SAFE_AUTOMATION + fallback LEGAL_REVIEW_REQUIRED
 16. `desktop-rights-contact-verified.png` — vérifier que CONTACT_VERIFIED précède REQUEST_READY et qu’aucun envoi réel n’est suggéré
 17. `desktop-rights-notification-preview.png` — vérifier que les événements fictifs restent clairement marqués non reçus
+18. `desktop-rights-outbound-delivered.png` — vérifier que DELIVERED n’est jamais confondu avec une autorisation
+19. `desktop-rights-inbound-ready.png` — vérifier corrélation, provenance, quarantaine et READY_FOR_INTERPRETATION sans confusion juridique
 - `desktop-rights-lifecycle-expired.png` — vérifier que l’expiration rebloque clairement les usages dépendants.
 - `desktop-ip-takedown-restricted.png` — vérifier compréhension du fallback temporaire, preuves conservées et absence de décision juridique automatique.
 
@@ -67,6 +69,8 @@ Aucune capture ne doit être présentée comme donnée réelle : le prototype ut
 13. `mobile-rights-response-interpretation.png` — vérifier compréhension du parsing de réponse et du garde-fou juridique
 14. `mobile-rights-contact-verified.png` — vérifier la lisibilité du contact vérifié et de REQUEST_READY sur petit écran
 15. `mobile-rights-notification-preview.png` — vérifier la compréhension des notifications droits fictives sans confusion avec un événement réel
+16. `mobile-rights-outbound-delivered.png` — vérifier que la livraison reste permission-neutral sur petit écran
+17. `mobile-rights-inbound-ready.png` — vérifier que le résultat READY_FOR_INTERPRETATION ≠ autorisation reste immédiatement visible
 - `mobile-rights-lifecycle-expired.png` — vérifier lisibilité du fallback baseline MODARYX après expiration.
 - `mobile-ip-takedown-restricted.png` — vérifier lisibilité du cas IP restreint sur petit écran.
 
@@ -179,16 +183,29 @@ Ne pas dire :
    - comprenez-vous que LEGAL_REVIEW_REQUIRED ne débloque aucun droit ?
    - comprenez-vous qu’email et push sont encore indisponibles ?
 
+### Transport outbound / inbound éditeur
+
+20. Sur le transport outbound fictif :
+   - comprenez-vous que REQUEST_READY n’est pas envoyé ?
+   - comprenez-vous que DELIVERED n’accorde aucun droit ?
+   - comprenez-vous qu’un bounce ne déclenche jamais une adresse devinée ?
+
+21. Sur la réception inbound fictive :
+   - comprenez-vous que réception, corrélation, provenance et interprétation sont des étapes distinctes ?
+   - comprenez-vous que SPF/DKIM/DMARC ne prouvent pas seuls l’autorité juridique ?
+   - comprenez-vous que les pièces jointes restent en quarantaine avant traitement ?
+   - comprenez-vous que READY_FOR_INTERPRETATION n’est toujours pas une autorisation ?
+
 ### Cycle de vie des droits
 
-16. Dans le Rights Dashboard :
+22. Dans le Rights Dashboard :
    - comprenez-vous qu’une autorisation expirée ou révoquée rebloque immédiatement ses usages dépendants ?
    - comprenez-vous que la baseline originale MODARYX peut rester disponible lorsqu’elle est juridiquement acceptable ?
    - comprenez-vous qu’une réactivation exige une nouvelle preuve et ne peut pas être silencieuse ?
 
 ### IP / takedown
 
-17. Sur le cas IP de démonstration :
+23. Sur le cas IP de démonstration :
    - comprenez-vous qu’un signalement n’est pas automatiquement une décision juridique ?
    - comprenez-vous que l’asset contesté peut être restreint avec un fallback MODARYX sans suppression des preuves ?
    - comprenez-vous que `LEGAL_REVIEW_REQUIRED` bloque la restauration automatique ?
@@ -293,3 +310,23 @@ Questions ciblées :
 - sur mobile, la hiérarchie reste-t-elle lisible et non envahissante ?
 
 Cette surface reste un **preview d’intégration**, pas une IA réelle.
+
+
+## Extension Publisher Inbound — 4 octobre 2026
+
+Preuves :
+- contrat inbound : run `37214242330` — **SUCCESS**, `PASS_V2_PUBLISHER_INBOUND_CONTRACT` ;
+- micro-proof rendu : run `37214564614` — **SUCCESS**, `PUBLISHER_INBOUND_MOBILE_OVERFLOW 0`, `PASS_V2_PUBLISHER_INBOUND_PREVIEW` ;
+- Living Threshold : run `37214829645` — **SUCCESS**, **81 captures**.
+
+Captures :
+- `desktop-rights-inbound-ready.png`
+- `mobile-rights-inbound-ready.png`
+
+À valider humainement :
+- distinction réception / corrélation / provenance / interprétation ;
+- compréhension de `READY_FOR_INTERPRETATION ≠ autorisation` ;
+- compréhension de la quarantaine des pièces jointes ;
+- lisibilité mobile de l’état final.
+
+Le flux reste entièrement fictif : aucune mailbox, aucun webhook, aucun email entrant et aucune pièce jointe réelle.
