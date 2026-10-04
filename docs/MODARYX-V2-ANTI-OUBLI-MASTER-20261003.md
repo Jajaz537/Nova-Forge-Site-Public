@@ -286,7 +286,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | High-fi final | BLOQUÉ volontairement ; exploration réversible autorisée | HIGH-FI-GATE |
 | Direction artistique exploratoire | TERMINÉ — option 2 sélectionnée, palette hybride 2+3, prototype isolé | LIVING-THRESHOLD-DESIGN-SYSTEM / review-evidence |
 | Design system préparatoire | TERMINÉ — tokens, composants, responsive, a11y, motion, identité documentés | LIVING-THRESHOLD-DESIGN-SYSTEM |
-| QA visuelle archivable du prototype | EN COURS — export navigateur + a11y ciblée + flows + 39 captures archivées ; comparaison normalisée source + humain/screen-reader/device encore manquants | review-evidence/.../design-qa.md |
+| QA visuelle archivable du prototype | TERMINÉ — export navigateur + a11y ciblée + flows + 57 captures archivées ; comparaison normalisée source + humain/screen-reader/device restent PREUVE MANQUANTE | review-evidence/.../design-qa.md |
 | Direction artistique finale | BLOQUÉ volontairement — sélection exploratoire ≠ gel high-fi | HIGH-FI-GATE |
 | Tree test humain | EN COURS — P01 réel + mini-test terminologique P01 terminés, validation globale incomplète | HUMAN-MINI-TREE-TEST-P01 / HUMAN-TERMINOLOGY-MINITEST-P01 / CROSS-ANALYSIS |
 
@@ -423,7 +423,7 @@ Référence : `docs/MODARYX-V2-LIVING-THRESHOLD-DESIGN-SYSTEM-20261003.md`.
 
 ## Benchmark écosystèmes modding / transfert MODARYX Forge
 
-**EN COURS — recherche retenue et tracée / aucune parité concurrent déclarée**
+**TERMINÉ pour le corpus actuel — recherche retenue et tracée / veille benchmark continue jusqu'à la VF / aucune parité concurrent déclarée**
 
 Document :
 `docs/MODARYX-V2-MODDING-ECOSYSTEM-BENCHMARK-TRANSFER-20261003.md`
@@ -499,7 +499,7 @@ Prochain anti-oubli actif :
 
 ## 30. Benchmark actuel écosystèmes de mods — 4 octobre 2026
 
-**TERMINÉ — recherche consolidée / intégration produit EN COURS**
+**TERMINÉ — recherche consolidée / intégration prototype ciblée TERMINÉE**
 
 Document :
 `docs/MODARYX-V2-CURRENT-MOD-ECOSYSTEM-BENCHMARK-20261004.md`
@@ -596,7 +596,7 @@ Toujours anti-oubli :
 
 ## 31. Benchmark spécialisé — relations, compatibilité et handoff — 4 octobre 2026
 
-**TERMINÉ — recherche spécialisée consolidée / intégration prototype EN COURS**
+**TERMINÉ — recherche spécialisée consolidée / intégration prototype ciblée TERMINÉE**
 
 Document :
 `docs/MODARYX-V2-SPECIALIZED-MOD-ECOSYSTEM-BENCHMARK-20261004.md`
@@ -694,4 +694,72 @@ Toujours PREUVE MANQUANTE réelle :
 - MODARYX Forge ;
 - backend et production.
 
-**Prochain travail interne : audit des états EN COURS / PREUVE MANQUANTE pour distinguer les gaps encore récupérables ici des vrais gates externes.**
+**Audit interne : TERMINÉ.**
+
+Résultat :
+- aucun autre gap produit/prototype honnêtement récupérable n'a été identifié sans inventer backend, runtime, provider ou preuve humaine ;
+- le contrat Web → MODARYX Forge est désormais formalisé ;
+- les anciennes incohérences documentaires ont été réconciliées ;
+- la veille benchmark reste continue jusqu'à la VF, mais le corpus étudié à ce jour est intégré.
+
+Reste réellement externe/runtime :
+- validation humaine multi-écrans supplémentaire ;
+- mobile humain réel ;
+- référence visuelle approuvée archivable + comparaison normalisée ;
+- screen reader réel ;
+- Safari/appareils physiques ;
+- passkeys/backend/préférences distantes ;
+- providers/connecteurs réels ;
+- runtime MODARYX Forge ;
+- PWA/upgrade/cutover production ;
+- données/compatibilité/crossplay réels.
+
+**Prochain saut significatif : lever un gate externe ou reclasser explicitement le gate avant création du root/frontend V2 production.**
+
+
+## 32. Classification finale des blockers après audit interne — 4 octobre 2026
+
+**TERMINÉ — aucun faux progrès ajouté**
+
+### Externe / humain
+- validation humaine globale ;
+- validation mobile humaine ;
+- référence visuelle approuvée archivable ;
+- comparaison normalisée source ↔ implémentation ;
+- NVDA / VoiceOver / TalkBack ;
+- Safari réel ;
+- appareils physiques.
+
+### Backend / services
+- passkeys réelles ;
+- préférences distantes ;
+- email/push ;
+- données et historique réels ;
+- providers/connecteurs ;
+- signer / trust anchor ;
+- artefacts réels de téléchargement.
+
+### Desktop / runtime MODARYX Forge
+- runtime réel ;
+- transport/protocole réel ;
+- receipt/signature réel ;
+- installation/update/rollback réels ;
+- Safe Profile réellement exécuté ;
+- synchro serveur/save ;
+- compatibilité alimentée par données locales réelles.
+
+### Production / migration
+- root/frontend V2 production ;
+- stack finale ;
+- PWA/SW V2 production ;
+- migration/upgrade V1→V2 réellement testée ;
+- cutover ;
+- mesures Core Web Vitals production.
+
+### Historique non récupéré
+- Master Nova Design Intelligence complète : **PREUVE MANQUANTE / NON RÉCUPÉRÉE** — ne pas inventer.
+
+Décision :
+- ne pas créer de nouvelles fonctionnalités décoratives simplement pour occuper le temps ;
+- continuer uniquement la veille benchmark, la maintenance anti-oubli et les micro-proofs nécessaires tant que les gates externes restent fermés ;
+- aucun PASS VF/High-Fi final avant fermeture appropriée.
