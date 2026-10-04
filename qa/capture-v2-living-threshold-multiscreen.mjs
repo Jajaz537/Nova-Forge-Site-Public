@@ -283,6 +283,10 @@ try {
 
   await clickByText("footer button", "Droits jeux · démo admin");
   manifest.captures.push(await capture("desktop-rights-dashboard.png", 1440, 1024, "Aucune demande réelle n’est envoyée dans ce prototype."));
+  await clickByText(".support-triage-actions .primary", "Accepter la baseline sûre");
+  await evaluate("document.querySelector('.support-triage-result')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("desktop-rights-triage-accepted.png", 1440, 1024, "Rights Case de démonstration préparé — non créé réellement."));
 
   // Mobile states
   await navigateHome(390, 844);
@@ -379,6 +383,10 @@ try {
 
   await clickByText("footer button", "Droits jeux · démo admin");
   manifest.captures.push(await capture("mobile-rights-dashboard.png", 390, 844, "Aucune demande réelle n’est envoyée dans ce prototype."));
+  await clickByText(".support-triage-actions .primary", "Accepter la baseline sûre");
+  await evaluate("document.querySelector('.support-triage-result')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("mobile-rights-triage-accepted.png", 390, 844, "Rights Case de démonstration préparé — non créé réellement."));
 
   const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/manifest.json";
   writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
