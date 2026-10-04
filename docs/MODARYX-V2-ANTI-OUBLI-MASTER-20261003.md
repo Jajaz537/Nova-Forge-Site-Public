@@ -1412,3 +1412,22 @@ Responsive matrix :
 Limite :
 - browser automation uniquement ;
 - vrai zoom utilisateur, text resize, Safari, tactile, appareils physiques et screen readers restent PREUVE MANQUANTE.
+
+
+## 52. Sémantique des états actifs — 4 octobre 2026
+
+**TERMINÉ pour navigateur automatisé / AT réel PREUVE MANQUANTE**
+
+À conserver :
+- destination principale active exposée avec `aria-current="page"` ;
+- utilitaires Compte / Bibliothèque / Notifications / MODARYX IA exposent l’état courant ;
+- onglets locaux et toggles exposent `aria-pressed` ;
+- changement visuel actif et sémantique doivent rester synchronisés.
+
+Preuve :
+- run `37219118824` — **SUCCESS**
+- `PASS_V2_ACTIVE_STATE_SEMANTICS`
+- Living Threshold `37219047594` — **SUCCESS**
+- 81 captures.
+
+Ne jamais considérer cette preuve comme validation screen reader réelle.
