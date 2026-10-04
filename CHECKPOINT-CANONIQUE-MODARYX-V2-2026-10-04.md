@@ -1906,3 +1906,52 @@ Toujours NON IMPLÉMENTÉ :
 - choix final de versionnement ;
 - runtime webhooks ;
 - protocole MODARYX Forge réel.
+
+
+## 58. Registre consolidé des contrats pré-production
+
+**TERMINÉ — preuve consolidée / implémentations réelles restent distinctes**
+
+Fichiers :
+- `qa/modaryx-v2-preproduction-contract-registry.json`
+- `qa/check-v2-preproduction-contract-registry.mjs`
+- `.github/workflows/modaryx-v2-preproduction-contract-registry-proof.yml`
+
+Incident initial :
+- run `37232662714` — **FAIL**
+- erreur exacte : checker dédié async manquant `qa/check-v2-async-loading-contract.mjs`
+- les deux premiers contrats avaient déjà passé avant arrêt ;
+- aucun full replay.
+
+Isolation/correction ciblée :
+- vérification de tous les checkers du registry ;
+- seul `async-loading` était sans checker fichier dédié ;
+- ajout de `qa/check-v2-async-loading-contract.mjs`.
+
+Micro-proof/continuation :
+- run `37232747869` — **SUCCESS**
+- commit `905c83dad2bad10544060ae6ff8b9ff372bc8369`
+- 19 contrats exécutés individuellement ;
+- `PREPRODUCTION_CONTRACT_COUNT 19`
+- `PREPRODUCTION_CONTRACT_REGISTRY_INVARIANT_COUNT 5`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+Contrats couverts :
+- MODARYX IA ;
+- asset rights ;
+- async/loading ;
+- Game Rights Registry ;
+- workflow droits ;
+- demande support jeu ;
+- Help/Docs ;
+- IP takedown ;
+- moderation/appeals ;
+- publisher inbound/outbound/response ;
+- rights lifecycle/notifications ;
+- SEO/i18n ;
+- CSP/headers/rich text ;
+- notifications/preferences ;
+- onboarding/account/creator ;
+- API governance.
+
+Cette preuve consolide les **contrats**. Elle ne transforme aucun backend, provider, auth, email, runtime Forge ou service externe en implémentation réelle.
