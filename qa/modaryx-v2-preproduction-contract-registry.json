@@ -308,6 +308,12 @@
       "contract": "qa/modaryx-v2-vf-readiness-gate.json",
       "checker": "qa/check-v2-vf-readiness-gate.mjs",
       "source": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-04.md"
+    },
+    {
+      "id": "external-validation-evidence",
+      "contract": "qa/modaryx-v2-external-validation-evidence-contract.json",
+      "checker": "qa/check-v2-external-validation-evidence-contract.mjs",
+      "source": "docs/MODARYX-V2-EXTERNAL-VALIDATION-EVIDENCE-CONTRACT-20261004.md"
     }
   ],
   "invariants": [
