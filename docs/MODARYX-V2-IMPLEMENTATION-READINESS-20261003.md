@@ -553,3 +553,29 @@ La future production doit étendre ce mécanisme :
 Les assets actuels restent `ALLOWED_PROTOTYPE_ONLY`.
 
 Le root/frontend production reste BLOQUÉ par le gate canonique.
+
+
+## 30. Game Rights Registry — réconciliation — 4 octobre 2026
+
+Contrat :
+- `docs/MODARYX-V2-GAME-RIGHTS-REGISTRY-CONTRACT-20261004.md`
+- run `37205429699` — **SUCCESS**
+- 8 surfaces produit ;
+- 18 scopes ;
+- 10 statuts ;
+- 14 activation guards ;
+- 14 invariants ;
+- `PASS_V2_GAME_RIGHTS_REGISTRY_CONTRACT`.
+
+La production doit encore implémenter :
+- persistence ;
+- API ;
+- admin CRUD ;
+- policy engine ;
+- scheduler/revalidation ;
+- asset linkage ;
+- audit store.
+
+Le prototype Rights Dashboard reste une preuve comportementale fictive, pas le Registry production.
+
+Le root/frontend production reste BLOQUÉ selon le gate canonique.
