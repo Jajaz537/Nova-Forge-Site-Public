@@ -1533,3 +1533,42 @@ Limites :
 - tous les contrôles visibles ciblés atteints au clavier sur chaque surface.
 
 Cette preuve ne remplace pas un test humain clavier ni un screen reader réel.
+
+
+## 49. Confiance publique — surface prototype
+
+**TERMINÉ pour la structure et le prototype / publication finale PREUVE MANQUANTE**
+
+Référence :
+`docs/MODARYX-V2-PUBLIC-LEGAL-TRUST-READINESS-20261004.md`
+
+Preuve UI :
+- run `37227306023` — **SUCCESS**
+- commit `63868585bfc89b24eb2c138a0e64889932de69b8`
+- artifact `11312436153`
+- digest `sha256:dabf001e15e97608b988105de220a6743bca97664dcbe530303aabb1cbeea1be`
+- `KEYBOARD_REACHABLE 39 / 39`
+- `MULTISCREEN_CAPTURE_COUNT 83`.
+
+Preuves ciblées :
+- structure/accessibilité run `37227306134` — **SUCCESS**, 16 surfaces ;
+- touch matrix : **16 surfaces** ;
+- forced colors : **13 surfaces** ;
+- text spacing run `37227306076` — **SUCCESS**, 13 surfaces ;
+- narrow 320 run `37227306114` — **SUCCESS**, 13 surfaces ;
+- tablet run `37227306108` — **SUCCESS**, 13 surfaces ;
+- surface map run `37227011707` — **SUCCESS**, **25 surfaces**.
+
+Matérialisé :
+- entrée footer `Confiance & légal` ;
+- catégories de readiness ;
+- statuts non finaux explicites ;
+- prototype noindex ;
+- aucun contenu final présenté comme approuvé.
+
+Toujours PREUVE MANQUANTE :
+- identité opérateur réelle ;
+- textes finaux ;
+- canaux support/IP/sécurité réels ;
+- revue juridique ;
+- publication production.
