@@ -94,6 +94,7 @@ try{
 
   await evaluate("document.body.setAttribute('tabindex','-1');document.body.focus()");
   await pressTab();
+  await sleep(220);
   const skipFocus=await evaluate(`(() => {
     const a=document.activeElement;
     if(!a?.classList?.contains('skip-link')) return null;
