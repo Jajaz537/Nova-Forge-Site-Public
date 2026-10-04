@@ -592,3 +592,56 @@ Toujours anti-oubli :
 - validation humaine/externe.
 
 **Prochain travail interne : poursuivre le benchmark spécialisé et ne retenir que les capacités réellement distinctes.**
+
+
+## 31. Benchmark spécialisé — relations, compatibilité et handoff — 4 octobre 2026
+
+**TERMINÉ — recherche spécialisée consolidée / intégration prototype EN COURS**
+
+Document :
+`docs/MODARYX-V2-SPECIALIZED-MOD-ECOSYSTEM-BENCHMARK-20261004.md`
+
+Écosystèmes spécialisés étudiés :
+- Factorio ;
+- CKAN / Kerbal ;
+- BeamNG ;
+- Satisfactory ;
+- Farming Simulator ModHub ;
+- SMAPI ;
+- GTA5-Mods ;
+- Paradox Mods ;
+- ModWorkshop / MO2 bridge ;
+- tModLoader.
+
+Décisions retenues à ne pas perdre :
+- relations typées : Required / Recommended / Suggested / Supported / Conflict / ReplacedBy / Alternative ;
+- **reverse dependency impact** avant disable/remove/update ;
+- CompatibilityClaim multi-dimension : jeu/version/édition/plateforme/loader/channel ;
+- preuve + date/fraîcheur + workaround séparés du résultat ;
+- capability handshake obligatoire avant tout CTA web→MODARYX Forge ;
+- raison lisible si capability absente ;
+- version policy enrichie : Auto sûr / Proposer / Épinglé exact / Minimum accepté ;
+- validation/modération par plateforme et crossplay séparé ;
+- variantes de Release/File par édition/loader/plateforme/format ;
+- type de contenu distinct du provider et du runtime ;
+- Diagnostic Safe Profile conservé comme capacité future, jamais simulé comme exécuté ;
+- synchro save/serveur = delta vers une référence exacte, pas simple Update All.
+
+Peut être matérialisé honnêtement dans Living Threshold :
+- types de relations ;
+- dépendants inverses ;
+- matrice compatibilité/fraîcheur/workaround ;
+- CTA manager disabled avec raison ;
+- variantes de fichier pédagogiques ;
+- pipeline de validation plateforme illustratif ;
+- Safe Profile indiqué indisponible.
+
+Ne pas simuler :
+- provider API réelle ;
+- synchro serveur/save ;
+- crossplay testé ;
+- safe mode exécuté ;
+- manager/runtime desktop ;
+- validation plateforme réelle.
+
+**Prochain travail interne : micro-matérialisation ciblée + preuve navigateur.**
