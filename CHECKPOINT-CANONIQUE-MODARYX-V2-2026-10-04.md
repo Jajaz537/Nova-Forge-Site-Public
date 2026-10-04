@@ -2528,3 +2528,42 @@ Inspection visuelle directe de l'artifact frais :
 Limite :
 - cette fermeture valide l'archive de preuve du prototype ;
 - elle ne ferme aucun blocker humain, screen reader, appareil, backend ou production.
+
+
+## 75. Capture integrity guard — archive Living Threshold
+
+**TERMINÉ pour le garde-fou d'archive / High-Fi final toujours BLOQUÉ**
+
+Checker :
+`qa/check-v2-multiscreen-capture-integrity.mjs`
+
+Self-test dédié :
+- run `37239093475` — **SUCCESS**
+- `PASS_V2_MULTISCREEN_CAPTURE_INTEGRITY`
+- `PASS_V2_MULTISCREEN_CAPTURE_INTEGRITY_SELF_TEST`.
+
+Le checker protège notamment contre :
+- capture PNG trop petite / probablement vide ;
+- dimensions desktop/mobile inattendues ;
+- nom de capture hors convention ;
+- duplicata binaire exact ;
+- nombre de captures inférieur au corpus attendu.
+
+Intégration au workflow Living Threshold :
+- run `37239135911` — **SUCCESS**
+- commit capturé `9a783595ea87cb4475ea19cde8cdfa995a75b09c`
+- artifact `11316673052`
+- digest `sha256:2856da71951c047ce32fe7e1453b61a76567e97aae84ec74370887dd029ed117`
+- `KEYBOARD_REACHABLE 41 / 41`
+- desktop/mobile overflow `0 / 0`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 87`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+- `MULTISCREEN_INTEGRITY_CAPTURE_COUNT 87`
+- plus petite capture : `mobile-content-report-error.png 67707 bytes`
+- `PASS_V2_MULTISCREEN_CAPTURE_INTEGRITY`.
+
+Conséquence :
+le défaut de capture vide détecté précédemment est désormais couvert par un garde-fou automatique dans le workflow visuel principal.
+
+Ce PASS reste une preuve d'intégrité de l'archive du prototype, pas une validation humaine, High-Fi finale ou production.
