@@ -42,6 +42,7 @@ const rightsDemoCases = [
     status:"APPROVED_WITH_LIMITS",
     summary:"Autorisation fictive partielle pour tester la lecture scope par scope.",
     response:"Réponse fictive archivée · aucune communication réelle",
+    interpretation:{state:"SAFE_AUTOMATION",detail:"Réponse fictive explicite et partielle : seuls les scopes écrits peuvent être appliqués.",notification:"Notification admin fictive préparée · aucune notification réelle envoyée."},
     scopes:[
       ["Nom référentiel","Autorisé dans cette démonstration"],
       ["Logo officiel","Autorisé — exemple fictif"],
@@ -561,6 +562,11 @@ function RightsDashboard() {
         <div className="rights-scope-grid">
           {current.scopes.map(([scope,value])=><article key={scope}><strong>{scope}</strong><span>{value}</span></article>)}
         </div>
+        <section className="rights-interpretation-demo">
+          <div className="rights-interpretation-head"><div><span className="kicker">Interprétation automatique · démonstration</span><h3>Lecture structurée de la réponse</h3></div><span className={`rights-state ${current.interpretation?"approved":"neutral"}`}>{current.interpretation?.state || "AUCUNE RÉPONSE INTERPRÉTABLE"}</span></div>
+          {current.interpretation?<><p>{current.interpretation.detail}</p><small>{current.interpretation.notification}</small></>:<p>Aucune réponse exploitable ne permet d’accorder un scope supplémentaire.</p>}
+          <div className="rights-legal-fallback"><strong>Garde-fou juridique</strong><span>Clause ambiguë, conflit de documents ou portée incertaine → <b>LEGAL_REVIEW_REQUIRED</b>. Aucun déblocage automatique.</span></div>
+        </section>
         <div className="rights-guards">
           <strong>Garde-fous actifs</strong>
           <ul><li>Contact officiel vérifié requis avant envoi.</li><li>NO_RESPONSE et refus ne débloquent aucun scope.</li><li>Droits Web et MODARYX Forge restent séparés.</li><li>Expiration ou révocation rebloquent les usages dépendants.</li></ul>
