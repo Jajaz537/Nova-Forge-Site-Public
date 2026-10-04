@@ -686,3 +686,31 @@ Le gap de conception loading/skeleton est fermé. Le prototype local ne doit pas
 - skeletons prototype artificiels : **NON REQUIS** ;
 - backend/adapters async réels : **NON IMPLÉMENTÉS** ;
 - loading/error/stale production : **PREUVE MANQUANTE** jusqu’aux frontières réelles.
+
+
+## 25. Public Trust / Legal Readiness — 4 octobre 2026
+
+**Prototype : TERMINÉ — production : BLOQUÉ**
+
+Matérialisé :
+- surface footer dédiée ;
+- 8 catégories de readiness ;
+- états non finaux explicites ;
+- aucune information opérateur ou canal inventé ;
+- noindex conservé.
+
+Preuve :
+- Living Threshold `37227306023` — **SUCCESS**
+- 83 captures ;
+- Accessibility Structure Matrix `37227306134` — **SUCCESS**
+- Text Spacing `37227306076` — **SUCCESS**
+- Narrow 320 `37227306114` — **SUCCESS**
+- Tablet `37227306108` — **SUCCESS**
+- surface map `37227011707` — **SUCCESS**, 25 surfaces.
+
+Production reste bloquée par :
+- identité opérateur réelle ;
+- politiques adaptées aux services réellement déployés ;
+- canaux support/IP/sécurité réels ;
+- revue spécialisée ;
+- stack/backend final.
