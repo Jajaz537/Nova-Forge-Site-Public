@@ -1140,3 +1140,26 @@ Cette preuve ne remplace pas :
 - screen reader réel.
 
 Le blocker appareil physique reste donc ouvert.
+
+
+## 35. Narrow reflow 320 — incident ciblé
+
+**EN COURS — correction produit non encore prouvée**
+
+Premier run :
+- workflow `MODARYX V2 Narrow Reflow 320 Micro-Proof`
+- run `37216217158` — **FAIL**
+- build : SUCCESS
+- Game Hub / Games / Catalog / Collections / Creators / Community / Creator Studio / Library : overflow 0
+- échec exact : Account à 320×900 → overflow horizontal **65 px**
+- cause isolée : la navigation compte en flex conserve une largeur min-content qui élargit le grid parent ; les actions compte héritent ensuite d’un conteneur trop large.
+
+Première correction :
+- commit `03119e0482d19b5f638afefd2ccabd96dc008bb1`
+- résultat run `37216621771` : **FAIL identique** ;
+- cause de la correction inefficace : une règle `.account-shell{grid-template-columns:1fr}` plus tardive dans le même media query écrase le `minmax(0,1fr)` ajouté plus tôt.
+
+Procédure :
+- aucun full replay ;
+- correction suivante doit neutraliser la règle plus tardive ou imposer le min-width au shell/nav ;
+- relancer uniquement le micro-proof 320 avant continuation générale.
