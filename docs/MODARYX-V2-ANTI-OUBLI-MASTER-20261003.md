@@ -1261,3 +1261,35 @@ Toujours PREUVE MANQUANTE :
 - scheduler ;
 - asset linkage ;
 - audit store.
+
+
+## 47. MODARYX IA — preview site et contrat machine — 4 octobre 2026
+
+**TERMINÉ pour prototype/contrat / système réel PREUVE MANQUANTE**
+
+Preuves :
+- Living Threshold run `37211271783` — **SUCCESS** ;
+- 77 captures ;
+- `FLOW_ASSERT modaryx ai preview no fake model or action` ;
+- Assistant Contract run `37211787695` — **SUCCESS** ;
+- `PASS_V2_MODARYX_AI_INTEGRATION_CONTRACT`.
+
+À conserver avant VF :
+- MODARYX IA est une surface native, pas un chatbot isolé ;
+- aucune fausse réponse IA dans le prototype ;
+- composer désactivé sans backend ;
+- permissions en niveaux READ / PLAN / EXECUTE_SAFE / EXECUTE_SENSITIVE / BLOCKED ;
+- preuve insuffisante doit rester explicite ;
+- aucune permission juridique ou compatibilité certaine inventée ;
+- provider independence.
+
+Production toujours non implémentée :
+- gateway ;
+- modèles/providers ;
+- knowledge/retrieval ;
+- tools ;
+- permission engine ;
+- evals ;
+- observabilité ;
+- mémoire réelle ;
+- intégration MODARYX Forge.
