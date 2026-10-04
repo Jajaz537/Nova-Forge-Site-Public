@@ -207,6 +207,8 @@ try {
   await clickByText(".global-nav button", "Mods & contenus");
   await clickSelector(".card-hit");
   manifest.captures.push(await capture("desktop-content-detail.png", 1440, 1024, "Avant d’ajouter"));
+  await clickByText(".detail-tabs button", "Plan avancé");
+  manifest.captures.push(await capture("desktop-content-advanced-plan.png", 1440, 1024, "Plan avancé — démonstration"));
   await clickByText(".detail-tabs button", "Signalement");
   manifest.captures.push(await capture("desktop-content-report.png", 1440, 1024, "Signaler ce contenu"));
   await clickByText(".report-section .primary", "Préparer le signalement local");
@@ -219,8 +221,10 @@ try {
   manifest.captures.push(await capture("desktop-library-history.png", 1440, 1024, "Aucun historique réel disponible"));
   await clickByText(".library-tabs button", "Profils de jeu");
   await clickByText(".profile-library article:first-child .quiet", "Ouvrir");
-  await clickByText(".profile-decision .quiet", "Prévisualiser une mise à jour");
+  await clickByText(".profile-preview-actions .quiet", "Prévisualiser une mise à jour");
   manifest.captures.push(await capture("desktop-game-profile-delta.png", 1440, 1024, "Copie avant promotion"));
+  await clickByText(".profile-preview-actions .quiet", "Prévisualiser import / export");
+  manifest.captures.push(await capture("desktop-game-profile-interop.png", 1440, 1024, "Rapport d’import / export — démonstration"));
   await clickByText(".back", "← Retour à la Bibliothèque");
 
   await clickByText(".global-nav button", "Communauté");
@@ -260,6 +264,8 @@ try {
 
   await clickSelector(".card-hit");
   manifest.captures.push(await capture("mobile-content-detail.png", 390, 844, "Avant d’ajouter"));
+  await clickByText(".detail-tabs button", "Plan avancé");
+  manifest.captures.push(await capture("mobile-content-advanced-plan.png", 390, 844, "Plan avancé — démonstration"));
   await clickByText(".detail-tabs button", "Signalement");
   manifest.captures.push(await capture("mobile-content-report.png", 390, 844, "Signaler ce contenu"));
   await clickByText(".report-section .primary", "Préparer le signalement local");
@@ -274,8 +280,10 @@ try {
   await clickByText(".library-tabs button", "Profils de jeu");
   await clickByText(".profile-library article:first-child .quiet", "Ouvrir");
   manifest.captures.push(await capture("mobile-game-profile.png", 390, 844, "Manager non connecté"));
-  await clickByText(".profile-decision .quiet", "Prévisualiser une mise à jour");
+  await clickByText(".profile-preview-actions .quiet", "Prévisualiser une mise à jour");
   manifest.captures.push(await capture("mobile-game-profile-delta.png", 390, 844, "Copie avant promotion"));
+  await clickByText(".profile-preview-actions .quiet", "Prévisualiser import / export");
+  manifest.captures.push(await capture("mobile-game-profile-interop.png", 390, 844, "Rapport d’import / export — démonstration"));
   await clickByText(".back", "← Retour à la Bibliothèque");
 
   await clickSelector(".mobile-menu");
