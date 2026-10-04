@@ -80,7 +80,7 @@ try{
 
   await waitBodyText("Centre de notifications");
   await waitBodyText("Réponse éditeur reçue — Aetherlands");
-  await waitBodyText("Démonstration · non reçue");
+  await waitBodyText("DÉMONSTRATION · NON REÇUE");
   await waitBodyText("LEGAL_REVIEW_REQUIRED");
 
   const overflow=await evaluate("document.documentElement.scrollWidth-document.documentElement.clientWidth");
@@ -89,7 +89,7 @@ try{
   const realClaims=await evaluate(`(() => {
     const t=document.querySelector('.notification-demo-list')?.innerText||'';
     return {
-      markedDemo:t.includes('Démonstration · non reçue'),
+      markedDemo:t.includes('DÉMONSTRATION · NON REÇUE'),
       approved:t.includes('APPROVED_WITH_LIMITS'),
       legal:t.includes('LEGAL_REVIEW_REQUIRED')
     };
