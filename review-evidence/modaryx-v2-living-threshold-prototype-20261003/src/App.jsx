@@ -751,6 +751,14 @@ export function App() {
     const frame=requestAnimationFrame(()=>document.getElementById("main-content")?.focus({preventScroll:true}));
     return ()=>cancelAnimationFrame(frame);
   },[active,detail,gameHubOpen]);
+  useEffect(()=>{
+    const routeTitle=detail&&detail.title
+      ? detail.title+" — MODARYX"
+      : active==="Jeux"&&gameHubOpen
+        ? "Aetherlands — MODARYX"
+        : active+" — MODARYX";
+    document.title=routeTitle;
+  },[active,detail,gameHubOpen]);
   const scrollRouteTop=()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
   const navigate = item => { setDetail(null); setGameHubOpen(false); setActive(item); scrollRouteTop(); };
   const openGameHub=()=>{setDetail(null);setActive("Jeux");setGameHubOpen(true);scrollRouteTop();};
