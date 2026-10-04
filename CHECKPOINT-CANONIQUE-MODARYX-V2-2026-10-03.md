@@ -1524,3 +1524,26 @@ Derniers détails du modèle spécialisé maintenant matérialisés :
 - root/frontend V2 production : toujours **BLOQUÉ par gate de validation**.
 
 Le prochain travail doit être choisi uniquement parmi les gaps internes réellement récupérables restants ; ne pas ajouter des fonctionnalités décoratives simplement pour faire monter le pourcentage.
+
+
+## Décision canonique de nomenclature desktop — 4 octobre 2026
+
+**TERMINÉ — nouvelle nomenclature active**
+
+Noms produits actifs :
+- **MODARYX Forge** = logiciel / écosystème desktop ;
+- **MODARYX Public** = édition publique ;
+- **MODARYX Founder** = édition Founder.
+
+Décision :
+- **`Nova Forge OS` est un nom produit retiré** ;
+- ne plus utiliser `Nova Forge OS` comme nom actif dans l'UI, la documentation produit, les nouveaux contrats ou les nouvelles capacités ;
+- les anciennes occurrences `Nova Forge` / `Nova Forge OS` peuvent subsister uniquement comme **legacy technique, provenance historique, identifiant de dépôt/branche ou compatibilité**, tant qu'elles sont clairement classifiées ;
+- aucun remplacement global aveugle des identifiants techniques historiques ;
+- le site reste **MODARYX / MODARYX MODS** ;
+- le desktop reste **MODARYX Forge**, avec ses éditions **MODARYX Public** et **MODARYX Founder**.
+
+Le contrat Web → desktop de référence est :
+`docs/MODARYX-V2-FORGE-HANDOFF-CONTRACT-20261004.md`
+
+Cette décision remplace toute ancienne mention présentant `Nova Forge OS` comme nom produit courant.
