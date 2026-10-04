@@ -2010,3 +2010,51 @@ Toujours PREUVE MANQUANTE :
 - canaux support/IP/sécurité réels ;
 - revue juridique ;
 - publication production.
+
+
+## 61. Route / cutover — preuve contrat machine
+
+**TERMINÉ pour le contrat pré-production / cutover réel PREUVE MANQUANTE**
+
+Source :
+`docs/MODARYX-V2-ROUTE-CUTOVER-PLAN-20261003.md`
+
+Machine contract :
+`qa/modaryx-v2-route-cutover-contract.json`
+
+Checker :
+`qa/check-v2-route-cutover-contract.mjs`
+
+Workflow dédié :
+`.github/workflows/modaryx-v2-route-cutover-contract-proof.yml`
+
+Preuve consolidée :
+- registry run `37235052411` — **SUCCESS**
+- `ROUTE_CUTOVER_LAYER_COUNT 4`
+- `ROUTE_CUTOVER_INVARIANT_COUNT 8`
+- `PASS_V2_ROUTE_CUTOVER_CONTRACT`
+- `CONTRACT_REGISTRY_PASS route-cutover`
+- `PREPRODUCTION_CONTRACT_COUNT 21`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+Verrouillé :
+- V2 build isolé → preview immutable → mapping redirects validé → promotion contrôlée ;
+- aucune couche n'autorise automatiquement la suivante ;
+- aucun redirect global aveugle ;
+- aucune fausse ressource V2 créée uniquement pour préserver une ancienne URL ;
+- preview liée au SHA exact et noindex ;
+- aucune canonical getnovaforge ;
+- migration SW ordonnée et rollback testé avant cutover ;
+- legacy storage lu en read-only via migrator, pas de suppression globale ;
+- `modaryx:v2:` reste le namespace cible ;
+- DNS/DNSSEC/nameservers/IONOS/Cloudflare critique/PAGES_DOMAIN interdits sans instruction explicite ;
+- `main` et production restent intacts avant promotion contrôlée.
+
+Statut réel :
+- root V2 : `NOT_CREATED`
+- redirects : `DESIGN_ONLY`
+- migration SW browser : `NOT_EXECUTED`
+- cutover : `NOT_EXECUTED`
+- DNS/Cloudflare : `UNCHANGED`.
+
+Le contrat ne vaut pas preuve d'un vrai cutover.
