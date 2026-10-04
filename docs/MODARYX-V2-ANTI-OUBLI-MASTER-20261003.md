@@ -1047,3 +1047,22 @@ Preuve :
 - notification admin sur réponse matérielle.
 
 Le moteur réel de réception/parsing/licence reste NON IMPLÉMENTÉ.
+
+
+## 40. Triage admin avant contact éditeur — 4 octobre 2026
+
+**TERMINÉ pour le prototype fictif / production PREUVE MANQUANTE**
+
+Preuve :
+- Living Threshold run `37199552009` — **SUCCESS**
+- `FLOW_ASSERT member support triage accepted safe baseline only`
+- 65 captures
+- surface map run `37199751859` — **SUCCESS**
+
+À conserver :
+- demande membre → TRIAGE ;
+- vérifier existence/doublon/pertinence/restrictions ;
+- acceptation produit = `ACCEPTED_SAFE_BASELINE`, pas accord éditeur ;
+- Rights Case seulement après acceptation produit ;
+- aucun contact/outbound/asset officiel par simple acceptation locale ;
+- refus produit = aucun contact éditeur.
