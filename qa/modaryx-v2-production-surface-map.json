@@ -571,6 +571,30 @@
         "legal-review-required"
       ],
       "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "help-docs",
+      "acceptance": "Help / Documentation",
+      "prototypeStatus": "MATERIALIZED_DEMO",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "HelpDocsPage",
+        "HelpTopicGrid",
+        "HelpActionLinks",
+        "DocumentationReadinessState"
+      ],
+      "domains": [
+        "HelpTopic",
+        "DocumentationReadiness",
+        "ProductCapabilityReference"
+      ],
+      "states": [
+        "prototype-help",
+        "final-documentation-missing",
+        "runtime-dependent-content",
+        "no-server-workflow-simulated"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
     }
   ],
   "unresolvedRealRuntimeStates": [
