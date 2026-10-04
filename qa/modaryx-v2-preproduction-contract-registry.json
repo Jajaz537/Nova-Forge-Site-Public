@@ -116,6 +116,12 @@
       "contract": "qa/modaryx-v2-api-governance-contract.json",
       "checker": "qa/check-v2-api-governance-contract.mjs",
       "source": "docs/MODARYX-V2-API-GOVERNANCE-CONTRACT-20261003.md"
+    },
+    {
+      "id": "public-trust",
+      "contract": "qa/modaryx-v2-public-trust-contract.json",
+      "checker": "qa/check-v2-public-trust-contract.mjs",
+      "source": "docs/MODARYX-V2-PUBLIC-LEGAL-TRUST-READINESS-20261004.md"
     }
   ],
   "invariants": [
