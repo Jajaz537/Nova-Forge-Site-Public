@@ -266,6 +266,7 @@ Preuve cible la plus récente :
 - Compte/Notifications/Préférences/Onboarding ;
 - Support séparé de Signalement ;
 - Game Atmosphere Layer originale, avec variante desktop/mobile ;
+- Rights Dashboard admin fictif : autorisation limitée / attente / no-response / outbound indisponible ;
 - états nominal / empty / unavailable / anonymous / local-only / offline-stale / validation-error-retry / success sur les surfaces ciblées.
 
 ### Limites internes encore ouvertes
