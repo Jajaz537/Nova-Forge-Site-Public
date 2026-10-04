@@ -237,6 +237,12 @@ try{
   await clickAria("Notifications");
   await waitText("Centre de notifications");
   await waitText("Aucune notification réelle");
+  await waitText("Réponse éditeur reçue — Aetherlands");
+  await waitText("APPROVED_WITH_LIMITS");
+  await waitText("Revue juridique requise — Project Meridian");
+  await waitText("LEGAL_REVIEW_REQUIRED");
+  await waitText("Démonstration · non reçue");
+  console.log("FLOW_ASSERT publisher rights notification preview truthful");
   await clickText(".account-nav button","Confidentialité");
   await waitText("Privé par défaut");
 
@@ -418,6 +424,8 @@ try{
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav .mobile-nav-utility","Notifications");
   await waitText("Centre de notifications");
+  await waitText("Réponse éditeur reçue — Aetherlands");
+  await waitText("LEGAL_REVIEW_REQUIRED");
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav .mobile-nav-utility","Compte");
   await waitText("Vous explorez MODARYX en mode invité.");
