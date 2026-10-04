@@ -1893,3 +1893,22 @@ Run consolidé :
 - unauthorized ≠ forbidden ;
 - unverified ≠ success ;
 - aucune progression ou capacité runtime simulée.
+
+
+## 65. QA strategy + risk register — 41 contrats — 4 octobre 2026
+
+**TERMINÉ pour les invariants / preuves finales distinctes**
+
+Run :
+- `37236335418` — **SUCCESS**
+- `PREPRODUCTION_CONTRACT_COUNT 41`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+À ne pas oublier :
+- chaque catégorie QA valide uniquement sa propre catégorie ;
+- pas de full replay après erreur ciblée ;
+- CWV terrain seulement après mesure réelle ;
+- risque documenté ≠ fermé ;
+- cutover exige rollback ;
+- humain/appareils ne peuvent pas être simulés ;
+- faux PASS/VF interdit.
