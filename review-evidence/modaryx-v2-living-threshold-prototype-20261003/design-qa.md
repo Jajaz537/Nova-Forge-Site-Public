@@ -826,3 +826,37 @@ Contrat machine :
 - `PASS_V2_MODARYX_AI_INTEGRATION_CONTRACT`.
 
 Cette revue interne n’est pas une validation humaine externe et ne lève pas le gate High-Fi.
+
+
+## Publisher Inbound — correlation/provenance safe proof — 4 octobre 2026
+
+**TERMINÉ — prototype fictif / aucun inbound réel**
+
+Contrat :
+- run `37214242330` — **SUCCESS**
+- `PUBLISHER_INBOUND_STATE_COUNT 9`
+- `PUBLISHER_INBOUND_CORRELATION_EVIDENCE_COUNT 6`
+- `PUBLISHER_INBOUND_PROVENANCE_SIGNAL_COUNT 8`
+- `PUBLISHER_INBOUND_INVARIANT_COUNT 10`
+- `PASS_V2_PUBLISHER_INBOUND_CONTRACT`.
+
+Micro-proof :
+- run `37214564614` — **SUCCESS**
+- `PUBLISHER_INBOUND_MOBILE_OVERFLOW 0`
+- `PASS_V2_PUBLISHER_INBOUND_PREVIEW`.
+
+Living Threshold :
+- run `37214829645` — **SUCCESS**
+- commit `31db0796949a3c453f61864d84e3cf86f103aa94`
+- artifact `11308280526`
+- digest `sha256:124e7465bbb4b732153b2f8858a9288b96a59a2d7f1d905c1b0fea44df7d8a5c`
+- `KEYBOARD_REACHABLE 37 / 37`
+- `FLOW_ASSERT publisher inbound correlation provenance fail-closed`
+- `MULTISCREEN_CAPTURE_COUNT 81`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Captures :
+- `desktop-rights-inbound-ready.png`
+- `mobile-rights-inbound-ready.png`.
+
+Le prototype démontre que transport, corrélation, provenance et interprétation restent séparés et permission-neutral. Aucun message réel, header réel, fichier réel ou permission réelle n’est traité.
