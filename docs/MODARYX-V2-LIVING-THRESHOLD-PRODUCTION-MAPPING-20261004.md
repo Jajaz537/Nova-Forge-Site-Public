@@ -404,3 +404,28 @@ Blockers externes restants :
 - appareil physique.
 
 Ce mapping permet de commencer immédiatement l'implémentation réelle dès que la décision canonique de gate l'autorise, sans refaire l'architecture.
+
+
+## MODARYX IA — mapping de la surface preview
+
+Prototype :
+- `ModaryxAI`
+- `AiTrustPanel`
+- `AiCapabilityGrid`
+- composer désactivé.
+
+Cible future :
+- page assistant ;
+- panneau de preuves/sources ;
+- état de permission ;
+- adaptateurs vers les capacités IA réelles.
+
+Domaine futur :
+- capacité IA ;
+- niveau de permission ;
+- état de preuve ;
+- référence de source.
+
+Production :
+- `BLOCKED_GATE`
+- aucun modèle/provider sélectionné par ce mapping.
