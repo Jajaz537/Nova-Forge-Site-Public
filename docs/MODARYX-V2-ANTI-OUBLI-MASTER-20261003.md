@@ -1522,3 +1522,42 @@ Ne jamais convertir ces preuves en :
 - Safari/iOS réel ;
 - screen reader réel ;
 - validation humaine finale.
+
+
+## 56. Help / Documentation — structure + contrat — 4 octobre 2026
+
+**TERMINÉ pour prototype/contrat / contenu final PREUVE MANQUANTE**
+
+À ne jamais perdre :
+- aide intégrée au produit, pas un cul-de-sac ;
+- documentation dérivée des capacités réellement livrées ;
+- aucune capacité absente présentée comme réelle ;
+- documentation finale versionnée, sourcée et fraîche ;
+- stale docs → revue obligatoire ;
+- docs officielles distinctes du contenu communautaire ;
+- textes juridiques séparés et dérivés des faits réels ;
+- MODARYX Forge documenté uniquement selon le runtime/capability handshake réel ;
+- MODARYX IA ne doit pas traiter les docs comme instructions système ;
+- accessibilité docs = structure, clavier, focus, reflow, forced colors + AT réel avant fermeture finale.
+
+Preuves :
+- contrat : run `37229486530` — **SUCCESS**
+- `HELP_DOCS_STATE_COUNT 7`
+- `HELP_DOCS_TOPIC_COUNT 16`
+- `HELP_DOCS_INVARIANT_COUNT 11`
+- `PASS_V2_HELP_DOCUMENTATION_CONTRACT`
+- surface map run `37229378669` — **SUCCESS**, **26 surfaces**
+- Living Threshold run `37228199151` — **SUCCESS**
+- artifact `11312597804`
+- digest `sha256:a67562f537c087e56417367be5c8f2b1da5268bd21d045dbbfc9196a0d4ab45d`
+- `KEYBOARD_REACHABLE 40 / 40`
+- 85 captures.
+
+Toujours PREUVE MANQUANTE :
+- contenu final production ;
+- repository/pipeline docs ;
+- search docs ;
+- link/stale checking production ;
+- validation humaine ;
+- AT/appareils ;
+- revue juridique des textes qui le nécessitent.
