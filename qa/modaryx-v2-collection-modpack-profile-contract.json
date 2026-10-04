@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-COLLECTION-MODPACK-PROFILE-CONTRACT-20261003.md",
+  "objects": [
+    "Collection",
+    "Modpack",
+    "Profile"
+  ],
+  "dependencyRelations": [
+    "required",
+    "optional",
+    "recommended",
+    "incompatible",
+    "replaces"
+  ],
+  "conflictTypes": [
+    "hard-conflict",
+    "version-conflict",
+    "loader-conflict",
+    "file-conflict",
+    "load-order-conflict",
+    "unknown"
+  ],
+  "versionPolicies": [
+    "exact",
+    "compatible-range",
+    "latest-compatible-explicit"
+  ],
+  "removedStates": [
+    "withdrawn",
+    "revoked",
+    "deleted",
+    "unavailable"
+  ],
+  "invariants": [
+    "COLLECTION_MODPACK_PROFILE_ARE_DISTINCT_OBJECTS",
+    "COLLECTION_TO_MODPACK_NEVER_AUTOMATIC",
+    "PROFILE_TO_MODPACK_REQUIRES_RIGHTS_AND_DISTRIBUTION_CHECK",
+    "NO_SILENT_DEPENDENCY_SUBSTITUTION",
+    "UPDATE_NEVER_SILENTLY_MUTATES_STABLE_CONFIGURATION",
+    "WITHDRAWN_OR_REVOKED_ARTIFACT_NEVER_REDISTRIBUTED",
+    "PROFILE_PRIVATE_LOCAL_BY_DEFAULT",
+    "SHARING_IS_EXPLICIT",
+    "REORDERING_NEVER_DRAG_ONLY"
+  ],
+  "productionStatus": {
+    "collectionBackend": "NOT_IMPLEMENTED",
+    "modpackRuntime": "NOT_IMPLEMENTED",
+    "profileSync": "NOT_IMPLEMENTED",
+    "managerIntegration": "NOT_IMPLEMENTED"
+  }
+}
