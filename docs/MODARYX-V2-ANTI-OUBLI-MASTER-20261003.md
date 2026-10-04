@@ -1161,3 +1161,40 @@ Toujours PREUVE MANQUANTE :
 - réception révocation réelle ;
 - lock production ;
 - revalidation/licence réelle.
+
+
+## 44. IP / takedown / fallback MODARYX — 4 octobre 2026
+
+**TERMINÉ pour contrat + prototype / production PREUVE MANQUANTE**
+
+À ne jamais perdre :
+- canal IP/copyright avant lancement public ;
+- IpCase traçable ;
+- autorité déclarée ≠ autorité vérifiée ;
+- asset contesté localisé précisément ;
+- restriction temporaire limitée au scope ;
+- preuves et provenance conservées ;
+- fallback original MODARYX ;
+- pas de réupload automatique ;
+- LEGAL_REVIEW_REQUIRED sur ambiguïté ;
+- aucune restauration automatique ;
+- audit trail append-only logique ;
+- cache/CDN/SW à invalider en production ;
+- contacts/clauses privés non exposés publiquement ;
+- détection anti-réupload jamais utilisée comme unique preuve juridique.
+
+Preuves :
+- contrat run `37204583345` — **SUCCESS**, `PASS_V2_IP_TAKEDOWN_CONTRACT` ;
+- Living Threshold run `37204720263` — **SUCCESS** ;
+- `FLOW_ASSERT ip takedown containment preserves evidence fallback legal escalation` ;
+- 75 captures ;
+- surface map run `37204857565` — **SUCCESS**.
+
+Toujours PREUVE MANQUANTE :
+- backend cases ;
+- formulaire/mailbox IP ;
+- cache invalidation réelle ;
+- anti-réupload réel ;
+- recours ;
+- legal review opérationnelle ;
+- validation juridique externe.
