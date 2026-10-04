@@ -669,3 +669,49 @@ Couverture ciblée :
 La surface affiche uniquement la readiness et les éléments manquants. Elle ne constitue pas une politique publiée, une validation spécialisée ou une preuve de conformité.
 
 Le gate High-Fi final reste **BLOQUÉ** par les validations humaines/appareils et la référence visuelle approuvée manquante.
+
+
+## 32. Help / Documentation — preuve structurelle — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Contrat :
+- `docs/MODARYX-V2-HELP-DOCUMENTATION-CONTRACT-20261004.md`
+- run `37229486530` — **SUCCESS**
+- `HELP_DOCS_STATE_COUNT 7`
+- `HELP_DOCS_TOPIC_COUNT 16`
+- `HELP_DOCS_INVARIANT_COUNT 11`
+- `PASS_V2_HELP_DOCUMENTATION_CONTRACT`.
+
+Surface map :
+- run `37229378669` — **SUCCESS**
+- `SURFACE_MAP_COUNT 26`
+- `UNRESOLVED_RUNTIME_COUNT 6`
+- `PASS_V2_PRODUCTION_SURFACE_MAP`.
+
+Preuve Living Threshold couvrant le code produit actuel :
+- run `37228199151` — **SUCCESS**
+- commit `b5601ed14c224cec5c163d6783a0a351eb0e0f68`
+- artifact `11312597804`
+- digest `sha256:a67562f537c087e56417367be5c8f2b1da5268bd21d045dbbfc9196a0d4ab45d`
+- `KEYBOARD_REACHABLE 40 / 40`
+- desktop/mobile overflow `0 / 0`
+- `MULTISCREEN_CAPTURE_COUNT 85`
+- Help/Docs inclus dans les matrices structure/touch/forced-colors/reflow ciblées.
+
+Matérialisé :
+- surface Aide & documentation desktop/mobile ;
+- rubriques produit ;
+- raccourcis vers les tâches réelles du prototype ;
+- état explicite `Documentation finale : PREUVE MANQUANTE` ;
+- aucune capacité serveur inventée.
+
+Toujours PREUVE MANQUANTE :
+- contenu final dérivé des capacités production réellement livrées ;
+- repository/pipeline de publication docs ;
+- stale/link checkers production ;
+- validation humaine ;
+- textes juridiques finaux ;
+- backend/search docs réel.
+
+Cette fermeture structurelle ne lève aucun blocker humain/appareil et ne vaut pas documentation VF finale.
