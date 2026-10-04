@@ -290,6 +290,18 @@
       "contract": "qa/modaryx-v2-tech-stack-selection-gate-contract.json",
       "checker": "qa/check-v2-tech-stack-selection-gate-contract.mjs",
       "source": "docs/MODARYX-V2-TECH-STACK-SELECTION-GATE-20261003.md"
+    },
+    {
+      "id": "high-fi-gate",
+      "contract": "qa/modaryx-v2-high-fi-gate-contract.json",
+      "checker": "qa/check-v2-high-fi-gate-contract.mjs",
+      "source": "docs/MODARYX-V2-HIGH-FI-GATE-20261003.md"
+    },
+    {
+      "id": "frontend-gate-reclassification-proposal",
+      "contract": "qa/modaryx-v2-frontend-gate-reclassification-proposal-contract.json",
+      "checker": "qa/check-v2-frontend-gate-reclassification-proposal-contract.mjs",
+      "source": "docs/MODARYX-V2-FRONTEND-GATE-RECLASSIFICATION-PROPOSAL-20261004.md"
     }
   ],
   "invariants": [
