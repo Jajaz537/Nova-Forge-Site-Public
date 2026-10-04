@@ -1,0 +1,36 @@
+name: MODARYX V2 Preproduction Contract Registry Proof
+
+on:
+  push:
+    branches:
+      - 'audit/modaryx-v2-legacy-boundary-20261003'
+    paths:
+      - '.github/workflows/modaryx-v2-preproduction-contract-registry-proof.yml'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+      - 'qa/check-v2-preproduction-contract-registry.mjs'
+      - 'qa/modaryx-v2-*.json'
+      - 'qa/check-v2-*.mjs'
+      - 'docs/MODARYX-V2-*.md'
+      - 'docs/MODARYX-AI-FOUNDATION-ARCHITECTURE-20261004.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  registry:
+    name: Validate consolidated preproduction contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate consolidated preproduction contract registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-preproduction-contract-registry.mjs
