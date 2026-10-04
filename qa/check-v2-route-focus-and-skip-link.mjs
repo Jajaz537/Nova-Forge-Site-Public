@@ -9,8 +9,11 @@ const port=9242;
 const proc=spawn(chrome,[
   "--headless=new","--no-sandbox","--disable-gpu","--disable-dev-shm-usage",
   "--hide-scrollbars","--remote-debugging-port="+port,
-  "--user-data-dir=/tmp/modaryx-v2-route-focus","about:blank"
+  "--user-data-dir=/tmp/modaryx-v2-route-focus-"+process.pid,"about:blank"
 ],{stdio:"ignore"});
+
+let chromeExit=null;
+proc.on("exit",(code,signal)=>{chromeExit={code,signal};});
 
 let ws;
 let nextId=1;
@@ -27,7 +30,8 @@ async function evaluate(expression){
 }
 async function waitJson(path){
   let last;
-  for(let i=0;i<160;i++){
+  for(let i=0;i<240;i++){
+    if(chromeExit) throw new Error("Chrome exited before route-focus CDP readiness: "+JSON.stringify(chromeExit));
     try{
       const r=await fetch("http://127.0.0.1:"+port+path);
       if(r.ok) return await r.json();
@@ -35,7 +39,7 @@ async function waitJson(path){
     }catch(e){last=e}
     await sleep(100);
   }
-  throw last||new Error("CDP unavailable");
+  throw last||new Error("Route-focus CDP unavailable after readiness window");
 }
 async function pressTab(){
   const common={key:"Tab",code:"Tab",windowsVirtualKeyCode:9,nativeVirtualKeyCode:9};
