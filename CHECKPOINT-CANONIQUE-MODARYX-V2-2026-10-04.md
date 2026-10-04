@@ -1831,3 +1831,43 @@ Toujours NON IMPLÉMENTÉ :
 - push ;
 - préférences distantes ;
 - résolution sync backend.
+
+
+## 56. Onboarding / compte / créateur — preuve contrat
+
+**TERMINÉ pour le contrat / auth et backend PREUVE MANQUANTE**
+
+Source :
+`docs/MODARYX-V2-ONBOARDING-ACCOUNT-CREATOR-CONTRACT-20261003.md`
+
+Machine contract :
+`qa/modaryx-v2-onboarding-account-creator-contract.json`
+
+Preuve :
+- run `37232342904` — **SUCCESS**
+- commit `38025f4265b79c66ca5f4036afd0a39e1e66e9e8`
+- `ONBOARDING_GUEST_CAPABILITY_COUNT 8`
+- `ONBOARDING_SESSION_STATE_COUNT 5`
+- `ONBOARDING_INVARIANT_COUNT 12`
+- `PASS_V2_ONBOARDING_ACCOUNT_CREATOR_CONTRACT`.
+
+Verrouillé :
+- guest-first ;
+- pas de login forcé pour exploration ;
+- onboarding skippable ;
+- Account / Public Profile / Creator séparés ;
+- Library/favoris/profils/brouillons/recherches sauvegardées privés par défaut ;
+- partage explicite ;
+- rôles équipe = autorité serveur ;
+- UI session reflète état réel ;
+- support navigateur passkey ≠ passkey configurée ;
+- marketing non activé par défaut ;
+- échec save conserve les changements locaux.
+
+Toujours NON IMPLÉMENTÉ :
+- auth réelle ;
+- profils distants ;
+- autorité équipe ;
+- passkeys ;
+- notifications distantes ;
+- export/suppression compte réels.
