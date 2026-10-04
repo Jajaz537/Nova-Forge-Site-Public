@@ -786,6 +786,71 @@ function HelpDocs({ onNavigate }) {
   </main>;
 }
 
+
+function ModerationCenter() {
+  const cases=[
+    {
+      id:"report-abuse",
+      target:"Discussion · Composer une ambiance nocturne cohérente",
+      reason:"Abus / harcèlement",
+      state:"RECEIVED",
+      publicState:"Signalement reçu",
+      detail:"Cas fictif en attente de triage. Aucun auteur, commentaire ou compte réel n’est concerné.",
+      history:["RECEIVED · signalement fictif enregistré dans la démo"],
+      appeal:"Aucun appel : aucune décision de modération n’a été prise.",
+    },
+    {
+      id:"report-malware",
+      target:"Fichier · sentiers-aube-demo.zip",
+      reason:"Malware suspect",
+      state:"UNDER_REVIEW",
+      publicState:"Examen en cours",
+      detail:"Scénario fictif de risque distribution. La quarantaine réelle nécessite une autorité serveur et n’est pas exécutée ici.",
+      history:["RECEIVED · signalement fictif","TRIAGED · priorité sécurité","UNDER_REVIEW · aucune action serveur simulée"],
+      appeal:"L’appel n’est possible qu’après une décision réelle appelable.",
+    },
+    {
+      id:"appeal-demo",
+      target:"Collection · Exploration sereine",
+      reason:"Décision de visibilité contestée",
+      state:"APPEALED",
+      publicState:"Appel fictif en attente",
+      detail:"L’appel reste rattaché à la décision précédente ; il ne l’efface pas et ne restaure rien automatiquement.",
+      history:["ACTIONED · décision fictive antérieure","APPEALED · recours fictif séparé"],
+      appeal:"Aucun reviewer réel, aucun SLA et aucune restauration ne sont simulés.",
+    },
+  ];
+  const [selected,setSelected]=useState(cases[0].id);
+  const current=cases.find(item=>item.id===selected) || cases[0];
+  return <main id="main-content" tabIndex="-1" className="page-section moderation-center">
+    <span className="kicker">Administration · modération · prototype</span>
+    <h1>Modération, signalements et appels.</h1>
+    <p className="page-intro">Séparer support, signalement, décision et appel sans simuler une autorité serveur absente.</p>
+    <div className="moderation-warning"><strong>Aucune action de modération réelle n’est exécutée dans cette démo.</strong><span>Les cas, historiques et décisions sont fictifs. Les rôles moderator / appeals-reviewer / administrator devront venir du serveur.</span></div>
+    <section className="moderation-summary" aria-label="Résumé de modération fictif">
+      <article><span className="kicker">Reçu</span><strong>1</strong><small>Triage à faire</small></article>
+      <article><span className="kicker">Examen</span><strong>1</strong><small>Aucune quarantine réelle</small></article>
+      <article><span className="kicker">Appel</span><strong>1</strong><small>Décision précédente conservée</small></article>
+    </section>
+    <div className="moderation-layout">
+      <nav className="moderation-case-list" aria-label="Cas de modération fictifs">
+        {cases.map(item=><button key={item.id} className={selected===item.id?"active":""} aria-pressed={selected===item.id} onClick={()=>setSelected(item.id)}>
+          <span><strong>{item.reason}</strong><small>{item.target}</small></span><em>{item.state}</em>
+        </button>)}
+      </nav>
+      <section className="moderation-detail" aria-live="polite">
+        <div className="moderation-detail-head"><div><span className="kicker">Cas fictif</span><h2>{current.reason}</h2><p>{current.target}</p></div><span className="moderation-state">{current.state}</span></div>
+        <div className="moderation-public-state"><strong>État partageable</strong><span>{current.publicState}</span></div>
+        <p className="moderation-detail-copy">{current.detail}</p>
+        <section className="moderation-history" aria-label="Historique fictif"><h3>Historique</h3>{current.history.map(item=><div key={item}>{item}</div>)}</section>
+        <section className="moderation-appeal"><h3>Appel</h3><p>{current.appeal}</p></section>
+        <div className="moderation-boundaries"><strong>Garde-fous</strong><ul><li>Support ≠ signalement.</li><li>Action destructive = autorité serveur obligatoire.</li><li>Un appel n’efface jamais la décision précédente.</li><li>Audit trail requis pour chaque transition réelle.</li></ul></div>
+        <div className="moderation-actions"><button className="quiet" disabled>Masquer — serveur indisponible</button><button className="quiet" disabled>Quarantaine — serveur indisponible</button><button className="quiet" disabled>Restaurer — serveur indisponible</button></div>
+      </section>
+    </div>
+  </main>;
+}
+
 function Community() {
   const [tab,setTab]=useState("Support");
   const [draft,setDraft]=useState(false);
@@ -846,6 +911,7 @@ export function App() {
   else if(active==='MODARYX IA') screen=<ModaryxAI/>;
   else if(active==='Confiance & légal') screen=<PublicLegalTrust/>;
   else if(active==='Aide & documentation') screen=<HelpDocs onNavigate={navigate}/>;
+  else if(active==='Modération') screen=<ModerationCenter/>;
   else screen=<GameHub onOpen={openContent}/>;
-  return <div className="app-shell"><a className="skip-link" href="#main-content">Aller au contenu principal</a>{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo onNavigate={navigate}/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button><button onClick={()=>navigate('Confiance & légal')}>Confiance & légal</button><button onClick={()=>navigate('Aide & documentation')}>Aide & documentation</button></footer></div>;
+  return <div className="app-shell"><a className="skip-link" href="#main-content">Aller au contenu principal</a>{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo onNavigate={navigate}/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button><button onClick={()=>navigate('Modération')}>Modération · démo admin</button><button onClick={()=>navigate('Confiance & légal')}>Confiance & légal</button><button onClick={()=>navigate('Aide & documentation')}>Aide & documentation</button></footer></div>;
 }
