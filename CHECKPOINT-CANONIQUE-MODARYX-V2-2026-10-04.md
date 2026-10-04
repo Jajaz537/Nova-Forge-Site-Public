@@ -977,3 +977,56 @@ Toujours NON IMPLÉMENTÉ :
 - observabilité ;
 - assistant production ;
 - intégration MODARYX Forge.
+
+
+## 31. Publisher Outbound — contrat de transport
+
+**TERMINÉ pour le contrat pré-production / transport réel PREUVE MANQUANTE**
+
+Fichiers :
+- `qa/modaryx-v2-publisher-outbound-contract.json`
+- `qa/check-v2-publisher-outbound-contract.mjs`
+- `.github/workflows/modaryx-v2-publisher-outbound-contract-proof.yml`
+
+Preuve :
+- workflow `MODARYX V2 Publisher Outbound Contract Proof`
+- run `37210953700` — **SUCCESS**
+- commit capturé `f56ee00e0a304e89b7062e8755d6cfa97a20cc13`
+- `PUBLISHER_OUTBOUND_STATE_COUNT 11`
+- `PUBLISHER_OUTBOUND_ENQUEUE_GUARD_COUNT 9`
+- `PUBLISHER_OUTBOUND_INVARIANT_COUNT 10`
+- `PASS_V2_PUBLISHER_OUTBOUND_CONTRACT`
+
+États transport :
+- REQUEST_READY ;
+- OUTBOUND_QUEUED ;
+- SEND_ATTEMPTED ;
+- PROVIDER_ACCEPTED ;
+- DELIVERED ;
+- DELIVERY_UNKNOWN ;
+- BOUNCED ;
+- SUPPRESSED ;
+- CANCELED ;
+- FAILED_RETRYABLE ;
+- FAILED_FINAL.
+
+Règles verrouillées :
+- REQUEST_READY ≠ envoyé ;
+- contact officiel vérifié requis avant queue ;
+- idempotence obligatoire ;
+- opt-out/refus actif bloque la queue ;
+- succès transport ≠ permission/licence ;
+- bounce ne déclenche jamais une adresse devinée ;
+- retry conserve le logical request id ;
+- relance commerciale ≠ retry technique ;
+- droits Web et MODARYX Forge séparés.
+
+Toujours NON IMPLÉMENTÉ :
+- queue réelle ;
+- adapter provider email/API ;
+- identité d’envoi ;
+- webhooks transport ;
+- gestion bounce réelle ;
+- corrélation réelle des réponses.
+
+Aucun email réel n’est envoyé par ce contrat.
