@@ -76,16 +76,29 @@ async function assertKeyboardSurface(label){
   })()`);
   if(!setup.count) throw new Error(label+" has no visible focusable controls");
   const reached=new Set();
+  const noFocusIndicator=[];
   for(let i=0;i<setup.count;i++){
     await pressTab();
-    const id=await evaluate("document.activeElement?.dataset?.qaKbId ?? null");
-    if(id!==null) reached.add(Number(id));
+    const state=await evaluate(`(()=>{
+      const el=document.activeElement;
+      const id=el?.dataset?.qaKbId??null;
+      if(id===null) return {id:null};
+      const s=getComputedStyle(el);
+      const outline=parseFloat(s.outlineWidth)||0;
+      const visibleIndicator=(s.outlineStyle!=='none'&&outline>=2.5)||s.boxShadow!=='none';
+      return {id:Number(id),visibleIndicator,outlineStyle:s.outlineStyle,outlineWidth:s.outlineWidth,boxShadow:s.boxShadow};
+    })()`);
+    if(state.id!==null){
+      reached.add(state.id);
+      if(!state.visibleIndicator) noFocusIndicator.push({id:state.id,label:setup.labels[state.id],outlineStyle:state.outlineStyle,outlineWidth:state.outlineWidth,boxShadow:state.boxShadow});
+    }
   }
   if(reached.size!==setup.count){
     const missing=setup.labels.map((name,i)=>({i,name})).filter(x=>!reached.has(x.i));
     throw new Error(label+" keyboard reachability "+reached.size+"/"+setup.count+" missing "+JSON.stringify(missing.slice(0,10)));
   }
-  console.log("KEYBOARD_MATRIX_SURFACE",label,reached.size,"/",setup.count);
+  if(noFocusIndicator.length) throw new Error(label+" focused controls without strong visible indicator "+JSON.stringify(noFocusIndicator.slice(0,10)));
+  console.log("KEYBOARD_MATRIX_SURFACE",label,reached.size,"/",setup.count,"FOCUS_INDICATORS",setup.count);
 }
 
 try{
@@ -143,6 +156,7 @@ try{
 
   console.log("KEYBOARD_MATRIX_SURFACE_COUNT",count);
   console.log("PASS_V2_KEYBOARD_REACHABILITY_MATRIX");
+  console.log("PASS_V2_FOCUS_VISIBLE_MATRIX");
 }finally{
   try{ws?.close()}catch{}
   proc.kill("SIGTERM");
