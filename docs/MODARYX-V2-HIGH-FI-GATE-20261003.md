@@ -297,3 +297,31 @@ Le prototype peut continuer à être approfondi et utilisé comme référence de
 Il **ne devient pas** automatiquement un frontend V2 de production ni une validation High-Fi finale.
 
 Le passage au premier root/frontend V2 de production reste régi par la matrice de readiness et doit faire l'objet d'une décision contrôlée une fois les blockers de validation requis fermés ou explicitement reclassifiés avec preuve.
+
+
+## 16. Contact éditeur vérifié avant demande — preuve prototype — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Preuve Living Threshold la plus fraîche pour ce flux :
+- run `37201151562` — **SUCCESS** ;
+- commit capturé `238cc7f5fae3720aa495ca2e6c3909c8baabc21a` ;
+- artifact `11303470181` ;
+- digest `sha256:853428274c5abce89cd1ab2b147005161b656f7e613ae121fd191835a69ed719` ;
+- `KEYBOARD_REACHABLE 36 / 36` ;
+- `PUBLISHER_CONTACT_MOBILE_OVERFLOW 0` ;
+- `RIGHTS_MOBILE_OVERFLOW 0` ;
+- `FLOW_ASSERT publisher contact verified before request ready` ;
+- `MULTISCREEN_CAPTURE_COUNT 69` ;
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Nouveau flux matérialisé :
+- `CONTACT_CANDIDATE` ;
+- vérification explicite du canal fictif ;
+- `CONTACT_VERIFIED` ;
+- préparation structurée seulement après vérification ;
+- `REQUEST_READY` ;
+- outbound réel toujours indisponible ;
+- aucune adresse réelle utilisée.
+
+Cette preuve améliore la couverture du workflow droits mais ne ferme aucun blocker humain/appareil, ne prouve aucun contact éditeur réel et ne lève pas le gate High-Fi.
