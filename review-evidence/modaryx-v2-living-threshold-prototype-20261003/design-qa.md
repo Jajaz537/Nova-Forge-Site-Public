@@ -628,3 +628,36 @@ Captures :
 - `mobile-rights-response-interpretation.png`.
 
 Aucune mailbox, provenance réelle, extraction de licence réelle ou notification production n’est prouvée.
+
+
+## Publisher contact verification — workflow-safe proof — 4 octobre 2026
+
+**TERMINÉ — prototype fictif / aucun contact ou outbound réel**
+
+Run :
+- `37201151562` — **SUCCESS**
+- commit capturé `238cc7f5fae3720aa495ca2e6c3909c8baabc21a`
+- artifact `11303470181`
+- digest `sha256:853428274c5abce89cd1ab2b147005161b656f7e613ae121fd191835a69ed719`
+
+Marqueurs :
+- `KEYBOARD_REACHABLE 36 / 36`
+- `PUBLISHER_CONTACT_MOBILE_OVERFLOW 0`
+- `RIGHTS_MOBILE_OVERFLOW 0`
+- `FLOW_ASSERT publisher contact verified before request ready`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 69`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Captures :
+- `desktop-rights-contact-verified.png`
+- `mobile-rights-contact-verified.png`
+
+Garde-fous visibles :
+- CONTACT_CANDIDATE ne suffit pas ;
+- CONTACT_VERIFIED précède REQUEST_READY ;
+- scopes explicitement préparés ;
+- aucune adresse réelle ;
+- outbound réel indisponible.
+
+Aucun contact éditeur réel, aucune demande réelle et aucune licence réelle ne sont prouvés.
