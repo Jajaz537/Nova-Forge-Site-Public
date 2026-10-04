@@ -603,3 +603,34 @@ Preuve :
 Surface map :
 - `modaryx-ai-preview`
 - statut production : `BLOCKED_GATE`.
+
+
+## 25. Publisher Inbound — readiness — 4 octobre 2026
+
+**Prototype/contrat TERMINÉS / production PREUVE MANQUANTE**
+
+Preuves :
+- contrat inbound run `37214242330` — **SUCCESS** ;
+- micro-proof run `37214564614` — **SUCCESS** ;
+- Living Threshold run `37214829645` — **SUCCESS** ;
+- 81 captures ;
+- surface map : 24 surfaces, 6 runtime states réels non résolus.
+
+Prototype :
+- réception fictive ;
+- corrélation ;
+- provenance ;
+- quarantaine pièces jointes ;
+- ready-for-interpretation ;
+- fail closed provenance non fiable.
+
+Production requise :
+- mailbox ou webhook inbound ;
+- corrélation Message-ID/In-Reply-To/References/thread token ;
+- préservation raw headers/message ;
+- SPF/DKIM/DMARC comme signaux, jamais comme autorité juridique suffisante ;
+- scanner pièces jointes ;
+- audit store ;
+- routing vers le Publisher Response Contract.
+
+Ces éléments ne justifient pas de lever le gate frontend/High-Fi.
