@@ -128,6 +128,12 @@
       "contract": "qa/modaryx-v2-route-cutover-contract.json",
       "checker": "qa/check-v2-route-cutover-contract.mjs",
       "source": "docs/MODARYX-V2-ROUTE-CUTOVER-PLAN-20261003.md"
+    },
+    {
+      "id": "storage-cache-sw-migration",
+      "contract": "qa/modaryx-v2-storage-cache-sw-migration-contract.json",
+      "checker": "qa/check-v2-storage-cache-sw-migration-contract.mjs",
+      "source": "docs/MODARYX-V2-STORAGE-CACHE-SW-MIGRATION-20261003.md"
     }
   ],
   "invariants": [
