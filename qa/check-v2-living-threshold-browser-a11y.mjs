@@ -184,6 +184,29 @@ try {
     console.error(JSON.stringify(rightsSmallTargets,null,2));
     fail("rights dashboard mobile targets below 44x44: "+rightsSmallTargets.length);
   }
+
+  const triageAcceptedForContact=await evaluate(`(() => {
+    const b=[...document.querySelectorAll('.support-triage-actions button')].find(el=>el.textContent.includes('Accepter la baseline sûre'));
+    if(!b) return false; b.click(); return true;
+  })()`);
+  if(!triageAcceptedForContact) fail("publisher contact demo requires triage acceptance");
+  await sleep(120);
+  const contactOverflow=await evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth");
+  if(contactOverflow>1) fail("publisher contact demo mobile horizontal overflow "+contactOverflow);
+  const contactSmallTargets=await evaluate(`(() => {
+    const root=document.querySelector('.publisher-contact-demo'); if(!root) return [{label:'missing-root',width:0,height:0}];
+    return [...root.querySelectorAll('button:not([disabled])')].filter(el=>{
+      const r=el.getBoundingClientRect(),s=getComputedStyle(el);
+      return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0&&(r.width<44||r.height<44);
+    }).map(el=>({label:el.textContent.trim().slice(0,60),width:Math.round(el.getBoundingClientRect().width*10)/10,height:Math.round(el.getBoundingClientRect().height*10)/10}));
+  })()`);
+  if(contactSmallTargets.length){
+    console.error(JSON.stringify(contactSmallTargets,null,2));
+    fail("publisher contact demo mobile targets below 44x44: "+contactSmallTargets.length);
+  }
+  console.log("PUBLISHER_CONTACT_MOBILE_OVERFLOW",contactOverflow);
+  console.log("AX_ASSERT publisher contact verification safety surface");
+
   console.log("RIGHTS_MOBILE_OVERFLOW",rightsOverflow);
   console.log("AX_ASSERT rights dashboard safety surface");
 
