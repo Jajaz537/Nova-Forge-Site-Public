@@ -1423,3 +1423,20 @@ Limites :
 - canonical/sitemap/SEO production non implémentés ;
 - routage production non sélectionné ;
 - preview reste volontairement noindex.
+
+
+## 44. États asynchrones / loading
+
+**TERMINÉ pour le contrat UX / production PREUVE MANQUANTE**
+
+Référence :
+`docs/MODARYX-V2-ASYNC-LOADING-STATE-CONTRACT-20261004.md`
+
+Contrat machine-readable :
+`qa/modaryx-v2-async-loading-contract.json`
+
+Décision :
+- ne pas inventer de latence dans le prototype local ;
+- loading initial, refresh, stale, empty et erreurs restent distincts ;
+- skeleton uniquement lorsqu’une vraie frontière asynchrone le justifie ;
+- production async reste non implémentée.
