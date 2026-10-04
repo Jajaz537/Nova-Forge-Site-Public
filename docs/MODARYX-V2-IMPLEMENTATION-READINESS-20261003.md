@@ -381,3 +381,46 @@ Root/frontend V2 production : **NON CRÉÉ**.
 
 Source canonique de reprise la plus récente :
 `CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-04.md`.
+
+
+## 25. Réconciliation contact éditeur / request readiness — 4 octobre 2026
+
+Cette section supersède les preuves de couverture antérieures lorsqu’elles sont moins récentes pour le workflow droits.
+
+Preuve Living Threshold :
+- run `37201151562` — **SUCCESS**
+- commit `238cc7f5fae3720aa495ca2e6c3909c8baabc21a`
+- artifact `11303470181`
+- digest `sha256:853428274c5abce89cd1ab2b147005161b656f7e613ae121fd191835a69ed719`
+- 69 captures ;
+- `PUBLISHER_CONTACT_MOBILE_OVERFLOW 0` ;
+- `FLOW_ASSERT publisher contact verified before request ready`.
+
+Contrat droits renforcé :
+- run `37201224168` — **SUCCESS**
+- 5 sources de contact autorisées ;
+- 5 sources explicitement interdites ;
+- 5 exigences de readiness ;
+- 7 send guards ;
+- `PASS_V2_GAME_RIGHTS_WORKFLOW`.
+
+Surface map :
+- run `37201297613` — **SUCCESS**
+- 23 surfaces ;
+- 6 runtime states réels toujours non résolus.
+
+Couverture prototype ajoutée :
+- contact candidat ;
+- contact vérifié ;
+- REQUEST_READY ;
+- outbound indisponible.
+
+Toujours **NON IMPLÉMENTÉ** :
+- découverte de contact réelle ;
+- vérification domaine/contact réelle ;
+- génération de demande production ;
+- email/API outbound ;
+- audit mailbox ;
+- Game Rights Registry production.
+
+Le root/frontend production reste BLOQUÉ selon le gate canonique.
