@@ -446,6 +446,30 @@
         "stale"
       ],
       "mobile": "DEDICATED_RESPONSIVE"
+    },
+    {
+      "id": "rights-admin",
+      "acceptance": "Rights / Publisher Admin",
+      "prototypeStatus": "MATERIALIZED_DEMO",
+      "productionStatus": "BLOCKED_GATE",
+      "components": [
+        "RightsDashboard",
+        "RightsCaseList",
+        "RightsScopeMatrix",
+        "RightsStateBadge"
+      ],
+      "domains": [
+        "RightsCase",
+        "RightsScope",
+        "PublisherContact"
+      ],
+      "states": [
+        "approved-with-limits-demo",
+        "awaiting-response-demo",
+        "no-response-demo",
+        "outbound-unavailable"
+      ],
+      "mobile": "DEDICATED_RESPONSIVE"
     }
   ],
   "unresolvedRealRuntimeStates": [
