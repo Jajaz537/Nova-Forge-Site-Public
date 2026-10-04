@@ -154,6 +154,14 @@ try{
   await clickText(".game-card button","Ouvrir le Game Hub");
   await waitText("Mes profils pour ce jeu");
   await waitText("Catalogue consultable — téléchargement non garanti");
+  await waitText("Ambiance originale MODARYX");
+  await waitText("aucun asset éditeur utilisé");
+  await clickText(".atmosphere-preview button","Rivenfall");
+  const atmosphereRivenfall=await evaluate(`document.querySelector('.game-hero')?.dataset.atmosphere === 'rivenfall'`);
+  if(!atmosphereRivenfall) throw new Error("Rivenfall atmosphere layer did not activate");
+  await clickText(".atmosphere-preview button","Aetherlands");
+  const atmosphereAetherlands=await evaluate(`document.querySelector('.game-hero')?.dataset.atmosphere === 'aetherlands'`);
+  if(!atmosphereAetherlands) throw new Error("Aetherlands atmosphere layer did not restore");
   await clickText(".local-nav button","Collections");
   await waitText("Sélections organisées");
   await waitText("installation non disponible");
