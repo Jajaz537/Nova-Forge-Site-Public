@@ -512,3 +512,34 @@ Limite :
 il s'agit d'une émulation Chrome 834×1112, **pas** d'une validation sur tablette physique ou Safari/iPadOS.
 
 Le blocker « appareils physiques » reste donc inchangé.
+
+
+## 22. Responsive matrix navigateur — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Narrow :
+- run `37217511653` — **SUCCESS**
+- 320×900
+- 12 surfaces
+- `PASS_V2_NARROW_REFLOW_320`.
+
+Matrice :
+- run `37218193186` — **SUCCESS**
+- 360 / 430 / 768 / 1024 / 1280 / 1920 px
+- 12 surfaces par largeur
+- tous les jobs : **SUCCESS**
+- `PASS_V2_REFLOW_VIEWPORT_360`
+- `PASS_V2_REFLOW_VIEWPORT_430`
+- `PASS_V2_REFLOW_VIEWPORT_768`
+- `PASS_V2_REFLOW_VIEWPORT_1024`
+- `PASS_V2_REFLOW_VIEWPORT_1280`
+- `PASS_V2_REFLOW_VIEWPORT_1920`.
+
+Cette preuve ferme les overflows horizontaux détectés dans l’émulation Chrome ciblée mais **ne remplace pas** :
+- appareil physique ;
+- navigateur Safari réel ;
+- zoom utilisateur réel ;
+- texte agrandi réel ;
+- tactile humain ;
+- screen reader.
