@@ -1026,3 +1026,24 @@ Run :
 - aucun claim licence/partenariat issu du membre ;
 - refus produit = aucun contact éditeur ;
 - déduplication avant création Rights Case.
+
+
+## 39. Réponse éditeur — interprétation automatique sûre — 4 octobre 2026
+
+**TERMINÉ pour le contrat / production PREUVE MANQUANTE**
+
+Preuve :
+- run `37199257204` — **SUCCESS**
+- `PASS_V2_PUBLISHER_RESPONSE_CONTRACT`
+
+À ne jamais perdre :
+- scope non mentionné = non accordé ;
+- formulation ambiguë = revue, jamais APPROVED par inférence ;
+- risque juridique = LEGAL_REVIEW_REQUIRED ;
+- pas d’accord global implicite ;
+- Web et MODARYX Forge séparés ;
+- expiration/révocation rebloquent ;
+- message brut et provenance archivés ;
+- notification admin sur réponse matérielle.
+
+Le moteur réel de réception/parsing/licence reste NON IMPLÉMENTÉ.
