@@ -10,11 +10,15 @@ const proc = spawn(chrome, [
   "--headless=new",
   "--no-sandbox",
   "--disable-gpu",
+  "--disable-dev-shm-usage",
   "--hide-scrollbars",
   "--remote-debugging-port=" + port,
   "--user-data-dir=/tmp/modaryx-v2-cdp-profile",
   "about:blank",
 ], { stdio: "ignore" });
+
+let chromeExit = null;
+proc.on("exit", (code, signal) => { chromeExit = { code, signal }; });
 
 const fail = (message) => {
   console.error("FAIL_V2_LIVING_THRESHOLD_BROWSER_A11Y", message);
@@ -24,7 +28,8 @@ const fail = (message) => {
 
 async function waitJson(path) {
   let last;
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 200; i++) {
+    if (chromeExit) throw new Error("Chrome exited before CDP readiness: " + JSON.stringify(chromeExit));
     try {
       const r = await fetch(`http://127.0.0.1:${port}${path}`);
       if (r.ok) return await r.json();
