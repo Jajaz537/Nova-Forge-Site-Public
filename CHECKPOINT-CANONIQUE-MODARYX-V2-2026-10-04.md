@@ -86,26 +86,30 @@ Workflow :
 `MODARYX V2 Living Threshold Visual Proof`
 
 Run :
-`37196769573` — **SUCCESS**
+`37214829645` — **SUCCESS**
 
 Commit capturé :
-`81ddfbb24d9ff3a3e74342121cbcc1b779810681`
+`31db0796949a3c453f61864d84e3cf86f103aa94`
 
 Artifact :
-`11302418920`
+`11308280526`
 
 Digest :
-`sha256:0f9bb8ea6d2293c1c866026f11d2a7200e1f80dd3a4b6748204dcf3463b08e35`
+`sha256:124e7465bbb4b732153b2f8858a9288b96a59a2d7f1d905c1b0fea44df7d8a5c`
 
 Marqueurs :
 - `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
-- `KEYBOARD_REACHABLE 36 / 36`
+- `KEYBOARD_REACHABLE 37 / 37`
 - `RIGHTS_MOBILE_OVERFLOW 0`
+- `PUBLISHER_CONTACT_MOBILE_OVERFLOW 0`
+- `GAME_SUPPORT_REQUEST_MOBILE_OVERFLOW 0`
+- `RIGHTS_NOTIFICATION_MOBILE_OVERFLOW 0`
 - `DESKTOP_OVERFLOW 0`
 - `MOBILE_OVERFLOW 0`
 - `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `FLOW_ASSERT publisher inbound correlation provenance fail-closed`
 - `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
-- `MULTISCREEN_CAPTURE_COUNT 67`
+- `MULTISCREEN_CAPTURE_COUNT 81`
 - `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
 
 Cette preuve n’est pas :
@@ -123,14 +127,14 @@ Fichiers :
 - `qa/check-v2-production-surface-map.mjs`
 
 Run :
-`37196989554` — **SUCCESS**
+`37214676514` — **SUCCESS**
 
 Marqueurs :
-- `SURFACE_MAP_COUNT 23`
+- `SURFACE_MAP_COUNT 24`
 - `UNRESOLVED_RUNTIME_COUNT 6`
 - `PASS_V2_PRODUCTION_SURFACE_MAP`
 
-Les 23 surfaces restent `BLOCKED_GATE` côté production.
+Les 24 surfaces restent `BLOCKED_GATE` côté production.
 
 États runtime réels toujours non résolus :
 - session-expired-real ;
@@ -290,7 +294,7 @@ Documents :
 - `docs/MODARYX-V2-HUMAN-MULTISCREEN-REVIEW-PACK-20261004.md`
 - `docs/MODARYX-V2-ASSISTIVE-DEVICE-VALIDATION-PROTOCOL-20261004.md`
 
-Pack humain actuel préparé autour de la preuve **69 captures**.
+Pack humain actuel préparé autour de la preuve **81 captures**.
 
 Toujours PREUVE MANQUANTE :
 - validation humaine multi-écrans supplémentaire ;
@@ -1030,3 +1034,51 @@ Toujours NON IMPLÉMENTÉ :
 - corrélation réelle des réponses.
 
 Aucun email réel n’est envoyé par ce contrat.
+
+
+## 33. Publisher Inbound — contrat + prototype
+
+**TERMINÉ pour contrat et prototype / infrastructure réelle PREUVE MANQUANTE**
+
+Contrat :
+- `qa/modaryx-v2-publisher-inbound-contract.json`
+- `qa/check-v2-publisher-inbound-contract.mjs`
+- workflow `MODARYX V2 Publisher Inbound Contract Proof`
+- run `37214242330` — **SUCCESS**
+- `PASS_V2_PUBLISHER_INBOUND_CONTRACT`.
+
+Micro-proof :
+- workflow `MODARYX V2 Publisher Inbound Preview Micro-Proof`
+- run `37214564614` — **SUCCESS**
+- `PUBLISHER_INBOUND_MOBILE_OVERFLOW 0`
+- `PASS_V2_PUBLISHER_INBOUND_PREVIEW`.
+
+Preuve UI :
+- Living Threshold run `37214829645` — **SUCCESS**
+- commit `31db0796949a3c453f61864d84e3cf86f103aa94`
+- artifact `11308280526`
+- digest `sha256:124e7465bbb4b732153b2f8858a9288b96a59a2d7f1d905c1b0fea44df7d8a5c`
+- `FLOW_ASSERT publisher inbound correlation provenance fail-closed`
+- `MULTISCREEN_CAPTURE_COUNT 81`.
+
+Surface map :
+- run `37214676514` — **SUCCESS**
+- 24 surfaces ;
+- 6 runtime states réels non résolus.
+
+Règles :
+- inbound transport ≠ permission ;
+- corrélation avant interprétation ;
+- provenance technique ≠ autorité juridique ;
+- SPF/DKIM/DMARC seuls insuffisants ;
+- unmatched/untrusted = fail closed ;
+- attachments en quarantaine avant traitement ;
+- raw message + headers conservés ;
+- Web / MODARYX Forge séparés.
+
+Toujours NON IMPLÉMENTÉ :
+- mailbox/webhook ;
+- correlation engine ;
+- provenance verifier ;
+- attachment scanner ;
+- response router.
