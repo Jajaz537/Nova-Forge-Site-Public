@@ -1,0 +1,40 @@
+name: MODARYX V2 External Validation Evidence Validator
+
+on:
+  push:
+    branches:
+      - 'audit/modaryx-v2-legacy-boundary-20261003'
+    paths:
+      - '.github/workflows/modaryx-v2-external-validation-evidence-validator.yml'
+      - 'qa/modaryx-v2-external-validation-evidence-contract.json'
+      - 'qa/check-v2-external-validation-evidence-contract.mjs'
+      - 'qa/validate-v2-external-validation-evidence.mjs'
+      - 'docs/MODARYX-V2-EXTERNAL-VALIDATION-EVIDENCE-CONTRACT-20261004.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evidence-validator:
+    name: Self-test external validation evidence validator
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate evidence contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-external-validation-evidence-contract.mjs
+
+      - name: Self-test evidence validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/validate-v2-external-validation-evidence.mjs --self-test
