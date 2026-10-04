@@ -222,3 +222,57 @@ Remaining external/final blockers:
 - real backend/data/integration proof.
 
 The older notes describing Creator Studio or multi-screen coverage as minimal are historical and superseded by this section for current prototype coverage.
+
+
+## Benchmark-informed product states — 4 octobre 2026
+
+**TERMINÉ — prototype ciblé / aucune preuve backend ou installation réelle**
+
+Run ciblé : `37163931034` — **SUCCESS**  
+Commit capturé : `226b41b40f49166c936cf7968391e0d35105b09e`  
+Artifact : `11288409054`  
+Artifact digest : `sha256:0f3c73af5ab4936fc0e10cee121612cef13363b4701a313df70041164f8df60f`
+
+Preuves fraîches :
+- `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `KEYBOARD_REACHABLE 32 / 32`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 47`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Nouveaux états exercés :
+- Bibliothèque > **Historique** : aucun historique réel inventé, privé par défaut ;
+- Profil de jeu : origine des composants + politique de version `Auto sûr / Proposer / Épinglé` ;
+- Profil de jeu : preview de mise à jour via **copie/branche avant promotion**, aucune mutation réelle ;
+- Modpack : dépendance choisie/incluse/transitive explicitée ;
+- Modpack : preview du delta avant mutation ;
+- Modpack : modes `Ajouter / Remplacer / Annuler` ;
+- Creator Studio : maturité projet `Concept / WiP / Released / Archived`, séparée du canal de release ;
+- Creator Studio : crédits/auteurs/studio/assets tiers structurés ;
+- installation Modpack toujours désactivée sans runtime MODARYX Forge.
+
+Nouvelles captures archivées portent la couverture à **47** et incluent notamment :
+- desktop/mobile Library Historique ;
+- desktop/mobile Profile delta ;
+- desktop/mobile Modpack delta ;
+- desktop/mobile Creator Project / crédits.
+
+Build prototype observé :
+- CSS : ~43.71 kB / gzip ~8.63 kB ;
+- JS : ~296.11 kB / gzip ~83.91 kB.
+
+Ces tailles appartiennent au prototype React/Vite et ne constituent pas un budget production V2 ni une validation de stack.
+
+Reste ouvert :
+- comparaison normalisée à une référence visuelle approuvée ;
+- validation humaine multi-écrans réelle ;
+- screen reader réel ;
+- appareils physiques ;
+- backend/données/providers réels ;
+- runtime MODARYX Forge ;
+- root/frontend V2 production.
+
+Aucun PASS High-Fi/VF final n'est déduit de ce run.
