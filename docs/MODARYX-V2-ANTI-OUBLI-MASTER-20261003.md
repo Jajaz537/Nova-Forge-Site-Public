@@ -1357,3 +1357,33 @@ Toujours PREUVE MANQUANTE :
 - scanner pièces jointes ;
 - parser/routing ;
 - audit store production.
+
+
+## 50. Tablet reflow — 4 octobre 2026
+
+**TERMINÉ pour browser emulation / appareil réel PREUVE MANQUANTE**
+
+Erreur exacte initiale :
+- run `37215370580` : Game Hub 834×1112 → overflow horizontal **220 px** ;
+- cause : topbar desktop trop large.
+
+Correction :
+- shell navigation compact pour 761–1050 px.
+
+Preuve finale :
+- run `37215965531` — **SUCCESS**
+- `TABLET_REFLOW_SURFACE_COUNT 12`
+- `PASS_V2_TABLET_REFLOW`
+- 12 surfaces à overflow 0.
+
+Continuation CSS :
+- Living Threshold run `37215577121` — **SUCCESS**
+- 81 captures ;
+- keyboard `37 / 37` ;
+- desktop/mobile overflow `0 / 0`.
+
+À ne pas perdre :
+- tablet doit être recomposé, pas simplement desktop compressé ;
+- menu compact autorisé sur medium viewport ;
+- aucune preuve browser simulée ne ferme le blocker appareil physique ;
+- iPad/Safari/tactile humain restent PREUVE MANQUANTE.
