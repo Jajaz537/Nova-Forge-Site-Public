@@ -758,3 +758,39 @@ Captures nouvelles :
 - `mobile-rights-lifecycle-expired.png`
 
 Aucun scheduler, monitor d’expiration, inbound de révocation ou lock de production réel n’est prouvé.
+
+
+## IP takedown containment — proof — 4 octobre 2026
+
+**TERMINÉ — prototype fictif / backend et procédure juridique réels PREUVE MANQUANTE**
+
+Contract proof :
+- run `37204583345` — **SUCCESS**
+- `IP_TAKEDOWN_STATE_COUNT 12`
+- `IP_TAKEDOWN_INVARIANT_COUNT 12`
+- `IP_TAKEDOWN_RESTRICTION_EFFECT_COUNT 6`
+- `PASS_V2_IP_TAKEDOWN_CONTRACT`.
+
+Living Threshold :
+- run `37204720263` — **SUCCESS**
+- commit `eefd01c8ec1d35f7bd9212e40f65d2ac390479cd`
+- artifact `11304695959`
+- digest `sha256:126e3758ca6a4f1c19e85f6eb8be0c9d0b456705feb43ce1e8777ccbf77004f0`
+- `FLOW_ASSERT ip takedown containment preserves evidence fallback legal escalation`
+- `MULTISCREEN_CAPTURE_COUNT 75`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Flow exercised :
+- RECEIVED ;
+- CONTENT_LOCATED ;
+- TEMP_RESTRICTED ;
+- fallback original MODARYX ;
+- LEGAL_REVIEW_REQUIRED ;
+- evidence remains conserved ;
+- reset only as local demo, not a real legal restoration.
+
+Captures :
+- `desktop-ip-takedown-restricted.png`
+- `mobile-ip-takedown-restricted.png`
+
+No real claimant, legal authority, asset restriction, cache invalidation or legal decision is represented.
