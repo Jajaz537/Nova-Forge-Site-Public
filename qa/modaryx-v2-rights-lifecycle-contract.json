@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md",
+  "lifecycleStates": [
+    "ACTIVE_WITH_LIMITS",
+    "EXPIRING_SOON",
+    "EXPIRED",
+    "REVOKED"
+  ],
+  "stateEffects": {
+    "ACTIVE_WITH_LIMITS": [
+      "allow_granted_scopes_only",
+      "monitor_expiry"
+    ],
+    "EXPIRING_SOON": [
+      "allow_granted_scopes_only",
+      "notify_admin",
+      "schedule_revalidation"
+    ],
+    "EXPIRED": [
+      "lock_dependent_scopes",
+      "fallback_original_modaryx",
+      "require_new_evidence"
+    ],
+    "REVOKED": [
+      "lock_dependent_scopes",
+      "fallback_original_modaryx",
+      "require_new_evidence",
+      "stop_related_automation"
+    ]
+  },
+  "invariants": [
+    "EXPIRED_LOCKS_ALL_DEPENDENT_SCOPES",
+    "REVOKED_LOCKS_ALL_DEPENDENT_SCOPES",
+    "EXPIRING_SOON_DOES_NOT_EXPAND_RIGHTS",
+    "REACTIVATION_REQUIRES_NEW_EVIDENCE",
+    "NO_SILENT_REACTIVATION",
+    "SAFE_BASELINE_REMAINS_AVAILABLE_WHEN_LEGALLY_ALLOWED",
+    "WEB_AND_FORGE_LIFECYCLES_REMAIN_SEPARATE",
+    "LIFECYCLE_TRANSITIONS_ARE_AUDITED",
+    "LOCK_ACTIONS_ARE_IDEMPOTENT"
+  ],
+  "requiredEvidenceForReactivation": [
+    "publisher_response_or_license",
+    "scope_identity",
+    "territory_if_applicable",
+    "product_scope",
+    "effective_dates",
+    "provenance"
+  ],
+  "productionStatus": {
+    "scheduler": "NOT_IMPLEMENTED",
+    "expiryMonitor": "NOT_IMPLEMENTED",
+    "revocationInbound": "NOT_IMPLEMENTED",
+    "automaticScopeLock": "NOT_IMPLEMENTED",
+    "revalidation": "NOT_IMPLEMENTED"
+  }
+}
