@@ -756,6 +756,36 @@ function PublicLegalTrust() {
   </main>;
 }
 
+
+function HelpDocs({ onNavigate }) {
+  const topics=[
+    ["Bien démarrer","Comprendre Jeux, Mods & contenus, Collections, Profils de jeu et Bibliothèque."],
+    ["Compatibilité","Lire versions, loaders, dépendances, conflits, fraîcheur et provenance avant toute décision."],
+    ["Profils de jeu","Préparer des configurations enregistrées de mods, versions et réglages sans confondre profil et collection."],
+    ["Créateurs","Comprendre Creator Studio, projets, releases, crédits et états de publication."],
+    ["Confiance & droits","Comprendre provenance, permissions, signalements et les limites des démonstrations actuelles."],
+    ["MODARYX Forge","Préparer le futur handoff desktop sans simuler une installation locale absente."],
+  ];
+  return <main id="main-content" tabIndex="-1" className="page-section help-docs">
+    <span className="kicker">Aide & documentation · prototype</span>
+    <h1>Comprendre MODARYX sans deviner.</h1>
+    <p className="page-intro">Cette surface organise l’aide produit avant la documentation finale. Les fonctions absentes restent signalées comme telles et aucun workflow serveur n’est simulé.</p>
+    <section className="help-docs-grid" aria-label="Rubriques d’aide">
+      {topics.map(([title,detail])=><article key={title}><h2>{title}</h2><p>{detail}</p></article>)}
+    </section>
+    <section className="help-docs-actions">
+      <div><span className="kicker">Raccourcis</span><h2>Revenir directement à la tâche.</h2><p>L’aide ne doit pas devenir un cul-de-sac séparé du produit.</p></div>
+      <div className="help-action-list">
+        <button className="quiet" onClick={()=>onNavigate("Jeux")}>Voir les jeux</button>
+        <button className="quiet" onClick={()=>onNavigate("Mods & contenus")}>Explorer les contenus</button>
+        <button className="quiet" onClick={()=>onNavigate("Bibliothèque")}>Ouvrir la Bibliothèque</button>
+        <button className="quiet" onClick={()=>onNavigate("Confiance & légal")}>Confiance & légal</button>
+      </div>
+    </section>
+    <div className="help-docs-status"><strong>Documentation finale : PREUVE MANQUANTE</strong><span>Le contenu final dépendra des fonctionnalités, routes, providers, backend et capacités MODARYX Forge réellement livrés.</span></div>
+  </main>;
+}
+
 function Community() {
   const [tab,setTab]=useState("Support");
   const [draft,setDraft]=useState(false);
@@ -815,6 +845,7 @@ export function App() {
   else if(active==='Droits jeux') screen=<RightsDashboard/>;
   else if(active==='MODARYX IA') screen=<ModaryxAI/>;
   else if(active==='Confiance & légal') screen=<PublicLegalTrust/>;
+  else if(active==='Aide & documentation') screen=<HelpDocs onNavigate={navigate}/>;
   else screen=<GameHub onOpen={openContent}/>;
-  return <div className="app-shell"><a className="skip-link" href="#main-content">Aller au contenu principal</a>{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo onNavigate={navigate}/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button><button onClick={()=>navigate('Confiance & légal')}>Confiance & légal</button></footer></div>;
+  return <div className="app-shell"><a className="skip-link" href="#main-content">Aller au contenu principal</a>{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo onNavigate={navigate}/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button><button onClick={()=>navigate('Confiance & légal')}>Confiance & légal</button><button onClick={()=>navigate('Aide & documentation')}>Aide & documentation</button></footer></div>;
 }
