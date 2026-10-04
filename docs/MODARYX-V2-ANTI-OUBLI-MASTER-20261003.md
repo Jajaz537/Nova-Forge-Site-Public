@@ -1781,3 +1781,35 @@ Preuve :
 - privacy doit refléter l'architecture déployée ;
 - disclosures IA doivent refléter les providers actifs ;
 - publication seulement après approbation réelle.
+
+
+## 61. Route / cutover — garde-fou machine — 4 octobre 2026
+
+**TERMINÉ pour le contrat / exécution réelle PREUVE MANQUANTE**
+
+Preuve consolidée :
+- run `37235052411` — **SUCCESS**
+- `PASS_V2_ROUTE_CUTOVER_CONTRACT`
+- `CONTRACT_REGISTRY_PASS route-cutover`
+- registry : 21 contrats.
+
+À ne pas perdre :
+- build V2 isolé ;
+- preview immutable liée au SHA ;
+- mapping redirects validé avant promotion ;
+- aucun redirect global aveugle ;
+- 404/410 conservés lorsque sémantiquement corrects ;
+- aucun canonical getnovaforge ;
+- preview noindex ;
+- SW V1→V2 avec ordre de migration/rollback ;
+- aucune suppression globale du storage ;
+- namespace V2 `modaryx:v2:` ;
+- aucune action DNS/Cloudflare critique sans instruction explicite ;
+- production et `main` restent intacts avant promotion contrôlée.
+
+Toujours non exécuté :
+- root V2 ;
+- redirects réels ;
+- migration SW browser ;
+- cutover ;
+- DNS/Cloudflare.
