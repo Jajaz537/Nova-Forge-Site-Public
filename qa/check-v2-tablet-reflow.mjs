@@ -39,7 +39,7 @@ async function waitJson(path){
 }
 async function waitBodyText(value){
   for(let i=0;i<100;i++){
-    if(await evaluate("document.body?.innerText.includes("+JSON.stringify(value)+")")) return;
+    if(await evaluate("document.body?.textContent.includes("+JSON.stringify(value)+")")) return;
     await sleep(75);
   }
   throw new Error("missing text: "+value);
