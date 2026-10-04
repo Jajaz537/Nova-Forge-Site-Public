@@ -543,3 +543,21 @@ Cette preuve ferme les overflows horizontaux détectés dans l’émulation Chro
 - texte agrandi réel ;
 - tactile humain ;
 - screen reader.
+
+
+## 23. États actifs exposés aux technologies d’assistance — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Preuve navigateur :
+- run `37219118824` — **SUCCESS**
+- navigation primaire : aria-current ;
+- tabs/toggles : aria-pressed ;
+- états après interaction : synchronisés.
+
+Continuation UI :
+- run Living Threshold `37219047594` — **SUCCESS**
+- keyboard `37 / 37`
+- 81 captures.
+
+Limite : aucune lecture NVDA / VoiceOver / TalkBack réelle.
