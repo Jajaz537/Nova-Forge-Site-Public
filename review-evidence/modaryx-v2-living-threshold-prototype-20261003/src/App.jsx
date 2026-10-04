@@ -33,6 +33,55 @@ const creatorDetails = [
   { name:"Les Cartographes", role:"Équipe de démonstration", focus:"Graphismes & quêtes", creations:["Sommets silencieux","Le pont des veilleurs"], pos:"100% 0%" },
 ];
 
+
+const rightsDemoCases = [
+  {
+    id:"aetherlands",
+    game:"Aetherlands",
+    publisher:"Éditeur fictif · démonstration",
+    status:"APPROVED_WITH_LIMITS",
+    summary:"Autorisation fictive partielle pour tester la lecture scope par scope.",
+    response:"Réponse fictive archivée · aucune communication réelle",
+    scopes:[
+      ["Nom référentiel","Autorisé dans cette démonstration"],
+      ["Logo officiel","Autorisé — exemple fictif"],
+      ["Key art","Refusé — reste bloqué"],
+      ["Hébergement de mods","Non demandé"],
+      ["MODARYX Forge","En attente — droit séparé"],
+    ],
+  },
+  {
+    id:"rivenfall",
+    game:"Rivenfall",
+    publisher:"Studio fictif · démonstration",
+    status:"AWAITING_RESPONSE",
+    summary:"Demande fictive envoyée dans le scénario de test ; aucun droit supplémentaire activé.",
+    response:"En attente — absence de réponse ≠ autorisation",
+    scopes:[
+      ["Nom référentiel","Baseline sûre uniquement"],
+      ["Logo officiel","Bloqué"],
+      ["Key art","Bloqué"],
+      ["Hébergement de mods","Bloqué"],
+      ["MODARYX Forge","Bloqué"],
+    ],
+  },
+  {
+    id:"solstice",
+    game:"Solstice Frontier",
+    publisher:"Éditeur fictif · démonstration",
+    status:"NO_RESPONSE",
+    summary:"Scénario de non-réponse : MODARYX conserve uniquement sa baseline originale.",
+    response:"NO_RESPONSE ≠ autorisation",
+    scopes:[
+      ["Nom référentiel","Baseline sûre uniquement"],
+      ["Logo officiel","Bloqué"],
+      ["Key art","Bloqué"],
+      ["Hébergement de mods","Bloqué"],
+      ["MODARYX Forge","Bloqué"],
+    ],
+  },
+];
+
 function Logo() {
   return <a className="logo" href="#top" aria-label="MODARYX — accueil">MODARY<span>X</span></a>;
 }
@@ -440,6 +489,43 @@ function AccountCenter({ initialTab="Compte" }) {
   return <main className="page-section account-center"><span className="kicker">Paramètres</span><h1>Compte & préférences</h1><p className="page-intro">Contrôlez session, confidentialité, notifications et données locales sans transformer une capacité absente en promesse.</p><div className="account-shell"><nav className="account-nav" aria-label="Sections du compte">{tabs.map(value=><button key={value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>{panel[tab]}</div></main>;
 }
 
+
+function RightsDashboard() {
+  const [selected,setSelected]=useState("aetherlands");
+  const current=rightsDemoCases.find(item=>item.id===selected) || rightsDemoCases[0];
+  const statusClass=current.status==="APPROVED_WITH_LIMITS"?"approved":current.status==="AWAITING_RESPONSE"?"pending":"neutral";
+  return <main className="page-section rights-dashboard">
+    <span className="kicker">Administration · démonstration</span>
+    <h1>Droits des jeux</h1>
+    <p className="page-intro">Suivez les demandes éditeurs scope par scope sans transformer une absence de réponse ou une formulation ambiguë en autorisation.</p>
+    <div className="rights-safety-note"><strong>Aucune demande réelle n’est envoyée dans ce prototype.</strong><span>Les jeux, éditeurs, réponses et permissions ci-dessous servent uniquement à valider le workflow et l’interface.</span></div>
+    <section className="rights-summary" aria-label="Résumé des dossiers de démonstration">
+      <article><span className="kicker">Avec limites</span><strong>1</strong><small>Scopes séparés</small></article>
+      <article><span className="kicker">En attente</span><strong>1</strong><small>Aucun droit supplémentaire</small></article>
+      <article><span className="kicker">Sans réponse</span><strong>1</strong><small>Baseline MODARYX uniquement</small></article>
+    </section>
+    <div className="rights-layout">
+      <nav className="rights-case-list" aria-label="Dossiers droits de démonstration">
+        {rightsDemoCases.map(item=><button key={item.id} className={selected===item.id?"active":""} onClick={()=>setSelected(item.id)}>
+          <span><strong>{item.game}</strong><small>{item.publisher}</small></span><em>{item.status}</em>
+        </button>)}
+      </nav>
+      <section className="rights-detail" aria-live="polite">
+        <div className="rights-detail-head"><div><span className="kicker">Rights Case fictif</span><h2>{current.game}</h2><p>{current.summary}</p></div><span className={`rights-state ${statusClass}`}>{current.status}</span></div>
+        <div className="rights-response"><strong>Dernier état</strong><span>{current.response}</span></div>
+        <div className="rights-scope-grid">
+          {current.scopes.map(([scope,value])=><article key={scope}><strong>{scope}</strong><span>{value}</span></article>)}
+        </div>
+        <div className="rights-guards">
+          <strong>Garde-fous actifs</strong>
+          <ul><li>Contact officiel vérifié requis avant envoi.</li><li>NO_RESPONSE et refus ne débloquent aucun scope.</li><li>Droits Web et MODARYX Forge restent séparés.</li><li>Expiration ou révocation rebloquent les usages dépendants.</li></ul>
+        </div>
+        <button className="quiet" disabled>Envoyer une demande — backend indisponible</button>
+      </section>
+    </div>
+  </main>;
+}
+
 function Community() {
   const [tab,setTab]=useState("Support");
   const [draft,setDraft]=useState(false);
@@ -481,6 +567,7 @@ export function App() {
   else if(active==='Compte') screen=<AccountCenter key="account" initialTab="Compte"/>;
   else if(active==='Créer') screen=<CreatorStudio/>;
   else if(active==='Bibliothèque') screen=<Library/>;
+  else if(active==='Droits jeux') screen=<RightsDashboard/>;
   else screen=<GameHub onOpen={openContent}/>;
-  return <div className="app-shell">{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button></footer></div>;
+  return <div className="app-shell">{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button></footer></div>;
 }
