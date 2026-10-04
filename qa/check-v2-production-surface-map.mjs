@@ -44,13 +44,13 @@ for (const state of ["support-request-closed","support-request-validation-error"
 }
 
 const rightsAdmin = data.surfaces.find(x => x.id === "rights-admin");
-for (const component of ["RightsDashboard","GameSupportTriage"]) {
+for (const component of ["RightsDashboard","GameSupportTriage","PublisherResponseInterpretation"]) {
   if (!rightsAdmin?.components?.includes(component)) throw new Error("rights-admin missing component: " + component);
 }
 for (const state of [
   "approved-with-limits-demo","awaiting-response-demo","no-response-demo",
   "support-triage-demo","support-accepted-safe-baseline-demo","support-declined-product-demo",
-  "outbound-unavailable"
+  "response-safe-automation-demo","response-legal-review-fallback-demo","outbound-unavailable"
 ]) {
   if (!rightsAdmin?.states?.includes(state)) throw new Error("rights-admin missing state: " + state);
 }
