@@ -20,7 +20,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 | Élément | État V2 | Référence |
 |---|---|---|
 | MODARYX = plateforme web multigaming | TERMINÉ — conception | PRODUCT-ARCHITECTURE |
-| Nova Forge OS reste distinct | TERMINÉ — contrat | CHECKPOINT |
+| MODARYX Forge = logiciel/écosystème desktop ; MODARYX Public + MODARYX Founder = éditions actives | TERMINÉ — nomenclature canonique ; ancien nom `Nova Forge OS` retiré | CHECKPOINT / FORGE-HANDOFF-CONTRACT |
 | getnova/getnovaforge = historique | TERMINÉ — classification | LEGACY-AUDIT |
 | Univers MODARYX conservé sans masquer le produit | TERMINÉ — principe | BENCHMARK / PRODUCT-ARCHITECTURE |
 | Ancien front non canonique visuellement | TERMINÉ — décision | LEGACY-AUDIT |
@@ -303,7 +303,7 @@ Une capacité non implémentée reste non implémentée même si son contrat est
 - Storage Resolver ;
 - Repair Network ;
 - Guide MODARYX ;
-- pont MODARYX Forge (références techniques/historiques `Nova Forge` à classifier avant migration) ;
+- pont MODARYX Forge ; les anciennes références techniques `Nova Forge` ne sont que du legacy/provenance et ne doivent jamais être réutilisées comme nom produit actif ;
 - vérificateur SHA-256 ;
 - PWA offline/stale ;
 - Smart Profile ;
@@ -448,9 +448,9 @@ Références étudiées notamment : ModDropV, Vortex/Nexus, Mod Organizer 2, Pri
 - **MODARYX Public** = édition publique ;
 - **MODARYX Founder** = édition Founder ;
 - **MODARYX / MODARYX MODS** = plateforme web ;
-- `Nova Forge` = historique/legacy technique jusqu'à classification ; aucun remplacement global aveugle.
+- `Nova Forge` / `Nova Forge OS` = historique/legacy technique uniquement ; **nom produit retiré**, jamais utilisé pour une nouvelle UI, un nouveau document produit ou une nouvelle capacité.
 
-**Pont MODARYX ↔ MODARYX Forge : EN COURS — contrat à formaliser / runtime PREUVE MANQUANTE.**
+**Pont MODARYX ↔ MODARYX Forge : TERMINÉ — contrat web formalisé dans `docs/MODARYX-V2-FORGE-HANDOFF-CONTRACT-20261004.md` / runtime réel PREUVE MANQUANTE.**
 
 
 ## 29. Expansion produit accélérée — preuve consolidée 2026-10-04
