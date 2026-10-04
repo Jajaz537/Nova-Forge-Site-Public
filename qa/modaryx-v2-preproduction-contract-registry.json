@@ -302,6 +302,12 @@
       "contract": "qa/modaryx-v2-frontend-gate-reclassification-proposal-contract.json",
       "checker": "qa/check-v2-frontend-gate-reclassification-proposal-contract.mjs",
       "source": "docs/MODARYX-V2-FRONTEND-GATE-RECLASSIFICATION-PROPOSAL-20261004.md"
+    },
+    {
+      "id": "vf-readiness-gate",
+      "contract": "qa/modaryx-v2-vf-readiness-gate.json",
+      "checker": "qa/check-v2-vf-readiness-gate.mjs",
+      "source": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-04.md"
     }
   ],
   "invariants": [
