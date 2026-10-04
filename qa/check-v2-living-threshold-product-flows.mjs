@@ -241,7 +241,7 @@ try{
   await waitText("APPROVED_WITH_LIMITS");
   await waitText("Revue juridique requise — Project Meridian");
   await waitText("LEGAL_REVIEW_REQUIRED");
-  await waitText("Démonstration · non reçue");
+  await waitText("DÉMONSTRATION · NON REÇUE");
   console.log("FLOW_ASSERT publisher rights notification preview truthful");
   await clickText(".account-nav button","Confidentialité");
   await waitText("Privé par défaut");
