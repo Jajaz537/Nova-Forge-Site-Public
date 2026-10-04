@@ -530,3 +530,26 @@ Production toujours NON IMPLÉMENTÉE :
 - legal review workflow.
 
 Le root/frontend production reste BLOQUÉ selon le gate canonique.
+
+
+## 29. Asset rights provenance — réconciliation — 4 octobre 2026
+
+Prototype :
+- manifest `qa/modaryx-v2-asset-rights-manifest.json` ;
+- checker `qa/check-v2-asset-rights-provenance.mjs` ;
+- run `37205150007` — **SUCCESS** ;
+- 2 assets classifiés ;
+- 0 remote media reference ;
+- `PASS_V2_ASSET_RIGHTS_PROVENANCE`.
+
+La future production doit étendre ce mécanisme :
+- tous assets V2 ;
+- source/provenance ;
+- licence/scope ;
+- expiry/revocation ;
+- Game Rights Registry ;
+- build failure sur Unknown/Forbidden/unlisted.
+
+Les assets actuels restent `ALLOWED_PROTOTYPE_ONLY`.
+
+Le root/frontend production reste BLOQUÉ par le gate canonique.
