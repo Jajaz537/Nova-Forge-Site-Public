@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "source": "docs/MODARYX-V2-MODERATION-APPEALS-CONTRACT-20261003.md",
+  "reportableObjects": [
+    "CONTENT",
+    "RELEASE",
+    "FILE",
+    "COMMENT",
+    "DISCUSSION",
+    "PUBLIC_PROFILE",
+    "COLLECTION",
+    "TEAM"
+  ],
+  "reportRequiredFields": [
+    "reason",
+    "context",
+    "target"
+  ],
+  "moderationStates": [
+    "RECEIVED",
+    "TRIAGED",
+    "UNDER_REVIEW",
+    "ACTIONED",
+    "NO_ACTION",
+    "APPEALED",
+    "CLOSED"
+  ],
+  "actions": [
+    "HIDE",
+    "RESTRICT",
+    "QUARANTINE",
+    "REMOVE",
+    "RESTORE",
+    "REQUEST_CHANGES"
+  ],
+  "serverRoles": [
+    "MODERATOR",
+    "APPEALS_REVIEWER",
+    "ADMINISTRATOR"
+  ],
+  "auditFields": [
+    "serverActorId",
+    "action",
+    "target",
+    "timestamp",
+    "reasonCode",
+    "previousState",
+    "nextState"
+  ],
+  "supportVsReport": {
+    "support": [
+      "INSTALLATION_PROBLEM",
+      "BUG",
+      "QUESTION"
+    ],
+    "report": [
+      "ABUSE",
+      "RIGHTS",
+      "SUSPECTED_MALWARE",
+      "PROHIBITED_CONTENT",
+      "IMPERSONATION",
+      "OTHER_VIOLATION"
+    ]
+  },
+  "invariants": [
+    "SUPPORT_AND_REPORT_ARE_DISTINCT",
+    "DESTRUCTIVE_ACTION_REQUIRES_SERVER_AUTHORITY",
+    "APPEAL_REFERENCES_PREVIOUS_DECISION",
+    "APPEAL_NEVER_ERASES_PREVIOUS_DECISION",
+    "QUARANTINE_LOCKS_DISTRIBUTION_WHEN_REAL",
+    "NO_SILENT_REMOVAL_WITHOUT_AUDIT",
+    "SERVER_ROLE_IS_AUTHORITATIVE",
+    "REPORTER_RECEIVES_NO_OUTCOME_PROMISE",
+    "CREATOR_SEES_ONLY_SHAREABLE_REASON",
+    "MOBILE_SUPPORTS_REPORT_TRACKING_RESPONSE_AND_APPEAL",
+    "STATUS_IS_TEXTUAL_NOT_COLOR_ONLY",
+    "ERROR_FOCUS_RECOVERY_REQUIRED"
+  ],
+  "productionStatus": {
+    "moderationBackend": "NOT_IMPLEMENTED",
+    "reportSubmission": "NOT_IMPLEMENTED",
+    "appealBackend": "NOT_IMPLEMENTED",
+    "roleAuthority": "NOT_IMPLEMENTED",
+    "quarantineEnforcement": "NOT_IMPLEMENTED",
+    "auditStore": "NOT_IMPLEMENTED"
+  }
+}
