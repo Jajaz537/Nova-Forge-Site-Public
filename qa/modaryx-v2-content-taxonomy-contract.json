@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-CONTENT-TAXONOMY-20261003.md",
+  "contentFamilies": [
+    "gameplay-content",
+    "visual-audio",
+    "technical",
+    "aggregates"
+  ],
+  "gameplayTypes": [
+    "mod",
+    "addon",
+    "plugin",
+    "script",
+    "map",
+    "campaign",
+    "quest",
+    "character",
+    "vehicle",
+    "weapon",
+    "gameplay-overhaul",
+    "patch",
+    "translation"
+  ],
+  "visualAudioTypes": [
+    "texture-pack",
+    "resource-pack",
+    "shader",
+    "preset",
+    "reshade-preset",
+    "model",
+    "animation",
+    "sound-pack",
+    "music-pack",
+    "ui-theme"
+  ],
+  "technicalTypes": [
+    "library",
+    "framework",
+    "loader",
+    "api",
+    "tool",
+    "utility",
+    "installer",
+    "manager-extension"
+  ],
+  "aggregateTypes": [
+    "collection",
+    "modpack",
+    "profile",
+    "loadout"
+  ],
+  "releaseChannels": [
+    "stable",
+    "beta",
+    "alpha",
+    "legacy"
+  ],
+  "dependencyRelations": [
+    "required",
+    "optional",
+    "recommended",
+    "incompatible",
+    "replaces"
+  ],
+  "evidenceTypes": [
+    "measured",
+    "declared",
+    "estimated",
+    "unknown",
+    "incompatible"
+  ],
+  "invariants": [
+    "CONTENT_TYPE_EXTENSIBLE_PER_GAME",
+    "AGGREGATES_NEVER_TREATED_AS_ORDINARY_FILES",
+    "GAME_DEFINES_ITS_SUPPORTED_TYPES_AND_CATEGORIES",
+    "CONTENT_ITEM_STABLE_RELEASE_DISTINCT",
+    "REPLACES_NEVER_AUTO_SUBSTITUTES",
+    "COLLECTION_EDITORIAL_NOT_INSTALLABLE_BY_DEFAULT",
+    "MODPACK_VERSIONED_INSTALLABLE_OBJECT",
+    "PROFILE_LOCAL_PRIVATE_BY_DEFAULT",
+    "CREATOR_AND_TEAM_DISTINCT",
+    "LEGACY_KIND_NEVER_DIRECTLY_DRIVES_V2_NAV_WITHOUT_MAPPING"
+  ],
+  "productionStatus": {
+    "taxonomyRuntime": "NOT_IMPLEMENTED",
+    "realGameTaxonomies": "NOT_IMPLEMENTED",
+    "schemaMigration": "NOT_EXECUTED"
+  }
+}
