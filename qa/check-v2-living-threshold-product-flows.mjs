@@ -320,6 +320,22 @@ try{
   await clickText(".community-tabs button","Studios / équipes");
   await waitText("Équipes de création");
 
+
+  await clickText("footer button","Droits jeux · démo admin");
+  await waitText("Droits des jeux");
+  await waitText("Aucune demande réelle n’est envoyée dans ce prototype.");
+  await waitText("APPROVED_WITH_LIMITS");
+  await clickText(".rights-case-list button","RivenfallStudio fictif · démonstrationAWAITING_RESPONSE");
+  await waitText("AWAITING_RESPONSE");
+  await waitText("Aucun droit supplémentaire");
+  await clickText(".rights-case-list button","Solstice FrontierÉditeur fictif · démonstrationNO_RESPONSE");
+  await waitText("NO_RESPONSE ≠ autorisation");
+  await clickText(".rights-case-list button","AetherlandsÉditeur fictif · démonstrationAPPROVED_WITH_LIMITS");
+  await waitText("Key art");
+  await waitText("Refusé — reste bloqué");
+  const rightsSendDisabled=await evaluate(`(() => {const b=[...document.querySelectorAll('.rights-detail button')].find(x=>x.textContent.includes('Envoyer une demande'));return !!b&&b.disabled;})()`);
+  if(!rightsSendDisabled) throw new Error("rights outbound must stay disabled without backend");
+
   await clickText(".global-nav button","Mods & contenus");
   await waitText("Catalogue global");
   await fill(".catalog-search input","sommets");
@@ -374,6 +390,13 @@ try{
   await clickText(".profile-preview-actions .quiet","Prévisualiser import / export");
   await waitText("Rapport d’import / export — démonstration");
   await clickText(".back","← Retour à la Bibliothèque");
+
+
+  await clickText("footer button","Droits jeux · démo admin");
+  await waitText("Droits des jeux");
+  await waitText("Aucune demande réelle n’est envoyée dans ce prototype.");
+  await clickText(".rights-case-list button","Solstice FrontierÉditeur fictif · démonstrationNO_RESPONSE");
+  await waitText("NO_RESPONSE ≠ autorisation");
 
   await clickAria("Ouvrir le menu");
   await clickText(".global-nav button","Créer");
