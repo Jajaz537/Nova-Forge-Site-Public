@@ -8,7 +8,7 @@ const required = [
   "requirements-dependencies","release-files","collection","modpack","profile-loadout",
   "creator-profile","creator-studio","community","library","security-trust",
   "mobile-navigation","mobile-catalog","mobile-content-detail",
-  "account-settings","notifications","offline-stale","rights-admin"
+  "account-settings","notifications","offline-stale","rights-admin","modaryx-ai-preview"
 ];
 
 if (data.schemaVersion !== 1) throw new Error("unexpected schemaVersion");
@@ -53,6 +53,14 @@ for (const state of [
   "response-safe-automation-demo","response-legal-review-fallback-demo","outbound-unavailable"
 ]) {
   if (!rightsAdmin?.states?.includes(state)) throw new Error("rights-admin missing state: " + state);
+}
+
+const aiPreview = data.surfaces.find(x => x.id === "modaryx-ai-preview");
+for (const component of ["ModaryxAIPage","AiTrustPanel","AiDisabledComposer"]) {
+  if (!aiPreview?.components?.includes(component)) throw new Error("modaryx-ai-preview missing component: " + component);
+}
+for (const state of ["backend-unavailable","composer-disabled","insufficient-evidence-safe-fallback"]) {
+  if (!aiPreview?.states?.includes(state)) throw new Error("modaryx-ai-preview missing state: " + state);
 }
 
 const unresolved = new Set(data.unresolvedRealRuntimeStates || []);
