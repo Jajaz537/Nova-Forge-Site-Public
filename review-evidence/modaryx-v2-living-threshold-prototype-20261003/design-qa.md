@@ -386,3 +386,36 @@ Ce run ne prouve pas :
 - validation humaine/appareil.
 
 Aucun PASS High-Fi/VF final n'est déclaré.
+
+
+## Specialized model closure proof — 4 octobre 2026
+
+**TERMINÉ — dernier détail de modèle spécialisé au niveau prototype**
+
+Run : `37165177246` — **SUCCESS**  
+Commit capturé : `8ecd8a139eac084348c503a65d0289d7fb30fdba`  
+Artifact : `11289616195`  
+Digest : `sha256:e3e680c741d79e2bb91dc94bc5b5817ea873182c9422b8dd5e71b476a4c33c76`
+
+Marqueurs :
+- `PASS_V2_LIVING_THRESHOLD_STATIC_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `KEYBOARD_REACHABLE 32 / 32`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 57`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Détails désormais matérialisés et exercés :
+- relation `Supported` ;
+- relation `Alternative / AnyOf` avec choix utilisateur requis ;
+- politique de version `Minimum accepté` ;
+- états de fraîcheur `Current / Aging / Stale / Unknown`.
+
+Interprétation :
+- ces éléments ferment le **modèle d'information exploratoire** ;
+- ils ne prouvent aucune relation réelle, aucune version réelle, aucune compatibilité réelle ou mise à jour réelle ;
+- les 57 captures restent des états de prototype, pas une validation humaine.
+
+Aucun PASS High-Fi/VF final n'est déclaré.
