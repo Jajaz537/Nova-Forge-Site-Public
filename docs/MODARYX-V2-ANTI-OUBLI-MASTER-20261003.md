@@ -930,3 +930,21 @@ Statut actuel :
 - validation automatisée de licence : **NON IMPLÉMENTÉ**.
 
 Avant VF, ce workflow doit être implémenté et testé, ou remplacé provisoirement par un processus manuel contrôlé équivalent.
+
+
+### Preuve ciblée workflow droits jeux — 4 octobre 2026
+
+**TERMINÉ — contrat pré-production protégé par CI**
+
+Preuve :
+- run `37196259361` — **SUCCESS**
+- commit capturé `038a5b0e51eea76bb6859f7ead12ed18eef20894`
+- workflow `MODARYX V2 Game Rights Workflow Proof`
+
+Le checker bloque toute régression qui ferait de `NO_RESPONSE`, `DECLINED`, `EXPIRED` ou `REVOKED` un état de permission, retirerait le contact officiel vérifié des garde-fous outbound, supprimerait l’idempotence ou fusionnerait les droits web avec MODARYX Forge.
+
+À ne pas sur-déclarer :
+- aucun email réel envoyé ;
+- aucun contact éditeur réel validé ;
+- aucun Game Rights Registry production ;
+- aucun moteur de licence production.
