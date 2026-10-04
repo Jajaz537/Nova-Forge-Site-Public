@@ -2567,3 +2567,30 @@ Conséquence :
 le défaut de capture vide détecté précédemment est désormais couvert par un garde-fou automatique dans le workflow visuel principal.
 
 Ce PASS reste une preuve d'intégrité de l'archive du prototype, pas une validation humaine, High-Fi finale ou production.
+
+
+## 76. Registry completeness — tous les JSON machine classifiés
+
+**TERMINÉ pour l'anti-oubli machine / implémentations réelles inchangées**
+
+Run :
+- `37239331659` — **SUCCESS**
+- `PREPRODUCTION_MACHINE_JSON_COUNT 55`
+- `PREPRODUCTION_NON_CONTRACT_JSON_COUNT 3`
+- `PREPRODUCTION_CONTRACT_COUNT 52`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+Le registry classe désormais explicitement chaque fichier `qa/modaryx-v2-*.json` :
+- 52 contrats exécutés via leur checker ;
+- 3 JSON d'infrastructure explicitement non-contractuels :
+  - anti-contamination policy ;
+  - production surface map ;
+  - registry lui-même.
+
+Invariant ajouté :
+`EVERY_MODARYX_V2_JSON_CLASSIFIED`.
+
+Conséquence :
+un nouveau JSON machine MODARYX V2 oublié hors registry / classification fera échouer le checker consolidé au lieu de disparaître silencieusement de l'anti-oubli.
+
+Ce PASS valide la couverture de classification machine, pas la production.
