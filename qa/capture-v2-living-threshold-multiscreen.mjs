@@ -287,6 +287,9 @@ try {
   await evaluate("document.querySelector('.support-triage-result')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("desktop-rights-triage-accepted.png", 1440, 1024, "Rights Case de démonstration préparé — non créé réellement."));
+  await evaluate("document.querySelector('.rights-interpretation-demo')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("desktop-rights-response-interpretation.png", 1440, 1024, "SAFE_AUTOMATION"));
 
   // Mobile states
   await navigateHome(390, 844);
@@ -387,6 +390,9 @@ try {
   await evaluate("document.querySelector('.support-triage-result')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("mobile-rights-triage-accepted.png", 390, 844, "Rights Case de démonstration préparé — non créé réellement."));
+  await evaluate("document.querySelector('.rights-interpretation-demo')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("mobile-rights-response-interpretation.png", 390, 844, "SAFE_AUTOMATION"));
 
   const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/manifest.json";
   writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
