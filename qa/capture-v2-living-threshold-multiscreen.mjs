@@ -197,6 +197,9 @@ try {
   manifest.captures.push(await capture("desktop-collections.png", 1440, 1024, "Organiser n’est pas installer"));
   await clickByText(".collection-mode-tabs button", "Modpacks");
   manifest.captures.push(await capture("desktop-modpack.png", 1440, 1024, "Aetherlands — Essentiel"));
+  await clickByText(".delta-trigger", "Prévisualiser le delta");
+  await clickByText(".apply-mode button", "Remplacer");
+  manifest.captures.push(await capture("desktop-modpack-delta.png", 1440, 1024, "Avant toute mutation"));
 
   await clickByText(".global-nav button", "Créateurs");
   manifest.captures.push(await capture("desktop-creators.png", 1440, 1024, "Créateurs, équipes et studios"));
@@ -211,7 +214,14 @@ try {
 
   await clickByText("footer button", "Game Hub");
   await clickSelector('[aria-label="Bibliothèque"]');
-  manifest.captures.push(await capture("desktop-library.png", 1440, 1024, "Retrouvez favoris, suivis, collections et profils"));
+  manifest.captures.push(await capture("desktop-library.png", 1440, 1024, "Retrouvez favoris, suivis, collections, profils et historique"));
+  await clickByText(".library-tabs button", "Historique");
+  manifest.captures.push(await capture("desktop-library-history.png", 1440, 1024, "Aucun historique réel disponible"));
+  await clickByText(".library-tabs button", "Profils de jeu");
+  await clickByText(".profile-library article:first-child .quiet", "Ouvrir");
+  await clickByText(".profile-decision .quiet", "Prévisualiser une mise à jour");
+  manifest.captures.push(await capture("desktop-game-profile-delta.png", 1440, 1024, "Copie avant promotion"));
+  await clickByText(".back", "← Retour à la Bibliothèque");
 
   await clickByText(".global-nav button", "Communauté");
   manifest.captures.push(await capture("desktop-community.png", 1440, 1024, "Des échanges utiles autour des créations"));
@@ -224,6 +234,10 @@ try {
 
   await clickByText(".global-nav button", "Créer");
   manifest.captures.push(await capture("desktop-creator-studio.png", 1440, 1024, "Creator Studio"));
+  await clickByText(".studio-workflow .primary", "Créer un projet local");
+  await clickByText(".studio-nav button", "Projects");
+  await clickByText(".project-maturity .filter-chips button", "WiP");
+  manifest.captures.push(await capture("desktop-creator-project.png", 1440, 1024, "Crédits structurés"));
 
   // Mobile states
   await navigateHome(390, 844);
@@ -254,20 +268,31 @@ try {
   await navigateHome(390, 844);
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav .mobile-nav-utility", "Bibliothèque");
-  manifest.captures.push(await capture("mobile-library.png", 390, 844, "Retrouvez favoris, suivis, collections et profils"));
+  manifest.captures.push(await capture("mobile-library.png", 390, 844, "Retrouvez favoris, suivis, collections, profils et historique"));
+  await clickByText(".library-tabs button", "Historique");
+  manifest.captures.push(await capture("mobile-library-history.png", 390, 844, "Aucun historique réel disponible"));
+  await clickByText(".library-tabs button", "Profils de jeu");
   await clickByText(".profile-library article:first-child .quiet", "Ouvrir");
   manifest.captures.push(await capture("mobile-game-profile.png", 390, 844, "Manager non connecté"));
+  await clickByText(".profile-decision .quiet", "Prévisualiser une mise à jour");
+  manifest.captures.push(await capture("mobile-game-profile-delta.png", 390, 844, "Copie avant promotion"));
   await clickByText(".back", "← Retour à la Bibliothèque");
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Créer");
   manifest.captures.push(await capture("mobile-creator-studio.png", 390, 844, "Creator Studio"));
+  await clickByText(".studio-workflow .primary", "Créer un projet local");
+  await clickByText(".studio-nav button", "Projects");
+  await clickByText(".project-maturity .filter-chips button", "WiP");
+  manifest.captures.push(await capture("mobile-creator-project.png", 390, 844, "Crédits structurés"));
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Collections");
   manifest.captures.push(await capture("mobile-collections.png", 390, 844, "Organiser n’est pas installer"));
   await clickByText(".collection-mode-tabs button", "Modpacks");
   manifest.captures.push(await capture("mobile-modpack.png", 390, 844, "Aetherlands — Essentiel"));
+  await clickByText(".delta-trigger", "Prévisualiser le delta");
+  manifest.captures.push(await capture("mobile-modpack-delta.png", 390, 844, "Avant toute mutation"));
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Créateurs");
