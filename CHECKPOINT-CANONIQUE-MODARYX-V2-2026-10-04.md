@@ -1230,3 +1230,44 @@ Continuation générale de la correction App :
 
 Limite :
 - cette preuve navigateur ne remplace pas NVDA / VoiceOver / TalkBack réels.
+
+
+## 38. Skip link + focus de route + reduced motion
+
+**TERMINÉ pour le prototype navigateur / AT réel PREUVE MANQUANTE**
+
+Implémenté :
+- skip link `Aller au contenu principal` ;
+- cible unique `#main-content` focusable programmatiquement ;
+- focus déplacé vers le contenu principal après changement de route SPA ;
+- scroll route `smooth` en mode normal ;
+- scroll route `auto` sous `prefers-reduced-motion: reduce`.
+
+Incident micro-proof :
+- premier run `37219418914` — **FAIL**
+- erreur exacte : skip link mesuré pendant sa transition, top `-31.49px` malgré hauteur 44px ;
+- cause isolée : checker observait avant la fin de la transition CSS 140ms ;
+- correction ciblée : attente 220ms dans le checker, aucun changement produit supplémentaire.
+
+Micro-proof final :
+- run `37219490005` — **SUCCESS**
+- commit capturé `cbb0787ef8d433ccd69d24dde6c3b24980f477f6`
+- `SKIP_LINK_VISIBLE_TARGET_OK`
+- `ROUTE_FOCUS_MAIN_OK`
+- `ROUTE_SCROLL_NORMAL smooth`
+- `ROUTE_SCROLL_REDUCED auto`
+- `PASS_V2_ROUTE_FOCUS_AND_SKIP_LINK`.
+
+Continuation générale produit :
+- Living Threshold run `37219359937` — **SUCCESS**
+- commit capturé `ddc4da6e3193d063d7bfe7f6cb91a58340c49c8f`
+- artifact `11309950992`
+- digest `sha256:b1ac20cca202322b33afdf03c7da9114963676b90e17027280f76fa6ef95db53`
+- `KEYBOARD_REACHABLE 38 / 38`
+- desktop/mobile overflow `0 / 0`
+- `MULTISCREEN_CAPTURE_COUNT 81`.
+
+Limites :
+- aucun screen reader réel ;
+- aucune validation humaine clavier ;
+- aucun navigateur Safari réel.
