@@ -169,6 +169,12 @@ try{
   await waitBodyText("Droits des jeux");
   await assertNoOverflow("rights-dashboard");
 
+  await clickText("footer button","Confiance & légal");
+  await waitBodyText("Confiance, informations légales et transparence.");
+  await assertNoOverflow("public-trust");
+
+  await clickText("footer button","Droits jeux · démo admin");
+  await waitBodyText("Droits des jeux");
   await clickText(".support-triage-actions button","Accepter la baseline sûre");
   await waitBodyText("ACCEPTED_SAFE_BASELINE");
   await clickText(".publisher-contact-actions button","Vérifier le canal de démonstration");
@@ -176,7 +182,7 @@ try{
   await waitBodyText("REQUEST_READY");
   await assertNoOverflow("rights-expanded");
 
-  console.log("TABLET_REFLOW_SURFACE_COUNT",12);
+  console.log("TABLET_REFLOW_SURFACE_COUNT",13);
   console.log("PASS_V2_TABLET_REFLOW");
 }finally{
   try{ws?.close()}catch{}
