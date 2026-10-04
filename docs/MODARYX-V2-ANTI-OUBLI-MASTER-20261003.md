@@ -1869,3 +1869,27 @@ Le passage à `READY` est interdit tant qu'un blocker requis des catégories sui
 - web production ;
 - MODARYX Forge runtime ;
 - droits/légal.
+
+
+## 64. Architecture/data/schema/states — preuve machine — 4 octobre 2026
+
+**TERMINÉ pour les contrats / runtime PREUVE MANQUANTE**
+
+Run consolidé :
+- `37236188453` — **SUCCESS**
+- `PREPRODUCTION_CONTRACT_COUNT 39`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+À conserver :
+- frontières UI/application/domain/adapters ;
+- aucune dépendance domain au navigateur/CSS/Auth0/Cloudflare ;
+- aucune fixture technique en production ;
+- démonstration toujours explicite ;
+- schémas v2 séparés et versionnés ;
+- ContentItem ≠ Release ;
+- Collection ≠ Modpack ≠ Profile ;
+- états dégradés/transitoires obligatoires ;
+- stale ≠ current ;
+- unauthorized ≠ forbidden ;
+- unverified ≠ success ;
+- aucune progression ou capacité runtime simulée.
