@@ -236,6 +236,18 @@
       "contract": "qa/modaryx-v2-interaction-states-contract.json",
       "checker": "qa/check-v2-interaction-states-contract.mjs",
       "source": "docs/MODARYX-V2-INTERACTION-STATES-20261003.md"
+    },
+    {
+      "id": "qa-strategy",
+      "contract": "qa/modaryx-v2-qa-strategy-contract.json",
+      "checker": "qa/check-v2-qa-strategy-contract.mjs",
+      "source": "docs/MODARYX-V2-QA-STRATEGY-20261003.md"
+    },
+    {
+      "id": "risk-register",
+      "contract": "qa/modaryx-v2-risk-register-contract.json",
+      "checker": "qa/check-v2-risk-register-contract.mjs",
+      "source": "docs/MODARYX-V2-RISK-REGISTER-20261003.md"
     }
   ],
   "invariants": [
