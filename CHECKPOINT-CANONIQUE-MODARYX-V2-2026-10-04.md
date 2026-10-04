@@ -1693,3 +1693,35 @@ Toujours NON IMPLÉMENTÉ :
 - notifications réelles.
 
 La validation humaine, screen reader réel et appareil physique restent PREUVE MANQUANTE.
+
+
+## 52. SEO / i18n / contenu
+
+**TERMINÉ pour contrat + garde-fou preview / production PREUVE MANQUANTE**
+
+Source :
+`docs/MODARYX-V2-SEO-I18N-CONTENT-CONTRACT-20261003.md`
+
+Machine contract :
+`qa/modaryx-v2-seo-i18n-content-contract.json`
+
+Preuve :
+- run `37230817511` — **SUCCESS**
+- `SEO_I18N_EDITORIAL_STATE_COUNT 5`
+- `SEO_I18N_INVARIANT_COUNT 12`
+- `SEO_I18N_PREVIEW_ROBOTS noindex,nofollow,noarchive`
+- `PASS_V2_SEO_I18N_CONTENT_CONTRACT`.
+
+Le prototype reste :
+- `lang=fr` ;
+- `noindex,nofollow,noarchive` ;
+- titre non générique ;
+- titres SPA mis à jour par route logique.
+
+Production reste à faire :
+- canonicals V2 ;
+- sitemap ;
+- removed/archived URL behavior ;
+- structured data ;
+- i18n réel ;
+- localisation/review.
