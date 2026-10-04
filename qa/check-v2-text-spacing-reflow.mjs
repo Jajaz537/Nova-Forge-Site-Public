@@ -166,13 +166,15 @@ try{
   await navigateUtility("Compte"); await waitText("Compte & préférences"); await assertSpacing("account");
   await navigateUtility("MODARYX IA"); await waitText("Une IA native du produit, pas un chatbot greffé."); await assertSpacing("modaryx-ai");
   await clickText("footer button","Droits jeux · démo admin"); await waitText("Droits des jeux"); await assertSpacing("rights-dashboard");
+  await clickText("footer button","Confiance & légal"); await waitText("Confiance, informations légales et transparence."); await assertSpacing("public-trust");
+  await clickText("footer button","Droits jeux · démo admin"); await waitText("Droits des jeux");
   await clickText(".support-triage-actions button","Accepter la baseline sûre");
   await clickText(".publisher-contact-actions button","Vérifier le canal de démonstration");
   await clickText(".publisher-contact-actions button","Préparer la demande structurée");
   await waitText("REQUEST_READY");
   await assertSpacing("rights-expanded");
 
-  console.log("TEXT_SPACING_SURFACE_COUNT",12);
+  console.log("TEXT_SPACING_SURFACE_COUNT",13);
   console.log("PASS_V2_TEXT_SPACING_REFLOW");
 }finally{
   try{ws?.close()}catch{}
