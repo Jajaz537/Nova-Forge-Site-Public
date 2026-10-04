@@ -40,6 +40,7 @@ Fonctions UI actuellement présentes :
 - `Community`
 - `RightsDashboard`
 - `PublicLegalTrust`
+- `HelpDocs`
 - `App`
 
 Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles matérialisent les comportements à conserver.
@@ -66,6 +67,7 @@ Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles mat
 | Community | CommunityPage | Support/Question/Discussion/TeamActivity | community adapter/backend futur |
 | RightsDashboard | RightsAdminPage + RightsCaseList + RightsScopeMatrix + PublisherContactVerification + PublisherRequestReadiness + RightsLifecyclePreview + IpTakedownPreview | RightsCase + RightsScope + PublisherContact + RightsLifecycle + IpCase | rights registry/IP backend futur |
 | PublicLegalTrust | PublicTrustPage + TrustReadinessGrid + PublicTrustGate | LegalDocumentReadiness + PublicTrustChannel | faits opérateur + politiques + canaux réels futurs |
+| HelpDocs | HelpDocsPage + HelpTopicGrid + HelpActionLinks | HelpTopic + DocumentationReadiness + ProductCapabilityReference | contenu final + routes/capacités réelles futures |
 | App | Route shell | routing | stack à sélectionner |
 
 ## 4. Primitives et composants à extraire
@@ -123,6 +125,9 @@ Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles mat
 - GameSupportTriage
 - TrustReadinessGrid
 - PublicTrustGate
+- HelpTopicGrid
+- HelpActionLinks
+- DocumentationReadinessState
 
 Aucun de ces patterns ne doit importer le CSS V1.
 
@@ -221,6 +226,7 @@ Interfaces conceptuelles, framework-agnostic :
 - `RightsRepository`
 - `IpCaseRepository`
 - `PublicTrustRepository`
+- `HelpRepository`
 
 Chaque adapter doit pouvoir retourner :
 - nominal ;
@@ -256,6 +262,7 @@ Le prototype utilise un état React local. La production doit utiliser des route
 - `/account`
 - `/admin/rights` — administration authentifiée uniquement
 - `/trust` — informations publiques de confiance/readiness, textes finaux uniquement après validation
+- `/help` — documentation produit finale liée aux capacités réellement livrées
 
 Aucun fallback vers une page V1 contaminante.
 
@@ -388,10 +395,11 @@ Quand le gate autorisera le root :
 11. Account / Settings ;
 12. Rights admin / Game Rights Registry ;
 13. Public Trust / informations publiques ;
-14. PWA V2 séparée ;
-15. QA complète ;
-16. upgrade/rollback V1→V2 ;
-17. cutover seulement après preuves.
+14. Help / Documentation ;
+15. PWA V2 séparée ;
+16. QA complète ;
+17. upgrade/rollback V1→V2 ;
+18. cutover seulement après preuves.
 
 ## 16. Gate
 
