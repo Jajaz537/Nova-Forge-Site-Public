@@ -794,3 +794,35 @@ Captures :
 - `mobile-ip-takedown-restricted.png`
 
 No real claimant, legal authority, asset restriction, cache invalidation or legal decision is represented.
+
+
+## MODARYX IA — integration preview proof — 4 octobre 2026
+
+**TERMINÉ pour le prototype / aucune IA réelle déclarée**
+
+Run :
+- `37211271783` — **SUCCESS**
+- commit capturé `f8616f18876c49de45b3d208222be042dd2b543a`
+- artifact `11306731614`
+- digest `sha256:6cd590ef764afc4825cec9f199c504fbd57b6d7dd296a629fa311a1393495047`
+- `KEYBOARD_REACHABLE 37 / 37`
+- `FLOW_ASSERT modaryx ai preview no fake model or action`
+- `MULTISCREEN_CAPTURE_COUNT 77`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Captures :
+- `desktop-modaryx-ai.png`
+- `mobile-modaryx-ai.png`
+
+Revue visuelle interne de l’archive :
+- la surface appartient à la même famille Living Threshold ;
+- le statut non actif est visible avant le composer ;
+- le desktop conserve une hiérarchie claire entre assistant et panneau de confiance ;
+- le mobile recompose en une colonne sans compression horizontale observée dans la preuve navigateur ;
+- le composer reste désactivé et ne simule aucune réponse.
+
+Contrat machine :
+- run `37211787695` — **SUCCESS**
+- `PASS_V2_MODARYX_AI_INTEGRATION_CONTRACT`.
+
+Cette revue interne n’est pas une validation humaine externe et ne lève pas le gate High-Fi.
