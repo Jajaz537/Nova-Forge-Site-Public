@@ -424,3 +424,39 @@ Toujours **NON IMPLÉMENTÉ** :
 - Game Rights Registry production.
 
 Le root/frontend production reste BLOQUÉ selon le gate canonique.
+
+
+## 26. Notifications droits éditeurs — réconciliation — 4 octobre 2026
+
+Preuve Living Threshold :
+- run `37202254205` — **SUCCESS**
+- commit `ddba1f0bbf90c417600f6fdb800529b7e24248f0`
+- artifact `11303272811`
+- digest `sha256:f34ee2b0b83e561f6f550ab1e575216a80200dd60d827f9bc64f6d96a7da34a4`
+- 71 captures ;
+- notification preview desktop/mobile ;
+- `RIGHTS_NOTIFICATION_MOBILE_OVERFLOW 0` ;
+- product flows : SUCCESS.
+
+Contrat notification :
+- run `37202025942` — **SUCCESS**
+- 9 event types ;
+- 8 invariants ;
+- 5 champs de preuve minimum ;
+- `PASS_V2_RIGHTS_NOTIFICATION_CONTRACT`.
+
+Surface map :
+- run `37202563463` — **SUCCESS**
+- 23 surfaces ;
+- 6 runtime states réels non résolus ;
+- Notifications inclut désormais RightsNotificationPreview + états fictifs rights approval/legal review et canaux indisponibles.
+
+Toujours NON IMPLÉMENTÉ :
+- event bus ;
+- Rights Case deep-link réel ;
+- unread counter ;
+- email ;
+- push ;
+- persistance/acknowledgement serveur.
+
+Le frontend/root production reste BLOQUÉ par le gate canonique.
