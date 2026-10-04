@@ -252,6 +252,9 @@ try {
   await clickByText(".studio-nav button", "Releases");
   manifest.captures.push(await capture("desktop-creator-platform-validation.png", 1440, 1024, "Validation par plateforme"));
 
+  await clickByText("footer button", "Droits jeux · démo admin");
+  manifest.captures.push(await capture("desktop-rights-dashboard.png", 1440, 1024, "Aucune demande réelle n’est envoyée dans ce prototype."));
+
   // Mobile states
   await navigateHome(390, 844);
   manifest.captures.push(await capture("mobile-game-hub.png", 390, 844, "Mes profils pour ce jeu"));
@@ -335,6 +338,9 @@ try {
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav .mobile-nav-utility", "Compte");
   manifest.captures.push(await capture("mobile-account.png", 390, 844, "Vous explorez MODARYX en mode invité"));
+
+  await clickByText("footer button", "Droits jeux · démo admin");
+  manifest.captures.push(await capture("mobile-rights-dashboard.png", 390, 844, "Aucune demande réelle n’est envoyée dans ce prototype."));
 
   const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/manifest.json";
   writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
