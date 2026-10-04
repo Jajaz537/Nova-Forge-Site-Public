@@ -2172,3 +2172,31 @@ Verrouillé en plus :
 - progression et capacités runtime ne sont jamais simulées.
 
 Ces PASS sont des preuves de contrat, pas des preuves backend/runtime/production.
+
+
+## 65. QA strategy + risk register — preuve machine
+
+**TERMINÉ pour les contrats / validations réelles restent distinctes**
+
+Run :
+`37236335418` — **SUCCESS**
+
+Marqueurs :
+- `PASS_V2_QA_STRATEGY_CONTRACT`
+- `PASS_V2_RISK_REGISTER_CONTRACT`
+- `PREPRODUCTION_CONTRACT_COUNT 41`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+Verrouillé :
+- fonction / visuel / accessibilité / performance / sécurité / responsive / données / migration / PWA / anti-contamination restent des catégories de QA distinctes ;
+- après erreur : erreur exacte → isolation → correction ciblée → micro-proof ;
+- aucun full replay immédiat ;
+- full replay uniquement en fin de candidat ;
+- CWV terrain seulement avec mesure terrain réelle ;
+- risque documenté ≠ risque fermé ;
+- aucun cutover sans rollback ;
+- aucune distribution sans droits ;
+- aucune validation humaine déduite d'une automatisation ;
+- aucun faux PASS/VF.
+
+Les risques runtime, appareils, humain, production et droits restent ouverts tant que leurs preuves n'existent pas.
