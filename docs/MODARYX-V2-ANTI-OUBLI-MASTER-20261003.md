@@ -2046,3 +2046,16 @@ Work ne remplace jamais :
 - NVDA/VoiceOver/TalkBack réels ;
 - appareil physique ;
 - revue juridique humaine requise.
+
+
+## 73. Validateur de preuves externes
+
+**TERMINÉ pour l'outil / blockers externes toujours ouverts**
+
+Run `37238143495` — SUCCESS.
+
+À conserver :
+- toute future preuve humaine/appareil doit passer par un dossier lié au commit ;
+- P0/P1 ouvert interdit un PASS ;
+- aucun artifact vide ;
+- aucune émulation ne peut devenir preuve physique/screen-reader/Safari.
