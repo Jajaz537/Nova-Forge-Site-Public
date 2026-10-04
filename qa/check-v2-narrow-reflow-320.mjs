@@ -188,6 +188,9 @@ try{
   await clickText("footer button","Aide & documentation");
   await waitText("Comprendre MODARYX sans deviner.");
   await assertNoOverflow("help-docs");
+  await clickText("footer button","Modération · démo admin");
+  await waitText("Modération, signalements et appels.");
+  await assertNoOverflow("moderation-center");
 
   await clickText("footer button","Droits jeux · démo admin");
   await waitText("Droits des jeux");
@@ -198,7 +201,7 @@ try{
   await assertNoOverflow("rights-expanded");
 
   console.log("NARROW_REFLOW_VIEWPORT",viewportWidth,viewportHeight);
-  console.log("NARROW_REFLOW_SURFACE_COUNT",14);
+  console.log("NARROW_REFLOW_SURFACE_COUNT",15);
   if(viewportWidth===320) console.log("PASS_V2_NARROW_REFLOW_320");
   console.log("PASS_V2_REFLOW_VIEWPORT_"+viewportWidth);
 }finally{
