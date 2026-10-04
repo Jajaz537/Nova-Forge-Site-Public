@@ -1387,3 +1387,28 @@ Continuation CSS :
 - menu compact autorisé sur medium viewport ;
 - aucune preuve browser simulée ne ferme le blocker appareil physique ;
 - iPad/Safari/tactile humain restent PREUVE MANQUANTE.
+
+
+## 51. Responsive matrix + narrow 320 — 4 octobre 2026
+
+**TERMINÉ pour browser emulation / appareils réels PREUVE MANQUANTE**
+
+Narrow 320 :
+- run `37217511653` — SUCCESS
+- `PASS_V2_NARROW_REFLOW_320`
+- 12 surfaces à overflow 0.
+
+Responsive matrix :
+- run `37218193186` — SUCCESS
+- largeurs : 360 / 430 / 768 / 1024 / 1280 / 1920
+- 12 surfaces testées par largeur
+- marqueurs `PASS_V2_REFLOW_VIEWPORT_<width>`.
+
+À conserver :
+- Account mobile : track `minmax(0,1fr)`, actions wrappables ;
+- publisher contact actions : track `minmax(0,1fr)`, min-width 0 ;
+- aucune largeur courante testée ne doit réintroduire un overflow horizontal.
+
+Limite :
+- browser automation uniquement ;
+- vrai zoom utilisateur, text resize, Safari, tactile, appareils physiques et screen readers restent PREUVE MANQUANTE.
