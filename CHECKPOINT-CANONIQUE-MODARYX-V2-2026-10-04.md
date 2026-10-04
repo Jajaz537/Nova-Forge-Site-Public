@@ -1455,3 +1455,67 @@ Preuve :
 - `PASS_V2_ASYNC_LOADING_CONTRACT`
 
 Cette preuve valide le contrat, pas un backend asynchrone réel.
+
+
+## 46. Archive visuelle courante + navigation logo
+
+**TERMINÉ pour le prototype / production toujours BLOQUÉE**
+
+Preuve Living Threshold la plus fraîche couvrant le code produit courant avant les ajouts QA-only :
+- run `37223254174` — **SUCCESS**
+- commit capturé `183c93867e147d928b88c11e41f2deb368308f88`
+- artifact `11310823204`
+- digest `sha256:5fb9a9fadff38960fbe977680cb393aa85e9a5a005203973d8549718503f98e6`
+- `KEYBOARD_REACHABLE 38 / 38`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `MULTISCREEN_CAPTURE_COUNT 81`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+- `FLOW_ASSERT MODARYX logo returns to discover`.
+
+Le logo MODARYX du shell retourne désormais vers Découvrir dans le prototype.
+
+Cette archive ne ferme aucun blocker humain/appareil et ne vaut pas frontend production.
+
+## 47. Text spacing / reflow ciblé
+
+**TERMINÉ pour Chrome automatisé / validation humaine et AT réel PREUVE MANQUANTE**
+
+Micro-proof :
+- workflow `MODARYX V2 Text Spacing Reflow Micro-Proof`
+- run `37224236854` — **SUCCESS**
+- commit capturé `8dd2fcaa7a9806510ad0efd1f29bde68489939e2`
+- `TEXT_SPACING_SURFACE_COUNT 12`
+- `PASS_V2_TEXT_SPACING_REFLOW`.
+
+Override de test :
+- line-height `1.5` ;
+- letter-spacing `0.12em` ;
+- word-spacing `0.16em` ;
+- paragraph spacing `2em`.
+
+Résultat :
+- 12 surfaces ciblées ;
+- overflow horizontal = 0 ;
+- texte horizontalement clippé détecté = 0 selon le checker ciblé.
+
+Surfaces :
+- Game Hub
+- Games Index
+- Catalog
+- Collections
+- Creators
+- Community
+- Creator Studio
+- Library
+- Account
+- MODARYX IA
+- Rights Dashboard
+- Rights expanded.
+
+Limites :
+- preuve automatisée Chrome uniquement ;
+- ne remplace pas zoom navigateur humain ;
+- ne remplace pas text resize réel sur Safari/iOS ;
+- ne remplace pas screen reader ou validation humaine.
