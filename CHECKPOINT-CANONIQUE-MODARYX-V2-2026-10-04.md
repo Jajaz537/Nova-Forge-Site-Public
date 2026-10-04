@@ -2116,3 +2116,29 @@ ce run prouve les **contrats et invariants**, pas :
 - appareils ;
 - screen readers ;
 - Core Web Vitals réels.
+
+
+## 63. VF readiness gate machine
+
+**TERMINÉ pour le garde-fou de statut / VF reste BLOQUÉE**
+
+Fichiers :
+- `qa/modaryx-v2-vf-readiness-gate.json`
+- `qa/check-v2-vf-readiness-gate.mjs`
+- `.github/workflows/modaryx-v2-vf-readiness-gate-proof.yml`
+
+Preuve :
+- run `37235975698` — **SUCCESS**
+- `VF_READINESS_OPEN_BLOCKER_COUNT 32`
+- `VF_READINESS_STATUS BLOCKED`
+- `PASS_V2_VF_READINESS_GATE`.
+
+Le checker interdit de marquer la VF `READY` tant qu'un blocker requis reste `OPEN`.
+
+Groupes ouverts :
+- validations humaines/appareils ;
+- production web ;
+- runtime MODARYX Forge ;
+- droits/légal.
+
+Ce PASS valide uniquement l'honnêteté du gate. Il confirme explicitement que la **VF n'est pas validée**.
