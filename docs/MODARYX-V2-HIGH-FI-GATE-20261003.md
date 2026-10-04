@@ -715,3 +715,74 @@ Toujours PREUVE MANQUANTE :
 - backend/search docs réel.
 
 Cette fermeture structurelle ne lève aucun blocker humain/appareil et ne vaut pas documentation VF finale.
+
+
+## 33. Modération / signalements / appels — preuve prototype — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Contrat source :
+- `docs/MODARYX-V2-MODERATION-APPEALS-CONTRACT-20261003.md`
+- contrat machine : `qa/modaryx-v2-moderation-appeals-contract.json`
+- run `37230196601` — **SUCCESS**
+- `MODERATION_STATE_COUNT 7`
+- `MODERATION_ACTION_COUNT 6`
+- `MODERATION_INVARIANT_COUNT 12`
+- `PASS_V2_MODERATION_APPEALS_CONTRACT`.
+
+Preuve Living Threshold :
+- run `37230093681` — **SUCCESS**
+- commit capturé `6134ec747cce538582236c39c4c656c07a0d5146`
+- artifact `11313079816`
+- digest `sha256:004e8a29f942dd177fd4b21c28cfda5d7ed4e6af2b872e18ff0cc9136262fd2e`
+- `KEYBOARD_REACHABLE 41 / 41`
+- desktop/mobile overflow `0 / 0`
+- `FLOW_ASSERT moderation appeals preserves server authority and prior decision`
+- `MULTISCREEN_CAPTURE_COUNT 87`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Accessibilité ciblée après hardening CDP :
+- incident run `37230089556` — **FAIL** infrastructure `ECONNREFUSED 127.0.0.1:9243`, aucune assertion produit en échec ;
+- correction ciblée : profil Chrome unique + détection d’exit + readiness étendue ;
+- run `37230250723` — **SUCCESS** ;
+- structure 18 surfaces ;
+- touch 18 surfaces ;
+- forced colors 15 surfaces.
+
+Keyboard matrix étendue :
+- run `37230361038` — **SUCCESS**
+- `KEYBOARD_MATRIX_SURFACE_COUNT 18`
+- `PASS_V2_KEYBOARD_REACHABILITY_MATRIX`
+- `PASS_V2_FOCUS_VISIBLE_MATRIX`
+- modération : `24 / 24` contrôles atteints avec indicateur focus.
+
+Responsive :
+- text spacing run `37230028555` — **SUCCESS**, moderation overflow 0 / clipped 0 ;
+- narrow 320 run `37230036543` — **SUCCESS**, moderation overflow 0 ;
+- tablet run `37230040694` — **SUCCESS**, moderation overflow 0.
+
+Surface map :
+- run `37230139266` — **SUCCESS**
+- `SURFACE_MAP_COUNT 27`
+- `UNRESOLVED_RUNTIME_COUNT 6`
+- `PASS_V2_PRODUCTION_SURFACE_MAP`.
+
+Matérialisé :
+- cas fictifs RECEIVED / UNDER_REVIEW / APPEALED ;
+- Support distinct du Signalement ;
+- historique de décision conservé ;
+- appel distinct et rattaché à la décision précédente ;
+- actions destructives désactivées sans autorité serveur ;
+- état partageable distinct des informations internes.
+
+Toujours PREUVE MANQUANTE :
+- backend de modération ;
+- soumission/track réel des signalements ;
+- autorité serveur des rôles ;
+- quarantine/remove/restore réels ;
+- audit store ;
+- appeals backend ;
+- validation humaine / AT / appareils.
+
+Cette preuve ne constitue ni une politique de modération finale ni un système de modération production.
