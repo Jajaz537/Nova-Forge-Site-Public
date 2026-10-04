@@ -147,6 +147,9 @@ try{
   await clickAria("Notifications"); await assertKeyboardSurface("notifications"); count++;
   await clickAria("Compte"); await assertKeyboardSurface("account"); count++;
   await clickAria("MODARYX IA"); await assertKeyboardSurface("modaryx-ai"); count++;
+  await clickExact("footer button","Confiance & légal"); await assertKeyboardSurface("public-trust"); count++;
+  await clickExact("footer button","Aide & documentation"); await assertKeyboardSurface("help-docs"); count++;
+  await clickExact("footer button","Modération · démo admin"); await assertKeyboardSurface("moderation-center"); count++;
   await clickExact("footer button","Droits jeux · démo admin"); await assertKeyboardSurface("rights-dashboard"); count++;
 
   await clickExact(".support-triage-actions button","Accepter la baseline sûre");
