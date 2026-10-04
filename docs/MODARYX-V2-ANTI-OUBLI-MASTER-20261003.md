@@ -539,4 +539,30 @@ Prototype / production :
 - aucun téléchargement/installation/provider réel n'est simulé ;
 - toute idée ajoutée au prototype doit rester explicitement démonstration/local-only lorsque les services réels sont absents.
 
-**Prochain travail interne : matérialiser dans Living Threshold les décisions qui peuvent être démontrées honnêtement sans backend, puis micro-proof ciblé.**
+**Matérialisation Living Threshold : TERMINÉE pour le périmètre ciblé de cette passe.**
+
+Micro-proof :
+- run `37163931034` — **SUCCESS**
+- commit capturé `226b41b40f49166c936cf7968391e0d35105b09e`
+- artifact `11288409054`
+- digest `sha256:0f3c73af5ab4936fc0e10cee121612cef13363b4701a313df70041164f8df60f`
+- `MULTISCREEN_CAPTURE_COUNT 47`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Matérialisé sans backend :
+- Library > Historique privé sans fausse activité ;
+- dépendances avec origine ;
+- version `Auto sûr / Proposer / Épinglé` ;
+- update de Profil vers copie/branche avant promotion ;
+- Modpack : delta + `Ajouter / Remplacer / Annuler` ;
+- Creator : maturité Concept/WiP/Released/Archived ;
+- crédits structurés.
+
+Toujours à ne pas oublier / non matérialisé réellement :
+- provider/source réel et sélection multi-source ;
+- import/export réel + rapport de compatibilité/pertes ;
+- plan avancé alimenté par données/runtime réels ;
+- backend, téléchargement, installation et historique réels.
+
+**Prochain travail interne : matérialiser honnêtement provider/source, rapport d'import/export et plan avancé en états de démonstration, sans inventer de connecteur ni parser réel.**
