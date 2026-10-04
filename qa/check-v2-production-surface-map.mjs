@@ -34,6 +34,27 @@ for (const surface of data.surfaces) {
   }
 }
 
+
+const gamesIndex = data.surfaces.find(x => x.id === "games-index");
+for (const component of ["GameSupportRequest"]) {
+  if (!gamesIndex?.components?.includes(component)) throw new Error("games-index missing component: " + component);
+}
+for (const state of ["support-request-closed","support-request-validation-error","support-request-local-draft"]) {
+  if (!gamesIndex?.states?.includes(state)) throw new Error("games-index missing state: " + state);
+}
+
+const rightsAdmin = data.surfaces.find(x => x.id === "rights-admin");
+for (const component of ["RightsDashboard","GameSupportTriage"]) {
+  if (!rightsAdmin?.components?.includes(component)) throw new Error("rights-admin missing component: " + component);
+}
+for (const state of [
+  "approved-with-limits-demo","awaiting-response-demo","no-response-demo",
+  "support-triage-demo","support-accepted-safe-baseline-demo","support-declined-product-demo",
+  "outbound-unavailable"
+]) {
+  if (!rightsAdmin?.states?.includes(state)) throw new Error("rights-admin missing state: " + state);
+}
+
 const unresolved = new Set(data.unresolvedRealRuntimeStates || []);
 for (const requiredState of [
   "session-expired-real",
