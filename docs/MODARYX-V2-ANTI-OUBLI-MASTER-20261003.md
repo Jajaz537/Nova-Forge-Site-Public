@@ -1975,3 +1975,25 @@ Run :
 - aucune stack choisie tant que le gate canonique bloque ;
 - aucun root V2 créé par inertie ;
 - strict CSP / SW contrôlé / preview SHA / isolation legacy obligatoires.
+
+
+## 69. High-Fi gate + frontend reclassification proposal — preuve machine
+
+**TERMINÉ pour les contrats / aucune autorisation de root**
+
+Preuve :
+- run `37237489658` — **SUCCESS**
+- `PASS_V2_HIGH_FI_GATE_CONTRACT`
+- `PASS_V2_FRONTEND_GATE_RECLASSIFICATION_PROPOSAL_CONTRACT`
+- registry : **50 contrats**.
+
+À ne pas perdre :
+- High-Fi final reste BLOQUÉ ;
+- humain réel, mobile réel, NVDA/VoiceOver/TalkBack, Safari et appareils physiques restent PREUVE MANQUANTE ;
+- référence visuelle approuvée archivable + comparaison normalisée restent PREUVE MANQUANTE ;
+- la proposition de preview engineering reste `PROPOSAL_ONLY_NOT_ACTIVE` ;
+- proposition ≠ décision ;
+- proposition ≠ stack ;
+- proposition ≠ root ;
+- proposition ≠ production ;
+- aucun faux backend ne doit être ajouté pour simuler une implémentation réelle.
