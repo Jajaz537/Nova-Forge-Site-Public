@@ -8,6 +8,7 @@ on:
       - '.github/workflows/modaryx-v2-*.yml'
       - '.github/workflows/modaryx-v2-*.yaml'
       - 'qa/check-v2-workflow-action-pins.mjs'
+      - 'qa/check-v2-workflow-security-baseline.mjs'
   workflow_dispatch:
 
 permissions:
@@ -30,3 +31,9 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-v2-workflow-action-pins.mjs
+
+      - name: Validate workflow baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-workflow-security-baseline.mjs
