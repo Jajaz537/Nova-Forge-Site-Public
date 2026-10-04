@@ -554,3 +554,41 @@ Captures :
 - `mobile-game-support-request.png`
 
 Aucun backend de demande, triage serveur, notification ou outbound réel n’est prouvé.
+
+
+## Member support triage — safe-baseline proof — 4 octobre 2026
+
+**TERMINÉ — prototype admin fictif / aucun contact éditeur réel**
+
+Run :
+- `37199552009` — **SUCCESS**
+- commit capturé : `d6716baabdb573012ef722d7f5fa014142f4d84d`
+- artifact : `11302751771`
+- digest : `sha256:9af7ba96ea9c8aed64f11cf9f2b15ae74cc9fe8e89798aa4f270e8715a58cd59`
+
+Marqueurs :
+- `KEYBOARD_REACHABLE 36 / 36`
+- `RIGHTS_MOBILE_OVERFLOW 0`
+- `GAME_SUPPORT_REQUEST_MOBILE_OVERFLOW 0`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `FLOW_ASSERT member support triage accepted safe baseline only`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 65`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`
+
+Matérialisé :
+- demande membre fictive en état TRIAGE ;
+- checks existence/doublon/pertinence/restrictions ;
+- action locale `Accepter la baseline sûre` ;
+- état `ACCEPTED_SAFE_BASELINE` ;
+- Rights Case seulement **préparé en démonstration**, jamais créé réellement ;
+- aucun contact éditeur ;
+- aucun outbound ;
+- aucun asset officiel débloqué.
+
+Captures :
+- `desktop-rights-triage-accepted.png`
+- `mobile-rights-triage-accepted.png`.
+
+Aucun triage serveur, Rights Case production, contact éditeur ou décision juridique réelle n’est prouvé.
