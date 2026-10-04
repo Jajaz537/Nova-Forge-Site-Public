@@ -681,3 +681,65 @@ Toujours non implémenté :
 - outbound email/API ;
 - audit mailbox ;
 - Game Rights Registry production.
+
+
+## 26. Notifications droits éditeurs — contrat et micro-preuve ciblée
+
+**TERMINÉ pour le contrat et la surface ciblée / événement réel PREUVE MANQUANTE**
+
+Contrat :
+- `docs/MODARYX-V2-NOTIFICATIONS-PREFERENCES-CONTRACT-20261003.md`
+- `qa/modaryx-v2-rights-notification-contract.json`
+- `qa/check-v2-rights-notification-contract.mjs`
+- workflow `MODARYX V2 Rights Notification Contract Proof`
+
+Preuve contrat :
+- run `37202025942` — **SUCCESS**
+- `RIGHTS_NOTIFICATION_EVENT_TYPE_COUNT 9`
+- `RIGHTS_NOTIFICATION_INVARIANT_COUNT 8`
+- `RIGHTS_NOTIFICATION_REQUIRED_EVIDENCE_COUNT 5`
+- `PASS_V2_RIGHTS_NOTIFICATION_CONTRACT`
+
+Événements structurés prévus :
+- réponse éditeur reçue ;
+- approved / approved with limits ;
+- information complémentaire ;
+- legal review required ;
+- declined ;
+- expiring / expired / revoked.
+
+Garde-fous :
+- aucun événement réel = aucune notification réelle ;
+- notification liée à un Rights Case réel ;
+- scope absent jamais présenté comme accordé ;
+- `LEGAL_REVIEW_REQUIRED` ne débloque aucun droit ;
+- confidentialité des réponses éditeurs ;
+- droits Web et MODARYX Forge séparés ;
+- badge réel uniquement avec compteur réel ;
+- email/push bloqués sans infrastructure réelle.
+
+### Incident QA ciblé et fermeture
+
+Run Living Threshold `37201905576` :
+- build : SUCCESS ;
+- static a11y : SUCCESS ;
+- browser a11y : **FAIL** ;
+- erreur exacte : `publisher rights notification safety copy missing`.
+
+Isolation :
+- micro-proof dédié `MODARYX V2 Rights Notification Preview Micro-Proof` ;
+- premier run `37202147304` : **FAIL** ;
+- erreur exacte : `missing text: Démonstration · non reçue` ;
+- cause isolée : le label utilise la règle CSS `text-transform: uppercase`, donc le texte rendu est `DÉMONSTRATION · NON REÇUE`.
+
+Correction ciblée :
+- assertions alignées sur le texte réellement rendu ;
+- aucune modification fonctionnelle ou de contenu nécessaire.
+
+Micro-proof après correction :
+- run `37202244972` — **SUCCESS**
+- commit capturé `356afffdee0280081a5684307e237ad9d4dfe51c`
+- `RIGHTS_NOTIFICATION_MOBILE_OVERFLOW 0`
+- `PASS_V2_RIGHTS_NOTIFICATION_PREVIEW`.
+
+Le full Living Threshold de continuation doit rester séparément prouvé avant d’archiver le nouveau nombre de captures.
