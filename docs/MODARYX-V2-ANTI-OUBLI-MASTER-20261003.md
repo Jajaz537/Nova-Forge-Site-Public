@@ -1561,3 +1561,49 @@ Toujours PREUVE MANQUANTE :
 - validation humaine ;
 - AT/appareils ;
 - revue juridique des textes qui le nécessitent.
+
+
+## 57. Modération / signalements / appels — 4 octobre 2026
+
+**TERMINÉ pour contrat + prototype / production PREUVE MANQUANTE**
+
+À ne jamais perdre :
+- Support ≠ Signalement ;
+- objets signalables contextualisés ;
+- états received / triaged / under-review / actioned / no-action / appealed / closed ;
+- hide/restrict/quarantine/remove/restore/request-changes = actions serveur ;
+- aucun contrôle client seul ne peut effectuer une action destructive ;
+- appel rattaché à la décision précédente ;
+- appel n’efface jamais l’historique ;
+- rôle moderator / appeals-reviewer / administrator fourni par l’autorité serveur ;
+- audit trail actor/action/target/timestamp/reason/previous/next ;
+- reporter : réception sans promesse de résultat ;
+- créateur : uniquement raison/état partageables ;
+- mobile : report/tracking/response/appeal ;
+- statut textuel, pas couleur seule.
+
+Preuves :
+- contract run `37230196601` — **SUCCESS**, `PASS_V2_MODERATION_APPEALS_CONTRACT` ;
+- Living Threshold `37230093681` — **SUCCESS**, 87 captures ;
+- `FLOW_ASSERT moderation appeals preserves server authority and prior decision` ;
+- accessibility run `37230250723` — **SUCCESS**, structure/touch/forced colors incluent moderation ;
+- keyboard run `37230361038` — **SUCCESS**, moderation 24/24 ;
+- text spacing `37230028555` — SUCCESS ;
+- narrow 320 `37230036543` — SUCCESS ;
+- tablet `37230040694` — SUCCESS ;
+- surface map `37230139266` — SUCCESS, 27 surfaces.
+
+Incident checker fermé :
+- `37230089556` : `ECONNREFUSED 127.0.0.1:9243` avant assertions ;
+- correction readiness Chrome ciblée ;
+- micro-proof `37230250723` vert.
+
+Toujours PREUVE MANQUANTE :
+- report backend ;
+- moderation backend ;
+- role authority ;
+- quarantine/remove/restore ;
+- audit store ;
+- appeal backend ;
+- notifications réelles ;
+- validation humaine / AT / appareils.
