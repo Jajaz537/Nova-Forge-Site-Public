@@ -1314,3 +1314,82 @@ Continuation générale :
 - `MULTISCREEN_CAPTURE_COUNT 81`.
 
 Limite : AX Chrome automatisé ≠ validation NVDA / VoiceOver / TalkBack réelle.
+
+
+## 40. Validation de formulaires — sémantique d’erreur
+
+**TERMINÉ pour le prototype navigateur / AT réel PREUVE MANQUANTE**
+
+Implémenté :
+- champ demande de support : `aria-invalid` + `aria-describedby` vers l’erreur ;
+- champ raison de signalement : même contrat ;
+- focus récupérable après erreur ;
+- erreur supprimée après correction utilisateur.
+
+Micro-proof :
+- workflow `MODARYX V2 Form Validation Semantics Micro-Proof`
+- run `37220323315` — **SUCCESS**
+- commit capturé `74bab3ea80ae0407f050a4cbe5edd7966a6bd50e`
+- `FORM_ERROR_GAME_REQUEST_ASSOCIATED`
+- `FORM_ERROR_REPORT_ASSOCIATED`
+- `FORM_ERROR_FOCUS_RECOVERY_OK`
+- `FORM_ERROR_CLEAR_RECOVERY_OK`
+- `PASS_V2_FORM_VALIDATION_SEMANTICS`.
+
+Limite :
+- aucun NVDA / VoiceOver / TalkBack réel.
+
+## 41. Hiérarchie de titres — fermeture ciblée
+
+**TERMINÉ pour les 15 surfaces automatisées / AT réel PREUVE MANQUANTE**
+
+Incident :
+- run `37220405644` — **FAIL**
+- erreur exacte : Content Detail exposait `h2 À propos` avant son `h1 Sentiers de l’aube` ;
+- après réordre DOM, run `37221370768` — **FAIL** sur Catalog : saut `h1 → h3`.
+
+Corrections ciblées :
+- Content Detail : titre principal placé avant les sous-sections dans l’ordre DOM, layout visuel préservé par CSS Grid ;
+- Catalog : cartes de contenu exposées en `h2` sur cette surface, sans changer les autres usages où `h3` reste approprié.
+
+Micro-proof final :
+- workflow `MODARYX V2 Accessibility Structure Matrix Proof`
+- run `37221433701` — **SUCCESS**
+- commit capturé `b30c93a3946c22310c1e40551a41232a6e7ba75f`
+- 15 surfaces ;
+- `A11Y_STRUCTURE_SURFACE_COUNT 15`
+- `PASS_V2_ACCESSIBILITY_STRUCTURE_MATRIX`.
+
+Continuation générale :
+- Living Threshold run `37221433677` — **SUCCESS**
+- commit capturé `b30c93a3946c22310c1e40551a41232a6e7ba75f`
+- artifact `11310750338`
+- digest `sha256:12033e64f9ebbc316cfe0bb783eccc4bb68740df8fb2e2c149b86cd8cfd354f0`
+- `KEYBOARD_REACHABLE 38 / 38`
+- desktop/mobile overflow `0 / 0`
+- `MULTISCREEN_CAPTURE_COUNT 81`.
+
+## 42. Route-focus checker — hardening CDP
+
+**TERMINÉ — incident d’infrastructure ciblé fermé**
+
+Après les corrections de titres :
+- run route-focus `37221433797` — **FAIL**
+- erreur exacte : `ECONNREFUSED 127.0.0.1:9242` avant assertions produit ;
+- aucun échec de skip link/focus/scroll prouvé.
+
+Correction checker :
+- user-data-dir Chrome unique par PID ;
+- détection d’exit Chrome ;
+- fenêtre readiness étendue.
+
+Micro-proof :
+- run `37221560230` — **SUCCESS**
+- commit capturé `6d40be7205f2e27efbd989d4411330423436d6da`
+- `SKIP_LINK_VISIBLE_TARGET_OK`
+- `ROUTE_FOCUS_MAIN_OK`
+- `ROUTE_SCROLL_NORMAL smooth`
+- `ROUTE_SCROLL_REDUCED auto`
+- `PASS_V2_ROUTE_FOCUS_AND_SKIP_LINK`.
+
+Cette fermeture concerne la fiabilité du checker ; elle ne remplace pas une validation humaine clavier ou screen reader réelle.
