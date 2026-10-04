@@ -1997,3 +1997,19 @@ Preuve :
 - proposition ≠ root ;
 - proposition ≠ production ;
 - aucun faux backend ne doit être ajouté pour simuler une implémentation réelle.
+
+
+## 70. VF readiness intégré au registry consolidé — 51 contrats
+
+**TERMINÉ pour le garde-fou / VF non validée**
+
+Preuve :
+- run `37237609788` — **SUCCESS**
+- 51 contrats ;
+- 32 blockers VF ouverts ;
+- statut machine `BLOCKED`.
+
+Anti-dérive :
+- ne jamais figer un ancien nombre de contrats dans `currentlyProven` ;
+- registry vert = contrats verts, pas production verte ;
+- VF readiness vert signifie que le **garde-fou de blocage** fonctionne, pas que la VF est prête.
