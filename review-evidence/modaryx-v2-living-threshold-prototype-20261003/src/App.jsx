@@ -112,13 +112,14 @@ function Media({ pos, className="" }) {
   return <div className={`media ${className}`} style={{ backgroundPosition: pos }} role="img" aria-label="Paysage de démonstration non contractuel" />;
 }
 
-function ContentCard({ item, dense=false, onOpen }) {
+function ContentCard({ item, dense=false, onOpen, headingLevel=3 }) {
+  const Heading=headingLevel===2?"h2":"h3";
   return <article className={dense ? "content-card dense" : "content-card"}>
     <button className="card-hit" aria-label={`Ouvrir ${item.title}`} onClick={() => onOpen(item)} />
     <Media pos={item.pos} />
     <div className="card-copy">
       <div className="eyebrow">{item.kind}</div>
-      <h3>{item.title}</h3>
+      <Heading>{item.title}</Heading>
       <p>Une extension de démonstration conçue pour cette version du jeu.</p>
       <div className="card-meta"><Compatibility compact/><span>Version 1.4.2</span></div>
     </div>
@@ -357,7 +358,7 @@ function Catalog({ onOpen }) {
       <button className="reset-filters" onClick={reset} disabled={activeFilters===0}>Réinitialiser</button>
     </section>}
     <div className="catalog-summary" aria-live="polite"><strong>{visible.length} résultat{visible.length>1?"s":""}</strong><span>Données de démonstration</span>{activeFilters>0&&<button onClick={reset}>Tout réinitialiser</button>}</div>
-    {visible.length>0 ? <div className={grid?'content-grid catalog-grid':'content-list'}>{visible.map(item => <ContentCard dense={!grid} key={item.title} item={item} onOpen={onOpen}/>)}</div> : <div className="empty"><MagnifyingGlass/><h3>Aucun contenu trouvé</h3><p>Modifiez les filtres ou recommencez avec une autre recherche.</p><button onClick={reset}>Réinitialiser les filtres</button></div>}
+    {visible.length>0 ? <div className={grid?'content-grid catalog-grid':'content-list'}>{visible.map(item => <ContentCard dense={!grid} headingLevel={2} key={item.title} item={item} onOpen={onOpen}/>)}</div> : <div className="empty"><MagnifyingGlass/><h3>Aucun contenu trouvé</h3><p>Modifiez les filtres ou recommencez avec une autre recherche.</p><button onClick={reset}>Réinitialiser les filtres</button></div>}
   </main>;
 }
 
