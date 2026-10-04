@@ -1607,3 +1607,37 @@ Toujours PREUVE MANQUANTE :
 - appeal backend ;
 - notifications réelles ;
 - validation humaine / AT / appareils.
+
+
+## 58. SEO / i18n / contenu — preuve contrat — 4 octobre 2026
+
+**TERMINÉ pour le contrat / production PREUVE MANQUANTE**
+
+Preuve :
+- run `37230817511` — **SUCCESS**
+- `SEO_I18N_EDITORIAL_STATE_COUNT 5`
+- `SEO_I18N_INVARIANT_COUNT 12`
+- `PASS_V2_SEO_I18N_CONTENT_CONTRACT`.
+
+À conserver :
+- preview toujours noindex ;
+- title unique / description / canonical / URL lisible pour surfaces indexables finales ;
+- sitemap ;
+- pages removed explicites ;
+- données structurées seulement exactes ;
+- filtres/facettes sans explosion d’URLs indexables ;
+- Game Hub actif indexé uniquement si support réel le justifie ;
+- aucun faux chiffre ou compatibilité non prouvée dans snippets ;
+- UI MODARYX distincte des contenus créateurs/communautaires ;
+- textes longs / pluriels / dates/nombres / langues multiples ;
+- contenu créateur peut rester dans langue originale ;
+- recherche accent-insensitive ;
+- texte juridique traduit = approbation requise.
+
+Toujours PREUVE MANQUANTE :
+- canonicals production ;
+- sitemap ;
+- routing removed/410 ;
+- schema.org production ;
+- pipeline localisation ;
+- revue SEO production.
