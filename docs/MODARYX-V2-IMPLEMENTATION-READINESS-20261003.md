@@ -460,3 +460,38 @@ Toujours NON IMPLÉMENTÉ :
 - persistance/acknowledgement serveur.
 
 Le frontend/root production reste BLOQUÉ par le gate canonique.
+
+
+## 27. Cycle de vie droits — réconciliation — 4 octobre 2026
+
+Preuve prototype :
+- Living Threshold run `37204012017` — **SUCCESS**
+- commit `7dc36e1231872d1fdd5a7af17bed6f5ad0b717da`
+- artifact `11303812534`
+- digest `sha256:9718d2ff47e24b3ba50707bcb340adfe5fbff9bc24f7b73c0a95a93b1ff8cf00`
+- 73 captures ;
+- `FLOW_ASSERT rights lifecycle expired revoked scopes reblocked`.
+
+Contrat :
+- run `37204099457` — **SUCCESS**
+- 4 états lifecycle ;
+- 9 invariants ;
+- 6 éléments de preuve de réactivation ;
+- `PASS_V2_RIGHTS_LIFECYCLE_CONTRACT`.
+
+Surface rights admin désormais mappée avec :
+- RightsLifecyclePreview ;
+- ACTIVE_WITH_LIMITS ;
+- EXPIRING_SOON ;
+- EXPIRED ;
+- REVOKED ;
+- dependent scopes reblocked.
+
+Production toujours NON IMPLÉMENTÉE :
+- scheduler ;
+- monitor expiry ;
+- revocation inbound ;
+- automatic scope lock ;
+- revalidation.
+
+Le root/frontend production reste BLOQUÉ selon le gate canonique.
