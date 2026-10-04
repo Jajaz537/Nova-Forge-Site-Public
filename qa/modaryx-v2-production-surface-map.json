@@ -461,7 +461,8 @@
         "RightsCaseList",
         "RightsScopeMatrix",
         "RightsStateBadge",
-        "GameSupportTriage"
+        "GameSupportTriage",
+        "PublisherResponseInterpretation"
       ],
       "domains": [
         "RightsCase",
@@ -475,7 +476,9 @@
         "outbound-unavailable",
         "support-triage-demo",
         "support-accepted-safe-baseline-demo",
-        "support-declined-product-demo"
+        "support-declined-product-demo",
+        "response-safe-automation-demo",
+        "response-legal-review-fallback-demo"
       ],
       "mobile": "DEDICATED_RESPONSIVE"
     }
