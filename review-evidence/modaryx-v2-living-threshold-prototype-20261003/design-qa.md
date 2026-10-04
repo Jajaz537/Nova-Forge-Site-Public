@@ -919,3 +919,16 @@ Limites :
 - Living Threshold continuation `37219047594` — SUCCESS.
 
 AT humain/réel reste PREUVE MANQUANTE.
+
+
+## Route focus / skip link — 4 octobre 2026
+
+**TERMINÉ pour navigateur ciblé**
+
+- micro-proof `37219490005` — SUCCESS ;
+- skip link visible au focus et hauteur 44px ;
+- focus du contenu principal après navigation SPA ;
+- reduced motion respecté pour le scroll route ;
+- continuation Living Threshold `37219359937` — SUCCESS.
+
+Validation humaine clavier et screen reader : PREUVE MANQUANTE.
