@@ -1066,3 +1066,31 @@ Preuve :
 - Rights Case seulement après acceptation produit ;
 - aucun contact/outbound/asset officiel par simple acceptation locale ;
 - refus produit = aucun contact éditeur.
+
+
+## 41. Contact éditeur vérifié avant REQUEST_READY — 4 octobre 2026
+
+**TERMINÉ pour le prototype/contrat — production PREUVE MANQUANTE**
+
+Preuves :
+- Living Threshold run `37201151562` — **SUCCESS** ;
+- Game Rights Workflow run `37201224168` — **SUCCESS** ;
+- surface map run `37201297613` — **SUCCESS** ;
+- 69 captures ;
+- `PUBLISHER_CONTACT_MOBILE_OVERFLOW 0` ;
+- `FLOW_ASSERT publisher contact verified before request ready`.
+
+À ne jamais perdre :
+- CONTACT_CANDIDATE ne permet aucun outbound ;
+- CONTACT_VERIFIED exige une provenance officielle vérifiable ;
+- adresse devinée / forum seul / scrape non vérifié / intermédiaire non vérifié = interdits ;
+- REQUEST_READY exige support accepté + Rights Case + contact vérifié + scopes explicites + template courant ;
+- REQUEST_READY n’est pas REQUEST_SENT ;
+- outbound réel reste bloqué sans backend autorisé ;
+- Web et MODARYX Forge gardent leurs scopes séparés.
+
+Toujours PREUVE MANQUANTE :
+- recherche de contact réelle ;
+- vérification domaine/contact réelle ;
+- mailbox/outbound ;
+- licence réelle.
