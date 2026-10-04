@@ -63,7 +63,7 @@ Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles mat
 | CreatorStudio | CreatorDashboardShell | Creator/Team/Project/Release | studio adapter/backend futur |
 | AccountCenter | AccountSettingsShell + NotificationsCenter + RightsNotificationPreview | Account / Preferences / Notification / RightsCase | local prefs + auth/event bus futur |
 | Community | CommunityPage | Support/Question/Discussion/TeamActivity | community adapter/backend futur |
-| RightsDashboard | RightsAdminPage + RightsCaseList + RightsScopeMatrix + PublisherContactVerification + PublisherRequestReadiness + RightsLifecyclePreview | RightsCase + RightsScope + PublisherContact + RightsLifecycle | rights registry/backend futur |
+| RightsDashboard | RightsAdminPage + RightsCaseList + RightsScopeMatrix + PublisherContactVerification + PublisherRequestReadiness + RightsLifecyclePreview + IpTakedownPreview | RightsCase + RightsScope + PublisherContact + RightsLifecycle + IpCase | rights registry/IP backend futur |
 | App | Route shell | routing | stack à sélectionner |
 
 ## 4. Primitives et composants à extraire
@@ -117,6 +117,7 @@ Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles mat
 - PublisherRequestReadiness
 - RightsNotificationPreview
 - RightsLifecyclePreview
+- IpTakedownPreview
 - GameSupportTriage
 
 Aucun de ces patterns ne doit importer le CSS V1.
@@ -214,6 +215,7 @@ Interfaces conceptuelles, framework-agnostic :
 - `StudioRepository`
 - `AccountRepository`
 - `RightsRepository`
+- `IpCaseRepository`
 
 Chaque adapter doit pouvoir retourner :
 - nominal ;
