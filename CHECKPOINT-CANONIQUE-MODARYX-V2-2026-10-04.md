@@ -2142,3 +2142,33 @@ Groupes ouverts :
 - droits/légal.
 
 Ce PASS valide uniquement l'honnêteté du gate. Il confirme explicitement que la **VF n'est pas validée**.
+
+
+## 64. Registry contrats pré-production étendu — 39 contrats
+
+**TERMINÉ pour les contrats / production PREUVE MANQUANTE**
+
+Run :
+`37236188453` — **SUCCESS**
+
+Nouveaux marqueurs :
+- `PASS_V2_ADAPTER_MODULE_BOUNDARIES_CONTRACT`
+- `PASS_V2_DATA_FIXTURE_STRATEGY_CONTRACT`
+- `PASS_V2_SCHEMA_PLAN_CONTRACT`
+- `PASS_V2_INTERACTION_STATES_CONTRACT`
+- `PREPRODUCTION_CONTRACT_COUNT 39`
+- `PASS_V2_PREPRODUCTION_CONTRACT_REGISTRY`.
+
+Verrouillé en plus :
+- UI V2 → application services → domain → adapters → externes, sans inversion ;
+- aucun accès direct UI aux renderers/CSS/SW/localStorage legacy ;
+- fixtures classées et jamais présentées comme corpus réel ;
+- aucun faux auteur/badge/compatibilité/avis/classement ;
+- schémas V2 versionnés sans écraser v1 ;
+- ContentItem séparé de Release ;
+- Collection / Modpack / Profile séparés ;
+- états transversaux loading/empty/error/offline/stale/unavailable/auth/conflict/etc. explicitement contractuels ;
+- unverified ne devient jamais success ;
+- progression et capacités runtime ne sont jamais simulées.
+
+Ces PASS sont des preuves de contrat, pas des preuves backend/runtime/production.
