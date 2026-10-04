@@ -24,6 +24,7 @@ button,a,select { -webkit-tap-highlight-color: transparent; }
 button { color: inherit; }
 button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
 .app-shell { min-height:100vh; background: radial-gradient(circle at 85% 8%, rgba(43,124,255,.11), transparent 28%), var(--bg); }
+.skip-link{position:fixed;left:16px;top:12px;z-index:1000;transform:translateY(-160%);min-height:44px;display:flex;align-items:center;padding:0 14px;border:1px solid var(--cyan);border-radius:10px;background:#07121d;color:var(--text);font-weight:800;text-decoration:none;box-shadow:var(--shadow);transition:transform .14s ease}.skip-link:focus{transform:translateY(0)}#main-content:focus{outline:none}
 
 .connectivity-banner{min-height:44px;padding:10px 3.2vw;display:flex;align-items:center;justify-content:center;gap:10px;background:#3a2611;border-bottom:1px solid rgba(255,179,92,.45);color:#ffe1b7;font-size:12px;position:relative;z-index:40}.connectivity-banner strong{color:#fff0d6}.connectivity-banner span{color:#e9cfa9}
 
