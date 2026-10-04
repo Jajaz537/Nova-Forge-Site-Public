@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md",
+  "requestStates": [
+    "LOCAL_DRAFT",
+    "REQUESTED",
+    "TRIAGE",
+    "ACCEPTED_SAFE_BASELINE",
+    "DECLINED_PRODUCT",
+    "DUPLICATE",
+    "ABUSE_BLOCKED"
+  ],
+  "requiredFields": [
+    "gameName",
+    "platforms",
+    "createdAt"
+  ],
+  "optionalFields": [
+    "memberOpaqueId",
+    "reason",
+    "sourceUrls",
+    "developer",
+    "publisher"
+  ],
+  "forbiddenMemberClaims": [
+    "publisherApproval",
+    "licenseGranted",
+    "officialPartnership",
+    "verifiedPublisherContact"
+  ],
+  "acceptanceEffects": [
+    "create_game_support_record",
+    "allow_safe_modaryx_baseline",
+    "create_rights_case"
+  ],
+  "nonAcceptanceEffects": [
+    "no_publisher_outbound",
+    "no_official_assets",
+    "no_partnership_claim",
+    "no_forge_permission_inference"
+  ],
+  "triageChecks": [
+    "game_exists",
+    "duplicate_request",
+    "modding_relevance",
+    "known_restrictions",
+    "product_feasibility",
+    "security_risk",
+    "legal_risk"
+  ],
+  "invariants": [
+    "LOCAL_DRAFT_IS_NOT_SENT",
+    "MEMBER_REQUEST_IS_NOT_PUBLISHER_PERMISSION",
+    "PRODUCT_ACCEPTANCE_PRECEDES_RIGHTS_CASE",
+    "PRODUCT_ACCEPTANCE_PRECEDES_PUBLISHER_OUTBOUND",
+    "MEMBER_CANNOT_ASSERT_LICENSE",
+    "SAFE_BASELINE_REMAINS_ORIGINAL_MODARYX",
+    "DECLINED_PRODUCT_NEVER_CONTACTS_PUBLISHER",
+    "DUPLICATES_DO_NOT_CREATE_DUPLICATE_RIGHTS_CASES"
+  ],
+  "productionStatus": {
+    "persistence": "NOT_IMPLEMENTED",
+    "triageBackend": "NOT_IMPLEMENTED",
+    "rightsCaseCreation": "NOT_IMPLEMENTED",
+    "memberNotification": "NOT_IMPLEMENTED"
+  }
+}
