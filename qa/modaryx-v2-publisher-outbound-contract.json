@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md",
+  "states": [
+    "REQUEST_READY",
+    "OUTBOUND_QUEUED",
+    "SEND_ATTEMPTED",
+    "PROVIDER_ACCEPTED",
+    "DELIVERED",
+    "DELIVERY_UNKNOWN",
+    "BOUNCED",
+    "SUPPRESSED",
+    "CANCELED",
+    "FAILED_RETRYABLE",
+    "FAILED_FINAL"
+  ],
+  "enqueueRequires": [
+    "product_support_accepted",
+    "rights_case_exists",
+    "official_contact_verified",
+    "requested_scopes_explicit",
+    "current_request_template",
+    "authorized_outbound_channel",
+    "unique_idempotency_key",
+    "no_active_refusal",
+    "no_active_opt_out"
+  ],
+  "permissionNeutralTransportStates": [
+    "OUTBOUND_QUEUED",
+    "SEND_ATTEMPTED",
+    "PROVIDER_ACCEPTED",
+    "DELIVERED",
+    "DELIVERY_UNKNOWN",
+    "BOUNCED",
+    "FAILED_RETRYABLE",
+    "FAILED_FINAL"
+  ],
+  "retryableOnlyStates": [
+    "FAILED_RETRYABLE"
+  ],
+  "terminalWithoutPermission": [
+    "BOUNCED",
+    "SUPPRESSED",
+    "CANCELED",
+    "FAILED_FINAL"
+  ],
+  "invariants": [
+    "REQUEST_READY_IS_NOT_SENT",
+    "CONTACT_VERIFIED_REQUIRED_BEFORE_QUEUE",
+    "IDEMPOTENCY_PREVENTS_DUPLICATE_LOGICAL_SEND",
+    "OPT_OUT_BLOCKS_QUEUE",
+    "ACTIVE_REFUSAL_BLOCKS_QUEUE",
+    "TRANSPORT_SUCCESS_NEVER_EQUALS_RIGHTS_APPROVAL",
+    "BOUNCE_NEVER_TRIGGERS_GUESSED_CONTACT",
+    "RETRY_PRESERVES_LOGICAL_REQUEST_ID",
+    "FOLLOW_UP_IS_NOT_TECHNICAL_RETRY",
+    "WEB_AND_FORGE_SCOPES_REMAIN_SEPARATE"
+  ],
+  "productionStatus": {
+    "queue": "NOT_IMPLEMENTED",
+    "providerAdapter": "NOT_IMPLEMENTED",
+    "senderIdentity": "NOT_IMPLEMENTED",
+    "transportWebhook": "NOT_IMPLEMENTED",
+    "bounceHandling": "NOT_IMPLEMENTED",
+    "replyCorrelation": "NOT_IMPLEMENTED"
+  }
+}
