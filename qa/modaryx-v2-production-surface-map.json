@@ -30,7 +30,8 @@
       "productionStatus": "BLOCKED_GATE",
       "components": [
         "GamesIndexPage",
-        "GameCard"
+        "GameCard",
+        "GameSupportRequest"
       ],
       "domains": [
         "Game",
@@ -38,7 +39,10 @@
       ],
       "states": [
         "nominal",
-        "empty"
+        "empty",
+        "support-request-closed",
+        "support-request-validation-error",
+        "support-request-local-draft"
       ],
       "mobile": "DEDICATED_RESPONSIVE"
     },
