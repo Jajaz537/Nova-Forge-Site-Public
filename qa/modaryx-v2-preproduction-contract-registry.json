@@ -152,6 +152,12 @@
       "contract": "qa/modaryx-v2-frontend-isolation-contract.json",
       "checker": "qa/check-v2-frontend-isolation-contract.mjs",
       "source": "docs/MODARYX-V2-FRONTEND-ISOLATION-ARCHITECTURE-20261003.md"
+    },
+    {
+      "id": "threat-model",
+      "contract": "qa/modaryx-v2-threat-model-contract.json",
+      "checker": "qa/check-v2-threat-model-contract.mjs",
+      "source": "docs/MODARYX-V2-THREAT-MODEL-20261003.md"
     }
   ],
   "invariants": [
