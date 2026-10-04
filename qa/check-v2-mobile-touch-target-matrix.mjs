@@ -59,11 +59,11 @@ async function clickPrimary(text){
   await sleep(230);
 }
 async function clickUtility(text){
-  const top=await evaluate(`(()=>{
-    const el=[...document.querySelectorAll('.top-actions button')].find(x=>x.getAttribute('aria-label')===${JSON.stringify(text)}&&getComputedStyle(x).display!=='none'&&x.getBoundingClientRect().width>0);
+  const direct=await evaluate(`(()=>{
+    const el=[...document.querySelectorAll('.mobile-search,.top-actions button')].find(x=>x.getAttribute('aria-label')===${JSON.stringify(text)}&&getComputedStyle(x).display!=='none'&&x.getBoundingClientRect().width>0);
     if(!el||el.disabled) return false; el.click(); return true;
   })()`);
-  if(top){await sleep(230);return;}
+  if(direct){await sleep(230);return;}
   await openMenu();
   const ok=await evaluate(`(()=>{
     const el=[...document.querySelectorAll('.global-nav .mobile-nav-utility')].find(x=>x.textContent.trim()===${JSON.stringify(text)}&&getComputedStyle(x).display!=='none'&&x.getBoundingClientRect().width>0);
