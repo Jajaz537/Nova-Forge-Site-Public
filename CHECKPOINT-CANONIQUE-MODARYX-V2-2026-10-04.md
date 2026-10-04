@@ -1271,3 +1271,46 @@ Limites :
 - aucun screen reader réel ;
 - aucune validation humaine clavier ;
 - aucun navigateur Safari réel.
+
+
+## 39. Matrice structure accessibilité — landmarks, titres et noms accessibles
+
+**TERMINÉ pour navigateur automatisé / AT réel PREUVE MANQUANTE**
+
+Premier run :
+- `37219723858` — **FAIL**
+- erreur exacte : Game Hub `main#main-content` sans `h1` interne ;
+- cause : hero/h1 Aetherlands était placé avant le landmark `main`.
+- Discover utilisait également un `main` sans cible `#main-content`.
+
+Correction ciblée :
+- Game Hub : hero + navigation locale + hub regroupés dans un unique landmark `main#main-content` ;
+- Discover : landmark principal reçoit la même cible/focus programmables ;
+- aucun changement de donnée/backend.
+
+Micro-proof après correction :
+- workflow `MODARYX V2 Accessibility Structure Matrix Proof`
+- run `37219841541` — **SUCCESS**
+- commit capturé `c350d06aff236e35d3b9c58630056f8d1d305ae4`
+- 15 surfaces vérifiées ;
+- `A11Y_STRUCTURE_SURFACE_COUNT 15`
+- `PASS_V2_ACCESSIBILITY_STRUCTURE_MATRIX`.
+
+Contrôles par surface :
+- un unique `main#main-content` ;
+- un unique `h1` nommé dans le main ;
+- aucun ID dupliqué ;
+- aucun tabindex positif ;
+- aucun contrôle visible sans nom accessible selon le checker DOM ;
+- aucun rôle interactif AX ciblé sans nom.
+
+Continuation générale :
+- Living Threshold run `37219841451` — **SUCCESS**
+- commit `c350d06aff236e35d3b9c58630056f8d1d305ae4`
+- artifact `11310112115`
+- digest `sha256:0e150be45f1dbff04bcb0580c64f7a91f92f5f96f5b271dfc3dc88ed690813f8`
+- `KEYBOARD_REACHABLE 38 / 38`
+- desktop/mobile overflow `0 / 0`
+- `MULTISCREEN_CAPTURE_COUNT 81`.
+
+Limite : AX Chrome automatisé ≠ validation NVDA / VoiceOver / TalkBack réelle.
