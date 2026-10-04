@@ -1476,3 +1476,26 @@ Incident fermé :
 - `PASS_V2_ACCESSIBILITY_STRUCTURE_MATRIX`.
 
 Continuation Living Threshold `37219841451` — SUCCESS, 81 captures.
+
+
+## 39. Formulaires + hiérarchie de titres — preuves ciblées — 4 octobre 2026
+
+**TERMINÉ pour prototype automatisé / AT réel PREUVE MANQUANTE**
+
+À conserver :
+- erreurs formulaire associées par `aria-invalid` / `aria-describedby` ;
+- focus récupérable ;
+- erreur retirée après correction ;
+- hiérarchie de titres sans saut sur les 15 surfaces couvertes ;
+- Content Detail : `h1` avant sous-sections dans l’ordre DOM ;
+- Catalog : cartes en `h2`, autres contextes conservent leur niveau approprié.
+
+Preuves :
+- form semantics : run `37220323315` — **SUCCESS** — `PASS_V2_FORM_VALIDATION_SEMANTICS` ;
+- structure matrix : run `37221433701` — **SUCCESS** — `PASS_V2_ACCESSIBILITY_STRUCTURE_MATRIX` ;
+- Living Threshold : run `37221433677` — **SUCCESS**, 81 captures, keyboard 38/38.
+
+Incident checker route-focus après correction :
+- `ECONNREFUSED 127.0.0.1:9242` ;
+- hardening CDP ciblé ;
+- run `37221560230` — **SUCCESS**.
