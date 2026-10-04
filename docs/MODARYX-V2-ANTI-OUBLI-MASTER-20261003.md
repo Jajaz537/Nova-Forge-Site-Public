@@ -1453,3 +1453,26 @@ Preuve :
 - 81 captures.
 
 Screen reader et validation humaine clavier restent PREUVE MANQUANTE.
+
+
+## 54. Structure accessibilité multi-surfaces — 4 octobre 2026
+
+**TERMINÉ pour Chrome automatisé / AT réel PREUVE MANQUANTE**
+
+À ne pas perdre :
+- un landmark principal unique par surface ;
+- le `h1` de page doit appartenir au landmark principal ;
+- `#main-content` doit rester la cible du skip link et du focus de route ;
+- pas d’ID dupliqué ;
+- pas de tabindex positif ;
+- contrôles visibles nommés ;
+- rôles interactifs AX ciblés nommés.
+
+Incident fermé :
+- Game Hub h1 hors main détecté par run `37219723858` ;
+- correction structurelle ciblée ;
+- run `37219841541` — **SUCCESS**
+- 15 surfaces ;
+- `PASS_V2_ACCESSIBILITY_STRUCTURE_MATRIX`.
+
+Continuation Living Threshold `37219841451` — SUCCESS, 81 captures.
