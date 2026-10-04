@@ -269,7 +269,9 @@ Preuve cible la plus récente :
 - Rights Dashboard admin fictif : autorisation limitée / attente / no-response / outbound indisponible ;
 - demande membre de support d’un jeu : brouillon local, validation, triage explicite, aucun Rights Case réel ;
 - triage admin fictif d’une demande membre : ACCEPTED_SAFE_BASELINE distinct de tout accord éditeur ;
-- interprétation automatique fictive de réponse éditeur : SAFE_AUTOMATION + LEGAL_REVIEW_REQUIRED fallback.
+- interprétation automatique fictive de réponse éditeur : SAFE_AUTOMATION + LEGAL_REVIEW_REQUIRED fallback ;
+- Publisher Outbound fictif : queue/provider/livraison/bounce permission-neutral ;
+- Publisher Inbound fictif : réception/corrélation/provenance/quarantaine/READY_FOR_INTERPRETATION.
 - états nominal / empty / unavailable / anonymous / local-only / offline-stale / validation-error-retry / success sur les surfaces ciblées.
 
 ### Limites internes encore ouvertes
@@ -443,3 +445,42 @@ La surface MODARYX IA desktop/mobile est matérialisée comme preview non active
 Cela augmente la couverture du prototype sans lever les validations humaines/appareils.
 
 **High-Fi final : BLOQUÉ.**
+
+
+## 20. Publisher Inbound — preuve prototype — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Contrat :
+- run `37214242330` — **SUCCESS** ;
+- `PASS_V2_PUBLISHER_INBOUND_CONTRACT`.
+
+Micro-proof :
+- run `37214564614` — **SUCCESS** ;
+- `PUBLISHER_INBOUND_MOBILE_OVERFLOW 0` ;
+- `PASS_V2_PUBLISHER_INBOUND_PREVIEW`.
+
+Preuve Living Threshold :
+- run `37214829645` — **SUCCESS** ;
+- commit `31db0796949a3c453f61864d84e3cf86f103aa94` ;
+- artifact `11308280526` ;
+- digest `sha256:124e7465bbb4b732153b2f8858a9288b96a59a2d7f1d905c1b0fea44df7d8a5c` ;
+- `FLOW_ASSERT publisher inbound correlation provenance fail-closed` ;
+- `MULTISCREEN_CAPTURE_COUNT 81`.
+
+Matérialisé :
+- réception fictive ;
+- corrélation à une demande logique / Rights Case fictifs ;
+- provenance technique séparée de l’autorité juridique ;
+- quarantaine des pièces jointes ;
+- `READY_FOR_INTERPRETATION ≠ autorisation` ;
+- provenance non fiable → fail closed.
+
+Toujours NON IMPLÉMENTÉ :
+- mailbox/webhook ;
+- moteur de corrélation réel ;
+- vérification provenance réelle ;
+- scanner pièces jointes ;
+- parser/routing réel.
+
+Cette preuve n’enlève aucun blocker humain/appareil et ne vaut aucune validation juridique.
