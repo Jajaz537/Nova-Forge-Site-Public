@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-A11Y-PERF-DESIGN-SYSTEM-CONTRACT-20261003.md",
+  "wcagBaseline": "2.2",
+  "focusRules": [
+    "VISIBLE_KEYBOARD_FOCUS",
+    "STICKY_UI_DOES_NOT_FULLY_OBSCURE_FOCUS",
+    "TAB_ORDER_FOLLOWS_READING_ORDER",
+    "NO_ESSENTIAL_HOVER_ONLY_CONTROL"
+  ],
+  "touchTargetPolicy": {
+    "wcagMinimumCssPx": 24,
+    "preferredFrequentActionCssPx": 44
+  },
+  "stateRules": [
+    "STATE_NEVER_COLOR_ONLY",
+    "COMPATIBILITY_HAS_TEXT_OR_ICON",
+    "ERROR_WARNING_SUCCESS_MONOCHROME_COMPREHENSIBLE"
+  ],
+  "motionRules": [
+    "PREFERS_REDUCED_MOTION_RESPECTED",
+    "NO_ANIMATION_REQUIRED_FOR_COMPREHENSION",
+    "NO_PARALLAX_REQUIRED_FOR_NAVIGATION",
+    "WEATHER_SEASON_AMBIENCE_CAN_BE_NEUTRALIZED"
+  ],
+  "coreWebVitalsTargets": {
+    "percentile": 75,
+    "LCP_ms": 2500,
+    "INP_ms": 200,
+    "CLS": 0.1
+  },
+  "performanceRules": [
+    "RESPONSIVE_HERO_MEDIA",
+    "NO_MANDATORY_HEAVY_VIDEO_FOR_LCP",
+    "MEDIA_DIMENSIONS_RESERVED",
+    "LAZY_LOAD_OFFSCREEN_IMAGES",
+    "PRIMARY_MEDIA_PRIORITY",
+    "LIMIT_FONT_FAMILIES_AND_WEIGHTS",
+    "SKELETON_ONLY_FOR_REAL_LATENCY",
+    "LIVING_WORLD_NEVER_BLOCKS_CRITICAL_FUNCTION"
+  ],
+  "tokenLayers": [
+    "primitive",
+    "semantic"
+  ],
+  "requiredComponentPatterns": [
+    "Button",
+    "IconButton",
+    "Input",
+    "SearchInput",
+    "Select",
+    "Checkbox",
+    "Radio",
+    "Switch",
+    "Chip",
+    "Badge",
+    "Link",
+    "GamePicker",
+    "GameCard",
+    "ContentCard",
+    "CompatibilityBadge",
+    "DependencyRow",
+    "ReleaseSelector",
+    "InstallAction",
+    "FilterGroup",
+    "FilterDrawer",
+    "CollectionItem",
+    "ProvenancePanel",
+    "ModerationStatus",
+    "EmptyState",
+    "ErrorState",
+    "AppHeader",
+    "MobileNav",
+    "GameHubHeader",
+    "CatalogShell",
+    "DetailDecisionPanel",
+    "CreatorDashboardShell",
+    "LibraryShell"
+  ],
+  "responsiveModes": [
+    "desktop-large",
+    "laptop",
+    "tablet",
+    "mobile"
+  ],
+  "invariants": [
+    "FUNCTIONAL_PROPS_DESCRIBE_BEHAVIOR_NOT_ONLY_APPEARANCE",
+    "SEMANTIC_TOKENS_SURVIVE_ART_DIRECTION_CHANGE",
+    "COMPONENT_PATTERNS_REUSED_OVER_AD_HOC_REBUILDS",
+    "REDUCED_MOTION_IS_SYSTEM_WIDE",
+    "PERFORMANCE_BUDGET_IS_MEASURED_IN_PRODUCTION_NOT_ASSUMED",
+    "NO_LAYOUT_SHIFT_FROM_MEDIA_WITHOUT_DIMENSIONS",
+    "NO_CRITICAL_FUNCTION_BLOCKED_BY_LIVING_AMBIENCE"
+  ],
+  "productionStatus": {
+    "lcpP75": "NOT_MEASURED",
+    "inpP75": "NOT_MEASURED",
+    "clsP75": "NOT_MEASURED",
+    "realScreenReader": "NOT_PROVEN",
+    "physicalDevice": "NOT_PROVEN",
+    "highFiHumanValidation": "NOT_PROVEN"
+  }
+}
