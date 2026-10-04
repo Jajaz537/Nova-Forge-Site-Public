@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "source": "docs/MODARYX-V2-SEO-I18N-CONTENT-CONTRACT-20261003.md",
+  "seo": {
+    "requiredPerIndexableSurface": [
+      "uniqueTitle",
+      "usefulDescription",
+      "canonical",
+      "readableUrl"
+    ],
+    "global": [
+      "sitemap",
+      "explicitRemovedPageHandling",
+      "structuredDataOnlyWhenExact"
+    ],
+    "preview": [
+      "noindex",
+      "nofollow",
+      "noarchive"
+    ],
+    "filterPolicy": [
+      "boundedIndexation",
+      "noUncontrolledFacetedUrlExplosion"
+    ],
+    "gameHubPolicy": [
+      "indexActiveCatalogOnlyWhenSupportStateJustifies",
+      "editorialHubMustNotImplyDistribution"
+    ],
+    "contentSnippetPolicy": [
+      "noFakePopularity",
+      "noUnprovenCompatibility"
+    ]
+  },
+  "i18n": {
+    "requirements": [
+      "longerTextReady",
+      "pluralReady",
+      "dateNumberLocaleReady",
+      "multiLanguageReady",
+      "creatorContentMayRemainOriginalLanguage",
+      "accentInsensitiveSearch"
+    ],
+    "layoutInvariant": "NO_LAYOUT_ASSUMPTION_ON_FRENCH_STRING_LENGTH",
+    "legalInvariant": "NO_RAW_MACHINE_TRANSLATION_AS_APPROVED_LEGAL_TEXT"
+  },
+  "contentKinds": [
+    "MODARYX_UI",
+    "CREATOR_METADATA",
+    "DESCRIPTION",
+    "GUIDE",
+    "COMMUNITY_CONTENT"
+  ],
+  "editorialStates": [
+    "DRAFT",
+    "PUBLISHED",
+    "UPDATED",
+    "ARCHIVED",
+    "REMOVED"
+  ],
+  "requiredContentMetadata": [
+    "title",
+    "game",
+    "type",
+    "author",
+    "release",
+    "state"
+  ],
+  "invariants": [
+    "PREVIEW_IS_NOINDEX",
+    "CANONICALS_USE_V2_ROUTES",
+    "GETNOVAFORGE_IS_NOT_A_V2_CANONICAL_TARGET",
+    "FILTERS_DO_NOT_CREATE_UNBOUNDED_INDEXABLE_URLS",
+    "STRUCTURED_DATA_MUST_BE_FACTUAL",
+    "REMOVED_CONTENT_HAS_EXPLICIT_URL_BEHAVIOR",
+    "ACTIVE_CATALOG_CLAIM_REQUIRES_SUPPORT_STATE",
+    "EDITORIAL_HUB_DOES_NOT_IMPLY_MOD_DISTRIBUTION",
+    "SNIPPETS_DO_NOT_INVENT_POPULARITY_OR_COMPATIBILITY",
+    "UI_AND_COMMUNITY_CONTENT_REMAIN_DISTINCT",
+    "I18N_SUPPORTS_TEXT_EXPANSION_AND_LOCALE_FORMATS",
+    "LEGAL_TRANSLATION_REQUIRES_APPROVAL"
+  ],
+  "productionStatus": {
+    "v2CanonicalGeneration": "NOT_IMPLEMENTED",
+    "sitemap": "NOT_IMPLEMENTED",
+    "removedPageRouting": "NOT_IMPLEMENTED",
+    "productionStructuredData": "NOT_IMPLEMENTED",
+    "productionI18n": "NOT_IMPLEMENTED",
+    "localizationWorkflow": "NOT_IMPLEMENTED"
+  }
+}
