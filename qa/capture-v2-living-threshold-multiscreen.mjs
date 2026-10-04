@@ -298,6 +298,13 @@ try {
   await evaluate("document.querySelector('.publisher-contact-demo')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("desktop-rights-contact-verified.png", 1440, 1024, "REQUEST_READY"));
+  await clickByText(".publisher-outbound-actions .quiet", "Simuler mise en file locale");
+  await clickByText(".publisher-outbound-actions .quiet", "Simuler provider accepted");
+  await clickByText(".publisher-outbound-actions .quiet", "Simuler livraison");
+  await evaluate("document.querySelector('.publisher-outbound-demo')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("desktop-rights-outbound-delivered.png", 1440, 1024, "DELIVERED ≠ autorisation éditeur"));
+  await clickByText(".publisher-outbound-actions .quiet", "Réinitialiser le transport");
   await evaluate("document.querySelector('.rights-interpretation-demo')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("desktop-rights-response-interpretation.png", 1440, 1024, "SAFE_AUTOMATION"));
@@ -424,6 +431,13 @@ try {
   await evaluate("document.querySelector('.publisher-contact-demo')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("mobile-rights-contact-verified.png", 390, 844, "REQUEST_READY"));
+  await clickByText(".publisher-outbound-actions .quiet", "Simuler mise en file locale");
+  await clickByText(".publisher-outbound-actions .quiet", "Simuler provider accepted");
+  await clickByText(".publisher-outbound-actions .quiet", "Simuler livraison");
+  await evaluate("document.querySelector('.publisher-outbound-demo')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("mobile-rights-outbound-delivered.png", 390, 844, "DELIVERED ≠ autorisation éditeur"));
+  await clickByText(".publisher-outbound-actions .quiet", "Réinitialiser le transport");
   await evaluate("document.querySelector('.rights-interpretation-demo')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("mobile-rights-response-interpretation.png", 390, 844, "SAFE_AUTOMATION"));
