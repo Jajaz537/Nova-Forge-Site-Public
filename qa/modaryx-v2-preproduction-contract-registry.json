@@ -140,6 +140,12 @@
       "contract": "qa/modaryx-v2-trust-provenance-distribution-contract.json",
       "checker": "qa/check-v2-trust-provenance-distribution-contract.mjs",
       "source": "docs/MODARYX-V2-TRUST-PROVENANCE-DISTRIBUTION-CONTRACT-20261003.md"
+    },
+    {
+      "id": "install-manager",
+      "contract": "qa/modaryx-v2-install-manager-contract.json",
+      "checker": "qa/check-v2-install-manager-contract.mjs",
+      "source": "docs/MODARYX-V2-INSTALL-MANAGER-CONTRACT-20261003.md"
     }
   ],
   "invariants": [
