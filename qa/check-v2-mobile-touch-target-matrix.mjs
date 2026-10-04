@@ -147,6 +147,8 @@ try{
   await clickUtility("Compte"); await assertTargets("account"); count++;
   await clickUtility("MODARYX IA"); await assertTargets("modaryx-ai"); count++;
   await clickExact("footer button","Droits jeux · démo admin"); await assertTargets("rights-dashboard"); count++;
+  await clickExact("footer button","Confiance & légal"); await assertTargets("public-trust"); count++;
+  await clickExact("footer button","Droits jeux · démo admin");
 
   await clickExact(".support-triage-actions button","Accepter la baseline sûre");
   await clickExact(".publisher-contact-actions button","Vérifier le canal de démonstration");
