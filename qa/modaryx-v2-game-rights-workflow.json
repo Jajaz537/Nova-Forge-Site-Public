@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md",
+  "states": [
+    "REQUESTED",
+    "TRIAGE",
+    "ACCEPTED_SAFE_BASELINE",
+    "RIGHTS_CASE_CREATED",
+    "CONTACT_CANDIDATE",
+    "CONTACT_VERIFIED",
+    "REQUEST_READY",
+    "REQUEST_SENT",
+    "AWAITING_RESPONSE",
+    "APPROVED",
+    "APPROVED_WITH_LIMITS",
+    "DECLINED",
+    "NO_RESPONSE",
+    "EXPIRED",
+    "REVOKED",
+    "GAME_SUPPORT_BLOCKED"
+  ],
+  "requiredSendGuards": [
+    "product_support_accepted",
+    "rights_case_exists",
+    "official_contact_verified",
+    "requested_scopes_explicit",
+    "outbound_channel_authorized",
+    "idempotency_key_unique",
+    "no_active_refusal_or_opt_out"
+  ],
+  "permissionStates": [
+    "APPROVED",
+    "APPROVED_WITH_LIMITS"
+  ],
+  "noPermissionStates": [
+    "REQUESTED",
+    "TRIAGE",
+    "ACCEPTED_SAFE_BASELINE",
+    "RIGHTS_CASE_CREATED",
+    "CONTACT_CANDIDATE",
+    "CONTACT_VERIFIED",
+    "REQUEST_READY",
+    "REQUEST_SENT",
+    "AWAITING_RESPONSE",
+    "DECLINED",
+    "NO_RESPONSE",
+    "EXPIRED",
+    "REVOKED",
+    "GAME_SUPPORT_BLOCKED"
+  ],
+  "requiredScopes": [
+    "OFFICIAL_LOGO",
+    "OFFICIAL_KEY_ART",
+    "OFFICIAL_SCREENSHOTS",
+    "MOD_HOSTING",
+    "MOD_DISTRIBUTION",
+    "MOD_INSTALLATION_HANDOFF",
+    "API_ACCESS",
+    "COMMERCIAL_USE",
+    "COBRANDING",
+    "PARTNERSHIP_CLAIM"
+  ],
+  "invariants": [
+    "NO_RESPONSE_NEVER_EQUALS_APPROVED",
+    "DECLINED_NEVER_UNLOCKS_RIGHTS",
+    "ONLY_GRANTED_SCOPES_UNLOCK",
+    "EXPIRED_OR_REVOKED_SCOPES_LOCK",
+    "SAFE_BASELINE_USES_ORIGINAL_MODARYX_ASSETS",
+    "OUTBOUND_REQUIRES_VERIFIED_OFFICIAL_CONTACT",
+    "OUTBOUND_IS_IDEMPOTENT_AND_AUDITED",
+    "WEB_AND_FORGE_RIGHTS_REMAIN_SEPARATE"
+  ],
+  "productionStatus": {
+    "rightsRegistry": "NOT_IMPLEMENTED",
+    "workflowEngine": "NOT_IMPLEMENTED",
+    "outbound": "NOT_IMPLEMENTED",
+    "licenseValidation": "NOT_IMPLEMENTED"
+  }
+}
