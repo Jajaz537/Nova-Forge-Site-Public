@@ -51,7 +51,7 @@ Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles mat
 | Compatibility | CompatibilityBadge | CompatibilityClaim | adapter données |
 | ContentCard | ContentCard / CompactContentRow | ContentItem + Release | catalog adapter |
 | ProfilesRail | GameProfileRail | Profile/Loadout | local profile adapter / manager futur |
-| GamesIndex | GamesIndexPage | Game | games adapter |
+| GamesIndex | GamesIndexPage + GameSupportRequest | Game + GameSupportRequest | games adapter + support-request backend futur |
 | GlobalSearch | GlobalSearchPage | SearchDocument | search adapter |
 | GameHub | GameHubPage + GameHubHeader | Game + ContentItem | games/catalog adapters |
 | Discover | DiscoverPage | Discovery feed | discovery adapter |
@@ -93,6 +93,7 @@ Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles mat
 
 À dériver du prototype actuel :
 - GameCard
+- GameSupportRequest
 - ContentCard
 - CompatibilityBadge
 - ReleaseSelector
@@ -227,6 +228,7 @@ Le prototype utilise un état React local. La production doit utiliser des route
 - `/discover`
 - `/games`
 - `/games/:gameId`
+- `/games/support-request` — route/formulaire membre ou action équivalente, backend futur
 - `/search`
 - `/mods`
 - `/content/:contentId`
