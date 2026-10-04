@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-CONTENT-DETAIL-CONTRACT-20261003.md",
+  "compatibilityStates": [
+    "Compatible",
+    "Partially compatible",
+    "Incompatible",
+    "Unverified"
+  ],
+  "relationTypes": [
+    "Required",
+    "Optional",
+    "Recommended",
+    "Incompatible"
+  ],
+  "fileStates": [
+    "available",
+    "locked",
+    "withdrawn",
+    "revoked",
+    "quarantined",
+    "archived"
+  ],
+  "decisionSignals": [
+    "compatibility",
+    "gameVersion",
+    "loaderFramework",
+    "platformEnvironment",
+    "requiredDependencies",
+    "majorConflict",
+    "distributionState",
+    "provenanceTrust"
+  ],
+  "invariants": [
+    "DECISION_SIGNALS_PRECEDE_PRIMARY_ACTION",
+    "MANAGER_ACTION_HIDDEN_OR_DISABLED_WITHOUT_REAL_RUNTIME",
+    "DEPENDENCY_AND_CONFLICT_NOT_BURIED_IN_DESCRIPTION",
+    "REVOKED_OR_QUARANTINED_NEVER_DOWNLOADABLE",
+    "ABSENCE_OF_PERMISSION_TEXT_NEVER_EQUALS_PERMISSION",
+    "SHA256_NEVER_MEANS_SAFE",
+    "SIGNATURE_NEVER_MEANS_SAFE",
+    "OLD_RELEASES_NOT_HIDDEN_WITHOUT_REASON",
+    "PERSONAL_COMPATIBILITY_REQUIRES_REAL_CONTEXT",
+    "MOBILE_PRIMARY_ACTION_NEVER_HIDES_WARNINGS"
+  ],
+  "productionStatus": {
+    "contentBackend": "NOT_IMPLEMENTED",
+    "distributionBackend": "NOT_IMPLEMENTED",
+    "managerRuntime": "NOT_IMPLEMENTED",
+    "scanPipeline": "NOT_IMPLEMENTED"
+  }
+}
