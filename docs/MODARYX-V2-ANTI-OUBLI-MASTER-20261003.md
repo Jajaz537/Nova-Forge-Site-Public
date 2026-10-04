@@ -2031,3 +2031,18 @@ Run :
 - comparaison visuelle finale exige une référence approuvée archivable ;
 - P0/P1 ouvert bloque la fermeture ;
 - toute preuve doit être liée au commit testé et à des artifacts/observations structurées.
+
+
+## 72. Handoff Work pour blockers externes
+
+**PRÊT — aucune preuve externe fermée**
+
+Référence :
+`docs/MODARYX-V2-WORK-HANDOFF-EXTERNAL-GATES-20261004.md`
+
+Work peut aider à récupérer/archiver une référence source réelle et à préparer une comparaison.  
+Work ne remplace jamais :
+- participant humain réel ;
+- NVDA/VoiceOver/TalkBack réels ;
+- appareil physique ;
+- revue juridique humaine requise.
