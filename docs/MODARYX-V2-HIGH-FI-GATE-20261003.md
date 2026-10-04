@@ -798,3 +798,35 @@ Micro-proof `37231081387` — SUCCESS :
 - styles inline ciblés : 0.
 
 Ce durcissement n'affecte pas le statut High-Fi final : validation humaine, AT réel, appareils et référence visuelle restent nécessaires.
+
+
+## 34. Archive produit courante après hardening source — 4 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Dernière preuve Living Threshold couvrant le code produit après suppression des styles inline ciblés :
+- run `37231060131` — **SUCCESS**
+- commit `d1397e5e370bb8bc45d25b766239364291132a73`
+- artifact `11314270782`
+- digest `sha256:cedeb19b42f6e866c9823effb1d951701a90297ed619c9870eb3ccdbe4a812cf`
+- `KEYBOARD_REACHABLE 41 / 41`
+- `PUBLISHER_CONTACT_MOBILE_OVERFLOW 0`
+- `RIGHTS_MOBILE_OVERFLOW 0`
+- `GAME_SUPPORT_REQUEST_MOBILE_OVERFLOW 0`
+- `RIGHTS_NOTIFICATION_MOBILE_OVERFLOW 0`
+- `DESKTOP_OVERFLOW 0`
+- `MOBILE_OVERFLOW 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 87`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Cette archive supersède les artefacts plus anciens pour l'état courant du **code produit** au moment du hardening, sans invalider leurs preuves historiques spécifiques.
+
+Toujours requis avant High-Fi final :
+- validation humaine supplémentaire ;
+- mobile humain réel ;
+- référence visuelle approuvée archivable + comparaison normalisée ;
+- NVDA / VoiceOver / TalkBack réels ;
+- Safari réel ;
+- appareils physiques.
