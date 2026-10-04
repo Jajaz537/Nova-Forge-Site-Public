@@ -38,6 +38,7 @@ Fonctions UI actuellement présentes :
 - `CreatorStudio`
 - `AccountCenter`
 - `Community`
+- `RightsDashboard`
 - `App`
 
 Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles matérialisent les comportements à conserver.
@@ -62,6 +63,7 @@ Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles mat
 | CreatorStudio | CreatorDashboardShell | Creator/Team/Project/Release | studio adapter/backend futur |
 | AccountCenter | AccountSettingsShell | Account / Preferences | local prefs + auth futur |
 | Community | CommunityPage | Support/Question/Discussion/TeamActivity | community adapter/backend futur |
+| RightsDashboard | RightsAdminPage + RightsCaseList + RightsScopeMatrix | RightsCase + RightsScope + PublisherContact | rights registry/backend futur |
 | App | Route shell | routing | stack à sélectionner |
 
 ## 4. Primitives et composants à extraire
@@ -107,6 +109,9 @@ Ces fonctions ne deviennent pas automatiquement les composants finaux. Elles mat
 - SupportState
 - LocalDraftState
 - ConnectivityBanner
+- RightsCaseList
+- RightsScopeMatrix
+- RightsStateBadge
 
 Aucun de ces patterns ne doit importer le CSS V1.
 
@@ -202,6 +207,7 @@ Interfaces conceptuelles, framework-agnostic :
 - `CommunityRepository`
 - `StudioRepository`
 - `AccountRepository`
+- `RightsRepository`
 
 Chaque adapter doit pouvoir retourner :
 - nominal ;
@@ -234,6 +240,7 @@ Le prototype utilise un état React local. La production doit utiliser des route
 - `/studio`
 - `/library`
 - `/account`
+- `/admin/rights` — administration authentifiée uniquement
 
 Aucun fallback vers une page V1 contaminante.
 
@@ -288,7 +295,9 @@ Prototype :
 - validation error → correction → retry ;
 - success local ;
 - compatibilité/prérequis ;
-- manager/runtime absent explicitement.
+- manager/runtime absent explicitement ;
+- rights workflow fictif : approved-with-limits / awaiting-response / no-response ;
+- outbound rights désactivé sans backend.
 
 États non prouvés réellement :
 - vraie session expirée ;
@@ -361,10 +370,11 @@ Quand le gate autorisera le root :
 9. Library ;
 10. Creator Studio ;
 11. Account / Settings ;
-12. PWA V2 séparée ;
-13. QA complète ;
-14. upgrade/rollback V1→V2 ;
-15. cutover seulement après preuves.
+12. Rights admin / Game Rights Registry ;
+13. PWA V2 séparée ;
+14. QA complète ;
+15. upgrade/rollback V1→V2 ;
+16. cutover seulement après preuves.
 
 ## 16. Gate
 
