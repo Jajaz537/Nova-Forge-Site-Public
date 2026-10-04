@@ -18,10 +18,10 @@ Ce pack ne remplace pas :
 
 Run de capture étendu le plus récent :
 - workflow : `MODARYX V2 Living Threshold Visual Proof`
-- run : `37230093681` — **SUCCESS**
-- commit capturé : `6134ec747cce538582236c39c4c656c07a0d5146`
-- artifact : `11313079816`
-- digest : `sha256:004e8a29f942dd177fd4b21c28cfda5d7ed4e6af2b872e18ff0cc9136262fd2e`
+- run : `37231060131` — **SUCCESS**
+- commit capturé : `d1397e5e370bb8bc45d25b766239364291132a73`
+- artifact : `11314270782`
+- digest : `sha256:cedeb19b42f6e866c9823effb1d951701a90297ed619c9870eb3ccdbe4a812cf`
 - captures : **87**
 - desktop + mobile
 - keyboard : `41 / 41`
