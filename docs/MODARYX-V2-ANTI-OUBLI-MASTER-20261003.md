@@ -1499,3 +1499,26 @@ Incident checker route-focus après correction :
 - `ECONNREFUSED 127.0.0.1:9242` ;
 - hardening CDP ciblé ;
 - run `37221560230` — **SUCCESS**.
+
+
+## 55. Text spacing reflow + navigation logo — 4 octobre 2026
+
+**TERMINÉ pour preuves navigateur ciblées / réel humain PREUVE MANQUANTE**
+
+À conserver :
+- logo MODARYX du shell → Découvrir ;
+- text spacing ne doit pas casser le reflow ;
+- preuve text spacing couvre 12 surfaces à 390×844 ;
+- override QA : line-height 1.5, letter-spacing 0.12em, word-spacing 0.16em, paragraph spacing 2em ;
+- overflow horizontal 0 ;
+- clipping horizontal ciblé 0.
+
+Preuves :
+- Living Threshold `37223254174` — **SUCCESS**, 81 captures, `FLOW_ASSERT MODARYX logo returns to discover` ;
+- Text Spacing Reflow `37224236854` — **SUCCESS**, `PASS_V2_TEXT_SPACING_REFLOW`.
+
+Ne jamais convertir ces preuves en :
+- validation zoom navigateur réelle ;
+- Safari/iOS réel ;
+- screen reader réel ;
+- validation humaine finale.
