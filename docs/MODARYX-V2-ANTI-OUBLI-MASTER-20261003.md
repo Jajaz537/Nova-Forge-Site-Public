@@ -1094,3 +1094,39 @@ Toujours PREUVE MANQUANTE :
 - vérification domaine/contact réelle ;
 - mailbox/outbound ;
 - licence réelle.
+
+
+## 42. Notifications droits éditeurs — 4 octobre 2026
+
+**TERMINÉ pour contrat + micro-proof / backend réel PREUVE MANQUANTE**
+
+À conserver :
+- notification in-app seulement sur événement réel futur ;
+- réponse éditeur reçue ;
+- approval / approval with limits ;
+- needs more info ;
+- legal review required ;
+- declined ;
+- expiration/révocation ;
+- lien obligatoire vers le Rights Case réel ;
+- scopes exacts, jamais d’autorisation globale implicite ;
+- `LEGAL_REVIEW_REQUIRED` = aucun déblocage ;
+- adresse/contact/clause confidentielle non exposés ;
+- badge non lu uniquement à partir de données réelles ;
+- email/push uniquement quand infrastructure réelle prouvée.
+
+Prototype :
+- cartes explicitement `Démonstration · non reçue` ;
+- aucune notification distante inventée ;
+- aucun compteur distant inventé.
+
+Preuves :
+- contrat run `37202025942` — **SUCCESS**, `PASS_V2_RIGHTS_NOTIFICATION_CONTRACT` ;
+- incident ciblé Living Threshold `37201905576` : FAIL browser a11y sur copy notification ;
+- isolation micro-proof `37202147304` : FAIL sur différence de casse due à `text-transform: uppercase` ;
+- correction ciblée des assertions ;
+- micro-proof `37202244972` — **SUCCESS** ;
+- `RIGHTS_NOTIFICATION_MOBILE_OVERFLOW 0` ;
+- `PASS_V2_RIGHTS_NOTIFICATION_PREVIEW`.
+
+Ne pas déclarer notification production tant que event bus, Rights Case deep-link, unread count, email et push réels n’existent pas.
