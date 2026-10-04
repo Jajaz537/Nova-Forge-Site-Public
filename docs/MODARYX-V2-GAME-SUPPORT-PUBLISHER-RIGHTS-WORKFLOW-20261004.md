@@ -414,6 +414,56 @@ Les coordonnées privées d’un contact éditeur :
 
 Les réponses de licence peuvent contenir des clauses confidentielles et doivent être stockées avec accès contrôlé.
 
+
+
+## 17.1 Notification et lecture automatique des réponses
+
+Le propriétaire de MODARYX ne doit pas avoir à interpréter manuellement un email juridique pour décider si un jeu est “accepté”.
+
+Quand une réponse éditeur arrive, le système cible doit :
+- rattacher la réponse au bon Rights Case ;
+- conserver le message brut et sa provenance ;
+- détecter les scopes explicitement acceptés, refusés, limités ou non traités ;
+- extraire territoire, durée, produits concernés, obligations de crédit, restrictions et date d’expiration ;
+- comparer la réponse à la demande exacte envoyée ;
+- produire un résumé structuré ;
+- notifier l’administration MODARYX.
+
+Notification cible :
+`Réponse éditeur reçue — <jeu>. Autorisation / autorisation avec limites / revue requise / refus.`
+
+États d’interprétation :
+- `SAFE_AUTOMATION` : formulation explicite et scopes suffisamment clairs ;
+- `NEEDS_REVIEW` : information manquante ou condition à confirmer ;
+- `LEGAL_REVIEW_REQUIRED` : ambiguïté juridique, clause inhabituelle, conflit de documents ou risque élevé ;
+- `DENIED` : refus explicite ou politique incompatible.
+
+Règles :
+- une réponse “positive” générale ne débloque pas automatiquement tous les scopes ;
+- un scope absent de la réponse reste non autorisé ;
+- une formulation ambiguë ne devient jamais `APPROVED` par inférence ;
+- en cas de doute, l’usage concerné reste bloqué ;
+- le système doit préparer le dossier complet pour une revue juridique externe si nécessaire.
+
+## 17.2 Tableau de bord administrateur des droits
+
+Le futur tableau de bord doit afficher, par jeu :
+- statut global ;
+- éditeur ;
+- dernier événement ;
+- scopes accordés ;
+- scopes refusés ;
+- scopes en attente ;
+- expirations ;
+- restrictions ;
+- preuve source ;
+- état MODARYX Forge séparé.
+
+Résumé global possible :
+`Autorisés · Autorisés avec limites · En attente · Sans réponse · Refusés · Expirés / Révoqués`.
+
+Le tableau de bord est une surface d’administration et ne doit pas être exposé comme une preuve publique de partenariat.
+
 ## 18. Automatisation réelle
 
 État actuel :
