@@ -844,3 +844,45 @@ Toujours NON IMPLÉMENTÉ :
 - legal review opérationnelle.
 
 Le contrat/prototype ne vaut pas conformité juridique finale.
+
+
+## 29. Provenance assets / guard droits
+
+**TERMINÉ pour les assets du prototype / production PREUVE MANQUANTE**
+
+Manifest :
+- `qa/modaryx-v2-asset-rights-manifest.json`
+
+Checker :
+- `qa/check-v2-asset-rights-provenance.mjs`
+
+Workflow :
+- `MODARYX V2 Asset Rights Provenance Proof`
+
+Preuve :
+- run `37205150007` — **SUCCESS**
+- `ASSET_RIGHTS_PROVENANCE_COUNT 2`
+- `ASSET_RIGHTS_REMOTE_REFERENCE_COUNT 0`
+- `PASS_V2_ASSET_RIGHTS_PROVENANCE`
+
+Assets couverts :
+- `living-threshold-hero.png`
+- `living-threshold-content-sheet.png`
+
+Classification :
+- `ORIGINAL_MODARYX_DEMO`
+- `ALLOWED_PROTOTYPE_ONLY`
+
+Le guard bloque :
+- asset média prototype non listé ;
+- Unknown / Forbidden ;
+- changement de blob sans mise à jour du manifest ;
+- preuve/politique absente ;
+- références média distantes HTTP(S) dans le prototype.
+
+Toujours PREUVE MANQUANTE :
+- dossier de provenance/licence production complet ;
+- assets de jeux réels ;
+- licences éditeurs ;
+- allowlist production ;
+- scanning de tous futurs roots/media production.
