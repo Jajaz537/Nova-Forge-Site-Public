@@ -272,6 +272,12 @@
       "contract": "qa/modaryx-v2-v1-v2-mapping-contract.json",
       "checker": "qa/check-v2-v1-v2-mapping-contract.mjs",
       "source": "docs/MODARYX-V2-V1-V2-MAPPING-MATRIX-20261003.md"
+    },
+    {
+      "id": "naming-wording",
+      "contract": "qa/modaryx-v2-naming-wording-contract.json",
+      "checker": "qa/check-v2-naming-wording-contract.mjs",
+      "source": "docs/MODARYX-V2-NAMING-WORDING-CONTRACT-20261004.md"
     }
   ],
   "invariants": [
