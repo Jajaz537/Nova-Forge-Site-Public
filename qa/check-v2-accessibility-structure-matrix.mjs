@@ -62,7 +62,9 @@ async function assertSurface(label){
       return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0;
     };
     const mains=[...document.querySelectorAll('main#main-content')];
-    const headings=mains[0]?[...mains[0].querySelectorAll('h1')]:[];
+    const allHeadings=mains[0]?[...mains[0].querySelectorAll('h1,h2,h3,h4,h5,h6')].filter(visible):[];
+    const headings=allHeadings.filter(el=>el.tagName==='H1');
+    const headingSequence=allHeadings.map(el=>({level:Number(el.tagName.slice(1)),text:el.textContent.trim().slice(0,100)}));
     const ids=[...document.querySelectorAll('[id]')].map(el=>el.id).filter(Boolean);
     const duplicates=[...new Set(ids.filter((id,i)=>ids.indexOf(id)!==i))];
     const positiveTab=[...document.querySelectorAll('[tabindex]')].filter(el=>Number(el.getAttribute('tabindex'))>0).map(el=>({tag:el.tagName,tabindex:el.getAttribute('tabindex')}));
@@ -77,6 +79,7 @@ async function assertSurface(label){
       mainCount:mains.length,
       h1Count:headings.length,
       h1Text:headings[0]?.textContent?.trim()||'',
+      headingSequence,
       duplicates,
       positiveTab,
       unnamed,
@@ -85,6 +88,11 @@ async function assertSurface(label){
   })()`);
   if(dom.mainCount!==1) throw new Error(label+" expected one main#main-content: "+JSON.stringify(dom));
   if(dom.h1Count!==1||!dom.h1Text) throw new Error(label+" expected exactly one named h1: "+JSON.stringify(dom));
+  if(dom.headingSequence[0]?.level!==1) throw new Error(label+" first visible heading must be h1: "+JSON.stringify(dom.headingSequence));
+  for(let i=1;i<dom.headingSequence.length;i++){
+    const prev=dom.headingSequence[i-1],current=dom.headingSequence[i];
+    if(current.level>prev.level+1) throw new Error(label+" heading level jump: "+JSON.stringify({prev,current,sequence:dom.headingSequence}));
+  }
   if(dom.duplicates.length) throw new Error(label+" duplicate ids: "+JSON.stringify(dom.duplicates));
   if(dom.positiveTab.length) throw new Error(label+" positive tabindex: "+JSON.stringify(dom.positiveTab));
   if(dom.unnamed.length) throw new Error(label+" unnamed visible controls: "+JSON.stringify(dom.unnamed));
