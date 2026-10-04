@@ -282,6 +282,8 @@ try {
   manifest.captures.push(await capture("desktop-public-trust.png", 1440, 1024, "Confiance, informations légales et transparence."));
   await clickByText("footer button", "Aide & documentation");
   manifest.captures.push(await capture("desktop-help-docs.png", 1440, 1024, "Comprendre MODARYX sans deviner."));
+  await clickByText("footer button", "Modération · démo admin");
+  manifest.captures.push(await capture("desktop-moderation-center.png", 1440, 1024, "Modération, signalements et appels."));
 
   await clickByText(".global-nav button", "Créer");
   manifest.captures.push(await capture("desktop-creator-studio.png", 1440, 1024, "Creator Studio"));
@@ -437,6 +439,8 @@ try {
   manifest.captures.push(await capture("mobile-public-trust.png", 390, 844, "Confiance, informations légales et transparence."));
   await clickByText("footer button", "Aide & documentation");
   manifest.captures.push(await capture("mobile-help-docs.png", 390, 844, "Comprendre MODARYX sans deviner."));
+  await clickByText("footer button", "Modération · démo admin");
+  manifest.captures.push(await capture("mobile-moderation-center.png", 390, 844, "Modération, signalements et appels."));
 
   await clickByText("footer button", "Droits jeux · démo admin");
   manifest.captures.push(await capture("mobile-rights-dashboard.png", 390, 844, "Aucune demande réelle n’est envoyée dans ce prototype."));
