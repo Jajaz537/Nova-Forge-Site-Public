@@ -2059,3 +2059,67 @@ Run `37238143495` — SUCCESS.
 - P0/P1 ouvert interdit un PASS ;
 - aucun artifact vide ;
 - aucune émulation ne peut devenir preuve physique/screen-reader/Safari.
+
+
+## 74. Report validation capture artifact — défaut fermé
+
+**TERMINÉ pour le défaut de preuve visuelle / fonctionnalité produit inchangée**
+
+Défaut observé dans l'artifact Living Threshold antérieur :
+- `mobile-content-report-error.png` pouvait être capturé vide/sombre ;
+- `desktop-content-report-error.png` pouvait capturer l'origine de page au lieu de l'état d'erreur visible ;
+- product flow et validation fonctionnelle étaient déjà verts : le défaut concernait l'archive de preuve, pas le workflow produit.
+
+Cause isolée :
+- le helper `capture()` utilisait un clip page `x:0,y:0` ;
+- après focus/scroll de validation, ce clip ne représentait plus le viewport actuel.
+
+Correction ciblée :
+- centrage de `#report-reason-error` ;
+- capture via `captureCurrentViewport()` ;
+- aucun changement du comportement produit.
+
+Micro-preuve dédiée :
+- workflow `MODARYX V2 Report Error Capture Micro-Proof`
+- run `37238782856` — **SUCCESS**
+- mobile : erreur centrée, screenshot `67707` bytes, `pageY 1686`
+- desktop : erreur centrée, screenshot `314386` bytes, `pageY 609`
+- `PASS_V2_REPORT_ERROR_CAPTURE_VIEWPORT`.
+
+Incident de syntaxe intermédiaire :
+- run Living Threshold `37238610323` — **FAIL**
+- erreur exacte : `SyntaxError: missing ) after argument list` dans `qa/capture-v2-living-threshold-multiscreen.mjs:250`
+- build, a11y navigateur et product flows avaient passé avant l'étape capture ;
+- aucun full replay lancé aveuglément.
+
+Isolation :
+- micro-proof syntaxe dédié créé ;
+- premier run `37238741435` — **FAIL**, reproduisant exactement le défaut.
+
+Correction :
+- fermeture des deux appels `await evaluate(...);`.
+
+Micro-proof syntaxe après correction :
+- run `37238782451` — **SUCCESS**
+- `PASS_V2_MULTISCREEN_CAPTURE_SCRIPT_SYNTAX`.
+
+Continuation Living Threshold :
+- run `37238782482` — **SUCCESS**
+- commit capturé `06621017f0e20595512164e20da6069ca9baabbe`
+- artifact `11316682569`
+- digest `sha256:bd136befe40d2efab32acf76c3cf85ea8e45660dbfebb191a12fadde64b5dfec`
+- `KEYBOARD_REACHABLE 41 / 41`
+- desktop/mobile overflow `0 / 0`
+- `FLOW_ASSERT report validation error retry recovered`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 87`
+- `PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE`.
+
+Inspection visuelle directe de l'artifact frais :
+- `mobile-content-report-error.png` montre clairement le formulaire, le champ Raison et le message d'erreur rouge ;
+- `desktop-content-report-error.png` montre clairement le formulaire d'erreur et le panneau de décision ;
+- les deux captures ne sont plus vides ni décalées hors de l'état critique.
+
+Limite :
+- cette fermeture valide l'archive de preuve du prototype ;
+- elle ne ferme aucun blocker humain, screen reader, appareil, backend ou production.
