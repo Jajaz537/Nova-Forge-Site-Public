@@ -1440,3 +1440,18 @@ Décision :
 - loading initial, refresh, stale, empty et erreurs restent distincts ;
 - skeleton uniquement lorsqu’une vraie frontière asynchrone le justifie ;
 - production async reste non implémentée.
+
+
+## 45. Preuve contrat async/loading
+
+**TERMINÉ — contrat pré-production**
+
+Preuve :
+- workflow `MODARYX V2 Async Loading Contract Proof`
+- run `37222822827` — **SUCCESS**
+- commit `ee106dd7ae6e4ba50923f844e18ec5b28798aca5`
+- `ASYNC_STATE_COUNT 9`
+- `ASYNC_INVARIANT_COUNT 10`
+- `PASS_V2_ASYNC_LOADING_CONTRACT`
+
+Cette preuve valide le contrat, pas un backend asynchrone réel.
