@@ -9,10 +9,12 @@ const port=9243;
 const proc=spawn(chrome,[
   "--headless=new","--no-sandbox","--disable-gpu","--disable-dev-shm-usage",
   "--hide-scrollbars","--remote-debugging-port="+port,
-  "--user-data-dir=/tmp/modaryx-v2-a11y-structure-matrix","about:blank"
+  "--user-data-dir=/tmp/modaryx-v2-a11y-structure-matrix-"+process.pid,"about:blank"
 ],{stdio:"ignore"});
 
 let ws;
+let chromeExit=null;
+proc.on("exit",(code,signal)=>{chromeExit={code,signal};});
 let nextId=1;
 const pending=new Map();
 function send(method,params={}){
@@ -27,7 +29,8 @@ async function evaluate(expression){
 }
 async function waitJson(path){
   let last;
-  for(let i=0;i<160;i++){
+  for(let i=0;i<220;i++){
+    if(chromeExit) throw new Error("Chrome exited before structure matrix readiness: "+JSON.stringify(chromeExit));
     try{
       const r=await fetch("http://127.0.0.1:"+port+path);
       if(r.ok) return await r.json();
