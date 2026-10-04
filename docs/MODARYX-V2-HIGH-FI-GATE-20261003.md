@@ -786,3 +786,15 @@ Toujours PREUVE MANQUANTE :
 - validation humaine / AT / appareils.
 
 Cette preuve ne constitue ni une politique de modération finale ni un système de modération production.
+
+
+## Security-source polish — 4 octobre 2026
+
+**TERMINÉ au niveau prototype source**
+
+Micro-proof `37231081387` — SUCCESS :
+- références distantes ciblées : 0 ;
+- sinks dangereux ciblés : 0 ;
+- styles inline ciblés : 0.
+
+Ce durcissement n'affecte pas le statut High-Fi final : validation humaine, AT réel, appareils et référence visuelle restent nécessaires.
