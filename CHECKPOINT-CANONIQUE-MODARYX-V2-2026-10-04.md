@@ -1082,3 +1082,61 @@ Toujours NON IMPLÉMENTÉ :
 - provenance verifier ;
 - attachment scanner ;
 - response router.
+
+
+## 34. Tablet reflow — preuve navigateur ciblée
+
+**TERMINÉ pour reflow navigateur simulé / appareil physique PREUVE MANQUANTE**
+
+Incident initial :
+- run `37215370580` — **FAIL**
+- erreur exacte : Game Hub à 834×1112 avec overflow horizontal de **220 px**
+- cause isolée : topbar desktop conservée trop longtemps ; `.top-actions` dépassait le viewport.
+
+Correction ciblée :
+- navigation primaire repliée en shell menu/search pour la plage **761–1050 px** ;
+- aucun changement desktop ≥1051 px ;
+- règles mobile ≤760 px conservées.
+
+Micro-proof intermédiaires :
+- `37215609256` / `37215757686` / `37215867021` : échecs de checker sur l'assertion textuelle `Catalogue global` après fermeture du premier overflow ;
+- cause : `innerText` reflétait le `text-transform: uppercase` du kicker ;
+- checker rendu indépendant du style via `textContent`.
+
+Micro-proof final :
+- workflow `MODARYX V2 Tablet Reflow Micro-Proof`
+- run `37215965531` — **SUCCESS**
+- commit capturé `2c867f7292ea5d5bfc23f366868e50a96f8d7350`
+- viewport : **834×1112**
+- `TABLET_REFLOW_SURFACE_COUNT 12`
+- `PASS_V2_TABLET_REFLOW`
+- overflow = **0** sur :
+  - Game Hub
+  - Games Index
+  - Catalog
+  - Collections
+  - Creators
+  - Community
+  - Creator Studio
+  - Library
+  - Account
+  - MODARYX IA
+  - Rights Dashboard
+  - Rights expanded.
+
+Continuation générale après correction CSS :
+- Living Threshold run `37215577121` — **SUCCESS**
+- commit capturé `2692094981a2f67b1142709e33747bbde13a253b`
+- artifact `11308176729`
+- digest `sha256:824fbf35b192aa7f48d6fb283c9192a20b279cc8e315ff38e5b50542e916be2d`
+- `KEYBOARD_REACHABLE 37 / 37`
+- desktop/mobile overflow : `0 / 0`
+- `MULTISCREEN_CAPTURE_COUNT 81`.
+
+Cette preuve ne remplace pas :
+- une vraie tablette physique ;
+- Safari/iPadOS réel ;
+- validation tactile humaine ;
+- screen reader réel.
+
+Le blocker appareil physique reste donc ouvert.
