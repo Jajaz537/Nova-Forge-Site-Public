@@ -246,7 +246,9 @@ try {
   await clickByText(".detail-tabs button", "Signalement");
   manifest.captures.push(await capture("desktop-content-report.png", 1440, 1024, "Signaler ce contenu"));
   await clickByText(".report-section .primary", "Préparer le signalement local");
-  manifest.captures.push(await capture("desktop-content-report-error.png", 1440, 1024, "Choisissez une raison avant de préparer le signalement."));
+  await evaluate("document.querySelector('#report-reason-error')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("desktop-content-report-error.png", 1440, 1024, "Choisissez une raison avant de préparer le signalement."));
 
   await clickByText("footer button", "Game Hub");
   await clickSelector('[aria-label="Bibliothèque"]');
@@ -375,7 +377,9 @@ try {
   await clickByText(".detail-tabs button", "Signalement");
   manifest.captures.push(await capture("mobile-content-report.png", 390, 844, "Signaler ce contenu"));
   await clickByText(".report-section .primary", "Préparer le signalement local");
-  manifest.captures.push(await capture("mobile-content-report-error.png", 390, 844, "Choisissez une raison avant de préparer le signalement."));
+  await evaluate("document.querySelector('#report-reason-error')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("mobile-content-report-error.png", 390, 844, "Choisissez une raison avant de préparer le signalement."));
 
   await navigateHome(390, 844);
   await clickSelector(".mobile-menu");
