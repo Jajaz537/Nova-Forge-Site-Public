@@ -353,3 +353,46 @@ Quand l'utilisateur dit `Suite l'ami` :
 - ne pas reconstruire l'état depuis de vieux chats ;
 - continuer automatiquement au prochain point logique ;
 - ne jamais transformer la correction prototype du hero en validation humaine.
+
+
+## 20. Micro-preuve composition hero canonique
+
+**TERMINÉ pour la géométrie/visibilité du prototype — validation artistique humaine toujours PREUVE MANQUANTE**
+
+Workflow :
+`MODARYX V2 Canonical Hero Composition Micro-Proof`
+
+Séquence d'erreur respectée :
+1. run `37313644754` — **FAIL** : route Discover non ouverte, nœuds hero absents ;
+2. diagnostic ciblé ;
+3. run `37314359820` — **FAIL** : desktop géométrie valide, navigation mobile Discover non ouverte ;
+4. correction ciblée : ouverture explicite du menu mobile + clic pointer réel ;
+5. run `37314488570` — **SUCCESS**.
+
+Commit capturé :
+`83259afcfb8d71fe53aebdf813ac849b16557b26`
+
+Marqueur :
+`PASS_V2_CANON_HERO_COMPOSITION`
+
+Mesures desktop :
+- traveler visible ~98.97 %, overlap copy ~6.37 % ;
+- wolf visible ~86.07 %, overlap copy ~3.26 % ;
+- dragon visible ~80.40 %, overlap copy 0 %.
+
+Mesures mobile :
+- traveler visible ~96.46 %, overlap copy 0 % ;
+- wolf visible ~69.89 %, overlap copy 0 % ;
+- dragon visible ~71.94 %, overlap copy 0 %.
+
+Invariants :
+- narrative layer décorative `aria-hidden=true` ;
+- `pointer-events:none` ;
+- les trois ancres restent dans la zone narrative basse ;
+- aucun overlap significatif avec le copy hero selon le seuil machine.
+
+Cette micro-preuve ne ferme pas :
+- l'acceptation artistique humaine ;
+- la provenance production des assets compagnon ;
+- le P1 `normalized-visual-comparison` ;
+- High-Fi final.
