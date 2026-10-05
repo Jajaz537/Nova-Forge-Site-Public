@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-ONBOARDING-ACCOUNT-CREATOR-CONTRACT-20261003.md",
+  "guestCapabilities": [
+    "SEARCH",
+    "BROWSE_GAMES",
+    "READ_CONTENT",
+    "READ_COMPATIBILITY",
+    "READ_DEPENDENCIES",
+    "VIEW_PUBLIC_COLLECTIONS",
+    "VIEW_PUBLIC_CREATORS",
+    "READ_HELP_AND_SECURITY"
+  ],
+  "authRequiredCapabilities": [
+    "PUBLISH",
+    "REMOTE_PRIVATE_SYNC",
+    "REMOTE_FOLLOW",
+    "TEAM_MANAGEMENT",
+    "SERVER_NOTIFICATIONS",
+    "MODERATION_ACTIONS"
+  ],
+  "onboarding": {
+    "player": [
+      "OPTIONAL_GAME_SELECTION",
+      "OPTIONAL_CONTENT_PREFERENCES",
+      "EXPLAIN_COLLECTIONS_PROFILES",
+      "EXPLAIN_COMPATIBILITY",
+      "INTRO_LIBRARY"
+    ],
+    "creator": [
+      "PUBLIC_IDENTITY",
+      "SOLO_OR_TEAM",
+      "TARGET_GAMES",
+      "RIGHTS_AND_LICENSE",
+      "PROVENANCE_REMINDER",
+      "FIRST_PROJECT"
+    ],
+    "skippable": true
+  },
+  "identitySeparation": [
+    "ACCOUNT",
+    "PUBLIC_PROFILE",
+    "CREATOR"
+  ],
+  "privacyDefaults": [
+    "LIBRARY_PRIVATE",
+    "FAVORITES_PRIVATE",
+    "GAME_PROFILES_PRIVATE_LOCAL",
+    "DRAFTS_PRIVATE",
+    "SAVED_SEARCHES_PRIVATE"
+  ],
+  "teamRoles": [
+    "OWNER",
+    "MAINTAINER",
+    "CONTRIBUTOR",
+    "TRANSLATOR",
+    "TESTER"
+  ],
+  "sessionStates": [
+    "ANONYMOUS",
+    "AUTHENTICATED",
+    "EXPIRED",
+    "UNAVAILABLE",
+    "PERMISSION_DENIED"
+  ],
+  "passkeyRules": [
+    "BROWSER_SUPPORT_IS_NOT_ENROLLMENT",
+    "ENROLLMENT_IS_NOT_SUCCESSFUL_AUTHENTICATION",
+    "NEVER_SHOW_CONFIGURED_WITHOUT_PROOF"
+  ],
+  "criticalDataActions": {
+    "export": "REQUIRES_REAL_BACKEND_AND_POLICY",
+    "deleteAccount": "REQUIRES_REAL_BACKEND_AND_POLICY",
+    "deletePublicProfile": "REQUIRES_REAL_BACKEND_AND_POLICY"
+  },
+  "invariants": [
+    "GUEST_FIRST",
+    "NO_FORCED_LOGIN_FOR_EXPLORATION",
+    "ONBOARDING_SKIPPABLE",
+    "ACCOUNT_PROFILE_CREATOR_SEPARATE",
+    "PRIVACY_PRIVATE_BY_DEFAULT",
+    "SHARING_REQUIRES_EXPLICIT_ACTION",
+    "TEAM_PERMISSIONS_SERVER_AUTHORITY",
+    "SESSION_UI_REFLECTS_REAL_STATE",
+    "PASSKEY_STATUS_REQUIRES_REAL_PROOF",
+    "MARKETING_NOTIFICATION_NOT_DEFAULT",
+    "FAILED_SAVE_PRESERVES_LOCAL_CHANGES",
+    "CRITICAL_ACTION_NOT_ICON_ONLY"
+  ],
+  "productionStatus": {
+    "auth": "NOT_IMPLEMENTED",
+    "remoteProfile": "NOT_IMPLEMENTED",
+    "teamAuthority": "NOT_IMPLEMENTED",
+    "passkeys": "NOT_IMPLEMENTED",
+    "remoteNotifications": "NOT_IMPLEMENTED",
+    "exportDelete": "NOT_IMPLEMENTED"
+  }
+}

@@ -1,0 +1,14 @@
+import fs from "node:fs";
+const d=JSON.parse(fs.readFileSync("qa/modaryx-v2-naming-wording-contract.json","utf8"));
+const app=fs.readFileSync("review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx","utf8");
+if(d.schemaVersion!==1) throw new Error("unexpected schemaVersion");
+for(const x of ["Mods & contenus","Profils de jeu","Mes profils pour ce jeu","Compte","MODARYX IA"]) if(!new Set(d.canonicalLabels||[]).has(x)) throw new Error("missing canonical label "+x);
+for(const x of ["Mods & contenus","Mes profils pour ce jeu","Configurations enregistrées de mods, versions et réglages.","MODARYX IA"]) if(!app.includes(x)) throw new Error("prototype missing canonical wording "+x);
+for(const x of ["MODARYX Forge Public","MODARYX Forge Founder","Nova Forge OS"]) if(app.includes(x)) throw new Error("retired/incorrect product label leaked into active prototype: "+x);
+if(!new Set(d.prohibitedGenericTrustLabels||[]).has("Non vérifié")) throw new Error("generic trust-label prohibition missing");
+const inv=new Set(d.invariants||[]);
+for(const x of ["WEB_AND_DESKTOP_IDENTITIES_REMAIN_DISTINCT","MODARYX_FORGE_IS_UMBRELLA_NOT_EDITION_PREFIX","RETIRED_NOVA_FORGE_OS_NOT_NEW_ACTIVE_PRODUCT_LABEL","GETNOVAFORGE_NEVER_CURRENT_WEB_TARGET","MODS_AND_CONTENTS_IS_GLOBAL_UMBRELLA","GAME_PROFILES_IS_USER_LABEL","GENERIC_UNVERIFIED_LABEL_FORBIDDEN","MODARYX_AI_NEVER_CLAIMS_ACTIVE_WITHOUT_REAL_RUNTIME"]) if(!inv.has(x)) throw new Error("missing invariant "+x);
+if(d.productionStatus?.globalHumanValidation!=="NOT_PROVEN") throw new Error("global human validation status drift");
+console.log("NAMING_CANONICAL_LABEL_COUNT",(d.canonicalLabels||[]).length);
+console.log("NAMING_INVARIANT_COUNT",inv.size);
+console.log("PASS_V2_NAMING_WORDING_CONTRACT");

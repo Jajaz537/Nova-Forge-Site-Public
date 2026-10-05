@@ -1,0 +1,36 @@
+name: MODARYX V2 Asset Rights Provenance Proof
+
+on:
+  push:
+    branches:
+      - 'audit/modaryx-v2-legacy-boundary-20261003'
+    paths:
+      - '.github/workflows/modaryx-v2-asset-rights-provenance-proof.yml'
+      - 'qa/modaryx-v2-asset-rights-manifest.json'
+      - 'qa/check-v2-asset-rights-provenance.mjs'
+      - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/**'
+      - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx'
+      - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/styles.css'
+      - 'docs/MODARYX-V2-GAME-ATMOSPHERE-IP-POLICY-20261004.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  provenance:
+    name: Validate prototype asset rights provenance
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate asset rights provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-asset-rights-provenance.mjs

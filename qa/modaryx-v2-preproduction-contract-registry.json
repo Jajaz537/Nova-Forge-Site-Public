@@ -1,0 +1,341 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-05",
+  "status": "PRE_PRODUCTION_CONTRACT_REGISTRY",
+  "contracts": [
+    {
+      "id": "ai-integration",
+      "contract": "qa/modaryx-v2-ai-integration-contract.json",
+      "checker": "qa/check-v2-ai-integration-contract.mjs",
+      "source": "docs/MODARYX-AI-FOUNDATION-ARCHITECTURE-20261004.md"
+    },
+    {
+      "id": "asset-rights",
+      "contract": "qa/modaryx-v2-asset-rights-manifest.json",
+      "checker": "qa/check-v2-asset-rights-provenance.mjs",
+      "source": "docs/MODARYX-V2-GAME-ATMOSPHERE-IP-POLICY-20261004.md"
+    },
+    {
+      "id": "async-loading",
+      "contract": "qa/modaryx-v2-async-loading-contract.json",
+      "checker": "qa/check-v2-async-loading-contract.mjs",
+      "source": "docs/MODARYX-V2-ASYNC-LOADING-STATE-CONTRACT-20261004.md"
+    },
+    {
+      "id": "game-rights-registry",
+      "contract": "qa/modaryx-v2-game-rights-registry-contract.json",
+      "checker": "qa/check-v2-game-rights-registry-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-RIGHTS-REGISTRY-CONTRACT-20261004.md"
+    },
+    {
+      "id": "game-rights-workflow",
+      "contract": "qa/modaryx-v2-game-rights-workflow.json",
+      "checker": "qa/check-v2-game-rights-workflow.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "game-support-request",
+      "contract": "qa/modaryx-v2-game-support-request-contract.json",
+      "checker": "qa/check-v2-game-support-request-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "help-documentation",
+      "contract": "qa/modaryx-v2-help-documentation-contract.json",
+      "checker": "qa/check-v2-help-documentation-contract.mjs",
+      "source": "docs/MODARYX-V2-HELP-DOCUMENTATION-CONTRACT-20261004.md"
+    },
+    {
+      "id": "ip-takedown",
+      "contract": "qa/modaryx-v2-ip-takedown-contract.json",
+      "checker": "qa/check-v2-ip-takedown-contract.mjs",
+      "source": "docs/MODARYX-V2-IP-TAKEDOWN-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "moderation-appeals",
+      "contract": "qa/modaryx-v2-moderation-appeals-contract.json",
+      "checker": "qa/check-v2-moderation-appeals-contract.mjs",
+      "source": "docs/MODARYX-V2-MODERATION-APPEALS-CONTRACT-20261003.md"
+    },
+    {
+      "id": "publisher-inbound",
+      "contract": "qa/modaryx-v2-publisher-inbound-contract.json",
+      "checker": "qa/check-v2-publisher-inbound-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "publisher-outbound",
+      "contract": "qa/modaryx-v2-publisher-outbound-contract.json",
+      "checker": "qa/check-v2-publisher-outbound-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "publisher-response",
+      "contract": "qa/modaryx-v2-publisher-response-contract.json",
+      "checker": "qa/check-v2-publisher-response-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "rights-lifecycle",
+      "contract": "qa/modaryx-v2-rights-lifecycle-contract.json",
+      "checker": "qa/check-v2-rights-lifecycle-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md"
+    },
+    {
+      "id": "rights-notification",
+      "contract": "qa/modaryx-v2-rights-notification-contract.json",
+      "checker": "qa/check-v2-rights-notification-contract.mjs",
+      "source": "docs/MODARYX-V2-NOTIFICATIONS-PREFERENCES-CONTRACT-20261003.md"
+    },
+    {
+      "id": "seo-i18n",
+      "contract": "qa/modaryx-v2-seo-i18n-content-contract.json",
+      "checker": "qa/check-v2-seo-i18n-content-contract.mjs",
+      "source": "docs/MODARYX-V2-SEO-I18N-CONTENT-CONTRACT-20261003.md"
+    },
+    {
+      "id": "csp-headers-rich-text",
+      "contract": "qa/modaryx-v2-csp-headers-rich-text-contract.json",
+      "checker": "qa/check-v2-csp-headers-rich-text-contract.mjs",
+      "source": "docs/MODARYX-V2-CSP-HEADERS-RICH-TEXT-POLICY-20261003.md"
+    },
+    {
+      "id": "notifications-preferences",
+      "contract": "qa/modaryx-v2-notifications-preferences-contract.json",
+      "checker": "qa/check-v2-notifications-preferences-contract.mjs",
+      "source": "docs/MODARYX-V2-NOTIFICATIONS-PREFERENCES-CONTRACT-20261003.md"
+    },
+    {
+      "id": "onboarding-account-creator",
+      "contract": "qa/modaryx-v2-onboarding-account-creator-contract.json",
+      "checker": "qa/check-v2-onboarding-account-creator-contract.mjs",
+      "source": "docs/MODARYX-V2-ONBOARDING-ACCOUNT-CREATOR-CONTRACT-20261003.md"
+    },
+    {
+      "id": "api-governance",
+      "contract": "qa/modaryx-v2-api-governance-contract.json",
+      "checker": "qa/check-v2-api-governance-contract.mjs",
+      "source": "docs/MODARYX-V2-API-GOVERNANCE-CONTRACT-20261003.md"
+    },
+    {
+      "id": "public-trust",
+      "contract": "qa/modaryx-v2-public-trust-contract.json",
+      "checker": "qa/check-v2-public-trust-contract.mjs",
+      "source": "docs/MODARYX-V2-PUBLIC-LEGAL-TRUST-READINESS-20261004.md"
+    },
+    {
+      "id": "route-cutover",
+      "contract": "qa/modaryx-v2-route-cutover-contract.json",
+      "checker": "qa/check-v2-route-cutover-contract.mjs",
+      "source": "docs/MODARYX-V2-ROUTE-CUTOVER-PLAN-20261003.md"
+    },
+    {
+      "id": "storage-cache-sw-migration",
+      "contract": "qa/modaryx-v2-storage-cache-sw-migration-contract.json",
+      "checker": "qa/check-v2-storage-cache-sw-migration-contract.mjs",
+      "source": "docs/MODARYX-V2-STORAGE-CACHE-SW-MIGRATION-20261003.md"
+    },
+    {
+      "id": "trust-provenance-distribution",
+      "contract": "qa/modaryx-v2-trust-provenance-distribution-contract.json",
+      "checker": "qa/check-v2-trust-provenance-distribution-contract.mjs",
+      "source": "docs/MODARYX-V2-TRUST-PROVENANCE-DISTRIBUTION-CONTRACT-20261003.md"
+    },
+    {
+      "id": "install-manager",
+      "contract": "qa/modaryx-v2-install-manager-contract.json",
+      "checker": "qa/check-v2-install-manager-contract.mjs",
+      "source": "docs/MODARYX-V2-INSTALL-MANAGER-CONTRACT-20261003.md"
+    },
+    {
+      "id": "frontend-isolation",
+      "contract": "qa/modaryx-v2-frontend-isolation-contract.json",
+      "checker": "qa/check-v2-frontend-isolation-contract.mjs",
+      "source": "docs/MODARYX-V2-FRONTEND-ISOLATION-ARCHITECTURE-20261003.md"
+    },
+    {
+      "id": "threat-model",
+      "contract": "qa/modaryx-v2-threat-model-contract.json",
+      "checker": "qa/check-v2-threat-model-contract.mjs",
+      "source": "docs/MODARYX-V2-THREAT-MODEL-20261003.md"
+    },
+    {
+      "id": "a11y-perf-design-system",
+      "contract": "qa/modaryx-v2-a11y-perf-design-system-contract.json",
+      "checker": "qa/check-v2-a11y-perf-design-system-contract.mjs",
+      "source": "docs/MODARYX-V2-A11Y-PERF-DESIGN-SYSTEM-CONTRACT-20261003.md"
+    },
+    {
+      "id": "game-support-lifecycle",
+      "contract": "qa/modaryx-v2-game-support-lifecycle-contract.json",
+      "checker": "qa/check-v2-game-support-lifecycle-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-LIFECYCLE-CONTRACT-20261003.md"
+    },
+    {
+      "id": "game-hub",
+      "contract": "qa/modaryx-v2-game-hub-contract.json",
+      "checker": "qa/check-v2-game-hub-contract.mjs",
+      "source": "docs/MODARYX-V2-GAME-HUB-CONTRACT-20261003.md"
+    },
+    {
+      "id": "search-filter-discovery",
+      "contract": "qa/modaryx-v2-search-filter-discovery-contract.json",
+      "checker": "qa/check-v2-search-filter-discovery-contract.mjs",
+      "source": "docs/MODARYX-V2-SEARCH-FILTER-DISCOVERY-CONTRACT-20261003.md"
+    },
+    {
+      "id": "content-detail",
+      "contract": "qa/modaryx-v2-content-detail-contract.json",
+      "checker": "qa/check-v2-content-detail-contract.mjs",
+      "source": "docs/MODARYX-V2-CONTENT-DETAIL-CONTRACT-20261003.md"
+    },
+    {
+      "id": "collection-modpack-profile",
+      "contract": "qa/modaryx-v2-collection-modpack-profile-contract.json",
+      "checker": "qa/check-v2-collection-modpack-profile-contract.mjs",
+      "source": "docs/MODARYX-V2-COLLECTION-MODPACK-PROFILE-CONTRACT-20261003.md"
+    },
+    {
+      "id": "creator-studio",
+      "contract": "qa/modaryx-v2-creator-studio-contract.json",
+      "checker": "qa/check-v2-creator-studio-contract.mjs",
+      "source": "docs/MODARYX-V2-CREATOR-STUDIO-CONTRACT-20261003.md"
+    },
+    {
+      "id": "community-library-nav",
+      "contract": "qa/modaryx-v2-community-library-nav-contract.json",
+      "checker": "qa/check-v2-community-library-nav-contract.mjs",
+      "source": "docs/MODARYX-V2-COMMUNITY-LIBRARY-NAV-CONTRACT-20261003.md"
+    },
+    {
+      "id": "critical-flows",
+      "contract": "qa/modaryx-v2-critical-flows-contract.json",
+      "checker": "qa/check-v2-critical-flows-contract.mjs",
+      "source": "docs/MODARYX-V2-CRITICAL-FLOWS-20261003.md"
+    },
+    {
+      "id": "adapter-module-boundaries",
+      "contract": "qa/modaryx-v2-adapter-module-boundaries-contract.json",
+      "checker": "qa/check-v2-adapter-module-boundaries-contract.mjs",
+      "source": "docs/MODARYX-V2-ADAPTER-MODULE-BOUNDARIES-20261003.md"
+    },
+    {
+      "id": "data-fixture-strategy",
+      "contract": "qa/modaryx-v2-data-fixture-strategy-contract.json",
+      "checker": "qa/check-v2-data-fixture-strategy-contract.mjs",
+      "source": "docs/MODARYX-V2-DATA-FIXTURE-STRATEGY-20261003.md"
+    },
+    {
+      "id": "schema-plan",
+      "contract": "qa/modaryx-v2-schema-plan-contract.json",
+      "checker": "qa/check-v2-schema-plan-contract.mjs",
+      "source": "docs/MODARYX-V2-SCHEMA-PLAN-20261003.md"
+    },
+    {
+      "id": "interaction-states",
+      "contract": "qa/modaryx-v2-interaction-states-contract.json",
+      "checker": "qa/check-v2-interaction-states-contract.mjs",
+      "source": "docs/MODARYX-V2-INTERACTION-STATES-20261003.md"
+    },
+    {
+      "id": "qa-strategy",
+      "contract": "qa/modaryx-v2-qa-strategy-contract.json",
+      "checker": "qa/check-v2-qa-strategy-contract.mjs",
+      "source": "docs/MODARYX-V2-QA-STRATEGY-20261003.md"
+    },
+    {
+      "id": "risk-register",
+      "contract": "qa/modaryx-v2-risk-register-contract.json",
+      "checker": "qa/check-v2-risk-register-contract.mjs",
+      "source": "docs/MODARYX-V2-RISK-REGISTER-20261003.md"
+    },
+    {
+      "id": "screen-acceptance",
+      "contract": "qa/modaryx-v2-screen-acceptance-contract.json",
+      "checker": "qa/check-v2-screen-acceptance-contract.mjs",
+      "source": "docs/MODARYX-V2-SCREEN-ACCEPTANCE-CRITERIA-20261003.md"
+    },
+    {
+      "id": "product-architecture",
+      "contract": "qa/modaryx-v2-product-architecture-contract.json",
+      "checker": "qa/check-v2-product-architecture-contract.mjs",
+      "source": "docs/MODARYX-V2-PRODUCT-ARCHITECTURE-20261003.md"
+    },
+    {
+      "id": "content-taxonomy",
+      "contract": "qa/modaryx-v2-content-taxonomy-contract.json",
+      "checker": "qa/check-v2-content-taxonomy-contract.mjs",
+      "source": "docs/MODARYX-V2-CONTENT-TAXONOMY-20261003.md"
+    },
+    {
+      "id": "v1-v2-mapping",
+      "contract": "qa/modaryx-v2-v1-v2-mapping-contract.json",
+      "checker": "qa/check-v2-v1-v2-mapping-contract.mjs",
+      "source": "docs/MODARYX-V2-V1-V2-MAPPING-MATRIX-20261003.md"
+    },
+    {
+      "id": "naming-wording",
+      "contract": "qa/modaryx-v2-naming-wording-contract.json",
+      "checker": "qa/check-v2-naming-wording-contract.mjs",
+      "source": "docs/MODARYX-V2-NAMING-WORDING-CONTRACT-20261004.md"
+    },
+    {
+      "id": "forge-handoff",
+      "contract": "qa/modaryx-v2-forge-handoff-contract.json",
+      "checker": "qa/check-v2-forge-handoff-contract.mjs",
+      "source": "docs/MODARYX-V2-FORGE-HANDOFF-CONTRACT-20261004.md"
+    },
+    {
+      "id": "tech-stack-selection-gate",
+      "contract": "qa/modaryx-v2-tech-stack-selection-gate-contract.json",
+      "checker": "qa/check-v2-tech-stack-selection-gate-contract.mjs",
+      "source": "docs/MODARYX-V2-TECH-STACK-SELECTION-GATE-20261003.md"
+    },
+    {
+      "id": "high-fi-gate",
+      "contract": "qa/modaryx-v2-high-fi-gate-contract.json",
+      "checker": "qa/check-v2-high-fi-gate-contract.mjs",
+      "source": "docs/MODARYX-V2-HIGH-FI-GATE-20261003.md"
+    },
+    {
+      "id": "frontend-gate-reclassification-proposal",
+      "contract": "qa/modaryx-v2-frontend-gate-reclassification-proposal-contract.json",
+      "checker": "qa/check-v2-frontend-gate-reclassification-proposal-contract.mjs",
+      "source": "docs/MODARYX-V2-FRONTEND-GATE-RECLASSIFICATION-PROPOSAL-20261004.md"
+    },
+    {
+      "id": "vf-readiness-gate",
+      "contract": "qa/modaryx-v2-vf-readiness-gate.json",
+      "checker": "qa/check-v2-vf-readiness-gate.mjs",
+      "source": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-05.md"
+    },
+    {
+      "id": "external-validation-evidence",
+      "contract": "qa/modaryx-v2-external-validation-evidence-contract.json",
+      "checker": "qa/check-v2-external-validation-evidence-contract.mjs",
+      "source": "docs/MODARYX-V2-EXTERNAL-VALIDATION-EVIDENCE-CONTRACT-20261004.md"
+    }
+  ],
+  "invariants": [
+    "EVERY_CONTRACT_HAS_SOURCE",
+    "EVERY_CONTRACT_HAS_CHECKER",
+    "EVERY_MACHINE_CONTRACT_SCHEMA_VERSION_ONE",
+    "EVERY_CHECKER_MUST_PASS",
+    "REGISTRY_DOES_NOT_IMPLY_PRODUCTION_IMPLEMENTATION",
+    "EVERY_MODARYX_V2_JSON_CLASSIFIED"
+  ],
+  "nonContractJson": [
+    {
+      "path": "qa/modaryx-v2-anti-contamination-policy.json",
+      "reason": "policy/config executed by dedicated anti-contamination guard, not a preproduction business contract"
+    },
+    {
+      "path": "qa/modaryx-v2-production-surface-map.json",
+      "reason": "production mapping registry executed by dedicated surface-map checker, not a preproduction business contract"
+    },
+    {
+      "path": "qa/modaryx-v2-preproduction-contract-registry.json",
+      "reason": "registry self-file"
+    }
+  ]
+}

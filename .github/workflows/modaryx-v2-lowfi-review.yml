@@ -1,0 +1,82 @@
+name: MODARYX V2 Low-Fi Review Micro-Proof
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/modaryx-v2-lowfi-review.yml'
+      - 'qa/check-v2-lowfi-review.mjs'
+      - 'review-evidence/modaryx-v2-lowfi-20261003/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-lowfi-review-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lowfi-review:
+    name: Chromium low-fi review micro-proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Start isolated review server
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4182 --bind 127.0.0.1 >/tmp/modaryx-v2-lowfi.log 2>&1 &
+          echo $! >/tmp/modaryx-v2-lowfi.pid
+          for attempt in {1..40}; do
+            if curl --fail --silent --show-error http://127.0.0.1:4182/review-evidence/modaryx-v2-lowfi-20261003/core-wireframes.html >/dev/null; then
+              exit 0
+            fi
+            sleep 0.25
+          done
+          cat /tmp/modaryx-v2-lowfi.log
+          exit 1
+
+      - name: Run targeted low-fi browser proof
+        shell: bash
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4182
+        run: |
+          set -euo pipefail
+          set +e
+          node qa/check-v2-lowfi-review.mjs 2>&1 | tee /tmp/lowfi-proof-first.log
+          status=${PIPESTATUS[0]}
+          set -e
+          if test "$status" -eq 0; then
+            exit 0
+          fi
+          if grep -F '"fatal": "fetch failed"' /tmp/lowfi-proof-first.log >/dev/null; then
+            sleep 2
+            node qa/check-v2-lowfi-review.mjs
+            exit 0
+          fi
+          exit "$status"
+
+      - name: Stop isolated review server
+        if: always()
+        shell: bash
+        run: |
+          if test -f /tmp/modaryx-v2-lowfi.pid; then
+            kill "$(cat /tmp/modaryx-v2-lowfi.pid)" 2>/dev/null || true
+          fi

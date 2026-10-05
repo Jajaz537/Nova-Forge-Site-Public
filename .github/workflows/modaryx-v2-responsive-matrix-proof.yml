@@ -1,0 +1,91 @@
+name: MODARYX V2 Responsive Matrix Micro-Proof
+
+on:
+  push:
+    branches:
+      - 'audit/modaryx-v2-legacy-boundary-20261003'
+    paths:
+      - '.github/workflows/modaryx-v2-responsive-matrix-proof.yml'
+      - 'qa/check-v2-narrow-reflow-320.mjs'
+      - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx'
+      - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/styles.css'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  responsive:
+    name: Reflow ${{ matrix.width }}px
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - width: 360
+            height: 900
+          - width: 430
+            height: 932
+          - width: 768
+            height: 1024
+          - width: 1024
+            height: 900
+          - width: 1280
+            height: 900
+          - width: 1920
+            height: 1080
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Build isolated prototype
+        shell: bash
+        working-directory: review-evidence/modaryx-v2-living-threshold-prototype-20261003
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+
+      - name: Start isolated preview
+        shell: bash
+        working-directory: review-evidence/modaryx-v2-living-threshold-prototype-20261003
+        run: |
+          set -euo pipefail
+          npm run preview -- --host 127.0.0.1 --port 4174 >/tmp/modaryx-responsive-matrix.log 2>&1 &
+          echo $! >/tmp/modaryx-responsive-matrix.pid
+          for attempt in {1..60}; do
+            if curl --fail --silent --show-error http://127.0.0.1:4174/ >/dev/null; then exit 0; fi
+            sleep 0.25
+          done
+          cat /tmp/modaryx-responsive-matrix.log
+          exit 1
+
+      - name: Validate responsive reflow
+        shell: bash
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4174
+          MODARYX_VIEWPORT_WIDTH: ${{ matrix.width }}
+          MODARYX_VIEWPORT_HEIGHT: ${{ matrix.height }}
+        run: |
+          set -euo pipefail
+          node qa/check-v2-narrow-reflow-320.mjs
+
+      - name: Stop isolated preview
+        if: always()
+        shell: bash
+        run: |
+          if test -f /tmp/modaryx-responsive-matrix.pid; then
+            kill "$(cat /tmp/modaryx-responsive-matrix.pid)" 2>/dev/null || true
+          fi

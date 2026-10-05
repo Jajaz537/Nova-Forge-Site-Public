@@ -1,0 +1,12 @@
+import fs from "node:fs";
+const d=JSON.parse(fs.readFileSync("qa/modaryx-v2-game-hub-contract.json","utf8"));
+if(d.schemaVersion!==1) throw new Error("unexpected schemaVersion");
+const supportStates=new Set(d["supportStates"]||[]);
+for(const x of ["editorial-only","catalog-enabled","distribution-enabled","deprecated"]) if(!supportStates.has(x)) throw new Error("missing supportStates "+x);
+const tabs=new Set(d["tabs"]||[]);
+for(const x of ["Aperçu","Mods & contenus","Collections","Créateurs","Guides","Activité"]) if(!tabs.has(x)) throw new Error("missing tabs "+x);
+const invariants=new Set(d["invariants"]||[]);
+for(const x of ["HUB_EXISTENCE_NEVER_PROVES_DISTRIBUTABLE_CORPUS","VERSION_CONTEXT_NEVER_SILENTLY_LOST","OFFLINE_DISTRIBUTION_FAILS_CLOSED"]) if(!invariants.has(x)) throw new Error("missing invariants "+x);
+for(const [k,v] of Object.entries(d.productionStatus||{})) if(!["NOT_IMPLEMENTED","NOT_PROVEN","NOT_MEASURED","NOT_DEPLOYED","NOT_EXECUTED"].includes(v)) throw new Error("production status drift "+k+"="+v);
+console.log("GAME_HUB_INVARIANT_COUNT",(d.invariants||[]).length);
+console.log("PASS_V2_GAME_HUB_CONTRACT");

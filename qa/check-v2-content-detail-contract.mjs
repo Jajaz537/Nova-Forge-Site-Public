@@ -1,0 +1,12 @@
+import fs from "node:fs";
+const d=JSON.parse(fs.readFileSync("qa/modaryx-v2-content-detail-contract.json","utf8"));
+if(d.schemaVersion!==1) throw new Error("unexpected schemaVersion");
+const fileStates=new Set(d["fileStates"]||[]);
+for(const x of ["available","locked","withdrawn","revoked","quarantined","archived"]) if(!fileStates.has(x)) throw new Error("missing fileStates "+x);
+const decisionSignals=new Set(d["decisionSignals"]||[]);
+for(const x of ["compatibility","gameVersion","requiredDependencies","majorConflict","distributionState","provenanceTrust"]) if(!decisionSignals.has(x)) throw new Error("missing decisionSignals "+x);
+const invariants=new Set(d["invariants"]||[]);
+for(const x of ["MANAGER_ACTION_HIDDEN_OR_DISABLED_WITHOUT_REAL_RUNTIME","REVOKED_OR_QUARANTINED_NEVER_DOWNLOADABLE","ABSENCE_OF_PERMISSION_TEXT_NEVER_EQUALS_PERMISSION","SHA256_NEVER_MEANS_SAFE"]) if(!invariants.has(x)) throw new Error("missing invariants "+x);
+for(const [k,v] of Object.entries(d.productionStatus||{})) if(!["NOT_IMPLEMENTED","NOT_PROVEN","NOT_MEASURED","NOT_DEPLOYED","NOT_EXECUTED"].includes(v)) throw new Error("production status drift "+k+"="+v);
+console.log("CONTENT_DETAIL_INVARIANT_COUNT",(d.invariants||[]).length);
+console.log("PASS_V2_CONTENT_DETAIL_CONTRACT");

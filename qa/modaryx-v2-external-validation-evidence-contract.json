@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "source": "docs/MODARYX-V2-EXTERNAL-VALIDATION-EVIDENCE-CONTRACT-20261004.md",
+  "sessionTypes": [
+    "HUMAN_MULTISCREEN",
+    "HUMAN_MOBILE",
+    "NVDA_REAL",
+    "VOICEOVER_REAL",
+    "TALKBACK_REAL",
+    "SAFARI_REAL",
+    "PHYSICAL_DEVICE",
+    "VISUAL_REFERENCE_COMPARISON"
+  ],
+  "requiredEvidenceFields": [
+    "evidenceId",
+    "sessionType",
+    "date",
+    "commitSha",
+    "actorOpaqueId",
+    "environment",
+    "tasks",
+    "findings",
+    "result",
+    "artifactRefs",
+    "reviewer"
+  ],
+  "resultStates": [
+    "PASS_WITH_NO_BLOCKER",
+    "PASS_WITH_P2_P3",
+    "FAIL_P0_P1",
+    "INCOMPLETE"
+  ],
+  "findingSeverities": [
+    "P0",
+    "P1",
+    "P2",
+    "P3"
+  ],
+  "findingStates": [
+    "OPEN",
+    "FIXED",
+    "ACCEPTED_P2_P3",
+    "NOT_REPRODUCIBLE"
+  ],
+  "blockerClosureRequirements": [
+    "matching_evidence_type",
+    "real_required_environment",
+    "commit_bound",
+    "tasks_executed",
+    "findings_archived",
+    "no_open_p0_p1",
+    "reviewer_recorded",
+    "artifact_refs_non_empty"
+  ],
+  "invariants": [
+    "AUTOMATION_NEVER_EQUALS_HUMAN_EVIDENCE",
+    "EMULATION_NEVER_EQUALS_PHYSICAL_DEVICE",
+    "CDP_AX_TREE_NEVER_EQUALS_REAL_SCREEN_READER",
+    "NON_SAFARI_NEVER_EQUALS_SAFARI_REAL",
+    "NO_ARCHIVABLE_REFERENCE_NEVER_EQUALS_VISUAL_FIDELITY_PASS",
+    "P0_P1_OPEN_NEVER_EQUALS_GATE_CLOSED",
+    "INCOMPLETE_NEVER_EQUALS_PASS",
+    "EVIDENCE_MUST_BIND_TO_COMMIT",
+    "EVIDENCE_MUST_HAVE_ARTIFACT_REFS",
+    "NO_UNNECESSARY_PERSONAL_DATA"
+  ],
+  "currentStatus": {
+    "humanMultiscreen": "NOT_PROVEN",
+    "humanMobile": "NOT_PROVEN",
+    "nvda": "NOT_PROVEN",
+    "voiceover": "NOT_PROVEN",
+    "talkback": "NOT_PROVEN",
+    "safari": "NOT_PROVEN",
+    "physicalDevice": "NOT_PROVEN",
+    "visualReferenceComparison": "NOT_PROVEN"
+  }
+}

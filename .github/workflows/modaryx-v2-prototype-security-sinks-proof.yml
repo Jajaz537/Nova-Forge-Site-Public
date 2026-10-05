@@ -1,0 +1,34 @@
+name: MODARYX V2 Prototype Security Sinks Micro-Proof
+
+on:
+  push:
+    branches:
+      - 'audit/modaryx-v2-legacy-boundary-20261003'
+    paths:
+      - '.github/workflows/modaryx-v2-prototype-security-sinks-proof.yml'
+      - 'qa/check-v2-prototype-security-sinks.mjs'
+      - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx'
+      - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/styles.css'
+      - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/index.html'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  security-sinks:
+    name: Validate isolated prototype security sinks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate prototype security sinks
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-prototype-security-sinks.mjs

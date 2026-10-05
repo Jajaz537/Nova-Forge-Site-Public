@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-COMMUNITY-LIBRARY-NAV-CONTRACT-20261003.md",
+  "communitySections": [
+    "Support",
+    "Questions",
+    "Discussions",
+    "Studios / équipes",
+    "Activité"
+  ],
+  "libraryObjects": [
+    "Favoris",
+    "Suivis",
+    "Collections",
+    "Modpacks",
+    "Profils de jeu",
+    "Recherches sauvegardées"
+  ],
+  "primaryNav": [
+    "Découvrir",
+    "Jeux",
+    "Mods & contenus",
+    "Collections",
+    "Créateurs",
+    "Communauté",
+    "Créer"
+  ],
+  "utilities": [
+    "Recherche",
+    "Bibliothèque",
+    "Notifications",
+    "Compte"
+  ],
+  "syncStates": [
+    "local-only",
+    "sync-pending",
+    "synced",
+    "conflict",
+    "unavailable"
+  ],
+  "invariants": [
+    "ADVANCED_COMMUNITY_ACTIONS_REQUIRE_SERVER_AUTHORITY",
+    "COMMUNITY_NEVER_BECOMES_GENERIC_SOCIAL_NETWORK",
+    "PERSONAL_LIBRARY_PRIVATE_BY_DEFAULT",
+    "SHARING_EXPLICIT",
+    "NO_MANAGER_CONNECTION_MEANS_NO_LOCAL_INSTALL_STATE_CLAIM",
+    "LORE_NEVER_REPLACES_FUNCTIONAL_LABELS",
+    "SEARCH_SCOPE_EXPLICIT_AND_REVERSIBLE",
+    "NO_NOTIFICATION_WITHOUT_REAL_EVENT",
+    "OFFLINE_NEVER_SIMULATES_REMOTE_SEND",
+    "MOBILE_SEARCH_IMMEDIATELY_ACCESSIBLE"
+  ],
+  "productionStatus": {
+    "communityBackend": "NOT_IMPLEMENTED",
+    "librarySync": "NOT_IMPLEMENTED",
+    "notifications": "NOT_IMPLEMENTED",
+    "managerState": "NOT_IMPLEMENTED"
+  }
+}

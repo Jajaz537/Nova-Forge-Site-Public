@@ -1,0 +1,14 @@
+import fs from "node:fs";
+const d=JSON.parse(fs.readFileSync("qa/modaryx-v2-frontend-isolation-contract.json","utf8"));
+if(d.schemaVersion!==1) throw new Error("unexpected schemaVersion");
+if(d.v2StoragePrefix!=="modaryx:v2:") throw new Error("wrong V2 storage prefix");
+const build=new Set(d.buildRules||[]);
+for(const x of ["V2_ENTRYPOINT_ISOLATED","NO_V1_TEMPLATE_GENERATION","NO_LEGACY_CSS_IMPORT","NO_LEGACY_DOM_RENDERER_IMPORT","NO_LEGACY_VISUAL_ASSET_AUTO_IMPORT","SCHEMA_VALIDATION_REQUIRED","ROUTE_TESTS_REQUIRED","ANTI_CONTAMINATION_REQUIRED"]) if(!build.has(x)) throw new Error("missing build rule "+x);
+const sw=new Set(d.serviceWorkerRules||[]);
+for(const x of ["DISTINCT_V2_CACHE_NAMESPACE","NO_LEGACY_PRECACHE","FAIL_CLOSED_FOR_DISTRIBUTION_DOWNLOAD","NO_PRODUCTION_CONTROL_BEFORE_VALIDATION"]) if(!sw.has(x)) throw new Error("missing SW rule "+x);
+const inv=new Set(d.invariants||[]);
+for(const x of ["NOTHING_LEGACY_ENTERS_V2_WITHOUT_EXPLICIT_AUDITED_IMPORT","NO_LEGACY_CSS_LOADED","NO_LEGACY_DOM_SCRIPT_LOADED","NO_LEGACY_SW_CONTROLS_V2_PREVIEW","NO_LEGACY_REDIRECT_INTERCEPTS_V2_ROUTE","NO_NOVA_VISUAL_ASSET_BY_ACCIDENT","V2_STORAGE_SEPARATE","LEGACY_DATA_MIGRATED_ONLY_EXPLICITLY","LEGACY_NOT_DELETED_IN_FIRST_CUTOVER_CHANGE"]) if(!inv.has(x)) throw new Error("missing invariant "+x);
+for(const [k,v] of Object.entries(d.productionStatus||{})) if(!["NOT_CREATED","NOT_IMPLEMENTED","NOT_EXECUTED"].includes(v)) throw new Error("production status drift "+k+"="+v);
+console.log("FRONTEND_ISOLATION_BUILD_RULE_COUNT",build.size);
+console.log("FRONTEND_ISOLATION_INVARIANT_COUNT",inv.size);
+console.log("PASS_V2_FRONTEND_ISOLATION_CONTRACT");

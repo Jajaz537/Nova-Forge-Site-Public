@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "BLOCKED",
+  "source": "docs/MODARYX-V2-HIGH-FI-GATE-20261003.md",
+  "blockers": [
+    "human-multiscreen-additional",
+    "human-mobile-real",
+    "approved-visual-reference-archivable",
+    "normalized-source-implementation-comparison",
+    "nvda-real",
+    "voiceover-real",
+    "talkback-real",
+    "safari-real",
+    "physical-devices"
+  ],
+  "prototypeProofs": [
+    "living-threshold-browser-a11y-targeted",
+    "product-flows",
+    "multiscreen-capture",
+    "responsive-browser-matrix",
+    "route-focus-skip",
+    "text-spacing",
+    "forced-colors",
+    "rights-dashboard",
+    "moderation-appeals",
+    "help-docs",
+    "modaryx-ai-preview"
+  ],
+  "invariants": [
+    "PROTOTYPE_PASS_NEVER_EQUALS_HIGH_FI_FINAL",
+    "AUTOMATED_A11Y_NEVER_EQUALS_REAL_SCREEN_READER",
+    "BROWSER_EMULATION_NEVER_EQUALS_PHYSICAL_DEVICE",
+    "NO_APPROVED_VISUAL_REFERENCE_MEANS_NO_NORMALIZED_FIDELITY_PASS",
+    "HUMAN_VALIDATION_CANNOT_BE_REPLACED_BY_AI_SIMULATION",
+    "ROOT_FRONTEND_REQUIRES_CONTROLLED_GATE_DECISION",
+    "PRODUCTION_REMAINS_UNTOUCHED_WHILE_GATE_BLOCKED"
+  ],
+  "statusFields": {
+    "highFiFinal": "BLOCKED",
+    "rootFrontendProduction": "BLOCKED",
+    "humanValidation": "NOT_PROVEN",
+    "deviceValidation": "NOT_PROVEN",
+    "visualReference": "NOT_PROVEN"
+  }
+}

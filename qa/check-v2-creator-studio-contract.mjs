@@ -1,0 +1,12 @@
+import fs from "node:fs";
+const d=JSON.parse(fs.readFileSync("qa/modaryx-v2-creator-studio-contract.json","utf8"));
+if(d.schemaVersion!==1) throw new Error("unexpected schemaVersion");
+const nav=new Set(d["nav"]||[]);
+for(const x of ["Dashboard","Projects","Releases","Upload","Analytics","Support","Reports","Team","Settings"]) if(!nav.has(x)) throw new Error("missing nav "+x);
+const publicationStates=new Set(d["publicationStates"]||[]);
+for(const x of ["draft","submitted","held-for-review","accepted","published","withdrawn","rejected","appealed"]) if(!publicationStates.has(x)) throw new Error("missing publicationStates "+x);
+const invariants=new Set(d["invariants"]||[]);
+for(const x of ["PROJECT_CREATION_NEVER_AUTO_CREATES_RELEASE","NO_FAKE_COUNTERS","UPLOAD_ERROR_NEVER_DELETES_DRAFT","PUBLICATION_AND_MODERATION_ARE_DISTINCT","ANALYTICS_ONLY_IF_REAL"]) if(!invariants.has(x)) throw new Error("missing invariants "+x);
+for(const [k,v] of Object.entries(d.productionStatus||{})) if(!["NOT_IMPLEMENTED","NOT_PROVEN","NOT_MEASURED","NOT_DEPLOYED","NOT_EXECUTED"].includes(v)) throw new Error("production status drift "+k+"="+v);
+console.log("CREATOR_STUDIO_INVARIANT_COUNT",(d.invariants||[]).length);
+console.log("PASS_V2_CREATOR_STUDIO_CONTRACT");

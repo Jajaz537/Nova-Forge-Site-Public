@@ -1,0 +1,158 @@
+name: MODARYX V2 Living Threshold Visual Proof
+
+on:
+  push:
+    branches:
+      - 'audit/modaryx-v2-legacy-boundary-20261003'
+    paths:
+      - '.github/workflows/modaryx-v2-living-threshold-visual-proof.yml'
+      - 'qa/check-v2-living-threshold-static-a11y.mjs'
+      - 'qa/check-v2-living-threshold-browser-a11y.mjs'
+      - 'qa/capture-v2-living-threshold-multiscreen.mjs'
+      - 'qa/check-v2-multiscreen-capture-integrity.mjs'
+      - 'qa/check-v2-living-threshold-product-flows.mjs'
+      - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-living-threshold-visual-proof-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  visual-proof:
+    name: Archive desktop and mobile prototype renders
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Run static accessibility/design-contract micro-check
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-living-threshold-static-a11y.mjs
+
+      - name: Build isolated prototype
+        shell: bash
+        working-directory: review-evidence/modaryx-v2-living-threshold-prototype-20261003
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+
+      - name: Start isolated preview
+        shell: bash
+        working-directory: review-evidence/modaryx-v2-living-threshold-prototype-20261003
+        run: |
+          set -euo pipefail
+          npm run preview -- --host 127.0.0.1 --port 4174 >/tmp/modaryx-living-threshold.log 2>&1 &
+          echo $! >/tmp/modaryx-living-threshold.pid
+          for attempt in {1..60}; do
+            if curl --fail --silent --show-error http://127.0.0.1:4174/ >/dev/null; then
+              exit 0
+            fi
+            sleep 0.25
+          done
+          cat /tmp/modaryx-living-threshold.log
+          exit 1
+
+      - name: Run rendered keyboard/touch accessibility proof
+        shell: bash
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4174
+        run: |
+          set -euo pipefail
+          node qa/check-v2-living-threshold-browser-a11y.mjs
+
+      - name: Run product flow micro-proof
+        shell: bash
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4174
+        run: |
+          set -euo pipefail
+          node qa/check-v2-living-threshold-product-flows.mjs
+
+      - name: Capture multi-screen review evidence
+        shell: bash
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4174
+        run: |
+          set -euo pipefail
+          node qa/capture-v2-living-threshold-multiscreen.mjs
+
+      - name: Validate multiscreen capture integrity
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-multiscreen-capture-integrity.mjs
+
+      - name: Capture exact browser renders
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof"
+          mkdir -p "$OUT"
+          "$CHROME_BIN" --headless=new --no-sandbox --disable-gpu --hide-scrollbars \
+            --force-device-scale-factor=1 --window-size=1440,1024 --virtual-time-budget=3000 \
+            --screenshot="$OUT/game-hub-desktop-1440x1024.png" http://127.0.0.1:4174/
+          "$CHROME_BIN" --headless=new --no-sandbox --disable-gpu --hide-scrollbars \
+            --force-device-scale-factor=1 --window-size=390,844 --virtual-time-budget=3000 \
+            --screenshot="$OUT/game-hub-mobile-390x844.png" http://127.0.0.1:4174/
+          test -s "$OUT/game-hub-desktop-1440x1024.png"
+          test -s "$OUT/game-hub-mobile-390x844.png"
+
+      - name: Write reproducible proof manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json, struct, os
+          root=Path("review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof")
+          files=[]
+          for p in sorted(root.glob("*.png")):
+              data=p.read_bytes()
+              if data[:8] != b"\x89PNG\r\n\x1a\n":
+                  raise SystemExit(f"not png: {p}")
+              w,h=struct.unpack(">II",data[16:24])
+              files.append({"file":p.name,"width":w,"height":h,"sha256":hashlib.sha256(data).hexdigest()})
+          expected={"game-hub-desktop-1440x1024.png":(1440,1024),"game-hub-mobile-390x844.png":(390,844)}
+          for item in files:
+              if (item["width"],item["height"]) != expected[item["file"]]:
+                  raise SystemExit(f"dimension mismatch: {item}")
+          manifest={"commit":os.environ["GITHUB_SHA"],"prototype":"Living Threshold 2+3","files":files}
+          (root/"manifest.json").write_text(json.dumps(manifest,indent=2)+"\n",encoding="utf-8")
+          print(json.dumps(manifest))
+          PY
+
+      - name: Upload visual proof
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: modaryx-v2-living-threshold-visual-proof
+          path: review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Stop isolated preview
+        if: always()
+        shell: bash
+        run: |
+          if test -f /tmp/modaryx-living-threshold.pid; then
+            kill "$(cat /tmp/modaryx-living-threshold.pid)" 2>/dev/null || true
+          fi

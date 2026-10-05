@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-SCHEMA-PLAN-20261003.md",
+  "schemaFamilies": [
+    "game",
+    "content-type",
+    "content-item",
+    "release",
+    "dependency",
+    "compatibility-claim",
+    "file-artifact",
+    "collection-v2",
+    "modpack",
+    "profile-loadout",
+    "creator",
+    "team",
+    "search-document"
+  ],
+  "gameSupportStates": [
+    "editorial-only",
+    "catalog-enabled",
+    "distribution-enabled",
+    "deprecated"
+  ],
+  "releaseStates": [
+    "draft",
+    "submitted",
+    "published",
+    "withdrawn",
+    "revoked",
+    "archived"
+  ],
+  "dependencyRelations": [
+    "required",
+    "optional",
+    "recommended",
+    "incompatible",
+    "replaces"
+  ],
+  "compatibilityStates": [
+    "compatible",
+    "partial",
+    "incompatible",
+    "unknown"
+  ],
+  "evidenceTypes": [
+    "measured",
+    "declared",
+    "estimated",
+    "unknown"
+  ],
+  "searchEntityTypes": [
+    "game",
+    "content",
+    "release",
+    "creator",
+    "team",
+    "collection",
+    "modpack"
+  ],
+  "invariants": [
+    "SCHEMAS_VERSIONED_NEVER_OVERWRITE_V1",
+    "CONTENT_ITEM_STABLE_RELEASE_VERSIONED",
+    "COLLECTION_MODPACK_PROFILE_SEPARATE",
+    "REPLACES_NEVER_SILENTLY_SUBSTITUTES",
+    "COMPATIBLE_VISUAL_NEVER_FROM_UNKNOWN_CLAIM",
+    "WITHDRAWN_REVOKED_DISTRIBUTION_FAILS_CLOSED",
+    "PROFILE_DEFAULT_LOCAL_ONLY_PRIVATE_LOCAL",
+    "CREATOR_PUBLIC_SCHEMA_NEVER_CONTAINS_ADMIN_AUTHORITY",
+    "SEARCH_EXTERNAL_NEVER_BECOMES_IDENTITY_SOURCE",
+    "NO_NEW_NOVA_FORGE_SCHEMA_IDS",
+    "ADDITIONAL_PROPERTIES_FALSE_FOR_ADOPTED_STRICT_SCHEMAS"
+  ],
+  "productionStatus": {
+    "schemaFilesV2": "NOT_CREATED",
+    "schemaMigration": "NOT_IMPLEMENTED",
+    "realValidationPipeline": "NOT_IMPLEMENTED"
+  }
+}

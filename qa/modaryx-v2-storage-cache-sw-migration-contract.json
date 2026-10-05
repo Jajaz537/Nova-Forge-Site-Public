@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-STORAGE-CACHE-SW-MIGRATION-20261003.md",
+  "v2NamespacePrefix": "modaryx:v2:",
+  "v2Keys": [
+    "modaryx:v2:favorites",
+    "modaryx:v2:saved-searches",
+    "modaryx:v2:creator-draft",
+    "modaryx:v2:collection-drafts",
+    "modaryx:v2:community-draft",
+    "modaryx:v2:preferences"
+  ],
+  "migrationOrder": [
+    "DETECT_LEGACY_FORMAT",
+    "PARSE_FAIL_SAFE",
+    "STRICT_VALIDATE",
+    "TRANSFORM_TO_V2",
+    "WRITE_V2_KEY",
+    "WRITE_MIGRATION_MARKER",
+    "PRESERVE_LEGACY_KEY_UNTIL_PROVEN"
+  ],
+  "storageRules": [
+    "NO_NEW_V2_KEY_USES_NOVA_FORGE_PREFIX",
+    "NO_REMAP_WITHOUT_PROOF",
+    "UNMAPPABLE_FILTERS_EXPLICITLY_PARTIAL",
+    "NO_AUTOMATIC_PUBLICATION_OR_RELEASE_RECEIPT",
+    "NO_AUTOMATIC_MODPACK_FROM_COLLECTION",
+    "LOCAL_DRAFT_NEVER_AUTO_SUBMITTED",
+    "NO_SECRET_IN_LOCAL_STORAGE",
+    "FIRST_MIGRATION_PASS_NON_DESTRUCTIVE"
+  ],
+  "serviceWorkerRules": [
+    "PREVIEW_DOES_NOT_TAKE_PRODUCTION_CONTROL",
+    "DISTINCT_V2_CACHE_NAME",
+    "VERIFY_FRESH_INSTALL",
+    "VERIFY_LEGACY_SW_UPGRADE",
+    "DELETE_ONLY_EXPLICIT_LEGACY_CACHES",
+    "PRESERVE_UNKNOWN_CACHES",
+    "CLIENTS_CLAIM_ONLY_AFTER_CUTOVER_VALIDATION",
+    "TEST_RELOAD_OFFLINE_NAVIGATION_ROLLBACK"
+  ],
+  "cacheRules": [
+    "NO_GLOBAL_CACHE_DELETE",
+    "EVERY_CACHE_HAS_NAME",
+    "EVERY_CACHE_HAS_VERSION",
+    "EVERY_CACHE_HAS_OWNER",
+    "EVERY_CACHE_HAS_EXPECTED_CONTENT",
+    "EVERY_CACHE_HAS_PURGE_POLICY",
+    "NO_GLOBAL_CDN_PURGE_WITHOUT_DIAGNOSIS"
+  ],
+  "pwaRules": [
+    "V1_MANIFEST_NOT_SERVED_AS_V2",
+    "V2_MANIFEST_USES_MODARYX_NAME",
+    "V2_START_URL_AND_SCOPE_EXPLICIT",
+    "SHORTCUTS_ONLY_IF_IMPLEMENTED"
+  ],
+  "requiredTests": [
+    "FRESH_BROWSER",
+    "LEGACY_BROWSER",
+    "OFFLINE",
+    "INTERRUPTED_UPGRADE",
+    "ROLLBACK"
+  ],
+  "invariants": [
+    "MIGRATION_IS_MONOTONE_AND_NON_DESTRUCTIVE_FIRST_PASS",
+    "UNKNOWN_LEGACY_DATA_IS_PRESERVED_OR_EXPLICITLY_UNMAPPED",
+    "V1_SW_MUST_NOT_SERVE_V1_CSS_JS_ON_V2",
+    "OFFLINE_DISTRIBUTION_FAILS_CLOSED_WHEN_REQUIRED_PROOF_IS_STALE",
+    "ROLLBACK_MUST_BE_DEMONSTRATED",
+    "NO_USER_DATA_LOSS_IN_MICRO_TESTS"
+  ],
+  "productionStatus": {
+    "localStorageMigration": "NOT_EXECUTED",
+    "serviceWorkerMigration": "NOT_EXECUTED",
+    "cacheStorageMigration": "NOT_EXECUTED",
+    "pwaManifestV2": "NOT_DEPLOYED",
+    "rollback": "NOT_PROVEN"
+  }
+}

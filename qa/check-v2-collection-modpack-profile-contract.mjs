@@ -1,0 +1,14 @@
+import fs from "node:fs";
+const d=JSON.parse(fs.readFileSync("qa/modaryx-v2-collection-modpack-profile-contract.json","utf8"));
+if(d.schemaVersion!==1) throw new Error("unexpected schemaVersion");
+const objects=new Set(d["objects"]||[]);
+for(const x of ["Collection","Modpack","Profile"]) if(!objects.has(x)) throw new Error("missing objects "+x);
+const dependencyRelations=new Set(d["dependencyRelations"]||[]);
+for(const x of ["required","optional","recommended","incompatible","replaces"]) if(!dependencyRelations.has(x)) throw new Error("missing dependencyRelations "+x);
+const removedStates=new Set(d["removedStates"]||[]);
+for(const x of ["withdrawn","revoked","deleted","unavailable"]) if(!removedStates.has(x)) throw new Error("missing removedStates "+x);
+const invariants=new Set(d["invariants"]||[]);
+for(const x of ["COLLECTION_MODPACK_PROFILE_ARE_DISTINCT_OBJECTS","COLLECTION_TO_MODPACK_NEVER_AUTOMATIC","NO_SILENT_DEPENDENCY_SUBSTITUTION","PROFILE_PRIVATE_LOCAL_BY_DEFAULT"]) if(!invariants.has(x)) throw new Error("missing invariants "+x);
+for(const [k,v] of Object.entries(d.productionStatus||{})) if(!["NOT_IMPLEMENTED","NOT_PROVEN","NOT_MEASURED","NOT_DEPLOYED","NOT_EXECUTED"].includes(v)) throw new Error("production status drift "+k+"="+v);
+console.log("COLLECTION_MODPACK_PROFILE_INVARIANT_COUNT",(d.invariants||[]).length);
+console.log("PASS_V2_COLLECTION_MODPACK_PROFILE_CONTRACT");

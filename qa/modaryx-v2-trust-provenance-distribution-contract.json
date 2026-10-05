@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-TRUST-PROVENANCE-DISTRIBUTION-CONTRACT-20261003.md",
+  "provenanceStates": [
+    "verified",
+    "declared-unattested",
+    "unknown"
+  ],
+  "scanStates": [
+    "not-scanned",
+    "scanning",
+    "passed",
+    "warning",
+    "quarantined",
+    "unavailable"
+  ],
+  "distributionStates": [
+    "locked",
+    "published",
+    "withdrawn",
+    "revoked"
+  ],
+  "trustSignals": [
+    "provenance",
+    "author",
+    "license",
+    "hash",
+    "scan",
+    "signature",
+    "distribution"
+  ],
+  "hashClaimsAllowed": [
+    "BYTE_IDENTITY",
+    "EXPECTED_DIGEST_MATCH"
+  ],
+  "hashClaimsForbidden": [
+    "SAFE",
+    "MALWARE_FREE",
+    "QUALITY",
+    "COMPATIBILITY"
+  ],
+  "signatureClaimsAllowed": [
+    "CRYPTOGRAPHIC_RELATION_TO_KEY_OR_IDENTITY"
+  ],
+  "signatureClaimsForbidden": [
+    "SAFE",
+    "MALWARE_FREE",
+    "QUALITY"
+  ],
+  "warnings": [
+    "INCOMPATIBLE",
+    "MISSING_DEPENDENCY",
+    "PROVENANCE_UNKNOWN",
+    "DISTRIBUTION_LOCKED",
+    "REVOKED",
+    "SCAN_WARNING",
+    "QUARANTINED"
+  ],
+  "invariants": [
+    "VERIFIED_PROVENANCE_REQUIRES_RECEIPT",
+    "VERIFIED_PROVENANCE_HAS_VERIFICATION_DATE",
+    "NO_SAFE_LABEL_WITHOUT_REAL_POLICY_AND_EVIDENCE",
+    "CREATOR_BADGE_NEVER_GRANTS_ADMIN_AUTHORITY",
+    "ABSENCE_OF_LICENSE_NEVER_EQUALS_PERMISSION",
+    "WITHDRAWN_OR_REVOKED_NOT_DOWNLOADABLE",
+    "STALE_REQUIRED_PROOF_FAILS_CLOSED",
+    "REQUIRED_HASH_OR_PROVENANCE_MISSING_BLOCKS_ACTION",
+    "WARNINGS_PRECEDE_INSTALL_ACTION",
+    "OFFLINE_NEVER_SIMULATES_SENSITIVE_ACTION",
+    "STATUS_NEVER_COLOR_ONLY"
+  ],
+  "productionStatus": {
+    "provenanceReceipts": "NOT_IMPLEMENTED",
+    "signerTrustAnchor": "NOT_IMPLEMENTED",
+    "scanPipeline": "NOT_IMPLEMENTED",
+    "distributionBackend": "NOT_IMPLEMENTED",
+    "auditTrail": "NOT_IMPLEMENTED"
+  }
+}

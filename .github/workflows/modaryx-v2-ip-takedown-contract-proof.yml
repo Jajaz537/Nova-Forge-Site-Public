@@ -1,0 +1,34 @@
+name: MODARYX V2 IP Takedown Contract Proof
+
+on:
+  push:
+    branches:
+      - 'audit/modaryx-v2-legacy-boundary-20261003'
+    paths:
+      - '.github/workflows/modaryx-v2-ip-takedown-contract-proof.yml'
+      - 'qa/modaryx-v2-ip-takedown-contract.json'
+      - 'qa/check-v2-ip-takedown-contract.mjs'
+      - 'docs/MODARYX-V2-IP-TAKEDOWN-WORKFLOW-20261004.md'
+      - 'docs/MODARYX-V2-GAME-ATMOSPHERE-IP-POLICY-20261004.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  takedown:
+    name: Validate IP takedown invariants
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate IP takedown contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-ip-takedown-contract.mjs

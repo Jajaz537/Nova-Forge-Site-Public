@@ -1,0 +1,12 @@
+import fs from "node:fs";
+const d=JSON.parse(fs.readFileSync("qa/modaryx-v2-critical-flows-contract.json","utf8"));
+if(d.schemaVersion!==1) throw new Error("unexpected schemaVersion");
+const flows=new Set(d["flows"]||[]);
+for(const x of ["DISCOVERY_TO_INSTALL","CREATOR_TO_PUBLICATION","COLLECTION_TO_STABLE_PROFILE"]) if(!flows.has(x)) throw new Error("missing flows "+x);
+const mandatoryStates=new Set(d["mandatoryStates"]||[]);
+for(const x of ["loading","empty","no-results","error","retry","offline","stale","unavailable","forbidden","removed","quarantined","incompatible","unverified","success"]) if(!mandatoryStates.has(x)) throw new Error("missing mandatoryStates "+x);
+const invariants=new Set(d["invariants"]||[]);
+for(const x of ["COMPATIBILITY_VISIBLE_BEFORE_ACTION","UNVERIFIED_NEVER_PRESENTED_AS_COMPATIBLE","AUTOMATED_INSTALL_ONLY_WITH_REAL_MANAGER","VALIDATION_FAILURE_PRESERVES_DRAFT","COLLECTION_MODPACK_PROFILE_DISTINCT","WITHDRAWN_REVOKED_NEVER_REDISTRIBUTED"]) if(!invariants.has(x)) throw new Error("missing invariants "+x);
+for(const [k,v] of Object.entries(d.productionStatus||{})) if(!["NOT_IMPLEMENTED","NOT_PROVEN","NOT_MEASURED","NOT_DEPLOYED","NOT_EXECUTED"].includes(v)) throw new Error("production status drift "+k+"="+v);
+console.log("CRITICAL_FLOWS_INVARIANT_COUNT",(d.invariants||[]).length);
+console.log("PASS_V2_CRITICAL_FLOWS_CONTRACT");

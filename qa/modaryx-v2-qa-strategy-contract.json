@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_QA_STRATEGY",
+  "source": "docs/MODARYX-V2-QA-STRATEGY-20261003.md",
+  "qaCategories": [
+    "functional",
+    "visual",
+    "accessibility",
+    "performance",
+    "security-trust",
+    "responsive",
+    "data",
+    "migration",
+    "cache-pwa",
+    "anti-contamination"
+  ],
+  "responsiveTargets": [
+    "narrow-mobile",
+    "large-mobile",
+    "tablet-portrait",
+    "tablet-landscape",
+    "laptop",
+    "large-desktop",
+    "intermediate-widths"
+  ],
+  "browserTargets": [
+    "chromium",
+    "edge",
+    "firefox",
+    "safari",
+    "ios-safari",
+    "android-chromium"
+  ],
+  "requiredA11y": [
+    "automated-structure",
+    "keyboard",
+    "focus",
+    "modals-drawers",
+    "screen-reader-critical-flows",
+    "zoom",
+    "reduced-motion",
+    "target-size",
+    "orientation"
+  ],
+  "requiredPwaScenarios": [
+    "fresh-browser",
+    "first-v2-install",
+    "upgrade-from-legacy-sw",
+    "offline",
+    "stale-cache",
+    "asset-update",
+    "html-update",
+    "interrupted-sw-activation",
+    "rollback"
+  ],
+  "evidenceFields": [
+    "surface",
+    "viewport",
+    "environment",
+    "buildSha",
+    "result",
+    "evidence",
+    "blocking"
+  ],
+  "invariants": [
+    "QA_CATEGORIES_VALIDATE_SEPARATELY",
+    "NO_GLOBAL_REPLAY_AFTER_TARGETED_ERROR",
+    "ERROR_EXACT_THEN_ISOLATE_THEN_FIX_THEN_MICRO_PROOF",
+    "FULL_REPLAY_ONLY_AT_FINAL_CANDIDATE",
+    "NO_VISUAL_APPROXIMATION_EQUALS_VALIDATION",
+    "FIELD_CWV_ONLY_WHEN_REAL_STAGING_OR_PRODUCTION",
+    "EXTERNAL_SEARCH_FAILURE_NEVER_BREAKS_CORE_LOCAL_SEARCH",
+    "NO_V1_CSS_JS_REAPPEARS_IN_V2_PWA",
+    "STATUS_USES_TERMINÉ_EN_COURS_BLOQUÉ_PREUVE_MANQUANTE"
+  ],
+  "productionStatus": {
+    "fullV2Qa": "NOT_EXECUTED",
+    "realScreenReader": "NOT_PROVEN",
+    "safariIos": "NOT_PROVEN",
+    "fieldCwv": "NOT_PROVEN",
+    "pwaMigration": "NOT_EXECUTED"
+  }
+}

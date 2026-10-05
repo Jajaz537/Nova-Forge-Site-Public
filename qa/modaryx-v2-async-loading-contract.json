@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-ASYNC-LOADING-STATE-CONTRACT-20261004.md",
+  "states": [
+    "IDLE",
+    "LOADING_INITIAL",
+    "LOADING_INCREMENTAL",
+    "REFRESHING_STALE",
+    "SUCCESS",
+    "EMPTY",
+    "ERROR_RECOVERABLE",
+    "ERROR_BLOCKING",
+    "OFFLINE_STALE"
+  ],
+  "skeletonRules": {
+    "requireKnownShape": true,
+    "forbidForImmediateLocalData": true,
+    "preserveUsefulStaleDataOnRefresh": true,
+    "forbidFakeData": true,
+    "reducedMotionStatic": true
+  },
+  "accessibility": [
+    "ARIA_BUSY_ONLY_DURING_REAL_WORK",
+    "FOCUS_NOT_MOVED_TO_SKELETON",
+    "RECOVERABLE_ERROR_ANNOUNCED",
+    "NO_LIVE_REGION_SPAM",
+    "REDUCED_MOTION_NO_REQUIRED_SHIMMER"
+  ],
+  "invariants": [
+    "LOADING_NEVER_EQUALS_SUCCESS",
+    "EMPTY_NEVER_EQUALS_LOADING",
+    "REFRESH_PRESERVES_SAFE_VISIBLE_DATA",
+    "RIGHTS_LOADING_FAILS_CLOSED",
+    "NO_FAKE_PROGRESS_PERCENT",
+    "NO_FAKE_ETA",
+    "NO_FAKE_SYNC_SUCCESS",
+    "NO_FAKE_INSTALL_SUCCESS",
+    "NO_FAKE_SCAN_SUCCESS",
+    "NO_FAKE_PUBLISHER_RESPONSE"
+  ],
+  "productionStatus": {
+    "asyncBackend": "NOT_IMPLEMENTED",
+    "productionSkeletons": "NOT_IMPLEMENTED",
+    "latencyMeasurement": "NOT_MEASURED"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-INSTALL-MANAGER-CONTRACT-20261003.md",
+  "managerStates": [
+    "not-detected",
+    "available",
+    "connected",
+    "incompatible-version",
+    "permission-required",
+    "unavailable"
+  ],
+  "installPreflight": [
+    "game",
+    "gameVersion",
+    "loaderFramework",
+    "platform",
+    "release",
+    "dependencies",
+    "conflicts",
+    "spaceOrConditionsIfMeasurable",
+    "provenance",
+    "distribution"
+  ],
+  "actionModes": [
+    "INSTALL_WITH_MANAGER",
+    "MANUAL_DOWNLOAD",
+    "ADD_TO_COLLECTION",
+    "ADD_TO_PROFILE"
+  ],
+  "progressStages": [
+    "preparation",
+    "download",
+    "hash-verification",
+    "installation",
+    "configuration",
+    "completed"
+  ],
+  "updateTypes": [
+    "update-available",
+    "compatible-update",
+    "breaking-update",
+    "blocked-update"
+  ],
+  "invariants": [
+    "NEVER_SIMULATE_AUTOMATED_INSTALL_CAPABILITY",
+    "MANAGER_INSTALL_REQUIRES_REAL_MANAGER_CAPABILITY",
+    "MANUAL_DOWNLOAD_REQUIRES_PUBLISHED_AUTHORIZED_ARTIFACT",
+    "NO_PROFILE_SELECTED_SILENTLY",
+    "REQUIRED_DEPENDENCIES_CAN_BE_PROPOSED_BUT_REPLACEMENT_REQUIRES_CONFIRMATION",
+    "UNRESOLVED_CONFLICT_IS_BLOCKED_OR_REQUIRES_EXPLICIT_CHOICE",
+    "NO_ARBITRARY_PROGRESS_PERCENTAGE",
+    "FAILED_INSTALL_NEVER_MARKS_PROFILE_INSTALLED",
+    "UPDATE_NEVER_SILENTLY_CHANGES_GAME_VERSION_LOADER_DEPENDENCIES_OR_CONFIG",
+    "DEEPLINK_REQUIRES_EXPLICIT_USER_ACTION",
+    "NO_SECRET_IN_MANAGER_URL",
+    "NO_SILENT_INSTALL",
+    "NO_LOCAL_MOD_LIST_OR_FILE_PATH_COLLECTION_WITHOUT_CONSENT_AND_NECESSITY",
+    "MOBILE_NEVER_SHOWS_MANAGER_INSTALL_WHEN_MANAGER_UNAVAILABLE",
+    "PRE_ACTION_REQUIRES_DISTRIBUTION_PROVENANCE_HASH_RIGHTS_WARNINGS"
+  ],
+  "productionStatus": {
+    "managerDetection": "NOT_IMPLEMENTED",
+    "capabilityHandshake": "NOT_IMPLEMENTED",
+    "preflight": "NOT_IMPLEMENTED",
+    "install": "NOT_IMPLEMENTED",
+    "update": "NOT_IMPLEMENTED",
+    "rollback": "NOT_IMPLEMENTED",
+    "localHashVerification": "NOT_IMPLEMENTED"
+  }
+}

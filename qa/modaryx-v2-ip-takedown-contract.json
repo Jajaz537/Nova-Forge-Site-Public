@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "source": "docs/MODARYX-V2-IP-TAKEDOWN-WORKFLOW-20261004.md",
+  "states": [
+    "RECEIVED",
+    "IDENTITY_OR_AUTHORITY_CHECK",
+    "EVIDENCE_REVIEW",
+    "CONTENT_LOCATED",
+    "TEMP_RESTRICTED",
+    "NEEDS_MORE_INFO",
+    "LEGAL_REVIEW_REQUIRED",
+    "ACTIONED",
+    "REJECTED",
+    "RESTORED",
+    "APPEALED",
+    "CLOSED"
+  ],
+  "authorityStates": [
+    "AUTHORITY_UNVERIFIED",
+    "AUTHORITY_PARTIAL",
+    "AUTHORITY_VERIFIED"
+  ],
+  "decisions": [
+    "ACTION_REMOVE_OR_RESTRICT",
+    "ACTION_KEEP_RESTRICTED_PENDING_REVIEW",
+    "ACTION_RESTORE",
+    "ACTION_REJECT_REQUEST",
+    "ACTION_REQUEST_MORE_INFO",
+    "ACTION_ESCALATE_LEGAL"
+  ],
+  "requiredCaseFields": [
+    "IpCaseId",
+    "receivedAt",
+    "channel",
+    "claimType",
+    "claimant",
+    "contentRef",
+    "rightsType",
+    "explanation",
+    "evidenceRefs",
+    "status",
+    "history",
+    "reviewer",
+    "result"
+  ],
+  "restrictionEffects": [
+    "block_asset_public_reuse",
+    "block_marketing_reuse",
+    "remove_from_game_atmosphere",
+    "fallback_original_modaryx",
+    "preserve_evidence",
+    "prevent_automatic_reupload"
+  ],
+  "auditFields": [
+    "eventId",
+    "caseId",
+    "fromState",
+    "toState",
+    "actor",
+    "reason",
+    "timestamp",
+    "evidenceRefs",
+    "technicalAction",
+    "result"
+  ],
+  "invariants": [
+    "EVIDENCE_IS_PRESERVED",
+    "TEMP_RESTRICTION_IS_SCOPED",
+    "CONTESTED_ASSET_NEVER_AUTO_RESTORES",
+    "LEGAL_REVIEW_REQUIRED_NEVER_AUTO_CLOSES",
+    "UNKNOWN_RIGHTS_ASSET_NEVER_ACTIVATES",
+    "FALLBACK_MODARYX_REPLACES_CONTESTED_DECOR_WHEN_POSSIBLE",
+    "RESTORE_REQUIRES_AUTHORIZED_STATE_AND_EVIDENCE",
+    "DECISION_DOES_NOT_EXPAND_BEYOND_CASE_SCOPE",
+    "RIGHTS_CASE_LINK_PRESERVES_SCOPE_BOUNDARY",
+    "AUDIT_TRAIL_IS_APPEND_ONLY_LOGICALLY",
+    "PRIVATE_CONTACTS_AND_CLAUSES_ARE_NOT_PUBLIC",
+    "ANTI_REUPLOAD_DETECTION_IS_NOT_SOLE_LEGAL_EVIDENCE"
+  ],
+  "safeAutomation": [
+    "create_case",
+    "link_content",
+    "extract_metadata",
+    "calculate_hash",
+    "lookup_provenance",
+    "apply_preapproved_fallback",
+    "prepare_notification",
+    "schedule_review"
+  ],
+  "sensitiveAutomation": [
+    "broad_restriction",
+    "restore_asset",
+    "contractual_conclusion",
+    "legal_conclusion",
+    "account_sanction",
+    "permanent_delete"
+  ],
+  "productionStatus": {
+    "caseBackend": "NOT_IMPLEMENTED",
+    "publicForm": "NOT_IMPLEMENTED",
+    "ipMailbox": "NOT_IMPLEMENTED",
+    "cacheInvalidation": "NOT_IMPLEMENTED",
+    "antiReupload": "NOT_IMPLEMENTED",
+    "legalReviewWorkflow": "NOT_IMPLEMENTED"
+  }
+}

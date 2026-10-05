@@ -1,0 +1,100 @@
+name: MODARYX V2 Accessibility Structure Matrix Proof
+
+on:
+  push:
+    branches:
+      - 'audit/modaryx-v2-legacy-boundary-20261003'
+    paths:
+      - '.github/workflows/modaryx-v2-accessibility-structure-matrix-proof.yml'
+      - 'qa/check-v2-accessibility-structure-matrix.mjs'
+      - 'qa/check-v2-keyboard-reachability-matrix.mjs'
+      - 'qa/check-v2-mobile-touch-target-matrix.mjs'
+      - 'qa/check-v2-forced-colors-smoke.mjs'
+      - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx'
+      - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/styles.css'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  structure:
+    name: Validate accessibility structure matrix
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Build isolated prototype
+        shell: bash
+        working-directory: review-evidence/modaryx-v2-living-threshold-prototype-20261003
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+
+      - name: Start isolated preview
+        shell: bash
+        working-directory: review-evidence/modaryx-v2-living-threshold-prototype-20261003
+        run: |
+          set -euo pipefail
+          npm run preview -- --host 127.0.0.1 --port 4174 >/tmp/modaryx-a11y-structure.log 2>&1 &
+          echo $! >/tmp/modaryx-a11y-structure.pid
+          for attempt in {1..60}; do
+            if curl --fail --silent --show-error http://127.0.0.1:4174/ >/dev/null; then exit 0; fi
+            sleep 0.25
+          done
+          cat /tmp/modaryx-a11y-structure.log
+          exit 1
+
+      - name: Validate accessibility structure matrix
+        shell: bash
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4174
+        run: |
+          set -euo pipefail
+          node qa/check-v2-accessibility-structure-matrix.mjs
+
+      - name: Validate keyboard reachability matrix
+        shell: bash
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4174
+        run: |
+          set -euo pipefail
+          node qa/check-v2-keyboard-reachability-matrix.mjs
+
+      - name: Validate mobile touch target matrix
+        shell: bash
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4174
+        run: |
+          set -euo pipefail
+          node qa/check-v2-mobile-touch-target-matrix.mjs
+
+      - name: Validate forced colors smoke
+        shell: bash
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4174
+        run: |
+          set -euo pipefail
+          node qa/check-v2-forced-colors-smoke.mjs
+
+      - name: Stop isolated preview
+        if: always()
+        shell: bash
+        run: |
+          if test -f /tmp/modaryx-a11y-structure.pid; then
+            kill "$(cat /tmp/modaryx-a11y-structure.pid)" 2>/dev/null || true
+          fi

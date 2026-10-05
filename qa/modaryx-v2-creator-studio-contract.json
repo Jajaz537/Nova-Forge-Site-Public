@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-CREATOR-STUDIO-CONTRACT-20261003.md",
+  "nav": [
+    "Dashboard",
+    "Projects",
+    "Releases",
+    "Upload",
+    "Analytics",
+    "Support",
+    "Reports",
+    "Team",
+    "Settings"
+  ],
+  "publicationStates": [
+    "draft",
+    "submitted",
+    "held-for-review",
+    "accepted",
+    "published",
+    "withdrawn",
+    "rejected",
+    "appealed"
+  ],
+  "requiredStates": [
+    "empty-dashboard",
+    "local-only",
+    "session-expired",
+    "backend-unavailable",
+    "anti-abuse-unavailable",
+    "upload-failed",
+    "validation-failed",
+    "held-for-review",
+    "rejected",
+    "published",
+    "withdrawn",
+    "revoked"
+  ],
+  "invariants": [
+    "PROJECT_CREATION_NEVER_AUTO_CREATES_RELEASE",
+    "NO_FAKE_COUNTERS",
+    "DEPENDENCIES_AND_CONFLICTS_USE_STRUCTURED_FIELDS",
+    "UPLOAD_ERROR_NEVER_DELETES_DRAFT",
+    "PREVIEW_IS_MARKED_DRAFT_AND_UNPUBLISHED",
+    "PUBLICATION_AND_MODERATION_ARE_DISTINCT",
+    "LOCAL_DRAFT_SURVIVES_NETWORK_AND_VALIDATION_FAILURES",
+    "TEAM_ROLE_NEVER_GRANTS_MODARYX_ADMIN_AUTHORITY",
+    "ANALYTICS_ONLY_IF_REAL",
+    "NO_PRIVATE_KEY_REQUESTED",
+    "SERVER_AUTHORITY_REQUIRED_FOR_PRIVILEGED_ACTIONS"
+  ],
+  "productionStatus": {
+    "creatorBackend": "NOT_IMPLEMENTED",
+    "uploadBackend": "NOT_IMPLEMENTED",
+    "teamAuthority": "NOT_IMPLEMENTED",
+    "analytics": "NOT_IMPLEMENTED",
+    "moderation": "NOT_IMPLEMENTED"
+  }
+}

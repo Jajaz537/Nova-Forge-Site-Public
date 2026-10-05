@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-CSP-HEADERS-RICH-TEXT-POLICY-20261003.md",
+  "previewMode": "REPORT_ONLY_BEFORE_ENFORCEMENT",
+  "directives": {
+    "default-src": [
+      "'self'"
+    ],
+    "base-uri": [
+      "'self'"
+    ],
+    "object-src": [
+      "'none'"
+    ],
+    "script-src": [
+      "'self'"
+    ],
+    "style-src": [
+      "'self'"
+    ],
+    "img-src": [
+      "'self'",
+      "data:"
+    ],
+    "font-src": [
+      "'self'"
+    ],
+    "connect-src": [
+      "'self'"
+    ],
+    "media-src": [
+      "'self'"
+    ],
+    "frame-src": [
+      "'none'"
+    ],
+    "worker-src": [
+      "'self'"
+    ],
+    "manifest-src": [
+      "'self'"
+    ],
+    "form-action": [
+      "'self'"
+    ]
+  },
+  "frameAncestorsAllowedValues": [
+    "'self'",
+    "'none'"
+  ],
+  "forbiddenGlobalTokens": [
+    "'unsafe-inline'",
+    "'unsafe-eval'"
+  ],
+  "requiredHeaders": [
+    "Content-Security-Policy",
+    "X-Content-Type-Options",
+    "Referrer-Policy",
+    "Strict-Transport-Security",
+    "Permissions-Policy"
+  ],
+  "richText": {
+    "defaultMode": "PLAIN_TEXT",
+    "pipeline": [
+      "parse",
+      "sanitize_allowlist",
+      "render"
+    ],
+    "forbiddenElements": [
+      "script",
+      "style",
+      "iframe",
+      "object",
+      "embed",
+      "form"
+    ],
+    "forbiddenUrlSchemes": [
+      "javascript:",
+      "data:arbitrary"
+    ],
+    "externalLinkProtocols": [
+      "http:",
+      "https:"
+    ],
+    "newTabRel": [
+      "noopener",
+      "noreferrer"
+    ]
+  },
+  "serviceWorker": {
+    "distinctV2FileRequired": true,
+    "explicitScopeRequired": true,
+    "importLegacyScriptsForbidden": true,
+    "cacheV1Forbidden": true
+  },
+  "preview": {
+    "noindexRequired": true,
+    "reportOnlyFirst": true,
+    "fakeReportEndpointForbidden": true
+  },
+  "productionStatus": {
+    "reportOnlyPreview": "NOT_IMPLEMENTED",
+    "enforcement": "NOT_IMPLEMENTED",
+    "headerDeployment": "NOT_IMPLEMENTED",
+    "reportEndpoint": "NOT_IMPLEMENTED"
+  },
+  "invariants": [
+    "NO_GLOBAL_UNSAFE_INLINE",
+    "NO_UNSAFE_EVAL",
+    "NO_ARBITRARY_REMOTE_ORIGINS",
+    "RICH_TEXT_SANITIZED_BEFORE_RENDER",
+    "USER_LINK_PROTOCOL_ALLOWLIST",
+    "NO_UNSANITIZED_USER_SVG",
+    "NO_FAKE_CSP_REPORT_ENDPOINT",
+    "PREVIEW_NOINDEX",
+    "SW_V2_ISOLATED_FROM_V1",
+    "COOP_COEP_CORP_ONLY_AFTER_COMPATIBILITY_REVIEW"
+  ]
+}

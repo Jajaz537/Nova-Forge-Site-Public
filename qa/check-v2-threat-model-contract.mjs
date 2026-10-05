@@ -1,0 +1,14 @@
+import fs from "node:fs";
+const d=JSON.parse(fs.readFileSync("qa/modaryx-v2-threat-model-contract.json","utf8"));
+if(d.schemaVersion!==1) throw new Error("unexpected schemaVersion");
+const domains=new Set(d.threatDomains||[]);
+for(const x of ["legacy-contamination","service-worker","auth-session","authorization","file-distribution","install-manager","xss-html-injection","csrf","ssrf","supply-chain","secrets","offline-stale","logging-analytics"]) if(!domains.has(x)) throw new Error("missing threat domain "+x);
+const mitigations=new Set(d.mandatoryMitigations||[]);
+for(const x of ["LEGACY_BLACKLIST_AND_CI_GUARD","PREVIEW_BOUND_TO_EXACT_SHA","V2_SW_SCOPE_AND_NAMESPACE","HTTPONLY_SECURE_SESSION_COOKIE","PKCE_AND_STATE","SERVER_SIDE_AUTHORITY","ALLOWLIST_RETURN_TO","DIGEST_AND_RELEASE_FILE_BINDING","TEXT_CONTENT_DEFAULT_OR_SANITIZED_RICH_TEXT","NO_REMOTE_SCRIPT_BY_DEFAULT","SECRETS_BACKEND_OR_CI_ONLY","V2_STORAGE_NAMESPACE","NOINDEX_PREVIEW","STALE_SENSITIVE_ACTIONS_FAIL_CLOSED"]) if(!mitigations.has(x)) throw new Error("missing mitigation "+x);
+const inv=new Set(d.invariants||[]);
+for(const x of ["UI_CAPABILITY_HINT_NEVER_REPLACES_SERVER_AUTHORITY","HASH_OR_SIGNATURE_NEVER_IMPLY_SAFETY","DEMO_DATA_NEVER_PRESENTED_AS_REAL","LOCAL_STORAGE_CONTAINS_NO_SECRETS","OFFLINE_STALE_SENSITIVE_ACTIONS_FAIL_CLOSED","GETNOVAFORGE_NEVER_BECOMES_V2_CANONICAL","NO_PRIVATE_JWK_IN_PUBLIC_ARTIFACT","NO_MUTATION_VIA_GET","RETURN_TO_MUST_BE_LOCAL_AND_VALIDATED"]) if(!inv.has(x)) throw new Error("missing invariant "+x);
+for(const [k,v] of Object.entries(d.productionStatus||{})) if(!["NOT_DEPLOYED","NOT_IMPLEMENTED","NOT_PROVEN"].includes(v)) throw new Error("production status drift "+k+"="+v);
+console.log("THREAT_MODEL_DOMAIN_COUNT",domains.size);
+console.log("THREAT_MODEL_MITIGATION_COUNT",mitigations.size);
+console.log("THREAT_MODEL_INVARIANT_COUNT",inv.size);
+console.log("PASS_V2_THREAT_MODEL_CONTRACT");

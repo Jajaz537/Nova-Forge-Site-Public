@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "source": "docs/MODARYX-V2-NOTIFICATIONS-PREFERENCES-CONTRACT-20261003.md",
+  "rightsEventTypes": [
+    "PUBLISHER_RESPONSE_RECEIVED",
+    "RIGHTS_APPROVED",
+    "RIGHTS_APPROVED_WITH_LIMITS",
+    "RIGHTS_MORE_INFO_REQUIRED",
+    "LEGAL_REVIEW_REQUIRED",
+    "RIGHTS_DECLINED",
+    "RIGHTS_EXPIRING",
+    "RIGHTS_EXPIRED",
+    "RIGHTS_REVOKED"
+  ],
+  "allowedChannels": [
+    "IN_APP",
+    "EMAIL",
+    "PUSH"
+  ],
+  "channelReadiness": {
+    "IN_APP": "UI_PREVIEW_ONLY",
+    "EMAIL": "NOT_IMPLEMENTED",
+    "PUSH": "NOT_IMPLEMENTED"
+  },
+  "requiredEventEvidence": [
+    "rights_case_id",
+    "event_type",
+    "occurred_at",
+    "source_provenance",
+    "affected_scopes"
+  ],
+  "invariants": [
+    "NO_REAL_EVENT_NO_REAL_NOTIFICATION",
+    "RIGHTS_NOTIFICATION_LINKS_TO_REAL_RIGHTS_CASE",
+    "UNADDRESSED_SCOPE_NEVER_NOTIFIED_AS_GRANTED",
+    "LEGAL_REVIEW_REQUIRED_UNLOCKS_NOTHING",
+    "CONFIDENTIAL_REPLY_DATA_NOT_EXPOSED_PUBLICLY",
+    "WEB_AND_FORGE_RIGHTS_REMAIN_SEPARATE",
+    "BADGE_COUNT_REQUIRES_REAL_UNREAD_COUNT",
+    "EMAIL_AND_PUSH_REQUIRE_REAL_INFRASTRUCTURE"
+  ],
+  "demoRequirements": [
+    "DEMO_EVENTS_EXPLICITLY_MARKED_NOT_RECEIVED",
+    "NO_FAKE_REMOTE_COUNTER",
+    "NO_FAKE_EMAIL_OR_PUSH_DELIVERY"
+  ],
+  "productionStatus": {
+    "inAppEventBus": "NOT_IMPLEMENTED",
+    "rightsCaseDeepLink": "NOT_IMPLEMENTED",
+    "emailDelivery": "NOT_IMPLEMENTED",
+    "pushDelivery": "NOT_IMPLEMENTED",
+    "unreadCounter": "NOT_IMPLEMENTED"
+  }
+}

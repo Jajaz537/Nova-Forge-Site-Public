@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md",
+  "interpretationStates": [
+    "SAFE_AUTOMATION",
+    "NEEDS_REVIEW",
+    "LEGAL_REVIEW_REQUIRED",
+    "DENIED"
+  ],
+  "scopeStatuses": [
+    "GRANTED",
+    "GRANTED_WITH_LIMITS",
+    "DENIED",
+    "UNADDRESSED",
+    "EXPIRED",
+    "REVOKED"
+  ],
+  "requiredEvidence": [
+    "raw_message",
+    "message_provenance",
+    "rights_case_id",
+    "matched_request_version",
+    "received_at"
+  ],
+  "requiredExtraction": [
+    "scope",
+    "status",
+    "territory",
+    "product",
+    "duration",
+    "conditions",
+    "credit_requirements",
+    "expiry"
+  ],
+  "automaticActionsAllowed": [
+    "archive_raw_response",
+    "attach_to_rights_case",
+    "extract_explicit_scope_language",
+    "mark_unaddressed_scopes_locked",
+    "prepare_structured_summary",
+    "notify_modaryx_admin"
+  ],
+  "automaticActionsBlocked": [
+    "infer_global_approval",
+    "treat_unaddressed_as_granted",
+    "accept_ambiguous_legal_clause",
+    "extend_scope_beyond_written_terms",
+    "merge_web_and_forge_rights",
+    "override_expiry_or_revocation"
+  ],
+  "invariants": [
+    "UNADDRESSED_NEVER_EQUALS_GRANTED",
+    "AMBIGUOUS_LANGUAGE_REQUIRES_REVIEW",
+    "LEGAL_RISK_REQUIRES_LEGAL_REVIEW",
+    "GLOBAL_APPROVAL_IS_NEVER_INFERRED",
+    "WEB_AND_FORGE_SCOPES_REMAIN_SEPARATE",
+    "EXPIRY_OR_REVOCATION_LOCKS_DEPENDENT_USES",
+    "RAW_RESPONSE_AND_PROVENANCE_ARE_PRESERVED",
+    "ADMIN_IS_NOTIFIED_OF_MATERIAL_RESPONSE"
+  ],
+  "productionStatus": {
+    "inboundMailbox": "NOT_IMPLEMENTED",
+    "responseParser": "NOT_IMPLEMENTED",
+    "provenanceVerifier": "NOT_IMPLEMENTED",
+    "adminNotification": "NOT_IMPLEMENTED",
+    "licensePolicyEngine": "NOT_IMPLEMENTED"
+  }
+}

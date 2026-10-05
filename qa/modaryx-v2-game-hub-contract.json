@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "PRE_PRODUCTION_CONTRACT",
+  "source": "docs/MODARYX-V2-GAME-HUB-CONTRACT-20261003.md",
+  "supportStates": [
+    "editorial-only",
+    "catalog-enabled",
+    "distribution-enabled",
+    "deprecated"
+  ],
+  "tabs": [
+    "Aperçu",
+    "Mods & contenus",
+    "Collections",
+    "Créateurs",
+    "Guides",
+    "Activité"
+  ],
+  "emptyStates": [
+    "NO_CORPUS",
+    "NO_COMPATIBLE_CONTENT",
+    "VERSION_UNKNOWN",
+    "OFFLINE_STALE"
+  ],
+  "requiredContext": [
+    "GAME_IDENTITY",
+    "ACTIVE_VERSION_OR_ALL",
+    "SUPPORT_STATUS",
+    "CONTEXTUAL_SEARCH",
+    "MY_GAME_PROFILES_IF_AVAILABLE"
+  ],
+  "invariants": [
+    "HUB_EXISTENCE_NEVER_PROVES_DISTRIBUTABLE_CORPUS",
+    "CATALOG_ENABLED_WITHOUT_DISTRIBUTION_USES_EXPLICIT_WARNING",
+    "CONTEXTUAL_SEARCH_STAYS_IN_CURRENT_GAME_UNLESS_EXPLICIT_GLOBAL_SWITCH",
+    "VERSION_CONTEXT_NEVER_SILENTLY_LOST",
+    "NO_PERSONAL_COMPATIBILITY_PROMISE_WITHOUT_SELECTED_VERSION",
+    "ONLY_VALID_DATA_BLOCKS_RENDER",
+    "OFFLINE_DISTRIBUTION_FAILS_CLOSED",
+    "LIVING_AMBIENCE_LOADS_AFTER_CRITICAL_CONTENT"
+  ],
+  "productionStatus": {
+    "gameHubData": "NOT_IMPLEMENTED",
+    "catalogBackend": "NOT_IMPLEMENTED",
+    "realCompatibility": "NOT_IMPLEMENTED"
+  }
+}
