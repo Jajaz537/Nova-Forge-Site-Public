@@ -820,3 +820,37 @@ h1, h2, h3,
     padding: 14px 22px;
   }
 }
+
+
+/* Normalized comparison pass against the human-approved Game Hub reference:
+   desktop chrome and contextual banner use the same compact vertical rhythm. */
+@media (min-width: 1051px) {
+  .game-hub-page .game-hero {
+    min-height: 206px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .game-hub-page .game-identity {
+    min-height: 150px;
+    padding-left: 168px;
+  }
+
+  .game-hub-page .game-identity::before {
+    width: 144px;
+    height: 150px;
+  }
+
+  .game-hub-page .local-nav {
+    min-height: 52px;
+    height: 52px;
+  }
+
+  .game-hub-page .local-nav button {
+    min-height: 50px;
+  }
+
+  .game-hub-page .hub-layout {
+    padding-top: 24px;
+  }
+}
