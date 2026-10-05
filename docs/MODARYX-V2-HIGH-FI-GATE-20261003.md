@@ -909,3 +909,18 @@ Donc :
 - `approved-visual-reference` = PROVEN ;
 - `normalized-visual-comparison` = OPEN ;
 - High-Fi final = **BLOQUÉ**.
+
+
+### Garde géométrique du hero réconcilié — 5 octobre 2026
+
+Micro-proof :
+- `MODARYX V2 Canonical Hero Composition Micro-Proof`
+- run `37314488570` — **SUCCESS**
+- commit `83259afcfb8d71fe53aebdf813ac849b16557b26`
+- `PASS_V2_CANON_HERO_COMPOSITION`.
+
+Ce résultat confirme seulement que les ancres voyageur/loup/dragon restent visibles et techniquement composées sans recouvrir de façon significative le copy hero sur desktop/mobile.
+
+**High-Fi final reste BLOQUÉ** :
+- acceptation artistique humaine du candidat : PREUVE MANQUANTE ;
+- provenance production des companion assets : PREUVE MANQUANTE.
