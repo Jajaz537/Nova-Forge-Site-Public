@@ -55,11 +55,22 @@
     "forgeAssistant": "NOT_IMPLEMENTED"
   },
   "foundationArtifact": {
-    "version": "0.136",
-    "sha256": "930da7a8b4b3cd2ed9954ad8e9f9e796700b3a9895ac077353a1b5a4ccce468f",
+    "version": "0.140",
+    "sha256": "870c0b8373e6751788a6ebe4423828a0a296a2b39f9af937f6c93114856f7e34",
     "vfProgress": 83,
     "releaseGate": "PASS",
-    "tests": "384/384",
-    "evals": "12/12"
+    "tests": "389/389",
+    "evals": "12/12",
+    "realTargetEvidence": {
+      "runner": "SD",
+      "python": "3.13.16",
+      "exactArchive": "PASS",
+      "preflight": "PASS",
+      "releaseGate": "PASS",
+      "coreIdle": "PASS",
+      "modelQualification": "NOT_RUN",
+      "gameImpact": "NOT_RUN",
+      "multimodal": "NOT_RUN"
+    }
   }
 }
