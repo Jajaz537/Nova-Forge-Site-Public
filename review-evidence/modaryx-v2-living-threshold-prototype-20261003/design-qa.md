@@ -979,3 +979,46 @@ Règles :
 - l’application possède un contrat de titre de route SPA.
 
 Aucun SEO/canonical production n’est déduit de ce prototype noindex.
+
+
+## Canonical living-world reconciliation candidate — 5 octobre 2026
+
+**EN COURS — correction prototype prouvée / validation artistique humaine toujours requise**
+
+Source approuvée :
+- `REFERENCE-CANONIQUE-Compagnons-face-au-royaume-enchante.png`
+- Library `file_00000000dcd482439ade71a96dfc6ba0@1`
+- SHA-256 `3b2cf82eda155d33d0ff14ad5d4ca1f95c155b8f9d019e5da03182f99f45e992`.
+
+Corrections du candidat :
+- retour d'un voyageur assis au premier plan ;
+- loup et bébé dragon visibles autour de lui ;
+- château, vallée continue et eau conservés ;
+- aucune île flottante ajoutée ;
+- ambiance réchauffée / éclaircie sans sacrifier la lisibilité du texte ;
+- hiérarchie MODARYX et modding-first conservée.
+
+Preuve navigateur :
+- run `37309857645` — **SUCCESS**
+- commit capturé `0ea8e28485f83466c5a8aaf05b28243cb56b4f0e`
+- artifact `11344949022`
+- digest `sha256:144573c0d12e6aea8dd9a146f53bc2f25c71e20372ccf9733a89716d8160e0d6`
+- `KEYBOARD_REACHABLE 41 / 41`
+- desktop/mobile overflow `0 / 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 87`
+- `PASS_V2_MULTISCREEN_CAPTURE_INTEGRITY`.
+
+Comparaison normalisée actuelle :
+`review-evidence/modaryx-v2-canonical-reference-20261005/visual-reference-comparison-reconciled.json`
+
+Constat automatisé :
+- l'omission totale humain/loup/dragon du candidat précédent est corrigée au niveau prototype ;
+- la luminance moyenne relative de la capture desktop est passée d'environ `0.0676` à `0.0935` ; la source approuvée est autour de `0.1534` ;
+- cette métrique n'est qu'un signal de support et ne remplace pas une revue artistique humaine ;
+- les assets loup/dragon restent `ALLOWED_PROTOTYPE_ONLY` ;
+- le voyageur reste une silhouette de prototype ;
+- les P1 artistiques restent donc ouverts jusqu'à validation humaine et provenance production.
+
+Aucun PASS High-Fi/VF n'est déduit de ce run.
