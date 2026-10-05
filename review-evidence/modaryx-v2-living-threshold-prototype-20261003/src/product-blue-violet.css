@@ -164,7 +164,21 @@ body {
 /* Keep the proof-required provenance note visible but discreet.
    Only the interactive atmosphere preview controls are hidden. */
 .game-identity .atmosphere-preview {
+  display: block;
+  margin-top: 4px;
+  max-width: 360px;
+}
+
+.game-identity .atmosphere-preview > span,
+.game-identity .atmosphere-preview > div {
   display: none;
+}
+
+.game-identity .atmosphere-preview small {
+  display: block;
+  color: #8999af;
+  font-size: 10px;
+  line-height: 1.35;
 }
 
 .game-identity .atmosphere-note {
