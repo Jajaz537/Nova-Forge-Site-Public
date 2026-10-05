@@ -145,7 +145,7 @@ function ProfilesRail() {
     <p>Configurations enregistrées de mods, versions et réglages.</p>
     <button className="profile-add"><Plus />Nouveau profil</button>
     <div className="profile-list">
-      {[['Exploration','4 contenus'],['Graphismes','7 contenus'],['Immersion','3 contenus']].map(([name,count],i) =>
+      {[['Exploration','4 contenus'],['Graphismes','7 contenus'],['Gameplay','5 contenus'],['Immersion','3 contenus']].map(([name,count],i) =>
         <button className="profile-row" key={name}><Media pos={contentItems[i].pos}/><span><strong>{name}</strong><small>{count}</small></span><ArrowRight /></button>)}
     </div>
   </aside>;
@@ -252,7 +252,7 @@ function GameHub({ onOpen }) {
   const [kicker,title,description]=meta[tab];
 
   let body;
-  if(tab==="Aperçu") body=<div className="content-grid">{visibleContent.slice(0,3).map(item=><ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div>;
+  if(tab==="Aperçu") body=<div className="content-grid">{visibleContent.slice(0,5).map(item=><ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div>;
   else if(tab==="Mods & contenus") body=visibleContent.length?<div className="content-grid">{visibleContent.map(item=><ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div>:<div className="empty"><MagnifyingGlass/><h3>Aucun contenu trouvé</h3><p>Essayez un autre terme.</p><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>;
   else if(tab==="Collections") body=visibleCollections.length?<div className="hub-collection-grid">{visibleCollections.map(item=><article key={item.title}><strong>{item.title}</strong><span>{item.curator} · {item.category}</span><small>{item.items} éléments de démonstration</small><div className="hub-capability">Sélection organisée · installation non disponible</div></article>)}</div>:<div className="empty"><Stack/><h3>Aucune collection trouvée</h3><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>;
   else if(tab==="Créateurs") body=visibleCreators.length?<div className="hub-creator-grid">{visibleCreators.map(item=><article key={item.name}><div className="creator-avatar static"><UsersThree/></div><div><strong>{item.name}</strong><span>{item.role}</span><small>{item.focus}</small></div></article>)}</div>:<div className="empty"><UsersThree/><h3>Aucun créateur trouvé</h3><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>;
