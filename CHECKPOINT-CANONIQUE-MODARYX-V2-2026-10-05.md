@@ -396,3 +396,34 @@ Cette micro-preuve ne ferme pas :
 - la provenance production des assets compagnon ;
 - le P1 `normalized-visual-comparison` ;
 - High-Fi final.
+
+
+## 21. Gate de promotion des assets prototype
+
+**TERMINÉ pour le garde-fou CI / provenance production toujours PREUVE MANQUANTE**
+
+Checker :
+`qa/check-v2-production-asset-promotion-gate.mjs`
+
+Workflow :
+`MODARYX V2 Production Asset Promotion Gate`
+
+Run :
+`37315176208` — **SUCCESS**
+
+Commit capturé :
+`84673abf9bbe12e95709d6a2714116a8acd1f67f`
+
+Marqueurs :
+- `PRODUCTION_ASSET_GATE_PROTOTYPE_ONLY_COUNT 4`
+- `PRODUCTION_ASSET_GATE_UNSAFE_REFERENCE_COUNT 0`
+- `PRODUCTION_ASSET_GATE_UNAPPROVED_COPY_COUNT 0`
+- `PASS_V2_PRODUCTION_ASSET_PROMOTION_GATE`
+
+Le gate empêche la promotion silencieuse des assets `ALLOWED_PROTOTYPE_ONLY` vers une surface source hors des racines de preuve/policy contrôlées et bloque les copies binaires non approuvées des assets de prototype, tout en tolérant les chemins legacy explicitement connus pour loup/dragon.
+
+Ce PASS ne transforme aucun asset en asset production :
+- hero : provenance/licence production toujours manquante ;
+- content sheet : idem ;
+- loup/dragon : idem ;
+- validation juridique formelle : non effectuée.
