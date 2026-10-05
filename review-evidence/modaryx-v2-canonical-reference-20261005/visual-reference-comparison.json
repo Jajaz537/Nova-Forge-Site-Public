@@ -1,0 +1,75 @@
+{
+  "evidenceId": "EV-VISUAL-REFERENCE-20261005-01",
+  "sessionType": "VISUAL_REFERENCE_COMPARISON",
+  "date": "2026-10-05",
+  "commitSha": "d1397e5e370bb8bc45d25b766239364291132a73",
+  "actorOpaqueId": "SOURCE_RECOVERY_AUTOMATION",
+  "environment": {
+    "realEnvironment": true,
+    "comparisonMode": "semantic-normalized-art-direction",
+    "sourceDimensions": "1672x941",
+    "candidateViewport": "1440x1024",
+    "candidateArtifact": "11314270782",
+    "candidateCapture": "multiscreen/desktop-home.png"
+  },
+  "sourceReference": {
+    "approved": true,
+    "artifactRef": "library://file_00000000dcd482439ade71a96dfc6ba0@1",
+    "name": "REFERENCE-CANONIQUE-Compagnons-face-au-royaume-enchante.png",
+    "sha256": "3b2cf82eda155d33d0ff14ad5d4ca1f95c155b8f9d019e5da03182f99f45e992",
+    "dimensions": "1672x941",
+    "approvalEvidence": "library://file_00000000ec7c81f4aa8d387fc8f2d34c@1"
+  },
+  "normalizedConditions": [
+    "compare artistic-direction anchors rather than pixel registration because source is concept art, not a page mockup",
+    "evaluate castle, water, valley, inhabited-world, foreground-companions, floating-island prohibition, cascade dominance, narrative warmth and MODARYX product clarity",
+    "candidate bound to exact GitHub Actions artifact and commit",
+    "source bound to Library version and SHA-256"
+  ],
+  "tasks": [
+    "verify approved source provenance and checksum",
+    "compare locked composition anchors against current desktop homepage",
+    "record divergences without treating intentional V2 product-first changes as automatically approved"
+  ],
+  "findings": [
+    {
+      "id": "VR-01",
+      "surface": "Homepage hero",
+      "description": "The approved source locks a seated human, wolf and baby dragon in the foreground; the current Living Threshold homepage hero omits all three. This is a material art-direction divergence and needs explicit human acceptance or correction.",
+      "severity": "P1",
+      "reproduction": "Compare library source file_00000000dcd482439ade71a96dfc6ba0@1 with artifact 11314270782 multiscreen/desktop-home.png.",
+      "status": "OPEN"
+    },
+    {
+      "id": "VR-02",
+      "surface": "Homepage hero / living world",
+      "description": "The approved source presents a brighter, visibly inhabited foreground and valley narrative; the current candidate is substantially darker and more product/tech-forward. The world remains present but the human/living narrative is weaker.",
+      "severity": "P1",
+      "reproduction": "Compare source composition and luminance/narrative density with the bound candidate screenshot.",
+      "status": "OPEN"
+    },
+    {
+      "id": "VR-03",
+      "surface": "Homepage hero / world anchors",
+      "description": "The current candidate preserves several approved anchors: dominant castle, mountain valley, water, continuous terrain and absence of floating islands; waterfall dominance is also avoided.",
+      "severity": "P3",
+      "reproduction": "Visual comparison of the same source and candidate artifacts.",
+      "status": "ACCEPTED_P2_P3"
+    },
+    {
+      "id": "VR-04",
+      "surface": "Product hierarchy",
+      "description": "The current candidate strongly preserves MODARYX product clarity and modding-first hierarchy, required by the newer Living Threshold direction; this creates a deliberate tension with the older narrative-heavy source rather than a simple pixel-fidelity problem.",
+      "severity": "P3",
+      "reproduction": "Inspect candidate headline, primary CTA, navigation and below-fold content hierarchy against the source art-direction brief.",
+      "status": "ACCEPTED_P2_P3"
+    }
+  ],
+  "result": "INCOMPLETE",
+  "artifactRefs": [
+    "library://file_00000000dcd482439ade71a96dfc6ba0@1",
+    "library://file_00000000ec7c81f4aa8d387fc8f2d34c@1",
+    "github-actions://artifact/11314270782/multiscreen/desktop-home.png"
+  ],
+  "reviewer": "MODARYX_V2_GATE_REVIEW"
+}
