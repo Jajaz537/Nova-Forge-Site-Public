@@ -80,13 +80,14 @@ async function inspect(label,width,height,mobile){
   assert(discoverReady,label+": Discover route did not render after navigation");
   const data=await evaluate(`(() => {
     const hero=document.querySelector('.canon-reconciled-hero');
+    const layer=document.querySelector('.canon-narrative-layer');
     const copy=document.querySelector('.editorial-hero-copy');
     const traveler=document.querySelector('.canon-traveler');
     const wolf=document.querySelector('.canon-wolf');
     const dragon=document.querySelector('.canon-dragon');
-    if(!hero||!copy||!traveler||!wolf||!dragon) return {missing:true,presence:{hero:!!hero,copy:!!copy,traveler:!!traveler,wolf:!!wolf,dragon:!!dragon},bodyText:document.body.innerText.slice(0,180)};
+    if(!hero||!layer||!copy||!traveler||!wolf||!dragon) return {missing:true,presence:{hero:!!hero,layer:!!layer,copy:!!copy,traveler:!!traveler,wolf:!!wolf,dragon:!!dragon},bodyText:document.body.innerText.slice(0,180)};
     const rect=el=>{const r=el.getBoundingClientRect();return {left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}};
-    const hr=rect(hero), cr=rect(copy);
+    const hr=rect(hero), lr=rect(layer), cr=rect(copy);
     const items={traveler:rect(traveler),wolf:rect(wolf),dragon:rect(dragon)};
     const visibleRatio=(r)=>{
       const left=Math.max(r.left,hr.left),right=Math.min(r.right,hr.right),top=Math.max(r.top,hr.top),bottom=Math.min(r.bottom,hr.bottom);
@@ -101,6 +102,8 @@ async function inspect(label,width,height,mobile){
     return {
       missing:false,
       hero:hr,
+      layer:lr,
+      layerWidthRatio:hr.width?lr.width/hr.width:0,
       copy:cr,
       pointerEvents:getComputedStyle(document.querySelector('.canon-narrative-layer')).pointerEvents,
       ariaHidden:document.querySelector('.canon-narrative-layer').getAttribute('aria-hidden'),
@@ -108,6 +111,7 @@ async function inspect(label,width,height,mobile){
     };
   })()`);
   assert(!data?.missing,label+": canonical hero nodes missing "+JSON.stringify(data));
+  assert(data.layerWidthRatio>=0.98,label+": narrative layer width ratio "+data.layerWidthRatio.toFixed(3)+" < 0.98");
   assert(data.pointerEvents==="none",label+": narrative layer must not intercept input");
   assert(data.ariaHidden==="true",label+": narrative layer must remain decorative");
   const minVisible=mobile?0.66:0.72;
@@ -119,6 +123,7 @@ async function inspect(label,width,height,mobile){
     const heroStart=data.hero.top+data.hero.height*0.48;
     assert(centerY>=heroStart,`${label}: ${name} escaped lower narrative zone`);
   }
+  console.log("CANON_HERO_LAYER_WIDTH_RATIO",label,data.layerWidthRatio.toFixed(4));
   console.log("CANON_HERO_COMPOSITION",label,JSON.stringify(data.items));
   return data;
 }
