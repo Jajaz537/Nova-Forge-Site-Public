@@ -15,7 +15,7 @@
     },
     {
       "id": "approved-visual-reference",
-      "state": "OPEN"
+      "state": "PROVEN"
     },
     {
       "id": "normalized-visual-comparison",
@@ -151,7 +151,8 @@
     "rights-dashboard-prototype",
     "member-game-support-request-prototype",
     "high-fi-gate-machine-blocked",
-    "frontend-gate-reclassification-proposal-not-active"
+    "frontend-gate-reclassification-proposal-not-active",
+    "approved-visual-reference-library-backed-sha256-proven"
   ],
   "invariants": [
     "PUBLIC_GREEN_NEVER_IMPLIES_PRODUCTION_VF",
