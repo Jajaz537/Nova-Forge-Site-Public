@@ -5,13 +5,14 @@
 
 ## Base IA vérifiée
 
-- Modaryx — IA Foundation **v0.134**
-- SHA-256 : `7387a75da8599abab7d306e05dfeeb128c0efc54fb636d629ae9d16b17b30faa`
-- 381/381 tests PASS
+- Modaryx — IA Foundation **v0.135**
+- SHA-256 : `cc41b236565817cdb5be30705044f026ca41c31b1401352375a16da01772a234`
+- 384/384 tests PASS
 - 12/12 evals PASS
 - RC rehearsal PASS
 - migration-scale PASS
 - archive reproductible + extraction neuve PASS
+- runtime Windows durci : Python >= 3.11 résolu dynamiquement ; Python 3.13.16 du runner SD est accepté sans installation artificielle
 - progression VF IA maintenue à **83 %**
 
 ## Intégration site ajoutée
