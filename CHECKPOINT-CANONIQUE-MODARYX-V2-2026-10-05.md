@@ -717,3 +717,42 @@ Aucune migration Workers/Pages ou Cloudflare critique n'est autorisée.
 - HUMAN_TREE_TEST : PREUVE MANQUANTE.
 - sélection stack : BLOQUÉE tant que le test humain n'est pas fermé.
 - VF stricte : inchangée à 2/32 prouvés.
+
+
+## 30. Super Nova site-only — canon actif durci — 5 octobre 2026
+
+**TERMINÉ pour le verrouillage de direction / site VF toujours EN COURS**
+
+Décision utilisateur fraîche :
+- priorité exclusive au site MODARYX ;
+- Nova Forge OS mis de côté pour cette phase ;
+- travail en plusieurs lanes site en parallèle ;
+- design canonique inchangé : Game Hub produit sombre, mélange bleu nuit + violet premium.
+
+Durcissement du canon actif :
+- les utilitaires Bibliothèque / Notifications / MODARYX IA ne sont plus visibles dans la topbar desktop canonique ;
+- leurs routes restent accessibles hors navigation primaire pour ne pas perdre les fonctionnalités déjà prouvées ;
+- le stylesheet historique `canon-hero.css` n'est plus chargé dans l'application active ;
+- le composant narratif cinématique voyageur/loup/dragon a été retiré du rendu actif puis supprimé de `App.jsx` ;
+- le guard `qa/check-v2-product-direction.mjs` interdit leur retour.
+
+Preuve technique de trouvabilité :
+- run `37366307508` — **SUCCESS** ;
+- `TREE_PROXY_ASSERT 1..10` — PASS ;
+- clavier 45/45 ;
+- overflow desktop 0 ;
+- overflow mobile 0 ;
+- 87 captures multiscreen ;
+- product flows PASS.
+
+Cette preuve reste un **proxy technique** et ne ferme pas `HUMAN_TREE_TEST`.
+
+Pré-requis de sélection de stack :
+- 5 / 6 prouvés ;
+- seul `HUMAN_TREE_TEST` reste OPEN ;
+- workflow `MODARYX V2 Stack Prerequisite Proof` run `37368708248` — **SUCCESS** ;
+- aucune stack finale sélectionnée ;
+- aucun root V2 production créé.
+
+Règle de reprise :
+ne pas réintroduire l'ancien hero narratif, ne pas remettre les utilitaires secondaires dans la topbar canonique, et ne pas sélectionner la stack tant que le dernier prérequis humain n'est pas fermé ou explicitement reclassifié avec preuve.
