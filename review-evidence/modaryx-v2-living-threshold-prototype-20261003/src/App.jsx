@@ -385,12 +385,12 @@ function CollectionsPage() {
 }
 
 
-function CreatorsPage() {
+function CreatorsPage({ onNavigate }) {
   const [query,setQuery]=useState("");
   const visible=creatorDetails.filter(x=>(x.name+" "+x.role+" "+x.focus).toLocaleLowerCase("fr").includes(query.trim().toLocaleLowerCase("fr")));
   return <main id="main-content" tabIndex="-1" className="page-section creators-page">
     <span className="kicker">Créateurs</span><h1>Créateurs, équipes et studios.</h1>
-    <p className="page-intro">Identités publiques et créations restent distinctes des rôles d’administration MODARYX. Aucun badge de vérification n’est simulé.</p>
+    <p className="page-intro">Identités publiques et créations restent distinctes des rôles d’administration MODARYX. Aucun badge de vérification n’est simulé.</p><button className="quiet creator-studio-entry" onClick={()=>onNavigate("Créer")}>Ouvrir Creator Studio <ArrowRight/></button>
     <label className="catalog-search creators-search"><MagnifyingGlass/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher un créateur ou un studio" aria-label="Rechercher un créateur ou un studio"/></label>
     <div className="creator-index-grid">{visible.map(item=><article className="creator-index-card" key={item.name}><Media pos={item.pos}/><div><div className="creator-avatar"><UsersThree/></div><span className="demo-label">Identité de démonstration</span><h2>{item.name}</h2><p>{item.role} · {item.focus}</p><div className="creator-trust-note"><strong>Vérification</strong><span>Aucune vérification réelle associée à ce prototype.</span></div><h3>Créations présentées</h3><ul>{item.creations.map(name=><li key={name}>{name}</li>)}</ul><button className="quiet">Voir les créations <ArrowRight/></button></div></article>)}</div>
     {visible.length===0&&<div className="empty"><UsersThree/><h3>Aucun créateur trouvé</h3><p>Essayez un autre nom ou domaine.</p><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>}
@@ -969,7 +969,7 @@ export function App() {
   else if(active==='Jeux' && !gameHubOpen) screen=<GamesIndex onOpenGame={openGameHub}/>;
   else if(active==='Mods & contenus') screen=<Catalog onOpen={openContent}/>;
   else if(active==='Collections') screen=<CollectionsPage/>;
-  else if(active==='Créateurs') screen=<CreatorsPage/>;
+  else if(active==='Créateurs') screen=<CreatorsPage onNavigate={navigate}/>;
   else if(active==='Communauté') screen=<Community/>;
   else if(active==='Notifications') screen=<AccountCenter key="notifications" initialTab="Notifications"/>;
   else if(active==='Compte') screen=<AccountCenter key="account" initialTab="Compte"/>;
