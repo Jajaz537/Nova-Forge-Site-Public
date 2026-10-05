@@ -256,7 +256,7 @@ try {
   manifest.captures.push(await captureCurrentViewport("desktop-content-report-error.png", 1440, 1024, "Choisissez une raison avant de préparer le signalement."));
 
   await clickByText("footer button", "Game Hub");
-  await clickSelector('[aria-label="Bibliothèque"]');
+  await clickByText("footer button", "Bibliothèque");
   manifest.captures.push(await capture("desktop-library.png", 1440, 1024, "Retrouvez favoris, suivis, collections, profils et historique"));
   await clickByText(".library-tabs button", "Historique");
   manifest.captures.push(await capture("desktop-library-history.png", 1440, 1024, "Aucun historique réel disponible"));
@@ -273,7 +273,7 @@ try {
   await clickByText(".global-nav button", "Communauté");
   manifest.captures.push(await capture("desktop-community.png", 1440, 1024, "Des échanges utiles autour des créations"));
 
-  await clickByAriaLabel("Notifications");
+  await clickByText("footer button", "Notifications");
   manifest.captures.push(await capture("desktop-notifications.png", 1440, 1024, "Centre de notifications"));
   await evaluate("document.querySelector('.notification-demo-list')?.scrollIntoView({block:'center'})");
   await sleep(120);
@@ -282,7 +282,7 @@ try {
   await clickByAriaLabel("Compte");
   manifest.captures.push(await capture("desktop-account.png", 1440, 1024, "Vous explorez MODARYX en mode invité"));
 
-  await clickByAriaLabel("MODARYX IA");
+  await clickByText("footer button", "MODARYX IA");
   manifest.captures.push(await capture("desktop-modaryx-ai.png", 1440, 1024, "MODARYX IA n’est pas active dans cette démo."));
 
   await clickByText("footer button", "Confiance & légal");
