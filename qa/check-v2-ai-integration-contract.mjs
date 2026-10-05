@@ -1,7 +1,7 @@
 import fs from "node:fs";
 
 const data=JSON.parse(fs.readFileSync("qa/modaryx-v2-ai-integration-contract.json","utf8"));
-if(data.schemaVersion!==1) throw new Error("unexpected schemaVersion");
+if(data.schemaVersion!==2) throw new Error("unexpected schemaVersion");
 
 for(const tier of ["READ","PLAN","EXECUTE_SAFE","EXECUTE_SENSITIVE","BLOCKED"]){
   if(!(data.permissionTiers||[]).includes(tier)) throw new Error("missing permission tier: "+tier);
@@ -21,9 +21,17 @@ for(const invariant of [
 ]){
   if(!(data.invariants||[]).includes(invariant)) throw new Error("missing invariant: "+invariant);
 }
+const allowedProductionStates=new Set([
+  "NOT_IMPLEMENTED",
+  "FOUNDATION_IMPLEMENTED_NOT_DEPLOYED",
+  "FOUNDER_ONLY_CODE_INTEGRATED_NOT_DEPLOYED"
+]);
 for(const [key,value] of Object.entries(data.productionStatus||{})){
-  if(value!=="NOT_IMPLEMENTED") throw new Error("production status must remain honest before implementation: "+key);
+  if(!allowedProductionStates.has(value)) throw new Error("unexpected production status: "+key+"="+value);
 }
+if(data.productionStatus?.siteAssistant!=="FOUNDER_ONLY_CODE_INTEGRATED_NOT_DEPLOYED") throw new Error("site assistant status must remain deployment-honest");
+if(data.foundationArtifact?.vfProgress!==83) throw new Error("VF progress must stay at 83 until external proofs close");
+if(data.foundationArtifact?.tests!=="374/374"||data.foundationArtifact?.evals!=="12/12") throw new Error("sealed v0.133 proof mismatch");
 console.log("MODARYX_AI_PERMISSION_TIER_COUNT",data.permissionTiers.length);
 console.log("MODARYX_AI_PREVIEW_STATE_COUNT",data.previewStates.length);
 console.log("MODARYX_AI_INVARIANT_COUNT",data.invariants.length);
