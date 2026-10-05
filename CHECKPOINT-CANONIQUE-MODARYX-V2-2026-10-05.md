@@ -452,3 +452,58 @@ aucune automatisation ne peut remplir ce pack comme une vraie validation humaine
 Prochain événement requis pour `normalized-visual-comparison` :
 - une vraie session humaine enregistrée ;
 - ou une correction ciblée suivie d'une vraie session humaine si le candidat est rejeté.
+
+
+## 23. Passage hero + éditorial premium — 5 octobre 2026
+
+**TERMINÉ pour le prototype ciblé / validation artistique humaine toujours PREUVE MANQUANTE**
+
+Dernier candidat UI prouvé par archive complète :
+- commit capturé : `fe9855c9c0e1b6e650a9994a0e04daba7fdda125`
+- Living Threshold run `37321209579` — **SUCCESS**
+- artifact `11350471321`
+- digest `sha256:02a293ae1f94cb8c351494a0679b84836e6f56a6c288ac0ea33f99daca617cbc`
+- `KEYBOARD_REACHABLE 41 / 41`
+- desktop/mobile overflow `0 / 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 87`
+- `PASS_V2_MULTISCREEN_CAPTURE_INTEGRITY`.
+
+Le HEAD technique immédiatement postérieur `db5a0e9e6d6b9a0f00200ee4326770afbafeee5b` n'ajoute qu'une couverture CI du nouveau layer dans la micro-preuve hero.
+
+Passage réalisé :
+- voyageur assis enrichi : cape/armure/épaulette/ceinture/épée/emblème/rim light ;
+- scène hero réchauffée et éclaircie ;
+- couche `src/premium-editorial.css` ajoutée ;
+- grands titres plus éditoriaux/nobles ;
+- surfaces internes allégées ;
+- densité type dashboard/SaaS réduite ;
+- bordures moins présentes ;
+- respiration verticale et rythme éditorial renforcés ;
+- comportements produit inchangés.
+
+Preuve composition après couche éditoriale :
+- run `37321410178` — **SUCCESS**
+- commit `db5a0e9e6d6b9a0f00200ee4326770afbafeee5b`
+- `PASS_V2_CANON_HERO_COMPOSITION`
+- narrative layer width ratio desktop/mobile : `1.0000 / 1.0000`
+- traveler visible desktop ~98.97 %, mobile ~96.46 %
+- wolf visible desktop ~86.10 %, mobile ~69.89 %
+- dragon visible desktop ~80.46 %, mobile ~71.94 %
+- overlaps avec le copy sous les seuils du checker.
+
+Signal de luminance, **non équivalent à une validation artistique** :
+- source canonique complète : ~`0.1534` ;
+- candidat desktop complet courant : ~`0.1033` car la capture inclut topbar + section sombre suivante ;
+- partie haute du hero courant, crop 72–700 px : ~`0.1513`.
+
+Interprétation :
+- le défaut « monde uniformément trop sombre » a été fortement réduit au niveau technique ;
+- le premier plan reste sombre volontairement pour la profondeur et la lisibilité ;
+- la qualité du traveler, l'intégration narrative du trio et la fidélité artistique globale doivent encore être jugées par une vraie personne.
+
+Pack humain rafraîchi :
+`docs/MODARYX-V2-CANONICAL-HERO-HUMAN-REVIEW-PACK-20261005.md`.
+
+Aucun PASS High-Fi/VF n'est déduit de ce passage.
