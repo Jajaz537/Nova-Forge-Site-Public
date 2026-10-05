@@ -699,3 +699,124 @@ h1, h2, h3,
     border-radius: 10px;
   }
 }
+
+
+/* Canon density pass: match the compact Aurelian Vale Game Hub proportions.
+   Atmosphere controls remain operable for provenance/product-flow proof, but
+   collapse visually into platform-like utility chips on desktop. */
+@media (min-width: 1051px) {
+  .game-hub-page .game-hero {
+    min-height: 252px;
+    padding: 28px 3.2vw 24px;
+    grid-template-columns: minmax(300px,.82fr) minmax(390px,1.5fr) auto;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .game-hub-page .game-identity {
+    min-height: 160px;
+    padding-left: 172px;
+    justify-content: center;
+  }
+
+  .game-hub-page .game-identity::before {
+    width: 146px;
+    height: 160px;
+  }
+
+  .game-hub-page .game-identity .demo-label {
+    font-size: 9px;
+    letter-spacing: .12em;
+  }
+
+  .game-hub-page .game-identity .atmosphere-note {
+    margin-top: 3px;
+    font-size: 9px;
+    opacity: .68;
+  }
+
+  .game-hub-page .game-identity h1 {
+    font-size: 34px;
+    margin: 5px 0 8px;
+  }
+
+  .game-hub-page .game-support {
+    margin: 0 0 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #95a5ba;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .game-hub-page .game-identity label {
+    gap: 9px;
+    font-size: 12px;
+  }
+
+  .game-hub-page .game-identity select {
+    min-height: 38px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  .game-hub-page .atmosphere-preview {
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    max-width: 330px;
+  }
+
+  .game-hub-page .atmosphere-preview > span {
+    display: none;
+  }
+
+  .game-hub-page .atmosphere-preview > div {
+    display: flex;
+    gap: 6px;
+    margin: 0;
+    flex-wrap: nowrap;
+  }
+
+  .game-hub-page .atmosphere-preview button {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    min-height: 30px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    font-size: 0;
+    border-radius: 7px;
+  }
+
+  .game-hub-page .atmosphere-preview button::before {
+    font-size: 13px;
+    line-height: 1;
+    color: #b9c7dc;
+  }
+
+  .game-hub-page .atmosphere-preview button:nth-child(1)::before { content: "⊞"; }
+  .game-hub-page .atmosphere-preview button:nth-child(2)::before { content: "◉"; }
+  .game-hub-page .atmosphere-preview button:nth-child(3)::before { content: "X"; }
+
+  .game-hub-page .atmosphere-preview small {
+    margin: 0;
+    max-width: 190px;
+    font-size: 8px;
+    line-height: 1.25;
+    opacity: .58;
+  }
+
+  .game-hub-page .hero-search {
+    height: 52px;
+  }
+
+  .game-hub-page .game-hero > .primary {
+    min-height: 52px;
+    padding: 14px 22px;
+  }
+}
