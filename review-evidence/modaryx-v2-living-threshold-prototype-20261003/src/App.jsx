@@ -138,6 +138,37 @@ function ContentCard({ item, dense=false, onOpen, headingLevel=3 }) {
   </article>;
 }
 
+function HubContentRow({ item, onOpen }) {
+  return <article className="hub-content-row">
+    <button className="hub-row-main" type="button" onClick={()=>onOpen(item)} aria-label={`Ouvrir ${item.title}`}>
+      <Media pos={item.pos}/>
+      <div className="hub-row-copy">
+        <h3>{item.title}</h3>
+        <div className="hub-row-meta"><Compatibility compact/><span>Version 1.4.2</span><span>◈ Dépendances</span></div>
+        <div className="hub-row-lines" aria-hidden="true"><span/><span/></div>
+      </div>
+      <div className="hub-row-source">
+        <div className="source-title">◉ <span>Source</span> ↗</div>
+        <div className="source-bars" aria-hidden="true"><span/><span/><span/></div>
+      </div>
+    </button>
+    <div className="hub-row-actions">
+      <button type="button" aria-label="Téléchargement indisponible" disabled>↓</button>
+      <button type="button" aria-label={`Plus d’options pour ${item.title}`}>•••</button>
+    </div>
+  </article>;
+}
+
+function HubFilters() {
+  return <div className="hub-filterbar" aria-label="Filtres du catalogue du jeu">
+    <select aria-label="Type de contenu" defaultValue=""><option value="">Type de contenu</option><option>Mod</option><option>Collection</option></select>
+    <select aria-label="Thème" defaultValue=""><option value="">Thème</option><option>Exploration</option><option>Graphismes</option></select>
+    <select aria-label="Dépendances" defaultValue=""><option value="">Dépendances</option><option>Avec dépendances</option><option>Sans dépendance</option></select>
+    <select aria-label="Source" defaultValue=""><option value="">Source</option><option>MODARYX</option><option>Créateurs</option></select>
+    <div className="hub-view-toggle" role="group" aria-label="Affichage"><button type="button" aria-label="Vue grille">▦</button><button type="button" className="active" aria-label="Vue liste">☰</button></div>
+  </div>;
+}
+
 function ProfilesRail() {
   return <aside className="profiles-rail">
     <div className="rail-icon"><Stack /></div>
@@ -243,7 +274,7 @@ function GameHub({ onOpen }) {
   const visibleCreators = useMemo(() => creatorDetails.filter(x => (x.name+" "+x.role+" "+x.focus).toLocaleLowerCase("fr").includes(normalized)), [normalized]);
   const meta={
     "Aperçu":["Sélection adaptative","Pour votre version",`Contenus de démonstration contextualisés pour Aetherlands ${version}.`],
-    "Mods & contenus":["Catalogue du jeu","Mods & contenus",`Contenus de démonstration pour Aetherlands ${version}.`],
+    "Mods & contenus":["Pour votre version","Pour votre version",`Contenus compatibles avec Aetherlands ${version}.`],
     "Collections":["Sélections organisées","Collections",`Collections de démonstration liées à Aetherlands ${version}.`],
     "Créateurs":["Écosystème créateur","Créateurs",`Créateurs et équipes de démonstration actifs autour d’Aetherlands.`],
     "Guides":["Guides","Guides",`Guides contextualisés pour Aetherlands ${version}.`],
@@ -252,8 +283,8 @@ function GameHub({ onOpen }) {
   const [kicker,title,description]=meta[tab];
 
   let body;
-  if(tab==="Aperçu") body=<div className="content-grid">{visibleContent.slice(0,5).map(item=><ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div>;
-  else if(tab==="Mods & contenus") body=visibleContent.length?<div className="content-grid">{visibleContent.map(item=><ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div>:<div className="empty"><MagnifyingGlass/><h3>Aucun contenu trouvé</h3><p>Essayez un autre terme.</p><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>;
+  if(tab==="Aperçu") body=<><HubFilters/><div className="hub-content-list">{visibleContent.slice(0,5).map(item=><HubContentRow key={item.title} item={item} onOpen={onOpen}/>)}</div></>;
+  else if(tab==="Mods & contenus") body=visibleContent.length?<><HubFilters/><div className="hub-content-list">{visibleContent.map(item=><HubContentRow key={item.title} item={item} onOpen={onOpen}/>)}</div></>:<div className="empty"><MagnifyingGlass/><h3>Aucun contenu trouvé</h3><p>Essayez un autre terme.</p><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>;
   else if(tab==="Collections") body=visibleCollections.length?<div className="hub-collection-grid">{visibleCollections.map(item=><article key={item.title}><strong>{item.title}</strong><span>{item.curator} · {item.category}</span><small>{item.items} éléments de démonstration</small><div className="hub-capability">Sélection organisée · installation non disponible</div></article>)}</div>:<div className="empty"><Stack/><h3>Aucune collection trouvée</h3><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>;
   else if(tab==="Créateurs") body=visibleCreators.length?<div className="hub-creator-grid">{visibleCreators.map(item=><article key={item.name}><div className="creator-avatar static"><UsersThree/></div><div><strong>{item.name}</strong><span>{item.role}</span><small>{item.focus}</small></div></article>)}</div>:<div className="empty"><UsersThree/><h3>Aucun créateur trouvé</h3><button onClick={()=>setQuery("")}>Effacer la recherche</button></div>;
   else if(tab==="Guides") body=<div className="hub-info-state"><BookOpen/><div><strong>Guides de démonstration indisponibles</strong><span>Aucun guide éditorial réel n’est connecté à ce prototype. La navigation existe sans inventer de contenu.</span></div></div>;
@@ -262,7 +293,7 @@ function GameHub({ onOpen }) {
   return <main id="main-content" tabIndex="-1" className="game-hub-page">
     <section className={`game-hero game-atmosphere atmosphere-${atmosphereKey}`} data-atmosphere={atmosphereKey}>
       <div className="hero-shade" />
-      <div className="game-identity"><span className="demo-label">Démonstration</span><span className="atmosphere-note">Ambiance originale MODARYX · {atmosphere.title}</span><h1>Aetherlands</h1><div className="game-support">Catalogue consultable — téléchargement non garanti</div><label>Version<select value={version} onChange={e => setVersion(e.target.value)}><option>1.4.2</option><option>1.4.1</option></select></label><div className="atmosphere-preview"><span>Prévisualiser l’ambiance</span><div role="group" aria-label="Ambiances de démonstration originales MODARYX">{gameItems.map(game=><button key={game.atmosphere} type="button" aria-pressed={atmosphereKey===game.atmosphere} className={atmosphereKey===game.atmosphere?"active":""} onClick={()=>setAtmosphereKey(game.atmosphere)}>{game.title}</button>)}</div><small>{atmosphere.mood} · aucun asset éditeur utilisé</small></div></div>
+      <div className="game-identity"><span className="demo-label">Jeu sélectionné</span><span className="atmosphere-note">Ambiance originale MODARYX · {atmosphere.title}</span><h1>Aetherlands</h1><div className="game-support">Catalogue consultable — téléchargement non garanti</div><label>Version<select value={version} onChange={e => setVersion(e.target.value)}><option>1.4.2</option><option>1.4.1</option></select></label><div className="atmosphere-preview"><span>Prévisualiser l’ambiance</span><div role="group" aria-label="Ambiances de démonstration originales MODARYX">{gameItems.map(game=><button key={game.atmosphere} type="button" aria-pressed={atmosphereKey===game.atmosphere} className={atmosphereKey===game.atmosphere?"active":""} onClick={()=>setAtmosphereKey(game.atmosphere)}>{game.title}</button>)}</div><small>{atmosphere.mood} · aucun asset éditeur utilisé</small></div></div>
       <form className="hero-search" onSubmit={e => e.preventDefault()}><MagnifyingGlass /><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Rechercher dans ce jeu" aria-label="Rechercher dans ce jeu"/><button type="button" aria-label="Filtres"><SlidersHorizontal /></button></form>
       <button className="primary" onClick={()=>setTab("Mods & contenus")}>Explorer les contenus <ArrowRight /></button>
     </section>
