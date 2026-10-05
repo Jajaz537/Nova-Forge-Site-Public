@@ -113,6 +113,10 @@ async function clickSelector(selector) {
   await sleep(250);
 }
 async function capture(file, width, height, expectedText) {
+  // Route changes use smooth scrolling in the prototype. Normalize origin captures
+  // to the real top of the page so stale scroll offsets do not create blank bands.
+  await evaluate("window.scrollTo({top:0,left:0,behavior:'auto'}); true");
+  await sleep(120);
   let textOk = !expectedText;
   if (expectedText) {
     for (let i = 0; i < 30; i++) {
