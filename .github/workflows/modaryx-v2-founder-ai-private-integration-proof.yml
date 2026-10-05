@@ -49,10 +49,10 @@ jobs:
         shell: bash
         run: npm ci
 
-      - name: Test and build exact prototype
+      - name: Build and test exact prototype
         working-directory: review-evidence/modaryx-v2-living-threshold-prototype-20261003
         shell: bash
         run: |
           set -euo pipefail
-          npm run test:sites
           npm run build
+          npm run test:sites
