@@ -87,7 +87,7 @@ function Logo({ onNavigate }) {
   return <a className="logo" href="#top" aria-label="MODARYX — accueil" onClick={onNavigate?()=>onNavigate("Découvrir"):undefined}>MODARY<span>X</span></a>;
 }
 
-function Topbar({ active, onNavigate }) {
+function Topbar({ active, onNavigate, founderAiEnabled=false }) {
   const [open, setOpen] = useState(false);
   return <header className="topbar" id="top">
     <Logo onNavigate={onNavigate} />
@@ -98,9 +98,9 @@ function Topbar({ active, onNavigate }) {
       <button className={active==="Bibliothèque"?"mobile-nav-utility active":"mobile-nav-utility"} aria-current={active==="Bibliothèque"?"page":undefined} onClick={() => { onNavigate("Bibliothèque"); setOpen(false); }}><BookOpen />Bibliothèque</button>
       <button className={active==="Notifications"?"mobile-nav-utility active":"mobile-nav-utility"} aria-current={active==="Notifications"?"page":undefined} onClick={() => { onNavigate("Notifications"); setOpen(false); }}><Bell />Notifications</button>
       <button className={active==="Compte"?"mobile-nav-utility active":"mobile-nav-utility"} aria-current={active==="Compte"?"page":undefined} onClick={() => { onNavigate("Compte"); setOpen(false); }}><UsersThree />Compte</button>
-      <button className={active==="MODARYX IA"?"mobile-nav-utility active":"mobile-nav-utility"} aria-current={active==="MODARYX IA"?"page":undefined} onClick={() => { onNavigate("MODARYX IA"); setOpen(false); }}><Stack />MODARYX IA</button>
+      {founderAiEnabled&&<button className={active==="MODARYX IA"?"mobile-nav-utility active":"mobile-nav-utility"} aria-current={active==="MODARYX IA"?"page":undefined} onClick={() => { onNavigate("MODARYX IA"); setOpen(false); }}><Stack />MODARYX IA</button>}
     </nav>
-    <div className="top-actions"><button aria-label="Recherche globale" aria-current={active==="Recherche"?"page":undefined} onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button><button aria-label="Bibliothèque" aria-current={active==="Bibliothèque"?"page":undefined} onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button aria-label="Notifications" aria-current={active==="Notifications"?"page":undefined} onClick={() => onNavigate("Notifications")}><Bell /></button><button aria-label="MODARYX IA" aria-current={active==="MODARYX IA"?"page":undefined} onClick={() => onNavigate("MODARYX IA")}><Stack /></button><button className="avatar" aria-label="Compte" aria-current={active==="Compte"?"page":undefined} onClick={() => onNavigate("Compte")}>M</button></div>
+    <div className="top-actions"><button aria-label="Recherche globale" aria-current={active==="Recherche"?"page":undefined} onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button><button aria-label="Bibliothèque" aria-current={active==="Bibliothèque"?"page":undefined} onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button aria-label="Notifications" aria-current={active==="Notifications"?"page":undefined} onClick={() => onNavigate("Notifications")}><Bell /></button>{founderAiEnabled&&<button aria-label="MODARYX IA" aria-current={active==="MODARYX IA"?"page":undefined} onClick={() => onNavigate("MODARYX IA")}><Stack /></button>}<button className="avatar" aria-label="Compte" aria-current={active==="Compte"?"page":undefined} onClick={() => onNavigate("Compte")}>M</button></div>
   </header>;
 }
 
@@ -745,7 +745,7 @@ function RightsDashboard() {
 }
 
 
-function ModaryxAI() {
+function ModaryxAI({ founderLive=false }) {
   const capabilities=[
     ["Recherche & découverte","Comprendre un besoin, retrouver jeux et contenus pertinents et expliquer pourquoi un résultat est proposé."],
     ["Compatibilité","Raisonner sur jeu, version, plateforme, loader, dépendances et fraîcheur des preuves avant toute recommandation."],
@@ -754,25 +754,68 @@ function ModaryxAI() {
     ["Droits & éditeurs","Aider à structurer Rights Cases, scopes et réponses sans transformer une ambiguïté juridique en autorisation."],
     ["MODARYX Forge","Préparer de futurs diagnostics locaux uniquement après capability handshake réel et permissions explicites."],
   ];
+  const [bridge,setBridge]=useState(null);
+  const [message,setMessage]=useState("");
+  const [answer,setAnswer]=useState("");
+  const [error,setError]=useState("");
+  const [sending,setSending]=useState(false);
+  useEffect(()=>{
+    if(!founderLive) return;
+    let cancelled=false;
+    fetch("/api/founder/ai/status",{headers:{accept:"application/json"},credentials:"same-origin",cache:"no-store"})
+      .then(async response=>({response,data:await response.json().catch(()=>null)}))
+      .then(({response,data})=>{if(!cancelled)setBridge(response.ok&&data?.ok?data:{ok:false,status:response.status});})
+      .catch(()=>{if(!cancelled)setBridge({ok:false,status:502});});
+    return ()=>{cancelled=true;};
+  },[founderLive]);
+  const send=async()=>{
+    const text=message.trim();
+    if(!founderLive||!bridge?.inference_ready||!text||sending) return;
+    setSending(true);setError("");
+    try{
+      const response=await fetch("/api/founder/ai/chat",{
+        method:"POST",credentials:"same-origin",cache:"no-store",
+        headers:{"content-type":"application/json","accept":"application/json"},
+        body:JSON.stringify({conversation_id:"site-founder-main",message:text,max_tokens:512,agent_id:"site"})
+      });
+      const data=await response.json().catch(()=>null);
+      if(response.status===202&&data?.approval){
+        setAnswer(`Action sensible en attente d’approbation : ${data.approval.tool_name}. Aucune exécution automatique.`);
+        setMessage("");
+      }else if(response.ok&&data?.status==="complete"){
+        setAnswer(data.content||"Réponse vide.");
+        setMessage("");
+      }else{
+        setError(data?.error==="resources_busy_or_no_provider"?"Le PC a la priorité ou aucun modèle qualifié n’est disponible.":"Nova est momentanément indisponible.");
+      }
+    }catch{setError("Nova est momentanément indisponible.");}
+    finally{setSending(false);}
+  };
+  const ready=Boolean(founderLive&&bridge?.ok&&bridge?.inference_ready);
   return <main id="main-content" tabIndex="-1" className="page-section modaryx-ai">
-    <span className="kicker">MODARYX IA · fondation</span>
-    <h1>Une IA native du produit, pas un chatbot greffé.</h1>
-    <p className="page-intro">Cette surface prépare l’intégration future de MODARYX IA. Aucun modèle, provider, outil distant ou mémoire IA réelle n’est connecté dans ce prototype.</p>
-    <div className="ai-safety-note"><strong>MODARYX IA n’est pas active dans cette démo.</strong><span>Aucune réponse générée, aucun historique IA et aucune action automatique ne sont simulés.</span></div>
+    <span className="kicker">Nova · MODARYX IA · Fondateur</span>
+    <h1>Votre Nova privée, intégrée à MODARYX.</h1>
+    <p className="page-intro">{founderLive?"Cette surface est réservée à la session Fondateur vérifiée côté serveur. La clé HMAC du bridge ne quitte jamais le backend.":"Cette surface locale de revue conserve le preview historique ; aucun backend privé n’est activé dans ce mode."}</p>
+    <div className="ai-safety-note">
+      <strong>{!founderLive?"MODARYX IA n’est pas active dans cette démo.":bridge===null?"Vérification du bridge privé…":ready?"Nova est connectée.":"Nova reste verrouillée tant que le bridge et un modèle qualifié ne sont pas disponibles."}</strong>
+      <span>{founderLive?"PC-first : Game/Light restent prioritaires et le modèle lourd peut être libéré à tout moment.":"Aucune réponse générée, aucun historique IA et aucune action automatique ne sont simulés."}</span>
+    </div>
     <section className="ai-hero-grid">
       <article className="ai-command-preview">
         <span className="kicker">Assistant contextuel</span>
         <h2>Demandez, vérifiez, puis agissez.</h2>
-        <p>Le futur assistant devra afficher ses sources, distinguer preuve et incertitude, et utiliser des outils permissionnés plutôt que prétendre avoir exécuté une action.</p>
-        <label><span>Message</span><div className="ai-input-shell"><input disabled aria-label="Message à MODARYX IA" placeholder="MODARYX IA sera connectée dans une phase dédiée"/><button className="primary" disabled>Envoyer</button></div></label>
+        <p>Sources, incertitude, permissions et actions restent séparées. Une action sensible exige toujours son gate d’approbation.</p>
+        <label><span>Message</span><div className="ai-input-shell"><input value={message} onChange={event=>setMessage(event.target.value)} onKeyDown={event=>{if(event.key==="Enter"&&!event.shiftKey){event.preventDefault();send();}}} disabled={!ready||sending} aria-label="Message à Nova" placeholder={ready?"Écrire à Nova…":"Nova sera disponible quand le bridge privé sera prêt"}/><button className="primary" onClick={send} disabled={!ready||sending||!message.trim()}>{sending?"Envoi…":"Envoyer"}</button></div></label>
+        {answer&&<div className="ai-safety-note" aria-live="polite"><strong>Nova</strong><span>{answer}</span></div>}
+        {error&&<div className="form-error" role="alert">{error}</div>}
       </article>
       <aside className="ai-trust-panel">
         <span className="kicker">Confiance</span>
         <h2>Safe by default</h2>
+        <div><strong>Accès</strong><span>Session serveur + permission modaryx:founder obligatoires.</span></div>
         <div><strong>Sources</strong><span>Provenance et fraîcheur pour les réponses importantes.</span></div>
         <div><strong>Permissions</strong><span>READ → PLAN → EXECUTE_SAFE → EXECUTE_SENSITIVE → BLOCKED.</span></div>
-        <div><strong>Évaluations</strong><span>Hallucination, outils, fuite de données, prompt injection et cohérence multi-tour.</span></div>
-        <div><strong>Incertain</strong><span>Le système doit dire “preuve insuffisante” plutôt qu’inventer.</span></div>
+        <div><strong>Incertain</strong><span>Le système dit “preuve insuffisante” plutôt que d’inventer.</span></div>
       </aside>
     </section>
     <section className="ai-capabilities">
@@ -780,13 +823,12 @@ function ModaryxAI() {
       <div className="ai-capability-grid">{capabilities.map(([title,detail])=><article key={title}><strong>{title}</strong><span>{detail}</span></article>)}</div>
     </section>
     <section className="ai-boundaries">
-      <div><span className="kicker">Non négociable</span><h2>Ce que l’IA ne doit jamais inventer.</h2></div>
+      <div><span className="kicker">Non négociable</span><h2>Ce que Nova ne doit jamais inventer.</h2></div>
       <ul><li>Une compatibilité non prouvée.</li><li>Une permission éditeur ou une licence.</li><li>Une installation locale non exécutée par MODARYX Forge.</li><li>Un résultat backend absent.</li><li>Une certitude lorsqu’une revue humaine ou juridique est nécessaire.</li></ul>
     </section>
-    <div className="ai-roadmap-note"><strong>Architecture conceptuelle retenue</strong><span>AI Gateway · routing multi-modèles · RAG / Knowledge Layer · Tool Layer · Permission Engine · agents spécialisés · evals · observabilité.</span></div>
+    <div className="ai-roadmap-note"><strong>Architecture active côté fondation</strong><span>Nova Identity · mémoire · routing multi-modèles · Tool Broker · permissions · evals · bridge HMAC · Resource Governor PC-first.</span></div>
   </main>;
 }
-
 
 function PublicLegalTrust() {
   const sections=[
@@ -937,12 +979,26 @@ export function App() {
   const [detail, setDetail] = useState(null);
   const [gameHubOpen,setGameHubOpen]=useState(true);
   const [online,setOnline]=useState(()=>typeof navigator==="undefined"?true:navigator.onLine);
+  const [founderAi,setFounderAi]=useState(()=>{
+    const localReview=typeof location!=="undefined"&&["localhost","127.0.0.1","::1"].includes(location.hostname);
+    return {visible:localReview,live:false};
+  });
   const firstRouteRender=useRef(true);
   useEffect(()=>{
     const syncConnectivity=()=>setOnline(navigator.onLine);
     window.addEventListener("online",syncConnectivity);
     window.addEventListener("offline",syncConnectivity);
     return ()=>{window.removeEventListener("online",syncConnectivity);window.removeEventListener("offline",syncConnectivity);};
+  },[]);
+  useEffect(()=>{
+    const localReview=["localhost","127.0.0.1","::1"].includes(window.location.hostname);
+    if(localReview) return;
+    let cancelled=false;
+    fetch("/api/v1/auth/session",{headers:{accept:"application/json"},credentials:"same-origin",cache:"no-store"})
+      .then(response=>response.ok?response.json():null)
+      .then(data=>{if(!cancelled&&data?.authenticated===true&&data?.authority?.capabilities?.founder===true)setFounderAi({visible:true,live:true});})
+      .catch(()=>{});
+    return ()=>{cancelled=true;};
   },[]);
   useEffect(()=>{
     if(firstRouteRender.current){firstRouteRender.current=false;return;}
@@ -958,7 +1014,7 @@ export function App() {
     document.title=routeTitle;
   },[active,detail,gameHubOpen]);
   const scrollRouteTop=()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
-  const navigate = item => { setDetail(null); setGameHubOpen(false); setActive(item); scrollRouteTop(); };
+  const navigate = item => { if(item==="MODARYX IA"&&!founderAi.visible)return; setDetail(null); setGameHubOpen(false); setActive(item); scrollRouteTop(); };
   const openGameHub=()=>{setDetail(null);setActive("Jeux");setGameHubOpen(true);scrollRouteTop();};
   const openContent=item=>{setDetail(item);scrollRouteTop();};
   let screen;
@@ -975,10 +1031,10 @@ export function App() {
   else if(active==='Créer') screen=<CreatorStudio/>;
   else if(active==='Bibliothèque') screen=<Library/>;
   else if(active==='Droits jeux') screen=<RightsDashboard/>;
-  else if(active==='MODARYX IA') screen=<ModaryxAI/>;
+  else if(active==='MODARYX IA'&&founderAi.visible) screen=<ModaryxAI founderLive={founderAi.live}/>;
   else if(active==='Confiance & légal') screen=<PublicLegalTrust/>;
   else if(active==='Aide & documentation') screen=<HelpDocs onNavigate={navigate}/>;
   else if(active==='Modération') screen=<ModerationCenter/>;
   else screen=<GameHub onOpen={openContent}/>;
-  return <div className="app-shell"><a className="skip-link" href="#main-content">Aller au contenu principal</a>{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo onNavigate={navigate}/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button><button onClick={()=>navigate('Modération')}>Modération · démo admin</button><button onClick={()=>navigate('Confiance & légal')}>Confiance & légal</button><button onClick={()=>navigate('Aide & documentation')}>Aide & documentation</button></footer></div>;
+  return <div className="app-shell"><a className="skip-link" href="#main-content">Aller au contenu principal</a>{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate} founderAiEnabled={founderAi.visible}/>{screen}<footer><Logo onNavigate={navigate}/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button><button onClick={()=>navigate('Modération')}>Modération · démo admin</button><button onClick={()=>navigate('Confiance & légal')}>Confiance & légal</button><button onClick={()=>navigate('Aide & documentation')}>Aide & documentation</button></footer></div>;
 }
