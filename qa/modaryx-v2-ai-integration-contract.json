@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
-  "date": "2026-10-04",
+  "schemaVersion": 2,
+  "date": "2026-10-05",
   "status": "ACTIVE_PRE_PRODUCTION_POLICY",
-  "source": "docs/MODARYX-AI-FOUNDATION-ARCHITECTURE-20261004.md",
+  "source": "docs/MODARYX-V2-FOUNDER-AI-INTEGRATION-20261005.md",
   "surfaces": [
     "site",
     "future_modaryx_forge"
@@ -43,15 +43,23 @@
     "PROVIDER_INDEPENDENCE_REQUIRED"
   ],
   "productionStatus": {
-    "gateway": "NOT_IMPLEMENTED",
-    "modelRouter": "NOT_IMPLEMENTED",
-    "knowledgeLayer": "NOT_IMPLEMENTED",
-    "retrieval": "NOT_IMPLEMENTED",
-    "toolLayer": "NOT_IMPLEMENTED",
-    "permissionEngine": "NOT_IMPLEMENTED",
-    "evalHarness": "NOT_IMPLEMENTED",
-    "observability": "NOT_IMPLEMENTED",
-    "siteAssistant": "NOT_IMPLEMENTED",
+    "gateway": "FOUNDATION_IMPLEMENTED_NOT_DEPLOYED",
+    "modelRouter": "FOUNDATION_IMPLEMENTED_NOT_DEPLOYED",
+    "knowledgeLayer": "FOUNDATION_IMPLEMENTED_NOT_DEPLOYED",
+    "retrieval": "FOUNDATION_IMPLEMENTED_NOT_DEPLOYED",
+    "toolLayer": "FOUNDATION_IMPLEMENTED_NOT_DEPLOYED",
+    "permissionEngine": "FOUNDATION_IMPLEMENTED_NOT_DEPLOYED",
+    "evalHarness": "FOUNDATION_IMPLEMENTED_NOT_DEPLOYED",
+    "observability": "FOUNDATION_IMPLEMENTED_NOT_DEPLOYED",
+    "siteAssistant": "FOUNDER_ONLY_CODE_INTEGRATED_NOT_DEPLOYED",
     "forgeAssistant": "NOT_IMPLEMENTED"
+  },
+  "foundationArtifact": {
+    "version": "0.133",
+    "sha256": "c7fea980c8de6a06d9325fe4408cca722097b2b70b831e8933e822faad52755d",
+    "vfProgress": 83,
+    "releaseGate": "PASS",
+    "tests": "374/374",
+    "evals": "12/12"
   }
 }
