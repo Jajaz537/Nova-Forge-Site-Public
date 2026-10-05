@@ -4,7 +4,7 @@ import {
   List, MagnifyingGlass, Plus, SlidersHorizontal, Stack, UsersThree, X
 } from "@phosphor-icons/react";
 
-const navItems = ["Découvrir", "Jeux", "Mods & contenus", "Collections", "Créateurs", "Communauté", "Créer"];
+const navItems = ["Découvrir", "Jeux", "Mods & contenus", "Collections", "Créateurs", "Communauté"];
 const contentItems = [
   { title: "Sentiers de l’aube", kind: "Exploration", creator: "Atelier Boréal", pos: "0% 0%", tone: "cyan" },
   { title: "Vestiges suspendus", kind: "Environnements", creator: "Lueur Collective", pos: "50% 0%", tone: "violet" },
@@ -100,7 +100,7 @@ function Topbar({ active, onNavigate }) {
       <button className={active==="Compte"?"mobile-nav-utility active":"mobile-nav-utility"} aria-current={active==="Compte"?"page":undefined} onClick={() => { onNavigate("Compte"); setOpen(false); }}><UsersThree />Compte</button>
       <button className={active==="MODARYX IA"?"mobile-nav-utility active":"mobile-nav-utility"} aria-current={active==="MODARYX IA"?"page":undefined} onClick={() => { onNavigate("MODARYX IA"); setOpen(false); }}><Stack />MODARYX IA</button>
     </nav>
-    <div className="top-actions"><button aria-label="Recherche globale" aria-current={active==="Recherche"?"page":undefined} onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button><button aria-label="Bibliothèque" aria-current={active==="Bibliothèque"?"page":undefined} onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button aria-label="Notifications" aria-current={active==="Notifications"?"page":undefined} onClick={() => onNavigate("Notifications")}><Bell /></button><button aria-label="MODARYX IA" aria-current={active==="MODARYX IA"?"page":undefined} onClick={() => onNavigate("MODARYX IA")}><Stack /></button><button className="avatar" aria-label="Compte" aria-current={active==="Compte"?"page":undefined} onClick={() => onNavigate("Compte")}>M</button></div>
+    <div className="top-actions"><button aria-label="Recherche globale" aria-current={active==="Recherche"?"page":undefined} onClick={() => onNavigate("Recherche")}><MagnifyingGlass /></button><button className="demo-cta" type="button" onClick={() => onNavigate("Jeux")}>Démonstration</button><button className="desktop-utility" aria-label="Bibliothèque" aria-current={active==="Bibliothèque"?"page":undefined} onClick={() => onNavigate("Bibliothèque")}><BookOpen /></button><button className="desktop-utility" aria-label="Notifications" aria-current={active==="Notifications"?"page":undefined} onClick={() => onNavigate("Notifications")}><Bell /></button><button className="desktop-utility" aria-label="MODARYX IA" aria-current={active==="MODARYX IA"?"page":undefined} onClick={() => onNavigate("MODARYX IA")}><Stack /></button><button className="avatar" aria-label="Compte" aria-current={active==="Compte"?"page":undefined} onClick={() => onNavigate("Compte")}>M</button></div>
   </header>;
 }
 
