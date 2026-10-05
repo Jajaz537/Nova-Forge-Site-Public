@@ -2623,3 +2623,69 @@ Fichiers :
 - `.github/workflows/modaryx-v2-workflow-action-pin-proof.yml`
 
 Ce PASS prouve la configuration contrôlée des workflows présents, pas la sécurité globale de la production ou du compte GitHub.
+
+
+## 78. Référence visuelle canonique récupérée + comparaison normalisée
+
+**SOURCE APPROUVÉE : TERMINÉ / COMPARAISON : INCOMPLETE avec P1 ouverts**
+
+Référence récupérée :
+- `REFERENCE-CANONIQUE-Compagnons-face-au-royaume-enchante.png`
+- Library file id `file_00000000dcd482439ade71a96dfc6ba0`
+- version `1`
+- dimensions `1672 × 941`
+- taille `3,908,411 bytes`
+- SHA-256 `3b2cf82eda155d33d0ff14ad5d4ca1f95c155b8f9d019e5da03182f99f45e992`.
+
+Preuve d'approbation :
+- `WORK-HANDOFF-MODARYX-ULTRA-HAUT-DE-GAMME-2026-09-23.md`
+- Library file id `file_00000000ec7c81f4aa8d387fc8f2d34c`
+- version `1`
+- le document qualifie explicitement l'image de référence artistique canonique et de référence humaine validée.
+
+Composition verrouillée retrouvée :
+- humain assis au premier plan ;
+- loup ;
+- bébé dragon ;
+- château dominant ;
+- rivière/eau structurante ;
+- vallée/forêt/monde habité ;
+- aucune île flottante ;
+- cascades non dominantes ;
+- ambiance vivante, narrative, crédible et premium.
+
+Provenance :
+`review-evidence/modaryx-v2-canonical-reference-20261005/README.md`
+
+Comparaison normalisée :
+`review-evidence/modaryx-v2-canonical-reference-20261005/visual-reference-comparison.json`
+
+Validation du fichier de preuve :
+- run `37303759075` — **SUCCESS**
+- `PASS_V2_EXTERNAL_VALIDATION_EVIDENCE_FILE visual-reference-comparison.json`.
+
+VF readiness après récupération :
+- run `37303860232` — **SUCCESS**
+- `VF_READINESS_OPEN_BLOCKER_COUNT 31`
+- `VF_READINESS_STATUS BLOCKED`
+- `PASS_V2_VF_READINESS_GATE`.
+
+Le blocker `approved-visual-reference` est maintenant **PROVEN**.
+
+La comparaison normalisée reste **INCOMPLETE** :
+- P1 ouvert : le hero Living Threshold courant omet l'humain assis + loup + bébé dragon verrouillés dans la source approuvée ;
+- P1 ouvert : le candidat courant est nettement plus sombre / product-tech et affaiblit la narration de monde habité ;
+- points conformes : château, vallée continue, eau, montagnes, absence d'îles flottantes, cascades non dominantes ;
+- la clarté modding/product de Living Threshold reste un acquis à préserver.
+
+Décision :
+- ne pas revenir aveuglément à l'ancien site ;
+- ne pas considérer Living Threshold visuellement final ;
+- réconcilier les ancres narratives approuvées avec la hiérarchie produit moderne ;
+- aucun PASS High-Fi tant que les P1 visuels ne sont pas fermés par correction + validation humaine appropriée.
+
+Limite technique :
+- la source canonique est archivée dans Library avec version + checksum ;
+- le binaire exact n'est pas présent dans Git ;
+- recherche fraîche dans les arbres historiques connus : fichier exact non retrouvé ;
+- ne pas inventer un asset équivalent ni déclarer une copie différente identique.
