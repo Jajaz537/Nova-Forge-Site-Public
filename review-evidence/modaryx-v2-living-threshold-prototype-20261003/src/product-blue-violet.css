@@ -169,13 +169,36 @@ body {
   max-width: 360px;
 }
 
-.game-identity .atmosphere-preview > span,
-.game-identity .atmosphere-preview > div {
+.game-identity .atmosphere-preview > span {
   display: none;
+}
+
+.game-identity .atmosphere-preview > div {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.game-identity .atmosphere-preview button {
+  min-height: 28px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  color: #aab6c9;
+  background: rgba(13, 22, 37, .68);
+  border-color: rgba(100, 120, 160, .35);
+}
+
+.game-identity .atmosphere-preview button.active {
+  color: #fff;
+  background: linear-gradient(90deg, rgba(59,124,255,.17), rgba(139,99,255,.18));
+  border-color: rgba(139,99,255,.46);
 }
 
 .game-identity .atmosphere-preview small {
   display: block;
+  margin-top: 4px;
   color: #8999af;
   font-size: 10px;
   line-height: 1.35;
