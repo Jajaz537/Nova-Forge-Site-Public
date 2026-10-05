@@ -276,13 +276,16 @@ function GameHub({ onOpen }) {
 function CanonNarrativeLayer() {
   return <div className="canon-narrative-layer" aria-hidden="true">
     <span className="canon-ground-glow"/>
-    <svg className="canon-traveler" viewBox="0 0 180 230" focusable="false">
-      <circle className="traveler-head" cx="101" cy="44" r="17"/>
-      <path className="traveler-cloak" d="M81 64c17-13 42-10 55 8 10 14 8 36 4 55-4 21-2 43 11 66l-52 3c-11-17-16-34-17-52-1-20-12-35-20-49-7-12 3-24 19-31Z"/>
-      <path className="traveler-arm" d="M111 82c12 7 24 18 31 32l-11 8c-9-11-19-20-31-25Z"/>
-      <path className="traveler-leg" d="M96 137c20 1 38 8 51 22l-9 14c-15-9-32-13-51-12Z"/>
-      <path className="traveler-boot" d="M135 168c13 4 25 11 34 21l-7 12-33-7Z"/>
-      <path className="traveler-ridge" d="M18 201c36-18 77-22 143-9l19 38H0Z"/>
+    <svg className="canon-traveler" viewBox="0 0 220 270" focusable="false">
+      <path className="traveler-ridge" d="M0 244c36-22 74-31 117-28 42 3 75 14 103 34v20H0Z"/>
+      <path className="traveler-cloak" d="M95 69c18-14 42-12 57 2 16 15 18 39 11 65-6 22-5 40 8 62-24 10-51 11-79 4-8-20-12-40-10-59 2-17-2-31-10-45-8-14 1-24 23-29Z"/>
+      <path className="traveler-head" d="M112 29c12-2 24 4 30 14 5 9 4 21-2 30-7 9-19 13-30 9-12-4-19-14-19-26 0-13 8-24 21-27Z"/>
+      <path className="traveler-hair" d="M96 49c2-14 12-24 25-25 13 0 23 6 29 17-9-4-17-5-24-3-7 2-15 8-23 17Z"/>
+      <path className="traveler-arm" d="M137 93c14 7 27 20 35 37l-14 10c-9-13-20-23-34-30Z"/>
+      <path className="traveler-knee" d="M109 157c22 0 43 8 61 25l-12 17c-17-11-35-16-55-16Z"/>
+      <path className="traveler-boot" d="M157 193c15 4 28 12 39 24l-9 14-40-9Z"/>
+      <path className="traveler-cloak-fold" d="M111 87c7 22 5 50-5 84"/>
+      <path className="traveler-cloak-fold" d="M129 82c12 24 14 52 7 84"/>
     </svg>
     <img className="canon-companion canon-wolf" src="/assets/living-threshold-wolf-baby.png" alt=""/>
     <img className="canon-companion canon-dragon" src="/assets/living-threshold-dragon-baby.png" alt=""/>
