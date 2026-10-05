@@ -4,11 +4,14 @@ on:
   push:
     branches:
       - 'audit/modaryx-v2-legacy-boundary-20261003'
+      - 'design/modaryx-v2-blue-violet-product-20261005'
     paths:
       - '.github/workflows/modaryx-v2-vf-readiness-gate-proof.yml'
       - 'qa/modaryx-v2-vf-readiness-gate.json'
       - 'qa/check-v2-vf-readiness-gate.mjs'
       - 'CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-04.md'
+      - 'CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-05.md'
+      - 'docs/MODARYX-V2-NORMALIZED-VISUAL-COMPARISON-20261005.md'
   workflow_dispatch:
 
 permissions:
