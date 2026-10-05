@@ -10,6 +10,7 @@ on:
       - 'qa/check-v2-external-validation-evidence-contract.mjs'
       - 'qa/validate-v2-external-validation-evidence.mjs'
       - 'docs/MODARYX-V2-EXTERNAL-VALIDATION-EVIDENCE-CONTRACT-20261004.md'
+      - 'review-evidence/modaryx-v2-canonical-reference-20261005/visual-reference-comparison.json'
   workflow_dispatch:
 
 permissions:
@@ -38,3 +39,9 @@ jobs:
         run: |
           set -euo pipefail
           node qa/validate-v2-external-validation-evidence.mjs --self-test
+
+      - name: Validate recovered canonical visual comparison evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/validate-v2-external-validation-evidence.mjs --file review-evidence/modaryx-v2-canonical-reference-20261005/visual-reference-comparison.json
