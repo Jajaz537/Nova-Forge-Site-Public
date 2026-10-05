@@ -1,0 +1,8 @@
+/* Canon source luminance reconciliation — isolated prototype override. */
+.canon-reconciled-hero{background:#07131e}
+.canon-reconciled-hero:before{content:"";position:absolute;inset:0;z-index:0;background:url('/assets/living-threshold-hero.png') 58% center/cover;filter:brightness(1.24) saturate(1.08) contrast(.97);transform:scale(1.01);pointer-events:none}
+.canon-reconciled-hero:after{content:"";position:absolute;inset:0;height:auto;z-index:1;background:linear-gradient(90deg,rgba(4,13,22,.90) 0%,rgba(4,13,22,.66) 30%,rgba(4,13,22,.24) 55%,rgba(4,13,22,.03) 78%,rgba(4,13,22,0) 100%),linear-gradient(180deg,rgba(255,193,122,.05) 0%,transparent 43%,rgba(5,13,19,.09) 68%,rgba(4,10,15,.52) 100%),radial-gradient(circle at 83% 27%,rgba(255,191,111,.12),transparent 24%);pointer-events:none}
+.canon-reconciled-hero .editorial-hero-copy p{color:#dbe5ee}
+@media (max-width:1050px){.canon-reconciled-hero:before{background-position:62% center;filter:brightness(1.20) saturate(1.06) contrast(.98)}}
+@media (max-width:760px){.canon-reconciled-hero{background:#07131e}.canon-reconciled-hero:before{background-position:63% center;filter:brightness(1.18) saturate(1.05) contrast(.98)}.canon-reconciled-hero:after{background:linear-gradient(180deg,rgba(4,13,22,.76) 0%,rgba(4,13,22,.62) 40%,rgba(4,13,22,.22) 69%,rgba(4,13,22,.08) 100%),linear-gradient(90deg,rgba(4,13,22,.22),transparent 74%),radial-gradient(circle at 75% 23%,rgba(255,190,115,.11),transparent 25%)}.canon-reconciled-hero .editorial-hero-copy p{color:#e2eaf1}}
+@media (forced-colors:active){.canon-reconciled-hero:before,.canon-reconciled-hero:after{display:none}.canon-reconciled-hero{background:Canvas}}
