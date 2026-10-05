@@ -830,3 +830,41 @@ Toujours requis avant High-Fi final :
 - NVDA / VoiceOver / TalkBack réels ;
 - Safari réel ;
 - appareils physiques.
+
+
+## 35. Référence visuelle approuvée retrouvée — 5 octobre 2026
+
+**Le blocker “source introuvable” est fermé. Le High-Fi final reste BLOQUÉ.**
+
+Source :
+- `REFERENCE-CANONIQUE-Compagnons-face-au-royaume-enchante.png`
+- Library `file_00000000dcd482439ade71a96dfc6ba0@1`
+- SHA-256 `3b2cf82eda155d33d0ff14ad5d4ca1f95c155b8f9d019e5da03182f99f45e992`
+- 1672×941.
+
+Approbation documentée :
+- `WORK-HANDOFF-MODARYX-ULTRA-HAUT-DE-GAMME-2026-09-23.md`
+- Library `file_00000000ec7c81f4aa8d387fc8f2d34c@1`.
+
+Comparaison :
+- `review-evidence/modaryx-v2-canonical-reference-20261005/visual-reference-comparison.json`
+- validator run `37303759075` — **SUCCESS**
+- résultat de comparaison : `INCOMPLETE`.
+
+P1 ouverts :
+1. trio humain assis + loup + bébé dragon absent du hero V2 actuel ;
+2. monde/narration humaine trop assombris et affaiblis par rapport à la source approuvée.
+
+Conformes ou compatibles :
+- château ;
+- vallée continue ;
+- eau ;
+- montagnes ;
+- pas d'îles flottantes ;
+- cascades non dominantes ;
+- clarté produit/modding de Living Threshold à préserver.
+
+Le travail visuel suivant doit donc être une **réconciliation**, pas un rollback :
+canon narratif approuvé + architecture/UX Living Threshold.
+
+VF readiness : 31 blockers ouverts après fermeture du blocker source.
