@@ -868,3 +868,44 @@ Le travail visuel suivant doit donc être une **réconciliation**, pas un rollba
 canon narratif approuvé + architecture/UX Living Threshold.
 
 VF readiness : 31 blockers ouverts après fermeture du blocker source.
+
+
+## 36. Hero canonique réconcilié — preuve candidate — 5 octobre 2026
+
+**High-Fi final reste BLOQUÉ.**
+
+Candidat courant :
+- voyageur assis réintroduit ;
+- loup + bébé dragon réintroduits ;
+- château / vallée / eau conservés ;
+- traitement visuel plus lumineux et plus chaud ;
+- lisibilité produit et hiérarchie MODARYX conservées ;
+- composition mobile dédiée.
+
+Preuve navigateur :
+- run `37309857645` — **SUCCESS**
+- commit capturé `0ea8e28485f83466c5a8aaf05b28243cb56b4f0e`
+- artifact `11344949022`
+- digest `sha256:144573c0d12e6aea8dd9a146f53bc2f25c71e20372ccf9733a89716d8160e0d6`
+- `KEYBOARD_REACHABLE 41 / 41`
+- desktop/mobile overflow `0 / 0`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 87`
+- `PASS_V2_MULTISCREEN_CAPTURE_INTEGRITY`.
+
+Comparaison normalisée complémentaire :
+`review-evidence/modaryx-v2-canonical-reference-20261005/visual-reference-comparison-reconciled.json`
+
+Le défaut d'omission totale du trio humain/loup/dragon est corrigé **au niveau prototype**.
+
+Reste bloquant avant fermeture de la comparaison :
+- validation artistique humaine du candidat ;
+- voyageur encore sous forme de silhouette prototype ;
+- loup/dragon encore `ALLOWED_PROTOTYPE_ONLY` ;
+- provenance/licence production des couches compagnon ;
+- candidat toujours plus sombre que la source canonique.
+
+Donc :
+- `approved-visual-reference` = PROVEN ;
+- `normalized-visual-comparison` = OPEN ;
+- High-Fi final = **BLOQUÉ**.
