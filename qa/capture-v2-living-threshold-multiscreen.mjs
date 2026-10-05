@@ -292,7 +292,8 @@ try {
   await clickByText("footer button", "Modération · démo admin");
   manifest.captures.push(await capture("desktop-moderation-center.png", 1440, 1024, "Modération, signalements et appels."));
 
-  await clickByText(".global-nav button", "Créer");
+  await clickByText(".global-nav button", "Créateurs");
+  await clickByText(".creators-page .creator-studio-entry", "Ouvrir Creator Studio");
   manifest.captures.push(await capture("desktop-creator-studio.png", 1440, 1024, "Creator Studio"));
   await clickByText(".studio-workflow .primary", "Créer un projet local");
   await clickByText(".studio-nav button", "Projects");
@@ -405,7 +406,8 @@ try {
   await clickByText(".back", "← Retour à la Bibliothèque");
 
   await clickSelector(".mobile-menu");
-  await clickByText(".global-nav button", "Créer");
+  await clickByText(".global-nav button", "Créateurs");
+  await clickByText(".creators-page .creator-studio-entry", "Ouvrir Creator Studio");
   manifest.captures.push(await capture("mobile-creator-studio.png", 390, 844, "Creator Studio"));
   await clickByText(".studio-workflow .primary", "Créer un projet local");
   await clickByText(".studio-nav button", "Projects");
