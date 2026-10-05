@@ -198,3 +198,63 @@ footer .logo{opacity:.92}
 @media (prefers-reduced-motion:reduce){
   .content-card:hover{transform:none}
 }
+
+
+/* Canon narrative cohesion pass — prototype-only.
+   Rebalances the approved trio hierarchy without introducing new assets. */
+.canon-reconciled-hero .canon-traveler{
+  left:28.5%;
+  width:clamp(172px,13.4vw,216px);
+  bottom:-3px;
+  filter:
+    drop-shadow(0 24px 26px rgba(0,0,0,.62))
+    drop-shadow(0 0 14px rgba(255,190,118,.13));
+}
+.canon-reconciled-hero .canon-wolf{
+  left:8.5%;
+  width:clamp(250px,20.5vw,320px);
+  bottom:-2.8%;
+  opacity:.94;
+  filter:
+    saturate(.76)
+    contrast(1.05)
+    brightness(.88)
+    drop-shadow(0 24px 24px rgba(0,0,0,.56))
+    drop-shadow(0 0 12px rgba(231,178,111,.10));
+}
+.canon-reconciled-hero .canon-dragon{
+  left:43%;
+  width:clamp(178px,15vw,238px);
+  bottom:-2.2%;
+  opacity:.93;
+  filter:
+    saturate(.78)
+    contrast(1.06)
+    brightness(.90)
+    drop-shadow(0 23px 22px rgba(0,0,0,.56))
+    drop-shadow(0 0 12px rgba(82,213,215,.10));
+}
+.canon-reconciled-hero .canon-ground-glow{
+  left:6%;
+  bottom:-19%;
+  width:54%;
+  height:40%;
+  opacity:.82;
+}
+@media (max-width:1050px){
+  .canon-reconciled-hero .canon-traveler{left:34%;width:162px}
+  .canon-reconciled-hero .canon-wolf{left:5%;width:255px}
+  .canon-reconciled-hero .canon-dragon{left:47%;width:190px}
+}
+@media (max-width:760px){
+  .canon-reconciled-hero .canon-narrative-layer{height:250px}
+  .canon-reconciled-hero .canon-traveler{left:37%;bottom:-2px;width:118px}
+  .canon-reconciled-hero .canon-wolf{left:0%;bottom:-17px;width:195px}
+  .canon-reconciled-hero .canon-dragon{left:58%;bottom:-12px;width:150px}
+  .canon-reconciled-hero .canon-ground-glow{left:-8%;bottom:-26%;width:92%;height:56%}
+}
+@media (max-width:420px){
+  .canon-reconciled-hero .canon-traveler{left:36%;width:112px}
+  .canon-reconciled-hero .canon-wolf{left:-2%;width:185px}
+  .canon-reconciled-hero .canon-dragon{left:59%;width:144px}
+}
