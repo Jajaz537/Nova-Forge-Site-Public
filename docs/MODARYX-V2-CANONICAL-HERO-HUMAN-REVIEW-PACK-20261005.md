@@ -43,27 +43,50 @@ La référence approuvée impose comme ancres :
 
 ## 4. Candidat V2 à revoir
 
-Code visuel courant du candidat :
-`f54f4c96350436dbc9a9d4796d687706fa9d1e26`
+Code visuel courant prouvé par l'archive complète :
+`fe9855c9c0e1b6e650a9994a0e04daba7fdda125`
+
+HEAD technique immédiatement postérieur, sans changement UI supplémentaire :
+`db5a0e9e6d6b9a0f00200ee4326770afbafeee5b`
 
 Living Threshold Visual Proof :
-- run `37311727875` — **SUCCESS**
-- artifact `11346416315`
-- digest `sha256:779e09e6169e0421511f40f541d7a67deafb9dfe738aad34cecad9e95615d872`
+- run `37321209579` — **SUCCESS**
+- artifact `11350471321`
+- digest `sha256:02a293ae1f94cb8c351494a0679b84836e6f56a6c288ac0ea33f99daca617cbc`
 - capture desktop : `multiscreen/desktop-home.png`
 - capture mobile : `multiscreen/mobile-home.png`
-- 87 captures dans l'archive.
+- **87 captures** dans l'archive
+- `KEYBOARD_REACHABLE 41 / 41`
+- desktop/mobile overflow `0 / 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `PASS_V2_MULTISCREEN_CAPTURE_INTEGRITY`.
 
 Le code UI n'a pas été modifié par les micro-proofs géométriques postérieurs.
+
+## 4.1 Passage éditorial premium
+
+Le candidat courant inclut aussi :
+- typographie hero et grands titres plus éditoriale/noble ;
+- surfaces moins « panneaux imbriqués » ;
+- bordures et fonds internes allégés ;
+- respiration verticale accrue ;
+- hiérarchie de cartes plus douce ;
+- même comportement produit et mêmes labels fonctionnels.
+
+Fichier isolé :
+`src/premium-editorial.css`
+
+Cette couche est réversible et prototype-only. Elle doit être incluse dans la revue humaine au même titre que le hero.
 
 ## 5. Preuve technique complémentaire
 
 Canonical Hero Composition Micro-Proof :
-- run `37314488570` — **SUCCESS**
-- commit `83259afcfb8d71fe53aebdf813ac849b16557b26`
+- run `37321410178` — **SUCCESS**
+- commit `db5a0e9e6d6b9a0f00200ee4326770afbafeee5b`
 - `PASS_V2_CANON_HERO_COMPOSITION`.
 
-Cette preuve confirme seulement que les ancres restent techniquement visibles, basses dans la composition et sans overlap significatif avec le copy.
+Cette preuve confirme seulement que les ancres restent techniquement visibles, basses dans la composition et sans overlap significatif avec le copy, y compris après la couche éditoriale premium.
 
 Elle ne répond pas à la question artistique : **est-ce suffisamment bon ?**
 
@@ -107,14 +130,16 @@ Vérifier :
 ### VR2-01 — P1 OPEN
 
 Le voyageur/loup/dragon sont présents, mais :
-- voyageur encore sous forme de silhouette prototype ;
+- le voyageur a reçu un passage d'illustration plus détaillé (armure, cape, emblème, lumière de contour) et n'est plus seulement la silhouette initiale ;
+- il reste néanmoins un asset vectoriel de prototype et doit encore être jugé humainement face à la référence ;
 - acceptation artistique humaine manquante ;
 - provenance production des companion assets manquante.
 
 ### VR2-02 — P1 OPEN
 
-Le monde a été éclairci/réchauffé, mais :
-- reste plus sombre que la source canonique ;
+Le monde a encore été éclairci/réchauffé et la couche éditoriale premium réduit l'effet dashboard/SaaS, mais :
+- la scène complète conserve volontairement un premier plan sombre pour la lisibilité et la profondeur ;
+- la partie haute du hero desktop mesurée sur la capture courante atteint une luminance relative moyenne d'environ `0.151` sur le crop 72–700 px, proche de la source complète mesurée autour de `0.153` ; cette mesure n'est pas un verdict artistique ;
 - acceptation humaine manquante.
 
 ### VR2-03 — P3 ACCEPTED_P2_P3
