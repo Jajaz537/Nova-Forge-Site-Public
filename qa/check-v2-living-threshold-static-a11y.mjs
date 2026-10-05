@@ -1,10 +1,14 @@
 import { readFileSync } from "node:fs";
 
 const cssPath = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/styles.css";
+const canonCssPath = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/canon-hero.css";
 const appPath = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx";
+const mainPath = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/main.jsx";
 const indexPath = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/index.html";
 const css = readFileSync(cssPath, "utf8");
+const canonCss = readFileSync(canonCssPath, "utf8");
 const app = readFileSync(appPath, "utf8");
+const main = readFileSync(mainPath, "utf8");
 const indexHtml = readFileSync(indexPath, "utf8");
 
 const fail = (message) => {
@@ -29,6 +33,17 @@ for (const label of ["Mods & contenus", "Mes profils pour ce jeu", "Créer", "Gu
 if (!app.includes("Configurations enregistrées de mods, versions et réglages.")) {
   fail("locked game-profile microcopy missing");
 }
+
+if (!app.includes("function CanonNarrativeLayer()")) fail("canonical hero narrative layer missing");
+for (const asset of ["living-threshold-wolf-baby.png","living-threshold-dragon-baby.png"]) {
+  if (!app.includes(asset)) fail("canonical companion reference missing: " + asset);
+}
+if (!main.includes('import "./canon-hero.css";')) fail("canonical hero override import missing");
+if (!canonCss.includes("Canon source luminance reconciliation")) fail("canonical luminance reconciliation missing");
+if (!canonCss.includes("brightness(1.24)")) fail("canonical desktop luminance override missing");
+if (!canonCss.includes("@media (forced-colors:active)")) fail("canonical forced-colors fallback missing");
+console.log("CANON_HERO_SOURCE_GUARD_OK");
+
 
 for (const [needle,message] of [
   ['<html lang="fr">',"prototype document language must be fr"],
