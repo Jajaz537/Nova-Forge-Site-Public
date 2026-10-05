@@ -2,6 +2,9 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import {signFounderAiRequest} from "../functions/_lib/founder-ai-bridge.mjs";
 
+import {onRequestGet as founderStatus} from "../functions/api/founder/ai/status.js";
+import {onRequestPost as founderChat} from "../functions/api/founder/ai/chat.js";
+
 const vector={
   keyHex:"00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff",
   method:"POST",
@@ -41,6 +44,40 @@ for(const file of [
   const text=fs.readFileSync(file,"utf8");
   assert.match(text,/authorizeFounderAi/);
 }
+function fakeDb(permissions){
+  return {
+    prepare(){
+      return {
+        bind(){return this;},
+        async first(){return {
+          identity_sub:"test-sub",
+          scope_json:"[]",
+          permissions_json:JSON.stringify(permissions),
+          created_at:"2026-10-05T00:00:00.000Z",
+          expires_at:"2099-01-01T00:00:00.000Z"
+        };},
+        async run(){return {success:true};}
+      };
+    }
+  };
+}
+function ctx({permissions=[],method="GET",origin=null,body=null,env={}}={}){
+  const headers={cookie:"modaryx_session=01234567890123456789012345678901"};
+  if(origin) headers.origin=origin;
+  if(body!==null) headers["content-type"]="application/json";
+  const request=new Request("https://modaryx.test/api/founder/ai/test",{method,headers,body:body===null?undefined:JSON.stringify(body)});
+  return {request,env:{MODARYX_DB:fakeDb(permissions),...env}};
+}
+const hidden=await founderStatus(ctx({permissions:[]}));
+assert.equal(hidden.status,404,"non-Founder endpoint must be undiscoverable");
+const founderUnconfigured=await founderStatus(ctx({permissions:["modaryx:founder"]}));
+assert.equal(founderUnconfigured.status,503,"Founder endpoint must fail closed without bridge config");
+const crossOrigin=await founderChat(ctx({permissions:["modaryx:founder"],method:"POST",origin:"https://evil.example",body:{conversation_id:"c",message:"hello"}}));
+assert.equal(crossOrigin.status,403,"Founder POST must reject cross-origin requests");
+const sameOriginUnconfigured=await founderChat(ctx({permissions:["modaryx:founder"],method:"POST",origin:"https://modaryx.test",body:{conversation_id:"c",message:"hello"}}));
+assert.equal(sameOriginUnconfigured.status,503,"Founder POST must fail closed when bridge is unconfigured");
+console.log("FOUNDER_AI_ROUTE_GATES","NON_FOUNDER_404 FOUNDER_UNCONFIGURED_503 CROSS_ORIGIN_403");
+
 console.log("FOUNDER_AI_GOLDEN_VECTOR",signed.signature);
 console.log("FOUNDER_AI_PUBLIC_DEFAULT","HIDDEN_UNLESS_VERIFIED_FOUNDER");
 console.log("PASS_V2_FOUNDER_AI_PRIVATE_INTEGRATION");
