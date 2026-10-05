@@ -241,7 +241,7 @@ try{
   await clickText(".detail-tabs button","Permissions");
   await waitText("Aucune licence de distribution réelle");
 
-  await clickAria("Notifications");
+  await clickText("footer button","Notifications");
   await waitText("Centre de notifications");
   await waitText("Aucune notification réelle");
   await waitText("Réponse éditeur reçue — Aetherlands");
@@ -261,7 +261,7 @@ try{
   await waitText("Types de contenus");
   await clickText(".onboarding-actions .quiet","Passer l’onboarding");
 
-  await clickAria("Bibliothèque");
+  await clickText("footer button","Bibliothèque");
   await waitText("Retrouvez favoris, suivis, collections, profils et historique sans les confondre.");
   await clickText(".library-tabs button","Favoris");
   await waitText("Contenus enregistrés");
@@ -486,7 +486,7 @@ try{
 
 
 
-  await clickAria("MODARYX IA");
+  await clickText("footer button","MODARYX IA");
   await waitText("Une IA native du produit, pas un chatbot greffé.");
   await waitText("MODARYX IA n’est pas active dans cette démo.");
   await waitText("READ → PLAN → EXECUTE_SAFE → EXECUTE_SENSITIVE → BLOCKED.");
