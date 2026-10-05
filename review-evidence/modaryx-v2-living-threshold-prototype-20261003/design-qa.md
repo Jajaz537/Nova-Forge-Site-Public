@@ -1077,3 +1077,26 @@ Passage visuel :
 - comportements produit inchangés.
 
 La revue humaine face à la source canonique reste ouverte. Aucun PASS High-Fi/VF n'est déclaré.
+
+
+## Canon narrative trio cohesion pass — 5 octobre 2026
+
+**TERMINÉ — prototype ciblé / validation humaine toujours manquante**
+
+But :
+réduire la domination visuelle du loup et du dragon et rendre le trio plus cohérent avec la hiérarchie narrative de la source canonique, sans ajouter de nouvel asset.
+
+Résultat prouvé :
+- composition micro-proof `37324897850` — **SUCCESS**
+- traveler desktop overlap copy ~11.49 % (< 12 %)
+- aucun overlap copy wolf/dragon desktop/mobile
+- visibilité des trois ancres au-dessus des seuils
+- Living Threshold `37324897735` — **SUCCESS**
+- artifact `11352066192`
+- 87 captures
+- intégrité archive : PASS.
+
+Le traitement reste un candidat de prototype :
+- traveler toujours illustré en SVG interne ;
+- companions toujours prototype-only ;
+- appréciation de cohérence stylistique finale : session humaine requise.
