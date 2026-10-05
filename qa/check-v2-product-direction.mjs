@@ -2,9 +2,11 @@ import { readFileSync } from "node:fs";
 
 const mainPath = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/main.jsx";
 const cssPath = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/product-blue-violet.css";
+const canonPath = "docs/MODARYX-V2-DESIGN-CANON-20261005.md";
 
 const main = readFileSync(mainPath, "utf8");
 const css = readFileSync(cssPath, "utf8");
+const canon = readFileSync(canonPath, "utf8");
 
 function assert(condition, message) {
   if (!condition) {
@@ -29,6 +31,13 @@ assert(/h1,\s*h2,\s*h3[\s\S]*font-family:\s*Inter/.test(css), "product sans-seri
 assert(/\.game-hero\s*\{[\s\S]*background-position/.test(css), "contextual Game Hub banner contract missing");
 assert(css.includes("no full-screen marketing hero"), "design rationale marker missing");
 assert(css.includes("balanced blue + violet"), "blue/violet balance marker missing");
+assert(css.includes("human-selected Aurelian Vale Game Hub canon"), "human-selected Game Hub canon marker missing");
+assert(/\.game-hub-page \.hub-layout[\s\S]*grid-template-columns:\s*minmax\(0, 1fr\) 336px/.test(css), "desktop Game Hub + profile rail structure missing");
+assert(/\.game-hub-page \.content-grid[\s\S]*grid-template-columns:\s*1fr/.test(css), "dense single-column Game Hub content list missing");
+assert(/\.game-hub-page \.profiles-rail[\s\S]*position:\s*sticky/.test(css), "desktop profile rail contract missing");
+assert(canon.includes("VERROUILLÉ PAR DÉCISION HUMAINE"), "human design canon is not locked");
+assert(canon.includes("Mélange équilibré bleu nuit + violet premium"), "canonical blue/violet palette statement missing");
+assert(canon.includes("contenus présentés prioritairement en lignes produit denses sur desktop"), "canonical dense desktop list statement missing");
 
 console.log("PASS_V2_PRODUCT_DIRECTION");
-console.log("PRODUCT_DIRECTION", "product-first blue+violet, no full-screen marketing hero");
+console.log("PRODUCT_DIRECTION", "human-selected Game Hub, dense desktop list, right profile rail, blue+violet, no full-screen marketing hero");
