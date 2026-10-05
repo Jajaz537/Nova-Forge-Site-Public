@@ -611,3 +611,39 @@ Les anciennes sections hero restent des preuves historiques/prototype uniquement
 
 Règle de reprise :
 toute nouvelle passe design doit lire d'abord `docs/MODARYX-V2-DESIGN-CANON-20261005.md` et ne doit pas réactiver le hero narratif comme direction principale.
+
+
+## 26. Preuve fraîche — alignement Game Hub canon humain — 5 octobre 2026
+
+**TERMINÉ pour la passe technique ciblée / VF stricte toujours BLOQUÉE**
+
+Branche :
+`design/modaryx-v2-blue-violet-product-20261005`
+
+Commit prouvé :
+`1975c33a76aac62d269cee3c36506a6768205e20`
+
+Workflow :
+`MODARYX V2 Living Threshold Visual Proof`
+
+Run :
+`37355156732` — **SUCCESS**
+
+La preuve verrouille désormais explicitement :
+- décision humaine Game Hub ;
+- structure desktop en liste produit dense ;
+- rail droit profils ;
+- mélange bleu nuit + violet premium ;
+- absence de retour au grand hero marketing comme cible directrice.
+
+Preuves héritées du même run :
+- direction produit : PASS ;
+- accessibilité navigateur : PASS ;
+- product flows : PASS ;
+- 87 captures multiscreen ;
+- intégrité captures : PASS.
+
+Limites inchangées :
+- cette preuve ne ferme pas les gates production ;
+- elle ne remplace pas NVDA / VoiceOver / TalkBack / Safari / appareils physiques ;
+- elle ne sélectionne pas la stack production et ne déclenche aucun cutover.
