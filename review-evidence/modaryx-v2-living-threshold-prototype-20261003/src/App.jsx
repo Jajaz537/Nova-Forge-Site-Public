@@ -331,7 +331,7 @@ function CanonNarrativeLayer() {
 }
 
 function Discover({ onOpen }) {
-  return <main id="main-content" tabIndex="-1"><section className="editorial-hero canon-reconciled-hero"><div className="editorial-hero-copy"><span className="kicker">Votre monde évolue</span><h1>Redécouvrez vos jeux,<br/>une possibilité à la fois.</h1><p>Explorez des contenus, vérifiez leur compatibilité et composez des expériences qui vous ressemblent, au cœur d’un royaume vivant.</p><button className="primary">Découvrir maintenant <ArrowRight/></button></div><CanonNarrativeLayer/></section><section className="page-section"><div className="section-heading"><div><span className="kicker">En ce moment</span><h2>Des mondes à réinventer</h2></div></div><div className="content-grid editorial">{contentItems.slice(0,3).map(item => <ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div></section></main>;
+  return <main id="main-content" tabIndex="-1"><section className="editorial-hero canon-reconciled-hero"><div className="editorial-hero-copy"><span className="kicker">Votre monde évolue</span><h1>Redécouvrez vos jeux,<br/>une possibilité à la fois.</h1><p>Explorez des contenus, vérifiez leur compatibilité et composez des expériences qui vous ressemblent, au cœur d’un royaume vivant.</p><button className="primary">Découvrir maintenant <ArrowRight/></button></div></section><section className="page-section"><div className="section-heading"><div><span className="kicker">En ce moment</span><h2>Des mondes à réinventer</h2></div></div><div className="content-grid editorial">{contentItems.slice(0,3).map(item => <ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div></section></main>;
 }
 
 function CollectionsPage() {
