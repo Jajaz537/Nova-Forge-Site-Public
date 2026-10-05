@@ -2294,3 +2294,26 @@ Comparaison complémentaire :
 - le candidat reste plus sombre que la source canonique ;
 - aucune validation artistique humaine du candidat réconcilié n'est acquise ;
 - High-Fi/VF restent BLOQUÉS.
+
+
+## 79. Hero canonique — garde géométrique — 5 octobre 2026
+
+**TERMINÉ pour le prototype ciblé / validation humaine non remplacée**
+
+Micro-proof :
+- workflow `MODARYX V2 Canonical Hero Composition Micro-Proof` ;
+- run `37314488570` — **SUCCESS** ;
+- commit `83259afcfb8d71fe53aebdf813ac849b16557b26` ;
+- marqueur `PASS_V2_CANON_HERO_COMPOSITION`.
+
+Le garde-fou vérifie desktop + mobile :
+- présence voyageur / loup / bébé dragon ;
+- visibilité majoritaire dans le hero ;
+- zone narrative basse ;
+- overlap limité avec le contenu éditorial ;
+- couche décorative non interactive et masquée aux technologies d'assistance.
+
+À ne pas sur-déclarer :
+- géométrie verte ≠ validation artistique ;
+- compagnon visible ≠ provenance production fermée ;
+- le High-Fi final reste BLOQUÉ.
