@@ -1,0 +1,34 @@
+import { readFileSync } from "node:fs";
+
+const mainPath = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/main.jsx";
+const cssPath = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/product-blue-violet.css";
+
+const main = readFileSync(mainPath, "utf8");
+const css = readFileSync(cssPath, "utf8");
+
+function assert(condition, message) {
+  if (!condition) {
+    console.error("FAIL_V2_PRODUCT_DIRECTION", message);
+    process.exit(1);
+  }
+}
+
+const imports = [...main.matchAll(/import\s+["']\.\/([^"']+\.css)["'];/g)].map(m => m[1]);
+const productIndex = imports.indexOf("product-blue-violet.css");
+const editorialIndex = imports.indexOf("premium-editorial.css");
+
+assert(productIndex >= 0, "product-blue-violet.css import missing");
+assert(editorialIndex >= 0, "premium-editorial.css import missing");
+assert(productIndex > editorialIndex, "product direction override must load after premium-editorial.css");
+
+assert(css.includes("--violet:"), "violet token missing");
+assert(css.includes("--cyan-2:"), "blue token missing");
+assert(/\.canon-reconciled-hero::before[\s\S]*display:\s*none\s*!important/.test(css), "old cinematic Discover pseudo-hero is not explicitly disabled");
+assert(/\.canon-reconciled-hero::after[\s\S]*display:\s*none\s*!important/.test(css), "old cinematic Discover overlay is not explicitly disabled");
+assert(/h1,\s*h2,\s*h3[\s\S]*font-family:\s*Inter/.test(css), "product sans-serif heading contract missing");
+assert(/\.game-hero\s*\{[\s\S]*background-position/.test(css), "contextual Game Hub banner contract missing");
+assert(css.includes("no full-screen marketing hero"), "design rationale marker missing");
+assert(css.includes("balanced blue + violet"), "blue/violet balance marker missing");
+
+console.log("PASS_V2_PRODUCT_DIRECTION");
+console.log("PRODUCT_DIRECTION", "product-first blue+violet, no full-screen marketing hero");
