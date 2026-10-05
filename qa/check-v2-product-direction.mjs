@@ -46,6 +46,7 @@ assert(canon.includes("contenus présentés prioritairement en lignes produit de
 assert(app.includes('const navItems = ["Découvrir", "Jeux", "Mods & contenus", "Collections", "Créateurs", "Communauté"];'), "canonical six-item primary navigation missing");
 assert(!app.includes('"Communauté", "Créer"'), "Créer must not return to the primary canon navigation");
 assert(!app.includes("<CanonNarrativeLayer/>"), "historical cinematic narrative layer must not render in active Discover");
+assert(!app.includes("function CanonNarrativeLayer()"), "rejected cinematic narrative component must not remain in active App source");
 assert(app.includes('className="demo-cta"'), "canonical Demonstration CTA missing from desktop topbar");
 assert(topbar.includes(".top-actions .desktop-utility{display:none}"), "non-canonical desktop utility buttons must stay out of the visible topbar");
 
