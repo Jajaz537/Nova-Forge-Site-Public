@@ -12,6 +12,7 @@ on:
       - 'qa/capture-v2-living-threshold-multiscreen.mjs'
       - 'qa/check-v2-multiscreen-capture-integrity.mjs'
       - 'qa/check-v2-living-threshold-product-flows.mjs'
+      - 'qa/check-v2-product-direction.mjs'
       - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/**'
   workflow_dispatch:
 
@@ -48,6 +49,12 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-v2-living-threshold-static-a11y.mjs
+
+      - name: Lock selected product-first visual direction
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-product-direction.mjs
 
       - name: Build isolated prototype
         shell: bash
