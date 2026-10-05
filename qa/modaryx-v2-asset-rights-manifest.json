@@ -26,6 +26,22 @@
       "status": "ALLOWED_PROTOTYPE_ONLY",
       "sourceNote": "Living Threshold prototype content-sheet asset retained as MODARYX-origin demo material. Production provenance/licensing archive remains required before final use.",
       "evidence": "docs/MODARYX-V2-GAME-ATMOSPHERE-IP-POLICY-20261004.md"
+    },
+    {
+      "path": "review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-wolf-baby.png",
+      "gitBlobSha": "632d39f72d1edf767b40054fc3913dd7991201bf",
+      "classification": "ORIGINAL_MODARYX_DEMO",
+      "status": "ALLOWED_PROTOTYPE_ONLY",
+      "sourceNote": "Legacy MODARYX living-world wolf layer copied byte-for-byte for reversible canon-reconciliation prototype work; original repo provenance is preserved. Production provenance/licensing archive remains required before final use.",
+      "evidence": "qa/MODARYX-LIVING-WORLD-ART-DIRECTION-20260919.md"
+    },
+    {
+      "path": "review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-dragon-baby.png",
+      "gitBlobSha": "c056e23172a81887ac913929fc357fec25b132d5",
+      "classification": "ORIGINAL_MODARYX_DEMO",
+      "status": "ALLOWED_PROTOTYPE_ONLY",
+      "sourceNote": "Legacy MODARYX living-world dragon hatchling layer copied byte-for-byte for reversible canon-reconciliation prototype work; original repo provenance is preserved. Production provenance/licensing archive remains required before final use.",
+      "evidence": "qa/MODARYX-LIVING-WORLD-ART-DIRECTION-20260919.md"
     }
   ]
 }
