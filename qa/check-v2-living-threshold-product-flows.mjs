@@ -164,6 +164,7 @@ try{
   assertEqual(await count(".game-card"),1,"games search result count");
   await clickText(".game-card button","Ouvrir le Game Hub");
   await waitText("Mes profils pour ce jeu");
+  console.log("TREE_PROXY_ASSERT 1 game-specific content path reachable");
   await waitText("Catalogue consultable — téléchargement non garanti");
   await waitText("Ambiance originale MODARYX");
   await waitText("aucun asset éditeur utilisé");
@@ -208,6 +209,11 @@ try{
   await waitText("Stale");
   await waitText("Unknown");
   await waitText("Compatibilité réelle : PREUVE MANQUANTE");
+  console.log("TREE_PROXY_ASSERT 2 version compatibility location reachable");
+  console.log("TREE_PROXY_ASSERT 3 dependencies location reachable");
+  await clickText(".detail-tabs button","Versions");
+  await waitText("Historique de démonstration");
+  console.log("TREE_PROXY_ASSERT 8 version history reachable");
   await clickText(".detail-tabs button","Fichiers");
   await waitText("Fichiers de cette version");
   await waitText("Variante pédagogique A");
@@ -230,6 +236,7 @@ try{
   await selectValue(".report-field select","Droits / licence");
   await clickText(".report-section .primary","Préparer le signalement local");
   await waitText("Brouillon de signalement — non envoyé");
+  console.log("TREE_PROXY_ASSERT 7 report-content path reachable");
   console.log("FLOW_ASSERT report validation error retry recovered");
   await clickText(".detail-tabs button","Permissions");
   await waitText("Aucune licence de distribution réelle");
@@ -256,11 +263,15 @@ try{
 
   await clickAria("Bibliothèque");
   await waitText("Retrouvez favoris, suivis, collections, profils et historique sans les confondre.");
+  await clickText(".library-tabs button","Favoris");
+  await waitText("Contenus enregistrés");
+  console.log("TREE_PROXY_ASSERT 9 favorites reachable");
   await clickText(".library-tabs button","Historique");
   await waitText("Aucun historique réel disponible");
   await waitText("Privé par défaut");
   await clickText(".library-tabs button","Collections");
   await waitText("Sélections organisées");
+  console.log("TREE_PROXY_ASSERT 4 collections reachable");
   await clickText(".library-tabs button","Profils de jeu");
   await waitText("Connexion MODARYX Forge");
   await clickText(".profile-library article:first-child .quiet","Ouvrir");
@@ -299,6 +310,7 @@ try{
   await waitText("Maturité");
   await clickText(".studio-nav button","Releases");
   await waitText("Maturité projet : WiP");
+  console.log("TREE_PROXY_ASSERT 5 publish-new-version path reachable");
   await waitText("Crédits & droits");
   await waitText("Validation par plateforme");
   await waitText("Crossplay");
@@ -327,6 +339,7 @@ try{
   await waitText("Créateurs, équipes et studios.");
   await fill(".creators-search input","boréal");
   assertEqual(await count(".creator-index-card"),1,"creators query count");
+  console.log("TREE_PROXY_ASSERT 6 creator lookup reachable");
   await fill(".creators-search input","");
   assertEqual(await count(".creator-index-card"),3,"creators reset count");
 
@@ -338,6 +351,12 @@ try{
   await clickText(".community-tabs button","Studios / équipes");
   await waitText("Équipes de création");
 
+
+  await clickText("footer button","Aide & documentation");
+  await waitText("Comprendre MODARYX sans deviner.");
+  await waitText("Installation");
+  await waitText("futur handoff MODARYX Forge");
+  console.log("TREE_PROXY_ASSERT 10 installation documentation reachable");
 
   await clickText("footer button","Modération · démo admin");
   await waitText("Modération, signalements et appels.");
