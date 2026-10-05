@@ -5,9 +5,9 @@
 
 ## Base IA vérifiée
 
-- Modaryx — IA Foundation **v0.133**
-- SHA-256 : `c7fea980c8de6a06d9325fe4408cca722097b2b70b831e8933e822faad52755d`
-- 374/374 tests PASS
+- Modaryx — IA Foundation **v0.134**
+- SHA-256 : `7387a75da8599abab7d306e05dfeeb128c0efc54fb636d629ae9d16b17b30faa`
+- 381/381 tests PASS
 - 12/12 evals PASS
 - RC rehearsal PASS
 - migration-scale PASS
