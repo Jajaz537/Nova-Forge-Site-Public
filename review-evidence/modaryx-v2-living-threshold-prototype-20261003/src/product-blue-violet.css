@@ -1,0 +1,190 @@
+/* MODARYX V2 — product-first blue/violet direction
+   User-selected visual target: premium dark product UI, balanced blue + violet,
+   no full-screen marketing hero. Contextual game banners remain allowed. */
+
+:root {
+  --bg: #080d18;
+  --surface: #0d1421;
+  --surface-2: #121b2b;
+  --line: #28364d;
+  --text: #f3f5fb;
+  --muted: #9ba9bd;
+  --cyan: #4fd3ff;
+  --cyan-2: #3b7cff;
+  --teal: #63dec9;
+  --violet: #8b63ff;
+  --shadow: 0 24px 70px rgba(0,0,0,.42);
+}
+
+body {
+  background:
+    radial-gradient(circle at 18% -10%, rgba(89, 94, 255, .10), transparent 34rem),
+    radial-gradient(circle at 86% 10%, rgba(139, 99, 255, .08), transparent 30rem),
+    var(--bg);
+}
+
+.app-shell {
+  background:
+    radial-gradient(circle at 84% 4%, rgba(59,124,255,.08), transparent 26rem),
+    radial-gradient(circle at 20% 18%, rgba(139,99,255,.055), transparent 30rem),
+    transparent;
+}
+
+.topbar {
+  background: rgba(7, 12, 23, .93);
+  border-bottom-color: rgba(139, 159, 194, .16);
+}
+
+.logo span { color: #6f8dff; }
+
+.global-nav button.active:after,
+.local-nav button.active:after {
+  background: linear-gradient(90deg, var(--cyan), #6478ff 52%, var(--violet));
+  box-shadow: 0 0 16px rgba(103, 108, 255, .42);
+}
+
+.primary {
+  color: #fff;
+  background: linear-gradient(112deg, #397bff 0%, #5c70ff 48%, #8b63ff 100%);
+  box-shadow: 0 12px 36px rgba(91, 91, 255, .28);
+}
+
+.avatar {
+  color: #fff !important;
+  background: linear-gradient(135deg, #426fff, #8b63ff) !important;
+}
+
+.game-hero {
+  min-height: 310px;
+  background-position: center 46%;
+}
+
+.game-atmosphere.atmosphere-aetherlands {
+  background-image:
+    linear-gradient(105deg, rgba(5,12,25,.92) 0%, rgba(8,18,36,.70) 36%, rgba(31,32,72,.22) 70%, rgba(48,35,92,.16) 100%),
+    url('/assets/living-threshold-hero.png');
+}
+
+.game-atmosphere.atmosphere-aetherlands:before {
+  opacity: .58;
+  background:
+    radial-gradient(circle at 77% 22%, rgba(78,172,255,.17), transparent 28%),
+    radial-gradient(circle at 89% 28%, rgba(139,99,255,.14), transparent 29%);
+}
+
+.hero-shade {
+  background:
+    linear-gradient(90deg, rgba(4,9,18,.94) 0%, rgba(7,15,28,.74) 40%, rgba(21,24,53,.34) 72%, rgba(31,24,58,.18) 100%),
+    linear-gradient(0deg, rgba(6,11,22,.94), transparent 62%);
+}
+
+.hero-search,
+.catalog-search,
+.global-search-field {
+  background: rgba(10, 19, 34, .91);
+  border-color: #40506b;
+}
+
+.local-nav {
+  background: rgba(8, 14, 25, .96);
+}
+
+.content-card,
+.game-card,
+.search-groups > section,
+.detail-section,
+.help-docs-grid article,
+.moderation-detail {
+  background: linear-gradient(180deg, #101827, #0b121f);
+  border-color: #27364b;
+}
+
+.content-card:hover {
+  border-color: #52639c;
+  box-shadow: 0 18px 42px rgba(0,0,0,.28), 0 0 0 1px rgba(139,99,255,.08);
+}
+
+.eyebrow,
+.empty svg,
+.search-result-row > svg,
+.search-result-static > svg,
+.catalog-summary button {
+  color: #78bfff;
+}
+
+.profiles-rail {
+  border-left-color: #2c3850;
+}
+
+.rail-icon {
+  background: linear-gradient(135deg, rgba(65,126,255,.16), rgba(139,99,255,.23));
+  color: #a98fff;
+}
+
+.profile-add {
+  border-color: rgba(139,99,255,.58);
+  background: linear-gradient(90deg, rgba(139,99,255,.20), rgba(59,124,255,.13));
+}
+
+.profile-row {
+  background: #0d1624;
+  border-color: #2b3950;
+}
+
+.compat {
+  color: #071713;
+  background: var(--teal);
+}
+
+/* No large marketing hero in the selected MODARYX direction.
+   Discover becomes a compact product introduction instead of a cinematic hero. */
+.editorial-hero,
+.canon-reconciled-hero {
+  min-height: auto !important;
+  padding: 54px 4vw 28px !important;
+  display: block !important;
+  background:
+    radial-gradient(circle at 78% 15%, rgba(139,99,255,.08), transparent 24rem),
+    linear-gradient(180deg, rgba(13,20,33,.82), rgba(8,13,24,.36)) !important;
+  border-bottom: 1px solid rgba(106,124,158,.14);
+}
+
+.editorial-hero > div,
+.editorial-hero-copy {
+  max-width: 780px;
+}
+
+.editorial-hero h1,
+.canon-reconciled-hero .editorial-hero-copy h1 {
+  font-size: clamp(38px, 4.2vw, 58px) !important;
+  line-height: 1.04;
+  margin: 12px 0 18px;
+}
+
+.editorial-hero p,
+.canon-reconciled-hero .editorial-hero-copy p {
+  color: #bac6d8;
+  font-size: 17px;
+  max-width: 680px;
+}
+
+.canon-narrative-layer {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .editorial-hero,
+  .canon-reconciled-hero {
+    min-height: auto !important;
+    padding: 34px 18px 22px !important;
+  }
+
+  .editorial-hero h1,
+  .canon-reconciled-hero .editorial-hero-copy h1 {
+    font-size: clamp(34px, 10vw, 46px) !important;
+  }
+
+  .game-hero {
+    min-height: 430px;
+  }
+}
