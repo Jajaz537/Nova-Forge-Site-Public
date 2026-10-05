@@ -1,0 +1,24 @@
+name: MODARYX V2 Founder AI private integration proof
+
+on:
+  pull_request:
+    paths:
+      - "functions/_lib/founder-ai-bridge.mjs"
+      - "functions/api/founder/ai/**"
+      - "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx"
+      - "qa/check-v2-founder-ai-private-integration.mjs"
+      - ".github/workflows/modaryx-v2-founder-ai-private-integration-proof.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node qa/check-v2-founder-ai-private-integration.mjs
