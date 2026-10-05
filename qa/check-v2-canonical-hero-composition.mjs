@@ -46,6 +46,22 @@ function assert(condition,message){ if(!condition) throw new Error(message); }
 
 async function inspect(label,width,height,mobile){
   await navigate(width,height,mobile);
+  const point=await evaluate(`(() => {
+    const b=[...document.querySelectorAll('.global-nav button')].find(el=>el.textContent.trim()==='Découvrir');
+    if(!b) return null;
+    const r=b.getBoundingClientRect();
+    return {x:r.left+r.width/2,y:r.top+r.height/2};
+  })()`);
+  assert(point,label+": Discover navigation unavailable");
+  await send("Input.dispatchMouseEvent",{type:"mousePressed",x:point.x,y:point.y,button:"left",clickCount:1});
+  await send("Input.dispatchMouseEvent",{type:"mouseReleased",x:point.x,y:point.y,button:"left",clickCount:1});
+  let discoverReady=false;
+  for(let i=0;i<50;i++){
+    discoverReady=await evaluate("document.body.innerText.includes('Redécouvrez vos jeux')");
+    if(discoverReady) break;
+    await sleep(50);
+  }
+  assert(discoverReady,label+": Discover route did not render after navigation");
   const data=await evaluate(`(() => {
     const hero=document.querySelector('.canon-reconciled-hero');
     const copy=document.querySelector('.editorial-hero-copy');
