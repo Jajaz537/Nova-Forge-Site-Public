@@ -1,4 +1,4 @@
-.top-actions .desktop-utility{display:none}
+.top-actions .desktop-utility{opacity:.72}
 .top-actions .demo-cta{min-width:146px;min-height:40px;padding:0 20px;border:0;border-radius:7px;color:#fff;font-weight:700;background:linear-gradient(105deg,#6d55e8 0%,#5265f4 56%,#6a4cff 100%);box-shadow:0 10px 28px rgba(93,79,233,.24)}
 .top-actions .demo-cta:hover{background:linear-gradient(105deg,#7d61f0 0%,#5c70ff 56%,#7958ff 100%)}
 @media(max-width:900px){.top-actions .demo-cta{display:none}}
