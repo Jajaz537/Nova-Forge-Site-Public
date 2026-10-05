@@ -1,5 +1,7 @@
 name: MODARYX V2 Canonical Hero Composition Micro-Proof
 
+# Targeted micro-proof for the canonical hero narrative anchors.
+
 on:
   push:
     branches:
