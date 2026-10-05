@@ -2594,3 +2594,32 @@ Conséquence :
 un nouveau JSON machine MODARYX V2 oublié hors registry / classification fera échouer le checker consolidé au lieu de disparaître silencieusement de l'anti-oubli.
 
 Ce PASS valide la couverture de classification machine, pas la production.
+
+
+## 77. Sécurité des workflows GitHub Actions
+
+**TERMINÉ pour les workflows MODARYX V2 présents / production inchangée**
+
+Run :
+- `37239644264` — **SUCCESS**
+
+Marqueurs :
+- `MODARYX_V2_WORKFLOW_COUNT 51`
+- `MODARYX_V2_ACTION_USES_COUNT 52`
+- `PASS_V2_WORKFLOW_ACTION_SHA_PINS`
+- `MODARYX_V2_WORKFLOW_SECURITY_COUNT 51`
+- `MODARYX_V2_CHECKOUT_BLOCK_COUNT 51`
+- `PASS_V2_WORKFLOW_SECURITY_BASELINE`.
+
+Garde-fous couverts :
+- chaque action externe utilisée par les workflows MODARYX V2 doit être référencée par SHA, pas par tag flottant ;
+- les workflows contrôlés possèdent le bloc de checkout attendu ;
+- la baseline sécurité des workflows doit rester verte ;
+- aucune permission GitHub supplémentaire n'est déduite de ce PASS.
+
+Fichiers :
+- `qa/check-v2-workflow-action-pins.mjs`
+- `qa/check-v2-workflow-security-baseline.mjs`
+- `.github/workflows/modaryx-v2-workflow-action-pin-proof.yml`
+
+Ce PASS prouve la configuration contrôlée des workflows présents, pas la sécurité globale de la production ou du compte GitHub.
