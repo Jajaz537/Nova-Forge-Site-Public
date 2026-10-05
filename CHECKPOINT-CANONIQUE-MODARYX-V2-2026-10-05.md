@@ -647,3 +647,65 @@ Limites inchangées :
 - cette preuve ne ferme pas les gates production ;
 - elle ne remplace pas NVDA / VoiceOver / TalkBack / Safari / appareils physiques ;
 - elle ne sélectionne pas la stack production et ne déclenche aucun cutover.
+
+
+## 27. Comparaison normalisée + progression VF stricte — 5 octobre 2026
+
+**TERMINÉ pour la comparaison structurelle / VF globale toujours BLOQUÉE**
+
+Référence humaine :
+- capture utilisateur `Image ChatGPT 5 oct. 2026, 19_33_06.png` ;
+- 1487 × 1058 ;
+- SHA-256 `9d7a709fe5091aeee3f7f1755f8883991a739a281e8d1c4a2034b5614dad380e`.
+
+Candidat prouvé :
+- commit visuel `cb1ed7973efec1b9a10535c6f4a85e191ecb1f56` ;
+- run `37363048084` — **SUCCESS** ;
+- artifact `11366899033` ;
+- digest `sha256:4206f5d073aa6eb04d89e5eb6af618e4b5a2b835aacf294f693cd6b04031d512` ;
+- capture desktop 1440 × 1024 ;
+- SHA-256 capture `6b93bc1f9ba5b2c34e3e40e76e574b7bb1fecf99af8dbeb96919f1cdde7adeb7`.
+
+Document :
+`docs/MODARYX-V2-NORMALIZED-VISUAL-COMPARISON-20261005.md`
+
+Le blocker `normalized-visual-comparison` est désormais **PROVEN**.
+
+Le gate VF mis à jour a été vérifié par :
+- workflow `MODARYX V2 VF Readiness Gate Proof` ;
+- run `37363745523` — **SUCCESS**.
+
+Comptage strict courant :
+- 32 exigences obligatoires ;
+- 2 exigences maintenant PROVEN dans le gate externe principal :
+  - `approved-visual-reference` ;
+  - `normalized-visual-comparison`.
+- progression arithmétique stricte : **2 / 32 = 6,25 %**.
+
+Cette progression ne ferme aucun autre blocker externe, production, Forge ou rights/legal.
+
+## 28. Préparation de la décision de stack — 5 octobre 2026
+
+**EN COURS — aucune stack sélectionnée**
+
+Stratégie auth/backend définie :
+`docs/MODARYX-V2-AUTH-BACKEND-STRATEGY-20261005.md`
+
+Preuves stack :
+`docs/MODARYX-V2-STACK-PREREQUISITE-EVIDENCE-20261005.md`
+
+État des 6 prérequis :
+- `AUTH_BACKEND_STRATEGY_DEFINED` — PROVEN ;
+- `BUNDLE_BUDGET_MEASURED` — PROVEN ;
+- `V2_ARCHITECTURE_STABLE` — PROVEN pour décision de stack ;
+- `INTERACTION_REQUIREMENTS_KNOWN` — PROVEN pour décision de stack ;
+- `CORE_WIREFRAMES_COMPLETE` — OPEN ;
+- `HUMAN_TREE_TEST` — OPEN.
+
+Baseline bundle mesurée sur le prototype React/Vite :
+- HTML 0,67 kB / gzip 0,39 kB ;
+- CSS 108,28 kB / gzip 19,67 kB ;
+- JS 356,85 kB / gzip 98,67 kB.
+
+Aucun root V2 réel n'est créé par cette preuve.
+Aucune migration Workers/Pages ou Cloudflare critique n'est autorisée.
