@@ -7,6 +7,8 @@ on:
       - "functions/api/founder/ai/**"
       - "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx"
       - "qa/check-v2-founder-ai-private-integration.mjs"
+      - "qa/modaryx-v2-ai-integration-contract.json"
+      - "qa/check-v2-ai-integration-contract.mjs"
       - ".github/workflows/modaryx-v2-founder-ai-private-integration-proof.yml"
   workflow_dispatch:
 
@@ -15,10 +17,19 @@ permissions:
 
 jobs:
   proof:
+    name: Validate Founder-only Nova integration
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          node-version: "22"
-      - run: node qa/check-v2-founder-ai-private-integration.mjs
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate Founder-only integration
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-founder-ai-private-integration.mjs
+          node qa/check-v2-ai-integration-contract.mjs
