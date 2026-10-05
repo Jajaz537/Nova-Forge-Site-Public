@@ -203,8 +203,8 @@ footer .logo{opacity:.92}
 /* Canon narrative cohesion pass — prototype-only.
    Rebalances the approved trio hierarchy without introducing new assets. */
 .canon-reconciled-hero .canon-traveler{
-  left:28.5%;
-  width:clamp(172px,13.4vw,216px);
+  left:29.5%;
+  width:clamp(158px,12vw,194px);
   bottom:-3px;
   filter:
     drop-shadow(0 24px 26px rgba(0,0,0,.62))
@@ -242,7 +242,7 @@ footer .logo{opacity:.92}
   opacity:.82;
 }
 @media (max-width:1050px){
-  .canon-reconciled-hero .canon-traveler{left:34%;width:162px}
+  .canon-reconciled-hero .canon-traveler{left:34%;width:150px}
   .canon-reconciled-hero .canon-wolf{left:5%;width:255px}
   .canon-reconciled-hero .canon-dragon{left:47%;width:190px}
 }
