@@ -2189,3 +2189,22 @@ Conséquence :
 un nouveau JSON machine MODARYX V2 oublié hors registry / classification fera échouer le checker consolidé au lieu de disparaître silencieusement de l'anti-oubli.
 
 Ce PASS valide la couverture de classification machine, pas la production.
+
+
+## 77. GitHub Actions — pins SHA + baseline sécurité — 4 octobre 2026
+
+**TERMINÉ pour les workflows V2 présents**
+
+Preuve :
+- run `37239644264` — **SUCCESS**
+- 51 workflows V2 contrôlés ;
+- 52 usages d'actions contrôlés ;
+- `PASS_V2_WORKFLOW_ACTION_SHA_PINS`
+- `PASS_V2_WORKFLOW_SECURITY_BASELINE`.
+
+À ne jamais perdre :
+- aucune action tierce MODARYX V2 ne doit revenir à un tag flottant ;
+- checkout et baseline sécurité restent contrôlés ;
+- un nouveau workflow doit entrer dans ces garde-fous avant d'être considéré couvert.
+
+Ce PASS ne remplace ni revue de dépendances applicatives, ni sécurité backend, ni sécurité production.
