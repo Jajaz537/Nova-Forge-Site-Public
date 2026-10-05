@@ -31,7 +31,7 @@ for(const [key,value] of Object.entries(data.productionStatus||{})){
 }
 if(data.productionStatus?.siteAssistant!=="FOUNDER_ONLY_CODE_INTEGRATED_NOT_DEPLOYED") throw new Error("site assistant status must remain deployment-honest");
 if(data.foundationArtifact?.vfProgress!==83) throw new Error("VF progress must stay at 83 until external proofs close");
-if(data.foundationArtifact?.tests!=="384/384"||data.foundationArtifact?.evals!=="12/12") throw new Error("sealed v0.135 proof mismatch");
+if(data.foundationArtifact?.tests!=="384/384"||data.foundationArtifact?.evals!=="12/12") throw new Error("sealed v0.136 proof mismatch");
 console.log("MODARYX_AI_PERMISSION_TIER_COUNT",data.permissionTiers.length);
 console.log("MODARYX_AI_PREVIEW_STATE_COUNT",data.previewStates.length);
 console.log("MODARYX_AI_INVARIANT_COUNT",data.invariants.length);
