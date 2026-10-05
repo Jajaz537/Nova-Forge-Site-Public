@@ -75,7 +75,8 @@
       "state": "OPEN"
     },
     "CORE_WIREFRAMES_COMPLETE": {
-      "state": "OPEN"
+      "state": "PROVEN",
+      "source": "docs/MODARYX-V2-CORE-WIREFRAMES-EQUIVALENCE-20261005.md"
     },
     "V2_ARCHITECTURE_STABLE": {
       "state": "PROVEN",
