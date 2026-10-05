@@ -832,6 +832,7 @@ function HelpDocs({ onNavigate }) {
     ["Profils de jeu","Préparer des configurations enregistrées de mods, versions et réglages sans confondre profil et collection."],
     ["Créateurs","Comprendre Creator Studio, projets, releases, crédits et états de publication."],
     ["Confiance & droits","Comprendre provenance, permissions, signalements et les limites des démonstrations actuelles."],
+    ["Installation","Comprendre fichiers, prérequis, profils et futur handoff MODARYX Forge avant toute action locale."],
     ["MODARYX Forge","Préparer le futur handoff desktop sans simuler une installation locale absente."],
   ];
   return <main id="main-content" tabIndex="-1" className="page-section help-docs">
