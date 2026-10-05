@@ -507,3 +507,71 @@ Pack humain rafraîchi :
 `docs/MODARYX-V2-CANONICAL-HERO-HUMAN-REVIEW-PACK-20261005.md`.
 
 Aucun PASS High-Fi/VF n'est déduit de ce passage.
+
+
+## 24. Cohésion du trio narratif canonique — 5 octobre 2026
+
+**TERMINÉ pour le prototype ciblé / validation artistique humaine toujours PREUVE MANQUANTE**
+
+Observation visuelle ciblée sur l'artifact premium précédent :
+- loup trop dominant par rapport au voyageur ;
+- dragon trop volumineux pour un rôle de bébé dragon ;
+- hiérarchie du trio encore peu cohérente avec la lecture narrative de la source approuvée ;
+- différence de rendu traveler/compagnons encore visible, sans pouvoir être considérée comme fermée sans revue humaine.
+
+Correction ciblée sans nouvel asset :
+- voyageur légèrement renforcé mais maintenu hors du copy ;
+- loup réduit et intégré par traitement tonal ;
+- bébé dragon réduit ;
+- saturation/contraste/luminosité des compagnons harmonisés avec le premier plan ;
+- glow de sol rééquilibré ;
+- mobile recomposé séparément.
+
+Séquence d'erreur respectée :
+1. run composition `37324395300` — **FAIL**
+   - erreur exacte : `desktop: traveler overlaps hero copy 0.227 > 0.12` ;
+2. correction ciblée ;
+3. run `37324572114` — **FAIL**
+   - erreur exacte : `desktop: traveler overlaps hero copy 0.137 > 0.12` ;
+4. correction ciblée ;
+5. run `37324733210` — **FAIL**
+   - erreur exacte : `desktop: traveler overlaps hero copy 0.122 > 0.12` ;
+6. nudge final ciblé ;
+7. micro-proof composition `37324897850` — **SUCCESS**.
+
+Mesures finales composition :
+- layer width desktop/mobile : `1.0000 / 1.0000` ;
+- traveler desktop : visible ~98.55 %, overlap copy ~11.49 % ;
+- wolf desktop : visible ~87.19 %, overlap copy 0 % ;
+- dragon desktop : visible ~86.25 %, overlap copy 0 % ;
+- traveler mobile : visible ~98.54 %, overlap copy 0 % ;
+- wolf mobile : visible ~80.14 %, overlap copy 0 % ;
+- dragon mobile : visible ~85.19 %, overlap copy 0 % ;
+- `PASS_V2_CANON_HERO_COMPOSITION`.
+
+Continuation complète après micro-proof :
+- Living Threshold run `37324897735` — **SUCCESS**
+- commit capturé `3846a09e1971c683e66ae3f7f5dc65e6e05fb2ea`
+- artifact `11352066192`
+- digest `sha256:ed3b7399d5f8d0a31762596839f3b20d15514b1f8bfe0381715b45308918a39f`
+- `KEYBOARD_REACHABLE 41 / 41`
+- desktop/mobile overflow `0 / 0`
+- `PASS_V2_LIVING_THRESHOLD_BROWSER_A11Y`
+- `PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS`
+- `MULTISCREEN_CAPTURE_COUNT 87`
+- `PASS_V2_MULTISCREEN_CAPTURE_INTEGRITY`.
+
+Checks PR du HEAD `3846a09e...` observés verts :
+- Anti-Contamination Guard ;
+- Low-Fi Review ;
+- CodeQL ;
+- Production Asset Promotion Gate ;
+- Canonical Hero Composition ;
+- Living Threshold Visual Proof.
+
+Limite :
+- cette passe améliore la hiérarchie et la cohésion visuelle du prototype ;
+- elle ne valide pas la qualité artistique finale du traveler ;
+- elle ne transforme pas les assets compagnon en assets production ;
+- elle ne ferme pas `normalized-visual-comparison` ;
+- une vraie validation humaine reste requise avant High-Fi final.
