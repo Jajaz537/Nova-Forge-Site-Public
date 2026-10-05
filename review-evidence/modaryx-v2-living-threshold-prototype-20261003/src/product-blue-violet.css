@@ -682,3 +682,20 @@ h1, h2, h3,
     padding-top: 22px;
   }
 }
+
+
+/* Canon polish: align the selected-game thumbnail with the identity block. */
+@media (min-width: 1051px) {
+  .game-hub-page .game-identity {
+    justify-content: center;
+    padding-left: 188px;
+  }
+
+  .game-hub-page .game-identity::before {
+    top: 0;
+    bottom: auto;
+    width: 162px;
+    height: 188px;
+    border-radius: 10px;
+  }
+}
