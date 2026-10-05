@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-04",
+  "date": "2026-10-05",
   "status": "PRE_PRODUCTION_CONTRACT_REGISTRY",
   "contracts": [
     {
@@ -307,7 +307,7 @@
       "id": "vf-readiness-gate",
       "contract": "qa/modaryx-v2-vf-readiness-gate.json",
       "checker": "qa/check-v2-vf-readiness-gate.mjs",
-      "source": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-04.md"
+      "source": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-05.md"
     },
     {
       "id": "external-validation-evidence",
