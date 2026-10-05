@@ -575,3 +575,39 @@ Limite :
 - elle ne transforme pas les assets compagnon en assets production ;
 - elle ne ferme pas `normalized-visual-comparison` ;
 - une vraie validation humaine reste requise avant High-Fi final.
+
+
+## 25. Décision humaine fraîche — canon Game Hub produit — 5 octobre 2026
+
+**PRIORITAIRE SUR LES SECTIONS HERO PRÉCÉDENTES POUR LA CIBLE WEB VF**
+
+L'utilisateur a rejeté explicitement la direction hero/cinématique comme cible actuelle du site et a fourni une capture de référence précise du Game Hub « Aurelian Vale ».
+
+Document de décision :
+`docs/MODARYX-V2-DESIGN-CANON-20261005.md`
+
+Cible humaine courante :
+- Game Hub produit sombre ;
+- topbar MODARYX ;
+- navigation Découvrir / Jeux / Mods & contenus / Collections / Créateurs / Communauté ;
+- bandeau contextuel du jeu ;
+- vignette jeu à gauche ;
+- nom + version ;
+- recherche dans le jeu ;
+- CTA Explorer les contenus ;
+- navigation locale ;
+- zone « Pour votre version » ;
+- contenus denses ;
+- rail « Mes profils pour ce jeu » ;
+- palette équilibrée bleu nuit + violet premium.
+
+Les anciennes sections hero restent des preuves historiques/prototype uniquement et ne doivent plus être interprétées comme cible artistique web actuelle.
+
+**État :**
+- décision humaine : TERMINÉ ;
+- alignement complet du prototype sur cette référence : EN COURS ;
+- suppression physique des anciennes preuves/branches : non requise et non exécutée ; elles sont classifiées comme historiques afin de préserver la provenance ;
+- VF : toujours BLOQUÉE par les gates production et validations externes restantes.
+
+Règle de reprise :
+toute nouvelle passe design doit lire d'abord `docs/MODARYX-V2-DESIGN-CANON-20261005.md` et ne doit pas réactiver le hero narratif comme direction principale.
