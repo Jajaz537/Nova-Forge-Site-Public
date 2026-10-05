@@ -427,3 +427,28 @@ Ce PASS ne transforme aucun asset en asset production :
 - content sheet : idem ;
 - loup/dragon : idem ;
 - validation juridique formelle : non effectuée.
+
+
+## 22. Pack de validation humaine du hero canonique
+
+**TERMINÉ pour la préparation / session humaine PREUVE MANQUANTE**
+
+Document :
+`docs/MODARYX-V2-CANONICAL-HERO-HUMAN-REVIEW-PACK-20261005.md`
+
+Le pack lie explicitement :
+- source canonique Library + SHA-256 ;
+- preuve d'approbation humaine historique ;
+- artifact/captures du candidat actuel ;
+- micro-proof géométrique ;
+- tâches desktop/mobile ;
+- findings P1 déjà ouverts ;
+- verdicts autorisés ;
+- format de preuve `VISUAL_REFERENCE_COMPARISON`.
+
+Règle :
+aucune automatisation ne peut remplir ce pack comme une vraie validation humaine.
+
+Prochain événement requis pour `normalized-visual-comparison` :
+- une vraie session humaine enregistrée ;
+- ou une correction ciblée suivie d'une vraie session humaine si le candidat est rejeté.
