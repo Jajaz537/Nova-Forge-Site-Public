@@ -44,15 +44,15 @@ La référence approuvée impose comme ancres :
 ## 4. Candidat V2 à revoir
 
 Code visuel courant prouvé par l'archive complète :
-`fe9855c9c0e1b6e650a9994a0e04daba7fdda125`
+`3846a09e1971c683e66ae3f7f5dc65e6e05fb2ea`
 
 HEAD technique immédiatement postérieur, sans changement UI supplémentaire :
-`db5a0e9e6d6b9a0f00200ee4326770afbafeee5b`
+`4917f54ebd3c6c15cb97dfa065c3002493137953`
 
 Living Threshold Visual Proof :
-- run `37321209579` — **SUCCESS**
-- artifact `11350471321`
-- digest `sha256:02a293ae1f94cb8c351494a0679b84836e6f56a6c288ac0ea33f99daca617cbc`
+- run `37324897735` — **SUCCESS**
+- artifact `11352066192`
+- digest `sha256:ed3b7399d5f8d0a31762596839f3b20d15514b1f8bfe0381715b45308918a39f`
 - capture desktop : `multiscreen/desktop-home.png`
 - capture mobile : `multiscreen/mobile-home.png`
 - **87 captures** dans l'archive
@@ -79,14 +79,25 @@ Fichier isolé :
 
 Cette couche est réversible et prototype-only. Elle doit être incluse dans la revue humaine au même titre que le hero.
 
+## 4.2 Passage de cohésion du trio
+
+Le candidat courant inclut aussi :
+- réduction de la domination visuelle du loup et du bébé dragon ;
+- voyageur renforcé sans franchir le seuil technique d'overlap du copy ;
+- traitement tonal des compagnons harmonisé au premier plan ;
+- aucun nouvel asset ajouté ;
+- companions toujours `ALLOWED_PROTOTYPE_ONLY`.
+
+Cette passe est incluse dans la revue humaine et doit être jugée comme un ensemble narratif, pas comme trois assets séparés.
+
 ## 5. Preuve technique complémentaire
 
 Canonical Hero Composition Micro-Proof :
-- run `37321410178` — **SUCCESS**
-- commit `db5a0e9e6d6b9a0f00200ee4326770afbafeee5b`
+- run `37324897850` — **SUCCESS**
+- commit `3846a09e1971c683e66ae3f7f5dc65e6e05fb2ea`
 - `PASS_V2_CANON_HERO_COMPOSITION`.
 
-Cette preuve confirme seulement que les ancres restent techniquement visibles, basses dans la composition et sans overlap significatif avec le copy, y compris après la couche éditoriale premium.
+Cette preuve confirme seulement que les ancres restent techniquement visibles, basses dans la composition et avec overlap copy sous les seuils, y compris après la couche éditoriale premium et le passage de cohésion du trio.
 
 Elle ne répond pas à la question artistique : **est-ce suffisamment bon ?**
 
@@ -129,18 +140,24 @@ Vérifier :
 
 ### VR2-01 — P1 OPEN
 
-Le voyageur/loup/dragon sont présents, mais :
-- le voyageur a reçu un passage d'illustration plus détaillé (armure, cape, emblème, lumière de contour) et n'est plus seulement la silhouette initiale ;
-- il reste néanmoins un asset vectoriel de prototype et doit encore être jugé humainement face à la référence ;
-- acceptation artistique humaine manquante ;
-- provenance production des companion assets manquante.
+Le voyageur/loup/dragon sont présents et leur hiérarchie a été rééquilibrée :
+- loup réduit ;
+- bébé dragon réduit ;
+- voyageur renforcé ;
+- traveler desktop overlap copy mesuré à environ 11,49 %, sous le seuil technique de 12 % ;
+- aucun overlap copy loup/dragon desktop/mobile ;
+- les trois ancres restent visibles selon le garde géométrique.
+
+Le voyageur reste néanmoins un asset vectoriel de prototype et les compagnons restent prototype-only.  
+**Acceptation artistique humaine manquante.**
 
 ### VR2-02 — P1 OPEN
 
-Le monde a encore été éclairci/réchauffé et la couche éditoriale premium réduit l'effet dashboard/SaaS, mais :
-- la scène complète conserve volontairement un premier plan sombre pour la lisibilité et la profondeur ;
-- la partie haute du hero desktop mesurée sur la capture courante atteint une luminance relative moyenne d'environ `0.151` sur le crop 72–700 px, proche de la source complète mesurée autour de `0.153` ; cette mesure n'est pas un verdict artistique ;
-- acceptation humaine manquante.
+Le monde a été éclairci/réchauffé et la couche éditoriale premium réduit l'effet dashboard/SaaS. Le passage de cohésion du trio limite aussi la sensation de collage d'assets.
+
+La partie haute du hero reste proche de la source sur le signal de luminance déjà mesuré, mais cette métrique ne remplace pas un jugement humain de narration, chaleur, intégration et premium.
+
+**Acceptation humaine manquante.**
 
 ### VR2-03 — P3 ACCEPTED_P2_P3
 
