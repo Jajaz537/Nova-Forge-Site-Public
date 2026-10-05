@@ -924,3 +924,17 @@ Ce résultat confirme seulement que les ancres voyageur/loup/dragon restent visi
 **High-Fi final reste BLOQUÉ** :
 - acceptation artistique humaine du candidat : PREUVE MANQUANTE ;
 - provenance production des companion assets : PREUVE MANQUANTE.
+
+
+### Gate de promotion des assets prototype — 5 octobre 2026
+
+Run `37315176208` — **SUCCESS**  
+`PASS_V2_PRODUCTION_ASSET_PROMOTION_GATE`.
+
+Ce garde-fou réduit le risque qu'un asset de démonstration soit promu silencieusement dans un futur root production.
+
+Il **ne ferme pas** :
+- provenance/licence production du hero ;
+- provenance/licence production loup/dragon ;
+- validation artistique humaine ;
+- High-Fi final.
