@@ -232,7 +232,7 @@ function GlobalSearch({ onOpenContent, onOpenGame, onOpenCreators, onOpenCollect
 }
 
 function GameHub({ onOpen }) {
-  const [tab, setTab] = useState("Aperçu");
+  const [tab, setTab] = useState("Mods & contenus");
   const [query, setQuery] = useState("");
   const [version, setVersion] = useState("1.4.2");
   const [atmosphereKey,setAtmosphereKey]=useState("aetherlands");
