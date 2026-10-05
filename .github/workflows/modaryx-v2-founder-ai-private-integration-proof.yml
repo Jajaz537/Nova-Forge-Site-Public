@@ -5,7 +5,7 @@ on:
     paths:
       - "functions/_lib/founder-ai-bridge.mjs"
       - "functions/api/founder/ai/**"
-      - "review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx"
+      - "review-evidence/modaryx-v2-living-threshold-prototype-20261003/**"
       - "qa/check-v2-founder-ai-private-integration.mjs"
       - "qa/modaryx-v2-ai-integration-contract.json"
       - "qa/check-v2-ai-integration-contract.mjs"
@@ -19,7 +19,7 @@ jobs:
   proof:
     name: Validate Founder-only Nova integration
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Checkout exact candidate
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
@@ -33,3 +33,26 @@ jobs:
           set -euo pipefail
           node qa/check-v2-founder-ai-private-integration.mjs
           node qa/check-v2-ai-integration-contract.mjs
+
+      - name: Replay repository security guards
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-workflow-action-pins.mjs
+          node qa/check-v2-workflow-security-baseline.mjs
+          node qa/check-v2-prototype-security-sinks.mjs
+          node qa/check-v2-frontend-isolation-contract.mjs
+          node qa/check-v2-anti-contamination.mjs
+
+      - name: Install prototype dependencies
+        working-directory: review-evidence/modaryx-v2-living-threshold-prototype-20261003
+        shell: bash
+        run: npm ci
+
+      - name: Test and build exact prototype
+        working-directory: review-evidence/modaryx-v2-living-threshold-prototype-20261003
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run test:sites
+          npm run build
