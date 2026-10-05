@@ -19,7 +19,7 @@
     },
     {
       "id": "normalized-visual-comparison",
-      "state": "OPEN"
+      "state": "PROVEN"
     },
     {
       "id": "nvda-real",
@@ -153,7 +153,8 @@
     "high-fi-gate-machine-blocked",
     "frontend-gate-reclassification-proposal-not-active",
     "approved-visual-reference-library-backed-sha256-proven",
-    "canonical-hero-composition-desktop-mobile-prototype"
+    "canonical-hero-composition-desktop-mobile-prototype",
+    "normalized-visual-comparison-human-reference-vs-current-game-hub"
   ],
   "invariants": [
     "PUBLIC_GREEN_NEVER_IMPLIES_PRODUCTION_VF",
