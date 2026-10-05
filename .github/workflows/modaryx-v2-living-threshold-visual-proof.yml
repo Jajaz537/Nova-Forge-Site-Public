@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'audit/modaryx-v2-legacy-boundary-20261003'
+      - 'design/modaryx-v2-blue-violet-product-20261005'
     paths:
       - '.github/workflows/modaryx-v2-living-threshold-visual-proof.yml'
       - 'qa/check-v2-living-threshold-static-a11y.mjs'
