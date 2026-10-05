@@ -7,6 +7,7 @@ on:
       - "functions/api/founder/ai/**"
       - "review-evidence/modaryx-v2-living-threshold-prototype-20261003/**"
       - "qa/check-v2-founder-ai-private-integration.mjs"
+      - "qa/test-v2-founder-ai-private-integration.mjs"
       - "qa/modaryx-v2-ai-integration-contract.json"
       - "qa/check-v2-ai-integration-contract.mjs"
       - ".github/workflows/modaryx-v2-founder-ai-private-integration-proof.yml"
@@ -32,6 +33,7 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-v2-founder-ai-private-integration.mjs
+          node --test qa/test-v2-founder-ai-private-integration.mjs
           node qa/check-v2-ai-integration-contract.mjs
 
       - name: Replay repository security guards
