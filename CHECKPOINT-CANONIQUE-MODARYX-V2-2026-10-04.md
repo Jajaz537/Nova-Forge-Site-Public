@@ -2689,3 +2689,172 @@ Limite technique :
 - le binaire exact n'est pas présent dans Git ;
 - recherche fraîche dans les arbres historiques connus : fichier exact non retrouvé ;
 - ne pas inventer un asset équivalent ni déclarer une copie différente identique.
+
+
+## 79. Hero canonique réconcilié — candidat prototype
+
+**EN COURS — correction prototype prouvée / validation artistique humaine PREUVE MANQUANTE**
+
+Source verrouillée :
+- `REFERENCE-CANONIQUE-Compagnons-face-au-royaume-enchante.png`
+- Library `file_00000000dcd482439ade71a96dfc6ba0@1`
+- SHA-256 `3b2cf82eda155d33d0ff14ad5d4ca1f95c155b8f9d019e5da03182f99f45e992`.
+
+Candidat :
+- voyageur assis réintroduit ;
+- loup + bébé dragon réintroduits ;
+- château / eau / vallée conservés ;
+- aucune île flottante ;
+- monde éclairci/réchauffé ;
+- hiérarchie MODARYX et modding-first conservée.
+
+Preuve Living Threshold :
+- run `37309857645` — **SUCCESS**
+- commit `0ea8e28485f83466c5a8aaf05b28243cb56b4f0e`
+- artifact `11344949022`
+- digest `sha256:144573c0d12e6aea8dd9a146f53bc2f25c71e20372ccf9733a89716d8160e0d6`
+- 87 captures ;
+- a11y navigateur ciblée / flows / capture integrity : verts.
+
+Comparaison :
+`review-evidence/modaryx-v2-canonical-reference-20261005/visual-reference-comparison-reconciled.json`
+
+Statut artistique :
+- omission totale du trio : corrigée au niveau prototype ;
+- qualité finale du voyageur : PREUVE MANQUANTE ;
+- cohérence finale trio : PREUVE MANQUANTE humaine ;
+- provenance production companions : PREUVE MANQUANTE.
+
+Aucun PASS High-Fi/VF.
+
+
+## 80. Garde géométrique du hero canonique
+
+**TERMINÉ pour le prototype ciblé**
+
+Workflow :
+`MODARYX V2 Canonical Hero Composition Micro-Proof`
+
+Preuve la plus récente après passage de cohésion :
+- run `37324897850` — **SUCCESS**
+- commit `3846a09e1971c683e66ae3f7f5dc65e6e05fb2ea`
+- `PASS_V2_CANON_HERO_COMPOSITION`.
+
+Desktop :
+- traveler overlap copy ~11,49 % (< 12 %) ;
+- wolf overlap copy 0 ;
+- dragon overlap copy 0 ;
+- trois ancres visibles au-dessus des seuils.
+
+Mobile :
+- aucun overlap copy des compagnons ;
+- visibilité des trois ancres au-dessus des seuils.
+
+Le test protège la composition technique, pas le jugement artistique humain.
+
+
+## 81. Promotion des assets prototype — fail closed
+
+**TERMINÉ pour le garde-fou CI / droits production non fermés**
+
+Run :
+- `37315176208` — **SUCCESS**
+- `PASS_V2_PRODUCTION_ASSET_PROMOTION_GATE`.
+
+Invariants :
+- `ALLOWED_PROTOTYPE_ONLY` ne devient jamais production par simple copie ;
+- références hors racines approuvées bloquées ;
+- duplications binaires non approuvées bloquées ;
+- absence de référence interdite ≠ licence.
+
+Les assets loup/dragon courants restent prototype-only.  
+Ce PASS ne ferme aucune licence/droit production.
+
+
+## 82. Réconciliation éditoriale premium
+
+**TERMINÉ pour le prototype / validation humaine PREUVE MANQUANTE**
+
+Couche :
+`review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/premium-editorial.css`
+
+Effets :
+- titres majeurs plus éditoriaux/nobles ;
+- surfaces moins imbriquées ;
+- bordures/fonds secondaires allégés ;
+- respiration renforcée ;
+- hero plus chaud/lumineux ;
+- voyageur illustré plus détaillé ;
+- comportements produit inchangés.
+
+Preuve :
+- Living Threshold run `37321209579` — **SUCCESS**
+- commit `fe9855c9c0e1b6e650a9994a0e04daba7fdda125`
+- artifact `11350471321`
+- digest `sha256:02a293ae1f94cb8c351494a0679b84836e6f56a6c288ac0ea33f99daca617cbc`
+- 87 captures ;
+- Canon Hero Composition `37321410178` — SUCCESS.
+
+Aucun PASS High-Fi/VF.
+
+
+## 83. Cohésion du trio canonique
+
+**TERMINÉ pour le prototype / validation humaine PREUVE MANQUANTE**
+
+But :
+- réduire la domination visuelle du loup et du bébé dragon ;
+- renforcer le voyageur sans empiéter sur le copy ;
+- harmoniser le traitement tonal du premier plan ;
+- ne pas ajouter de nouvel asset.
+
+Séquence ciblée :
+- `37324395300` FAIL : traveler overlap `0.227 > 0.12` ;
+- `37324572114` FAIL : `0.137 > 0.12` ;
+- `37324733210` FAIL : `0.122 > 0.12` ;
+- correction finale ;
+- `37324897850` SUCCESS : `PASS_V2_CANON_HERO_COMPOSITION`.
+
+Continuation Living Threshold :
+- run `37324897735` — **SUCCESS**
+- commit `3846a09e1971c683e66ae3f7f5dc65e6e05fb2ea`
+- artifact `11352066192`
+- digest `sha256:ed3b7399d5f8d0a31762596839f3b20d15514b1f8bfe0381715b45308918a39f`
+- 87 captures ;
+- intégrité archive / flows / a11y navigateur ciblée : verts.
+
+Le candidat visuel courant à soumettre à revue humaine est ce commit UI `3846a09e...`.
+
+
+## 84. Pack humain hero canonique — candidat courant
+
+**TERMINÉ pour préparation / session humaine PREUVE MANQUANTE**
+
+Document :
+`docs/MODARYX-V2-CANONICAL-HERO-HUMAN-REVIEW-PACK-20261005.md`
+
+Le pack a été actualisé sur :
+- candidat UI `3846a09e1971c683e66ae3f7f5dc65e6e05fb2ea` ;
+- Living Threshold `37324897735` ;
+- artifact `11352066192` ;
+- composition `37324897850`.
+
+À faire par une vraie personne :
+- revue desktop + mobile ;
+- voyageur / loup / bébé dragon ;
+- chaleur / monde habité ;
+- château / eau ;
+- hiérarchie MODARYX/modding ;
+- sensation premium ;
+- findings P0/P1/P2/P3.
+
+Règle :
+- P0/P1 ouvert = aucun PASS ;
+- IA/automation ne remplace pas le verdict humain ;
+- validation artistique ne ferme pas les droits/licences production.
+
+État :
+- pack : **PRÊT**
+- session humaine : **PREUVE MANQUANTE**
+- High-Fi final : **BLOQUÉ**
+- VF : **BLOQUÉ**.
