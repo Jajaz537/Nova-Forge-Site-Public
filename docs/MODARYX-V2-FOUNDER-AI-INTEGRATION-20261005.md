@@ -5,14 +5,14 @@
 
 ## Base IA vérifiée
 
-- Modaryx — IA Foundation **v0.136**
-- SHA-256 : `930da7a8b4b3cd2ed9954ad8e9f9e796700b3a9895ac077353a1b5a4ccce468f`
-- 384/384 tests PASS
+- Modaryx — IA Foundation **v0.140**
+- SHA-256 : `870c0b8373e6751788a6ebe4423828a0a296a2b39f9af937f6c93114856f7e34`
+- 389/389 tests PASS
 - 12/12 evals PASS
 - RC rehearsal PASS
 - migration-scale PASS
 - archive reproductible + extraction neuve PASS
-- runtime Windows durci : Python >= 3.11 résolu dynamiquement ; le resolver v0.136 a été prouvé sur le runner SD avec Python 3.13.16, y compris le cas où `py -0p` fonctionne mais `py -3.13` ne résout pas l'interpréteur
+- runtime Windows durci : Python >= 3.11 résolu dynamiquement ; le checkpoint v0.140 exact a été reconstruit et exécuté sur le runner SD avec Python 3.13.16. Les gates réels `preflight`, `release_gate` et `core_idle` sont PASS ; `model_qualification`, `game_impact` et `multimodal` restent explicitement `NOT_RUN` tant que leurs preuves natives ne sont pas terminées
 - progression VF IA maintenue à **83 %**
 
 ## Intégration site ajoutée
