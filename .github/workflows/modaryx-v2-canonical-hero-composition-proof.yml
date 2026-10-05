@@ -12,6 +12,7 @@ on:
       - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/App.jsx'
       - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/styles.css'
       - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/canon-hero.css'
+      - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/src/premium-editorial.css'
       - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-wolf-baby.png'
       - 'review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-dragon-baby.png'
   workflow_dispatch:
