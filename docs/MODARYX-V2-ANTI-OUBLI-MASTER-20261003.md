@@ -2208,3 +2208,40 @@ Preuve :
 - un nouveau workflow doit entrer dans ces garde-fous avant d'être considéré couvert.
 
 Ce PASS ne remplace ni revue de dépendances applicatives, ni sécurité backend, ni sécurité production.
+
+
+## 78. Référence humaine canonique retrouvée — 5 octobre 2026
+
+**TERMINÉ pour la récupération / P1 visuels ouverts**
+
+À ne plus classer comme introuvable :
+- `REFERENCE-CANONIQUE-Compagnons-face-au-royaume-enchante.png`
+- Library `file_00000000dcd482439ade71a96dfc6ba0@1`
+- SHA-256 `3b2cf82eda155d33d0ff14ad5d4ca1f95c155b8f9d019e5da03182f99f45e992`
+- 1672×941.
+
+Provenance humaine :
+- handoff `file_00000000ec7c81f4aa8d387fc8f2d34c@1`
+- référence canonique explicitement humainement validée.
+
+Ancres visuelles à conserver ou faire explicitement revalider :
+- humain assis ;
+- loup ;
+- bébé dragon ;
+- château ;
+- eau/rivière ;
+- monde habité ;
+- pas d'îles flottantes ;
+- cascades non dominantes ;
+- narration premium vivante.
+
+Comparaison Living Threshold actuelle :
+- `INCOMPLETE`
+- deux P1 ouverts : trio de premier plan absent ; narration/monde habité trop affaiblis par le traitement sombre product-tech.
+
+Ne jamais :
+- fermer le gap en affirmant que l'ancien canon est “obsolète” sans décision ;
+- supprimer la clarté modding de Living Threshold ;
+- réintroduire l'ancien dashboard/site entier ;
+- fabriquer une fausse référence ;
+- annoncer High-Fi final avant réconciliation + validation.
