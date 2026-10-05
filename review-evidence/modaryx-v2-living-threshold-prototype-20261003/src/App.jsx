@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import "./canon-topbar.css";
 import {
   ArrowRight, Bell, BookOpen, Check, FunnelSimple, GameController, GridFour,
   List, MagnifyingGlass, Plus, SlidersHorizontal, Stack, UsersThree, X
