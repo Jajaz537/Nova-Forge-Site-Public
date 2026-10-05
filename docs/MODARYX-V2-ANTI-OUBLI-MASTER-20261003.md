@@ -2335,3 +2335,19 @@ Invariants :
 À ne pas perdre :
 - production provenance/licensing séparée reste obligatoire ;
 - High-Fi/VF ne peut pas utiliser ce PASS comme preuve de droits.
+
+
+## 81. Pack de validation humaine hero canonique — 5 octobre 2026
+
+**TERMINÉ pour préparation / PREUVE MANQUANTE pour exécution**
+
+Référence :
+`docs/MODARYX-V2-CANONICAL-HERO-HUMAN-REVIEW-PACK-20261005.md`
+
+À ne pas perdre :
+- desktop + mobile doivent être revus ;
+- source canonique hashée obligatoire ;
+- voyageur/loup/dragon, chaleur, royaume habité, château/eau et hiérarchie modding doivent être jugés ;
+- P1 ouvert interdit tout PASS ;
+- aucune auto-évaluation IA ne ferme le blocker humain ;
+- validation artistique positive ne ferme pas les droits/licences production.
