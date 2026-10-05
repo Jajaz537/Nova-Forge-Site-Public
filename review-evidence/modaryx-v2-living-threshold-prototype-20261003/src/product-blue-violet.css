@@ -292,3 +292,75 @@ body {
     min-height: 430px;
   }
 }
+
+
+/* Visual polish after browser proof: closer to the selected premium mock while
+   keeping all product and accessibility contracts intact. */
+.top-actions button {
+  background: linear-gradient(180deg, rgba(15,24,40,.96), rgba(10,17,29,.96));
+  border-color: rgba(92,111,149,.35);
+}
+
+.top-actions button:hover {
+  border-color: rgba(139,99,255,.50);
+  background: linear-gradient(180deg, rgba(22,30,52,.98), rgba(12,19,34,.98));
+}
+
+.game-hero {
+  box-shadow: inset 0 -1px rgba(116,130,164,.12);
+}
+
+.hero-search {
+  box-shadow: 0 16px 36px rgba(0,0,0,.26);
+}
+
+.hub-layout {
+  gap: 34px;
+}
+
+.content-card > .media,
+.game-card > .media,
+.profile-row .media {
+  filter: saturate(1.05) brightness(1.06);
+}
+
+.content-card {
+  box-shadow: inset 0 1px rgba(255,255,255,.018);
+}
+
+.compat {
+  background: #66ddc3;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
+}
+
+.profiles-rail {
+  background: linear-gradient(180deg, rgba(139,99,255,.025), transparent 34%);
+}
+
+.profile-add:hover,
+.profile-row:hover {
+  border-color: rgba(139,99,255,.48);
+}
+
+@media (min-width: 1051px) {
+  .game-hero {
+    grid-template-columns: minmax(310px,.82fr) minmax(400px,1.52fr) auto;
+    padding-top: 44px;
+    padding-bottom: 40px;
+  }
+
+  .game-identity {
+    min-height: 188px;
+    padding-left: 176px;
+  }
+
+  .game-identity::before {
+    width: 150px;
+    height: 188px;
+  }
+
+  .game-identity h1 {
+    margin-top: 6px;
+    margin-bottom: 14px;
+  }
+}
