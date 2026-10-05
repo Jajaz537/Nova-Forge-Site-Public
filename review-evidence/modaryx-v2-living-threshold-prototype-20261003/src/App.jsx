@@ -273,8 +273,24 @@ function GameHub({ onOpen }) {
   </main>;
 }
 
+function CanonNarrativeLayer() {
+  return <div className="canon-narrative-layer" aria-hidden="true">
+    <span className="canon-ground-glow"/>
+    <svg className="canon-traveler" viewBox="0 0 180 230" focusable="false">
+      <circle className="traveler-head" cx="101" cy="44" r="17"/>
+      <path className="traveler-cloak" d="M81 64c17-13 42-10 55 8 10 14 8 36 4 55-4 21-2 43 11 66l-52 3c-11-17-16-34-17-52-1-20-12-35-20-49-7-12 3-24 19-31Z"/>
+      <path className="traveler-arm" d="M111 82c12 7 24 18 31 32l-11 8c-9-11-19-20-31-25Z"/>
+      <path className="traveler-leg" d="M96 137c20 1 38 8 51 22l-9 14c-15-9-32-13-51-12Z"/>
+      <path className="traveler-boot" d="M135 168c13 4 25 11 34 21l-7 12-33-7Z"/>
+      <path className="traveler-ridge" d="M18 201c36-18 77-22 143-9l19 38H0Z"/>
+    </svg>
+    <img className="canon-companion canon-wolf" src="/assets/living-threshold-wolf-baby.png" alt=""/>
+    <img className="canon-companion canon-dragon" src="/assets/living-threshold-dragon-baby.png" alt=""/>
+  </div>;
+}
+
 function Discover({ onOpen }) {
-  return <main id="main-content" tabIndex="-1"><section className="editorial-hero"><div><span className="kicker">Votre monde évolue</span><h1>Redécouvrez vos jeux,<br/>une possibilité à la fois.</h1><p>Explorez des contenus, vérifiez leur compatibilité et composez des expériences qui vous ressemblent.</p><button className="primary">Découvrir maintenant <ArrowRight/></button></div></section><section className="page-section"><div className="section-heading"><div><span className="kicker">En ce moment</span><h2>Des mondes à réinventer</h2></div></div><div className="content-grid editorial">{contentItems.slice(0,3).map(item => <ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div></section></main>;
+  return <main id="main-content" tabIndex="-1"><section className="editorial-hero canon-reconciled-hero"><div className="editorial-hero-copy"><span className="kicker">Votre monde évolue</span><h1>Redécouvrez vos jeux,<br/>une possibilité à la fois.</h1><p>Explorez des contenus, vérifiez leur compatibilité et composez des expériences qui vous ressemblent, au cœur d’un royaume vivant.</p><button className="primary">Découvrir maintenant <ArrowRight/></button></div><CanonNarrativeLayer/></section><section className="page-section"><div className="section-heading"><div><span className="kicker">En ce moment</span><h2>Des mondes à réinventer</h2></div></div><div className="content-grid editorial">{contentItems.slice(0,3).map(item => <ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div></section></main>;
 }
 
 function CollectionsPage() {
