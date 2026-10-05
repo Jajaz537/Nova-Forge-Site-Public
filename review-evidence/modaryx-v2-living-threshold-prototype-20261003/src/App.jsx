@@ -277,15 +277,52 @@ function CanonNarrativeLayer() {
   return <div className="canon-narrative-layer" aria-hidden="true">
     <span className="canon-ground-glow"/>
     <svg className="canon-traveler" viewBox="0 0 220 270" focusable="false">
+      <defs>
+        <linearGradient id="traveler-cloak-gradient" x1="30" y1="55" x2="175" y2="215" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#172b3b"/>
+          <stop offset=".5" stopColor="#091620"/>
+          <stop offset="1" stopColor="#040a0f"/>
+        </linearGradient>
+        <linearGradient id="traveler-armor-gradient" x1="96" y1="73" x2="169" y2="168" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#53606a"/>
+          <stop offset=".34" stopColor="#252f38"/>
+          <stop offset="1" stopColor="#0c1319"/>
+        </linearGradient>
+        <linearGradient id="traveler-rim-gradient" x1="82" y1="55" x2="180" y2="185" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#ffd59a" stopOpacity=".82"/>
+          <stop offset=".52" stopColor="#d38f4f" stopOpacity=".42"/>
+          <stop offset="1" stopColor="#55d7d4" stopOpacity=".16"/>
+        </linearGradient>
+        <radialGradient id="traveler-emblem-gradient" cx=".35" cy=".35" r=".8">
+          <stop offset="0" stopColor="#ffe3a9"/>
+          <stop offset=".5" stopColor="#d49a50"/>
+          <stop offset="1" stopColor="#7d4d23"/>
+        </radialGradient>
+      </defs>
       <path className="traveler-ridge" d="M0 244c36-22 74-31 117-28 42 3 75 14 103 34v20H0Z"/>
-      <path className="traveler-cloak" d="M95 69c18-14 42-12 57 2 16 15 18 39 11 65-6 22-5 40 8 62-24 10-51 11-79 4-8-20-12-40-10-59 2-17-2-31-10-45-8-14 1-24 23-29Z"/>
+      <path className="traveler-cloak" fill="url(#traveler-cloak-gradient)" d="M94 69c18-14 42-12 58 2 16 15 18 39 11 65-6 22-5 40 8 62-23 10-51 11-80 4-8-20-12-40-10-59 2-17-2-31-10-45-7-14 2-24 23-29Z"/>
+      <path className="traveler-shoulder" fill="url(#traveler-armor-gradient)" d="M121 72c17 0 32 8 42 21l-10 19-42-8-8-20c4-8 10-12 18-12Z"/>
+      <path className="traveler-armor-panel" fill="url(#traveler-armor-gradient)" d="M112 99l35 7 8 46-26 20-26-13 2-34Z"/>
+      <path className="traveler-pauldron" d="M145 91c12 3 22 10 28 20l-8 15-20-12-10-16Z"/>
       <path className="traveler-head" d="M112 29c12-2 24 4 30 14 5 9 4 21-2 30-7 9-19 13-30 9-12-4-19-14-19-26 0-13 8-24 21-27Z"/>
       <path className="traveler-hair" d="M96 49c2-14 12-24 25-25 13 0 23 6 29 17-9-4-17-5-24-3-7 2-15 8-23 17Z"/>
-      <path className="traveler-arm" d="M137 93c14 7 27 20 35 37l-14 10c-9-13-20-23-34-30Z"/>
-      <path className="traveler-knee" d="M109 157c22 0 43 8 61 25l-12 17c-17-11-35-16-55-16Z"/>
+      <path className="traveler-neck-guard" d="M105 73l30-2 8 17-30 5Z"/>
+      <path className="traveler-arm" fill="url(#traveler-armor-gradient)" d="M142 101c14 7 25 18 32 34l-15 10c-8-13-19-23-33-30Z"/>
+      <path className="traveler-glove" d="M158 134c8 1 14 6 17 13l-10 8-12-8Z"/>
+      <path className="traveler-knee" fill="url(#traveler-armor-gradient)" d="M108 157c23 0 44 8 62 25l-12 18c-17-12-35-17-56-17Z"/>
       <path className="traveler-boot" d="M157 193c15 4 28 12 39 24l-9 14-40-9Z"/>
+      <path className="traveler-belt" d="M100 146c17 8 35 10 54 5l3 9c-21 7-42 5-61-5Z"/>
+      <path className="traveler-sword" d="M173 119l5 3-17 51-8-4Z"/>
+      <path className="traveler-sword-hilt" d="M166 116l22 7-3 7-22-7Z"/>
+      <path className="traveler-rim" fill="none" stroke="url(#traveler-rim-gradient)" d="M95 70c19-15 42-12 57 2 16 15 18 39 11 65-6 22-5 40 8 62M111 29c14-3 27 5 32 17"/>
       <path className="traveler-cloak-fold" d="M111 87c7 22 5 50-5 84"/>
       <path className="traveler-cloak-fold" d="M129 82c12 24 14 52 7 84"/>
+      <g className="traveler-emblem">
+        <circle cx="112" cy="124" r="12" fill="rgba(4,10,15,.72)" stroke="rgba(246,197,126,.46)" strokeWidth="1.2"/>
+        <path fill="url(#traveler-emblem-gradient)" d="M112 110l3.7 10.3L126 124l-10.3 3.7L112 138l-3.7-10.3L98 124l10.3-3.7Z"/>
+        <circle cx="112" cy="124" r="3.3" fill="#f0c77e"/>
+      </g>
+      <path className="traveler-ground-contact" d="M63 232c35-8 83-7 126 5" fill="none"/>
     </svg>
     <img className="canon-companion canon-wolf" src="/assets/living-threshold-wolf-baby.png" alt=""/>
     <img className="canon-companion canon-dragon" src="/assets/living-threshold-dragon-baby.png" alt=""/>
