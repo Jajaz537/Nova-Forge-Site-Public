@@ -1048,3 +1048,32 @@ Mobile :
 - dragon visible 0.7194 / copy overlap 0.
 
 Le test protège la composition technique, pas le jugement artistique humain.
+
+
+## Premium editorial reconciliation — 5 octobre 2026
+
+**TERMINÉ — prototype ciblé / revue humaine encore requise**
+
+Preuve :
+- Living Threshold `37321209579` — SUCCESS
+- commit `fe9855c9c0e1b6e650a9994a0e04daba7fdda125`
+- artifact `11350471321`
+- digest `sha256:02a293ae1f94cb8c351494a0679b84836e6f56a6c288ac0ea33f99daca617cbc`
+- `KEYBOARD_REACHABLE 41 / 41`
+- overflow desktop/mobile 0 / 0
+- product flows SUCCESS
+- 87 captures + intégrité SUCCESS.
+
+Hero composition :
+- run `37321410178` — SUCCESS
+- `PASS_V2_CANON_HERO_COMPOSITION`.
+
+Passage visuel :
+- traveler illustré plus détaillé ;
+- hero plus chaud et lumineux ;
+- titres plus éditoriaux ;
+- panneaux et bordures allégés ;
+- respiration renforcée ;
+- comportements produit inchangés.
+
+La revue humaine face à la source canonique reste ouverte. Aucun PASS High-Fi/VF n'est déclaré.
