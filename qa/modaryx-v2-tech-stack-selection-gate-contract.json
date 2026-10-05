@@ -68,7 +68,8 @@
       "source": "docs/MODARYX-V2-AUTH-BACKEND-STRATEGY-20261005.md"
     },
     "BUNDLE_BUDGET_MEASURED": {
-      "state": "OPEN"
+      "state": "PROVEN",
+      "source": "docs/MODARYX-V2-STACK-PREREQUISITE-EVIDENCE-20261005.md"
     },
     "HUMAN_TREE_TEST": {
       "state": "OPEN"
@@ -77,10 +78,12 @@
       "state": "OPEN"
     },
     "V2_ARCHITECTURE_STABLE": {
-      "state": "OPEN"
+      "state": "PROVEN",
+      "source": "docs/MODARYX-V2-STACK-PREREQUISITE-EVIDENCE-20261005.md"
     },
     "INTERACTION_REQUIREMENTS_KNOWN": {
-      "state": "OPEN"
+      "state": "PROVEN",
+      "source": "docs/MODARYX-V2-STACK-PREREQUISITE-EVIDENCE-20261005.md"
     }
   }
 }
