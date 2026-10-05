@@ -136,6 +136,48 @@ body {
   background: var(--teal);
 }
 
+/* Match the chosen product-hub composition more closely. */
+.game-identity {
+  position: relative;
+  min-height: 176px;
+  padding-left: 174px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.game-identity::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 148px;
+  height: 176px;
+  border-radius: 12px;
+  border: 1px solid rgba(160,178,210,.28);
+  background:
+    linear-gradient(180deg, rgba(22,34,56,.08), rgba(8,13,23,.18)),
+    url('/assets/living-threshold-content-sheet.png') 0% 0% / 300% 200%;
+  box-shadow: 0 18px 38px rgba(0,0,0,.34);
+}
+
+.game-identity .atmosphere-preview,
+.game-identity .atmosphere-note {
+  display: none;
+}
+
+.game-support {
+  max-width: 350px;
+}
+
+.section-heading h2,
+.card-copy h3,
+.profiles-rail h2,
+.page-section > h1,
+.catalog-title h1 {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
 /* No large marketing hero in the selected MODARYX direction.
    Discover becomes a compact product introduction instead of a cinematic hero. */
 .editorial-hero,
@@ -170,6 +212,17 @@ body {
 
 .canon-narrative-layer {
   display: none !important;
+}
+
+@media (max-width: 1050px) {
+  .game-identity {
+    min-height: auto;
+    padding-left: 0;
+  }
+
+  .game-identity::before {
+    display: none;
+  }
 }
 
 @media (max-width: 760px) {
