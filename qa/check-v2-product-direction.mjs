@@ -26,6 +26,7 @@ const editorialIndex = imports.indexOf("premium-editorial.css");
 assert(productIndex >= 0, "product-blue-violet.css import missing");
 assert(editorialIndex >= 0, "premium-editorial.css import missing");
 assert(productIndex > editorialIndex, "product direction override must load after premium-editorial.css");
+assert(!imports.includes("canon-hero.css"), "historical cinematic hero stylesheet must not load in the active product direction");
 
 assert(css.includes("--violet:"), "violet token missing");
 assert(css.includes("--cyan-2:"), "blue token missing");
@@ -44,6 +45,7 @@ assert(canon.includes("Mélange équilibré bleu nuit + violet premium"), "canon
 assert(canon.includes("contenus présentés prioritairement en lignes produit denses sur desktop"), "canonical dense desktop list statement missing");
 assert(app.includes('const navItems = ["Découvrir", "Jeux", "Mods & contenus", "Collections", "Créateurs", "Communauté"];'), "canonical six-item primary navigation missing");
 assert(!app.includes('"Communauté", "Créer"'), "Créer must not return to the primary canon navigation");
+assert(!app.includes("<CanonNarrativeLayer/>"), "historical cinematic narrative layer must not render in active Discover");
 assert(app.includes('className="demo-cta"'), "canonical Demonstration CTA missing from desktop topbar");
 assert(topbar.includes(".top-actions .desktop-utility{display:none}"), "non-canonical desktop utility buttons must stay out of the visible topbar");
 
