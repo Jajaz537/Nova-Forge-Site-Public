@@ -1,0 +1,56 @@
+{
+  "evidenceId": "EV-VISUAL-REFERENCE-20261005-02",
+  "sessionType": "VISUAL_REFERENCE_COMPARISON",
+  "date": "2026-10-05",
+  "commitSha": "0ea8e28485f83466c5a8aaf05b28243cb56b4f0e",
+  "actorOpaqueId": "CANON_RECONCILIATION_REVIEW",
+  "environment": {
+    "realEnvironment": true,
+    "comparisonMode": "semantic-normalized-art-direction",
+    "sourceDimensions": "1672x941",
+    "candidateViewport": "1440x1024",
+    "candidateArtifact": "11344949022",
+    "candidateCapture": "multiscreen/desktop-home.png"
+  },
+  "sourceReference": {
+    "approved": true,
+    "artifactRef": "library://file_00000000dcd482439ade71a96dfc6ba0@1",
+    "name": "REFERENCE-CANONIQUE-Compagnons-face-au-royaume-enchante.png",
+    "sha256": "3b2cf82eda155d33d0ff14ad5d4ca1f95c155b8f9d019e5da03182f99f45e992",
+    "dimensions": "1672x941",
+    "approvalEvidence": "library://file_00000000ec7c81f4aa8d387fc8f2d34c@1"
+  },
+  "findings": [
+    {
+      "id": "VR2-01",
+      "severity": "P1",
+      "status": "OPEN",
+      "description": "The seated traveler, wolf and dragon hatchling are now present in the prototype hero. The prior total omission is corrected, but the foreground still needs human artistic acceptance and production asset provenance."
+    },
+    {
+      "id": "VR2-02",
+      "severity": "P1",
+      "status": "OPEN",
+      "description": "The world is materially brighter and warmer than the previous candidate while preserving text legibility. It remains darker than the approved source and still needs human acceptance."
+    },
+    {
+      "id": "VR2-03",
+      "severity": "P3",
+      "status": "ACCEPTED_P2_P3",
+      "description": "Castle, continuous mountain valley, water, inhabited terrain, no floating islands and non-dominant waterfalls remain preserved."
+    },
+    {
+      "id": "VR2-04",
+      "severity": "P3",
+      "status": "ACCEPTED_P2_P3",
+      "description": "MODARYX navigation, CTA and modding-first product hierarchy remain clear."
+    }
+  ],
+  "result": "INCOMPLETE",
+  "artifactRefs": [
+    "library://file_00000000dcd482439ade71a96dfc6ba0@1",
+    "library://file_00000000ec7c81f4aa8d387fc8f2d34c@1",
+    "github-actions://artifact/11344949022/multiscreen/desktop-home.png"
+  ],
+  "reviewer": "MODARYX_V2_GATE_REVIEW"
+}
