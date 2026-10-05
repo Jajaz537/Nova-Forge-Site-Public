@@ -2351,3 +2351,30 @@ Référence :
 - P1 ouvert interdit tout PASS ;
 - aucune auto-évaluation IA ne ferme le blocker humain ;
 - validation artistique positive ne ferme pas les droits/licences production.
+
+
+## 39. Réconciliation éditoriale premium + hero canonique — 5 octobre 2026
+
+**TERMINÉ au niveau prototype / validation humaine PREUVE MANQUANTE**
+
+À conserver :
+- `src/premium-editorial.css` chargé après les styles Living Threshold et le layer canon hero ;
+- titres majeurs plus éditoriaux/nobles ;
+- surfaces/panneaux moins imbriqués et bordures plus discrètes ;
+- rythme vertical et respiration renforcés ;
+- hero plus chaud/lumineux ;
+- traveler assis enrichi graphiquement ;
+- loup + bébé dragon + traveler restent les trois ancres de premier plan ;
+- priorité MODARYX/modding conservée.
+
+Preuves :
+- Living Threshold `37321209579` — SUCCESS — 87 captures ;
+- artifact `11350471321` ;
+- digest `sha256:02a293ae1f94cb8c351494a0679b84836e6f56a6c288ac0ea33f99daca617cbc` ;
+- Canon Hero Composition `37321410178` — SUCCESS.
+
+Ne pas oublier :
+- revue humaine de la référence canonique encore obligatoire ;
+- traveler actuel reste prototype ;
+- assets compagnon restent prototype-only pour la production ;
+- aucun PASS High-Fi/VF déduit.
