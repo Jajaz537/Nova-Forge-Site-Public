@@ -709,3 +709,11 @@ Baseline bundle mesurée sur le prototype React/Vite :
 
 Aucun root V2 réel n'est créé par cette preuve.
 Aucune migration Workers/Pages ou Cloudflare critique n'est autorisée.
+
+
+## 29. Mise à jour prérequis stack — 5 octobre 2026
+
+- CORE_WIREFRAMES_COMPLETE : PROVEN_EQUIVALENT via `docs/MODARYX-V2-CORE-WIREFRAMES-EQUIVALENCE-20261005.md`.
+- HUMAN_TREE_TEST : PREUVE MANQUANTE.
+- sélection stack : BLOQUÉE tant que le test humain n'est pas fermé.
+- VF stricte : inchangée à 2/32 prouvés.
