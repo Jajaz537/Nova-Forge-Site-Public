@@ -525,7 +525,11 @@ h1, h2, h3,
 }
 
 .game-hub-page .section-heading .kicker {
-  display: none;
+  display: inline-block;
+  margin-bottom: 6px;
+  color: #7fa5d8;
+  font-size: 10px;
+  letter-spacing: .14em;
 }
 
 .game-hub-page .section-heading h2 {
