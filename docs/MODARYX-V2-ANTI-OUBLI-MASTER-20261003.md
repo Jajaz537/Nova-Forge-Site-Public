@@ -2378,3 +2378,34 @@ Ne pas oublier :
 - traveler actuel reste prototype ;
 - assets compagnon restent prototype-only pour la production ;
 - aucun PASS High-Fi/VF déduit.
+
+
+## 79. Cohésion trio canonique — 5 octobre 2026
+
+**TERMINÉ pour le prototype / validation humaine PREUVE MANQUANTE**
+
+À retenir :
+- source canonique conserve humain assis + loup + bébé dragon ;
+- hiérarchie prototype rééquilibrée : loup réduit, bébé dragon réduit, voyageur renforcé sans empiéter sur le copy ;
+- traitement tonal des compagnons harmonisé au premier plan ;
+- aucun nouvel asset introduit ;
+- assets compagnon restent `ALLOWED_PROTOTYPE_ONLY`.
+
+Erreur → correction → micro-proof :
+- `37324395300` FAIL : overlap traveler `0.227 > 0.12` ;
+- `37324572114` FAIL : `0.137 > 0.12` ;
+- `37324733210` FAIL : `0.122 > 0.12` ;
+- `37324897850` SUCCESS : `PASS_V2_CANON_HERO_COMPOSITION`.
+
+Continuation :
+- `37324897735` SUCCESS ;
+- commit `3846a09e1971c683e66ae3f7f5dc65e6e05fb2ea` ;
+- artifact `11352066192` ;
+- digest `sha256:ed3b7399d5f8d0a31762596839f3b20d15514b1f8bfe0381715b45308918a39f` ;
+- 87 captures ;
+- intégrité, flows, a11y navigateur ciblée : verts.
+
+Ne pas sur-déclarer :
+- qualité artistique finale traveler non validée humainement ;
+- provenance production companions non fermée ;
+- High-Fi/VF toujours BLOQUÉS.
