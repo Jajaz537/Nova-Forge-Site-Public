@@ -52,7 +52,7 @@ async function inspect(label,width,height,mobile){
     const traveler=document.querySelector('.canon-traveler');
     const wolf=document.querySelector('.canon-wolf');
     const dragon=document.querySelector('.canon-dragon');
-    if(!hero||!copy||!traveler||!wolf||!dragon) return {missing:true};
+    if(!hero||!copy||!traveler||!wolf||!dragon) return {missing:true,presence:{hero:!!hero,copy:!!copy,traveler:!!traveler,wolf:!!wolf,dragon:!!dragon},bodyText:document.body.innerText.slice(0,180)};
     const rect=el=>{const r=el.getBoundingClientRect();return {left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}};
     const hr=rect(hero), cr=rect(copy);
     const items={traveler:rect(traveler),wolf:rect(wolf),dragon:rect(dragon)};
@@ -75,7 +75,7 @@ async function inspect(label,width,height,mobile){
       items:Object.fromEntries(Object.entries(items).map(([k,r])=>[k,{...r,visibleRatio:visibleRatio(r),copyOverlapRatio:overlapRatio(r,cr)}]))
     };
   })()`);
-  assert(!data?.missing,label+": canonical hero nodes missing");
+  assert(!data?.missing,label+": canonical hero nodes missing "+JSON.stringify(data));
   assert(data.pointerEvents==="none",label+": narrative layer must not intercept input");
   assert(data.ariaHidden==="true",label+": narrative layer must remain decorative");
   const minVisible=mobile?0.66:0.72;
