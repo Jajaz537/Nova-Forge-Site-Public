@@ -31,7 +31,15 @@ for(const [key,value] of Object.entries(data.productionStatus||{})){
 }
 if(data.productionStatus?.siteAssistant!=="FOUNDER_ONLY_CODE_INTEGRATED_NOT_DEPLOYED") throw new Error("site assistant status must remain deployment-honest");
 if(data.foundationArtifact?.vfProgress!==83) throw new Error("VF progress must stay at 83 until external proofs close");
-if(data.foundationArtifact?.tests!=="384/384"||data.foundationArtifact?.evals!=="12/12") throw new Error("sealed v0.136 proof mismatch");
+if(data.foundationArtifact?.version!=="0.140") throw new Error("Foundation version must be v0.140");
+if(data.foundationArtifact?.sha256!=="870c0b8373e6751788a6ebe4423828a0a296a2b39f9af937f6c93114856f7e34") throw new Error("Foundation SHA mismatch");
+if(data.foundationArtifact?.tests!=="389/389"||data.foundationArtifact?.evals!=="12/12") throw new Error("sealed v0.140 proof mismatch");
+for(const gate of ["exactArchive","preflight","releaseGate","coreIdle"]){
+  if(data.foundationArtifact?.realTargetEvidence?.[gate]!=="PASS") throw new Error("missing real-target PASS: "+gate);
+}
+for(const gate of ["modelQualification","gameImpact","multimodal"]){
+  if(data.foundationArtifact?.realTargetEvidence?.[gate]!=="NOT_RUN") throw new Error("external proof must remain honest: "+gate);
+}
 console.log("MODARYX_AI_PERMISSION_TIER_COUNT",data.permissionTiers.length);
 console.log("MODARYX_AI_PREVIEW_STATE_COUNT",data.previewStates.length);
 console.log("MODARYX_AI_INVARIANT_COUNT",data.invariants.length);
