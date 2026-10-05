@@ -55,8 +55,8 @@
     "forgeAssistant": "NOT_IMPLEMENTED"
   },
   "foundationArtifact": {
-    "version": "0.135",
-    "sha256": "cc41b236565817cdb5be30705044f026ca41c31b1401352375a16da01772a234",
+    "version": "0.136",
+    "sha256": "930da7a8b4b3cd2ed9954ad8e9f9e796700b3a9895ac077353a1b5a4ccce468f",
     "vfProgress": 83,
     "releaseGate": "PASS",
     "tests": "384/384",
