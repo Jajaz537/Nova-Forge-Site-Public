@@ -46,8 +46,24 @@ function assert(condition,message){ if(!condition) throw new Error(message); }
 
 async function inspect(label,width,height,mobile){
   await navigate(width,height,mobile);
+  if(mobile){
+    const menuPoint=await evaluate(`(() => {
+      const b=document.querySelector('.mobile-menu');
+      if(!b) return null;
+      const r=b.getBoundingClientRect();
+      return {x:r.left+r.width/2,y:r.top+r.height/2};
+    })()`);
+    assert(menuPoint,label+": mobile menu unavailable");
+    await send("Input.dispatchMouseEvent",{type:"mousePressed",x:menuPoint.x,y:menuPoint.y,button:"left",clickCount:1});
+    await send("Input.dispatchMouseEvent",{type:"mouseReleased",x:menuPoint.x,y:menuPoint.y,button:"left",clickCount:1});
+    await sleep(100);
+  }
   const point=await evaluate(`(() => {
-    const b=[...document.querySelectorAll('.global-nav button')].find(el=>el.textContent.trim()==='Découvrir');
+    const b=[...document.querySelectorAll('.global-nav button')].find(el=>{
+      if(el.textContent.trim()!=='Découvrir') return false;
+      const r=el.getBoundingClientRect(),s=getComputedStyle(el);
+      return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0;
+    });
     if(!b) return null;
     const r=b.getBoundingClientRect();
     return {x:r.left+r.width/2,y:r.top+r.height/2};
