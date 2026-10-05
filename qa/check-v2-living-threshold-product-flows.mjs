@@ -284,7 +284,8 @@ try{
   await clickText(".back","← Retour à la Bibliothèque");
   await waitText("Retrouvez favoris, suivis, collections, profils et historique sans les confondre.");
 
-  await clickText(".global-nav button","Créer");
+  await clickText(".global-nav button","Créateurs");
+  await clickText(".creators-page .creator-studio-entry","Ouvrir Creator Studio");
   await waitText("Creator Studio");
   await clickText(".studio-nav button","Analytics");
   await waitText("Données indisponibles");
@@ -574,7 +575,8 @@ try{
 
 
   await clickAria("Ouvrir le menu");
-  await clickText(".global-nav button","Créer");
+  await clickText(".global-nav button","Créateurs");
+  await clickText(".creators-page .creator-studio-entry","Ouvrir Creator Studio");
   await waitText("Creator Studio");
   await clickText(".studio-nav button","Releases");
   await waitText("Préparer une release");
