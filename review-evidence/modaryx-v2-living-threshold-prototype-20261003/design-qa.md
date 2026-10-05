@@ -1022,3 +1022,29 @@ Constat automatisé :
 - les P1 artistiques restent donc ouverts jusqu'à validation humaine et provenance production.
 
 Aucun PASS High-Fi/VF n'est déduit de ce run.
+
+
+## Canonical hero composition guard — 5 octobre 2026
+
+**TERMINÉ — preuve géométrique ciblée**
+
+Run :
+`37314488570` — **SUCCESS**
+
+Commit :
+`83259afcfb8d71fe53aebdf813ac849b16557b26`
+
+Marker :
+`PASS_V2_CANON_HERO_COMPOSITION`
+
+Desktop :
+- traveler visible 0.9897 / copy overlap 0.0637 ;
+- wolf visible 0.8607 / copy overlap 0.0326 ;
+- dragon visible 0.8040 / copy overlap 0.
+
+Mobile :
+- traveler visible 0.9646 / copy overlap 0 ;
+- wolf visible 0.6989 / copy overlap 0 ;
+- dragon visible 0.7194 / copy overlap 0.
+
+Le test protège la composition technique, pas le jugement artistique humain.
