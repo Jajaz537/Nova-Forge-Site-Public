@@ -2317,3 +2317,21 @@ Le garde-fou vérifie desktop + mobile :
 - géométrie verte ≠ validation artistique ;
 - compagnon visible ≠ provenance production fermée ;
 - le High-Fi final reste BLOQUÉ.
+
+
+## 80. Gate fail-closed de promotion des assets prototype — 5 octobre 2026
+
+**TERMINÉ pour la prévention CI / droits production non fermés**
+
+Run `37315176208` — **SUCCESS**  
+Marker `PASS_V2_PRODUCTION_ASSET_PROMOTION_GATE`.
+
+Invariants :
+- un asset `ALLOWED_PROTOTYPE_ONLY` ne devient jamais production par simple copie ;
+- les références hors racines de preuve/policy sont bloquées ;
+- les duplications binaires non approuvées sont bloquées ;
+- l'absence de référence interdite n'est pas une licence.
+
+À ne pas perdre :
+- production provenance/licensing séparée reste obligatoire ;
+- High-Fi/VF ne peut pas utiliser ce PASS comme preuve de droits.
