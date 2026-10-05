@@ -2245,3 +2245,52 @@ Ne jamais :
 - réintroduire l'ancien dashboard/site entier ;
 - fabriquer une fausse référence ;
 - annoncer High-Fi final avant réconciliation + validation.
+
+
+## 79. Hero canonique réconcilié — candidat prototype — 5 octobre 2026
+
+**EN COURS — correction prototype prouvée / validation artistique humaine PREUVE MANQUANTE**
+
+Source verrouillée :
+- `REFERENCE-CANONIQUE-Compagnons-face-au-royaume-enchante.png`
+- Library `file_00000000dcd482439ade71a96dfc6ba0@1`
+- SHA-256 `3b2cf82eda155d33d0ff14ad5d4ca1f95c155b8f9d019e5da03182f99f45e992`.
+
+Le candidat réconcilié doit conserver simultanément :
+- voyageur humain assis ;
+- loup ;
+- bébé dragon ;
+- château ;
+- eau / vallée continue ;
+- aucune île flottante ;
+- cascades non dominantes ;
+- monde vivant et narratif ;
+- clarté MODARYX et hiérarchie modding-first.
+
+Correction matérialisée :
+- voyageur assis réintroduit sous forme de silhouette prototype ;
+- loup + bébé dragon réintroduits ;
+- monde éclairci/réchauffé ;
+- scrim de lecture localisé ;
+- mobile recomposé.
+
+Preuve :
+- Living Threshold run `37309857645` — **SUCCESS**
+- commit capturé `0ea8e28485f83466c5a8aaf05b28243cb56b4f0e`
+- artifact `11344949022`
+- digest `sha256:144573c0d12e6aea8dd9a146f53bc2f25c71e20372ccf9733a89716d8160e0d6`
+- `KEYBOARD_REACHABLE 41 / 41`
+- desktop/mobile overflow `0 / 0`
+- `MULTISCREEN_CAPTURE_COUNT 87`
+- capture integrity : PASS.
+
+Comparaison complémentaire :
+`review-evidence/modaryx-v2-canonical-reference-20261005/visual-reference-comparison-reconciled.json`
+
+À ne pas sur-déclarer :
+- le voyageur n'est pas un asset final ;
+- loup/dragon restent `ALLOWED_PROTOTYPE_ONLY` ;
+- la provenance production des couches compagnon reste ouverte ;
+- le candidat reste plus sombre que la source canonique ;
+- aucune validation artistique humaine du candidat réconcilié n'est acquise ;
+- High-Fi/VF restent BLOQUÉS.
