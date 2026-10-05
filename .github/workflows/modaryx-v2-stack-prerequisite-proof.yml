@@ -1,0 +1,53 @@
+name: MODARYX V2 Stack Prerequisite Proof
+
+on:
+  push:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+    paths:
+      - '.github/workflows/modaryx-v2-stack-prerequisite-proof.yml'
+      - 'qa/modaryx-v2-tech-stack-selection-gate-contract.json'
+      - 'qa/check-v2-tech-stack-selection-gate-contract.mjs'
+      - 'docs/MODARYX-V2-AUTH-BACKEND-STRATEGY-20261005.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate stack gate contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-tech-stack-selection-gate-contract.mjs
+
+      - name: Validate auth/backend prerequisite evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs=require('fs');
+          const gate=JSON.parse(fs.readFileSync('qa/modaryx-v2-tech-stack-selection-gate-contract.json','utf8'));
+          const evidence=gate.prerequisiteEvidence?.AUTH_BACKEND_STRATEGY_DEFINED;
+          if(evidence?.state!=='PROVEN') throw new Error('AUTH_BACKEND_STRATEGY_DEFINED not PROVEN');
+          if(!evidence.source || !fs.existsSync(evidence.source)) throw new Error('auth/backend strategy source missing');
+          const text=fs.readFileSync(evidence.source,'utf8');
+          for(const marker of [
+            'Authorization Code + PKCE S256',
+            'HttpOnly + Secure + SameSite=Lax',
+            'Cloudflare D1',
+            'R2 pour artefacts/provenance',
+            'Turnstile côté serveur',
+            'backend production réel : **NON PROUVÉ**'
+          ]) if(!text.includes(marker)) throw new Error('strategy marker missing: '+marker);
+          console.log('PASS_V2_AUTH_BACKEND_STRATEGY_PREREQUISITE');
+          NODE
