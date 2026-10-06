@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./canon-topbar.css";
 import { contentPath, pathForActive, routeStateFromPath } from "./routes.js";
-import { authLoginUrl, logoutAccountSession, resolveAccountRemoteState } from "./api/modaryx-api.js";
+import { authLoginUrl, getNotifications, logoutAccountSession, markNotificationRead, resolveAccountRemoteState } from "./api/modaryx-api.js";
 import { resolveAmbientContext } from "./api/local-context.js";
 import {
   ArrowRight, Bell, BookOpen, Check, FunnelSimple, GameController, GridFour,
@@ -546,6 +546,7 @@ function AccountCenter({ initialTab="Compte" }) {
   const [prefs,setPrefs]=useState({ambience:true,reduced:false,compact:false});
   const [remoteAccount,setRemoteAccount]=useState({state:"LOADING",loginAvailable:false,profile:null,authority:null});
   const [accountMessage,setAccountMessage]=useState("");
+  const [remoteNotifications,setRemoteNotifications]=useState({state:"IDLE",items:[],unreadCount:0});
   const tabs=["Compte","Profil","Confidentialité","Notifications","Apparence","Accessibilité","Données locales"];
   const onboardingSteps=[
     ["Jeux","Choisissez quelques jeux pour contextualiser la découverte. Aucun choix n’est envoyé."],
@@ -566,6 +567,24 @@ function AccountCenter({ initialTab="Compte" }) {
     resolveAccountRemoteState().then(next=>{if(!cancelled)setRemoteAccount(next);});
     return ()=>{cancelled=true;};
   },[]);
+  useEffect(()=>{
+    if(tab!=="Notifications"||remoteAccount.state!=="AUTHENTICATED") return;
+    let cancelled=false;
+    setRemoteNotifications(current=>({...current,state:"LOADING"}));
+    getNotifications().then(result=>{
+      if(cancelled) return;
+      if(!result.ok){
+        setRemoteNotifications({state:"UNAVAILABLE",items:[],unreadCount:0});
+        return;
+      }
+      setRemoteNotifications({
+        state:"READY",
+        items:Array.isArray(result.body?.items)?result.body.items:[],
+        unreadCount:Number(result.body?.unreadCount||0)
+      });
+    });
+    return ()=>{cancelled=true;};
+  },[tab,remoteAccount.state]);
 
   const signIn=()=>{
     window.location.assign(authLoginUrl("/account"));
@@ -624,7 +643,14 @@ function AccountCenter({ initialTab="Compte" }) {
     "Compte": accountPanel,
     "Profil": profilePanel,
     "Confidentialité": <section className="account-panel"><span className="kicker">Confidentialité</span><h2>Privé par défaut</h2><div className="privacy-grid">{["Bibliothèque","Favoris","Profils de jeu","Brouillons","Recherches enregistrées"].map(value=><article key={value}><strong>{value}</strong><span>Privé / local par défaut</span></article>)}</div><p className="settings-note">Tout partage devra demander une action explicite.</p></section>,
-    "Notifications": <section className="account-panel notifications-center"><span className="kicker">Notifications</span><h2>Centre de notifications</h2><div className="empty notification-empty"><Bell/><h3>Aucune notification réelle</h3><p>Le candidat n’invente ni compteur, ni événement distant.</p></div><div className="notification-demo-list" aria-label="Aperçu fictif des notifications droits éditeurs"><article><div><span className="demo-label">Démonstration · non reçue</span><strong>Réponse éditeur reçue — Aetherlands</strong><p>Autorisation fictive avec limites : seuls les scopes écrits sont applicables.</p></div><span className="rights-state approved">APPROVED_WITH_LIMITS</span><small>Le futur système ouvrira le Rights Case associé. Aucun événement réel dans ce candidat.</small></article><article><div><span className="demo-label">Démonstration · non reçue</span><strong>Revue juridique requise — Project Meridian</strong><p>Une clause ambiguë a été détectée dans le scénario : aucun scope n’est automatiquement débloqué.</p></div><span className="rights-state pending">LEGAL_REVIEW_REQUIRED</span><small>Le dossier reste bloqué jusqu’à validation appropriée.</small></article></div><div className="channel-grid"><article><strong>In-app</strong><span>Structure prête · aucun événement réel</span></article><article><strong>Email</strong><span>Indisponible — infrastructure non connectée</span></article><article><strong>Push</strong><span>Indisponible — infrastructure non connectée</span></article></div></section>,
+    "Notifications": <section className="account-panel notifications-center"><span className="kicker">Notifications</span><h2>Centre de notifications</h2>
+      {remoteAccount.state==="AUTHENTICATED"&&remoteNotifications.state==="LOADING"&&<div className="empty notification-empty"><Bell/><h3>Chargement des notifications…</h3><p>Lecture same-origin du compte actif.</p></div>}
+      {remoteAccount.state==="AUTHENTICATED"&&remoteNotifications.state==="READY"&&remoteNotifications.items.length===0&&<div className="empty notification-empty"><Bell/><h3>Aucune notification réelle</h3><p>Le compteur reste à zéro tant qu’aucun événement serveur réel n’existe.</p></div>}
+      {remoteAccount.state==="AUTHENTICATED"&&remoteNotifications.state==="READY"&&remoteNotifications.items.length>0&&<div className="notification-demo-list" aria-label="Notifications in-app réelles">{remoteNotifications.items.map(item=><article key={item.id}><div><span className="demo-label">{item.readAt?"Lue":"Non lue"} · {item.priority}</span><strong>{item.title}</strong><p>{item.summary}</p></div>{item.stateLabel&&<span className="rights-state neutral">{item.stateLabel}</span>}<small>{new Date(item.occurredAt).toLocaleString()}</small>{!item.readAt&&<button className="quiet" onClick={async()=>{const result=await markNotificationRead(item.id);if(result.ok)setRemoteNotifications(current=>({...current,items:current.items.map(n=>n.id===item.id?{...n,readAt:result.body?.readAt||new Date().toISOString()}:n),unreadCount:Math.max(0,current.unreadCount-1)}));}}>Marquer comme lue</button>}</article>)}</div>}
+      {remoteAccount.state==="AUTHENTICATED"&&remoteNotifications.state==="UNAVAILABLE"&&<div className="unavailable-state"><strong>Notifications in-app indisponibles</strong><span>Aucun événement n’est inventé si le stockage V2 n’est pas disponible.</span></div>}
+      {remoteAccount.state!=="AUTHENTICATED"&&<><div className="empty notification-empty"><Bell/><h3>Aucune notification réelle</h3><p>Connectez-vous pour lire les événements in-app réels. Le candidat n’invente ni compteur, ni événement distant.</p></div><div className="notification-demo-list" aria-label="Aperçu fictif des notifications droits éditeurs"><article><div><span className="demo-label">Démonstration · non reçue</span><strong>Réponse éditeur reçue — Aetherlands</strong><p>Autorisation fictive avec limites : seuls les scopes écrits sont applicables.</p></div><span className="rights-state approved">APPROVED_WITH_LIMITS</span><small>Le futur système ouvrira le Rights Case associé. Aucun événement réel dans ce candidat.</small></article><article><div><span className="demo-label">Démonstration · non reçue</span><strong>Revue juridique requise — Project Meridian</strong><p>Une clause ambiguë a été détectée dans le scénario : aucun scope n’est automatiquement débloqué.</p></div><span className="rights-state pending">LEGAL_REVIEW_REQUIRED</span><small>Le dossier reste bloqué jusqu’à validation appropriée.</small></article></div></>}
+      <div className="channel-grid"><article><strong>In-app</strong><span>{remoteAccount.state==="AUTHENTICATED"?"Lecture serveur candidate":"Disponible après connexion et événement réel"}</span></article><article><strong>Email</strong><span>Indisponible — infrastructure non connectée</span></article><article><strong>Push</strong><span>Indisponible — infrastructure non connectée</span></article></div>
+    </section>,
     "Apparence": <section className="account-panel"><span className="kicker">Apparence</span><h2>Préférences locales</h2><div className="settings-list"><button role="switch" aria-checked={prefs.ambience} onClick={()=>setPref("ambience")}><span><strong>Ambiance vivante</strong><small>Préférence locale de démonstration</small></span><em>{prefs.ambience?"Activée":"Désactivée"}</em></button><button role="switch" aria-checked={prefs.compact} onClick={()=>setPref("compact")}><span><strong>Densité compacte</strong><small>Préférence locale de démonstration</small></span><em>{prefs.compact?"Activée":"Désactivée"}</em></button></div></section>,
     "Accessibilité": <section className="account-panel"><span className="kicker">Accessibilité</span><h2>Accessible sans réglage spécial</h2><p>Les préférences complètent le produit mais ne remplacent jamais un design accessible par défaut.</p><div className="settings-list"><button role="switch" aria-checked={prefs.reduced} onClick={()=>setPref("reduced")}><span><strong>Effets réduits</strong><small>Préférence locale de démonstration</small></span><em>{prefs.reduced?"Activés":"Désactivés"}</em></button></div><div className="accessibility-proof"><strong>Candidat actuel</strong><span>Focus visible 3 px · cibles tactiles ≥44 px · règle prefers-reduced-motion présente.</span></div></section>,
     "Données locales": <section className="account-panel"><span className="kicker">Données locales</span><h2>Ce navigateur</h2><div className="data-list"><div><strong>Favoris de démonstration</strong><span>Local</span></div><div><strong>Profils de jeu de démonstration</strong><span>Local</span></div><div><strong>Brouillons de démonstration</strong><span>Local</span></div><div><strong>Migration legacy</strong><span>Préservée / contrôlée</span></div></div><button className="quiet" disabled>Exporter — fonction réelle non connectée</button></section>,
