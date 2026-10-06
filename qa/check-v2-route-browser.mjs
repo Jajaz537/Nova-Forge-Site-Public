@@ -49,8 +49,9 @@ try{
   for(let i=0;i<80;i++){if(await evalv("document.readyState==='complete'"))break;await sleep(100)}
   const transition=await evalv(`(()=>new Promise(resolve=>{const b=[...document.querySelectorAll(".global-nav button")].find(x=>x.textContent.trim()==="Découvrir");b.click();requestAnimationFrame(()=>requestAnimationFrame(()=>resolve(location.pathname))) }))()`);
   assert.equal(transition,"/discover");
-  await send("Page.goBack");
-  await sleep(400);
+  await evalv("history.back(); true");
+  for(let i=0;i<40;i++){if(await evalv("location.pathname==='/'")) break; await sleep(100);}
+  await sleep(150);
   assert.equal(await evalv("location.pathname"),"/");
   assert.equal(await evalv("document.body.innerText.includes('Mes profils pour ce jeu')"),true);
   console.log("ROUTE_ASSERT history back restores root Game Hub");
