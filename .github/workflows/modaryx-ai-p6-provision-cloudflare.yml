@@ -1,0 +1,273 @@
+name: MODARYX IA P6 provision Cloudflare bridge
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-provision-cloudflare.yml"
+      - "qa/p6-sd-public.pem"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  provision:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      ZONE_NAME: modaryxmods.com
+      PROJECT_NAME: nova-forge-site-public
+      TUNNEL_NAME: modaryx-ai-bridge
+      BRIDGE_HOSTNAME: ai-bridge.modaryxmods.com
+      BRIDGE_URL: https://ai-bridge.modaryxmods.com
+      SD_PUBLIC_KEY_FINGERPRINT: 82375c4a6ce12165dd7c2319848e8bffc2cc53caf983b09d0af9c6df8947f20f
+    steps:
+      - name: Checkout exact site branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Provision tunnel, DNS and Pages server secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -p evidence
+
+          if [ -z "${CLOUDFLARE_API_TOKEN:-}" ]; then
+            echo "CLOUDFLARE_API_TOKEN missing" >&2
+            exit 2
+          fi
+
+          pub="qa/p6-sd-public.pem"
+          test -f "$pub"
+          openssl pkey -pubin -in "$pub" -outform DER -out evidence/p6-public.der
+          pub_fp="$(sha256sum evidence/p6-public.der | awk '{print $1}')"
+          rm -f evidence/p6-public.der
+          test "$pub_fp" = "$SD_PUBLIC_KEY_FINGERPRINT"
+
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          verify="$(curl -fsS "${auth[@]}" "${api}/user/tokens/verify")"
+          test "$(jq -r '.success == true and .result.status == "active"' <<<"$verify")" = "true"
+
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=${ZONE_NAME}" "${api}/zones")"
+          test "$(jq -r '.success' <<<"$zones")" = "true"
+          test "$(jq '.result|length' <<<"$zones")" -eq 1
+          zone_id="$(jq -r '.result[0].id' <<<"$zones")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+
+          project="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$project")" = "true"
+          has_bridge_url="$(jq -r '(.result.deployment_configs.production.env_vars // {}) | has("MODARYX_AI_BRIDGE_URL")' <<<"$project")"
+          has_bridge_key="$(jq -r '(.result.deployment_configs.production.env_vars // {}) | has("MODARYX_AI_BRIDGE_KEY_HEX")' <<<"$project")"
+          if [ "$has_bridge_url" = "true" ] || [ "$has_bridge_key" = "true" ]; then
+            jq -n \
+              --arg schema "modaryx-p6-cloudflare-provision-v1" \
+              --argjson has_url "$has_bridge_url" \
+              --argjson has_key "$has_bridge_key" \
+              '{
+                schema:$schema,
+                status:"BLOCKED_EXISTING_CONFIGURATION",
+                production_has_bridge_url:$has_url,
+                production_has_bridge_key:$has_key,
+                external_changes_made:false,
+                secret_values_logged:false,
+                awards_vf_points:false
+              }' > evidence/provision.json
+            echo "MODARYX_P6_PROVISION_BLOCKED existing_pages_bridge_configuration"
+            exit 3
+          fi
+
+          tunnels="$(curl -fsS "${auth[@]}" --get \
+            --data-urlencode "is_deleted=false" \
+            --data-urlencode "name=${TUNNEL_NAME}" \
+            --data-urlencode "per_page=100" \
+            "${api}/accounts/${account_id}/cfd_tunnel")"
+          test "$(jq -r '.success' <<<"$tunnels")" = "true"
+          tunnel_count="$(jq '.result|length' <<<"$tunnels")"
+          tunnel_created=false
+
+          if [ "$tunnel_count" -eq 0 ]; then
+            create_payload="$(jq -n --arg name "$TUNNEL_NAME" '{name:$name,config_src:"cloudflare"}')"
+            created="$(curl -fsS "${auth[@]}" \
+              --request POST \
+              --data "$create_payload" \
+              "${api}/accounts/${account_id}/cfd_tunnel")"
+            test "$(jq -r '.success' <<<"$created")" = "true"
+            tunnel_id="$(jq -r '.result.id' <<<"$created")"
+            tunnel_created=true
+          elif [ "$tunnel_count" -eq 1 ]; then
+            tunnel_id="$(jq -r '.result[0].id' <<<"$tunnels")"
+          else
+            echo "Multiple tunnels named ${TUNNEL_NAME}; refusing to choose." >&2
+            exit 4
+          fi
+
+          config_payload="$(jq -n \
+            --arg host "$BRIDGE_HOSTNAME" \
+            '{config:{ingress:[{hostname:$host,service:"http://localhost:11900"},{service:"http_status:404"}]}}')"
+          configured="$(curl -fsS "${auth[@]}" \
+            --request PUT \
+            --data "$config_payload" \
+            "${api}/accounts/${account_id}/cfd_tunnel/${tunnel_id}/configurations")"
+          test "$(jq -r '.success' <<<"$configured")" = "true"
+
+          dns="$(curl -fsS "${auth[@]}" --get \
+            --data-urlencode "name=${BRIDGE_HOSTNAME}" \
+            --data-urlencode "per_page=100" \
+            "${api}/zones/${zone_id}/dns_records")"
+          test "$(jq -r '.success' <<<"$dns")" = "true"
+          dns_count="$(jq '.result|length' <<<"$dns")"
+          target="${tunnel_id}.cfargotunnel.com"
+          dns_created=false
+
+          if [ "$dns_count" -eq 0 ]; then
+            dns_payload="$(jq -n \
+              --arg name "$BRIDGE_HOSTNAME" \
+              --arg target "$target" \
+              '{type:"CNAME",name:$name,content:$target,proxied:true,ttl:1}')"
+            dns_new="$(curl -fsS "${auth[@]}" \
+              --request POST \
+              --data "$dns_payload" \
+              "${api}/zones/${zone_id}/dns_records")"
+            test "$(jq -r '.success' <<<"$dns_new")" = "true"
+            dns_created=true
+          elif [ "$dns_count" -eq 1 ]; then
+            existing_type="$(jq -r '.result[0].type' <<<"$dns")"
+            existing_content="$(jq -r '.result[0].content' <<<"$dns")"
+            if [ "$existing_type" != "CNAME" ] || [ "$existing_content" != "$target" ]; then
+              echo "Existing DNS record conflicts with dedicated P6 hostname; refusing overwrite." >&2
+              exit 5
+            fi
+          else
+            echo "Multiple DNS records exist for dedicated P6 hostname; refusing overwrite." >&2
+            exit 6
+          fi
+
+          token_resp="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/cfd_tunnel/${tunnel_id}/token")"
+          test "$(jq -r '.success' <<<"$token_resp")" = "true"
+          tunnel_token="$(jq -r '.result' <<<"$token_resp")"
+          test -n "$tunnel_token"
+          test "$tunnel_token" != "null"
+
+          bridge_key="$(openssl rand -hex 32)"
+          test "$(printf '%s' "$bridge_key" | wc -c)" -eq 64
+
+          pages_payload="$(jq -n \
+            --arg bridge_url "$BRIDGE_URL" \
+            --arg bridge_key "$bridge_key" \
+            '{
+              deployment_configs:{
+                production:{
+                  env_vars:{
+                    MODARYX_AI_BRIDGE_URL:{type:"plain_text",value:$bridge_url},
+                    MODARYX_AI_BRIDGE_KEY_HEX:{type:"secret_text",value:$bridge_key}
+                  }
+                }
+              }
+            }')"
+
+          pages_update="$(curl -fsS "${auth[@]}" \
+            --request PATCH \
+            --data "$pages_payload" \
+            "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$pages_update")" = "true"
+
+          project_after="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$project_after")" = "true"
+          test "$(jq -r '(.result.deployment_configs.production.env_vars // {}) | has("MODARYX_AI_BRIDGE_URL")' <<<"$project_after")" = "true"
+          test "$(jq -r '(.result.deployment_configs.production.env_vars // {}) | has("MODARYX_AI_BRIDGE_KEY_HEX")' <<<"$project_after")" = "true"
+
+          payload_plain="$(mktemp)"
+          pass_file="$(mktemp)"
+          trap 'rm -f "$payload_plain" "$pass_file"' EXIT
+
+          jq -n \
+            --arg schema "modaryx-p6-sd-envelope-v1" \
+            --arg bridge_url "$BRIDGE_URL" \
+            --arg bridge_key "$bridge_key" \
+            --arg tunnel_token "$tunnel_token" \
+            --arg tunnel_id "$tunnel_id" \
+            --arg tunnel_name "$TUNNEL_NAME" \
+            --arg hostname "$BRIDGE_HOSTNAME" \
+            --arg generated_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{
+              schema:$schema,
+              generated_at:$generated_at,
+              bridge_url:$bridge_url,
+              bridge_key_hex:$bridge_key,
+              tunnel_token:$tunnel_token,
+              tunnel_id:$tunnel_id,
+              tunnel_name:$tunnel_name,
+              hostname:$hostname
+            }' > "$payload_plain"
+
+          openssl rand -hex 32 > "$pass_file"
+          openssl enc -aes-256-cbc -salt -pbkdf2 -iter 200000 \
+            -in "$payload_plain" \
+            -out evidence/p6-envelope.bin \
+            -pass "file:${pass_file}"
+
+          openssl pkeyutl -encrypt \
+            -pubin \
+            -inkey "$pub" \
+            -in "$pass_file" \
+            -out evidence/p6-envelope-key.bin \
+            -pkeyopt rsa_padding_mode:oaep \
+            -pkeyopt rsa_oaep_md:sha256 \
+            -pkeyopt rsa_mgf1_md:sha256
+
+          envelope_sha="$(sha256sum evidence/p6-envelope.bin | awk '{print $1}')"
+          envelope_key_sha="$(sha256sum evidence/p6-envelope-key.bin | awk '{print $1}')"
+
+          rm -f "$payload_plain" "$pass_file"
+          trap - EXIT
+          unset bridge_key tunnel_token pages_payload token_resp
+
+          jq -n \
+            --arg schema "modaryx-p6-cloudflare-provision-v1" \
+            --arg tunnel_id "$tunnel_id" \
+            --arg tunnel_name "$TUNNEL_NAME" \
+            --arg hostname "$BRIDGE_HOSTNAME" \
+            --arg bridge_url "$BRIDGE_URL" \
+            --arg public_key_fingerprint "$SD_PUBLIC_KEY_FINGERPRINT" \
+            --arg envelope_sha256 "$envelope_sha" \
+            --arg envelope_key_sha256 "$envelope_key_sha" \
+            --argjson tunnel_created "$tunnel_created" \
+            --argjson dns_created "$dns_created" \
+            '{
+              schema:$schema,
+              status:"PASS",
+              tunnel_id:$tunnel_id,
+              tunnel_name:$tunnel_name,
+              hostname:$hostname,
+              bridge_url:$bridge_url,
+              tunnel_created:$tunnel_created,
+              tunnel_configured:true,
+              dns_created:$dns_created,
+              pages_production_bridge_url_set:true,
+              pages_production_bridge_key_set:true,
+              sd_public_key_fingerprint:$public_key_fingerprint,
+              envelope_sha256:$envelope_sha256,
+              envelope_key_sha256:$envelope_key_sha256,
+              encryption:"RSA-4096-OAEP-SHA256 + AES-256-CBC-PBKDF2-200000",
+              secret_values_logged:false,
+              plaintext_secret_artifacts:false,
+              awards_vf_points:false
+            }' > evidence/provision.json
+
+          echo "MODARYX_P6_CLOUDFLARE_PROVISION_PASS tunnelCreated=${tunnel_created} dnsCreated=${dns_created} pagesSecrets=true encryptedEnvelope=true"
+
+      - name: Upload encrypted SD provisioning envelope
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-cloudflare-provision
+          path: evidence
+          if-no-files-found: error
+          retention-days: 7
