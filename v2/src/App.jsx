@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import "./canon-topbar.css";
 import { contentPath, pathForActive, routeStateFromPath } from "./routes.js";
 import { authLoginUrl, getDataHistory, getNotifications, getProviderRegistry, logoutAccountSession, markNotificationRead, resolveAccountRemoteState } from "./api/modaryx-api.js";
