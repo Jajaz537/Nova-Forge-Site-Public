@@ -1,6 +1,9 @@
 name: MODARYX V2 VF Readiness Gate Proof
 
 on:
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
   push:
     branches:
       - 'audit/modaryx-v2-legacy-boundary-20261003'
@@ -12,6 +15,7 @@ on:
       - 'CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-04.md'
       - 'CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-05.md'
       - 'docs/MODARYX-V2-NORMALIZED-VISUAL-COMPARISON-20261005.md'
+      - 'docs/MODARYX-V2-OWNER-DELEGATED-VISUAL-VALIDATION-20261006.md'
   workflow_dispatch:
 
 permissions:
