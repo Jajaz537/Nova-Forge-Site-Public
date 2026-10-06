@@ -1,6 +1,6 @@
-import {json} from '../../_lib/api-security.mjs';
-import {authenticateRead} from '../../_lib/remote-write.mjs';
-import {publicNotification} from '../../_lib/notifications.mjs';
+import {json} from '../../../_lib/api-security.mjs';
+import {authenticateRead} from '../../../_lib/remote-write.mjs';
+import {publicNotification} from '../../../_lib/notifications.mjs';
 
 export async function onRequestGet(context){
   const auth=await authenticateRead(context);
