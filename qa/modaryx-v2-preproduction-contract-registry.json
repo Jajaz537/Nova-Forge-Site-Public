@@ -458,6 +458,12 @@
       "contract": "qa/modaryx-v2-production-evidence-probe-contract.json",
       "checker": "qa/check-v2-production-evidence-probe-contract.mjs",
       "source": "docs/MODARYX-V2-PRODUCTION-EVIDENCE-READ-ONLY-PROBE-20261006.md"
+    },
+    {
+      "id": "external-validation-execution-pack",
+      "contract": "qa/modaryx-v2-external-validation-execution-pack.json",
+      "checker": "qa/check-v2-external-validation-execution-pack.mjs",
+      "source": "docs/MODARYX-V2-EXTERNAL-VALIDATION-EXECUTION-PACK-20261006.md"
     }
   ],
   "invariants": [

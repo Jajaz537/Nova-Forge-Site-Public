@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "PREPARED_NOT_EXECUTED",
+  "targetBranch": "design/modaryx-v2-blue-violet-product-20261005",
+  "preparedAgainstCommit": "c00335a22fe62ffde35a6edfdecb51a5b1f66304",
+  "blockerIds": [
+    "nvda-real",
+    "voiceover-real",
+    "talkback-real",
+    "safari-real",
+    "physical-devices"
+  ],
+  "evidenceDirectory": "qa/external-validation/evidence",
+  "requiredResultStates": [
+    "PASS_WITH_NO_BLOCKER",
+    "PASS_WITH_P2_P3",
+    "FAIL_P0_P1",
+    "INCOMPLETE"
+  ],
+  "sessions": [
+    {
+      "blockerId": "nvda-real",
+      "sessionType": "NVDA_REAL",
+      "requiredReality": [
+        "WINDOWS_REAL",
+        "NVDA_ACTIVE",
+        "REAL_BROWSER"
+      ],
+      "criticalTasks": [
+        "home-to-game-hub",
+        "search-to-content-detail",
+        "account-notifications-data",
+        "keyboard-only-primary-flows",
+        "form-error-announcement"
+      ]
+    },
+    {
+      "blockerId": "voiceover-real",
+      "sessionType": "VOICEOVER_REAL",
+      "requiredReality": [
+        "APPLE_OS_REAL",
+        "VOICEOVER_ACTIVE",
+        "REAL_BROWSER"
+      ],
+      "criticalTasks": [
+        "home-to-game-hub",
+        "search-to-content-detail",
+        "account-notifications-data",
+        "creator-studio-navigation",
+        "form-error-announcement"
+      ]
+    },
+    {
+      "blockerId": "talkback-real",
+      "sessionType": "TALKBACK_REAL",
+      "requiredReality": [
+        "ANDROID_PHYSICAL_DEVICE",
+        "TALKBACK_ACTIVE",
+        "CHROME_REAL"
+      ],
+      "criticalTasks": [
+        "home-to-game-hub",
+        "search-to-content-detail",
+        "touch-navigation",
+        "account-notifications-data",
+        "form-error-announcement"
+      ]
+    },
+    {
+      "blockerId": "safari-real",
+      "sessionType": "SAFARI_REAL",
+      "requiredReality": [
+        "SAFARI_EXECUTED",
+        "APPLE_OS_REAL"
+      ],
+      "criticalTasks": [
+        "sticky-header",
+        "horizontal-overflow",
+        "forms-select-input",
+        "focus-visible",
+        "backdrop-filter-fail-soft",
+        "reduced-motion",
+        "mobile-viewport-units"
+      ]
+    },
+    {
+      "blockerId": "physical-devices",
+      "sessionType": "PHYSICAL_DEVICE",
+      "requiredReality": [
+        "PHYSICAL_DEVICE_REAL",
+        "TOUCH_REAL"
+      ],
+      "criticalTasks": [
+        "touch-targets",
+        "virtual-keyboard-visibility",
+        "text-zoom",
+        "orientation",
+        "safe-area",
+        "scroll-stability",
+        "content-layout-shift"
+      ]
+    }
+  ],
+  "closureRules": [
+    "EVIDENCE_COMMIT_EQUALS_TESTED_COMMIT",
+    "REQUIRED_REALITY_FLAGS_TRUE",
+    "ALL_CRITICAL_TASKS_EXECUTED",
+    "ARTIFACT_REFS_NON_EMPTY",
+    "REVIEWER_RECORDED",
+    "NO_OPEN_P0_P1",
+    "RESULT_NOT_INCOMPLETE"
+  ],
+  "invariants": [
+    "AUTOMATION_NEVER_CLOSES_EXTERNAL_BLOCKER",
+    "CDP_NEVER_EQUALS_SCREEN_READER",
+    "VIEWPORT_EMULATION_NEVER_EQUALS_PHYSICAL_DEVICE",
+    "NON_SAFARI_NEVER_EQUALS_SAFARI_REAL",
+    "EVIDENCE_TEMPLATE_NEVER_EQUALS_EXECUTED_SESSION",
+    "NO_UNNECESSARY_PERSONAL_DATA"
+  ]
+}
