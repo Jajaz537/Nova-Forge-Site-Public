@@ -59,6 +59,8 @@ async function runScenario(name,s){
     await new Promise((resolve,reject)=>{ws.addEventListener("open",resolve,{once:true});ws.addEventListener("error",reject,{once:true})});
     ws.addEventListener("message",event=>{const m=JSON.parse(event.data);if(!m.id||!pending.has(m.id))return;const p=pending.get(m.id);pending.delete(m.id);m.error?p.reject(new Error(m.error.message)):p.resolve(m)});
     await send("Page.enable"); await send("Runtime.enable"); await send("Network.enable");
+    await send("Page.bringToFront");
+    await send("Emulation.setFocusEmulationEnabled",{enabled:true});
     await send("Emulation.setDeviceMetricsOverride",{width:s.width,height:s.height,deviceScaleFactor:1,mobile:name==="mobile"});
     await send("Emulation.setCPUThrottlingRate",{rate:s.cpuRate});
     await send("Network.setCacheDisabled",{cacheDisabled:true});
@@ -75,7 +77,8 @@ async function runScenario(name,s){
     for(let i=0;i<150;i++){if(await evaluate("document.readyState==='complete'"))break;await sleep(100)}
     await sleep(1800);
     const metrics=await evaluate(`(()=>{const nav=performance.getEntriesByType("navigation")[0];return {...window.__modPerf,fcp:performance.getEntriesByName("first-contentful-paint")[0]?.startTime||0,domContentLoaded:nav?.domContentLoadedEventEnd||0,load:nav?.loadEventEnd||0,resources:performance.getEntriesByType("resource").reduce((n,e)=>n+(e.transferSize||0),0)}})()`);
-    assert.ok(metrics.lcp>0&&metrics.lcp<=s.lcpCeilingMs,`${name} LCP ${metrics.lcp} > ${s.lcpCeilingMs}`);
+    assert.ok(metrics.lcp>0,`${name} LCP was not observed`);
+    assert.ok(metrics.lcp<=s.lcpCeilingMs,`${name} LCP ${metrics.lcp} > ${s.lcpCeilingMs}`);
     assert.ok(metrics.cls<=s.clsCeiling,`${name} CLS ${metrics.cls} > ${s.clsCeiling}`);
     const routeMs=await evaluate(`(()=>new Promise(resolve=>{
       const target=[...document.querySelectorAll(".global-nav button")].find(x=>x.textContent.trim()==="Découvrir");

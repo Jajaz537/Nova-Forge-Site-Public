@@ -10,6 +10,10 @@ on:
       - 'v2/src/api/modaryx-api.js'
       - 'qa/modaryx-v2-game-support-ui-contract.json'
       - 'qa/check-v2-game-support-ui-candidate.mjs'
+      - 'qa/check-v2-game-support-ui-browser.mjs'
+      - 'v2/src/components/GameSupportRequestPanel.jsx'
+      - 'v2/scripts/prepare-sites-build.mjs'
+      - 'qa/check-v2-performance-candidate-browser.mjs'
       - 'qa/modaryx-v2-preproduction-contract-registry.json'
   pull_request:
     branches:
@@ -61,8 +65,7 @@ jobs:
         env:
           MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4196
         run: |
-          node qa/check-v2-living-threshold-product-flows.mjs
-          echo PASS_V2_GAME_SUPPORT_UI_BROWSER_GUEST_FLOW
+          node qa/check-v2-game-support-ui-browser.mjs
       - name: Cleanup
         if: always()
         run: |
