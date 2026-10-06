@@ -10,7 +10,7 @@ const REQUIRED_TABLES=[
   "modaryx_v2_file_artifacts","modaryx_v2_collections","modaryx_v2_collection_items","modaryx_v2_modpacks",
   "modaryx_v2_game_profiles","modaryx_v2_search_documents",
   "modaryx_v2_notification_events","modaryx_v2_notification_preferences",
-  "modaryx_v2_data_history","modaryx_v2_notification_delivery_outbox",
+  "modaryx_v2_data_history","modaryx_v2_notification_delivery_outbox","modaryx_v2_notification_destinations",
   "modaryx_v2_rights_cases","modaryx_v2_rights_scope_decisions","modaryx_v2_rights_audit",
   "modaryx_v2_game_support_requests","modaryx_v2_game_support_records",
   "modaryx_v2_rights_contact_evidence","modaryx_v2_rights_response_evidence","modaryx_v2_rights_license_preflight",
