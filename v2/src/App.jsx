@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./canon-topbar.css";
+import { contentPath, pathForActive, routeStateFromPath } from "./routes.js";
 import {
   ArrowRight, Bell, BookOpen, Check, FunnelSimple, GameController, GridFour,
   List, MagnifyingGlass, Plus, SlidersHorizontal, Stack, UsersThree, X
@@ -7,12 +8,12 @@ import {
 
 const navItems = ["Découvrir", "Jeux", "Mods & contenus", "Collections", "Créateurs", "Communauté"];
 const contentItems = [
-  { title: "Sentiers de l’aube", kind: "Exploration", creator: "Atelier Boréal", pos: "0% 0%", tone: "cyan" },
-  { title: "Vestiges suspendus", kind: "Environnements", creator: "Lueur Collective", pos: "50% 0%", tone: "violet" },
-  { title: "Sommets silencieux", kind: "Graphismes", creator: "Les Cartographes", pos: "100% 0%", tone: "cyan" },
-  { title: "Rivages du couchant", kind: "Immersion", creator: "Atelier Boréal", pos: "0% 100%", tone: "violet" },
-  { title: "Brumes des hautes terres", kind: "Gameplay", creator: "Lueur Collective", pos: "50% 100%", tone: "cyan" },
-  { title: "Le pont des veilleurs", kind: "Quêtes", creator: "Les Cartographes", pos: "100% 100%", tone: "violet" },
+  { slug: "sentiers-de-laube", title: "Sentiers de l’aube", kind: "Exploration", creator: "Atelier Boréal", pos: "0% 0%", tone: "cyan" },
+  { slug: "vestiges-suspendus", title: "Vestiges suspendus", kind: "Environnements", creator: "Lueur Collective", pos: "50% 0%", tone: "violet" },
+  { slug: "sommets-silencieux", title: "Sommets silencieux", kind: "Graphismes", creator: "Les Cartographes", pos: "100% 0%", tone: "cyan" },
+  { slug: "rivages-du-couchant", title: "Rivages du couchant", kind: "Immersion", creator: "Atelier Boréal", pos: "0% 100%", tone: "violet" },
+  { slug: "brumes-des-hautes-terres", title: "Brumes des hautes terres", kind: "Gameplay", creator: "Lueur Collective", pos: "50% 100%", tone: "cyan" },
+  { slug: "le-pont-des-veilleurs", title: "Le pont des veilleurs", kind: "Quêtes", creator: "Les Cartographes", pos: "100% 100%", tone: "violet" },
 ];
 
 const gameItems = [
@@ -85,7 +86,7 @@ const rightsDemoCases = [
 ];
 
 function Logo({ onNavigate }) {
-  return <a className="logo" href="#top" aria-label="MODARYX — accueil" onClick={onNavigate?()=>onNavigate("Découvrir"):undefined}>MODARY<span>X</span></a>;
+  return <a className="logo" href="/discover" aria-label="MODARYX — accueil" onClick={onNavigate?(event)=>{event.preventDefault();onNavigate("Découvrir");}:undefined}>MODARY<span>X</span></a>;
 }
 
 function Topbar({ active, onNavigate }) {
@@ -910,16 +911,33 @@ function Community() {
 }
 
 export function App() {
-  const [active, setActive] = useState("Jeux");
-  const [detail, setDetail] = useState(null);
-  const [gameHubOpen,setGameHubOpen]=useState(true);
+  const initialRoute=()=>routeStateFromPath(typeof window==="undefined"?"/":window.location.pathname,contentItems);
+  const initial=initialRoute();
+  const [active, setActive] = useState(initial.active);
+  const [detail, setDetail] = useState(initial.detail);
+  const [gameHubOpen,setGameHubOpen]=useState(initial.gameHubOpen);
   const [online,setOnline]=useState(()=>typeof navigator==="undefined"?true:navigator.onLine);
   const firstRouteRender=useRef(true);
+
+  const applyResolvedRoute=route=>{
+    setActive(route.active);
+    setDetail(route.detail);
+    setGameHubOpen(route.gameHubOpen);
+  };
+  const pushPath=path=>{
+    if(typeof window!=="undefined" && window.location.pathname!==path) window.history.pushState({modaryxV2:true},"",path);
+  };
+
   useEffect(()=>{
     const syncConnectivity=()=>setOnline(navigator.onLine);
     window.addEventListener("online",syncConnectivity);
     window.addEventListener("offline",syncConnectivity);
     return ()=>{window.removeEventListener("online",syncConnectivity);window.removeEventListener("offline",syncConnectivity);};
+  },[]);
+  useEffect(()=>{
+    const onPopState=()=>applyResolvedRoute(routeStateFromPath(window.location.pathname,contentItems));
+    window.addEventListener("popstate",onPopState);
+    return ()=>window.removeEventListener("popstate",onPopState);
   },[]);
   useEffect(()=>{
     if(firstRouteRender.current){firstRouteRender.current=false;return;}
@@ -934,12 +952,34 @@ export function App() {
         : active+" — MODARYX";
     document.title=routeTitle;
   },[active,detail,gameHubOpen]);
+
   const scrollRouteTop=()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
-  const navigate = item => { setDetail(null); setGameHubOpen(false); setActive(item); scrollRouteTop(); };
-  const openGameHub=()=>{setDetail(null);setActive("Jeux");setGameHubOpen(true);scrollRouteTop();};
-  const openContent=item=>{setDetail(item);scrollRouteTop();};
+  const navigate=item=>{
+    const route=routeStateFromPath(pathForActive(item),contentItems);
+    applyResolvedRoute(route);
+    pushPath(pathForActive(item));
+    scrollRouteTop();
+  };
+  const openGameHub=()=>{
+    const route=routeStateFromPath("/games/aetherlands",contentItems);
+    applyResolvedRoute(route);
+    pushPath("/games/aetherlands");
+    scrollRouteTop();
+  };
+  const openContent=item=>{
+    setDetail(item);
+    pushPath(contentPath(item));
+    scrollRouteTop();
+  };
+  const closeDetail=()=>{
+    const route=routeStateFromPath("/mods",contentItems);
+    applyResolvedRoute(route);
+    pushPath("/mods");
+    scrollRouteTop();
+  };
+
   let screen;
-  if (detail) screen=<Detail item={detail} onBack={()=>setDetail(null)}/>;
+  if (detail) screen=<Detail item={detail} onBack={closeDetail}/>;
   else if(active==='Découvrir') screen=<Discover onOpen={openContent}/>;
   else if(active==='Recherche') screen=<GlobalSearch onOpenContent={openContent} onOpenGame={openGameHub} onOpenCreators={()=>navigate('Créateurs')} onOpenCollections={()=>navigate('Collections')}/>;
   else if(active==='Jeux' && !gameHubOpen) screen=<GamesIndex onOpenGame={openGameHub}/>;
@@ -957,5 +997,12 @@ export function App() {
   else if(active==='Aide & documentation') screen=<HelpDocs onNavigate={navigate}/>;
   else if(active==='Modération') screen=<ModerationCenter/>;
   else screen=<GameHub onOpen={openContent}/>;
-  return <div className="app-shell"><a className="skip-link" href="#main-content">Aller au contenu principal</a>{!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}<Topbar active={active} onNavigate={navigate}/>{screen}<footer><Logo onNavigate={navigate}/><p>Prototype exploratoire MODARYX V2 · Direction Living Threshold hybride 2+3</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button><button onClick={()=>navigate('Modération')}>Modération · démo admin</button><button onClick={()=>navigate('Confiance & légal')}>Confiance & légal</button><button onClick={()=>navigate('Aide & documentation')}>Aide & documentation</button></footer></div>;
+
+  return <div className="app-shell">
+    <a className="skip-link" href="#main-content">Aller au contenu principal</a>
+    {!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}
+    <Topbar active={active} onNavigate={navigate}/>
+    {screen}
+    <footer><Logo onNavigate={navigate}/><p>MODARYX V2 · Candidat produit isolé</p><button onClick={openGameHub}><GameController/>Game Hub</button><button onClick={()=>navigate('Bibliothèque')}><BookOpen/>Bibliothèque</button><button onClick={()=>navigate('Droits jeux')}><Check/>Droits jeux · démo admin</button><button onClick={()=>navigate('Modération')}>Modération · démo admin</button><button onClick={()=>navigate('Confiance & légal')}>Confiance & légal</button><button onClick={()=>navigate('Aide & documentation')}>Aide & documentation</button></footer>
+  </div>;
 }
