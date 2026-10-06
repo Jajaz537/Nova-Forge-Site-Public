@@ -1,0 +1,130 @@
+name: MODARYX V2 Public Origin Read-Only Classification
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-public-origin-readonly-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-public-origin-readonly-classification.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-public-origin-readonly-classification
+  cancel-in-progress: true
+
+jobs:
+  classify:
+    name: Classify current public origin with GET/HEAD only
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      MODARYX_PUBLIC_ORIGIN: https://modaryxmods.com
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Classify current public origin
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const origin=new URL(process.env.MODARYX_PUBLIC_ORIGIN);
+          if(origin.protocol!=="https:"||origin.username||origin.password||origin.hash||origin.pathname!=="/"||origin.search){
+            throw new Error("public origin must be bare HTTPS");
+          }
+          const request=async(path,accept="application/json")=>{
+            const controller=new AbortController();
+            const timer=setTimeout(()=>controller.abort(),8000);
+            try{
+              const response=await fetch(new URL(path,origin),{
+                method:"GET",
+                redirect:"manual",
+                credentials:"omit",
+                referrerPolicy:"no-referrer",
+                cache:"no-store",
+                headers:{accept},
+                signal:controller.signal
+              });
+              const type=response.headers.get("content-type")||"";
+              let body=null;
+              if(/application\/json/i.test(type)){
+                try{body=await response.json();}catch{}
+              }else if(/text\/html/i.test(type)){
+                try{body=await response.text();}catch{}
+              }
+              return {status:response.status,type,headers:Object.fromEntries(response.headers.entries()),body};
+            }finally{clearTimeout(timer)}
+          };
+
+          const root=await request("/","text/html");
+          if(root.status!==200) throw new Error("public root unavailable: "+root.status);
+          const html=typeof root.body==="string"?root.body:"";
+          const robots=(root.headers["x-robots-tag"]||"").toLowerCase();
+          const noindex=robots.includes("noindex")||/<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html);
+
+          const paths=[
+            "/api/v1/status",
+            "/api/v1/auth/session",
+            "/api/v1/providers/status",
+            "/api/v1/notifications/delivery/readiness",
+            "/api/v1/rum/cwv",
+            "/api/v1/production/readiness",
+            "/api/v1/history",
+            "/sw-v2.js"
+          ];
+          const results={};
+          for(const path of paths){
+            try{
+              const r=await request(path,path==="/sw-v2.js"?"application/javascript":"application/json");
+              results[path]={status:r.status,type:r.type};
+              if(path==="/api/v1/status"&&r.body&&typeof r.body==="object"){
+                results[path].service=r.body.service||null;
+                results[path].stage=r.body.stage||null;
+                results[path].d1=Boolean(r.body.bindings?.d1);
+                results[path].r2=Boolean(r.body.bindings?.r2);
+              }
+              if(path==="/api/v1/production/readiness"&&r.body&&typeof r.body==="object"){
+                results[path].productionPass=Boolean(r.body.productionPass);
+              }
+              if(path==="/api/v1/rum/cwv"&&r.body&&typeof r.body==="object"){
+                results[path].state=r.body.state||null;
+              }
+            }catch(error){
+              results[path]={status:0,error:error?.name||"ERROR"};
+            }
+          }
+
+          const v2Backend=results["/api/v1/status"]?.status===200&&results["/api/v1/status"]?.service==="modaryx-backend";
+          const v2Readiness=results["/api/v1/production/readiness"]?.status===200;
+          const sw=results["/sw-v2.js"]?.status===200;
+          const classification=v2Backend&&v2Readiness
+            ? (noindex?"V2_BACKEND_PRESENT_ROOT_NOINDEX":"V2_BACKEND_PRESENT_ROOT_INDEXABLE")
+            : "PUBLIC_ORIGIN_NOT_FULL_V2";
+          console.log("PUBLIC_ORIGIN_CLASSIFICATION",JSON.stringify({
+            origin:origin.origin,
+            rootStatus:root.status,
+            noindex,
+            v2Backend,
+            v2Readiness,
+            serviceWorkerAsset:sw,
+            endpoints:results
+          }));
+          console.log("PUBLIC_ORIGIN_STATE="+classification);
+          console.log("BLOCKER_CLOSURE=no");
+          console.log("PASS_V2_PUBLIC_ORIGIN_READ_ONLY_CLASSIFICATION");
+          NODE
+
+      - name: Guard read-only workflow
+        run: |
+          set -euo pipefail
+          file=".github/workflows/modaryx-v2-public-origin-readonly-classification.yml"
+          if grep -E 'method:"(POST|PUT|PATCH|DELETE)"|curl .* -(X|--request) *(POST|PUT|PATCH|DELETE)' "$file"; then
+            echo "mutating HTTP method detected"
+            exit 1
+          fi
+          echo PUBLIC_ORIGIN_READ_ONLY_GUARD=yes
