@@ -1,0 +1,107 @@
+name: MODARYX IA P6 Cloudflare write permission probe
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-write-permission-probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      ZONE_NAME: modaryxmods.com
+      PROJECT_NAME: nova-forge-site-public
+    steps:
+      - name: Probe Pages Write and DNS Write with automatic cleanup
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=${ZONE_NAME}" "${api}/zones")"
+          zone_id="$(jq -r '.result[0].id' <<<"$zones")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+
+          pages_write=false
+          pages_cleanup=false
+          probe_value="probe-$GITHUB_RUN_ID"
+          pages_payload="$(jq -n --arg v "$probe_value" '{deployment_configs:{production:{env_vars:{MODARYX_P6_WRITE_PROBE:{type:"plain_text",value:$v}}}}}')"
+          pages_body="$(mktemp)"
+          pages_code="$(curl -sS -o "$pages_body" -w '%{http_code}' "${auth[@]}" --request PATCH --data "$pages_payload" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+          if [ "$pages_code" = "200" ] && [ "$(jq -r '.success' "$pages_body")" = "true" ]; then
+            pages_write=true
+            cleanup_payload='{"deployment_configs":{"production":{"env_vars":{"MODARYX_P6_WRITE_PROBE":null}}}}'
+            cleanup_body="$(mktemp)"
+            cleanup_code="$(curl -sS -o "$cleanup_body" -w '%{http_code}' "${auth[@]}" --request PATCH --data "$cleanup_payload" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+            if [ "$cleanup_code" = "200" ] && [ "$(jq -r '.success' "$cleanup_body")" = "true" ]; then
+              pages_cleanup=true
+            fi
+            rm -f "$cleanup_body"
+          fi
+          rm -f "$pages_body"
+
+          dns_write=false
+          dns_cleanup=false
+          dns_name="_modaryx-p6-write-probe.$ZONE_NAME"
+          dns_payload="$(jq -n --arg name "$dns_name" --arg content "$probe_value" '{type:"TXT",name:$name,content:$content,ttl:60}')"
+          dns_body="$(mktemp)"
+          dns_code="$(curl -sS -o "$dns_body" -w '%{http_code}' "${auth[@]}" --request POST --data "$dns_payload" "${api}/zones/${zone_id}/dns_records")"
+          if [ "$dns_code" = "200" ] && [ "$(jq -r '.success' "$dns_body")" = "true" ]; then
+            dns_write=true
+            dns_id="$(jq -r '.result.id' "$dns_body")"
+            del_body="$(mktemp)"
+            del_code="$(curl -sS -o "$del_body" -w '%{http_code}' "${auth[@]}" --request DELETE "${api}/zones/${zone_id}/dns_records/${dns_id}")"
+            if [ "$del_code" = "200" ] && [ "$(jq -r '.success' "$del_body")" = "true" ]; then
+              dns_cleanup=true
+            fi
+            rm -f "$del_body"
+          fi
+          rm -f "$dns_body"
+
+          jq -n \
+            --arg schema "modaryx-p6-cloudflare-write-permission-probe-v1" \
+            --arg pages_http "$pages_code" \
+            --arg dns_http "$dns_code" \
+            --argjson pages_write "$pages_write" \
+            --argjson pages_cleanup "$pages_cleanup" \
+            --argjson dns_write "$dns_write" \
+            --argjson dns_cleanup "$dns_cleanup" \
+            '{
+              schema:$schema,
+              pages_http_status:$pages_http,
+              pages_write:$pages_write,
+              pages_probe_cleanup:$pages_cleanup,
+              dns_http_status:$dns_http,
+              dns_write:$dns_write,
+              dns_probe_cleanup:$dns_cleanup,
+              permanent_changes:false,
+              secret_values_logged:false,
+              awards_vf_points:false
+            }' > evidence/write-permissions.json
+
+          echo "MODARYX_P6_WRITE_PROBE pagesWrite=$pages_write pagesCleanup=$pages_cleanup dnsWrite=$dns_write dnsCleanup=$dns_cleanup pagesHttp=$pages_code dnsHttp=$dns_code"
+
+          if [ "$pages_write" = "true" ] && [ "$pages_cleanup" != "true" ]; then
+            exit 7
+          fi
+          if [ "$dns_write" = "true" ] && [ "$dns_cleanup" != "true" ]; then
+            exit 8
+          fi
+
+      - name: Upload permission probe evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-cloudflare-write-permissions
+          path: evidence
+          if-no-files-found: error
+          retention-days: 30
