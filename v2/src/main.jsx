@@ -23,3 +23,19 @@ createRoot(document.getElementById("root")).render(
 void registerV2PwaIfEnabled().catch(() => {
   // Offline support is fail-soft; registration failure must not break the product shell.
 });
+
+
+// Field CWV RUM remains doubly gated: the Vite flag and the server-side MODARYX_CWV_RUM_ENABLED binding must both be enabled.
+// Default builds collect nothing and the production p75 blocker remains OPEN until real traffic evidence exists.
+if (import.meta.env.VITE_MODARYX_FIELD_CWV === "1") {
+  void import("./cwv-rum.js")
+    .then(({ startFieldCwvCollection }) => {
+      startFieldCwvCollection({
+        enabled: true,
+        endpoint: "/api/v1/rum/cwv",
+      });
+    })
+    .catch(() => {
+      // Observability must never break the product shell.
+    });
+}

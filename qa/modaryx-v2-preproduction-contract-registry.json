@@ -470,6 +470,12 @@
       "contract": "qa/modaryx-v2-production-evidence-probe-contract.json",
       "checker": "qa/check-v2-production-evidence-probe-contract.mjs",
       "source": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md"
+    },
+    {
+      "id": "cwv-rum-candidate",
+      "contract": "qa/modaryx-v2-cwv-rum-contract.json",
+      "checker": "qa/check-v2-cwv-rum.mjs",
+      "source": "docs/MODARYX-V2-CWV-RUM-CANDIDATE-20261006.md"
     }
   ],
   "invariants": [
