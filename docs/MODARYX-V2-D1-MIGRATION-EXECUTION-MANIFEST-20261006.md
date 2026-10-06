@@ -2,14 +2,14 @@
 
 **État : PRÉPARÉ / NON EXÉCUTÉ À DISTANCE**
 
-Ce paquet verrouille l'ordre et l'identité exacte des migrations D1 actuellement présentes, de `0001` à `0014`.
+Ce paquet verrouille l'ordre et l'identité exacte des migrations D1 actuellement présentes, de `0001` à `0015`.
 
 ## Garanties
 
 - chaque fichier est lié à son Git blob SHA-1 exact ;
 - ordre continu obligatoire ;
 - replay SQLite local complet ;
-- 31 tables V2 requises présentes après replay ;
+- 32 tables V2 requises présentes après replay ;
 - détection de DDL destructif élémentaire (`DROP TABLE`, `DROP COLUMN`, `TRUNCATE`) ;
 - aucune commande d'application remote dans le manifest ;
 - aucun seed catalogue/fixture ;
