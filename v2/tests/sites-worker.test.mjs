@@ -5,7 +5,7 @@ import worker from "../worker/index.js";
 
 test("serves existing static assets without a fallback", async () => {
   const calls = [];
-  const response = await worker.fetch(new Request("https://example.test/assets/app.js"), {
+  const response = await worker.fetch(new Request("https://example.test/assets/v2-test.js"), {
     ASSETS: {
       fetch: async (request) => {
         calls.push(new URL(request.url).pathname);
@@ -15,7 +15,7 @@ test("serves existing static assets without a fallback", async () => {
   });
 
   assert.equal(response.status, 200);
-  assert.deepEqual(calls, ["/assets/app.js"]);
+  assert.deepEqual(calls, ["/assets/v2-test.js"]);
 });
 
 test("falls back to index.html for an unknown app route", async () => {
