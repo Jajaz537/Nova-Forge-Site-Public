@@ -55,11 +55,11 @@
     "forgeAssistant": "NOT_IMPLEMENTED"
   },
   "foundationArtifact": {
-    "version": "0.142",
-    "sha256": "c564142cb77a8cc13ce5ef3dfd1b9c82a0fe0048a87723ec95cd67719eb0d3d1",
-    "vfProgress": 83,
+    "version": "0.143",
+    "sha256": "5274ccbbe46b247e012a59bfb90b709c12864d5a74f239dd0ec5a881561afa28",
+    "vfProgress": 85,
     "releaseGate": "PASS",
-    "tests": "396/396",
+    "tests": "399/399",
     "evals": "12/12",
     "realTargetEvidence": {
       "runner": "SD",
@@ -71,10 +71,12 @@
         "version": "0.140",
         "status": "PASS"
       },
-      "modelQualification": "FORMAL_QWEN3_4B_PASS_TARGET_BUNDLE_PENDING",
-      "gameImpact": "NOT_RUN",
-      "multimodal": "STT_TTS_PASS_VISION_FIX_PENDING",
-      "vfCreditApplied": false
+      "modelQualification": "QWEN3_4B_FORMAL_AND_INDEPENDENT_ASSESSMENT_PASS",
+      "gameImpact": "PRESENTMON_READY_NO_ACTIVE_GAME_CAPTURE_YET",
+      "multimodal": "STT_TTS_PASS_VISION_V0143_REAL_TARGET_REPLAY_PENDING",
+      "publicDenial": "PASS",
+      "browserSecretAbsence": "PASS",
+      "vfCreditApplied": true
     }
   }
 }
