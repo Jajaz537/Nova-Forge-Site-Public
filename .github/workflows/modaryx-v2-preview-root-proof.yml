@@ -98,7 +98,7 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: modaryx-v2-preview-root-browser-matrix
-          path: review-evidence/modaryx-v2-living-threshold-prototype-20261003/multiscreen
+          path: review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen
           if-no-files-found: error
           retention-days: 30
 
