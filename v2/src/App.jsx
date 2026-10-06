@@ -381,7 +381,7 @@ function GamesIndex({ onOpenGame }) {
     <h1>Trouvez votre prochain terrain de jeu.</h1>
     <p className="page-intro">Recherchez un jeu et voyez immédiatement si son catalogue est réellement disponible.</p>
     <section className="game-support-request">
-      <div><span className="kicker">Jeu absent ?</span><h2>Demander le support d’un jeu</h2><p>Une demande membre passe toujours par le triage MODARYX avant tout ajout. Une acceptation crée seulement une baseline MODARYX sûre ; elle ne vaut jamais autorisation éditeur.</p></div>
+      <div><span className="kicker">Jeu absent ?</span><h2>Demander le support d’un jeu</h2><p>Une demande membre passe toujours par le triage MODARYX avant tout ajout. Aucune demande éditeur n’est envoyée depuis ce prototype. Une acceptation crée seulement une baseline MODARYX sûre ; elle ne vaut jamais autorisation éditeur.</p></div>
       <button className="quiet" aria-expanded={requestOpen} onClick={()=>{setRequestOpen(v=>!v);setRequestError("");setSubmitState({state:"IDLE",item:null,message:""});}}> {requestOpen?"Fermer":"Demander le support d’un jeu"} </button>
       {requestOpen&&<div className="game-request-form">
         <label><span>Nom du jeu</span><input id="game-support-name" value={requestName} aria-invalid={requestError?"true":undefined} aria-describedby={requestError?"game-support-name-error":undefined} onChange={e=>{setRequestName(e.target.value);setRequestError("");setRequestDraft(false);setSubmitState({state:"IDLE",item:null,message:""});}} placeholder="Ex. Project Meridian" aria-label="Nom du jeu à demander"/></label>
