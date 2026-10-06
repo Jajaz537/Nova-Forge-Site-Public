@@ -1,0 +1,260 @@
+/* MODARYX V2 — premium editorial reconciliation.
+   Prototype-only visual layer. Keeps product behavior/contracts unchanged. */
+
+:root{
+  --editorial-serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+  --premium-line:rgba(126,165,196,.14);
+  --premium-surface:linear-gradient(180deg,rgba(15,34,49,.88),rgba(7,21,32,.94));
+  --premium-surface-soft:linear-gradient(180deg,rgba(13,31,45,.72),rgba(7,20,30,.82));
+  --premium-shadow:0 24px 72px rgba(0,0,0,.20);
+}
+
+body{
+  background:
+    radial-gradient(circle at 86% 4%,rgba(255,179,92,.055),transparent 24rem),
+    radial-gradient(circle at 12% 25%,rgba(53,214,255,.045),transparent 30rem),
+    var(--bg);
+}
+
+.topbar{
+  height:72px;
+  padding-inline:4vw;
+  background:rgba(4,13,22,.88);
+  border-bottom-color:rgba(157,186,209,.13);
+  box-shadow:0 14px 38px rgba(0,0,0,.12);
+}
+.logo{font-size:22px;letter-spacing:.19em}
+.global-nav{gap:clamp(14px,2.35vw,38px)}
+.global-nav button,.local-nav button{font-size:13px;letter-spacing:.01em}
+.top-actions button,.mobile-menu,.mobile-search{
+  border-color:rgba(120,161,194,.18);
+  background:rgba(12,28,41,.76);
+}
+
+.page-section{
+  max-width:1460px;
+  padding:78px 5vw;
+}
+.page-section>h1,.catalog-title h1,
+.rights-dashboard>h1,.help-docs>h1,.moderation-center>h1{
+  font-family:var(--editorial-serif);
+  font-weight:650;
+  letter-spacing:-.035em;
+  line-height:1.02;
+}
+.page-section>h1,.catalog-title h1{font-size:clamp(42px,4.3vw,60px)}
+.page-intro,.catalog-title p{max-width:820px;font-size:14px;line-height:1.72}
+.kicker,.eyebrow,.demo-label{letter-spacing:.15em}
+
+.editorial-hero{
+  min-height:610px;
+  padding-inline:6vw;
+}
+.canon-reconciled-hero .editorial-hero-copy{max-width:660px}
+.canon-reconciled-hero .editorial-hero-copy h1{
+  font-family:var(--editorial-serif);
+  font-weight:650;
+  font-size:clamp(50px,5.35vw,78px);
+  line-height:.98;
+  letter-spacing:-.045em;
+  text-wrap:balance;
+}
+.canon-reconciled-hero .editorial-hero-copy p{
+  font-size:17px;
+  line-height:1.7;
+  max-width:610px;
+}
+.section-heading{margin-bottom:28px}
+.section-heading h2{
+  font-family:var(--editorial-serif);
+  font-weight:650;
+  font-size:clamp(30px,2.7vw,40px);
+  letter-spacing:-.025em;
+}
+.content-grid,.catalog-grid,.collection-grid,.creator-index-grid{gap:22px}
+
+.content-card,.game-card,.collection-card,.creator-index-card{
+  border-color:var(--premium-line);
+  background:var(--premium-surface);
+  border-radius:18px;
+  box-shadow:0 16px 42px rgba(0,0,0,.12);
+}
+.content-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(88,208,231,.28);
+  box-shadow:0 24px 54px rgba(0,0,0,.24);
+}
+.content-card>.media{aspect-ratio:1.62}
+.card-copy{padding:18px 18px 19px}
+.card-copy h3,.collection-card h2,.creator-index-card h2,.game-card h2{
+  font-family:var(--editorial-serif);
+  font-weight:650;
+  letter-spacing:-.015em;
+}
+.card-copy h3{font-size:19px}
+.card-copy p{line-height:1.62}
+
+.catalog-tools,.index-tools{margin-top:36px}
+.catalog-search,.global-search-field,.sort-control{
+  border-color:rgba(123,167,200,.20);
+  background:rgba(8,24,36,.68);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+}
+.view-toggle{border-color:rgba(123,167,200,.16)}
+.view-toggle button{background:rgba(9,25,37,.72)}
+
+.collection-card>div,.creator-index-card>div{padding:22px}
+.collection-capability,.creator-trust-note{
+  border-color:rgba(125,165,196,.14);
+  background:rgba(10,29,42,.56);
+}
+.collection-card dl>div{border-top-color:rgba(126,165,196,.12)}
+
+.community-board,.studio-workflow,.studio-panel,.account-panel,
+.profile-components,.profile-decision,.modpack-surface,.rights-detail,
+.search-groups>section,.detail-section{
+  border-color:var(--premium-line);
+  background:var(--premium-surface-soft);
+  box-shadow:var(--premium-shadow);
+  border-radius:18px;
+}
+.community-board,.studio-workflow,.studio-panel,.account-panel,
+.profile-components,.profile-decision,.modpack-surface,.rights-detail,.detail-section{
+  padding:28px;
+}
+.community-board h2,.account-panel h2,.detail-section h2,
+.modpack-header h2,.profile-components h2,.profile-decision h2{
+  font-family:var(--editorial-serif);
+  font-weight:650;
+  letter-spacing:-.015em;
+}
+.community-list article,.community-teams article,.activity-list article,
+.studio-cards article,.studio-workflow li,.studio-row,.release-steps>div,
+.modpack-grid article,.dependency-origin-list>div,.delta-grid article,
+.session-state,.project-maturity,.credits-panel,.rights-scope-grid article,
+.rights-summary article{
+  border-color:rgba(126,165,196,.12);
+  background:rgba(11,30,43,.54);
+}
+.community-list{gap:12px}
+.community-list article{padding:18px 19px}
+.studio-cards{gap:14px}
+.studio-cards article{padding:20px}
+.studio-workflow{gap:34px}
+.studio-nav button,.account-nav button{
+  border-color:rgba(126,165,196,.12);
+  background:rgba(10,28,41,.52);
+}
+.studio-nav button.active,.account-nav button.active,
+.community-tabs button.active,.collection-mode-tabs button.active{
+  background:linear-gradient(135deg,rgba(53,214,255,.13),rgba(43,124,255,.10));
+  border-color:rgba(53,214,255,.34);
+}
+.community-tabs button,.collection-mode-tabs button,.detail-tabs button,.apply-mode button{
+  border-color:rgba(126,165,196,.15);
+  background:rgba(9,27,40,.58);
+}
+
+.quiet,.catalog-tools>button{
+  border-color:rgba(126,165,196,.18);
+  background:rgba(10,29,42,.58);
+}
+.primary{
+  box-shadow:0 12px 30px rgba(43,124,255,.18);
+}
+.primary:hover{box-shadow:0 17px 38px rgba(43,124,255,.25)}
+
+footer{
+  border-top-color:rgba(126,165,196,.12);
+  background:rgba(4,13,21,.72);
+}
+footer .logo{opacity:.92}
+
+@media (max-width:1050px){
+  .page-section{padding:68px 4.5vw}
+  .canon-reconciled-hero .editorial-hero-copy h1{font-size:clamp(48px,6.4vw,68px)}
+}
+
+@media (max-width:760px){
+  .topbar{height:60px;padding-inline:20px}
+  .logo{font-size:19px}
+  .page-section{padding:54px 20px}
+  .page-section>h1,.catalog-title h1{font-size:clamp(37px,10.5vw,48px)}
+  .canon-reconciled-hero .editorial-hero-copy h1{
+    font-size:clamp(42px,11.4vw,54px);
+    line-height:.99;
+    letter-spacing:-.035em;
+  }
+  .canon-reconciled-hero .editorial-hero-copy p{font-size:16px;line-height:1.62}
+  .content-grid,.catalog-grid,.collection-grid,.creator-index-grid{gap:16px}
+  .community-board,.studio-workflow,.studio-panel,.account-panel,
+  .profile-components,.profile-decision,.modpack-surface,.rights-detail,.detail-section{
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 18px 48px rgba(0,0,0,.18);
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .content-card:hover{transform:none}
+}
+
+
+/* Canon narrative cohesion pass — prototype-only.
+   Rebalances the approved trio hierarchy without introducing new assets. */
+.canon-reconciled-hero .canon-traveler{
+  left:31.6%;
+  width:clamp(154px,11.7vw,188px);
+  bottom:-3px;
+  filter:
+    drop-shadow(0 24px 26px rgba(0,0,0,.62))
+    drop-shadow(0 0 14px rgba(255,190,118,.13));
+}
+.canon-reconciled-hero .canon-wolf{
+  left:8.5%;
+  width:clamp(250px,20.5vw,320px);
+  bottom:-2.8%;
+  opacity:.94;
+  filter:
+    saturate(.76)
+    contrast(1.05)
+    brightness(.88)
+    drop-shadow(0 24px 24px rgba(0,0,0,.56))
+    drop-shadow(0 0 12px rgba(231,178,111,.10));
+}
+.canon-reconciled-hero .canon-dragon{
+  left:43%;
+  width:clamp(178px,15vw,238px);
+  bottom:-2.2%;
+  opacity:.93;
+  filter:
+    saturate(.78)
+    contrast(1.06)
+    brightness(.90)
+    drop-shadow(0 23px 22px rgba(0,0,0,.56))
+    drop-shadow(0 0 12px rgba(82,213,215,.10));
+}
+.canon-reconciled-hero .canon-ground-glow{
+  left:6%;
+  bottom:-19%;
+  width:54%;
+  height:40%;
+  opacity:.82;
+}
+@media (max-width:1050px){
+  .canon-reconciled-hero .canon-traveler{left:34%;width:150px}
+  .canon-reconciled-hero .canon-wolf{left:5%;width:255px}
+  .canon-reconciled-hero .canon-dragon{left:47%;width:190px}
+}
+@media (max-width:760px){
+  .canon-reconciled-hero .canon-narrative-layer{height:250px}
+  .canon-reconciled-hero .canon-traveler{left:37%;bottom:-2px;width:118px}
+  .canon-reconciled-hero .canon-wolf{left:0%;bottom:-17px;width:195px}
+  .canon-reconciled-hero .canon-dragon{left:58%;bottom:-12px;width:150px}
+  .canon-reconciled-hero .canon-ground-glow{left:-8%;bottom:-26%;width:92%;height:56%}
+}
+@media (max-width:420px){
+  .canon-reconciled-hero .canon-traveler{left:36%;width:112px}
+  .canon-reconciled-hero .canon-wolf{left:-2%;width:185px}
+  .canon-reconciled-hero .canon-dragon{left:59%;width:144px}
+}

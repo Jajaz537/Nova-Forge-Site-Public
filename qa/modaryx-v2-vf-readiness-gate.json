@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-05",
+  "date": "2026-10-06",
   "status": "BLOCKED",
   "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-05.md",
   "rule": "NO_VF_OR_HIGH_FI_FINAL_WHILE_REQUIRED_BLOCKER_OPEN",
@@ -45,11 +45,13 @@
   "webProduction": [
     {
       "id": "stack-selected",
-      "state": "OPEN"
+      "state": "PROVEN",
+      "evidence": "docs/MODARYX-V2-STACK-SELECTION-20261006.md"
     },
     {
       "id": "root-v2-created",
-      "state": "OPEN"
+      "state": "PROVEN",
+      "evidence": "qa/modaryx-v2-production-candidate-root.json"
     },
     {
       "id": "backend-real",
@@ -77,7 +79,8 @@
     },
     {
       "id": "v1-v2-browser-migration",
-      "state": "OPEN"
+      "state": "PROVEN",
+      "evidence": "run 37423884798 / PASS_V2_BROWSER_MIGRATION_MICROPROOF"
     },
     {
       "id": "core-web-vitals-production",
@@ -154,7 +157,11 @@
     "frontend-gate-reclassification-proposal-not-active",
     "approved-visual-reference-library-backed-sha256-proven",
     "canonical-hero-composition-desktop-mobile-prototype",
-    "normalized-visual-comparison-human-reference-vs-current-game-hub"
+    "normalized-visual-comparison-human-reference-vs-current-game-hub",
+    "stack-react-vite-cloudflare-workers-selected",
+    "root-v2-production-candidate-created",
+    "v1-v2-browser-migration-targeted-proven",
+    "v2-anti-contamination-current-root-proven"
   ],
   "invariants": [
     "PUBLIC_GREEN_NEVER_IMPLIES_PRODUCTION_VF",

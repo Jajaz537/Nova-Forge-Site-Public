@@ -84,5 +84,19 @@
     "project-[a-z0-9-]+\\.html",
     "nova-site-shell-[a-zA-Z0-9._-]*",
     "modaryx-site-v[0-9][a-zA-Z0-9._-]*"
+  ],
+  "auditedExceptions": [
+    {
+      "path": "v2/src/storage-migration.js",
+      "kind": "forbidden-token",
+      "value": "nova-forge:",
+      "reason": "Explicit read-only legacy key mapping is required for non-destructive V1→V2 migration; tested first pass preserves legacy keys."
+    },
+    {
+      "path": "v2/public/sw-v2.js",
+      "kind": "forbidden-regex",
+      "value": "modaryx-site-v[0-9][a-zA-Z0-9._-]*",
+      "reason": "Exact known legacy cache family is referenced solely by tested cleanup; unknown caches remain preserved."
+    }
   ]
 }
