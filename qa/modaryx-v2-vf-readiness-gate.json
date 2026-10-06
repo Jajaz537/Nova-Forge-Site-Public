@@ -57,11 +57,15 @@
     },
     {
       "id": "backend-real",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-LIVE-PREVIEW-BACKEND-EVIDENCE-20261006.md",
+      "note": "DEV preview backend is real and proven; production backend remains OPEN."
     },
     {
       "id": "auth-passkeys-real",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-LIVE-PREVIEW-BACKEND-EVIDENCE-20261006.md",
+      "note": "DEV Auth0 login redirect/session boundary proven; real-device passkey + production auth remain OPEN."
     },
     {
       "id": "real-data-history",
@@ -167,7 +171,8 @@
     "owner-delegated-ai-visual-review-143-browser-captures",
     "v2-pwa-candidate-gated-offline-proof",
     "v2-performance-lab-desktop-mobile-proof",
-    "v2-deep-links-route-initial-metadata-proof"
+    "v2-deep-links-route-initial-metadata-proof",
+    "live-preview-dev-backend-auth-bindings-and-deny-boundaries"
   ],
   "invariants": [
     "PUBLIC_GREEN_NEVER_IMPLIES_PRODUCTION_VF",
@@ -179,6 +184,7 @@
     "NO_PUBLISHER_APPROVAL_CLAIM_WITHOUT_SCOPE_EVIDENCE",
     "NO_VF_WHILE_ANY_REQUIRED_BLOCKER_OPEN",
     "OWNER_DELEGATED_AI_VISUAL_REVIEW_IS_NOT_HUMAN_SESSION",
-    "OWNER_DELEGATED_AI_VISUAL_REVIEW_NEVER_REPLACES_REAL_SCREEN_READER_SAFARI_OR_DEVICE"
+    "OWNER_DELEGATED_AI_VISUAL_REVIEW_NEVER_REPLACES_REAL_SCREEN_READER_SAFARI_OR_DEVICE",
+    "DEV_PREVIEW_BACKEND_PROOF_NEVER_EQUALS_PRODUCTION_BACKEND_PASS"
   ]
 }
