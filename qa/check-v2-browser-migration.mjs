@@ -68,11 +68,14 @@ try{
   assert.equal(await evaluate("Boolean(navigator.serviceWorker.controller)"),true);
   await sleep(300);
   await send("Network.emulateNetworkConditions",{offline:true,latency:0,downloadThroughput:0,uploadThroughput:0});
-  await send("Page.reload",{ignoreCache:true});
+  const offlineFetch=await evaluate(`(async()=>{try{const r=await fetch(location.href,{cache:"no-store"});return {ok:r.ok,status:r.status,text:(await r.text()).slice(0,200)}}catch(e){return {ok:false,status:0,error:String(e)}}})()`);
+  assert.equal(offlineFetch.ok,true,"controlled document fetch must succeed offline via V2 SW");
+  await send("Page.navigate",{url:origin});
   for(let i=0;i<80;i++){if(await evaluate("document.readyState==='complete'"))break;await sleep(100)}
   await sleep(500);
-  assert.equal(await evaluate("document.body.innerText.includes('Mes profils pour ce jeu')"),true);
-  console.log("MIGRATION_ASSERT offline controlled reload works");
+  const offlineBody=await evaluate("document.body.innerText.slice(0,1400)");
+  assert.equal(offlineBody.includes("Mes profils pour ce jeu"),true,"offline navigation did not restore the Game Hub shell: "+offlineBody);
+  console.log("MIGRATION_ASSERT offline controlled navigation works");
 
   await send("Network.emulateNetworkConditions",{offline:false,latency:0,downloadThroughput:-1,uploadThroughput:-1});
   const rolled=await evaluate(`(async()=>{const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(r=>r.unregister()));await caches.delete("modaryx-v2-preview-shell-v1");const keys=await caches.keys();return {unknown:keys.includes("third-party-unknown-v1"),legacy:keys.includes("modaryx-site-v120-scalable")}})()`);
