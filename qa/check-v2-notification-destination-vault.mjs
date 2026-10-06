@@ -155,3 +155,21 @@ assert.equal(api.includes("MODARYX_NOTIFICATION_DESTINATION_KEY_B64"),false,"end
 
 console.log("DESTINATION_VAULT_ROWS",db.prepare("SELECT count(*) AS n FROM modaryx_v2_notification_destinations").get().n);
 console.log("PASS_V2_NOTIFICATION_DESTINATION_VAULT");
+
+
+const registry=JSON.parse(fs.readFileSync("qa/modaryx-v2-preproduction-contract-registry.json","utf8"));
+const registryEntry=registry.contracts.find(x=>x.id==="notification-destination-vault-candidate");
+assert.ok(registryEntry,"destination vault contract missing from registry");
+assert.equal(registryEntry.contract,"qa/modaryx-v2-notification-destination-vault-contract.json");
+assert.equal(registryEntry.checker,"qa/check-v2-notification-destination-vault.mjs");
+assert.equal(registryEntry.source,"docs/MODARYX-V2-NOTIFICATION-DESTINATION-VAULT-20261006.md");
+assert.ok(fs.existsSync(registryEntry.source),"destination vault source doc missing");
+
+const migrationManifest=JSON.parse(fs.readFileSync("qa/modaryx-v2-d1-migration-execution-manifest.json","utf8"));
+assert.equal(migrationManifest.sequence.length,15);
+assert.equal(migrationManifest.sequence.at(-1).migration,"0015");
+assert.equal(migrationManifest.sequence.at(-1).gitBlobSha1,"a4bb420908bca57992e9549024748d838b9103cc");
+assert.equal(migrationManifest.expectedCurrentV2TableCount,32);
+
+const readinessContract=JSON.parse(fs.readFileSync("qa/modaryx-v2-production-readiness-contract.json","utf8"));
+assert.equal(readinessContract.requiredCurrentV2TableCount,32);
