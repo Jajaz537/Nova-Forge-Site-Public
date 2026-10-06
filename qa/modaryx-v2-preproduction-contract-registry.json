@@ -524,6 +524,12 @@
       "contract": "qa/modaryx-v2-rights-official-contact-sources.json",
       "checker": "qa/check-v2-rights-official-contact-sources.mjs",
       "source": "docs/MODARYX-V2-RIGHTS-OFFICIAL-CONTACT-SOURCES-20261006.md"
+    },
+    {
+      "id": "rights-public-policy-preflight",
+      "contract": "qa/modaryx-v2-rights-public-policy-preflight.json",
+      "checker": "qa/check-v2-rights-public-policy-preflight.mjs",
+      "source": "docs/MODARYX-V2-RIGHTS-PUBLIC-POLICY-PREFLIGHT-20261006.md"
     }
   ],
   "invariants": [

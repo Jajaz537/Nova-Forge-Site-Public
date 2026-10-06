@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "PUBLIC_POLICY_PREFLIGHT_NON_AUTHORIZING",
+  "scope": "DEMONSTRATION_CATALOG_ONLY",
+  "productionBlockers": [
+    "license-validation",
+    "legal-review-where-required",
+    "official-contact-discovery"
+  ],
+  "games": [
+    {
+      "gameId": "skyrim-se",
+      "gameName": "Skyrim Special Edition",
+      "publisherGroup": "Bethesda Softworks / ZeniMax",
+      "sources": [
+        "https://help.bethesda.net/app/answers/detail/a_id/55221/",
+        "https://help.bethesda.net/app/answers/detail/a_id/55219/",
+        "https://bethesda.net/en-EU/news/bethesda-softworks-community-standards"
+      ],
+      "observedPublicRules": [
+        "MOD_AUTHOR_PERMISSION_REQUIRED_WHEN_REUSING_OTHER_MOD_CONTENT",
+        "COMMERCIAL_MOD_EXPLOITATION_MAY_REQUIRE_PRIOR_WRITTEN_ZENIMAX_CONSENT",
+        "AUTHORIZED_COPY_OF_GAME_REQUIRED_FOR_MOD_USE",
+        "THIRD_PARTY_IP_REQUIRES_RIGHTS"
+      ],
+      "preflight": "EXPLICIT_SCOPE_AND_LEGAL_REVIEW_REQUIRED_FOR_MODARYX_DISTRIBUTION",
+      "authorizes": false
+    },
+    {
+      "gameId": "cyberpunk-2077",
+      "gameName": "Cyberpunk 2077",
+      "publisherGroup": "CD PROJEKT RED",
+      "sources": [
+        "https://www.cdprojektred.com/en/fan-content",
+        "https://regulations.cdprojektred.com/en/user_agreement"
+      ],
+      "observedPublicRules": [
+        "MODS_FOR_CDPR_GAMES_PUBLICLY_ALLOWED_SUBJECT_TO_RELEVANT_GAME_EULA",
+        "COMMUNITY_WEBSITES_ALLOWED_WITH_BRAND_DOMAIN_LIMITS",
+        "OTHER_OR_UNCLEAR_FAN_CONTENT_USES_CAN_BE_ESCALATED_TO_OFFICIAL_LEGAL_CONTACT",
+        "NO_RESPONSE_DOES_NOT_MEAN_APPROVAL"
+      ],
+      "preflight": "PUBLIC_MOD_POLICY_EXISTS_BUT_MODARYX_HOSTING_DISTRIBUTION_SCOPE_NOT_PROVEN",
+      "authorizes": false
+    },
+    {
+      "gameId": "minecraft",
+      "gameName": "Minecraft",
+      "publisherGroup": "Mojang / Microsoft",
+      "sources": [
+        "https://www.minecraft.net/en-us/usage-guidelines",
+        "https://partnerships.minecraft.net/hc/en-us/requests/new"
+      ],
+      "observedPublicRules": [
+        "GUIDELINES_TARGET_COMMUNITY_PLAYERS_AND_FANS",
+        "COMMERCIAL_COMPANIES_NOT_BLANKET_AUTHORIZED_FOR_UNRELATED_PROMOTION",
+        "DO_NOT_REDISTRIBUTE_GAMES_OR_ALTERATIONS_OF_GAME_FILES",
+        "FORMAL_PARTNERSHIP_ROUTE_EXISTS",
+        "UNCOVERED_USE_SHOULD_NOT_PROCEED_WITHOUT_PERMISSION"
+      ],
+      "preflight": "COMMERCIAL_PLATFORM_SCOPE_REQUIRES_EXPLICIT_SCOPE_REVIEW_OR_PARTNERSHIP_PATH",
+      "authorizes": false
+    }
+  ],
+  "invariants": [
+    "PUBLIC_GUIDELINES_ARE_NOT_PUBLISHER_SPECIFIC_PERMISSION_TO_MODARYX",
+    "NO_GAME_POLICY_ENTRY_AUTHORIZES",
+    "NO_SILENCE_EQUALS_PERMISSION",
+    "NO_DEMO_ENTRY_AUTO_PROMOTES_TO_PRODUCTION",
+    "LEGAL_INTERPRETATION_REMAINS_EXTERNAL",
+    "LICENSE_VALIDATION_BLOCKER_REMAINS_OPEN",
+    "LEGAL_REVIEW_BLOCKER_REMAINS_OPEN",
+    "NO_OUTBOUND_PERFORMED",
+    "NO_REMOTE_D1_APPLY",
+    "NO_CUTOVER"
+  ]
+}
