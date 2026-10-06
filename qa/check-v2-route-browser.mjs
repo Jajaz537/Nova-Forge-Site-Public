@@ -7,7 +7,7 @@ if(!chrome) throw new Error("CHROME_BIN missing");
 const routes=[
   ["/","Mes profils pour ce jeu"],
   ["/discover","Redécouvrez vos jeux"],
-  ["/games","Jeux disponibles"],
+  ["/games","Trouvez votre prochain terrain de jeu."],
   ["/games/aetherlands","Mes profils pour ce jeu"],
   ["/mods","Mods & contenus"],
   ["/search","Recherche"],
