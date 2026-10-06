@@ -1,0 +1,181 @@
+name: MODARYX V2 Production Rehearsal
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-production-rehearsal-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-production-rehearsal.yml'
+      - 'qa/modaryx-v2-production-rehearsal-contract.json'
+      - 'qa/check-v2-production-rehearsal-contract.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+      - 'qa/check-v2-pwa-candidate-browser.mjs'
+      - 'qa/check-v2-browser-migration.mjs'
+      - 'qa/check-v2-route-browser.mjs'
+      - 'qa/check-v2-performance-candidate-browser.mjs'
+      - 'v2/**'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-production-rehearsal-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rehearsal:
+    name: Rehearse PWA rollback routes and lab performance without cutover
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate rehearsal and preproduction contracts
+        run: |
+          set -euo pipefail
+          node qa/check-v2-production-rehearsal-contract.mjs
+          node qa/check-v2-pwa-candidate-contract.mjs
+          node qa/check-v2-performance-candidate-contract.mjs
+          node qa/check-v2-route-cutover-contract.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+
+      - name: Locate Chrome
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Install V2 dependencies
+        working-directory: v2
+        run: npm ci
+
+      - name: Default build remains PWA disabled
+        working-directory: v2
+        run: npm run build
+
+      - name: Start default build
+        working-directory: v2
+        run: |
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4190 >/tmp/modaryx-rehearsal-default.log 2>&1 &
+          echo $! >/tmp/modaryx-rehearsal-default.pid
+          for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4190/ >/dev/null && exit 0; sleep 0.25; done
+          cat /tmp/modaryx-rehearsal-default.log
+          exit 1
+
+      - name: Browser proof default PWA disabled
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4190
+          MODARYX_PWA_EXPECT: disabled
+        run: node qa/check-v2-pwa-candidate-browser.mjs
+
+      - name: Stop default build
+        run: kill "$(cat /tmp/modaryx-rehearsal-default.pid)" 2>/dev/null || true
+
+      - name: Build gated PWA candidate
+        working-directory: v2
+        env:
+          VITE_MODARYX_PWA_PRODUCTION: "1"
+        run: npm run build
+
+      - name: Start gated PWA build
+        working-directory: v2
+        run: |
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4191 >/tmp/modaryx-rehearsal-pwa.log 2>&1 &
+          echo $! >/tmp/modaryx-rehearsal-pwa.pid
+          for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4191/ >/dev/null && exit 0; sleep 0.25; done
+          cat /tmp/modaryx-rehearsal-pwa.log
+          exit 1
+
+      - name: Browser proof gated PWA offline
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4191
+          MODARYX_PWA_EXPECT: enabled
+          MODARYX_PREVIEW_PID_FILE: /tmp/modaryx-rehearsal-pwa.pid
+        run: node qa/check-v2-pwa-candidate-browser.mjs
+
+      - name: Rebuild rollback default
+        working-directory: v2
+        run: npm run build
+
+      - name: Start rollback default build
+        working-directory: v2
+        run: |
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4192 >/tmp/modaryx-rehearsal-rollback.log 2>&1 &
+          echo $! >/tmp/modaryx-rehearsal-rollback.pid
+          for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4192/ >/dev/null && exit 0; sleep 0.25; done
+          cat /tmp/modaryx-rehearsal-rollback.log
+          exit 1
+
+      - name: Browser proof rollback default PWA disabled again
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4192
+          MODARYX_PWA_EXPECT: disabled
+        run: |
+          node qa/check-v2-pwa-candidate-browser.mjs
+          echo DEFAULT_BUILD_RESTORED_WITH_PWA_DISABLED
+
+      - name: Stop rollback default build
+        run: kill "$(cat /tmp/modaryx-rehearsal-rollback.pid)" 2>/dev/null || true
+
+      - name: Start migration rehearsal root
+        working-directory: v2
+        run: |
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4193 >/tmp/modaryx-rehearsal-migration.log 2>&1 &
+          echo $! >/tmp/modaryx-rehearsal-migration.pid
+          for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4193/ >/dev/null && exit 0; sleep 0.25; done
+          cat /tmp/modaryx-rehearsal-migration.log
+          exit 1
+
+      - name: Browser migration and rollback
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4193
+          MODARYX_V2_ROOT_DIR: v2
+          MODARYX_V2_SW_PATH: /sw-v2.js
+          MODARYX_V2_CACHE_NAME: modaryx-v2-candidate-shell-v1
+          MODARYX_PREVIEW_PID_FILE: /tmp/modaryx-rehearsal-migration.pid
+        run: node qa/check-v2-browser-migration.mjs
+
+      - name: Start route and performance root
+        working-directory: v2
+        run: |
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4194 >/tmp/modaryx-rehearsal-final.log 2>&1 &
+          echo $! >/tmp/modaryx-rehearsal-final.pid
+          for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4194/ >/dev/null && exit 0; sleep 0.25; done
+          cat /tmp/modaryx-rehearsal-final.log
+          exit 1
+
+      - name: Deep links
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4194
+        run: node qa/check-v2-route-browser.mjs
+
+      - name: Lab performance
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4194
+        run: node qa/check-v2-performance-candidate-browser.mjs
+
+      - name: Confirm candidate stayed noindex
+        run: |
+          set -euo pipefail
+          grep -q 'name="robots" content="noindex,nofollow,noarchive"' v2/index.html
+          grep -q 'x-robots-tag","noindex, nofollow, noarchive' v2/worker/index.js
+          echo CANDIDATE_STAYS_NOINDEX
+          echo PASS_V2_PRODUCTION_REHEARSAL
+
+      - name: Cleanup
+        if: always()
+        run: |
+          for file in /tmp/modaryx-rehearsal-*.pid; do
+            test -f "$file" || continue
+            kill "$(cat "$file")" 2>/dev/null || true
+          done

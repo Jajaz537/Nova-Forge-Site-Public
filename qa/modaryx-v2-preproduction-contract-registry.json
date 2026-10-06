@@ -398,6 +398,12 @@
       "contract": "qa/modaryx-v2-artifact-storage-r2-contract.json",
       "checker": "qa/check-v2-artifact-storage-r2.mjs",
       "source": "docs/MODARYX-V2-ARTIFACT-STORAGE-R2-ADAPTER-20261006.md"
+    },
+    {
+      "id": "production-rehearsal",
+      "contract": "qa/modaryx-v2-production-rehearsal-contract.json",
+      "checker": "qa/check-v2-production-rehearsal-contract.mjs",
+      "source": "docs/MODARYX-V2-PRODUCTION-REHEARSAL-20261006.md"
     }
   ],
   "invariants": [

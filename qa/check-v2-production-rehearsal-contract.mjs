@@ -1,0 +1,21 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+
+const d=JSON.parse(fs.readFileSync("qa/modaryx-v2-production-rehearsal-contract.json","utf8"));
+assert.equal(d.schemaVersion,1);
+assert.equal(d.status,"LOCALHOST_PRODUCTION_REHEARSAL_ONLY");
+assert.equal(d.root,"v2");
+const seq=new Set(d.rehearsalSequence||[]);
+for(const x of ["DEFAULT_BUILD_PWA_DISABLED","PWA_ENABLED_BUILD_OFFLINE_PROOF","DEFAULT_BUILD_RESTORED","BROWSER_MIGRATION_AND_ROLLBACK","ROUTES_DEEP_LINKS","LAB_PERFORMANCE"]) assert.ok(seq.has(x),"missing sequence "+x);
+assert.equal(d.productionState?.pwaActivation,"OPEN");
+assert.equal(d.productionState?.productionCwv,"OPEN");
+assert.equal(d.productionState?.routePromotion,"OPEN");
+assert.equal(d.productionState?.indexability,"OPEN");
+assert.equal(d.productionState?.cutover,"NOT_EXECUTED");
+const inv=new Set(d.invariants||[]);
+for(const x of ["LOCALHOST_ONLY","NO_PRODUCTION_ORIGIN","NO_INDEXABILITY_CHANGE","NO_PRODUCTION_SW_ACTIVATION","NO_CUTOVER","PWA_PRODUCTION_BLOCKER_REMAINS_OPEN","CWV_PRODUCTION_BLOCKER_REMAINS_OPEN"]) assert.ok(inv.has(x),"missing invariant "+x);
+const html=fs.readFileSync("v2/index.html","utf8");
+assert.ok(html.includes('name="robots" content="noindex,nofollow,noarchive"'),"candidate must remain noindex");
+const worker=fs.readFileSync("v2/worker/index.js","utf8");
+assert.ok(worker.includes('headers.set("x-robots-tag","noindex, nofollow, noarchive")'),"worker must remain noindex");
+console.log("PASS_V2_PRODUCTION_REHEARSAL_CONTRACT");
