@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "RIGHTS_REGISTRY_BACKEND_CANDIDATE_LOCAL_PROOF",
+  "migration": "migrations/0008_modaryx_v2_game_rights_registry.sql",
+  "endpoints": [
+    "GET /api/v1/rights/cases",
+    "POST /api/v1/rights/cases",
+    "POST /api/v1/rights/scope-decisions",
+    "GET /api/v1/rights/effective"
+  ],
+  "remoteApplication": "NOT_EXECUTED",
+  "productionStatus": {
+    "database": "CANDIDATE_LOCAL_MIGRATION_PROVEN",
+    "api": "CANDIDATE_ADMIN_ONLY",
+    "adminCrud": "CREATE_CASE_AND_NON_AUTHORIZING_DECISIONS_ONLY",
+    "policyEngine": "CANDIDATE_FAIL_CLOSED_EVALUATOR",
+    "authorizingEvidenceIngestion": "NOT_IMPLEMENTED",
+    "contactDiscovery": "NOT_IMPLEMENTED",
+    "outbound": "NOT_IMPLEMENTED",
+    "inbound": "NOT_IMPLEMENTED",
+    "licenseValidation": "NOT_IMPLEMENTED",
+    "scheduler": "NOT_IMPLEMENTED",
+    "assetLinkage": "NOT_IMPLEMENTED"
+  },
+  "invariants": [
+    "ADMIN_PERMISSION_REQUIRED",
+    "RECENT_AUTH_REQUIRED_FOR_WRITES",
+    "MEMBER_CANNOT_CREATE_OR_DECIDE_RIGHTS",
+    "CURRENT_API_CANNOT_RECORD_GRANTED_OR_GRANTED_WITH_LIMITS",
+    "NO_RESPONSE_NEVER_AUTHORIZES",
+    "PENDING_NEVER_AUTHORIZES",
+    "EXPIRED_REVOKED_FORBIDDEN_RESTRICTED_DENIED_FAIL_CLOSED",
+    "EXACT_SCOPE_AND_PRODUCT_SURFACE_MATCH_REQUIRED",
+    "VERIFIED_EVIDENCE_GUARDS_REQUIRED_FOR_AUTHORIZING_ROWS",
+    "WEB_AND_MODARYX_FORGE_REMAIN_SEPARATE",
+    "AUDIT_APPEND_ONLY",
+    "NO_CONTACT_ADDRESS_STORED_BY_THIS_SLICE",
+    "NO_PUBLISHER_CONTACT_OR_OUTBOUND",
+    "NO_REMOTE_D1_APPLY",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER",
+    "RIGHTS_PRODUCTION_BLOCKERS_REMAIN_OPEN"
+  ]
+}
