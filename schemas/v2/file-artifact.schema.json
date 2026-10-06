@@ -1,0 +1,183 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:modaryx:schemas:file-artifact:v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "releaseId",
+    "filename",
+    "path",
+    "size",
+    "mediaType",
+    "executable",
+    "hashes",
+    "signature",
+    "provenance",
+    "distributionState",
+    "downloadable"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "releaseId": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "filename": {
+      "type": "string",
+      "minLength": 1
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "size": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "mediaType": {
+      "type": "string",
+      "minLength": 1
+    },
+    "executable": {
+      "type": "boolean"
+    },
+    "hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sha256"
+      ],
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "sha512": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{128}$"
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "absent",
+            "unverified",
+            "verified",
+            "invalid"
+          ]
+        },
+        "signerId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+        },
+        "receiptId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "receiptId"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "unknown",
+            "declared",
+            "verified"
+          ]
+        },
+        "receiptId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+        }
+      }
+    },
+    "distributionState": {
+      "enum": [
+        "available",
+        "withdrawn",
+        "revoked",
+        "archived"
+      ]
+    },
+    "downloadable": {
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "distributionState": {
+            "enum": [
+              "withdrawn",
+              "revoked",
+              "archived"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "downloadable": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "provenance": {
+            "properties": {
+              "state": {
+                "const": "verified"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "provenance": {
+            "properties": {
+              "receiptId": {
+                "type": "string",
+                "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

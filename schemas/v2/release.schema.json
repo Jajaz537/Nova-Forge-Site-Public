@@ -1,0 +1,233 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:modaryx:schemas:release:v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "contentId",
+    "version",
+    "channel",
+    "publishedAt",
+    "gameVersions",
+    "loaders",
+    "platforms",
+    "environment",
+    "fileIds",
+    "dependencyIds",
+    "compatibilityClaimIds",
+    "changelog",
+    "provenance",
+    "distribution",
+    "releaseReceipt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "contentId": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "channel": {
+      "enum": [
+        "stable",
+        "beta",
+        "alpha",
+        "legacy"
+      ]
+    },
+    "publishedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "gameVersions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "loaders": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "dlcs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "environment": {
+      "enum": [
+        "client",
+        "server",
+        "client-server",
+        "mixed",
+        "unknown"
+      ]
+    },
+    "fileIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+      },
+      "uniqueItems": true
+    },
+    "dependencyIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+      },
+      "uniqueItems": true
+    },
+    "compatibilityClaimIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+      },
+      "uniqueItems": true
+    },
+    "changelog": {
+      "type": "string"
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "unknown",
+            "declared",
+            "verified"
+          ]
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "downloadable"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "draft",
+            "available",
+            "withdrawn",
+            "revoked",
+            "archived"
+          ]
+        },
+        "downloadable": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "releaseReceipt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "distribution": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "withdrawn",
+                  "revoked",
+                  "archived"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "distribution": {
+            "properties": {
+              "downloadable": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "provenance": {
+            "properties": {
+              "state": {
+                "const": "verified"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "releaseReceipt": {
+            "type": "string",
+            "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+          }
+        }
+      }
+    }
+  ]
+}
