@@ -58,6 +58,21 @@ test("plain HTTP is rejected for non-loopback bridge URLs", async()=>{
   assert.deepEqual(await r.json(),{ok:false,error:"founder-ai-not-configured"});
 });
 
+test("Founder bridge rejects redirects without following them", async()=>{
+  const originalFetch=globalThis.fetch;
+  globalThis.fetch=async()=>new Response(null,{status:302,headers:{location:"https://evil.example/"}});
+  try{
+    const r=await requestFounderBridge({env:{
+      MODARYX_AI_BRIDGE_URL:"https://bridge.example/",
+      MODARYX_AI_BRIDGE_KEY_HEX:"33".repeat(32)
+    }},"GET","/v1/status");
+    assert.equal(r.status,502);
+    assert.deepEqual(await r.json(),{ok:false,error:"bridge-redirect-rejected"});
+  }finally{
+    globalThis.fetch=originalFetch;
+  }
+});
+
 test("Founder bridge request sends complete HMAC envelope and exact JSON body", async()=>{
   const originalFetch=globalThis.fetch;
   let captured=null;
@@ -77,7 +92,7 @@ test("Founder bridge request sends complete HMAC envelope and exact JSON body", 
     assert.equal((await r.json()).ok,true);
     assert.equal(captured.url,"https://bridge.example/v1/chat");
     assert.equal(captured.options.method,"POST");
-    assert.equal(captured.options.redirect,"error");
+    assert.equal(captured.options.redirect,"manual");
     assert.equal(captured.options.cache,"no-store");
     assert.equal(captured.options.headers["content-type"],"application/json");
     assert.match(captured.options.headers["x-modaryx-timestamp"],/^\d+$/);
