@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-04",
+  "date": "2026-10-06",
   "status": "PRE_PRODUCTION_CONTRACT",
   "source": "docs/MODARYX-V2-FRONTEND-ISOLATION-ARCHITECTURE-20261003.md",
   "legacyCssForbidden": [
@@ -80,10 +80,10 @@
     "LEGACY_NOT_DELETED_IN_FIRST_CUTOVER_CHANGE"
   ],
   "productionStatus": {
-    "rootV2": "NOT_CREATED",
-    "v2Build": "NOT_IMPLEMENTED",
-    "v2ServiceWorker": "NOT_IMPLEMENTED",
-    "v2StorageMigration": "NOT_EXECUTED",
+    "rootV2": "CREATED_PRODUCTION_CANDIDATE",
+    "v2Build": "IMPLEMENTED_CANDIDATE",
+    "v2ServiceWorker": "IMPLEMENTED_NOT_REGISTERED_PRODUCTION",
+    "v2StorageMigration": "PROVEN_CANDIDATE_NON_DESTRUCTIVE",
     "cutover": "NOT_EXECUTED"
   }
 }
