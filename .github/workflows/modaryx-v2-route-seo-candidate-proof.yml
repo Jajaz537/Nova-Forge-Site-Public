@@ -1,0 +1,70 @@
+name: MODARYX V2 Route and Initial SEO Candidate Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-route-seo-candidate-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-route-seo-candidate-proof.yml'
+      - 'v2/src/App.jsx'
+      - 'v2/src/routes.js'
+      - 'v2/worker/index.js'
+      - 'v2/tests/sites-worker.test.mjs'
+      - 'qa/modaryx-v2-route-cutover-contract.json'
+      - 'qa/check-v2-route-cutover-contract.mjs'
+      - 'qa/check-v2-route-browser.mjs'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-route-seo-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove V2 deep links and route-specific initial metadata
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate route contract
+        run: node qa/check-v2-route-cutover-contract.mjs
+      - name: Locate Chrome
+        run: |
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+      - name: Build and unit-test V2 worker
+        working-directory: v2
+        run: |
+          npm ci
+          npm run build
+          npm run test:sites
+      - name: Start V2 candidate
+        working-directory: v2
+        run: |
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4183 >/tmp/modaryx-v2-route.log 2>&1 &
+          echo $! >/tmp/modaryx-v2-route.pid
+          for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4183/ >/dev/null && exit 0; sleep 0.25; done
+          cat /tmp/modaryx-v2-route.log
+          exit 1
+      - name: Prove direct deep links and history routing
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4183
+        run: |
+          node qa/check-v2-route-browser.mjs
+          echo PASS_V2_ROUTE_SEO_CANDIDATE_PROOF
+      - name: Cleanup
+        if: always()
+        run: |
+          if test -f /tmp/modaryx-v2-route.pid; then kill "$(cat /tmp/modaryx-v2-route.pid)" 2>/dev/null || true; fi
