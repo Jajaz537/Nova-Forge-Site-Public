@@ -45,8 +45,8 @@ try{
   await send("Page.navigate",{url:origin+"/games"});
   for(let i=0;i<100;i++){if(await evaluate("document.readyState==='complete'"))break;await sleep(100)}
   await waitText("Demander le support d’un jeu");
-  const opened=await evaluate(`(()=>{const b=[...document.querySelectorAll("button")].find(x=>x.textContent.trim()==="Demander le support d’un jeu");if(!b)return false;b.click();return true})()`);
-  assert.equal(opened,true,"support request button missing");
+  const opened=await evaluate(`(()=>{const b=document.querySelector(".game-support-request button[aria-expanded]");if(!b)return false;b.click();return true})()`);
+  assert.equal(opened,true,"support request disclosure control missing");
   await waitText("Préparer la demande locale");
   const filled=await evaluate(`(()=>{const i=document.querySelector("#game-support-name");if(!i)return false;const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,"value").set;s.call(i,"Project Meridian");i.dispatchEvent(new Event("input",{bubbles:true}));return true})()`);
   assert.equal(filled,true,"game support input missing");
