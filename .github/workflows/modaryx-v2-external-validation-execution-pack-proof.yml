@@ -5,6 +5,7 @@ on:
     branches:
       - 'chatgpt/modaryx-v2-external-validation-execution-pack-20261006'
       - 'chatgpt/modaryx-v2-current-preview-refresh-20261006-1648'
+      - 'chatgpt/modaryx-v2-work-handoff-refresh-20261006-1732'
     paths:
       - '.github/workflows/modaryx-v2-external-validation-execution-pack-proof.yml'
       - 'qa/modaryx-v2-external-validation-execution-pack.json'

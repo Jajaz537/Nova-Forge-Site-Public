@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'chatgpt/modaryx-v2-work-handoff-20261006'
+      - 'chatgpt/modaryx-v2-work-handoff-refresh-20261006-1732'
     paths:
       - '.github/workflows/modaryx-v2-work-handoff-proof.yml'
       - 'qa/modaryx-v2-work-handoff.json'

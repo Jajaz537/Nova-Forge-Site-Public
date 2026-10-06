@@ -3,8 +3,11 @@ import fs from "node:fs";
 const h=JSON.parse(fs.readFileSync("qa/modaryx-v2-work-handoff.json","utf8"));
 const l=JSON.parse(fs.readFileSync("qa/modaryx-v2-vf-closure-ledger.json","utf8"));
 assert.equal(h.status,"READY_FOR_WORK_OR_REAL_OPERATOR");
-assert.equal(h.sourceCommit,"fc2c3513bde941e0aa9751b987eefa6de3e71643");
+assert.equal(h.sourceCommit,"7464b3bc8e8270737f733047804406a5cce6d48d");
 assert.equal(h.blockerCount,l.blockerCount);
+assert.equal(h.testedCandidateCommit,"ce587af7d138eedf148d5d446cacd8fb6f2235a3");
+assert.equal(h.latestCheckpoint,"CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1732.md");
+assert.equal(h.latestReadOnlyProbe?.state,"SUCCESS");
 assert.deepEqual(new Set(h.blockers.map(x=>x.id)),new Set(l.blockers.map(x=>x.id)));
 for(const b of h.blockers){
   assert.equal(b.automationCanCloseWithoutExternalChange,false,b.id+" must remain external");
