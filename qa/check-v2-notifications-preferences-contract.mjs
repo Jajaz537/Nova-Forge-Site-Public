@@ -39,7 +39,7 @@ for (const x of [
 }
 
 const status=data.productionStatus||{};
-if(status.serverEvents!=="NOT_IMPLEMENTED") throw new Error("event producers must remain NOT_IMPLEMENTED");
+if(status.serverEvents!=="CANDIDATE_MODERATION_DECISION_AND_APPEAL_OUTCOME") throw new Error("moderation producer status drift");
 if(status.inAppStorageAndReadApi!=="IMPLEMENTED_CANDIDATE") throw new Error("in-app candidate status drift");
 if(status.email!=="NOT_IMPLEMENTED"||status.push!=="NOT_IMPLEMENTED") throw new Error("email/push must remain NOT_IMPLEMENTED");
 if(status.remotePreferences!=="IMPLEMENTED_CANDIDATE") throw new Error("remote preferences candidate status drift");
@@ -51,7 +51,8 @@ for (const x of [
   "MARKETING_SEPARATE_OPT_IN","NO_SILENT_SYNC_OVERWRITE","BADGE_ONLY_FROM_REAL_COUNT",
   "RIGHTS_NOTIFICATION_REQUIRES_REAL_RIGHTS_EVENT","LEGAL_REVIEW_REQUIRED_NEVER_UNLOCKS_RIGHTS",
   "NOTIFICATION_POINTS_TO_REAL_SURFACE","READ_UNREAD_STATE_TEXTUAL","NO_SWIPE_ONLY_DELETE",
-  "IN_APP_CANDIDATE_DOES_NOT_IMPLY_EVENT_PRODUCERS","EMAIL_PUSH_REMAIN_DISABLED"
+  "IN_APP_CANDIDATE_DOES_NOT_IMPLY_EVENT_PRODUCERS","EMAIL_PUSH_REMAIN_DISABLED",
+  "NOTIFICATION_WRITE_FAILURE_NEVER_ROLLS_BACK_MODERATION_DECISION","MODERATION_PRODUCER_NOTIFIES_ONLY_SUBMISSION_OWNER"
 ]) {
   if (!invariants.has(x)) throw new Error("missing invariant " + x);
 }
