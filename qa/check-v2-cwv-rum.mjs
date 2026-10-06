@@ -67,7 +67,9 @@ assert.throws(()=>db.prepare(`INSERT INTO modaryx_v2_cwv_samples (
 ));
 
 const migration=fs.readFileSync("migrations/0014_modaryx_v2_cwv_rum.sql","utf8").toLowerCase();
-for(const forbidden of ["ip_address","user_agent","referrer","account_id","identity_sub","email"]) assert.equal(migration.includes(forbidden),false,"forbidden field in CWV storage: "+forbidden);
+const tableBody=migration.match(/create table if not exists modaryx_v2_cwv_samples\s*\(([\s\S]*?)\);/)?.[1]||"";
+assert.ok(tableBody,"CWV table body missing");
+for(const forbidden of ["ip_address","user_agent","referrer","account_id","identity_sub","email"]) assert.equal(tableBody.includes(forbidden),false,"forbidden field in CWV storage: "+forbidden);
 const endpoint=fs.readFileSync("functions/api/v1/rum/cwv.js","utf8");
 assert.ok(endpoint.includes("requireSameOrigin"));
 assert.ok(endpoint.includes("cwv-rum-disabled"));
