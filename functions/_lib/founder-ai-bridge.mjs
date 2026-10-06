@@ -84,7 +84,8 @@ export async function requestFounderBridge(context,method,pathWithQuery,payload)
   if(body.byteLength) headers['content-type']='application/json';
   const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),30000);
   try{
-    const response=await fetch(target,{method:String(method).toUpperCase(),headers,body:body.byteLength?body:undefined,redirect:'error',cache:'no-store',signal:controller.signal});
+    const response=await fetch(target,{method:String(method).toUpperCase(),headers,body:body.byteLength?body:undefined,redirect:'manual',cache:'no-store',signal:controller.signal});
+    if(response.status>=300&&response.status<400) return json({ok:false,error:'bridge-redirect-rejected'},502);
     const bytes=await readBounded(response);
     let data=null;
     if(bytes.byteLength){try{data=JSON.parse(DECODER.decode(bytes));}catch{return json({ok:false,error:'bridge-invalid-response'},502);}}
