@@ -99,3 +99,35 @@ export function validateNotificationPreferences(input){
   if(names.some(k=>typeof prefs[k]!=="boolean")) return {ok:false,reason:"preferences-invalid"};
   return {ok:true,value:{version:input.version,preferences:Object.fromEntries(names.map(k=>[k,prefs[k]]))}};
 }
+
+export function moderationDecisionNotification({recipientIdentitySub,submissionId,outcome,moderationState,receiptId,occurredAt}){
+  if(!recipientIdentitySub||!submissionId||!receiptId||!occurredAt) return null;
+  const map={
+    publish:{title:"Votre contribution a été publiée",summary:"Une décision de modération a autorisé sa publication.",priority:"NORMAL"},
+    hold:{title:"Votre contribution reste en revue",summary:"Une décision de modération maintient une revue supplémentaire.",priority:"IMPORTANT"},
+    reject:{title:"Votre contribution a été refusée",summary:"Une décision de modération a refusé sa publication.",priority:"IMPORTANT"}
+  };
+  const copy=map[outcome];
+  if(!copy) return null;
+  return {
+    recipientIdentitySub,eventType:"MODERATION_UPDATE",priority:copy.priority,title:copy.title,summary:copy.summary,
+    href:"/community",stateLabel:String(moderationState||"").toUpperCase(),affectedScopes:[],
+    sourceKind:"moderation",sourceId:receiptId,occurredAt
+  };
+}
+
+export function appealOutcomeNotification({recipientIdentitySub,submissionId,result,moderationState,receiptId,occurredAt}){
+  if(!recipientIdentitySub||!submissionId||!receiptId||!occurredAt) return null;
+  const map={
+    upheld:{title:"Votre recours a été examiné",summary:"La décision précédente a été maintenue.",priority:"IMPORTANT"},
+    modified:{title:"Votre recours a modifié la décision",summary:"La décision précédente a été modifiée après nouvelle revue.",priority:"IMPORTANT"},
+    reversed:{title:"Votre recours a rétabli votre contribution",summary:"La décision précédente a été infirmée après nouvelle revue.",priority:"NORMAL"}
+  };
+  const copy=map[result];
+  if(!copy) return null;
+  return {
+    recipientIdentitySub,eventType:"MODERATION_UPDATE",priority:copy.priority,title:copy.title,summary:copy.summary,
+    href:"/community",stateLabel:String(moderationState||"").toUpperCase(),affectedScopes:[],
+    sourceKind:"moderation",sourceId:receiptId,occurredAt
+  };
+}
