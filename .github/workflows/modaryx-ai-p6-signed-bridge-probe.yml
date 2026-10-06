@@ -1,0 +1,131 @@
+name: MODARYX IA P6 signed bridge probe
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-signed-bridge-probe.yml"
+      - "functions/api/p6/bridge-probe.js"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      ZONE_NAME: modaryxmods.com
+      PROJECT_NAME: nova-forge-site-public
+      TARGET_BRANCH: chatgpt/modaryx-ai-founder-integration-20261005
+    steps:
+      - name: Wait for exact preview deployment and probe signed bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=$ZONE_NAME" "$api/zones")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          test -n "$account_id"
+
+          target_url=""
+          target_id=""
+          target_stage=""
+          matched_sha=""
+          for i in $(seq 1 90); do
+            deployments="$(curl -fsS "${auth[@]}" --get \
+              --data-urlencode "page=1" \
+              --data-urlencode "per_page=100" \
+              "$api/accounts/$account_id/pages/projects/$PROJECT_NAME/deployments")"
+            test "$(jq -r '.success' <<<"$deployments")" = "true"
+
+            target="$(jq -c \
+              --arg b "$TARGET_BRANCH" \
+              --arg sha "$GITHUB_SHA" \
+              '[.result[] | select((.deployment_trigger.metadata.branch // "") == $b and (.deployment_trigger.metadata.commit_hash // "") == $sha)] | sort_by(.created_on) | reverse | .[0] // null' \
+              <<<"$deployments")"
+
+            if [ "$(jq -r '. != null' <<<"$target")" = "true" ]; then
+              target_id="$(jq -r '.id // ""' <<<"$target")"
+              target_url="$(jq -r '.url // ""' <<<"$target")"
+              target_stage="$(jq -r '.latest_stage.name // ""' <<<"$target")"
+              matched_sha="$(jq -r '.deployment_trigger.metadata.commit_hash // ""' <<<"$target")"
+              if [ -n "$target_url" ] && [ "$target_stage" = "success" ]; then
+                break
+              fi
+            fi
+            sleep 4
+          done
+
+          if [ -z "$target_url" ]; then
+            jq -n \
+              --arg schema "modaryx-p6-signed-bridge-probe-v1" \
+              --arg expected_sha "$GITHUB_SHA" \
+              '{schema:$schema,status:"NOT_RUN",reason:"exact_preview_deployment_not_ready",expected_sha:$expected_sha,awards_vf_points:false}' \
+              > evidence/probe.json
+            echo "MODARYX_P6_SIGNED_BRIDGE_NOT_RUN exact_preview_deployment_not_ready"
+            exit 4
+          fi
+
+          probe_url="${target_url%/}/api/p6/bridge-probe"
+          body="$(mktemp)"
+          code="$(curl -sS -o "$body" -w '%{http_code}' --max-time 30 "$probe_url")"
+
+          ok=false
+          protocol=""
+          if [ "$code" = "200" ]; then
+            ok="$(jq -r '.ok == true' "$body" 2>/dev/null || echo false)"
+            protocol="$(jq -r '.protocol // ""' "$body" 2>/dev/null || true)"
+          fi
+
+          jq -n \
+            --arg schema "modaryx-p6-signed-bridge-probe-v1" \
+            --arg created_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --arg deployment_id "$target_id" \
+            --arg deployment_url "$target_url" \
+            --arg deployment_stage "$target_stage" \
+            --arg deployment_sha "$matched_sha" \
+            --arg expected_sha "$GITHUB_SHA" \
+            --arg http "$code" \
+            --arg protocol "$protocol" \
+            --argjson ok "$ok" \
+            '{
+              schema:$schema,
+              created_at:$created_at,
+              deployment_id:$deployment_id,
+              deployment_url:$deployment_url,
+              deployment_stage:$deployment_stage,
+              deployment_sha:$deployment_sha,
+              expected_sha:$expected_sha,
+              http_status:($http|tonumber),
+              bridge_ok:$ok,
+              protocol:$protocol,
+              secret_values_recorded:false,
+              founder_bypass:false,
+              awards_vf_points:false
+            }' > evidence/probe.json
+
+          rm -f "$body"
+
+          if [ "$code" != "200" ] || [ "$ok" != "true" ] || [ "$protocol" != "modaryx-founder-bridge-v1" ]; then
+            cat evidence/probe.json
+            echo "MODARYX_P6_SIGNED_BRIDGE_FAIL http=$code ok=$ok protocol=$protocol" >&2
+            exit 5
+          fi
+
+          echo "MODARYX_P6_SIGNED_BRIDGE_PASS deployment=$target_id protocol=$protocol"
+
+      - name: Upload signed bridge probe evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-signed-bridge-probe
+          path: evidence
+          if-no-files-found: warn
+          retention-days: 30
