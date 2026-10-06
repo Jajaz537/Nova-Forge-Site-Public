@@ -1,0 +1,50 @@
+name: MODARYX V2 Authorizing Rights Decision Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-license-decision-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-authorizing-rights-decision-proof.yml'
+      - 'migrations/0013_modaryx_v2_authorizing_decision_audit.sql'
+      - 'functions/_lib/rights-evidence.mjs'
+      - 'functions/api/v1/rights/authorizing-decisions.js'
+      - 'qa/modaryx-v2-rights-evidence-preflight-contract.json'
+      - 'qa/check-v2-rights-evidence-preflight.mjs'
+      - 'qa/modaryx-v2-rights-registry-backend-contract.json'
+      - 'qa/check-v2-rights-registry-backend.mjs'
+      - 'qa/check-v2-authorizing-decision.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-authorizing-rights-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove grants derive only from eligible reviewed preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate rights contracts and authorizing decision guard
+        run: |
+          set -euo pipefail
+          node qa/check-v2-rights-evidence-preflight.mjs
+          node qa/check-v2-rights-registry-backend.mjs
+          node --experimental-sqlite qa/check-v2-authorizing-decision.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+          echo PASS_V2_AUTHORIZING_RIGHTS_DECISION_PROOF
+      - name: Mirror Cloudflare root build
+        run: npm run build

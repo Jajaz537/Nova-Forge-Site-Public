@@ -11,7 +11,8 @@ const contract=JSON.parse(fs.readFileSync("qa/modaryx-v2-rights-evidence-preflig
 assert.equal(contract.status,"RIGHTS_EVIDENCE_PREFLIGHT_CANDIDATE_LOCAL_PROOF");
 assert.equal(contract.remoteApplication,"NOT_EXECUTED");
 assert.equal(contract.productionStatus.publisherOutbound,"NOT_IMPLEMENTED");
-assert.equal(contract.productionStatus.authorizingDecisionWrite,"NOT_IMPLEMENTED");
+assert.equal(contract.productionStatus.authorizingDecisionWrite,"CANDIDATE_EXPLICIT_ADMIN_FROM_ELIGIBLE_PREFLIGHT");
+assert.equal(contract.productionStatus.licenseValidation,"CANDIDATE_PREFLIGHT_PLUS_MANUAL_VERIFIED_DECISION");
 
 const caseId="mx_rights_case_"+"a".repeat(32);
 const contactId="mx_rights_contact_"+"b".repeat(32);
@@ -114,4 +115,8 @@ for(const p of [
 const preflightSource=fs.readFileSync("functions/api/v1/rights/license-preflight.js","utf8");
 assert.equal(preflightSource.includes("modaryx_v2_rights_scope_decisions"),false,"preflight must never write an authorizing decision");
 
+const authorizingSource=fs.readFileSync("functions/api/v1/rights/authorizing-decisions.js","utf8");
+assert.ok(authorizingSource.includes("AUTHORIZE_EXACT_PREFLIGHT_SCOPE"));
+assert.equal(/mailto:|fetch\(|sendgrid|mailgun|postmark|resend/i.test(authorizingSource),false,"authorizing decision must not contact publisher/provider");
+assert.ok(authorizingSource.includes("evaluateAuthorizingDecisionCandidate"));
 console.log("PASS_V2_RIGHTS_EVIDENCE_PREFLIGHT");
