@@ -64,3 +64,4 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 # replay-trigger: fresh-sync-6e1cc217-20261006
+# replay-trigger: instant-receipt-state-20261006-1547
