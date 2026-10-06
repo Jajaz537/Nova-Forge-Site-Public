@@ -1,0 +1,8 @@
+{
+  "schema": "modaryx-p6-sd-public-key-v1",
+  "algorithm": "RSA-4096",
+  "padding": "OAEP-SHA256",
+  "sha256_der": "82375c4a6ce12165dd7c2319848e8bffc2cc53caf983b09d0af9c6df8947f20f",
+  "private_key_location": "SD local only; never committed",
+  "private_key_uploaded": false
+}
