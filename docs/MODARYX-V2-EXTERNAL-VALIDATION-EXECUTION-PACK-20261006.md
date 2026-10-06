@@ -1,26 +1,27 @@
 # MODARYX V2 — Pack d’exécution des validations externes — 2026-10-06
 
-**État : PRÊT CÔTÉ PROCÉDURE / EXÉCUTION BLOQUÉE TANT QU’UNE URL V2 INTERACTIVE N’EST PAS PUBLIÉE**
+**État : PRÊT À EXÉCUTER SUR LA V2 INTERACTIVE EXACTE / aucune validation externe encore ajoutée**
 
 Candidat canonique courant :
-- HEAD : `85ae67578f848cb1aef6f43d8958eb56fcf7e136`
+- HEAD : `acd424a3d4abf0eb4cb153dc24d5202db7412afe`
 - checkpoint : `CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-2304.md`
-- probe PRE_CUTOVER read-only : run `37532315393`, job `112504495423` — **SUCCESS**
-- origin du probe infra : `https://6ed17e00.nova-forge-site-public.pages.dev`
 
-## Important — ne pas tester le mauvais frontend
+## Preview V2 interactive vérifiée
 
-L’origin PRE_CUTOVER ci-dessus sert à prouver l’état backend/bindings en GET/HEAD.
-Il ne doit **pas** être utilisé comme preuve visuelle ou interactive V2 si sa racine sert encore le frontend historique.
+- alias stable : `https://v2-engineering.nova-forge-site-public.pages.dev`
+- déploiement exact : `https://6b6a0acb.nova-forge-site-public.pages.dev`
+- source déployée : `acd424a3d4abf0eb4cb153dc24d5202db7412afe`
+- workflow : `MODARYX V2 Isolated Pages Preview`
+- run : `37533118410`
+- job : `112507209743`
+- état : **SUCCESS**
+- meta robots : noindex/nofollow/noarchive
+- header X-Robots-Tag : noindex
+- DNS : non modifié
+- `main` : non modifié
+- cutover : non exécuté
 
-Avant toute session NVDA / VoiceOver / TalkBack / Safari / appareil physique :
-- une URL **V2 interactive exacte** doit être publiée ;
-- son commit doit correspondre au candidat testé ;
-- le testeur doit ouvrir cette URL, pas la racine historique ;
-- la preuve doit enregistrer l’URL, le SHA et les artifacts de session.
-
-Le pack JSON marque donc :
-`interactiveV2OriginState = MISSING_REQUIRED_BEFORE_EXECUTION`.
+Cette URL est désormais l’origine correcte pour les sessions réelles NVDA / VoiceOver / TalkBack / Safari / appareil physique.
 
 ## Cinq blockers visés
 
@@ -49,4 +50,4 @@ Une même personne peut exécuter plusieurs sessions, mais chaque blocker conser
 Safari + VoiceOver peuvent être testés dans le même créneau réel, avec deux enregistrements distincts.
 
 Aucune émulation Chrome, arbre AX/CDP, user-agent Safari ou viewport mobile ne ferme ces blockers.
-Aucune session ne doit être lancée contre l’ancien root historique en le faisant passer pour la V2.
+La racine historique Pages ne doit jamais être utilisée comme substitut à cette URL V2 interactive.
