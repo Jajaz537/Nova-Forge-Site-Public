@@ -12,7 +12,8 @@ assert.equal(contract.status,"RIGHTS_REGISTRY_BACKEND_CANDIDATE_LOCAL_PROOF");
 assert.equal(contract.remoteApplication,"NOT_EXECUTED");
 assert.equal(contract.productionStatus.authorizingEvidenceIngestion,"CANDIDATE_ELIGIBLE_PREFLIGHT_ONLY");
 assert.equal(contract.productionStatus.contactDiscovery,"NOT_IMPLEMENTED");
-assert.equal(contract.productionStatus.outbound,"NOT_IMPLEMENTED");
+assert.equal(contract.productionStatus.outbound,"REQUEST_PREPARATION_CANDIDATE_REAL_SEND_OPEN");
+assert.equal(contract.productionStatus.inbound,"QUARANTINE_CANDIDATE_REAL_MAILBOX_OPEN");
 const inv=new Set(contract.invariants||[]);
 for(const x of [
   "ADMIN_PERMISSION_REQUIRED","GENERAL_SCOPE_DECISIONS_API_CANNOT_RECORD_GRANTED_OR_GRANTED_WITH_LIMITS","AUTHORISING_DECISION_REQUIRES_ELIGIBLE_PREFLIGHT","AUTHORISING_DECISION_REQUIRES_EXPLICIT_ADMIN_CONFIRMATION",
