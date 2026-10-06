@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 22
     env:
-      EVIDENCE_URL: "https://52c2cad6.nova-forge-site-public.pages.dev/api/p6/evidence"
+      EVIDENCE_URL: "https://38b9ed09.nova-forge-site-public.pages.dev/api/p6/evidence"
     steps:
       - name: Poll short-lived non-sensitive Founder receipt
         shell: bash
@@ -96,3 +96,4 @@ jobs:
 # replay-trigger: extended-founder-receipt-window-current-4298fe2c
 # replay-trigger: fresh-founder-window-e632b150
 # replay-trigger: fresh-preview-52c2cad6
+# replay-trigger: synchronized-preview-38b9ed09
