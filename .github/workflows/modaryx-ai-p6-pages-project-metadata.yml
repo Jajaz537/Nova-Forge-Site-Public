@@ -43,6 +43,14 @@ jobs:
           latest_url="$(jq -r '.result.latest_deployment.url // ""' <<<"$project")"
           latest_branch="$(jq -r '.result.latest_deployment.deployment_trigger.metadata.branch // ""' <<<"$project")"
           latest_stage="$(jq -r '.result.latest_deployment.latest_stage.name // ""' <<<"$project")"
+          latest_stage_status="$(jq -r '.result.latest_deployment.latest_stage.status // ""' <<<"$project")"
+          latest_uses_functions="$(jq -r '.result.latest_deployment.uses_functions // false' <<<"$project")"
+          latest_env_has_bridge_url="$(jq -r '(.result.latest_deployment.env_vars // {}) | has("MODARYX_AI_BRIDGE_URL")' <<<"$project")"
+          latest_env_has_bridge_key="$(jq -r '(.result.latest_deployment.env_vars // {}) | has("MODARYX_AI_BRIDGE_KEY_HEX")' <<<"$project")"
+          latest_env_has_evidence_mode="$(jq -r '(.result.latest_deployment.env_vars // {}) | has("MODARYX_P6_EVIDENCE_MODE")' <<<"$project")"
+          latest_env_bridge_url_value="$(jq -r '.result.latest_deployment.env_vars.MODARYX_AI_BRIDGE_URL.value // ""' <<<"$project")"
+          latest_env_evidence_mode_value="$(jq -r '.result.latest_deployment.env_vars.MODARYX_P6_EVIDENCE_MODE.value // ""' <<<"$project")"
+          latest_env_bridge_key_type="$(jq -r '.result.latest_deployment.env_vars.MODARYX_AI_BRIDGE_KEY_HEX.type // ""' <<<"$project")"
           domains="$(jq -c '.result.domains // []' <<<"$project")"
           preview_has_bridge_url="$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_AI_BRIDGE_URL")' <<<"$project")"
           preview_has_bridge_key="$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_AI_BRIDGE_KEY_HEX")' <<<"$project")"
@@ -63,6 +71,14 @@ jobs:
             --arg latest_url "$latest_url" \
             --arg latest_branch "$latest_branch" \
             --arg latest_stage "$latest_stage" \
+            --arg latest_stage_status "$latest_stage_status" \
+            --argjson latest_uses_functions "$latest_uses_functions" \
+            --argjson latest_env_has_bridge_url "$latest_env_has_bridge_url" \
+            --argjson latest_env_has_bridge_key "$latest_env_has_bridge_key" \
+            --argjson latest_env_has_evidence_mode "$latest_env_has_evidence_mode" \
+            --arg latest_env_bridge_url_value "$latest_env_bridge_url_value" \
+            --arg latest_env_evidence_mode_value "$latest_env_evidence_mode_value" \
+            --arg latest_env_bridge_key_type "$latest_env_bridge_key_type" \
             --argjson domains "$domains" \
             --argjson preview_has_bridge_url "$preview_has_bridge_url" \
             --argjson preview_has_bridge_key "$preview_has_bridge_key" \
@@ -86,13 +102,30 @@ jobs:
                 bridge_key_type:$preview_bridge_key_type
               },
               canonical_deployment:{id:$canonical_id,url:$canonical_url,branch:$canonical_branch,stage:$canonical_stage},
-              latest_deployment:{id:$latest_id,url:$latest_url,branch:$latest_branch,stage:$latest_stage},
+              latest_deployment:{
+                id:$latest_id,
+                url:$latest_url,
+                branch:$latest_branch,
+                stage:$latest_stage,
+                stage_status:$latest_stage_status,
+                uses_functions:$latest_uses_functions,
+                env_presence:{
+                  bridge_url:$latest_env_has_bridge_url,
+                  bridge_key:$latest_env_has_bridge_key,
+                  evidence_mode:$latest_env_has_evidence_mode
+                },
+                env_safe_values:{
+                  bridge_url:$latest_env_bridge_url_value,
+                  evidence_mode:$latest_env_evidence_mode_value,
+                  bridge_key_type:$latest_env_bridge_key_type
+                }
+              },
               secret_values_logged:false,
               external_changes_made:false,
               awards_vf_points:false
             }' > evidence/pages-project-metadata.json
 
-          echo "MODARYX_P6_PAGES_PROJECT productionBranch=$production_branch canonicalBranch=$canonical_branch canonicalStage=$canonical_stage latestBranch=$latest_branch latestStage=$latest_stage previewUrl=$preview_has_bridge_url previewKey=$preview_has_bridge_key previewEvidence=$preview_has_evidence_mode evidenceModeValue=$preview_evidence_mode_value bridgeKeyType=$preview_bridge_key_type bridgeUrlValue=$preview_bridge_url_value"
+          echo "MODARYX_P6_PAGES_PROJECT productionBranch=$production_branch canonicalBranch=$canonical_branch canonicalStage=$canonical_stage latestBranch=$latest_branch latestStage=$latest_stage latestStageStatus=$latest_stage_status latestUsesFunctions=$latest_uses_functions latestEnvUrl=$latest_env_has_bridge_url latestEnvKey=$latest_env_has_bridge_key latestEnvEvidence=$latest_env_has_evidence_mode latestEvidenceValue=$latest_env_evidence_mode_value latestKeyType=$latest_env_bridge_key_type previewUrl=$preview_has_bridge_url previewKey=$preview_has_bridge_key previewEvidence=$preview_has_evidence_mode evidenceModeValue=$preview_evidence_mode_value bridgeKeyType=$preview_bridge_key_type bridgeUrlValue=$preview_bridge_url_value"
 
       - name: Upload Pages project metadata
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
@@ -103,3 +136,4 @@ jobs:
           retention-days: 30
 # replay-trigger: preview-env-presence-safe-read
 # replay-trigger: preview-safe-values-read
+# replay-trigger: deployment-env-and-functions-safe-read
