@@ -494,6 +494,12 @@
       "contract": "qa/modaryx-v2-cwv-retention-contract.json",
       "checker": "qa/check-v2-cwv-retention.mjs",
       "source": "docs/MODARYX-V2-CWV-RETENTION-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "d1-migration-execution-manifest",
+      "contract": "qa/modaryx-v2-d1-migration-execution-manifest.json",
+      "checker": "qa/check-v2-d1-migration-execution-manifest.mjs",
+      "source": "docs/MODARYX-V2-D1-MIGRATION-EXECUTION-MANIFEST-20261006.md"
     }
   ],
   "invariants": [
