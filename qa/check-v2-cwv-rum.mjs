@@ -26,7 +26,7 @@ assert.equal(cwvViewportClass(1440),"desktop");
 
 const interactions=new Map([[1,120],[2,430],[3,210]]);
 assert.equal(selectInpValue(interactions,3),430);
-assert.equal(selectInpValue(interactions,100),210);
+assert.equal(selectInpValue(interactions,100),120);
 
 const valid=validateCwvBatch({
   schemaVersion:1,pageViewId:"a".repeat(32),routeClass:"GAME_HUB",viewportClass:"desktop",navigationType:"navigate",
