@@ -4,6 +4,7 @@ import { App } from "./App.jsx";
 import "./styles.css";
 import "./premium-editorial.css";
 import "./product-blue-violet.css";
+import "./readability-polish.css";
 import { migrateLegacyBrowserState } from "./storage-migration.js";
 import { registerV2PwaIfEnabled } from "./pwa-registration.js";
 
