@@ -1,0 +1,137 @@
+name: MODARYX V2 Cloudflare Import Fix Microproof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-notification-destination-import-fix-20261007'
+    paths:
+      - '.github/workflows/modaryx-v2-cloudflare-import-fix-microproof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-cloudflare-import-fix-microproof
+  cancel-in-progress: true
+
+env:
+  CLOUDFLARE_ZONE_NAME: modaryxmods.com
+  CLOUDFLARE_PROJECT_NAME: nova-forge-site-public
+  EXPECTED_FIX_SHA: 11c84137a3bd94c072fc61b185a91a63c77f2460
+  EXPECTED_FIX_BRANCH: chatgpt/modaryx-v2-notification-destination-import-fix-20261007
+
+jobs:
+  proof:
+    name: Prove corrected Pages Functions build on Cloudflare
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Checkout exact fix
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: 11c84137a3bd94c072fc61b185a91a63c77f2460
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Verify only targeted import fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_FIX_SHA"
+          grep -q "from '../../../_lib/api-security.mjs'" functions/api/v1/notifications/destinations.js
+          grep -q "from '../../../_lib/remote-write.mjs'" functions/api/v1/notifications/destinations.js
+          grep -q "} from '../../../_lib/notification-destinations.mjs'" functions/api/v1/notifications/destinations.js
+          if grep -q "../../../../_lib/" functions/api/v1/notifications/destinations.js; then
+            echo "stale import path remains"
+            exit 1
+          fi
+          echo TARGETED_IMPORT_FIX_PRESENT=yes
+
+      - name: Resolve Cloudflare account with GET only
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${CLOUDFLARE_API_TOKEN:-}"
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+          zones="$(curl -fsS "${auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}")"
+          test "$(jq -r '.success' <<<"$zones")" = "true"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          test -n "$account_id"
+          echo "CLOUDFLARE_ACCOUNT_ID=$account_id" >> "$GITHUB_ENV"
+          echo ACCOUNT_RESOLVED=yes
+
+      - name: Await exact Cloudflare preview deployment
+        id: deploy
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+          deployment_id=""
+          for attempt in $(seq 1 30); do
+            list="$(curl -fsS "${auth[@]}" "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/deployments?env=preview&per_page=25")"
+            test "$(jq -r '.success' <<<"$list")" = "true"
+            deployment_id="$(jq -r --arg sha "$EXPECTED_FIX_SHA" --arg branch "$EXPECTED_FIX_BRANCH" '
+              .result[]?
+              | select(.deployment_trigger.metadata.commit_hash==$sha)
+              | select(.deployment_trigger.metadata.branch==$branch)
+              | .id' <<<"$list" | head -n1)"
+            if [ -n "$deployment_id" ]; then
+              echo "MATCHED_DEPLOYMENT_ID=$deployment_id"
+              break
+            fi
+            echo "attempt=$attempt deployment=pending"
+            sleep 10
+          done
+          test -n "$deployment_id"
+          echo "deployment_id=$deployment_id" >> "$GITHUB_OUTPUT"
+
+      - name: Require build and deploy success
+        shell: bash
+        env:
+          DEPLOYMENT_ID: ${{ steps.deploy.outputs.deployment_id }}
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+          state=""
+          for attempt in $(seq 1 30); do
+            one="$(curl -fsS "${auth[@]}" "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/deployments/${DEPLOYMENT_ID}")"
+            test "$(jq -r '.success' <<<"$one")" = "true"
+            state="$(jq -r '.result.latest_stage.status' <<<"$one")"
+            echo "attempt=$attempt latest_stage=$state"
+            if [ "$state" = "success" ] || [ "$state" = "failure" ] || [ "$state" = "canceled" ]; then
+              break
+            fi
+            sleep 10
+          done
+
+          jq '.result | {id,url,aliases,environment,deployment_trigger,latest_stage,stages,uses_functions}' <<<"$one"
+          test "$(jq -r '.result.deployment_trigger.metadata.commit_hash' <<<"$one")" = "$EXPECTED_FIX_SHA"
+          test "$(jq -r '.result.deployment_trigger.metadata.branch' <<<"$one")" = "$EXPECTED_FIX_BRANCH"
+          test "$state" = "success"
+          test "$(jq -r '[.result.stages[] | select(.name=="build")][0].status' <<<"$one")" = "success"
+          test "$(jq -r '[.result.stages[] | select(.name=="deploy")][0].status' <<<"$one")" = "success"
+
+          logs="$(curl -fsS "${auth[@]}" "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/deployments/${DEPLOYMENT_ID}/history/logs")"
+          test "$(jq -r '.success' <<<"$logs")" = "true"
+          if jq -r '.result.data[]?.line' <<<"$logs" | grep -F 'Could not resolve "../../../../_lib/' ; then
+            echo "stale import resolution failure still present"
+            exit 1
+          fi
+          echo PASS_MODARYX_V2_CLOUDFLARE_IMPORT_FIX
+
+      - name: Prove read-only Cloudflare API usage
+        shell: bash
+        run: |
+          set -euo pipefail
+          file=".github/workflows/modaryx-v2-cloudflare-import-fix-microproof.yml"
+          if grep -E 'curl .* -(X|--request) *(POST|PUT|PATCH|DELETE)' "$file"; then
+            echo "mutation verb detected"
+            exit 1
+          fi
+          echo READ_ONLY_CLOUDFLARE_IMPORT_FIX_PROOF=yes
