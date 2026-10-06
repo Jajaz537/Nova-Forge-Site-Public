@@ -1,0 +1,48 @@
+name: MODARYX V2 Production Readiness Candidate Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-production-readiness-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-production-readiness-proof.yml'
+      - 'functions/_lib/production-readiness.mjs'
+      - 'functions/api/v1/production/readiness.js'
+      - 'qa/modaryx-v2-production-readiness-contract.json'
+      - 'qa/check-v2-production-readiness.mjs'
+      - 'qa/modaryx-v2-production-evidence-probe-contract.json'
+      - 'qa/check-v2-production-evidence-probe-contract.mjs'
+      - 'qa/check-v2-production-evidence-origin.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-production-readiness-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove production preflight remains read-only and non-final
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate production readiness
+        run: |
+          set -euo pipefail
+          node --experimental-sqlite qa/check-v2-production-readiness.mjs
+          node qa/check-v2-production-evidence-probe-contract.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+          echo PASS_V2_PRODUCTION_READINESS_PROOF
+      - name: Mirror Cloudflare root build
+        run: npm run build

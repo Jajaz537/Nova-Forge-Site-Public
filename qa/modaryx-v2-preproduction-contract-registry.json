@@ -476,6 +476,12 @@
       "contract": "qa/modaryx-v2-cwv-rum-contract.json",
       "checker": "qa/check-v2-cwv-rum.mjs",
       "source": "docs/MODARYX-V2-CWV-RUM-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "production-readiness-candidate",
+      "contract": "qa/modaryx-v2-production-readiness-contract.json",
+      "checker": "qa/check-v2-production-readiness.mjs",
+      "source": "docs/MODARYX-V2-PRODUCTION-READINESS-CANDIDATE-20261006.md"
     }
   ],
   "invariants": [
