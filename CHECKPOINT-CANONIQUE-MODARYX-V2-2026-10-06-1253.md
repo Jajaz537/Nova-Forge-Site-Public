@@ -60,6 +60,27 @@ Toujours OPEN, non remplaçables par automatisation :
 - support jeux backend + UI candidat ;
 - droits : registre, preflight, outbound préparatoire, inbound quarantine et décision d'autorisation fail-closed.
 
+## 4.1 Preuve PRE_CUTOVER du SHA courant
+
+**TERMINÉ pour le preview exact / production OPEN**
+
+- source : `5a8e66f096a1482bb98044b12894c9b615364104`
+- preview : `ca255dbb.nova-forge-site-public.pages.dev`
+- run : `37459818856`
+- job : `112256297554`
+- GET/HEAD uniquement
+- root 200 + noindex
+- D1 présent
+- R2 absent
+- Auth0 + Turnstile configurés
+- email/push non implémentés
+- météo OFF
+- historique anonyme 401
+- Service Worker 404
+- CWV terrain toujours PREUVE MANQUANTE
+
+Preuve : `docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md`.
+
 ## 5. Runtime desktop hors scope site
 
 Les entrées historiques suivantes sont reclassifiées :
