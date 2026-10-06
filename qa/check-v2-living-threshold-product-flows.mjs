@@ -256,7 +256,7 @@ try{
   await clickText(".account-nav button","Confidentialité");
   await waitText("Privé par défaut");
 
-  await clickAria("Compte");
+  await clickText(".account-nav button","Compte");
   await waitText("Vous explorez MODARYX en mode invité.");
   await clickText(".account-panel .primary","Découvrir l’onboarding joueur");
   await waitText("Onboarding joueur · 1/4");
