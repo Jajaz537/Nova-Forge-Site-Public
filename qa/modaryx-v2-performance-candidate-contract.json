@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "LAB_CANDIDATE_PROOF_REQUIRED",
+  "root": "v2",
+  "productionCwv": "OPEN",
+  "scenarios": {
+    "desktop": {
+      "width": 1440,
+      "height": 1024,
+      "cpuRate": 2,
+      "latencyMs": 20,
+      "downloadMbps": 20,
+      "lcpCeilingMs": 3000,
+      "clsCeiling": 0.1,
+      "routeResponseCeilingMs": 500
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "cpuRate": 4,
+      "latencyMs": 80,
+      "downloadMbps": 4,
+      "lcpCeilingMs": 4000,
+      "clsCeiling": 0.1,
+      "routeResponseCeilingMs": 650
+    }
+  },
+  "bundleCeilings": {
+    "jsGzipBytes": 105000,
+    "cssGzipBytes": 22000
+  },
+  "invariants": [
+    "LAB_METRICS_NEVER_EQUAL_FIELD_CWV",
+    "PRODUCTION_CWV_REMAINS_OPEN",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER"
+  ]
+}
