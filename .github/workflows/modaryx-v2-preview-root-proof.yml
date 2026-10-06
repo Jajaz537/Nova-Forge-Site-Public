@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'chatgpt/modaryx-v2-preview-root-20261006'
+      - 'design/modaryx-v2-blue-violet-product-20261005'
     paths:
       - '.github/workflows/modaryx-v2-preview-root-proof.yml'
       - 'qa/modaryx-v2-preview-root-contract.json'
