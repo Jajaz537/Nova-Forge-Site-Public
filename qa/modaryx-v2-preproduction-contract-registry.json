@@ -320,6 +320,12 @@
       "contract": "qa/modaryx-v2-preview-root-contract.json",
       "checker": "qa/check-v2-preview-root-contract.mjs",
       "source": "docs/MODARYX-V2-PREVIEW-ROOT-DECISION-20261006.md"
+    },
+    {
+      "id": "production-candidate-root",
+      "contract": "qa/modaryx-v2-production-candidate-root.json",
+      "checker": "qa/check-v2-production-candidate-root.mjs",
+      "source": "docs/MODARYX-V2-PRODUCTION-CANDIDATE-ROOT-20261006.md"
     }
   ],
   "invariants": [

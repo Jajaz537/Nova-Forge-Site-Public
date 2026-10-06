@@ -5,6 +5,10 @@ import assert from "node:assert/strict";
 
 const chrome=process.env.CHROME_BIN;
 const origin=process.env.MODARYX_REVIEW_ORIGIN||"http://127.0.0.1:4176";
+const rootDir=process.env.MODARYX_V2_ROOT_DIR||"v2-preview";
+const swPath=process.env.MODARYX_V2_SW_PATH||"/sw-v2-preview.js";
+const v2CacheName=process.env.MODARYX_V2_CACHE_NAME||"modaryx-v2-preview-shell-v1";
+const previewPort=String(new URL(origin).port||"4176");
 if(!chrome) throw new Error("CHROME_BIN missing");
 const port=19000+(process.pid%1000);
 const proc=spawn(chrome,["--headless=new","--no-sandbox","--disable-gpu","--remote-debugging-port="+port,"--user-data-dir=/tmp/modaryx-v2-migration-cdp-"+process.pid,"about:blank"],{stdio:"ignore"});
@@ -13,7 +17,7 @@ const wait=async path=>{let last;for(let i=0;i<200;i++){try{const r=await fetch(
 const send=(method,params={})=>{const id=nextId++;ws.send(JSON.stringify({id,method,params}));return new Promise((resolve,reject)=>pending.set(id,{resolve,reject}))};
 const evaluate=async expression=>{const r=await send("Runtime.evaluate",{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw new Error(r.exceptionDetails.text||"eval failed");return r.result?.result?.value};
 const navigate=async()=>{await send("Page.navigate",{url:origin});for(let i=0;i<80;i++){if(await evaluate("document.readyState==='complete'"))break;await sleep(100)}await sleep(400)};
-const previewPidFile="/tmp/modaryx-v2-migration.pid";
+const previewPidFile=process.env.MODARYX_PREVIEW_PID_FILE||"/tmp/modaryx-v2-migration.pid";
 let restartedPreview=null;
 async function waitOrigin(up){
   let last;
@@ -37,7 +41,7 @@ async function stopPreview(){
   await waitOrigin(false);
 }
 async function restartPreview(){
-  restartedPreview=spawn(process.execPath,["./node_modules/vite/bin/vite.js","preview","--host","127.0.0.1","--port","4176"],{cwd:"v2-preview",stdio:"ignore"});
+  restartedPreview=spawn(process.execPath,["./node_modules/vite/bin/vite.js","preview","--host","127.0.0.1","--port",previewPort],{cwd:rootDir,stdio:"ignore"});
   writeFileSync(previewPidFile,String(restartedPreview.pid));
   await waitOrigin(true);
 }
@@ -84,10 +88,10 @@ try{
   console.log("MIGRATION_ASSERT localStorage first pass non-destructive");
 
   await evaluate(`(async()=>{const a=await caches.open("modaryx-site-v120-scalable");await a.put("/legacy.css",new Response("legacy"));const u=await caches.open("third-party-unknown-v1");await u.put("/keep",new Response("keep"));return true})()`);
-  const registered=await evaluate(`(async()=>{const r=await navigator.serviceWorker.register("/sw-v2-preview.js",{scope:"/",updateViaCache:"none"});await new Promise((resolve,reject)=>{if(r.active)return resolve();const timer=setTimeout(()=>reject(new Error("sw-timeout")),8000);r.addEventListener("updatefound",()=>{const w=r.installing;w?.addEventListener("statechange",()=>{if(w.state==="activated"){clearTimeout(timer);resolve()}})})});return true})()`);
+  const registered=await evaluate(`(async()=>{const r=await navigator.serviceWorker.register(${JSON.stringify(swPath)},{scope:"/",updateViaCache:"none"});await new Promise((resolve,reject)=>{if(r.active)return resolve();const timer=setTimeout(()=>reject(new Error("sw-timeout")),8000);r.addEventListener("updatefound",()=>{const w=r.installing;w?.addEventListener("statechange",()=>{if(w.state==="activated"){clearTimeout(timer);resolve()}})})});return true})()`);
   assert.equal(registered,true);
   await sleep(500);
-  const cacheState=await evaluate(`(async()=>{const k=await caches.keys();return {keys:k,legacy:k.includes("modaryx-site-v120-scalable"),unknown:k.includes("third-party-unknown-v1"),v2:k.includes("modaryx-v2-preview-shell-v1")}})()`);
+  const cacheState=await evaluate(`(async()=>{const k=await caches.keys();return {keys:k,legacy:k.includes("modaryx-site-v120-scalable"),unknown:k.includes("third-party-unknown-v1"),v2:k.includes(${JSON.stringify(v2CacheName)})}})()`);
   assert.equal(cacheState.legacy,false);
   assert.equal(cacheState.unknown,true);
   assert.equal(cacheState.v2,true);
@@ -105,7 +109,7 @@ try{
   console.log("MIGRATION_ASSERT offline controlled navigation works with origin stopped");
 
   await restartPreview();
-  const rolled=await evaluate(`(async()=>{const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(r=>r.unregister()));await caches.delete("modaryx-v2-preview-shell-v1");const keys=await caches.keys();return {unknown:keys.includes("third-party-unknown-v1"),legacy:keys.includes("modaryx-site-v120-scalable")}})()`);
+  const rolled=await evaluate(`(async()=>{const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(r=>r.unregister()));await caches.delete(${JSON.stringify(v2CacheName)});const keys=await caches.keys();return {unknown:keys.includes("third-party-unknown-v1"),legacy:keys.includes("modaryx-site-v120-scalable")}})()`);
   assert.equal(rolled.unknown,true);
   assert.equal(rolled.legacy,false);
   await navigate();

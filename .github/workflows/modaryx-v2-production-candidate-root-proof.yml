@@ -1,0 +1,140 @@
+name: MODARYX V2 Production Candidate Root Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-production-candidate-integration-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-production-candidate-root-proof.yml'
+      - 'qa/check-v2-production-candidate-root.mjs'
+      - 'qa/check-v2-anti-contamination.mjs'
+      - 'qa/modaryx-v2-anti-contamination-policy.json'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+      - 'qa/modaryx-v2-production-candidate-root.json'
+      - 'qa/check-v2-tech-stack-selection-gate-contract.mjs'
+      - 'qa/modaryx-v2-tech-stack-selection-gate-contract.json'
+      - 'qa/check-v2-vf-readiness-gate.mjs'
+      - 'qa/modaryx-v2-vf-readiness-gate.json'
+      - 'qa/check-v2-browser-migration.mjs'
+      - 'qa/check-v2-storage-migration-unit.mjs'
+      - 'qa/check-v2-living-threshold-browser-a11y.mjs'
+      - 'qa/check-v2-living-threshold-product-flows.mjs'
+      - 'qa/capture-v2-living-threshold-multiscreen.mjs'
+      - 'qa/check-v2-multiscreen-capture-integrity.mjs'
+      - 'v2/**'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-production-candidate-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove real V2 root without public cutover
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate stack root and readiness contracts
+        run: |
+          set -euo pipefail
+          node qa/check-v2-tech-stack-selection-gate-contract.mjs
+          node qa/check-v2-production-candidate-root.mjs
+          node qa/check-v2-anti-contamination.mjs --self-test
+          node qa/check-v2-anti-contamination.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+          node qa/check-v2-vf-readiness-gate.mjs
+
+      - name: Unit proof storage migration
+        run: |
+          set -euo pipefail
+          node qa/check-v2-storage-migration-unit.mjs
+
+      - name: Locate Chrome
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Build real V2 root
+        working-directory: v2
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+          npm run test:sites
+
+      - name: Start real V2 candidate
+        working-directory: v2
+        run: |
+          set -euo pipefail
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4178 >/tmp/modaryx-v2-candidate.log 2>&1 &
+          echo $! >/tmp/modaryx-v2-candidate.pid
+          for attempt in {1..80}; do
+            if curl --fail --silent --show-error http://127.0.0.1:4178/ >/dev/null; then exit 0; fi
+            sleep 0.25
+          done
+          cat /tmp/modaryx-v2-candidate.log
+          exit 1
+
+      - name: Browser accessibility proof
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4178
+        run: |
+          set -euo pipefail
+          node qa/check-v2-living-threshold-browser-a11y.mjs
+
+      - name: Product flows page tab module proof
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4178
+        run: |
+          set -euo pipefail
+          node qa/check-v2-living-threshold-product-flows.mjs
+
+      - name: Capture 143-screen browser matrix
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4178
+        run: |
+          set -euo pipefail
+          node qa/capture-v2-living-threshold-multiscreen.mjs
+          node qa/check-v2-multiscreen-capture-integrity.mjs
+
+      - name: Browser migration offline rollback proof on real V2 root
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4178
+          MODARYX_V2_ROOT_DIR: v2
+          MODARYX_V2_SW_PATH: /sw-v2.js
+          MODARYX_V2_CACHE_NAME: modaryx-v2-candidate-shell-v1
+          MODARYX_PREVIEW_PID_FILE: /tmp/modaryx-v2-candidate.pid
+        run: |
+          set -euo pipefail
+          node qa/check-v2-browser-migration.mjs
+          echo PASS_V2_PRODUCTION_CANDIDATE_BROWSER_MIGRATION
+
+      - name: Upload candidate browser matrix
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: modaryx-v2-production-candidate-browser-matrix
+          path: review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Stop candidate
+        if: always()
+        run: |
+          if test -f /tmp/modaryx-v2-candidate.pid; then
+            kill "$(cat /tmp/modaryx-v2-candidate.pid)" 2>/dev/null || true
+          fi
