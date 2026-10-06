@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 6
     env:
-      DEPLOYMENT_URL: "https://4298fe2c.nova-forge-site-public.pages.dev"
+      DEPLOYMENT_URL: "https://e632b150.nova-forge-site-public.pages.dev"
       EXPECTED_PROTOCOL: "modaryx-founder-bridge-v1"
     steps:
       - name: Probe exact Pages retry through real signed bridge
@@ -64,3 +64,4 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 # replay-trigger: current-son-known-quick-tunnel
+# replay-trigger: fresh-founder-window-e632b150
