@@ -1,0 +1,104 @@
+name: MODARYX V2 Cloudflare Target Read-Only Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-cloudflare-target-readonly-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-cloudflare-target-readonly-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-cloudflare-target-readonly-proof
+  cancel-in-progress: true
+
+env:
+  CLOUDFLARE_ZONE_NAME: modaryxmods.com
+  CLOUDFLARE_PROJECT_NAME: nova-forge-site-public
+
+jobs:
+  proof:
+    name: Prove exact Pages D1/R2 target metadata with GET only
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Require scoped token
+        run: |
+          set -euo pipefail
+          test -n "${CLOUDFLARE_API_TOKEN:-}"
+          echo TOKEN_PRESENT=yes
+
+      - name: Read exact Pages project bindings
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}")"
+          test "$(jq -r '.success' <<<"$zones")" = "true"
+          test "$(jq '.result | length' <<<"$zones")" -eq 1
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+
+          project="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${CLOUDFLARE_PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$project")" = "true"
+          test "$(jq -r '.result.name' <<<"$project")" = "${CLOUDFLARE_PROJECT_NAME}"
+
+          prod_d1="$(jq -c '.result.deployment_configs.production.d1_databases // {}' <<<"$project")"
+          preview_d1="$(jq -c '.result.deployment_configs.preview.d1_databases // {}' <<<"$project")"
+          prod_r2="$(jq -c '.result.deployment_configs.production.r2_buckets // {}' <<<"$project")"
+          preview_r2="$(jq -c '.result.deployment_configs.preview.r2_buckets // {}' <<<"$project")"
+
+          normalize='def norm:
+            if type=="object" then
+              to_entries | map({
+                binding:.key,
+                id:(.value.id // .value.database_id // .value.bucket_name // .value),
+                name:(.value.database_name // .value.name // .value.bucket_name // null)
+              })
+            elif type=="array" then
+              map({
+                binding:(.binding // .name // null),
+                id:(.id // .database_id // .bucket_name // null),
+                name:(.database_name // .name // .bucket_name // null)
+              })
+            else [] end;
+            norm'
+
+          prod_d1_safe="$(jq -c "$normalize" <<<"$prod_d1")"
+          preview_d1_safe="$(jq -c "$normalize" <<<"$preview_d1")"
+          prod_r2_safe="$(jq -c "$normalize" <<<"$prod_r2")"
+          preview_r2_safe="$(jq -c "$normalize" <<<"$preview_r2")"
+
+          echo "PAGES_PROJECT=${CLOUDFLARE_PROJECT_NAME}"
+          echo "PAGES_PRODUCTION_BRANCH=$(jq -r '.result.source.config.production_branch // .result.production_branch // "unknown"' <<<"$project")"
+          echo "PRODUCTION_D1_BINDINGS=$prod_d1_safe"
+          echo "PREVIEW_D1_BINDINGS=$preview_d1_safe"
+          echo "PRODUCTION_R2_BINDINGS=$prod_r2_safe"
+          echo "PREVIEW_R2_BINDINGS=$preview_r2_safe"
+
+          d1_target="$(jq -r '.[] | select(.binding=="MODARYX_DB") | .id' <<<"$prod_d1_safe" | head -n1)"
+          if [ -z "$d1_target" ] || [ "$d1_target" = "null" ]; then
+            d1_target="$(jq -r '.[] | select(.binding=="MODARYX_DB") | .id' <<<"$preview_d1_safe" | head -n1)"
+          fi
+          test -n "$d1_target"
+          test "$d1_target" != "null"
+
+          echo "D1_TARGET_ID=$d1_target"
+          echo "D1_TARGET_ID_SHA256=$(printf %s "$d1_target" | sha256sum | awk '{print $1}')"
+          echo "PASS_V2_CLOUDFLARE_TARGET_READ_ONLY_PROOF"
+
+      - name: Confirm no mutation verbs in proof
+        run: |
+          set -euo pipefail
+          file=".github/workflows/modaryx-v2-cloudflare-target-readonly-proof.yml"
+          if grep -E 'curl .* -(X|--request) *(POST|PUT|PATCH|DELETE)|wrangler .*d1 .*execute .*--remote' "$file"; then
+            echo "mutation verb detected"
+            exit 1
+          fi
+          echo READ_ONLY_MUTATION_GUARD=yes
