@@ -6,7 +6,6 @@ on:
       - "chatgpt/modaryx-ai-founder-integration-20261005"
     paths:
       - ".github/workflows/modaryx-ai-p6-configure-quick-preview.yml"
-      - "qa/p6-quick-url.txt"
   workflow_dispatch:
 
 permissions:
@@ -14,6 +13,7 @@ permissions:
 
 jobs:
   configure:
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     env:
@@ -186,3 +186,4 @@ jobs:
 # replay-trigger: fresh-window-taught-chips-20261006
 # replay-trigger: current-cyber-rarely-defense-mai
 # replay-trigger: fresh-live-url-1791300554433
+# disabled: superseded by key-first + URL-only P6 flow
