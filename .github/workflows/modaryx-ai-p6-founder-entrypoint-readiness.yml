@@ -1,0 +1,65 @@
+name: MODARYX IA P6 Founder entrypoint readiness
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-founder-entrypoint-readiness.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      DEPLOYMENT_URL: "https://e632b150.nova-forge-site-public.pages.dev"
+    steps:
+      - name: Verify login redirect and current receipt state
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          login="${DEPLOYMENT_URL}/api/v1/auth/login?returnTo=%2Fapi%2Ffounder%2Fai%2Fe2e-proof"
+          headers="$(mktemp)"
+          body="$(mktemp)"
+          trap 'rm -f "$headers" "$body"' EXIT
+
+          code="$(curl -sS -D "$headers" -o "$body" -w '%{http_code}' --max-time 15 "$login" || true)"
+          location="$(awk 'BEGIN{IGNORECASE=1}/^location:/{sub(/$/,""); sub(/^location:[[:space:]]*/,""); print; exit}' "$headers")"
+          auth_redirect=false
+          if [ "$code" = "302" ] && printf '%s' "$location" | grep -Eq '^https://[^/]+/authorize[?]'; then auth_redirect=true; fi
+
+          evidence_body="$(mktemp)"
+          ev_code="$(curl -sS -o "$evidence_body" -w '%{http_code}' --max-time 15 "${DEPLOYMENT_URL}/api/p6/evidence" || true)"
+          ev_ready=false
+          if [ "$ev_code" = "200" ]; then
+            ev_ready="$(jq -r '.ready == true' "$evidence_body" 2>/dev/null || echo false)"
+          fi
+
+          jq -n             --arg schema "modaryx-p6-founder-entrypoint-readiness-v1"             --arg deployment_url "$DEPLOYMENT_URL"             --arg login_http "$code"             --argjson auth_redirect "$auth_redirect"             --arg evidence_http "$ev_code"             --argjson receipt_ready "$ev_ready"             '{
+              schema:$schema,
+              deployment_url:$deployment_url,
+              login_http:$login_http,
+              auth0_redirect:$auth_redirect,
+              evidence_http:$evidence_http,
+              receipt_ready:$receipt_ready,
+              identity_recorded:false,
+              secret_values_recorded:false,
+              awards_vf_points:false
+            }' > evidence/readiness.json
+
+          echo "MODARYX_P6_FOUNDER_ENTRYPOINT loginHttp=$code authRedirect=$auth_redirect evidenceHttp=$ev_code receiptReady=$ev_ready"
+          test "$auth_redirect" = "true"
+          test "$ev_code" = "200"
+
+      - name: Upload Founder entrypoint readiness
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-founder-entrypoint-readiness
+          path: evidence
+          if-no-files-found: error
+          retention-days: 30
