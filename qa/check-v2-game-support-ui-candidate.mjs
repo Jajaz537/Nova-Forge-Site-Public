@@ -38,11 +38,16 @@ assert.equal(calls[1].init.method,"GET");
 assert.equal(calls[1].init.body,undefined);
 
 const app=fs.readFileSync("v2/src/App.jsx","utf8");
-assert.ok(app.includes("https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"));
-assert.ok(app.includes('action="game-support-request"'));
-assert.ok(app.includes("Brouillon de demande — non envoyé"));
-assert.ok(app.includes("Envoyer la demande pour triage"));
-assert.ok(app.includes("Elle reste sans permission éditeur"));
-assert.equal(app.includes('turnstileToken:"test"'),false);
-assert.equal(app.includes('turnstileToken:"demo"'),false);
+const support=fs.readFileSync("v2/src/components/GameSupportRequestPanel.jsx","utf8");
+const ui=app+"\n"+support;
+assert.ok(ui.includes("https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"));
+assert.ok(ui.includes('action="game-support-request"'));
+assert.ok(ui.includes("Brouillon de demande — non envoyé"));
+assert.ok(ui.includes("Envoyer la demande pour triage"));
+assert.ok(ui.includes("Elle reste sans permission éditeur"));
+assert.equal(ui.includes('turnstileToken:"test"'),false);
+assert.equal(ui.includes('turnstileToken:"demo"'),false);
 console.log("PASS_V2_GAME_SUPPORT_UI_CANDIDATE");
+
+assert.ok(app.includes('lazy(()=>import("./components/GameSupportRequestPanel.jsx"))'));
+console.log("PASS_V2_GAME_SUPPORT_UI_CODE_SPLIT");
