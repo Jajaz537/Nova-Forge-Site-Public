@@ -338,6 +338,12 @@
       "contract": "qa/modaryx-v2-performance-candidate-contract.json",
       "checker": "qa/check-v2-performance-candidate-contract.mjs",
       "source": "docs/MODARYX-V2-PERFORMANCE-CANDIDATE-PROOF-20261006.md"
+    },
+    {
+      "id": "backend-client-candidate",
+      "contract": "qa/modaryx-v2-backend-client-contract.json",
+      "checker": "qa/check-v2-backend-client.mjs",
+      "source": "docs/MODARYX-V2-BACKEND-CLIENT-CANDIDATE-20261006.md"
     }
   ],
   "invariants": [

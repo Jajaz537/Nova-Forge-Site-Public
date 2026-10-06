@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./canon-topbar.css";
 import { contentPath, pathForActive, routeStateFromPath } from "./routes.js";
+import { authLoginUrl, logoutAccountSession, resolveAccountRemoteState } from "./api/modaryx-api.js";
 import {
   ArrowRight, Bell, BookOpen, Check, FunnelSimple, GameController, GridFour,
   List, MagnifyingGlass, Plus, SlidersHorizontal, Stack, UsersThree, X
@@ -542,6 +543,8 @@ function AccountCenter({ initialTab="Compte" }) {
   const [onboarding,setOnboarding]=useState(false);
   const [step,setStep]=useState(0);
   const [prefs,setPrefs]=useState({ambience:true,reduced:false,compact:false});
+  const [remoteAccount,setRemoteAccount]=useState({state:"LOADING",loginAvailable:false,profile:null,authority:null});
+  const [accountMessage,setAccountMessage]=useState("");
   const tabs=["Compte","Profil","Confidentialité","Notifications","Apparence","Accessibilité","Données locales"];
   const onboardingSteps=[
     ["Jeux","Choisissez quelques jeux pour contextualiser la découverte. Aucun choix n’est envoyé."],
@@ -550,18 +553,83 @@ function AccountCenter({ initialTab="Compte" }) {
     ["Bibliothèque","Favoris, suivis, Collections, Profils de jeu et recherches restent séparés et privés par défaut."],
   ];
   const setPref=(key)=>setPrefs(current=>({...current,[key]:!current[key]}));
+
+  const refreshRemoteAccount=async()=>{
+    const next=await resolveAccountRemoteState();
+    setRemoteAccount(next);
+    return next;
+  };
+
+  useEffect(()=>{
+    let cancelled=false;
+    resolveAccountRemoteState().then(next=>{if(!cancelled)setRemoteAccount(next);});
+    return ()=>{cancelled=true;};
+  },[]);
+
+  const signIn=()=>{
+    window.location.assign(authLoginUrl("/account"));
+  };
+  const signOut=async()=>{
+    setAccountMessage("Déconnexion…");
+    const result=await logoutAccountSession();
+    if(!result.ok){
+      setAccountMessage("Déconnexion indisponible — aucune session n’a été simulée.");
+      return;
+    }
+    setAccountMessage("Session fermée.");
+    await refreshRemoteAccount();
+  };
+
+  const authenticated=remoteAccount.state==="AUTHENTICATED";
+  const profile=remoteAccount.profile;
+  const accountHeading=authenticated
+    ? `Bonjour ${profile?.displayName || profile?.handle || "membre"}.`
+    : "Vous explorez MODARYX en mode invité.";
+  const sessionLabel=remoteAccount.state==="LOADING"
+    ? "Vérification same-origin…"
+    : authenticated
+      ? `Authentifiée${remoteAccount.authority?.role ? " · "+remoteAccount.authority.role : ""}`
+      : remoteAccount.state==="GUEST"
+        ? "Anonyme · connexion réelle disponible"
+        : "Anonyme · backend réel indisponible";
+
+  const accountPanel=<section className="account-panel">
+    <span className="kicker">Compte</span>
+    <h2>{accountHeading}</h2>
+    <p>{authenticated
+      ? "La session affichée provient du backend MODARYX same-origin. Aucun token fournisseur n’est exposé au navigateur."
+      : "Recherche, jeux, contenus, Collections publiques et profils créateurs restent accessibles sans compte."}</p>
+    <div className="session-state"><strong>Session</strong><span>{sessionLabel}</span></div>
+    <div className="account-actions">
+      {!authenticated&&<button className="primary" onClick={()=>{setOnboarding(true);setStep(0)}}>Découvrir l’onboarding joueur <ArrowRight/></button>}
+      {!authenticated&&<button className="quiet" disabled={!remoteAccount.loginAvailable} onClick={signIn}>{remoteAccount.loginAvailable?"Se connecter avec MODARYX":"Se connecter — backend indisponible"}</button>}
+      {authenticated&&<button className="quiet" onClick={signOut}>Se déconnecter</button>}
+    </div>
+    {accountMessage&&<p className="settings-note" role="status">{accountMessage}</p>}
+    {onboarding&&!authenticated&&<div className="onboarding-card" aria-live="polite"><div><span className="kicker">Onboarding joueur · {step+1}/{onboardingSteps.length}</span><h3>{onboardingSteps[step][0]}</h3><p>{onboardingSteps[step][1]}</p></div><div className="onboarding-actions"><button className="quiet" onClick={()=>setOnboarding(false)}>Passer l’onboarding</button><button className="primary" onClick={()=>step<onboardingSteps.length-1?setStep(step+1):setOnboarding(false)}>{step<onboardingSteps.length-1?"Suivant":"Terminer"}</button></div></div>}
+  </section>;
+
+  const profilePanel=<section className="account-panel">
+    <span className="kicker">Profil public</span>
+    <h2>{profile?.displayName || profile?.handle || "Aucun profil public actif"}</h2>
+    <p>{profile
+      ? `Profil réel chargé depuis la session same-origin · visibilité ${profile.visibility || "non renseignée"}.`
+      : "Compte, profil public et capacité créateur restent trois concepts distincts. Une session réelle sera requise pour publier un profil."}</p>
+    {!profile&&<div className="unavailable-state"><strong>Édition distante indisponible</strong><span>Les changements non sauvegardés ne doivent jamais être perdus lorsque le backend sera connecté.</span></div>}
+    {profile&&<div className="session-state"><strong>@{profile.handle || "profil"}</strong><span>{profile.isCreator?"Créateur":"Profil membre"}</span></div>}
+  </section>;
+
   const panel={
-    "Compte": <section className="account-panel"><span className="kicker">Compte</span><h2>Vous explorez MODARYX en mode invité.</h2><p>Recherche, jeux, contenus, Collections publiques et profils créateurs restent accessibles sans compte.</p><div className="session-state"><strong>Session</strong><span>Anonyme · aucune authentification simulée</span></div><div className="account-actions"><button className="primary" onClick={()=>{setOnboarding(true);setStep(0)}}>Découvrir l’onboarding joueur <ArrowRight/></button><button className="quiet" disabled>Se connecter — backend indisponible</button></div>{onboarding&&<div className="onboarding-card" aria-live="polite"><div><span className="kicker">Onboarding joueur · {step+1}/{onboardingSteps.length}</span><h3>{onboardingSteps[step][0]}</h3><p>{onboardingSteps[step][1]}</p></div><div className="onboarding-actions"><button className="quiet" onClick={()=>setOnboarding(false)}>Passer l’onboarding</button><button className="primary" onClick={()=>step<onboardingSteps.length-1?setStep(step+1):setOnboarding(false)}>{step<onboardingSteps.length-1?"Suivant":"Terminer"}</button></div></div>}</section>,
-    "Profil": <section className="account-panel"><span className="kicker">Profil public</span><h2>Aucun profil public actif</h2><p>Compte, profil public et capacité créateur restent trois concepts distincts. Une session réelle sera requise pour publier un profil.</p><div className="unavailable-state"><strong>Édition distante indisponible</strong><span>Les changements non sauvegardés ne doivent jamais être perdus lorsque le backend sera connecté.</span></div></section>,
+    "Compte": accountPanel,
+    "Profil": profilePanel,
     "Confidentialité": <section className="account-panel"><span className="kicker">Confidentialité</span><h2>Privé par défaut</h2><div className="privacy-grid">{["Bibliothèque","Favoris","Profils de jeu","Brouillons","Recherches enregistrées"].map(value=><article key={value}><strong>{value}</strong><span>Privé / local par défaut</span></article>)}</div><p className="settings-note">Tout partage devra demander une action explicite.</p></section>,
-    "Notifications": <section className="account-panel notifications-center"><span className="kicker">Notifications</span><h2>Centre de notifications</h2><div className="empty notification-empty"><Bell/><h3>Aucune notification réelle</h3><p>Ce prototype n’invente ni compteur, ni événement distant.</p></div><div className="notification-demo-list" aria-label="Aperçu fictif des notifications droits éditeurs"><article><div><span className="demo-label">Démonstration · non reçue</span><strong>Réponse éditeur reçue — Aetherlands</strong><p>Autorisation fictive avec limites : seuls les scopes écrits sont applicables.</p></div><span className="rights-state approved">APPROVED_WITH_LIMITS</span><small>Le futur système ouvrira le Rights Case associé. Aucun événement réel dans ce prototype.</small></article><article><div><span className="demo-label">Démonstration · non reçue</span><strong>Revue juridique requise — Project Meridian</strong><p>Une clause ambiguë a été détectée dans le scénario : aucun scope n’est automatiquement débloqué.</p></div><span className="rights-state pending">LEGAL_REVIEW_REQUIRED</span><small>Le dossier reste bloqué jusqu’à validation appropriée.</small></article></div><div className="channel-grid"><article><strong>In-app</strong><span>Structure prête · aucun événement réel</span></article><article><strong>Email</strong><span>Indisponible — infrastructure non connectée</span></article><article><strong>Push</strong><span>Indisponible — infrastructure non connectée</span></article></div></section>,
+    "Notifications": <section className="account-panel notifications-center"><span className="kicker">Notifications</span><h2>Centre de notifications</h2><div className="empty notification-empty"><Bell/><h3>Aucune notification réelle</h3><p>Le candidat n’invente ni compteur, ni événement distant.</p></div><div className="notification-demo-list" aria-label="Aperçu fictif des notifications droits éditeurs"><article><div><span className="demo-label">Démonstration · non reçue</span><strong>Réponse éditeur reçue — Aetherlands</strong><p>Autorisation fictive avec limites : seuls les scopes écrits sont applicables.</p></div><span className="rights-state approved">APPROVED_WITH_LIMITS</span><small>Le futur système ouvrira le Rights Case associé. Aucun événement réel dans ce candidat.</small></article><article><div><span className="demo-label">Démonstration · non reçue</span><strong>Revue juridique requise — Project Meridian</strong><p>Une clause ambiguë a été détectée dans le scénario : aucun scope n’est automatiquement débloqué.</p></div><span className="rights-state pending">LEGAL_REVIEW_REQUIRED</span><small>Le dossier reste bloqué jusqu’à validation appropriée.</small></article></div><div className="channel-grid"><article><strong>In-app</strong><span>Structure prête · aucun événement réel</span></article><article><strong>Email</strong><span>Indisponible — infrastructure non connectée</span></article><article><strong>Push</strong><span>Indisponible — infrastructure non connectée</span></article></div></section>,
     "Apparence": <section className="account-panel"><span className="kicker">Apparence</span><h2>Préférences locales</h2><div className="settings-list"><button role="switch" aria-checked={prefs.ambience} onClick={()=>setPref("ambience")}><span><strong>Ambiance vivante</strong><small>Préférence locale de démonstration</small></span><em>{prefs.ambience?"Activée":"Désactivée"}</em></button><button role="switch" aria-checked={prefs.compact} onClick={()=>setPref("compact")}><span><strong>Densité compacte</strong><small>Préférence locale de démonstration</small></span><em>{prefs.compact?"Activée":"Désactivée"}</em></button></div></section>,
-    "Accessibilité": <section className="account-panel"><span className="kicker">Accessibilité</span><h2>Accessible sans réglage spécial</h2><p>Les préférences complètent le produit mais ne remplacent jamais un design accessible par défaut.</p><div className="settings-list"><button role="switch" aria-checked={prefs.reduced} onClick={()=>setPref("reduced")}><span><strong>Effets réduits</strong><small>Préférence locale de démonstration</small></span><em>{prefs.reduced?"Activés":"Désactivés"}</em></button></div><div className="accessibility-proof"><strong>Prototype actuel</strong><span>Focus visible 3 px · cibles tactiles ≥44 px · règle prefers-reduced-motion présente.</span></div></section>,
-    "Données locales": <section className="account-panel"><span className="kicker">Données locales</span><h2>Ce navigateur</h2><div className="data-list"><div><strong>Favoris de démonstration</strong><span>Local</span></div><div><strong>Profils de jeu de démonstration</strong><span>Local</span></div><div><strong>Brouillons de démonstration</strong><span>Local</span></div><div><strong>Migration legacy</strong><span>Non exécutée</span></div></div><button className="quiet" disabled>Exporter — fonction réelle non connectée</button></section>,
+    "Accessibilité": <section className="account-panel"><span className="kicker">Accessibilité</span><h2>Accessible sans réglage spécial</h2><p>Les préférences complètent le produit mais ne remplacent jamais un design accessible par défaut.</p><div className="settings-list"><button role="switch" aria-checked={prefs.reduced} onClick={()=>setPref("reduced")}><span><strong>Effets réduits</strong><small>Préférence locale de démonstration</small></span><em>{prefs.reduced?"Activés":"Désactivés"}</em></button></div><div className="accessibility-proof"><strong>Candidat actuel</strong><span>Focus visible 3 px · cibles tactiles ≥44 px · règle prefers-reduced-motion présente.</span></div></section>,
+    "Données locales": <section className="account-panel"><span className="kicker">Données locales</span><h2>Ce navigateur</h2><div className="data-list"><div><strong>Favoris de démonstration</strong><span>Local</span></div><div><strong>Profils de jeu de démonstration</strong><span>Local</span></div><div><strong>Brouillons de démonstration</strong><span>Local</span></div><div><strong>Migration legacy</strong><span>Préservée / contrôlée</span></div></div><button className="quiet" disabled>Exporter — fonction réelle non connectée</button></section>,
   };
   return <main id="main-content" tabIndex="-1" className="page-section account-center"><span className="kicker">Paramètres</span><h1>Compte & préférences</h1><p className="page-intro">Contrôlez session, confidentialité, notifications et données locales sans transformer une capacité absente en promesse.</p><div className="account-shell"><nav className="account-nav" aria-label="Sections du compte">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>{panel[tab]}</div></main>;
 }
-
 
 function RightsDashboard() {
   const [selected,setSelected]=useState("aetherlands");
