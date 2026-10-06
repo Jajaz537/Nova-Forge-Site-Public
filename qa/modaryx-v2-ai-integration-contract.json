@@ -55,11 +55,11 @@
     "forgeAssistant": "NOT_IMPLEMENTED"
   },
   "foundationArtifact": {
-    "version": "0.141",
-    "sha256": "714fe55635fdbdfcf11f69257ec0c4154e797d2ac2a72ea0e75a39dde4359a4d",
+    "version": "0.142",
+    "sha256": "c564142cb77a8cc13ce5ef3dfd1b9c82a0fe0048a87723ec95cd67719eb0d3d1",
     "vfProgress": 83,
     "releaseGate": "PASS",
-    "tests": "392/392",
+    "tests": "396/396",
     "evals": "12/12",
     "realTargetEvidence": {
       "runner": "SD",
@@ -71,9 +71,9 @@
         "version": "0.140",
         "status": "PASS"
       },
-      "modelQualification": "IN_PROGRESS",
+      "modelQualification": "FORMAL_QWEN3_4B_PASS_TARGET_BUNDLE_PENDING",
       "gameImpact": "NOT_RUN",
-      "multimodal": "IN_PROGRESS",
+      "multimodal": "STT_TTS_PASS_VISION_FIX_PENDING",
       "vfCreditApplied": false
     }
   }
