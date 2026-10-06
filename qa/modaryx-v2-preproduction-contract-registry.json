@@ -482,6 +482,12 @@
       "contract": "qa/modaryx-v2-production-readiness-contract.json",
       "checker": "qa/check-v2-production-readiness.mjs",
       "source": "docs/MODARYX-V2-PRODUCTION-READINESS-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "cwv-p75-report-candidate",
+      "contract": "qa/modaryx-v2-cwv-p75-report-contract.json",
+      "checker": "qa/check-v2-cwv-p75-report.mjs",
+      "source": "docs/MODARYX-V2-CWV-P75-REPORT-CANDIDATE-20261006.md"
     }
   ],
   "invariants": [

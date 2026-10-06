@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "P75_AGGREGATION_CANDIDATE_READ_ONLY",
+  "library": "functions/_lib/cwv-rum-report.mjs",
+  "endpoint": "/api/v1/rum/cwv/report",
+  "auth": "ADMIN_CONSOLE_PERMISSION",
+  "defaultWindowDays": 28,
+  "candidateSampleTargetPerMetric": 75,
+  "percentileMethod": "NEAREST_RANK_P75",
+  "productionBlocker": "core-web-vitals-production",
+  "blockerClosedByThisContract": false,
+  "retentionPolicy": "PENDING_EXPLICIT_PRODUCTION_APPROVAL",
+  "invariants": [
+    "READ_ONLY_REPORT",
+    "ADMIN_AUTH_REQUIRED",
+    "NO_ACCOUNT_IDENTITY_IN_SAMPLE_STORAGE",
+    "NO_RAW_URL_QUERY_REFERRER",
+    "NO_IP_USER_AGENT",
+    "P75_REPORT_NEVER_EQUALS_PRODUCTION_PROOF_BY_ITSELF",
+    "SAMPLE_TARGET_IS_CANDIDATE_NOT_CRUX_CERTIFICATION",
+    "PRODUCTION_ORIGIN_PROOF_REQUIRED",
+    "RETENTION_POLICY_APPROVAL_REQUIRED",
+    "REAL_TRAFFIC_REQUIRED",
+    "COLLECTION_REMAINS_DISABLED_BY_DEFAULT",
+    "NO_REMOTE_D1_MIGRATION",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER"
+  ]
+}

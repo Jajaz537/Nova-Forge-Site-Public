@@ -59,18 +59,22 @@ async function navigateHome(width, height) {
   await sleep(300);
 }
 async function clickByText(selector, text) {
-  const ok = await evaluate(`(() => {
-    const target=[...document.querySelectorAll(${JSON.stringify(selector)})]
-      .find(el => {
-        if (el.textContent.trim() !== ${JSON.stringify(text)}) return false;
-        const r=el.getBoundingClientRect(), s=getComputedStyle(el);
-        return s.display!=='none' && s.visibility!=='hidden' && r.width>0 && r.height>0;
-      });
-    if(!target) return false;
-    target.click();
-    return true;
-  })()`);
-  if (!ok) throw new Error("visible target not found: " + selector + " / " + text);
+  let ok=false;
+  for(let attempt=0; attempt<40 && !ok; attempt++){
+    ok = await evaluate(`(() => {
+      const target=[...document.querySelectorAll(${JSON.stringify(selector)})]
+        .find(el => {
+          if (el.textContent.trim() !== ${JSON.stringify(text)}) return false;
+          const r=el.getBoundingClientRect(), s=getComputedStyle(el);
+          return s.display!=='none' && s.visibility!=='hidden' && r.width>0 && r.height>0;
+        });
+      if(!target) return false;
+      target.click();
+      return true;
+    })()`);
+    if(!ok) await sleep(100);
+  }
+  if (!ok) throw new Error("visible target not found after wait: " + selector + " / " + text);
   await sleep(100);
 }
 async function clickByAriaLabel(label) {
