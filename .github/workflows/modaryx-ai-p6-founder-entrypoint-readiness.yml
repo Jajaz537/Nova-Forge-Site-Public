@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
-      DEPLOYMENT_URL: "https://f46f80f0.nova-forge-site-public.pages.dev"
+      DEPLOYMENT_URL: "https://20a4cbd4.nova-forge-site-public.pages.dev"
     steps:
       - name: Verify login redirect and current receipt state
         shell: bash
@@ -64,3 +64,4 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 # replay-trigger: exact-f46f80f0-1791296909667
+# replay-trigger: final-origin-20a4cbd4-1791301960386
