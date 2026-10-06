@@ -41,6 +41,8 @@ jobs:
           code=""
           ok=false
           protocol=""
+          inner_http=""
+          bridge_error=""
 
           for i in $(seq 1 90); do
             deployments="$(curl -fsS "${auth[@]}" --get \
@@ -61,12 +63,12 @@ jobs:
               if [ -n "$target_url" ]; then
                 body="$(mktemp)"
                 code="$(curl -sS -o "$body" -w '%{http_code}' --max-time 20 "${target_url%/}/api/p6/bridge-probe" || true)"
-                if [ "$code" = "200" ]; then
-                  ok="$(jq -r '.ok == true' "$body" 2>/dev/null || echo false)"
-                  protocol="$(jq -r '.protocol // ""' "$body" 2>/dev/null || true)"
-                else
+                ok="$(jq -r '.ok == true' "$body" 2>/dev/null || echo false)"
+                protocol="$(jq -r '.protocol // ""' "$body" 2>/dev/null || true)"
+                inner_http="$(jq -r '.http // ""' "$body" 2>/dev/null || true)"
+                bridge_error="$(jq -r '.bridge_error // ""' "$body" 2>/dev/null || true)"
+                if [ "$code" != "200" ]; then
                   ok=false
-                  protocol=""
                 fi
                 rm -f "$body"
 
@@ -102,6 +104,8 @@ jobs:
             --arg deployment_sha "$target_sha" \
             --arg http "$code" \
             --arg protocol "$protocol" \
+            --arg inner_http "$inner_http" \
+            --arg bridge_error "$bridge_error" \
             --argjson ok "$ok" \
             '{
               schema:$schema,
@@ -112,6 +116,8 @@ jobs:
               http_status:($http|tonumber),
               bridge_ok:$ok,
               protocol:$protocol,
+              inner_http:(if $inner_http=="" then null else ($inner_http|tonumber) end),
+              bridge_error:(if $bridge_error=="" then null else $bridge_error end),
               secret_values_recorded:false,
               founder_bypass:false,
               awards_vf_points:false
@@ -119,7 +125,7 @@ jobs:
 
           if [ "$code" != "200" ] || [ "$ok" != "true" ] || [ "$protocol" != "modaryx-founder-bridge-v1" ]; then
             cat evidence/probe.json
-            echo "MODARYX_P6_SIGNED_BRIDGE_FAIL http=$code ok=$ok protocol=$protocol" >&2
+            echo "MODARYX_P6_SIGNED_BRIDGE_FAIL outer=$code inner=$inner_http ok=$ok protocol=$protocol bridgeError=$bridge_error" >&2
             exit 5
           fi
 
@@ -134,3 +140,4 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 # replay-trigger: p6-synchronized-preview-after-env-20261006-a
+# replay-trigger: safe-inner-bridge-diagnostic-20261006
