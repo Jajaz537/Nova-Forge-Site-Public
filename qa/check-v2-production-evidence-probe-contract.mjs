@@ -10,8 +10,12 @@ const inv=new Set(c.invariants||[]);
 for(const x of [
   "READ_ONLY_HTTP_ONLY","HTTPS_ORIGIN_REQUIRED","NO_MUTATING_METHODS",
   "NO_CUTOVER","NO_FIELD_CWV_CLAIM_FROM_SYNTHETIC_PROBE","NO_PRODUCTION_PASS_FROM_PRE_CUTOVER_PROBE"
+  ,"CWV_READINESS_GET_NEVER_ENABLES_COLLECTION"
 ]) assert.ok(inv.has(x),"missing invariant "+x);
 
+assert.ok(c.endpoints.includes("/api/v1/rum/cwv"),"CWV readiness endpoint missing");
+assert.equal(c.fieldCwv?.collectorProbeMethod,"GET");
+assert.equal(c.fieldCwv?.collectorProbeCanCloseBlocker,false);
 const source=fs.readFileSync("qa/check-v2-production-evidence-origin.mjs","utf8");
 for(const forbidden of ['method:"POST"','method:"PUT"','method:"PATCH"','method:"DELETE"',"credentials:'include'"]) {
   assert.equal(source.includes(forbidden),false,"mutating/credentialed probe code forbidden: "+forbidden);

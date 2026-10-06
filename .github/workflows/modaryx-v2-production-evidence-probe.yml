@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'chatgpt/modaryx-v2-production-evidence-probe-20261006'
+      - 'chatgpt/modaryx-v2-production-probe-rum-20261006'
     paths:
       - '.github/workflows/modaryx-v2-production-evidence-probe.yml'
       - 'qa/modaryx-v2-production-evidence-probe-contract.json'
