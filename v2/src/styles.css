@@ -189,3 +189,58 @@ footer{border-top:1px solid var(--line);min-height:100px;padding:28px 4vw;displa
 .traveler-head,.traveler-cloak,.traveler-arm,.traveler-knee,.traveler-boot{stroke:rgba(255,214,159,.32);stroke-width:1.8}
 .traveler-hair{fill:#03080d}
 .traveler-cloak-fold{fill:none;stroke:rgba(255,214,159,.20);stroke-width:2.2;stroke-linecap:round}
+
+
+/* 2026-10-06 — local season + time + weather lens.
+   This stays intentionally restrained: blue-night remains the canon, violet is
+   secondary, cyan is reserved for actionable/status emphasis. No particle system,
+   GPS prompt or provider dependency is introduced here. */
+.app-shell[data-ambient-state="CONTEXT_READY"] {
+  --ambient-a: rgba(73, 104, 158, .07);
+  --ambient-b: rgba(117, 78, 180, .045);
+  --ambient-c: rgba(0, 0, 0, 0);
+  background:
+    radial-gradient(circle at 86% 9%, var(--ambient-a), transparent 29%),
+    radial-gradient(circle at 13% 31%, var(--ambient-b), transparent 33%),
+    linear-gradient(180deg, transparent, var(--ambient-c)),
+    var(--bg);
+}
+.app-shell[data-ambient-state="CONTEXT_READY"][data-day-phase="night"] {
+  --ambient-a: rgba(61, 105, 178, .10);
+  --ambient-b: rgba(116, 79, 183, .07);
+  --ambient-c: rgba(0, 4, 12, .12);
+}
+.app-shell[data-ambient-state="CONTEXT_READY"][data-day-phase="dawn"],
+.app-shell[data-ambient-state="CONTEXT_READY"][data-day-phase="dusk"] {
+  --ambient-a: rgba(91, 112, 173, .08);
+  --ambient-b: rgba(143, 76, 168, .065);
+}
+.app-shell[data-ambient-state="CONTEXT_READY"][data-season="winter"] {
+  --ambient-a: rgba(101, 159, 196, .09);
+}
+.app-shell[data-ambient-state="CONTEXT_READY"][data-season="summer"] {
+  --ambient-b: rgba(130, 88, 170, .055);
+  --ambient-c: rgba(55, 31, 13, .025);
+}
+.app-shell[data-ambient-state="CONTEXT_READY"][data-season="autumn"] {
+  --ambient-c: rgba(65, 38, 20, .035);
+}
+.app-shell[data-ambient-state="CONTEXT_READY"][data-season="spring"] {
+  --ambient-b: rgba(91, 133, 147, .045);
+}
+.app-shell[data-ambient-state="CONTEXT_READY"][data-weather="rain"],
+.app-shell[data-ambient-state="CONTEXT_READY"][data-weather="storm"] {
+  --ambient-a: rgba(58, 109, 153, .105);
+  --ambient-c: rgba(0, 6, 13, .085);
+}
+.app-shell[data-ambient-state="CONTEXT_READY"][data-weather="snow"] {
+  --ambient-a: rgba(137, 191, 216, .105);
+  --ambient-c: rgba(198, 221, 230, .018);
+}
+.app-shell[data-ambient-state="CONTEXT_READY"][data-weather="fog"] {
+  --ambient-a: rgba(129, 149, 163, .08);
+  --ambient-b: rgba(99, 91, 130, .04);
+}
+.app-shell[data-ambient-state="CONTEXT_READY"][data-weather="clear"][data-day-phase="day"] {
+  --ambient-a: rgba(67, 118, 157, .055);
+}

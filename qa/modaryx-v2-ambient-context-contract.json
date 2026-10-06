@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "IMPLEMENTED_CANDIDATE_PROOF_REQUIRED",
+  "endpoint": "/api/local-context",
+  "client": "v2/src/api/local-context.js",
+  "appSurface": "v2/src/App.jsx",
+  "inputs": [
+    "coarse-edge-timezone",
+    "coarse-climate-band",
+    "local-month",
+    "local-hour",
+    "optional-normalized-weather"
+  ],
+  "seasons": [
+    "winter",
+    "spring",
+    "summer",
+    "autumn",
+    "tropical",
+    "neutral"
+  ],
+  "dayPhases": [
+    "night",
+    "dawn",
+    "day",
+    "dusk",
+    "neutral"
+  ],
+  "weatherConditions": [
+    "off",
+    "clear",
+    "cloud",
+    "partly-cloudy",
+    "rain",
+    "snow",
+    "fog",
+    "storm",
+    "wind"
+  ],
+  "providerActivation": "NOT_CHANGED_BY_THIS_SLICE",
+  "privacy": {
+    "exactCoordinatesReturned": false,
+    "cityReturned": false,
+    "gpsPermissionRequested": false,
+    "browserGeolocationForbidden": true
+  },
+  "behavior": [
+    "SAME_ORIGIN_CONTEXT_ONLY",
+    "SEASON_FROM_CLIMATE_BAND_AND_LOCAL_MONTH",
+    "TIME_FROM_EDGE_TIMEZONE_WHEN_AVAILABLE",
+    "WEATHER_ONLY_WHEN_PROVIDER_RESPONSE_IS_LIVE",
+    "WEATHER_FAILURE_IS_FAIL_SOFT",
+    "ATMOSPHERE_NEVER_BLOCKS_NAVIGATION_OR_CONTENT",
+    "SUBTLE_PRODUCT_LENS_NO_PARTICLE_SYSTEM"
+  ],
+  "invariants": [
+    "NO_NAVIGATOR_GEOLOCATION",
+    "NO_EXACT_LOCATION_IN_CLIENT",
+    "NO_PROVIDER_SECRET_IN_CLIENT",
+    "NO_PROVIDER_ACTIVATION_BY_THIS_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER",
+    "PROVIDERS_CONNECTORS_REAL_BLOCKER_REMAINS_OPEN_UNTIL_ACTIVATED_AND_PROVEN"
+  ]
+}
