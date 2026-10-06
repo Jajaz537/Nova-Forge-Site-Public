@@ -1,0 +1,47 @@
+name: MODARYX V2 Game Support Backend Candidate Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-game-support-backend-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-game-support-backend-proof.yml'
+      - 'migrations/0009_modaryx_v2_game_support_requests.sql'
+      - 'functions/_lib/game-support.mjs'
+      - 'functions/api/v1/game-support/**'
+      - 'qa/modaryx-v2-game-support-request-contract.json'
+      - 'qa/check-v2-game-support-request-contract.mjs'
+      - 'qa/check-v2-game-support-backend.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-game-support-backend-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove member request triage and safe baseline without publisher contact
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate game support backend
+        run: |
+          set -euo pipefail
+          node qa/check-v2-game-support-request-contract.mjs
+          node --experimental-sqlite qa/check-v2-game-support-backend.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+          echo PASS_V2_GAME_SUPPORT_BACKEND_PROOF
+      - name: Mirror Cloudflare root build
+        run: npm run build
