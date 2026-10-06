@@ -92,3 +92,7 @@ export async function getNotificationPreferences(options={}){
 export async function getProviderRegistry(options={}){
   return readJson(API_ROOT+"/providers/status",options);
 }
+
+export async function getDataHistory(options={}){
+  return readJson(API_ROOT+"/history",options);
+}

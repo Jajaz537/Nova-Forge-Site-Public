@@ -380,6 +380,12 @@
       "contract": "qa/modaryx-v2-notifications-preferences-contract.json",
       "checker": "qa/check-v2-moderation-notification-producers.mjs",
       "source": "docs/MODARYX-V2-MODERATION-NOTIFICATION-PRODUCERS-20261006.md"
+    },
+    {
+      "id": "data-history-candidate",
+      "contract": "qa/modaryx-v2-data-history-contract.json",
+      "checker": "qa/check-v2-data-history.mjs",
+      "source": "docs/MODARYX-V2-DATA-HISTORY-CANDIDATE-20261006.md"
     }
   ],
   "invariants": [

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "CANDIDATE_LOCAL_MIGRATION_PROVEN_REMOTE_OPEN",
+  "migration": "migrations/0006_modaryx_v2_data_history.sql",
+  "endpoint": "/api/v1/history",
+  "producers": [
+    "profile-write",
+    "notification-preferences-write"
+  ],
+  "storageMode": "APPEND_ONLY_OWNER_SCOPED",
+  "remoteApplication": "NOT_EXECUTED",
+  "productionBlocker": "real-data-history",
+  "invariants": [
+    "OWNER_SCOPED_READS_ONLY",
+    "HISTORY_APPEND_ONLY",
+    "NO_RAW_IDENTITY_SUB_RETURNED",
+    "NO_SECRET_OR_TOKEN_IN_HISTORY",
+    "CHANGED_FIELDS_NO_VALUES",
+    "DIGEST_SHA256_CHAIN_METADATA",
+    "PROFILE_PRIMARY_WRITE_NOT_ROLLED_BACK_IF_HISTORY_TABLE_ABSENT",
+    "PREFERENCES_PRIMARY_WRITE_NOT_ROLLED_BACK_IF_HISTORY_TABLE_ABSENT",
+    "NO_REMOTE_D1_APPLY",
+    "NO_FAKE_HISTORY",
+    "NO_FIXTURE_TO_PRODUCTION_PROMOTION",
+    "PRODUCTION_BLOCKER_REMAINS_OPEN_UNTIL_REMOTE_PIPELINE_PROVEN"
+  ]
+}

@@ -1,6 +1,7 @@
 import {json,readJson,requireSameOrigin} from '../../../_lib/api-security.mjs';
 import {authenticateRead} from '../../../_lib/remote-write.mjs';
 import {defaultNotificationPreferences,validateNotificationPreferences} from '../../../_lib/notifications.mjs';
+import {recordDataHistory} from '../../../_lib/data-history.mjs';
 
 const shape=row=>row?{
   version:Number(row.version),persisted:true,
@@ -59,6 +60,19 @@ export async function onRequestPut(context){
         rights_enabled=excluded.rights_enabled,marketing_enabled=excluded.marketing_enabled,
         version=excluded.version,updated_at=excluded.updated_at`
     ).bind(auth.identity.sub,p.product?1:0,p.community?1:0,p.creator?1:0,p.profile?1:0,p.rights?1:0,p.marketing?1:0,next,now).run();
+    const changedFields=Object.keys(p).filter(key=>{
+      if(!existing) return true;
+      const column={product:"product_enabled",community:"community_enabled",creator:"creator_enabled",profile:"profile_enabled",rights:"rights_enabled",marketing:"marketing_enabled"}[key];
+      return Boolean(existing[column])!==Boolean(p[key]);
+    });
+    await recordDataHistory(context.env,{
+      ownerIdentitySub:auth.identity.sub,
+      entityKind:"notification-preferences",
+      entityId:"notification-preferences",
+      action:"preferences-updated",
+      changedFields,
+      occurredAt:now
+    });
     return json({schemaVersion:1,...shape(await current(db,auth.identity.sub)),email:{available:false},push:{available:false}});
   }catch{
     return json({error:"notification-preferences-storage-unavailable"},503);
