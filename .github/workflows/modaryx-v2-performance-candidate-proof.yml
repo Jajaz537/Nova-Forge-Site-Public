@@ -1,0 +1,68 @@
+name: MODARYX V2 Performance Candidate Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-performance-candidate-proof-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-performance-candidate-proof.yml'
+      - 'qa/modaryx-v2-performance-candidate-contract.json'
+      - 'qa/check-v2-performance-candidate-contract.mjs'
+      - 'qa/check-v2-performance-candidate-browser.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+      - 'v2/**'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-performance-candidate-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Measure V2 candidate lab performance without claiming field CWV
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate performance and registry contracts
+        run: |
+          set -euo pipefail
+          node qa/check-v2-performance-candidate-contract.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+      - name: Locate Chrome
+        run: |
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+      - name: Build exact V2 root
+        working-directory: v2
+        run: |
+          npm ci
+          npm run build
+      - name: Start candidate
+        working-directory: v2
+        run: |
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4182 >/tmp/modaryx-v2-perf.log 2>&1 &
+          echo $! >/tmp/modaryx-v2-perf.pid
+          for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4182/ >/dev/null && exit 0; sleep 0.25; done
+          cat /tmp/modaryx-v2-perf.log
+          exit 1
+      - name: Measure cold-load and route-response budgets
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4182
+        run: node qa/check-v2-performance-candidate-browser.mjs
+      - name: Cleanup
+        if: always()
+        run: |
+          if test -f /tmp/modaryx-v2-perf.pid; then kill "$(cat /tmp/modaryx-v2-perf.pid)" 2>/dev/null || true; fi

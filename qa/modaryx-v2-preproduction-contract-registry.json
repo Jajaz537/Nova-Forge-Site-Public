@@ -332,6 +332,12 @@
       "contract": "qa/modaryx-v2-pwa-candidate-contract.json",
       "checker": "qa/check-v2-pwa-candidate-contract.mjs",
       "source": "docs/MODARYX-V2-PWA-CANDIDATE-GATE-20261006.md"
+    },
+    {
+      "id": "performance-candidate",
+      "contract": "qa/modaryx-v2-performance-candidate-contract.json",
+      "checker": "qa/check-v2-performance-candidate-contract.mjs",
+      "source": "docs/MODARYX-V2-PERFORMANCE-CANDIDATE-PROOF-20261006.md"
     }
   ],
   "invariants": [
