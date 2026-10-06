@@ -1,0 +1,82 @@
+name: MODARYX V2 Browser Migration Microproof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-browser-migration-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-browser-migration-microproof.yml'
+      - 'qa/check-v2-storage-migration-unit.mjs'
+      - 'qa/check-v2-browser-migration.mjs'
+      - 'qa/modaryx-v2-browser-migration-proof.json'
+      - 'v2-preview/**'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-browser-migration-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  migration:
+    name: Prove non-destructive V1 to V2 browser migration
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Unit proof storage migration
+        run: |
+          set -euo pipefail
+          node qa/check-v2-storage-migration-unit.mjs
+
+      - name: Locate Chrome
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Build preview root
+        working-directory: v2-preview
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+
+      - name: Start isolated preview
+        working-directory: v2-preview
+        run: |
+          set -euo pipefail
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4176 >/tmp/modaryx-v2-migration.log 2>&1 &
+          echo $! >/tmp/modaryx-v2-migration.pid
+          for attempt in {1..60}; do
+            if curl --fail --silent --show-error http://127.0.0.1:4176/ >/dev/null; then exit 0; fi
+            sleep 0.25
+          done
+          cat /tmp/modaryx-v2-migration.log
+          exit 1
+
+      - name: Browser proof fresh legacy offline interrupted rollback
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4176
+        run: |
+          set -euo pipefail
+          node qa/check-v2-browser-migration.mjs
+
+      - name: Stop preview
+        if: always()
+        run: |
+          if test -f /tmp/modaryx-v2-migration.pid; then
+            kill "$(cat /tmp/modaryx-v2-migration.pid)" 2>/dev/null || true
+          fi
