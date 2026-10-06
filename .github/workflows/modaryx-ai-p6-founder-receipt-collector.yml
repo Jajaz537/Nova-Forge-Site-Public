@@ -1,0 +1,95 @@
+name: MODARYX IA P6 Founder receipt collector
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-founder-receipt-collector.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      EVIDENCE_URL: "https://272be97b.nova-forge-site-public.pages.dev/api/p6/evidence"
+    steps:
+      - name: Poll short-lived non-sensitive Founder receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          ready=false
+          for i in $(seq 1 100); do
+            body="$(mktemp)"
+            code="$(curl -sS -o "$body" -w '%{http_code}' --max-time 10 "$EVIDENCE_URL" || true)"
+            if [ "$code" = "200" ] && [ "$(jq -r '.ready == true' "$body" 2>/dev/null || echo false)" = "true" ]; then
+              cp "$body" evidence/founder-receipt.json
+              rm -f "$body"
+              ready=true
+              break
+            fi
+            rm -f "$body"
+            sleep 5
+          done
+
+          if [ "$ready" != "true" ]; then
+            jq -n '{
+              schema:"modaryx-p6-founder-receipt-collector-v1",
+              status:"NOT_RUN",
+              reason:"founder_receipt_not_available",
+              secret_values_recorded:false,
+              awards_vf_points:false
+            }' > evidence/collector.json
+            echo "MODARYX_P6_FOUNDER_RECEIPT_NOT_RUN founder_receipt_not_available"
+            exit 4
+          fi
+
+          receipt="$(jq -c '.receipt' evidence/founder-receipt.json)"
+          schema="$(jq -r '.schema // ""' <<<"$receipt")"
+          overall="$(jq -r '.overall_status // ""' <<<"$receipt")"
+          founder="$(jq -r '.founder_session.status // ""' <<<"$receipt")"
+          private="$(jq -r '.private_status.status // ""' <<<"$receipt")"
+          chat="$(jq -r '.signed_chat.status // ""' <<<"$receipt")"
+          secrets="$(jq -r '.secrets_recorded // true' <<<"$receipt")"
+          identity="$(jq -r '.identity_recorded // true' <<<"$receipt")"
+          chat_content="$(jq -r '.chat_content_recorded // true' <<<"$receipt")"
+
+          test "$schema" = "modaryx-p6-founder-e2e-receipt-v1"
+          test "$overall" = "PASS"
+          test "$founder" = "PASS"
+          test "$private" = "PASS"
+          test "$chat" = "PASS"
+          test "$secrets" = "false"
+          test "$identity" = "false"
+          test "$chat_content" = "false"
+
+          jq -n             --arg schema "modaryx-p6-founder-receipt-collector-v1"             --arg source "$EVIDENCE_URL"             --arg created_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)"             '{
+              schema:$schema,
+              status:"PASS",
+              collected_at:$created_at,
+              evidence_url:$source,
+              founder_session:"PASS",
+              private_status:"PASS",
+              signed_chat:"PASS",
+              public_denial:"ALREADY_PROVEN",
+              browser_secret_absence:"ALREADY_PROVEN",
+              secrets_recorded:false,
+              identity_recorded:false,
+              chat_content_recorded:false,
+              awards_vf_points:false
+            }' > evidence/collector.json
+          echo "MODARYX_P6_FOUNDER_RECEIPT_PASS founder=PASS privateStatus=PASS signedChat=PASS"
+
+      - name: Upload Founder receipt evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-founder-receipt
+          path: evidence
+          if-no-files-found: warn
+          retention-days: 30
