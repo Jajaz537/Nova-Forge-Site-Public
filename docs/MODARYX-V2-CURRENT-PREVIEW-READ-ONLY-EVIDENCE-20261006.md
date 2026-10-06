@@ -4,14 +4,14 @@
 
 ## Cible
 
-- source déployée : `5a8e66f096a1482bb98044b12894c9b615364104`
-- preview Cloudflare exact : `https://ca255dbb.nova-forge-site-public.pages.dev`
+- source déployée : `cbeacc72f8b8d0891ea1de53a580a027fd75ca6e`
+- preview Cloudflare exact : `https://cb360fb9.nova-forge-site-public.pages.dev`
 - Cloudflare Pages : deploy successful sur ce SHA
 - workflow : `MODARYX V2 Current Preview Read-Only Proof`
-- run : `37459818856`
-- job : `112256297554`
+- run : `37482673742`
+- job : `112334605734`
 - mode : `PRE_CUTOVER`
-- méthodes utilisées : GET/HEAD uniquement
+- méthodes utilisées : **GET/HEAD uniquement**
 
 ## Résultat observé
 
@@ -31,9 +31,17 @@ providers.email = NOT_IMPLEMENTED
 providers.push = NOT_IMPLEMENTED
 delivery.email = NOT_IMPLEMENTED
 delivery.push = NOT_IMPLEMENTED
+readiness.status = PRE_CUTOVER_READINESS_ONLY
+readiness.d1SchemaReady = false
+readiness.d1PresentCount = 0
+readiness.backendFoundationReady = true
+readiness.productionPass = false
 historyAnonymousStatus = 401
 serviceWorkerAssetStatus = 404
-fieldCwv = EXTERNAL_EVIDENCE_REQUIRED
+fieldCwv.collectorState = DISABLED
+fieldCwv.explicitlyEnabled = false
+fieldCwv.storageReady = true
+fieldCwv.evidence = EXTERNAL_EVIDENCE_REQUIRED
 ```
 
 Markers :
@@ -45,7 +53,7 @@ Markers :
 Cette preuve confirme que le candidat courant reste honnêtement en PRE_CUTOVER :
 - noindex actif ;
 - backend DEV réel joignable ;
-- D1 joignable ;
+- D1 binding joignable, mais **schéma V2 remote non appliqué** (`presentCount=0`) ;
 - session invitée honnête ;
 - Auth0 et Turnstile configurés ;
 - R2 absent ;
@@ -53,6 +61,7 @@ Cette preuve confirme que le candidat courant reste honnêtement en PRE_CUTOVER 
 - email/push absents ;
 - historique anonyme refusé ;
 - Service Worker production absent ;
-- aucun CWV terrain revendiqué.
+- collecte CWV terrain désactivée ;
+- `productionPass=false`.
 
-Elle ne ferme pas les blockers production correspondants.
+Elle ne ferme aucun blocker production et ne réalise aucune mutation distante.
