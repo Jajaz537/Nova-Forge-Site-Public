@@ -4,10 +4,14 @@ import {providerRegistryState} from "../functions/_lib/provider-registry.mjs";
 
 const c=JSON.parse(fs.readFileSync("qa/modaryx-v2-provider-registry-contract.json","utf8"));
 assert.equal(c.schemaVersion,1);
-assert.equal(c.status,"IMPLEMENTED_CANDIDATE_PROOF_REQUIRED");
+assert.equal(c.status,"IMPLEMENTED_CANDIDATE_PROVIDER_DIRECTION_RECORDED");
 const inv=new Set(c.invariants||[]);
-for(const x of ["NO_SECRET_VALUES_RETURNED","NO_PROVIDER_ACTIVATION_BY_THIS_CHANGE","WEATHER_PROVIDER_SERVER_SIDE_ONLY","EMAIL_PUSH_REMAIN_NOT_IMPLEMENTED","PRODUCTION_APPROVAL_REMAINS_OPEN"]) assert.ok(inv.has(x),"missing invariant "+x);
+for(const x of ["NO_SECRET_VALUES_RETURNED","NO_PROVIDER_ACTIVATION_BY_THIS_CHANGE","WEATHER_PROVIDER_SERVER_SIDE_ONLY","EMAIL_PUSH_DISPATCH_REMAINS_NOT_IMPLEMENTED","TECHNICAL_CANDIDATE_SELECTION_NEVER_EQUALS_PRODUCTION_APPROVAL","PRODUCTION_APPROVAL_REMAINS_OPEN"]) assert.ok(inv.has(x),"missing invariant "+x);
 
+assert.equal(c.notificationProviderCandidates.email.provider,"Cloudflare Email Service");
+assert.equal(c.notificationProviderCandidates.push.provider,"Web Push standard + VAPID");
+assert.match(c.notificationProviderCandidates.email.selectionState,/NOT_PRODUCTION_APPROVED/);
+assert.match(c.notificationProviderCandidates.push.selectionState,/NOT_PRODUCTION_APPROVED/);
 const empty=providerRegistryState({});
 assert.equal(empty.connectors.weather.mode,"off");
 assert.equal(empty.connectors.weather.configured,false);

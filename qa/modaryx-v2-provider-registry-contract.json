@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-06",
-  "status": "IMPLEMENTED_CANDIDATE_PROOF_REQUIRED",
+  "status": "IMPLEMENTED_CANDIDATE_PROVIDER_DIRECTION_RECORDED",
   "endpoint": "/api/v1/providers/status",
   "connectors": [
     "auth",
@@ -17,12 +17,54 @@
     "NO_PROVIDER_ACTIVATION_BY_THIS_CHANGE",
     "NO_BROWSER_GPS",
     "WEATHER_PROVIDER_SERVER_SIDE_ONLY",
-    "EMAIL_PUSH_REMAIN_NOT_IMPLEMENTED",
     "R2_REMAINS_FALSE_WHEN_BINDING_ABSENT",
     "PRODUCTION_APPROVAL_REMAINS_OPEN",
     "NO_MAIN_CHANGE",
     "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
     "NO_CLOUDFLARE_CRITICAL_CHANGE",
-    "NO_CUTOVER"
-  ]
+    "NO_CUTOVER",
+    "EMAIL_PUSH_DISPATCH_REMAINS_NOT_IMPLEMENTED",
+    "TECHNICAL_CANDIDATE_SELECTION_NEVER_EQUALS_PRODUCTION_APPROVAL",
+    "EMAIL_DOMAIN_ONBOARDING_NEVER_RUNS_WITHOUT_EXPLICIT_DNS_APPROVAL",
+    "PUSH_VAPID_KEYS_NEVER_COMMITTED"
+  ],
+  "notificationProviderCandidates": {
+    "email": {
+      "provider": "Cloudflare Email Service",
+      "selectionState": "TECHNICAL_CANDIDATE_NOT_PRODUCTION_APPROVED",
+      "rationale": [
+        "NATIVE_CLOUDFLARE_WORKERS_SEND_BINDING",
+        "EXISTING_CLOUDFLARE_DNS_FIT",
+        "AVOIDS_ADDITIONAL_EMAIL_SDK_IN_RUNTIME"
+      ],
+      "activationRequires": [
+        "EXPLICIT_PROVIDER_APPROVAL",
+        "DOMAIN_ONBOARDING",
+        "DNS_AUTHENTICATION_CHANGES_EXPLICITLY_APPROVED",
+        "REAL_DELIVERY_AND_BOUNCE_PROOF"
+      ],
+      "officialSource": "https://developers.cloudflare.com/email-service/get-started/send-emails/"
+    },
+    "push": {
+      "provider": "Web Push standard + VAPID",
+      "selectionState": "TECHNICAL_CANDIDATE_NOT_PRODUCTION_APPROVED",
+      "rationale": [
+        "REUSES_EXISTING_SERVICE_WORKER",
+        "STANDARD_PUSH_API",
+        "NO_FIREBASE_REQUIRED_FOR_BASELINE",
+        "CLOUDFLARE_WORKERS_CAN_SEND_WITH_WEB_PUSH_LIBRARY"
+      ],
+      "activationRequires": [
+        "EXPLICIT_PROVIDER_APPROVAL",
+        "VAPID_KEYS_SECRET_CONFIGURATION",
+        "USER_OPT_IN",
+        "SUBSCRIPTION_STORAGE_PROOF",
+        "REAL_DEVICE_DELIVERY_AND_REVOCATION_PROOF"
+      ],
+      "officialSources": [
+        "https://developers.cloudflare.com/agents/communication-channels/webhooks/push-notifications/",
+        "https://developer.mozilla.org/en-US/docs/Web/API/Push_API"
+      ]
+    }
+  }
 }

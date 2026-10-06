@@ -29,7 +29,9 @@ assert.deepEqual(cwv.retentionDaysBounds,[7,90]);
 
 const notifications=m.activationUnits.find(x=>x.id==="external-notifications");
 assert.equal(notifications.requiredProviderState,"CONFIGURED_PRODUCTION_APPROVED");
-assert.equal(notifications.state,"BLOCKED_PROVIDER_NOT_SELECTED");
+assert.equal(notifications.state,"BLOCKED_CANDIDATES_SELECTED_NOT_IMPLEMENTED_OR_APPROVED");
+assert.equal(notifications.candidateProviders.email,"Cloudflare Email Service");
+assert.equal(notifications.candidateProviders.push,"Web Push standard + VAPID");
 
 const weather=m.activationUnits.find(x=>x.id==="weather-provider");
 assert.ok(weather.allowedModes.includes("off"));
@@ -65,7 +67,7 @@ assert.equal(retention.minimumDays,7);
 assert.equal(retention.maximumDays,90);
 const delivery=JSON.parse(fs.readFileSync("qa/modaryx-v2-notification-delivery-contract.json","utf8"));
 assert.equal(delivery.dispatchImplementation,"NOT_IMPLEMENTED");
-assert.equal(delivery.providerSelection,"NOT_SELECTED");
+assert.equal(delivery.providerSelection,"TECHNICAL_CANDIDATES_SELECTED_NOT_PRODUCTION_APPROVED");
 const readiness=JSON.parse(fs.readFileSync("qa/modaryx-v2-production-readiness-contract.json","utf8"));
 assert.equal(readiness.productionPass,false);
 assert.equal(readiness.closesNoBlockerByItself,true);

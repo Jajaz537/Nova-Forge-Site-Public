@@ -92,18 +92,25 @@
         "providers-connectors-real",
         "notifications-email-push-real"
       ],
-      "state": "BLOCKED_PROVIDER_NOT_SELECTED",
+      "state": "BLOCKED_CANDIDATES_SELECTED_NOT_IMPLEMENTED_OR_APPROVED",
       "contract": "qa/modaryx-v2-notification-delivery-contract.json",
       "requiredProviderState": "CONFIGURED_PRODUCTION_APPROVED",
       "requiredBeforeProduction": [
-        "EMAIL_PROVIDER_EXPLICITLY_SELECTED_OR_EMAIL_STAYS_DISABLED",
-        "PUSH_PROVIDER_EXPLICITLY_SELECTED_OR_PUSH_STAYS_DISABLED",
+        "EMAIL_PROVIDER_EXPLICITLY_APPROVED_OR_EMAIL_STAYS_DISABLED",
+        "PUSH_PROVIDER_EXPLICITLY_APPROVED_OR_PUSH_STAYS_DISABLED",
+        "EMAIL_DOMAIN_ONBOARDING_AND_DNS_CHANGES_EXPLICITLY_APPROVED_IF_EMAIL_ENABLED",
+        "PUSH_VAPID_SECRET_CONFIGURATION_IF_PUSH_ENABLED",
+        "DISPATCH_IMPLEMENTATION_TARGETED_PROOF",
         "USER_CONSENT_AND_PREFERENCE_PATH_PROVEN",
         "REAL_DELIVERY_TARGETED_PROOF",
         "BOUNCE_UNSUBSCRIBE_RETRY_OR_REVOCATION_PATH_PROVEN_AS_APPLICABLE",
         "EXPLICIT_PRODUCTION_APPROVAL"
       ],
-      "automatic": false
+      "automatic": false,
+      "candidateProviders": {
+        "email": "Cloudflare Email Service",
+        "push": "Web Push standard + VAPID"
+      }
     },
     {
       "id": "pwa-production",
