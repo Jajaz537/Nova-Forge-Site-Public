@@ -1,35 +1,39 @@
 # MODARYX V2 — Handoff Work / opérateur réel — 2026-10-06
 
-**Source exacte : `fc2c3513bde941e0aa9751b987eefa6de3e71643`**  
+**Source canonique : `7464b3bc8e8270737f733047804406a5cce6d48d`**  
+**Candidat runtime re-probé : `ce587af7d138eedf148d5d446cacd8fb6f2235a3`**  
+**Preview exact : `https://371b4eff.nova-forge-site-public.pages.dev`**  
+**Checkpoint : `CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1732.md`**  
 **État : prêt pour exécution externe contrôlée — aucun blocker fermé par ce document**
 
-Le candidat web interne est largement préparé. Les **19 blockers restants** exigent maintenant une réalité externe : appareil, production, provider, éditeur ou revue juridique.
+Le candidat web interne est préparé au maximum sans mutation distante. Les **19 blockers restants** exigent maintenant une réalité externe : appareil, production, provider, éditeur ou revue juridique.
 
-## Ordre d'exécution
+## Ordre d’exécution
 
 1. **Validations appareils réels**
    - NVDA sur Windows réel ;
    - VoiceOver sur Apple réel ;
    - TalkBack sur Android physique ;
    - Safari réel ;
-   - appareils physiques/touch.
+   - appareils physiques/touch ;
    - utiliser `qa/modaryx-v2-external-validation-execution-pack.json`.
 
 2. **Production read-only**
-   - garder `/api/v1/production/readiness` et le probe GET/HEAD verts ;
-   - ne fermer aucun blocker à partir d'un simple preflight.
+   - conserver `/api/v1/production/readiness` et le probe GET/HEAD verts ;
+   - dernier run : `37488293293`, job `112354005071` ;
+   - aucun blocker fermé à partir d’un simple preflight.
 
 3. **D1 DEV contrôlé**
    - cible exacte ;
    - backup/export pré-apply ;
-   - approbation explicite ;
+   - **approbation explicite** ;
    - appliquer le manifeste D1 DEV seulement ensuite ;
    - preuve schéma + historique propriétaire + restauration.
 
 4. **R2 / providers / auth / email-push**
    - uniquement avec sélection/configuration réelle et approbation explicite ;
-   - chaque activation doit avoir sa micro-preuve ;
-   - pas de changement critique Cloudflare implicite.
+   - chaque activation a sa micro-preuve ;
+   - aucun changement critique Cloudflare implicite.
 
 5. **Droits / légal**
    - sources officielles réelles ;
@@ -45,17 +49,17 @@ Le candidat web interne est largement préparé. Les **19 blockers restants** ex
    - LCP/INP/CLS p75.
 
 7. **Cutover en dernier**
-   - seulement lorsque tous les blockers obligatoires sont fermés ;
+   - tous les blockers obligatoires fermés ;
    - rollback fraîchement prouvé ;
    - approbation release explicite.
 
 ## Interdictions
 
 - aucun faux PASS ;
-- aucun écran simulé déclaré « appareil réel » ;
-- aucun navigateur automatisé déclaré « Safari réel » ;
+- aucun écran simulé déclaré appareil réel ;
+- aucun navigateur automatisé déclaré Safari réel ;
 - aucune approbation éditeur/juridique inventée ;
-- aucune migration ou activation distante sans l'autorisation requise ;
+- aucune migration ou activation distante sans autorisation requise ;
 - aucun `main`, DNS/DNSSEC/nameserver ou cutover implicite.
 
 La source machine lisible est `qa/modaryx-v2-work-handoff.json`.

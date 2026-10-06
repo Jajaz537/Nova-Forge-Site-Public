@@ -2,7 +2,14 @@
 
 **État : PRÊT À EXÉCUTER / aucune validation externe ajoutée**
 
-Ce pack cible exactement les cinq blockers encore impossibles à fermer honnêtement depuis l’automatisation :
+Candidat réellement re-probé :
+- source runtime : `ce587af7d138eedf148d5d446cacd8fb6f2235a3`
+- preview exact : `https://371b4eff.nova-forge-site-public.pages.dev`
+- run read-only : `37488293293`
+- job : `112354005071`
+- checkpoint : `CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1732.md`
+
+Ce pack cible exactement les cinq blockers impossibles à fermer honnêtement depuis l’automatisation :
 - NVDA réel ;
 - VoiceOver réel ;
 - TalkBack réel ;
@@ -24,11 +31,7 @@ Le checker refuse :
 - un P0/P1 encore OPEN ;
 - un résultat INCOMPLETE.
 
-## Important
-
 Une même personne peut exécuter plusieurs sessions, mais chaque blocker conserve sa propre preuve.
-Safari + VoiceOver peuvent être testés dans le même créneau réel, mais doivent produire deux enregistrements distincts.
+Safari + VoiceOver peuvent être testés dans le même créneau réel, avec deux enregistrements distincts.
 
 Aucune émulation Chrome, arbre AX/CDP, user-agent Safari ou viewport mobile ne ferme ces blockers.
-
-Le pack ne collecte aucune donnée personnelle nécessairement identifiable : utiliser des identifiants opérateur/reviewer opaques.

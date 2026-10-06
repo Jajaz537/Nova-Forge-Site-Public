@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-06",
   "status": "READY_FOR_WORK_OR_REAL_OPERATOR",
-  "sourceCommit": "fc2c3513bde941e0aa9751b987eefa6de3e71643",
+  "sourceCommit": "7464b3bc8e8270737f733047804406a5cce6d48d",
   "targetBranch": "design/modaryx-v2-blue-violet-product-20261005",
   "blockerCount": 19,
   "blockers": [
@@ -280,5 +280,13 @@
     "NO_CUTOVER_UNTIL_ALL_REQUIRED_BLOCKERS_CLOSED",
     "WORK_BROWSER_NEVER_EQUALS_REAL_SAFARI_OR_PHYSICAL_DEVICE_UNLESS_EXECUTED_ON_THAT_REAL_TARGET",
     "AUTOMATION_NEVER_EQUALS_LEGAL_OR_PUBLISHER_APPROVAL"
-  ]
+  ],
+  "testedCandidateCommit": "ce587af7d138eedf148d5d446cacd8fb6f2235a3",
+  "latestCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1732.md",
+  "latestReadOnlyProbe": {
+    "runId": 37488293293,
+    "jobId": 112354005071,
+    "previewOrigin": "https://371b4eff.nova-forge-site-public.pages.dev",
+    "state": "SUCCESS"
+  }
 }
