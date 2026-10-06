@@ -319,7 +319,7 @@ try {
     ["Confidentialité","desktop-account-privacy.png","Privé par défaut"],
     ["Apparence","desktop-account-appearance.png","Préférences locales"],
     ["Accessibilité","desktop-account-accessibility.png","Accessible sans réglage spécial"],
-    ["Données locales","desktop-account-local-data.png","Ce navigateur"],
+    ["Données locales","desktop-account-local-data.png","Local + historique serveur"],
   ]) {
     await clickByText(".account-nav button", tabName);
     manifest.captures.push(await capture(file, 1440, 1024, expected));
