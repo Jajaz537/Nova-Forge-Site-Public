@@ -1,0 +1,284 @@
+name: MODARYX V2 Controlled D1 DEV Apply
+
+on:
+  push:
+    branches:
+      - 'ops/modaryx-v2-d1-dev-controlled-20261007'
+    paths:
+      - '.github/workflows/modaryx-v2-d1-dev-controlled-apply.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-d1-dev-controlled-apply
+  cancel-in-progress: false
+
+env:
+  CLOUDFLARE_ZONE_NAME: modaryxmods.com
+  CLOUDFLARE_PROJECT_NAME: nova-forge-site-public
+  EXPECTED_SOURCE_SHA: 128add6e1b39aa072d300befed6641cd16bfef5f
+  EXPECTED_TARGET_ID_SHA256: 6b7632ab913b02ba55b35a024401d432749116ff4f82adf76dd275f8be244eba
+  EXPECTED_MIGRATION_COUNT: "15"
+  EXPECTED_V2_TABLE_COUNT: "32"
+  CANONICAL_PREVIEW_ORIGIN: https://1912f10b.nova-forge-site-public.pages.dev
+
+jobs:
+  apply:
+    name: Backup, apply migrations to exact preview D1, and prove schema
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+    steps:
+      - name: Checkout exact approved canonical source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: 128add6e1b39aa072d300befed6641cd16bfef5f
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Verify manifest and migration chain locally
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SOURCE_SHA"
+          node --experimental-sqlite qa/check-v2-d1-migration-execution-manifest.mjs
+          count="$(jq '.sequence | length' qa/modaryx-v2-d1-migration-execution-manifest.json)"
+          tables="$(jq -r '.expectedCurrentV2TableCount' qa/modaryx-v2-d1-migration-execution-manifest.json)"
+          test "$count" = "$EXPECTED_MIGRATION_COUNT"
+          test "$tables" = "$EXPECTED_V2_TABLE_COUNT"
+          test "$(jq -r '.applyPolicy.remoteDev' qa/modaryx-v2-d1-migration-execution-manifest.json)" = "EXPLICIT_MANUAL_ONLY"
+          test "$(jq -r '.applyPolicy.remoteProduction' qa/modaryx-v2-d1-migration-execution-manifest.json)" = "BLOCKED_UNTIL_DEV_PROOF_AND_EXPLICIT_APPROVAL"
+          echo "LOCAL_MANIFEST_PROOF=success"
+
+      - name: Resolve exact Pages preview D1 target and prove production binding absent
+        id: target
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${CLOUDFLARE_API_TOKEN:-}"
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}")"
+          test "$(jq -r '.success' <<<"$zones")" = "true"
+          test "$(jq '.result | length' <<<"$zones")" -eq 1
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          test -n "$account_id"
+
+          project="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${CLOUDFLARE_PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$project")" = "true"
+          test "$(jq -r '.result.production_branch' <<<"$project")" = "main"
+
+          preview_id="$(jq -r '.result.deployment_configs.preview.d1_databases.MODARYX_DB.id // empty' <<<"$project")"
+          production_id="$(jq -r '.result.deployment_configs.production.d1_databases.MODARYX_DB.id // empty' <<<"$project")"
+          test -n "$preview_id"
+          test -z "$production_id"
+
+          target_hash="$(printf '%s' "$preview_id" | sha256sum | awk '{print $1}')"
+          test "$target_hash" = "$EXPECTED_TARGET_ID_SHA256"
+
+          echo "::add-mask::$account_id"
+          echo "::add-mask::$preview_id"
+          echo "CLOUDFLARE_ACCOUNT_ID=$account_id" >> "$GITHUB_ENV"
+          echo "MODARYX_D1_DEV_ID=$preview_id" >> "$GITHUB_ENV"
+          echo "TARGET_ID_SHA256=$target_hash"
+          echo "PRODUCTION_D1_BINDING=ABSENT"
+          echo "EXACT_PREVIEW_TARGET=VERIFIED"
+
+      - name: Require D1 metadata permission and production storage backend
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+          tmp="$(mktemp)"
+          status="$(curl -sS -o "$tmp" -w '%{http_code}' "${auth[@]}" "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/d1/database/${MODARYX_D1_DEV_ID}")"
+          if [ "$status" != "200" ]; then
+            echo "D1_METADATA_HTTP_STATUS=$status"
+            jq '{success,errors}' "$tmp" || cat "$tmp"
+            echo "BLOCKED_D1_SCOPE_OR_ACCESS"
+            exit 41
+          fi
+          test "$(jq -r '.success' "$tmp")" = "true"
+          db_id="$(jq -r '.result.uuid' "$tmp")"
+          db_name="$(jq -r '.result.name' "$tmp")"
+          db_version="$(jq -r '.result.version' "$tmp")"
+          test "$db_id" = "$MODARYX_D1_DEV_ID"
+          test -n "$db_name"
+          test "$db_name" != "null"
+          test "$db_version" = "production"
+
+          echo "::add-mask::$db_name"
+          echo "MODARYX_D1_DEV_NAME=$db_name" >> "$GITHUB_ENV"
+          echo "D1_METADATA_PERMISSION=OK"
+          echo "D1_STORAGE_VERSION=production"
+
+      - name: Build ephemeral Wrangler config for exact DEV database
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -n             --arg name "modaryx-v2-controlled-dev-migration"             --arg dbname "$MODARYX_D1_DEV_NAME"             --arg dbid "$MODARYX_D1_DEV_ID"             '{
+              name:$name,
+              compatibility_date:"2026-10-07",
+              d1_databases:[{
+                binding:"MODARYX_DB",
+                database_name:$dbname,
+                database_id:$dbid,
+                migrations_dir:"migrations"
+              }]
+            }' > /tmp/modaryx-d1-dev-wrangler.json
+          chmod 600 /tmp/modaryx-d1-dev-wrangler.json
+          echo "EPHEMERAL_WRANGLER_CONFIG=READY"
+
+      - name: Capture pre-apply Time Travel restore point
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+          pre_ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          bookmark_json="$(curl -fsS "${auth[@]}" "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/d1/database/${MODARYX_D1_DEV_ID}/time_travel/bookmark")"
+          test "$(jq -r '.success' <<<"$bookmark_json")" = "true"
+          bookmark="$(jq -r '.result.bookmark' <<<"$bookmark_json")"
+          test -n "$bookmark"
+          test "$bookmark" != "null"
+          bookmark_hash="$(printf '%s' "$bookmark" | sha256sum | awk '{print $1}')"
+          echo "::add-mask::$bookmark"
+          echo "PRE_APPLY_TIMESTAMP=$pre_ts" >> "$GITHUB_ENV"
+          echo "PRE_APPLY_BOOKMARK=$bookmark" >> "$GITHUB_ENV"
+          echo "PRE_APPLY_BOOKMARK_SHA256=$bookmark_hash" >> "$GITHUB_ENV"
+          echo "PRE_APPLY_TIMESTAMP=$pre_ts"
+          echo "PRE_APPLY_BOOKMARK_SHA256=$bookmark_hash"
+          echo "TIME_TRAVEL_RESTORE_POINT=VERIFIED"
+
+      - name: Export exact remote DEV database before apply
+        shell: bash
+        run: |
+          set -euo pipefail
+          export CLOUDFLARE_ACCOUNT_ID
+          out="/tmp/modaryx-d1-dev-preapply.sql"
+          npx --yes wrangler@4 d1 export MODARYX_DB             --remote             --output="$out"             --skip-confirmation             --config=/tmp/modaryx-d1-dev-wrangler.json
+          test -s "$out"
+          chmod 600 "$out"
+          export_hash="$(sha256sum "$out" | awk '{print $1}')"
+          export_bytes="$(wc -c < "$out" | tr -d ' ')"
+          echo "PRE_APPLY_EXPORT_SHA256=$export_hash" >> "$GITHUB_ENV"
+          echo "PRE_APPLY_EXPORT_BYTES=$export_bytes" >> "$GITHUB_ENV"
+          echo "PRE_APPLY_EXPORT_SHA256=$export_hash"
+          echo "PRE_APPLY_EXPORT_BYTES=$export_bytes"
+          echo "PRE_APPLY_EXPORT=SUCCESS"
+          # Deliberately do not upload the raw export from this public repository.
+
+      - name: List unapplied migrations before mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          export CLOUDFLARE_ACCOUNT_ID
+          npx --yes wrangler@4 d1 migrations list MODARYX_DB             --remote             --config=/tmp/modaryx-d1-dev-wrangler.json | tee /tmp/migrations-before.txt
+          echo "PRE_APPLY_MIGRATION_LIST=CAPTURED"
+
+      - name: Apply approved migration chain to exact D1 DEV target
+        shell: bash
+        run: |
+          set -euo pipefail
+          export CLOUDFLARE_ACCOUNT_ID
+          npx --yes wrangler@4 d1 migrations apply MODARYX_DB             --remote             --config=/tmp/modaryx-d1-dev-wrangler.json | tee /tmp/migrations-apply.txt
+          echo "D1_DEV_REMOTE_APPLY=SUCCESS"
+
+      - name: Prove all migrations applied and required schema exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          export CLOUDFLARE_ACCOUNT_ID
+
+          after="$(npx --yes wrangler@4 d1 migrations list MODARYX_DB             --remote             --config=/tmp/modaryx-d1-dev-wrangler.json)"
+          printf '%s\n' "$after"
+          if grep -Eq '000[1-9]_modaryx|001[0-5]_modaryx' <<<"$after"; then
+            echo "UNAPPLIED_MIGRATION_REMAINS"
+            exit 1
+          fi
+
+          sql="SELECT COUNT(*) AS present_count FROM sqlite_master WHERE type='table' AND name IN (
+            'modaryx_v2_games','modaryx_v2_content_types','modaryx_v2_creators','modaryx_v2_teams',
+            'modaryx_v2_content_items','modaryx_v2_releases','modaryx_v2_dependencies','modaryx_v2_compatibility_claims',
+            'modaryx_v2_file_artifacts','modaryx_v2_collections','modaryx_v2_collection_items','modaryx_v2_modpacks',
+            'modaryx_v2_game_profiles','modaryx_v2_search_documents','modaryx_v2_notification_events',
+            'modaryx_v2_notification_preferences','modaryx_v2_data_history','modaryx_v2_notification_delivery_outbox',
+            'modaryx_v2_notification_destinations','modaryx_v2_rights_cases','modaryx_v2_rights_scope_decisions',
+            'modaryx_v2_rights_audit','modaryx_v2_game_support_requests','modaryx_v2_game_support_records',
+            'modaryx_v2_rights_contact_evidence','modaryx_v2_rights_response_evidence','modaryx_v2_rights_license_preflight',
+            'modaryx_v2_rights_contact_suppressions','modaryx_v2_publisher_outbound_requests',
+            'modaryx_v2_publisher_inbound_envelopes','modaryx_v2_rights_authorizing_reviews','modaryx_v2_cwv_samples'
+          );"
+          result="$(npx --yes wrangler@4 d1 execute MODARYX_DB             --remote             --command="$sql"             --json             --config=/tmp/modaryx-d1-dev-wrangler.json)"
+          present="$(jq -r '.[0].results[0].present_count // .[0].result[0].results[0].present_count // empty' <<<"$result")"
+          test "$present" = "$EXPECTED_V2_TABLE_COUNT"
+          echo "POST_APPLY_V2_TABLE_COUNT=$present"
+          echo "POST_APPLY_SCHEMA=SUCCESS"
+
+      - name: Prove canonical preview backend now sees the remote schema
+        shell: bash
+        run: |
+          set -euo pipefail
+          body=""
+          for attempt in $(seq 1 12); do
+            if body="$(curl -fsS --max-time 20 "$CANONICAL_PREVIEW_ORIGIN/api/v1/production/readiness")"; then
+              present="$(jq -r '.technical.d1Schema.presentCount // 0' <<<"$body")"
+              ready="$(jq -r '.technical.d1Schema.ready // false' <<<"$body")"
+              if [ "$present" = "$EXPECTED_V2_TABLE_COUNT" ] && [ "$ready" = "true" ]; then
+                break
+              fi
+            fi
+            sleep 5
+          done
+          test "$(jq -r '.productionPass' <<<"$body")" = "false"
+          test "$(jq -r '.technical.d1Schema.presentCount' <<<"$body")" = "$EXPECTED_V2_TABLE_COUNT"
+          test "$(jq -r '.technical.d1Schema.ready' <<<"$body")" = "true"
+          echo "BACKEND_READ_ONLY_D1_SCHEMA=SUCCESS"
+          echo "PRODUCTION_PASS_REMAINS_FALSE=yes"
+
+      - name: Seal non-sensitive controlled DEV receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/modaryx-d1-receipt
+          jq -n             --arg source "$EXPECTED_SOURCE_SHA"             --arg target_hash "$EXPECTED_TARGET_ID_SHA256"             --arg pre_ts "$PRE_APPLY_TIMESTAMP"             --arg bookmark_hash "$PRE_APPLY_BOOKMARK_SHA256"             --arg export_hash "$PRE_APPLY_EXPORT_SHA256"             --arg export_bytes "$PRE_APPLY_EXPORT_BYTES"             --arg migration_count "$EXPECTED_MIGRATION_COUNT"             --arg table_count "$EXPECTED_V2_TABLE_COUNT"             '{
+              schemaVersion:1,
+              status:"DEV_REMOTE_APPLY_SUCCESS",
+              sourceCommit:$source,
+              targetIdSha256:$target_hash,
+              preApplyTimestamp:$pre_ts,
+              preApplyBookmarkSha256:$bookmark_hash,
+              preApplyExportSha256:$export_hash,
+              preApplyExportBytes:($export_bytes|tonumber),
+              migrationCount:($migration_count|tonumber),
+              requiredV2TableCount:($table_count|tonumber),
+              postApplySchemaReady:true,
+              productionPass:false,
+              rawDatabaseIdIncluded:false,
+              rawDatabaseNameIncluded:false,
+              rawBackupIncluded:false,
+              productionBindingMutated:false,
+              dnsChanged:false,
+              cutover:false
+            }' > /tmp/modaryx-d1-receipt/receipt.json
+          cat /tmp/modaryx-d1-receipt/receipt.json
+          echo "PASS_MODARYX_V2_CONTROLLED_D1_DEV_APPLY"
+
+      - name: Upload non-sensitive receipt only
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: modaryx-v2-controlled-d1-dev-apply-receipt
+          path: /tmp/modaryx-d1-receipt/receipt.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Remove sensitive ephemeral files
+        if: always()
+        shell: bash
+        run: |
+          rm -f /tmp/modaryx-d1-dev-preapply.sql /tmp/modaryx-d1-dev-wrangler.json
