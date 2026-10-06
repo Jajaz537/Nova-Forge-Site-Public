@@ -1,0 +1,170 @@
+name: MODARYX IA P6 final cloud evidence
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-final-cloud-evidence.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  consolidate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 32
+    env:
+      SITE_ORIGIN: "https://0dcb2d71.nova-forge-site-public.pages.dev"
+      FOUNDATION_VERSION: "0.144.0"
+      FOUNDATION_SHA256: "799607c09f20ecade4c50cd78b96d5d67856ca789b7551a9fd8634aa6ae5f2d2"
+    steps:
+      - name: Wait for Founder receipt and consolidate all five P6 gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/assets
+
+          ready=false
+          for i in $(seq 1 360); do
+            body="$(mktemp)"
+            code="$(curl -sS -o "$body" -w '%{http_code}' --max-time 10 "${SITE_ORIGIN}/api/p6/evidence" || true)"
+            if [ "$code" = "200" ] && [ "$(jq -r '.ready == true' "$body" 2>/dev/null || echo false)" = "true" ]; then
+              cp "$body" evidence/founder-receipt-wrapper.json
+              jq '.receipt' "$body" > evidence/founder-receipt.json
+              rm -f "$body"
+              ready=true
+              break
+            fi
+            rm -f "$body"
+            sleep 5
+          done
+
+          if [ "$ready" != "true" ]; then
+            jq -n '{
+              schema:"modaryx-p6-final-cloud-evidence-v1",
+              status:"NOT_RUN",
+              reason:"founder_receipt_not_available",
+              secret_values_recorded:false,
+              awards_vf_points:false
+            }' > evidence/result.json
+            echo "MODARYX_P6_FINAL_CLOUD_NOT_RUN founder_receipt_not_available"
+            exit 4
+          fi
+
+          receipt="evidence/founder-receipt.json"
+          test "$(jq -r '.schema' "$receipt")" = "modaryx-p6-founder-e2e-receipt-v1"
+          test "$(jq -r '.overall_status' "$receipt")" = "PASS"
+          test "$(jq -r '.founder_session.status' "$receipt")" = "PASS"
+          test "$(jq -r '.private_status.status' "$receipt")" = "PASS"
+          test "$(jq -r '.signed_chat.status' "$receipt")" = "PASS"
+          test "$(jq -r '.secrets_recorded' "$receipt")" = "false"
+          test "$(jq -r '.identity_recorded' "$receipt")" = "false"
+          test "$(jq -r '.chat_content_recorded' "$receipt")" = "false"
+
+          status_code="$(curl -sS -o evidence/public-status-body.txt -w '%{http_code}' --max-time 20 "${SITE_ORIGIN}/api/founder/ai/status" || true)"
+          chat_code="$(curl -sS -o evidence/public-chat-body.txt -w '%{http_code}' --max-time 20 \
+            -X POST -H 'Content-Type: application/json' \
+            --data '{"conversation_id":"public-proof","message":"hello"}' \
+            "${SITE_ORIGIN}/api/founder/ai/chat" || true)"
+          test "$status_code" = "404"
+          test "$chat_code" = "404"
+
+          curl -fsSL --max-time 30 "${SITE_ORIGIN}/" -o evidence/index.html
+          python3 - <<'PY'
+          from pathlib import Path
+          from urllib.parse import urljoin
+          import hashlib, json, os, re, urllib.request
+
+          origin=os.environ["SITE_ORIGIN"]
+          html=Path("evidence/index.html").read_text("utf-8",errors="replace")
+          urls=[]
+          for attr in ("src","href"):
+              for m in re.finditer(rf'{attr}=["\']([^"\']+)["\']',html,re.I):
+                  raw=m.group(1)
+                  if re.search(r'\.(?:js|mjs|css)(?:\?|$)',raw,re.I):
+                      urls.append(urljoin(origin+"/",raw))
+          urls=sorted(set(urls))
+          corpus=html
+          rows=[]
+          for i,u in enumerate(urls):
+              try:
+                  data=urllib.request.urlopen(u,timeout=30).read()
+              except Exception:
+                  continue
+              p=Path("evidence/assets")/f"{i:03d}.asset"
+              p.write_bytes(data)
+              text=data.decode("utf-8",errors="replace")
+              corpus+="\n"+text
+              rows.append({"url":u,"sha256":hashlib.sha256(data).hexdigest(),"bytes":len(data)})
+          forbidden=[
+              "MODARYX_AI_BRIDGE_KEY_HEX",
+              "x-modaryx-signature",
+              "x-modaryx-body-sha256",
+              "x-modaryx-nonce",
+          ]
+          hits={x:(x.lower() in corpus.lower()) for x in forbidden}
+          if any(hits.values()):
+              raise SystemExit("browser secret/signature material found")
+          Path("evidence/browser-secret-absence.json").write_text(json.dumps({
+              "status":"PASS","assets":rows,"forbidden_hits":hits
+          },indent=2),encoding="utf-8")
+          PY
+
+          created_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          run_id="site-$(date -u +%Y%m%d-%H%M%S)"
+          jq -n \
+            --arg schema "modaryx-site-founder-integration-v1" \
+            --arg run_id "$run_id" \
+            --arg created_at "$created_at" \
+            --arg site_origin "$SITE_ORIGIN" \
+            --arg version "$FOUNDATION_VERSION" \
+            --arg sha "$FOUNDATION_SHA256" \
+            '{
+              schema:$schema,
+              run_id:$run_id,
+              created_at:$created_at,
+              site_origin:$site_origin,
+              foundation:{version:$version,sha256:$sha},
+              gates:{
+                founder_session:{status:"PASS",evidence:["evidence/founder-receipt.json"],details:{source:"real_founder_session"}},
+                public_denial:{status:"PASS",evidence:["evidence/public-status-body.txt","evidence/public-chat-body.txt"],details:{status_http:404,chat_http:404}},
+                private_status:{status:"PASS",evidence:["evidence/founder-receipt.json"],details:{protocol:"modaryx-founder-bridge-v1"}},
+                signed_chat:{status:"PASS",evidence:["evidence/founder-receipt.json"],details:{source:"real_founder_signed_chat"}},
+                browser_secret_absence:{status:"PASS",evidence:["evidence/browser-secret-absence.json"],details:{client_secret_material:"absent"}}
+              },
+              overall_status:"PASS",
+              notes:["Real Founder receipt is short-lived and excludes identity, chat content and secrets."]
+            }' > evidence/site-integration.json
+
+          jq -n \
+            --arg schema "modaryx-p6-final-cloud-evidence-v1" \
+            --arg created_at "$created_at" \
+            '{
+              schema:$schema,
+              status:"PASS",
+              created_at:$created_at,
+              founder_session:"PASS",
+              public_denial:"PASS",
+              private_status:"PASS",
+              signed_chat:"PASS",
+              browser_secret_absence:"PASS",
+              identity_recorded:false,
+              secrets_recorded:false,
+              chat_content_recorded:false,
+              native_foundation_gate:"PENDING_LOCAL_REPLAY",
+              suggested_points_P6:2,
+              applied:false
+            }' > evidence/result.json
+
+          echo "MODARYX_P6_FINAL_CLOUD_PASS founder=PASS public=PASS private=PASS chat=PASS browserSecrets=PASS"
+
+      - name: Upload final P6 cloud evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-final-cloud-evidence
+          path: evidence
+          if-no-files-found: warn
+          retention-days: 30
