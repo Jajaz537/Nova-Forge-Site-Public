@@ -88,3 +88,7 @@ export async function markNotificationRead(id,options={}){
 export async function getNotificationPreferences(options={}){
   return readJson(API_ROOT+"/notifications/preferences",options);
 }
+
+export async function getProviderRegistry(options={}){
+  return readJson(API_ROOT+"/providers/status",options);
+}

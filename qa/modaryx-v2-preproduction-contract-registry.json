@@ -368,6 +368,12 @@
       "contract": "qa/modaryx-v2-notifications-preferences-contract.json",
       "checker": "qa/check-v2-notifications-inapp-candidate.mjs",
       "source": "docs/MODARYX-V2-NOTIFICATIONS-INAPP-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "provider-registry-candidate",
+      "contract": "qa/modaryx-v2-provider-registry-contract.json",
+      "checker": "qa/check-v2-provider-registry.mjs",
+      "source": "docs/MODARYX-V2-PROVIDER-REGISTRY-CANDIDATE-20261006.md"
     }
   ],
   "invariants": [
