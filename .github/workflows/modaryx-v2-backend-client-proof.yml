@@ -39,6 +39,13 @@ jobs:
           set -euo pipefail
           node qa/check-v2-backend-client.mjs
           node qa/check-v2-preproduction-contract-registry.mjs
+      - name: Locate Chrome
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
       - name: Build exact V2 root
         working-directory: v2
         run: |
