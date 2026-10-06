@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 32
     env:
-      SITE_ORIGIN: "https://0dcb2d71.nova-forge-site-public.pages.dev"
+      SITE_ORIGIN: "https://6e1cc217.nova-forge-site-public.pages.dev"
       FOUNDATION_VERSION: "0.144.0"
       FOUNDATION_SHA256: "799607c09f20ecade4c50cd78b96d5d67856ca789b7551a9fd8634aa6ae5f2d2"
     steps:
@@ -168,3 +168,4 @@ jobs:
           path: evidence
           if-no-files-found: warn
           retention-days: 30
+# replay-trigger: fresh-sync-6e1cc217-20261006
