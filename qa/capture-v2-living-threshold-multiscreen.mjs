@@ -273,16 +273,21 @@ try {
   await clickByText(".global-nav button", "Communauté");
   manifest.captures.push(await capture("desktop-community.png", 1440, 1024, "Des échanges utiles autour des créations"));
 
-  await clickByText("footer button", "Notifications");
+  await clickByAriaLabel("Compte");
+  await clickByText(".account-nav button", "Notifications");
   manifest.captures.push(await capture("desktop-notifications.png", 1440, 1024, "Centre de notifications"));
   await evaluate("document.querySelector('.notification-demo-list')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("desktop-rights-notification-preview.png", 1440, 1024, "Réponse éditeur reçue — Aetherlands"));
 
-  await clickByAriaLabel("Compte");
+  await clickByText(".account-nav button", "Compte");
   manifest.captures.push(await capture("desktop-account.png", 1440, 1024, "Vous explorez MODARYX en mode invité"));
 
-  await clickByText("footer button", "MODARYX IA");
+  await setViewport(390, 844);
+  await clickByAriaLabel("Ouvrir le menu");
+  await clickByText(".mobile-nav-utility", "MODARYX IA");
+  await setViewport(1440, 1024);
+  await sleep(120);
   manifest.captures.push(await capture("desktop-modaryx-ai.png", 1440, 1024, "MODARYX IA n’est pas active dans cette démo."));
 
   await clickByText("footer button", "Confiance & légal");
