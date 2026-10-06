@@ -262,6 +262,7 @@ try {
   manifest.captures.push(await capture("desktop-library-history.png", 1440, 1024, "Aucun historique réel disponible"));
   await clickByText(".library-tabs button", "Profils de jeu");
   await clickByText(".profile-library article:first-child .quiet", "Ouvrir");
+  manifest.captures.push(await capture("desktop-game-profile.png", 1440, 1024, "Manager non connecté"));
   await clickByText(".profile-preview-actions .quiet", "Prévisualiser une mise à jour");
   manifest.captures.push(await capture("desktop-game-profile-delta.png", 1440, 1024, "Copie avant promotion"));
   await clickByText(".profile-preview-actions .quiet", "Prévisualiser import / export");
@@ -351,16 +352,27 @@ try {
   // Mobile states
   await navigateHome(390, 844);
   manifest.captures.push(await capture("mobile-game-hub.png", 390, 844, "Mes profils pour ce jeu"));
+  await evaluate("document.querySelector('.hub-content-list')?.scrollIntoView({block:'center'})");
+  await sleep(120);
+  manifest.captures.push(await captureCurrentViewport("mobile-game-hub-content-list.png", 390, 844, "Sentiers de l’aube"));
+  await evaluate("window.scrollTo({top:0,left:0,behavior:'auto'}); true");
+  await sleep(120);
   await clickByText(".atmosphere-preview button", "Rivenfall");
   manifest.captures.push(await capture("mobile-game-hub-atmosphere-rivenfall.png", 390, 844, "aucun asset éditeur utilisé"));
   await clickByText(".atmosphere-preview button", "Aetherlands");
   await clickByText(".local-nav button", "Collections");
   manifest.captures.push(await capture("mobile-game-hub-collections.png", 390, 844, "Sélections organisées"));
+  await clickByText(".local-nav button", "Créateurs");
+  manifest.captures.push(await capture("mobile-game-hub-creators.png", 390, 844, "Écosystème créateur"));
   await clickByText(".local-nav button", "Guides");
   manifest.captures.push(await capture("mobile-game-hub-guides.png", 390, 844, "Guides de démonstration indisponibles"));
+  await clickByText(".local-nav button", "Activité");
+  manifest.captures.push(await capture("mobile-game-hub-activity.png", 390, 844, "Activité de démonstration"));
 
   await clickByAriaLabel("Recherche globale");
   manifest.captures.push(await capture("mobile-global-search.png", 390, 844, "Rechercher dans MODARYX"));
+  await fillVisibleInput(".global-search-field input", "aube");
+  manifest.captures.push(await capture("mobile-global-search-results.png", 390, 844, "Sentiers de l’aube"));
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Découvrir");
@@ -368,6 +380,7 @@ try {
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Jeux");
+  manifest.captures.push(await capture("mobile-games-index.png", 390, 844, "Trouvez votre prochain terrain de jeu"));
   await clickByText(".game-support-request>.quiet", "Demander le support d’un jeu");
   await fillVisibleInput(".game-request-form input", "Project Meridian");
   await clickByText(".game-request-form .primary", "Préparer la demande locale");
