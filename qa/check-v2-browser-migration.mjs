@@ -1,4 +1,5 @@
 import {spawn} from "node:child_process";
+import {readFileSync, writeFileSync} from "node:fs";
 import {setTimeout as sleep} from "node:timers/promises";
 import assert from "node:assert/strict";
 
@@ -12,6 +13,34 @@ const wait=async path=>{let last;for(let i=0;i<80;i++){try{const r=await fetch("
 const send=(method,params={})=>{const id=nextId++;ws.send(JSON.stringify({id,method,params}));return new Promise((resolve,reject)=>pending.set(id,{resolve,reject}))};
 const evaluate=async expression=>{const r=await send("Runtime.evaluate",{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw new Error(r.exceptionDetails.text||"eval failed");return r.result?.result?.value};
 const navigate=async()=>{await send("Page.navigate",{url:origin});for(let i=0;i<80;i++){if(await evaluate("document.readyState==='complete'"))break;await sleep(100)}await sleep(400)};
+const previewPidFile="/tmp/modaryx-v2-migration.pid";
+let restartedPreview=null;
+async function waitOrigin(up){
+  let last;
+  for(let i=0;i<80;i++){
+    try{
+      const r=await fetch(origin,{cache:"no-store"});
+      if(up && r.ok) return;
+      if(!up) last=new Error("origin-still-up");
+    }catch(e){
+      if(!up) return;
+      last=e;
+    }
+    await sleep(100);
+  }
+  throw last||new Error(up?"origin-did-not-start":"origin-did-not-stop");
+}
+async function stopPreview(){
+  const pid=Number(readFileSync(previewPidFile,"utf8").trim());
+  if(!Number.isInteger(pid)||pid<=0) throw new Error("preview-pid-invalid");
+  process.kill(pid,"SIGTERM");
+  await waitOrigin(false);
+}
+async function restartPreview(){
+  restartedPreview=spawn(process.execPath,["./node_modules/vite/bin/vite.js","preview","--host","127.0.0.1","--port","4176"],{cwd:"v2-preview",stdio:"ignore"});
+  writeFileSync(previewPidFile,String(restartedPreview.pid));
+  await waitOrigin(true);
+}
 
 try{
   await wait("/json/version");
@@ -67,17 +96,17 @@ try{
   await navigate();
   assert.equal(await evaluate("Boolean(navigator.serviceWorker.controller)"),true);
   await sleep(300);
-  await send("Network.emulateNetworkConditions",{offline:true,latency:0,downloadThroughput:0,uploadThroughput:0});
+  await stopPreview();
   const offlineFetch=await evaluate(`(async()=>{try{const r=await fetch(location.href,{cache:"no-store"});return {ok:r.ok,status:r.status,text:(await r.text()).slice(0,200)}}catch(e){return {ok:false,status:0,error:String(e)}}})()`);
-  assert.equal(offlineFetch.ok,true,"controlled document fetch must succeed offline via V2 SW");
+  assert.equal(offlineFetch.ok,true,"controlled document fetch must succeed with the origin stopped via V2 SW");
   await send("Page.navigate",{url:origin});
   for(let i=0;i<80;i++){if(await evaluate("document.readyState==='complete'"))break;await sleep(100)}
   await sleep(500);
   const offlineBody=await evaluate("document.body.innerText.slice(0,1400)");
   assert.equal(offlineBody.includes("Mes profils pour ce jeu"),true,"offline navigation did not restore the Game Hub shell: "+offlineBody);
-  console.log("MIGRATION_ASSERT offline controlled navigation works");
+  console.log("MIGRATION_ASSERT offline controlled navigation works with origin stopped");
 
-  await send("Network.emulateNetworkConditions",{offline:false,latency:0,downloadThroughput:-1,uploadThroughput:-1});
+  await restartPreview();
   const rolled=await evaluate(`(async()=>{const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(r=>r.unregister()));await caches.delete("modaryx-v2-preview-shell-v1");const keys=await caches.keys();return {unknown:keys.includes("third-party-unknown-v1"),legacy:keys.includes("modaryx-site-v120-scalable")}})()`);
   assert.equal(rolled.unknown,true);
   assert.equal(rolled.legacy,false);
@@ -88,4 +117,5 @@ try{
 } finally {
   try{ws?.close()}catch{}
   proc.kill("SIGTERM");
+  try{restartedPreview?.kill("SIGTERM")}catch{}
 }
