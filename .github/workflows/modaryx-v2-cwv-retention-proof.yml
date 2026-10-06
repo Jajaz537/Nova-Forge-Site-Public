@@ -1,0 +1,44 @@
+name: MODARYX V2 CWV Retention Candidate Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-cwv-retention-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-cwv-retention-proof.yml'
+      - 'functions/_lib/cwv-retention.mjs'
+      - 'functions/api/v1/rum/cwv/retention.js'
+      - 'qa/modaryx-v2-cwv-retention-contract.json'
+      - 'qa/check-v2-cwv-retention.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-cwv-retention-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove CWV retention stays bounded and disabled by default
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate retention candidate
+        run: |
+          set -euo pipefail
+          node --experimental-sqlite qa/check-v2-cwv-retention.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+          echo PASS_V2_CWV_RETENTION_PROOF
+      - name: Mirror Cloudflare root build
+        run: npm run build
