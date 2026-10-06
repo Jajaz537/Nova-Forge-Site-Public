@@ -148,3 +148,4 @@ jobs:
 # replay-trigger: exact-sha-single-safe-probe-20261006
 # replay-trigger: exact-sha-no-stage-name-assumption-20261006
 # replay-trigger: wait-pages-status-success
+# replay-trigger: host-ready-confirmed-20261006
