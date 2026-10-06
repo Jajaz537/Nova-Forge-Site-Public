@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "date": "2026-10-06",
   "status": "ACTIVE_FAIL_CLOSED_19_OPEN",
-  "sourceCommit": "26eb8e056ad967676f64d4992f93692241c7bed5",
+  "sourceCommit": "5429af8674b35653cff826a2d9f2a68b9e7da7e2",
   "sourceGate": "qa/modaryx-v2-vf-readiness-gate.json",
-  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1519.md",
+  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1648.md",
   "blockerCount": 19,
   "blockers": [
     {

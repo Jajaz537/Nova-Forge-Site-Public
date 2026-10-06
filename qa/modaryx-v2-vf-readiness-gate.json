@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-06",
   "status": "BLOCKED",
-  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1535.md",
+  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1648.md",
   "rule": "NO_VF_OR_HIGH_FI_FINAL_WHILE_REQUIRED_BLOCKER_OPEN",
   "externalHuman": [
     {
