@@ -8,7 +8,7 @@ for(const x of ["game","content-type","content-item","release","dependency","com
 const inv=new Set(d.invariants||[]);
 for(const x of ["SCHEMAS_VERSIONED_NEVER_OVERWRITE_V1","CONTENT_ITEM_STABLE_RELEASE_VERSIONED","COLLECTION_MODPACK_PROFILE_SEPARATE","REPLACES_NEVER_SILENTLY_SUBSTITUTES","COMPATIBLE_VISUAL_NEVER_FROM_UNKNOWN_CLAIM","PROFILE_DEFAULT_LOCAL_ONLY_PRIVATE_LOCAL","NO_NEW_NOVA_FORGE_SCHEMA_IDS","ADDITIONAL_PROPERTIES_FALSE_FOR_ADOPTED_STRICT_SCHEMAS"]) if(!inv.has(x)) throw new Error("missing invariant "+x);
 if(d.productionStatus?.schemaFilesV2!=="CREATED_CANDIDATE") throw new Error("schema files candidate status drift");
-if(d.productionStatus?.schemaMigration!=="NOT_IMPLEMENTED") throw new Error("schema migration must remain NOT_IMPLEMENTED");
-if(d.productionStatus?.realValidationPipeline!=="TARGETED_CANDIDATE_PROVEN") throw new Error("targeted validation status drift");
+if(d.productionStatus?.schemaMigration!=="CREATED_NOT_APPLIED") throw new Error("schema migration candidate status drift");
+if(d.productionStatus?.realValidationPipeline!=="TARGETED_LOCAL_D1_PROVEN") throw new Error("targeted validation status drift");
 if(d.implementationPrerequisites?.productTerminology!=="STABLE_INTERNAL_IDENTIFIERS_UI_WORDING_STILL_HUMAN_OPEN") throw new Error("UI wording openness must remain explicit");
 console.log("PASS_V2_SCHEMA_PLAN_CONTRACT");

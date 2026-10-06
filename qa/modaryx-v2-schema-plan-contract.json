@@ -75,8 +75,8 @@
   ],
   "productionStatus": {
     "schemaFilesV2": "CREATED_CANDIDATE",
-    "schemaMigration": "NOT_IMPLEMENTED",
-    "realValidationPipeline": "TARGETED_CANDIDATE_PROVEN"
+    "schemaMigration": "CREATED_NOT_APPLIED",
+    "realValidationPipeline": "TARGETED_LOCAL_D1_PROVEN"
   },
   "schemaRoot": "schemas/v2",
   "implementationPrerequisites": {

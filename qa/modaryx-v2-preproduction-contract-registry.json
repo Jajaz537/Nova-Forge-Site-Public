@@ -356,6 +356,12 @@
       "contract": "qa/modaryx-v2-schema-plan-contract.json",
       "checker": "qa/check-v2-schema-materialization.mjs",
       "source": "docs/MODARYX-V2-SCHEMA-MATERIALIZATION-20261006.md"
+    },
+    {
+      "id": "d1-v2-core-model",
+      "contract": "qa/modaryx-v2-d1-core-contract.json",
+      "checker": "qa/check-v2-d1-core-migration.py",
+      "source": "docs/MODARYX-V2-D1-CORE-MIGRATION-20261006.md"
     }
   ],
   "invariants": [
