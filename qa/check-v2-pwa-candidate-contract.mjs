@@ -1,0 +1,16 @@
+import fs from "node:fs";
+const d=JSON.parse(fs.readFileSync("qa/modaryx-v2-pwa-candidate-contract.json","utf8"));
+if(d.schemaVersion!==1||d.status!=="IMPLEMENTED_CANDIDATE_PROOF_REQUIRED") throw new Error("PWA candidate contract drift");
+if(d.root!=="v2"||d.activationFlag!=="VITE_MODARYX_PWA_PRODUCTION"||d.defaultEnabled!==false) throw new Error("PWA activation gate drift");
+if(d.productionCutover!=="OPEN") throw new Error("production cutover must remain OPEN");
+for(const p of [d.registrationModule,d.serviceWorker,d.manifest]) if(!fs.existsSync(p)) throw new Error("PWA file missing: "+p);
+const registration=fs.readFileSync(d.registrationModule,"utf8");
+if(!registration.includes('import.meta.env.VITE_MODARYX_PWA_PRODUCTION === "1"')) throw new Error("PWA build gate missing");
+if(!registration.includes('serviceWorker.register("/sw-v2.js"')) throw new Error("gated SW registration missing");
+if(!registration.includes('updateViaCache: "none"')) throw new Error("updateViaCache hardening missing");
+const sw=fs.readFileSync(d.serviceWorker,"utf8");
+if(/self\.clients\.claim\s*\(/.test(sw)) throw new Error("clients.claim forbidden before cutover");
+if(!sw.includes(d.cacheName)) throw new Error("candidate cache identity drift");
+const inv=new Set(d.invariants||[]);
+for(const x of ["NO_PRODUCTION_ACTIVATION_FROM_CANDIDATE_PROOF","NO_CLOUDFLARE_CRITICAL_CHANGE","NO_CUTOVER","FAIL_SOFT_REGISTRATION","PWA_BLOCKER_REMAINS_OPEN_UNTIL_REAL_PRODUCTION_ACTIVATION"]) if(!inv.has(x)) throw new Error("missing invariant "+x);
+console.log("PASS_V2_PWA_CANDIDATE_CONTRACT");

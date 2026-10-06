@@ -1,0 +1,114 @@
+name: MODARYX V2 PWA Candidate Gate Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-pwa-candidate-gate-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-pwa-candidate-proof.yml'
+      - 'v2/src/main.jsx'
+      - 'v2/src/pwa-registration.js'
+      - 'v2/public/sw-v2.js'
+      - 'v2/public/manifest.webmanifest'
+      - 'qa/modaryx-v2-pwa-candidate-contract.json'
+      - 'qa/check-v2-pwa-candidate-contract.mjs'
+      - 'qa/check-v2-pwa-candidate-browser.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+      - 'qa/check-v2-preproduction-contract-registry.mjs'
+      - 'qa/check-v2-production-candidate-root.mjs'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-pwa-candidate-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove gated V2 PWA registration without production activation
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate contracts
+        run: |
+          set -euo pipefail
+          node qa/check-v2-pwa-candidate-contract.mjs
+          node qa/check-v2-production-candidate-root.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+
+      - name: Locate Chrome
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Install pinned dependencies
+        working-directory: v2
+        run: npm ci
+
+      - name: Build default PWA-disabled candidate
+        working-directory: v2
+        run: npm run build
+
+      - name: Start default candidate
+        working-directory: v2
+        run: |
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4180 >/tmp/modaryx-v2-pwa-disabled.log 2>&1 &
+          echo $! >/tmp/modaryx-v2-pwa-disabled.pid
+          for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4180/ >/dev/null && exit 0; sleep 0.25; done
+          cat /tmp/modaryx-v2-pwa-disabled.log
+          exit 1
+
+      - name: Prove default registration stays disabled
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4180
+          MODARYX_PWA_EXPECT: disabled
+        run: node qa/check-v2-pwa-candidate-browser.mjs
+
+      - name: Stop default candidate
+        run: kill "$(cat /tmp/modaryx-v2-pwa-disabled.pid)" 2>/dev/null || true
+
+      - name: Build gated PWA-enabled candidate
+        working-directory: v2
+        env:
+          VITE_MODARYX_PWA_PRODUCTION: "1"
+        run: npm run build
+
+      - name: Start gated candidate
+        working-directory: v2
+        run: |
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4181 >/tmp/modaryx-v2-pwa-enabled.log 2>&1 &
+          echo $! >/tmp/modaryx-v2-pwa-enabled.pid
+          for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4181/ >/dev/null && exit 0; sleep 0.25; done
+          cat /tmp/modaryx-v2-pwa-enabled.log
+          exit 1
+
+      - name: Prove gated registration and offline shell
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4181
+          MODARYX_PWA_EXPECT: enabled
+          MODARYX_PREVIEW_PID_FILE: /tmp/modaryx-v2-pwa-enabled.pid
+        run: |
+          set -euo pipefail
+          node qa/check-v2-pwa-candidate-browser.mjs
+          echo PASS_V2_PWA_CANDIDATE_GATE_PROOF
+
+      - name: Cleanup
+        if: always()
+        run: |
+          for p in /tmp/modaryx-v2-pwa-disabled.pid /tmp/modaryx-v2-pwa-enabled.pid; do
+            if test -f "$p"; then kill "$(cat "$p")" 2>/dev/null || true; fi
+          done
