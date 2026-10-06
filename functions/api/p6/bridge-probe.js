@@ -13,6 +13,7 @@ export async function onRequestGet(context){
       http:response.status,
       protocol:data?.protocol||null,
       bridge_error:data?.error||null,
+      bridge_diagnostic:data?.diagnostic||null,
       secret_values_exposed:false,
       founder_bypass:false
     }),{
@@ -26,6 +27,7 @@ export async function onRequestGet(context){
       http:503,
       protocol:null,
       bridge_error:'probe-exception',
+      bridge_diagnostic:null,
       secret_values_exposed:false,
       founder_bypass:false
     }),{
