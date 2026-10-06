@@ -854,3 +854,23 @@ h1, h2, h3,
     padding-top: 24px;
   }
 }
+
+
+/* 2026-10-06 targeted mobile touch fix.
+   Keeps the approved desktop density while guaranteeing 44x44 interactive targets
+   for the Game Hub filters, view controls and row actions. */
+@media (max-width: 900px) {
+  .game-hub-page .hub-filterbar select {
+    min-height: 44px;
+    height: 44px;
+    padding: 0 12px;
+  }
+
+  .game-hub-page .hub-view-toggle button,
+  .game-hub-page .hub-row-actions button {
+    min-width: 44px;
+    width: 44px;
+    min-height: 44px;
+    height: 44px;
+  }
+}
