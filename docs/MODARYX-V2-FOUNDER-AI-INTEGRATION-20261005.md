@@ -5,15 +5,15 @@
 
 ## Base IA vérifiée
 
-- Modaryx — IA Foundation **v0.141**
-- SHA-256 : `714fe55635fdbdfcf11f69257ec0c4154e797d2ac2a72ea0e75a39dde4359a4d`
-- 392/392 tests PASS
+- Modaryx — IA Foundation **v0.143**
+- SHA-256 : `5274ccbbe46b247e012a59bfb90b709c12864d5a74f239dd0ec5a881561afa28`
+- 399/399 tests PASS
 - 12/12 evals PASS
 - RC rehearsal PASS
 - migration-scale PASS
 - archive reproductible + extraction neuve PASS
-- runtime Windows durci : Python >= 3.11 résolu dynamiquement ; le checkpoint v0.141 exact a été reconstruit et exécuté sur le runner SD avec Python 3.13.16. Le ZIP exact v0.141 et son `release_gate` ont été rejoués PASS sur SD. Le matériel cible reste prouvé ; le `core_idle` de référence PASS provient du checkpoint v0.140. Les qualifications modèle et multimodale v0.141 sont en cours, tandis que `game_impact` reste explicitement `NOT_RUN`. Aucun crédit VF n'est appliqué avant fermeture des preuves correspondantes
-- progression VF IA maintenue à **83 %**
+- runtime Windows durci : Python >= 3.11 résolu dynamiquement ; P2 est désormais fermé à 10/10 après qualification formelle Qwen3 4B sur SD/GTX 1070 et évaluation indépendante du bundle cible. PresentMon est préparé mais la capture jeu réelle reste à faire. STT et TTS sont PASS ; la vision v0.143 est en replay cible avec un budget RAM PC-first limité au mode Idle. Les preuves public denial et absence de secret navigateur sont PASS ; la preuve Founder privée de bout en bout reste requise.
+- progression VF IA validée à **85 %**
 
 ## Intégration site ajoutée
 
