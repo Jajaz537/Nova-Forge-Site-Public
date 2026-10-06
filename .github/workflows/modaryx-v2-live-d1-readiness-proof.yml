@@ -1,0 +1,47 @@
+name: MODARYX V2 Live D1 Readiness Read-Only Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-d1-readiness-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-live-d1-readiness-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-live-d1-readiness
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Probe exact Cloudflare preview D1 readiness without migration
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Probe exact deployed preview
+        env:
+          MODARYX_PREVIEW_ORIGIN: https://45a9b884.nova-forge-site-public.pages.dev
+          MODARYX_EXPECTED_SOURCE_SHA: efeb59d7585183681666f4af287e0953a3212bb9
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const origin=process.env.MODARYX_PREVIEW_ORIGIN;
+          const response=await fetch(origin+"/api/v1/status/d1-readiness",{headers:{accept:"application/json"}});
+          if(response.status!==200) throw new Error("readiness endpoint HTTP "+response.status);
+          const body=await response.json();
+          if(body?.bindingPresent!==true) throw new Error("LIVE_D1_BINDING_MISSING");
+          if(body?.queryState!=="OK") throw new Error("LIVE_D1_READINESS_QUERY_NOT_OK");
+          if(body?.productionApproval!=="OPEN") throw new Error("production approval must remain OPEN");
+          if(!body?.groups?.v1Foundation) throw new Error("v1 readiness group missing");
+          const summary={
+            expectedSourceSha:process.env.MODARYX_EXPECTED_SOURCE_SHA,
+            migrationLevel:body.migrationLevel,
+            latestCandidateComplete:Boolean(body.latestCandidateComplete),
+            groups:Object.fromEntries(Object.entries(body.groups).map(([k,v])=>[k,{expected:v.expected,present:v.present,complete:v.complete}]))
+          };
+          console.log("LIVE_D1_READINESS_STATE",JSON.stringify(summary));
+          console.log("PASS_V2_LIVE_D1_READINESS_READ_ONLY");
+          NODE
