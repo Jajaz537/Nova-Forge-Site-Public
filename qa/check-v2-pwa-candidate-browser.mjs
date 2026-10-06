@@ -1,5 +1,5 @@
 import {spawn} from "node:child_process";
-import {readFileSync} from "node:fs";
+import {existsSync,readFileSync} from "node:fs";
 import {setTimeout as sleep} from "node:timers/promises";
 import assert from "node:assert/strict";
 
@@ -8,10 +8,11 @@ const origin=process.env.MODARYX_REVIEW_ORIGIN;
 const expectation=process.env.MODARYX_PWA_EXPECT;
 const pidFile=process.env.MODARYX_PREVIEW_PID_FILE;
 if(!chrome||!origin||!["disabled","enabled"].includes(expectation)) throw new Error("PWA browser proof env missing");
-const port=20500+(process.pid%1000);
-const proc=spawn(chrome,["--headless=new","--no-sandbox","--disable-gpu","--remote-debugging-port="+port,"--user-data-dir=/tmp/modaryx-v2-pwa-"+process.pid,"about:blank"],{stdio:"ignore"});
-let ws,nextId=1;const pending=new Map();
-const wait=async path=>{let last;for(let i=0;i<200;i++){try{const r=await fetch("http://127.0.0.1:"+port+path);if(r.ok)return await r.json();last=new Error("HTTP "+r.status);}catch(e){last=e}await sleep(100)}throw last||new Error("CDP unavailable")};
+const profileDir="/tmp/modaryx-v2-pwa-"+process.pid;
+const proc=spawn(chrome,["--headless=new","--no-sandbox","--disable-gpu","--remote-debugging-port=0","--user-data-dir="+profileDir,"about:blank"],{stdio:"ignore"});
+let port=null,ws,nextId=1;const pending=new Map();
+const waitForPort=async()=>{let last;const file=profileDir+"/DevToolsActivePort";for(let i=0;i<300;i++){try{if(existsSync(file)){const first=readFileSync(file,"utf8").trim().split(/\r?\n/)[0];const value=Number(first);if(Number.isInteger(value)&&value>0)return value}}catch(e){last=e}await sleep(100)}throw last||new Error("Chrome DevToolsActivePort unavailable")};
+const wait=async path=>{let last;if(!port)port=await waitForPort();for(let i=0;i<200;i++){try{const r=await fetch("http://127.0.0.1:"+port+path);if(r.ok)return await r.json();last=new Error("HTTP "+r.status);}catch(e){last=e}await sleep(100)}throw last||new Error("CDP unavailable")};
 const send=(method,params={})=>{const id=nextId++;ws.send(JSON.stringify({id,method,params}));return new Promise((resolve,reject)=>pending.set(id,{resolve,reject}))};
 const evaluate=async expression=>{const r=await send("Runtime.evaluate",{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw new Error(r.exceptionDetails.text||"eval failed");return r.result?.result?.value};
 const navigate=async url=>{await send("Page.navigate",{url});for(let i=0;i<100;i++){if(await evaluate("document.readyState==='complete'"))break;await sleep(100)}await sleep(350)};

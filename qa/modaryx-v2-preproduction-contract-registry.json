@@ -488,6 +488,12 @@
       "contract": "qa/modaryx-v2-cwv-p75-report-contract.json",
       "checker": "qa/check-v2-cwv-p75-report.mjs",
       "source": "docs/MODARYX-V2-CWV-P75-REPORT-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "cwv-retention-candidate",
+      "contract": "qa/modaryx-v2-cwv-retention-contract.json",
+      "checker": "qa/check-v2-cwv-retention.mjs",
+      "source": "docs/MODARYX-V2-CWV-RETENTION-CANDIDATE-20261006.md"
     }
   ],
   "invariants": [

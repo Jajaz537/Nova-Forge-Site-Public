@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "RETENTION_CANDIDATE_DISABLED_BY_DEFAULT",
+  "endpoint": "/api/v1/rum/cwv/retention",
+  "enableFlag": "MODARYX_CWV_RETENTION_ENABLED=1",
+  "daysFlag": "MODARYX_CWV_RETENTION_DAYS",
+  "defaultDays": 28,
+  "minimumDays": 7,
+  "maximumDays": 90,
+  "productionApproval": "OPEN",
+  "productionBlocker": "core-web-vitals-production",
+  "blockerClosedByThisContract": false,
+  "invariants": [
+    "RETENTION_DISABLED_BY_DEFAULT",
+    "GET_NEVER_PURGES",
+    "POST_REQUIRES_SAME_ORIGIN",
+    "POST_REQUIRES_ADMIN_PERMISSION",
+    "POST_REQUIRES_EXPLICIT_RUNTIME_ENABLE",
+    "RETENTION_DAYS_BOUNDED_7_TO_90",
+    "ONLY_CWV_SAMPLE_TABLE_PURGED",
+    "NO_ACCOUNT_IDENTITY_TARGETING",
+    "NO_REMOTE_CONFIGURATION_CHANGE",
+    "NO_REMOTE_INVOCATION_BY_THIS_CHANGE",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER",
+    "PRODUCTION_APPROVAL_REMAINS_OPEN"
+  ]
+}
