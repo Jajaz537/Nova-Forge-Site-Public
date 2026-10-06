@@ -30,18 +30,19 @@ for(const [key,value] of Object.entries(data.productionStatus||{})){
   if(!allowedProductionStates.has(value)) throw new Error("unexpected production status: "+key+"="+value);
 }
 if(data.productionStatus?.siteAssistant!=="FOUNDER_ONLY_CODE_INTEGRATED_NOT_DEPLOYED") throw new Error("site assistant status must remain deployment-honest");
-if(data.foundationArtifact?.vfProgress!==83) throw new Error("VF progress must stay at 83 until external proofs close");
-if(data.foundationArtifact?.version!=="0.141") throw new Error("Foundation version must be v0.141");
-if(data.foundationArtifact?.sha256!=="714fe55635fdbdfcf11f69257ec0c4154e797d2ac2a72ea0e75a39dde4359a4d") throw new Error("Foundation SHA mismatch");
-if(data.foundationArtifact?.tests!=="392/392"||data.foundationArtifact?.evals!=="12/12") throw new Error("sealed v0.141 proof mismatch");
+if(data.foundationArtifact?.vfProgress!==85) throw new Error("VF progress must match sealed v0.143 evidence");
+if(data.foundationArtifact?.version!=="0.143") throw new Error("Foundation version must be v0.143");
+if(data.foundationArtifact?.sha256!=="5274ccbbe46b247e012a59bfb90b709c12864d5a74f239dd0ec5a881561afa28") throw new Error("Foundation SHA mismatch");
+if(data.foundationArtifact?.tests!=="399/399"||data.foundationArtifact?.evals!=="12/12") throw new Error("sealed v0.143 proof mismatch");
 for(const gate of ["exactArchive","releaseGate","hardwareBaseline"]){
   if(data.foundationArtifact?.realTargetEvidence?.[gate]!=="PASS") throw new Error("missing real-target PASS: "+gate);
 }
 if(data.foundationArtifact?.realTargetEvidence?.coreIdleBaseline?.version!=="0.140"||data.foundationArtifact?.realTargetEvidence?.coreIdleBaseline?.status!=="PASS") throw new Error("core idle baseline provenance mismatch");
-if(data.foundationArtifact?.realTargetEvidence?.modelQualification!=="IN_PROGRESS") throw new Error("model qualification must remain in progress until final target proof");
-if(data.foundationArtifact?.realTargetEvidence?.gameImpact!=="NOT_RUN") throw new Error("game impact must remain NOT_RUN");
-if(data.foundationArtifact?.realTargetEvidence?.multimodal!=="IN_PROGRESS") throw new Error("multimodal must remain in progress until vision closes");
-if(data.foundationArtifact?.realTargetEvidence?.vfCreditApplied!==false) throw new Error("VF credit must remain unapplied");
+if(data.foundationArtifact?.realTargetEvidence?.modelQualification!=="QWEN3_4B_FORMAL_AND_INDEPENDENT_ASSESSMENT_PASS") throw new Error("model qualification evidence mismatch");
+if(data.foundationArtifact?.realTargetEvidence?.gameImpact!=="PRESENTMON_READY_NO_ACTIVE_GAME_CAPTURE_YET") throw new Error("game impact evidence mismatch");
+if(data.foundationArtifact?.realTargetEvidence?.multimodal!=="STT_TTS_PASS_VISION_V0143_REAL_TARGET_REPLAY_PENDING") throw new Error("multimodal evidence mismatch");
+if(data.foundationArtifact?.realTargetEvidence?.vfCreditApplied!==true) throw new Error("validated P2 VF credit must be applied");
+if(data.foundationArtifact?.realTargetEvidence?.publicDenial!=="PASS"||data.foundationArtifact?.realTargetEvidence?.browserSecretAbsence!=="PASS") throw new Error("deployed public safety evidence mismatch");
 console.log("MODARYX_AI_PERMISSION_TIER_COUNT",data.permissionTiers.length);
 console.log("MODARYX_AI_PREVIEW_STATE_COUNT",data.previewStates.length);
 console.log("MODARYX_AI_INVARIANT_COUNT",data.invariants.length);
