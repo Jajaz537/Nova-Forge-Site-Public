@@ -1,0 +1,149 @@
+name: MODARYX IA P6 deployed preview public proof
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-preview-public-proof.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      ZONE_NAME: modaryxmods.com
+      PROJECT_NAME: nova-forge-site-public
+      TARGET_BRANCH: chatgpt/modaryx-ai-founder-integration-20261005
+    steps:
+      - name: Prove public denial and browser secret absence on deployed preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/assets
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=${ZONE_NAME}" "${api}/zones")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+
+          preview_url=""
+          preview_id=""
+          preview_branch=""
+          for i in $(seq 1 60); do
+            project="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+            preview_url="$(jq -r '.result.latest_deployment.url // ""' <<<"$project")"
+            preview_id="$(jq -r '.result.latest_deployment.id // ""' <<<"$project")"
+            preview_branch="$(jq -r '.result.latest_deployment.deployment_trigger.metadata.branch // ""' <<<"$project")"
+            if [ "$preview_branch" = "$TARGET_BRANCH" ] && [ -n "$preview_url" ]; then
+              code="$(curl -sS -L -o /dev/null -w '%{http_code}' --max-time 10 "$preview_url/" || true)"
+              if [ "$code" = "200" ]; then
+                break
+              fi
+            fi
+            sleep 5
+          done
+
+          test "$preview_branch" = "$TARGET_BRANCH"
+          test -n "$preview_url"
+          root_code="$(curl -sS -L -o evidence/root.html -w '%{http_code}' --max-time 20 "$preview_url/")"
+          test "$root_code" = "200"
+
+          status_code="$(curl -sS -o evidence/public-status-body.txt -w '%{http_code}' --max-time 20 "$preview_url/api/founder/ai/status")"
+          chat_code="$(curl -sS -o evidence/public-chat-body.txt -w '%{http_code}' --max-time 20 \
+            -X POST -H 'Content-Type: application/json' \
+            --data '{"message":"public denial probe"}' \
+            "$preview_url/api/founder/ai/chat")"
+
+          test "$status_code" = "404"
+          test "$chat_code" = "404"
+
+          chrome=""
+          for c in google-chrome google-chrome-stable chromium chromium-browser; do
+            if command -v "$c" >/dev/null 2>&1; then chrome="$(command -v "$c")"; break; fi
+          done
+          test -n "$chrome"
+
+          "$chrome" --headless=new --no-sandbox --disable-gpu --virtual-time-budget=8000 \
+            --dump-dom "$preview_url/" > evidence/rendered-dom.html 2>evidence/chrome-stderr.txt
+
+          private_visible=false
+          if grep -Eiq 'href=["'"'"'][^"'"'"']*(/ai|modaryx-ia)|>[^<]*(MODARYX IA|Nova IA|Nova Founder)[^<]*<' evidence/rendered-dom.html; then
+            private_visible=true
+          fi
+          test "$private_visible" = "false"
+
+          mapfile -t assets < <(grep -Eo '(src|href)="[^"]+\.(js|mjs)(\?[^"]*)?"' evidence/root.html | sed -E 's/^(src|href)="([^"]+)"/\2/' | sort -u)
+          asset_count=0
+          for asset in "${assets[@]}"; do
+            if [[ "$asset" == http* ]]; then
+              url="$asset"
+            elif [[ "$asset" == /* ]]; then
+              url="$preview_url$asset"
+            else
+              url="$preview_url/$asset"
+            fi
+            out="evidence/assets/asset-$asset_count.js"
+            curl -fsSL --max-time 20 "$url" -o "$out"
+            asset_count=$((asset_count+1))
+          done
+
+          secret_marker_found=false
+          signature_header_found=false
+          if grep -R -Eiq 'MODARYX_AI_BRIDGE_KEY_HEX|[0-9a-fA-F]{64}' evidence/assets evidence/rendered-dom.html; then
+            secret_marker_found=true
+          fi
+          if grep -R -Eiq 'x-modaryx-signature|x-modaryx-timestamp|x-modaryx-nonce' evidence/assets evidence/rendered-dom.html; then
+            signature_header_found=true
+          fi
+          test "$secret_marker_found" = "false"
+          test "$signature_header_found" = "false"
+
+          jq -n \
+            --arg schema "modaryx-p6-preview-public-proof-v1" \
+            --arg preview_url "$preview_url" \
+            --arg preview_id "$preview_id" \
+            --arg branch "$preview_branch" \
+            --arg status_http "$status_code" \
+            --arg chat_http "$chat_code" \
+            --argjson asset_count "$asset_count" \
+            --argjson private_visible "$private_visible" \
+            --argjson secret_marker_found "$secret_marker_found" \
+            --argjson signature_header_found "$signature_header_found" \
+            '{
+              schema:$schema,
+              preview_url:$preview_url,
+              deployment_id:$preview_id,
+              branch:$branch,
+              public_denial:{
+                status_endpoint_http:$status_http,
+                chat_endpoint_http:$chat_http,
+                private_surface_visible:$private_visible,
+                status:"PASS"
+              },
+              browser_secret_absence:{
+                scanned_js_assets:$asset_count,
+                bridge_key_or_hex_secret_found:$secret_marker_found,
+                signature_headers_found:$signature_header_found,
+                status:"PASS"
+              },
+              https:(($preview_url|startswith("https://"))),
+              real_deployed_preview:true,
+              secret_values_logged:false,
+              awards_vf_points:false
+            }' > evidence/public-proof.json
+
+          echo "MODARYX_P6_DEPLOYED_PUBLIC_PROOF_PASS status404=$status_code chat404=$chat_code privateVisible=$private_visible assets=$asset_count secretsFound=$secret_marker_found signaturesFound=$signature_header_found"
+
+      - name: Upload deployed public proof
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-deployed-preview-public-proof
+          path: evidence
+          if-no-files-found: error
+          retention-days: 30
