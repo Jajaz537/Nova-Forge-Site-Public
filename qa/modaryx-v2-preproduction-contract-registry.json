@@ -512,6 +512,12 @@
       "contract": "qa/modaryx-v2-vf-closure-ledger.json",
       "checker": "qa/check-v2-vf-closure-ledger.mjs",
       "source": "docs/MODARYX-V2-VF-CLOSURE-LEDGER-20261006.md"
+    },
+    {
+      "id": "work-handoff",
+      "contract": "qa/modaryx-v2-work-handoff.json",
+      "checker": "qa/check-v2-work-handoff.mjs",
+      "source": "docs/MODARYX-V2-WORK-HANDOFF-20261006.md"
     }
   ],
   "invariants": [

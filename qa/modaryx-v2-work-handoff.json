@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "READY_FOR_WORK_OR_REAL_OPERATOR",
+  "sourceCommit": "fc2c3513bde941e0aa9751b987eefa6de3e71643",
+  "targetBranch": "design/modaryx-v2-blue-violet-product-20261005",
+  "blockerCount": 19,
+  "blockers": [
+    {
+      "id": "nvda-real",
+      "category": "external-validation",
+      "executorClass": "REAL_DEVICE_OPERATOR",
+      "closureMode": "EXTERNAL_SESSION",
+      "requiredEvidence": [
+        "WINDOWS_REAL",
+        "NVDA_ACTIVE",
+        "REAL_BROWSER",
+        "NO_OPEN_P0_P1"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "voiceover-real",
+      "category": "external-validation",
+      "executorClass": "REAL_DEVICE_OPERATOR",
+      "closureMode": "EXTERNAL_SESSION",
+      "requiredEvidence": [
+        "APPLE_OS_REAL",
+        "VOICEOVER_ACTIVE",
+        "REAL_BROWSER",
+        "NO_OPEN_P0_P1"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "talkback-real",
+      "category": "external-validation",
+      "executorClass": "REAL_DEVICE_OPERATOR",
+      "closureMode": "EXTERNAL_SESSION",
+      "requiredEvidence": [
+        "ANDROID_PHYSICAL_DEVICE",
+        "TALKBACK_ACTIVE",
+        "CHROME_REAL",
+        "NO_OPEN_P0_P1"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "safari-real",
+      "category": "external-validation",
+      "executorClass": "REAL_DEVICE_OPERATOR",
+      "closureMode": "EXTERNAL_SESSION",
+      "requiredEvidence": [
+        "SAFARI_EXECUTED",
+        "APPLE_OS_REAL",
+        "CRITICAL_TASKS_COMPLETE",
+        "NO_OPEN_P0_P1"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "physical-devices",
+      "category": "external-validation",
+      "executorClass": "REAL_DEVICE_OPERATOR",
+      "closureMode": "EXTERNAL_SESSION",
+      "requiredEvidence": [
+        "PHYSICAL_DEVICE_REAL",
+        "TOUCH_REAL",
+        "CRITICAL_TASKS_COMPLETE",
+        "NO_OPEN_P0_P1"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "backend-real",
+      "category": "web-production",
+      "executorClass": "PRODUCTION_INFRA_OPERATOR",
+      "closureMode": "CONTROLLED_PRODUCTION_INFRA",
+      "requiredEvidence": [
+        "REMOTE_D1_SCHEMA_PROVEN",
+        "PRODUCTION_BACKEND_FOUNDATION_PROVEN",
+        "PRODUCTION_ORIGIN_READ_ONLY_PROBE",
+        "ROLLBACK_OR_RESTORE_EVIDENCE"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "auth-passkeys-real",
+      "category": "web-production",
+      "executorClass": "REAL_DEVICE_AND_PRODUCTION_OPERATOR",
+      "closureMode": "CONTROLLED_PRODUCTION_PLUS_REAL_DEVICE",
+      "requiredEvidence": [
+        "PRODUCTION_AUTH_CONFIG_PROVEN",
+        "REAL_DEVICE_PASSKEY_REGISTRATION",
+        "REAL_DEVICE_PASSKEY_AUTHENTICATION",
+        "SESSION_COOKIE_SECURITY_PROOF",
+        "TURNSTILE_PRODUCTION_PROOF"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "real-data-history",
+      "category": "web-production",
+      "executorClass": "PRODUCTION_INFRA_OPERATOR",
+      "closureMode": "CONTROLLED_REMOTE_DATA_PROOF",
+      "requiredEvidence": [
+        "DEV_REMOTE_APPLY_PROVEN",
+        "POST_APPLY_SCHEMA_PROOF",
+        "OWNER_HISTORY_TARGETED_READ_WRITE",
+        "ROLLBACK_OR_RESTORE_EVIDENCE",
+        "PRODUCTION_PIPELINE_PROOF"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "providers-connectors-real",
+      "category": "web-production",
+      "executorClass": "PRODUCTION_INFRA_OPERATOR",
+      "closureMode": "CONTROLLED_PROVIDER_ACTIVATION",
+      "requiredEvidence": [
+        "R2_REAL_BINDING_PROOF",
+        "REQUIRED_PROVIDER_SELECTIONS_EXPLICIT",
+        "TERMS_LICENSE_ATTRIBUTION_VERIFIED",
+        "TARGETED_REAL_PROVIDER_PROOFS"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "notifications-email-push-real",
+      "category": "web-production",
+      "executorClass": "PRODUCTION_INFRA_OPERATOR",
+      "closureMode": "CONTROLLED_PROVIDER_DELIVERY",
+      "requiredEvidence": [
+        "PROVIDER_EXPLICITLY_SELECTED",
+        "PROVIDER_STATE_CONFIGURED_PRODUCTION_APPROVED",
+        "USER_CONSENT_PREFERENCES_PROVEN",
+        "REAL_DELIVERY_TARGETED_PROOF",
+        "FAILURE_UNSUBSCRIBE_OR_REVOCATION_PATH_PROVEN"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "pwa-service-worker-production",
+      "category": "web-production",
+      "executorClass": "PRODUCTION_RELEASE_OPERATOR",
+      "closureMode": "CONTROLLED_PRODUCTION_ACTIVATION",
+      "requiredEvidence": [
+        "EXACT_PRODUCTION_BUILD_SHA",
+        "HTTPS_PRODUCTION_ORIGIN",
+        "SERVICE_WORKER_SCOPE_ROOT",
+        "OFFLINE_NAVIGATION_PRODUCTION_ORIGIN",
+        "UPDATE_ROLLBACK_PATH"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "core-web-vitals-production",
+      "category": "web-production",
+      "executorClass": "PRODUCTION_OBSERVABILITY_OPERATOR",
+      "closureMode": "REAL_TRAFFIC_FIELD_EVIDENCE",
+      "requiredEvidence": [
+        "FIELD_COLLECTION_APPROVED_AND_ENABLED",
+        "RETENTION_POLICY_APPROVED",
+        "REAL_PRODUCTION_TRAFFIC",
+        "LCP_P75_FIELD_EVIDENCE",
+        "INP_P75_FIELD_EVIDENCE",
+        "CLS_P75_FIELD_EVIDENCE"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "cutover",
+      "category": "web-production",
+      "executorClass": "PRODUCTION_RELEASE_OPERATOR",
+      "closureMode": "EXPLICIT_RELEASE_ACTION",
+      "requiredEvidence": [
+        "ALL_REQUIRED_VF_BLOCKERS_CLOSED",
+        "PRODUCTION_READINESS_READ_ONLY_PROOF",
+        "EXTERNAL_VALIDATION_PACK_COMPLETE",
+        "ROLLBACK_PATH_FRESHLY_PROVEN",
+        "EXPLICIT_RELEASE_APPROVAL"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "game-rights-registry-production",
+      "category": "rights-legal",
+      "executorClass": "RIGHTS_OPERATIONS",
+      "closureMode": "CONTROLLED_PRODUCTION_RIGHTS_DATA",
+      "requiredEvidence": [
+        "REMOTE_PRODUCTION_REGISTRY_PROVEN",
+        "REAL_GAME_SCOPE_RECORDS",
+        "AUDIT_AND_REVOCATION_PATH_PROVEN"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "official-contact-discovery",
+      "category": "rights-legal",
+      "executorClass": "RIGHTS_OPERATIONS",
+      "closureMode": "REAL_WORLD_SOURCE_EVIDENCE",
+      "requiredEvidence": [
+        "OFFICIAL_SOURCE_FOUND",
+        "CONTACT_OWNERSHIP_VERIFIED",
+        "SOURCE_ARTIFACT_RECORDED",
+        "NO_SCRAPING_AROUND_RESTRICTIONS"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "publisher-outbound",
+      "category": "rights-legal",
+      "executorClass": "RIGHTS_OPERATIONS",
+      "closureMode": "REAL_OUTBOUND_COMMUNICATION",
+      "requiredEvidence": [
+        "VERIFIED_OFFICIAL_DESTINATION",
+        "APPROVED_REQUEST_SCOPE",
+        "REAL_SENDER_TRANSPORT",
+        "DELIVERY_RECEIPT_OR_EQUIVALENT"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "publisher-response-parsing",
+      "category": "rights-legal",
+      "executorClass": "RIGHTS_OPERATIONS",
+      "closureMode": "REAL_INBOUND_EVIDENCE",
+      "requiredEvidence": [
+        "REAL_PUBLISHER_RESPONSE_RECEIVED",
+        "OPAQUE_QUARANTINE_RECEIPT",
+        "HUMAN_OR_POLICY_REVIEW",
+        "SCOPED_INTERPRETATION_RECORDED"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "license-validation",
+      "category": "rights-legal",
+      "executorClass": "RIGHTS_OPERATIONS",
+      "closureMode": "REAL_LICENSE_EVIDENCE",
+      "requiredEvidence": [
+        "REAL_LICENSE_OR_PUBLISHER_EVIDENCE",
+        "SCOPE_MATCH_PROVEN",
+        "CONSTRAINTS_RECORDED",
+        "AUTHORIZING_DECISION_AUDITED"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "legal-review-where-required",
+      "category": "rights-legal",
+      "executorClass": "LEGAL_REVIEWER",
+      "closureMode": "EXTERNAL_LEGAL_REVIEW",
+      "requiredEvidence": [
+        "REAL_REVIEW_WHERE_REQUIRED",
+        "REVIEW_SCOPE_RECORDED",
+        "UNRESOLVED_LEGAL_P0_P1_NONE",
+        "NO_SIMULATED_LEGAL_APPROVAL"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    }
+  ],
+  "executionOrder": [
+    "external-validation-real-devices",
+    "production-read-only-confirmation",
+    "controlled-dev-d1-apply-only-after-explicit-approval",
+    "controlled-r2-provider-auth-enablement-only-after-explicit-approval",
+    "rights-real-world-evidence",
+    "production-field-cwv",
+    "cutover-last"
+  ],
+  "invariants": [
+    "NO_BLOCKER_CLOSES_WITHOUT_MATCHING_REQUIRED_EVIDENCE",
+    "NO_REMOTE_D1_APPLY_WITHOUT_EXPLICIT_APPROVAL",
+    "NO_R2_BINDING_CHANGE_WITHOUT_EXPLICIT_APPROVAL",
+    "NO_PROVIDER_ACTIVATION_WITHOUT_EXPLICIT_APPROVAL",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER_UNTIL_ALL_REQUIRED_BLOCKERS_CLOSED",
+    "WORK_BROWSER_NEVER_EQUALS_REAL_SAFARI_OR_PHYSICAL_DEVICE_UNLESS_EXECUTED_ON_THAT_REAL_TARGET",
+    "AUTOMATION_NEVER_EQUALS_LEGAL_OR_PUBLISHER_APPROVAL"
+  ]
+}

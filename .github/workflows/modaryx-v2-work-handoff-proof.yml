@@ -1,0 +1,35 @@
+name: MODARYX V2 Work Handoff Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-work-handoff-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-work-handoff-proof.yml'
+      - 'qa/modaryx-v2-work-handoff.json'
+      - 'qa/check-v2-work-handoff.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+      - 'docs/MODARYX-V2-WORK-HANDOFF-20261006.md'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    name: Validate Work handoff matches the 19-open closure ledger
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - run: |
+          set -euo pipefail
+          node qa/check-v2-work-handoff.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+          echo PASS_V2_WORK_HANDOFF_PROOF
