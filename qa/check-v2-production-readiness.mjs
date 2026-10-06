@@ -50,10 +50,10 @@ const env={
   MODARYX_ARTIFACTS:fakeArtifacts,
   AUTH0_ISSUER_BASE_URL:"https://tenant.example/",
   AUTH0_AUDIENCE:"https://api.example/",
-  AUTH0_CLIENT_ID:"client",
-  AUTH0_CLIENT_SECRET:"secret",
-  MODARYX_TURNSTILE_SECRET:"secret",
-  MODARYX_TURNSTILE_SITE_KEY:"site",
+  AUTH0_CLIENT_ID:"sentinel-client-93x",
+  AUTH0_CLIENT_SECRET:"sentinel-auth-secret-8f4",
+  MODARYX_TURNSTILE_SECRET:"sentinel-turnstile-7c2",
+  MODARYX_TURNSTILE_SITE_KEY:"sentinel-site-key-5b1",
   MODARYX_CWV_RUM_ENABLED:"1"
 };
 const ready=await productionReadinessState(env);
@@ -71,7 +71,7 @@ assert.equal(ready.blockerHints["pwa-service-worker-production"],"OPEN_PRODUCTIO
 assert.equal(ready.blockerHints["cutover"],"OPEN_EXPLICIT_CUTOVER");
 
 const serialized=JSON.stringify(ready);
-for(const secret of ["tenant.example","https://api.example/","client","secret","site"]) assert.equal(serialized.includes(secret),false,"config/secret leaked: "+secret);
+for(const sentinel of ["tenant.example","https://api.example/","sentinel-client-93x","sentinel-auth-secret-8f4","sentinel-turnstile-7c2","sentinel-site-key-5b1"]) assert.equal(serialized.includes(sentinel),false,"config/secret leaked: "+sentinel);
 
 const endpoint=fs.readFileSync("functions/api/v1/production/readiness.js","utf8");
 assert.equal(/POST|PUT|PATCH|DELETE/.test(endpoint),false,"readiness endpoint must remain GET only");
