@@ -3,10 +3,12 @@ import fs from "node:fs";
 const h=JSON.parse(fs.readFileSync("qa/modaryx-v2-work-handoff.json","utf8"));
 const l=JSON.parse(fs.readFileSync("qa/modaryx-v2-vf-closure-ledger.json","utf8"));
 assert.equal(h.status,"READY_FOR_WORK_OR_REAL_OPERATOR");
-assert.equal(h.sourceCommit,"7464b3bc8e8270737f733047804406a5cce6d48d");
+assert.equal(h.sourceCommit,"39c98861dfbfcc4dfee3f266e5f500a7b7a934d1");
 assert.equal(h.blockerCount,l.blockerCount);
-assert.equal(h.testedCandidateCommit,"ce587af7d138eedf148d5d446cacd8fb6f2235a3");
-assert.equal(h.latestCheckpoint,"CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1732.md");
+assert.equal(h.testedCandidateCommit,"db8ebf50ba4ff593fd73b27e72075b4f8088686a");
+assert.equal(h.latestCheckpoint,"CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-2304.md");
+assert.equal(h.treeEquivalentCanonicalCommit,"39c98861dfbfcc4dfee3f266e5f500a7b7a934d1");
+assert.equal(h.latestDesignProof?.canonicalTreeEquivalent,true);
 assert.equal(h.latestReadOnlyProbe?.state,"SUCCESS");
 assert.deepEqual(new Set(h.blockers.map(x=>x.id)),new Set(l.blockers.map(x=>x.id)));
 for(const b of h.blockers){

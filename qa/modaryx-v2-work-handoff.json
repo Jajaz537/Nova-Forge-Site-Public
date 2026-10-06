@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-06",
   "status": "READY_FOR_WORK_OR_REAL_OPERATOR",
-  "sourceCommit": "7464b3bc8e8270737f733047804406a5cce6d48d",
+  "sourceCommit": "39c98861dfbfcc4dfee3f266e5f500a7b7a934d1",
   "targetBranch": "design/modaryx-v2-blue-violet-product-20261005",
   "blockerCount": 19,
   "blockers": [
@@ -281,12 +281,39 @@
     "WORK_BROWSER_NEVER_EQUALS_REAL_SAFARI_OR_PHYSICAL_DEVICE_UNLESS_EXECUTED_ON_THAT_REAL_TARGET",
     "AUTOMATION_NEVER_EQUALS_LEGAL_OR_PUBLISHER_APPROVAL"
   ],
-  "testedCandidateCommit": "ce587af7d138eedf148d5d446cacd8fb6f2235a3",
-  "latestCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1732.md",
+  "testedCandidateCommit": "db8ebf50ba4ff593fd73b27e72075b4f8088686a",
+  "latestCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-2304.md",
   "latestReadOnlyProbe": {
     "runId": 37488293293,
     "jobId": 112354005071,
     "previewOrigin": "https://371b4eff.nova-forge-site-public.pages.dev",
     "state": "SUCCESS"
+  },
+  "treeEquivalentCanonicalCommit": "39c98861dfbfcc4dfee3f266e5f500a7b7a934d1",
+  "latestDesignProof": {
+    "previewRoot": {
+      "runId": 37530691966,
+      "state": "SUCCESS"
+    },
+    "productionCandidate": {
+      "runId": 37530691998,
+      "state": "SUCCESS"
+    },
+    "performanceLab": {
+      "runId": 37530691986,
+      "state": "SUCCESS"
+    },
+    "vfReadiness": {
+      "runId": 37530691854,
+      "state": "SUCCESS"
+    },
+    "proofHead": "db8ebf50ba4ff593fd73b27e72075b4f8088686a",
+    "canonicalTreeEquivalent": true
+  },
+  "latestCloudflareBranchDeploy": {
+    "sourceCommit": "39c98861dfbfcc4dfee3f266e5f500a7b7a934d1",
+    "previewOrigin": "https://89b95085.nova-forge-site-public.pages.dev",
+    "state": "SUCCESS",
+    "note": "Cloudflare branch deployment success only; public-root visual promotion/cutover remains unclaimed."
   }
 }
