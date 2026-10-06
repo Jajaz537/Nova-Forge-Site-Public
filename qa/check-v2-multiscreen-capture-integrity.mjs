@@ -5,7 +5,7 @@ import os from "node:os";
 
 const DEFAULT_DIR="review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen";
 const MIN_BYTES=20000;
-const MIN_CAPTURE_COUNT=93;
+const MIN_CAPTURE_COUNT=143;
 
 function dimensions(buf){
   if(buf.length<24) throw new Error("PNG too small for IHDR");

@@ -199,6 +199,9 @@ try {
   // Desktop states
   await navigateHome(1440, 1024);
   manifest.captures.push(await capture("desktop-game-hub.png", 1440, 1024, "Mes profils pour ce jeu"));
+  await clickByText(".local-nav button", "Aperçu");
+  manifest.captures.push(await capture("desktop-game-hub-overview.png", 1440, 1024, "Sélection adaptative"));
+  await clickByText(".local-nav button", "Mods & contenus");
   await clickByText(".atmosphere-preview button", "Rivenfall");
   manifest.captures.push(await capture("desktop-game-hub-atmosphere-rivenfall.png", 1440, 1024, "aucun asset éditeur utilisé"));
   await clickByText(".atmosphere-preview button", "Aetherlands");
@@ -243,10 +246,18 @@ try {
   await clickByText(".global-nav button", "Mods & contenus");
   await clickSelector(".card-hit");
   manifest.captures.push(await capture("desktop-content-detail.png", 1440, 1024, "Avant d’ajouter"));
+  await clickByText(".detail-tabs button", "Fichiers");
+  manifest.captures.push(await capture("desktop-content-files.png", 1440, 1024, "Fichiers de cette version"));
+  await clickByText(".detail-tabs button", "Versions");
+  manifest.captures.push(await capture("desktop-content-versions.png", 1440, 1024, "Historique de démonstration"));
   await clickByText(".detail-tabs button", "Compatibilité et prérequis");
   manifest.captures.push(await capture("desktop-content-compatibility-specialized.png", 1440, 1024, "Fraîcheur preuve"));
   await clickByText(".detail-tabs button", "Plan avancé");
   manifest.captures.push(await capture("desktop-content-advanced-plan.png", 1440, 1024, "Plan avancé — démonstration"));
+  await clickByText(".detail-tabs button", "Changelog");
+  manifest.captures.push(await capture("desktop-content-changelog.png", 1440, 1024, "Changelog"));
+  await clickByText(".detail-tabs button", "Support");
+  manifest.captures.push(await capture("desktop-content-support.png", 1440, 1024, "Support indisponible dans cette démo"));
   await clickByText(".detail-tabs button", "Signalement");
   manifest.captures.push(await capture("desktop-content-report.png", 1440, 1024, "Signaler ce contenu"));
   await clickByText(".report-section .primary", "Préparer le signalement local");
@@ -254,10 +265,21 @@ try {
   await evaluate("document.querySelector('#report-reason-error')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("desktop-content-report-error.png", 1440, 1024, "Choisissez une raison avant de préparer le signalement."));
+  await clickByText(".detail-tabs button", "Permissions");
+  manifest.captures.push(await capture("desktop-content-permissions.png", 1440, 1024, "Aucune licence de distribution réelle"));
 
   await clickByText("footer button", "Game Hub");
   await clickByText("footer button", "Bibliothèque");
   manifest.captures.push(await capture("desktop-library.png", 1440, 1024, "Retrouvez favoris, suivis, collections, profils et historique"));
+  for (const [tabName,file,expected] of [
+    ["Favoris","desktop-library-favorites.png","Contenus enregistrés"],
+    ["Suivis","desktop-library-following.png","Créateurs et projets suivis"],
+    ["Collections","desktop-library-collections.png","Sélections organisées"],
+    ["Recherches enregistrées","desktop-library-saved-searches.png","Veilles personnelles"],
+  ]) {
+    await clickByText(".library-tabs button", tabName);
+    manifest.captures.push(await capture(file, 1440, 1024, expected));
+  }
   await clickByText(".library-tabs button", "Historique");
   manifest.captures.push(await capture("desktop-library-history.png", 1440, 1024, "Aucun historique réel disponible"));
   await clickByText(".library-tabs button", "Profils de jeu");
@@ -273,6 +295,15 @@ try {
 
   await clickByText(".global-nav button", "Communauté");
   manifest.captures.push(await capture("desktop-community.png", 1440, 1024, "Des échanges utiles autour des créations"));
+  for (const [tabName,file,expected] of [
+    ["Questions","desktop-community-questions.png","Préparer une question"],
+    ["Discussions","desktop-community-discussions.png","Discussions liées au modding"],
+    ["Studios / équipes","desktop-community-teams.png","Équipes de création"],
+    ["Activité","desktop-community-activity.png","Contexte utile, pas un réseau social"],
+  ]) {
+    await clickByText(".community-tabs button", tabName);
+    manifest.captures.push(await capture(file, 1440, 1024, expected));
+  }
 
   await clickByAriaLabel("Compte");
   await clickByText(".account-nav button", "Notifications");
@@ -283,6 +314,16 @@ try {
 
   await clickByText(".account-nav button", "Compte");
   manifest.captures.push(await capture("desktop-account.png", 1440, 1024, "Vous explorez MODARYX en mode invité"));
+  for (const [tabName,file,expected] of [
+    ["Profil","desktop-account-profile.png","Aucun profil public actif"],
+    ["Confidentialité","desktop-account-privacy.png","Privé par défaut"],
+    ["Apparence","desktop-account-appearance.png","Préférences locales"],
+    ["Accessibilité","desktop-account-accessibility.png","Accessible sans réglage spécial"],
+    ["Données locales","desktop-account-local-data.png","Ce navigateur"],
+  ]) {
+    await clickByText(".account-nav button", tabName);
+    manifest.captures.push(await capture(file, 1440, 1024, expected));
+  }
 
   await setViewport(390, 844);
   await clickByAriaLabel("Ouvrir le menu");
@@ -307,6 +348,17 @@ try {
   manifest.captures.push(await capture("desktop-creator-project.png", 1440, 1024, "Crédits structurés"));
   await clickByText(".studio-nav button", "Releases");
   manifest.captures.push(await capture("desktop-creator-platform-validation.png", 1440, 1024, "Validation par plateforme"));
+  for (const [tabName,file,expected] of [
+    ["Upload","desktop-creator-upload.png","Fichiers de release"],
+    ["Analytics","desktop-creator-analytics.png","Données indisponibles"],
+    ["Support","desktop-creator-support.png","Support du projet"],
+    ["Reports","desktop-creator-reports.png","Aucun signalement réel"],
+    ["Team","desktop-creator-team.png","Équipe / studio"],
+    ["Settings","desktop-creator-settings.png","Paramètres du Studio"],
+  ]) {
+    await clickByText(".studio-nav button", tabName);
+    manifest.captures.push(await capture(file, 1440, 1024, expected));
+  }
 
   await clickByText("footer button", "Droits jeux · démo admin");
   manifest.captures.push(await capture("desktop-rights-dashboard.png", 1440, 1024, "Aucune demande réelle n’est envoyée dans ce prototype."));
@@ -352,6 +404,9 @@ try {
   // Mobile states
   await navigateHome(390, 844);
   manifest.captures.push(await capture("mobile-game-hub.png", 390, 844, "Mes profils pour ce jeu"));
+  await clickByText(".local-nav button", "Aperçu");
+  manifest.captures.push(await capture("mobile-game-hub-overview.png", 390, 844, "Sélection adaptative"));
+  await clickByText(".local-nav button", "Mods & contenus");
   await evaluate("document.querySelector('.hub-content-list')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("mobile-game-hub-content-list.png", 390, 844, "Sentiers de l’aube"));
@@ -394,10 +449,18 @@ try {
 
   await clickSelector(".card-hit");
   manifest.captures.push(await capture("mobile-content-detail.png", 390, 844, "Avant d’ajouter"));
+  await clickByText(".detail-tabs button", "Fichiers");
+  manifest.captures.push(await capture("mobile-content-files.png", 390, 844, "Fichiers de cette version"));
+  await clickByText(".detail-tabs button", "Versions");
+  manifest.captures.push(await capture("mobile-content-versions.png", 390, 844, "Historique de démonstration"));
   await clickByText(".detail-tabs button", "Compatibilité et prérequis");
   manifest.captures.push(await capture("mobile-content-compatibility-specialized.png", 390, 844, "Fraîcheur preuve"));
   await clickByText(".detail-tabs button", "Plan avancé");
   manifest.captures.push(await capture("mobile-content-advanced-plan.png", 390, 844, "Plan avancé — démonstration"));
+  await clickByText(".detail-tabs button", "Changelog");
+  manifest.captures.push(await capture("mobile-content-changelog.png", 390, 844, "Changelog"));
+  await clickByText(".detail-tabs button", "Support");
+  manifest.captures.push(await capture("mobile-content-support.png", 390, 844, "Support indisponible dans cette démo"));
   await clickByText(".detail-tabs button", "Signalement");
   manifest.captures.push(await capture("mobile-content-report.png", 390, 844, "Signaler ce contenu"));
   await clickByText(".report-section .primary", "Préparer le signalement local");
@@ -405,11 +468,22 @@ try {
   await evaluate("document.querySelector('#report-reason-error')?.scrollIntoView({block:'center'})");
   await sleep(120);
   manifest.captures.push(await captureCurrentViewport("mobile-content-report-error.png", 390, 844, "Choisissez une raison avant de préparer le signalement."));
+  await clickByText(".detail-tabs button", "Permissions");
+  manifest.captures.push(await capture("mobile-content-permissions.png", 390, 844, "Aucune licence de distribution réelle"));
 
   await navigateHome(390, 844);
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav .mobile-nav-utility", "Bibliothèque");
   manifest.captures.push(await capture("mobile-library.png", 390, 844, "Retrouvez favoris, suivis, collections, profils et historique"));
+  for (const [tabName,file,expected] of [
+    ["Favoris","mobile-library-favorites.png","Contenus enregistrés"],
+    ["Suivis","mobile-library-following.png","Créateurs et projets suivis"],
+    ["Collections","mobile-library-collections.png","Sélections organisées"],
+    ["Recherches enregistrées","mobile-library-saved-searches.png","Veilles personnelles"],
+  ]) {
+    await clickByText(".library-tabs button", tabName);
+    manifest.captures.push(await capture(file, 390, 844, expected));
+  }
   await clickByText(".library-tabs button", "Historique");
   manifest.captures.push(await capture("mobile-library-history.png", 390, 844, "Aucun historique réel disponible"));
   await clickByText(".library-tabs button", "Profils de jeu");
@@ -433,6 +507,17 @@ try {
   manifest.captures.push(await capture("mobile-creator-project.png", 390, 844, "Crédits structurés"));
   await clickByText(".studio-nav button", "Releases");
   manifest.captures.push(await capture("mobile-creator-platform-validation.png", 390, 844, "Validation par plateforme"));
+  for (const [tabName,file,expected] of [
+    ["Upload","mobile-creator-upload.png","Fichiers de release"],
+    ["Analytics","mobile-creator-analytics.png","Données indisponibles"],
+    ["Support","mobile-creator-support.png","Support du projet"],
+    ["Reports","mobile-creator-reports.png","Aucun signalement réel"],
+    ["Team","mobile-creator-team.png","Équipe / studio"],
+    ["Settings","mobile-creator-settings.png","Paramètres du Studio"],
+  ]) {
+    await clickByText(".studio-nav button", tabName);
+    manifest.captures.push(await capture(file, 390, 844, expected));
+  }
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Collections");
@@ -449,6 +534,15 @@ try {
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav button", "Communauté");
   manifest.captures.push(await capture("mobile-community.png", 390, 844, "Des échanges utiles autour des créations"));
+  for (const [tabName,file,expected] of [
+    ["Questions","mobile-community-questions.png","Préparer une question"],
+    ["Discussions","mobile-community-discussions.png","Discussions liées au modding"],
+    ["Studios / équipes","mobile-community-teams.png","Équipes de création"],
+    ["Activité","mobile-community-activity.png","Contexte utile, pas un réseau social"],
+  ]) {
+    await clickByText(".community-tabs button", tabName);
+    manifest.captures.push(await capture(file, 390, 844, expected));
+  }
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav .mobile-nav-utility", "Notifications");
@@ -460,6 +554,16 @@ try {
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav .mobile-nav-utility", "Compte");
   manifest.captures.push(await capture("mobile-account.png", 390, 844, "Vous explorez MODARYX en mode invité"));
+  for (const [tabName,file,expected] of [
+    ["Profil","mobile-account-profile.png","Aucun profil public actif"],
+    ["Confidentialité","mobile-account-privacy.png","Privé par défaut"],
+    ["Apparence","mobile-account-appearance.png","Préférences locales"],
+    ["Accessibilité","mobile-account-accessibility.png","Accessible sans réglage spécial"],
+    ["Données locales","mobile-account-local-data.png","Ce navigateur"],
+  ]) {
+    await clickByText(".account-nav button", tabName);
+    manifest.captures.push(await capture(file, 390, 844, expected));
+  }
 
   await clickSelector(".mobile-menu");
   await clickByText(".global-nav .mobile-nav-utility", "MODARYX IA");
