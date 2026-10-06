@@ -109,6 +109,32 @@ Ces mesures ne valent pas CWV p75 production.
 - aucun canonical production ;
 - aucun cutover.
 
+## 8.1 Backend/auth preview DEV réel
+
+**TERMINÉ pour le preview DEV / production OPEN**
+
+Preuve HTTP réelle liée au déploiement Cloudflare exact du SHA `d70613a1c5d22b5745545f3547ee9b6d6dfba6be` :
+
+- run GitHub Actions : `37432679004` — SUCCESS ;
+- D1 : présent ;
+- Auth0 : configuré ;
+- login Auth0 : configuré ;
+- Turnstile secret : configuré ;
+- `remoteWritesReady = true` ;
+- session sans compte : `GUEST` honnête ;
+- login : redirect HTTPS externe réel ;
+- `GET /api/v1/profile` sans session → 401 `authentication-required` ;
+- modération/recours sans session → 401 ;
+- écriture profil sans Origin → 403 `origin-required` ;
+- écriture profil avec Origin mais sans session → 401.
+
+R2 n'est pas lié sur ce preview et reste une dépendance séparée pour les usages qui l'exigent.
+
+Cette preuve **ne ferme pas** :
+- backend production ;
+- auth production ;
+- cérémonie passkey appareil réel.
+
 ## 9. Gate VF strict
 
 Dernière micro-preuve :
@@ -164,10 +190,10 @@ Blocages OPEN actuels :
 ## 11. Prochain point logique
 
 Continuer les blockers web réellement préparables sans infrastructure critique :
-1. audit backend/auth existant ;
-2. adapter V2 same-origin fail-closed ;
-3. preuve DEV/preview si bindings réels disponibles ;
-4. préparer notifications/providers sans simuler de service réel ;
-5. conserver tous les blockers externes OPEN jusqu'à preuve réelle.
+1. préparer notifications/providers sans simuler de service réel ;
+2. poursuivre les données V2 réelles sans transformer les fixtures en catalogue ;
+3. préparer les dépendances production (R2/PWA/CWV) sans cutover ;
+4. conserver passkeys appareil réel, Safari, screen-readers et appareils physiques OPEN jusqu'à preuve réelle ;
+5. aucun cutover tant que les blockers production ne sont pas fermés.
 
 **Ce checkpoint devient la source canonique MODARYX la plus récente après fusion.**
