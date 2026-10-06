@@ -62,7 +62,6 @@ jobs:
           };
 
           const root=await request("/","text/html");
-          if(root.status!==200) throw new Error("public root unavailable: "+root.status);
           const html=typeof root.body==="string"?root.body:"";
           const robots=(root.headers["x-robots-tag"]||"").toLowerCase();
           const noindex=robots.includes("noindex")||/<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html);
@@ -102,9 +101,11 @@ jobs:
           const v2Backend=results["/api/v1/status"]?.status===200&&results["/api/v1/status"]?.service==="modaryx-backend";
           const v2Readiness=results["/api/v1/production/readiness"]?.status===200;
           const sw=results["/sw-v2.js"]?.status===200;
-          const classification=v2Backend&&v2Readiness
-            ? (noindex?"V2_BACKEND_PRESENT_ROOT_NOINDEX":"V2_BACKEND_PRESENT_ROOT_INDEXABLE")
-            : "PUBLIC_ORIGIN_NOT_FULL_V2";
+          const classification=root.status===403
+            ? "PUBLIC_ORIGIN_ACCESS_GATED_403"
+            : v2Backend&&v2Readiness
+              ? (noindex?"V2_BACKEND_PRESENT_ROOT_NOINDEX":"V2_BACKEND_PRESENT_ROOT_INDEXABLE")
+              : "PUBLIC_ORIGIN_NOT_FULL_V2";
           console.log("PUBLIC_ORIGIN_CLASSIFICATION",JSON.stringify({
             origin:origin.origin,
             rootStatus:root.status,
