@@ -452,6 +452,12 @@
       "contract": "qa/modaryx-v2-vf-readiness-gate.json",
       "checker": "qa/check-v2-vf-readiness-gate.mjs",
       "source": "docs/MODARYX-V2-SITE-VF-SCOPE-CLASSIFICATION-20261006.md"
+    },
+    {
+      "id": "production-evidence-read-only-probe",
+      "contract": "qa/modaryx-v2-production-evidence-probe-contract.json",
+      "checker": "qa/check-v2-production-evidence-probe-contract.mjs",
+      "source": "docs/MODARYX-V2-PRODUCTION-EVIDENCE-READ-ONLY-PROBE-20261006.md"
     }
   ],
   "invariants": [
