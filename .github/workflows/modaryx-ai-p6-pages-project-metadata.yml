@@ -142,43 +142,72 @@ jobs:
       - name: Verify Auth0 Founder login redirect on exact preview
         shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
           mkdir -p evidence
           api="https://api.cloudflare.com/client/v4"
           auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
 
-          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=${ZONE_NAME}" "${api}/zones")"
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=${ZONE_NAME}" "${api}/zones")" || exit 2
           account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
-          test -n "$account_id"
+          [ -n "$account_id" ] || exit 2
 
           deployment_url=""
           for i in $(seq 1 90); do
-            deployments="$(curl -fsS "${auth[@]}" --get --data-urlencode "env=preview" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}/deployments")"
+            deployments="$(curl -fsS "${auth[@]}" --get --data-urlencode "env=preview" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}/deployments")" || exit 2
             target="$(jq -c --arg sha "$GITHUB_SHA" '[.result[] | select((.deployment_trigger.metadata.commit_hash // "") == $sha)] | sort_by(.created_on) | reverse | .[0] // null' <<<"$deployments")"
             if [ "$(jq -r '. != null' <<<"$target")" = "true" ]; then
               status="$(jq -r '.latest_stage.status // ""' <<<"$target")"
               deployment_url="$(jq -r '.url // ""' <<<"$target")"
               if [ "$status" = "success" ] && [ -n "$deployment_url" ]; then break; fi
-              if [ "$status" = "failure" ]; then echo "Preview deployment failed" >&2; exit 3; fi
+              if [ "$status" = "failure" ]; then break; fi
             fi
             sleep 4
           done
-          test -n "$deployment_url"
+
+          if [ -z "$deployment_url" ]; then
+            jq -n '{schema:"modaryx-p6-founder-login-readiness-v1",status:"FAIL",reason:"preview_not_ready",cookies_recorded:false,tokens_recorded:false,awards_vf_points:false}' > evidence/founder-login-readiness.json
+            cat evidence/founder-login-readiness.json
+            exit 4
+          fi
 
           headers="$(mktemp)"
           body="$(mktemp)"
           login_url="${deployment_url%/}/api/v1/auth/login?returnTo=%2Fapi%2Ffounder%2Fai%2Fe2e-proof"
           code="$(curl -sS -D "$headers" -o "$body" -w '%{http_code}' --max-time 20 "$login_url" || true)"
           location="$(grep -i '^location:' "$headers" | head -n1 | sed -E 's/^[^:]+:[[:space:]]*//; s/\r$//' || true)"
+          response_error="$(jq -r '.error // ""' "$body" 2>/dev/null || true)"
+          content_type="$(grep -i '^content-type:' "$headers" | head -n1 | sed -E 's/^[^:]+:[[:space:]]*//; s/\r$//' || true)"
           rm -f "$body" "$headers"
-          test "$code" = "302"
-          test -n "$location"
 
-          python3 -c 'import json,sys,urllib.parse; origin=sys.argv[1].rstrip("/"); location=sys.argv[2]; u=urllib.parse.urlparse(location); q=urllib.parse.parse_qs(u.query); redirect=(q.get("redirect_uri") or [""])[0]; state=(q.get("state") or [""])[0]; challenge=(q.get("code_challenge") or [""])[0]; method=(q.get("code_challenge_method") or [""])[0]; ok=(u.scheme=="https" and bool(u.hostname) and redirect==origin+"/api/v1/auth/callback" and len(state)>=20 and len(challenge)>=20 and method=="S256" and "client_secret" not in q); out={"schema":"modaryx-p6-founder-login-readiness-v1","status":"PASS" if ok else "FAIL","preview_origin":origin,"auth0_host":u.hostname,"redirect_uri":redirect,"pkce":method,"state_present":len(state)>=20,"client_secret_in_redirect":"client_secret" in q,"cookies_recorded":False,"tokens_recorded":False,"awards_vf_points":False}; print(json.dumps(out,indent=2)); raise SystemExit(0 if ok else 4)' "$deployment_url" "$location" > evidence/founder-login-readiness.json
+          if [ "$code" = "302" ] && [ -n "$location" ]; then
+            python3 -c 'import json,sys,urllib.parse; origin=sys.argv[1].rstrip("/"); location=sys.argv[2]; u=urllib.parse.urlparse(location); q=urllib.parse.parse_qs(u.query); redirect=(q.get("redirect_uri") or [""])[0]; state=(q.get("state") or [""])[0]; challenge=(q.get("code_challenge") or [""])[0]; method=(q.get("code_challenge_method") or [""])[0]; ok=(u.scheme=="https" and bool(u.hostname) and redirect==origin+"/api/v1/auth/callback" and len(state)>=20 and len(challenge)>=20 and method=="S256" and "client_secret" not in q); out={"schema":"modaryx-p6-founder-login-readiness-v1","status":"PASS" if ok else "FAIL","http_status":302,"preview_origin":origin,"auth0_host":u.hostname,"redirect_uri":redirect,"pkce":method,"state_present":len(state)>=20,"client_secret_in_redirect":"client_secret" in q,"cookies_recorded":False,"tokens_recorded":False,"awards_vf_points":False}; print(json.dumps(out,indent=2)); raise SystemExit(0 if ok else 4)' "$deployment_url" "$location" > evidence/founder-login-readiness.json
+            rc=$?
+          else
+            jq -n               --arg schema "modaryx-p6-founder-login-readiness-v1"               --arg origin "$deployment_url"               --arg http "$code"               --arg error "$response_error"               --arg content_type "$content_type"               '{
+                schema:$schema,
+                status:"FAIL",
+                http_status:($http|tonumber),
+                preview_origin:$origin,
+                response_error:(if $error=="" then null else $error end),
+                content_type:$content_type,
+                auth_redirect_present:false,
+                cookies_recorded:false,
+                tokens_recorded:false,
+                awards_vf_points:false
+              }' > evidence/founder-login-readiness.json
+            rc=4
+          fi
+
           cat evidence/founder-login-readiness.json
-          echo "MODARYX_P6_FOUNDER_LOGIN_READY origin=$deployment_url"
+          if [ "$rc" -eq 0 ]; then
+            echo "MODARYX_P6_FOUNDER_LOGIN_READY origin=$deployment_url"
+          else
+            echo "MODARYX_P6_FOUNDER_LOGIN_NOT_READY http=$code error=$response_error" >&2
+          fi
+          exit "$rc"
 
       - name: Upload Founder login readiness evidence
+        if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: modaryx-ai-p6-founder-login-readiness
