@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "PREPARED_NOT_EXECUTED",
+  "sourceCommit": "770377dfb33feba9e3d06d79c1fd587bc81765b8",
+  "sequence": [
+    {
+      "order": 1,
+      "migration": "0001",
+      "path": "migrations/0001_modaryx_dev_foundation.sql",
+      "gitBlobSha1": "2e538e242a67ceac028a7309d96b06ee26456dd7",
+      "sizeBytes": 1943
+    },
+    {
+      "order": 2,
+      "migration": "0002",
+      "path": "migrations/0002_modaryx_auth_sessions.sql",
+      "gitBlobSha1": "2444f11d1f21edb549c33e95b0afa7036b439d65",
+      "sizeBytes": 812
+    },
+    {
+      "order": 3,
+      "migration": "0003",
+      "path": "migrations/0003_modaryx_moderation_publication.sql",
+      "gitBlobSha1": "9a4af03da13bfdcef4d2c127c891b427bb54f798",
+      "sizeBytes": 1003
+    },
+    {
+      "order": 4,
+      "migration": "0004",
+      "path": "migrations/0004_modaryx_v2_core_model.sql",
+      "gitBlobSha1": "278c9b6b2ab7449942b304eafbe6f2aff64c086f",
+      "sizeBytes": 13477
+    },
+    {
+      "order": 5,
+      "migration": "0005",
+      "path": "migrations/0005_modaryx_v2_notifications.sql",
+      "gitBlobSha1": "a087f5e3ec9669d2940f9544d553cbd41ff1d17e",
+      "sizeBytes": 2555
+    },
+    {
+      "order": 6,
+      "migration": "0006",
+      "path": "migrations/0006_modaryx_v2_data_history.sql",
+      "gitBlobSha1": "d4e06afe5f9ec8026cb87793436a39fc8531d3e4",
+      "sizeBytes": 1432
+    },
+    {
+      "order": 7,
+      "migration": "0007",
+      "path": "migrations/0007_modaryx_v2_notification_delivery_outbox.sql",
+      "gitBlobSha1": "c68f7e249ed22c6f3fe98ff99b8af2b0a273c193",
+      "sizeBytes": 1419
+    },
+    {
+      "order": 8,
+      "migration": "0008",
+      "path": "migrations/0008_modaryx_v2_game_rights_registry.sql",
+      "gitBlobSha1": "02b4e3a8ea37d7c8e66949d2013d0d7167a0704a",
+      "sizeBytes": 3516
+    },
+    {
+      "order": 9,
+      "migration": "0009",
+      "path": "migrations/0009_modaryx_v2_game_support_requests.sql",
+      "gitBlobSha1": "d630f3eb380ad73a7e755f329145eeacc782277b",
+      "sizeBytes": 2720
+    },
+    {
+      "order": 10,
+      "migration": "0010",
+      "path": "migrations/0010_modaryx_v2_rights_evidence.sql",
+      "gitBlobSha1": "e8e81fcea8e31716e85d273ba0b41f36adf76f63",
+      "sizeBytes": 3712
+    },
+    {
+      "order": 11,
+      "migration": "0011",
+      "path": "migrations/0011_modaryx_v2_publisher_outbound_readiness.sql",
+      "gitBlobSha1": "9622a094115be8a576b65ea457633b2aecd5a4f4",
+      "sizeBytes": 2461
+    },
+    {
+      "order": 12,
+      "migration": "0012",
+      "path": "migrations/0012_modaryx_v2_publisher_inbound_quarantine.sql",
+      "gitBlobSha1": "99d3e2ef59353d3126ee1274b23bba1186c974e5",
+      "sizeBytes": 1435
+    },
+    {
+      "order": 13,
+      "migration": "0013",
+      "path": "migrations/0013_modaryx_v2_authorizing_decision_audit.sql",
+      "gitBlobSha1": "179dd2705895030639f27eed256b350418959439",
+      "sizeBytes": 1438
+    },
+    {
+      "order": 14,
+      "migration": "0014",
+      "path": "migrations/0014_modaryx_v2_cwv_rum.sql",
+      "gitBlobSha1": "d459e5ca1c135ca858b26e4731cb247aaf30c881",
+      "sizeBytes": 1429
+    }
+  ],
+  "expectedCurrentV2TableCount": 31,
+  "applyPolicy": {
+    "localValidation": "ALLOWED",
+    "remoteDev": "EXPLICIT_MANUAL_ONLY",
+    "remoteProduction": "BLOCKED_UNTIL_DEV_PROOF_AND_EXPLICIT_APPROVAL",
+    "automaticRemoteApply": false,
+    "cutoverCoupledApply": false
+  },
+  "prerequisites": [
+    "EXACT_SOURCE_COMMIT_VERIFIED",
+    "ALL_MIGRATION_BLOB_HASHES_VERIFIED",
+    "CONTIGUOUS_ORDER_0001_TO_0014",
+    "LOCAL_SQLITE_REPLAY_GREEN",
+    "NO_DESTRUCTIVE_DDL_IN_CURRENT_SEQUENCE",
+    "REMOTE_TARGET_IDENTITY_PROVEN_BEFORE_APPLY",
+    "PRE_APPLY_BACKUP_OR_EXPORT_EVIDENCE_REQUIRED",
+    "DEV_REMOTE_APPLY_AND_POST_APPLY_READ_ONLY_PROOF_BEFORE_PRODUCTION",
+    "SEPARATE_EXPLICIT_PRODUCTION_APPROVAL_REQUIRED"
+  ],
+  "postApplyProofRequired": [
+    "D1_SCHEMA_READ_ONLY_TABLE_COUNT",
+    "BACKEND_STATUS_READ_ONLY",
+    "OWNER_HISTORY_READ_WRITE_TARGETED_PROOF",
+    "ROLLBACK_OR_RESTORE_PATH_EVIDENCE"
+  ],
+  "invariants": [
+    "NO_REMOTE_APPLY_BY_THIS_MANIFEST",
+    "NO_WRANGLER_D1_EXECUTE_REMOTE_IN_PROOF",
+    "NO_PRODUCTION_MUTATION",
+    "NO_FIXTURE_SEED",
+    "NO_CATALOGUE_PROMOTION",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER",
+    "REAL_DATA_HISTORY_BLOCKER_REMAINS_OPEN"
+  ]
+}
