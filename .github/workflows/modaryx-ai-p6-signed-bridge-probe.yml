@@ -62,7 +62,7 @@ jobs:
               target_sha="$(jq -r '.deployment_trigger.metadata.commit_hash // ""' <<<"$target")"
               target_stage="$(jq -r '.latest_stage.name // ""' <<<"$target")"
 
-              if [ "$target_sha" = "$GITHUB_SHA" ] && [ "$target_stage" = "success" ] && [ -n "$target_url" ]; then
+              if [ "$target_sha" = "$GITHUB_SHA" ] && [ -n "$target_url" ]; then
                 body="$(mktemp)"
                 code="$(curl -sS -o "$body" -w '%{http_code}' --max-time 20 "${target_url%/}/api/p6/bridge-probe" || true)"
                 ok="$(jq -r '.ok == true' "$body" 2>/dev/null || echo false)"
@@ -144,3 +144,4 @@ jobs:
 # replay-trigger: p6-synchronized-preview-after-env-20261006-a
 # replay-trigger: safe-inner-bridge-diagnostic-20261006
 # replay-trigger: exact-sha-single-safe-probe-20261006
+# replay-trigger: exact-sha-no-stage-name-assumption-20261006
