@@ -9,7 +9,8 @@ const inputs=new Set(c.cloudflareSystemInputs||[]);
 for(const x of ["CF_PAGES_COMMIT_SHA","CF_PAGES_BRANCH","CF_PAGES_URL"]) assert.ok(inputs.has(x),"missing Pages system input "+x);
 const inv=new Set(c.invariants||[]);
 for(const x of [
-  "NO_SECRET_ENV_VALUE_EXPOSED","BUILD_INFO_STATIC_READ_ONLY","BRANCH_ALIAS_PROBE_GET_HEAD_ONLY",
+  "NO_SECRET_ENV_VALUE_EXPOSED","BUILD_INFO_STATIC_READ_ONLY",
+  "IMMUTABLE_HASH_PREVIEW_FROM_SUCCESSFUL_CLOUDFLARE_CHECK","PREVIEW_RESOLUTION_READ_ONLY_GITHUB_CHECKS",
   "PRE_CUTOVER_REQUIRES_NOINDEX","EXPECTED_SHA_MUST_MATCH_BEFORE_PASS","NO_REMOTE_MUTATION","NO_CUTOVER"
 ]) assert.ok(inv.has(x),"missing invariant "+x);
 
