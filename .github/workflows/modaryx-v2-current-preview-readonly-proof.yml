@@ -3,7 +3,7 @@ name: MODARYX V2 Current Preview Read-Only Proof
 on:
   push:
     branches:
-      - 'chatgpt/modaryx-v2-current-preview-readonly-proof-20261006'
+      - 'chatgpt/modaryx-v2-current-preview-refresh-20261006-1648'
     paths:
       - '.github/workflows/modaryx-v2-current-preview-readonly-proof.yml'
   workflow_dispatch:
@@ -24,13 +24,13 @@ jobs:
       - name: Checkout exact proof branch
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          ref: 5a8e66f096a1482bb98044b12894c9b615364104
+          ref: cbeacc72f8b8d0891ea1de53a580a027fd75ca6e
           persist-credentials: false
           fetch-depth: 1
 
       - name: Verify source relation
         env:
-          MODARYX_EXPECTED_SOURCE_SHA: 5a8e66f096a1482bb98044b12894c9b615364104
+          MODARYX_EXPECTED_SOURCE_SHA: cbeacc72f8b8d0891ea1de53a580a027fd75ca6e
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$MODARYX_EXPECTED_SOURCE_SHA"
@@ -38,7 +38,7 @@ jobs:
 
       - name: Read-only PRE_CUTOVER probe
         env:
-          MODARYX_PRODUCTION_ORIGIN: https://ca255dbb.nova-forge-site-public.pages.dev
+          MODARYX_PRODUCTION_ORIGIN: https://cb360fb9.nova-forge-site-public.pages.dev
           MODARYX_EXPECTED_MODE: PRE_CUTOVER
         run: |
           set -euo pipefail
