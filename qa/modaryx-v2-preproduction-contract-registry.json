@@ -518,6 +518,12 @@
       "contract": "qa/modaryx-v2-work-handoff.json",
       "checker": "qa/check-v2-work-handoff.mjs",
       "source": "docs/MODARYX-V2-WORK-HANDOFF-20261006.md"
+    },
+    {
+      "id": "rights-official-source-artifacts",
+      "contract": "qa/modaryx-v2-rights-official-contact-sources.json",
+      "checker": "qa/check-v2-rights-official-contact-sources.mjs",
+      "source": "docs/MODARYX-V2-RIGHTS-OFFICIAL-CONTACT-SOURCES-20261006.md"
     }
   ],
   "invariants": [

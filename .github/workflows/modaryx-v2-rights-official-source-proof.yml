@@ -1,0 +1,35 @@
+name: MODARYX V2 Rights Official Source Artifacts Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-rights-official-contact-sources-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-rights-official-source-proof.yml'
+      - 'qa/modaryx-v2-rights-official-contact-sources.json'
+      - 'qa/check-v2-rights-official-contact-sources.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+      - 'docs/MODARYX-V2-RIGHTS-OFFICIAL-CONTACT-SOURCES-20261006.md'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    name: Validate official rights sources without outbound or blocker closure
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - run: |
+          set -euo pipefail
+          node qa/check-v2-rights-official-contact-sources.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+          echo PASS_V2_RIGHTS_OFFICIAL_SOURCE_PROOF
