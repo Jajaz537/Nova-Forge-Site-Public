@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 6
     env:
-      DEPLOYMENT_URL: "https://53d71c83.nova-forge-site-public.pages.dev"
+      DEPLOYMENT_URL: "https://4386bbfe.nova-forge-site-public.pages.dev"
       EXPECTED_PROTOCOL: "modaryx-founder-bridge-v1"
     steps:
       - name: Probe exact Pages retry through real signed bridge
@@ -53,7 +53,7 @@ jobs:
             exit 5
           fi
 
-          echo "MODARYX_P6_EXACT_SIGNED_BRIDGE_PASS deployment=53d71c83 protocol=$protocol"
+          echo "MODARYX_P6_EXACT_SIGNED_BRIDGE_PASS deployment=4386bbfe protocol=$protocol"
 
       - name: Upload exact signed bridge proof
         if: always()
@@ -64,3 +64,4 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 # replay-trigger: cache-option-and-public-fetch-preview
+# replay-trigger: workers-manual-redirect-deployed
