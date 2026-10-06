@@ -13,7 +13,9 @@ const manifest=JSON.parse(fs.readFileSync("v2/public/manifest.webmanifest","utf8
 if(manifest.name!=="MODARYX"||manifest.short_name!=="MODARYX"||manifest.start_url!=="/"||manifest.scope!=="/") throw new Error("manifest identity drift");
 if(Array.isArray(manifest.shortcuts)&&manifest.shortcuts.length) throw new Error("unproven PWA shortcuts forbidden");
 const main=fs.readFileSync("v2/src/main.jsx","utf8");
-if(main.includes("serviceWorker.register")) throw new Error("automatic SW registration before gate forbidden");
+if(main.includes("serviceWorker.register")) throw new Error("service worker registration must stay isolated in the gated PWA module");
+if(!main.includes("registerV2PwaIfEnabled")) throw new Error("gated PWA registration hook missing");
+if(!fs.existsSync("v2/src/pwa-registration.js")) throw new Error("PWA registration module missing");
 if(!main.includes("migrateLegacyBrowserState")) throw new Error("storage migration hook missing");
 const app=fs.readFileSync("v2/src/App.jsx","utf8");
 if(app.includes("CanonNarrativeLayer")||app.includes("living-threshold-dragon-baby")||app.includes("living-threshold-wolf-baby")) throw new Error("rejected narrative companion returned");

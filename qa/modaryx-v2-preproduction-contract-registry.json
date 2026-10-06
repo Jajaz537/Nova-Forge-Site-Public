@@ -326,6 +326,12 @@
       "contract": "qa/modaryx-v2-production-candidate-root.json",
       "checker": "qa/check-v2-production-candidate-root.mjs",
       "source": "docs/MODARYX-V2-PRODUCTION-CANDIDATE-ROOT-20261006.md"
+    },
+    {
+      "id": "pwa-candidate-gate",
+      "contract": "qa/modaryx-v2-pwa-candidate-contract.json",
+      "checker": "qa/check-v2-pwa-candidate-contract.mjs",
+      "source": "docs/MODARYX-V2-PWA-CANDIDATE-GATE-20261006.md"
     }
   ],
   "invariants": [

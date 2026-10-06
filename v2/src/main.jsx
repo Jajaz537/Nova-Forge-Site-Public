@@ -5,6 +5,7 @@ import "./styles.css";
 import "./premium-editorial.css";
 import "./product-blue-violet.css";
 import { migrateLegacyBrowserState } from "./storage-migration.js";
+import { registerV2PwaIfEnabled } from "./pwa-registration.js";
 
 try {
   migrateLegacyBrowserState(window.localStorage);
@@ -17,3 +18,8 @@ createRoot(document.getElementById("root")).render(
     <App />
   </React.StrictMode>,
 );
+
+// Production PWA activation stays opt-in until the cutover gate is explicitly lifted.
+void registerV2PwaIfEnabled().catch(() => {
+  // Offline support is fail-soft; registration failure must not break the product shell.
+});
