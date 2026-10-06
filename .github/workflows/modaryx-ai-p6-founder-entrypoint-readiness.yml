@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
-      DEPLOYMENT_URL: "https://38b9ed09.nova-forge-site-public.pages.dev"
+      DEPLOYMENT_URL: "https://b2f36ad5.nova-forge-site-public.pages.dev"
     steps:
       - name: Verify login redirect and current receipt state
         shell: bash
@@ -65,3 +65,4 @@ jobs:
           retention-days: 30
 # replay-trigger: fresh-preview-52c2cad6
 # replay-trigger: synchronized-preview-38b9ed09
+# replay-trigger: synchronized-live-preview-b2f36ad5
