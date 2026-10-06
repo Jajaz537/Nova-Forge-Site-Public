@@ -11,6 +11,13 @@ on:
       - 'functions/api/v1/notifications/destinations.js'
       - 'qa/modaryx-v2-notification-destination-vault-contract.json'
       - 'qa/check-v2-notification-destination-vault.mjs'
+      - 'qa/modaryx-v2-d1-migration-execution-manifest.json'
+      - 'qa/check-v2-d1-migration-execution-manifest.mjs'
+      - 'functions/_lib/production-readiness.mjs'
+      - 'qa/modaryx-v2-production-readiness-contract.json'
+      - 'qa/check-v2-production-readiness.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+      - 'docs/MODARYX-V2-NOTIFICATION-DESTINATION-VAULT-20261006.md'
   pull_request:
     branches:
       - 'design/modaryx-v2-blue-violet-product-20261005'
@@ -38,4 +45,7 @@ jobs:
         run: |
           set -euo pipefail
           node --experimental-sqlite qa/check-v2-notification-destination-vault.mjs
+          node --experimental-sqlite qa/check-v2-d1-migration-execution-manifest.mjs
+          node --experimental-sqlite qa/check-v2-production-readiness.mjs
           echo PASS_V2_NOTIFICATION_DESTINATION_VAULT_PROOF
+          echo PASS_V2_NOTIFICATION_DESTINATION_VAULT_INTEGRATION
