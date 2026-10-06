@@ -1,0 +1,115 @@
+name: MODARYX V2 External Validation Capability Probe
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-external-capability-probe-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-external-capability-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-external-capability-probe
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    name: Inspect real Windows validation capabilities read-only
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Verify exact source
+        shell: powershell
+        env:
+          EXPECTED_SHA: cbeacc72f8b8d0891ea1de53a580a027fd75ca6e
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $actual = (git rev-parse HEAD).Trim()
+          if ($actual -ne $env:EXPECTED_SHA) { throw "SHA mismatch: $actual" }
+          Write-Host "CAPABILITY_SOURCE_SHA=$actual"
+          Write-Host "RUNNER_NAME=$env:RUNNER_NAME"
+          Write-Host "WINDOWS_REAL=yes"
+          Write-Host "RUNNER_ARCH=$env:RUNNER_ARCH"
+
+      - name: Detect browser screen-reader and touch capability without activation
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          function Find-Exe([string[]]$Names,[string[]]$Paths) {
+            foreach ($name in $Names) {
+              $cmd = Get-Command $name -ErrorAction SilentlyContinue | Select-Object -First 1
+              if ($cmd -and (Test-Path $cmd.Source)) { return $cmd.Source }
+            }
+            foreach ($p in $Paths) {
+              $expanded = [Environment]::ExpandEnvironmentVariables($p)
+              if (Test-Path $expanded) { return $expanded }
+            }
+            return $null
+          }
+
+          $chrome = Find-Exe @('chrome.exe','google-chrome.exe') @(
+            '%ProgramFiles%\Google\Chrome\Application\chrome.exe',
+            '%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe',
+            '%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe'
+          )
+          $edge = Find-Exe @('msedge.exe') @(
+            '%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe',
+            '%ProgramFiles%\Microsoft\Edge\Application\msedge.exe'
+          )
+          $firefox = Find-Exe @('firefox.exe') @(
+            '%ProgramFiles%\Mozilla Firefox\firefox.exe',
+            '%ProgramFiles(x86)%\Mozilla Firefox\firefox.exe'
+          )
+          $nvda = Find-Exe @('nvda.exe') @(
+            '%ProgramFiles%\NVDA\nvda.exe',
+            '%ProgramFiles(x86)%\NVDA\nvda.exe',
+            '%APPDATA%\nvda\nvda.exe',
+            '%LOCALAPPDATA%\NVDA\nvda.exe'
+          )
+
+          $nvdaRunning = @(Get-Process nvda -ErrorAction SilentlyContinue).Count -gt 0
+          $interactive = [Environment]::UserInteractive
+
+          $touch = $false
+          try {
+            $touch = @(Get-CimInstance Win32_PnPEntity -ErrorAction Stop |
+              Where-Object { $_.Name -match 'touch screen|touchscreen|digitizer' }).Count -gt 0
+          } catch {
+            Write-Host "TOUCH_ENUMERATION=UNAVAILABLE"
+          }
+
+          Write-Host ("BROWSER_CHROME_PRESENT=" + ($(if($chrome){'yes'}else{'no'})))
+          Write-Host ("BROWSER_EDGE_PRESENT=" + ($(if($edge){'yes'}else{'no'})))
+          Write-Host ("BROWSER_FIREFOX_PRESENT=" + ($(if($firefox){'yes'}else{'no'})))
+          Write-Host ("NVDA_INSTALLED=" + ($(if($nvda){'yes'}else{'no'})))
+          Write-Host ("NVDA_ACTIVE=" + ($(if($nvdaRunning){'yes'}else{'no'})))
+          Write-Host ("WINDOWS_USER_INTERACTIVE=" + ($(if($interactive){'yes'}else{'no'})))
+          Write-Host ("TOUCH_DEVICE_DETECTED=" + ($(if($touch){'yes'}else{'no'})))
+          Write-Host "SAFARI_REAL=no"
+          Write-Host "VOICEOVER_REAL=no"
+          Write-Host "TALKBACK_REAL=no"
+          Write-Host "BLOCKER_CLOSURE=no"
+          Write-Host "PASS_V2_EXTERNAL_CAPABILITY_READ_ONLY_PROBE"
+
+      - name: Assert no external-validation blocker is claimed closed
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $gate = Get-Content qa/modaryx-v2-vf-readiness-gate.json -Raw | ConvertFrom-Json
+          $required = @('nvda-real','voiceover-real','talkback-real','safari-real','physical-devices')
+          foreach ($id in $required) {
+            $item = $gate.externalHuman | Where-Object { $_.id -eq $id } | Select-Object -First 1
+            if (-not $item) { throw "missing external blocker $id" }
+            if ($item.state -ne 'OPEN') { throw "external blocker unexpectedly closed: $id=$($item.state)" }
+          }
+          Write-Host "EXTERNAL_BLOCKERS_REMAIN_OPEN=yes"
