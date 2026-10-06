@@ -44,6 +44,9 @@ jobs:
           latest_branch="$(jq -r '.result.latest_deployment.deployment_trigger.metadata.branch // ""' <<<"$project")"
           latest_stage="$(jq -r '.result.latest_deployment.latest_stage.name // ""' <<<"$project")"
           domains="$(jq -c '.result.domains // []' <<<"$project")"
+          preview_has_bridge_url="$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_AI_BRIDGE_URL")' <<<"$project")"
+          preview_has_bridge_key="$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_AI_BRIDGE_KEY_HEX")' <<<"$project")"
+          preview_has_evidence_mode="$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_P6_EVIDENCE_MODE")' <<<"$project")"
 
           jq -n \
             --arg schema "modaryx-p6-pages-project-metadata-v1" \
@@ -58,11 +61,19 @@ jobs:
             --arg latest_branch "$latest_branch" \
             --arg latest_stage "$latest_stage" \
             --argjson domains "$domains" \
+            --argjson preview_has_bridge_url "$preview_has_bridge_url" \
+            --argjson preview_has_bridge_key "$preview_has_bridge_key" \
+            --argjson preview_has_evidence_mode "$preview_has_evidence_mode" \
             '{
               schema:$schema,
               production_branch:$production_branch,
               subdomain:$subdomain,
               domains:$domains,
+              preview_env_presence:{
+                bridge_url:$preview_has_bridge_url,
+                bridge_key:$preview_has_bridge_key,
+                evidence_mode:$preview_has_evidence_mode
+              },
               canonical_deployment:{id:$canonical_id,url:$canonical_url,branch:$canonical_branch,stage:$canonical_stage},
               latest_deployment:{id:$latest_id,url:$latest_url,branch:$latest_branch,stage:$latest_stage},
               secret_values_logged:false,
@@ -70,7 +81,7 @@ jobs:
               awards_vf_points:false
             }' > evidence/pages-project-metadata.json
 
-          echo "MODARYX_P6_PAGES_PROJECT productionBranch=$production_branch canonicalBranch=$canonical_branch canonicalStage=$canonical_stage latestBranch=$latest_branch latestStage=$latest_stage"
+          echo "MODARYX_P6_PAGES_PROJECT productionBranch=$production_branch canonicalBranch=$canonical_branch canonicalStage=$canonical_stage latestBranch=$latest_branch latestStage=$latest_stage previewUrl=$preview_has_bridge_url previewKey=$preview_has_bridge_key previewEvidence=$preview_has_evidence_mode"
 
       - name: Upload Pages project metadata
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
@@ -79,3 +90,4 @@ jobs:
           path: evidence
           if-no-files-found: error
           retention-days: 30
+# replay-trigger: preview-env-presence-safe-read
