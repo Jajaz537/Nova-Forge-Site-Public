@@ -56,16 +56,23 @@ for (const invariant of [
   "UNKNOWN_SENDER_NEVER_BECOMES_VERIFIED_BY_GUESS",
   "WEB_AND_FORGE_RIGHTS_REMAIN_SEPARATE",
   "AMBIGUOUS_OR_UNTRUSTED_INBOUND_REQUIRES_REVIEW",
-  "RESPONSE_INTERPRETATION_CONTRACT_REMAINS_SEPARATE"
+  "RESPONSE_INTERPRETATION_CONTRACT_REMAINS_SEPARATE",
+  "RAW_MESSAGE_ARCHIVE_REQUIRES_DEDICATED_BINDING",
+  "ARCHIVE_CONTENT_IS_OPAQUE_NEVER_EXECUTED",
+  "NO_MAILBOX_OR_WEBHOOK_BY_THIS_CHANGE",
+  "NO_REAL_ATTACHMENT_SCAN_CLAIM",
+  "REMOTE_D1_NOT_APPLIED",
+  "PUBLISHER_INBOUND_PRODUCTION_BLOCKER_REMAINS_OPEN"
 ]) {
   if (!(data.invariants || []).includes(invariant)) throw new Error("missing invariant: " + invariant);
 }
 
-for (const [key, value] of Object.entries(data.productionStatus || {})) {
-  if (value !== "NOT_IMPLEMENTED") {
-    throw new Error("production status must remain honest before implementation: " + key);
-  }
+if(data.productionStatus?.archiveQuarantineAdapter!=="CANDIDATE_FAKE_BINDING_PROVEN") throw new Error("archive quarantine candidate status drift");
+if(data.productionStatus?.metadataLedger!=="CANDIDATE_LOCAL_PROOF") throw new Error("metadata ledger candidate status drift");
+for(const key of ["inboundMailbox","webhookReceiver","correlationEngine","provenanceVerifier","attachmentScanner","responseRouter"]){
+  if(data.productionStatus?.[key]!=="NOT_IMPLEMENTED") throw new Error("production status must remain honest: "+key);
 }
+if(data.remoteApplication!=="NOT_EXECUTED") throw new Error("remote application must remain NOT_EXECUTED");
 
 console.log("PUBLISHER_INBOUND_STATE_COUNT", data.inboundStates.length);
 console.log("PUBLISHER_INBOUND_CORRELATION_EVIDENCE_COUNT", data.correlationEvidence.length);
