@@ -1,0 +1,80 @@
+name: MODARYX V2 Live Preview Backend Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-live-preview-backend-proof-20261006'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-live-preview-backend-proof
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Probe exact Cloudflare preview backend bindings
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact proof branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Probe exact deployed preview
+        env:
+          MODARYX_PREVIEW_ORIGIN: https://d51866bb.nova-forge-site-public.pages.dev
+          MODARYX_EXPECTED_SOURCE_SHA: d70613a1c5d22b5745545f3547ee9b6d6dfba6be
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const origin=process.env.MODARYX_PREVIEW_ORIGIN;
+          const expectedSha=process.env.MODARYX_EXPECTED_SOURCE_SHA;
+
+          const getJson=async path=>{
+            const response=await fetch(origin+path,{redirect:"manual",headers:{accept:"application/json"}});
+            const type=response.headers.get("content-type")||"";
+            let body=null;
+            if(/application\/json/i.test(type)) body=await response.json();
+            return {response,body};
+          };
+
+          const status=await getJson("/api/v1/status");
+          if(status.response.status!==200) throw new Error("status endpoint HTTP "+status.response.status);
+          if(status.body?.service!=="modaryx-backend") throw new Error("unexpected backend service");
+          if(status.body?.guarantees?.secretsReturned!==false) throw new Error("secretsReturned guarantee drift");
+
+          const summary={
+            expectedSourceSha:expectedSha,
+            stage:status.body?.stage,
+            d1:Boolean(status.body?.bindings?.d1),
+            r2:Boolean(status.body?.bindings?.r2),
+            authConfigured:Boolean(status.body?.auth0?.configured),
+            loginConfigured:Boolean(status.body?.auth0?.loginConfigured),
+            turnstileSecretConfigured:Boolean(status.body?.turnstile?.secretConfigured),
+            remoteWritesReady:Boolean(status.body?.remoteWritesReady)
+          };
+          console.log("LIVE_PREVIEW_BACKEND_STATE",JSON.stringify(summary));
+
+          if(!summary.d1) throw new Error("LIVE_PREVIEW_D1_BINDING_MISSING");
+          if(!summary.loginConfigured) throw new Error("LIVE_PREVIEW_AUTH0_LOGIN_NOT_CONFIGURED");
+
+          const session=await getJson("/api/v1/auth/session");
+          if(session.response.status!==200) throw new Error("session endpoint HTTP "+session.response.status);
+          if(typeof session.body?.authenticated!=="boolean") throw new Error("session authenticated boolean missing");
+          console.log("LIVE_PREVIEW_SESSION_STATE",session.body.authenticated ? "AUTHENTICATED" : "GUEST");
+
+          const login=await fetch(origin+"/api/v1/auth/login?returnTo=%2Faccount",{redirect:"manual"});
+          if(login.status!==302) throw new Error("login endpoint expected 302, got "+login.status);
+          const location=login.headers.get("location");
+          if(!location) throw new Error("login redirect location missing");
+          const target=new URL(location);
+          if(target.protocol!=="https:") throw new Error("login redirect must use https");
+          console.log("LIVE_PREVIEW_LOGIN_REDIRECT","HTTPS_EXTERNAL");
+
+          console.log("PASS_V2_LIVE_PREVIEW_BACKEND_PROOF");
+          NODE
