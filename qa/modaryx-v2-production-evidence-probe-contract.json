@@ -27,6 +27,7 @@
     "/api/v1/auth/session",
     "/api/v1/providers/status",
     "/api/v1/notifications/delivery/readiness",
+    "/api/v1/rum/cwv",
     "/api/v1/history"
   ],
   "fieldCwv": {
@@ -36,7 +37,10 @@
       "LCP_P75",
       "INP_P75",
       "CLS_P75"
-    ]
+    ],
+    "collectorReadinessEndpoint": "/api/v1/rum/cwv",
+    "collectorProbeMethod": "GET",
+    "collectorProbeCanCloseBlocker": false
   },
   "invariants": [
     "READ_ONLY_HTTP_ONLY",
@@ -49,6 +53,7 @@
     "NO_FIELD_CWV_CLAIM_FROM_SYNTHETIC_PROBE",
     "NO_PRODUCTION_PASS_FROM_PRE_CUTOVER_PROBE",
     "NO_AUTHENTICATED_SESSION_REQUIRED",
-    "NO_SECRET_VALUES_LOGGED"
+    "NO_SECRET_VALUES_LOGGED",
+    "CWV_READINESS_GET_NEVER_ENABLES_COLLECTION"
   ]
 }

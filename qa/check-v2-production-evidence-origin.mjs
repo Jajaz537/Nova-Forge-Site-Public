@@ -63,6 +63,11 @@ assert.equal(providers.body?.privacy?.secretsReturned,false,"provider registry s
 const delivery=await json("/api/v1/notifications/delivery/readiness");
 assert.equal(delivery.response.status,200,"delivery readiness HTTP");
 
+const cwv=await json("/api/v1/rum/cwv");
+assert.equal(cwv.response.status,200,"CWV readiness HTTP");
+assert.ok(["DISABLED","STORAGE_MISSING","READY_FOR_FIELD_TRAFFIC"].includes(cwv.body?.state),"unexpected CWV readiness state");
+assert.equal(cwv.body?.fieldEvidence,"OPEN_TRAFFIC_AND_P75_REQUIRED","CWV field evidence state drift");
+
 const history=await json("/api/v1/history");
 assert.ok([401,503].includes(history.response.status),"anonymous history must be denied or unavailable, got "+history.response.status);
 
@@ -94,7 +99,12 @@ const summary={
   },
   historyAnonymousStatus:history.response.status,
   serviceWorkerAssetStatus:sw.status,
-  fieldCwv:"EXTERNAL_EVIDENCE_REQUIRED"
+  fieldCwv:{
+    collectorState:cwv.body?.state||null,
+    explicitlyEnabled:Boolean(cwv.body?.explicitlyEnabled),
+    storageReady:Boolean(cwv.body?.storageReady),
+    evidence:"EXTERNAL_EVIDENCE_REQUIRED"
+  }
 };
 console.log("PRODUCTION_EVIDENCE_PROBE",JSON.stringify(summary));
 console.log(mode==="PRE_CUTOVER"?"PASS_V2_PRE_CUTOVER_READ_ONLY_PROBE":"PASS_V2_POST_CUTOVER_READ_ONLY_PROBE");
