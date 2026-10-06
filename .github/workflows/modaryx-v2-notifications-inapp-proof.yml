@@ -14,6 +14,7 @@ on:
       - 'qa/modaryx-v2-notifications-preferences-contract.json'
       - 'qa/check-v2-notifications-preferences-contract.mjs'
       - 'qa/check-v2-notifications-inapp-candidate.mjs'
+      - 'qa/check-v2-living-threshold-product-flows.mjs'
       - 'qa/modaryx-v2-preproduction-contract-registry.json'
   pull_request:
     branches:
