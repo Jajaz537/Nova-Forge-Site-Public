@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./canon-topbar.css";
 import { contentPath, pathForActive, routeStateFromPath } from "./routes.js";
-import { authLoginUrl, getNotifications, logoutAccountSession, markNotificationRead, resolveAccountRemoteState } from "./api/modaryx-api.js";
+import { authLoginUrl, getNotifications, getProviderRegistry, logoutAccountSession, markNotificationRead, resolveAccountRemoteState } from "./api/modaryx-api.js";
 import { resolveAmbientContext } from "./api/local-context.js";
 import {
   ArrowRight, Bell, BookOpen, Check, FunnelSimple, GameController, GridFour,
@@ -861,6 +861,20 @@ function ModaryxAI() {
 
 
 function PublicLegalTrust() {
+  const [providers,setProviders]=useState({state:"LOADING",connectors:null});
+  useEffect(()=>{
+    let cancelled=false;
+    getProviderRegistry().then(result=>{
+      if(cancelled) return;
+      if(!result.ok){
+        setProviders({state:"UNAVAILABLE",connectors:null});
+        return;
+      }
+      setProviders({state:"READY",connectors:result.body?.connectors||{}});
+    });
+    return ()=>{cancelled=true;};
+  },[]);
+
   const sections=[
     ["Informations légales / opérateur","PREUVE MANQUANTE","Identité opérateur réelle requise avant publication."],
     ["Confidentialité","LEGAL_DRAFT_REQUIRED","Doit refléter les données, providers, durées et transferts réellement déployés."],
@@ -871,6 +885,15 @@ function PublicLegalTrust() {
     ["Sécurité","PREUVE MANQUANTE","Aucun contact sécurité public ne doit être inventé."],
     ["Support & contact","PRODUCT_FACTS_MISSING","Les canaux affichés devront correspondre à des services réellement opérés."],
   ];
+  const providerRows=providers.connectors?[
+    ["Identité",providers.connectors.auth],
+    ["Anti-abus",providers.connectors.antiAbuse],
+    ["Stockage artefacts",providers.connectors.artifactStorage],
+    ["Météo",providers.connectors.weather],
+    ["Email",providers.connectors.email],
+    ["Push",providers.connectors.push],
+  ]:[];
+
   return <main id="main-content" tabIndex="-1" className="page-section public-trust">
     <span className="kicker">Confiance publique · prototype</span>
     <h1>Confiance, informations légales et transparence.</h1>
@@ -882,6 +905,18 @@ function PublicLegalTrust() {
         <p>{detail}</p>
       </article>)}
     </section>
+
+    <section className="public-trust-facts" aria-label="État technique des providers">
+      <div><span className="kicker">Providers & connecteurs</span><h2>Afficher uniquement ce que l’environnement déclare réellement.</h2></div>
+      {providers.state==="LOADING"&&<p>Lecture same-origin de l’état technique…</p>}
+      {providers.state==="UNAVAILABLE"&&<div className="unavailable-state"><strong>État providers indisponible</strong><span>Aucun provider n’est déclaré actif par défaut.</span></div>}
+      {providers.state==="READY"&&<div className="public-trust-grid">{providerRows.map(([label,item])=><article key={label}>
+        <div className="public-trust-card-head"><h3>{label}</h3><span className="public-trust-state">{item?.state||"UNKNOWN"}</span></div>
+        <p>{item?.provider||"Aucun provider sélectionné"}</p>
+        {label==="Météo"&&<small>{item?.configured?"Configuré côté serveur · activation production toujours soumise au gate légal/attribution.":"Saison + heure locale restent disponibles sans météo fournisseur."}</small>}
+      </article>)}</div>}
+    </section>
+
     <section className="public-trust-facts">
       <div><span className="kicker">Règle de publication</span><h2>Les faits d’abord, le texte juridique ensuite.</h2></div>
       <ul>
@@ -894,7 +929,6 @@ function PublicLegalTrust() {
     <div className="public-trust-gate"><strong>Gate VF publique</strong><span>Identité opérateur · politiques adaptées au service réel · canaux vérifiés · revue juridique · liens footer fonctionnels.</span><small>État actuel : PREUVE MANQUANTE / non prêt pour publication juridique finale.</small></div>
   </main>;
 }
-
 
 function HelpDocs({ onNavigate }) {
   const topics=[
