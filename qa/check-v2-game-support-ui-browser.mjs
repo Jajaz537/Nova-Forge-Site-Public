@@ -44,7 +44,13 @@ try{
   await send("Page.enable"); await send("Runtime.enable"); await send("Page.bringToFront");
   await send("Page.navigate",{url:origin+"/games"});
   for(let i=0;i<100;i++){if(await evaluate("document.readyState==='complete'"))break;await sleep(100)}
-  await waitText("Demander le support d’un jeu");
+  let disclosureReady=false;
+  for(let i=0;i<100;i++){
+    disclosureReady=await evaluate('Boolean(document.querySelector(".game-support-request button[aria-expanded]"))');
+    if(disclosureReady) break;
+    await sleep(100);
+  }
+  assert.equal(disclosureReady,true,"support request disclosure control did not load");
   const opened=await evaluate(`(()=>{const b=document.querySelector(".game-support-request button[aria-expanded]");if(!b)return false;b.click();return true})()`);
   assert.equal(opened,true,"support request disclosure control missing");
   await waitText("Préparer la demande locale");
