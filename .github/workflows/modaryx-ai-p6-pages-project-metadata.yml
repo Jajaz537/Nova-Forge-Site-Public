@@ -174,38 +174,7 @@ jobs:
           test "$code" = "302"
           test -n "$location"
 
-          python3 - "$deployment_url" "$location" > evidence/founder-login-readiness.json <<'PY'
-import json,sys,urllib.parse
-origin=sys.argv[1].rstrip("/")
-location=sys.argv[2]
-u=urllib.parse.urlparse(location)
-q=urllib.parse.parse_qs(u.query)
-redirect=(q.get("redirect_uri") or [""])[0]
-state=(q.get("state") or [""])[0]
-challenge=(q.get("code_challenge") or [""])[0]
-method=(q.get("code_challenge_method") or [""])[0]
-ok=(
-    u.scheme=="https:"[:-1] and bool(u.hostname) and
-    redirect==origin+"/api/v1/auth/callback" and
-    len(state)>=20 and len(challenge)>=20 and method=="S256" and
-    "client_secret" not in q
-)
-out={
-  "schema":"modaryx-p6-founder-login-readiness-v1",
-  "status":"PASS" if ok else "FAIL",
-  "preview_origin":origin,
-  "auth0_host":u.hostname,
-  "redirect_uri":redirect,
-  "pkce":method,
-  "state_present":len(state)>=20,
-  "client_secret_in_redirect":"client_secret" in q,
-  "cookies_recorded":False,
-  "tokens_recorded":False,
-  "awards_vf_points":False
-}
-print(json.dumps(out,indent=2))
-if not ok: raise SystemExit(4)
-PY
+          python3 -c 'import json,sys,urllib.parse; origin=sys.argv[1].rstrip("/"); location=sys.argv[2]; u=urllib.parse.urlparse(location); q=urllib.parse.parse_qs(u.query); redirect=(q.get("redirect_uri") or [""])[0]; state=(q.get("state") or [""])[0]; challenge=(q.get("code_challenge") or [""])[0]; method=(q.get("code_challenge_method") or [""])[0]; ok=(u.scheme=="https" and bool(u.hostname) and redirect==origin+"/api/v1/auth/callback" and len(state)>=20 and len(challenge)>=20 and method=="S256" and "client_secret" not in q); out={"schema":"modaryx-p6-founder-login-readiness-v1","status":"PASS" if ok else "FAIL","preview_origin":origin,"auth0_host":u.hostname,"redirect_uri":redirect,"pkce":method,"state_present":len(state)>=20,"client_secret_in_redirect":"client_secret" in q,"cookies_recorded":False,"tokens_recorded":False,"awards_vf_points":False}; print(json.dumps(out,indent=2)); raise SystemExit(0 if ok else 4)' "$deployment_url" "$location" > evidence/founder-login-readiness.json
           cat evidence/founder-login-readiness.json
           echo "MODARYX_P6_FOUNDER_LOGIN_READY origin=$deployment_url"
 
