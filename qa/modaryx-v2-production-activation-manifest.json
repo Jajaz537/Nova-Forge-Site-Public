@@ -28,7 +28,14 @@
         "ROLLBACK_OR_RESTORE_PATH_EVIDENCE",
         "SEPARATE_EXPLICIT_PRODUCTION_APPROVAL"
       ],
-      "automatic": false
+      "automatic": false,
+      "latestReadOnlyTargetEvidence": "docs/MODARYX-V2-CLOUDFLARE-TARGET-READONLY-EVIDENCE-20261006.md",
+      "observedTargetState": {
+        "pagesPreviewD1Binding": "PRESENT",
+        "pagesProductionD1Binding": "ABSENT",
+        "d1MetadataApiScope": "INSUFFICIENT_401",
+        "remoteApplyExecuted": false
+      }
     },
     {
       "id": "artifact-storage-r2",
@@ -46,7 +53,13 @@
         "WITHDRAWN_REVOKED_ARCHIVED_DENY_PROOF",
         "EXPLICIT_PRODUCTION_APPROVAL"
       ],
-      "automatic": false
+      "automatic": false,
+      "latestReadOnlyTargetEvidence": "docs/MODARYX-V2-CLOUDFLARE-TARGET-READONLY-EVIDENCE-20261006.md",
+      "observedBindingState": {
+        "preview": "ABSENT",
+        "production": "ABSENT",
+        "mutationPerformed": false
+      }
     },
     {
       "id": "auth-passkeys",
