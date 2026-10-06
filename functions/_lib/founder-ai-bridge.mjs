@@ -90,6 +90,15 @@ export async function requestFounderBridge(context,method,pathWithQuery,payload)
     if(bytes.byteLength){try{data=JSON.parse(DECODER.decode(bytes));}catch{return json({ok:false,error:'bridge-invalid-response'},502);}}
     if(response.status<200||response.status>599) return json({ok:false,error:'bridge-invalid-status'},502);
     return json(data??{ok:response.ok},response.status);
-  }catch{return json({ok:false,error:'bridge-unavailable'},502);}
+  }catch(error){
+    const out={ok:false,error:'bridge-unavailable'};
+    if(context.env?.MODARYX_P6_EVIDENCE_MODE==='enabled'){
+      out.diagnostic={
+        name:String(error?.name||'Error').slice(0,80),
+        message:String(error?.message||'').slice(0,240)
+      };
+    }
+    return json(out,502);
+  }
   finally{clearTimeout(timer);}
 }
