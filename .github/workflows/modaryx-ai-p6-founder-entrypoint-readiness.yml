@@ -29,7 +29,7 @@ jobs:
           trap 'rm -f "$headers" "$body"' EXIT
 
           code="$(curl -sS -D "$headers" -o "$body" -w '%{http_code}' --max-time 15 "$login" || true)"
-          location="$(awk 'BEGIN{IGNORECASE=1}/^location:/{sub(/$/,""); sub(/^location:[[:space:]]*/,""); print; exit}' "$headers")"
+          location="$(awk 'BEGIN{IGNORECASE=1}/^location:/{sub(/^location:[[:space:]]*/,""); print; exit}' "$headers" | tr -d '\r')"
           auth_redirect=false
           if [ "$code" = "302" ] && printf '%s' "$location" | grep -Eq '^https://[^/]+/authorize[?]'; then auth_redirect=true; fi
 
