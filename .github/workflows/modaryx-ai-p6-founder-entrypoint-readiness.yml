@@ -1,18 +1,23 @@
 name: MODARYX IA P6 Founder entrypoint readiness
 
 on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-founder-entrypoint-readiness.yml"
   workflow_dispatch:
     inputs:
       site_origin:
         description: Immutable Cloudflare Pages preview origin
         required: true
         type: string
-        default: "https://2f4f6f67.nova-forge-site-public.pages.dev"
+        default: "https://e1b00663.nova-forge-site-public.pages.dev"
       site_sha:
         description: Exact Git SHA deployed to that origin
         required: true
         type: string
-        default: "0c193b4c42e1dcc05adeda483596eff8c557beee"
+        default: "39be013ebf418648cc5c6fa5332e3d532209ebfa"
 
 permissions:
   contents: read
@@ -23,9 +28,16 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
-      SITE_ORIGIN: ${{ inputs.site_origin }}
-      EXPECTED_SITE_SHA: ${{ inputs.site_sha }}
+      SITE_ORIGIN: ${{ inputs.site_origin || 'https://e1b00663.nova-forge-site-public.pages.dev' }}
+      EXPECTED_SITE_SHA: ${{ inputs.site_sha || '39be013ebf418648cc5c6fa5332e3d532209ebfa' }}
     steps:
+      - name: Prepare non-sensitive readiness evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          jq -n '{schema:"modaryx-p6-founder-entrypoint-readiness-v1",overall_status:"NOT_RUN",founder_qualification:"NOT_RUN",awards_vf_points:false}' > evidence/readiness.json
+
       - name: Verify immutable preview origin against exact deployed Git SHA
         env:
           GH_READ_TOKEN: ${{ github.token }}
@@ -77,49 +89,89 @@ jobs:
           print('MODARYX_P6_DEPLOYMENT_PROVENANCE_PASS')
           PY
 
-      - name: Verify login redirect and current receipt state
+      - name: Measure anonymous entrypoint readiness without Founder qualification
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p evidence
           login="${SITE_ORIGIN}/api/v1/auth/login?returnTo=%2Fapi%2Ffounder%2Fai%2Fe2e-proof"
           headers="$(mktemp)"
           body="$(mktemp)"
-          trap 'rm -f "$headers" "$body"' EXIT
+          evidence_body="$(mktemp)"
+          denial_body="$(mktemp)"
+          trap 'rm -f "$headers" "$body" "$evidence_body" "$denial_body"' EXIT
 
           code="$(curl -sS -D "$headers" -o "$body" -w '%{http_code}' --max-time 15 "$login" || true)"
           location="$(awk 'BEGIN{IGNORECASE=1}/^location:/{sub(/^location:[[:space:]]*/,""); print; exit}' "$headers" | tr -d '\r')"
           auth_redirect=false
           if [ "$code" = "302" ] && printf '%s' "$location" | grep -Eq '^https://[^/]+/authorize[?]'; then auth_redirect=true; fi
 
-          evidence_body="$(mktemp)"
           ev_code="$(curl -sS -o "$evidence_body" -w '%{http_code}' --max-time 15 "${SITE_ORIGIN}/api/p6/evidence" || true)"
-          ev_ready=false
+          receipt_state=invalid
           if [ "$ev_code" = "200" ]; then
-            ev_ready="$(jq -r '.ready == true' "$evidence_body" 2>/dev/null || echo false)"
+            receipt_state="$(jq -r 'if type=="object" then if .ready==false then "false" elif .ready==true then "true" else "invalid" end else "invalid" end' "$evidence_body" 2>/dev/null || echo invalid)"
           fi
 
-          jq -n             --arg schema "modaryx-p6-founder-entrypoint-readiness-v1"             --arg deployment_url "$SITE_ORIGIN"             --arg login_http "$code"             --argjson auth_redirect "$auth_redirect"             --arg evidence_http "$ev_code"             --argjson receipt_ready "$ev_ready"             '{
-              schema:$schema,
-              deployment_url:$deployment_url,
-              login_http:$login_http,
-              auth0_redirect:$auth_redirect,
+          denial_code="$(curl -sS -o "$denial_body" -w '%{http_code}' --max-time 15 "${SITE_ORIGIN}/api/founder/ai/e2e-proof" || true)"
+          measured_ok=false
+          if [ "$auth_redirect" = "true" ] && [ "$ev_code" = "200" ] && [[ "$receipt_state" =~ ^(false|true)$ ]] && [ "$denial_code" = "404" ]; then measured_ok=true; fi
+          jq -n \
+            --arg origin "$SITE_ORIGIN" --arg sha "$EXPECTED_SITE_SHA" \
+            --arg login_http "$code" --argjson auth_redirect "$auth_redirect" \
+            --arg evidence_http "$ev_code" --arg receipt_state "$receipt_state" \
+            --arg denial_http "$denial_code" --argjson measured_ok "$measured_ok" \
+            '{
+              schema:"modaryx-p6-founder-entrypoint-readiness-v1",
+              deployment_url:$origin,deployed_sha:$sha,
+              login_http:$login_http,auth0_redirect:$auth_redirect,
               evidence_http:$evidence_http,
-              receipt_ready:$receipt_ready,
-              identity_recorded:false,
-              secret_values_recorded:false,
-              awards_vf_points:false
+              receipt_ready:(if $receipt_state=="false" then false elif $receipt_state=="true" then true else null end),
+              guest_e2e_denial_http:$denial_http,
+              measured_readiness_status:(if $measured_ok then "PASS" else "FAIL" end),
+              overall_status:(if $measured_ok then "INCONCLUSIVE" else "FAIL" end),
+              founder_qualification:"NOT_RUN",authenticated_non_founder:"NOT_RUN",
+              identity_recorded:false,secret_values_recorded:false,receipt_body_recorded:false,
+              signed_bridge_request_performed:false,awards_vf_points:false
             }' > evidence/readiness.json
 
-          echo "MODARYX_P6_FOUNDER_ENTRYPOINT loginHttp=$code authRedirect=$auth_redirect evidenceHttp=$ev_code receiptReady=$ev_ready"
-          test "$auth_redirect" = "true"
-          test "$ev_code" = "200"
+          if [ "$measured_ok" != "true" ]; then
+            echo "MODARYX_P6_ANONYMOUS_READINESS_FAIL founderQualification=NOT_RUN awards=false" >&2
+            exit 4
+          fi
+          echo "MODARYX_P6_ANONYMOUS_READINESS_MEASURED founderQualification=NOT_RUN overall=INCONCLUSIVE awards=false"
+
+      - name: Seal prepared readiness evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          python3 - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          from datetime import datetime,timezone
+          root=Path('evidence')
+          files=[]
+          for path in sorted(root.rglob('*')):
+              if path.is_file() and path.name!='seal-manifest.json':
+                  data=path.read_bytes()
+                  files.append({'path':path.relative_to(root).as_posix(),'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()})
+          (root/'seal-manifest.json').write_text(json.dumps({
+              'schema':'modaryx-p6-readiness-seal-v1',
+              'created_at':datetime.now(timezone.utc).isoformat(),
+              'site_origin':os.environ['SITE_ORIGIN'],'deployed_sha':os.environ['EXPECTED_SITE_SHA'],
+              'workflow_sha':os.environ['GITHUB_SHA'],'workflow_run_id':os.environ['GITHUB_RUN_ID'],
+              'files':files,'awards_vf_points':False,
+          },indent=2),encoding='utf-8')
+          print('MODARYX_P6_READINESS_EVIDENCE_SEALED awards=false')
+          PY
 
       - name: Upload Founder entrypoint readiness
+        if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: modaryx-ai-p6-founder-entrypoint-readiness
           path: evidence
           if-no-files-found: error
           retention-days: 30
+
 
