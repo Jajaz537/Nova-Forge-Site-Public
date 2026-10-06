@@ -77,3 +77,14 @@ export async function resolveAccountRemoteState(options={}){
 export async function logoutAccountSession(options={}){
   return readJson(API_ROOT+"/auth/logout",{...options,method:"POST"});
 }
+
+export async function getNotifications(options={}){
+  return readJson(API_ROOT+"/notifications",options);
+}
+export async function markNotificationRead(id,options={}){
+  if(typeof id!=="string"||!/^mx_notification_[a-f0-9]{32}$/.test(id)) return {ok:false,state:"ID_REJECTED",status:0};
+  return readJson(API_ROOT+"/notifications/"+id+"/read",{...options,method:"POST"});
+}
+export async function getNotificationPreferences(options={}){
+  return readJson(API_ROOT+"/notifications/preferences",options);
+}

@@ -362,6 +362,12 @@
       "contract": "qa/modaryx-v2-d1-core-contract.json",
       "checker": "qa/check-v2-d1-core-migration.mjs",
       "source": "docs/MODARYX-V2-D1-CORE-MIGRATION-20261006.md"
+    },
+    {
+      "id": "notifications-inapp-candidate",
+      "contract": "qa/modaryx-v2-notifications-preferences-contract.json",
+      "checker": "qa/check-v2-notifications-inapp-candidate.mjs",
+      "source": "docs/MODARYX-V2-NOTIFICATIONS-INAPP-CANDIDATE-20261006.md"
     }
   ],
   "invariants": [

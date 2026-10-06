@@ -9,7 +9,7 @@ const port=9225;
 const proc=spawn(chrome,[
   "--headless=new","--no-sandbox","--disable-gpu","--hide-scrollbars",
   "--remote-debugging-port="+port,
-  "--user-data-dir=/tmp/modaryx-v2-cdp-product-flows",
+  "--user-data-dir=/tmp/modaryx-v2-cdp-product-flows-"+process.pid,
   "about:blank"
 ],{stdio:"ignore"});
 
@@ -22,7 +22,7 @@ function send(method,params={}) {
 }
 async function waitJson(path){
   let last;
-  for(let i=0;i<80;i++){
+  for(let i=0;i<200;i++){
     try{const r=await fetch(`http://127.0.0.1:${port}${path}`);if(r.ok)return await r.json();last=new Error("HTTP "+r.status);}
     catch(e){last=e;}
     await sleep(100);

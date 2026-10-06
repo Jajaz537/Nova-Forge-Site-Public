@@ -38,16 +38,20 @@ for (const x of [
   if (!privacy.has(x)) throw new Error("missing privacy rule " + x);
 }
 
-for (const [key,value] of Object.entries(data.productionStatus || {})) {
-  if (value !== "NOT_IMPLEMENTED") throw new Error("production status must remain honest: " + key);
-}
+const status=data.productionStatus||{};
+if(status.serverEvents!=="NOT_IMPLEMENTED") throw new Error("event producers must remain NOT_IMPLEMENTED");
+if(status.inAppStorageAndReadApi!=="IMPLEMENTED_CANDIDATE") throw new Error("in-app candidate status drift");
+if(status.email!=="NOT_IMPLEMENTED"||status.push!=="NOT_IMPLEMENTED") throw new Error("email/push must remain NOT_IMPLEMENTED");
+if(status.remotePreferences!=="IMPLEMENTED_CANDIDATE") throw new Error("remote preferences candidate status drift");
+if(status.syncConflictBackend!=="VERSION_CONFLICT_PROTECTED_CANDIDATE") throw new Error("sync conflict candidate status drift");
 
 const invariants = new Set(data.invariants || []);
 for (const x of [
   "NO_FAKE_REMOTE_NOTIFICATION","NO_CHANNEL_EXPOSED_AS_ACTIVE_WITHOUT_INFRASTRUCTURE",
   "MARKETING_SEPARATE_OPT_IN","NO_SILENT_SYNC_OVERWRITE","BADGE_ONLY_FROM_REAL_COUNT",
   "RIGHTS_NOTIFICATION_REQUIRES_REAL_RIGHTS_EVENT","LEGAL_REVIEW_REQUIRED_NEVER_UNLOCKS_RIGHTS",
-  "NOTIFICATION_POINTS_TO_REAL_SURFACE","READ_UNREAD_STATE_TEXTUAL","NO_SWIPE_ONLY_DELETE"
+  "NOTIFICATION_POINTS_TO_REAL_SURFACE","READ_UNREAD_STATE_TEXTUAL","NO_SWIPE_ONLY_DELETE",
+  "IN_APP_CANDIDATE_DOES_NOT_IMPLY_EVENT_PRODUCERS","EMAIL_PUSH_REMAIN_DISABLED"
 ]) {
   if (!invariants.has(x)) throw new Error("missing invariant " + x);
 }
