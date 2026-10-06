@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-06",
+  "date": "2026-10-07",
   "status": "READY_FOR_WORK_OR_REAL_OPERATOR",
-  "sourceCommit": "39c98861dfbfcc4dfee3f266e5f500a7b7a934d1",
+  "sourceCommit": "7ef0c89a13539b6060b51d604717c40b5cf5168b",
   "targetBranch": "design/modaryx-v2-blue-violet-product-20261005",
   "blockerCount": 19,
   "blockers": [
@@ -282,12 +282,15 @@
     "AUTOMATION_NEVER_EQUALS_LEGAL_OR_PUBLISHER_APPROVAL"
   ],
   "testedCandidateCommit": "db8ebf50ba4ff593fd73b27e72075b4f8088686a",
-  "latestCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-2304.md",
+  "latestCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-07-0054.md",
   "latestReadOnlyProbe": {
-    "runId": 37488293293,
-    "jobId": 112354005071,
-    "previewOrigin": "https://371b4eff.nova-forge-site-public.pages.dev",
-    "state": "SUCCESS"
+    "runId": 37532315393,
+    "jobId": 112504495423,
+    "previewOrigin": "https://6ed17e00.nova-forge-site-public.pages.dev",
+    "sourceCommit": "85ae67578f848cb1aef6f43d8958eb56fcf7e136",
+    "state": "SUCCESS",
+    "mode": "PRE_CUTOVER",
+    "note": "Infrastructure/backend read-only probe only; not the interactive V2 validation origin."
   },
   "treeEquivalentCanonicalCommit": "39c98861dfbfcc4dfee3f266e5f500a7b7a934d1",
   "latestDesignProof": {
@@ -315,5 +318,74 @@
     "previewOrigin": "https://89b95085.nova-forge-site-public.pages.dev",
     "state": "SUCCESS",
     "note": "Cloudflare branch deployment success only; public-root visual promotion/cutover remains unclaimed."
+  },
+  "latestInteractiveV2Preview": {
+    "runId": 37533118410,
+    "jobId": 112507209743,
+    "sourceCommit": "acd424a3d4abf0eb4cb153dc24d5202db7412afe",
+    "deploymentOrigin": "https://6b6a0acb.nova-forge-site-public.pages.dev",
+    "aliasOrigin": "https://v2-engineering.nova-forge-site-public.pages.dev",
+    "state": "SUCCESS",
+    "noindex": true,
+    "dnsChanged": false,
+    "cutover": false
+  },
+  "currentFrontendEquivalence": {
+    "previewSourceCommit": "acd424a3d4abf0eb4cb153dc24d5202db7412afe",
+    "canonicalCommit": "7ef0c89a13539b6060b51d604717c40b5cf5168b",
+    "verifiedNoV2OrV2PreviewFileChanges": true,
+    "fullTreeEquivalent": false,
+    "scope": "FRONTEND_ONLY",
+    "note": "Backend/QA/governance changed after preview deployment; interactive V2 UI remains frontend-equivalent, but preview does not prove latest backend runtime."
+  },
+  "latestCloudflareCanonicalDeploy": {
+    "sourceCommit": "7ef0c89a13539b6060b51d604717c40b5cf5168b",
+    "deploymentId": "1912f10b-d142-45ea-84ca-6c608c141d57",
+    "previewOrigin": "https://1912f10b.nova-forge-site-public.pages.dev",
+    "state": "SUCCESS",
+    "build": "SUCCESS",
+    "deploy": "SUCCESS",
+    "proofRunId": 37543478471,
+    "proofJobId": 112541779264,
+    "readOnlyVerification": true
+  },
+  "latestNotificationDestinationVault": {
+    "state": "CANDIDATE_LOCAL_PROOF_GREEN_REMOTE_NOT_APPLIED",
+    "finalCanonicalCommit": "7ef0c89a13539b6060b51d604717c40b5cf5168b",
+    "migration": "0015",
+    "keyAlgorithm": "AES-256-GCM",
+    "requiredTable": "modaryx_v2_notification_destinations",
+    "latestVaultProofRunId": 37543293985,
+    "cloudflareFunctionsBuildProofRunId": 37543478471,
+    "remoteApplication": "NOT_EXECUTED",
+    "networkDispatch": "NOT_IMPLEMENTED"
+  },
+  "d1MigrationState": {
+    "sequence": "0001-0015",
+    "migrationCount": 15,
+    "requiredV2TableCount": 32,
+    "remoteDevApply": "NOT_EXECUTED",
+    "remoteProductionApply": "NOT_EXECUTED",
+    "explicitApprovalStillRequired": true
+  },
+  "notificationProviderCandidates": {
+    "email": {
+      "provider": "Cloudflare Email Service",
+      "state": "TECHNICAL_CANDIDATE_NOT_PRODUCTION_APPROVED"
+    },
+    "push": {
+      "provider": "Web Push standard + VAPID",
+      "state": "TECHNICAL_CANDIDATE_NOT_PRODUCTION_APPROVED"
+    },
+    "dispatchImplementation": "NOT_IMPLEMENTED"
+  },
+  "latestCloudflareImportIncident": {
+    "failedCanonicalCommit": "e3f48abc03066cdd3209dc4b3f043f12e5401cb2",
+    "failedDeploymentId": "f2eb493d-be91-496b-9df7-c2a39571794c",
+    "exactFailure": "Pages Functions could not resolve three ../../../../_lib imports from functions/api/v1/notifications/destinations.js",
+    "targetedFixCommit": "11c84137a3bd94c072fc61b185a91a63c77f2460",
+    "mergedCanonicalCommit": "7ef0c89a13539b6060b51d604717c40b5cf5168b",
+    "fixedCanonicalDeploymentId": "1912f10b-d142-45ea-84ca-6c608c141d57",
+    "fixedState": "SUCCESS"
   }
 }
