@@ -185,8 +185,9 @@ try{
   await clickText(".local-nav button","Activité");
   await waitText("Activité de démonstration");
   await clickText(".local-nav button","Mods & contenus");
-  await waitText("Catalogue du jeu");
-  assertEqual(await count(".hub-content .content-card"),6,"game hub content tab count");
+  const gameHubSectionTitle=await evaluate(`document.querySelector('.game-hub-page .section-heading h2')?.textContent?.trim()`);
+  assertEqual(gameHubSectionTitle,"Pour votre version","game hub content tab heading");
+  assertEqual(await count(".hub-content .hub-content-row"),6,"game hub content tab count");
 
   await clickAria("Recherche globale");
   await waitText("Rechercher dans MODARYX");
