@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "R2_ADAPTER_CANDIDATE_FAKE_BINDING_PROVEN",
+  "module": "functions/_lib/artifact-storage.mjs",
+  "binding": "MODARYX_ARTIFACTS",
+  "realBindingActivation": "NOT_EXECUTED",
+  "bucketCreation": "NOT_EXECUTED",
+  "productionBlockers": [
+    "providers-connectors-real",
+    "backend-real"
+  ],
+  "invariants": [
+    "R2_BINDING_REQUIRED_FOR_REAL_READ_WRITE",
+    "SHA256_VERIFIED_BEFORE_STORE",
+    "SHA256_VERIFIED_AFTER_READ",
+    "SIZE_VERIFIED_BEFORE_STORE_AND_AFTER_READ",
+    "OBJECT_KEY_DERIVED_FROM_RELEASE_FILE_DIGEST",
+    "PATH_TRAVERSAL_REJECTED",
+    "WITHDRAWN_REVOKED_ARCHIVED_NOT_DOWNLOADABLE",
+    "NO_BUCKET_CREATION",
+    "NO_BINDING_CONFIGURATION_CHANGE",
+    "NO_REMOTE_ARTIFACT_WRITE_IN_PROOF",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER",
+    "PRODUCTION_APPROVAL_REMAINS_OPEN"
+  ]
+}
