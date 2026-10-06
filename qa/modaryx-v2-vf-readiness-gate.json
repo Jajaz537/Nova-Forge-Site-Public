@@ -59,7 +59,8 @@
       "id": "backend-real",
       "state": "OPEN",
       "evidenceCandidate": "docs/MODARYX-V2-LIVE-PREVIEW-BACKEND-EVIDENCE-20261006.md",
-      "note": "DEV preview backend is real and proven; production backend remains OPEN."
+      "note": "DEV preview backend is real and proven; production backend remains OPEN.",
+      "latestPreCutoverReadOnlyEvidence": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md"
     },
     {
       "id": "auth-passkeys-real",
@@ -77,19 +78,22 @@
       "id": "providers-connectors-real",
       "state": "OPEN",
       "evidenceCandidate": "docs/MODARYX-V2-PROVIDER-REGISTRY-CANDIDATE-20261006.md",
-      "note": "Secret-safe provider registry is proven; real production provider activation/configuration remains OPEN."
+      "note": "Secret-safe provider registry is proven; real production provider activation/configuration remains OPEN.",
+      "latestPreCutoverReadOnlyEvidence": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md"
     },
     {
       "id": "notifications-email-push-real",
       "state": "OPEN",
       "evidenceCandidate": "docs/MODARYX-V2-NOTIFICATION-DELIVERY-GUARD-20261006.md",
-      "note": "Provider-neutral fail-closed delivery guard is proven; no real email/push provider or dispatch is active."
+      "note": "Provider-neutral fail-closed delivery guard is proven; no real email/push provider or dispatch is active.",
+      "latestPreCutoverReadOnlyEvidence": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md"
     },
     {
       "id": "pwa-service-worker-production",
       "state": "OPEN",
       "evidenceCandidate": "docs/MODARYX-V2-PWA-PRODUCTION-CANDIDATE-20261006.md",
-      "note": "Gated PWA candidate is browser-proven; production activation remains OPEN."
+      "note": "Gated PWA candidate is browser-proven; production activation remains OPEN.",
+      "latestPreCutoverReadOnlyEvidence": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md"
     },
     {
       "id": "v1-v2-browser-migration",
@@ -100,13 +104,15 @@
       "id": "core-web-vitals-production",
       "state": "OPEN",
       "evidenceCandidate": "docs/MODARYX-V2-PERFORMANCE-CANDIDATE-PROOF-20261006.md",
-      "note": "Desktop/mobile lab budgets are proven; field production p75 CWV remain OPEN."
+      "note": "Desktop/mobile lab budgets are proven; field production p75 CWV remain OPEN.",
+      "latestPreCutoverReadOnlyEvidence": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md"
     },
     {
       "id": "cutover",
       "state": "OPEN",
       "evidenceCandidate": "docs/MODARYX-V2-PRODUCTION-REHEARSAL-20261006.md",
-      "note": "Localhost production rehearsal is green; public cutover remains NOT_EXECUTED."
+      "note": "Localhost production rehearsal is green; public cutover remains NOT_EXECUTED.",
+      "latestPreCutoverReadOnlyEvidence": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md"
     }
   ],
   "forgeRuntime": [
