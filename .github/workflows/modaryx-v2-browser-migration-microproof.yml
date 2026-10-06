@@ -58,7 +58,7 @@ jobs:
         working-directory: v2-preview
         run: |
           set -euo pipefail
-          npm run preview -- --host 127.0.0.1 --port 4176 >/tmp/modaryx-v2-migration.log 2>&1 &
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4176 >/tmp/modaryx-v2-migration.log 2>&1 &
           echo $! >/tmp/modaryx-v2-migration.pid
           for attempt in {1..60}; do
             if curl --fail --silent --show-error http://127.0.0.1:4176/ >/dev/null; then exit 0; fi
