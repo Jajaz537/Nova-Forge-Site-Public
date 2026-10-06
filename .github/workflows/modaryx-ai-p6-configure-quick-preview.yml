@@ -91,7 +91,7 @@ jobs:
           test "$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_P6_EVIDENCE_MODE")' <<<"$after")" = "true"
 
           deployments="$(curl -fsS "${auth[@]}" --get --data-urlencode "env=preview" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}/deployments")"
-          source_deployment="$(jq -c --arg b "$GITHUB_REF_NAME" '[.result[] | select((.deployment_trigger.metadata.branch // "") == $b) and (.latest_stage.status // "") == "success"] | sort_by(.created_on) | reverse | .[0] // null' <<<"$deployments")"
+          source_deployment="$(jq -c --arg b "$GITHUB_REF_NAME" '[.result[] | select(((.deployment_trigger.metadata.branch // "") == $b) and ((.latest_stage.status // "") == "success"))] | sort_by(.created_on) | reverse | .[0] // null' <<<"$deployments")"
           test "$(jq -r '. != null' <<<"$source_deployment")" = "true"
           source_id="$(jq -r '.id' <<<"$source_deployment")"
 
@@ -182,4 +182,4 @@ jobs:
           path: evidence
           if-no-files-found: error
           retention-days: 7
-# replay-trigger: synchronized-retry-pages-preview-20261006
+# replay-trigger: fix-preview-selection-and-retry-20261006
