@@ -6,6 +6,9 @@ on:
       - 'chatgpt/modaryx-v2-public-origin-readonly-20261006'
     paths:
       - '.github/workflows/modaryx-v2-public-origin-readonly-classification.yml'
+      - 'docs/MODARYX-V2-PUBLIC-ORIGIN-READONLY-CLASSIFICATION-20261006.md'
+      - 'qa/modaryx-v2-production-activation-manifest.json'
+      - 'qa/modaryx-v2-vf-readiness-gate.json'
   workflow_dispatch:
 
 permissions:
@@ -129,3 +132,11 @@ jobs:
             exit 1
           fi
           echo PUBLIC_ORIGIN_READ_ONLY_GUARD=yes
+
+      - name: Validate fail-closed manifests
+        run: |
+          set -euo pipefail
+          node qa/check-v2-production-activation-manifest.mjs
+          node qa/check-v2-vf-readiness-gate.mjs
+          node qa/check-v2-vf-closure-ledger.mjs
+          echo PASS_V2_PUBLIC_ORIGIN_MANIFEST_RECONCILIATION
