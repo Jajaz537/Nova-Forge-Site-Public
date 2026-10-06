@@ -8,13 +8,15 @@ import {
 } from "../functions/_lib/notification-delivery.mjs";
 
 const contract=JSON.parse(fs.readFileSync("qa/modaryx-v2-notification-delivery-contract.json","utf8"));
-assert.equal(contract.status,"DELIVERY_GUARD_CANDIDATE_PROVIDER_MISSING");
+assert.equal(contract.status,"DELIVERY_GUARD_CANDIDATE_DIRECTION_SELECTED_DISPATCH_MISSING");
 assert.equal(contract.remoteApplication,"NOT_EXECUTED");
 assert.equal(contract.dispatchImplementation,"NOT_IMPLEMENTED");
-assert.equal(contract.providerSelection,"NOT_SELECTED");
+assert.equal(contract.providerSelection,"TECHNICAL_CANDIDATES_SELECTED_NOT_PRODUCTION_APPROVED");
+assert.equal(contract.providerCandidates.EMAIL,"Cloudflare Email Service");
+assert.equal(contract.providerCandidates.PUSH,"Web Push standard + VAPID");
 const inv=new Set(contract.invariants||[]);
 for(const x of [
-  "NO_NETWORK_DISPATCH","NO_PROVIDER_SELECTED_BY_THIS_CHANGE","NO_RAW_EMAIL_ADDRESS_IN_OUTBOX",
+  "NO_NETWORK_DISPATCH","NO_PRODUCTION_PROVIDER_ACTIVATED_BY_THIS_CHANGE","NO_RAW_EMAIL_ADDRESS_IN_OUTBOX",
   "NO_RAW_PUSH_TOKEN_IN_OUTBOX","DESTINATION_REFERENCE_DIGEST_ONLY",
   "EMAIL_PUSH_BLOCKED_UNLESS_PROVIDER_STATE_CONFIGURED_PRODUCTION_APPROVED",
   "USER_PREFERENCE_REQUIRED","PROVIDER_PRODUCTION_APPROVAL_REQUIRED","PRODUCTION_BLOCKER_REMAINS_OPEN"
