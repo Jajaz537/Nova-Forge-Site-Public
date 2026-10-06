@@ -1,0 +1,1208 @@
+/* MODARYX V2 — product-first blue/violet direction
+   User-selected visual target: premium dark product UI, balanced blue + violet,
+   no full-screen marketing hero. Contextual game banners remain allowed. */
+
+:root {
+  --bg: #080d18;
+  --surface: #0d1421;
+  --surface-2: #121b2b;
+  --line: #28364d;
+  --text: #f3f5fb;
+  --muted: #9ba9bd;
+  --cyan: #4fd3ff;
+  --cyan-2: #3b7cff;
+  --teal: #63dec9;
+  --violet: #8b63ff;
+  --shadow: 0 24px 70px rgba(0,0,0,.42);
+}
+
+body {
+  background:
+    radial-gradient(circle at 18% -10%, rgba(89, 94, 255, .10), transparent 34rem),
+    radial-gradient(circle at 86% 10%, rgba(139, 99, 255, .08), transparent 30rem),
+    var(--bg);
+}
+
+.app-shell {
+  background:
+    radial-gradient(circle at 84% 4%, rgba(59,124,255,.08), transparent 26rem),
+    radial-gradient(circle at 20% 18%, rgba(139,99,255,.055), transparent 30rem),
+    transparent;
+}
+
+.topbar {
+  background: rgba(7, 12, 23, .93);
+  border-bottom-color: rgba(139, 159, 194, .16);
+}
+
+.logo span { color: #6f8dff; }
+
+.global-nav button.active:after,
+.local-nav button.active:after {
+  background: linear-gradient(90deg, var(--cyan), #6478ff 52%, var(--violet));
+  box-shadow: 0 0 16px rgba(103, 108, 255, .42);
+}
+
+.primary {
+  color: #fff;
+  background: linear-gradient(112deg, #397bff 0%, #5c70ff 48%, #8b63ff 100%);
+  box-shadow: 0 12px 36px rgba(91, 91, 255, .28);
+}
+
+.avatar {
+  color: #fff !important;
+  background: linear-gradient(135deg, #426fff, #8b63ff) !important;
+}
+
+.game-hero {
+  min-height: 310px;
+  background-position: center 46%;
+}
+
+.game-atmosphere.atmosphere-aetherlands {
+  background-image:
+    linear-gradient(105deg, rgba(5,12,25,.92) 0%, rgba(8,18,36,.70) 36%, rgba(31,32,72,.22) 70%, rgba(48,35,92,.16) 100%),
+    url('/assets/living-threshold-hero.png');
+}
+
+.game-atmosphere.atmosphere-aetherlands:before {
+  opacity: .58;
+  background:
+    radial-gradient(circle at 77% 22%, rgba(78,172,255,.17), transparent 28%),
+    radial-gradient(circle at 89% 28%, rgba(139,99,255,.14), transparent 29%);
+}
+
+.hero-shade {
+  background:
+    linear-gradient(90deg, rgba(4,9,18,.94) 0%, rgba(7,15,28,.74) 40%, rgba(21,24,53,.34) 72%, rgba(31,24,58,.18) 100%),
+    linear-gradient(0deg, rgba(6,11,22,.94), transparent 62%);
+}
+
+.hero-search,
+.catalog-search,
+.global-search-field {
+  background: rgba(10, 19, 34, .91);
+  border-color: #40506b;
+}
+
+.local-nav {
+  background: rgba(8, 14, 25, .96);
+}
+
+.content-card,
+.game-card,
+.search-groups > section,
+.detail-section,
+.help-docs-grid article,
+.moderation-detail {
+  background: linear-gradient(180deg, #101827, #0b121f);
+  border-color: #27364b;
+}
+
+.content-card:hover {
+  border-color: #52639c;
+  box-shadow: 0 18px 42px rgba(0,0,0,.28), 0 0 0 1px rgba(139,99,255,.08);
+}
+
+.eyebrow,
+.empty svg,
+.search-result-row > svg,
+.search-result-static > svg,
+.catalog-summary button {
+  color: #78bfff;
+}
+
+.profiles-rail {
+  border-left-color: #2c3850;
+}
+
+.rail-icon {
+  background: linear-gradient(135deg, rgba(65,126,255,.16), rgba(139,99,255,.23));
+  color: #a98fff;
+}
+
+.profile-add {
+  border-color: rgba(139,99,255,.58);
+  background: linear-gradient(90deg, rgba(139,99,255,.20), rgba(59,124,255,.13));
+}
+
+.profile-row {
+  background: #0d1624;
+  border-color: #2b3950;
+}
+
+.compat {
+  color: #071713;
+  background: var(--teal);
+}
+
+/* Match the chosen product-hub composition more closely. */
+.game-identity {
+  position: relative;
+  min-height: 176px;
+  padding-left: 174px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.game-identity::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 148px;
+  height: 176px;
+  border-radius: 12px;
+  border: 1px solid rgba(160,178,210,.28);
+  background:
+    linear-gradient(180deg, rgba(22,34,56,.08), rgba(8,13,23,.18)),
+    url('/assets/living-threshold-content-sheet.png') 0% 0% / 300% 200%;
+  box-shadow: 0 18px 38px rgba(0,0,0,.34);
+}
+
+/* Keep the proof-required provenance note visible but discreet.
+   Only the interactive atmosphere preview controls are hidden. */
+.game-identity .atmosphere-preview {
+  display: block;
+  margin-top: 4px;
+  max-width: 360px;
+}
+
+.game-identity .atmosphere-preview > span {
+  display: none;
+}
+
+.game-identity .atmosphere-preview > div {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.game-identity .atmosphere-preview button {
+  min-height: 28px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  color: #aab6c9;
+  background: rgba(13, 22, 37, .68);
+  border-color: rgba(100, 120, 160, .35);
+}
+
+.game-identity .atmosphere-preview button.active {
+  color: #fff;
+  background: linear-gradient(90deg, rgba(59,124,255,.17), rgba(139,99,255,.18));
+  border-color: rgba(139,99,255,.46);
+}
+
+.game-identity .atmosphere-preview small {
+  display: block;
+  margin-top: 4px;
+  color: #8999af;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.game-identity .atmosphere-note {
+  display: inline-block;
+  margin-top: 2px;
+  color: #9aaac0;
+  font-size: 10px;
+  letter-spacing: .05em;
+}
+
+.game-support {
+  max-width: 350px;
+}
+
+.section-heading h2,
+.card-copy h3,
+.profiles-rail h2,
+.page-section > h1,
+.catalog-title h1 {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+/* No large marketing hero in the selected MODARYX direction.
+   Discover becomes a compact product introduction instead of a cinematic hero. */
+.editorial-hero,
+.canon-reconciled-hero {
+  min-height: auto !important;
+  padding: 54px 4vw 28px !important;
+  display: block !important;
+  background:
+    radial-gradient(circle at 78% 15%, rgba(139,99,255,.08), transparent 24rem),
+    linear-gradient(180deg, rgba(13,20,33,.82), rgba(8,13,24,.36)) !important;
+  border-bottom: 1px solid rgba(106,124,158,.14);
+}
+
+.editorial-hero > div,
+.editorial-hero-copy {
+  max-width: 780px;
+}
+
+.editorial-hero h1,
+.canon-reconciled-hero .editorial-hero-copy h1 {
+  font-size: clamp(38px, 4.2vw, 58px) !important;
+  line-height: 1.04;
+  margin: 12px 0 18px;
+}
+
+.editorial-hero p,
+.canon-reconciled-hero .editorial-hero-copy p {
+  color: #bac6d8;
+  font-size: 17px;
+  max-width: 680px;
+}
+
+.canon-narrative-layer {
+  display: none !important;
+}
+
+@media (max-width: 1050px) {
+  .game-identity {
+    min-height: auto;
+    padding-left: 0;
+  }
+
+  .game-identity::before {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .editorial-hero,
+  .canon-reconciled-hero {
+    min-height: auto !important;
+    padding: 34px 18px 22px !important;
+  }
+
+  .editorial-hero h1,
+  .canon-reconciled-hero .editorial-hero-copy h1 {
+    font-size: clamp(34px, 10vw, 46px) !important;
+  }
+
+  .game-identity .atmosphere-preview button {
+    min-height: 44px;
+    padding: 8px 11px;
+  }
+
+  .game-hero {
+    min-height: 430px;
+  }
+}
+
+
+/* Visual polish after browser proof: closer to the selected premium mock while
+   keeping all product and accessibility contracts intact. */
+.top-actions button {
+  background: linear-gradient(180deg, rgba(15,24,40,.96), rgba(10,17,29,.96));
+  border-color: rgba(92,111,149,.35);
+}
+
+.top-actions button:hover {
+  border-color: rgba(139,99,255,.50);
+  background: linear-gradient(180deg, rgba(22,30,52,.98), rgba(12,19,34,.98));
+}
+
+.game-hero {
+  box-shadow: inset 0 -1px rgba(116,130,164,.12);
+}
+
+.hero-search {
+  box-shadow: 0 16px 36px rgba(0,0,0,.26);
+}
+
+.hub-layout {
+  gap: 34px;
+}
+
+.content-card > .media,
+.game-card > .media,
+.profile-row .media {
+  filter: saturate(1.05) brightness(1.06);
+}
+
+.content-card {
+  box-shadow: inset 0 1px rgba(255,255,255,.018);
+}
+
+.compat {
+  background: #66ddc3;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
+}
+
+.profiles-rail {
+  background: linear-gradient(180deg, rgba(139,99,255,.025), transparent 34%);
+}
+
+.profile-add:hover,
+.profile-row:hover {
+  border-color: rgba(139,99,255,.48);
+}
+
+@media (min-width: 1051px) {
+  .game-hero {
+    grid-template-columns: minmax(310px,.82fr) minmax(400px,1.52fr) auto;
+    padding-top: 44px;
+    padding-bottom: 40px;
+  }
+
+  .game-identity {
+    min-height: 188px;
+    padding-left: 176px;
+  }
+
+  .game-identity::before {
+    width: 150px;
+    height: 188px;
+  }
+
+  .game-identity h1 {
+    margin-top: 6px;
+    margin-bottom: 14px;
+  }
+}
+
+
+/* Enforce the selected no-marketing-hero direction on Discover.
+   canon-hero.css uses pseudo-elements for the old cinematic artwork; neutralize them here. */
+.canon-reconciled-hero::before,
+.canon-reconciled-hero::after {
+  display: none !important;
+  content: none !important;
+}
+
+.canon-reconciled-hero .editorial-hero-copy h1 {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-weight: 760 !important;
+  letter-spacing: -.045em !important;
+  max-width: 760px;
+}
+
+.canon-reconciled-hero .editorial-hero-copy {
+  text-shadow: none !important;
+}
+
+.canon-reconciled-hero .editorial-hero-copy p {
+  color: #aebbd0 !important;
+}
+
+@media (min-width: 761px) {
+  .canon-reconciled-hero .editorial-hero-copy h1 {
+    font-size: clamp(40px, 4vw, 58px) !important;
+    line-height: 1.02 !important;
+  }
+}
+
+
+/* Compact Discover: product intro, not a hero. */
+.editorial-hero.canon-reconciled-hero {
+  padding: 34px 4vw 30px !important;
+}
+
+.editorial-hero.canon-reconciled-hero .editorial-hero-copy {
+  max-width: 980px !important;
+}
+
+.editorial-hero.canon-reconciled-hero .editorial-hero-copy h1 {
+  font-size: clamp(34px, 3.1vw, 46px) !important;
+  line-height: 1.03 !important;
+  max-width: 900px !important;
+  margin: 8px 0 14px !important;
+}
+
+.editorial-hero.canon-reconciled-hero .editorial-hero-copy p {
+  max-width: 760px !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 18px !important;
+}
+
+.editorial-hero.canon-reconciled-hero .primary {
+  padding: 13px 18px;
+  min-height: 44px;
+}
+
+@media (max-width: 760px) {
+  .editorial-hero.canon-reconciled-hero {
+    padding: 28px 18px 24px !important;
+  }
+
+  .editorial-hero.canon-reconciled-hero .editorial-hero-copy h1 {
+    font-size: clamp(30px, 9vw, 38px) !important;
+  }
+}
+
+
+/* Product UI typography: the selected reference is consistently sans-serif. */
+h1, h2, h3,
+.page-section > h1,
+.catalog-title h1,
+.rights-dashboard > h1,
+.help-docs > h1,
+.moderation-center > h1,
+.community-board h2,
+.account-panel h2,
+.detail-section h2,
+.modpack-header h2,
+.profile-components h2,
+.profile-decision h2,
+.collection-card h2,
+.creator-index-card h2,
+.game-card h2 {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+
+/* 2026-10-05 human-selected Aurelian Vale Game Hub canon.
+   Dense desktop list + right profile rail + restrained blue/violet mix. */
+.game-hub-page {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(139,99,255,.045), transparent 32rem),
+    linear-gradient(180deg, #09111d 0%, #080d16 100%);
+}
+
+.game-hub-page .local-nav {
+  min-height: 56px;
+  padding-inline: 3.5vw;
+  gap: 30px;
+  border-top: 1px solid rgba(106,123,153,.12);
+  border-bottom: 1px solid rgba(106,123,153,.18);
+}
+
+.game-hub-page .local-nav button {
+  min-width: 132px;
+  min-height: 54px;
+  justify-content: center;
+}
+
+.game-hub-page .local-nav button:nth-child(2) {
+  font-size: 0;
+}
+
+.game-hub-page .local-nav button:nth-child(2)::before {
+  content: "Pour votre version";
+  font-size: 14px;
+}
+
+.game-hub-page .local-nav button:nth-child(n+3) {
+  min-width: 92px;
+  width: 92px;
+  color: transparent;
+  font-size: 0;
+  pointer-events: auto;
+}
+
+.game-hub-page .local-nav button:nth-child(n+3)::before {
+  content: "";
+  width: 68px;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(108,125,153,.65), rgba(89,104,129,.52));
+  box-shadow: inset 0 1px rgba(255,255,255,.04);
+}
+
+.game-hub-page .local-nav button:nth-child(n+3).active::before {
+  background: linear-gradient(90deg, #4fd3ff, #7c6dff);
+  box-shadow: 0 0 18px rgba(105,103,255,.25);
+}
+
+.game-hub-page .hub-layout {
+  grid-template-columns: minmax(0, 1fr) 336px;
+  align-items: start;
+  padding: 28px 3.5vw 54px;
+  gap: 26px;
+}
+
+.game-hub-page .hub-content {
+  min-width: 0;
+}
+
+.game-hub-page .section-heading {
+  margin-bottom: 14px;
+}
+
+.game-hub-page .section-heading .kicker {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: #7fa5d8;
+  font-size: 10px;
+  letter-spacing: .14em;
+}
+
+.game-hub-page .section-heading h2 {
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.game-hub-page .section-heading p {
+  color: #a9b6c9;
+  font-size: 14px;
+}
+
+/* Desktop Game Hub content becomes the dense product list shown in the canon. */
+@media (min-width: 901px) {
+  .game-hub-page .content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .game-hub-page .content-card {
+    min-height: 116px;
+    display: grid;
+    grid-template-columns: 230px minmax(0, 1fr);
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(15,25,39,.98), rgba(10,19,31,.98));
+    border-color: rgba(70,88,116,.46);
+    box-shadow: inset 0 1px rgba(255,255,255,.018);
+  }
+
+  .game-hub-page .content-card > .media {
+    width: 230px;
+    height: 100%;
+    min-height: 116px;
+    aspect-ratio: auto;
+    border-right: 1px solid rgba(66,84,112,.30);
+  }
+
+  .game-hub-page .content-card .card-copy {
+    padding: 12px 16px 12px 18px;
+    display: grid;
+    align-content: center;
+    gap: 7px;
+  }
+
+  .game-hub-page .content-card .eyebrow {
+    display: none;
+  }
+
+  .game-hub-page .content-card .card-copy h3 {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .game-hub-page .content-card .card-copy p {
+    margin: 0;
+    max-width: 620px;
+    font-size: 12px;
+    color: #8594aa;
+  }
+
+  .game-hub-page .content-card .card-meta {
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .game-hub-page .profiles-rail {
+    position: sticky;
+    top: 88px;
+    border: 1px solid rgba(63,81,107,.44);
+    border-left: 1px solid rgba(63,81,107,.44);
+    border-radius: 10px;
+    padding: 20px;
+    background:
+      linear-gradient(180deg, rgba(139,99,255,.045), transparent 34%),
+      linear-gradient(180deg, rgba(16,26,41,.98), rgba(9,17,28,.98));
+  }
+
+  .game-hub-page .profiles-rail .rail-icon {
+    display: none;
+  }
+
+  .game-hub-page .profiles-rail h2 {
+    font-size: 21px;
+    margin-bottom: 6px;
+  }
+
+  .game-hub-page .profiles-rail > p {
+    font-size: 13px;
+    line-height: 1.45;
+    margin-bottom: 18px;
+  }
+
+  .game-hub-page .profile-add {
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+    border: 0;
+    color: #fff;
+    background: linear-gradient(90deg, #985cff 0%, #6c69ff 48%, #3c6cff 100%);
+    box-shadow: 0 12px 28px rgba(98,76,255,.20);
+  }
+
+  .game-hub-page .profile-list {
+    margin-top: 14px;
+    gap: 9px;
+  }
+
+  .game-hub-page .profile-row {
+    min-height: 72px;
+    border-radius: 8px;
+    background: rgba(10,18,29,.88);
+  }
+
+  .game-hub-page .profile-row .media {
+    width: 56px;
+    min-width: 56px;
+    height: 56px;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 900px) {
+  .game-hub-page .local-nav {
+    overflow-x: auto;
+    justify-content: flex-start;
+    gap: 10px;
+    padding-inline: 18px;
+  }
+
+  .game-hub-page .local-nav button {
+    min-width: max-content;
+    padding-inline: 14px;
+  }
+
+  .game-hub-page .local-nav button:nth-child(n+3) {
+    min-width: 68px;
+    width: 68px;
+  }
+
+  .game-hub-page .hub-layout {
+    grid-template-columns: 1fr;
+    padding: 22px 18px 40px;
+  }
+
+  .game-hub-page .profiles-rail {
+    border-left: 0;
+    border-top: 1px solid #2c3850;
+    padding-top: 22px;
+  }
+}
+
+
+/* Canon polish: align the selected-game thumbnail with the identity block. */
+@media (min-width: 1051px) {
+  .game-hub-page .game-identity {
+    justify-content: center;
+    padding-left: 188px;
+  }
+
+  .game-hub-page .game-identity::before {
+    top: 0;
+    bottom: auto;
+    width: 162px;
+    height: 188px;
+    border-radius: 10px;
+  }
+}
+
+
+/* Canon density pass: match the compact Aurelian Vale Game Hub proportions.
+   Atmosphere controls remain operable for provenance/product-flow proof, but
+   collapse visually into platform-like utility chips on desktop. */
+@media (min-width: 1051px) {
+  .game-hub-page .game-hero {
+    min-height: 252px;
+    padding: 28px 3.2vw 24px;
+    grid-template-columns: minmax(300px,.82fr) minmax(390px,1.5fr) auto;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .game-hub-page .game-identity {
+    min-height: 160px;
+    padding-left: 172px;
+    justify-content: center;
+  }
+
+  .game-hub-page .game-identity::before {
+    width: 146px;
+    height: 160px;
+  }
+
+  .game-hub-page .game-identity .demo-label {
+    font-size: 9px;
+    letter-spacing: .12em;
+  }
+
+  .game-hub-page .game-identity .atmosphere-note {
+    margin-top: 3px;
+    font-size: 9px;
+    opacity: .68;
+  }
+
+  .game-hub-page .game-identity h1 {
+    font-size: 34px;
+    margin: 5px 0 8px;
+  }
+
+  .game-hub-page .game-support {
+    margin: 0 0 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #95a5ba;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .game-hub-page .game-identity label {
+    gap: 9px;
+    font-size: 12px;
+  }
+
+  .game-hub-page .game-identity select {
+    min-height: 38px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  .game-hub-page .atmosphere-preview {
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    max-width: 330px;
+  }
+
+  .game-hub-page .atmosphere-preview > span {
+    display: none;
+  }
+
+  .game-hub-page .atmosphere-preview > div {
+    display: flex;
+    gap: 6px;
+    margin: 0;
+    flex-wrap: nowrap;
+  }
+
+  .game-hub-page .atmosphere-preview button {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    min-height: 30px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    font-size: 0;
+    border-radius: 7px;
+  }
+
+  .game-hub-page .atmosphere-preview button::before {
+    font-size: 13px;
+    line-height: 1;
+    color: #b9c7dc;
+  }
+
+  .game-hub-page .atmosphere-preview button:nth-child(1)::before { content: "⊞"; }
+  .game-hub-page .atmosphere-preview button:nth-child(2)::before { content: "◉"; }
+  .game-hub-page .atmosphere-preview button:nth-child(3)::before { content: "X"; }
+
+  .game-hub-page .atmosphere-preview small {
+    margin: 0;
+    max-width: 190px;
+    font-size: 8px;
+    line-height: 1.25;
+    opacity: .58;
+  }
+
+  .game-hub-page .hero-search {
+    height: 52px;
+  }
+
+  .game-hub-page .game-hero > .primary {
+    min-height: 52px;
+    padding: 14px 22px;
+  }
+}
+
+
+/* Normalized comparison pass against the human-approved Game Hub reference:
+   desktop chrome and contextual banner use the same compact vertical rhythm. */
+@media (min-width: 1051px) {
+  .game-hub-page .game-hero {
+    min-height: 206px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .game-hub-page .game-identity {
+    min-height: 150px;
+    padding-left: 168px;
+  }
+
+  .game-hub-page .game-identity::before {
+    width: 144px;
+    height: 150px;
+  }
+
+  .game-hub-page .local-nav {
+    min-height: 52px;
+    height: 52px;
+  }
+
+  .game-hub-page .local-nav button {
+    min-height: 50px;
+  }
+
+  .game-hub-page .hub-layout {
+    padding-top: 24px;
+  }
+}
+
+
+/* 2026-10-06 targeted mobile touch fix.
+   Keeps the approved desktop density while guaranteeing 44x44 interactive targets
+   for the Game Hub filters, view controls and row actions. */
+@media (max-width: 900px) {
+  .game-hub-page .hub-filterbar select {
+    min-height: 44px;
+    height: 44px;
+    padding: 0 12px;
+  }
+
+  .game-hub-page .hub-view-toggle button,
+  .game-hub-page .hub-row-actions button {
+    min-width: 44px;
+    width: 44px;
+    min-height: 44px;
+    height: 44px;
+  }
+}
+
+
+/* 2026-10-06 browser-visual repair — canonical dense Game Hub rows.
+   The React Game Hub now renders hub-content-row primitives rather than the
+   historical content-card grid. Keep the human-approved Aurelian Vale density,
+   restrained blue/violet palette and product-first hierarchy. */
+.game-hub-page .hub-filterbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0 14px;
+  min-width: 0;
+}
+
+.game-hub-page .hub-filterbar select {
+  min-height: 40px;
+  height: 40px;
+  min-width: 0;
+  padding: 0 34px 0 12px;
+  border: 1px solid rgba(72, 92, 122, .58);
+  border-radius: 8px;
+  color: #c6d0df;
+  background: #0c1522;
+  font: inherit;
+  font-size: 12px;
+  outline: 0;
+}
+
+.game-hub-page .hub-filterbar select:nth-child(1) { width: 184px; }
+.game-hub-page .hub-filterbar select:nth-child(2) { width: 124px; }
+.game-hub-page .hub-filterbar select:nth-child(3) { width: 164px; }
+.game-hub-page .hub-filterbar select:nth-child(4) { width: 122px; }
+
+.game-hub-page .hub-filterbar select:focus-visible {
+  outline: 3px solid rgba(79, 211, 255, .72);
+  outline-offset: 2px;
+  border-color: #4fd3ff;
+}
+
+.game-hub-page .hub-view-toggle {
+  margin-left: auto;
+  display: flex;
+  gap: 7px;
+  flex: 0 0 auto;
+}
+
+.game-hub-page .hub-view-toggle button {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(72, 92, 122, .56);
+  border-radius: 8px;
+  color: #9fb0c6;
+  background: #0d1724;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.game-hub-page .hub-view-toggle button.active {
+  color: #5ee4ff;
+  border-color: rgba(79, 211, 255, .82);
+  background: linear-gradient(180deg, rgba(17, 47, 67, .96), rgba(10, 26, 42, .96));
+  box-shadow: inset 0 0 0 1px rgba(79, 211, 255, .10), 0 0 18px rgba(79, 211, 255, .08);
+}
+
+.game-hub-page .hub-content-list {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.game-hub-page .hub-content-row {
+  min-width: 0;
+  min-height: 112px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid rgba(66, 84, 112, .48);
+  border-radius: 9px;
+  background: linear-gradient(180deg, rgba(15, 25, 39, .98), rgba(9, 18, 30, .98));
+  box-shadow: inset 0 1px rgba(255, 255, 255, .018);
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+.game-hub-page .hub-content-row:hover,
+.game-hub-page .hub-content-row:focus-within {
+  border-color: rgba(91, 116, 162, .72);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .18), inset 0 0 0 1px rgba(139, 99, 255, .05);
+}
+
+.game-hub-page .hub-row-main {
+  min-width: 0;
+  width: 100%;
+  min-height: 112px;
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr) 150px;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.game-hub-page .hub-row-main:focus-visible {
+  outline: 3px solid rgba(79, 211, 255, .72);
+  outline-offset: -3px;
+}
+
+.game-hub-page .hub-row-main > .media {
+  width: 230px;
+  height: 100%;
+  min-height: 112px;
+  border-right: 1px solid rgba(67, 84, 111, .32);
+  border-radius: 0;
+  filter: saturate(1.04) brightness(1.06);
+}
+
+.game-hub-page .hub-row-copy {
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  padding: 13px 18px;
+}
+
+.game-hub-page .hub-row-copy h3 {
+  margin: 0;
+  color: #f2f5fb;
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: -.015em;
+}
+
+.game-hub-page .hub-row-meta {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  color: #a6b2c3;
+  font-size: 10px;
+}
+
+.game-hub-page .hub-row-lines {
+  display: grid;
+  gap: 5px;
+  max-width: 430px;
+}
+
+.game-hub-page .hub-row-lines span {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(104, 119, 143, .58), rgba(71, 85, 107, .46));
+}
+
+.game-hub-page .hub-row-lines span:first-child { width: 88%; }
+.game-hub-page .hub-row-lines span:last-child { width: 66%; }
+
+.game-hub-page .hub-row-source {
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  gap: 9px;
+  padding: 13px 14px;
+  border-left: 1px solid rgba(66, 84, 112, .34);
+}
+
+.game-hub-page .source-title {
+  color: #b9c5d5;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.game-hub-page .source-bars {
+  display: grid;
+  gap: 6px;
+}
+
+.game-hub-page .source-bars span {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(67, 82, 105, .74);
+}
+
+.game-hub-page .source-bars span:nth-child(1) {
+  width: 52%;
+  background: linear-gradient(90deg, #3e8fd0, #396f9e);
+}
+
+.game-hub-page .source-bars span:nth-child(2) { width: 88%; }
+.game-hub-page .source-bars span:nth-child(3) {
+  width: 38%;
+  background: linear-gradient(90deg, #655bce, #8568e5);
+}
+
+.game-hub-page .hub-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border-left: 1px solid rgba(66, 84, 112, .26);
+}
+
+.game-hub-page .hub-row-actions button {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(76, 96, 126, .56);
+  border-radius: 8px;
+  color: #dbe4f0;
+  background: linear-gradient(180deg, rgba(18, 29, 45, .98), rgba(11, 20, 33, .98));
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.game-hub-page .hub-row-actions button:hover:not(:disabled) {
+  border-color: rgba(139, 99, 255, .58);
+  background: linear-gradient(180deg, rgba(24, 34, 57, .98), rgba(13, 22, 38, .98));
+}
+
+.game-hub-page .hub-row-actions button:disabled {
+  opacity: .72;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1180px) and (min-width: 901px) {
+  .game-hub-page .hub-row-main {
+    grid-template-columns: 180px minmax(0, 1fr) 126px;
+  }
+  .game-hub-page .hub-row-main > .media { width: 180px; }
+  .game-hub-page .hub-filterbar select:nth-child(1) { width: 160px; }
+  .game-hub-page .hub-filterbar select:nth-child(2) { width: 112px; }
+  .game-hub-page .hub-filterbar select:nth-child(3) { width: 148px; }
+  .game-hub-page .hub-filterbar select:nth-child(4) { width: 108px; }
+}
+
+@media (max-width: 900px) {
+  .game-hub-page .hub-filterbar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .game-hub-page .hub-filterbar select,
+  .game-hub-page .hub-filterbar select:nth-child(n) {
+    width: 100%;
+    min-height: 44px;
+    height: 44px;
+    padding: 0 32px 0 11px;
+    font-size: 12px;
+  }
+
+  .game-hub-page .hub-view-toggle {
+    grid-column: 1 / -1;
+    margin-left: 0;
+    justify-self: end;
+  }
+
+  .game-hub-page .hub-view-toggle button,
+  .game-hub-page .hub-row-actions button {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+  }
+
+  .game-hub-page .hub-content-row {
+    min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .game-hub-page .hub-row-main {
+    min-height: 104px;
+    grid-template-columns: 104px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+  }
+
+  .game-hub-page .hub-row-main > .media {
+    grid-row: 1 / 3;
+    width: 104px;
+    min-height: 104px;
+    height: 100%;
+  }
+
+  .game-hub-page .hub-row-copy {
+    padding: 12px 12px 7px;
+    gap: 7px;
+  }
+
+  .game-hub-page .hub-row-copy h3 { font-size: 14px; }
+  .game-hub-page .hub-row-lines { display: none; }
+
+  .game-hub-page .hub-row-source {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px 10px;
+    border-left: 0;
+  }
+
+  .game-hub-page .source-title { font-size: 9px; }
+  .game-hub-page .source-bars {
+    flex: 1;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .game-hub-page .source-bars span { height: 6px; }
+
+  .game-hub-page .hub-row-actions {
+    justify-content: flex-end;
+    padding: 8px 10px 10px;
+    border-left: 0;
+    border-top: 1px solid rgba(66, 84, 112, .26);
+  }
+}
