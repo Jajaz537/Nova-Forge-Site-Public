@@ -35,8 +35,14 @@ jobs:
           umask 077
           mkdir -p evidence
 
-          comment_body="$(curl -fsS 'https://api.github.com/repos/Jajaz537/Nova-Forge-Site-Public/issues/comments/6013122024' | jq -r '.body // ""')"
-          quick_url="$(printf '%s\n' "$comment_body" | grep -Eo 'https://[A-Za-z0-9-]+[.]trycloudflare[.]com' | tail -n 1 || true)"
+          quick_url=""
+          if [ -f qa/p6-quick-url.txt ]; then
+            quick_url="$(tr -d '\r\n ' < qa/p6-quick-url.txt)"
+          fi
+          if [ -z "$quick_url" ]; then
+            comment_body="$(curl -fsS 'https://api.github.com/repos/Jajaz537/Nova-Forge-Site-Public/issues/comments/6013122024' | jq -r '.body // ""')"
+            quick_url="$(printf '%s\n' "$comment_body" | grep -Eo 'https://[A-Za-z0-9-]+[.]trycloudflare[.]com' | tail -n 1 || true)"
+          fi
           if [ -z "$quick_url" ]; then
             jq -n '{schema:"modaryx-p6-quick-preview-config-v1",status:"NOT_RUN",reason:"quick_url_comment_missing",external_changes_made:false,awards_vf_points:false}' > evidence/config.json
             echo "MODARYX_P6_QUICK_PREVIEW_NOT_RUN quick_url_comment_missing"
@@ -84,6 +90,31 @@ jobs:
           test "$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_AI_BRIDGE_KEY_HEX")' <<<"$after")" = "true"
           test "$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_P6_EVIDENCE_MODE")' <<<"$after")" = "true"
 
+          deployments="$(curl -fsS "${auth[@]}" --get --data-urlencode "env=preview" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}/deployments")"
+          source_deployment="$(jq -c --arg b "$GITHUB_REF_NAME" '[.result[] | select((.deployment_trigger.metadata.branch // "") == $b) and (.latest_stage.status // "") == "success"] | sort_by(.created_on) | reverse | .[0] // null' <<<"$deployments")"
+          test "$(jq -r '. != null' <<<"$source_deployment")" = "true"
+          source_id="$(jq -r '.id' <<<"$source_deployment")"
+
+          retried="$(curl -fsS "${auth[@]}" --request POST "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}/deployments/${source_id}/retry")"
+          test "$(jq -r '.success' <<<"$retried")" = "true"
+          retry_id="$(jq -r '.result.id // ""' <<<"$retried")"
+          test -n "$retry_id"
+
+          retry_url=""
+          retry_success=false
+          retry_uses_functions=false
+          for i in $(seq 1 90); do
+            sleep 4
+            dep="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}/deployments/${retry_id}")"
+            test "$(jq -r '.success' <<<"$dep")" = "true"
+            retry_status="$(jq -r '.result.latest_stage.status // ""' <<<"$dep")"
+            retry_url="$(jq -r '.result.url // ""' <<<"$dep")"
+            retry_uses_functions="$(jq -r '.result.uses_functions // false' <<<"$dep")"
+            if [ "$retry_status" = "success" ]; then retry_success=true; break; fi
+            if [ "$retry_status" = "failure" ]; then break; fi
+          done
+          test "$retry_success" = "true"
+
           plain="$(mktemp)"
           pass_file="$(mktemp)"
           trap 'rm -f "$plain" "$pass_file"' EXIT
@@ -104,6 +135,8 @@ jobs:
             -pkeyopt rsa_oaep_md:sha256 \
             -pkeyopt rsa_mgf1_md:sha256
 
+          base64 -w 0 evidence/p6-quick-envelope.bin > evidence/p6-quick-envelope.b64
+          base64 -w 0 evidence/p6-quick-envelope-key.bin > evidence/p6-quick-envelope-key.b64
           envelope_sha="$(sha256sum evidence/p6-quick-envelope.bin | awk '{print $1}')"
           key_sha="$(sha256sum evidence/p6-quick-envelope-key.bin | awk '{print $1}')"
           rm -f "$plain" "$pass_file"
@@ -116,6 +149,9 @@ jobs:
             --arg public_key_fingerprint "$SD_PUBLIC_KEY_FINGERPRINT" \
             --arg envelope_sha256 "$envelope_sha" \
             --arg envelope_key_sha256 "$key_sha" \
+            --arg retry_deployment_id "$retry_id" \
+            --arg retry_deployment_url "$retry_url" \
+            --argjson retry_uses_functions "$retry_uses_functions" \
             '{
               schema:$schema,
               status:"PASS",
@@ -130,6 +166,10 @@ jobs:
               secret_values_logged:false,
               plaintext_secret_artifacts:false,
               production_modified:false,
+              retry_deployment_id:$retry_deployment_id,
+              retry_deployment_url:$retry_deployment_url,
+              retry_deployment_success:true,
+              retry_deployment_uses_functions:$retry_uses_functions,
               awards_vf_points:false
             }' > evidence/config.json
 
@@ -142,4 +182,4 @@ jobs:
           path: evidence
           if-no-files-found: error
           retention-days: 7
-# replay-trigger: p6-pr-comment-url-coordinate
+# replay-trigger: synchronized-retry-pages-preview-20261006
