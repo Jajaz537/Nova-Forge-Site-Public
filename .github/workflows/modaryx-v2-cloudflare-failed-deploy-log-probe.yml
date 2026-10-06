@@ -1,4 +1,4 @@
-name: MODARYX V2 Cloudflare Failed Deploy Log Probe
+name: MODARYX V2 Cloudflare Canonical Deploy Verification
 
 on:
   push:
@@ -18,30 +18,30 @@ concurrency:
 env:
   CLOUDFLARE_ZONE_NAME: modaryxmods.com
   CLOUDFLARE_PROJECT_NAME: nova-forge-site-public
-  CLOUDFLARE_DEPLOYMENT_ID: f2eb493d-be91-496b-9df7-c2a39571794c
-  EXPECTED_SOURCE_SHA: e3f48abc03066cdd3209dc4b3f043f12e5401cb2
+  CLOUDFLARE_DEPLOYMENT_ID: 1912f10b-d142-45ea-84ca-6c608c141d57
+  EXPECTED_SOURCE_SHA: 7ef0c89a13539b6060b51d604717c40b5cf5168b
 
 jobs:
   probe:
-    name: Read exact failed Pages deployment logs
+    name: Verify exact canonical Pages deployment
     runs-on: ubuntu-latest
     timeout-minutes: 6
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
-      - name: Checkout exact failed source
+      - name: Checkout exact canonical source
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          ref: e3f48abc03066cdd3209dc4b3f043f12e5401cb2
+          ref: 7ef0c89a13539b6060b51d604717c40b5cf5168b
           persist-credentials: false
           fetch-depth: 1
 
-      - name: Verify exact failed source
+      - name: Verify exact canonical source
         shell: bash
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_SOURCE_SHA"
-          echo "FAILED_SOURCE_SHA=$EXPECTED_SOURCE_SHA"
+          echo "CANONICAL_SOURCE_SHA=$EXPECTED_SOURCE_SHA"
 
       - name: Resolve Cloudflare account with GET only
         shell: bash
@@ -58,24 +58,41 @@ jobs:
           echo "CLOUDFLARE_ACCOUNT_ID=$account_id" >> "$GITHUB_ENV"
           echo "ACCOUNT_RESOLVED=yes"
 
-      - name: Read deployment details and failed build logs
+      - name: Await deployment terminal state and read logs
         shell: bash
         run: |
           set -euo pipefail
           api="https://api.cloudflare.com/client/v4"
           auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
 
-          deployment="$(curl -fsS "${auth[@]}" "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/deployments/${CLOUDFLARE_DEPLOYMENT_ID}")"
-          test "$(jq -r '.success' <<<"$deployment")" = "true"
+          deployment=""
+          state=""
+          for attempt in $(seq 1 30); do
+            deployment="$(curl -fsS "${auth[@]}" "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/deployments/${CLOUDFLARE_DEPLOYMENT_ID}")"
+            test "$(jq -r '.success' <<<"$deployment")" = "true"
+            state="$(jq -r '.result.latest_stage.status' <<<"$deployment")"
+            echo "attempt=$attempt latest_stage=$state"
+            if [ "$state" = "success" ] || [ "$state" = "failure" ] || [ "$state" = "canceled" ]; then
+              break
+            fi
+            sleep 10
+          done
           echo "DEPLOYMENT_SUMMARY"
-          jq '.result | {id,environment,latest_stage,stages,source,short_id,url,uses_functions}' <<<"$deployment"
+          jq '.result | {id,environment,deployment_trigger,latest_stage,stages,source,short_id,url,aliases,uses_functions}' <<<"$deployment"
+          test "$(jq -r '.result.deployment_trigger.metadata.commit_hash' <<<"$deployment")" = "$EXPECTED_SOURCE_SHA"
+          test "$state" = "success"
+          test "$(jq -r '[.result.stages[] | select(.name=="build")][0].status' <<<"$deployment")" = "success"
+          test "$(jq -r '[.result.stages[] | select(.name=="deploy")][0].status' <<<"$deployment")" = "success"
 
           logs="$(curl -fsS "${auth[@]}" "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/deployments/${CLOUDFLARE_DEPLOYMENT_ID}/history/logs")"
           test "$(jq -r '.success' <<<"$logs")" = "true"
-          echo "CLOUDFLARE_BUILD_LOG_START"
-          jq -r '.result.data[]?.line' <<<"$logs"
-          echo "CLOUDFLARE_BUILD_LOG_END"
-          echo "CLOUDFLARE_BUILD_LOG_TOTAL=$(jq -r '.result.total' <<<"$logs")"
+          if jq -r '.result.data[]?.line' <<<"$logs" | grep -F 'Could not resolve "../../../../_lib/' ; then
+            echo "stale import-resolution error returned"
+            exit 1
+          fi
+          echo CANONICAL_CLOUDFLARE_BUILD=success
+          echo CANONICAL_CLOUDFLARE_DEPLOY=success
+          echo PASS_MODARYX_V2_CANONICAL_CLOUDFLARE_DEPLOY
 
       - name: Prove probe remained read-only
         shell: bash
