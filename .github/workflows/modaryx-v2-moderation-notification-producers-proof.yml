@@ -1,0 +1,37 @@
+name: MODARYX V2 Moderation Notification Producers Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-notification-producers-moderation-20261006'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-moderation-notification-producers-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove moderation notification producers stay owner-bound and fail-soft
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate producer contracts
+        run: |
+          set -euo pipefail
+          node qa/check-v2-notifications-preferences-contract.mjs
+          node qa/check-v2-moderation-notification-producers.mjs
+          node qa/check-moderation-publication-engine.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+          echo PASS_V2_MODERATION_NOTIFICATION_PRODUCER_PROOF

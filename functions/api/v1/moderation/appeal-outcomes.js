@@ -1,4 +1,5 @@
 import {json} from '../../../_lib/api-security.mjs';
+import {appealOutcomeNotification, recordInAppNotification} from '../../../_lib/notifications.mjs';
 import {
   appealOutcomeTransition,
   auditActorKey,
@@ -48,10 +49,11 @@ export async function onRequestPost(context) {
   if (existingOutcome) return json({error:'appeal-already-decided'}, 409);
 
   const submission = await db.prepare(
-    `SELECT submission_id, kind, abuse_state, moderation_state,
-      publication_state, created_at, updated_at
-     FROM modaryx_community_submissions
-     WHERE submission_id = ?
+    `SELECT s.submission_id, s.actor_profile_id, s.kind, s.abuse_state, s.moderation_state,
+      s.publication_state, s.created_at, s.updated_at, p.identity_sub AS actor_identity_sub
+     FROM modaryx_community_submissions s
+     LEFT JOIN modaryx_profiles p ON p.profile_id = s.actor_profile_id
+     WHERE s.submission_id = ?
      LIMIT 1`
   ).bind(appealRow.submission_id).first();
   if (!submission) return json({error:'submission-not-found'}, 404);
@@ -111,6 +113,16 @@ export async function onRequestPost(context) {
   } catch {
     return json({error:'appeal-outcome-write-failed'}, 409);
   }
+
+  const notification=appealOutcomeNotification({
+    recipientIdentitySub:submission.actor_identity_sub,
+    submissionId:submission.submission_id,
+    result:validated.value.result,
+    moderationState:transition.moderationState,
+    receiptId,
+    occurredAt:now
+  });
+  if(notification) await recordInAppNotification(context.env,notification);
 
   return json({
     schemaVersion:1,
