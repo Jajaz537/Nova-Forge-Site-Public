@@ -38,6 +38,7 @@ jobs:
           target_id=""
           target_url=""
           target_sha=""
+          target_stage=""
           code=""
           ok=false
           protocol=""
@@ -59,8 +60,9 @@ jobs:
               target_id="$(jq -r '.id // ""' <<<"$target")"
               target_url="$(jq -r '.url // ""' <<<"$target")"
               target_sha="$(jq -r '.deployment_trigger.metadata.commit_hash // ""' <<<"$target")"
+              target_stage="$(jq -r '.latest_stage.name // ""' <<<"$target")"
 
-              if [ -n "$target_url" ]; then
+              if [ "$target_sha" = "$GITHUB_SHA" ] && [ "$target_stage" = "success" ] && [ -n "$target_url" ]; then
                 body="$(mktemp)"
                 code="$(curl -sS -o "$body" -w '%{http_code}' --max-time 20 "${target_url%/}/api/p6/bridge-probe" || true)"
                 ok="$(jq -r '.ok == true' "$body" 2>/dev/null || echo false)"
@@ -72,9 +74,7 @@ jobs:
                 fi
                 rm -f "$body"
 
-                if [ "$code" = "200" ] && [ "$ok" = "true" ] && [ "$protocol" = "modaryx-founder-bridge-v1" ]; then
-                  break
-                fi
+                break
               fi
             fi
 
@@ -102,6 +102,7 @@ jobs:
             --arg deployment_id "$target_id" \
             --arg deployment_url "$target_url" \
             --arg deployment_sha "$target_sha" \
+            --arg deployment_stage "$target_stage" \
             --arg http "$code" \
             --arg protocol "$protocol" \
             --arg inner_http "$inner_http" \
@@ -113,6 +114,7 @@ jobs:
               deployment_id:$deployment_id,
               deployment_url:$deployment_url,
               deployment_sha:$deployment_sha,
+              deployment_stage:$deployment_stage,
               http_status:($http|tonumber),
               bridge_ok:$ok,
               protocol:$protocol,
@@ -141,3 +143,4 @@ jobs:
           retention-days: 30
 # replay-trigger: p6-synchronized-preview-after-env-20261006-a
 # replay-trigger: safe-inner-bridge-diagnostic-20261006
+# replay-trigger: exact-sha-single-safe-probe-20261006
