@@ -60,7 +60,8 @@
       "state": "OPEN",
       "evidenceCandidate": "docs/MODARYX-V2-LIVE-PREVIEW-BACKEND-EVIDENCE-20261006.md",
       "note": "DEV preview backend is real and proven; production backend remains OPEN.",
-      "latestPreCutoverReadOnlyEvidence": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md"
+      "latestPreCutoverReadOnlyEvidence": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md",
+      "latestTargetReadOnlyEvidence": "docs/MODARYX-V2-CLOUDFLARE-TARGET-READONLY-EVIDENCE-20261006.md"
     },
     {
       "id": "auth-passkeys-real",
@@ -72,14 +73,16 @@
       "id": "real-data-history",
       "state": "OPEN",
       "evidenceCandidate": "docs/MODARYX-V2-DATA-HISTORY-CANDIDATE-20261006.md",
-      "note": "Owner-scoped append-only history is locally proven; remote D1 application and production data pipeline remain OPEN."
+      "note": "Owner-scoped append-only history is locally proven; remote D1 application and production data pipeline remain OPEN.",
+      "latestTargetReadOnlyEvidence": "docs/MODARYX-V2-CLOUDFLARE-TARGET-READONLY-EVIDENCE-20261006.md"
     },
     {
       "id": "providers-connectors-real",
       "state": "OPEN",
       "evidenceCandidate": "docs/MODARYX-V2-PROVIDER-REGISTRY-CANDIDATE-20261006.md",
       "note": "Secret-safe provider registry is proven; real production provider activation/configuration remains OPEN.",
-      "latestPreCutoverReadOnlyEvidence": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md"
+      "latestPreCutoverReadOnlyEvidence": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md",
+      "latestTargetReadOnlyEvidence": "docs/MODARYX-V2-CLOUDFLARE-TARGET-READONLY-EVIDENCE-20261006.md"
     },
     {
       "id": "notifications-email-push-real",

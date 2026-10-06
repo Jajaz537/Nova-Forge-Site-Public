@@ -139,5 +139,22 @@
     "NO_CLOUDFLARE_CRITICAL_CHANGE",
     "NO_CUTOVER",
     "REAL_DATA_HISTORY_BLOCKER_REMAINS_OPEN"
-  ]
+  ],
+  "readOnlyTargetEvidence": {
+    "observedAt": "2026-10-06T14:17:00Z",
+    "proofRunId": "37477638283",
+    "proofJobId": "112317141636",
+    "pagesProject": "nova-forge-site-public",
+    "productionBranch": "main",
+    "identitySource": "PAGES_PROJECT_PREVIEW_BINDING",
+    "binding": "MODARYX_DB",
+    "targetIdSha256": "6b7632ab913b02ba55b35a024401d432749116ff4f82adf76dd275f8be244eba",
+    "previewD1BindingPresent": true,
+    "productionD1BindingPresent": false,
+    "previewR2BindingPresent": false,
+    "productionR2BindingPresent": false,
+    "d1MetadataApiScope": "INSUFFICIENT_401",
+    "mutationPerformed": false,
+    "closesBlocker": false
+  }
 }
