@@ -7,8 +7,8 @@ import {requiredProductionTables} from "../functions/_lib/production-readiness.m
 const manifest=JSON.parse(fs.readFileSync("qa/modaryx-v2-d1-migration-execution-manifest.json","utf8"));
 assert.equal(manifest.schemaVersion,1);
 assert.equal(manifest.status,"PREPARED_NOT_EXECUTED");
-assert.equal(manifest.sequence.length,14);
-assert.equal(manifest.expectedCurrentV2TableCount,31);
+assert.equal(manifest.sequence.length,15);
+assert.equal(manifest.expectedCurrentV2TableCount,32);
 assert.equal(manifest.applyPolicy.automaticRemoteApply,false);
 assert.equal(manifest.applyPolicy.remoteDev,"EXPLICIT_MANUAL_ONLY");
 assert.equal(manifest.applyPolicy.remoteProduction,"BLOCKED_UNTIL_DEV_PROOF_AND_EXPLICIT_APPROVAL");

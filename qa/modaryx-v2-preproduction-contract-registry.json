@@ -530,6 +530,12 @@
       "contract": "qa/modaryx-v2-rights-public-policy-preflight.json",
       "checker": "qa/check-v2-rights-public-policy-preflight.mjs",
       "source": "docs/MODARYX-V2-RIGHTS-PUBLIC-POLICY-PREFLIGHT-20261006.md"
+    },
+    {
+      "id": "notification-destination-vault-candidate",
+      "contract": "qa/modaryx-v2-notification-destination-vault-contract.json",
+      "checker": "qa/check-v2-notification-destination-vault.mjs",
+      "source": "docs/MODARYX-V2-NOTIFICATION-DESTINATION-VAULT-20261006.md"
     }
   ],
   "invariants": [
