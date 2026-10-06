@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 6
     env:
-      DEPLOYMENT_URL: "https://f46f80f0.nova-forge-site-public.pages.dev"
+      DEPLOYMENT_URL: "https://20a4cbd4.nova-forge-site-public.pages.dev"
       EXPECTED_PROTOCOL: "modaryx-founder-bridge-v1"
     steps:
       - name: Probe exact Pages retry through real signed bridge
@@ -65,3 +65,4 @@ jobs:
           retention-days: 30
 # replay-trigger: exact-f46f80f0-1791296906711
 # replay-trigger: pre-founder-live-check-1791300333433
+# replay-trigger: final-origin-20a4cbd4-1791301956930
