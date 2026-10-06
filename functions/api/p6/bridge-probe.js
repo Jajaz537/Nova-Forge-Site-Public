@@ -12,6 +12,7 @@ export async function onRequestGet(context){
       ok,
       http:response.status,
       protocol:data?.protocol||null,
+      bridge_error:data?.error||null,
       secret_values_exposed:false,
       founder_bypass:false
     }),{
@@ -24,6 +25,7 @@ export async function onRequestGet(context){
       ok:false,
       http:503,
       protocol:null,
+      bridge_error:'probe-exception',
       secret_values_exposed:false,
       founder_bypass:false
     }),{
