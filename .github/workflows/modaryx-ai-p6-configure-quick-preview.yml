@@ -183,3 +183,4 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 # replay-trigger: fix-preview-selection-and-retry-20261006
+# replay-trigger: fresh-window-taught-chips-20261006
