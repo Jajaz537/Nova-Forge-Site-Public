@@ -1,10 +1,10 @@
-import {json} from '../../../../_lib/api-security.mjs';
-import {authenticateRead,authorizeWrite} from '../../../../_lib/remote-write.mjs';
+import {json} from '../../../_lib/api-security.mjs';
+import {authenticateRead,authorizeWrite} from '../../../_lib/remote-write.mjs';
 import {
   listNotificationDestinations,
   registerNotificationDestination,
   revokeNotificationDestination
-} from '../../../../_lib/notification-destinations.mjs';
+} from '../../../_lib/notification-destinations.mjs';
 
 export async function onRequestGet(context){
   const auth=await authenticateRead(context);
