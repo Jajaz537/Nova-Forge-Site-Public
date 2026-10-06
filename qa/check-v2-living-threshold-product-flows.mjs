@@ -489,7 +489,9 @@ try{
 
 
 
-  await clickText("footer button","MODARYX IA");
+  await setViewport(390,844);
+  await clickAria("Ouvrir le menu");
+  await clickText(".mobile-nav-utility","MODARYX IA");
   await waitText("Une IA native du produit, pas un chatbot greffé.");
   await waitText("MODARYX IA n’est pas active dans cette démo.");
   await waitText("READ → PLAN → EXECUTE_SAFE → EXECUTE_SENSITIVE → BLOCKED.");
@@ -498,6 +500,8 @@ try{
   if(!aiSendDisabled) throw new Error("MODARYX AI input must stay disabled without AI backend");
   console.log("FLOW_ASSERT modaryx ai preview no fake model or action");
 
+  await setViewport(1440,1024);
+  await sleep(120);
   await clickText(".global-nav button","Mods & contenus");
   await waitText("Catalogue global");
   await fill(".catalog-search input","sommets");
