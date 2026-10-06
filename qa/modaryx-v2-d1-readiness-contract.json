@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "READ_ONLY_D1_READINESS_CANDIDATE",
+  "endpoint": "/api/v1/status/d1-readiness",
+  "sqlMode": "READ_ONLY",
+  "publicExposure": "COUNTS_AND_COMPLETION_ONLY",
+  "expectedMigrationFiles": [
+    "migrations/0001_modaryx_dev_foundation.sql",
+    "migrations/0002_modaryx_auth_sessions.sql",
+    "migrations/0003_modaryx_moderation_publication.sql",
+    "migrations/0004_modaryx_v2_core_model.sql",
+    "migrations/0005_modaryx_v2_notifications.sql",
+    "migrations/0006_modaryx_v2_data_history.sql",
+    "migrations/0007_modaryx_v2_notification_delivery_outbox.sql"
+  ],
+  "productionBlockers": [
+    "real-data-history",
+    "backend-real"
+  ],
+  "invariants": [
+    "NO_MIGRATION_APPLY",
+    "NO_INSERT_UPDATE_DELETE_ALTER_DROP",
+    "NO_TABLE_NAMES_RETURNED_PUBLICLY",
+    "NO_SCHEMA_SQL_RETURNED_PUBLICLY",
+    "BINDING_MISSING_IS_HONEST",
+    "PARTIAL_MIGRATION_IS_NOT_COMPLETE",
+    "PRODUCTION_APPROVAL_REMAINS_OPEN",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER"
+  ]
+}
