@@ -68,6 +68,12 @@ assert.equal(cwv.response.status,200,"CWV readiness HTTP");
 assert.ok(["DISABLED","STORAGE_MISSING","READY_FOR_FIELD_TRAFFIC"].includes(cwv.body?.state),"unexpected CWV readiness state");
 assert.equal(cwv.body?.fieldEvidence,"OPEN_TRAFFIC_AND_P75_REQUIRED","CWV field evidence state drift");
 
+const readiness=await json("/api/v1/production/readiness");
+assert.equal(readiness.response.status,200,"production readiness HTTP");
+assert.equal(readiness.body?.productionPass,false,"readiness endpoint must never claim production PASS");
+assert.equal(readiness.body?.secretsReturned,false,"readiness endpoint secret guarantee drift");
+assert.equal(readiness.body?.remoteMutationPerformed,false,"readiness endpoint mutation guarantee drift");
+
 const history=await json("/api/v1/history");
 assert.ok([401,503].includes(history.response.status),"anonymous history must be denied or unavailable, got "+history.response.status);
 
@@ -96,6 +102,13 @@ const summary={
   delivery:{
     email:delivery.body?.email?.state||null,
     push:delivery.body?.push?.state||null
+  },
+  readiness:{
+    status:readiness.body?.status||null,
+    d1SchemaReady:Boolean(readiness.body?.technical?.d1Schema?.ready),
+    d1PresentCount:Number(readiness.body?.technical?.d1Schema?.presentCount||0),
+    backendFoundationReady:Boolean(readiness.body?.technical?.backendFoundation?.ready),
+    productionPass:Boolean(readiness.body?.productionPass)
   },
   historyAnonymousStatus:history.response.status,
   serviceWorkerAssetStatus:sw.status,

@@ -28,6 +28,7 @@
     "/api/v1/providers/status",
     "/api/v1/notifications/delivery/readiness",
     "/api/v1/rum/cwv",
+    "/api/v1/production/readiness",
     "/api/v1/history"
   ],
   "fieldCwv": {
@@ -54,6 +55,7 @@
     "NO_PRODUCTION_PASS_FROM_PRE_CUTOVER_PROBE",
     "NO_AUTHENTICATED_SESSION_REQUIRED",
     "NO_SECRET_VALUES_LOGGED",
-    "CWV_READINESS_GET_NEVER_ENABLES_COLLECTION"
+    "CWV_READINESS_GET_NEVER_ENABLES_COLLECTION",
+    "READINESS_ENDPOINT_NEVER_CLOSES_PRODUCTION_BLOCKER"
   ]
 }
