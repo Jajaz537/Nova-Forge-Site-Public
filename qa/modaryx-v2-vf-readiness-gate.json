@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-06",
   "status": "BLOCKED",
-  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06.md",
+  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1253.md",
   "rule": "NO_VF_OR_HIGH_FI_FINAL_WHILE_REQUIRED_BLOCKER_OPEN",
   "externalHuman": [
     {
@@ -69,19 +69,27 @@
     },
     {
       "id": "real-data-history",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-DATA-HISTORY-CANDIDATE-20261006.md",
+      "note": "Owner-scoped append-only history is locally proven; remote D1 application and production data pipeline remain OPEN."
     },
     {
       "id": "providers-connectors-real",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-PROVIDER-REGISTRY-CANDIDATE-20261006.md",
+      "note": "Secret-safe provider registry is proven; real production provider activation/configuration remains OPEN."
     },
     {
       "id": "notifications-email-push-real",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-NOTIFICATION-DELIVERY-GUARD-20261006.md",
+      "note": "Provider-neutral fail-closed delivery guard is proven; no real email/push provider or dispatch is active."
     },
     {
       "id": "pwa-service-worker-production",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-PWA-PRODUCTION-CANDIDATE-20261006.md",
+      "note": "Gated PWA candidate is browser-proven; production activation remains OPEN."
     },
     {
       "id": "v1-v2-browser-migration",
@@ -90,71 +98,85 @@
     },
     {
       "id": "core-web-vitals-production",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-PERFORMANCE-CANDIDATE-PROOF-20261006.md",
+      "note": "Desktop/mobile lab budgets are proven; field production p75 CWV remain OPEN."
     },
     {
       "id": "cutover",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-PRODUCTION-REHEARSAL-20261006.md",
+      "note": "Localhost production rehearsal is green; public cutover remains NOT_EXECUTED."
     }
   ],
   "forgeRuntime": [
     {
       "id": "forge-runtime",
-      "state": "OPEN"
+      "state": "OUT_OF_SCOPE_SITE_VF_OFFICIAL_SEPARATION",
+      "note": "Desktop/runtime work is outside the MODARYX web-site VF scope and must not be implemented from this repository to close the site gate."
     },
     {
       "id": "transport-protocol",
-      "state": "OPEN"
+      "state": "OUT_OF_SCOPE_SITE_VF_OFFICIAL_SEPARATION",
+      "note": "Desktop/runtime work is outside the MODARYX web-site VF scope and must not be implemented from this repository to close the site gate."
     },
     {
       "id": "receipt-signature",
-      "state": "OPEN"
+      "state": "OUT_OF_SCOPE_SITE_VF_OFFICIAL_SEPARATION",
+      "note": "Desktop/runtime work is outside the MODARYX web-site VF scope and must not be implemented from this repository to close the site gate."
     },
     {
       "id": "install-update-rollback",
-      "state": "OPEN"
+      "state": "OUT_OF_SCOPE_SITE_VF_OFFICIAL_SEPARATION",
+      "note": "Desktop/runtime work is outside the MODARYX web-site VF scope and must not be implemented from this repository to close the site gate."
     },
     {
       "id": "safe-profile",
-      "state": "OPEN"
+      "state": "OUT_OF_SCOPE_SITE_VF_OFFICIAL_SEPARATION",
+      "note": "Desktop/runtime work is outside the MODARYX web-site VF scope and must not be implemented from this repository to close the site gate."
     },
     {
       "id": "server-save-sync",
-      "state": "OPEN"
+      "state": "OUT_OF_SCOPE_SITE_VF_OFFICIAL_SEPARATION",
+      "note": "Desktop/runtime work is outside the MODARYX web-site VF scope and must not be implemented from this repository to close the site gate."
     }
   ],
   "rightsLegal": [
     {
       "id": "game-rights-registry-production",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-RIGHTS-REGISTRY-BACKEND-CANDIDATE-20261006.md",
+      "note": "Fail-closed rights registry backend is locally proven; remote/production registry remains OPEN."
     },
     {
       "id": "official-contact-discovery",
       "state": "OPEN",
       "evidenceCandidate": "docs/MODARYX-V2-RIGHTS-EVIDENCE-PREFLIGHT-20261006.md",
-      "note": "Official-source evidence ingestion is implemented locally; real publisher contact discovery/verification has not been executed."
+      "note": "Official-source evidence ingestion exists; real publisher contact discovery/verification remains OPEN."
     },
     {
       "id": "publisher-outbound",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-PUBLISHER-OUTBOUND-PREPARATION-20261006.md",
+      "note": "REQUEST_READY preparation exists; no real provider/sender/transport/outbound has occurred."
     },
     {
       "id": "publisher-response-parsing",
       "state": "OPEN",
-      "evidenceCandidate": "docs/MODARYX-V2-RIGHTS-EVIDENCE-PREFLIGHT-20261006.md",
-      "note": "Fail-closed response evidence interpretation is implemented locally; no real inbound publisher response has been ingested."
+      "evidenceCandidate": "docs/MODARYX-V2-PUBLISHER-INBOUND-QUARANTINE-20261006.md",
+      "note": "Opaque inbound quarantine and fail-closed interpretation are prepared; no real publisher response has been ingested."
     },
     {
       "id": "license-validation",
       "state": "OPEN",
-      "evidenceCandidate": "docs/MODARYX-V2-RIGHTS-EVIDENCE-PREFLIGHT-20261006.md",
-      "note": "License preflight is implemented locally and never authorizes; final verified authorizing decision remains OPEN."
+      "evidenceCandidate": "docs/MODARYX-V2-AUTHORIZING-RIGHTS-DECISION-20261006.md",
+      "note": "Manual fail-closed authorizing decision guard exists; no real publisher evidence has authorized production rights."
     },
     {
       "id": "legal-review-where-required",
       "state": "OPEN",
       "evidenceCandidate": "docs/MODARYX-V2-RIGHTS-EVIDENCE-PREFLIGHT-20261006.md",
-      "note": "The preflight requires an external legal-review record where applicable; no legal review is simulated."
+      "note": "External legal review remains required where applicable and is never simulated."
     }
   ],
   "currentlyProven": [
@@ -180,7 +202,23 @@
     "v2-pwa-candidate-gated-offline-proof",
     "v2-performance-lab-desktop-mobile-proof",
     "v2-deep-links-route-initial-metadata-proof",
-    "live-preview-dev-backend-auth-bindings-and-deny-boundaries"
+    "live-preview-dev-backend-auth-bindings-and-deny-boundaries",
+    "v2-notifications-inapp-storage-read-candidate-proven",
+    "v2-moderation-notification-producers-candidate-proven",
+    "v2-notification-email-push-fail-closed-guard-proven",
+    "v2-provider-registry-fail-closed-candidate-proven",
+    "v2-data-history-local-append-only-candidate-proven",
+    "v2-r2-artifact-storage-adapter-fail-closed-candidate-proven",
+    "v2-localhost-production-rehearsal-green",
+    "v2-rights-registry-local-candidate-proven",
+    "v2-game-support-backend-ui-candidate-proven",
+    "v2-rights-evidence-preflight-candidate-proven",
+    "v2-publisher-outbound-preparation-candidate-proven",
+    "v2-publisher-inbound-quarantine-candidate-proven",
+    "v2-authorizing-rights-decision-guard-candidate-proven",
+    "v2-schema-materialization-strict-candidate-proven",
+    "v2-d1-core-migration-local-only-proven",
+    "v2-ambient-season-time-weather-lens-proven"
   ],
   "invariants": [
     "PUBLIC_GREEN_NEVER_IMPLIES_PRODUCTION_VF",
@@ -193,6 +231,10 @@
     "NO_VF_WHILE_ANY_REQUIRED_BLOCKER_OPEN",
     "OWNER_DELEGATED_AI_VISUAL_REVIEW_IS_NOT_HUMAN_SESSION",
     "OWNER_DELEGATED_AI_VISUAL_REVIEW_NEVER_REPLACES_REAL_SCREEN_READER_SAFARI_OR_DEVICE",
-    "DEV_PREVIEW_BACKEND_PROOF_NEVER_EQUALS_PRODUCTION_BACKEND_PASS"
-  ]
+    "DEV_PREVIEW_BACKEND_PROOF_NEVER_EQUALS_PRODUCTION_BACKEND_PASS",
+    "OFFICIAL_SEPARATION_MODARYX_WEB_NOVA_FORGE_SOFTWARE_OS",
+    "DESKTOP_RUNTIME_NEVER_BLOCKS_MODARYX_WEB_SITE_VF",
+    "HISTORICAL_DESKTOP_HANDOFF_DOCS_DO_NOT_CHANGE_PRODUCT_IDENTITY"
+  ],
+  "scope": "MODARYX_WEB_SITE_VF_ONLY"
 }
