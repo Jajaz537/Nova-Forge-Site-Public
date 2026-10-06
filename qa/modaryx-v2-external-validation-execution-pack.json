@@ -3,7 +3,7 @@
   "date": "2026-10-06",
   "status": "PREPARED_NOT_EXECUTED",
   "targetBranch": "design/modaryx-v2-blue-violet-product-20261005",
-  "preparedAgainstCommit": "ce587af7d138eedf148d5d446cacd8fb6f2235a3",
+  "preparedAgainstCommit": "85ae67578f848cb1aef6f43d8958eb56fcf7e136",
   "blockerIds": [
     "nvda-real",
     "voiceover-real",
@@ -117,15 +117,20 @@
     "VIEWPORT_EMULATION_NEVER_EQUALS_PHYSICAL_DEVICE",
     "NON_SAFARI_NEVER_EQUALS_SAFARI_REAL",
     "EVIDENCE_TEMPLATE_NEVER_EQUALS_EXECUTED_SESSION",
-    "NO_UNNECESSARY_PERSONAL_DATA"
+    "NO_UNNECESSARY_PERSONAL_DATA",
+    "NO_EXTERNAL_SESSION_AGAINST_HISTORICAL_ROOT",
+    "INTERACTIVE_V2_ORIGIN_REQUIRED_BEFORE_REAL_DEVICE_EXECUTION"
   ],
-  "preparedPreviewOrigin": "https://371b4eff.nova-forge-site-public.pages.dev",
+  "preparedPreviewOrigin": null,
   "latestReadOnlyProbe": {
-    "runId": 37488293293,
-    "jobId": 112354005071,
+    "runId": 37532315393,
+    "jobId": 112504495423,
     "state": "SUCCESS",
-    "mode": "PRE_CUTOVER"
+    "mode": "PRE_CUTOVER",
+    "origin": "https://6ed17e00.nova-forge-site-public.pages.dev",
+    "note": "Current Pages root is a PRE_CUTOVER infrastructure probe target and must not be treated as the interactive V2 validation origin."
   },
-  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1732.md",
-  "canonicalGovernanceHead": "7464b3bc8e8270737f733047804406a5cce6d48d"
+  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-2304.md",
+  "canonicalGovernanceHead": "85ae67578f848cb1aef6f43d8958eb56fcf7e136",
+  "interactiveV2OriginState": "MISSING_REQUIRED_BEFORE_EXECUTION"
 }
