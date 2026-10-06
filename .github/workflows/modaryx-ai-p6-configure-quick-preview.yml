@@ -125,7 +125,7 @@ jobs:
               preview_evidence_mode_enabled:true,
               sd_public_key_fingerprint:$public_key_fingerprint,
               envelope_sha256:$envelope_sha256,
-              envelope_key_sha256:$ene_key_sha,
+              envelope_key_sha256:$envelope_key_sha256,
               encryption:"RSA-4096-OAEP-SHA256 + AES-256-CBC-PBKDF2-200000",
               secret_values_logged:false,
               plaintext_secret_artifacts:false,
