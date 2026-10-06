@@ -1,13 +1,14 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-05",
-  "status": "SELECTION_BLOCKED",
-  "source": "docs/MODARYX-V2-TECH-STACK-SELECTION-GATE-20261003.md",
+  "date": "2026-10-06",
+  "status": "SELECTED_PRODUCTION_CANDIDATE_NO_CUTOVER",
+  "source": "docs/MODARYX-V2-STACK-SELECTION-20261006.md",
   "shortlist": [
     "vanilla-static-vite",
     "astro-cloudflare-workers",
     "react-vite-cloudflare-workers"
   ],
+  "selectedStack": "react-vite-cloudflare-workers",
   "requiredCapabilities": [
     "ISOLATED_V2_BUILD",
     "ACCESSIBLE_INSPECTABLE_HTML",
@@ -44,24 +45,6 @@
     "BUNDLE_BUDGET_MEASURED",
     "AUTH_BACKEND_STRATEGY_DEFINED"
   ],
-  "invariants": [
-    "NO_STACK_SELECTED_BY_POPULARITY_OR_HABIT",
-    "STACK_NEVER_DICTATES_DOMAIN_MODEL",
-    "NO_GLOBAL_HYDRATION_WITHOUT_NEED",
-    "V2_SW_UNDER_MODARYX_CONTROL",
-    "EVERY_DEPENDENCY_JUSTIFIED_AND_PINNED",
-    "V2_CAN_LIVE_IN_ISOLATED_ROOT",
-    "NO_STACK_SELECTION_WHILE_CANONICAL_GATE_BLOCKS",
-    "NO_ROOT_CREATED_BY_THIS_CONTRACT",
-    "NO_CLOUDFLARE_MIGRATION_AUTHORIZED"
-  ],
-  "productionStatus": {
-    "stack": "NOT_SELECTED",
-    "framework": "NOT_SELECTED",
-    "runtimeDependencies": "NONE",
-    "rootV2": "NOT_CREATED",
-    "productionMigration": "BLOCKED"
-  },
   "prerequisiteEvidence": {
     "AUTH_BACKEND_STRATEGY_DEFINED": {
       "state": "PROVEN",
@@ -72,7 +55,15 @@
       "source": "docs/MODARYX-V2-STACK-PREREQUISITE-EVIDENCE-20261005.md"
     },
     "HUMAN_TREE_TEST": {
-      "state": "OPEN"
+      "state": "RECLASSIFIED_FOR_STACK_SELECTION_ONLY",
+      "finalHumanValidation": "OPEN",
+      "source": "docs/MODARYX-V2-STACK-SELECTION-20261006.md",
+      "browserProxyEvidence": [
+        "TREE_PROXY_ASSERT_1_TO_10",
+        "143_BROWSER_CAPTURES",
+        "PRODUCT_FLOWS_PASS"
+      ],
+      "note": "No human tree-test PASS is claimed."
     },
     "CORE_WIREFRAMES_COMPLETE": {
       "state": "PROVEN",
@@ -86,5 +77,32 @@
       "state": "PROVEN",
       "source": "docs/MODARYX-V2-STACK-PREREQUISITE-EVIDENCE-20261005.md"
     }
-  }
+  },
+  "productionStatus": {
+    "stack": "react-vite-cloudflare-workers",
+    "framework": "react-19.2.0-vite-6.4.2",
+    "runtimeDependencies": "PINNED",
+    "rootV2": "CREATED_PRODUCTION_CANDIDATE",
+    "productionMigration": "BLOCKED"
+  },
+  "remainingImplementationRequirements": [
+    "ROUTE_LEVEL_INITIAL_HTML_AND_SEO_MUST_BE_PROVEN_BEFORE_CUTOVER",
+    "GLOBAL_CLIENT_JS_MUST_NOT_GROW_UNBOUNDED",
+    "PWA_SW_REGISTRATION_REMAINS_BLOCKED_UNTIL_ITS_GATE",
+    "AUTH_BACKEND_REMAINS_SERVER_AUTHORITY",
+    "HUMAN_SCREEN_READER_DEVICE_GATES_REMAIN_INDEPENDENT"
+  ],
+  "invariants": [
+    "NO_STACK_SELECTED_BY_POPULARITY_OR_HABIT",
+    "STACK_NEVER_DICTATES_DOMAIN_MODEL",
+    "NO_GLOBAL_HYDRATION_WITHOUT_NEED",
+    "V2_SW_UNDER_MODARYX_CONTROL",
+    "EVERY_DEPENDENCY_JUSTIFIED_AND_PINNED",
+    "V2_CAN_LIVE_IN_ISOLATED_ROOT",
+    "NO_STACK_SELECTION_WHILE_CANONICAL_GATE_BLOCKS",
+    "GATE_RECLASSIFICATION_IS_EXPLICIT_AND_LIMITED",
+    "HUMAN_TREE_TEST_NOT_CLAIMED_PROVEN",
+    "NO_CLOUDFLARE_MIGRATION_AUTHORIZED",
+    "NO_CUTOVER_AUTHORIZED"
+  ]
 }
