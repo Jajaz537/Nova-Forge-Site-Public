@@ -5,14 +5,14 @@
 
 ## Base IA vérifiée
 
-- Modaryx — IA Foundation **v0.140**
-- SHA-256 : `870c0b8373e6751788a6ebe4423828a0a296a2b39f9af937f6c93114856f7e34`
-- 389/389 tests PASS
+- Modaryx — IA Foundation **v0.141**
+- SHA-256 : `714fe55635fdbdfcf11f69257ec0c4154e797d2ac2a72ea0e75a39dde4359a4d`
+- 392/392 tests PASS
 - 12/12 evals PASS
 - RC rehearsal PASS
 - migration-scale PASS
 - archive reproductible + extraction neuve PASS
-- runtime Windows durci : Python >= 3.11 résolu dynamiquement ; le checkpoint v0.140 exact a été reconstruit et exécuté sur le runner SD avec Python 3.13.16. Les gates réels `preflight`, `release_gate` et `core_idle` sont PASS ; `model_qualification`, `game_impact` et `multimodal` restent explicitement `NOT_RUN` tant que leurs preuves natives ne sont pas terminées
+- runtime Windows durci : Python >= 3.11 résolu dynamiquement ; le checkpoint v0.141 exact a été reconstruit et exécuté sur le runner SD avec Python 3.13.16. Le ZIP exact v0.141 et son `release_gate` ont été rejoués PASS sur SD. Le matériel cible reste prouvé ; le `core_idle` de référence PASS provient du checkpoint v0.140. Les qualifications modèle et multimodale v0.141 sont en cours, tandis que `game_impact` reste explicitement `NOT_RUN`. Aucun crédit VF n'est appliqué avant fermeture des preuves correspondantes
 - progression VF IA maintenue à **83 %**
 
 ## Intégration site ajoutée
