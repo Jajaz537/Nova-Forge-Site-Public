@@ -15,7 +15,7 @@ export function authLoginUrl(returnTo="/account"){
   return API_ROOT+"/auth/login?returnTo="+encodeURIComponent(normalizeReturnTo(returnTo));
 }
 
-async function readJson(path,{fetchImpl=globalThis.fetch,method="GET",timeoutMs=2500}={}){
+async function readJson(path,{fetchImpl=globalThis.fetch,method="GET",timeoutMs=2500,body:requestBody}={}){
   if(typeof fetchImpl!=="function") return {ok:false,state:"FETCH_UNAVAILABLE",status:0};
   if(typeof path!=="string"||!path.startsWith(API_ROOT+"/")) return {ok:false,state:"PATH_REJECTED",status:0};
   const controller=new AbortController();
@@ -25,7 +25,7 @@ async function readJson(path,{fetchImpl=globalThis.fetch,method="GET",timeoutMs=
       method,
       credentials:"same-origin",
       headers:method==="GET"?JSON_ACCEPT:{...JSON_ACCEPT,"content-type":"application/json"},
-      body:method==="GET"?undefined:"{}",
+      body:method==="GET"?undefined:JSON.stringify(requestBody??{}),
       signal:controller.signal,
       cache:"no-store",
     });
@@ -95,4 +95,13 @@ export async function getProviderRegistry(options={}){
 
 export async function getDataHistory(options={}){
   return readJson(API_ROOT+"/history",options);
+}
+
+export async function getGameSupportRequests(options={}){
+  return readJson(API_ROOT+"/game-support/requests",options);
+}
+
+export async function createGameSupportRequest(payload,options={}){
+  if(!payload||typeof payload!=="object"||Array.isArray(payload)) return {ok:false,state:"PAYLOAD_REJECTED",status:0};
+  return readJson(API_ROOT+"/game-support/requests",{...options,method:"POST",body:payload});
 }
