@@ -36,7 +36,7 @@ jobs:
           project="$(curl -fsS "${auth[@]}" "$api/accounts/$account_id/pages/projects/$PROJECT_NAME")"
           test "$(jq -r '.success' <<<"$project")" = "true"
           current_flags="$(jq -c '.result.deployment_configs.preview.compatibility_flags // []' <<<"$project")"
-          merged_flags="$(jq -c '. + ["global_fetch_strictly_public"] | unique' <<<"$current_flags")"
+          merged_flags="$(jq -c '. + ["global_fetch_strictly_public","cache_option_enabled"] | unique' <<<"$current_flags")"
 
           payload="$(jq -n --argjson flags "$merged_flags" '{deployment_configs:{preview:{compatibility_flags:$flags}}}')"
           updated="$(curl -fsS "${auth[@]}" --request PATCH --data "$payload" "$api/accounts/$account_id/pages/projects/$PROJECT_NAME")"
@@ -44,6 +44,7 @@ jobs:
 
           after="$(curl -fsS "${auth[@]}" "$api/accounts/$account_id/pages/projects/$PROJECT_NAME")"
           test "$(jq -r '.result.deployment_configs.preview.compatibility_flags | index("global_fetch_strictly_public") != null' <<<"$after")" = "true"
+          test "$(jq -r '.result.deployment_configs.preview.compatibility_flags | index("cache_option_enabled") != null' <<<"$after")" = "true"
 
           deployments="$(curl -fsS "${auth[@]}" --get --data-urlencode "env=preview" "$api/accounts/$account_id/pages/projects/$PROJECT_NAME/deployments")"
           source="$(jq -c --arg b "$TARGET_BRANCH" '[.result[] | select(((.deployment_trigger.metadata.branch // "") == $b) and ((.latest_stage.status // "") == "success") and ((.uses_functions // false) == true))] | sort_by(.created_on) | reverse | .[0] // null' <<<"$deployments")"
@@ -85,6 +86,7 @@ jobs:
               before_compatibility_flags:$before_flags,
               after_compatibility_flags:$after_flags,
               global_fetch_strictly_public_enabled:true,
+              cache_option_enabled:true,
               source_deployment_id:$source_deployment_id,
               retry_deployment_id:$retry_deployment_id,
               retry_deployment_url:$retry_deployment_url,
@@ -105,3 +107,4 @@ jobs:
           path: evidence
           if-no-files-found: error
           retention-days: 30
+# replay-trigger: enable-worker-cache-option-for-bridge-fetch
