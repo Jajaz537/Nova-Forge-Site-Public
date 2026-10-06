@@ -1,0 +1,171 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:modaryx:schemas:content-item:v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "slug",
+    "title",
+    "summary",
+    "description",
+    "gameId",
+    "contentTypeId",
+    "creatorIds",
+    "categories",
+    "tags",
+    "status",
+    "licenseRef",
+    "permissionRef",
+    "provenanceSummary",
+    "moderationState",
+    "visibility",
+    "currentReleaseId",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gameId": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "contentTypeId": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "creatorIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "teamId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+      },
+      "uniqueItems": true
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "submitted",
+        "published",
+        "withdrawn",
+        "revoked",
+        "archived"
+      ]
+    },
+    "licenseRef": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "permissionRef": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "provenanceSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "unknown",
+            "declared",
+            "verified"
+          ]
+        },
+        "receiptId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+        }
+      }
+    },
+    "moderationState": {
+      "enum": [
+        "unreviewed",
+        "pending",
+        "approved",
+        "restricted",
+        "rejected"
+      ]
+    },
+    "visibility": {
+      "enum": [
+        "private",
+        "unlisted",
+        "public"
+      ]
+    },
+    "currentReleaseId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

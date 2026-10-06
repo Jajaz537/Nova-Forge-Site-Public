@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-04",
-  "status": "PRE_PRODUCTION_CONTRACT",
+  "date": "2026-10-06",
+  "status": "CANDIDATE_SCHEMAS_MATERIALIZED",
   "source": "docs/MODARYX-V2-SCHEMA-PLAN-20261003.md",
   "schemaFamilies": [
     "game",
@@ -74,8 +74,16 @@
     "ADDITIONAL_PROPERTIES_FALSE_FOR_ADOPTED_STRICT_SCHEMAS"
   ],
   "productionStatus": {
-    "schemaFilesV2": "NOT_CREATED",
+    "schemaFilesV2": "CREATED_CANDIDATE",
     "schemaMigration": "NOT_IMPLEMENTED",
-    "realValidationPipeline": "NOT_IMPLEMENTED"
+    "realValidationPipeline": "TARGETED_CANDIDATE_PROVEN"
+  },
+  "schemaRoot": "schemas/v2",
+  "implementationPrerequisites": {
+    "coreWireframes": "PROVEN_EQUIVALENT",
+    "productTerminology": "STABLE_INTERNAL_IDENTIFIERS_UI_WORDING_STILL_HUMAN_OPEN",
+    "collectionModpackProfile": "PRODUCT_CONTRACT_PROVEN",
+    "contentItemRelease": "MODEL_PROVEN_FOR_CANDIDATE",
+    "backwardCompatibility": "MAPPING_DEFINED_NO_MIGRATION"
   }
 }

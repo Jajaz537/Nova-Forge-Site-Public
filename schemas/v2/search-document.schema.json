@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:modaryx:schemas:search-document:v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "entityType",
+    "title",
+    "summary",
+    "href",
+    "gameId",
+    "contentTypeId",
+    "creatorIds",
+    "categories",
+    "tags",
+    "gameVersions",
+    "loaders",
+    "platforms",
+    "status",
+    "updatedAt",
+    "rankingSignals"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "entityType": {
+      "enum": [
+        "game",
+        "content",
+        "release",
+        "creator",
+        "team",
+        "collection",
+        "modpack"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string"
+    },
+    "href": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "gameId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "contentTypeId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "creatorIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+      },
+      "uniqueItems": true
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+      },
+      "uniqueItems": true
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "gameVersions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "loaders": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "rankingSignals": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "quality": {
+          "type": "number",
+          "minimum": 0
+        },
+        "freshness": {
+          "type": "number",
+          "minimum": 0
+        },
+        "popularity": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

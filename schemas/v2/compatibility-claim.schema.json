@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:modaryx:schemas:compatibility-claim:v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "contentId",
+    "releaseId",
+    "gameId",
+    "gameVersion",
+    "loader",
+    "platform",
+    "environment",
+    "state",
+    "evidenceType",
+    "receiptId",
+    "source",
+    "observedAt",
+    "notes"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "contentId": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "releaseId": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "gameId": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "gameVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "loader": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "platform": {
+      "type": "string",
+      "minLength": 1
+    },
+    "environment": {
+      "enum": [
+        "client",
+        "server",
+        "client-server",
+        "mixed",
+        "unknown"
+      ]
+    },
+    "state": {
+      "enum": [
+        "compatible",
+        "partial",
+        "incompatible",
+        "unknown"
+      ]
+    },
+    "evidenceType": {
+      "enum": [
+        "measured",
+        "declared",
+        "estimated",
+        "unknown"
+      ]
+    },
+    "receiptId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "evidenceType": {
+            "const": "measured"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "receiptId": {
+            "type": "string",
+            "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:modaryx:schemas:profile-loadout:v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "ownerProfileId",
+    "gameId",
+    "gameVersion",
+    "selectedReleases",
+    "enabledState",
+    "loadOrder",
+    "localConfigRefs",
+    "syncState",
+    "visibility",
+    "shareConsentReceiptId",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "ownerProfileId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "gameId": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "gameVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "selectedReleases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+      },
+      "uniqueItems": true
+    },
+    "enabledState": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "loadOrder": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+      },
+      "uniqueItems": true
+    },
+    "localConfigRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "syncState": {
+      "enum": [
+        "local-only",
+        "sync-pending",
+        "synced",
+        "sync-error"
+      ]
+    },
+    "visibility": {
+      "enum": [
+        "private-local",
+        "private-synced",
+        "shared-unlisted",
+        "shared-public"
+      ]
+    },
+    "shareConsentReceiptId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "visibility": {
+            "enum": [
+              "shared-unlisted",
+              "shared-public"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "shareConsentReceiptId": {
+            "type": "string",
+            "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+          }
+        }
+      }
+    }
+  ]
+}

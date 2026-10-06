@@ -1,0 +1,147 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:modaryx:schemas:game:v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "slug",
+    "name",
+    "status",
+    "platforms",
+    "versions",
+    "contentTypeIds",
+    "categoryIds",
+    "loaderIds",
+    "environmentModel",
+    "installCapabilities"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "status": {
+      "enum": [
+        "editorial-only",
+        "catalog-enabled",
+        "distribution-enabled",
+        "deprecated"
+      ]
+    },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "versions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "dlcs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "contentTypeIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+      },
+      "uniqueItems": true
+    },
+    "categoryIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+      },
+      "uniqueItems": true
+    },
+    "loaderIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+      },
+      "uniqueItems": true
+    },
+    "environmentModel": {
+      "enum": [
+        "client",
+        "server",
+        "client-server",
+        "mixed",
+        "unknown"
+      ]
+    },
+    "installCapabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manual",
+        "manager",
+        "direct"
+      ],
+      "properties": {
+        "manual": {
+          "type": "boolean"
+        },
+        "manager": {
+          "type": "boolean"
+        },
+        "direct": {
+          "type": "boolean"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "publisher": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string",
+          "format": "uri"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:modaryx:schemas:team:v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "description",
+    "visibility",
+    "members",
+    "roles",
+    "projectIds"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "visibility": {
+      "enum": [
+        "private",
+        "unlisted",
+        "public"
+      ]
+    },
+    "members": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profileId",
+          "roleId"
+        ],
+        "properties": {
+          "profileId": {
+            "type": "string",
+            "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+          },
+          "roleId": {
+            "type": "string",
+            "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+          }
+        }
+      }
+    },
+    "roles": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "projectIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+      },
+      "uniqueItems": true
+    }
+  }
+}
