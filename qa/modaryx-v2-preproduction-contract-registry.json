@@ -360,7 +360,7 @@
     {
       "id": "d1-v2-core-model",
       "contract": "qa/modaryx-v2-d1-core-contract.json",
-      "checker": "qa/check-v2-d1-core-migration.py",
+      "checker": "qa/check-v2-d1-core-migration.mjs",
       "source": "docs/MODARYX-V2-D1-CORE-MIGRATION-20261006.md"
     }
   ],

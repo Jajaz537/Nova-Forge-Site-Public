@@ -9,6 +9,7 @@ on:
       - 'migrations/0004_modaryx_v2_core_model.sql'
       - 'qa/modaryx-v2-d1-core-contract.json'
       - 'qa/check-v2-d1-core-migration.py'
+      - 'qa/check-v2-d1-core-migration.mjs'
       - 'qa/modaryx-v2-schema-plan-contract.json'
       - 'qa/check-v2-schema-plan-contract.mjs'
       - 'qa/modaryx-v2-preproduction-contract-registry.json'
