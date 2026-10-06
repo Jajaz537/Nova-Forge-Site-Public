@@ -195,7 +195,17 @@
         "EXPLICIT_RELEASE_APPROVAL",
         "SEPARATE_INDEXABILITY_AND_ROUTE_PROMOTION_STEP"
       ],
-      "automatic": false
+      "automatic": false,
+      "latestPublicOriginReadOnlyEvidence": "docs/MODARYX-V2-PUBLIC-ORIGIN-READONLY-CLASSIFICATION-20261006.md",
+      "observedPublicOriginState": {
+        "origin": "https://modaryxmods.com",
+        "rootHttp": 403,
+        "apiHttp": "403_ALL_PROBED_V2_ENDPOINTS",
+        "serviceWorkerV2Http": 404,
+        "classification": "PUBLIC_ORIGIN_ACCESS_GATED_403",
+        "mutationPerformed": false,
+        "blockerClosed": false
+      }
     }
   ],
   "invariants": [

@@ -61,7 +61,8 @@
       "evidenceCandidate": "docs/MODARYX-V2-LIVE-PREVIEW-BACKEND-EVIDENCE-20261006.md",
       "note": "DEV preview backend is real and proven; production backend remains OPEN.",
       "latestPreCutoverReadOnlyEvidence": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md",
-      "latestTargetReadOnlyEvidence": "docs/MODARYX-V2-CLOUDFLARE-TARGET-READONLY-EVIDENCE-20261006.md"
+      "latestTargetReadOnlyEvidence": "docs/MODARYX-V2-CLOUDFLARE-TARGET-READONLY-EVIDENCE-20261006.md",
+      "latestPublicOriginReadOnlyEvidence": "docs/MODARYX-V2-PUBLIC-ORIGIN-READONLY-CLASSIFICATION-20261006.md"
     },
     {
       "id": "auth-passkeys-real",
@@ -115,7 +116,8 @@
       "state": "OPEN",
       "evidenceCandidate": "docs/MODARYX-V2-PRODUCTION-REHEARSAL-20261006.md",
       "note": "Localhost production rehearsal is green; public cutover remains NOT_EXECUTED.",
-      "latestPreCutoverReadOnlyEvidence": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md"
+      "latestPreCutoverReadOnlyEvidence": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md",
+      "latestPublicOriginReadOnlyEvidence": "docs/MODARYX-V2-PUBLIC-ORIGIN-READONLY-CLASSIFICATION-20261006.md"
     }
   ],
   "forgeRuntime": [
