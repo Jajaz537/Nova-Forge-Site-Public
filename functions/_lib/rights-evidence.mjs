@@ -113,3 +113,57 @@ export function evaluateLicensePreflight(input,{responseArchived=false,responseS
   if(!base.legalReviewRef) blockers.push("legal-review-record-missing");
   return {ok:true,value:base,result:blockers.length?"BLOCKED":"ELIGIBLE_FOR_MANUAL_DECISION",reason:blockers[0]||null,blockers,authorizes:false};
 }
+
+
+const parseJsonList=value=>{
+  try{
+    const parsed=typeof value==="string"?JSON.parse(value):value;
+    return Array.isArray(parsed)?parsed:[];
+  }catch{return []}
+};
+
+export function evaluateAuthorizingDecisionCandidate({preflight,response}={}){
+  const blockers=[];
+  if(!preflight||!response) return {ok:false,reason:"authorizing-evidence-missing",blockers:["authorizing-evidence-missing"]};
+  if(preflight.result!=="ELIGIBLE_FOR_MANUAL_DECISION") blockers.push("preflight-not-eligible");
+  if(!AUTHORIZING.has(preflight.requested_status)) blockers.push("preflight-status-not-authorizing");
+  if(!preflight.legal_review_ref) blockers.push("legal-review-record-missing");
+  if(!Boolean(preflight.asset_linked)) blockers.push("asset-not-linked");
+  if(!Boolean(preflight.conditions_satisfied)) blockers.push("conditions-not-satisfied");
+  if(!Boolean(response.archived)) blockers.push("response-not-archived");
+  if(!Boolean(response.source_verified)) blockers.push("response-source-not-verified");
+  if(response.review_state!=="LEGAL_REVIEW_REQUIRED") blockers.push("response-review-state-invalid");
+  if(preflight.case_id!==response.case_id||preflight.response_evidence_id!==response.response_evidence_id) blockers.push("response-preflight-mismatch");
+
+  const extraction=parseJsonList(response.extraction_json);
+  const exact=extraction.find(row=>
+    row&&row.rightScope===preflight.right_scope&&
+    row.productSurface===preflight.product_surface&&
+    row.status===preflight.requested_status
+  );
+  if(!exact) blockers.push("response-does-not-support-exact-scope-status");
+
+  const evidenceRefs=parseJsonList(preflight.evidence_refs_json).filter(x=>typeof x==="string"&&x.trim());
+  if(evidenceRefs.length===0) blockers.push("preflight-evidence-empty");
+
+  return {
+    ok:true,
+    eligible:blockers.length===0,
+    blockers,
+    decision:blockers.length?null:{
+      caseId:preflight.case_id,
+      preflightId:preflight.preflight_id,
+      responseEvidenceId:preflight.response_evidence_id,
+      rightScope:preflight.right_scope,
+      productSurface:preflight.product_surface,
+      status:preflight.requested_status,
+      territories:parseJsonList(preflight.territories_json),
+      platforms:parseJsonList(preflight.platforms_json),
+      conditions:parseJsonList(preflight.conditions_json),
+      evidenceRefs,
+      validFrom:preflight.valid_from||null,
+      validUntil:preflight.valid_until||null,
+      legalReviewRef:preflight.legal_review_ref
+    }
+  };
+}

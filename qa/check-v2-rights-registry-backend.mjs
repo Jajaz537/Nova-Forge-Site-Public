@@ -10,12 +10,12 @@ import {
 const contract=JSON.parse(fs.readFileSync("qa/modaryx-v2-rights-registry-backend-contract.json","utf8"));
 assert.equal(contract.status,"RIGHTS_REGISTRY_BACKEND_CANDIDATE_LOCAL_PROOF");
 assert.equal(contract.remoteApplication,"NOT_EXECUTED");
-assert.equal(contract.productionStatus.authorizingEvidenceIngestion,"NOT_IMPLEMENTED");
+assert.equal(contract.productionStatus.authorizingEvidenceIngestion,"CANDIDATE_ELIGIBLE_PREFLIGHT_ONLY");
 assert.equal(contract.productionStatus.contactDiscovery,"NOT_IMPLEMENTED");
 assert.equal(contract.productionStatus.outbound,"NOT_IMPLEMENTED");
 const inv=new Set(contract.invariants||[]);
 for(const x of [
-  "ADMIN_PERMISSION_REQUIRED","CURRENT_API_CANNOT_RECORD_GRANTED_OR_GRANTED_WITH_LIMITS",
+  "ADMIN_PERMISSION_REQUIRED","GENERAL_SCOPE_DECISIONS_API_CANNOT_RECORD_GRANTED_OR_GRANTED_WITH_LIMITS","AUTHORISING_DECISION_REQUIRES_ELIGIBLE_PREFLIGHT","AUTHORISING_DECISION_REQUIRES_EXPLICIT_ADMIN_CONFIRMATION",
   "NO_RESPONSE_NEVER_AUTHORIZES","EXACT_SCOPE_AND_PRODUCT_SURFACE_MATCH_REQUIRED",
   "VERIFIED_EVIDENCE_GUARDS_REQUIRED_FOR_AUTHORIZING_ROWS","WEB_AND_MODARYX_FORGE_REMAIN_SEPARATE",
   "NO_PUBLISHER_CONTACT_OR_OUTBOUND","RIGHTS_PRODUCTION_BLOCKERS_REMAIN_OPEN"
@@ -111,7 +111,8 @@ for(const t of ["modaryx_v2_rights_cases","modaryx_v2_rights_scope_decisions","m
 for(const p of [
   "../functions/api/v1/rights/cases/index.js",
   "../functions/api/v1/rights/scope-decisions.js",
-  "../functions/api/v1/rights/effective.js"
+  "../functions/api/v1/rights/effective.js",
+  "../functions/api/v1/rights/authorizing-decisions.js"
 ]) await import(p);
 
 const decisionEndpoint=fs.readFileSync("functions/api/v1/rights/scope-decisions.js","utf8");
