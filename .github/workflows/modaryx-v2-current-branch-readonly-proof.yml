@@ -54,16 +54,25 @@ jobs:
           console.log("PASS_V2_LOCAL_BUILD_FINGERPRINT");
           NODE
 
-      - name: Wait for exact Cloudflare branch alias
+      - name: Diagnose and wait for exact Cloudflare branch alias
         run: |
           set -euo pipefail
           alias_name="$(printf '%s' "$GITHUB_REF_NAME" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')"
           origin="https://${alias_name}.nova-forge-site-public.pages.dev"
           echo "MODARYX_BRANCH_ORIGIN=${origin}" >> "$GITHUB_ENV"
+          echo "BRANCH_ALIAS_ORIGIN ${origin}"
           matched=0
-          for attempt in {1..72}; do
-            body="$(curl --fail --silent --show-error --max-time 10 "${origin}/build-info.json" 2>/dev/null || true)"
-            got="$(printf '%s' "$body" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{try{const j=JSON.parse(s);process.stdout.write(String(j.commitSha||""))}catch{}})')"
+          for attempt in {1..24}; do
+            root_code="$(curl --silent --show-error --max-time 10 -o /tmp/modaryx-root.html -w '%{http_code}' "${origin}/" 2>/dev/null || printf '000')"
+            info_code="$(curl --silent --show-error --max-time 10 -o /tmp/modaryx-build-info.json -w '%{http_code}' "${origin}/build-info.json" 2>/dev/null || printf '000')"
+            got=""
+            if [ "$info_code" = "200" ]; then
+              got="$(node -e 'const fs=require("fs");try{const j=JSON.parse(fs.readFileSync("/tmp/modaryx-build-info.json","utf8"));process.stdout.write(String(j.commitSha||""))}catch{}')"
+            fi
+            if [ "$attempt" = "1" ] || [ $((attempt % 6)) = "0" ]; then
+              root_title="$(grep -o -i '<title>[^<]*' /tmp/modaryx-root.html 2>/dev/null | head -1 | sed -E 's/<title>//I' || true)"
+              echo "ALIAS_DIAGNOSTIC attempt=${attempt} root=${root_code} buildInfo=${info_code} sha=${got:-NONE} title=${root_title:-NONE}"
+            fi
             if [ "$got" = "$GITHUB_SHA" ]; then
               echo "EXACT_BRANCH_FINGERPRINT ${got}"
               matched=1
@@ -71,7 +80,10 @@ jobs:
             fi
             sleep 5
           done
-          test "$matched" = "1"
+          if [ "$matched" != "1" ]; then
+            echo "ALIAS_FINGERPRINT_NOT_CURRENT expected=${GITHUB_SHA}"
+            exit 1
+          fi
 
       - name: Run exact-SHA PRE_CUTOVER read-only probe
         env:
