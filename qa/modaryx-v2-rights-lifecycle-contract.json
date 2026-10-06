@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-04",
-  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "date": "2026-10-06",
+  "status": "LIFECYCLE_EVALUATOR_AND_ADMIN_EXPIRY_LOCK_CANDIDATE",
   "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md",
   "lifecycleStates": [
     "ACTIVE_WITH_LIMITS",
@@ -40,7 +40,13 @@
     "SAFE_BASELINE_REMAINS_AVAILABLE_WHEN_LEGALLY_ALLOWED",
     "WEB_AND_FORGE_LIFECYCLES_REMAIN_SEPARATE",
     "LIFECYCLE_TRANSITIONS_ARE_AUDITED",
-    "LOCK_ACTIONS_ARE_IDEMPOTENT"
+    "LOCK_ACTIONS_ARE_IDEMPOTENT",
+    "ADMIN_TRIGGERED_EXPIRY_LOCK_CANNOT_EXPAND_RIGHTS",
+    "EXPIRY_LOCK_SUPERSEDES_ONLY_SOURCE_DECISION",
+    "EXPIRY_LOCK_IDEMPOTENCY_KEY_REQUIRED",
+    "NO_SILENT_REACTIVATION_FROM_LIFECYCLE_ENDPOINT",
+    "PRODUCTION_SCHEDULER_REMAINS_OPEN",
+    "REMOTE_D1_NOT_APPLIED"
   ],
   "requiredEvidenceForReactivation": [
     "publisher_response_or_license",
@@ -52,9 +58,12 @@
   ],
   "productionStatus": {
     "scheduler": "NOT_IMPLEMENTED",
-    "expiryMonitor": "NOT_IMPLEMENTED",
+    "expiryMonitor": "CANDIDATE_PURE_EVALUATOR",
     "revocationInbound": "NOT_IMPLEMENTED",
-    "automaticScopeLock": "NOT_IMPLEMENTED",
+    "automaticScopeLock": "CANDIDATE_ADMIN_TRIGGERED_IDEMPOTENT_EXPIRY_LOCK",
     "revalidation": "NOT_IMPLEMENTED"
-  }
+  },
+  "migration": "migrations/0014_modaryx_v2_rights_lifecycle.sql",
+  "endpoint": "POST /api/v1/rights/lifecycle/evaluate-case",
+  "remoteApplication": "NOT_EXECUTED"
 }

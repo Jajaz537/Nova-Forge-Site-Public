@@ -446,6 +446,12 @@
       "contract": "qa/modaryx-v2-rights-evidence-preflight-contract.json",
       "checker": "qa/check-v2-authorizing-decision.mjs",
       "source": "docs/MODARYX-V2-AUTHORIZING-RIGHTS-DECISION-20261006.md"
+    },
+    {
+      "id": "rights-lifecycle-candidate",
+      "contract": "qa/modaryx-v2-rights-lifecycle-contract.json",
+      "checker": "qa/check-v2-rights-lifecycle-candidate.mjs",
+      "source": "docs/MODARYX-V2-RIGHTS-LIFECYCLE-CANDIDATE-20261006.md"
     }
   ],
   "invariants": [

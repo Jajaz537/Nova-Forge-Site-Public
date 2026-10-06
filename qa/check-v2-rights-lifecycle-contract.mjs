@@ -32,7 +32,13 @@ for(const invariant of [
   "SAFE_BASELINE_REMAINS_AVAILABLE_WHEN_LEGALLY_ALLOWED",
   "WEB_AND_FORGE_LIFECYCLES_REMAIN_SEPARATE",
   "LIFECYCLE_TRANSITIONS_ARE_AUDITED",
-  "LOCK_ACTIONS_ARE_IDEMPOTENT"
+  "LOCK_ACTIONS_ARE_IDEMPOTENT",
+  "ADMIN_TRIGGERED_EXPIRY_LOCK_CANNOT_EXPAND_RIGHTS",
+  "EXPIRY_LOCK_SUPERSEDES_ONLY_SOURCE_DECISION",
+  "EXPIRY_LOCK_IDEMPOTENCY_KEY_REQUIRED",
+  "NO_SILENT_REACTIVATION_FROM_LIFECYCLE_ENDPOINT",
+  "PRODUCTION_SCHEDULER_REMAINS_OPEN",
+  "REMOTE_D1_NOT_APPLIED"
 ]){
   if(!invariants.has(invariant)) throw new Error("missing invariant: "+invariant);
 }
@@ -42,9 +48,12 @@ for(const item of ["publisher_response_or_license","scope_identity","product_sco
   if(!evidence.has(item)) throw new Error("missing reactivation evidence: "+item);
 }
 
-for(const [key,value] of Object.entries(data.productionStatus||{})){
-  if(value!=="NOT_IMPLEMENTED") throw new Error("production status must remain honest: "+key);
-}
+if(data.productionStatus?.scheduler!=="NOT_IMPLEMENTED") throw new Error("scheduler must remain NOT_IMPLEMENTED");
+if(data.productionStatus?.expiryMonitor!=="CANDIDATE_PURE_EVALUATOR") throw new Error("expiry monitor candidate status drift");
+if(data.productionStatus?.revocationInbound!=="NOT_IMPLEMENTED") throw new Error("revocation inbound must remain NOT_IMPLEMENTED");
+if(data.productionStatus?.automaticScopeLock!=="CANDIDATE_ADMIN_TRIGGERED_IDEMPOTENT_EXPIRY_LOCK") throw new Error("scope lock candidate status drift");
+if(data.productionStatus?.revalidation!=="NOT_IMPLEMENTED") throw new Error("revalidation must remain NOT_IMPLEMENTED");
+if(data.remoteApplication!=="NOT_EXECUTED") throw new Error("remote application must remain NOT_EXECUTED");
 
 console.log("RIGHTS_LIFECYCLE_STATE_COUNT",states.size);
 console.log("RIGHTS_LIFECYCLE_INVARIANT_COUNT",invariants.size);

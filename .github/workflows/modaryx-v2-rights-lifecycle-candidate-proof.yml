@@ -1,0 +1,47 @@
+name: MODARYX V2 Rights Lifecycle Candidate Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-rights-lifecycle-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-rights-lifecycle-candidate-proof.yml'
+      - 'migrations/0014_modaryx_v2_rights_lifecycle.sql'
+      - 'functions/_lib/rights-lifecycle.mjs'
+      - 'functions/api/v1/rights/lifecycle/**'
+      - 'qa/modaryx-v2-rights-lifecycle-contract.json'
+      - 'qa/check-v2-rights-lifecycle-contract.mjs'
+      - 'qa/check-v2-rights-lifecycle-candidate.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-rights-lifecycle-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove expiry lifecycle only reduces rights without scheduler
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate rights lifecycle candidate
+        run: |
+          set -euo pipefail
+          node qa/check-v2-rights-lifecycle-contract.mjs
+          node --experimental-sqlite qa/check-v2-rights-lifecycle-candidate.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+          echo PASS_V2_RIGHTS_LIFECYCLE_CANDIDATE_PROOF
+      - name: Mirror Cloudflare root build
+        run: npm run build
