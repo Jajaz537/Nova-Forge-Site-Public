@@ -218,11 +218,15 @@ try {
     return true;
   })()`);
   if(!supportRequestOpened) fail("game support request navigation unavailable");
-  await sleep(180);
-  const requestToggleOpened=await evaluate(`(() => {
-    const b=[...document.querySelectorAll('.game-support-request>.quiet')].find(el=>el.textContent.trim()==='Demander le support d’un jeu');
-    if(!b) return false; b.click(); return true;
-  })()`);
+  let requestToggleOpened=false;
+  for(let i=0;i<80;i++){
+    requestToggleOpened=await evaluate(`(() => {
+      const b=[...document.querySelectorAll('.game-support-request>.quiet')].find(el=>el.textContent.trim()==='Demander le support d’un jeu');
+      if(!b) return false; b.click(); return true;
+    })()`);
+    if(requestToggleOpened) break;
+    await sleep(100);
+  }
   if(!requestToggleOpened) fail("game support request toggle unavailable");
   await sleep(120);
   const requestOverflow=await evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth");
