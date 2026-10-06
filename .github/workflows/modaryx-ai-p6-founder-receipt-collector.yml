@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 22
     env:
-      EVIDENCE_URL: "https://4298fe2c.nova-forge-site-public.pages.dev/api/p6/evidence"
+      EVIDENCE_URL: "https://e632b150.nova-forge-site-public.pages.dev/api/p6/evidence"
     steps:
       - name: Poll short-lived non-sensitive Founder receipt
         shell: bash
@@ -94,3 +94,4 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 # replay-trigger: extended-founder-receipt-window-current-4298fe2c
+# replay-trigger: fresh-founder-window-e632b150
