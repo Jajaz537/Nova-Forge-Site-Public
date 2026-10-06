@@ -13,7 +13,11 @@ for(const s of pack.sessions){
   assert.ok(Array.isArray(s.criticalTasks)&&s.criticalTasks.length>=5,s.blockerId+" task coverage too small");
 }
 const inv=new Set(pack.invariants||[]);
-for(const x of ["AUTOMATION_NEVER_CLOSES_EXTERNAL_BLOCKER","CDP_NEVER_EQUALS_SCREEN_READER","VIEWPORT_EMULATION_NEVER_EQUALS_PHYSICAL_DEVICE","NON_SAFARI_NEVER_EQUALS_SAFARI_REAL","EVIDENCE_TEMPLATE_NEVER_EQUALS_EXECUTED_SESSION"]) assert.ok(inv.has(x),"missing invariant "+x);
+for(const x of ["AUTOMATION_NEVER_CLOSES_EXTERNAL_BLOCKER","CDP_NEVER_EQUALS_SCREEN_READER","VIEWPORT_EMULATION_NEVER_EQUALS_PHYSICAL_DEVICE","NON_SAFARI_NEVER_EQUALS_SAFARI_REAL","EVIDENCE_TEMPLATE_NEVER_EQUALS_EXECUTED_SESSION","NO_EXTERNAL_SESSION_AGAINST_HISTORICAL_ROOT","INTERACTIVE_V2_ORIGIN_REQUIRED_BEFORE_REAL_DEVICE_EXECUTION"]) assert.ok(inv.has(x),"missing invariant "+x);
+assert.equal(pack.preparedAgainstCommit,"85ae67578f848cb1aef6f43d8958eb56fcf7e136");
+assert.equal(pack.preparedPreviewOrigin,null);
+assert.equal(pack.interactiveV2OriginState,"MISSING_REQUIRED_BEFORE_EXECUTION");
+assert.equal(pack.latestReadOnlyProbe?.runId,37532315393);
 const template=JSON.parse(fs.readFileSync("qa/external-validation/evidence-template.json","utf8"));
 assert.equal(template.status,"TEMPLATE_NOT_EVIDENCE");
 assert.equal(template.result,"INCOMPLETE");
