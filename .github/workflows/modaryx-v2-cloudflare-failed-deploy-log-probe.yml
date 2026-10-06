@@ -1,0 +1,89 @@
+name: MODARYX V2 Cloudflare Failed Deploy Log Probe
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-cloudflare-failed-deploy-log-20261007'
+    paths:
+      - '.github/workflows/modaryx-v2-cloudflare-failed-deploy-log-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-cloudflare-failed-deploy-log-probe
+  cancel-in-progress: true
+
+env:
+  CLOUDFLARE_ZONE_NAME: modaryxmods.com
+  CLOUDFLARE_PROJECT_NAME: nova-forge-site-public
+  CLOUDFLARE_DEPLOYMENT_ID: f2eb493d-be91-496b-9df7-c2a39571794c
+  EXPECTED_SOURCE_SHA: e3f48abc03066cdd3209dc4b3f043f12e5401cb2
+
+jobs:
+  probe:
+    name: Read exact failed Pages deployment logs
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Checkout exact failed source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: e3f48abc03066cdd3209dc4b3f043f12e5401cb2
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Verify exact failed source
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SOURCE_SHA"
+          echo "FAILED_SOURCE_SHA=$EXPECTED_SOURCE_SHA"
+
+      - name: Resolve Cloudflare account with GET only
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${CLOUDFLARE_API_TOKEN:-}"
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+          zones="$(curl -fsS "${auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}")"
+          test "$(jq -r '.success' <<<"$zones")" = "true"
+          test "$(jq '.result | length' <<<"$zones")" -eq 1
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          test -n "$account_id"
+          echo "CLOUDFLARE_ACCOUNT_ID=$account_id" >> "$GITHUB_ENV"
+          echo "ACCOUNT_RESOLVED=yes"
+
+      - name: Read deployment details and failed build logs
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          deployment="$(curl -fsS "${auth[@]}" "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/deployments/${CLOUDFLARE_DEPLOYMENT_ID}")"
+          test "$(jq -r '.success' <<<"$deployment")" = "true"
+          echo "DEPLOYMENT_SUMMARY"
+          jq '.result | {id,environment,latest_stage,stages,source,short_id,url,uses_functions}' <<<"$deployment"
+
+          logs="$(curl -fsS "${auth[@]}" "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}/deployments/${CLOUDFLARE_DEPLOYMENT_ID}/history/logs")"
+          test "$(jq -r '.success' <<<"$logs")" = "true"
+          echo "CLOUDFLARE_BUILD_LOG_START"
+          jq -r '.result.data[]?.line' <<<"$logs"
+          echo "CLOUDFLARE_BUILD_LOG_END"
+          echo "CLOUDFLARE_BUILD_LOG_TOTAL=$(jq -r '.result.total' <<<"$logs")"
+
+      - name: Prove probe remained read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          file=".github/workflows/modaryx-v2-cloudflare-failed-deploy-log-probe.yml"
+          if grep -E 'curl .* -(X|--request) *(POST|PUT|PATCH|DELETE)' "$file"; then
+            echo "mutation verb detected"
+            exit 1
+          fi
+          echo READ_ONLY_CLOUDFLARE_LOG_PROBE=yes
