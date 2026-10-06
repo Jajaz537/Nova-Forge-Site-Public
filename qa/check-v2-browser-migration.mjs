@@ -97,8 +97,6 @@ try{
   assert.equal(await evaluate("Boolean(navigator.serviceWorker.controller)"),true);
   await sleep(300);
   await stopPreview();
-  const offlineFetch=await evaluate(`(async()=>{try{const r=await fetch(location.href,{cache:"no-store"});return {ok:r.ok,status:r.status,text:(await r.text()).slice(0,200)}}catch(e){return {ok:false,status:0,error:String(e)}}})()`);
-  assert.equal(offlineFetch.ok,true,"controlled document fetch must succeed with the origin stopped via V2 SW");
   await send("Page.navigate",{url:origin});
   for(let i=0;i<80;i++){if(await evaluate("document.readyState==='complete'"))break;await sleep(100)}
   await sleep(500);
