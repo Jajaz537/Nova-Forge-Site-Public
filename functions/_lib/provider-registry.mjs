@@ -18,6 +18,7 @@ function weatherState(env={}){
     provider,
     mode,
     configured,
+    state:mode==="off"?"OFF":configured?"CONFIGURED_NOT_PRODUCTION_APPROVED":"CONFIG_MISSING",
     activationState:mode==="off"?"OFF":configured?"CONFIGURED_NOT_PRODUCTION_APPROVED":"CONFIG_MISSING",
     serverSideOnly:true,
     exactLocationReturned:false,
