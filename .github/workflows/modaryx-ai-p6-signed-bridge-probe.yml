@@ -45,6 +45,8 @@ jobs:
           protocol=""
           inner_http=""
           bridge_error=""
+          diagnostic_name=""
+          diagnostic_message=""
 
           for i in $(seq 1 90); do
             deployments="$(curl -fsS "${auth[@]}" --get \
@@ -71,6 +73,8 @@ jobs:
                 protocol="$(jq -r '.protocol // ""' "$body" 2>/dev/null || true)"
                 inner_http="$(jq -r '.http // ""' "$body" 2>/dev/null || true)"
                 bridge_error="$(jq -r '.bridge_error // ""' "$body" 2>/dev/null || true)"
+                diagnostic_name="$(jq -r '.bridge_diagnostic.name // ""' "$body" 2>/dev/null || true)"
+                diagnostic_message="$(jq -r '.bridge_diagnostic.message // ""' "$body" 2>/dev/null || true)"
                 if [ "$code" != "200" ]; then
                   ok=false
                 fi
@@ -109,6 +113,8 @@ jobs:
             --arg protocol "$protocol" \
             --arg inner_http "$inner_http" \
             --arg bridge_error "$bridge_error" \
+            --arg diagnostic_name "$diagnostic_name" \
+            --arg diagnostic_message "$diagnostic_message" \
             --argjson ok "$ok" \
             '{
               schema:$schema,
@@ -122,6 +128,7 @@ jobs:
               protocol:$protocol,
               inner_http:(if $inner_http=="" then null else ($inner_http|tonumber) end),
               bridge_error:(if $bridge_error=="" then null else $bridge_error end),
+              bridge_diagnostic:(if $diagnostic_name=="" and $diagnostic_message=="" then null else {name:$diagnostic_name,message:$diagnostic_message} end),
               secret_values_recorded:false,
               founder_bypass:false,
               awards_vf_points:false
@@ -129,7 +136,7 @@ jobs:
 
           if [ "$code" != "200" ] || [ "$ok" != "true" ] || [ "$protocol" != "modaryx-founder-bridge-v1" ]; then
             cat evidence/probe.json
-            echo "MODARYX_P6_SIGNED_BRIDGE_FAIL outer=$code inner=$inner_http ok=$ok protocol=$protocol bridgeError=$bridge_error" >&2
+            echo "MODARYX_P6_SIGNED_BRIDGE_FAIL outer=$code inner=$inner_http ok=$ok protocol=$protocol bridgeError=$bridge_error diagnosticName=$diagnostic_name diagnosticMessage=$diagnostic_message" >&2
             exit 5
           fi
 
@@ -143,9 +150,4 @@ jobs:
           path: evidence
           if-no-files-found: warn
           retention-days: 30
-# replay-trigger: p6-synchronized-preview-after-env-20261006-a
-# replay-trigger: safe-inner-bridge-diagnostic-20261006
-# replay-trigger: exact-sha-single-safe-probe-20261006
-# replay-trigger: exact-sha-no-stage-name-assumption-20261006
-# replay-trigger: wait-pages-status-success
-# replay-trigger: host-ready-confirmed-20261006
+# replay-trigger: safe-fetch-diagnostic-current-sha
