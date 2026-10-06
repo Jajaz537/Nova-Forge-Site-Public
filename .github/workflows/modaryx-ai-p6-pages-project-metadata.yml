@@ -138,3 +138,82 @@ jobs:
 # replay-trigger: preview-safe-values-read
 # replay-trigger: deployment-env-and-functions-safe-read
 # replay-trigger: post-cloudflare-success-7c7203f
+
+      - name: Verify Auth0 Founder login redirect on exact preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=${ZONE_NAME}" "${api}/zones")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          test -n "$account_id"
+
+          deployment_url=""
+          for i in $(seq 1 90); do
+            deployments="$(curl -fsS "${auth[@]}" --get --data-urlencode "env=preview" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}/deployments")"
+            target="$(jq -c --arg sha "$GITHUB_SHA" '[.result[] | select((.deployment_trigger.metadata.commit_hash // "") == $sha)] | sort_by(.created_on) | reverse | .[0] // null' <<<"$deployments")"
+            if [ "$(jq -r '. != null' <<<"$target")" = "true" ]; then
+              status="$(jq -r '.latest_stage.status // ""' <<<"$target")"
+              deployment_url="$(jq -r '.url // ""' <<<"$target")"
+              if [ "$status" = "success" ] && [ -n "$deployment_url" ]; then break; fi
+              if [ "$status" = "failure" ]; then echo "Preview deployment failed" >&2; exit 3; fi
+            fi
+            sleep 4
+          done
+          test -n "$deployment_url"
+
+          headers="$(mktemp)"
+          body="$(mktemp)"
+          login_url="${deployment_url%/}/api/v1/auth/login?returnTo=%2Fapi%2Ffounder%2Fai%2Fe2e-proof"
+          code="$(curl -sS -D "$headers" -o "$body" -w '%{http_code}' --max-time 20 "$login_url" || true)"
+          location="$(grep -i '^location:' "$headers" | head -n1 | sed -E 's/^[^:]+:[[:space:]]*//; s/\r$//' || true)"
+          rm -f "$body" "$headers"
+          test "$code" = "302"
+          test -n "$location"
+
+          python3 - "$deployment_url" "$location" > evidence/founder-login-readiness.json <<'PY'
+import json,sys,urllib.parse
+origin=sys.argv[1].rstrip("/")
+location=sys.argv[2]
+u=urllib.parse.urlparse(location)
+q=urllib.parse.parse_qs(u.query)
+redirect=(q.get("redirect_uri") or [""])[0]
+state=(q.get("state") or [""])[0]
+challenge=(q.get("code_challenge") or [""])[0]
+method=(q.get("code_challenge_method") or [""])[0]
+ok=(
+    u.scheme=="https:"[:-1] and bool(u.hostname) and
+    redirect==origin+"/api/v1/auth/callback" and
+    len(state)>=20 and len(challenge)>=20 and method=="S256" and
+    "client_secret" not in q
+)
+out={
+  "schema":"modaryx-p6-founder-login-readiness-v1",
+  "status":"PASS" if ok else "FAIL",
+  "preview_origin":origin,
+  "auth0_host":u.hostname,
+  "redirect_uri":redirect,
+  "pkce":method,
+  "state_present":len(state)>=20,
+  "client_secret_in_redirect":"client_secret" in q,
+  "cookies_recorded":False,
+  "tokens_recorded":False,
+  "awards_vf_points":False
+}
+print(json.dumps(out,indent=2))
+if not ok: raise SystemExit(4)
+PY
+          cat evidence/founder-login-readiness.json
+          echo "MODARYX_P6_FOUNDER_LOGIN_READY origin=$deployment_url"
+
+      - name: Upload Founder login readiness evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-founder-login-readiness
+          path: evidence/founder-login-readiness.json
+          if-no-files-found: error
+          retention-days: 30
+
