@@ -500,6 +500,12 @@
       "contract": "qa/modaryx-v2-d1-migration-execution-manifest.json",
       "checker": "qa/check-v2-d1-migration-execution-manifest.mjs",
       "source": "docs/MODARYX-V2-D1-MIGRATION-EXECUTION-MANIFEST-20261006.md"
+    },
+    {
+      "id": "production-activation-manifest",
+      "contract": "qa/modaryx-v2-production-activation-manifest.json",
+      "checker": "qa/check-v2-production-activation-manifest.mjs",
+      "source": "docs/MODARYX-V2-PRODUCTION-ACTIVATION-MANIFEST-20261006.md"
     }
   ],
   "invariants": [

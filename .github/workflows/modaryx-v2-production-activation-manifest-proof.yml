@@ -1,0 +1,46 @@
+name: MODARYX V2 Production Activation Manifest Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-production-activation-manifest-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-production-activation-manifest-proof.yml'
+      - 'qa/modaryx-v2-production-activation-manifest.json'
+      - 'qa/check-v2-production-activation-manifest.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+      - 'qa/modaryx-v2-d1-migration-execution-manifest.json'
+      - 'qa/modaryx-v2-pwa-candidate-contract.json'
+      - 'qa/modaryx-v2-cwv-rum-contract.json'
+      - 'qa/modaryx-v2-cwv-retention-contract.json'
+      - 'qa/modaryx-v2-notification-delivery-contract.json'
+      - 'qa/modaryx-v2-production-readiness-contract.json'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-production-activation-manifest-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove production activation manifest stays non-mutating
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate activation manifest
+        run: |
+          set -euo pipefail
+          node qa/check-v2-production-activation-manifest.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+          echo PASS_V2_PRODUCTION_ACTIVATION_MANIFEST_PROOF
