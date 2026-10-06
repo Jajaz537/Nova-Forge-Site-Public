@@ -410,6 +410,12 @@
       "contract": "qa/modaryx-v2-rights-registry-backend-contract.json",
       "checker": "qa/check-v2-rights-registry-backend.mjs",
       "source": "docs/MODARYX-V2-RIGHTS-REGISTRY-BACKEND-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "game-support-backend-candidate",
+      "contract": "qa/modaryx-v2-game-support-request-contract.json",
+      "checker": "qa/check-v2-game-support-backend.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-BACKEND-CANDIDATE-20261006.md"
     }
   ],
   "invariants": [
