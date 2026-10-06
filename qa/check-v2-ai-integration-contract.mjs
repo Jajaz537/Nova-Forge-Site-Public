@@ -31,15 +31,17 @@ for(const [key,value] of Object.entries(data.productionStatus||{})){
 }
 if(data.productionStatus?.siteAssistant!=="FOUNDER_ONLY_CODE_INTEGRATED_NOT_DEPLOYED") throw new Error("site assistant status must remain deployment-honest");
 if(data.foundationArtifact?.vfProgress!==83) throw new Error("VF progress must stay at 83 until external proofs close");
-if(data.foundationArtifact?.version!=="0.140") throw new Error("Foundation version must be v0.140");
-if(data.foundationArtifact?.sha256!=="870c0b8373e6751788a6ebe4423828a0a296a2b39f9af937f6c93114856f7e34") throw new Error("Foundation SHA mismatch");
-if(data.foundationArtifact?.tests!=="389/389"||data.foundationArtifact?.evals!=="12/12") throw new Error("sealed v0.140 proof mismatch");
-for(const gate of ["exactArchive","preflight","releaseGate","coreIdle"]){
+if(data.foundationArtifact?.version!=="0.141") throw new Error("Foundation version must be v0.141");
+if(data.foundationArtifact?.sha256!=="714fe55635fdbdfcf11f69257ec0c4154e797d2ac2a72ea0e75a39dde4359a4d") throw new Error("Foundation SHA mismatch");
+if(data.foundationArtifact?.tests!=="392/392"||data.foundationArtifact?.evals!=="12/12") throw new Error("sealed v0.141 proof mismatch");
+for(const gate of ["exactArchive","releaseGate","hardwareBaseline"]){
   if(data.foundationArtifact?.realTargetEvidence?.[gate]!=="PASS") throw new Error("missing real-target PASS: "+gate);
 }
-for(const gate of ["modelQualification","gameImpact","multimodal"]){
-  if(data.foundationArtifact?.realTargetEvidence?.[gate]!=="NOT_RUN") throw new Error("external proof must remain honest: "+gate);
-}
+if(data.foundationArtifact?.realTargetEvidence?.coreIdleBaseline?.version!=="0.140"||data.foundationArtifact?.realTargetEvidence?.coreIdleBaseline?.status!=="PASS") throw new Error("core idle baseline provenance mismatch");
+if(data.foundationArtifact?.realTargetEvidence?.modelQualification!=="IN_PROGRESS") throw new Error("model qualification must remain in progress until final target proof");
+if(data.foundationArtifact?.realTargetEvidence?.gameImpact!=="NOT_RUN") throw new Error("game impact must remain NOT_RUN");
+if(data.foundationArtifact?.realTargetEvidence?.multimodal!=="IN_PROGRESS") throw new Error("multimodal must remain in progress until vision closes");
+if(data.foundationArtifact?.realTargetEvidence?.vfCreditApplied!==false) throw new Error("VF credit must remain unapplied");
 console.log("MODARYX_AI_PERMISSION_TIER_COUNT",data.permissionTiers.length);
 console.log("MODARYX_AI_PREVIEW_STATE_COUNT",data.previewStates.length);
 console.log("MODARYX_AI_INVARIANT_COUNT",data.invariants.length);
