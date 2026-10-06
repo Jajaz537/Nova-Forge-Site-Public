@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import "./canon-topbar.css";
 import { contentPath, pathForActive, routeStateFromPath } from "./routes.js";
 import { authLoginUrl, getDataHistory, getNotifications, getProviderRegistry, logoutAccountSession, markNotificationRead, resolveAccountRemoteState } from "./api/modaryx-api.js";
 import { resolveAmbientContext } from "./api/local-context.js";
+const GameSupportRequestPanel=lazy(()=>import("./components/GameSupportRequestPanel.jsx"));
 import {
   ArrowRight, Bell, BookOpen, Check, FunnelSimple, GameController, GridFour,
   List, MagnifyingGlass, Plus, SlidersHorizontal, Stack, UsersThree, X
@@ -188,42 +189,19 @@ function ProfilesRail() {
 function GamesIndex({ onOpenGame }) {
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("Nom");
-  const [requestOpen,setRequestOpen]=useState(false);
-  const [requestName,setRequestName]=useState("");
-  const [requestPlatform,setRequestPlatform]=useState("PC");
-  const [requestError,setRequestError]=useState("");
-  const [requestDraft,setRequestDraft]=useState(false);
   const games = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("fr");
     const filtered = gameItems.filter(game => game.title.toLocaleLowerCase("fr").includes(normalized));
     return [...filtered].sort((a,b) => sort === "Nom" ? a.title.localeCompare(b.title, "fr") : a.status.localeCompare(b.status, "fr"));
   }, [query, sort]);
-  const prepareSupportRequest=()=>{
-    if(!requestName.trim()){
-      setRequestError("Saisissez un nom de jeu avant de préparer la demande.");
-      setRequestDraft(false);
-      requestAnimationFrame(()=>document.getElementById("game-support-name")?.focus());
-      return;
-    }
-    setRequestError("");
-    setRequestDraft(true);
-  };
 
   return <main id="main-content" tabIndex="-1" className="page-section games-index">
     <span className="kicker">Jeux</span>
     <h1>Trouvez votre prochain terrain de jeu.</h1>
     <p className="page-intro">Recherchez un jeu et voyez immédiatement si son catalogue est réellement disponible.</p>
-    <section className="game-support-request">
-      <div><span className="kicker">Jeu absent ?</span><h2>Demander le support d’un jeu</h2><p>Une demande membre passe toujours par le triage MODARYX avant tout ajout. Aucune demande éditeur n’est envoyée depuis ce prototype.</p></div>
-      <button className="quiet" aria-expanded={requestOpen} onClick={()=>{setRequestOpen(v=>!v);setRequestError("");}}> {requestOpen?"Fermer":"Demander le support d’un jeu"} </button>
-      {requestOpen&&<div className="game-request-form">
-        <label><span>Nom du jeu</span><input id="game-support-name" value={requestName} aria-invalid={requestError?"true":undefined} aria-describedby={requestError?"game-support-name-error":undefined} onChange={e=>{setRequestName(e.target.value);setRequestError("");setRequestDraft(false);}} placeholder="Ex. Project Meridian" aria-label="Nom du jeu à demander"/></label>
-        <label><span>Plateforme principale</span><select id="game-support-platform" value={requestPlatform} onChange={e=>setRequestPlatform(e.target.value)}><option>PC</option><option>PlayStation</option><option>Xbox</option><option>Nintendo</option><option>Autre</option></select></label>
-        <button className="primary" onClick={prepareSupportRequest}>Préparer la demande locale</button>
-        {requestError&&<div id="game-support-name-error" className="form-error" role="alert">{requestError}</div>}
-        {requestDraft&&<div className="game-request-status" role="status"><strong>Brouillon de demande — non envoyé</strong><span>{requestName.trim()} · {requestPlatform}</span><small>Triage MODARYX requis. Aucun Rights Case réel n’est créé dans ce prototype.</small></div>}
-      </div>}
-    </section>
+    <Suspense fallback={<section className="game-support-request"><div><span className="kicker">Jeu absent ?</span><h2>Demander le support d’un jeu</h2><p>Chargement du canal de demande…</p></div></section>}>
+      <GameSupportRequestPanel/>
+    </Suspense>
     <div className="index-tools">
       <label className="catalog-search"><MagnifyingGlass/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher un jeu" aria-label="Rechercher un jeu"/></label>
       <label className="sort-control"><span>Trier</span><select value={sort} onChange={e=>setSort(e.target.value)}><option>Nom</option><option>État</option></select></label>

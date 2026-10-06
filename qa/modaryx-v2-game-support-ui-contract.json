@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "REAL_SUBMISSION_UI_CANDIDATE_FAIL_SOFT",
+  "route": "/games",
+  "endpoint": "/api/v1/game-support/requests",
+  "antiAbuse": "Cloudflare Turnstile explicit client",
+  "productionBlocker": "backend/auth/remote-D1 remain OPEN",
+  "invariants": [
+    "GUEST_LOCAL_DRAFT_REMAINS_AVAILABLE",
+    "NO_FAKE_TURNSTILE_TOKEN",
+    "REAL_POST_REQUIRES_AUTHENTICATED_SESSION",
+    "REAL_POST_REQUIRES_REMOTE_WRITES_READY",
+    "REAL_POST_REQUIRES_PUBLIC_TURNSTILE_SITE_KEY",
+    "TURNSTILE_ACTION_GAME_SUPPORT_REQUEST",
+    "D1_TABLE_ABSENCE_FAILS_SOFT_IN_UI",
+    "DUPLICATE_ACTIVE_REQUEST_FAILS_CLOSED",
+    "SUCCESS_NEVER_IMPLIES_PUBLISHER_PERMISSION",
+    "NO_PUBLISHER_CONTACT",
+    "NO_REMOTE_D1_APPLY",
+    "NO_CUTOVER"
+  ]
+}

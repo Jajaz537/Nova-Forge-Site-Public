@@ -65,14 +65,19 @@ async function waitText(text){
   throw new Error("text not found: "+text+"\n"+body);
 }
 async function clickText(selector,text){
-  const ok=await evaluate(`(() => {
-    const target=[...document.querySelectorAll(${JSON.stringify(selector)})].find(el=>{
-      if(el.textContent.trim()!==${JSON.stringify(text)}) return false;
-      const r=el.getBoundingClientRect(),s=getComputedStyle(el);
-      return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0&&!el.disabled;
-    });
-    if(!target) return false; target.click(); return true;
-  })()`);
+  let ok=false;
+  for(let i=0;i<80;i++){
+    ok=await evaluate(`(() => {
+      const target=[...document.querySelectorAll(${JSON.stringify(selector)})].find(el=>{
+        if(el.textContent.trim()!==${JSON.stringify(text)}) return false;
+        const r=el.getBoundingClientRect(),s=getComputedStyle(el);
+        return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0&&!el.disabled;
+      });
+      if(!target) return false; target.click(); return true;
+    })()`);
+    if(ok) break;
+    await sleep(100);
+  }
   if(!ok) throw new Error("visible clickable text not found: "+text);
   await sleep(150);
 }

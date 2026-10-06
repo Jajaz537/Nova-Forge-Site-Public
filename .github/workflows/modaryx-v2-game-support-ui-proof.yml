@@ -1,0 +1,74 @@
+name: MODARYX V2 Game Support UI Candidate Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-game-support-ui-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-game-support-ui-proof.yml'
+      - 'v2/src/App.jsx'
+      - 'v2/src/api/modaryx-api.js'
+      - 'qa/modaryx-v2-game-support-ui-contract.json'
+      - 'qa/check-v2-game-support-ui-candidate.mjs'
+      - 'qa/check-v2-game-support-ui-browser.mjs'
+      - 'v2/src/components/GameSupportRequestPanel.jsx'
+      - 'v2/scripts/prepare-sites-build.mjs'
+      - 'qa/check-v2-performance-candidate-browser.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-game-support-ui-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove real support-request UI stays fail-soft without fake Turnstile
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate UI contract
+        run: |
+          set -euo pipefail
+          node qa/check-v2-game-support-ui-candidate.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+      - name: Locate Chrome
+        run: |
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+      - name: Build V2
+        working-directory: v2
+        run: |
+          npm ci
+          npm run build
+      - name: Start V2
+        working-directory: v2
+        run: |
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4196 >/tmp/modaryx-game-support-ui.log 2>&1 &
+          echo $! >/tmp/modaryx-game-support-ui.pid
+          for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4196/ >/dev/null && exit 0; sleep 0.25; done
+          cat /tmp/modaryx-game-support-ui.log
+          exit 1
+      - name: Preserve guest/local browser flow
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4196
+        run: |
+          node qa/check-v2-game-support-ui-browser.mjs
+      - name: Cleanup
+        if: always()
+        run: |
+          if test -f /tmp/modaryx-game-support-ui.pid; then kill "$(cat /tmp/modaryx-game-support-ui.pid)" 2>/dev/null || true; fi
+      - name: Marker
+        run: echo PASS_V2_GAME_SUPPORT_UI_PROOF

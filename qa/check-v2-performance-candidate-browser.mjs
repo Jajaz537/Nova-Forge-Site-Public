@@ -9,12 +9,16 @@ const origin=process.env.MODARYX_REVIEW_ORIGIN||"http://127.0.0.1:4182";
 if(!chrome) throw new Error("CHROME_BIN missing");
 const contract=JSON.parse(fs.readFileSync("qa/modaryx-v2-performance-candidate-contract.json","utf8"));
 const gzipSize=path=>zlib.gzipSync(fs.readFileSync(path),{level:9}).length;
-const assets=fs.readdirSync("v2/dist/client/assets");
-const js=assets.find(x=>x.endsWith(".js"));
-const css=assets.find(x=>x.endsWith(".css"));
-if(!js||!css) throw new Error("built JS/CSS asset missing");
-const jsGzip=gzipSize("v2/dist/client/assets/"+js);
-const cssGzip=gzipSize("v2/dist/client/assets/"+css);
+const html=fs.readFileSync("v2/dist/client/index.html","utf8");
+const jsSrc=html.match(/<script[^>]+src="([^"]+\.js)"/)?.[1];
+const cssHref=html.match(/<link[^>]+href="([^"]+\.css)"/)?.[1];
+if(!jsSrc||!cssHref) throw new Error("entry JS/CSS asset missing from built index.html");
+const normalizeAsset=value=>"v2/dist/client/"+value.replace(/^\//,"");
+const jsPath=normalizeAsset(jsSrc);
+const cssPath=normalizeAsset(cssHref);
+if(!fs.existsSync(jsPath)||!fs.existsSync(cssPath)) throw new Error("built entry JS/CSS asset missing");
+const jsGzip=gzipSize(jsPath);
+const cssGzip=gzipSize(cssPath);
 assert.ok(jsGzip<=contract.bundleCeilings.jsGzipBytes,`JS gzip ${jsGzip} > ${contract.bundleCeilings.jsGzipBytes}`);
 assert.ok(cssGzip<=contract.bundleCeilings.cssGzipBytes,`CSS gzip ${cssGzip} > ${contract.bundleCeilings.cssGzipBytes}`);
 console.log("PERF_BUNDLE_JS_GZIP",jsGzip);
@@ -55,6 +59,8 @@ async function runScenario(name,s){
     await new Promise((resolve,reject)=>{ws.addEventListener("open",resolve,{once:true});ws.addEventListener("error",reject,{once:true})});
     ws.addEventListener("message",event=>{const m=JSON.parse(event.data);if(!m.id||!pending.has(m.id))return;const p=pending.get(m.id);pending.delete(m.id);m.error?p.reject(new Error(m.error.message)):p.resolve(m)});
     await send("Page.enable"); await send("Runtime.enable"); await send("Network.enable");
+    await send("Page.bringToFront");
+    await send("Emulation.setFocusEmulationEnabled",{enabled:true});
     await send("Emulation.setDeviceMetricsOverride",{width:s.width,height:s.height,deviceScaleFactor:1,mobile:name==="mobile"});
     await send("Emulation.setCPUThrottlingRate",{rate:s.cpuRate});
     await send("Network.setCacheDisabled",{cacheDisabled:true});
@@ -71,7 +77,8 @@ async function runScenario(name,s){
     for(let i=0;i<150;i++){if(await evaluate("document.readyState==='complete'"))break;await sleep(100)}
     await sleep(1800);
     const metrics=await evaluate(`(()=>{const nav=performance.getEntriesByType("navigation")[0];return {...window.__modPerf,fcp:performance.getEntriesByName("first-contentful-paint")[0]?.startTime||0,domContentLoaded:nav?.domContentLoadedEventEnd||0,load:nav?.loadEventEnd||0,resources:performance.getEntriesByType("resource").reduce((n,e)=>n+(e.transferSize||0),0)}})()`);
-    assert.ok(metrics.lcp>0&&metrics.lcp<=s.lcpCeilingMs,`${name} LCP ${metrics.lcp} > ${s.lcpCeilingMs}`);
+    assert.ok(metrics.lcp>0,`${name} LCP was not observed`);
+    assert.ok(metrics.lcp<=s.lcpCeilingMs,`${name} LCP ${metrics.lcp} > ${s.lcpCeilingMs}`);
     assert.ok(metrics.cls<=s.clsCeiling,`${name} CLS ${metrics.cls} > ${s.clsCeiling}`);
     const routeMs=await evaluate(`(()=>new Promise(resolve=>{
       const target=[...document.querySelectorAll(".global-nav button")].find(x=>x.textContent.trim()==="Découvrir");

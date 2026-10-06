@@ -416,6 +416,12 @@
       "contract": "qa/modaryx-v2-game-support-request-contract.json",
       "checker": "qa/check-v2-game-support-backend.mjs",
       "source": "docs/MODARYX-V2-GAME-SUPPORT-BACKEND-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "game-support-ui-candidate",
+      "contract": "qa/modaryx-v2-game-support-ui-contract.json",
+      "checker": "qa/check-v2-game-support-ui-candidate.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-UI-CANDIDATE-20261006.md"
     }
   ],
   "invariants": [
