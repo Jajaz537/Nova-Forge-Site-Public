@@ -7,8 +7,8 @@ const contract=JSON.parse(fs.readFileSync("qa/modaryx-v2-production-readiness-co
 assert.equal(contract.status,"PRE_CUTOVER_READ_ONLY_CANDIDATE");
 assert.equal(contract.productionPass,false);
 assert.equal(contract.closesNoBlockerByItself,true);
-assert.equal(requiredProductionTables().length,31);
-assert.equal(contract.requiredCurrentV2TableCount,31);
+assert.equal(requiredProductionTables().length,32);
+assert.equal(contract.requiredCurrentV2TableCount,32);
 const inv=new Set(contract.invariants||[]);
 for(const x of [
   "NO_SECRET_VALUES_RETURNED","NO_REMOTE_MUTATION","NO_SCHEMA_MIGRATION","D1_SCHEMA_CHECK_IS_READ_ONLY",
@@ -31,7 +31,8 @@ for(const p of [
   "migrations/0007_modaryx_v2_notification_delivery_outbox.sql","migrations/0008_modaryx_v2_game_rights_registry.sql",
   "migrations/0009_modaryx_v2_game_support_requests.sql","migrations/0010_modaryx_v2_rights_evidence.sql",
   "migrations/0011_modaryx_v2_publisher_outbound_readiness.sql","migrations/0012_modaryx_v2_publisher_inbound_quarantine.sql",
-  "migrations/0013_modaryx_v2_authorizing_decision_audit.sql","migrations/0014_modaryx_v2_cwv_rum.sql"
+  "migrations/0013_modaryx_v2_authorizing_decision_audit.sql","migrations/0014_modaryx_v2_cwv_rum.sql",
+  "migrations/0015_modaryx_v2_notification_destinations.sql"
 ]) db.exec(fs.readFileSync(p,"utf8"));
 
 const d1={
@@ -60,7 +61,7 @@ const ready=await productionReadinessState(env);
 assert.equal(ready.productionPass,false);
 assert.equal(ready.technical.backendFoundation.ready,true);
 assert.equal(ready.technical.d1Schema.ready,true);
-assert.equal(ready.technical.d1Schema.presentCount,31);
+assert.equal(ready.technical.d1Schema.presentCount,32);
 assert.equal(ready.technical.artifactStorage.readReady,true);
 assert.equal(ready.technical.artifactStorage.writeReady,true);
 assert.equal(ready.technical.cwv.collectorState,"READY_FOR_FIELD_TRAFFIC");
