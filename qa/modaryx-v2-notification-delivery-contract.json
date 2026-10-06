@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-06",
-  "status": "DELIVERY_GUARD_CANDIDATE_PROVIDER_MISSING",
+  "status": "DELIVERY_GUARD_CANDIDATE_DIRECTION_SELECTED_DISPATCH_MISSING",
   "migration": "migrations/0007_modaryx_v2_notification_delivery_outbox.sql",
   "endpoint": "/api/v1/notifications/delivery/readiness",
   "channels": [
@@ -10,11 +10,10 @@
   ],
   "remoteApplication": "NOT_EXECUTED",
   "dispatchImplementation": "NOT_IMPLEMENTED",
-  "providerSelection": "NOT_SELECTED",
+  "providerSelection": "TECHNICAL_CANDIDATES_SELECTED_NOT_PRODUCTION_APPROVED",
   "productionBlocker": "notifications-email-push-real",
   "invariants": [
     "NO_NETWORK_DISPATCH",
-    "NO_PROVIDER_SELECTED_BY_THIS_CHANGE",
     "NO_RAW_EMAIL_ADDRESS_IN_OUTBOX",
     "NO_RAW_PUSH_TOKEN_IN_OUTBOX",
     "DESTINATION_REFERENCE_DIGEST_ONLY",
@@ -26,6 +25,13 @@
     "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
     "NO_CLOUDFLARE_CRITICAL_CHANGE",
     "NO_CUTOVER",
-    "PRODUCTION_BLOCKER_REMAINS_OPEN"
-  ]
+    "PRODUCTION_BLOCKER_REMAINS_OPEN",
+    "NO_PRODUCTION_PROVIDER_ACTIVATED_BY_THIS_CHANGE",
+    "TECHNICAL_CANDIDATE_SELECTION_NEVER_EQUALS_CONFIGURED_PRODUCTION_APPROVED",
+    "NO_NETWORK_DISPATCH_IMPLEMENTED_BY_THIS_CHANGE"
+  ],
+  "providerCandidates": {
+    "EMAIL": "Cloudflare Email Service",
+    "PUSH": "Web Push standard + VAPID"
+  }
 }
