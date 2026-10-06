@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import "./canon-topbar.css";
 import { contentPath, pathForActive, routeStateFromPath } from "./routes.js";
 import { authLoginUrl, logoutAccountSession, resolveAccountRemoteState } from "./api/modaryx-api.js";
+import { resolveAmbientContext } from "./api/local-context.js";
 import {
   ArrowRight, Bell, BookOpen, Check, FunnelSimple, GameController, GridFour,
   List, MagnifyingGlass, Plus, SlidersHorizontal, Stack, UsersThree, X
@@ -985,6 +986,13 @@ export function App() {
   const [detail, setDetail] = useState(initial.detail);
   const [gameHubOpen,setGameHubOpen]=useState(initial.gameHubOpen);
   const [online,setOnline]=useState(()=>typeof navigator==="undefined"?true:navigator.onLine);
+  const [ambientContext,setAmbientContext]=useState({
+    state:"OFF",
+    season:"neutral",
+    dayPhase:"neutral",
+    weatherCondition:"off",
+    weatherStatus:"not-connected"
+  });
   const firstRouteRender=useRef(true);
 
   const applyResolvedRoute=route=>{
@@ -1001,6 +1009,11 @@ export function App() {
     window.addEventListener("online",syncConnectivity);
     window.addEventListener("offline",syncConnectivity);
     return ()=>{window.removeEventListener("online",syncConnectivity);window.removeEventListener("offline",syncConnectivity);};
+  },[]);
+  useEffect(()=>{
+    let cancelled=false;
+    resolveAmbientContext().then(next=>{if(!cancelled)setAmbientContext(next);});
+    return ()=>{cancelled=true;};
   },[]);
   useEffect(()=>{
     const onPopState=()=>applyResolvedRoute(routeStateFromPath(window.location.pathname,contentItems));
@@ -1066,7 +1079,14 @@ export function App() {
   else if(active==='Modération') screen=<ModerationCenter/>;
   else screen=<GameHub onOpen={openContent}/>;
 
-  return <div className="app-shell">
+  return <div
+    className="app-shell"
+    data-ambient-state={ambientContext.state}
+    data-season={ambientContext.season}
+    data-day-phase={ambientContext.dayPhase}
+    data-weather={ambientContext.weatherCondition}
+    data-weather-status={ambientContext.weatherStatus}
+  >
     <a className="skip-link" href="#main-content">Aller au contenu principal</a>
     {!online&&<div className="connectivity-banner" role="status"><strong>Hors ligne</strong><span>Les données locales restent consultables ; les informations distantes peuvent être indisponibles ou obsolètes.</span></div>}
     <Topbar active={active} onNavigate={navigate}/>
