@@ -1,11 +1,6 @@
 name: MODARYX V2 Controlled D1 DEV Apply
 
 on:
-  push:
-    branches:
-      - 'ops/modaryx-v2-d1-dev-controlled-20261007'
-    paths:
-      - '.github/workflows/modaryx-v2-d1-dev-controlled-apply.yml'
   workflow_dispatch:
 
 permissions:
@@ -30,7 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_PAGES_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_D1_API_TOKEN }}
 
     steps:
       - name: Checkout exact approved canonical source
@@ -59,9 +55,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -n "${CLOUDFLARE_API_TOKEN:-}"
+          test -n "${CLOUDFLARE_PAGES_API_TOKEN:-}"
           api="https://api.cloudflare.com/client/v4"
-          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_PAGES_API_TOKEN}" -H "Content-Type: application/json")
 
           zones="$(curl -fsS "${auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}")"
           test "$(jq -r '.success' <<<"$zones")" = "true"
@@ -93,6 +89,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          if [ -z "${CLOUDFLARE_API_TOKEN:-}" ]; then
+            echo "MISSING_CLOUDFLARE_D1_API_TOKEN"
+            exit 42
+          fi
           api="https://api.cloudflare.com/client/v4"
           auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
           tmp="$(mktemp)"
