@@ -22,8 +22,8 @@ for name in ["modaryx_profiles","modaryx_community_submissions","modaryx_session
     if name not in tables: raise SystemExit("v1 table lost: "+name)
 
 now="2026-10-06T08:30:00Z"
-db.execute("INSERT INTO modaryx_v2_games VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(
- "mx_game_aetherlands","aetherlands","Aetherlands","catalog-enabled","[]",'["1.4.2"]',"[]",'["mx_type_mod"]',"[]","[]","client",'{"manual":true}',"{}",now))
+db.execute("INSERT INTO modaryx_v2_games VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(
+ "mx_game_aetherlands","aetherlands","Aetherlands","catalog-enabled","[]",'["1.4.2"]',"[]",'["mx_type_mod"]',"[]","[]","client",'{"manual":true}',"{}",now,now))
 db.execute("INSERT INTO modaryx_v2_content_types VALUES (?,?,?,?,?,?,?,?)",(
  "mx_type_mod","mx_game_aetherlands","Mod","gameplay","contextual",'{"files":true}',now,now))
 db.execute("INSERT INTO modaryx_v2_creators VALUES (?,?,?,?,?,?,?,?,?,?)",(
@@ -47,7 +47,7 @@ except sqlite3.IntegrityError:
 
 # Measured compatibility must carry a receipt.
 try:
-    db.execute("INSERT INTO modaryx_v2_compatibility_claims VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(
+    db.execute("INSERT INTO modaryx_v2_compatibility_claims VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(
       "mx_claim_bad","mx_content_dawn","mx_release_dawn_1","mx_game_aetherlands","1.4.2",None,"windows","client","compatible","measured",None,"test",now,""))
     raise SystemExit("measured claim without receipt accepted")
 except sqlite3.IntegrityError:
@@ -55,7 +55,7 @@ except sqlite3.IntegrityError:
 
 # Verified provenance must carry a receipt.
 try:
-    db.execute("INSERT INTO modaryx_v2_file_artifacts VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(
+    db.execute("INSERT INTO modaryx_v2_file_artifacts VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(
       "mx_file_bad","mx_release_dawn_1","bad.zip","bad.zip",1,"application/zip",0,"a"*64,None,"absent",None,None,"verified",None,"available",1,now))
     raise SystemExit("verified provenance without receipt accepted")
 except sqlite3.IntegrityError:
