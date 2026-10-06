@@ -3,7 +3,7 @@ import fs from "node:fs";
 
 const c=JSON.parse(fs.readFileSync("qa/modaryx-v2-build-fingerprint-contract.json","utf8"));
 assert.equal(c.schemaVersion,1);
-assert.equal(c.status,"IMPLEMENTED_CANDIDATE_EXACT_SHA_PROOF_REQUIRED");
+assert.equal(c.status,"IMPLEMENTED_CANDIDATE_EXACT_IMMUTABLE_PREVIEW_PROOF_REQUIRED");
 assert.equal(c.output,"v2/dist/client/build-info.json");
 const inputs=new Set(c.cloudflareSystemInputs||[]);
 for(const x of ["CF_PAGES_COMMIT_SHA","CF_PAGES_BRANCH","CF_PAGES_URL"]) assert.ok(inputs.has(x),"missing Pages system input "+x);
