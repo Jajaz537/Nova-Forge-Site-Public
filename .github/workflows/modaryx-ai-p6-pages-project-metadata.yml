@@ -1,0 +1,81 @@
+name: MODARYX IA P6 Pages project metadata
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-pages-project-metadata.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      ZONE_NAME: modaryxmods.com
+      PROJECT_NAME: nova-forge-site-public
+    steps:
+      - name: Read safe Pages project metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=${ZONE_NAME}" "${api}/zones")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          project="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$project")" = "true"
+
+          production_branch="$(jq -r '.result.production_branch // .result.source.config.production_branch // ""' <<<"$project")"
+          subdomain="$(jq -r '.result.subdomain // ""' <<<"$project")"
+          canonical_id="$(jq -r '.result.canonical_deployment.id // ""' <<<"$project")"
+          canonical_url="$(jq -r '.result.canonical_deployment.url // ""' <<<"$project")"
+          canonical_branch="$(jq -r '.result.canonical_deployment.deployment_trigger.metadata.branch // ""' <<<"$project")"
+          canonical_stage="$(jq -r '.result.canonical_deployment.latest_stage.name // ""' <<<"$project")"
+          latest_id="$(jq -r '.result.latest_deployment.id // ""' <<<"$project")"
+          latest_url="$(jq -r '.result.latest_deployment.url // ""' <<<"$project")"
+          latest_branch="$(jq -r '.result.latest_deployment.deployment_trigger.metadata.branch // ""' <<<"$project")"
+          latest_stage="$(jq -r '.result.latest_deployment.latest_stage.name // ""' <<<"$project")"
+          domains="$(jq -c '.result.domains // []' <<<"$project")"
+
+          jq -n \
+            --arg schema "modaryx-p6-pages-project-metadata-v1" \
+            --arg production_branch "$production_branch" \
+            --arg subdomain "$subdomain" \
+            --arg canonical_id "$canonical_id" \
+            --arg canonical_url "$canonical_url" \
+            --arg canonical_branch "$canonical_branch" \
+            --arg canonical_stage "$canonical_stage" \
+            --arg latest_id "$latest_id" \
+            --arg latest_url "$latest_url" \
+            --arg latest_branch "$latest_branch" \
+            --arg latest_stage "$latest_stage" \
+            --argjson domains "$domains" \
+            '{
+              schema:$schema,
+              production_branch:$production_branch,
+              subdomain:$subdomain,
+              domains:$domains,
+              canonical_deployment:{id:$canonical_id,url:$canonical_url,branch:$canonical_branch,stage:$canonical_stage},
+              latest_deployment:{id:$latest_id,url:$latest_url,branch:$latest_branch,stage:$latest_stage},
+              secret_values_logged:false,
+              external_changes_made:false,
+              awards_vf_points:false
+            }' > evidence/pages-project-metadata.json
+
+          echo "MODARYX_P6_PAGES_PROJECT productionBranch=$production_branch canonicalBranch=$canonical_branch canonicalStage=$canonical_stage latestBranch=$latest_branch latestStage=$latest_stage"
+
+      - name: Upload Pages project metadata
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-pages-project-metadata
+          path: evidence
+          if-no-files-found: error
+          retention-days: 30
