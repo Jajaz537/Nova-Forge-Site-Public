@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "RIGHTS_EVIDENCE_PREFLIGHT_CANDIDATE_LOCAL_PROOF",
+  "migration": "migrations/0010_modaryx_v2_rights_evidence.sql",
+  "endpoints": [
+    "POST /api/v1/rights/contact-evidence",
+    "POST /api/v1/rights/response-evidence",
+    "POST /api/v1/rights/license-preflight"
+  ],
+  "remoteApplication": "NOT_EXECUTED",
+  "productionStatus": {
+    "officialContactDiscovery": "PIPELINE_READY_REAL_EVIDENCE_NOT_INGESTED",
+    "publisherOutbound": "NOT_IMPLEMENTED",
+    "inboundMailbox": "NOT_IMPLEMENTED",
+    "responseEvidence": "ADMIN_INGEST_CANDIDATE",
+    "licenseValidation": "PREFLIGHT_ONLY_NO_GRANT_WRITE",
+    "legalReview": "EXTERNAL_RECORD_REQUIRED",
+    "authorizingDecisionWrite": "NOT_IMPLEMENTED"
+  },
+  "invariants": [
+    "ONLY_OFFICIAL_CONTACT_EVIDENCE_SOURCES_ALLOWED",
+    "NO_GUESSED_OR_SCRAPED_UNVERIFIED_CONTACT",
+    "NO_RAW_CONTACT_ADDRESS_STORED_BY_THIS_SLICE",
+    "RAW_RESPONSE_CONTENT_NOT_STORED_ONLY_SHA256",
+    "RESPONSE_GRANT_LANGUAGE_ALWAYS_REQUIRES_LEGAL_REVIEW",
+    "UNADDRESSED_NEVER_EQUALS_GRANTED",
+    "PREFLIGHT_NEVER_WRITES_AUTHORIZING_DECISION",
+    "LEGAL_REVIEW_RECORD_REQUIRED_FOR_ELIGIBLE_PREFLIGHT",
+    "WEB_AND_MODARYX_FORGE_REMAIN_SEPARATE",
+    "NO_PUBLISHER_CONTACT_OR_OUTBOUND",
+    "NO_REMOTE_D1_APPLY",
+    "RIGHTS_PRODUCTION_BLOCKERS_REMAIN_OPEN"
+  ]
+}
