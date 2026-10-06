@@ -4,12 +4,12 @@
 
 ## Cible
 
-- source déployée : `cbeacc72f8b8d0891ea1de53a580a027fd75ca6e`
-- preview Cloudflare exact : `https://cb360fb9.nova-forge-site-public.pages.dev`
+- source déployée : `ce587af7d138eedf148d5d446cacd8fb6f2235a3`
+- preview Cloudflare exact : `https://371b4eff.nova-forge-site-public.pages.dev`
 - Cloudflare Pages : deploy successful sur ce SHA
 - workflow : `MODARYX V2 Current Preview Read-Only Proof`
-- run : `37482673742`
-- job : `112334605734`
+- run : `37488293293`
+- job : `112354005071`
 - mode : `PRE_CUTOVER`
 - méthodes utilisées : **GET/HEAD uniquement**
 
@@ -50,7 +50,7 @@ Markers :
 
 ## Interprétation
 
-Cette preuve confirme que le candidat courant reste honnêtement en PRE_CUTOVER :
+Cette preuve confirme que le SHA courant reste honnêtement en PRE_CUTOVER :
 - noindex actif ;
 - backend DEV réel joignable ;
 - D1 binding joignable, mais **schéma V2 remote non appliqué** (`presentCount=0`) ;
