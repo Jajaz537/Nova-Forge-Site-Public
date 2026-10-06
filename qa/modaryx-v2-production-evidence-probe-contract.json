@@ -22,6 +22,7 @@
     "DELETE"
   ],
   "endpoints": [
+    "/build-info.json",
     "/",
     "/api/v1/status",
     "/api/v1/auth/session",
@@ -56,6 +57,11 @@
     "NO_AUTHENTICATED_SESSION_REQUIRED",
     "NO_SECRET_VALUES_LOGGED",
     "CWV_READINESS_GET_NEVER_ENABLES_COLLECTION",
-    "READINESS_ENDPOINT_NEVER_CLOSES_PRODUCTION_BLOCKER"
+    "READINESS_ENDPOINT_NEVER_CLOSES_PRODUCTION_BLOCKER",
+    "BUILD_FINGERPRINT_NO_SECRET",
+    "EXPECTED_SHA_WHEN_SUPPLIED_MUST_MATCH_DEPLOYED_BUILD"
+  ],
+  "optionalInputs": [
+    "expectedSha"
   ]
 }

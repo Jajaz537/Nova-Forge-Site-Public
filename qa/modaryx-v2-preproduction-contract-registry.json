@@ -512,6 +512,12 @@
       "contract": "qa/modaryx-v2-vf-closure-ledger.json",
       "checker": "qa/check-v2-vf-closure-ledger.mjs",
       "source": "docs/MODARYX-V2-VF-CLOSURE-LEDGER-20261006.md"
+    },
+    {
+      "id": "build-fingerprint",
+      "contract": "qa/modaryx-v2-build-fingerprint-contract.json",
+      "checker": "qa/check-v2-build-fingerprint.mjs",
+      "source": "docs/MODARYX-V2-BUILD-FINGERPRINT-20261006.md"
     }
   ],
   "invariants": [

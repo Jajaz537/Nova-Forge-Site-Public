@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 const originRaw=process.env.MODARYX_PRODUCTION_ORIGIN||"";
 const mode=process.env.MODARYX_EXPECTED_MODE||"";
 const timeoutMs=Number(process.env.MODARYX_PROBE_TIMEOUT_MS||8000);
+const expectedSha=String(process.env.MODARYX_EXPECTED_SHA||"").trim().toLowerCase();
+if(expectedSha&&!/^[a-f0-9]{40}$/.test(expectedSha)) throw new Error("MODARYX_EXPECTED_SHA must be a 40-char lowercase git SHA");
 
 if(!["PRE_CUTOVER","POST_CUTOVER"].includes(mode)) throw new Error("MODARYX_EXPECTED_MODE must be PRE_CUTOVER or POST_CUTOVER");
 let origin;
@@ -47,6 +49,13 @@ const noindex=robotsHeader.includes("noindex")||metaNoindex;
 if(mode==="PRE_CUTOVER") assert.equal(noindex,true,"pre-cutover origin must remain noindex");
 if(mode==="POST_CUTOVER") assert.equal(noindex,false,"post-cutover origin must be indexable");
 
+const buildInfo=await json("/build-info.json");
+assert.equal(buildInfo.response.status,200,"build-info endpoint HTTP");
+assert.equal(buildInfo.body?.schemaVersion,1,"build-info schemaVersion drift");
+assert.equal(buildInfo.body?.product,"modaryx-v2","build-info product drift");
+assert.match(String(buildInfo.body?.commitSha||""),/^[a-f0-9]{40}$/,"build-info commit sha missing");
+if(expectedSha) assert.equal(buildInfo.body?.commitSha,expectedSha,"deployed build SHA does not match expected SHA");
+
 const status=await json("/api/v1/status");
 assert.equal(status.response.status,200,"status endpoint HTTP");
 assert.equal(status.body?.service,"modaryx-backend","unexpected backend service");
@@ -83,6 +92,13 @@ if(mode==="POST_CUTOVER") assert.equal(sw.status,200,"post-cutover service worke
 const summary={
   origin:origin.origin,
   mode,
+  buildInfo:{
+    commitSha:buildInfo.body?.commitSha||null,
+    branch:buildInfo.body?.branch||null,
+    deploymentUrl:buildInfo.body?.deploymentUrl||null,
+    expectedSha:expectedSha||null,
+    exactShaMatch:expectedSha?buildInfo.body?.commitSha===expectedSha:null
+  },
   root:{status:root.status,noindex},
   backend:{
     stage:status.body?.stage||null,

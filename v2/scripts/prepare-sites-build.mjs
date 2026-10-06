@@ -32,4 +32,36 @@ if(existsSync(builtSw)&&existsSync(assetsDir)){
   console.log("Prepared V2 offline shell assets:",assets.length);
 }
 
+const buildCommitSha=String(
+  process.env.CF_PAGES_COMMIT_SHA||
+  process.env.GITHUB_SHA||
+  process.env.MODARYX_BUILD_SHA||
+  "unknown"
+).trim().toLowerCase();
+const buildBranch=String(
+  process.env.CF_PAGES_BRANCH||
+  process.env.GITHUB_REF_NAME||
+  process.env.MODARYX_BUILD_BRANCH||
+  "unknown"
+).trim();
+const rawDeploymentUrl=String(process.env.CF_PAGES_URL||"").trim();
+let deploymentUrl=null;
+if(rawDeploymentUrl){
+  try{
+    const parsed=new URL(rawDeploymentUrl);
+    if(parsed.protocol==="https:"&&!parsed.username&&!parsed.password&&!parsed.hash&&!parsed.search){
+      deploymentUrl=parsed.origin;
+    }
+  }catch{}
+}
+const buildInfo={
+  schemaVersion:1,
+  product:"modaryx-v2",
+  commitSha:/^[a-f0-9]{40}$/.test(buildCommitSha)?buildCommitSha:"unknown",
+  branch:buildBranch||"unknown",
+  deploymentUrl
+};
+writeFileSync(path.join(dist,"client","build-info.json"),JSON.stringify(buildInfo,null,2)+"\n");
+console.log("Prepared V2 build fingerprint:",buildInfo.commitSha,buildInfo.branch);
+
 console.log("Prepared Sites build: dist/server/index.js and dist/.openai/hosting.json");

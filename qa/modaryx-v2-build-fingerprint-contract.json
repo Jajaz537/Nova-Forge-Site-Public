@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "IMPLEMENTED_CANDIDATE_EXACT_SHA_PROOF_REQUIRED",
+  "output": "v2/dist/client/build-info.json",
+  "source": "v2/scripts/prepare-sites-build.mjs",
+  "cloudflareSystemInputs": [
+    "CF_PAGES_COMMIT_SHA",
+    "CF_PAGES_BRANCH",
+    "CF_PAGES_URL"
+  ],
+  "fallbackCiInputs": [
+    "GITHUB_SHA",
+    "GITHUB_REF_NAME"
+  ],
+  "publicFields": [
+    "schemaVersion",
+    "product",
+    "commitSha",
+    "branch",
+    "deploymentUrl"
+  ],
+  "invariants": [
+    "NO_SECRET_ENV_VALUE_EXPOSED",
+    "COMMIT_SHA_EXACT_40_HEX_OR_UNKNOWN",
+    "DEPLOYMENT_URL_HTTPS_OR_NULL",
+    "BUILD_INFO_STATIC_READ_ONLY",
+    "BRANCH_ALIAS_PROBE_GET_HEAD_ONLY",
+    "PRE_CUTOVER_REQUIRES_NOINDEX",
+    "EXPECTED_SHA_MUST_MATCH_BEFORE_PASS",
+    "NO_REMOTE_MUTATION",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER"
+  ]
+}

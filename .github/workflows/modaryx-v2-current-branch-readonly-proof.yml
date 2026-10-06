@@ -1,0 +1,83 @@
+name: MODARYX V2 Current Branch Exact-SHA Read-Only Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-deployment-fingerprint-20261006'
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+    paths:
+      - '.github/workflows/modaryx-v2-current-branch-readonly-proof.yml'
+      - 'v2/scripts/prepare-sites-build.mjs'
+      - 'qa/check-v2-production-evidence-origin.mjs'
+      - 'qa/modaryx-v2-production-evidence-probe-contract.json'
+      - 'qa/check-v2-production-evidence-probe-contract.mjs'
+      - 'qa/modaryx-v2-build-fingerprint-contract.json'
+      - 'qa/check-v2-build-fingerprint.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-current-branch-readonly-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Probe exact branch alias with GET HEAD only
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate fingerprint and probe contracts
+        run: |
+          set -euo pipefail
+          node qa/check-v2-build-fingerprint.mjs
+          node qa/check-v2-production-evidence-probe-contract.mjs
+
+      - name: Build V2 and prove local fingerprint
+        working-directory: v2
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+          node - <<'NODE'
+          const fs=require("fs");
+          const info=JSON.parse(fs.readFileSync("dist/client/build-info.json","utf8"));
+          if(info.commitSha!==process.env.GITHUB_SHA) throw new Error("local fingerprint SHA mismatch: "+info.commitSha+" != "+process.env.GITHUB_SHA);
+          console.log("LOCAL_BUILD_FINGERPRINT",JSON.stringify(info));
+          console.log("PASS_V2_LOCAL_BUILD_FINGERPRINT");
+          NODE
+
+      - name: Wait for exact Cloudflare branch alias
+        run: |
+          set -euo pipefail
+          alias_name="$(printf '%s' "$GITHUB_REF_NAME" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')"
+          origin="https://${alias_name}.nova-forge-site-public.pages.dev"
+          echo "MODARYX_BRANCH_ORIGIN=${origin}" >> "$GITHUB_ENV"
+          matched=0
+          for attempt in {1..72}; do
+            body="$(curl --fail --silent --show-error --max-time 10 "${origin}/build-info.json" 2>/dev/null || true)"
+            got="$(printf '%s' "$body" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{try{const j=JSON.parse(s);process.stdout.write(String(j.commitSha||""))}catch{}})')"
+            if [ "$got" = "$GITHUB_SHA" ]; then
+              echo "EXACT_BRANCH_FINGERPRINT ${got}"
+              matched=1
+              break
+            fi
+            sleep 5
+          done
+          test "$matched" = "1"
+
+      - name: Run exact-SHA PRE_CUTOVER read-only probe
+        env:
+          MODARYX_EXPECTED_MODE: PRE_CUTOVER
+          MODARYX_EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          MODARYX_PRODUCTION_ORIGIN="$MODARYX_BRANCH_ORIGIN" node qa/check-v2-production-evidence-origin.mjs
+          echo PASS_V2_CURRENT_BRANCH_EXACT_SHA_READ_ONLY_PROOF

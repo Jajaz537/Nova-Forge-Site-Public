@@ -27,6 +27,10 @@ on:
         options:
           - PRE_CUTOVER
           - POST_CUTOVER
+      expected_sha:
+        description: Optional exact deployed git SHA to require
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -68,6 +72,7 @@ jobs:
         env:
           MODARYX_PRODUCTION_ORIGIN: ${{ inputs.origin }}
           MODARYX_EXPECTED_MODE: ${{ inputs.mode }}
+          MODARYX_EXPECTED_SHA: ${{ inputs.expected_sha }}
         run: |
           set -euo pipefail
           node qa/check-v2-production-evidence-origin.mjs
