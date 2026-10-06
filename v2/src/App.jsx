@@ -386,9 +386,9 @@ function GamesIndex({ onOpenGame }) {
       {requestOpen&&<div className="game-request-form">
         <label><span>Nom du jeu</span><input id="game-support-name" value={requestName} aria-invalid={requestError?"true":undefined} aria-describedby={requestError?"game-support-name-error":undefined} onChange={e=>{setRequestName(e.target.value);setRequestError("");setRequestDraft(false);setSubmitState({state:"IDLE",item:null,message:""});}} placeholder="Ex. Project Meridian" aria-label="Nom du jeu à demander"/></label>
         <label><span>Plateforme principale</span><select id="game-support-platform" value={requestPlatform} onChange={e=>setRequestPlatform(e.target.value)}><option>PC</option><option>PlayStation</option><option>Xbox</option><option>Nintendo</option><option>Autre</option></select></label>
-        <button className="quiet" onClick={prepareSupportRequest}>Préparer la demande locale</button>
+        <button className="primary" onClick={prepareSupportRequest}>Préparer la demande locale</button>
         {requestError&&<div id="game-support-name-error" className="form-error" role="alert">{requestError}</div>}
-        {requestDraft&&<div className="game-request-status" role="status"><strong>Brouillon de demande — non envoyé</strong><span>{requestName.trim()} · {requestPlatform}</span><small>Triage MODARYX requis. Aucun Rights Case réel n’est créé depuis ce brouillon local.</small></div>}
+        {requestDraft&&<div className="game-request-status" role="status"><strong>Brouillon de demande — non envoyé</strong><span>{requestName.trim()} · {requestPlatform}</span><small>Triage MODARYX requis. Aucun Rights Case réel n’est créé dans ce prototype. Le brouillon reste local.</small></div>}
 
         {supportRemote.accountState==="LOADING"&&<p className="settings-note">Vérification du canal d’envoi réel…</p>}
         {supportRemote.accountState==="GUEST"&&<div className="game-request-status"><strong>Envoi réel disponible après connexion</strong><span>Le brouillon local reste privé dans cette page.</span><button className="primary" onClick={()=>window.location.assign(authLoginUrl("/games"))} disabled={!supportRemote.loginAvailable}>Se connecter pour envoyer</button></div>}
