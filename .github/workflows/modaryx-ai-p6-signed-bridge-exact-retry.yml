@@ -1,0 +1,65 @@
+name: MODARYX IA P6 signed bridge exact retry proof
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-signed-bridge-exact-retry.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    env:
+      DEPLOYMENT_URL: "https://7c325dae.nova-forge-site-public.pages.dev"
+      EXPECTED_PROTOCOL: "modaryx-founder-bridge-v1"
+    steps:
+      - name: Probe exact Pages retry through real signed bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          body="$(mktemp)"
+          code="$(curl -sS -o "$body" -w '%{http_code}' --max-time 25 "${DEPLOYMENT_URL}/api/p6/bridge-probe" || true)"
+          ok="$(jq -r '.ok == true' "$body" 2>/dev/null || echo false)"
+          protocol="$(jq -r '.protocol // ""' "$body" 2>/dev/null || true)"
+          inner_http="$(jq -r '.http // ""' "$body" 2>/dev/null || true)"
+          bridge_error="$(jq -r '.bridge_error // ""' "$body" 2>/dev/null || true)"
+          cp "$body" evidence/bridge-response.json
+          rm -f "$body"
+
+          jq -n             --arg schema "modaryx-p6-signed-bridge-exact-retry-v1"             --arg deployment_url "$DEPLOYMENT_URL"             --arg http "$code"             --argjson ok "$ok"             --arg protocol "$protocol"             --arg inner_http "$inner_http"             --arg bridge_error "$bridge_error"             '{
+              schema:$schema,
+              deployment_url:$deployment_url,
+              outer_http:($http|tonumber),
+              bridge_ok:$ok,
+              protocol:$protocol,
+              inner_http:(if $inner_http=="" then null else ($inner_http|tonumber) end),
+              bridge_error:(if $bridge_error=="" then null else $bridge_error end),
+              secret_values_recorded:false,
+              founder_bypass:false,
+              production_modified:false,
+              awards_vf_points:false
+            }' > evidence/probe.json
+
+          if [ "$code" != "200" ] || [ "$ok" != "true" ] || [ "$protocol" != "$EXPECTED_PROTOCOL" ] || [ "$inner_http" != "200" ]; then
+            cat evidence/probe.json
+            echo "MODARYX_P6_EXACT_SIGNED_BRIDGE_FAIL outer=$code inner=$inner_http ok=$ok protocol=$protocol bridgeError=$bridge_error" >&2
+            exit 5
+          fi
+
+          echo "MODARYX_P6_EXACT_SIGNED_BRIDGE_PASS deployment=7c325dae protocol=$protocol"
+
+      - name: Upload exact signed bridge proof
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-signed-bridge-exact-retry
+          path: evidence
+          if-no-files-found: warn
+          retention-days: 30
