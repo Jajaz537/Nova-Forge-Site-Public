@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "status": "TEMPLATE_NOT_EVIDENCE",
+  "evidenceId": null,
+  "blockerId": null,
+  "sessionType": null,
+  "date": null,
+  "commitSha": null,
+  "actorOpaqueId": null,
+  "environment": {
+    "device": null,
+    "os": null,
+    "browser": null,
+    "browserVersion": "UNKNOWN_RECORDED",
+    "screenReader": null,
+    "screenReaderVersion": "UNKNOWN_RECORDED",
+    "viewportApprox": null,
+    "orientation": null,
+    "inputModes": [],
+    "reducedMotion": null,
+    "contrastMode": null,
+    "realityFlags": []
+  },
+  "tasks": [],
+  "findings": [],
+  "result": "INCOMPLETE",
+  "artifactRefs": [],
+  "reviewer": null,
+  "notes": "Template only. Do not count as evidence until a real session is executed."
+}
