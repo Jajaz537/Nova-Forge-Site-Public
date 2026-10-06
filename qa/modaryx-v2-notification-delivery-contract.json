@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "DELIVERY_GUARD_CANDIDATE_PROVIDER_MISSING",
+  "migration": "migrations/0007_modaryx_v2_notification_delivery_outbox.sql",
+  "endpoint": "/api/v1/notifications/delivery/readiness",
+  "channels": [
+    "EMAIL",
+    "PUSH"
+  ],
+  "remoteApplication": "NOT_EXECUTED",
+  "dispatchImplementation": "NOT_IMPLEMENTED",
+  "providerSelection": "NOT_SELECTED",
+  "productionBlocker": "notifications-email-push-real",
+  "invariants": [
+    "NO_NETWORK_DISPATCH",
+    "NO_PROVIDER_SELECTED_BY_THIS_CHANGE",
+    "NO_RAW_EMAIL_ADDRESS_IN_OUTBOX",
+    "NO_RAW_PUSH_TOKEN_IN_OUTBOX",
+    "DESTINATION_REFERENCE_DIGEST_ONLY",
+    "EMAIL_PUSH_BLOCKED_UNLESS_PROVIDER_STATE_CONFIGURED_PRODUCTION_APPROVED",
+    "USER_PREFERENCE_REQUIRED",
+    "PROVIDER_PRODUCTION_APPROVAL_REQUIRED",
+    "NO_REMOTE_D1_APPLY",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER",
+    "PRODUCTION_BLOCKER_REMAINS_OPEN"
+  ]
+}

@@ -1,0 +1,45 @@
+name: MODARYX V2 Notification Delivery Guard Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-notification-delivery-readiness-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-notification-delivery-proof.yml'
+      - 'migrations/0007_modaryx_v2_notification_delivery_outbox.sql'
+      - 'functions/_lib/notification-delivery.mjs'
+      - 'functions/api/v1/notifications/delivery/readiness.js'
+      - 'qa/modaryx-v2-notification-delivery-contract.json'
+      - 'qa/check-v2-notification-delivery.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-notification-delivery-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove email/push delivery remains fail-closed without provider
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate delivery guard
+        run: |
+          set -euo pipefail
+          node --experimental-sqlite qa/check-v2-notification-delivery.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+          echo PASS_V2_NOTIFICATION_DELIVERY_GUARD_PROOF
+      - name: Mirror Cloudflare root build
+        run: npm run build

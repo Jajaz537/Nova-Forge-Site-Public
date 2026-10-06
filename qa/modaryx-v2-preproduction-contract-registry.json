@@ -386,6 +386,12 @@
       "contract": "qa/modaryx-v2-data-history-contract.json",
       "checker": "qa/check-v2-data-history.mjs",
       "source": "docs/MODARYX-V2-DATA-HISTORY-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "notification-delivery-guard",
+      "contract": "qa/modaryx-v2-notification-delivery-contract.json",
+      "checker": "qa/check-v2-notification-delivery.mjs",
+      "source": "docs/MODARYX-V2-NOTIFICATION-DELIVERY-GUARD-20261006.md"
     }
   ],
   "invariants": [
