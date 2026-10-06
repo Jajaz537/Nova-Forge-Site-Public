@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-05",
+  "date": "2026-10-06",
   "status": "PRE_PRODUCTION_CONTRACT_REGISTRY",
   "contracts": [
     {
@@ -314,6 +314,12 @@
       "contract": "qa/modaryx-v2-external-validation-evidence-contract.json",
       "checker": "qa/check-v2-external-validation-evidence-contract.mjs",
       "source": "docs/MODARYX-V2-EXTERNAL-VALIDATION-EVIDENCE-CONTRACT-20261004.md"
+    },
+    {
+      "id": "preview-root",
+      "contract": "qa/modaryx-v2-preview-root-contract.json",
+      "checker": "qa/check-v2-preview-root-contract.mjs",
+      "source": "docs/MODARYX-V2-PREVIEW-ROOT-DECISION-20261006.md"
     }
   ],
   "invariants": [
@@ -336,6 +342,10 @@
     {
       "path": "qa/modaryx-v2-preproduction-contract-registry.json",
       "reason": "registry self-file"
+    },
+    {
+      "path": "qa/modaryx-v2-browser-migration-proof.json",
+      "reason": "browser migration proof/evidence ledger exercised by dedicated browser micro-proof, not a static preproduction contract"
     }
   ]
 }
