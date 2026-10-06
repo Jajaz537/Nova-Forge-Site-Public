@@ -3,7 +3,7 @@
   "date": "2026-10-06",
   "status": "PRE_CUTOVER_READ_ONLY_CANDIDATE",
   "endpoint": "/api/v1/production/readiness",
-  "requiredCurrentV2TableCount": 31,
+  "requiredCurrentV2TableCount": 32,
   "productionPass": false,
   "closesNoBlockerByItself": true,
   "invariants": [
