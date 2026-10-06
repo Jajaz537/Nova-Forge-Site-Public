@@ -35,15 +35,15 @@ jobs:
           umask 077
           mkdir -p evidence
 
-          if [ ! -f qa/p6-quick-url.txt ]; then
-            jq -n '{schema:"modaryx-p6-quick-preview-config-v1",status:"NOT_RUN",reason:"quick_url_missing",external_changes_made:false,awards_vf_points:false}' > evidence/config.json
-            echo "MODARYX_P6_QUICK_PREVIEW_NOT_RUN quick_url_missing"
+          comment_body="$(curl -fsS 'https://api.github.com/repos/Jajaz537/Nova-Forge-Site-Public/issues/comments/6013122024' | jq -r '.body // ""')"
+          quick_url="$(printf '%s\n' "$comment_body" | grep -Eo 'https://[A-Za-z0-9-]+[.]trycloudflare[.]com' | tail -n 1 || true)"
+          if [ -z "$quick_url" ]; then
+            jq -n '{schema:"modaryx-p6-quick-preview-config-v1",status:"NOT_RUN",reason:"quick_url_comment_missing",external_changes_made:false,awards_vf_points:false}' > evidence/config.json
+            echo "MODARYX_P6_QUICK_PREVIEW_NOT_RUN quick_url_comment_missing"
             exit 0
           fi
-
-          quick_url="$(tr -d '\r\n ' < qa/p6-quick-url.txt)"
           if ! [[ "$quick_url" =~ ^https://[a-zA-Z0-9-]+[.]trycloudflare[.]com$ ]]; then
-            echo "Invalid Quick Tunnel URL" >&2
+            echo "Invalid Quick Tunnel URL from PR comment" >&2
             exit 2
           fi
 
@@ -142,3 +142,4 @@ jobs:
           path: evidence
           if-no-files-found: error
           retention-days: 7
+# replay-trigger: p6-pr-comment-url-coordinate
