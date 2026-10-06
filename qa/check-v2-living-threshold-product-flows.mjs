@@ -242,7 +242,9 @@ try{
   await clickText(".detail-tabs button","Permissions");
   await waitText("Aucune licence de distribution réelle");
 
-  await clickText("footer button","Notifications");
+  await clickAria("Compte");
+  await waitText("Vous explorez MODARYX en mode invité.");
+  await clickText(".account-nav button","Notifications");
   await waitText("Centre de notifications");
   await waitText("Aucune notification réelle");
   await waitText("Réponse éditeur reçue — Aetherlands");
