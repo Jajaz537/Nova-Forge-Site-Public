@@ -17,6 +17,7 @@ on:
 
 permissions:
   contents: read
+  checks: read
 
 concurrency:
   group: modaryx-v2-current-branch-readonly-${{ github.ref }}
@@ -54,36 +55,62 @@ jobs:
           console.log("PASS_V2_LOCAL_BUILD_FINGERPRINT");
           NODE
 
-      - name: Diagnose and wait for exact Cloudflare branch alias
+      - name: Resolve exact immutable Cloudflare preview URL
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          alias_name="$(printf '%s' "$GITHUB_REF_NAME" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')"
-          origin="https://${alias_name}.nova-forge-site-public.pages.dev"
-          echo "MODARYX_BRANCH_ORIGIN=${origin}" >> "$GITHUB_ENV"
-          echo "BRANCH_ALIAS_ORIGIN ${origin}"
+          node <<'NODE'
+          const fs=require("fs");
+          const repo=process.env.GITHUB_REPOSITORY;
+          const sha=process.env.GITHUB_SHA;
+          const token=process.env.GITHUB_TOKEN;
+          if(!repo||!sha||!token) throw new Error("GitHub Actions context missing");
+          const api="https://api.github.com/repos/"+repo+"/commits/"+sha+"/check-runs";
+          const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+          const headers={
+            accept:"application/vnd.github+json",
+            authorization:"Bearer "+token,
+            "x-github-api-version":"2022-11-28"
+          };
+          let preview=null;
+          for(let attempt=1;attempt<=60;attempt++){
+            const response=await fetch(api,{headers});
+            if(!response.ok) throw new Error("check-runs HTTP "+response.status);
+            const body=await response.json();
+            const cf=(body.check_runs||[]).find(x=>x.name==="Cloudflare Pages"&&x.status==="completed"&&x.conclusion==="success");
+            const summary=cf?.output?.summary||"";
+            const match=summary.match(/<strong>Preview URL:<\/strong>[\s\S]*?<a href='(https:\/\/[a-z0-9]+\.nova-forge-site-public\.pages\.dev)'/i);
+            if(match){
+              preview=match[1];
+              console.log("CLOUDFLARE_EXACT_PREVIEW",preview);
+              break;
+            }
+            if(attempt===1||attempt%10===0) console.log("WAIT_CLOUDFLARE_CHECK",attempt);
+            await sleep(5000);
+          }
+          if(!preview) throw new Error("exact Cloudflare Preview URL not found in successful check");
+          fs.appendFileSync(process.env.GITHUB_ENV,"MODARYX_BRANCH_ORIGIN="+preview+"\n");
+          NODE
+
+      - name: Wait for exact deployed build fingerprint
+        run: |
+          set -euo pipefail
           matched=0
-          for attempt in {1..24}; do
-            root_code="$(curl --silent --show-error --max-time 10 -o /tmp/modaryx-root.html -w '%{http_code}' "${origin}/" 2>/dev/null || printf '000')"
-            info_code="$(curl --silent --show-error --max-time 10 -o /tmp/modaryx-build-info.json -w '%{http_code}' "${origin}/build-info.json" 2>/dev/null || printf '000')"
-            got=""
-            if [ "$info_code" = "200" ]; then
-              got="$(node -e 'const fs=require("fs");try{const j=JSON.parse(fs.readFileSync("/tmp/modaryx-build-info.json","utf8"));process.stdout.write(String(j.commitSha||""))}catch{}')"
-            fi
-            if [ "$attempt" = "1" ] || [ $((attempt % 6)) = "0" ]; then
-              root_title="$(grep -o -i '<title>[^<]*' /tmp/modaryx-root.html 2>/dev/null | head -1 | sed -E 's/<title>//I' || true)"
-              echo "ALIAS_DIAGNOSTIC attempt=${attempt} root=${root_code} buildInfo=${info_code} sha=${got:-NONE} title=${root_title:-NONE}"
+          for attempt in {1..48}; do
+            body="$(curl --fail --silent --show-error --max-time 10 "$MODARYX_BRANCH_ORIGIN/build-info.json" 2>/dev/null || true)"
+            got="$(printf '%s' "$body" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{try{const j=JSON.parse(s);process.stdout.write(String(j.commitSha||""))}catch{}})')"
+            if [ "$attempt" = "1" ] || [ $((attempt % 8)) = "0" ]; then
+              echo "FINGERPRINT_DIAGNOSTIC attempt=${attempt} sha=${got:-NONE}"
             fi
             if [ "$got" = "$GITHUB_SHA" ]; then
-              echo "EXACT_BRANCH_FINGERPRINT ${got}"
+              echo "EXACT_DEPLOYMENT_FINGERPRINT ${got}"
               matched=1
               break
             fi
             sleep 5
           done
-          if [ "$matched" != "1" ]; then
-            echo "ALIAS_FINGERPRINT_NOT_CURRENT expected=${GITHUB_SHA}"
-            exit 1
-          fi
+          test "$matched" = "1"
 
       - name: Run exact-SHA PRE_CUTOVER read-only probe
         env:
