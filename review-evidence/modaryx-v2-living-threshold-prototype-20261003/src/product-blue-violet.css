@@ -1206,3 +1206,35 @@ h1, h2, h3,
     border-top: 1px solid rgba(66, 84, 112, .26);
   }
 }
+
+
+/* 2026-10-06 canon refinement from the approved Game Hub reference.
+   Cyan is reserved for the primary in-game action and active product navigation;
+   violet remains the premium secondary accent. */
+.game-hub-page .game-hero > .primary {
+  color: #06121a;
+  background: linear-gradient(112deg, #5fdcff 0%, #4ccfff 58%, #73e4ff 100%);
+  border-color: rgba(115, 228, 255, .72);
+  box-shadow: 0 14px 34px rgba(79, 211, 255, .20);
+  font-weight: 850;
+}
+
+.game-hub-page .game-hero > .primary:hover {
+  background: linear-gradient(112deg, #7ae5ff 0%, #5dd7ff 58%, #8ceaff 100%);
+  box-shadow: 0 16px 38px rgba(79, 211, 255, .25);
+}
+
+.game-hub-page .local-nav button.active:after {
+  background: #55dcff;
+  box-shadow: 0 0 14px rgba(79, 211, 255, .38);
+}
+
+.game-hub-page .hub-row-main > .media {
+  filter: saturate(1.08) brightness(1.11);
+}
+
+.game-hub-page .atmosphere-preview button.active {
+  color: #dff8ff;
+  background: rgba(31, 61, 83, .64);
+  border-color: rgba(79, 211, 255, .48);
+}
