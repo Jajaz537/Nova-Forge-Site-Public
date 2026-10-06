@@ -6,7 +6,7 @@
 
 Il vérifie notamment :
 - binding D1 ;
-- présence des **31 tables V2 actuellement requises** via `sqlite_master` en lecture seule ;
+- présence des **32 tables V2 actuellement requises** via `sqlite_master` en lecture seule ;
 - fondation Auth0 + Turnstile ;
 - R2 lecture/écriture ;
 - readiness providers ;
