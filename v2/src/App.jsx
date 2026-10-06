@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./canon-topbar.css";
 import { contentPath, pathForActive, routeStateFromPath } from "./routes.js";
-import { authLoginUrl, getNotifications, getProviderRegistry, logoutAccountSession, markNotificationRead, resolveAccountRemoteState } from "./api/modaryx-api.js";
+import { authLoginUrl, getDataHistory, getNotifications, getProviderRegistry, logoutAccountSession, markNotificationRead, resolveAccountRemoteState } from "./api/modaryx-api.js";
 import { resolveAmbientContext } from "./api/local-context.js";
 import {
   ArrowRight, Bell, BookOpen, Check, FunnelSimple, GameController, GridFour,
@@ -547,6 +547,7 @@ function AccountCenter({ initialTab="Compte" }) {
   const [remoteAccount,setRemoteAccount]=useState({state:"LOADING",loginAvailable:false,profile:null,authority:null});
   const [accountMessage,setAccountMessage]=useState("");
   const [remoteNotifications,setRemoteNotifications]=useState({state:"IDLE",items:[],unreadCount:0});
+  const [remoteHistory,setRemoteHistory]=useState({state:"IDLE",items:[]});
   const tabs=["Compte","Profil","Confidentialité","Notifications","Apparence","Accessibilité","Données locales"];
   const onboardingSteps=[
     ["Jeux","Choisissez quelques jeux pour contextualiser la découverte. Aucun choix n’est envoyé."],
@@ -567,6 +568,21 @@ function AccountCenter({ initialTab="Compte" }) {
     resolveAccountRemoteState().then(next=>{if(!cancelled)setRemoteAccount(next);});
     return ()=>{cancelled=true;};
   },[]);
+  useEffect(()=>{
+    if(tab!=="Données locales"||remoteAccount.state!=="AUTHENTICATED") return;
+    let cancelled=false;
+    setRemoteHistory(current=>({...current,state:"LOADING"}));
+    getDataHistory().then(result=>{
+      if(cancelled) return;
+      if(!result.ok){
+        setRemoteHistory({state:"UNAVAILABLE",items:[]});
+        return;
+      }
+      setRemoteHistory({state:"READY",items:Array.isArray(result.body?.items)?result.body.items:[]});
+    });
+    return ()=>{cancelled=true;};
+  },[tab,remoteAccount.state]);
+
   useEffect(()=>{
     if(tab!=="Notifications"||remoteAccount.state!=="AUTHENTICATED") return;
     let cancelled=false;
@@ -653,7 +669,13 @@ function AccountCenter({ initialTab="Compte" }) {
     </section>,
     "Apparence": <section className="account-panel"><span className="kicker">Apparence</span><h2>Préférences locales</h2><div className="settings-list"><button role="switch" aria-checked={prefs.ambience} onClick={()=>setPref("ambience")}><span><strong>Ambiance vivante</strong><small>Préférence locale de démonstration</small></span><em>{prefs.ambience?"Activée":"Désactivée"}</em></button><button role="switch" aria-checked={prefs.compact} onClick={()=>setPref("compact")}><span><strong>Densité compacte</strong><small>Préférence locale de démonstration</small></span><em>{prefs.compact?"Activée":"Désactivée"}</em></button></div></section>,
     "Accessibilité": <section className="account-panel"><span className="kicker">Accessibilité</span><h2>Accessible sans réglage spécial</h2><p>Les préférences complètent le produit mais ne remplacent jamais un design accessible par défaut.</p><div className="settings-list"><button role="switch" aria-checked={prefs.reduced} onClick={()=>setPref("reduced")}><span><strong>Effets réduits</strong><small>Préférence locale de démonstration</small></span><em>{prefs.reduced?"Activés":"Désactivés"}</em></button></div><div className="accessibility-proof"><strong>Candidat actuel</strong><span>Focus visible 3 px · cibles tactiles ≥44 px · règle prefers-reduced-motion présente.</span></div></section>,
-    "Données locales": <section className="account-panel"><span className="kicker">Données locales</span><h2>Ce navigateur</h2><div className="data-list"><div><strong>Favoris de démonstration</strong><span>Local</span></div><div><strong>Profils de jeu de démonstration</strong><span>Local</span></div><div><strong>Brouillons de démonstration</strong><span>Local</span></div><div><strong>Migration legacy</strong><span>Préservée / contrôlée</span></div></div><button className="quiet" disabled>Exporter — fonction réelle non connectée</button></section>,
+    "Données locales": <section className="account-panel"><span className="kicker">Données & historique</span><h2>Local + historique serveur</h2><div className="data-list"><div><strong>Favoris de démonstration</strong><span>Local</span></div><div><strong>Profils de jeu de démonstration</strong><span>Local</span></div><div><strong>Brouillons de démonstration</strong><span>Local</span></div><div><strong>Migration legacy</strong><span>Préservée / contrôlée</span></div></div>
+      {remoteAccount.state!=="AUTHENTICATED"&&<div className="unavailable-state"><strong>Historique serveur non chargé</strong><span>Une session réelle est requise ; aucune entrée n’est simulée.</span></div>}
+      {remoteAccount.state==="AUTHENTICATED"&&remoteHistory.state==="LOADING"&&<p className="settings-note">Chargement de l’historique propriétaire…</p>}
+      {remoteAccount.state==="AUTHENTICATED"&&remoteHistory.state==="UNAVAILABLE"&&<div className="unavailable-state"><strong>Historique serveur indisponible</strong><span>La migration distante V2 n’est pas considérée active tant qu’elle n’est pas prouvée.</span></div>}
+      {remoteAccount.state==="AUTHENTICATED"&&remoteHistory.state==="READY"&&remoteHistory.items.length===0&&<div className="empty"><h3>Aucun événement historique réel</h3><p>Aucune entrée fictive n’est ajoutée.</p></div>}
+      {remoteAccount.state==="AUTHENTICATED"&&remoteHistory.state==="READY"&&remoteHistory.items.length>0&&<div className="data-list">{remoteHistory.items.map(item=><div key={item.id}><strong>{item.entityKind} · {item.action}</strong><span>r{item.revision} · {new Date(item.occurredAt).toLocaleString()}</span></div>)}</div>}
+      <button className="quiet" disabled>Exporter — fonction réelle non connectée</button></section>,
   };
   return <main id="main-content" tabIndex="-1" className="page-section account-center"><span className="kicker">Paramètres</span><h1>Compte & préférences</h1><p className="page-intro">Contrôlez session, confidentialité, notifications et données locales sans transformer une capacité absente en promesse.</p><div className="account-shell"><nav className="account-nav" aria-label="Sections du compte">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>{panel[tab]}</div></main>;
 }

@@ -112,6 +112,18 @@ async function clickSelector(selector) {
   if (!ok) throw new Error("selector not found: " + selector);
   await sleep(250);
 }
+function expectedTextExpression(expectedText){
+  const values=(Array.isArray(expectedText)?expectedText:[expectedText])
+    .filter(Boolean)
+    .map(value=>String(value).toLocaleLowerCase("fr"));
+  if(values.length===0) return "true";
+  return values.map(value=>`document.body.innerText.toLocaleLowerCase("fr").includes(${JSON.stringify(value)})`).join(" || ");
+}
+
+function expectedTextLabel(expectedText){
+  return Array.isArray(expectedText)?expectedText.join(" OR "):String(expectedText||"");
+}
+
 async function capture(file, width, height, expectedText) {
   // Route changes use smooth scrolling in the prototype. Normalize origin captures
   // to the real top of the page so stale scroll offsets do not create blank bands.
@@ -120,14 +132,14 @@ async function capture(file, width, height, expectedText) {
   let textOk = !expectedText;
   if (expectedText) {
     for (let i = 0; i < 30; i++) {
-      textOk = await evaluate(`document.body.innerText.toLocaleLowerCase("fr").includes(${JSON.stringify(expectedText.toLocaleLowerCase("fr"))})`);
+      textOk = await evaluate(expectedTextExpression(expectedText));
       if (textOk) break;
       await sleep(100);
     }
   }
   if (!textOk) {
     const visibleText = await evaluate("document.body.innerText.slice(0,1200)");
-    throw new Error("expected text missing before capture: " + expectedText + "\\nVISIBLE_TEXT:\\n" + visibleText);
+    throw new Error("expected text missing before capture: " + expectedTextLabel(expectedText) + "\\nVISIBLE_TEXT:\\n" + visibleText);
   }
   const shot = await send("Page.captureScreenshot", {
     format: "png",
@@ -156,7 +168,7 @@ async function captureCurrentViewport(file, width, height, expectedText) {
       await sleep(100);
     }
   }
-  if (!textOk) throw new Error("expected text missing before viewport capture: " + expectedText);
+  if (!textOk) throw new Error("expected text missing before viewport capture: " + expectedTextLabel(expectedText));
   const metrics = await send("Page.getLayoutMetrics");
   const viewport = metrics.result.visualViewport || {};
   const shot = await send("Page.captureScreenshot", {
@@ -319,7 +331,7 @@ try {
     ["Confidentialité","desktop-account-privacy.png","Privé par défaut"],
     ["Apparence","desktop-account-appearance.png","Préférences locales"],
     ["Accessibilité","desktop-account-accessibility.png","Accessible sans réglage spécial"],
-    ["Données locales","desktop-account-local-data.png","Ce navigateur"],
+    ["Données locales","desktop-account-local-data.png",["Ce navigateur","Local + historique serveur"]],
   ]) {
     await clickByText(".account-nav button", tabName);
     manifest.captures.push(await capture(file, 1440, 1024, expected));
@@ -559,7 +571,7 @@ try {
     ["Confidentialité","mobile-account-privacy.png","Privé par défaut"],
     ["Apparence","mobile-account-appearance.png","Préférences locales"],
     ["Accessibilité","mobile-account-accessibility.png","Accessible sans réglage spécial"],
-    ["Données locales","mobile-account-local-data.png","Ce navigateur"],
+    ["Données locales","mobile-account-local-data.png",["Ce navigateur","Local + historique serveur"]],
   ]) {
     await clickByText(".account-nav button", tabName);
     manifest.captures.push(await capture(file, 390, 844, expected));
