@@ -21,24 +21,29 @@ console.log("PERF_BUNDLE_JS_GZIP",jsGzip);
 console.log("PERF_BUNDLE_CSS_GZIP",cssGzip);
 
 async function runScenario(name,s){
+  const port=23000+(process.pid%1000)+(name==="mobile"?1000:0);
   const userDataDir=fs.mkdtempSync("/tmp/modaryx-perf-"+name+"-");
   const proc=spawn(chrome,[
     "--headless=new","--no-sandbox","--disable-gpu","--disable-dev-shm-usage",
-    "--remote-debugging-port=0","--user-data-dir="+userDataDir,"about:blank"
-  ],{stdio:"ignore"});
-  let port=0,ws,nextId=1;const pending=new Map();
-  for(let i=0;i<200;i++){
-    const marker=userDataDir+"/DevToolsActivePort";
-    if(fs.existsSync(marker)){
-      const first=fs.readFileSync(marker,"utf8").split(/\r?\n/)[0];
-      port=Number(first);
-      if(Number.isInteger(port)&&port>0) break;
+    "--remote-debugging-address=127.0.0.1","--remote-debugging-port="+port,
+    "--user-data-dir="+userDataDir,"about:blank"
+  ],{stdio:["ignore","ignore","pipe"]});
+  let chromeStderr="";
+  proc.stderr?.on("data",chunk=>{chromeStderr=(chromeStderr+String(chunk)).slice(-6000);});
+  let ws,nextId=1;const pending=new Map();
+  const wait=async path=>{
+    let last;
+    for(let i=0;i<240;i++){
+      if(proc.exitCode!==null) throw new Error("Chrome exited before CDP: "+proc.exitCode+"\n"+chromeStderr);
+      try{
+        const r=await fetch("http://127.0.0.1:"+port+path);
+        if(r.ok) return await r.json();
+        last=new Error("HTTP "+r.status);
+      }catch(e){last=e}
+      await sleep(100);
     }
-    if(proc.exitCode!==null) throw new Error("Chrome exited before DevToolsActivePort: "+proc.exitCode);
-    await sleep(100);
-  }
-  if(!port) throw new Error("DevToolsActivePort unavailable");
-  const wait=async path=>{let last;for(let i=0;i<120;i++){try{const r=await fetch("http://127.0.0.1:"+port+path);if(r.ok)return await r.json();last=new Error("HTTP "+r.status)}catch(e){last=e}await sleep(100)}throw last||new Error("CDP unavailable")};
+    throw new Error("CDP unavailable on "+port+": "+String(last||"unknown")+"\n"+chromeStderr);
+  };
   const send=(method,params={})=>{const id=nextId++;ws.send(JSON.stringify({id,method,params}));return new Promise((resolve,reject)=>pending.set(id,{resolve,reject}))};
   const evaluate=async expression=>{const r=await send("Runtime.evaluate",{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw new Error(r.exceptionDetails.text||"eval failed");return r.result?.result?.value};
   try{
