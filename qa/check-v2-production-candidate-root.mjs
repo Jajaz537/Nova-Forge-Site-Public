@@ -19,7 +19,7 @@ const app=fs.readFileSync("v2/src/App.jsx","utf8");
 if(app.includes("CanonNarrativeLayer")||app.includes("living-threshold-dragon-baby")||app.includes("living-threshold-wolf-baby")) throw new Error("rejected narrative companion returned");
 for(const p of ["v2/public/assets/living-threshold-dragon-baby.png","v2/public/assets/living-threshold-wolf-baby.png"]) if(fs.existsSync(p)) throw new Error("unused narrative companion asset leaked into production root");
 const sw=fs.readFileSync("v2/public/sw-v2.js","utf8");
-if(/self\\.clients\\.claim\\s*\\(/.test(sw)) throw new Error("clients.claim forbidden before cutover");
+if(/self\.clients\.claim\s*\(/.test(sw)) throw new Error("clients.claim forbidden before cutover");
 if(!sw.includes("modaryx-v2-preview-shell-v1")) throw new Error("controlled V2 cache missing");
 if(!sw.includes('new Set(["modaryx-site-v120-scalable"])')) throw new Error("explicit legacy cache allowlist missing");
 const migration=fs.readFileSync("v2/src/storage-migration.js","utf8");
