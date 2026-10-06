@@ -76,5 +76,31 @@ jobs:
           if(target.protocol!=="https:") throw new Error("login redirect must use https");
           console.log("LIVE_PREVIEW_LOGIN_REDIRECT","HTTPS_EXTERNAL");
 
+          const expectJson=async(path,expectedStatus,expectedError,options={})=>{
+            const response=await fetch(origin+path,{redirect:"manual",...options,headers:{accept:"application/json",...(options.headers||{})}});
+            const type=response.headers.get("content-type")||"";
+            let body=null;
+            if(/application\/json/i.test(type)) body=await response.json();
+            if(response.status!==expectedStatus) throw new Error(path+" expected HTTP "+expectedStatus+", got "+response.status);
+            if(expectedError && body?.error!==expectedError) throw new Error(path+" expected error "+expectedError+", got "+String(body?.error));
+            console.log("LIVE_PREVIEW_DENY",path,response.status,body?.error||"NO_ERROR");
+          };
+
+          await expectJson("/api/v1/profile",401,"authentication-required");
+          await expectJson("/api/v1/moderation/queue?limit=1",401,"authentication-required");
+          await expectJson("/api/v1/moderation/appeals?limit=1",401,"authentication-required");
+
+          await expectJson("/api/v1/profile",403,"origin-required",{
+            method:"PUT",
+            headers:{"content-type":"application/json"},
+            body:"{}"
+          });
+          await expectJson("/api/v1/profile",401,"authentication-required",{
+            method:"PUT",
+            headers:{"content-type":"application/json","origin":origin},
+            body:"{}"
+          });
+
+          console.log("PASS_V2_LIVE_PREVIEW_BACKEND_ALLOW_DENY");
           console.log("PASS_V2_LIVE_PREVIEW_BACKEND_PROOF");
           NODE
