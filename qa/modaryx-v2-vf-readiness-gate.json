@@ -130,7 +130,9 @@
     },
     {
       "id": "official-contact-discovery",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-RIGHTS-EVIDENCE-PREFLIGHT-20261006.md",
+      "note": "Official-source evidence ingestion is implemented locally; real publisher contact discovery/verification has not been executed."
     },
     {
       "id": "publisher-outbound",
@@ -138,15 +140,21 @@
     },
     {
       "id": "publisher-response-parsing",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-RIGHTS-EVIDENCE-PREFLIGHT-20261006.md",
+      "note": "Fail-closed response evidence interpretation is implemented locally; no real inbound publisher response has been ingested."
     },
     {
       "id": "license-validation",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-RIGHTS-EVIDENCE-PREFLIGHT-20261006.md",
+      "note": "License preflight is implemented locally and never authorizes; final verified authorizing decision remains OPEN."
     },
     {
       "id": "legal-review-where-required",
-      "state": "OPEN"
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-RIGHTS-EVIDENCE-PREFLIGHT-20261006.md",
+      "note": "The preflight requires an external legal-review record where applicable; no legal review is simulated."
     }
   ],
   "currentlyProven": [

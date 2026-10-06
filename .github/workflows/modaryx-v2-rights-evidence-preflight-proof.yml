@@ -1,0 +1,49 @@
+name: MODARYX V2 Rights Evidence Preflight Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-rights-evidence-preflight-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-rights-evidence-preflight-proof.yml'
+      - 'migrations/0010_modaryx_v2_rights_evidence.sql'
+      - 'functions/_lib/rights-evidence.mjs'
+      - 'functions/api/v1/rights/contact-evidence.js'
+      - 'functions/api/v1/rights/response-evidence.js'
+      - 'functions/api/v1/rights/license-preflight.js'
+      - 'qa/modaryx-v2-rights-evidence-preflight-contract.json'
+      - 'qa/check-v2-rights-evidence-preflight.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+      - 'qa/modaryx-v2-vf-readiness-gate.json'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-rights-evidence-preflight-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove rights evidence preflight without publisher contact or grant
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate rights evidence preflight
+        run: |
+          set -euo pipefail
+          node --experimental-sqlite qa/check-v2-rights-evidence-preflight.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+          node qa/check-v2-vf-readiness-gate.mjs
+          echo PASS_V2_RIGHTS_EVIDENCE_PREFLIGHT_PROOF
+      - name: Mirror Cloudflare root build
+        run: npm run build
