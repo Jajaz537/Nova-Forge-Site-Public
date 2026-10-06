@@ -14,7 +14,7 @@ permissions:
 jobs:
   collect:
     runs-on: ubuntu-24.04
-    timeout-minutes: 22
+    timeout-minutes: 32
     env:
       EVIDENCE_URL: "https://38b9ed09.nova-forge-site-public.pages.dev/api/p6/evidence"
     steps:
@@ -24,7 +24,7 @@ jobs:
           set -euo pipefail
           mkdir -p evidence
           ready=false
-          for i in $(seq 1 220); do
+          for i in $(seq 1 360); do
             body="$(mktemp)"
             code="$(curl -sS -o "$body" -w '%{http_code}' --max-time 10 "$EVIDENCE_URL" || true)"
             if [ "$code" = "200" ] && [ "$(jq -r '.ready == true' "$body" 2>/dev/null || echo false)" = "true" ]; then
@@ -100,3 +100,4 @@ jobs:
 # replay-trigger: final-founder-login-window-20261006-1318
 # replay-trigger: fresh-founder-receipt-window-sync-20261006-b
 # replay-trigger: p6-founder-receipt-recheck-20261006
+# replay-trigger: fresh-founder-receipt-window-20261006-1422
