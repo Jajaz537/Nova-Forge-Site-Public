@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "FIELD_COLLECTION_CANDIDATE_DISABLED_BY_DEFAULT",
+  "migration": "migrations/0014_modaryx_v2_cwv_rum.sql",
+  "endpoint": "/api/v1/rum/cwv",
+  "client": "v2/src/cwv-rum.js",
+  "defaultClientEnabled": false,
+  "serverEnableFlag": "MODARYX_CWV_RUM_ENABLED=1",
+  "requiredMetrics": [
+    "LCP",
+    "INP",
+    "CLS"
+  ],
+  "fieldEvidenceState": "OPEN_TRAFFIC_AND_P75_REQUIRED",
+  "productionBlocker": "core-web-vitals-production",
+  "privacy": {
+    "accountIdentity": false,
+    "ipStored": false,
+    "userAgent": false,
+    "rawUrl": false,
+    "queryString": false,
+    "referrer": false,
+    "pageViewId": "RANDOM_EPHEMERAL_128_BIT",
+    "respectsDnt": true,
+    "respectsGlobalPrivacyControl": true
+  },
+  "invariants": [
+    "CLIENT_DISABLED_BY_DEFAULT",
+    "SERVER_DISABLED_BY_DEFAULT",
+    "DOUBLE_GATE_REQUIRED",
+    "SAME_ORIGIN_POST_ONLY",
+    "NO_ACCOUNT_IDENTITY",
+    "NO_IP_STORAGE",
+    "NO_USER_AGENT_STORAGE",
+    "NO_RAW_URL_QUERY_REFERRER",
+    "DNT_AND_GPC_OPT_OUT",
+    "FIELD_P75_NEVER_CLAIMED_FROM_SYNTHETIC_OR_LOCAL_PROOF",
+    "REMOTE_D1_MIGRATION_NOT_EXECUTED",
+    "RETENTION_POLICY_REQUIRED_BEFORE_PRODUCTION_ENABLEMENT",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER"
+  ]
+}
