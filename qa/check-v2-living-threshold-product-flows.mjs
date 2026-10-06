@@ -5,13 +5,18 @@ const chrome=process.env.CHROME_BIN;
 const origin=process.env.MODARYX_REVIEW_ORIGIN || "http://127.0.0.1:4174";
 if(!chrome) throw new Error("CHROME_BIN missing");
 
-const port=9225;
+const port=12000+(process.pid%20000);
 const proc=spawn(chrome,[
-  "--headless=new","--no-sandbox","--disable-gpu","--hide-scrollbars",
-  "--remote-debugging-port="+port,
+  "--headless=new","--no-sandbox","--disable-gpu","--disable-dev-shm-usage","--hide-scrollbars","--no-first-run","--no-default-browser-check",
+  "--remote-debugging-address=127.0.0.1","--remote-debugging-port="+port,
   "--user-data-dir=/tmp/modaryx-v2-cdp-product-flows-"+process.pid,
   "about:blank"
-],{stdio:"ignore"});
+],{stdio:["ignore","ignore","pipe"]});
+
+let chromeStderr="";
+let chromeExit=null;
+proc.stderr?.on("data",chunk=>{chromeStderr=(chromeStderr+String(chunk)).slice(-6000);});
+proc.once("exit",(code,signal)=>{chromeExit={code,signal};});
 
 let ws; let nextId=1;
 const pending=new Map();
@@ -22,12 +27,15 @@ function send(method,params={}) {
 }
 async function waitJson(path){
   let last;
-  for(let i=0;i<200;i++){
+  for(let i=0;i<240;i++){
+    if(chromeExit){
+      throw new Error("Chrome exited before CDP: "+JSON.stringify(chromeExit)+"\n"+chromeStderr);
+    }
     try{const r=await fetch(`http://127.0.0.1:${port}${path}`);if(r.ok)return await r.json();last=new Error("HTTP "+r.status);}
     catch(e){last=e;}
     await sleep(100);
   }
-  throw last||new Error("CDP unavailable");
+  throw new Error("CDP unavailable on "+port+": "+String(last||"unknown")+"\n"+chromeStderr);
 }
 async function evaluate(expression){
   const r=await send("Runtime.evaluate",{expression,returnByValue:true,awaitPromise:true});
