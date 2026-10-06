@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-06",
   "status": "BLOCKED",
-  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1519.md",
+  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1535.md",
   "rule": "NO_VF_OR_HIGH_FI_FINAL_WHILE_REQUIRED_BLOCKER_OPEN",
   "externalHuman": [
     {
@@ -228,7 +228,10 @@
     "v2-production-readiness-read-only-preflight-proven",
     "v2-cwv-rum-private-disabled-candidate-proven",
     "v2-cwv-p75-read-only-report-candidate-proven",
-    "v2-cwv-retention-disabled-by-default-candidate-proven"
+    "v2-cwv-retention-disabled-by-default-candidate-proven",
+    "v2-d1-migration-execution-manifest-proven",
+    "v2-production-activation-manifest-non-mutating-proven",
+    "v2-vf-closure-ledger-19-open-proven"
   ],
   "invariants": [
     "PUBLIC_GREEN_NEVER_IMPLIES_PRODUCTION_VF",
@@ -244,7 +247,8 @@
     "DEV_PREVIEW_BACKEND_PROOF_NEVER_EQUALS_PRODUCTION_BACKEND_PASS",
     "OFFICIAL_SEPARATION_MODARYX_WEB_NOVA_FORGE_SOFTWARE_OS",
     "DESKTOP_RUNTIME_NEVER_BLOCKS_MODARYX_WEB_SITE_VF",
-    "HISTORICAL_DESKTOP_HANDOFF_DOCS_DO_NOT_CHANGE_PRODUCT_IDENTITY"
+    "HISTORICAL_DESKTOP_HANDOFF_DOCS_DO_NOT_CHANGE_PRODUCT_IDENTITY",
+    "CLOSURE_LEDGER_MUST_EQUAL_CURRENT_OPEN_GATE_SET"
   ],
   "scope": "MODARYX_WEB_SITE_VF_ONLY"
 }
