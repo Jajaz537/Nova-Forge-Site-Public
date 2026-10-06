@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "PREPARED_READ_ONLY_NOT_EXECUTED_AGAINST_PRODUCTION",
+  "probe": "qa/check-v2-production-evidence-origin.mjs",
+  "requiredInputs": [
+    "origin",
+    "mode"
+  ],
+  "modes": [
+    "PRE_CUTOVER",
+    "POST_CUTOVER"
+  ],
+  "allowedMethods": [
+    "GET",
+    "HEAD"
+  ],
+  "forbiddenMethods": [
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE"
+  ],
+  "endpoints": [
+    "/",
+    "/api/v1/status",
+    "/api/v1/auth/session",
+    "/api/v1/providers/status",
+    "/api/v1/notifications/delivery/readiness",
+    "/api/v1/history"
+  ],
+  "fieldCwv": {
+    "measuredByProbe": false,
+    "state": "EXTERNAL_EVIDENCE_REQUIRED",
+    "requiredMetrics": [
+      "LCP_P75",
+      "INP_P75",
+      "CLS_P75"
+    ]
+  },
+  "invariants": [
+    "READ_ONLY_HTTP_ONLY",
+    "HTTPS_ORIGIN_REQUIRED",
+    "NO_CREDENTIALS_IN_URL",
+    "NO_MUTATING_METHODS",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER",
+    "NO_FIELD_CWV_CLAIM_FROM_SYNTHETIC_PROBE",
+    "NO_PRODUCTION_PASS_FROM_PRE_CUTOVER_PROBE",
+    "NO_AUTHENTICATED_SESSION_REQUIRED",
+    "NO_SECRET_VALUES_LOGGED"
+  ]
+}
