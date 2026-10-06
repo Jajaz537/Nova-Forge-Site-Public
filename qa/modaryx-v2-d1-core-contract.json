@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "CREATED_NOT_APPLIED",
+  "migration": "migrations/0004_modaryx_v2_core_model.sql",
+  "prerequisiteMigrations": [
+    "migrations/0001_modaryx_dev_foundation.sql",
+    "migrations/0002_modaryx_auth_sessions.sql",
+    "migrations/0003_modaryx_moderation_publication.sql"
+  ],
+  "remoteApplication": "NOT_EXECUTED",
+  "tables": [
+    "modaryx_v2_games",
+    "modaryx_v2_content_types",
+    "modaryx_v2_creators",
+    "modaryx_v2_teams",
+    "modaryx_v2_content_items",
+    "modaryx_v2_releases",
+    "modaryx_v2_dependencies",
+    "modaryx_v2_compatibility_claims",
+    "modaryx_v2_file_artifacts",
+    "modaryx_v2_collections",
+    "modaryx_v2_collection_items",
+    "modaryx_v2_modpacks",
+    "modaryx_v2_game_profiles",
+    "modaryx_v2_search_documents"
+  ],
+  "constraints": [
+    "NO_V1_TABLE_DROP_OR_RENAME",
+    "WITHDRAWN_REVOKED_ARCHIVED_NOT_DOWNLOADABLE",
+    "MEASURED_COMPATIBILITY_REQUIRES_RECEIPT",
+    "VERIFIED_PROVENANCE_REQUIRES_RECEIPT",
+    "SHARED_GAME_PROFILE_REQUIRES_CONSENT_RECEIPT",
+    "DEPENDENCY_RELATIONS_UNIQUE",
+    "COLLECTION_ORDER_UNIQUE",
+    "SEARCH_IDENTITY_PRIMARY_KEY_ENTITY_TYPE_PLUS_ID"
+  ],
+  "invariants": [
+    "NO_REMOTE_D1_APPLY",
+    "NO_PRODUCTION_DATA_SEED",
+    "NO_FIXTURE_TO_CATALOGUE_PROMOTION",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER",
+    "REAL_DATA_HISTORY_BLOCKER_REMAINS_OPEN_UNTIL_REMOTE_DATA_PIPELINE_PROVEN"
+  ]
+}
