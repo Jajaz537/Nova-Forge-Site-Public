@@ -133,3 +133,4 @@ jobs:
           path: evidence
           if-no-files-found: warn
           retention-days: 30
+# replay-trigger: p6-synchronized-preview-after-env-20261006-a
