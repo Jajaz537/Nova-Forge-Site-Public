@@ -5,14 +5,14 @@
 
 ## Base IA vérifiée
 
-- Modaryx — IA Foundation **v0.144**
-- SHA-256 : `799607c09f20ecade4c50cd78b96d5d67856ca789b7551a9fd8634aa6ae5f2d2`
-- 399/399 tests PASS
+- Modaryx — IA Foundation **v0.145**
+- SHA-256 : `33f585a9b73cbed046159709d3683edcdae14c2e1d87e158a54eb803035b29aa`
+- 400/400 tests PASS
 - 12/12 evals PASS
 - RC rehearsal PASS
 - migration-scale PASS
 - archive reproductible + extraction neuve PASS
-- runtime Windows durci : Python >= 3.11 résolu dynamiquement ; P2 est désormais fermé à 10/10 après qualification formelle Qwen3 4B sur SD/GTX 1070 et évaluation indépendante du bundle cible. PresentMon est préparé mais la capture jeu réelle reste à faire. STT, TTS et vision sont PASS sur le PC cible ; P8 est fermé après assessment indépendant du bundle scellé. Les preuves public denial et absence de secret navigateur sont PASS ; la preuve Founder privée de bout en bout reste requise.
+- runtime Windows durci : Python >= 3.11 résolu dynamiquement ; P2 est désormais fermé à 10/10 après qualification formelle Qwen3 4B sur SD/GTX 1070 et évaluation indépendante du bundle cible. Deux campagnes PresentMon réelles sur Pax Dei ont été capturées ; elles ne valent pas encore crédit P1 car les shaders étaient encore actifs et le harnais v0.144 avait un défaut de passage JSON. Foundation v0.145 corrige ce harnais et est installée byte-exacte sur SD ; le retry stable post-shaders reste requis. STT, TTS et vision sont PASS sur le PC cible ; P8 est fermé après assessment indépendant du bundle scellé. Les preuves public denial et absence de secret navigateur sont PASS ; la preuve Founder privée de bout en bout reste requise.
 - progression VF IA validée à **86 %**
 
 ## Intégration site ajoutée
