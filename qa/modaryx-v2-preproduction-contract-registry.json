@@ -446,6 +446,12 @@
       "contract": "qa/modaryx-v2-rights-evidence-preflight-contract.json",
       "checker": "qa/check-v2-authorizing-decision.mjs",
       "source": "docs/MODARYX-V2-AUTHORIZING-RIGHTS-DECISION-20261006.md"
+    },
+    {
+      "id": "site-vf-official-scope",
+      "contract": "qa/modaryx-v2-vf-readiness-gate.json",
+      "checker": "qa/check-v2-vf-readiness-gate.mjs",
+      "source": "docs/MODARYX-V2-SITE-VF-SCOPE-CLASSIFICATION-20261006.md"
     }
   ],
   "invariants": [
