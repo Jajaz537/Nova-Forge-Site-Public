@@ -35,7 +35,12 @@ for(const invariant of [
   "BOUNCE_NEVER_TRIGGERS_GUESSED_CONTACT",
   "RETRY_PRESERVES_LOGICAL_REQUEST_ID",
   "FOLLOW_UP_IS_NOT_TECHNICAL_RETRY",
-  "WEB_AND_FORGE_SCOPES_REMAIN_SEPARATE"
+  "WEB_AND_FORGE_SCOPES_REMAIN_SEPARATE",
+  "NO_RAW_CONTACT_ADDRESS_STORED_BY_OUTBOUND_PREPARATION",
+  "REQUEST_PREPARATION_NEVER_PERFORMS_NETWORK_SEND",
+  "PROVIDER_MISSING_BLOCKS_QUEUE",
+  "REMOTE_D1_NOT_APPLIED",
+  "PUBLISHER_OUTBOUND_PRODUCTION_BLOCKER_REMAINS_OPEN"
 ]){
   if(!(data.invariants||[]).includes(invariant)) throw new Error("missing invariant: "+invariant);
 }
@@ -44,9 +49,11 @@ if((data.retryableOnlyStates||[]).length!==1||data.retryableOnlyStates[0]!=="FAI
   throw new Error("retryable state set must remain explicit and bounded");
 }
 
-for(const [key,value] of Object.entries(data.productionStatus||{})){
-  if(value!=="NOT_IMPLEMENTED") throw new Error("production status must remain honest before implementation: "+key);
+if(data.productionStatus?.requestPreparation!=="CANDIDATE_LOCAL_PROOF") throw new Error("request preparation candidate status drift");
+for(const key of ["queue","providerAdapter","senderIdentity","transportWebhook","bounceHandling","replyCorrelation"]){
+  if(data.productionStatus?.[key]!=="NOT_IMPLEMENTED") throw new Error("production status must remain honest: "+key);
 }
+if(data.remoteApplication!=="NOT_EXECUTED") throw new Error("remote application must remain NOT_EXECUTED");
 
 console.log("PUBLISHER_OUTBOUND_STATE_COUNT",data.states.length);
 console.log("PUBLISHER_OUTBOUND_ENQUEUE_GUARD_COUNT",data.enqueueRequires.length);

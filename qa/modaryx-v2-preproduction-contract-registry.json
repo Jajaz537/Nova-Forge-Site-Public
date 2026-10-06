@@ -428,6 +428,12 @@
       "contract": "qa/modaryx-v2-rights-evidence-preflight-contract.json",
       "checker": "qa/check-v2-rights-evidence-preflight.mjs",
       "source": "docs/MODARYX-V2-RIGHTS-EVIDENCE-PREFLIGHT-20261006.md"
+    },
+    {
+      "id": "publisher-outbound-preparation-candidate",
+      "contract": "qa/modaryx-v2-publisher-outbound-contract.json",
+      "checker": "qa/check-v2-publisher-outbound-preparation.mjs",
+      "source": "docs/MODARYX-V2-PUBLISHER-OUTBOUND-PREPARATION-20261006.md"
     }
   ],
   "invariants": [
