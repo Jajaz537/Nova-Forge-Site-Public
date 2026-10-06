@@ -1,0 +1,99 @@
+name: MODARYX IA P6 current preview public proof
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-current-public-proof.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      SITE_ORIGIN: "https://38b9ed09.nova-forge-site-public.pages.dev"
+    steps:
+      - name: Prove public denial and browser secret absence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/assets
+
+          status_code="$(curl -sS -o evidence/status-body.txt -w '%{http_code}' --max-time 20 "$SITE_ORIGIN/api/founder/ai/status")"
+          chat_code="$(curl -sS -o evidence/chat-body.txt -w '%{http_code}' --max-time 20 -X POST -H 'Content-Type: application/json' --data '{"conversation_id":"public-proof","message":"hello"}' "$SITE_ORIGIN/api/founder/ai/chat")"
+
+          test "$status_code" = "404"
+          test "$chat_code" = "404"
+
+          curl -fsSL --max-time 30 "$SITE_ORIGIN/" -o evidence/index.html
+          python3 - <<'PY'
+          from pathlib import Path
+          from urllib.parse import urljoin
+          import re, urllib.request, json, hashlib, os
+
+          origin=os.environ["SITE_ORIGIN"]
+          html=Path("evidence/index.html").read_text("utf-8",errors="replace")
+          urls=[]
+          for attr in ("src","href"):
+              for m in re.finditer(rf'{attr}=["\']([^"\']+)["\']', html, re.I):
+                  u=m.group(1)
+                  if u.endswith((".js",".mjs",".css")):
+                      urls.append(urljoin(origin+"/",u))
+          urls=sorted(set(urls))
+          rows=[]
+          corpus=html
+          for i,u in enumerate(urls):
+              try:
+                  data=urllib.request.urlopen(u,timeout=30).read()
+              except Exception:
+                  continue
+              p=Path("evidence/assets")/f"{i:03d}-{Path(u).name or 'asset'}"
+              p.write_bytes(data)
+              text=data.decode("utf-8",errors="replace")
+              corpus+="\n"+text
+              rows.append({"url":u,"sha256":hashlib.sha256(data).hexdigest(),"bytes":len(data)})
+          forbidden=[
+              "MODARYX_AI_BRIDGE_KEY_HEX",
+              "x-modaryx-signature",
+              "x-modaryx-body-sha256",
+              "x-modaryx-nonce",
+          ]
+          hits={x:(x.lower() in corpus.lower()) for x in forbidden}
+          if any(hits.values()):
+              raise SystemExit("browser secret/signature material found: "+json.dumps(hits))
+          Path("evidence/browser-assets.json").write_text(json.dumps({"assets":rows,"forbidden_hits":hits},indent=2),encoding="utf-8")
+          PY
+
+          python3 - <<'PY'
+          import json, os, pathlib, datetime
+          data={
+            "schema":"modaryx-p6-current-preview-public-proof-v1",
+            "created_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "site_origin":os.environ["SITE_ORIGIN"],
+            "public_status_endpoint_http":404,
+            "public_chat_endpoint_http":404,
+            "public_denial":"PASS",
+            "browser_secret_absence":"PASS",
+            "founder_session":"NOT_RUN",
+            "private_status":"NOT_RUN",
+            "signed_chat":"NOT_RUN",
+            "overall":"INCOMPLETE",
+            "awards_vf_points":False,
+          }
+          pathlib.Path("evidence/public-proof.json").write_text(json.dumps(data,indent=2),encoding="utf-8")
+          print(json.dumps(data))
+          PY
+          echo "MODARYX_P6_CURRENT_PUBLIC_PROOF_PASS"
+
+      - name: Upload current public proof
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-current-public-proof
+          path: evidence
+          if-no-files-found: error
+          retention-days: 30

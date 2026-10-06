@@ -1,0 +1,189 @@
+name: MODARYX IA P6 configure Quick Tunnel preview
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-configure-quick-preview.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  configure:
+    if: ${{ false }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      ZONE_NAME: modaryxmods.com
+      PROJECT_NAME: nova-forge-site-public
+      SD_PUBLIC_KEY_FINGERPRINT: 82375c4a6ce12165dd7c2319848e8bffc2cc53caf983b09d0af9c6df8947f20f
+    steps:
+      - name: Checkout exact preview branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Configure preview bridge and create encrypted SD envelope
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -p evidence
+
+          quick_url=""
+          if [ -f qa/p6-quick-url.txt ]; then
+            quick_url="$(tr -d '\r\n ' < qa/p6-quick-url.txt)"
+          fi
+          if [ -z "$quick_url" ]; then
+            comment_body="$(curl -fsS 'https://api.github.com/repos/Jajaz537/Nova-Forge-Site-Public/issues/comments/6013122024' | jq -r '.body // ""')"
+            quick_url="$(printf '%s\n' "$comment_body" | grep -Eo 'https://[A-Za-z0-9-]+[.]trycloudflare[.]com' | tail -n 1 || true)"
+          fi
+          if [ -z "$quick_url" ]; then
+            jq -n '{schema:"modaryx-p6-quick-preview-config-v1",status:"NOT_RUN",reason:"quick_url_comment_missing",external_changes_made:false,awards_vf_points:false}' > evidence/config.json
+            echo "MODARYX_P6_QUICK_PREVIEW_NOT_RUN quick_url_comment_missing"
+            exit 0
+          fi
+          if ! [[ "$quick_url" =~ ^https://[a-zA-Z0-9-]+[.]trycloudflare[.]com$ ]]; then
+            echo "Invalid Quick Tunnel URL from PR comment" >&2
+            exit 2
+          fi
+
+          pub="qa/p6-sd-public.pem"
+          test -f "$pub"
+          openssl pkey -pubin -in "$pub" -outform DER -out evidence/p6-public.der
+          pub_fp="$(sha256sum evidence/p6-public.der | awk '{print $1}')"
+          rm -f evidence/p6-public.der
+          test "$pub_fp" = "$SD_PUBLIC_KEY_FINGERPRINT"
+
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=${ZONE_NAME}" "${api}/zones")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+
+          bridge_key="$(openssl rand -hex 32)"
+          test "$(printf '%s' "$bridge_key" | wc -c)" -eq 64
+
+          payload="$(jq -n \
+            --arg bridge_url "$quick_url" \
+            --arg bridge_key "$bridge_key" \
+            '{
+              deployment_configs:{
+                preview:{
+                  env_vars:{
+                    MODARYX_AI_BRIDGE_URL:{type:"plain_text",value:$bridge_url},
+                    MODARYX_AI_BRIDGE_KEY_HEX:{type:"secret_text",value:$bridge_key},
+                    MODARYX_P6_EVIDENCE_MODE:{type:"plain_text",value:"enabled"}
+                  }
+                }
+              }
+            }')"
+          update="$(curl -fsS "${auth[@]}" --request PATCH --data "$payload" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$update")" = "true"
+
+          after="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+          test "$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_AI_BRIDGE_URL")' <<<"$after")" = "true"
+          test "$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_AI_BRIDGE_KEY_HEX")' <<<"$after")" = "true"
+          test "$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_P6_EVIDENCE_MODE")' <<<"$after")" = "true"
+
+          deployments="$(curl -fsS "${auth[@]}" --get --data-urlencode "env=preview" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}/deployments")"
+          source_deployment="$(jq -c --arg b "$GITHUB_REF_NAME" '[.result[] | select(((.deployment_trigger.metadata.branch // "") == $b) and ((.latest_stage.status // "") == "success"))] | sort_by(.created_on) | reverse | .[0] // null' <<<"$deployments")"
+          test "$(jq -r '. != null' <<<"$source_deployment")" = "true"
+          source_id="$(jq -r '.id' <<<"$source_deployment")"
+
+          retried="$(curl -fsS "${auth[@]}" --request POST "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}/deployments/${source_id}/retry")"
+          test "$(jq -r '.success' <<<"$retried")" = "true"
+          retry_id="$(jq -r '.result.id // ""' <<<"$retried")"
+          test -n "$retry_id"
+
+          retry_url=""
+          retry_success=false
+          retry_uses_functions=false
+          for i in $(seq 1 90); do
+            sleep 4
+            dep="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}/deployments/${retry_id}")"
+            test "$(jq -r '.success' <<<"$dep")" = "true"
+            retry_status="$(jq -r '.result.latest_stage.status // ""' <<<"$dep")"
+            retry_url="$(jq -r '.result.url // ""' <<<"$dep")"
+            retry_uses_functions="$(jq -r '.result.uses_functions // false' <<<"$dep")"
+            if [ "$retry_status" = "success" ]; then retry_success=true; break; fi
+            if [ "$retry_status" = "failure" ]; then break; fi
+          done
+          test "$retry_success" = "true"
+
+          plain="$(mktemp)"
+          pass_file="$(mktemp)"
+          trap 'rm -f "$plain" "$pass_file"' EXIT
+
+          jq -n \
+            --arg schema "modaryx-p6-quick-sd-envelope-v1" \
+            --arg bridge_url "$quick_url" \
+            --arg bridge_key "$bridge_key" \
+            --arg created_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{schema:$schema,created_at:$created_at,bridge_url:$bridge_url,bridge_key_hex:$bridge_key}' > "$plain"
+
+          openssl rand -hex 32 > "$pass_file"
+          openssl enc -aes-256-cbc -salt -pbkdf2 -iter 200000 \
+            -in "$plain" -out evidence/p6-quick-envelope.bin -pass "file:${pass_file}"
+          openssl pkeyutl -encrypt \
+            -pubin -inkey "$pub" -in "$pass_file" -out evidence/p6-quick-envelope-key.bin \
+            -pkeyopt rsa_padding_mode:oaep \
+            -pkeyopt rsa_oaep_md:sha256 \
+            -pkeyopt rsa_mgf1_md:sha256
+
+          base64 -w 0 evidence/p6-quick-envelope.bin > evidence/p6-quick-envelope.b64
+          base64 -w 0 evidence/p6-quick-envelope-key.bin > evidence/p6-quick-envelope-key.b64
+          envelope_sha="$(sha256sum evidence/p6-quick-envelope.bin | awk '{print $1}')"
+          key_sha="$(sha256sum evidence/p6-quick-envelope-key.bin | awk '{print $1}')"
+          rm -f "$plain" "$pass_file"
+          trap - EXIT
+          unset bridge_key payload
+
+          jq -n \
+            --arg schema "modaryx-p6-quick-preview-config-v1" \
+            --arg bridge_url "$quick_url" \
+            --arg public_key_fingerprint "$SD_PUBLIC_KEY_FINGERPRINT" \
+            --arg envelope_sha256 "$envelope_sha" \
+            --arg envelope_key_sha256 "$key_sha" \
+            --arg retry_deployment_id "$retry_id" \
+            --arg retry_deployment_url "$retry_url" \
+            --argjson retry_uses_functions "$retry_uses_functions" \
+            '{
+              schema:$schema,
+              status:"PASS",
+              bridge_url:$bridge_url,
+              preview_bridge_url_set:true,
+              preview_bridge_key_set:true,
+              preview_evidence_mode_enabled:true,
+              sd_public_key_fingerprint:$public_key_fingerprint,
+              envelope_sha256:$envelope_sha256,
+              envelope_key_sha256:$envelope_key_sha256,
+              encryption:"RSA-4096-OAEP-SHA256 + AES-256-CBC-PBKDF2-200000",
+              secret_values_logged:false,
+              plaintext_secret_artifacts:false,
+              production_modified:false,
+              retry_deployment_id:$retry_deployment_id,
+              retry_deployment_url:$retry_deployment_url,
+              retry_deployment_success:true,
+              retry_deployment_uses_functions:$retry_uses_functions,
+              awards_vf_points:false
+            }' > evidence/config.json
+
+          echo "MODARYX_P6_QUICK_PREVIEW_CONFIG_PASS previewOnly=true encryptedEnvelope=true"
+
+      - name: Upload encrypted Quick Tunnel envelope
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-quick-preview-config
+          path: evidence
+          if-no-files-found: error
+          retention-days: 7
+# replay-trigger: fix-preview-selection-and-retry-20261006
+# replay-trigger: fresh-window-taught-chips-20261006
+# replay-trigger: current-cyber-rarely-defense-mai
+# replay-trigger: fresh-live-url-1791300554433
+# disabled: superseded by key-first + URL-only P6 flow

@@ -1,0 +1,201 @@
+name: MODARYX IA P6 Pages project metadata
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-pages-project-metadata.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      ZONE_NAME: modaryxmods.com
+      PROJECT_NAME: nova-forge-site-public
+    steps:
+      - name: Read safe Pages project metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=${ZONE_NAME}" "${api}/zones")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          project="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$project")" = "true"
+
+          production_branch="$(jq -r '.result.production_branch // .result.source.config.production_branch // ""' <<<"$project")"
+          subdomain="$(jq -r '.result.subdomain // ""' <<<"$project")"
+          canonical_id="$(jq -r '.result.canonical_deployment.id // ""' <<<"$project")"
+          canonical_url="$(jq -r '.result.canonical_deployment.url // ""' <<<"$project")"
+          canonical_branch="$(jq -r '.result.canonical_deployment.deployment_trigger.metadata.branch // ""' <<<"$project")"
+          canonical_stage="$(jq -r '.result.canonical_deployment.latest_stage.name // ""' <<<"$project")"
+          latest_id="$(jq -r '.result.latest_deployment.id // ""' <<<"$project")"
+          latest_url="$(jq -r '.result.latest_deployment.url // ""' <<<"$project")"
+          latest_branch="$(jq -r '.result.latest_deployment.deployment_trigger.metadata.branch // ""' <<<"$project")"
+          latest_stage="$(jq -r '.result.latest_deployment.latest_stage.name // ""' <<<"$project")"
+          latest_stage_status="$(jq -r '.result.latest_deployment.latest_stage.status // ""' <<<"$project")"
+          latest_uses_functions="$(jq -r '.result.latest_deployment.uses_functions // false' <<<"$project")"
+          latest_env_has_bridge_url="$(jq -r '(.result.latest_deployment.env_vars // {}) | has("MODARYX_AI_BRIDGE_URL")' <<<"$project")"
+          latest_env_has_bridge_key="$(jq -r '(.result.latest_deployment.env_vars // {}) | has("MODARYX_AI_BRIDGE_KEY_HEX")' <<<"$project")"
+          latest_env_has_evidence_mode="$(jq -r '(.result.latest_deployment.env_vars // {}) | has("MODARYX_P6_EVIDENCE_MODE")' <<<"$project")"
+          latest_env_bridge_url_value="$(jq -r '.result.latest_deployment.env_vars.MODARYX_AI_BRIDGE_URL.value // ""' <<<"$project")"
+          latest_env_evidence_mode_value="$(jq -r '.result.latest_deployment.env_vars.MODARYX_P6_EVIDENCE_MODE.value // ""' <<<"$project")"
+          latest_env_bridge_key_type="$(jq -r '.result.latest_deployment.env_vars.MODARYX_AI_BRIDGE_KEY_HEX.type // ""' <<<"$project")"
+          domains="$(jq -c '.result.domains // []' <<<"$project")"
+          preview_has_bridge_url="$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_AI_BRIDGE_URL")' <<<"$project")"
+          preview_has_bridge_key="$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_AI_BRIDGE_KEY_HEX")' <<<"$project")"
+          preview_has_evidence_mode="$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_P6_EVIDENCE_MODE")' <<<"$project")"
+          preview_bridge_url_value="$(jq -r '.result.deployment_configs.preview.env_vars.MODARYX_AI_BRIDGE_URL.value // ""' <<<"$project")"
+          preview_evidence_mode_value="$(jq -r '.result.deployment_configs.preview.env_vars.MODARYX_P6_EVIDENCE_MODE.value // ""' <<<"$project")"
+          preview_bridge_key_type="$(jq -r '.result.deployment_configs.preview.env_vars.MODARYX_AI_BRIDGE_KEY_HEX.type // ""' <<<"$project")"
+
+          jq -n \
+            --arg schema "modaryx-p6-pages-project-metadata-v1" \
+            --arg production_branch "$production_branch" \
+            --arg subdomain "$subdomain" \
+            --arg canonical_id "$canonical_id" \
+            --arg canonical_url "$canonical_url" \
+            --arg canonical_branch "$canonical_branch" \
+            --arg canonical_stage "$canonical_stage" \
+            --arg latest_id "$latest_id" \
+            --arg latest_url "$latest_url" \
+            --arg latest_branch "$latest_branch" \
+            --arg latest_stage "$latest_stage" \
+            --arg latest_stage_status "$latest_stage_status" \
+            --argjson latest_uses_functions "$latest_uses_functions" \
+            --argjson latest_env_has_bridge_url "$latest_env_has_bridge_url" \
+            --argjson latest_env_has_bridge_key "$latest_env_has_bridge_key" \
+            --argjson latest_env_has_evidence_mode "$latest_env_has_evidence_mode" \
+            --arg latest_env_bridge_url_value "$latest_env_bridge_url_value" \
+            --arg latest_env_evidence_mode_value "$latest_env_evidence_mode_value" \
+            --arg latest_env_bridge_key_type "$latest_env_bridge_key_type" \
+            --argjson domains "$domains" \
+            --argjson preview_has_bridge_url "$preview_has_bridge_url" \
+            --argjson preview_has_bridge_key "$preview_has_bridge_key" \
+            --argjson preview_has_evidence_mode "$preview_has_evidence_mode" \
+            --arg preview_bridge_url_value "$preview_bridge_url_value" \
+            --arg preview_evidence_mode_value "$preview_evidence_mode_value" \
+            --arg preview_bridge_key_type "$preview_bridge_key_type" \
+            '{
+              schema:$schema,
+              production_branch:$production_branch,
+              subdomain:$subdomain,
+              domains:$domains,
+              preview_env_presence:{
+                bridge_url:$preview_has_bridge_url,
+                bridge_key:$preview_has_bridge_key,
+                evidence_mode:$preview_has_evidence_mode
+              },
+              preview_env_safe_values:{
+                bridge_url:$preview_bridge_url_value,
+                evidence_mode:$preview_evidence_mode_value,
+                bridge_key_type:$preview_bridge_key_type
+              },
+              canonical_deployment:{id:$canonical_id,url:$canonical_url,branch:$canonical_branch,stage:$canonical_stage},
+              latest_deployment:{
+                id:$latest_id,
+                url:$latest_url,
+                branch:$latest_branch,
+                stage:$latest_stage,
+                stage_status:$latest_stage_status,
+                uses_functions:$latest_uses_functions,
+                env_presence:{
+                  bridge_url:$latest_env_has_bridge_url,
+                  bridge_key:$latest_env_has_bridge_key,
+                  evidence_mode:$latest_env_has_evidence_mode
+                },
+                env_safe_values:{
+                  bridge_url:$latest_env_bridge_url_value,
+                  evidence_mode:$latest_env_evidence_mode_value,
+                  bridge_key_type:$latest_env_bridge_key_type
+                }
+              },
+              secret_values_logged:false,
+              external_changes_made:false,
+              awards_vf_points:false
+            }' > evidence/pages-project-metadata.json
+
+          echo "MODARYX_P6_PAGES_PROJECT productionBranch=$production_branch canonicalBranch=$canonical_branch canonicalStage=$canonical_stage latestBranch=$latest_branch latestStage=$latest_stage latestStageStatus=$latest_stage_status latestUsesFunctions=$latest_uses_functions latestEnvUrl=$latest_env_has_bridge_url latestEnvKey=$latest_env_has_bridge_key latestEnvEvidence=$latest_env_has_evidence_mode latestEvidenceValue=$latest_env_evidence_mode_value latestKeyType=$latest_env_bridge_key_type previewUrl=$preview_has_bridge_url previewKey=$preview_has_bridge_key previewEvidence=$preview_has_evidence_mode evidenceModeValue=$preview_evidence_mode_value bridgeKeyType=$preview_bridge_key_type bridgeUrlValue=$preview_bridge_url_value"
+
+      - name: Upload Pages project metadata
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-pages-project-metadata
+          path: evidence
+          if-no-files-found: error
+          retention-days: 30
+# replay-trigger: preview-env-presence-safe-read
+# replay-trigger: preview-safe-values-read
+# replay-trigger: deployment-env-and-functions-safe-read
+# replay-trigger: post-cloudflare-success-7c7203f
+
+      - name: Verify Auth0 Founder login redirect on exact preview
+        shell: bash
+        run: |
+          set -uo pipefail
+          mkdir -p evidence
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=${ZONE_NAME}" "${api}/zones")" || exit 2
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          [ -n "$account_id" ] || exit 2
+
+          deployment_url="https://272be97b.nova-forge-site-public.pages.dev"
+          echo "MODARYX_P6_LOGIN_PROBE_TARGET origin=$deployment_url functionsProven=true"
+
+          headers="$(mktemp)"
+          body="$(mktemp)"
+          login_url="${deployment_url%/}/api/v1/auth/login?returnTo=%2Fapi%2Ffounder%2Fai%2Fe2e-proof"
+          code="$(curl -sS -D "$headers" -o "$body" -w '%{http_code}' --max-time 20 "$login_url" || true)"
+          location="$(grep -i '^location:' "$headers" | head -n1 | sed -E 's/^[^:]+:[[:space:]]*//; s/\r$//' || true)"
+          response_error="$(jq -r '.error // ""' "$body" 2>/dev/null || true)"
+          content_type="$(grep -i '^content-type:' "$headers" | head -n1 | sed -E 's/^[^:]+:[[:space:]]*//; s/\r$//' || true)"
+          rm -f "$body" "$headers"
+
+          if [ "$code" = "302" ] && [ -n "$location" ]; then
+            python3 -c 'import json,sys,urllib.parse; origin=sys.argv[1].rstrip("/"); location=sys.argv[2]; u=urllib.parse.urlparse(location); q=urllib.parse.parse_qs(u.query); redirect=(q.get("redirect_uri") or [""])[0]; state=(q.get("state") or [""])[0]; challenge=(q.get("code_challenge") or [""])[0]; method=(q.get("code_challenge_method") or [""])[0]; ok=(u.scheme=="https" and bool(u.hostname) and redirect==origin+"/api/v1/auth/callback" and len(state)>=20 and len(challenge)>=20 and method=="S256" and "client_secret" not in q); out={"schema":"modaryx-p6-founder-login-readiness-v1","status":"PASS" if ok else "FAIL","http_status":302,"preview_origin":origin,"auth0_host":u.hostname,"redirect_uri":redirect,"pkce":method,"state_present":len(state)>=20,"client_secret_in_redirect":"client_secret" in q,"cookies_recorded":False,"tokens_recorded":False,"awards_vf_points":False}; print(json.dumps(out,indent=2)); raise SystemExit(0 if ok else 4)' "$deployment_url" "$location" > evidence/founder-login-readiness.json
+            rc=$?
+          else
+            jq -n               --arg schema "modaryx-p6-founder-login-readiness-v1"               --arg origin "$deployment_url"               --arg http "$code"               --arg error "$response_error"               --arg content_type "$content_type"               '{
+                schema:$schema,
+                status:"FAIL",
+                http_status:($http|tonumber),
+                preview_origin:$origin,
+                response_error:(if $error=="" then null else $error end),
+                content_type:$content_type,
+                auth_redirect_present:false,
+                cookies_recorded:false,
+                tokens_recorded:false,
+                awards_vf_points:false
+              }' > evidence/founder-login-readiness.json
+            rc=4
+          fi
+
+          cat evidence/founder-login-readiness.json
+          if [ "$rc" -eq 0 ]; then
+            echo "MODARYX_P6_FOUNDER_LOGIN_READY origin=$deployment_url"
+          else
+            echo "MODARYX_P6_FOUNDER_LOGIN_NOT_READY http=$code error=$response_error" >&2
+          fi
+          exit "$rc"
+
+      - name: Upload Founder login readiness evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-founder-login-readiness
+          path: evidence/founder-login-readiness.json
+          if-no-files-found: error
+          retention-days: 30
+

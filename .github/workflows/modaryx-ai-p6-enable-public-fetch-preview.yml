@@ -1,0 +1,110 @@
+name: MODARYX IA P6 enable public fetch on preview
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-enable-public-fetch-preview.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  patch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      ZONE_NAME: modaryxmods.com
+      PROJECT_NAME: nova-forge-site-public
+      TARGET_BRANCH: chatgpt/modaryx-ai-founder-integration-20261005
+    steps:
+      - name: Add global_fetch_strictly_public to preview and retry
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=$ZONE_NAME" "$api/zones")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          test -n "$account_id"
+
+          project="$(curl -fsS "${auth[@]}" "$api/accounts/$account_id/pages/projects/$PROJECT_NAME")"
+          test "$(jq -r '.success' <<<"$project")" = "true"
+          current_flags="$(jq -c '.result.deployment_configs.preview.compatibility_flags // []' <<<"$project")"
+          merged_flags="$(jq -c '. + ["global_fetch_strictly_public","cache_option_enabled"] | unique' <<<"$current_flags")"
+
+          payload="$(jq -n --argjson flags "$merged_flags" '{deployment_configs:{preview:{compatibility_flags:$flags}}}')"
+          updated="$(curl -fsS "${auth[@]}" --request PATCH --data "$payload" "$api/accounts/$account_id/pages/projects/$PROJECT_NAME")"
+          test "$(jq -r '.success' <<<"$updated")" = "true"
+
+          after="$(curl -fsS "${auth[@]}" "$api/accounts/$account_id/pages/projects/$PROJECT_NAME")"
+          test "$(jq -r '.result.deployment_configs.preview.compatibility_flags | index("global_fetch_strictly_public") != null' <<<"$after")" = "true"
+          test "$(jq -r '.result.deployment_configs.preview.compatibility_flags | index("cache_option_enabled") != null' <<<"$after")" = "true"
+
+          deployments="$(curl -fsS "${auth[@]}" --get --data-urlencode "env=preview" "$api/accounts/$account_id/pages/projects/$PROJECT_NAME/deployments")"
+          source="$(jq -c --arg b "$TARGET_BRANCH" '[.result[] | select(((.deployment_trigger.metadata.branch // "") == $b) and ((.latest_stage.status // "") == "success") and ((.uses_functions // false) == true))] | sort_by(.created_on) | reverse | .[0] // null' <<<"$deployments")"
+          test "$(jq -r '. != null' <<<"$source")" = "true"
+          source_id="$(jq -r '.id' <<<"$source")"
+
+          retried="$(curl -fsS "${auth[@]}" --request POST "$api/accounts/$account_id/pages/projects/$PROJECT_NAME/deployments/$source_id/retry")"
+          test "$(jq -r '.success' <<<"$retried")" = "true"
+          retry_id="$(jq -r '.result.id // ""' <<<"$retried")"
+          test -n "$retry_id"
+
+          retry_success=false
+          retry_url=""
+          retry_uses_functions=false
+          for i in $(seq 1 90); do
+            sleep 4
+            dep="$(curl -fsS "${auth[@]}" "$api/accounts/$account_id/pages/projects/$PROJECT_NAME/deployments/$retry_id")"
+            test "$(jq -r '.success' <<<"$dep")" = "true"
+            retry_status="$(jq -r '.result.latest_stage.status // ""' <<<"$dep")"
+            retry_url="$(jq -r '.result.url // ""' <<<"$dep")"
+            retry_uses_functions="$(jq -r '.result.uses_functions // false' <<<"$dep")"
+            if [ "$retry_status" = "success" ]; then retry_success=true; break; fi
+            if [ "$retry_status" = "failure" ]; then break; fi
+          done
+          test "$retry_success" = "true"
+          test "$retry_uses_functions" = "true"
+
+          jq -n \
+            --arg schema "modaryx-p6-preview-public-fetch-v1" \
+            --argjson before_flags "$current_flags" \
+            --argjson after_flags "$merged_flags" \
+            --arg source_deployment_id "$source_id" \
+            --arg retry_deployment_id "$retry_id" \
+            --arg retry_deployment_url "$retry_url" \
+            '{
+              schema:$schema,
+              status:"PASS",
+              scope:"preview",
+              before_compatibility_flags:$before_flags,
+              after_compatibility_flags:$after_flags,
+              global_fetch_strictly_public_enabled:true,
+              cache_option_enabled:true,
+              source_deployment_id:$source_deployment_id,
+              retry_deployment_id:$retry_deployment_id,
+              retry_deployment_url:$retry_deployment_url,
+              retry_deployment_success:true,
+              retry_deployment_uses_functions:true,
+              production_modified:false,
+              secret_values_logged:false,
+              awards_vf_points:false
+            }' > evidence/result.json
+
+          printf '%s\n' "$retry_url" > evidence/retry-url.txt
+          echo "MODARYX_P6_PREVIEW_PUBLIC_FETCH_PASS retry=$retry_id functions=true"
+
+      - name: Upload public-fetch preview evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-preview-public-fetch
+          path: evidence
+          if-no-files-found: error
+          retention-days: 30
+# replay-trigger: enable-worker-cache-option-for-bridge-fetch

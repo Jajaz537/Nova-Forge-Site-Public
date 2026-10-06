@@ -1,0 +1,121 @@
+name: MODARYX IA P6 signed bridge exact retry proof
+
+on:
+  workflow_dispatch:
+    inputs:
+      site_origin:
+        description: Immutable Cloudflare Pages preview origin
+        required: true
+        type: string
+        default: "https://2f4f6f67.nova-forge-site-public.pages.dev"
+      site_sha:
+        description: Exact Git SHA deployed to that origin
+        required: true
+        type: string
+        default: "0c193b4c42e1dcc05adeda483596eff8c557beee"
+
+permissions:
+  contents: read
+  checks: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    env:
+      SITE_ORIGIN: ${{ inputs.site_origin }}
+      EXPECTED_SITE_SHA: ${{ inputs.site_sha }}
+      EXPECTED_PROTOCOL: "modaryx-founder-bridge-v1"
+    steps:
+      - name: Verify immutable preview origin against exact deployed Git SHA
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          python3 - <<'PY'
+          import json, os, re, urllib.request
+          from html.parser import HTMLParser
+          from pathlib import Path
+          origin=os.environ['SITE_ORIGIN']
+          sha=os.environ['EXPECTED_SITE_SHA']
+          if not re.fullmatch(r'https://[0-9a-f]{8}\.nova-forge-site-public\.pages\.dev',origin):
+              raise SystemExit('P6 invalid immutable preview origin')
+          if not re.fullmatch(r'[0-9a-f]{40}',sha):
+              raise SystemExit('P6 invalid deployed Git SHA')
+          class Links(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.urls=[]
+              def handle_starttag(self,tag,attrs):
+                  if tag=='a':
+                      self.urls.extend(v for k,v in attrs if k=='href')
+          api=f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/commits/{sha}/check-runs?per_page=100"
+          request=urllib.request.Request(api,headers={
+              'Authorization':'Bearer '+os.environ['GH_READ_TOKEN'],
+              'Accept':'application/vnd.github+json',
+              'X-GitHub-Api-Version':'2022-11-28',
+          })
+          try:
+              with urllib.request.urlopen(request,timeout=20) as response:
+                  data=json.load(response)
+          except Exception:
+              raise SystemExit('P6 deployed SHA provenance unavailable')
+          matches=[]
+          for check in data.get('check_runs',[]):
+              if check.get('head_sha')!=sha or check.get('name')!='Cloudflare Pages' or check.get('conclusion')!='success':
+                  continue
+              links=Links(); links.feed((check.get('output') or {}).get('summary') or '')
+              if origin in links.urls:
+                  matches.append({'check_id':check['id'],'check_url':check.get('html_url'),'deployment_id':check.get('external_id')})
+          if not matches:
+              raise SystemExit('P6 origin does not match successful exact-SHA Pages deployment')
+          Path('evidence/deployment-provenance.json').write_text(json.dumps({
+              'schema':'modaryx-p6-deployment-provenance-v1',
+              'site_origin':origin,'site_sha':sha,'checks':matches,
+              'status':'PASS','awards_vf_points':False,
+          },indent=2),encoding='utf-8')
+          print('MODARYX_P6_DEPLOYMENT_PROVENANCE_PASS')
+          PY
+
+      - name: Probe exact Pages retry through real signed bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          body="$(mktemp)"
+          code="$(curl -sS -o "$body" -w '%{http_code}' --max-time 25 "${SITE_ORIGIN}/api/p6/bridge-probe" || true)"
+          ok="$(jq -r '.ok == true' "$body" 2>/dev/null || echo false)"
+          protocol="$(jq -r '.protocol // ""' "$body" 2>/dev/null || true)"
+          inner_http="$(jq -r '.http // ""' "$body" 2>/dev/null || true)"
+          rm -f "$body"
+
+          jq -n             --arg schema "modaryx-p6-signed-bridge-exact-retry-v1"             --arg deployment_url "$SITE_ORIGIN"             --arg http "$code"             --argjson ok "$ok"             --arg protocol "$protocol"             --arg inner_http "$inner_http"             '{
+              schema:$schema,
+              deployment_url:$deployment_url,
+              outer_http:($http|tonumber),
+              bridge_ok:$ok,
+              protocol:$protocol,
+              inner_http:(if $inner_http=="" then null else ($inner_http|tonumber) end),
+              secret_values_recorded:false,
+              founder_bypass:false,
+              production_modified:false,
+              awards_vf_points:false
+            }' > evidence/probe.json
+
+          if [ "$code" != "200" ] || [ "$ok" != "true" ] || [ "$protocol" != "$EXPECTED_PROTOCOL" ] || [ "$inner_http" != "200" ]; then
+            echo "MODARYX_P6_EXACT_SIGNED_BRIDGE_FAIL" >&2
+            exit 5
+          fi
+
+          echo "MODARYX_P6_EXACT_SIGNED_BRIDGE_PASS"
+
+      - name: Upload exact signed bridge proof
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-signed-bridge-exact-retry
+          path: evidence
+          if-no-files-found: warn
+          retention-days: 30
+

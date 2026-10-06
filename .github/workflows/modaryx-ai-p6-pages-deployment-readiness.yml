@@ -1,0 +1,92 @@
+name: MODARYX IA P6 Pages deployment readiness
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-pages-deployment-readiness.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      ZONE_NAME: modaryxmods.com
+      PROJECT_NAME: nova-forge-site-public
+      TARGET_BRANCH: chatgpt/modaryx-ai-founder-integration-20261005
+    steps:
+      - name: Read Pages deployment topology without secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=${ZONE_NAME}" "${api}/zones")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+
+          project="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$project")" = "true"
+          production_branch="$(jq -r '.result.production_branch // ""' <<<"$project")"
+          subdomain="$(jq -r '.result.subdomain // ""' <<<"$project")"
+
+          deployments="$(curl -fsS "${auth[@]}" --get \
+            --data-urlencode "page=1" \
+            --data-urlencode "per_page=100" \
+            "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}/deployments")"
+          test "$(jq -r '.success' <<<"$deployments")" = "true"
+
+          target="$(jq -c --arg b "$TARGET_BRANCH" '[.result[] | select((.deployment_trigger.metadata.branch // "") == $b)] | sort_by(.created_on) | reverse | .[0] // null' <<<"$deployments")"
+          target_found="$(jq -r '. != null' <<<"$target")"
+          target_id=""
+          target_url=""
+          target_env=""
+          target_stage=""
+          if [ "$target_found" = "true" ]; then
+            target_id="$(jq -r '.id // ""' <<<"$target")"
+            target_url="$(jq -r '.url // ""' <<<"$target")"
+            target_env="$(jq -r '.environment // ""' <<<"$target")"
+            target_stage="$(jq -r '.latest_stage.name // ""' <<<"$target")"
+          fi
+
+          jq -n \
+            --arg schema "modaryx-p6-pages-deployment-readiness-v1" \
+            --arg production_branch "$production_branch" \
+            --arg pages_subdomain "$subdomain" \
+            --arg target_branch "$TARGET_BRANCH" \
+            --argjson target_found "$target_found" \
+            --arg target_deployment_id "$target_id" \
+            --arg target_url "$target_url" \
+            --arg target_environment "$target_env" \
+            --arg target_stage "$target_stage" \
+            '{
+              schema:$schema,
+              production_branch:$production_branch,
+              pages_subdomain:$pages_subdomain,
+              target_branch:$target_branch,
+              target_deployment_found:$target_found,
+              target_deployment_id:$target_deployment_id,
+              target_url:$target_url,
+              target_environment:$target_environment,
+              target_stage:$target_stage,
+              secret_values_logged:false,
+              external_changes_made:false,
+              awards_vf_points:false
+            }' > evidence/pages-deployment-readiness.json
+
+          echo "MODARYX_P6_PAGES_READINESS productionBranch=$production_branch targetFound=$target_found environment=$target_env stage=$target_stage"
+
+      - name: Upload Pages deployment topology
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-pages-deployment-readiness
+          path: evidence
+          if-no-files-found: error
+          retention-days: 30

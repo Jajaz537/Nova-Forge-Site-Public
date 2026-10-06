@@ -1,0 +1,77 @@
+name: MODARYX IA P6 cleanup temporary preview proof
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-cleanup-preview.yml"
+      - "qa/p6-cleanup.trigger"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      ZONE_NAME: modaryxmods.com
+      PROJECT_NAME: nova-forge-site-public
+    steps:
+      - name: Cleanup only when explicit trigger file exists
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Remove temporary preview bridge variables
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          if [ ! -f qa/p6-cleanup.trigger ]; then
+            jq -n '{schema:"modaryx-p6-preview-cleanup-v1",status:"NOT_RUN",reason:"explicit_trigger_missing",external_changes_made:false}' > evidence/cleanup.json
+            echo "MODARYX_P6_CLEANUP_NOT_RUN trigger_missing"
+            exit 0
+          fi
+
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=${ZONE_NAME}" "${api}/zones")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+
+          payload='{"deployment_configs":{"preview":{"env_vars":{"MODARYX_AI_BRIDGE_URL":null,"MODARYX_AI_BRIDGE_KEY_HEX":null,"MODARYX_P6_EVIDENCE_MODE":null}}}}'
+          update="$(curl -fsS "${auth[@]}" --request PATCH --data "$payload" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$update")" = "true"
+
+          after="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+          has_url="$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_AI_BRIDGE_URL")' <<<"$after")"
+          has_key="$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_AI_BRIDGE_KEY_HEX")' <<<"$after")"
+          has_mode="$(jq -r '(.result.deployment_configs.preview.env_vars // {}) | has("MODARYX_P6_EVIDENCE_MODE")' <<<"$after")"
+          test "$has_url" = "false"
+          test "$has_key" = "false"
+          test "$has_mode" = "false"
+
+          jq -n \
+            --arg schema "modaryx-p6-preview-cleanup-v1" \
+            '{
+              schema:$schema,
+              status:"PASS",
+              preview_bridge_url_removed:true,
+              preview_bridge_key_removed:true,
+              preview_evidence_mode_removed:true,
+              production_modified:false,
+              secret_values_logged:false
+            }' > evidence/cleanup.json
+          echo "MODARYX_P6_PREVIEW_CLEANUP_PASS"
+
+      - name: Upload cleanup evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-preview-cleanup
+          path: evidence
+          if-no-files-found: error
+          retention-days: 30

@@ -1,0 +1,97 @@
+name: MODARYX IA P6 D1 readiness
+
+on:
+  push:
+    branches:
+      - "chatgpt/modaryx-ai-founder-integration-20261005"
+    paths:
+      - ".github/workflows/modaryx-ai-p6-d1-readiness.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      ZONE_NAME: modaryxmods.com
+      PROJECT_NAME: nova-forge-site-public
+    steps:
+      - name: Probe preview D1 binding with SELECT 1 only
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" --get --data-urlencode "name=${ZONE_NAME}" "${api}/zones")"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          project="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$project")" = "true"
+
+          bindings="$(jq -c '.result.deployment_configs.preview.d1_databases // {}' <<<"$project")"
+          binding_count="$(jq 'length' <<<"$bindings")"
+          db_id=""
+          binding_name=""
+          if [ "$binding_count" -eq 1 ]; then
+            binding_name="$(jq -r 'keys[0]' <<<"$bindings")"
+            db_id="$(jq -r 'to_entries[0].value.id // to_entries[0].value.database_id // ""' <<<"$bindings")"
+          elif [ "$binding_count" -gt 1 ]; then
+            if jq -e 'has("MODARYX_DB")' <<<"$bindings" >/dev/null; then
+              binding_name="MODARYX_DB"
+              db_id="$(jq -r '.MODARYX_DB.id // .MODARYX_DB.database_id // ""' <<<"$bindings")"
+            fi
+          fi
+
+          query_access=false
+          query_http=""
+          select_one=false
+          if [ -n "$db_id" ]; then
+            body="$(mktemp)"
+            payload='{"sql":"SELECT 1 AS ok","params":[]}'
+            query_http="$(curl -sS -o "$body" -w '%{http_code}' "${auth[@]}" \
+              --request POST --data "$payload" \
+              "${api}/accounts/${account_id}/d1/database/${db_id}/query")"
+            if [ "$query_http" = "200" ] && [ "$(jq -r '.success' "$body")" = "true" ]; then
+              query_access=true
+              if [ "$(jq -r '.result[0].results[0].ok // 0' "$body")" = "1" ]; then
+                select_one=true
+              fi
+            fi
+            rm -f "$body"
+          fi
+
+          jq -n \
+            --arg schema "modaryx-p6-d1-readiness-v1" \
+            --arg binding_name "$binding_name" \
+            --argjson binding_count "$binding_count" \
+            --arg query_http "$query_http" \
+            --argjson query_access "$query_access" \
+            --argjson select_one "$select_one" \
+            '{
+              schema:$schema,
+              preview_d1_binding_count:$binding_count,
+              target_binding_name:$binding_name,
+              database_id_present:($binding_name!=""),
+              d1_query_http_status:$query_http,
+              d1_query_access:$query_access,
+              select_one_pass:$select_one,
+              user_rows_read:0,
+              external_changes_made:false,
+              secret_values_logged:false,
+              awards_vf_points:false
+            }' > evidence/d1-readiness.json
+
+          echo "MODARYX_P6_D1_READINESS bindings=$binding_count target=$binding_name queryAccess=$query_access selectOne=$select_one http=$query_http"
+
+      - name: Upload D1 readiness evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: modaryx-ai-p6-d1-readiness
+          path: evidence
+          if-no-files-found: error
+          retention-days: 30
