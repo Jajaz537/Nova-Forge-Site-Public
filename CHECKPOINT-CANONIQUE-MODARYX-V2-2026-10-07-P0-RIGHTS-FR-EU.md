@@ -517,3 +517,39 @@ Blockers principaux restants :
 - terrain pricing réel.
 
 Aucun prix canonique et aucun paiement activé.
+
+
+---
+
+## 20. Handoff Work / opérateur — 19 blockers externes VF — 2026-10-07
+
+HEAD canonique revérifié avant handoff :
+`design/modaryx-v2-blue-violet-product-20261005` @ `d88a416313a02d4b976ef9d6e0843489f8930998`.
+
+Runbook consolidé ajouté :
+`docs/MODARYX-V2-WORK-EXTERNAL-VF-HANDOFF-20261007.md`.
+
+Le ledger reste :
+- status : `ACTIVE_FAIL_CLOSED_19_OPEN`
+- blockers : **19**
+- blockers fermables sans changement externe : **0**
+- `automationCanCloseWithoutExternalChange=false` pour **19/19**.
+
+Répartition :
+- 5 blockers appareil réel / accessibilité ;
+- 8 blockers production contrôlée ;
+- 6 blockers droits / juridique.
+
+Le handoff sépare explicitement :
+1. sessions appareils réels ;
+2. production contrôlée une unité à la fois et uniquement après approbation explicite ;
+3. droits/licences/revue juridique avec preuves réelles.
+
+Aucun blocker n'est fermé par ce document.
+
+Gates :
+- VF TECHNIQUE : **EN COURS**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+
+Aucun `main`, DNS/DNSSEC/nameserver, Cloudflare critique, D1/R2 production, paiement/provider, PWA production, field CWV, indexability ou cutover modifié.
