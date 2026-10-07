@@ -88,3 +88,31 @@ Pour fermer la gate :
 6. seulement ensuite autoriser `finalReleaseAllowed=true`.
 
 **État : EN COURS / droits commerciaux PREUVE MANQUANTE.**
+
+
+---
+
+## 7. Variantes PNG de la marque — chaîne Git directe récupérée
+
+Le SVG courant de la marque est modifié au commit :
+- `14142306a9d160fc2ebc01486167853bc27dcdf2`
+- message : `fix(brand): make MODARYX site mark an unmistakable M`
+
+Le commit immédiatement suivant :
+- `2ae5bd279bd3437d74424801ff428e40bc61504c`
+- parent exact : `14142306a9d160fc2ebc01486167853bc27dcdf2`
+- message : `fix(brand): refresh MODARYX PNG marks with clear M`
+- fichiers modifiés uniquement :
+  - `assets/modaryx-mark-192.png`
+  - `assets/modaryx-mark-512.png`
+
+Cela établit une chaîne interne directe **SVG M → refresh des deux raster PNG**.
+
+État :
+- relation de dérivation de marque dans Git : **PARTIAL_EVIDENCE**
+- outil de rasterisation exact : **PREUVE MANQUANTE**
+- auteur/propriété juridique de la marque : **PREUVE MANQUANTE**
+- clearance marque/droits commerciaux : **PREUVE MANQUANTE**
+- `finalReleaseAllowed` : **false**
+
+Les copies sous `v2/public/assets/` héritent de cette même chaîne binaire via leurs doublons déjà identifiés dans le registre.

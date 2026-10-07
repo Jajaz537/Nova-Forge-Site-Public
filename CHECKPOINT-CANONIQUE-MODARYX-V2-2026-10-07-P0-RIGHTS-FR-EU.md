@@ -407,3 +407,30 @@ Contenu :
 - droits des 5 assets PRODUCT redistribués : **BLOQUÉ / PREUVE MANQUANTE**
 
 Aucun changement production/paiement/DNS/cutover.
+
+
+---
+
+## 18. Provenance variantes raster MODARYX — 2026-10-07
+
+Chaîne Git directe récupérée pour les assets de marque réellement présents dans le bundle candidat :
+
+1. `14142306a9d160fc2ebc01486167853bc27dcdf2` modifie le SVG pour rendre le « M » explicite ;
+2. `2ae5bd279bd3437d74424801ff428e40bc61504c` est son **enfant direct** ;
+3. ce second commit ne modifie que `modaryx-mark-192.png` et `modaryx-mark-512.png`, avec le message `refresh MODARYX PNG marks with clear M`.
+
+Conséquence :
+- SVG : **PARTIAL_EVIDENCE** déjà conservé ;
+- PNG 192/512 et leurs copies V2 : **PARTIAL_EVIDENCE** désormais ;
+- outil de rasterisation : **PREUVE MANQUANTE** ;
+- droits de marque/commerciaux : **PREUVE MANQUANTE** ;
+- `finalReleaseAllowed=false`.
+
+Sur les 5 visuels réellement redistribués par le bundle candidat, les 3 assets de marque ont donc une chaîne de provenance interne partielle. Les deux Living Threshold gardent leur preuve partielle de génération spécifique au prototype, avec outil/modèle/conditions exactes encore manquants.
+
+Gates inchangées :
+- VF TECHNIQUE : **EN COURS**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+
+Aucun changement main, DNS, paiement, production ou cutover.
