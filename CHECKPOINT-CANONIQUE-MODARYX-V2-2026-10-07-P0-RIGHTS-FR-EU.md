@@ -124,3 +124,26 @@ Document :
 8. préparer CGU/CGV/privacy notice uniquement après fixation des faits vendeur/provider/territoires.
 
 **Ce checkpoint supersède les checkpoints commerciaux/juridiques antérieurs pour les éléments qu'il précise.**
+
+
+---
+
+## 10. Mise à jour provenance — 2026-10-07
+
+Après remontée de l'historique Git :
+
+**PARTIAL_EVIDENCE récupérée**
+- marque SVG MODARYX : historique vectoriel in-repo retrouvé ;
+- hero Loup/Dragon + portails : archive source utilisateur documentée, SHA-256 `c7592976adc53de0d5fb6f98bc1454c73d741bd0215fcd1398e047ececfb6532` ;
+- vista réduite : dérivation depuis panorama approuvé documentée ;
+- Living Threshold : workflow d'assets générés spécifiquement et source visuelle locale documentés.
+
+**Toujours PREUVE MANQUANTE**
+- droits commerciaux/licences des sources ci-dessus ;
+- auteur/générateur/conditions exactes quand ils ne sont pas établis ;
+- environnement + 10 couches de croissance wolf/dragon : commits d'introduction et hashes retrouvés, mais aucune provenance/licence explicite récupérée.
+
+Référence :
+`docs/MODARYX-V2-ASSET-PROVENANCE-EVIDENCE-20261007.md`.
+
+Aucun `finalReleaseAllowed` n'a été passé à `true`.
