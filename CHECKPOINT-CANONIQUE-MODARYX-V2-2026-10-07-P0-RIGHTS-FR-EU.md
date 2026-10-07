@@ -588,3 +588,31 @@ Blockers droits :
 Le ledger VF reste fail-closed ; aucun des 19 blockers externes n'est fermé par cette tranche.
 
 Aucun outbound, production, D1/R2, provider, paiement, DNS ou cutover exécuté.
+
+
+---
+
+## 22. Référence marché pricing — 2026-10-08
+
+Références officielles adjacentes revues en lecture seule :
+- CurseForge Premium : **$2.99/mois**, **$30/an**
+- Modrinth Plus : **$4.99/mois**, réduction annuelle affichée **16 %**
+- Nexus Mods Premium : valeur Premium confirmée, présentation tarifaire variable selon page/région
+- Overwolf : subscriptions app-specific, non utilisées comme benchmark tarifaire direct.
+
+Documents :
+- `docs/MODARYX-V2-MARKET-PRICING-REFERENCE-20261008.md`
+- `docs/MODARYX-V2-MARKET-PRICING-REFERENCE-20261008.json`
+
+Conséquences :
+- stimuli `4,99 / 6,99 / 8,99 € / mois` maintenus **uniquement pour recherche**
+- `4,99 €` reste une hypothèse crédible à tester, pas une décision
+- `6,99 / 8,99 €` exigent une valeur récurrente plus forte
+- aucun ralentissement/bridage artificiel du gratuit pour fabriquer un upsell
+- sécurité/accessibilité/provenance/privacy/récupération essentielle restent baseline.
+
+**Prix canonique : PREUVE MANQUANTE.**
+**Paiement/provider : PREUVE MANQUANTE.**
+**Willingness-to-pay terrain : PREUVE MANQUANTE.**
+
+La gate commerciale reste **EN COURS**.
