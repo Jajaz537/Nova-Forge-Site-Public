@@ -184,10 +184,18 @@
       "sizeBytes": 331,
       "classification": "PRODUCT",
       "duplicateOf": null,
-      "provenanceStatus": "PREUVE MANQUANTE",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
       "commercialRightsStatus": "PREUVE MANQUANTE",
       "finalReleaseAllowed": false,
-      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "IN_REPOSITORY_VECTOR_AUTHORING_HISTORY",
+        "commits": [
+          "d2547af939fe374ea9ef0b93c4fa65382b98be1f",
+          "14142306a9d160fc2ebc01486167853bc27dcdf2"
+        ],
+        "note": "Git patch history shows the vector mark introduced/modified in repository brand commits. Commit authorship alone is not sufficient proof of commercial IP ownership."
+      }
     },
     {
       "path": "assets/modaryx-realm-vista-reduced.webp",
@@ -195,10 +203,15 @@
       "sizeBytes": 95172,
       "classification": "PRODUCT",
       "duplicateOf": null,
-      "provenanceStatus": "PREUVE MANQUANTE",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
       "commercialRightsStatus": "PREUVE MANQUANTE",
       "finalReleaseAllowed": false,
-      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "DERIVATIVE_CHAIN_DOCUMENTED_IN_GIT",
+        "commit": "806a4fe4636da907afd8a6a12e22e83a71bcabbe",
+        "note": "Commit states the lightweight vista was derived from an approved existing panorama with no scene/geography redrawn. Underlying source rights remain unresolved."
+      }
     },
     {
       "path": "assets/modaryx-wolf-dragon-hero.webp",
@@ -206,10 +219,17 @@
       "sizeBytes": 198162,
       "classification": "PRODUCT",
       "duplicateOf": null,
-      "provenanceStatus": "PREUVE MANQUANTE",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
       "commercialRightsStatus": "PREUVE MANQUANTE",
       "finalReleaseAllowed": false,
-      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "USER_PROVIDED_SOURCE_ARCHIVE_DOCUMENTED_IN_GIT",
+        "sourceArchive": "Nova_Forge_5_Nouveaux_Concepts_Loup_Dragon(1).rar",
+        "sourceArchiveSha256": "c7592976adc53de0d5fb6f98bc1454c73d741bd0215fcd1398e047ececfb6532",
+        "commit": "c8c163799a46f8c4ec780d6a5189eb57865cb932",
+        "note": "Git documentation states five PNGs were extracted and references 02/03/01 inspected/adapted. This proves an internal source chain, not ownership or commercial licence."
+      }
     },
     {
       "path": "assets/modaryx-world-portals.webp",
@@ -217,10 +237,17 @@
       "sizeBytes": 169360,
       "classification": "PRODUCT",
       "duplicateOf": null,
-      "provenanceStatus": "PREUVE MANQUANTE",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
       "commercialRightsStatus": "PREUVE MANQUANTE",
       "finalReleaseAllowed": false,
-      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "USER_PROVIDED_SOURCE_ARCHIVE_DOCUMENTED_IN_GIT",
+        "sourceArchive": "Nova_Forge_5_Nouveaux_Concepts_Loup_Dragon(1).rar",
+        "sourceArchiveSha256": "c7592976adc53de0d5fb6f98bc1454c73d741bd0215fcd1398e047ececfb6532",
+        "commit": "c8c163799a46f8c4ec780d6a5189eb57865cb932",
+        "note": "Git documentation states five PNGs were extracted and references 02/03/01 inspected/adapted. This proves an internal source chain, not ownership or commercial licence."
+      }
     },
     {
       "path": "assets/nova-kingdom-panorama.svg",
@@ -272,10 +299,18 @@
       "sizeBytes": 331,
       "classification": "PRODUCT",
       "duplicateOf": "assets/modaryx-mark.svg",
-      "provenanceStatus": "PREUVE MANQUANTE",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
       "commercialRightsStatus": "PREUVE MANQUANTE",
       "finalReleaseAllowed": false,
-      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "IN_REPOSITORY_VECTOR_AUTHORING_HISTORY",
+        "commits": [
+          "d2547af939fe374ea9ef0b93c4fa65382b98be1f",
+          "14142306a9d160fc2ebc01486167853bc27dcdf2"
+        ],
+        "note": "Git patch history shows the vector mark introduced/modified in repository brand commits. Commit authorship alone is not sufficient proof of commercial IP ownership."
+      }
     },
     {
       "path": "qa/finish-line/after-catalog-768.webp",
@@ -1185,10 +1220,16 @@
       "sizeBytes": 2680314,
       "classification": "PRODUCT",
       "duplicateOf": "review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-content-sheet.png",
-      "provenanceStatus": "PREUVE MANQUANTE",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
       "commercialRightsStatus": "PREUVE MANQUANTE",
       "finalReleaseAllowed": false,
-      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "GENERATED_SPECIFICALLY_FOR_ISOLATED_V2_PROTOTYPE",
+        "sourceCommit": "33405e93bae60ccfc4b84362f3102c578d100ab9",
+        "sourceVisualTruthPath": "C:\\Users\\steph\\.codex\\generated_images\\01a1033a-47d2-7910-92b8-05aa89cfb208\\exec-197fd322-f242-4a81-a337-91f52572641b.png",
+        "note": "Design docs say the prototype used assets generated specifically and dedicated generated raster assets. Exact generator/model/terms/account evidence is still missing."
+      }
     },
     {
       "path": "v2/public/assets/living-threshold-hero.png",
@@ -1196,10 +1237,16 @@
       "sizeBytes": 1527079,
       "classification": "PRODUCT",
       "duplicateOf": "review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-hero.png",
-      "provenanceStatus": "PREUVE MANQUANTE",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
       "commercialRightsStatus": "PREUVE MANQUANTE",
       "finalReleaseAllowed": false,
-      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "GENERATED_SPECIFICALLY_FOR_ISOLATED_V2_PROTOTYPE",
+        "sourceCommit": "33405e93bae60ccfc4b84362f3102c578d100ab9",
+        "sourceVisualTruthPath": "C:\\Users\\steph\\.codex\\generated_images\\01a1033a-47d2-7910-92b8-05aa89cfb208\\exec-197fd322-f242-4a81-a337-91f52572641b.png",
+        "note": "Design docs say the prototype used assets generated specifically and dedicated generated raster assets. Exact generator/model/terms/account evidence is still missing."
+      }
     },
     {
       "path": "v2/public/assets/modaryx-mark-192.png",
@@ -1229,10 +1276,38 @@
       "sizeBytes": 331,
       "classification": "PRODUCT",
       "duplicateOf": "assets/modaryx-mark.svg",
-      "provenanceStatus": "PREUVE MANQUANTE",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
       "commercialRightsStatus": "PREUVE MANQUANTE",
       "finalReleaseAllowed": false,
-      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "IN_REPOSITORY_VECTOR_AUTHORING_HISTORY",
+        "commits": [
+          "d2547af939fe374ea9ef0b93c4fa65382b98be1f",
+          "14142306a9d160fc2ebc01486167853bc27dcdf2"
+        ],
+        "note": "Git patch history shows the vector mark introduced/modified in repository brand commits. Commit authorship alone is not sufficient proof of commercial IP ownership."
+      }
     }
-  ]
+  ],
+  "updatedAt": "2026-10-07",
+  "evidenceSummary": {
+    "USER_PROVIDED_ARCHIVE_PARTIAL": [
+      "assets/modaryx-wolf-dragon-hero.webp",
+      "assets/modaryx-world-portals.webp"
+    ],
+    "DERIVED_FROM_EXISTING_APPROVED_PANORAMA_PARTIAL": [
+      "assets/modaryx-realm-vista-reduced.webp"
+    ],
+    "GENERATED_SPECIFICALLY_FOR_V2_PROTOTYPE_PARTIAL": [
+      "v2/public/assets/living-threshold-content-sheet.png",
+      "v2/public/assets/living-threshold-hero.png"
+    ],
+    "IN_REPO_BRAND_VECTOR_HISTORY_PARTIAL": [
+      "assets/modaryx-mark.svg",
+      "favicon.svg",
+      "v2/public/assets/modaryx-mark.svg"
+    ],
+    "NO_SOURCE_TOOL_EVIDENCE_RECOVERED_YET": "living-world staged layers and other product assets remain PREUVE MANQUANTE"
+  }
 }
