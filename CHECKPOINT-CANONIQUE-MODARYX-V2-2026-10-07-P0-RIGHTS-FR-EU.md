@@ -147,3 +147,33 @@ Référence :
 `docs/MODARYX-V2-ASSET-PROVENANCE-EVIDENCE-20261007.md`.
 
 Aucun `finalReleaseAllowed` n'a été passé à `true`.
+
+
+---
+
+## 11. Mise à jour privacy / rétention — 2026-10-07
+
+Calendrier candidat ajouté :
+`docs/MODARYX-V2-RETENTION-SCHEDULE-CANDIDATE-20261007.md`.
+
+Cadres de référence intégrés sans configuration production :
+- auth transaction : purge rapide après expiration, durée exacte **PREUVE MANQUANTE** ;
+- sessions : jusqu'à expiration/révocation, secrets invalidés dès révocation ;
+- logs sécurité standard : **6 à 12 mois candidat** selon nature/justification ;
+- profils/comptes : pendant le besoin de service, traitement post-clôture à justifier séparément ;
+- UGC/modération : durée finale dépend du rôle réel, des CGU et du DSA applicable ;
+- prospection si activée : cadre CNIL de **3 ans** selon relation client/prospect ;
+- mémorisation du choix cookies si CMP nécessaire : **6 mois candidat** ;
+- mesure d'audience exemptée de consentement : **13 mois traceur / 25 mois données maximum uniquement si toutes les conditions CNIL sont réellement satisfaites** ;
+- pièces comptables françaises : **10 ans uniquement lorsque l'obligation s'applique effectivement au vendeur/document**.
+
+Aucune de ces durées ne devient automatiquement une valeur production.
+
+Toujours **PREUVE MANQUANTE / LEGAL_REVIEW_REQUIRED** :
+- responsable de traitement ;
+- finalités finales ;
+- rôle DSA ;
+- provider RUM/CMP ;
+- vendeur et modèle de facturation ;
+- sauvegardes/purge production ;
+- process suppression/export.
