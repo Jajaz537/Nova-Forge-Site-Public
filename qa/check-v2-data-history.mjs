@@ -4,10 +4,13 @@ import sqlite3 from "node:sqlite";
 import {validateDataHistoryEvent} from "../functions/_lib/data-history.mjs";
 
 const contract=JSON.parse(fs.readFileSync("qa/modaryx-v2-data-history-contract.json","utf8"));
-assert.equal(contract.status,"CANDIDATE_LOCAL_MIGRATION_PROVEN_REMOTE_OPEN");
-assert.equal(contract.remoteApplication,"NOT_EXECUTED");
+assert.equal(contract.status,"DEV_SCHEMA_APPLIED_REMOTE_PIPELINE_PROOF_PENDING");
+assert.equal(contract.remoteApplication,"DEV_SCHEMA_APPLIED");
+assert.equal(contract.remoteSchemaEvidence.runId,37613283219);
+assert.equal(contract.remoteSchemaEvidence.tablePresent,true);
+assert.equal(contract.ownerPipelineProof,"NOT_EXECUTED");
 const inv=new Set(contract.invariants||[]);
-for(const x of ["OWNER_SCOPED_READS_ONLY","HISTORY_APPEND_ONLY","CHANGED_FIELDS_NO_VALUES","NO_REMOTE_D1_APPLY","NO_FAKE_HISTORY","PRODUCTION_BLOCKER_REMAINS_OPEN_UNTIL_REMOTE_PIPELINE_PROVEN"]) assert.ok(inv.has(x),"missing invariant "+x);
+for(const x of ["OWNER_SCOPED_READS_ONLY","HISTORY_APPEND_ONLY","CHANGED_FIELDS_NO_VALUES","NO_FAKE_HISTORY","NO_DIRECT_SYNTHETIC_HISTORY_FOR_BLOCKER_CLOSURE","PRODUCTION_BLOCKER_REMAINS_OPEN_UNTIL_REMOTE_PIPELINE_PROVEN"]) assert.ok(inv.has(x),"missing invariant "+x);
 
 const db=new sqlite3.DatabaseSync(":memory:");
 for(const p of ["migrations/0001_modaryx_dev_foundation.sql","migrations/0002_modaryx_auth_sessions.sql","migrations/0003_modaryx_moderation_publication.sql","migrations/0004_modaryx_v2_core_model.sql","migrations/0005_modaryx_v2_notifications.sql","migrations/0006_modaryx_v2_data_history.sql"]) db.exec(fs.readFileSync(p,"utf8"));
