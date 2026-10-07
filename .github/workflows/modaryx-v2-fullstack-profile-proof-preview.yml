@@ -95,7 +95,23 @@ jobs:
           headers="$(curl -fsSI --max-time 20 "$PREVIEW_ORIGIN/account")"
           grep -qi 'x-robots-tag:.*noindex' <<<"$headers"
 
-          status="$(curl -fsS --max-time 20 "$PREVIEW_ORIGIN/api/v1/status")"
+          status=""
+          readiness=""
+          for attempt in $(seq 1 24); do
+            status="$(curl -fsS --max-time 20 "$PREVIEW_ORIGIN/api/v1/status" || true)"
+            readiness="$(curl -fsS --max-time 20 "$PREVIEW_ORIGIN/api/v1/production/readiness" || true)"
+            d1="$(jq -r '.bindings.d1 // false' <<<"$status" 2>/dev/null || echo false)"
+            login="$(jq -r '.auth0.loginConfigured // false' <<<"$status" 2>/dev/null || echo false)"
+            writes="$(jq -r '.remoteWritesReady // false' <<<"$status" 2>/dev/null || echo false)"
+            count="$(jq -r '.technical.d1Schema.presentCount // 0' <<<"$readiness" 2>/dev/null || echo 0)"
+            ready="$(jq -r '.technical.d1Schema.ready // false' <<<"$readiness" 2>/dev/null || echo false)"
+            if [ "$d1" = "true" ] && [ "$login" = "true" ] && [ "$writes" = "true" ] && [ "$count" = "32" ] && [ "$ready" = "true" ]; then
+              echo "FUNCTIONS_PROPAGATION_ATTEMPT=$attempt"
+              break
+            fi
+            sleep 3
+          done
+
           test "$(jq -r '.bindings.d1' <<<"$status")" = "true"
           test "$(jq -r '.auth0.configured' <<<"$status")" = "true"
           test "$(jq -r '.auth0.loginConfigured' <<<"$status")" = "true"
@@ -111,7 +127,6 @@ jobs:
           test "$history_status" = "401"
           test "$(jq -r '.error' "$tmp")" = "authentication-required"
 
-          readiness="$(curl -fsS --max-time 20 "$PREVIEW_ORIGIN/api/v1/production/readiness")"
           test "$(jq -r '.technical.d1Schema.presentCount' <<<"$readiness")" = "32"
           test "$(jq -r '.technical.d1Schema.ready' <<<"$readiness")" = "true"
           test "$(jq -r '.productionPass' <<<"$readiness")" = "false"
