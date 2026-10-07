@@ -1,0 +1,71 @@
+name: MODARYX V2 Fullstack Preview Read-Only Diagnose
+
+on:
+  push:
+    branches:
+      - 'feat/modaryx-v2-profile-editor-turnstile-20261007'
+    paths:
+      - '.github/workflows/modaryx-v2-fullstack-preview-readonly-diagnose.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-fullstack-preview-readonly-diagnose
+  cancel-in-progress: true
+
+env:
+  ORIGIN: https://v2-profile-proof.nova-forge-site-public.pages.dev
+
+jobs:
+  diagnose:
+    name: Diagnose deployed V2 preview with GET HEAD only
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Probe safe public state
+        shell: bash
+        run: |
+          set -euo pipefail
+          html_status="$(curl -sS -o /tmp/account.html -w '%{http_code}' --max-time 20 "$ORIGIN/account")"
+          echo "ACCOUNT_HTTP=$html_status"
+          echo "ACCOUNT_V2_TITLE_MATCH=$(grep -q 'MODARYX V2 — Candidat de production' /tmp/account.html && echo yes || echo no)"
+          curl -sSI --max-time 20 "$ORIGIN/account" > /tmp/account.headers
+          echo "ACCOUNT_X_ROBOTS=$(awk 'BEGIN{IGNORECASE=1}/^x-robots-tag:/{sub(/^[^:]+:[[:space:]]*/, ""); gsub(/\r/,""); print}' /tmp/account.headers | head -n1)"
+
+          status_http="$(curl -sS -o /tmp/status.json -w '%{http_code}' --max-time 20 "$ORIGIN/api/v1/status")"
+          echo "STATUS_HTTP=$status_http"
+          if jq -e . /tmp/status.json >/dev/null 2>&1; then
+            echo "STATUS_D1=$(jq -r '.bindings.d1 // false' /tmp/status.json)"
+            echo "STATUS_R2=$(jq -r '.bindings.r2 // false' /tmp/status.json)"
+            echo "STATUS_AUTH0=$(jq -r '.auth0.configured // false' /tmp/status.json)"
+            echo "STATUS_LOGIN=$(jq -r '.auth0.loginConfigured // false' /tmp/status.json)"
+            echo "STATUS_TURNSTILE_SECRET=$(jq -r '.turnstile.secretConfigured // false' /tmp/status.json)"
+            echo "STATUS_TURNSTILE_SITEKEY=$(jq -r '.turnstile.siteKeyConfigured // false' /tmp/status.json)"
+            echo "STATUS_REMOTE_WRITES=$(jq -r '.remoteWritesReady // false' /tmp/status.json)"
+          else
+            echo "STATUS_JSON=no"
+          fi
+
+          session_http="$(curl -sS -o /tmp/session.json -w '%{http_code}' --max-time 20 "$ORIGIN/api/v1/auth/session")"
+          echo "SESSION_HTTP=$session_http"
+          if jq -e . /tmp/session.json >/dev/null 2>&1; then
+            echo "SESSION_AUTHENTICATED=$(jq -r '.authenticated // false' /tmp/session.json)"
+            echo "SESSION_ERROR=$(jq -r '.error // "none"' /tmp/session.json)"
+          fi
+
+          history_http="$(curl -sS -o /tmp/history.json -w '%{http_code}' --max-time 20 "$ORIGIN/api/v1/history?limit=5")"
+          echo "HISTORY_HTTP=$history_http"
+          if jq -e . /tmp/history.json >/dev/null 2>&1; then
+            echo "HISTORY_ERROR=$(jq -r '.error // "none"' /tmp/history.json)"
+          fi
+
+          readiness_http="$(curl -sS -o /tmp/readiness.json -w '%{http_code}' --max-time 20 "$ORIGIN/api/v1/production/readiness")"
+          echo "READINESS_HTTP=$readiness_http"
+          if jq -e . /tmp/readiness.json >/dev/null 2>&1; then
+            echo "READINESS_D1_COUNT=$(jq -r '.technical.d1Schema.presentCount // -1' /tmp/readiness.json)"
+            echo "READINESS_D1_READY=$(jq -r '.technical.d1Schema.ready // false' /tmp/readiness.json)"
+            echo "READINESS_PRODUCTION_PASS=$(jq -r '.productionPass // false' /tmp/readiness.json)"
+          fi
+
+          echo PASS_MODARYX_V2_FULLSTACK_PREVIEW_READONLY_DIAGNOSE
