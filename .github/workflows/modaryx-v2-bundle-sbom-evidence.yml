@@ -1,0 +1,197 @@
+name: MODARYX V2 Bundle SBOM Evidence
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-bundle-sbom-evidence-20261007'
+    paths:
+      - '.github/workflows/modaryx-v2-bundle-sbom-evidence.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-bundle-sbom-evidence
+  cancel-in-progress: true
+
+jobs:
+  evidence:
+    name: Build candidate and inventory redistributed evidence
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact proof branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Record environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          node --version | tee evidence/node-version.txt
+          npm --version | tee evidence/npm-version.txt
+          git rev-parse HEAD | tee evidence/git-sha.txt
+          uname -a | tee evidence/runner-uname.txt
+
+      - name: Install exact lockfile
+        working-directory: v2
+        run: |
+          set -euo pipefail
+          npm ci
+
+      - name: Build exact candidate
+        working-directory: v2
+        run: |
+          set -euo pipefail
+          npm run build
+
+      - name: Run targeted Sites micro-tests
+        working-directory: v2
+        run: |
+          set -euo pipefail
+          npm run test:sites
+
+      - name: Generate bundle manifest and package/license evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs=require('fs');
+          const path=require('path');
+          const crypto=require('crypto');
+          const root=process.cwd();
+          const evidence=path.join(root,'evidence');
+          fs.mkdirSync(evidence,{recursive:true});
+          const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+          const walk=dir=>{
+            const out=[];
+            for(const ent of fs.readdirSync(dir,{withFileTypes:true})){
+              const p=path.join(dir,ent.name);
+              if(ent.isDirectory()) out.push(...walk(p));
+              else if(ent.isFile()) out.push(p);
+            }
+            return out;
+          };
+          const dist=path.join(root,'v2','dist');
+          if(!fs.existsSync(dist)) throw new Error('v2/dist missing after build');
+          const bundle=walk(dist).map(p=>({
+            path:path.relative(dist,p).replaceAll('\\','/'),
+            size:fs.statSync(p).size,
+            sha256:sha(p),
+            ext:path.extname(p).toLowerCase()||null
+          })).sort((a,b)=>a.path.localeCompare(b.path));
+          fs.writeFileSync(path.join(evidence,'MODARYX-V2-WORK-BUNDLE-MANIFEST-20261007.json'),JSON.stringify({
+            status:'TERMINÉ',
+            sourceSha:fs.readFileSync(path.join(evidence,'git-sha.txt'),'utf8').trim(),
+            root:'v2/dist',
+            fileCount:bundle.length,
+            files:bundle
+          },null,2));
+
+          const lock=JSON.parse(fs.readFileSync(path.join(root,'v2','package-lock.json'),'utf8'));
+          const pkgs=lock.packages||{};
+          const byName=new Map();
+          for(const [pkgPath,meta] of Object.entries(pkgs)){
+            if(!pkgPath || !meta?.name) continue;
+            const prev=byName.get(meta.name);
+            if(!prev || pkgPath.length<prev.pkgPath.length) byName.set(meta.name,{pkgPath,meta});
+          }
+          const runtimeRoots=new Set(['react','react-dom','@phosphor-icons/react']);
+          const buildRoots=new Set(['vite','@vitejs/plugin-react']);
+          const closure=roots=>{
+            const seen=new Set(), q=[...roots];
+            while(q.length){
+              const name=q.shift();
+              if(seen.has(name)) continue;
+              seen.add(name);
+              const rec=byName.get(name);
+              if(!rec) continue;
+              for(const dep of Object.keys(rec.meta.dependencies||{})) q.push(dep);
+            }
+            return seen;
+          };
+          const runtime=closure(runtimeRoots);
+          const build=closure(buildRoots);
+          const records=[];
+          for(const [pkgPath,meta] of Object.entries(pkgs)){
+            if(!pkgPath || !meta?.name) continue;
+            let classification='UNKNOWN';
+            if(runtime.has(meta.name)) classification='BUNDLED_OR_RUNTIME';
+            else if(build.has(meta.name)) classification='BUILD_ONLY';
+            const installed=path.join(root,'v2',pkgPath);
+            const texts=[];
+            if(fs.existsSync(installed)){
+              for(const ent of fs.readdirSync(installed,{withFileTypes:true})){
+                if(!ent.isFile()) continue;
+                if(!/^(licen[cs]e|notice|copying)(\..*)?$/i.test(ent.name)) continue;
+                const fp=path.join(installed,ent.name);
+                const buf=fs.readFileSync(fp);
+                texts.push({file:ent.name,sha256:crypto.createHash('sha256').update(buf).digest('hex'),content:buf.toString('utf8')});
+              }
+            }
+            records.push({
+              name:meta.name,
+              version:meta.version||null,
+              packagePath:pkgPath,
+              declaredLicense:meta.license||null,
+              classification,
+              classificationBasis: classification==='BUNDLED_OR_RUNTIME'
+                ? 'dependency closure of runtime roots react/react-dom/@phosphor-icons/react'
+                : classification==='BUILD_ONLY'
+                  ? 'dependency closure of build roots vite/@vitejs/plugin-react'
+                  : 'not proven by conservative role classification',
+              licenseNoticeTexts:texts
+            });
+          }
+          records.sort((a,b)=>a.name.localeCompare(b.name)||String(a.version).localeCompare(String(b.version)));
+          const caniuse=records.filter(r=>r.name==='caniuse-lite'&&r.version==='1.0.30001803');
+          fs.writeFileSync(path.join(evidence,'MODARYX-V2-WORK-LICENSE-EVIDENCE-20261007.json'),JSON.stringify({
+            status:'EN COURS',
+            packageCount:records.length,
+            method:'package-lock v3 + installed package root LICENSE/NOTICE/COPYING files; conservative dependency-role classification',
+            caniuseLiteVerification:caniuse,
+            packages:records
+          },null,2));
+          NODE
+
+      - name: Capture npm dependency tree
+        working-directory: v2
+        shell: bash
+        run: |
+          set +e
+          npm ls --all --json > ../evidence/npm-ls-all.json
+          code=$?
+          set -e
+          printf '{"exitCode":%s}\n' "$code" > ../evidence/npm-ls-status.json
+
+      - name: Generate npm SBOM when supported
+        working-directory: v2
+        shell: bash
+        run: |
+          set +e
+          npm sbom --sbom-format cyclonedx > ../evidence/MODARYX-V2-WORK-SBOM-20261007.cdx.json 2> ../evidence/npm-sbom.stderr.txt
+          code=$?
+          set -e
+          printf '{"exitCode":%s}\n' "$code" > ../evidence/npm-sbom-status.json
+          if [ "$code" -ne 0 ]; then
+            echo "PREUVE_MANQUANTE: npm sbom unavailable or failed; package inventory remains available."
+          fi
+
+      - name: Summarize evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "SOURCE_SHA=$(cat evidence/git-sha.txt)"
+          node -e "const x=require('./evidence/MODARYX-V2-WORK-BUNDLE-MANIFEST-20261007.json'); console.log('BUNDLE_FILES='+x.fileCount)"
+          node -e "const x=require('./evidence/MODARYX-V2-WORK-LICENSE-EVIDENCE-20261007.json'); const c=x.packages.reduce((a,p)=>(a[p.classification]=(a[p.classification]||0)+1,a),{}); console.log(JSON.stringify(c)); console.log('CANIUSE='+JSON.stringify(x.caniuseLiteVerification));"
+
+      - name: Upload evidence only
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: modaryx-v2-bundle-sbom-evidence
+          path: evidence
+          if-no-files-found: error
+          retention-days: 30
