@@ -23,9 +23,13 @@ Pour un contenu numérique sans support matériel, l'exception au droit de rétr
 
 Conséquence produit : si cette voie est retenue, le checkout et le journal de preuve doivent matérialiser les consentements/confirmations légalement nécessaires. Un simple libellé « non remboursable » n'est pas une solution de conformité.
 
+Depuis le 19 juin 2026, l'article L221-21 impose en outre, pour les contrats conclus à distance au moyen d'une interface en ligne lorsque le droit de rétractation existe, une fonctionnalité gratuite permettant de l'exercer pendant le délai. L'article D221-5 précise notamment qu'elle doit être visible, directement et facilement accessible et identifiée sans ambiguïté (par exemple « renoncer au contrat ici » ou formule analogue).
+
 Sources officielles :
-- https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000053310511/2026-07-06
+- https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044563141/
 - https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044563170/2026-05-06
+- https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044563193
+- https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000053303365
 
 ## 2. Conformité et remèdes numériques — France / UE
 
