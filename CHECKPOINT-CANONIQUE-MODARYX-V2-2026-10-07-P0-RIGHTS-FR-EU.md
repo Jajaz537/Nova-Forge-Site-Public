@@ -272,3 +272,32 @@ Résultat :
 - prix canonique : **aucun**
 - paiement : **aucun activé**
 - production : **aucun changement**
+
+
+---
+
+## 14. Handoff Work — bundle / SBOM / THIRD-PARTY — 2026-10-07 18:45 CEST
+
+HEAD GitHub revérifié avant écriture :
+`design/modaryx-v2-blue-violet-product-20261005` @ `f2ebe61655954d39b6230112f890b8bbc0f0ec9a`.
+
+Le prochain bloc de preuve exige désormais un environnement d'exécution propre capable de lancer le build V2. Runbook ajouté :
+`docs/MODARYX-V2-WORK-BUNDLE-SBOM-HANDOFF-20261007.md`.
+
+**À exécuter dans Work / environnement équivalent :**
+- `npm ci` puis `npm run build` dans `v2/`, sans déploiement ;
+- manifeste SHA-256 complet de `v2/dist` ;
+- SBOM + distinction dépendances réellement redistribuées / build-only / inconnues ;
+- collecte des LICENSE/NOTICE exacts ;
+- poursuite de la recherche de provenance des assets PRODUCT.
+
+**Toujours interdit / non décidé :**
+- production, DNS, paiement, cutover ;
+- prix canonique ;
+- fausse clearance de droits ;
+- passage automatique d'une gate à PASS.
+
+État après handoff :
+- VF TECHNIQUE : **EN COURS**
+- COMMERCIAL : **EN COURS**
+- LEGAL/COMPLIANCE France-UE : **BLOQUÉ / PREUVE MANQUANTE** sur les faits externes et droits non fermés.
