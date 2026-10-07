@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "NON_CANONICAL_MARKET_PRICING_REFERENCE",
+  "sourceSha": "2eca6ae74dc5c08ced64dd385399dfe99f199a75",
+  "rules": [
+    "NO_CANONICAL_PRICE_FROM_COMPETITOR_REFERENCE",
+    "NO_ARTIFICIAL_FREE_TIER_DEGRADATION",
+    "NO_DARK_PATTERNS",
+    "RECURRING_PRICE_REQUIRES_RECURRING_VALUE",
+    "MARKET_REFERENCE_DOES_NOT_REPLACE_WILLINGNESS_TO_PAY_OR_COST_DATA"
+  ],
+  "references": [
+    {
+      "service": "CurseForge Premium",
+      "officialUrl": "https://www.curseforge.com/premium",
+      "observedPricing": {
+        "monthlyUsd": 2.99,
+        "annualUsd": 30,
+        "annualMonthlyEquivalentUsd": 2.5
+      },
+      "observedValue": [
+        "ad-free",
+        "instant downloads",
+        "premium web + desktop",
+        "enhanced author support"
+      ],
+      "creatorShareObservation": "Official page states 70% of subscription payment goes to support authors."
+    },
+    {
+      "service": "Modrinth Plus",
+      "officialUrl": "https://modrinth.com/plus",
+      "observedPricing": {
+        "monthlyUsd": 4.99,
+        "annualDiscountPercent": 16
+      },
+      "observedValue": [
+        "ad-free",
+        "profile badge",
+        "creator support"
+      ],
+      "creatorShareObservation": "Official page states 50% of the subscription goes directly to Modrinth creators.",
+      "freeTierObservation": "Modrinth publicly states it does not plan to paywall content and creator features will remain free."
+    },
+    {
+      "service": "Nexus Mods Premium",
+      "officialUrl": "https://www.nexusmods.com/premium",
+      "observedPricing": {
+        "status": "DYNAMIC_OR_REGION_DEPENDENT_PRESENTATION",
+        "signupPageObserved": "from £2.99/month"
+      },
+      "observedValue": [
+        "uncapped download speeds",
+        "one-click collections",
+        "instant downloads",
+        "multi-threaded downloads",
+        "ad-free",
+        "preferred download server"
+      ],
+      "note": "Official pages emphasize convenience/performance benefits; exact current price presentation is not treated as a stable cross-region benchmark here."
+    },
+    {
+      "service": "Overwolf app subscriptions",
+      "officialUrl": "https://support.overwolf.com/support/solutions/articles/9000178332-app-subscriptions-faq",
+      "observedPricing": {
+        "status": "APP_SPECIFIC_NOT_USED_AS_DIRECT_PRICE_BENCHMARK"
+      },
+      "observedValue": [
+        "creator support",
+        "premium tools/quality-of-life",
+        "ad removal"
+      ],
+      "note": "Subscriptions are app-specific and renew every 30 days; not a direct apples-to-apples platform price benchmark."
+    }
+  ],
+  "modaryxImplications": [
+    {
+      "type": "HYPOTHESIS",
+      "statement": "4.99 EUR/month is a defensible research stimulus because an adjacent platform currently charges 4.99 USD/month, but currency, tax, feature set and market differences prevent direct equivalence."
+    },
+    {
+      "type": "HYPOTHESIS",
+      "statement": "6.99 and 8.99 EUR/month require substantially stronger recurring user value than ad removal or download convenience alone."
+    },
+    {
+      "type": "PRODUCT_GUARD",
+      "statement": "MODARYX should not copy artificial delays or speed restrictions into the free tier merely to manufacture Premium value."
+    },
+    {
+      "type": "PRODUCT_GUARD",
+      "statement": "Safety, accessibility, rights/provenance visibility and essential recovery remain baseline product quality, not Premium upsells."
+    },
+    {
+      "type": "RESEARCH_REQUIREMENT",
+      "statement": "Current market references do not replace willingness-to-pay testing, activation/retention, cost per MAU, refunds/chargebacks, VAT/tax and legal readiness."
+    }
+  ],
+  "currentResearchStimuliEurMonthly": [
+    4.99,
+    6.99,
+    8.99
+  ],
+  "canonicalPrice": null,
+  "paymentProvider": null,
+  "launchDecision": "PREUVE MANQUANTE"
+}
