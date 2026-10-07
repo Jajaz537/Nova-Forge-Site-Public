@@ -57,3 +57,28 @@ Le statut exact de redistribution et l'attribution requise doivent être validé
 - NOTICE final : **PREUVE MANQUANTE** ;
 - droits assets : **PREUVE MANQUANTE** ;
 - autorisation release commerciale fondée sur ce fichier seul : **BLOQUÉ**.
+
+
+## 6. Preuve CI du bundle candidat — 2026-10-07
+
+Référence :
+`docs/MODARYX-V2-CI-BUNDLE-SBOM-EVIDENCE-20261007.md`.
+
+Sur une exécution dont le delta depuis la branche produit ne contient que les workflows de preuve :
+- build + `test:sites` : **TERMINÉ** ;
+- bundle : **15 fichiers** ;
+- SBOM CycloneDX 1.5 : **66 composants** ;
+- 66 packages npm installés sur le runner sur 115 chemins package du lockfile multi-plateforme ;
+- classification conservatrice : **4 BUNDLED_OR_RUNTIME / 59 BUILD_ONLY / 3 UNKNOWN** ;
+- textes LICENSE/NOTICE locaux récupérés : **62/66**.
+
+Candidats runtime/bundled prouvés par rôle :
+- `@phosphor-icons/react@2.1.10` — MIT ;
+- `react@19.2.0` — MIT ;
+- `react-dom@19.2.0` — MIT ;
+- `scheduler@0.27.0` — MIT.
+
+`caniuse-lite@1.0.30001803` est confirmé `CC-BY-4.0` et classé **BUILD_ONLY** par la fermeture de dépendances des racines Vite/plugin React. Son texte `LICENSE` exact a été récupéré, SHA-256 :
+`fd3a263fe19ed8faa9068b43abaebafc02c77897b0c6fc09abc04bb592e5f16e`.
+
+Cette classification de rôle réduit le risque d'attribution dans le produit final mais ne remplace pas une preuve module→bundle minifié. Le NOTICE final reste donc **EN COURS** et non un PASS release.
