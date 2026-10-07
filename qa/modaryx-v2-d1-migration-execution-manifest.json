@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-06",
-  "status": "PREPARED_NOT_EXECUTED",
-  "sourceCommit": "d3863359b083b41388fca67e6e13af41144c72bb",
+  "date": "2026-10-07",
+  "status": "DEV_REMOTE_APPLIED_SCHEMA_PROVEN_PRODUCTION_BLOCKED",
+  "sourceCommit": "128add6e1b39aa072d300befed6641cd16bfef5f",
   "sequence": [
     {
       "order": 1,
@@ -136,7 +136,7 @@
     "ROLLBACK_OR_RESTORE_PATH_EVIDENCE"
   ],
   "invariants": [
-    "NO_REMOTE_APPLY_BY_THIS_MANIFEST",
+    "NO_ADDITIONAL_REMOTE_APPLY_BY_THIS_MANIFEST_UPDATE",
     "NO_WRANGLER_D1_EXECUTE_REMOTE_IN_PROOF",
     "NO_PRODUCTION_MUTATION",
     "NO_FIXTURE_SEED",
@@ -160,8 +160,41 @@
     "productionD1BindingPresent": false,
     "previewR2BindingPresent": false,
     "productionR2BindingPresent": false,
-    "d1MetadataApiScope": "INSUFFICIENT_401",
+    "d1MetadataApiScope": "D1_EDIT_OK_ON_DEDICATED_TOKEN",
     "mutationPerformed": false,
     "closesBlocker": false
+  },
+  "devRemoteApplyEvidence": {
+    "status": "SUCCESS",
+    "explicitApproval": true,
+    "runId": 37613283219,
+    "jobId": 112765470695,
+    "workflowHead": "eaabf029f8e916c40fa05e92c1057400ed7a5c7d",
+    "sourceCommit": "128add6e1b39aa072d300befed6641cd16bfef5f",
+    "targetIdSha256": "6b7632ab913b02ba55b35a024401d432749116ff4f82adf76dd275f8be244eba",
+    "preApplyTimestamp": "2026-10-07T11:19:28Z",
+    "preApplyBookmarkSha256": "5588e4509c58bfd9d05070f0d44b29869520378fb748961d6d59143302960912",
+    "preApplyExportSha256": "d7dabe791e6d42295a65fb9a2928fff019d5756dd93500ebd6e5b8ea72aadc26",
+    "preApplyExportBytes": 10199,
+    "migrationCount": 15,
+    "requiredV2TableCount": 32,
+    "zeroUnappliedMigrations": true,
+    "postApplySchemaReady": true,
+    "backendReadOnlySchemaReady": true,
+    "productionPass": false,
+    "productionD1BindingPresent": false,
+    "productionBindingMutated": false,
+    "dnsChanged": false,
+    "cutover": false,
+    "receiptArtifactId": 11479710441,
+    "receiptArtifactSha256": "b1e8455246acff26e2cf4465cad62f8ba14579c4306a1f8ea4e710859044e539",
+    "workflowReturnedToManualOnly": true
+  },
+  "postApplyEvidenceState": {
+    "d1SchemaReadOnlyTableCount": "PROVEN_32_OF_32",
+    "backendStatusReadOnly": "PROVEN_SCHEMA_READY_PRODUCTION_PASS_FALSE",
+    "ownerHistoryReadWriteTargetedProof": "PENDING_REAL_AUTHENTICATED_PIPELINE",
+    "rollbackOrRestorePathEvidence": "PROVEN_TIME_TRAVEL_POINT_AND_PRE_APPLY_EXPORT",
+    "productionPipelineProof": "PENDING"
   }
 }
