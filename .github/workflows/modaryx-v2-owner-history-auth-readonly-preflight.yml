@@ -1,0 +1,79 @@
+name: MODARYX V2 Owner History Auth Read-Only Preflight
+
+on:
+  push:
+    branches:
+      - 'qa/modaryx-v2-auth-owner-history-preflight-20261007'
+    paths:
+      - '.github/workflows/modaryx-v2-owner-history-auth-readonly-preflight.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-owner-history-auth-readonly-preflight
+  cancel-in-progress: true
+
+env:
+  ORIGIN: https://1912f10b.nova-forge-site-public.pages.dev
+
+jobs:
+  proof:
+    name: Prove auth foundation and owner-history gates without mutation
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Read backend status
+        shell: bash
+        run: |
+          set -euo pipefail
+          body="$(curl -fsS --max-time 20 "$ORIGIN/api/v1/status")"
+          test "$(jq -r '.bindings.d1' <<<"$body")" = "true"
+          test "$(jq -r '.auth0.configured' <<<"$body")" = "true"
+          test "$(jq -r '.auth0.loginConfigured' <<<"$body")" = "true"
+          test "$(jq -r '.turnstile.secretConfigured' <<<"$body")" = "true"
+          test "$(jq -r '.turnstile.siteKeyConfigured' <<<"$body")" = "true"
+          test "$(jq -r '.remoteWritesReady' <<<"$body")" = "true"
+          test "$(jq -r '.guarantees.secretsReturned' <<<"$body")" = "false"
+          echo "AUTH_FOUNDATION=READY"
+          echo "REMOTE_WRITE_FOUNDATION=READY"
+
+      - name: Prove guest session is read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          body="$(curl -fsS --max-time 20 "$ORIGIN/api/v1/auth/session")"
+          test "$(jq -r '.authenticated' <<<"$body")" = "false"
+          echo "GUEST_SESSION=EXPECTED"
+
+      - name: Prove owner history rejects unauthenticated read
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp)"
+          status="$(curl -sS -o "$tmp" -w '%{http_code}' --max-time 20 "$ORIGIN/api/v1/history?limit=5")"
+          test "$status" = "401"
+          test "$(jq -r '.error' "$tmp")" = "authentication-required"
+          echo "OWNER_HISTORY_GUEST_DENY=SUCCESS"
+
+      - name: Prove profile write rejects unauthenticated request before body mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp)"
+          status="$(curl -sS -o "$tmp" -w '%{http_code}' --max-time 20             -X PUT             -H "Origin: $ORIGIN"             -H "Content-Type: application/json"             --data '{"handle":"proof-user","displayName":"Proof User","bio":"","visibility":"private","creator":{"isCreator":false},"links":[],"turnstileToken":"not-used-because-auth-fails-first"}'             "$ORIGIN/api/v1/profile")"
+          test "$status" = "401"
+          test "$(jq -r '.error' "$tmp")" = "authentication-required"
+          echo "PROFILE_WRITE_GUEST_DENY=SUCCESS"
+
+      - name: Prove readiness sees applied D1 schema
+        shell: bash
+        run: |
+          set -euo pipefail
+          body="$(curl -fsS --max-time 20 "$ORIGIN/api/v1/production/readiness")"
+          test "$(jq -r '.technical.d1Schema.presentCount' <<<"$body")" = "32"
+          test "$(jq -r '.technical.d1Schema.ready' <<<"$body")" = "true"
+          test "$(jq -r '.productionPass' <<<"$body")" = "false"
+          echo "D1_SCHEMA_READY=32_OF_32"
+          echo "PRODUCTION_PASS_REMAINS_FALSE=yes"
+          echo "PASS_MODARYX_V2_OWNER_HISTORY_AUTH_READONLY_PREFLIGHT"
