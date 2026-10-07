@@ -1,0 +1,113 @@
+name: MODARYX V2 D1 Migrations Path Microproof
+
+on:
+  push:
+    branches:
+      - 'ops/modaryx-v2-d1-dev-controlled-20261007'
+    paths:
+      - '.github/workflows/modaryx-v2-d1-dev-migrations-list-microproof.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-d1-dev-migrations-list-microproof
+  cancel-in-progress: true
+
+env:
+  CLOUDFLARE_ZONE_NAME: modaryxmods.com
+  CLOUDFLARE_PROJECT_NAME: nova-forge-site-public
+  EXPECTED_SOURCE_SHA: 128add6e1b39aa072d300befed6641cd16bfef5f
+  EXPECTED_TARGET_ID_SHA256: 6b7632ab913b02ba55b35a024401d432749116ff4f82adf76dd275f8be244eba
+
+jobs:
+  proof:
+    name: Prove Wrangler resolves repo migrations without mutation
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      CLOUDFLARE_PAGES_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_D1_API_TOKEN }}
+
+    steps:
+      - name: Checkout exact approved canonical source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: 128add6e1b39aa072d300befed6641cd16bfef5f
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Resolve exact preview D1 target read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${CLOUDFLARE_PAGES_API_TOKEN:-}"
+          test -n "${CLOUDFLARE_API_TOKEN:-}"
+          api="https://api.cloudflare.com/client/v4"
+          pages_auth=(-H "Authorization: Bearer ${CLOUDFLARE_PAGES_API_TOKEN}" -H "Content-Type: application/json")
+          d1_auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${pages_auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}")"
+          test "$(jq -r '.success' <<<"$zones")" = "true"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+
+          project="$(curl -fsS "${pages_auth[@]}" "${api}/accounts/${account_id}/pages/projects/${CLOUDFLARE_PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$project")" = "true"
+          preview_id="$(jq -r '.result.deployment_configs.preview.d1_databases.MODARYX_DB.id // empty' <<<"$project")"
+          production_id="$(jq -r '.result.deployment_configs.production.d1_databases.MODARYX_DB.id // empty' <<<"$project")"
+          test -n "$preview_id"
+          test -z "$production_id"
+          target_hash="$(printf '%s' "$preview_id" | sha256sum | awk '{print $1}')"
+          test "$target_hash" = "$EXPECTED_TARGET_ID_SHA256"
+
+          meta="$(curl -fsS "${d1_auth[@]}" "${api}/accounts/${account_id}/d1/database/${preview_id}")"
+          test "$(jq -r '.success' <<<"$meta")" = "true"
+          db_name="$(jq -r '.result.name' <<<"$meta")"
+          test -n "$db_name"
+          test "$db_name" != "null"
+
+          echo "::add-mask::$account_id"
+          echo "::add-mask::$preview_id"
+          echo "::add-mask::$db_name"
+          echo "CLOUDFLARE_ACCOUNT_ID=$account_id" >> "$GITHUB_ENV"
+          echo "MODARYX_D1_DEV_ID=$preview_id" >> "$GITHUB_ENV"
+          echo "MODARYX_D1_DEV_NAME=$db_name" >> "$GITHUB_ENV"
+          echo "EXACT_PREVIEW_TARGET=VERIFIED"
+          echo "PRODUCTION_D1_BINDING=ABSENT"
+
+      - name: Build workspace-local Wrangler config
+        shell: bash
+        run: |
+          set -euo pipefail
+          config="$GITHUB_WORKSPACE/.modaryx-d1-dev-wrangler.json"
+          jq -n             --arg name "modaryx-v2-d1-migrations-list-microproof"             --arg dbname "$MODARYX_D1_DEV_NAME"             --arg dbid "$MODARYX_D1_DEV_ID"             '{
+              name:$name,
+              compatibility_date:"2026-10-07",
+              d1_databases:[{
+                binding:"MODARYX_DB",
+                database_name:$dbname,
+                database_id:$dbid,
+                migrations_dir:"migrations"
+              }]
+            }' > "$config"
+          chmod 600 "$config"
+          echo "WRANGLER_CONFIG_PATH=$config" >> "$GITHUB_ENV"
+          test -d "$GITHUB_WORKSPACE/migrations"
+          echo "WORKSPACE_MIGRATIONS_DIR=VERIFIED"
+
+      - name: List unapplied migrations read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          export CLOUDFLARE_ACCOUNT_ID
+          output="$(npx --yes wrangler@4 d1 migrations list MODARYX_DB --remote --config="$WRANGLER_CONFIG_PATH")"
+          printf '%s\n' "$output"
+          if grep -F "No migrations present" <<<"$output"; then
+            exit 1
+          fi
+          echo "PASS_D1_MIGRATIONS_LIST_MICROPROOF"
+
+      - name: Remove ephemeral config
+        if: always()
+        shell: bash
+        run: rm -f "$GITHUB_WORKSPACE/.modaryx-d1-dev-wrangler.json"
