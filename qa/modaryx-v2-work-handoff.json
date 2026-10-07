@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-07",
   "status": "READY_FOR_WORK_OR_REAL_OPERATOR",
-  "sourceCommit": "7ef0c89a13539b6060b51d604717c40b5cf5168b",
+  "sourceCommit": "128add6e1b39aa072d300befed6641cd16bfef5f",
   "targetBranch": "design/modaryx-v2-blue-violet-product-20261005",
   "blockerCount": 19,
   "blockers": [
@@ -282,7 +282,7 @@
     "AUTOMATION_NEVER_EQUALS_LEGAL_OR_PUBLISHER_APPROVAL"
   ],
   "testedCandidateCommit": "db8ebf50ba4ff593fd73b27e72075b4f8088686a",
-  "latestCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-07-0054.md",
+  "latestCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-07-1320.md",
   "latestReadOnlyProbe": {
     "runId": 37532315393,
     "jobId": 112504495423,
@@ -332,7 +332,7 @@
   },
   "currentFrontendEquivalence": {
     "previewSourceCommit": "acd424a3d4abf0eb4cb153dc24d5202db7412afe",
-    "canonicalCommit": "7ef0c89a13539b6060b51d604717c40b5cf5168b",
+    "canonicalCommit": "128add6e1b39aa072d300befed6641cd16bfef5f",
     "verifiedNoV2OrV2PreviewFileChanges": true,
     "fullTreeEquivalent": false,
     "scope": "FRONTEND_ONLY",
@@ -350,23 +350,24 @@
     "readOnlyVerification": true
   },
   "latestNotificationDestinationVault": {
-    "state": "CANDIDATE_LOCAL_PROOF_GREEN_REMOTE_NOT_APPLIED",
-    "finalCanonicalCommit": "7ef0c89a13539b6060b51d604717c40b5cf5168b",
+    "state": "DEV_SCHEMA_APPLIED_REMOTE_DISPATCH_NOT_IMPLEMENTED",
+    "finalCanonicalCommit": "128add6e1b39aa072d300befed6641cd16bfef5f",
     "migration": "0015",
     "keyAlgorithm": "AES-256-GCM",
     "requiredTable": "modaryx_v2_notification_destinations",
     "latestVaultProofRunId": 37543293985,
     "cloudflareFunctionsBuildProofRunId": 37543478471,
-    "remoteApplication": "NOT_EXECUTED",
+    "remoteApplication": "DEV_SCHEMA_APPLIED",
     "networkDispatch": "NOT_IMPLEMENTED"
   },
   "d1MigrationState": {
     "sequence": "0001-0015",
     "migrationCount": 15,
     "requiredV2TableCount": 32,
-    "remoteDevApply": "NOT_EXECUTED",
+    "remoteDevApply": "SUCCESS",
     "remoteProductionApply": "NOT_EXECUTED",
-    "explicitApprovalStillRequired": true
+    "ownerHistoryTargetedReadWrite": "PENDING_REAL_AUTHENTICATED_PIPELINE",
+    "separateProductionApprovalStillRequired": true
   },
   "notificationProviderCandidates": {
     "email": {
@@ -387,5 +388,33 @@
     "mergedCanonicalCommit": "7ef0c89a13539b6060b51d604717c40b5cf5168b",
     "fixedCanonicalDeploymentId": "1912f10b-d142-45ea-84ca-6c608c141d57",
     "fixedState": "SUCCESS"
+  },
+  "latestD1DevControlledApply": {
+    "status": "SUCCESS",
+    "sourceCommit": "128add6e1b39aa072d300befed6641cd16bfef5f",
+    "opsWorkflowHead": "eaabf029f8e916c40fa05e92c1057400ed7a5c7d",
+    "runId": 37613283219,
+    "jobId": 112765470695,
+    "targetIdSha256": "6b7632ab913b02ba55b35a024401d432749116ff4f82adf76dd275f8be244eba",
+    "preApplyTimestamp": "2026-10-07T11:19:28Z",
+    "preApplyBookmarkSha256": "5588e4509c58bfd9d05070f0d44b29869520378fb748961d6d59143302960912",
+    "preApplyExportSha256": "d7dabe791e6d42295a65fb9a2928fff019d5756dd93500ebd6e5b8ea72aadc26",
+    "preApplyExportBytes": 10199,
+    "zeroUnappliedMigrations": true,
+    "postApplyV2TableCount": 32,
+    "backendSchemaReady": true,
+    "productionPass": false,
+    "productionD1BindingPresent": false,
+    "receiptArtifactId": 11479710441,
+    "receiptArtifactSha256": "b1e8455246acff26e2cf4465cad62f8ba14579c4306a1f8ea4e710859044e539",
+    "workflowReturnedToManualOnly": true,
+    "ownerHistoryPipelineProof": "PENDING",
+    "productionPipelineProof": "PENDING"
+  },
+  "currentRuntimeEquivalence": {
+    "canonicalGovernanceCommit": "128add6e1b39aa072d300befed6641cd16bfef5f",
+    "latestCloudflareRuntimeProofCommit": "7ef0c89a13539b6060b51d604717c40b5cf5168b",
+    "docsOnlyDelta": true,
+    "note": "The governance merge after the Cloudflare runtime proof changed only checkpoint/handoff files; runtime proof remains applicable."
   }
 }
