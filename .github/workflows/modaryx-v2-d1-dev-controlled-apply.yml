@@ -1,6 +1,11 @@
 name: MODARYX V2 Controlled D1 DEV Apply
 
 on:
+  push:
+    branches:
+      - 'ops/modaryx-v2-d1-dev-controlled-20261007'
+    paths:
+      - '.github/workflows/modaryx-v2-d1-dev-controlled-apply.yml'
   workflow_dispatch:
 
 permissions:
