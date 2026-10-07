@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "NON_CANONICAL_INFRA_COST_SENSITIVITY",
+  "sourceSha": "fb8e681d363c04b2e2c857f27e4e116bfac7ae67",
+  "officialRates": {
+    "pages": {
+      "staticPlanUsdMonthly": 0,
+      "note": "Cloudflare Pages Free is listed at $0; static asset requests/bandwidth are not modeled as Workers requests."
+    },
+    "workersPaid": {
+      "minimumUsdMonthly": 5,
+      "includedRequestsMillionsMonthly": 10,
+      "additionalUsdPerMillionRequests": 0.3,
+      "includedCpuMillionMsMonthly": 30,
+      "additionalUsdPerMillionCpuMs": 0.02,
+      "egress": "NO_ADDITIONAL_CHARGE"
+    },
+    "d1Paid": {
+      "includedRowsReadBillionsMonthly": 25,
+      "additionalUsdPerMillionRowsRead": 0.001,
+      "includedRowsWrittenMillionsMonthly": 50,
+      "additionalUsdPerMillionRowsWritten": 1,
+      "includedStorageGb": 5,
+      "additionalUsdPerGbMonth": 0.75
+    },
+    "r2Standard": {
+      "includedStorageGb": 10,
+      "storageUsdPerGbMonth": 0.015,
+      "includedClassAMillionOps": 1,
+      "classAUsdPerMillionOps": 4.5,
+      "includedClassBMillionOps": 10,
+      "classBUsdPerMillionOps": 0.36,
+      "internetEgressUsdPerGb": 0
+    }
+  },
+  "scenarios": {
+    "workers": [
+      {
+        "name": "small",
+        "dynamicRequestsMillions": 5,
+        "assumedAvgCpuMsPerRequest": 5,
+        "estimatedUsdMonthly": 5,
+        "note": "Within included request and CPU allotments; only paid-plan minimum modeled."
+      },
+      {
+        "name": "medium",
+        "dynamicRequestsMillions": 25,
+        "assumedAvgCpuMsPerRequest": 5,
+        "estimatedUsdMonthly": 11.4,
+        "note": "Hypothetical sensitivity only."
+      },
+      {
+        "name": "large",
+        "dynamicRequestsMillions": 100,
+        "assumedAvgCpuMsPerRequest": 5,
+        "estimatedUsdMonthly": 41.4,
+        "note": "Hypothetical sensitivity only."
+      }
+    ],
+    "d1": [
+      {
+        "name": "small",
+        "rowsReadBillions": 1,
+        "rowsWrittenMillions": 5,
+        "storageGb": 1,
+        "estimatedUsdMonthly": 0
+      },
+      {
+        "name": "included-edge",
+        "rowsReadBillions": 25,
+        "rowsWrittenMillions": 50,
+        "storageGb": 5,
+        "estimatedUsdMonthly": 0
+      },
+      {
+        "name": "heavy",
+        "rowsReadBillions": 100,
+        "rowsWrittenMillions": 200,
+        "storageGb": 20,
+        "estimatedUsdMonthly": 236.25,
+        "note": "Demonstrates write-heavy sensitivity; not a forecast."
+      }
+    ],
+    "r2": [
+      {
+        "name": "small",
+        "storageGb": 100,
+        "classAMillionOps": 1,
+        "classBMillionOps": 10,
+        "estimatedUsdMonthly": 1.35
+      },
+      {
+        "name": "medium",
+        "storageGb": 1024,
+        "classAMillionOps": 10,
+        "classBMillionOps": 100,
+        "estimatedUsdMonthly": 88.11
+      },
+      {
+        "name": "large",
+        "storageGb": 10240,
+        "classAMillionOps": 50,
+        "classBMillionOps": 500,
+        "estimatedUsdMonthly": 550.35
+      }
+    ]
+  },
+  "interpretation": [
+    "These are sensitivity scenarios, not forecasts and not a production budget.",
+    "Static Pages traffic is not charged like dynamic Worker invocations under the cited pricing model.",
+    "For a mod platform, R2 operation volume can matter as much as storage at scale; free egress is economically relevant but not sufficient to choose the provider.",
+    "D1 writes become materially expensive only after the large included monthly allowance; schema/query design still matters.",
+    "Workers CPU/request cost is likely modest at moderate dynamic traffic, but real CPU_ms/request and request mix must be measured.",
+    "Support, moderation, fraud, rights, payment, legal, tax, observability, email/push and human operations are excluded."
+  ],
+  "decisionState": {
+    "canonicalInfraBudget": null,
+    "productionPlan": null,
+    "providerSelection": null,
+    "measuredRealUsage": "PREUVE MANQUANTE"
+  }
+}
