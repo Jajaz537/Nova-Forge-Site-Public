@@ -1,0 +1,21 @@
+.remote-profile-editor{margin-top:20px;display:grid;gap:18px}
+.remote-profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.remote-profile-grid label{display:grid;gap:7px;min-width:0}
+.remote-profile-grid label>span{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800}
+.remote-profile-grid input,.remote-profile-grid textarea,.remote-profile-grid select{width:100%;min-height:46px;border:1px solid rgba(89,111,148,.58);border-radius:10px;background:rgba(14,24,40,.96);color:var(--text);padding:11px 13px;outline:0}
+.remote-profile-grid textarea{min-height:110px;resize:vertical;line-height:1.5}
+.remote-profile-grid input:focus-visible,.remote-profile-grid textarea:focus-visible,.remote-profile-grid select:focus-visible{outline:3px solid var(--cyan);outline-offset:2px;border-color:var(--cyan)}
+.remote-profile-grid small{justify-self:end;color:var(--muted);font-size:10px}
+.remote-profile-wide{grid-column:1/-1}
+.remote-profile-security{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,360px);gap:18px;align-items:center;padding:16px;border:1px solid rgba(93,113,148,.4);border-radius:12px;background:linear-gradient(135deg,rgba(59,124,255,.05),rgba(139,99,255,.06))}
+.remote-profile-security>div:first-child{display:grid;gap:5px}
+.remote-profile-security strong{font-size:13px}
+.remote-profile-security span{color:var(--muted);font-size:12px;line-height:1.5}
+.turnstile-shell{min-height:65px;display:flex;align-items:center;justify-content:flex-end;overflow:hidden}
+.turnstile-slot{width:100%;min-height:65px}
+.remote-profile-actions{display:flex;gap:10px;flex-wrap:wrap}
+.remote-profile-actions button:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.remote-profile-message,.remote-profile-state{margin:0;color:#b9c7d8;font-size:12px;line-height:1.55}
+.remote-profile-state{margin-top:16px;padding:14px;border:1px solid var(--line);border-radius:10px;background:rgba(13,22,36,.78)}
+.remote-profile-state.error{border-color:rgba(255,113,138,.4);color:#ffc0cb}
+@media(max-width:760px){.remote-profile-grid{grid-template-columns:1fr}.remote-profile-wide{grid-column:auto}.remote-profile-security{grid-template-columns:1fr}.turnstile-shell{justify-content:flex-start}.remote-profile-actions{display:grid;grid-template-columns:1fr}.remote-profile-actions button{width:100%}}
