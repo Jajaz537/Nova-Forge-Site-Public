@@ -93,11 +93,22 @@ jobs:
 
           const lock=JSON.parse(fs.readFileSync(path.join(root,'v2','package-lock.json'),'utf8'));
           const pkgs=lock.packages||{};
+          const packageNameFromPath=pkgPath=>{
+            const marker='node_modules/';
+            const i=pkgPath.lastIndexOf(marker);
+            if(i<0) return null;
+            const rest=pkgPath.slice(i+marker.length);
+            const parts=rest.split('/');
+            if(!parts[0]) return null;
+            return parts[0].startsWith('@') ? parts.slice(0,2).join('/') : parts[0];
+          };
           const byName=new Map();
           for(const [pkgPath,meta] of Object.entries(pkgs)){
-            if(!pkgPath || !meta?.name) continue;
-            const prev=byName.get(meta.name);
-            if(!prev || pkgPath.length<prev.pkgPath.length) byName.set(meta.name,{pkgPath,meta});
+            if(!pkgPath) continue;
+            const name=meta?.name||packageNameFromPath(pkgPath);
+            if(!name) continue;
+            const prev=byName.get(name);
+            if(!prev || pkgPath.length<prev.pkgPath.length) byName.set(name,{pkgPath,meta,name});
           }
           const runtimeRoots=new Set(['react','react-dom','@phosphor-icons/react']);
           const buildRoots=new Set(['vite','@vitejs/plugin-react']);
@@ -117,10 +128,12 @@ jobs:
           const build=closure(buildRoots);
           const records=[];
           for(const [pkgPath,meta] of Object.entries(pkgs)){
-            if(!pkgPath || !meta?.name) continue;
+            if(!pkgPath) continue;
+            const name=meta?.name||packageNameFromPath(pkgPath);
+            if(!name) continue;
             let classification='UNKNOWN';
-            if(runtime.has(meta.name)) classification='BUNDLED_OR_RUNTIME';
-            else if(build.has(meta.name)) classification='BUILD_ONLY';
+            if(runtime.has(name)) classification='BUNDLED_OR_RUNTIME';
+            else if(build.has(name)) classification='BUILD_ONLY';
             const installed=path.join(root,'v2',pkgPath);
             const texts=[];
             if(fs.existsSync(installed)){
@@ -133,7 +146,7 @@ jobs:
               }
             }
             records.push({
-              name:meta.name,
+              name,
               version:meta.version||null,
               packagePath:pkgPath,
               declaredLicense:meta.license||null,
