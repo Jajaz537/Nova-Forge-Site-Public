@@ -1,0 +1,129 @@
+name: MODARYX V2 R2 Read-Only Preflight
+
+on:
+  push:
+    branches:
+      - 'qa/modaryx-v2-r2-readonly-preflight-20261007'
+    paths:
+      - '.github/workflows/modaryx-v2-r2-readonly-preflight.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-r2-readonly-preflight
+  cancel-in-progress: true
+
+env:
+  CLOUDFLARE_ZONE_NAME: modaryxmods.com
+  CLOUDFLARE_PROJECT_NAME: nova-forge-site-public
+  EXPECTED_BINDING: MODARYX_ARTIFACTS
+  CANDIDATE_DEV_BUCKET: modaryx-v2-artifacts-dev
+  FULLSTACK_ORIGIN: https://v2-profile-proof.nova-forge-site-public.pages.dev
+
+jobs:
+  proof:
+    name: Probe R2 account and Pages bindings with GET only
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: 5dcde91e7aa7d7ea3c8a40f9eec6ba69b2d0e14a
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Prove local R2 adapter contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          node qa/check-v2-artifact-storage-r2.mjs
+          echo R2_ADAPTER_LOCAL_PROOF=SUCCESS
+
+      - name: Resolve account and inspect Pages bindings
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${CLOUDFLARE_API_TOKEN:-}"
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}")"
+          test "$(jq -r '.success' <<<"$zones")" = "true"
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          test -n "$account_id"
+          echo "::add-mask::$account_id"
+          echo "CLOUDFLARE_ACCOUNT_ID=$account_id" >> "$GITHUB_ENV"
+
+          project="$(curl -fsS "${auth[@]}" "${api}/accounts/${account_id}/pages/projects/${CLOUDFLARE_PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$project")" = "true"
+
+          preview_count="$(jq -r --arg b "$EXPECTED_BINDING" '
+            (.result.deployment_configs.preview.r2_buckets // {}) |
+            if type=="object" then ([to_entries[] | select(.key==$b)] | length)
+            elif type=="array" then ([.[] | select((.binding // .name // "")==$b)] | length)
+            else 0 end' <<<"$project")"
+          production_count="$(jq -r --arg b "$EXPECTED_BINDING" '
+            (.result.deployment_configs.production.r2_buckets // {}) |
+            if type=="object" then ([to_entries[] | select(.key==$b)] | length)
+            elif type=="array" then ([.[] | select((.binding // .name // "")==$b)] | length)
+            else 0 end' <<<"$project")"
+
+          test "$preview_count" = "0"
+          test "$production_count" = "0"
+          echo "PREVIEW_R2_BINDING_${EXPECTED_BINDING}=ABSENT"
+          echo "PRODUCTION_R2_BINDING_${EXPECTED_BINDING}=ABSENT"
+
+      - name: Probe R2 bucket-list permission without mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H "Content-Type: application/json")
+          tmp="$(mktemp)"
+          http="$(curl -sS -o "$tmp" -w '%{http_code}' "${auth[@]}"             "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/r2/buckets?name_contains=modaryx&per_page=100")"
+
+          echo "R2_BUCKET_LIST_HTTP=$http"
+          if [ "$http" = "200" ]; then
+            test "$(jq -r '.success' "$tmp")" = "true"
+            count="$(jq -r '.result.buckets // [] | length' "$tmp")"
+            candidate="$(jq -r --arg name "$CANDIDATE_DEV_BUCKET" '[.result.buckets[]? | select(.name==$name)] | length' "$tmp")"
+            digest="$(jq -r '[.result.buckets[]?.name] | sort | join("\n")' "$tmp" | sha256sum | awk '{print $1}')"
+            echo "R2_METADATA_SCOPE=READABLE"
+            echo "R2_MODARYX_BUCKET_MATCH_COUNT=$count"
+            echo "R2_BUCKET_NAMESET_SHA256=$digest"
+            echo "R2_CANDIDATE_DEV_BUCKET_EXISTS=$candidate"
+          elif [ "$http" = "401" ] || [ "$http" = "403" ]; then
+            echo "R2_METADATA_SCOPE=INSUFFICIENT"
+            echo "R2_BUCKET_LIST_NOT_COUNTED_AS_BUCKET_EVIDENCE=yes"
+          else
+            echo "Unexpected R2 bucket-list HTTP: $http"
+            jq '{success,errors}' "$tmp" || cat "$tmp"
+            exit 1
+          fi
+
+      - name: Confirm deployed preview still has no R2 binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          status="$(curl -fsS --max-time 20 "$FULLSTACK_ORIGIN/api/v1/status")"
+          test "$(jq -r '.bindings.r2' <<<"$status")" = "false"
+          test "$(jq -r '.bindings.d1' <<<"$status")" = "true"
+          test "$(jq -r '.remoteWritesReady' <<<"$status")" = "true"
+          echo "FULLSTACK_PREVIEW_R2=false"
+          echo "FULLSTACK_PREVIEW_D1=true"
+
+      - name: Prove workflow is read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          file=".github/workflows/modaryx-v2-r2-readonly-preflight.yml"
+          if grep -E 'curl .* -(X|--request) *(POST|PUT|PATCH|DELETE)|wrangler +r2 +bucket +(create|delete)|wrangler +pages +deployment' "$file"; then
+            echo "mutation verb detected"
+            exit 1
+          fi
+          echo "READ_ONLY_R2_PREFLIGHT=yes"
+          echo "PASS_MODARYX_V2_R2_READ_ONLY_PREFLIGHT"
