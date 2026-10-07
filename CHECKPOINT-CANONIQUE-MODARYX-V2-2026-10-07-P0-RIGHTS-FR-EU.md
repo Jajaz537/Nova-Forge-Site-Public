@@ -651,3 +651,38 @@ Toujours exclus :
 **Budget infra canonique : PREUVE MANQUANTE.**
 **Mesures de production réelles : PREUVE MANQUANTE.**
 La gate commerciale reste **EN COURS**.
+
+
+---
+
+## 24. Sensibilité unit economics paiement — 2026-10-08
+
+Documents :
+- `docs/MODARYX-V2-UNIT-ECONOMICS-SENSITIVITY-20261008.md`
+- `docs/MODARYX-V2-UNIT-ECONOMICS-SENSITIVITY-20261008.json`
+
+Stripe France standard EEE, paiement réussi :
+- 4,99 € → frais ≈ **0,325 €** → payment-net ≈ **4,665 €**
+- 6,99 € → frais ≈ **0,355 €** → payment-net ≈ **6,635 €**
+- 8,99 € → frais ≈ **0,385 €** → payment-net ≈ **8,605 €**
+
+Ces valeurs excluent explicitement TVA/taxes, refunds, chargebacks, FX, support, modération, fraude, droits, juridique, infrastructure et CAC.
+
+Paddle :
+- headline officiel : **5 % + $0.50**
+- comparaison directe EUR non effectuée car Merchant of Record et base/coûts opérationnels différents.
+
+Lemon Squeezy :
+- base : **5 % + $0.50**
+- frais additionnels documentés possibles : international, PayPal, abonnement, payout.
+
+Conclusion :
+- aucun « net paiement » n'est assimilé à un bénéfice ;
+- aucun prix/provider n'est choisi ;
+- choix final à faire sur total cost of ownership + faits vendeur/territoires/fiscalité/refunds.
+
+**Prix canonique : PREUVE MANQUANTE.**
+**Provider : PREUVE MANQUANTE.**
+**Conversion/refunds/chargebacks terrain : PREUVE MANQUANTE.**
+
+Gate commerciale : **EN COURS**.
