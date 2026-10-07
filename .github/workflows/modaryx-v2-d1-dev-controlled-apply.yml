@@ -135,8 +135,8 @@ jobs:
                 database_id:$dbid,
                 migrations_dir:"migrations"
               }]
-            }' > /tmp/modaryx-d1-dev-wrangler.json
-          chmod 600 /tmp/modaryx-d1-dev-wrangler.json
+            }' > $GITHUB_WORKSPACE/.modaryx-d1-dev-wrangler.json
+          chmod 600 $GITHUB_WORKSPACE/.modaryx-d1-dev-wrangler.json
           echo "EPHEMERAL_WRANGLER_CONFIG=READY"
 
       - name: Capture pre-apply Time Travel restore point
@@ -166,7 +166,7 @@ jobs:
           set -euo pipefail
           export CLOUDFLARE_ACCOUNT_ID
           out="/tmp/modaryx-d1-dev-preapply.sql"
-          npx --yes wrangler@4 d1 export MODARYX_DB             --remote             --output="$out"             --skip-confirmation             --config=/tmp/modaryx-d1-dev-wrangler.json
+          npx --yes wrangler@4 d1 export MODARYX_DB             --remote             --output="$out"             --skip-confirmation             --config=$GITHUB_WORKSPACE/.modaryx-d1-dev-wrangler.json
           test -s "$out"
           chmod 600 "$out"
           export_hash="$(sha256sum "$out" | awk '{print $1}')"
@@ -183,7 +183,7 @@ jobs:
         run: |
           set -euo pipefail
           export CLOUDFLARE_ACCOUNT_ID
-          npx --yes wrangler@4 d1 migrations list MODARYX_DB             --remote             --config=/tmp/modaryx-d1-dev-wrangler.json | tee /tmp/migrations-before.txt
+          npx --yes wrangler@4 d1 migrations list MODARYX_DB             --remote             --config=$GITHUB_WORKSPACE/.modaryx-d1-dev-wrangler.json | tee /tmp/migrations-before.txt
           echo "PRE_APPLY_MIGRATION_LIST=CAPTURED"
 
       - name: Apply approved migration chain to exact D1 DEV target
@@ -191,7 +191,7 @@ jobs:
         run: |
           set -euo pipefail
           export CLOUDFLARE_ACCOUNT_ID
-          npx --yes wrangler@4 d1 migrations apply MODARYX_DB             --remote             --config=/tmp/modaryx-d1-dev-wrangler.json | tee /tmp/migrations-apply.txt
+          npx --yes wrangler@4 d1 migrations apply MODARYX_DB             --remote             --config=$GITHUB_WORKSPACE/.modaryx-d1-dev-wrangler.json | tee /tmp/migrations-apply.txt
           echo "D1_DEV_REMOTE_APPLY=SUCCESS"
 
       - name: Prove all migrations applied and required schema exists
@@ -200,7 +200,7 @@ jobs:
           set -euo pipefail
           export CLOUDFLARE_ACCOUNT_ID
 
-          after="$(npx --yes wrangler@4 d1 migrations list MODARYX_DB             --remote             --config=/tmp/modaryx-d1-dev-wrangler.json)"
+          after="$(npx --yes wrangler@4 d1 migrations list MODARYX_DB             --remote             --config=$GITHUB_WORKSPACE/.modaryx-d1-dev-wrangler.json)"
           printf '%s\n' "$after"
           if grep -Eq '000[1-9]_modaryx|001[0-5]_modaryx' <<<"$after"; then
             echo "UNAPPLIED_MIGRATION_REMAINS"
@@ -219,7 +219,7 @@ jobs:
             'modaryx_v2_rights_contact_suppressions','modaryx_v2_publisher_outbound_requests',
             'modaryx_v2_publisher_inbound_envelopes','modaryx_v2_rights_authorizing_reviews','modaryx_v2_cwv_samples'
           );"
-          result="$(npx --yes wrangler@4 d1 execute MODARYX_DB             --remote             --command="$sql"             --json             --config=/tmp/modaryx-d1-dev-wrangler.json)"
+          result="$(npx --yes wrangler@4 d1 execute MODARYX_DB             --remote             --command="$sql"             --json             --config=$GITHUB_WORKSPACE/.modaryx-d1-dev-wrangler.json)"
           present="$(jq -r '.[0].results[0].present_count // .[0].result[0].results[0].present_count // empty' <<<"$result")"
           test "$present" = "$EXPECTED_V2_TABLE_COUNT"
           echo "POST_APPLY_V2_TABLE_COUNT=$present"
@@ -286,4 +286,4 @@ jobs:
         if: always()
         shell: bash
         run: |
-          rm -f /tmp/modaryx-d1-dev-preapply.sql /tmp/modaryx-d1-dev-wrangler.json
+          rm -f /tmp/modaryx-d1-dev-preapply.sql $GITHUB_WORKSPACE/.modaryx-d1-dev-wrangler.json
