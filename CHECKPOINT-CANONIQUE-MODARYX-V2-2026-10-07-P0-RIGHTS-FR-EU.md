@@ -380,3 +380,30 @@ Gates :
 - LEGAL/COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**.
 
 Aucun déploiement, DNS, paiement, provider ou cutover.
+
+
+---
+
+## 17. THIRD-PARTY bundle candidate exact — 2026-10-07
+
+À partir de la preuve exacte `chunk.modules`, un NOTICE candidat limité aux composants npm réellement observés dans les chunks a été créé :
+`docs/MODARYX-V2-THIRD-PARTY-NOTICES-BUNDLE-CANDIDATE-20261007.md`.
+
+Contenu :
+- `@phosphor-icons/react@2.1.10` — MIT — texte exact + copyright Phosphor Icons ;
+- `react@19.2.0` — MIT ;
+- `react-dom@19.2.0` — MIT ;
+- `scheduler@0.27.0` — MIT ;
+- texte exact Meta partagé pour ces trois packages.
+
+`caniuse-lite@1.0.30001803` :
+- CC-BY-4.0 conservé dans la preuve build-time ;
+- absent des chunks client ;
+- non inclus dans le NOTICE redistribué candidat.
+
+État :
+- NOTICE npm du **bundle candidat actuel** : **TERMINÉ**
+- THIRD-PARTY final de release : **EN COURS** jusqu'au SHA final et au packaging final
+- droits des 5 assets PRODUCT redistribués : **BLOQUÉ / PREUVE MANQUANTE**
+
+Aucun changement production/paiement/DNS/cutover.
