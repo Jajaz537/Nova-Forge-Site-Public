@@ -1,0 +1,316 @@
+name: MODARYX V2 Controlled R2 DEV Activation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-r2-dev-controlled
+  cancel-in-progress: false
+
+env:
+  CLOUDFLARE_ZONE_NAME: modaryxmods.com
+  CLOUDFLARE_PROJECT_NAME: nova-forge-site-public
+  CANONICAL_SOURCE_SHA: 5dcde91e7aa7d7ea3c8a40f9eec6ba69b2d0e14a
+  R2_BINDING: MODARYX_ARTIFACTS
+  R2_DEV_BUCKET: modaryx-v2-artifacts-dev
+  R2_PROOF_ALIAS: v2-r2-proof
+  R2_PROOF_ORIGIN: https://v2-r2-proof.nova-forge-site-public.pages.dev
+
+jobs:
+  activate:
+    name: Create exact DEV bucket, bind preview only, and microprove R2
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CLOUDFLARE_PAGES_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_R2_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_API_TOKEN }}
+
+    steps:
+      - name: Checkout controlled proof branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Verify proof branch is canonical plus harness only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor "$CANONICAL_SOURCE_SHA" HEAD
+          unexpected="$(git diff --name-only "$CANONICAL_SOURCE_SHA...HEAD" | grep -Ev '^(.github/workflows/modaryx-v2-r2-dev-controlled-apply.yml|functions/api/v1/qa/r2-proof.js)$' || true)"
+          if [ -n "$unexpected" ]; then
+            echo "Unexpected files relative to canonical source:"
+            printf '%s\n' "$unexpected"
+            exit 1
+          fi
+          node qa/check-v2-artifact-storage-r2.mjs
+          echo "CONTROLLED_R2_HARNESS=VERIFIED"
+
+      - name: Resolve exact account and capture Pages config before mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${CLOUDFLARE_PAGES_API_TOKEN:-}"
+          test -n "${CLOUDFLARE_R2_API_TOKEN:-}"
+
+          api="https://api.cloudflare.com/client/v4"
+          pages_auth=(-H "Authorization: Bearer ${CLOUDFLARE_PAGES_API_TOKEN}" -H "Content-Type: application/json")
+
+          zones="$(curl -fsS "${pages_auth[@]}" "${api}/zones?name=${CLOUDFLARE_ZONE_NAME}")"
+          test "$(jq -r '.success' <<<"$zones")" = "true"
+          test "$(jq '.result | length' <<<"$zones")" -eq 1
+          account_id="$(jq -r '.result[0].account.id' <<<"$zones")"
+          test -n "$account_id"
+
+          echo "::add-mask::$account_id"
+          echo "CLOUDFLARE_ACCOUNT_ID=$account_id" >> "$GITHUB_ENV"
+
+          curl -fsS "${pages_auth[@]}"             "${api}/accounts/${account_id}/pages/projects/${CLOUDFLARE_PROJECT_NAME}"             > /tmp/pages-before.json
+          test "$(jq -r '.success' /tmp/pages-before.json)" = "true"
+          test "$(jq -r '.result.production_branch' /tmp/pages-before.json)" = "main"
+
+          preview_binding="$(jq -r --arg b "$R2_BINDING" '.result.deployment_configs.preview.r2_buckets[$b].name // empty' /tmp/pages-before.json)"
+          production_binding="$(jq -r --arg b "$R2_BINDING" '.result.deployment_configs.production.r2_buckets[$b].name // empty' /tmp/pages-before.json)"
+          test -z "$preview_binding"
+          test -z "$production_binding"
+
+          jq '.result.deployment_configs.preview.r2_buckets // {}' /tmp/pages-before.json > /tmp/r2-before.json
+          preview_non_r2_hash="$(jq -cS '.result.deployment_configs.preview | del(.r2_buckets)' /tmp/pages-before.json | sha256sum | awk '{print $1}')"
+          production_hash="$(jq -cS '.result.deployment_configs.production' /tmp/pages-before.json | sha256sum | awk '{print $1}')"
+          d1_id="$(jq -r '.result.deployment_configs.preview.d1_databases.MODARYX_DB.id // empty' /tmp/pages-before.json)"
+          test -n "$d1_id"
+          d1_hash="$(printf '%s' "$d1_id" | sha256sum | awk '{print $1}')"
+
+          echo "::add-mask::$d1_id"
+          echo "PREVIEW_NON_R2_HASH=$preview_non_r2_hash" >> "$GITHUB_ENV"
+          echo "PRODUCTION_CONFIG_HASH=$production_hash" >> "$GITHUB_ENV"
+          echo "PREVIEW_D1_ID_SHA256=$d1_hash" >> "$GITHUB_ENV"
+          echo "PAGES_PRE_R2_BINDING=ABSENT"
+          echo "PAGES_PRODUCTION_R2_BINDING=ABSENT"
+
+      - name: Require dedicated R2 write token and exact bucket absence
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          r2_auth=(-H "Authorization: Bearer ${CLOUDFLARE_R2_API_TOKEN}" -H "Content-Type: application/json")
+          tmp="$(mktemp)"
+          http="$(curl -sS -o "$tmp" -w '%{http_code}' "${r2_auth[@]}"             "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/r2/buckets?name_contains=${R2_DEV_BUCKET}&per_page=100")"
+          if [ "$http" != "200" ]; then
+            echo "R2_LIST_HTTP=$http"
+            jq '{success,errors}' "$tmp" || cat "$tmp"
+            exit 41
+          fi
+          test "$(jq -r '.success' "$tmp")" = "true"
+          exact="$(jq -r --arg name "$R2_DEV_BUCKET" '[.result.buckets[]? | select(.name==$name)] | length' "$tmp")"
+          test "$exact" = "0"
+          echo "R2_WRITE_SCOPE=VERIFIED"
+          echo "R2_EXACT_DEV_BUCKET_PRESTATE=ABSENT"
+
+      - name: Create exact DEV R2 bucket
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          r2_auth=(-H "Authorization: Bearer ${CLOUDFLARE_R2_API_TOKEN}" -H "Content-Type: application/json")
+          body="$(jq -n --arg name "$R2_DEV_BUCKET" '{name:$name}')"
+          created="$(curl -fsS -X POST "${r2_auth[@]}"             --data "$body"             "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/r2/buckets")"
+          test "$(jq -r '.success' <<<"$created")" = "true"
+          test "$(jq -r '.result.name // empty' <<<"$created")" = "$R2_DEV_BUCKET"
+          echo "R2_BUCKET_CREATED=yes" >> "$GITHUB_ENV"
+          echo "R2_DEV_BUCKET_CREATE=SUCCESS"
+
+      - name: Bind R2 to Pages preview only
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          pages_auth=(-H "Authorization: Bearer ${CLOUDFLARE_PAGES_API_TOKEN}" -H "Content-Type: application/json")
+
+          new_r2="$(jq --arg binding "$R2_BINDING" --arg name "$R2_DEV_BUCKET"             '. + {($binding): {name:$name}}' /tmp/r2-before.json)"
+          patch="$(jq -n --argjson r2 "$new_r2" '{deployment_configs:{preview:{r2_buckets:$r2}}}')"
+
+          updated="$(curl -fsS -X PATCH "${pages_auth[@]}"             --data "$patch"             "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}")"
+          test "$(jq -r '.success' <<<"$updated")" = "true"
+          echo "R2_BINDING_CHANGED=yes" >> "$GITHUB_ENV"
+
+          curl -fsS "${pages_auth[@]}"             "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}"             > /tmp/pages-after.json
+
+          test "$(jq -r --arg b "$R2_BINDING" '.result.deployment_configs.preview.r2_buckets[$b].name // empty' /tmp/pages-after.json)" = "$R2_DEV_BUCKET"
+          test -z "$(jq -r --arg b "$R2_BINDING" '.result.deployment_configs.production.r2_buckets[$b].name // empty' /tmp/pages-after.json)"
+
+          after_preview_non_r2="$(jq -cS '.result.deployment_configs.preview | del(.r2_buckets)' /tmp/pages-after.json | sha256sum | awk '{print $1}')"
+          after_production="$(jq -cS '.result.deployment_configs.production' /tmp/pages-after.json | sha256sum | awk '{print $1}')"
+          test "$after_preview_non_r2" = "$PREVIEW_NON_R2_HASH"
+          test "$after_production" = "$PRODUCTION_CONFIG_HASH"
+
+          d1_after="$(jq -r '.result.deployment_configs.preview.d1_databases.MODARYX_DB.id // empty' /tmp/pages-after.json)"
+          d1_after_hash="$(printf '%s' "$d1_after" | sha256sum | awk '{print $1}')"
+          test "$d1_after_hash" = "$PREVIEW_D1_ID_SHA256"
+
+          echo "R2_PREVIEW_BINDING=SUCCESS"
+          echo "R2_PRODUCTION_BINDING=ABSENT"
+          echo "PAGES_NON_R2_CONFIG_UNCHANGED=yes"
+
+      - name: Write and read benign proof object through R2 REST
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          r2_auth=(-H "Authorization: Bearer ${CLOUDFLARE_R2_API_TOKEN}")
+          printf 'MODARYX-R2-DEV-PROOF\nsource=%s\n' "$CANONICAL_SOURCE_SHA" > /tmp/r2-proof.txt
+          proof_sha="$(sha256sum /tmp/r2-proof.txt | awk '{print $1}')"
+          proof_size="$(wc -c < /tmp/r2-proof.txt | tr -d ' ')"
+          key="v2/artifacts/mx_release_r2proof/mx_file_r2proof/${proof_sha}/proof.txt"
+          echo "R2_PROOF_SHA256=$proof_sha" >> "$GITHUB_ENV"
+          echo "R2_PROOF_SIZE=$proof_size" >> "$GITHUB_ENV"
+          echo "R2_PROOF_OBJECT_KEY=$key" >> "$GITHUB_ENV"
+
+          upload="$(curl -fsS -X PUT "${r2_auth[@]}"             -H "Content-Type: text/plain; charset=utf-8"             --data-binary @/tmp/r2-proof.txt             "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/r2/buckets/${R2_DEV_BUCKET}/objects/${key}")"
+          test "$(jq -r '.success' <<<"$upload")" = "true"
+          echo "R2_PROOF_OBJECT_CREATED=yes" >> "$GITHUB_ENV"
+
+          curl -fsS "${r2_auth[@]}"             "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/r2/buckets/${R2_DEV_BUCKET}/objects/${key}"             -o /tmp/r2-proof-read.txt
+          read_sha="$(sha256sum /tmp/r2-proof-read.txt | awk '{print $1}')"
+          read_size="$(wc -c < /tmp/r2-proof-read.txt | tr -d ' ')"
+          test "$read_sha" = "$proof_sha"
+          test "$read_size" = "$proof_size"
+          echo "R2_DIRECT_WRITE_READ_HASH=SUCCESS"
+
+      - name: Build and deploy isolated full-stack R2 proof preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          (
+            cd v2
+            npm ci
+            npm run build
+            npm run test:sites
+          )
+          printf '/* /index.html 200\n' > v2/dist/client/_redirects
+          cat > v2/dist/client/_headers <<'EOF'
+          /*
+            X-Robots-Tag: noindex, nofollow, noarchive
+            Referrer-Policy: no-referrer
+          EOF
+
+          CLOUDFLARE_API_TOKEN="$CLOUDFLARE_PAGES_API_TOKEN"           CLOUDFLARE_ACCOUNT_ID="$CLOUDFLARE_ACCOUNT_ID"           npx --yes wrangler@4 pages deploy v2/dist/client             --project-name="$CLOUDFLARE_PROJECT_NAME"             --branch="$R2_PROOF_ALIAS"             --commit-hash="$(git rev-parse HEAD)"             --commit-message="MODARYX V2 controlled R2 DEV proof"             --commit-dirty=false
+          echo "R2_FULLSTACK_PROOF_DEPLOYED=yes"
+
+      - name: Prove binding and adapter read on real R2
+        shell: bash
+        run: |
+          set -euo pipefail
+          status=""
+          proof=""
+          for attempt in $(seq 1 30); do
+            status="$(curl -fsS --max-time 20 "$R2_PROOF_ORIGIN/api/v1/status" || true)"
+            proof="$(curl -fsS --max-time 20 "$R2_PROOF_ORIGIN/api/v1/qa/r2-proof" || true)"
+            r2="$(jq -r '.bindings.r2 // false' <<<"$status" 2>/dev/null || echo false)"
+            read_ok="$(jq -r '.proofRead // false' <<<"$proof" 2>/dev/null || echo false)"
+            if [ "$r2" = "true" ] && [ "$read_ok" = "true" ]; then
+              echo "R2_FUNCTIONS_PROPAGATION_ATTEMPT=$attempt"
+              break
+            fi
+            sleep 3
+          done
+
+          test "$(jq -r '.bindings.r2' <<<"$status")" = "true"
+          test "$(jq -r '.bindings.d1' <<<"$status")" = "true"
+          test "$(jq -r '.proofRead' <<<"$proof")" = "true"
+          test "$(jq -r '.proofSha256' <<<"$proof")" = "$R2_PROOF_SHA256"
+          test "$(jq -r '.proofSize' <<<"$proof")" = "$R2_PROOF_SIZE"
+          test "$(jq -r '.revokedReadDenied' <<<"$proof")" = "true"
+          test "$(jq -r '.productionApproval' <<<"$proof")" = "OPEN"
+
+          readiness="$(curl -fsS --max-time 20 "$R2_PROOF_ORIGIN/api/v1/production/readiness")"
+          test "$(jq -r '.productionPass' <<<"$readiness")" = "false"
+          echo "R2_REAL_BINDING_ADAPTER_READ=SUCCESS"
+          echo "R2_REVOKED_DENY=SUCCESS"
+          echo "PRODUCTION_PASS_REMAINS_FALSE=yes"
+
+      - name: Delete benign proof object after successful proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4"
+          r2_auth=(-H "Authorization: Bearer ${CLOUDFLARE_R2_API_TOKEN}" -H "Content-Type: application/json")
+          deleted="$(curl -fsS -X DELETE "${r2_auth[@]}"             "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/r2/buckets/${R2_DEV_BUCKET}/objects/${R2_PROOF_OBJECT_KEY}")"
+          test "$(jq -r '.success' <<<"$deleted")" = "true"
+          echo "R2_PROOF_OBJECT_CREATED=no" >> "$GITHUB_ENV"
+
+          http="$(curl -sS -o /tmp/r2-after-delete -w '%{http_code}'             -H "Authorization: Bearer ${CLOUDFLARE_R2_API_TOKEN}"             "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/r2/buckets/${R2_DEV_BUCKET}/objects/${R2_PROOF_OBJECT_KEY}")"
+          test "$http" = "404"
+          echo "R2_PROOF_OBJECT_CLEANUP=SUCCESS"
+
+      - name: Seal non-sensitive R2 DEV receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/r2-receipt
+          jq -n             --arg canonical "$CANONICAL_SOURCE_SHA"             --arg harness "$(git rev-parse HEAD)"             --arg bucket "$R2_DEV_BUCKET"             --arg binding "$R2_BINDING"             --arg proof_sha "$R2_PROOF_SHA256"             --arg proof_size "$R2_PROOF_SIZE"             --arg d1_hash "$PREVIEW_D1_ID_SHA256"             '{
+              schemaVersion:1,
+              status:"R2_DEV_REAL_BINDING_PROOF_SUCCESS",
+              canonicalSourceCommit:$canonical,
+              proofHarnessCommit:$harness,
+              bucket:$bucket,
+              binding:$binding,
+              previewBinding:true,
+              productionBinding:false,
+              proofObjectSha256:$proof_sha,
+              proofObjectSize:($proof_size|tonumber),
+              proofObjectDeleted:true,
+              adapterRealRead:true,
+              revokedReadDenied:true,
+              previewD1IdSha256:$d1_hash,
+              pagesNonR2ConfigUnchanged:true,
+              productionPass:false,
+              dnsChanged:false,
+              mainChanged:false,
+              cutover:false,
+              productionApproval:"OPEN"
+            }' > /tmp/r2-receipt/receipt.json
+          cat /tmp/r2-receipt/receipt.json
+          echo "PASS_MODARYX_V2_CONTROLLED_R2_DEV_ACTIVATION"
+
+      - name: Upload non-sensitive receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: modaryx-v2-controlled-r2-dev-receipt
+          path: /tmp/r2-receipt/receipt.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Roll back bucket and preview binding if proof fails
+        if: failure()
+        shell: bash
+        run: |
+          set +e
+          api="https://api.cloudflare.com/client/v4"
+          pages_auth=(-H "Authorization: Bearer ${CLOUDFLARE_PAGES_API_TOKEN}" -H "Content-Type: application/json")
+          r2_auth=(-H "Authorization: Bearer ${CLOUDFLARE_R2_API_TOKEN}" -H "Content-Type: application/json")
+
+          if [ "${R2_PROOF_OBJECT_CREATED:-no}" = "yes" ] && [ -n "${R2_PROOF_OBJECT_KEY:-}" ]; then
+            curl -sS -X DELETE "${r2_auth[@]}"               "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/r2/buckets/${R2_DEV_BUCKET}/objects/${R2_PROOF_OBJECT_KEY}" >/dev/null
+            echo "ROLLBACK_PROOF_OBJECT=attempted"
+          fi
+
+          if [ "${R2_BINDING_CHANGED:-no}" = "yes" ] && [ -f /tmp/r2-before.json ]; then
+            restore="$(jq -n --slurpfile r2 /tmp/r2-before.json '{deployment_configs:{preview:{r2_buckets:$r2[0]}}}')"
+            curl -sS -X PATCH "${pages_auth[@]}" --data "$restore"               "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CLOUDFLARE_PROJECT_NAME}" >/dev/null
+            echo "ROLLBACK_PREVIEW_BINDING=attempted"
+          fi
+
+          if [ "${R2_BUCKET_CREATED:-no}" = "yes" ]; then
+            curl -sS -X DELETE "${r2_auth[@]}"               "${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/r2/buckets/${R2_DEV_BUCKET}" >/dev/null
+            echo "ROLLBACK_BUCKET=attempted"
+          fi
+
+      - name: Remove ephemeral proof files
+        if: always()
+        shell: bash
+        run: |
+          rm -f /tmp/r2-proof.txt /tmp/r2-proof-read.txt /tmp/r2-after-delete             /tmp/pages-before.json /tmp/pages-after.json /tmp/r2-before.json
