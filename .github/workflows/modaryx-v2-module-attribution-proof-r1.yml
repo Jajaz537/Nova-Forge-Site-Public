@@ -1,0 +1,81 @@
+name: MODARYX V2 Module Attribution Proof R1
+
+on:
+  push:
+    branches:
+      - 'proof/modaryx-v2-bundle-sbom-r1-20261007'
+    paths:
+      - '.github/workflows/modaryx-v2-module-attribution-proof-r1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  module-attribution:
+    name: Attribute exact Vite chunk modules without deployment
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Install pinned dependency tree
+        working-directory: v2
+        run: npm ci
+      - name: Build in-memory and capture Rollup module graph
+        working-directory: v2
+        run: |
+          set -euo pipefail
+          mkdir -p ../proof-output-module
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import { build } from 'vite';
+
+          const result=await build({
+            configFile:path.resolve('vite.config.mjs'),
+            build:{write:false}
+          });
+          const builds=Array.isArray(result)?result:[result];
+          const chunks=[];
+          const packages=new Set();
+          function pkgFromId(id){
+            const norm=id.replaceAll('\\','/');
+            const marker='/node_modules/';
+            const i=norm.lastIndexOf(marker);
+            if(i<0) return null;
+            const rest=norm.slice(i+marker.length).split('/');
+            if(rest[0]?.startsWith('@')) return rest.slice(0,2).join('/');
+            return rest[0]||null;
+          }
+          for(const b of builds){
+            for(const out of b.output||[]){
+              if(out.type!=='chunk') continue;
+              const modules=Object.keys(out.modules||{}).sort();
+              const chunkPackages=[...new Set(modules.map(pkgFromId).filter(Boolean))].sort();
+              chunkPackages.forEach(p=>packages.add(p));
+              chunks.push({fileName:out.fileName,isEntry:out.isEntry,isDynamicEntry:out.isDynamicEntry,modules,packages:chunkPackages});
+            }
+          }
+          const payload={
+            schemaVersion:1,
+            state:'TERMINÉ',
+            method:'Vite build(write=false) Rollup chunk.modules attribution',
+            packageCount:packages.size,
+            packages:[...packages].sort(),
+            chunks
+          };
+          fs.writeFileSync('../proof-output-module/vite-module-attribution.json',JSON.stringify(payload,null,2)+'\n');
+          console.log('VITE_BUNDLED_PACKAGE_COUNT',payload.packageCount);
+          console.log('VITE_BUNDLED_PACKAGES',payload.packages.join(','));
+          console.log('CANIUSE_LITE_IN_CHUNKS',payload.packages.includes('caniuse-lite'));
+          NODE
+      - name: Upload attribution evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: modaryx-v2-module-attribution-proof-r1
+          path: proof-output-module
+          if-no-files-found: error
+          retention-days: 30
