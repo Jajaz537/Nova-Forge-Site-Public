@@ -141,3 +141,32 @@ Les autres assets PRODUCT du registre ne sont pas prouvés comme redistribués p
 - production : **aucun changement**
 
 Les trois gates globales restent indépendantes.
+
+
+## 9. Attribution exacte des modules Vite — preuve renforcée
+
+Une micro-preuve supplémentaire a exécuté Vite 6.4.2 avec `build.write=false` et extrait directement `Rollup chunk.modules` sur la même baseline produit.
+
+- execution SHA : `47b3e26014c84c3f4506a074d1f6327c5ed3fd87`
+- GitHub Actions run : `37657712033`
+- conclusion : **success**
+- artefact : `modaryx-v2-module-attribution-proof-r1`
+- digest artefact : `sha256:f634b6b1c943867746d1dcd95ca6601c7bfeb66c5c2d065d1072ed841c514b33`
+
+Packages npm observés dans les chunks client, **exactement 4** :
+- `@phosphor-icons/react`
+- `react`
+- `react-dom`
+- `scheduler`
+
+`caniuse-lite` : **absent des chunks Vite** (`CANIUSE_LITE_IN_CHUNKS false`).
+
+Le worker `v2/worker/index.js` a été inspecté séparément : il n'importe aucun package npm tiers ; il utilise uniquement du JavaScript local et les APIs de la plateforme Worker.
+
+Conséquence :
+- le mapping module→chunks npm est désormais **TERMINÉ** pour ce bundle candidat ;
+- les trois binaires tooling auparavant classés `UNKNOWN` ne sont pas observés dans les chunks client et restent des composants d'environnement/build, pas des composants npm redistribués prouvés ;
+- `caniuse-lite@1.0.30001803` est **BUILD_ONLY pour ce build candidat** et n'est pas inclus dans les chunks client ;
+- le périmètre npm redistribué prouvé par le bundle candidat se réduit aux quatre composants MIT ci-dessus.
+
+Cette preuve ne ferme pas les droits des cinq assets visuels PRODUCT réellement redistribués : ils restent `finalReleaseAllowed=false`.

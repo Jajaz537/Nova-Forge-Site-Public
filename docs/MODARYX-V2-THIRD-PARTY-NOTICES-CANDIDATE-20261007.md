@@ -82,3 +82,26 @@ Candidats runtime/bundled prouvés par rôle :
 `fd3a263fe19ed8faa9068b43abaebafc02c77897b0c6fc09abc04bb592e5f16e`.
 
 Cette classification de rôle réduit le risque d'attribution dans le produit final mais ne remplace pas une preuve module→bundle minifié. Le NOTICE final reste donc **EN COURS** et non un PASS release.
+
+
+## 7. Attribution module → bundle renforcée — 2026-10-07
+
+Micro-preuve Vite/Rollup run `37657712033` : **TERMINÉ**.
+
+`chunk.modules` prouve exactement quatre packages npm dans les chunks client :
+- `@phosphor-icons/react@2.1.10`
+- `react@19.2.0`
+- `react-dom@19.2.0`
+- `scheduler@0.27.0`
+
+Ils sont tous déclarés MIT et leurs textes LICENSE exacts ont été hashés dans la preuve CI.
+
+`caniuse-lite@1.0.30001803` :
+- présent dans l'environnement de build ;
+- licence locale CC-BY-4.0 conservée et hashée ;
+- **absent des chunks client Vite** ;
+- classification pour ce candidat : **BUILD_ONLY**.
+
+`v2/worker/index.js` n'importe aucun package npm tiers.
+
+Le périmètre npm redistribué prouvé de ce candidat est donc limité aux quatre composants MIT ci-dessus. Le THIRD-PARTY final reste **EN COURS** tant que la forme finale de distribution/release n'est pas figée, et les droits des assets visuels restent un blocker séparé.

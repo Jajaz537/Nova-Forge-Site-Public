@@ -92,7 +92,9 @@
     "license": "CC-BY-4.0",
     "classification": "BUILD_ONLY",
     "licenseFile": "LICENSE",
-    "licenseSha256": "fd3a263fe19ed8faa9068b43abaebafc02c77897b0c6fc09abc04bb592e5f16e"
+    "licenseSha256": "fd3a263fe19ed8faa9068b43abaebafc02c77897b0c6fc09abc04bb592e5f16e",
+    "inViteClientChunks": false,
+    "redistributionRole": "BUILD_ONLY_FOR_THIS_CANDIDATE"
   },
   "redistributedVisualAssets": [
     {
@@ -124,6 +126,53 @@
       "provenanceStatus": "PARTIAL_EVIDENCE",
       "commercialRightsStatus": "PREUVE MANQUANTE",
       "finalReleaseAllowed": false
+    }
+  ],
+  "moduleAttributionProof": {
+    "executionSha": "47b3e26014c84c3f4506a074d1f6327c5ed3fd87",
+    "runId": 37657712033,
+    "conclusion": "success",
+    "method": "Vite build(write=false) / Rollup chunk.modules",
+    "artifact": {
+      "name": "modaryx-v2-module-attribution-proof-r1",
+      "id": 11499566621,
+      "digest": "sha256:f634b6b1c943867746d1dcd95ca6601c7bfeb66c5c2d065d1072ed841c514b33"
+    },
+    "bundledNpmPackageCount": 4,
+    "bundledNpmPackages": [
+      "@phosphor-icons/react",
+      "react",
+      "react-dom",
+      "scheduler"
+    ],
+    "caniuseLiteInClientChunks": false,
+    "workerExternalNpmImports": 0,
+    "status": "TERMINÉ"
+  },
+  "redistributedNpmPackages": [
+    {
+      "name": "@phosphor-icons/react",
+      "version": "2.1.10",
+      "license": "MIT",
+      "licenseSha256": "6918b72504641180600cbbd4a86b0dfa9dfccf788775694325b71b9a029f6eb4"
+    },
+    {
+      "name": "react",
+      "version": "19.2.0",
+      "license": "MIT",
+      "licenseSha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+    },
+    {
+      "name": "react-dom",
+      "version": "19.2.0",
+      "license": "MIT",
+      "licenseSha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+    },
+    {
+      "name": "scheduler",
+      "version": "0.27.0",
+      "license": "MIT",
+      "licenseSha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
     }
   ]
 }

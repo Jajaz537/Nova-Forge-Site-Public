@@ -344,3 +344,39 @@ Références :
 - LEGAL/COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE** notamment sur les droits des assets réellement redistribués, vendeur/provider/territoires et validations externes.
 
 Aucun prix canonique, aucun paiement, aucun DNS, aucun déploiement, aucun cutover.
+
+
+---
+
+## 16. Preuve renforcée module → bundle — 2026-10-07
+
+Un travail parallèle a d'abord intégré la preuve bundle/SBOM via PR #242. Cette tranche ne l'a pas écrasé ; elle ajoute uniquement une attribution plus forte des modules réellement empaquetés.
+
+Preuve :
+- baseline produit : `175533c149a9bdfd7e4eccd2d4983327d0d0f201`
+- run module attribution : `37657712033`
+- execution SHA : `47b3e26014c84c3f4506a074d1f6327c5ed3fd87`
+- Vite : 6.4.2
+- conclusion : **success**
+
+Résultat :
+- packages npm dans les chunks client : **4**
+- `@phosphor-icons/react`, `react`, `react-dom`, `scheduler`
+- licences : MIT
+- `caniuse-lite@1.0.30001803` : **absent des chunks client / BUILD_ONLY pour ce candidat**
+- worker serveur : **aucun import npm tiers**
+
+Le mapping npm module→bundle candidat est désormais **TERMINÉ**.
+
+Toujours **BLOQUÉ / PREUVE MANQUANTE** :
+- droits commerciaux des 5 assets PRODUCT réellement présents dans `v2/dist` ;
+- faits vendeur/provider/territoires ;
+- validation juridique/fiscale finale ;
+- release SHA finale et THIRD-PARTY final associé à cette release.
+
+Gates :
+- VF TECHNIQUE : **EN COURS** — le registre interne conserve 19 blockers ouverts ;
+- LAUNCH-READINESS COMMERCIALE : **EN COURS** ;
+- LEGAL/COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**.
+
+Aucun déploiement, DNS, paiement, provider ou cutover.
