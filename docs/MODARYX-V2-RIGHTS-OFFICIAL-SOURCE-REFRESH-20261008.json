@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "READ_ONLY_REFRESH_OF_OFFICIAL_RIGHTS_AND_CONTACT_SOURCES_FOR_DEMO_CATALOG",
+  "sourceBranch": "design/modaryx-v2-blue-violet-product-20261005",
+  "sourceSha": "1c5e73cb3cd8a9303e26596a86388cb5491b5588",
+  "catalogScope": [
+    "Skyrim Special Edition",
+    "Cyberpunk 2077",
+    "Minecraft"
+  ],
+  "rules": [
+    "OFFICIAL_PUBLIC_SOURCE_DOES_NOT_EQUAL_LICENSE",
+    "NO_OUTBOUND_SENT",
+    "NO_RIGHT_GRANTED",
+    "NO_SILENCE_AS_CONSENT",
+    "DEMO_CATALOG_DOES_NOT_EQUAL_PRODUCTION_CORPUS",
+    "LEGAL_REVIEW_REMAINS_REQUIRED_WHERE_SCOPE_IS_AMBIGUOUS"
+  ],
+  "entries": [
+    {
+      "game": "Skyrim Special Edition",
+      "publisherFamily": "Bethesda / ZeniMax",
+      "officialSources": [
+        {
+          "kind": "porting-rules",
+          "url": "https://help.bethesda.net/app/answers/detail/a_id/55219/",
+          "verified": "TERMINÉ",
+          "observation": "Bethesda requires public evidence of author permission for ports where the porter is not the original author/co-author; permissions must match the porting scope."
+        },
+        {
+          "kind": "mod-monetization",
+          "url": "https://help.bethesda.net/app/answers/detail/a_id/55221/",
+          "verified": "TERMINÉ",
+          "observation": "Bethesda cites Creation Kit EULA language prohibiting fees/commercial exploitation of Game Mods without express prior written consent of an authorized ZeniMax representative."
+        },
+        {
+          "kind": "general-contact",
+          "url": "https://bethesdagamestudios.mweb.bethesda.net/",
+          "verified": "TERMINÉ",
+          "observation": "Official Bethesda Game Studios page publishes Bethesda Softworks LLC general contact details and info@bethsoft.com."
+        }
+      ],
+      "contactQualification": "PREUVE MANQUANTE",
+      "note": "The official general contact is not proven to be the correct licensing/permission destination for MODARYX hosting/distribution/commercial scope."
+    },
+    {
+      "game": "Cyberpunk 2077",
+      "publisherFamily": "CD PROJEKT RED",
+      "officialSources": [
+        {
+          "kind": "fan-content-guidelines",
+          "url": "https://www.cdprojektred.com/en/fan-content",
+          "verified": "TERMINÉ",
+          "observation": "CDPR permits specified fan-content/mod activity subject to its rules and the relevant EULA, and publishes legal@cdprojektred.com for questions or advance permission in certain out-of-scope cases."
+        },
+        {
+          "kind": "user-agreement",
+          "url": "https://regulations.cdprojektred.com/en/user_agreement",
+          "verified": "TERMINÉ",
+          "observation": "Current User Agreement points users to Fan Content Guidelines and governs Cyberpunk 2077, while product-specific rules may also apply."
+        }
+      ],
+      "contactQualification": "PARTIAL_EVIDENCE",
+      "note": "An official legal contact exists, but MODARYX hosting/distribution/commercial scope still requires scoped interpretation and, where necessary, legal review/explicit authorization."
+    },
+    {
+      "game": "Minecraft",
+      "publisherFamily": "Mojang / Microsoft",
+      "officialSources": [
+        {
+          "kind": "usage-guidelines",
+          "url": "https://www.minecraft.net/en-us/usage-guidelines",
+          "verified": "TERMINÉ",
+          "observation": "Usage Guidelines distinguish community/fan allowances from commercial-company use, reserve rights, and direct formal partnership proposals to the official partnership path."
+        },
+        {
+          "kind": "partnership-proposal",
+          "url": "https://partnerships.minecraft.net/hc/en-us/requests/new",
+          "verified": "TERMINÉ",
+          "observation": "Official partnership proposal form is currently available."
+        }
+      ],
+      "contactQualification": "PARTIAL_EVIDENCE",
+      "note": "The formal partnership path is proven to exist, but no proposal has been submitted and no MODARYX-specific permission exists."
+    }
+  ],
+  "blockerImpact": {
+    "official-contact-discovery": "EN COURS",
+    "publisher-outbound": "BLOQUÉ",
+    "publisher-response-parsing": "BLOQUÉ",
+    "license-validation": "BLOQUÉ",
+    "legal-review-where-required": "PREUVE MANQUANTE",
+    "game-rights-registry-production": "BLOQUÉ"
+  },
+  "closureStatement": "This refresh strengthens official-source provenance only. It does not close any of the 19 external VF blockers."
+}

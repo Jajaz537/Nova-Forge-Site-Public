@@ -553,3 +553,38 @@ Gates :
 - LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
 
 Aucun `main`, DNS/DNSSEC/nameserver, Cloudflare critique, D1/R2 production, paiement/provider, PWA production, field CWV, indexability ou cutover modifié.
+
+
+---
+
+## 21. Refresh lecture seule des sources officielles droits/contact — 2026-10-08
+
+Une revalidation fraîche des sources officielles du catalogue de démonstration a été effectuée sans outbound.
+
+Preuves ajoutées :
+- `docs/MODARYX-V2-RIGHTS-OFFICIAL-SOURCE-REFRESH-20261008.md`
+- `docs/MODARYX-V2-RIGHTS-OFFICIAL-SOURCE-REFRESH-20261008.json`
+
+Périmètre :
+- Skyrim Special Edition — Bethesda / ZeniMax
+- Cyberpunk 2077 — CD PROJEKT RED
+- Minecraft — Mojang / Microsoft
+
+Résultat :
+- Bethesda : règles officielles de portage + monétisation + contact général toujours disponibles ; destination licensing exacte MODARYX : **PREUVE MANQUANTE**
+- CD PROJEKT RED : Fan Content Guidelines + User Agreement + contact juridique officiel confirmés ; scope MODARYX : **PARTIAL_EVIDENCE**
+- Minecraft : Usage Guidelines + formulaire officiel de partenariat confirmés ; autorisation MODARYX : **PREUVE MANQUANTE**
+
+Aucune politique publique n'est transformée en licence.
+
+Blockers droits :
+- `official-contact-discovery` : **EN COURS**
+- `publisher-outbound` : **BLOQUÉ**
+- `publisher-response-parsing` : **BLOQUÉ**
+- `license-validation` : **BLOQUÉ**
+- `legal-review-where-required` : **PREUVE MANQUANTE**
+- `game-rights-registry-production` : **BLOQUÉ**
+
+Le ledger VF reste fail-closed ; aucun des 19 blockers externes n'est fermé par cette tranche.
+
+Aucun outbound, production, D1/R2, provider, paiement, DNS ou cutover exécuté.
