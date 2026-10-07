@@ -1,0 +1,242 @@
+name: MODARYX V2 Bundle SBOM Proof R1
+
+on:
+  push:
+    branches:
+      - 'proof/modaryx-v2-bundle-sbom-r1-20261007'
+    paths:
+      - '.github/workflows/modaryx-v2-bundle-sbom-proof-r1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-bundle-sbom-r1
+  cancel-in-progress: false
+
+jobs:
+  bundle-sbom:
+    name: Build candidate and inventory bundle without deployment
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact proof branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Record environment
+        run: |
+          set -euo pipefail
+          mkdir -p proof-output
+          {
+            echo "git=$(git rev-parse HEAD)"
+            echo "os=$(uname -a)"
+            echo "node=$(node --version)"
+            echo "npm=$(npm --version)"
+          } | tee proof-output/environment.txt
+
+      - name: Install, build and targeted Sites tests
+        working-directory: v2
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+          npm run test:sites
+
+      - name: Generate bundle manifest, dependency graph, SBOM and license evidence
+        working-directory: v2
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ../proof-output/licenses
+          npm ls --all --json > ../proof-output/npm-ls-all.json || {
+            code=$?
+            echo "npm ls returned $code" >&2
+            exit $code
+          }
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import crypto from 'node:crypto';
+
+          const root=process.cwd();
+          const out=path.resolve(root,'../proof-output');
+          const dist=path.join(root,'dist');
+          const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+
+          function walk(dir){
+            const result=[];
+            for(const ent of fs.readdirSync(dir,{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name))){
+              const p=path.join(dir,ent.name);
+              if(ent.isDirectory()) result.push(...walk(p));
+              else if(ent.isFile()) result.push(p);
+            }
+            return result;
+          }
+
+          const bundleFiles=walk(dist).map(p=>({
+            path:path.relative(dist,p).replaceAll('\\','/'),
+            size:fs.statSync(p).size,
+            sha256:sha(p),
+            extension:path.extname(p).toLowerCase()||null
+          }));
+          fs.writeFileSync(path.join(out,'bundle-manifest.json'),JSON.stringify({
+            schemaVersion:1,
+            state:'TERMINÉ',
+            source:'v2/dist',
+            fileCount:bundleFiles.length,
+            files:bundleFiles
+          },null,2)+'\n');
+
+          const lock=JSON.parse(fs.readFileSync(path.join(root,'package-lock.json'),'utf8'));
+          const pkgs=lock.packages||{};
+          const byName={};
+          for(const [p,v] of Object.entries(pkgs)){
+            if(!p.startsWith('node_modules/')) continue;
+            const name=p.slice('node_modules/'.length);
+            byName[name]={...v,path:p};
+          }
+          const runtimeRoots=['react','react-dom','@phosphor-icons/react'];
+          const buildRoots=['vite','@vitejs/plugin-react'];
+          function graph(roots){
+            const seen=new Set(), stack=[...roots];
+            while(stack.length){
+              const name=stack.pop();
+              if(seen.has(name)||!byName[name]) continue;
+              seen.add(name);
+              for(const dep of Object.keys(byName[name].dependencies||{})) stack.push(dep);
+              for(const dep of Object.keys(byName[name].optionalDependencies||{})) stack.push(dep);
+            }
+            return seen;
+          }
+          const runtime=graph(runtimeRoots), build=graph(buildRoots);
+          const classification=[];
+          for(const name of Object.keys(byName).sort()){
+            const r=runtime.has(name), b=build.has(name);
+            classification.push({
+              name,
+              version:byName[name].version,
+              declaredLicense:byName[name].license||null,
+              installed:fs.existsSync(path.join(root,'node_modules',...name.split('/'))),
+              classification:r&&!b?'BUNDLED_OR_RUNTIME_CANDIDATE':b&&!r?'BUILD_ONLY_CANDIDATE':r&&b?'UNKNOWN_SHARED_GRAPH':'UNKNOWN'
+            });
+          }
+          fs.writeFileSync(path.join(out,'dependency-classification.json'),JSON.stringify({
+            schemaVersion:1,
+            method:'lockfile dependency reachability from runtime roots vs build roots; candidate classification, not byte-level bundle attribution',
+            runtimeRoots,buildRoots,packages:classification
+          },null,2)+'\n');
+
+          const npmLs=JSON.parse(fs.readFileSync(path.join(out,'npm-ls-all.json'),'utf8'));
+          const installed=new Map();
+          function collect(node){
+            for(const [name,dep] of Object.entries(node.dependencies||{})){
+              if(dep?.version) installed.set(name,dep.version);
+              collect(dep||{});
+            }
+          }
+          collect(npmLs);
+
+          const licenseRecords=[];
+          const components=[];
+          for(const [name,version] of [...installed.entries()].sort((a,b)=>a[0].localeCompare(b[0]))){
+            const pkgDir=path.join(root,'node_modules',...name.split('/'));
+            const pkgJsonPath=path.join(pkgDir,'package.json');
+            if(!fs.existsSync(pkgJsonPath)) continue;
+            const meta=JSON.parse(fs.readFileSync(pkgJsonPath,'utf8'));
+            const licenseNames=fs.readdirSync(pkgDir).filter(n=>/^(licen[cs]e|notice|copying|copyright)(\.|$)/i.test(n)).sort();
+            const safe=name.replaceAll('/','__').replaceAll('@','_at_');
+            const files=[];
+            const destDir=path.join(out,'licenses',safe+'@'+version);
+            fs.mkdirSync(destDir,{recursive:true});
+            for(const n of licenseNames){
+              const src=path.join(pkgDir,n);
+              if(!fs.statSync(src).isFile()) continue;
+              const dest=path.join(destDir,n);
+              fs.copyFileSync(src,dest);
+              files.push({name:n,sha256:sha(src),size:fs.statSync(src).size});
+            }
+            const lockClass=classification.find(x=>x.name===name);
+            licenseRecords.push({
+              name,version,
+              declaredLicense:meta.license||lockClass?.declaredLicense||null,
+              classification:lockClass?.classification||'UNKNOWN',
+              licenseFiles:files
+            });
+            const licenses=[];
+            const declared=meta.license||lockClass?.declaredLicense;
+            if(declared) licenses.push({license:{id:String(declared)}});
+            components.push({
+              type:'library',
+              name,
+              version,
+              purl:'pkg:npm/'+encodeURIComponent(name)+'@'+encodeURIComponent(version),
+              licenses
+            });
+          }
+          fs.writeFileSync(path.join(out,'license-evidence.json'),JSON.stringify({
+            schemaVersion:1,
+            state:'EN COURS',
+            note:'Exact installed LICENSE/NOTICE files are copied under licenses/. Missing files remain PREUVE MANQUANTE.',
+            packages:licenseRecords
+          },null,2)+'\n');
+
+          fs.writeFileSync(path.join(out,'sbom-cyclonedx-candidate.json'),JSON.stringify({
+            bomFormat:'CycloneDX',
+            specVersion:'1.5',
+            serialNumber:'urn:uuid:'+crypto.randomUUID(),
+            version:1,
+            metadata:{
+              timestamp:new Date().toISOString(),
+              component:{type:'application',name:'modaryx-v2-production-candidate',version:'0.0.0'},
+              properties:[
+                {name:'modaryx:status',value:'CANDIDATE'},
+                {name:'modaryx:source',value:'npm ls --all + package-lock'}
+              ]
+            },
+            components
+          },null,2)+'\n');
+
+          const cani=licenseRecords.find(x=>x.name==='caniuse-lite');
+          fs.writeFileSync(path.join(out,'caniuse-lite-evidence.json'),JSON.stringify({
+            expectedVersion:'1.0.30001803',
+            observed:cani||null,
+            graphClassification:classification.find(x=>x.name==='caniuse-lite')||null,
+            finalRedistributionConclusion:'PREUVE MANQUANTE_UNTIL_BYTE_LEVEL_OR_BUILD_TOOL_SCOPE_REVIEW'
+          },null,2)+'\n');
+
+          console.log('BUNDLE_FILE_COUNT',bundleFiles.length);
+          console.log('INSTALLED_PACKAGE_COUNT',installed.size);
+          console.log('RUNTIME_GRAPH_COUNT',classification.filter(x=>x.classification==='BUNDLED_OR_RUNTIME_CANDIDATE').length);
+          console.log('BUILD_GRAPH_COUNT',classification.filter(x=>x.classification==='BUILD_ONLY_CANDIDATE').length);
+          console.log('CANIUSE_LITE_CLASS',classification.find(x=>x.name==='caniuse-lite')?.classification);
+          NODE
+
+      - name: Summarize evidence
+        working-directory: v2
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const out='../proof-output';
+          const manifest=JSON.parse(fs.readFileSync(out+'/bundle-manifest.json','utf8'));
+          const deps=JSON.parse(fs.readFileSync(out+'/dependency-classification.json','utf8'));
+          const lic=JSON.parse(fs.readFileSync(out+'/license-evidence.json','utf8'));
+          const cani=JSON.parse(fs.readFileSync(out+'/caniuse-lite-evidence.json','utf8'));
+          console.log('PASS_MODARYX_V2_BUNDLE_MANIFEST files='+manifest.fileCount);
+          console.log('PASS_MODARYX_V2_DEPENDENCY_CLASSIFICATION packages='+deps.packages.length);
+          console.log('PASS_MODARYX_V2_LICENSE_EVIDENCE installed='+lic.packages.length);
+          console.log('MODARYX_V2_CANIUSE_LITE '+JSON.stringify(cani.observed));
+          console.log('MODARYX_V2_CANIUSE_LITE_CLASS '+cani.graphClassification?.classification);
+          NODE
+
+      - name: Upload proof evidence only
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: modaryx-v2-bundle-sbom-proof-r1
+          path: proof-output
+          if-no-files-found: error
+          retention-days: 30
