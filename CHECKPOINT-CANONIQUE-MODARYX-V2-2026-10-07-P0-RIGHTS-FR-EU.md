@@ -301,3 +301,46 @@ Le prochain bloc de preuve exige désormais un environnement d'exécution propre
 - VF TECHNIQUE : **EN COURS**
 - COMMERCIAL : **EN COURS**
 - LEGAL/COMPLIANCE France-UE : **BLOQUÉ / PREUVE MANQUANTE** sur les faits externes et droits non fermés.
+
+
+---
+
+## 15. Exécution CI bundle / SBOM / licences — 2026-10-07
+
+La contrainte d'absence de chat local a été contournée par une CI GitHub isolée, sans production et sans utiliser de runner self-hosted.
+
+Baseline produit :
+`175533c149a9bdfd7e4eccd2d4983327d0d0f201`.
+
+Preuves :
+- build/SBOM run `37656319907` @ `0b28efb076744e9cd34bfd47a936a720e1b7dba0` : **success** ;
+- micro-preuve licences run `37657179187` @ `f8763c2a4db27916d3ddeac7cd703851fe15a5a0` : **success** ;
+- les deltas depuis la baseline sont uniquement les workflows de preuve.
+
+Résultats :
+- `npm ci` : **TERMINÉ**
+- `npm run build` : **TERMINÉ**
+- `npm run test:sites` : **TERMINÉ**
+- `v2/dist` : **15 fichiers**
+- SBOM CycloneDX 1.5 : **66 composants**
+- packages installés : **66** sur **115** chemins package du lockfile multi-plateforme
+- classification : **4 BUNDLED_OR_RUNTIME / 59 BUILD_ONLY / 3 UNKNOWN**
+- textes LICENSE/NOTICE locaux : **62/66**
+- `caniuse-lite@1.0.30001803` : CC-BY-4.0, **BUILD_ONLY** par classification de rôle, LICENSE hashé.
+
+Bundle visuel réellement redistribué :
+- **5 assets PRODUCT**
+- les cinq restent `finalReleaseAllowed=false`
+- droits commerciaux : **PREUVE MANQUANTE**
+- aucune promotion en release finale autorisée par cette preuve.
+
+Références :
+- `docs/MODARYX-V2-CI-BUNDLE-SBOM-EVIDENCE-20261007.md`
+- `docs/MODARYX-V2-CI-BUNDLE-SBOM-EVIDENCE-20261007.json`
+
+État des gates :
+- VF TECHNIQUE : **EN COURS** — cette micro-preuve ferme le build/bundle/SBOM ciblé, pas la VF entière ;
+- LAUNCH-READINESS COMMERCIALE : **EN COURS** ;
+- LEGAL/COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE** notamment sur les droits des assets réellement redistribués, vendeur/provider/territoires et validations externes.
+
+Aucun prix canonique, aucun paiement, aucun DNS, aucun déploiement, aucun cutover.
