@@ -84,6 +84,7 @@ Aucune intégration production avant décision explicite.
 - disponibilité ;
 - politique de remboursement ;
 - conditions de rétractation ;
+- fonctionnalité de rétractation en ligne conforme L221-21/D221-5 lorsque le droit existe ;
 - garantie/remèdes numériques.
 
 **BLOQUE : CGV finales et checkout.**
