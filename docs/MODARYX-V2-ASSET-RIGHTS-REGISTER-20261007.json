@@ -162,10 +162,18 @@
       "sizeBytes": 1084,
       "classification": "PRODUCT",
       "duplicateOf": null,
-      "provenanceStatus": "PREUVE MANQUANTE",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
       "commercialRightsStatus": "PREUVE MANQUANTE",
       "finalReleaseAllowed": false,
-      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "DIRECT_GIT_PARENT_VECTOR_TO_RASTER_BRAND_REFRESH",
+        "vectorCommit": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommit": "2ae5bd279bd3437d74424801ff428e40bc61504c",
+        "rasterCommitParent": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommitMessage": "fix(brand): refresh MODARYX PNG marks with clear M",
+        "note": "The raster refresh commit is a direct child of the SVG M-shape commit and modifies only modaryx-mark-192.png and modaryx-mark-512.png. This proves an in-repository brand derivative chain, but not the rasterization tool or commercial IP rights."
+      }
     },
     {
       "path": "assets/modaryx-mark-512.png",
@@ -173,10 +181,18 @@
       "sizeBytes": 3459,
       "classification": "PRODUCT",
       "duplicateOf": null,
-      "provenanceStatus": "PREUVE MANQUANTE",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
       "commercialRightsStatus": "PREUVE MANQUANTE",
       "finalReleaseAllowed": false,
-      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "DIRECT_GIT_PARENT_VECTOR_TO_RASTER_BRAND_REFRESH",
+        "vectorCommit": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommit": "2ae5bd279bd3437d74424801ff428e40bc61504c",
+        "rasterCommitParent": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommitMessage": "fix(brand): refresh MODARYX PNG marks with clear M",
+        "note": "The raster refresh commit is a direct child of the SVG M-shape commit and modifies only modaryx-mark-192.png and modaryx-mark-512.png. This proves an in-repository brand derivative chain, but not the rasterization tool or commercial IP rights."
+      }
     },
     {
       "path": "assets/modaryx-mark.svg",
@@ -1254,10 +1270,18 @@
       "sizeBytes": 1084,
       "classification": "PRODUCT",
       "duplicateOf": "assets/modaryx-mark-192.png",
-      "provenanceStatus": "PREUVE MANQUANTE",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
       "commercialRightsStatus": "PREUVE MANQUANTE",
       "finalReleaseAllowed": false,
-      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "DIRECT_GIT_PARENT_VECTOR_TO_RASTER_BRAND_REFRESH",
+        "vectorCommit": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommit": "2ae5bd279bd3437d74424801ff428e40bc61504c",
+        "rasterCommitParent": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommitMessage": "fix(brand): refresh MODARYX PNG marks with clear M",
+        "note": "The raster refresh commit is a direct child of the SVG M-shape commit and modifies only modaryx-mark-192.png and modaryx-mark-512.png. This proves an in-repository brand derivative chain, but not the rasterization tool or commercial IP rights."
+      }
     },
     {
       "path": "v2/public/assets/modaryx-mark-512.png",
@@ -1265,10 +1289,18 @@
       "sizeBytes": 3459,
       "classification": "PRODUCT",
       "duplicateOf": "assets/modaryx-mark-512.png",
-      "provenanceStatus": "PREUVE MANQUANTE",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
       "commercialRightsStatus": "PREUVE MANQUANTE",
       "finalReleaseAllowed": false,
-      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "DIRECT_GIT_PARENT_VECTOR_TO_RASTER_BRAND_REFRESH",
+        "vectorCommit": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommit": "2ae5bd279bd3437d74424801ff428e40bc61504c",
+        "rasterCommitParent": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommitMessage": "fix(brand): refresh MODARYX PNG marks with clear M",
+        "note": "The raster refresh commit is a direct child of the SVG M-shape commit and modifies only modaryx-mark-192.png and modaryx-mark-512.png. This proves an in-repository brand derivative chain, but not the rasterization tool or commercial IP rights."
+      }
     },
     {
       "path": "v2/public/assets/modaryx-mark.svg",
@@ -1290,7 +1322,7 @@
       }
     }
   ],
-  "updatedAt": "2026-10-07",
+  "updatedAt": "2026-10-07T20:15:00+02:00",
   "evidenceSummary": {
     "USER_PROVIDED_ARCHIVE_PARTIAL": [
       "assets/modaryx-wolf-dragon-hero.webp",
@@ -1308,6 +1340,12 @@
       "favicon.svg",
       "v2/public/assets/modaryx-mark.svg"
     ],
-    "NO_SOURCE_TOOL_EVIDENCE_RECOVERED_YET": "living-world staged layers and other product assets remain PREUVE MANQUANTE"
+    "NO_SOURCE_TOOL_EVIDENCE_RECOVERED_YET": "living-world staged layers and other product assets remain PREUVE MANQUANTE",
+    "IN_REPO_BRAND_RASTER_DERIVATIVE_PARTIAL": [
+      "assets/modaryx-mark-192.png",
+      "assets/modaryx-mark-512.png",
+      "v2/public/assets/modaryx-mark-192.png",
+      "v2/public/assets/modaryx-mark-512.png"
+    ]
   }
 }
