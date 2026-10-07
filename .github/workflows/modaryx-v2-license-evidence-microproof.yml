@@ -1,0 +1,130 @@
+name: MODARYX V2 License Evidence Microproof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-bundle-sbom-evidence-20261007'
+    paths:
+      - '.github/workflows/modaryx-v2-license-evidence-microproof.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-license-evidence-microproof
+  cancel-in-progress: true
+
+jobs:
+  evidence:
+    name: Recover exact installed npm license evidence without rebuild
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact proof branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Install exact lockfile only
+        working-directory: v2
+        run: |
+          set -euo pipefail
+          npm ci
+
+      - name: Generate corrected license evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/git-sha.txt
+          node <<'NODE'
+          const fs=require('fs');
+          const path=require('path');
+          const crypto=require('crypto');
+          const root=process.cwd();
+          const evidence=path.join(root,'evidence');
+          const lock=JSON.parse(fs.readFileSync(path.join(root,'v2','package-lock.json'),'utf8'));
+          const pkgs=lock.packages||{};
+          const rows=[];
+          const byName=new Map();
+
+          for(const [pkgPath,lockMeta] of Object.entries(pkgs)){
+            if(!pkgPath) continue;
+            const installed=path.join(root,'v2',pkgPath);
+            const pj=path.join(installed,'package.json');
+            if(!fs.existsSync(pj)) continue;
+            const meta=JSON.parse(fs.readFileSync(pj,'utf8'));
+            const rec={pkgPath,lockMeta,meta,installed};
+            rows.push(rec);
+            const prev=byName.get(meta.name);
+            if(!prev || pkgPath.length<prev.pkgPath.length) byName.set(meta.name,rec);
+          }
+
+          const closure=roots=>{
+            const seen=new Set(), q=[...roots];
+            while(q.length){
+              const name=q.shift();
+              if(seen.has(name)) continue;
+              seen.add(name);
+              const rec=byName.get(name);
+              if(!rec) continue;
+              const deps={...(rec.meta.dependencies||{}),...(rec.meta.peerDependencies||{})};
+              for(const dep of Object.keys(deps)) q.push(dep);
+            }
+            return seen;
+          };
+          const runtime=closure(['react','react-dom','@phosphor-icons/react']);
+          const build=closure(['vite','@vitejs/plugin-react']);
+          const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+          const records=rows.map(rec=>{
+            let classification='UNKNOWN';
+            if(runtime.has(rec.meta.name)) classification='BUNDLED_OR_RUNTIME';
+            else if(build.has(rec.meta.name)) classification='BUILD_ONLY';
+            const texts=[];
+            for(const ent of fs.readdirSync(rec.installed,{withFileTypes:true})){
+              if(!ent.isFile()) continue;
+              if(!/^(licen[cs]e|notice|copying)(\..*)?$/i.test(ent.name)) continue;
+              const buf=fs.readFileSync(path.join(rec.installed,ent.name));
+              texts.push({file:ent.name,sha256:hash(buf),content:buf.toString('utf8')});
+            }
+            return {
+              name:rec.meta.name,
+              version:rec.meta.version,
+              packagePath:rec.pkgPath,
+              declaredLicense:rec.meta.license||rec.lockMeta.license||null,
+              classification,
+              classificationBasis:classification==='BUNDLED_OR_RUNTIME'
+                ? 'installed dependency closure of runtime roots react/react-dom/@phosphor-icons/react'
+                : classification==='BUILD_ONLY'
+                  ? 'installed dependency closure of build roots vite/@vitejs/plugin-react'
+                  : 'not proven by conservative role classification',
+              licenseNoticeTexts:texts
+            };
+          }).sort((a,b)=>a.name.localeCompare(b.name)||a.version.localeCompare(b.version));
+
+          const classes=records.reduce((a,r)=>(a[r.classification]=(a[r.classification]||0)+1,a),{});
+          const caniuse=records.filter(r=>r.name==='caniuse-lite'&&r.version==='1.0.30001803');
+          const output={
+            status:'TERMINÉ',
+            sourceSha:fs.readFileSync(path.join(evidence,'git-sha.txt'),'utf8').trim(),
+            installedPackageCount:records.length,
+            lockPackagePathCount:Object.keys(pkgs).filter(Boolean).length,
+            classificationCounts:classes,
+            caniuseLiteVerification:caniuse,
+            packages:records
+          };
+          fs.writeFileSync(path.join(evidence,'MODARYX-V2-WORK-LICENSE-EVIDENCE-MICROPROOF-20261007.json'),JSON.stringify(output,null,2));
+          console.log(JSON.stringify({installedPackageCount:records.length,lockPackagePathCount:output.lockPackagePathCount,classificationCounts:classes,caniuse:caniuse.map(x=>({license:x.declaredLicense,textFiles:x.licenseNoticeTexts.map(t=>t.file)}))}));
+          if(records.length===0) throw new Error('No installed packages discovered');
+          if(caniuse.length!==1) throw new Error('Expected exact caniuse-lite 1.0.30001803 record');
+          if(caniuse[0].declaredLicense!=='CC-BY-4.0') throw new Error('Unexpected caniuse-lite license');
+          NODE
+
+      - name: Upload corrected license evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: modaryx-v2-license-evidence-microproof
+          path: evidence
+          if-no-files-found: error
+          retention-days: 30
