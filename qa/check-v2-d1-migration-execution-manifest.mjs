@@ -6,16 +6,27 @@ import {requiredProductionTables} from "../functions/_lib/production-readiness.m
 
 const manifest=JSON.parse(fs.readFileSync("qa/modaryx-v2-d1-migration-execution-manifest.json","utf8"));
 assert.equal(manifest.schemaVersion,1);
-assert.equal(manifest.status,"PREPARED_NOT_EXECUTED");
+assert.equal(manifest.status,"DEV_REMOTE_APPLIED_SCHEMA_PROVEN_PRODUCTION_BLOCKED");
 assert.equal(manifest.sequence.length,15);
 assert.equal(manifest.expectedCurrentV2TableCount,32);
 assert.equal(manifest.applyPolicy.automaticRemoteApply,false);
 assert.equal(manifest.applyPolicy.remoteDev,"EXPLICIT_MANUAL_ONLY");
 assert.equal(manifest.applyPolicy.remoteProduction,"BLOCKED_UNTIL_DEV_PROOF_AND_EXPLICIT_APPROVAL");
+assert.equal(manifest.devRemoteApplyEvidence.status,"SUCCESS");
+assert.equal(manifest.devRemoteApplyEvidence.explicitApproval,true);
+assert.equal(manifest.devRemoteApplyEvidence.runId,37613283219);
+assert.equal(manifest.devRemoteApplyEvidence.requiredV2TableCount,32);
+assert.equal(manifest.devRemoteApplyEvidence.zeroUnappliedMigrations,true);
+assert.equal(manifest.devRemoteApplyEvidence.postApplySchemaReady,true);
+assert.equal(manifest.devRemoteApplyEvidence.productionPass,false);
+assert.equal(manifest.devRemoteApplyEvidence.productionD1BindingPresent,false);
+assert.equal(manifest.devRemoteApplyEvidence.workflowReturnedToManualOnly,true);
+assert.equal(manifest.postApplyEvidenceState.ownerHistoryReadWriteTargetedProof,"PENDING_REAL_AUTHENTICATED_PIPELINE");
+assert.equal(manifest.postApplyEvidenceState.productionPipelineProof,"PENDING");
 
 const inv=new Set(manifest.invariants||[]);
 for(const x of [
-  "NO_REMOTE_APPLY_BY_THIS_MANIFEST","NO_WRANGLER_D1_EXECUTE_REMOTE_IN_PROOF","NO_PRODUCTION_MUTATION",
+  "NO_ADDITIONAL_REMOTE_APPLY_BY_THIS_MANIFEST_UPDATE","NO_WRANGLER_D1_EXECUTE_REMOTE_IN_PROOF","NO_PRODUCTION_MUTATION",
   "NO_FIXTURE_SEED","NO_CATALOGUE_PROMOTION","NO_CUTOVER","REAL_DATA_HISTORY_BLOCKER_REMAINS_OPEN"
 ]) assert.ok(inv.has(x),"missing invariant "+x);
 

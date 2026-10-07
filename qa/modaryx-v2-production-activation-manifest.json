@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-06",
-  "status": "PREPARED_NOT_EXECUTED",
-  "sourceCommit": "f979dfa38ccfead4c29ad923561ca95fb7426c7d",
+  "date": "2026-10-07",
+  "status": "DEV_D1_APPLIED_PRODUCTION_NOT_EXECUTED",
+  "sourceCommit": "128add6e1b39aa072d300befed6641cd16bfef5f",
   "productionPass": false,
   "cutoverAuthorized": false,
   "activationUnits": [
@@ -12,7 +12,7 @@
         "backend-real",
         "real-data-history"
       ],
-      "state": "BLOCKED_PENDING_EXPLICIT_REMOTE_DEV_APPLY",
+      "state": "DEV_REMOTE_APPLY_SCHEMA_PROVEN_OWNER_HISTORY_PENDING",
       "exactInputs": [
         "qa/modaryx-v2-d1-migration-execution-manifest.json"
       ],
@@ -33,8 +33,14 @@
       "observedTargetState": {
         "pagesPreviewD1Binding": "PRESENT",
         "pagesProductionD1Binding": "ABSENT",
-        "d1MetadataApiScope": "INSUFFICIENT_401",
-        "remoteApplyExecuted": false
+        "d1MetadataApiScope": "D1_EDIT_OK_DEDICATED_TOKEN",
+        "remoteApplyExecuted": true,
+        "devApplyRunId": 37613283219,
+        "schemaReady": true,
+        "requiredV2TableCount": 32,
+        "productionPass": false,
+        "ownerHistoryTargetedReadWrite": "PENDING",
+        "productionPipelineProof": "PENDING"
       }
     },
     {
@@ -206,8 +212,8 @@
     }
   ],
   "invariants": [
-    "NO_REMOTE_MUTATION_BY_THIS_MANIFEST",
-    "NO_D1_REMOTE_APPLY",
+    "NO_ADDITIONAL_D1_REMOTE_APPLY_BY_THIS_CHANGE",
+    "NO_PRODUCTION_D1_APPLY",
     "NO_R2_BUCKET_CREATION_OR_BINDING_CHANGE",
     "NO_PROVIDER_ACTIVATION",
     "NO_EMAIL_OR_PUSH_DISPATCH",

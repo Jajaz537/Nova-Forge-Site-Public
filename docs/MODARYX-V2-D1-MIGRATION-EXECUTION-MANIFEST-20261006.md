@@ -1,32 +1,56 @@
-# MODARYX V2 — Manifest d'exécution D1 contrôlé — 2026-10-06
+# MODARYX V2 — Manifest d'exécution D1 contrôlé — état post-apply 2026-10-07
 
-**État : PRÉPARÉ / NON EXÉCUTÉ À DISTANCE**
+**État : DEV REMOTE APPLIQUÉ ET PROUVÉ / PRODUCTION NON EXÉCUTÉE**
 
-Ce paquet verrouille l'ordre et l'identité exacte des migrations D1 actuellement présentes, de `0001` à `0015`.
+Le manifest reste verrouillé sur la séquence `0001 → 0015`, soit **15 migrations** et **32 tables V2 requises**.
 
-## Garanties
+## Preuve DEV contrôlée
 
-- chaque fichier est lié à son Git blob SHA-1 exact ;
-- ordre continu obligatoire ;
-- replay SQLite local complet ;
-- 32 tables V2 requises présentes après replay ;
-- détection de DDL destructif élémentaire (`DROP TABLE`, `DROP COLUMN`, `TRUNCATE`) ;
-- aucune commande d'application remote dans le manifest ;
-- aucun seed catalogue/fixture ;
-- aucun cutover.
+- autorisation explicite utilisateur : oui ;
+- source canonique appliquée : `128add6e1b39aa072d300befed6641cd16bfef5f` ;
+- run : `37613283219` ;
+- job : `112765470695` ;
+- cible preview D1 : hash SHA-256 attendu et vérifié ;
+- binding D1 production : absent ;
+- Time Travel pré-apply : capturé ;
+- export SQL pré-apply : réussi, **10199 octets** ;
+- SHA-256 export : `d7dabe791e6d42295a65fb9a2928fff019d5756dd93500ebd6e5b8ea72aadc26` ;
+- migrations `0001→0015` : appliquées ;
+- migrations restantes : zéro ;
+- tables V2 post-apply : **32/32** ;
+- readiness backend : `d1Schema.ready=true` ;
+- `productionPass=false` ;
+- DNS / main / cutover : inchangés.
 
-## Politique d'application
+Artifact reçu non sensible :
+- id : `11479710441`
+- SHA-256 : `b1e8455246acff26e2cf4465cad62f8ba14579c4306a1f8ea4e710859044e539`
 
-`DEV remote` : uniquement par action explicite séparée, après preuve exacte de la cible et preuve de sauvegarde/export.
+## Incident et correction ciblée
 
-`Production remote` : bloquée tant qu'une application DEV contrôlée + preuve post-apply + voie de restauration n'existent pas, puis exige une approbation explicite distincte.
+Le premier run avec le token D1 dédié a échoué **avant mutation** sur :
+`No migrations present at /tmp/migrations`.
 
-## Post-apply attendu
+Cause isolée : `migrations_dir` était résolu relativement au fichier Wrangler placé dans `/tmp`.
 
-Une future exécution autorisée devra prouver séparément :
-- schéma D1 en lecture seule ;
-- état backend en lecture seule ;
-- micro-preuve ciblée lecture/écriture de l'historique propriétaire ;
-- preuve de rollback/restauration.
+Micro-proof read-only :
+- run `37613151174` — SUCCESS ;
+- cible exacte vérifiée ;
+- binding production absent ;
+- `wrangler d1 migrations list` voit les 15 migrations `0001→0015`.
 
-Cette préparation ne ferme pas `real-data-history`, `backend-real` ou `cutover`.
+Correction appliquée :
+- config Wrangler éphémère replacée dans le workspace du repo ;
+- workflow d'apply remis en `workflow_dispatch` uniquement après succès.
+
+## Ce qui reste OPEN
+
+La preuve DEV distante ne ferme pas à elle seule `real-data-history`.
+
+Toujours requis :
+- **OWNER_HISTORY_TARGETED_READ_WRITE** via le pipeline authentifié réel ;
+- preuve production séparée ;
+- autorisation production séparée ;
+- aucune promotion de données DEV vers production.
+
+Le blocker strict reste OPEN jusqu'à preuve complète correspondante.
