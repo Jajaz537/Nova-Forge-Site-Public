@@ -616,3 +616,38 @@ Conséquences :
 **Willingness-to-pay terrain : PREUVE MANQUANTE.**
 
 La gate commerciale reste **EN COURS**.
+
+
+---
+
+## 23. Enveloppe de coûts Cloudflare — 2026-10-08
+
+Modèle de sensibilité ajouté :
+- `docs/MODARYX-V2-CLOUDFLARE-COST-ENVELOPE-20261008.md`
+- `docs/MODARYX-V2-CLOUDFLARE-COST-ENVELOPE-20261008.json`
+
+Tarifs officiels retenus pour la modélisation :
+- Workers Paid : minimum **$5/mois**, 10 M requêtes + 30 M CPU-ms inclus
+- D1 Paid : 25 Md rows read + 50 M rows written + 5 GB inclus
+- R2 Standard : 10 GB + 1 M Class A + 10 M Class B inclus, egress Internet à **$0**
+- Pages Free : **$0** affiché pour l'offre statique.
+
+Scénarios purement hypothétiques :
+- Workers à 5 ms CPU moyen : 5 M req → **$5.00**, 25 M → **$11.40**, 100 M → **$41.40**
+- R2 : 100 GB / faible ops → **$1.35**, 1 TB / 10 M A / 100 M B → **$88.11**, 10 TB / 50 M A / 500 M B → **$550.35**
+- D1 write-heavy illustratif : 100 Md reads / 200 M writes / 20 GB → **$236.25**
+
+Ces montants ne sont **pas des prévisions ni un budget canonique**.
+
+Toujours exclus :
+- paiement/taxes
+- support/modération/fraude
+- providers email/push/auth
+- observabilité additionnelle
+- droits/licences
+- juridique/comptabilité
+- CAC et coûts humains.
+
+**Budget infra canonique : PREUVE MANQUANTE.**
+**Mesures de production réelles : PREUVE MANQUANTE.**
+La gate commerciale reste **EN COURS**.
