@@ -226,3 +226,49 @@ Registre centralisé créé pour les faits manquants avant documents finaux :
 
 Aucun champ manquant n'a été inventé.
 Les CGU/CGV/privacy notice/mentions légales finales restent BLOQUÉES tant que les faits structurants ne sont pas fournis et validés.
+
+
+---
+
+## 13. Vérification finale sources officielles + Projet — 2026-10-07
+
+### France — rétractation interface en ligne
+
+Vérification officielle effectuée le 2026-10-07 :
+- article L221-5 en vigueur depuis le 19/06/2026 ;
+- article L221-21 en vigueur depuis le 19/06/2026 ;
+- article D221-5 créé par décret n°2026-3 du 5 janvier 2026.
+
+Point ajouté à la gate checkout :
+lorsque le droit de rétractation existe pour un contrat conclu à distance via une interface en ligne, une fonctionnalité gratuite d'exercice du droit doit être prévue, visible, directement et facilement accessible, selon les modalités applicables.
+
+Le lien L221-5 erroné de la première matrice a été corrigé vers l'article officiel courant.
+
+### Sources officielles revérifiées
+
+- Stripe France : 1,5 % + 0,25 € cartes standard EEE ; 2,8 % + 0,25 € premium EEE ; litiges 20 € ; réfutation manuelle 20 € remboursée si gagnée selon tarification publiée.
+- Paddle : 5 % + 0,50 USD par Checkout, Merchant of Record.
+- Lemon Squeezy : 5 % + 0,50 USD base ; frais additionnels possibles, notamment international, PayPal et abonnement.
+- CNIL : durées par finalité, logs standard 6–12 mois, prospection 3 ans selon cas, choix cookies 6 mois comme bonne pratique.
+- DGCCRF : obligations accessibilité depuis 28/06/2025 pour catégories concernées ; exemption microentreprise de services à qualifier, jamais à présumer.
+- Commission UE : guides OSS révisés le 24/07/2026 pour changements ViDA entrant notamment en vigueur le 01/01/2027.
+
+### Sources visuelles Projet
+
+Cross-check ajouté :
+`docs/MODARYX-V2-PROJECT-VISUAL-SOURCE-CROSSCHECK-20261007.md`.
+
+Résultat :
+- références historiques MODARYX/loup+dragon retrouvées ;
+- hashes/dimensions conservés ;
+- aucune identité exacte avec les assets Git actuels n'est affirmée sans preuve ;
+- droits commerciaux restent **PREUVE MANQUANTE** ;
+- `finalReleaseAllowed` reste `false`.
+
+### État après cette tranche
+
+- commercial : **EN COURS**
+- legal/compliance France-UE : **BLOQUÉ / PREUVE MANQUANTE** sur faits vendeur/provider/territoires/rights
+- prix canonique : **aucun**
+- paiement : **aucun activé**
+- production : **aucun changement**
