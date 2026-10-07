@@ -434,3 +434,86 @@ Gates inchangées :
 - LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
 
 Aucun changement main, DNS, paiement, production ou cutover.
+
+
+---
+
+## 19. Clôture tranche CI / SBOM / provenance — 2026-10-07
+
+HEAD canonique revérifié avant cette clôture :
+`design/modaryx-v2-blue-violet-product-20261005` @ `f4c5f49bcfa0f3289866e62766d281fbf76d0264`.
+
+### Build / bundle / SBOM
+
+Les preuves canoniques intégrées dans les sections précédentes restent prioritaires :
+- build V2 candidat : **TERMINÉ**
+- micro-tests Sites : **TERMINÉ**
+- bundle `v2/dist` : **15 fichiers**
+- SBOM CycloneDX candidat : **66 composants**
+- attribution module → bundle : **TERMINÉ pour le candidat courant**
+- tiers client effectivement attribués : `@phosphor-icons/react`, `react`, `react-dom`, `scheduler`, tous déclarés MIT
+- `caniuse-lite@1.0.30001803` : **BUILD_ONLY** pour ce candidat, non attribué aux chunks client.
+
+Erreur ciblée rencontrée pendant une lane auxiliaire :
+- collecteur initial : `packageCount=0` car certaines entrées lockfile v3 n'exposent pas `name`
+- correction : dérivation du nom depuis le chemin `node_modules/`
+- micro-proof corrigé : **TERMINÉ**
+- cette classification auxiliaire plus faible ne remplace pas la preuve module→bundle canonique déjà intégrée.
+
+### Assets réellement redistribués
+
+Cinq visuels produit sont présents dans le bundle candidat.
+
+**Marque MODARYX — PARTIAL_EVIDENCE**
+- `modaryx-mark.svg`
+- `modaryx-mark-192.png`
+- `modaryx-mark-512.png`
+
+Chaîne Git directe fermée :
+- SVG « M » : `14142306a9d160fc2ebc01486167853bc27dcdf2`
+- PNG refresh : `2ae5bd279bd3437d74424801ff428e40bc61504c`
+- le second commit est l'enfant direct du premier et ne modifie que les deux PNG.
+
+**Living Threshold — PARTIAL_EVIDENCE**
+- `living-threshold-hero.png`
+- `living-threshold-content-sheet.png`
+
+Le commit d'introduction `33405e93bae60ccfc4b84362f3102c578d100ab9` documente :
+- assets générés spécifiquement pour le prototype ;
+- aucun asset V1/legacy ;
+- source visual truth locale `C:\Users\steph\.codex\generated_images\01a1033a-47d2-7910-92b8-05aa89cfb208\exec-197fd322-f242-4a81-a337-91f52572641b.png` ;
+- dimensions source : **1488 × 1058**.
+
+Recherche Projet/Bibliothèque : le binaire source exact n'a pas été retrouvé.
+
+Donc, pour les deux Living Threshold :
+- source/génération dédiée : **PARTIAL_EVIDENCE**
+- binaire source original : **PREUVE MANQUANTE**
+- outil/modèle exact et conditions de génération : **PREUVE MANQUANTE**
+- droits commerciaux : **PREUVE MANQUANTE**
+
+Pour les cinq visuels :
+`finalReleaseAllowed=false`.
+
+### Intégrations gouvernance
+
+- PR #241 : handoff bundle/SBOM
+- PR #244 : THIRD-PARTY exact du bundle candidat
+- PR #245 : provenance raster de la marque
+
+Aucun changement `main`, DNS/DNSSEC/nameservers, Cloudflare critique, D1/R2 production, paiement, provider production ou cutover.
+
+### Gates après tranche
+
+- VF TECHNIQUE : **EN COURS**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE France-UE : **BLOQUÉ / PREUVE MANQUANTE**
+
+Blockers principaux restants :
+- droits commerciaux/propriété intellectuelle des visuels ;
+- faits vendeur/opérateur/territoires ;
+- choix provider/paiement et fiscalité lorsque l'utilisateur décidera d'avancer ;
+- validation juridique appropriée ;
+- terrain pricing réel.
+
+Aucun prix canonique et aucun paiement activé.
