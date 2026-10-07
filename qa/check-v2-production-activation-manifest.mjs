@@ -3,7 +3,7 @@ import fs from "node:fs";
 
 const m=JSON.parse(fs.readFileSync("qa/modaryx-v2-production-activation-manifest.json","utf8"));
 assert.equal(m.schemaVersion,1);
-assert.equal(m.status,"PREPARED_NOT_EXECUTED");
+assert.equal(m.status,"DEV_D1_APPLIED_PRODUCTION_NOT_EXECUTED");
 assert.equal(m.productionPass,false);
 assert.equal(m.cutoverAuthorized,false);
 
@@ -17,6 +17,13 @@ for(const unit of m.activationUnits) assert.equal(unit.automatic,false,unit.id+"
 const d1=m.activationUnits.find(x=>x.id==="d1-remote-schema");
 assert.ok(d1.exactInputs.includes("qa/modaryx-v2-d1-migration-execution-manifest.json"));
 assert.ok(d1.requiredBeforeProduction.includes("SEPARATE_EXPLICIT_PRODUCTION_APPROVAL"));
+assert.equal(d1.state,"DEV_REMOTE_APPLY_SCHEMA_PROVEN_OWNER_HISTORY_PENDING");
+assert.equal(d1.observedTargetState.remoteApplyExecuted,true);
+assert.equal(d1.observedTargetState.schemaReady,true);
+assert.equal(d1.observedTargetState.requiredV2TableCount,32);
+assert.equal(d1.observedTargetState.pagesProductionD1Binding,"ABSENT");
+assert.equal(d1.observedTargetState.productionPass,false);
+assert.equal(d1.observedTargetState.ownerHistoryTargetedReadWrite,"PENDING");
 
 const pwa=m.activationUnits.find(x=>x.id==="pwa-production");
 assert.equal(pwa.buildFlag,"VITE_MODARYX_PWA_PRODUCTION=1");
@@ -43,7 +50,7 @@ assert.ok(cutover.requiredBeforeCutover.includes("ALL_REQUIRED_VF_BLOCKERS_CLOSE
 
 const inv=new Set(m.invariants||[]);
 for(const x of [
-  "NO_REMOTE_MUTATION_BY_THIS_MANIFEST","NO_D1_REMOTE_APPLY","NO_PROVIDER_ACTIVATION",
+  "NO_ADDITIONAL_D1_REMOTE_APPLY_BY_THIS_CHANGE","NO_PRODUCTION_D1_APPLY","NO_PROVIDER_ACTIVATION",
   "NO_PWA_PRODUCTION_ENABLE","NO_FIELD_CWV_ENABLE","NO_INDEXABILITY_CHANGE",
   "NO_CLOUDFLARE_CRITICAL_CHANGE","NO_CUTOVER",
   "ALL_19_REAL_EXTERNAL_PRODUCTION_BLOCKERS_REMAIN_OPEN_UNTIL_SEPARATE_EVIDENCE"
