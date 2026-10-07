@@ -4,6 +4,7 @@ import { contentPath, pathForActive, routeStateFromPath } from "./routes.js";
 import { authLoginUrl, getDataHistory, getNotifications, getProviderRegistry, logoutAccountSession, markNotificationRead, resolveAccountRemoteState } from "./api/modaryx-api.js";
 import { resolveAmbientContext } from "./api/local-context.js";
 const GameSupportRequestPanel=lazy(()=>import("./components/GameSupportRequestPanel.jsx"));
+const RemoteProfileEditor=lazy(()=>import("./components/RemoteProfileEditor.jsx").then(module=>({default:module.RemoteProfileEditor})));
 import {
   ArrowRight, Bell, BookOpen, Check, FunnelSimple, GameController, GridFour,
   List, MagnifyingGlass, Plus, SlidersHorizontal, Stack, UsersThree, X
@@ -625,12 +626,17 @@ function AccountCenter({ initialTab="Compte" }) {
 
   const profilePanel=<section className="account-panel">
     <span className="kicker">Profil public</span>
-    <h2>{profile?.displayName || profile?.handle || "Aucun profil public actif"}</h2>
-    <p>{profile
-      ? `Profil réel chargé depuis la session same-origin · visibilité ${profile.visibility || "non renseignée"}.`
-      : "Compte, profil public et capacité créateur restent trois concepts distincts. Une session réelle sera requise pour publier un profil."}</p>
-    {!profile&&<div className="unavailable-state"><strong>Édition distante indisponible</strong><span>Les changements non sauvegardés ne doivent jamais être perdus lorsque le backend sera connecté.</span></div>}
-    {profile&&<div className="session-state"><strong>@{profile.handle || "profil"}</strong><span>{profile.isCreator?"Créateur":"Profil membre"}</span></div>}
+    <h2>{profile?.displayName || profile?.handle || (authenticated ? "Créer votre profil" : "Aucun profil public actif")}</h2>
+    <p>{authenticated
+      ? profile
+        ? `Profil réel chargé depuis la session same-origin · visibilité ${profile.visibility || "non renseignée"}.`
+        : "Votre session est authentifiée. Créez un profil MODARYX sans exposer votre identité fournisseur."
+      : "Compte, profil public et capacité créateur restent trois concepts distincts. Une session réelle est requise pour publier un profil."}</p>
+    {!authenticated&&<div className="unavailable-state"><strong>Connexion requise</strong><span>Connectez-vous depuis l’onglet Compte pour modifier un profil réel.</span></div>}
+    {authenticated&&profile&&<div className="session-state"><strong>@{profile.handle || "profil"}</strong><span>{profile.isCreator?"Créateur":"Profil membre"}</span></div>}
+    {authenticated&&<Suspense fallback={<div className="remote-profile-state" role="status">Chargement de l’éditeur distant…</div>}>
+      <RemoteProfileEditor sessionProfile={profile} onSaved={refreshRemoteAccount}/>
+    </Suspense>}
   </section>;
 
   const panel={

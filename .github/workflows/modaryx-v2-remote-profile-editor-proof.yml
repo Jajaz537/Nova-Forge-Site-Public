@@ -1,0 +1,54 @@
+name: MODARYX V2 Remote Profile Editor Proof
+
+on:
+  push:
+    branches:
+      - 'feat/modaryx-v2-profile-editor-turnstile-20261007'
+    paths:
+      - '.github/workflows/modaryx-v2-remote-profile-editor-proof.yml'
+      - 'v2/src/components/TurnstileWidget.jsx'
+      - 'v2/src/components/RemoteProfileEditor.jsx'
+      - 'v2/src/profile-editor.css'
+      - 'v2/src/api/modaryx-api.js'
+      - 'v2/src/App.jsx'
+      - 'qa/check-v2-remote-profile-editor.mjs'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-remote-profile-editor-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove real-profile UI wiring without remote mutation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate profile editor contract
+        run: |
+          set -euo pipefail
+          node qa/check-v2-remote-profile-editor.mjs
+
+      - name: Build V2 candidate
+        working-directory: v2
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+          npm run test:sites
+
+      - name: Marker
+        run: |
+          echo PASS_MODARYX_V2_REMOTE_PROFILE_EDITOR_PROOF

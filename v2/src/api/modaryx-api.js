@@ -50,6 +50,15 @@ export async function getAccountSession(options={}){
   return readJson(API_ROOT+"/auth/session",options);
 }
 
+export async function getProfile(options={}){
+  return readJson(API_ROOT+"/profile",options);
+}
+
+export async function saveProfile(payload,options={}){
+  if(!payload||typeof payload!=="object"||Array.isArray(payload)) return {ok:false,state:"PAYLOAD_REJECTED",status:0};
+  return readJson(API_ROOT+"/profile",{...options,method:"PUT",timeoutMs:options.timeoutMs??12000,body:payload});
+}
+
 export async function resolveAccountRemoteState(options={}){
   const status=await getBackendStatus(options);
   if(!status.ok) return {state:"BACKEND_UNAVAILABLE",loginAvailable:false,profile:null,authority:null,reason:status.state};
