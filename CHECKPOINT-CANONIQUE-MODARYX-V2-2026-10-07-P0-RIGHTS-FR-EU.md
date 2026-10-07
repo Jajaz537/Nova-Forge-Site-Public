@@ -177,3 +177,52 @@ Toujours **PREUVE MANQUANTE / LEGAL_REVIEW_REQUIRED** :
 - vendeur et modèle de facturation ;
 - sauvegardes/purge production ;
 - process suppression/export.
+
+
+---
+
+## 12. Mise à jour pricing research / DSA / launch facts — 2026-10-07
+
+Nouveaux artefacts :
+- `docs/MODARYX-V2-PRICING-RESEARCH-INSTRUMENT-20261007.md`
+- `docs/MODARYX-V2-DSA-ROLE-QUALIFICATION-WORKSHEET-20261007.md`
+- `docs/MODARYX-V2-FR-EU-LAUNCH-FACTS-REGISTER-20261007.md`
+
+### Pricing
+Le protocole est désormais transformé en questionnaire/interview guide exécutable :
+- gratuit testé comme vrai produit ;
+- Premium testé par valeur fonctionnelle ;
+- prix 4,99 / 6,99 / 8,99 €/mois uniquement comme stimuli ;
+- premier test prix monadique/randomisé ;
+- aucune carte, réservation ou fausse commande ;
+- segment créateurs séparé.
+
+**Exécution terrain : PREUVE MANQUANTE.**
+
+### DSA
+La qualification finale n'est pas forcée.
+Le worksheet distingue :
+- stockage à la demande ;
+- diffusion publique ;
+- hosting/online platform à qualifier selon fonctions réellement activées ;
+- marketplace non prouvée et non canonique ;
+- vente propre MODARYX distincte d'une marketplace tiers.
+
+**Qualification finale : LEGAL_REVIEW_REQUIRED.**
+
+### Launch facts France/UE
+Registre centralisé créé pour les faits manquants avant documents finaux :
+- opérateur/vendeur ;
+- territoires ;
+- langues ;
+- offre/prix ;
+- paiement/TVA ;
+- privacy/providers ;
+- cookies ;
+- DSA/UGC ;
+- accessibilité ;
+- rights/licenses ;
+- support/refunds.
+
+Aucun champ manquant n'a été inventé.
+Les CGU/CGV/privacy notice/mentions légales finales restent BLOQUÉES tant que les faits structurants ne sont pas fournis et validés.
