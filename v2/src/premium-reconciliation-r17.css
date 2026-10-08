@@ -696,3 +696,25 @@
     width:auto!important;
   }
 }
+
+
+/* R17.2 account-title correction after desktop/mobile visual review. */
+@media (min-width:901px){
+  .account-center{
+    grid-template-columns:minmax(360px,.72fr) minmax(0,1.28fr)!important;
+  }
+
+  .account-center > h1{
+    max-width:12.5ch!important;
+    width:auto!important;
+  }
+}
+
+@media (max-width:900px){
+  .account-center > h1{
+    max-width:none!important;
+    width:100%!important;
+    font-size:clamp(42px,12vw,58px)!important;
+    line-height:.94!important;
+  }
+}
