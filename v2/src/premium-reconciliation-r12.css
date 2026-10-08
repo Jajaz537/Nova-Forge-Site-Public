@@ -1,0 +1,310 @@
+/* MODARYX V2 — Premium reconciliation R12
+   Removes the remaining inherited "old design / mockup" header plates on secondary pages.
+   Visual-only. No route, data, backend, entitlement or production behavior change. */
+
+/* Full-bleed secondary-page canvases. */
+.page-section.collections-page,
+.page-section.community,
+.page-section.creators-page,
+.page-section.account-center{
+  position:relative;
+  isolation:isolate;
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:
+    clamp(150px,15vw,220px)
+    max(28px,calc((100vw - 1320px)/2))
+    112px;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:visible;
+}
+
+/* Kill inherited rounded/purple "mockup plate" layers. */
+.page-section.collections-page::before,
+.page-section.collections-page::after,
+.page-section.community::before,
+.page-section.community::after,
+.page-section.creators-page::before,
+.page-section.creators-page::after,
+.page-section.account-center::before,
+.page-section.account-center::after{
+  display:none!important;
+  content:none!important;
+}
+
+/* Collections: luminous world archive, no boxed masthead. */
+.page-section.collections-page{
+  background:
+    linear-gradient(180deg,rgba(2,7,13,.08) 0%,rgba(2,7,13,.42) 27rem,#02070d 42rem),
+    linear-gradient(90deg,rgba(2,7,13,.82),rgba(2,7,13,.28) 58%,rgba(2,7,13,.70)),
+    url('/assets/modaryx-wolf-dragon-hero.webp') center 18%/100% auto no-repeat;
+}
+
+.collections-page>.kicker,
+.collections-page>h1,
+.collections-page>.page-intro,
+.collections-page>.collection-mode-tabs,
+.collections-page>.collection-tools,
+.collections-page>.collection-grid,
+.collections-page>.modpack-manager,
+.collections-page>.primary{
+  position:relative;
+  z-index:1;
+}
+
+.collections-page>h1{
+  max-width:9.5ch;
+  font-size:clamp(64px,7vw,104px);
+  line-height:.88;
+  letter-spacing:-.065em;
+  text-shadow:0 16px 50px rgba(0,0,0,.36);
+}
+
+.collections-page>.page-intro{
+  max-width:680px;
+  color:rgba(238,247,250,.80);
+  text-shadow:0 8px 28px rgba(0,0,0,.40);
+}
+
+.collection-mode-tabs{
+  margin-top:36px;
+  width:max-content;
+  padding:5px;
+  border:1px solid rgba(164,225,239,.10);
+  border-radius:999px;
+  background:rgba(2,9,15,.48);
+  backdrop-filter:blur(18px);
+  box-shadow:none;
+}
+
+.collection-mode-tabs button{
+  border-radius:999px;
+}
+
+/* Community: darker editorial forum with atmospheric stage instead of a header card. */
+.page-section.community{
+  background:
+    radial-gradient(circle at 76% 12%,rgba(139,116,255,.18),transparent 30rem),
+    radial-gradient(circle at 12% 26%,rgba(100,237,240,.08),transparent 26rem),
+    linear-gradient(180deg,#02070d 0%,#04101a 32rem,#02070d 100%);
+}
+
+.community>h1{
+  max-width:9.5ch;
+  font-size:clamp(64px,7vw,102px);
+  line-height:.88;
+  letter-spacing:-.065em;
+}
+
+.community>.page-intro{
+  max-width:690px;
+}
+
+.community .community-tabs{
+  width:max-content;
+  max-width:100%;
+  overflow:auto;
+  padding:5px;
+  margin-top:38px;
+  border:1px solid rgba(164,225,239,.10);
+  border-radius:999px;
+  background:rgba(3,11,18,.52);
+  backdrop-filter:blur(18px);
+}
+
+.community .community-tabs button{
+  border-radius:999px;
+}
+
+.community-board{
+  width:min(1080px,100%);
+  margin-top:64px;
+  padding:54px;
+  border-radius:34px;
+  background:
+    linear-gradient(145deg,rgba(7,20,30,.72),rgba(2,8,14,.90));
+  border:1px solid rgba(164,225,239,.07);
+  box-shadow:0 48px 120px rgba(0,0,0,.28);
+}
+
+.community-board>h2{
+  max-width:11ch;
+  font-size:clamp(42px,4.5vw,68px);
+  line-height:.94;
+  letter-spacing:-.05em;
+}
+
+.community-board>p{
+  max-width:680px;
+  font-size:16px;
+  line-height:1.72;
+}
+
+/* Creators: portfolio/editorial entrance. */
+.page-section.creators-page{
+  background:
+    linear-gradient(180deg,rgba(2,7,13,.16) 0%,rgba(2,7,13,.56) 25rem,#02070d 40rem),
+    linear-gradient(90deg,rgba(2,7,13,.88),rgba(2,7,13,.26) 62%,rgba(2,7,13,.68)),
+    url('/assets/modaryx-wolf-dragon-hero.webp') 64% 18%/100% auto no-repeat;
+}
+
+.creators-page>.kicker,
+.creators-page>h1,
+.creators-page>.page-intro,
+.creators-page>.creator-studio-entry,
+.creators-page>.creators-search,
+.creators-page>.creator-index-grid{
+  position:relative;
+  z-index:1;
+}
+
+.creators-page>h1{
+  max-width:8.7ch;
+  font-size:clamp(64px,7vw,102px);
+  line-height:.88;
+  letter-spacing:-.065em;
+  text-shadow:0 16px 50px rgba(0,0,0,.38);
+}
+
+.creators-page>.page-intro{
+  max-width:690px;
+  color:rgba(238,247,250,.80);
+}
+
+.creator-studio-entry{
+  margin-top:28px;
+  border:1px solid rgba(164,225,239,.12)!important;
+  background:rgba(3,11,18,.52)!important;
+  backdrop-filter:blur(16px);
+}
+
+.creators-search{
+  max-width:760px;
+  margin-top:54px;
+}
+
+/* Account: quiet private atelier, deliberately no fantasy-cover image. */
+.page-section.account-center{
+  background:
+    radial-gradient(circle at 74% 10%,rgba(139,116,255,.16),transparent 31rem),
+    radial-gradient(circle at 14% 22%,rgba(100,237,240,.08),transparent 26rem),
+    linear-gradient(180deg,#02070d 0%,#06121c 32rem,#02070d 100%);
+}
+
+.account-center>.kicker,
+.account-center>h1,
+.account-center>.page-intro,
+.account-center>.account-shell{
+  position:relative;
+  z-index:1;
+}
+
+.account-center>h1{
+  max-width:8.4ch;
+  font-size:clamp(64px,7vw,100px);
+  line-height:.88;
+  letter-spacing:-.065em;
+}
+
+.account-center>.page-intro{
+  max-width:700px;
+}
+
+.account-shell{
+  margin-top:72px!important;
+}
+
+.account-panel{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+.account-panel::before,
+.account-panel::after{
+  display:none!important;
+  content:none!important;
+}
+
+/* Remove old generic hero-card chrome on these families. */
+.collections-page>.kicker,
+.community>.kicker,
+.creators-page>.kicker,
+.account-center>.kicker{
+  letter-spacing:.22em;
+  color:rgba(100,237,240,.78);
+}
+
+.collections-page .collection-tools,
+.creators-page .creators-search{
+  background:rgba(2,9,15,.52);
+  border:1px solid rgba(164,225,239,.09);
+  backdrop-filter:blur(16px);
+}
+
+@media (max-width:760px){
+  .page-section.collections-page,
+  .page-section.community,
+  .page-section.creators-page,
+  .page-section.account-center{
+    padding:126px 18px 82px;
+  }
+
+  .page-section.collections-page{
+    background:
+      linear-gradient(180deg,rgba(2,7,13,.08),rgba(2,7,13,.50) 25rem,#02070d 38rem),
+      url('/assets/modaryx-wolf-dragon-hero.webp') 62% 0/auto 520px no-repeat;
+  }
+
+  .page-section.creators-page{
+    background:
+      linear-gradient(180deg,rgba(2,7,13,.12),rgba(2,7,13,.54) 25rem,#02070d 38rem),
+      url('/assets/modaryx-wolf-dragon-hero.webp') 66% 0/auto 520px no-repeat;
+  }
+
+  .collections-page>h1,
+  .community>h1,
+  .creators-page>h1,
+  .account-center>h1{
+    font-size:clamp(48px,14vw,68px);
+    max-width:8.5ch;
+  }
+
+  .collections-page>.page-intro,
+  .creators-page>.page-intro{
+    color:rgba(238,247,250,.86);
+  }
+
+  .collection-mode-tabs,
+  .community .community-tabs{
+    width:100%;
+    border-radius:20px;
+  }
+
+  .community-board{
+    margin-top:40px;
+    padding:34px 22px;
+    border-radius:28px;
+  }
+
+  .community-board>h2{
+    font-size:clamp(38px,11vw,54px);
+  }
+
+  .account-shell{
+    margin-top:46px!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .page-section.collections-page,
+  .page-section.community,
+  .page-section.creators-page,
+  .page-section.account-center{
+    transition:none!important;
+    animation:none!important;
+  }
+}
