@@ -1106,3 +1106,50 @@ Toujours **PREUVE MANQUANTE** :
 Aucun prix, paiement ou lancement n'est rendu canonique.
 
 Gate commerciale : **EN COURS**.
+
+
+---
+
+## 34. TVA/facturation, médiation et résiliation — readiness candidat — 2026-10-08
+
+Documents :
+- `docs/MODARYX-V2-TAX-INVOICING-MEDIATION-CANCELLATION-READINESS-20261008.md`
+- `docs/MODARYX-V2-TAX-INVOICING-MEDIATION-CANCELLATION-READINESS-20261008.json`
+
+Axes préparés :
+- TVA / OSS ;
+- facturation / reçus ;
+- médiation de la consommation ;
+- résiliation électronique ;
+- séparation rétractation vs résiliation.
+
+Références officielles revues :
+- impots.gouv.fr — OSS/IOSS ;
+- Commission européenne / Your Europe — VAT One Stop Shop ;
+- DGCCRF — médiation consommation ;
+- Entreprendre.Service-Public / DGCCRF — résiliation électronique.
+
+Règles :
+- aucun régime TVA canonique sans vendeur/offre/territoires ;
+- aucun médiateur fictif ;
+- aucun abonnement supposé ;
+- aucun flow de résiliation présenté comme final avant qualification du contrat ;
+- rétractation et résiliation restent juridiquement/produit distinctes.
+
+Toujours **PREUVE MANQUANTE** :
+- vendeur/établissement/statut TVA ;
+- territoires ;
+- modèle fiscal ;
+- OSS ;
+- facturation/reçus ;
+- médiateur ;
+- applicabilité résiliation ;
+- validation comptable/fiscale ;
+- validation juridique.
+
+Aucun prix, abonnement, provider, paiement, taxe, facture, médiateur ou production activé.
+
+Gates :
+- VF TECHNIQUE : **EN COURS**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
