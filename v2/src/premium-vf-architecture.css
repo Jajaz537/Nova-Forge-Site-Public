@@ -1298,3 +1298,24 @@
     transition:none!important;
   }
 }
+
+
+/* R3 targeted accessibility micro-fix — measured 390px touch targets */
+/* CI 37818505729: mobile-search 33px, mobile-menu 30px; local-nav 42px high. */
+@media (max-width:760px){
+  .topbar .mobile-search,
+  .topbar .mobile-menu{
+    box-sizing:border-box!important;
+    width:44px!important;
+    min-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+  .game-hub-page .local-nav button{
+    box-sizing:border-box!important;
+    min-height:44px!important;
+  }
+}
