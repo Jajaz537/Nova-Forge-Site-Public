@@ -31,6 +31,21 @@
       ]
     },
     {
+      "id": "visual-direction-premium-fidelity",
+      "coverageState": "TERMINÉ",
+      "subjectState": "BLOQUÉ",
+      "refs": [
+        "docs/MODARYX-V2-VISUAL-RECONCILIATION-20261008.md",
+        "docs/MODARYX-V2-VISUAL-RECONCILIATION-20261008.json",
+        "qa/modaryx-v2-vf-readiness-gate.json"
+      ],
+      "remaining": [
+        "reconciled premium visual candidate",
+        "fresh desktop/mobile captures bound to current SHA",
+        "owner visual acceptance"
+      ]
+    },
+    {
       "id": "technical-vf",
       "coverageState": "TERMINÉ",
       "subjectState": "EN COURS",
@@ -39,7 +54,7 @@
         "qa/modaryx-v2-vf-readiness-gate.json"
       ],
       "remaining": [
-        "19 external blockers currently open"
+        "19 external blockers plus 1 owner visual-reconciliation blocker currently open"
       ]
     },
     {
@@ -319,7 +334,7 @@
     }
   ],
   "coverageSummary": {
-    "axisCount": 21,
+    "axisCount": 22,
     "unmappedAxisCount": 0,
     "allCoverageMapped": true
   },
@@ -327,14 +342,16 @@
     "vfTechnical": "EN COURS",
     "commercialLaunchReadiness": "EN COURS",
     "legalCompliance": "BLOQUÉ",
-    "productionCutover": "BLOQUÉ"
+    "productionCutover": "BLOQUÉ",
+    "visualDirection": "BLOQUÉ"
   },
   "unresolvedClassifications": {
     "externalVFBlockers": 19,
     "rightsCommercial": "BLOQUÉ",
     "ownerProfessionalDecisions": "PREUVE MANQUANTE",
     "realPilotAndEconomics": "PREUVE MANQUANTE",
-    "productionActivation": "BLOQUÉ"
+    "productionActivation": "BLOQUÉ",
+    "currentVisualReconciliation": "BLOQUÉ"
   },
   "finalRule": "Do not remove an axis to improve readiness. Update this matrix and canonical checkpoint whenever a mapped subject materially changes."
 }
