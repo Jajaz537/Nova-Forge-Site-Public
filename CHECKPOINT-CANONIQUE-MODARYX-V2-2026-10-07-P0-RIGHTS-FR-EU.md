@@ -1971,3 +1971,91 @@ Si un élément reste utile :
 5. garder la gate propriétaire ouverte tant que le propriétaire n'a pas validé le nouveau rendu.
 
 Aucune PR historique n'a été fermée ou modifiée par cette classification.
+
+
+---
+
+## 50. VF architecture — rupture structurelle avec l'ancienne maquette — 2026-10-08
+
+Retour propriétaire de référence :
+le site doit cesser de ressembler à l'ancien design / à une maquette.
+
+### Produit
+
+PR :
+- **#289**
+- merge SHA : `229244deab846a7ff52409f52267538c994d21f5`
+
+Candidat source :
+- `64058072a65d4499850dbfbc6b1940793c40e772`
+
+Portée :
+- `v2/src/premium-vf-architecture.css` ajouté ;
+- import final ajouté dans `v2/src/main.jsx` ;
+- aucun nouvel asset binaire ;
+- aucune route, donnée, backend, entitlement ou production modifiés.
+
+Direction :
+- topbar renforcée et moins « mini toolbar SaaS » ;
+- Jeux : champ de sélection cinématique, un jeu principal + chapitres secondaires ;
+- Mods : atlas éditorial, moins de cartes flottantes ;
+- Collections : archive éditoriale, un récit principal + index secondaire ;
+- Créateurs : mur portfolio, identité principale + roster ;
+- Communauté : observatoire éditorial, disparition du grand board encadré ;
+- Compte : atelier privé intégré, suppression de l'effet panneau réglages flottant ;
+- mobile recomposé indépendamment du desktop.
+
+La tranche corrige aussi deux défauts détectés sur la première preuve :
+- coupure disgracieuse du titre Compte desktop ;
+- interférence de pseudo-couches R17/R18 derrière la nouvelle architecture.
+
+### Preuve fraîche R2
+
+Run :
+- `37813820976`
+- job : `113437184825`
+- conclusion : **success**
+- artifact id : `11565812865`
+- digest : `sha256:b768a2d84549164e4731797c743d17f15a02927ed12a1e0ffc977d0a9c4873bb`
+- build : **TERMINÉ**
+- `test:sites` : **TERMINÉ**
+- captures : **16/16**
+  - 8 desktop 1440×1024
+  - 8 mobile 390×844
+
+Preuve :
+`docs/MODARYX-V2-VF-ARCHITECTURE-R2-EVIDENCE-20261008.json`.
+
+### Inspection support
+
+Inspection assistant : **TERMINÉE en support uniquement**.
+
+Constat :
+- rupture visuelle plus forte que R19 ;
+- hiérarchies et scènes plus distinctes entre routes ;
+- moins de cartes/panneaux répétés ;
+- mobile reste cohérent et lisible ;
+- défaut Compte R1 corrigé ;
+- bandes parasites Jeux R1 corrigées.
+
+Cette inspection ne remplace pas la décision propriétaire.
+
+### Gate propriétaire
+
+- candidat courant : **VF architecture R2**
+- implémentation : **TERMINÉ**
+- preuve visuelle fraîche : **TERMINÉ**
+- acceptation propriétaire : **PREUVE MANQUANTE**
+- `owner-visual-reconciliation-current` : **BLOQUÉ / OPEN**
+
+Aucun PASS VF final n'est dérivé de cette tranche.
+
+### Gates
+
+- VF TECHNIQUE : **EN COURS**
+- DIRECTION VISUELLE : **BLOQUÉ**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+- PRODUCTION / CUTOVER : **BLOQUÉ**
+
+Aucune mutation `main`, DNS, D1/R2 production, provider production, paiement, PWA production, field CWV, indexability ou cutover.
