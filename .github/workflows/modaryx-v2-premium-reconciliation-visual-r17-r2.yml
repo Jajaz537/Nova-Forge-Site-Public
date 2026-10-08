@@ -3,9 +3,9 @@ name: MODARYX V2 Premium Reconciliation Visual Proof R17 R2
 on:
   push:
     branches:
-      - 'proof/modaryx-v2-premium-reconciliation-visual-r17-r2-r2-20261008'
+      - 'proof/modaryx-v2-premium-reconciliation-visual-r17-r2-20261008'
     paths:
-      - '.github/workflows/modaryx-v2-premium-reconciliation-visual-r17-r2-r2.yml'
+      - '.github/workflows/modaryx-v2-premium-reconciliation-visual-r17-r2.yml'
   workflow_dispatch:
 
 permissions:
@@ -35,7 +35,7 @@ jobs:
           git merge-base --is-ancestor "$MODARYX_PRODUCT_BASE_SHA" HEAD
           mapfile -t changed < <(git diff --name-only "$MODARYX_PRODUCT_BASE_SHA..HEAD")
           test "${#changed[@]}" -eq 1
-          test "${changed[0]}" = ".github/workflows/modaryx-v2-premium-reconciliation-visual-r17-r2-r2.yml"
+          test "${changed[0]}" = ".github/workflows/modaryx-v2-premium-reconciliation-visual-r17-r2.yml"
           echo "PASS_PREMIUM_R17_PROOF_ISOLATED product=$MODARYX_PRODUCT_BASE_SHA"
 
       - name: Locate Chrome
