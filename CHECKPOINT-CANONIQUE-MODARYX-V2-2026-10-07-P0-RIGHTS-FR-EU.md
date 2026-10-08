@@ -1068,3 +1068,41 @@ Gates :
 - LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
 
 Aucune production, provider, paiement, DNS ou cutover activé.
+
+
+---
+
+## 33. Protocole pilote lancement / go-no-go — 2026-10-08
+
+Documents :
+- `docs/MODARYX-V2-LAUNCH-PILOT-GO-NO-GO-PROTOCOL-20261008.md`
+- `docs/MODARYX-V2-LAUNCH-PILOT-GO-NO-GO-PROTOCOL-20261008.json`
+
+Le protocole relie :
+problème/valeur → recherche pricing → pilote gratuit utile → acquisition → éventuel pilote commercial → décision go/no-go.
+
+Règles :
+- activation ≠ création de compte ;
+- intention de payer ≠ conversion ;
+- signup count ≠ preuve de valeur ;
+- payment-net ≠ bénéfice ;
+- aucun seuil arbitraire canonisé ;
+- aucune acquisition payante avant attribution/privacy/coûts crédibles ;
+- aucun pilote commercial tant que vendeur/territoires/taxes/paiement/refunds/droits/legal/production ne sont pas prêts ;
+- aucune dégradation artificielle du gratuit.
+
+Toujours **PREUVE MANQUANTE** :
+- valeur gratuite terrain ;
+- activation/rétention ;
+- valeur Premium récurrente ;
+- willingness-to-pay terrain ;
+- coûts réels ;
+- CAC ;
+- conversion/churn ;
+- capacité opérationnelle ;
+- readiness commerciale/légale ;
+- décision propriétaire.
+
+Aucun prix, paiement ou lancement n'est rendu canonique.
+
+Gate commerciale : **EN COURS**.
