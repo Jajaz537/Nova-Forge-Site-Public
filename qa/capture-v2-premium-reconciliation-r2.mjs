@@ -69,7 +69,8 @@ async function openRoute(path,width,height,mobile,expected){
   }
   let ok=false;
   for(let i=0;i<50;i++){
-    ok=Boolean(await evaluate(`document.body.innerText.includes(${JSON.stringify(expected)})`));
+    const expectedLower=String(expected).toLocaleLowerCase("fr");
+    ok=Boolean(await evaluate(`document.body.innerText.toLocaleLowerCase("fr").includes(${JSON.stringify(expectedLower)})`));
     if(ok) break;
     await sleep(100);
   }
