@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "status": "EN COURS",
+  "candidateSha": "e81b727c366571cc8c0329393dd3878b4317e0cb",
+  "integratedMergeSha": "cf7ba7d8e76548af1b995ae40ad641cf64e8efcd",
+  "productPr": 274,
+  "proof": {
+    "runId": 37744588355,
+    "conclusion": "success",
+    "artifact": {
+      "id": 11534408897,
+      "name": "modaryx-v2-premium-reconciliation-visual-r6",
+      "digest": "sha256:575624facfd7dc4b6602e368ae229f93ae29c45341cf892c419445c3ce49dadc"
+    },
+    "build": "TERMINÉ",
+    "siteTests": "TERMINÉ",
+    "captureCount": 16,
+    "desktop": 8,
+    "mobile": 8
+  },
+  "visualReview": {
+    "assistantSupportiveReview": "TERMINÉ",
+    "ownerAcceptance": "PREUVE MANQUANTE",
+    "observation": "R6 materially improves depth and editorial hierarchy on secondary surfaces while preserving the current React/Vite architecture and honest unavailable/demo states. This does not constitute owner acceptance."
+  },
+  "scope": {
+    "files": [
+      "v2/src/premium-reconciliation-r6.css",
+      "v2/src/main.jsx",
+      "v2/src/components/GameSupportRequestPanel.jsx"
+    ],
+    "backendChanged": false,
+    "routesChanged": false,
+    "dataChanged": false,
+    "entitlementChanged": false,
+    "newAssets": false,
+    "newDependencies": false,
+    "productionChanged": false
+  },
+  "gate": {
+    "id": "owner-visual-reconciliation-current",
+    "status": "BLOQUÉ",
+    "reason": "Owner acceptance of the current visual candidate remains required."
+  }
+}

@@ -1517,3 +1517,71 @@ Gates :
 - PRODUCTION / CUTOVER : **BLOQUÉ**
 
 Aucune mutation production, DNS, paiement ou cutover.
+
+
+---
+
+## 43. Premium reconciliation R6 — profondeur des surfaces secondaires — 2026-10-08
+
+Retour propriétaire de référence :
+le site ne doit plus ressembler à l'ancien design / à une maquette.
+
+### Produit
+
+PR :
+- **#274**
+- merge SHA : `cf7ba7d8e76548af1b995ae40ad641cf64e8efcd`
+
+Portée :
+- `v2/src/premium-reconciliation-r6.css` ajouté ;
+- import R6 en dernier dans `v2/src/main.jsx` ;
+- nettoyage limité de formulations « prototype » dans le panneau de demande de support ;
+- aucun nouvel asset ;
+- aucune nouvelle dépendance ;
+- aucun changement backend, route, données, entitlement ou production.
+
+R6 renforce notamment :
+- Communauté : composition éditoriale à deux zones au lieu d'un board plat ;
+- Collections : hiérarchie éditoriale et carte principale renforcée ;
+- Créateurs : présentation type showcase plutôt qu'annuaire plat ;
+- Catalogue : profondeur de cartes et rythme visuel ;
+- Compte : surfaces et navigation moins proches d'un panneau de réglages maquette ;
+- mobile : même hiérarchie conservée sans animation forcée.
+
+### Preuve fraîche
+
+Run :
+- `37744588355`
+- conclusion : **success**
+- artifact id : `11534408897`
+- digest : `sha256:575624facfd7dc4b6602e368ae229f93ae29c45341cf892c419445c3ce49dadc`
+- build V2 : **TERMINÉ**
+- tests sites : **TERMINÉ**
+- captures : **16/16**
+  - 8 desktop 1440×1024
+  - 8 mobile 390×844
+
+Preuve :
+`docs/MODARYX-V2-PREMIUM-RECONCILIATION-R6-EVIDENCE-20261008.json`.
+
+Pré-revue assistant :
+**TERMINÉE en support uniquement**.
+Le candidat montre une amélioration matérielle de la profondeur et de la hiérarchie des pages secondaires par rapport à R5.
+
+### Gate propriétaire
+
+- candidat R6 : **TERMINÉ**
+- preuve visuelle fraîche : **TERMINÉ**
+- acceptation propriétaire : **PREUVE MANQUANTE**
+- `owner-visual-reconciliation-current` : **BLOQUÉ / OPEN**
+
+Aucun PASS VF final n'est dérivé de cette tranche.
+
+Gates :
+- VF TECHNIQUE : **EN COURS**
+- DIRECTION VISUELLE : **BLOQUÉ**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+- PRODUCTION / CUTOVER : **BLOQUÉ**
+
+Aucune mutation production, DNS, paiement ou cutover.
