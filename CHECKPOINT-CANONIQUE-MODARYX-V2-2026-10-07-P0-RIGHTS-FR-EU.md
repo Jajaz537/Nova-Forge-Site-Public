@@ -1922,3 +1922,52 @@ Aucun PASS VF final n'est dérivé de cette tranche.
 - PRODUCTION / CUTOVER : **BLOQUÉ**
 
 Aucune mutation `main`, DNS, D1/R2 production, provider production, paiement, PWA production, field CWV, indexability ou cutover.
+
+
+---
+
+## 49. Anti-régression visuelle — PRs historiques ouvertes — 2026-10-08
+
+HEAD visuel canonique actuel :
+`design/modaryx-v2-blue-violet-product-20261005` @ `8a1677611c29ee6cceefce8c73788d1402ae36a8`.
+
+Après intégration R19, les PRs design historiques encore ouvertes ont été comparées au HEAD courant.
+
+### Classification
+
+- PR **#164** `design: MODARYX V2 product-first blue violet direction`
+  - état Git : **identical** au HEAD courant
+  - aucune régression spécifique détectée par comparaison de tête.
+
+- PR **#161** `design: MODARYX true Finish Line from recovered canonical master`
+  - **diverged**
+  - 165 commits ahead / **1537 behind**
+  - **NE PAS FUSIONNER AVEUGLÉMENT**.
+
+- PR **#153** `design: reconstruire MODARYX depuis le canon visuel`
+  - **diverged**
+  - 54 commits ahead / **1568 behind**
+  - **NE PAS FUSIONNER AVEUGLÉMENT**.
+
+- PR **#152** `design: diversifier les familles de pages Premium HD`
+  - **diverged**
+  - 24 commits ahead / **1568 behind**
+  - **NE PAS FUSIONNER AVEUGLÉMENT**.
+
+- PR **#151** `design: enrichir l’univers MODARYX Premium HD`
+  - **diverged**
+  - 1 commit ahead / **1568 behind**
+  - **NE PAS FUSIONNER AVEUGLÉMENT**.
+
+### Doctrine
+
+Les PRs divergées ci-dessus sont des sources historiques / travaux parallèles à préserver, mais elles ne doivent pas redevenir la base visuelle par merge brut.
+
+Si un élément reste utile :
+1. relire son intention ;
+2. comparer fichier par fichier au R19 courant ;
+3. cherry-pick/reproduire uniquement l'élément utile sur une branche neuve ;
+4. refaire build + `test:sites` + captures ;
+5. garder la gate propriétaire ouverte tant que le propriétaire n'a pas validé le nouveau rendu.
+
+Aucune PR historique n'a été fermée ou modifiée par cette classification.
