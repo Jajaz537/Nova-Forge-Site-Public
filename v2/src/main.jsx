@@ -6,6 +6,7 @@ import "./product-blue-violet.css";
 import "./readability-polish.css";
 import "./premium-editorial.css";
 import "./premium-reconciliation.css";
+import "./premium-reconciliation-r3.css";
 import { migrateLegacyBrowserState } from "./storage-migration.js";
 import { registerV2PwaIfEnabled } from "./pwa-registration.js";
 
