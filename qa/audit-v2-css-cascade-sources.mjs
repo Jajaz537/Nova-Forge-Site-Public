@@ -3,6 +3,7 @@
 // This is an inventory, not a proof that removing any declaration is safe.
 import fs from "node:fs";
 import path from "node:path";
+import zlib from "node:zlib";
 const root=fs.existsSync(path.join(process.cwd(),"v2/src/main.jsx")) ? process.cwd() : path.resolve(process.cwd(),"..");
 if(!fs.existsSync(path.join(root,"v2/src/main.jsx"))) throw new Error("Run from repository root or v2/");
 const entry=fs.readFileSync(path.join(root,"v2/src/main.jsx"),"utf8");
@@ -11,9 +12,10 @@ if(!css.length) throw new Error("No V2 CSS entry imports found");
 const rows=css.map((name,index)=>{
   const file=path.join(root,"v2/src",name);
   const source=fs.readFileSync(file,"utf8");
-  return {order:index+1,file:name,sourceBytes:Buffer.byteLength(source),importantDeclarations:(source.match(/!important\b/g)||[]).length,mediaBlocks:(source.match(/@media\b/g)||[]).length};
+  return {order:index+1,file:name,sourceBytes:Buffer.byteLength(source),sourceGzipBytes:zlib.gzipSync(Buffer.from(source),{level:9}).length,importantDeclarations:(source.match(/!important\b/g)||[]).length,mediaBlocks:(source.match(/@media\b/g)||[]).length};
 });
 rows.sort((a,b)=>b.sourceBytes-a.sourceBytes);
+// Individual-source gzip is diagnostic only: summing it is NOT the built bundle gzip.
 // Exact selector reuse across source files is a candidate for cascade inspection,
 // NOT proof of redundant styles (media/specificity/order may be intentional).
 const bySelector=new Map();
