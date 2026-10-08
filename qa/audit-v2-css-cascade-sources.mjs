@@ -3,7 +3,8 @@
 // This is an inventory, not a proof that removing any declaration is safe.
 import fs from "node:fs";
 import path from "node:path";
-const root=process.cwd();
+const root=fs.existsSync(path.join(process.cwd(),"v2/src/main.jsx")) ? process.cwd() : path.resolve(process.cwd(),"..");
+if(!fs.existsSync(path.join(root,"v2/src/main.jsx"))) throw new Error("Run from repository root or v2/");
 const entry=fs.readFileSync(path.join(root,"v2/src/main.jsx"),"utf8");
 const css=[...entry.matchAll(/^import "\.\/([^"]+\.css)";/gm)].map(m=>m[1]);
 if(!css.length) throw new Error("No V2 CSS entry imports found");
