@@ -2059,3 +2059,33 @@ Aucun PASS VF final n'est dérivé de cette tranche.
 - PRODUCTION / CUTOVER : **BLOQUÉ**
 
 Aucune mutation `main`, DNS, D1/R2 production, provider production, paiement, PWA production, field CWV, indexability ou cutover.
+
+
+---
+
+## 51. Alignement ledger/readiness sur le candidat VF architecture R2 — 2026-10-08
+
+Après intégration de la PR #289 et de sa preuve R2, une incohérence documentaire restait :
+- CHECKPOINT : VF architecture R2 ;
+- ledger/readiness gate : ancien candidat R14.
+
+Correction gouvernance uniquement :
+- `qa/modaryx-v2-vf-closure-ledger.json`
+- `qa/modaryx-v2-vf-readiness-gate.json`
+
+Le blocker `owner-visual-reconciliation-current` reste **OPEN**.
+
+Candidat courant enregistré :
+- merge PR : **#289**
+- merge SHA : `229244deab846a7ff52409f52267538c994d21f5`
+- candidat source : `64058072a65d4499850dbfbc6b1940793c40e772`
+- run visuel : `37813820976`
+- artifact id : `11565812865`
+- digest : `sha256:b768a2d84549164e4731797c743d17f15a02927ed12a1e0ffc977d0a9c4873bb`
+- owner acceptance : **PREUVE MANQUANTE**
+
+Le nombre de blockers reste inchangé :
+- **20 OPEN**
+- aucun blocker n'est fermé par cette mise à jour.
+
+Aucune mutation produit, production, DNS, paiement ou cutover.
