@@ -55,7 +55,7 @@ async function waitJson(path){
 async function evaluate(expression){
   const r=await send("Runtime.evaluate",{expression,returnByValue:true,awaitPromise:true});
   if(r.result?.exceptionDetails) throw new Error(r.result.exceptionDetails.text||"Runtime.evaluate failed");
-  return r.result?.result?.result?.value;
+  return r.result?.result?.value;
 }
 async function setViewport(width,height,mobile){
   await send("Emulation.setDeviceMetricsOverride",{width,height,deviceScaleFactor:1,mobile});
