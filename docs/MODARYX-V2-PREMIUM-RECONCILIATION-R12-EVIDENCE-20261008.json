@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "TERMINÉ",
+  "candidate": "MODARYX_V2_PREMIUM_RECONCILIATION_R12",
+  "productMergePr": 278,
+  "productMergeSha": "911205554693c9c44d9eed24b54792d16c54446b",
+  "candidateSha": "46ea207ad548677a5d1a403a9548274b32d4da8d",
+  "proof": {
+    "runId": 37759779812,
+    "jobId": 113253103125,
+    "conclusion": "success",
+    "artifactId": 11541009480,
+    "artifactName": "modaryx-v2-premium-reconciliation-visual-r12",
+    "digest": "sha256:46e9e6081a3a6862a35f042fa87d94bf339d509d035101907f0b1bae9242d32a",
+    "captureCount": 16,
+    "desktopCount": 8,
+    "mobileCount": 8,
+    "desktopViewport": "1440x1024",
+    "mobileViewport": "390x844",
+    "build": "TERMINÉ",
+    "testsSites": "TERMINÉ"
+  },
+  "captures": [
+    {
+      "file": "desktop-account-1440x1024.png",
+      "sha256": "614dbccb5ed7d5ef1e53f7aa1925e1a8ebad67866bf6c676e44cd07a1a326ec4"
+    },
+    {
+      "file": "desktop-collections-1440x1024.png",
+      "sha256": "b79ac54e889094d3a0659779e95e903d551240e1fcbd1af47dfc6ef25c492de2"
+    },
+    {
+      "file": "desktop-community-1440x1024.png",
+      "sha256": "4179196a786a6887b663c479cacad46711b89ecb3ead9e7e68699dc3ea79781a"
+    },
+    {
+      "file": "desktop-creators-1440x1024.png",
+      "sha256": "8e001d78b4779aa1fcbbd9d2443e93cfcf344feebdd1b6d5aed20128b76c1681"
+    },
+    {
+      "file": "desktop-discover-1440x1024.png",
+      "sha256": "c9a26a3de252434e95f528b37052637f9bcef2f65999d6d0a0e83b1ff5298adf"
+    },
+    {
+      "file": "desktop-games-1440x1024.png",
+      "sha256": "42866a0eedb07cd3688c36c6d63a064d7ed16e3717eb108cab013d934a6b7d78"
+    },
+    {
+      "file": "desktop-games-aetherlands-1440x1024.png",
+      "sha256": "9908093618ac05446f85b899225adf3a7095177139a651507785847741970a21"
+    },
+    {
+      "file": "desktop-mods-1440x1024.png",
+      "sha256": "d85b7ca41daadf1e6801a10c69f0134d52ebf2a826a8888da1c9d651d03ec367"
+    },
+    {
+      "file": "mobile-account-390x844.png",
+      "sha256": "ce048cfea70d4ab2ff0b2f31506228ce41af771862a8b32b34671c8f8271a8d8"
+    },
+    {
+      "file": "mobile-collections-390x844.png",
+      "sha256": "574a3bf3af996b07554b56b3acf338be98641851d013c64b49e25799d6d1d27d"
+    },
+    {
+      "file": "mobile-community-390x844.png",
+      "sha256": "92e8cb1b7359ed990804a5199b84a50b6ca8f243c991bfebc9d0d4dd0148ee0d"
+    },
+    {
+      "file": "mobile-creators-390x844.png",
+      "sha256": "cff9279f125630171a8dac4dba690537c50d484e94c429fdaa398c8d583c5490"
+    },
+    {
+      "file": "mobile-discover-390x844.png",
+      "sha256": "f1e82410a9f515314ebc815f612424a131b334ac4bcf08affa536f8c0e15d8d5"
+    },
+    {
+      "file": "mobile-games-390x844.png",
+      "sha256": "5f2bd0006ab09337755c119893a9645e364d856ff2db7b6354893714071e1de8"
+    },
+    {
+      "file": "mobile-games-aetherlands-390x844.png",
+      "sha256": "74a365319367e2fba63835274b9077a71a8d1ff5e7950fde0331322824d00450"
+    },
+    {
+      "file": "mobile-mods-390x844.png",
+      "sha256": "1055947b2552b4d297bc9b5ad5b29b79be288d731f355a1d6704ffa550341efe"
+    }
+  ],
+  "scope": {
+    "architecturePreserved": true,
+    "backendChanged": false,
+    "routesChanged": false,
+    "dataChanged": false,
+    "productionChanged": false,
+    "newUniqueAssetProvenance": false,
+    "wolfDragonHeroCandidateBlob": "e0ec285c134fd0688895ff7ac5f0c09eddb39f94",
+    "identicalExistingPath": "assets/modaryx-wolf-dragon-hero.webp",
+    "ownerAcceptance": "PREUVE MANQUANTE"
+  },
+  "gate": {
+    "id": "owner-visual-reconciliation-current",
+    "state": "OPEN",
+    "reason": "Owner acceptance of the R12 current visual candidate is still required."
+  }
+}

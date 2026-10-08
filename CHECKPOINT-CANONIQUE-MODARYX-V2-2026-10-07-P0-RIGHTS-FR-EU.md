@@ -1648,3 +1648,65 @@ Gates :
 - PRODUCTION / CUTOVER : **BLOQUÉ**
 
 Aucune mutation production, DNS, paiement ou cutover.
+
+
+---
+
+## 45. Premium reconciliation R12 — candidat visuel courant — 2026-10-08
+
+Retour propriétaire de référence :
+le site ne doit plus ressembler à l'ancien design / à une maquette.
+
+### Produit
+
+PR :
+- **#278**
+- merge SHA : `911205554693c9c44d9eed24b54792d16c54446b`
+
+Candidat source :
+- `46ea207ad548677a5d1a403a9548274b32d4da8d`
+
+Portée :
+- couches Premium R8 → R12 intégrées ;
+- hero Loup/Dragon restauré dans V2 ;
+- recomposition des pages secondaires ;
+- aucune modification backend, données, routes, entitlement ou production ;
+- aucun nouvel asset binaire unique : `v2/public/assets/modaryx-wolf-dragon-hero.webp` a le même blob Git `e0ec285c134fd0688895ff7ac5f0c09eddb39f94` que `assets/modaryx-wolf-dragon-hero.webp`.
+
+### Preuve fraîche
+
+Run :
+- `37759779812`
+- job : `113253103125`
+- conclusion : **success**
+- artifact id : `11541009480`
+- digest : `sha256:46e9e6081a3a6862a35f042fa87d94bf339d509d035101907f0b1bae9242d32a`
+- captures : **16/16**
+  - 8 desktop 1440×1024
+  - 8 mobile 390×844
+- build : **TERMINÉ**
+- tests sites : **TERMINÉ**
+
+Preuve :
+`docs/MODARYX-V2-PREMIUM-RECONCILIATION-R12-EVIDENCE-20261008.json`.
+
+### Gate propriétaire
+
+La gate reste volontairement ouverte :
+- `owner-visual-reconciliation-current` : **BLOQUÉ / OPEN**
+- candidat courant : **R12**
+- implémentation : **TERMINÉ**
+- preuve visuelle fraîche : **TERMINÉ**
+- acceptation propriétaire : **PREUVE MANQUANTE**
+
+Le ledger reste à **20 blockers OPEN**.
+
+### Gates
+
+- VF TECHNIQUE : **EN COURS**
+- DIRECTION VISUELLE : **BLOQUÉ**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+- PRODUCTION / CUTOVER : **BLOQUÉ**
+
+Aucune mutation `main`, DNS, D1/R2 production, provider production, paiement, PWA production, field CWV, indexability ou cutover.
