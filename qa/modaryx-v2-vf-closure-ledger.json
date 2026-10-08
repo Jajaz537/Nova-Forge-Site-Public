@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-06",
+  "date": "2026-10-08",
   "status": "ACTIVE_FAIL_CLOSED_20_OPEN",
-  "sourceCommit": "9ca97ed681700f21c6e4c5b9ca6cc4b8b2c5e6f9",
+  "sourceCommit": "1c8f82214f45194c7d48b11ceb5d61c82c9191e7",
   "sourceGate": "qa/modaryx-v2-vf-readiness-gate.json",
-  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1732.md",
+  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-07-P0-RIGHTS-FR-EU.md",
   "blockerCount": 20,
   "blockers": [
     {
