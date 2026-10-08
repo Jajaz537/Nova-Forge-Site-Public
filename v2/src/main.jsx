@@ -23,6 +23,7 @@ import "./premium-reconciliation-r16.css";
 import "./premium-reconciliation-r17.css";
 import "./premium-reconciliation-r18.css";
 import "./premium-reconciliation-r19.css";
+import "./premium-vf-architecture.css";
 import { migrateLegacyBrowserState } from "./storage-migration.js";
 import { registerV2PwaIfEnabled } from "./pwa-registration.js";
 
