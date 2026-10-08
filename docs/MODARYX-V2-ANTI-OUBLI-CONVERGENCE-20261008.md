@@ -79,3 +79,26 @@ Gates actuelles :
 - **LAUNCH-READINESS COMMERCIALE : EN COURS**
 - **LEGAL / COMPLIANCE : BLOQUÉ**
 - **PRODUCTION / CUTOVER : BLOQUÉ**
+
+
+---
+
+## Mise à jour 2026-10-08 — réouverture visuelle propriétaire
+
+Décision fraîche :
+le rendu V2 courant est rejeté comme **ancien / type maquette** pour la cible Premium/VF.
+
+Axe ajouté :
+- `visual-direction-premium-fidelity`
+- couverture : **TERMINÉE**
+- état sujet : **BLOQUÉ**
+
+Références :
+- `docs/MODARYX-V2-VISUAL-RECONCILIATION-20261008.md`
+- `docs/MODARYX-V2-VISUAL-RECONCILIATION-20261008.json`
+- `qa/modaryx-v2-vf-readiness-gate.json`
+
+La couverture anti-oubli passe de **21 à 22 axes**.
+Cela ne rend pas le produit plus prêt : la direction visuelle reste **BLOQUÉE** jusqu'à nouveau candidat + captures fraîches + acceptation propriétaire.
+
+Le ledger externe conserve ses 19 blockers historiques et reçoit en plus un blocker visuel propriétaire distinct, soit **20 blockers gate au total**.
