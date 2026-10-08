@@ -988,3 +988,40 @@
     backdrop-filter:none!important;
   }
 }
+
+
+/* -------------------------------------------------------------------------- */
+/* Fresh-capture corrections — remove legacy pseudo-layer interference.        */
+/* -------------------------------------------------------------------------- */
+
+.games-index::before,
+.catalog::before,
+.collections-page::after,
+.creators-page::before,
+.page-section.community::before,
+.account-center::before{
+  content:none!important;
+  display:none!important;
+}
+
+@media (min-width:901px){
+  .account-center{
+    grid-template-columns:minmax(430px,.72fr) minmax(0,1.28fr)!important;
+  }
+
+  .account-center>h1{
+    max-width:12ch!important;
+    width:auto!important;
+    font-size:clamp(56px,5.4vw,88px)!important;
+  }
+
+  .collections-page::before{
+    opacity:1!important;
+    height:min(760px,78vh)!important;
+    background-position:center,center,0% 0%!important;
+  }
+
+  .games-index::after{
+    height:min(760px,78vh)!important;
+  }
+}
