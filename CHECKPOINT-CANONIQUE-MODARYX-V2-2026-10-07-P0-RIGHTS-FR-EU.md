@@ -1309,3 +1309,34 @@ Blockers structurants restant explicitement tracés :
 
 La matrice ne supprime aucun historique et ne convertit aucun candidat en fait.
 Elle doit être maintenue avec le CHECKPOINT lors de tout changement matériel.
+
+
+---
+
+## 39. Revalidation fraîche du handoff Work externe — 2026-10-08
+
+HEAD courant vérifié :
+`design/modaryx-v2-blue-violet-product-20261005` @ `030cdf9b2bfca3efb73292968c69d4a95f464793`.
+
+Preuve :
+`docs/MODARYX-V2-WORK-EXTERNAL-VF-HANDOFF-FRESHNESS-20261008.json`.
+
+Résultat :
+- ledger VF : `ACTIVE_FAIL_CLOSED_19_OPEN`
+- blockers : **19/19 ouverts**
+- blockers fermables automatiquement sans changement externe : **0/19**
+- pack appareils/accessibilité : blob revérifié
+- manifest production : blob revérifié
+- preflight droits : blob revérifié
+- handoff Work : blob revérifié
+- matrice anti-oubli : **21/21 axes couverts, 0 axe non mappé**
+
+Gates inchangées :
+- VF TECHNIQUE : **EN COURS**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ**
+- PRODUCTION / CUTOVER : **BLOQUÉ**
+
+Cette revalidation ne ferme aucun blocker.
+
+Aucune mutation `main`, DNS/DNSSEC/nameserver, D1/R2 production, provider production, paiement, PWA production, field CWV, indexability ou cutover.
