@@ -26,8 +26,8 @@
     {
       "id": "owner-visual-reconciliation-current",
       "state": "OPEN",
-      "evidenceCandidate": "docs/MODARYX-V2-VISUAL-RECONCILIATION-20261008.md",
-      "note": "Compatibility machine state OPEN. Canonical project state: BLOQUÉ. Owner review on 2026-10-08 rejected the current V2 rendering as old/mockup-like. A new reconciled visual candidate and fresh owner validation are required before this blocker can close."
+      "evidenceCandidate": "docs/MODARYX-V2-PREMIUM-RECONCILIATION-R2-EVIDENCE-20261008.json",
+      "note": "Compatibility state remains OPEN. Premium R2 is implemented at PR #269 / cf7d7e6eb922f160e2125554a50134249025be7f with fresh 16-capture proof run 37732973675. Owner acceptance remains PREUVE MANQUANTE, therefore canonical project state stays BLOQUÉ."
     },
     {
       "id": "nvda-real",
