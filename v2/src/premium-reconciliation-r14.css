@@ -1,0 +1,23 @@
+/* MODARYX V2 — Premium reconciliation R14
+   Fix the desktop sticky topbar centering regression exposed by R13 captures.
+   Visual-only. */
+
+.topbar{
+  left:auto!important;
+  right:auto!important;
+  transform:none!important;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+@media (min-width:1051px){
+  .topbar{
+    width:min(1380px,calc(100% - 36px));
+  }
+}
+
+@media (max-width:760px){
+  .topbar{
+    width:calc(100% - 20px);
+  }
+}
