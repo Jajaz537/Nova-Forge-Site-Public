@@ -23,3 +23,10 @@ Status: EN COURS / PREUVE MANQUANTE. No budget relaxation, no production action.
 - No merge, main, DNS, production resources, payments, provider activation or cutover.
 - Do not overwrite other branches or parallel work. Revalidate canonical branch and this PR before writes.
 - Current performance gate: **BLOQUÉ**. Visual owner acceptance: **PREUVE MANQUANTE**. Legal/commercial gates independent.
+
+## Source-only scan — 2026-10-09 (read-only GitHub)
+The isolated `v2/src/premium-vf-architecture.css` source has 36,292 text characters at the inspected ref. Heuristic repeated-selector candidates include `.community>.community-board` (5), `.account-center>.account-shell` (5), `.community>.community-tabs` (4), and `.account-center .account-nav` (4). These occurrences may belong to different media contexts or deliberate overrides: **not safe-deletion evidence**.
+
+Seven variable names occur once **inside this file**: `--vf-night-soft`, `--vf-violet`, `--vf-gold`, `--vf-ink`, `--vf-shadow`, `--vf-r3-panel-strong`, `--vf-r3-line-warm`. They may be referenced by other CSS files and must not be deleted without a cross-file scan.
+
+Local Git clone unavailable in this execution environment (DNS resolution for github.com failed). This source-only scan is **TERMINÉ**, but local build, complete cross-file inventory, CSS removal and visual regression are **PREUVE MANQUANTE**. No bundle size improvement is claimed.
