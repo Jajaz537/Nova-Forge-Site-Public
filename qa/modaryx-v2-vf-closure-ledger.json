@@ -88,14 +88,22 @@
       "state": "OPEN",
       "executorClass": "PRODUCT_DESIGN_WORK_PLUS_OWNER_REVIEW",
       "closureMode": "CURRENT_CANDIDATE_VISUAL_RECONCILIATION",
-      "currentPreparation": "docs/MODARYX-V2-VISUAL-RECONCILIATION-20261008.md",
+      "currentPreparation": "docs/MODARYX-V2-PREMIUM-RECONCILIATION-R2-EVIDENCE-20261008.json",
       "requiredEvidence": [
         "CURRENT_V2_ARCHITECTURE_PRESERVED",
         "PREMIUM_VISUAL_LANGUAGE_RECONCILED",
         "FRESH_DESKTOP_AND_MOBILE_CAPTURES",
         "OWNER_VISUAL_ACCEPTANCE"
       ],
-      "automationCanCloseWithoutExternalChange": false
+      "automationCanCloseWithoutExternalChange": false,
+      "latestCandidate": {
+        "mergePr": 269,
+        "mergeSha": "cf7d7e6eb922f160e2125554a50134249025be7f",
+        "visualProofRunId": 37732973675,
+        "artifactId": 11530203934,
+        "state": "OPEN",
+        "ownerAcceptance": "PREUVE MANQUANTE"
+      }
     },
     {
       "id": "backend-real",
