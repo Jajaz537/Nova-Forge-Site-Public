@@ -1153,3 +1153,38 @@ Gates :
 - VF TECHNIQUE : **EN COURS**
 - LAUNCH-READINESS COMMERCIALE : **EN COURS**
 - LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+
+
+---
+
+## 35. Matrice de readiness internationale — 2026-10-08
+
+Documents :
+- `docs/MODARYX-V2-INTERNATIONAL-TERRITORY-READINESS-20261008.md`
+- `docs/MODARYX-V2-INTERNATIONAL-TERRITORY-READINESS-20261008.json`
+
+Règle enregistrée :
+**accessible sur Internet ≠ prêt légalement/commercialement partout**.
+
+Priorité :
+1. France
+2. UE/EEE
+3. Royaume-Uni
+4. États-Unis / États ciblés
+5. Canada / provinces ciblées
+6. Australie
+7. autres marchés uniquement après décision explicite
+
+État :
+- France : **EN COURS**
+- UE/EEE : **EN COURS**
+- Royaume-Uni : **PREUVE MANQUANTE**
+- États-Unis : **PREUVE MANQUANTE**
+- Canada : **PREUVE MANQUANTE**
+- Australie : **PREUVE MANQUANTE**
+- autres : **BLOQUÉ jusqu'à ciblage explicite**
+
+Aucun marketing ciblé ni vente payante hors marchés approuvés ne doit être supposé.
+La décision de territoires, éventuelles limitations/geoblocking et revue locale restent **PREUVE MANQUANTE**.
+
+Aucun territoire n'est ajouté au lancement par cette tranche.
