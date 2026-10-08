@@ -1773,3 +1773,45 @@ Le ledger reste fail-closed. Aucun PASS VF final n'est dérivé de l'inspection 
 - PRODUCTION / CUTOVER : **BLOQUÉ**
 
 Aucune mutation `main`, DNS, D1/R2 production, provider production, paiement, PWA production, field CWV, indexability ou cutover.
+
+
+---
+
+## 21. Réconciliation visuelle Premium R16 — 2026-10-08
+
+Retour propriétaire actif :
+le rendu Web antérieur était rejeté comme **ancien design / type maquette**.
+
+Le candidat courant a été remplacé par **Premium Living Atlas R16** :
+- produit PR #282 ;
+- merge SHA `4a993d94a386ac0fd5cc8dcb27bd0482c1a2dcda`;
+- source candidat `994aeeae317015fbfb6d8d271655d00b4ef2f250`.
+
+Preuves :
+- R15 run `37767448754` : success, 16 captures ;
+- R16 run `37768198037` : success, 16 captures ;
+- R16 artifact `11545572439`;
+- digest `sha256:e95ac03ded1b316ed3c743418aa68778f9f691ef6590e2da58c7a3ff062ee72f`;
+- desktop : 8 × 1440×1024 ;
+- mobile : 8 × 390×844 ;
+- build : **TERMINÉ** ;
+- `test:sites` : **TERMINÉ**.
+
+Portée :
+- aucune route, donnée, backend, entitlement, provider ou production modifiés ;
+- architecture React/Vite/Workers conservée ;
+- composition visuelle devenue plus éditoriale et différenciée par famille de page ;
+- mobile recomposé davantage.
+
+Gate :
+- `owner-visual-reconciliation-current` : **OPEN / BLOQUÉ**
+- acceptation propriétaire : **PREUVE MANQUANTE**
+
+Gates globales :
+- VF TECHNIQUE : **EN COURS**
+- DIRECTION VISUELLE VF : **BLOQUÉ**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+- PRODUCTION / CUTOVER : **BLOQUÉ**
+
+Aucun `main`, DNS/DNSSEC/nameserver, Cloudflare critique, D1/R2 production, paiement/provider, PWA production, indexability ou cutover modifié.
