@@ -1025,3 +1025,269 @@
     height:min(760px,78vh)!important;
   }
 }
+
+
+/* -------------------------------------------------------------------------- */
+/* VF architecture R3 — fresh-capture coherence pass                           */
+/* Purpose: reduce demo/mockup cues on secondary worlds without changing       */
+/* product behavior, routes, data, entitlements or production configuration.   */
+/* -------------------------------------------------------------------------- */
+
+:root{
+  --vf-r3-panel:rgba(8,20,31,.72);
+  --vf-r3-panel-strong:rgba(7,17,27,.90);
+  --vf-r3-line:rgba(170,232,242,.14);
+  --vf-r3-line-warm:rgba(240,211,151,.14);
+}
+
+/* The demo state remains truthful, but no longer dominates the product brand. */
+.demo-cta{
+  min-width:auto!important;
+  padding-inline:16px!important;
+  border:1px solid rgba(164,181,255,.22)!important;
+  background:linear-gradient(135deg,rgba(82,110,255,.28),rgba(139,98,255,.34))!important;
+  box-shadow:0 12px 34px rgba(52,67,154,.18)!important;
+  color:rgba(247,251,253,.92)!important;
+}
+
+/* Secondary worlds: keep the editorial scale, remove poster-sized empty zones. */
+.page-section.community,
+.account-center{
+  padding-top:142px!important;
+}
+
+.community>h1,
+.account-center>h1{
+  font-size:clamp(54px,5.1vw,82px)!important;
+  line-height:.91!important;
+  max-width:10ch!important;
+}
+
+.community>.page-intro,
+.account-center>.page-intro{
+  max-width:520px!important;
+  font-size:clamp(16px,1.15vw,18px)!important;
+}
+
+/* Community becomes a living observatory rather than three isolated columns. */
+.page-section.community{
+  grid-template-columns:minmax(300px,.68fr) minmax(0,1.32fr)!important;
+  column-gap:clamp(42px,5.5vw,84px)!important;
+}
+
+.community>.community-board{
+  min-height:650px!important;
+  padding:46px 0 54px 50px!important;
+  border-left-color:rgba(124,247,243,.16)!important;
+  background:
+    radial-gradient(circle at 78% 12%,rgba(155,134,255,.10),transparent 22rem),
+    linear-gradient(90deg,rgba(7,22,32,.68),rgba(5,14,23,.24) 68%,transparent)!important;
+}
+
+.community .community-board h2{
+  max-width:9ch!important;
+  font-size:clamp(44px,4.2vw,66px)!important;
+  line-height:.92!important;
+}
+
+.community .community-list{
+  margin-top:38px!important;
+}
+
+.community .community-list>*{
+  padding:26px 12px 26px 0!important;
+  border-bottom:1px solid rgba(170,232,242,.10)!important;
+  background:linear-gradient(90deg,rgba(124,247,243,.025),transparent 58%)!important;
+}
+
+.community>.community-tabs{
+  margin-top:20px!important;
+}
+
+.community .community-tabs button{
+  min-height:46px!important;
+}
+
+/* Account reads as a private atelier: one composed material surface, not a mock panel. */
+.account-center{
+  grid-template-columns:minmax(320px,.54fr) minmax(0,1.46fr)!important;
+  column-gap:clamp(40px,5.5vw,82px)!important;
+}
+
+.account-center>.account-shell{
+  min-height:650px!important;
+  grid-template-columns:176px minmax(0,1fr)!important;
+  overflow:hidden!important;
+  border:1px solid rgba(170,232,242,.10)!important;
+  border-left-color:rgba(124,247,243,.20)!important;
+  border-radius:32px 32px 10px 32px!important;
+  background:
+    radial-gradient(circle at 92% 10%,rgba(155,134,255,.09),transparent 22rem),
+    linear-gradient(135deg,rgba(7,20,31,.82),rgba(4,12,20,.42))!important;
+  box-shadow:0 34px 110px rgba(0,0,0,.30)!important;
+}
+
+.account-center .account-nav{
+  padding:26px 10px!important;
+  background:linear-gradient(180deg,rgba(4,14,22,.64),rgba(4,12,20,.20))!important;
+}
+
+.account-center .account-nav button{
+  min-height:46px!important;
+  padding-left:16px!important;
+}
+
+.account-center .account-panel{
+  min-height:650px!important;
+  padding:48px 50px!important;
+}
+
+.account-center .account-panel>h2{
+  max-width:10ch!important;
+  font-size:clamp(44px,4.2vw,66px)!important;
+  line-height:.93!important;
+}
+
+.account-panel .settings-list button,
+.account-panel .notification-demo-list article,
+.account-panel .data-list article{
+  padding-top:20px!important;
+  padding-bottom:20px!important;
+}
+
+/* Preserve cinematic imagery while differentiating the atlas pages more clearly. */
+.catalog::after{
+  filter:saturate(1.02) contrast(1.08) brightness(.86)!important;
+}
+
+.collections-page::before{
+  filter:saturate(.92) contrast(1.08) brightness(.82) hue-rotate(8deg)!important;
+}
+
+.creators-page::after{
+  filter:saturate(1.08) contrast(1.04) brightness(.90) hue-rotate(-7deg)!important;
+}
+
+/* Focus remains unmistakable on the darker final surfaces. */
+.games-index :focus-visible,
+.catalog :focus-visible,
+.collections-page :focus-visible,
+.creators-page :focus-visible,
+.community :focus-visible,
+.account-center :focus-visible{
+  outline:3px solid rgba(124,247,243,.92)!important;
+  outline-offset:3px!important;
+}
+
+/* Mobile is a recomposition, not a scaled poster. */
+@media (max-width:900px){
+  .page-section.community,
+  .account-center{
+    padding-top:108px!important;
+  }
+
+  .community>h1,
+  .account-center>h1{
+    max-width:11ch!important;
+    font-size:clamp(42px,11.6vw,56px)!important;
+    line-height:.94!important;
+  }
+
+  .community>.page-intro,
+  .account-center>.page-intro{
+    font-size:16px!important;
+    line-height:1.55!important;
+  }
+
+  .community>.community-tabs,
+  .account-center .account-nav{
+    scrollbar-width:none;
+    scroll-snap-type:x proximity;
+    -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 calc(100% - 28px),transparent 100%);
+    mask-image:linear-gradient(90deg,#000 0%,#000 calc(100% - 28px),transparent 100%);
+  }
+
+  .community>.community-tabs::-webkit-scrollbar,
+  .account-center .account-nav::-webkit-scrollbar{
+    display:none;
+  }
+
+  .community .community-tabs button,
+  .account-center .account-nav button{
+    scroll-snap-align:start;
+  }
+
+  .community>.community-board{
+    margin-top:18px!important;
+    padding:28px 0 36px!important;
+    background:
+      radial-gradient(circle at 86% 4%,rgba(155,134,255,.10),transparent 17rem),
+      linear-gradient(180deg,rgba(7,22,32,.42),transparent 74%)!important;
+  }
+
+  .community .community-board h2,
+  .account-center .account-panel>h2{
+    max-width:11ch!important;
+    font-size:clamp(38px,10.8vw,52px)!important;
+    line-height:.96!important;
+  }
+
+  .community .community-list{
+    margin-top:28px!important;
+  }
+
+  .account-center>.account-shell{
+    margin-top:22px!important;
+    border-radius:24px 24px 8px 24px!important;
+    background:
+      radial-gradient(circle at 86% 5%,rgba(155,134,255,.08),transparent 18rem),
+      linear-gradient(180deg,rgba(7,20,31,.66),rgba(4,12,20,.18))!important;
+  }
+
+  .account-center .account-nav{
+    padding:8px 0 10px!important;
+  }
+
+  .account-center .account-panel{
+    padding:28px 18px 34px!important;
+  }
+
+  .games-index>h1,
+  .catalog .catalog-title>h1,
+  .collections-page>h1,
+  .creators-page>h1{
+    font-size:clamp(44px,12.6vw,60px)!important;
+    line-height:.92!important;
+  }
+
+  .games-index .game-support-request{
+    padding-left:16px!important;
+  }
+
+  .games-index .game-support-request p{
+    max-width:34rem!important;
+    line-height:1.55!important;
+  }
+}
+
+@media (max-width:560px){
+  .topbar{
+    border-radius:16px!important;
+  }
+
+  .logo{
+    letter-spacing:.20em!important;
+  }
+
+  .community .community-list>*{
+    padding-block:22px!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .demo-cta,
+  .community .community-list>*,
+  .account-center>.account-shell{
+    transition:none!important;
+  }
+}
