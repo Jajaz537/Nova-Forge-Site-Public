@@ -873,3 +873,52 @@ Avant lancement restent notamment **PREUVE MANQUANTE** :
 
 Aucun des 19 blockers VF externes n'est fermé.
 Aucun provider, analytics, paiement, DNS, D1/R2 production, PWA production ou cutover activé.
+
+
+---
+
+## 29. Contrat CMP / consentement cookies et traceurs — candidat — 2026-10-08
+
+Documents :
+- `docs/MODARYX-V2-COOKIE-CONSENT-CMP-CANDIDATE-20261008.md`
+- `docs/MODARYX-V2-COOKIE-CONSENT-CMP-CANDIDATE-20261008.json`
+
+Le contrat distingue explicitement :
+- moteur de consentement Guide/OS historique ;
+- consentement cookies/traceurs privacy actuel.
+
+Principes enregistrés :
+- refus aussi simple qu'acceptation ;
+- retrait simple et accessible ;
+- aucun traceur non nécessaire soumis à consentement avant choix valide ;
+- aucune case précochée non nécessaire ;
+- aucun dark pattern / cookie wall artificiel ;
+- aucune dégradation artificielle du gratuit après refus ;
+- exemption audience jamais supposée sans preuve de configuration finale réelle.
+
+Mapping candidat :
+- session first-party : catégorie nécessaire candidate, qualification finale **PREUVE MANQUANTE** ;
+- localStorage fonctionnel : classification à faire item par item ;
+- PWA Cache Storage : gate production OFF ;
+- CWV/RUM : analytics candidat, OFF par défaut, exemption **PREUVE MANQUANTE** ;
+- Turnstile : sécurité/anti-abus conditionnel, qualification **PREUVE MANQUANTE**.
+
+Avant lancement restent **PREUVE MANQUANTE** :
+- opérateur réel ;
+- inventaire runtime final ;
+- classification finale par storage/traceur ;
+- analyse exemption ;
+- stockage/durée/renouvellement du reçu ;
+- texte cookies/privacy ;
+- observation réseau/cookies du candidat final ;
+- accessibilité réelle du CMP ;
+- validation juridique appropriée.
+
+Aucun CMP, analytics, marketing ou provider n'est activé.
+
+Gates :
+- VF TECHNIQUE : **EN COURS**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+
+Les 19 blockers VF externes restent ouverts.
