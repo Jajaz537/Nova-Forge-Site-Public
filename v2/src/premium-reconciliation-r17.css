@@ -670,3 +670,29 @@
     transform:none!important;
   }
 }
+
+
+/* R17.1 targeted typography correction after fresh capture review. */
+@media (min-width:901px){
+  .catalog .catalog-title{
+    grid-template-columns:minmax(0,1fr) 120px!important;
+  }
+
+  .catalog .catalog-title > h1{
+    max-width:7.8ch!important;
+    width:auto!important;
+    white-space:normal!important;
+    word-break:normal!important;
+    overflow-wrap:normal!important;
+  }
+
+  .community > h1{
+    max-width:9.2ch!important;
+    width:auto!important;
+  }
+
+  .account-center > h1{
+    max-width:9.4ch!important;
+    width:auto!important;
+  }
+}
