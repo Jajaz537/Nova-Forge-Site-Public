@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-06",
-  "status": "ACTIVE_FAIL_CLOSED_19_OPEN",
-  "sourceCommit": "ce587af7d138eedf148d5d446cacd8fb6f2235a3",
+  "status": "ACTIVE_FAIL_CLOSED_20_OPEN",
+  "sourceCommit": "9ca97ed681700f21c6e4c5b9ca6cc4b8b2c5e6f9",
   "sourceGate": "qa/modaryx-v2-vf-readiness-gate.json",
   "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1732.md",
-  "blockerCount": 19,
+  "blockerCount": 20,
   "blockers": [
     {
       "id": "nvda-real",
@@ -79,6 +79,21 @@
         "TOUCH_REAL",
         "CRITICAL_TASKS_COMPLETE",
         "NO_OPEN_P0_P1"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "owner-visual-reconciliation-current",
+      "category": "visual-owner",
+      "state": "OPEN",
+      "executorClass": "PRODUCT_DESIGN_WORK_PLUS_OWNER_REVIEW",
+      "closureMode": "CURRENT_CANDIDATE_VISUAL_RECONCILIATION",
+      "currentPreparation": "docs/MODARYX-V2-VISUAL-RECONCILIATION-20261008.md",
+      "requiredEvidence": [
+        "CURRENT_V2_ARCHITECTURE_PRESERVED",
+        "PREMIUM_VISUAL_LANGUAGE_RECONCILED",
+        "FRESH_DESKTOP_AND_MOBILE_CAPTURES",
+        "OWNER_VISUAL_ACCEPTANCE"
       ],
       "automationCanCloseWithoutExternalChange": false
     },
