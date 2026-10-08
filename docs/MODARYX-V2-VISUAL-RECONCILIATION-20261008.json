@@ -55,5 +55,14 @@
     "FRESH_DESKTOP_MOBILE_CAPTURES_SHA_BOUND",
     "NO_CRITICAL_A11Y_OR_OVERFLOW_REGRESSION",
     "OWNER_VISUAL_ACCEPTANCE"
-  ]
+  ],
+  "currentCandidate": {
+    "status": "IMPLEMENTED_WITH_FRESH_VISUAL_EVIDENCE",
+    "mergePr": 269,
+    "mergeSha": "cf7d7e6eb922f160e2125554a50134249025be7f",
+    "evidence": "docs/MODARYX-V2-PREMIUM-RECONCILIATION-R2-EVIDENCE-20261008.json",
+    "visualProofRunId": 37732973675,
+    "artifactId": 11530203934,
+    "ownerAcceptance": "PREUVE MANQUANTE"
+  }
 }
