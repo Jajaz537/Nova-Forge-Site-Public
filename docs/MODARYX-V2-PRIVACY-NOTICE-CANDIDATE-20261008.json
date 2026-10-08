@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "PRIVACY_NOTICE_CANDIDATE",
+  "sourceHead": "fcc7a485f7e3991e2d94330ee495df5d43f1868e",
+  "officialInformationRequirements": [
+    "controller identity and contact",
+    "purposes",
+    "legal bases",
+    "mandatory/optional nature where relevant",
+    "recipients/categories",
+    "retention period or criteria",
+    "data subject rights and how to exercise them",
+    "privacy/DPO contact if applicable",
+    "right to complain to supervisory authority",
+    "international transfers and safeguards if applicable",
+    "legitimate interests where applicable",
+    "automated decision-making/profiling where applicable",
+    "data source/categories for indirect collection where applicable"
+  ],
+  "publicationRule": "Do not publish as final while any mandatory field remains PREUVE MANQUANTE.",
+  "sections": [
+    {
+      "id": "controller",
+      "title": "Who operates MODARYX and who is the controller?",
+      "known": "MODARYX is the current web product.",
+      "missing": [
+        "legal entity/operator identity",
+        "postal address",
+        "privacy contact",
+        "DPO status if any"
+      ],
+      "state": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "data_categories",
+      "title": "What data may be processed?",
+      "knownSources": [
+        "docs/MODARYX-V2-DATA-PROCESSING-INVENTORY-20261007.md",
+        "docs/MODARYX-V2-PRIVACY-TABLE-FIELD-REGISTER-CANDIDATE-20261007.json"
+      ],
+      "candidateCategories": [
+        "account/profile and creator/team data",
+        "authentication/session/security data",
+        "UGC/community/moderation data",
+        "content/file/provenance metadata",
+        "notification preferences/destinations",
+        "owner history/audit data",
+        "game support/rights evidence metadata",
+        "optional performance/CWV samples",
+        "support/payment data if those functions are activated"
+      ],
+      "state": "EN COURS"
+    },
+    {
+      "id": "purposes_and_bases",
+      "title": "Why is data used and on what legal basis?",
+      "source": "docs/MODARYX-V2-PRIVACY-LEGAL-BASIS-MATRIX-CANDIDATE-20261007.md",
+      "state": "PREUVE MANQUANTE",
+      "note": "Current bases are candidates only; final legal qualification is required."
+    },
+    {
+      "id": "required_optional",
+      "title": "Which fields are required?",
+      "state": "PREUVE MANQUANTE",
+      "note": "Must be defined per form/function, including consequences of not providing data."
+    },
+    {
+      "id": "recipients_processors",
+      "title": "Who receives or processes data?",
+      "source": "docs/MODARYX-V2-PROCESSOR-SUBPROCESSOR-REGISTER-CANDIDATE-20261008.md",
+      "state": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "retention",
+      "title": "How long is data kept?",
+      "source": "docs/MODARYX-V2-RETENTION-SCHEDULE-CANDIDATE-20261007.md",
+      "state": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "cookies_trackers",
+      "title": "Cookies, local storage and trackers",
+      "sources": [
+        "docs/MODARYX-V2-COOKIE-STORAGE-TRACKER-STATIC-INVENTORY-20261008.md",
+        "docs/MODARYX-V2-COOKIE-CONSENT-CMP-CANDIDATE-20261008.md"
+      ],
+      "state": "EN COURS"
+    },
+    {
+      "id": "rights",
+      "title": "Your rights and how to exercise them",
+      "source": "docs/MODARYX-V2-DATA-SUBJECT-RIGHTS-PROCESS-CANDIDATE-20261008.md",
+      "state": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "transfers",
+      "title": "International transfers",
+      "source": "docs/MODARYX-V2-PROCESSOR-SUBPROCESSOR-REGISTER-CANDIDATE-20261008.md",
+      "state": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "security",
+      "title": "Security and incidents",
+      "source": "docs/MODARYX-V2-DATA-BREACH-INCIDENT-PROCESS-CANDIDATE-20261008.md",
+      "state": "EN COURS"
+    },
+    {
+      "id": "automated_decisions",
+      "title": "Automated decisions/profiling",
+      "state": "PREUVE MANQUANTE",
+      "note": "No final production assessment exists; do not claim none until reviewed."
+    },
+    {
+      "id": "complaint",
+      "title": "Supervisory authority complaint",
+      "candidateAuthority": "CNIL for France where applicable",
+      "state": "PREUVE MANQUANTE",
+      "note": "Final controller establishment and territorial analysis required."
+    },
+    {
+      "id": "changes",
+      "title": "Changes to this notice",
+      "state": "EN COURS",
+      "rule": "Material changes require updated information at the appropriate time."
+    }
+  ],
+  "accessibilityContract": [
+    "plain-language summary before dense detail",
+    "semantic headings",
+    "keyboard accessible",
+    "screen-reader compatible",
+    "zoom/reflow compatible",
+    "no consent dark patterns",
+    "stable direct link from relevant forms and footer"
+  ],
+  "launchGate": {
+    "controllerIdentity": "PREUVE MANQUANTE",
+    "purposesFinal": "PREUVE MANQUANTE",
+    "legalBasesFinal": "PREUVE MANQUANTE",
+    "requiredOptionalFields": "PREUVE MANQUANTE",
+    "finalRecipientsProcessors": "PREUVE MANQUANTE",
+    "finalRetention": "PREUVE MANQUANTE",
+    "transfers": "PREUVE MANQUANTE",
+    "rightsChannel": "PREUVE MANQUANTE",
+    "automatedDecisionAssessment": "PREUVE MANQUANTE",
+    "finalCookieTrackerState": "PREUVE MANQUANTE",
+    "legalReview": "PREUVE MANQUANTE"
+  },
+  "finalPublicationAllowed": false
+}

@@ -922,3 +922,59 @@ Gates :
 - LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
 
 Les 19 blockers VF externes restent ouverts.
+
+
+---
+
+## 30. Privacy notice candidate — 2026-10-08
+
+Documents :
+- `docs/MODARYX-V2-PRIVACY-NOTICE-CANDIDATE-20261008.md`
+- `docs/MODARYX-V2-PRIVACY-NOTICE-CANDIDATE-20261008.json`
+
+La structure candidate couvre :
+- responsable/opérateur ;
+- catégories de données ;
+- finalités / bases ;
+- obligatoire/facultatif ;
+- destinataires/providers ;
+- rétention ;
+- cookies/storage/traceurs ;
+- droits ;
+- transferts ;
+- sécurité/incidents ;
+- décisions automatisées/profilage ;
+- réclamation ;
+- changements de notice.
+
+Références officielles revues :
+- CNIL — information des personnes ;
+- RGPD articles 12, 13 et 14.
+
+Règle fail-closed :
+`finalPublicationAllowed=false` tant qu'un champ obligatoire reste **PREUVE MANQUANTE**.
+
+Toujours **PREUVE MANQUANTE** notamment :
+- identité du responsable/opérateur ;
+- contact privacy/DPO éventuel ;
+- finalités et bases finales ;
+- caractère obligatoire/facultatif par fonction ;
+- destinataires/providers finaux ;
+- rétention finale ;
+- transferts ;
+- canal droits ;
+- décision automatisée/profiling final ;
+- cookies/traceurs finaux ;
+- validation juridique appropriée.
+
+Le document impose aussi un contrat d'accessibilité pour la future notice :
+langage clair, headings sémantiques, clavier/lecteur d'écran, zoom/reflow et lien stable depuis le footer/formulaires pertinents.
+
+Aucun texte juridique final, provider, collecte ou CMP n'est activé.
+
+Gates :
+- VF TECHNIQUE : **EN COURS**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+
+Les 19 blockers VF externes restent ouverts.
