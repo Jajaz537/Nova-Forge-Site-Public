@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "TERMINÉ",
+  "purpose": "STRICT_SEPARATION_BETWEEN_MODARYX_AND_DISTINCT_18_PLUS_ECOSYSTEM",
+  "sourceHead": "4ea2806becb824457076bce71c7cb866777e139e",
+  "scope": [
+    "MODARYX web platform",
+    "MODARYX OS Public",
+    "MODARYX OS Fondateur"
+  ],
+  "separateEcosystem": "Distinct 18+ game + 18+ site ecosystem, not part of MODARYX or MODARYX OS.",
+  "rules": {
+    "userFacingContent": [
+      "Do not display 18+ content inside MODARYX.",
+      "Do not promote or advertise the separate 18+ game/site from MODARYX.",
+      "Do not use adult branding in MODARYX.",
+      "Do not create a commercial funnel from MODARYX to the separate 18+ ecosystem."
+    ],
+    "identityAuth": [
+      "Do not assume shared accounts.",
+      "Do not assume shared authentication.",
+      "Do not share session or entitlement state without an explicit future architecture decision and reviews."
+    ],
+    "payments": [
+      "Do not assume shared payment provider, merchant account, billing profile, subscription or entitlement.",
+      "No cross-product checkout or upsell from MODARYX to the separate 18+ ecosystem."
+    ],
+    "dataPrivacy": [
+      "Do not assume shared personal-data stores.",
+      "Do not assume shared analytics.",
+      "Do not reuse identifiers across ecosystems by default.",
+      "Any future sharing requires explicit product, security, legal and privacy review before implementation."
+    ],
+    "infrastructure": [
+      "Do not infer shared backend, database, storage, secrets or telemetry from co-ownership.",
+      "A future shared technical provider does not by itself authorize shared data or identity."
+    ]
+  },
+  "futureChangeGate": {
+    "required": [
+      "explicit product-owner decision",
+      "security architecture review",
+      "privacy/data-flow review",
+      "legal/compliance review",
+      "age/audience and consumer review",
+      "updated threat model",
+      "updated checkpoint and provenance"
+    ],
+    "defaultDecision": "NO_SHARING"
+  },
+  "currentStaticObservation": {
+    "searchTerms": [
+      "18+",
+      "adult",
+      "adulte",
+      "NSFW"
+    ],
+    "obviousRepositoryMatchesObserved": 0,
+    "qualification": "Limited repository search observation only; not a substitute for a release-surface audit."
+  },
+  "releaseGate": {
+    "productFacingAdultContentAudit": "PREUVE MANQUANTE",
+    "crossAccountAuthAudit": "PREUVE MANQUANTE",
+    "crossPaymentEntitlementAudit": "PREUVE MANQUANTE",
+    "crossDataAnalyticsAudit": "PREUVE MANQUANTE",
+    "policyContract": "TERMINÉ"
+  }
+}
