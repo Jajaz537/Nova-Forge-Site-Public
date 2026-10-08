@@ -1,0 +1,370 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "OWNER_AND_PROFESSIONAL_DECISION_PACKET",
+  "sourceHead": "635c68e5cfaa737f4210c1e4142425576ca561bf",
+  "rule": "This packet requests decisions; it does not make them.",
+  "decisions": [
+    {
+      "id": "operator-legal-entity",
+      "owner": "PRODUCT_OWNER_WITH_LEGAL_ACCOUNTING_INPUT",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Actual legal operator/seller identity and establishment",
+      "requiredFacts": [
+        "legal name",
+        "legal form",
+        "registered address",
+        "country",
+        "registration numbers",
+        "VAT status/id if applicable",
+        "legal representative"
+      ],
+      "unlocks": [
+        "legal notices",
+        "sales terms",
+        "provider contracts",
+        "tax model",
+        "privacy controller identity",
+        "payment onboarding"
+      ]
+    },
+    {
+      "id": "launch-territories-day1",
+      "owner": "PRODUCT_OWNER_WITH_LEGAL_TAX_INPUT",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Day-1 commercial territories",
+      "candidates": [
+        "France only",
+        "France + selected EU/EEA",
+        "other explicit subset"
+      ],
+      "note": "UK/US/Canada/Australia require separate readiness review before targeting.",
+      "unlocks": [
+        "tax scope",
+        "legal text scope",
+        "payment coverage",
+        "language/support requirements",
+        "rights territorial scope"
+      ]
+    },
+    {
+      "id": "audience-minimum-age",
+      "owner": "PRODUCT_OWNER_WITH_LEGAL_PRIVACY_INPUT",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Intended audience and minimum age",
+      "unlocks": [
+        "privacy/minors analysis",
+        "DSA/safety analysis",
+        "marketing design",
+        "account UX"
+      ]
+    },
+    {
+      "id": "free-product-baseline",
+      "owner": "PRODUCT_OWNER",
+      "state": "EN COURS",
+      "decision": "Confirm final useful free baseline",
+      "constraint": "Do not intentionally degrade the free product.",
+      "unlocks": [
+        "pilot definition",
+        "Premium boundary",
+        "value measurement"
+      ]
+    },
+    {
+      "id": "premium-offer-model",
+      "owner": "PRODUCT_OWNER_AFTER_FIELD_EVIDENCE",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Whether a Premium user offer exists, and whether recurring subscription or one-time purchase is justified",
+      "prerequisites": [
+        "activation/retention evidence",
+        "recurrent value evidence",
+        "willingness-to-pay field evidence",
+        "real cost model"
+      ],
+      "note": "Stimuli 4.99/6.99/8.99 EUR are research only.",
+      "unlocks": [
+        "pricing decision",
+        "sales terms",
+        "checkout design"
+      ]
+    },
+    {
+      "id": "creator-paid-services",
+      "owner": "PRODUCT_OWNER_AFTER_FIELD_EVIDENCE",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Whether paid creator services exist",
+      "note": "Keep separate from user Premium.",
+      "unlocks": [
+        "creator economics",
+        "creator terms",
+        "support requirements"
+      ]
+    },
+    {
+      "id": "marketplace-commission",
+      "owner": "PRODUCT_OWNER_WITH_LEGAL_TAX_REVIEW",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Whether any third-party marketplace/commission model exists",
+      "currentDefault": "NO_CANONICAL_MARKETPLACE_MODEL",
+      "unlocks": [
+        "DSA/trader traceability analysis",
+        "payments/payouts",
+        "tax",
+        "creator contracts"
+      ]
+    },
+    {
+      "id": "payment-rail",
+      "owner": "PRODUCT_OWNER_WITH_ACCOUNTING_LEGAL_INPUT",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Direct PSP versus Merchant of Record and selected provider",
+      "candidates": [
+        "Stripe candidate",
+        "Paddle candidate",
+        "Lemon Squeezy candidate"
+      ],
+      "prerequisites": [
+        "seller identity",
+        "territories",
+        "offer model",
+        "refund policy",
+        "tax analysis",
+        "provider contract/privacy/accessibility review"
+      ],
+      "unlocks": [
+        "checkout",
+        "tax operations",
+        "billing/refunds",
+        "payment production"
+      ]
+    },
+    {
+      "id": "canonical-price",
+      "owner": "PRODUCT_OWNER",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Canonical price(s), if paid offer is approved",
+      "prerequisites": [
+        "pricing field research",
+        "pilot metrics",
+        "real costs",
+        "payment fees",
+        "taxes",
+        "support/moderation costs",
+        "explicit owner approval"
+      ],
+      "unlocks": [
+        "commercial launch",
+        "CGV/checkout disclosures"
+      ]
+    },
+    {
+      "id": "refund-withdrawal-policy",
+      "owner": "PRODUCT_OWNER_WITH_LEGAL_INPUT",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Operational refund and withdrawal implementation consistent with final offer classification",
+      "unlocks": [
+        "CGV",
+        "checkout",
+        "support workflows",
+        "payment configuration"
+      ]
+    },
+    {
+      "id": "consumer-mediator",
+      "owner": "LEGAL_OPERATOR",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Applicable approved French consumer mediator if required",
+      "prerequisites": [
+        "operator identity",
+        "business sector",
+        "applicability review",
+        "contract/membership"
+      ],
+      "unlocks": [
+        "consumer disclosures"
+      ]
+    },
+    {
+      "id": "privacy-controller-dpo",
+      "owner": "LEGAL_PRIVACY_REVIEW",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Controller identity, privacy contact and DPO status if applicable",
+      "unlocks": [
+        "privacy notice",
+        "rights channel",
+        "incident process"
+      ]
+    },
+    {
+      "id": "final-processors-providers",
+      "owner": "PRODUCT_OWNER_WITH_SECURITY_PRIVACY_LEGAL_INPUT",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Final provider set and contractual roles",
+      "candidates": [
+        "Cloudflare",
+        "Auth0",
+        "Turnstile",
+        "R2",
+        "email provider",
+        "push provider",
+        "weather provider",
+        "payment provider"
+      ],
+      "unlocks": [
+        "DPA/subprocessor register",
+        "transfer analysis",
+        "privacy notice",
+        "production activation"
+      ]
+    },
+    {
+      "id": "analytics-cwv-runtime",
+      "owner": "PRODUCT_OWNER_WITH_PRIVACY_REVIEW",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Whether field CWV/RUM is enabled and under what legal/consent configuration",
+      "currentDefault": "OFF",
+      "unlocks": [
+        "field performance measurement",
+        "cookie/consent finalization"
+      ]
+    },
+    {
+      "id": "dsa-role",
+      "owner": "LEGAL_REVIEW",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Hosting/online-platform/marketplace qualification and exact obligations/exemptions",
+      "prerequisites": [
+        "real production feature set",
+        "operator size",
+        "EU active recipients",
+        "UGC/publication model",
+        "marketplace decision",
+        "audience"
+      ],
+      "unlocks": [
+        "final moderation/notice-action rules",
+        "transparency duties",
+        "terms"
+      ]
+    },
+    {
+      "id": "accessibility-applicability",
+      "owner": "LEGAL_ACCESSIBILITY_REVIEW",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Exact regulatory applicability and any exemption claims",
+      "constraint": "Product accessibility remains required regardless of exemption strategy.",
+      "unlocks": [
+        "public accessibility information",
+        "launch legal gate"
+      ]
+    },
+    {
+      "id": "rights-commercial-clearance",
+      "owner": "RIGHTS_HOLDER_EVIDENCE_PLUS_LEGAL_REVIEW_WHERE_NEEDED",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Commercial release rights for bundled PRODUCT assets and third-party game/mod scopes",
+      "note": "Git/internet availability is not commercial authorization.",
+      "unlocks": [
+        "final release distribution"
+      ]
+    },
+    {
+      "id": "modaryx-trademark-clearance",
+      "owner": "LEGAL_IP_REVIEW",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Trademark/name clearance for targeted territories",
+      "unlocks": [
+        "brand launch confidence"
+      ]
+    },
+    {
+      "id": "support-operations-owner",
+      "owner": "PRODUCT_OWNER",
+      "state": "PREUVE MANQUANTE",
+      "decision": "Real support channels, ownership, moderation/fraud escalation and release owner",
+      "unlocks": [
+        "operational launch gate",
+        "consumer/support disclosures"
+      ]
+    },
+    {
+      "id": "production-activation",
+      "owner": "PRODUCT_OWNER_EXPLICIT_APPROVAL",
+      "state": "BLOQUÉ",
+      "decision": "Authorize controlled production units one by one",
+      "prerequisites": [
+        "relevant technical/legal/privacy facts",
+        "rollback plan",
+        "proof owner"
+      ],
+      "note": "Not a blanket approval for DNS/D1/R2/providers/cutover.",
+      "unlocks": [
+        "production evidence blockers"
+      ]
+    },
+    {
+      "id": "cutover-launch",
+      "owner": "PRODUCT_OWNER_EXPLICIT_APPROVAL",
+      "state": "BLOQUÉ",
+      "decision": "Final go/no-go and cutover",
+      "prerequisites": [
+        "all required gates separately green",
+        "19 external VF blockers closed as applicable",
+        "release/rollback/support owner",
+        "territory/legal readiness"
+      ],
+      "unlocks": [
+        "public launch"
+      ]
+    }
+  ],
+  "professionalReviews": [
+    {
+      "id": "legal-fr-eu",
+      "profession": "qualified legal counsel",
+      "state": "PREUVE MANQUANTE",
+      "scope": [
+        "operator/seller",
+        "consumer terms",
+        "withdrawal/refunds",
+        "privacy",
+        "DSA/platform role",
+        "accessibility applicability",
+        "IP/trademark",
+        "territorial launch"
+      ]
+    },
+    {
+      "id": "tax-accounting",
+      "profession": "qualified tax/accounting professional where needed",
+      "state": "PREUVE MANQUANTE",
+      "scope": [
+        "seller establishment",
+        "VAT/OSS",
+        "invoicing",
+        "MoR vs PSP responsibility",
+        "other territories"
+      ]
+    },
+    {
+      "id": "ip-rights",
+      "profession": "legal/IP review where permission scope is ambiguous",
+      "state": "PREUVE MANQUANTE",
+      "scope": [
+        "asset commercial rights",
+        "publisher/mod rights",
+        "trademark clearance"
+      ]
+    }
+  ],
+  "forbiddenShortcuts": [
+    "Do not mark a decision TERMINÉ because a candidate document exists.",
+    "Do not choose a provider solely on headline transaction fees.",
+    "Do not choose a price from survey stimuli alone.",
+    "Do not infer rights from Git history or internet availability.",
+    "Do not treat a technical PASS as legal/commercial PASS.",
+    "Do not activate production from this packet."
+  ]
+}
