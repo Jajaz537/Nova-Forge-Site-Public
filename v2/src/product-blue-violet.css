@@ -216,50 +216,6 @@ body {
   max-width: 350px;
 }
 
-.section-heading h2,
-.card-copy h3,
-.profiles-rail h2,
-.page-section > h1,
-.catalog-title h1 {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-}
-
-/* No large marketing hero in the selected MODARYX direction.
-   Discover becomes a compact product introduction instead of a cinematic hero. */
-.editorial-hero,
-.canon-reconciled-hero {
-  min-height: auto !important;
-  padding: 54px 4vw 28px !important;
-  display: block !important;
-  background:
-    radial-gradient(circle at 78% 15%, rgba(139,99,255,.08), transparent 24rem),
-    linear-gradient(180deg, rgba(13,20,33,.82), rgba(8,13,24,.36)) !important;
-  border-bottom: 1px solid rgba(106,124,158,.14);
-}
-
-.editorial-hero > div,
-.editorial-hero-copy {
-  max-width: 780px;
-}
-
-.editorial-hero h1,
-.canon-reconciled-hero .editorial-hero-copy h1 {
-  font-size: clamp(38px, 4.2vw, 58px) !important;
-  line-height: 1.04;
-  margin: 12px 0 18px;
-}
-
-.editorial-hero p,
-.canon-reconciled-hero .editorial-hero-copy p {
-  color: #bac6d8;
-  font-size: 17px;
-  max-width: 680px;
-}
-
-.canon-narrative-layer {
-  display: none !important;
-}
-
 @media (max-width: 1050px) {
   .game-identity {
     min-height: auto;
@@ -272,17 +228,6 @@ body {
 }
 
 @media (max-width: 760px) {
-  .editorial-hero,
-  .canon-reconciled-hero {
-    min-height: auto !important;
-    padding: 34px 18px 22px !important;
-  }
-
-  .editorial-hero h1,
-  .canon-reconciled-hero .editorial-hero-copy h1 {
-    font-size: clamp(34px, 10vw, 46px) !important;
-  }
-
   .game-identity .atmosphere-preview button {
     min-height: 44px;
     padding: 8px 11px;
@@ -366,95 +311,8 @@ body {
 }
 
 
-/* Enforce the selected no-marketing-hero direction on Discover.
-   canon-hero.css uses pseudo-elements for the old cinematic artwork; neutralize them here. */
-.canon-reconciled-hero::before,
-.canon-reconciled-hero::after {
-  display: none !important;
-  content: none !important;
-}
-
-.canon-reconciled-hero .editorial-hero-copy h1 {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-  font-weight: 760 !important;
-  letter-spacing: -.045em !important;
-  max-width: 760px;
-}
-
-.canon-reconciled-hero .editorial-hero-copy {
-  text-shadow: none !important;
-}
-
-.canon-reconciled-hero .editorial-hero-copy p {
-  color: #aebbd0 !important;
-}
-
-@media (min-width: 761px) {
-  .canon-reconciled-hero .editorial-hero-copy h1 {
-    font-size: clamp(40px, 4vw, 58px) !important;
-    line-height: 1.02 !important;
-  }
-}
-
-
-/* Compact Discover: product intro, not a hero. */
-.editorial-hero.canon-reconciled-hero {
-  padding: 34px 4vw 30px !important;
-}
-
-.editorial-hero.canon-reconciled-hero .editorial-hero-copy {
-  max-width: 980px !important;
-}
-
-.editorial-hero.canon-reconciled-hero .editorial-hero-copy h1 {
-  font-size: clamp(34px, 3.1vw, 46px) !important;
-  line-height: 1.03 !important;
-  max-width: 900px !important;
-  margin: 8px 0 14px !important;
-}
-
-.editorial-hero.canon-reconciled-hero .editorial-hero-copy p {
-  max-width: 760px !important;
-  font-size: 15px !important;
-  line-height: 1.6 !important;
-  margin-bottom: 18px !important;
-}
-
-.editorial-hero.canon-reconciled-hero .primary {
-  padding: 13px 18px;
-  min-height: 44px;
-}
-
-@media (max-width: 760px) {
-  .editorial-hero.canon-reconciled-hero {
-    padding: 28px 18px 24px !important;
-  }
-
-  .editorial-hero.canon-reconciled-hero .editorial-hero-copy h1 {
-    font-size: clamp(30px, 9vw, 38px) !important;
-  }
-}
-
 
 /* Product UI typography: the selected reference is consistently sans-serif. */
-h1, h2, h3,
-.page-section > h1,
-.catalog-title h1,
-.rights-dashboard > h1,
-.help-docs > h1,
-.moderation-center > h1,
-.community-board h2,
-.account-panel h2,
-.detail-section h2,
-.modpack-header h2,
-.profile-components h2,
-.profile-decision h2,
-.collection-card h2,
-.creator-index-card h2,
-.game-card h2 {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-}
-
 
 /* 2026-10-05 human-selected Aurelian Vale Game Hub canon.
    Dense desktop list + right profile rail + restrained blue/violet mix. */
