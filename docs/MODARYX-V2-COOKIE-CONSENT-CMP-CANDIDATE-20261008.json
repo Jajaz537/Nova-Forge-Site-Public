@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "COOKIE_TRACKER_CONSENT_CMP_CANDIDATE",
+  "sourceHead": "fd039a59e3d0845242f7deeeb945d479128d8a01",
+  "scope": {
+    "currentStaticInventory": "docs/MODARYX-V2-COOKIE-STORAGE-TRACKER-STATIC-INVENTORY-20261008.json",
+    "currentObserved": [
+      "first-party session cookie modaryx_session",
+      "functional localStorage",
+      "PWA Cache Storage candidate",
+      "first-party CWV/RUM candidate gated OFF",
+      "conditional Turnstile",
+      "optional providers currently not production-proven"
+    ]
+  },
+  "principles": [
+    "Strictly necessary storage may operate only when documented as necessary for the requested service.",
+    "Any non-essential tracker remains OFF before valid consent when consent is required.",
+    "Reject must be as easy as accept.",
+    "Consent withdrawal must be easy, persistent and accessible from all relevant pages.",
+    "No dark pattern, pre-ticked consent, forced bundling or misleading hierarchy.",
+    "Audience-measurement exemption is not assumed; it must be separately documented against the actual final configuration."
+  ],
+  "categories": [
+    {
+      "id": "necessary",
+      "label": "Strictly necessary",
+      "default": "ON_IF_ACTUALLY_NECESSARY",
+      "userToggle": false,
+      "examplesCandidate": [
+        "session/authentication",
+        "security/anti-abuse where indispensable",
+        "requested UI preference where intrinsic"
+      ],
+      "legalQualification": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "functional_optional",
+      "label": "Optional functional",
+      "default": "OFF_UNTIL_DECISION",
+      "userToggle": true,
+      "examplesCandidate": [
+        "optional convenience/personalization not indispensable"
+      ],
+      "legalQualification": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "analytics",
+      "label": "Audience/performance",
+      "default": "OFF",
+      "userToggle": true,
+      "examplesCandidate": [
+        "CWV/RUM if final implementation requires consent"
+      ],
+      "exemptionPossible": "only if every applicable CNIL condition is demonstrated for the actual configuration",
+      "exemptionStatus": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "marketing",
+      "label": "Marketing",
+      "default": "OFF",
+      "userToggle": true,
+      "examplesCandidate": [
+        "marketing notifications/marketing trackers if introduced"
+      ],
+      "legalQualification": "PREUVE MANQUANTE"
+    }
+  ],
+  "uiContract": {
+    "firstLayerActions": [
+      "ACCEPT_ALL_NON_NECESSARY",
+      "REJECT_ALL_NON_NECESSARY",
+      "CUSTOMIZE"
+    ],
+    "acceptRejectEffort": "COMPARABLE",
+    "noPreselectedNonNecessary": true,
+    "informationBeforeChoice": true,
+    "manageLinkPersistent": true,
+    "withdrawalAccessible": true,
+    "keyboardAccessible": true,
+    "screenReaderAccessible": true,
+    "zoomReflowRequired": true,
+    "reducedMotionCompatible": true
+  },
+  "consentReceiptCandidate": {
+    "storageLocation": "PREUVE MANQUANTE",
+    "fields": [
+      "policyVersion",
+      "choiceTimestamp",
+      "categories",
+      "sourceSurface"
+    ],
+    "prohibited": [
+      "advertising identifier by default",
+      "unnecessary fingerprint",
+      "raw cross-site identity"
+    ],
+    "retention": "PREUVE MANQUANTE",
+    "renewalRule": "PREUVE MANQUANTE"
+  },
+  "runtimeGateCandidate": {
+    "beforeConsent": [
+      "do not enable non-essential analytics/marketing trackers",
+      "do not load optional third-party tracker scripts requiring consent",
+      "do not write optional non-essential storage requiring consent"
+    ],
+    "afterReject": [
+      "same access to core free product",
+      "no artificial degradation",
+      "no silent re-enable"
+    ],
+    "afterWithdrawal": [
+      "stop future non-essential tracking",
+      "clear/disable consent-controlled storage where technically and legally appropriate",
+      "record new choice with minimization"
+    ]
+  },
+  "currentFeatureMapping": [
+    {
+      "feature": "modaryx_session",
+      "observed": "first-party HttpOnly Secure SameSite=Lax session cookie",
+      "candidateCategory": "necessary",
+      "finalQualification": "PREUVE MANQUANTE"
+    },
+    {
+      "feature": "localStorage favorites/search/drafts/collections/preferences",
+      "observed": "functional client storage",
+      "candidateCategory": "necessary_or_functional_optional_by_item",
+      "finalQualification": "PREUVE MANQUANTE"
+    },
+    {
+      "feature": "PWA Cache Storage",
+      "observed": "production gated OFF",
+      "candidateCategory": "technical/offline functionality",
+      "finalQualification": "PREUVE MANQUANTE"
+    },
+    {
+      "feature": "CWV/RUM",
+      "observed": "first-party, double gated, OFF by default, DNT/GPC aware",
+      "candidateCategory": "analytics",
+      "finalQualification": "PREUVE MANQUANTE"
+    },
+    {
+      "feature": "Turnstile",
+      "observed": "conditional",
+      "candidateCategory": "security/anti-abuse",
+      "finalQualification": "PREUVE MANQUANTE"
+    }
+  ],
+  "launchGate": {
+    "operatorIdentity": "PREUVE MANQUANTE",
+    "finalTrackerInventory": "PREUVE MANQUANTE",
+    "finalCategoryQualification": "PREUVE MANQUANTE",
+    "exemptionAnalysis": "PREUVE MANQUANTE",
+    "consentReceiptStorageAndRetention": "PREUVE MANQUANTE",
+    "privacyCookieNoticeText": "PREUVE MANQUANTE",
+    "runtimeNetworkObservation": "PREUVE MANQUANTE",
+    "finalAccessibilityReview": "PREUVE MANQUANTE",
+    "legalReview": "PREUVE MANQUANTE"
+  },
+  "activationPerformed": false
+}
