@@ -133,11 +133,11 @@ async function capture(file, width, height, expectedText) {
   // to the real top of the page so stale scroll offsets do not create blank bands.
   // On mobile, tab content can start below the fold. Center the evidenced
   // state instead of capturing an unchanged header for every tab.
-  const mobileDetailState = width < 760 && (/^mobile-content-(detail|files|versions|compatibility-specialized|advanced-plan|changelog|support|report|permissions)\\.png$/.test(file) || /^mobile-library(-|\\.png$)/.test(file) || /^mobile-game-profile(-|\\.png$)/.test(file));
+  const mobileDetailState = width < 760 && (/^mobile-content-(detail|files|versions|compatibility-specialized|advanced-plan|changelog|support|report|permissions)\.png$/.test(file) || /^mobile-library(-|\.png$)/.test(file) || /^mobile-game-profile(-|\.png$)/.test(file));
   if (mobileDetailState) {
     const focusText = Array.isArray(expectedText) ? expectedText[0] : expectedText;
-    const located = await evaluate(\`(() => {
-      const text = \${JSON.stringify(String(focusText || "").toLocaleLowerCase("fr"))};
+    const located = await evaluate(`(() => {
+      const text = ${JSON.stringify(String(focusText || "").toLocaleLowerCase("fr"))};
       const nodes = [...document.querySelectorAll('h1,h2,h3,h4,p,strong,span,small,button')];
       const match = nodes.find(el => (el.textContent || '').trim().toLocaleLowerCase('fr').includes(text) &&
         ![...el.children].some(c => (c.textContent || '').toLocaleLowerCase('fr').includes(text)) &&
@@ -145,7 +145,7 @@ async function capture(file, width, height, expectedText) {
       if (!match) return false;
       match.scrollIntoView({block:'center', inline:'nearest', behavior:'instant'});
       return true;
-    })()\`);
+    })()`);
     if (!located) throw new Error("mobile capture target unavailable: " + file + " / " + focusText);
   } else {
     await evaluate("window.scrollTo({top:0,left:0,behavior:'auto'}); true");
