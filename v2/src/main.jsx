@@ -9,6 +9,7 @@ import "./premium-reconciliation.css";
 import "./premium-reconciliation-r3.css";
 import "./premium-reconciliation-r4.css";
 import "./premium-reconciliation-r5.css";
+import "./premium-reconciliation-r6.css";
 import { migrateLegacyBrowserState } from "./storage-migration.js";
 import { registerV2PwaIfEnabled } from "./pwa-registration.js";
 
