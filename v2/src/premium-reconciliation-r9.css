@@ -1,0 +1,623 @@
+/* MODARYX V2 — Premium reconciliation R9
+   Focus: Game Hub, catalogue rows and content detail.
+   Visual-only continuation of R8. No route/data/backend/entitlement/production changes. */
+
+/* Game Hub becomes an immersive destination rather than a dashboard header + table. */
+.game-hub-page{
+  position:relative;
+  isolation:isolate;
+  min-height:100vh;
+  padding-bottom:120px;
+  overflow:clip;
+  background:
+    radial-gradient(circle at 78% 8%,rgba(103,86,255,.11),transparent 30rem),
+    radial-gradient(circle at 12% 30%,rgba(69,218,211,.06),transparent 30rem),
+    #030a12;
+}
+
+.game-hero{
+  position:relative;
+  min-height:440px;
+  margin:16px auto 0;
+  width:min(1480px,calc(100% - 28px));
+  border:0;
+  border-radius:34px;
+  overflow:hidden;
+  box-shadow:0 58px 140px rgba(0,0,0,.44);
+}
+
+.game-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.025),transparent 22%),
+    linear-gradient(90deg,rgba(2,9,16,.92) 0%,rgba(2,9,16,.66) 42%,rgba(2,9,16,.12) 76%),
+    linear-gradient(0deg,rgba(2,9,16,.82),transparent 46%);
+}
+
+.game-identity{
+  position:relative;
+  z-index:3;
+  width:min(720px,58%);
+  min-height:440px;
+  padding:74px 0 54px clamp(34px,5vw,78px);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:flex-start;
+}
+
+.game-identity h1{
+  margin:10px 0 12px;
+  font-family:var(--editorial-serif);
+  font-size:clamp(58px,6vw,92px);
+  line-height:.9;
+  letter-spacing:-.06em;
+  text-shadow:0 26px 76px rgba(0,0,0,.48);
+}
+
+.game-support{
+  border:0;
+  padding:0;
+  color:rgba(220,235,244,.72);
+  background:transparent;
+}
+
+.game-identity>label{
+  margin-top:22px;
+  padding:7px 8px 7px 14px;
+  border:1px solid rgba(116,190,221,.11);
+  border-radius:12px;
+  background:rgba(7,22,34,.64);
+  backdrop-filter:blur(14px);
+}
+
+.game-identity>label select{
+  border:0;
+  background:transparent;
+}
+
+.atmosphere-preview{
+  margin-top:18px;
+  padding:0;
+  border:0;
+  background:transparent;
+}
+
+.atmosphere-preview>div{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:8px;
+}
+
+.atmosphere-preview button{
+  min-height:34px;
+  border-radius:999px;
+  border:1px solid rgba(113,188,220,.10);
+  background:rgba(6,21,33,.54);
+}
+
+.atmosphere-preview button.active{
+  border-color:rgba(84,218,219,.28);
+  background:linear-gradient(135deg,rgba(82,216,221,.12),rgba(121,102,255,.14));
+}
+
+.game-hero .hero-search{
+  position:absolute;
+  z-index:4;
+  right:clamp(34px,5vw,72px);
+  bottom:58px;
+  width:min(440px,34vw);
+  border:1px solid rgba(116,190,221,.12);
+  border-radius:16px;
+  background:rgba(3,13,22,.72);
+  backdrop-filter:blur(18px);
+  box-shadow:0 20px 60px rgba(0,0,0,.24);
+}
+
+.game-hero>.primary{
+  position:absolute;
+  z-index:4;
+  right:clamp(34px,5vw,72px);
+  bottom:122px;
+  min-width:220px;
+  border-radius:13px;
+  box-shadow:0 18px 48px rgba(89,91,255,.26);
+}
+
+/* Local navigation becomes a floating mode switcher. */
+.game-hub-page>.local-nav{
+  position:relative;
+  z-index:5;
+  width:fit-content;
+  max-width:calc(100% - 40px);
+  margin:-22px auto 0;
+  padding:6px;
+  display:flex;
+  gap:4px;
+  border:1px solid rgba(110,187,221,.10);
+  border-radius:999px;
+  background:rgba(4,15,24,.90);
+  box-shadow:0 24px 70px rgba(0,0,0,.30);
+  backdrop-filter:blur(18px);
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+.game-hub-page>.local-nav::-webkit-scrollbar{display:none}
+
+.game-hub-page>.local-nav button{
+  min-height:40px;
+  padding-inline:16px;
+  border:0;
+  border-radius:999px;
+  background:transparent;
+}
+
+.game-hub-page>.local-nav button.active,
+.game-hub-page>.local-nav button[aria-pressed="true"]{
+  color:#f5fbff;
+  background:linear-gradient(135deg,rgba(77,216,215,.12),rgba(116,89,255,.16));
+  box-shadow:inset 0 0 0 1px rgba(94,201,219,.11);
+}
+
+/* The main hub is one canvas with a quiet profile rail, not a 2-panel dashboard. */
+.hub-layout{
+  width:min(1380px,calc(100% - 56px));
+  margin:52px auto 0;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 270px;
+  gap:48px;
+  align-items:start;
+}
+
+.hub-content{
+  min-width:0;
+}
+
+.hub-content .section-heading{
+  margin-bottom:28px;
+}
+
+.hub-content .section-heading h2{
+  font-size:clamp(42px,4vw,64px);
+  line-height:.96;
+  letter-spacing:-.045em;
+}
+
+.profiles-rail{
+  position:sticky;
+  top:96px;
+  padding:4px 0 8px 28px;
+  border:0;
+  border-left:1px solid rgba(112,187,221,.10);
+  background:transparent;
+  box-shadow:none;
+}
+
+.profiles-rail .rail-icon{
+  width:36px;
+  height:36px;
+  border-radius:12px;
+  background:linear-gradient(135deg,rgba(76,217,215,.12),rgba(116,88,255,.15));
+  box-shadow:inset 0 0 0 1px rgba(100,194,220,.10);
+}
+
+.profiles-rail h2{
+  margin-top:16px;
+  font-size:24px;
+  letter-spacing:-.03em;
+}
+
+.profiles-rail p{
+  color:rgba(193,213,227,.66);
+  line-height:1.65;
+}
+
+.profile-add{
+  width:100%;
+  margin:18px 0 14px;
+  min-height:44px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(115deg,#625df5,#7657f4 56%,#4f8cff);
+  box-shadow:0 16px 42px rgba(88,80,241,.22);
+}
+
+.profile-list{
+  display:grid;
+  gap:0;
+}
+
+.profile-row{
+  min-height:72px;
+  padding:10px 0;
+  border:0;
+  border-bottom:1px solid rgba(111,188,221,.08);
+  border-radius:0;
+  background:transparent;
+}
+
+.profile-row .media{
+  width:52px;
+  height:52px;
+  border-radius:12px;
+}
+
+/* Filters become a compact toolbar integrated into the scene. */
+.hub-filterbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:18px;
+  padding:7px;
+  border:1px solid rgba(111,188,221,.09);
+  border-radius:16px;
+  background:rgba(5,17,28,.58);
+  backdrop-filter:blur(14px);
+}
+
+.hub-filterbar select{
+  min-height:38px;
+  border:0;
+  border-radius:10px;
+  background:rgba(11,30,44,.66);
+}
+
+.hub-view-toggle{
+  margin-left:auto;
+  padding:3px;
+  border:0;
+  border-radius:10px;
+  background:rgba(11,30,44,.52);
+}
+
+/* Catalogue rows become editorial stories with image, content and source aligned on one rhythm. */
+.hub-content-list{
+  display:grid;
+  gap:10px;
+}
+
+.hub-content-row{
+  position:relative;
+  min-height:116px;
+  border:0;
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 90% 12%,rgba(111,87,255,.09),transparent 20rem),
+    linear-gradient(110deg,rgba(8,27,42,.82),rgba(4,14,23,.90));
+  box-shadow:0 20px 60px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.025);
+  overflow:hidden;
+}
+
+.hub-content-row::before{
+  content:"";
+  position:absolute;
+  inset:18px auto 18px 0;
+  width:2px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#54d9da,#7565ff);
+  opacity:.68;
+}
+
+.hub-row-main{
+  min-height:116px;
+  grid-template-columns:128px minmax(0,1fr) minmax(130px,.28fr);
+  gap:22px;
+  padding:14px 66px 14px 18px;
+}
+
+.hub-row-main>.media{
+  height:88px;
+  border-radius:14px;
+  box-shadow:0 16px 38px rgba(0,0,0,.22);
+}
+
+.hub-row-copy h3{
+  font-family:var(--editorial-serif);
+  font-size:23px;
+  letter-spacing:-.025em;
+}
+
+.hub-row-lines{
+  opacity:.42;
+}
+
+.hub-row-source{
+  padding-left:18px;
+  border-left:1px solid rgba(109,187,221,.08);
+}
+
+.hub-row-actions{
+  right:12px;
+}
+
+.hub-row-actions button{
+  border:0;
+  background:rgba(8,24,36,.66);
+}
+
+/* Content detail reads as an editorial dossier instead of left-form/right-panel. */
+.detail{
+  position:relative;
+  isolation:isolate;
+  max-width:1500px;
+  margin-inline:auto;
+  padding:36px 4vw 130px;
+}
+
+.detail::before{
+  content:"";
+  position:absolute;
+  z-index:-3;
+  inset:0 0 auto;
+  height:620px;
+  background:
+    linear-gradient(90deg,rgba(3,10,18,.94),rgba(3,10,18,.56) 48%,rgba(3,10,18,.78)),
+    linear-gradient(180deg,rgba(3,10,18,.06),rgba(3,10,18,.96)),
+    url('/assets/living-threshold-hero.png') 72% 46%/cover no-repeat;
+  opacity:.32;
+  mask-image:linear-gradient(180deg,#000 0%,#000 60%,transparent 100%);
+}
+
+.detail>.back{
+  position:relative;
+  z-index:2;
+  margin-bottom:34px;
+}
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:minmax(300px,.62fr) minmax(0,1.38fr);
+  gap:clamp(44px,6vw,92px);
+  align-items:start;
+}
+
+.detail-copy{
+  position:sticky;
+  top:98px;
+  padding:18px 0 0;
+  border:0;
+  background:transparent;
+}
+
+.detail-copy h1{
+  margin-top:10px;
+  font-family:var(--editorial-serif);
+  font-size:clamp(48px,4.8vw,76px);
+  line-height:.94;
+  letter-spacing:-.055em;
+}
+
+.detail-copy .lede{
+  font-size:16px;
+  line-height:1.75;
+  color:rgba(218,232,242,.72);
+}
+
+.decision-panel{
+  margin:28px 0 20px;
+  padding:22px 0;
+  border:0;
+  border-top:1px solid rgba(111,188,221,.10);
+  border-bottom:1px solid rgba(111,188,221,.10);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+
+.decision-alert{
+  border:0;
+  border-radius:14px;
+  background:rgba(62,201,177,.065);
+}
+
+.manager-capability-panel{
+  margin-top:16px;
+  border:0;
+  border-radius:16px;
+  background:rgba(8,24,36,.56);
+  box-shadow:inset 0 0 0 1px rgba(111,188,221,.07);
+}
+
+.detail-main{
+  min-width:0;
+}
+
+.detail-media{
+  min-height:430px;
+  border:0;
+  border-radius:32px;
+  box-shadow:var(--r8-shadow);
+  overflow:hidden;
+}
+
+.detail-tabs{
+  position:relative;
+  margin:-22px 22px 26px;
+  padding:6px;
+  display:flex;
+  gap:4px;
+  border:1px solid rgba(111,188,221,.09);
+  border-radius:999px;
+  background:rgba(4,15,24,.91);
+  box-shadow:0 24px 64px rgba(0,0,0,.28);
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+.detail-tabs::-webkit-scrollbar{display:none}
+
+.detail-tabs button{
+  flex:0 0 auto;
+  min-height:40px;
+  border:0;
+  border-radius:999px;
+  background:transparent;
+}
+
+.detail-tabs button.active,
+.detail-tabs button[aria-pressed="true"]{
+  background:linear-gradient(135deg,rgba(78,216,215,.12),rgba(117,90,255,.15));
+}
+
+.detail-section{
+  padding:34px 38px 38px;
+  border:0;
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 90% 0%,rgba(111,86,255,.08),transparent 24rem),
+    linear-gradient(145deg,rgba(8,26,40,.78),rgba(4,14,23,.88));
+  box-shadow:0 28px 80px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.025);
+}
+
+.detail-section h2{
+  font-size:clamp(30px,2.7vw,42px);
+  letter-spacing:-.035em;
+}
+
+/* Responsive continuity: collapse hierarchy without restoring the dashboard. */
+@media (max-width:1050px){
+  .game-hero{
+    min-height:500px;
+  }
+
+  .game-identity{
+    width:70%;
+  }
+
+  .game-hero .hero-search{
+    width:40vw;
+  }
+
+  .hub-layout{
+    width:min(100% - 40px,1120px);
+    grid-template-columns:1fr;
+    gap:34px;
+  }
+
+  .profiles-rail{
+    position:static;
+    padding:22px 0 0;
+    border-left:0;
+    border-top:1px solid rgba(111,188,221,.10);
+  }
+
+  .profile-list{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px 16px;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+
+  .detail-copy{
+    position:static;
+    max-width:820px;
+  }
+}
+
+@media (max-width:760px){
+  .game-hub-page{
+    padding-bottom:84px;
+  }
+
+  .game-hero{
+    width:calc(100% - 20px);
+    min-height:580px;
+    margin-top:10px;
+    border-radius:26px;
+  }
+
+  .game-identity{
+    width:100%;
+    min-height:580px;
+    padding:54px 22px 170px;
+  }
+
+  .game-identity h1{
+    font-size:clamp(48px,15vw,66px);
+  }
+
+  .game-hero .hero-search{
+    left:20px;
+    right:20px;
+    bottom:88px;
+    width:auto;
+  }
+
+  .game-hero>.primary{
+    left:20px;
+    right:20px;
+    bottom:28px;
+  }
+
+  .game-hub-page>.local-nav{
+    margin-top:-18px;
+    max-width:calc(100% - 24px);
+  }
+
+  .hub-layout{
+    width:calc(100% - 36px);
+    margin-top:38px;
+  }
+
+  .hub-content .section-heading h2{
+    font-size:38px;
+  }
+
+  .hub-row-main{
+    display:grid;
+    grid-template-columns:86px minmax(0,1fr);
+    min-height:126px;
+    padding:14px 54px 14px 14px;
+  }
+
+  .hub-row-main>.media{
+    width:86px;
+    height:92px;
+  }
+
+  .hub-row-source{
+    display:none;
+  }
+
+  .profile-list{
+    grid-template-columns:1fr;
+  }
+
+  .detail{
+    padding:26px 20px 90px;
+  }
+
+  .detail-copy h1{
+    font-size:clamp(46px,13vw,62px);
+  }
+
+  .detail-media{
+    min-height:280px;
+    border-radius:24px;
+  }
+
+  .detail-tabs{
+    margin:-18px 12px 22px;
+  }
+
+  .detail-section{
+    padding:26px 22px 28px;
+    border-radius:22px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .hub-content-row,
+  .profile-row,
+  .detail-tabs button,
+  .game-hub-page>.local-nav button{
+    transition:none!important;
+  }
+}
