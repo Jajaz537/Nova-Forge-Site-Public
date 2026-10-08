@@ -163,7 +163,19 @@ try{
   await clickText(".global-nav button","Jeux");
   await waitText("Trouvez votre prochain terrain de jeu");
   await clickText(".game-support-request>.quiet","Demander le support d’un jeu");
-  await waitText("Aucune demande n’est envoyée automatiquement à un éditeur.");
+  // Preview and V2 candidate currently use different truthful, fail-closed copy.
+  // Require either exact safety statement, never a generic “demonstration” match.
+  let publisherSafetyCopyFound=false;
+  for(let attempt=0;attempt<40;attempt++){
+    publisherSafetyCopyFound=await evaluate(`(() => {
+      const copy=document.body.innerText.toLocaleLowerCase("fr");
+      return copy.includes("aucune demande n’est envoyée automatiquement à un éditeur.") ||
+        copy.includes("aucune demande éditeur n’est envoyée depuis ce prototype.");
+    })()`);
+    if(publisherSafetyCopyFound) break;
+    await sleep(100);
+  }
+  if(!publisherSafetyCopyFound) throw new Error("publisher no-outbound safety statement missing");
   await clickText(".game-request-form .primary","Préparer la demande locale");
   await waitText("Saisissez un nom de jeu avant de préparer la demande.");
   await fill(".game-request-form input","Project Meridian");
