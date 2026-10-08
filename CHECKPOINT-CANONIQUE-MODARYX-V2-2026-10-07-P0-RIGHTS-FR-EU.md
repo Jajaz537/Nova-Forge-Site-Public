@@ -1394,3 +1394,66 @@ Gates :
 - PRODUCTION / CUTOVER : **BLOQUÉ**
 
 Aucune mutation production, DNS, paiement ou cutover.
+
+
+---
+
+## 41. Premium reconciliation R2 implémentée — 2026-10-08
+
+Retour propriétaire ayant déclenché la tranche :
+le site courant était perçu comme **ancien design / type maquette**.
+
+### Produit
+
+PR :
+- **#269**
+- merge SHA : `cf7d7e6eb922f160e2125554a50134249025be7f`
+
+Portée :
+- architecture React/Vite/Workers conservée ;
+- 3 fichiers visuels touchés ;
+- aucun nouvel asset ;
+- aucune nouvelle dépendance ;
+- aucun changement backend, route, données, entitlement ou production ;
+- ancien override compact/no-hero retiré ;
+- nouvelle couche `v2/src/premium-reconciliation.css` chargée en dernier.
+
+### Preuve visuelle fraîche
+
+Run :
+- `37732973675`
+- conclusion : **success**
+- artifact id : `11530203934`
+- digest : `sha256:262890fc81ea30b5ef20e0a51d67ec88dd318198c9dd569fb5b72afa5b8ea7ad`
+- captures : **16**
+  - 8 desktop 1440×1024
+  - 8 mobile 390×844
+- build V2 : **TERMINÉ**
+- tests sites : **TERMINÉ**
+
+Preuve :
+`docs/MODARYX-V2-PREMIUM-RECONCILIATION-R2-EVIDENCE-20261008.json`.
+
+Inspection assistant :
+**TERMINÉE en support uniquement**.
+Le candidat montre une vraie rupture avec le rendu plat/ancien : entrée d'univers cinématique restaurée, hiérarchie éditoriale renforcée, profondeur accrue des surfaces internes et cohérence mobile.
+
+### Gate propriétaire
+
+Le blocker n'est **pas** fermé :
+- `owner-visual-reconciliation-current` : **BLOQUÉ / OPEN**
+- candidat implémenté : **TERMINÉ**
+- captures fraîches : **TERMINÉ**
+- acceptation propriétaire : **PREUVE MANQUANTE**
+
+Le ledger reste à **20 blockers OPEN**.
+
+### Gates
+
+- VF TECHNIQUE : **EN COURS**
+- DIRECTION VISUELLE : **BLOQUÉ**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+- PRODUCTION / CUTOVER : **BLOQUÉ**
+
+Aucune mutation `main`, DNS, D1/R2 production, provider production, paiement, PWA production, field CWV, indexability ou cutover.
