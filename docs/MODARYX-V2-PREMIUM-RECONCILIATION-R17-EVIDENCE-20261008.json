@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "status": "TERMINÉ",
+  "date": "2026-10-08",
+  "candidate": "e5c495699bf9ba20b01c453a787f7d215baa4c64",
+  "integratedMergeSha": "01c1f8f6a4e6488f3bf8662f9b2aa3264e0771fa",
+  "integrationPr": 284,
+  "proof": {
+    "runId": 37780025969,
+    "conclusion": "success",
+    "artifactId": 11551199212,
+    "artifactName": "modaryx-v2-premium-reconciliation-visual-r17-r2",
+    "digest": "sha256:75ec43b5964218b7af62bcef67f5587a080585c933ce3496f68012d47e923e1c",
+    "build": "TERMINÉ",
+    "testSites": "TERMINÉ",
+    "captures": 16,
+    "desktop": 8,
+    "mobile": 8
+  },
+  "files": [
+    {
+      "file": "desktop-account-1440x1024.png",
+      "sha256": "d8aba988003f5316f8473c28e19e127cf82d8e5e11331c264cc135748c0272fa"
+    },
+    {
+      "file": "desktop-collections-1440x1024.png",
+      "sha256": "74f1641d0e40f2f2629247782468835a0d3a98c7449443fb8bb4d81dbaf0236c"
+    },
+    {
+      "file": "desktop-community-1440x1024.png",
+      "sha256": "1af072864aec893e1a2e0f571d981a2a7dbf6000a957f90db1c76c7974baa59b"
+    },
+    {
+      "file": "desktop-creators-1440x1024.png",
+      "sha256": "80189a2f5d81589b3ce74dad27afbf97d6ae4f5d1ab2fd75918f5bb1140e8f42"
+    },
+    {
+      "file": "desktop-discover-1440x1024.png",
+      "sha256": "b74f68251513c555276136c77bcfea544f67115290f5cb10f870efe691ac9c4d"
+    },
+    {
+      "file": "desktop-games-1440x1024.png",
+      "sha256": "a948e8c7c2ecde5a31983a24c8f44c1cafa38049f4e4a95bb95318281ab19aa1"
+    },
+    {
+      "file": "desktop-games-aetherlands-1440x1024.png",
+      "sha256": "c68ad12dbc4b6a6e1a44573e431d7ffb3f56f9d02639e78112c78e6b46c2ca65"
+    },
+    {
+      "file": "desktop-mods-1440x1024.png",
+      "sha256": "cab0b470af6614ca26e199b4b22595c74ba554ec431af2d30030db8c5c40bf55"
+    },
+    {
+      "file": "mobile-account-390x844.png",
+      "sha256": "cdcf5f1a7876021f0107996275b984ede33a635ec88a0427f16992cf61e00d9b"
+    },
+    {
+      "file": "mobile-collections-390x844.png",
+      "sha256": "a5564005034ceb8f666c14ef94b9b8f8c38113b77b277c9092d6ac769afdee09"
+    },
+    {
+      "file": "mobile-community-390x844.png",
+      "sha256": "0ea5a23c28cf74a1bafd38cc01492128a6e726400d63514beb6ac97f43137a28"
+    },
+    {
+      "file": "mobile-creators-390x844.png",
+      "sha256": "a0bd0346d3bfe078aa10f0ab004925376d58839f5fdd47c6197612f9e3094dbf"
+    },
+    {
+      "file": "mobile-discover-390x844.png",
+      "sha256": "83a5de0ba9fa5818bd2d44666ef9c7220a29eb8eccbd96e0d2de42221fbc8600"
+    },
+    {
+      "file": "mobile-games-390x844.png",
+      "sha256": "78bc9a947dc0ee83c304bbf1bec4a0cb6e4175281dafe3b4f40a901718c70a6f"
+    },
+    {
+      "file": "mobile-games-aetherlands-390x844.png",
+      "sha256": "69d6f5eee34fc9594e874d7d868cd0b43ba021019e3a5fb938cc236a63b508be"
+    },
+    {
+      "file": "mobile-mods-390x844.png",
+      "sha256": "72a80db3ad789adb370c73005a80cac18a1e311b9956e3e81dc4a3f5c0130f7e"
+    }
+  ],
+  "visualDirection": {
+    "implementation": "TERMINÉ",
+    "assistantInspection": "TERMINÉ_SUPPORT_ONLY",
+    "ownerAcceptance": "PREUVE MANQUANTE",
+    "blocker": "owner-visual-reconciliation-current",
+    "blockerState": "BLOQUÉ"
+  },
+  "prohibitedClaims": [
+    "No final VF visual approval",
+    "No production readiness implied",
+    "No legal/commercial gate closure"
+  ]
+}
