@@ -978,3 +978,47 @@ Gates :
 - LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
 
 Les 19 blockers VF externes restent ouverts.
+
+
+---
+
+## 31. Surfaces légales publiques France/UE — readiness candidat — 2026-10-08
+
+Documents :
+- `docs/MODARYX-V2-PUBLIC-LEGAL-SURFACES-READINESS-20261008.md`
+- `docs/MODARYX-V2-PUBLIC-LEGAL-SURFACES-READINESS-20261008.json`
+
+Modules préparés sans publication finale :
+- mentions légales ;
+- CGU / règles d'utilisation ;
+- CGV / vente consommateur ;
+- rétractation / remboursement ;
+- accessibilité du commerce électronique.
+
+Références officielles revues :
+- Ministère de l'Économie / DGCCRF — mentions obligatoires, informations précontractuelles, CGV, rétractation ;
+- Commission européenne / Your Europe — Consumer Rights Directive et contrats numériques ;
+- DGCCRF / Commission européenne — European Accessibility Act.
+
+Points fail-closed :
+- aucune identité vendeur/opérateur inventée ;
+- aucun prix/offre/provider de paiement rendu canonique ;
+- aucune exception au droit de rétractation supposée ;
+- services numériques et contenus numériques distingués ;
+- aucune exemption accessibilité supposée sans faits réels et revue appropriée ;
+- aucun texte légal final publiable tant que les faits obligatoires manquent.
+
+État :
+- mentions légales : **PREUVE MANQUANTE**
+- CGU : **EN COURS**
+- CGV : **BLOQUÉ**
+- rétractation/refund : **PREUVE MANQUANTE**
+- conformité/accessibilité réglementaire : **EN COURS / PREUVE MANQUANTE**
+- revue juridique : **PREUVE MANQUANTE**
+
+Gates :
+- VF TECHNIQUE : **EN COURS**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+
+Aucune production, vente, paiement, DNS ou cutover activé.
