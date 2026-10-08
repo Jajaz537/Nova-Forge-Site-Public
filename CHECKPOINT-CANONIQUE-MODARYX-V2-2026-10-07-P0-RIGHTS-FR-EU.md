@@ -1773,3 +1773,72 @@ Le ledger reste fail-closed. Aucun PASS VF final n'est dérivé de l'inspection 
 - PRODUCTION / CUTOVER : **BLOQUÉ**
 
 Aucune mutation `main`, DNS, D1/R2 production, provider production, paiement, PWA production, field CWV, indexability ou cutover.
+
+
+---
+
+## 47. Premium reconciliation R17 — Distinct Realms intégré — 2026-10-08
+
+Retour propriétaire de référence :
+le site ne doit plus ressembler à l'ancien design / à une maquette.
+
+### Produit
+
+PR :
+- **#284**
+- merge SHA : `01c1f8f6a4e6488f3bf8662f9b2aa3264e0771fa`
+
+Candidat source :
+- `e5c495699bf9ba20b01c453a787f7d215baa4c64`
+
+Portée :
+- 2 fichiers visuels ;
+- `v2/src/premium-reconciliation-r17.css` ;
+- import R17 dans `v2/src/main.jsx` ;
+- aucun nouveau provider/backend/data/route/entitlement ;
+- aucune mutation production, DNS, paiement ou cutover.
+
+### Preuve fraîche
+
+Run :
+- `37780025969`
+- conclusion : **success**
+- artifact id : `11551199212`
+- digest : `sha256:75ec43b5964218b7af62bcef67f5587a080585c933ce3496f68012d47e923e1c`
+- build : **TERMINÉ**
+- `test:sites` : **TERMINÉ**
+- captures : **16/16**
+  - 8 desktop 1440×1024
+  - 8 mobile 390×844
+
+Preuve machine-readable :
+`docs/MODARYX-V2-PREMIUM-RECONCILIATION-R17-EVIDENCE-20261008.json`.
+
+### Inspection visuelle support
+
+Inspection assistant : **TERMINÉE en support uniquement**.
+
+R17 matérialise une rupture supplémentaire avec l'ancien rendu :
+- routes principales traitées comme des univers distincts plutôt que le même dashboard répété ;
+- Discover conserve le hero Loup/Dragon ;
+- Games / Mods / Collections / Créateurs / Communauté / Compte ont des compositions différenciées ;
+- mobile recomposé et non simple réduction desktop.
+
+Cette inspection ne remplace pas la décision du propriétaire.
+
+### Gate propriétaire
+
+- `owner-visual-reconciliation-current` : **BLOQUÉ / OPEN**
+- implémentation R17 : **TERMINÉ**
+- preuve visuelle fraîche : **TERMINÉ**
+- acceptation propriétaire : **PREUVE MANQUANTE**
+
+Aucun PASS VF final n'est dérivé de cette tranche.
+
+### Gates
+
+- VF TECHNIQUE : **EN COURS**
+- DIRECTION VISUELLE : **BLOQUÉ**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+- PRODUCTION / CUTOVER : **BLOQUÉ**
