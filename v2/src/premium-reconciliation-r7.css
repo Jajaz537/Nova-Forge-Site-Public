@@ -1,0 +1,423 @@
+/* MODARYX V2 — Premium reconciliation R7
+   Owner-feedback continuation: remove the remaining "old dashboard/mockup" feeling
+   from Community and Account while preserving routes, data, behavior and assets. */
+
+:root {
+  --r7-ink: rgba(4, 12, 21, .94);
+  --r7-panel: rgba(8, 23, 36, .78);
+  --r7-panel-deep: rgba(5, 15, 26, .92);
+  --r7-cyan: rgba(67, 218, 211, .22);
+  --r7-blue: rgba(74, 151, 255, .18);
+  --r7-violet: rgba(128, 88, 255, .22);
+  --r7-line: rgba(108, 178, 225, .10);
+  --r7-shadow: 0 46px 110px rgba(0, 0, 0, .38);
+}
+
+/* Secondary product areas read as continuous scenes instead of independent boxes. */
+.community,
+.account-center {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(28px, 5vw, 72px);
+  padding-bottom: 124px;
+}
+
+.community::before,
+.account-center::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: 86px max(18px, 2.5vw) auto;
+  height: 560px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 24%, rgba(55, 216, 207, .10), transparent 30rem),
+    radial-gradient(circle at 78% 18%, rgba(117, 82, 255, .14), transparent 34rem),
+    linear-gradient(180deg, rgba(10, 31, 48, .14), rgba(3, 10, 18, 0));
+  filter: blur(.2px);
+}
+
+.community::after,
+.account-center::after {
+  opacity: .72;
+}
+
+/* Stronger editorial entry: fewer dashboard cues at the top of secondary pages. */
+.community > h1,
+.account-center > h1 {
+  max-width: 1020px;
+  margin-top: 12px;
+  font-size: clamp(48px, 5.15vw, 78px);
+  line-height: .96;
+  letter-spacing: -.052em;
+}
+
+.community > .page-intro,
+.account-center > .page-intro {
+  max-width: 720px;
+  font-size: 17px;
+  line-height: 1.72;
+  color: rgba(219, 232, 243, .72);
+}
+
+/* Community tabs become a quiet editorial switcher, not a toolbar. */
+.community-tabs {
+  width: fit-content;
+  max-width: 100%;
+  display: flex;
+  gap: 8px;
+  margin: 32px 0 24px;
+  padding: 6px;
+  border: 1px solid rgba(104, 184, 228, .08);
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(10, 27, 42, .58), rgba(5, 16, 27, .42));
+  box-shadow:
+    0 22px 54px rgba(0, 0, 0, .20),
+    inset 0 1px rgba(255, 255, 255, .025);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.community-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.community-tabs button {
+  min-height: 42px;
+  padding-inline: 18px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(183, 204, 221, .78);
+  box-shadow: none;
+}
+
+.community-tabs button:hover,
+.community-tabs button:focus-visible {
+  color: #effbff;
+  background: rgba(71, 213, 211, .06);
+}
+
+.community-tabs button.active,
+.community-tabs button[aria-pressed="true"] {
+  color: #f4fbff;
+  background:
+    linear-gradient(135deg, rgba(71, 213, 211, .14), rgba(102, 91, 255, .16));
+  box-shadow:
+    inset 0 0 0 1px rgba(86, 205, 214, .18),
+    0 10px 26px rgba(0, 0, 0, .18);
+}
+
+/* Community board becomes one editorial scene with an embedded stream. */
+.community-board {
+  position: relative;
+  isolation: isolate;
+  border: 0;
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(119, 83, 255, .14), transparent 30rem),
+    radial-gradient(circle at 12% 92%, rgba(53, 216, 206, .065), transparent 28rem),
+    linear-gradient(145deg, rgba(9, 28, 43, .86), rgba(5, 15, 26, .92) 62%, rgba(7, 13, 28, .94));
+  box-shadow:
+    var(--r7-shadow),
+    inset 0 1px rgba(255, 255, 255, .035);
+}
+
+.community-board::before {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(70, 220, 211, .88), rgba(103, 91, 255, .55), transparent 72%);
+}
+
+@media (min-width: 961px) {
+  .community-board {
+    grid-template-columns: minmax(250px, .55fr) minmax(0, 1.45fr);
+    gap: clamp(36px, 4vw, 66px);
+    padding: 46px 50px 48px;
+  }
+
+  .community-board > h2 {
+    max-width: 9.5ch;
+    margin-top: 18px;
+    font-size: clamp(36px, 3.45vw, 56px);
+    line-height: .98;
+    letter-spacing: -.045em;
+  }
+
+  .community-board > p {
+    max-width: 31ch;
+    margin-top: 8px;
+    color: rgba(214, 228, 240, .68);
+  }
+
+  .community-list,
+  .community-teams,
+  .activity-list {
+    gap: 0;
+    border-radius: 22px;
+    overflow: hidden;
+    background: rgba(2, 10, 18, .16);
+    box-shadow:
+      inset 0 1px rgba(255,255,255,.02),
+      0 24px 64px rgba(0,0,0,.20);
+  }
+
+  .community-list article,
+  .community-teams article,
+  .activity-list article {
+    min-height: 128px;
+    padding: 26px 28px 24px 32px;
+    border: 0;
+    border-radius: 0;
+    background:
+      radial-gradient(circle at 92% 0%, rgba(108, 84, 255, .09), transparent 24rem),
+      linear-gradient(110deg, rgba(10, 30, 45, .78), rgba(7, 18, 29, .72));
+  }
+
+  .community-list article + article,
+  .community-teams article + article,
+  .activity-list article + article {
+    border-top: 1px solid rgba(99, 175, 218, .09);
+  }
+
+  .community-list article::after,
+  .community-teams article::after,
+  .activity-list article::after {
+    inset: 24px auto 24px 0;
+    opacity: .5;
+  }
+
+  .community-list article strong,
+  .community-teams article strong,
+  .activity-list article strong {
+    font-size: 18px;
+  }
+}
+
+/* Account becomes a composed private room: quiet rail + dominant content plane. */
+.account-shell {
+  position: relative;
+  align-items: start;
+}
+
+@media (min-width: 1051px) {
+  .account-shell {
+    grid-template-columns: 188px minmax(0, 1fr);
+    gap: 42px;
+  }
+
+  .account-nav {
+    position: sticky;
+    top: 92px;
+    padding: 10px 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .account-nav::after {
+    content: "";
+    position: absolute;
+    inset: 0 -18px 0 auto;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(101, 180, 225, .11) 14%, rgba(101, 180, 225, .11) 86%, transparent);
+  }
+
+  .account-nav button {
+    min-height: 46px;
+    padding-inline: 14px 10px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: rgba(162, 187, 207, .72);
+  }
+
+  .account-nav button:hover,
+  .account-nav button:focus-visible {
+    color: #eefaff;
+    background: linear-gradient(90deg, rgba(67, 218, 211, .055), transparent 86%);
+  }
+
+  .account-nav button.active,
+  .account-nav button[aria-pressed="true"] {
+    color: #f4fbff;
+    background: linear-gradient(90deg, rgba(68, 214, 210, .085), rgba(102, 90, 255, .035), transparent 92%);
+  }
+
+  .account-nav button.active::before {
+    width: 3px;
+    top: 9px;
+    bottom: 9px;
+  }
+
+  .account-panel {
+    position: relative;
+    isolation: isolate;
+    min-height: 360px;
+    padding: 48px 52px 50px;
+    border: 0;
+    border-radius: 30px;
+    background:
+      radial-gradient(circle at 92% 10%, rgba(116, 82, 255, .13), transparent 28rem),
+      radial-gradient(circle at 8% 90%, rgba(55, 216, 207, .055), transparent 24rem),
+      linear-gradient(145deg, rgba(9, 28, 43, .88), rgba(5, 15, 26, .94));
+    box-shadow:
+      0 48px 110px rgba(0, 0, 0, .38),
+      inset 0 1px rgba(255, 255, 255, .035);
+    overflow: hidden;
+  }
+
+  .account-panel::before {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(68, 218, 211, .88), rgba(112, 87, 255, .55), transparent 76%);
+  }
+
+  .account-panel h2 {
+    max-width: 820px;
+    margin-top: 10px;
+    font-size: clamp(32px, 3.1vw, 48px);
+    line-height: 1.02;
+    letter-spacing: -.04em;
+  }
+
+  .account-panel > p {
+    max-width: 760px;
+    color: rgba(216, 229, 240, .70);
+    line-height: 1.72;
+  }
+
+  .session-state {
+    margin-top: 28px;
+    padding: 18px 0;
+    border: 0;
+    border-top: 1px solid rgba(103, 178, 221, .10);
+    border-bottom: 1px solid rgba(103, 178, 221, .10);
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .account-actions {
+    margin-top: 20px;
+  }
+
+  .account-actions .primary {
+    min-height: 54px;
+    padding-inline: 24px;
+    box-shadow: 0 18px 44px rgba(86, 89, 255, .22);
+  }
+
+  .privacy-grid,
+  .channel-grid {
+    gap: 12px;
+  }
+
+  .privacy-grid article,
+  .channel-grid article {
+    border: 0;
+    border-radius: 16px;
+    background: rgba(11, 31, 47, .56);
+    box-shadow:
+      inset 0 0 0 1px rgba(104, 183, 226, .08),
+      inset 0 1px rgba(255, 255, 255, .025);
+  }
+}
+
+/* Common micro-surfaces should not reintroduce a box-inside-box visual language. */
+.community .local-draft,
+.community .moderation-note,
+.account-center .unavailable-state,
+.account-center .settings-note,
+.account-center .onboarding-card {
+  border-color: rgba(92, 181, 223, .10);
+  background:
+    linear-gradient(135deg, rgba(9, 28, 43, .60), rgba(7, 18, 29, .52));
+  box-shadow: none;
+}
+
+@media (max-width: 1050px) {
+  .community,
+  .account-center {
+    padding-inline: clamp(20px, 5vw, 34px);
+  }
+
+  .community > h1,
+  .account-center > h1 {
+    font-size: clamp(42px, 8.5vw, 64px);
+  }
+
+  .account-shell {
+    gap: 22px;
+  }
+
+  .account-nav {
+    position: static;
+  }
+}
+
+@media (max-width: 760px) {
+  .community,
+  .account-center {
+    padding-inline: 22px;
+    padding-bottom: 86px;
+  }
+
+  .community::before,
+  .account-center::before {
+    inset: 72px 0 auto;
+    height: 360px;
+  }
+
+  .community > h1,
+  .account-center > h1 {
+    margin-top: 10px;
+    font-size: clamp(40px, 12vw, 54px);
+    line-height: .98;
+  }
+
+  .community-tabs {
+    width: 100%;
+    margin: 26px 0 20px;
+    padding: 5px;
+  }
+
+  .community-tabs button {
+    flex: 0 0 auto;
+  }
+
+  .community-board {
+    padding: 28px 24px;
+    border-radius: 24px;
+  }
+
+  .community-board > h2 {
+    font-size: 32px;
+    line-height: 1.03;
+  }
+
+  .community-list article,
+  .community-teams article,
+  .activity-list article {
+    min-height: 0;
+    padding: 20px 20px 18px 24px;
+  }
+
+  .account-panel {
+    padding: 28px 24px 30px;
+    border-radius: 24px;
+  }
+
+  .account-panel h2 {
+    font-size: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .community-tabs button,
+  .account-nav button,
+  .community-list article,
+  .community-teams article,
+  .activity-list article {
+    transition: none;
+  }
+}
