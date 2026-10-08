@@ -808,3 +808,68 @@ preuve statique seulement ; scan bundle final + observation réseau/cookies runt
 
 État privacy/cookies : **EN COURS / LEGAL_REVIEW_REQUIRED**.
 Aucun CMP, analytics, PWA production, Auth0 production, météo provider ou autre service n'a été activé.
+
+
+---
+
+## 28. Registre processors/subprocessors + procédure incident/breach — 2026-10-08
+
+Documents ajoutés :
+- `docs/MODARYX-V2-PROCESSOR-SUBPROCESSOR-REGISTER-CANDIDATE-20261008.md`
+- `docs/MODARYX-V2-PROCESSOR-SUBPROCESSOR-REGISTER-CANDIDATE-20261008.json`
+- `docs/MODARYX-V2-DATA-BREACH-INCIDENT-PROCESS-CANDIDATE-20261008.md`
+- `docs/MODARYX-V2-DATA-BREACH-INCIDENT-PROCESS-CANDIDATE-20261008.json`
+
+### Sous-traitance / providers
+
+Le registre couvre sans activation :
+- Cloudflare Pages / Workers / D1 ;
+- R2 ;
+- Turnstile ;
+- Auth0 ;
+- email ;
+- Web Push ;
+- météo ;
+- paiement / Merchant of Record candidats.
+
+Aucun rôle juridique n'est supposé automatiquement. Pour chaque provider réel restent **PREUVE MANQUANTE** :
+- qualification de rôle ;
+- DPA/clauses applicables ;
+- subprocessors ;
+- localisation/transferts ;
+- rétention/suppression ;
+- sécurité contractuelle ;
+- notification incident/breach ;
+- adéquation configuration production ↔ contrat.
+
+Aucun provider n'est sélectionné ni activé par cette tranche.
+
+### Incident / violation de données
+
+Procédure candidate préparée :
+détection → containment → qualification → décision privacy/juridique → notification si requise → récupération → postmortem.
+
+Références officielles revues :
+- CNIL sous-traitance / sécurité de la sous-traitance ;
+- CNIL violations de données / notification ;
+- RGPD articles 28 et 33.
+
+La règle des 72 h, l'évaluation du risque et l'information des personnes sont enregistrées comme cadre à appliquer **lorsque les conditions juridiques sont remplies** ; l'applicabilité finale reste **PREUVE MANQUANTE** et nécessite validation appropriée.
+
+Avant lancement restent notamment **PREUVE MANQUANTE** :
+- responsable de traitement/opérateur ;
+- point de contact privacy/DPO ou équivalent ;
+- propriétaires/escalade incidents ;
+- clauses providers ;
+- procédure autorité adaptée au territoire ;
+- template utilisateur ;
+- exercice tabletop end-to-end.
+
+### Gates
+
+- VF TECHNIQUE : **EN COURS**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+
+Aucun des 19 blockers VF externes n'est fermé.
+Aucun provider, analytics, paiement, DNS, D1/R2 production, PWA production ou cutover activé.
