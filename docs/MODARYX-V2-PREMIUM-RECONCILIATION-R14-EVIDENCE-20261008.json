@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "TERMINÉ",
+  "candidate": "MODARYX_V2_PREMIUM_RECONCILIATION_R14",
+  "productMergePr": 280,
+  "productMergeSha": "13f7ddd8f3e355bb27e8b1514c59cb96cd2f2068",
+  "candidateSha": "0610697e9373fc63c4be7af5dcb12e43b39aab51",
+  "proof": {
+    "runId": 37762837798,
+    "jobId": 113263197576,
+    "conclusion": "success",
+    "artifactId": 11542314431,
+    "artifactName": "modaryx-v2-premium-reconciliation-visual-r14",
+    "digest": "sha256:bc52b05fbfe546e56a1436e938767fdad80a90ea2a432aacb66c3a6365d6c609",
+    "captureCount": 16,
+    "desktopCount": 8,
+    "mobileCount": 8,
+    "desktopViewport": "1440x1024",
+    "mobileViewport": "390x844",
+    "build": "TERMINÉ",
+    "testsSites": "TERMINÉ"
+  },
+  "fixes": [
+    "Account heading no longer produces an orphan letter/word",
+    "desktop sticky topbar is fully visible and centered using normal auto margins",
+    "Community and Account use intentional second-axis atmospheric composition",
+    "horizontal overflow is clipped at the document boundary"
+  ],
+  "gate": {
+    "id": "owner-visual-reconciliation-current",
+    "state": "OPEN",
+    "ownerAcceptance": "PREUVE MANQUANTE"
+  }
+}
