@@ -163,11 +163,15 @@ async function capture(file, width, height, expectedText) {
     const visibleText = await evaluate("document.body.innerText.slice(0,1200)");
     throw new Error("expected text missing before capture: " + expectedTextLabel(expectedText) + "\\nVISIBLE_TEXT:\\n" + visibleText);
   }
+  // CDP clip coordinates are document-relative. After scrolling to the
+  // evidenced mobile state, use the real visual viewport origin.
+  const metrics = await send("Page.getLayoutMetrics");
+  const viewport = metrics.result.visualViewport || {};
   const shot = await send("Page.captureScreenshot", {
     format: "png",
     fromSurface: true,
     captureBeyondViewport: false,
-    clip: { x: 0, y: 0, width, height, scale: 1 },
+    clip: { x: viewport.pageX || 0, y: viewport.pageY || 0, width, height, scale: 1 },
   });
   const data = Buffer.from(shot.result.data, "base64");
   const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/" + file;
