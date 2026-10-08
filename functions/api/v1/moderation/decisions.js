@@ -1,4 +1,5 @@
 import {json} from '../../../_lib/api-security.mjs';
+import {moderationDecisionNotification, recordInAppNotification} from '../../../_lib/notifications.mjs';
 import {
   authorizeModerator,
   buildModerationDecisionReceipt,
@@ -33,10 +34,12 @@ export async function onRequestPost(context) {
 
   const db = context.env.MODARYX_DB;
   const submission = await db.prepare(
-    `SELECT submission_id, actor_profile_id, kind, target_id, abuse_state,
-      moderation_state, publication_state, created_at, updated_at
-     FROM modaryx_community_submissions
-     WHERE submission_id = ?
+    `SELECT s.submission_id, s.actor_profile_id, s.kind, s.target_id, s.abuse_state,
+      s.moderation_state, s.publication_state, s.created_at, s.updated_at,
+      p.identity_sub AS actor_identity_sub
+     FROM modaryx_community_submissions s
+     LEFT JOIN modaryx_profiles p ON p.profile_id = s.actor_profile_id
+     WHERE s.submission_id = ?
      LIMIT 1`
   ).bind(validated.value.submissionId).first();
 
@@ -102,6 +105,16 @@ export async function onRequestPost(context) {
   } catch {
     return json({error:'moderation-write-failed'}, 409);
   }
+
+  const notification=moderationDecisionNotification({
+    recipientIdentitySub:submission.actor_identity_sub,
+    submissionId:submission.submission_id,
+    outcome:validated.value.outcome,
+    moderationState:transition.moderationState,
+    receiptId,
+    occurredAt:now
+  });
+  if(notification) await recordInAppNotification(context.env,notification);
 
   const updated = {
     ...submission,

@@ -1,0 +1,458 @@
+/* MODARYX V2 — Premium reconciliation R3
+   Editorial-depth pass after owner rejection of the old/mockup-like design.
+   Visual only: routes, data, behavior, entitlements and assets are unchanged. */
+
+:root {
+  --premium-r3-hairline: rgba(145, 186, 219, .11);
+  --premium-r3-cyan: rgba(79, 211, 255, .22);
+  --premium-r3-violet: rgba(139, 99, 255, .18);
+  --premium-r3-warm: rgba(239, 178, 108, .10);
+  --premium-r3-deep: rgba(3, 12, 20, .92);
+}
+
+.page-section {
+  overflow: clip;
+}
+
+.page-section > .kicker,
+.catalog-title .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.page-section > .kicker::before,
+.catalog-title .kicker::before {
+  content: "";
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(79, 211, 255, .9), rgba(139, 99, 255, .18));
+  box-shadow: 0 0 16px rgba(79, 211, 255, .18);
+}
+
+.games-index::after,
+.collections-page::after,
+.creators-page::after,
+.catalog::after,
+.community::after,
+.account-center::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 5vw;
+  right: 5vw;
+  top: 132px;
+  height: 360px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 10% 18%, rgba(79, 211, 255, .075), transparent 30rem),
+    radial-gradient(circle at 74% 9%, rgba(139, 99, 255, .07), transparent 28rem),
+    linear-gradient(90deg, rgba(255, 255, 255, .018), transparent 24%, transparent 74%, rgba(255, 255, 255, .012));
+  filter: blur(.4px);
+}
+
+.games-index > h1,
+.collections-page > h1,
+.creators-page > h1,
+.catalog-title h1,
+.community > h1,
+.account-center > h1 {
+  max-width: 900px;
+  text-wrap: balance;
+}
+
+.games-index > .page-intro,
+.collections-page > .page-intro,
+.creators-page > .page-intro,
+.community > .page-intro,
+.account-center > .page-intro {
+  max-width: 720px;
+}
+
+/* Large-screen editorial composition: the product stops reading as three equal SaaS columns. */
+@media (min-width: 1101px) {
+  .games-index .game-grid,
+  .collections-page .collection-grid,
+  .creators-page .creator-index-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: start;
+    gap: 20px;
+  }
+
+  .games-index .game-card:first-child,
+  .collections-page .collection-card:first-child,
+  .creators-page .creator-index-card:first-child {
+    grid-column: span 6;
+  }
+
+  .games-index .game-card:not(:first-child),
+  .collections-page .collection-card:not(:first-child),
+  .creators-page .creator-index-card:not(:first-child) {
+    grid-column: span 3;
+  }
+
+  .games-index .game-card:first-child > .media,
+  .collections-page .collection-card:first-child > .media,
+  .creators-page .creator-index-card:first-child > .media {
+    height: 310px;
+  }
+
+  .games-index .game-card:not(:first-child) > .media,
+  .collections-page .collection-card:not(:first-child) > .media,
+  .creators-page .creator-index-card:not(:first-child) > .media {
+    height: 198px;
+  }
+
+  .games-index .game-card:first-child h2,
+  .collections-page .collection-card:first-child h2,
+  .creators-page .creator-index-card:first-child h2 {
+    font-size: clamp(27px, 2.25vw, 36px);
+    line-height: 1.03;
+  }
+
+  .games-index .game-card:first-child p,
+  .collections-page .collection-card:first-child p,
+  .creators-page .creator-index-card:first-child p {
+    font-size: 14px;
+    line-height: 1.68;
+  }
+
+  .catalog .catalog-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+  }
+
+  .catalog .catalog-grid > .content-card:nth-child(1) {
+    grid-column: span 6;
+  }
+
+  .catalog .catalog-grid > .content-card:nth-child(2),
+  .catalog .catalog-grid > .content-card:nth-child(3) {
+    grid-column: span 3;
+  }
+
+  .catalog .catalog-grid > .content-card:nth-child(n+4) {
+    grid-column: span 4;
+  }
+
+  .catalog .catalog-grid > .content-card:nth-child(1) > .media {
+    aspect-ratio: 1.78;
+  }
+
+  .catalog .catalog-grid > .content-card:nth-child(1) .card-copy h3 {
+    font-size: 24px;
+  }
+}
+
+/* Media becomes a framed editorial scene rather than a flat thumbnail. */
+:where(
+  .game-card,
+  .collection-card,
+  .creator-index-card,
+  .catalog-grid > .content-card
+) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  align-self: start;
+}
+
+:where(
+  .game-card,
+  .collection-card,
+  .creator-index-card,
+  .catalog-grid > .content-card
+)::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .045),
+    inset 0 -74px 90px rgba(0, 0, 0, .08);
+}
+
+:where(
+  .game-card,
+  .collection-card,
+  .creator-index-card,
+  .catalog-grid > .content-card
+) > .media {
+  position: relative;
+  overflow: hidden;
+  transition: transform .35s ease, filter .35s ease;
+}
+
+:where(
+  .game-card,
+  .collection-card,
+  .creator-index-card,
+  .catalog-grid > .content-card
+) > .media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .025), transparent 38%),
+    linear-gradient(0deg, rgba(4, 13, 22, .28), transparent 54%);
+  pointer-events: none;
+}
+
+:where(
+  .game-card,
+  .collection-card,
+  .creator-index-card,
+  .catalog-grid > .content-card
+):hover > .media {
+  transform: scale(1.018);
+  filter: saturate(1.12) brightness(1.10) contrast(1.035);
+}
+
+/* Copy zones feel like one composition rather than panels bolted below images. */
+.game-card > div,
+.collection-card > div,
+.creator-index-card > div,
+.catalog-grid > .content-card .card-copy {
+  position: relative;
+  z-index: 4;
+  background:
+    radial-gradient(circle at 94% 8%, rgba(79, 211, 255, .035), transparent 12rem),
+    linear-gradient(180deg, rgba(11, 28, 41, .94), rgba(6, 19, 30, .97));
+}
+
+.collection-card dl > div {
+  border-top-color: rgba(149, 181, 209, .085);
+}
+
+.collection-capability,
+.creator-trust-note {
+  border-left: 2px solid rgba(79, 211, 255, .26);
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 0 12px 12px 0;
+  background: linear-gradient(90deg, rgba(79, 211, 255, .06), rgba(9, 25, 38, .18));
+}
+
+/* Toolbars float over the canvas instead of creating another horizontal box. */
+.catalog-tools,
+.index-tools,
+.collection-tools,
+.creators-search {
+  position: relative;
+  z-index: 2;
+}
+
+.catalog-tools::before,
+.index-tools::before,
+.collection-tools::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -10px -12px;
+  border-radius: 18px;
+  border: 1px solid rgba(136, 176, 208, .07);
+  background: linear-gradient(180deg, rgba(9, 25, 38, .36), rgba(4, 15, 24, .18));
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .10);
+}
+
+/* Community becomes an editorial conversation surface on desktop. */
+@media (min-width: 961px) {
+  .community-board:has(> .community-list),
+  .community-board:has(> .community-teams),
+  .community-board:has(> .activity-list) {
+    display: grid;
+    grid-template-columns: minmax(260px, .72fr) minmax(0, 1.28fr);
+    column-gap: 38px;
+    row-gap: 10px;
+    align-items: start;
+    padding: 34px;
+  }
+
+  .community-board:has(> .community-list) > :not(.community-list),
+  .community-board:has(> .community-teams) > :not(.community-teams),
+  .community-board:has(> .activity-list) > :not(.activity-list):not(.moderation-note) {
+    grid-column: 1;
+  }
+
+  .community-board > .community-list,
+  .community-board > .community-teams,
+  .community-board > .activity-list {
+    grid-column: 2;
+    grid-row: 1 / span 6;
+    margin-top: 0;
+  }
+
+  .community-board > .moderation-note {
+    grid-column: 1;
+  }
+
+  .community-list article,
+  .community-teams article,
+  .activity-list article {
+    position: relative;
+    overflow: hidden;
+    padding: 20px 22px;
+  }
+
+  .community-list article::before,
+  .community-teams article::before,
+  .activity-list article::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(79, 211, 255, .68), rgba(139, 99, 255, .18));
+  }
+}
+
+/* Account rail becomes quiet navigation, leaving the content as the hero of the screen. */
+@media (min-width: 1051px) {
+  .account-shell {
+    grid-template-columns: 208px minmax(0, 1fr);
+    gap: 34px;
+  }
+
+  .account-nav {
+    padding: 6px 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .account-nav button {
+    position: relative;
+    border-color: transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: #95a8bc;
+  }
+
+  .account-nav button::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    border-radius: 999px;
+    background: transparent;
+  }
+
+  .account-nav button.active {
+    color: #ecfaff;
+    border-color: transparent;
+    background: linear-gradient(90deg, rgba(79, 211, 255, .07), transparent);
+    box-shadow: none;
+  }
+
+  .account-nav button.active::before {
+    background: linear-gradient(180deg, #4fd3ff, #8b63ff);
+    box-shadow: 0 0 14px rgba(79, 211, 255, .22);
+  }
+
+  .account-panel {
+    padding: 34px 36px;
+  }
+}
+
+/* Page-specific atmospheric accents without new assets. */
+.collections-page .collection-card:first-child {
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, .30),
+    0 0 0 1px rgba(79, 211, 255, .045),
+    inset 0 1px rgba(255, 255, 255, .03);
+}
+
+.creators-page .creator-index-card:first-child {
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, .28),
+    0 0 0 1px rgba(139, 99, 255, .055),
+    inset 0 1px rgba(255, 255, 255, .03);
+}
+
+.games-index .game-card:first-child {
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, .30),
+    0 0 0 1px rgba(239, 178, 108, .045),
+    inset 0 1px rgba(255, 255, 255, .03);
+}
+
+/* Mobile is recomposed: stronger lead image, quieter controls, no desktop asymmetry forced down. */
+@media (max-width: 1100px) {
+  .games-index .game-grid,
+  .collections-page .collection-grid,
+  .creators-page .creator-index-grid,
+  .catalog .catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .games-index .game-card:first-child,
+  .collections-page .collection-card:first-child,
+  .creators-page .creator-index-card:first-child,
+  .catalog .catalog-grid > .content-card:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .games-index::after,
+  .collections-page::after,
+  .creators-page::after,
+  .catalog::after,
+  .community::after,
+  .account-center::after {
+    left: 0;
+    right: 0;
+    top: 104px;
+    height: 250px;
+  }
+
+  .games-index .game-grid,
+  .collections-page .collection-grid,
+  .creators-page .creator-index-grid,
+  .catalog .catalog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .games-index .game-card:first-child > .media,
+  .collections-page .collection-card:first-child > .media,
+  .creators-page .creator-index-card:first-child > .media {
+    height: 238px;
+  }
+
+  .catalog-tools::before,
+  .index-tools::before,
+  .collection-tools::before {
+    inset: -8px;
+    border-radius: 14px;
+  }
+
+  .collection-capability,
+  .creator-trust-note {
+    margin-inline: -2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(
+    .game-card,
+    .collection-card,
+    .creator-index-card,
+    .catalog-grid > .content-card
+  ) > .media {
+    transition: none;
+  }
+
+  :where(
+    .game-card,
+    .collection-card,
+    .creator-index-card,
+    .catalog-grid > .content-card
+  ):hover > .media {
+    transform: none;
+  }
+}

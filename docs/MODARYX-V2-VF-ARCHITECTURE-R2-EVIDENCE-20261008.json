@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "status": "TERMINÉ",
+  "date": "2026-10-08",
+  "productBranch": "design/modaryx-v2-blue-violet-product-20261005",
+  "productMergeSha": "229244deab846a7ff52409f52267538c994d21f5",
+  "sourceCandidateSha": "64058072a65d4499850dbfbc6b1940793c40e772",
+  "productPr": 289,
+  "scope": {
+    "files": [
+      "v2/src/main.jsx",
+      "v2/src/premium-vf-architecture.css"
+    ],
+    "visualOnly": true,
+    "routesChanged": false,
+    "dataChanged": false,
+    "backendChanged": false,
+    "entitlementsChanged": false,
+    "productionChanged": false,
+    "newBinaryAssets": 0
+  },
+  "proof": {
+    "workflow": ".github/workflows/modaryx-v2-vf-architecture-visual-r2.yml",
+    "proofSha": "a193dc535bd324fe7a5a59fe825122fe3fade246",
+    "runId": 37813820976,
+    "jobId": 113437184825,
+    "conclusion": "success",
+    "build": "TERMINÉ",
+    "testSites": "TERMINÉ",
+    "captures": 16,
+    "desktop": 8,
+    "mobile": 8,
+    "artifact": {
+      "id": 11565812865,
+      "name": "modaryx-v2-vf-architecture-visual-r2",
+      "digest": "sha256:b768a2d84549164e4731797c743d17f15a02927ed12a1e0ffc977d0a9c4873bb"
+    }
+  },
+  "visualReview": {
+    "assistantSupportReview": "TERMINÉ",
+    "ownerAcceptance": "PREUVE MANQUANTE",
+    "gate": "BLOQUÉ",
+    "blockerId": "owner-visual-reconciliation-current",
+    "note": "Fresh captures show a structural departure from the previous mockup-like dashboard language, but owner acceptance remains authoritative."
+  },
+  "files": [
+    {
+      "file": "desktop-account-1440x1024.png",
+      "width": 1440,
+      "height": 1024,
+      "sha256": "45494bb66d91e4eedf6dd1233ee8465a94df6797697b3718a5c05f5f17a93adf"
+    },
+    {
+      "file": "desktop-collections-1440x1024.png",
+      "width": 1440,
+      "height": 1024,
+      "sha256": "ce646e541f5ba4628688c4757e2e38b856d4a1622fc0e0adb6c3d840c956ca6a"
+    },
+    {
+      "file": "desktop-community-1440x1024.png",
+      "width": 1440,
+      "height": 1024,
+      "sha256": "aeda41f6074b9eef7ed67f40779e8d7c544ddd4ff96338a3fdfa54e055557d1a"
+    },
+    {
+      "file": "desktop-creators-1440x1024.png",
+      "width": 1440,
+      "height": 1024,
+      "sha256": "a50e08fe9287a06b7760a0ecf8532f04c391d5cb17b584d6aeab46a558f23ca5"
+    },
+    {
+      "file": "desktop-discover-1440x1024.png",
+      "width": 1440,
+      "height": 1024,
+      "sha256": "fc6c3464c3ee70006dcf999bb155a3e6cf96f6ba56eca567f72596b9fa18a61b"
+    },
+    {
+      "file": "desktop-games-1440x1024.png",
+      "width": 1440,
+      "height": 1024,
+      "sha256": "07a9bc2d4144629a0585374ec2cd3692540b7bcb560a2554aa9fca07fa09f4d3"
+    },
+    {
+      "file": "desktop-games-aetherlands-1440x1024.png",
+      "width": 1440,
+      "height": 1024,
+      "sha256": "702394563d32ca1f49a6c712a65165f956d6679348e0393649f8853ab4cc6fe9"
+    },
+    {
+      "file": "desktop-mods-1440x1024.png",
+      "width": 1440,
+      "height": 1024,
+      "sha256": "2e0b3966921a22caf5525b4c7c47c262d45a2072f0ffea133fc5e2ce67b1ae2a"
+    },
+    {
+      "file": "mobile-account-390x844.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "0952c1c96a246fad2bdf4dd582eb3b4aad97ffee1802c38c3481946f94f29253"
+    },
+    {
+      "file": "mobile-collections-390x844.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "71508ee2027cc669a0adb5d803477871f79ea67a788d95cb023a23fdda9d5ee4"
+    },
+    {
+      "file": "mobile-community-390x844.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "891e63527717ce4a39b8a19103758676faf7daeec6150a6a4f12a8d32d7073a4"
+    },
+    {
+      "file": "mobile-creators-390x844.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "60e6e8b92c3a45f28684e084a28105a801f8c624e36d6894592870080bca8f0e"
+    },
+    {
+      "file": "mobile-discover-390x844.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "6380a2e2830149922eaaa038af45b4d934f7950bd36bb29b10c8cbda5032d950"
+    },
+    {
+      "file": "mobile-games-390x844.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "c16940a2aed90cc5cf2ec45e34e4978e150cd1c55ec729f9d5d31d09d344361a"
+    },
+    {
+      "file": "mobile-games-aetherlands-390x844.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "13e7c47a93878039be63d293e99b1fa71df1f5bdd920934fa482f081770bb47b"
+    },
+    {
+      "file": "mobile-mods-390x844.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "f7256cb1f8af5412d690c118f7ddd3f4aded56d170f7909e413784f8481c5d4e"
+    }
+  ],
+  "gates": {
+    "vfTechnique": "EN COURS",
+    "directionVisuelle": "BLOQUÉ",
+    "launchReadinessCommerciale": "EN COURS",
+    "legalCompliance": "BLOQUÉ / PREUVE MANQUANTE",
+    "productionCutover": "BLOQUÉ"
+  }
+}

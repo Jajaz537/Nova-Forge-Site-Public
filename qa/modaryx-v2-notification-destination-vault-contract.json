@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "ENCRYPTED_DESTINATION_VAULT_CANDIDATE_LOCAL_PROOF",
+  "migration": "migrations/0015_modaryx_v2_notification_destinations.sql",
+  "module": "functions/_lib/notification-destinations.mjs",
+  "endpoint": "/api/v1/notifications/destinations",
+  "keyEnv": "MODARYX_NOTIFICATION_DESTINATION_KEY_B64",
+  "keyAlgorithm": "AES-256-GCM",
+  "keyVersion": 1,
+  "providerCandidates": {
+    "EMAIL": "Cloudflare Email Service",
+    "PUSH": "Web Push standard + VAPID"
+  },
+  "remoteApplication": "NOT_EXECUTED",
+  "networkDispatch": "NOT_IMPLEMENTED",
+  "productionBlockers": [
+    "providers-connectors-real",
+    "notifications-email-push-real",
+    "real-data-history"
+  ],
+  "invariants": [
+    "RAW_EMAIL_NEVER_STORED_IN_OUTBOX",
+    "RAW_PUSH_SUBSCRIPTION_NEVER_STORED_IN_OUTBOX",
+    "VAULT_DESTINATION_ENCRYPTED_AT_REST",
+    "AES_GCM_256_KEY_FROM_SECRET_ONLY",
+    "ENCRYPTION_KEY_NEVER_RETURNED",
+    "PUBLIC_API_NEVER_RETURNS_DESTINATION_CIPHERTEXT_OR_DIGEST",
+    "OUTBOX_REFERENCES_SHA256_DIGEST_ONLY",
+    "REVOKED_DESTINATION_CANNOT_RESOLVE",
+    "SAME_ORIGIN_AUTH_AND_TURNSTILE_REQUIRED_FOR_WRITES",
+    "NO_NETWORK_DISPATCH_BY_THIS_SLICE",
+    "NO_REMOTE_D1_APPLY",
+    "NO_PROVIDER_ACTIVATION",
+    "NO_DNS_CHANGE",
+    "NO_MAIN_CHANGE",
+    "NO_CUTOVER"
+  ]
+}

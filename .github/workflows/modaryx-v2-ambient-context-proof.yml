@@ -1,0 +1,72 @@
+name: MODARYX V2 Ambient Context Candidate Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-ambient-context-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-ambient-context-proof.yml'
+      - 'v2/src/App.jsx'
+      - 'v2/src/styles.css'
+      - 'v2/src/api/local-context.js'
+      - 'qa/modaryx-v2-ambient-context-contract.json'
+      - 'qa/check-v2-ambient-context.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-ambient-context-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove V2 local season/time/weather lens without provider activation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate ambient and registry contracts
+        run: |
+          set -euo pipefail
+          node qa/check-v2-ambient-context.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+      - name: Locate Chrome
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+      - name: Build exact V2 root
+        working-directory: v2
+        run: |
+          npm ci
+          npm run build
+      - name: Start V2 candidate
+        working-directory: v2
+        run: |
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4185 >/tmp/modaryx-v2-ambient.log 2>&1 &
+          echo $! >/tmp/modaryx-v2-ambient.pid
+          for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4185/ >/dev/null && exit 0; sleep 0.25; done
+          cat /tmp/modaryx-v2-ambient.log
+          exit 1
+      - name: Re-run product flows with context endpoint absent
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4185
+        run: |
+          node qa/check-v2-living-threshold-product-flows.mjs
+          echo PASS_V2_AMBIENT_CONTEXT_FAIL_SOFT
+      - name: Cleanup
+        if: always()
+        run: |
+          if test -f /tmp/modaryx-v2-ambient.pid; then kill "$(cat /tmp/modaryx-v2-ambient.pid)" 2>/dev/null || true; fi

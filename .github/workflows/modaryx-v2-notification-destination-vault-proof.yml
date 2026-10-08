@@ -1,0 +1,51 @@
+name: MODARYX V2 Notification Destination Vault Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-notification-destination-vault-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-notification-destination-vault-proof.yml'
+      - 'migrations/0015_modaryx_v2_notification_destinations.sql'
+      - 'functions/_lib/notification-destinations.mjs'
+      - 'functions/api/v1/notifications/destinations.js'
+      - 'qa/modaryx-v2-notification-destination-vault-contract.json'
+      - 'qa/check-v2-notification-destination-vault.mjs'
+      - 'qa/modaryx-v2-d1-migration-execution-manifest.json'
+      - 'qa/check-v2-d1-migration-execution-manifest.mjs'
+      - 'functions/_lib/production-readiness.mjs'
+      - 'qa/modaryx-v2-production-readiness-contract.json'
+      - 'qa/check-v2-production-readiness.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+      - 'docs/MODARYX-V2-NOTIFICATION-DESTINATION-VAULT-20261006.md'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-notification-destination-vault-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove encrypted notification destination vault locally
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate encrypted destination vault
+        run: |
+          set -euo pipefail
+          node --experimental-sqlite qa/check-v2-notification-destination-vault.mjs
+          node --experimental-sqlite qa/check-v2-d1-migration-execution-manifest.mjs
+          node --experimental-sqlite qa/check-v2-production-readiness.mjs
+          echo PASS_V2_NOTIFICATION_DESTINATION_VAULT_PROOF
+          echo PASS_V2_NOTIFICATION_DESTINATION_VAULT_INTEGRATION

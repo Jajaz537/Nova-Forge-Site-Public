@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "IMPLEMENTED_CANDIDATE_PROOF_REQUIRED",
+  "client": "v2/src/api/modaryx-api.js",
+  "accountSurface": "v2/src/App.jsx#AccountCenter",
+  "backendRoutes": [
+    "/api/v1/status",
+    "/api/v1/auth/session",
+    "/api/v1/auth/login",
+    "/api/v1/auth/logout"
+  ],
+  "stateModel": [
+    "LOADING",
+    "BACKEND_UNAVAILABLE",
+    "GUEST",
+    "AUTHENTICATED"
+  ],
+  "backendEvidence": {
+    "devAuth0": "REAL_DEV_CONFIGURATION_PREVIOUSLY_PROVEN",
+    "devFounderSession": "REAL_DEV_SESSION_PREVIOUSLY_PROVEN",
+    "passkeyProviderConfig": "REAL_DEV_PROVIDER_CONFIG_PROVEN",
+    "passkeyCeremony": "OPEN_REAL_DEVICE",
+    "productionBackend": "OPEN"
+  },
+  "invariants": [
+    "SAME_ORIGIN_ONLY",
+    "NO_BROWSER_BEARER_TOKEN",
+    "NO_LOCALSTORAGE_SESSION_TOKEN",
+    "NO_FAKE_AUTHENTICATED_STATE",
+    "BACKEND_FAILURE_FAILS_TO_GUEST_OR_UNAVAILABLE",
+    "LOGIN_RETURN_TO_V2_ACCOUNT",
+    "PRODUCTION_BACKEND_BLOCKER_REMAINS_OPEN",
+    "PASSKEY_REAL_DEVICE_BLOCKER_REMAINS_OPEN"
+  ]
+}

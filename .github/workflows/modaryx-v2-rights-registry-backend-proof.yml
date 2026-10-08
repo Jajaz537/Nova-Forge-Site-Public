@@ -1,0 +1,46 @@
+name: MODARYX V2 Rights Registry Backend Candidate Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-rights-registry-backend-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-rights-registry-backend-proof.yml'
+      - 'migrations/0008_modaryx_v2_game_rights_registry.sql'
+      - 'functions/_lib/rights-admin.mjs'
+      - 'functions/_lib/rights-registry.mjs'
+      - 'functions/api/v1/rights/**'
+      - 'qa/modaryx-v2-rights-registry-backend-contract.json'
+      - 'qa/check-v2-rights-registry-backend.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-rights-registry-backend-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove fail-closed rights registry backend without publisher contact
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate rights registry candidate
+        run: |
+          set -euo pipefail
+          node --experimental-sqlite qa/check-v2-rights-registry-backend.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+          echo PASS_V2_RIGHTS_REGISTRY_BACKEND_PROOF
+      - name: Mirror Cloudflare root build
+        run: npm run build

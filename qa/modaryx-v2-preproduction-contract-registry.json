@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-05",
+  "date": "2026-10-06",
   "status": "PRE_PRODUCTION_CONTRACT_REGISTRY",
   "contracts": [
     {
@@ -314,6 +314,228 @@
       "contract": "qa/modaryx-v2-external-validation-evidence-contract.json",
       "checker": "qa/check-v2-external-validation-evidence-contract.mjs",
       "source": "docs/MODARYX-V2-EXTERNAL-VALIDATION-EVIDENCE-CONTRACT-20261004.md"
+    },
+    {
+      "id": "preview-root",
+      "contract": "qa/modaryx-v2-preview-root-contract.json",
+      "checker": "qa/check-v2-preview-root-contract.mjs",
+      "source": "docs/MODARYX-V2-PREVIEW-ROOT-DECISION-20261006.md"
+    },
+    {
+      "id": "production-candidate-root",
+      "contract": "qa/modaryx-v2-production-candidate-root.json",
+      "checker": "qa/check-v2-production-candidate-root.mjs",
+      "source": "docs/MODARYX-V2-PRODUCTION-CANDIDATE-ROOT-20261006.md"
+    },
+    {
+      "id": "pwa-candidate-gate",
+      "contract": "qa/modaryx-v2-pwa-candidate-contract.json",
+      "checker": "qa/check-v2-pwa-candidate-contract.mjs",
+      "source": "docs/MODARYX-V2-PWA-CANDIDATE-GATE-20261006.md"
+    },
+    {
+      "id": "performance-candidate",
+      "contract": "qa/modaryx-v2-performance-candidate-contract.json",
+      "checker": "qa/check-v2-performance-candidate-contract.mjs",
+      "source": "docs/MODARYX-V2-PERFORMANCE-CANDIDATE-PROOF-20261006.md"
+    },
+    {
+      "id": "backend-client-candidate",
+      "contract": "qa/modaryx-v2-backend-client-contract.json",
+      "checker": "qa/check-v2-backend-client.mjs",
+      "source": "docs/MODARYX-V2-BACKEND-CLIENT-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "ambient-context-candidate",
+      "contract": "qa/modaryx-v2-ambient-context-contract.json",
+      "checker": "qa/check-v2-ambient-context.mjs",
+      "source": "docs/MODARYX-V2-AMBIENT-CONTEXT-20261006.md"
+    },
+    {
+      "id": "schema-materialization",
+      "contract": "qa/modaryx-v2-schema-plan-contract.json",
+      "checker": "qa/check-v2-schema-materialization.mjs",
+      "source": "docs/MODARYX-V2-SCHEMA-MATERIALIZATION-20261006.md"
+    },
+    {
+      "id": "d1-v2-core-model",
+      "contract": "qa/modaryx-v2-d1-core-contract.json",
+      "checker": "qa/check-v2-d1-core-migration.mjs",
+      "source": "docs/MODARYX-V2-D1-CORE-MIGRATION-20261006.md"
+    },
+    {
+      "id": "notifications-inapp-candidate",
+      "contract": "qa/modaryx-v2-notifications-preferences-contract.json",
+      "checker": "qa/check-v2-notifications-inapp-candidate.mjs",
+      "source": "docs/MODARYX-V2-NOTIFICATIONS-INAPP-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "provider-registry-candidate",
+      "contract": "qa/modaryx-v2-provider-registry-contract.json",
+      "checker": "qa/check-v2-provider-registry.mjs",
+      "source": "docs/MODARYX-V2-PROVIDER-REGISTRY-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "moderation-notification-producers",
+      "contract": "qa/modaryx-v2-notifications-preferences-contract.json",
+      "checker": "qa/check-v2-moderation-notification-producers.mjs",
+      "source": "docs/MODARYX-V2-MODERATION-NOTIFICATION-PRODUCERS-20261006.md"
+    },
+    {
+      "id": "data-history-candidate",
+      "contract": "qa/modaryx-v2-data-history-contract.json",
+      "checker": "qa/check-v2-data-history.mjs",
+      "source": "docs/MODARYX-V2-DATA-HISTORY-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "notification-delivery-guard",
+      "contract": "qa/modaryx-v2-notification-delivery-contract.json",
+      "checker": "qa/check-v2-notification-delivery.mjs",
+      "source": "docs/MODARYX-V2-NOTIFICATION-DELIVERY-GUARD-20261006.md"
+    },
+    {
+      "id": "artifact-storage-r2-adapter",
+      "contract": "qa/modaryx-v2-artifact-storage-r2-contract.json",
+      "checker": "qa/check-v2-artifact-storage-r2.mjs",
+      "source": "docs/MODARYX-V2-ARTIFACT-STORAGE-R2-ADAPTER-20261006.md"
+    },
+    {
+      "id": "production-rehearsal",
+      "contract": "qa/modaryx-v2-production-rehearsal-contract.json",
+      "checker": "qa/check-v2-production-rehearsal-contract.mjs",
+      "source": "docs/MODARYX-V2-PRODUCTION-REHEARSAL-20261006.md"
+    },
+    {
+      "id": "rights-registry-backend-candidate",
+      "contract": "qa/modaryx-v2-rights-registry-backend-contract.json",
+      "checker": "qa/check-v2-rights-registry-backend.mjs",
+      "source": "docs/MODARYX-V2-RIGHTS-REGISTRY-BACKEND-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "game-support-backend-candidate",
+      "contract": "qa/modaryx-v2-game-support-request-contract.json",
+      "checker": "qa/check-v2-game-support-backend.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-BACKEND-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "game-support-ui-candidate",
+      "contract": "qa/modaryx-v2-game-support-ui-contract.json",
+      "checker": "qa/check-v2-game-support-ui-candidate.mjs",
+      "source": "docs/MODARYX-V2-GAME-SUPPORT-UI-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "rights-evidence-preflight",
+      "contract": "qa/modaryx-v2-rights-evidence-preflight-contract.json",
+      "checker": "qa/check-v2-rights-evidence-preflight.mjs",
+      "source": "docs/MODARYX-V2-RIGHTS-EVIDENCE-PREFLIGHT-20261006.md"
+    },
+    {
+      "id": "publisher-outbound-preparation-candidate",
+      "contract": "qa/modaryx-v2-publisher-outbound-contract.json",
+      "checker": "qa/check-v2-publisher-outbound-preparation.mjs",
+      "source": "docs/MODARYX-V2-PUBLISHER-OUTBOUND-PREPARATION-20261006.md"
+    },
+    {
+      "id": "publisher-inbound-quarantine-candidate",
+      "contract": "qa/modaryx-v2-publisher-inbound-contract.json",
+      "checker": "qa/check-v2-publisher-inbound-quarantine.mjs",
+      "source": "docs/MODARYX-V2-PUBLISHER-INBOUND-QUARANTINE-20261006.md"
+    },
+    {
+      "id": "authorizing-rights-decision-candidate",
+      "contract": "qa/modaryx-v2-rights-evidence-preflight-contract.json",
+      "checker": "qa/check-v2-authorizing-decision.mjs",
+      "source": "docs/MODARYX-V2-AUTHORIZING-RIGHTS-DECISION-20261006.md"
+    },
+    {
+      "id": "site-vf-official-scope",
+      "contract": "qa/modaryx-v2-vf-readiness-gate.json",
+      "checker": "qa/check-v2-vf-readiness-gate.mjs",
+      "source": "docs/MODARYX-V2-SITE-VF-SCOPE-CLASSIFICATION-20261006.md"
+    },
+    {
+      "id": "production-evidence-read-only-probe",
+      "contract": "qa/modaryx-v2-production-evidence-probe-contract.json",
+      "checker": "qa/check-v2-production-evidence-probe-contract.mjs",
+      "source": "docs/MODARYX-V2-PRODUCTION-EVIDENCE-READ-ONLY-PROBE-20261006.md"
+    },
+    {
+      "id": "external-validation-execution-pack",
+      "contract": "qa/modaryx-v2-external-validation-execution-pack.json",
+      "checker": "qa/check-v2-external-validation-execution-pack.mjs",
+      "source": "docs/MODARYX-V2-EXTERNAL-VALIDATION-EXECUTION-PACK-20261006.md"
+    },
+    {
+      "id": "current-preview-read-only-evidence",
+      "contract": "qa/modaryx-v2-production-evidence-probe-contract.json",
+      "checker": "qa/check-v2-production-evidence-probe-contract.mjs",
+      "source": "docs/MODARYX-V2-CURRENT-PREVIEW-READ-ONLY-EVIDENCE-20261006.md"
+    },
+    {
+      "id": "cwv-rum-candidate",
+      "contract": "qa/modaryx-v2-cwv-rum-contract.json",
+      "checker": "qa/check-v2-cwv-rum.mjs",
+      "source": "docs/MODARYX-V2-CWV-RUM-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "production-readiness-candidate",
+      "contract": "qa/modaryx-v2-production-readiness-contract.json",
+      "checker": "qa/check-v2-production-readiness.mjs",
+      "source": "docs/MODARYX-V2-PRODUCTION-READINESS-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "cwv-p75-report-candidate",
+      "contract": "qa/modaryx-v2-cwv-p75-report-contract.json",
+      "checker": "qa/check-v2-cwv-p75-report.mjs",
+      "source": "docs/MODARYX-V2-CWV-P75-REPORT-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "cwv-retention-candidate",
+      "contract": "qa/modaryx-v2-cwv-retention-contract.json",
+      "checker": "qa/check-v2-cwv-retention.mjs",
+      "source": "docs/MODARYX-V2-CWV-RETENTION-CANDIDATE-20261006.md"
+    },
+    {
+      "id": "d1-migration-execution-manifest",
+      "contract": "qa/modaryx-v2-d1-migration-execution-manifest.json",
+      "checker": "qa/check-v2-d1-migration-execution-manifest.mjs",
+      "source": "docs/MODARYX-V2-D1-MIGRATION-EXECUTION-MANIFEST-20261006.md"
+    },
+    {
+      "id": "production-activation-manifest",
+      "contract": "qa/modaryx-v2-production-activation-manifest.json",
+      "checker": "qa/check-v2-production-activation-manifest.mjs",
+      "source": "docs/MODARYX-V2-PRODUCTION-ACTIVATION-MANIFEST-20261006.md"
+    },
+    {
+      "id": "vf-closure-ledger",
+      "contract": "qa/modaryx-v2-vf-closure-ledger.json",
+      "checker": "qa/check-v2-vf-closure-ledger.mjs",
+      "source": "docs/MODARYX-V2-VF-CLOSURE-LEDGER-20261006.md"
+    },
+    {
+      "id": "work-handoff",
+      "contract": "qa/modaryx-v2-work-handoff.json",
+      "checker": "qa/check-v2-work-handoff.mjs",
+      "source": "docs/MODARYX-V2-WORK-HANDOFF-20261006.md"
+    },
+    {
+      "id": "rights-official-source-artifacts",
+      "contract": "qa/modaryx-v2-rights-official-contact-sources.json",
+      "checker": "qa/check-v2-rights-official-contact-sources.mjs",
+      "source": "docs/MODARYX-V2-RIGHTS-OFFICIAL-CONTACT-SOURCES-20261006.md"
+    },
+    {
+      "id": "rights-public-policy-preflight",
+      "contract": "qa/modaryx-v2-rights-public-policy-preflight.json",
+      "checker": "qa/check-v2-rights-public-policy-preflight.mjs",
+      "source": "docs/MODARYX-V2-RIGHTS-PUBLIC-POLICY-PREFLIGHT-20261006.md"
+    },
+    {
+      "id": "notification-destination-vault-candidate",
+      "contract": "qa/modaryx-v2-notification-destination-vault-contract.json",
+      "checker": "qa/check-v2-notification-destination-vault.mjs",
+      "source": "docs/MODARYX-V2-NOTIFICATION-DESTINATION-VAULT-20261006.md"
     }
   ],
   "invariants": [
@@ -336,6 +558,10 @@
     {
       "path": "qa/modaryx-v2-preproduction-contract-registry.json",
       "reason": "registry self-file"
+    },
+    {
+      "path": "qa/modaryx-v2-browser-migration-proof.json",
+      "reason": "browser migration proof/evidence ledger exercised by dedicated browser micro-proof, not a static preproduction contract"
     }
   ]
 }

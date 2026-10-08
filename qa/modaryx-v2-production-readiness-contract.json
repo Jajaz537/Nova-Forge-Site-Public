@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "PRE_CUTOVER_READ_ONLY_CANDIDATE",
+  "endpoint": "/api/v1/production/readiness",
+  "requiredCurrentV2TableCount": 32,
+  "productionPass": false,
+  "closesNoBlockerByItself": true,
+  "invariants": [
+    "GET_ONLY_PUBLIC_READINESS",
+    "NO_SECRET_VALUES_RETURNED",
+    "NO_REMOTE_MUTATION",
+    "NO_SCHEMA_MIGRATION",
+    "D1_SCHEMA_CHECK_IS_READ_ONLY",
+    "PRODUCTION_PASS_ALWAYS_FALSE",
+    "AUTH_CONFIG_NEVER_EQUALS_PASSKEY_PROOF",
+    "CWV_COLLECTOR_READY_NEVER_EQUALS_FIELD_P75_PROOF",
+    "PWA_REQUIRES_PRODUCTION_BUILD_ORIGIN_PROOF",
+    "CUTOVER_REQUIRES_EXPLICIT_RELEASE_ACTION",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER"
+  ]
+}

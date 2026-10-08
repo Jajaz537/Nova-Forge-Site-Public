@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-04",
-  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "date": "2026-10-06",
+  "status": "QUARANTINE_ADAPTER_CANDIDATE_FAKE_BINDING_PROVEN",
   "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md",
   "inboundStates": [
     "INBOUND_RECEIVED",
@@ -77,14 +77,25 @@
     "UNKNOWN_SENDER_NEVER_BECOMES_VERIFIED_BY_GUESS",
     "WEB_AND_FORGE_RIGHTS_REMAIN_SEPARATE",
     "AMBIGUOUS_OR_UNTRUSTED_INBOUND_REQUIRES_REVIEW",
-    "RESPONSE_INTERPRETATION_CONTRACT_REMAINS_SEPARATE"
+    "RESPONSE_INTERPRETATION_CONTRACT_REMAINS_SEPARATE",
+    "RAW_MESSAGE_ARCHIVE_REQUIRES_DEDICATED_BINDING",
+    "ARCHIVE_CONTENT_IS_OPAQUE_NEVER_EXECUTED",
+    "NO_MAILBOX_OR_WEBHOOK_BY_THIS_CHANGE",
+    "NO_REAL_ATTACHMENT_SCAN_CLAIM",
+    "REMOTE_D1_NOT_APPLIED",
+    "PUBLISHER_INBOUND_PRODUCTION_BLOCKER_REMAINS_OPEN"
   ],
   "productionStatus": {
     "inboundMailbox": "NOT_IMPLEMENTED",
     "webhookReceiver": "NOT_IMPLEMENTED",
+    "archiveQuarantineAdapter": "CANDIDATE_FAKE_BINDING_PROVEN",
+    "metadataLedger": "CANDIDATE_LOCAL_PROOF",
     "correlationEngine": "NOT_IMPLEMENTED",
     "provenanceVerifier": "NOT_IMPLEMENTED",
     "attachmentScanner": "NOT_IMPLEMENTED",
     "responseRouter": "NOT_IMPLEMENTED"
-  }
+  },
+  "migration": "migrations/0012_modaryx_v2_publisher_inbound_quarantine.sql",
+  "endpoint": "GET /api/v1/rights/inbound/readiness",
+  "remoteApplication": "NOT_EXECUTED"
 }

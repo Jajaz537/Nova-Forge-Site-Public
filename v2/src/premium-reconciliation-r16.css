@@ -1,0 +1,406 @@
+/* MODARYX V2 — Premium reconciliation R16 / Living Atlas
+   Distinct route atmospheres + stronger mobile recomposition.
+   Visual-only: architecture, routes, data, backend, entitlements and production remain unchanged. */
+
+:root{
+  --r16-cyan:#6ef0ef;
+  --r16-violet:#937bff;
+  --r16-gold:#f1c77e;
+  --r16-night:#02070d;
+  --r16-line:rgba(170,228,240,.10);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Route atmospheres — stop reusing the same hero everywhere.                 */
+/* -------------------------------------------------------------------------- */
+
+.games-index,
+.catalog{
+  position:relative;
+  isolation:isolate;
+}
+
+.games-index::after,
+.catalog::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  left:50%;
+  top:0;
+  width:100vw;
+  height:620px;
+  transform:translateX(-50%);
+  pointer-events:none;
+  opacity:.76;
+  filter:saturate(.92) contrast(1.05);
+  mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.9) 55%,transparent 100%);
+}
+
+.games-index::after{
+  background:
+    linear-gradient(180deg,rgba(2,7,13,.20),rgba(2,7,13,.64) 66%,#02070d),
+    linear-gradient(90deg,rgba(2,7,13,.86),rgba(2,7,13,.20) 66%,rgba(2,7,13,.76)),
+    url('/assets/living-threshold-content-sheet.png') 100% 0%/300% 200% no-repeat;
+}
+
+.catalog::before{
+  background:
+    linear-gradient(180deg,rgba(2,7,13,.16),rgba(2,7,13,.66) 64%,#02070d),
+    linear-gradient(90deg,rgba(2,7,13,.90),rgba(2,7,13,.26) 58%,rgba(2,7,13,.72)),
+    url('/assets/living-threshold-content-sheet.png') 50% 100%/300% 200% no-repeat;
+}
+
+.games-index>h1,
+.catalog-title>h1{
+  text-shadow:0 18px 60px rgba(0,0,0,.42);
+}
+
+.games-index>.page-intro,
+.catalog-title>p{
+  color:rgba(239,247,250,.82);
+}
+
+.page-section.collections-page{
+  background:
+    linear-gradient(180deg,rgba(2,7,13,.14),rgba(2,7,13,.58) 430px,#02070d 760px),
+    linear-gradient(90deg,rgba(2,7,13,.88),rgba(2,7,13,.24) 58%,rgba(2,7,13,.72)),
+    url('/assets/living-threshold-content-sheet.png') 0% 100%/300% 200% no-repeat!important;
+}
+
+.page-section.creators-page{
+  background:
+    linear-gradient(180deg,rgba(2,7,13,.12),rgba(2,7,13,.56) 430px,#02070d 760px),
+    linear-gradient(90deg,rgba(2,7,13,.90),rgba(2,7,13,.24) 60%,rgba(2,7,13,.70)),
+    url('/assets/living-threshold-content-sheet.png') 50% 0%/300% 200% no-repeat!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Games — stronger horizon and editorial callout.                            */
+/* -------------------------------------------------------------------------- */
+
+.games-index{
+  padding-top:158px!important;
+}
+
+.games-index .game-support-request{
+  margin-top:34px;
+  border:0!important;
+  border-left:1px solid rgba(110,240,239,.24)!important;
+  border-radius:0!important;
+  background:rgba(2,9,15,.30)!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(8px);
+}
+
+.games-index .index-tools{
+  margin-top:40px;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.games-index .game-card:first-child::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 78% 18%,rgba(110,240,239,.12),transparent 18rem),
+    linear-gradient(180deg,transparent 48%,rgba(2,8,14,.34));
+}
+
+/* -------------------------------------------------------------------------- */
+/* Mods catalogue — atlas/index, not a storefront grid.                        */
+/* -------------------------------------------------------------------------- */
+
+.catalog{
+  padding-top:158px!important;
+}
+
+.catalog .catalog-title{
+  padding-top:8px;
+}
+
+.catalog .catalog-title::after{
+  content:"";
+  display:block;
+  width:76px;
+  height:1px;
+  margin-top:28px;
+  background:linear-gradient(90deg,var(--r16-cyan),transparent);
+}
+
+.catalog .catalog-summary{
+  padding-bottom:16px;
+  border-bottom:1px solid rgba(170,228,240,.08);
+}
+
+.catalog .content-card:nth-child(2n)>.media{
+  filter:saturate(.82) hue-rotate(8deg) contrast(1.05);
+}
+
+.catalog .content-card:nth-child(3n)>.media{
+  filter:saturate(.94) hue-rotate(-8deg) contrast(1.04);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Collections — archive shelves, quieter secondary records.                  */
+/* -------------------------------------------------------------------------- */
+
+.collections-page .collection-grid{
+  align-items:stretch;
+}
+
+.collections-page .collection-card:not(:first-child){
+  min-height:310px!important;
+  border-radius:22px!important;
+  box-shadow:0 24px 72px rgba(0,0,0,.22)!important;
+}
+
+.collections-page .collection-card:not(:first-child)>div{
+  padding:104px 24px 24px!important;
+}
+
+.collections-page .collection-card:not(:first-child) dl{
+  display:none;
+}
+
+.collections-page .collection-card:not(:first-child) .collection-capability{
+  background:transparent!important;
+  border:0!important;
+  padding:0!important;
+}
+
+.collections-page .collection-card:not(:first-child) .quiet{
+  min-height:40px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Creators — portfolio wall with different visual rhythm per creator.         */
+/* -------------------------------------------------------------------------- */
+
+.creator-index-card:nth-child(2){
+  transform:translateY(34px);
+}
+
+.creator-index-card:nth-child(3){
+  transform:translateY(6px);
+}
+
+.creator-index-card:nth-child(2)>.media{
+  filter:saturate(.82) hue-rotate(10deg) contrast(1.04);
+}
+
+.creator-index-card:nth-child(3)>.media{
+  filter:saturate(.9) hue-rotate(-10deg) contrast(1.05);
+}
+
+.creator-index-card:not(:first-child) h2{
+  font-size:clamp(30px,2.5vw,42px);
+  line-height:.96;
+}
+
+.creator-index-card:not(:first-child) ul{
+  display:none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Community — ambient forum, no fantasy-cover repetition.                    */
+/* -------------------------------------------------------------------------- */
+
+.page-section.community{
+  background:
+    radial-gradient(circle at 78% 18%,rgba(147,123,255,.18),transparent 26rem),
+    radial-gradient(circle at 18% 78%,rgba(110,240,239,.08),transparent 28rem),
+    linear-gradient(180deg,#02070d,#06111b 48%,#02070d)!important;
+}
+
+.community-board{
+  overflow:hidden;
+}
+
+.community-board::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(115deg,transparent 0 62%,rgba(110,240,239,.035) 62% 62.5%,transparent 62.5%),
+    linear-gradient(155deg,transparent 0 72%,rgba(147,123,255,.045) 72% 72.4%,transparent 72.4%);
+}
+
+.community-board>*{
+  position:relative;
+  z-index:1;
+}
+
+.community-tabs button::before{
+  content:"";
+  display:inline-block;
+  width:6px;
+  height:6px;
+  margin-right:10px;
+  border-radius:50%;
+  background:rgba(170,228,240,.24);
+  vertical-align:middle;
+}
+
+.community-tabs button.active::before{
+  background:var(--r16-cyan);
+  box-shadow:0 0 18px rgba(110,240,239,.34);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Account — private atelier, softer secondary UI.                            */
+/* -------------------------------------------------------------------------- */
+
+.account-center{
+  background:
+    radial-gradient(circle at 82% 10%,rgba(147,123,255,.12),transparent 28rem),
+    radial-gradient(circle at 10% 34%,rgba(110,240,239,.055),transparent 26rem),
+    linear-gradient(180deg,#02070d,#05101a 52%,#02070d)!important;
+}
+
+.account-panel .settings-list,
+.account-panel .notification-demo-list,
+.account-panel .data-list{
+  max-width:900px;
+}
+
+.account-panel .settings-list button,
+.account-panel .notification-demo-list article,
+.account-panel .data-list article{
+  border-radius:0!important;
+  border-width:0 0 1px!important;
+  border-color:rgba(170,228,240,.08)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Detail rhythm — subtle separators replace repeated floating rectangles.     */
+/* -------------------------------------------------------------------------- */
+
+.hub-collection-grid article,
+.hub-creator-grid article{
+  border:0!important;
+  border-bottom:1px solid rgba(170,228,240,.08)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.hub-collection-grid,
+.hub-creator-grid{
+  border-top:1px solid rgba(170,228,240,.08);
+}
+
+.hub-collection-grid article:last-child,
+.hub-creator-grid article:last-child{
+  border-bottom:0!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Mobile — page-specific scenic headers and stronger separation.             */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width:900px){
+  .games-index,
+  .catalog{
+    padding-top:126px!important;
+  }
+
+  .games-index::after,
+  .catalog::before{
+    height:500px;
+    opacity:.82;
+    mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.86) 54%,transparent 100%);
+  }
+
+  .games-index::after{
+    background:
+      linear-gradient(180deg,rgba(2,7,13,.18),rgba(2,7,13,.62) 60%,#02070d),
+      url('/assets/living-threshold-content-sheet.png') 100% 0%/auto 500px no-repeat;
+  }
+
+  .catalog::before{
+    background:
+      linear-gradient(180deg,rgba(2,7,13,.18),rgba(2,7,13,.66) 60%,#02070d),
+      url('/assets/living-threshold-content-sheet.png') 50% 100%/auto 500px no-repeat;
+  }
+
+  .page-section.collections-page{
+    background:
+      linear-gradient(180deg,rgba(2,7,13,.16),rgba(2,7,13,.60) 360px,#02070d 560px),
+      url('/assets/living-threshold-content-sheet.png') 0% 100%/auto 520px no-repeat!important;
+  }
+
+  .page-section.creators-page{
+    background:
+      linear-gradient(180deg,rgba(2,7,13,.14),rgba(2,7,13,.58) 360px,#02070d 560px),
+      url('/assets/living-threshold-content-sheet.png') 50% 0%/auto 520px no-repeat!important;
+  }
+
+  .games-index .game-support-request{
+    margin-top:24px;
+    padding-left:18px;
+  }
+
+  .catalog .catalog-title::after{
+    margin-top:22px;
+  }
+
+  .creator-index-card:nth-child(2),
+  .creator-index-card:nth-child(3){
+    transform:none;
+  }
+
+  .collections-page .collection-card:not(:first-child),
+  .creator-index-card:not(:first-child){
+    min-height:380px!important;
+  }
+
+  .collections-page .collection-card:not(:first-child)>div,
+  .creator-index-card:not(:first-child)>div{
+    padding:142px 22px 24px!important;
+  }
+
+  .community-board::before{
+    opacity:.6;
+  }
+
+  .community-tabs button::before{
+    display:none;
+  }
+
+  .account-panel .settings-list button,
+  .account-panel .notification-demo-list article,
+  .account-panel .data-list article{
+    padding-inline:0!important;
+  }
+}
+
+@media (max-width:560px){
+  .games-index::after,
+  .catalog::before{
+    height:460px;
+  }
+
+  .page-section.collections-page,
+  .page-section.creators-page{
+    padding-top:126px!important;
+  }
+
+  .collections-page .collection-card:not(:first-child),
+  .creator-index-card:not(:first-child){
+    min-height:360px!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .creator-index-card:nth-child(2),
+  .creator-index-card:nth-child(3){
+    transform:none!important;
+  }
+}

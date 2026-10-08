@@ -1,0 +1,244 @@
+/* MODARYX V2 — Premium HD readability/depth polish — 2026-10-06
+   Purpose: preserve the approved midnight blue + restrained violet direction
+   while separating surfaces, improving secondary-text readability and keeping
+   cyan reserved for primary/active states. This is intentionally a reversible
+   final-layer override; it does not alter layout, product flows or runtime logic. */
+
+:root {
+  --surface-readable: #111b2a;
+  --surface-readable-deep: #0d1624;
+  --surface-readable-raised: #152235;
+  --line-readable: rgba(101, 122, 158, .48);
+  --line-readable-soft: rgba(101, 122, 158, .30);
+  --muted-readable: #adbacd;
+}
+
+/* Keep the canvas dark, but remove the near-black flattening between sections. */
+body {
+  background:
+    radial-gradient(circle at 18% -10%, rgba(89, 94, 255, .115), transparent 34rem),
+    radial-gradient(circle at 86% 10%, rgba(139, 99, 255, .095), transparent 30rem),
+    linear-gradient(180deg, #0a101d 0%, #080d17 58%, #090f1a 100%);
+}
+
+.app-shell {
+  background:
+    radial-gradient(circle at 84% 4%, rgba(59, 124, 255, .095), transparent 27rem),
+    radial-gradient(circle at 20% 18%, rgba(139, 99, 255, .07), transparent 31rem),
+    transparent;
+}
+
+/* Shared raised product surfaces: a small luminance lift, not a palette change. */
+.content-card,
+.game-card,
+.search-groups > section,
+.detail-section,
+.help-docs-grid article,
+.moderation-detail,
+.collection-card,
+.creator-index-card,
+.account-panel,
+.community-board,
+.rights-dashboard,
+.modpack-header,
+.profile-components,
+.profile-decision {
+  background: linear-gradient(180deg, rgba(20, 32, 49, .98), rgba(13, 22, 36, .98));
+  border-color: var(--line-readable-soft);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .028),
+    0 12px 32px rgba(0, 0, 0, .12);
+}
+
+.content-card:hover,
+.game-card:hover,
+.collection-card:hover,
+.creator-index-card:hover {
+  border-color: rgba(112, 132, 177, .58);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, .22),
+    inset 0 1px rgba(255, 255, 255, .035),
+    0 0 0 1px rgba(139, 99, 255, .055);
+}
+
+/* Secondary copy was the darkest part of the current render. */
+.page-intro,
+.section-heading p,
+.card-copy p,
+.profiles-rail > p,
+.detail-section p,
+.help-docs-grid p,
+.collection-card p,
+.creator-index-card p,
+.game-support,
+.atmosphere-note {
+  color: var(--muted-readable);
+}
+
+/* Inputs stay product-dark while being visually distinct from the canvas. */
+.hero-search,
+.catalog-search,
+.global-search-field,
+.game-hub-page .hub-filterbar select {
+  background: rgba(15, 26, 43, .96);
+  border-color: rgba(92, 116, 154, .56);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .025);
+}
+
+/* Preserve the atmospheric banner but open its mid-tones slightly. */
+.game-atmosphere.atmosphere-aetherlands {
+  background-image:
+    linear-gradient(105deg, rgba(5, 12, 25, .88) 0%, rgba(8, 18, 36, .62) 36%, rgba(31, 32, 72, .19) 70%, rgba(48, 35, 92, .13) 100%),
+    url('/assets/living-threshold-hero.png');
+}
+
+.hero-shade {
+  background:
+    linear-gradient(90deg, rgba(4, 9, 18, .90) 0%, rgba(7, 15, 28, .66) 40%, rgba(21, 24, 53, .28) 72%, rgba(31, 24, 58, .14) 100%),
+    linear-gradient(0deg, rgba(6, 11, 22, .90), transparent 62%);
+}
+
+/* Main Game Hub: keep a dark shell, add real depth between page, rows and rail. */
+.game-hub-page {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(139, 99, 255, .060), transparent 32rem),
+    radial-gradient(circle at 14% 42%, rgba(79, 151, 255, .035), transparent 30rem),
+    linear-gradient(180deg, #0b1422 0%, #09111d 55%, #090f1a 100%);
+}
+
+.game-hub-page .local-nav {
+  background: rgba(11, 19, 32, .97);
+  border-top-color: rgba(121, 139, 174, .16);
+  border-bottom-color: rgba(121, 139, 174, .25);
+}
+
+.game-hub-page .section-heading .kicker {
+  color: #8bb0e0;
+}
+
+.game-hub-page .section-heading p {
+  color: #b3bfd0;
+}
+
+/* Dense rows receive the clearest depth improvement. */
+.game-hub-page .hub-content-row {
+  background: linear-gradient(180deg, rgba(20, 33, 51, .99), rgba(13, 23, 38, .99));
+  border-color: rgba(82, 103, 137, .56);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .032),
+    0 10px 26px rgba(0, 0, 0, .10);
+}
+
+.game-hub-page .hub-content-row:hover,
+.game-hub-page .hub-content-row:focus-within {
+  border-color: rgba(105, 130, 180, .76);
+  background: linear-gradient(180deg, rgba(23, 37, 58, .99), rgba(15, 26, 43, .99));
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, .18),
+    inset 0 1px rgba(255, 255, 255, .04),
+    0 0 0 1px rgba(139, 99, 255, .06);
+}
+
+.game-hub-page .hub-row-copy h3 {
+  color: #f5f7fc;
+}
+
+.game-hub-page .hub-row-meta {
+  color: #b4c0d0;
+}
+
+.game-hub-page .hub-row-lines span {
+  background: linear-gradient(90deg, rgba(126, 141, 166, .64), rgba(88, 105, 131, .52));
+}
+
+.game-hub-page .hub-row-source {
+  border-left-color: rgba(88, 108, 141, .40);
+}
+
+.game-hub-page .source-title {
+  color: #c4cfdd;
+}
+
+.game-hub-page .source-bars span {
+  background: rgba(82, 100, 127, .78);
+}
+
+/* Artwork gets a modest lift only; no HDR/neon treatment. */
+.content-card > .media,
+.game-card > .media,
+.profile-row .media,
+.game-hub-page .hub-row-main > .media {
+  filter: saturate(1.06) brightness(1.14) contrast(1.02);
+}
+
+/* Profile rail reads as a raised companion surface instead of another black block. */
+.game-hub-page .profiles-rail {
+  border-color: rgba(84, 105, 141, .55);
+  border-left-color: rgba(84, 105, 141, .55);
+  background:
+    linear-gradient(180deg, rgba(139, 99, 255, .060), transparent 34%),
+    linear-gradient(180deg, rgba(21, 34, 53, .99), rgba(13, 23, 38, .99));
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .03),
+    0 18px 42px rgba(0, 0, 0, .14);
+}
+
+.game-hub-page .profiles-rail > p {
+  color: #b2bed0;
+}
+
+.game-hub-page .profile-row {
+  background: rgba(17, 29, 47, .94);
+  border-color: rgba(78, 100, 136, .50);
+}
+
+.game-hub-page .profile-row:hover {
+  background: rgba(21, 35, 56, .98);
+  border-color: rgba(139, 99, 255, .50);
+}
+
+/* Utility controls gain edge definition without adding more cyan. */
+.game-hub-page .hub-view-toggle button,
+.game-hub-page .hub-row-actions button,
+.top-actions button {
+  background: linear-gradient(180deg, rgba(22, 35, 54, .98), rgba(14, 24, 40, .98));
+  border-color: rgba(89, 111, 148, .52);
+}
+
+.game-hub-page .hub-row-actions button:disabled {
+  opacity: .78;
+}
+
+/* On small screens, separation matters more than extra brightness. */
+@media (max-width: 900px) {
+  .game-hub-page .hub-content-row {
+    box-shadow:
+      inset 0 1px rgba(255, 255, 255, .03),
+      0 12px 28px rgba(0, 0, 0, .13);
+  }
+
+  .game-hub-page .profiles-rail {
+    border-top-color: rgba(92, 113, 149, .48);
+    background:
+      linear-gradient(180deg, rgba(139, 99, 255, .045), transparent 30%),
+      linear-gradient(180deg, rgba(19, 31, 49, .98), rgba(12, 21, 35, .98));
+  }
+}
+
+/* Respect users who request stronger contrast: polish never weakens focus/edges. */
+@media (prefers-contrast: more) {
+  .game-hub-page .hub-content-row,
+  .game-hub-page .profiles-rail,
+  .content-card,
+  .game-card {
+    border-color: rgba(155, 174, 210, .72);
+  }
+
+  .page-intro,
+  .section-heading p,
+  .card-copy p,
+  .profiles-rail > p,
+  .game-hub-page .hub-row-meta {
+    color: #d0d8e5;
+  }
+}

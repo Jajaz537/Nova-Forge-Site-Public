@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:modaryx:schemas:content-type:v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "label",
+    "family",
+    "gameScope",
+    "supportsFiles",
+    "supportsVersions",
+    "supportsDependencies",
+    "supportsConflicts",
+    "supportsLoadOrder",
+    "supportsClientServerEnvironment",
+    "supportsCollections",
+    "installMode"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "family": {
+      "enum": [
+        "gameplay",
+        "visual-audio",
+        "technical",
+        "aggregate",
+        "other"
+      ]
+    },
+    "gameScope": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^mx_[a-z0-9][a-z0-9_-]{2,95}$"
+    },
+    "supportsFiles": {
+      "type": "boolean"
+    },
+    "supportsVersions": {
+      "type": "boolean"
+    },
+    "supportsDependencies": {
+      "type": "boolean"
+    },
+    "supportsConflicts": {
+      "type": "boolean"
+    },
+    "supportsLoadOrder": {
+      "type": "boolean"
+    },
+    "supportsClientServerEnvironment": {
+      "type": "boolean"
+    },
+    "supportsCollections": {
+      "type": "boolean"
+    },
+    "installMode": {
+      "enum": [
+        "none",
+        "manual",
+        "manager",
+        "direct",
+        "contextual"
+      ]
+    }
+  }
+}

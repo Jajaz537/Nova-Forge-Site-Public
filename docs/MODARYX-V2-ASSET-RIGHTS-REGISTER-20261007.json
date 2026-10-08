@@ -1,0 +1,1351 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-07",
+  "source": {
+    "repository": "Jajaz537/Nova-Forge-Site-Public",
+    "branch": "design/modaryx-v2-blue-violet-product-20261005",
+    "head": "685d7fd321c06489cf8cce9adcfbcc777beb9b7c",
+    "tree": "2254d3a23bcf33ac5afff2fedfd63b47c7297ffe"
+  },
+  "status": "EN COURS",
+  "counts": {
+    "LEGACY": 5,
+    "PRODUCT": 23,
+    "PROOF": 78,
+    "PREVIEW": 4
+  },
+  "policy": {
+    "allowedStates": [
+      "TERMINÉ",
+      "EN COURS",
+      "BLOQUÉ",
+      "PREUVE MANQUANTE"
+    ],
+    "rule": "Classification is not rights clearance. Every PRODUCT asset remains blocked for final commercial/legal PASS until provenance and rights are evidenced."
+  },
+  "assets": [
+    {
+      "path": "assets/forge-field.svg",
+      "gitBlobSha1": "10311208bbd9a0ef05649a0ab9cbfc40762ec27e",
+      "sizeBytes": 1451,
+      "classification": "LEGACY",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Legacy/provenance/compatibilité. Ne pas supprimer ni renommer globalement; usage commercial futur interdit sans clearance."
+    },
+    {
+      "path": "assets/living-world/dragon-adolescent.png",
+      "gitBlobSha1": "e03a56f6a4f5dc09253753335274c1534feb2726",
+      "sizeBytes": 787928,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+    },
+    {
+      "path": "assets/living-world/dragon-adult.png",
+      "gitBlobSha1": "21b87fada145d4ebe55aeaea6efe6c33b9395bd3",
+      "sizeBytes": 902388,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+    },
+    {
+      "path": "assets/living-world/dragon-baby.png",
+      "gitBlobSha1": "c056e23172a81887ac913929fc357fec25b132d5",
+      "sizeBytes": 400863,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+    },
+    {
+      "path": "assets/living-world/dragon-juvenile.png",
+      "gitBlobSha1": "00dae47820c3773e2bc1a2dc17c53cda0747691a",
+      "sizeBytes": 448658,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+    },
+    {
+      "path": "assets/living-world/dragon-young-adult.png",
+      "gitBlobSha1": "0b90152125ea6d5c9449dc946a126b54c9051e50",
+      "sizeBytes": 852026,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+    },
+    {
+      "path": "assets/living-world/environment-premium.jpg",
+      "gitBlobSha1": "ab6062f5dbe4618a52ad7eb5781cd52cc285ebfe",
+      "sizeBytes": 1056220,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+    },
+    {
+      "path": "assets/living-world/wolf-adolescent.png",
+      "gitBlobSha1": "c43f5cb7d98a0425c1dbf4a22e5c241f374e8863",
+      "sizeBytes": 657963,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+    },
+    {
+      "path": "assets/living-world/wolf-adult.png",
+      "gitBlobSha1": "c9a65b8828c0077d97041e9a5d4a3414f5aa68f2",
+      "sizeBytes": 714658,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+    },
+    {
+      "path": "assets/living-world/wolf-baby.png",
+      "gitBlobSha1": "632d39f72d1edf767b40054fc3913dd7991201bf",
+      "sizeBytes": 763216,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+    },
+    {
+      "path": "assets/living-world/wolf-juvenile.png",
+      "gitBlobSha1": "dc20d6ba3fc449c19aa287ad7ec5938417b1ba8a",
+      "sizeBytes": 662632,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+    },
+    {
+      "path": "assets/living-world/wolf-young-adult.png",
+      "gitBlobSha1": "f31c3b896618b3f8d476120e0a6373625545e1a4",
+      "sizeBytes": 688259,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés."
+    },
+    {
+      "path": "assets/modaryx-mark-192.png",
+      "gitBlobSha1": "71556931161318f4b5887aa9b438f74c17b5faef",
+      "sizeBytes": 1084,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PARTIAL_EVIDENCE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "DIRECT_GIT_PARENT_VECTOR_TO_RASTER_BRAND_REFRESH",
+        "vectorCommit": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommit": "2ae5bd279bd3437d74424801ff428e40bc61504c",
+        "rasterCommitParent": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommitMessage": "fix(brand): refresh MODARYX PNG marks with clear M",
+        "note": "The raster refresh commit is a direct child of the SVG M-shape commit and modifies only modaryx-mark-192.png and modaryx-mark-512.png. This proves an in-repository brand derivative chain, but not the rasterization tool or commercial IP rights."
+      }
+    },
+    {
+      "path": "assets/modaryx-mark-512.png",
+      "gitBlobSha1": "2f9518f5e50cef0e69378b1516418806e44e4374",
+      "sizeBytes": 3459,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PARTIAL_EVIDENCE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "DIRECT_GIT_PARENT_VECTOR_TO_RASTER_BRAND_REFRESH",
+        "vectorCommit": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommit": "2ae5bd279bd3437d74424801ff428e40bc61504c",
+        "rasterCommitParent": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommitMessage": "fix(brand): refresh MODARYX PNG marks with clear M",
+        "note": "The raster refresh commit is a direct child of the SVG M-shape commit and modifies only modaryx-mark-192.png and modaryx-mark-512.png. This proves an in-repository brand derivative chain, but not the rasterization tool or commercial IP rights."
+      }
+    },
+    {
+      "path": "assets/modaryx-mark.svg",
+      "gitBlobSha1": "9cc65a38ce352015246a4a242ade17926fcef75c",
+      "sizeBytes": 331,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PARTIAL_EVIDENCE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "IN_REPOSITORY_VECTOR_AUTHORING_HISTORY",
+        "commits": [
+          "d2547af939fe374ea9ef0b93c4fa65382b98be1f",
+          "14142306a9d160fc2ebc01486167853bc27dcdf2"
+        ],
+        "note": "Git patch history shows the vector mark introduced/modified in repository brand commits. Commit authorship alone is not sufficient proof of commercial IP ownership."
+      }
+    },
+    {
+      "path": "assets/modaryx-realm-vista-reduced.webp",
+      "gitBlobSha1": "dbff4de9544f9c6f534a9df3b80b7290710d8c2b",
+      "sizeBytes": 95172,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PARTIAL_EVIDENCE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "DERIVATIVE_CHAIN_DOCUMENTED_IN_GIT",
+        "commit": "806a4fe4636da907afd8a6a12e22e83a71bcabbe",
+        "note": "Commit states the lightweight vista was derived from an approved existing panorama with no scene/geography redrawn. Underlying source rights remain unresolved."
+      }
+    },
+    {
+      "path": "assets/modaryx-wolf-dragon-hero.webp",
+      "gitBlobSha1": "e0ec285c134fd0688895ff7ac5f0c09eddb39f94",
+      "sizeBytes": 198162,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PARTIAL_EVIDENCE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "USER_PROVIDED_SOURCE_ARCHIVE_DOCUMENTED_IN_GIT",
+        "sourceArchive": "Nova_Forge_5_Nouveaux_Concepts_Loup_Dragon(1).rar",
+        "sourceArchiveSha256": "c7592976adc53de0d5fb6f98bc1454c73d741bd0215fcd1398e047ececfb6532",
+        "commit": "c8c163799a46f8c4ec780d6a5189eb57865cb932",
+        "note": "Git documentation states five PNGs were extracted and references 02/03/01 inspected/adapted. This proves an internal source chain, not ownership or commercial licence."
+      }
+    },
+    {
+      "path": "assets/modaryx-world-portals.webp",
+      "gitBlobSha1": "ca346c167031cb7a33dc126c92e6d6902e764f3c",
+      "sizeBytes": 169360,
+      "classification": "PRODUCT",
+      "duplicateOf": null,
+      "provenanceStatus": "PARTIAL_EVIDENCE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "USER_PROVIDED_SOURCE_ARCHIVE_DOCUMENTED_IN_GIT",
+        "sourceArchive": "Nova_Forge_5_Nouveaux_Concepts_Loup_Dragon(1).rar",
+        "sourceArchiveSha256": "c7592976adc53de0d5fb6f98bc1454c73d741bd0215fcd1398e047ececfb6532",
+        "commit": "c8c163799a46f8c4ec780d6a5189eb57865cb932",
+        "note": "Git documentation states five PNGs were extracted and references 02/03/01 inspected/adapted. This proves an internal source chain, not ownership or commercial licence."
+      }
+    },
+    {
+      "path": "assets/nova-kingdom-panorama.svg",
+      "gitBlobSha1": "4b48adc35046d799456bd384cf1a09a71506e841",
+      "sizeBytes": 2385,
+      "classification": "LEGACY",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Legacy/provenance/compatibilité. Ne pas supprimer ni renommer globalement; usage commercial futur interdit sans clearance."
+    },
+    {
+      "path": "assets/nova-mark-192.png",
+      "gitBlobSha1": "1ecd9781aba0017907e9f2e2230a2f830c9ac909",
+      "sizeBytes": 2176,
+      "classification": "LEGACY",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Legacy/provenance/compatibilité. Ne pas supprimer ni renommer globalement; usage commercial futur interdit sans clearance."
+    },
+    {
+      "path": "assets/nova-mark-512.png",
+      "gitBlobSha1": "9d983372d3d737e67bbb699dfca02c15a800fa19",
+      "sizeBytes": 3453,
+      "classification": "LEGACY",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Legacy/provenance/compatibilité. Ne pas supprimer ni renommer globalement; usage commercial futur interdit sans clearance."
+    },
+    {
+      "path": "assets/nova-mark.svg",
+      "gitBlobSha1": "af69bc0ef98445047f4e6dfc7c2bef58f034fc39",
+      "sizeBytes": 307,
+      "classification": "LEGACY",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Legacy/provenance/compatibilité. Ne pas supprimer ni renommer globalement; usage commercial futur interdit sans clearance."
+    },
+    {
+      "path": "favicon.svg",
+      "gitBlobSha1": "9cc65a38ce352015246a4a242ade17926fcef75c",
+      "sizeBytes": 331,
+      "classification": "PRODUCT",
+      "duplicateOf": "assets/modaryx-mark.svg",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "IN_REPOSITORY_VECTOR_AUTHORING_HISTORY",
+        "commits": [
+          "d2547af939fe374ea9ef0b93c4fa65382b98be1f",
+          "14142306a9d160fc2ebc01486167853bc27dcdf2"
+        ],
+        "note": "Git patch history shows the vector mark introduced/modified in repository brand commits. Commit authorship alone is not sufficient proof of commercial IP ownership."
+      }
+    },
+    {
+      "path": "qa/finish-line/after-catalog-768.webp",
+      "gitBlobSha1": "d2a4dd5f5a4042c14d0ecbf69c16a14a6736dbd9",
+      "sizeBytes": 62150,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/after-creator-studio.webp",
+      "gitBlobSha1": "a6bbbcffe5e68c1a9a169ba5e8842779ea7b22e4",
+      "sizeBytes": 161740,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/after-project.webp",
+      "gitBlobSha1": "dfccc903c7133ef2057a069479fc57d23ebb3c4b",
+      "sizeBytes": 53200,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-404.webp",
+      "gitBlobSha1": "6c6b2250d6b7a82cac08f2eb20d7773df5e1c39c",
+      "sizeBytes": 25362,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-catalog-768.webp",
+      "gitBlobSha1": "5b1c779b105841b489136046c93e8bbc09aa68fd",
+      "sizeBytes": 77506,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-catalog.webp",
+      "gitBlobSha1": "92219404753b2ba919f3909eaacbad6e9bc835c6",
+      "sizeBytes": 83674,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-community.webp",
+      "gitBlobSha1": "e4ab7c327fe9d9a1ee7e4e12d5b002c75620038c",
+      "sizeBytes": 135850,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-documentation.webp",
+      "gitBlobSha1": "176c9328ea2b2e3dc09dd41e5a2ba099fa760072",
+      "sizeBytes": 155734,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-downloads.webp",
+      "gitBlobSha1": "462f38129929baeb90b20ccd500364b3feb9cc98",
+      "sizeBytes": 78424,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-ecosystem.webp",
+      "gitBlobSha1": "e92ed87b41b57104331e389d810a8a7185eb7f86",
+      "sizeBytes": 174446,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-index.webp",
+      "gitBlobSha1": "dd41e928a06c2ec39c37c0e9ebac2bc866919354",
+      "sizeBytes": 195396,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-profiles.webp",
+      "gitBlobSha1": "11fa4705b80573680ca0f66ebbf593c16841fba1",
+      "sizeBytes": 68634,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-project-balanced-latency-pack.webp",
+      "gitBlobSha1": "c0cdc2aab880c7979b32679788494be49c16d31d",
+      "sizeBytes": 57068,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-project-ember-textures.webp",
+      "gitBlobSha1": "5e5ea7b6e65c828ae382db3e158e5ee5bb1b47ce",
+      "sizeBytes": 54020,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-project-forge-night-experience.webp",
+      "gitBlobSha1": "c93e642f1d1fc22b2bd5539f77329efbf59bd782",
+      "sizeBytes": 57566,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-project.webp",
+      "gitBlobSha1": "8267ef59eb9ad93c55f13b1a7323136e558702b6",
+      "sizeBytes": 38938,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-search.webp",
+      "gitBlobSha1": "3b0f46bd2787da343a57cad6af65d59c99a0462d",
+      "sizeBytes": 73678,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-security.webp",
+      "gitBlobSha1": "518f39cce5a3f20910f2ff2653a806dbd15aa296",
+      "sizeBytes": 123648,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/finish-line/before-verify.webp",
+      "gitBlobSha1": "600a307610e8e5124f9dd25b20bf6ed26c7633d8",
+      "sizeBytes": 54302,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/visual-community-20260915/modaryx-collection-after-20260915.jpg",
+      "gitBlobSha1": "53252d96952e8f52f50aa86eba56e0aa717982a4",
+      "sizeBytes": 77385,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/visual-community-20260915/modaryx-collection-before-20260915.jpg",
+      "gitBlobSha1": "b6cc4b517c49316793b2b8fc9e9c2f95d3a2a56b",
+      "sizeBytes": 71480,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/visual-community-20260915/modaryx-community-after-20260915.jpg",
+      "gitBlobSha1": "29787eb5c3b5eedcf8bf7fbc1ff63b67dbca34f7",
+      "sizeBytes": 94346,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/visual-community-20260915/modaryx-community-before-20260915.jpg",
+      "gitBlobSha1": "065af8fe8a787ab145e52cda3904a31a1e9a614c",
+      "sizeBytes": 92226,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/zoom-reflow-20260919/chromium-edge-desktop-index.png",
+      "gitBlobSha1": "16e8da8353044f2326047240966d437f7e421857",
+      "sizeBytes": 1443197,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/zoom-reflow-20260919/chromium-edge-responsive-creator-studio-html.png",
+      "gitBlobSha1": "d97c5622b9b352b45cac8de9859c589ed3eee18b",
+      "sizeBytes": 1042960,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/zoom-reflow-20260919/firefox-desktop-catalog-html.png",
+      "gitBlobSha1": "3695ccb8df38ad319aa9b71ce65ac96e91d3dc12",
+      "sizeBytes": 1313315,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "qa/zoom-reflow-20260919/firefox-responsive-index.png",
+      "gitBlobSha1": "46e410bf1b80c2970ad5a219158b4e9626201084",
+      "sizeBytes": 1226254,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-content-sheet.png",
+      "gitBlobSha1": "bbe064425709b32b34c0f6f3931ffff5ccc8639d",
+      "sizeBytes": 2680314,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-dragon-baby.png",
+      "gitBlobSha1": "c056e23172a81887ac913929fc357fec25b132d5",
+      "sizeBytes": 400863,
+      "classification": "PROOF",
+      "duplicateOf": "assets/living-world/dragon-baby.png",
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-hero.png",
+      "gitBlobSha1": "89fa2e7be59648aa0b68f0cab8760d1b06facd16",
+      "sizeBytes": 1527079,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-wolf-baby.png",
+      "gitBlobSha1": "632d39f72d1edf767b40054fc3913dd7991201bf",
+      "sizeBytes": 763216,
+      "classification": "PROOF",
+      "duplicateOf": "assets/living-world/wolf-baby.png",
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/404-after.webp",
+      "gitBlobSha1": "2be3b040073da2b2951105160310bc0c733d7c1c",
+      "sizeBytes": 44534,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/404-before.webp",
+      "gitBlobSha1": "b49a611f62269f2aeaa7e3794888a7c13df01029",
+      "sizeBytes": 40088,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/catalog-after.webp",
+      "gitBlobSha1": "e5eb80a6990c07f5b20e6f7186daeee0b0b0362c",
+      "sizeBytes": 46472,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/catalog-before.webp",
+      "gitBlobSha1": "3fdc1956201799203d7b73030bbd13993d754f00",
+      "sizeBytes": 43092,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/catalog-filters-pass2-after.jpg",
+      "gitBlobSha1": "3cc5a70240999309981527b7fd4bfe0ab41074ba",
+      "sizeBytes": 89679,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/catalog-filters-pass2-before.jpg",
+      "gitBlobSha1": "98e615b7e19927a2c3be7ae49722340f7e0b9870",
+      "sizeBytes": 89009,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/community-after.webp",
+      "gitBlobSha1": "a9cd0a958e0aa7b958542c0345a0987e4994f80c",
+      "sizeBytes": 57200,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/community-before.webp",
+      "gitBlobSha1": "917cf26924f2ae9894909e31ad95a40cfc1ebb47",
+      "sizeBytes": 50320,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/community-f884b919-viewport.jpg",
+      "gitBlobSha1": "2677b6cefb604664e9766bae42281e8fb5e00663",
+      "sizeBytes": 120035,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/community-f884b919-workspace.jpg",
+      "gitBlobSha1": "834f26b82a3a1ec2412a6ddb5ea12042747f4014",
+      "sizeBytes": 83814,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/documentation-after.webp",
+      "gitBlobSha1": "be9302e4da1c1fe9bd55bd25eddc9a97af9a2b5e",
+      "sizeBytes": 55326,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/documentation-before.webp",
+      "gitBlobSha1": "e77bc0cb105dfc87956d4e448e4794ed1f072071",
+      "sizeBytes": 48246,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/documentation-f884b919-viewport.jpg",
+      "gitBlobSha1": "4ec7f35e7bbad4d16d3f9776ae43fde49da46d40",
+      "sizeBytes": 115350,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/downloads-3e8caef-viewport.jpg",
+      "gitBlobSha1": "3b9047bdc6afb241b34c9a41606e640e7497abfb",
+      "sizeBytes": 107487,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/downloads-after.webp",
+      "gitBlobSha1": "4dba8852b28d9266a903161f932c9152660da3e5",
+      "sizeBytes": 50758,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/downloads-before.webp",
+      "gitBlobSha1": "56c090fde88f42e3c39ea39f43ac3de73b809b0b",
+      "sizeBytes": 46010,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/ecosystem-3e8caef-viewport.jpg",
+      "gitBlobSha1": "8189217afcabc2687ead420a41d11808a6755a84",
+      "sizeBytes": 104130,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/ecosystem-after.webp",
+      "gitBlobSha1": "1c2f3c8f53b90e53bc9e2f21f1fc1e661a57ede5",
+      "sizeBytes": 48688,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/ecosystem-before.webp",
+      "gitBlobSha1": "52e824c912677c138d50a78a37d9e2b966cf945c",
+      "sizeBytes": 95790,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/games-after.webp",
+      "gitBlobSha1": "144cb140efed6810157c84ccd17a1c940cb6d9c5",
+      "sizeBytes": 59804,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/games-before.webp",
+      "gitBlobSha1": "c3ced31d457eca3a28e323569296c592c3486f66",
+      "sizeBytes": 80542,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/home-after.webp",
+      "gitBlobSha1": "3689fe24caf56361b72085ab15acd31b649484d1",
+      "sizeBytes": 134132,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/home-before.webp",
+      "gitBlobSha1": "8d699a7f49c133a548da16789a5953405c1bd2d9",
+      "sizeBytes": 148942,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/home-catalog-pass2-after.jpg",
+      "gitBlobSha1": "c8ee38e25428a5ad9a0fbb6e00c63fc528027659",
+      "sizeBytes": 90373,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/home-catalog-pass2-before.jpg",
+      "gitBlobSha1": "254a0c8359bd89eb877b1841c872a8f9891f6ad7",
+      "sizeBytes": 83353,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/home-navigation-after.jpg",
+      "gitBlobSha1": "aa504fbe7054f75899d76b0bda8ed76a73d85e8a",
+      "sizeBytes": 219765,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/home-navigation-before.jpg",
+      "gitBlobSha1": "541e92bef923df9d1359894357149ec6ad70c5df",
+      "sizeBytes": 99125,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/profiles-3e8caef-before.jpg",
+      "gitBlobSha1": "b0f2a618bcb52f1859bac4d141917ca637094c53",
+      "sizeBytes": 83668,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/profiles-after.webp",
+      "gitBlobSha1": "ff69342720a58880674dc0696f0da5f95c00411a",
+      "sizeBytes": 43778,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/profiles-b6298ad-after.jpg",
+      "gitBlobSha1": "54924c28f703a7b0e4a1051c7bf186b74162ef49",
+      "sizeBytes": 99076,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/profiles-before.webp",
+      "gitBlobSha1": "4644c6b3f2e457a7830090db89085d00eb56fdae",
+      "sizeBytes": 57144,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/profiles-groups-deployed.jpg",
+      "gitBlobSha1": "b5d5d233bfd699ed2c7f8024b1588fae2646b51a",
+      "sizeBytes": 93421,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/project-after.webp",
+      "gitBlobSha1": "2a6c22190bab6e9f49b13e9161d6b73c03899797",
+      "sizeBytes": 32036,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/project-before.webp",
+      "gitBlobSha1": "743b0fa4d4aae0f0fe0b5351156a6cc8bba25298",
+      "sizeBytes": 48664,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/project-layout-pass2-after.jpg",
+      "gitBlobSha1": "9419cba7b7166a22a7e814f7bea0ccb7629c291b",
+      "sizeBytes": 95625,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/project-layout-pass2-before.jpg",
+      "gitBlobSha1": "54bf1446424ca1d7c3a3caecc41a8c7e54979158",
+      "sizeBytes": 79083,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/search-after.webp",
+      "gitBlobSha1": "a08a45279ef7ab1f28bf934305201f8203f47d68",
+      "sizeBytes": 44144,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/search-before.webp",
+      "gitBlobSha1": "ddc32e1cf6e0484f76ec83532f04446e5bcb6ef4",
+      "sizeBytes": 43846,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/security-after.webp",
+      "gitBlobSha1": "193deb8f51bbd7ef5dc1f33148fc398d422dd477",
+      "sizeBytes": 58354,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/security-before.webp",
+      "gitBlobSha1": "3440c35a3963cf7d4afd6d7ebe8e8960490b7e37",
+      "sizeBytes": 50558,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/security-f884b919-viewport.jpg",
+      "gitBlobSha1": "80ad99785e88650421e4f1a154d441140b73f42f",
+      "sizeBytes": 117532,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/smart-profile-after.jpg",
+      "gitBlobSha1": "ea875fe42cd2ddd19f4e11f75cc493f9a49321f3",
+      "sizeBytes": 61826,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/smart-profile-before.jpg",
+      "gitBlobSha1": "4c1b114c3c60426c488a95af1027dbe478194b08",
+      "sizeBytes": 89317,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/studio-after.webp",
+      "gitBlobSha1": "095b474f440c2e039c0cc382145cff4190631c45",
+      "sizeBytes": 38284,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/studio-before.webp",
+      "gitBlobSha1": "11e35ce0be6a05966b2cfb66ded6240432213309",
+      "sizeBytes": 52478,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/verify-after.webp",
+      "gitBlobSha1": "27617529c69ac5a494fd7435f88a64b028f67ec6",
+      "sizeBytes": 47638,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "review-evidence/visual-finish-20260916/verify-before.webp",
+      "gitBlobSha1": "2298e8b95b269f24d47e13365902a38eeb612c1a",
+      "sizeBytes": 41664,
+      "classification": "PROOF",
+      "duplicateOf": null,
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preuve QA/review à préserver. Ne pas promouvoir comme asset produit. Les droits sur tout contenu reproduit restent à vérifier si la preuve est publiée ou redistribuée."
+    },
+    {
+      "path": "v2-preview/public/assets/living-threshold-content-sheet.png",
+      "gitBlobSha1": "bbe064425709b32b34c0f6f3931ffff5ccc8639d",
+      "sizeBytes": 2680314,
+      "classification": "PREVIEW",
+      "duplicateOf": "review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-content-sheet.png",
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preview/candidat, pas preuve de production. Toute promotion en produit final exige provenance et droits commerciaux."
+    },
+    {
+      "path": "v2-preview/public/assets/living-threshold-dragon-baby.png",
+      "gitBlobSha1": "c056e23172a81887ac913929fc357fec25b132d5",
+      "sizeBytes": 400863,
+      "classification": "PREVIEW",
+      "duplicateOf": "assets/living-world/dragon-baby.png",
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preview/candidat, pas preuve de production. Toute promotion en produit final exige provenance et droits commerciaux."
+    },
+    {
+      "path": "v2-preview/public/assets/living-threshold-hero.png",
+      "gitBlobSha1": "89fa2e7be59648aa0b68f0cab8760d1b06facd16",
+      "sizeBytes": 1527079,
+      "classification": "PREVIEW",
+      "duplicateOf": "review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-hero.png",
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preview/candidat, pas preuve de production. Toute promotion en produit final exige provenance et droits commerciaux."
+    },
+    {
+      "path": "v2-preview/public/assets/living-threshold-wolf-baby.png",
+      "gitBlobSha1": "632d39f72d1edf767b40054fc3913dd7991201bf",
+      "sizeBytes": 763216,
+      "classification": "PREVIEW",
+      "duplicateOf": "assets/living-world/wolf-baby.png",
+      "provenanceStatus": "PREUVE MANQUANTE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Preview/candidat, pas preuve de production. Toute promotion en produit final exige provenance et droits commerciaux."
+    },
+    {
+      "path": "v2/public/assets/living-threshold-content-sheet.png",
+      "gitBlobSha1": "bbe064425709b32b34c0f6f3931ffff5ccc8639d",
+      "sizeBytes": 2680314,
+      "classification": "PRODUCT",
+      "duplicateOf": "review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-content-sheet.png",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "GENERATED_SPECIFICALLY_FOR_ISOLATED_V2_PROTOTYPE",
+        "sourceCommit": "33405e93bae60ccfc4b84362f3102c578d100ab9",
+        "sourceVisualTruthPath": "C:\\Users\\steph\\.codex\\generated_images\\01a1033a-47d2-7910-92b8-05aa89cfb208\\exec-197fd322-f242-4a81-a337-91f52572641b.png",
+        "note": "Design docs say the prototype used assets generated specifically and dedicated generated raster assets. Exact generator/model/terms/account evidence is still missing."
+      }
+    },
+    {
+      "path": "v2/public/assets/living-threshold-hero.png",
+      "gitBlobSha1": "89fa2e7be59648aa0b68f0cab8760d1b06facd16",
+      "sizeBytes": 1527079,
+      "classification": "PRODUCT",
+      "duplicateOf": "review-evidence/modaryx-v2-living-threshold-prototype-20261003/public/assets/living-threshold-hero.png",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "GENERATED_SPECIFICALLY_FOR_ISOLATED_V2_PROTOTYPE",
+        "sourceCommit": "33405e93bae60ccfc4b84362f3102c578d100ab9",
+        "sourceVisualTruthPath": "C:\\Users\\steph\\.codex\\generated_images\\01a1033a-47d2-7910-92b8-05aa89cfb208\\exec-197fd322-f242-4a81-a337-91f52572641b.png",
+        "note": "Design docs say the prototype used assets generated specifically and dedicated generated raster assets. Exact generator/model/terms/account evidence is still missing."
+      }
+    },
+    {
+      "path": "v2/public/assets/modaryx-mark-192.png",
+      "gitBlobSha1": "71556931161318f4b5887aa9b438f74c17b5faef",
+      "sizeBytes": 1084,
+      "classification": "PRODUCT",
+      "duplicateOf": "assets/modaryx-mark-192.png",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "DIRECT_GIT_PARENT_VECTOR_TO_RASTER_BRAND_REFRESH",
+        "vectorCommit": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommit": "2ae5bd279bd3437d74424801ff428e40bc61504c",
+        "rasterCommitParent": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommitMessage": "fix(brand): refresh MODARYX PNG marks with clear M",
+        "note": "The raster refresh commit is a direct child of the SVG M-shape commit and modifies only modaryx-mark-192.png and modaryx-mark-512.png. This proves an in-repository brand derivative chain, but not the rasterization tool or commercial IP rights."
+      }
+    },
+    {
+      "path": "v2/public/assets/modaryx-mark-512.png",
+      "gitBlobSha1": "2f9518f5e50cef0e69378b1516418806e44e4374",
+      "sizeBytes": 3459,
+      "classification": "PRODUCT",
+      "duplicateOf": "assets/modaryx-mark-512.png",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "DIRECT_GIT_PARENT_VECTOR_TO_RASTER_BRAND_REFRESH",
+        "vectorCommit": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommit": "2ae5bd279bd3437d74424801ff428e40bc61504c",
+        "rasterCommitParent": "14142306a9d160fc2ebc01486167853bc27dcdf2",
+        "rasterCommitMessage": "fix(brand): refresh MODARYX PNG marks with clear M",
+        "note": "The raster refresh commit is a direct child of the SVG M-shape commit and modifies only modaryx-mark-192.png and modaryx-mark-512.png. This proves an in-repository brand derivative chain, but not the rasterization tool or commercial IP rights."
+      }
+    },
+    {
+      "path": "v2/public/assets/modaryx-mark.svg",
+      "gitBlobSha1": "9cc65a38ce352015246a4a242ade17926fcef75c",
+      "sizeBytes": 331,
+      "classification": "PRODUCT",
+      "duplicateOf": "assets/modaryx-mark.svg",
+      "provenanceStatus": "PARTIAL_EVIDENCE",
+      "commercialRightsStatus": "PREUVE MANQUANTE",
+      "finalReleaseAllowed": false,
+      "note": "Asset produit actuel/candidat. Aucun PASS commercial/legal tant que auteur, source, licence et droits commerciaux ne sont pas prouvés.",
+      "provenanceEvidence": {
+        "kind": "IN_REPOSITORY_VECTOR_AUTHORING_HISTORY",
+        "commits": [
+          "d2547af939fe374ea9ef0b93c4fa65382b98be1f",
+          "14142306a9d160fc2ebc01486167853bc27dcdf2"
+        ],
+        "note": "Git patch history shows the vector mark introduced/modified in repository brand commits. Commit authorship alone is not sufficient proof of commercial IP ownership."
+      }
+    }
+  ],
+  "updatedAt": "2026-10-07T20:15:00+02:00",
+  "evidenceSummary": {
+    "USER_PROVIDED_ARCHIVE_PARTIAL": [
+      "assets/modaryx-wolf-dragon-hero.webp",
+      "assets/modaryx-world-portals.webp"
+    ],
+    "DERIVED_FROM_EXISTING_APPROVED_PANORAMA_PARTIAL": [
+      "assets/modaryx-realm-vista-reduced.webp"
+    ],
+    "GENERATED_SPECIFICALLY_FOR_V2_PROTOTYPE_PARTIAL": [
+      "v2/public/assets/living-threshold-content-sheet.png",
+      "v2/public/assets/living-threshold-hero.png"
+    ],
+    "IN_REPO_BRAND_VECTOR_HISTORY_PARTIAL": [
+      "assets/modaryx-mark.svg",
+      "favicon.svg",
+      "v2/public/assets/modaryx-mark.svg"
+    ],
+    "NO_SOURCE_TOOL_EVIDENCE_RECOVERED_YET": "living-world staged layers and other product assets remain PREUVE MANQUANTE",
+    "IN_REPO_BRAND_RASTER_DERIVATIVE_PARTIAL": [
+      "assets/modaryx-mark-192.png",
+      "assets/modaryx-mark-512.png",
+      "v2/public/assets/modaryx-mark-192.png",
+      "v2/public/assets/modaryx-mark-512.png"
+    ]
+  }
+}

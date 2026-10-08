@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "OFFICIAL_SOURCE_ARTIFACTS_RECORDED_DEMO_TARGETS_ONLY",
+  "sourceCommit": "47a46a97bbdc91e372358dc2a82d20b24f1b8fe4",
+  "productionBlocker": "official-contact-discovery",
+  "blockerState": "OPEN",
+  "scope": "DEMONSTRATION_CATALOG_ONLY",
+  "catalogTargets": [
+    {
+      "gameId": "skyrim-se",
+      "gameName": "Skyrim Special Edition",
+      "company": "Bethesda Softworks / ZeniMax",
+      "officialSources": [
+        {
+          "url": "https://bethesdagamestudios.mweb.bethesda.net/",
+          "ownerDomain": "bethesda.net",
+          "sourceKind": "OFFICIAL_CORPORATE_CONTACT_PAGE",
+          "observedFact": "Bethesda Game Studios publishes general Bethesda Softworks contact information including info@bethsoft.com.",
+          "contactRoute": "info@bethsoft.com",
+          "suitability": "GENERIC_CORPORATE_CONTACT_ONLY",
+          "productionOutboundEligible": false
+        },
+        {
+          "url": "https://help.bethesda.net/app/answers/detail/a_id/55219/",
+          "ownerDomain": "bethesda.net",
+          "sourceKind": "OFFICIAL_MODDING_RULES",
+          "observedFact": "Bethesda requires appropriate mod-author permission for porting and describes acceptable permission evidence.",
+          "contactRoute": null,
+          "suitability": "MOD_PERMISSION_RULES_ONLY",
+          "productionOutboundEligible": false
+        }
+      ],
+      "unresolved": [
+        "NO_EXPLICIT_LICENSING_DESTINATION_VERIFIED_FOR_MODARYX_SCOPE",
+        "PRODUCTION_GAME_SCOPE_NOT_SELECTED"
+      ]
+    },
+    {
+      "gameId": "cyberpunk-2077",
+      "gameName": "Cyberpunk 2077",
+      "company": "CD PROJEKT RED",
+      "officialSources": [
+        {
+          "url": "https://www.cdprojektred.com/en/fan-content",
+          "ownerDomain": "cdprojektred.com",
+          "sourceKind": "OFFICIAL_FAN_CONTENT_GUIDELINES",
+          "observedFact": "CD PROJEKT RED explicitly directs mod/fan-content questions that need advance permission to legal@cdprojektred.com.",
+          "contactRoute": "legal@cdprojektred.com",
+          "suitability": "EXPLICIT_FAN_CONTENT_LEGAL_ROUTE",
+          "productionOutboundEligible": false
+        },
+        {
+          "url": "https://regulations.cdprojektred.com/en/user_agreement",
+          "ownerDomain": "cdprojektred.com",
+          "sourceKind": "OFFICIAL_USER_AGREEMENT",
+          "observedFact": "The user agreement identifies CD PROJEKT RED and legal@cdprojektred.com as an official legal contact for covered games including Cyberpunk 2077.",
+          "contactRoute": "legal@cdprojektred.com",
+          "suitability": "OFFICIAL_LEGAL_CONTACT",
+          "productionOutboundEligible": false
+        }
+      ],
+      "unresolved": [
+        "REQUEST_SCOPE_NOT_APPROVED",
+        "REAL_SENDER_TRANSPORT_NOT_CONFIGURED"
+      ]
+    },
+    {
+      "gameId": "minecraft",
+      "gameName": "Minecraft",
+      "company": "Mojang / Microsoft",
+      "officialSources": [
+        {
+          "url": "https://www.minecraft.net/en-us/usage-guidelines",
+          "ownerDomain": "minecraft.net",
+          "sourceKind": "OFFICIAL_USAGE_GUIDELINES",
+          "observedFact": "Minecraft Usage Guidelines say formal partnership proposals should use the official partnership proposal route.",
+          "contactRoute": "https://partnerships.minecraft.net/hc/en-us/requests/new",
+          "suitability": "EXPLICIT_FORMAL_PARTNERSHIP_ROUTE",
+          "productionOutboundEligible": false
+        },
+        {
+          "url": "https://partnerships.minecraft.net/hc/en-us/requests/new",
+          "ownerDomain": "minecraft.net",
+          "sourceKind": "OFFICIAL_PARTNERSHIP_FORM",
+          "observedFact": "The official partnership site exposes a Submit a partnership proposal form.",
+          "contactRoute": "https://partnerships.minecraft.net/hc/en-us/requests/new",
+          "suitability": "OFFICIAL_PARTNERSHIP_FORM",
+          "productionOutboundEligible": false
+        }
+      ],
+      "unresolved": [
+        "REQUEST_SCOPE_NOT_APPROVED",
+        "FORM_SUBMISSION_NOT_AUTHORIZED",
+        "PRODUCTION_GAME_SCOPE_NOT_SELECTED"
+      ]
+    }
+  ],
+  "invariants": [
+    "OFFICIAL_DOMAINS_ONLY",
+    "NO_SCRAPING_AROUND_RESTRICTIONS",
+    "NO_OUTBOUND_PERFORMED",
+    "NO_CONTACT_ROUTE_AUTO_APPROVED_FOR_PRODUCTION",
+    "DEMO_CATALOG_NEVER_AUTO_PROMOTES_TO_PRODUCTION_RIGHTS_REGISTRY",
+    "OFFICIAL_CONTACT_DISCOVERY_BLOCKER_REMAINS_OPEN",
+    "PUBLISHER_OUTBOUND_BLOCKER_REMAINS_OPEN",
+    "LICENSE_VALIDATION_BLOCKER_REMAINS_OPEN",
+    "LEGAL_REVIEW_BLOCKER_REMAINS_OPEN",
+    "NO_REMOTE_D1_APPLY",
+    "NO_MAIN_CHANGE",
+    "NO_CUTOVER"
+  ]
+}

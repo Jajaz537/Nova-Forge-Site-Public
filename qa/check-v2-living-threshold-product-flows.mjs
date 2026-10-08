@@ -5,13 +5,18 @@ const chrome=process.env.CHROME_BIN;
 const origin=process.env.MODARYX_REVIEW_ORIGIN || "http://127.0.0.1:4174";
 if(!chrome) throw new Error("CHROME_BIN missing");
 
-const port=9225;
+const port=12000+(process.pid%20000);
 const proc=spawn(chrome,[
-  "--headless=new","--no-sandbox","--disable-gpu","--hide-scrollbars",
-  "--remote-debugging-port="+port,
-  "--user-data-dir=/tmp/modaryx-v2-cdp-product-flows",
+  "--headless=new","--no-sandbox","--disable-gpu","--disable-dev-shm-usage","--hide-scrollbars","--no-first-run","--no-default-browser-check",
+  "--remote-debugging-address=127.0.0.1","--remote-debugging-port="+port,
+  "--user-data-dir=/tmp/modaryx-v2-cdp-product-flows-"+process.pid,
   "about:blank"
-],{stdio:"ignore"});
+],{stdio:["ignore","ignore","pipe"]});
+
+let chromeStderr="";
+let chromeExit=null;
+proc.stderr?.on("data",chunk=>{chromeStderr=(chromeStderr+String(chunk)).slice(-6000);});
+proc.once("exit",(code,signal)=>{chromeExit={code,signal};});
 
 let ws; let nextId=1;
 const pending=new Map();
@@ -22,12 +27,15 @@ function send(method,params={}) {
 }
 async function waitJson(path){
   let last;
-  for(let i=0;i<80;i++){
+  for(let i=0;i<240;i++){
+    if(chromeExit){
+      throw new Error("Chrome exited before CDP: "+JSON.stringify(chromeExit)+"\n"+chromeStderr);
+    }
     try{const r=await fetch(`http://127.0.0.1:${port}${path}`);if(r.ok)return await r.json();last=new Error("HTTP "+r.status);}
     catch(e){last=e;}
     await sleep(100);
   }
-  throw last||new Error("CDP unavailable");
+  throw new Error("CDP unavailable on "+port+": "+String(last||"unknown")+"\n"+chromeStderr);
 }
 async function evaluate(expression){
   const r=await send("Runtime.evaluate",{expression,returnByValue:true,awaitPromise:true});
@@ -57,14 +65,19 @@ async function waitText(text){
   throw new Error("text not found: "+text+"\n"+body);
 }
 async function clickText(selector,text){
-  const ok=await evaluate(`(() => {
-    const target=[...document.querySelectorAll(${JSON.stringify(selector)})].find(el=>{
-      if(el.textContent.trim()!==${JSON.stringify(text)}) return false;
-      const r=el.getBoundingClientRect(),s=getComputedStyle(el);
-      return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0&&!el.disabled;
-    });
-    if(!target) return false; target.click(); return true;
-  })()`);
+  let ok=false;
+  for(let i=0;i<80;i++){
+    ok=await evaluate(`(() => {
+      const target=[...document.querySelectorAll(${JSON.stringify(selector)})].find(el=>{
+        if(el.textContent.trim()!==${JSON.stringify(text)}) return false;
+        const r=el.getBoundingClientRect(),s=getComputedStyle(el);
+        return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0&&!el.disabled;
+      });
+      if(!target) return false; target.click(); return true;
+    })()`);
+    if(ok) break;
+    await sleep(100);
+  }
   if(!ok) throw new Error("visible clickable text not found: "+text);
   await sleep(150);
 }
@@ -164,6 +177,7 @@ try{
   assertEqual(await count(".game-card"),1,"games search result count");
   await clickText(".game-card button","Ouvrir le Game Hub");
   await waitText("Mes profils pour ce jeu");
+  console.log("TREE_PROXY_ASSERT 1 game-specific content path reachable");
   await waitText("Catalogue consultable — téléchargement non garanti");
   await waitText("Ambiance originale MODARYX");
   await waitText("aucun asset éditeur utilisé");
@@ -184,8 +198,9 @@ try{
   await clickText(".local-nav button","Activité");
   await waitText("Activité de démonstration");
   await clickText(".local-nav button","Mods & contenus");
-  await waitText("Catalogue du jeu");
-  assertEqual(await count(".hub-content .content-card"),6,"game hub content tab count");
+  const gameHubSectionTitle=await evaluate(`document.querySelector('.game-hub-page .section-heading h2')?.textContent?.trim()`);
+  assertEqual(gameHubSectionTitle,"Pour votre version","game hub content tab heading");
+  assertEqual(await count(".hub-content .hub-content-row"),6,"game hub content tab count");
 
   await clickAria("Recherche globale");
   await waitText("Rechercher dans MODARYX");
@@ -208,6 +223,11 @@ try{
   await waitText("Stale");
   await waitText("Unknown");
   await waitText("Compatibilité réelle : PREUVE MANQUANTE");
+  console.log("TREE_PROXY_ASSERT 2 version compatibility location reachable");
+  console.log("TREE_PROXY_ASSERT 3 dependencies location reachable");
+  await clickText(".detail-tabs button","Versions");
+  await waitText("Historique de démonstration");
+  console.log("TREE_PROXY_ASSERT 8 version history reachable");
   await clickText(".detail-tabs button","Fichiers");
   await waitText("Fichiers de cette version");
   await waitText("Variante pédagogique A");
@@ -230,11 +250,14 @@ try{
   await selectValue(".report-field select","Droits / licence");
   await clickText(".report-section .primary","Préparer le signalement local");
   await waitText("Brouillon de signalement — non envoyé");
+  console.log("TREE_PROXY_ASSERT 7 report-content path reachable");
   console.log("FLOW_ASSERT report validation error retry recovered");
   await clickText(".detail-tabs button","Permissions");
   await waitText("Aucune licence de distribution réelle");
 
-  await clickAria("Notifications");
+  await clickAria("Compte");
+  await waitText("Vous explorez MODARYX en mode invité.");
+  await clickText(".account-nav button","Notifications");
   await waitText("Centre de notifications");
   await waitText("Aucune notification réelle");
   await waitText("Réponse éditeur reçue — Aetherlands");
@@ -246,7 +269,7 @@ try{
   await clickText(".account-nav button","Confidentialité");
   await waitText("Privé par défaut");
 
-  await clickAria("Compte");
+  await clickText(".account-nav button","Compte");
   await waitText("Vous explorez MODARYX en mode invité.");
   await clickText(".account-panel .primary","Découvrir l’onboarding joueur");
   await waitText("Onboarding joueur · 1/4");
@@ -254,13 +277,17 @@ try{
   await waitText("Types de contenus");
   await clickText(".onboarding-actions .quiet","Passer l’onboarding");
 
-  await clickAria("Bibliothèque");
+  await clickText("footer button","Bibliothèque");
   await waitText("Retrouvez favoris, suivis, collections, profils et historique sans les confondre.");
+  await clickText(".library-tabs button","Favoris");
+  await waitText("Contenus enregistrés");
+  console.log("TREE_PROXY_ASSERT 9 favorites reachable");
   await clickText(".library-tabs button","Historique");
   await waitText("Aucun historique réel disponible");
   await waitText("Privé par défaut");
   await clickText(".library-tabs button","Collections");
   await waitText("Sélections organisées");
+  console.log("TREE_PROXY_ASSERT 4 collections reachable");
   await clickText(".library-tabs button","Profils de jeu");
   await waitText("Connexion MODARYX Forge");
   await clickText(".profile-library article:first-child .quiet","Ouvrir");
@@ -284,7 +311,8 @@ try{
   await clickText(".back","← Retour à la Bibliothèque");
   await waitText("Retrouvez favoris, suivis, collections, profils et historique sans les confondre.");
 
-  await clickText(".global-nav button","Créer");
+  await clickText(".global-nav button","Créateurs");
+  await clickText(".creators-page .creator-studio-entry","Ouvrir Creator Studio");
   await waitText("Creator Studio");
   await clickText(".studio-nav button","Analytics");
   await waitText("Données indisponibles");
@@ -298,6 +326,7 @@ try{
   await waitText("Maturité");
   await clickText(".studio-nav button","Releases");
   await waitText("Maturité projet : WiP");
+  console.log("TREE_PROXY_ASSERT 5 publish-new-version path reachable");
   await waitText("Crédits & droits");
   await waitText("Validation par plateforme");
   await waitText("Crossplay");
@@ -326,6 +355,7 @@ try{
   await waitText("Créateurs, équipes et studios.");
   await fill(".creators-search input","boréal");
   assertEqual(await count(".creator-index-card"),1,"creators query count");
+  console.log("TREE_PROXY_ASSERT 6 creator lookup reachable");
   await fill(".creators-search input","");
   assertEqual(await count(".creator-index-card"),3,"creators reset count");
 
@@ -337,6 +367,12 @@ try{
   await clickText(".community-tabs button","Studios / équipes");
   await waitText("Équipes de création");
 
+
+  await clickText("footer button","Aide & documentation");
+  await waitText("Comprendre MODARYX sans deviner.");
+  await waitText("Installation");
+  await waitText("futur handoff MODARYX Forge");
+  console.log("TREE_PROXY_ASSERT 10 installation documentation reachable");
 
   await clickText("footer button","Modération · démo admin");
   await waitText("Modération, signalements et appels.");
@@ -466,7 +502,9 @@ try{
 
 
 
-  await clickAria("MODARYX IA");
+  await setViewport(390,844);
+  await clickAria("Ouvrir le menu");
+  await clickText(".mobile-nav-utility","MODARYX IA");
   await waitText("Une IA native du produit, pas un chatbot greffé.");
   await waitText("MODARYX IA n’est pas active dans cette démo.");
   await waitText("READ → PLAN → EXECUTE_SAFE → EXECUTE_SENSITIVE → BLOCKED.");
@@ -475,6 +513,8 @@ try{
   if(!aiSendDisabled) throw new Error("MODARYX AI input must stay disabled without AI backend");
   console.log("FLOW_ASSERT modaryx ai preview no fake model or action");
 
+  await setViewport(1440,1024);
+  await sleep(120);
   await clickText(".global-nav button","Mods & contenus");
   await waitText("Catalogue global");
   await fill(".catalog-search input","sommets");
@@ -574,7 +614,8 @@ try{
 
 
   await clickAria("Ouvrir le menu");
-  await clickText(".global-nav button","Créer");
+  await clickText(".global-nav button","Créateurs");
+  await clickText(".creators-page .creator-studio-entry","Ouvrir Creator Studio");
   await waitText("Creator Studio");
   await clickText(".studio-nav button","Releases");
   await waitText("Préparer une release");

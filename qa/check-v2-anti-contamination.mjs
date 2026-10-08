@@ -18,6 +18,10 @@ function walk(dir) {
 
 function inspectRoot(candidateRoot) {
   const findings = [];
+  const exceptions = policy.auditedExceptions || [];
+  const isAuditedException = (finding) => exceptions.some((x) =>
+    x.path === finding.file && x.kind === finding.kind && x.value === finding.value && typeof x.reason === 'string' && x.reason.trim().length > 0
+  );
   const regexes = (policy.forbiddenRegex || []).map((source) => new RegExp(source, 'im'));
   const extensions = new Set(policy.textExtensions || []);
   const files = walk(candidateRoot);
@@ -30,19 +34,33 @@ function inspectRoot(candidateRoot) {
     const source = fs.readFileSync(file, 'utf8');
 
     for (const token of policy.forbiddenContentTokens || []) {
-      if (source.includes(token)) findings.push({file:rel, kind:'forbidden-token', value:token});
+      if (source.includes(token)) {
+        const finding={file:rel, kind:'forbidden-token', value:token};
+        if (!isAuditedException(finding)) findings.push(finding);
+      }
     }
     for (const prefix of policy.forbiddenAssetPrefixes || []) {
-      if (source.includes(prefix)) findings.push({file:rel, kind:'forbidden-asset-prefix', value:prefix});
+      if (source.includes(prefix)) {
+        const finding={file:rel, kind:'forbidden-asset-prefix', value:prefix};
+        if (!isAuditedException(finding)) findings.push(finding);
+      }
     }
     for (const regex of regexes) {
-      if (regex.test(source)) findings.push({file:rel, kind:'forbidden-regex', value:regex.source});
+      if (regex.test(source)) {
+        const finding={file:rel, kind:'forbidden-regex', value:regex.source};
+        if (!isAuditedException(finding)) findings.push(finding);
+      }
     }
   }
   return findings;
 }
 
 function runScan() {
+  for (const x of policy.auditedExceptions || []) {
+    if (!x?.path || !x?.kind || !x?.value || !x?.reason) throw new Error('malformed audited anti-contamination exception');
+    const full=path.join(root,x.path);
+    if (!fs.existsSync(full)) throw new Error('audited exception path missing: '+x.path);
+  }
   const roots = (policy.candidateRoots || [])
     .map((name) => path.join(root, name))
     .filter((dir) => fs.existsSync(dir) && fs.statSync(dir).isDirectory());

@@ -13,13 +13,14 @@ for(const x of [
   "NO_BLIND_GLOBAL_REDIRECT",
   "NO_FAKE_CONTENT_ITEM_FOR_LEGACY_URL",
   "HISTORICAL_GAME_HUB_MAP_ONLY_IF_EQUIVALENT_EXISTS",
-  "REDIRECT_NEVER_MASKS_SEMANTIC_INCOMPATIBILITY"
+  "REDIRECT_NEVER_MASKS_SEMANTIC_INCOMPATIBILITY",
+  "UNKNOWN_V2_ROUTE_RETURNS_404"
 ]){
   if(!routeRules.has(x)) throw new Error("missing route rule: "+x);
 }
 
 const seo=new Set(data.seoRules||[]);
-for(const x of ["ONE_CANONICAL_PER_INDEXABLE_ROUTE","SITEMAP_FROM_REAL_V2_ROUTES","NO_GETNOVAFORGE_CANONICAL","NO_CANONICAL_TO_REMOVED_V1","PREVIEW_NOINDEX"]){
+for(const x of ["ONE_CANONICAL_PER_INDEXABLE_ROUTE","SITEMAP_FROM_REAL_V2_ROUTES","NO_GETNOVAFORGE_CANONICAL","NO_CANONICAL_TO_REMOVED_V1","PREVIEW_NOINDEX","ROUTE_SPECIFIC_INITIAL_TITLE_DESCRIPTION"]){
   if(!seo.has(x)) throw new Error("missing seo rule: "+x);
 }
 
@@ -43,9 +44,9 @@ for(const x of ["DNS","DNSSEC","NAMESERVERS","IONOS","CLOUDFLARE_CRITICAL_SETTIN
 }
 
 const status=data.productionStatus||{};
-if(status.rootV2!=="NOT_CREATED") throw new Error("rootV2 status must stay NOT_CREATED before gate");
-if(status.routeRedirects!=="DESIGN_ONLY") throw new Error("route redirects must stay DESIGN_ONLY");
-if(status.swMigrationBrowser!=="NOT_EXECUTED") throw new Error("sw migration must stay NOT_EXECUTED");
+if(status.rootV2!=="CREATED_PRODUCTION_CANDIDATE") throw new Error("rootV2 candidate status drift");
+if(status.routeRedirects!=="V2_INTERNAL_ROUTES_PROVEN_NO_PUBLIC_REDIRECT") throw new Error("route candidate status drift");
+if(status.swMigrationBrowser!=="PROVEN_CANDIDATE") throw new Error("sw migration candidate status drift");
 if(status.cutover!=="NOT_EXECUTED") throw new Error("cutover must stay NOT_EXECUTED");
 if(status.dnsCloudflare!=="UNCHANGED") throw new Error("dns/cloudflare status must stay UNCHANGED");
 
@@ -58,7 +59,7 @@ for(const x of [
   "ROLLBACK_MUST_RESTORE_BUILD_AND_ROUTES",
   "ROLLBACK_MUST_AVOID_STORAGE_CORRUPTION",
   "PREVIEW_MUST_BE_IMMUTABLE_AND_NOINDEX",
-  "MAIN_AND_PRODUCTION_UNTOUCHED_UNTIL_CONTROLLED_PROMOTION"
+  "PRODUCTION_UNTOUCHED_UNTIL_CONTROLLED_PROMOTION"
 ]){
   if(!invariants.has(x)) throw new Error("missing invariant: "+x);
 }

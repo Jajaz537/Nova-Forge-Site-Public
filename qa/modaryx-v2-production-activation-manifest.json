@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-07",
+  "status": "DEV_D1_APPLIED_PRODUCTION_NOT_EXECUTED",
+  "sourceCommit": "128add6e1b39aa072d300befed6641cd16bfef5f",
+  "productionPass": false,
+  "cutoverAuthorized": false,
+  "activationUnits": [
+    {
+      "id": "d1-remote-schema",
+      "blockers": [
+        "backend-real",
+        "real-data-history"
+      ],
+      "state": "DEV_REMOTE_APPLY_SCHEMA_PROVEN_OWNER_HISTORY_PENDING",
+      "exactInputs": [
+        "qa/modaryx-v2-d1-migration-execution-manifest.json"
+      ],
+      "requiredBeforeDev": [
+        "EXACT_REMOTE_TARGET_IDENTITY_PROVEN",
+        "PRE_APPLY_BACKUP_OR_EXPORT_EVIDENCE",
+        "EXPLICIT_DEV_APPROVAL"
+      ],
+      "requiredBeforeProduction": [
+        "DEV_APPLY_SUCCESS",
+        "DEV_POST_APPLY_READ_ONLY_SCHEMA_PROOF",
+        "DEV_OWNER_HISTORY_TARGETED_READ_WRITE_PROOF",
+        "ROLLBACK_OR_RESTORE_PATH_EVIDENCE",
+        "SEPARATE_EXPLICIT_PRODUCTION_APPROVAL"
+      ],
+      "automatic": false,
+      "latestReadOnlyTargetEvidence": "docs/MODARYX-V2-CLOUDFLARE-TARGET-READONLY-EVIDENCE-20261006.md",
+      "observedTargetState": {
+        "pagesPreviewD1Binding": "PRESENT",
+        "pagesProductionD1Binding": "ABSENT",
+        "d1MetadataApiScope": "D1_EDIT_OK_DEDICATED_TOKEN",
+        "remoteApplyExecuted": true,
+        "devApplyRunId": 37613283219,
+        "schemaReady": true,
+        "requiredV2TableCount": 32,
+        "productionPass": false,
+        "ownerHistoryTargetedReadWrite": "PENDING",
+        "productionPipelineProof": "PENDING"
+      }
+    },
+    {
+      "id": "artifact-storage-r2",
+      "blockers": [
+        "backend-real",
+        "providers-connectors-real"
+      ],
+      "state": "BLOCKED_REAL_BINDING_NOT_PROVEN",
+      "binding": "MODARYX_ARTIFACTS",
+      "contract": "qa/modaryx-v2-artifact-storage-r2-contract.json",
+      "requiredBeforeProduction": [
+        "REAL_BUCKET_EXISTS",
+        "EXACT_BINDING_TARGET_PROVEN",
+        "TARGETED_REAL_READ_WRITE_HASH_PROOF",
+        "WITHDRAWN_REVOKED_ARCHIVED_DENY_PROOF",
+        "EXPLICIT_PRODUCTION_APPROVAL"
+      ],
+      "automatic": false,
+      "latestReadOnlyTargetEvidence": "docs/MODARYX-V2-CLOUDFLARE-TARGET-READONLY-EVIDENCE-20261006.md",
+      "observedBindingState": {
+        "preview": "ABSENT",
+        "production": "ABSENT",
+        "mutationPerformed": false
+      }
+    },
+    {
+      "id": "auth-passkeys",
+      "blockers": [
+        "backend-real",
+        "auth-passkeys-real"
+      ],
+      "state": "BLOCKED_REAL_DEVICE_AND_PRODUCTION_ORIGIN_PROOF",
+      "runtimeConfiguration": [
+        "AUTH0_ISSUER_BASE_URL",
+        "AUTH0_AUDIENCE",
+        "AUTH0_CLIENT_ID",
+        "AUTH0_CLIENT_SECRET",
+        "MODARYX_TURNSTILE_SECRET",
+        "MODARYX_TURNSTILE_SITE_KEY"
+      ],
+      "requiredBeforeProduction": [
+        "PRODUCTION_ORIGIN_CALLBACK_LOGOUT_ALLOWLIST_PROVEN",
+        "REAL_DEVICE_PASSKEY_REGISTRATION_PROOF",
+        "REAL_DEVICE_PASSKEY_AUTHENTICATION_PROOF",
+        "SESSION_COOKIE_SECURITY_PROOF",
+        "TURNSTILE_REAL_PRODUCTION_PROOF",
+        "EXPLICIT_PRODUCTION_APPROVAL"
+      ],
+      "automatic": false
+    },
+    {
+      "id": "external-notifications",
+      "blockers": [
+        "providers-connectors-real",
+        "notifications-email-push-real"
+      ],
+      "state": "BLOCKED_CANDIDATES_SELECTED_NOT_IMPLEMENTED_OR_APPROVED",
+      "contract": "qa/modaryx-v2-notification-delivery-contract.json",
+      "requiredProviderState": "CONFIGURED_PRODUCTION_APPROVED",
+      "requiredBeforeProduction": [
+        "EMAIL_PROVIDER_EXPLICITLY_APPROVED_OR_EMAIL_STAYS_DISABLED",
+        "PUSH_PROVIDER_EXPLICITLY_APPROVED_OR_PUSH_STAYS_DISABLED",
+        "EMAIL_DOMAIN_ONBOARDING_AND_DNS_CHANGES_EXPLICITLY_APPROVED_IF_EMAIL_ENABLED",
+        "PUSH_VAPID_SECRET_CONFIGURATION_IF_PUSH_ENABLED",
+        "DISPATCH_IMPLEMENTATION_TARGETED_PROOF",
+        "USER_CONSENT_AND_PREFERENCE_PATH_PROVEN",
+        "REAL_DELIVERY_TARGETED_PROOF",
+        "BOUNCE_UNSUBSCRIBE_RETRY_OR_REVOCATION_PATH_PROVEN_AS_APPLICABLE",
+        "EXPLICIT_PRODUCTION_APPROVAL"
+      ],
+      "automatic": false,
+      "candidateProviders": {
+        "email": "Cloudflare Email Service",
+        "push": "Web Push standard + VAPID"
+      }
+    },
+    {
+      "id": "pwa-production",
+      "blockers": [
+        "pwa-service-worker-production",
+        "cutover"
+      ],
+      "state": "BLOCKED_PRODUCTION_ORIGIN_ACTIVATION_PROOF",
+      "buildFlag": "VITE_MODARYX_PWA_PRODUCTION=1",
+      "contract": "qa/modaryx-v2-pwa-candidate-contract.json",
+      "requiredBeforeProduction": [
+        "EXACT_PRODUCTION_BUILD_SHA",
+        "HTTPS_PRODUCTION_ORIGIN",
+        "SERVICE_WORKER_SCOPE_ROOT_PROOF",
+        "OFFLINE_NAVIGATION_PROOF_ON_PRODUCTION_ORIGIN",
+        "UPDATE_AND_ROLLBACK_PATH_PROOF",
+        "EXPLICIT_RELEASE_APPROVAL"
+      ],
+      "automatic": false
+    },
+    {
+      "id": "field-cwv",
+      "blockers": [
+        "core-web-vitals-production"
+      ],
+      "state": "BLOCKED_REAL_TRAFFIC_AND_APPROVAL",
+      "clientFlag": "VITE_MODARYX_FIELD_CWV=1",
+      "serverFlag": "MODARYX_CWV_RUM_ENABLED=1",
+      "retentionFlag": "MODARYX_CWV_RETENTION_ENABLED=1",
+      "retentionDaysFlag": "MODARYX_CWV_RETENTION_DAYS",
+      "retentionDaysBounds": [
+        7,
+        90
+      ],
+      "contracts": [
+        "qa/modaryx-v2-cwv-rum-contract.json",
+        "qa/modaryx-v2-cwv-retention-contract.json",
+        "qa/modaryx-v2-cwv-p75-report-contract.json"
+      ],
+      "requiredBeforeProduction": [
+        "REMOTE_D1_CWV_TABLE_PROVEN",
+        "RETENTION_POLICY_EXPLICITLY_APPROVED",
+        "PRIVACY_TEXT_MATCHES_REAL_COLLECTION",
+        "DOUBLE_GATE_ENABLEMENT_APPROVED",
+        "REAL_PRODUCTION_TRAFFIC",
+        "LCP_P75_FIELD_EVIDENCE",
+        "INP_P75_FIELD_EVIDENCE",
+        "CLS_P75_FIELD_EVIDENCE"
+      ],
+      "automatic": false
+    },
+    {
+      "id": "weather-provider",
+      "blockers": [
+        "providers-connectors-real"
+      ],
+      "state": "OPTIONAL_OFF_UNLESS_EXPLICITLY_APPROVED",
+      "modeFlag": "MODARYX_WEATHER_MODE",
+      "secretFlag": "MODARYX_WEATHER_API_KEY",
+      "allowedModes": [
+        "off",
+        "weatherapi",
+        "open-meteo-commercial",
+        "open-meteo-noncommercial"
+      ],
+      "requiredBeforeEnable": [
+        "PROVIDER_SELECTED",
+        "TERMS_OR_LICENSE_COMPATIBILITY_VERIFIED",
+        "ATTRIBUTION_REQUIREMENTS_IMPLEMENTED",
+        "SERVER_SIDE_SECRET_CONFIGURATION_IF_REQUIRED",
+        "TARGETED_REAL_PROVIDER_PROOF"
+      ],
+      "automatic": false,
+      "note": "Weather may remain off; season and local-time lens still works without provider."
+    },
+    {
+      "id": "public-cutover",
+      "blockers": [
+        "cutover"
+      ],
+      "state": "NOT_AUTHORIZED",
+      "preflight": "/api/v1/production/readiness",
+      "readOnlyProbe": "qa/check-v2-production-evidence-origin.mjs",
+      "requiredBeforeCutover": [
+        "ALL_REQUIRED_VF_BLOCKERS_CLOSED",
+        "PRODUCTION_READINESS_READ_ONLY_PROOF",
+        "EXTERNAL_VALIDATION_PACK_COMPLETE",
+        "ROLLBACK_PATH_FRESHLY_PROVEN",
+        "EXPLICIT_RELEASE_APPROVAL",
+        "SEPARATE_INDEXABILITY_AND_ROUTE_PROMOTION_STEP"
+      ],
+      "automatic": false
+    }
+  ],
+  "invariants": [
+    "NO_ADDITIONAL_D1_REMOTE_APPLY_BY_THIS_CHANGE",
+    "NO_PRODUCTION_D1_APPLY",
+    "NO_R2_BUCKET_CREATION_OR_BINDING_CHANGE",
+    "NO_PROVIDER_ACTIVATION",
+    "NO_EMAIL_OR_PUSH_DISPATCH",
+    "NO_PWA_PRODUCTION_ENABLE",
+    "NO_FIELD_CWV_ENABLE",
+    "NO_INDEXABILITY_CHANGE",
+    "NO_PUBLIC_ROUTE_PROMOTION",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER",
+    "ALL_19_REAL_EXTERNAL_PRODUCTION_BLOCKERS_REMAIN_OPEN_UNTIL_SEPARATE_EVIDENCE"
+  ]
+}

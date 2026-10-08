@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "LAUNCH_OPERATIONAL_READINESS_CANDIDATE",
+  "sourceHead": "679a74873d2591871e51791372099934e46b9989",
+  "modules": {
+    "customerSupport": {
+      "state": "PREUVE MANQUANTE",
+      "required": [
+        "real public contact channel",
+        "ownership/on-call model",
+        "ticket taxonomy",
+        "priority/severity",
+        "consumer complaint path",
+        "payment/refund escalation when enabled",
+        "privacy-rights handoff",
+        "security incident handoff",
+        "rights/IP handoff",
+        "moderation/report handoff",
+        "accessibility support path"
+      ],
+      "promisesForbidden": [
+        "unsupported response-time SLA",
+        "fake 24/7 support",
+        "fictional phone/email address"
+      ]
+    },
+    "fraudAndAbuse": {
+      "state": "EN COURS",
+      "threats": [
+        "account takeover",
+        "spam/bot creation",
+        "malicious upload or malware",
+        "rights/licence misrepresentation",
+        "rating/review manipulation",
+        "creator impersonation",
+        "refund/chargeback abuse if payments exist",
+        "notification abuse",
+        "moderation/report abuse"
+      ],
+      "controlsCandidate": [
+        "server-side authorization",
+        "rate limiting",
+        "quarantine",
+        "audit receipts",
+        "least privilege",
+        "anti-automation provider only if justified",
+        "manual review for high-impact cases",
+        "fail-closed distribution when trust evidence is missing"
+      ],
+      "realFraudData": "PREUVE MANQUANTE"
+    },
+    "moderationOperations": {
+      "state": "EN COURS",
+      "sourceContract": "docs/MODARYX-V2-MODERATION-APPEALS-CONTRACT-20261003.md",
+      "required": [
+        "moderator/reviewer staffing ownership",
+        "queues and severity",
+        "notice/action templates when applicable",
+        "appeals ownership",
+        "quarantine/removal authority",
+        "legal escalation",
+        "rights/IP escalation",
+        "urgent safety process",
+        "audit retention"
+      ],
+      "dsaRoleDependency": "docs/MODARYX-V2-DSA-ROLE-QUALIFICATION-WORKSHEET-20261007.md",
+      "staffing": "PREUVE MANQUANTE"
+    },
+    "backupRestoreRollback": {
+      "state": "PREUVE MANQUANTE",
+      "required": [
+        "D1 production backup/restore evidence",
+        "R2 versioning/backup strategy if activated",
+        "configuration/secrets recovery process",
+        "deployment rollback procedure",
+        "data migration rollback/forward-fix policy",
+        "recovery time objective candidate",
+        "recovery point objective candidate",
+        "restore drill"
+      ],
+      "note": "Do not claim backup or disaster recovery without a tested restore."
+    },
+    "monitoringObservability": {
+      "state": "PREUVE MANQUANTE",
+      "requiredSignals": [
+        "availability/error rates",
+        "auth failures",
+        "server exceptions",
+        "database errors/latency",
+        "storage errors",
+        "provider delivery failures",
+        "moderation queue health",
+        "security/rate-limit events",
+        "CWV field metrics only when lawfully activated",
+        "cost/budget anomalies"
+      ],
+      "privacyRule": "Monitoring must minimize personal data and must not silently become marketing analytics."
+    },
+    "incidentResponse": {
+      "state": "EN COURS",
+      "privacyIncidentSource": "docs/MODARYX-V2-DATA-BREACH-INCIDENT-PROCESS-CANDIDATE-20261008.md",
+      "required": [
+        "technical incident severity matrix",
+        "owner/escalation",
+        "status communication decision",
+        "rollback/containment",
+        "evidence preservation",
+        "privacy/legal branch when personal data is involved",
+        "postmortem and corrective actions"
+      ]
+    },
+    "releaseOperations": {
+      "state": "EN COURS",
+      "required": [
+        "release owner",
+        "change log",
+        "deployment receipt",
+        "rollback point",
+        "smoke tests",
+        "security/accessibility release checks",
+        "customer support briefing",
+        "known-issues decision",
+        "no cutover without explicit authorization"
+      ]
+    }
+  },
+  "severityCandidate": {
+    "SEV0": "security/safety/data-loss or broad critical outage candidate",
+    "SEV1": "major user-impacting function unavailable or high-risk abuse candidate",
+    "SEV2": "degraded feature with workaround",
+    "SEV3": "minor defect/request",
+    "state": "EN COURS",
+    "note": "No external response-time promise is attached."
+  },
+  "launchGate": {
+    "publicSupportChannel": "PREUVE MANQUANTE",
+    "supportOwnership": "PREUVE MANQUANTE",
+    "fraudAbuseOperationalOwner": "PREUVE MANQUANTE",
+    "moderationStaffing": "PREUVE MANQUANTE",
+    "testedBackupRestore": "PREUVE MANQUANTE",
+    "testedRollback": "PREUVE MANQUANTE",
+    "productionMonitoring": "PREUVE MANQUANTE",
+    "incidentEscalation": "PREUVE MANQUANTE",
+    "releaseOwner": "PREUVE MANQUANTE"
+  },
+  "productionActivated": false
+}

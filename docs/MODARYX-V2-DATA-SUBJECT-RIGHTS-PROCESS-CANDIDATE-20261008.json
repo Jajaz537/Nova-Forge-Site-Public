@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "DATA_SUBJECT_RIGHTS_OPERATIONAL_PROCESS_CANDIDATE",
+  "activatesProduction": false,
+  "controllerIdentity": "PREUVE MANQUANTE",
+  "privacyContact": "PREUVE MANQUANTE",
+  "requestTypes": [
+    "ACCESS",
+    "RECTIFICATION",
+    "ERASURE",
+    "PORTABILITY_EXPORT",
+    "OBJECTION",
+    "RESTRICTION",
+    "CONSENT_WITHDRAWAL",
+    "ACCOUNT_CLOSURE",
+    "PROCESSING_INFORMATION",
+    "AUTOMATED_DECISION_CHALLENGE_IF_APPLICABLE"
+  ],
+  "states": [
+    "RECEIVED",
+    "IDENTITY_CHECK_PENDING",
+    "SCOPE_DISCOVERY",
+    "LEGAL_REVIEW_REQUIRED",
+    "PROCESSING",
+    "WAITING_FOR_USER",
+    "COMPLETED",
+    "PARTIALLY_COMPLETED_WITH_REASON",
+    "REJECTED_WITH_REASON"
+  ],
+  "identityVerification": {
+    "principle": "PROPORTIONATE_TO_RISK",
+    "preferred": [
+      "AUTHENTICATED_SESSION",
+      "REAUTHENTICATION",
+      "VERIFIED_CHANNEL_CHALLENGE",
+      "MINIMAL_CONTEXTUAL_PROOF"
+    ],
+    "avoidByDefault": [
+      "IDENTITY_DOCUMENT_COPY",
+      "UNNECESSARY_SENSITIVE_DATA"
+    ]
+  },
+  "sourceRegister": "docs/MODARYX-V2-PRIVACY-TABLE-FIELD-REGISTER-CANDIDATE-20261007.json",
+  "exportCandidate": {
+    "formats": [
+      "JSON",
+      "ZIP_IF_MULTI_FILE"
+    ],
+    "manifest": true,
+    "schemaVersion": true,
+    "checksumsForArtifacts": true,
+    "excludes": [
+      "SECRETS",
+      "SESSION_TOKENS",
+      "OTHER_USERS_DATA",
+      "PROTECTED_INTERNAL_SECURITY_DETAILS"
+    ]
+  },
+  "erasureCandidate": {
+    "globalHardDelete": false,
+    "steps": [
+      "SCOPE_DISCOVERY",
+      "CLASSIFY_ERASABLE_DATA",
+      "CLASSIFY_LEGAL_SECURITY_RETENTION",
+      "DELETE_OR_ANONYMIZE_WHERE_APPROPRIATE",
+      "PROPAGATE_TO_REAL_PROCESSORS",
+      "VERIFY_STORES",
+      "MINIMAL_RECEIPT"
+    ]
+  },
+  "consentWithdrawal": {
+    "asEasyAsGrantWhereRequired": true,
+    "prospectiveEffect": true,
+    "providerPropagationRequired": true
+  },
+  "missingFacts": [
+    "CONTROLLER_IDENTITY",
+    "PRIVACY_CONTACT",
+    "REAL_INTAKE_CHANNEL",
+    "APPLICABLE_DEADLINES",
+    "FINAL_LEGAL_BASES",
+    "FINAL_RETENTION",
+    "REAL_PROCESSORS",
+    "TABLE_LEVEL_ERASURE_RULES",
+    "LEGAL_EXCEPTIONS",
+    "FINAL_EXPORT_FORMAT",
+    "IDENTITY_VERIFICATION_IMPLEMENTATION",
+    "LEGAL_REVIEW"
+  ],
+  "invariants": [
+    "NO_PRODUCTION_DELETION",
+    "NO_FAKE_LEGAL_DEADLINE",
+    "NO_FAKE_DPO_OR_CONTACT",
+    "NO_EXCESSIVE_IDENTITY_COLLECTION",
+    "NO_OTHER_USER_DATA_IN_EXPORT",
+    "NO_PROVIDER_SIMULATION",
+    "NO_LEGAL_APPROVAL_INFERENCE"
+  ]
+}

@@ -1,0 +1,720 @@
+/* MODARYX V2 — Premium reconciliation R17 / Distinct Realms
+   Owner feedback remains authoritative: the site must not read as the old design or a mockup.
+   Visual-only. No route, data, backend, entitlement, provider or production behavior changes. */
+
+:root{
+  --r17-cyan:#70f2ef;
+  --r17-violet:#8f7cff;
+  --r17-gold:#eecf91;
+  --r17-ink:#f4fbfd;
+  --r17-muted:rgba(223,238,244,.70);
+  --r17-line:rgba(161,228,239,.10);
+  --r17-night:#02070d;
+}
+
+/* Shared visual language: less repeated "hero + boxes", more editorial continuity. */
+.games-index,
+.catalog,
+.collections-page,
+.creators-page,
+.community,
+.account-center{
+  overflow:clip;
+}
+
+.games-index > h1,
+.catalog-title > h1,
+.collections-page > h1,
+.creators-page > h1,
+.community > h1,
+.account-center > h1{
+  text-wrap:balance;
+}
+
+.games-index .catalog-search,
+.catalog .catalog-search,
+.collections-page .catalog-search,
+.creators-page .catalog-search{
+  background:rgba(2,9,15,.52)!important;
+  border-color:rgba(153,230,241,.10)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.02)!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* GAMES — selection deck, not a catalogue form.                              */
+/* -------------------------------------------------------------------------- */
+
+.games-index{
+  min-height:calc(100vh - 40px);
+  padding-top:168px!important;
+  display:grid;
+  grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr);
+  grid-template-areas:
+    "kicker support"
+    "title support"
+    "intro support"
+    "tools tools"
+    "games games";
+  column-gap:72px;
+  align-items:start;
+}
+
+.games-index > .kicker{grid-area:kicker}
+.games-index > h1{grid-area:title;max-width:8.2ch!important;margin-bottom:0}
+.games-index > .page-intro{grid-area:intro;max-width:520px!important}
+.games-index > .game-support-request{grid-area:support;margin:0!important;align-self:end}
+.games-index > .index-tools{grid-area:tools}
+.games-index > .game-grid{grid-area:games}
+
+.games-index::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:76px -18vw auto 46%;
+  height:610px;
+  background:
+    radial-gradient(circle at 35% 35%,rgba(112,242,239,.12),transparent 24rem),
+    radial-gradient(circle at 72% 26%,rgba(143,124,255,.16),transparent 28rem);
+  filter:blur(4px);
+}
+
+.games-index::after{
+  opacity:.52!important;
+  height:690px!important;
+  background:
+    linear-gradient(180deg,rgba(2,7,13,.08),rgba(2,7,13,.54) 60%,#02070d),
+    linear-gradient(90deg,rgba(2,7,13,.82),rgba(2,7,13,.18) 60%,rgba(2,7,13,.70)),
+    url('/assets/living-threshold-content-sheet.png') 100% 0%/300% 200% no-repeat!important;
+}
+
+.games-index .game-support-request{
+  min-height:180px;
+  padding:30px 34px!important;
+  border-left:0!important;
+  border-top:1px solid rgba(112,242,239,.20)!important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(143,124,255,.12),transparent 20rem),
+    rgba(3,10,17,.45)!important;
+}
+
+.games-index .index-tools{
+  margin-top:54px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:14px;
+  max-width:860px;
+}
+
+.games-index .game-grid{
+  margin-top:28px;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr)!important;
+  grid-auto-rows:minmax(250px,auto);
+  gap:20px!important;
+}
+
+.games-index .game-card{
+  min-height:280px!important;
+  border-radius:28px!important;
+  overflow:hidden;
+  border-color:rgba(145,216,230,.09)!important;
+}
+
+.games-index .game-card:first-child{
+  grid-row:span 2;
+  min-height:590px!important;
+  border-radius:38px!important;
+}
+
+.games-index .game-card:first-child > .media{
+  opacity:.94;
+}
+
+.games-index .game-card:first-child > div:last-child{
+  padding:220px 34px 34px!important;
+}
+
+.games-index .game-card:first-child h2{
+  font-size:clamp(42px,4vw,64px)!important;
+  line-height:.93!important;
+  letter-spacing:-.045em;
+}
+
+/* -------------------------------------------------------------------------- */
+/* MODS — atlas with one dominant plate and thinner records.                   */
+/* -------------------------------------------------------------------------- */
+
+.catalog{
+  padding-top:176px!important;
+}
+
+.catalog::before{
+  opacity:.42!important;
+  height:760px!important;
+  background:
+    linear-gradient(180deg,rgba(2,7,13,.05),rgba(2,7,13,.50) 58%,#02070d),
+    linear-gradient(100deg,rgba(2,7,13,.92),rgba(2,7,13,.22) 55%,rgba(2,7,13,.76)),
+    url('/assets/living-threshold-content-sheet.png') 50% 100%/300% 200% no-repeat!important;
+}
+
+.catalog .catalog-title{
+  display:grid;
+  grid-template-columns:minmax(0,.72fr) minmax(260px,.28fr);
+  grid-template-areas:"kicker kicker" "title meta" "intro meta";
+  column-gap:64px;
+  align-items:end;
+}
+
+.catalog .catalog-title>.kicker{grid-area:kicker}
+.catalog .catalog-title>h1{grid-area:title}
+.catalog .catalog-title>p{grid-area:intro}
+.catalog .catalog-title::after{
+  grid-area:meta;
+  align-self:stretch;
+  justify-self:end;
+  width:1px!important;
+  height:100%!important;
+  margin:0 34px 0 0!important;
+  background:linear-gradient(180deg,var(--r17-cyan),transparent)!important;
+}
+
+.catalog .catalog-tools{
+  margin-top:48px;
+  max-width:1040px;
+}
+
+.catalog .catalog-summary{
+  margin-top:24px;
+}
+
+.catalog-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.2fr) minmax(240px,.8fr) minmax(240px,.8fr)!important;
+  gap:18px!important;
+  align-items:stretch;
+}
+
+.catalog-grid .content-card:first-child{
+  grid-row:span 2;
+  min-height:620px!important;
+  border-radius:38px!important;
+}
+
+.catalog-grid .content-card:not(:first-child){
+  min-height:300px!important;
+  border-radius:24px!important;
+}
+
+.catalog-grid .content-card:first-child .card-copy{
+  padding:240px 36px 36px!important;
+}
+
+.catalog-grid .content-card:not(:first-child) .card-copy{
+  padding:120px 22px 22px!important;
+}
+
+.catalog-grid .content-card:nth-child(3n){
+  transform:translateY(18px);
+}
+
+/* -------------------------------------------------------------------------- */
+/* COLLECTIONS — archive room, not another card grid.                          */
+/* -------------------------------------------------------------------------- */
+
+.collections-page{
+  padding-top:160px!important;
+  background:
+    radial-gradient(circle at 92% 12%,rgba(238,207,145,.12),transparent 30rem),
+    linear-gradient(180deg,#02070d,#071019 48%,#02070d)!important;
+}
+
+.collections-page::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:96px auto auto 62%;
+  width:38vw;
+  height:520px;
+  border:1px solid rgba(238,207,145,.08);
+  border-radius:50% 50% 8% 8%;
+  transform:rotate(7deg);
+  background:linear-gradient(180deg,rgba(238,207,145,.035),transparent 72%);
+}
+
+.collections-page .collection-mode-tabs{
+  margin-top:34px;
+  width:max-content;
+  border-bottom:1px solid rgba(238,207,145,.12);
+}
+
+.collections-page .collection-tools{
+  margin-top:38px;
+}
+
+.collections-page .collection-grid{
+  margin-top:34px;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.5fr) minmax(260px,.5fr)!important;
+  gap:18px!important;
+}
+
+.collections-page .collection-card:first-child{
+  grid-row:span 3;
+  min-height:720px!important;
+  border-radius:44px!important;
+}
+
+.collections-page .collection-card:first-child > div{
+  padding:300px 38px 38px!important;
+}
+
+.collections-page .collection-card:not(:first-child){
+  min-height:220px!important;
+  border-radius:0!important;
+  border-width:0 0 1px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.collections-page .collection-card:not(:first-child) > .media{
+  width:118px!important;
+  height:118px!important;
+  inset:28px auto auto 0!important;
+  border-radius:20px!important;
+  opacity:.78;
+}
+
+.collections-page .collection-card:not(:first-child) > div{
+  padding:28px 20px 28px 142px!important;
+  min-height:176px;
+}
+
+.collections-page .collection-card:not(:first-child) h2{
+  font-size:30px!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* CREATORS — studio wall with a featured identity and staggered dossiers.     */
+/* -------------------------------------------------------------------------- */
+
+.creators-page{
+  padding-top:160px!important;
+  background:
+    linear-gradient(180deg,rgba(2,7,13,.08),#02070d 720px),
+    radial-gradient(circle at 18% 10%,rgba(112,242,239,.09),transparent 28rem),
+    linear-gradient(180deg,#030912,#02070d)!important;
+}
+
+.creators-page::before{
+  content:"";
+  position:absolute;
+  inset:86px -8vw auto 48%;
+  height:560px;
+  z-index:-1;
+  background:
+    linear-gradient(90deg,rgba(2,7,13,.76),rgba(2,7,13,.12)),
+    url('/assets/living-threshold-content-sheet.png') 50% 0%/300% 200% no-repeat;
+  opacity:.30;
+  mask-image:linear-gradient(90deg,transparent,#000 24%,#000 76%,transparent);
+}
+
+.creators-page .creator-studio-entry{
+  margin-top:18px;
+  border-radius:999px!important;
+}
+
+.creators-page .creators-search{
+  margin-top:42px;
+  max-width:700px;
+}
+
+.creator-index-grid{
+  margin-top:34px;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.28fr) repeat(2,minmax(240px,.72fr))!important;
+  gap:18px!important;
+  align-items:start;
+}
+
+.creator-index-card{
+  border-radius:28px!important;
+}
+
+.creator-index-card:first-child{
+  min-height:650px!important;
+  border-radius:42px!important;
+}
+
+.creator-index-card:first-child > div:last-child{
+  padding:250px 34px 34px!important;
+}
+
+.creator-index-card:nth-child(2){
+  transform:translateY(82px)!important;
+}
+
+.creator-index-card:nth-child(3){
+  transform:translateY(20px)!important;
+}
+
+.creator-index-card:not(:first-child){
+  min-height:430px!important;
+}
+
+.creator-index-card:not(:first-child) > div:last-child{
+  padding:150px 24px 24px!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* COMMUNITY — observatory: editorial rail + live context panel.               */
+/* -------------------------------------------------------------------------- */
+
+.page-section.community{
+  padding-top:154px!important;
+  display:grid;
+  grid-template-columns:minmax(280px,.62fr) minmax(0,1.38fr);
+  grid-template-areas:
+    "kicker board"
+    "title board"
+    "intro board"
+    "tabs board";
+  column-gap:76px;
+  row-gap:18px;
+  align-items:start;
+  background:
+    radial-gradient(circle at 80% 14%,rgba(143,124,255,.18),transparent 30rem),
+    radial-gradient(circle at 18% 74%,rgba(112,242,239,.07),transparent 30rem),
+    linear-gradient(180deg,#02070d,#06101a 54%,#02070d)!important;
+}
+
+.community>.kicker{grid-area:kicker}
+.community>h1{grid-area:title;max-width:7.4ch!important;margin:0}
+.community>.page-intro{grid-area:intro;max-width:460px!important}
+.community>.community-tabs{grid-area:tabs}
+.community>.community-board{grid-area:board}
+
+.community .community-tabs{
+  display:grid!important;
+  gap:2px!important;
+  align-self:start;
+  margin-top:18px;
+  border:0!important;
+  background:transparent!important;
+}
+
+.community .community-tabs button{
+  justify-content:flex-start;
+  min-height:46px;
+  padding:0 0 0 16px!important;
+  border-radius:0!important;
+  border-left:1px solid rgba(164,225,239,.08)!important;
+  background:transparent!important;
+}
+
+.community .community-tabs button.active{
+  border-left-color:var(--r17-cyan)!important;
+  color:var(--r17-ink)!important;
+}
+
+.community .community-board{
+  min-height:650px;
+  padding:52px!important;
+  border:1px solid rgba(164,225,239,.09)!important;
+  border-radius:42px!important;
+  background:
+    linear-gradient(150deg,rgba(7,18,28,.94),rgba(3,10,17,.82))!important;
+  box-shadow:0 50px 140px rgba(0,0,0,.34)!important;
+}
+
+.community .community-board h2{
+  max-width:8ch;
+  font-size:clamp(44px,4.4vw,70px)!important;
+  line-height:.92!important;
+  letter-spacing:-.05em;
+}
+
+.community .community-list{
+  margin-top:54px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* ACCOUNT — private atelier: quiet identity rail + focused work surface.       */
+/* -------------------------------------------------------------------------- */
+
+.account-center{
+  padding-top:154px!important;
+  display:grid;
+  grid-template-columns:minmax(290px,.58fr) minmax(0,1.42fr);
+  grid-template-areas:
+    "kicker shell"
+    "title shell"
+    "intro shell";
+  column-gap:72px;
+  row-gap:18px;
+  align-items:start;
+  background:
+    radial-gradient(circle at 82% 12%,rgba(143,124,255,.13),transparent 28rem),
+    radial-gradient(circle at 14% 64%,rgba(112,242,239,.05),transparent 26rem),
+    linear-gradient(180deg,#02070d,#050d17 54%,#02070d)!important;
+}
+
+.account-center>.kicker{grid-area:kicker}
+.account-center>h1{grid-area:title;max-width:7.2ch!important;margin:0}
+.account-center>.page-intro{grid-area:intro;max-width:440px!important}
+.account-center>.account-shell{grid-area:shell}
+
+.account-center .account-shell{
+  min-height:680px;
+  display:grid!important;
+  grid-template-columns:180px minmax(0,1fr)!important;
+  border:1px solid rgba(164,225,239,.08)!important;
+  border-radius:40px!important;
+  overflow:hidden;
+  background:rgba(3,10,17,.68)!important;
+  box-shadow:0 50px 150px rgba(0,0,0,.30)!important;
+}
+
+.account-center .account-nav{
+  padding:28px 0!important;
+  border-right:1px solid rgba(164,225,239,.07);
+  background:rgba(255,255,255,.008);
+}
+
+.account-center .account-nav button{
+  min-height:46px;
+  border-radius:0!important;
+  border:0!important;
+  border-left:2px solid transparent!important;
+  background:transparent!important;
+  text-align:left;
+}
+
+.account-center .account-nav button.active,
+.account-center .account-nav button[aria-pressed="true"]{
+  border-left-color:var(--r17-cyan)!important;
+  background:linear-gradient(90deg,rgba(112,242,239,.06),transparent)!important;
+}
+
+.account-center .account-panel{
+  min-height:680px;
+  padding:50px!important;
+  background:transparent!important;
+}
+
+.account-center .account-panel>h2{
+  max-width:9ch;
+  font-size:clamp(42px,4vw,64px)!important;
+  line-height:.94!important;
+  letter-spacing:-.045em;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Mobile: preserve distinct identities without forcing desktop compositions.  */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width:900px){
+  .games-index,
+  .page-section.community,
+  .account-center{
+    display:block!important;
+  }
+
+  .games-index{
+    padding-top:132px!important;
+  }
+
+  .games-index>.game-support-request{
+    margin-top:28px!important;
+  }
+
+  .games-index .index-tools{
+    margin-top:34px!important;
+  }
+
+  .games-index .game-grid,
+  .catalog-grid,
+  .collections-page .collection-grid,
+  .creator-index-grid{
+    grid-template-columns:1fr!important;
+  }
+
+  .games-index .game-card:first-child,
+  .catalog-grid .content-card:first-child,
+  .collections-page .collection-card:first-child,
+  .creator-index-card:first-child{
+    grid-row:auto!important;
+    min-height:520px!important;
+    border-radius:30px!important;
+  }
+
+  .catalog .catalog-title{
+    display:block;
+  }
+
+  .catalog .catalog-title::after{
+    width:72px!important;
+    height:1px!important;
+    margin:24px 0 0!important;
+  }
+
+  .catalog-grid .content-card:nth-child(3n){
+    transform:none;
+  }
+
+  .collections-page .collection-card:not(:first-child){
+    min-height:200px!important;
+  }
+
+  .collections-page .collection-card:not(:first-child) > .media{
+    width:96px!important;
+    height:96px!important;
+    top:22px!important;
+  }
+
+  .collections-page .collection-card:not(:first-child) > div{
+    padding:22px 16px 22px 116px!important;
+  }
+
+  .creator-index-card:nth-child(2),
+  .creator-index-card:nth-child(3){
+    transform:none!important;
+  }
+
+  .community>.community-board{
+    margin-top:26px;
+    min-height:0;
+    padding:30px 22px!important;
+    border-radius:28px!important;
+  }
+
+  .community .community-tabs{
+    display:flex!important;
+    overflow-x:auto;
+    margin-top:28px;
+    gap:4px!important;
+  }
+
+  .community .community-tabs button{
+    min-width:max-content;
+    padding:0 14px!important;
+    border-left:0!important;
+    border-bottom:1px solid rgba(164,225,239,.08)!important;
+  }
+
+  .community .community-tabs button.active{
+    border-bottom-color:var(--r17-cyan)!important;
+  }
+
+  .account-center>.account-shell{
+    margin-top:30px;
+    display:block!important;
+    min-height:0;
+    border-radius:28px!important;
+  }
+
+  .account-center .account-nav{
+    display:flex!important;
+    overflow-x:auto;
+    padding:10px!important;
+    border-right:0;
+    border-bottom:1px solid rgba(164,225,239,.07);
+  }
+
+  .account-center .account-nav button{
+    min-width:max-content;
+    border-left:0!important;
+    border-bottom:2px solid transparent!important;
+  }
+
+  .account-center .account-nav button.active,
+  .account-center .account-nav button[aria-pressed="true"]{
+    border-bottom-color:var(--r17-cyan)!important;
+    background:transparent!important;
+  }
+
+  .account-center .account-panel{
+    min-height:0;
+    padding:30px 22px!important;
+  }
+}
+
+@media (max-width:560px){
+  .games-index,
+  .catalog,
+  .collections-page,
+  .creators-page,
+  .page-section.community,
+  .account-center{
+    padding-top:122px!important;
+  }
+
+  .games-index .game-card:first-child,
+  .catalog-grid .content-card:first-child,
+  .collections-page .collection-card:first-child,
+  .creator-index-card:first-child{
+    min-height:470px!important;
+  }
+
+  .games-index .game-card:first-child > div:last-child,
+  .catalog-grid .content-card:first-child .card-copy,
+  .collections-page .collection-card:first-child > div,
+  .creator-index-card:first-child > div:last-child{
+    padding:180px 22px 24px!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .catalog-grid .content-card:nth-child(3n),
+  .creator-index-card:nth-child(2),
+  .creator-index-card:nth-child(3){
+    transform:none!important;
+  }
+}
+
+
+/* R17.1 targeted typography correction after fresh capture review. */
+@media (min-width:901px){
+  .catalog .catalog-title{
+    grid-template-columns:minmax(0,1fr) 120px!important;
+  }
+
+  .catalog .catalog-title > h1{
+    max-width:7.8ch!important;
+    width:auto!important;
+    white-space:normal!important;
+    word-break:normal!important;
+    overflow-wrap:normal!important;
+  }
+
+  .community > h1{
+    max-width:9.2ch!important;
+    width:auto!important;
+  }
+
+  .account-center > h1{
+    max-width:9.4ch!important;
+    width:auto!important;
+  }
+}
+
+
+/* R17.2 account-title correction after desktop/mobile visual review. */
+@media (min-width:901px){
+  .account-center{
+    grid-template-columns:minmax(360px,.72fr) minmax(0,1.28fr)!important;
+  }
+
+  .account-center > h1{
+    max-width:12.5ch!important;
+    width:auto!important;
+  }
+}
+
+@media (max-width:900px){
+  .account-center > h1{
+    max-width:none!important;
+    width:100%!important;
+    font-size:clamp(42px,12vw,58px)!important;
+    line-height:.94!important;
+  }
+}

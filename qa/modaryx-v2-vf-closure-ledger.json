@@ -1,0 +1,340 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "ACTIVE_FAIL_CLOSED_20_OPEN",
+  "sourceCommit": "1c8f82214f45194c7d48b11ceb5d61c82c9191e7",
+  "sourceGate": "qa/modaryx-v2-vf-readiness-gate.json",
+  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-07-P0-RIGHTS-FR-EU.md",
+  "blockerCount": 20,
+  "blockers": [
+    {
+      "id": "nvda-real",
+      "category": "external-validation",
+      "state": "OPEN",
+      "executorClass": "REAL_DEVICE_OPERATOR",
+      "closureMode": "EXTERNAL_SESSION",
+      "currentPreparation": "qa/modaryx-v2-external-validation-execution-pack.json",
+      "requiredEvidence": [
+        "WINDOWS_REAL",
+        "NVDA_ACTIVE",
+        "REAL_BROWSER",
+        "NO_OPEN_P0_P1"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "voiceover-real",
+      "category": "external-validation",
+      "state": "OPEN",
+      "executorClass": "REAL_DEVICE_OPERATOR",
+      "closureMode": "EXTERNAL_SESSION",
+      "currentPreparation": "qa/modaryx-v2-external-validation-execution-pack.json",
+      "requiredEvidence": [
+        "APPLE_OS_REAL",
+        "VOICEOVER_ACTIVE",
+        "REAL_BROWSER",
+        "NO_OPEN_P0_P1"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "talkback-real",
+      "category": "external-validation",
+      "state": "OPEN",
+      "executorClass": "REAL_DEVICE_OPERATOR",
+      "closureMode": "EXTERNAL_SESSION",
+      "currentPreparation": "qa/modaryx-v2-external-validation-execution-pack.json",
+      "requiredEvidence": [
+        "ANDROID_PHYSICAL_DEVICE",
+        "TALKBACK_ACTIVE",
+        "CHROME_REAL",
+        "NO_OPEN_P0_P1"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "safari-real",
+      "category": "external-validation",
+      "state": "OPEN",
+      "executorClass": "REAL_DEVICE_OPERATOR",
+      "closureMode": "EXTERNAL_SESSION",
+      "currentPreparation": "qa/modaryx-v2-external-validation-execution-pack.json",
+      "requiredEvidence": [
+        "SAFARI_EXECUTED",
+        "APPLE_OS_REAL",
+        "CRITICAL_TASKS_COMPLETE",
+        "NO_OPEN_P0_P1"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "physical-devices",
+      "category": "external-validation",
+      "state": "OPEN",
+      "executorClass": "REAL_DEVICE_OPERATOR",
+      "closureMode": "EXTERNAL_SESSION",
+      "currentPreparation": "qa/modaryx-v2-external-validation-execution-pack.json",
+      "requiredEvidence": [
+        "PHYSICAL_DEVICE_REAL",
+        "TOUCH_REAL",
+        "CRITICAL_TASKS_COMPLETE",
+        "NO_OPEN_P0_P1"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "owner-visual-reconciliation-current",
+      "category": "visual-owner",
+      "state": "OPEN",
+      "executorClass": "PRODUCT_DESIGN_WORK_PLUS_OWNER_REVIEW",
+      "closureMode": "CURRENT_CANDIDATE_VISUAL_RECONCILIATION",
+      "currentPreparation": "docs/MODARYX-V2-VF-ARCHITECTURE-R2-EVIDENCE-20261008.json",
+      "requiredEvidence": [
+        "CURRENT_V2_ARCHITECTURE_PRESERVED",
+        "PREMIUM_VISUAL_LANGUAGE_RECONCILED",
+        "FRESH_DESKTOP_AND_MOBILE_CAPTURES",
+        "OWNER_VISUAL_ACCEPTANCE"
+      ],
+      "automationCanCloseWithoutExternalChange": false,
+      "latestCandidate": {
+        "mergePr": 289,
+        "mergeSha": "229244deab846a7ff52409f52267538c994d21f5",
+        "candidateSha": "64058072a65d4499850dbfbc6b1940793c40e772",
+        "visualProofRunId": 37813820976,
+        "artifactId": 11565812865,
+        "artifactDigest": "sha256:b768a2d84549164e4731797c743d17f15a02927ed12a1e0ffc977d0a9c4873bb",
+        "state": "OPEN",
+        "ownerAcceptance": "PREUVE MANQUANTE"
+      }
+    },
+    {
+      "id": "backend-real",
+      "category": "web-production",
+      "state": "OPEN",
+      "executorClass": "PRODUCTION_INFRA_OPERATOR",
+      "closureMode": "CONTROLLED_PRODUCTION_INFRA",
+      "currentPreparation": "qa/modaryx-v2-production-activation-manifest.json",
+      "requiredEvidence": [
+        "REMOTE_D1_SCHEMA_PROVEN",
+        "PRODUCTION_BACKEND_FOUNDATION_PROVEN",
+        "PRODUCTION_ORIGIN_READ_ONLY_PROBE",
+        "ROLLBACK_OR_RESTORE_EVIDENCE"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "auth-passkeys-real",
+      "category": "web-production",
+      "state": "OPEN",
+      "executorClass": "REAL_DEVICE_AND_PRODUCTION_OPERATOR",
+      "closureMode": "CONTROLLED_PRODUCTION_PLUS_REAL_DEVICE",
+      "currentPreparation": "qa/modaryx-v2-production-activation-manifest.json",
+      "requiredEvidence": [
+        "PRODUCTION_AUTH_CONFIG_PROVEN",
+        "REAL_DEVICE_PASSKEY_REGISTRATION",
+        "REAL_DEVICE_PASSKEY_AUTHENTICATION",
+        "SESSION_COOKIE_SECURITY_PROOF",
+        "TURNSTILE_PRODUCTION_PROOF"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "real-data-history",
+      "category": "web-production",
+      "state": "OPEN",
+      "executorClass": "PRODUCTION_INFRA_OPERATOR",
+      "closureMode": "CONTROLLED_REMOTE_DATA_PROOF",
+      "currentPreparation": "qa/modaryx-v2-d1-migration-execution-manifest.json",
+      "requiredEvidence": [
+        "DEV_REMOTE_APPLY_PROVEN",
+        "POST_APPLY_SCHEMA_PROOF",
+        "OWNER_HISTORY_TARGETED_READ_WRITE",
+        "ROLLBACK_OR_RESTORE_EVIDENCE",
+        "PRODUCTION_PIPELINE_PROOF"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "providers-connectors-real",
+      "category": "web-production",
+      "state": "OPEN",
+      "executorClass": "PRODUCTION_INFRA_OPERATOR",
+      "closureMode": "CONTROLLED_PROVIDER_ACTIVATION",
+      "currentPreparation": "qa/modaryx-v2-production-activation-manifest.json",
+      "requiredEvidence": [
+        "R2_REAL_BINDING_PROOF",
+        "REQUIRED_PROVIDER_SELECTIONS_EXPLICIT",
+        "TERMS_LICENSE_ATTRIBUTION_VERIFIED",
+        "TARGETED_REAL_PROVIDER_PROOFS"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "notifications-email-push-real",
+      "category": "web-production",
+      "state": "OPEN",
+      "executorClass": "PRODUCTION_INFRA_OPERATOR",
+      "closureMode": "CONTROLLED_PROVIDER_DELIVERY",
+      "currentPreparation": "qa/modaryx-v2-notification-delivery-contract.json",
+      "requiredEvidence": [
+        "PROVIDER_EXPLICITLY_SELECTED",
+        "PROVIDER_STATE_CONFIGURED_PRODUCTION_APPROVED",
+        "USER_CONSENT_PREFERENCES_PROVEN",
+        "REAL_DELIVERY_TARGETED_PROOF",
+        "FAILURE_UNSUBSCRIBE_OR_REVOCATION_PATH_PROVEN"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "pwa-service-worker-production",
+      "category": "web-production",
+      "state": "OPEN",
+      "executorClass": "PRODUCTION_RELEASE_OPERATOR",
+      "closureMode": "CONTROLLED_PRODUCTION_ACTIVATION",
+      "currentPreparation": "qa/modaryx-v2-pwa-candidate-contract.json",
+      "requiredEvidence": [
+        "EXACT_PRODUCTION_BUILD_SHA",
+        "HTTPS_PRODUCTION_ORIGIN",
+        "SERVICE_WORKER_SCOPE_ROOT",
+        "OFFLINE_NAVIGATION_PRODUCTION_ORIGIN",
+        "UPDATE_ROLLBACK_PATH"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "core-web-vitals-production",
+      "category": "web-production",
+      "state": "OPEN",
+      "executorClass": "PRODUCTION_OBSERVABILITY_OPERATOR",
+      "closureMode": "REAL_TRAFFIC_FIELD_EVIDENCE",
+      "currentPreparation": "qa/modaryx-v2-production-activation-manifest.json",
+      "requiredEvidence": [
+        "FIELD_COLLECTION_APPROVED_AND_ENABLED",
+        "RETENTION_POLICY_APPROVED",
+        "REAL_PRODUCTION_TRAFFIC",
+        "LCP_P75_FIELD_EVIDENCE",
+        "INP_P75_FIELD_EVIDENCE",
+        "CLS_P75_FIELD_EVIDENCE"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "cutover",
+      "category": "web-production",
+      "state": "OPEN",
+      "executorClass": "PRODUCTION_RELEASE_OPERATOR",
+      "closureMode": "EXPLICIT_RELEASE_ACTION",
+      "currentPreparation": "qa/modaryx-v2-production-activation-manifest.json",
+      "requiredEvidence": [
+        "ALL_REQUIRED_VF_BLOCKERS_CLOSED",
+        "PRODUCTION_READINESS_READ_ONLY_PROOF",
+        "EXTERNAL_VALIDATION_PACK_COMPLETE",
+        "ROLLBACK_PATH_FRESHLY_PROVEN",
+        "EXPLICIT_RELEASE_APPROVAL"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "game-rights-registry-production",
+      "category": "rights-legal",
+      "state": "OPEN",
+      "executorClass": "RIGHTS_OPERATIONS",
+      "closureMode": "CONTROLLED_PRODUCTION_RIGHTS_DATA",
+      "currentPreparation": "docs/MODARYX-V2-RIGHTS-REGISTRY-BACKEND-CANDIDATE-20261006.md",
+      "requiredEvidence": [
+        "REMOTE_PRODUCTION_REGISTRY_PROVEN",
+        "REAL_GAME_SCOPE_RECORDS",
+        "AUDIT_AND_REVOCATION_PATH_PROVEN"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "official-contact-discovery",
+      "category": "rights-legal",
+      "state": "OPEN",
+      "executorClass": "RIGHTS_OPERATIONS",
+      "closureMode": "REAL_WORLD_SOURCE_EVIDENCE",
+      "currentPreparation": "docs/MODARYX-V2-RIGHTS-EVIDENCE-PREFLIGHT-20261006.md",
+      "requiredEvidence": [
+        "OFFICIAL_SOURCE_FOUND",
+        "CONTACT_OWNERSHIP_VERIFIED",
+        "SOURCE_ARTIFACT_RECORDED",
+        "NO_SCRAPING_AROUND_RESTRICTIONS"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "publisher-outbound",
+      "category": "rights-legal",
+      "state": "OPEN",
+      "executorClass": "RIGHTS_OPERATIONS",
+      "closureMode": "REAL_OUTBOUND_COMMUNICATION",
+      "currentPreparation": "docs/MODARYX-V2-PUBLISHER-OUTBOUND-PREPARATION-20261006.md",
+      "requiredEvidence": [
+        "VERIFIED_OFFICIAL_DESTINATION",
+        "APPROVED_REQUEST_SCOPE",
+        "REAL_SENDER_TRANSPORT",
+        "DELIVERY_RECEIPT_OR_EQUIVALENT"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "publisher-response-parsing",
+      "category": "rights-legal",
+      "state": "OPEN",
+      "executorClass": "RIGHTS_OPERATIONS",
+      "closureMode": "REAL_INBOUND_EVIDENCE",
+      "currentPreparation": "docs/MODARYX-V2-PUBLISHER-INBOUND-QUARANTINE-20261006.md",
+      "requiredEvidence": [
+        "REAL_PUBLISHER_RESPONSE_RECEIVED",
+        "OPAQUE_QUARANTINE_RECEIPT",
+        "HUMAN_OR_POLICY_REVIEW",
+        "SCOPED_INTERPRETATION_RECORDED"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "license-validation",
+      "category": "rights-legal",
+      "state": "OPEN",
+      "executorClass": "RIGHTS_OPERATIONS",
+      "closureMode": "REAL_LICENSE_EVIDENCE",
+      "currentPreparation": "docs/MODARYX-V2-AUTHORIZING-RIGHTS-DECISION-20261006.md",
+      "requiredEvidence": [
+        "REAL_LICENSE_OR_PUBLISHER_EVIDENCE",
+        "SCOPE_MATCH_PROVEN",
+        "CONSTRAINTS_RECORDED",
+        "AUTHORIZING_DECISION_AUDITED"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "legal-review-where-required",
+      "category": "rights-legal",
+      "state": "OPEN",
+      "executorClass": "LEGAL_REVIEWER",
+      "closureMode": "EXTERNAL_LEGAL_REVIEW",
+      "currentPreparation": "docs/MODARYX-V2-RIGHTS-EVIDENCE-PREFLIGHT-20261006.md",
+      "requiredEvidence": [
+        "REAL_REVIEW_WHERE_REQUIRED",
+        "REVIEW_SCOPE_RECORDED",
+        "UNRESOLVED_LEGAL_P0_P1_NONE",
+        "NO_SIMULATED_LEGAL_APPROVAL"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    }
+  ],
+  "closureRule": "A blocker may leave OPEN only after evidence matching its requiredEvidence exists and the readiness gate is updated by a separate reviewed change.",
+  "invariants": [
+    "LEDGER_MUST_EQUAL_GATE_OPEN_SET",
+    "NO_LEDGER_ENTRY_CLOSES_A_BLOCKER",
+    "NO_AUTOMATION_ONLY_CLOSURE_FOR_EXTERNAL_REALITY",
+    "DEV_OR_CANDIDATE_EVIDENCE_NEVER_EQUALS_PRODUCTION_PROOF",
+    "NO_SIMULATED_SCREEN_READER_SAFARI_DEVICE_RIGHTS_OR_LEGAL_PROOF",
+    "NO_REMOTE_MUTATION_BY_THIS_LEDGER",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER"
+  ]
+}

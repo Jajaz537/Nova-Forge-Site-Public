@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "source": {
+    "repository": "Jajaz537/Nova-Forge-Site-Public",
+    "branch": "design/modaryx-v2-blue-violet-product-20261005",
+    "head": "c331966fb7e01c7b2b340f4c411160f98db5da77"
+  },
+  "scope": "STATIC_V2_CLIENT_AND_PRIVACY_RELEVANT_BACKEND",
+  "productionRuntimeValidated": false,
+  "mechanisms": [
+    {
+      "id": "modaryx-session-cookie",
+      "kind": "FIRST_PARTY_SESSION_COOKIE",
+      "name": "modaryx_session",
+      "source": "functions/_lib/auth-session.mjs",
+      "attributes": [
+        "Path=/",
+        "HttpOnly",
+        "Secure",
+        "SameSite=Lax",
+        "Max-Age=configurable"
+      ],
+      "ttlDefaultSeconds": 28800,
+      "ttlMinSeconds": 900,
+      "ttlMaxSeconds": 604800,
+      "productionTtl": "PREUVE MANQUANTE",
+      "candidatePurpose": "AUTHENTICATION_SESSION",
+      "legalQualification": "LEGAL_REVIEW_REQUIRED"
+    },
+    {
+      "id": "v2-local-storage",
+      "kind": "LOCAL_STORAGE_FUNCTIONAL",
+      "source": "v2/src/storage-migration.js",
+      "keys": [
+        "modaryx:v2:favorites",
+        "modaryx:v2:saved-searches",
+        "modaryx:v2:creator-draft",
+        "modaryx:v2:collection-drafts",
+        "modaryx:v2:community-draft",
+        "modaryx:v2:preferences",
+        "modaryx:v2:migration:v1"
+      ],
+      "legacyMigrationNonDestructive": true,
+      "retention": "PREUVE MANQUANTE",
+      "deletionExportRule": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "v2-pwa-cache",
+      "kind": "CACHE_STORAGE",
+      "cacheName": "modaryx-v2-candidate-shell-v1",
+      "registrationGate": "VITE_MODARYX_PWA_PRODUCTION=1",
+      "defaultEnabled": false,
+      "sameOriginOnly": true,
+      "productionEnabled": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "field-cwv-rum",
+      "kind": "FIRST_PARTY_PERFORMANCE_MEASUREMENT",
+      "clientGate": "VITE_MODARYX_FIELD_CWV=1",
+      "serverGate": "MODARYX_CWV_RUM_ENABLED",
+      "defaultEnabled": false,
+      "respectsDoNotTrack": true,
+      "respectsGlobalPrivacyControl": true,
+      "endpoint": "/api/v1/rum/cwv",
+      "credentials": "omit",
+      "fields": [
+        "pageViewId",
+        "routeClass",
+        "viewportClass",
+        "navigationType",
+        "LCP",
+        "INP",
+        "CLS"
+      ],
+      "legalQualification": "LEGAL_REVIEW_REQUIRED",
+      "retention": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "cloudflare-turnstile",
+      "kind": "THIRD_PARTY_SECURITY_ANTI_ABUSE",
+      "clientUrl": "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit",
+      "verifyUrl": "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      "activationCondition": "AUTHENTICATED_AND_REMOTE_WRITES_READY_AND_SITE_KEY_PRESENT",
+      "productionConfiguration": "PREUVE MANQUANTE",
+      "legalQualification": "LEGAL_REVIEW_REQUIRED"
+    },
+    {
+      "id": "auth0",
+      "kind": "THIRD_PARTY_IDENTITY",
+      "issuer": "ENV_CONFIGURED",
+      "productionConfiguration": "PREUVE MANQUANTE",
+      "legalQualification": "LEGAL_REVIEW_REQUIRED"
+    },
+    {
+      "id": "weather-context",
+      "kind": "OPTIONAL_SERVER_SIDE_CONTEXT_PROVIDER",
+      "defaultMode": "off",
+      "candidates": [
+        "WeatherAPI",
+        "Open-Meteo non-commercial",
+        "Open-Meteo commercial"
+      ],
+      "browserGpsRequested": false,
+      "exactCoordinatesReturned": false,
+      "cityReturned": false,
+      "postalCodeReturned": false,
+      "providerCoordinateRoundingDegrees": 0.1,
+      "productionProvider": "PREUVE MANQUANTE"
+    }
+  ],
+  "notObservedInReviewedScope": [
+    "sessionStorage",
+    "IndexedDB",
+    "client document.cookie writes",
+    "Google Analytics gtag",
+    "advertising SDK",
+    "marketing pixel"
+  ],
+  "limitations": [
+    "STATIC_SOURCE_ONLY",
+    "NOT_FINAL_BUNDLE_SCAN",
+    "NOT_BROWSER_NETWORK_OBSERVATION",
+    "NOT_PRODUCTION_COOKIE_STORAGE_CAPTURE",
+    "NOT_LEGAL_APPROVAL"
+  ],
+  "invariants": [
+    "NO_CMP_ENABLEMENT",
+    "NO_ANALYTICS_ENABLEMENT",
+    "NO_PWA_PRODUCTION_ENABLEMENT",
+    "NO_AUTH_PROVIDER_ACTIVATION",
+    "NO_WEATHER_PROVIDER_ACTIVATION",
+    "NO_PRODUCTION_MUTATION"
+  ]
+}

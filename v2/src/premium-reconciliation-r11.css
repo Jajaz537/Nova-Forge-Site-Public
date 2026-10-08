@@ -1,0 +1,498 @@
+/* MODARYX V2 — Premium reconciliation R11
+   Owner direction: remove the remaining "old design / mockup" reading.
+   Visual-only: no route, data, backend, entitlement or production behavior change. */
+
+:root{
+  --r11-ink:#02070d;
+  --r11-ink-soft:#06111b;
+  --r11-cyan:#64edf0;
+  --r11-violet:#8b74ff;
+  --r11-gold:#f0c987;
+  --r11-line:rgba(164,225,239,.10);
+  --r11-glass:rgba(4,12,20,.58);
+}
+
+body{
+  background:
+    radial-gradient(circle at 72% -10%,rgba(97,77,255,.15),transparent 34rem),
+    radial-gradient(circle at 8% 24%,rgba(72,209,220,.08),transparent 30rem),
+    linear-gradient(180deg,#02070d 0%,#04101a 48%,#02070d 100%);
+}
+
+.topbar{
+  width:min(1380px,calc(100% - 36px));
+  left:50%;
+  right:auto;
+  transform:translateX(-50%);
+  top:14px;
+  border:1px solid rgba(178,228,240,.09);
+  border-radius:18px;
+  background:rgba(2,8,14,.68);
+  box-shadow:0 18px 70px rgba(0,0,0,.32);
+  backdrop-filter:blur(20px) saturate(1.15);
+}
+
+.topbar::after{
+  content:"";
+  position:absolute;
+  inset:auto 22px -1px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(100,237,240,.42),rgba(139,116,255,.34),transparent);
+  pointer-events:none;
+}
+
+.logo{
+  letter-spacing:.28em;
+  font-size:13px;
+}
+
+/* DISCOVER — full-world entry instead of a dashboard hero. */
+.editorial-hero.canon-reconciled-hero{
+  min-height:clamp(720px,88vh,980px);
+  margin:0;
+  padding:180px max(28px,calc((100vw - 1320px)/2)) 96px;
+  display:flex;
+  align-items:flex-end;
+  border-radius:0 0 52px 52px;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    linear-gradient(180deg,rgba(2,7,13,.08) 0%,rgba(2,7,13,.14) 38%,rgba(2,7,13,.74) 78%,#02070d 100%),
+    linear-gradient(90deg,rgba(2,7,13,.86) 0%,rgba(2,7,13,.54) 31%,rgba(2,7,13,.08) 68%),
+    url('/assets/modaryx-wolf-dragon-hero.webp') center 44%/cover no-repeat;
+  box-shadow:0 80px 180px rgba(0,0,0,.42);
+}
+
+.editorial-hero.canon-reconciled-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(circle at 68% 25%,rgba(131,98,255,.15),transparent 20rem),
+    radial-gradient(circle at 28% 62%,rgba(88,229,232,.08),transparent 22rem);
+  mix-blend-mode:screen;
+  pointer-events:none;
+}
+
+.editorial-hero-copy{
+  max-width:790px;
+  padding:0;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  backdrop-filter:none;
+}
+
+.editorial-hero-copy .kicker{
+  color:rgba(229,244,249,.76);
+  letter-spacing:.22em;
+}
+
+.editorial-hero-copy h1{
+  max-width:11ch;
+  margin-top:18px;
+  font-size:clamp(58px,7.1vw,104px);
+  line-height:.89;
+  letter-spacing:-.065em;
+  text-wrap:balance;
+  text-shadow:0 12px 40px rgba(0,0,0,.34);
+}
+
+.editorial-hero-copy p{
+  max-width:660px;
+  margin-top:24px;
+  font-size:clamp(17px,1.45vw,21px);
+  line-height:1.72;
+  color:rgba(236,246,250,.82);
+}
+
+.editorial-hero-copy .primary{
+  margin-top:30px;
+  min-height:50px;
+  border-radius:999px;
+  padding-inline:24px;
+  background:linear-gradient(135deg,rgba(100,237,240,.96),rgba(137,116,255,.90));
+  color:#021017;
+  box-shadow:0 18px 52px rgba(70,193,209,.24);
+}
+
+/* Shared editorial rhythm: less boxed UI, more open composition. */
+.page-section{
+  width:min(1320px,calc(100% - 48px));
+  margin-inline:auto;
+  padding-top:112px;
+  padding-bottom:112px;
+}
+
+.page-section>.kicker,
+.catalog-title>.kicker{
+  letter-spacing:.20em;
+  opacity:.78;
+}
+
+.page-section>h1,
+.catalog-title>h1{
+  max-width:12ch;
+  font-size:clamp(54px,5.6vw,86px);
+  line-height:.92;
+  letter-spacing:-.055em;
+  text-wrap:balance;
+}
+
+.page-intro,
+.catalog-title>p{
+  max-width:780px;
+  margin-top:20px;
+  font-size:17px;
+  line-height:1.74;
+  color:rgba(222,236,242,.72);
+}
+
+.section-heading{
+  align-items:end;
+  margin-bottom:34px;
+}
+
+.section-heading h2{
+  max-width:10ch;
+  font-size:clamp(38px,4.2vw,66px);
+  line-height:.96;
+  letter-spacing:-.045em;
+}
+
+/* GAME INDEX — cover-led cards rather than SaaS tiles. */
+.games-index .game-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.38fr) minmax(320px,.62fr);
+  gap:26px;
+  align-items:start;
+}
+
+.games-index .game-card{
+  min-height:330px;
+  border-radius:30px;
+  overflow:hidden;
+  border:1px solid rgba(164,225,239,.08);
+  background:
+    linear-gradient(160deg,rgba(7,20,30,.88),rgba(3,9,15,.92));
+  box-shadow:0 40px 110px rgba(0,0,0,.32);
+}
+
+.games-index .game-card:first-child{
+  min-height:660px;
+  grid-row:span 2;
+  display:flex;
+  align-items:flex-end;
+  background:
+    linear-gradient(180deg,rgba(2,8,14,.06),rgba(2,8,14,.26) 44%,rgba(2,8,14,.94) 92%),
+    radial-gradient(circle at 66% 22%,rgba(100,237,240,.16),transparent 20rem),
+    url('/assets/modaryx-wolf-dragon-hero.webp') center/cover no-repeat;
+}
+
+.games-index .game-card:first-child>*{
+  position:relative;
+  z-index:1;
+}
+
+.games-index .game-card:first-child h2{
+  font-size:clamp(44px,4.8vw,72px);
+  line-height:.94;
+  letter-spacing:-.05em;
+}
+
+/* GAME HUB — make the selected game feel like a place. */
+.game-hub-page .game-hero{
+  min-height:620px;
+  margin:0;
+  border-radius:0 0 46px 46px;
+  padding:170px max(28px,calc((100vw - 1320px)/2)) 70px;
+  align-items:end;
+  background:
+    linear-gradient(180deg,rgba(1,7,13,.10),rgba(1,7,13,.20) 44%,rgba(1,7,13,.88) 94%),
+    linear-gradient(90deg,rgba(1,7,13,.78),rgba(1,7,13,.22) 55%,transparent),
+    url('/assets/modaryx-wolf-dragon-hero.webp') center 52%/cover no-repeat !important;
+}
+
+.game-hub-page .game-identity{
+  max-width:760px;
+}
+
+.game-hub-page .game-identity h1{
+  font-size:clamp(64px,7vw,102px);
+  line-height:.88;
+  letter-spacing:-.065em;
+}
+
+.game-hub-page .hero-search{
+  max-width:720px;
+  border-radius:999px;
+  background:rgba(2,9,15,.68);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(164,225,239,.10);
+}
+
+/* CATALOG / COLLECTIONS / CREATORS — editorial covers. */
+.catalog .catalog-grid,
+.collections-page .collection-grid,
+.creator-index-grid{
+  gap:26px;
+}
+
+.catalog .content-card,
+.collections-page .collection-card,
+.creator-index-card{
+  border-color:rgba(164,225,239,.08);
+  background:linear-gradient(160deg,rgba(7,20,30,.78),rgba(3,9,15,.90));
+  box-shadow:0 32px 94px rgba(0,0,0,.24);
+}
+
+.catalog .catalog-grid>.content-card:first-child,
+.collections-page .collection-card:first-child,
+.creator-index-card:first-child{
+  border-radius:38px;
+  box-shadow:0 64px 150px rgba(0,0,0,.42);
+}
+
+.catalog .catalog-grid>.content-card:first-child>.media,
+.collections-page .collection-card:first-child>.media,
+.creator-index-card:first-child>.media{
+  background-image:
+    linear-gradient(180deg,rgba(2,8,14,.04),rgba(2,8,14,.28) 48%,rgba(2,8,14,.94) 94%),
+    url('/assets/modaryx-wolf-dragon-hero.webp') !important;
+  background-size:cover !important;
+  background-position:center !important;
+}
+
+.catalog-tools,
+.collection-tools,
+.index-tools,
+.creators-search{
+  border:0;
+  background:transparent;
+  box-shadow:none;
+}
+
+.catalog-search{
+  border-radius:999px;
+  background:rgba(4,15,24,.62);
+  border:1px solid rgba(164,225,239,.10);
+  box-shadow:0 16px 48px rgba(0,0,0,.16);
+}
+
+/* COMMUNITY — one editorial stage, not stacked boxes. */
+.community .community-tabs{
+  margin-top:38px;
+  border:0;
+  border-bottom:1px solid rgba(164,225,239,.10);
+  border-radius:0;
+  padding:0 0 14px;
+  background:transparent;
+  box-shadow:none;
+  backdrop-filter:none;
+}
+
+.community .community-tabs button{
+  border-radius:999px;
+}
+
+.community-board{
+  margin-top:34px;
+  min-height:600px;
+  border-radius:42px;
+  border:1px solid rgba(164,225,239,.08);
+  background:
+    radial-gradient(circle at 78% 12%,rgba(139,116,255,.14),transparent 24rem),
+    radial-gradient(circle at 18% 82%,rgba(100,237,240,.07),transparent 22rem),
+    linear-gradient(145deg,rgba(7,20,30,.84),rgba(2,8,14,.94));
+  box-shadow:0 52px 130px rgba(0,0,0,.34);
+}
+
+.community-list,
+.community-teams,
+.activity-list{
+  background:rgba(2,9,15,.28);
+  border:1px solid rgba(164,225,239,.06);
+  box-shadow:none;
+}
+
+/* ACCOUNT — quiet atelier rather than a settings mockup. */
+.account-center{
+  position:relative;
+}
+
+.account-center::before{
+  content:"";
+  position:absolute;
+  inset:80px -20vw auto 36%;
+  height:420px;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at center,rgba(139,116,255,.12),transparent 36rem),
+    radial-gradient(circle at 20% 72%,rgba(100,237,240,.07),transparent 24rem);
+}
+
+.account-shell{
+  gap:72px;
+}
+
+.account-nav{
+  background:transparent;
+  border:0;
+  box-shadow:none;
+}
+
+.account-nav button{
+  border-radius:10px;
+  background:transparent;
+}
+
+.account-nav button[aria-pressed="true"],
+.account-nav button.active{
+  background:linear-gradient(90deg,rgba(100,237,240,.09),transparent);
+  color:#eefcff;
+}
+
+.account-panel{
+  border:0;
+  background:transparent;
+  box-shadow:none;
+}
+
+/* Reduce generic panel chrome across the product without touching semantics. */
+.filter-panel,
+.local-draft,
+.moderation-note,
+.game-support-request,
+.ai-safety-note{
+  border-color:rgba(164,225,239,.08);
+  background:rgba(4,15,24,.48);
+  box-shadow:none;
+}
+
+button.primary,
+.primary{
+  border-radius:999px;
+}
+
+button.quiet,
+.quiet{
+  border-radius:999px;
+}
+
+/* Mobile is recomposed, not merely shrunk. */
+@media (max-width:760px){
+  .topbar{
+    width:calc(100% - 20px);
+    top:8px;
+    border-radius:15px;
+  }
+
+  .editorial-hero.canon-reconciled-hero{
+    min-height:760px;
+    padding:144px 22px 54px;
+    align-items:flex-end;
+    border-radius:0 0 30px 30px;
+    background:
+      linear-gradient(180deg,rgba(2,7,13,.08),rgba(2,7,13,.24) 46%,rgba(2,7,13,.92) 90%),
+      url('/assets/modaryx-wolf-dragon-hero.webp') 58% center/cover no-repeat;
+  }
+
+  .editorial-hero-copy h1{
+    max-width:8.5ch;
+    font-size:clamp(50px,15vw,72px);
+    line-height:.90;
+  }
+
+  .editorial-hero-copy p{
+    max-width:33ch;
+    font-size:16px;
+  }
+
+  .page-section{
+    width:min(100% - 28px,1320px);
+    padding-top:82px;
+    padding-bottom:82px;
+  }
+
+  .page-section>h1,
+  .catalog-title>h1{
+    font-size:clamp(44px,13vw,64px);
+    max-width:9ch;
+  }
+
+  .games-index .game-grid{
+    display:block;
+  }
+
+  .games-index .game-card,
+  .games-index .game-card:first-child{
+    min-height:390px;
+    margin-bottom:18px;
+    border-radius:26px;
+  }
+
+  .game-hub-page .game-hero{
+    min-height:700px;
+    padding:142px 20px 46px;
+    border-radius:0 0 30px 30px;
+    background:
+      linear-gradient(180deg,rgba(1,7,13,.12),rgba(1,7,13,.34) 50%,rgba(1,7,13,.94) 94%),
+      url('/assets/modaryx-wolf-dragon-hero.webp') 60% center/cover no-repeat !important;
+  }
+
+  .game-hub-page .game-identity h1{
+    font-size:clamp(54px,16vw,76px);
+  }
+
+  .catalog .catalog-grid,
+  .collections-page .collection-grid,
+  .creator-index-grid{
+    display:block;
+  }
+
+  .catalog .content-card,
+  .collections-page .collection-card,
+  .creator-index-card{
+    margin-bottom:18px;
+    border-radius:26px;
+  }
+
+  .community-board{
+    min-height:0;
+    border-radius:28px;
+    padding:34px 22px;
+  }
+
+  .account-shell{
+    display:block;
+  }
+
+  .account-nav{
+    position:relative;
+    display:flex;
+    gap:8px;
+    overflow:auto;
+    margin-bottom:28px;
+    padding-bottom:8px;
+  }
+
+  .account-nav button{
+    flex:0 0 auto;
+    border:1px solid rgba(164,225,239,.08);
+    background:rgba(4,15,24,.52);
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .topbar,
+  .editorial-hero.canon-reconciled-hero,
+  .game-hub-page .game-hero,
+  .catalog .content-card,
+  .collections-page .collection-card,
+  .creator-index-card{
+    transition:none!important;
+    animation:none!important;
+  }
+}

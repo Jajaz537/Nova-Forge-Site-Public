@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "ACTIVE_PREVIEW_ENGINEERING",
+  "sourceBranch": "design/modaryx-v2-blue-violet-product-20261005",
+  "sourceCommit": "15d7a4746dda80d135188fd9921b761888e9de1e",
+  "userDecision": "SITE_ONLY_BROWSER_ASSISTED_PAGE_TAB_MODULE_REVIEW",
+  "stack": {
+    "candidate": "react-vite-cloudflare-workers",
+    "react": "19.2.0",
+    "vite": "6.4.2",
+    "phosphor": "2.1.10",
+    "scope": "PREVIEW_ONLY"
+  },
+  "root": "v2-preview",
+  "browserEvidence": {
+    "runId": 37417080782,
+    "keyboard": "54/54",
+    "desktopOverflow": 0,
+    "mobileOverflow": 0,
+    "treeProxy": "1..10 PASS",
+    "productFlows": "PASS",
+    "captureCount": 143,
+    "captureIntegrity": "PASS"
+  },
+  "humanTreeTest": {
+    "state": "RECLASSIFIED_FOR_PREVIEW_ONLY",
+    "finalHumanValidation": "OPEN"
+  },
+  "finalVfGates": "UNCHANGED_OPEN",
+  "invariants": [
+    "NO_MAIN_CHANGE",
+    "NO_DNS_OR_CRITICAL_CLOUDFLARE_CHANGE",
+    "NO_CUTOVER",
+    "NO_PRODUCTION_VF_CLAIM",
+    "NO_FAKE_BACKEND",
+    "NO_V1_AUTO_IMPORT",
+    "NOINDEX_PREVIEW",
+    "BROWSER_PROOF_REQUIRED"
+  ]
+}

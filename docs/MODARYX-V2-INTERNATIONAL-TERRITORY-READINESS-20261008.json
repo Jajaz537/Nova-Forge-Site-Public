@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "INTERNATIONAL_TERRITORY_LAUNCH_READINESS_MATRIX",
+  "sourceHead": "1e1e7988fbadd9b943ebf043d068dff722cad02e",
+  "governingRule": "Internet accessibility does not equal legal/commercial launch readiness. Every targeted territory requires explicit inclusion and evidence.",
+  "commonDimensions": [
+    "sale/service legality",
+    "consumer protection",
+    "privacy/data protection",
+    "cookies/marketing/communications",
+    "payments/refunds/chargebacks",
+    "tax/VAT/GST/sales tax",
+    "invoicing/receipts",
+    "content/UGC/platform obligations",
+    "rights/licences/trademarks",
+    "accessibility",
+    "security/incident obligations",
+    "age/minors if applicable",
+    "support/dispute resolution",
+    "local language/information requirements where applicable"
+  ],
+  "territories": [
+    {
+      "id": "FR",
+      "priority": 1,
+      "launchTargetState": "EN COURS",
+      "currentEvidence": [
+        "FR/EU compliance readiness candidate",
+        "public legal surfaces readiness",
+        "privacy/processor/CMP candidates",
+        "consumer mediation/tax/cancellation readiness candidates"
+      ],
+      "blockers": [
+        "operator/seller identity",
+        "final offer/pricing/payment",
+        "tax/accounting review",
+        "consumer/legal text finalization",
+        "rights/licences",
+        "production evidence",
+        "accessibility applicability/conformity",
+        "legal review"
+      ]
+    },
+    {
+      "id": "EU_EEA",
+      "priority": 2,
+      "launchTargetState": "EN COURS",
+      "blockers": [
+        "country-by-country VAT/customer-location implementation where applicable",
+        "consumer/digital-content/service contract review",
+        "privacy/transfers/providers",
+        "accessibility/EAA applicability",
+        "language/local information needs",
+        "rights/licences territorial scope",
+        "platform/DSA qualification and obligations",
+        "legal/tax review"
+      ]
+    },
+    {
+      "id": "UK",
+      "priority": 3,
+      "launchTargetState": "PREUVE MANQUANTE",
+      "blockers": [
+        "UK legal entity/targeting analysis",
+        "UK consumer terms/digital content/services",
+        "UK privacy/cookies/marketing",
+        "UK VAT/tax",
+        "accessibility/equality obligations",
+        "payments/refunds/disputes",
+        "rights/licences territorial scope",
+        "platform/online safety applicability if relevant",
+        "legal/tax review"
+      ]
+    },
+    {
+      "id": "US",
+      "priority": 4,
+      "launchTargetState": "PREUVE MANQUANTE",
+      "scopeRule": "Do not treat the United States as one uniform legal/privacy/tax jurisdiction.",
+      "blockers": [
+        "federal baseline",
+        "target-state selection",
+        "state consumer/privacy laws",
+        "state sales-tax nexus/product taxability",
+        "auto-renewal/subscription rules where applicable",
+        "accessibility risk/applicability",
+        "payments/refunds/chargebacks",
+        "UGC/platform/content rules",
+        "rights/licences territorial scope",
+        "legal/tax review"
+      ]
+    },
+    {
+      "id": "CA",
+      "priority": 5,
+      "launchTargetState": "PREUVE MANQUANTE",
+      "scopeRule": "Federal and provincial requirements must be checked for targeted provinces.",
+      "blockers": [
+        "privacy federal/provincial qualification",
+        "consumer rules by province where applicable",
+        "GST/HST/PST/QST and digital supplies",
+        "marketing communications",
+        "language requirements where applicable",
+        "accessibility provincial/federal applicability",
+        "payments/refunds",
+        "rights/licences",
+        "legal/tax review"
+      ]
+    },
+    {
+      "id": "AU",
+      "priority": 6,
+      "launchTargetState": "PREUVE MANQUANTE",
+      "blockers": [
+        "consumer guarantees/digital service terms",
+        "privacy applicability",
+        "GST/digital services",
+        "marketing communications",
+        "accessibility expectations/requirements",
+        "payments/refunds",
+        "rights/licences",
+        "legal/tax review"
+      ]
+    }
+  ],
+  "launchPolicy": {
+    "defaultAvailabilityOutsideApprovedTerritories": "PREUVE MANQUANTE",
+    "geoblockingDecision": "PREUVE MANQUANTE",
+    "marketingTargetingOutsideApprovedTerritories": false,
+    "paidSalesOutsideApprovedTerritories": false,
+    "ownerTerritoryDecision": "PREUVE MANQUANTE"
+  },
+  "gate": {
+    "france": "EN COURS",
+    "euEea": "EN COURS",
+    "uk": "PREUVE MANQUANTE",
+    "us": "PREUVE MANQUANTE",
+    "canada": "PREUVE MANQUANTE",
+    "australia": "PREUVE MANQUANTE",
+    "otherMarkets": "BLOQUÉ_UNTIL_EXPLICITLY_TARGETED"
+  }
+}

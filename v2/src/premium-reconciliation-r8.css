@@ -1,0 +1,457 @@
+/* MODARYX V2 — Premium reconciliation R8
+   Owner direction: break the remaining "old design / mockup" feeling.
+   Visual-only layer: no routes, backend, data, entitlement, dependency or production change. */
+
+:root{
+  --r8-ink:#030a12;
+  --r8-panel:rgba(7,20,31,.78);
+  --r8-panel-deep:rgba(4,13,22,.94);
+  --r8-line:rgba(111,195,226,.105);
+  --r8-cyan:#52d8dd;
+  --r8-violet:#7966ff;
+  --r8-ice:#dff8ff;
+  --r8-shadow:0 52px 130px rgba(0,0,0,.42);
+}
+
+/* The shell should feel like a premium product window, not a generic full-width web nav. */
+@media (min-width:901px){
+  .topbar{
+    width:min(1380px,calc(100% - 32px));
+    height:64px;
+    margin:12px auto 0;
+    padding-inline:22px;
+    border:1px solid rgba(133,194,224,.12);
+    border-radius:18px;
+    background:
+      linear-gradient(180deg,rgba(9,25,38,.90),rgba(4,14,23,.88));
+    box-shadow:
+      0 24px 70px rgba(0,0,0,.30),
+      inset 0 1px rgba(255,255,255,.035);
+    backdrop-filter:blur(22px) saturate(1.12);
+  }
+
+  .logo{
+    font-size:18px;
+    letter-spacing:.24em;
+  }
+
+  .global-nav{
+    gap:clamp(12px,1.7vw,28px);
+  }
+
+  .global-nav button{
+    min-height:40px;
+    padding-inline:4px;
+    color:rgba(188,207,221,.72);
+  }
+
+  .global-nav button.active,
+  .global-nav button[aria-current="page"]{
+    color:#f4fbff;
+  }
+
+  .top-actions{
+    gap:8px;
+  }
+
+  .top-actions button:not(.demo-cta){
+    border:0;
+    background:rgba(13,33,48,.66);
+    box-shadow:inset 0 0 0 1px rgba(126,185,216,.09);
+  }
+
+  .top-actions .demo-cta{
+    min-width:132px;
+    border-radius:12px;
+    background:linear-gradient(115deg,#625df5,#7657f4 54%,#4f8cff);
+    box-shadow:0 18px 44px rgba(91,78,241,.26);
+  }
+}
+
+/* Every major product page gets a real scene, not a heading floating over dark space. */
+.games-index,
+.catalog,
+.collections-page,
+.creators-page,
+.community,
+.account-center{
+  position:relative;
+  isolation:isolate;
+  overflow:clip;
+}
+
+.games-index::before,
+.catalog::before,
+.collections-page::before,
+.creators-page::before,
+.community::before,
+.account-center::before{
+  content:"";
+  position:absolute;
+  z-index:-3;
+  inset:0 0 auto;
+  height:clamp(420px,52vw,690px);
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(3,10,18,.96) 0%,rgba(3,10,18,.80) 32%,rgba(3,10,18,.24) 66%,rgba(3,10,18,.82) 100%),
+    linear-gradient(180deg,rgba(3,10,18,.06),rgba(3,10,18,.94) 86%),
+    url('/assets/living-threshold-hero.png') 70% 46%/cover no-repeat;
+  opacity:.42;
+  mask-image:linear-gradient(180deg,#000 0%,#000 64%,transparent 100%);
+  filter:saturate(.92) contrast(1.06);
+}
+
+.catalog::before{background-position:center,center,54% 42%;opacity:.30}
+.collections-page::before{background-position:center,center,63% 43%;opacity:.30}
+.creators-page::before{background-position:center,center,76% 43%;opacity:.32}
+.community::before{background-position:center,center,43% 42%;opacity:.27}
+.account-center::before{background-position:center,center,82% 46%;opacity:.24}
+
+.games-index::after,
+.catalog::after,
+.collections-page::after,
+.creators-page::after,
+.community::after,
+.account-center::after{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:88px 3vw auto;
+  height:520px;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 16% 18%,rgba(71,220,211,.10),transparent 28rem),
+    radial-gradient(circle at 84% 15%,rgba(121,93,255,.15),transparent 32rem);
+}
+
+/* Editorial entry: larger, calmer and deliberately offset. */
+.games-index>.kicker,
+.catalog .catalog-title,
+.collections-page>.kicker,
+.creators-page>.kicker,
+.community>.kicker,
+.account-center>.kicker{
+  position:relative;
+  z-index:2;
+}
+
+.games-index>h1,
+.catalog-title h1,
+.collections-page>h1,
+.creators-page>h1,
+.community>h1,
+.account-center>h1{
+  position:relative;
+  z-index:2;
+  max-width:1040px;
+  font-size:clamp(54px,6vw,92px);
+  line-height:.91;
+  letter-spacing:-.058em;
+  text-wrap:balance;
+  text-shadow:0 24px 70px rgba(0,0,0,.40);
+}
+
+.games-index>.page-intro,
+.catalog-title p,
+.collections-page>.page-intro,
+.creators-page>.page-intro,
+.community>.page-intro,
+.account-center>.page-intro{
+  position:relative;
+  z-index:2;
+  max-width:700px;
+  font-size:16px;
+  line-height:1.76;
+  color:rgba(221,234,244,.72);
+}
+
+/* Search/filter controls become one quiet command dock. */
+.index-tools,
+.catalog-tools,
+.collection-tools,
+.creators-search{
+  position:relative;
+  z-index:3;
+  gap:10px;
+  margin-top:34px;
+  padding:8px;
+  border:1px solid rgba(108,187,221,.10);
+  border-radius:18px;
+  background:rgba(5,17,28,.68);
+  box-shadow:
+    0 28px 70px rgba(0,0,0,.22),
+    inset 0 1px rgba(255,255,255,.025);
+  backdrop-filter:blur(18px);
+}
+
+.index-tools .catalog-search,
+.catalog-tools .catalog-search,
+.collection-tools .catalog-search,
+.creators-search .catalog-search,
+.sort-control{
+  border:0;
+  background:rgba(12,31,45,.58);
+  box-shadow:inset 0 0 0 1px rgba(108,187,221,.07);
+  border-radius:12px;
+}
+
+/* Kill the box-inside-box language. */
+.content-card,
+.game-card,
+.collection-card,
+.creator-index-card{
+  border:0;
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 88% 0%,rgba(112,86,255,.13),transparent 26rem),
+    linear-gradient(150deg,rgba(9,28,43,.92),rgba(4,14,24,.96));
+  box-shadow:
+    0 34px 90px rgba(0,0,0,.30),
+    inset 0 1px rgba(255,255,255,.035);
+  overflow:hidden;
+}
+
+.content-card::after,
+.game-card::after,
+.collection-card::after,
+.creator-index-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  box-shadow:inset 0 0 0 1px rgba(111,195,226,.07);
+}
+
+.content-card>.media,
+.collection-card>.media,
+.creator-index-card>.media{
+  border:0;
+  min-height:190px;
+}
+
+.card-copy,
+.collection-card>div,
+.creator-index-card>div{
+  padding:24px 26px 28px;
+}
+
+/* Asymmetric catalog: one editorial anchor, then supporting cards. */
+@media (min-width:1101px){
+  .catalog .catalog-grid{
+    grid-template-columns:minmax(0,1.3fr) minmax(250px,.7fr) minmax(250px,.7fr);
+    grid-auto-flow:dense;
+    align-items:stretch;
+  }
+
+  .catalog .catalog-grid>.content-card:first-child{
+    grid-column:span 2;
+    min-height:520px;
+  }
+
+  .catalog .catalog-grid>.content-card:first-child>.media{
+    min-height:320px;
+  }
+
+  .catalog .catalog-grid>.content-card:first-child h3{
+    font-size:clamp(34px,3.2vw,52px);
+    letter-spacing:-.04em;
+  }
+
+  .catalog .catalog-grid>.content-card:nth-child(4n){
+    grid-column:span 2;
+  }
+
+  .collections-page .collection-grid,
+  .creator-index-grid{
+    gap:24px;
+  }
+
+  .collections-page .collection-card:first-child,
+  .creator-index-card:first-child{
+    border-radius:32px;
+    box-shadow:var(--r8-shadow);
+  }
+}
+
+/* Games lead becomes almost full-bleed cinematic instead of a card in a list. */
+@media (min-width:1101px){
+  .games-index .game-grid{
+    gap:26px;
+  }
+
+  .games-index .game-card:first-child{
+    min-height:600px;
+    border-radius:34px;
+    background:
+      linear-gradient(90deg,rgba(2,9,16,.96) 0%,rgba(2,9,16,.66) 42%,rgba(2,9,16,.12) 75%),
+      linear-gradient(180deg,transparent 45%,rgba(2,9,16,.88)),
+      url('/assets/living-threshold-hero.png') 72% 52%/cover no-repeat;
+    box-shadow:0 58px 140px rgba(0,0,0,.42);
+  }
+
+  .games-index .game-card:first-child>.media{
+    display:none;
+  }
+
+  .games-index .game-card:first-child>div{
+    width:min(58%,760px);
+    padding:250px 48px 48px;
+    background:linear-gradient(90deg,rgba(2,9,16,.93),rgba(2,9,16,.62) 70%,transparent);
+  }
+
+  .games-index .game-card:first-child h2{
+    font-size:clamp(50px,5vw,74px);
+    letter-spacing:-.05em;
+  }
+}
+
+/* Community should feel like a destination rather than a dashboard module. */
+.community-board{
+  border-radius:34px;
+  background:
+    radial-gradient(circle at 86% 8%,rgba(117,84,255,.15),transparent 30rem),
+    radial-gradient(circle at 12% 90%,rgba(71,220,211,.07),transparent 30rem),
+    linear-gradient(145deg,rgba(7,24,38,.90),rgba(4,13,22,.96));
+  box-shadow:var(--r8-shadow),inset 0 1px rgba(255,255,255,.035);
+}
+
+@media (min-width:961px){
+  .community-board{
+    grid-template-columns:minmax(280px,.48fr) minmax(0,1.52fr);
+    gap:clamp(46px,5vw,86px);
+    padding:58px 62px;
+  }
+
+  .community-board>h2{
+    font-size:clamp(42px,4vw,64px);
+    max-width:8ch;
+  }
+
+  .community-list,
+  .community-teams,
+  .activity-list{
+    border-radius:24px;
+    background:rgba(2,9,16,.24);
+  }
+
+  .community-list article,
+  .community-teams article,
+  .activity-list article{
+    min-height:136px;
+    padding:30px 32px 28px 36px;
+    background:
+      linear-gradient(110deg,rgba(10,31,47,.76),rgba(5,16,27,.62));
+  }
+}
+
+/* Account becomes a private workspace, not a settings card. */
+@media (min-width:1051px){
+  .account-shell{
+    grid-template-columns:170px minmax(0,1fr);
+    gap:54px;
+  }
+
+  .account-panel{
+    min-height:430px;
+    padding:58px 64px 62px;
+    border-radius:34px;
+    background:
+      radial-gradient(circle at 91% 9%,rgba(120,89,255,.14),transparent 30rem),
+      radial-gradient(circle at 10% 91%,rgba(73,219,211,.06),transparent 28rem),
+      linear-gradient(145deg,rgba(8,27,42,.90),rgba(4,14,24,.96));
+    box-shadow:var(--r8-shadow),inset 0 1px rgba(255,255,255,.035);
+  }
+
+  .account-panel h2{
+    font-size:clamp(38px,3.6vw,56px);
+    max-width:900px;
+  }
+
+  .account-nav::after{
+    opacity:.55;
+  }
+}
+
+/* Content sheet imagery should read as atmosphere, not repeated thumbnails. */
+.catalog .content-card>.media,
+.collections-page .collection-card>.media,
+.creators-page .creator-index-card>.media{
+  background-size:auto,auto,auto,260% 170%;
+  filter:saturate(.88) contrast(1.04);
+}
+
+/* Premium focus remains explicit. */
+.topbar button:focus-visible,
+.content-card button:focus-visible,
+.game-card button:focus-visible,
+.community button:focus-visible,
+.account-center button:focus-visible,
+.catalog input:focus-visible,
+.games-index input:focus-visible{
+  outline:3px solid rgba(111,224,238,.88);
+  outline-offset:3px;
+}
+
+/* Mobile keeps the new identity without becoming a giant hero-only page. */
+@media (max-width:900px){
+  .topbar{
+    background:rgba(4,13,22,.94);
+    border-bottom-color:rgba(127,188,220,.10);
+    box-shadow:0 16px 42px rgba(0,0,0,.24);
+  }
+}
+
+@media (max-width:760px){
+  .games-index::before,
+  .catalog::before,
+  .collections-page::before,
+  .creators-page::before,
+  .community::before,
+  .account-center::before{
+    height:390px;
+    opacity:.26;
+    background-position:center,center,67% 44%;
+  }
+
+  .games-index>h1,
+  .catalog-title h1,
+  .collections-page>h1,
+  .creators-page>h1,
+  .community>h1,
+  .account-center>h1{
+    font-size:clamp(44px,13.2vw,62px);
+    line-height:.94;
+  }
+
+  .index-tools,
+  .catalog-tools,
+  .collection-tools,
+  .creators-search{
+    padding:6px;
+    border-radius:15px;
+  }
+
+  .content-card,
+  .game-card,
+  .collection-card,
+  .creator-index-card,
+  .community-board,
+  .account-panel{
+    border-radius:24px;
+  }
+
+  .community-board,
+  .account-panel{
+    padding:30px 24px 32px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .content-card,
+  .game-card,
+  .collection-card,
+  .creator-index-card{
+    transition:none!important;
+  }
+}

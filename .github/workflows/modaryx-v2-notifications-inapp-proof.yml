@@ -1,0 +1,77 @@
+name: MODARYX V2 Notifications In-App Candidate Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-notifications-inapp-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-notifications-inapp-proof.yml'
+      - 'migrations/0005_modaryx_v2_notifications.sql'
+      - 'functions/_lib/notifications.mjs'
+      - 'functions/api/v1/notifications/**'
+      - 'v2/src/App.jsx'
+      - 'v2/src/api/modaryx-api.js'
+      - 'qa/modaryx-v2-notifications-preferences-contract.json'
+      - 'qa/check-v2-notifications-preferences-contract.mjs'
+      - 'qa/check-v2-notifications-inapp-candidate.mjs'
+      - 'qa/check-v2-living-threshold-product-flows.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-notifications-inapp-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove in-app storage/read candidate without fake delivery
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Mirror Cloudflare root build
+        run: npm run build
+      - name: Validate in-app candidate
+        run: |
+          set -euo pipefail
+          node qa/check-v2-notifications-preferences-contract.mjs
+          node --experimental-sqlite qa/check-v2-notifications-inapp-candidate.mjs
+          node qa/check-v2-preproduction-contract-registry.mjs
+      - name: Locate Chrome
+        run: |
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+      - name: Build V2
+        working-directory: v2
+        run: |
+          npm ci
+          npm run build
+      - name: Start V2 candidate
+        working-directory: v2
+        run: |
+          node ./node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4185 >/tmp/modaryx-v2-notifications.log 2>&1 &
+          echo $! >/tmp/modaryx-v2-notifications.pid
+          for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4185/ >/dev/null && exit 0; sleep 0.25; done
+          cat /tmp/modaryx-v2-notifications.log
+          exit 1
+      - name: Preserve truthful guest notification flow
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4185
+        run: |
+          node qa/check-v2-living-threshold-product-flows.mjs
+          echo PASS_V2_NOTIFICATIONS_INAPP_BROWSER_GUEST_TRUTH
+      - name: Cleanup
+        if: always()
+        run: |
+          if test -f /tmp/modaryx-v2-notifications.pid; then kill "$(cat /tmp/modaryx-v2-notifications.pid)" 2>/dev/null || true; fi

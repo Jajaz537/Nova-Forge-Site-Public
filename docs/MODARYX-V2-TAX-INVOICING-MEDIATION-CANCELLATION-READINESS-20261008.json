@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "FR_EU_TAX_INVOICING_MEDIATION_CANCELLATION_READINESS_CANDIDATE",
+  "sourceHead": "444fd5107fbfe9eeb719a4cfa2918e84565d2cae",
+  "sellerFacts": {
+    "legalEntity": "PREUVE MANQUANTE",
+    "establishmentCountry": "PREUVE MANQUANTE",
+    "vatStatus": "PREUVE MANQUANTE",
+    "vatId": "PREUVE MANQUANTE",
+    "businessRegistration": "PREUVE MANQUANTE",
+    "territories": "PREUVE MANQUANTE"
+  },
+  "vatAndTax": {
+    "state": "BLOQUÉ",
+    "rule": "No VAT/tax regime is canonical until seller establishment, offer classification, customer location, territories and payment/MoR model are known.",
+    "candidateTopics": [
+      "domestic VAT status",
+      "B2C cross-border EU place-of-supply rules",
+      "OSS eligibility/use",
+      "customer-location evidence appropriate to the actual supply",
+      "VAT rates by destination where applicable",
+      "records/retention",
+      "Merchant of Record allocation if selected",
+      "ViDA changes with future effective dates"
+    ],
+    "oss": "PREUVE MANQUANTE",
+    "taxProfessionalReview": "PREUVE MANQUANTE"
+  },
+  "invoicing": {
+    "state": "PREUVE MANQUANTE",
+    "requiredCandidate": [
+      "seller identity",
+      "invoice/receipt numbering",
+      "transaction date",
+      "description of service/content",
+      "net/tax/gross amounts where applicable",
+      "VAT treatment/rate/identifier where applicable",
+      "customer facts required by actual transaction",
+      "credit note/refund linkage",
+      "currency",
+      "provider/MoR receipt responsibilities"
+    ],
+    "finalFormat": "PREUVE MANQUANTE",
+    "retention": "PREUVE MANQUANTE"
+  },
+  "consumerMediation": {
+    "state": "BLOQUÉ",
+    "baseline": "For covered French B2C activity, prepare access to an approved consumer mediation mechanism and communicate the selected mediator as required.",
+    "mediator": "PREUVE MANQUANTE",
+    "sectorCompetence": "PREUVE MANQUANTE",
+    "contractOrMembership": "PREUVE MANQUANTE",
+    "publicInformation": "PREUVE MANQUANTE",
+    "legalApplicability": "PREUVE MANQUANTE"
+  },
+  "onlineCancellation": {
+    "state": "PREUVE MANQUANTE",
+    "baselineCandidate": "If MODARYX offers consumer contracts that can be concluded electronically and the French rule applies, provide a free, direct, permanent and unambiguous online cancellation function.",
+    "offerType": "PREUVE MANQUANTE",
+    "subscriptionExists": false,
+    "requiredFlowCandidate": [
+      "easy-to-find cancellation entry",
+      "identify/confirm contract",
+      "summary before final notification",
+      "unambiguous final cancellation notification",
+      "receipt acknowledgement",
+      "durable information on termination date/effects"
+    ],
+    "noDarkPatterns": true,
+    "noPhoneOrPostalOnlyBarrier": true,
+    "legalApplicability": "PREUVE MANQUANTE"
+  },
+  "withdrawalVsCancellation": {
+    "rule": "Keep withdrawal during statutory cooling-off separate from ordinary contract cancellation/termination.",
+    "withdrawalSource": "docs/MODARYX-V2-PUBLIC-LEGAL-SURFACES-READINESS-20261008.md",
+    "state": "EN COURS"
+  },
+  "launchGate": {
+    "sellerFacts": "PREUVE MANQUANTE",
+    "taxModel": "PREUVE MANQUANTE",
+    "vatOssDecision": "PREUVE MANQUANTE",
+    "invoiceReceiptModel": "PREUVE MANQUANTE",
+    "consumerMediator": "PREUVE MANQUANTE",
+    "cancellationApplicabilityAndFlow": "PREUVE MANQUANTE",
+    "accountingTaxReview": "PREUVE MANQUANTE",
+    "legalReview": "PREUVE MANQUANTE"
+  },
+  "productionActivated": false
+}

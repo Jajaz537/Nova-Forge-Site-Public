@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "PREPARED_NOT_EXECUTED",
+  "targetBranch": "design/modaryx-v2-blue-violet-product-20261005",
+  "preparedAgainstCommit": "acd424a3d4abf0eb4cb153dc24d5202db7412afe",
+  "blockerIds": [
+    "nvda-real",
+    "voiceover-real",
+    "talkback-real",
+    "safari-real",
+    "physical-devices"
+  ],
+  "evidenceDirectory": "qa/external-validation/evidence",
+  "requiredResultStates": [
+    "PASS_WITH_NO_BLOCKER",
+    "PASS_WITH_P2_P3",
+    "FAIL_P0_P1",
+    "INCOMPLETE"
+  ],
+  "sessions": [
+    {
+      "blockerId": "nvda-real",
+      "sessionType": "NVDA_REAL",
+      "requiredReality": [
+        "WINDOWS_REAL",
+        "NVDA_ACTIVE",
+        "REAL_BROWSER"
+      ],
+      "criticalTasks": [
+        "home-to-game-hub",
+        "search-to-content-detail",
+        "account-notifications-data",
+        "keyboard-only-primary-flows",
+        "form-error-announcement"
+      ]
+    },
+    {
+      "blockerId": "voiceover-real",
+      "sessionType": "VOICEOVER_REAL",
+      "requiredReality": [
+        "APPLE_OS_REAL",
+        "VOICEOVER_ACTIVE",
+        "REAL_BROWSER"
+      ],
+      "criticalTasks": [
+        "home-to-game-hub",
+        "search-to-content-detail",
+        "account-notifications-data",
+        "creator-studio-navigation",
+        "form-error-announcement"
+      ]
+    },
+    {
+      "blockerId": "talkback-real",
+      "sessionType": "TALKBACK_REAL",
+      "requiredReality": [
+        "ANDROID_PHYSICAL_DEVICE",
+        "TALKBACK_ACTIVE",
+        "CHROME_REAL"
+      ],
+      "criticalTasks": [
+        "home-to-game-hub",
+        "search-to-content-detail",
+        "touch-navigation",
+        "account-notifications-data",
+        "form-error-announcement"
+      ]
+    },
+    {
+      "blockerId": "safari-real",
+      "sessionType": "SAFARI_REAL",
+      "requiredReality": [
+        "SAFARI_EXECUTED",
+        "APPLE_OS_REAL"
+      ],
+      "criticalTasks": [
+        "sticky-header",
+        "horizontal-overflow",
+        "forms-select-input",
+        "focus-visible",
+        "backdrop-filter-fail-soft",
+        "reduced-motion",
+        "mobile-viewport-units"
+      ]
+    },
+    {
+      "blockerId": "physical-devices",
+      "sessionType": "PHYSICAL_DEVICE",
+      "requiredReality": [
+        "PHYSICAL_DEVICE_REAL",
+        "TOUCH_REAL"
+      ],
+      "criticalTasks": [
+        "touch-targets",
+        "virtual-keyboard-visibility",
+        "text-zoom",
+        "orientation",
+        "safe-area",
+        "scroll-stability",
+        "content-layout-shift"
+      ]
+    }
+  ],
+  "closureRules": [
+    "EVIDENCE_COMMIT_EQUALS_TESTED_COMMIT",
+    "REQUIRED_REALITY_FLAGS_TRUE",
+    "ALL_CRITICAL_TASKS_EXECUTED",
+    "ARTIFACT_REFS_NON_EMPTY",
+    "REVIEWER_RECORDED",
+    "NO_OPEN_P0_P1",
+    "RESULT_NOT_INCOMPLETE"
+  ],
+  "invariants": [
+    "AUTOMATION_NEVER_CLOSES_EXTERNAL_BLOCKER",
+    "CDP_NEVER_EQUALS_SCREEN_READER",
+    "VIEWPORT_EMULATION_NEVER_EQUALS_PHYSICAL_DEVICE",
+    "NON_SAFARI_NEVER_EQUALS_SAFARI_REAL",
+    "EVIDENCE_TEMPLATE_NEVER_EQUALS_EXECUTED_SESSION",
+    "NO_UNNECESSARY_PERSONAL_DATA",
+    "NO_EXTERNAL_SESSION_AGAINST_HISTORICAL_ROOT",
+    "INTERACTIVE_V2_ORIGIN_REQUIRED_BEFORE_REAL_DEVICE_EXECUTION"
+  ],
+  "preparedPreviewOrigin": "https://v2-engineering.nova-forge-site-public.pages.dev",
+  "latestReadOnlyProbe": {
+    "runId": 37532315393,
+    "jobId": 112504495423,
+    "state": "SUCCESS",
+    "mode": "PRE_CUTOVER",
+    "origin": "https://6ed17e00.nova-forge-site-public.pages.dev",
+    "note": "Current Pages root is a PRE_CUTOVER infrastructure probe target and must not be treated as the interactive V2 validation origin."
+  },
+  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-2304.md",
+  "canonicalGovernanceHead": "acd424a3d4abf0eb4cb153dc24d5202db7412afe",
+  "interactiveV2OriginState": "READY_VERIFIED_EXACT_CANON",
+  "latestInteractiveV2Preview": {
+    "runId": 37533118410,
+    "jobId": 112507209743,
+    "state": "SUCCESS",
+    "sourceCommit": "acd424a3d4abf0eb4cb153dc24d5202db7412afe",
+    "deploymentOrigin": "https://6b6a0acb.nova-forge-site-public.pages.dev",
+    "aliasOrigin": "https://v2-engineering.nova-forge-site-public.pages.dev",
+    "noindex": true,
+    "dnsChanged": false,
+    "cutover": false
+  }
+}

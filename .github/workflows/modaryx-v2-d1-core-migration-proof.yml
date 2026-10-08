@@ -1,0 +1,45 @@
+name: MODARYX V2 D1 Core Migration Proof
+
+on:
+  push:
+    branches:
+      - 'chatgpt/modaryx-v2-d1-core-schema-20261006'
+    paths:
+      - '.github/workflows/modaryx-v2-d1-core-migration-proof.yml'
+      - 'migrations/0004_modaryx_v2_core_model.sql'
+      - 'qa/modaryx-v2-d1-core-contract.json'
+      - 'qa/check-v2-d1-core-migration.py'
+      - 'qa/check-v2-d1-core-migration.mjs'
+      - 'qa/modaryx-v2-schema-plan-contract.json'
+      - 'qa/check-v2-schema-plan-contract.mjs'
+      - 'qa/modaryx-v2-preproduction-contract-registry.json'
+  pull_request:
+    branches:
+      - 'design/modaryx-v2-blue-violet-product-20261005'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-d1-core-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Prove V2 D1 migration locally without remote apply
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Validate migration contract and local SQLite
+        run: |
+          set -euo pipefail
+          node qa/check-v2-schema-plan-contract.mjs
+          python3 qa/check-v2-d1-core-migration.py
+          node qa/check-v2-preproduction-contract-registry.mjs
+          echo PASS_V2_D1_CORE_CANDIDATE_PROOF

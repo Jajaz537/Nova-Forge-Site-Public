@@ -1,5 +1,6 @@
 import {json} from '../../_lib/api-security.mjs';
 import {authenticateRead, authorizeWrite, profileIdForSub, validateProfilePayload} from '../../_lib/remote-write.mjs';
+import {recordDataHistory} from '../../_lib/data-history.mjs';
 
 function publicShape(row) {
   return {
@@ -83,5 +84,23 @@ export async function onRequestPut(context) {
   }
 
   const row = await findByIdentity(db, access.identity.identity.sub);
+  const changedFields=["handle","displayName","bio","visibility","creator","links"].filter(field=>{
+    if(!existing) return true;
+    if(field==="displayName") return existing.display_name!==profile.displayName;
+    if(field==="creator") return Boolean(existing.creator_is_creator)!==Boolean(profile.creator.isCreator)||(existing.creator_display_label||"")!==(profile.creator.displayLabel||"");
+    if(field==="links"){
+      try{return JSON.stringify(JSON.parse(existing.links_json||"[]"))!==JSON.stringify(profile.links);}catch{return true;}
+    }
+    const map={handle:"handle",bio:"bio",visibility:"visibility"};
+    return (existing[map[field]]||"")!==(profile[field]||"");
+  });
+  await recordDataHistory(context.env,{
+    ownerIdentitySub:access.identity.identity.sub,
+    entityKind:"profile",
+    entityId:profileId,
+    action:existing?"updated":"created",
+    changedFields,
+    occurredAt:now
+  });
   return json(publicShape(row), existing ? 200 : 201);
 }

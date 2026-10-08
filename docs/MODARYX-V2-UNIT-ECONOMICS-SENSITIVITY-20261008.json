@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "PAYMENT_FEE_SENSITIVITY_ONLY",
+  "sourceSha": "b67a888c2371f6e317036c11ade2271e79956ea8",
+  "researchStimuliEur": [
+    4.99,
+    6.99,
+    8.99
+  ],
+  "stripeFranceStandardEea": {
+    "formula": "1.5% * price + 0.25 EUR",
+    "rows": [
+      {
+        "priceEur": 4.99,
+        "feeEur": 0.32485,
+        "feePercentOfPrice": 6.51,
+        "paymentNetEur": 4.66515
+      },
+      {
+        "priceEur": 6.99,
+        "feeEur": 0.35485,
+        "feePercentOfPrice": 5.08,
+        "paymentNetEur": 6.63515
+      },
+      {
+        "priceEur": 8.99,
+        "feeEur": 0.38485,
+        "feePercentOfPrice": 4.28,
+        "paymentNetEur": 8.60515
+      }
+    ],
+    "excludes": [
+      "VAT/taxes",
+      "refunds",
+      "chargebacks/dispute fees",
+      "currency conversion",
+      "support",
+      "moderation",
+      "fraud/abuse",
+      "rights/licenses",
+      "legal/accounting",
+      "infrastructure",
+      "CAC"
+    ]
+  },
+  "merchantOfRecordReferences": {
+    "paddle": {
+      "officialQuotedFee": "5% + $0.50 per Checkout transaction",
+      "directEurComparison": "NOT_COMPUTED",
+      "reason": "Fixed fee is quoted in USD and Merchant-of-Record tax/billing treatment differs from direct PSP economics."
+    },
+    "lemonSqueezy": {
+      "officialQuotedFee": "5% + $0.50 base",
+      "additionalFees": [
+        "+1.5% international transactions outside the US",
+        "+1.5% PayPal",
+        "+0.5% subscription payments",
+        "payout fees can apply by region/method"
+      ],
+      "directEurComparison": "NOT_COMPUTED",
+      "reason": "Fee basis, tax-inclusive settings, international/subscription surcharges and payout fees must be modeled from the actual seller/customer configuration."
+    }
+  },
+  "interpretation": [
+    "Lower price points carry a higher effective percentage cost under fixed-fee PSP pricing.",
+    "PaymentNet is not contribution margin and must not be called profit.",
+    "Merchant-of-Record pricing cannot be compared fairly using headline percentages alone because it also covers tax/compliance/chargeback functions and may apply fees to tax-inclusive totals.",
+    "Provider choice remains blocked on seller identity, territories, tax model, refund policy, checkout accessibility and total operational cost."
+  ],
+  "decisionState": {
+    "canonicalPrice": null,
+    "canonicalProvider": null,
+    "canonicalTaxPresentation": null,
+    "measuredRefundRate": "PREUVE MANQUANTE",
+    "measuredChargebackRate": "PREUVE MANQUANTE",
+    "measuredConversion": "PREUVE MANQUANTE"
+  }
+}

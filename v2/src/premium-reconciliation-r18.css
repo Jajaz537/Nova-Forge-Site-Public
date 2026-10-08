@@ -1,0 +1,586 @@
+/* MODARYX V2 — Premium reconciliation R18 / Living Realms
+   Owner feedback is authoritative: R17 still reads too close to the old design / a mockup.
+   Visual-only. No route, data, backend, entitlement, provider or production behavior changes. */
+
+:root{
+  --r18-cyan:#79f3ef;
+  --r18-violet:#9a87ff;
+  --r18-gold:#f1d49a;
+  --r18-deep:#02060b;
+  --r18-surface:rgba(5,15,24,.72);
+  --r18-surface-strong:rgba(4,12,20,.88);
+  --r18-line:rgba(167,230,239,.13);
+  --r18-shadow:0 34px 110px rgba(0,0,0,.42);
+}
+
+/* Floating product ribbon instead of a flat SaaS strip. */
+.topbar{
+  top:14px!important;
+  width:min(1380px,calc(100% - 28px))!important;
+  min-height:58px!important;
+  margin-inline:auto!important;
+  padding-inline:16px!important;
+  border:1px solid rgba(174,231,240,.12)!important;
+  border-radius:20px!important;
+  background:
+    linear-gradient(180deg,rgba(8,19,29,.88),rgba(3,10,17,.80))!important;
+  box-shadow:
+    0 20px 70px rgba(0,0,0,.34),
+    inset 0 1px rgba(255,255,255,.04)!important;
+  backdrop-filter:blur(22px) saturate(1.18)!important;
+}
+
+.global-nav{
+  gap:3px!important;
+}
+
+.global-nav button{
+  min-height:36px!important;
+  padding-inline:12px!important;
+  border-radius:12px!important;
+}
+
+.global-nav button.active,
+.global-nav button[aria-current="page"]{
+  background:linear-gradient(135deg,rgba(121,243,239,.11),rgba(154,135,255,.10))!important;
+  box-shadow:inset 0 0 0 1px rgba(121,243,239,.12)!important;
+}
+
+.top-actions>button{
+  border-radius:12px!important;
+}
+
+.demo-cta{
+  box-shadow:0 10px 30px rgba(119,101,255,.24)!important;
+}
+
+/* Realm foundations: every major route owns a visual atmosphere before controls begin. */
+.games-index,
+.catalog,
+.collections-page,
+.creators-page,
+.page-section.community,
+.account-center{
+  isolation:isolate;
+  min-height:100vh;
+  padding-inline:clamp(22px,4.6vw,72px)!important;
+}
+
+.games-index::before,
+.catalog::before,
+.collections-page::after,
+.creators-page::before,
+.page-section.community::before,
+.account-center::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  pointer-events:none;
+  inset:72px 0 auto 0;
+  height:min(720px,74vh);
+  opacity:.78;
+  background-image:
+    linear-gradient(180deg,rgba(2,6,11,.06),rgba(2,6,11,.34) 58%,var(--r18-deep) 100%),
+    linear-gradient(90deg,rgba(2,6,11,.74),rgba(2,6,11,.12) 45%,rgba(2,6,11,.46)),
+    url('/assets/living-threshold-content-sheet.png');
+  background-size:cover,cover,300% 200%;
+  background-repeat:no-repeat;
+  mask-image:linear-gradient(180deg,#000 0%,#000 72%,transparent 100%);
+}
+
+.games-index::before{background-position:center,center,100% 100%}
+.catalog::before{background-position:center,center,0% 100%!important}
+.collections-page::after{background-position:center,center,50% 100%}
+.creators-page::before{background-position:center,center,100% 0%!important}
+.page-section.community::before{background-position:center,center,50% 0%}
+.account-center::before{background-position:center,center,0% 0%}
+
+/* A soft light field joins the world image and the functional plane. */
+.games-index,
+.catalog,
+.collections-page,
+.creators-page,
+.page-section.community,
+.account-center{
+  background:
+    radial-gradient(circle at 78% 19%,rgba(154,135,255,.10),transparent 30rem),
+    radial-gradient(circle at 20% 48%,rgba(121,243,239,.065),transparent 26rem),
+    linear-gradient(180deg,#02060b 0%,#030a11 48%,#02060b 100%)!important;
+}
+
+/* Headlines become part of a cinematic threshold instead of floating in blank space. */
+.games-index>.kicker,
+.catalog .catalog-title>.kicker,
+.collections-page>.kicker,
+.creators-page>.kicker,
+.community>.kicker,
+.account-center>.kicker{
+  margin-top:18px;
+  text-shadow:0 2px 20px rgba(0,0,0,.54);
+}
+
+.games-index>h1,
+.catalog .catalog-title>h1,
+.collections-page>h1,
+.creators-page>h1,
+.community>h1,
+.account-center>h1{
+  text-shadow:0 8px 42px rgba(0,0,0,.52);
+}
+
+.games-index>.page-intro,
+.catalog .catalog-title>p,
+.collections-page>.page-intro,
+.creators-page>.page-intro,
+.community>.page-intro,
+.account-center>.page-intro{
+  color:rgba(233,244,247,.78)!important;
+  text-shadow:0 2px 18px rgba(0,0,0,.56);
+}
+
+/* GAMES — support becomes a secondary lens inside the same realm. */
+.games-index{
+  padding-top:154px!important;
+}
+
+.games-index .game-support-request{
+  min-height:210px!important;
+  align-self:center!important;
+  border:1px solid rgba(121,243,239,.12)!important;
+  border-radius:30px!important;
+  background:
+    linear-gradient(145deg,rgba(6,18,28,.72),rgba(5,11,20,.54))!important;
+  box-shadow:var(--r18-shadow)!important;
+  backdrop-filter:blur(16px)!important;
+}
+
+.games-index .index-tools{
+  margin-top:72px!important;
+}
+
+.games-index .game-grid{
+  position:relative;
+  z-index:1;
+  padding-top:8px;
+}
+
+.games-index .game-card{
+  box-shadow:0 28px 80px rgba(0,0,0,.30)!important;
+}
+
+.games-index .game-card:first-child{
+  box-shadow:0 42px 120px rgba(0,0,0,.42)!important;
+}
+
+/* MODS — atlas controls sit on a translucent map shelf rather than in blank space. */
+.catalog{
+  padding-top:158px!important;
+}
+
+.catalog .catalog-title{
+  min-height:360px;
+  align-content:center;
+}
+
+.catalog .catalog-tools{
+  margin-top:14px!important;
+  padding:14px!important;
+  max-width:1120px!important;
+  border:1px solid var(--r18-line);
+  border-radius:22px;
+  background:rgba(3,11,18,.66);
+  box-shadow:0 24px 80px rgba(0,0,0,.28);
+  backdrop-filter:blur(18px);
+}
+
+.catalog .catalog-summary{
+  margin-top:18px!important;
+}
+
+.catalog-grid{
+  margin-top:24px!important;
+}
+
+/* COLLECTIONS — remove the giant dark void: a realm threshold first, archive second. */
+.collections-page{
+  padding-top:150px!important;
+}
+
+.collections-page>h1,
+.collections-page>.page-intro,
+.collections-page>.collection-mode-tabs{
+  position:relative;
+  z-index:1;
+}
+
+.collections-page>h1{
+  max-width:9ch!important;
+}
+
+.collections-page>.page-intro{
+  max-width:630px!important;
+}
+
+.collections-page .collection-mode-tabs{
+  margin-top:30px!important;
+  padding:6px!important;
+  border:1px solid rgba(241,212,154,.13)!important;
+  border-radius:16px!important;
+  background:rgba(4,12,18,.60)!important;
+  backdrop-filter:blur(14px);
+}
+
+.collections-page .collection-mode-tabs button{
+  border-radius:11px!important;
+}
+
+.collections-page .collection-tools{
+  margin-top:64px!important;
+  padding-top:18px;
+  border-top:1px solid rgba(241,212,154,.10);
+}
+
+.collections-page .collection-grid{
+  margin-top:24px!important;
+}
+
+.collections-page .collection-card:first-child{
+  box-shadow:0 42px 120px rgba(0,0,0,.42)!important;
+}
+
+/* CREATORS — studio vista with the identities emerging from the landscape. */
+.creators-page{
+  padding-top:150px!important;
+}
+
+.creators-page>h1{
+  max-width:10ch!important;
+}
+
+.creators-page>.page-intro{
+  max-width:620px!important;
+}
+
+.creators-page .creator-studio-entry{
+  margin-top:24px!important;
+  background:rgba(4,13,21,.66)!important;
+  backdrop-filter:blur(14px);
+}
+
+.creators-page .creators-search{
+  margin-top:66px!important;
+  padding:5px 10px!important;
+  border-radius:18px!important;
+  background:rgba(3,11,18,.64)!important;
+  backdrop-filter:blur(16px);
+}
+
+.creator-index-grid{
+  margin-top:24px!important;
+}
+
+/* COMMUNITY — immersive observatory. The board overlaps the realm instead of floating beside a blank title. */
+.page-section.community{
+  display:block!important;
+  padding-top:148px!important;
+}
+
+.community>.kicker,
+.community>h1,
+.community>.page-intro{
+  position:relative;
+  z-index:1;
+  max-width:620px!important;
+}
+
+.community>h1{
+  max-width:8.6ch!important;
+}
+
+.community>.community-tabs{
+  position:relative;
+  z-index:3;
+  display:flex!important;
+  width:max-content;
+  max-width:100%;
+  margin-top:50px!important;
+  padding:6px!important;
+  gap:4px!important;
+  overflow-x:auto;
+  border:1px solid var(--r18-line)!important;
+  border-radius:18px!important;
+  background:rgba(3,11,18,.66)!important;
+  backdrop-filter:blur(18px);
+}
+
+.community .community-tabs button{
+  min-height:42px!important;
+  padding:0 14px!important;
+  border:0!important;
+  border-radius:12px!important;
+}
+
+.community .community-tabs button.active{
+  background:linear-gradient(135deg,rgba(121,243,239,.10),rgba(154,135,255,.11))!important;
+  box-shadow:inset 0 0 0 1px rgba(121,243,239,.12);
+}
+
+.community>.community-board{
+  position:relative;
+  z-index:2;
+  width:min(100%,1080px);
+  min-height:560px!important;
+  margin:26px 0 0 auto!important;
+  padding:48px 52px!important;
+  border:1px solid rgba(167,230,239,.12)!important;
+  border-radius:34px!important;
+  background:
+    linear-gradient(155deg,rgba(6,19,29,.90),rgba(3,10,17,.78))!important;
+  box-shadow:var(--r18-shadow)!important;
+  backdrop-filter:blur(20px);
+}
+
+.community .community-board::before{
+  content:"";
+  position:absolute;
+  inset:-1px auto -1px -1px;
+  width:3px;
+  border-radius:34px 0 0 34px;
+  background:linear-gradient(180deg,var(--r18-cyan),rgba(154,135,255,.22),transparent);
+  opacity:.72;
+}
+
+/* ACCOUNT — identity sanctuary. No more title-left / settings-box-right mockup. */
+.account-center{
+  display:block!important;
+  padding-top:148px!important;
+}
+
+.account-center>.kicker,
+.account-center>h1,
+.account-center>.page-intro{
+  position:relative;
+  z-index:1;
+  max-width:620px!important;
+}
+
+.account-center>h1{
+  max-width:10.5ch!important;
+}
+
+.account-center>.account-shell{
+  position:relative;
+  z-index:2;
+  width:min(100%,1080px);
+  min-height:620px!important;
+  margin:54px 0 0 auto!important;
+  grid-template-columns:210px minmax(0,1fr)!important;
+  border:1px solid rgba(167,230,239,.12)!important;
+  border-radius:34px!important;
+  background:
+    linear-gradient(155deg,rgba(6,18,28,.92),rgba(3,10,17,.80))!important;
+  box-shadow:var(--r18-shadow)!important;
+  backdrop-filter:blur(20px);
+}
+
+.account-center .account-nav{
+  padding:24px 12px!important;
+  border-right:1px solid rgba(167,230,239,.09)!important;
+  background:linear-gradient(180deg,rgba(121,243,239,.025),transparent)!important;
+}
+
+.account-center .account-nav button{
+  min-height:44px!important;
+  margin:2px 0!important;
+  padding-left:14px!important;
+  border-radius:11px!important;
+  border-left:0!important;
+}
+
+.account-center .account-nav button.active,
+.account-center .account-nav button[aria-pressed="true"]{
+  border-left:0!important;
+  background:linear-gradient(90deg,rgba(121,243,239,.10),rgba(154,135,255,.05))!important;
+  box-shadow:inset 0 0 0 1px rgba(121,243,239,.09)!important;
+}
+
+.account-center .account-panel{
+  min-height:620px!important;
+  padding:44px 48px!important;
+}
+
+/* Controls should feel embedded in the world, not pasted from a default form. */
+.catalog-search,
+.sort-control select,
+.filter-panel,
+.collection-tools .filter-chips,
+.creators-search,
+.account-shell input,
+.account-shell select,
+.account-shell textarea{
+  border-color:rgba(167,230,239,.12)!important;
+}
+
+.catalog-search,
+.creators-search,
+.account-shell input,
+.account-shell select,
+.account-shell textarea{
+  background:rgba(2,9,15,.70)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.025)!important;
+}
+
+/* Desktop rhythm: use the full canvas, reduce dead zones. */
+@media (min-width:1100px){
+  .games-index,
+  .catalog,
+  .collections-page,
+  .creators-page,
+  .page-section.community,
+  .account-center{
+    max-width:1520px!important;
+    margin-inline:auto!important;
+  }
+
+  .collections-page .collection-grid,
+  .creator-index-grid,
+  .catalog-grid{
+    width:calc(100% - 24px);
+    margin-left:auto;
+  }
+}
+
+/* Mobile becomes a composed world entrance followed by calm functional surfaces. */
+@media (max-width:900px){
+  .topbar{
+    top:8px!important;
+    width:calc(100% - 14px)!important;
+    min-height:54px!important;
+    border-radius:17px!important;
+    padding-inline:10px!important;
+  }
+
+  .games-index,
+  .catalog,
+  .collections-page,
+  .creators-page,
+  .page-section.community,
+  .account-center{
+    padding-top:112px!important;
+    padding-inline:14px!important;
+  }
+
+  .games-index::before,
+  .catalog::before,
+  .collections-page::after,
+  .creators-page::before,
+  .page-section.community::before,
+  .account-center::before{
+    inset:64px 0 auto 0;
+    height:520px;
+    opacity:.66;
+    background-size:cover,cover,300% 200%;
+    mask-image:linear-gradient(180deg,#000 0%,#000 64%,transparent 100%);
+  }
+
+  .games-index>.page-intro,
+  .catalog .catalog-title>p,
+  .collections-page>.page-intro,
+  .creators-page>.page-intro,
+  .community>.page-intro,
+  .account-center>.page-intro{
+    max-width:34rem!important;
+  }
+
+  .games-index .game-support-request{
+    margin-top:28px!important;
+    border-radius:24px!important;
+  }
+
+  .catalog .catalog-title{
+    min-height:330px!important;
+  }
+
+  .catalog .catalog-tools,
+  .collections-page .collection-tools,
+  .creators-page .creators-search{
+    margin-top:30px!important;
+  }
+
+  .community>.community-tabs{
+    margin-top:34px!important;
+    width:100%;
+  }
+
+  .community>.community-board,
+  .account-center>.account-shell{
+    width:100%!important;
+    margin-top:20px!important;
+    border-radius:24px!important;
+  }
+
+  .community>.community-board{
+    padding:28px 20px!important;
+  }
+
+  .account-center>.account-shell{
+    display:block!important;
+    min-height:0!important;
+  }
+
+  .account-center .account-nav{
+    display:flex!important;
+    overflow-x:auto;
+    padding:8px!important;
+    border-right:0!important;
+    border-bottom:1px solid rgba(167,230,239,.09)!important;
+  }
+
+  .account-center .account-nav button{
+    min-width:max-content;
+    padding-inline:13px!important;
+  }
+
+  .account-center .account-panel{
+    min-height:0!important;
+    padding:28px 20px!important;
+  }
+}
+
+@media (max-width:560px){
+  .games-index::before,
+  .catalog::before,
+  .collections-page::after,
+  .creators-page::before,
+  .page-section.community::before,
+  .account-center::before{
+    height:470px;
+  }
+
+  .games-index>h1,
+  .catalog .catalog-title>h1,
+  .collections-page>h1,
+  .creators-page>h1,
+  .community>h1,
+  .account-center>h1{
+    font-size:clamp(42px,12vw,58px)!important;
+    line-height:.92!important;
+  }
+
+  .catalog .catalog-title{
+    min-height:300px!important;
+  }
+
+  .community>.community-board,
+  .account-center>.account-shell{
+    box-shadow:0 24px 70px rgba(0,0,0,.34)!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .topbar,
+  .community>.community-board,
+  .account-center>.account-shell{
+    backdrop-filter:none!important;
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "PREPRODUCTION_BROWSER_PROOF_REQUIRED",
+  "baseCommit": "4eda03ee19609fb089ba955bb142e1206be00cec",
+  "root": "v2-preview",
+  "migration": {
+    "namespace": "modaryx:v2:",
+    "firstPass": "NON_DESTRUCTIVE",
+    "legacyDeletion": false,
+    "marker": "modaryx:v2:migration:v1",
+    "creatorDraftV1": "PRESERVE_UNMAPPED_REQUIRES_EXPLICIT_USER_SAVE"
+  },
+  "serviceWorker": {
+    "file": "v2-preview/public/sw-v2-preview.js",
+    "cache": "modaryx-v2-preview-shell-v1",
+    "explicitLegacyCaches": [
+      "modaryx-site-v120-scalable"
+    ],
+    "unknownCaches": "PRESERVE",
+    "clientsClaim": false,
+    "registeredByProduct": false,
+    "browserProofRegistration": "TEST_ONLY"
+  },
+  "requiredEvidence": [
+    "FRESH_BROWSER",
+    "LEGACY_BROWSER",
+    "OFFLINE",
+    "INTERRUPTED_UPGRADE",
+    "ROLLBACK"
+  ],
+  "finalGate": "DO_NOT_CLOSE_PRODUCTION_CUTOVER_FROM_PREVIEW_PROOF"
+}

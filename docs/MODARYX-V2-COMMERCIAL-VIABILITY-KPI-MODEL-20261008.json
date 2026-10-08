@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "COMMERCIAL_VIABILITY_KPI_MEASUREMENT_CONTRACT",
+  "activatesCollection": false,
+  "canonicalPrice": null,
+  "canonicalPaymentProvider": null,
+  "kpis": [
+    {
+      "id": "acquisition",
+      "state": "PREUVE MANQUANTE",
+      "denominatorRule": "ATTRIBUTABLE_SPEND_AND_ATTRIBUTABLE_NEW_PAYERS"
+    },
+    {
+      "id": "activation",
+      "state": "EN COURS",
+      "rule": "FIRST_COMPLETE_USEFUL_WORKFLOW_NOT_ACCOUNT_CREATION"
+    },
+    {
+      "id": "retention-d1-d7-d30",
+      "state": "PREUVE MANQUANTE",
+      "cohortRequired": true
+    },
+    {
+      "id": "premium-conversion",
+      "state": "PREUVE MANQUANTE",
+      "denominatorMustBeExplicit": true
+    },
+    {
+      "id": "premium-churn",
+      "state": "PREUVE MANQUANTE",
+      "cohortRequired": true
+    },
+    {
+      "id": "arppu",
+      "state": "PREUVE MANQUANTE",
+      "cashCollectedRequired": true
+    },
+    {
+      "id": "refund-rate",
+      "state": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "chargeback-rate",
+      "state": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "support-cost-per-1k-mau",
+      "state": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "moderation-cost-per-1k-ugc",
+      "state": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "infra-cost-per-mau",
+      "state": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "cac",
+      "state": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "net-ltv",
+      "state": "PREUVE MANQUANTE"
+    }
+  ],
+  "formulas": {
+    "activatedUsers": "MAU * activationRate",
+    "retainedD30": "activatedUsers * d30Retention",
+    "payers": "explicitDenominator * premiumConversion",
+    "grossRevenue": "payers * ARPPU",
+    "paymentNet": "grossRevenue - actualPaymentFees",
+    "contributionBeforeAcquisition": "paymentNet - measuredRefunds - measuredChargebacks - measuredInfra - measuredProviders - measuredSupport - measuredModeration - measuredFraud - measuredRights - measuredCompliance",
+    "contributionAfterAcquisition": "contributionBeforeAcquisition - attributableCAC"
+  },
+  "evidenceAlreadyAvailable": [
+    "PRICING_RESEARCH_PROTOCOL",
+    "PRICING_RESEARCH_INSTRUMENT",
+    "MARKET_PRICING_REFERENCE",
+    "CLOUDFLARE_COST_ENVELOPE",
+    "PAYMENT_UNIT_ECONOMICS_SENSITIVITY"
+  ],
+  "privacy": {
+    "instrumentationEnabled": false,
+    "marketingAnalyticsDefault": "OFF",
+    "nonNecessaryTrackingBeforeConsent": "PROHIBITED_WHEN_CONSENT_REQUIRED",
+    "minimize": true,
+    "preferAggregates": true,
+    "sensitiveDataNotNeeded": true
+  },
+  "decisionGate": {
+    "canonicalPricingAllowed": false,
+    "launchPremiumAllowed": false,
+    "requiredEvidence": [
+      "FREE_CORE_VALUE_REAL_USE",
+      "ACTIVATION_AND_RETENTION",
+      "RECURRING_PREMIUM_VALUE",
+      "PAYMENT_NET_REAL",
+      "SUPPORT_MODERATION_INFRA_COSTS",
+      "REFUNDS_CHARGEBACKS",
+      "CAC_OR_EQUIVALENT_ACQUISITION_ECONOMICS",
+      "LTV_OR_EQUIVALENT_VIABILITY",
+      "SELLER_TERRITORIES_TAX_PROVIDER_FACTS",
+      "RIGHTS_AND_LEGAL_READINESS",
+      "OWNER_DECISION"
+    ]
+  },
+  "invariants": [
+    "NO_PRICE_CANONIZATION",
+    "NO_PROVIDER_SELECTION",
+    "NO_ANALYTICS_ENABLEMENT",
+    "NO_PAYMENT_ENABLEMENT",
+    "NO_DARK_PATTERNS",
+    "NO_ARTIFICIAL_FREE_DEGRADATION",
+    "NO_PRODUCTION_MUTATION"
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-04",
-  "status": "ACTIVE_PRE_PRODUCTION_POLICY",
+  "date": "2026-10-06",
+  "status": "REQUEST_PREPARATION_CANDIDATE_LOCAL_PROOF",
   "source": "docs/MODARYX-V2-GAME-SUPPORT-PUBLISHER-RIGHTS-WORKFLOW-20261004.md",
   "states": [
     "REQUEST_READY",
@@ -56,14 +56,26 @@
     "BOUNCE_NEVER_TRIGGERS_GUESSED_CONTACT",
     "RETRY_PRESERVES_LOGICAL_REQUEST_ID",
     "FOLLOW_UP_IS_NOT_TECHNICAL_RETRY",
-    "WEB_AND_FORGE_SCOPES_REMAIN_SEPARATE"
+    "WEB_AND_FORGE_SCOPES_REMAIN_SEPARATE",
+    "NO_RAW_CONTACT_ADDRESS_STORED_BY_OUTBOUND_PREPARATION",
+    "REQUEST_PREPARATION_NEVER_PERFORMS_NETWORK_SEND",
+    "PROVIDER_MISSING_BLOCKS_QUEUE",
+    "REMOTE_D1_NOT_APPLIED",
+    "PUBLISHER_OUTBOUND_PRODUCTION_BLOCKER_REMAINS_OPEN"
   ],
   "productionStatus": {
+    "requestPreparation": "CANDIDATE_LOCAL_PROOF",
     "queue": "NOT_IMPLEMENTED",
     "providerAdapter": "NOT_IMPLEMENTED",
     "senderIdentity": "NOT_IMPLEMENTED",
     "transportWebhook": "NOT_IMPLEMENTED",
     "bounceHandling": "NOT_IMPLEMENTED",
     "replyCorrelation": "NOT_IMPLEMENTED"
-  }
+  },
+  "migration": "migrations/0011_modaryx_v2_publisher_outbound_readiness.sql",
+  "endpoints": [
+    "POST /api/v1/rights/outbound/prepare",
+    "GET /api/v1/rights/outbound/readiness"
+  ],
+  "remoteApplication": "NOT_EXECUTED"
 }

@@ -575,3 +575,184 @@ Limite :
 - elle ne transforme pas les assets compagnon en assets production ;
 - elle ne ferme pas `normalized-visual-comparison` ;
 - une vraie validation humaine reste requise avant High-Fi final.
+
+
+## 25. Décision humaine fraîche — canon Game Hub produit — 5 octobre 2026
+
+**PRIORITAIRE SUR LES SECTIONS HERO PRÉCÉDENTES POUR LA CIBLE WEB VF**
+
+L'utilisateur a rejeté explicitement la direction hero/cinématique comme cible actuelle du site et a fourni une capture de référence précise du Game Hub « Aurelian Vale ».
+
+Document de décision :
+`docs/MODARYX-V2-DESIGN-CANON-20261005.md`
+
+Cible humaine courante :
+- Game Hub produit sombre ;
+- topbar MODARYX ;
+- navigation Découvrir / Jeux / Mods & contenus / Collections / Créateurs / Communauté ;
+- bandeau contextuel du jeu ;
+- vignette jeu à gauche ;
+- nom + version ;
+- recherche dans le jeu ;
+- CTA Explorer les contenus ;
+- navigation locale ;
+- zone « Pour votre version » ;
+- contenus denses ;
+- rail « Mes profils pour ce jeu » ;
+- palette équilibrée bleu nuit + violet premium.
+
+Les anciennes sections hero restent des preuves historiques/prototype uniquement et ne doivent plus être interprétées comme cible artistique web actuelle.
+
+**État :**
+- décision humaine : TERMINÉ ;
+- alignement complet du prototype sur cette référence : EN COURS ;
+- suppression physique des anciennes preuves/branches : non requise et non exécutée ; elles sont classifiées comme historiques afin de préserver la provenance ;
+- VF : toujours BLOQUÉE par les gates production et validations externes restantes.
+
+Règle de reprise :
+toute nouvelle passe design doit lire d'abord `docs/MODARYX-V2-DESIGN-CANON-20261005.md` et ne doit pas réactiver le hero narratif comme direction principale.
+
+
+## 26. Preuve fraîche — alignement Game Hub canon humain — 5 octobre 2026
+
+**TERMINÉ pour la passe technique ciblée / VF stricte toujours BLOQUÉE**
+
+Branche :
+`design/modaryx-v2-blue-violet-product-20261005`
+
+Commit prouvé :
+`1975c33a76aac62d269cee3c36506a6768205e20`
+
+Workflow :
+`MODARYX V2 Living Threshold Visual Proof`
+
+Run :
+`37355156732` — **SUCCESS**
+
+La preuve verrouille désormais explicitement :
+- décision humaine Game Hub ;
+- structure desktop en liste produit dense ;
+- rail droit profils ;
+- mélange bleu nuit + violet premium ;
+- absence de retour au grand hero marketing comme cible directrice.
+
+Preuves héritées du même run :
+- direction produit : PASS ;
+- accessibilité navigateur : PASS ;
+- product flows : PASS ;
+- 87 captures multiscreen ;
+- intégrité captures : PASS.
+
+Limites inchangées :
+- cette preuve ne ferme pas les gates production ;
+- elle ne remplace pas NVDA / VoiceOver / TalkBack / Safari / appareils physiques ;
+- elle ne sélectionne pas la stack production et ne déclenche aucun cutover.
+
+
+## 27. Comparaison normalisée + progression VF stricte — 5 octobre 2026
+
+**TERMINÉ pour la comparaison structurelle / VF globale toujours BLOQUÉE**
+
+Référence humaine :
+- capture utilisateur `Image ChatGPT 5 oct. 2026, 19_33_06.png` ;
+- 1487 × 1058 ;
+- SHA-256 `9d7a709fe5091aeee3f7f1755f8883991a739a281e8d1c4a2034b5614dad380e`.
+
+Candidat prouvé :
+- commit visuel `cb1ed7973efec1b9a10535c6f4a85e191ecb1f56` ;
+- run `37363048084` — **SUCCESS** ;
+- artifact `11366899033` ;
+- digest `sha256:4206f5d073aa6eb04d89e5eb6af618e4b5a2b835aacf294f693cd6b04031d512` ;
+- capture desktop 1440 × 1024 ;
+- SHA-256 capture `6b93bc1f9ba5b2c34e3e40e76e574b7bb1fecf99af8dbeb96919f1cdde7adeb7`.
+
+Document :
+`docs/MODARYX-V2-NORMALIZED-VISUAL-COMPARISON-20261005.md`
+
+Le blocker `normalized-visual-comparison` est désormais **PROVEN**.
+
+Le gate VF mis à jour a été vérifié par :
+- workflow `MODARYX V2 VF Readiness Gate Proof` ;
+- run `37363745523` — **SUCCESS**.
+
+Comptage strict courant :
+- 32 exigences obligatoires ;
+- 2 exigences maintenant PROVEN dans le gate externe principal :
+  - `approved-visual-reference` ;
+  - `normalized-visual-comparison`.
+- progression arithmétique stricte : **2 / 32 = 6,25 %**.
+
+Cette progression ne ferme aucun autre blocker externe, production, Forge ou rights/legal.
+
+## 28. Préparation de la décision de stack — 5 octobre 2026
+
+**EN COURS — aucune stack sélectionnée**
+
+Stratégie auth/backend définie :
+`docs/MODARYX-V2-AUTH-BACKEND-STRATEGY-20261005.md`
+
+Preuves stack :
+`docs/MODARYX-V2-STACK-PREREQUISITE-EVIDENCE-20261005.md`
+
+État des 6 prérequis :
+- `AUTH_BACKEND_STRATEGY_DEFINED` — PROVEN ;
+- `BUNDLE_BUDGET_MEASURED` — PROVEN ;
+- `V2_ARCHITECTURE_STABLE` — PROVEN pour décision de stack ;
+- `INTERACTION_REQUIREMENTS_KNOWN` — PROVEN pour décision de stack ;
+- `CORE_WIREFRAMES_COMPLETE` — OPEN ;
+- `HUMAN_TREE_TEST` — OPEN.
+
+Baseline bundle mesurée sur le prototype React/Vite :
+- HTML 0,67 kB / gzip 0,39 kB ;
+- CSS 108,28 kB / gzip 19,67 kB ;
+- JS 356,85 kB / gzip 98,67 kB.
+
+Aucun root V2 réel n'est créé par cette preuve.
+Aucune migration Workers/Pages ou Cloudflare critique n'est autorisée.
+
+
+## 29. Mise à jour prérequis stack — 5 octobre 2026
+
+- CORE_WIREFRAMES_COMPLETE : PROVEN_EQUIVALENT via `docs/MODARYX-V2-CORE-WIREFRAMES-EQUIVALENCE-20261005.md`.
+- HUMAN_TREE_TEST : PREUVE MANQUANTE.
+- sélection stack : BLOQUÉE tant que le test humain n'est pas fermé.
+- VF stricte : inchangée à 2/32 prouvés.
+
+
+## 30. Super Nova site-only — canon actif durci — 5 octobre 2026
+
+**TERMINÉ pour le verrouillage de direction / site VF toujours EN COURS**
+
+Décision utilisateur fraîche :
+- priorité exclusive au site MODARYX ;
+- Nova Forge OS mis de côté pour cette phase ;
+- travail en plusieurs lanes site en parallèle ;
+- design canonique inchangé : Game Hub produit sombre, mélange bleu nuit + violet premium.
+
+Durcissement du canon actif :
+- les utilitaires Bibliothèque / Notifications / MODARYX IA ne sont plus visibles dans la topbar desktop canonique ;
+- leurs routes restent accessibles hors navigation primaire pour ne pas perdre les fonctionnalités déjà prouvées ;
+- le stylesheet historique `canon-hero.css` n'est plus chargé dans l'application active ;
+- le composant narratif cinématique voyageur/loup/dragon a été retiré du rendu actif puis supprimé de `App.jsx` ;
+- le guard `qa/check-v2-product-direction.mjs` interdit leur retour.
+
+Preuve technique de trouvabilité :
+- run `37366307508` — **SUCCESS** ;
+- `TREE_PROXY_ASSERT 1..10` — PASS ;
+- clavier 45/45 ;
+- overflow desktop 0 ;
+- overflow mobile 0 ;
+- 87 captures multiscreen ;
+- product flows PASS.
+
+Cette preuve reste un **proxy technique** et ne ferme pas `HUMAN_TREE_TEST`.
+
+Pré-requis de sélection de stack :
+- 5 / 6 prouvés ;
+- seul `HUMAN_TREE_TEST` reste OPEN ;
+- workflow `MODARYX V2 Stack Prerequisite Proof` run `37368708248` — **SUCCESS** ;
+- aucune stack finale sélectionnée ;
+- aucun root V2 production créé.
+
+Règle de reprise :
+ne pas réintroduire l'ancien hero narratif, ne pas remettre les utilitaires secondaires dans la topbar canonique, et ne pas sélectionner la stack tant que le dernier prérequis humain n'est pas fermé ou explicitement reclassifié avec preuve.

@@ -1,0 +1,365 @@
+/* MODARYX V2 — Premium reconciliation R6
+   Owner-feedback continuation: secondary surfaces must stop reading as sparse prototypes.
+   No new assets, routes, data, entitlements or production behavior. */
+
+:root{
+  --r6-surface:rgba(7,18,29,.88);
+  --r6-surface-soft:rgba(10,25,39,.72);
+  --r6-line:rgba(91,176,232,.15);
+  --r6-violet:rgba(132,91,255,.18);
+  --r6-cyan:rgba(71,220,211,.16);
+  --r6-shadow:0 36px 90px rgba(0,0,0,.34);
+}
+
+/* Secondary pages become scenes, not flat canvases. */
+.catalog,
+.collections-page,
+.creators-page,
+.community,
+.account-center{
+  position:relative;
+  isolation:isolate;
+  overflow:clip;
+}
+
+.catalog::after,
+.collections-page::after,
+.creators-page::after,
+.community::after,
+.account-center::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:112px 4vw auto;
+  height:360px;
+  pointer-events:none;
+  border-radius:36px;
+  background:
+    radial-gradient(circle at 14% 10%,rgba(70,217,212,.13),transparent 30%),
+    radial-gradient(circle at 86% 18%,rgba(126,89,255,.17),transparent 32%),
+    linear-gradient(180deg,rgba(10,28,43,.32),rgba(5,13,22,0));
+  filter:blur(.01px);
+}
+
+.catalog-title,
+.collections-page>.kicker,
+.collections-page>h1,
+.collections-page>.page-intro,
+.creators-page>.kicker,
+.creators-page>h1,
+.creators-page>.page-intro,
+.community>.kicker,
+.community>h1,
+.community>.page-intro,
+.account-center>.kicker,
+.account-center>h1,
+.account-center>.page-intro{
+  position:relative;
+  z-index:2;
+}
+
+.catalog-title,
+.collections-page>h1,
+.creators-page>h1,
+.community>h1,
+.account-center>h1{
+  text-shadow:0 18px 42px rgba(0,0,0,.22);
+}
+
+.catalog-title p,
+.collections-page>.page-intro,
+.creators-page>.page-intro,
+.community>.page-intro,
+.account-center>.page-intro{
+  max-width:760px;
+}
+
+/* Common premium surface language. */
+.community-board,
+.collection-card,
+.creator-index-card,
+.account-panel,
+.settings-panel,
+.filter-panel,
+.modpack-surface{
+  border:1px solid var(--r6-line);
+  background:
+    linear-gradient(145deg,rgba(12,31,47,.92),rgba(6,16,27,.94) 58%,rgba(8,13,28,.96));
+  box-shadow:
+    var(--r6-shadow),
+    inset 0 1px rgba(255,255,255,.035);
+  border-radius:22px;
+}
+
+.community-board,
+.modpack-surface,
+.account-panel,
+.settings-panel{
+  overflow:hidden;
+}
+
+.community-board::before,
+.modpack-surface::before,
+.account-panel::before,
+.settings-panel::before{
+  content:"";
+  display:block;
+  height:2px;
+  background:linear-gradient(90deg,#45d9d2,rgba(98,132,255,.85),transparent 78%);
+  opacity:.72;
+}
+
+/* Community: give the board a real focal composition. */
+@media (min-width:961px){
+  .community{
+    padding-bottom:120px;
+  }
+
+  .community-tabs{
+    margin-bottom:28px;
+  }
+
+  .community-board{
+    display:grid;
+    grid-template-columns:minmax(280px,.62fr) minmax(460px,1.38fr);
+    gap:38px;
+    min-height:330px;
+    padding:38px 40px;
+    align-items:start;
+  }
+
+  .community-board>.kicker,
+  .community-board>h2,
+  .community-board>p,
+  .community-board>.primary,
+  .community-board>.local-draft,
+  .community-board>.moderation-note{
+    grid-column:1;
+  }
+
+  .community-board>.community-list,
+  .community-board>.community-teams,
+  .community-board>.activity-list{
+    grid-column:2;
+    grid-row:1 / span 6;
+    align-self:stretch;
+  }
+
+  .community-board>h2{
+    font-size:clamp(30px,2.5vw,44px);
+    line-height:1.02;
+    letter-spacing:-.035em;
+    margin:10px 0 14px;
+  }
+
+  .community-board>p{
+    max-width:36ch;
+    color:rgba(221,231,241,.74);
+    line-height:1.7;
+  }
+}
+
+.community-list,
+.community-teams,
+.activity-list{
+  display:grid;
+  gap:12px;
+}
+
+.community-list article,
+.community-teams article,
+.activity-list article{
+  position:relative;
+  min-height:92px;
+  padding:20px 22px;
+  border:1px solid rgba(93,183,230,.12);
+  border-radius:17px;
+  background:
+    radial-gradient(circle at 90% 8%,rgba(118,86,255,.11),transparent 42%),
+    linear-gradient(145deg,rgba(12,35,51,.76),rgba(7,18,29,.9));
+  box-shadow:inset 0 1px rgba(255,255,255,.025);
+}
+
+.community-list article::after,
+.community-teams article::after,
+.activity-list article::after{
+  content:"";
+  position:absolute;
+  inset:14px auto 14px 0;
+  width:2px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#48dcd4,#665bff);
+  opacity:.72;
+}
+
+/* Collections: first item becomes a proper editorial anchor. */
+@media (min-width:1101px){
+  .collections-page .collection-grid{
+    grid-template-columns:minmax(0,1.34fr) minmax(330px,.66fr);
+    align-items:stretch;
+  }
+
+  .collections-page .collection-card:first-child{
+    grid-row:span 2;
+    min-height:560px;
+  }
+
+  .collections-page .collection-card:first-child>.media{
+    min-height:240px;
+  }
+
+  .collections-page .collection-card:first-child>div{
+    padding:28px 30px 32px;
+  }
+
+  .collections-page .collection-card:first-child h2{
+    font-size:clamp(34px,3vw,52px);
+    letter-spacing:-.04em;
+  }
+}
+
+.collection-card,
+.creator-index-card{
+  overflow:hidden;
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+
+.collection-card:hover,
+.creator-index-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(83,213,217,.28);
+  box-shadow:0 42px 100px rgba(0,0,0,.4),inset 0 1px rgba(255,255,255,.045);
+}
+
+.collection-card>.media,
+.creator-index-card>.media{
+  min-height:170px;
+  border-bottom:1px solid rgba(103,178,226,.12);
+}
+
+.collection-card>div,
+.creator-index-card>div{
+  padding:24px 26px 28px;
+}
+
+/* Creators: less directory, more showcase. */
+@media (min-width:1101px){
+  .creator-index-grid{
+    grid-template-columns:minmax(0,1.2fr) repeat(2,minmax(260px,.8fr));
+    align-items:stretch;
+  }
+
+  .creator-index-card:first-child{
+    grid-row:span 2;
+    min-height:560px;
+  }
+
+  .creator-index-card:first-child h2{
+    font-size:clamp(34px,3vw,52px);
+    letter-spacing:-.04em;
+  }
+}
+
+.creator-avatar{
+  box-shadow:0 0 0 1px rgba(94,210,218,.18),0 14px 28px rgba(0,0,0,.22);
+}
+
+/* Catalog: cards gain depth and a calmer rhythm. */
+.catalog .catalog-tools,
+.collections-page .collection-tools,
+.creators-search{
+  position:relative;
+  z-index:2;
+}
+
+.catalog .content-card{
+  border-color:rgba(85,168,219,.14);
+  background:
+    radial-gradient(circle at 78% 6%,rgba(105,82,255,.13),transparent 34%),
+    linear-gradient(155deg,rgba(12,31,46,.93),rgba(6,17,28,.96));
+  box-shadow:0 28px 68px rgba(0,0,0,.29),inset 0 1px rgba(255,255,255,.03);
+}
+
+.catalog .content-card:hover{
+  border-color:rgba(75,211,210,.28);
+  box-shadow:0 38px 84px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.04);
+}
+
+/* Account: reduce the "settings mockup" effect. */
+@media (min-width:961px){
+  .account-layout{
+    gap:26px;
+  }
+
+  .account-nav{
+    padding:14px;
+    border:1px solid rgba(91,176,232,.12);
+    border-radius:20px;
+    background:
+      linear-gradient(180deg,rgba(10,26,40,.9),rgba(6,16,27,.92));
+    box-shadow:0 28px 64px rgba(0,0,0,.26);
+  }
+
+  .account-nav button{
+    border-radius:12px;
+    min-height:42px;
+  }
+
+  .account-panel,
+  .settings-panel{
+    padding:30px 32px;
+  }
+}
+
+/* Honest states still look intentional rather than unfinished. */
+.unavailable-state,
+.game-request-status,
+.collection-capability,
+.manager-state,
+.creator-trust-note,
+.search-hint{
+  border-radius:14px;
+  border:1px solid rgba(97,177,221,.12);
+  background:rgba(8,22,34,.72);
+}
+
+/* Mobile keeps editorial depth without becoming heavy. */
+@media (max-width:960px){
+  .catalog::after,
+  .collections-page::after,
+  .creators-page::after,
+  .community::after,
+  .account-center::after{
+    inset:92px 18px auto;
+    height:260px;
+    border-radius:26px;
+  }
+
+  .community-board{
+    padding:24px 20px;
+    min-height:0;
+  }
+
+  .community-list article,
+  .community-teams article,
+  .activity-list article{
+    padding:17px 18px;
+  }
+
+  .collection-card>div,
+  .creator-index-card>div{
+    padding:21px 20px 24px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .collection-card,
+  .creator-index-card,
+  .catalog .content-card{
+    transition:none;
+  }
+  .collection-card:hover,
+  .creator-index-card:hover{
+    transform:none;
+  }
+}

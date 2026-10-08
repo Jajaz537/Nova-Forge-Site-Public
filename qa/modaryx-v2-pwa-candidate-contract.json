@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "IMPLEMENTED_CANDIDATE_PROOF_REQUIRED",
+  "root": "v2",
+  "activationFlag": "VITE_MODARYX_PWA_PRODUCTION",
+  "defaultEnabled": false,
+  "productionCutover": "OPEN",
+  "registrationModule": "v2/src/pwa-registration.js",
+  "serviceWorker": "v2/public/sw-v2.js",
+  "manifest": "v2/public/manifest.webmanifest",
+  "cacheName": "modaryx-v2-candidate-shell-v1",
+  "requiredProofs": [
+    "DEFAULT_BUILD_DOES_NOT_REGISTER",
+    "ENABLED_BUILD_AUTO_REGISTERS",
+    "SCOPE_ROOT",
+    "UPDATE_VIA_CACHE_NONE",
+    "CONTROL_AFTER_RELOAD",
+    "OFFLINE_NAVIGATION_WITH_ORIGIN_STOPPED",
+    "NO_CLIENTS_CLAIM",
+    "UNKNOWN_CACHE_PRESERVED_BY_MIGRATION_PROOF"
+  ],
+  "invariants": [
+    "NO_PRODUCTION_ACTIVATION_FROM_CANDIDATE_PROOF",
+    "NO_MAIN_CHANGE",
+    "NO_DNS_DNSSEC_NAMESERVER_CHANGE",
+    "NO_CLOUDFLARE_CRITICAL_CHANGE",
+    "NO_CUTOVER",
+    "FAIL_SOFT_REGISTRATION",
+    "PWA_BLOCKER_REMAINS_OPEN_UNTIL_REAL_PRODUCTION_ACTIVATION"
+  ]
+}
