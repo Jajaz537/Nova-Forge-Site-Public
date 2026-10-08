@@ -18,7 +18,7 @@ rows.sort((a,b)=>b.sourceBytes-a.sourceBytes);
 const bySelector=new Map();
 for(const [index,name] of css.entries()){
   const source=fs.readFileSync(path.join(root,"v2/src",name),"utf8");
-  for(const match of source.matchAll(/(?:^|})\\s*([^@{}][^{}]*?)\\s*\\{/gm)){
+  for(const match of source.matchAll(/(?:^|})\s*([^@{}][^{}]*?)\s*\{/gm)){
     const selector=match[1].trim();
     if(!selector || selector.startsWith("/*") || selector.length>160)continue;
     const occurrences=bySelector.get(selector)||[];
