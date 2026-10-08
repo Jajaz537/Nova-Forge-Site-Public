@@ -1237,3 +1237,44 @@ Gates :
 - VF TECHNIQUE : **EN COURS**
 - LAUNCH-READINESS COMMERCIALE : **EN COURS**
 - LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+
+
+---
+
+## 37. Séparation stricte avec l'écosystème 18+ — 2026-10-08
+
+Documents :
+- `docs/MODARYX-ADULT-ECOSYSTEM-SEPARATION-CONTRACT-20261008.md`
+- `docs/MODARYX-ADULT-ECOSYSTEM-SEPARATION-CONTRACT-20261008.json`
+
+Règle d'architecture :
+l'éventuel jeu 18+ + son site 18+ forment un écosystème distinct de MODARYX et MODARYX OS.
+
+Interdictions côté MODARYX :
+- aucun contenu 18+ ;
+- aucune promotion/funnel vers l'écosystème adulte ;
+- aucun branding adulte ;
+- aucun compte/auth partagé supposé ;
+- aucun paiement/entitlement partagé supposé ;
+- aucune donnée/analytics partagé par défaut.
+
+Toute évolution future exige :
+- décision produit explicite ;
+- revue sécurité ;
+- revue privacy/data-flow ;
+- revue juridique/compliance ;
+- revue âge/audience/consommateur ;
+- mise à jour threat model/checkpoint.
+
+Observation statique courante :
+aucune référence évidente trouvée avec les recherches ciblées `18+`, `adult`, `adulte`, `NSFW`.
+Cette observation ne remplace pas un audit de release.
+
+État :
+- contrat de séparation : **TERMINÉ**
+- audit surface distribuée : **PREUVE MANQUANTE**
+- audit auth/compte croisé : **PREUVE MANQUANTE**
+- audit paiement/entitlement croisé : **PREUVE MANQUANTE**
+- audit data/analytics croisé : **PREUVE MANQUANTE**
+
+Valeur par défaut : **NO_SHARING**.
