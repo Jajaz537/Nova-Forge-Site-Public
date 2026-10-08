@@ -1,0 +1,115 @@
+name: MODARYX V2 Premium Reconciliation Visual Proof R17.1
+
+on:
+  push:
+    branches:
+      - 'proof/modaryx-v2-premium-reconciliation-visual-r17-1-20261008'
+    paths:
+      - '.github/workflows/modaryx-v2-premium-reconciliation-visual-r17-1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modaryx-v2-premium-reconciliation-visual-r17-1
+  cancel-in-progress: false
+
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      MODARYX_PRODUCT_BASE_SHA: '41fab27fd10d8dbe0eea11ea1858fb91e95c5392'
+
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Verify isolated proof delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor "$MODARYX_PRODUCT_BASE_SHA" HEAD
+          mapfile -t changed < <(git diff --name-only "$MODARYX_PRODUCT_BASE_SHA..HEAD")
+          test "${#changed[@]}" -eq 1
+          test "${changed[0]}" = ".github/workflows/modaryx-v2-premium-reconciliation-visual-r17-1.yml"
+          echo "PASS_PREMIUM_R17_1_PROOF_ISOLATED product=$MODARYX_PRODUCT_BASE_SHA"
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
+
+      - name: Install and build exact V2 R17.1 candidate
+        working-directory: v2
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+          npm run test:sites
+          echo "PASS_PREMIUM_R17_1_V2_BUILD"
+
+      - name: Start V2 preview
+        working-directory: v2
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run preview -- --host 127.0.0.1 --port 4173 >"$RUNNER_TEMP/modaryx-v2-preview.log" 2>&1 &
+          echo $! >"$RUNNER_TEMP/modaryx-v2-preview.pid"
+          for attempt in {1..80}; do
+            if curl --fail --silent http://127.0.0.1:4173/discover >/dev/null; then exit 0; fi
+            sleep .25
+          done
+          cat "$RUNNER_TEMP/modaryx-v2-preview.log"
+          exit 1
+
+      - name: Capture R17.1 desktop and mobile
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/modaryx-v2-premium-r17-1"
+          mkdir -p "$OUT"
+          routes=(discover games games/aetherlands mods collections community creators account)
+          for route in "${routes[@]}"; do
+            safe="${route//\//-}"
+            "$CHROME_BIN" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-device-scale-factor=1 --window-size=1440,1024 --virtual-time-budget=4000 --screenshot="$OUT/desktop-$safe-1440x1024.png" "http://127.0.0.1:4173/$route"
+            "$CHROME_BIN" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-device-scale-factor=1 --window-size=390,844 --virtual-time-budget=4000 --screenshot="$OUT/mobile-$safe-390x844.png" "http://127.0.0.1:4173/$route"
+          done
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json, struct, os
+          root=Path(os.environ["RUNNER_TEMP"])/"modaryx-v2-premium-r17-1"
+          files=[]
+          for p in sorted(root.glob("*.png")):
+              data=p.read_bytes()
+              if data[:8] != b"\x89PNG\r\n\x1a\n": raise SystemExit(f"not PNG: {p}")
+              w,h=struct.unpack(">II",data[16:24])
+              files.append({"file":p.name,"width":w,"height":h,"sha256":hashlib.sha256(data).hexdigest()})
+          if len(files) != 16: raise SystemExit(f"expected 16 captures, got {len(files)}")
+          manifest={"schemaVersion":1,"candidate":os.environ["MODARYX_PRODUCT_BASE_SHA"],"status":"TERMINÉ","files":files}
+          (root/"manifest.json").write_text(json.dumps(manifest,indent=2)+"\n",encoding="utf-8")
+          print(json.dumps(manifest))
+          PY
+          echo "PASS_PREMIUM_R17_1_VISUAL_CAPTURE count=16"
+
+      - name: Upload visual evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: modaryx-v2-premium-reconciliation-visual-r17-1
+          path: ${{ runner.temp }}/modaryx-v2-premium-r17-1
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Stop preview
+        if: always()
+        shell: bash
+        run: |
+          if test -f "$RUNNER_TEMP/modaryx-v2-preview.pid"; then kill "$(cat "$RUNNER_TEMP/modaryx-v2-preview.pid")" 2>/dev/null || true; fi
