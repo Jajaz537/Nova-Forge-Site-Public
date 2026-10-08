@@ -88,7 +88,7 @@
       "state": "OPEN",
       "executorClass": "PRODUCT_DESIGN_WORK_PLUS_OWNER_REVIEW",
       "closureMode": "CURRENT_CANDIDATE_VISUAL_RECONCILIATION",
-      "currentPreparation": "docs/MODARYX-V2-PREMIUM-RECONCILIATION-R14-EVIDENCE-20261008.json",
+      "currentPreparation": "docs/MODARYX-V2-VF-ARCHITECTURE-R2-EVIDENCE-20261008.json",
       "requiredEvidence": [
         "CURRENT_V2_ARCHITECTURE_PRESERVED",
         "PREMIUM_VISUAL_LANGUAGE_RECONCILED",
@@ -97,12 +97,12 @@
       ],
       "automationCanCloseWithoutExternalChange": false,
       "latestCandidate": {
-        "mergePr": 280,
-        "mergeSha": "13f7ddd8f3e355bb27e8b1514c59cb96cd2f2068",
-        "candidateSha": "0610697e9373fc63c4be7af5dcb12e43b39aab51",
-        "visualProofRunId": 37762837798,
-        "artifactId": 11542314431,
-        "artifactDigest": "sha256:bc52b05fbfe546e56a1436e938767fdad80a90ea2a432aacb66c3a6365d6c609",
+        "mergePr": 289,
+        "mergeSha": "229244deab846a7ff52409f52267538c994d21f5",
+        "candidateSha": "64058072a65d4499850dbfbc6b1940793c40e772",
+        "visualProofRunId": 37813820976,
+        "artifactId": 11565812865,
+        "artifactDigest": "sha256:b768a2d84549164e4731797c743d17f15a02927ed12a1e0ffc977d0a9c4873bb",
         "state": "OPEN",
         "ownerAcceptance": "PREUVE MANQUANTE"
       }
