@@ -1,0 +1,1027 @@
+/* MODARYX V2 — VF architecture reset
+   Owner direction: the site must stop reading like the old design / a premium mockup.
+   Structural visual layer only. No route, data, backend, entitlement or production behavior changes. */
+
+:root{
+  --vf-night:#02060b;
+  --vf-night-soft:#07111b;
+  --vf-cyan:#7cf7f3;
+  --vf-violet:#9b86ff;
+  --vf-gold:#f0d397;
+  --vf-ink:#f7fbfd;
+  --vf-muted:rgba(229,240,245,.72);
+  --vf-hairline:rgba(170,232,242,.12);
+  --vf-shadow:0 42px 130px rgba(0,0,0,.42);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Product chrome — stronger identity, no miniature SaaS toolbar.              */
+/* -------------------------------------------------------------------------- */
+
+.topbar{
+  top:18px!important;
+  width:min(1420px,calc(100% - 36px))!important;
+  min-height:68px!important;
+  padding:8px 14px 8px 18px!important;
+  border:1px solid rgba(182,235,243,.14)!important;
+  border-radius:24px!important;
+  background:
+    linear-gradient(180deg,rgba(8,20,31,.90),rgba(3,10,17,.82))!important;
+  box-shadow:
+    0 28px 90px rgba(0,0,0,.38),
+    inset 0 1px rgba(255,255,255,.045)!important;
+  backdrop-filter:blur(26px) saturate(1.2)!important;
+}
+
+.logo{
+  min-width:132px;
+  font-size:15px!important;
+  letter-spacing:.24em!important;
+}
+
+.global-nav{
+  gap:5px!important;
+}
+
+.global-nav button{
+  min-height:42px!important;
+  padding-inline:14px!important;
+  border-radius:14px!important;
+}
+
+.top-actions{
+  gap:7px!important;
+}
+
+.top-actions>button{
+  min-height:42px!important;
+  border-radius:14px!important;
+}
+
+.demo-cta{
+  padding-inline:18px!important;
+  box-shadow:0 12px 34px rgba(126,105,255,.28)!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Shared realm canvas — content feels placed in a world, not inside a frame.  */
+/* -------------------------------------------------------------------------- */
+
+.games-index,
+.catalog,
+.collections-page,
+.creators-page,
+.page-section.community,
+.account-center{
+  position:relative;
+  isolation:isolate;
+  width:100%!important;
+  max-width:none!important;
+  min-height:100vh;
+  margin:0!important;
+  padding-left:clamp(24px,6vw,96px)!important;
+  padding-right:clamp(24px,6vw,96px)!important;
+  overflow:clip;
+  background:
+    radial-gradient(circle at 78% 12%,rgba(155,134,255,.09),transparent 30rem),
+    radial-gradient(circle at 16% 58%,rgba(124,247,243,.06),transparent 28rem),
+    linear-gradient(180deg,#02060b 0%,#06101a 52%,#02060b 100%)!important;
+}
+
+.games-index::after,
+.catalog::after,
+.collections-page::before,
+.creators-page::after,
+.page-section.community::after,
+.account-center::after{
+  content:"";
+  position:absolute;
+  z-index:-4;
+  left:50%;
+  top:0;
+  width:100vw;
+  height:min(820px,82vh);
+  transform:translateX(-50%);
+  pointer-events:none;
+  opacity:.92;
+  filter:saturate(1.10) contrast(1.05);
+  mask-image:linear-gradient(180deg,#000 0%,#000 72%,transparent 100%);
+  background-size:cover,cover,300% 200%;
+  background-repeat:no-repeat;
+}
+
+.games-index::after{
+  background-image:
+    linear-gradient(180deg,rgba(2,6,11,.03),rgba(2,6,11,.20) 48%,#02060b 100%),
+    linear-gradient(90deg,rgba(2,6,11,.68),rgba(2,6,11,.08) 52%,rgba(2,6,11,.38)),
+    url('/assets/living-threshold-content-sheet.png')!important;
+  background-position:center,center,100% 0%;
+}
+
+.catalog::after{
+  background-image:
+    linear-gradient(180deg,rgba(2,6,11,.02),rgba(2,6,11,.18) 48%,#02060b 100%),
+    linear-gradient(90deg,rgba(2,6,11,.72),rgba(2,6,11,.07) 54%,rgba(2,6,11,.34)),
+    url('/assets/living-threshold-content-sheet.png')!important;
+  background-position:center,center,50% 100%;
+}
+
+.collections-page::before{
+  background-image:
+    linear-gradient(180deg,rgba(2,6,11,.02),rgba(2,6,11,.18) 48%,#02060b 100%),
+    linear-gradient(90deg,rgba(2,6,11,.72),rgba(2,6,11,.08) 56%,rgba(2,6,11,.34)),
+    url('/assets/living-threshold-content-sheet.png')!important;
+  background-position:center,center,0% 100%;
+}
+
+.creators-page::after{
+  background-image:
+    linear-gradient(180deg,rgba(2,6,11,.02),rgba(2,6,11,.18) 48%,#02060b 100%),
+    linear-gradient(90deg,rgba(2,6,11,.72),rgba(2,6,11,.07) 52%,rgba(2,6,11,.36)),
+    url('/assets/living-threshold-content-sheet.png')!important;
+  background-position:center,center,100% 100%;
+}
+
+.page-section.community::after{
+  background:
+    radial-gradient(circle at 72% 20%,rgba(155,134,255,.24),transparent 24rem),
+    radial-gradient(circle at 28% 74%,rgba(124,247,243,.09),transparent 28rem),
+    linear-gradient(180deg,rgba(2,6,11,.10),#02060b 88%)!important;
+}
+
+.account-center::after{
+  background:
+    radial-gradient(circle at 76% 16%,rgba(155,134,255,.17),transparent 28rem),
+    radial-gradient(circle at 20% 64%,rgba(124,247,243,.07),transparent 30rem),
+    linear-gradient(180deg,rgba(2,6,11,.10),#02060b 88%)!important;
+}
+
+.games-index>.kicker,
+.catalog .catalog-title>.kicker,
+.collections-page>.kicker,
+.creators-page>.kicker,
+.community>.kicker,
+.account-center>.kicker{
+  letter-spacing:.24em!important;
+}
+
+.games-index>h1,
+.catalog .catalog-title>h1,
+.collections-page>h1,
+.creators-page>h1,
+.community>h1,
+.account-center>h1{
+  max-width:9ch!important;
+  font-size:clamp(58px,6.1vw,104px)!important;
+  line-height:.86!important;
+  letter-spacing:-.06em!important;
+  text-shadow:0 24px 74px rgba(0,0,0,.48)!important;
+}
+
+.games-index>.page-intro,
+.catalog .catalog-title>p,
+.collections-page>.page-intro,
+.creators-page>.page-intro,
+.community>.page-intro,
+.account-center>.page-intro{
+  max-width:640px!important;
+  color:var(--vf-muted)!important;
+  font-size:clamp(16px,1.3vw,20px)!important;
+  line-height:1.6!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* GAMES — one cinematic selection field, not a grid of product cards.         */
+/* -------------------------------------------------------------------------- */
+
+.games-index{
+  padding-top:168px!important;
+  display:grid!important;
+  grid-template-columns:minmax(340px,.8fr) minmax(440px,1.2fr)!important;
+  grid-template-areas:
+    "kicker support"
+    "title support"
+    "intro support"
+    "tools tools"
+    "games games"!important;
+  column-gap:clamp(50px,7vw,110px)!important;
+  row-gap:16px!important;
+  align-items:start!important;
+}
+
+.games-index>.kicker{grid-area:kicker}
+.games-index>h1{grid-area:title;margin:0!important}
+.games-index>.page-intro{grid-area:intro}
+.games-index>.game-support-request{grid-area:support}
+.games-index>.index-tools{grid-area:tools}
+.games-index>.game-grid{grid-area:games}
+
+.games-index .game-support-request{
+  align-self:end!important;
+  justify-self:end!important;
+  width:min(100%,520px)!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:28px 0 28px 28px!important;
+  border:0!important;
+  border-left:1px solid rgba(124,247,243,.24)!important;
+  border-radius:0!important;
+  background:linear-gradient(90deg,rgba(4,14,22,.46),transparent)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+
+.games-index .index-tools{
+  width:min(100%,980px)!important;
+  margin:82px 0 0!important;
+  padding:0 0 18px!important;
+  border:0!important;
+  border-bottom:1px solid var(--vf-hairline)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+
+.games-index .game-grid{
+  margin-top:14px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr)!important;
+  grid-auto-rows:minmax(230px,auto)!important;
+  gap:2px 24px!important;
+}
+
+.games-index .game-card{
+  min-height:250px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:hidden;
+}
+
+.games-index .game-card:first-child{
+  grid-row:span 2;
+  min-height:650px!important;
+}
+
+.games-index .game-card:first-child>.media{
+  inset:0!important;
+  border-radius:42px 42px 8px 42px!important;
+  opacity:.98!important;
+}
+
+.games-index .game-card:first-child>div:last-child{
+  position:absolute!important;
+  z-index:2;
+  inset:auto 0 0 0;
+  padding:270px 40px 40px!important;
+  background:linear-gradient(180deg,transparent,rgba(2,7,13,.90) 68%)!important;
+}
+
+.games-index .game-card:first-child h2{
+  font-size:clamp(48px,5vw,78px)!important;
+  line-height:.9!important;
+  letter-spacing:-.055em!important;
+}
+
+.games-index .game-card:not(:first-child){
+  display:grid!important;
+  grid-template-columns:140px minmax(0,1fr)!important;
+  align-items:center!important;
+  min-height:210px!important;
+  border-bottom:1px solid var(--vf-hairline)!important;
+}
+
+.games-index .game-card:not(:first-child)>.media{
+  position:relative!important;
+  inset:auto!important;
+  width:126px!important;
+  height:126px!important;
+  margin:0!important;
+  border-radius:28px!important;
+  opacity:.84!important;
+}
+
+.games-index .game-card:not(:first-child)>div:last-child{
+  position:relative!important;
+  padding:26px 12px 26px 0!important;
+  background:none!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* MODS — atlas/editorial index, no repeating floating cards.                  */
+/* -------------------------------------------------------------------------- */
+
+.catalog{
+  padding-top:168px!important;
+}
+
+.catalog .catalog-title{
+  min-height:430px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+  padding:0!important;
+}
+
+.catalog .catalog-title>h1{
+  margin:0!important;
+  max-width:7.5ch!important;
+}
+
+.catalog .catalog-title::after{
+  width:120px!important;
+  height:1px!important;
+  margin-top:30px!important;
+  background:linear-gradient(90deg,var(--vf-cyan),transparent)!important;
+}
+
+.catalog .catalog-tools{
+  width:min(100%,1100px)!important;
+  margin:34px 0 0!important;
+  padding:0 0 18px!important;
+  border:0!important;
+  border-bottom:1px solid var(--vf-hairline)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+
+.catalog .catalog-summary{
+  width:min(100%,1100px)!important;
+  padding:18px 0!important;
+  border-bottom:1px solid rgba(170,232,242,.07)!important;
+}
+
+.catalog-grid{
+  width:100%!important;
+  margin-top:0!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.28fr) minmax(260px,.72fr)!important;
+  gap:0 28px!important;
+}
+
+.catalog-grid .content-card{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.catalog-grid .content-card:first-child{
+  grid-row:span 5;
+  min-height:720px!important;
+}
+
+.catalog-grid .content-card:first-child>.media{
+  border-radius:42px 42px 10px 42px!important;
+}
+
+.catalog-grid .content-card:first-child .card-copy{
+  padding:320px 38px 38px!important;
+}
+
+.catalog-grid .content-card:not(:first-child){
+  min-height:170px!important;
+  display:grid!important;
+  grid-template-columns:124px minmax(0,1fr)!important;
+  border-bottom:1px solid var(--vf-hairline)!important;
+}
+
+.catalog-grid .content-card:not(:first-child)>.media{
+  position:relative!important;
+  inset:auto!important;
+  width:108px!important;
+  height:108px!important;
+  align-self:center;
+  border-radius:24px!important;
+}
+
+.catalog-grid .content-card:not(:first-child) .card-copy{
+  position:relative!important;
+  padding:24px 0!important;
+  background:none!important;
+}
+
+.catalog-grid .content-card:nth-child(3n){
+  transform:none!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* COLLECTIONS — editorial archive: one story, then a calm index.              */
+/* -------------------------------------------------------------------------- */
+
+.collections-page{
+  padding-top:160px!important;
+}
+
+.collections-page>h1{
+  margin-bottom:18px!important;
+}
+
+.collections-page .collection-mode-tabs{
+  width:max-content!important;
+  margin-top:28px!important;
+  padding:0!important;
+  border:0!important;
+  border-bottom:1px solid rgba(240,211,151,.14)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  backdrop-filter:none!important;
+}
+
+.collections-page .collection-mode-tabs button{
+  min-height:44px!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+
+.collections-page .collection-tools{
+  width:min(100%,1040px)!important;
+  margin-top:46px!important;
+  padding:0 0 18px!important;
+  border:0!important;
+  border-bottom:1px solid rgba(240,211,151,.12)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+
+.collections-page .collection-grid{
+  width:100%!important;
+  margin-top:0!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.45fr) minmax(300px,.55fr)!important;
+  gap:0 34px!important;
+}
+
+.collections-page .collection-card{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.collections-page .collection-card:first-child{
+  grid-row:span 3;
+  min-height:760px!important;
+}
+
+.collections-page .collection-card:first-child>.media{
+  border-radius:46px 46px 12px 46px!important;
+}
+
+.collections-page .collection-card:first-child>div{
+  padding:340px 42px 42px!important;
+}
+
+.collections-page .collection-card:not(:first-child){
+  min-height:230px!important;
+  display:grid!important;
+  grid-template-columns:112px minmax(0,1fr)!important;
+  border-bottom:1px solid rgba(240,211,151,.11)!important;
+}
+
+.collections-page .collection-card:not(:first-child)>.media{
+  position:relative!important;
+  inset:auto!important;
+  width:96px!important;
+  height:96px!important;
+  margin:auto 0!important;
+  border-radius:22px!important;
+}
+
+.collections-page .collection-card:not(:first-child)>div{
+  padding:26px 0!important;
+}
+
+.collections-page .collection-card:not(:first-child) dl{
+  display:none!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* CREATORS — portfolio wall with one featured studio and a vertical roster.   */
+/* -------------------------------------------------------------------------- */
+
+.creators-page{
+  padding-top:160px!important;
+}
+
+.creators-page .creator-studio-entry{
+  margin-top:20px!important;
+  padding:0 0 10px!important;
+  border:0!important;
+  border-bottom:1px solid rgba(124,247,243,.16)!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+
+.creators-page .creators-search{
+  width:min(100%,780px)!important;
+  margin-top:54px!important;
+  padding-inline:0!important;
+  border-width:0 0 1px!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.creator-index-grid{
+  width:100%!important;
+  margin-top:0!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr)!important;
+  gap:0 34px!important;
+}
+
+.creator-index-card{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+
+.creator-index-card:first-child{
+  grid-row:span 3;
+  min-height:760px!important;
+}
+
+.creator-index-card:first-child>.media{
+  border-radius:46px 46px 12px 46px!important;
+}
+
+.creator-index-card:first-child>div:last-child{
+  padding:330px 42px 42px!important;
+}
+
+.creator-index-card:not(:first-child){
+  min-height:230px!important;
+  display:grid!important;
+  grid-template-columns:112px minmax(0,1fr)!important;
+  border-bottom:1px solid var(--vf-hairline)!important;
+}
+
+.creator-index-card:not(:first-child)>.media{
+  position:relative!important;
+  inset:auto!important;
+  width:96px!important;
+  height:96px!important;
+  margin:auto 0!important;
+  border-radius:22px!important;
+}
+
+.creator-index-card:not(:first-child)>div:last-child{
+  padding:26px 0!important;
+}
+
+.creator-index-card:not(:first-child) ul,
+.creator-index-card:not(:first-child) .creator-trust-note{
+  display:none!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* COMMUNITY — editorial observatory, not a dashboard board.                   */
+/* -------------------------------------------------------------------------- */
+
+.page-section.community{
+  padding-top:160px!important;
+  display:grid!important;
+  grid-template-columns:minmax(320px,.58fr) minmax(0,1.42fr)!important;
+  grid-template-areas:
+    "kicker board"
+    "title board"
+    "intro board"
+    "tabs board"!important;
+  column-gap:clamp(52px,7vw,110px)!important;
+  row-gap:16px!important;
+  align-items:start!important;
+}
+
+.community>.kicker{grid-area:kicker}
+.community>h1{grid-area:title;margin:0!important}
+.community>.page-intro{grid-area:intro}
+.community>.community-tabs{grid-area:tabs}
+.community>.community-board{grid-area:board}
+
+.community>.community-tabs{
+  width:100%!important;
+  max-width:340px!important;
+  margin-top:26px!important;
+  padding:0!important;
+  display:grid!important;
+  gap:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  backdrop-filter:none!important;
+}
+
+.community .community-tabs button{
+  min-height:48px!important;
+  justify-content:flex-start!important;
+  padding:0 0 0 18px!important;
+  border:0!important;
+  border-left:1px solid rgba(170,232,242,.10)!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+
+.community .community-tabs button.active{
+  border-left-color:var(--vf-cyan)!important;
+  background:linear-gradient(90deg,rgba(124,247,243,.07),transparent)!important;
+  box-shadow:none!important;
+}
+
+.community>.community-board{
+  width:100%!important;
+  min-height:720px!important;
+  margin:0!important;
+  padding:58px 0 58px 58px!important;
+  border:0!important;
+  border-left:1px solid var(--vf-hairline)!important;
+  border-radius:0!important;
+  background:
+    linear-gradient(90deg,rgba(6,18,28,.50),rgba(4,12,20,.16) 62%,transparent)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+
+.community .community-board h2{
+  max-width:7.5ch!important;
+  font-size:clamp(54px,5.4vw,88px)!important;
+  line-height:.88!important;
+  letter-spacing:-.055em!important;
+}
+
+.community .community-list{
+  margin-top:58px!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* ACCOUNT — private atelier integrated in the world.                          */
+/* -------------------------------------------------------------------------- */
+
+.account-center{
+  padding-top:160px!important;
+  display:grid!important;
+  grid-template-columns:minmax(340px,.62fr) minmax(0,1.38fr)!important;
+  grid-template-areas:
+    "kicker shell"
+    "title shell"
+    "intro shell"!important;
+  column-gap:clamp(52px,7vw,110px)!important;
+  row-gap:16px!important;
+  align-items:start!important;
+}
+
+.account-center>.kicker{grid-area:kicker}
+.account-center>h1{grid-area:title;margin:0!important}
+.account-center>.page-intro{grid-area:intro}
+.account-center>.account-shell{grid-area:shell}
+
+.account-center>.account-shell{
+  width:100%!important;
+  min-height:720px!important;
+  margin:0!important;
+  display:grid!important;
+  grid-template-columns:190px minmax(0,1fr)!important;
+  border:0!important;
+  border-left:1px solid var(--vf-hairline)!important;
+  border-radius:0!important;
+  background:
+    linear-gradient(90deg,rgba(5,16,25,.52),rgba(4,12,20,.14) 70%,transparent)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+
+.account-center .account-nav{
+  padding:28px 12px!important;
+  border-right:1px solid rgba(170,232,242,.08)!important;
+  background:rgba(3,11,18,.18)!important;
+}
+
+.account-center .account-nav button{
+  min-height:48px!important;
+  margin:0!important;
+  border:0!important;
+  border-left:1px solid transparent!important;
+  border-radius:0!important;
+  background:transparent!important;
+  text-align:left!important;
+}
+
+.account-center .account-nav button.active,
+.account-center .account-nav button[aria-pressed="true"]{
+  border-left-color:var(--vf-cyan)!important;
+  background:linear-gradient(90deg,rgba(124,247,243,.06),transparent)!important;
+  box-shadow:none!important;
+}
+
+.account-center .account-panel{
+  min-height:720px!important;
+  padding:56px!important;
+  background:transparent!important;
+}
+
+.account-center .account-panel>h2{
+  max-width:8ch!important;
+  font-size:clamp(48px,4.8vw,76px)!important;
+  line-height:.9!important;
+  letter-spacing:-.05em!important;
+}
+
+.account-panel .settings-list button,
+.account-panel .notification-demo-list article,
+.account-panel .data-list article{
+  border-radius:0!important;
+  border-width:0 0 1px!important;
+  border-color:rgba(170,232,242,.09)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Repeated generic chrome — calm it down across the six worlds.              */
+/* -------------------------------------------------------------------------- */
+
+.games-index input,
+.catalog input,
+.collections-page input,
+.creators-page input,
+.games-index select,
+.catalog select,
+.collections-page select,
+.account-center input,
+.account-center select,
+.account-center textarea{
+  border-color:rgba(170,232,242,.12)!important;
+}
+
+.filter-panel,
+.collection-capability,
+.creator-trust-note{
+  box-shadow:none!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Mobile — recomposed, never a desktop shrink.                                */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width:900px){
+  .topbar{
+    top:8px!important;
+    width:calc(100% - 14px)!important;
+    min-height:58px!important;
+    padding:7px 9px!important;
+    border-radius:18px!important;
+  }
+
+  .logo{
+    min-width:auto;
+    font-size:13px!important;
+  }
+
+  .games-index,
+  .catalog,
+  .collections-page,
+  .creators-page,
+  .page-section.community,
+  .account-center{
+    display:block!important;
+    min-height:100vh;
+    padding-top:118px!important;
+    padding-left:16px!important;
+    padding-right:16px!important;
+  }
+
+  .games-index::after,
+  .catalog::after,
+  .collections-page::before,
+  .creators-page::after,
+  .page-section.community::after,
+  .account-center::after{
+    top:64px;
+    height:520px;
+    opacity:.82;
+    background-size:cover,cover,auto 520px;
+    mask-image:linear-gradient(180deg,#000 0%,#000 62%,transparent 100%);
+  }
+
+  .games-index>h1,
+  .catalog .catalog-title>h1,
+  .collections-page>h1,
+  .creators-page>h1,
+  .community>h1,
+  .account-center>h1{
+    max-width:none!important;
+    font-size:clamp(48px,14vw,68px)!important;
+    line-height:.9!important;
+  }
+
+  .games-index>.page-intro,
+  .catalog .catalog-title>p,
+  .collections-page>.page-intro,
+  .creators-page>.page-intro,
+  .community>.page-intro,
+  .account-center>.page-intro{
+    max-width:34rem!important;
+  }
+
+  .games-index>.game-support-request{
+    margin-top:28px!important;
+    width:100%!important;
+    padding:22px 0 22px 18px!important;
+  }
+
+  .games-index .index-tools,
+  .catalog .catalog-tools,
+  .collections-page .collection-tools,
+  .creators-page .creators-search{
+    margin-top:36px!important;
+  }
+
+  .games-index .game-grid,
+  .catalog-grid,
+  .collections-page .collection-grid,
+  .creator-index-grid{
+    display:block!important;
+  }
+
+  .games-index .game-card:first-child,
+  .catalog-grid .content-card:first-child,
+  .collections-page .collection-card:first-child,
+  .creator-index-card:first-child{
+    min-height:520px!important;
+    margin-bottom:8px!important;
+  }
+
+  .games-index .game-card:first-child>div:last-child,
+  .catalog-grid .content-card:first-child .card-copy,
+  .collections-page .collection-card:first-child>div,
+  .creator-index-card:first-child>div:last-child{
+    padding:210px 24px 26px!important;
+  }
+
+  .games-index .game-card:not(:first-child),
+  .catalog-grid .content-card:not(:first-child),
+  .collections-page .collection-card:not(:first-child),
+  .creator-index-card:not(:first-child){
+    min-height:150px!important;
+    display:grid!important;
+    grid-template-columns:88px minmax(0,1fr)!important;
+  }
+
+  .games-index .game-card:not(:first-child)>.media,
+  .catalog-grid .content-card:not(:first-child)>.media,
+  .collections-page .collection-card:not(:first-child)>.media,
+  .creator-index-card:not(:first-child)>.media{
+    width:76px!important;
+    height:76px!important;
+    border-radius:18px!important;
+  }
+
+  .games-index .game-card:not(:first-child)>div:last-child,
+  .catalog-grid .content-card:not(:first-child) .card-copy,
+  .collections-page .collection-card:not(:first-child)>div,
+  .creator-index-card:not(:first-child)>div:last-child{
+    padding:18px 0!important;
+  }
+
+  .community>.community-tabs{
+    width:100%!important;
+    max-width:none!important;
+    margin-top:28px!important;
+    display:flex!important;
+    overflow-x:auto;
+    border-bottom:1px solid var(--vf-hairline)!important;
+  }
+
+  .community .community-tabs button{
+    min-width:max-content;
+    padding:0 14px!important;
+    border-left:0!important;
+    border-bottom:1px solid transparent!important;
+  }
+
+  .community .community-tabs button.active{
+    border-bottom-color:var(--vf-cyan)!important;
+  }
+
+  .community>.community-board{
+    min-height:0!important;
+    margin-top:20px!important;
+    padding:28px 0!important;
+    border-left:0!important;
+    border-top:1px solid var(--vf-hairline)!important;
+    background:linear-gradient(180deg,rgba(6,18,28,.36),transparent)!important;
+  }
+
+  .community .community-board h2{
+    max-width:10ch!important;
+    font-size:clamp(44px,12vw,62px)!important;
+  }
+
+  .account-center>.account-shell{
+    min-height:0!important;
+    margin-top:26px!important;
+    display:block!important;
+    border-left:0!important;
+    border-top:1px solid var(--vf-hairline)!important;
+    background:linear-gradient(180deg,rgba(5,16,25,.42),transparent)!important;
+  }
+
+  .account-center .account-nav{
+    display:flex!important;
+    overflow-x:auto;
+    padding:10px 0!important;
+    border-right:0!important;
+    border-bottom:1px solid rgba(170,232,242,.08)!important;
+  }
+
+  .account-center .account-nav button{
+    min-width:max-content;
+    padding:0 14px!important;
+    border-left:0!important;
+    border-bottom:1px solid transparent!important;
+  }
+
+  .account-center .account-nav button.active,
+  .account-center .account-nav button[aria-pressed="true"]{
+    border-bottom-color:var(--vf-cyan)!important;
+  }
+
+  .account-center .account-panel{
+    min-height:0!important;
+    padding:30px 0!important;
+  }
+
+  .account-center .account-panel>h2{
+    max-width:10ch!important;
+    font-size:clamp(42px,11vw,60px)!important;
+  }
+}
+
+@media (max-width:560px){
+  .games-index::after,
+  .catalog::after,
+  .collections-page::before,
+  .creators-page::after{
+    height:470px;
+    background-size:cover,cover,auto 470px;
+  }
+
+  .games-index .game-card:first-child,
+  .catalog-grid .content-card:first-child,
+  .collections-page .collection-card:first-child,
+  .creator-index-card:first-child{
+    min-height:470px!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .topbar{
+    backdrop-filter:none!important;
+  }
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Fresh-capture corrections — remove legacy pseudo-layer interference.        */
+/* -------------------------------------------------------------------------- */
+
+.games-index::before,
+.catalog::before,
+.collections-page::after,
+.creators-page::before,
+.page-section.community::before,
+.account-center::before{
+  content:none!important;
+  display:none!important;
+}
+
+@media (min-width:901px){
+  .account-center{
+    grid-template-columns:minmax(430px,.72fr) minmax(0,1.28fr)!important;
+  }
+
+  .account-center>h1{
+    max-width:12ch!important;
+    width:auto!important;
+    font-size:clamp(56px,5.4vw,88px)!important;
+  }
+
+  .collections-page::before{
+    opacity:1!important;
+    height:min(760px,78vh)!important;
+    background-position:center,center,0% 0%!important;
+  }
+
+  .games-index::after{
+    height:min(760px,78vh)!important;
+  }
+}
