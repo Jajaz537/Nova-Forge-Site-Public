@@ -686,3 +686,50 @@ Conclusion :
 **Conversion/refunds/chargebacks terrain : PREUVE MANQUANTE.**
 
 Gate commerciale : **EN COURS**.
+
+
+---
+
+## 25. Modèle KPI de viabilité commerciale — 2026-10-08
+
+Documents :
+- `docs/MODARYX-V2-COMMERCIAL-VIABILITY-KPI-MODEL-20261008.md`
+- `docs/MODARYX-V2-COMMERCIAL-VIABILITY-KPI-MODEL-20261008.json`
+
+But :
+relier les travaux pricing/coûts/paiement déjà prouvés à un contrat de mesure terrain avant toute décision de prix.
+
+Le modèle définit sans activer de collecte :
+- acquisition / CAC ;
+- activation ;
+- rétention D1/D7/D30 ;
+- conversion Premium ;
+- churn ;
+- ARPPU ;
+- refunds / chargebacks ;
+- support / modération ;
+- infra / MAU ;
+- contribution avant/après acquisition ;
+- LTV nette uniquement quand les cohortes sont suffisamment stables.
+
+Règles :
+- activation ≠ simple création de compte ;
+- dénominateur de conversion toujours explicite ;
+- payment-net ≠ bénéfice ;
+- aucune ligne de coût manquante ne devient zéro par défaut ;
+- gratuit réellement utile à préserver ;
+- sécurité/accessibilité/provenance essentielle non paywallées ;
+- aucune collecte/analytics activée par cette tranche ;
+- privacy by design + minimisation + consentement lorsque requis.
+
+État :
+- contrat de mesure : **TERMINÉ**
+- activation finale canonique : **EN COURS**
+- données terrain activation/rétention/conversion/churn : **PREUVE MANQUANTE**
+- support/modération/CAC/LTV réels : **PREUVE MANQUANTE**
+- prix canonique : **PREUVE MANQUANTE**
+- provider paiement : **PREUVE MANQUANTE**
+
+Gate commerciale : **EN COURS**.
+
+Aucun analytics, paiement, provider production, DNS, D1/R2 production ou cutover activé.
