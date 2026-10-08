@@ -1,0 +1,292 @@
+/* MODARYX V2 — Premium reconciliation R19 / Integrated Realms
+   Follows direct owner feedback that R18 still felt too close to an old design/mockup.
+   Visual-only; no data, routes, backend, entitlements or production behavior changes. */
+
+/* Let the realm artwork read as an environment, not a nearly black texture. */
+.games-index::before,
+.catalog::before,
+.collections-page::after,
+.creators-page::before,
+.page-section.community::before,
+.account-center::before{
+  opacity:.92!important;
+  filter:saturate(1.08) contrast(1.04);
+}
+
+.games-index::before,
+.catalog::before,
+.collections-page::after,
+.creators-page::before{
+  background-image:
+    linear-gradient(180deg,rgba(2,6,11,.01),rgba(2,6,11,.18) 50%,rgba(2,6,11,.90) 100%),
+    linear-gradient(90deg,rgba(2,6,11,.62),rgba(2,6,11,.06) 48%,rgba(2,6,11,.34)),
+    url('/assets/living-threshold-content-sheet.png')!important;
+}
+
+/* Games: the support request becomes a contextual floating note, not a giant SaaS card. */
+@media (min-width:901px){
+  .games-index{
+    grid-template-columns:minmax(360px,.9fr) minmax(360px,1.1fr)!important;
+    column-gap:54px!important;
+  }
+
+  .games-index .game-support-request{
+    justify-self:end;
+    width:min(100%,560px);
+    min-height:0!important;
+    padding:26px 30px!important;
+    border-width:1px 0 0!important;
+    border-radius:0 0 26px 26px!important;
+    background:
+      linear-gradient(145deg,rgba(4,14,22,.74),rgba(3,9,15,.36))!important;
+    box-shadow:0 28px 90px rgba(0,0,0,.28)!important;
+  }
+}
+
+/* Collections: bring the archive controls into the world threshold instead of below a dead gap. */
+@media (min-width:901px){
+  .collections-page{
+    padding-top:138px!important;
+  }
+
+  .collections-page>h1{
+    max-width:8.4ch!important;
+  }
+
+  .collections-page>.page-intro{
+    max-width:660px!important;
+  }
+
+  .collections-page .collection-mode-tabs{
+    margin-top:22px!important;
+  }
+
+  .collections-page .collection-tools{
+    width:min(100%,980px);
+    margin-top:42px!important;
+    padding:12px!important;
+    border:1px solid rgba(241,212,154,.11)!important;
+    border-radius:22px;
+    background:rgba(4,12,18,.62);
+    box-shadow:0 22px 72px rgba(0,0,0,.24);
+    backdrop-filter:blur(16px);
+  }
+
+  .collections-page .collection-grid{
+    margin-top:28px!important;
+  }
+}
+
+/* Community: editorial split without a boxed dashboard. */
+@media (min-width:901px){
+  .page-section.community{
+    display:grid!important;
+    grid-template-columns:minmax(350px,.78fr) minmax(0,1.22fr)!important;
+    grid-template-areas:
+      "kicker board"
+      "title board"
+      "intro board"
+      "tabs board"!important;
+    column-gap:64px!important;
+    row-gap:16px!important;
+    align-items:start!important;
+    padding-top:142px!important;
+  }
+
+  .community>.kicker{grid-area:kicker}
+  .community>h1{grid-area:title;max-width:7.8ch!important}
+  .community>.page-intro{grid-area:intro;max-width:480px!important}
+  .community>.community-tabs{grid-area:tabs}
+  .community>.community-board{grid-area:board}
+
+  .community>.community-tabs{
+    display:grid!important;
+    width:100%!important;
+    max-width:360px!important;
+    margin-top:20px!important;
+    padding:0!important;
+    gap:2px!important;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    backdrop-filter:none!important;
+  }
+
+  .community .community-tabs button{
+    min-height:46px!important;
+    justify-content:flex-start!important;
+    padding:0 16px!important;
+    border:0!important;
+    border-left:1px solid rgba(167,230,239,.10)!important;
+    border-radius:0!important;
+    background:transparent!important;
+  }
+
+  .community .community-tabs button.active{
+    border-left-color:var(--r18-cyan)!important;
+    background:linear-gradient(90deg,rgba(121,243,239,.07),transparent)!important;
+    box-shadow:none!important;
+  }
+
+  .community>.community-board{
+    width:100%!important;
+    min-height:620px!important;
+    margin:0!important;
+    padding:42px 20px 44px 54px!important;
+    border:0!important;
+    border-left:1px solid rgba(167,230,239,.12)!important;
+    border-radius:0!important;
+    background:
+      linear-gradient(90deg,rgba(6,18,28,.50),rgba(4,12,20,.18) 58%,transparent 100%)!important;
+    box-shadow:none!important;
+    backdrop-filter:none!important;
+  }
+
+  .community .community-board::before{
+    width:1px!important;
+    inset:0 auto 0 -1px!important;
+    border-radius:0!important;
+    opacity:.9!important;
+  }
+
+  .community .community-list{
+    margin-top:40px!important;
+  }
+}
+
+/* Account: private atelier integrated into the environment, not a settings modal. */
+@media (min-width:901px){
+  .account-center{
+    display:grid!important;
+    grid-template-columns:minmax(360px,.78fr) minmax(0,1.22fr)!important;
+    grid-template-areas:
+      "kicker shell"
+      "title shell"
+      "intro shell"!important;
+    column-gap:62px!important;
+    row-gap:16px!important;
+    align-items:start!important;
+    padding-top:142px!important;
+  }
+
+  .account-center>.kicker{grid-area:kicker}
+  .account-center>h1{grid-area:title;max-width:8.8ch!important}
+  .account-center>.page-intro{grid-area:intro;max-width:480px!important}
+  .account-center>.account-shell{grid-area:shell}
+
+  .account-center>.account-shell{
+    width:100%!important;
+    min-height:640px!important;
+    margin:0!important;
+    grid-template-columns:188px minmax(0,1fr)!important;
+    border:0!important;
+    border-left:1px solid rgba(167,230,239,.11)!important;
+    border-radius:0!important;
+    background:
+      linear-gradient(90deg,rgba(5,16,25,.56),rgba(4,12,20,.18) 72%,transparent)!important;
+    box-shadow:none!important;
+    backdrop-filter:none!important;
+  }
+
+  .account-center .account-nav{
+    padding:24px 12px!important;
+    border-right:1px solid rgba(167,230,239,.08)!important;
+    background:rgba(3,11,18,.28)!important;
+  }
+
+  .account-center .account-panel{
+    min-height:640px!important;
+    padding:42px 42px 48px!important;
+    background:transparent!important;
+  }
+
+  .account-center .account-panel>h2{
+    max-width:10ch!important;
+  }
+}
+
+/* Creator and Mods worlds: reduce the generic panel feel around controls. */
+@media (min-width:901px){
+  .creators-page .creator-studio-entry{
+    border:0!important;
+    border-bottom:1px solid rgba(121,243,239,.14)!important;
+    border-radius:0!important;
+    padding-inline:0!important;
+    background:transparent!important;
+  }
+
+  .creators-page .creators-search{
+    width:min(100%,720px);
+    border-width:0 0 1px!important;
+    border-radius:0!important;
+    padding-inline:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    backdrop-filter:none!important;
+  }
+
+  .catalog .catalog-tools{
+    border-width:0 0 1px!important;
+    border-radius:0!important;
+    padding-inline:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    backdrop-filter:none!important;
+  }
+}
+
+/* Remove the last repetitive boxed signature from major first-screen surfaces. */
+.games-index .game-support-request,
+.community>.community-board,
+.account-center>.account-shell{
+  outline:none!important;
+}
+
+/* Mobile keeps the realm artwork but returns to a clear one-column reading order. */
+@media (max-width:900px){
+  .page-section.community,
+  .account-center{
+    display:block!important;
+  }
+
+  .community>.community-tabs{
+    display:flex!important;
+    width:100%!important;
+    margin-top:28px!important;
+    padding:6px!important;
+    border:1px solid rgba(167,230,239,.10)!important;
+    border-radius:16px!important;
+    background:rgba(3,11,18,.62)!important;
+    backdrop-filter:blur(14px)!important;
+  }
+
+  .community>.community-board,
+  .account-center>.account-shell{
+    margin-top:18px!important;
+    border:1px solid rgba(167,230,239,.10)!important;
+    border-radius:24px!important;
+    background:rgba(4,13,21,.70)!important;
+    box-shadow:0 24px 70px rgba(0,0,0,.30)!important;
+    backdrop-filter:blur(16px)!important;
+  }
+
+  .community>.community-board{
+    padding:26px 18px!important;
+  }
+
+  .account-center>.account-shell{
+    display:block!important;
+  }
+
+  .account-center .account-panel{
+    min-height:0!important;
+    padding:26px 18px!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .community>.community-board,
+  .account-center>.account-shell{
+    backdrop-filter:none!important;
+  }
+}
