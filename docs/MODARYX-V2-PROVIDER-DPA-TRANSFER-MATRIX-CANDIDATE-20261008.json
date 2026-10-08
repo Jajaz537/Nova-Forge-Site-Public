@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "PROVIDER_DPA_TRANSFER_READINESS_MATRIX_CANDIDATE",
+  "activatesProviders": false,
+  "providers": [
+    {
+      "id": "cloudflare",
+      "services": [
+        "Pages",
+        "Workers",
+        "D1",
+        "R2",
+        "Turnstile"
+      ],
+      "selectionState": "CANDIDATE_ARCHITECTURE",
+      "productionState": "PREUVE MANQUANTE",
+      "dpa": "PREUVE MANQUANTE",
+      "transfers": "LEGAL_REVIEW_REQUIRED",
+      "deletionExport": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "auth0",
+      "services": [
+        "Identity",
+        "Authentication"
+      ],
+      "selectionState": "CANDIDATE_CODE",
+      "productionState": "PREUVE MANQUANTE",
+      "dpa": "PREUVE MANQUANTE",
+      "transfers": "LEGAL_REVIEW_REQUIRED",
+      "deletionExport": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "weatherapi",
+      "services": [
+        "Weather context"
+      ],
+      "selectionState": "OPTIONAL_CANDIDATE",
+      "productionState": "OFF_BY_DEFAULT",
+      "dpa": "PREUVE MANQUANTE_IF_APPLICABLE",
+      "terms": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "open-meteo",
+      "services": [
+        "Weather context"
+      ],
+      "selectionState": "OPTIONAL_CANDIDATE",
+      "productionState": "OFF_BY_DEFAULT",
+      "dpa": "PREUVE MANQUANTE_IF_APPLICABLE",
+      "terms": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "email-push",
+      "services": [
+        "Operational notifications",
+        "Marketing if later approved"
+      ],
+      "selectionState": "NOT_SELECTED",
+      "productionState": "NOT_IMPLEMENTED",
+      "dpa": "PREUVE MANQUANTE"
+    },
+    {
+      "id": "stripe",
+      "services": [
+        "Payments"
+      ],
+      "selectionState": "RESEARCH_CANDIDATE",
+      "productionState": "NOT_SELECTED",
+      "dpa": "PREUVE MANQUANTE",
+      "commercialDecisionRequired": true
+    },
+    {
+      "id": "paddle",
+      "services": [
+        "Payments",
+        "Merchant of Record"
+      ],
+      "selectionState": "RESEARCH_CANDIDATE",
+      "productionState": "NOT_SELECTED",
+      "dpa": "PREUVE MANQUANTE",
+      "commercialDecisionRequired": true
+    },
+    {
+      "id": "lemon-squeezy",
+      "services": [
+        "Payments",
+        "Merchant of Record"
+      ],
+      "selectionState": "RESEARCH_CANDIDATE",
+      "productionState": "NOT_SELECTED",
+      "dpa": "PREUVE MANQUANTE",
+      "commercialDecisionRequired": true
+    },
+    {
+      "id": "external-analytics",
+      "services": [
+        "Analytics"
+      ],
+      "selectionState": "NOT_SELECTED",
+      "productionState": "OFF",
+      "dpa": "NOT_APPLICABLE_UNTIL_SELECTED"
+    },
+    {
+      "id": "ai-provider",
+      "services": [
+        "MODARYX IA"
+      ],
+      "selectionState": "NOT_SELECTED",
+      "productionState": "PREUVE MANQUANTE",
+      "dpa": "PREUVE MANQUANTE"
+    }
+  ],
+  "requiredEvidencePerSelectedProvider": [
+    "ROLE_CONTROLLER_PROCESSOR",
+    "DPA_OR_RELEVANT_CONTRACT",
+    "DATA_CATEGORIES",
+    "PURPOSES",
+    "REGION_DATA_LOCATION",
+    "INTERNATIONAL_TRANSFERS",
+    "TRANSFER_MECHANISM_IF_REQUIRED",
+    "SUBPROCESSORS",
+    "RETENTION",
+    "DELETION_EXPORT",
+    "SECURITY",
+    "INCIDENT_PROCESS",
+    "ACCESSIBILITY_IF_USER_FACING",
+    "EXIT_MIGRATION",
+    "REAL_COST"
+  ],
+  "invariants": [
+    "NO_PROVIDER_ACTIVATION",
+    "NO_PROVIDER_SELECTION",
+    "NO_PAYMENT_ACTIVATION",
+    "NO_ANALYTICS_ACTIVATION",
+    "NO_AI_PROVIDER_ASSUMPTION",
+    "NO_18_PLUS_DATA_SHARING_ASSUMPTION",
+    "NO_PRODUCTION_MUTATION"
+  ]
+}
