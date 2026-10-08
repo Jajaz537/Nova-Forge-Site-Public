@@ -1,0 +1,1336 @@
+/* MODARYX V2 — Premium reconciliation R15
+   Structural scene composition after owner rejection of the remaining old/mockup feel.
+   Visual-only: no route, backend, data, entitlement, provider or production behavior changed. */
+
+:root{
+  --r15-bg:#02070d;
+  --r15-bg-soft:#05111b;
+  --r15-ink:#eef8fb;
+  --r15-muted:rgba(222,236,242,.72);
+  --r15-line:rgba(164,225,239,.095);
+  --r15-line-strong:rgba(100,237,240,.24);
+  --r15-cyan:#64edf0;
+  --r15-violet:#8b74ff;
+  --r15-gold:#f0c987;
+  --r15-glass:rgba(3,11,18,.62);
+  --r15-shadow:0 42px 120px rgba(0,0,0,.34);
+  --r15-radius-xl:42px;
+  --r15-radius-lg:30px;
+  --r15-radius-md:20px;
+}
+
+html,
+body,
+#root{
+  background:var(--r15-bg);
+}
+
+body{
+  background:
+    radial-gradient(circle at 82% -8%,rgba(120,88,255,.15),transparent 34rem),
+    radial-gradient(circle at 10% 20%,rgba(86,221,228,.08),transparent 30rem),
+    linear-gradient(180deg,#02070d 0%,#04101a 46%,#02070d 100%);
+}
+
+.app-shell{
+  min-height:100vh;
+  background:transparent;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Global chrome — light, floating, not a toolbar slab.                        */
+/* -------------------------------------------------------------------------- */
+
+.topbar{
+  top:12px;
+  min-height:62px;
+  border:1px solid rgba(180,229,241,.09)!important;
+  border-radius:20px!important;
+  background:rgba(2,8,14,.70)!important;
+  box-shadow:
+    0 20px 70px rgba(0,0,0,.30),
+    inset 0 1px rgba(255,255,255,.025)!important;
+  backdrop-filter:blur(22px) saturate(1.15);
+}
+
+.topbar::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(100,237,240,.06),transparent 18rem),
+    radial-gradient(circle at 80% 0%,rgba(139,116,255,.08),transparent 18rem);
+}
+
+.topbar > *{
+  position:relative;
+  z-index:1;
+}
+
+.global-nav{
+  align-items:center;
+}
+
+.global-nav button,
+.top-actions button{
+  border-color:transparent!important;
+}
+
+.global-nav button{
+  border-radius:999px!important;
+  background:transparent!important;
+}
+
+.global-nav button:hover,
+.global-nav button.active,
+.global-nav button[aria-current="page"]{
+  background:linear-gradient(135deg,rgba(100,237,240,.09),rgba(139,116,255,.10))!important;
+}
+
+.logo{
+  letter-spacing:.32em!important;
+  font-weight:750;
+}
+
+.logo span{
+  color:var(--r15-cyan);
+}
+
+/* Shared page rhythm: remove "header card then grid" default reading. */
+.page-section{
+  width:min(1360px,calc(100% - 52px));
+  margin-inline:auto;
+  padding-top:132px;
+  padding-bottom:120px;
+}
+
+.page-section::before,
+.page-section::after{
+  pointer-events:none;
+}
+
+.page-section>.kicker,
+.catalog-title>.kicker{
+  letter-spacing:.22em;
+  color:rgba(100,237,240,.76);
+}
+
+.page-section>h1,
+.catalog-title>h1{
+  max-width:11ch;
+  font-size:clamp(58px,6.3vw,96px);
+  line-height:.89;
+  letter-spacing:-.065em;
+  text-wrap:balance;
+}
+
+.page-intro,
+.catalog-title>p{
+  max-width:760px;
+  margin-top:22px;
+  font-size:17px;
+  line-height:1.76;
+  color:var(--r15-muted);
+}
+
+/* Generic panel chrome is deliberately reduced; functional containers remain. */
+:where(
+  .content-card,
+  .game-card,
+  .collection-card,
+  .creator-index-card,
+  .community-board,
+  .account-panel,
+  .profiles-rail
+){
+  border-color:var(--r15-line)!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Discover — a world entrance, then a cinematic editorial strip.             */
+/* -------------------------------------------------------------------------- */
+
+.editorial-hero.canon-reconciled-hero{
+  min-height:clamp(760px,92vh,1040px)!important;
+  margin:0!important;
+  padding:
+    188px
+    max(28px,calc((100vw - 1360px)/2))
+    92px!important;
+  display:flex!important;
+  align-items:flex-end!important;
+  border-radius:0 0 56px 56px!important;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    linear-gradient(180deg,rgba(1,6,11,.04) 0%,rgba(1,6,11,.12) 32%,rgba(1,6,11,.58) 72%,#02070d 100%),
+    linear-gradient(90deg,rgba(1,6,11,.86),rgba(1,6,11,.48) 32%,rgba(1,6,11,.03) 70%),
+    url('/assets/modaryx-wolf-dragon-hero.webp') 58% 46%/cover no-repeat!important;
+  box-shadow:0 86px 190px rgba(0,0,0,.46)!important;
+}
+
+.editorial-hero.canon-reconciled-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(circle at 67% 22%,rgba(139,116,255,.16),transparent 20rem),
+    radial-gradient(circle at 34% 62%,rgba(100,237,240,.08),transparent 24rem);
+  mix-blend-mode:screen;
+}
+
+.editorial-hero.canon-reconciled-hero::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0;
+  height:190px;
+  z-index:-1;
+  background:linear-gradient(180deg,transparent,#02070d);
+}
+
+.editorial-hero-copy{
+  max-width:820px!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+
+.editorial-hero-copy h1{
+  max-width:9.8ch!important;
+  font-size:clamp(64px,7.6vw,114px)!important;
+  line-height:.87!important;
+  letter-spacing:-.072em!important;
+  text-shadow:0 18px 58px rgba(0,0,0,.38);
+}
+
+.editorial-hero-copy p{
+  max-width:650px;
+  font-size:clamp(17px,1.45vw,21px);
+  color:rgba(238,247,250,.84);
+}
+
+.editorial-hero-copy .primary{
+  margin-top:30px;
+  min-height:52px;
+  padding-inline:26px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#78f4f2,#9a83ff)!important;
+  color:#021017!important;
+  box-shadow:0 20px 58px rgba(77,201,215,.22);
+}
+
+.editorial-hero + .page-section{
+  width:min(1360px,calc(100% - 52px));
+  padding-top:96px;
+}
+
+.editorial-hero + .page-section .section-heading{
+  margin-bottom:38px;
+}
+
+.editorial-hero + .page-section .section-heading h2{
+  max-width:8.5ch;
+  font-size:clamp(46px,4.8vw,72px);
+  line-height:.92;
+  letter-spacing:-.052em;
+}
+
+.editorial-hero + .page-section .content-grid.editorial{
+  display:grid;
+  grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr);
+  grid-template-rows:repeat(2,minmax(240px,1fr));
+  gap:24px;
+}
+
+.editorial-hero + .page-section .content-card{
+  position:relative;
+  min-height:270px;
+  overflow:hidden;
+  border:0!important;
+  border-radius:28px!important;
+  background:#06111b!important;
+  box-shadow:var(--r15-shadow)!important;
+}
+
+.editorial-hero + .page-section .content-card:first-child{
+  grid-row:1 / span 2;
+  min-height:620px;
+  border-radius:40px!important;
+}
+
+.editorial-hero + .page-section .content-card>.media{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  min-height:0;
+  border:0!important;
+  opacity:.86;
+  filter:saturate(.96) contrast(1.05);
+}
+
+.editorial-hero + .page-section .content-card .card-copy{
+  position:absolute;
+  z-index:2;
+  inset:auto 0 0;
+  padding:120px 30px 30px;
+  background:linear-gradient(180deg,transparent,rgba(2,9,16,.76) 42%,rgba(2,9,16,.97));
+}
+
+.editorial-hero + .page-section .content-card:first-child .card-copy{
+  padding:220px 40px 40px;
+}
+
+.editorial-hero + .page-section .content-card:first-child h3{
+  max-width:9ch;
+  font-size:clamp(42px,4.3vw,66px);
+  line-height:.94;
+  letter-spacing:-.05em;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Games — cover wall, not three equal product tiles.                          */
+/* -------------------------------------------------------------------------- */
+
+.games-index{
+  position:relative;
+  isolation:isolate;
+}
+
+.games-index::before{
+  content:""!important;
+  display:block!important;
+  position:absolute;
+  inset:70px -12vw auto 42%;
+  height:520px;
+  z-index:-1;
+  background:
+    radial-gradient(circle at center,rgba(139,116,255,.15),transparent 29rem),
+    radial-gradient(circle at 26% 64%,rgba(100,237,240,.07),transparent 22rem);
+}
+
+.games-index .index-tools,
+.games-index .game-support-request{
+  max-width:920px;
+}
+
+.games-index .game-grid{
+  margin-top:52px;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.42fr) minmax(320px,.58fr)!important;
+  grid-auto-rows:minmax(270px,auto);
+  gap:24px!important;
+}
+
+.games-index .game-card{
+  position:relative;
+  min-height:300px;
+  overflow:hidden;
+  border:0!important;
+  border-radius:30px!important;
+  background:#06111b!important;
+  box-shadow:0 38px 110px rgba(0,0,0,.32)!important;
+}
+
+.games-index .game-card:first-child{
+  grid-row:span 2;
+  min-height:670px!important;
+  border-radius:42px!important;
+}
+
+.games-index .game-card>.media{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  min-height:0;
+  opacity:.86;
+}
+
+.games-index .game-card>div{
+  position:absolute;
+  z-index:2;
+  inset:auto 0 0;
+  padding:110px 30px 30px;
+  background:linear-gradient(180deg,transparent,rgba(2,9,16,.78) 42%,rgba(2,9,16,.97));
+}
+
+.games-index .game-card:first-child>div{
+  padding:240px 42px 42px;
+}
+
+.games-index .game-card:first-child h2{
+  max-width:8ch;
+  font-size:clamp(48px,5vw,76px)!important;
+  line-height:.92;
+  letter-spacing:-.055em;
+}
+
+.games-index .game-card .primary,
+.games-index .game-card .quiet{
+  border-radius:999px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Game Hub — selected game becomes a place; controls become a dock.           */
+/* -------------------------------------------------------------------------- */
+
+.game-hub-page{
+  background:
+    radial-gradient(circle at 82% 36%,rgba(139,116,255,.08),transparent 30rem),
+    #02070d;
+}
+
+.game-hub-page .game-hero{
+  min-height:700px!important;
+  margin:0!important;
+  padding:
+    176px
+    max(28px,calc((100vw - 1360px)/2))
+    74px!important;
+  border-radius:0 0 54px 54px!important;
+  align-items:end!important;
+  overflow:hidden;
+  box-shadow:0 72px 170px rgba(0,0,0,.42);
+}
+
+.game-hub-page .game-hero::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0;
+  height:180px;
+  background:linear-gradient(180deg,transparent,rgba(2,7,13,.86));
+  pointer-events:none;
+}
+
+.game-hub-page .game-identity,
+.game-hub-page .hero-search,
+.game-hub-page .game-hero>.primary{
+  position:relative;
+  z-index:2;
+}
+
+.game-hub-page .game-identity{
+  max-width:770px;
+}
+
+.game-hub-page .game-identity h1{
+  max-width:8ch;
+  font-size:clamp(68px,7.8vw,112px)!important;
+  line-height:.86!important;
+  letter-spacing:-.07em!important;
+}
+
+.game-hub-page .hero-search{
+  max-width:680px;
+  min-height:54px;
+  border-radius:999px!important;
+  border:1px solid rgba(164,225,239,.12)!important;
+  background:rgba(2,9,15,.64)!important;
+  backdrop-filter:blur(18px);
+}
+
+.game-hub-page .local-nav{
+  position:sticky;
+  top:90px;
+  z-index:8;
+  width:max-content;
+  max-width:calc(100vw - 32px);
+  margin:-26px auto 0;
+  padding:6px;
+  overflow:auto;
+  border:1px solid rgba(164,225,239,.10);
+  border-radius:999px;
+  background:rgba(2,9,15,.74);
+  box-shadow:0 20px 60px rgba(0,0,0,.26);
+  backdrop-filter:blur(20px);
+}
+
+.game-hub-page .local-nav button{
+  min-height:42px;
+  padding-inline:18px;
+  border:0!important;
+  border-radius:999px!important;
+  background:transparent!important;
+}
+
+.game-hub-page .local-nav button.active{
+  background:linear-gradient(135deg,rgba(100,237,240,.12),rgba(139,116,255,.16))!important;
+}
+
+.game-hub-page .hub-layout{
+  width:min(1360px,calc(100% - 52px));
+  margin:78px auto 120px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 300px;
+  gap:60px;
+  align-items:start;
+}
+
+.game-hub-page .hub-content{
+  min-width:0;
+}
+
+.game-hub-page .section-heading{
+  margin-bottom:34px;
+}
+
+.game-hub-page .section-heading h2{
+  max-width:9ch;
+  font-size:clamp(44px,4.8vw,70px);
+  line-height:.94;
+  letter-spacing:-.05em;
+}
+
+.game-hub-page .profiles-rail{
+  position:sticky;
+  top:166px;
+  padding:26px;
+  border:1px solid rgba(164,225,239,.09)!important;
+  border-radius:26px!important;
+  background:
+    radial-gradient(circle at 80% 0%,rgba(139,116,255,.10),transparent 16rem),
+    rgba(3,12,20,.62)!important;
+  box-shadow:0 30px 90px rgba(0,0,0,.24)!important;
+  backdrop-filter:blur(18px);
+}
+
+.game-hub-page .hub-content-row{
+  border:0!important;
+  border-bottom:1px solid rgba(164,225,239,.09)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.game-hub-page .hub-content-row:first-child{
+  border-top:1px solid rgba(164,225,239,.09)!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Catalog — editorial index with a navigation column and a visual field.      */
+/* -------------------------------------------------------------------------- */
+
+.page-section.catalog{
+  display:grid;
+  grid-template-columns:300px minmax(0,1fr);
+  column-gap:64px;
+  align-items:start;
+}
+
+.catalog .catalog-title{
+  grid-column:1;
+  position:sticky;
+  top:116px;
+}
+
+.catalog .catalog-title h1{
+  max-width:7.5ch;
+  font-size:clamp(54px,5.6vw,84px);
+}
+
+.catalog .catalog-tools{
+  grid-column:1;
+  display:grid!important;
+  gap:12px;
+  margin-top:36px!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.catalog .catalog-tools .catalog-search{
+  width:100%;
+}
+
+.catalog .filter-panel{
+  grid-column:1;
+  margin-top:14px;
+}
+
+.catalog .catalog-summary{
+  grid-column:2;
+  margin-top:0;
+  margin-bottom:18px;
+}
+
+.catalog .content-grid,
+.catalog .content-list,
+.catalog>.empty{
+  grid-column:2;
+}
+
+.catalog .catalog-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.18fr) minmax(260px,.82fr)!important;
+  gap:24px!important;
+}
+
+.catalog .content-card{
+  position:relative;
+  min-height:320px;
+  overflow:hidden;
+  border:0!important;
+  border-radius:28px!important;
+  background:#06111b!important;
+  box-shadow:0 30px 90px rgba(0,0,0,.25)!important;
+}
+
+.catalog .content-card:first-child{
+  grid-row:span 2;
+  min-height:650px!important;
+  border-radius:40px!important;
+}
+
+.catalog .content-card>.media{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  min-height:0;
+  opacity:.85;
+}
+
+.catalog .content-card .card-copy{
+  position:absolute;
+  z-index:2;
+  inset:auto 0 0;
+  padding:120px 28px 30px;
+  background:linear-gradient(180deg,transparent,rgba(2,9,16,.78) 44%,rgba(2,9,16,.97));
+}
+
+.catalog .content-card:first-child .card-copy{
+  padding:250px 38px 40px;
+}
+
+.catalog .content-card:first-child h2{
+  max-width:9ch;
+  font-size:clamp(42px,4.3vw,66px);
+  line-height:.94;
+  letter-spacing:-.05em;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Collections — archive/library feeling, with one cover and quieter records.  */
+/* -------------------------------------------------------------------------- */
+
+.page-section.collections-page{
+  position:relative;
+  width:100%;
+  max-width:none;
+  padding:
+    156px
+    max(26px,calc((100vw - 1360px)/2))
+    126px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(2,7,13,.14),rgba(2,7,13,.58) 430px,#02070d 720px),
+    linear-gradient(90deg,rgba(2,7,13,.86),rgba(2,7,13,.30) 58%,rgba(2,7,13,.70)),
+    url('/assets/modaryx-wolf-dragon-hero.webp') 62% 8%/cover no-repeat;
+}
+
+.collections-page::before,
+.collections-page::after{
+  display:none!important;
+  content:none!important;
+}
+
+.collections-page>h1{
+  max-width:8.5ch;
+  font-size:clamp(66px,7vw,106px);
+  text-shadow:0 18px 58px rgba(0,0,0,.38);
+}
+
+.collections-page>.page-intro{
+  max-width:680px;
+  color:rgba(238,247,250,.84);
+}
+
+.collections-page .collection-mode-tabs{
+  width:max-content;
+  margin-top:38px;
+  padding:5px;
+  border:1px solid rgba(164,225,239,.10);
+  border-radius:999px;
+  background:rgba(2,9,15,.58);
+  backdrop-filter:blur(18px);
+}
+
+.collections-page .collection-tools{
+  max-width:920px;
+  margin-top:54px;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+.collections-page .collection-grid{
+  margin-top:30px;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.42fr) minmax(300px,.58fr)!important;
+  grid-auto-rows:minmax(270px,auto);
+  gap:24px!important;
+}
+
+.collections-page .collection-card{
+  position:relative;
+  overflow:hidden;
+  min-height:300px;
+  border:0!important;
+  border-radius:28px!important;
+  background:#06111b!important;
+  box-shadow:0 34px 100px rgba(0,0,0,.28)!important;
+}
+
+.collections-page .collection-card:first-child{
+  grid-row:span 2;
+  min-height:660px!important;
+  border-radius:42px!important;
+}
+
+.collections-page .collection-card>.media{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  min-height:0;
+  opacity:.84;
+}
+
+.collections-page .collection-card>div{
+  position:absolute;
+  z-index:2;
+  inset:auto 0 0;
+  padding:130px 28px 30px;
+  background:linear-gradient(180deg,transparent,rgba(2,9,16,.80) 42%,rgba(2,9,16,.97));
+}
+
+.collections-page .collection-card:first-child>div{
+  padding:250px 42px 42px;
+}
+
+.collections-page .collection-card:first-child h2{
+  max-width:9ch;
+  font-size:clamp(46px,4.7vw,72px);
+  line-height:.93;
+  letter-spacing:-.055em;
+}
+
+.collections-page .collection-card dl{
+  border-top:1px solid rgba(164,225,239,.08);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Creators — portfolio exhibition instead of directory cards.                 */
+/* -------------------------------------------------------------------------- */
+
+.page-section.creators-page{
+  position:relative;
+  width:100%;
+  max-width:none;
+  padding:
+    156px
+    max(26px,calc((100vw - 1360px)/2))
+    126px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(2,7,13,.12),rgba(2,7,13,.56) 420px,#02070d 700px),
+    linear-gradient(90deg,rgba(2,7,13,.88),rgba(2,7,13,.28) 60%,rgba(2,7,13,.68)),
+    url('/assets/modaryx-wolf-dragon-hero.webp') 66% 8%/cover no-repeat;
+}
+
+.creators-page::before,
+.creators-page::after{
+  display:none!important;
+  content:none!important;
+}
+
+.creators-page>h1{
+  max-width:8.4ch;
+  font-size:clamp(66px,7vw,104px);
+  text-shadow:0 18px 58px rgba(0,0,0,.38);
+}
+
+.creators-page>.page-intro{
+  max-width:690px;
+  color:rgba(238,247,250,.84);
+}
+
+.creators-page .creator-studio-entry{
+  margin-top:28px;
+  border-radius:999px!important;
+  background:rgba(2,9,15,.62)!important;
+  backdrop-filter:blur(16px);
+}
+
+.creators-page .creators-search{
+  max-width:760px;
+  margin-top:54px;
+}
+
+.creator-index-grid{
+  margin-top:34px;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.34fr) minmax(300px,.66fr)!important;
+  grid-auto-rows:minmax(280px,auto);
+  gap:24px!important;
+}
+
+.creator-index-card{
+  position:relative;
+  min-height:300px;
+  overflow:hidden;
+  border:0!important;
+  border-radius:28px!important;
+  background:#06111b!important;
+  box-shadow:0 34px 100px rgba(0,0,0,.28)!important;
+}
+
+.creator-index-card:first-child{
+  grid-row:span 2;
+  min-height:660px!important;
+  border-radius:42px!important;
+}
+
+.creator-index-card>.media{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  min-height:0;
+  opacity:.82;
+}
+
+.creator-index-card>div{
+  position:absolute;
+  z-index:2;
+  inset:auto 0 0;
+  padding:130px 28px 30px;
+  background:linear-gradient(180deg,transparent,rgba(2,9,16,.80) 42%,rgba(2,9,16,.97));
+}
+
+.creator-index-card:first-child>div{
+  padding:250px 42px 42px;
+}
+
+.creator-index-card:first-child h2{
+  max-width:9ch;
+  font-size:clamp(46px,4.7vw,72px);
+  line-height:.93;
+  letter-spacing:-.055em;
+}
+
+.creator-index-card .creator-trust-note{
+  border:0!important;
+  background:rgba(2,9,15,.38)!important;
+  backdrop-filter:blur(12px);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Community — magazine desk: navigation as rail, active context as stage.     */
+/* -------------------------------------------------------------------------- */
+
+.page-section.community{
+  position:relative;
+  width:min(1360px,calc(100% - 52px));
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:minmax(260px,360px) minmax(0,1fr);
+  grid-template-rows:auto auto auto 1fr;
+  column-gap:76px;
+  align-items:start;
+  background:
+    radial-gradient(circle at 82% 12%,rgba(139,116,255,.13),transparent 30rem),
+    radial-gradient(circle at 8% 30%,rgba(100,237,240,.06),transparent 26rem);
+}
+
+.community::before,
+.community::after{
+  display:none!important;
+  content:none!important;
+}
+
+.community>.kicker,
+.community>h1,
+.community>.page-intro,
+.community>.community-tabs{
+  grid-column:1;
+}
+
+.community>h1{
+  max-width:8.8ch;
+  font-size:clamp(58px,5.8vw,88px);
+}
+
+.community>.page-intro{
+  max-width:33ch;
+}
+
+.community .community-tabs{
+  margin-top:38px!important;
+  width:100%!important;
+  display:flex!important;
+  flex-direction:column;
+  gap:6px!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+
+.community .community-tabs button{
+  width:100%;
+  min-height:46px;
+  padding:0 14px;
+  text-align:left;
+  border:0!important;
+  border-radius:12px!important;
+  background:transparent!important;
+}
+
+.community .community-tabs button.active{
+  background:linear-gradient(90deg,rgba(100,237,240,.10),rgba(139,116,255,.04),transparent)!important;
+  color:#f1fbfd;
+}
+
+.community-board{
+  grid-column:2;
+  grid-row:1 / span 4;
+  margin-top:0!important;
+  min-height:720px!important;
+  padding:70px!important;
+  border:1px solid rgba(164,225,239,.08)!important;
+  border-radius:44px!important;
+  background:
+    radial-gradient(circle at 76% 8%,rgba(139,116,255,.16),transparent 24rem),
+    radial-gradient(circle at 12% 84%,rgba(100,237,240,.07),transparent 24rem),
+    linear-gradient(145deg,rgba(7,20,30,.82),rgba(2,8,14,.95))!important;
+  box-shadow:0 58px 150px rgba(0,0,0,.34)!important;
+}
+
+.community-board>h2{
+  max-width:8.8ch;
+  font-size:clamp(48px,4.6vw,72px)!important;
+  line-height:.94;
+  letter-spacing:-.052em;
+}
+
+.community-board>p{
+  max-width:620px;
+  font-size:17px;
+  line-height:1.75;
+}
+
+.community-list,
+.community-teams,
+.activity-list{
+  margin-top:38px;
+  border:0!important;
+  border-top:1px solid rgba(164,225,239,.09)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.community-list article,
+.community-teams article,
+.activity-list article{
+  min-height:132px;
+  padding:28px 0!important;
+  border:0!important;
+  border-bottom:1px solid rgba(164,225,239,.08)!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Account — quiet private atelier, side rail + open working surface.          */
+/* -------------------------------------------------------------------------- */
+
+.page-section.account-center{
+  position:relative;
+  width:min(1360px,calc(100% - 52px));
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 80% 8%,rgba(139,116,255,.13),transparent 31rem),
+    radial-gradient(circle at 10% 28%,rgba(100,237,240,.06),transparent 26rem);
+}
+
+.account-center::before,
+.account-center::after{
+  display:none!important;
+  content:none!important;
+}
+
+.account-center>h1{
+  max-width:9.6ch;
+  font-size:clamp(58px,6vw,92px);
+}
+
+.account-center>.page-intro{
+  max-width:700px;
+}
+
+.account-shell{
+  margin-top:68px!important;
+  display:grid!important;
+  grid-template-columns:210px minmax(0,1fr)!important;
+  gap:78px!important;
+  align-items:start;
+}
+
+.account-nav{
+  position:sticky;
+  top:116px;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.account-nav button{
+  min-height:46px;
+  padding:0 14px!important;
+  border:0!important;
+  border-radius:12px!important;
+  background:transparent!important;
+  text-align:left;
+}
+
+.account-nav button.active,
+.account-nav button[aria-pressed="true"]{
+  background:linear-gradient(90deg,rgba(100,237,240,.10),rgba(139,116,255,.04),transparent)!important;
+}
+
+.account-panel{
+  min-height:560px;
+  padding:18px 0 64px 58px!important;
+  border:0!important;
+  border-left:1px solid rgba(164,225,239,.10)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.account-panel::before,
+.account-panel::after{
+  display:none!important;
+  content:none!important;
+}
+
+.account-panel h2{
+  max-width:10ch;
+  font-size:clamp(46px,4.8vw,72px)!important;
+  line-height:.94;
+  letter-spacing:-.05em;
+}
+
+.account-panel>p{
+  max-width:720px;
+  font-size:16px;
+  line-height:1.75;
+}
+
+.session-state,
+.privacy-grid,
+.channel-grid{
+  max-width:860px;
+}
+
+.privacy-grid,
+.channel-grid{
+  gap:0!important;
+  border-top:1px solid rgba(164,225,239,.08);
+}
+
+.privacy-grid article,
+.channel-grid article{
+  min-height:116px;
+  padding:24px 20px 24px 0!important;
+  border:0!important;
+  border-bottom:1px solid rgba(164,225,239,.08)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Controls — utility should look deliberate but never dominate the scenery.  */
+/* -------------------------------------------------------------------------- */
+
+.catalog-search,
+.global-search-field,
+.hero-search{
+  border-radius:999px!important;
+  background:rgba(3,12,20,.64)!important;
+  border:1px solid rgba(164,225,239,.10)!important;
+  box-shadow:0 16px 48px rgba(0,0,0,.15)!important;
+}
+
+button.primary,
+.primary,
+button.quiet,
+.quiet{
+  border-radius:999px;
+}
+
+:where(
+  .collection-mode-tabs,
+  .local-nav,
+  .community-tabs
+) button:focus-visible,
+:where(
+  .account-nav,
+  .global-nav
+) button:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  outline:3px solid rgba(100,237,240,.96)!important;
+  outline-offset:3px!important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Mobile — dedicated recomposition, not a compressed desktop.                 */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width:900px){
+  .page-section{
+    width:min(100% - 32px,760px);
+    padding-top:122px;
+    padding-bottom:86px;
+  }
+
+  .page-section>h1,
+  .catalog-title>h1{
+    max-width:9.4ch;
+    font-size:clamp(48px,12vw,72px);
+  }
+
+  .editorial-hero.canon-reconciled-hero{
+    min-height:780px!important;
+    padding:148px 20px 52px!important;
+    border-radius:0 0 30px 30px!important;
+    background:
+      linear-gradient(180deg,rgba(1,6,11,.06),rgba(1,6,11,.24) 44%,rgba(1,6,11,.92) 88%),
+      url('/assets/modaryx-wolf-dragon-hero.webp') 60% center/cover no-repeat!important;
+  }
+
+  .editorial-hero-copy h1{
+    max-width:8.6ch!important;
+    font-size:clamp(54px,15vw,76px)!important;
+  }
+
+  .editorial-hero + .page-section .content-grid.editorial,
+  .games-index .game-grid,
+  .catalog .catalog-grid,
+  .collections-page .collection-grid,
+  .creator-index-grid{
+    display:flex!important;
+    flex-direction:column;
+    gap:18px!important;
+  }
+
+  .editorial-hero + .page-section .content-card,
+  .editorial-hero + .page-section .content-card:first-child,
+  .games-index .game-card,
+  .games-index .game-card:first-child,
+  .catalog .content-card,
+  .catalog .content-card:first-child,
+  .collections-page .collection-card,
+  .collections-page .collection-card:first-child,
+  .creator-index-card,
+  .creator-index-card:first-child{
+    min-height:430px!important;
+    border-radius:26px!important;
+  }
+
+  .editorial-hero + .page-section .content-card .card-copy,
+  .editorial-hero + .page-section .content-card:first-child .card-copy,
+  .games-index .game-card>div,
+  .games-index .game-card:first-child>div,
+  .catalog .content-card .card-copy,
+  .catalog .content-card:first-child .card-copy,
+  .collections-page .collection-card>div,
+  .collections-page .collection-card:first-child>div,
+  .creator-index-card>div,
+  .creator-index-card:first-child>div{
+    padding:150px 22px 24px!important;
+  }
+
+  .game-hub-page .game-hero{
+    min-height:760px!important;
+    padding:148px 20px 58px!important;
+    border-radius:0 0 30px 30px!important;
+  }
+
+  .game-hub-page .game-identity h1{
+    font-size:clamp(56px,16vw,78px)!important;
+  }
+
+  .game-hub-page .local-nav{
+    position:relative;
+    top:auto;
+    margin:-22px 12px 0;
+    width:calc(100% - 24px);
+    border-radius:20px;
+  }
+
+  .game-hub-page .hub-layout{
+    width:min(100% - 32px,760px);
+    margin:46px auto 86px;
+    display:flex;
+    flex-direction:column;
+    gap:36px;
+  }
+
+  .game-hub-page .profiles-rail{
+    position:relative;
+    top:auto;
+    width:100%;
+  }
+
+  .page-section.catalog{
+    display:block;
+  }
+
+  .catalog .catalog-title{
+    position:relative;
+    top:auto;
+  }
+
+  .catalog .catalog-tools{
+    margin-top:28px!important;
+  }
+
+  .catalog .catalog-summary{
+    margin-top:30px;
+  }
+
+  .page-section.collections-page,
+  .page-section.creators-page{
+    width:100%;
+    padding:132px 18px 86px;
+    background-size:auto,auto,auto 520px;
+  }
+
+  .collections-page>h1,
+  .creators-page>h1{
+    max-width:8.6ch;
+    font-size:clamp(50px,14vw,72px);
+  }
+
+  .community{
+    display:block!important;
+  }
+
+  .community>.page-intro{
+    max-width:680px;
+  }
+
+  .community .community-tabs{
+    width:100%!important;
+    margin-top:30px!important;
+    display:flex!important;
+    flex-direction:row;
+    overflow:auto;
+    padding:5px!important;
+    border:1px solid rgba(164,225,239,.09)!important;
+    border-radius:20px!important;
+    background:rgba(3,11,18,.56)!important;
+  }
+
+  .community .community-tabs button{
+    width:auto;
+    white-space:nowrap;
+    border-radius:14px!important;
+  }
+
+  .community-board{
+    margin-top:36px!important;
+    min-height:0!important;
+    padding:34px 22px!important;
+    border-radius:28px!important;
+  }
+
+  .account-shell{
+    display:block!important;
+    margin-top:44px!important;
+  }
+
+  .account-nav{
+    position:relative;
+    top:auto;
+    display:flex!important;
+    gap:6px!important;
+    overflow:auto;
+    padding:5px!important;
+    border:1px solid rgba(164,225,239,.09)!important;
+    border-radius:18px!important;
+    background:rgba(3,11,18,.54)!important;
+  }
+
+  .account-nav button{
+    min-width:max-content;
+    border-radius:12px!important;
+  }
+
+  .account-panel{
+    min-height:0;
+    margin-top:34px;
+    padding:8px 0 36px 22px!important;
+  }
+}
+
+@media (max-width:560px){
+  .topbar{
+    width:calc(100% - 16px)!important;
+    top:8px;
+    border-radius:16px!important;
+  }
+
+  .page-section{
+    width:calc(100% - 28px);
+  }
+
+  .editorial-hero + .page-section{
+    width:calc(100% - 28px);
+  }
+
+  .game-hub-page .hub-layout{
+    width:calc(100% - 28px);
+  }
+
+  .community-board{
+    padding:28px 18px!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .content-card,
+  .game-card,
+  .collection-card,
+  .creator-index-card,
+  .topbar,
+  .community-board,
+  .profiles-rail{
+    transition:none!important;
+    animation:none!important;
+  }
+
+  .content-card:hover,
+  .game-card:hover,
+  .collection-card:hover,
+  .creator-index-card:hover{
+    transform:none!important;
+  }
+}
