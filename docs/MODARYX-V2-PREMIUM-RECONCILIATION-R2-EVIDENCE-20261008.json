@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "blockerId": "owner-visual-reconciliation-current",
+  "product": {
+    "branch": "design/modaryx-v2-blue-violet-product-20261005",
+    "mergePr": 269,
+    "mergeSha": "cf7d7e6eb922f160e2125554a50134249025be7f",
+    "candidateSourceSha": "c9d7024c1fb69762c5a1d546a42713c6900e93c2",
+    "architecturePreserved": true,
+    "visualOnly": true,
+    "filesChanged": [
+      "v2/src/main.jsx",
+      "v2/src/product-blue-violet.css",
+      "v2/src/premium-reconciliation.css"
+    ]
+  },
+  "visualProof": {
+    "runId": 37732973675,
+    "conclusion": "success",
+    "artifactId": 11530203934,
+    "artifactName": "modaryx-v2-premium-reconciliation-visual-r2",
+    "artifactDigest": "sha256:262890fc81ea30b5ef20e0a51d67ec88dd318198c9dd569fb5b72afa5b8ea7ad",
+    "captureCount": 16,
+    "desktopCount": 8,
+    "mobileCount": 8,
+    "desktopViewport": "1440x1024",
+    "mobileViewport": "390x844",
+    "build": true,
+    "siteTests": true
+  },
+  "captures": [
+    {
+      "file": "desktop-account-1440x1024.png",
+      "sha256": "36b2cc53b34cc48def8677ad82d79554db8b45ab1f4200ff127099e22daf8ab0"
+    },
+    {
+      "file": "desktop-collections-1440x1024.png",
+      "sha256": "0688bf040bdfc430eb6c0717bd07eea0211a8e906ce4c0bd956fdb859e769725"
+    },
+    {
+      "file": "desktop-community-1440x1024.png",
+      "sha256": "6b58a28449224c54ee24b49c036222a093541273a6df1253b105f22996f3e1f9"
+    },
+    {
+      "file": "desktop-creators-1440x1024.png",
+      "sha256": "2eb2afd246a0cca6a8ca1fc1f25e2737cc358cb14f1b9b6fc768818478082087"
+    },
+    {
+      "file": "desktop-discover-1440x1024.png",
+      "sha256": "ad04ce5e50db2e8ea9c22abe72a0141cd8f1960a2050060e25b1842a3657a3ca"
+    },
+    {
+      "file": "desktop-games-1440x1024.png",
+      "sha256": "1371c0eb944e95e7abf175b4696416399d95c472409661c0c918919c9473d442"
+    },
+    {
+      "file": "desktop-games-aetherlands-1440x1024.png",
+      "sha256": "dd889bc6192c5a7a5eba646025e50d590e7b7592897d6631fe1cc1bc713bcb1f"
+    },
+    {
+      "file": "desktop-mods-1440x1024.png",
+      "sha256": "1d4c5827ab9d1babd15981aaba20013d3532493a09cb3494bdcaff77b3f81631"
+    },
+    {
+      "file": "mobile-account-390x844.png",
+      "sha256": "3bc6483a8d915e779e7626368016d39acb14f977ac050f551036306c45e71152"
+    },
+    {
+      "file": "mobile-collections-390x844.png",
+      "sha256": "af8f777479b3175dd63ae9f119d90853dfcb2ac8df3a4917bc8fafdc56808213"
+    },
+    {
+      "file": "mobile-community-390x844.png",
+      "sha256": "9ec14791bdf641d2a88926e7ae1e032350c160dbfec638b5a18796d9e4a91c11"
+    },
+    {
+      "file": "mobile-creators-390x844.png",
+      "sha256": "badf714023fa091f98fbc671809163f8ca820f2b1fbffdb83470a24b0a5e7d04"
+    },
+    {
+      "file": "mobile-discover-390x844.png",
+      "sha256": "64bd98e51ea0ccb889ca250a1fd092bd862b33b0e95d066f5388394cabb42dae"
+    },
+    {
+      "file": "mobile-games-390x844.png",
+      "sha256": "975d3442bc490d2e16a686cf51133c102e3a67f44c01eb1a9dd77c0910914539"
+    },
+    {
+      "file": "mobile-games-aetherlands-390x844.png",
+      "sha256": "1fcfae1e1adbb6bdc206bd2c1ca8d947fb946b88d215d6ca61e9d4e9a46ff233"
+    },
+    {
+      "file": "mobile-mods-390x844.png",
+      "sha256": "a421847bd5051cc32889a4b21fbeedfda9f4dc5b00552e398733bd4bf06b0a3d"
+    }
+  ],
+  "assistantVisualInspection": {
+    "status": "TERMINÉ",
+    "role": "supportive_only",
+    "observations": [
+      "Discover restores the living/cinematic hero instead of the prior flat compact product intro",
+      "internal pages use stronger depth and editorial hierarchy",
+      "desktop and mobile are visually coherent",
+      "no obvious critical overflow/collision was observed in the 16 captured viewports"
+    ],
+    "closesOwnerBlocker": false
+  },
+  "blocker": {
+    "canonicalState": "BLOQUÉ",
+    "machineState": "OPEN",
+    "remainingEvidence": [
+      "OWNER_VISUAL_ACCEPTANCE"
+    ],
+    "note": "Candidate implementation and fresh capture evidence are complete; owner acceptance remains required."
+  },
+  "gates": {
+    "vfTechnique": "EN COURS",
+    "visualDirection": "BLOQUÉ",
+    "commercial": "EN COURS",
+    "legalCompliance": "BLOQUÉ / PREUVE MANQUANTE",
+    "productionCutover": "BLOQUÉ"
+  }
+}
