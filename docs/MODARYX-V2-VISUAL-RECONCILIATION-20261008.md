@@ -194,3 +194,44 @@ La R3 réduit davantage l'effet catalogue/dashboard constaté sur la R2, mais ne
 - acceptation propriétaire : **PREUVE MANQUANTE**
 
 Aucun PASS VF final n'est déclaré.
+
+
+## 11. Candidat courant — Premium Living Atlas R16
+
+Produit :
+- PR #282
+- merge SHA : `4a993d94a386ac0fd5cc8dcb27bd0482c1a2dcda`
+- source candidat : `994aeeae317015fbfb6d8d271655d00b4ef2f250`
+
+Direction :
+- R15 remplace la grammaire visuelle répétitive par des scènes éditoriales asymétriques ;
+- R16 différencie les familles de pages avec des atmosphères distinctes ;
+- Découvrir / Game Hub conservent la signature loup + dragon ;
+- Jeux / Mods / Collections / Créateurs exploitent des scènes différentes de la planche Living Threshold ;
+- Communauté devient plus organique et moins "carte SaaS" ;
+- Compte reste volontairement plus calme et privé ;
+- mobile est recomposé séparément.
+
+Preuves fraîches :
+- R15 : run `37767448754`, job `113278446863`, **success**, 16 captures ;
+- R15 artifact `11545606513`, digest `sha256:ff8edeaa2cb37c12e88571c2c1298e2672c442762b64db8381258c87baefc3f2` ;
+- R16 : run `37768198037`, job `113280917134`, **success**, 16 captures ;
+- R16 artifact `11545572439`, digest `sha256:e95ac03ded1b316ed3c743418aa68778f9f691ef6590e2da58c7a3ff062ee72f` ;
+- build V2 : **TERMINÉ** ;
+- `test:sites` : **TERMINÉ**.
+
+Inspection assistant :
+**TERMINÉE en support uniquement**. R16 est matériellement plus différencié que R14/R15, notamment sur Jeux/Mods/Collections/Créateurs mobile et Communauté/Compte desktop.
+
+Cette inspection ne remplace pas la décision propriétaire.
+
+État :
+- candidat R16 implémenté : **TERMINÉ**
+- captures fraîches : **TERMINÉ**
+- `owner-visual-reconciliation-current` : **BLOQUÉ / OPEN**
+- acceptation propriétaire : **PREUVE MANQUANTE**
+
+Référence machine :
+`docs/MODARYX-V2-PREMIUM-RECONCILIATION-R16-EVIDENCE-20261008.json`.
+
+Aucun PASS VF final n'est déclaré.
