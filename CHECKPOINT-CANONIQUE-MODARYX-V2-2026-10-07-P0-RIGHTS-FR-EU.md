@@ -1278,3 +1278,34 @@ Cette observation ne remplace pas un audit de release.
 - audit data/analytics croisé : **PREUVE MANQUANTE**
 
 Valeur par défaut : **NO_SHARING**.
+
+
+---
+
+## 38. Matrice anti-oubli de convergence actuelle — 2026-10-08
+
+Documents :
+- `docs/MODARYX-V2-ANTI-OUBLI-CONVERGENCE-20261008.md`
+- `docs/MODARYX-V2-ANTI-OUBLI-CONVERGENCE-20261008.json`
+
+Règle :
+**couverture TERMINÉE ≠ sujet prêt**.
+
+Résultat de convergence :
+- axes doctrine mappés : **21/21**
+- axes sans référence actuelle : **0**
+- couverture anti-oubli actuelle : **TERMINÉE**
+- produit VF : **non**
+- launch readiness commerciale : **non**
+- legal/compliance : **BLOQUÉ**
+- production/cutover : **BLOQUÉ**
+
+Blockers structurants restant explicitement tracés :
+1. 19 blockers VF externes ;
+2. droits commerciaux/assets/tiers ;
+3. décisions propriétaire/professionnels ;
+4. pilote terrain/economics ;
+5. production/cutover.
+
+La matrice ne supprime aucun historique et ne convertit aucun candidat en fait.
+Elle doit être maintenue avec le CHECKPOINT lors de tout changement matériel.
