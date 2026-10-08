@@ -26,8 +26,8 @@
     {
       "id": "owner-visual-reconciliation-current",
       "state": "OPEN",
-      "evidenceCandidate": "docs/MODARYX-V2-PREMIUM-RECONCILIATION-R2-EVIDENCE-20261008.json",
-      "note": "Compatibility state remains OPEN. Premium R2 is implemented at PR #269 / cf7d7e6eb922f160e2125554a50134249025be7f with fresh 16-capture proof run 37732973675. Owner acceptance remains PREUVE MANQUANTE, therefore canonical project state stays BLOQUÉ."
+      "evidenceCandidate": "docs/MODARYX-V2-PREMIUM-RECONCILIATION-R12-EVIDENCE-20261008.json",
+      "note": "Compatibility state remains OPEN. Premium R12 is integrated at PR #278 / 911205554693c9c44d9eed24b54792d16c54446b with fresh 16-capture proof run 37759779812. Owner acceptance remains PREUVE MANQUANTE."
     },
     {
       "id": "nvda-real",
