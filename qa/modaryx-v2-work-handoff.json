@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-07",
+  "date": "2026-10-08",
   "status": "READY_FOR_WORK_OR_REAL_OPERATOR",
   "sourceCommit": "128add6e1b39aa072d300befed6641cd16bfef5f",
   "targetBranch": "design/modaryx-v2-blue-violet-product-20261005",
-  "blockerCount": 19,
+  "blockerCount": 20,
   "blockers": [
     {
       "id": "nvda-real",
@@ -68,6 +68,19 @@
         "TOUCH_REAL",
         "CRITICAL_TASKS_COMPLETE",
         "NO_OPEN_P0_P1"
+      ],
+      "automationCanCloseWithoutExternalChange": false
+    },
+    {
+      "id": "owner-visual-reconciliation-current",
+      "category": "visual-owner",
+      "executorClass": "PRODUCT_DESIGN_WORK_PLUS_OWNER_REVIEW",
+      "closureMode": "CURRENT_CANDIDATE_VISUAL_RECONCILIATION",
+      "requiredEvidence": [
+        "CURRENT_V2_ARCHITECTURE_PRESERVED",
+        "PREMIUM_VISUAL_LANGUAGE_RECONCILED",
+        "FRESH_DESKTOP_AND_MOBILE_CAPTURES",
+        "OWNER_VISUAL_ACCEPTANCE"
       ],
       "automationCanCloseWithoutExternalChange": false
     },
@@ -261,6 +274,7 @@
     }
   ],
   "executionOrder": [
+    "owner-visual-reconciliation-current",
     "external-validation-real-devices",
     "production-read-only-confirmation",
     "controlled-dev-d1-apply-only-after-explicit-approval",
@@ -282,7 +296,7 @@
     "AUTOMATION_NEVER_EQUALS_LEGAL_OR_PUBLISHER_APPROVAL"
   ],
   "testedCandidateCommit": "db8ebf50ba4ff593fd73b27e72075b4f8088686a",
-  "latestCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-07-1320.md",
+  "latestCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-07-P0-RIGHTS-FR-EU.md",
   "latestReadOnlyProbe": {
     "runId": 37532315393,
     "jobId": 112504495423,
@@ -416,5 +430,11 @@
     "latestCloudflareRuntimeProofCommit": "7ef0c89a13539b6060b51d604717c40b5cf5168b",
     "docsOnlyDelta": true,
     "note": "The governance merge after the Cloudflare runtime proof changed only checkpoint/handoff files; runtime proof remains applicable."
+  },
+  "visualReconciliation": {
+    "status": "BLOQUÉ",
+    "evidence": "docs/MODARYX-V2-VISUAL-RECONCILIATION-20261008.md",
+    "workHandoff": "docs/MODARYX-V2-WORK-VISUAL-RECONCILIATION-HANDOFF-20261008.md",
+    "ownerAcceptedCurrentV2": false
   }
 }
