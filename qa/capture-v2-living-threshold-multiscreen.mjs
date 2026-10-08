@@ -138,10 +138,10 @@ async function capture(file, width, height, expectedText) {
     const focusText = Array.isArray(expectedText) ? expectedText[0] : expectedText;
     const located = await evaluate(`(() => {
       const text = ${JSON.stringify(String(focusText || "").toLocaleLowerCase("fr"))};
-      const nodes = [...document.querySelectorAll('h1,h2,h3,h4,p,strong,span,small,button')];
+      const nodes = [...document.querySelectorAll('main *')];
       const match = nodes.find(el => (el.textContent || '').trim().toLocaleLowerCase('fr').includes(text) &&
         ![...el.children].some(c => (c.textContent || '').toLocaleLowerCase('fr').includes(text)) &&
-        getComputedStyle(el).display !== 'none' && el.getBoundingClientRect().width > 0);
+        getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden' && el.getBoundingClientRect().width > 0);
       if (!match) return false;
       match.scrollIntoView({block:'center', inline:'nearest', behavior:'instant'});
       return true;
