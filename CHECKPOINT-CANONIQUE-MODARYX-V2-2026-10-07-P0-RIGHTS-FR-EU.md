@@ -733,3 +733,43 @@ Règles :
 Gate commerciale : **EN COURS**.
 
 Aucun analytics, paiement, provider production, DNS, D1/R2 production ou cutover activé.
+
+
+---
+
+## 26. Processus droits utilisateur / données — 2026-10-08
+
+Documents :
+- `docs/MODARYX-V2-DATA-SUBJECT-RIGHTS-PROCESS-CANDIDATE-20261008.md`
+- `docs/MODARYX-V2-DATA-SUBJECT-RIGHTS-PROCESS-CANDIDATE-20261008.json`
+
+Le contrat prépare :
+- accès ;
+- rectification ;
+- effacement ;
+- portabilité/export ;
+- opposition ;
+- limitation ;
+- retrait du consentement ;
+- fermeture de compte ;
+- information sur traitements ;
+- contestation de décision automatisée si applicable.
+
+Principes :
+- vérification d’identité proportionnée ;
+- pas de hard-delete global ;
+- export sans secrets ni données d’autres utilisateurs ;
+- propagation aux providers réels seulement ;
+- aucune simulation de provider ;
+- délais/base juridique/exceptions finales : **LEGAL_REVIEW_REQUIRED** ;
+- privacy by design et minimisation.
+
+État :
+- contrat de processus : **TERMINÉ**
+- implémentation backend : **PREUVE MANQUANTE**
+- canal public : **PREUVE MANQUANTE**
+- règles table→droit : **LEGAL_REVIEW_REQUIRED**
+- délais finaux : **LEGAL_REVIEW_REQUIRED**
+- test end-to-end : **PREUVE MANQUANTE**
+
+Aucune suppression production, provider, collecte ou texte juridique final activé.
