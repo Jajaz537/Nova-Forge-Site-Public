@@ -1,0 +1,549 @@
+/* MODARYX V2 — Premium reconciliation R4
+   Owner feedback: current internal pages still read as an old/mockup dashboard.
+   Visual/composition only: no routes, data, behavior, entitlements, backend or assets changed. */
+
+:root{
+  --r4-canvas:#06111b;
+  --r4-surface:rgba(8,24,36,.72);
+  --r4-surface-strong:rgba(8,24,36,.92);
+  --r4-line:rgba(144,187,220,.11);
+  --r4-cyan:rgba(79,211,255,.92);
+  --r4-violet:rgba(139,99,255,.84);
+  --r4-warm:rgba(239,178,108,.86);
+  --r4-shadow:0 34px 90px rgba(0,0,0,.30);
+}
+
+.games-index,
+.collections-page,
+.creators-page,
+.catalog,
+.community,
+.account-center{
+  position:relative;
+  isolation:isolate;
+}
+
+.games-index::after,
+.collections-page::after,
+.creators-page::after,
+.catalog::after,
+.community::after,
+.account-center::after{
+  left:0;
+  right:0;
+  top:80px;
+  height:520px;
+  background:
+    radial-gradient(circle at 14% 16%,rgba(61,190,255,.11),transparent 34rem),
+    radial-gradient(circle at 78% 6%,rgba(139,99,255,.10),transparent 31rem),
+    radial-gradient(circle at 58% 74%,rgba(239,178,108,.035),transparent 22rem);
+  filter:blur(10px);
+  opacity:.78;
+}
+
+.games-index::before,
+.collections-page::before,
+.creators-page::before,
+.catalog::before,
+.community::before,
+.account-center::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:72px 0 auto;
+  height:540px;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.014),transparent 46%),
+    linear-gradient(90deg,rgba(79,211,255,.025),transparent 22%,transparent 73%,rgba(139,99,255,.025));
+  mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.96) 58%,transparent 100%);
+}
+
+.page-section>h1,
+.catalog-title h1{
+  max-width:980px;
+  text-wrap:balance;
+  text-shadow:0 18px 48px rgba(0,0,0,.22);
+}
+
+.page-section>.page-intro,
+.catalog-title p{
+  max-width:760px;
+}
+
+/* The support block becomes a contextual signal rather than another dashboard panel. */
+.game-support-request{
+  margin:26px 0 34px;
+  border:0;
+  border-left:2px solid rgba(79,211,255,.48);
+  border-radius:0 18px 18px 0;
+  background:
+    radial-gradient(circle at 88% 15%,rgba(139,99,255,.075),transparent 18rem),
+    linear-gradient(90deg,rgba(79,211,255,.055),rgba(8,24,36,.34) 34%,rgba(8,24,36,.16));
+  box-shadow:none;
+  padding:20px 24px;
+}
+
+.game-support-request>.quiet{
+  background:rgba(6,20,31,.52);
+  border-color:rgba(133,174,206,.14);
+}
+
+/* Search/sort controls should float in the scene, not create a second full-width box. */
+.index-tools,
+.catalog-tools,
+.collection-tools,
+.creators-search{
+  gap:12px;
+  margin-top:30px;
+  margin-bottom:30px;
+}
+
+.index-tools::before,
+.catalog-tools::before,
+.collection-tools::before{
+  inset:-6px -8px;
+  border-color:transparent;
+  background:linear-gradient(180deg,rgba(8,23,35,.22),rgba(6,17,27,.08));
+  box-shadow:none;
+}
+
+.catalog-search,
+.sort-control,
+.global-search-field{
+  border-color:rgba(127,170,203,.15);
+  background:rgba(5,19,30,.58);
+  box-shadow:inset 0 1px rgba(255,255,255,.025),0 10px 28px rgba(0,0,0,.10);
+  backdrop-filter:blur(12px);
+}
+
+/* Media must remain visually intentional even when the content sprite itself is subtle. */
+.game-card>.media,
+.collection-card>.media,
+.creator-index-card>.media,
+.catalog-grid>.content-card>.media{
+  position:relative;
+  isolation:isolate;
+  background-color:#0a1824;
+}
+
+.game-card>.media::before,
+.collection-card>.media::before,
+.creator-index-card>.media::before,
+.catalog-grid>.content-card>.media::before{
+  content:"";
+  position:absolute;
+  inset:auto -8% -24% -8%;
+  height:68%;
+  z-index:1;
+  clip-path:polygon(0 68%,12% 50%,24% 63%,38% 28%,52% 58%,65% 36%,77% 57%,90% 33%,100% 49%,100% 100%,0 100%);
+  background:linear-gradient(180deg,rgba(11,23,34,.42),rgba(3,9,15,.96));
+  filter:drop-shadow(0 -18px 38px rgba(0,0,0,.20));
+  pointer-events:none;
+}
+
+.game-card>.media::after,
+.collection-card>.media::after,
+.creator-index-card>.media::after,
+.catalog-grid>.content-card>.media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.025),transparent 30%),
+    linear-gradient(0deg,rgba(3,12,20,.72),transparent 58%);
+  pointer-events:none;
+}
+
+.atmosphere-aetherlands>.media{
+  background-image:
+    radial-gradient(circle at 72% 24%,rgba(109,215,255,.30),transparent 19rem),
+    radial-gradient(circle at 38% 14%,rgba(113,104,255,.17),transparent 22rem),
+    linear-gradient(145deg,#173e56 0%,#0d2437 42%,#08131f 100%),
+    url('/assets/living-threshold-content-sheet.png');
+  background-size:auto,auto,auto,300% 200%;
+  background-position:center,center,center,0% 0%;
+  background-blend-mode:screen,screen,normal,soft-light;
+}
+
+.atmosphere-rivenfall>.media{
+  background-image:
+    radial-gradient(circle at 28% 24%,rgba(69,224,178,.23),transparent 18rem),
+    radial-gradient(circle at 78% 18%,rgba(117,91,255,.16),transparent 20rem),
+    linear-gradient(145deg,#123a38 0%,#102737 46%,#08131f 100%),
+    url('/assets/living-threshold-content-sheet.png');
+  background-size:auto,auto,auto,300% 200%;
+  background-position:center,center,center,50% 0%;
+  background-blend-mode:screen,screen,normal,soft-light;
+}
+
+.atmosphere-solstice>.media{
+  background-image:
+    radial-gradient(circle at 70% 24%,rgba(255,188,98,.28),transparent 18rem),
+    radial-gradient(circle at 28% 18%,rgba(117,91,255,.10),transparent 20rem),
+    linear-gradient(145deg,#4b2919 0%,#222137 45%,#08131f 100%),
+    url('/assets/living-threshold-content-sheet.png');
+  background-size:auto,auto,auto,300% 200%;
+  background-position:center,center,center,100% 0%;
+  background-blend-mode:screen,screen,normal,soft-light;
+}
+
+.collection-card>.media,
+.creator-index-card>.media,
+.catalog-grid>.content-card>.media{
+  background-image:
+    radial-gradient(circle at 70% 22%,rgba(79,211,255,.16),transparent 17rem),
+    radial-gradient(circle at 25% 10%,rgba(139,99,255,.13),transparent 19rem),
+    url('/assets/living-threshold-content-sheet.png');
+  background-size:auto,auto,300% 200%;
+  background-blend-mode:screen,screen,soft-light;
+}
+
+/* Index pages become editorial scenes, not a SaaS card grid. */
+@media (min-width:1101px){
+  .games-index .game-grid,
+  .collections-page .collection-grid,
+  .creators-page .creator-index-grid{
+    grid-template-columns:repeat(12,minmax(0,1fr));
+    gap:24px;
+  }
+
+  .games-index .game-card:first-child,
+  .collections-page .collection-card:first-child,
+  .creators-page .creator-index-card:first-child{
+    grid-column:1/-1;
+    min-height:430px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    position:relative;
+    overflow:hidden;
+  }
+
+  .games-index .game-card:first-child>.media,
+  .collections-page .collection-card:first-child>.media,
+  .creators-page .creator-index-card:first-child>.media{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+  }
+
+  .games-index .game-card:first-child>div,
+  .collections-page .collection-card:first-child>div,
+  .creators-page .creator-index-card:first-child>div{
+    position:relative;
+    z-index:4;
+    align-self:end;
+    width:min(66%,760px);
+    min-height:0;
+    margin:0;
+    padding:140px 34px 32px;
+    background:
+      linear-gradient(90deg,rgba(3,13,21,.98) 0%,rgba(3,13,21,.92) 62%,rgba(3,13,21,0) 100%);
+  }
+
+  .games-index .game-card:first-child h2,
+  .collections-page .collection-card:first-child h2,
+  .creators-page .creator-index-card:first-child h2{
+    font-size:clamp(34px,3.1vw,48px);
+    line-height:1.02;
+    margin-top:10px;
+  }
+
+  .games-index .game-card:not(:first-child),
+  .collections-page .collection-card:not(:first-child),
+  .creators-page .creator-index-card:not(:first-child){
+    grid-column:span 6;
+  }
+
+  .games-index .game-card:not(:first-child)>.media,
+  .collections-page .collection-card:not(:first-child)>.media,
+  .creators-page .creator-index-card:not(:first-child)>.media{
+    height:260px;
+  }
+}
+
+.game-card,
+.collection-card,
+.creator-index-card,
+.catalog-grid>.content-card{
+  border-color:rgba(133,177,211,.10);
+  background:linear-gradient(180deg,rgba(9,28,41,.92),rgba(4,16,26,.97));
+  box-shadow:0 18px 58px rgba(0,0,0,.16);
+}
+
+.game-card:hover,
+.collection-card:hover,
+.creator-index-card:hover,
+.catalog-grid>.content-card:hover{
+  border-color:rgba(79,211,255,.20);
+  box-shadow:var(--r4-shadow);
+}
+
+.game-card>div,
+.collection-card>div,
+.creator-index-card>div,
+.catalog-grid>.content-card .card-copy{
+  background:
+    radial-gradient(circle at 88% 10%,rgba(79,211,255,.035),transparent 11rem),
+    linear-gradient(180deg,rgba(8,25,38,.91),rgba(4,16,26,.98));
+}
+
+/* Collections/creator metadata should read like editorial notes, not nested form fields. */
+.collection-card dl{
+  margin-top:18px;
+}
+
+.collection-card dl>div{
+  padding:9px 0;
+  border-top-color:rgba(144,187,220,.075);
+}
+
+.collection-capability,
+.creator-trust-note{
+  margin-top:17px;
+  border:0;
+  border-left:2px solid rgba(79,211,255,.34);
+  border-radius:0 12px 12px 0;
+  background:linear-gradient(90deg,rgba(79,211,255,.055),rgba(5,18,28,.12));
+  padding:12px 14px;
+}
+
+/* Community: remove the giant generic outer panel. The conversation itself becomes the composition. */
+.community-tabs{
+  margin-top:30px;
+  gap:8px;
+}
+
+.community-tabs button{
+  border-color:rgba(135,177,209,.12);
+  background:rgba(7,22,34,.48);
+  border-radius:999px;
+  padding-inline:18px;
+}
+
+.community-tabs button.active{
+  background:linear-gradient(135deg,rgba(79,211,255,.13),rgba(139,99,255,.10));
+  border-color:rgba(79,211,255,.32);
+  box-shadow:0 12px 32px rgba(0,0,0,.12);
+}
+
+.community-board{
+  margin-top:24px;
+  border:0;
+  background:transparent;
+  box-shadow:none;
+  border-radius:0;
+  padding:18px 0 0;
+}
+
+@media (min-width:961px){
+  .community-board:has(>.community-list),
+  .community-board:has(>.community-teams),
+  .community-board:has(>.activity-list){
+    grid-template-columns:minmax(280px,.68fr) minmax(0,1.32fr);
+    gap:44px;
+    padding:18px 0 0;
+  }
+
+  .community-list,
+  .community-teams,
+  .activity-list{
+    display:grid;
+    gap:12px;
+  }
+
+  .community-list article,
+  .community-teams article,
+  .activity-list article{
+    border:0;
+    border-left:2px solid rgba(79,211,255,.24);
+    border-radius:0 16px 16px 0;
+    background:
+      radial-gradient(circle at 92% 20%,rgba(139,99,255,.055),transparent 12rem),
+      linear-gradient(90deg,rgba(9,29,43,.80),rgba(7,23,35,.50));
+    box-shadow:0 18px 48px rgba(0,0,0,.11);
+    padding:20px 22px;
+  }
+}
+
+/* Account: quiet settings rail, no giant dashboard rectangle around the whole page. */
+@media (min-width:1051px){
+  .account-shell{
+    grid-template-columns:220px minmax(0,1fr);
+    gap:42px;
+    margin-top:34px;
+  }
+
+  .account-nav{
+    align-self:start;
+    position:sticky;
+    top:94px;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+    padding:4px 0;
+  }
+
+  .account-nav button{
+    min-height:48px;
+    padding:0 16px;
+    border:0;
+    border-radius:0;
+    background:transparent;
+    color:#91a6ba;
+  }
+
+  .account-nav button.active{
+    color:#f1f8ff;
+    background:linear-gradient(90deg,rgba(79,211,255,.065),transparent 82%);
+  }
+
+  .account-panel{
+    position:relative;
+    overflow:hidden;
+    border:0;
+    border-radius:20px;
+    background:
+      radial-gradient(circle at 88% 12%,rgba(139,99,255,.065),transparent 20rem),
+      linear-gradient(180deg,rgba(9,28,42,.76),rgba(5,18,28,.86));
+    box-shadow:0 28px 80px rgba(0,0,0,.18);
+    padding:38px 40px;
+  }
+
+  .account-panel::before{
+    content:"";
+    position:absolute;
+    inset:0 auto 0 0;
+    width:2px;
+    background:linear-gradient(180deg,rgba(79,211,255,.62),rgba(139,99,255,.12));
+  }
+}
+
+/* Game Hub and catalog lists: reduce rows-as-table impression. */
+.hub-content-row{
+  border-color:rgba(137,180,213,.09);
+  background:linear-gradient(90deg,rgba(8,25,38,.72),rgba(6,20,31,.42));
+  box-shadow:0 14px 40px rgba(0,0,0,.09);
+}
+
+.hub-content-row:hover{
+  border-color:rgba(79,211,255,.20);
+  background:linear-gradient(90deg,rgba(10,32,47,.82),rgba(7,24,36,.52));
+}
+
+.profiles-rail{
+  border-left-color:rgba(137,180,213,.09);
+}
+
+.profile-row{
+  border-color:rgba(137,180,213,.09);
+  background:rgba(7,22,34,.52);
+}
+
+/* Buttons remain obvious, but secondary actions stop looking like form widgets. */
+.quiet,
+.catalog-tools>button,
+.collection-mode-tabs button,
+.detail-tabs button{
+  border-color:rgba(130,173,206,.13);
+  background:rgba(6,21,32,.46);
+}
+
+.collection-mode-tabs{
+  margin-top:28px;
+}
+
+.collection-mode-tabs button{
+  border-radius:999px;
+  padding-inline:18px;
+}
+
+.collection-mode-tabs button.active{
+  background:linear-gradient(135deg,rgba(79,211,255,.12),rgba(139,99,255,.10));
+  border-color:rgba(79,211,255,.28);
+}
+
+/* Mobile keeps the same hierarchy but removes desktop-style framing. */
+@media (max-width:1100px){
+  .games-index .game-grid,
+  .collections-page .collection-grid,
+  .creators-page .creator-index-grid,
+  .catalog .catalog-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px;
+  }
+
+  .games-index .game-card:first-child,
+  .collections-page .collection-card:first-child,
+  .creators-page .creator-index-card:first-child,
+  .catalog .catalog-grid>.content-card:first-child{
+    grid-column:1/-1;
+  }
+}
+
+@media (max-width:760px){
+  .games-index::after,
+  .collections-page::after,
+  .creators-page::after,
+  .catalog::after,
+  .community::after,
+  .account-center::after{
+    top:72px;
+    height:360px;
+    filter:blur(6px);
+  }
+
+  .game-support-request{
+    margin:22px 0 28px;
+    padding:18px;
+  }
+
+  .games-index .game-grid,
+  .collections-page .collection-grid,
+  .creators-page .creator-index-grid,
+  .catalog .catalog-grid{
+    grid-template-columns:1fr;
+  }
+
+  .game-card>.media,
+  .collection-card>.media,
+  .creator-index-card>.media{
+    height:230px;
+  }
+
+  .community-board{
+    padding-top:8px;
+  }
+
+  .community-tabs{
+    display:flex;
+    overflow-x:auto;
+    padding-bottom:4px;
+  }
+
+  .community-tabs button{
+    flex:0 0 auto;
+  }
+
+  .account-panel{
+    border-color:rgba(136,177,210,.10);
+    background:linear-gradient(180deg,rgba(8,25,38,.76),rgba(5,18,28,.88));
+    box-shadow:0 20px 54px rgba(0,0,0,.16);
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .game-card,
+  .collection-card,
+  .creator-index-card,
+  .catalog-grid>.content-card,
+  .game-card>.media,
+  .collection-card>.media,
+  .creator-index-card>.media,
+  .catalog-grid>.content-card>.media{
+    transition:none!important;
+    transform:none!important;
+  }
+}
