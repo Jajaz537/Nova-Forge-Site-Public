@@ -1,0 +1,340 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "TERMINÉ",
+  "purpose": "CURRENT_ANTI_FORGET_CONVERGENCE_MATRIX",
+  "sourceHead": "0136e2dd5fc30f0bc0fdd9760fefac1486df3176",
+  "rule": "Coverage completion is not subject readiness. Every retained axis is mapped to current evidence and an authorized status.",
+  "axes": [
+    {
+      "id": "brand-product-identity",
+      "coverageState": "TERMINÉ",
+      "subjectState": "EN COURS",
+      "refs": [
+        "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-07-P0-RIGHTS-FR-EU.md",
+        "docs/MODARYX-V2-PRODUCT-ARCHITECTURE-20261003.md"
+      ],
+      "remaining": [
+        "final launch identity/legal operator facts"
+      ]
+    },
+    {
+      "id": "adult-ecosystem-separation",
+      "coverageState": "TERMINÉ",
+      "subjectState": "PREUVE MANQUANTE",
+      "refs": [
+        "docs/MODARYX-ADULT-ECOSYSTEM-SEPARATION-CONTRACT-20261008.md"
+      ],
+      "remaining": [
+        "release-surface audit",
+        "cross-auth/payment/data/analytics audit"
+      ]
+    },
+    {
+      "id": "technical-vf",
+      "coverageState": "TERMINÉ",
+      "subjectState": "EN COURS",
+      "refs": [
+        "qa/modaryx-v2-vf-closure-ledger.json",
+        "qa/modaryx-v2-vf-readiness-gate.json"
+      ],
+      "remaining": [
+        "19 external blockers currently open"
+      ]
+    },
+    {
+      "id": "real-device-accessibility",
+      "coverageState": "TERMINÉ",
+      "subjectState": "PREUVE MANQUANTE",
+      "refs": [
+        "qa/modaryx-v2-external-validation-execution-pack.json",
+        "docs/MODARYX-V2-PUBLIC-LEGAL-SURFACES-READINESS-20261008.md"
+      ],
+      "remaining": [
+        "NVDA real",
+        "VoiceOver real",
+        "TalkBack real",
+        "Safari real",
+        "physical touch devices",
+        "final regulatory applicability"
+      ]
+    },
+    {
+      "id": "security",
+      "coverageState": "TERMINÉ",
+      "subjectState": "EN COURS",
+      "refs": [
+        "docs/MODARYX-V2-THREAT-MODEL-20261003.md",
+        "docs/MODARYX-V2-OPERATIONAL-READINESS-CANDIDATE-20261008.md",
+        "docs/MODARYX-V2-DATA-BREACH-INCIDENT-PROCESS-CANDIDATE-20261008.md"
+      ],
+      "remaining": [
+        "production monitoring",
+        "restore/rollback proof",
+        "incident ownership",
+        "production security proof"
+      ]
+    },
+    {
+      "id": "privacy-data-inventory",
+      "coverageState": "TERMINÉ",
+      "subjectState": "EN COURS",
+      "refs": [
+        "docs/MODARYX-V2-DATA-PROCESSING-INVENTORY-20261007.md",
+        "docs/MODARYX-V2-PRIVACY-TABLE-FIELD-REGISTER-CANDIDATE-20261007.json"
+      ],
+      "remaining": [
+        "final production data-flow reconciliation"
+      ]
+    },
+    {
+      "id": "privacy-legal-bases-retention-rights",
+      "coverageState": "TERMINÉ",
+      "subjectState": "PREUVE MANQUANTE",
+      "refs": [
+        "docs/MODARYX-V2-PRIVACY-LEGAL-BASIS-MATRIX-CANDIDATE-20261007.md",
+        "docs/MODARYX-V2-RETENTION-SCHEDULE-CANDIDATE-20261007.md",
+        "docs/MODARYX-V2-DATA-SUBJECT-RIGHTS-PROCESS-CANDIDATE-20261008.md"
+      ],
+      "remaining": [
+        "controller facts",
+        "final legal bases",
+        "durations",
+        "public rights channel",
+        "legal review"
+      ]
+    },
+    {
+      "id": "processors-transfers",
+      "coverageState": "TERMINÉ",
+      "subjectState": "PREUVE MANQUANTE",
+      "refs": [
+        "docs/MODARYX-V2-PROCESSOR-SUBPROCESSOR-REGISTER-CANDIDATE-20261008.md"
+      ],
+      "remaining": [
+        "final providers",
+        "role qualification",
+        "DPA",
+        "subprocessors",
+        "transfers",
+        "contract clauses"
+      ]
+    },
+    {
+      "id": "cookies-trackers-consent",
+      "coverageState": "TERMINÉ",
+      "subjectState": "EN COURS",
+      "refs": [
+        "docs/MODARYX-V2-COOKIE-STORAGE-TRACKER-STATIC-INVENTORY-20261008.md",
+        "docs/MODARYX-V2-COOKIE-CONSENT-CMP-CANDIDATE-20261008.md"
+      ],
+      "remaining": [
+        "runtime inventory",
+        "final classifications",
+        "CMP implementation if needed",
+        "consent/accessibility/legal proof"
+      ]
+    },
+    {
+      "id": "privacy-notice",
+      "coverageState": "TERMINÉ",
+      "subjectState": "PREUVE MANQUANTE",
+      "refs": [
+        "docs/MODARYX-V2-PRIVACY-NOTICE-CANDIDATE-20261008.md"
+      ],
+      "remaining": [
+        "mandatory real facts",
+        "legal review",
+        "final publication"
+      ]
+    },
+    {
+      "id": "ugc-moderation-dsa",
+      "coverageState": "TERMINÉ",
+      "subjectState": "EN COURS",
+      "refs": [
+        "docs/MODARYX-V2-MODERATION-APPEALS-CONTRACT-20261003.md",
+        "docs/MODARYX-V2-DSA-ROLE-QUALIFICATION-WORKSHEET-20261007.md"
+      ],
+      "remaining": [
+        "real production role",
+        "audience/age",
+        "staffing",
+        "final notice-and-action",
+        "legal qualification"
+      ]
+    },
+    {
+      "id": "rights-licences-ip",
+      "coverageState": "TERMINÉ",
+      "subjectState": "BLOQUÉ",
+      "refs": [
+        "docs/MODARYX-V2-ASSET-RIGHTS-REGISTER-20261007.json",
+        "docs/MODARYX-V2-RIGHTS-EVIDENCE-PREFLIGHT-20261006.md",
+        "docs/MODARYX-V2-OSS-DEPENDENCY-INVENTORY-20261007.md",
+        "docs/MODARYX-V2-AUTHORIZING-RIGHTS-DECISION-20261006.md"
+      ],
+      "remaining": [
+        "commercial rights for PRODUCT assets",
+        "publisher/mod rights",
+        "trademark clearance",
+        "final third-party notice at release SHA"
+      ]
+    },
+    {
+      "id": "free-premium-product-value",
+      "coverageState": "TERMINÉ",
+      "subjectState": "EN COURS",
+      "refs": [
+        "docs/MODARYX-V2-COMMERCIAL-VIABILITY-KPI-MODEL-20261008.md",
+        "docs/MODARYX-V2-PRICING-VALIDATION-PROTOCOL-20261007.md"
+      ],
+      "remaining": [
+        "field value evidence",
+        "activation",
+        "retention",
+        "recurrent Premium value"
+      ]
+    },
+    {
+      "id": "pricing-economics",
+      "coverageState": "TERMINÉ",
+      "subjectState": "PREUVE MANQUANTE",
+      "refs": [
+        "docs/MODARYX-V2-COST-PRICING-PAYMENT-REFRESH-20261007.md",
+        "docs/MODARYX-V2-UNIT-ECONOMICS-CANDIDATE-20261007.md",
+        "docs/MODARYX-V2-LAUNCH-PILOT-GO-NO-GO-PROTOCOL-20261008.md"
+      ],
+      "remaining": [
+        "real costs",
+        "field willingness-to-pay",
+        "conversion/churn",
+        "CAC/LTV",
+        "owner decision"
+      ]
+    },
+    {
+      "id": "payment-refunds-tax-invoicing",
+      "coverageState": "TERMINÉ",
+      "subjectState": "BLOQUÉ",
+      "refs": [
+        "docs/MODARYX-V2-PAYMENT-RAIL-COMPARISON-20261007.md",
+        "docs/MODARYX-V2-TAX-INVOICING-MEDIATION-CANCELLATION-READINESS-20261008.md",
+        "docs/MODARYX-V2-PUBLIC-LEGAL-SURFACES-READINESS-20261008.md"
+      ],
+      "remaining": [
+        "seller",
+        "offer",
+        "PSP/MoR",
+        "tax model",
+        "refund flow",
+        "invoicing",
+        "consumer mediator"
+      ]
+    },
+    {
+      "id": "support-fraud-operations",
+      "coverageState": "TERMINÉ",
+      "subjectState": "PREUVE MANQUANTE",
+      "refs": [
+        "docs/MODARYX-V2-OPERATIONAL-READINESS-CANDIDATE-20261008.md"
+      ],
+      "remaining": [
+        "real channels",
+        "owners/staffing",
+        "restore drill",
+        "monitoring",
+        "incident escalation",
+        "release owner"
+      ]
+    },
+    {
+      "id": "public-legal-surfaces",
+      "coverageState": "TERMINÉ",
+      "subjectState": "BLOQUÉ",
+      "refs": [
+        "docs/MODARYX-V2-PUBLIC-LEGAL-SURFACES-READINESS-20261008.md",
+        "docs/MODARYX-V2-PUBLIC-LEGAL-TRUST-READINESS-20261004.md"
+      ],
+      "remaining": [
+        "operator facts",
+        "final CGU/CGV/legal notices/refund/cookie/privacy texts",
+        "legal review"
+      ]
+    },
+    {
+      "id": "international-territories",
+      "coverageState": "TERMINÉ",
+      "subjectState": "EN COURS",
+      "refs": [
+        "docs/MODARYX-V2-INTERNATIONAL-TERRITORY-READINESS-20261008.md"
+      ],
+      "remaining": [
+        "day-1 territory owner decision",
+        "country/state/province reviews",
+        "local tax/legal/accessibility/rights"
+      ]
+    },
+    {
+      "id": "production-activation",
+      "coverageState": "TERMINÉ",
+      "subjectState": "BLOQUÉ",
+      "refs": [
+        "qa/modaryx-v2-production-activation-manifest.json",
+        "docs/MODARYX-V2-WORK-EXTERNAL-VF-HANDOFF-20261007.md"
+      ],
+      "remaining": [
+        "8 controlled-production blockers",
+        "explicit approvals",
+        "real production proofs"
+      ]
+    },
+    {
+      "id": "launch-pilot-go-no-go",
+      "coverageState": "TERMINÉ",
+      "subjectState": "PREUVE MANQUANTE",
+      "refs": [
+        "docs/MODARYX-V2-LAUNCH-PILOT-GO-NO-GO-PROTOCOL-20261008.md"
+      ],
+      "remaining": [
+        "real pilot",
+        "metrics",
+        "real costs",
+        "owner go/no-go"
+      ]
+    },
+    {
+      "id": "owner-professional-decisions",
+      "coverageState": "TERMINÉ",
+      "subjectState": "PREUVE MANQUANTE",
+      "refs": [
+        "docs/MODARYX-V2-OWNER-PROFESSIONAL-DECISION-PACKET-20261008.md"
+      ],
+      "remaining": [
+        "owner decisions",
+        "legal review",
+        "tax/accounting review",
+        "IP review"
+      ]
+    }
+  ],
+  "coverageSummary": {
+    "axisCount": 21,
+    "unmappedAxisCount": 0,
+    "allCoverageMapped": true
+  },
+  "gateSummary": {
+    "vfTechnical": "EN COURS",
+    "commercialLaunchReadiness": "EN COURS",
+    "legalCompliance": "BLOQUÉ",
+    "productionCutover": "BLOQUÉ"
+  },
+  "unresolvedClassifications": {
+    "externalVFBlockers": 19,
+    "rightsCommercial": "BLOQUÉ",
+    "ownerProfessionalDecisions": "PREUVE MANQUANTE",
+    "realPilotAndEconomics": "PREUVE MANQUANTE",
+    "productionActivation": "BLOQUÉ"
+  },
+  "finalRule": "Do not remove an axis to improve readiness. Update this matrix and canonical checkpoint whenever a mapped subject materially changes."
+}
