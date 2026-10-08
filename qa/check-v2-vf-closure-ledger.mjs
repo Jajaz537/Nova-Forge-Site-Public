@@ -43,6 +43,7 @@ for(const forbidden of ["wrangler d1 execute","--remote","curl -x post","curl -x
 
 console.log("VF_CLOSURE_LEDGER_OPEN_COUNT",open.length);
 console.log("VF_CLOSURE_LEDGER_EXTERNAL",categories["external-validation"]);
+console.log("VF_CLOSURE_LEDGER_VISUAL",categories["visual-owner"]);
 console.log("VF_CLOSURE_LEDGER_WEB",categories["web-production"]);
 console.log("VF_CLOSURE_LEDGER_RIGHTS",categories["rights-legal"]);
 console.log("PASS_V2_VF_CLOSURE_LEDGER");
