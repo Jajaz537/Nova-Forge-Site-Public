@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "COMMERCIAL_LAUNCH_PILOT_AND_GO_NO_GO_PROTOCOL",
+  "sourceHead": "c70e3abdb8259bcd342c62acb19ca2bf8d66de5d",
+  "prerequisites": {
+    "technicalPilotCandidate": "PREUVE MANQUANTE",
+    "privacyInstrumentationReview": "PREUVE MANQUANTE",
+    "legalPilotReview": "PREUVE MANQUANTE",
+    "supportOwner": "PREUVE MANQUANTE",
+    "rightsScope": "PREUVE MANQUANTE",
+    "productionLikeEnvironment": "PREUVE MANQUANTE"
+  },
+  "phases": [
+    {
+      "id": "qualitative_problem_value",
+      "state": "EN COURS",
+      "objective": "Validate real user problems and vocabulary before commercial launch.",
+      "candidates": [
+        "12–20 qualified interviews",
+        "task-based prototype sessions"
+      ],
+      "noPurchase": true
+    },
+    {
+      "id": "pricing_research",
+      "state": "EN COURS",
+      "objective": "Measure willingness-to-pay without selling.",
+      "source": "docs/MODARYX-V2-PRICING-VALIDATION-PROTOCOL-20261007.md",
+      "noPurchase": true
+    },
+    {
+      "id": "free_pilot",
+      "state": "PREUVE MANQUANTE",
+      "objective": "Measure useful workflows, activation, retention, support and trust on a genuinely useful free experience.",
+      "purchaseEnabled": false
+    },
+    {
+      "id": "controlled_commercial_pilot",
+      "state": "BLOQUÉ",
+      "objective": "Only after technical/commercial/legal gates and explicit owner decision.",
+      "purchaseEnabled": "PREUVE MANQUANTE"
+    }
+  ],
+  "acquisitionCandidate": {
+    "channelsToTestSeparately": [
+      "organic search/content",
+      "creator/community partnerships with permission",
+      "owned social/community",
+      "direct referrals",
+      "paid acquisition only after economics and privacy are ready"
+    ],
+    "prohibited": [
+      "fake urgency",
+      "fake counters/reviews",
+      "misleading influencer disclosure",
+      "spam",
+      "dark patterns",
+      "paid acquisition before attribution/privacy/cost model is ready"
+    ],
+    "realCAC": "PREUVE MANQUANTE"
+  },
+  "activationCandidate": {
+    "definition": "Complete at least one meaningful user workflow, not merely create an account.",
+    "candidateExamples": [
+      "find relevant content and understand compatibility/dependencies/provenance",
+      "save/add content to a useful collection or game profile",
+      "creator completes a meaningful publish/draft workflow"
+    ],
+    "canonicalDefinition": "EN COURS"
+  },
+  "retentionMeasurement": {
+    "candidates": [
+      "D1",
+      "D7",
+      "D30",
+      "monthly cohort"
+    ],
+    "segments": [
+      "free",
+      "Premium if it exists",
+      "creator if creator offer exists"
+    ],
+    "realData": "PREUVE MANQUANTE"
+  },
+  "conversionAndRevenue": {
+    "priceCanonical": "PREUVE MANQUANTE",
+    "offerCanonical": "PREUVE MANQUANTE",
+    "conversion": "PREUVE MANQUANTE",
+    "churn": "PREUVE MANQUANTE",
+    "arppu": "PREUVE MANQUANTE",
+    "refunds": "PREUVE MANQUANTE",
+    "chargebacks": "PREUVE MANQUANTE"
+  },
+  "costMeasurement": {
+    "infrastructure": "PREUVE MANQUANTE",
+    "providers": "PREUVE MANQUANTE",
+    "support": "PREUVE MANQUANTE",
+    "moderation": "PREUVE MANQUANTE",
+    "rightsLicences": "PREUVE MANQUANTE",
+    "complianceAccounting": "PREUVE MANQUANTE",
+    "acquisition": "PREUVE MANQUANTE"
+  },
+  "goNoGoFramework": {
+    "rules": [
+      "No launch because a calendar date was reached.",
+      "No paid launch while seller/territories/taxes/refunds/payment/legal facts are missing.",
+      "No Premium launch unless the free product is useful and Premium value is recurrent and evidenced.",
+      "No price decision from survey intent alone.",
+      "No success declaration from signup count alone.",
+      "Any threshold must be selected from observed cohorts/costs and explicit owner decision, not invented in this protocol."
+    ],
+    "evidenceDimensions": [
+      "user value",
+      "activation",
+      "retention",
+      "quality/reliability",
+      "support/moderation load",
+      "security/abuse",
+      "rights/legal",
+      "privacy/accessibility",
+      "unit economics",
+      "operational capacity"
+    ],
+    "decisionOwner": "PREUVE MANQUANTE",
+    "thresholds": "PREUVE MANQUANTE"
+  },
+  "pilotReceiptCandidate": {
+    "fields": [
+      "pilotId",
+      "commit",
+      "environment",
+      "dates",
+      "segments",
+      "participants",
+      "acquisition channels",
+      "activation definition",
+      "activation rate",
+      "D1/D7/D30",
+      "support volume",
+      "moderation volume",
+      "incidents",
+      "infra/provider costs",
+      "privacy/legal deviations",
+      "participant feedback",
+      "go/no-go decision",
+      "decision owner",
+      "decision rationale"
+    ],
+    "personalDataMinimization": true
+  },
+  "launchGate": {
+    "validatedFreeValue": "PREUVE MANQUANTE",
+    "activationRetentionReal": "PREUVE MANQUANTE",
+    "recurrentPremiumValue": "PREUVE MANQUANTE",
+    "willingnessToPayFieldData": "PREUVE MANQUANTE",
+    "realCosts": "PREUVE MANQUANTE",
+    "operationalCapacity": "PREUVE MANQUANTE",
+    "legalCommercialReadiness": "PREUVE MANQUANTE",
+    "explicitOwnerDecision": "PREUVE MANQUANTE"
+  }
+}
