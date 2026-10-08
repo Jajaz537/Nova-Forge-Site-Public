@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "TERMINÉ",
+  "candidate": "MODARYX_V2_PREMIUM_LIVING_ATLAS_R16",
+  "productMergePr": 282,
+  "productMergeSha": "4a993d94a386ac0fd5cc8dcb27bd0482c1a2dcda",
+  "candidateSha": "994aeeae317015fbfb6d8d271655d00b4ef2f250",
+  "architecturePreserved": true,
+  "visualOnly": true,
+  "proofs": {
+    "r15": {
+      "runId": 37767448754,
+      "jobId": 113278446863,
+      "conclusion": "success",
+      "artifactId": 11545606513,
+      "artifactName": "modaryx-v2-premium-reconciliation-visual-r15",
+      "digest": "sha256:ff8edeaa2cb37c12e88571c2c1298e2672c442762b64db8381258c87baefc3f2",
+      "captureCount": 16,
+      "desktopCount": 8,
+      "mobileCount": 8,
+      "build": "TERMINÉ",
+      "testsSites": "TERMINÉ"
+    },
+    "r16": {
+      "runId": 37768198037,
+      "jobId": 113280917134,
+      "conclusion": "success",
+      "artifactId": 11545572439,
+      "artifactName": "modaryx-v2-premium-reconciliation-visual-r16",
+      "digest": "sha256:e95ac03ded1b316ed3c743418aa68778f9f691ef6590e2da58c7a3ff062ee72f",
+      "captureCount": 16,
+      "desktopCount": 8,
+      "mobileCount": 8,
+      "desktopViewport": "1440x1024",
+      "mobileViewport": "390x844",
+      "build": "TERMINÉ",
+      "testsSites": "TERMINÉ"
+    }
+  },
+  "changes": [
+    "structural editorial composition across Discover, Games, Game Hub, Mods, Collections, Creators, Community and Account",
+    "distinct route atmospheres instead of one repeated page grammar",
+    "mobile recomposition strengthened beyond desktop shrink-down",
+    "no route/data/backend/provider/entitlement/production mutation"
+  ],
+  "assistantVisualInspection": {
+    "status": "TERMINÉ_SUPPORT_ONLY",
+    "result": "R16 is materially more differentiated than R14/R15, especially Games/Mods/Collections/Creators on mobile and Community/Account on desktop.",
+    "limitations": [
+      "assistant inspection is supportive only",
+      "owner acceptance remains required",
+      "commercial rights for current visual assets remain separately blocked"
+    ]
+  },
+  "gate": {
+    "id": "owner-visual-reconciliation-current",
+    "state": "OPEN",
+    "ownerAcceptance": "PREUVE MANQUANTE"
+  }
+}
