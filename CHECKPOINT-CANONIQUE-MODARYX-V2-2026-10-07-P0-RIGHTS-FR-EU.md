@@ -1842,3 +1842,83 @@ Aucun PASS VF final n'est dérivé de cette tranche.
 - LAUNCH-READINESS COMMERCIALE : **EN COURS**
 - LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
 - PRODUCTION / CUTOVER : **BLOQUÉ**
+
+
+---
+
+## 48. Premium reconciliation R19 — Integrated Realms intégré — 2026-10-08
+
+Retour propriétaire de référence :
+le site ressemble encore à l'ancien design / à une maquette.
+
+### Produit
+
+PR :
+- **#286**
+- merge SHA : `fefdac20f85abf115f35165a52ad5ad62fb05e4c`
+
+Candidat source :
+- `27ccec51876df6025a53986f3c3079beb0f42e92`
+
+Portée :
+- `v2/src/premium-reconciliation-r18.css`
+- `v2/src/premium-reconciliation-r19.css`
+- imports correspondants dans `v2/src/main.jsx`
+- aucune route, donnée, backend, entitlement ou production modifiés ;
+- aucun nouvel asset binaire.
+
+Direction :
+- univers continu plus présent sur Jeux / Collections / Créateurs / Communauté / Compte ;
+- réduction des grands vides sombres ;
+- Communauté et Compte intégrés au décor au lieu de lire comme des dashboards encadrés ;
+- contrôles Jeux / Mods / Créateurs moins « cartes SaaS » ;
+- mobile recomposé avec la même hiérarchie.
+
+### Preuve fraîche
+
+Run :
+- `37786429766`
+- conclusion : **success**
+- artifact id : `11554507456`
+- digest : `sha256:b3bb9b624ccfbbbc18eb12cf767a746c08b5bb832b2091f5404570a5f48331a9`
+- build : **TERMINÉ**
+- `test:sites` : **TERMINÉ**
+- captures : **16/16**
+  - 8 desktop 1440×1024
+  - 8 mobile 390×844
+
+Preuve machine-readable :
+`docs/MODARYX-V2-PREMIUM-RECONCILIATION-R19-EVIDENCE-20261008.json`.
+
+### Inspection visuelle support
+
+Inspection assistant : **TERMINÉE en support uniquement**.
+
+R19 est objectivement distinct de R17/R18 sur la composition :
+- les paysages occupent réellement les premières vues de Jeux et Collections ;
+- Communauté devient une composition éditoriale à deux plans ;
+- Compte devient un atelier intégré à l'univers ;
+- la répétition de grands panneaux rectangulaires est réduite ;
+- mobile reste lisible sans simple réduction desktop.
+
+Cette inspection ne remplace pas la décision du propriétaire.
+
+### Gate propriétaire
+
+- `owner-visual-reconciliation-current` : **BLOQUÉ / OPEN**
+- candidat courant : **R19**
+- implémentation : **TERMINÉ**
+- preuve visuelle fraîche : **TERMINÉ**
+- acceptation propriétaire : **PREUVE MANQUANTE**
+
+Aucun PASS VF final n'est dérivé de cette tranche.
+
+### Gates
+
+- VF TECHNIQUE : **EN COURS**
+- DIRECTION VISUELLE : **BLOQUÉ**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+- PRODUCTION / CUTOVER : **BLOQUÉ**
+
+Aucune mutation `main`, DNS, D1/R2 production, provider production, paiement, PWA production, field CWV, indexability ou cutover.

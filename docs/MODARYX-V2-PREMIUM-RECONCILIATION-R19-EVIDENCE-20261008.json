@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "status": "TERMINÉ",
+  "candidate": "MODARYX V2 Premium Reconciliation R19 — Integrated Realms",
+  "productBranch": "design/modaryx-v2-blue-violet-product-20261005",
+  "productMergeSha": "fefdac20f85abf115f35165a52ad5ad62fb05e4c",
+  "sourceCandidateSha": "27ccec51876df6025a53986f3c3079beb0f42e92",
+  "proof": {
+    "runId": 37786429766,
+    "conclusion": "success",
+    "artifact": {
+      "id": 11554507456,
+      "name": "modaryx-v2-premium-reconciliation-visual-r19-r1",
+      "digest": "sha256:b3bb9b624ccfbbbc18eb12cf767a746c08b5bb832b2091f5404570a5f48331a9"
+    },
+    "build": "TERMINÉ",
+    "testSites": "TERMINÉ",
+    "captureCount": 16,
+    "desktopCount": 8,
+    "mobileCount": 8
+  },
+  "scope": {
+    "changedFiles": [
+      "v2/src/main.jsx",
+      "v2/src/premium-reconciliation-r18.css",
+      "v2/src/premium-reconciliation-r19.css"
+    ],
+    "functionalChanges": false,
+    "newAssets": false,
+    "productionChanges": false
+  },
+  "ownerFeedbackAddressed": "Le site ressemble encore à l'ancien design / à une maquette.",
+  "visualIntent": [
+    "living realm continuity across non-Discover routes",
+    "less SaaS-card/dashboard composition",
+    "community and account integrated into the environment",
+    "stronger first-screen artwork and reduced dead dark zones",
+    "mobile remains composed rather than desktop shrink"
+  ],
+  "ownerVisualGate": {
+    "state": "PREUVE MANQUANTE",
+    "blockerId": "owner-visual-reconciliation-current",
+    "note": "Technical and assistant visual inspection do not replace explicit owner acceptance."
+  },
+  "files": [
+    {
+      "file": "desktop-account-1440x1024.png",
+      "sha256": "16fc5a1b3bd01eaaf57589a1dc824b1e684fb1e900e4b3cd5cd2c456f9a8fcf4"
+    },
+    {
+      "file": "desktop-collections-1440x1024.png",
+      "sha256": "e22043c9bc3faedadbc11fae8c0f669cebdf9a1e4d46230c1c7527dcd0a8e44a"
+    },
+    {
+      "file": "desktop-community-1440x1024.png",
+      "sha256": "607bff82697f54f50e15bffb57128293cca6ef5e360d56a48c4055c3ff253ce8"
+    },
+    {
+      "file": "desktop-creators-1440x1024.png",
+      "sha256": "8b0b057b812ae004efa4a7418744f97a0f616267428973fa27e5ab16a01d555a"
+    },
+    {
+      "file": "desktop-discover-1440x1024.png",
+      "sha256": "e0cd4d8a6ed827ffa53b43b6333c69be4cf9512a708f606be8446935ab6d04da"
+    },
+    {
+      "file": "desktop-games-1440x1024.png",
+      "sha256": "fcb10de6553d99c57bfbfa47f15d7be88840e96a9181ac71c908fea5b656c356"
+    },
+    {
+      "file": "desktop-games-aetherlands-1440x1024.png",
+      "sha256": "80acfe33fd7e39b1c5f2e192831ee9a72fb270bb0f2db86f07e492ccd77ebf2d"
+    },
+    {
+      "file": "desktop-mods-1440x1024.png",
+      "sha256": "b78d2e065b02634879c80d90d2b545cf8a7ad89ae854a5809d7eb45fc8f22a0e"
+    },
+    {
+      "file": "mobile-account-390x844.png",
+      "sha256": "d92c28661bc77ad5f59d7d879d650de28d5b19908a67b952d9aeb5de1fabf460"
+    },
+    {
+      "file": "mobile-collections-390x844.png",
+      "sha256": "726bc86f26ca3134996cbd0a3038244cb85064eda64e0f24bafe89921f6adc96"
+    },
+    {
+      "file": "mobile-community-390x844.png",
+      "sha256": "10fe7a39168e55d73fed46f530cf03ff2e48192c078023df374fd28c0d4b46fc"
+    },
+    {
+      "file": "mobile-creators-390x844.png",
+      "sha256": "1d504088e123eb863ef167bf2ef5671eee81ea1415b1910378945236c658d150"
+    },
+    {
+      "file": "mobile-discover-390x844.png",
+      "sha256": "656eba3952dc47701e5d3e5d7bf65da655e2f0bbb5870e2164e4c7609725043f"
+    },
+    {
+      "file": "mobile-games-390x844.png",
+      "sha256": "9d44688892d18f1f91e3b48b6209c1cd26422333b0426a79e8f0c2b70ea51087"
+    },
+    {
+      "file": "mobile-games-aetherlands-390x844.png",
+      "sha256": "5841fcfc8e97fcb4101d665eac41c103bd7003f221b7b9cb8d024210c0066241"
+    },
+    {
+      "file": "mobile-mods-390x844.png",
+      "sha256": "ee06c967139740b0f080149e11f39d3149c31e7003eceb5a7d70c4a9ca94487c"
+    }
+  ]
+}
