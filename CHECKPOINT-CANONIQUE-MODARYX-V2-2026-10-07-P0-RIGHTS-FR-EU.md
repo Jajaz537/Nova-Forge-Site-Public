@@ -773,3 +773,38 @@ Principes :
 - test end-to-end : **PREUVE MANQUANTE**
 
 Aucune suppression production, provider, collecte ou texte juridique final activé.
+
+
+---
+
+## 27. Inventaire statique cookies / storage / traceurs — 2026-10-08
+
+Documents :
+- `docs/MODARYX-V2-COOKIE-STORAGE-TRACKER-STATIC-INVENTORY-20261008.md`
+- `docs/MODARYX-V2-COOKIE-STORAGE-TRACKER-STATIC-INVENTORY-20261008.json`
+
+Périmètre :
+client V2 + backend privacy-relevant au HEAD `c331966fb7e01c7b2b340f4c411160f98db5da77`.
+
+Observé :
+- cookie session first-party `modaryx_session`, `HttpOnly; Secure; SameSite=Lax`, TTL code 15 min→7 j, défaut 8 h ;
+- localStorage fonctionnel pour favoris, recherches, brouillons, collections, préférences + reçu de migration legacy ;
+- Cache Storage PWA `modaryx-v2-candidate-shell-v1`, gate production OFF par défaut ;
+- CWV/RUM first-party doublement gated, OFF par défaut, respecte DNT/GPC, credentials omit ;
+- Turnstile conditionnel uniquement quand auth + remote writes + site key sont prêts ;
+- Auth0 configurable, production non prouvée ;
+- météo server-side optionnelle, mode par défaut OFF, aucun GPS navigateur.
+
+Non observé dans le périmètre statique revu :
+- sessionStorage ;
+- IndexedDB ;
+- écriture client `document.cookie` ;
+- Google Analytics / gtag ;
+- SDK publicitaire ;
+- pixel marketing.
+
+Limite :
+preuve statique seulement ; scan bundle final + observation réseau/cookies runtime production candidate restent **PREUVE MANQUANTE**.
+
+État privacy/cookies : **EN COURS / LEGAL_REVIEW_REQUIRED**.
+Aucun CMP, analytics, PWA production, Auth0 production, météo provider ou autre service n'a été activé.
