@@ -170,7 +170,7 @@ try{
   await clickText(".game-request-form .primary","Préparer la demande locale");
   await waitText("Brouillon de demande — non envoyé");
   await waitText("Project Meridian · PC");
-  await waitText("Aucun Rights Case réel n’est créé dans ce prototype.");
+  await waitText("Aucun Rights Case réel n’est créé par ce brouillon local.");
   console.log("FLOW_ASSERT game support request local-only triage");
 
   await fill(".games-index .catalog-search input","Aetherlands");
