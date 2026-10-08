@@ -26,8 +26,8 @@
     {
       "id": "owner-visual-reconciliation-current",
       "state": "OPEN",
-      "evidenceCandidate": "docs/MODARYX-V2-PREMIUM-RECONCILIATION-R14-EVIDENCE-20261008.json",
-      "note": "Premium R14 is integrated at PR #280 / 13f7ddd8f3e355bb27e8b1514c59cb96cd2f2068 with fresh 16-capture proof run 37762837798. Owner acceptance remains PREUVE MANQUANTE."
+      "evidenceCandidate": "docs/MODARYX-V2-PREMIUM-RECONCILIATION-R16-EVIDENCE-20261008.json",
+      "note": "Premium Living Atlas R16 is integrated at PR #282 / 4a993d94a386ac0fd5cc8dcb27bd0482c1a2dcda with fresh 16-capture proof run 37768198037. Owner acceptance remains PREUVE MANQUANTE."
     },
     {
       "id": "nvda-real",
