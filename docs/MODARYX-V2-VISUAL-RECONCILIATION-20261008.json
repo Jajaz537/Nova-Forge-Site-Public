@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "BLOQUÉ",
+  "blockerId": "owner-visual-reconciliation-current",
+  "ownerDecision": {
+    "currentV2RenderingAccepted": false,
+    "reasons": [
+      "ancien design",
+      "rendu type maquette",
+      "insuffisant pour cible Premium/VF"
+    ],
+    "supersedesVisualDirectionDate": "2026-10-05"
+  },
+  "historicalReferencesPreserved": [
+    "docs/MODARYX-V2-DESIGN-CANON-20261005.md",
+    "docs/MODARYX-V2-NORMALIZED-VISUAL-COMPARISON-20261005.md",
+    "docs/MODARYX-V2-OWNER-DELEGATED-VISUAL-VALIDATION-20261006.md",
+    "PR#151",
+    "PR#152",
+    "PR#153",
+    "PR#161"
+  ],
+  "preserveCurrentV2": [
+    "React/Vite/Workers architecture",
+    "routes/navigation",
+    "Game Hub functional structure",
+    "search/collections/creators/community/account/notifications",
+    "backend-client contracts",
+    "accessibility structure",
+    "PWA/caching/route metadata",
+    "rights/moderation/privacy safeguards",
+    "18+ ecosystem separation"
+  ],
+  "visualLanguageToRecover": [
+    "living coherent world",
+    "cinematic depth",
+    "editorial composition",
+    "premium typography and spacing",
+    "distinct page atmospheres",
+    "functional objects integrated into visual world",
+    "mobile recomposition"
+  ],
+  "forbiddenBlindActions": [
+    "wholesale merge of historical design branches",
+    "global CSS replacement",
+    "restoring static architecture",
+    "claiming historical captures prove current code",
+    "using assets without rights provenance"
+  ],
+  "closureEvidence": [
+    "CURRENT_V2_ARCHITECTURE_PRESERVED",
+    "RECONCILED_VISUAL_CANDIDATE_IMPLEMENTED",
+    "TARGETED_BUILD_AND_TESTS_GREEN",
+    "FRESH_DESKTOP_MOBILE_CAPTURES_SHA_BOUND",
+    "NO_CRITICAL_A11Y_OR_OVERFLOW_REGRESSION",
+    "OWNER_VISUAL_ACCEPTANCE"
+  ]
+}
