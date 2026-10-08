@@ -1710,3 +1710,66 @@ Le ledger reste à **20 blockers OPEN**.
 - PRODUCTION / CUTOVER : **BLOQUÉ**
 
 Aucune mutation `main`, DNS, D1/R2 production, provider production, paiement, PWA production, field CWV, indexability ou cutover.
+
+
+---
+
+## 46. Premium reconciliation R14 — topbar + composition finale ciblée — 2026-10-08
+
+Retour propriétaire de référence :
+le site ne doit plus ressembler à l'ancien design / à une maquette.
+
+### Produit
+
+PR :
+- **#280**
+- merge SHA : `13f7ddd8f3e355bb27e8b1514c59cb96cd2f2068`
+
+Candidat :
+- `0610697e9373fc63c4be7af5dcb12e43b39aab51`
+
+R14 comprend R13 + correction topbar R14.
+
+Corrections principales :
+- titre Compte sans lettre orpheline ;
+- composition Communauté / Compte plus intentionnelle ;
+- topbar desktop entièrement visible ;
+- suppression du faux centrage sticky `left:50% + translateX(-50%)` au profit de marges automatiques ;
+- aucune modification fonctionnelle.
+
+### Preuve fraîche
+
+Run :
+- `37762837798`
+- job : `113263197576`
+- conclusion : **success**
+- artifact id : `11542314431`
+- digest : `sha256:bc52b05fbfe546e56a1436e938767fdad80a90ea2a432aacb66c3a6365d6c609`
+- captures : **16/16**
+  - 8 desktop 1440×1024
+  - 8 mobile 390×844
+- build : **TERMINÉ**
+- tests sites : **TERMINÉ**
+
+Preuve :
+`docs/MODARYX-V2-PREMIUM-RECONCILIATION-R14-EVIDENCE-20261008.json`.
+
+### Gate propriétaire
+
+- `owner-visual-reconciliation-current` : **BLOQUÉ / OPEN**
+- candidat courant : **R14**
+- implémentation : **TERMINÉ**
+- preuve visuelle fraîche : **TERMINÉ**
+- acceptation propriétaire : **PREUVE MANQUANTE**
+
+Le ledger reste fail-closed. Aucun PASS VF final n'est dérivé de l'inspection assistant.
+
+### Gates
+
+- VF TECHNIQUE : **EN COURS**
+- DIRECTION VISUELLE : **BLOQUÉ**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+- PRODUCTION / CUTOVER : **BLOQUÉ**
+
+Aucune mutation `main`, DNS, D1/R2 production, provider production, paiement, PWA production, field CWV, indexability ou cutover.
