@@ -1188,3 +1188,52 @@ Aucun marketing ciblé ni vente payante hors marchés approuvés ne doit être s
 La décision de territoires, éventuelles limitations/geoblocking et revue locale restent **PREUVE MANQUANTE**.
 
 Aucun territoire n'est ajouté au lancement par cette tranche.
+
+
+---
+
+## 36. Paquet décisions propriétaire / professionnels — 2026-10-08
+
+Documents :
+- `docs/MODARYX-V2-OWNER-PROFESSIONAL-DECISION-PACKET-20261008.md`
+- `docs/MODARYX-V2-OWNER-PROFESSIONAL-DECISION-PACKET-20261008.json`
+
+Le paquet centralise sans les prendre :
+- opérateur/vendeur ;
+- territoires jour 1 ;
+- audience/âge ;
+- baseline gratuite ;
+- Premium / achat ponctuel / abonnement ;
+- services créateurs ;
+- marketplace/commission ;
+- PSP vs MoR ;
+- prix canonique ;
+- refunds/rétractation ;
+- privacy controller/DPO ;
+- providers/processors ;
+- analytics/CWV ;
+- DSA role ;
+- accessibilité réglementaire ;
+- droits commerciaux/IP/marque ;
+- support/modération/fraude/release owner ;
+- autorisations production ;
+- go/no-go/cutover.
+
+Revues professionnelles explicitement séparées :
+- juridique France/UE ;
+- fiscalité/comptabilité ;
+- droits/IP.
+
+Règle :
+ce paquet demande des décisions, il ne les rend pas canoniques.
+Aucun prix, abonnement, commission, fournisseur, territoire ou production n'est activé.
+
+État global :
+- décisions propriétaire : **EN COURS / PREUVE MANQUANTE**
+- revues professionnelles : **PREUVE MANQUANTE**
+- production/cutover : **BLOQUÉ** jusqu'aux gates pertinentes.
+
+Gates :
+- VF TECHNIQUE : **EN COURS**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
