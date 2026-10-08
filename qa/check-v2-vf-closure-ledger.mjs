@@ -12,9 +12,9 @@ const open=[
 
 const listed=(ledger.blockers||[]).map(x=>x.id).sort();
 assert.equal(ledger.schemaVersion,1);
-assert.equal(ledger.status,"ACTIVE_FAIL_CLOSED_19_OPEN");
-assert.equal(ledger.blockerCount,19);
-assert.equal(open.length,19,"gate open blocker count drift");
+assert.equal(ledger.status,"ACTIVE_FAIL_CLOSED_20_OPEN");
+assert.equal(ledger.blockerCount,20);
+assert.equal(open.length,20,"gate open blocker count drift");
 assert.deepEqual(listed,open,"closure ledger must exactly match OPEN gate blockers");
 assert.equal(new Set(listed).size,listed.length,"duplicate blocker id");
 
@@ -26,7 +26,7 @@ for(const item of ledger.blockers){
   assert.ok(Array.isArray(item.requiredEvidence)&&item.requiredEvidence.length>=3,item.id+" evidence list too small");
   categories[item.category]=(categories[item.category]||0)+1;
 }
-assert.deepEqual(categories,{"external-validation":5,"web-production":8,"rights-legal":6});
+assert.deepEqual(categories,{"external-validation":5,"visual-owner":1,"web-production":8,"rights-legal":6});
 
 const inv=new Set(ledger.invariants||[]);
 for(const x of [
@@ -43,6 +43,7 @@ for(const forbidden of ["wrangler d1 execute","--remote","curl -x post","curl -x
 
 console.log("VF_CLOSURE_LEDGER_OPEN_COUNT",open.length);
 console.log("VF_CLOSURE_LEDGER_EXTERNAL",categories["external-validation"]);
+console.log("VF_CLOSURE_LEDGER_VISUAL",categories["visual-owner"]);
 console.log("VF_CLOSURE_LEDGER_WEB",categories["web-production"]);
 console.log("VF_CLOSURE_LEDGER_RIGHTS",categories["rights-legal"]);
 console.log("PASS_V2_VF_CLOSURE_LEDGER");

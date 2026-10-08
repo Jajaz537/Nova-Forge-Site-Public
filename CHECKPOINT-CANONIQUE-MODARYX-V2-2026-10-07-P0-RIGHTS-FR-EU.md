@@ -1340,3 +1340,57 @@ Gates inchangées :
 Cette revalidation ne ferme aucun blocker.
 
 Aucune mutation `main`, DNS/DNSSEC/nameserver, D1/R2 production, provider production, paiement, PWA production, field CWV, indexability ou cutover.
+
+
+---
+
+## 40. Réouverture de la direction visuelle propriétaire — 2026-10-08
+
+Décision propriétaire fraîche :
+le rendu V2 courant est rejeté comme **ancien design / type maquette** et n'est pas accepté comme cible Premium/VF.
+
+Cette décision supersède, pour la direction visuelle courante, le canon du 5 octobre 2026. Les documents/captures antérieurs restent conservés comme **provenance historique**, jamais supprimés ni réattribués.
+
+Nouveau blocker gate :
+- id : `owner-visual-reconciliation-current`
+- état canonique : **BLOQUÉ**
+- état machine de compatibilité : `OPEN`
+- fermeture : nouveau candidat implémenté + preuves ciblées + captures fraîches desktop/mobile + acceptation propriétaire.
+
+Le gate VF passe à :
+- **20 blockers OPEN**
+- 5 appareils/accessibilité réels
+- 1 réconciliation visuelle propriétaire
+- 8 production contrôlée
+- 6 droits/juridique
+
+L'anti-oubli passe à **22 axes**, avec :
+- `visual-direction-premium-fidelity`
+- couverture : **TERMINÉE**
+- sujet : **BLOQUÉ**
+
+Références :
+- `docs/MODARYX-V2-VISUAL-RECONCILIATION-20261008.md`
+- `docs/MODARYX-V2-VISUAL-RECONCILIATION-20261008.json`
+- `docs/MODARYX-V2-WORK-VISUAL-RECONCILIATION-HANDOFF-20261008.md`
+- `qa/modaryx-v2-vf-readiness-gate.json`
+- `qa/modaryx-v2-vf-closure-ledger.json`
+- `docs/MODARYX-V2-ANTI-OUBLI-CONVERGENCE-20261008.json`
+
+Principe de réconciliation :
+**architecture V2 actuelle conservée + langage visuel Premium/monde vivant réinterprété**.
+
+Interdit :
+- merge global aveugle des PRs #151/#152/#153/#161 ;
+- retour à l'architecture HTML statique ;
+- réutilisation d'assets sans vérification de provenance/droits ;
+- claim visuel final à partir d'anciennes captures.
+
+Gates :
+- VF TECHNIQUE : **EN COURS**
+- DIRECTION VISUELLE : **BLOQUÉ**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+- PRODUCTION / CUTOVER : **BLOQUÉ**
+
+Aucune mutation production, DNS, paiement ou cutover.

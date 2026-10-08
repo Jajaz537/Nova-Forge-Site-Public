@@ -670,3 +670,48 @@ Toujours **PREUVE MANQUANTE** : preview HTTPS finale, appareils physiques, lecte
 
 **VF NON VALIDÉE**.
 
+
+
+---
+
+## État courant — 8 octobre 2026 — direction visuelle rouverte
+
+Cette section est l'état courant pour la direction visuelle et supersède les anciennes validations artistiques lorsqu'elles concernent le choix du design final.
+
+Décision propriétaire fraîche :
+- rendu V2 courant rejeté comme **ancien design / type maquette** ;
+- aucune VF visuelle n'est considérée validée sur la base du candidat bleu/violet actuel ;
+- le canon du 5 octobre reste une preuve historique mais n'est plus la cible visuelle d'acceptation.
+
+Nouveau blocker :
+- `owner-visual-reconciliation-current`
+- état canonique : **BLOQUÉ**
+- état machine de compatibilité dans le gate : `OPEN`
+
+Gate courant :
+- **20 blockers au total**
+- 19 blockers externes historiques
+- 1 blocker visuel propriétaire
+
+Réconciliation attendue :
+- conserver l'architecture V2 React/Vite/Workers et les flows déjà prouvés ;
+- récupérer le niveau de finition Premium, la profondeur, le monde vivant et la composition éditoriale des passes #151/#152/#153/#161 ;
+- ne jamais merger ces anciennes branches en bloc ;
+- implémenter un nouveau candidat sur la V2 actuelle ;
+- produire des captures fraîches desktop/mobile liées au SHA ;
+- obtenir une validation propriétaire explicite.
+
+Références :
+- `docs/MODARYX-V2-VISUAL-RECONCILIATION-20261008.md`
+- `docs/MODARYX-V2-WORK-VISUAL-RECONCILIATION-HANDOFF-20261008.md`
+- `qa/modaryx-v2-vf-readiness-gate.json`
+- `qa/modaryx-v2-vf-closure-ledger.json`
+
+États :
+- VF TECHNIQUE : **EN COURS**
+- DIRECTION VISUELLE VF : **BLOQUÉ**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+- PRODUCTION / CUTOVER : **BLOQUÉ**
+
+Aucune ancienne capture ne doit être réattribuée au futur candidat.

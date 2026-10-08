@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-06",
+  "date": "2026-10-08",
   "status": "BLOCKED",
-  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-06-1732.md",
+  "sourceCheckpoint": "CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-07-P0-RIGHTS-FR-EU.md",
   "rule": "NO_VF_OR_HIGH_FI_FINAL_WHILE_REQUIRED_BLOCKER_OPEN",
   "externalHuman": [
     {
@@ -22,6 +22,12 @@
     {
       "id": "normalized-visual-comparison",
       "state": "PROVEN"
+    },
+    {
+      "id": "owner-visual-reconciliation-current",
+      "state": "OPEN",
+      "evidenceCandidate": "docs/MODARYX-V2-VISUAL-RECONCILIATION-20261008.md",
+      "note": "Compatibility machine state OPEN. Canonical project state: BLOQUÉ. Owner review on 2026-10-08 rejected the current V2 rendering as old/mockup-like. A new reconciled visual candidate and fresh owner validation are required before this blocker can close."
     },
     {
       "id": "nvda-real",
@@ -202,7 +208,6 @@
     "frontend-gate-reclassification-proposal-not-active",
     "approved-visual-reference-library-backed-sha256-proven",
     "canonical-hero-composition-desktop-mobile-prototype",
-    "normalized-visual-comparison-human-reference-vs-current-game-hub",
     "stack-react-vite-cloudflare-workers-selected",
     "root-v2-production-candidate-created",
     "v1-v2-browser-migration-targeted-proven",
@@ -234,7 +239,8 @@
     "v2-cwv-retention-disabled-by-default-candidate-proven",
     "v2-d1-migration-execution-manifest-proven",
     "v2-production-activation-manifest-non-mutating-proven",
-    "v2-vf-closure-ledger-19-open-proven"
+    "v2-vf-closure-ledger-19-open-proven",
+    "historical-normalized-visual-comparison-superseded-by-owner-review-20261008"
   ],
   "invariants": [
     "PUBLIC_GREEN_NEVER_IMPLIES_PRODUCTION_VF",

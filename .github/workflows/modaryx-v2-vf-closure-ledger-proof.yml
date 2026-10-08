@@ -24,7 +24,7 @@ concurrency:
 
 jobs:
   proof:
-    name: Prove closure ledger exactly matches 19 OPEN VF blockers
+    name: Prove closure ledger exactly matches 20 OPEN VF blockers
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:

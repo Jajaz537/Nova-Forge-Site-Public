@@ -6,7 +6,7 @@ assert.equal(h.status,"READY_FOR_WORK_OR_REAL_OPERATOR");
 assert.equal(h.sourceCommit,"128add6e1b39aa072d300befed6641cd16bfef5f");
 assert.equal(h.blockerCount,l.blockerCount);
 assert.equal(h.testedCandidateCommit,"db8ebf50ba4ff593fd73b27e72075b4f8088686a");
-assert.equal(h.latestCheckpoint,"CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-07-1320.md");
+assert.equal(h.latestCheckpoint,"CHECKPOINT-CANONIQUE-MODARYX-V2-2026-10-07-P0-RIGHTS-FR-EU.md");
 assert.equal(h.treeEquivalentCanonicalCommit,"39c98861dfbfcc4dfee3f266e5f500a7b7a934d1");
 assert.equal(h.latestDesignProof?.canonicalTreeEquivalent,true);
 assert.equal(h.currentFrontendEquivalence?.canonicalCommit,"128add6e1b39aa072d300befed6641cd16bfef5f");
