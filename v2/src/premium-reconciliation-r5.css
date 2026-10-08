@@ -1,0 +1,289 @@
+/* MODARYX V2 — Premium reconciliation R5
+   Adds intentional visual windows to internal pages after R4 still felt too dashboard-like.
+   Uses only already-tracked MODARYX assets; no new assets, routes, data or behavior. */
+
+/* Page atmosphere becomes visible rather than only chromatic. */
+.games-index::before,
+.collections-page::before,
+.creators-page::before,
+.community::before,
+.account-center::before{
+  inset:72px 0 auto;
+  height:520px;
+  opacity:.23;
+  filter:saturate(.92) contrast(1.04);
+  background:
+    linear-gradient(90deg,rgba(5,17,27,.98) 0%,rgba(5,17,27,.88) 34%,rgba(5,17,27,.48) 66%,rgba(5,17,27,.88) 100%),
+    linear-gradient(180deg,rgba(5,17,27,.10),rgba(5,17,27,.98)),
+    url('/assets/living-threshold-hero.png') 72% 44%/cover no-repeat;
+  mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.80) 66%,transparent 100%);
+}
+
+.collections-page::before{
+  background-position:center,center,58% 42%;
+  opacity:.16;
+}
+
+.creators-page::before{
+  background-position:center,center,78% 48%;
+  opacity:.18;
+}
+
+.community::before{
+  background-position:center,center,44% 46%;
+  opacity:.13;
+}
+
+.account-center::before{
+  background-position:center,center,82% 52%;
+  opacity:.11;
+}
+
+/* Game index: make the lead game a true cinematic entry point. */
+@media (min-width:1101px){
+  .games-index .game-card:first-child{
+    min-height:500px;
+    border-color:rgba(79,211,255,.17);
+    background:
+      linear-gradient(90deg,rgba(3,12,20,.96),rgba(3,12,20,.58) 58%,rgba(3,12,20,.20)),
+      url('/assets/living-threshold-hero.png') 72% 54%/cover no-repeat;
+    box-shadow:
+      0 42px 110px rgba(0,0,0,.36),
+      inset 0 1px rgba(255,255,255,.035);
+  }
+
+  .games-index .game-card:first-child>.media{
+    opacity:.28;
+    mix-blend-mode:screen;
+    background:
+      radial-gradient(circle at 74% 23%,rgba(79,211,255,.20),transparent 18rem),
+      radial-gradient(circle at 35% 18%,rgba(139,99,255,.12),transparent 20rem);
+  }
+
+  .games-index .game-card:first-child>div{
+    width:min(58%,700px);
+    padding:190px 38px 38px;
+    background:
+      linear-gradient(90deg,rgba(3,12,20,.96) 0%,rgba(3,12,20,.86) 72%,rgba(3,12,20,0) 100%);
+  }
+
+  .games-index .game-card:first-child h2{
+    font-size:clamp(42px,4vw,60px);
+    letter-spacing:-.045em;
+  }
+
+  .games-index .game-card:first-child p{
+    max-width:560px;
+    font-size:15px;
+    line-height:1.7;
+  }
+
+  .games-index .game-card:first-child .primary{
+    width:auto;
+    min-width:260px;
+    padding-inline:24px;
+  }
+}
+
+/* Secondary cards get readable art instead of dark empty fields. */
+.games-index .game-card:not(:first-child)>.media,
+.collections-page .collection-card>.media,
+.creators-page .creator-index-card>.media{
+  background:
+    radial-gradient(circle at 72% 22%,rgba(79,211,255,.18),transparent 14rem),
+    radial-gradient(circle at 28% 18%,rgba(139,99,255,.14),transparent 15rem),
+    linear-gradient(145deg,rgba(20,63,86,.84),rgba(9,28,43,.90) 46%,rgba(5,15,24,.98)),
+    url('/assets/living-threshold-content-sheet.png');
+  background-size:auto,auto,auto,300% 200%;
+  background-blend-mode:screen,screen,normal,soft-light;
+}
+
+/* Community receives a visual lead without inventing social content. */
+.community{
+  min-height:calc(100vh - 70px);
+}
+
+.community>.kicker,
+.community>h1,
+.community>.page-intro,
+.community>.community-tabs,
+.community>.community-board{
+  position:relative;
+  z-index:1;
+}
+
+@media (min-width:961px){
+  .community-board:has(>.community-list),
+  .community-board:has(>.community-teams),
+  .community-board:has(>.activity-list){
+    grid-template-columns:minmax(300px,.62fr) minmax(0,1.38fr);
+    gap:52px;
+  }
+
+  .community-board>h2{
+    font-size:30px;
+    line-height:1.05;
+    max-width:280px;
+  }
+
+  .community-board>p{
+    max-width:320px;
+    font-size:14px;
+    line-height:1.72;
+  }
+
+  .community-list article,
+  .community-teams article,
+  .activity-list article{
+    min-height:108px;
+    align-content:center;
+    background:
+      radial-gradient(circle at 88% 18%,rgba(79,211,255,.035),transparent 12rem),
+      linear-gradient(90deg,rgba(9,30,45,.76),rgba(6,20,31,.44));
+  }
+}
+
+/* Account behaves like a premium control space, not a settings form. */
+.account-center{
+  min-height:calc(100vh - 70px);
+}
+
+.account-center>.kicker,
+.account-center>h1,
+.account-center>.page-intro,
+.account-center>.account-shell{
+  position:relative;
+  z-index:1;
+}
+
+@media (min-width:1051px){
+  .account-shell{
+    margin-top:44px;
+    grid-template-columns:200px minmax(0,1fr);
+    gap:54px;
+  }
+
+  .account-nav{
+    top:106px;
+  }
+
+  .account-nav button{
+    position:relative;
+    color:#8fa6ba;
+    font-size:14px;
+  }
+
+  .account-nav button::after{
+    content:"";
+    position:absolute;
+    right:8px;
+    top:50%;
+    width:5px;
+    height:5px;
+    margin-top:-2px;
+    border-radius:50%;
+    background:transparent;
+    box-shadow:none;
+  }
+
+  .account-nav button.active::after{
+    background:#4fd3ff;
+    box-shadow:0 0 12px rgba(79,211,255,.56);
+  }
+
+  .account-panel{
+    min-height:360px;
+    padding:44px 46px;
+    background:
+      radial-gradient(circle at 84% 12%,rgba(79,211,255,.055),transparent 18rem),
+      radial-gradient(circle at 98% 78%,rgba(139,99,255,.045),transparent 20rem),
+      linear-gradient(180deg,rgba(8,26,39,.74),rgba(5,18,28,.90));
+  }
+
+  .account-panel h2{
+    max-width:760px;
+    font-size:clamp(26px,2vw,34px);
+    line-height:1.1;
+  }
+
+  .account-panel>p{
+    max-width:760px;
+    font-size:15px;
+    line-height:1.7;
+  }
+
+  .session-state{
+    margin-top:26px;
+    border:0;
+    border-top:1px solid rgba(143,184,215,.10);
+    border-bottom:1px solid rgba(143,184,215,.10);
+    border-radius:0;
+    background:transparent;
+    padding:16px 0;
+  }
+}
+
+/* Catalog lead cards receive stronger scene depth. */
+@media (min-width:1101px){
+  .catalog .catalog-grid>.content-card:first-child{
+    min-height:410px;
+    display:grid;
+    grid-template-rows:minmax(240px,1fr) auto;
+    box-shadow:0 36px 96px rgba(0,0,0,.30);
+  }
+
+  .catalog .catalog-grid>.content-card:first-child>.media{
+    min-height:260px;
+    background:
+      radial-gradient(circle at 72% 18%,rgba(79,211,255,.22),transparent 16rem),
+      radial-gradient(circle at 30% 12%,rgba(139,99,255,.16),transparent 18rem),
+      linear-gradient(145deg,#183b52,#102637 48%,#07131e),
+      url('/assets/living-threshold-content-sheet.png');
+    background-size:auto,auto,auto,300% 200%;
+    background-blend-mode:screen,screen,normal,soft-light;
+  }
+}
+
+/* Footer recedes slightly so internal scenes remain the focus. */
+footer{
+  background:rgba(3,12,20,.88);
+  border-top-color:rgba(137,177,210,.08);
+}
+
+/* Mobile: maintain visual windows without turning pages into giant hero screens. */
+@media (max-width:760px){
+  .games-index::before,
+  .collections-page::before,
+  .creators-page::before,
+  .community::before,
+  .account-center::before{
+    top:60px;
+    height:360px;
+    opacity:.16;
+    background-position:center,center,68% 44%;
+  }
+
+  .games-index .game-card:first-child{
+    background:
+      linear-gradient(180deg,rgba(3,12,20,.22),rgba(3,12,20,.94) 76%),
+      url('/assets/living-threshold-hero.png') 72% 48%/cover no-repeat;
+  }
+
+  .games-index .game-card:first-child>.media{
+    opacity:.20;
+  }
+
+  .account-panel{
+    padding:22px 20px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .games-index .game-card:first-child,
+  .account-panel,
+  .community-list article,
+  .community-teams article,
+  .activity-list article{
+    transition:none!important;
+  }
+}
