@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "PRIVACY_PROCESSOR_SUBPROCESSOR_REGISTER_CANDIDATE",
+  "sourceHead": "4be9c9eb773d5d53d58b42dd47dad857fd538b61",
+  "rules": [
+    "No provider is classified as processor/controller by default when facts are missing.",
+    "No provider becomes production-approved from this register.",
+    "DPA, role qualification, transfer mechanism, subprocessors, retention, deletion/export and security evidence must be reviewed before production when applicable.",
+    "Candidate payment providers may act under roles other than processor; role qualification remains open until provider/model selection."
+  ],
+  "officialLegalReference": {
+    "article28": "RGPD Article 28 / CNIL processor guidance",
+    "state": "PREUVE MANQUANTE",
+    "note": "Final contractual/legal qualification requires appropriate review."
+  },
+  "entries": [
+    {
+      "service": "Cloudflare Pages / Workers / D1",
+      "productUse": "hosting/backend/database foundation",
+      "technicalState": "preview/development evidence exists; production configuration not fully proven",
+      "personalDataPossible": [
+        "account/profile identifiers",
+        "UGC/moderation records",
+        "notification metadata",
+        "rights/support records",
+        "security/session metadata"
+      ],
+      "roleQualification": "candidate processor relationship",
+      "complianceState": "PREUVE MANQUANTE",
+      "dpa": "PREUVE MANQUANTE",
+      "subprocessors": "PREUVE MANQUANTE",
+      "hostingAndTransfers": "PREUVE MANQUANTE",
+      "retentionDeletion": "PREUVE MANQUANTE",
+      "securityEvidence": "EN COURS",
+      "breachNoticeClause": "PREUVE MANQUANTE",
+      "productionAllowed": false
+    },
+    {
+      "service": "Cloudflare R2",
+      "productUse": "artifact storage candidate",
+      "technicalState": "binding absent in preview and production per activation manifest",
+      "personalDataPossible": [
+        "file artifacts",
+        "creator/content metadata when linked"
+      ],
+      "roleQualification": "candidate processor relationship if activated",
+      "complianceState": "PREUVE MANQUANTE",
+      "dpa": "PREUVE MANQUANTE",
+      "subprocessors": "PREUVE MANQUANTE",
+      "hostingAndTransfers": "PREUVE MANQUANTE",
+      "retentionDeletion": "PREUVE MANQUANTE",
+      "securityEvidence": "PREUVE MANQUANTE",
+      "breachNoticeClause": "PREUVE MANQUANTE",
+      "productionAllowed": false
+    },
+    {
+      "service": "Cloudflare Turnstile",
+      "productUse": "anti-abuse/auth protection candidate",
+      "technicalState": "conditional; production proof missing",
+      "personalDataPossible": [
+        "request/device/network anti-abuse signals according to real provider operation"
+      ],
+      "roleQualification": "PREUVE MANQUANTE",
+      "complianceState": "PREUVE MANQUANTE",
+      "dpa": "PREUVE MANQUANTE",
+      "subprocessors": "PREUVE MANQUANTE",
+      "hostingAndTransfers": "PREUVE MANQUANTE",
+      "retentionDeletion": "PREUVE MANQUANTE",
+      "securityEvidence": "EN COURS",
+      "breachNoticeClause": "PREUVE MANQUANTE",
+      "productionAllowed": false
+    },
+    {
+      "service": "Auth0",
+      "productUse": "identity/authentication candidate",
+      "technicalState": "integration candidate; production configuration not proven",
+      "personalDataPossible": [
+        "identity subject",
+        "authentication events",
+        "account security data"
+      ],
+      "roleQualification": "PREUVE MANQUANTE",
+      "complianceState": "PREUVE MANQUANTE",
+      "dpa": "PREUVE MANQUANTE",
+      "subprocessors": "PREUVE MANQUANTE",
+      "hostingAndTransfers": "PREUVE MANQUANTE",
+      "retentionDeletion": "PREUVE MANQUANTE",
+      "securityEvidence": "EN COURS",
+      "breachNoticeClause": "PREUVE MANQUANTE",
+      "productionAllowed": false
+    },
+    {
+      "service": "Email provider",
+      "productUse": "transactional/operational notifications candidate",
+      "technicalState": "not implemented/activated",
+      "personalDataPossible": [
+        "email destination",
+        "message delivery metadata",
+        "bounce/unsubscribe state"
+      ],
+      "roleQualification": "PREUVE MANQUANTE",
+      "complianceState": "PREUVE MANQUANTE",
+      "dpa": "PREUVE MANQUANTE",
+      "subprocessors": "PREUVE MANQUANTE",
+      "hostingAndTransfers": "PREUVE MANQUANTE",
+      "retentionDeletion": "PREUVE MANQUANTE",
+      "securityEvidence": "PREUVE MANQUANTE",
+      "breachNoticeClause": "PREUVE MANQUANTE",
+      "productionAllowed": false
+    },
+    {
+      "service": "Web Push ecosystem",
+      "productUse": "push notifications candidate",
+      "technicalState": "not implemented/activated",
+      "personalDataPossible": [
+        "push subscription endpoint",
+        "keys",
+        "delivery metadata"
+      ],
+      "roleQualification": "PREUVE MANQUANTE",
+      "complianceState": "PREUVE MANQUANTE",
+      "dpa": "PREUVE MANQUANTE",
+      "subprocessors": "PREUVE MANQUANTE",
+      "hostingAndTransfers": "PREUVE MANQUANTE",
+      "retentionDeletion": "PREUVE MANQUANTE",
+      "securityEvidence": "PREUVE MANQUANTE",
+      "breachNoticeClause": "PREUVE MANQUANTE",
+      "productionAllowed": false
+    },
+    {
+      "service": "Weather provider",
+      "productUse": "optional real-world weather adaptation",
+      "technicalState": "OFF by default; provider not selected",
+      "personalDataPossible": [
+        "server-side approximate location/weather request metadata depending on final provider"
+      ],
+      "roleQualification": "PREUVE MANQUANTE",
+      "complianceState": "PREUVE MANQUANTE",
+      "dpa": "PREUVE MANQUANTE",
+      "subprocessors": "PREUVE MANQUANTE",
+      "hostingAndTransfers": "PREUVE MANQUANTE",
+      "retentionDeletion": "PREUVE MANQUANTE",
+      "securityEvidence": "PREUVE MANQUANTE",
+      "breachNoticeClause": "PREUVE MANQUANTE",
+      "productionAllowed": false
+    },
+    {
+      "service": "Payment provider / Merchant of Record candidate",
+      "productUse": "payments/refunds/invoicing candidate",
+      "technicalState": "no provider selected or activated",
+      "candidates": [
+        "Stripe",
+        "Paddle",
+        "Lemon Squeezy"
+      ],
+      "personalDataPossible": [
+        "billing identity",
+        "payment transaction metadata",
+        "refund/chargeback/fraud data"
+      ],
+      "roleQualification": "PREUVE MANQUANTE",
+      "note": "Do not assume processor role; final role depends on provider and commercial model.",
+      "complianceState": "PREUVE MANQUANTE",
+      "dpa": "PREUVE MANQUANTE",
+      "subprocessors": "PREUVE MANQUANTE",
+      "hostingAndTransfers": "PREUVE MANQUANTE",
+      "retentionDeletion": "PREUVE MANQUANTE",
+      "securityEvidence": "PREUVE MANQUANTE",
+      "breachNoticeClause": "PREUVE MANQUANTE",
+      "productionAllowed": false
+    }
+  ],
+  "launchGate": {
+    "controllerIdentity": "PREUVE MANQUANTE",
+    "finalProviderSet": "PREUVE MANQUANTE",
+    "finalRoleQualification": "PREUVE MANQUANTE",
+    "dpasAndContracts": "PREUVE MANQUANTE",
+    "subprocessorLists": "PREUVE MANQUANTE",
+    "transferAssessment": "PREUVE MANQUANTE",
+    "retentionDeletionAlignment": "PREUVE MANQUANTE",
+    "incidentNotificationClauses": "PREUVE MANQUANTE"
+  }
+}
