@@ -1,0 +1,314 @@
+/* MODARYX V2 — Premium reconciliation R2
+   Internal-page finish layer after owner rejection of the old/mockup-like rendering.
+   Visual only: no route, behavior, data, entitlement or accessibility semantics changed. */
+
+:root {
+  --premium-r2-line: rgba(139, 177, 214, .16);
+  --premium-r2-line-strong: rgba(107, 206, 239, .26);
+  --premium-r2-surface: linear-gradient(155deg, rgba(15, 35, 51, .92), rgba(8, 22, 34, .88));
+  --premium-r2-surface-soft: linear-gradient(160deg, rgba(15, 31, 47, .78), rgba(8, 21, 33, .72));
+  --premium-r2-shadow: 0 24px 72px rgba(0, 0, 0, .24), inset 0 1px 0 rgba(255, 255, 255, .025);
+  --premium-r2-shadow-hover: 0 30px 82px rgba(0, 0, 0, .34), 0 0 0 1px rgba(79, 211, 255, .035);
+}
+
+body {
+  background:
+    radial-gradient(circle at 15% 8%, rgba(51, 181, 224, .055), transparent 30rem),
+    radial-gradient(circle at 88% 16%, rgba(129, 91, 255, .06), transparent 34rem),
+    radial-gradient(circle at 54% 92%, rgba(255, 176, 96, .025), transparent 26rem),
+    var(--bg);
+}
+
+.topbar {
+  background: linear-gradient(180deg, rgba(4, 13, 22, .96), rgba(4, 13, 22, .84));
+  border-bottom-color: rgba(153, 190, 218, .12);
+  box-shadow: 0 18px 52px rgba(0, 0, 0, .18);
+}
+
+.page-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.page-section::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 14px 2.4vw auto;
+  height: 260px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 10% 18%, rgba(79, 211, 255, .06), transparent 19rem),
+    radial-gradient(circle at 78% 14%, rgba(139, 99, 255, .055), transparent 21rem);
+  filter: blur(2px);
+}
+
+.page-section > h1,
+.catalog-title h1,
+.rights-dashboard > h1,
+.help-docs > h1,
+.moderation-center > h1 {
+  text-shadow: 0 14px 38px rgba(0, 0, 0, .22);
+}
+
+.page-intro,
+.catalog-title p {
+  max-width: 760px;
+  color: #b9c6d5;
+}
+
+/* Primary content surfaces should feel carved into one continuous product canvas. */
+:where(
+  .content-card,
+  .game-card,
+  .collection-card,
+  .creator-index-card,
+  .search-groups > section,
+  .detail-section,
+  .community-board,
+  .studio-workflow,
+  .studio-panel,
+  .account-panel,
+  .profile-components,
+  .profile-decision,
+  .modpack-surface,
+  .library-panel,
+  .trust-panel,
+  .decision-panel,
+  .game-support-request
+) {
+  border: 1px solid var(--premium-r2-line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .015), transparent 28%),
+    var(--premium-r2-surface);
+  border-radius: 22px;
+  box-shadow: var(--premium-r2-shadow);
+}
+
+:where(
+  .content-card,
+  .game-card,
+  .collection-card,
+  .creator-index-card,
+  .community-list article,
+  .library-cards article,
+  .profile-library article,
+  .studio-cards article,
+  .community-teams article
+) {
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+:where(
+  .content-card,
+  .game-card,
+  .collection-card,
+  .creator-index-card,
+  .community-list article,
+  .library-cards article,
+  .profile-library article,
+  .studio-cards article,
+  .community-teams article
+):hover {
+  transform: translateY(-3px);
+  border-color: var(--premium-r2-line-strong);
+  box-shadow: var(--premium-r2-shadow-hover);
+}
+
+/* Secondary rows: less boxed, more layered. */
+:where(
+  .community-list article,
+  .library-cards article,
+  .profile-library article,
+  .studio-cards article,
+  .community-teams article,
+  .notification-demo-list article,
+  .privacy-grid article,
+  .channel-grid article,
+  .detail-feature-grid article,
+  .requirements-grid article
+) {
+  border-color: rgba(133, 167, 199, .13);
+  background:
+    linear-gradient(145deg, rgba(20, 40, 56, .68), rgba(8, 23, 35, .58));
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .018);
+}
+
+/* Media cards should read as editorial objects rather than flat tiles. */
+:where(
+  .content-card > .media,
+  .game-card > .media,
+  .collection-card > .media,
+  .creator-index-card > .media,
+  .profile-library .media,
+  .community-grid .media
+) {
+  filter: saturate(1.08) brightness(1.08) contrast(1.025);
+}
+
+.content-card > .media,
+.game-card > .media,
+.collection-card > .media,
+.creator-index-card > .media {
+  border-bottom: 1px solid rgba(146, 179, 209, .10);
+}
+
+/* Inputs and toolbars merge with the canvas instead of looking like default form blocks. */
+:where(
+  .catalog-search,
+  .global-search-field,
+  .hero-search,
+  .creators-search,
+  .catalog-tools,
+  .index-tools,
+  .game-hub-page .hub-filterbar select,
+  .game-request-form input,
+  .game-request-form select,
+  .report-field select,
+  .report-field textarea
+) {
+  border-color: rgba(129, 164, 198, .22);
+  background: linear-gradient(180deg, rgba(13, 31, 45, .92), rgba(7, 21, 32, .88));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025), 0 10px 30px rgba(0, 0, 0, .10);
+}
+
+/* Navigation groups become one system instead of independent rectangular buttons. */
+:where(.community-tabs, .collection-mode-tabs, .library-tabs, .studio-nav, .account-nav, .detail-tabs, .apply-mode) {
+  gap: 8px;
+}
+
+:where(
+  .community-tabs button,
+  .collection-mode-tabs button,
+  .library-tabs button,
+  .studio-nav button,
+  .account-nav button,
+  .detail-tabs button,
+  .apply-mode button,
+  .filter-chips button
+) {
+  border-radius: 12px;
+  border-color: rgba(132, 169, 201, .14);
+  background: rgba(9, 25, 38, .54);
+}
+
+:where(
+  .community-tabs button.active,
+  .collection-mode-tabs button.active,
+  .library-tabs button.active,
+  .studio-nav button.active,
+  .account-nav button.active,
+  .detail-tabs button.active,
+  .apply-mode button.active,
+  .filter-chips button.selected
+) {
+  color: #e9fbff;
+  background:
+    linear-gradient(135deg, rgba(66, 202, 238, .14), rgba(99, 94, 255, .13));
+  border-color: rgba(79, 211, 255, .30);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .04), 0 8px 24px rgba(30, 111, 174, .10);
+}
+
+/* Internal titles inherit the same editorial rhythm as Discover. */
+:where(
+  .community-board h2,
+  .account-panel h2,
+  .detail-section h2,
+  .modpack-header h2,
+  .profile-components h2,
+  .profile-decision h2,
+  .library-panel h2,
+  .studio-panel h2,
+  .studio-workflow h2
+) {
+  font-family: var(--editorial-serif);
+  font-weight: 650;
+  letter-spacing: -.022em;
+}
+
+/* Account/community/studio side navigation should feel integrated, not like a wireframe list. */
+:where(.account-nav, .studio-nav) {
+  padding: 10px;
+  border: 1px solid rgba(128, 166, 198, .11);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(9, 26, 39, .64), rgba(6, 19, 30, .48));
+  box-shadow: inset 0 1px rgba(255, 255, 255, .018);
+}
+
+:where(.account-nav button, .studio-nav button) {
+  min-height: 42px;
+  padding-inline: 13px;
+}
+
+/* Footer remains quiet but gets a premium edge. */
+footer {
+  background:
+    linear-gradient(180deg, rgba(5, 15, 24, .72), rgba(3, 10, 17, .94));
+  border-top-color: rgba(133, 170, 200, .11);
+}
+
+@media (max-width: 760px) {
+  .page-section::before {
+    inset-inline: 0;
+    height: 190px;
+  }
+
+  :where(
+    .content-card,
+    .game-card,
+    .collection-card,
+    .creator-index-card,
+    .search-groups > section,
+    .detail-section,
+    .community-board,
+    .studio-workflow,
+    .studio-panel,
+    .account-panel,
+    .profile-components,
+    .profile-decision,
+    .modpack-surface,
+    .library-panel,
+    .trust-panel,
+    .decision-panel,
+    .game-support-request
+  ) {
+    border-radius: 18px;
+    box-shadow: 0 16px 42px rgba(0, 0, 0, .22), inset 0 1px rgba(255, 255, 255, .02);
+  }
+
+  :where(.account-nav, .studio-nav) {
+    padding: 8px;
+    border-radius: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(
+    .content-card,
+    .game-card,
+    .collection-card,
+    .creator-index-card,
+    .community-list article,
+    .library-cards article,
+    .profile-library article,
+    .studio-cards article,
+    .community-teams article
+  ) {
+    transition: none;
+  }
+
+  :where(
+    .content-card,
+    .game-card,
+    .collection-card,
+    .creator-index-card,
+    .community-list article,
+    .library-cards article,
+    .profile-library article,
+    .studio-cards article,
+    .community-teams article
+  ):hover {
+    transform: none;
+  }
+}
