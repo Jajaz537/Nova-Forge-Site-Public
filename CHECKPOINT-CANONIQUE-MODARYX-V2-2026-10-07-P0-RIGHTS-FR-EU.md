@@ -1585,3 +1585,66 @@ Gates :
 - PRODUCTION / CUTOVER : **BLOQUÉ**
 
 Aucune mutation production, DNS, paiement ou cutover.
+
+
+---
+
+## 44. Premium reconciliation R7 — Communauté + Compte — 2026-10-08
+
+Retour propriétaire de référence :
+le site ne doit plus ressembler à l'ancien design / à une maquette.
+
+### Produit
+
+PR :
+- **#276**
+- merge SHA : `c81e9914f3c31450b0248ddbab335a4b5de058c4`
+
+Portée :
+- `v2/src/premium-reconciliation-r7.css` ajouté ;
+- import R7 en dernier dans `v2/src/main.jsx` ;
+- aucun nouvel asset ;
+- aucune nouvelle dépendance ;
+- aucun changement backend, route, données, entitlement ou production.
+
+R7 cible les deux surfaces qui gardaient le plus une lecture « dashboard / ancien design » :
+- **Communauté** : composition éditoriale continue, tabs plus calmes, flux intégré ;
+- **Compte** : rail secondaire discret, surface principale dominante, moins de boîtes imbriquées.
+
+### Preuve fraîche
+
+Run :
+- `37748471541`
+- job : `113215569894`
+- conclusion : **success**
+- artifact id : `11537355340`
+- digest : `sha256:343a3c1cc685761b795506637b99d7c9cf4fb228c2698ba8939057e0507ddc7c`
+- build V2 : **TERMINÉ**
+- tests sites : **TERMINÉ**
+- captures : **16/16**
+  - 8 desktop 1440×1024
+  - 8 mobile 390×844
+
+Preuve :
+`docs/MODARYX-V2-PREMIUM-RECONCILIATION-R7-EVIDENCE-20261008.json`.
+
+Pré-revue assistant :
+**TERMINÉE en support uniquement**.
+
+### Gate propriétaire
+
+- candidat R7 : **TERMINÉ**
+- preuve visuelle fraîche : **TERMINÉ**
+- acceptation propriétaire : **PREUVE MANQUANTE**
+- `owner-visual-reconciliation-current` : **BLOQUÉ / OPEN**
+
+Le ledger n'est pas fermé par cette tranche.
+
+Gates :
+- VF TECHNIQUE : **EN COURS**
+- DIRECTION VISUELLE : **BLOQUÉ**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+- PRODUCTION / CUTOVER : **BLOQUÉ**
+
+Aucune mutation production, DNS, paiement ou cutover.

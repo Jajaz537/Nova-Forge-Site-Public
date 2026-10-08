@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "status": "EN COURS",
+  "candidateSha": "ccc8f418f965c3653d0515b9cac241facafe00b8",
+  "integratedMergeSha": "c81e9914f3c31450b0248ddbab335a4b5de058c4",
+  "productPr": 276,
+  "proof": {
+    "runId": 37748471541,
+    "jobId": 113215569894,
+    "conclusion": "success",
+    "artifact": {
+      "id": 11537355340,
+      "name": "modaryx-v2-premium-reconciliation-visual-r7",
+      "digest": "sha256:343a3c1cc685761b795506637b99d7c9cf4fb228c2698ba8939057e0507ddc7c"
+    },
+    "build": "TERMINÉ",
+    "siteTests": "TERMINÉ",
+    "captureCount": 16,
+    "desktop": 8,
+    "mobile": 8
+  },
+  "scope": {
+    "files": [
+      "v2/src/premium-reconciliation-r7.css",
+      "v2/src/main.jsx"
+    ],
+    "backendChanged": false,
+    "routesChanged": false,
+    "dataChanged": false,
+    "entitlementChanged": false,
+    "newAssets": false,
+    "newDependencies": false,
+    "productionChanged": false
+  },
+  "visualReview": {
+    "assistantSupportiveReview": "TERMINÉ",
+    "ownerAcceptance": "PREUVE MANQUANTE",
+    "observations": [
+      "Community now reads as one editorial conversation scene rather than stacked dashboard cards.",
+      "Account now reads as a composed private product surface rather than a settings mockup.",
+      "Desktop and mobile keep the existing premium/cinematic family and preserve the current product architecture.",
+      "This supportive review does not constitute owner acceptance."
+    ]
+  },
+  "gate": {
+    "id": "owner-visual-reconciliation-current",
+    "status": "BLOQUÉ",
+    "reason": "Owner acceptance of the current visual candidate remains required."
+  }
+}
