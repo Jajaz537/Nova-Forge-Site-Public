@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "PUBLIC_LEGAL_SURFACES_READINESS_CANDIDATE_FR_EU",
+  "sourceHead": "1a0dc713bbe0b9b75d4c510a5d2fafd222aa3460",
+  "territoryPriority": [
+    "France",
+    "EU/EEA"
+  ],
+  "publicationRule": "No candidate section may be published as final while mandatory facts or legal review are missing.",
+  "modules": {
+    "legalNotices": {
+      "state": "PREUVE MANQUANTE",
+      "candidateRequirements": [
+        "publisher/operator identity according to actual legal form",
+        "contact details",
+        "registration/company identifiers where applicable",
+        "VAT identifier where applicable",
+        "publication director/responsible editor where applicable",
+        "hosting provider identity/contact",
+        "intellectual-property/credits information where relevant"
+      ],
+      "missing": [
+        "actual legal operator",
+        "legal form",
+        "registered address",
+        "registration identifiers",
+        "VAT status",
+        "publication director",
+        "final production host/legal entity and required contact facts"
+      ],
+      "finalPublicationAllowed": false
+    },
+    "termsOfUse": {
+      "state": "EN COURS",
+      "candidateScope": [
+        "account and acceptable use",
+        "UGC/community rules",
+        "creator/content rights and licence representations",
+        "moderation/reporting/appeals",
+        "security/abuse restrictions",
+        "service evolution/availability",
+        "termination/account closure",
+        "intellectual property",
+        "dispute/contact structure",
+        "governing-law/jurisdiction wording only after legal review"
+      ],
+      "dependencies": [
+        "final moderation role and DSA qualification",
+        "final content/creator licence model",
+        "operator identity",
+        "support process",
+        "territories",
+        "legal review"
+      ],
+      "finalPublicationAllowed": false
+    },
+    "consumerSalesTerms": {
+      "state": "BLOQUÉ",
+      "reason": "No canonical paid offer, price, seller, provider or final digital product/service classification exists.",
+      "candidateRequirements": [
+        "seller identity/contact",
+        "essential characteristics",
+        "total price/taxes/extra charges",
+        "payment methods and timing",
+        "contract duration/renewal/termination",
+        "digital functionality/interoperability/compatibility where applicable",
+        "order button/payment obligation wording",
+        "durable confirmation",
+        "complaint/support channel",
+        "legal guarantees/remedies where applicable",
+        "withdrawal/right-of-withdrawal information and standard form where applicable",
+        "refund method/timing",
+        "mediation/consumer dispute information where applicable",
+        "invoice/tax information"
+      ],
+      "priceCanonical": "PREUVE MANQUANTE",
+      "paidOfferCanonical": "PREUVE MANQUANTE",
+      "paymentProvider": "PREUVE MANQUANTE",
+      "sellerIdentity": "PREUVE MANQUANTE",
+      "finalPublicationAllowed": false
+    },
+    "withdrawalRefunds": {
+      "state": "PREUVE MANQUANTE",
+      "baselineCandidate": {
+        "distanceContractCoolingOff": "14 days candidate baseline for covered distance consumer contracts",
+        "refundTiming": "candidate baseline: refund no later than 14 days after being informed of withdrawal where applicable",
+        "refundMethod": "candidate baseline: same payment method unless consumer agrees otherwise without extra fees"
+      },
+      "digitalDistinction": [
+        "digital service/subscription and one-off digital content may follow different withdrawal rules",
+        "do not treat starting a subscription/service as automatic loss of withdrawal right",
+        "for online digital content not supplied on tangible medium, loss of withdrawal right requires the legally required explicit consent/acknowledgement conditions where applicable",
+        "any proportional payment for service already performed requires the applicable legal conditions"
+      ],
+      "implementationNeeds": [
+        "final product classification",
+        "withdrawal UI/process",
+        "standard withdrawal form if required",
+        "durable receipt",
+        "refund workflow",
+        "account/content access consequences",
+        "export/retrieval handling for user-created content where applicable"
+      ],
+      "legalReview": "PREUVE MANQUANTE"
+    },
+    "accessibility": {
+      "state": "EN COURS",
+      "baseline": [
+        "e-commerce services are within the European Accessibility Act scope from 28 June 2025 when applicable",
+        "do not assume exemption solely from current project size",
+        "validate any microenterprise or disproportionate-burden exemption against actual legal facts",
+        "automated accessibility tests do not prove legal conformity"
+      ],
+      "productRequirements": [
+        "keyboard operability",
+        "screen-reader semantics",
+        "contrast",
+        "zoom/reflow",
+        "reduced motion",
+        "forms/errors",
+        "authentication",
+        "consent surfaces",
+        "checkout/payment if enabled",
+        "support/contact",
+        "legal/privacy pages"
+      ],
+      "declarationOrInformationSurface": "PREUVE MANQUANTE",
+      "actualEntityAndSizeFacts": "PREUVE MANQUANTE",
+      "legalApplicabilityReview": "PREUVE MANQUANTE",
+      "realAssistiveTechnologyTests": "PREUVE MANQUANTE"
+    }
+  },
+  "prohibitedAssumptions": [
+    "Do not invent company/legal entity details.",
+    "Do not publish a canonical price or subscription.",
+    "Do not claim withdrawal exceptions before product classification and required consent flow are proven.",
+    "Do not claim accessibility exemption without actual entity facts and legal review.",
+    "Do not use dark patterns, hidden cancellation or forced consent.",
+    "Do not merge privacy notice, legal notices, CGU and CGV into one opaque wall if separate presentation improves clarity."
+  ],
+  "launchGate": {
+    "operatorIdentity": "PREUVE MANQUANTE",
+    "sellerIdentity": "PREUVE MANQUANTE",
+    "finalOfferAndPrice": "PREUVE MANQUANTE",
+    "paymentAndTaxModel": "PREUVE MANQUANTE",
+    "termsOfUseFinal": "PREUVE MANQUANTE",
+    "salesTermsFinal": "PREUVE MANQUANTE",
+    "withdrawalRefundFlow": "PREUVE MANQUANTE",
+    "legalNoticesFinal": "PREUVE MANQUANTE",
+    "accessibilityApplicabilityAndConformity": "PREUVE MANQUANTE",
+    "legalReview": "PREUVE MANQUANTE"
+  }
+}
