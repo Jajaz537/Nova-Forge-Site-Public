@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      MODARYX_PRODUCT_BASE_SHA: '080254b65c41dfd0bd5c054f7df9493e9e98d4e7'
+      MODARYX_PRODUCT_BASE_SHA: 'e5c495699bf9ba20b01c453a787f7d215baa4c64'
 
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
