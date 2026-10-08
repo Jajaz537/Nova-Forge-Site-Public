@@ -1022,3 +1022,49 @@ Gates :
 - LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
 
 Aucune production, vente, paiement, DNS ou cutover activé.
+
+
+---
+
+## 32. Operational readiness candidat — support / fraude / résilience / exploitation — 2026-10-08
+
+Documents :
+- `docs/MODARYX-V2-OPERATIONAL-READINESS-CANDIDATE-20261008.md`
+- `docs/MODARYX-V2-OPERATIONAL-READINESS-CANDIDATE-20261008.json`
+
+Modules préparés :
+- support utilisateur ;
+- fraude/abus ;
+- exploitation de la modération ;
+- backup/restore/rollback ;
+- monitoring/observability ;
+- incident response ;
+- release operations.
+
+Règles :
+- aucun canal support fictif ;
+- aucun SLA fictif ;
+- aucun backup déclaré sans restore testé ;
+- monitoring ≠ analytics marketing ;
+- aucun cutover sans autorisation explicite ;
+- aucune astreinte/staffing inventé.
+
+Toujours **PREUVE MANQUANTE** :
+- canal support public réel ;
+- ownership support ;
+- ownership fraude/abus ;
+- staffing modération ;
+- backup/restore production testé ;
+- rollback production testé ;
+- monitoring production ;
+- escalade incident ;
+- release owner.
+
+Aucun des 19 blockers externes VF n'est fermé.
+
+Gates :
+- VF TECHNIQUE : **EN COURS**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+
+Aucune production, provider, paiement, DNS ou cutover activé.
