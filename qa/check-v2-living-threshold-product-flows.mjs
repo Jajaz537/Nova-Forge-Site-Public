@@ -182,7 +182,18 @@ try{
   await clickText(".game-request-form .primary","Préparer la demande locale");
   await waitText("Brouillon de demande — non envoyé");
   await waitText("Project Meridian · PC");
-  await waitText("Aucun Rights Case réel n’est créé par ce brouillon local.");
+  // Both preview and candidate guarantee that the local draft creates no real Rights Case.
+  let noRealRightsCase=false;
+  for(let attempt=0;attempt<40;attempt++){
+    noRealRightsCase=await evaluate(`(() => {
+      const copy=document.body.innerText.toLocaleLowerCase("fr");
+      return copy.includes("aucun rights case réel n’est créé par ce brouillon local.") ||
+        copy.includes("aucun rights case réel n’est créé dans ce prototype.");
+    })()`);
+    if(noRealRightsCase) break;
+    await sleep(100);
+  }
+  if(!noRealRightsCase) throw new Error("local draft must explicitly create no real Rights Case");
   console.log("FLOW_ASSERT game support request local-only triage");
 
   await fill(".games-index .catalog-search input","Aetherlands");
