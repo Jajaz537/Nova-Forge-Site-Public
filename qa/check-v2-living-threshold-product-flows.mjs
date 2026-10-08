@@ -163,7 +163,7 @@ try{
   await clickText(".global-nav button","Jeux");
   await waitText("Trouvez votre prochain terrain de jeu");
   await clickText(".game-support-request>.quiet","Demander le support d’un jeu");
-  await waitText("Aucune demande éditeur n’est envoyée depuis ce prototype.");
+  await waitText("Aucune demande n’est envoyée automatiquement à un éditeur.");
   await clickText(".game-request-form .primary","Préparer la demande locale");
   await waitText("Saisissez un nom de jeu avant de préparer la demande.");
   await fill(".game-request-form input","Project Meridian");
