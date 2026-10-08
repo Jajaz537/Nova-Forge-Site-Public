@@ -1457,3 +1457,63 @@ Le ledger reste à **20 blockers OPEN**.
 - PRODUCTION / CUTOVER : **BLOQUÉ**
 
 Aucune mutation `main`, DNS, D1/R2 production, provider production, paiement, PWA production, field CWV, indexability ou cutover.
+
+
+---
+
+## 42. Premium reconciliation R3 — profondeur éditoriale — 2026-10-08
+
+Retour propriétaire de référence :
+le site ne doit plus ressembler à l'ancien design / à une maquette.
+
+### Produit
+
+PR :
+- **#271**
+- merge SHA : `d0570433bd75088fd7bff3eb05162fa82f8123b5`
+
+Portée :
+- 2 fichiers visuels produit ;
+- nouvelle couche `v2/src/premium-reconciliation-r3.css` ;
+- aucun nouvel asset ;
+- aucune nouvelle dépendance ;
+- aucun changement backend, route, données, entitlement ou production.
+
+### Preuve
+
+Run :
+- `37737395752`
+- job : `113179958047`
+- conclusion : **success**
+- artifact id : `11532601192`
+- digest : `sha256:0ac583c63e27a9d3a31939f1bded63c47b2f63cc7aedcc10bd74915a74bdbbbf`
+- captures : **16**
+  - 8 desktop 1440×1024
+  - 8 mobile 390×844
+- build : **TERMINÉ**
+- tests sites : **TERMINÉ**
+
+La R3 renforce :
+- asymétrie éditoriale Jeux / Collections / Créateurs / Mods ;
+- profondeur et hiérarchie interne ;
+- Communauté moins dashboard ;
+- Compte plus calme ;
+- recomposition mobile dédiée.
+
+### Gate propriétaire
+
+- candidat R3 : **TERMINÉ**
+- preuve visuelle fraîche : **TERMINÉ**
+- acceptation propriétaire : **PREUVE MANQUANTE**
+- `owner-visual-reconciliation-current` : **BLOQUÉ / OPEN**
+
+Le ledger n'est pas fermé par cette tranche.
+
+Gates :
+- VF TECHNIQUE : **EN COURS**
+- DIRECTION VISUELLE : **BLOQUÉ**
+- LAUNCH-READINESS COMMERCIALE : **EN COURS**
+- LEGAL / COMPLIANCE : **BLOQUÉ / PREUVE MANQUANTE**
+- PRODUCTION / CUTOVER : **BLOQUÉ**
+
+Aucune mutation production, DNS, paiement ou cutover.

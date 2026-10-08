@@ -153,3 +153,44 @@ Inspection assistant :
 - `owner-visual-reconciliation-current` : **BLOQUÉ / OPEN**
 
 Aucun PASS VF final n'est déclaré.
+
+
+## 10. Candidat Premium reconciliation R3 — profondeur éditoriale
+
+Produit :
+- PR #271
+- merge SHA : `d0570433bd75088fd7bff3eb05162fa82f8123b5`
+- source candidat : `48f8ca0ae929210b20641f14ef21b546cdf04cae`
+
+Portée :
+- architecture React/Vite/Workers conservée ;
+- aucun nouvel asset ;
+- aucune nouvelle dépendance ;
+- aucun backend/route/data/entitlement modifié ;
+- couche `premium-reconciliation-r3.css` chargée en dernier ;
+- Games / Collections / Créateurs / Mods réorganisés vers une composition éditoriale asymétrique ;
+- Communauté rendue plus organique ;
+- navigation Compte rendue plus discrète ;
+- mobile recomposé séparément.
+
+Preuve fraîche :
+- run `37737395752` : **success**
+- job `113179958047`
+- artifact `11532601192`
+- digest `sha256:0ac583c63e27a9d3a31939f1bded63c47b2f63cc7aedcc10bd74915a74bdbbbf`
+- captures : **16**
+  - 8 desktop 1440×1024
+  - 8 mobile 390×844
+- build V2 : **TERMINÉ**
+- tests sites : **TERMINÉ**
+
+Inspection assistant : **TERMINÉE en support uniquement**.
+La R3 réduit davantage l'effet catalogue/dashboard constaté sur la R2, mais ne remplace pas l'acceptation propriétaire.
+
+État :
+- candidat R3 implémenté : **TERMINÉ**
+- captures fraîches : **TERMINÉ**
+- `owner-visual-reconciliation-current` : **BLOQUÉ / OPEN**
+- acceptation propriétaire : **PREUVE MANQUANTE**
+
+Aucun PASS VF final n'est déclaré.
