@@ -114,3 +114,42 @@ Une simple doc, un mockup, une capture d'une ancienne branche ou un PASS automat
 - PRODUCTION / CUTOVER : **BLOQUÉ**
 
 Aucun prix, paiement, provider, DNS, production ou cutover n'est modifié par cette décision.
+
+
+## 9. Candidat courant implémenté — Premium reconciliation R2
+
+Produit :
+- PR #269
+- merge SHA : `cf7d7e6eb922f160e2125554a50134249025be7f`
+- source candidat : `c9d7024c1fb69762c5a1d546a42713c6900e93c2`
+
+Portée :
+- architecture React/Vite/Workers conservée ;
+- aucun nouveau provider, backend, entitlement, dépendance ou asset ;
+- couche visuelle R2 ajoutée en dernier ;
+- anciens overrides qui imposaient le rendu compact/no-hero retirés ;
+- surfaces internes réconciliées vers davantage de profondeur et hiérarchie éditoriale.
+
+Preuve fraîche :
+- run `37732973675` : **success**
+- artifact `11530203934`
+- digest `sha256:262890fc81ea30b5ef20e0a51d67ec88dd318198c9dd569fb5b72afa5b8ea7ad`
+- captures : **16**
+  - 8 desktop 1440×1024
+  - 8 mobile 390×844
+- build V2 : **TERMINÉ**
+- tests sites : **TERMINÉ**
+
+Référence machine :
+`docs/MODARYX-V2-PREMIUM-RECONCILIATION-R2-EVIDENCE-20261008.json`.
+
+Inspection assistant :
+**TERMINÉE en support uniquement**. Le candidat corrige clairement l'ancien rendu plat/maquette, mais cette inspection **ne remplace pas** l'acceptation propriétaire.
+
+État du blocker :
+- candidat implémenté : **TERMINÉ**
+- captures fraîches : **TERMINÉ**
+- acceptation propriétaire : **PREUVE MANQUANTE**
+- `owner-visual-reconciliation-current` : **BLOQUÉ / OPEN**
+
+Aucun PASS VF final n'est déclaré.
