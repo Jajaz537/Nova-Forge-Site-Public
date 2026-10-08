@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "status": "EN COURS",
+  "purpose": "PERSONAL_DATA_BREACH_AND_SECURITY_INCIDENT_PROCESS_CANDIDATE",
+  "officialReference": {
+    "source": "CNIL / RGPD Article 33",
+    "reviewed": "2026-10-08",
+    "legalReviewState": "PREUVE MANQUANTE"
+  },
+  "principles": [
+    "Every suspected incident gets an internal incident record.",
+    "Preserve evidence with least necessary personal data.",
+    "Do not delay containment to complete legal qualification.",
+    "Do not notify authority or users automatically without the required risk/legal decision.",
+    "If a personal data breach is confirmed, maintain an internal breach record even when notification is not required.",
+    "The GDPR 72-hour authority-notification rule can apply after awareness when risk to rights and freedoms exists; final applicability and timing decision require appropriate legal/privacy review."
+  ],
+  "phases": [
+    {
+      "id": "detect",
+      "state": "EN COURS",
+      "required": [
+        "incident id",
+        "detectedAt",
+        "reporter/source",
+        "affected system",
+        "initial containment owner"
+      ]
+    },
+    {
+      "id": "contain",
+      "state": "EN COURS",
+      "required": [
+        "stop ongoing exposure where safe",
+        "revoke/rotate affected secrets if applicable",
+        "preserve logs/evidence",
+        "avoid destructive cleanup before evidence capture"
+      ]
+    },
+    {
+      "id": "assess",
+      "state": "EN COURS",
+      "required": [
+        "personal data involved yes/no/unknown",
+        "categories and approximate scope",
+        "confidentiality/integrity/availability impact",
+        "likely consequences",
+        "risk level",
+        "processor/provider involvement"
+      ]
+    },
+    {
+      "id": "decide",
+      "state": "PREUVE MANQUANTE",
+      "required": [
+        "controller identity",
+        "privacy/legal reviewer",
+        "authority notification decision",
+        "data subject communication decision",
+        "reasoning and timestamp"
+      ]
+    },
+    {
+      "id": "notify",
+      "state": "PREUVE MANQUANTE",
+      "required": [
+        "authority receipt if required",
+        "data subject communication proof if required",
+        "provider/controller notices when contractually required"
+      ]
+    },
+    {
+      "id": "recover",
+      "state": "EN COURS",
+      "required": [
+        "fix validation",
+        "restore/rollback validation",
+        "monitoring",
+        "user protection actions where relevant"
+      ]
+    },
+    {
+      "id": "postmortem",
+      "state": "EN COURS",
+      "required": [
+        "root cause",
+        "corrective actions",
+        "owners/dates",
+        "security/privacy backlog",
+        "retention of incident record"
+      ]
+    }
+  ],
+  "riskDecision": {
+    "noRisk": "document internally; no authority/user notification assumed",
+    "risk": "authority notification may be required; legal/privacy decision required",
+    "highRisk": "authority notification and communication to affected people may be required; legal/privacy decision required",
+    "state": "PREUVE MANQUANTE"
+  },
+  "evidenceSchema": [
+    "incidentId",
+    "detectedAtUtc",
+    "awarenessAtUtc",
+    "affectedSystems",
+    "dataCategories",
+    "approxPeopleAffected",
+    "approxRecordsAffected",
+    "likelyConsequences",
+    "containmentActions",
+    "riskAssessment",
+    "decisionMaker",
+    "notificationDecision",
+    "notificationReceipts",
+    "dataSubjectCommunicationReceipts",
+    "remediation",
+    "closedAtUtc"
+  ],
+  "launchGate": {
+    "controllerIdentity": "PREUVE MANQUANTE",
+    "contactPointDpoOrEquivalent": "PREUVE MANQUANTE",
+    "finalSeverityAndEscalationOwners": "PREUVE MANQUANTE",
+    "providerContractNotificationPaths": "PREUVE MANQUANTE",
+    "authorityNotificationProcedure": "PREUVE MANQUANTE",
+    "userCommunicationTemplate": "PREUVE MANQUANTE",
+    "endToEndTabletopExercise": "PREUVE MANQUANTE"
+  }
+}
