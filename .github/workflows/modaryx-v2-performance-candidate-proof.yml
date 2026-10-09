@@ -38,6 +38,7 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-v2-performance-candidate-contract.mjs
+          node qa/check-v2-living-world-style-isolation.mjs
           node qa/check-v2-preproduction-contract-registry.mjs
       - name: Locate Chrome
         run: |
