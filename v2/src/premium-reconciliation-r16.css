@@ -351,11 +351,6 @@
     margin-top:22px;
   }
 
-  .creator-index-card:nth-child(2),
-  .creator-index-card:nth-child(3){
-    transform:none;
-  }
-
   .collections-page .collection-card:not(:first-child),
   .creator-index-card:not(:first-child){
     min-height:380px!important;
