@@ -50,6 +50,10 @@ jobs:
         run: |
           npm ci
           npm run build
+      - name: Audit CSS source composition (read-only)
+        run: |
+          node qa/audit-v2-css-cascade-sources.mjs > /tmp/modaryx-v2-css-audit.json
+          node -e 'const a=require("/tmp/modaryx-v2-css-audit.json"); console.log("CSS_AUDIT_IMPORTS",a.totalCssImports); console.log("CSS_AUDIT_SOURCE_BYTES",a.totalSourceBytes); console.log("CSS_AUDIT_SINGLE_OCCURRENCE_CANDIDATES",a.singleOccurrenceTokens.length); console.log("CSS_AUDIT_LARGEST_SOURCES",JSON.stringify(a.rows.slice(0,7)))'
       - name: Start candidate
         working-directory: v2
         run: |
