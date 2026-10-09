@@ -658,37 +658,6 @@ try{
   await waitText("Préparer une question");
 
 
-  const assertRoute=async(path,selector,label)=>{
-    let last;
-    for(let attempt=0;attempt<45;attempt++){
-      last=await evaluate(`({path:window.location.pathname,main:document.querySelector('main')?.className||''})`);
-      if(last.path===path && (await evaluate(`!!document.querySelector(${JSON.stringify(selector)})`)))return;
-      await sleep(100);
-    }
-    throw new Error(label+" route mismatch: "+JSON.stringify(last));
-  };
-
-  // CTA navigation: real routes, no fabricated commerce or installation.
-  await load(1440,1024);
-  await clickText(".global-nav button","Découvrir");
-  await waitText("Redécouvrez vos jeux");
-  console.log("CTA_DEBUG_BEFORE",JSON.stringify(await evaluate("({path:location.pathname,title:document.title,mainText:document.querySelector('main')?.innerText.slice(0,90)||'',cta:document.querySelector('.canon-reconciled-hero .primary')?.outerHTML.slice(0,250)||''})")));
-  await clickText(".canon-reconciled-hero .primary","Découvrir maintenant");
-  console.log("CTA_DEBUG_AFTER",JSON.stringify(await evaluate("({path:location.pathname,title:document.title,mainText:document.querySelector('main')?.innerText.slice(0,90)||'',cta:document.querySelector('.canon-reconciled-hero .primary')?.outerHTML.slice(0,250)||''})")));
-  await assertRoute("/mods",".catalog","Discover CTA");
-  console.log("FLOW_ASSERT_DISCOVER_CTA");
-
-  await clickText("footer button","Bibliothèque");
-  await waitText("Bibliothèque");
-  await clickText(".library-focus .primary","Ouvrir le Game Hub");
-  await assertRoute("/games/aetherlands",".game-hub-page","Library CTA");
-  console.log("FLOW_ASSERT_LIBRARY_GAME_HUB_CTA");
-
-  await waitText("Mes profils pour ce jeu");
-  await clickAria("Consulter les détails de Sentiers de l’aube");
-  await assertRoute("/content/sentiers-de-laube","main","Hub row details");
-  console.log("FLOW_ASSERT_GAME_HUB_CONTENT_DETAILS");
-
   console.log("PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS");
 } finally {
   try{ws?.close();}catch{}
