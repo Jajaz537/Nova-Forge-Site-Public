@@ -47,6 +47,8 @@ jobs:
           echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
       - name: Build exact V2 root
         working-directory: v2
+        env:
+          MODARYX_CSS_PARITY_BASELINE: /tmp/modaryx-v2-original-css.txt
         run: |
           npm ci
           npm run build
@@ -64,6 +66,11 @@ jobs:
           for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4182/ >/dev/null && exit 0; sleep 0.25; done
           cat /tmp/modaryx-v2-perf.log
           exit 1
+      - name: Compare original versus optimized CSS across 18 browser states
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4182
+          MODARYX_CSS_PARITY_BASELINE: /tmp/modaryx-v2-original-css.txt
+        run: node qa/check-v2-css-parity-browser.mjs
       - name: Survey CSS usage for V2 routes
         env:
           MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4182

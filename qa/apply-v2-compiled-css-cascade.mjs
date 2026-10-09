@@ -18,6 +18,12 @@ const oldFile=join(root,href.slice(1));
 const oldBase=basename(oldFile);
 const previous=readFileSync(oldFile,"utf8");
 const result=pruneCompiledCss(previous);
+// CI only: retain the unpruned baseline outside all generated site assets.
+if(process.env.MODARYX_CSS_PARITY_BASELINE){
+  const target=process.env.MODARYX_CSS_PARITY_BASELINE;
+  if(!target.startsWith("/tmp/"))throw new Error("CSS parity baseline must remain outside site assets");
+  writeFileSync(target,previous);
+}
 const digest=createHash("sha256").update(result.css,"utf8").digest("hex").slice(0,12);
 const newBase="index-"+digest+".css";
 const newFile=join(dirname(oldFile),newBase);
