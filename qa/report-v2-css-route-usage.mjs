@@ -157,5 +157,12 @@ try{
 }finally{
   try{ws?.close()}catch{}
   proc.kill("SIGTERM");
-  rmSync(userDataDir,{recursive:true,force:true});
+  // Chrome may still be flushing its profile when SIGTERM returns.
+  await sleep(300);
+  try{
+    rmSync(userDataDir,{recursive:true,force:true,maxRetries:10,retryDelay:150});
+  }catch(error){
+    // Never replace genuine route-usage evidence with a temp-profile cleanup error.
+    console.warn("CSS_ROUTE_USAGE_CLEANUP_WARNING",String(error));
+  }
 }
