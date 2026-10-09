@@ -45,23 +45,3 @@ export function pruneCompiledCss(input){
   }
   return {css:root.toString(),removed};
 }
-export function measuredCssCascadePruner(){
-  return {
-    name:"modaryx-v2-conservative-css-cascade-pruner",
-    apply:"build",
-    enforce:"post",
-    generateBundle(_options,bundle){
-      for(const output of Object.values(bundle)){
-        if(output.type!=="asset"||!output.fileName.endsWith(".css"))continue;
-        const before=String(output.source);
-        const result=pruneCompiledCss(before);
-        output.source=result.css;
-        console.log("CSS_CASCADE_PRUNE",JSON.stringify({
-          file:output.fileName,beforeBytes:Buffer.byteLength(before),
-          afterBytes:Buffer.byteLength(result.css),
-          removedDeclarations:result.removed
-        }));
-      }
-    }
-  };
-}

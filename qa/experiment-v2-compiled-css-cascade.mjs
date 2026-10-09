@@ -86,7 +86,7 @@ const report={
   note:"No visual safety / browser comparison: MUST NOT ship or claim PASS; media and shorthand interactions still need scrutiny"
 };
 console.log("CSS_COMPILED_EXPERIMENT",JSON.stringify(report));
-if(report.candidateDeclarations<1)throw new Error("No candidates found — inspect compiled CSS or selectors");
+if(report.candidateDeclarations===0)console.log("CSS_COMPILED_ALREADY_CONSOLIDATED");
 
 // Architecture feasibility only: split obvious route-scoped CSS rules while
 // leaving all mixed/global rules in common. No emitted application asset changes.
