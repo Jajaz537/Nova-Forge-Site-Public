@@ -15,7 +15,7 @@ assert.equal(previewContract.sourceCommit,"15d7a4746dda80d135188fd9921b761888e9d
 assert.ok(pkg.private,"Root must not be publishable as an npm package");
 const referenceDiscover='<button className="primary">Découvrir maintenant <ArrowRight/></button>';
 const candidateDiscover='<button type="button" className="primary" onClick={()=>onNavigate("Mods & contenus")}>Découvrir maintenant <ArrowRight/></button>';
-const candidateDetails='aria-label={\`Consulter les détails de \${item.title}\`} onClick={()=>onOpen(item)';
+const candidateDetails='aria-label={`Consulter les détails de ${item.title}`} onClick={()=>onOpen(item)';
 if(kind==="preview"){
   assert.ok(app.includes(referenceDiscover),"Frozen preview control has unexpectedly migrated; review contract");
   assert.ok(!app.includes(candidateDiscover),"Preview must not masquerade as current R3 candidate");
