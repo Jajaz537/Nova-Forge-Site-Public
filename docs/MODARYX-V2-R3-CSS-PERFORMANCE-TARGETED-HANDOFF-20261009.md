@@ -30,3 +30,13 @@ The isolated `v2/src/premium-vf-architecture.css` source has 36,292 text charact
 Seven variable names occur once **inside this file**: `--vf-night-soft`, `--vf-violet`, `--vf-gold`, `--vf-ink`, `--vf-shadow`, `--vf-r3-panel-strong`, `--vf-r3-line-warm`. They may be referenced by other CSS files and must not be deleted without a cross-file scan.
 
 Local Git clone unavailable in this execution environment (DNS resolution for github.com failed). This source-only scan is **TERMINÉ**, but local build, complete cross-file inventory, CSS removal and visual regression are **PREUVE MANQUANTE**. No bundle size improvement is claimed.
+
+## Verified complete laboratory scenario — 2026-10-09
+- Tested commit `dfafcd8b831dc65866a55764c5c3da2de2bbe216`, GitHub run `37922753349` (failed overall on mandatory CSS ceiling).
+- JS level-9 gzip: **104,925 bytes** / 105,000 ceiling (**75-byte margin**); monitor JS regression separately.
+- CSS level-9 gzip: **47,511 bytes** / 22,000 ceiling (**25,511 bytes over**).
+- Desktop lab (1440×1024): LCP **920 ms** / 3,000; CLS **0.008421** / 0.1; route response **82.9 ms** / 500.
+- Mobile lab (390×844): LCP **1,556 ms** / 4,000; CLS **0** / 0.1; route response **66.9 ms** / 650.
+- Preview Root Proof run `37922753445`: success; Candidate Root Proof run `37922753438`: success. These are **SHA-scoped candidate checks** only, not launch acceptance.
+- The runner now gathers both scenarios before failing on the CSS ceiling. **No CSS bytes removed, no design changes and no field CWV PASS claimed.**
+- Following change must measure entry CSS at level-9 gzip (not sum of source gzip values), preserve mobile/desktop state coverage and use focused visual comparisons before declaring optimization complete.
