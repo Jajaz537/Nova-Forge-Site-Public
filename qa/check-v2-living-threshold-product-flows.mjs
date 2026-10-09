@@ -672,7 +672,9 @@ try{
   await load(1440,1024);
   await clickText(".global-nav button","Découvrir");
   await waitText("Redécouvrez vos jeux");
+  console.log("CTA_DEBUG_BEFORE",JSON.stringify(await evaluate("({path:location.pathname,title:document.title,mainText:document.querySelector('main')?.innerText.slice(0,90)||'',cta:document.querySelector('.canon-reconciled-hero .primary')?.outerHTML.slice(0,250)||''})")));
   await clickText(".canon-reconciled-hero .primary","Découvrir maintenant");
+  console.log("CTA_DEBUG_AFTER",JSON.stringify(await evaluate("({path:location.pathname,title:document.title,mainText:document.querySelector('main')?.innerText.slice(0,90)||'',cta:document.querySelector('.canon-reconciled-hero .primary')?.outerHTML.slice(0,250)||''})")));
   await assertRoute("/mods",".catalog","Discover CTA");
   console.log("FLOW_ASSERT_DISCOVER_CTA");
 
