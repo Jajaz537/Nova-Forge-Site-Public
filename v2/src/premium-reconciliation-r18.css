@@ -61,8 +61,8 @@
 .creators-page,
 .page-section.community,
 .account-center{
-  isolation:isolate;
-  min-height:100vh;
+  
+  
   padding-inline:clamp(22px,4.6vw,72px)!important;
 }
 
@@ -315,7 +315,7 @@
 .community .community-tabs button{
   min-height:42px!important;
   padding:0 14px!important;
-  border:0!important;
+  
   border-radius:12px!important;
 }
 
@@ -452,8 +452,8 @@
 /* Mobile becomes a composed world entrance followed by calm functional surfaces. */
 @media (max-width:900px){
   .topbar{
-    top:8px!important;
-    width:calc(100% - 14px)!important;
+    
+    
     min-height:54px!important;
     border-radius:17px!important;
     padding-inline:10px!important;
@@ -488,7 +488,7 @@
   .creators-page>.page-intro,
   .community>.page-intro,
   .account-center>.page-intro{
-    max-width:34rem!important;
+    
   }
 
   .games-index .game-support-request{
@@ -515,7 +515,7 @@
   .account-center>.account-shell{
     width:100%!important;
     margin-top:20px!important;
-    border-radius:24px!important;
+    
   }
 
   .community>.community-board{
@@ -523,25 +523,25 @@
   }
 
   .account-center>.account-shell{
-    display:block!important;
-    min-height:0!important;
+    
+    
   }
 
   .account-center .account-nav{
-    display:flex!important;
-    overflow-x:auto;
+    
+    
     padding:8px!important;
-    border-right:0!important;
+    
     border-bottom:1px solid rgba(167,230,239,.09)!important;
   }
 
   .account-center .account-nav button{
-    min-width:max-content;
+    
     padding-inline:13px!important;
   }
 
   .account-center .account-panel{
-    min-height:0!important;
+    
     padding:28px 20px!important;
   }
 }

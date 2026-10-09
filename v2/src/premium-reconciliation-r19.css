@@ -250,9 +250,9 @@
   }
 
   .community>.community-tabs{
-    display:flex!important;
-    width:100%!important;
-    margin-top:28px!important;
+    
+    
+    
     padding:6px!important;
     border:1px solid rgba(167,230,239,.10)!important;
     border-radius:16px!important;
@@ -275,11 +275,11 @@
   }
 
   .account-center>.account-shell{
-    display:block!important;
+    
   }
 
   .account-center .account-panel{
-    min-height:0!important;
+    
     padding:26px 18px!important;
   }
 }

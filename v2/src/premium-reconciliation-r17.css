@@ -46,7 +46,7 @@
 
 .games-index{
   min-height:calc(100vh - 40px);
-  padding-top:168px!important;
+  
   display:grid;
   grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr);
   grid-template-areas:
@@ -107,7 +107,7 @@
 
 .games-index .game-grid{
   margin-top:28px;
-  display:grid!important;
+  
   grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr)!important;
   grid-auto-rows:minmax(250px,auto);
   gap:20px!important;
@@ -116,12 +116,12 @@
 .games-index .game-card{
   min-height:280px!important;
   border-radius:28px!important;
-  overflow:hidden;
+  
   border-color:rgba(145,216,230,.09)!important;
 }
 
 .games-index .game-card:first-child{
-  grid-row:span 2;
+  
   min-height:590px!important;
   border-radius:38px!important;
 }
@@ -188,7 +188,7 @@
 }
 
 .catalog-grid{
-  display:grid!important;
+  
   grid-template-columns:minmax(0,1.2fr) minmax(240px,.8fr) minmax(240px,.8fr)!important;
   gap:18px!important;
   align-items:stretch;
@@ -222,7 +222,7 @@
 /* -------------------------------------------------------------------------- */
 
 .collections-page{
-  padding-top:160px!important;
+  
   background:
     radial-gradient(circle at 92% 12%,rgba(238,207,145,.12),transparent 30rem),
     linear-gradient(180deg,#02070d,#071019 48%,#02070d)!important;
@@ -253,13 +253,13 @@
 
 .collections-page .collection-grid{
   margin-top:34px;
-  display:grid!important;
+  
   grid-template-columns:minmax(0,1.5fr) minmax(260px,.5fr)!important;
   gap:18px!important;
 }
 
 .collections-page .collection-card:first-child{
-  grid-row:span 3;
+  
   min-height:720px!important;
   border-radius:44px!important;
 }
@@ -298,7 +298,7 @@
 /* -------------------------------------------------------------------------- */
 
 .creators-page{
-  padding-top:160px!important;
+  
   background:
     linear-gradient(180deg,rgba(2,7,13,.08),#02070d 720px),
     radial-gradient(circle at 18% 10%,rgba(112,242,239,.09),transparent 28rem),
@@ -330,7 +330,7 @@
 
 .creator-index-grid{
   margin-top:34px;
-  display:grid!important;
+  
   grid-template-columns:minmax(0,1.28fr) repeat(2,minmax(240px,.72fr))!important;
   gap:18px!important;
   align-items:start;
@@ -387,11 +387,11 @@
     linear-gradient(180deg,#02070d,#06101a 54%,#02070d)!important;
 }
 
-.community>.kicker{grid-area:kicker}
-.community>h1{grid-area:title;max-width:7.4ch!important;margin:0}
-.community>.page-intro{grid-area:intro;max-width:460px!important}
-.community>.community-tabs{grid-area:tabs}
-.community>.community-board{grid-area:board}
+.community>.kicker{}
+.community>h1{max-width:7.4ch!important;margin:0}
+.community>.page-intro{max-width:460px!important}
+.community>.community-tabs{}
+.community>.community-board{}
 
 .community .community-tabs{
   display:grid!important;
@@ -406,9 +406,9 @@
   justify-content:flex-start;
   min-height:46px;
   padding:0 0 0 16px!important;
-  border-radius:0!important;
+  
   border-left:1px solid rgba(164,225,239,.08)!important;
-  background:transparent!important;
+  
 }
 
 .community .community-tabs button.active{
@@ -429,7 +429,7 @@
 .community .community-board h2{
   max-width:8ch;
   font-size:clamp(44px,4.4vw,70px)!important;
-  line-height:.92!important;
+  
   letter-spacing:-.05em;
 }
 
@@ -458,10 +458,10 @@
     linear-gradient(180deg,#02070d,#050d17 54%,#02070d)!important;
 }
 
-.account-center>.kicker{grid-area:kicker}
-.account-center>h1{grid-area:title;max-width:7.2ch!important;margin:0}
-.account-center>.page-intro{grid-area:intro;max-width:440px!important}
-.account-center>.account-shell{grid-area:shell}
+.account-center>.kicker{}
+.account-center>h1{max-width:7.2ch!important;margin:0}
+.account-center>.page-intro{max-width:440px!important}
+.account-center>.account-shell{}
 
 .account-center .account-shell{
   min-height:680px;
@@ -482,10 +482,10 @@
 
 .account-center .account-nav button{
   min-height:46px;
-  border-radius:0!important;
-  border:0!important;
+  
+  
   border-left:2px solid transparent!important;
-  background:transparent!important;
+  
   text-align:left;
 }
 
@@ -498,7 +498,7 @@
 .account-center .account-panel{
   min-height:680px;
   padding:50px!important;
-  background:transparent!important;
+  
 }
 
 .account-center .account-panel>h2{
@@ -524,7 +524,7 @@
   }
 
   .games-index>.game-support-request{
-    margin-top:28px!important;
+    
   }
 
   .games-index .index-tools{
@@ -543,7 +543,7 @@
   .collections-page .collection-card:first-child,
   .creator-index-card:first-child{
     grid-row:auto!important;
-    min-height:520px!important;
+    
     border-radius:30px!important;
   }
 
@@ -595,9 +595,9 @@
   }
 
   .community .community-tabs button{
-    min-width:max-content;
-    padding:0 14px!important;
-    border-left:0!important;
+    
+    
+    
     border-bottom:1px solid rgba(164,225,239,.08)!important;
   }
 
@@ -607,22 +607,22 @@
 
   .account-center>.account-shell{
     margin-top:30px;
-    display:block!important;
+    
     min-height:0;
     border-radius:28px!important;
   }
 
   .account-center .account-nav{
-    display:flex!important;
-    overflow-x:auto;
+    
+    
     padding:10px!important;
     border-right:0;
     border-bottom:1px solid rgba(164,225,239,.07);
   }
 
   .account-center .account-nav button{
-    min-width:max-content;
-    border-left:0!important;
+    
+    
     border-bottom:2px solid transparent!important;
   }
 
@@ -652,7 +652,7 @@
   .catalog-grid .content-card:first-child,
   .collections-page .collection-card:first-child,
   .creator-index-card:first-child{
-    min-height:470px!important;
+    
   }
 
   .games-index .game-card:first-child > div:last-child,

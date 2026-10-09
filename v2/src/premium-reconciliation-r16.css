@@ -84,20 +84,20 @@
 
 .games-index .game-support-request{
   margin-top:34px;
-  border:0!important;
+  
   border-left:1px solid rgba(110,240,239,.24)!important;
-  border-radius:0!important;
+  
   background:rgba(2,9,15,.30)!important;
-  box-shadow:none!important;
+  
   backdrop-filter:blur(8px);
 }
 
 .games-index .index-tools{
   margin-top:40px;
   padding:0!important;
-  border:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
+  
+  
+  
 }
 
 .games-index .game-card:first-child::after{
@@ -271,11 +271,11 @@
 .account-panel .settings-list button,
 .account-panel .notification-demo-list article,
 .account-panel .data-list article{
-  border-radius:0!important;
-  border-width:0 0 1px!important;
+  
+  
   border-color:rgba(170,228,240,.08)!important;
-  background:transparent!important;
-  box-shadow:none!important;
+  
+  
 }
 
 /* -------------------------------------------------------------------------- */

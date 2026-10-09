@@ -305,7 +305,7 @@ body{
 .games-index::before{
   content:""!important;
   display:block!important;
-  position:absolute;
+  
   inset:70px -12vw auto 42%;
   height:520px;
   z-index:-1;
@@ -321,7 +321,7 @@ body{
 
 .games-index .game-grid{
   margin-top:52px;
-  display:grid!important;
+  
   grid-template-columns:minmax(0,1.42fr) minmax(320px,.58fr)!important;
   grid-auto-rows:minmax(270px,auto);
   gap:24px!important;
@@ -330,15 +330,15 @@ body{
 .games-index .game-card{
   position:relative;
   min-height:300px;
-  overflow:hidden;
-  border:0!important;
+  
+  
   border-radius:30px!important;
   background:#06111b!important;
   box-shadow:0 38px 110px rgba(0,0,0,.32)!important;
 }
 
 .games-index .game-card:first-child{
-  grid-row:span 2;
+  
   min-height:670px!important;
   border-radius:42px!important;
 }
@@ -540,9 +540,9 @@ body{
   gap:12px;
   margin-top:36px!important;
   padding:0!important;
-  border:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
+  
+  
+  
 }
 
 .catalog .catalog-tools .catalog-search{
@@ -665,14 +665,14 @@ body{
 .collections-page .collection-tools{
   max-width:920px;
   margin-top:54px;
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
+  
+  
+  
 }
 
 .collections-page .collection-grid{
   margin-top:30px;
-  display:grid!important;
+  
   grid-template-columns:minmax(0,1.42fr) minmax(300px,.58fr)!important;
   grid-auto-rows:minmax(270px,auto);
   gap:24px!important;
@@ -682,7 +682,7 @@ body{
   position:relative;
   overflow:hidden;
   min-height:300px;
-  border:0!important;
+  
   border-radius:28px!important;
   background:#06111b!important;
   box-shadow:0 34px 100px rgba(0,0,0,.28)!important;
@@ -776,7 +776,7 @@ body{
 
 .creator-index-grid{
   margin-top:34px;
-  display:grid!important;
+  
   grid-template-columns:minmax(0,1.34fr) minmax(300px,.66fr)!important;
   grid-auto-rows:minmax(280px,auto);
   gap:24px!important;
@@ -786,7 +786,7 @@ body{
   position:relative;
   min-height:300px;
   overflow:hidden;
-  border:0!important;
+  
   border-radius:28px!important;
   background:#06111b!important;
   box-shadow:0 34px 100px rgba(0,0,0,.28)!important;
@@ -795,7 +795,7 @@ body{
 .creator-index-card:first-child{
   grid-row:span 2;
   min-height:660px!important;
-  border-radius:42px!important;
+  
 }
 
 .creator-index-card>.media{
@@ -843,7 +843,7 @@ body{
   display:grid;
   grid-template-columns:minmax(260px,360px) minmax(0,1fr);
   grid-template-rows:auto auto auto 1fr;
-  column-gap:76px;
+  
   align-items:start;
   background:
     radial-gradient(circle at 82% 12%,rgba(139,116,255,.13),transparent 30rem),
@@ -879,8 +879,8 @@ body{
   flex-direction:column;
   gap:6px!important;
   padding:0!important;
-  border:0!important;
-  background:transparent!important;
+  
+  
   box-shadow:none!important;
   backdrop-filter:none!important;
 }
@@ -890,9 +890,9 @@ body{
   min-height:46px;
   padding:0 14px;
   text-align:left;
-  border:0!important;
+  
   border-radius:12px!important;
-  background:transparent!important;
+  
 }
 
 .community .community-tabs button.active{
@@ -1240,7 +1240,7 @@ textarea:focus-visible{
   .community .community-tabs{
     width:100%!important;
     margin-top:30px!important;
-    display:flex!important;
+    
     flex-direction:row;
     overflow:auto;
     padding:5px!important;
@@ -1295,7 +1295,7 @@ textarea:focus-visible{
   .topbar{
     width:calc(100% - 16px)!important;
     top:8px;
-    border-radius:16px!important;
+    
   }
 
   .page-section{
