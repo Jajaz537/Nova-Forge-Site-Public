@@ -21,6 +21,8 @@ const proc = spawn(chrome, [
 let ws;
 let nextId = 1;
 const pending = new Map();
+const captureCssCoverage=process.env.MODARYX_CSS_143_COVERAGE==="1";
+const trackedStylesheets=new Map();
 
 function send(method, params = {}) {
   const id = nextId++;
@@ -223,6 +225,9 @@ try {
   });
   ws.addEventListener("message", event => {
     const msg = JSON.parse(event.data);
+    if(captureCssCoverage && msg.method==="CSS.styleSheetAdded" && msg.params?.header){
+      trackedStylesheets.set(msg.params.header.styleSheetId,msg.params.header.sourceURL||"");
+    }
     if (!msg.id || !pending.has(msg.id)) return;
     const p = pending.get(msg.id);
     pending.delete(msg.id);
@@ -231,6 +236,11 @@ try {
   });
   await send("Page.enable");
   await send("Runtime.enable");
+  if(captureCssCoverage){
+    await send("DOM.enable");
+    await send("CSS.enable");
+    await send("CSS.startRuleUsageTracking");
+  }
 
   const manifest = { commit: process.env.GITHUB_SHA, captures: [] };
 
@@ -657,6 +667,34 @@ try {
 
   const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/manifest.json";
   writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
+  if(captureCssCoverage){
+    const tracked=(await send("CSS.stopRuleUsageTracking")).result?.ruleUsage||[];
+    const bySheet=new Map();
+    for(const usage of tracked){
+      const url=trackedStylesheets.get(usage.styleSheetId)||"";
+      if(!url.includes("/assets/") || !/\.css(?:\?|$)/.test(url) || !usage.used)continue;
+      const asset=url.split("?")[0].split("/").pop();
+      const ranges=bySheet.get(asset)||[];
+      ranges.push([usage.startOffset,usage.endOffset]);
+      bySheet.set(asset,ranges);
+    }
+    if(!bySheet.size)throw new Error("No compiled CSS coverage collected from 143 visual states");
+    const summary=[];
+    for(const [asset,ranges] of bySheet){
+      let usedChars=0,lastEnd=0;
+      for(const [start,end] of ranges.sort((a,b)=>a[0]-b[0])){
+        if(end>lastEnd){
+          usedChars+=end-Math.max(start,lastEnd);
+          lastEnd=end;
+        }
+      }
+      summary.push({asset,usedCssRuleCharacters:usedChars,usedRangeObservations:ranges.length});
+    }
+    console.log("CSS_143_STATE_USAGE_SUMMARY",JSON.stringify({
+      captures:manifest.captures.length,stylesheets:summary,
+      caveat:"143 captures are not all possible routes, personalized states, pseudo-states or accessibility modes; never purge CSS automatically."
+    }));
+  }
   console.log("MULTISCREEN_CAPTURE_COUNT", manifest.captures.length);
   console.log("PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE");
 } finally {
