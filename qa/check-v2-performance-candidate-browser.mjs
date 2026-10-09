@@ -20,7 +20,8 @@ if(!fs.existsSync(jsPath)||!fs.existsSync(cssPath)) throw new Error("built entry
 const jsGzip=gzipSize(jsPath);
 const cssGzip=gzipSize(cssPath);
 assert.ok(jsGzip<=contract.bundleCeilings.jsGzipBytes,`JS gzip ${jsGzip} > ${contract.bundleCeilings.jsGzipBytes}`);
-assert.ok(cssGzip<=contract.bundleCeilings.cssGzipBytes,`CSS gzip ${cssGzip} > ${contract.bundleCeilings.cssGzipBytes}`);
+// Preserve the CSS budget as a mandatory gate, but collect desktop/mobile lab metrics first.
+const cssBudgetError=cssGzip>contract.bundleCeilings.cssGzipBytes ? `CSS gzip ${cssGzip} > ${contract.bundleCeilings.cssGzipBytes}` : null;
 console.log("PERF_BUNDLE_JS_GZIP",jsGzip);
 console.log("PERF_BUNDLE_CSS_GZIP",cssGzip);
 
@@ -95,4 +96,5 @@ async function runScenario(name,s){
 
 const results={desktop:await runScenario("desktop",contract.scenarios.desktop),mobile:await runScenario("mobile",contract.scenarios.mobile)};
 console.log("PERF_RESULT",JSON.stringify({jsGzip,cssGzip,results}));
+if(cssBudgetError) throw new Error(cssBudgetError);
 console.log("PASS_V2_PERFORMANCE_CANDIDATE_LAB");
