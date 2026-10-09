@@ -51,6 +51,7 @@ jobs:
           MODARYX_CSS_PARITY_BASELINE: /tmp/modaryx-v2-original-css.txt
         run: |
           npm ci
+          node --test tests/css-cascade-prune.test.mjs
           npm run build
       - name: Experiment compiled CSS cascade without changing candidate assets
         run: node qa/experiment-v2-compiled-css-cascade.mjs
