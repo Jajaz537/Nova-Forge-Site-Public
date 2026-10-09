@@ -73,6 +73,10 @@ jobs:
           MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4182
           MODARYX_CSS_PARITY_BASELINE: /tmp/modaryx-v2-original-css.txt
         run: node qa/check-v2-css-parity-browser.mjs
+      - name: Verify three real Premium CTAs in a fresh browser
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4182
+        run: node qa/check-v2-premium-cta-routes.mjs
       - name: Survey CSS usage for V2 routes
         env:
           MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4182
