@@ -11,10 +11,18 @@ function safeValue(value){
     !/(?:^|[\s(])(?:revert|inherit|initial|unset|revert-layer)(?:[\s)]|$)/i.test(value) &&
     !/[{}]/.test(value);
 }
+function equivalentSelectorKey(selector){
+  const normalized=selector.trim().replace(/\\s+/g," ");
+  // Comma-separated selector groups have no ordering semantics. Avoid function
+  // arguments, attribute selectors and quoted strings: commas there are syntax.
+  if(/[()[\\]"']/.test(normalized))return normalized;
+  return normalized.split(",").map(part=>part.trim())
+    .filter(Boolean).sort().join(",");
+}
 function mediaContext(decl){
   if(decl.parent?.type!=="rule")return null;
   const rule=decl.parent;
-  const selector=rule.selector?.trim().replace(/\s+/g," ");
+  const selector=rule.selector ? equivalentSelectorKey(rule.selector) : "";
   if(!selector)return null;
   const outer=[];
   for(let parent=rule.parent;parent&&parent.type!=="root";parent=parent.parent){
@@ -43,5 +51,16 @@ export function pruneCompiledCss(input){
       if(superseded){earlier.remove();removed++}
     }
   }
-  return {css:root.toString(),removed};
+  // Removing declarations can leave empty rules; these have no computed-style
+  // effects but inflate the delivered CSS. Keep non-empty keyframe and @rules.
+  let emptyRulesRemoved=0;
+  root.walkRules(rule=>{
+    if(rule.nodes?.length===0){rule.remove();emptyRulesRemoved++}
+  });
+  root.walkAtRules(at=>{
+    if(at.nodes?.length===0 && /^(?:media|supports|container|layer)$/i.test(at.name)){
+      at.remove();emptyRulesRemoved++;
+    }
+  });
+  return {css:root.toString(),removed,emptyRulesRemoved};
 }
