@@ -51,6 +51,7 @@ jobs:
           set -euo pipefail
           node qa/check-v2-tech-stack-selection-gate-contract.mjs
           node qa/check-v2-production-candidate-root.mjs
+          node qa/check-v2-root-provenance.mjs --root=candidate
           node qa/check-v2-anti-contamination.mjs --self-test
           node qa/check-v2-anti-contamination.mjs
           node qa/check-v2-preproduction-contract-registry.mjs
