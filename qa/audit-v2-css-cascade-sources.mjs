@@ -31,10 +31,11 @@ for(const [index,name] of css.entries()){
 }
 // Candidate custom-property references must be checked across ALL imported CSS,
 // not only within the declaring file. This scan is conservative and read-only.
-const combined=css.map(name=>fs.readFileSync(path.join(root,"v2/src",name),"utf8")).join("\\n");
-const propertyTokens=[...new Set([...combined.matchAll(/--[a-zA-Z][\\w-]*/g)].map(m=>m[0]))];
-const singleOccurrenceTokens=propertyTokens.filter(token=>{
-  const escaped=token.replace(/[.*+?^$\\{\\}()|[\\]\\\\]/g,"\\\\const repeatedSelectors=[...bySelector]");
+const combined=css.map(name=>fs.readFileSync(path.join(root,"v2/src",name),"utf8")).join("\n");
+const tokenCounts=new Map();
+for(const match of combined.matchAll(/--[a-zA-Z][\w-]*/g))tokenCounts.set(match[0],(tokenCounts.get(match[0])||0)+1);
+const singleOccurrenceTokens=[...tokenCounts].filter(([,count])=>count===1).map(([token])=>token);
+const repeatedSelectors=[...bySelector]");
   return (combined.match(new RegExp(escaped+"(?![\\\\w-])","g"))||[]).length===1;
 });
 const repeatedSelectors=[...bySelector].filter(([,hits])=>hits.length>1)
