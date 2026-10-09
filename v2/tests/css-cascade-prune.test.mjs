@@ -43,3 +43,34 @@ test("optimization is deterministic and idempotent",()=>{
   const once=pruneCompiledCss(source).css;
   assert.equal(pruneCompiledCss(once).css,once);
 });
+
+test("coalesces adjacent identical selector bodies without changing declaration order",()=>{
+  const result=pruneCompiledCss(".box{padding:2px}.box{margin:4px}");
+  assert.equal(result.css,".box{padding:2px;margin:4px}");
+});
+
+test("coalesces adjacent identical declarations across selector groups",()=>{
+  const result=pruneCompiledCss(".one{color:red}.two{color:red}");
+  assert.equal(result.css,".one,.two{color:red}");
+});
+
+test("coalesces adjacent identical media blocks preserving order",()=>{
+  const result=pruneCompiledCss("@media (max-width:900px){.one{color:red}}@media (max-width:900px){.two{margin:0}}");
+  assert.equal(result.css,"@media (max-width:900px){.one{color:red}.two{margin:0}}");
+});
+
+test("non-adjacent siblings never merge across an intervening rule",()=>{
+  const input=".one{color:red}.middle{color:blue}.two{color:red}";
+  assert.equal(pruneCompiledCss(input).css,input);
+});
+
+test("unlike media conditions cannot merge and supports boundaries remain intact",()=>{
+  const input="@media (max-width:900px){.one{color:red}}@supports (display:grid){.two{color:red}}@media (max-width:900px){.three{color:red}}";
+  assert.equal(pruneCompiledCss(input).css,input);
+});
+
+test("adjacent declarations with fallback declarations preserve fallback order",()=>{
+  const input=".a{display:-webkit-box;display:flex}.b{display:-webkit-box;display:flex}";
+  const result=pruneCompiledCss(input);
+  assert.ok(result.css.includes("display:-webkit-box;display:flex"));
+});
