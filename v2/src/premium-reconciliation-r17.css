@@ -56,7 +56,7 @@
     "tools tools"
     "games games";
   column-gap:72px;
-  align-items:start;
+  
 }
 
 .games-index > .kicker{grid-area:kicker}
@@ -88,9 +88,9 @@
 }
 
 .games-index .game-support-request{
-  min-height:180px;
-  padding:30px 34px!important;
-  border-left:0!important;
+  
+  
+  
   border-top:1px solid rgba(112,242,239,.20)!important;
   background:
     radial-gradient(circle at 100% 0%,rgba(143,124,255,.12),transparent 20rem),
@@ -98,7 +98,7 @@
 }
 
 .games-index .index-tools{
-  margin-top:54px!important;
+  
   display:grid!important;
   grid-template-columns:minmax(0,1fr) auto;
   gap:14px;
@@ -106,23 +106,23 @@
 }
 
 .games-index .game-grid{
-  margin-top:28px;
+  
   
   grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr)!important;
   grid-auto-rows:minmax(250px,auto);
-  gap:20px!important;
+  
 }
 
 .games-index .game-card{
-  min-height:280px!important;
-  border-radius:28px!important;
+  
+  
   
   border-color:rgba(145,216,230,.09)!important;
 }
 
 .games-index .game-card:first-child{
   
-  min-height:590px!important;
+  
   border-radius:38px!important;
 }
 
@@ -136,8 +136,8 @@
 
 .games-index .game-card:first-child h2{
   font-size:clamp(42px,4vw,64px)!important;
-  line-height:.93!important;
-  letter-spacing:-.045em;
+  
+  
 }
 
 /* -------------------------------------------------------------------------- */
@@ -145,7 +145,7 @@
 /* -------------------------------------------------------------------------- */
 
 .catalog{
-  padding-top:176px!important;
+  
 }
 
 .catalog::before{
@@ -162,7 +162,7 @@
   grid-template-columns:minmax(0,.72fr) minmax(260px,.28fr);
   grid-template-areas:"kicker kicker" "title meta" "intro meta";
   column-gap:64px;
-  align-items:end;
+  
 }
 
 .catalog .catalog-title>.kicker{grid-area:kicker}
@@ -172,45 +172,45 @@
   grid-area:meta;
   align-self:stretch;
   justify-self:end;
-  width:1px!important;
-  height:100%!important;
+  
+  
   margin:0 34px 0 0!important;
   background:linear-gradient(180deg,var(--r17-cyan),transparent)!important;
 }
 
 .catalog .catalog-tools{
-  margin-top:48px;
-  max-width:1040px;
+  
+  
 }
 
 .catalog .catalog-summary{
-  margin-top:24px;
+  
 }
 
 .catalog-grid{
   
   grid-template-columns:minmax(0,1.2fr) minmax(240px,.8fr) minmax(240px,.8fr)!important;
-  gap:18px!important;
+  
   align-items:stretch;
 }
 
 .catalog-grid .content-card:first-child{
   grid-row:span 2;
-  min-height:620px!important;
+  
   border-radius:38px!important;
 }
 
 .catalog-grid .content-card:not(:first-child){
-  min-height:300px!important;
+  
   border-radius:24px!important;
 }
 
 .catalog-grid .content-card:first-child .card-copy{
-  padding:240px 36px 36px!important;
+  
 }
 
 .catalog-grid .content-card:not(:first-child) .card-copy{
-  padding:120px 22px 22px!important;
+  
 }
 
 .catalog-grid .content-card:nth-child(3n){
@@ -242,25 +242,25 @@
 }
 
 .collections-page .collection-mode-tabs{
-  margin-top:34px;
-  width:max-content;
-  border-bottom:1px solid rgba(238,207,145,.12);
+  
+  
+  
 }
 
 .collections-page .collection-tools{
-  margin-top:38px;
+  
 }
 
 .collections-page .collection-grid{
-  margin-top:34px;
+  
   
   grid-template-columns:minmax(0,1.5fr) minmax(260px,.5fr)!important;
-  gap:18px!important;
+  
 }
 
 .collections-page .collection-card:first-child{
   
-  min-height:720px!important;
+  
   border-radius:44px!important;
 }
 
@@ -269,7 +269,7 @@
 }
 
 .collections-page .collection-card:not(:first-child){
-  min-height:220px!important;
+  
   border-radius:0!important;
   border-width:0 0 1px!important;
   background:transparent!important;
@@ -319,29 +319,29 @@
 }
 
 .creators-page .creator-studio-entry{
-  margin-top:18px;
-  border-radius:999px!important;
+  
+  
 }
 
 .creators-page .creators-search{
-  margin-top:42px;
+  
   max-width:700px;
 }
 
 .creator-index-grid{
-  margin-top:34px;
+  
   
   grid-template-columns:minmax(0,1.28fr) repeat(2,minmax(240px,.72fr))!important;
-  gap:18px!important;
+  
   align-items:start;
 }
 
 .creator-index-card{
-  border-radius:28px!important;
+  
 }
 
 .creator-index-card:first-child{
-  min-height:650px!important;
+  
   border-radius:42px!important;
 }
 
@@ -358,7 +358,7 @@
 }
 
 .creator-index-card:not(:first-child){
-  min-height:430px!important;
+  
 }
 
 .creator-index-card:not(:first-child) > div:last-child{
@@ -370,7 +370,7 @@
 /* -------------------------------------------------------------------------- */
 
 .page-section.community{
-  padding-top:154px!important;
+  
   display:grid;
   grid-template-columns:minmax(280px,.62fr) minmax(0,1.38fr);
   grid-template-areas:
@@ -379,8 +379,8 @@
     "intro board"
     "tabs board";
   column-gap:76px;
-  row-gap:18px;
-  align-items:start;
+  
+  
   background:
     radial-gradient(circle at 80% 14%,rgba(143,124,255,.18),transparent 30rem),
     radial-gradient(circle at 18% 74%,rgba(112,242,239,.07),transparent 30rem),
@@ -388,7 +388,7 @@
 }
 
 .community>.kicker{}
-.community>h1{max-width:7.4ch!important;margin:0}
+.community>h1{}
 .community>.page-intro{max-width:460px!important}
 .community>.community-tabs{}
 .community>.community-board{}
@@ -403,11 +403,11 @@
 }
 
 .community .community-tabs button{
-  justify-content:flex-start;
-  min-height:46px;
-  padding:0 0 0 16px!important;
   
-  border-left:1px solid rgba(164,225,239,.08)!important;
+  
+  
+  
+  
   
 }
 
@@ -427,14 +427,14 @@
 }
 
 .community .community-board h2{
-  max-width:8ch;
+  
   font-size:clamp(44px,4.4vw,70px)!important;
   
-  letter-spacing:-.05em;
+  
 }
 
 .community .community-list{
-  margin-top:54px;
+  
 }
 
 /* -------------------------------------------------------------------------- */
@@ -442,7 +442,7 @@
 /* -------------------------------------------------------------------------- */
 
 .account-center{
-  padding-top:154px!important;
+  
   display:grid;
   grid-template-columns:minmax(290px,.58fr) minmax(0,1.42fr);
   grid-template-areas:
@@ -450,8 +450,8 @@
     "title shell"
     "intro shell";
   column-gap:72px;
-  row-gap:18px;
-  align-items:start;
+  
+  
   background:
     radial-gradient(circle at 82% 12%,rgba(143,124,255,.13),transparent 28rem),
     radial-gradient(circle at 14% 64%,rgba(112,242,239,.05),transparent 26rem),
@@ -459,7 +459,7 @@
 }
 
 .account-center>.kicker{}
-.account-center>h1{max-width:7.2ch!important;margin:0}
+.account-center>h1{}
 .account-center>.page-intro{max-width:440px!important}
 .account-center>.account-shell{}
 
@@ -475,16 +475,16 @@
 }
 
 .account-center .account-nav{
-  padding:28px 0!important;
-  border-right:1px solid rgba(164,225,239,.07);
+  
+  
   background:rgba(255,255,255,.008);
 }
 
 .account-center .account-nav button{
-  min-height:46px;
   
   
-  border-left:2px solid transparent!important;
+  
+  
   
   text-align:left;
 }
@@ -496,16 +496,16 @@
 }
 
 .account-center .account-panel{
-  min-height:680px;
-  padding:50px!important;
+  
+  
   
 }
 
 .account-center .account-panel>h2{
-  max-width:9ch;
+  
   font-size:clamp(42px,4vw,64px)!important;
-  line-height:.94!important;
-  letter-spacing:-.045em;
+  
+  
 }
 
 /* -------------------------------------------------------------------------- */
@@ -581,9 +581,9 @@
   }
 
   .community>.community-board{
-    margin-top:26px;
-    min-height:0;
-    padding:30px 22px!important;
+    
+    
+    
     border-radius:28px!important;
   }
 
@@ -598,7 +598,7 @@
     
     
     
-    border-bottom:1px solid rgba(164,225,239,.08)!important;
+    
   }
 
   .community .community-tabs button.active{
@@ -606,24 +606,24 @@
   }
 
   .account-center>.account-shell{
-    margin-top:30px;
     
-    min-height:0;
-    border-radius:28px!important;
+    
+    
+    
   }
 
   .account-center .account-nav{
     
     
-    padding:10px!important;
-    border-right:0;
-    border-bottom:1px solid rgba(164,225,239,.07);
+    
+    
+    
   }
 
   .account-center .account-nav button{
     
     
-    border-bottom:2px solid transparent!important;
+    
   }
 
   .account-center .account-nav button.active,
@@ -633,8 +633,8 @@
   }
 
   .account-center .account-panel{
-    min-height:0;
-    padding:30px 22px!important;
+    
+    
   }
 }
 

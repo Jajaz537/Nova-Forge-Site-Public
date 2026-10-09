@@ -170,7 +170,7 @@
   }
 
   .account-center>.kicker{grid-area:kicker}
-  .account-center>h1{grid-area:title;max-width:8.8ch!important}
+  .account-center>h1{grid-area:title;}
   .account-center>.page-intro{grid-area:intro;max-width:480px!important}
   .account-center>.account-shell{grid-area:shell}
 
@@ -271,7 +271,7 @@
   }
 
   .community>.community-board{
-    padding:26px 18px!important;
+    
   }
 
   .account-center>.account-shell{
@@ -280,7 +280,7 @@
 
   .account-center .account-panel{
     
-    padding:26px 18px!important;
+    
   }
 }
 
