@@ -50,6 +50,8 @@ jobs:
         run: |
           npm ci
           npm run build
+      - name: Experiment compiled CSS cascade without changing candidate assets
+        run: node qa/experiment-v2-compiled-css-cascade.mjs
       - name: Audit CSS source composition (read-only)
         run: |
           node qa/audit-v2-css-cascade-sources.mjs > /tmp/modaryx-v2-css-audit.json
