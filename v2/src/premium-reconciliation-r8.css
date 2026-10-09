@@ -101,7 +101,7 @@
   filter:saturate(.92) contrast(1.06);
 }
 
-.catalog::before{background-position:center,center,54% 42%;opacity:.30}
+.catalog::before{background-position:center,center,54% 42%;}
 .collections-page::before{background-position:center,center,63% 43%;opacity:.30}
 .creators-page::before{background-position:center,center,76% 43%;opacity:.32}
 .community::before{background-position:center,center,43% 42%;opacity:.27}
@@ -308,7 +308,7 @@
 
 /* Community should feel like a destination rather than a dashboard module. */
 .community-board{
-  border-radius:34px;
+  
   background:
     radial-gradient(circle at 86% 8%,rgba(117,84,255,.15),transparent 30rem),
     radial-gradient(circle at 12% 90%,rgba(71,220,211,.07),transparent 30rem),

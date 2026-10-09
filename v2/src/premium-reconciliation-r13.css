@@ -37,13 +37,13 @@ body,
 
 /* Prevent editorial headings from producing orphan letters/words. */
 .account-center>h1{
-  max-width:11.5ch;
+  
   font-size:clamp(60px,6.2vw,94px);
   text-wrap:balance;
 }
 
 .community>h1{
-  max-width:10.6ch;
+  
   text-wrap:balance;
 }
 
