@@ -79,25 +79,25 @@
 /* -------------------------------------------------------------------------- */
 
 .games-index{
-  padding-top:158px!important;
+  
 }
 
 .games-index .game-support-request{
   margin-top:34px;
-  border:0!important;
-  border-left:1px solid rgba(110,240,239,.24)!important;
-  border-radius:0!important;
+  
+  
+  
   background:rgba(2,9,15,.30)!important;
-  box-shadow:none!important;
+  
   backdrop-filter:blur(8px);
 }
 
 .games-index .index-tools{
-  margin-top:40px;
-  padding:0!important;
-  border:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
+  
+  
+  
+  
+  
 }
 
 .games-index .game-card:first-child::after{
@@ -115,7 +115,7 @@
 /* -------------------------------------------------------------------------- */
 
 .catalog{
-  padding-top:158px!important;
+  
 }
 
 .catalog .catalog-title{
@@ -125,15 +125,15 @@
 .catalog .catalog-title::after{
   content:"";
   display:block;
-  width:76px;
-  height:1px;
-  margin-top:28px;
+  
+  
+  
   background:linear-gradient(90deg,var(--r16-cyan),transparent);
 }
 
 .catalog .catalog-summary{
   padding-bottom:16px;
-  border-bottom:1px solid rgba(170,228,240,.08);
+  
 }
 
 .catalog .content-card:nth-child(2n)>.media{
@@ -153,13 +153,13 @@
 }
 
 .collections-page .collection-card:not(:first-child){
-  min-height:310px!important;
-  border-radius:22px!important;
-  box-shadow:0 24px 72px rgba(0,0,0,.22)!important;
+  
+  
+  
 }
 
 .collections-page .collection-card:not(:first-child)>div{
-  padding:104px 24px 24px!important;
+  
 }
 
 .collections-page .collection-card:not(:first-child) dl{
@@ -271,11 +271,11 @@
 .account-panel .settings-list button,
 .account-panel .notification-demo-list article,
 .account-panel .data-list article{
-  border-radius:0!important;
-  border-width:0 0 1px!important;
-  border-color:rgba(170,228,240,.08)!important;
-  background:transparent!important;
-  box-shadow:none!important;
+  
+  
+  
+  
+  
 }
 
 /* -------------------------------------------------------------------------- */
@@ -343,17 +343,12 @@
   }
 
   .games-index .game-support-request{
-    margin-top:24px;
-    padding-left:18px;
+    
+    
   }
 
   .catalog .catalog-title::after{
     margin-top:22px;
-  }
-
-  .creator-index-card:nth-child(2),
-  .creator-index-card:nth-child(3){
-    transform:none;
   }
 
   .collections-page .collection-card:not(:first-child),

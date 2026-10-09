@@ -170,7 +170,7 @@
   }
 
   .account-center>.kicker{grid-area:kicker}
-  .account-center>h1{grid-area:title;max-width:8.8ch!important}
+  .account-center>h1{grid-area:title;}
   .account-center>.page-intro{grid-area:intro;max-width:480px!important}
   .account-center>.account-shell{grid-area:shell}
 
@@ -250,9 +250,9 @@
   }
 
   .community>.community-tabs{
-    display:flex!important;
-    width:100%!important;
-    margin-top:28px!important;
+    
+    
+    
     padding:6px!important;
     border:1px solid rgba(167,230,239,.10)!important;
     border-radius:16px!important;
@@ -271,16 +271,16 @@
   }
 
   .community>.community-board{
-    padding:26px 18px!important;
+    
   }
 
   .account-center>.account-shell{
-    display:block!important;
+    
   }
 
   .account-center .account-panel{
-    min-height:0!important;
-    padding:26px 18px!important;
+    
+    
   }
 }
 

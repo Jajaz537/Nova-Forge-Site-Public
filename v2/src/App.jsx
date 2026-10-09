@@ -159,7 +159,7 @@ function HubContentRow({ item, onOpen }) {
     </button>
     <div className="hub-row-actions">
       <button type="button" aria-label="Téléchargement indisponible" disabled>↓</button>
-      <button type="button" aria-label={`Plus d’options pour ${item.title}`}>•••</button>
+      <button type="button" aria-label={`Consulter les détails de ${item.title}`} onClick={()=>onOpen(item)}>•••</button>
     </div>
   </article>;
 }
@@ -287,8 +287,8 @@ function GameHub({ onOpen }) {
   </main>;
 }
 
-function Discover({ onOpen }) {
-  return <main id="main-content" tabIndex="-1"><section className="editorial-hero canon-reconciled-hero"><div className="editorial-hero-copy"><span className="kicker">Votre monde évolue</span><h1>Redécouvrez vos jeux,<br/>une possibilité à la fois.</h1><p>Explorez des contenus, vérifiez leur compatibilité et composez des expériences qui vous ressemblent, au cœur d’un royaume vivant.</p><button className="primary">Découvrir maintenant <ArrowRight/></button></div></section><section className="page-section"><div className="section-heading"><div><span className="kicker">En ce moment</span><h2>Des mondes à réinventer</h2></div></div><div className="content-grid editorial">{contentItems.slice(0,3).map(item => <ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div></section></main>;
+function Discover({ onOpen, onNavigate }) {
+  return <main id="main-content" tabIndex="-1"><section className="editorial-hero canon-reconciled-hero"><div className="editorial-hero-copy"><span className="kicker">Votre monde évolue</span><h1>Redécouvrez vos jeux,<br/>une possibilité à la fois.</h1><p>Explorez des contenus, vérifiez leur compatibilité et composez des expériences qui vous ressemblent, au cœur d’un royaume vivant.</p><button type="button" className="primary" onClick={()=>onNavigate("Mods & contenus")}>Découvrir maintenant <ArrowRight/></button></div></section><section className="page-section"><div className="section-heading"><div><span className="kicker">En ce moment</span><h2>Des mondes à réinventer</h2></div></div><div className="content-grid editorial">{contentItems.slice(0,3).map(item => <ContentCard key={item.title} item={item} onOpen={onOpen}/>)}</div></section></main>;
 }
 
 function CollectionsPage() {
@@ -442,7 +442,7 @@ function Detail({ item, onBack }) {
   </main>;
 }
 
-function Library() {
+function Library({ onOpenGameHub }) {
   const [tab,setTab]=useState("Profils de jeu");
   const [openProfile,setOpenProfile]=useState(null);
   const [showProfileDelta,setShowProfileDelta]=useState(false);
@@ -488,7 +488,7 @@ function Library() {
   };
   return <main id="main-content" tabIndex="-1" className="page-section library">
     <span className="kicker">Votre espace</span><h1>Bibliothèque</h1><p className="page-intro">Retrouvez favoris, suivis, collections, profils et historique sans les confondre.</p>
-    <section className="library-overview"><div className="library-focus"><Media pos="50% 100%"/><div><span className="demo-label">Jeu actif</span><h2>Aetherlands</h2><p>3 profils de démonstration · version 1.4.2</p><button className="primary">Ouvrir le Game Hub <ArrowRight/></button></div></div><div className="library-summary"><strong>État de la bibliothèque</strong><span>Données locales de démonstration</span><span>Aucun cloud connecté</span><span>Aucun manager connecté</span></div></section>
+    <section className="library-overview"><div className="library-focus"><Media pos="50% 100%"/><div><span className="demo-label">Jeu actif</span><h2>Aetherlands</h2><p>3 profils de démonstration · version 1.4.2</p><button type="button" className="primary" onClick={onOpenGameHub}>Ouvrir le Game Hub <ArrowRight/></button></div></div><div className="library-summary"><strong>État de la bibliothèque</strong><span>Données locales de démonstration</span><span>Aucun cloud connecté</span><span>Aucun manager connecté</span></div></section>
     <nav className="library-tabs" aria-label="Sections de la bibliothèque">{tabs.map(value=><button key={value} aria-pressed={tab===value} className={tab===value?"active":""} onClick={()=>setTab(value)}>{value}</button>)}</nav>
     {panels[tab]}
   </main>;
@@ -1127,7 +1127,7 @@ export function App() {
 
   let screen;
   if (detail) screen=<Detail item={detail} onBack={closeDetail}/>;
-  else if(active==='Découvrir') screen=<Discover onOpen={openContent}/>;
+  else if(active==='Découvrir') screen=<Discover onOpen={openContent} onNavigate={navigate}/>;
   else if(active==='Recherche') screen=<GlobalSearch onOpenContent={openContent} onOpenGame={openGameHub} onOpenCreators={()=>navigate('Créateurs')} onOpenCollections={()=>navigate('Collections')}/>;
   else if(active==='Jeux' && !gameHubOpen) screen=<GamesIndex onOpenGame={openGameHub}/>;
   else if(active==='Mods & contenus') screen=<Catalog onOpen={openContent}/>;
@@ -1137,7 +1137,7 @@ export function App() {
   else if(active==='Notifications') screen=<AccountCenter key="notifications" initialTab="Notifications"/>;
   else if(active==='Compte') screen=<AccountCenter key="account" initialTab="Compte"/>;
   else if(active==='Créer') screen=<CreatorStudio/>;
-  else if(active==='Bibliothèque') screen=<Library/>;
+  else if(active==='Bibliothèque') screen=<Library onOpenGameHub={openGameHub}/>;
   else if(active==='Droits jeux') screen=<RightsDashboard/>;
   else if(active==='MODARYX IA') screen=<ModaryxAI/>;
   else if(active==='Confiance & légal') screen=<PublicLegalTrust/>;

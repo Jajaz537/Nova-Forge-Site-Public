@@ -21,6 +21,8 @@ const proc = spawn(chrome, [
 let ws;
 let nextId = 1;
 const pending = new Map();
+const captureCssCoverage=process.env.MODARYX_CSS_143_COVERAGE==="1";
+const trackedStylesheets=new Map();
 
 function send(method, params = {}) {
   const id = nextId++;
@@ -131,7 +133,25 @@ function expectedTextLabel(expectedText){
 async function capture(file, width, height, expectedText) {
   // Route changes use smooth scrolling in the prototype. Normalize origin captures
   // to the real top of the page so stale scroll offsets do not create blank bands.
-  await evaluate("window.scrollTo({top:0,left:0,behavior:'auto'}); true");
+  // On mobile, tab content can start below the fold. Center the evidenced
+  // state instead of capturing an unchanged header for every tab.
+  const mobileDetailState = width < 760 && (/^mobile-content-(detail|files|versions|compatibility-specialized|advanced-plan|changelog|support|report|permissions)\.png$/.test(file) || /^mobile-library(-|\.png$)/.test(file) || /^mobile-game-profile(-|\.png$)/.test(file));
+  if (mobileDetailState) {
+    const focusText = Array.isArray(expectedText) ? expectedText[0] : expectedText;
+    const located = await evaluate(`(() => {
+      const text = ${JSON.stringify(String(focusText || "").toLocaleLowerCase("fr"))};
+      const nodes = [...document.querySelectorAll('main *')];
+      const match = nodes.find(el => (el.textContent || '').trim().toLocaleLowerCase('fr').includes(text) &&
+        ![...el.children].some(c => (c.textContent || '').toLocaleLowerCase('fr').includes(text)) &&
+        getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden' && el.getBoundingClientRect().width > 0);
+      if (!match) return false;
+      match.scrollIntoView({block:'center', inline:'nearest', behavior:'instant'});
+      return true;
+    })()`);
+    if (!located) throw new Error("mobile capture target unavailable: " + file + " / " + focusText);
+  } else {
+    await evaluate("window.scrollTo({top:0,left:0,behavior:'auto'}); true");
+  }
   await sleep(120);
   let textOk = !expectedText;
   if (expectedText) {
@@ -145,11 +165,15 @@ async function capture(file, width, height, expectedText) {
     const visibleText = await evaluate("document.body.innerText.slice(0,1200)");
     throw new Error("expected text missing before capture: " + expectedTextLabel(expectedText) + "\\nVISIBLE_TEXT:\\n" + visibleText);
   }
+  // CDP clip coordinates are document-relative. After scrolling to the
+  // evidenced mobile state, use the real visual viewport origin.
+  const metrics = await send("Page.getLayoutMetrics");
+  const viewport = metrics.result.visualViewport || {};
   const shot = await send("Page.captureScreenshot", {
     format: "png",
     fromSurface: true,
     captureBeyondViewport: false,
-    clip: { x: 0, y: 0, width, height, scale: 1 },
+    clip: { x: viewport.pageX || 0, y: viewport.pageY || 0, width, height, scale: 1 },
   });
   const data = Buffer.from(shot.result.data, "base64");
   const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/" + file;
@@ -201,6 +225,9 @@ try {
   });
   ws.addEventListener("message", event => {
     const msg = JSON.parse(event.data);
+    if(captureCssCoverage && msg.method==="CSS.styleSheetAdded" && msg.params?.header){
+      trackedStylesheets.set(msg.params.header.styleSheetId,msg.params.header.sourceURL||"");
+    }
     if (!msg.id || !pending.has(msg.id)) return;
     const p = pending.get(msg.id);
     pending.delete(msg.id);
@@ -209,6 +236,11 @@ try {
   });
   await send("Page.enable");
   await send("Runtime.enable");
+  if(captureCssCoverage){
+    await send("DOM.enable");
+    await send("CSS.enable");
+    await send("CSS.startRuleUsageTracking");
+  }
 
   const manifest = { commit: process.env.GITHUB_SHA, captures: [] };
 
@@ -635,6 +667,34 @@ try {
 
   const out = "review-evidence/modaryx-v2-living-threshold-prototype-20261003/visual-proof/multiscreen/manifest.json";
   writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
+  if(captureCssCoverage){
+    const tracked=(await send("CSS.stopRuleUsageTracking")).result?.ruleUsage||[];
+    const bySheet=new Map();
+    for(const usage of tracked){
+      const url=trackedStylesheets.get(usage.styleSheetId)||"";
+      if(!url.includes("/assets/") || !/\.css(?:\?|$)/.test(url) || !usage.used)continue;
+      const asset=url.split("?")[0].split("/").pop();
+      const ranges=bySheet.get(asset)||[];
+      ranges.push([usage.startOffset,usage.endOffset]);
+      bySheet.set(asset,ranges);
+    }
+    if(!bySheet.size)throw new Error("No compiled CSS coverage collected from 143 visual states");
+    const summary=[];
+    for(const [asset,ranges] of bySheet){
+      let usedChars=0,lastEnd=0;
+      for(const [start,end] of ranges.sort((a,b)=>a[0]-b[0])){
+        if(end>lastEnd){
+          usedChars+=end-Math.max(start,lastEnd);
+          lastEnd=end;
+        }
+      }
+      summary.push({asset,usedCssRuleCharacters:usedChars,usedRangeObservations:ranges.length});
+    }
+    console.log("CSS_143_STATE_USAGE_SUMMARY",JSON.stringify({
+      captures:manifest.captures.length,stylesheets:summary,
+      caveat:"143 captures are not all possible routes, personalized states, pseudo-states or accessibility modes; never purge CSS automatically."
+    }));
+  }
   console.log("MULTISCREEN_CAPTURE_COUNT", manifest.captures.length);
   console.log("PASS_V2_LIVING_THRESHOLD_MULTISCREEN_CAPTURE");
 } finally {

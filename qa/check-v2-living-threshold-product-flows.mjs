@@ -163,14 +163,37 @@ try{
   await clickText(".global-nav button","Jeux");
   await waitText("Trouvez votre prochain terrain de jeu");
   await clickText(".game-support-request>.quiet","Demander le support d’un jeu");
-  await waitText("Aucune demande éditeur n’est envoyée depuis ce prototype.");
+  // Preview and V2 candidate currently use different truthful, fail-closed copy.
+  // Require either exact safety statement, never a generic “demonstration” match.
+  let publisherSafetyCopyFound=false;
+  for(let attempt=0;attempt<40;attempt++){
+    publisherSafetyCopyFound=await evaluate(`(() => {
+      const copy=document.body.innerText.toLocaleLowerCase("fr");
+      return copy.includes("aucune demande n’est envoyée automatiquement à un éditeur.") ||
+        copy.includes("aucune demande éditeur n’est envoyée depuis ce prototype.");
+    })()`);
+    if(publisherSafetyCopyFound) break;
+    await sleep(100);
+  }
+  if(!publisherSafetyCopyFound) throw new Error("publisher no-outbound safety statement missing");
   await clickText(".game-request-form .primary","Préparer la demande locale");
   await waitText("Saisissez un nom de jeu avant de préparer la demande.");
   await fill(".game-request-form input","Project Meridian");
   await clickText(".game-request-form .primary","Préparer la demande locale");
   await waitText("Brouillon de demande — non envoyé");
   await waitText("Project Meridian · PC");
-  await waitText("Aucun Rights Case réel n’est créé dans ce prototype.");
+  // Both preview and candidate guarantee that the local draft creates no real Rights Case.
+  let noRealRightsCase=false;
+  for(let attempt=0;attempt<40;attempt++){
+    noRealRightsCase=await evaluate(`(() => {
+      const copy=document.body.innerText.toLocaleLowerCase("fr");
+      return copy.includes("aucun rights case réel n’est créé par ce brouillon local.") ||
+        copy.includes("aucun rights case réel n’est créé dans ce prototype.");
+    })()`);
+    if(noRealRightsCase) break;
+    await sleep(100);
+  }
+  if(!noRealRightsCase) throw new Error("local draft must explicitly create no real Rights Case");
   console.log("FLOW_ASSERT game support request local-only triage");
 
   await fill(".games-index .catalog-search input","Aetherlands");
@@ -633,6 +656,7 @@ try{
   await waitText("Des échanges utiles autour des créations.");
   await clickText(".community-tabs button","Questions");
   await waitText("Préparer une question");
+
 
   console.log("PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS");
 } finally {

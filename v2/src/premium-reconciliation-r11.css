@@ -20,15 +20,15 @@ body{
 }
 
 .topbar{
-  width:min(1380px,calc(100% - 36px));
-  left:50%;
-  right:auto;
+  
+  
+  
   transform:translateX(-50%);
-  top:14px;
-  border:1px solid rgba(178,228,240,.09);
-  border-radius:18px;
+  
+  
+  
   background:rgba(2,8,14,.68);
-  box-shadow:0 18px 70px rgba(0,0,0,.32);
+  
   backdrop-filter:blur(20px) saturate(1.15);
 }
 
@@ -42,25 +42,25 @@ body{
 }
 
 .logo{
-  letter-spacing:.28em;
-  font-size:13px;
+  
+  
 }
 
 /* DISCOVER — full-world entry instead of a dashboard hero. */
 .editorial-hero.canon-reconciled-hero{
   min-height:clamp(720px,88vh,980px);
-  margin:0;
-  padding:180px max(28px,calc((100vw - 1320px)/2)) 96px;
+  
+  
   display:flex;
-  align-items:flex-end;
-  border-radius:0 0 52px 52px;
+  
+  
   overflow:hidden;
   isolation:isolate;
   background:
     linear-gradient(180deg,rgba(2,7,13,.08) 0%,rgba(2,7,13,.14) 38%,rgba(2,7,13,.74) 78%,#02070d 100%),
     linear-gradient(90deg,rgba(2,7,13,.86) 0%,rgba(2,7,13,.54) 31%,rgba(2,7,13,.08) 68%),
     url('/assets/modaryx-wolf-dragon-hero.webp') center 44%/cover no-repeat;
-  box-shadow:0 80px 180px rgba(0,0,0,.42);
+  
 }
 
 .editorial-hero.canon-reconciled-hero::before{
@@ -76,11 +76,11 @@ body{
 }
 
 .editorial-hero-copy{
-  max-width:790px;
-  padding:0;
+  
+  
   background:transparent;
-  border:0;
-  box-shadow:none;
+  
+  
   backdrop-filter:none;
 }
 
@@ -90,11 +90,11 @@ body{
 }
 
 .editorial-hero-copy h1{
-  max-width:11ch;
+  
   margin-top:18px;
   font-size:clamp(58px,7.1vw,104px);
-  line-height:.89;
-  letter-spacing:-.065em;
+  
+  
   text-wrap:balance;
   text-shadow:0 12px 40px rgba(0,0,0,.34);
 }
@@ -113,7 +113,7 @@ body{
   border-radius:999px;
   padding-inline:24px;
   background:linear-gradient(135deg,rgba(100,237,240,.96),rgba(137,116,255,.90));
-  color:#021017;
+  
   box-shadow:0 18px 52px rgba(70,193,209,.24);
 }
 
@@ -165,22 +165,22 @@ body{
 .games-index .game-grid{
   display:grid;
   grid-template-columns:minmax(0,1.38fr) minmax(320px,.62fr);
-  gap:26px;
+  
   align-items:start;
 }
 
 .games-index .game-card{
-  min-height:330px;
-  border-radius:30px;
+  
+  
   overflow:hidden;
-  border:1px solid rgba(164,225,239,.08);
+  
   background:
     linear-gradient(160deg,rgba(7,20,30,.88),rgba(3,9,15,.92));
-  box-shadow:0 40px 110px rgba(0,0,0,.32);
+  
 }
 
 .games-index .game-card:first-child{
-  min-height:660px;
+  
   grid-row:span 2;
   display:flex;
   align-items:flex-end;
@@ -197,17 +197,17 @@ body{
 
 .games-index .game-card:first-child h2{
   font-size:clamp(44px,4.8vw,72px);
-  line-height:.94;
-  letter-spacing:-.05em;
+  
+  
 }
 
 /* GAME HUB — make the selected game feel like a place. */
 .game-hub-page .game-hero{
-  min-height:620px;
-  margin:0;
-  border-radius:0 0 46px 46px;
-  padding:170px max(28px,calc((100vw - 1320px)/2)) 70px;
-  align-items:end;
+  
+  
+  
+  
+  
   background:
     linear-gradient(180deg,rgba(1,7,13,.10),rgba(1,7,13,.20) 44%,rgba(1,7,13,.88) 94%),
     linear-gradient(90deg,rgba(1,7,13,.78),rgba(1,7,13,.22) 55%,transparent),
@@ -220,16 +220,16 @@ body{
 
 .game-hub-page .game-identity h1{
   font-size:clamp(64px,7vw,102px);
-  line-height:.88;
-  letter-spacing:-.065em;
+  
+  
 }
 
 .game-hub-page .hero-search{
   max-width:720px;
-  border-radius:999px;
+  
   background:rgba(2,9,15,.68);
   backdrop-filter:blur(18px);
-  border:1px solid rgba(164,225,239,.10);
+  
 }
 
 /* CATALOG / COLLECTIONS / CREATORS — editorial covers. */
@@ -283,37 +283,37 @@ body{
 /* COMMUNITY — one editorial stage, not stacked boxes. */
 .community .community-tabs{
   margin-top:38px;
-  border:0;
+  
   border-bottom:1px solid rgba(164,225,239,.10);
   border-radius:0;
-  padding:0 0 14px;
+  
   background:transparent;
-  box-shadow:none;
+  
   backdrop-filter:none;
 }
 
 .community .community-tabs button{
-  border-radius:999px;
+  
 }
 
 .community-board{
-  margin-top:34px;
-  min-height:600px;
-  border-radius:42px;
-  border:1px solid rgba(164,225,239,.08);
+  
+  
+  
+  
   background:
     radial-gradient(circle at 78% 12%,rgba(139,116,255,.14),transparent 24rem),
     radial-gradient(circle at 18% 82%,rgba(100,237,240,.07),transparent 22rem),
     linear-gradient(145deg,rgba(7,20,30,.84),rgba(2,8,14,.94));
-  box-shadow:0 52px 130px rgba(0,0,0,.34);
+  
 }
 
 .community-list,
 .community-teams,
 .activity-list{
   background:rgba(2,9,15,.28);
-  border:1px solid rgba(164,225,239,.06);
-  box-shadow:none;
+  
+  
 }
 
 /* ACCOUNT — quiet atelier rather than a settings mockup. */
@@ -334,17 +334,17 @@ body{
 }
 
 .account-shell{
-  gap:72px;
+  
 }
 
 .account-nav{
   background:transparent;
-  border:0;
-  box-shadow:none;
+  
+  
 }
 
 .account-nav button{
-  border-radius:10px;
+  
   background:transparent;
 }
 
@@ -355,9 +355,9 @@ body{
 }
 
 .account-panel{
-  border:0;
+  
   background:transparent;
-  box-shadow:none;
+  
 }
 
 /* Reduce generic panel chrome across the product without touching semantics. */

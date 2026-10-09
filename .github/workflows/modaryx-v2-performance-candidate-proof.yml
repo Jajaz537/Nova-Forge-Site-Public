@@ -38,6 +38,8 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-v2-performance-candidate-contract.mjs
+          node qa/check-v2-root-provenance.mjs --root=candidate
+          node qa/check-v2-living-world-style-isolation.mjs
           node qa/check-v2-preproduction-contract-registry.mjs
       - name: Locate Chrome
         run: |
@@ -47,9 +49,18 @@ jobs:
           echo "CHROME_BIN=$CHROME_BIN" >> "$GITHUB_ENV"
       - name: Build exact V2 root
         working-directory: v2
+        env:
+          MODARYX_CSS_PARITY_BASELINE: /tmp/modaryx-v2-original-css.txt
         run: |
           npm ci
+          node --test tests/css-cascade-prune.test.mjs
           npm run build
+      - name: Experiment compiled CSS cascade without changing candidate assets
+        run: node qa/experiment-v2-compiled-css-cascade.mjs
+      - name: Audit CSS source composition (read-only)
+        run: |
+          node qa/audit-v2-css-cascade-sources.mjs > /tmp/modaryx-v2-css-audit.json
+          node -e 'const a=require("/tmp/modaryx-v2-css-audit.json"); console.log("CSS_AUDIT_IMPORTS",a.totalCssImports); console.log("CSS_AUDIT_SOURCE_BYTES",a.totalSourceBytes); console.log("CSS_AUDIT_SINGLE_OCCURRENCE_CANDIDATES",a.singleOccurrenceTokens.length); console.log("CSS_AUDIT_LARGEST_SOURCES",JSON.stringify(a.rows.slice(0,7)))'
       - name: Start candidate
         working-directory: v2
         run: |
@@ -58,6 +69,19 @@ jobs:
           for attempt in {1..80}; do curl --fail --silent http://127.0.0.1:4182/ >/dev/null && exit 0; sleep 0.25; done
           cat /tmp/modaryx-v2-perf.log
           exit 1
+      - name: Compare original versus optimized CSS across 18 browser states
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4182
+          MODARYX_CSS_PARITY_BASELINE: /tmp/modaryx-v2-original-css.txt
+        run: node qa/check-v2-css-parity-browser.mjs
+      - name: Verify three real Premium CTAs in a fresh browser
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4182
+        run: node qa/check-v2-premium-cta-routes.mjs
+      - name: Survey CSS usage for V2 routes
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4182
+        run: node qa/report-v2-css-route-usage.mjs
       - name: Measure cold-load and route-response budgets
         env:
           MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4182

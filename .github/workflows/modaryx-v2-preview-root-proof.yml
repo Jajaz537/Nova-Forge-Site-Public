@@ -42,6 +42,7 @@ jobs:
         run: |
           set -euo pipefail
           node qa/check-v2-preview-root-contract.mjs
+          node qa/check-v2-root-provenance.mjs --root=preview
 
       - name: Locate Chrome
         run: |
@@ -89,6 +90,7 @@ jobs:
       - name: Capture page tab module matrix
         env:
           MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4175
+          MODARYX_CSS_143_COVERAGE: "1"
         run: |
           set -euo pipefail
           node qa/capture-v2-living-threshold-multiscreen.mjs
