@@ -99,7 +99,7 @@ async function runScenario(name,s){
     for(const stylesheet of observedCssUrls){
       const parsed=new URL(stylesheet,origin);
       if(parsed.origin!==new URL(origin).origin)throw new Error("Unaccounted external CSS: "+parsed.origin);
-      if(!/^\\/assets\\/[a-zA-Z0-9._-]+\\.css$/.test(parsed.pathname)){
+      if(!/^\/assets\/[a-zA-Z0-9._-]+\.css$/.test(parsed.pathname)){
         throw new Error("Unaccounted local CSS: "+parsed.pathname);
       }
       localCss.add("v2/dist/client"+parsed.pathname);
