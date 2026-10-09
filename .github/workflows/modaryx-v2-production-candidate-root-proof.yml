@@ -98,6 +98,13 @@ jobs:
           set -euo pipefail
           node qa/check-v2-living-threshold-browser-a11y.mjs
 
+      - name: Prove current R3 Premium CTAs on candidate root
+        env:
+          MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4178
+        run: |
+          set -euo pipefail
+          node qa/check-v2-premium-cta-routes.mjs
+
       - name: Product flows page tab module proof
         env:
           MODARYX_REVIEW_ORIGIN: http://127.0.0.1:4178
