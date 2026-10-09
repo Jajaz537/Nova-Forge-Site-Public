@@ -89,12 +89,36 @@ async function runScenario(name,s){
       poll();
     }))()`);
     assert.ok(routeMs>=0&&routeMs<=s.routeResponseCeilingMs,`${name} route response ${routeMs} > ${s.routeResponseCeilingMs}`);
-    console.log("PERF_SCENARIO",name,JSON.stringify({...metrics,routeResponseMs:routeMs}));
-    return {...metrics,routeResponseMs:routeMs};
+    // Account for ALL local CSS actually loaded during the page and navigation,
+    // not only the single HTML entry CSS. Prevent false greens from CSS splitting.
+    const observedCssUrls=await evaluate(`(()=>[...new Set([
+      ...performance.getEntriesByType("resource").map(resource=>resource.name),
+      ...[...document.styleSheets].map(sheet=>sheet.href).filter(Boolean)
+    ].filter(url=>/\\.css(?:[?#]|$)/.test(url)))])()`);
+    const localCss=new Set();
+    for(const stylesheet of observedCssUrls){
+      const parsed=new URL(stylesheet,origin);
+      if(parsed.origin!==new URL(origin).origin)throw new Error("Unaccounted external CSS: "+parsed.origin);
+      if(!/^\\/assets\\/[a-zA-Z0-9._-]+\\.css$/.test(parsed.pathname)){
+        throw new Error("Unaccounted local CSS: "+parsed.pathname);
+      }
+      localCss.add("v2/dist/client"+parsed.pathname);
+    }
+    if(!localCss.size) throw new Error("No CSS asset observed during "+name+" scenario");
+    for(const file of localCss)if(!fs.existsSync(file))throw new Error("CSS asset not found for route proof: "+file);
+    const loadedCssGzip=[...localCss].reduce((total,file)=>total+gzipSize(file),0);
+    console.log("PERF_ROUTE_CSS_GZIP",name,loadedCssGzip,JSON.stringify([...localCss]));
+    console.log("PERF_SCENARIO",name,JSON.stringify({...metrics,routeResponseMs:routeMs,loadedCssGzip}));
+    return {...metrics,routeResponseMs:routeMs,loadedCssGzip};
   } finally {try{ws?.close()}catch{} proc.kill("SIGTERM"); try{fs.rmSync(userDataDir,{recursive:true,force:true})}catch{}}
 }
 
 const results={desktop:await runScenario("desktop",contract.scenarios.desktop),mobile:await runScenario("mobile",contract.scenarios.mobile)};
 console.log("PERF_RESULT",JSON.stringify({jsGzip,cssGzip,results}));
-if(cssBudgetError) throw new Error(cssBudgetError);
+const routeCssErrors=Object.entries(results).flatMap(([viewport,measure])=>
+  measure.loadedCssGzip>contract.bundleCeilings.cssGzipBytes ?
+    [viewport+" loaded CSS gzip "+measure.loadedCssGzip+" > "+contract.bundleCeilings.cssGzipBytes] : []
+);
+const errors=[...(cssBudgetError?[cssBudgetError]:[]),...routeCssErrors];
+if(errors.length) throw new Error(errors.join("; "));
 console.log("PASS_V2_PERFORMANCE_CANDIDATE_LAB");
