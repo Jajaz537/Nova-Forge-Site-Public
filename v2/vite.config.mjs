@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { measuredCssCascadePruner } from "./css-cascade-prune.mjs";
 
 export default defineConfig({
   build: {
@@ -15,5 +16,5 @@ export default defineConfig({
       clientFiles: ["./src/main.jsx"],
     },
   },
-  plugins: [react()],
+  plugins: [react(), measuredCssCascadePruner()],
 });
