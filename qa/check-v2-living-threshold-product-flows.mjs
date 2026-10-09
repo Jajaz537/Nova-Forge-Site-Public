@@ -658,26 +658,33 @@ try{
   await waitText("Préparer une question");
 
 
+  const assertRoute=async(path,selector,label)=>{
+    let last;
+    for(let attempt=0;attempt<45;attempt++){
+      last=await evaluate(`({path:window.location.pathname,main:document.querySelector('main')?.className||''})`);
+      if(last.path===path && (await evaluate(`!!document.querySelector(${JSON.stringify(selector)})`)))return;
+      await sleep(100);
+    }
+    throw new Error(label+" route mismatch: "+JSON.stringify(last));
+  };
+
   // CTA navigation: real routes, no fabricated commerce or installation.
   await load(1440,1024);
   await clickText(".global-nav button","Découvrir");
   await waitText("Redécouvrez vos jeux");
   await clickText(".canon-reconciled-hero .primary","Découvrir maintenant");
-  if(!(await evaluate("window.location.pathname==='/mods' && !!document.querySelector('.catalog')")))
-    throw new Error("Discover action did not reach the MODARYX catalogue");
+  await assertRoute("/mods",".catalog","Discover CTA");
   console.log("FLOW_ASSERT_DISCOVER_CTA");
 
   await clickText("footer button","Bibliothèque");
   await waitText("Bibliothèque");
   await clickText(".library-focus .primary","Ouvrir le Game Hub");
-  if(!(await evaluate("window.location.pathname==='/games/aetherlands' && !!document.querySelector('.game-hub-page')")))
-    throw new Error("Library action did not open the Game Hub");
+  await assertRoute("/games/aetherlands",".game-hub-page","Library CTA");
   console.log("FLOW_ASSERT_LIBRARY_GAME_HUB_CTA");
 
   await waitText("Mes profils pour ce jeu");
   await clickAria("Consulter les détails de Sentiers de l’aube");
-  if(!(await evaluate("window.location.pathname==='/content/sentiers-de-laube'")))
-    throw new Error("Game Hub row details action did not open the content");
+  await assertRoute("/content/sentiers-de-laube","main","Hub row details");
   console.log("FLOW_ASSERT_GAME_HUB_CONTENT_DETAILS");
 
   console.log("PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS");
