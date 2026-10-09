@@ -46,9 +46,19 @@ export function pruneCompiledCss(input){
   for(const decls of buckets.values()){
     for(let i=0;i<decls.length-1;i++){
       const earlier=decls[i];
-      const superseded=decls.slice(i+1).some(later=>
-        (!earlier.important||later.important)&&safeValue(later.value)
-      );
+      const superseded=decls.slice(i+1).some(later=>{
+        if(earlier.important&&!later.important)return false;
+        if(!safeValue(later.value))return false;
+        // Within the SAME rule, duplicate properties with differing values
+        // can be deliberate cross-engine fallbacks (e.g. -webkit-box / flex).
+        // Across rules, keep the same protection for compatibility-sensitive
+        // properties. Both variants must survive unknown client engines.
+        if(earlier.value!==later.value &&
+           (earlier.parent===later.parent ||
+            /^(?:display|position|background|background-image|mask|mask-image|font-family)$/i.test(earlier.prop)))
+          return false;
+        return true;
+      });
       if(superseded){earlier.remove();removed++}
     }
   }
