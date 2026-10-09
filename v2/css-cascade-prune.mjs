@@ -12,10 +12,10 @@ function safeValue(value){
     !/[{}]/.test(value);
 }
 function equivalentSelectorKey(selector){
-  const normalized=selector.trim().replace(/\\s+/g," ");
+  const normalized=selector.trim().replace(/\s+/g," ");
   // Comma-separated selector groups have no ordering semantics. Avoid function
   // arguments, attribute selectors and quoted strings: commas there are syntax.
-  if(/[()[\\]"']/.test(normalized))return normalized;
+  if(/[\[\]()"']/.test(normalized))return normalized;
   return normalized.split(",").map(part=>part.trim())
     .filter(Boolean).sort().join(",");
 }
