@@ -29,8 +29,16 @@ for(const [index,name] of css.entries()){
     bySelector.set(selector,occurrences);
   }
 }
+// Candidate custom-property references must be checked across ALL imported CSS,
+// not only within the declaring file. This scan is conservative and read-only.
+const combined=css.map(name=>fs.readFileSync(path.join(root,"v2/src",name),"utf8")).join("\\n");
+const propertyTokens=[...new Set([...combined.matchAll(/--[a-zA-Z][\\w-]*/g)].map(m=>m[0]))];
+const singleOccurrenceTokens=propertyTokens.filter(token=>{
+  const escaped=token.replace(/[.*+?^$\\{\\}()|[\\]\\\\]/g,"\\\\const repeatedSelectors=[...bySelector]");
+  return (combined.match(new RegExp(escaped+"(?![\\\\w-])","g"))||[]).length===1;
+});
 const repeatedSelectors=[...bySelector].filter(([,hits])=>hits.length>1)
  .map(([selector,hits])=>({selector,count:hits.length,files:[...new Set(hits.map(h=>h.file))]}))
  .sort((a,b)=>b.count-a.count).slice(0,40);
-const report={kind:"source-inventory-not-bundle-proof",totalCssImports:css.length,totalSourceBytes:rows.reduce((n,r)=>n+r.sourceBytes,0),totalImportantDeclarations:rows.reduce((n,r)=>n+r.importantDeclarations,0),repeatedSelectorsAreCandidatesOnly:true,repeatedSelectors,rows};
+const report={kind:"source-inventory-not-bundle-proof",totalCssImports:css.length,totalSourceBytes:rows.reduce((n,r)=>n+r.sourceBytes,0),totalImportantDeclarations:rows.reduce((n,r)=>n+r.importantDeclarations,0),repeatedSelectorsAreCandidatesOnly:true,singleOccurrenceTokensAreCandidatesOnly:true,singleOccurrenceTokens,repeatedSelectors,rows};
 console.log(JSON.stringify(report,null,2));
