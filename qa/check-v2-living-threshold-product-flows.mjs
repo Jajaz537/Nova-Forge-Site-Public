@@ -659,6 +659,7 @@ try{
 
 
   // CTA navigation: real routes, no fabricated commerce or installation.
+  await setViewport(1440,1024);
   await send("Page.navigate",{url:origin+"/discover"});
   await waitText("Redécouvrez vos jeux");
   await clickText(".canon-reconciled-hero .primary","Découvrir maintenant");
