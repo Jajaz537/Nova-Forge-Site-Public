@@ -657,6 +657,29 @@ try{
   await clickText(".community-tabs button","Questions");
   await waitText("Préparer une question");
 
+
+  // CTA navigation: real routes, no fabricated commerce or installation.
+  await send("Page.navigate",{url:origin+"/discover"});
+  await waitText("Redécouvrez vos jeux");
+  await clickText(".canon-reconciled-hero .primary","Découvrir maintenant");
+  if(!(await evaluate("window.location.pathname==='/mods' && !!document.querySelector('.catalog')")))
+    throw new Error("Discover action did not reach the MODARYX catalogue");
+  console.log("FLOW_ASSERT_DISCOVER_CTA");
+
+  await send("Page.navigate",{url:origin+"/library"});
+  await waitText("Bibliothèque");
+  await clickText(".library-focus .primary","Ouvrir le Game Hub");
+  if(!(await evaluate("window.location.pathname==='/games/aetherlands' && !!document.querySelector('.game-hub-page')")))
+    throw new Error("Library action did not open the Game Hub");
+  console.log("FLOW_ASSERT_LIBRARY_GAME_HUB_CTA");
+
+  await send("Page.navigate",{url:origin+"/"});
+  await waitText("Mes profils pour ce jeu");
+  await clickAria("Consulter les détails de Sentiers de l’aube");
+  if(!(await evaluate("window.location.pathname==='/content/sentiers-de-laube'")))
+    throw new Error("Game Hub row details action did not open the content");
+  console.log("FLOW_ASSERT_GAME_HUB_CONTENT_DETAILS");
+
   console.log("PASS_V2_LIVING_THRESHOLD_PRODUCT_FLOWS");
 } finally {
   try{ws?.close();}catch{}
