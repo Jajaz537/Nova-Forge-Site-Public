@@ -87,3 +87,70 @@ const report={
 };
 console.log("CSS_COMPILED_EXPERIMENT",JSON.stringify(report));
 if(report.candidateDeclarations<1)throw new Error("No candidates found — inspect compiled CSS or selectors");
+
+// Architecture feasibility only: split obvious route-scoped CSS rules while
+// leaving all mixed/global rules in common. No emitted application asset changes.
+// This is NOT proof that CSS injection order, FOUC, or interactive states are safe.
+const routeMarkers={
+  games:[".games-index",".game-hub-page"],
+  mods:[".catalog",".content-detail",".content-page"],
+  collections:[".collections-page"],
+  creators:[".creators-page",".creator-index-card",".creator-studio"],
+  community:[".community"],
+  account:[".account-center"]
+};
+const unmodified=postcss.parse(input,{from:cssFile});
+const candidateRoutes={};
+for(const name of Object.keys(routeMarkers))candidateRoutes[name]={rules:0,parts:[]};
+let safeIsolatedRules=0;
+function routeOwner(rule){
+  const parts=rule.selector?.split(",")||[];
+  if(!parts.length||parts.some(s=>/:(?:is|where|has|not)\(/.test(s)))return null;
+  const owning=new Set();
+  for(const selector of parts){
+    const matches=Object.entries(routeMarkers).filter(([,markers])=>
+      markers.some(marker=>selector.includes(marker))
+    ).map(([name])=>name);
+    if(matches.length!==1)return null;
+    owning.add(matches[0]);
+    if(owning.size>1)return null;
+  }
+  return [...owning][0]||null;
+}
+function serializeWithContext(node){
+  let out=node.toString(),parent=node.parent;
+  while(parent&&parent.type!=="root"){
+    if(parent.type!=="atrule"||/keyframes$/i.test(parent.name))return null;
+    out="@"+parent.name+" "+parent.params+"{"+out+"}";
+    parent=parent.parent;
+  }
+  return out;
+}
+const transferable=[];
+unmodified.walkRules(rule=>{
+  const name=routeOwner(rule);
+  if(!name)return;
+  const wrapped=serializeWithContext(rule);
+  if(!wrapped)return;
+  candidateRoutes[name].parts.push(wrapped);
+  candidateRoutes[name].rules++;
+  transferable.push(rule);
+  safeIsolatedRules++;
+});
+for(const node of transferable)node.remove();
+unmodified.walkAtRules(at=>{
+  if(at.nodes && !at.nodes.length)at.remove();
+});
+const commonGzip=size(unmodified.toString());
+const routeEstimates=Object.entries(candidateRoutes).map(([name,entry])=>{
+  const bundle=entry.parts.join("");
+  const routeGzip=bundle?size(bundle):0;
+  return {route:name,rules:entry.rules,cssGzip:routeGzip,
+    loadedGzipEstimate:commonGzip+routeGzip};
+});
+console.log("CSS_ROUTE_SPLIT_ESTIMATE",JSON.stringify({
+  baseGzip:size(input),commonGzip,isolatedRules:safeIsolatedRules,
+  routeEstimates,
+  disclaimer:"Approximation of exclusive route selectors only; ignores cascade reorder, loading, UI states and shared selector interactions. Not a production option or PASS."
+}));
+
